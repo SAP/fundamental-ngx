@@ -30,7 +30,7 @@
         tabindex="0"
         glyph="overflow"
         title="Menu"
-        [compact]="true"
+        fdCompact
         [fdMenuTrigger]="menu"
         [disabled]="_isEditActionsAvailable"
         (click)="$event.stopPropagation()"
@@ -124,7 +124,7 @@
         fd-button
         glyph="add"
         title="Add node"
-        [compact]="true"
+        fdCompact
         class="fdp-approval-flow-node__add"
         [class.fdp-approval-flow-node__add--blank]="this._blank"
         [class.fdp-approval-flow-node__add--before]="
@@ -150,7 +150,7 @@
     ></div>
 </ng-template>
 
-<fd-menu #menu [compact]="true" placement="bottom-end" (isOpenChange)="_onMenuOpen()">
+<fd-menu #menu fdContentDensity placement="bottom-end" (isOpenChange)="_onMenuOpen()">
     <li
         *ngIf="meta?.canAddNodeBefore && !this.node?.actionsConfig?.disableAddBefore"
         fd-menu-item

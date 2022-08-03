@@ -11,7 +11,6 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { ContentDensity, ContentDensityEnum } from '@fundamental-ngx/core/utils';
 import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
 import { VhdFilter, VdhTableSelection } from '../../models';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
@@ -65,10 +64,6 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     @Input()
     defaultMobileHeaders = 2;
 
-    /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
-    @Input()
-    contentTableDensity: ContentDensity = ContentDensityEnum.COMPACT;
-
     @Input()
     /** Displayed data for search table */
     displayedData: T[] = [];
@@ -79,9 +74,6 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     select = new EventEmitter<T[]>();
 
     @ViewChild(InfiniteScrollDirective) infiniteScrollTable: InfiniteScrollDirective;
-
-    /** @hidden */
-    _contentDensityOptions = ContentDensityEnum;
 
     /** @hidden indeterminate flag for `select all` checkbox */
     _selectedAll: boolean | null = false;

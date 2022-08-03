@@ -20,6 +20,7 @@ import { PlatformObjectListItemWithRowSelectionExampleComponent } from './platfo
 import { PlatformObjectListItemWithRowNavigationExampleComponent } from './platform-object-list-item-examples/platform-object-list-item-with-row-navigation-example.component';
 import { PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent } from './platform-object-list-item-examples/platform-object-list-item-with-row-selection-and-navigation-example.component';
 import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -55,6 +56,10 @@ const routes: Routes = [
         PlatformObjectListItemExampleComponent,
         PlatformObjectListItemWithRowNavigationExampleComponent,
         PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent
+    ],
+    providers: [
+        platformContentDensityModuleDeprecationsProvider('fdp-list'),
+        platformContentDensityModuleDeprecationsProvider('fdp-object-list-item')
     ]
 })
 export class PlatformObjectListItemDocsModule {}

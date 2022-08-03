@@ -6,8 +6,8 @@
         <div fdLayoutGridRow>
             <div [fdLayoutGridCol]="5">
                 <label id="CONDITIONPANEL_OPERATOR_LABEL" fd-form-label class="fdp-value-help-dialog__hidden_label">
-                    CONDITIONPANEL_OPERATOR_LABEL</label
-                >
+                    CONDITIONPANEL_OPERATOR_LABEL
+                </label>
                 <label [id]="selectedId" fd-form-label class="fdp-value-help-dialog__hidden_label">
                     {{
                         'platformVHD.defineConditionSelectedValueHiddenA11yLabel'
@@ -20,7 +20,6 @@
                     colGrow
                     [class.fd-select-custom-class]="false"
                     #sttr
-                    [compact]="contentDensity | isCompactDensity"
                     [controlTemplate]="customSelectTemplate"
                     [name]="uid + '-' + type + '-strategy-' + item.id"
                     [(ngModel)]="item.strategy"
@@ -73,7 +72,6 @@
                                     [placeholder]="'platformVHD.defineConditionFromPlaceholder' | fdTranslate"
                                     placeholder="from"
                                     required
-                                    [compact]="contentDensity | isCompactDensity"
                                     [state]="fromModel.invalid ? 'error' : null"
                                     [name]="uid + '-' + type + '-from-' + item.id"
                                     (blur)="_validateConditionValue(item, [!!fromModel.valid, !!toModel.valid])"
@@ -95,7 +93,6 @@
                                     type="text"
                                     [placeholder]="'platformVHD.defineConditionToPlaceholder' | fdTranslate"
                                     required
-                                    [compact]="contentDensity | isCompactDensity"
                                     [state]="toModel.invalid ? 'error' : null"
                                     [name]="uid + '-' + type + '-to-' + item.id"
                                     (blur)="_validateConditionValue(item, [!!fromModel.valid, !!toModel.valid])"
@@ -118,7 +115,6 @@
                                     [maxCharacters]="_rules.maxCharactersHintCount"
                                     type="text"
                                     [placeholder]="'platformVHD.defineConditionValuePlaceholder' | fdTranslate"
-                                    [compact]="contentDensity | isCompactDensity"
                                     [state]="valueModel.invalid ? 'error' : null"
                                     [name]="uid + '-' + type + '-value-' + item.id"
                                     (blur)="_validateConditionValue(item, !!valueModel.valid)"
@@ -142,7 +138,6 @@
                     [ariaLabel]="'platformVHD.defineConditionRemoveConditionButtonTitle' | fdTranslate"
                     fdType="transparent"
                     glyph="decline"
-                    [compact]="contentDensity | isCompactDensity"
                     [title]="'platformVHD.defineConditionRemoveConditionButtonTitle' | fdTranslate"
                     (click)="removeCondition(i)"
                 ></button>
@@ -159,7 +154,6 @@
                 fd-button
                 [attr.aria-label]="'platformVHD.defineConditionAddConditionButtonTitle' | fdTranslate"
                 [label]="'platformVHD.defineConditionAddConditionButtonLabel' | fdTranslate"
-                [compact]="contentDensity | isCompactDensity"
                 [title]="'platformVHD.defineConditionAddConditionButtonTitle' | fdTranslate"
                 (click)="addEmptyCondition()"
             ></button>

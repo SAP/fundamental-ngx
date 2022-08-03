@@ -13,6 +13,7 @@ import { PlatformTimePickerHeaderComponent } from './platform-time-picker-header
 import { PlatformTimePickerBasicExampleComponent } from './examples/platform-time-picker-basic-example.component';
 import { PlatformTimePickerReactiveExampleComponent } from './examples/platform-time-picker-reactive-example.component';
 import { PlatformTimePickerTemplateExampleComponent } from './examples/platform-time-picker-template-example.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -41,6 +42,7 @@ const routes: Routes = [
         PlatformTimePickerBasicExampleComponent,
         PlatformTimePickerReactiveExampleComponent,
         PlatformTimePickerTemplateExampleComponent
-    ]
+    ],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-time-picker')]
 })
 export class PlatformTimePickerDocsModule {}

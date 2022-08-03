@@ -22,7 +22,6 @@
             #table
             (rowSelectionChange)="_onRowSelectionChange($event)"
             [dataSource]="source"
-            contentDensity="compact"
             selectionMode="multiple"
         >
             <fdp-table-toolbar
@@ -34,7 +33,6 @@
                         (selectionChange)="_onFilterVisibilityChange($event)"
                         [list]="_filterVisibilityOptions"
                         [value]="_filterVisibilityOptions[0].value"
-                        contentDensity="compact"
                     >
                     </fdp-select>
                 </fdp-table-toolbar-actions>
@@ -64,7 +62,6 @@
             <fdp-button
                 (click)="_confirm()"
                 buttonType="emphasized"
-                contentDensity="compact"
                 [label]="'platformSmartFilterBar.selectFiltersSubmitButtonLabel' | fdTranslate"
             ></fdp-button>
         </fd-dialog-footer-button>
@@ -73,7 +70,6 @@
             <fdp-button
                 (click)="_cancel()"
                 buttonType="transparent"
-                contentDensity="compact"
                 [label]="'platformSmartFilterBar.selectFiltersCancelButton' | fdTranslate"
             ></fdp-button>
         </fd-dialog-footer-button>

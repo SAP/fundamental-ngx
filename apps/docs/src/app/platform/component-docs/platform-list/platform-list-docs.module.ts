@@ -36,6 +36,7 @@ import { PlatformListWithDeleteButtonExampleComponent } from './platform-list-ex
 import { PlatformListWithSelectionExampleComponent } from './platform-list-examples/platform-list-with-selection-example.component';
 import { PlatformListWithSingleSelectionExampleComponent } from './platform-list-examples/platform-list-with-single-selection-example.component';
 import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -86,6 +87,7 @@ const routes: Routes = [
         PlatformListWithMoreButtonExampleComponent,
         PlatformListWithNoSeperatorExampleComponent,
         PlatformListWithUnReadExampleComponent
-    ]
+    ],
+    providers: [platformContentDensityModuleDeprecationsProvider('fd-list')]
 })
 export class PlatformListDocsModule {}

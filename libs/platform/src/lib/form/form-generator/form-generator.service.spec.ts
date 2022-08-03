@@ -57,7 +57,7 @@ export const brokenFormItems: DynamicFormFieldItem[] = [
     template: `
         <ng-container [formGroup]="form">
             <fdp-slider
-                [contentDensity]="formItem.guiOptions?.contentDensity"
+                [fdContentDensity]="formItem.guiOptions?.contentDensity"
                 [customValues]="formItem.choices"
                 [showTicks]="formItem.guiOptions?.additionalData?.showTicks"
                 [showTicksLabels]="formItem.guiOptions?.additionalData?.showTicksLabels"

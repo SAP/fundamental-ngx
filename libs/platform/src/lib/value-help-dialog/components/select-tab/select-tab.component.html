@@ -12,8 +12,6 @@
 >
     <table
         fd-table
-        [compact]="contentTableDensity === _contentDensityOptions.COMPACT"
-        [condensed]="contentTableDensity === _contentDensityOptions.CONDENSED"
         [popIn]="mobile"
         [noBorderX]="mobile"
         [noBorderY]="false"
@@ -38,7 +36,6 @@
                     <fd-checkbox
                         *ngIf="isMultiSelection"
                         [name]="uid + '-row-all'"
-                        [compact]="contentTableDensity | isCompactDensity"
                         [tristate]="true"
                         [tristateSelectable]="false"
                         [ngModel]="_selectedAll"
@@ -74,7 +71,6 @@
                         <fd-checkbox
                             *ngIf="isMultiSelection"
                             [name]="uid + '-row-' + i"
-                            [compact]="contentTableDensity | isCompactDensity"
                             [ngModel]="_selectedMap[row[uniqueKey]]"
                             (change)="_toggleSelectRow(row)"
                         ></fd-checkbox>

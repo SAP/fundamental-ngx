@@ -1,6 +1,5 @@
 import { Directive, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ContentDensity } from '@fundamental-ngx/core/utils';
 
 import { FormField, SelectItem } from '@fundamental-ngx/platform/shared';
 import { PreparedDynamicFormFieldItem } from './interfaces/dynamic-form-item';
@@ -42,11 +41,6 @@ export abstract class BaseDynamicFormGeneratorControl implements BaseDynamicForm
 
     /** @description Inner form group name */
     @Input() formGroupName: string;
-
-    /** @description Returns form item content density. */
-    get contentDensity(): ContentDensity {
-        return this.formItem.guiOptions?.contentDensity || 'cozy';
-    }
 
     /** @description Returns form item choices. */
     get choices(): SelectItem[] {

@@ -39,6 +39,7 @@ import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-multi-combobox',
@@ -46,7 +47,14 @@ import { TokenizerComponent } from '@fundamental-ngx/core/token';
     styleUrls: ['./multi-combobox.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FormFieldControl, useExisting: MultiComboboxComponent, multi: true }]
+    providers: [
+        {
+            provide: FormFieldControl,
+            useExisting: MultiComboboxComponent,
+            multi: true
+        },
+        contentDensityObserverProviders()
+    ]
 })
 export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit, AfterViewInit {
     /** @hidden */
@@ -80,7 +88,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         private readonly _injector: Injector,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
-        @Inject(MAP_LIMIT) _mapLimit: number
+        @Inject(MAP_LIMIT) _mapLimit: number,
+        readonly contentDensityObserver: ContentDensityObserver
     ) {
         super(cd, elementRef, ngControl, ngForm, dialogConfig, _multiComboboxConfig, formField, formControl, _mapLimit);
     }

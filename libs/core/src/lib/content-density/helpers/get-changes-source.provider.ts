@@ -1,6 +1,11 @@
 import { Observable, of, switchMap } from 'rxjs';
 import { GlobalContentDensityService } from '../services/global-content-density.service';
-import { ContentDensityGlobalKeyword, ContentDensityMode, LocalContentDensityMode } from '../content-density.types';
+import {
+    ContentDensityDefaultKeyword,
+    ContentDensityGlobalKeyword,
+    ContentDensityMode,
+    LocalContentDensityMode
+} from '../content-density.types';
 
 export const getChangesSource$ = (params: {
     defaultContentDensity: ContentDensityMode;
@@ -14,10 +19,13 @@ export const getChangesSource$ = (params: {
 
     return changesSource$.pipe(
         switchMap((mode: LocalContentDensityMode) => {
-            if (mode !== ContentDensityGlobalKeyword) {
-                return of(mode);
+            if (mode === ContentDensityDefaultKeyword) {
+                return of(params.defaultContentDensity);
             }
-            return serviceValue$;
+            if (mode === ContentDensityGlobalKeyword) {
+                return serviceValue$;
+            }
+            return of(mode);
         })
     );
 };

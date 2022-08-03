@@ -4,5 +4,6 @@ import { ContentDensityObserverSettings } from '../classes/content-density-obser
 export const defaultContentDensityObserverConfigs: Required<ContentDensityObserverSettings> = {
     modifiers: {},
     supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY],
-    defaultContentDensity: ContentDensityMode.COZY
+    defaultContentDensity: ContentDensityMode.COZY,
+    debug: false
 };

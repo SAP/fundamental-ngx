@@ -8,9 +8,7 @@
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <fdp-table-reset-button
-                        [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                    ></fdp-table-reset-button>
+                    <fdp-table-reset-button></fdp-table-reset-button>
                 </fd-bar-element>
             </div>
         </ng-template>
@@ -22,7 +20,6 @@
                 class="group-row__select"
                 [value]="rule.columnKey"
                 (valueChange)="_onRuleColumnKeyChange(rule, $event)"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 [placeholder]="'platformTable.P13GroupDialogNoneSelectedColumnSelectPlaceholder' | fdTranslate"
             >
                 <li fd-option *ngFor="let column of columns" [value]="column.key">
@@ -34,7 +31,6 @@
                 class="group-row__checkbox"
                 [ngModel]="rule.showAsColumn"
                 (ngModelChange)="_onRuleShowAsColumnChange(rule, $event)"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 [label]="'platformTable.P13GroupDialogShowFieldAsColumnCheckboxLabel' | fdTranslate"
             ></fd-checkbox>
 
@@ -43,7 +39,6 @@
                     fd-button
                     fdType="transparent"
                     glyph="sys-cancel"
-                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                     [attr.aria-label]="'platformTable.P13GroupDialogRemoveGroupBtnTitle' | fdTranslate"
                     [title]="'platformTable.P13GroupDialogRemoveGroupBtnTitle' | fdTranslate"
                     (click)="_removeRule(rule)"
@@ -53,7 +48,6 @@
                     fd-button
                     fdType="transparent"
                     glyph="add"
-                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                     [attr.aria-label]="'platformTable.P13GroupDialogAddNewGroupBtnTitle' | fdTranslate"
                     [title]="'platformTable.P13GroupDialogAddNewGroupBtnTitle' | fdTranslate"
                     (click)="_addNew(i)"
@@ -69,7 +63,6 @@
                 fdType="emphasized"
                 fd-dialog-decisive-button
                 [label]="'platformTable.P13GroupDialogConfirmationBtnLabel' | fdTranslate"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="confirm()"
             ></button>
         </fd-dialog-footer-button>
@@ -81,7 +74,6 @@
                 fd-dialog-decisive-button
                 fd-initial-focus
                 [label]="'platformTable.P13GroupDialogCancelBtnLabel' | fdTranslate"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="cancel()"
             ></button>
         </fd-dialog-footer-button>

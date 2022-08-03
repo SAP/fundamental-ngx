@@ -1,16 +1,8 @@
-<fdp-table [dataSource]="source" contentDensity="compact" emptyTableMessage="No data found" [rowsClass]="rowsClass">
+<fdp-table [dataSource]="source" fdCompact emptyTableMessage="No data found" [rowsClass]="rowsClass">
     <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false">
         <fdp-table-toolbar-actions>
-            <fdp-button
-                label="Set row class: string"
-                contentDensity="compact"
-                (click)="setRowClassString()"
-            ></fdp-button>
-            <fdp-button
-                label="Set row class: function"
-                contentDensity="compact"
-                (click)="setRowClassFunction()"
-            ></fdp-button>
+            <fdp-button label="Set row class: string" (click)="setRowClassString()"></fdp-button>
+            <fdp-button label="Set row class: function" (click)="setRowClassFunction()"></fdp-button>
         </fdp-table-toolbar-actions>
     </fdp-table-toolbar>
 

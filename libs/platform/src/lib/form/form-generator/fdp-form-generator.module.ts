@@ -37,6 +37,7 @@ import {
     FORM_GENERATOR_CONFIG,
     FORM_GENERATOR_ITEM_CONFIG
 } from './providers/providers';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 /**
  * Adds Form Generator functionality to your application.
@@ -78,7 +79,8 @@ import {
         FormMessageModule,
         BusyIndicatorModule,
         PlatformMultiComboboxModule,
-        PlatformMultiInputModule
+        PlatformMultiInputModule,
+        ContentDensityModule
     ],
     providers: [
         FormGeneratorService,
@@ -97,7 +99,8 @@ import {
         DynamicFormGeneratorRadioComponent,
         DynamicFormGeneratorDatepickerComponent,
         DynamicFormGeneratorSwitchComponent,
-        FormGeneratorFieldComponent
+        FormGeneratorFieldComponent,
+        ContentDensityModule
     ]
 })
 export class PlatformFormGeneratorModule {

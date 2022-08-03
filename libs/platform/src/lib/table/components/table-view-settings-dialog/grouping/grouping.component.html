@@ -8,16 +8,14 @@
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <fdp-table-reset-button
-                        [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                    ></fdp-table-reset-button>
+                    <fdp-table-reset-button></fdp-table-reset-button>
                 </fd-bar-element>
             </div>
         </ng-template>
     </fd-dialog-header>
 
     <fd-dialog-body>
-        <ul fd-list [selection]="true" [compact]="dialogRef.data.tableContentDensity | isCompactDensity">
+        <ul fd-list [selection]="true">
             <li fd-list-group-header>
                 <span fd-list-title>{{ 'platformTable.groupDialogGroupOrderHeader' | fdTranslate }}</span>
             </li>
@@ -26,7 +24,6 @@
                     name="sort-order"
                     value="asc"
                     state="default"
-                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                     [ngModel]="direction"
                     (ngModelChange)="_groupOrderChange($event)"
                 ></fd-radio-button>
@@ -37,7 +34,6 @@
                     name="sort-order"
                     value="desc"
                     state="default"
-                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                     [ngModel]="direction"
                     (ngModelChange)="_groupOrderChange($event)"
                 ></fd-radio-button>
@@ -45,7 +41,7 @@
             </li>
         </ul>
 
-        <ul fd-list [selection]="true" [compact]="dialogRef.data.tableContentDensity | isCompactDensity">
+        <ul fd-list [selection]="true">
             <li fd-list-group-header>
                 <span fd-list-title>{{ 'platformTable.groupDialogGroupByHeader' | fdTranslate }}</span>
             </li>
@@ -54,7 +50,6 @@
                     name="sort-by"
                     [value]="NOT_GROUPED_OPTION_VALUE"
                     state="default"
-                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                     [ngModel]="field"
                     (ngModelChange)="_groupFieldChange($event)"
                 ></fd-radio-button>
@@ -65,7 +60,6 @@
                     name="sort-by"
                     [value]="column.key"
                     state="default"
-                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                     [ngModel]="field"
                     (ngModelChange)="_groupFieldChange($event)"
                 ></fd-radio-button>
@@ -77,13 +71,11 @@
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
-            [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
             [label]="'platformTable.groupDialogConfirmBtnLabel' | fdTranslate"
             (click)="confirm()"
         >
         </fd-button-bar>
         <fd-button-bar
-            [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
             [label]="'platformTable.groupDialogCancelBtnLabel' | fdTranslate"
             fd-initial-focus
             (click)="cancel()"

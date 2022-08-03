@@ -79,9 +79,9 @@
         role="img"
     >
     </fd-avatar>
-    <span *ngIf="title" fd-list-title [attr.aria-label]="ariaLabel" [attr.nowrap]="titleWrap" [attr.title]="title">{{
-        title
-    }}</span>
+    <span *ngIf="title" fd-list-title [attr.aria-label]="ariaLabel" [attr.nowrap]="titleWrap" [attr.title]="title">
+        {{ title }}
+    </span>
     <span
         fd-list-secondary
         [attr.aria-label]="secondary"
@@ -171,7 +171,6 @@
         <fd-checkbox
             *ngIf="selectionMode === 'multi'"
             (click)="$event.stopPropagation()"
-            [compact]="contentDensity | isCompactDensity"
             [(ngModel)]="_selected"
             [ariaLabel]="ariaLabel"
             [attr.aria-selected]="_selected"
@@ -182,7 +181,6 @@
             [value]="value"
             [name]="name"
             role="radio"
-            [compact]="contentDensity | isCompactDensity"
             [(ngModel)]="selectionValue"
             [attr.aria-selected]="_selected"
         >
@@ -190,7 +188,7 @@
     </div>
 </ng-template>
 <ng-template #actionsTemplate>
-    <ng-content selector="#secondaryAction"></ng-content>
+    <ng-content select="#secondaryAction"></ng-content>
     <button
         fd-button
         #edit
@@ -198,7 +196,6 @@
         *ngIf="listType === 'detail'"
         role="button"
         title="detail"
-        [compact]="contentDensity | isCompactDensity"
         fdType="transparent"
         glyph="edit"
         (click)="_onActionButtonClick('edit')"
@@ -212,7 +209,6 @@
         *ngIf="selectionMode === 'delete'"
         role="button"
         title="delete"
-        [compact]="contentDensity | isCompactDensity"
         [attr.aria-label]="'platformStandardListItem.deleteActionAriaLabel' | fdTranslate"
         fdType="transparent"
         glyph="decline"

@@ -1,11 +1,9 @@
-import { ChangeDetectorRef, Directive, InjectFlags, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Directive, Input, OnDestroy } from '@angular/core';
 // eslint-disable-next-line
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Nullable } from '@fundamental-ngx/core/shared';
-import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core/utils';
-import { PlatformConfig } from './platform.config';
 
 let randomId = 0;
 
@@ -15,7 +13,7 @@ let randomId = 0;
  * @hidden for form related Base , see BaseInput.
  */
 @Directive()
-export abstract class BaseComponent implements OnInit, OnDestroy {
+export abstract class BaseComponent implements OnDestroy {
     protected defaultId = `fdp-id-${randomId++}`;
     protected _disabled = false;
 
@@ -39,18 +37,6 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     @Input()
     name: string;
 
-    /** content Density of element. cozy | compact | condensed*/
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-    }
-    get contentDensity(): ContentDensity {
-        return this._contentDensity ?? 'cozy';
-    }
-    /** @hidden - Avoiding private property name collision */
-    _contentDensity?: ContentDensity = 'cozy';
-    protected _contentDensityService: ContentDensityService | null = null;
-
     /** @hidden */
     protected _subscriptions = new Subscription();
 
@@ -71,34 +57,11 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
         this._disabled = disabled;
     }
 
-    constructor(protected _cd: ChangeDetectorRef) {
-        const injector = PlatformConfig.getInjector();
-        // There is an issue in ViewEngine, it simply ignores InjectFlags.Optional
-        // so to make it work in ViewEngine we need to to use notFoundValue as "null" and avoid "undefined"
-        // cause "undefined" is equal to Injector.THROW_IF_NOT_FOUND
-        this._contentDensityService = injector?.get(ContentDensityService, null, InjectFlags.Optional) || null;
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._setupDensitySubscriptions();
-    }
+    constructor(protected _cd: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden */
-    private _setupDensitySubscriptions(): void {
-        if (this._contentDensity === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.contentDensity = density;
-                    this.markForCheck();
-                })
-            );
-        }
     }
 
     /**

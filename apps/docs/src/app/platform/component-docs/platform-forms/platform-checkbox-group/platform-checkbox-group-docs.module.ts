@@ -15,6 +15,7 @@ import { PlatformCheckboxGroupExampleComponent } from './platform-checkbox-group
 import { PlatformCheckboxGroupListComponent } from './platform-checkbox-group-examples/platform-checkbox-group-list.component';
 import { PlatformCheckboxGroupContentCheckboxComponent } from './platform-checkbox-group-examples/platform-checkbox-group-content-checkbox.component';
 import { PlatformCheckboxGroupListObjectComponent } from './platform-checkbox-group-examples/platform-checkbox-group-list-object.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -44,6 +45,7 @@ const routes: Routes = [
         PlatformCheckboxGroupListComponent,
         PlatformCheckboxGroupListObjectComponent,
         PlatformCheckboxGroupContentCheckboxComponent
-    ]
+    ],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-checkbox-group')]
 })
 export class PlatformCheckboxGroupDocsModule {}

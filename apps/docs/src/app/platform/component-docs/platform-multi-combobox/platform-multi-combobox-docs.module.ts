@@ -23,6 +23,7 @@ import { MultiComboboxFormsExampleComponent } from './examples/multi-combobox-fo
 import { MultiComboboxStatesExampleComponent } from './examples/multi-combobox-states/multi-combobox-states-example.component';
 import { MultiComboboxLoadingExampleComponent } from './examples/multi-combobox-loading/multi-combobox-loading-example.component';
 import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -41,13 +42,15 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         FdpFormGroupModule,
-        PlatformMultiComboboxModule,
         PlatformComboboxModule,
         PlatformMultiComboboxModule,
         BusyIndicatorModule
     ],
     exports: [RouterModule],
-    providers: [{ provide: MOBILE_MODE_CONFIG, useValue: MULTI_COMBOBOX_MOBILE_CONFIG, multi: true }],
+    providers: [
+        { provide: MOBILE_MODE_CONFIG, useValue: MULTI_COMBOBOX_MOBILE_CONFIG, multi: true },
+        platformContentDensityModuleDeprecationsProvider('fdp-multi-combobox')
+    ],
     declarations: [
         PlatformMultiComboboxHeaderComponent,
         PlatformMultiComboboxDocsComponent,

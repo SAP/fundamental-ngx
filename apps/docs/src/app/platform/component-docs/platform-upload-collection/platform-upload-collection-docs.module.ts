@@ -13,6 +13,7 @@ import { PlatformUploadCollectionReadonlyExampleComponent } from './platform-upl
 import { PlatformUploadCollectionTurnOffExampleComponent } from './platform-upload-collection-examples/platform-upload-collection-turn-off-example.component';
 import { PlatformUploadCollectionHeaderComponent } from './platform-upload-collection-header/platform-upload-collection-header.component';
 import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -36,6 +37,7 @@ const routes: Routes = [
         PlatformUploadCollectionDisabledExampleComponent,
         PlatformUploadCollectionReadonlyExampleComponent,
         PlatformUploadCollectionTurnOffExampleComponent
-    ]
+    ],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-upload-collection')]
 })
 export class PlatformUploadCollectionDocsModule {}

@@ -10,9 +10,7 @@
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <fdp-table-reset-button
-                        [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                    ></fdp-table-reset-button>
+                    <fdp-table-reset-button></fdp-table-reset-button>
                 </fd-bar-element>
             </div>
         </ng-template>
@@ -22,7 +20,6 @@
         <fd-toolbar>
             <fdp-search-field
                 [placeholder]="'platformTable.P13ColumnsDialogSearchPlaceholder' | fdTranslate"
-                [contentDensity]="dialogRef.data.tableContentDensity"
                 [inputText]="(_searchQuerySubject | async) || ''"
                 [suggestions]="[]"
                 (inputChange)="_searchInputChange($event)"
@@ -31,13 +28,7 @@
             <fd-toolbar-spacer></fd-toolbar-spacer>
 
             <!-- Show Selected/All -->
-            <button
-                fd-toolbar-item
-                fd-button
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                fdType="transparent"
-                (click)="_toggleShowAll()"
-            >
+            <button fd-toolbar-item fd-button fdType="transparent" (click)="_toggleShowAll()">
                 <ng-container *ngIf="(_showAllItemsSubject | async) === true; else showAll">
                     {{ 'platformTable.P13ColumnsDialogsShowSelected' | fdTranslate }}
                 </ng-container>
@@ -52,7 +43,6 @@
                 fd-button
                 fdType="transparent"
                 glyph="collapse-group"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 [disabled]="_moveUpDisabled"
                 [attr.aria-label]="'platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate"
                 [title]="'platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate"
@@ -64,7 +54,6 @@
                 fd-button
                 fdType="transparent"
                 glyph="slim-arrow-up"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 [disabled]="_moveUpDisabled"
                 [attr.aria-label]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
                 [title]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
@@ -76,7 +65,6 @@
                 fd-button
                 fdType="transparent"
                 glyph="slim-arrow-down"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 [disabled]="_moveDownDisabled"
                 [attr.aria-label]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
                 [title]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
@@ -88,7 +76,6 @@
                 fd-button
                 fdType="transparent"
                 glyph="expand-group"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 [disabled]="_moveDownDisabled"
                 [attr.aria-label]="'platformTable.P13ColumnsDialogMoveToBottomBtn' | fdTranslate"
                 [title]="'platformTable.P13ColumnsDialogMoveToBottomBtn' | fdTranslate"
@@ -96,13 +83,12 @@
             ></button>
         </fd-toolbar>
 
-        <ul fd-list [compact]="dialogRef.data.tableContentDensity | isCompactDensity">
+        <ul fd-list>
             <li fd-list-item>
                 <fd-checkbox
                     [ngModel]="_selectedColumnsCount === _selectableColumns.length"
                     (ngModelChange)="_toggleSelectAll($event)"
                     [disabled]="_selectAllDisabled"
-                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 ></fd-checkbox>
                 <span fd-list-title>
                     {{
@@ -122,11 +108,7 @@
                 [class.fd-select-item--active]="item.active"
                 (click)="_setActiveColumn(item)"
             >
-                <fd-checkbox
-                    [(ngModel)]="item.selected"
-                    (ngModelChange)="_onToggleColumn()"
-                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                ></fd-checkbox>
+                <fd-checkbox [(ngModel)]="item.selected" (ngModelChange)="_onToggleColumn()"></fd-checkbox>
                 <span fd-list-title>
                     {{ item.column.label }}
                 </span>
@@ -141,7 +123,6 @@
                 fdType="emphasized"
                 fd-dialog-decisive-button
                 [label]="'platformTable.P13ColumnsDialogConfirmationBtnLabel' | fdTranslate"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="confirm()"
             ></button>
         </fd-dialog-footer-button>
@@ -153,7 +134,6 @@
                 fd-dialog-decisive-button
                 fd-initial-focus
                 [label]="'platformTable.P13ColumnsDialogCancelBtnLabel' | fdTranslate"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="cancel()"
             ></button>
         </fd-dialog-footer-button>

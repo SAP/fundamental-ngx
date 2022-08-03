@@ -12,7 +12,7 @@
         <fdp-time-picker name="disabled" [disabled]="true"></fdp-time-picker>
     </fdp-form-field>
     <fdp-form-field label="Compact Time Picker">
-        <fdp-time-picker name="24-hour" [displayFormat]="displayFormat"></fdp-time-picker>
+        <fdp-time-picker name="24-hour" fdCompact [displayFormat]="displayFormat"></fdp-time-picker>
     </fdp-form-field>
     <fdp-form-field label="Null Validity" id="sadf">
         <fdp-time-picker name="null-validity" [allowNull]="false" [(ngModel)]="allowNullTimeObject"></fdp-time-picker>

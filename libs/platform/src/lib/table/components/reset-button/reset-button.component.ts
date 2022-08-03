@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, InjectionToken, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
 
 /**
@@ -20,7 +20,6 @@ export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
     template: `<button
         fd-button
         fdType="transparent"
-        [compact]="compact"
         [label]="'platformTable.resetChangesButtonLabel' | fdTranslate"
         (click)="resettable.reset()"
         [disabled]="(resettable.isResetAvailable$ | async) === false"
@@ -28,8 +27,5 @@ export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResetButtonComponent {
-    /** Whether should be displayed in compact mode **/
-    @Input() compact: boolean;
-
     constructor(@Inject(RESETTABLE_TOKEN) public resettable: Resettable) {}
 }

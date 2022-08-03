@@ -4,18 +4,16 @@
             (inputChange)="_onSearchInputChange($event)"
             (searchSubmit)="submitForm()"
             [disableRefresh]="true"
-            contentDensity="compact"
             [placeholder]="'platformSmartFilterBar.searchPlaceholder' | fdTranslate"
         ></fdp-search-field>
         <fd-toolbar-spacer></fd-toolbar-spacer>
         <fdp-button
             (click)="submitForm()"
             buttonType="emphasized"
-            contentDensity="compact"
             fd-toolbar-item
             [label]="'platformSmartFilterBar.submitButtonLabel' | fdTranslate"
         ></fdp-button>
-        <fdp-button (click)="submitForm()" contentDensity="compact" fd-toolbar-item glyph="synchronize"></fdp-button>
+        <fdp-button (click)="submitForm()" fd-toolbar-item glyph="synchronize"></fdp-button>
         <fdp-button
             (click)="showFilteringSettings()"
             [label]="
@@ -24,7 +22,6 @@
                     : ('platformSmartFilterBar.filtersButtonLabel'
                       | fdTranslate: { filtersCount: _selectedFilters.length })
             "
-            contentDensity="compact"
             fd-toolbar-item
         ></fdp-button>
         <fdp-button
@@ -36,7 +33,6 @@
                 ) | fdTranslate
             "
             buttonType="transparent"
-            contentDensity="compact"
             fd-toolbar-item
         ></fdp-button>
     </fd-toolbar>

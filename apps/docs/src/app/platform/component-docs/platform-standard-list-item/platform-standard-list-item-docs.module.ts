@@ -23,6 +23,7 @@ import { PlatformStandardListItemWithNavigationExampleComponent } from './platfo
 import { PlatformStandardListItemWithSingleSelectionExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component';
 import { PlatformStandardListItemWithSelectionExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-selection-example.component';
 import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -59,6 +60,10 @@ const routes: Routes = [
         PlatformStandardListItemWithSingleSelectionExampleComponent,
         PlatformStandardListItemWithInvertedSecondaryTypeExampleComponent,
         PlatformNonByLineStandardListItemExampleComponent
+    ],
+    providers: [
+        platformContentDensityModuleDeprecationsProvider('fdp-list'),
+        platformContentDensityModuleDeprecationsProvider('fdp-standard-list-item')
     ]
 })
 export class PlatformStandardListItemDocsModule {}

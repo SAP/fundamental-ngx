@@ -1,57 +1,52 @@
-<button
-    *ngIf="!graph?.columns?.length && !graph?.errors"
-    fd-button
-    [label]="'platformApprovalFlow.toolbarAddStepButton' | fdTranslate"
-    [compact]="true"
-    (click)="_addNode('empty')"
-></button>
-
-<button
-    *ngIf="!!graph?.columns?.length && !isEditMode"
-    fd-button
-    [label]="'platformApprovalFlow.toolbarEditButton' | fdTranslate"
-    [compact]="true"
-    (click)="enterEditMode.emit()"
-></button>
-
-<ng-container *ngIf="isEditMode">
+<ng-container fdCompact>
     <button
-        *ngIf="_canAddBefore"
+        *ngIf="!graph?.columns?.length && !graph?.errors"
         fd-button
-        [label]="'platformApprovalFlow.toolbarAddApproversBefore' | fdTranslate"
-        [compact]="true"
-        (click)="_addNode('before')"
+        [label]="'platformApprovalFlow.toolbarAddStepButton' | fdTranslate"
+        (click)="_addNode('empty')"
     ></button>
 
     <button
-        *ngIf="_canAddAfter"
+        *ngIf="!!graph?.columns?.length && !isEditMode"
         fd-button
-        [label]="'platformApprovalFlow.toolbarAddApproversAfter' | fdTranslate"
-        [compact]="true"
-        (click)="_addNode('after')"
+        [label]="'platformApprovalFlow.toolbarEditButton' | fdTranslate"
+        (click)="enterEditMode.emit()"
     ></button>
 
-    <button
-        *ngIf="_canAddParallel"
-        fd-button
-        [label]="'platformApprovalFlow.toolbarAddApproversParallel' | fdTranslate"
-        [compact]="true"
-        (click)="_addNode('parallel')"
-    ></button>
+    <ng-container *ngIf="isEditMode">
+        <button
+            *ngIf="_canAddBefore"
+            fd-button
+            [label]="'platformApprovalFlow.toolbarAddApproversBefore' | fdTranslate"
+            (click)="_addNode('before')"
+        ></button>
 
-    <button
-        *ngIf="_canRemoveSelectedNodes"
-        fd-button
-        [label]="'platformApprovalFlow.toolbarRemove' | fdTranslate"
-        [compact]="true"
-        (click)="deleteSelectedNodes.emit()"
-    ></button>
+        <button
+            *ngIf="_canAddAfter"
+            fd-button
+            [label]="'platformApprovalFlow.toolbarAddApproversAfter' | fdTranslate"
+            (click)="_addNode('after')"
+        ></button>
 
-    <button
-        *ngIf="_canEditNode"
-        fd-button
-        [label]="'platformApprovalFlow.toolbarEditApprover' | fdTranslate"
-        [compact]="true"
-        (click)="_editSelectedNode()"
-    ></button>
+        <button
+            *ngIf="_canAddParallel"
+            fd-button
+            [label]="'platformApprovalFlow.toolbarAddApproversParallel' | fdTranslate"
+            (click)="_addNode('parallel')"
+        ></button>
+
+        <button
+            *ngIf="_canRemoveSelectedNodes"
+            fd-button
+            [label]="'platformApprovalFlow.toolbarRemove' | fdTranslate"
+            (click)="deleteSelectedNodes.emit()"
+        ></button>
+
+        <button
+            *ngIf="_canEditNode"
+            fd-button
+            [label]="'platformApprovalFlow.toolbarEditApprover' | fdTranslate"
+            (click)="_editSelectedNode()"
+        ></button>
+    </ng-container>
 </ng-container>

@@ -25,6 +25,7 @@ import {
 } from './platform-vhd-examples';
 import { PlatformVhdLoadingExampleComponent } from './platform-vhd-examples/platform-vhd-loading-example.component';
 import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -55,7 +56,6 @@ const routes: Routes = [
     declarations: [
         PlatformVhdDocsComponent,
         PlatformVhdHeaderComponent,
-
         PlatformVhdBasicExampleComponent,
         PlatformVhdTokenExampleComponent,
         PlatformVhdLoadingExampleComponent,
@@ -63,6 +63,7 @@ const routes: Routes = [
         PlatformVhdInputExampleComponent,
         PlatformVhdMobileExampleComponent,
         PlatformVhdStrategyLabelExampleComponent
-    ]
+    ],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-value-help-dialog')]
 })
 export class PlatformVhdDocsModule {}

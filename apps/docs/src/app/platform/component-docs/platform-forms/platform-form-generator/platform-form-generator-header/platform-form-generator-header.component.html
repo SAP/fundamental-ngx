@@ -1,76 +1,77 @@
-<header>Form generator</header>
-<description>
-    Form generator is an utility that helps to generate form with appropriate controls.
-    <h3>Form generator features</h3>
-    <ul>
-        <li>Support of form layout with multiple responsive columns;</li>
-        <li>Automatic component rendering without predefined template;</li>
-        <li>Ability to extend the default set of controls with custom ones;</li>
-        <li>Dynamic validators for each form item</li>
-        <li>Dynamic options for choice-based components</li>
-    </ul>
-    <h3>Questions in Form Generator can have:</h3>
-    <ul>
-        <li>Individual labels with async function support;</li>
-        <li>Support for adding a hint for question;</li>
-        <li>Ability to set available variants for question with async function support;</li>
-        <li>Transformation function which will transform form item value as defined in function itself;</li>
-        <li>Standard Angular validators support;</li>
-        <li>Question-specific validator function with asynchronous functions support;</li>
-        <li>Rule function that can determine if question should be shown to the user;</li>
-    </ul>
-    <p>
-        Developers can also set default form field parameters by calling <code>withConfig()</code> method of the
-        <code>PlatformFormGeneratorModule</code> during it's import.
-    </p>
+<fd-doc-page>
+    <header>Form generator</header>
+    <description>
+        Form generator is an utility that helps to generate form with appropriate controls.
+        <h3>Form generator features</h3>
+        <ul>
+            <li>Support of form layout with multiple responsive columns;</li>
+            <li>Automatic component rendering without predefined template;</li>
+            <li>Ability to extend the default set of controls with custom ones;</li>
+            <li>Dynamic validators for each form item</li>
+            <li>Dynamic options for choice-based components</li>
+        </ul>
+        <h3>Questions in Form Generator can have:</h3>
+        <ul>
+            <li>Individual labels with async function support;</li>
+            <li>Support for adding a hint for question;</li>
+            <li>Ability to set available variants for question with async function support;</li>
+            <li>Transformation function which will transform form item value as defined in function itself;</li>
+            <li>Standard Angular validators support;</li>
+            <li>Question-specific validator function with asynchronous functions support;</li>
+            <li>Rule function that can determine if question should be shown to the user;</li>
+        </ul>
+        <p>
+            Developers can also set default form field parameters by calling <code>withConfig()</code> method of the
+            <code>PlatformFormGeneratorModule</code> during it's import.
+        </p>
 
-    <h3>Form Generator Elements:</h3>
-    <p>
-        The table below shows a list of element types, attributes, and descriptions. All types have a built-in validator
-        function <code> validators: [Validators.required] </code> but you can choose to write your own validator
-        functions.
-    </p>
-    <table fd-table>
-        <thead fd-table-header>
-            <tr fd-table-row>
-                <th fd-table-cell><b>Type</b></th>
-                <th fd-table-cell><b>Attribute</b></th>
-                <th fd-table-cell><b>Description</b></th>
-            </tr>
-        </thead>
-        <tbody fd-table-body>
-            <tr fd-table-row *ngFor="let prop of Elementtype">
-                <td fd-table-cell>{{ prop[0] }}</td>
-                <td fd-table-cell>{{ prop[1] }}</td>
-                <td fd-table-cell>{{ prop[2] }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <br />
-    <h3>Inline help default global options</h3>
-    <p>Inline help has default options as below:</p>
-    <table fd-table>
-        <thead fd-table-header>
-            <tr fd-table-row>
-                <th fd-table-cell>Property name</th>
-                <th fd-table-cell>Value</th>
-            </tr>
-        </thead>
-        <tbody fd-table-body>
-            <tr fd-table-row *ngFor="let prop of defaultHintOptions">
-                <td fd-table-cell>{{ prop[0] }}</td>
-                <td fd-table-cell>{{ prop[1] }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <p>
-        if you want to modify default values globally and not per-field, provide
-        <code>FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS</code>
-        in your module or component.
-        <import module="FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS" subPackage="form"></import>
-    </p>
-</description>
-<import module="PlatformFormGeneratorModule" subPackage="form"></import>
+        <h3>Form Generator Elements:</h3>
+        <p>
+            The table below shows a list of element types, attributes, and descriptions. All types have a built-in
+            validator function <code> validators: [Validators.required] </code> but you can choose to write your own
+            validator functions.
+        </p>
+        <table fd-table>
+            <thead fd-table-header>
+                <tr fd-table-row>
+                    <th fd-table-cell><b>Type</b></th>
+                    <th fd-table-cell><b>Attribute</b></th>
+                    <th fd-table-cell><b>Description</b></th>
+                </tr>
+            </thead>
+            <tbody fd-table-body>
+                <tr fd-table-row *ngFor="let prop of Elementtype">
+                    <td fd-table-cell>{{ prop[0] }}</td>
+                    <td fd-table-cell>{{ prop[1] }}</td>
+                    <td fd-table-cell>{{ prop[2] }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <h3>Inline help default global options</h3>
+        <p>Inline help has default options as below:</p>
+        <table fd-table>
+            <thead fd-table-header>
+                <tr fd-table-row>
+                    <th fd-table-cell>Property name</th>
+                    <th fd-table-cell>Value</th>
+                </tr>
+            </thead>
+            <tbody fd-table-body>
+                <tr fd-table-row *ngFor="let prop of defaultHintOptions">
+                    <td fd-table-cell>{{ prop[0] }}</td>
+                    <td fd-table-cell>{{ prop[1] }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            if you want to modify default values globally and not per-field, provide
+            <code>FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS</code>
+            in your module or component.
+            <import module="FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS" subPackage="form"></import>
+        </p>
+    </description>
+    <import module="PlatformFormGeneratorModule" subPackage="form"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

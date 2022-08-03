@@ -8,6 +8,8 @@ import { ListModule } from '@fundamental-ngx/core/list';
 import { PipeModule } from '@fundamental-ngx/core/utils';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { ListComponent, ListFooter, ListGroupHeader } from './list.component';
 import { ListItemDef } from './base-list-item';
 import { I18nModule } from '@fundamental-ngx/i18n';
@@ -23,8 +25,17 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         ListModule,
         PipeModule,
         BusyIndicatorModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
     ],
-    exports: [ListComponent, ListFooter, ListGroupHeader, ListItemDef]
+    exports: [
+        ListComponent,
+        ListFooter,
+        ListGroupHeader,
+        ListItemDef,
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
+    ]
 })
 export class PlatformListModule {}

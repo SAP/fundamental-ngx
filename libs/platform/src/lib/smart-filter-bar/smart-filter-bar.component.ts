@@ -96,6 +96,7 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
     get subject(): SmartFilterBarSubjectDirective {
         return this._subject;
     }
+
     /**
      * 'Show filters' button label.
      * @deprecated use i18n capabilities instead
@@ -452,7 +453,6 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
             choices: column.hasOptions ? this._getFilterDefaultOptions(column.key, column.filterType) : undefined,
             transformer: (itemValue) => getSelectItemValue(itemValue),
             guiOptions: {
-                contentDensity: 'compact',
                 additionalData: {
                     type: 'input',
                     dataType: column.dataType,

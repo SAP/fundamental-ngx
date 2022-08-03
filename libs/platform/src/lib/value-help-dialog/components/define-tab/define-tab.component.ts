@@ -1,24 +1,22 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ViewEncapsulation,
+    EventEmitter,
     Input,
-    SimpleChanges,
     OnChanges,
     Output,
-    EventEmitter,
-    AfterViewInit
+    AfterViewInit,
+    SimpleChanges,
+    ViewEncapsulation
 } from '@angular/core';
 
-import { ContentDensity } from '@fundamental-ngx/core/utils';
-
 import {
-    VhdIncludedEntity,
-    VhdExcludedEntity,
     BaseEntity,
-    VhdDefineIncludeStrategy,
     VhdDefineExcludeStrategy,
-    VhdDefineType
+    VhdDefineIncludeStrategy,
+    VhdDefineType,
+    VhdExcludedEntity,
+    VhdIncludedEntity
 } from '../../models';
 import { MAX_CHARACTER_HINT_COUNT } from '../../constans';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
@@ -64,10 +62,9 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
     /** depricated */
     @Input()
     excluded: ExtendedExcludedEntity[] = [];
-
-    /** The content density for which to render value help dialog */
     @Input()
-    contentDensity: ContentDensity;
+    strategyLabels: { [key in keyof (typeof VhdDefineIncludeStrategy | typeof VhdDefineExcludeStrategy)]?: string } =
+        {};
 
     @Output()
     includeChange: EventEmitter<ExtendedIncludedEntity[]> = new EventEmitter<ExtendedIncludedEntity[]>();

@@ -3,7 +3,7 @@
 </ng-template>
 
 <ng-template #bodyTemplate>
-    <ul fd-list [compact]="contentDensity | isCompactDensity" [navigationIndicator]="true">
+    <ul fd-list [navigationIndicator]="true">
         <li fd-list-group-header>{{ 'platformTable.filterDialogFilterBy' | fdTranslate }}</li>
 
         <li fd-list-item *ngFor="let filter of filters">

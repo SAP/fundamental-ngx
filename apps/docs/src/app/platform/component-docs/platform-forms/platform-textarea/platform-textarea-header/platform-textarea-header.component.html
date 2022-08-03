@@ -1,27 +1,29 @@
-<header>Textarea</header>
-<description>
-    The text area is an input control that allows the user to enter several lines of text.
-    <br />
-    This text area is specially designed to work with Platform Forms, although it can be used by itself as well in
-    conjunction with <a routerLink="/core/textarea">Fundamental ngx core's</a> form directives to achieve similar
-    results.
+<fd-doc-page>
+    <header>Textarea</header>
+    <description>
+        The text area is an input control that allows the user to enter several lines of text.
+        <br />
+        This text area is specially designed to work with Platform Forms, although it can be used by itself as well in
+        conjunction with <a routerLink="/core/textarea">Fundamental ngx core's</a> form directives to achieve similar
+        results.
 
-    <br />
-    <br />
+        <br />
+        <br />
 
-    <import module="PlatformTextAreaModule" subPackage="form"></import>
+        <import module="PlatformTextAreaModule" subPackage="form"></import>
 
-    <br />
+        <br />
 
-    <h2>Platform specific enhancements:</h2>
-    1. Textarea can automatically grow its height by specifying the max number of rows, or height to which it can grow.
-    <br />
-    2. A counter message that counts the number of remaining or exceeded characters.
-    <br />
-    3. Various interaction behaviours when counter exceeds the number of maximum characters.
-    <br />
-    4. Support for internationalisation of counter message.
-</description>
+        <h2>Platform specific enhancements:</h2>
+        1. Textarea can automatically grow its height by specifying the max number of rows, or height to which it can
+        grow.
+        <br />
+        2. A counter message that counts the number of remaining or exceeded characters.
+        <br />
+        3. Various interaction behaviours when counter exceeds the number of maximum characters.
+        <br />
+        4. Support for internationalisation of counter message.
+    </description>
 
-<fd-header-tabs [hasI18n]="true"></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs [hasI18n]="true"></fd-header-tabs>
+</fd-doc-page>

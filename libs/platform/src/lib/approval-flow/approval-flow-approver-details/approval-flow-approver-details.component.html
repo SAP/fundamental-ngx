@@ -19,7 +19,7 @@
             <fdp-search-field
                 *ngIf="!_userToShowDetails && _isListMode"
                 [placeholder]="'platformApprovalFlow.addNodeSearchPlaceholder' | fdTranslate"
-                contentDensity="compact"
+                fdCompact
                 [suggestions]="[]"
                 (inputChange)="_onSearchStringChange($event.text)"
             ></fdp-search-field>
@@ -41,14 +41,13 @@
         ></fdp-approval-flow-user-list>
     </fd-dialog-body>
 
-    <fd-dialog-footer>
+    <fd-dialog-footer fdCompact>
         <fd-dialog-footer-button *ngIf="_isListMode || (_userToShowDetails && _data.node?.approvers?.length === 1)">
             <button
                 fd-button
                 fd-dialog-decisive-button
                 fdType="emphasized"
                 [label]="'platformApprovalFlow.userDetailsSendReminderBtnLabel' | fdTranslate"
-                [compact]="true"
                 [disabled]="!_data.allowSendReminder || (_isListMode && !_selectedUsers.length)"
                 (click)="_sendReminder()"
             ></button>
@@ -61,7 +60,6 @@
                 fd-dialog-decisive-button
                 fdType="transparent"
                 [label]="'platformApprovalFlow.userDetailsCancelBtnLabel' | fdTranslate"
-                [compact]="true"
                 (click)="dialogRef.close('Cancel')"
             ></button>
         </fd-dialog-footer-button>

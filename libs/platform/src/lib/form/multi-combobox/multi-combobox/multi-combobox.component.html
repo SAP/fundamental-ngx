@@ -31,7 +31,6 @@
             [buttonFocusable]="buttonFocusable"
             [button]="!readonly"
             [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
-            [compact]="contentDensity | isCompactDensity"
             [isControl]="true"
             [disabled]="disabled || readonly"
             [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
@@ -45,14 +44,12 @@
         >
             <fd-tokenizer
                 *ngIf="_selectedSuggestions"
-                [compact]="contentDensity | isCompactDensity"
                 [tokenizerFocusable]="false"
                 class="fdp-multi-combobox-tokenizer-custom"
-                [class]="(contentDensity | isCompactDensity) ? 'fdp-multi-combobox-tokenizer-custom--compact' : ''"
+                [class.fdp-multi-combobox-tokenizer-custom--compact]="contentDensityObserver.isCompact"
                 (moreClickedEvent)="moreClicked()"
             >
                 <fd-token
-                    [compact]="contentDensity | isCompactDensity"
                     [readOnly]="disabled"
                     (onCloseClick)="removeToken(token, $event)"
                     *ngFor="let token of _selectedSuggestions"
@@ -80,7 +77,6 @@
                     tabindex="0"
                     [id]="id"
                     [name]="name"
-                    [compact]="contentDensity | isCompactDensity"
                     (keydown)="onInputKeydownHandler($event)"
                     [disabled]="disabled"
                     [(ngModel)]="inputText"
@@ -110,7 +106,6 @@
         class="fdp-multi-combobox-input-group-custom"
         [state]="state"
         [buttonFocusable]="false"
-        [compact]="contentDensity | isCompactDensity"
         [isControl]="true"
         [disabled]="disabled || readonly"
         [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
@@ -137,7 +132,6 @@
             tabindex="0"
             [id]="id"
             [name]="name"
-            [compact]="contentDensity | isCompactDensity"
             (keydown)="onInputKeydownHandler($event)"
             [disabled]="disabled"
             [(ngModel)]="inputText"
@@ -160,7 +154,6 @@
         class="fdp-multi-combobox__list fd-list--multi-input"
         [id]="id + '-result'"
         role="listbox"
-        [compact]="contentDensity | isCompactDensity"
         [style.maxHeight]="!mobile && maxHeight"
         [style.minWidth]="!mobile && minWidth + 'px'"
         [style.maxWidth]="autoResize && maxWidth + 'px'"
@@ -195,7 +188,6 @@
                 >
                     <fd-checkbox
                         (click)="onOptionCheckboxClicked($event, i)"
-                        [compact]="contentDensity | isCompactDensity"
                         (ngModelChange)="toggleSelection(optionItem)"
                         [ngModel]="optionItem.selected"
                     >
@@ -220,7 +212,6 @@
             >
                 <fd-checkbox
                     (click)="onOptionCheckboxClicked($event, i)"
-                    [compact]="contentDensity | isCompactDensity"
                     (ngModelChange)="toggleSelection(optionItem)"
                     [ngModel]="optionItem.selected"
                 >

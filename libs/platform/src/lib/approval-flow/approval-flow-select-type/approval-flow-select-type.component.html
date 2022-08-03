@@ -4,8 +4,7 @@
             <p>{{ 'platformApprovalFlow.selectTypeDialogMoveApproverAs' | fdTranslate }}</p>
         </ng-template>
     </fd-dialog-header>
-
-    <fd-dialog-body>
+    <fd-dialog-body fdCompact>
         <span class="fd-form-label">
             {{ 'platformApprovalFlow.selectTypeDialogParallelOrSerial' | fdTranslate }}
         </span>
@@ -15,7 +14,6 @@
                 <fd-radio-button
                     [value]="_nodeTypes.PARALLEL"
                     [(ngModel)]="_nodeType"
-                    [compact]="true"
                     id="select-type-parallel"
                     name="select-type-parallel"
                 >
@@ -27,7 +25,6 @@
                 <fd-radio-button
                     [value]="_nodeTypes.SERIAL"
                     [(ngModel)]="_nodeType"
-                    [compact]="true"
                     id="select-type-serial"
                     name="select-type-serial"
                 >
@@ -43,7 +40,7 @@
         </fd-form-group>
     </fd-dialog-body>
 
-    <fd-dialog-footer>
+    <fd-dialog-footer fdCompact>
         <ng-container>
             <fd-dialog-footer-button>
                 <button
@@ -51,7 +48,6 @@
                     fd-dialog-decisive-button
                     fdType="emphasized"
                     [label]="'platformApprovalFlow.selectTypeDialogConfirmButton' | fdTranslate"
-                    [compact]="true"
                     (click)="_submit()"
                 ></button>
             </fd-dialog-footer-button>
@@ -63,7 +59,6 @@
                     fd-dialog-decisive-button
                     fdType="transparent"
                     [label]="'platformApprovalFlow.selectTypeDialogCancelButton' | fdTranslate"
-                    [compact]="true"
                     (click)="_dialogRef.close()"
                 ></button>
             </fd-dialog-footer-button>

@@ -27,7 +27,6 @@
                         <fdp-button
                             (click)="removeCondition(i)"
                             buttonType="transparent"
-                            contentDensity="compact"
                             glyph="decline"
                             [title]="'platformSmartFilterBar.defineConditionsRemoveConditionButtonTitle' | fdTranslate"
                             type="button"
@@ -41,7 +40,6 @@
                     <div class="fdp-smart-filter-bar__actions-column" fdLayoutGridCol>
                         <fdp-button
                             (click)="addCondition()"
-                            contentDensity="compact"
                             [label]="'platformSmartFilterBar.defineConditionsAddConditionButtonLabel' | fdTranslate"
                         ></fdp-button>
                     </div>
@@ -55,7 +53,6 @@
             <fdp-button
                 (click)="applyConditions()"
                 buttonType="emphasized"
-                contentDensity="compact"
                 [label]="'platformSmartFilterBar.defineConditionsSubmitButtonLabel' | fdTranslate"
             ></fdp-button>
         </fd-dialog-footer-button>
@@ -64,7 +61,6 @@
             <fdp-button
                 (click)="_cancel()"
                 buttonType="transparent"
-                contentDensity="compact"
                 [label]="'platformSmartFilterBar.defineConditionsCancelButton' | fdTranslate"
             ></fdp-button>
         </fd-dialog-footer-button>

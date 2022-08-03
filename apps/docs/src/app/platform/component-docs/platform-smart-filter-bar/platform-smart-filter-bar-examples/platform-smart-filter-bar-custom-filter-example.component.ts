@@ -43,7 +43,6 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
         <ng-container [formGroup]="form">
             <ng-container [formGroupName]="formGroupName">
                 <fdp-slider
-                    [contentDensity]="formItem.guiOptions?.contentDensity || 'cozy'"
                     [customValues]="formItem.choices || []"
                     tooltipMode="readonly"
                     [name]="name"
@@ -66,7 +65,6 @@ export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGenera
         <ng-container [formGroup]="form">
             <ng-container [formGroupName]="formGroupName">
                 <fdp-date-picker
-                    [contentDensity]="formItem.guiOptions?.contentDensity || 'cozy'"
                     [placeholder]="formItem.placeholder || formItem.message"
                     [name]="name"
                     [formControlName]="name"

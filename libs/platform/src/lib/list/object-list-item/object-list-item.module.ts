@@ -19,6 +19,9 @@ import { PlatformObjectAttributeModule } from '@fundamental-ngx/platform/object-
 import { ObjectListItemComponent } from './object-list-item.component';
 import { ObjectListItemRowComponent } from './object-list-item-row.component';
 import { I18nModule } from '@fundamental-ngx/i18n';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
     declarations: [ObjectListItemComponent, ObjectListItemRowComponent],
@@ -39,8 +42,16 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         ObjectMarkerModule,
         ObjectNumberModule,
         ObjectIdentifierModule,
-        PlatformObjectAttributeModule
+        PlatformObjectAttributeModule,
+        ButtonModule,
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
     ],
-    exports: [ObjectListItemComponent, ObjectListItemRowComponent]
+    exports: [
+        ObjectListItemComponent,
+        ObjectListItemRowComponent,
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
+    ]
 })
 export class ObjectListItemModule {}

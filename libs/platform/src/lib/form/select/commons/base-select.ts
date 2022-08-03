@@ -8,7 +8,6 @@ import {
     Host,
     Input,
     OnDestroy,
-    OnInit,
     Optional,
     Output,
     QueryList,
@@ -53,7 +52,7 @@ export class FdpSelectionChangeEvent {
 }
 
 @Directive()
-export abstract class BaseSelect extends CollectionBaseInput implements OnInit, AfterViewInit, OnDestroy {
+export abstract class BaseSelect extends CollectionBaseInput implements AfterViewInit, OnDestroy {
     /** Provides maximum default height for the optionPanel */
     @Input()
     maxHeight = '250px';
@@ -271,20 +270,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
         super(cd, ngControl, ngForm, formField, formControl);
-    }
-
-    /** @hidden
-     * extended by super class
-     */
-    ngOnInit(): void {
-        if (this.contentDensity === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.contentDensity = density;
-                    this.cd.markForCheck();
-                })
-            );
-        }
     }
 
     /** @hidden */

@@ -8,9 +8,7 @@
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <fdp-table-reset-button
-                        [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                    ></fdp-table-reset-button>
+                    <fdp-table-reset-button></fdp-table-reset-button>
                 </fd-bar-element>
             </div>
         </ng-template>
@@ -18,7 +16,7 @@
 
     <fd-dialog-body>
         <!-- Include Rules -->
-        <fd-panel [compact]="dialogRef.data.tableContentDensity | isCompactDensity" [expanded]="_includePanelExpanded">
+        <fd-panel [expanded]="_includePanelExpanded">
             <div fd-panel-title>
                 {{
                     (_validIncludeRulesCount > 0
@@ -32,7 +30,6 @@
                     <div fdLayoutGridRow>
                         <fdp-table-filter-rule
                             [fdLayoutGridCol]="10"
-                            [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                             [rule]="rule"
                             (ruleChange)="_recalculateResetAvailability()"
                             (ruleStateChange)="_onRuleStateChange()"
@@ -43,7 +40,6 @@
                                 fd-button
                                 fdType="transparent"
                                 glyph="sys-cancel"
-                                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                                 [attr.aria-label]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
                                 [title]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
                                 (click)="_removeRule(rule, _includeRules)"
@@ -54,7 +50,6 @@
                                 fd-button
                                 fdType="transparent"
                                 glyph="add"
-                                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                                 [attr.aria-label]="'platformTable.P13FilterDialoAddFilterBtnTitle' | fdTranslate"
                                 [title]="'platformTable.P13FilterDialoAddFilterBtnTitle' | fdTranslate"
                                 (click)="_addNewRule(_includeRules)"
@@ -65,7 +60,7 @@
             </div>
         </fd-panel>
         <!-- Exclude Rules -->
-        <fd-panel [compact]="dialogRef.data.tableContentDensity | isCompactDensity" [expanded]="_excludePanelExpanded">
+        <fd-panel [expanded]="_excludePanelExpanded">
             <div fd-panel-title>
                 {{
                     (_validExcludeRulesCount > 0
@@ -89,7 +84,6 @@
                                 fd-button
                                 fdType="transparent"
                                 glyph="sys-cancel"
-                                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                                 [attr.aria-label]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
                                 [title]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
                                 (click)="_removeRule(rule, _excludeRules)"
@@ -100,7 +94,6 @@
                                 fd-button
                                 fdType="transparent"
                                 glyph="add"
-                                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                                 [attr.aria-label]="'platformTable.P13FilterDialoAddFilterBtnTitle' | fdTranslate"
                                 [title]="'platformTable.P13FilterDialoAddFilterBtnTitle' | fdTranslate"
                                 (click)="_addNewRule(_excludeRules)"
@@ -119,7 +112,6 @@
                 fdType="emphasized"
                 fd-dialog-decisive-button
                 [label]="'platformTable.P13FilterDialogConfirmationBtnLabel' | fdTranslate"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="confirm()"
             ></button>
         </fd-dialog-footer-button>
@@ -131,7 +123,6 @@
                 fd-dialog-decisive-button
                 fd-initial-focus
                 [label]="'platformTable.P13FilterDialogCancelBtnLabel' | fdTranslate"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="cancel()"
             ></button>
         </fd-dialog-footer-button>
