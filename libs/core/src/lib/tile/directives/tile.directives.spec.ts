@@ -12,8 +12,8 @@ import {
 @Component({
     selector: 'fd-test-component',
     template: `
-        <button fd-button fd-tile-action-close [compact]="true" fdType="transparent"></button>
-        <button fd-button fd-tile-action-indicator [compact]="true" fdType="transparent"></button>
+        <button fd-button fd-tile-action-close fdCompact fdType="transparent"></button>
+        <button fd-button fd-tile-action-indicator fdCompact fdType="transparent"></button>
         <div #header fd-tile-header [twoColumn]="true">
             <div fd-tile-header-content></div>
         </div>
