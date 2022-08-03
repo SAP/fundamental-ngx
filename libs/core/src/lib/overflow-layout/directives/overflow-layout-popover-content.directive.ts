@@ -3,7 +3,7 @@ import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk
 import { Directive, HostBinding, HostListener, Inject, Input } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { OverflowContainer } from '../interfaces/overflow-container.interface';
-import { OverflowItem } from '../interfaces/overflow-item.interface';
+import { OverflowLayoutFocusableItem } from '../interfaces/overflow-focusable-item.interface';
 import { OverflowPopoverContent } from '../interfaces/overflow-popover-content.interface';
 import { OverflowItemRef } from '../interfaces/overflow-item-ref.interface';
 import { FD_OVERFLOW_CONTAINER } from '../tokens/overflow-container.token';
@@ -21,16 +21,21 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
      */
     @Input()
     set items(value: OverflowItemRef[]) {
-        this._items = value;
-        this._keyboardEventsManager = new FocusKeyManager(
-            this._items.filter((item) => item.overflowItem.focusable).map((item) => item.overflowItem)
-        )
-            .withWrap()
-            .withHorizontalOrientation('ltr');
+        // Need to set items with a delay so that elementRef of the focusable item would refresh.
+        setTimeout(() => {
+            this._items = value;
+            this._keyboardEventsManager = new FocusKeyManager(
+                this._items
+                    .filter((item) => item.overflowItem.focusableItem?.focusable)
+                    .map((item) => item.overflowItem.focusableItem)
+            )
+                .withWrap()
+                .withHorizontalOrientation('ltr');
+        });
     }
 
     /** @hidden */
-    private _keyboardEventsManager: FocusKeyManager<OverflowItem>;
+    private _keyboardEventsManager: FocusKeyManager<OverflowLayoutFocusableItem>;
 
     /** @hidden */
     private _items: OverflowItemRef[];

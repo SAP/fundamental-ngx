@@ -1,5 +1,7 @@
+import { FocusableOption } from '@angular/cdk/a11y';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
-import { AbstractFdNgxClass } from '@fundamental-ngx/core/utils';
+import { AbstractFdNgxClass, KeyUtil } from '@fundamental-ngx/core/utils';
 
 /**
  * Tab link for nav mode
@@ -19,7 +21,7 @@ import { AbstractFdNgxClass } from '@fundamental-ngx/core/utils';
         tabindex: '-1'
     }
 })
-export class TabLinkDirective extends AbstractFdNgxClass {
+export class TabLinkDirective extends AbstractFdNgxClass implements FocusableOption {
     /** Whether the link is active */
     @Input()
     @HostBinding('attr.aria-selected')
@@ -38,6 +40,9 @@ export class TabLinkDirective extends AbstractFdNgxClass {
     @Output()
     readonly keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
+    @Output()
+    readonly focused = new EventEmitter<void>();
+
     /** @hidden */
     _setProperties(): void {
         this._addClassToElement('fd-tabs__link');
@@ -52,8 +57,20 @@ export class TabLinkDirective extends AbstractFdNgxClass {
     }
 
     /** @hidden */
-    @HostListener('keydown', ['$event'])
-    onKeyDown(e: KeyboardEvent): void {
-        this.keyDown.emit(e);
+    @HostListener('focus')
+    private _onFocus(): void {
+        this.focused.emit();
+    }
+
+    @HostListener('keyup', ['$event'])
+    private _onKeyUp(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            this.focused.emit();
+        }
+    }
+
+    /** @hidden */
+    focus(): void {
+        this.elementRef.nativeElement.focus();
     }
 }

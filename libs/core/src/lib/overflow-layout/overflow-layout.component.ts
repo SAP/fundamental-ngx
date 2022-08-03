@@ -26,14 +26,14 @@ import { debounceTime, Subject, Subscription } from 'rxjs';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowContainer } from './interfaces/overflow-container.interface';
 import { OverflowExpand } from './interfaces/overflow-expand.interface';
+import { OverflowLayoutFocusableItem } from './interfaces/overflow-focusable-item.interface';
 import { OverflowItemRef } from './interfaces/overflow-item-ref.interface';
-import { OverflowItem } from './interfaces/overflow-item.interface';
 import { OverflowPopoverContent } from './interfaces/overflow-popover-content.interface';
 import { OverflowLayoutConfig, OverflowLayoutService } from './overflow-layout.service';
 import { FD_OVERFLOW_CONTAINER } from './tokens/overflow-container.token';
 import { FD_OVERFLOW_EXPAND } from './tokens/overflow-expand.token';
+import { FD_OVERFLOW_FOCUSABLE_ITEM } from './tokens/overflow-focusable-item.token';
 import { FD_OVERFLOW_ITEM_REF } from './tokens/overflow-item-ref.token';
-import { FD_OVERFLOW_ITEM } from './tokens/overflow-item.token';
 
 @Component({
     selector: 'fd-overflow-layout',
@@ -106,10 +106,10 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
 
     /**
      * @hidden
-     * List of items that can be focused.
+     * List of items that can be focused
      */
-    @ContentChildren(FD_OVERFLOW_ITEM, { descendants: true })
-    _overflowItems: QueryList<OverflowItem>;
+    @ContentChildren(FD_OVERFLOW_FOCUSABLE_ITEM, { descendants: true })
+    _focusableOverflowItems: QueryList<OverflowLayoutFocusableItem>;
 
     /**
      * @hidden
@@ -204,8 +204,8 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
      * Sets current focused element.
      * @param element Element that needs to be focused.
      */
-    setFocusedElement(element: OverflowItem): void {
-        const index = this._overflowItems.toArray().findIndex((item) => item === element);
+    setFocusedElement(element: OverflowLayoutFocusableItem): void {
+        const index = this._focusableOverflowItems.toArray().findIndex((item) => item === element);
 
         if (index !== -1) {
             this._overflowLayoutService._keyboardEventsManager.setActiveItem(index);
@@ -270,7 +270,7 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
         return {
             visibleItems: this._visibleItems,
             items: this._items,
-            focusableItems: this._overflowItems,
+            focusableItems: this._focusableOverflowItems,
             itemsWrapper: this._itemsWrapper.nativeElement,
             showMoreContainer: this._showMoreContainer.nativeElement,
             layoutContainerElement: this._layoutContainer.nativeElement,
@@ -288,9 +288,9 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
             return;
         }
         if (KeyUtil.isKeyCode(event, TAB)) {
-            const index = this._allItems.findIndex(
-                (item) => item.overflowItem?.focusable && item.elementRef.nativeElement === event.target
-            );
+            const index = this._focusableOverflowItems
+                .toArray()
+                .findIndex((item) => item.focusable && item.elementRef.nativeElement === event.target);
             if (index !== -1) {
                 this._overflowLayoutService._keyboardEventsManager.setActiveItem(index);
             }

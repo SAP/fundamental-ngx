@@ -45,6 +45,7 @@ $fd-block: 'fd-overflow-layout';
 
     &__items-container {
         @include fd-reset();
+        position: relative;
     }
 
     &__items-wrapper {

@@ -70,4 +70,9 @@ export class TabInfo {
     get glyph(): string {
         return this.panel.glyph;
     }
+
+    /** @hidden */
+    get forcedVisibility(): boolean {
+        return this.panel._forcedVisibility;
+    }
 }
