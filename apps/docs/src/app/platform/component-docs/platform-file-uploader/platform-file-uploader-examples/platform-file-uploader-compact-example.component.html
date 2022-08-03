@@ -8,6 +8,7 @@
         placeholder="Field placeholder text"
     >
         <fdp-file-uploader
+            fdCompact
             id="input1-compact"
             name="compactFileUploader"
             ariaLabel="Choose file"
@@ -18,7 +19,6 @@
             accept=".png,.jpg,.jpeg"
             [(ngModel)]="files"
             [multiple]="true"
-            contentDensity="compact"
             (selectionChange)="handleFileSelection($event)"
         ></fdp-file-uploader>
     </fdp-form-field>

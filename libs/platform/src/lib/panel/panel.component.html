@@ -1,7 +1,7 @@
 <fd-panel
+    [fdContentDensity]="contentDensityObserver.value"
     [expanded]="expanded"
     [fixed]="!expandable"
-    [compact]="contentDensity | isCompactDensity"
     [expandAriaLabel]="_expandAriaLabel"
     [expandAriaLabelledBy]="_titleId"
     [attr.aria-disabled]="disabled"
@@ -10,7 +10,7 @@
     <h5 [id]="_titleId" fd-panel-title>{{ title }}</h5>
 
     <ng-container *ngIf="_panelActionsComponent">
-        <fd-toolbar [size]="_contentDensity" [shouldOverflow]="true" fdType="transparent" [clearBorder]="true">
+        <fd-toolbar [shouldOverflow]="true" fdType="transparent" [clearBorder]="true">
             <ng-container *ngTemplateOutlet="_panelActionsComponent.contentTemplateRef"></ng-container>
         </fd-toolbar>
     </ng-container>

@@ -21,8 +21,6 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { startWith } from 'rxjs/operators';
-
-import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { InputComponent } from '../input/input.component';
 
@@ -52,19 +50,6 @@ import { InputGroupInputComponent } from './input.component';
     providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => InputGroupComponent), multi: true }]
 })
 export class InputGroupComponent extends BaseInput implements OnInit, AfterContentInit, AfterViewInit {
-    /**
-     * content Density of element: 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-
-        this._setAddonsOptions();
-    }
-    get contentDensity(): ContentDensity {
-        return this._contentDensity || this._inputGroupConfig.contentDensity;
-    }
-
     /** Input value */
     @Input()
     get value(): any {
@@ -208,7 +193,6 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         const before = this._beforeInputAddons || [];
         const after = this._afterInputAddons || [];
         [...before, ...after].forEach((addon) => {
-            addon.contentDensity = this._contentDensity ?? 'cozy';
             addon.disabled = this.disabled;
         });
     }

@@ -13,6 +13,7 @@ import { PlatformSearchFieldBasicExampleComponent } from './platform-search-fiel
 import { PlatformSearchFieldCategoriesExampleComponent } from './platform-search-field-examples/platform-search-field-categories-example.component';
 import { PlatformSearchFieldDataSourceExampleComponent } from './platform-search-field-examples/platform-search-field-data-source-example.component';
 import { PlatformSearchFieldMobileExampleComponent } from './platform-search-field-examples/platform-search-field-mobile/platform-search-field-mobile-example.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -36,6 +37,9 @@ const routes: Routes = [
         PlatformSearchFieldDataSourceExampleComponent,
         PlatformSearchFieldMobileExampleComponent
     ],
-    providers: [{ provide: MOBILE_MODE_CONFIG, useValue: SEARCH_FIELD_MOBILE_CONFIG, multi: true }]
+    providers: [
+        { provide: MOBILE_MODE_CONFIG, useValue: SEARCH_FIELD_MOBILE_CONFIG, multi: true },
+        platformContentDensityModuleDeprecationsProvider('fdp-search-field')
+    ]
 })
 export class PlatformSearchFieldDocsModule {}

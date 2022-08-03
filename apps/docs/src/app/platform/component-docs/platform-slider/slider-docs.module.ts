@@ -12,6 +12,7 @@ import { API_FILES } from '../../api-files';
 import { COMPONENTS } from './examples';
 import { PlatformSliderDocsComponent } from './slider-docs.component';
 import { SliderHeaderComponent } from './slider-header/slider-header.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -34,6 +35,7 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [SliderHeaderComponent, PlatformSliderDocsComponent, ...COMPONENTS],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-slider')]
 })
 export class PlatformSliderDocsModule {}

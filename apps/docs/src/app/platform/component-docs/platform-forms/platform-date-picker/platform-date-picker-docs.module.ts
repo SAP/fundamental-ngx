@@ -16,6 +16,7 @@ import { PlatformDatePickeri18nExampleComponent } from './platform-date-picker-e
 import { PlatformDatePickerDisableFuncExampleComponent } from './platform-date-picker-examples/platform-date-picker-disable-func-example.component';
 import { PlatformDatePickerFormatExampleComponent } from './platform-date-picker-examples/platform-date-picker-format-example.component';
 import { PlatformDatePickerUpdateOnBlurExampleComponent } from './platform-date-picker-examples/platform-date-picker-update-on-blur-example.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -47,6 +48,7 @@ const routes: Routes = [
         PlatformDatePickerModule,
         FdpFormGroupModule
     ],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-date-picker')]
 })
 export class PlatformDatePickerDocsModule {}

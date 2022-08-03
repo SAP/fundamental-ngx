@@ -39,8 +39,9 @@ import { ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keyc
 import { merge, Observable, Subscription } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 
-import { ContentDensity, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { MenuItemComponent } from './menu-item.component';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 export type MenuCloseMethod = void | 'mouse' | 'keyboard' | 'tab' | 'arrow';
 
@@ -56,7 +57,8 @@ let menuIdCounter = 0;
     templateUrl: './menu.component.html',
     styleUrls: ['./menu.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [contentDensityObserverProviders()]
 })
 export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy {
     /** Menu ID */
@@ -64,16 +66,13 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     get id(): string {
         return this._id;
     }
+
     set id(id: string) {
         this._id = id;
 
         // Use 'id' property to create menu ID for aria-control purposes.
         this.menuId = MENU_ID_ROOT + id;
     }
-
-    /** Density for Menu */
-    @Input()
-    contentDensity: ContentDensity;
 
     /**
      * Whether menu can be opened using arrow keys
@@ -127,7 +126,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     private _dirChangeSubscription = Subscription.EMPTY;
 
     /** @hidden */
-    constructor(@Optional() private _rtl: RtlService) {
+    constructor(@Optional() private _rtl: RtlService, readonly contentDensityObserver: ContentDensityObserver) {
         if (this._rtl) {
             this._dirChangeSubscription = this._rtl.rtl.subscribe((value: boolean) => {
                 this.direction = value ? 'rtl' : 'ltr';

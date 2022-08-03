@@ -33,12 +33,11 @@
             *ngIf="_isShownSelectionColumn"
             fd-table-cell
             class="fd-table__cell--fixed fd-table__cell--checkbox"
-            [style]="contentDensity | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth"
+            [style]="contentDensityObserver | async | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth"
         >
             <fd-checkbox
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
                 labelClass="fd-table__checkbox-label"
-                [compact]="contentDensity | isCompactDensity"
                 [tristate]="true"
                 [tristateSelectable]="false"
                 [ngModel]="checkedState"
@@ -103,7 +102,7 @@
                     [noArrow]="true"
                     fd-table-popover
                 >
-                    <ul fd-list [noBorder]="true" [compact]="contentDensity | isCompactDensity">
+                    <ul fd-list [noBorder]="true">
                         <!-- Sorting -->
                         <ng-container *ngIf="column.sortable">
                             <li
@@ -177,7 +176,6 @@
                                     >
                                     <input
                                         fd-form-control
-                                        [compact]="contentDensity | isCompactDensity"
                                         [id]="'fdp-table-column-filtering-' + column.name"
                                         (keyup.enter)="_columnHeaderFilterBy(column.key, $any($event.target)?.value)"
                                     />
@@ -293,7 +291,9 @@
                                     fd-table-cell
                                     fd-table-cell-selectable
                                     [style]="
-                                        contentDensity | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
+                                        contentDensityObserver
+                                            | async
+                                            | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
                                     "
                                     [focusable]="true"
                                     [attr.aria-selected]="row.checked"
@@ -309,11 +309,12 @@
                                     role="cell"
                                     fd-table-cell
                                     [style]="
-                                        contentDensity | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
+                                        contentDensityObserver
+                                            | async
+                                            | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
                                     "
                                 >
                                     <fd-checkbox
-                                        [compact]="contentDensity | isCompactDensity"
                                         labelClass="fd-table__checkbox-label"
                                         [ngModel]="row.checked"
                                         (click)="_toggleMultiSelectRow(row, rowIdx, $event)"

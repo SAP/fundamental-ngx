@@ -15,7 +15,8 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
     constructor(
         @Inject(DynamicComponentService) dynamicComponentService: DynamicComponentService,
         @Optional() @Inject(DIALOG_DEFAULT_CONFIG) private _defaultConfig: DialogConfig,
-        @Optional() private _rtlService: RtlService
+        @Optional() private _rtlService: RtlService,
+        private _injector: Injector
     ) {
         super(dynamicComponentService);
     }
@@ -24,9 +25,17 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
      * Opens a dialog component with provided content.
      * @param content Content of the dialog component.
      * @param dialogConfig Configuration of the dialog component.
+     * @param parentInjector Parent injector instance.
      */
-    public open<T = any>(content: DialogContentType, dialogConfig?: DialogConfig<T>): DialogRef<T> {
+    public open<T = any>(
+        content: DialogContentType,
+        dialogConfig?: DialogConfig<T>,
+        parentInjector?: Injector
+    ): DialogRef<T> {
         const dialogRef = new DialogRef();
+        if (!parentInjector) {
+            parentInjector = this._injector;
+        }
 
         dialogConfig = this._applyDefaultConfig(dialogConfig || {}, this._defaultConfig || new DialogConfig());
         dialogRef.data = dialogConfig.data;
@@ -37,7 +46,8 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
                 { provide: DialogRef, useValue: dialogRef },
                 { provide: RtlService, useValue: this._rtlService },
                 { provide: DialogService, useValue: this }
-            ]
+            ],
+            parent: parentInjector
         });
 
         const component = this._dynamicComponentService.createDynamicComponent<DialogContainerComponent>(

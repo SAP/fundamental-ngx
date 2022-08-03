@@ -1,15 +1,13 @@
-<ng-content selector="fd-toolbar"></ng-content>
+<ng-content select="fd-toolbar"></ng-content>
 <ul
     fd-list
     [attr.id]="id"
-    [compact]="contentDensity | isCompactDensity"
     [noBorder]="noBorder"
     [selection]="selection"
     [byline]="hasByLine"
-    [class.fd-list--navigation]="navigated"
+    [class.fd-list--navigation]="navigated || navigationIndicator"
     [navigationIndicator]="navigationIndicator"
     style="outline: none"
-    [class.fd-list--navigation]="navigationIndicator"
     (keydown)="_keyManager?.onKeydown($event); _handleKeyDown($event)"
     (change)="_onSelectionChanged($event)"
     [attr.aria-setsize]="ariaSetsize"
@@ -62,7 +60,7 @@
                     [attr.aria-labelledby]="_loading ? 'loadingOnScroll' : 'loadingOnbutton'"
                 >
                 </fd-busy-indicator>
-                {{ loadTitle }} <ng-content selector="#load"></ng-content>
+                {{ loadTitle }} <ng-content select="#load"></ng-content>
             </button>
         </li>
     </ng-container>

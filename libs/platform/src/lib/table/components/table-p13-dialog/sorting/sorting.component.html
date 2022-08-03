@@ -20,7 +20,6 @@
                 class="sort-row__select"
                 [value]="rule.columnKey"
                 (valueChange)="_onRuleColumnKeyChange(rule, $event)"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 placeholder="(none)"
                 i18n-placeholder="@@platformTableP13SortDialogNoneSelectedColumn|Table column select placeholder"
             >
@@ -37,7 +36,6 @@
                 class="sort-row__select"
                 [value]="rule.direction"
                 (valueChange)="_onRuleDirectionChange(rule, $event)"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 placeholder="(none)"
                 i18n-placeholder="@@platformTableP13SortDialogNoneSelectedSorting|Sorting select placeholder"
             >
@@ -54,7 +52,6 @@
                     fd-button
                     fdType="transparent"
                     glyph="sys-cancel"
-                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                     i18n-aria-label="platformTableP13SortDialogRemoveSort|Remove btn aria-label attribute"
                     aria-label="Remove"
                     i18n-title="platformTableP13SortDialogRemoveSort|Remove btn title attribute"
@@ -66,7 +63,6 @@
                     fd-button
                     fdType="transparent"
                     glyph="add"
-                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                     i18n-aria-label="platformTableP13SortDialogAddNewSort|Add New btn aria-label attribute"
                     aria-label="Add new"
                     i18n-title="platformTableP13SortDialogAddNewSort|Add New btn title attribute"
@@ -85,7 +81,6 @@
                 fd-dialog-decisive-button
                 i18n-label="@@platformTableP13SortDialogConfirmationBtn"
                 label="OK"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="confirm()"
             ></button>
         </fd-dialog-footer-button>
@@ -98,7 +93,6 @@
                 fd-initial-focus
                 i18n-label="@@platformTableP13SortDialogCancelBtn"
                 label="Cancel"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="cancel()"
             ></button>
         </fd-dialog-footer-button>

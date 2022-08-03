@@ -19,13 +19,12 @@ import { Table } from '../../table';
 import { TableColumn } from '../table-column/table-column';
 import { FiltersComponent, FiltersDialogData, FiltersDialogResultData } from './filtering/filters.component';
 import {
+    GroupingComponent,
     SettingsGroupDialogData,
-    SettingsGroupDialogResultData,
-    GroupingComponent
+    SettingsGroupDialogResultData
 } from './grouping/grouping.component';
 import { SettingsSortDialogData, SettingsSortDialogResultData, SortingComponent } from './sorting/sorting.component';
 import { TableViewSettingsFilterComponent } from './table-view-settings-filter.component';
-import { TableDialogCommonData } from '../../models/table-dialog-common-data.model';
 
 export const dialogConfig: DialogConfig = {
     responsivePadding: false,
@@ -64,6 +63,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
     set table(table: Table) {
         this._setTable(table);
     }
+
     get table(): Table {
         return this._table;
     }
@@ -101,16 +101,19 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         const columns = this._getTableColumns();
         const sortBy = state.sortBy?.[0];
         const dialogData: SettingsSortDialogData = {
-            ...this._getCommonDialogData(),
             columns: columns.filter(({ sortable }) => sortable),
             direction: sortBy?.direction,
             field: sortBy?.field
         };
 
-        const dialogRef = this._dialogService.open(SortingComponent, {
-            ...dialogConfig,
-            data: dialogData
-        });
+        const dialogRef = this._dialogService.open(
+            SortingComponent,
+            {
+                ...dialogConfig,
+                data: dialogData
+            },
+            this.table.injector
+        );
 
         this._subscriptions.add(
             dialogRef.afterClosed
@@ -126,16 +129,19 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         const state = this._getTableState();
         const columns = this._getTableColumns();
         const dialogData: FiltersDialogData = {
-            ...this._getCommonDialogData(),
             columns,
             viewSettingsFilters: this.filters.toArray(),
             filterBy: state?.filterBy
         };
 
-        const dialogRef = this._dialogService.open(FiltersComponent, {
-            ...dialogConfig,
-            data: dialogData
-        });
+        const dialogRef = this._dialogService.open(
+            FiltersComponent,
+            {
+                ...dialogConfig,
+                data: dialogData
+            },
+            this.table.injector
+        );
 
         this._subscriptions.add(
             dialogRef.afterClosed
@@ -149,16 +155,19 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         const state = this._getTableState();
         const columns = this._getTableColumns();
         const dialogData: SettingsGroupDialogData = {
-            ...this._getCommonDialogData(),
             columns: columns.filter(({ groupable }) => groupable),
             direction: state.groupBy?.[0]?.direction,
             field: state.groupBy?.[0]?.field
         };
 
-        const dialogRef = this._dialogService.open(GroupingComponent, {
-            ...dialogConfig,
-            data: dialogData
-        });
+        const dialogRef = this._dialogService.open(
+            GroupingComponent,
+            {
+                ...dialogConfig,
+                data: dialogData
+            },
+            this.table.injector
+        );
 
         this._subscriptions.add(
             dialogRef.afterClosed
@@ -240,12 +249,5 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
     private _unsubscribeFromTable(): void {
         this._tableSubscriptions.unsubscribe();
         this._tableSubscriptions = new Subscription();
-    }
-
-    /** @hidden */
-    private _getCommonDialogData(): TableDialogCommonData {
-        return {
-            tableContentDensity: this._table.contentDensity
-        };
     }
 }

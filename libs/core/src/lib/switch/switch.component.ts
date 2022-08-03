@@ -19,6 +19,7 @@ import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let switchUniqueId = 0;
+let warnedAboutAriaLabeledBy = false;
 
 /**
  * The Switch component is used to activate or deactivate an element.
@@ -88,8 +89,9 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     /** @deprecated renamed to "ariaLabelledBy" */
     @Input()
     set ariaLabelledby(value: Nullable<string>) {
-        if (isDevMode()) {
-            console.warn('"ariaLabelledby" is deprecated. Use "ariaLabelledBy" instead');
+        if (isDevMode() && !warnedAboutAriaLabeledBy) {
+            console.warn('fd-switch[ariaLabelledby] is deprecated. Use fd-switch[ariaLabelledBy] instead');
+            warnedAboutAriaLabeledBy = true;
         }
         this.ariaLabelledBy = value;
     }

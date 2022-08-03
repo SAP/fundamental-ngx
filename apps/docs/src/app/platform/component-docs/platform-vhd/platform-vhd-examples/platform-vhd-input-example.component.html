@@ -8,7 +8,7 @@
                 aria-label="Open value help dialog"
                 title="Open value help dialog"
                 glyph="value-help"
-                [compact]="true"
+                fdCompact
                 fdType="transparent"
                 (click)="vhd1.open()"
             ></button>
@@ -39,13 +39,13 @@
 <br />
 <div fd-form-item>
     <label fd-form-label for="test-selection-type-single">Selection type: multi</label>
-    <fd-token fd-toolbar-item *ngFor="let item of valuesMulti" [compact]="true" [readOnly]="true">
+    <fd-token fd-toolbar-item *ngFor="let item of valuesMulti" fdCompact [readOnly]="true">
         {{ item.name }}
     </fd-token>
     <br *ngIf="valuesMulti && valuesMulti?.length" />
     <button
         fd-button
-        [compact]="true"
+        fdCompact
         (click)="vhd2.open()"
         aria-label="Open value help dialog"
         label="Open and select"
@@ -80,11 +80,10 @@
         <span fd-input-group-addon [button]="true">
             <button
                 fd-button
-                fd-button
                 aria-label="Open value help dialog"
                 title="Open value help dialog"
                 glyph="value-help"
-                [compact]="true"
+                fdCompact
                 fdType="transparent"
                 (click)="vhd3.open()"
             ></button>

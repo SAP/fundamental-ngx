@@ -1,11 +1,10 @@
-<fdp-list [hasByLine]="true">
+<fdp-list [hasByLine]="true" fdCompact>
     <fd-form-group>
         <div *ngFor="let team of teams; let i = index; trackBy: _trackByFn" fd-form-item>
             <fd-radio-button
                 [value]="team.id"
                 [attr.id]="'team-radio' + i"
                 [name]="'team-radio' + i"
-                [compact]="true"
                 [(ngModel)]="selectedTeamId"
                 (click)="onTeamRadioClick.emit(team)"
             >

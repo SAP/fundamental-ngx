@@ -18,10 +18,10 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { isObservable, Observable, Subject, Subscription } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { ContentDensity, ContentDensityEnum, RtlService, ContentDensityService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import {
     ArrayValueHelpDialogDataSource,
@@ -157,10 +157,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     @Input()
     loading: boolean | undefined;
 
-    /** The content density for which to render value help dialog */
-    @Input()
-    contentDensity: ContentDensity = ContentDensityEnum.COMPACT;
-
     /** Define conditions tab's settings */
     @Input()
     defineTabTitle = 'Define Conditions';
@@ -245,9 +241,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     /** @hidden for data source handling */
     private _dsSubscription: Subscription | null;
 
-    /** @hidden */
-    private _contentDensityManuallySet = false;
-
     /** @hidden Previous state */
     private _prevState: VhdValue<T> = {
         selected: [],
@@ -281,14 +274,12 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         private readonly _elementRef: ElementRef,
         private readonly _changeDetectorRef: ChangeDetectorRef,
         private readonly _dialogService: DialogService,
-        @Optional() private readonly _rtlService: RtlService,
-        @Optional() private readonly _contentDensityService: ContentDensityService
+        @Optional() private readonly _rtlService: RtlService
     ) {
         /** Default display function for define conditions */
         if (!this.conditionDisplayFn || typeof this.conditionDisplayFn !== 'function') {
             this.conditionDisplayFn = defaultConditionDisplayFn;
         }
-        this._trackContentDensityChanges();
     }
 
     /** @hidden */
@@ -358,10 +349,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
             if ('dataSource' in changes) {
                 this._initializeDS();
             }
-        }
-
-        if (changes.contentDensity) {
-            this._contentDensityManuallySet = true;
         }
     }
 
@@ -709,20 +696,5 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
             );
         }
         return true;
-    }
-
-    /** @hidden */
-    private _trackContentDensityChanges(): void {
-        if (this._contentDensityService) {
-            this._contentDensityService._contentDensityListener
-                .pipe(
-                    filter(() => !this._contentDensityManuallySet),
-                    takeUntil(this._onDestroy$)
-                )
-                .subscribe((density) => {
-                    this.contentDensity = density as ContentDensityEnum;
-                    this._changeDetectorRef.markForCheck();
-                });
-        }
     }
 }

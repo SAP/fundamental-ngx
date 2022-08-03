@@ -6,7 +6,7 @@ import { PlatformConfig } from '@fundamental-ngx/platform/shared';
  * Default options for platform dynamic-page
  */
 @Injectable({ providedIn: 'root' })
-export class DynamicPageConfig {
+export class DynamicPageConfig extends PlatformConfig {
     /**
      * aria label for expand/collapse button when the Dynamic Page is collapsed
      */
@@ -38,5 +38,8 @@ export class DynamicPageConfig {
         return useFactory;
     }
 
-    constructor(platformConfig: PlatformConfig) {}
+    constructor(platformConfig: PlatformConfig) {
+        super();
+        this.contentDensity = platformConfig.contentDensity;
+    }
 }

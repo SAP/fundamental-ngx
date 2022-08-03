@@ -4,6 +4,7 @@ import {
     Component,
     EventEmitter,
     forwardRef,
+    Injector,
     Input,
     OnDestroy,
     Output,
@@ -95,6 +96,7 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
     get subject(): SmartFilterBarSubjectDirective {
         return this._subject;
     }
+
     /**
      * 'Show filters' button label.
      */
@@ -201,7 +203,8 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
         private _dialogService: DialogService,
         private _cdr: ChangeDetectorRef,
         private _smartFilterBarService: SmartFilterBarService,
-        private _fgService: FormGeneratorService
+        private _fgService: FormGeneratorService,
+        private _injector: Injector
     ) {
         this._fgService.addComponent(SmartFilterBarConditionFieldComponent, [SMART_FILTER_BAR_RENDERER_COMPONENT]);
     }
@@ -234,13 +237,17 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
             visibilityCategories: this.filtersVisibilityCategoryLabels
         };
 
-        const dialogRef = this._dialogService.open(SmartFilterBarSettingsDialogComponent, {
-            ...dialogConfig,
-            responsivePadding: false,
-            verticalPadding: false,
-            width: '50rem',
-            data: dialogData
-        });
+        const dialogRef = this._dialogService.open(
+            SmartFilterBarSettingsDialogComponent,
+            {
+                ...dialogConfig,
+                responsivePadding: false,
+                verticalPadding: false,
+                width: '50rem',
+                data: dialogData
+            },
+            this._injector
+        );
 
         dialogRef.afterClosed.pipe(take(1)).subscribe((selectedFilters: string[]) => {
             this._setSelectedFilters(selectedFilters);
@@ -461,7 +468,6 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
             choices: column.hasOptions ? this._getFilterDefaultOptions(column.key, column.filterType) : undefined,
             transformer: (itemValue) => getSelectItemValue(itemValue),
             guiOptions: {
-                contentDensity: 'compact',
                 additionalData: {
                     type: 'input',
                     dataType: column.dataType,

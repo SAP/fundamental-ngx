@@ -1,7 +1,7 @@
-import { ContentDensity, ContentDensityEnum } from '@fundamental-ngx/core/utils';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 
 import { CollectionPage, TableState } from '../interfaces';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 export const DEFAULT_TABLE_PAGE: Readonly<CollectionPage> = {
     pageSize: 0,
@@ -30,16 +30,16 @@ export const EDITABLE_ROW_SEMANTIC_STATE = 'information';
 
 export const SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH = 6;
 
-export const SELECTION_COLUMN_WIDTH: ReadonlyMap<ContentDensity, number> = new Map<ContentDensity, number>([
-    [ContentDensityEnum.COZY, 44],
-    [ContentDensityEnum.COMPACT, 32],
-    [ContentDensityEnum.CONDENSED, 32]
+export const SELECTION_COLUMN_WIDTH: ReadonlyMap<ContentDensityMode, number> = new Map<ContentDensityMode, number>([
+    [ContentDensityMode.COZY, 44],
+    [ContentDensityMode.COMPACT, 32],
+    [ContentDensityMode.CONDENSED, 32]
 ]);
 
 export const TABLE_COLUMN_MIN_WIDTH = 50;
 
-export const ROW_HEIGHT: ReadonlyMap<ContentDensity, number> = new Map<ContentDensity, number>([
-    [ContentDensityEnum.COZY, 44],
-    [ContentDensityEnum.COMPACT, 32],
-    [ContentDensityEnum.CONDENSED, 24]
+export const ROW_HEIGHT: ReadonlyMap<ContentDensityMode, number> = new Map<ContentDensityMode, number>([
+    [ContentDensityMode.COZY, 44],
+    [ContentDensityMode.COMPACT, 32],
+    [ContentDensityMode.CONDENSED, 24]
 ]);

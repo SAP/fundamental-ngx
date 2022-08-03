@@ -1,4 +1,4 @@
-<fd-dialog>
+<fd-dialog fdCompact>
     <fd-dialog-header [class.show-search]="_selectMode && !_userToShowDetails">
         <ng-template fdTemplate="header">
             <p>
@@ -38,7 +38,6 @@
                 *ngIf="_selectMode && !_userToShowDetails"
                 i18n-placeholder
                 placeholder="Search"
-                contentDensity="compact"
                 [suggestions]="[]"
                 (inputChange)="_onSearchStringChange($event.text)"
             ></fdp-search-field>
@@ -50,7 +49,7 @@
             <div fd-form-item *ngIf="_data.showNodeTypeSelect">
                 <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogNodeType">Parallel or serial</label>
 
-                <fd-select [compact]="true" [(value)]="_nodeType">
+                <fd-select [(value)]="_nodeType">
                     <ng-container *ngFor="let option of _nodeTypesArray">
                         <ng-container [ngSwitch]="option">
                             <li
@@ -78,7 +77,7 @@
             <div fd-form-item>
                 <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogApproverType">Approver type</label>
 
-                <fd-select [compact]="true" [(value)]="_approverType">
+                <fd-select [(value)]="_approverType">
                     <ng-container *ngFor="let option of _approverTypesArray">
                         <ng-container [ngSwitch]="option">
                             <li
@@ -117,7 +116,6 @@
 
                 <fd-multi-input
                     *ngIf="_isSingleUserMode"
-                    [compact]="true"
                     [showAllButton]="false"
                     [dropdownValues]="_selectedApprovers"
                     [(ngModel)]="_selectedApprovers"
@@ -128,7 +126,6 @@
 
                 <fd-multi-input
                     *ngIf="!_isSingleUserMode"
-                    [compact]="true"
                     [showAllButton]="false"
                     [dropdownValues]="_selectedTeamArray"
                     [(ngModel)]="_selectedTeamArray"
@@ -146,12 +143,7 @@
             <div *ngIf="_checkDueDate" fd-form-item>
                 <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogDueDate">Due date</label>
 
-                <fd-date-picker
-                    type="single"
-                    [compact]="true"
-                    [state]="!this._dueDate ? 'error' : null"
-                    [(ngModel)]="_dueDate"
-                >
+                <fd-date-picker type="single" [state]="!this._dueDate ? 'error' : null" [(ngModel)]="_dueDate">
                 </fd-date-picker>
             </div>
         </ng-container>
@@ -197,7 +189,6 @@
                     fdType="emphasized"
                     i18n-label="platformApprovalFlowDialogButtonAdd"
                     label="Add"
-                    [compact]="true"
                     [disabled]="_isMainSubmitButtonDisabled"
                     (click)="_submit()"
                 ></button>
@@ -211,7 +202,6 @@
                     fdType="transparent"
                     i18n-label="platformApprovalFlowDialogButtonCancel"
                     label="Cancel"
-                    [compact]="true"
                     (click)="dialogRef.close()"
                 ></button>
             </fd-dialog-footer-button>
@@ -225,7 +215,6 @@
                         fdType="emphasized"
                         i18n-label="platformApprovalFlowAddNodeDialogSelectButton"
                         label="Select"
-                        [compact]="true"
                         [disabled]="!_selectedApprovers.length"
                         (click)="_confirmSelectedApprovers()"
                     ></button>
@@ -238,7 +227,6 @@
                         fdType="transparent"
                         i18n-label="platformApprovalFlowDialogButtonCancel"
                         label="Cancel"
-                        [compact]="true"
                         (click)="_exitSelectMode()"
                     ></button>
                 </fd-dialog-footer-button>
@@ -251,7 +239,6 @@
                         fdType="emphasized"
                         i18n-label="platformApprovalFlowDialogButtonAdd"
                         label="Add"
-                        [compact]="true"
                         [disabled]="!_selectedTeam && !viewService.team"
                         (click)="_confirmSelectedTeam()"
                     ></button>
@@ -264,7 +251,6 @@
                         fdType="transparent"
                         i18n-label="platformApprovalFlowDialogButtonCancel"
                         label="Cancel"
-                        [compact]="true"
                         (click)="_exitSelectMode()"
                     ></button>
                 </fd-dialog-footer-button>
@@ -278,7 +264,6 @@
                         fdType="transparent"
                         i18n-label="platformApprovalFlowDialogButtonClose"
                         label="Close"
-                        [compact]="true"
                         (click)="_exitTeamMembersMode()"
                     ></button>
                 </fd-dialog-footer-button>
@@ -292,7 +277,6 @@
                         fdType="transparent"
                         i18n-label="platformApprovalFlowDialogButtonClose"
                         label="Close"
-                        [compact]="true"
                         (click)="_exitUserDetailsMode()"
                     ></button>
                 </fd-dialog-footer-button>

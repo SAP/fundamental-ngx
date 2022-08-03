@@ -1,12 +1,11 @@
 <ng-template
-    let-size="size"
     let-counter="counter"
     let-sortable="sortable"
     let-filterable="filterable"
     let-groupable="groupable"
     let-columns="columns"
 >
-    <fd-toolbar fdType="transparent" [clearBorder]="true" [hasTitle]="!!title" [size]="size">
+    <fd-toolbar fdType="transparent" [clearBorder]="true" [hasTitle]="!!title">
         <label fd-toolbar-label [id]="tableToolbarTitleId" [class.fd-toolbar__title]="!!title">
             {{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span>
         </label>
@@ -19,7 +18,6 @@
             i18n-placeholder="@@platformTableToolbarSearchPlaceholder"
             placeholder="Search"
             [disabled]="!!(tableLoading$ | async)"
-            [contentDensity]="size"
             [suggestions]="searchSuggestions"
             [ariaLabelledBy]="tableToolbarTitleId"
             (searchSubmit)="submitSearch($event)"
@@ -30,14 +28,12 @@
             <fdp-button
                 label="Create"
                 i18n-label="@@platformTableToolbarActionButtonCreate"
-                [contentDensity]="size"
                 (click)="_addRow()"
             ></fdp-button>
             <ng-container *ngIf="_showSaveButton">
                 <fdp-button
                     label="Save"
                     i18n-label="@@platformTableToolbarActionButtonSave"
-                    [contentDensity]="size"
                     *ngIf="_showSaveButton"
                     (click)="_saveRows()"
                 ></fdp-button>
@@ -45,7 +41,6 @@
                 <fdp-button
                     label="Cancel"
                     i18n-label="@@platformTableToolbarActionButtonCancel"
-                    [contentDensity]="size"
                     (click)="_cancelEditing()"
                     buttonType="transparent"
                 ></fdp-button>
@@ -68,7 +63,6 @@
                 i18n-title="@@platformTableToolbarActionButtonSort"
                 title="Sort"
                 buttonType="transparent"
-                [contentDensity]="size"
                 aria-haspopup="modal"
                 (click)="openSorting()"
             ></fdp-button>
@@ -78,7 +72,6 @@
                 i18n-title="@@platformTableToolbarActionButtonFilter"
                 title="Filter"
                 buttonType="transparent"
-                [contentDensity]="size"
                 aria-haspopup="modal"
                 (click)="openFiltering()"
             ></fdp-button>
@@ -88,7 +81,6 @@
                 i18n-title="@@platformTableToolbarActionButtonGroup"
                 title="Group"
                 buttonType="transparent"
-                [contentDensity]="size"
                 aria-haspopup="modal"
                 (click)="openGrouping()"
             ></fdp-button>
@@ -98,7 +90,6 @@
                 i18n-title="@@platformTableToolbarActionButtonColumns"
                 title="Columns"
                 buttonType="transparent"
-                [contentDensity]="size"
                 aria-haspopup="modal"
                 (click)="openColumns()"
             ></fdp-button>

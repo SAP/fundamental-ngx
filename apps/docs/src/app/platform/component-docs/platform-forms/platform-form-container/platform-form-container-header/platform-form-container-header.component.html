@@ -1,80 +1,82 @@
-<header>Form Container</header>
-<description>
-    Platform Forms' structure can be broken down into 3 groups:
-    <ul>
-        <li>
-            Form Group (actual Form Layout)
-            <ul>
-                <li>Manages global Error handling navigation</li>
-                <li>Responsible for layout (multizone)</li>
-                <li>Can pre-set common properties to be applied for whole forms</li>
-            </ul>
-        </li>
-        <li>
-            Form Field
-            <ul>
-                <li>Aggregates common behavior for input field (Errors, Hints, Labels,..)</li>
-                <li>
-                    If multi zone layout is enabled ability to specify where the field should appear (e.g.: left/right
-                    column)
-                </li>
-                <li>Responsible for change detection and UI updates</li>
-                <li>Form field can be placed to different columns based on available screen size.</li>
-                <li>
-                    <code>[columnLayout]</code> value can be passed in form of <code>XL: 3, L: 2, M: 1, S: 1</code> to
-                    acheive this.
-                </li>
-            </ul>
-        </li>
-        <li>
-            Form Control (eg: input widget)
-            <ul>
-                <li>Shares common properties among other input form controls</li>
-                <li>Notify its parent (FormField) about any state change.</li>
-            </ul>
-        </li>
-    </ul>
+<fd-doc-page>
+    <header>Form Container</header>
+    <description>
+        Platform Forms' structure can be broken down into 3 groups:
+        <ul>
+            <li>
+                Form Group (actual Form Layout)
+                <ul>
+                    <li>Manages global Error handling navigation</li>
+                    <li>Responsible for layout (multizone)</li>
+                    <li>Can pre-set common properties to be applied for whole forms</li>
+                </ul>
+            </li>
+            <li>
+                Form Field
+                <ul>
+                    <li>Aggregates common behavior for input field (Errors, Hints, Labels,..)</li>
+                    <li>
+                        If multi zone layout is enabled ability to specify where the field should appear (e.g.:
+                        left/right column)
+                    </li>
+                    <li>Responsible for change detection and UI updates</li>
+                    <li>Form field can be placed to different columns based on available screen size.</li>
+                    <li>
+                        <code>[columnLayout]</code> value can be passed in form of
+                        <code>XL: 3, L: 2, M: 1, S: 1</code> to acheive this.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Form Control (eg: input widget)
+                <ul>
+                    <li>Shares common properties among other input form controls</li>
+                    <li>Notify its parent (FormField) about any state change.</li>
+                </ul>
+            </li>
+        </ul>
 
-    Specify the <code>columnLayoutType</code> at the <code>fdp-form-group</code> level to render the layout in that
-    particular form. For example, if you want a 2 column layout in XL, 2 column layout in L, 2 column layout in M, and
-    single-column layout in S, the corresponding <code>columnLayoutType</code> would be <code>XL2-L2-M2-S1</code>.
-    <br />
-    <br />
+        Specify the <code>columnLayoutType</code> at the <code>fdp-form-group</code> level to render the layout in that
+        particular form. For example, if you want a 2 column layout in XL, 2 column layout in L, 2 column layout in M,
+        and single-column layout in S, the corresponding <code>columnLayoutType</code> would be
+        <code>XL2-L2-M2-S1</code>.
+        <br />
+        <br />
 
-    <h3>React with custom screen-size breakpoints</h3>
-    We have default breakpoints of screen sizes. on change of that, layout of form-container changes based on
-    specification provided. Further we also have option to inject custom breakpoints as well. Please check component
-    file of example
-    <strong>Change of column number for a field</strong> for reference.
-    <br />
-    <br />
+        <h3>React with custom screen-size breakpoints</h3>
+        We have default breakpoints of screen sizes. on change of that, layout of form-container changes based on
+        specification provided. Further we also have option to inject custom breakpoints as well. Please check component
+        file of example
+        <strong>Change of column number for a field</strong> for reference.
+        <br />
+        <br />
 
-    <h3>Inline help default global options</h3>
-    <p>Inline help has default options as below:</p>
-    <table fd-table>
-        <thead fd-table-header>
-            <tr fd-table-row>
-                <th fd-table-cell>Property name</th>
-                <th fd-table-cell>Value</th>
-            </tr>
-        </thead>
-        <tbody fd-table-body>
-            <tr fd-table-row *ngFor="let prop of defaultHintOptions">
-                <td fd-table-cell>{{ prop[0] }}</td>
-                <td fd-table-cell>{{ prop[1] }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <p>
-        if you want to modify default values globally and not per-field, provide
-        <code>FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT</code>
-        in your module or component.
-        <import module="FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT" subPackage="form"></import>
-    </p>
-    <br />
-    <br />
-    <import module="FdpFormGroupModule" subPackage="form"></import>
-</description>
+        <h3>Inline help default global options</h3>
+        <p>Inline help has default options as below:</p>
+        <table fd-table>
+            <thead fd-table-header>
+                <tr fd-table-row>
+                    <th fd-table-cell>Property name</th>
+                    <th fd-table-cell>Value</th>
+                </tr>
+            </thead>
+            <tbody fd-table-body>
+                <tr fd-table-row *ngFor="let prop of defaultHintOptions">
+                    <td fd-table-cell>{{ prop[0] }}</td>
+                    <td fd-table-cell>{{ prop[1] }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            if you want to modify default values globally and not per-field, provide
+            <code>FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT</code>
+            in your module or component.
+            <import module="FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT" subPackage="form"></import>
+        </p>
+        <br />
+        <br />
+        <import module="FdpFormGroupModule" subPackage="form"></import>
+    </description>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

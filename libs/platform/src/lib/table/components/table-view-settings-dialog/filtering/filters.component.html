@@ -11,9 +11,7 @@
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <fdp-table-reset-button
-                        [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                    ></fdp-table-reset-button>
+                    <fdp-table-reset-button></fdp-table-reset-button>
                 </fd-bar-element>
             </div>
         </ng-template>
@@ -29,14 +27,12 @@
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
-            [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
             i18n-label="@@platformTableFilterDialogConfirmBtn"
             label="OK"
             (click)="confirm()"
         >
         </fd-button-bar>
         <fd-button-bar
-            [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
             i18n-label="@@platformTableFilterDialogCancelBtn"
             label="Cancel"
             fd-initial-focus
@@ -50,7 +46,6 @@
 <ng-container [ngSwitch]="activeStep">
     <ng-container *ngSwitchCase="ACTIVE_STEP.SELECT_FILTER">
         <fdp-filters-list-step
-            [contentDensity]="dialogRef.data.tableContentDensity"
             [filters]="viewSettingsFilters"
             (selectFilter)="selectFilter($event)"
         ></fdp-filters-list-step>
@@ -59,7 +54,6 @@
         <fdp-filter-step
             [columnKey]="activeFilterColumnKey!"
             [filter]="activeFilter!"
-            [contentDensity]="dialogRef.data.tableContentDensity"
             [filterBy]="filterBy"
             (back)="goToFilters()"
             (valueChange)="applyFilter($event, activeFilter!)"

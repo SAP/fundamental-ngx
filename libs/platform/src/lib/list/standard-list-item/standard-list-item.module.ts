@@ -14,6 +14,8 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
 import { StandardListItemComponent } from './standard-list-item.component';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
     declarations: [StandardListItemComponent],
@@ -30,8 +32,10 @@ import { StandardListItemComponent } from './standard-list-item.component';
         ListModule,
         AvatarModule,
         RouterModule,
-        PlatformObjectStatusModule
+        PlatformObjectStatusModule,
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
     ],
-    exports: [StandardListItemComponent]
+    exports: [StandardListItemComponent, ContentDensityModule, PlatformContentDensityDeprecationsModule]
 })
 export class StandardListItemModule {}

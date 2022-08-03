@@ -153,8 +153,7 @@ export class SmartFilterBarConditionsDialogComponent {
                 guiOptions: {
                     inline: false,
                     column: 1,
-                    noLabelLayout: true,
-                    contentDensity: 'compact'
+                    noLabelLayout: true
                 }
             },
             {
@@ -172,8 +171,7 @@ export class SmartFilterBarConditionsDialogComponent {
                 guiOptions: {
                     inline: false,
                     column: 2,
-                    noLabelLayout: true,
-                    contentDensity: 'compact'
+                    noLabelLayout: true
                 }
             },
             {
@@ -191,8 +189,7 @@ export class SmartFilterBarConditionsDialogComponent {
                 guiOptions: {
                     inline: false,
                     column: 2,
-                    noLabelLayout: true,
-                    contentDensity: 'compact'
+                    noLabelLayout: true
                 }
             },
             {
@@ -208,8 +205,7 @@ export class SmartFilterBarConditionsDialogComponent {
                 guiOptions: {
                     inline: false,
                     column: 3,
-                    noLabelLayout: true,
-                    contentDensity: 'compact'
+                    noLabelLayout: true
                 }
             }
         ];

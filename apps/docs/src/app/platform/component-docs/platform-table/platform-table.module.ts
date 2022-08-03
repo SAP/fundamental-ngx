@@ -46,6 +46,7 @@ import { PlatformTableRowClassExampleComponent } from './platform-table-examples
 import { PlatformTableNoOuterBordersExampleComponent } from './platform-table-examples/platform-table-no-outer-borders-example.component';
 import { PlatformTableWrapExampleComponent } from './platform-table-examples/platform-table-wrap-example.component';
 import { PlatformTableEditableRowsExampleComponent } from './platform-table-examples/editable-rows/platform-table-editable-rows-example.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -105,7 +106,7 @@ const routes: Routes = [
         PlatformTableWrapExampleComponent,
         PlatformTableEditableRowsExampleComponent
     ],
-    providers: [RtlService],
+    providers: [RtlService, platformContentDensityModuleDeprecationsProvider('fdp-table')],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PlatformTableDocsModule {}
