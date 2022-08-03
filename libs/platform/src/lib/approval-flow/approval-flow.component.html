@@ -32,7 +32,7 @@
             *ngIf="_approvalProcess?.watchers?.length || _isEditMode"
             [attr.aria-label]="watchersLabel"
         >
-            <p class="fdp-approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">
+            <p class="fdp-approval-flow__watchers-title">
                 {{ watchersLabel || ('platformApprovalFlow.defaultWatchersLabel' | fdTranslate) }}
             </p>
 
