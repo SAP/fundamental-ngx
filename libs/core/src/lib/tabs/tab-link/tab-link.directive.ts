@@ -40,6 +40,7 @@ export class TabLinkDirective extends AbstractFdNgxClass implements FocusableOpt
     @Output()
     readonly keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
+    /** Event Emitted when item has been focused. */
     @Output()
     readonly focused = new EventEmitter<void>();
 
@@ -62,6 +63,7 @@ export class TabLinkDirective extends AbstractFdNgxClass implements FocusableOpt
         this.focused.emit();
     }
 
+    /** @hidden */
     @HostListener('keyup', ['$event'])
     private _onKeyUp(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {

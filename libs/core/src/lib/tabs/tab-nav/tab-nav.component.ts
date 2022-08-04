@@ -69,6 +69,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     /** @hidden */
     private _keyboardEventsManager: FocusKeyManager<TabLinkDirective>;
 
+    /** @hidden */
     private _dir: 'ltr' | 'rtl' = this._rtlService?.rtl.value ? 'rtl' : 'ltr';
 
     /** @hidden */
