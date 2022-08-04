@@ -10,6 +10,7 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import { createKeyboardEvent, DataProvider, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
 import { PlatformSearchFieldModule } from './search-field.module';
 import { SearchFieldComponent, SearchInput, SuggestionItem, ValueLabelItem } from './search-field.component';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 const CATEGORIES: ValueLabelItem[] = [
     { value: 'Fruits', label: 'Fruits' },
@@ -69,7 +70,7 @@ function mouseClickOnElement(el: Element): void {
             [categories]="categories"
             [categoryLabel]="categoryLabel"
             [hideCategoryLabel]="hideCategoryLabel"
-            [contentDensity]="contentDensity"
+            [fdContentDensity]="contentDensity"
             [isLoading]="isLoading"
             [disabled]="disabled"
             (inputChange)="onInputChange($event)"
@@ -87,7 +88,7 @@ class TestComponent {
     categories: ValueLabelItem[];
     categoryLabel: string;
     hideCategoryLabel = false;
-    contentDensity: 'cozy' | 'compact';
+    contentDensity: ContentDensityMode = ContentDensityMode.COZY;
     isLoading = false;
     disabled = false;
 
@@ -341,7 +342,8 @@ describe('SearchFieldComponent', () => {
         expect(submitButton.nativeElement.classList.contains('fd-button--compact')).toBeFalsy();
         expect(categoryButton.nativeElement.classList.contains('fd-button--compact')).toBeFalsy();
         expect(compactAddons.length).toBe(0);
-        host.contentDensity = 'compact';
+        host.contentDensity = ContentDensityMode.COMPACT;
+
         fixture.detectChanges();
 
         inputField = fixture.debugElement.query(By.css('input.fd-input'));
@@ -744,7 +746,7 @@ describe('SearchFieldComponent', () => {
             [categoryLabel]="categoryLabel"
             [hideCategoryLabel]="hideCategoryLabel"
             [dataSource]="dataSource"
-            [contentDensity]="contentDensity"
+            [fdContentDensity]="contentDensity"
             [isLoading]="isLoading"
             [disabled]="disabled"
             (inputChange)="onInputChange($event)"
@@ -761,7 +763,7 @@ class DataSourceTestComponent implements OnInit {
     categories: ValueLabelItem[];
     categoryLabel: string;
     hideCategoryLabel = false;
-    contentDensity: 'cozy' | 'compact';
+    contentDensity: ContentDensityMode = ContentDensityMode.COZY;
     isLoading = false;
     disabled = false;
     dataSource: SearchFieldDataSource<any>;

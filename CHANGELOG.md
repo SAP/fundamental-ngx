@@ -1,4 +1,60 @@
 
+## [0.36.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.1...v0.36.0-rc.2) (2022-08-04)
+
+
+### Bug Fixes
+
+* **core:** solve wizard flicker on summary ([#8502](https://github.com/SAP/fundamental-ngx/issues/8502)) ([c89c14a](https://github.com/SAP/fundamental-ngx/commit/c89c14a9528f98a29dbee6f25c5a5c5d2f5c8a0d))
+
+## [0.36.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.0...v0.36.0-rc.1) (2022-08-03)
+
+## [0.36.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.7...v0.36.0-rc.0) (2022-08-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **platform:** removed input searchTableDensity from value help dialog
+
+* **platform:** removed deprecated searchTableDensity input ([#8477](https://github.com/SAP/fundamental-ngx/issues/8477)) ([3654436](https://github.com/SAP/fundamental-ngx/commit/3654436143863613980ce768c2355043b2e97418))
+
+### [0.35.5-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.6...v0.35.5-rc.7) (2022-08-02)
+
+### [0.35.5-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.5...v0.35.5-rc.6) (2022-08-02)
+
+
+### Features
+
+* **core:** enable scrolling in time picker ([#8470](https://github.com/SAP/fundamental-ngx/issues/8470)) ([aa8219f](https://github.com/SAP/fundamental-ngx/commit/aa8219f52b2c1744c7ac51cd840944a347a1f188))
+
+### [0.35.5-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.4...v0.35.5-rc.5) (2022-08-02)
+
+### [0.35.5-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.3...v0.35.5-rc.4) (2022-08-02)
+
+
+### Bug Fixes
+
+* **core:** revert "fixed card layout flickering issue ([#8476](https://github.com/SAP/fundamental-ngx/issues/8476))" ([#8494](https://github.com/SAP/fundamental-ngx/issues/8494)) ([1b0f83c](https://github.com/SAP/fundamental-ngx/commit/1b0f83cde6a4478e8d0605adac4a515a61939311))
+
+### [0.35.5-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.2...v0.35.5-rc.3) (2022-08-02)
+
+
+### Bug Fixes
+
+* **core:** fixed card layout flickering issue ([#8476](https://github.com/SAP/fundamental-ngx/issues/8476)) ([54e89a9](https://github.com/SAP/fundamental-ngx/commit/54e89a92813020f476dce25d73acaecc4559ec35))
+
+### [0.35.5-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.1...v0.35.5-rc.2) (2022-08-01)
+
+### [0.35.5-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.0...v0.35.5-rc.1) (2022-08-01)
+
+### [0.35.5-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.4...v0.35.5-rc.0) (2022-07-30)
+
+
+### Features
+
+* **core, platform:** datepicker today button ([#8394](https://github.com/SAP/fundamental-ngx/issues/8394)) ([89a6ebe](https://github.com/SAP/fundamental-ngx/commit/89a6ebe90dad67fe82ad1270f47ca517d7924685))
+
+### [0.35.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.13...v0.35.4) (2022-07-30)
+
 ### [0.35.4-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.12...v0.35.4-rc.13) (2022-07-29)
 
 ### [0.35.4-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.11...v0.35.4-rc.12) (2022-07-29)

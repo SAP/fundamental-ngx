@@ -35,7 +35,6 @@
         glyph="value-help"
         [state]="state"
         [disabled]="disabled"
-        [compact]="contentDensity | isCompactDensity"
         (keydown)="removeSelectedTokens($event)"
         (addOnButtonClicked)="addOnButtonClick()"
         (click)="onInputGroupClicked()"
@@ -45,17 +44,15 @@
         >
         <fd-tokenizer
             *ngIf="selected"
-            [compact]="contentDensity | isCompactDensity"
             [tokenizerFocusable]="false"
             class="fd-multi-input-tokenizer-custom"
-            [class]="(contentDensity | isCompactDensity) ? 'fd-multi-input-tokenizer-custom--compact' : ''"
+            [class.fd-multi-input-tokenizer-custom--compact]="contentDensityObserver.isCompact$ | async"
             (moreClickedEvent)="moreClicked()"
             tabindex="-1"
             role="listbox"
         >
             <fd-token
                 [readOnly]="disabled"
-                [compact]="contentDensity | isCompactDensity"
                 (onCloseClick)="removeToken(token)"
                 *ngFor="let token of selected; let i = index"
                 [attr.aria-posinset]="i"
@@ -67,7 +64,6 @@
             <input
                 #searchInputElement
                 type="text"
-                [compact]="contentDensity | isCompactDensity"
                 class="fd-input fd-multi-input-tokenizer-input"
                 fdp-auto-complete
                 (onComplete)="_onAutoComplete($event)"
@@ -102,7 +98,6 @@
         #listTemplateDD
         [hasByLine]="hasByLine"
         [selectionMode]="selectionMode"
-        [contentDensity]="contentDensity"
         *ngIf="_suggestions && _suggestions.length"
         role="listbox"
         aria-multiselectable="true"
@@ -114,7 +109,6 @@
                 [description]="listItem.description || ''"
                 [avatarSrc]="listItem.avatarSrc"
                 (itemSelected)="addToArray(listItem)"
-                [contentDensity]="contentDensity"
                 (buttonClicked)="deleteToken(listItem)"
                 role="option"
             >

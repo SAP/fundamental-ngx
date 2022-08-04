@@ -13,18 +13,17 @@
         <div fdLayoutGridRow>
             <div [fdLayoutGridCol]="5">
                 <label id="CONDITIONPANEL_OPERATOR_LABEL" fd-form-label class="fdp-value-help-dialog__hidden_label">
-                    CONDITIONPANEL_OPERATOR_LABEL</label
-                >
+                    CONDITIONPANEL_OPERATOR_LABEL
+                </label>
                 <label [id]="selectedId" fd-form-label class="fdp-value-help-dialog__hidden_label">
-                    selected value {{ item.strategy }}</label
-                >
+                    selected value {{ item.strategy }}
+                </label>
                 <fd-select
                     class="vhd-condition-filters"
                     fdLayoutGridCol
                     colGrow
                     [class.fd-select-custom-class]="false"
                     #sttr
-                    [compact]="contentDensity | isCompactDensity"
                     [controlTemplate]="customSelectTemplate"
                     [name]="uid + '-' + type + '-strategy-' + item.id"
                     [(ngModel)]="item.strategy"
@@ -73,7 +72,6 @@
                                     i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.FromPlaceholder"
                                     placeholder="from"
                                     required
-                                    [compact]="contentDensity | isCompactDensity"
                                     [state]="fromModel.invalid ? 'error' : null"
                                     [name]="uid + '-' + type + '-from-' + item.id"
                                     (blur)="_validateConditionValue(item, [!!fromModel.valid, !!toModel.valid])"
@@ -96,7 +94,6 @@
                                     i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ToPlaceholder"
                                     placeholder="to"
                                     required
-                                    [compact]="contentDensity | isCompactDensity"
                                     [state]="toModel.invalid ? 'error' : null"
                                     [name]="uid + '-' + type + '-to-' + item.id"
                                     (blur)="_validateConditionValue(item, [!!fromModel.valid, !!toModel.valid])"
@@ -120,7 +117,6 @@
                                     type="text"
                                     i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ValuePlaceholder"
                                     placeholder="value"
-                                    [compact]="contentDensity | isCompactDensity"
                                     [state]="valueModel.invalid ? 'error' : null"
                                     [name]="uid + '-' + type + '-value-' + item.id"
                                     (blur)="_validateConditionValue(item, !!valueModel.valid)"
@@ -145,7 +141,6 @@
                     ariaLabel="Remove Define Condition"
                     fdType="transparent"
                     glyph="decline"
-                    [compact]="contentDensity | isCompactDensity"
                     title="Remove Define Condition"
                     i18n-title="@@platformI18nValueHelpDialog.defineTab.removeButton"
                     (click)="removeCondition(i)"
@@ -165,7 +160,6 @@
                 i18n-aria-label="@@platformI18nValueHelpDialog.AddAriaLabelDefineCondition"
                 aria-label="Add New Define Condition"
                 label="Add"
-                [compact]="contentDensity | isCompactDensity"
                 title="Add New Define Condition"
                 (click)="addEmptyCondition()"
             ></button>

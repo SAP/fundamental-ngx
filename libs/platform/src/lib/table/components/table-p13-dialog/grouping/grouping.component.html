@@ -8,9 +8,7 @@
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <fdp-table-reset-button
-                        [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                    ></fdp-table-reset-button>
+                    <fdp-table-reset-button></fdp-table-reset-button>
                 </fd-bar-element>
             </div>
         </ng-template>
@@ -22,7 +20,6 @@
                 class="group-row__select"
                 [value]="rule.columnKey"
                 (valueChange)="_onRuleColumnKeyChange(rule, $event)"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 placeholder="(none)"
                 i18n-placeholder="@@platformTableP13GroupDialogNoneSelectedColumn|Table column select placeholder"
             >
@@ -35,7 +32,6 @@
                 class="group-row__checkbox"
                 [ngModel]="rule.showAsColumn"
                 (ngModelChange)="_onRuleShowAsColumnChange(rule, $event)"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 label="Show Field as Column"
                 i18n-label="@@platformTableP13GroupDialogShowFieldAsColumn"
             ></fd-checkbox>
@@ -45,7 +41,6 @@
                     fd-button
                     fdType="transparent"
                     glyph="sys-cancel"
-                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                     i18n-aria-label="platformTableP13GroupDialogRemoveGroup|Remove line aria-label attribute"
                     aria-label="Remove"
                     i18n-title="@@platformTableP13GroupDialogRemoveGroup|Remove line title attribute"
@@ -57,7 +52,6 @@
                     fd-button
                     fdType="transparent"
                     glyph="add"
-                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                     i18n-aria-label="@@platformTableP13GroupDialogAddNewGroup|Add new line aria-label attribute"
                     aria-label="Add new"
                     i18n-title="@@platformTableP13GroupDialogAddNewGroup|Add new line title attribute"
@@ -76,7 +70,6 @@
                 fd-dialog-decisive-button
                 i18n-label="@@platformTableP13GroupDialogConfirmationBtn"
                 label="OK"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="confirm()"
             ></button>
         </fd-dialog-footer-button>
@@ -89,7 +82,6 @@
                 fd-initial-focus
                 i18n-label="@@platformTableP13GroupDialogCancelBtn"
                 label="Cancel"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="cancel()"
             ></button>
         </fd-dialog-footer-button>

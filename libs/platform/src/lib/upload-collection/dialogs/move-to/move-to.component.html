@@ -14,7 +14,6 @@
                     <ng-container *ngIf="_currentFolder">
                         <button
                             fd-button
-                            [compact]="dialogRef.data.contentDensity | isCompactDensity"
                             fdType="transparent"
                             glyph="navigation-left-arrow"
                             (click)="_goToParentFolder()"
@@ -28,19 +27,14 @@
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <button
-                        fd-button
-                        [compact]="dialogRef.data.contentDensity | isCompactDensity"
-                        label="New Folder"
-                        (click)="_newFolder()"
-                    ></button>
+                    <button fd-button label="New Folder" (click)="_newFolder()"></button>
                 </fd-bar-element>
             </div>
         </ng-template>
     </fd-dialog-header>
 
     <fd-dialog-body class="fd-dialog__body--no-horizontal-padding">
-        <ul fd-list [compact]="dialogRef.data.contentDensity | isCompactDensity">
+        <ul fd-list>
             <li *ngIf="!_currentFolder" fd-list-item class="fd-list__item--title-background">
                 <span fd-list-title i18n="@@platformUploadCollection.MoveTo.AllFile.Label">All files</span>
             </li>

@@ -3,7 +3,7 @@
         [attr.id]="menuId"
         [attr.dir]="direction"
         class="fd-menu"
-        [class.fd-menu--compact]="contentDensity | isCompactDensity"
+        [class.fd-menu--compact]="contentDensityObserver.isCompact$ | async"
         tabindex="0"
         role="menu"
         (click)="_onClick()"

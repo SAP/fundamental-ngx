@@ -1,25 +1,28 @@
-<header>Step Input Component</header>
+<fd-doc-page>
+    <header>Step Input Component</header>
 
-<description>
-    The step input control allows the user to change the input values in predefined increments (steps).
-    <br />
-    <br />
+    <description>
+        The step input control allows the user to change the input values in predefined increments (steps).
+        <br />
+        <br />
 
-    <import module="PlatformStepInputModule" subPackage="form"></import>
-    <br />
+        <import module="PlatformStepInputModule" subPackage="form"></import>
+        <br />
 
-    <h3>Platform specific enhancements:</h3>
-    <ul>
-        <li>The core implementation is in progress and probably needs to some re-work</li>
-        <li>Component implements the FormFieldControl interface, thus can be used with in the FormField component.</li>
-        <li>
-            Focuses on single responsibility which will deal with specific types:
-            <ul>
-                <li>NumberStepInput - which can deal with quantity</li>
-            </ul>
-        </li>
-    </ul>
-</description>
+        <h3>Platform specific enhancements:</h3>
+        <ul>
+            <li>The core implementation is in progress and probably needs to some re-work</li>
+            <li>
+                Component implements the FormFieldControl interface, thus can be used with in the FormField component.
+            </li>
+            <li>
+                Focuses on single responsibility which will deal with specific types:
+                <ul>
+                    <li>NumberStepInput - which can deal with quantity</li>
+                </ul>
+            </li>
+        </ul>
+    </description>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

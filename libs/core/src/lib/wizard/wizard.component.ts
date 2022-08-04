@@ -464,7 +464,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _handleStepOrStatusChanges(): void {
         if (this._isCurrentStepSummary() && !this.displaySummaryStep) {
-            this.progressBar.visible = false;
+            setTimeout(() => {
+                this.progressBar.visible = false;
+            });
             this._showSummary();
         } else {
             this.progressBar.visible = true;

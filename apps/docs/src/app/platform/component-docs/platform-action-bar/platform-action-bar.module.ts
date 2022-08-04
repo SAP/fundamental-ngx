@@ -18,6 +18,7 @@ import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { PlatformActionBarModule } from '@fundamental-ngx/platform/action-bar';
 import { PlatformActionButtonGroupModule } from '@fundamental-ngx/platform/action-button-group';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -50,6 +51,7 @@ const routes: Routes = [
         PlatformActionBarWithContextualMenuExampleComponent,
         PlatformActionBarWithPositiveNegativeActionsExampleComponent,
         PlatformActionBarCozyModeExampleComponent
-    ]
+    ],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-action-bar')]
 })
 export class PlatformActionBarDocsModule {}

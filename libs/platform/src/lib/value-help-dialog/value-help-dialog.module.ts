@@ -22,7 +22,9 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 import { PlatformValueHelpDialogComponent } from './value-help-dialog/value-help-dialog.component';
 import { VhdFilterComponent } from './components/value-help-dialog-filter/value-help-dialog-filter.component';
@@ -66,8 +68,16 @@ import { ConditionCountMessageDirective } from './directives/condition-count-mes
         InputGroupModule,
         PopoverModule,
         InfiniteScrollModule,
-        PlatformSearchFieldModule
+        PlatformSearchFieldModule,
+        ContentDensityModule,
+        PlatformContentDensityDeprecationsModule
     ],
-    exports: [PlatformValueHelpDialogComponent, VhdFilterComponent, VhdSearchComponent]
+    exports: [
+        PlatformValueHelpDialogComponent,
+        VhdFilterComponent,
+        VhdSearchComponent,
+        ContentDensityModule,
+        PlatformContentDensityDeprecationsModule
+    ]
 })
 export class PlatformValueHelpDialogModule {}

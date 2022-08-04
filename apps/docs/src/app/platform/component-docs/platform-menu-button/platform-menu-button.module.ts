@@ -11,6 +11,7 @@ import { PlatformMenuButtonDocsComponent } from './platform-menu-button-docs.com
 import { PlatformMenuButtonCompactExampleComponent } from './platform-menu-button-examples/platform-menu-button-compact-examples.component';
 import { PlatformMenuButtonCozyExampleComponent } from './platform-menu-button-examples/platform-menu-button-cozy-examples.component';
 import { PlatformMenuButtonExampleComponent } from './platform-menu-button-examples/platform-menu-button-examples.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -37,6 +38,7 @@ const routes: Routes = [
         PlatformMenuButtonCompactExampleComponent,
         PlatformMenuButtonCozyExampleComponent,
         PlatformMenuButtonExampleComponent
-    ]
+    ],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-menu-button')]
 })
 export class PlatformMenuButtonDocsModule {}

@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, Injector } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import {
     BaseDynamicFormGeneratorControl,
@@ -17,7 +17,11 @@ import { isSelectItem, SelectItem } from '@fundamental-ngx/platform/shared';
     providers: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider]
 })
 export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGeneratorControl {
-    protected constructor(protected _dialogService: DialogService, protected _smartFilterBar: SmartFilterBar) {
+    protected constructor(
+        protected _dialogService: DialogService,
+        protected _smartFilterBar: SmartFilterBar,
+        protected _injector: Injector
+    ) {
         super();
     }
 
@@ -37,14 +41,18 @@ export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGe
             defineStrategyLabels: this._smartFilterBar.defineStrategyLabels
         };
 
-        const dialogRef = this._dialogService.open(SmartFilterBarConditionsDialogComponent, {
-            data: dialogData,
-            width: '67.5rem',
-            minHeight: '30%'
-        });
+        const dialogRef = this._dialogService.open(
+            SmartFilterBarConditionsDialogComponent,
+            {
+                data: dialogData,
+                width: '67.5rem',
+                minHeight: '30%'
+            },
+            this._injector
+        );
 
-        dialogRef.afterClosed.pipe(take(1)).subscribe(
-            async (conditions: SmartFilterBarCondition[]) => {
+        dialogRef.afterClosed.pipe(take(1)).subscribe({
+            next: async (conditions: SmartFilterBarCondition[]) => {
                 const field = this.getField();
                 const normalizedConditions = (await this.normalizeConditions(conditions)).map((c: any) => {
                     if (isSelectItem(c)) {
@@ -60,8 +68,9 @@ export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGe
                 });
                 field.setValue(normalizedConditions);
             },
-            (_) => {}
-        );
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            error: (_) => {}
+        });
     };
 
     /**

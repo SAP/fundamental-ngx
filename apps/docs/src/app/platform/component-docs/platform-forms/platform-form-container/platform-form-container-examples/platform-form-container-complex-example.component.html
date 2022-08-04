@@ -17,7 +17,7 @@
             name="switch-1"
             ariaLabel="switch-label"
             ariaLabelledby="switch-label"
-            contentDensity="cozy"
+            fdCozy
             [semantic]="false"
         >
         </fdp-switch>
@@ -74,13 +74,7 @@
         </fdp-input-group>
     </fdp-form-field>
     <fdp-form-field #ff6 id="radioc1" [column]="2" [rank]="6" label="Radio Group ">
-        <fdp-radio-group
-            name="radioc1"
-            contentDensity="compact"
-            selected="spring"
-            [isInline]="true"
-            [formControl]="ff6.formControl"
-        >
+        <fdp-radio-group name="radioc1" fdCompact selected="spring" [isInline]="true" [formControl]="ff6.formControl">
             <fdp-radio-button value="winter">Winter</fdp-radio-button>
             <fdp-radio-button value="spring">Spring</fdp-radio-button>
             <fdp-radio-button value="summer">Summer</fdp-radio-button>

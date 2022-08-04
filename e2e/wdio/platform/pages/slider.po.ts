@@ -38,6 +38,7 @@ export class SliderPo extends BaseComponentPo {
     progressTracker = this.playgroundExamples + '.fd-slider__track-range';
     sliderTicks = this.playgroundExamples + '.fd-slider__tick';
     inputCheckboxes = this.playgroundExamples + '.fd-checkbox__label';
+    sliderCozyClass = '.fd-slider--lg';
 
     open(): void {
         super.open(this.url);

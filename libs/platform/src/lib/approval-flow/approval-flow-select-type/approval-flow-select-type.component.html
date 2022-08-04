@@ -5,7 +5,7 @@
         </ng-template>
     </fd-dialog-header>
 
-    <fd-dialog-body>
+    <fd-dialog-body fdCompact>
         <span class="fd-form-label" i18n="@@platformApprovalFlowSelectTypeDialogParallelOrSerial">
             Parallel or serial
         </span>
@@ -16,7 +16,6 @@
                     i18n="@@platformApprovalFlowSelectTypeDialogNodeTypeParallel"
                     [value]="_nodeTypes.PARALLEL"
                     [(ngModel)]="_nodeType"
-                    [compact]="true"
                     id="select-type-parallel"
                     name="select-type-parallel"
                 >
@@ -29,7 +28,6 @@
                     i18n="@@platformApprovalFlowSelectTypeDialogNodeTypeSerial"
                     [value]="_nodeTypes.SERIAL"
                     [(ngModel)]="_nodeType"
-                    [compact]="true"
                     id="select-type-serial"
                     name="select-type-serial"
                 >
@@ -38,14 +36,14 @@
             </div>
 
             <div *ngIf="_nodeType === _nodeTypes.PARALLEL" fd-form-item>
-                <fd-checkbox [(ngModel)]="_toNextSerial" i18n="@@platformApprovalFlowAddToNext"
-                    >Add to the next serial node</fd-checkbox
-                >
+                <fd-checkbox [(ngModel)]="_toNextSerial" i18n="@@platformApprovalFlowAddToNext">
+                    Add to the next serial node
+                </fd-checkbox>
             </div>
         </fd-form-group>
     </fd-dialog-body>
 
-    <fd-dialog-footer>
+    <fd-dialog-footer fdCompact>
         <ng-container>
             <fd-dialog-footer-button>
                 <button
@@ -54,7 +52,6 @@
                     fdType="emphasized"
                     i18n-label="@@platformApprovalFlowSelectTypeDialogConfirm"
                     label="Confirm"
-                    [compact]="true"
                     (click)="_submit()"
                 ></button>
             </fd-dialog-footer-button>
@@ -67,7 +64,6 @@
                     fdType="transparent"
                     i18n-label="@@platformApprovalFlowSelectTypeDialogCancel"
                     label="Cancel"
-                    [compact]="true"
                     (click)="_dialogRef.close()"
                 ></button>
             </fd-dialog-footer-button>

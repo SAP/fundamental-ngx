@@ -1,6 +1,6 @@
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { Component, ViewChildren, QueryList, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
 import { DatePickerModule } from '@fundamental-ngx/core/date-picker';
 import { ButtonModule } from '@fundamental-ngx/core/button';
@@ -37,7 +37,7 @@ import { runValueAccessorTests } from 'ngx-cva-test-suite';
                     name="journeydate"
                     type="range"
                     [allowNull]="false"
-                    contentDensity="compact"
+                    fdCompact
                     placeholder="When are you travelling?"
                     formControlName="journeydate"
                 >

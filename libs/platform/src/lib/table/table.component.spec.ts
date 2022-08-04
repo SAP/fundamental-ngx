@@ -193,7 +193,7 @@ describe('TableComponent internal', () => {
         template: `
             <fdp-table
                 [dataSource]="source"
-                contentDensity="compact"
+                fdCompact
                 emptyTableMessage="No data found"
                 [selectionMode]="selection"
                 [rowsClass]="rowsClass"
@@ -771,7 +771,7 @@ describe('TableComponent internal', () => {
         template: `
             <fdp-table
                 [dataSource]="source"
-                contentDensity="compact"
+                fdCompact
                 [initialSortBy]="initialSortBy"
                 [initialFilterBy]="initialFilterBy"
                 [initialGroupBy]="initialGroupBy"
@@ -867,13 +867,7 @@ describe('TableComponent internal', () => {
 
     @Component({
         template: `
-            <fdp-table
-                [dataSource]="source"
-                contentDensity="compact"
-                [pageScrolling]="true"
-                [pageSize]="50"
-                bodyHeight="20rem"
-            >
+            <fdp-table [dataSource]="source" fdCompact [pageScrolling]="true" [pageSize]="50" bodyHeight="20rem">
                 <fdp-column name="name" key="name" label="Name"></fdp-column>
                 <fdp-column name="description" key="description" label="Description"></fdp-column>
                 <fdp-column name="status" key="status" label="Status"></fdp-column>
@@ -1028,7 +1022,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
     @Component({
         template: `
             <fdp-table
-                contentDensity="compact"
+                fdCompact
                 selectionMode="multiple"
                 [dataSource]="source"
                 [isTreeTable]="true"

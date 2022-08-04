@@ -8,9 +8,7 @@
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <fdp-table-reset-button
-                        [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                    ></fdp-table-reset-button>
+                    <fdp-table-reset-button></fdp-table-reset-button>
                 </fd-bar-element>
             </div>
         </ng-template>
@@ -18,7 +16,7 @@
 
     <fd-dialog-body>
         <!-- Include Rules -->
-        <fd-panel [compact]="dialogRef.data.tableContentDensity | isCompactDensity" [expanded]="_includePanelExpanded">
+        <fd-panel [expanded]="_includePanelExpanded">
             <div fd-panel-title i18n="@@platformTableP13FilterDialogIncludePanelTitle">
                 Include <ng-container *ngIf="_validIncludeRulesCount > 0">({{ _validIncludeRulesCount }})</ng-container>
             </div>
@@ -27,7 +25,6 @@
                     <div fdLayoutGridRow>
                         <fdp-table-filter-rule
                             [fdLayoutGridCol]="10"
-                            [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                             [rule]="rule"
                             (ruleChange)="_recalculateResetAvailability()"
                             (ruleStateChange)="_onRuleStateChange()"
@@ -38,7 +35,6 @@
                                 fd-button
                                 fdType="transparent"
                                 glyph="sys-cancel"
-                                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                                 i18n-aria-label="platformTableP13FilterDialogRemoveFilter|Button aria-label attribute"
                                 aria-label="Remove Filter"
                                 i18n-title="platformTableP13FilterDialogRemoveFilter|Button title attribute"
@@ -51,7 +47,6 @@
                                 fd-button
                                 fdType="transparent"
                                 glyph="add"
-                                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                                 i18n-aria-label="platformTableP13FilterDialogAddFilter|Button arial-label attribute"
                                 aria-label="Add Filter"
                                 i18n-title="platformTableP13FilterDialogAddFilter|Button title attribute"
@@ -64,7 +59,7 @@
             </div>
         </fd-panel>
         <!-- Exclude Rules -->
-        <fd-panel [compact]="dialogRef.data.tableContentDensity | isCompactDensity" [expanded]="_excludePanelExpanded">
+        <fd-panel [expanded]="_excludePanelExpanded">
             <div fd-panel-title i18n="@@platformTableP13FilterDialogExcludePanelTitle">
                 Exclude <ng-container *ngIf="_validExcludeRulesCount > 0">({{ _validExcludeRulesCount }})</ng-container>
             </div>
@@ -83,7 +78,6 @@
                                 fd-button
                                 fdType="transparent"
                                 glyph="sys-cancel"
-                                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                                 i18n-aria-label="
                                     platformTableP13FilterDialogRemoveFilterFromExclude|Button aria-label attribute
                                 "
@@ -98,7 +92,6 @@
                                 fd-button
                                 fdType="transparent"
                                 glyph="add"
-                                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                                 i18n-aria-label="
                                     platformTableP13FilterDialogAddFilterToExclude|Button aria-label attribute
                                 "
@@ -122,7 +115,6 @@
                 fd-dialog-decisive-button
                 i18n-label="@@platformTableP13FilterDialogConfirmationBtn"
                 label="OK"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="confirm()"
             ></button>
         </fd-dialog-footer-button>
@@ -135,7 +127,6 @@
                 fd-initial-focus
                 i18n-label="@@platformTableP13FilterDialogCancelBtn"
                 label="Cancel"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="cancel()"
             ></button>
         </fd-dialog-footer-button>
