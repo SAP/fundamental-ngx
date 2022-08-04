@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { AlertComponent } from '@fundamental-ngx/core/alert';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
@@ -18,7 +18,8 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 
 @Component({
     selector: 'app-alert',
-    templateUrl: './alert-docs.component.html'
+    templateUrl: './alert-docs.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertDocsComponent implements AfterViewInit {
     static schema: any = {
@@ -141,7 +142,7 @@ export class AlertDocsComponent implements AfterViewInit {
     @ViewChild('alert')
     alertComponent: AlertComponent;
 
-    constructor(private schemaFactory: SchemaFactoryService) {
+    constructor(private _changeDetectorRef: ChangeDetectorRef, private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('alert');
     }
 
@@ -152,9 +153,8 @@ export class AlertDocsComponent implements AfterViewInit {
     /** opens alert */
     openDynamicAlert(): void {
         this.shouldShow = true;
-        setTimeout(() => {
-            this.alertComponent.open();
-        });
+        this._changeDetectorRef.detectChanges();
+        this.alertComponent.open();
     }
 
     onAlertDismiss(): void {
