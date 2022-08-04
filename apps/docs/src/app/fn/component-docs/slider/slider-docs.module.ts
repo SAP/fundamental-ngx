@@ -12,6 +12,7 @@ import { SliderDocsComponent } from './slider-docs.component';
 import { SliderHeaderComponent } from './slider-header/slider-header.component';
 import { SliderModule } from '@fundamental-ngx/fn/slider';
 import { ButtonModule } from '@fundamental-ngx/fn/button';
+import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
 
 const routes: Routes = [
     {
@@ -19,7 +20,8 @@ const routes: Routes = [
         component: SliderHeaderComponent,
         children: [
             { path: '', component: SliderDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.slider } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.slider } },
+            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('fnSlider') }
         ]
     }
 ];

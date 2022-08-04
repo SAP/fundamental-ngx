@@ -12,6 +12,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { ListComponent, ListFooter, ListGroupHeader } from './list.component';
 import { ListItemDef } from './base-list-item';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     declarations: [ListComponent, ListFooter, ListGroupHeader, ListItemDef],
@@ -19,6 +20,7 @@ import { ListItemDef } from './base-list-item';
         CommonModule,
         FormsModule,
         FormModule,
+        I18nModule,
         ToolbarModule,
         ListModule,
         PipeModule,

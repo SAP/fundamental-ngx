@@ -4,6 +4,7 @@ import { SwitchComponent } from './switch.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 describe('SwitchComponent', () => {
     let component: SwitchComponent;
@@ -14,7 +15,7 @@ describe('SwitchComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [CommonModule, FormsModule],
+                imports: [CommonModule, FormsModule, I18nModule],
                 declarations: [SwitchComponent]
             }).compileComponents();
         })

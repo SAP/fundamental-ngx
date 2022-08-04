@@ -17,7 +17,6 @@
                                     *ngFor="let value of control.enum; let i = index; let c = count"
                                     [value]="value"
                                     [attr.aria-label]="value + ', option ' + (i + 1) + ' of ' + c"
-                                    i18n-aria-label="@@Docs.SchemaGroup.OptionLabel"
                                 >
                                     {{ value }}
                                 </option>
@@ -53,7 +52,6 @@
                                     *ngFor="let value of control.enum; let i = index; let c = count"
                                     [value]="value"
                                     [attr.aria-label]="value + ', option ' + (i + 1) + ' of ' + c"
-                                    i18n-aria-label="@@Docs.SchemaGroup.OptionLabel"
                                 >
                                     {{ value }}
                                 </option>

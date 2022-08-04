@@ -27,15 +27,12 @@
             <ng-template fdTemplate="footer">
                 <div
                     class="fdp-value-help-dialog__row fdp-value-help-dialog__selection-row"
-                    aria-label="Selected and condition items"
-                    i18n-aria-label="@@platformI18nValueHelpDialog.SelectionBarLabel"
+                    [attr.aria-label]="'platformVHD.selectionBarLabel' | fdTranslate"
                     *ngIf="!isMobileAdvancedSearchActive"
                 >
                     <h5 fd-title class="selected-and-condition-title" [id]="id + '-selected-item'">
                         <ng-container *ngIf="hasSelectedAndConditions; else noItemsPanelTitle">
-                            <ng-container i18n="@@platformI18nValueHelpDialog.SelectedAndConditionLabel"
-                                >Selected Items and Conditions
-                            </ng-container>
+                            {{ 'platformVHD.selectedAndConditionLabel' | fdTranslate }}
                             ({{ selectedItems.length + validConditions.length }})
                         </ng-container>
                     </h5>
@@ -81,11 +78,9 @@
                             fd-button
                             [disabled]="!hasSelectedAndConditions"
                             fdType="transparent"
-                            title="clear selected items"
-                            i18n-title="@@platformI18nValueHelpDialog.footer.declineButton"
+                            [title]="'platformVHD.footerClearSelectedTitle' | fdTranslate"
                             glyph="decline"
-                            i18n-aria-label="@@platformI18nValueHelpDialog.ClearSelectedAriaLabel"
-                            aria-label="clear selected items"
+                            [attr.aria-label]="'platformVHD.footerClearSelectedAriaLabel' | fdTranslate"
                         ></button>
                     </div>
                 </div>
@@ -93,8 +88,7 @@
                     <button
                         fd-button
                         data-go-advanced
-                        i18n-label="@@platformI18nValueHelpDialog.SearchButton"
-                        label="Go"
+                        [label]="'platformVHD.searchButtonLabel' | fdTranslate"
                         fdType="emphasized"
                         *ngIf="mobile && isOpenAdvanced"
                         (click)="searchAdvanced()"
@@ -102,8 +96,7 @@
                     <button
                         fd-button
                         data-succes
-                        i18n-label="@@platformI18nValueHelpDialog.SuccessButton"
-                        label="OK"
+                        [label]="'platformVHD.successButtonLabel' | fdTranslate"
                         fdType="emphasized"
                         *ngIf="selectedTab !== _tabTypes.advancedSearch"
                         (click)="success()"
@@ -112,8 +105,7 @@
                         fd-button
                         data-dismiss-dialog
                         fd-dialog-decisive-button
-                        i18n-label="@@platformI18nValueHelpDialog.CancelButton"
-                        label="Cancel"
+                        [label]="'platformVHD.cancelButtonLabel' | fdTranslate"
                         fdType="transparent"
                         (click)="dismiss()"
                     ></button>
@@ -124,9 +116,7 @@
 </ng-template>
 
 <ng-template #noItemsPanelTitle>
-    <ng-container i18n="@@platformI18nValueHelpDialog.Selected.EmptyLabel"
-        >No Items or Conditions Selected</ng-container
-    >
+    {{ 'platformVHD.selectedEmptyLabel' | fdTranslate }}
 </ng-template>
 
 <ng-template #advancedSearchContent>
@@ -140,8 +130,8 @@
                 <div fdLayoutGridRow>
                     <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="mobile ? 12 : 6" [colXl]="mobile ? 12 : 6">
                         <fdp-search-field
-                            [placeholder]="searchField.placeholder"
-                            [ariaLabel]="searchField.placeholder"
+                            [placeholder]="'platformVHD.searchButtonLabel' | fdTranslate"
+                            [ariaLabel]="'platformVHD.searchButtonLabel' | fdTranslate"
                             (searchSubmit)="search()"
                             (inputChange)="_mainSearch = $event.text"
                         ></fdp-search-field>
@@ -163,31 +153,30 @@
                                 fdType="transparent"
                                 *ngIf="_hasAdvanced"
                                 [label]="
-                                    mobile
-                                        ? searchField.advancedSearchLabel
+                                    (mobile
+                                        ? 'platformVHD.searchAdvancedSearchLabel'
                                         : isOpenAdvanced
-                                        ? searchField.hideAdvancedSearchLabel
-                                        : searchField.showAdvancedSearchLabel
+                                        ? 'platformVHD.searchHideAdvancedSearchLabel'
+                                        : 'platformVHD.searchShowAdvancedSearchLabel'
+                                    ) | fdTranslate
                                 "
                                 (click)="toggleAdvancedSearch()"
                                 [attr.aria-label]="
-                                    mobile
-                                        ? searchField.advancedSearchLabel
+                                    (mobile
+                                        ? 'platformVHD.searchAdvancedSearchLabel'
                                         : isOpenAdvanced
-                                        ? searchField.hideAdvancedSearchLabel
-                                        : searchField.showAdvancedSearchLabel
+                                        ? 'platformVHD.searchHideAdvancedSearchLabel'
+                                        : 'platformVHD.searchShowAdvancedSearchLabel'
+                                    ) | fdTranslate
                                 "
-                                i18n-aria-label="@@platformI18nValueHelpDialog.filter.Button"
                             ></button>
                             <button
                                 fd-toolbar-item
                                 type="submit"
                                 fd-button
-                                i18n-label="@@platformI18nValueHelpDialog.Search.Button"
-                                label="Go"
+                                [label]="'platformVHD.searchButtonLabel' | fdTranslate"
                                 fdType="emphasized"
-                                aria-label="Go"
-                                i18n-aria-label="@@platformI18nValueHelpDialog.Search.Button"
+                                [label]="'platformVHD.searchButtonLabel' | fdTranslate"
                                 (click)="filter()"
                             ></button>
                         </fd-toolbar>
@@ -239,11 +228,11 @@
                                 fd-button
                                 fdType="transparent"
                                 (click)="toggleShownFilters()"
-                                i18n-label="@@platformI18nValueHelpDialog.ShowAllFilters.Button"
                                 [label]="
-                                    isShowAllFilters
-                                        ? searchField.hideAllAdvancedSearchLabel
-                                        : searchField.showAllAdvancedSearchLabel
+                                    (isShowAllFilters
+                                        ? 'platformVHD.searchHideAllAdvancedSearchLabel'
+                                        : 'platformVHD.searchShowAllAdvancedSearchLabel'
+                                    ) | fdTranslate
                                 "
                             ></button>
                         </div>
@@ -260,10 +249,10 @@
             [selected]="selectedItems"
             [uid]="id"
             [displayedData]="_displayedData"
-            [tabTitle]="selectTabTitle"
+            [tabTitle]="selectTabTitle || ('platformVHD.selectTabTitle' | fdTranslate)"
             [mobile]="mobile"
             [selection]="searchSelection"
-            [emptyTableMessage]="searchTableEmptyMessage"
+            [emptyTableMessage]="searchTableEmptyMessage || ('platformVHD.searchTableEmptyMessage' | fdTranslate)"
             [uniqueKey]="uniqueKey"
             [pageSize]="searchTablePageSize"
             [defaultMobileHeaders]="searchTableMobileHeaders"
@@ -278,7 +267,7 @@
         [strategyLabels]="defineStrategyLabels"
         [conditions]="conditionItems"
         [uid]="id"
-        [tabTitle]="defineTabTitle"
+        [tabTitle]="defineTabTitle || ('platformVHD.defineTabTitle' | fdTranslate)"
         [mobile]="mobile"
         (conditionChange)="onConditionChange($event)"
     ></fdp-define-tab>
@@ -295,8 +284,7 @@
             glyph="navigation-left-arrow"
             fdType="transparent"
             (click)="switchTab()"
-            i18n-title="@@platformI18nValueHelpDialog.selectTab.back"
-            title="Back"
+            [title]="'platformVHD.selectMobileTabBackBtnTitle' | fdTranslate"
         ></button>
         <h5 fd-title>{{ title }}</h5>
     </ng-container>
@@ -304,8 +292,7 @@
         <a
             fd-list-link
             (click)="switchTab(type)"
-            i18n-title="@@platformI18nValueHelpDialog.selectTab.openDialog"
-            title="Open dialog"
+            [title]="'platformVHD.selectMobileTabBtnOpenDialogLabel' | fdTranslate"
         >
             <span fd-list-title>{{ title }}</span>
             <i fd-list-icon glyph="navigation-right-arrow"></i>
@@ -315,7 +302,7 @@
 
 <ng-template #advancedHeader>
     <button fd-button glyph="navigation-left-arrow" fdType="transparent" (click)="toggleAdvancedSearch()"></button>
-    <h5 fd-title>{{ searchField.advancedSearchLabel }}</h5>
+    <h5 fd-title>{{ 'platformVHD.searchAdvancedSearchLabel' | fdTranslate }}</h5>
 </ng-template>
 
 <ng-template #desktopDialogTitle>
@@ -339,7 +326,7 @@
                 fd-tab-link
                 [active]="selectedTab === _tabTypes.selectFromList"
                 [tabindex]="selectedTab === _tabTypes.selectFromList ? '0' : '-1'"
-                ><span fd-tab-tag>{{ selectTabTitle }}</span></a
+                ><span fd-tab-tag>{{ selectTabTitle || ('platformVHD.selectTabTitle' | fdTranslate) }}</span></a
             >
         </div>
         <div fd-tab-item (click)="switchTab(_tabTypes.defineConditions)" *ngIf="showDefineTab">
@@ -347,7 +334,7 @@
                 fd-tab-link
                 [active]="selectedTab === _tabTypes.defineConditions"
                 [tabindex]="selectedTab === _tabTypes.defineConditions ? '0' : '-1'"
-                ><span fd-tab-tag>{{ defineTabTitle }}</span></a
+                ><span fd-tab-tag>{{ defineTabTitle || ('platformVHD.defineTabTitle' | fdTranslate) }}</span></a
             >
         </div>
     </nav>
@@ -358,7 +345,7 @@
         <div fd-bar [inPage]="true" *ngIf="showSelectionTab">
             <div fd-bar-left>
                 <fd-bar-element>
-                    {{ selectTabTitle }}
+                    {{ selectTabTitle || ('platformVHD.selectTabTitle' | fdTranslate) }}
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -366,8 +353,10 @@
                     <fd-button-bar
                         glyph="navigation-right-arrow"
                         (click)="switchTab(_tabTypes.selectFromList)"
-                        title="{{ selectTabTitle }} tab "
-                        i18n-title="@@platformI18nValueHelpDialog.selectTab.selectTabTitle"
+                        [title]="
+                            'platformVHD.selectMobileTabTitle'
+                                | fdTranslate: { title: selectTabTitle || ('platformVHD.selectTabTitle' | fdTranslate) }
+                        "
                     ></fd-button-bar>
                 </fd-bar-element>
             </div>
@@ -375,15 +364,17 @@
         <div fd-bar [inPage]="true" *ngIf="showDefineTab">
             <div fd-bar-left>
                 <fd-bar-element>
-                    {{ defineTabTitle }}
+                    {{ defineTabTitle || ('platformVHD.defineTabTitle' | fdTranslate) }}
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
                     <fd-button-bar
                         glyph="navigation-right-arrow"
-                        title="{{ defineTabTitle }} tab "
-                        i18n-title="@@platformI18nValueHelpDialog.defineTab.defineTabTitle"
+                        [title]="
+                            'platformVHD.selectMobileTabTitle'
+                                | fdTranslate: { title: defineTabTitle || ('platformVHD.defineTabTitle' | fdTranslate) }
+                        "
                         (click)="switchTab(_tabTypes.defineConditions)"
                     >
                     </fd-button-bar>
@@ -397,7 +388,13 @@
     <ng-container [ngSwitch]="selectedTab">
         <ng-container *ngSwitchCase="_tabTypes.selectFromList">
             <ng-container
-                *ngTemplateOutlet="tabLink; context: { title: selectTabTitle, type: selectedTab }"
+                *ngTemplateOutlet="
+                    tabLink;
+                    context: {
+                        title: selectTabTitle || ('platformVHD.selectTabTitle' | fdTranslate),
+                        type: selectedTab
+                    }
+                "
             ></ng-container>
         </ng-container>
         <ng-container *ngSwitchCase="_tabTypes.advancedSearch">
@@ -405,7 +402,13 @@
         </ng-container>
         <ng-container *ngSwitchCase="_tabTypes.defineConditions">
             <ng-container
-                *ngTemplateOutlet="tabLink; context: { title: defineTabTitle, type: selectedTab }"
+                *ngTemplateOutlet="
+                    tabLink;
+                    context: {
+                        title: defineTabTitle || ('platformVHD.defineTabTitle' | fdTranslate),
+                        type: selectedTab
+                    }
+                "
             ></ng-container>
         </ng-container>
     </ng-container>
@@ -422,6 +425,4 @@
     </ng-template>
 </ng-template>
 
-<ng-template #emptyConditionText>
-    &lt;<ng-container i18n="@@platformI18nValueHelpDialog.Condition.Empty">Empty</ng-container>&gt;
-</ng-template>
+<ng-template #emptyConditionText> &lt;{{ 'platformVHD.selectMobileConditionEmpty' | fdTranslate }}&gt; </ng-template>

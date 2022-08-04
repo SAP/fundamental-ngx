@@ -64,16 +64,18 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     ariaLabelledby: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Text for more button
      */
     @Input()
-    moreLabel = 'More';
+    moreLabel: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Text for less button
      */
     @Input()
-    lessLabel = 'Less';
+    lessLabel: string;
 
     /**
      * Apply rich feed text, please note - we use a formatted text component with this option, it has a list of controlled tags and attibutes.

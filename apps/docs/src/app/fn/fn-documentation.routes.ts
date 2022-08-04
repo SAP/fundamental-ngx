@@ -9,6 +9,13 @@ export const ROUTES: Routes = [
         component: CoreDocumentationComponent,
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
+            {
+                path: 'i18n',
+                loadChildren: () =>
+                    import('../platform/component-docs/i18n/platform-i18n-docs.module').then(
+                        (m) => m.PlatformI18nDocsModule
+                    )
+            },
             { path: 'home', component: HomeDocsComponent },
             {
                 path: 'button',

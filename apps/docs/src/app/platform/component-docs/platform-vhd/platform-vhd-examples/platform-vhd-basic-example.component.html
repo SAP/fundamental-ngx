@@ -18,14 +18,11 @@
     dialogTitle="Simple value help dialog"
     uniqueKey="id"
     tokenViewField="name"
-    selectTabTitle="Select from list"
-    defineTabTitle="Define Conditions"
     [formatToken]="formatTokenFn"
     [dataSource]="dataSource"
     (valueChange)="valueChange($event)"
     headerId="fdp-vhd-header-1"
 >
-    <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
     <fdp-value-help-dialog-filter
         *ngFor="let filter of filters; index as i"
         [main]="i < 2"

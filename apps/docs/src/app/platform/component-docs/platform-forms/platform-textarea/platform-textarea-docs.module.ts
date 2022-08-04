@@ -13,7 +13,7 @@ import { PlatformTextareaBasicExampleComponent } from './platform-textarea-examp
 import { PlatformTextareaCounterExampleComponent } from './platform-textarea-examples/platform-textarea-counter-example.component';
 import { PlatformTextareaCounterTemplateExampleComponent } from './platform-textarea-examples/platform-textarea-counter-template-example.component';
 import { PlatformTextareaAutogrowExampleComponent } from './platform-textarea-examples/platform-textarea-autogrow-example.component';
-import { PlatformTextareaI18nExampleComponent } from './platform-textarea-examples/platform-textarea-i18n-example.component';
+import { getI18nKey, I18nDocsComponent } from '../../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
 import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
@@ -22,7 +22,8 @@ const routes: Routes = [
         component: PlatformTextareaHeaderComponent,
         children: [
             { path: '', component: PlatformTextareaDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.textarea } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.textarea } },
+            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformTextarea') }
         ]
     }
 ];
@@ -43,8 +44,7 @@ const routes: Routes = [
         PlatformTextareaBasicExampleComponent,
         PlatformTextareaCounterExampleComponent,
         PlatformTextareaCounterTemplateExampleComponent,
-        PlatformTextareaAutogrowExampleComponent,
-        PlatformTextareaI18nExampleComponent
+        PlatformTextareaAutogrowExampleComponent
     ],
     providers: [platformContentDensityModuleDeprecationsProvider('fdp-textarea')]
 })

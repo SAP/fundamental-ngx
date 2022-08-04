@@ -11,7 +11,6 @@ export class StackblitzDependencies {
         '@angular/compiler-cli',
         '@angular/common',
         '@angular/forms',
-        '@angular/localize',
         '@angular/router',
         '@angular/platform-browser',
         '@angular/platform-browser-dynamic',

@@ -2,16 +2,14 @@
     <button
         *ngIf="!graph?.columns?.length && !graph?.errors"
         fd-button
-        label="Add a step"
-        i18n-label="@@platformApprovalAddStep"
+        [label]="'platformApprovalFlow.toolbarAddStepButton' | fdTranslate"
         (click)="_addNode('empty')"
     ></button>
 
     <button
         *ngIf="!!graph?.columns?.length && !isEditMode"
         fd-button
-        label="Edit"
-        i18n-label="@@platformApprovalEdit"
+        [label]="'platformApprovalFlow.toolbarEditButton' | fdTranslate"
         (click)="enterEditMode.emit()"
     ></button>
 
@@ -19,40 +17,35 @@
         <button
             *ngIf="_canAddBefore"
             fd-button
-            label="Add approvers before"
-            i18n-label="@@platformApprovalAddApproversBefore"
+            [label]="'platformApprovalFlow.toolbarAddApproversBefore' | fdTranslate"
             (click)="_addNode('before')"
         ></button>
 
         <button
             *ngIf="_canAddAfter"
             fd-button
-            label="Add approvers after"
-            i18n-label="@@platformApprovalAddApproversAfter"
+            [label]="'platformApprovalFlow.toolbarAddApproversAfter' | fdTranslate"
             (click)="_addNode('after')"
         ></button>
 
         <button
             *ngIf="_canAddParallel"
             fd-button
-            label="Add parallel approvers"
-            i18n-label="@@platformApprovalAddApproversParallel"
+            [label]="'platformApprovalFlow.toolbarAddApproversParallel' | fdTranslate"
             (click)="_addNode('parallel')"
         ></button>
 
         <button
             *ngIf="_canRemoveSelectedNodes"
             fd-button
-            label="Remove"
-            i18n-label="@@platformApprovalRemove"
+            [label]="'platformApprovalFlow.toolbarRemove' | fdTranslate"
             (click)="deleteSelectedNodes.emit()"
         ></button>
 
         <button
             *ngIf="_canEditNode"
             fd-button
-            label="Edit approver"
-            i18n-label="@@platformApprovalEditApprover"
+            [label]="'platformApprovalFlow.toolbarEditApprover' | fdTranslate"
             (click)="_editSelectedNode()"
         ></button>
     </ng-container>

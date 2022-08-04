@@ -13,6 +13,7 @@ import { PlatformSearchFieldBasicExampleComponent } from './platform-search-fiel
 import { PlatformSearchFieldCategoriesExampleComponent } from './platform-search-field-examples/platform-search-field-categories-example.component';
 import { PlatformSearchFieldDataSourceExampleComponent } from './platform-search-field-examples/platform-search-field-data-source-example.component';
 import { PlatformSearchFieldMobileExampleComponent } from './platform-search-field-examples/platform-search-field-mobile/platform-search-field-mobile-example.component';
+import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
 import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
         component: PlatformSearchFieldHeaderComponent,
         children: [
             { path: '', component: PlatformSearchFieldDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.searchField } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.searchField } },
+            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformSearchField') }
         ]
     }
 ];

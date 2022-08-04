@@ -11,6 +11,7 @@
         "focus-visible",
         "fundamental-styles",
         "lodash-es",
+        "@fundamental-ngx/i18n",
         "fast-deep-equal"
     ]
 }

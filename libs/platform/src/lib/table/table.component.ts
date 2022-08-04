@@ -233,7 +233,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** Text displayed when table has no items. */
     @Input()
-    emptyTableMessage = 'No data found';
+    emptyTableMessage: string;
 
     /** Table without horizontal borders. */
     @Input()

@@ -14,6 +14,7 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
 import { StandardListItemComponent } from './standard-list-item.component';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
@@ -27,6 +28,7 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
         FormModule,
         RadioModule,
         PipeModule,
+        I18nModule,
         ButtonModule,
         PlatformLinkModule,
         ListModule,

@@ -30,6 +30,7 @@ import { UploadCollectionDragnDropDirective } from './directives/upload-collecti
 import { UploadCollectionComponent } from './upload-collection/upload-collection.component';
 import { NewFolderComponent } from './dialogs/new-folder/new-folder.component';
 import { MoveToComponent } from './dialogs/move-to/move-to.component';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     declarations: [UploadCollectionComponent, NewFolderComponent, MoveToComponent, UploadCollectionDragnDropDirective],
@@ -40,6 +41,7 @@ import { MoveToComponent } from './dialogs/move-to/move-to.component';
         ButtonModule,
         InputGroupModule,
         FormModule,
+        I18nModule,
         FormsModule,
         ReactiveFormsModule,
         DialogModule,

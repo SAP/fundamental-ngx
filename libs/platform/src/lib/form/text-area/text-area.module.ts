@@ -7,6 +7,7 @@ import { PipeModule } from '@fundamental-ngx/core/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { TextAreaComponent } from './text-area.component';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
         FormControlModule,
         PipeModule,
         PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
+        ContentDensityModule,
+        I18nModule
     ],
     exports: [TextAreaComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule],
     declarations: [TextAreaComponent]

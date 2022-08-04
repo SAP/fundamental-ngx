@@ -18,6 +18,7 @@ import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-sta
 import { PlatformObjectAttributeModule } from '@fundamental-ngx/platform/object-attribute';
 import { ObjectListItemComponent } from './object-list-item.component';
 import { ObjectListItemRowComponent } from './object-list-item-row.component';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
@@ -37,6 +38,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         PlatformObjectStatusModule,
         CheckboxModule,
         RadioModule,
+        I18nModule,
         ObjectMarkerModule,
         ObjectNumberModule,
         ObjectIdentifierModule,

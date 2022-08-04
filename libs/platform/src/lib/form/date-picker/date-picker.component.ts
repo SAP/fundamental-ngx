@@ -86,17 +86,26 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Input()
     useValidation = true;
 
-    /** Aria label for the date picker input. */
+    /**
+     * @deprecated use i18n capabilities instead (being translated in core date picker)
+     * Aria label for the date picker input.
+     */
     @Input()
-    dateInputLabel = 'Date input';
+    dateInputLabel: string;
 
-    /** Aria label for the datepicker input. */
+    /**
+     * @deprecated use i18n capabilities instead (being translated in core date picker)
+     * Aria label for the datepicker input.
+     */
     @Input()
-    dateRangeInputLabel = 'Date range input';
+    dateRangeInputLabel: string;
 
-    /** Aria label for the button to show/hide the calendar. */
+    /**
+     * @deprecated use i18n capabilities instead (being translated in core date picker)
+     * Aria label for the button to show/hide the calendar.
+     */
     @Input()
-    displayCalendarToggleLabel = 'Display calendar toggle';
+    displayCalendarToggleLabel: string;
 
     /** Enables Today-Selection-Button if true */
     @Input()

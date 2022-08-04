@@ -75,13 +75,15 @@
                 [attr.aria-readonly]="readonly"
             />
         </fd-input-group>
-        <div
-            class="fdp-combobox__count-list-results"
-            role="status"
-            *ngIf="isOpen"
-            i18n="@@platform.Combobox.CountListResults"
-        >
-            {{ _flatSuggestions?.length || 0 }} result list items
+        <div class="fdp-combobox__count-list-results" role="status" *ngIf="isOpen">
+            <ng-container *ngIf="_flatSuggestions?.length || '0' as count">
+                {{
+                    (count === 1
+                        ? 'platformCombobox.countListResultsSingular'
+                        : 'platformCombobox.countListResultsPlural'
+                    ) | fdTranslate: { count: count }
+                }}
+            </ng-container>
         </div>
         <fd-form-message
             *ngIf="mobile || isOpen ? null : !!stateMessage"

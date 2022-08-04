@@ -231,6 +231,12 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     /** @hidden */
     _isRtl = false;
 
+    /**
+     * @hidden
+     * whether to use value with a prefix for announcing
+     */
+    _useSliderValuePrefix = true;
+
     /** @hidden */
     _handle1Position = 0;
 
@@ -442,6 +448,13 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         }
     }
 
+    /** @hidden reset default prefix on leaving the slider */
+    onBlur(): void {
+        // reset prefix string for slider current value that need to be announced
+        this._useSliderValuePrefix = true;
+        this._cdr.markForCheck();
+    }
+
     /** @hidden */
     private _calculateValueFromPointerPosition(event: MouseEvent, takeCustomValue = true): number | SliderTickMark {
         const { left, width } = this._elementRef.nativeElement.getBoundingClientRect();
@@ -469,6 +482,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             newValue = this.min;
         }
 
+        this._useSliderValuePrefix = false;
         this._cdr.markForCheck();
 
         const stepDiffArray = this._valuesBySteps

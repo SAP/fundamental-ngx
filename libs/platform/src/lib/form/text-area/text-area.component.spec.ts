@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { DELETE } from '@angular/cdk/keycodes';
-import '@angular/localize/init';
 
 import { createKeyboardEvent } from '@fundamental-ngx/platform/shared';
 import { TextAreaComponent } from './text-area.component';

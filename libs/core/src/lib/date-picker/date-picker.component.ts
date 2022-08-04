@@ -139,41 +139,54 @@ export class DatePickerComponent<D>
     @Input()
     useValidation = true;
 
-    /** Aria-label for the datepicker input. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria-label for the datepicker input.
+     */
     @Input()
-    dateInputLabel = 'Date input';
-
-    /** Aria-label for the datepicker input. */
-    @Input()
-    dateRangeInputLabel = 'Date range input';
-
-    /** Aria-label for the button to show/hide the calendar. */
-    @Input()
-    displayCalendarToggleLabel = 'Open picker';
+    dateInputLabel: string;
 
     /**
+     * @deprecated use i18n capabilities instead
+     * Aria-label for the datepicker input.
+     */
+    @Input()
+    dateRangeInputLabel: string;
+
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria-label for the button to show/hide the calendar.
+     */
+    @Input()
+    displayCalendarToggleLabel: string;
+
+    /**
+     * @deprecated use i18n capabilities instead
      * Value state "success" aria message.
      */
     @Input()
-    valueStateSuccessMessage = 'Value state Success';
+    valueStateSuccessMessage: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Value state "information" aria message.
      */
     @Input()
-    valueStateInformationMessage = 'Value state Information';
+    valueStateInformationMessage: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Value state "warning" aria message.
      */
     @Input()
-    valueStateWarningMessage = 'Value state Warning';
+    valueStateWarningMessage: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Value state "error" aria message.
      */
     @Input()
-    valueStateErrorMessage = 'Value state Error';
+    valueStateErrorMessage: string;
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -301,10 +314,6 @@ export class DatePickerComponent<D>
     @Input()
     inline = true;
 
-    /** aria-label for the date-picker. */
-    @Input()
-    ariaLabel: Nullable<string>;
-
     /** aria-labelledby for element describing date-picker. */
     @Input()
     ariaLabelledBy: Nullable<string>;
@@ -412,10 +421,17 @@ export class DatePickerComponent<D>
      * @hidden
      */
     get _dateInputArialLabel(): string {
-        if (this.ariaLabel) {
-            return this.ariaLabel;
-        }
+        // return either input value or a key for "fdTranslate" pipe
         return this.type === 'range' ? this.dateRangeInputLabel : this.dateInputLabel;
+    }
+
+    /**
+     * Date input aria label key based on type
+     * @hidden
+     */
+    get _dateInputArialLabelKey(): string {
+        // return either input value or a key for "fdTranslate" pipe
+        return this.type === 'range' ? 'coreDatePicker.dateRangeInputLabel' : 'coreDatePicker.dateInputLabel';
     }
 
     /** @hidden */

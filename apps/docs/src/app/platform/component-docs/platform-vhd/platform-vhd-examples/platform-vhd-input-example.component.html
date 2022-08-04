@@ -20,14 +20,12 @@
     dialogTitle="Single select value help dialog"
     uniqueKey="id"
     tokenViewField="name"
-    selectTabTitle="Select from list"
     searchSelection="single"
     tabs="select"
     [dataSource]="dataSource"
     (valueChange)="vhd1ValueChange($event)"
     headerId="fdp-vhd-header-4"
 >
-    <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
     <fdp-value-help-dialog-filter
         *ngFor="let filter of filters; index as i"
         [main]="i < 2"
@@ -56,14 +54,12 @@
     dialogTitle="Multi select value help dialog"
     uniqueKey="id"
     tokenViewField="name"
-    selectTabTitle="Select from list"
     searchSelection="multi"
     tabs="select"
     [dataSource]="dataSource"
     (valueChange)="vhd2ValueChange($event)"
     headerId="fdp-vhd-header-5"
 >
-    <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
     <fdp-value-help-dialog-filter
         *ngFor="let filter of filters; index as i"
         [main]="i < 2"
@@ -95,14 +91,12 @@
     dialogTitle="Once select value help dialog"
     uniqueKey="id"
     tokenViewField="name"
-    selectTabTitle="Select from list"
     searchSelection="once"
     tabs="select"
     [dataSource]="dataSource"
     (valueChange)="vhd3ValueChange($event)"
     headerId="fdp-vhd-header-6"
 >
-    <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
     <fdp-value-help-dialog-filter
         *ngFor="let filter of filters; index as i"
         [main]="i < 2"

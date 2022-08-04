@@ -5,6 +5,7 @@ import { ButtonModule } from '../../button/button.module';
 import { DragAndDropModule } from '../../utils/drag-and-drop/drag-and-drop.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ProductSwitchComponent } from './product-switch.component';
+import { ProductSwitchModule } from '../product-switch.module';
 
 describe('ProductSwitchComponent', () => {
     let component: ProductSwitchComponent;
@@ -13,8 +14,7 @@ describe('ProductSwitchComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [PopoverModule, ButtonModule, DragAndDropModule, DragDropModule],
-                declarations: [ProductSwitchComponent]
+                imports: [PopoverModule, ButtonModule, DragAndDropModule, DragDropModule, ProductSwitchModule]
             }).compileComponents();
         })
     );

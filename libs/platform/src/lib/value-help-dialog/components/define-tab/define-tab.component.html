@@ -1,12 +1,5 @@
-<h5
-    [id]="titleId"
-    role="heading"
-    aria-level="5"
-    fd-title
-    class="define-condition-title"
-    i18n="@@platformI18nValueHelpDialog.Define.Condition.Title"
->
-    Product
+<h5 [id]="titleId" role="heading" aria-level="5" fd-title class="define-condition-title">
+    {{ 'platformVHD.defineConditionTitle' | fdTranslate }}
 </h5>
 <ng-container *ngFor="let item of _conditions; trackBy: _trackByKeyAndType; index as i">
     <fd-layout-grid class="condition-row" [noGap]="true">
@@ -16,8 +9,11 @@
                     CONDITIONPANEL_OPERATOR_LABEL
                 </label>
                 <label [id]="selectedId" fd-form-label class="fdp-value-help-dialog__hidden_label">
-                    selected value {{ item.strategy }}
-                </label>
+                    {{
+                        'platformVHD.defineConditionSelectedValueHiddenA11yLabel'
+                            | fdTranslate: { value: item.strategy }
+                    }}</label
+                >
                 <fd-select
                     class="vhd-condition-filters"
                     fdLayoutGridCol
@@ -34,7 +30,9 @@
                     [ariaLabelledBy]="titleId + ' ' + 'CONDITIONPANEL_OPERATOR_LABEL' + ' ' + selectedId"
                 >
                     <ng-container *ngIf="_includeStrategy.length">
-                        <li fd-list-group-header>Include</li>
+                        <li fd-list-group-header>
+                            {{ 'platformVHD.defineConditionConditionsGroupHeaderInclude' | fdTranslate }}
+                        </li>
                         <li fd-option *ngFor="let strategy of _includeStrategy" [value]="strategy.key">
                             <ng-container
                                 [ngTemplateOutlet]="conditionStrategyOption"
@@ -43,7 +41,9 @@
                         </li>
                     </ng-container>
                     <ng-container *ngIf="_excludeStrategy.length">
-                        <li fd-list-group-header>Exclude</li>
+                        <li fd-list-group-header>
+                            {{ 'platformVHD.defineConditionConditionsGroupHeaderExclude' | fdTranslate }}
+                        </li>
                         <li fd-option *ngFor="let strategy of _excludeStrategy" [value]="strategy.key">
                             <ng-container
                                 [ngTemplateOutlet]="conditionStrategyOption"
@@ -69,7 +69,7 @@
                                     fdp-condition-count-message
                                     [maxCharacters]="_rules.maxCharactersHintCount"
                                     type="text"
-                                    i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.FromPlaceholder"
+                                    [placeholder]="'platformVHD.defineConditionFromPlaceholder' | fdTranslate"
                                     placeholder="from"
                                     required
                                     [state]="fromModel.invalid ? 'error' : null"
@@ -91,8 +91,7 @@
                                     fdp-condition-count-message
                                     [maxCharacters]="_rules.maxCharactersHintCount"
                                     type="text"
-                                    i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ToPlaceholder"
-                                    placeholder="to"
+                                    [placeholder]="'platformVHD.defineConditionToPlaceholder' | fdTranslate"
                                     required
                                     [state]="toModel.invalid ? 'error' : null"
                                     [name]="uid + '-' + type + '-to-' + item.id"
@@ -115,8 +114,7 @@
                                     fdp-condition-count-message
                                     [maxCharacters]="_rules.maxCharactersHintCount"
                                     type="text"
-                                    i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ValuePlaceholder"
-                                    placeholder="value"
+                                    [placeholder]="'platformVHD.defineConditionValuePlaceholder' | fdTranslate"
                                     [state]="valueModel.invalid ? 'error' : null"
                                     [name]="uid + '-' + type + '-value-' + item.id"
                                     (blur)="_validateConditionValue(item, !!valueModel.valid)"
@@ -137,12 +135,10 @@
             <div class="action-col" fdLayoutGridCol colGrow>
                 <button
                     fd-button
-                    i18n-aria-label="@@platformI18nValueHelpDialog.Condition.RemoveLabel"
-                    ariaLabel="Remove Define Condition"
+                    [ariaLabel]="'platformVHD.defineConditionRemoveConditionButtonTitle' | fdTranslate"
                     fdType="transparent"
                     glyph="decline"
-                    title="Remove Define Condition"
-                    i18n-title="@@platformI18nValueHelpDialog.defineTab.removeButton"
+                    [title]="'platformVHD.defineConditionRemoveConditionButtonTitle' | fdTranslate"
                     (click)="removeCondition(i)"
                 ></button>
             </div>
@@ -156,11 +152,9 @@
         <div fdLayoutGridCol class="action-col">
             <button
                 fd-button
-                i18n-label="@@platformI18nValueHelpDialog.AddLabelDefineCondition"
-                i18n-aria-label="@@platformI18nValueHelpDialog.AddAriaLabelDefineCondition"
-                aria-label="Add New Define Condition"
-                label="Add"
-                title="Add New Define Condition"
+                [attr.aria-label]="'platformVHD.defineConditionAddConditionButtonTitle' | fdTranslate"
+                [label]="'platformVHD.defineConditionAddConditionButtonLabel' | fdTranslate"
+                [title]="'platformVHD.defineConditionAddConditionButtonTitle' | fdTranslate"
                 (click)="addEmptyCondition()"
             ></button>
         </div>
@@ -168,103 +162,60 @@
 </fd-layout-grid>
 
 <ng-template #conditionStrategyOption let-type="type" let-strategy="strategy">
-    <ng-container *ngIf="strategyLabels[strategy.key]; else defaultOption">{{
-        strategyLabels[strategy.key]
-    }}</ng-container>
-    <ng-template #defaultOption>
-        <ng-container [ngSwitch]="strategy.key">
-            <ng-container
-                *ngSwitchCase="'contains'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Contains"
-            >
-                contains
-            </ng-container>
-
-            <ng-container
-                *ngSwitchCase="'equalTo'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.EqualTo"
-            >
-                equal to
-            </ng-container>
-
-            <ng-container
-                *ngSwitchCase="'between'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Between"
-            >
-                between
-            </ng-container>
-
-            <ng-container
-                *ngSwitchCase="'startsWith'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.StartsWith"
-            >
-                starts with
-            </ng-container>
-
-            <ng-container
-                *ngSwitchCase="'endsWith'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.EndsWith"
-            >
-                ends with
-            </ng-container>
-
-            <ng-container
-                *ngSwitchCase="'lessThan'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.LessThan"
-            >
-                less than
-            </ng-container>
-
-            <ng-container
-                *ngSwitchCase="'lessThanEqual'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.LessThanEqual"
-            >
-                less than equal
-            </ng-container>
-
-            <ng-container
-                *ngSwitchCase="'greaterThan'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.GreaterThan'"
-            >
-                greater than
-            </ng-container>
-
-            <ng-container
-                *ngSwitchCase="'greaterThanEqual'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.GreaterThanEqual"
-            >
-                greater than equal
-            </ng-container>
-
-            <ng-container
-                *ngSwitchCase="'empty'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Empty"
-            >
-                empty
-            </ng-container>
-
-            <ng-container
-                *ngSwitchCase="'not_equalTo'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.NotEqualTo"
-            >
-                not equal to
-            </ng-container>
-
-            <ng-container
-                *ngSwitchCase="'not_empty'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.NotEmpty"
-            >
-                not empty
-            </ng-container>
+    <ng-container [ngSwitch]="strategy.key">
+        <ng-container *ngSwitchCase="'contains'">
+            {{ 'platformVHD.defineConditionConditionStrategyLabelContains' | fdTranslate }}
         </ng-container>
-    </ng-template>
+
+        <ng-container *ngSwitchCase="'equalTo'">
+            {{ 'platformVHD.defineConditionConditionStrategyLabelEqualTo' | fdTranslate }}
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'between'">
+            {{ 'platformVHD.defineConditionConditionStrategyLabelBetween' | fdTranslate }}
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'startsWith'">
+            {{ 'platformVHD.defineConditionConditionStrategyLabelStartsWith' | fdTranslate }}
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'endsWith'">
+            {{ 'platformVHD.defineConditionConditionStrategyLabelEndsWith' | fdTranslate }}
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'lessThan'">
+            {{ 'platformVHD.defineConditionConditionStrategyLabelLessThan' | fdTranslate }}
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'lessThanEqual'">
+            {{ 'platformVHD.defineConditionConditionStrategyLabelLessThanEqual' | fdTranslate }}
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'greaterThan'">
+            {{ 'platformVHD.defineConditionConditionStrategyLabelGreaterThan' | fdTranslate }}
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'greaterThanEqual'">
+            {{ 'platformVHD.defineConditionConditionStrategyLabelGreaterThanEqual' | fdTranslate }}
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'empty'">
+            {{ 'platformVHD.defineConditionConditionStrategyLabelEmpty' | fdTranslate }}
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'not_equalTo'">
+            {{ 'platformVHD.defineConditionConditionStrategyLabelNotEqualTo' | fdTranslate }}
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'not_empty'">
+            {{ 'platformVHD.defineConditionConditionStrategyLabelNotEmpty' | fdTranslate }}
+        </ng-container>
+    </ng-container>
 </ng-template>
 
 <ng-template #countError let-count>
     <fd-form-message type="error" *ngIf="count && count > 7">
-        <ng-container i18n="@@platformI18nValueHelpDialog.Condition.MaxCountError"
-            >Enter a value with no more than 7 characters</ng-container
-        >
+        {{ 'platformVHD.defineConditionMaxCountError' | fdTranslate: { count: 7 } }}
     </fd-form-message>
 </ng-template>
 

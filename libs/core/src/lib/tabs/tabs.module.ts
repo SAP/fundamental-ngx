@@ -23,6 +23,7 @@ import { IconModule } from '@fundamental-ngx/core/icon';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
@@ -57,7 +58,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ButtonModule,
         MenuModule,
         ScrollSpyModule,
-        ContentDensityModule
+        ContentDensityModule,
+        I18nModule
     ],
     exports: [
         TabListComponent,

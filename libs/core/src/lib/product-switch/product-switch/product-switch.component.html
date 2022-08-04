@@ -14,8 +14,8 @@
         <fd-popover-control>
             <button
                 fd-button
-                [attr.aria-label]="ariaLabel"
-                [attr.title]="ariaLabel"
+                [attr.aria-label]="ariaLabel || ('coreProductSwitch.ariaLabel' | fdTranslate)"
+                [attr.title]="ariaLabel || ('coreProductSwitch.ariaLabel' | fdTranslate)"
                 class="fd-shellbar__button"
                 glyph="grid"
                 fdType="transparent"

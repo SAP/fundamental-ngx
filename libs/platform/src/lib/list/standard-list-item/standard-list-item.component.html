@@ -199,8 +199,7 @@
         fdType="transparent"
         glyph="edit"
         (click)="_onActionButtonClick('edit')"
-        i18n-aria-label="@@standardList.Item.detail"
-        aria-label="detail"
+        [attr.aria-label]="'platformStandardListItem.detailsActionAriaLabel' | fdTranslate"
         (keydown)="_onKeyButtonClick($event, 'edit')"
     ></button>
     <button
@@ -210,8 +209,7 @@
         *ngIf="selectionMode === 'delete'"
         role="button"
         title="delete"
-        i18n-aria-label="@@standardList.Item.delete"
-        aria-label="delete"
+        [attr.aria-label]="'platformStandardListItem.deleteActionAriaLabel' | fdTranslate"
         fdType="transparent"
         glyph="decline"
         (click)="_onActionButtonClick('delete')"

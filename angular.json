@@ -3880,16 +3880,6 @@
                                     "with": "apps/docs/src/environments/environment.prod.ts"
                                 }
                             ]
-                        },
-                        "fr": {
-                            "outputPath": "dist/libs/platform/locale",
-                            "i18nMissingTranslation": "error",
-                            "localize": ["fr"]
-                        },
-                        "ar": {
-                            "outputPath": "dist/libs/platform/locale",
-                            "i18nMissingTranslation": "error",
-                            "localize": ["ar"]
                         }
                     },
                     "outputs": ["{options.outputPath}"],
@@ -3916,12 +3906,6 @@
                         }
                     }
                 },
-                "extract-i18n": {
-                    "builder": "@angular-devkit/build-angular:extract-i18n",
-                    "options": {
-                        "browserTarget": "docs:build"
-                    }
-                },
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
@@ -3943,18 +3927,6 @@
                         "assets": ["apps/docs/src/favicon.ico", "apps/docs/src/assets"]
                     },
                     "outputs": ["coverage/apps/docs/"]
-                }
-            },
-            "i18n": {
-                "locales": {
-                    "fr": {
-                        "translation": "apps/docs/src/app/platform/locale/fr/messages.fr.xlf",
-                        "baseHref": ""
-                    },
-                    "ar": {
-                        "translation": "apps/docs/src/app/platform/locale/ar/messages.ar.xlf",
-                        "baseHref": ""
-                    }
                 }
             },
             "tags": ["scope:docs", "type:app"]
@@ -4899,6 +4871,45 @@
                 }
             },
             "tags": ["scope:fn", "type:lib"]
+        },
+        "i18n": {
+            "projectType": "library",
+            "root": "libs/i18n",
+            "sourceRoot": "libs/i18n/src",
+            "prefix": "fundamental-ngx",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/i18n"],
+                    "options": {
+                        "project": "libs/i18n/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/i18n/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/i18n/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/i18n/src/test.ts",
+                        "tsConfig": "libs/i18n/tsconfig.spec.json",
+                        "karmaConfig": "libs/i18n/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/i18n/src/**/*.ts", "libs/i18n/src/**/*.html"]
+                    }
+                }
+            },
+            "tags": ["type:lib", "scope:i18n"]
         },
         "moment-adapter": {
             "root": "libs/moment-adapter",

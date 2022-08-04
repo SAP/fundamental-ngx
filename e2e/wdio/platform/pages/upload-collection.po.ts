@@ -22,7 +22,7 @@ export class UploadCollectionPo extends BaseComponentPo {
     transparentButton = ' .fd-button--transparent';
     dialogInputField = 'fd-dialog-body .fd-input';
     dialogCreateButton = 'button.fd-dialog__decisive-button';
-    tableItemCount = ' span~span';
+    tableItemCount = ' fd-breadcrumb:first-child fd-breadcrumb-item';
     menuButton = '.fd-menu__item';
     checkbox = ' [labelclass="fd-table__checkbox-label"]';
     busyIndicator = ' .fd-busy-indicator';

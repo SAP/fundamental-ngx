@@ -1,7 +1,6 @@
 <div class="table-header">
     <h5 fd-title role="heading" aria-level="5">
-        <ng-container i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</ng-container>
-        ({{ displayedData.length }})
+        {{ 'platformVHD.selectTabDisplayCountLabel' | fdTranslate: { count: displayedData.length } }}
     </h5>
 </div>
 <div
@@ -22,11 +21,14 @@
         aria-multiselectable="true"
         [attr.aria-labelledby]="selectTabTitleId + ' ' + selectTabCountId"
     >
-        <label [id]="selectTabCountId" fd-form-label class="fdp-value-help-dialog__hidden_label"
-            >contains {{ displayedData.length }} rows and {{ _tableFilters.main.length }} column</label
-        >
-        <label [id]="selectTabTitleId" fd-form-label class="fdp-value-help-dialog__hidden_label"
-            >Items ({{ displayedData.length }})
+        <label [id]="selectTabCountId" fd-form-label class="fdp-value-help-dialog__hidden_label">
+            {{
+                'platformVHD.selectTabCountHiddenA11yLabel'
+                    | fdTranslate: { rowCount: displayedData.length, colCount: _tableFilters.main.length }
+            }}
+        </label>
+        <label [id]="selectTabTitleId" fd-form-label class="fdp-value-help-dialog__hidden_label">
+            {{ 'platformVHD.selectTabDisplayCountLabel' | fdTranslate: { count: displayedData.length } }}
         </label>
         <thead fd-table-header>
             <tr fd-table-row *ngIf="displayedData.length && _tableFilters">
@@ -108,8 +110,7 @@
                                 <button
                                     fd-button
                                     fdType="transparent"
-                                    i18n-label="@@platformI18nValueHelpDialogMoreButton"
-                                    label="More"
+                                    [label]="'platformVHD.selectTabMoreBtnLabel' | fdTranslate"
                                     (click)="_showMoreElements()"
                                 ></button>
                             </fd-bar-element>
@@ -120,7 +121,7 @@
             <tr fd-table-row *ngIf="!displayedData.length">
                 <td colspan="100%">
                     <div class="fdp-value-help-dialog__empty-message">
-                        {{ emptyTableMessage }}
+                        {{ emptyTableMessage || ('platformVHD.searchTableEmptyMessage' | fdTranslate) }}
                     </div>
                 </td>
             </tr>

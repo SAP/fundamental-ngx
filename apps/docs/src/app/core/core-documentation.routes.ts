@@ -13,6 +13,13 @@ export const ROUTES: Routes = [
             { path: 'home', component: HomeDocsComponent },
             { path: 'new-component', component: NewComponentComponent },
             {
+                path: 'i18n',
+                loadChildren: () =>
+                    import('../platform/component-docs/i18n/platform-i18n-docs.module').then(
+                        (m) => m.PlatformI18nDocsModule
+                    )
+            },
+            {
                 path: 'action-bar',
                 loadChildren: () =>
                     import('./component-docs/action-bar/action-bar-docs.module').then((m) => m.ActionBarDocsModule)

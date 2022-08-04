@@ -3,7 +3,9 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h4 fd-title [headerSize]="4" i18n="@@platformTableP13ColumnsDialogHeader">Columns</h4>
+                    <h4 fd-title [headerSize]="4">
+                        {{ 'platformTable.P13ColumnsDialogHeader' | fdTranslate }}
+                    </h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -17,8 +19,7 @@
     <fd-dialog-body>
         <fd-toolbar>
             <fdp-search-field
-                i18n-placeholder="@@platformTableP13ColumnsDialogSearchPlaceholder"
-                placeholder="Search"
+                [placeholder]="'platformTable.P13ColumnsDialogSearchPlaceholder' | fdTranslate"
                 [inputText]="(_searchQuerySubject | async) || ''"
                 [suggestions]="[]"
                 (inputChange)="_searchInputChange($event)"
@@ -28,13 +29,12 @@
 
             <!-- Show Selected/All -->
             <button fd-toolbar-item fd-button fdType="transparent" (click)="_toggleShowAll()">
-                <ng-container
-                    *ngIf="(_showAllItemsSubject | async) === true; else showAll"
-                    i18n="@@platformTableP13ColumnsDialogsShowSelected"
-                >
-                    Show Selected
+                <ng-container *ngIf="(_showAllItemsSubject | async) === true; else showAll">
+                    {{ 'platformTable.P13ColumnsDialogsShowSelected' | fdTranslate }}
                 </ng-container>
-                <ng-template #showAll i18n="@@platformTableP13ColumnsDialogShowAll"> Show all </ng-template>
+                <ng-template #showAll>
+                    {{ 'platformTable.P13ColumnsDialogShowAll' | fdTranslate }}
+                </ng-template>
             </button>
 
             <!-- Active Button Movement -->
@@ -44,10 +44,8 @@
                 fdType="transparent"
                 glyph="collapse-group"
                 [disabled]="_moveUpDisabled"
-                aria-label="Move to Top"
-                i18n-aria-label="platformTableP13ColumnsDialogMoveToTopBtn|Button aria-label attribute"
-                title="Move to Top"
-                i18n-title="platformTableP13ColumnsDialogMoveToTopBtn|Button title attribute"
+                [attr.aria-label]="'platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate"
+                [title]="'platformTable.P13ColumnsDialogMoveToTopBtn' | fdTranslate"
                 (click)="_moveActiveToTop()"
             ></button>
 
@@ -57,10 +55,8 @@
                 fdType="transparent"
                 glyph="slim-arrow-up"
                 [disabled]="_moveUpDisabled"
-                aria-label="Move Up"
-                i18n-aria-label="platformTableP13ColumnsDialogMoveUpBtn|Button title attribute"
-                title="Move Up"
-                i18n-title="platformTableP13ColumnsDialogMoveUpBtn|Button title attribute"
+                [attr.aria-label]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
+                [title]="'platformTable.P13ColumnsDialogMoveUpBtn' | fdTranslate"
                 (click)="_moveActiveUp()"
             ></button>
 
@@ -70,10 +66,8 @@
                 fdType="transparent"
                 glyph="slim-arrow-down"
                 [disabled]="_moveDownDisabled"
-                aria-label="Move Down"
-                i18n-aria-label="platformTableP13ColumnsDialogMoveDownBtn|Button aria-label attribute"
-                title="Move Down"
-                i18n-title="platformTableP13ColumnsDialogMoveDownBtn|Button title attribute"
+                [attr.aria-label]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
+                [title]="'platformTable.P13ColumnsDialogMoveDownBtn' | fdTranslate"
                 (click)="_moveActiveDown()"
             ></button>
 
@@ -83,10 +77,8 @@
                 fdType="transparent"
                 glyph="expand-group"
                 [disabled]="_moveDownDisabled"
-                aria-label="Move to Bottom"
-                i18n-aria-label="platformTableP13ColumnsDialogMoveToBottomBtn|Button aria-label attribute"
-                title="Move to Bottom"
-                i18n-title="platformTableP13ColumnsDialogMoveToBottomBtn|Btn title attribute"
+                [attr.aria-label]="'platformTable.P13ColumnsDialogMoveToBottomBtn' | fdTranslate"
+                [title]="'platformTable.P13ColumnsDialogMoveToBottomBtn' | fdTranslate"
                 (click)="_moveActiveToBottom()"
             ></button>
         </fd-toolbar>
@@ -98,8 +90,15 @@
                     (ngModelChange)="_toggleSelectAll($event)"
                     [disabled]="_selectAllDisabled"
                 ></fd-checkbox>
-                <span fd-list-title i18n="@@platformTableP13ColumnsDialogSelectAll|Select All checkbox">
-                    Select All ({{ _selectedColumnsCount }}/{{ _selectableColumns.length }})
+                <span fd-list-title>
+                    {{
+                        'platformTable.P13ColumnsDialogSelectAll'
+                            | fdTranslate
+                                : {
+                                      selectedColumnsCount: _selectedColumnsCount,
+                                      selectableColumnsCount: _selectableColumns.length
+                                  }
+                    }}
                 </span>
             </li>
             <li
@@ -123,8 +122,7 @@
                 fd-button
                 fdType="emphasized"
                 fd-dialog-decisive-button
-                i18n-label="@@platformTableP13ColumnsDialogConfirmationBtn"
-                label="OK"
+                [label]="'platformTable.P13ColumnsDialogConfirmationBtnLabel' | fdTranslate"
                 (click)="confirm()"
             ></button>
         </fd-dialog-footer-button>
@@ -135,8 +133,7 @@
                 fdType="transparent"
                 fd-dialog-decisive-button
                 fd-initial-focus
-                i18n-label="@@platformTableP13ColumnsDialogCancelBtn"
-                label="Cancel"
+                [label]="'platformTable.P13ColumnsDialogCancelBtnLabel' | fdTranslate"
                 (click)="cancel()"
             ></button>
         </fd-dialog-footer-button>

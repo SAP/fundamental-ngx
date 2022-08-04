@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { TimeModule } from '@fundamental-ngx/core/time';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 import { TimePickerComponent } from './time-picker.component';
 import { FormMessageModule } from '@fundamental-ngx/core/form';
@@ -20,7 +21,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         InputGroupModule,
         TimeModule,
         FormMessageModule,
-        ContentDensityModule
+        ContentDensityModule,
+        I18nModule
     ],
     exports: [
         TimePickerComponent,

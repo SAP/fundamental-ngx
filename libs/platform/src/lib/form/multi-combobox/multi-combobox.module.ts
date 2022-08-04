@@ -10,6 +10,7 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { TokenModule } from '@fundamental-ngx/core/token';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
 import { MultiComboboxComponent } from './multi-combobox/multi-combobox.component';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
@@ -33,6 +34,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         PlatformListModule,
         StandardListItemModule,
         PlatformAutoCompleteModule,
+        I18nModule,
         PlatformContentDensityDeprecationsModule,
         ContentDensityModule
     ],

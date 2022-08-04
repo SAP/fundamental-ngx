@@ -23,7 +23,6 @@ describe('DatePickerComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [DatePickerComponent],
                 imports: [
                     FdDatetimeModule,
                     CalendarModule,

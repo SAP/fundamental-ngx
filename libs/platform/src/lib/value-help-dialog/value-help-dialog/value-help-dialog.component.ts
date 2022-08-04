@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChild,
     ContentChildren,
     ElementRef,
     EventEmitter,
@@ -37,7 +36,6 @@ import {
     VhdValueChangeEvent
 } from '../models';
 import { VhdFilterComponent } from '../components/value-help-dialog-filter/value-help-dialog-filter.component';
-import { VhdSearchComponent } from '../components/value-help-dialog-search/value-help-dialog-search.component';
 import { defaultConditionDisplayFn } from '../constans/condition-display.function';
 import { cloneDeep } from 'lodash-es';
 
@@ -128,18 +126,22 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     conditionDisplayFn = defaultConditionDisplayFn;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Select from list tab's and Search table settings
      * */
     @Input()
-    selectTabTitle = 'Select from list';
+    selectTabTitle: string;
 
     /** Selection mode for search table */
     @Input()
     searchSelection: VdhTableSelection = 'multi';
 
-    /** Text displayed when table has no items. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Text displayed when table has no items.
+     */
     @Input()
-    searchTableEmptyMessage = 'Use the search to get results';
+    searchTableEmptyMessage: string;
 
     /** Items per page for pagination below search table */
     @Input()
@@ -157,11 +159,14 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     @Input()
     loading: boolean | undefined;
 
-    /** Define conditions tab's settings */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Define conditions tab's settings
+     */
     @Input()
-    defineTabTitle = 'Define Conditions';
+    defineTabTitle: string;
 
-    /** Custom stratagies labels
+    /** Custom strategies labels
      * Allowed keys: contains, equalTo, between, startsWith, endsWith, lessThan, lessThanEqual, greaterThan, greaterThanEqual, empty
      */
     @Input()
@@ -194,10 +199,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     /** Event emitted when data loading is finished. */
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onDataReceived = new EventEmitter<void>();
-
-    /** @hidden Search control component  */
-    @ContentChild(VhdSearchComponent)
-    searchField: VhdSearchComponent;
 
     /** @hidden Fitlers for search table and defince conditions */
     @ContentChildren(VhdFilterComponent)

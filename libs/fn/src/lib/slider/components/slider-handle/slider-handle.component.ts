@@ -33,14 +33,14 @@ export class SliderHandleComponent {
      */
     @Input()
     @HostBinding('[attr.aria-valuenow]')
-    ariaValueNow: Nullable<string> = null;
+    ariaValueNow: Nullable<string | number> = null;
 
     /**
      * Aria-valuetext for slider handle.
      */
     @Input()
     @HostBinding('[attr.aria-valuetext]')
-    ariaValueText: Nullable<string> = null;
+    ariaValueText: Nullable<string | number> = null;
 
     /**
      * Aria-valuemax for slider handle.

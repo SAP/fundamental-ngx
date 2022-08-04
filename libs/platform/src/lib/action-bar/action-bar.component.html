@@ -4,9 +4,9 @@
             <button
                 fd-button
                 fdType="transparent"
-                [attr.aria-label]="backButtonLabel"
+                [attr.aria-label]="backButtonLabel || ('platformActionBar.backButtonLabel' | fdTranslate)"
                 data-tag="actionbar__back-button"
-                [attr.title]="backButtonLabel"
+                [attr.title]="backButtonLabel || ('platformActionBar.backButtonLabel' | fdTranslate)"
                 [glyph]="navigationArrow$ | async"
                 (click)="backButtonClick.emit()"
             ></button>

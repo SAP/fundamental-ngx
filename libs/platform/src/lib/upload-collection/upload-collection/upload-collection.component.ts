@@ -131,13 +131,19 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
     @Input()
     mimeTypes: string[] = [];
 
-    /** Allows to set own text for the 'No data' text label. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Allows to set own text for the 'No data' text label.
+     */
     @Input()
-    noDataText = 'No files found';
+    noDataText: string;
 
-    /** Allows to set own text for the 'No data' description label. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Allows to set own text for the 'No data' description label.
+     */
     @Input()
-    noDataDescription = 'Drop files to upload, or use the “Add” button.';
+    noDataDescription: string;
 
     /** All action buttons will be disabled */
     @Input()
@@ -776,6 +782,13 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
     /** @hidden */
     _trackByDocumentId(index: number, item: UploadCollectionItem): UploadCollectionItem['documentId'] {
         return item.documentId;
+    }
+
+    /** @hidden */
+    _getAllowedTypes(): string {
+        return `${this.fileTypes?.join(', ')}${
+            this.fileTypes?.length && this.mimeTypes?.length ? ', ' : ''
+        }${this.mimeTypes?.join(', ')}`;
     }
 
     /** @hidden */

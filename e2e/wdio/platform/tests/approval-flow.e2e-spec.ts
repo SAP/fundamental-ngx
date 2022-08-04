@@ -682,7 +682,7 @@ describe('Approval flow', () => {
         expect(isElementDisplayed(detailsDialog)).toBe(true);
         expect(isElementDisplayed(detailsDialogAvatar)).toBe(true);
         expect(getText(detailsDialogCancelBtn)).toContain(details_dialog_cancel_btn);
-        expect(getText(detailsDialogHeader)).toBe(details_dialog_header);
+        expect(getText(detailsDialogHeader).trim()).toBe(details_dialog_header);
     }
 
     function markOption(option: number): void {

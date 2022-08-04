@@ -16,6 +16,11 @@
             <span fd-tab-tag>API</span>
         </a>
     </li>
+    <li fd-tab-item *ngIf="hasI18n">
+        <a fd-tab-link routerLink="./i18n" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">
+            <span fd-tab-tag>I18n</span>
+        </a>
+    </li>
 </ul>
 
 <separator style="margin-top: 0"></separator>

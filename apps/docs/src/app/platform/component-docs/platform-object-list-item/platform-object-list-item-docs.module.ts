@@ -19,6 +19,7 @@ import { PlatformObjectListItemBorderLessExampleComponent } from './platform-obj
 import { PlatformObjectListItemWithRowSelectionExampleComponent } from './platform-object-list-item-examples/platform-object-list-item-with-row-selection-example.component';
 import { PlatformObjectListItemWithRowNavigationExampleComponent } from './platform-object-list-item-examples/platform-object-list-item-with-row-navigation-example.component';
 import { PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent } from './platform-object-list-item-examples/platform-object-list-item-with-row-selection-and-navigation-example.component';
+import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
 import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
         component: PlatformObjectListItemHeaderComponent,
         children: [
             { path: '', component: PlatformObjectListItemDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.objectlistitem } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.objectlistitem } },
+            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformObjectListItem') }
         ]
     }
 ];

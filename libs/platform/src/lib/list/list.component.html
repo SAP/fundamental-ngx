@@ -23,7 +23,7 @@
             [loading]="_loading"
             role="alert"
             [attr.aria-busy]="_loading"
-            [attr.aria-labelledby]="_loading ? 'loadingOnScroll' : ''"
+            [attr.aria-label]="_loading ? ('platformList.loadingAriaLabel' | fdTranslate) : null"
         >
             <div
                 fd-list
@@ -57,7 +57,7 @@
                     [block]="true"
                     [loading]="_loading"
                     role="alert"
-                    [attr.aria-labelledby]="_loading ? 'loadingOnScroll' : 'loadingOnbutton'"
+                    [attr.aria-label]="_loading ? ('platformList.loadingAriaLabel' | fdTranslate) : loadTitle"
                 >
                 </fd-busy-indicator>
                 {{ loadTitle }} <ng-content select="#load"></ng-content>
@@ -74,6 +74,3 @@
 <ng-template #elseBlock>
     <ng-content></ng-content>
 </ng-template>
-
-<span style="display: none" id="loadingOnScroll" i18n="@@list.loading">loading</span>
-<span style="display: none" id="loadingOnbutton" i18n="@@list.loadingtitle">{{ loadTitle }}</span>

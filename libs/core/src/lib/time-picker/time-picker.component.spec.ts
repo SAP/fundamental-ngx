@@ -28,7 +28,8 @@ describe('TimePickerComponent', () => {
                     ButtonModule,
                     FdDatetimeModule,
                     TimeModule,
-                    FormMessageModule
+                    FormMessageModule,
+                    TimePickerModule
                 ],
                 declarations: [TimePickerComponent]
             }).compileComponents();

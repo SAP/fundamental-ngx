@@ -18,8 +18,7 @@
 
             <fdp-search-field
                 *ngIf="!_userToShowDetails && _isListMode"
-                i18n-placeholder
-                placeholder="Search"
+                [placeholder]="'platformApprovalFlow.addNodeSearchPlaceholder' | fdTranslate"
                 fdCompact
                 [suggestions]="[]"
                 (inputChange)="_onSearchStringChange($event.text)"
@@ -48,8 +47,7 @@
                 fd-button
                 fd-dialog-decisive-button
                 fdType="emphasized"
-                i18n-label="platformApprovalFlowDialogButtonSendReminder"
-                label="Send reminder"
+                [label]="'platformApprovalFlow.userDetailsSendReminderBtnLabel' | fdTranslate"
                 [disabled]="!_data.allowSendReminder || (_isListMode && !_selectedUsers.length)"
                 (click)="_sendReminder()"
             ></button>
@@ -61,8 +59,7 @@
                 fd-initial-focus
                 fd-dialog-decisive-button
                 fdType="transparent"
-                i18n-label="platformApprovalFlowDialogButtonCancel"
-                label="Cancel"
+                [label]="'platformApprovalFlow.userDetailsCancelBtnLabel' | fdTranslate"
                 (click)="dialogRef.close('Cancel')"
             ></button>
         </fd-dialog-footer-button>
@@ -70,5 +67,5 @@
 </fd-dialog>
 
 <ng-template #defaultHeader>
-    <ng-container i18n="@@platformApprovalFlowUserDetailHeader">Detail</ng-container>
+    {{ 'platformApprovalFlow.userDetailsHeader' | fdTranslate }}
 </ng-template>

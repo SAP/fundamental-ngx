@@ -5,10 +5,36 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { filter, fromEvent, Subject } from 'rxjs';
+import { BehaviorSubject, filter, fromEvent, Subject } from 'rxjs';
 import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 import { MenuComponent, MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { ShellbarMenuItem, ShellbarSizes } from '@fundamental-ngx/core/shellbar';
+import {
+    FdLanguage,
+    FD_LANGUAGE,
+    FD_LANGUAGE_ALBANIAN,
+    FD_LANGUAGE_ARABIC,
+    FD_LANGUAGE_BELARUSIAN,
+    FD_LANGUAGE_BULGARIAN,
+    FD_LANGUAGE_CHINESE,
+    FD_LANGUAGE_CROATIAN,
+    FD_LANGUAGE_CZECH,
+    FD_LANGUAGE_ENGLISH,
+    FD_LANGUAGE_FRENCH,
+    FD_LANGUAGE_GEORGIAN,
+    FD_LANGUAGE_GERMAN,
+    FD_LANGUAGE_HEBREW,
+    FD_LANGUAGE_HINDI,
+    FD_LANGUAGE_ITALIAN,
+    FD_LANGUAGE_POLISH,
+    FD_LANGUAGE_PORTUGUESE,
+    FD_LANGUAGE_ROMANIAN,
+    FD_LANGUAGE_RUSSIAN,
+    FD_LANGUAGE_SINHALA,
+    FD_LANGUAGE_SPANISH,
+    FD_LANGUAGE_TURKISH,
+    FD_LANGUAGE_UKRAINIAN
+} from '@fundamental-ngx/i18n';
 import { ContentDensityMode, GlobalContentDensityService } from '@fundamental-ngx/core/content-density';
 
 const urlContains = (themeName: string, search: string): boolean => themeName.toLowerCase().includes(search);
@@ -30,6 +56,9 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     @ViewChild('themeMenu')
     themeMenu: MenuComponent;
 
+    @ViewChild('i18nMenu')
+    i18nMenu: MenuComponent;
+
     ContentDensityMode = ContentDensityMode;
 
     highlightJsThemeCss: SafeResourceUrl;
@@ -46,6 +75,31 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     };
 
     versions: any[];
+
+    translations = [
+        { name: 'Shqip', value: FD_LANGUAGE_ALBANIAN },
+        { name: 'العربية', value: FD_LANGUAGE_ARABIC },
+        { name: 'Беларускі', value: FD_LANGUAGE_BELARUSIAN },
+        { name: 'Български', value: FD_LANGUAGE_BULGARIAN },
+        { name: '中国人', value: FD_LANGUAGE_CHINESE },
+        { name: 'Hrvatski', value: FD_LANGUAGE_CROATIAN },
+        { name: 'Český', value: FD_LANGUAGE_CZECH },
+        { name: 'English', value: FD_LANGUAGE_ENGLISH },
+        { name: 'Français', value: FD_LANGUAGE_FRENCH },
+        { name: 'ქართული', value: FD_LANGUAGE_GEORGIAN },
+        { name: 'Deutsch', value: FD_LANGUAGE_GERMAN },
+        { name: 'עִברִית', value: FD_LANGUAGE_HEBREW },
+        { name: 'Hindi', value: FD_LANGUAGE_HINDI },
+        { name: 'Italiano', value: FD_LANGUAGE_ITALIAN },
+        { name: 'Polski', value: FD_LANGUAGE_POLISH },
+        { name: 'Português', value: FD_LANGUAGE_PORTUGUESE },
+        { name: 'Română', value: FD_LANGUAGE_ROMANIAN },
+        { name: 'Русский', value: FD_LANGUAGE_RUSSIAN },
+        { name: 'සිංහල', value: FD_LANGUAGE_SINHALA },
+        { name: 'Española', value: FD_LANGUAGE_SPANISH },
+        { name: 'Türkçe', value: FD_LANGUAGE_TURKISH },
+        { name: 'Українська', value: FD_LANGUAGE_UKRAINIAN }
+    ];
 
     items: ShellbarMenuItem[] = [
         {
@@ -76,6 +130,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         private _contentDensityService: GlobalContentDensityService,
         private _themingService: ThemingService,
         @Inject(CURRENT_LIB) private _currentLib: Libraries,
+        @Inject(FD_LANGUAGE) private langSubject$: BehaviorSubject<FdLanguage>,
         private _route: ActivatedRoute,
         private _domSanitizer: DomSanitizer
     ) {
@@ -152,6 +207,11 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     selectTheme(themeId: string): void {
         this._themingService.setTheme(themeId);
         this.updateHighlightTheme(themeId);
+    }
+
+    selectTranslation(translation: FdLanguage): void {
+        this.langSubject$.next(translation);
+        this.i18nMenu.close();
     }
 
     selectDensity(density: ContentDensityMode): void {

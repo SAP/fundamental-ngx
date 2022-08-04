@@ -12,9 +12,6 @@ import platformTemplateCounterTextareaTsCode from '!./platform-textarea-examples
 import platformAutogrowTextareaSrc from '!./platform-textarea-examples/platform-textarea-autogrow-example.component.html?raw';
 import platformAutogrowTextareaTsCode from '!./platform-textarea-examples/platform-textarea-autogrow-example.component.ts?raw';
 
-import platformI18nTextareaSrc from '!./platform-textarea-examples/platform-textarea-i18n-example.component.html?raw';
-import platformI18nTextareaTsCode from '!./platform-textarea-examples/platform-textarea-i18n-example.component.ts?raw';
-
 @Component({
     selector: 'app-textarea',
     templateUrl: './platform-textarea-docs.component.html'
@@ -73,20 +70,6 @@ export class PlatformTextareaDocsComponent {
             code: platformAutogrowTextareaTsCode,
             fileName: 'platform-textarea-autogrow-example',
             component: 'PlatformTextareaAutogrowExampleComponent'
-        }
-    ];
-
-    textareaI18n: ExampleFile[] = [
-        {
-            language: 'html',
-            code: platformI18nTextareaSrc,
-            fileName: 'platform-textarea-i18n-example'
-        },
-        {
-            language: 'typescript',
-            code: platformI18nTextareaTsCode,
-            fileName: 'platform-textarea-i18n-example',
-            component: 'PlatformTextareaI18nExampleComponent'
         }
     ];
 }

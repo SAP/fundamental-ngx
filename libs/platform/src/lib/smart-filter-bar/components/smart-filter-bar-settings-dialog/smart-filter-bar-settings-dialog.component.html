@@ -3,7 +3,9 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h4 [headerSize]="4" fd-title i18n="@@PlatformSmartFilterBarSelectFiltersHeader">Filters</h4>
+                    <h4 [headerSize]="4" fd-title>
+                        {{ 'platformSmartFilterBar.selectFiltersHeader' | fdTranslate }}
+                    </h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -16,6 +18,7 @@
 
     <fd-dialog-body>
         <fdp-table
+            *ngIf="loaded; else loadingTpl"
             #table
             (rowSelectionChange)="_onRowSelectionChange($event)"
             [dataSource]="source"
@@ -23,8 +26,7 @@
         >
             <fdp-table-toolbar
                 [hideItemCount]="false"
-                i18n-title="@@PlatformSmartFilterBarSelectFiltersAvailableFiltersText"
-                title="Available filters"
+                [title]="'platformSmartFilterBar.selectFiltersAvailableFiltersText' | fdTranslate"
             >
                 <fdp-table-toolbar-actions>
                     <fdp-select
@@ -37,16 +39,14 @@
             </fdp-table-toolbar>
             <fdp-column
                 align="start"
-                i18n-label="@@PlatformSmartFilterBarSelectFiltersFilterColumn"
                 key="label"
-                label="Filter"
+                [label]="'platformSmartFilterBar.selectFiltersFilterColumnLabel' | fdTranslate"
                 name="label"
             ></fdp-column>
             <fdp-column
                 align="center"
-                i18n-label="@@PlatformSmartFilterBarSelectFiltersActiveColumn"
                 key="active"
-                label="Active"
+                [label]="'platformSmartFilterBar.selectFiltersActiveColumnLabel' | fdTranslate"
                 name="active"
                 width="150px"
             >
@@ -62,8 +62,7 @@
             <fdp-button
                 (click)="_confirm()"
                 buttonType="emphasized"
-                i18n-label="@@PlatformSmartFilterBarSelectFiltersSubmitButton"
-                label="Go"
+                [label]="'platformSmartFilterBar.selectFiltersSubmitButtonLabel' | fdTranslate"
             ></fdp-button>
         </fd-dialog-footer-button>
 
@@ -71,9 +70,14 @@
             <fdp-button
                 (click)="_cancel()"
                 buttonType="transparent"
-                i18n-label="@@PlatformSmartFilterBarSelectFiltersCancelButton"
-                label="Cancel"
+                [label]="'platformSmartFilterBar.selectFiltersCancelButton' | fdTranslate"
             ></fdp-button>
         </fd-dialog-footer-button>
     </fd-dialog-footer>
 </fd-dialog>
+
+<ng-template #loadingTpl>
+    <div style="text-align: center; margin: 1rem">
+        <fd-busy-indicator [loading]="true"></fd-busy-indicator>
+    </div>
+</ng-template>

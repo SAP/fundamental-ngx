@@ -26,6 +26,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformDatePickerModule, PlatformInputModule, PlatformSwitchModule } from '@fundamental-ngx/platform/form';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 import { TableComponent } from './table.component';
@@ -141,6 +142,7 @@ const EXPORTABLE_DECLARATIONS = [
         DialogModule,
         PlatformSearchFieldModule,
         IconModule,
+        I18nModule,
         SelectModule,
         LayoutGridModule,
         PanelModule,

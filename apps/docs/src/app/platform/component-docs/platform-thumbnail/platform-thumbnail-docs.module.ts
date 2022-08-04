@@ -12,6 +12,7 @@ import { PlatformThumbnailHeaderComponent } from './platform-thumbnail-header/pl
 import { PlatformThumbnailBasicExampleComponent } from './platform-thumbnail-examples/platform-thumbnail-basic-example.component';
 import { PlatformThumbnailHorizontalExampleComponent } from './platform-thumbnail-examples/platform-thumbnail-horizontal-example.component';
 import { PlatformThumbnailVideoMediaExampleComponent } from './platform-thumbnail-examples/platform-thumbnail-video-media-example.component';
+import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
 
 const routes: Routes = [
     {
@@ -19,7 +20,8 @@ const routes: Routes = [
         component: PlatformThumbnailHeaderComponent,
         children: [
             { path: '', component: PlatformThumbnailDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.thumbnail } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.thumbnail } },
+            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformThumbnail') }
         ]
     }
 ];

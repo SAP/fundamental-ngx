@@ -27,14 +27,12 @@
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
-            i18n-label="@@platformTableFilterDialogConfirmBtn"
-            label="OK"
+            [label]="'platformTable.filterDialogConfirmBtnLabel' | fdTranslate"
             (click)="confirm()"
         >
         </fd-button-bar>
         <fd-button-bar
-            i18n-label="@@platformTableFilterDialogCancelBtn"
-            label="Cancel"
+            [label]="'platformTable.filterDialogCancelBtnLabel' | fdTranslate"
             fd-initial-focus
             (click)="cancel()"
         >

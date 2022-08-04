@@ -52,8 +52,7 @@
                 *ngIf="inputText && inputText.length > 0"
             >
                 <button
-                    i18n-title="@@platformSearchFieldClearButtonTitle"
-                    title="Clear"
+                    [title]="'platformSearchField.clearButtonTitle' | fdTranslate"
                     class="fdp-search-field__clear fd-input-group__button fd-button fd-button--transparent"
                     [attr.disabled]="disabled ? '' : null"
                     [class.fd-button--compact]="contentDensityObserver.isCompact"
@@ -69,8 +68,7 @@
                 *ngIf="isLoading || (!isLoading && !_isSearchDone)"
             >
                 <button
-                    i18n-title="@@platformSearchFieldSubmitButtonTitle"
-                    title="Search"
+                    [title]="'platformSearchField.submitButtonTitle' | fdTranslate"
                     class="fdp-search-field__submit fd-input-group__button fd-button fd-button--transparent"
                     [attr.id]="_submitId"
                     [attr.disabled]="disabled ? '' : null"
@@ -86,8 +84,7 @@
                 *ngIf="!disableRefresh && !isLoading && (_isRefresh || _isSearchDone)"
             >
                 <button
-                    i18n-title="@@platformSearchFieldSynchronizeButtonTitle"
-                    title="Synchronize"
+                    [title]="'platformSearchField.synchronizeButtonTitle' | fdTranslate"
                     class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent"
                     [attr.disabled]="disabled ? '' : null"
                     [class.fd-button--compact]="contentDensityObserver.isCompact"

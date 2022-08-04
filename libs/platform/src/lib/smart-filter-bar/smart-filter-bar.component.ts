@@ -99,21 +99,24 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
 
     /**
      * 'Show filters' button label.
+     * @deprecated use i18n capabilities instead
      */
     @Input()
-    showFiltersLabel = 'Show filters';
+    showFiltersLabel: string;
 
     /**
      * 'Hide filters' button label.
+     * @deprecated use i18n capabilities instead
      */
     @Input()
-    hideFiltersLabel = 'Hide filters';
+    hideFiltersLabel: string;
 
     /**
      * 'Filters' button label.
+     * @deprecated use i18n capabilities instead
      */
     @Input()
-    filtersLabel = 'Filters';
+    filtersLabel: string;
 
     /**
      * Whether smart filter bar background should be transparent.
@@ -128,36 +131,18 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
     }
 
     /**
+     * @deprecated use i18n capabilities instead
      * Condition strategy labels.
      */
     @Input()
-    defineStrategyLabels: SmartFilterBarStrategyLabels = {
-        contains: 'contains',
-        equalTo: 'equal to',
-        between: 'between',
-        beginsWith: 'starts with',
-        endsWith: 'ends with',
-        lessThan: 'less than',
-        lessThanOrEqualTo: 'less than or equal to',
-        greaterThan: 'greater than',
-        greaterThanOrEqualTo: 'greater than or equal to',
-        after: 'after',
-        onOrAfter: 'on or after',
-        before: 'before',
-        beforeOrOn: 'before or on'
-    };
+    defineStrategyLabels: SmartFilterBarStrategyLabels | undefined;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Filters visibility category labels.
      */
     @Input()
-    filtersVisibilityCategoryLabels: SmartFilterBarVisibilityCategoryLabels = {
-        all: 'All',
-        visible: 'Visible',
-        active: 'Active',
-        visibleAndActive: 'Visible and active',
-        mandatory: 'Mandatory'
-    };
+    filtersVisibilityCategoryLabels: SmartFilterBarVisibilityCategoryLabels | undefined;
 
     /**
      * Columns layout.

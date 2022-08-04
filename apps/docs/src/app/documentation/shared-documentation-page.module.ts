@@ -25,6 +25,7 @@ import { CodeSnippetComponent } from './core-helpers/code-snippet/code-snippet.c
 import { DatetimeImportantComponent } from './common-components/datetime-important/datetime-important.component';
 import { DeprecatedAlertsComponent } from './core-helpers/deprecated-alerts/deprecated-alerts.component';
 import { DocPageComponent } from './core-helpers/doc-page/doc-page.component';
+import { I18nDocsModule } from './core-helpers/i18n-docs/i18n-docs.module';
 
 /** THIS MODULE PROVIDES BASIC SET OF DEPENDENCIES NEEDED TO CREATE COMPONENT EXAMPLE PAGE */
 @NgModule({
@@ -46,7 +47,15 @@ import { DocPageComponent } from './core-helpers/doc-page/doc-page.component';
         DeprecatedAlertsComponent,
         DocPageComponent
     ],
-    imports: [FormsModule, CommonModule, RouterModule, SchemaModule, sharedCoreModules, MarkdownModule.forChild()],
+    imports: [
+        FormsModule,
+        CommonModule,
+        RouterModule,
+        SchemaModule,
+        sharedCoreModules,
+        I18nDocsModule,
+        MarkdownModule.forChild()
+    ],
     providers: [CopyService, ApiDocsService],
     exports: [
         FormsModule,
@@ -69,7 +78,8 @@ import { DocPageComponent } from './core-helpers/doc-page/doc-page.component';
         sharedCoreModules,
         DatetimeImportantComponent,
         DeprecatedAlertsComponent,
-        DocPageComponent
+        DocPageComponent,
+        I18nDocsModule
     ]
 })
 export class SharedDocumentationPageModule {}

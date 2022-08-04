@@ -8,9 +8,12 @@ import { ControlValueAccessor } from '@angular/forms';
     encapsulation: ViewEncapsulation.None
 })
 export class UploadCollectionFormItemComponent implements ControlValueAccessor {
-    /** Value for the input's placeholder. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Value for the input's placeholder.
+     */
     @Input()
-    placeholder = 'Filename';
+    placeholder: string;
 
     /** @hidden */
     @Input()

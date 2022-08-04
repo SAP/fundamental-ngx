@@ -10,6 +10,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 
 import { SearchFieldComponent, SearchFieldSuggestionDirective, SuggestionMatchesPipe } from './search-field.component';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
@@ -22,7 +23,8 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
         PipeModule,
         PlatformMenuModule,
         PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
+        ContentDensityModule,
+        I18nModule
     ],
     exports: [
         SearchFieldComponent,
