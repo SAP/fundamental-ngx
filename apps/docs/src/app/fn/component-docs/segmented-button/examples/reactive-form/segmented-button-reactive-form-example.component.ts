@@ -10,7 +10,7 @@ import { startWith } from 'rxjs/operators';
 })
 export class SegmentedButtonReactiveFormExampleComponent {
     segmentControl = new FormControl('value2');
-    value$: Observable<string>;
+    value$: Observable<string | null>;
 
     constructor() {
         this.value$ = this.segmentControl.valueChanges.pipe(startWith(this.segmentControl.value));
