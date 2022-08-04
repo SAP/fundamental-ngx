@@ -91,9 +91,11 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     @Output()
     selectedTabChange = new EventEmitter<TabPanelComponent>();
 
+    /** Event emitted when visible items count has been changed. */
     @Output()
     visibleItemsCount = new EventEmitter<number>();
 
+    /** Event emitted when hidden items count has been changed. */
     @Output()
     hiddenItemsCount = new EventEmitter<number>();
 

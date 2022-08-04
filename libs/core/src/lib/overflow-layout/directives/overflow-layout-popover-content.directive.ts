@@ -1,7 +1,8 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
-import { Directive, HostBinding, HostListener, Inject, Input } from '@angular/core';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { Directive, HostBinding, HostListener, Inject, Input, Optional } from '@angular/core';
+import { DestroyedService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { takeUntil } from 'rxjs';
 import { OverflowContainer } from '../interfaces/overflow-container.interface';
 import { OverflowLayoutFocusableItem } from '../interfaces/overflow-focusable-item.interface';
 import { OverflowPopoverContent } from '../interfaces/overflow-popover-content.interface';
@@ -13,7 +14,8 @@ import { FD_OVERFLOW_CONTAINER } from '../tokens/overflow-container.token';
  * Used to apply keyboard navigation through the items.
  */
 @Directive({
-    selector: '[fdOverflowLayoutPopoverContent]'
+    selector: '[fdOverflowLayoutPopoverContent]',
+    providers: [DestroyedService]
 })
 export class OverflowLayoutPopoverContentDirective implements OverflowPopoverContent {
     /**
@@ -30,7 +32,7 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
                     .map((item) => item.overflowItem.focusableItem)
             )
                 .withWrap()
-                .withHorizontalOrientation('ltr');
+                .withHorizontalOrientation(this._dir);
         });
     }
 
@@ -44,9 +46,22 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
     @HostBinding('class')
     private readonly _initialClass = 'fd-overflow-layout__popover-container';
 
+    private _dir: 'ltr' | 'rtl' = 'ltr';
+
     /** @hidden */
-    constructor(@Inject(FD_OVERFLOW_CONTAINER) private _overflowContainer: OverflowContainer) {
+    constructor(
+        @Inject(FD_OVERFLOW_CONTAINER) private _overflowContainer: OverflowContainer,
+        @Optional() private _rtl: RtlService,
+        private readonly _onDestroy$: DestroyedService
+    ) {
         this._overflowContainer?.registerPopoverContent(this);
+
+        this._rtl?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((rtl) => {
+            this._dir = rtl ? 'rtl' : 'ltr';
+            if (this._keyboardEventsManager) {
+                this._keyboardEventsManager = this._keyboardEventsManager.withHorizontalOrientation(this._dir);
+            }
+        });
     }
 
     /** @hidden */
