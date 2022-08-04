@@ -2,8 +2,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FeedListItemComponent } from './feed-list-item.component';
-import { FeedListItemModule } from './../../feed-list-item.module';
-import { PipeModule, TruncateModule } from '../../../utils/public_api';
+import { PipeModule } from '../../../utils/public_api';
 import { LinkModule } from '../../../link/public_api';
 
 const componentClassPrefix = 'fd-feed-list__item';
@@ -23,8 +22,8 @@ describe('FeedListItemComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [FormattedTextTestComponent],
-            imports: [PipeModule, TruncateModule, LinkModule, FeedListItemModule]
+            declarations: [FeedListItemComponent, FormattedTextTestComponent],
+            imports: [PipeModule, LinkModule]
         })
             .overrideComponent(FeedListItemComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }

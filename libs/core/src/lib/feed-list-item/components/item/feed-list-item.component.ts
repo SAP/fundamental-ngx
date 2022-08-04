@@ -7,8 +7,7 @@ import {
     SimpleChanges,
     ElementRef,
     OnInit,
-    OnChanges,
-    ChangeDetectorRef
+    OnChanges
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
@@ -108,10 +107,12 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     hasMore = false;
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(private readonly _elementRef: ElementRef) {}
 
     setHasMore(): void {
-        this.hasMore = this.text.length > this.maxChars;
+        if (this.text) {
+            this.hasMore = this.text.length > this.maxChars;
+        }
     }
 
     setDefaultMaxChars(): void {
