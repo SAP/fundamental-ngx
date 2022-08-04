@@ -40,7 +40,11 @@ export class ActionSheetControlComponent {
 
     /** @hidden */
     _focus(): void {
-        this._elementRef.nativeElement.firstChild.focus();
+        const elemChild = this._elementRef.nativeElement.firstChild;
+        if (elemChild && elemChild.getAttribute('tabindex') !== '-1') {
+            elemChild.tabIndex = '0';
+        }
+        elemChild && elemChild.focus();
     }
 
     /** @hidden */
