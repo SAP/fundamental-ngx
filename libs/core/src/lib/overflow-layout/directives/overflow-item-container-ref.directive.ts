@@ -28,7 +28,7 @@ export class OverflowItemContainerRefDirective {
         if (value && !this._detached) {
             this._viewRef = this._viewContainerRef.detach()!;
             this._detached = true;
-        } else if (!value && this._viewRef && this._detached) {
+        } else if (!value && this._viewRef && !this._viewRef.destroyed && this._detached) {
             this._viewRef = this._viewContainerRef.insert(this._viewRef);
             this._detached = false;
         }

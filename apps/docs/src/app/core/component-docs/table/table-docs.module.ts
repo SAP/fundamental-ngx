@@ -27,7 +27,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { TableModule } from '@fundamental-ngx/core/table';
+import {
+    DeprecatedTableCompactDirective,
+    DeprecatedTableCondensedDirective,
+    TableModule
+} from '@fundamental-ngx/core/table';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
@@ -35,6 +39,7 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -85,6 +90,11 @@ const routes: Routes = [
         TableCustomDialogComponent,
         TableFocusableExampleComponent,
         TableNavigatableRowExampleComponent
+    ],
+    entryComponents: [TableCustomDialogComponent],
+    providers: [
+        moduleDeprecationsProvider(DeprecatedTableCompactDirective),
+        moduleDeprecationsProvider(DeprecatedTableCondensedDirective)
     ]
 })
 export class TableDocsModule {}

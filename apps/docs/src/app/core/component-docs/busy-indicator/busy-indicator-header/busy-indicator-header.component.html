@@ -1,22 +1,23 @@
-<header>Busy Indicator</header>
-<description>
-    The busy indicator informs the user about an ongoing operation. Try to avoid showing multiple busy indicators at
-    once. Use the busy indicator if:
-    <ul>
-        <li>The ongoing operation covers only part of a screen that has multiple controls</li>
-        <li>You need to display additional information or the user needs to be able to cancel the operation</li>
-    </ul>
+<fd-doc-page>
+    <header>Busy Indicator</header>
+    <description>
+        The busy indicator informs the user about an ongoing operation. Try to avoid showing multiple busy indicators at
+        once. Use the busy indicator if:
+        <ul>
+            <li>The ongoing operation covers only part of a screen that has multiple controls</li>
+            <li>You need to display additional information or the user needs to be able to cancel the operation</li>
+        </ul>
 
-    Do not use the busy indicator if:
-    <ul>
-        <li>The operation takes less than one second</li>
-        <li>
-            You need to block the screen because the user is not supposed to start another activity. In this case, use
-            the busy dialog
-        </li>
-    </ul>
-</description>
-<import module="BusyIndicatorModule" subPackage="busy-indicator"></import>
+        Do not use the busy indicator if:
+        <ul>
+            <li>The operation takes less than one second</li>
+            <li>
+                You need to block the screen because the user is not supposed to start another activity. In this case,
+                use the busy dialog
+            </li>
+        </ul>
+    </description>
+    <import module="BusyIndicatorModule" subPackage="busy-indicator"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

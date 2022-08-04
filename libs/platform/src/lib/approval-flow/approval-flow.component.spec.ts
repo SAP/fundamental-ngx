@@ -146,26 +146,32 @@ describe('ApprovalFlowComponent', () => {
         expect(component._onNodeKeyDown).toHaveBeenCalled();
     });
 
-    it('should increment step count after nextSlide call', () => {
-        spyOn(component, 'nextSlide').and.callThrough();
-
-        const prevCount = component._carouselStep;
+    it('should increment step count after nextSlide call', async () => {
+        const prevCountRight = component._carouselStepsRight;
 
         component.nextSlide();
+        // wait until smooth scrolling is done
+        await new Promise((r) => setTimeout(r, 1000));
 
-        expect(prevCount < component._carouselStep).toBeTruthy();
+        expect(prevCountRight > component._carouselStepsRight).toBeTruthy();
     });
 
-    it('should decrement step count after previousSlide call', () => {
-        spyOn(component, 'previousSlide').and.callThrough();
+    it('should decrement step count after previousSlide call', async () => {
+        expect(component._carouselStepsLeft).toBe(0);
 
-        component._carouselStep = 1;
+        // scroll as far to the right as we can
+        component._setScrollPosition(10000);
+        // wait until smooth scrolling is done
+        await new Promise((r) => setTimeout(r, 1000));
 
-        const prevCount = component._carouselStep;
+        const prevCountLeft = component._carouselStepsLeft;
+        expect(prevCountLeft).not.toBe(0);
 
-        component.previousSlide();
+        component.nextSlide(-1);
+        // wait until smooth scrolling is done
+        await new Promise((r) => setTimeout(r, 1000));
 
-        expect(prevCount > component._carouselStep).toBeTruthy();
+        expect(prevCountLeft > component._carouselStepsLeft).toBeTruthy();
     });
 
     it('should open adding node dialog for the empty graph', () => {

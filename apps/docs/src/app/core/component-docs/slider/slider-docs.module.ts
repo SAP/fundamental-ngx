@@ -10,7 +10,9 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 import { COMPONENTS } from './examples';
 import { SliderDocsComponent } from './slider-docs.component';
 import { SliderHeaderComponent } from './slider-header/slider-header.component';
-import { SliderModule } from '@fundamental-ngx/core/slider';
+import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
+import { DeprecatedSliderCozyDirective, SliderModule } from '@fundamental-ngx/core/slider';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -18,7 +20,8 @@ const routes: Routes = [
         component: SliderHeaderComponent,
         children: [
             { path: '', component: SliderDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.slider } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.slider } },
+            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('coreSlider') }
         ]
     }
 ];
@@ -32,6 +35,7 @@ const routes: Routes = [
         FormsModule
     ],
     exports: [RouterModule],
-    declarations: [SliderHeaderComponent, SliderDocsComponent, ...COMPONENTS]
+    declarations: [SliderHeaderComponent, SliderDocsComponent, ...COMPONENTS],
+    providers: [moduleDeprecationsProvider(DeprecatedSliderCozyDirective)]
 })
 export class SliderDocsModule {}

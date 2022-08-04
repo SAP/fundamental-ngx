@@ -21,7 +21,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
                     fd-initial-focus
                     fdType="emphasized"
                     label="Close"
-                    [compact]="true"
+                    fdCompact
                     (click)="dialogRef.close()"
                     ariaLabel="Close Emphasized"
                 >

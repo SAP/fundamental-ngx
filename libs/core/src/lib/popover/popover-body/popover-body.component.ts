@@ -5,7 +5,6 @@ import {
     ContentChild,
     ElementRef,
     HostListener,
-    Optional,
     Renderer2,
     TemplateRef,
     ViewChild,
@@ -25,8 +24,9 @@ import {
     PopoverFlippedXDirection,
     PopoverPosition
 } from '@fundamental-ngx/core/shared';
-import { ContentDensityService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { NotificationGroupComponent } from '@fundamental-ngx/core/notification';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -42,7 +42,8 @@ import { NotificationGroupComponent } from '@fundamental-ngx/core/notification';
     templateUrl: './popover-body.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls: ['./popover-body.component.scss']
+    styleUrls: ['./popover-body.component.scss'],
+    providers: [contentDensityObserverProviders()]
 })
 export class PopoverBodyComponent {
     /** @hidden */
@@ -95,11 +96,6 @@ export class PopoverBodyComponent {
     /** Close event from popover body */
     onClose = new Subject<void>();
 
-    /** @hidden */
-    get _isCompact(): boolean {
-        return this._contentDensityService?.contentDensity.value === 'compact';
-    }
-
     /** Handler escape keydown */
     @HostListener('keyup', ['$event'])
     bodyKeyupHandler(event: KeyboardEvent): void {
@@ -114,7 +110,7 @@ export class PopoverBodyComponent {
         readonly _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private _renderer2: Renderer2,
-        @Optional() private _contentDensityService: ContentDensityService
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** @hidden */

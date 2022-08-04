@@ -6,7 +6,7 @@ import { RtlService } from '../utils/services/rtl.service';
 
 @Component({
     template: `
-        <fd-panel #panelRef [compact]="isCompact" [fixed]="isFixed">
+        <fd-panel #panelRef [fdCompact]="isCompact" [fixed]="isFixed">
             <h5 fd-panel-title>Panel Header</h5>
             <div fd-panel-content>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut laoreet lorem.

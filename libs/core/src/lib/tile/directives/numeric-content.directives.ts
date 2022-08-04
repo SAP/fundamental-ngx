@@ -2,8 +2,8 @@ import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@a
 import { applyCssClass } from '@fundamental-ngx/core/utils';
 import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
-type NumericContentState = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
-type NumericContentSize = 's' | 'm' | 'l';
+export type NumericContentState = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
+export type NumericContentSize = 's' | 'm' | 'l';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector

@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ButtonComponent, ButtonModule } from '@fundamental-ngx/core/button';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-test-component',
@@ -19,8 +18,7 @@ describe('ButtonComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ButtonModule],
-            declarations: [TestComponent],
-            providers: [ContentDensityService]
+            declarations: [TestComponent]
         });
     }));
 
@@ -37,7 +35,6 @@ describe('ButtonComponent', () => {
     });
 
     it('should add appropriate classes', () => {
-        componentInstance.compact = true;
         componentInstance.fdType = 'standard';
         componentInstance.fdMenu = true;
         componentInstance.buildComponentCssClass();
@@ -45,13 +42,11 @@ describe('ButtonComponent', () => {
         const cssClass = componentInstance.buildComponentCssClass().join(' ');
         expect(cssClass).toContain('standard');
         expect(cssClass).toContain('fd-button--menu');
-        expect(cssClass).toContain('compact');
     });
 
     it('should handle content density when compact input is not provided', () => {
         spyOn(componentInstance, 'buildComponentCssClass').and.callThrough();
         componentInstance.ngOnInit();
-        expect(componentInstance.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
         expect(componentInstance.buildComponentCssClass).toHaveBeenCalled();
     });
 });

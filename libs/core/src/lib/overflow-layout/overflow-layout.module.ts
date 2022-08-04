@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { OverflowLayoutComponent } from './overflow-layout.component';
 import { OverflowItemRefDirective } from './directives/overflow-item-ref.directive';
 import { OverflowExpandDirective } from './directives/overflow-expand.directive';
@@ -11,7 +12,7 @@ import { OverflowLayoutPopoverContentDirective } from './directives/overflow-lay
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 
 @NgModule({
-    imports: [CommonModule, PopoverModule, ButtonModule],
+    imports: [CommonModule, PopoverModule, ButtonModule, I18nModule],
     exports: [
         OverflowLayoutComponent,
         OverflowItemRefDirective,

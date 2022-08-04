@@ -1,0 +1,16 @@
+<fieldset>
+    <legend>Notifications position</legend>
+    <div *ngFor="let option of positionOptions; let i = index">
+        <fn-radio-button
+            [isGroup]="true"
+            [value]="option.position"
+            [id]="'position-' + i"
+            name="position"
+            [(ngModel)]="currentPosition"
+            (ngModelChange)="changePosition($event)"
+            >{{ option.title }}</fn-radio-button
+        >
+    </div>
+</fieldset>
+<br />
+<button fn-button emphasized (click)="openFromString()" label="Open notification from string"></button>

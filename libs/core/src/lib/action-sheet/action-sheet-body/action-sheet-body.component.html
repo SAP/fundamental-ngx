@@ -1,10 +1,11 @@
 <ul
+    #actionSheetElement
     [attr.id]="actionSheetBodyId"
     [attr.aria-label]="ariaLabel"
     [attr.aria-labelledby]="ariaLabelledby"
     class="fd-action-sheet"
-    [class.fd-action-sheet--compact]="compact"
     [class.fd-action-sheet--mobile]="mobile"
+    [class.fd-action-sheet--compact]="_contentDensityObserver.isCompact$ | async"
     role="menu"
 >
     <ng-content select="[fd-action-sheet-item]"></ng-content>

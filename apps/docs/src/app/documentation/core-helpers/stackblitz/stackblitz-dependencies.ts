@@ -1,5 +1,4 @@
 import packageInfo from '../../../../../../../package.json';
-import packageLockInfo from '../../../../../../../package-lock.json';
 
 export class StackblitzDependencies {
     private static _libDependencies: string[] = ['@fundamental-ngx/platform', '@fundamental-ngx/core'];
@@ -12,13 +11,15 @@ export class StackblitzDependencies {
         '@angular/compiler-cli',
         '@angular/common',
         '@angular/forms',
-        '@angular/localize',
         '@angular/router',
         '@angular/platform-browser',
-        '@angular/platform-browser-dynamic'
+        '@angular/platform-browser-dynamic',
+        '@angular-devkit/build-angular',
+        '@angular/cli'
     ];
 
     private static _dependencies: string[] = [
+        'rxjs',
         '@sap-theming/theming-base-content',
         'core-js',
         'focus-trap',
@@ -27,7 +28,6 @@ export class StackblitzDependencies {
         'moment',
         'tslib',
         'typescript',
-        'focus-trap',
         'fast-deep-equal',
         'lodash-es'
     ];
@@ -38,10 +38,12 @@ export class StackblitzDependencies {
         this._libDependencies.forEach((libDep) => (_dependencies[libDep] = packageInfo.version));
 
         [...this._dependencies, ...this._ngDependencies].forEach((dep) => {
-            if (packageLockInfo.dependencies && packageLockInfo.dependencies[dep]) {
-                _dependencies[dep] = packageLockInfo.dependencies[dep].version;
+            if (packageInfo.dependencies && packageInfo.dependencies[dep]) {
+                _dependencies[dep] = packageInfo.dependencies[dep];
+            } else if (packageInfo.devDependencies && packageInfo.devDependencies[dep]) {
+                _dependencies[dep] = packageInfo.devDependencies[dep];
             } else {
-                throw new Error('Dependency ' + dep + ' not found in package-lock.json');
+                throw new Error('Dependency ' + dep + ' not found in package.json');
             }
         });
 

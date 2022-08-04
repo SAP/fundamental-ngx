@@ -1,10 +1,6 @@
-<ul fd-list [compact]="contentDensity | isCompactDensity" [selection]="true">
+<ul fd-list [selection]="true">
     <li fd-list-item *ngFor="let option of _selectableOptions" [selected]="option.selected">
-        <fd-checkbox
-            [ngModel]="option.selected"
-            (ngModelChange)="_onSelectChange(option, $event)"
-            [compact]="contentDensity | isCompactDensity"
-        ></fd-checkbox>
+        <fd-checkbox [ngModel]="option.selected" (ngModelChange)="_onSelectChange(option, $event)"></fd-checkbox>
         <span fd-list-title>{{ option.label }}</span>
     </li>
 </ul>

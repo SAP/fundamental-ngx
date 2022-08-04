@@ -8,19 +8,18 @@ import {
     Input,
     isDevMode,
     OnDestroy,
-    OnInit,
-    Optional,
     Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
-import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let switchUniqueId = 0;
+let warnedAboutAriaLabeledBy = false;
 
 /**
  * The Switch component is used to activate or deactivate an element.
@@ -36,7 +35,8 @@ let switchUniqueId = 0;
             useExisting: forwardRef(() => SwitchComponent),
             multi: true
         },
-        registerFormItemControl(SwitchComponent)
+        registerFormItemControl(SwitchComponent),
+        contentDensityObserverProviders()
     ],
     host: {
         class: 'fd-form__item fd-form__item--check fd-switch-custom',
@@ -45,7 +45,7 @@ let switchUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy, FormItemControl {
+export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormItemControl {
     /** @hidden */
     @ViewChild('switchInput')
     inputElement: ElementRef<HTMLInputElement>;
@@ -82,10 +82,6 @@ export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy,
     @Input()
     semantic = false;
 
-    /** Whether the switch is compact */
-    @Input()
-    compact?: boolean;
-
     /** aria-label attribute of the inner input element. */
     @Input()
     ariaLabel: Nullable<string>;
@@ -93,8 +89,9 @@ export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy,
     /** @deprecated renamed to "ariaLabelledBy" */
     @Input()
     set ariaLabelledby(value: Nullable<string>) {
-        if (isDevMode()) {
-            console.warn('"ariaLabelledby" is deprecated. Use "ariaLabelledBy" instead');
+        if (isDevMode() && !warnedAboutAriaLabeledBy) {
+            console.warn('fd-switch[ariaLabelledby] is deprecated. Use fd-switch[ariaLabelledBy] instead');
+            warnedAboutAriaLabeledBy = true;
         }
         this.ariaLabelledBy = value;
     }
@@ -103,13 +100,19 @@ export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy,
     @Input()
     ariaLabelledBy: Nullable<string>;
 
-    /** Semantic Label Accept set for Accessibility */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Semantic Label Accept set for Accessibility
+     */
     @Input()
-    semanticAcceptLabel = 'Accept';
+    semanticAcceptLabel: string;
 
-    /** Semantic Label Decline set for Accessibility */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Semantic Label Decline set for Accessibility
+     */
     @Input()
-    semanticDeclineLabel = 'Decline';
+    semanticDeclineLabel: string;
 
     /**
      * Event fired when the state of the switch changes.
@@ -129,20 +132,8 @@ export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
     constructor(
         private readonly _changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._changeDetectorRef.markForCheck();
-                })
-            );
-        }
-    }
 
     /** @hidden */
     ngOnDestroy(): void {

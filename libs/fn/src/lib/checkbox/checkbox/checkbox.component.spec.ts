@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import { CheckboxComponent } from './checkbox.component';
 
@@ -8,7 +9,8 @@ describe('CheckboxComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [CheckboxComponent]
+            declarations: [CheckboxComponent],
+            imports: [FormsModule]
         }).compileComponents();
     });
 

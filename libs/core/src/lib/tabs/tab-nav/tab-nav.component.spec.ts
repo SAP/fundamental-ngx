@@ -3,12 +3,11 @@ import { Component, ViewChild } from '@angular/core';
 import { TabsModule } from '../tabs.module';
 import { TabNavComponent } from './tab-nav.component';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/services/content-density.service';
 
 @Component({
     selector: 'fd-test-tabs',
     template: `
-        <nav fd-tab-nav>
+        <nav fd-tab-nav [fdCompact]="compact">
             <div fd-tab-item>
                 <a fd-tab-link [active]="true"> Link </a>
             </div>
@@ -27,6 +26,7 @@ class TestNavWrapperComponent {
     @ViewChild('fdTabLink', { read: TabLinkDirective })
     tabLink: TabLinkDirective;
 
+    compact = false;
     showLastTab = true;
 }
 
@@ -38,7 +38,7 @@ describe('TabNavDirective', () => {
         TestBed.configureTestingModule({
             declarations: [TestNavWrapperComponent],
             imports: [TabsModule],
-            providers: [ContentDensityService]
+            providers: []
         }).compileComponents();
     }));
 
@@ -52,11 +52,13 @@ describe('TabNavDirective', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should handle content density when compact input is not provided', () => {
-        spyOn(component, 'buildComponentCssClass');
-        component.ngOnInit();
-        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
-        expect(component.buildComponentCssClass).toHaveBeenCalled();
+    it('should consume content density', () => {
+        fixture.componentInstance.compact = true;
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.fd-tabs--compact')).toBeTruthy();
+        fixture.componentInstance.compact = false;
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.fd-tabs--compact')).toBeFalsy();
     });
 
     it('should handle ngAfterContentInit', () => {

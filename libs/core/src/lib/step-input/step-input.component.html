@@ -5,7 +5,7 @@
         [class.is-focus]="focused"
         [class.is-readonly]="readonly"
         [class.is-disabled]="disabled"
-        [class.fd-step-input--compact]="compact"
+        [class.fd-step-input--compact]="_contentDensityObserver.isCompact"
         [class.fd-step-input--without-buttons]="!hasStepButtons"
     >
         <button
@@ -16,12 +16,11 @@
             class="fd-step-input__button"
             tabindex="-1"
             type="button"
-            [compact]="compact"
             [disabled]="!canDecrement"
-            [title]="decrementButtonTitle"
+            [title]="decrementButtonTitle || ('coreStepInput.decrementButtonTitle' | fdTranslate)"
             [glyph]="decrementButtonIcon"
             (click)="onTouched()"
-            [attr.aria-label]="decrementButtonTitle"
+            [attr.aria-label]="decrementButtonTitle || ('coreStepInput.decrementButtonTitle' | fdTranslate)"
             [attr.aria-controls]="inputId"
         ></button>
         <input
@@ -32,7 +31,7 @@
             [disabled]="disabled"
             [readOnly]="readonly"
             [placeholder]="placeholder"
-            [class.fd-input--compact]="compact"
+            [class.fd-input--compact]="_contentDensityObserver.isCompact"
             [attr.aria-label]="ariaLabel"
             [attr.aria-labelledby]="ariaLabelledBy"
             [attr.aria-valuenow]="value"
@@ -40,7 +39,7 @@
             [attr.aria-valuemin]="min"
             [attr.aria-describedby]="canDisplayLabel ? inputId + '__description' : ''"
             [attr.aria-required]="required"
-            [attr.aria-roledescription]="ariaRoleDescription"
+            [attr.aria-roledescription]="ariaRoleDescription || ('coreStepInput.ariaRoleDescription' | fdTranslate)"
             (focusin)="handleFocusIn()"
             (focusout)="handleFocusOut()"
             (wheel)="handleScroll($event)"
@@ -60,12 +59,11 @@
             class="fd-step-input__button"
             tabindex="-1"
             type="button"
-            [compact]="compact"
             [disabled]="!canIncrement"
-            [title]="incrementButtonTitle"
+            [title]="incrementButtonTitle || ('coreStepInput.incrementButtonTitle' | fdTranslate)"
             [glyph]="incrementButtonIcon"
             (click)="onTouched()"
-            [attr.aria-label]="incrementButtonTitle"
+            [attr.aria-label]="incrementButtonTitle || ('coreStepInput.incrementButtonTitle' | fdTranslate)"
             [attr.aria-controls]="inputId"
         ></button>
     </div>

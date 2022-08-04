@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IconTabBarComponent } from './icon-tab-bar.component';
 import { TabConfig } from './interfaces/tab-config.interface';
 import { TabType } from './types';
-import { ContentDensityService, OverflowListModule, RtlService } from '@fundamental-ngx/core/utils';
+import { OverflowListModule, RtlService } from '@fundamental-ngx/core/utils';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { IconTabBarTextTypeComponent } from './components/icon-tab-bar-text-type/icon-tab-bar-text-type.component';
@@ -59,7 +59,7 @@ describe('IconTabBarComponent', () => {
                 IconBarDndItemDirective,
                 IconBarDndContainerDirective
             ],
-            providers: [ContentDensityService, RtlService],
+            providers: [RtlService],
             imports: [IconModule, PopoverModule, OverflowListModule, DragDropModule]
         }).compileComponents();
     });

@@ -8,7 +8,6 @@ export class TextareaPo extends BaseComponentPo {
     textareaAutogrowExample = 'fdp-platform-textarea-autogrow-example ';
     textareaCounterExample = 'fdp-platform-textarea-counter-example ';
     textareaCounterTemplateExample = 'fdp-platform-textarea-counter-template-example ';
-    textareaI18nExample = 'fdp-platform-textarea-i18n-example ';
 
     basicTextArea = '#basicTextarea';
     basicTextAreaLabel = '#fdp-form-label-basicTextarea';

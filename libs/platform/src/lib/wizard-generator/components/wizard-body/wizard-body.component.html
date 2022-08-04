@@ -39,7 +39,7 @@
                             <ng-container *ngIf="!isLastStep">
                                 <ng-template #defaultGoNextButtonTemplate>
                                     <fdp-button
-                                        [contentDensity]="navigationButtonLabels.goNext.contentDensity"
+                                        [fdContentDensity]="navigationButtonLabels.goNext.contentDensity"
                                         [buttonType]="navigationButtonLabels.goNext.type"
                                         [label]="navigationButtonLabels.goNext.label"
                                         (click)="goNext.emit()"
@@ -47,7 +47,7 @@
                                 </ng-template>
                                 <ng-template #defaultReviewButtonTemplate>
                                     <fdp-button
-                                        [contentDensity]="navigationButtonLabels.review.contentDensity"
+                                        [fdContentDensity]="navigationButtonLabels.review.contentDensity"
                                         [buttonType]="navigationButtonLabels.review.type"
                                         [label]="navigationButtonLabels.review.label"
                                         (click)="goNext.emit()"
@@ -75,7 +75,7 @@
                             <ng-container *ngIf="isLastStep">
                                 <ng-template #defaultFinishButtonTemplate>
                                     <fdp-button
-                                        [contentDensity]="navigationButtonLabels.finish.contentDensity"
+                                        [fdContentDensity]="navigationButtonLabels.finish.contentDensity"
                                         [buttonType]="navigationButtonLabels.finish.type"
                                         [label]="navigationButtonLabels.finish.label"
                                         (click)="finish.emit()"

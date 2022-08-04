@@ -26,7 +26,7 @@
                     <button
                         fd-toolbar-item
                         fd-button
-                        [compact]="true"
+                        fdCompact
                         fdType="positive"
                         (click)="closePage()"
                         label="Accept"
@@ -35,7 +35,7 @@
                     <button
                         fd-toolbar-item
                         fd-button
-                        [compact]="true"
+                        fdCompact
                         fdType="negative"
                         (click)="closePage()"
                         label="Reject"
@@ -73,7 +73,7 @@
                 repellendus esse, facere autem optio consequatur nobis?</span
             >
         </fd-dynamic-page-subheader>
-        <fd-dynamic-page-content class="fd-docs-center-align">
+        <fd-dynamic-page-content class="fd-docs-center-align" cdkScrollable>
             <fd-resizable-card-layout [layoutConfig]="layoutConfig" (stepChange)="onStepChange($event)">
                 <fd-resizable-card-item>
                     <fd-card>

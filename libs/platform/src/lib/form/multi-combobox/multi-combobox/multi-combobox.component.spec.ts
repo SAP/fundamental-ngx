@@ -5,13 +5,14 @@ import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/t
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { ContentDensity, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { DATA_PROVIDERS, DataProvider, isSelectableOptionItem } from '@fundamental-ngx/platform/shared';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { MultiComboboxComponent } from './multi-combobox.component';
 import { MultiComboboxSelectionChangeEvent } from '../commons/base-multi-combobox';
 import { PlatformMultiComboboxModule } from '../multi-combobox.module';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-multi-combobox-test',
@@ -26,7 +27,7 @@ import { PlatformMultiComboboxModule } from '../multi-combobox.module';
                     [groupKey]="groupKey"
                     [showSecondaryText]="showSecondaryText"
                     [secondaryKey]="secondaryKey"
-                    [contentDensity]="contentDensity"
+                    [fdContentDensity]="contentDensity"
                     [dataSource]="dataSource"
                     [maxHeight]="maxHeight"
                     [selectedItems]="selectedItems"
@@ -52,7 +53,7 @@ class MultiComboboxStandardComponent {
     selectedItems = null;
     maxHeight: string;
     autoResize = false;
-    contentDensity: ContentDensity = 'cozy';
+    contentDensity: ContentDensityMode = ContentDensityMode.COZY;
     group = false;
     groupKey = 'type';
     showSecondaryText = false;
@@ -93,7 +94,7 @@ describe('MultiComboboxComponent default values', () => {
     });
 
     it('should be able to change the contentDensity to "compact"', () => {
-        component.contentDensity = 'compact';
+        component.contentDensity = ContentDensityMode.COMPACT;
 
         multiCombobox.onPrimaryButtonClick(multiCombobox.isOpen);
         fixture.detectChanges();

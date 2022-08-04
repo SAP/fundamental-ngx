@@ -1,5 +1,6 @@
 import { StandardListItemPo } from '../pages/standard-list-item.po';
 import {
+    checkSelectorExists,
     click,
     getAttributeByName,
     getElementArrayLength,
@@ -64,7 +65,7 @@ describe('Standard List Item test suite:', () => {
 
     describe('Standard List Item (ByLine)- Border Less examples:', () => {
         it('should check border and density', () => {
-            expect(getAttributeByName(sNoBorderByLineAttr, 'contentdensity', 1)).toBe('compact');
+            checkSelectorExists(`${sNoBorderByLineAttr}[fdCompact] > .fd-list--compact`);
         });
 
         it('should check interaction and content', () => {

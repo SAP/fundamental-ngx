@@ -4,13 +4,14 @@ import { Component, Input, QueryList, ViewChild, ViewChildren } from '@angular/c
 import { By } from '@angular/platform-browser';
 import { ENTER } from '@angular/cdk/keycodes';
 
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonModule, ButtonType } from '@fundamental-ngx/core/button';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { createKeyboardEvent } from '@fundamental-ngx/platform/shared';
-import { PlatformMenuModule, MenuItemComponent } from '@fundamental-ngx/platform/menu';
+import { MenuItemComponent, PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { MenuButtonComponent } from './menu-button.component';
 import { PlatformMenuButtonModule } from './menu-button.module';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 function mouseClickOnElement(el: Element): void {
     const event: MouseEvent = new MouseEvent('click', {
@@ -50,20 +51,20 @@ describe('MenuButtonComponent', () => {
 @Component({
     selector: 'fdp-disabled-menu-button',
     template: `
-        <fdp-menu-button [contentDensity]="size" [disabled]="disabled" [type]="type">
+        <fdp-menu-button [fdContentDensity]="size" [disabled]="disabled" [type]="type">
             Standard Button with long text
         </fdp-menu-button>
     `
 })
 class DisabledMenuButtonComponent {
     @Input()
-    size = 'compact';
+    size: ContentDensityMode = ContentDensityMode.COMPACT;
 
     @Input()
     disabled = true;
 
     @Input()
-    type = 'standard';
+    type: ButtonType = 'standard';
 
     constructor() {}
 }
@@ -108,7 +109,7 @@ describe('Menu Button Disabled test and Type, size test', () => {
     selector: 'fdp-menu-button-click',
     template: `
         <fdp-menu-button
-            [contentDensity]="size"
+            [fdContentDensity]="size"
             [disabled]="disabled"
             [type]="type"
             [fdpMenuTriggerFor]="basicMenu"
@@ -126,13 +127,13 @@ describe('Menu Button Disabled test and Type, size test', () => {
 })
 class TestMenuButtonComponent {
     @Input()
-    size = 'compact';
+    size: ContentDensityMode = ContentDensityMode.COMPACT;
 
     @Input()
     disabled = false;
 
     @Input()
-    type = 'standard';
+    type: ButtonType = 'standard';
 
     currentSelectedItem = '';
 

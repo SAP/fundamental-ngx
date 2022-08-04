@@ -24,7 +24,7 @@ import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from
                         <button
                             fd-toolbar-item
                             fd-button
-                            [compact]="true"
+                            fdCompact
                             fdType="positive"
                             (click)="$event.stopPropagation()"
                         >
@@ -268,7 +268,7 @@ describe('DynamicPageComponent with collapsible set to false', () => {
                             <button
                                 fd-toolbar-item
                                 fd-button
-                                [compact]="true"
+                                fdCompact
                                 fdType="positive"
                                 (click)="$event.stopPropagation()"
                                 id="global-action-button"

@@ -1,0 +1,41 @@
+<div class="docs-fn-container" *ngFor="let size of sizes">
+    <ng-container>
+        <p>Size: {{ size }}</p>
+        <fn-object-status
+            label="Positive"
+            state="positive"
+            glyph="status-positive"
+            [interactive]="true"
+            [byline]="size === 'byline'"
+        ></fn-object-status>
+        <fn-object-status
+            label="Critical"
+            state="critical"
+            glyph="status-critical"
+            [interactive]="true"
+            [byline]="size === 'byline'"
+        ></fn-object-status>
+        <fn-object-status
+            label="Negative"
+            state="negative"
+            glyph="status-negative"
+            [interactive]="true"
+            [byline]="size === 'byline'"
+        ></fn-object-status>
+        <fn-object-status
+            label="Info"
+            state="info"
+            glyph="information"
+            [interactive]="true"
+            [byline]="size === 'byline'"
+        ></fn-object-status>
+        <fn-object-status
+            label="Disabled"
+            state="info"
+            glyph="information"
+            [interactive]="true"
+            [disabled]="true"
+            [byline]="size === 'byline'"
+        ></fn-object-status>
+    </ng-container>
+</div>

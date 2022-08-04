@@ -7,8 +7,6 @@ import {
     EventEmitter,
     Input,
     OnDestroy,
-    OnInit,
-    Optional,
     Output,
     TemplateRef,
     ViewChild,
@@ -16,7 +14,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /**
  * A token is used to represent contextualizing information.
@@ -27,16 +27,13 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
     templateUrl: './token.component.html',
     styleUrls: ['./token.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [contentDensityObserverProviders()]
 })
-export class TokenComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TokenComponent implements AfterViewInit, OnDestroy {
     /** Whether the token is disabled. */
     @Input()
     disabled = false;
-
-    /** Whether the token is compact. */
-    @Input()
-    compact?: boolean;
 
     /** @hidden */
     @ViewChild('tokenWrapperElement')
@@ -71,13 +68,19 @@ export class TokenComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input()
     readOnly = false;
 
-    /** label for close icon */
+    /**
+     * @deprecated use i18n capabilities instead
+     * label for close icon
+     */
     @Input()
-    deleteButtonLabel = 'Deletable';
+    deleteButtonLabel: string;
 
-    /** role description for token */
+    /**
+     * @deprecated use i18n capabilities instead
+     * role description for token
+     */
     @Input()
-    ariaRoleDescription = 'token';
+    ariaRoleDescription: string;
 
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()
@@ -92,26 +95,21 @@ export class TokenComponent implements OnInit, AfterViewInit, OnDestroy {
     /** Emitted when a token is clicked. */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    onTokenClick: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
+    onTokenClick = new EventEmitter<MouseEvent>();
+
+    /** Emitted when a there's a keydown registered on the token. */
+    @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    onTokenKeydown = new EventEmitter<KeyboardEvent>();
+
+    /** @hidden */
+    totalCount: number;
 
     constructor(
         public elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
-
-    /** @hidden */
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._cdRef.markForCheck();
-                })
-            );
-        }
-    }
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -136,5 +134,19 @@ export class TokenComponent implements OnInit, AfterViewInit, OnDestroy {
     /** @hidden */
     tokenClickHandler(event): void {
         this.onTokenClick.emit(event);
+    }
+
+    /** @hidden */
+    tokenKeydownHandler(event): void {
+        this.onTokenKeydown.emit(event);
+        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            this.onTokenClick.emit(event);
+        }
+    }
+
+    /** @hidden */
+    _setTotalCount(count: number): void {
+        this.totalCount = count;
+        this._cdRef.markForCheck();
     }
 }

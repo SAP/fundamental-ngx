@@ -26,7 +26,7 @@ import { RadioButtonComponent } from './radio.component';
             name="radio"
             state="error"
             [value]="2"
-            [contentDensity]="'compact'"
+            fdCompact
             [forceRender]="true"
             [(ngModel)]="selectedValue"
         ></fdp-radio-button>

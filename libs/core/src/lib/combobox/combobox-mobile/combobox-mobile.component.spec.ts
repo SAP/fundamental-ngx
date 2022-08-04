@@ -6,8 +6,7 @@ import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { EventEmitter } from '@angular/core';
 import { DialogModule } from '../../dialog/dialog.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { COMBOBOX_COMPONENT } from '../combobox.interface';
-import { ComboboxComponent } from '../combobox.component';
+import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ComboboxMobileComponent', () => {
@@ -22,12 +21,17 @@ describe('ComboboxMobileComponent', () => {
         hasCloseButton: true
     };
 
-    let comboboxInputComponent: Partial<ComboboxComponent> = {
+    let comboboxInputComponent: ComboboxInterface = {
+        inputText: 'someInputText',
+        mobile: false,
         mobileConfig: {
             title: 'title',
             approveButtonText: 'approve',
             cancelButtonText: 'cancel',
             hasCloseButton: true
+        },
+        getValue() {
+            return this.inputText;
         },
         dialogDismiss: () => {},
         dialogApprove: () => {},
@@ -43,17 +47,7 @@ describe('ComboboxMobileComponent', () => {
     }));
 
     beforeEach(() => {
-        comboboxInputComponent = {
-            mobileConfig: {
-                title: 'title',
-                approveButtonText: 'approve',
-                cancelButtonText: 'cancel',
-                hasCloseButton: true
-            },
-            dialogDismiss: () => {},
-            dialogApprove: () => {},
-            openChange: new EventEmitter<boolean>()
-        };
+        comboboxInputComponent = { ...comboboxInputComponent };
         fixture = TestBed.createComponent(ComboboxMobileComponent);
         component = fixture.componentInstance;
         anyComponent = <any>component;

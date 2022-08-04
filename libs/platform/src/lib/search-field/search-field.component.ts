@@ -31,7 +31,7 @@ import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a1
 import { TemplatePortal } from '@angular/cdk/portal';
 import { Direction } from '@angular/cdk/bidi';
 
-import { fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
+import { firstValueFrom, fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 
 import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
@@ -45,6 +45,8 @@ import {
 } from './search-field-mobile/search-field-mobile.interface';
 import { SearchFieldMobileComponent } from './search-field-mobile/search-field/search-field-mobile.component';
 import { PlatformSearchFieldMobileModule } from './search-field-mobile/search-field-mobile.module';
+import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 export interface SearchInput {
     text: string;
@@ -84,7 +86,8 @@ let searchFieldIdCount = 0;
     templateUrl: './search-field.component.html',
     styleUrls: ['./search-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [contentDensityObserverProviders()]
 })
 export class SearchFieldComponent
     extends BaseComponent
@@ -185,17 +188,19 @@ export class SearchFieldComponent
     ariaLabelledby: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Message announced by screen reader, when search suggestions opens.
      */
     @Input()
-    searchSuggestionMessage = 'suggestions found.';
+    searchSuggestionMessage: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Second part of message for search suggestion.
      * direction for navigating the suggestion. This is not necessry in case of 0 suggestion.
      */
     @Input()
-    searchSuggestionNavigateMessage = 'use up and down arrows to navigate';
+    searchSuggestionNavigateMessage: string;
 
     /** Input change event. */
     @Output()
@@ -291,6 +296,9 @@ export class SearchFieldComponent
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
 
     /** @hidden */
+    private _translationResolver = new TranslationResolver();
+
+    /** @hidden */
     private readonly _onDestroy$ = new Subject<void>();
 
     /** @hidden */
@@ -319,8 +327,10 @@ export class SearchFieldComponent
         protected readonly _cd: ChangeDetectorRef,
         @Optional() private readonly _rtl: RtlService,
         @Inject(DOCUMENT) private readonly _document: Document,
+        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
         private readonly _liveAnnouncer: LiveAnnouncer,
-        readonly _dynamicComponentService: DynamicComponentService
+        readonly _dynamicComponentService: DynamicComponentService,
+        readonly contentDensityObserver: ContentDensityObserver
     ) {
         super(_cd);
     }
@@ -626,13 +636,31 @@ export class SearchFieldComponent
     }
 
     /** @hidden */
-    private _updateSearchAnnoucementText(): void {
+    private async _updateSearchAnnoucementText(): Promise<void> {
         // create search suggestion message with count.
         const suggestionCount = this._getSuggestionsLength();
+        let { searchSuggestionMessage, searchSuggestionNavigateMessage } = this;
+        if (searchSuggestionMessage) {
+            searchSuggestionMessage = suggestionCount + ' ' + searchSuggestionMessage;
+        }
+        if (!searchSuggestionMessage || !searchSuggestionNavigateMessage) {
+            const lang = await firstValueFrom(this._language$);
+            if (!searchSuggestionMessage) {
+                searchSuggestionMessage = this._translationResolver.resolve(
+                    lang,
+                    'platformSearchField.searchSuggestionMessage',
+                    { count: suggestionCount }
+                );
+            }
+            if (!searchSuggestionNavigateMessage) {
+                searchSuggestionNavigateMessage = this._translationResolver.resolve(
+                    lang,
+                    'platformSearchField.searchSuggestionNavigateMessage'
+                );
+            }
+        }
         this._currentSearchSuggestionAnnoucementMessage =
-            suggestionCount +
-            this.searchSuggestionMessage +
-            (suggestionCount > 0 ? this.searchSuggestionNavigateMessage : '');
+            searchSuggestionMessage + (suggestionCount > 0 ? searchSuggestionNavigateMessage : '');
         if (this.inputText?.length > 0) {
             this._liveAnnouncer.announce(this._currentSearchSuggestionAnnoucementMessage);
         }

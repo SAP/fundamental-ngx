@@ -21,31 +21,31 @@
 <ng-template #userDetailsTemplate let-data="data">
     <h4 style="margin-bottom: 1rem">Contact info</h4>
 
-    <p style="display: flex; flex-direction: column">
+    <p style="display: flex; flex-direction: column" *ngIf="data?.phone">
         <span>Mobile</span>
-        <a href="javascript:void(0)">{{ data?.phone }}</a>
+        <a [href]="'tel:' + data.phone">{{ data.phone }}</a>
     </p>
 
-    <p style="display: flex; flex-direction: column">
+    <p style="display: flex; flex-direction: column" *ngIf="data?.phone">
         <span>Phone</span>
-        <a href="javascript:void(0)">{{ data?.phone }}</a>
+        <a [href]="'tel:' + data.phone">{{ data.phone }}</a>
     </p>
 
-    <p style="display: flex; flex-direction: column">
+    <p style="display: flex; flex-direction: column" *ngIf="data?.email">
         <span>E-mail</span>
-        <a href="javascript:void(0)">{{ data?.email }}</a>
+        <a [href]="'mailto:' + data.email">{{ data.email }}</a>
     </p>
 
     <h4 style="margin-top: 1.5rem; margin-bottom: 1rem">Company</h4>
 
     <p style="display: flex; flex-direction: column">
         <span>Name</span>
-        <a href="javascript:void(0)">Company A{{ data?.email }}</a>
+        <span>Company A{{ data?.email }}</span>
     </p>
 
     <p style="display: flex; flex-direction: column">
         <span>Address</span>
-        <a href="javascript:void(0)">481 West Street, Anytown OH, 83749, USA</a>
+        <span>481 West Street, Anytown OH, 83749, USA</span>
     </p>
 </ng-template>
 
@@ -135,11 +135,11 @@
         <label for="disableRemovingNode">Disable removing</label>
     </p>
 </div>
-<p style="display: flex; align-items: center">
+<p style="display: flex; align-items: center; flex-wrap: wrap">
     Allow sending reminders to approvers with statuses:
     <fd-multi-input
         style="margin-left: 0.5rem"
-        [compact]="true"
+        fdCompact
         [dropdownValues]="allStatuses"
         [(ngModel)]="sendReminderStatuses"
     ></fd-multi-input>

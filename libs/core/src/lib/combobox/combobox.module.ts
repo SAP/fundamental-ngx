@@ -13,9 +13,11 @@ import { AutoCompleteModule } from '@fundamental-ngx/core/utils';
 
 import { ComboboxComponent } from './combobox.component';
 import { ListGroupPipe } from './list-group.pipe';
+import { DeprecatedComboboxContentDensityDirective } from './deprecated-combobox-content-density.directive';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    declarations: [ComboboxComponent, ListGroupPipe],
+    declarations: [ComboboxComponent, ListGroupPipe, DeprecatedComboboxContentDensityDirective],
     imports: [
         CommonModule,
         PopoverModule,
@@ -26,8 +28,9 @@ import { ListGroupPipe } from './list-group.pipe';
         InputGroupModule,
         ListModule,
         IconModule,
-        AutoCompleteModule
+        AutoCompleteModule,
+        ContentDensityModule
     ],
-    exports: [ComboboxComponent, ListGroupPipe]
+    exports: [ComboboxComponent, ListGroupPipe, DeprecatedComboboxContentDensityDirective, ContentDensityModule]
 })
 export class ComboboxModule {}

@@ -16,8 +16,6 @@ import { FilterRule } from './filtering.model';
 export class FilterRuleComponent implements OnDestroy {
     /** Rule to be displayed **/
     @Input() rule: FilterRule;
-    /** Whether should be displayed in compact mode **/
-    @Input() compact: boolean;
 
     /** Emits when rule is changed */
     @Output() ruleChange: EventEmitter<void> = new EventEmitter();

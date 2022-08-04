@@ -1,6 +1,7 @@
 import {
     AfterContentInit,
     AfterViewInit,
+    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -10,38 +11,38 @@ import {
     HostListener,
     Injector,
     Input,
+    isDevMode,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
     Output,
     QueryList,
+    Self,
+    SimpleChanges,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation,
-    isDevMode,
-    Attribute,
-    SimpleChanges,
-    OnChanges,
-    Self,
-    ViewContainerRef
+    ViewContainerRef,
+    ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { SelectionModel } from '@angular/cdk/collections';
-import { Subject, Subscription, merge, Observable, defer } from 'rxjs';
-import { startWith, takeUntil, switchMap } from 'rxjs/operators';
+import { defer, merge, Observable, Subject, Subscription } from 'rxjs';
+import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
-import { PopoverFillMode, FormStates, Nullable } from '@fundamental-ngx/core/shared';
-import { ContentDensityService, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import { FormStates, Nullable, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 
 import { SELECT_COMPONENT, SelectInterface } from './select.interface';
 import { SelectKeyManagerService } from './select-key-manager.service';
-import { OptionComponent, FdOptionSelectionChange } from './option/option.component';
+import { FdOptionSelectionChange, OptionComponent } from './option/option.component';
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { SelectMobileModule } from './select-mobile/select-mobile.module';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let selectUniqueId = 0;
 
@@ -75,7 +76,8 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
             useExisting: SelectComponent
         },
         registerFormItemControl(SelectComponent),
-        SelectKeyManagerService
+        SelectKeyManagerService,
+        contentDensityObserverProviders()
     ]
 })
 export class SelectComponent
@@ -132,10 +134,6 @@ export class SelectComponent
             this._internalValue = newValue;
         }
     }
-
-    /** Whether the select is in compact mode. */
-    @Input()
-    compact?: boolean;
 
     /** @deprecated
      * it is handled internally by controlTemplate != null|undefined is
@@ -392,7 +390,7 @@ export class SelectComponent
         @Optional() private readonly _dynamicComponentService: DynamicComponentService,
         @Optional() @Self() private readonly ngControl: NgControl,
         @Optional() private readonly _injector: Injector,
-        @Optional() private readonly _contentDensityService: ContentDensityService
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
@@ -405,15 +403,6 @@ export class SelectComponent
         this.ariaLabel = this.ariaLabel || this.placeholder;
 
         this._initializeCommonBehavior();
-
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._changeDetectorRef.markForCheck();
-                })
-            );
-        }
     }
 
     /** @hidden */

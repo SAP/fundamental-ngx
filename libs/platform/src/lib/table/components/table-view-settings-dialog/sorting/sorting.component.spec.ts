@@ -1,10 +1,8 @@
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ContentDensityEnum } from '@fundamental-ngx/core/utils';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 
-import { SortingComponent, SettingsSortDialogData } from './sorting.component';
+import { SettingsSortDialogData, SortingComponent } from './sorting.component';
 import { PlatformTableModule } from '../../../table.module';
 import { SortDirection } from '../../../enums';
 
@@ -15,8 +13,7 @@ describe('PlatformTableSortDialogComponent', () => {
     const dialogData: SettingsSortDialogData = {
         columns: [],
         direction: SortDirection.NONE,
-        field: null,
-        tableContentDensity: ContentDensityEnum.COZY
+        field: null
     };
     dialogRef.data = dialogData;
 

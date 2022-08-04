@@ -43,6 +43,8 @@ import { PlatformMultiInputMobileModule } from './multi-input-mobile/multi-input
 import { MULTIINPUT_COMPONENT } from './multi-input.interface';
 import { MultiInputConfig } from './multi-input.config';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+
 let uniqueHiddenLabel = 0;
 
 @Component({
@@ -56,7 +58,8 @@ let uniqueHiddenLabel = 0;
             provide: FormFieldControl,
             useExisting: forwardRef(() => PlatformMultiInputComponent),
             multi: true
-        }
+        },
+        contentDensityObserverProviders()
     ]
 })
 export class PlatformMultiInputComponent extends BaseMultiInput implements OnInit, AfterViewInit {
@@ -84,6 +87,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     set selected(selectedValue: any[]) {
         this.value = selectedValue;
     }
+
     get selected(): any[] {
         return this._selected;
     }
@@ -112,6 +116,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     get disabled(): boolean {
         return this._disabled;
     }
+
     set disabled(value) {
         this._disabled = value;
     }
@@ -176,7 +181,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         /** @hidden */
         @Optional() @SkipSelf() @Host() formField: FormField,
         /** @hidden */
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        readonly contentDensityObserver: ContentDensityObserver
     ) {
         super(cd, elementRef, ngControl, ngForm, dialogConfig, _multiInputConfig, formField, formControl);
     }
@@ -302,6 +308,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         }
         this._cd.markForCheck();
     }
+
     /** @hidden Define is selected item selected */
     isSelectedOptionItem(selectedItem: any): boolean {
         return (

@@ -61,8 +61,7 @@ import { PlatformSliderModule } from './slider.module';
             </fdp-form-field>
 
             <fdp-form-field id="value6">
-                <fdp-slider class="example-6" contentDensity="cozy" name="value6" formControlName="value6">
-                </fdp-slider>
+                <fdp-slider class="example-6" fdCozy name="value6" formControlName="value6"> </fdp-slider>
             </fdp-form-field>
         </fdp-form-group>
     `,

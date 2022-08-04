@@ -429,7 +429,7 @@ function getColumnsFromPaths(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][
 
 /** Trim space nodes at the end of the columns. */
 function trimColumns(columns: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
-    const processedColumns: ApprovalNode[][] = [];
+    const processedColumns: ApprovalGraphNode[][] = [];
 
     columns.forEach((column) => {
         let lastNotSpaceNodeIndex;
@@ -453,7 +453,7 @@ function trimColumns(columns: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
 
 /** Remove empty columns (where every node is a blank node)  */
 function removeEmptyColumns(columns: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
-    const processedColumns: ApprovalNode[][] = [];
+    const processedColumns: ApprovalGraphNode[][] = [];
 
     columns.forEach((column) => {
         const areAllNodesEmpty = column.every((node) => node.blank || node.space);
@@ -489,6 +489,8 @@ function getGraphColumnsFromPaths(columns: ApprovalGraphNode[][]): ApprovalGraph
     const graphColumns: ApprovalGraphColumn[] = [];
 
     columns.forEach((column, index) => {
+        column.forEach((node) => (node.colIndex = index));
+
         graphColumns.push({
             nodes: column,
             index,

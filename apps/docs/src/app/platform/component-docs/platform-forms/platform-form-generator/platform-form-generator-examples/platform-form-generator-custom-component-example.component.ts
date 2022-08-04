@@ -15,7 +15,6 @@ import {
         <ng-container [formGroup]="form">
             <ng-container [formGroupName]="formGroupName">
                 <fdp-slider
-                    [contentDensity]="formItem.guiOptions?.contentDensity || 'cozy'"
                     [customValues]="formItem.choices || []"
                     [showTicks]="formItem.guiOptions?.additionalData?.showTicks"
                     [showTicksLabels]="formItem.guiOptions?.additionalData?.showTicksLabels"

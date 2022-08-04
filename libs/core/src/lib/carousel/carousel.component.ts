@@ -97,13 +97,19 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     @Input()
     loop = false;
 
-    /** Label for left navigation button */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Label for left navigation button
+     */
     @Input()
-    leftNavigationBtnLabel = 'Go to previous item';
+    leftNavigationBtnLabel: string;
 
-    /** Label for right navigation button */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Label for right navigation button
+     */
     @Input()
-    rightNavigationBtnLabel = 'Go to next item';
+    rightNavigationBtnLabel: string;
 
     /** Shows/hides optional navigation button */
     @Input()

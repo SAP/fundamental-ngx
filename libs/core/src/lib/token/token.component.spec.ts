@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TokenComponent } from './token.component';
+import { TokenModule } from './token.module';
 
 describe('TokenComponent', () => {
     let component: TokenComponent;
@@ -8,7 +9,7 @@ describe('TokenComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TokenComponent]
+            imports: [TokenModule]
         }).compileComponents();
     }));
 

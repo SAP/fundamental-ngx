@@ -1,31 +1,30 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
     forwardRef,
+    Inject,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
     Output,
     ViewChild,
-    ViewEncapsulation,
-    Inject,
-    OnChanges,
-    AfterViewInit
+    ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { Placement, SpecialDayRule, FormStates, Nullable } from '@fundamental-ngx/core/shared';
-import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
-import { CalendarComponent, DaysOfWeek, FdCalendarView, CalendarYearGrid } from '@fundamental-ngx/core/calendar';
-import { PopoverFormMessageService, registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { FormStates, Nullable, Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
+import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { CalendarComponent, CalendarYearGrid, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
+import { FormItemControl, PopoverFormMessageService, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { PopoverService } from '@fundamental-ngx/core/popover';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
@@ -71,10 +70,6 @@ export class DatetimePickerComponent<D>
     @Input()
     placeholder = '';
 
-    /** Whether the component should be in compact mode. */
-    @Input()
-    compact?: boolean;
-
     /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.
@@ -112,10 +107,6 @@ export class DatetimePickerComponent<D>
     @Input()
     displaySeconds: boolean;
 
-    /** aria-label for the date-picker. */
-    @Input()
-    ariaLabel: Nullable<string>;
-
     /** aria-labelledby for element describing date-picker. */
     @Input()
     ariaLabelledBy: Nullable<string>;
@@ -126,6 +117,7 @@ export class DatetimePickerComponent<D>
         this._message = message;
         this._popoverFormMessage.message = message;
     }
+
     /** @hidden */
     _message: string | null = null;
 
@@ -136,6 +128,7 @@ export class DatetimePickerComponent<D>
         this._messageTriggers = triggers;
         this._popoverFormMessage.triggers = triggers;
     }
+
     /** @hidden */
     _messageTriggers: string[] = ['focusin', 'focusout'];
 
@@ -173,21 +166,33 @@ export class DatetimePickerComponent<D>
     @Input()
     activeView: FdCalendarView = 'day';
 
-    /** Aria label for the datetime picker input. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria label for the datetime picker input.
+     */
     @Input()
-    datetimeInputLabel = 'Datetime input';
+    datetimeInputLabel: string;
 
-    /** Aria label for the button to show/hide the calendar. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria label for the button to show/hide the calendar.
+     */
     @Input()
-    displayDatetimeToggleLabel = 'Display calendar toggle';
+    displayDatetimeToggleLabel: string;
 
-    /** Label for the "Date" button in display type switcher in mobile mode */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Label for the "Date" button in display type switcher in mobile mode
+     */
     @Input()
-    displayTypeDateLabel = 'Date';
+    displayTypeDateLabel: string;
 
-    /** Label for the "Time" button in display type switcher in mobile mode */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Label for the "Time" button in display type switcher in mobile mode
+     */
     @Input()
-    displayTypeTimeLabel = 'Time';
+    displayTypeTimeLabel: string;
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -211,12 +216,14 @@ export class DatetimePickerComponent<D>
         this._state = state;
         this._popoverFormMessage.messageType = state;
     }
+
     get state(): FormStates {
-        if (this._state == null && this.useValidation && this.isInvalidDateInput) {
+        if (this.useValidation && this.isInvalidDateInput) {
             return 'error';
         }
         return this._state;
     }
+
     /** @hidden */
     private _state: FormStates = 'default';
 
@@ -286,6 +293,7 @@ export class DatetimePickerComponent<D>
     set processInputOnBlur(v: boolean) {
         this._processInputOnBlur = coerceBooleanProperty(v);
     }
+
     get processInputOnBlur(): boolean {
         return this._processInputOnBlur;
     }
@@ -414,7 +422,6 @@ export class DatetimePickerComponent<D>
     constructor(
         private _elRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
@@ -460,15 +467,6 @@ export class DatetimePickerComponent<D>
                 this._calculateTimeOptions();
                 this._changeDetRef.detectChanges();
             });
-
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._changeDetRef.markForCheck();
-                })
-            );
-        }
     }
 
     /** @hidden */

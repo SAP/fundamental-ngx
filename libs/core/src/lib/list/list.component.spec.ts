@@ -10,7 +10,7 @@ import { ListModule } from './list.module';
             [multiInputMode]="multiInput"
             [hasMessage]="hasMessage"
             [noBorder]="noBorder"
-            [compact]="compact"
+            [fdCompact]="compact"
             fd-list
         >
             Action Bar Title Test Text

@@ -26,6 +26,7 @@ import { WizardGeneratorFinishButtonDirective } from './directives/wizard-genera
 import { WizardGeneratorComponent } from './components/wizard-generator/wizard-generator.component';
 import { WizardGeneratorSummaryStepDirective } from './directives/wizard-generator-summary-step.directive';
 import { WizardGeneratorReviewButtonDirective } from './directives/wizard-generator-review-button.directive';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 /**
  * Adds Wizard Generator functionality to your application.
@@ -50,6 +51,7 @@ import { WizardGeneratorReviewButtonDirective } from './directives/wizard-genera
     imports: [
         CommonModule,
         DialogModule,
+        I18nModule,
         ButtonModule,
         WizardModule,
         PlatformFormGeneratorModule,

@@ -25,11 +25,11 @@
                 </fdp-dynamic-page-key-info>
                 <fdp-dynamic-page-global-actions>
                     <!-- global actions -->
-                    <fd-toolbar fdType="transparent" [clearBorder]="true">
+                    <fd-toolbar fdType="transparent" [clearBorder]="true" fdCompact>
                         <button
                             fd-toolbar-item
                             fd-button
-                            [compact]="true"
+                            fdCompact
                             fdType="positive"
                             (click)="closePage($event)"
                             label="Accept"
@@ -38,7 +38,7 @@
                         <button
                             fd-toolbar-item
                             fd-button
-                            [compact]="true"
+                            fdCompact
                             fdType="negative"
                             (click)="closePage($event)"
                             label="Reject"

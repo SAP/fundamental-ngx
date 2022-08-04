@@ -2,7 +2,7 @@
     class="fd-switch"
     (click)="focus()"
     [style.cursor]="disabled ? 'auto' : 'pointer'"
-    [class.fd-switch--compact]="compact"
+    [class.fd-switch--compact]="_contentDensityObserver.isCompact$ | async"
     [class.fd-switch--semantic]="semantic"
     [class.is-disabled]="disabled"
     [attr.aria-label]="ariaLabel"
@@ -40,7 +40,11 @@
             </div>
 
             <span *ngIf="semantic" [id]="_semanticLabelId" aria-hidden="true" class="fd-switch__invisible-text">
-                {{ checked ? semanticAcceptLabel : semanticDeclineLabel }}
+                {{
+                    checked
+                        ? semanticAcceptLabel || ('coreSwitch.semanticAcceptLabel' | fdTranslate)
+                        : semanticDeclineLabel || ('coreSwitch.semanticAcceptLabel' | fdTranslate)
+                }}
             </span>
         </div>
     </span>

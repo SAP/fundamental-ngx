@@ -4,31 +4,35 @@
             (inputChange)="_onSearchInputChange($event)"
             (searchSubmit)="submitForm()"
             [disableRefresh]="true"
-            contentDensity="compact"
-            i18n-placeholder="@@PlatformSmartFilterBarSearchPlaceholder"
-            placeholder="Search"
+            [placeholder]="'platformSmartFilterBar.searchPlaceholder' | fdTranslate"
         ></fdp-search-field>
         <fd-toolbar-spacer></fd-toolbar-spacer>
         <fdp-button
             (click)="submitForm()"
             buttonType="emphasized"
-            contentDensity="compact"
             fd-toolbar-item
-            i18n-placeholder="@@PlatformSmartFilterBarSubmitButton"
-            label="Go"
+            [label]="'platformSmartFilterBar.submitButtonLabel' | fdTranslate"
         ></fdp-button>
-        <fdp-button (click)="submitForm()" contentDensity="compact" fd-toolbar-item glyph="synchronize"></fdp-button>
+        <fdp-button (click)="submitForm()" fd-toolbar-item glyph="synchronize"></fdp-button>
         <fdp-button
             (click)="showFilteringSettings()"
-            [label]="filtersLabel + ' (' + _selectedFilters.length + ')'"
-            contentDensity="compact"
+            [label]="
+                filtersLabel
+                    ? filtersLabel + ' (' + _selectedFilters.length + ')'
+                    : ('platformSmartFilterBar.filtersButtonLabel'
+                      | fdTranslate: { filtersCount: _selectedFilters.length })
+            "
             fd-toolbar-item
         ></fdp-button>
         <fdp-button
             (click)="_toggleFilterBar()"
-            [label]="_showFilterBar ? hideFiltersLabel : showFiltersLabel"
+            [label]="
+                (_showFilterBar
+                    ? 'platformSmartFilterBar.hideFiltersButtonLabel'
+                    : 'platformSmartFilterBar.showFiltersButtonLabel'
+                ) | fdTranslate
+            "
             buttonType="transparent"
-            contentDensity="compact"
             fd-toolbar-item
         ></fdp-button>
     </fd-toolbar>

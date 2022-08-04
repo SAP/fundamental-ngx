@@ -6,8 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     ComponentFixture,
     fakeAsync,
-    flushMicrotasks,
     flush,
+    flushMicrotasks,
     inject,
     TestBed,
     waitForAsync
@@ -15,13 +15,14 @@ import {
 
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { ContentDensity, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 import { DATA_PROVIDERS, DataProvider, isOptionItem } from '@fundamental-ngx/platform/shared';
 
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { PlatformComboboxModule } from '../combobox.module';
 import { ComboboxSelectionChangeEvent } from '../commons/base-combobox';
 import { ComboboxComponent } from './combobox.component';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-combobox-test',
@@ -36,7 +37,7 @@ import { ComboboxComponent } from './combobox.component';
                     [groupKey]="groupKey"
                     [showSecondaryText]="showSecondaryText"
                     [secondaryKey]="secondaryKey"
-                    [contentDensity]="contentDensity"
+                    [fdContentDensity]="contentDensity"
                     [dataSource]="dataSource"
                     [maxHeight]="maxHeight"
                     (selectionChange)="onSelect($event)"
@@ -61,7 +62,7 @@ class ComboboxStandardComponent {
     selectedItem: ComboboxSelectionChangeEvent | null = null;
     maxHeight: string;
     autoResize = false;
-    contentDensity: ContentDensity = 'cozy';
+    contentDensity: ContentDensityMode = ContentDensityMode.COZY;
     group = false;
     groupKey = 'type';
     showSecondaryText = false;
@@ -118,7 +119,7 @@ describe('ComboboxComponent default values', () => {
     });
 
     it('should be able to change the contentDensity to "compact"', () => {
-        component.contentDensity = 'compact';
+        component.contentDensity = ContentDensityMode.COMPACT;
 
         fixture.detectChanges();
 

@@ -1,23 +1,24 @@
-<header>Object List Item</header>
-<description>
-    <p>
-        The object list item lets the user trigger actions directly from a list item This component makes use of
-        <a routerLink="/core/list">list-item</a> directive present in fundamental-ngx/core and has additional
-        enhancements on top of it.
-    </p>
-    <h3>Platform specific enhancements:</h3>
-    <ul>
-        <li>
-            Object-List-item is implemented as Angular component to hide complexity of dealing with HTML in order to
-            deliver high-order component.
-        </li>
-        <li>Alignment of sub element title is abstracted.</li>
-        <li>Enhanced support for accessibility which covers access by keyboard, mouse and touch.</li>
-        <li>Enhanced compatibility with screen readers.</li>
-        <li>Supports both imperative and declarative way of accepting the items for all the list variants.</li>
-    </ul>
-</description>
-<import module="ObjectListItemModule, PlatformListModule" subPackage="list"></import>
+<fd-doc-page>
+    <header>Object List Item</header>
+    <description>
+        <p>
+            The object list item lets the user trigger actions directly from a list item This component makes use of
+            <a routerLink="/core/list">list-item</a> directive present in fundamental-ngx/core and has additional
+            enhancements on top of it.
+        </p>
+        <h3>Platform specific enhancements:</h3>
+        <ul>
+            <li>
+                Object-List-item is implemented as Angular component to hide complexity of dealing with HTML in order to
+                deliver high-order component.
+            </li>
+            <li>Alignment of sub element title is abstracted.</li>
+            <li>Enhanced support for accessibility which covers access by keyboard, mouse and touch.</li>
+            <li>Enhanced compatibility with screen readers.</li>
+            <li>Supports both imperative and declarative way of accepting the items for all the list variants.</li>
+        </ul>
+    </description>
+    <import module="ObjectListItemModule, PlatformListModule" subPackage="list"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs [hasI18n]="true"></fd-header-tabs>
+</fd-doc-page>

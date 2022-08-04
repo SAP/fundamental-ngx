@@ -18,17 +18,11 @@
                     <h2 fd-card-title>Card Title</h2>
                 </fd-card-header>
                 <fd-card-content>
-                    <ul fd-list [noBorder]="true">
-                        <li fd-list-item>
-                            <span fd-list-title> item 1 </span>
-                        </li>
-                        <li fd-list-item>
-                            <span fd-list-title> item 2 </span>
-                        </li>
-                        <li fd-list-item>
-                            <span fd-list-title> item 3 </span>
-                        </li>
-                    </ul>
+                    <div fd-form-item>
+                        <textarea style="width: 100%; resize: vertical">
+You can resize this textarea and see how card grows</textarea
+                        >
+                    </div>
                 </fd-card-content>
             </fd-card>
         </ng-container>
@@ -155,14 +149,14 @@
                 </ul>
             </fd-card-content>
         </fd-card>
-        <fd-card *fdCardDef="5" [compact]="true" cardType="list">
+        <fd-card *fdCardDef="5" fdCompact cardType="list">
             <fd-card-header>
                 <h2 fd-card-title>Card Title</h2>
                 <h3 fd-card-subtitle>Card Subtitle</h3>
                 <span fd-card-counter>3 of 10</span>
             </fd-card-header>
             <fd-card-content>
-                <ul fd-list [noBorder]="true" [compact]="true">
+                <ul fd-list [noBorder]="true" fdCompact>
                     <li fd-list-item>
                         <span fd-list-title> item 1 </span>
                     </li>
@@ -268,14 +262,14 @@
                 </ul>
             </fd-card-content>
         </fd-card>
-        <fd-card *fdCardDef="9" [compact]="true" cardType="list">
+        <fd-card *fdCardDef="9" fdCompact cardType="list">
             <fd-card-header>
                 <h2 fd-card-title>Card Title</h2>
                 <h3 fd-card-subtitle>Card Subtitle</h3>
                 <span fd-card-counter>3 of 10</span>
             </fd-card-header>
             <fd-card-content>
-                <ul fd-list [noBorder]="true" [compact]="true">
+                <ul fd-list [noBorder]="true" fdCompact>
                     <li fd-list-item>
                         <span fd-list-title> item 1 </span>
                     </li>

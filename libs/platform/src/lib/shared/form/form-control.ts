@@ -1,8 +1,6 @@
 import { NgControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { ContentDensity } from '@fundamental-ngx/core/utils';
-
 export abstract class FormFieldControl<T> {
     /**
      * Each input control has always a value. Need to make sure we keep a convention for
@@ -30,10 +28,10 @@ export abstract class FormFieldControl<T> {
      */
     editable: boolean;
 
-    /**
-     *  Components works in two sizes compact or cozy
-     */
-    contentDensity: ContentDensity;
+    // /**
+    //  *  Components works in two sizes compact or cozy
+    //  */
+    // contentDensity: ContentDensity;
 
     /**
      * The height of the extra content at the bottom of the form control,

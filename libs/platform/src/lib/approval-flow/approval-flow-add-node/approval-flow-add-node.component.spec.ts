@@ -10,7 +10,6 @@ import {
 } from './approval-flow-add-node.component';
 import { ApprovalNode, ApprovalTeam } from '../interfaces';
 import { ApprovalFlowAddNodeViewService } from '../services/approval-flow-add-node-view.service';
-import '@angular/localize/init';
 import { ApprovalFlowTeamDataSource, ApprovalFlowUserDataSource } from '@fundamental-ngx/platform/shared';
 import { TeamDataProvider, UserDataProvider } from '../tests/providers';
 import { teams } from '../tests/data';

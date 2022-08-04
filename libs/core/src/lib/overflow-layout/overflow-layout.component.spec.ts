@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { OverflowLayoutItemDirective } from './directives/overflow-layout-item.directive';
 import { OverflowLayoutComponent } from './overflow-layout.component';
@@ -12,12 +12,14 @@ import { OverflowLayoutModule } from './overflow-layout.module';
         <fd-overflow-layout [maxVisibleItems]="maxItems" [style.width.px]="containerWidth">
             <ng-container *ngFor="let item of itemsToRender; let i = index">
                 <div
-                    *fdOverflowItemRef="let hidden"
+                    *fdOverflowItemRef="let hidden; index as i"
                     fdOverflowLayoutItem
                     [focusable]="true"
                     [style.width.px]="elementsWidth"
                     [style.height.px]="20"
-                ></div>
+                >
+                    {{ i }}
+                </div>
             </ng-container>
             <div *fdOverflowExpand></div>
         </fd-overflow-layout>
@@ -69,18 +71,18 @@ describe('OverflowLayoutComponent', () => {
         );
     });
 
-    it('should render automatic amount of items', async () => {
+    it('should render automatic amount of items', fakeAsync(() => {
+        tick(1000);
         const expectedAmount = Math.floor(component.containerWidth / component.elementsWidth);
-
-        const countSpy = spyOn(component.overflowLayout.visibleItemsCount, 'emit');
-
+        const visibleItemsCountSpy = spyOn(component.overflowLayout.visibleItemsCount, 'emit').and.callThrough();
         component.maxItems = Infinity;
         fixture.detectChanges();
-        await fixture.whenStable();
 
+        tick(1000);
+
+        expect(visibleItemsCountSpy).toHaveBeenCalledWith(expectedAmount);
         expect(fixture.debugElement.queryAll(By.directive(OverflowLayoutItemDirective)).length).toEqual(expectedAmount);
-        expect(countSpy).toHaveBeenCalledOnceWith(expectedAmount);
-    });
+    }));
 
     it('should react on items resize', async () => {
         component.elementsWidth = 300;

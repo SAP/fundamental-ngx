@@ -2,7 +2,7 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PlatformTableModule } from './../../table.module';
 
 import { RESETTABLE_TOKEN, Resettable, ResetButtonComponent } from './reset-button.component';
 
@@ -19,7 +19,7 @@ describe('PlatformTableResetButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ButtonModule],
+            imports: [PlatformTableModule],
             declarations: [ResetButtonComponent],
             providers: [
                 {

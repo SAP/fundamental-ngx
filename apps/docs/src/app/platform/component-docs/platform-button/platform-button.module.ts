@@ -14,6 +14,7 @@ import { PlatformButtonSizesExampleComponent } from './platform-button-examples/
 import { PlatformButtonIconsExampleComponent } from './platform-button-examples/platform-button-examples.component';
 import { PlatformButtonStateExampleComponent } from './platform-button-examples/platform-button-examples.component';
 import { PlatformButtonTruncateExampleComponent } from './platform-button-examples/platform-button-examples.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -37,6 +38,7 @@ const routes: Routes = [
         PlatformButtonIconsExampleComponent,
         PlatformButtonTruncateExampleComponent,
         PlatformButtonStateExampleComponent
-    ]
+    ],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-button')]
 })
 export class PlatformButtonDocsModule {}

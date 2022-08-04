@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TextComponent } from './text.component';
+import { TextModule } from './text.module';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { LineClampModule, PipeModule } from '../utils/public_api';
+import { LineClampModule, PipeModule } from '@fundamental-ngx/core/utils';
 
 describe('TextComponent', () => {
     let component: TextComponent;
@@ -10,8 +11,7 @@ describe('TextComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TextComponent],
-            imports: [PipeModule, LineClampModule]
+            imports: [PipeModule, LineClampModule, TextModule]
         })
             .overrideComponent(TextComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }

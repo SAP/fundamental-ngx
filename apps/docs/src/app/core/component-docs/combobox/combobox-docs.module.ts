@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ListModule } from '@fundamental-ngx/core/list';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ComboboxModule, DeprecatedComboboxContentDensityDirective } from '@fundamental-ngx/core/combobox';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -12,6 +12,7 @@ import { ComboboxHeaderComponent } from './combobox-header/combobox-header.compo
 import { ComboboxDocsComponent } from './combobox-docs.component';
 import { examples } from './examples';
 import { ComboboxBylineExampleComponent } from './examples/combobox-byline-example.component';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -27,6 +28,7 @@ const routes: Routes = [
 @NgModule({
     imports: [ListModule, FormModule, ComboboxModule, RouterModule.forChild(routes), SharedDocumentationPageModule],
     exports: [RouterModule],
-    declarations: [examples, ComboboxDocsComponent, ComboboxHeaderComponent, ComboboxBylineExampleComponent]
+    declarations: [examples, ComboboxDocsComponent, ComboboxHeaderComponent, ComboboxBylineExampleComponent],
+    providers: [moduleDeprecationsProvider(DeprecatedComboboxContentDensityDirective)]
 })
 export class ComboboxDocsModule {}

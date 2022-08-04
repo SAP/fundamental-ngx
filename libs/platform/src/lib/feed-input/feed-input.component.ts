@@ -39,9 +39,12 @@ export class FeedInputComponent implements AfterViewInit {
     @Input()
     maxHeight: number;
 
-    /** Set title attribute for accessibility user image */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Set title attribute for accessibility user image
+     */
     @Input()
-    userTitle = 'User';
+    userTitle: string;
 
     /** @hidden Event emitted when user click on send button */
     @Output()

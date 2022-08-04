@@ -2,10 +2,13 @@
     #tokenWrapperElement
     class="fd-token"
     role="option"
+    tabindex="0"
     [attr.aria-roledescription]="ariaRoleDescription"
     (click)="tokenClickHandler($event)"
+    (keydown)="tokenKeydownHandler($event)"
+    [attr.aria-setsize]="totalCount"
     [class.fd-token__disabled]="disabled"
-    [class.fd-token--compact]="compact"
+    [class.fd-token--compact]="_contentDensityObserver.isCompact$ | async"
     [class.fd-token--selected]="selected"
     [class.fd-token--readonly]="readOnly"
     [attr.aria-selected]="selected"
@@ -17,10 +20,9 @@
     <span
         (click)="closeClickHandler($event)"
         role="button"
-        [attr.aria-label]="deleteButtonLabel"
+        [attr.aria-label]="deleteButtonLabel || ('coreToken.deleteButtonLabel' | fdTranslate)"
         *ngIf="!readOnly"
         class="fd-token__close"
-        tabindex="-1"
     ></span>
 </span>
 

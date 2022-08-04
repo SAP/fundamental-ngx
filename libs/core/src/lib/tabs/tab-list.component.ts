@@ -9,8 +9,6 @@ import {
     EventEmitter,
     Input,
     OnDestroy,
-    OnInit,
-    Optional,
     Output,
     QueryList,
     ViewChild,
@@ -19,14 +17,7 @@ import {
 } from '@angular/core';
 import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import {
-    getElementCapacity,
-    getElementWidth,
-    KeyUtil,
-    resizeObservable,
-    scrollTop,
-    ContentDensityService
-} from '@fundamental-ngx/core/utils';
+import { getElementCapacity, getElementWidth, KeyUtil, resizeObservable, scrollTop } from '@fundamental-ngx/core/utils';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
@@ -36,6 +27,7 @@ import { TabsService } from './tabs.service';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -53,13 +45,9 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [TabsService]
+    providers: [TabsService, contentDensityObserverProviders()]
 })
-export class TabListComponent implements AfterContentInit, AfterViewInit, OnDestroy, OnInit {
-    /** Whether user wants to use tab component in compact mode */
-    @Input()
-    compact?: boolean;
-
+export class TabListComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
     @Input()
     size: TabSizes = 'm';
@@ -92,9 +80,12 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     @Input()
     collapsibleTabs = false;
 
-    /** Text visible in expand overflow trigger */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Text visible in expand overflow trigger
+     */
     @Input()
-    expandOverflowText = 'More';
+    expandOverflowText: string;
 
     /** Event emitted when the selected panel changes. */
     @Output()
@@ -155,20 +146,8 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         private _tabsService: TabsService,
         private _changeDetectorRef: ChangeDetectorRef,
         private _elRef: ElementRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._changeDetectorRef.markForCheck();
-                })
-            );
-        }
-    }
 
     /** @hidden */
     ngAfterContentInit(): void {

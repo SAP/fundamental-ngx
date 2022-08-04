@@ -4,12 +4,12 @@ import { FormControlComponent } from '@fundamental-ngx/core/form';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { TokenComponent, TokenizerComponent, TokenModule } from '@fundamental-ngx/core/token';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY, RtlService } from '@fundamental-ngx/core/utils';
+import { DEFAULT_CONTENT_DENSITY, RtlService } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-tokenizer-test-component',
     template: `
-        <fd-tokenizer [compact]="compact">
+        <fd-tokenizer [fdCompact]="compact">
             <fd-token>Token 1</fd-token>
             <fd-token>Token 2</fd-token>
             <fd-token>Token 3</fd-token>
@@ -35,7 +35,7 @@ describe('TokenizerComponent', () => {
         TestBed.configureTestingModule({
             imports: [TokenModule],
             declarations: [HostComponent, FormControlComponent],
-            providers: [RtlService, ContentDensityService]
+            providers: [RtlService]
         }).compileComponents();
     }));
 
@@ -58,9 +58,9 @@ describe('TokenizerComponent', () => {
         expect(component.buildComponentCssClass).toHaveBeenCalled();
     });
 
-    it('should addEventListener to input during ngAfterViewChecked and handle keydown', async () => {
+    it('should addEventListener to input during ngAfterViewInit and handle keydown', async () => {
         spyOn(component, 'handleKeyDown');
-        component.ngAfterViewChecked();
+        component.ngAfterViewInit();
 
         await whenStable(fixture);
 
@@ -113,7 +113,7 @@ describe('TokenizerComponent', () => {
         const event = new MouseEvent('click', {
             ctrlKey: true
         });
-        component.ngAfterViewChecked();
+        component.ngAfterViewInit();
         (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(
             event
         );
@@ -126,7 +126,7 @@ describe('TokenizerComponent', () => {
     });
 
     it('should deselect using control or command', () => {
-        component.ngAfterViewChecked();
+        component.ngAfterViewInit();
         const event = new MouseEvent('click', {
             ctrlKey: true
         });
@@ -145,7 +145,7 @@ describe('TokenizerComponent', () => {
     });
 
     it('should select using shift', () => {
-        component.ngAfterViewChecked();
+        component.ngAfterViewInit();
         const event = new MouseEvent('click', {
             ctrlKey: false,
             shiftKey: true
@@ -161,10 +161,6 @@ describe('TokenizerComponent', () => {
         component.tokenList.forEach((token) =>
             spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'focus')
         );
-        component.tokenList.forEach((token) =>
-            spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'setAttribute')
-        );
-        spyOn(component, 'addKeyboardListener');
         spyOn(component, 'handleKeyDown');
 
         component.focusTokenElement(1);
@@ -176,29 +172,11 @@ describe('TokenizerComponent', () => {
             .filter((element, index) => index === 1)[0]
             .elementRef.nativeElement.querySelector('.fd-token');
         expect(elementToCheck.focus).toHaveBeenCalled();
-        expect(elementToCheck.setAttribute).toHaveBeenCalledWith('tabindex', '0');
-        expect(component.addKeyboardListener).toHaveBeenCalledWith(elementToCheck, 1);
-    });
-
-    it('should add keyboard listener', async () => {
-        spyOn(component, 'handleKeyDown');
-        const mockElement = document.createElement('span');
-        spyOn(mockElement, 'addEventListener').and.callThrough();
-        spyOn(mockElement, 'setAttribute');
-        spyOn(mockElement, 'removeEventListener');
-        const event = new KeyboardEvent('blur');
-        component.addKeyboardListener(mockElement, 0);
-        mockElement.dispatchEvent(event);
-
-        await whenStable(fixture);
-
-        expect(mockElement.addEventListener).toHaveBeenCalled();
-        expect(mockElement.setAttribute).toHaveBeenCalled();
-        expect(mockElement.removeEventListener).toHaveBeenCalled();
     });
 
     it('should handle resize - getting smaller', () => {
-        component.compact = true;
+        fixture.componentInstance.compact = true;
+        fixture.detectChanges();
         spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
         component.previousElementWidth = 2;
@@ -214,7 +192,8 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handle resize - getting bigger', () => {
-        component.compact = true;
+        fixture.componentInstance.compact = true;
+        fixture.detectChanges();
         // need to collapse the tokens before running expand
         spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
@@ -230,7 +209,8 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handle resize - getting bigger', () => {
-        component.compact = true;
+        fixture.componentInstance.compact = true;
+        fixture.detectChanges();
         // need to collapse the tokens before running expand
         spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
@@ -272,7 +252,7 @@ describe('TokenizerComponent', () => {
         });
         spyOnProperty(component.tokenizerInnerEl.nativeElement, 'scrollWidth').and.returnValue(5);
 
-        component.ngAfterViewChecked();
+        component.ngAfterViewInit();
 
         await whenStable(fixture);
 

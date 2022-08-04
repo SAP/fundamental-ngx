@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 
 import { IconModule } from '@fundamental-ngx/core/icon';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 import { SplitterPaginationComponent } from './splitter-pagination/splitter-pagination.component';
 import {
@@ -23,7 +24,7 @@ import { SplitterComponent } from './splitter.component';
         SplitterPaginationComponent,
         NoDefaultPanePipe
     ],
-    imports: [CommonModule, IconModule, ButtonModule, PortalModule],
+    imports: [CommonModule, IconModule, ButtonModule, PortalModule, I18nModule],
     exports: [
         SplitterComponent,
         SplitterPaneContainerComponent,

@@ -1,7 +1,6 @@
 <fd-select
     [placeholder]="placeholder"
     [glyph]="glyph"
-    [compact]="contentDensity | isCompactDensity"
     [disabled]="disabled"
     [readonly]="readonly"
     [closeOnOutsideClick]="closeOnOutsideClick"
@@ -13,7 +12,7 @@
     [attr.aria-labelledby]="value"
     [attr.tooltip]="value"
     [attr.aria-readonly]="readonly"
-    attr.role="listbox"
+    [attr.role]="'listbox'"
     [value]="value"
     [state]="state"
     [stateMessage]="stateMessage"
@@ -24,12 +23,13 @@
     (valueChange)="_onSelection($event)"
 >
     <ng-content></ng-content>
-    <fd-option *ngIf="noValueLabel" [disabled]="false" [value]="null">
+    <li fd-option *ngIf="noValueLabel" [disabled]="false" [value]="null">
         {{ noValueLabel }}
-    </fd-option>
-    <fd-option
+    </li>
+    <li
+        fd-option
         *ngFor="let item of _optionItems; index as index"
-        [disabled]="item.disabled ? true : false"
+        [disabled]="!!item.disabled"
         [value]="item.value"
         [attr.aria-labelledby]="ariaLabel"
         [attr.aria-disabled]="disabled"
@@ -39,7 +39,7 @@
             [ngTemplateOutlet]="listItem"
             [ngTemplateOutletContext]="{ optionItem: item, index: index }"
         ></ng-container>
-    </fd-option>
+    </li>
 </fd-select>
 
 <ng-template let-optionItem="optionItem" let-index="index" #listItem>

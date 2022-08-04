@@ -5,9 +5,8 @@
             fdOverflowLayoutItem
             [focusable]="true"
             [color]="(i % 10).toString()"
+            [label]="'Info label ' + i + (hidden ? ' hidden' : ' visible')"
         >
-            Info label {{ i }}
-            {{ hidden ? 'hidden' : 'visible' }}
         </fd-info-label>
     </ng-container>
 </fd-overflow-layout>

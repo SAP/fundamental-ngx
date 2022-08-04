@@ -5,10 +5,12 @@ import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { MultiComboboxMobileComponent } from './multi-combobox/multi-combobox-mobile.component';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     declarations: [MultiComboboxMobileComponent],
-    imports: [BarModule, DialogModule, ButtonModule, CommonModule],
+    imports: [BarModule, DialogModule, ButtonModule, CommonModule, I18nModule],
+    entryComponents: [MultiComboboxMobileComponent],
     exports: [MultiComboboxMobileComponent]
 })
 export class PlatformMultiComboboxMobileModule {}

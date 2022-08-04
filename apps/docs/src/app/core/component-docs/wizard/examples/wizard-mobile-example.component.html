@@ -1,5 +1,5 @@
 <div style="display: flex; justify-content: space-around; flex-wrap: wrap">
-    <fd-wizard [appendToWizard]="false">
+    <fd-wizard [appendToWizard]="false" [contentHeight]="contentHeight">
         <fd-wizard-navigation>
             <ul fd-wizard-progress-bar size="sm" role="list" aria-label="Wizard Steps">
                 <li
@@ -64,7 +64,7 @@
         </div>
     </fd-wizard>
 
-    <fd-wizard [appendToWizard]="false">
+    <fd-wizard [appendToWizard]="false" [contentHeight]="contentHeight">
         <fd-wizard-navigation>
             <ul fd-wizard-progress-bar size="sm">
                 <li

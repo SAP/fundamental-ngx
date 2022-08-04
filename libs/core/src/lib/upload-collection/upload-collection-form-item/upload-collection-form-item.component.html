@@ -5,7 +5,7 @@
     style="pointer-events: all"
     class="fd-input"
     type="text"
-    [attr.placeholder]="placeholder"
+    [attr.placeholder]="placeholder || ('coreUploadCollection.formItemPlaceholder' | fdTranslate)"
     [(ngModel)]="fileName"
     [state]="!fileName ? 'error' : null"
     (click)="$event.stopPropagation()"

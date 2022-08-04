@@ -7,11 +7,12 @@ import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 import { PlatformFileUploaderModule } from './platform-file-uploader.module';
 import { FileUploaderSelectionChangeEvent, PlatformFileUploaderComponent } from './platform-file-uploader.component';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-file-uploader-test',
     template: `
-        <fdp-form-group #fg>
+        <fdp-form-group #fg [fdContentDensity]="contentDensity">
             <fdp-form-field
                 #ffl1
                 label="File Uploader"
@@ -39,7 +40,7 @@ import { FileUploaderSelectionChangeEvent, PlatformFileUploaderComponent } from 
 class PlatformFileUploaderTestComponent {
     @ViewChild(PlatformFileUploaderComponent)
     platformFileUploader: PlatformFileUploaderComponent;
-
+    contentDensity: ContentDensityMode = ContentDensityMode.COZY;
     files: File[];
 
     invalidFiles: File[];
@@ -91,7 +92,7 @@ describe('PlatformFileUploaderComponent', () => {
 
     it('should set compact', async () => {
         await wait(fixture);
-        fileInput.contentDensity = 'compact';
+        component.contentDensity = ContentDensityMode.COMPACT;
         fixture.detectChanges();
         const fileUploaderData = fixture.debugElement.query(By.css('.fd-file-uploader__input'));
         const disabledValue = fileUploaderData.nativeElement.classList;
@@ -100,7 +101,7 @@ describe('PlatformFileUploaderComponent', () => {
 
     it('should upload file', async () => {
         await wait(fixture);
-        fileInput.contentDensity = 'compact';
+        component.contentDensity = ContentDensityMode.COMPACT;
         fixture.detectChanges();
         const fileUploaderData = fixture.debugElement.query(By.css('.fd-file-uploader__input'));
         const disabledValue = fileUploaderData.nativeElement.classList;

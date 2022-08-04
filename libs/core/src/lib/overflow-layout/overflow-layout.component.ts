@@ -1,4 +1,3 @@
-import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     Component,
@@ -22,14 +21,15 @@ import {
     OnDestroy,
     Input
 } from '@angular/core';
-import { KeyUtil, resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
-import { debounceTime, distinctUntilChanged, filter, skip, Subject, Subscription } from 'rxjs';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { debounceTime, Subject, Subscription } from 'rxjs';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowContainer } from './interfaces/overflow-container.interface';
 import { OverflowExpand } from './interfaces/overflow-expand.interface';
 import { OverflowItemRef } from './interfaces/overflow-item-ref.interface';
 import { OverflowItem } from './interfaces/overflow-item.interface';
 import { OverflowPopoverContent } from './interfaces/overflow-popover-content.interface';
+import { OverflowLayoutConfig, OverflowLayoutService } from './overflow-layout.service';
 import { FD_OVERFLOW_CONTAINER } from './tokens/overflow-container.token';
 import { FD_OVERFLOW_EXPAND } from './tokens/overflow-expand.token';
 import { FD_OVERFLOW_ITEM_REF } from './tokens/overflow-item-ref.token';
@@ -45,7 +45,8 @@ import { FD_OVERFLOW_ITEM } from './tokens/overflow-item.token';
         {
             provide: FD_OVERFLOW_CONTAINER,
             useExisting: OverflowLayoutComponent
-        }
+        },
+        OverflowLayoutService
     ]
 })
 export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, OverflowContainer {
@@ -65,6 +66,18 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
         return this._maxVisibleItems;
     }
 
+    /** Direction of the fitting items calculation. */
+    @Input()
+    showMorePosition: 'left' | 'right' = 'right';
+
+    /** Whether to render hidden items in reverse order. */
+    @Input()
+    reverseHiddenItems = false;
+
+    /** Whether to enable keyboard navigation. */
+    @Input()
+    enableKeyboardNavigation = true;
+
     /**
      * Event, triggered when amount of visible items has been changed.
      */
@@ -81,7 +94,7 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
      * @hidden
      * List of items to display.
      */
-    @ContentChildren(FD_OVERFLOW_ITEM_REF)
+    @ContentChildren(FD_OVERFLOW_ITEM_REF, { descendants: true })
     _items: QueryList<OverflowItemRef>;
 
     /**
@@ -95,7 +108,7 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
      * @hidden
      * List of items that can be focused.
      */
-    @ContentChildren(FD_OVERFLOW_ITEM)
+    @ContentChildren(FD_OVERFLOW_ITEM, { descendants: true })
     _overflowItems: QueryList<OverflowItem>;
 
     /**
@@ -140,12 +153,6 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
     private readonly _initialClass = 'fd-overflow-layout';
 
     /** @hidden */
-    private _keyboardEventsManager: FocusKeyManager<OverflowItem>;
-
-    /** @hidden */
-    private _listenToItemResize = true;
-
-    /** @hidden */
     private readonly _subscription = new Subscription();
 
     /** @hidden */
@@ -155,10 +162,10 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
     private _fillTrigger$ = new Subject<void>();
 
     /** @hidden */
-    private _dir: 'rtl' | 'ltr' = 'ltr';
+    private _maxVisibleItems = Infinity;
 
     /** @hidden */
-    private _maxVisibleItems = Infinity;
+    private _canListenToResize = false;
 
     /** Overflow Layout more button text */
     @Input()
@@ -166,44 +173,31 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
 
     /** @hidden */
     constructor(
-        private _cdr: ChangeDetectorRef,
-        private _zone: NgZone,
-        private _elRef: ElementRef,
-        @Optional() private _rtlService: RtlService
+        protected _cdr: ChangeDetectorRef,
+        protected _zone: NgZone,
+        protected _elRef: ElementRef,
+        protected _overflowLayoutService: OverflowLayoutService,
+        @Optional() protected _rtlService: RtlService
     ) {
-        this._subscription.add(this._fillTrigger$.pipe(debounceTime(30)).subscribe(() => this._fitVisibleItems()));
+        this._subscription.add(
+            this._fillTrigger$.pipe(debounceTime(30)).subscribe(() => this._overflowLayoutService.fitVisibleItems())
+        );
     }
 
     /**
      * Triggers layout recalculation of the items.
      */
     triggerRecalculation(): void {
+        if (!this._canListenToResize) {
+            return;
+        }
+        this._overflowLayoutService.setConfig(this._getConfig());
         this._fillTrigger$.next();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
-    }
-
-    /** @hidden */
-    @HostListener('keyup', ['$event'])
-    private _keyUpHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, TAB)) {
-            const index = this._allItems.findIndex(
-                (item) => item.overflowItem?.focusable && item.elementRef.nativeElement === event.target
-            );
-            if (index !== -1) {
-                this._keyboardEventsManager.setActiveItem(index);
-            }
-        }
-
-        if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
-            event.preventDefault();
-
-            // passing the event to key manager so, we get a change fired
-            this._keyboardEventsManager.onKeydown(event);
-        }
     }
 
     /**
@@ -214,7 +208,7 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
         const index = this._overflowItems.toArray().findIndex((item) => item === element);
 
         if (index !== -1) {
-            this._keyboardEventsManager.setActiveItem(index);
+            this._overflowLayoutService._keyboardEventsManager.setActiveItem(index);
         }
     }
 
@@ -240,173 +234,73 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._fitVisibleItems();
-        this._setFocusKeyManager();
-        this._listenToChanges();
-        this._subscribeToRtl();
-    }
-
-    /** @hidden */
-    private _listenToChanges(): void {
         this._subscription.add(
-            this._items.changes.subscribe(() => {
-                setTimeout(() => {
-                    this._fitVisibleItems();
-                });
+            this._overflowLayoutService.detectChanges.subscribe(() => {
+                this._cdr.detectChanges();
             })
         );
 
-        this._listenToSizeChanges(this._elRef.nativeElement, this._itemsWrapper.nativeElement);
-    }
-
-    /** @hidden */
-    private _listenToSizeChanges(...elements: HTMLElement[]): void {
-        elements.forEach((element) =>
-            this._subscription.add(
-                resizeObservable(element)
-                    .pipe(
-                        skip(1),
-                        filter(() => this._listenToItemResize),
-                        distinctUntilChanged(),
-                        debounceTime(30)
-                    )
-                    .subscribe(() => {
-                        setTimeout(() => {
-                            this._fitVisibleItems();
-                        });
-                    })
-            )
+        this._subscription.add(
+            this._overflowLayoutService.onResult.subscribe((result) => {
+                this._hiddenItems = result.hiddenItems;
+                this._showMore = result.showMore;
+                this.hiddenItemsCount.emit(result.hiddenItems.length);
+                this.visibleItemsCount.emit(this._allItems.filter((i) => !i.hidden).length);
+                this._cdr.detectChanges();
+            })
         );
-    }
 
-    /** @hidden */
-    private _fitVisibleItems(): void {
-        this._listenToItemResize = false;
+        this._subscription.add(
+            this._items.changes.subscribe(() => {
+                this._allItems = this._items.toArray();
+                this._cdr.detectChanges();
+            })
+        );
+
         this._allItems = this._items.toArray();
-        this._visibleItems.forEach((i) => (i.containerRef.hidden = false));
-        this._allItems.forEach((item, index) => {
-            item.hidden = false;
-            item.index = index;
-        });
         this._cdr.detectChanges();
-        const containerWidth = this._elRef.nativeElement.getBoundingClientRect().width;
-        const itemsContainerWidth = this._itemsWrapper.nativeElement.getBoundingClientRect().width;
 
-        if (
-            containerWidth >= itemsContainerWidth &&
-            this._visibleItems.length <= this.maxVisibleItems &&
-            this._hiddenItems.length === 0
-        ) {
-            this._showMore = false;
-            this._cdr.detectChanges();
-            this._listenToItemResize = true;
+        this._overflowLayoutService.startListening(this._getConfig());
+
+        this._canListenToResize = true;
+    }
+
+    /** @hidden */
+    private _getConfig(): OverflowLayoutConfig {
+        return {
+            visibleItems: this._visibleItems,
+            items: this._items,
+            focusableItems: this._overflowItems,
+            itemsWrapper: this._itemsWrapper.nativeElement,
+            showMoreContainer: this._showMoreContainer.nativeElement,
+            layoutContainerElement: this._layoutContainer.nativeElement,
+            maxVisibleItems: this.maxVisibleItems,
+            direction: this.showMorePosition,
+            enableKeyboardNavigation: this.enableKeyboardNavigation,
+            reverseHiddenItems: this.reverseHiddenItems
+        };
+    }
+
+    /** @hidden */
+    @HostListener('keyup', ['$event'])
+    private _keyUpHandler(event: KeyboardEvent): void {
+        if (!this.enableKeyboardNavigation) {
             return;
         }
-        this._showMore = true;
-        let fittingElmCount = 0;
-        let fittingElmsWidth = 0;
-        let shouldHideItems = false;
-        this._cdr.detectChanges();
-
-        const showMoreContainerWidth = this._showMoreContainer.nativeElement.getBoundingClientRect().width;
-        let layoutWidth = this._layoutContainer.nativeElement.getBoundingClientRect().width;
-
-        // Try to find all forced visible items
-        const forcedItemsIndexes = this._getForcedItemsIndexes();
-
-        forcedItemsIndexes.forEach((itemIndex) => {
-            const container = this._visibleItems.get(itemIndex);
-            if (!container) {
-                return;
-            }
-            const elementSize = this._getElementWidth(container.elementRef.nativeElement);
-
-            layoutWidth -= elementSize;
-        });
-
-        if (layoutWidth < 0 && forcedItemsIndexes.length > 0) {
-            console.warn(
-                'There is no enough space to fit all forced visible items into the container. Please adjust their visibility accordingly.'
+        if (KeyUtil.isKeyCode(event, TAB)) {
+            const index = this._allItems.findIndex(
+                (item) => item.overflowItem?.focusable && item.elementRef.nativeElement === event.target
             );
+            if (index !== -1) {
+                this._overflowLayoutService._keyboardEventsManager.setActiveItem(index);
+            }
         }
 
-        this._visibleItems.forEach((item, index) => {
-            const itemRef = this._allItems[index];
-            if (shouldHideItems && !itemRef.overflowItem.forceVisibility) {
-                item.containerRef.hidden = true;
-                itemRef.hidden = true;
-                return;
-            }
+        if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
+            event.preventDefault();
 
-            const elementSize = this._getElementWidth(item.elementRef.nativeElement);
-            const combinedWidth = fittingElmsWidth + elementSize;
-
-            if (
-                (combinedWidth <= layoutWidth ||
-                    (item === this._visibleItems.last && combinedWidth <= layoutWidth + showMoreContainerWidth)) &&
-                fittingElmCount < this.maxVisibleItems
-            ) {
-                fittingElmsWidth += elementSize;
-                fittingElmCount++;
-            } else if (!itemRef.overflowItem.forceVisibility) {
-                shouldHideItems = true;
-                item.containerRef.hidden = true;
-                itemRef.hidden = true;
-            }
-        });
-
-        this._hiddenItems = this._allItems.filter((i) => i.hidden);
-        this.visibleItemsCount.emit(this._allItems.filter((i) => !i.hidden).length);
-        this.hiddenItemsCount.emit(this._hiddenItems.length);
-
-        this._showMore = this._hiddenItems.length > 0;
-
-        this._cdr.detectChanges();
-
-        this._listenToItemResize = true;
-    }
-
-    /** @hidden */
-    private _setFocusKeyManager(): void {
-        this._dir = this._rtlService?.rtl.value ? 'rtl' : 'ltr';
-        this._keyboardEventsManager = new FocusKeyManager(this._overflowItems)
-            .withWrap()
-            .withHorizontalOrientation(this._dir)
-            .skipPredicate((item) => !item.focusable || item.hidden);
-    }
-
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        if (!this._rtlService) {
-            return;
+            // passing the event to key manager so, we get a change fired
+            this._overflowLayoutService._keyboardEventsManager.onKeydown(event);
         }
-
-        const rtlSub = this._rtlService.rtl.subscribe((isRtl) => {
-            this._dir = isRtl ? 'rtl' : 'ltr';
-
-            this._keyboardEventsManager = this._keyboardEventsManager.withHorizontalOrientation(isRtl ? 'rtl' : 'ltr');
-        });
-
-        this._subscription.add(rtlSub);
-    }
-
-    /** @hidden */
-    private _getForcedItemsIndexes(): number[] {
-        return this._allItems
-            .map((item, index) => (item.overflowItem.forceVisibility ? index : -1))
-            .filter((i) => i > -1);
-    }
-
-    /**
-     * @hidden
-     * Returns combined width of the element including margins.
-     * @param element Element to calculate width of.
-     */
-    private _getElementWidth(element: HTMLElement): number {
-        const elementStyle = getComputedStyle(element);
-        const elementWidth = element.getBoundingClientRect().width;
-        const elementSize = elementWidth + parseFloat(elementStyle.marginLeft) + parseFloat(elementStyle.marginRight);
-
-        return elementSize;
     }
 }

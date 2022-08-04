@@ -4,7 +4,7 @@
     <fd-input-group
         glyph="decline"
         placeholder="Search"
-        [compact]="true"
+        fdCompact
         [disabled]="loading"
         [button]="true"
         [(ngModel)]="searchTerm"
@@ -17,7 +17,7 @@
         fd-button
         label="Toggle Loading"
         (click)="loading = !loading"
-        [compact]="true"
+        fdCompact
         fdType="transparent"
         glyph="refresh"
     ></button>
@@ -27,7 +27,7 @@
         fd-button
         label="New Item"
         (click)="openDialog(newItemDialog)"
-        [compact]="true"
+        fdCompact
         fdType="transparent"
         glyph="add"
     ></button>

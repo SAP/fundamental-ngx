@@ -1,22 +1,19 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ContentDensityEnum } from '@fundamental-ngx/core/utils';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { FiltersComponent, FiltersDialogData } from './filters.component';
+import { FiltersComponent } from './filters.component';
 import { PlatformTableModule } from '../../../table.module';
 
 describe('PlatformTableFiltersDialogComponent', () => {
     let component: FiltersComponent;
     let fixture: ComponentFixture<FiltersComponent>;
     const dialogRef = new DialogRef();
-    const dialogData: FiltersDialogData = {
+    dialogRef.data = {
         columns: [],
         filterBy: [],
-        viewSettingsFilters: [],
-        tableContentDensity: ContentDensityEnum.COZY
+        viewSettingsFilters: []
     };
-    dialogRef.data = dialogData;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({

@@ -1,0 +1,55 @@
+<ul fn-list byline>
+    <li fn-list-group-header>group header</li>
+    <li fn-list-item>
+        <span *fnListItemTitle>Byline List Item Title</span>
+        <span *fnListItemByline>List Item Byline</span>
+    </li>
+    <li fn-list-item>
+        <fn-avatar *fnListItemPrefix label="M" [circle]="true"></fn-avatar>
+        <span *fnListItemTitle>Byline List Item with Avatar Title</span>
+        <span *fnListItemByline>List Item Byline</span>
+    </li>
+    <li fn-list-item>
+        <span *fnListItemTitle>Byline List Item with Status Title</span>
+        <fn-object-status *fnListItemByline state="critical" glyph="status-critical" label="Critical">
+        </fn-object-status>
+    </li>
+    <li fn-list-item>
+        <span *fnListItemTitle>Byline List Item With Buttons Title</span>
+        <span *fnListItemByline>List Item Byline</span>
+        <ng-template fnListItemActions>
+            <button fn-button fnType="secondary" glyph="edit"></button>
+            <button fn-button fnType="secondary" glyph="decline"></button>
+        </ng-template>
+    </li>
+    <li fn-list-item>
+        <span *fnListItemTitle>Byline List Item With Number and Navigation Title</span>
+        <span *fnListItemByline>List Item Byline</span>
+        <span *fnListItemPostfix>42</span>
+        <button *fnListItemActions fn-button fnType="layout" glyph="navigation-right-arrow"></button>
+    </li>
+    <li fn-list-item>
+        <span *fnListItemTitle>Byline List Item With Navigation Arrow Title</span>
+        <span *fnListItemByline>List Item Byline</span>
+        <button *fnListItemActions fn-button fnType="layout" glyph="navigation-right-arrow"></button>
+    </li>
+    <li fn-list-item>
+        <span *fnListItemTitle>Byline List Item with Text at the End Title</span>
+        <span *fnListItemByline>List Item Byline</span>
+        <span *fnListItemPostfix>42</span>
+    </li>
+    <li fn-list-item>
+        <fd-icon *fnListItemPrefix glyph="person-placeholder"></fd-icon>
+        <span *fnListItemTitle>Byline List Item With Icon Title</span>
+        <span *fnListItemByline>List Item Byline</span>
+    </li>
+    <li fn-list-item fnDisabled>
+        <span *fnListItemTitle>Disabled Byline List Item Title</span>
+        <span *fnListItemByline>List Item Byline</span>
+    </li>
+    <li fn-list-item>
+        <fn-checkbox *fnListItemCheckbox></fn-checkbox>
+        <span *fnListItemTitle>Byline List Item With Checkbox</span>
+        <span *fnListItemByline>List Item Byline</span>
+    </li>
+</ul>

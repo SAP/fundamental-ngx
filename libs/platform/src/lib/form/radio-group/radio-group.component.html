@@ -15,7 +15,6 @@
                         context: {
                             name: name,
                             value: radio.value,
-                            contentDensity: contentDensity,
                             state: state,
                             disabled: disabled || radio.disabled,
                             ariaLabel: radio.ariaLabel,
@@ -36,14 +35,7 @@
 <ng-template #listvalues>
     <ng-container *ngIf="hasNoValue">
         <div fd-form-item>
-            <fdp-radio-button
-                [name]="name"
-                value="None"
-                [contentDensity]="contentDensity"
-                [state]="state"
-                [disabled]="disabled"
-                [forceRender]="true"
-            >
+            <fdp-radio-button [name]="name" value="None" [state]="state" [disabled]="disabled" [forceRender]="true">
                 {{ noValueLabel }}
             </fdp-radio-button>
         </div>
@@ -53,7 +45,6 @@
             <fdp-radio-button
                 [name]="name"
                 [value]="lookupValue(item)"
-                [contentDensity]="contentDensity"
                 [state]="state"
                 [disabled]="_getListItemDisabledValue(item)"
                 [forceRender]="true"

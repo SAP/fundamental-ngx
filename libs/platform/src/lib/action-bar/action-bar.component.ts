@@ -29,10 +29,11 @@ export class ActionBarComponent extends BaseComponent implements OnInit {
     showBackButton = false;
 
     /**
+     * @deprecated use i18n capabilities instead
      * "back" button label.
      */
     @Input()
-    backButtonLabel = 'Go Back';
+    backButtonLabel: string;
 
     /**
      * Emitted event when "back" button is clicked.

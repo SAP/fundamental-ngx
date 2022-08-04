@@ -1,18 +1,19 @@
-<header>Approval Flow</header>
-<fd-info-label label="SAP Ariba Component" title="SAP Ariba Component" color="8"></fd-info-label>
-<description>
-    The Approval Flow component is a complex component which tracks and manages the approval process for a business
-    object. From the Approval Flow component a user is able to:
+<fd-doc-page>
+    <header>Approval Flow</header>
+    <fd-info-label label="SAP Ariba Component" title="SAP Ariba Component" color="8"></fd-info-label>
+    <description>
+        The Approval Flow component is a complex component which tracks and manages the approval process for a business
+        object. From the Approval Flow component a user is able to:
 
-    <ul>
-        <li>See the progress of the approval process</li>
-        <li>Add, edit, move (drag and drop) and delete approvers</li>
-        <li>Add and remove watchers</li>
-        <li>Send reminder notifications to approvers</li>
-    </ul>
-</description>
+        <ul>
+            <li>See the progress of the approval process</li>
+            <li>Add, edit, move (drag and drop) and delete approvers</li>
+            <li>Add and remove watchers</li>
+            <li>Send reminder notifications to approvers</li>
+        </ul>
+    </description>
 
-<import module="PlatformApprovalFlowModule" subPackage="approval-flow"></import>
+    <import module="PlatformApprovalFlowModule" subPackage="approval-flow"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs [hasI18n]="true"></fd-header-tabs>
+</fd-doc-page>

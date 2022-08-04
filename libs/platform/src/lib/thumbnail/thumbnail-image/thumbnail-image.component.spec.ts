@@ -10,6 +10,7 @@ import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { ThumbnailImageComponent } from './thumbnail-image.component';
 import { Media } from '../thumbnail.interfaces';
+import { PlatformThumbnailModule } from '../thumbnail.module';
 
 @Component({
     template: `<fdp-thumbnail-image [mediaList]="mediaList"></fdp-thumbnail-image>`
@@ -45,8 +46,8 @@ describe('DefaultThumbnailImageComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule],
-            declarations: [ThumbnailImageComponent, DefaultThumbnailImageTestComponent],
+            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule, PlatformThumbnailModule],
+            declarations: [DefaultThumbnailImageTestComponent],
             providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();
     }));
@@ -108,8 +109,8 @@ describe('HorizontalThumbnailImageComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule],
-            declarations: [HorizontalThumbnailImageTestComponent, ThumbnailImageComponent],
+            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule, PlatformThumbnailModule],
+            declarations: [HorizontalThumbnailImageTestComponent],
             providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();
     }));
@@ -192,8 +193,8 @@ describe('MoreImagesThumbnailImageTestComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule],
-            declarations: [MoreImagesThumbnailImageTestComponent, ThumbnailImageComponent],
+            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule, PlatformThumbnailModule],
+            declarations: [MoreImagesThumbnailImageTestComponent],
             providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();
     }));

@@ -11,7 +11,7 @@
     <div *ngIf="mainTitle" class="fd-form-header">
         <ng-template [ngTemplateOutlet]="mainTitleTemplate"></ng-template>
     </div>
-    <div class="fd-container fd-form-layout-grid-container" [class.fd-col--compact]="compact">
+    <div class="fd-container fd-form-layout-grid-container" [class.fd-col--compact]="contentDensityObserver.isCompact">
         <ng-container *ngFor="let row of formRows | keyvalue; trackBy: trackByFn">
             <div class="fd-row fd-row--top">
                 <ng-container *ngIf="$fieldGroup(row.value) as value">
@@ -22,7 +22,7 @@
                     <div
                         class="fd-form-group fd-col__form-group fd-col"
                         [class]="xlCol"
-                        [class.fd-col--compact]="compact"
+                        [class.fd-col--compact]="contentDensityObserver.isCompact"
                     >
                         <div class="fd-form-item fd-row__form-item fd-row">
                             <div

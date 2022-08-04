@@ -1,36 +1,37 @@
-<header>Message Toast</header>
-<description>
-    <p>
-        The message toast is a small, non-disruptive popup for success messages that disappears automatically after a
-        few seconds. When message toast is displayed, it is always centered horizontally at the bottom of the screen and
-        fades in and out automatically.
-    </p>
+<fd-doc-page>
+    <header>Message Toast</header>
+    <description>
+        <p>
+            The message toast is a small, non-disruptive popup for success messages that disappears automatically after
+            a few seconds. When message toast is displayed, it is always centered horizontally at the bottom of the
+            screen and fades in and out automatically.
+        </p>
 
-    <p></p>
-    <p>
-        <b>Note:</b> By default, Message Toast uses default <code>MessageToastConfig</code> configuration.<br />
-        Users can override this configuration with <code>MessageToastModule.withConfig(config)</code> method when
-        importing <code>MessageToastModule</code> module.<br />
-        Default timing and duration of the message toast is 3000 ms. The duration can be above 3000 ms, but it's not
-        recommended to be less than 3000 ms.
-    </p>
+        <p></p>
+        <p>
+            <b>Note:</b> By default, Message Toast uses default <code>MessageToastConfig</code> configuration.<br />
+            Users can override this configuration with <code>MessageToastModule.withConfig(config)</code> method when
+            importing <code>MessageToastModule</code> module.<br />
+            Default timing and duration of the message toast is 3000 ms. The duration can be above 3000 ms, but it's not
+            recommended to be less than 3000 ms.
+        </p>
 
-    <h2>Usage</h2>
-    <b>Use message toast if:</b>
-    <ul>
-        <li>To display a short success message.</li>
-        <li>To avoid interrupting the user while they are performing an action.</li>
-        <li>To confirm a successful action.</li>
-    </ul>
+        <h2>Usage</h2>
+        <b>Use message toast if:</b>
+        <ul>
+            <li>To display a short success message.</li>
+            <li>To avoid interrupting the user while they are performing an action.</li>
+            <li>To confirm a successful action.</li>
+        </ul>
 
-    <b>Do not use the message toast if:</b>
-    <ul>
-        <li>You want to display an error or warning message.</li>
-        <li>You want to interrupt users while they are performing an action.</li>
-        <li>You want to make sure that users read the message before they leave the page.</li>
-    </ul>
-</description>
-<import module="MessageToastModule" subPackage="message-toast"></import>
+        <b>Do not use the message toast if:</b>
+        <ul>
+            <li>You want to display an error or warning message.</li>
+            <li>You want to interrupt users while they are performing an action.</li>
+            <li>You want to make sure that users read the message before they leave the page.</li>
+        </ul>
+    </description>
+    <import module="MessageToastModule" subPackage="message-toast"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

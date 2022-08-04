@@ -35,7 +35,7 @@
 <description>
     You can change size of time component by passing
     <ul>
-        <li><code>[compact]="true"</code>, which is dedicated for desktop devices and makes time items smaller.</li>
+        <li><code>fdCompact</code>, which is dedicated for desktop devices and makes time items smaller.</li>
         <li><code>[tablet]="true"</code>, which is dedicated for tablets and changes container spacing.</li>
     </ul>
 </description>
@@ -95,19 +95,6 @@
 <code-example [exampleFiles]="timeTwoDigits"></code-example>
 
 <separator></separator>
-
-<fd-docs-section-title id="24-hour-clock" componentName="time"> Internationalization </fd-docs-section-title>
-<description>
-    The time component uses a custom service called TimeI18nLabels to give aria-labels to the buttons and inputs.
-    Inspect the HTML elements to see the Spanish aria-labels. The time component also uses a custom service called
-    TimeI18n to allow the possibility of changing the name of the meridian modifier. In the example below, the german
-    vorm. and nach. are shown. Also it is possible to modify placeholders of the inputs, such as hours, minutes,
-    seconds, and meridian. Besides service allows to define if meridian modifier should be validated case sensitive.
-</description>
-<component-example>
-    <fd-time-i18n-example></fd-time-i18n-example>
-</component-example>
-<code-example [exampleFiles]="timeI18n"></code-example>
 
 <separator></separator>
 

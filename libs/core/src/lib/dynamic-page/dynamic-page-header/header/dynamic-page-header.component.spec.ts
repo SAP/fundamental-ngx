@@ -70,7 +70,7 @@ describe('DynamicPageTitleComponent', () => {
 
         header.size = 'small';
 
-        tick(5);
+        tick(50);
 
         expect(breadcrumbSpy).toHaveBeenCalled();
         expect(contentToolbarSpy).toHaveBeenCalledWith('small');

@@ -11,19 +11,19 @@
                         "depConstraints": [
                             {
                                 "sourceTag": "scope:fd",
-                                "onlyDependOnLibsWithTags": ["scope:fd"]
+                                "onlyDependOnLibsWithTags": ["scope:fd", "scope:i18n"]
                             },
                             {
                                 "sourceTag": "scope:fdp",
-                                "onlyDependOnLibsWithTags": ["scope:fd", "scope:fdp"]
+                                "onlyDependOnLibsWithTags": ["scope:fd", "scope:fdp", "scope:i18n"]
                             },
                             {
                                 "sourceTag": "scope:fn",
-                                "onlyDependOnLibsWithTags": ["scope:fd", "scope:fn"]
+                                "onlyDependOnLibsWithTags": ["scope:fd", "scope:fn", "scope:i18n"]
                             },
                             {
                                 "sourceTag": "scope:datetime-adapter",
-                                "onlyDependOnLibsWithTags": ["scope:fd"]
+                                "onlyDependOnLibsWithTags": ["scope:fd", "scope:i18n"]
                             },
                             {
                                 "sourceTag": "scope:docs",
@@ -31,7 +31,8 @@
                                     "scope:fd",
                                     "scope:fdp",
                                     "scope:fn",
-                                    "scope:datetime-adapter"
+                                    "scope:datetime-adapter",
+                                    "scope:i18n"
                                 ]
                             }
                         ],

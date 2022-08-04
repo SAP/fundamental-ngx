@@ -18,4 +18,4 @@ export * from './directives/byline/list-content.directive';
 export * from './directives/byline/list-thumbnail.directive';
 export * from './list.component';
 export * from './list-focus-item.model';
-export * from './list.tokens';
+export * from './deprecated-list-content-density,directive';

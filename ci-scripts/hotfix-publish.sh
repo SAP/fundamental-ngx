@@ -19,7 +19,7 @@ if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Hotfix-release" ]]; then
   # delete temp branch
   git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$HOTFIX_BRANCH" > /dev/null 2>&1;
 
-  std_ver=$(npm run std-version)
+  std_ver=$(yarn run std-version)
 
   release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
 
@@ -38,10 +38,10 @@ else
 fi
 
 git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git" $release_tag > /dev/null;
-npm run build-deploy-library
+yarn run build-deploy-library
 
 #cd dist/libs
-#NPM_BIN="$(which npm)"
+#NPM_BIN="$(which yarn)"
 #
 #
 #
@@ -64,7 +64,7 @@ npm run build-deploy-library
 #cd ../../
 
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Hotfix-release" ]]; then
-    npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch $OLD_TAG
+    yarn run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch $OLD_TAG
 fi
 
 
@@ -72,6 +72,6 @@ fi
 if [[ $latest == "true" ]]; then
   git stash
   git checkout $MAIN_BRANCH
-  npm run std-version
+  yarn run std-version
   git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git" $MAIN_BRANCH > /dev/null;
 fi
