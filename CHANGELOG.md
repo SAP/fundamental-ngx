@@ -1,4 +1,15 @@
 
+## [0.36.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.2...v0.36.0-rc.3) (2022-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core,platform:** replace the current i18n approach for the components in the package
+
+### Features
+
+* **core,platform:** add i18n package ([#7900](https://github.com/SAP/fundamental-ngx/issues/7900)) ([484cc52](https://github.com/SAP/fundamental-ngx/commit/484cc52b46ea4660bb94c5d5b2667301414e16bf))
+
 ## [0.36.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.1...v0.36.0-rc.2) (2022-08-04)
 
 
