@@ -4,9 +4,9 @@ import { BarModule } from '../bar.module';
 
 @Component({
     template: `
-        <fd-bar-element #directiveElement fd-bar-element [fullWidth]="fullWidth" [isTitle]="isTitle"
-            >Bar Element Test</fd-bar-element
-        >
+        <fd-bar-element #directiveElement [fullWidth]="fullWidth" [isTitle]="isTitle">
+            Bar Element Test
+        </fd-bar-element>
     `
 })
 class TestComponent {
