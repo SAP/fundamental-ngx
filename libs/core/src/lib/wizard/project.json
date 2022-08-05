@@ -1,0 +1,45 @@
+{
+  "projectType": "library",
+  "root": "libs/core/src/lib/wizard",
+  "sourceRoot": "libs/core/src/lib/wizard",
+  "prefix": "fd",
+  "architect": {
+    "build": {
+      "builder": "@nrwl/angular:package",
+      "outputs": [
+        "dist/libs/core/wizard"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/wizard/tsconfig.lib.json",
+        "project": "libs/core/src/lib/wizard/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/wizard/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "test": {
+      "builder": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "libs/core/src/lib/wizard/test.ts",
+        "tsConfig": "libs/core/src/lib/wizard/tsconfig.spec.json",
+        "karmaConfig": "libs/core/src/lib/wizard/karma.conf.js"
+      }
+    },
+    "lint": {
+      "builder": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/wizard/**/*.ts",
+          "libs/core/src/lib/wizard/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
+}

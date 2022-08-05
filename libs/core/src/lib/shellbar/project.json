@@ -1,0 +1,45 @@
+{
+  "projectType": "library",
+  "root": "libs/core/src/lib/shellbar",
+  "sourceRoot": "libs/core/src/lib/shellbar",
+  "prefix": "fd",
+  "architect": {
+    "build": {
+      "builder": "@nrwl/angular:package",
+      "outputs": [
+        "dist/libs/core/shellbar"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/shellbar/tsconfig.lib.json",
+        "project": "libs/core/src/lib/shellbar/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/shellbar/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "test": {
+      "builder": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "libs/core/src/lib/shellbar/test.ts",
+        "tsConfig": "libs/core/src/lib/shellbar/tsconfig.spec.json",
+        "karmaConfig": "libs/core/src/lib/shellbar/karma.conf.js"
+      }
+    },
+    "lint": {
+      "builder": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/shellbar/**/*.ts",
+          "libs/core/src/lib/shellbar/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
+}

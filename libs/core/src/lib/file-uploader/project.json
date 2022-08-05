@@ -1,0 +1,45 @@
+{
+  "projectType": "library",
+  "root": "libs/core/src/lib/file-uploader",
+  "sourceRoot": "libs/core/src/lib/file-uploader",
+  "prefix": "fd",
+  "architect": {
+    "build": {
+      "builder": "@nrwl/angular:package",
+      "outputs": [
+        "dist/libs/core/file-uploader"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/file-uploader/tsconfig.lib.json",
+        "project": "libs/core/src/lib/file-uploader/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/file-uploader/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "test": {
+      "builder": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "libs/core/src/lib/file-uploader/test.ts",
+        "tsConfig": "libs/core/src/lib/file-uploader/tsconfig.spec.json",
+        "karmaConfig": "libs/core/src/lib/file-uploader/karma.conf.js"
+      }
+    },
+    "lint": {
+      "builder": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/file-uploader/**/*.ts",
+          "libs/core/src/lib/file-uploader/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
+}

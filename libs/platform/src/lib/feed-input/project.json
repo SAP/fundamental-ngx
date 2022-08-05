@@ -1,0 +1,48 @@
+{
+  "projectType": "library",
+  "root": "libs/platform/src/lib/feed-input",
+  "sourceRoot": "libs/platform/src/lib/feed-input",
+  "prefix": "fdp",
+  "architect": {
+    "build": {
+      "builder": "@nrwl/angular:package",
+      "outputs": [
+        "dist/libs/platform/feed-input"
+      ],
+      "options": {
+        "tsConfig": "libs/platform/src/lib/feed-input/tsconfig.lib.json",
+        "project": "libs/platform/src/lib/feed-input/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/platform/src/lib/feed-input/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "test": {
+      "builder": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "libs/platform/src/lib/feed-input/test.ts",
+        "tsConfig": "libs/platform/src/lib/feed-input/tsconfig.spec.json",
+        "karmaConfig": "libs/platform/src/lib/feed-input/karma.conf.js"
+      }
+    },
+    "lint": {
+      "builder": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/platform/src/lib/feed-input/**/*.ts",
+          "libs/platform/src/lib/feed-input/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fdp"
+  ],
+  "implicitDependencies": [
+    "core"
+  ]
+}

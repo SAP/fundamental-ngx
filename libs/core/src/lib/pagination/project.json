@@ -1,0 +1,45 @@
+{
+  "projectType": "library",
+  "root": "libs/core/src/lib/pagination",
+  "sourceRoot": "libs/core/src/lib/pagination",
+  "prefix": "fd",
+  "architect": {
+    "build": {
+      "builder": "@nrwl/angular:package",
+      "outputs": [
+        "dist/libs/core/pagination"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/pagination/tsconfig.lib.json",
+        "project": "libs/core/src/lib/pagination/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/pagination/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "test": {
+      "builder": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "libs/core/src/lib/pagination/test.ts",
+        "tsConfig": "libs/core/src/lib/pagination/tsconfig.spec.json",
+        "karmaConfig": "libs/core/src/lib/pagination/karma.conf.js"
+      }
+    },
+    "lint": {
+      "builder": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/pagination/**/*.ts",
+          "libs/core/src/lib/pagination/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
+}

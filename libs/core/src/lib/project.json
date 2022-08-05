@@ -1,0 +1,45 @@
+{
+  "projectType": "library",
+  "root": "libs/core/src/lib",
+  "sourceRoot": "libs/core/src/lib",
+  "prefix": "fd",
+  "architect": {
+    "build": {
+      "builder": "@nrwl/angular:package",
+      "outputs": [
+        "dist/libs/core"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/tsconfig.lib.json",
+        "project": "libs/core/src/lib/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "test": {
+      "builder": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "libs/core/src/lib/test.ts",
+        "tsConfig": "libs/core/src/lib/tsconfig.spec.json",
+        "karmaConfig": "libs/core/src/lib/karma.conf.js"
+      }
+    },
+    "lint": {
+      "builder": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/**/*.ts",
+          "libs/core/src/lib/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
+}

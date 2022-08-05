@@ -1,0 +1,50 @@
+{
+  "projectType": "library",
+  "root": "libs/fn/src/lib/notification",
+  "sourceRoot": "libs/fn/src/lib/notification",
+  "prefix": "fn",
+  "architect": {
+    "build": {
+      "builder": "@nrwl/angular:package",
+      "outputs": [
+        "dist/libs/fn/notification"
+      ],
+      "options": {
+        "project": "libs/fn/src/lib/notification/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/fn/src/lib/notification/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/fn/src/lib/notification/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "builder": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "libs/fn/src/lib/notification/test.ts",
+        "tsConfig": "libs/fn/src/lib/notification/tsconfig.spec.json",
+        "karmaConfig": "libs/fn/src/lib/notification/karma.conf.js"
+      }
+    },
+    "lint": {
+      "builder": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/fn/src/lib/notification/**/*.ts",
+          "libs/fn/src/lib/notification/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "scope:fn",
+    "type:lib"
+  ],
+  "implicitDependencies": [
+    "core"
+  ]
+}

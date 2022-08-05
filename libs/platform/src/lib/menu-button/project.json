@@ -1,0 +1,48 @@
+{
+  "projectType": "library",
+  "root": "libs/platform/src/lib/menu-button",
+  "sourceRoot": "libs/platform/src/lib/menu-button",
+  "prefix": "fdp",
+  "architect": {
+    "build": {
+      "builder": "@nrwl/angular:package",
+      "outputs": [
+        "dist/libs/platform/menu-button"
+      ],
+      "options": {
+        "tsConfig": "libs/platform/src/lib/menu-button/tsconfig.lib.json",
+        "project": "libs/platform/src/lib/menu-button/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/platform/src/lib/menu-button/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "test": {
+      "builder": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "libs/platform/src/lib/menu-button/test.ts",
+        "tsConfig": "libs/platform/src/lib/menu-button/tsconfig.spec.json",
+        "karmaConfig": "libs/platform/src/lib/menu-button/karma.conf.js"
+      }
+    },
+    "lint": {
+      "builder": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/platform/src/lib/menu-button/**/*.ts",
+          "libs/platform/src/lib/menu-button/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fdp"
+  ],
+  "implicitDependencies": [
+    "core"
+  ]
+}

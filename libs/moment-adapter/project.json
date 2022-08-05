@@ -1,0 +1,50 @@
+{
+  "root": "libs/moment-adapter",
+  "sourceRoot": "libs/moment-adapter/src",
+  "projectType": "library",
+  "prefix": "fd",
+  "architect": {
+    "build": {
+      "builder": "@nrwl/angular:package",
+      "options": {
+        "tsConfig": "libs/moment-adapter/tsconfig.lib.json",
+        "project": "libs/moment-adapter/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/moment-adapter/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "lint": {
+      "builder": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/moment-adapter/**/*.ts",
+          "libs/moment-adapter/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "builder": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "libs/moment-adapter/src/test.ts",
+        "tsConfig": "libs/moment-adapter/tsconfig.spec.json",
+        "karmaConfig": "libs/moment-adapter/karma.conf.js"
+      },
+      "outputs": [
+        "coverage/libs/moment-adapter"
+      ]
+    }
+  },
+  "schematics": {
+    "@nrwl/schematics:component": {
+      "styleext": "scss"
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:datetime-adapter"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "root": "e2e",
+  "sourceRoot": "e2e",
+  "projectType": "application",
+  "architect": {
+    "lint": {
+      "builder": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "e2e/**/*.ts"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "type:e2e",
+    "scope:components-e2e"
+  ]
+}

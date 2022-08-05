@@ -1,0 +1,45 @@
+{
+  "projectType": "library",
+  "root": "libs/core/src/lib/message-box",
+  "sourceRoot": "libs/core/src/lib/message-box",
+  "prefix": "fd",
+  "architect": {
+    "build": {
+      "builder": "@nrwl/angular:package",
+      "outputs": [
+        "dist/libs/core/message-box"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/message-box/tsconfig.lib.json",
+        "project": "libs/core/src/lib/message-box/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/message-box/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "test": {
+      "builder": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "libs/core/src/lib/message-box/test.ts",
+        "tsConfig": "libs/core/src/lib/message-box/tsconfig.spec.json",
+        "karmaConfig": "libs/core/src/lib/message-box/karma.conf.js"
+      }
+    },
+    "lint": {
+      "builder": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/message-box/**/*.ts",
+          "libs/core/src/lib/message-box/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
+}
