@@ -21,7 +21,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         datetimeInputLabel: 'Hyrja e datës',
         displayDatetimeToggleLabel: 'Shfaq ndryshimin e kalendarit',
         displayTypeDateLabel: 'Data',
-        displayTypeTimeLabel: 'Koha'
+        displayTypeTimeLabel: 'Koha',
+        datetimeOkLabel: 'Ok',
+        datetimeCancelLabel: 'Anulo'
     },
     coreFeedListItem: {
         moreLabel: 'Më shumë',

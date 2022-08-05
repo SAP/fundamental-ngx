@@ -21,7 +21,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         datetimeInputLabel: 'Datetime girişi',
         displayDatetimeToggleLabel: 'Takvim geçişini görüntüle',
         displayTypeDateLabel: 'Tarih',
-        displayTypeTimeLabel: 'Zaman'
+        displayTypeTimeLabel: 'Zaman',
+        datetimeOkLabel: 'Tamam',
+        datetimeCancelLabel: 'İptal'
     },
     coreFeedListItem: {
         moreLabel: 'Daha fazla',

@@ -110,8 +110,8 @@
                                 <button
                                     fd-button
                                     fdType="emphasized"
-                                    [label]="okLabel"
-                                    [ariaLabel]="okLabel"
+                                    [label]="okLabel || ('coreDatetimePicker.datetimeOkLabel' | fdTranslate)"
+                                    [ariaLabel]="okLabel || ('coreDatetimePicker.datetimeOkLabel' | fdTranslate)"
                                     (click)="submit()"
                                 ></button>
                             </fd-bar-element>
@@ -119,8 +119,10 @@
                                 <button
                                     fd-button
                                     fdType="transparent"
-                                    [label]="cancelLabel"
-                                    [ariaLabel]="cancelLabel"
+                                    [label]="cancelLabel || ('coreDatetimePicker.datetimeCancelLabel' | fdTranslate)"
+                                    [ariaLabel]="
+                                        cancelLabel || ('coreDatetimePicker.datetimeCancelLabel' | fdTranslate)
+                                    "
                                     (click)="cancel()"
                                 ></button>
                             </fd-bar-element>

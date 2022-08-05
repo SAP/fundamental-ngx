@@ -24,7 +24,9 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         datetimeInputLabel: 'Поле за дата и час',
         displayDatetimeToggleLabel: 'Покажи/Скрий календар',
         displayTypeDateLabel: 'Дата',
-        displayTypeTimeLabel: 'Час'
+        displayTypeTimeLabel: 'Час',
+        datetimeOkLabel: 'Ok',
+        datetimeCancelLabel: 'Отмени'
     },
     coreFeedListItem: {
         moreLabel: 'Повече',
