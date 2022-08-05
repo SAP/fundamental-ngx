@@ -1,0 +1,32 @@
+name: Unit test all libraries
+
+on:
+    workflow_call:
+        inputs:
+            username:
+                required: true
+                type: string
+        secrets:
+            token:
+                required: true
+
+jobs:
+    install:
+        name: Install dependencies
+        runs-on: ubuntu-latest
+        steps:
+            - name: Installing dependencies
+              uses: ./.github/actions/nodejs
+
+    unit-test:
+        name: Unit test of ${{ matrix.lib }}
+        runs-on: ubuntu-latest
+        needs: install
+        strategy:
+            fail-fast: false
+            matrix:
+                lib: [core, platform, moment-adapter, datetime-adapter, fn]
+        steps:
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/nodejs
+            - run: npx nx test ${{ matrix.lib }} --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
