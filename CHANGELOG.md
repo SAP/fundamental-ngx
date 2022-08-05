@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.5...v0.36.0-rc.6) (2022-08-05)
+
+
+### Bug Fixes
+
+* **core:** additional i18n updates ([#8507](https://github.com/SAP/fundamental-ngx/issues/8507)) ([774efb2](https://github.com/SAP/fundamental-ngx/commit/774efb29b2906baa5145ac892610843babc4c583))
+
 ## [0.36.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.4...v0.36.0-rc.5) (2022-08-05)
 
 
