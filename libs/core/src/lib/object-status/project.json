@@ -3,9 +3,9 @@
   "root": "libs/core/src/lib/object-status",
   "sourceRoot": "libs/core/src/lib/object-status",
   "prefix": "fd",
-  "architect": {
+  "targets": {
     "build": {
-      "builder": "@nrwl/angular:package",
+      "executor": "@nrwl/angular:package",
       "outputs": [
         "dist/libs/core/object-status"
       ],
@@ -21,7 +21,7 @@
       }
     },
     "test": {
-      "builder": "@angular-devkit/build-angular:karma",
+      "executor": "@angular-devkit/build-angular:karma",
       "options": {
         "main": "libs/core/src/lib/object-status/test.ts",
         "tsConfig": "libs/core/src/lib/object-status/tsconfig.spec.json",
@@ -29,7 +29,7 @@
       }
     },
     "lint": {
-      "builder": "@nrwl/linter:eslint",
+      "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/core/src/lib/object-status/**/*.ts",

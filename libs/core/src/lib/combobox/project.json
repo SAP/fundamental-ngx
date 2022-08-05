@@ -3,9 +3,9 @@
   "root": "libs/core/src/lib/combobox",
   "sourceRoot": "libs/core/src/lib/combobox",
   "prefix": "fd",
-  "architect": {
+  "targets": {
     "build": {
-      "builder": "@nrwl/angular:package",
+      "executor": "@nrwl/angular:package",
       "outputs": [
         "dist/libs/core/combobox"
       ],
@@ -21,7 +21,7 @@
       }
     },
     "test": {
-      "builder": "@angular-devkit/build-angular:karma",
+      "executor": "@angular-devkit/build-angular:karma",
       "options": {
         "main": "libs/core/src/lib/combobox/test.ts",
         "tsConfig": "libs/core/src/lib/combobox/tsconfig.spec.json",
@@ -29,7 +29,7 @@
       }
     },
     "lint": {
-      "builder": "@nrwl/linter:eslint",
+      "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/core/src/lib/combobox/**/*.ts",

@@ -3,9 +3,9 @@
   "root": "libs/platform/src/lib/action-button-group",
   "sourceRoot": "libs/platform/src/lib/action-button-group",
   "prefix": "fdp",
-  "architect": {
+  "targets": {
     "build": {
-      "builder": "@nrwl/angular:package",
+      "executor": "@nrwl/angular:package",
       "outputs": [
         "dist/libs/platform/action-button-group"
       ],
@@ -21,7 +21,7 @@
       }
     },
     "test": {
-      "builder": "@angular-devkit/build-angular:karma",
+      "executor": "@angular-devkit/build-angular:karma",
       "options": {
         "main": "libs/platform/src/lib/action-button-group/test.ts",
         "tsConfig": "libs/platform/src/lib/action-button-group/tsconfig.spec.json",
@@ -29,7 +29,7 @@
       }
     },
     "lint": {
-      "builder": "@nrwl/linter:eslint",
+      "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/platform/src/lib/action-button-group/**/*.ts",

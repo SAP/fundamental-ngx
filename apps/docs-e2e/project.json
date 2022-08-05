@@ -2,9 +2,9 @@
   "root": "apps/docs-e2e",
   "projectType": "application",
   "prefix": "",
-  "architect": {
+  "targets": {
     "e2e": {
-      "builder": "@angular-devkit/build-angular:protractor",
+      "executor": "@angular-devkit/build-angular:protractor",
       "options": {
         "protractorConfig": "apps/docs-e2e/protractor.conf.js",
         "devServerTarget": "docs:serve"
@@ -16,7 +16,7 @@
       }
     },
     "lint": {
-      "builder": "@nrwl/linter:eslint",
+      "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "apps/docs-e2e/**/*.ts",

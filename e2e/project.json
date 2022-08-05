@@ -2,9 +2,9 @@
   "root": "e2e",
   "sourceRoot": "e2e",
   "projectType": "application",
-  "architect": {
+  "targets": {
     "lint": {
-      "builder": "@nrwl/linter:eslint",
+      "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "e2e/**/*.ts"

@@ -92,6 +92,7 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { ThemingModule } from '@fundamental-ngx/core/theming';
 import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { TestModule } from '@fundamental-ngx/core/test';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -190,7 +191,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ScrollbarModule,
         ThemingModule,
         OverflowLayoutModule,
-        ContentDensityModule
+        ContentDensityModule,
+        TestModule
     ]
 })
 export class FundamentalNgxCoreModule {}

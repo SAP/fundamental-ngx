@@ -3,9 +3,9 @@
   "root": "libs/fn/src/lib/form",
   "sourceRoot": "libs/fn/src/lib/form",
   "prefix": "fd",
-  "architect": {
+  "targets": {
     "build": {
-      "builder": "@nrwl/angular:package",
+      "executor": "@nrwl/angular:package",
       "outputs": [
         "dist/libs/fn/form"
       ],
@@ -21,7 +21,7 @@
       }
     },
     "test": {
-      "builder": "@angular-devkit/build-angular:karma",
+      "executor": "@angular-devkit/build-angular:karma",
       "options": {
         "main": "libs/fn/src/lib/form/test.ts",
         "tsConfig": "libs/fn/src/lib/form/tsconfig.spec.json",
@@ -29,7 +29,7 @@
       }
     },
     "lint": {
-      "builder": "@nrwl/linter:eslint",
+      "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/fn/src/lib/form/**/*.ts",
