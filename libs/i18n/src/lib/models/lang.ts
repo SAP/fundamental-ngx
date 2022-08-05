@@ -26,6 +26,8 @@ export interface FdLanguage {
         displayDatetimeToggleLabel: FdLanguageKey;
         displayTypeDateLabel: FdLanguageKey;
         displayTypeTimeLabel: FdLanguageKey;
+        datetimeOkLabel: FdLanguageKey;
+        datetimeCancelLabel: FdLanguageKey;
     };
     coreFeedListItem: {
         moreLabel: FdLanguageKey;

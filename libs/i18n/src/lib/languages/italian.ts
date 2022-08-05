@@ -21,7 +21,9 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         datetimeInputLabel: 'Inserimento data/ora',
         displayDatetimeToggleLabel: 'Visualizza/disattiva calendario',
         displayTypeDateLabel: 'Data',
-        displayTypeTimeLabel: 'Volta'
+        displayTypeTimeLabel: 'Volta',
+        datetimeOkLabel: 'Ok',
+        datetimeCancelLabel: 'Anulla'
     },
     coreFeedListItem: {
         moreLabel: 'Altro',

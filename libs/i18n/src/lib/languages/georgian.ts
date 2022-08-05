@@ -21,7 +21,9 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         datetimeInputLabel: 'თარიღის და დროის შესაყვანი ველი',
         displayDatetimeToggleLabel: 'კალენდრის გახსნა/დახურვა',
         displayTypeDateLabel: 'თარიღი',
-        displayTypeTimeLabel: 'დრო'
+        displayTypeTimeLabel: 'დრო',
+        datetimeOkLabel: 'კარგი',
+        datetimeCancelLabel: 'გაუქმება'
     },
     coreFeedListItem: {
         moreLabel: 'მეტი',
