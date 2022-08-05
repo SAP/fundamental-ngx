@@ -1,4 +1,15 @@
 
+## [0.36.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.4...v0.36.0-rc.5) (2022-08-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** * If you rely on dimensions in your unit tests now you have to call component's `updateLayout()` method to organize cards into the columns.
+
+### Bug Fixes
+
+* **core:** fixed card layout flickering issue ([#8496](https://github.com/SAP/fundamental-ngx/issues/8496)) ([cab4afc](https://github.com/SAP/fundamental-ngx/commit/cab4afcfb17ef48bb9f5d843cf4e4de5a56a9813))
+
 ## [0.36.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.3...v0.36.0-rc.4) (2022-08-04)
 
 ## [0.36.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.2...v0.36.0-rc.3) (2022-08-04)
