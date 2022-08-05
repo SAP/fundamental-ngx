@@ -1,45 +1,37 @@
 {
-  "projectType": "library",
-  "root": "libs/core/src/lib/layout-grid",
-  "sourceRoot": "libs/core/src/lib/layout-grid",
-  "prefix": "fd",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:package",
-      "outputs": [
-        "dist/libs/core/layout-grid"
-      ],
-      "options": {
-        "tsConfig": "libs/core/src/lib/layout-grid/tsconfig.lib.json",
-        "project": "libs/core/src/lib/layout-grid/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": false
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/core/src/lib/layout-grid/tsconfig.lib.prod.json"
+    "projectType": "library",
+    "root": "libs/core/src/lib/layout-grid",
+    "sourceRoot": "libs/core/src/lib/layout-grid",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/core/layout-grid"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/layout-grid/tsconfig.lib.json",
+                "project": "libs/core/src/lib/layout-grid/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/layout-grid/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/layout-grid/test.ts",
+                "tsConfig": "libs/core/src/lib/layout-grid/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/layout-grid/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/core/src/lib/layout-grid/**/*.ts", "libs/core/src/lib/layout-grid/**/*.html"]
+            }
         }
-      }
     },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "libs/core/src/lib/layout-grid/test.ts",
-        "tsConfig": "libs/core/src/lib/layout-grid/tsconfig.spec.json",
-        "karmaConfig": "libs/core/src/lib/layout-grid/karma.conf.js"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/core/src/lib/layout-grid/**/*.ts",
-          "libs/core/src/lib/layout-grid/**/*.html"
-        ]
-      }
-    }
-  },
-  "tags": [
-    "type:lib",
-    "scope:fd"
-  ]
+    "tags": ["type:lib", "scope:fd"]
 }

@@ -1,45 +1,37 @@
 {
-  "projectType": "library",
-  "root": "libs/core/src/lib/list",
-  "sourceRoot": "libs/core/src/lib/list",
-  "prefix": "fd",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:package",
-      "outputs": [
-        "dist/libs/core/list"
-      ],
-      "options": {
-        "tsConfig": "libs/core/src/lib/list/tsconfig.lib.json",
-        "project": "libs/core/src/lib/list/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": false
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/core/src/lib/list/tsconfig.lib.prod.json"
+    "projectType": "library",
+    "root": "libs/core/src/lib/list",
+    "sourceRoot": "libs/core/src/lib/list",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/core/list"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/list/tsconfig.lib.json",
+                "project": "libs/core/src/lib/list/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/list/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/list/test.ts",
+                "tsConfig": "libs/core/src/lib/list/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/list/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/core/src/lib/list/**/*.ts", "libs/core/src/lib/list/**/*.html"]
+            }
         }
-      }
     },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "libs/core/src/lib/list/test.ts",
-        "tsConfig": "libs/core/src/lib/list/tsconfig.spec.json",
-        "karmaConfig": "libs/core/src/lib/list/karma.conf.js"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/core/src/lib/list/**/*.ts",
-          "libs/core/src/lib/list/**/*.html"
-        ]
-      }
-    }
-  },
-  "tags": [
-    "type:lib",
-    "scope:fd"
-  ]
+    "tags": ["type:lib", "scope:fd"]
 }

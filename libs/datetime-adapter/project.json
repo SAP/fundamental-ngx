@@ -1,48 +1,40 @@
 {
-  "projectType": "library",
-  "root": "libs/datetime-adapter",
-  "sourceRoot": "libs/datetime-adapter/src",
-  "prefix": "fundamental-ngx",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:package",
-      "outputs": [
-        "dist/libs/datetime-adapter"
-      ],
-      "options": {
-        "project": "libs/datetime-adapter/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": false
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/datetime-adapter/tsconfig.lib.prod.json"
+    "projectType": "library",
+    "root": "libs/datetime-adapter",
+    "sourceRoot": "libs/datetime-adapter/src",
+    "prefix": "fundamental-ngx",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/datetime-adapter"],
+            "options": {
+                "project": "libs/datetime-adapter/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/datetime-adapter/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/datetime-adapter/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
         },
-        "development": {
-          "tsConfig": "libs/datetime-adapter/tsconfig.lib.json"
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/datetime-adapter/src/test.ts",
+                "tsConfig": "libs/datetime-adapter/tsconfig.spec.json",
+                "karmaConfig": "libs/datetime-adapter/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/datetime-adapter/src/**/*.ts", "libs/datetime-adapter/src/**/*.html"]
+            }
         }
-      },
-      "defaultConfiguration": "production"
     },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "libs/datetime-adapter/src/test.ts",
-        "tsConfig": "libs/datetime-adapter/tsconfig.spec.json",
-        "karmaConfig": "libs/datetime-adapter/karma.conf.js"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/datetime-adapter/src/**/*.ts",
-          "libs/datetime-adapter/src/**/*.html"
-        ]
-      }
-    }
-  },
-  "tags": [
-    "type:lib",
-    "scope:datetime-adapter"
-  ]
+    "tags": ["type:lib", "scope:datetime-adapter"]
 }

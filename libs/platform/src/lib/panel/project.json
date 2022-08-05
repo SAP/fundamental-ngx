@@ -1,48 +1,38 @@
 {
-  "projectType": "library",
-  "root": "libs/platform/src/lib/panel",
-  "sourceRoot": "libs/platform/src/lib/panel",
-  "prefix": "fdp",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:package",
-      "outputs": [
-        "dist/libs/platform/panel"
-      ],
-      "options": {
-        "tsConfig": "libs/platform/src/lib/panel/tsconfig.lib.json",
-        "project": "libs/platform/src/lib/panel/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": false
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/platform/src/lib/panel/tsconfig.lib.prod.json"
+    "projectType": "library",
+    "root": "libs/platform/src/lib/panel",
+    "sourceRoot": "libs/platform/src/lib/panel",
+    "prefix": "fdp",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/platform/panel"],
+            "options": {
+                "tsConfig": "libs/platform/src/lib/panel/tsconfig.lib.json",
+                "project": "libs/platform/src/lib/panel/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/platform/src/lib/panel/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/platform/src/lib/panel/test.ts",
+                "tsConfig": "libs/platform/src/lib/panel/tsconfig.spec.json",
+                "karmaConfig": "libs/platform/src/lib/panel/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/platform/src/lib/panel/**/*.ts", "libs/platform/src/lib/panel/**/*.html"]
+            }
         }
-      }
     },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "libs/platform/src/lib/panel/test.ts",
-        "tsConfig": "libs/platform/src/lib/panel/tsconfig.spec.json",
-        "karmaConfig": "libs/platform/src/lib/panel/karma.conf.js"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/platform/src/lib/panel/**/*.ts",
-          "libs/platform/src/lib/panel/**/*.html"
-        ]
-      }
-    }
-  },
-  "tags": [
-    "type:lib",
-    "scope:fdp"
-  ],
-  "implicitDependencies": [
-    "core"
-  ]
+    "tags": ["type:lib", "scope:fdp"],
+    "implicitDependencies": ["core"]
 }

@@ -3,22 +3,20 @@
     "sourceRoot": "tools",
     "projectType": "application",
     "targets": {
-      "lint": {
-        "executor": "@nrwl/linter:eslint",
-        "options": {
-          "lintFilePatterns": [
-            "tools/**/*.ts"
-          ]
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["tools/**/*.ts"]
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "tools/test.ts",
+                "tsConfig": "tools/tsconfig.spec.json",
+                "karmaConfig": "tools/karma.conf.js"
+            }
         }
-      },
-      "test": {
-        "executor": "@angular-devkit/build-angular:karma",
-        "options": {
-          "main": "tools/test.ts",
-          "tsConfig": "tools/tsconfig.spec.json",
-          "karmaConfig": "tools/karma.conf.js"
-        }
-      }
     },
     "tags": ["type:tools", "scope:tools"]
 }

@@ -1,45 +1,40 @@
 {
-  "projectType": "library",
-  "root": "libs/core/src/lib/progress-indicator",
-  "sourceRoot": "libs/core/src/lib/progress-indicator",
-  "prefix": "fd",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:package",
-      "outputs": [
-        "dist/libs/core/progress-indicator"
-      ],
-      "options": {
-        "tsConfig": "libs/core/src/lib/progress-indicator/tsconfig.lib.json",
-        "project": "libs/core/src/lib/progress-indicator/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": false
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/core/src/lib/progress-indicator/tsconfig.lib.prod.json"
+    "projectType": "library",
+    "root": "libs/core/src/lib/progress-indicator",
+    "sourceRoot": "libs/core/src/lib/progress-indicator",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/core/progress-indicator"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/progress-indicator/tsconfig.lib.json",
+                "project": "libs/core/src/lib/progress-indicator/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/progress-indicator/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/progress-indicator/test.ts",
+                "tsConfig": "libs/core/src/lib/progress-indicator/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/progress-indicator/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/core/src/lib/progress-indicator/**/*.ts",
+                    "libs/core/src/lib/progress-indicator/**/*.html"
+                ]
+            }
         }
-      }
     },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "libs/core/src/lib/progress-indicator/test.ts",
-        "tsConfig": "libs/core/src/lib/progress-indicator/tsconfig.spec.json",
-        "karmaConfig": "libs/core/src/lib/progress-indicator/karma.conf.js"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/core/src/lib/progress-indicator/**/*.ts",
-          "libs/core/src/lib/progress-indicator/**/*.html"
-        ]
-      }
-    }
-  },
-  "tags": [
-    "type:lib",
-    "scope:fd"
-  ]
+    "tags": ["type:lib", "scope:fd"]
 }

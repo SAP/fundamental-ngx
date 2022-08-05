@@ -1,47 +1,39 @@
 {
-  "projectType": "library",
-  "root": "libs/i18n",
-  "sourceRoot": "libs/i18n/src",
-  "prefix": "fundamental-ngx",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:package",
-      "outputs": [
-        "dist/libs/i18n"
-      ],
-      "options": {
-        "project": "libs/i18n/ng-package.json"
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/i18n/tsconfig.lib.prod.json"
+    "projectType": "library",
+    "root": "libs/i18n",
+    "sourceRoot": "libs/i18n/src",
+    "prefix": "fundamental-ngx",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/i18n"],
+            "options": {
+                "project": "libs/i18n/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/i18n/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/i18n/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
         },
-        "development": {
-          "tsConfig": "libs/i18n/tsconfig.lib.json"
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/i18n/src/test.ts",
+                "tsConfig": "libs/i18n/tsconfig.spec.json",
+                "karmaConfig": "libs/i18n/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/i18n/src/**/*.ts", "libs/i18n/src/**/*.html"]
+            }
         }
-      },
-      "defaultConfiguration": "production"
     },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "libs/i18n/src/test.ts",
-        "tsConfig": "libs/i18n/tsconfig.spec.json",
-        "karmaConfig": "libs/i18n/karma.conf.js"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/i18n/src/**/*.ts",
-          "libs/i18n/src/**/*.html"
-        ]
-      }
-    }
-  },
-  "tags": [
-    "type:lib",
-    "scope:i18n"
-  ]
+    "tags": ["type:lib", "scope:i18n"]
 }

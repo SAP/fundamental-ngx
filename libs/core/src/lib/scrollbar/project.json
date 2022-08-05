@@ -1,45 +1,37 @@
 {
-  "projectType": "library",
-  "root": "libs/core/src/lib/scrollbar",
-  "sourceRoot": "libs/core/src/lib/scrollbar",
-  "prefix": "fd",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:package",
-      "outputs": [
-        "dist/libs/core/scrollbar"
-      ],
-      "options": {
-        "tsConfig": "libs/core/src/lib/scrollbar/tsconfig.lib.json",
-        "project": "libs/core/src/lib/scrollbar/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": false
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/core/src/lib/scrollbar/tsconfig.lib.prod.json"
+    "projectType": "library",
+    "root": "libs/core/src/lib/scrollbar",
+    "sourceRoot": "libs/core/src/lib/scrollbar",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/core/scrollbar"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/scrollbar/tsconfig.lib.json",
+                "project": "libs/core/src/lib/scrollbar/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/scrollbar/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/scrollbar/test.ts",
+                "tsConfig": "libs/core/src/lib/scrollbar/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/scrollbar/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/core/src/lib/scrollbar/**/*.ts", "libs/core/src/lib/scrollbar/**/*.html"]
+            }
         }
-      }
     },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "libs/core/src/lib/scrollbar/test.ts",
-        "tsConfig": "libs/core/src/lib/scrollbar/tsconfig.spec.json",
-        "karmaConfig": "libs/core/src/lib/scrollbar/karma.conf.js"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/core/src/lib/scrollbar/**/*.ts",
-          "libs/core/src/lib/scrollbar/**/*.html"
-        ]
-      }
-    }
-  },
-  "tags": [
-    "type:lib",
-    "scope:fd"
-  ]
+    "tags": ["type:lib", "scope:fd"]
 }

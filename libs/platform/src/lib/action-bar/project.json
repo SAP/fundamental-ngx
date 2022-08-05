@@ -1,48 +1,41 @@
 {
-  "projectType": "library",
-  "root": "libs/platform/src/lib/action-bar",
-  "sourceRoot": "libs/platform/src/lib/action-bar",
-  "prefix": "fdp",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:package",
-      "outputs": [
-        "dist/libs/platform/action-bar"
-      ],
-      "options": {
-        "tsConfig": "libs/platform/src/lib/action-bar/tsconfig.lib.json",
-        "project": "libs/platform/src/lib/action-bar/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": false
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/platform/src/lib/action-bar/tsconfig.lib.prod.json"
+    "projectType": "library",
+    "root": "libs/platform/src/lib/action-bar",
+    "sourceRoot": "libs/platform/src/lib/action-bar",
+    "prefix": "fdp",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/platform/action-bar"],
+            "options": {
+                "tsConfig": "libs/platform/src/lib/action-bar/tsconfig.lib.json",
+                "project": "libs/platform/src/lib/action-bar/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/platform/src/lib/action-bar/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/platform/src/lib/action-bar/test.ts",
+                "tsConfig": "libs/platform/src/lib/action-bar/tsconfig.spec.json",
+                "karmaConfig": "libs/platform/src/lib/action-bar/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/platform/src/lib/action-bar/**/*.ts",
+                    "libs/platform/src/lib/action-bar/**/*.html"
+                ]
+            }
         }
-      }
     },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "libs/platform/src/lib/action-bar/test.ts",
-        "tsConfig": "libs/platform/src/lib/action-bar/tsconfig.spec.json",
-        "karmaConfig": "libs/platform/src/lib/action-bar/karma.conf.js"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/platform/src/lib/action-bar/**/*.ts",
-          "libs/platform/src/lib/action-bar/**/*.html"
-        ]
-      }
-    }
-  },
-  "tags": [
-    "type:lib",
-    "scope:fdp"
-  ],
-  "implicitDependencies": [
-    "core"
-  ]
+    "tags": ["type:lib", "scope:fdp"],
+    "implicitDependencies": ["core"]
 }

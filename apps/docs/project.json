@@ -1,191 +1,168 @@
 {
-  "root": "apps/docs",
-  "sourceRoot": "apps/docs/src",
-  "projectType": "application",
-  "prefix": "fundamental-ngx",
-  "generators": {
-    "@nrwl/schematics:component": {
-      "style": "scss"
-    }
-  },
-  "targets": {
-    "build": {
-      "executor": "@angular-builders/custom-webpack:browser",
-      "options": {
-        "outputPath": "dist/apps/docs",
-        "index": "apps/docs/src/index.html",
-        "main": "apps/docs/src/main.ts",
-        "polyfills": "apps/docs/src/polyfills.ts",
-        "tsConfig": "apps/docs/tsconfig.app.json",
-        "assets": [
-          "apps/docs/src/favicon.ico",
-          "apps/docs/src/assets",
-          {
-            "glob": "**/css_variables.css",
-            "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
-            "output": "./assets/theming-base/"
-          },
-          {
-            "glob": "**/*",
-            "input": "./node_modules/fundamental-styles/dist/theming/",
-            "output": "./assets/fundamental-styles-theming/"
-          },
-          {
-            "glob": "**/*",
-            "input": "./node_modules/highlight.js/styles/",
-            "output": "./assets/highlight-js-styles/"
-          }
-        ],
-        "styles": [
-          "node_modules/fundamental-styles/dist/icon.css",
-          "apps/docs/src/fd-typedoc/assets/css/main.scss",
-          "apps/docs/src/styles.scss",
-          {
-            "input": "apps/docs/src/theming/sap_fiori_3_fonts.css",
-            "inject": false,
-            "bundleName": "sap_fiori_3_fonts"
-          },
-          {
-            "input": "apps/docs/src/theming/sap_horizon_fonts.css",
-            "inject": false,
-            "bundleName": "sap_horizon_fonts"
-          }
-        ],
-        "scripts": [
-          "node_modules/marked/lib/marked.js"
-        ],
-        "allowedCommonJsDependencies": [
-          "moment",
-          "highlight.js",
-          "focus-trap",
-          "@angularclass/hmr"
-        ],
-        "vendorChunk": true,
-        "extractLicenses": false,
-        "buildOptimizer": false,
-        "sourceMap": true,
-        "optimization": false,
-        "namedChunks": true,
-        "customWebpackConfig": {
-          "path": "./webpack.config.js"
+    "root": "apps/docs",
+    "sourceRoot": "apps/docs/src",
+    "projectType": "application",
+    "prefix": "fundamental-ngx",
+    "generators": {
+        "@nrwl/schematics:component": {
+            "style": "scss"
         }
-      },
-      "configurations": {
-        "production": {
-          "fileReplacements": [
-            {
-              "replace": "apps/docs/src/environments/environment.ts",
-              "with": "apps/docs/src/environments/environment.prod.ts"
-            }
-          ],
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false,
-          "buildOptimizer": true,
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "2mb",
-              "maximumError": "5mb"
-            }
-          ]
+    },
+    "targets": {
+        "build": {
+            "executor": "@angular-builders/custom-webpack:browser",
+            "options": {
+                "outputPath": "dist/apps/docs",
+                "index": "apps/docs/src/index.html",
+                "main": "apps/docs/src/main.ts",
+                "polyfills": "apps/docs/src/polyfills.ts",
+                "tsConfig": "apps/docs/tsconfig.app.json",
+                "assets": [
+                    "apps/docs/src/favicon.ico",
+                    "apps/docs/src/assets",
+                    {
+                        "glob": "**/css_variables.css",
+                        "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
+                        "output": "./assets/theming-base/"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "./node_modules/fundamental-styles/dist/theming/",
+                        "output": "./assets/fundamental-styles-theming/"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "./node_modules/highlight.js/styles/",
+                        "output": "./assets/highlight-js-styles/"
+                    }
+                ],
+                "styles": [
+                    "node_modules/fundamental-styles/dist/icon.css",
+                    "apps/docs/src/fd-typedoc/assets/css/main.scss",
+                    "apps/docs/src/styles.scss",
+                    {
+                        "input": "apps/docs/src/theming/sap_fiori_3_fonts.css",
+                        "inject": false,
+                        "bundleName": "sap_fiori_3_fonts"
+                    },
+                    {
+                        "input": "apps/docs/src/theming/sap_horizon_fonts.css",
+                        "inject": false,
+                        "bundleName": "sap_horizon_fonts"
+                    }
+                ],
+                "scripts": ["node_modules/marked/lib/marked.js"],
+                "allowedCommonJsDependencies": ["moment", "highlight.js", "focus-trap", "@angularclass/hmr"],
+                "vendorChunk": true,
+                "extractLicenses": false,
+                "buildOptimizer": false,
+                "sourceMap": true,
+                "optimization": false,
+                "namedChunks": true,
+                "customWebpackConfig": {
+                    "path": "./webpack.config.js"
+                }
+            },
+            "configurations": {
+                "production": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/environment.ts",
+                            "with": "apps/docs/src/environments/environment.prod.ts"
+                        }
+                    ],
+                    "optimization": true,
+                    "outputHashing": "all",
+                    "sourceMap": false,
+                    "namedChunks": false,
+                    "extractLicenses": true,
+                    "vendorChunk": false,
+                    "buildOptimizer": true,
+                    "budgets": [
+                        {
+                            "type": "initial",
+                            "maximumWarning": "2mb",
+                            "maximumError": "5mb"
+                        }
+                    ]
+                },
+                "production-unoptimized": {
+                    "tsConfig": "apps/docs/tsconfig.netlify.json",
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/environment.ts",
+                            "with": "apps/docs/src/environments/environment.prod.ts"
+                        }
+                    ],
+                    "sourceMap": false,
+                    "namedChunks": false,
+                    "vendorChunk": false
+                },
+                "hmr": {
+                    "budgets": [
+                        {
+                            "type": "anyComponentStyle",
+                            "maximumWarning": "6kb"
+                        }
+                    ],
+                    "optimization": true,
+                    "outputHashing": "all",
+                    "sourceMap": false,
+                    "namedChunks": false,
+                    "extractLicenses": true,
+                    "vendorChunk": false,
+                    "buildOptimizer": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/environment.ts",
+                            "with": "apps/docs/src/environments/environment.prod.ts"
+                        }
+                    ]
+                }
+            },
+            "outputs": ["{options.outputPath}"],
+            "defaultConfiguration": "",
+            "dependsOn": []
         },
-        "production-unoptimized": {
-          "tsConfig": "apps/docs/tsconfig.netlify.json",
-          "fileReplacements": [
-            {
-              "replace": "apps/docs/src/environments/environment.ts",
-              "with": "apps/docs/src/environments/environment.prod.ts"
+        "serve": {
+            "executor": "@angular-builders/custom-webpack:dev-server",
+            "options": {
+                "browserTarget": "docs:build"
+            },
+            "configurations": {
+                "production": {
+                    "browserTarget": "docs:build:production"
+                },
+                "hmr": {
+                    "browserTarget": "docs:build:hmr"
+                },
+                "fr": {
+                    "browserTarget": "docs:build:fr"
+                },
+                "ar": {
+                    "browserTarget": "docs:build:ar"
+                }
             }
-          ],
-          "sourceMap": false,
-          "namedChunks": false,
-          "vendorChunk": false
         },
-        "hmr": {
-          "budgets": [
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "6kb"
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["apps/docs/**/*.ts", "apps/docs/**/*.html"]
             }
-          ],
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false,
-          "buildOptimizer": true,
-          "fileReplacements": [
-            {
-              "replace": "apps/docs/src/environments/environment.ts",
-              "with": "apps/docs/src/environments/environment.prod.ts"
-            }
-          ]
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "apps/docs/src/test.ts",
+                "tsConfig": "apps/docs/tsconfig.spec.json",
+                "karmaConfig": "apps/docs/karma.conf.js",
+                "polyfills": "apps/docs/src/polyfills.ts",
+                "styles": ["node_modules/fundamental-styles/dist/fundamental-styles.css", "apps/docs/src/styles.scss"],
+                "scripts": [],
+                "assets": ["apps/docs/src/favicon.ico", "apps/docs/src/assets"]
+            },
+            "outputs": ["coverage/apps/docs/"]
         }
-      },
-      "outputs": [
-        "{options.outputPath}"
-      ],
-      "defaultConfiguration": "",
-      "dependsOn": []
     },
-    "serve": {
-      "executor": "@angular-builders/custom-webpack:dev-server",
-      "options": {
-        "browserTarget": "docs:build"
-      },
-      "configurations": {
-        "production": {
-          "browserTarget": "docs:build:production"
-        },
-        "hmr": {
-          "browserTarget": "docs:build:hmr"
-        },
-        "fr": {
-          "browserTarget": "docs:build:fr"
-        },
-        "ar": {
-          "browserTarget": "docs:build:ar"
-        }
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "apps/docs/**/*.ts",
-          "apps/docs/**/*.html"
-        ]
-      }
-    },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "apps/docs/src/test.ts",
-        "tsConfig": "apps/docs/tsconfig.spec.json",
-        "karmaConfig": "apps/docs/karma.conf.js",
-        "polyfills": "apps/docs/src/polyfills.ts",
-        "styles": [
-          "node_modules/fundamental-styles/dist/fundamental-styles.css",
-          "apps/docs/src/styles.scss"
-        ],
-        "scripts": [],
-        "assets": [
-          "apps/docs/src/favicon.ico",
-          "apps/docs/src/assets"
-        ]
-      },
-      "outputs": [
-        "coverage/apps/docs/"
-      ]
-    }
-  },
-  "tags": [
-    "scope:docs",
-    "type:app"
-  ]
+    "tags": ["scope:docs", "type:app"]
 }

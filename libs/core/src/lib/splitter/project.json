@@ -1,45 +1,37 @@
 {
-  "projectType": "library",
-  "root": "libs/core/src/lib/splitter",
-  "sourceRoot": "libs/core/src/lib/splitter",
-  "prefix": "fd",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:package",
-      "outputs": [
-        "dist/libs/core/splitter"
-      ],
-      "options": {
-        "tsConfig": "libs/core/src/lib/splitter/tsconfig.lib.json",
-        "project": "libs/core/src/lib/splitter/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": false
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/core/src/lib/splitter/tsconfig.lib.prod.json"
+    "projectType": "library",
+    "root": "libs/core/src/lib/splitter",
+    "sourceRoot": "libs/core/src/lib/splitter",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/core/splitter"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/splitter/tsconfig.lib.json",
+                "project": "libs/core/src/lib/splitter/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/splitter/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/splitter/test.ts",
+                "tsConfig": "libs/core/src/lib/splitter/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/splitter/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/core/src/lib/splitter/**/*.ts", "libs/core/src/lib/splitter/**/*.html"]
+            }
         }
-      }
     },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "libs/core/src/lib/splitter/test.ts",
-        "tsConfig": "libs/core/src/lib/splitter/tsconfig.spec.json",
-        "karmaConfig": "libs/core/src/lib/splitter/karma.conf.js"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/core/src/lib/splitter/**/*.ts",
-          "libs/core/src/lib/splitter/**/*.html"
-        ]
-      }
-    }
-  },
-  "tags": [
-    "type:lib",
-    "scope:fd"
-  ]
+    "tags": ["type:lib", "scope:fd"]
 }

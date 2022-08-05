@@ -1,45 +1,37 @@
 {
-  "projectType": "library",
-  "root": "libs/core/src/lib/alert",
-  "sourceRoot": "libs/core/src/lib/alert",
-  "prefix": "fd",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:package",
-      "outputs": [
-        "dist/libs/core/alert"
-      ],
-      "options": {
-        "tsConfig": "libs/core/src/lib/alert/tsconfig.lib.json",
-        "project": "libs/core/src/lib/alert/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": false
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/core/src/lib/alert/tsconfig.lib.prod.json"
+    "projectType": "library",
+    "root": "libs/core/src/lib/alert",
+    "sourceRoot": "libs/core/src/lib/alert",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/core/alert"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/alert/tsconfig.lib.json",
+                "project": "libs/core/src/lib/alert/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/alert/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/alert/test.ts",
+                "tsConfig": "libs/core/src/lib/alert/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/alert/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/core/src/lib/alert/**/*.ts", "libs/core/src/lib/alert/**/*.html"]
+            }
         }
-      }
     },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "libs/core/src/lib/alert/test.ts",
-        "tsConfig": "libs/core/src/lib/alert/tsconfig.spec.json",
-        "karmaConfig": "libs/core/src/lib/alert/karma.conf.js"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/core/src/lib/alert/**/*.ts",
-          "libs/core/src/lib/alert/**/*.html"
-        ]
-      }
-    }
-  },
-  "tags": [
-    "type:lib",
-    "scope:fd"
-  ]
+    "tags": ["type:lib", "scope:fd"]
 }

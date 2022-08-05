@@ -1,45 +1,37 @@
 {
-  "projectType": "library",
-  "root": "libs/core/src/lib/bar",
-  "sourceRoot": "libs/core/src/lib/bar",
-  "prefix": "fd",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:package",
-      "outputs": [
-        "dist/libs/core/bar"
-      ],
-      "options": {
-        "tsConfig": "libs/core/src/lib/bar/tsconfig.lib.json",
-        "project": "libs/core/src/lib/bar/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": false
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/core/src/lib/bar/tsconfig.lib.prod.json"
+    "projectType": "library",
+    "root": "libs/core/src/lib/bar",
+    "sourceRoot": "libs/core/src/lib/bar",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/core/bar"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/bar/tsconfig.lib.json",
+                "project": "libs/core/src/lib/bar/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/bar/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/bar/test.ts",
+                "tsConfig": "libs/core/src/lib/bar/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/bar/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/core/src/lib/bar/**/*.ts", "libs/core/src/lib/bar/**/*.html"]
+            }
         }
-      }
     },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "libs/core/src/lib/bar/test.ts",
-        "tsConfig": "libs/core/src/lib/bar/tsconfig.spec.json",
-        "karmaConfig": "libs/core/src/lib/bar/karma.conf.js"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/core/src/lib/bar/**/*.ts",
-          "libs/core/src/lib/bar/**/*.html"
-        ]
-      }
-    }
-  },
-  "tags": [
-    "type:lib",
-    "scope:fd"
-  ]
+    "tags": ["type:lib", "scope:fd"]
 }
