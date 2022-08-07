@@ -4184,6 +4184,16 @@
     loglevel-plugin-prefix "^0.8.4"
     strip-ansi "^6.0.0"
 
+"@wdio/logger@^7.19.0":
+  version "7.19.0"
+  resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-7.19.0.tgz#23697a4b4aaea56c3bd477a0393af2a5c175fc85"
+  integrity sha512-xR7SN/kGei1QJD1aagzxs3KMuzNxdT/7LYYx+lt6BII49+fqL/SO+5X0FDCZD0Ds93AuQvvz9eGyzrBI2FFXmQ==
+  dependencies:
+    chalk "^4.0.0"
+    loglevel "^1.6.0"
+    loglevel-plugin-prefix "^0.8.4"
+    strip-ansi "^6.0.0"
+
 "@wdio/protocols@6.12.0":
   version "6.12.0"
   resolved "https://registry.yarnpkg.com/@wdio/protocols/-/protocols-6.12.0.tgz#e40850be62c42c82dd2c486655d6419cd9ec1e3e"
@@ -5863,13 +5873,13 @@ caniuse-lite@^1.0.30001299:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001312.tgz#e11eba4b87e24d22697dae05455d5aea28550d5f"
   integrity sha512-Wiz1Psk2MEK0pX3rUzWaunLTZzqS2JYZFzNKqAiJGiuxIjRPLgV6+VDPOg6lQOUxmDwhTlh198JsTTi8Hzw6aQ==
 
-canvas@^2.6.1:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/canvas/-/canvas-2.8.0.tgz#f99ca7f25e6e26686661ffa4fec1239bbef74461"
-  integrity sha512-gLTi17X8WY9Cf5GZ2Yns8T5lfBOcGgFehDFb+JQwDqdOoBOcECS9ZWMEAqMSVcMYwXD659J8NyzjRY/2aE+C2Q==
+canvas@^2.9.3:
+  version "2.9.3"
+  resolved "https://registry.yarnpkg.com/canvas/-/canvas-2.9.3.tgz#8723c4f970442d4cdcedba5221579f9660a58bdb"
+  integrity sha512-WOUM7ghii5TV2rbhaZkh1youv/vW1/Canev6Yx6BG2W+1S07w8jKZqKkPnbiPpQEDsnJdN8ouDd7OvQEGXDcUw==
   dependencies:
     "@mapbox/node-pre-gyp" "^1.0.0"
-    nan "^2.14.0"
+    nan "^2.15.0"
     simple-get "^3.0.3"
 
 capital-case@^1.0.4:
@@ -5905,7 +5915,7 @@ chalk@2.4.2, chalk@^2.0.0, chalk@^2.3.0, chalk@^2.4.1, chalk@^2.4.2:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@4, chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.1:
+chalk@4, chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.1, chalk@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
@@ -9145,6 +9155,15 @@ fs-extra@^10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.0.0.tgz#9ff61b655dde53fb34a82df84bb214ce802e17c1"
   integrity sha512-C5owb14u9eJwizKGdchcDUQeFtlSHHthBk8pbX9Vc1PFZrLombudjDnNns88aYslCyF6IY5SUw3Roz6xShcEIQ==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^2.0.0"
+
+fs-extra@^10.0.1:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.1.0.tgz#02873cfbc4084dde127eaa5f9905eef2325d1abf"
+  integrity sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==
   dependencies:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
@@ -12863,10 +12882,15 @@ mute-stream@0.0.8:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
 
-nan@2.14.2, nan@^2.14.0:
+nan@2.14.2:
   version "2.14.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.2.tgz#f5376400695168f4cc694ac9393d0c9585eeea19"
   integrity sha512-M2ufzIiINKCuDfBSAUr1vWQ+vuVcA9kqx8JJUsbQi6yf1uGRyb7HfpdfUr5qLXf3B/t8dPvcjhKMmlfnP47EzQ==
+
+nan@^2.15.0:
+  version "2.16.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.16.0.tgz#664f43e45460fb98faf00edca0bb0d7b8dce7916"
+  integrity sha512-UdAqHyFngu7TfQKsCBgAA6pWDkT8MAO7d0jyOecVhN5354xbLqdn8mV9Tat9gepAupm0bt2DbeaSC8vS52MuFA==
 
 nanoid@^3.1.30, nanoid@^3.3.1:
   version "3.3.1"
@@ -17475,21 +17499,22 @@ wdio-html-format-reporter@0.4.0:
     nightmare "^3.0.2"
     path "^0.12.7"
 
-wdio-image-comparison-service@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/wdio-image-comparison-service/-/wdio-image-comparison-service-2.0.0.tgz#e86247ee2577d1f5b147758b57c18cd862b71d67"
-  integrity sha512-LEUK9no+lnZno7EHSvLM1NVDmDHVBi/eoirr+WKiJfFF7rUFKKX6NnGTjbx26sykwo6potV6krM+VPpsYd7+1w==
+wdio-image-comparison-service@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/wdio-image-comparison-service/-/wdio-image-comparison-service-4.0.0.tgz#55459529584c0e842adb41f987660a4660331581"
+  integrity sha512-tn/5WXFaJBpTh27uNx478C6G20Cge37QHuY+r1wr7+LB/R5P119KfFBziDzkUaxBYylQnle28KzQoGRajRd41A==
   dependencies:
-    webdriver-image-comparison "0.16.0"
+    "@wdio/logger" "^7.19.0"
+    webdriver-image-comparison "0.22.0"
 
-webdriver-image-comparison@0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/webdriver-image-comparison/-/webdriver-image-comparison-0.16.0.tgz#6976e6de26a870c8568bfd29d4d56fc408cdb56b"
-  integrity sha512-GRZFiFOi4Ho8RpwdWknsP4H493NnOHX1uEgGv1hur2+LiKxURBGlljBzym5Pi5OOcN9exZ0MOiJ/CKpotpUH/g==
+webdriver-image-comparison@0.22.0:
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/webdriver-image-comparison/-/webdriver-image-comparison-0.22.0.tgz#1eb9b70e1cd074bac650aeed64c13b6c014f039b"
+  integrity sha512-YSYy3FtU86QkfdMQwO9jyV4gPyw5XuZYsBDIlN8Km/CTRK3JG4YGKoAjcjTcS5Is81yi0MOde0xEhZ51FnRICQ==
   dependencies:
-    canvas "^2.6.1"
-    chalk "^4.1.0"
-    fs-extra "^9.0.1"
+    canvas "^2.9.3"
+    chalk "^4.1.2"
+    fs-extra "^10.0.1"
 
 webdriver-manager@12.1.7:
   version "12.1.7"
