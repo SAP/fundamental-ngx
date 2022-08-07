@@ -2972,15 +2972,14 @@
     tmp "~0.2.1"
     tslib "^2.3.0"
 
-"@nrwl/nx-cloud@13.1.5":
-  version "13.1.5"
-  resolved "https://registry.yarnpkg.com/@nrwl/nx-cloud/-/nx-cloud-13.1.5.tgz#cd9cf8c415226a7b63b4027fd0d42878761a5255"
-  integrity sha512-busITSwldU7K78/ncr4fjZxc+TeuDnbXREM/cbyVM0Gob5Q36T3nLpCxPkV7iCdJZACSKe7UbKm/IEYLPnrXmA==
+"@nrwl/nx-cloud@14.3.0":
+  version "14.3.0"
+  resolved "https://registry.yarnpkg.com/@nrwl/nx-cloud/-/nx-cloud-14.3.0.tgz#4beeca3977998927dceb720420c30f193e1aa957"
+  integrity sha512-aByHe8Gp1/IT9CtQYlGLIYBgU+ZtrgEwblBX8kcoBNRPf1OOdouahjyasAjQ9zi1cznve8AzTTcLt2eSCHWfrw==
   dependencies:
     axios "^0.21.1"
     chalk "4.1.0"
     node-machine-id "^1.1.12"
-    rxjs "6.5.5"
     strip-json-comments "^3.1.1"
     tar "6.1.11"
 
@@ -15402,13 +15401,6 @@ rxjs@6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.4.0.tgz#f3bb0fe7bda7fb69deac0c16f17b50b0b8790504"
   integrity sha512-Z9Yfa11F6B9Sg/BK9MnqnQ+aQYicPLtilXBp2yUtDt2JRCE0h26d33EnfO3ZxoNxG0T92OUucP3Ct7cpfkdFfw==
-  dependencies:
-    tslib "^1.9.0"
-
-rxjs@6.5.5:
-  version "6.5.5"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.5.tgz#c5c884e3094c8cfee31bf27eb87e54ccfc87f9ec"
-  integrity sha512-WfQI+1gohdf0Dai/Bbmk5L5ItH5tYqm3ki2c5GdWhKjalzjg93N3avFjVStyZZz+A2Em+ZxKH5bNghw9UeylGQ==
   dependencies:
     tslib "^1.9.0"
 
