@@ -1,7 +1,6 @@
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -10,9 +9,7 @@ import { ObjectPageDocsHeaderComponent } from './object-page-header/object-page-
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
 import { DeprecatedDynamicPageCompactDirective, DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { FacetModule } from '@fundamental-ngx/core/facets';
 import { TextModule } from '@fundamental-ngx/core/text';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
@@ -41,17 +38,14 @@ const routes: Routes = [
         BreadcrumbModule,
         ToolbarModule,
         BarModule,
-        FlexibleColumnLayoutModule,
         DynamicPageModule,
-        SegmentedButtonModule,
         FacetModule,
         TextModule,
         RatingIndicatorModule,
         AvatarModule,
         ObjectNumberModule,
         ObjectStatusModule,
-        CdkScrollableModule,
-        InlineHelpModule
+        CdkScrollableModule
     ],
     exports: [RouterModule],
     declarations: [ObjectPageDocsComponent, ObjectPageDocsHeaderComponent, ObjectPageExampleComponent],
