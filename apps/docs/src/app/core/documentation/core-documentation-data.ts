@@ -98,6 +98,7 @@ export const components: SectionInterfaceContent[] = [
 
 export const layouts: SectionInterfaceContent[] = [
     { url: 'core/dynamic-page', name: 'Dynamic Page' },
+    { url: 'core/object-page', name: 'Object Page' },
     { url: 'core/dynamic-side-content', name: 'Dynamic Side Content' },
     { url: 'core/fixed-card-layout', name: 'Fixed Card Layout' },
     { url: 'core/flexible-column-layout', name: 'Flexible Column Layout' },
