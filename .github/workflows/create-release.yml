@@ -11,7 +11,6 @@ env:
     NX_BRANCH: ${{ github.event.number || github.ref_name }}
     NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
     NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-    FIREBASE_SERVICE_ACCOUNT_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GCH_FD_NGX_GH }}
 
 jobs:
     agents:
