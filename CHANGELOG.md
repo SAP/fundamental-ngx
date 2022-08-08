@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.6...v0.36.0-rc.7) (2022-08-08)
+
+
+### Bug Fixes
+
+* **core:** getters and setters for list-item checkboxes/radios to fix tab issue ([#8497](https://github.com/SAP/fundamental-ngx/issues/8497)) ([0a430b4](https://github.com/SAP/fundamental-ngx/commit/0a430b47af433ce96f0587bf1788117f36d09cf5))
+
 ## [0.36.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.5...v0.36.0-rc.6) (2022-08-05)
 
 
