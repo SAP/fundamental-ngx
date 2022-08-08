@@ -1,0 +1,41 @@
+{
+    "projectType": "library",
+    "root": "libs/platform/src/lib/thumbnail",
+    "sourceRoot": "libs/platform/src/lib/thumbnail",
+    "prefix": "fdp",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/platform/thumbnail"],
+            "options": {
+                "tsConfig": "libs/platform/src/lib/thumbnail/tsconfig.lib.json",
+                "project": "libs/platform/src/lib/thumbnail/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/platform/src/lib/thumbnail/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/platform/src/lib/thumbnail/test.ts",
+                "tsConfig": "libs/platform/src/lib/thumbnail/tsconfig.spec.json",
+                "karmaConfig": "libs/platform/src/lib/thumbnail/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/platform/src/lib/thumbnail/**/*.ts",
+                    "libs/platform/src/lib/thumbnail/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fdp"],
+    "implicitDependencies": ["core"]
+}

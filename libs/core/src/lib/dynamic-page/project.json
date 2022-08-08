@@ -1,0 +1,40 @@
+{
+    "projectType": "library",
+    "root": "libs/core/src/lib/dynamic-page",
+    "sourceRoot": "libs/core/src/lib/dynamic-page",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/core/dynamic-page"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/dynamic-page/tsconfig.lib.json",
+                "project": "libs/core/src/lib/dynamic-page/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/dynamic-page/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/dynamic-page/test.ts",
+                "tsConfig": "libs/core/src/lib/dynamic-page/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/dynamic-page/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/core/src/lib/dynamic-page/**/*.ts",
+                    "libs/core/src/lib/dynamic-page/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fd"]
+}

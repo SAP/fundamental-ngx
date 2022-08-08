@@ -1,0 +1,27 @@
+{
+    "root": "apps/docs-e2e",
+    "projectType": "application",
+    "prefix": "",
+    "targets": {
+        "e2e": {
+            "executor": "@angular-devkit/build-angular:protractor",
+            "options": {
+                "protractorConfig": "apps/docs-e2e/protractor.conf.js",
+                "devServerTarget": "docs:serve"
+            },
+            "configurations": {
+                "production": {
+                    "devServerTarget": "docs:serve:production"
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["apps/docs-e2e/**/*.ts", "apps/docs-e2e/**/*.html"]
+            }
+        }
+    },
+    "tags": ["scope:docs", "type:e2e"],
+    "implicitDependencies": ["docs"]
+}

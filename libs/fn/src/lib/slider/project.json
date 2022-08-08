@@ -1,0 +1,38 @@
+{
+    "projectType": "library",
+    "root": "libs/fn/src/lib/slider",
+    "sourceRoot": "libs/fn/src/lib/slider",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/fn/slider"],
+            "options": {
+                "tsConfig": "libs/fn/src/lib/slider/tsconfig.lib.json",
+                "project": "libs/fn/src/lib/slider/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/fn/src/lib/slider/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/fn/src/lib/slider/test.ts",
+                "tsConfig": "libs/fn/src/lib/slider/tsconfig.spec.json",
+                "karmaConfig": "libs/fn/src/lib/slider/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/fn/src/lib/slider/**/*.ts", "libs/fn/src/lib/slider/**/*.html"]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fn"],
+    "implicitDependencies": ["core"]
+}
