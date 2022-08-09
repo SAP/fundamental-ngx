@@ -21,7 +21,7 @@ import { DynamicPageTitleImageComponent } from './dynamic-page-title-image.compo
  */
 @Component({
     selector: 'fdp-dynamic-page-title',
-    templateUrl: './dynamic-page-title.component.html',
+    template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [

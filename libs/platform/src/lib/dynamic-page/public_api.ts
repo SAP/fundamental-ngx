@@ -15,5 +15,4 @@ export * from './dynamic-page-header/actions/layout-actions/dynamic-page-layout-
 export * from './dynamic-page-header/header/dynamic-page-header.component';
 export * from './dynamic-page-header/key-info/dynamic-page-key-info.component';
 export * from './dynamic-page-header/title/dynamic-page-title.component';
-export * from './dynamic-page-header/title/dynamic-page-title-host.component';
 export * from './dynamic-page-header/title/dynamic-page-title-image.component';

@@ -60,7 +60,7 @@
         </ng-container>
     </fd-tab-list>
 
-    <fd-dynamic-page-content *ngIf="!_isTabbed" cdkScrollable>
+    <fd-dynamic-page-content *ngIf="!_isTabbed && contentComponent" cdkScrollable>
         <ng-container [ngTemplateOutlet]="contentComponent.contentTemplateRef"></ng-container>
     </fd-dynamic-page-content>
 
