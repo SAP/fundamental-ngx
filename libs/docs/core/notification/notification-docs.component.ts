@@ -10,6 +10,8 @@ const templateTs = 'template-as-content/notification-open-template-example.compo
 const templateH = 'template-as-content/notification-open-template-example.component.html';
 const groupTs = 'notification-group/notification-group-example.component.ts';
 const groupH = 'notification-group/notification-group-example.component.html';
+const mobileTs = 'notification-mobile/notification-mobile-example.component.ts';
+const mobileH = 'notification-mobile/notification-mobile-example.component.html';
 
 @Component({
     selector: 'app-notification',
@@ -74,6 +76,20 @@ export class NotificationDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(groupH),
             fileName: 'notification-group-example'
+        }
+    ];
+
+    mobile: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: mobileTs,
+            fileName: 'notification-mobile-example',
+            component: 'NotificationMobileExampleComponent'
+        },
+        {
+            language: 'html',
+            code: mobileH,
+            fileName: 'notification-mobile-example'
         }
     ];
 }
