@@ -31,7 +31,7 @@
                     [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
                     [active]="tab.active"
                     [disabled]="tab.disabled"
-                    (keyboardSelected)="_tabHeaderClickHandler(tab.panel)"
+                    (keydown)="_tabHeaderKeydownHandler($event, tab.panel)"
                     (click)="_tabHeaderClickHandler(tab.panel)"
                 >
                     <ng-container *ngTemplateOutlet="tab.titleTemplate || null"></ng-container>

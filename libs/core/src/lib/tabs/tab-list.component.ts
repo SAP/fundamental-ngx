@@ -172,6 +172,16 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     }
 
     /** @hidden */
+    _tabHeaderKeydownHandler(event: KeyboardEvent, tabPanel: TabPanelComponent): void {
+        if (!KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            return;
+        }
+
+        event.preventDefault();
+        this._tabHeaderClickHandler(tabPanel);
+    }
+
+    /** @hidden */
     _overflowingTabHeaderClickHandler(tabPanel: TabPanelComponent): void {
         this._tabArray.forEach((tab) => {
             tab.panel._forcedVisibility = tab.panel === tabPanel;

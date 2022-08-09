@@ -1,15 +1,4 @@
-import {
-    Directive,
-    ElementRef,
-    EventEmitter,
-    HostBinding,
-    HostListener,
-    Inject,
-    Input,
-    OnInit,
-    Optional,
-    Output
-} from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Inject, Input, OnInit, Optional } from '@angular/core';
 import { OverflowLayoutFocusableItem } from '../interfaces/overflow-focusable-item.interface';
 import { OverflowItem } from '../interfaces/overflow-item.interface';
 import { OverflowLayoutComponent } from '../overflow-layout.component';
@@ -34,10 +23,6 @@ export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocus
     @Input()
     navigable = true;
 
-    /** Event emitted when user selected item via keyboard (enter or space key was pressed). */
-    @Output()
-    keyboardSelected = new EventEmitter<KeyboardEvent>();
-
     /** @hidden */
     @HostBinding('attr.tabindex')
     private get _tabindex(): number {
@@ -53,13 +38,6 @@ export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocus
     @HostListener('focus')
     private _onFocus(): void {
         this._overflowContainer.setFocusedElement(this);
-    }
-
-    /** @hidden */
-    @HostListener('keyup.enter', ['$event'])
-    @HostListener('keyup.space', ['$event'])
-    private _onSelect(event: KeyboardEvent): void {
-        this.keyboardSelected.emit(event);
     }
 
     /** @hidden */
