@@ -323,7 +323,7 @@ describe('Datetime picker suite', () => {
         for (let i = 0; i < datepickerButtonsLength; i++) {
             if (!getElementClass(datePickerButton, i).includes('disabled')) {
                 click(datePickerButton, i);
-                expect(getText(okButton + buttonText).trim()).toEqual('OK');
+                expect(getText(okButton + buttonText).trim()).toEqual('Ok');
                 click(okButton);
             }
         }

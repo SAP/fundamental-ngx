@@ -357,3 +357,8 @@ jobs:
                   package: 'dist/libs/fn/package.json'
                   token: ${{ secrets.NPM_TOKEN }}
                   tag: ${{ env.releaseTag }}
+            - uses: JS-DevTools/npm-publish@v1
+              with:
+                  package: 'dist/libs/i18n/package.json'
+                  token: ${{ secrets.NPM_TOKEN }}
+                  tag: ${{ env.releaseTag }}

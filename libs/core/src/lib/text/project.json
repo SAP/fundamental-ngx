@@ -1,0 +1,37 @@
+{
+    "projectType": "library",
+    "root": "libs/core/src/lib/text",
+    "sourceRoot": "libs/core/src/lib/text",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/core/text"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/text/tsconfig.lib.json",
+                "project": "libs/core/src/lib/text/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/text/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/text/test.ts",
+                "tsConfig": "libs/core/src/lib/text/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/text/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/core/src/lib/text/**/*.ts", "libs/core/src/lib/text/**/*.html"]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fd"]
+}

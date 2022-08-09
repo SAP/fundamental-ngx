@@ -1,10 +1,9 @@
-let projects: { projectName: string; tags: string[] }[];
-
 const angularJson = require('../../angular.json');
-projects = Object.keys(angularJson.projects).map((projName) => {
+const projects: { projectName: string; tags: string[] }[] = Object.keys(angularJson.projects).map((projName) => {
+    const projectContent = require('../../' + angularJson.projects[projName] + '/project.json');
     return {
         projectName: projName,
-        ...angularJson.projects[projName]
+        ...projectContent
     };
 });
 

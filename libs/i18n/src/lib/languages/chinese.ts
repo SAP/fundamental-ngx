@@ -21,7 +21,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         datetimeInputLabel: 'Datetime input',
         displayDatetimeToggleLabel: 'Display calendar toggle',
         displayTypeDateLabel: 'Date',
-        displayTypeTimeLabel: 'Time'
+        displayTypeTimeLabel: 'Time',
+        datetimeOkLabel: 'Ok',
+        datetimeCancelLabel: 'Cancel'
     },
     coreFeedListItem: {
         moreLabel: 'More',

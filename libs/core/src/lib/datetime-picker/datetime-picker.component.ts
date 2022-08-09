@@ -305,16 +305,18 @@ export class DatetimePickerComponent<D>
     preventScrollOnFocus = false;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Text and aria-label of the DateTimePicker 'OK' button.
      */
     @Input()
-    okLabel = 'OK';
+    okLabel: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Text and aria-label of the DateTimePicker 'Cancel' button.
      */
     @Input()
-    cancelLabel = 'Cancel';
+    cancelLabel: string;
 
     /** @hidden */
     _processInputOnBlur = false;

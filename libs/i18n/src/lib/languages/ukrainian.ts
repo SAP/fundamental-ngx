@@ -23,7 +23,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         datetimeInputLabel: 'Поле вводу дати та часу',
         displayDatetimeToggleLabel: 'Показати календар',
         displayTypeDateLabel: 'Дата',
-        displayTypeTimeLabel: 'Час'
+        displayTypeTimeLabel: 'Час',
+        datetimeOkLabel: 'OK',
+        datetimeCancelLabel: 'Відмінити'
     },
     coreFeedListItem: {
         moreLabel: 'Більше',
