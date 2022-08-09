@@ -10,18 +10,16 @@ import {
     HostBinding,
     ViewChild,
     ElementRef,
-    NgZone,
     Output,
     EventEmitter,
     HostListener,
-    Optional,
     TemplateRef,
     ViewChildren,
     AfterViewInit,
     OnDestroy,
     Input
 } from '@angular/core';
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { debounceTime, Subject, Subscription } from 'rxjs';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowContainer } from './interfaces/overflow-container.interface';
@@ -172,13 +170,7 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
     moreItemsButtonText: (hiddenItemsCount: number) => string = (count) => `${count} more`;
 
     /** @hidden */
-    constructor(
-        protected _cdr: ChangeDetectorRef,
-        protected _zone: NgZone,
-        protected _elRef: ElementRef,
-        protected _overflowLayoutService: OverflowLayoutService,
-        @Optional() protected _rtlService: RtlService
-    ) {
+    constructor(protected _cdr: ChangeDetectorRef, protected _overflowLayoutService: OverflowLayoutService) {
         this._subscription.add(
             this._fillTrigger$.pipe(debounceTime(30)).subscribe(() => this._overflowLayoutService.fitVisibleItems())
         );
