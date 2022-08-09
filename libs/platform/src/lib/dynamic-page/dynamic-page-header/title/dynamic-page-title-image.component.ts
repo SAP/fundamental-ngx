@@ -1,7 +1,7 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, ViewChild, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
-    selector: 'fdp-dynamic-page-key-info',
+    selector: 'fdp-dynamic-page-title-image',
     template: `
         <ng-template #contentTemplateRef>
             <ng-content></ng-content>
@@ -10,7 +10,7 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation, ViewChild, Templ
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class DynamicPageKeyInfoComponent {
+export class DynamicPageTitleImageComponent {
     /**
      * @hidden
      * The component view is wrapped in ng-template so

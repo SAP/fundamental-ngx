@@ -15,8 +15,10 @@ import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic
 import { DynamicPageKeyInfoComponent } from './dynamic-page-header/key-info/dynamic-page-key-info.component';
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageTitleHostComponent } from './dynamic-page-header/title/dynamic-page-title-host.component';
+import { DynamicPageTitleImageComponent } from './dynamic-page-header/title/dynamic-page-title-image.component';
 import { DynamicPageComponent } from './dynamic-page.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { FacetModule } from '@fundamental-ngx/core/facets';
 
 @NgModule({
     declarations: [
@@ -29,9 +31,18 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         DynamicPageHeaderComponent,
         DynamicPageContentComponent,
         DynamicPageContentHostComponent,
-        DynamicPageFooterComponent
+        DynamicPageFooterComponent,
+        DynamicPageTitleImageComponent
     ],
-    imports: [CommonModule, TabsModule, DynamicPageModule, PlatformButtonModule, BreadcrumbModule, ScrollingModule],
+    imports: [
+        CommonModule,
+        TabsModule,
+        DynamicPageModule,
+        PlatformButtonModule,
+        BreadcrumbModule,
+        ScrollingModule,
+        FacetModule
+    ],
     exports: [
         DynamicPageComponent,
         DynamicPageTitleComponent,
@@ -40,7 +51,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         DynamicPageLayoutActionsComponent,
         DynamicPageHeaderComponent,
         DynamicPageContentComponent,
-        DynamicPageFooterComponent
+        DynamicPageFooterComponent,
+        DynamicPageTitleImageComponent
     ]
 })
 export class PlatformDynamicPageModule {}
