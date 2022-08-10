@@ -4,6 +4,13 @@
     "sourceRoot": "libs/i18n/src",
     "prefix": "fundamental-ngx",
     "targets": {
+        "compile-typedocs": {
+            "executor": "./tools/executors/compile-typedocs:compile-lib",
+            "options": {
+                "outputPath": "apps/docs/src/assets/typedoc/i18n"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
         "build": {
             "executor": "@nrwl/angular:package",
             "outputs": ["dist/libs/i18n"],

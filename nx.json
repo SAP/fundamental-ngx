@@ -13,14 +13,14 @@
         "default": {
             "runner": "nx/tasks-runners/default",
             "options": {
-                "cacheableOperations": ["build", "lint", "test", "e2e"],
+                "cacheableOperations": ["compile-typedocs", "build", "lint", "test", "e2e"],
                 "parallel": 1
             }
         },
         "cloud": {
             "runner": "@nrwl/nx-cloud",
             "options": {
-                "strictlyOrderedTargets": ["build", "lint", "test", "e2e"],
+                "strictlyOrderedTargets": ["compile-typedocs", "build", "lint", "test", "e2e"],
                 "canTrackAnalytics": false,
                 "showUsageWarnings": true
             }

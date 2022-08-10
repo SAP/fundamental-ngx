@@ -1,0 +1,14 @@
+{
+    "executors": {
+        "compile-lib": {
+            "implementation": "./impl-lib",
+            "schema": "./schema.json",
+            "description": "Compiles typedocs of library"
+        },
+        "compile-docs": {
+            "implementation": "./impl-docs",
+            "schema": "./schema.json",
+            "description": "Compiles typedocs of docs"
+        }
+    }
+}

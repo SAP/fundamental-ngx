@@ -4,6 +4,13 @@
     "sourceRoot": "libs/datetime-adapter/src",
     "prefix": "fundamental-ngx",
     "targets": {
+        "compile-typedocs": {
+            "executor": "./tools/executors/compile-typedocs:compile-lib",
+            "options": {
+                "outputPath": "apps/docs/src/assets/typedoc/datetime-adapter"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
         "build": {
             "executor": "@nrwl/angular:package",
             "outputs": ["dist/libs/datetime-adapter"],

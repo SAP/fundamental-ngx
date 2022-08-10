@@ -4,6 +4,9 @@
     "sourceRoot": "libs/core/src/lib",
     "prefix": "fd",
     "targets": {
+        "compile-typedocs": {
+            "executor": "./tools/executors/compile-typedocs:compile-lib"
+        },
         "build": {
             "executor": "@nrwl/angular:package",
             "outputs": ["dist/libs/core"],

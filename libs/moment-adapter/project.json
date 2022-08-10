@@ -4,6 +4,13 @@
     "projectType": "library",
     "prefix": "fd",
     "targets": {
+        "compile-typedocs": {
+            "executor": "./tools/executors/compile-typedocs:compile-lib",
+            "options": {
+                "outputPath": "apps/docs/src/assets/typedoc/moment-adapter"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
         "build": {
             "executor": "@nrwl/angular:package",
             "options": {

@@ -9,6 +9,13 @@
         }
     },
     "targets": {
+        "compile-typedocs": {
+            "executor": "./tools/executors/compile-typedocs:compile-docs",
+            "options": {
+                "outputPath": "apps/docs/src/assets/typedoc"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
         "build": {
             "executor": "@angular-builders/custom-webpack:browser",
             "options": {

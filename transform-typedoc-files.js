@@ -26,3 +26,5 @@ async function* getFiles(dir) {
         await fs.rename(f, f.toLocaleLowerCase());
     }
 })();
+
+require('fs').rmdirSync(typedocDir, { recursive: true });

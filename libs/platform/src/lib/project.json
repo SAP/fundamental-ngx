@@ -4,6 +4,13 @@
     "sourceRoot": "libs/platform/src/lib",
     "prefix": "fdp",
     "targets": {
+        "compile-typedocs": {
+            "executor": "./tools/executors/compile-typedocs:compile-lib",
+            "options": {
+                "outputPath": "apps/docs/src/assets/typedoc/platform"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
         "build": {
             "executor": "@nrwl/angular:package",
             "outputs": ["dist/libs/fdp"],

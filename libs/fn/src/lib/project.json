@@ -4,6 +4,13 @@
     "sourceRoot": "libs/fn/src/lib",
     "prefix": "fn",
     "targets": {
+        "compile-typedocs": {
+            "executor": "./tools/executors/compile-typedocs:compile-lib",
+            "options": {
+                "outputPath": "apps/docs/src/assets/typedoc/fn"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
         "build": {
             "executor": "@nrwl/angular:package",
             "outputs": ["dist/libs/fn"],
