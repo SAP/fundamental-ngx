@@ -1,4 +1,4 @@
-import { ExecutorContext } from '@nrwl/tao/src/shared/workspace';
+import { ExecutorContext } from '@nrwl/devkit';
 import { rmdirSync, existsSync } from 'fs';
 import * as childProcess from 'child_process';
 

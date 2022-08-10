@@ -145,7 +145,7 @@ var __generator =
         }
     };
 exports.__esModule = true;
-var run_1 = require('@nrwl/tao/src/commands/run');
+var devkit_1 = require('@nrwl/devkit');
 function compileTypedocs(_options, context) {
     return __awaiter(this, void 0, void 0, function () {
         var projects, _i, projects_1, projectName;
@@ -169,7 +169,7 @@ function compileTypedocs(_options, context) {
                     projectName = projects_1[_i];
                     return [
                         4 /*yield*/,
-                        (0, run_1.runExecutor)(
+                        (0, devkit_1.runExecutor)(
                             { project: projectName, target: 'compile-typedocs' },
                             {
                                 outputPath: 'apps/docs/src/assets/typedoc/'.concat(projectName)

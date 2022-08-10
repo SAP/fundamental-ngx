@@ -1,5 +1,4 @@
-import { ExecutorContext } from '@nrwl/tao/src/shared/workspace';
-import { runExecutor } from '@nrwl/tao/src/commands/run';
+import { ExecutorContext, runExecutor } from '@nrwl/devkit';
 
 export default async function compileTypedocs(_options: any, context: ExecutorContext) {
     const projects: Array<string> = Object.keys(context.workspace.projects).filter((projectName) => {
