@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
+import { AfterContentChecked, ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -15,9 +15,19 @@ import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } fro
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PopoverControlComponent {
+export class PopoverControlComponent implements AfterContentChecked {
+    /** @hidden */
+    _tabbable = false;
+
     /** @hidden */
     constructor(public elRef: ElementRef) {}
+
+    /** @hidden */
+    ngAfterContentChecked(): void {
+        if (this._tabbable) {
+            this.makeTabbable();
+        }
+    }
 
     /** @hidden */
     makeTabbable(): void {

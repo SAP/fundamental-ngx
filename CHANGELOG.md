@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.8...v0.36.0-rc.9) (2022-08-09)
+
+
+### Bug Fixes
+
+* **core:** popover tab/focus fix and doc corrections ([#8493](https://github.com/SAP/fundamental-ngx/issues/8493)) ([3584673](https://github.com/SAP/fundamental-ngx/commit/358467322ea822de29dcae1b3001d844795a8183))
+
 ## [0.36.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.7...v0.36.0-rc.8) (2022-08-08)
 
 ## [0.36.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.6...v0.36.0-rc.7) (2022-08-08)
