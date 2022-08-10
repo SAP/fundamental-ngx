@@ -1,4 +1,15 @@
 
+## [0.36.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.9...v0.36.0-rc.10) (2022-08-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core,platform:** Angular 14 migration
+
+### Features
+
+* **core,platform:** ng14 migration ([#8273](https://github.com/SAP/fundamental-ngx/issues/8273)) ([2c14517](https://github.com/SAP/fundamental-ngx/commit/2c1451729d1a5da89c0575e300dbfe0fa8e9739f))
+
 ## [0.36.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.8...v0.36.0-rc.9) (2022-08-09)
 
 
