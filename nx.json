@@ -11,18 +11,11 @@
     },
     "tasksRunnerOptions": {
         "default": {
-            "runner": "nx/tasks-runners/default",
-            "options": {
-                "cacheableOperations": ["compile-typedocs", "build", "lint", "test", "e2e"],
-                "parallel": 1
-            }
-        },
-        "cloud": {
             "runner": "@nrwl/nx-cloud",
             "options": {
-                "strictlyOrderedTargets": ["compile-typedocs", "build", "lint", "test", "e2e"],
-                "canTrackAnalytics": false,
-                "showUsageWarnings": true
+                "cacheableOperations": ["compile-typedocs", "build", "lint", "test", "e2e"],
+                "parallel": 1,
+                "accessToken": "NTViYmFjZDctZjEyNy00NjQ0LWI4MzctZWViOTZmNDk2ZjAzfHJlYWQtd3JpdGU="
             }
         }
     },
