@@ -86,7 +86,11 @@ class TestRadioGroupReactiveFdpGroupComponent {
     ];
 
     form1 = new FormGroup({
-        sizeOrdered: new FormControl('5')
+        sizeOrdered: new FormControl('5'),
+        pizzaBrand: new FormControl(),
+        deliver: new FormControl(),
+        payment: new FormControl(),
+        season: new FormControl()
     });
 
     formData = { pizzaBrand: 'Pizza Hut', season: 'winter' };
@@ -96,14 +100,12 @@ describe('Radio Group Test with Reactive fdp-form-group', () => {
     let component: TestRadioGroupReactiveFdpGroupComponent;
     let fixture: ComponentFixture<TestRadioGroupReactiveFdpGroupComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
-                declarations: [TestRadioGroupReactiveFdpGroupComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
+            declarations: [TestRadioGroupReactiveFdpGroupComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestRadioGroupReactiveFdpGroupComponent);
@@ -334,14 +336,12 @@ describe('Radio Group Test with Template Driven fdp-form-group', () => {
     let component: TestRadioGroupTemplateDrivenFdpGroupComponent;
     let fixture: ComponentFixture<TestRadioGroupTemplateDrivenFdpGroupComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
-                declarations: [TestRadioGroupTemplateDrivenFdpGroupComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
+            declarations: [TestRadioGroupTemplateDrivenFdpGroupComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestRadioGroupTemplateDrivenFdpGroupComponent);

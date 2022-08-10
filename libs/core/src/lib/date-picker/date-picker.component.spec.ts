@@ -20,22 +20,20 @@ describe('DatePickerComponent', () => {
     let fixture: ComponentFixture<DatePickerComponent<FdDate>>;
     let adapter: FdDatetimeAdapter;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [
-                    FdDatetimeModule,
-                    CalendarModule,
-                    PopoverModule,
-                    FormsModule,
-                    IconModule,
-                    InputGroupModule,
-                    ButtonModule,
-                    FormMessageModule
-                ]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                FdDatetimeModule,
+                CalendarModule,
+                PopoverModule,
+                FormsModule,
+                IconModule,
+                InputGroupModule,
+                ButtonModule,
+                FormMessageModule
+            ]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent<DatePickerComponent<FdDate>>(DatePickerComponent);
@@ -360,15 +358,13 @@ describe('DatePickerComponent Accessibility', () => {
         valueStateErrorMessage = 'Value state Error';
     }
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [HostComponent],
-                imports: [FdDatetimeModule, DatePickerModule],
-                providers: []
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [HostComponent],
+            imports: [FdDatetimeModule, DatePickerModule],
+            providers: []
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent<HostComponent>(HostComponent);

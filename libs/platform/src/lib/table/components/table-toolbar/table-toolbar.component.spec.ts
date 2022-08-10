@@ -38,28 +38,26 @@ describe('TableToolbarComponent', () => {
     let fixture: ComponentFixture<TableToolbarComponent>;
     let table: TableComponentMock;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformTableModule],
-                providers: [
-                    {
-                        provide: Table,
-                        useFactory: () => {
-                            table = new TableComponentMock();
-                            return table;
-                        }
-                    },
-                    {
-                        provide: TableService,
-                        useValue: {
-                            tableLoading$: new Subject<void>()
-                        }
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformTableModule],
+            providers: [
+                {
+                    provide: Table,
+                    useFactory: () => {
+                        table = new TableComponentMock();
+                        return table;
                     }
-                ]
-            }).compileComponents();
-        })
-    );
+                },
+                {
+                    provide: TableService,
+                    useValue: {
+                        tableLoading$: new Subject<void>()
+                    }
+                }
+            ]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TableToolbarComponent);

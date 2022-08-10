@@ -35,15 +35,13 @@ describe('SelectComponent in mobile mode', () => {
     let testComponent: TestWrapperComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestWrapperComponent],
-                imports: [SelectModule, SelectMobileModule, BrowserAnimationsModule, RouterTestingModule],
-                providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
-            }).overrideComponent(SelectComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestWrapperComponent],
+            imports: [SelectModule, SelectMobileModule, BrowserAnimationsModule, RouterTestingModule],
+            providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
+        }).overrideComponent(SelectComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } });
+    }));
 
     async function setup(mobileConfig: MobileModeConfig = MOBILE_CONFIG): Promise<void> {
         TestBed.overrideProvider(MOBILE_CONFIG_TEST_TOKEN, { useValue: mobileConfig });

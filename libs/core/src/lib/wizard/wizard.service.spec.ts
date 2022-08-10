@@ -1,6 +1,6 @@
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { WizardStepComponent, WizardStepStatus } from '.';
+import { WizardStepComponent, WizardStepStatus } from './wizard-step/wizard-step.component';
 
 import { WizardService } from './wizard.service';
 

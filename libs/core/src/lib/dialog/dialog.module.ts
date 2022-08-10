@@ -51,7 +51,6 @@ const declarations = [
         A11yModule
     ],
     exports: [declarations, BarModule, TitleModule, TemplateModule, InitialFocusModule],
-    entryComponents: [DialogContainerComponent, DialogDefaultComponent],
     providers: [DialogService, DynamicComponentService]
 })
 export class DialogModule {}

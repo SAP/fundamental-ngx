@@ -78,14 +78,12 @@ describe('Basic Textarea', () => {
     let fixture: ComponentFixture<BasicTextareaTestWrapperComponent>;
     let host: BasicTextareaTestWrapperComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule],
-                declarations: [BasicTextareaTestWrapperComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule],
+            declarations: [BasicTextareaTestWrapperComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(BasicTextareaTestWrapperComponent);
@@ -161,14 +159,12 @@ describe('Advanced Textarea', () => {
     let fixture: ComponentFixture<BasicTextareaTestWrapperComponent>;
     let host: BasicTextareaTestWrapperComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule],
-                declarations: [BasicTextareaTestWrapperComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule],
+            declarations: [BasicTextareaTestWrapperComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(BasicTextareaTestWrapperComponent);

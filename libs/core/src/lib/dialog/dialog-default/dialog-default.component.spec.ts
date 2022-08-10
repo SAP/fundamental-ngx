@@ -14,14 +14,12 @@ describe('DefaultDialogComponent', () => {
     let fixture: ComponentFixture<DialogDefaultComponent>;
     let object: DialogDefaultContent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [DialogModule, BrowserAnimationsModule],
-                providers: [DialogConfig, DialogRef]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [DialogModule, BrowserAnimationsModule],
+            providers: [DialogConfig, DialogRef]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         object = {

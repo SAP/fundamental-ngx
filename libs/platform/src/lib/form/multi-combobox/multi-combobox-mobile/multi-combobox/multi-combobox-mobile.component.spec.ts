@@ -33,21 +33,19 @@ describe('MultiComboboxMobileComponent', () => {
         openChange: new EventEmitter<boolean>()
     };
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [DialogModule, BrowserAnimationsModule],
-                declarations: [MultiComboboxMobileComponent],
-                providers: [
-                    DynamicComponentService,
-                    {
-                        provide: MULTICOMBOBOX_COMPONENT,
-                        useValue: multiComboboxInputComponent
-                    }
-                ]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [DialogModule, BrowserAnimationsModule],
+            declarations: [MultiComboboxMobileComponent],
+            providers: [
+                DynamicComponentService,
+                {
+                    provide: MULTICOMBOBOX_COMPONENT,
+                    useValue: multiComboboxInputComponent
+                }
+            ]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         multiComboboxInputComponent = {

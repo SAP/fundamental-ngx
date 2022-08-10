@@ -59,31 +59,25 @@ class DefaultHeaderTestComponent {
 }
 
 describe('MessageBoxHeaderComponent', () => {
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [BarModule, MessageBoxModule],
-                declarations: [
-                    CustomHeaderTestComponent,
-                    DefaultHeaderTestComponent,
-                    HeaderWithProjectedIconTestComponent
-                ],
-                providers: [
-                    {
-                        provide: MessageBoxHost,
-                        useValue: {
-                            _messageBoxConfig: {
-                                ...new MessageBoxConfig(),
-                                mobile: true,
-                                type: 'error',
-                                showSemanticIcon: true
-                            }
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [BarModule, MessageBoxModule],
+            declarations: [CustomHeaderTestComponent, DefaultHeaderTestComponent, HeaderWithProjectedIconTestComponent],
+            providers: [
+                {
+                    provide: MessageBoxHost,
+                    useValue: {
+                        _messageBoxConfig: {
+                            ...new MessageBoxConfig(),
+                            mobile: true,
+                            type: 'error',
+                            showSemanticIcon: true
                         }
                     }
-                ]
-            }).compileComponents();
-        })
-    );
+                }
+            ]
+        }).compileComponents();
+    }));
 
     function setup<V>(testComponent): { fixture: ComponentFixture<V>; component: V } {
         const fixture = TestBed.createComponent(testComponent as any as Type<V>);

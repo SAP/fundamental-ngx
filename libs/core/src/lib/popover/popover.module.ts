@@ -31,7 +31,6 @@ import { PopoverContainerDirective } from './popover-container/popover-container
         PopoverComponent,
         PopoverTriggerDirective,
         PopoverContainerDirective
-    ],
-    entryComponents: [PopoverBodyComponent]
+    ]
 })
 export class PopoverModule {}

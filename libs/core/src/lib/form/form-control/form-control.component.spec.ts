@@ -14,13 +14,11 @@ describe('FormControlComponent', () => {
 
     let directive, componentInstance;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [FormControlComponent, TestComponent]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [FormControlComponent, TestComponent]
+        });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

@@ -37,14 +37,12 @@ describe('SplitButtonComponent', () => {
     let component: DebugElement;
     let componentInstance: SplitButtonComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [MenuModule, ButtonModule, I18nModule],
-                declarations: [SplitButtonComponent, TestComponent]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MenuModule, ButtonModule, I18nModule],
+            declarations: [SplitButtonComponent, TestComponent]
+        });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

@@ -79,14 +79,12 @@ export class TestComponent {
 describe('TileDirectives', () => {
     let fixture: ComponentFixture<TestComponent>, component: TestComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [TileModule, ButtonModule],
-                declarations: [TestComponent]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TileModule, ButtonModule],
+            declarations: [TestComponent]
+        });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

@@ -39,14 +39,12 @@ describe('MessagePageComponent', () => {
     let fixture: ComponentFixture<TestMessagePageComponent>;
     let host: TestMessagePageComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [MessagePageModule],
-                declarations: [TestMessagePageComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MessagePageModule],
+            declarations: [TestMessagePageComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMessagePageComponent);

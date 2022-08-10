@@ -48,7 +48,6 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         WizardGeneratorSummaryStepDirective,
         WizardGeneratorReviewButtonDirective
     ],
-    entryComponents: [DialogWizardGeneratorComponent],
     imports: [
         CommonModule,
         DialogModule,

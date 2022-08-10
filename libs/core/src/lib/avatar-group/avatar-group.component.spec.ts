@@ -59,14 +59,12 @@ describe('AvatarGroupComponent', () => {
     let component: AvatarGroupTestComponent;
     let fixture: ComponentFixture<AvatarGroupTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [AvatarGroupTestComponent],
-                imports: [AvatarGroupModule, PopoverModule, AvatarModule, ButtonModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [AvatarGroupTestComponent],
+            imports: [AvatarGroupModule, PopoverModule, AvatarModule, ButtonModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(AvatarGroupTestComponent);

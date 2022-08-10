@@ -30,14 +30,13 @@ describe('CheckboxComponent', () => {
     let checkbox: CheckboxComponent;
     let hostComponent: TestCheckboxWrapperComponent;
     let fixture: ComponentFixture<TestCheckboxWrapperComponent>;
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FormsModule, CheckboxModule],
-                declarations: [TestCheckboxWrapperComponent]
-            }).compileComponents();
-        })
-    );
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FormsModule, CheckboxModule],
+            declarations: [TestCheckboxWrapperComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(TestCheckboxWrapperComponent);
@@ -219,14 +218,12 @@ describe('CheckboxComponent with external listeners', () => {
     let fixture: ComponentFixture<TestCheckboxWrapper2Component>;
     let labelElement: HTMLLabelElement;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FormsModule, CheckboxModule],
-                declarations: [TestCheckboxWrapper2Component]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FormsModule, CheckboxModule],
+            declarations: [TestCheckboxWrapper2Component]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(TestCheckboxWrapper2Component);

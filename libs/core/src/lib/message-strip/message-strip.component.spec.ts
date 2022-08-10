@@ -16,14 +16,12 @@ describe('MessageStripComponent', () => {
     let component: MessageStripComponent;
     let fixture: ComponentFixture<TestMessageStripComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ButtonModule, MessageStripModule],
-                declarations: [TestMessageStripComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ButtonModule, MessageStripModule],
+            declarations: [TestMessageStripComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMessageStripComponent);

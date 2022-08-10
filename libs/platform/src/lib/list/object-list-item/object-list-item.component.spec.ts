@@ -38,14 +38,12 @@ describe('ObjectListItemComponent', () => {
     let component: ObjectListItemTestComponent;
     let fixture: ComponentFixture<ObjectListItemTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformListModule, ObjectListItemModule, RouterTestingModule],
-                declarations: [ObjectListItemTestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformListModule, ObjectListItemModule, RouterTestingModule],
+            declarations: [ObjectListItemTestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ObjectListItemTestComponent);
@@ -369,14 +367,12 @@ describe('Object  List Item Component with DataSource', () => {
     let component: ObjectListItemDataSourceTestComponent;
     let fixture: ComponentFixture<ObjectListItemDataSourceTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformListModule, RouterTestingModule, ObjectListItemModule],
-                declarations: [ObjectListItemDataSourceTestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformListModule, RouterTestingModule, ObjectListItemModule],
+            declarations: [ObjectListItemDataSourceTestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ObjectListItemDataSourceTestComponent);

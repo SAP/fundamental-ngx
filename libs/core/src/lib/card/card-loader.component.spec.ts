@@ -8,14 +8,12 @@ import { CLASS_NAME } from './constants';
 describe('CardLoaderComponent', () => {
     let fixture: ComponentFixture<CardLoaderComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule],
-                declarations: [CardLoaderComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule],
+            declarations: [CardLoaderComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CardLoaderComponent);

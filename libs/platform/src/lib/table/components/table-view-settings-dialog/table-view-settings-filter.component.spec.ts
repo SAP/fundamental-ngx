@@ -32,18 +32,16 @@ describe('TableViewSettingsFilterComponent', () => {
     let fixture: ComponentFixture<HostTableViewSettingsFilterComponent>;
     let component: TableViewSettingsFilterComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule],
-                declarations: [
-                    HostTableViewSettingsFilterComponent,
-                    FdpViewSettingsFilterCustomDef,
-                    TableViewSettingsFilterComponent
-                ]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule],
+            declarations: [
+                HostTableViewSettingsFilterComponent,
+                FdpViewSettingsFilterCustomDef,
+                TableViewSettingsFilterComponent
+            ]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HostTableViewSettingsFilterComponent);

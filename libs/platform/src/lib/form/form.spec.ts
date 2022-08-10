@@ -90,14 +90,12 @@ describe('Platform Form', () => {
     let fixture: ComponentFixture<SimpleFormTestComponent>;
     let host: SimpleFormTestComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
-                declarations: [SimpleFormTestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
+            declarations: [SimpleFormTestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SimpleFormTestComponent);
@@ -269,14 +267,12 @@ describe('Nested Form Groups', () => {
     let fixture: ComponentFixture<NestedFormGroupsTestComponent>;
     let host: NestedFormGroupsTestComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
-                declarations: [NestedFormGroupsTestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
+            declarations: [NestedFormGroupsTestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NestedFormGroupsTestComponent);
@@ -391,14 +387,12 @@ describe('fdp-form-field out of fdp-form-group', () => {
     let fixture: ComponentFixture<HostFormComponent>;
     let host: HostFormComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
-                declarations: [HostFormComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
+            declarations: [HostFormComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HostFormComponent);
@@ -454,14 +448,12 @@ describe('FdpFormField with Wrapper', () => {
     let fixture: ComponentFixture<HostFormComponent>;
     let host: HostFormComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
-                declarations: [WrapperComponent, HostFormComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
+            declarations: [WrapperComponent, HostFormComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HostFormComponent);

@@ -2,5 +2,8 @@
     "extends": "../../tsconfig.base.json",
     "angularCompilerOptions": {
         "enableIvy": true
+    },
+    "compilerOptions": {
+        "target": "es2020"
     }
 }

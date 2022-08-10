@@ -48,15 +48,13 @@ describe('MenuMobileComponent', () => {
     let menuMobile: MenuMobileComponent;
     let fixture: ComponentFixture<TesNestedMenuItemComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TesNestedMenuItemComponent],
-                imports: [MenuModule, MenuMobileModule, BrowserAnimationsModule],
-                providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TesNestedMenuItemComponent],
+            imports: [MenuModule, MenuMobileModule, BrowserAnimationsModule],
+            providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
+        }).compileComponents();
+    }));
 
     async function setup(mobileConfig: MobileModeConfig = MOBILE_CONFIG): Promise<void> {
         TestBed.overrideProvider(MOBILE_CONFIG_TEST_TOKEN, { useValue: mobileConfig });

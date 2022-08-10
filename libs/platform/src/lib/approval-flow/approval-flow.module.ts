@@ -52,11 +52,6 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         ApprovalFlowMessagesComponent,
         ApprovalFlowToolbarActionsComponent
     ],
-    entryComponents: [
-        ApprovalFlowAddNodeComponent,
-        ApprovalFlowApproverDetailsComponent,
-        ApprovalFlowSelectTypeComponent
-    ],
     providers: [ApprovalFlowAddNodeViewService],
     imports: [
         CommonModule,

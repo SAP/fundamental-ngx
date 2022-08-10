@@ -44,22 +44,13 @@ describe('DefaultThumbnailImageComponent', () => {
     let fixture: ComponentFixture<DefaultThumbnailImageTestComponent>;
     let thumbNailImageComponent: ThumbnailImageComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [
-                    CommonModule,
-                    AvatarModule,
-                    DialogModule,
-                    CarouselModule,
-                    ButtonModule,
-                    PlatformThumbnailModule
-                ],
-                declarations: [DefaultThumbnailImageTestComponent],
-                providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule, PlatformThumbnailModule],
+            declarations: [DefaultThumbnailImageTestComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DefaultThumbnailImageTestComponent);
@@ -116,22 +107,13 @@ describe('HorizontalThumbnailImageComponent', () => {
     let component: HorizontalThumbnailImageTestComponent;
     let fixture: ComponentFixture<HorizontalThumbnailImageTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [
-                    CommonModule,
-                    AvatarModule,
-                    DialogModule,
-                    CarouselModule,
-                    ButtonModule,
-                    PlatformThumbnailModule
-                ],
-                declarations: [HorizontalThumbnailImageTestComponent],
-                providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule, PlatformThumbnailModule],
+            declarations: [HorizontalThumbnailImageTestComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HorizontalThumbnailImageTestComponent);
@@ -209,22 +191,13 @@ describe('MoreImagesThumbnailImageTestComponent', () => {
     let component: MoreImagesThumbnailImageTestComponent;
     let fixture: ComponentFixture<MoreImagesThumbnailImageTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [
-                    CommonModule,
-                    AvatarModule,
-                    DialogModule,
-                    CarouselModule,
-                    ButtonModule,
-                    PlatformThumbnailModule
-                ],
-                declarations: [MoreImagesThumbnailImageTestComponent],
-                providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule, PlatformThumbnailModule],
+            declarations: [MoreImagesThumbnailImageTestComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MoreImagesThumbnailImageTestComponent);

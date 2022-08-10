@@ -39,14 +39,12 @@ describe('SplitterPaneContainerComponent', () => {
     let paneContainerComponent: SplitterPaneContainerComponent;
     let fixture: ComponentFixture<SplitterHostComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [SplitterHostComponent],
-                imports: [SplitterModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [SplitterHostComponent],
+            imports: [SplitterModule]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(SplitterHostComponent);

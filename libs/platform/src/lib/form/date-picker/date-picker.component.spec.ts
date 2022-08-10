@@ -63,7 +63,8 @@ class TestDatePickerComponent {
     };
 
     datePickerForm = new FormGroup({
-        journeydate: new FormControl(this.journeydate)
+        journeydate: new FormControl(this.journeydate),
+        birthday: new FormControl()
     });
 
     datePickerFormData = { birthday: this.birthday };
@@ -74,27 +75,25 @@ describe('TestDatePickerComponent', () => {
     let fixture: ComponentFixture<TestDatePickerComponent>;
     let adapter: FdDatetimeAdapter;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestDatePickerComponent],
-                imports: [
-                    PlatformDatePickerModule,
-                    CalendarModule,
-                    DatePickerModule,
-                    PopoverModule,
-                    FdDatetimeModule,
-                    FdpFormGroupModule,
-                    FormsModule,
-                    FormModule,
-                    IconModule,
-                    InputGroupModule,
-                    ButtonModule,
-                    ReactiveFormsModule
-                ]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestDatePickerComponent],
+            imports: [
+                PlatformDatePickerModule,
+                CalendarModule,
+                DatePickerModule,
+                PopoverModule,
+                FdDatetimeModule,
+                FdpFormGroupModule,
+                FormsModule,
+                FormModule,
+                IconModule,
+                InputGroupModule,
+                ButtonModule,
+                ReactiveFormsModule
+            ]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestDatePickerComponent);

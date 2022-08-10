@@ -107,14 +107,12 @@ describe('GridListItemComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let gridListComponent: GridListComponent<any>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent],
-                imports: [GridListModule, ButtonModule, AvatarModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [GridListModule, ButtonModule, AvatarModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

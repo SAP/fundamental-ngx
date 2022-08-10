@@ -18,23 +18,21 @@ describe('TimePickerComponent', () => {
     let component: TimePickerComponent<FdDate>;
     let fixture: ComponentFixture<TimePickerComponent<FdDate>>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [
-                    FormsModule,
-                    PopoverModule,
-                    InputGroupModule,
-                    ButtonModule,
-                    FdDatetimeModule,
-                    TimeModule,
-                    FormMessageModule,
-                    TimePickerModule
-                ],
-                declarations: [TimePickerComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                FormsModule,
+                PopoverModule,
+                InputGroupModule,
+                ButtonModule,
+                FdDatetimeModule,
+                TimeModule,
+                FormMessageModule,
+                TimePickerModule
+            ],
+            declarations: [TimePickerComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent<TimePickerComponent<FdDate>>(TimePickerComponent);

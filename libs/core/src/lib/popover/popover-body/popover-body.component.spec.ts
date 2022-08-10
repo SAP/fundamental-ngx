@@ -11,13 +11,11 @@ describe('PopoverBodyComponent', () => {
     let component: PopoverBodyComponent;
     let fixture: ComponentFixture<PopoverBodyComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PopoverModule, OverlayModule, A11yModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PopoverModule, OverlayModule, A11yModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(PopoverBodyComponent);

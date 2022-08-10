@@ -77,22 +77,19 @@ describe('SelectComponent', () => {
     let triggerControl: HTMLElement;
     let _keyService: SelectKeyManagerService;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestWrapperComponent, TestFilteringWrapperComponent],
-                imports: [SelectModule],
-                providers: []
-            })
-                .overrideComponent(SelectComponent, {
-                    set: { changeDetection: ChangeDetectionStrategy.Default }
-                })
-                .overrideComponent(PopoverComponent, {
-                    set: { changeDetection: ChangeDetectionStrategy.Default }
-                })
-                .compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestWrapperComponent, TestFilteringWrapperComponent],
+            imports: [SelectModule]
         })
-    );
+            .overrideComponent(SelectComponent, {
+                set: { changeDetection: ChangeDetectionStrategy.Default }
+            })
+            .overrideComponent(PopoverComponent, {
+                set: { changeDetection: ChangeDetectionStrategy.Default }
+            })
+            .compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestWrapperComponent);

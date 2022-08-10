@@ -6,20 +6,12 @@
         "tsconfig.json": "*",
         "nx.json": "*"
     },
-    "targetDependencies": {
-        "build": [
-            {
-                "target": "build",
-                "projects": "dependencies"
-            }
-        ]
-    },
     "affected": {
         "defaultBase": "main"
     },
     "tasksRunnerOptions": {
         "default": {
-            "runner": "@nrwl/workspace/tasks-runners/default",
+            "runner": "nx/tasks-runners/default",
             "options": {
                 "cacheableOperations": ["build", "lint", "test", "e2e"],
                 "parallel": 1
@@ -35,7 +27,6 @@
         }
     },
     "cli": {
-        "defaultCollection": "@nrwl/angular",
         "analytics": false
     },
     "defaultProject": "docs",
@@ -66,6 +57,12 @@
                 "removeTSLintIfNoMoreTSLintTargets": true,
                 "skipFormat": false
             }
+        }
+    },
+    "$schema": "./node_modules/nx/schemas/nx-schema.json",
+    "targetDefaults": {
+        "build": {
+            "dependsOn": ["^build"]
         }
     }
 }

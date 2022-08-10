@@ -34,15 +34,13 @@ describe('TabNavDirective', () => {
     let component: TabNavComponent;
     let fixture: ComponentFixture<TestNavWrapperComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestNavWrapperComponent],
-                imports: [TabsModule],
-                providers: []
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestNavWrapperComponent],
+            imports: [TabsModule],
+            providers: []
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNavWrapperComponent);

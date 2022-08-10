@@ -21,12 +21,19 @@ export class PlatformCheckboxGroupListObjectComponent {
     countryVisited = [new Country('Australia', 'Australia'), new Country('India', 'India'), new Country('USA', 'USA')];
     visited = { visited: ['India', 'USA'] };
 
-    form4 = new FormGroup({});
-    form5 = new FormGroup({});
-    form6 = new FormGroup({
-        currencies: new FormControl(['INR'])
+    form4 = new FormGroup({
+        languages: new FormControl()
     });
-    form7 = new FormGroup({});
+    form5 = new FormGroup({
+        visited: new FormControl()
+    });
+    form6 = new FormGroup({
+        currencies: new FormControl(['INR']),
+        disabled_currencies: new FormControl()
+    });
+    form7 = new FormGroup({
+        items: new FormControl()
+    });
 
     invoiceItems = [
         new Item('1', 'coffee', 'Coffee', 100, 12),

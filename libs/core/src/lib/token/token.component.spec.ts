@@ -7,13 +7,11 @@ describe('TokenComponent', () => {
     let component: TokenComponent;
     let fixture: ComponentFixture<TokenComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [TokenModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TokenModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TokenComponent);

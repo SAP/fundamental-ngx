@@ -85,33 +85,33 @@ class TestSliderComponent {
         value1: new FormControl(0),
         value2: new FormControl(0),
         value3: new FormControl(this.customValues[4]),
-        value4: new FormControl([20, 70]),
+        value4: new FormControl<[number, number]>([20, 70]),
         value5: new FormControl({ value: 50, disabled: true }),
         value6: new FormControl(50)
     });
 
     get value1(): number {
-        return this.customForm.controls['value1'].value;
+        return this.customForm.controls['value1'].value!;
     }
 
     get value2(): number {
-        return this.customForm.controls['value2'].value;
+        return this.customForm.controls['value2'].value!;
     }
 
     get value3(): SliderCustomValue {
-        return this.customForm.controls['value3'].value;
+        return this.customForm.controls['value3'].value!;
     }
 
     get value4(): [number, number] {
-        return this.customForm.controls['value4'].value;
+        return this.customForm.controls['value4'].value!;
     }
 
     get value5(): number {
-        return this.customForm.controls['value5'].value;
+        return this.customForm.controls['value5'].value!;
     }
 
     get value6(): number {
-        return this.customForm.controls['value6'].value;
+        return this.customForm.controls['value6'].value!;
     }
 }
 

@@ -97,15 +97,13 @@ describe('SideNavigationComponent', () => {
     let component: TestNestedContainerComponent;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [NestedListModule],
-                declarations: [SideNavigationComponent, SideNavigationMainDirective, TestNestedContainerComponent],
-                providers: [MenuKeyboardService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [NestedListModule],
+            declarations: [SideNavigationComponent, SideNavigationMainDirective, TestNestedContainerComponent],
+            providers: [MenuKeyboardService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);

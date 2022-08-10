@@ -56,14 +56,12 @@ describe('ListComponent', () => {
     let component: ListComponentTestComponent;
     let fixture: ComponentFixture<ListComponentTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformListModule, StandardListItemModule, RouterTestingModule],
-                declarations: [ListComponentTestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformListModule, StandardListItemModule, RouterTestingModule],
+            declarations: [ListComponentTestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ListComponentTestComponent);
@@ -130,14 +128,12 @@ class ListDataSourceTestComponent {
 describe('ListComponent with DataSource', () => {
     let fixture: ComponentFixture<ListDataSourceTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ListDataSourceTestComponent],
-                imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ListDataSourceTestComponent],
+            imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ListDataSourceTestComponent);

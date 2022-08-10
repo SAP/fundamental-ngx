@@ -11,13 +11,11 @@ describe('ProductSwitchComponent', () => {
     let component: ProductSwitchComponent;
     let fixture: ComponentFixture<ProductSwitchComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PopoverModule, ButtonModule, DragAndDropModule, DragDropModule, ProductSwitchModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PopoverModule, ButtonModule, DragAndDropModule, DragDropModule, ProductSwitchModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ProductSwitchComponent);

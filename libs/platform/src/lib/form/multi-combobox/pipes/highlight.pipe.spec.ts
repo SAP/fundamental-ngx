@@ -7,16 +7,14 @@ import { MultiComboboxConfig } from '../multi-combobox.config';
 describe('Pipe: MultiComboboxHighlightPipe', () => {
     let pipe: MultiComboboxHighlightPipe;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                providers: [MultiComboboxConfig]
-            }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            providers: [MultiComboboxConfig]
+        }).compileComponents();
 
-            const multiComboboxConfig = TestBed.inject(MultiComboboxConfig);
-            pipe = new MultiComboboxHighlightPipe(multiComboboxConfig);
-        })
-    );
+        const multiComboboxConfig = TestBed.inject(MultiComboboxConfig);
+        pipe = new MultiComboboxHighlightPipe(multiComboboxConfig);
+    }));
 
     it('create an instance', () => {
         expect(pipe).toBeTruthy();

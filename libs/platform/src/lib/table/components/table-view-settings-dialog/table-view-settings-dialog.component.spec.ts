@@ -42,14 +42,12 @@ describe('TableViewSettingsDialogComponent', () => {
     let component: TableViewSettingsDialogComponent;
     let fixture: ComponentFixture<TableViewSettingsDialogComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [DialogModule],
-                declarations: [TableViewSettingsDialogComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [DialogModule],
+            declarations: [TableViewSettingsDialogComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TableViewSettingsDialogComponent);

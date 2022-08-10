@@ -41,14 +41,12 @@ describe('InputGroup component', () => {
     let fixture: ComponentFixture<InputGroupHostComponent>;
     let inputGroupComponent: InputGroupComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformButtonModule, PlatformInputGroupModule],
-                declarations: [InputGroupHostComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformButtonModule, PlatformInputGroupModule],
+            declarations: [InputGroupHostComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(InputGroupHostComponent);
@@ -135,14 +133,12 @@ describe('Input group within platform form', () => {
     let fixture: ComponentFixture<InputGroupFormTestWrapperComponent>;
     let host: InputGroupFormTestWrapperComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformButtonModule, PlatformInputGroupModule],
-                declarations: [InputGroupFormTestWrapperComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformButtonModule, PlatformInputGroupModule],
+            declarations: [InputGroupFormTestWrapperComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(InputGroupFormTestWrapperComponent);

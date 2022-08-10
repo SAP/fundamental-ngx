@@ -70,23 +70,17 @@ describe('MultiComboboxComponent default values', () => {
     let multiCombobox: MultiComboboxComponent;
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FdpFormGroupModule, FormModule, ReactiveFormsModule, PlatformMultiComboboxModule],
-                declarations: [MultiComboboxStandardComponent],
-                providers: [
-                    DynamicComponentService,
-                    RtlService,
-                    { provide: DATA_PROVIDERS, useClass: DataProvider as any }
-                ]
-            }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdpFormGroupModule, FormModule, ReactiveFormsModule, PlatformMultiComboboxModule],
+            declarations: [MultiComboboxStandardComponent],
+            providers: [DynamicComponentService, RtlService, { provide: DATA_PROVIDERS, useClass: DataProvider as any }]
+        }).compileComponents();
 
-            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-                overlayContainerEl = overlayContainer.getContainerElement();
-            })();
-        })
-    );
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MultiComboboxStandardComponent);

@@ -15,13 +15,11 @@ describe('ObjectMarkerComponent', () => {
     let component: ObjectMarkerComponent;
     let fixture: ComponentFixture<TestObjectMarkerComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ObjectMarkerComponent, TestObjectMarkerComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ObjectMarkerComponent, TestObjectMarkerComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestObjectMarkerComponent);

@@ -76,27 +76,25 @@ describe('PlatformDatetimePickerComponent', () => {
     let host: TestDatetimePickerComponent;
     let fixture: ComponentFixture<TestDatetimePickerComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestDatetimePickerComponent],
-                imports: [
-                    PlatformDatetimePickerModule,
-                    FdDatetimeModule,
-                    CalendarModule,
-                    DatetimePickerModule,
-                    PopoverModule,
-                    FdpFormGroupModule,
-                    FormsModule,
-                    FormModule,
-                    IconModule,
-                    InputGroupModule,
-                    ButtonModule,
-                    ReactiveFormsModule
-                ]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestDatetimePickerComponent],
+            imports: [
+                PlatformDatetimePickerModule,
+                FdDatetimeModule,
+                CalendarModule,
+                DatetimePickerModule,
+                PopoverModule,
+                FdpFormGroupModule,
+                FormsModule,
+                FormModule,
+                IconModule,
+                InputGroupModule,
+                ButtonModule,
+                ReactiveFormsModule
+            ]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestDatetimePickerComponent);

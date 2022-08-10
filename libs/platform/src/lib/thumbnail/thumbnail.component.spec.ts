@@ -26,15 +26,13 @@ describe('DefaultThumbnailComponent', () => {
     let component: DefaultThumbnailTestComponent;
     let fixture: ComponentFixture<DefaultThumbnailTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformThumbnailModule],
-                declarations: [DefaultThumbnailTestComponent],
-                providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformThumbnailModule],
+            declarations: [DefaultThumbnailTestComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DefaultThumbnailTestComponent);
@@ -79,15 +77,13 @@ describe('HorizontalThumbnailComponent', () => {
     let component: HorizontalThumbnailTestComponent;
     let fixture: ComponentFixture<HorizontalThumbnailTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformThumbnailModule],
-                declarations: [HorizontalThumbnailTestComponent],
-                providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformThumbnailModule],
+            declarations: [HorizontalThumbnailTestComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HorizontalThumbnailTestComponent);
@@ -124,15 +120,13 @@ describe('ImageThumbnailComponent', () => {
     let component: ImageThumbnailTestComponent;
     let fixture: ComponentFixture<ImageThumbnailTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformThumbnailModule],
-                declarations: [ImageThumbnailTestComponent],
-                providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformThumbnailModule],
+            declarations: [ImageThumbnailTestComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ImageThumbnailTestComponent);

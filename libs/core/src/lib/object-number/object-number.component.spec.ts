@@ -29,13 +29,11 @@ describe('ObjectNumberComponent', () => {
     let fixture: ComponentFixture<TestObjectNumberComponent>;
     const numberTextEl = '.fd-object-number__text';
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ObjectNumberComponent, TestObjectNumberComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ObjectNumberComponent, TestObjectNumberComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestObjectNumberComponent);

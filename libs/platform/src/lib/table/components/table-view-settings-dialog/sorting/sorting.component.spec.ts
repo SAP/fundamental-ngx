@@ -17,14 +17,12 @@ describe('PlatformTableSortDialogComponent', () => {
     };
     dialogRef.data = dialogData;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                providers: [{ provide: DialogRef, useValue: dialogRef }, DialogService, DialogConfig],
-                imports: [PlatformTableModule, NoopAnimationsModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            providers: [{ provide: DialogRef, useValue: dialogRef }, DialogService, DialogConfig],
+            imports: [PlatformTableModule, NoopAnimationsModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SortingComponent);

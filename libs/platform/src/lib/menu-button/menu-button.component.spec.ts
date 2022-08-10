@@ -24,13 +24,11 @@ describe('MenuButtonComponent', () => {
     let component: MenuButtonComponent;
     let fixture: ComponentFixture<MenuButtonComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ButtonModule, PlatformMenuModule, IconModule, PlatformMenuButtonModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ButtonModule, PlatformMenuModule, IconModule, PlatformMenuButtonModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MenuButtonComponent);
@@ -75,14 +73,12 @@ describe('Menu Button Disabled test and Type, size test', () => {
     let component: DisabledMenuButtonComponent;
     let fixture: ComponentFixture<DisabledMenuButtonComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ButtonModule, PlatformMenuModule, IconModule, PlatformMenuButtonModule],
-                declarations: [DisabledMenuButtonComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ButtonModule, PlatformMenuModule, IconModule, PlatformMenuButtonModule],
+            declarations: [DisabledMenuButtonComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DisabledMenuButtonComponent);
@@ -165,19 +161,17 @@ describe('Menu Button click on Item select', () => {
     let fixture: ComponentFixture<TestMenuButtonComponent>;
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ButtonModule, PlatformMenuModule, IconModule, PlatformMenuButtonModule],
-                declarations: [TestMenuButtonComponent],
-                providers: [RtlService]
-            }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ButtonModule, PlatformMenuModule, IconModule, PlatformMenuButtonModule],
+            declarations: [TestMenuButtonComponent],
+            providers: [RtlService]
+        }).compileComponents();
 
-            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-                overlayContainerEl = overlayContainer.getContainerElement();
-            })();
-        })
-    );
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMenuButtonComponent);

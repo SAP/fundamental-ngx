@@ -6,13 +6,11 @@ describe('QuickViewGroupComponent', () => {
     let component: QuickViewGroupComponent;
     let fixture: ComponentFixture<QuickViewGroupComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [QuickViewModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [QuickViewModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(QuickViewGroupComponent);

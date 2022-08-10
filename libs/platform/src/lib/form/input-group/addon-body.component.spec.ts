@@ -20,14 +20,12 @@ describe('Input group addon with a text', () => {
     let host: TextAddonHostComponent;
     let fixture: ComponentFixture<TextAddonHostComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TextAddonHostComponent, InputGroupAddonBodyComponent],
-                imports: [ContentDensityModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TextAddonHostComponent, InputGroupAddonBodyComponent],
+            imports: [ContentDensityModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TextAddonHostComponent);

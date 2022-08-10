@@ -28,15 +28,13 @@ describe('PanelComponent', () => {
     let panelContent: ElementRef;
     let button: ElementRef;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent],
-                imports: [PanelModule],
-                providers: [RtlService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [PanelModule],
+            providers: [RtlService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

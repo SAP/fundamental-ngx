@@ -16,14 +16,12 @@ describe('PlatformTableP13ColumnsDialogComponent', () => {
     };
     dialogRef.data = dialogData;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                providers: [{ provide: DialogRef, useValue: dialogRef }, DialogService, DialogConfig, RtlService],
-                imports: [PlatformTableModule, NoopAnimationsModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            providers: [{ provide: DialogRef, useValue: dialogRef }, DialogService, DialogConfig, RtlService],
+            imports: [PlatformTableModule, NoopAnimationsModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(P13ColumnsDialogComponent);

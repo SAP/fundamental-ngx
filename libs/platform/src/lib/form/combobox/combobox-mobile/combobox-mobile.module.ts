@@ -9,7 +9,6 @@ import { ComboboxMobileComponent } from './combobox/combobox-mobile.component';
 @NgModule({
     declarations: [ComboboxMobileComponent],
     imports: [BarModule, DialogModule, ButtonModule, CommonModule],
-    entryComponents: [ComboboxMobileComponent],
     exports: [ComboboxMobileComponent]
 })
 export class PlatformComboboxMobileModule {}

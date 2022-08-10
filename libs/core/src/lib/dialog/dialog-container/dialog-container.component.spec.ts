@@ -21,19 +21,17 @@ describe('DialogContainerComponent', () => {
     let fixture: ComponentFixture<DialogContainerComponent>;
     const dialogConfig = { ...new DialogConfig(), componentClass: 'test-class' };
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [DialogContainerComponent, ContentTestComponent],
-                providers: [
-                    { provide: DialogConfig, useValue: dialogConfig },
-                    { provide: DialogRef, useClass: DialogRef }
-                ]
-            }).overrideModule(BrowserDynamicTestingModule, {
-                set: { entryComponents: [ContentTestComponent] }
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [DialogContainerComponent, ContentTestComponent],
+            providers: [
+                { provide: DialogConfig, useValue: dialogConfig },
+                { provide: DialogRef, useClass: DialogRef }
+            ]
+        }).overrideModule(BrowserDynamicTestingModule, {
+            set: { entryComponents: [ContentTestComponent] }
+        });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DialogContainerComponent);

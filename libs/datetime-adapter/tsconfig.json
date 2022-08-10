@@ -16,7 +16,8 @@
     "compilerOptions": {
         "forceConsistentCasingInFileNames": true,
         "noPropertyAccessFromIndexSignature": true,
-        "noImplicitReturns": false
+        "noImplicitReturns": false,
+        "target": "es2020"
     },
     "angularCompilerOptions": {
         "strictInjectionParameters": true,
