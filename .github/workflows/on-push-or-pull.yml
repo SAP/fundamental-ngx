@@ -167,17 +167,8 @@ jobs:
 
     # run unit tests core
     unit-test:
-        runs-on: ubuntu-latest
+        uses: ./.github/workflows/unit-test.yml
         needs: install
-        strategy:
-            fail-fast: false
-            matrix:
-                lib: [core, platform, moment-adapter, datetime-adapter, fn]
-        steps:
-            - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
-            - run: npx nx test ${{ matrix.lib }} --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
-            - run: yarn run test:coveralls
 
     # run linting
     linting:
