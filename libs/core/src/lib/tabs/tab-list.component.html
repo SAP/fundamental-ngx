@@ -8,6 +8,7 @@
     <fd-overflow-layout
         [maxVisibleItems]="maxVisibleTabs"
         [enableKeyboardNavigation]="true"
+        navigationTrigger="keydown"
         (hiddenItemsCount)="hiddenItemsCount.emit($event)"
         (visibleItemsCount)="visibleItemsCount.emit($event)"
     >
