@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.13...v0.36.0-rc.14) (2022-08-11)
+
+
+### Bug Fixes
+
+* **docs:** stackblitz missing deps ([#8534](https://github.com/SAP/fundamental-ngx/issues/8534)) ([b6ac923](https://github.com/SAP/fundamental-ngx/commit/b6ac9233ed18b73b853e01cd59cae8cd2e2d2b42))
+
 ## [0.36.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.12...v0.36.0-rc.13) (2022-08-11)
 
 
