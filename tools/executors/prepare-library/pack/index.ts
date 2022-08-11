@@ -2,6 +2,7 @@ import { detectPackageManager, ExecutorContext, getPackageManagerCommand, Projec
 import { exec } from 'child_process';
 
 export default async function pack(options: any, context: ExecutorContext) {
+    console.log(`=== Packing ${context.projectName} ===`);
     const projectConfig: ProjectConfiguration = context.workspace.projects[context.projectName as string];
     const [distFolder] = projectConfig.targets?.build.outputs as string[];
     if (!distFolder) {
@@ -17,7 +18,7 @@ export default async function pack(options: any, context: ExecutorContext) {
                 console.error(stderr);
             }
             if (!err) {
-                console.log(`Packed ${distFolder}`);
+                console.log(`✅  Packed ${distFolder}`);
                 resolve({ success: true });
             } else {
                 reject(err);
