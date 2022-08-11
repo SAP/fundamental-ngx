@@ -37,7 +37,8 @@
                     "tsConfig": "libs/moment-adapter/tsconfig.lib.prod.json"
                 }
             },
-            "outputs": ["dist/libs/moment-adapter"]
+            "outputs": ["dist/libs/moment-adapter"],
+            "defaultConfiguration": "production"
         },
         "lint": {
             "executor": "@nrwl/linter:eslint",

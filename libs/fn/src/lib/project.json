@@ -37,7 +37,8 @@
                 "production": {
                     "tsConfig": "libs/fn/src/lib/tsconfig.lib.prod.json"
                 }
-            }
+            },
+            "defaultConfiguration": "production"
         },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
