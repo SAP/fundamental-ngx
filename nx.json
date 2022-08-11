@@ -27,6 +27,7 @@
         }
     },
     "cli": {
+        "packageManager": "yarn",
         "analytics": false
     },
     "defaultProject": "docs",
