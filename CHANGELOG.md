@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.10...v0.36.0-rc.11) (2022-08-11)
+
+
+### Bug Fixes
+
+* **core:** dynamic page flickering on resize ([#8530](https://github.com/SAP/fundamental-ngx/issues/8530)) ([fbfc478](https://github.com/SAP/fundamental-ngx/commit/fbfc478f870f3b3469204a5bc4a4523007e872cb))
+
 ## [0.36.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.9...v0.36.0-rc.10) (2022-08-10)
 
 
