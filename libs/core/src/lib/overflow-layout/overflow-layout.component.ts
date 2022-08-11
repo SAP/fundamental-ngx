@@ -10,30 +10,28 @@ import {
     HostBinding,
     ViewChild,
     ElementRef,
-    NgZone,
     Output,
     EventEmitter,
-    HostListener,
-    Optional,
     TemplateRef,
     ViewChildren,
     AfterViewInit,
     OnDestroy,
-    Input
+    Input,
+    OnInit
 } from '@angular/core';
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
-import { debounceTime, Subject, Subscription } from 'rxjs';
+import { debounceTime, filter, fromEvent, Subject, Subscription } from 'rxjs';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowContainer } from './interfaces/overflow-container.interface';
 import { OverflowExpand } from './interfaces/overflow-expand.interface';
+import { OverflowLayoutFocusableItem } from './interfaces/overflow-focusable-item.interface';
 import { OverflowItemRef } from './interfaces/overflow-item-ref.interface';
-import { OverflowItem } from './interfaces/overflow-item.interface';
 import { OverflowPopoverContent } from './interfaces/overflow-popover-content.interface';
 import { OverflowLayoutConfig, OverflowLayoutService } from './overflow-layout.service';
 import { FD_OVERFLOW_CONTAINER } from './tokens/overflow-container.token';
 import { FD_OVERFLOW_EXPAND } from './tokens/overflow-expand.token';
+import { FD_OVERFLOW_FOCUSABLE_ITEM } from './tokens/overflow-focusable-item.token';
 import { FD_OVERFLOW_ITEM_REF } from './tokens/overflow-item-ref.token';
-import { FD_OVERFLOW_ITEM } from './tokens/overflow-item.token';
 
 @Component({
     selector: 'fd-overflow-layout',
@@ -49,7 +47,7 @@ import { FD_OVERFLOW_ITEM } from './tokens/overflow-item.token';
         OverflowLayoutService
     ]
 })
-export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, OverflowContainer {
+export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy, OverflowContainer {
     /**
      * Maximum amount of visible items.
      */
@@ -65,6 +63,12 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
     get maxVisibleItems(): number {
         return this._maxVisibleItems;
     }
+
+    /**
+     * Keyboard event to listen for keyboard navigation through items.
+     */
+    @Input()
+    navigationTrigger: 'keyup' | 'keydown' = 'keyup';
 
     /** Direction of the fitting items calculation. */
     @Input()
@@ -106,10 +110,10 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
 
     /**
      * @hidden
-     * List of items that can be focused.
+     * List of items that can be focused
      */
-    @ContentChildren(FD_OVERFLOW_ITEM, { descendants: true })
-    _overflowItems: QueryList<OverflowItem>;
+    @ContentChildren(FD_OVERFLOW_FOCUSABLE_ITEM, { descendants: true })
+    _focusableOverflowItems: QueryList<OverflowLayoutFocusableItem>;
 
     /**
      * @hidden
@@ -173,15 +177,17 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
 
     /** @hidden */
     constructor(
+        private readonly _elementRef: ElementRef<HTMLElement>,
         protected _cdr: ChangeDetectorRef,
-        protected _zone: NgZone,
-        protected _elRef: ElementRef,
-        protected _overflowLayoutService: OverflowLayoutService,
-        @Optional() protected _rtlService: RtlService
+        protected _overflowLayoutService: OverflowLayoutService
     ) {
         this._subscription.add(
             this._fillTrigger$.pipe(debounceTime(30)).subscribe(() => this._overflowLayoutService.fitVisibleItems())
         );
+    }
+
+    ngOnInit(): void {
+        this._setupKeyboardListener();
     }
 
     /**
@@ -204,8 +210,8 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
      * Sets current focused element.
      * @param element Element that needs to be focused.
      */
-    setFocusedElement(element: OverflowItem): void {
-        const index = this._overflowItems.toArray().findIndex((item) => item === element);
+    setFocusedElement(element: OverflowLayoutFocusableItem): void {
+        const index = this._focusableOverflowItems.toArray().findIndex((item) => item === element);
 
         if (index !== -1) {
             this._overflowLayoutService._keyboardEventsManager.setActiveItem(index);
@@ -270,7 +276,7 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
         return {
             visibleItems: this._visibleItems,
             items: this._items,
-            focusableItems: this._overflowItems,
+            focusableItems: this._focusableOverflowItems,
             itemsWrapper: this._itemsWrapper.nativeElement,
             showMoreContainer: this._showMoreContainer.nativeElement,
             layoutContainerElement: this._layoutContainer.nativeElement,
@@ -282,25 +288,27 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
     }
 
     /** @hidden */
-    @HostListener('keyup', ['$event'])
-    private _keyUpHandler(event: KeyboardEvent): void {
-        if (!this.enableKeyboardNavigation) {
-            return;
-        }
-        if (KeyUtil.isKeyCode(event, TAB)) {
-            const index = this._allItems.findIndex(
-                (item) => item.overflowItem?.focusable && item.elementRef.nativeElement === event.target
-            );
-            if (index !== -1) {
-                this._overflowLayoutService._keyboardEventsManager.setActiveItem(index);
-            }
-        }
+    private _setupKeyboardListener(): void {
+        this._subscription.add(
+            fromEvent<KeyboardEvent>(this._elementRef.nativeElement, this.navigationTrigger)
+                .pipe(filter(() => this.enableKeyboardNavigation))
+                .subscribe((event) => {
+                    if (KeyUtil.isKeyCode(event, TAB)) {
+                        const index = this._focusableOverflowItems
+                            .toArray()
+                            .findIndex((item) => item.focusable && item.elementRef.nativeElement === event.target);
+                        if (index !== -1) {
+                            this._overflowLayoutService._keyboardEventsManager.setActiveItem(index);
+                        }
+                    }
 
-        if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
-            event.preventDefault();
+                    if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
+                        event.preventDefault();
 
-            // passing the event to key manager so, we get a change fired
-            this._overflowLayoutService._keyboardEventsManager.onKeydown(event);
-        }
+                        // passing the event to key manager so, we get a change fired
+                        this._overflowLayoutService._keyboardEventsManager.onKeydown(event);
+                    }
+                })
+        );
     }
 }

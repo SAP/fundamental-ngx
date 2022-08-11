@@ -25,19 +25,15 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
  * ```
  */
 @Directive({
-    // TODO to be discussed
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-tab-title-template]'
+    selector: '[fdTabTitleTemplate], [fd-tab-title-template]'
 })
 export class TabTitleDirective {}
 
 /**
- * Directive for counter element, available in most of modes on `tab` component
+ * Directive for counter element, available in most of the modes on `tab` component
  */
 @Directive({
-    // TODO to be discussed
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-tab-count]'
+    selector: '[fdTabCount], [fd-tab-count]'
 })
 export class TabCountDirective {
     /** @hidden */
@@ -46,10 +42,10 @@ export class TabCountDirective {
 }
 
 /**
- * Directive for icon element, available in most of modes on `tab` component
+ * Directive for icon element, available in most of the modes on `tab` component
  */
 @Component({
-    // eslint-disable-next-line @angular-eslint/directive-selector, @angular-eslint/component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-tab-icon]',
     template: `
         <fd-icon role="presentation" *ngIf="icon" [glyph]="icon"></fd-icon>
@@ -94,14 +90,13 @@ export class TabIconComponent implements CssClassBuilder, OnChanges {
     /** HasElementRef interface implementation
      * function used by applyCssClass and applyCssStyle decorators
      */
-    elementRef(): ElementRef<any> {
+    elementRef(): ElementRef {
         return this._elementRef;
     }
 }
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-tab-tag]',
+    selector: '[fdTabTag], [fd-tab-tag]',
     host: {
         class: 'fd-tabs__tag'
     }
@@ -109,8 +104,7 @@ export class TabIconComponent implements CssClassBuilder, OnChanges {
 export class TabTagDirective {}
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-tab-label]',
+    selector: '[fdTabLabel], [fd-tab-label]',
     host: {
         class: 'fd-tabs__label'
     }
@@ -118,8 +112,7 @@ export class TabTagDirective {}
 export class TabLabelDirective {}
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-tab-process]',
+    selector: '[fdTabProcess], [fd-tab-process]',
     host: {
         class: 'fd-tabs__process'
     }
@@ -127,8 +120,7 @@ export class TabLabelDirective {}
 export class TabProcessDirective {}
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-tab-header]',
+    selector: '[fdTabHeader], [fd-tab-header]',
     host: {
         class: 'fd-tabs__header'
     }
@@ -136,8 +128,7 @@ export class TabProcessDirective {}
 export class TabHeaderDirective {}
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-tab-counter-header]',
+    selector: '[fdTabCounterHeader], [fd-tab-counter-header]',
     host: {
         class: 'fd-tabs__counter-header'
     }
@@ -145,8 +136,7 @@ export class TabHeaderDirective {}
 export class TabCounterHeaderDirective {}
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-tab-process-icon]',
+    selector: '[fdTabProcessIcon], [fd-tab-process-icon]',
     host: {
         class: 'fd-tabs__process-icon'
     }
@@ -154,8 +144,7 @@ export class TabCounterHeaderDirective {}
 export class TabProcessIconDirective {}
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-tab-separator]',
+    selector: '[fdTabSeparator], [fd-tab-separator]',
     host: {
         class: 'fd-tabs__separator'
     }

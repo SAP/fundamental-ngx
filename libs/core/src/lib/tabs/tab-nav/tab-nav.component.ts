@@ -1,23 +1,26 @@
+import { FocusKeyManager } from '@angular/cdk/a11y';
+import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
     ElementRef,
+    HostListener,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
+    Optional,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { TabItemDirective } from '../tab-item/tab-item.directive';
-import { TabsService } from '../tabs.service';
 import { merge, Subject, Subscription } from 'rxjs';
 import { TabModes, TabSizes } from '../tab-list.component';
-import { filter, takeUntil } from 'rxjs/operators';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { takeUntil } from 'rxjs/operators';
+import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import {
     ContentDensityObserver,
     contentDensityObserverProviders,
@@ -28,10 +31,7 @@ import {
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-tab-nav]',
     template: ` <ng-content></ng-content>`,
-    providers: [
-        TabsService,
-        contentDensityObserverProviders({ modifiers: { [ContentDensityMode.COMPACT]: 'fd-tabs--compact' } })
-    ],
+    providers: [contentDensityObserverProviders({ modifiers: { [ContentDensityMode.COMPACT]: 'fd-tabs--compact' } })],
     styleUrls: ['./tab-nav.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -53,11 +53,11 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     size: TabSizes = 'm';
 
     /** @hidden */
-    @ContentChildren(TabLinkDirective)
+    @ContentChildren(TabLinkDirective, { descendants: true })
     links: QueryList<TabLinkDirective>;
 
     /** @hidden */
-    @ContentChildren(TabItemDirective)
+    @ContentChildren(TabItemDirective, { descendants: true })
     items: QueryList<TabItemDirective>;
 
     /** @hidden */
@@ -66,22 +66,25 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
-    private readonly _onRefresh$: Subject<void> = new Subject<void>();
+    /** @hidden */
+    private _keyboardEventsManager: FocusKeyManager<TabLinkDirective>;
+
+    /** @hidden */
+    private _dir: 'ltr' | 'rtl' = this._rtlService?.rtl.value ? 'rtl' : 'ltr';
 
     /** @hidden */
     constructor(
-        private _tabsService: TabsService,
         private _elementRef: ElementRef,
-        private _contentDensityObserver: ContentDensityObserver
+        private _contentDensityObserver: ContentDensityObserver,
+        @Optional() private _rtlService: RtlService
     ) {
         this._contentDensityObserver.subscribe();
     }
 
     /** @hidden */
     ngAfterContentInit(): void {
+        this._setupKeyManager();
         this._refreshSubscription();
-        this._listenOnTabSelect();
         this._listenOnContentQueryListChange();
     }
 
@@ -114,7 +117,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     /** HasElementRef interface implementation
      * function used by applyCssClass and applyCssStyle decorators
      */
-    elementRef(): ElementRef<any> {
+    elementRef(): ElementRef {
         return this._elementRef;
     }
 
@@ -138,16 +141,6 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         this.tabLinks[tabIndex].elementRef.nativeElement.click();
     }
 
-    /** @hidden */
-    private _listenOnTabSelect(): void {
-        this._tabsService.tabSelected
-            .pipe(
-                takeUntil(this._onDestroy$),
-                filter((index) => !this.tabLinks[index].disabled)
-            )
-            .subscribe((index) => this.selectTab(index));
-    }
-
     /**
      * @hidden
      * Every time any of query is changed, ex. tab is removed or added
@@ -161,20 +154,41 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
 
     /** Whether any QueryList detects any changes */
     private _refreshSubscription(): void {
-        /** Finish all of the streams, form before */
-        this._onRefresh$.next();
+        this._subscriptions.unsubscribe();
+        this._subscriptions = new Subscription();
+        this._listenToFocusedLinks();
 
-        /** Merge refresh/destroy observables */
-        const refreshObs = merge(this._onRefresh$, this._onDestroy$);
+        this.links.changes.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._listenToFocusedLinks();
+        });
+    }
 
-        this.tabLinks.forEach((tab: TabLinkDirective, index: number) => {
-            tab.keyDown.pipe(takeUntil(refreshObs)).subscribe((event) =>
-                this._tabsService.tabHeaderKeyHandler(
-                    index,
-                    event,
-                    this.tabLinks.map((link) => link.elementRef.nativeElement)
-                )
+    /** @hidden */
+    private _listenToFocusedLinks(): void {
+        const links = this.links.toArray();
+        links.forEach((link) => {
+            this._subscriptions.add(
+                link.focused.subscribe(() => {
+                    this._keyboardEventsManager.setActiveItem(links.findIndex((item) => item === link));
+                })
             );
         });
+    }
+
+    /** @hidden */
+    private _setupKeyManager(): void {
+        this._keyboardEventsManager = new FocusKeyManager(this.links).withWrap().withHorizontalOrientation(this._dir);
+
+        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl) => {
+            this._keyboardEventsManager.withHorizontalOrientation(isRtl ? 'rtl' : 'ltr');
+        });
+    }
+
+    /** @hidden */
+    @HostListener('keyup', ['$event'])
+    private _keyUpHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
+            this._keyboardEventsManager.onKeydown(event);
+        }
     }
 }

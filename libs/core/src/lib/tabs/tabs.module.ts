@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabListComponent } from './tab-list.component';
@@ -59,7 +60,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         MenuModule,
         ScrollSpyModule,
         ContentDensityModule,
-        I18nModule
+        I18nModule,
+        OverflowLayoutModule
     ],
     exports: [
         TabListComponent,

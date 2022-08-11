@@ -3,12 +3,13 @@ import { ElementRef, Injectable, OnDestroy, Optional, QueryList } from '@angular
 import { resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
 import { debounceTime, distinctUntilChanged, filter, Observable, skip, Subject, Subscription } from 'rxjs';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
+import { OverflowLayoutFocusableItem } from './interfaces/overflow-focusable-item.interface';
 import { OverflowItemRef } from './interfaces/overflow-item-ref.interface';
 import { OverflowItem } from './interfaces/overflow-item.interface';
 
 export interface OverflowLayoutConfig {
     items: QueryList<OverflowItemRef>;
-    focusableItems: QueryList<OverflowItem>;
+    focusableItems: QueryList<OverflowLayoutFocusableItem>;
     visibleItems: QueryList<OverflowLayoutItemContainerDirective>;
     itemsWrapper: HTMLElement;
     showMoreContainer: HTMLElement;
@@ -39,7 +40,7 @@ export class OverflowLayoutService implements OnDestroy {
     result = new OverflowLayoutListeningResult();
 
     /** @hidden */
-    _keyboardEventsManager: FocusKeyManager<OverflowItem>;
+    _keyboardEventsManager: FocusKeyManager<OverflowLayoutFocusableItem>;
 
     /** @hidden */
     private _listenToItemResize = true;
@@ -107,9 +108,7 @@ export class OverflowLayoutService implements OnDestroy {
     private _listenToChanges(): void {
         this._subscription.add(
             this.config.items.changes.subscribe(() => {
-                setTimeout(() => {
-                    this.fitVisibleItems();
-                });
+                this.fitVisibleItems();
             })
         );
 
@@ -136,13 +135,17 @@ export class OverflowLayoutService implements OnDestroy {
         );
     }
 
-    /** @hidden */
+    /**
+     * Calculates available space for items and hides items that are not fitting into the container.
+     */
     fitVisibleItems(): void {
         this._listenToItemResize = false;
         this._allItems = this.config.items.toArray();
 
         let allItems = this.config.items.toArray();
         let visibleContainerItems = this.config.visibleItems.toArray();
+
+        this._elRef.nativeElement.style.height = `${this._elRef.nativeElement.clientHeight}px`;
 
         allItems.forEach((item, index) => {
             // Softly hide previously completely hidden item in order to correctly calculate it's size.
@@ -182,6 +185,7 @@ export class OverflowLayoutService implements OnDestroy {
             this.result.hiddenItems = this._hiddenItems;
             this._emitResult();
             this._listenToItemResize = true;
+            this._elRef.nativeElement.style.height = '';
             return;
         }
         this.result.showMore = true;
@@ -205,6 +209,10 @@ export class OverflowLayoutService implements OnDestroy {
 
             layoutWidth -= elementSize;
         });
+
+        const maxVisibleItems =
+            this.config.maxVisibleItems -
+            forcedItemsIndexes.filter((index) => index >= this.config.maxVisibleItems).length;
 
         if (layoutWidth < 0 && forcedItemsIndexes.length > 0) {
             console.warn(
@@ -230,7 +238,7 @@ export class OverflowLayoutService implements OnDestroy {
                 (combinedWidth <= layoutWidth ||
                     (item === this.config.visibleItems.last &&
                         combinedWidth <= layoutWidth + showMoreContainerWidth)) &&
-                fittingElmCount < this.config.maxVisibleItems;
+                fittingElmCount < maxVisibleItems;
 
             if (condition) {
                 fittingElmsWidth += elementSize;
@@ -270,6 +278,7 @@ export class OverflowLayoutService implements OnDestroy {
         this.result.showMore = this._hiddenItems.length > 0;
         this.result.hiddenItems = this._hiddenItems;
         this._emitResult();
+        this._elRef.nativeElement.style.height = '';
 
         this._listenToItemResize = true;
     }
@@ -284,7 +293,7 @@ export class OverflowLayoutService implements OnDestroy {
             .withWrap()
             .withHorizontalOrientation(this._dir)
             .withVerticalOrientation()
-            .skipPredicate((item) => !item.focusable || item.hidden);
+            .skipPredicate((item) => !item.navigable || item.hidden);
     }
 
     /** @hidden Rtl change subscription */
