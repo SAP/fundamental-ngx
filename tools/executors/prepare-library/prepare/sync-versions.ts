@@ -20,11 +20,16 @@ const versions = {
 };
 
 export async function syncVersions(projectConfig: ProjectConfiguration, projectName: string): Promise<void> {
+    console.log(`=== Syncing versions in ${projectName} ===`);
     const [distFolder] = projectConfig.targets?.build.outputs as string[];
     if (!distFolder) {
         throw new Error(`No dist folder found for project ${projectName}`);
     }
-    getFiles(distFolder).forEach(replaceInFile);
+    const replaced = getFiles(distFolder).map(replaceInFile).filter(Boolean);
+    if (replaced.length === 0) {
+        console.log(`⚠ No version placeholders found in ${projectName}`);
+        return;
+    }
 }
 
 const replaceInFile = (file: string) => {
@@ -34,11 +39,11 @@ const replaceInFile = (file: string) => {
         while (fileContents.indexOf(key) > -1) {
             replaced = true;
             fileContents = fileContents.replace(key, versions[key]);
+            console.log(`✅ Replaced "${key}" with "${versions[key]}" in ${file}`);
         }
-    });
-    if (replaced) {
         writeFileSync(file, fileContents);
-    }
+    });
+    return replaced;
 };
 
 const getFiles = (dir: string) => {

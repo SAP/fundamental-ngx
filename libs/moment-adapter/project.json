@@ -14,6 +14,10 @@
             },
             "dependsOn": ["build"]
         },
+        "pack": {
+            "executor": "./tools/executors/prepare-library:pack",
+            "dependsOn": ["prepare"]
+        },
         "compile-typedocs": {
             "executor": "./tools/executors/compile-typedocs:compile-lib",
             "options": {
@@ -32,7 +36,8 @@
                 "production": {
                     "tsConfig": "libs/moment-adapter/tsconfig.lib.prod.json"
                 }
-            }
+            },
+            "outputs": ["dist/libs/moment-adapter"]
         },
         "lint": {
             "executor": "@nrwl/linter:eslint",

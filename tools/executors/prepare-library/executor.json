@@ -1,9 +1,19 @@
 {
     "executors": {
         "prepare": {
-            "implementation": "./index",
+            "implementation": "./prepare/index",
             "schema": "./schema.json",
             "description": "Prepares project for publish. Build, copy MDs, schematics, etc."
+        },
+        "pack": {
+            "implementation": "./pack/index",
+            "schema": "./schema.json",
+            "description": "Prepares and packs library"
+        },
+        "pack-all": {
+            "implementation": "./pack-all/index",
+            "schema": "./schema.json",
+            "description": "Prepares and packs all libraries"
         }
     }
 }

@@ -3,6 +3,9 @@
     "sourceRoot": "tools",
     "projectType": "application",
     "targets": {
+        "pack-all": {
+            "executor": "./tools/executors/prepare-library:pack-all"
+        },
         "lint": {
             "executor": "@nrwl/linter:eslint",
             "options": {

@@ -3,10 +3,11 @@ import { pathExistsSync, copySync } from 'fs-extra';
 import { exec } from 'child_process';
 
 export async function copySchematics(projectConfig: ProjectConfiguration, projectName?: string): Promise<void> {
+    console.log(`=== Copying schematics of ${projectName} ===`);
     if (!projectName) {
         projectName = projectConfig.name;
     }
-    const [distFolder] = projectConfig.targets?.build.outputs as string[];
+    const [distFolder] = projectConfig.targets?.build?.outputs as string[];
     if (!distFolder) {
         throw new Error(`No dist folder found for project ${projectName}`);
     }
@@ -17,9 +18,8 @@ export async function copySchematics(projectConfig: ProjectConfiguration, projec
     if (pathExistsSync(schematicsPath) && pathExistsSync(tsConfigPath)) {
         await runTsc(tsConfigPath);
         copySync(schematicsPath, `${distFolder}/schematics`);
-        console.log(`Copied schematics for project ${projectName}`);
+        console.log(`✅ Copied schematics for project ${projectName}`);
     } else {
-        console.log({ options, tsConfigPath, schematicsPath });
         throw new Error(`No schematics found for project ${projectName}`);
     }
 }

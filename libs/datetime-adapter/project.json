@@ -8,6 +8,10 @@
             "executor": "./tools/executors/prepare-library:prepare",
             "dependsOn": ["build"]
         },
+        "pack": {
+            "executor": "./tools/executors/prepare-library:pack",
+            "dependsOn": ["prepare"]
+        },
         "compile-typedocs": {
             "executor": "./tools/executors/compile-typedocs:compile-lib",
             "options": {
