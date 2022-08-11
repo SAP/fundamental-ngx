@@ -55,7 +55,8 @@ export const API_FILES = {
         'TableP13GroupComponent',
         'TableP13ColumnsComponent',
         'TableDataSource',
-        'TableDataProvider'
+        'TableDataProvider',
+        'PlatformTableCellResponsiveDirective'
     ],
     textarea: ['TextAreaComponent'],
     timePicker: ['PlatformTimePickerComponent'],

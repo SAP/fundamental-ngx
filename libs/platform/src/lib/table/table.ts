@@ -55,6 +55,9 @@ export abstract class Table<T = any> {
     /** Get table columns definition list */
     abstract getTableColumns(): TableColumn[];
 
+    /** Get a list of visible table columns. */
+    abstract getVisibleTableColumns(): TableColumn[];
+
     /** Set Sorting rules */
     abstract sort(sortRules: CollectionSort[]): void;
 

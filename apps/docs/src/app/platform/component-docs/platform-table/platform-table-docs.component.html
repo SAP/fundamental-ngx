@@ -470,6 +470,28 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="responsive-columns" componentName="table">
+    Hidding columns depending on the table size
+</fd-docs-section-title>
+<description>
+    <p>it is not recommended to use large amount of columns in a table which has small size.</p>
+    <p>
+        In this case developers can use <code>[fdpTableCellResponsive]</code> directive with responsive breakpoints
+        object.
+    </p>
+    <p>
+        This object should contain key as a minimum width of the breakpoint and value whether or not to show column for
+        this size.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-table-responsive-columns-example></fdp-platform-table-responsive-columns-example>
+</component-example>
+
+<code-example [exampleFiles]="responsiveColumnsFiles"></code-example>
+
+<separator></separator>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fdp-table
         [fdContentDensity]="data.table.contentDensity"

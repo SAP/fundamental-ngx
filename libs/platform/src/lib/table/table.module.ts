@@ -76,6 +76,7 @@ import { TableCellStylesPipe } from './pipes/cell-styles.pipe';
 import { SelectionCellStylesPipe } from './pipes/selection-cell-styles.pipe';
 import { RowClassesPipe } from './pipes/row-classes.pipe';
 import { ColumnResizableSidePipe } from './pipes/column-resizable-side.pipe';
+import { PlatformTableColumnResponsiveDirective } from './directives/platform-table-column-responsive.directive';
 
 const EXPORTABLE_DECLARATIONS = [
     TableComponent,
@@ -120,7 +121,8 @@ const EXPORTABLE_DECLARATIONS = [
     NoDataWrapperComponent,
     GetAvailableSortColumnsPipe,
     TableEditableCellComponent,
-    FdpEditableCellFormDirective
+    FdpEditableCellFormDirective,
+    PlatformTableColumnResponsiveDirective
 ];
 
 @NgModule({
