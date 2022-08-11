@@ -83,4 +83,4 @@ jobs:
             - run: |
                   npx nx run docs:compile-typedocs
                   npx nx run docs:copy-docs
-                  npx nx build docs --base-href="fundamental-ngx" --runner cloud
+                  npx nx build docs --base-href="fundamental-ngx"
