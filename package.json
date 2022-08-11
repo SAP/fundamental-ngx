@@ -24,7 +24,7 @@
     "build-docs": "yarn run compile-typedoc-all && yarn run copy-docs && ng build",
     "build-artifacts": "nx build i18n --configuration production && nx build core --configuration production && nx build platform --configuration production && nx build moment-adapter --configuration production && nx build datetime-adapter --configuration production && nx build fn --configuration production && nx build docs",
     "build-deploy-library": "nx run i18n:prepare && nx run core:prepare && nx run platform:prepare && nx run moment-adapter:prepare && nx run datetime-adapter:prepare && nx run fn:prepare",
-    "build-pack-library": "nx run i18n:pack && nx run core:pack && nx run platform:pack && nx run moment-adapter:pack && nx run datetime-adapter:pack && nx run fn:pack",
+    "build-pack-library": "nx run workspace-tools:pack-all",
     "copy-docs": "cp README.md apps/docs/src/assets/README.md && cp NEW_COMPONENT.md apps/docs/src/assets/NEW_COMPONENT.md && yarn run copy-app-docs",
     "copy-app-docs": "cp libs/core/src/lib/README.md apps/docs/src/assets/CORE_README.md && cp PLATFORM_README.md apps/docs/src/assets/PLATFORM_README.md",
     "deploy-docs": "angular-cli-ghpages -d dist/apps/docs --branch gh-pages",
