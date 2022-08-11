@@ -16,6 +16,18 @@
             },
             "outputs": ["{options.outputPath}"]
         },
+        "copy-docs": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": [
+                    "echo === Copy docs ===",
+                    "node -e \"require('fs').copyFileSync('README.md', 'apps/docs/src/assets/README.md'); console.log('✅ Copied README.md')\"",
+                    "node -e \"require('fs').copyFileSync('NEW_COMPONENT.md', 'apps/docs/src/assets/NEW_COMPONENT.md'); console.log('✅ Copied NEW_COMPONENT.md')\"",
+                    "node -e \"require('fs').copyFileSync('libs/core/src/lib/README.md', 'apps/docs/src/assets/CORE_README.md'); console.log('✅ Copied Core README.md')\"",
+                    "node -e \"require('fs').copyFileSync('PLATFORM_README.md', 'apps/docs/src/assets/PLATFORM_README.md'); console.log('✅ Copied PLATFORM_README.md')\""
+                ]
+            }
+        },
         "build": {
             "executor": "@angular-builders/custom-webpack:browser",
             "options": {
