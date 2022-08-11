@@ -10,7 +10,7 @@
     },
     "targets": {
         "build": {
-            "executor": "@angular-builders/custom-webpack:browser",
+            "executor": "@nrwl/angular:webpack-browser",
             "options": {
                 "outputPath": "dist/apps/docs",
                 "index": "apps/docs/src/index.html",
@@ -52,7 +52,7 @@
                     }
                 ],
                 "scripts": ["node_modules/marked/lib/marked.js"],
-                "allowedCommonJsDependencies": ["moment", "highlight.js", "focus-trap", "@angularclass/hmr"],
+                "allowedCommonJsDependencies": ["moment", "highlight.js", "focus-trap"],
                 "vendorChunk": true,
                 "extractLicenses": false,
                 "buildOptimizer": false,
@@ -98,26 +98,13 @@
                     "namedChunks": false,
                     "vendorChunk": false
                 },
-                "hmr": {
-                    "budgets": [
-                        {
-                            "type": "anyComponentStyle",
-                            "maximumWarning": "6kb"
-                        }
-                    ],
-                    "optimization": true,
-                    "outputHashing": "all",
-                    "sourceMap": false,
-                    "namedChunks": false,
-                    "extractLicenses": true,
-                    "vendorChunk": false,
-                    "buildOptimizer": true,
-                    "fileReplacements": [
-                        {
-                            "replace": "apps/docs/src/environments/environment.ts",
-                            "with": "apps/docs/src/environments/environment.prod.ts"
-                        }
-                    ]
+                "development": {
+                    "buildOptimizer": false,
+                    "optimization": false,
+                    "vendorChunk": true,
+                    "extractLicenses": false,
+                    "sourceMap": true,
+                    "namedChunks": true
                 }
             },
             "outputs": ["{options.outputPath}"],
@@ -125,7 +112,7 @@
             "dependsOn": []
         },
         "serve": {
-            "executor": "@angular-builders/custom-webpack:dev-server",
+            "executor": "@nrwl/angular:webpack-server",
             "options": {
                 "browserTarget": "docs:build"
             },
@@ -133,8 +120,8 @@
                 "production": {
                     "browserTarget": "docs:build:production"
                 },
-                "hmr": {
-                    "browserTarget": "docs:build:hmr"
+                "development": {
+                    "browserTarget": "docs:build:development"
                 },
                 "fr": {
                     "browserTarget": "docs:build:fr"
@@ -142,7 +129,8 @@
                 "ar": {
                     "browserTarget": "docs:build:ar"
                 }
-            }
+            },
+            "defaultConfiguration": "development"
         },
         "lint": {
             "executor": "@nrwl/linter:eslint",
