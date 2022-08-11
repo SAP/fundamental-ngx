@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.12...v0.36.0-rc.13) (2022-08-11)
+
+
+### Features
+
+* **core:** tabs migration ([#8501](https://github.com/SAP/fundamental-ngx/issues/8501)) ([9e78586](https://github.com/SAP/fundamental-ngx/commit/9e78586755888ff8399b266dbdd0a3d4ff89b19b))
+
 ## [0.36.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.11...v0.36.0-rc.12) (2022-08-11)
 
 ## [0.36.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.10...v0.36.0-rc.11) (2022-08-11)
