@@ -4,6 +4,16 @@
     "sourceRoot": "libs/fn/src/lib",
     "prefix": "fn",
     "targets": {
+        "prepare": {
+            "executor": "./tools/executors/prepare-library:prepare",
+            "options": {
+                "schematics": {
+                    "collection": "../../schematics",
+                    "tsConfig": "../../tsconfig.schematics.json"
+                }
+            },
+            "dependsOn": ["build"]
+        },
         "compile-typedocs": {
             "executor": "./tools/executors/compile-typedocs:compile-lib",
             "options": {

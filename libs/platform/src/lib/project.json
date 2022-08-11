@@ -15,7 +15,8 @@
                     "readmePath": "../../../../PLATFORM_README.md",
                     "targetPath": "../../../../dist/libs/platform/PLATFORM_README.md"
                 }
-            }
+            },
+            "dependsOn": ["build"]
         },
         "compile-typedocs": {
             "executor": "./tools/executors/compile-typedocs:compile-lib",

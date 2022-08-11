@@ -4,6 +4,10 @@
     "sourceRoot": "libs/datetime-adapter/src",
     "prefix": "fundamental-ngx",
     "targets": {
+        "prepare": {
+            "executor": "./tools/executors/prepare-library:prepare",
+            "dependsOn": ["build"]
+        },
         "compile-typedocs": {
             "executor": "./tools/executors/compile-typedocs:compile-lib",
             "options": {
