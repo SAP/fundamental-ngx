@@ -16,7 +16,7 @@
   "packageManager": "yarn@1.22.18",
   "scripts": {
     "preinstall": "npx only-allow yarn",
-    "something": "nx run core:compile-typedocs",
+    "something": "nx run core:prepare",
     "build": "nx build",
     "build-all": "yarn run build-artifacts && yarn run build-docs -- --configuration production --base-href=\"/fundamental-ngx/\"",
     "build-docs-netlify": "yarn run build-docs -- --configuration=\"production-unoptimized\" --base-href=\"/\"",

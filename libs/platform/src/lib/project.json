@@ -4,6 +4,19 @@
     "sourceRoot": "libs/platform/src/lib",
     "prefix": "fdp",
     "targets": {
+        "prepare": {
+            "executor": "./tools/executors/prepare-library:prepare",
+            "options": {
+                "schematics": {
+                    "collection": "../../schematics",
+                    "tsConfig": "../../tsconfig.schematics.json"
+                },
+                "copyReadme": {
+                    "readmePath": "../../../../PLATFORM_README.md",
+                    "targetPath": "../../../../dist/libs/platform/PLATFORM_README.md"
+                }
+            }
+        },
         "compile-typedocs": {
             "executor": "./tools/executors/compile-typedocs:compile-lib",
             "options": {
@@ -13,7 +26,7 @@
         },
         "build": {
             "executor": "@nrwl/angular:package",
-            "outputs": ["dist/libs/fdp"],
+            "outputs": ["dist/libs/platform"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/ng-package.json",
