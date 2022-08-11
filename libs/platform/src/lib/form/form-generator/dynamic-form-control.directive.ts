@@ -1,10 +1,16 @@
-import { ComponentFactoryResolver, Directive, Input, OnInit, ViewContainerRef } from '@angular/core';
+import { Directive, Inject, Injector, Input, OnInit, Optional, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { FormField } from '@fundamental-ngx/platform/shared';
 import { PreparedDynamicFormFieldItem } from './interfaces/dynamic-form-item';
 import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
 import { FormGeneratorService } from './form-generator.service';
+import {
+    CONTENT_DENSITY_DIRECTIVE,
+    ContentDensityGlobalKeyword,
+    ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
+import { Observable, of } from 'rxjs';
 
 /**
  * Dynamic form control directive represents a renderer of the dynamic components
@@ -39,7 +45,8 @@ export class DynamicFormControlDirective implements OnInit {
     constructor(
         private readonly _formGeneratorService: FormGeneratorService,
         private readonly _vcRef: ViewContainerRef,
-        private readonly _cfRes: ComponentFactoryResolver
+        private readonly _injector: Injector,
+        @Optional() @Inject(CONTENT_DENSITY_DIRECTIVE) private contentDensityDirective: Observable<ContentDensityMode>
     ) {}
 
     ngOnInit(): void {
@@ -49,13 +56,27 @@ export class DynamicFormControlDirective implements OnInit {
             return;
         }
 
-        const componentFactory = this._cfRes.resolveComponentFactory<BaseDynamicFormGeneratorControl>(
-            foundComponent.component
-        );
-
         this._vcRef.clear();
 
-        const componentRef = this._vcRef.createComponent<BaseDynamicFormGeneratorControl>(componentFactory);
+        const componentRef = this._vcRef.createComponent<BaseDynamicFormGeneratorControl>(foundComponent.component, {
+            injector: Injector.create({
+                providers: [
+                    {
+                        provide: CONTENT_DENSITY_DIRECTIVE,
+                        useFactory: () => {
+                            if (this.formItem?.guiOptions?.contentDensity) {
+                                return of(this.formItem.guiOptions.contentDensity);
+                            }
+                            if (this.contentDensityDirective) {
+                                return this.contentDensityDirective;
+                            }
+                            return of(ContentDensityGlobalKeyword);
+                        }
+                    }
+                ],
+                parent: this._injector
+            })
+        });
 
         componentRef.instance.formItem = this.formItem;
         componentRef.instance.name = this.name;

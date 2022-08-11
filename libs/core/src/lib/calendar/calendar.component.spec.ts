@@ -10,13 +10,11 @@ describe('CalendarComponent', () => {
     let component: CalendarComponent<FdDate>;
     let fixture: ComponentFixture<CalendarComponent<FdDate>>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FdDatetimeModule, CalendarModule, ButtonModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdDatetimeModule, CalendarModule, ButtonModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent<CalendarComponent<FdDate>>(CalendarComponent);

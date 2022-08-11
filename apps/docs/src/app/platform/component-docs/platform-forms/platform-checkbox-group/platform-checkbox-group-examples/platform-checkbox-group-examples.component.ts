@@ -20,9 +20,16 @@ export class PlatformCheckboxGroupExampleComponent {
     ];
 
     validators = [Validators.requiredTrue];
-    form1 = new FormGroup({});
-    form2 = new FormGroup({});
-    form3 = new FormGroup({});
+    form1 = new FormGroup({
+        fruitsEx: new FormControl(),
+        education: new FormControl()
+    });
+    form2 = new FormGroup({
+        fruits1: new FormControl()
+    });
+    form3 = new FormGroup({
+        language: new FormControl()
+    });
 
     form4 = new FormGroup({
         apple: new FormControl(false),

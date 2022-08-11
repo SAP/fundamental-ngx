@@ -1,14 +1,13 @@
 import { SplitMenuButtonPo } from '../pages/split-menu-button.po';
 import {
     behaviorBtnTextArr,
-    compactAttr,
-    compactValue,
     iconAttr,
     iconBtnTextArr,
     iconLabel,
     standardBtnText,
     standardBtnText2,
-    typesBtnTextArr
+    typesBtnTextArr,
+    compactButtonClass
 } from '../fixtures/appData/split-menu-button-page-contents';
 import {
     acceptAlert,
@@ -24,6 +23,8 @@ import {
     waitForNotDisplayed,
     waitForPresent
 } from '../../driver/wdio';
+
+declare const $$: any;
 
 describe('Split menu button test suite', () => {
     const spMenuBtnPage = new SplitMenuButtonPo();
@@ -119,8 +120,9 @@ describe('Split menu button test suite', () => {
         }
     });
 
-    it('should check compact btn styles', () => {
-        expect(getAttributeByName(iconBtnAttrArr, compactAttr, 1)).toContain(compactValue);
+    it('should check compact btn styles', async () => {
+        const compactButtons = await $$(`${iconBtnAttrArr}[fdCompact] ${compactButtonClass}`);
+        expect(compactButtons.length).toBe(2);
     });
 
     it('should check tooltips', () => {

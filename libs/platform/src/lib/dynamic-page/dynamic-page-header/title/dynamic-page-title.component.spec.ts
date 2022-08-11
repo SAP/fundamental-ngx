@@ -12,7 +12,7 @@ import { DynamicPageKeyInfoComponent } from '../../dynamic-page-header/key-info/
 import { DynamicPageGlobalActionsComponent } from '../../dynamic-page-header/actions/global-actions/dynamic-page-global-actions.component';
 import { DynamicPageLayoutActionsComponent } from '../../dynamic-page-header/actions/layout-actions/dynamic-page-layout-actions.component';
 
-import { CLASS_NAME } from '../../constants';
+import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
 import { PlatformDynamicPageModule } from '../../dynamic-page.module';
 import { DynamicPageTitleHostComponent } from './dynamic-page-title-host.component';
 
@@ -32,13 +32,7 @@ import { DynamicPageTitleHostComponent } from './dynamic-page-title-host.compone
 
             <fdp-dynamic-page-global-actions>
                 <fd-toolbar fdType="transparent" [clearBorder]="true">
-                    <button
-                        fd-toolbar-item
-                        fd-button
-                        [compact]="true"
-                        fdType="positive"
-                        (click)="$event.stopPropagation()"
-                    >
+                    <button fd-toolbar-item fd-button fdCompact fdType="positive" (click)="$event.stopPropagation()">
                         Accept
                     </button>
                 </fd-toolbar>
@@ -61,8 +55,8 @@ import { DynamicPageTitleHostComponent } from './dynamic-page-title-host.compone
 class TestComponent implements AfterViewInit {
     title = 'Some title ';
     subtitle: string;
-    size = 'medium';
-    background = '';
+    size: DynamicPageResponsiveSize = 'medium';
+    background: DynamicPageBackgroundType;
     @ViewChild(DynamicPageTitleComponent) dynamicPageTitleComponent: DynamicPageTitleComponent;
     @ViewChild(DynamicPageKeyInfoComponent) dynamicPageKeyInfoComponent: DynamicPageKeyInfoComponent;
     @ViewChild(DynamicPageGlobalActionsComponent) dynamicPageGlobalActionsComponent: DynamicPageGlobalActionsComponent;
@@ -83,15 +77,13 @@ describe('DynamicPageTitleComponent', () => {
     let component: TestComponent;
     let titleHostComponentDebugElement: DebugElement;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformDynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
-                declarations: [TestComponent],
-                providers: [DynamicPageService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformDynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
+            declarations: [TestComponent],
+            providers: [DynamicPageService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

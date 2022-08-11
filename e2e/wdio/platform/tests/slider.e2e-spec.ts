@@ -6,7 +6,6 @@ import {
     click,
     clickAndMoveElement,
     doesItExist,
-    getAttributeByName,
     getElementArrayLength,
     getElementClass,
     getText,
@@ -17,7 +16,8 @@ import {
     setValue,
     waitForElDisplayed
 } from '../../driver/wdio';
-import { densityAttribute } from '../fixtures/appData/slider-content';
+
+declare const $$: any;
 
 describe('slider test suite', () => {
     const sliderPage = new SliderPo();
@@ -47,7 +47,8 @@ describe('slider test suite', () => {
         sliderTooltipInputFF,
         formFieldExamples,
         formValueLabels,
-        altSliderAttr
+        altSliderAttr,
+        sliderCozyClass
     } = sliderPage;
 
     beforeAll(() => {
@@ -177,7 +178,7 @@ describe('slider test suite', () => {
     describe('cozy examples', () => {
         it('should check cozy property', () => {
             scrollIntoView(cozyExamples);
-            expect(getAttributeByName(cozyExamples + altSliderAttr, densityAttribute)).toBe('cozy');
+            expect($$(`${cozyExamples + altSliderAttr} > ${sliderCozyClass}`)).toBeTruthy();
         });
 
         it('should check cozy slider', () => {

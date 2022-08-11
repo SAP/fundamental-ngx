@@ -38,25 +38,23 @@ describe('BreadcrumbComponent', () => {
     let component: BreadcrumbComponent;
     let fixture: ComponentFixture<BreadcrumbWrapperComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [BreadcrumbComponent, BreadcrumbItemComponent, BreadcrumbWrapperComponent],
-                imports: [
-                    PopoverModule,
-                    MenuModule,
-                    IconModule,
-                    LinkModule,
-                    RouterModule,
-                    RouterTestingModule,
-                    OverflowLayoutModule,
-                    PortalModule
-                ],
-                providers: [RtlService],
-                schemas: [NO_ERRORS_SCHEMA]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [BreadcrumbComponent, BreadcrumbItemComponent, BreadcrumbWrapperComponent],
+            imports: [
+                PopoverModule,
+                MenuModule,
+                IconModule,
+                LinkModule,
+                RouterModule,
+                RouterTestingModule,
+                OverflowLayoutModule,
+                PortalModule
+            ],
+            providers: [RtlService],
+            schemas: [NO_ERRORS_SCHEMA]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(BreadcrumbWrapperComponent);

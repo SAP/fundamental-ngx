@@ -9,11 +9,12 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import { ThumbnailImageComponent } from './thumbnail-image/thumbnail-image.component';
 import { ThumbnailDetailsComponent } from './thumbnail-details/thumbnail-details.component';
 import { ThumbnailComponent } from './thumbnail.component';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     declarations: [ThumbnailComponent, ThumbnailImageComponent, ThumbnailDetailsComponent],
     providers: [RtlService, DialogRef],
-    imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule],
-    exports: [ThumbnailComponent]
+    imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule, I18nModule],
+    exports: [ThumbnailComponent, ThumbnailImageComponent, ThumbnailDetailsComponent]
 })
 export class PlatformThumbnailModule {}

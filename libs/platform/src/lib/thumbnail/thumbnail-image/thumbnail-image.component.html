@@ -9,7 +9,7 @@
         (keydown.space)="openImage(image, $event)"
         tabindex="0"
         role="option"
-        [attr.aria-roledescription]="roleDescription"
+        [attr.aria-roledescription]="roleDescription || ('platformThumbnail.roleDescription' | fdTranslate)"
         [attr.aria-selected]="image.selected"
         [attr.title]="image.label"
         [attr.aria-label]="image.label"

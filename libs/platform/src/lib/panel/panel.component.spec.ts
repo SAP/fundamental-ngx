@@ -2,14 +2,13 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
-
-import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
 import { PanelComponent, PanelExpandChangeEvent } from './panel.component';
 import { PanelContentComponent } from './panel-content/panel-content.component';
 import { PanelActionsComponent } from './panel-actions/panel-actions.component';
 import { PlatformPanelModule } from './panel.module';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     template: ` <fdp-panel title="Panel Title">
@@ -25,14 +24,12 @@ describe('PanelComponent default values', () => {
     let fixture: ComponentFixture<PanelWithDefaultValuesComponent>;
     let panelComponent: PanelComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformPanelModule],
-                declarations: [PanelWithDefaultValuesComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformPanelModule],
+            declarations: [PanelWithDefaultValuesComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(PanelWithDefaultValuesComponent);
@@ -62,7 +59,7 @@ describe('PanelComponent default values', () => {
     template: ` <fdp-panel
         id="panel-id"
         [title]="title"
-        [contentDensity]="contentDensity"
+        [fdContentDensity]="contentDensity"
         [expanded]="expanded"
         [expandable]="expandable"
         [expandLabel]="expandLabel"
@@ -85,7 +82,7 @@ class SimplePanelComponent {
     expandable = true;
     title = 'Panel Title';
     contentHeight: string;
-    contentDensity: ContentDensity = 'cozy';
+    contentDensity: ContentDensityMode = ContentDensityMode.COZY;
     expandLabel = 'Collapse Panel';
     collapseLabel = 'Expand Panel';
 
@@ -99,14 +96,12 @@ describe('Simple PanelComponent', () => {
     let fixture: ComponentFixture<SimplePanelComponent>;
     let panelContentComponent: PanelContentComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformPanelModule, PlatformButtonModule],
-                declarations: [SimplePanelComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformPanelModule, PlatformButtonModule],
+            declarations: [SimplePanelComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SimplePanelComponent);
@@ -128,7 +123,7 @@ describe('Simple PanelComponent', () => {
     });
 
     it('Should be able to change the contentDensity to "compact"', async () => {
-        component.contentDensity = 'compact';
+        component.contentDensity = ContentDensityMode.COMPACT;
         fixture.detectChanges();
         const compactPanel = fixture.debugElement.queryAll(By.css('.fd-panel--compact'));
         expect(compactPanel.length).toBeGreaterThan(0);

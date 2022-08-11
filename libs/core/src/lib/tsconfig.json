@@ -17,6 +17,7 @@
         "forceConsistentCasingInFileNames": true,
         "strict": false,
         "noImplicitReturns": false,
-        "noFallthroughCasesInSwitch": true
+        "noFallthroughCasesInSwitch": true,
+        "target": "es2020"
     }
 }

@@ -82,20 +82,18 @@ describe('CarouselDirective', () => {
     let verticalFixture: ComponentFixture<VerticalCarouselComponent>;
     let horizontalFixture: ComponentFixture<HorizontalCarouselComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule],
-                declarations: [
-                    HorizontalCarouselComponent,
-                    VerticalCarouselComponent,
-                    CarouselItemDirective,
-                    CarouselDirective
-                ],
-                providers: [CarouselService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule],
+            declarations: [
+                HorizontalCarouselComponent,
+                VerticalCarouselComponent,
+                CarouselItemDirective,
+                CarouselDirective
+            ],
+            providers: [CarouselService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         horizontalFixture = TestBed.createComponent(HorizontalCarouselComponent);

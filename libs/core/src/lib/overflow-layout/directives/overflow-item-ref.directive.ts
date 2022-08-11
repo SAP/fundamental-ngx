@@ -35,11 +35,17 @@ export class OverflowItemRefDirective<T = any> implements OverflowItemRef<T> {
         this._hidden = value;
         this.overflowItem.hiddenChange.emit(value);
     }
+
+    /** @hidden */
     _hidden = false;
-    /**
-     * Index of the item in the array of Overflow Layout Component's items.
-     */
+
+    /** Index of the item in the visible or hidden array of Overflow Layout Component's items. */
     index: number;
+
+    /**
+     * The index of the item in the array of items.
+     */
+    globalIndex: number;
 
     /** Whether this item is last in the array. */
     first: boolean;

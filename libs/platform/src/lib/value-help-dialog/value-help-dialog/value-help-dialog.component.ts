@@ -2,12 +2,10 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChild,
     ContentChildren,
     ElementRef,
     EventEmitter,
     Input,
-    isDevMode,
     OnChanges,
     OnDestroy,
     Optional,
@@ -19,10 +17,10 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { isObservable, Observable, Subject, Subscription } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { ContentDensity, ContentDensityEnum, RtlService, ContentDensityService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import {
     ArrayValueHelpDialogDataSource,
@@ -38,7 +36,6 @@ import {
     VhdValueChangeEvent
 } from '../models';
 import { VhdFilterComponent } from '../components/value-help-dialog-filter/value-help-dialog-filter.component';
-import { VhdSearchComponent } from '../components/value-help-dialog-search/value-help-dialog-search.component';
 import { defaultConditionDisplayFn } from '../constans/condition-display.function';
 import { cloneDeep } from 'lodash-es';
 
@@ -129,18 +126,22 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     conditionDisplayFn = defaultConditionDisplayFn;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Select from list tab's and Search table settings
      * */
     @Input()
-    selectTabTitle = 'Select from list';
+    selectTabTitle: string;
 
     /** Selection mode for search table */
     @Input()
     searchSelection: VdhTableSelection = 'multi';
 
-    /** Text displayed when table has no items. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Text displayed when table has no items.
+     */
     @Input()
-    searchTableEmptyMessage = 'Use the search to get results';
+    searchTableEmptyMessage: string;
 
     /** Items per page for pagination below search table */
     @Input()
@@ -158,20 +159,14 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     @Input()
     loading: boolean | undefined;
 
-    /** @deprecated use `contentDensity` instead */
-    /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Define conditions tab's settings
+     */
     @Input()
-    searchTableDensity: ContentDensity = ContentDensityEnum.COMPACT;
+    defineTabTitle: string;
 
-    /** The content density for which to render value help dialog */
-    @Input()
-    contentDensity: ContentDensity = ContentDensityEnum.COMPACT;
-
-    /** Define conditions tab's settings */
-    @Input()
-    defineTabTitle = 'Define Conditions';
-
-    /** Custom stratagies labels
+    /** Custom strategies labels
      * Allowed keys: contains, equalTo, between, startsWith, endsWith, lessThan, lessThanEqual, greaterThan, greaterThanEqual, empty
      */
     @Input()
@@ -204,10 +199,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     /** Event emitted when data loading is finished. */
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onDataReceived = new EventEmitter<void>();
-
-    /** @hidden Search control component  */
-    @ContentChild(VhdSearchComponent)
-    searchField: VhdSearchComponent;
 
     /** @hidden Fitlers for search table and defince conditions */
     @ContentChildren(VhdFilterComponent)
@@ -251,9 +242,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     /** @hidden for data source handling */
     private _dsSubscription: Subscription | null;
 
-    /** @hidden */
-    private _contentDensityManuallySet = false;
-
     /** @hidden Previous state */
     private _prevState: VhdValue<T> = {
         selected: [],
@@ -287,14 +275,12 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         private readonly _elementRef: ElementRef,
         private readonly _changeDetectorRef: ChangeDetectorRef,
         private readonly _dialogService: DialogService,
-        @Optional() private readonly _rtlService: RtlService,
-        @Optional() private readonly _contentDensityService: ContentDensityService
+        @Optional() private readonly _rtlService: RtlService
     ) {
         /** Default display function for define conditions */
         if (!this.conditionDisplayFn || typeof this.conditionDisplayFn !== 'function') {
             this.conditionDisplayFn = defaultConditionDisplayFn;
         }
-        this._trackContentDensityChanges();
     }
 
     /** @hidden */
@@ -363,17 +349,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         if (this.isOpen) {
             if ('dataSource' in changes) {
                 this._initializeDS();
-            }
-        }
-
-        if (changes.searchTableDensity || changes.contentDensity) {
-            this._contentDensityManuallySet = true;
-
-            if (changes.searchTableDensity) {
-                this.contentDensity = this.searchTableDensity;
-                if (isDevMode()) {
-                    console.warn('"searchTableDensity" is deprecated. Use "contentDensity" instead');
-                }
             }
         }
     }
@@ -722,20 +697,5 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
             );
         }
         return true;
-    }
-
-    /** @hidden */
-    private _trackContentDensityChanges(): void {
-        if (this._contentDensityService) {
-            this._contentDensityService._contentDensityListener
-                .pipe(
-                    filter(() => !this._contentDensityManuallySet),
-                    takeUntil(this._onDestroy$)
-                )
-                .subscribe((density) => {
-                    this.contentDensity = density as ContentDensityEnum;
-                    this._changeDetectorRef.markForCheck();
-                });
-        }
     }
 }

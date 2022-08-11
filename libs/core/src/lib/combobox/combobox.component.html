@@ -140,7 +140,7 @@
                     [tabindex]="0"
                     class="fd-combobox-list-item"
                     *ngFor="let term of group.value"
-                    [selected]="inputText === (term | displayFnPipe: displayFn)"
+                    [selected]="isSelected(term)"
                     (keyDown)="onItemKeyDownHandler($event, term)"
                     (click)="onMenuClickHandler(term)"
                 >
@@ -158,7 +158,7 @@
                 [tabindex]="0"
                 class="fd-combobox-list-item"
                 *ngFor="let term of displayedValues"
-                [selected]="inputText === (term | displayFnPipe: displayFn)"
+                [selected]="isSelected(term)"
                 (keyDown)="onItemKeyDownHandler($event, term)"
                 (click)="onMenuClickHandler(term)"
             >

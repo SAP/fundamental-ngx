@@ -33,6 +33,14 @@ import {
 } from '@fundamental-ngx/platform/shared';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 
+let warnedAboutChecked = false;
+const warnAboutChecked = (): void => {
+    if (isDevMode() && !warnedAboutChecked) {
+        console.warn('The fdp-checkbox-group[checked] property is deprecated. Use fdp-checkbox-group[value] instead');
+        warnedAboutChecked = true;
+    }
+};
+
 /**
  * Checkbox group implementation based on the
  * https://github.com/SAP/fundamental-ngx/wiki/Platform:-CheckboxGroup-Technical-Design
@@ -53,6 +61,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     get value(): any[] {
         return this.getValue();
     }
+
     set value(selectedValue: any[]) {
         this.setValue(selectedValue);
         this._updateSelectionModelByValue();
@@ -76,15 +85,12 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
      */
     @Input()
     get checked(): string[] {
-        if (isDevMode()) {
-            console.warn('"checked" is deprecated. Use "value" instead');
-        }
+        warnAboutChecked();
         return this.value;
     }
+
     set checked(checkedValues: string[]) {
-        if (isDevMode()) {
-            console.warn('"checked" is deprecated. Use "value" instead');
-        }
+        warnAboutChecked();
         this.value = checkedValues;
     }
 

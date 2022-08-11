@@ -15,7 +15,7 @@ import { getCardModifierClassNameByCardType } from './utils';
 
 @Component({
     template: `
-        <fd-card [badge]="badgeText" [isLoading]="isLoading" [compact]="isCompact" [cardType]="cardType">
+        <fd-card [badge]="badgeText" [isLoading]="isLoading" [fdCompact]="isCompact" [cardType]="cardType">
             <fd-card-header>
                 <h2 fd-card-title>{{ titleText }}</h2>
             </fd-card-header>
@@ -47,14 +47,12 @@ describe('CardComponent', () => {
     let host: CardHostTestComponent;
     let card: CardComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CardModule],
-                declarations: [CardHostTestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CardModule],
+            declarations: [CardHostTestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CardHostTestComponent);

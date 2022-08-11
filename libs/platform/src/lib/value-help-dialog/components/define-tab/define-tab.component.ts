@@ -1,23 +1,22 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ViewEncapsulation,
+    EventEmitter,
     Input,
-    SimpleChanges,
     OnChanges,
     Output,
-    EventEmitter
+    AfterViewInit,
+    SimpleChanges,
+    ViewEncapsulation
 } from '@angular/core';
 
-import { ContentDensity } from '@fundamental-ngx/core/utils';
-
 import {
-    VhdIncludedEntity,
-    VhdExcludedEntity,
     BaseEntity,
-    VhdDefineIncludeStrategy,
     VhdDefineExcludeStrategy,
-    VhdDefineType
+    VhdDefineIncludeStrategy,
+    VhdDefineType,
+    VhdExcludedEntity,
+    VhdIncludedEntity
 } from '../../models';
 import { MAX_CHARACTER_HINT_COUNT } from '../../constans';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
@@ -41,7 +40,7 @@ let titleUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefineTabComponent extends VhdBaseTab implements OnChanges {
+export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterViewInit {
     protected defaultId = `fd-title-id-${titleUniqueId++}`;
     protected defaultSelectId = `fd-select-title-id-${titleUniqueId++}`;
 
@@ -63,11 +62,6 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges {
     /** depricated */
     @Input()
     excluded: ExtendedExcludedEntity[] = [];
-
-    /** The content density for which to render value help dialog */
-    @Input()
-    contentDensity: ContentDensity;
-
     @Input()
     strategyLabels: { [key in keyof (typeof VhdDefineIncludeStrategy | typeof VhdDefineExcludeStrategy)]?: string } =
         {};
@@ -114,9 +108,10 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges {
             this._conditions = (this.conditions as ExtendedIncludedEntity[]) || [];
             this._initializeConditions();
         }
-        if ('strategyLabels' in changes) {
-            this._refreshStrategies();
-        }
+    }
+
+    ngAfterViewInit(): void {
+        this._refreshStrategies();
     }
 
     /** @hidden Track function for main data */

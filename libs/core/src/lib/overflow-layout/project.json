@@ -1,0 +1,42 @@
+{
+    "projectType": "library",
+    "root": "libs/core/src/lib/overflow-layout",
+    "sourceRoot": "libs/core/src/lib/overflow-layout",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/core/overflow-layout"],
+            "options": {
+                "project": "libs/core/src/lib/overflow-layout/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/overflow-layout/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/core/src/lib/overflow-layout/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/overflow-layout/test.ts",
+                "tsConfig": "libs/core/src/lib/overflow-layout/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/overflow-layout/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/core/src/lib/overflow-layout/**/*.ts",
+                    "libs/core/src/lib/overflow-layout/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": ["scope:fd", "type:lib"]
+}

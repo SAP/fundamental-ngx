@@ -61,7 +61,11 @@
         class="fd-feed-list__link--more"
         *ngIf="!isRichText && hasMore"
         (click)="toggleTextView()"
-        [innerText]="isCollapsed ? moreLabel : lessLabel"
+        [innerText]="
+            isCollapsed
+                ? moreLabel || ('coreFeedListItem.moreLabel' | fdTranslate)
+                : lessLabel || ('coreFeedListItem.lessLabel' | fdTranslate)
+        "
     ></a>
 </ng-template>
 

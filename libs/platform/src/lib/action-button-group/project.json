@@ -1,0 +1,41 @@
+{
+    "projectType": "library",
+    "root": "libs/platform/src/lib/action-button-group",
+    "sourceRoot": "libs/platform/src/lib/action-button-group",
+    "prefix": "fdp",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/platform/action-button-group"],
+            "options": {
+                "tsConfig": "libs/platform/src/lib/action-button-group/tsconfig.lib.json",
+                "project": "libs/platform/src/lib/action-button-group/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/platform/src/lib/action-button-group/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/platform/src/lib/action-button-group/test.ts",
+                "tsConfig": "libs/platform/src/lib/action-button-group/tsconfig.spec.json",
+                "karmaConfig": "libs/platform/src/lib/action-button-group/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/platform/src/lib/action-button-group/**/*.ts",
+                    "libs/platform/src/lib/action-button-group/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fdp"],
+    "implicitDependencies": ["core"]
+}

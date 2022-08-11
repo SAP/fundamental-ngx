@@ -8,9 +8,8 @@ import {
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { ContentDensity } from '@fundamental-ngx/core/utils';
 
-import { FiltersViewStep, FILTERS_VIEW_STEP_TOKEN } from './filters-active-step';
+import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step';
 
 /**
  * Filters list dialog step.
@@ -45,8 +44,4 @@ export class FiltersListStepComponent implements FiltersViewStep {
     /** Template ref to the filter body */
     @ViewChild('bodyTemplate')
     bodyTemplateRef: TemplateRef<any>;
-
-    /** Table's content density to be used */
-    @Input()
-    contentDensity: ContentDensity;
 }

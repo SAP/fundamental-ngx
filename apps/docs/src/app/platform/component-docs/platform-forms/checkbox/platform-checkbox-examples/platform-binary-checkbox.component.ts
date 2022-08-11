@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,7 +6,11 @@ import { Component } from '@angular/core';
     templateUrl: 'platform-binary-checkbox.component.html'
 })
 export class PlatformCompactChekboxExampleComponent {
-    customForm = new FormGroup({});
+    customForm = new FormGroup({
+        red: new FormControl(),
+        blue: new FormControl(),
+        green: new FormControl()
+    });
     data: DataObject = new DataObject(false, true);
 
     yellow = false;

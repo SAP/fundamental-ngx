@@ -6,7 +6,7 @@
 </fdp-list>
 <br /><br />
 <h5>Compact Mode</h5>
-<fdp-list [noBorder]="true" [dataSource]="_dataSource" contentDensity="compact" id="compact-list">
+<fdp-list [noBorder]="true" [dataSource]="_dataSource" fdCompact id="compact-list">
     <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name" [ariaLabel]="address.name">
     </fdp-standard-list-item>
 </fdp-list>
@@ -23,7 +23,7 @@
 </fdp-list>
 <br /><br />
 <h5>Compact Mode</h5>
-<fdp-list contentDensity="compact" [noBorder]="true">
+<fdp-list fdCompact [noBorder]="true">
     <fdp-standard-list-item title="Title1" ariaLabel="compact first row"> </fdp-standard-list-item>
     <fdp-standard-list-item title="Title2" ariaLabel="compact second row"> </fdp-standard-list-item>
     <fdp-standard-list-item title="Title3" ariaLabel="compact third row"> </fdp-standard-list-item>

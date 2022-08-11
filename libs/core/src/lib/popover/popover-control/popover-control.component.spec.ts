@@ -6,13 +6,11 @@ describe('PopoverControlComponent', () => {
     let component: PopoverControlComponent;
     let fixture: ComponentFixture<PopoverControlComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [PopoverControlComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [PopoverControlComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(PopoverControlComponent);

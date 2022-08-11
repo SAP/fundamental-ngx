@@ -7,12 +7,16 @@
     .fd-breadcrumb__collapsed {
         cursor: pointer;
     }
-}
 
-.fd-breadcrumb__item:last-child::after {
-    content: '/';
-}
+    .fd-overflow-layout {
+        justify-content: start;
+    }
 
-.fd-overflow-layout__item--last .fd-breadcrumb__item::after {
-    content: none;
+    .fd-breadcrumb__item:last-child::after {
+        content: '/';
+    }
+
+    .fd-overflow-layout__item--last .fd-breadcrumb__item::after {
+        content: none;
+    }
 }

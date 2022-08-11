@@ -13,17 +13,15 @@ describe('OptionComponent', () => {
     const changeDetectorRef = jasmine.createSpyObj('ChangeDetectorRef', ['markForCheck']);
     const elementRef = new ElementRef(null);
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [OptionComponent],
-                providers: [
-                    { provide: ChangeDetectorRef, useValue: changeDetectorRef },
-                    { provide: ElementRef, useValue: elementRef }
-                ]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [OptionComponent],
+            providers: [
+                { provide: ChangeDetectorRef, useValue: changeDetectorRef },
+                { provide: ElementRef, useValue: elementRef }
+            ]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(OptionComponent);

@@ -19,7 +19,6 @@ import { DynamicComponentService } from '@fundamental-ngx/core/utils';
     declarations: [MessageToastComponent, MessageToastContainerComponent],
     imports: [CommonModule],
     exports: [MessageToastComponent, MessageToastContainerComponent],
-    entryComponents: [MessageToastContainerComponent, MessageToastComponent],
     providers: [
         MessageToastService,
         DynamicComponentService,

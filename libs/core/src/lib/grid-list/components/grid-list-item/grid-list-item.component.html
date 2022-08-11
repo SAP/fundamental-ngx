@@ -28,8 +28,7 @@
         [class.fd-grid-list__highlight--negative]="status === 'warning'"
         [class.fd-grid-list__highlight--critical]="status === 'error'"
         [class.fd-grid-list__highlight--neutral]="status === 'neutral'"
-        i18n-aria-label="coreGridList.Item.Status|Status aria-label attribute"
-        [attr.aria-label]="'Item has status. Status: ' + status + '.'"
+        [attr.aria-label]="'coreGridList.listItemStatusAriaLabel' | fdTranslate: { status: status }"
     ></span>
 
     <ng-container *ngIf="selectionMode === 'singleSelect'">
@@ -64,8 +63,7 @@
         <span
             *ngIf="counter"
             class="fd-grid-list__item-counter"
-            i18n-aria-label="@@coreGridList.Item.Counter|Count aria-label attribute"
-            [attr.aria-label]="'Item has ' + counter + ' children'"
+            [attr.aria-label]="'coreGridList.listItemCounterAriaLabel' | fdTranslate: { count: counter }"
             [innerText]="counter"
         ></span>
 
@@ -75,10 +73,8 @@
             fdType="transparent"
             glyph="edit"
             class="fd-grid-list__action-button"
-            i18n-aria-label="coreGridList.Item.Btn.Details|Button aria-label attribute"
-            aria-label="Details"
-            i18n-title="coreGridList.Item.Btn.Details|Button title attribute"
-            title="Details"
+            [attr.aria-label]="'coreGridList.listItemButtonDetailsTitle' | fdTranslate"
+            [title]="'coreGridList.listItemButtonDetailsTitle' | fdTranslate"
             fdCompact
             (click)="_onDetail($event)"
         ></button>
@@ -89,9 +85,8 @@
             fdType="transparent"
             glyph="decline"
             class="fd-grid-list__action-button"
-            i18n-aria-label="coreGridList.Item.Btn.Delete|Button aria-label attribute"
-            aria-label="Delete"
-            i18n-title="coreGridList.Item.Btn.Delete|Button title attribute"
+            [attr.aria-label]="'coreGridList.listItemButtonDeleteTitle' | fdTranslate"
+            [title]="'coreGridList.listItemButtonDeleteTitle' | fdTranslate"
             title="Delete"
             fdCompact
             (click)="_onDelete($event)"
@@ -175,10 +170,8 @@
                 *ngIf="state === 'error'"
                 fd-object-status
                 status="negative"
-                i18n-label="coreGridList.Item.Status.ContainsErrors|Error label attribute"
-                label="Contains errors"
-                i18n-title="coreGridList.Item.Status.ContainsErrors|Error title attribute"
-                title="Contains errors"
+                [label]="'coreGridList.listItemStatusContainsErrors' | fdTranslate"
+                [attr.aria-label]="'coreGridList.listItemStatusContainsErrors' | fdTranslate"
             ></span>
 
             <button
@@ -187,10 +180,8 @@
                 fd-button
                 fdType="transparent"
                 glyph="private"
-                i18n-aria-label="coreGridList.Item.Status.Locked|Button aria-label attribute"
-                aria-label="Locked"
-                i18n-label="coreGridList.Item.Status.Locked|Button label attribute"
-                label="Locked"
+                [label]="'coreGridList.listItemStatusLocked' | fdTranslate"
+                [attr.aria-label]="'coreGridList.listItemStatusLocked' | fdTranslate"
                 fdCompact
                 (click)="_clickOnLocked($event)"
             ></button>
@@ -200,10 +191,8 @@
                 *ngIf="state === 'draft'"
                 fd-button
                 fdType="transparent"
-                i18n-aria-label="coreGridList.Item.Status.Draft|Button aria-label attribute"
-                aria-label="Draft"
-                i18n-label="coreGridList.Item.Status.Draft|Button label attribute"
-                label="Draft"
+                [attr.aria-label]="'coreGridList.listItemStatusDraft' | fdTranslate"
+                [label]="'coreGridList.listItemStatusDraft' | fdTranslate"
                 fdCompact
                 (click)="_clickOnDraft($event)"
             ></button>

@@ -10,14 +10,12 @@ describe('SplitterPaginationComponent', () => {
     let component: SplitterPaginationComponent;
     let fixture: ComponentFixture<SplitterPaginationComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [SplitterModule],
-                providers: [SplitterComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [SplitterModule],
+            providers: [SplitterComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(SplitterPaginationComponent);

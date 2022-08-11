@@ -6,9 +6,9 @@
         <fdp-form-field id="radiolo1" [rank]="1" [required]="true">
             <fdp-radio-group name="radiolo1" [list]="items" [isInline]="true" formControlName="example1">
             </fdp-radio-group>
-            <fdp-button contentDensity="compact" type="submit" label="Submit"></fdp-button>
+            <fdp-button fdCompact type="submit" label="Submit"></fdp-button>
             <fdp-button
-                contentDensity="compact"
+                fdCompact
                 type="reset"
                 style="margin: 2rem 2rem 0 2rem"
                 label="Reset"
@@ -28,12 +28,12 @@
 <div>Vertical radio group</div>
 <form #listform2="ngForm" (ngSubmit)="onSubmit(listform2)">
     <fdp-form-group [formGroup]="form5">
-        <fdp-form-field id="radio-lo2" [rank]="2" [required]="true">
+        <fdp-form-field id="radiolo2" [rank]="2" [required]="true">
             <fdp-radio-group name="vertical-radio-group" [list]="items" [isInline]="false" formControlName="example2">
             </fdp-radio-group>
-            <fdp-button contentDensity="compact" type="submit" label="Submit"></fdp-button>
+            <fdp-button fdCompact type="submit" label="Submit"></fdp-button>
             <fdp-button
-                contentDensity="compact"
+                fdCompact
                 type="reset"
                 style="margin: 2rem 2rem 0 2rem"
                 label="Reset"
@@ -94,9 +94,9 @@
             <fdp-radio-group name="work" [list]="items3" title="Work experience" [formControl]="ffr3.formControl">
                 5 year of work experience
             </fdp-radio-group>
-            <fdp-button contentDensity="compact" type="submit" label="Submit"></fdp-button>
+            <fdp-button fdCompact type="submit" label="Submit"></fdp-button>
             <fdp-button
-                contentDensity="compact"
+                fdCompact
                 type="reset"
                 style="margin: 2rem 2rem 0 2rem"
                 label="Reset"
@@ -127,13 +127,7 @@
 <p>Compact platform radio button created with given list of SelectItem objects.Using FormGroup and FormControl</p>
 <fdp-form-group [formGroup]="form2">
     <fdp-form-field id="radiolo2" [rank]="1">
-        <fdp-radio-group
-            name="radiolo2"
-            contentDensity="compact"
-            [list]="items"
-            [isInline]="true"
-            formControlName="example2"
-        >
+        <fdp-radio-group name="radiolo2" fdCompact [list]="items" [isInline]="true" formControlName="example2">
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
@@ -181,13 +175,7 @@
 <p>Platform radio button created with given list of SelectItem objects</p>
 <fdp-form-group>
     <fdp-form-field id="radiolo6" [rank]="1">
-        <fdp-radio-group
-            name="radiolo6"
-            [list]="items"
-            contentDensity="compact"
-            [isInline]="true"
-            [(ngModel)]="favoriteOption2"
-        >
+        <fdp-radio-group name="radiolo6" [list]="items" fdCompact [isInline]="true" [(ngModel)]="favoriteOption2">
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>

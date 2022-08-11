@@ -76,7 +76,7 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
 
     private _toggleDialog(open: boolean): void {
         if (open) {
-            this._selectedBackup = this._component.inputText;
+            this._selectedBackup = this._component.getValue();
             if (!this._dialogService.hasOpenDialogs()) {
                 this._open();
             }

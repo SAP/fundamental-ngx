@@ -96,15 +96,19 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     @Input()
     activeView: FdCalendarView = 'day';
 
-    /** Aria label for the datetime picker input. */
+    /**
+     * @deprecated use i18n capabilities instead (being translated in core datetime picker)
+     * Aria label for the datetime picker input.
+     */
     @Input()
     datetimeInputLabel: string;
 
-    readonly _defaultDatetimeInputLabel = 'Datetime input';
-
-    /** Aria label for the button to show/hide the calendar. */
+    /**
+     * @deprecated use i18n capabilities instead (being translated in core datetime picker)
+     * Aria label for the button to show/hide the calendar.
+     */
     @Input()
-    displayDatetimeToggleLabel = 'Display calendar toggle';
+    displayDatetimeToggleLabel: string;
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -207,16 +211,18 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     preventScrollOnFocus = false;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Text and aria-label of the DateTimePicker 'OK' button.
      */
     @Input()
-    okLabel = 'OK';
+    okLabel: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Text and aria-label of the DateTimePicker 'Cancel' button.
      */
     @Input()
-    cancelLabel = 'Cancel';
+    cancelLabel: string;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()

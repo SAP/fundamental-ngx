@@ -6,13 +6,11 @@ describe('UserMenuComponent', () => {
     let component: ShellbarUserMenuComponent;
     let fixture: ComponentFixture<ShellbarUserMenuComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ShellbarModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ShellbarModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ShellbarUserMenuComponent);

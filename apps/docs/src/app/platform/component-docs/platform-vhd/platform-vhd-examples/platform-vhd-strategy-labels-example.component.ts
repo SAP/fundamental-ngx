@@ -10,6 +10,7 @@ import {
     VhdDefineIncludeStrategy,
     VhdDefineExcludeStrategy
 } from '@fundamental-ngx/platform/value-help-dialog';
+import { patchLanguage } from '@fundamental-ngx/i18n';
 
 interface ExampleTestModel {
     id: number;
@@ -53,7 +54,15 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
 
 @Component({
     selector: 'fdp-platform-vhd-strategy-labels-example',
-    templateUrl: './platform-vhd-strategy-labels-example.component.html'
+    templateUrl: './platform-vhd-strategy-labels-example.component.html',
+    providers: [
+        patchLanguage({
+            platformVHD: {
+                defineConditionConditionStrategyLabelEqualTo: 'ilingana ne-',
+                defineConditionConditionStrategyLabelBetween: 'FROM...TO'
+            }
+        })
+    ]
 })
 export class PlatformVhdStrategyLabelExampleComponent implements OnInit {
     filters: FilterData[];
@@ -62,12 +71,6 @@ export class PlatformVhdStrategyLabelExampleComponent implements OnInit {
     actualValue: Partial<VhdValue<ExampleTestModel>> = {};
     actualItems: string[] = [];
 
-    customStrategyLabels: {
-        [key in keyof (typeof VhdDefineIncludeStrategy | typeof VhdDefineExcludeStrategy)]?: string;
-    } = {
-        equalTo: 'ilingana ne-',
-        between: 'FROM...TO'
-    };
     formatTokenFn = (value: Partial<VhdValue<ExampleTestModel>>): void => {
         this.actualItems = [
             ...(value.selected || []).map((item) => item.name),

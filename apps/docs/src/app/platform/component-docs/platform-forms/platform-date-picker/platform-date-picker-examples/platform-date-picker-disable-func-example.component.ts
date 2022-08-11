@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import {
     DatetimeAdapter,
@@ -26,7 +26,9 @@ import {
     ]
 })
 export class PlatformDatePickerDisableFuncExampleComponent {
-    customForm = new FormGroup({});
+    customForm = new FormGroup({
+        offDay: new FormControl<FdDate | null>(null)
+    });
 
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
 

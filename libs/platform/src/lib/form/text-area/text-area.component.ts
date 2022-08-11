@@ -19,7 +19,7 @@ import {
 import { NgControl, NgForm } from '@angular/forms';
 import { BACKSPACE, DELETE } from '@angular/cdk/keycodes';
 
-import { ContentDensity, KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { TextAreaConfig } from './text-area.config';
@@ -143,9 +143,6 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     /** @hidden */
     @ViewChild('counter')
     _textareaCounter?: ElementRef<HTMLDivElement>;
-
-    /** @hidden */
-    _contentDensity: ContentDensity = this._textAreaConfig.contentDensity;
 
     /** @hidden */
     hasTextExceeded = false;

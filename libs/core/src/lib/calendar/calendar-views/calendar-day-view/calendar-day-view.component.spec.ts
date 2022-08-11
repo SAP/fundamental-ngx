@@ -12,15 +12,13 @@ describe('CalendarDayViewComponent', () => {
     let fixture: ComponentFixture<CalendarDayViewComponent<FdDate>>;
     let datetimeAdapter: FdDatetimeAdapter;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FdDatetimeModule],
-                declarations: [CalendarDayViewComponent],
-                providers: [CalendarService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdDatetimeModule],
+            declarations: [CalendarDayViewComponent],
+            providers: [CalendarService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent<CalendarDayViewComponent<FdDate>>(CalendarDayViewComponent);

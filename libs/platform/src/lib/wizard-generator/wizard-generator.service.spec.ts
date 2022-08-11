@@ -182,7 +182,7 @@ describe('WizardGeneratorService', () => {
                 done();
             });
 
-        service.prepareWizardItems(TEST_ITEMS).then(done);
+        service.prepareWizardItems(TEST_ITEMS);
     });
 
     it('should return current step ID', async () => {

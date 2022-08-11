@@ -8,14 +8,12 @@ describe('FormInputMessageGroupComponent', () => {
     let component: FormInputMessageGroupComponent;
     let fixture: ComponentFixture<FormInputMessageGroupComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PopoverModule],
-                declarations: [FormInputMessageGroupComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PopoverModule],
+            declarations: [FormInputMessageGroupComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(FormInputMessageGroupComponent);

@@ -13,6 +13,6 @@ export class MultiInputFormExampleComponent {
 
     isValid(): boolean {
         const value = this.customForm.get('selectedValues')?.value;
-        return value && value.length > 0;
+        return value != null && value.length > 0;
     }
 }

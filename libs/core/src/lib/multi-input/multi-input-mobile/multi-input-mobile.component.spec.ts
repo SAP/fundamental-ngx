@@ -33,18 +33,16 @@ describe('MultiInputMobileComponent', () => {
         allItemsSelectedChange: new EventEmitter<boolean>()
     };
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [DialogModule, BrowserAnimationsModule],
-                declarations: [MultiInputMobileComponent],
-                providers: [
-                    DynamicComponentService,
-                    { provide: MULTI_INPUT_COMPONENT, useValue: mockedMultiInputComponent }
-                ]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [DialogModule, BrowserAnimationsModule],
+            declarations: [MultiInputMobileComponent],
+            providers: [
+                DynamicComponentService,
+                { provide: MULTI_INPUT_COMPONENT, useValue: mockedMultiInputComponent }
+            ]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         mockedMultiInputComponent = {

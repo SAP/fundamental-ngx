@@ -4,13 +4,14 @@ import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
-import { ContentDensity, RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { PlatformStepInputModule } from '../step-input.module';
 import { NumberStepInputComponent } from './number-step-input.component';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { StepInputChangeEvent } from '../base.step-input';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     template: `<fdp-number-step-input name="number"></fdp-number-step-input>`
@@ -23,15 +24,13 @@ describe('NumberStepInputComponent default values', () => {
     let fixture: ComponentFixture<NumberStepInputDefaultValuesHostComponent>;
     let stepInputComponent: NumberStepInputComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformStepInputModule],
-                declarations: [NumberStepInputDefaultValuesHostComponent],
-                providers: [RtlService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformStepInputModule],
+            declarations: [NumberStepInputDefaultValuesHostComponent],
+            providers: [RtlService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NumberStepInputDefaultValuesHostComponent);
@@ -79,7 +78,7 @@ describe('NumberStepInputComponent default values', () => {
             [stepFn]="stepFn"
             [precision]="precision"
             [description]="description"
-            [contentDensity]="contentDensity"
+            [fdContentDensity]="contentDensity"
             (valueChange)="onValueChanged($event)"
         ></fdp-number-step-input>
     `
@@ -94,7 +93,7 @@ class NumberStepInputMainFunctionalityHostComponent {
     largerStep = 2;
     precision = 0;
     description: string;
-    contentDensity: ContentDensity = 'cozy';
+    contentDensity = ContentDensityMode.COZY;
 
     stepFn: (value: number, action: 'increase' | 'decrease') => number;
 
@@ -109,15 +108,13 @@ describe('NumberStepInputComponent main functionality', () => {
 
     const getInputDebugElement = (): DebugElement => fixture.debugElement.query(By.css('.fd-step-input__input'));
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformStepInputModule],
-                declarations: [NumberStepInputMainFunctionalityHostComponent],
-                providers: [RtlService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformStepInputModule],
+            declarations: [NumberStepInputMainFunctionalityHostComponent],
+            providers: [RtlService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NumberStepInputMainFunctionalityHostComponent);
@@ -227,13 +224,13 @@ describe('NumberStepInputComponent main functionality', () => {
         const hostEl = fixture.debugElement.query(By.css('.fd-step-input'));
         const input = fixture.debugElement.query(By.css('.fd-step-input__input'));
 
-        component.contentDensity = 'cozy';
+        component.contentDensity = ContentDensityMode.COZY;
         fixture.detectChanges();
 
         expect(hostEl.nativeElement.className.includes('fd-step-input--compact')).not.toBeTrue();
         expect(input.nativeElement.className.includes('fd-input--compact')).not.toBeTrue();
 
-        component.contentDensity = 'compact';
+        component.contentDensity = ContentDensityMode.COMPACT;
         fixture.detectChanges();
 
         expect(hostEl.nativeElement.className.includes('fd-step-input--compact')).toBeTrue();
@@ -449,15 +446,13 @@ describe('Basic number Step Input withing platforms form', () => {
     let fixture: ComponentFixture<NumberStepInputFormTestWrapperComponent>;
     let host: NumberStepInputFormTestWrapperComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformStepInputModule],
-                declarations: [NumberStepInputFormTestWrapperComponent],
-                providers: [RtlService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformStepInputModule],
+            declarations: [NumberStepInputFormTestWrapperComponent],
+            providers: [RtlService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NumberStepInputFormTestWrapperComponent);

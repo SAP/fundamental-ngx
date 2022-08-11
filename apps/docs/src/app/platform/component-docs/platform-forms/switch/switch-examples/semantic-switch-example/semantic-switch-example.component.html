@@ -3,7 +3,7 @@
         <fdp-switch
             name="semantic-switch"
             ariaLabel="Semantic Switch"
-            ariaLabelledby="semantic-switch-label"
+            ariaLabelledBy="semantic-switch-label"
             [semantic]="true"
             (switchChange)="onSwitchChange()"
         >
@@ -14,8 +14,8 @@
         <fdp-switch
             name="semantic-switch-compact"
             ariaLabel="Semantic Switch Compact"
-            ariaLabelledby="semantic-switch-compact-label"
-            contentDensity="compact"
+            ariaLabelledBy="semantic-switch-compact-label"
+            fdCompact
             [semantic]="true"
             [(ngModel)]="switched"
             (switchChange)="onSwitchChange()"

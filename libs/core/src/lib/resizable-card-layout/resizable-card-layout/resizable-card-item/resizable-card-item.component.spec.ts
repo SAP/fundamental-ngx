@@ -34,14 +34,12 @@ describe('ResizableCardItemComponent', () => {
     let component: TestResizableCardItemComponent;
     let fixture: ComponentFixture<TestResizableCardItemComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ResizableCardItemComponent, TestResizableCardItemComponent],
-                imports: [CommonModule, CardModule, IconModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ResizableCardItemComponent, TestResizableCardItemComponent],
+            imports: [CommonModule, CardModule, IconModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestResizableCardItemComponent);

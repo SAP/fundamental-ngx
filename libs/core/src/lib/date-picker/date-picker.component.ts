@@ -139,41 +139,54 @@ export class DatePickerComponent<D>
     @Input()
     useValidation = true;
 
-    /** Aria-label for the datepicker input. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria-label for the datepicker input.
+     */
     @Input()
-    dateInputLabel = 'Date input';
-
-    /** Aria-label for the datepicker input. */
-    @Input()
-    dateRangeInputLabel = 'Date range input';
-
-    /** Aria-label for the button to show/hide the calendar. */
-    @Input()
-    displayCalendarToggleLabel = 'Open picker';
+    dateInputLabel: string;
 
     /**
+     * @deprecated use i18n capabilities instead
+     * Aria-label for the datepicker input.
+     */
+    @Input()
+    dateRangeInputLabel: string;
+
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria-label for the button to show/hide the calendar.
+     */
+    @Input()
+    displayCalendarToggleLabel: string;
+
+    /**
+     * @deprecated use i18n capabilities instead
      * Value state "success" aria message.
      */
     @Input()
-    valueStateSuccessMessage = 'Value state Success';
+    valueStateSuccessMessage: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Value state "information" aria message.
      */
     @Input()
-    valueStateInformationMessage = 'Value state Information';
+    valueStateInformationMessage: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Value state "warning" aria message.
      */
     @Input()
-    valueStateWarningMessage = 'Value state Warning';
+    valueStateWarningMessage: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Value state "error" aria message.
      */
     @Input()
-    valueStateErrorMessage = 'Value state Error';
+    valueStateErrorMessage: string;
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -201,6 +214,14 @@ export class DatePickerComponent<D>
     /** Defines if date picker should be closed after date choose */
     @Input()
     closeOnDateChoose = true;
+
+    /** Enables Today-Selection-Button if true */
+    @Input()
+    showTodayButton = false;
+
+    /** Label for Today-Selection-Button */
+    @Input()
+    todayButtonLabel = 'Today';
 
     /**
      * Function used to disable previous button in the calendar header.
@@ -292,10 +313,6 @@ export class DatePickerComponent<D>
     /** Should date picker be inlined. */
     @Input()
     inline = true;
-
-    /** aria-label for the date-picker. */
-    @Input()
-    ariaLabel: Nullable<string>;
 
     /** aria-labelledby for element describing date-picker. */
     @Input()
@@ -404,10 +421,17 @@ export class DatePickerComponent<D>
      * @hidden
      */
     get _dateInputArialLabel(): string {
-        if (this.ariaLabel) {
-            return this.ariaLabel;
-        }
+        // return either input value or a key for "fdTranslate" pipe
         return this.type === 'range' ? this.dateRangeInputLabel : this.dateInputLabel;
+    }
+
+    /**
+     * Date input aria label key based on type
+     * @hidden
+     */
+    get _dateInputArialLabelKey(): string {
+        // return either input value or a key for "fdTranslate" pipe
+        return this.type === 'range' ? 'coreDatePicker.dateRangeInputLabel' : 'coreDatePicker.dateInputLabel';
     }
 
     /** @hidden */
@@ -526,6 +550,20 @@ export class DatePickerComponent<D>
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
             this.onChange(this.selectedRangeDate);
             this._isInvalidDateInput = !this.isModelValid();
+        }
+    }
+
+    /**
+     * @hidden
+     * Method that is triggered when Today-Selection-Button clicked, it changes selected date or date range to today's date
+     */
+    onTodayButtonClick(): void {
+        const todayDate = this._dateTimeAdapter.today();
+        if (this.type === 'single') {
+            this.handleSingleDateChange(todayDate);
+            this.closeFromCalendar();
+        } else if (this.type === 'range') {
+            this.handleRangeDateChange({ start: todayDate, end: todayDate });
         }
     }
 

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, ElementRef, Injectable, InjectFlags, Injector } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, FactorySansProvider, Injectable, InjectFlags, Injector } from '@angular/core';
 import {
     ContentDensityCallbackFn,
     ContentDensityMode,
@@ -14,6 +14,55 @@ import { isCompact, isCondensed, isCozy } from '../helpers/density-type-checkers
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 import { DestroyedService } from '@fundamental-ngx/core/utils';
 import { ContentDensityObserverSettings } from '../classes/content-density-observer.settings';
+
+const isFactoryProvider = (obj: any): obj is FactorySansProvider => !!(obj && (obj as FactorySansProvider).useFactory);
+
+const getDeps = (injector: Injector, defaultContentDensity: FactorySansProvider): Array<any> =>
+    (defaultContentDensity.deps || []).map((dep): any => {
+        if (Array.isArray(dep)) {
+            let type;
+            let flags = InjectFlags.Default;
+            for (let index = 0; index < dep.length; index++) {
+                const flag = dep[index]['__NG_DI_FLAG__'];
+                if (typeof flag === 'number') {
+                    // eslint-disable-next-line no-bitwise
+                    flags |= flag;
+                } else {
+                    type = dep[index];
+                }
+            }
+            return injector.get(type, undefined, flags);
+        }
+        return injector.get(dep, undefined, InjectFlags.Default);
+    });
+
+const getDefaultContentDensity = (
+    injector: Injector,
+    configuration: Required<ContentDensityObserverSettings>
+): ContentDensityMode => {
+    if (typeof configuration.defaultContentDensity === 'string') {
+        return configuration.defaultContentDensity as ContentDensityMode;
+    }
+    if (isFactoryProvider(configuration.defaultContentDensity)) {
+        const deps = getDeps(injector, configuration.defaultContentDensity);
+        return configuration.defaultContentDensity.useFactory(...deps);
+    }
+    return injector.get(configuration.defaultContentDensity, undefined, undefined);
+};
+
+const initialContentDensity = (
+    injector: Injector,
+    configuration?: ContentDensityObserverSettings
+): ContentDensityMode => {
+    const serviceValue = injector.get(GlobalContentDensityService, null, InjectFlags.Optional)?.currentContentDensity;
+    if (serviceValue) {
+        return serviceValue;
+    }
+    return getDefaultContentDensity(injector, {
+        ...defaultContentDensityObserverConfigs,
+        ...(configuration || {})
+    });
+};
 
 @Injectable()
 export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> {
@@ -42,7 +91,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
     private _cozySubscription: Subscription;
 
     /** @hidden */
-    private configuration: Required<ContentDensityObserverSettings>;
+    private readonly configuration: Required<ContentDensityObserverSettings>;
 
     /** @hidden */
     private alternativeTo = {
@@ -59,11 +108,10 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
     private contentDensityService?: GlobalContentDensityService;
 
     constructor(private _injector: Injector, private _providedConfig?: ContentDensityObserverSettings) {
-        super(
-            _injector.get(GlobalContentDensityService, null, InjectFlags.Optional)?.currentContentDensity ||
-                _providedConfig?.defaultContentDensity ||
-                defaultContentDensityObserverConfigs.defaultContentDensity
-        );
+        super(initialContentDensity(_injector, _providedConfig));
+        if (_providedConfig?.debug) {
+            console.log({ initialContentDensity: initialContentDensity(_injector, _providedConfig) });
+        }
         this.configuration = {
             ...defaultContentDensityObserverConfigs,
             ...(_providedConfig || {})
@@ -74,13 +122,20 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
         this.contentDensityService = this._injector.get(GlobalContentDensityService, undefined, InjectFlags.Optional);
 
         const changesSource$: Observable<ContentDensityMode> = getChangesSource$({
-            defaultContentDensity: this.configuration.defaultContentDensity,
+            defaultContentDensity: getDefaultContentDensity(this._injector, this.configuration),
             contentDensityDirective: this.contentDensityDirective,
             contentDensityService: this.contentDensityService
         }).pipe(
             map((density: ContentDensityMode) => {
+                if (this.configuration.debug) {
+                    console.log(`ContentDensityObserver: density changed to ${density}`);
+                }
                 if (!this.isSupported(density)) {
-                    return this.alternativeTo[density]();
+                    try {
+                        return this.alternativeTo[density]();
+                    } catch (e) {
+                        throw new Error(`ContentDensityObserver: density ${density} is not supported`);
+                    }
                 }
                 return density;
             }),
@@ -93,7 +148,11 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
                 finalize(() => this.complete())
             )
             .subscribe((density) => {
+                if (this.configuration.debug) {
+                    console.log(`ContentDensityObserver: density emmited ${density}`);
+                }
                 this.next(density);
+                this.changeDetectorRef.markForCheck();
             });
         this.isCompact$ = changesSource$.pipe(map(isCompact));
         this.isCozy$ = changesSource$.pipe(map(isCozy));

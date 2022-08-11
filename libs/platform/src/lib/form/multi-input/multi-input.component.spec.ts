@@ -3,13 +3,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ContentDensity, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 import { DATA_PROVIDERS, DataProvider } from '@fundamental-ngx/platform/shared';
 import { StandardListItemModule } from '@fundamental-ngx/platform/list';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformMultiInputComponent } from './multi-input.component';
 import { PlatformMultiInputModule } from './multi-input.module';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-mulit-input-test',
@@ -19,8 +20,6 @@ import { runValueAccessorTests } from 'ngx-cva-test-suite';
                 #ffl1
                 label="Default Multi Input Field"
                 id="input-simple"
-                name="reactiveFormInput"
-                zone="zLeft"
                 rank="1"
                 placeholder="Field placeholder text"
             >
@@ -32,7 +31,7 @@ import { runValueAccessorTests } from 'ngx-cva-test-suite';
                     name="input1"
                     [dataSource]="LIST_ELEMENTS"
                     displayKey="name"
-                    [contentDensity]="contentDensity"
+                    [fdContentDensity]="contentDensity"
                 >
                 </fdp-multi-input>
             </fdp-form-field>
@@ -43,7 +42,7 @@ class PlatformMulitiInputTestComponent {
     @ViewChild(PlatformMultiInputComponent)
     platformMultiInputComponent: PlatformMultiInputComponent;
 
-    contentDensity: ContentDensity = 'cozy';
+    contentDensity: ContentDensityMode = ContentDensityMode.COZY;
     LIST_ELEMENTS = [{ name: 'Name1' }, { name: 'Name2' }, { name: 'Name3' }, { name: 'Name4' }];
 }
 
@@ -76,7 +75,7 @@ describe('PlatformMultiInputComponent', () => {
     });
 
     it('should open and close the dropdown', async () => {
-        component.contentDensity = 'compact';
+        component.contentDensity = ContentDensityMode.COMPACT;
         fixture.detectChanges();
         const toggleButton = fixture.nativeElement.querySelectorAll('fd-input--compact');
         expect(toggleButton.length).toBe(0);

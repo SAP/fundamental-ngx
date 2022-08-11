@@ -12,6 +12,7 @@ import {
 import { WizardNavigationButtons } from './interfaces/wizard-navigation-buttons.interface';
 import { WizardGeneratorService } from './wizard-generator.service';
 import { WizardStepSubmittedForms } from './components/wizard-generator-step/wizard-generator-step.component';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 /**
  * @description Default button labels.
@@ -19,27 +20,27 @@ import { WizardStepSubmittedForms } from './components/wizard-generator-step/wiz
 export const DEFAULT_WIZARD_NAVIGATION_BUTTONS: Required<WizardNavigationButtons> = {
     goBack: {
         label: 'Previous Step',
-        contentDensity: 'compact',
+        contentDensity: ContentDensityMode.COMPACT,
         type: 'ghost'
     },
     goNext: {
         label: 'Next Step',
-        contentDensity: 'compact',
+        contentDensity: ContentDensityMode.COMPACT,
         type: 'emphasized'
     },
     cancel: {
         label: 'Cancel',
-        contentDensity: 'compact',
+        contentDensity: ContentDensityMode.COMPACT,
         type: 'ghost'
     },
     finish: {
         label: 'Finish',
-        contentDensity: 'compact',
+        contentDensity: ContentDensityMode.COMPACT,
         type: 'emphasized'
     },
     review: {
         label: 'Review',
-        contentDensity: 'compact',
+        contentDensity: ContentDensityMode.COMPACT,
         type: 'emphasized'
     }
 };

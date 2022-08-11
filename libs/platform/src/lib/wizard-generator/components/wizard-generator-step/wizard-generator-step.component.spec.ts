@@ -59,20 +59,18 @@ xdescribe('WizardGeneratorStepComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let service: WizardGeneratorService;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformWizardGeneratorModule],
-                declarations: [TestComponent]
-            })
-                .overrideModule(BrowserDynamicTestingModule, {
-                    set: {
-                        entryComponents: [DynamicFormGeneratorSelectComponent]
-                    }
-                })
-                .compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformWizardGeneratorModule],
+            declarations: [TestComponent]
         })
-    );
+            .overrideModule(BrowserDynamicTestingModule, {
+                set: {
+                    entryComponents: [DynamicFormGeneratorSelectComponent]
+                }
+            })
+            .compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

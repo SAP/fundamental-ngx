@@ -6,13 +6,11 @@ describe('MenuSeparatorComponent', () => {
     let component: MenuSeparatorComponent;
     let fixture: ComponentFixture<MenuSeparatorComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [MenuSeparatorComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [MenuSeparatorComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MenuSeparatorComponent);

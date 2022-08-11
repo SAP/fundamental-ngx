@@ -34,15 +34,13 @@ class DefaultFooterTestComponent {
 }
 
 describe('MessageBoxFooterComponent', () => {
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [MessageBoxFooterComponent, CustomFooterTestComponent, DefaultFooterTestComponent],
-                imports: [BarModule, TemplateModule],
-                providers: [{ provide: MessageBoxHost, useValue: { _messageBoxConfig: new MessageBoxConfig() } }]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [MessageBoxFooterComponent, CustomFooterTestComponent, DefaultFooterTestComponent],
+            imports: [BarModule, TemplateModule],
+            providers: [{ provide: MessageBoxHost, useValue: { _messageBoxConfig: new MessageBoxConfig() } }]
+        });
+    }));
 
     function setup<V>(testComponent): { fixture: ComponentFixture<V>; component: V } {
         const fixture = TestBed.createComponent(testComponent as any as Type<V>);

@@ -38,12 +38,12 @@
         </fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
-<span style="margin-left: 2rem">Visited Countries: {{ form3.controls.visited1?.value }}</span>
+<span style="margin-left: 2rem">Visited Countries: {{ form3.controls.visited?.value }}</span>
 <br />
 <br />
 <p>Disabled checkbox group</p>
 <fdp-form-group [formGroup]="form3">
-    <fdp-form-field #fl3 id="visited countries" label="Disabled checkbox Group: " [disabled]="true" [rank]="1">
+    <fdp-form-field #fl3 id="visited_countries" label="Disabled checkbox Group: " [disabled]="true" [rank]="1">
         <fdp-checkbox-group name="countries" ariaLabel="Disabled checkbox Group" [formControl]="fl3.formControl">
             <fdp-checkbox [values]="{ trueValue: 'Italy' }" label="Italy"></fdp-checkbox>
             <fdp-checkbox [values]="{ trueValue: 'France' }" label="France"></fdp-checkbox>

@@ -8,6 +8,7 @@ import {
     ElementRef,
     HostBinding,
     HostListener,
+    Inject,
     Input,
     OnDestroy,
     Optional,
@@ -16,7 +17,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DialogBodyComponent } from '@fundamental-ngx/core/dialog';
 import { scrollTop } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
@@ -25,6 +26,7 @@ import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progres
 import { WizardContentComponent } from './wizard-content/wizard-content.component';
 import { ACTIVE_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS, COMPLETED_STEP_STATUS } from './constants';
 import { WIZARD } from './wizard-injection-token';
+import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
@@ -63,8 +65,7 @@ export const handleTimeoutReference = (): void => {
         }
     ],
     host: {
-        role: 'region',
-        '[attr.aria-label]': 'ariaLabel'
+        role: 'region'
     }
 })
 export class WizardComponent implements AfterViewInit, OnDestroy {
@@ -92,9 +93,13 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     @Input()
     displaySummaryStep = false;
 
-    /** adding aria label to the component */
+    /**
+     * adding aria label to the component
+     * If not provided, is being translated by i18n package
+     */
     @Input()
-    ariaLabel = 'Wizard';
+    @HostBinding('attr.aria-label')
+    ariaLabel: string;
 
     /** @hidden */
     @ContentChildren(WizardStepComponent, { descendants: true })
@@ -125,7 +130,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     private _stepEventSubscriptions: Subscription = new Subscription();
 
     /** @hidden */
-    private _stepListChangesSubscription: Subscription = new Subscription();
+    private _subscriptions: Subscription = new Subscription();
+
+    /** @hidden */
+    private _translationResolver = new TranslationResolver();
 
     /** @hidden */
     private _previousWidth: number;
@@ -133,8 +141,15 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     constructor(
         private _elRef: ElementRef,
         private readonly _cdRef: ChangeDetectorRef,
+        @Inject(FD_LANGUAGE) _language$: Observable<FdLanguage>,
         @Optional() private _dialogBodyComponent: DialogBodyComponent
-    ) {}
+    ) {
+        const sub = _language$.subscribe((lang) => {
+            // set ariaLabel only if it's not applied manually
+            this.ariaLabel ??= this._translationResolver.resolve(lang, 'coreWizard.ariaLabel');
+        });
+        this._subscriptions.add(sub);
+    }
 
     /** @hidden */
     @HostListener('window:resize')
@@ -159,7 +174,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         setTimeout(() => {
             // fixes ExpressionChangedAfterItHasBeenCheckedError
             this._setContentTemplates();
-            this._stepListChangesSubscription.add(
+            this._subscriptions.add(
                 this.steps.changes.subscribe(() => {
                     this._handleStepOrStatusChanges();
                     this._setupStepEvents();
@@ -175,7 +190,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this._stepEventSubscriptions.unsubscribe();
-        this._stepListChangesSubscription.unsubscribe();
+        this._subscriptions.unsubscribe();
         this.wrapperContainer?.nativeElement.removeEventListener('scroll', handleTimeoutReference);
     }
 
@@ -464,7 +479,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _handleStepOrStatusChanges(): void {
         if (this._isCurrentStepSummary() && !this.displaySummaryStep) {
-            this.progressBar.visible = false;
+            setTimeout(() => {
+                this.progressBar.visible = false;
+            });
             this._showSummary();
         } else {
             this.progressBar.visible = true;

@@ -18,10 +18,8 @@
                             fd-button
                             glyph="multiselect-all"
                             fdType="emphasized"
-                            title="Show all items"
-                            i18n-title="@@platformMultiCombobox.Mobile.ShowAllItemsButton"
-                            aria-label="Show all items"
-                            i18n-aria-label="@@platformMultiCombobox.Mobile.ShowAllItemsButton"
+                            [title]="'platformMultiCombobox.mobileShowAllItemsButton' | fdTranslate"
+                            [attr.aria-label]="'platformMultiCombobox.mobileShowAllItemsButton' | fdTranslate"
                             class="fd-margin-begin--tiny"
                             (click)="showSelected()"
                         ></button>
@@ -31,10 +29,8 @@
                             fd-button
                             glyph="multiselect-all"
                             fdType="transparent"
-                            title="Show selected items"
-                            i18n-title="@@platformMultiCombobox.Mobile.ShowSelectedItemsButton"
-                            aria-label="Show selected items"
-                            i18n-aria-label="@@platformMultiCombobox.Mobile.ShowSelectedItemsButton"
+                            [title]="'platformMultiCombobox.mobileShowSelectedItemsButton' | fdTranslate"
+                            [attr.aria-label]="'platformMultiCombobox.mobileShowSelectedItemsButton' | fdTranslate"
                             class="fd-margin-begin--tiny"
                             (click)="showSelected()"
                         ></button>

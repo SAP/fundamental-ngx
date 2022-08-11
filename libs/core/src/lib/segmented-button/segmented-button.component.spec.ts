@@ -39,14 +39,12 @@ describe('SegmentedButtonComponent', () => {
     let component: HostComponent;
     let fixture: ComponentFixture<HostComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [HostComponent],
-                imports: [SegmentedButtonModule, ButtonModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [HostComponent],
+            imports: [SegmentedButtonModule, ButtonModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HostComponent);

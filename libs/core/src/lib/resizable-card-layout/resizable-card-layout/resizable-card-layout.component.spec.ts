@@ -114,18 +114,12 @@ describe('ResizableCardLayoutComponent', () => {
     let component: TestResizableCardLayoutComponent;
     let fixture: ComponentFixture<TestResizableCardLayoutComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [
-                    ResizableCardLayoutComponent,
-                    ResizableCardItemComponent,
-                    TestResizableCardLayoutComponent
-                ],
-                imports: [CommonModule, CardModule, ListModule, IconModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ResizableCardLayoutComponent, ResizableCardItemComponent, TestResizableCardLayoutComponent],
+            imports: [CommonModule, CardModule, ListModule, IconModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestResizableCardLayoutComponent);

@@ -19,16 +19,20 @@
                 [buttonFocusable]="buttonFocusable"
                 glyph="date-time"
                 [isExpanded]="isOpen"
-                [glyphAriaLabel]="displayDatetimeToggleLabel"
-                [iconTitle]="displayDatetimeToggleLabel"
+                [glyphAriaLabel]="
+                    displayDatetimeToggleLabel || ('coreDatetimePicker.displayDatetimeToggleLabel' | fdTranslate)
+                "
+                [iconTitle]="
+                    displayDatetimeToggleLabel || ('coreDatetimePicker.displayDatetimeToggleLabel' | fdTranslate)
+                "
                 (addOnButtonClicked)="togglePopover()"
             >
                 <input
                     type="text"
                     class="fd-input"
                     fd-input-group-input
-                    [attr.aria-label]="ariaLabel || datetimeInputLabel"
                     [attr.aria-labelledby]="ariaLabelledBy"
+                    [attr.aria-label]="datetimeInputLabel || ('coreDatetimePicker.datetimeInputLabel' | fdTranslate)"
                     [attr.id]="inputId"
                     [attr.aria-required]="required"
                     [placeholder]="placeholder"
@@ -52,8 +56,16 @@
                 </fd-form-message>
                 <div class="fd-datetime__display-type-switcher">
                     <fd-segmented-button [(ngModel)]="_displayType">
-                        <button fd-button [label]="displayTypeDateLabel" value="date"></button>
-                        <button fd-button [label]="displayTypeTimeLabel" value="time"></button>
+                        <button
+                            fd-button
+                            [label]="displayTypeDateLabel || ('coreDatetimePicker.displayTypeDateLabel' | fdTranslate)"
+                            value="date"
+                        ></button>
+                        <button
+                            fd-button
+                            [label]="displayTypeTimeLabel || ('coreDatetimePicker.displayTypeTimeLabel' | fdTranslate)"
+                            value="time"
+                        ></button>
                     </fd-segmented-button>
                 </div>
                 <ng-content></ng-content>
@@ -98,8 +110,8 @@
                                 <button
                                     fd-button
                                     fdType="emphasized"
-                                    [label]="okLabel"
-                                    [ariaLabel]="okLabel"
+                                    [label]="okLabel || ('coreDatetimePicker.datetimeOkLabel' | fdTranslate)"
+                                    [ariaLabel]="okLabel || ('coreDatetimePicker.datetimeOkLabel' | fdTranslate)"
                                     (click)="submit()"
                                 ></button>
                             </fd-bar-element>
@@ -107,8 +119,10 @@
                                 <button
                                     fd-button
                                     fdType="transparent"
-                                    [label]="cancelLabel"
-                                    [ariaLabel]="cancelLabel"
+                                    [label]="cancelLabel || ('coreDatetimePicker.datetimeCancelLabel' | fdTranslate)"
+                                    [ariaLabel]="
+                                        cancelLabel || ('coreDatetimePicker.datetimeCancelLabel' | fdTranslate)
+                                    "
                                     (click)="cancel()"
                                 ></button>
                             </fd-bar-element>

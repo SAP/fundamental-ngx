@@ -14,10 +14,10 @@
         Touched: {{ customForm.controls.dateRange.touched }}<br />
         Dirty: {{ customForm.controls.dateRange.dirty }}<br />
         Selected Start Date:
-        {{ customForm.controls.dateRange.value.start?.toDateString() || 'null' }}
+        {{ customForm.controls.dateRange.value?.start?.toDateString() || 'null' }}
         <br />
         Selected End Date:
-        {{ customForm.controls.dateRange.value.end?.toDateString() || 'null' }}
+        {{ customForm.controls.dateRange.value?.end?.toDateString() || 'null' }}
         <br />
         Valid: {{ customForm.controls.dateRange.valid }} <br />
         <button fd-button label="Set Invalid Range Date" (click)="setInvalidRange()"></button>

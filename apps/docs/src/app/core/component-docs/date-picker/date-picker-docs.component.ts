@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import datePickerRangeSrc from '!./examples/date-picker-range-example.component.ts?raw';
 import datePickerSingleSrc from '!./examples/date-picker-single-example.component.ts?raw';
 import datePickeri18nSrc from '!./examples/date-picker-i18n-example.component.ts?raw';
+import datePickerTodayButton from '!./examples/date-picker-today-button-example.component.ts?raw';
 import datePickerFormatSrc from '!./examples/date-picker-format-example.component.ts?raw';
 import datePickerAllowNullSrc from '!./examples/date-picker-allow-null-example.component.ts?raw';
 import datePickerFormTsSrc from '!./examples/date-picker-form-example.component.ts?raw';
@@ -47,6 +48,15 @@ export class DatePickerDocsComponent {
             component: 'DatePickerI18nExampleComponent',
             code: datePickeri18nSrc,
             fileName: 'datepicker-i18n-example'
+        }
+    ];
+
+    datePickerTodayButton: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'DatePickerTodayButtonExampleComponent',
+            code: datePickerTodayButton,
+            fileName: 'date-picker-today-button-example'
         }
     ];
 

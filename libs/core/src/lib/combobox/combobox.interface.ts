@@ -11,6 +11,7 @@ export interface ComboboxInterface extends MobileMode {
     inputText: string;
     openChange: EventEmitter<boolean>;
 
+    getValue(): any;
     dialogApprove(): void;
     dialogDismiss(backup: string): void;
 }

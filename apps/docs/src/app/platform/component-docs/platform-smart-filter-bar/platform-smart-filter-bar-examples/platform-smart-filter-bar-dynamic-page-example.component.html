@@ -7,8 +7,8 @@
         >
             <fd-dynamic-page-layout-actions>
                 <!-- layout actions -->
-                <fd-toolbar fdType="transparent" [clearBorder]="true" [size]="'compact'">
-                    <button fd-button fdType="transparent" ariaLabel="Resize" title="Resize" [compact]="true">
+                <fd-toolbar fdType="transparent" [clearBorder]="true" fdCompact>
+                    <button fd-button fdType="transparent" ariaLabel="Resize" title="Resize">
                         <i class="sap-icon--resize"></i>
                     </button>
                     <button
@@ -17,18 +17,10 @@
                         ariaLabel="Exit Fullscreen"
                         (click)="closePage()"
                         title="Exit Fullscreen"
-                        [compact]="true"
                     >
                         <i class="sap-icon--exitfullscreen"></i>
                     </button>
-                    <button
-                        fd-button
-                        fdType="transparent"
-                        ariaLabel="Close"
-                        (click)="closePage()"
-                        title="Close"
-                        [compact]="true"
-                    >
+                    <button fd-button fdType="transparent" ariaLabel="Close" (click)="closePage()" title="Close">
                         <i class="sap-icon--decline"></i>
                     </button>
                 </fd-toolbar>

@@ -8,14 +8,12 @@ import { DYNAMIC_SIDE_CONTENT_CLASS_NAME } from './constants';
 describe('DynamicSideContentMainComponent', () => {
     let fixture: ComponentFixture<DynamicSideContentMainComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule],
-                declarations: [DynamicSideContentMainComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule],
+            declarations: [DynamicSideContentMainComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DynamicSideContentMainComponent);

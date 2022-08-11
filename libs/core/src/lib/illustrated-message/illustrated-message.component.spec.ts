@@ -28,13 +28,11 @@ describe('IllustratedMessageComponent', () => {
     let testComponent: TestIllustratedMessageComponent;
     let fixture: ComponentFixture<TestIllustratedMessageComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [IllustratedMessageComponent, TestIllustratedMessageComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [IllustratedMessageComponent, TestIllustratedMessageComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestIllustratedMessageComponent);

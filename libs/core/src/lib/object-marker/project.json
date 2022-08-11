@@ -1,0 +1,40 @@
+{
+    "projectType": "library",
+    "root": "libs/core/src/lib/object-marker",
+    "sourceRoot": "libs/core/src/lib/object-marker",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/core/object-marker"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/object-marker/tsconfig.lib.json",
+                "project": "libs/core/src/lib/object-marker/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/object-marker/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/object-marker/test.ts",
+                "tsConfig": "libs/core/src/lib/object-marker/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/object-marker/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/core/src/lib/object-marker/**/*.ts",
+                    "libs/core/src/lib/object-marker/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fd"]
+}

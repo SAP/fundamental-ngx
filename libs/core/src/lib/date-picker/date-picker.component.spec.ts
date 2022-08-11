@@ -20,23 +20,20 @@ describe('DatePickerComponent', () => {
     let fixture: ComponentFixture<DatePickerComponent<FdDate>>;
     let adapter: FdDatetimeAdapter;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [DatePickerComponent],
-                imports: [
-                    FdDatetimeModule,
-                    CalendarModule,
-                    PopoverModule,
-                    FormsModule,
-                    IconModule,
-                    InputGroupModule,
-                    ButtonModule,
-                    FormMessageModule
-                ]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                FdDatetimeModule,
+                CalendarModule,
+                PopoverModule,
+                FormsModule,
+                IconModule,
+                InputGroupModule,
+                ButtonModule,
+                FormMessageModule
+            ]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent<DatePickerComponent<FdDate>>(DatePickerComponent);
@@ -95,6 +92,26 @@ describe('DatePickerComponent', () => {
         expect(component._inputFieldDate).toBe(dateStrStart + component._rangeDelimiter + dateStrLast);
         expect(component.onChange).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
+    });
+
+    it('should handle today button click and, change and update input', () => {
+        spyOn(component, 'onChange');
+        spyOn(component.selectedRangeDateChange, 'emit');
+        const date = adapter.today();
+        const dateStr = (<any>component)._formatDate(date);
+
+        component.type = 'single';
+        component._inputFieldDate = '';
+        component.onTodayButtonClick();
+        expect(component._inputFieldDate).toEqual(dateStr);
+        expect(component.onChange).toHaveBeenCalledWith(date);
+
+        component.type = 'range';
+        component._inputFieldDate = '';
+        component.onTodayButtonClick();
+        expect(component._inputFieldDate).toBe(dateStr + component._rangeDelimiter + dateStr);
+        expect(component.onChange).toHaveBeenCalledWith({ start: date, end: date });
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date, end: date });
     });
 
     it('should handle correct write value for single mode', () => {
@@ -341,15 +358,13 @@ describe('DatePickerComponent Accessibility', () => {
         valueStateErrorMessage = 'Value state Error';
     }
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [HostComponent],
-                imports: [FdDatetimeModule, DatePickerModule],
-                providers: []
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [HostComponent],
+            imports: [FdDatetimeModule, DatePickerModule],
+            providers: []
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent<HostComponent>(HostComponent);

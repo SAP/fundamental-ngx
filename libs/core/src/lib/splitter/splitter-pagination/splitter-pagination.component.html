@@ -5,7 +5,7 @@
     class="fd-splitter__pagination-item"
     [class.fd-splitter__pagination-item--active]="page === currentPage"
     role="radio"
-    [attr.aria-label]="paginationItemAriaLabel"
+    [attr.aria-label]="paginationItemAriaLabel || ('coreSplitter.paginationItemAriaLabel' | fdTranslate)"
     [attr.aria-checked]="page === currentPage"
     (click)="_changePage(page)"
     (keydown.enter)="_changePage(page)"

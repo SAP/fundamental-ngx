@@ -25,7 +25,7 @@ import {
 })
 export class TimePickerFormExampleComponent {
     customForm = new FormGroup({
-        time: new FormControl(null, Validators.required),
+        time: new FormControl<FdDate | null>(null, Validators.required),
         disabledTime: new FormControl({ value: new FdDate().setTime(12, 34, 10), disabled: true })
     });
 }

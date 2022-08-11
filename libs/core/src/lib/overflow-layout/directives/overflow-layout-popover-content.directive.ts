@@ -1,9 +1,10 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
-import { Directive, HostBinding, HostListener, Inject, Input } from '@angular/core';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { Directive, HostBinding, HostListener, Inject, Input, Optional } from '@angular/core';
+import { DestroyedService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { takeUntil } from 'rxjs';
 import { OverflowContainer } from '../interfaces/overflow-container.interface';
-import { OverflowItem } from '../interfaces/overflow-item.interface';
+import { OverflowLayoutFocusableItem } from '../interfaces/overflow-focusable-item.interface';
 import { OverflowPopoverContent } from '../interfaces/overflow-popover-content.interface';
 import { OverflowItemRef } from '../interfaces/overflow-item-ref.interface';
 import { FD_OVERFLOW_CONTAINER } from '../tokens/overflow-container.token';
@@ -13,7 +14,8 @@ import { FD_OVERFLOW_CONTAINER } from '../tokens/overflow-container.token';
  * Used to apply keyboard navigation through the items.
  */
 @Directive({
-    selector: '[fdOverflowLayoutPopoverContent]'
+    selector: '[fdOverflowLayoutPopoverContent]',
+    providers: [DestroyedService]
 })
 export class OverflowLayoutPopoverContentDirective implements OverflowPopoverContent {
     /**
@@ -21,16 +23,21 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
      */
     @Input()
     set items(value: OverflowItemRef[]) {
-        this._items = value;
-        this._keyboardEventsManager = new FocusKeyManager(
-            this._items.filter((item) => item.overflowItem.focusable).map((item) => item.overflowItem)
-        )
-            .withWrap()
-            .withHorizontalOrientation('ltr');
+        // Need to set items with a delay so that elementRef of the focusable item would refresh.
+        setTimeout(() => {
+            this._items = value;
+            this._keyboardEventsManager = new FocusKeyManager(
+                this._items
+                    .filter((item) => item.overflowItem.focusableItem?.focusable)
+                    .map((item) => item.overflowItem.focusableItem)
+            )
+                .withWrap()
+                .withHorizontalOrientation(this._dir);
+        });
     }
 
     /** @hidden */
-    private _keyboardEventsManager: FocusKeyManager<OverflowItem>;
+    private _keyboardEventsManager: FocusKeyManager<OverflowLayoutFocusableItem>;
 
     /** @hidden */
     private _items: OverflowItemRef[];
@@ -39,9 +46,22 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
     @HostBinding('class')
     private readonly _initialClass = 'fd-overflow-layout__popover-container';
 
+    private _dir: 'ltr' | 'rtl' = 'ltr';
+
     /** @hidden */
-    constructor(@Inject(FD_OVERFLOW_CONTAINER) private _overflowContainer: OverflowContainer) {
+    constructor(
+        @Inject(FD_OVERFLOW_CONTAINER) private _overflowContainer: OverflowContainer,
+        @Optional() private _rtl: RtlService,
+        private readonly _onDestroy$: DestroyedService
+    ) {
         this._overflowContainer?.registerPopoverContent(this);
+
+        this._rtl?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((rtl) => {
+            this._dir = rtl ? 'rtl' : 'ltr';
+            if (this._keyboardEventsManager) {
+                this._keyboardEventsManager = this._keyboardEventsManager.withHorizontalOrientation(this._dir);
+            }
+        });
     }
 
     /** @hidden */

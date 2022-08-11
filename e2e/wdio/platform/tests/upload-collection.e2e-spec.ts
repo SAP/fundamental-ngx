@@ -249,30 +249,26 @@ describe('Upload collection test suite', () => {
     function checkCreatingFolder(selector: string): void {
         scrollIntoView(selector);
         const countBeforeAdd = getText(selector + tableItemCount).trim();
-        const countBeforeAddNum = Number(countBeforeAdd);
-        expect(countBeforeAddNum).toEqual(54);
+        expect(countBeforeAdd).toEqual('All files (54)');
         click(selector + transparentButton);
         setValue(dialogInputField, testFolder1);
         click(dialogCreateButton);
         pause(300);
-        expect(getText(selector + tableItemCount).trim()).toBe('55');
+        expect(getText(selector + tableItemCount).trim()).toBe('All files (55)');
         const countAfterAdd = getText(selector + tableItemCount).trim();
-        const countAfterAddNum = Number(countAfterAdd);
-        expect(countAfterAddNum).toEqual(55);
+        expect(countAfterAdd).toEqual('All files (55)');
         expect(getText(selector + tableContent, 4).trim()).toBe(testFolder1);
     }
 
     function checkRemovingItem(selector: string): void {
         scrollIntoView(selector);
         const countBeforeRemove = getText(selector + tableItemCount).trim();
-        const countBeforeRemoveNum = Number(countBeforeRemove);
-        expect(countBeforeRemoveNum).toEqual(54);
+        expect(countBeforeRemove).toEqual('All files (54)');
         click(selector + transparentButton, 5);
         click(menuButton, 3);
         pause(300);
         const countAfterRemove = getText(selector + tableItemCount).trim();
-        const countAfterRemoveNum = Number(countAfterRemove);
-        expect(countAfterRemoveNum).toEqual(53);
+        expect(countAfterRemove).toEqual('All files (53)');
     }
 
     function checkClickabilityCancelButton(selector: string): void {

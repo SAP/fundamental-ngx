@@ -16,6 +16,7 @@ import { BarPageResponsiveExampleComponent } from './examples/bar-page-responsiv
 import { BarHeaderComponent } from './bar-header/bar-header.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ComboboxModule } from '@fundamental-ngx/core/combobox';
 import {
     BarModule,
     DeprecatedBarButtonContentDensityDirective,
@@ -24,6 +25,7 @@ import {
 import { BarWithTitleExampleComponent } from './examples/bar-with-title-example.component';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 import { TitleModule } from '@fundamental-ngx/core/title';
+import { BarCustomShellbarExampleComponent } from './examples/bar-custom-shellbar-example.component';
 
 const routes: Routes = [
     {
@@ -37,7 +39,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), AvatarModule, SharedDocumentationPageModule, BarModule, TitleModule],
+    imports: [
+        RouterModule.forChild(routes),
+        AvatarModule,
+        SharedDocumentationPageModule,
+        BarModule,
+        ComboboxModule,
+        TitleModule
+    ],
     exports: [RouterModule],
     declarations: [
         BarDocsComponent,
@@ -50,6 +59,7 @@ const routes: Routes = [
         BarFloatingFooterExampleComponent,
         BarPageExampleComponent,
         BarPageResponsiveExampleComponent,
+        BarCustomShellbarExampleComponent,
         BarWithTitleExampleComponent
     ],
     providers: [

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { isSelectItem, SelectItem } from '@fundamental-ngx/platform/shared';
 import {
@@ -43,7 +43,6 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
         <ng-container [formGroup]="form">
             <ng-container [formGroupName]="formGroupName">
                 <fdp-slider
-                    [contentDensity]="formItem.guiOptions?.contentDensity || 'cozy'"
                     [customValues]="formItem.choices || []"
                     tooltipMode="readonly"
                     [name]="name"
@@ -66,7 +65,6 @@ export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGenera
         <ng-container [formGroup]="form">
             <ng-container [formGroupName]="formGroupName">
                 <fdp-date-picker
-                    [contentDensity]="formItem.guiOptions?.contentDensity || 'cozy'"
                     [placeholder]="formItem.placeholder || formItem.message"
                     [name]="name"
                     [formControlName]="name"
@@ -79,8 +77,8 @@ export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGenera
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider]
 })
 export class PlatformSmartFilterBarDateRendererComponent extends BaseSmartFilterBarConditionField {
-    constructor(dialogService: DialogService, smartFilterBar: SmartFilterBar) {
-        super(dialogService, smartFilterBar);
+    constructor(dialogService: DialogService, smartFilterBar: SmartFilterBar, injector: Injector) {
+        super(dialogService, smartFilterBar, injector);
     }
 }
 

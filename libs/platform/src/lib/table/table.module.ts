@@ -21,9 +21,13 @@ import { PipeModule } from '@fundamental-ngx/core/utils';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DragAndDropModule } from '@fundamental-ngx/core/utils';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+
 import { PlatformDatePickerModule, PlatformInputModule, PlatformSwitchModule } from '@fundamental-ngx/platform/form';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { I18nModule } from '@fundamental-ngx/i18n';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 import { TableComponent } from './table.component';
 import { TableColumnComponent } from './components/table-column/table-column.component';
@@ -138,6 +142,7 @@ const EXPORTABLE_DECLARATIONS = [
         DialogModule,
         PlatformSearchFieldModule,
         IconModule,
+        I18nModule,
         SelectModule,
         LayoutGridModule,
         PanelModule,
@@ -146,9 +151,11 @@ const EXPORTABLE_DECLARATIONS = [
         DragAndDropModule,
         ScrollbarModule,
         PlatformDatePickerModule,
-        PlatformSwitchModule
+        PlatformSwitchModule,
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
     ],
     declarations: [...EXPORTABLE_DECLARATIONS],
-    exports: [...EXPORTABLE_DECLARATIONS]
+    exports: [...EXPORTABLE_DECLARATIONS, PlatformContentDensityDeprecationsModule, ContentDensityModule]
 })
 export class PlatformTableModule {}

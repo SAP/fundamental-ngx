@@ -21,14 +21,12 @@ describe('MultiInputComponent', () => {
         fixture.detectChanges();
     }
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [MultiInputModule],
-                providers: [DynamicComponentService, RtlService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MultiInputModule],
+            providers: [DynamicComponentService, RtlService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MultiInputComponent);

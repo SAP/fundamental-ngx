@@ -2,6 +2,7 @@
 
 import 'core-js/es/reflect';
 import 'zone.js';
+import '@angular/localize/init';
 
 import 'zone.js/testing';
 import { getTestBed } from '@angular/core/testing';

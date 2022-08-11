@@ -67,9 +67,12 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     @Input()
     ariaLabel: Nullable<string>;
 
-    /** Aria label for the dismiss button. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria label for the dismiss button.
+     */
     @Input()
-    dismissLabel = 'Dismiss';
+    dismissLabel: string;
 
     /** Width of the message-strip. */
     @Input()

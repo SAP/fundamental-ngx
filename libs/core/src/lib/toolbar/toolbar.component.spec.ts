@@ -10,14 +10,12 @@ describe('ToolbarComponent', () => {
     let component: ToolbarTestComponent;
     let fixture: ComponentFixture<ToolbarTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ToolbarTestComponent],
-                imports: [ToolbarModule, ButtonModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ToolbarTestComponent],
+            imports: [ToolbarModule, ButtonModule]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(ToolbarTestComponent);
@@ -45,14 +43,12 @@ describe('ToolbarComponent - Prioritization', () => {
     let component: ToolbarOverflowPriorityTestComponent;
     let fixture: ComponentFixture<ToolbarOverflowPriorityTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ToolbarModule, ButtonModule],
-                declarations: [ToolbarOverflowPriorityTestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ToolbarModule, ButtonModule],
+            declarations: [ToolbarOverflowPriorityTestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(ToolbarOverflowPriorityTestComponent);
@@ -92,14 +88,12 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
     let component: ToolbarOverflowGroupingTestComponent;
     let fixture: ComponentFixture<ToolbarOverflowGroupingTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ToolbarModule, ButtonModule],
-                declarations: [ToolbarOverflowGroupingTestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ToolbarModule, ButtonModule],
+            declarations: [ToolbarOverflowGroupingTestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(ToolbarOverflowGroupingTestComponent);
@@ -139,35 +133,35 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
     template: `
         <div [style.width]="width">
             <fd-toolbar #toolbar [shouldOverflow]="true">
-                <button fd-toolbar-item fd-button [compact]="true">Button1</button>
+                <button fd-toolbar-item fd-button fdCompact>Button1</button>
                 <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
-                <button fd-toolbar-item fd-button [compact]="true">Button2</button>
+                <button fd-toolbar-item fd-button fdCompact>Button2</button>
                 <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
-                <button fd-toolbar-item fd-button [compact]="true">Button3</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button4</button>
+                <button fd-toolbar-item fd-button fdCompact>Button3</button>
+                <button fd-toolbar-item fd-button fdCompact>Button4</button>
 
                 <fd-toolbar-spacer fd-toolbar-item></fd-toolbar-spacer>
 
                 <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
 
-                <button fd-toolbar-item fd-button [compact]="true">Button5</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button6</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button7</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button8</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button9</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button10</button>
+                <button fd-toolbar-item fd-button fdCompact>Button5</button>
+                <button fd-toolbar-item fd-button fdCompact>Button6</button>
+                <button fd-toolbar-item fd-button fdCompact>Button7</button>
+                <button fd-toolbar-item fd-button fdCompact>Button8</button>
+                <button fd-toolbar-item fd-button fdCompact>Button9</button>
+                <button fd-toolbar-item fd-button fdCompact>Button10</button>
                 <fd-toolbar-spacer fd-toolbar-item></fd-toolbar-spacer>
-                <button fd-toolbar-item fd-button [compact]="true">Button11</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button12</button>
+                <button fd-toolbar-item fd-button fdCompact>Button11</button>
+                <button fd-toolbar-item fd-button fdCompact>Button12</button>
                 <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
-                <button fd-toolbar-item fd-button [compact]="true">Button13</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button14</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button15</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button16</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button17</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button18</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button19</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button20</button>
+                <button fd-toolbar-item fd-button fdCompact>Button13</button>
+                <button fd-toolbar-item fd-button fdCompact>Button14</button>
+                <button fd-toolbar-item fd-button fdCompact>Button15</button>
+                <button fd-toolbar-item fd-button fdCompact>Button16</button>
+                <button fd-toolbar-item fd-button fdCompact>Button17</button>
+                <button fd-toolbar-item fd-button fdCompact>Button18</button>
+                <button fd-toolbar-item fd-button fdCompact>Button19</button>
+                <button fd-toolbar-item fd-button fdCompact>Button20</button>
                 <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
             </fd-toolbar>
         </div>
@@ -185,13 +179,13 @@ class ToolbarTestComponent {
     template: `
         <div [style.width]="width">
             <fd-toolbar #toolbar [shouldOverflow]="true">
-                <button fd-toolbar-item fd-button [compact]="true">Button First</button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="always">Always</button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="never">Never</button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="low">Low</button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="high">High</button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="disappear">Disappear</button>
-                <button fd-toolbar-item fd-button [compact]="true">Button Last</button>
+                <button fd-toolbar-item fd-button fdCompact>Button First</button>
+                <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="always">Always</button>
+                <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="never">Never</button>
+                <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="low">Low</button>
+                <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="high">High</button>
+                <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="disappear">Disappear</button>
+                <button fd-toolbar-item fd-button fdCompact>Button Last</button>
             </fd-toolbar>
         </div>
     `
@@ -208,22 +202,22 @@ class ToolbarOverflowPriorityTestComponent {
     template: `
         <div [style.width]="width">
             <fd-toolbar #toolbar [shouldOverflow]="true">
-                <button fd-toolbar-item fd-button [compact]="true">Button</button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="always">Always</button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="never">Never</button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="low" fdOverflowGroup="1">
+                <button fd-toolbar-item fd-button fdCompact>Button</button>
+                <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="always">Always</button>
+                <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="never">Never</button>
+                <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="low" fdOverflowGroup="1">
                     Gr 1 / Low
                 </button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="low" fdOverflowGroup="2">
+                <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="low" fdOverflowGroup="2">
                     Gr 2 / Low
                 </button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="disappear" fdOverflowGroup="2">
+                <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="disappear" fdOverflowGroup="2">
                     Gr 2 / Disappear
                 </button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="low" fdOverflowGroup="2">
+                <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="low" fdOverflowGroup="2">
                     Gr 2 / Low
                 </button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="high" fdOverflowGroup="1">
+                <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="high" fdOverflowGroup="1">
                     Gr 1 / High
                 </button>
             </fd-toolbar>

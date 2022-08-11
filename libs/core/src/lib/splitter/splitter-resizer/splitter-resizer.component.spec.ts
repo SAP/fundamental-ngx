@@ -10,13 +10,11 @@ describe('SplitterResizerComponent', () => {
     let component: SplitterResizerComponent;
     let fixture: ComponentFixture<SplitterResizerComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [SplitterModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [SplitterModule]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(SplitterResizerComponent);

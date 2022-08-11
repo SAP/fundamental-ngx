@@ -25,8 +25,7 @@ class TemplateTestComponent {
 @NgModule({
     declarations: [AlertComponent, AlertContainerComponent, TemplateTestComponent],
     imports: [CommonModule, BrowserModule, NoopAnimationsModule, ButtonModule],
-    providers: [AlertService, DynamicComponentService],
-    entryComponents: [AlertComponent, AlertContainerComponent, TemplateTestComponent]
+    providers: [AlertService, DynamicComponentService]
 })
 class TestModule {}
 
@@ -35,13 +34,11 @@ describe('AlertComponent', () => {
     let fixture: ComponentFixture<AlertComponent>;
     let service: AlertService;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [TestModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(AlertComponent);

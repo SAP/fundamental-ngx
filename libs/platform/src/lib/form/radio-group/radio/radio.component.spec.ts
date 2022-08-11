@@ -26,7 +26,7 @@ import { RadioButtonComponent } from './radio.component';
             name="radio"
             state="error"
             [value]="2"
-            [contentDensity]="'compact'"
+            fdCompact
             [forceRender]="true"
             [(ngModel)]="selectedValue"
         ></fdp-radio-button>
@@ -52,14 +52,12 @@ describe('RadioButtonComponent', () => {
     let component: TestRadioButtonComponent;
     let fixture: ComponentFixture<TestRadioButtonComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [RadioModule, FormModule, FormsModule, PlatformRadioGroupModule],
-                declarations: [TestRadioButtonComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [RadioModule, FormModule, FormsModule, PlatformRadioGroupModule],
+            declarations: [TestRadioButtonComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestRadioButtonComponent);

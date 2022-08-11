@@ -40,14 +40,12 @@ describe('CardKpiHeaderComponent', () => {
     let fixture: ComponentFixture<CardKpiHeaderHostTestComponent>;
     let host: CardKpiHeaderHostTestComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, CardModule],
-                declarations: [CardKpiHeaderHostTestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, CardModule],
+            declarations: [CardKpiHeaderHostTestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CardKpiHeaderHostTestComponent);

@@ -14,6 +14,8 @@ import { FormFieldControlExtrasComponent } from './form-field-extras/form-field-
 import { FormGroupHeaderComponent } from './form-group-header/form-group-header.component';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { FieldGroupRowValuePipe } from './pipes/field-group-row-value.pipe';
+import { DeprecatedFormGroupCompactDirective } from './deprecated-form-group-compact.directive';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 const EXPORTABLE_DECLARATIONS = [
     FormGroupComponent,
@@ -22,7 +24,8 @@ const EXPORTABLE_DECLARATIONS = [
     FormFieldGroupComponent,
     FormFieldControlExtrasComponent,
     FormGroupHeaderComponent,
-    FieldGroupRowValuePipe
+    FieldGroupRowValuePipe,
+    DeprecatedFormGroupCompactDirective
 ];
 
 @NgModule({
@@ -35,8 +38,9 @@ const EXPORTABLE_DECLARATIONS = [
         InlineHelpModule,
         PopoverModule,
         IconModule,
-        LinkModule
+        LinkModule,
+        ContentDensityModule
     ],
-    exports: [...EXPORTABLE_DECLARATIONS]
+    exports: [...EXPORTABLE_DECLARATIONS, ContentDensityModule]
 })
 export class FdpFormGroupModule {}

@@ -27,8 +27,7 @@ class TemplateTestComponent {
             provide: MESSAGE_TOAST_CONFIG,
             useValue: new MessageToastConfig()
         }
-    ],
-    entryComponents: [MessageToastComponent, MessageToastContainerComponent, TemplateTestComponent]
+    ]
 })
 class TestModule {}
 

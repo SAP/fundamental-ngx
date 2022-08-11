@@ -5,7 +5,6 @@
     [attr.ariaDescribedBy]="ariaDescribedBy"
     [inputId]="id"
     [placeholder]="placeholder"
-    [compact]="contentDensity | isCompactDensity"
     [required]="required"
     [placement]="placement"
     [appendTo]="appendTo"
@@ -18,7 +17,7 @@
     [isOpen]="isOpen"
     [startingDayOfWeek]="startingDayOfWeek"
     [activeView]="activeView"
-    [datetimeInputLabel]="datetimeInputLabel || formField?.label || _defaultDatetimeInputLabel"
+    [datetimeInputLabel]="datetimeInputLabel"
     [displayDatetimeToggleLabel]="displayDatetimeToggleLabel"
     [allowNull]="allowNull && !_isRequired"
     [keepTwoDigitsTime]="keepTwoDigitsTime"
@@ -39,8 +38,6 @@
     (activeViewChange)="handleActiveViewChange($event)"
     (isOpenChange)="handleOpenChange($event)"
     (touched)="onTouched()"
-    [okLabel]="okLabel"
-    [cancelLabel]="cancelLabel"
 >
     <ng-content></ng-content>
 </fd-datetime-picker>

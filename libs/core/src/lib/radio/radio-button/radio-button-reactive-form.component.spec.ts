@@ -36,14 +36,12 @@ describe('RadioButtonComponent reactive forms', () => {
     let component: TestRadioButtonComponentReactiveFormsComponent;
     let fixture: ComponentFixture<TestRadioButtonComponentReactiveFormsComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FormsModule, ReactiveFormsModule],
-                declarations: [RadioButtonComponent, TestRadioButtonComponentReactiveFormsComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FormsModule, ReactiveFormsModule],
+            declarations: [RadioButtonComponent, TestRadioButtonComponentReactiveFormsComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestRadioButtonComponentReactiveFormsComponent);

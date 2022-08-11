@@ -1,40 +1,27 @@
-import { Component, ChangeDetectionStrategy, OnInit, ElementRef, Renderer2, Input } from '@angular/core';
-
-import { ContentDensity, isCompactDensity } from '@fundamental-ngx/core/utils';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 import { CSS_CLASS_NAME } from './constants';
+import {
+    ContentDensityMode,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 
 /**
  * Fundamental input group addon body component
- *
  */
 @Component({
     selector: 'fdp-input-group-addon-body',
     template: '<ng-content></ng-content>',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        contentDensityObserverProviders({
+            modifiers: {
+                [ContentDensityMode.COMPACT]: CSS_CLASS_NAME.addonCompact
+            }
+        })
+    ]
 })
 export class InputGroupAddonBodyComponent implements OnInit {
-    /**
-     * content Density of element: 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        if (contentDensity === this._contentDensity) {
-            return;
-        }
-
-        this._contentDensity = contentDensity;
-
-        if (isCompactDensity(contentDensity)) {
-            this._addClassNameToHostElement(CSS_CLASS_NAME.addonCompact);
-        } else {
-            this._removeClassNameFromHostElement(CSS_CLASS_NAME.addonCompact);
-        }
-    }
-
-    get contentDensity(): ContentDensity {
-        return this._contentDensity;
-    }
-
     /**
      * indicates if addon contains a button
      */
@@ -48,10 +35,13 @@ export class InputGroupAddonBodyComponent implements OnInit {
     }
 
     /** @hidden */
-    private _contentDensity: ContentDensity;
-
-    /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
+    constructor(
+        private _elementRef: ElementRef<HTMLElement>,
+        private _renderer: Renderer2,
+        private contentDensityObserver: ContentDensityObserver
+    ) {
+        contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngOnInit(): void {

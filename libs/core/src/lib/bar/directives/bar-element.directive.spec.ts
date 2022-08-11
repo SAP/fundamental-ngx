@@ -4,9 +4,9 @@ import { BarModule } from '../bar.module';
 
 @Component({
     template: `
-        <fd-bar-element #directiveElement fd-bar-element [fullWidth]="fullWidth" [isTitle]="isTitle"
-            >Bar Element Test</fd-bar-element
-        >
+        <fd-bar-element #directiveElement [fullWidth]="fullWidth" [isTitle]="isTitle">
+            Bar Element Test
+        </fd-bar-element>
     `
 })
 class TestComponent {
@@ -20,14 +20,12 @@ describe('BarElementDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent],
-                imports: [BarModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [BarModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

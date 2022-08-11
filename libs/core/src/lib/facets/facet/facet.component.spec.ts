@@ -46,14 +46,12 @@ describe('FormFacetComponent', () => {
     let facetComponent: FacetComponent;
     let component: TestComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, FacetModule, IconModule, LinkModule, TextModule, RouterTestingModule],
-                declarations: [TestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, FacetModule, IconModule, LinkModule, TextModule, RouterTestingModule],
+            declarations: [TestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -98,14 +96,12 @@ describe('Image Facet Component', () => {
     let facetComponent: FacetComponent;
     let component: TestImageFacetComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, AvatarModule, FacetModule, IconModule],
-                declarations: [TestImageFacetComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, AvatarModule, FacetModule, IconModule],
+            declarations: [TestImageFacetComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestImageFacetComponent);
@@ -151,14 +147,12 @@ describe('Rating Indicator Facet Component', () => {
     let facetComponent: FacetComponent;
     let component: TestRatingIndicatorFacetComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, RatingIndicatorModule, FacetModule],
-                declarations: [TestRatingIndicatorFacetComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, RatingIndicatorModule, FacetModule],
+            declarations: [TestRatingIndicatorFacetComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestRatingIndicatorFacetComponent);
@@ -224,14 +218,12 @@ describe('Key Value Facet Component', () => {
     let facetComponent: FacetComponent;
     let component: TestKeyValueFacetComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, ObjectStatusModule, ObjectNumberModule, FacetModule, IconModule],
-                declarations: [TestKeyValueFacetComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, ObjectStatusModule, ObjectNumberModule, FacetModule, IconModule],
+            declarations: [TestKeyValueFacetComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestKeyValueFacetComponent);
@@ -291,23 +283,21 @@ describe('Key Value Facet Alignment Component', () => {
     let facetComponent: FacetComponent;
     let component: TestKeyValueFacetAlignmentComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [
-                    CommonModule,
-                    ObjectStatusModule,
-                    ObjectNumberModule,
-                    AvatarModule,
-                    FacetModule,
-                    IconModule,
-                    LinkModule,
-                    TextModule
-                ],
-                declarations: [TestKeyValueFacetAlignmentComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                CommonModule,
+                ObjectStatusModule,
+                ObjectNumberModule,
+                AvatarModule,
+                FacetModule,
+                IconModule,
+                LinkModule,
+                TextModule
+            ],
+            declarations: [TestKeyValueFacetAlignmentComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestKeyValueFacetAlignmentComponent);

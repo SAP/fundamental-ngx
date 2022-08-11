@@ -38,7 +38,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
 
     /** Role description for the thumbnail image  */
     @Input()
-    roleDescription = 'Image';
+    roleDescription: string;
 
     @Input()
     thumbnailId: string;

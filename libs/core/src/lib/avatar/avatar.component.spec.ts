@@ -40,18 +40,16 @@ describe('AvatarComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent],
-                imports: [AvatarModule]
-            })
-                .overrideComponent(AvatarComponent, {
-                    set: { changeDetection: ChangeDetectionStrategy.Default }
-                })
-                .compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [AvatarModule]
         })
-    );
+            .overrideComponent(AvatarComponent, {
+                set: { changeDetection: ChangeDetectionStrategy.Default }
+            })
+            .compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

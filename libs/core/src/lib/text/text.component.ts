@@ -51,16 +51,18 @@ export class TextComponent {
     expandable = false;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Text for more button
      */
     @Input()
-    moreLabel = 'More';
+    moreLabel: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Text for less button
      */
     @Input()
-    lessLabel = 'Less';
+    lessLabel: string;
 
     /**
      * Option to set text collapsed or expand on render

@@ -8,6 +8,7 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
+    Injector,
     Input,
     NgZone,
     OnChanges,
@@ -28,16 +29,8 @@ import set from 'lodash-es/set';
 import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
-import {
-    ContentDensityEnum,
-    ContentDensity,
-    ContentDensityService,
-    FdDropEvent,
-    resizeObservable,
-    RtlService,
-    RangeSelector
-} from '@fundamental-ngx/core/utils';
-import { TableRowDirective, TableComponent as FdTableComponent } from '@fundamental-ngx/core/table';
+import { FdDropEvent, RangeSelector, resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
+import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
 import { isDataSource, isString } from '@fundamental-ngx/platform/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { cloneDeep, get } from 'lodash-es';
@@ -61,7 +54,6 @@ import {
     DEFAULT_HIGHLIGHTING_KEY,
     DEFAULT_TABLE_STATE,
     EDITABLE_ROW_SEMANTIC_STATE,
-    ROW_HEIGHT,
     SELECTION_COLUMN_WIDTH,
     SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH
 } from './constants';
@@ -92,6 +84,11 @@ import {
     TableSortChangeEvent
 } from './models';
 import { TableColumnResizeService } from './table-column-resize.service';
+import {
+    ContentDensityMode,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -113,7 +110,7 @@ let tableUniqueId = 0;
  * ```html
  * <fdp-table
  *  [dataSource]="source"
- *  contentDensity="compact"
+ *  fdCompact
  *  selectionMode="multiple"
  *  emptyTableMessage="No data found">
  *
@@ -147,12 +144,21 @@ let tableUniqueId = 0;
         { provide: Table, useExisting: TableComponent },
         TableService,
         TableScrollDispatcherService,
-        TableColumnResizeService
+        TableColumnResizeService,
+        contentDensityObserverProviders({
+            supportedContentDensity: [
+                ContentDensityMode.COMPACT,
+                ContentDensityMode.COZY,
+                ContentDensityMode.CONDENSED
+            ],
+            modifiers: {
+                [ContentDensityMode.COMPACT]: 'fd-table--compact',
+                [ContentDensityMode.CONDENSED]: 'fd-table--condensed'
+            }
+        })
     ],
     host: {
         class: 'fdp-table',
-        '[class.fd-table--compact]': 'contentDensity === CONTENT_DENSITY.COMPACT',
-        '[class.fd-table--condensed]': 'contentDensity === CONTENT_DENSITY.CONDENSED',
         '[class.fd-table--no-horizontal-borders]': 'noHorizontalBorders || noBorders',
         '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders',
         '[class.fd-table--tree]': 'isTreeTable',
@@ -200,10 +206,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     freezeColumnsTo: string;
 
-    /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
-    @Input()
-    contentDensity: ContentDensity = ContentDensityEnum.COZY;
-
     /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
     @Input()
     selectionMode: SelectionModeValue = SelectionMode.NONE;
@@ -231,7 +233,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** Text displayed when table has no items. */
     @Input()
-    emptyTableMessage = 'No data found';
+    emptyTableMessage: string;
 
     /** Table without horizontal borders. */
     @Input()
@@ -442,9 +444,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     readonly SELECTION_MODE = SelectionMode;
 
-    /** @hidden */
-    readonly CONTENT_DENSITY = ContentDensityEnum;
-
     /**
      * @hidden
      * Data source items stream.
@@ -624,7 +623,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     get _toolbarContext(): any {
         return {
             counter: this._totalItems,
-            size: this.contentDensity,
             sortable: this._isShownSortSettingsInToolbar,
             filterable: this._isShownFilterSettingsInToolbar,
             groupable: this._isShownGroupSettingsInToolbar,
@@ -653,12 +651,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     private _dragDropInProgress = false;
 
-    /** @hidden Is used to identify whether the `contentDensity` property was set by the user manually. */
-    private contentDensityManuallySet = false;
-
     /** @hidden */
     get _selectionColumnWidth(): number {
-        return this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensity) ?? 0 : 0;
+        return this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensityObserver.value) ?? 0 : 0;
     }
 
     /** @hidden */
@@ -702,10 +697,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         public readonly _tableColumnResizeService: TableColumnResizeService,
         private readonly _elRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService,
-        @Optional() private readonly _contentDensityService: ContentDensityService
+        readonly contentDensityObserver: ContentDensityObserver,
+        readonly injector: Injector
     ) {
         super();
-        this._trackContentDensityChanges();
     }
 
     /** @hidden */
@@ -721,10 +716,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                     : (undefined as any);
         }
 
-        if (changes.contentDensity?.currentValue) {
-            this.contentDensityManuallySet = true;
-        }
-
         // changes below should be checked only after view is initialized
         if (!this._viewInitiated) {
             return;
@@ -734,12 +725,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             this._rangeSelector.reset();
         }
 
-        if (
-            'selectionMode' in changes ||
-            'freezeColumnsTo' in changes ||
-            'semanticHighlighting' in changes ||
-            'contentDensity' in changes
-        ) {
+        if ('selectionMode' in changes || 'freezeColumnsTo' in changes || 'semanticHighlighting' in changes) {
             this.recalculateTableColumnWidth();
         }
 
@@ -1226,16 +1212,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    _getFreezableSelectionCellStyles(): { [key: string]: string | number } {
-        return { 'min-width.px': this._selectionColumnWidth, 'max-width.px': this._selectionColumnWidth };
-    }
-
-    /** @hidden */
-    _getRowHeight(): number {
-        return ROW_HEIGHT.get(this.contentDensity) ?? 0;
-    }
-
-    /** @hidden */
     _onCellClick(colIdx: number, row: TableRow<T>): void {
         if (row.state === 'readonly' && this._isTreeRowFirstCell(colIdx, row)) {
             this._toggleGroupRow(row);
@@ -1284,27 +1260,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this.rowToggleOpenState.emit(
             new TableRowToggleOpenStateEvent(groupRowIndex, groupRow.value, groupRow.expanded)
         );
-    }
-
-    /**
-     * @hidden
-     * Select / Unselect all children rows
-     */
-    _toggleAllChildrenRows(treeRow: TableRow): void {
-        const removed: TableRow<T>[] = [];
-        const added: TableRow<T>[] = [];
-
-        this._findRowChildren(treeRow).forEach((row) => {
-            if (row.checked === treeRow.checked) {
-                return;
-            }
-            row.checked = treeRow.checked;
-            treeRow.checked ? added.push(row) : removed.push(row);
-        });
-
-        this._emitRowSelectionChangeEvent(added, removed);
-
-        this._calculateCheckedAll();
     }
 
     /** @hidden */
@@ -1408,8 +1363,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         const children = this._findRowChildren(dragRow);
         children.forEach((row) => {
-            const updatedRowLevel = this._getRowParents(row).length;
-            row.level = updatedRowLevel;
+            row.level = this._getRowParents(row).length;
         });
     }
 
@@ -1940,9 +1894,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         const sortedTreeLikeGroupedRows = this._sortTreeLikeGroupedRows(treeLikeGroupedRows);
 
         // Convert tree like list to a flat list
-        const flatTableRowsList = this._convertTreeLikeToFlatList(sortedTreeLikeGroupedRows);
-
-        return flatTableRowsList;
+        return this._convertTreeLikeToFlatList(sortedTreeLikeGroupedRows);
     }
 
     /** @hidden */
@@ -2203,20 +2155,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         }
 
         return !!rowNavigatable;
-    }
-
-    /** @hidden */
-    private _trackContentDensityChanges(): void {
-        if (this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._contentDensityListener
-                    .pipe(filter(() => !this.contentDensityManuallySet))
-                    .subscribe((density) => {
-                        this.contentDensity = density as ContentDensityEnum;
-                        this._cdr.markForCheck();
-                    })
-            );
-        }
     }
 
     /**

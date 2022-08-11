@@ -5,28 +5,13 @@
     (wizardFinished)="wizardFinished($event)"
 >
     <ng-template fdp-wizard-generator-go-next-button let-goNext="goNext">
-        <fdp-button
-            contentDensity="condensed"
-            buttonType="emphasized"
-            label="Custom next button"
-            (click)="goNext()"
-        ></fdp-button>
+        <fdp-button fdCondensed buttonType="emphasized" label="Custom next button" (click)="goNext()"></fdp-button>
     </ng-template>
     <ng-template fdp-wizard-generator-review-button let-goNext="goNext">
-        <fdp-button
-            contentDensity="condensed"
-            buttonType="emphasized"
-            label="Custom review button"
-            (click)="goNext()"
-        ></fdp-button>
+        <fdp-button fdCondensed buttonType="emphasized" label="Custom review button" (click)="goNext()"></fdp-button>
     </ng-template>
     <ng-template fdp-wizard-generator-finish-button let-finish="finish">
-        <fdp-button
-            contentDensity="condensed"
-            buttonType="emphasized"
-            label="Custom finish button"
-            (click)="finish()"
-        ></fdp-button>
+        <fdp-button fdCondensed buttonType="emphasized" label="Custom finish button" (click)="finish()"></fdp-button>
     </ng-template>
     <ng-template fdp-wizard-generator-summary-step let-steps="steps" let-editStep="editStep">
         <ng-container *ngFor="let step of steps; trackBy: trackFn">
