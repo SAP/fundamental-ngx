@@ -121,6 +121,11 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'object-page',
+                loadChildren: () =>
+                    import('./component-docs/object-page/object-page-docs.module').then((m) => m.ObjectPageDocsModule)
+            },
+            {
                 path: 'facets',
                 loadChildren: () => import('./component-docs/facets/facet-docs.module').then((m) => m.FacetDocsModule)
             },
