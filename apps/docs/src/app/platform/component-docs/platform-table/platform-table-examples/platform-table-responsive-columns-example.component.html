@@ -45,16 +45,16 @@
 
     <fdp-column
         [groupable]="true"
-        [fdpTableColumnResponsive]="{ '0': 'popping', '600': 'visible' }"
+        [fdpTableColumnResponsive]="{ '0': 'hidden', '600': 'visible' }"
         name="status"
         key="status"
         label="Status (hidden < 600px)"
         align="center"
     >
-        <fdp-table-cell *fdpCellDef="let item; popping as isPopping">
-            <span fd-object-status [status]="item.statusColor"
-                >{{ item.status }} {{ isPopping ? '(pop-in)' : '' }}</span
-            >
+        <fdp-table-cell *fdpCellDef="let item">
+            <span fd-object-status [status]="item.statusColor">
+                {{ item.status }}
+            </span>
         </fdp-table-cell>
     </fdp-column>
 </fdp-table>
