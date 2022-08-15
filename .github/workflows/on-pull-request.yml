@@ -6,28 +6,16 @@ on:
 env:
     NX_CLOUD_DISTRIBUTED_EXECUTION: true
     NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+    cancel-in-progress: true
 jobs:
-    pr_build:
+    cloud_main:
         name: PR Build Checks
-        runs-on: ubuntu-latest
-        steps:
-            - uses: styfle/cancel-workflow-action@0.9.0
-              name: Cancel Previous Runs
-              with:
-                  access_token: ${{ secrets.GITHUB_TOKEN }}
-            - uses: actions/checkout@v3
-              with:
-                  fetch-depth: 0
-            - uses: ./.github/actions/nodejs
-              name: Yarn setup
-            - uses: wagoid/commitlint-github-action@v3
-              name: Commit Lint
-            - uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.6
-              with:
-                  number-of-agents: 3
-                  parallel-commands-on-agents: |
-                      npx nx affected --target=build --base=${{ github.event.pull_request.base.ref }} --head=HEAD --parallel=3
-              name: Build Core
+        uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.6
+        with:
+            parallel-commands-on-agents: |
+                npx nx affected --target=build --base=${{ github.event.pull_request.base.ref }} --head=HEAD --parallel=3
 
     agents:
         name: Nx Cloud - Agents
