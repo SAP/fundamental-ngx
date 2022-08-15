@@ -1,6 +1,11 @@
-<label fd-form-label>Languages</label>
+<label fd-form-label id="lang-select">Languages</label>
 <div class="example">
-    <fd-select (valueChange)="setLocale($event)" placeholder="Select an option" [(value)]="locale">
+    <fd-select
+        (valueChange)="setLocale($event)"
+        placeholder="Select an option"
+        [(value)]="locale"
+        ariaLabelledBy="lang-select"
+    >
         <li fd-option *ngFor="let option of ['en-ca', 'fr', 'de', 'bg', 'ar-eg', 'zh']" [value]="option">
             {{ option }}
         </li>

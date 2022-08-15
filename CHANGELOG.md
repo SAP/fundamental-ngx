@@ -1,4 +1,13 @@
 
+## [0.36.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.18...v0.36.0-rc.19) (2022-08-15)
+
+
+### Bug Fixes
+
+* **core:** datetime picker - a11y issues ([#8102](https://github.com/SAP/fundamental-ngx/issues/8102)) ([e593f92](https://github.com/SAP/fundamental-ngx/commit/e593f92b3ee98ef29f1aa6f137fe66c972cfcfae))
+
+## [0.36.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.17...v0.36.0-rc.18) (2022-08-15)
+
 ## [0.36.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.16...v0.36.0-rc.17) (2022-08-15)
 
 

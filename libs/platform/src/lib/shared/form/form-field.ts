@@ -60,6 +60,8 @@ export abstract class FormField {
      * Set when form field is a mandatory one.
      */
     required: boolean;
+    /** Form field label */
+    label?: string;
     /**
      * Register underlying form control
      */
