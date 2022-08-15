@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.16...v0.36.0-rc.17) (2022-08-15)
+
+
+### Features
+
+* **core,platform:** bring French texts for i18n ([#8510](https://github.com/SAP/fundamental-ngx/issues/8510)) ([a595580](https://github.com/SAP/fundamental-ngx/commit/a5955805f6adcfb22248929aabafe300990ae180))
+
 ## [0.36.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.15...v0.36.0-rc.16) (2022-08-15)
 
 
