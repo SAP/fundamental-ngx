@@ -10,9 +10,14 @@ import { ColumnsChange, FilterChange, FreezeChange, GroupChange, PageChange, Sea
 
 @Injectable()
 export class TableService {
+    /** @hidden */
     private _tableStateSubject$: BehaviorSubject<TableState> = new BehaviorSubject(DEFAULT_TABLE_STATE);
+    /** @hidden */
     private _tableLoadingSubject$ = new BehaviorSubject<boolean>(false);
+    /** @hidden */
     private _markForCheck$: Subject<void> = new Subject<void>();
+    /** @hidden */
+    private _detectChanges$: Subject<void> = new Subject<void>();
 
     readonly tableState$ = this._tableStateSubject$.asObservable();
     readonly tableLoading$ = this._tableLoadingSubject$.asObservable();
@@ -26,9 +31,14 @@ export class TableService {
     readonly columnsChange: EventEmitter<ColumnsChange> = new EventEmitter<ColumnsChange>();
     readonly pageChange: EventEmitter<PageChange> = new EventEmitter<PageChange>();
 
-    /** Listen for changes in table subcomponents (mostly table column) */
+    /** Listen for soft changes in table subcomponents (mostly table column) */
     get markForCheck$(): Subject<void> {
         return this._markForCheck$;
+    }
+
+    /** Listen for immediate changes in table subcomponents (mostly table column) */
+    get detectChanges$(): Subject<void> {
+        return this._detectChanges$;
     }
 
     /** Get current state/settings of the Table. */
@@ -46,9 +56,14 @@ export class TableService {
         this._tableLoadingSubject$.next(isLoading);
     }
 
-    /** Notify about changes in table subcomponents (mostly table column) */
+    /** Notify about changes in table subcomponents (mostly table column) and detect them on next detector check. */
     markForCheck(): void {
         this._markForCheck$.next();
+    }
+
+    /** Notify about changes in table subcomponents (mostly table column) and detect them immediately. */
+    detectChanges(): void {
+        this._detectChanges$.next();
     }
 
     /** Search */

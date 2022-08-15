@@ -65,6 +65,9 @@ import platformTableWrappedTextTsSrc from '!./platform-table-examples/platform-t
 import platformTableEditableRowsSrc from '!./platform-table-examples/editable-rows/platform-table-editable-rows-example.component.html?raw';
 import platformTableEditableRowsTsSrc from '!./platform-table-examples/editable-rows/platform-table-editable-rows-example.component.ts?raw';
 
+import platformResponsiveColumnsSrc from '!./platform-table-examples/platform-table-responsive-columns-example.component.html?raw';
+import platformResponsiveColumnsTsSrc from '!./platform-table-examples/platform-table-responsive-columns-example.component.ts?raw';
+
 import illustrationDialogNoMail from '!../../../../assets/images/sapIllus-Dialog-NoMail.svg?raw';
 
 import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
@@ -569,6 +572,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-editable-rows-example',
             component: 'PlatformTableEditableRowsExampleComponent',
             name: 'platform-table-editable-rows-example.component.ts'
+        }
+    ];
+
+    responsiveColumnsFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformResponsiveColumnsSrc,
+            fileName: 'platform-table-responsive-columns-example',
+            name: 'platform-table-responsive-columns-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformResponsiveColumnsTsSrc,
+            fileName: 'platform-table-responsive-columns-example',
+            component: 'PlatformTableResponsiveColumnsExampleComponent',
+            name: 'platform-table-responsive-columns-example.component.ts'
         }
     ];
 
