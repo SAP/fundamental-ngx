@@ -3,84 +3,45 @@ name: PR Checks
 on:
     pull_request:
 
+env:
+    NX_CLOUD_DISTRIBUTED_EXECUTION: true
+    NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
 jobs:
-    one_run:
-        name: Cancel Previous Runs
+    pr_build:
+        name: PR Build Checks
         runs-on: ubuntu-latest
         steps:
             - uses: styfle/cancel-workflow-action@0.9.0
+              name: Cancel Previous Runs
               with:
                   access_token: ${{ secrets.GITHUB_TOKEN }}
-    install:
-        name: Yarn and Deps setup
-        runs-on: ubuntu-latest
-        needs: one_run
-        steps:
-            - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
-
-    commit_lint:
-        name: Commit Lint
-        runs-on: ubuntu-latest
-        needs: install
-        steps:
             - uses: actions/checkout@v3
               with:
                   fetch-depth: 0
+            - uses: ./.github/actions/nodejs
+              name: Yarn setup
             - uses: wagoid/commitlint-github-action@v3
-    build_core:
-        name: Build Core
-        runs-on: ubuntu-latest
-        needs: install
-        steps:
-            - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
-            - run: npx nx run core:build
+              name: Commit Lint
+            - uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.6
+              with:
+                  number-of-agents: 3
+                  parallel-commands-on-agents: |
+                      npx nx affected --target=build --base=${{ github.event.pull_request.base.ref }} --head=HEAD --parallel=3
+              name: Build Core
 
-    build-platform:
-        name: Build Platform
-        needs: build_core
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
-            - run: npx nx run platform:build
-
-    build_moment_adapter:
-        name: Build Moment Adapter
-        needs: build_core
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
-            - run: npx nx run moment-adapter:build
-
-    build_datetime_adapter:
-        name: Build Datetime Adapter
-        needs: build_core
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
-            - run: npx nx run datetime-adapter:build
-
-    build_fn:
-        name: Build Fn
-        needs: build_core
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
-            - run: npx nx run fn:build
-
-    build_docs:
-        name: Build Docs
-        needs: install
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
-            - run: |
-                  npx nx run docs:compile-typedocs
-                  npx nx run docs:copy-docs
-                  npx nx build docs --base-href="fundamental-ngx"
+    agents:
+        name: Nx Cloud - Agents
+        uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.6
+        with:
+            number-of-agents: 3
+#    build_docs:
+#        name: Build Docs
+#        needs: install
+#        runs-on: ubuntu-latest
+#        steps:
+#            - uses: actions/checkout@v3
+#            - uses: ./.github/actions/nodejs
+#            - run: |
+#                  npx nx run docs:compile-typedocs
+#                  npx nx run docs:copy-docs
+#                  npx nx build docs --base-href="fundamental-ngx"

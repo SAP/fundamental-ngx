@@ -15,7 +15,7 @@
             "options": {
                 "cacheableOperations": ["compile-typedocs", "build", "lint", "test", "e2e"],
                 "parallel": 1,
-                "accessToken": "NTViYmFjZDctZjEyNy00NjQ0LWI4MzctZWViOTZmNDk2ZjAzfHJlYWQtd3JpdGU="
+                "accessToken": "YzBkOTQyNjUtN2YyNS00YWI3LThiMzQtYjFhMmU4YzJhY2FkfHJlYWQ="
             }
         }
     },
