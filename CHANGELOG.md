@@ -1,4 +1,15 @@
 
+## [0.36.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.15...v0.36.0-rc.16) (2022-08-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* **platform:** * fdp-dynamic-page-title-host component removed as not used
+
+### Bug Fixes
+
+* **platform:** dynamic page facets and title content, refactoring ([#8527](https://github.com/SAP/fundamental-ngx/issues/8527)) ([2e93e29](https://github.com/SAP/fundamental-ngx/commit/2e93e295f57c3643931a9f8ad5c32d29e06157cb))
+
 ## [0.36.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.14...v0.36.0-rc.15) (2022-08-15)
 
 
