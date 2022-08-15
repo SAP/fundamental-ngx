@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.14...v0.36.0-rc.15) (2022-08-15)
+
+
+### Features
+
+* **platform:** responsive table columns ([#8532](https://github.com/SAP/fundamental-ngx/issues/8532)) ([d9ecfe4](https://github.com/SAP/fundamental-ngx/commit/d9ecfe4845f5724f9099afbd7ae0c8b1ba472be9))
+
 ## [0.36.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.13...v0.36.0-rc.14) (2022-08-11)
 
 
