@@ -1,6 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
 import { TableModule } from '@fundamental-ngx/core/table';
@@ -48,6 +50,7 @@ import { PlatformTableWrapExampleComponent } from './platform-table-examples/pla
 import { PlatformTableEditableRowsExampleComponent } from './platform-table-examples/editable-rows/platform-table-editable-rows-example.component';
 import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
 import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+import { PlatformTableResponsiveColumnsExampleComponent } from './platform-table-examples/platform-table-responsive-columns-example.component';
 
 const routes: Routes = [
     {
@@ -65,6 +68,7 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
+        FormsModule,
         CdkTableModule,
         TableModule,
         PlatformTableModule,
@@ -76,7 +80,8 @@ const routes: Routes = [
         PlatformSearchFieldModule,
         IllustratedMessageModule,
         FdpFormGroupModule,
-        SelectModule
+        SelectModule,
+        SegmentedButtonModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -106,7 +111,8 @@ const routes: Routes = [
         PlatformTableRowClassExampleComponent,
         PlatformTableNoOuterBordersExampleComponent,
         PlatformTableWrapExampleComponent,
-        PlatformTableEditableRowsExampleComponent
+        PlatformTableEditableRowsExampleComponent,
+        PlatformTableResponsiveColumnsExampleComponent
     ],
     providers: [RtlService, platformContentDensityModuleDeprecationsProvider('fdp-table')],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

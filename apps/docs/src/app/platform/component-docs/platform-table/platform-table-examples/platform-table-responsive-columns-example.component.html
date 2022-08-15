@@ -1,0 +1,63 @@
+<p>Try changing table window with buttons bellow to see how columns are being hidden or moved into a pop-in mode.</p>
+<p>Current table width: {{ currentTableWidth }} pixels.</p>
+
+<fd-segmented-button [ngModel]="tableWidth" (ngModelChange)="setTableWidth($event)">
+    <button fd-button label="450 pixels" value="450px"></button>
+    <button fd-button label="800 pixels" value="800px"></button>
+    <button fd-button label="Full width" value="100%"></button>
+</fd-segmented-button>
+
+<fdp-table
+    #table
+    [style.width]="tableWidth"
+    [dataSource]="source"
+    [trackBy]="trackBy"
+    selectionMode="multiple"
+    [rowsActivable]="true"
+    emptyTableMessage="No data found"
+    [noBorderX]="true"
+    [noBorderY]="true"
+>
+    <fdp-table-toolbar title="Order Items" [hideItemCount]="false"> </fdp-table-toolbar>
+
+    <fdp-column
+        [fdpTableColumnResponsive]="{ '0': 'visible' }"
+        name="name"
+        key="name"
+        label="Name (always visible)"
+        align="start"
+    >
+    </fdp-column>
+
+    <fdp-column
+        [fdpTableColumnResponsive]="{ '0': 'popping', '900': 'visible' }"
+        name="description"
+        key="description"
+        label="Description (popping < 900px)"
+    >
+        <fdp-table-cell *fdpCellDef="let item; popping as isPopping">
+            {{ item.description }} {{ item.description }}
+            <p *ngIf="isPopping">I'm in pop-in state</p>
+        </fdp-table-cell>
+    </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price (always visible)" align="end"> </fdp-column>
+
+    <fdp-column
+        [groupable]="true"
+        [fdpTableColumnResponsive]="{ '0': 'hidden', '600': 'visible' }"
+        name="status"
+        key="status"
+        label="Status (hidden < 600px)"
+        align="center"
+    >
+        <fdp-table-cell *fdpCellDef="let item">
+            <span fd-object-status [status]="item.statusColor">
+                {{ item.status }}
+            </span>
+        </fdp-table-cell>
+    </fdp-column>
+</fdp-table>
+
+<!-- View Settings Dialog-->
+<fdp-table-view-settings-dialog [table]="table"></fdp-table-view-settings-dialog>

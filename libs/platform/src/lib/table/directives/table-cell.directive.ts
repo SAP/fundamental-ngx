@@ -2,6 +2,11 @@ import { Directive, TemplateRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EditableTableCell } from '../table-cell.class';
 
+export interface FdpCellDefContext {
+    $implicit: any;
+    popping: boolean;
+}
+
 /** Column cell container. */
 // eslint-disable-next-line @angular-eslint/directive-selector
 @Directive({ selector: 'fdp-table-cell' })
@@ -15,7 +20,12 @@ export class FdpTableCell {}
 @Directive({ selector: '[fdpCellDef]' })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FdpCellDef {
-    constructor(public templateRef: TemplateRef<any>) {}
+    constructor(public templateRef: TemplateRef<FdpCellDefContext>) {}
+
+    /** @hidden */
+    static ngTemplateContextGuard(dir: FdpCellDef, ctx: FdpCellDefContext): ctx is FdpCellDefContext {
+        return true;
+    }
 }
 
 @Directive({ selector: '[fdpEditableCellDef]' })

@@ -4,6 +4,7 @@ export * from './table.service';
 export * from './table';
 export * from './table-column-resize.service';
 export * from './table-scroll-dispatcher.service';
+export * from './table-responsive.service';
 export * from './utils';
 
 export * from './components/no-data-wrapper/no-data-wrapper.component';
@@ -46,6 +47,7 @@ export * from './directives/table-cell-selectable.directive';
 export * from './directives/table-header.directive';
 export * from './directives/table-scrollable.directive';
 export * from './directives/table-view-settings-filter-custom.directive';
+export * from './directives/platform-table-column-responsive.directive';
 
 export * from './domain/array-data-source';
 export * from './domain/observable-data-source';
@@ -73,5 +75,6 @@ export * from './interfaces/search-field.interface';
 export * from './interfaces/selection-value.interface';
 export * from './interfaces/table-state.interface';
 export * from './interfaces/save-rows-event.interface';
+export * from './interfaces/column-responsive-state.interface';
 
 export * from './models';
