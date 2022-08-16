@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.19...v0.36.0-rc.20) (2022-08-16)
+
+
+### Features
+
+* **core:** fd-truncate improvements ([#8289](https://github.com/SAP/fundamental-ngx/issues/8289)) ([bd98d4d](https://github.com/SAP/fundamental-ngx/commit/bd98d4d6ed53e94ec21534f14fb986038c30a023))
+
 ## [0.36.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.18...v0.36.0-rc.19) (2022-08-15)
 
 
