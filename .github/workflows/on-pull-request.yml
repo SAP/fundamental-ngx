@@ -15,7 +15,7 @@ jobs:
         uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.6
         with:
             parallel-commands-on-agents: |
-                npx nx affected --target=build --base=${{ github.event.pull_request.base.head_ref }} --head=HEAD --parallel=3
+                npx nx affected --target=build --base=${{ github.base_ref }} --head=HEAD --parallel=3
 
     agents:
         name: Nx Cloud - Agents
