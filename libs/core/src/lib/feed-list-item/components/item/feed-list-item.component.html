@@ -48,13 +48,8 @@
 
 <ng-template #feedContent let-param>
     <ng-container *ngTemplateOutlet="param"></ng-container>
-    <span
-        fd-truncate
-        [fdTruncateState]="isCollapsed"
-        [fdTruncateChars]="maxChars"
-        [fdTruncateTargetText]="text"
-        (charCountUpdate)="checkCharCount($event)"
-    >
+    <span>
+        {{ isCollapsed ? (text | truncate: maxChars) : text }}
     </span>
     <a
         fd-link

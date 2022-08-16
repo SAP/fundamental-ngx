@@ -118,7 +118,8 @@ export const utilities: SectionInterfaceContent[] = [
     { url: 'core/scroll-spy', name: 'Scroll Spy' },
     { url: 'core/theme-switcher', name: 'Theme Switcher API' },
     { url: 'core/theming', name: 'Theming' },
-    { url: 'core/content-density', name: 'Content Density' }
+    { url: 'core/content-density', name: 'Content Density' },
+    { url: 'core/truncate', name: 'Truncate' }
 ];
 
 export const adapters: SectionInterfaceContent[] = [

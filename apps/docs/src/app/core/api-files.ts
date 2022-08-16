@@ -340,6 +340,7 @@ export const API_FILES = {
     time: ['TimeComponent', 'TimeI18n', 'TimeColumnComponent'],
     timePicker: ['TimePickerComponent', 'FdDate', 'FdDatetimeAdapter'],
     title: ['TitleComponent'],
+    truncate: ['TruncateDirective'],
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
     slider: ['SliderComponent'],
