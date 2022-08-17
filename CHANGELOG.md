@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.20...v0.36.0-rc.21) (2022-08-17)
+
+
+### Features
+
+* **core,platform:** bring czech language for i18n ([#8560](https://github.com/SAP/fundamental-ngx/issues/8560)) ([4bde06f](https://github.com/SAP/fundamental-ngx/commit/4bde06fa289c9d1b02812ade35e202c6da519aad))
+
 ## [0.36.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.19...v0.36.0-rc.20) (2022-08-16)
 
 
