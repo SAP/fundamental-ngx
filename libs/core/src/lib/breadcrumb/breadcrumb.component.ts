@@ -1,4 +1,5 @@
 import {
+    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -49,7 +50,7 @@ import { TAB } from '@angular/cdk/keycodes';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DestroyedService]
 })
-export class BreadcrumbComponent implements OnInit, AfterViewInit {
+export class BreadcrumbComponent implements OnInit, AfterViewInit, AfterContentInit {
     /**
      * @deprecated
      * Breadcrumbs component now uses more advanced calculation mechanism without the need of specifying the container element.
@@ -137,8 +138,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.onResize();
-
         if (this.arrowNavigation) {
             this._keyManager = new FocusKeyManager<BreadcrumbItemComponent>(this.breadcrumbItems)
                 .withWrap(false)
