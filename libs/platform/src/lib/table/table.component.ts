@@ -289,15 +289,15 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** Initial sort options. */
     @Input()
-    initialSortBy: CollectionSort[];
+    initialSortBy: CollectionSort[] = [];
 
     /** Initial filter options. */
     @Input()
-    initialFilterBy: CollectionFilter[];
+    initialFilterBy: CollectionFilter[] = [];
 
     /** Initial group options. */
     @Input()
-    initialGroupBy: CollectionGroup[];
+    initialGroupBy: CollectionGroup[] = [];
 
     /** Whether tree mode is enabled. */
     @Input()

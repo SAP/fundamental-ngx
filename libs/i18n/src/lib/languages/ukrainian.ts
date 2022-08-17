@@ -583,7 +583,7 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         sortDialogSortOrderHeader: 'Порядок сортування',
         sortDialogSortOrderAsc: 'За зростанням',
         sortDialogSortOrderDesc: 'за спаданням',
-        sortDialogSortByHeader: 'Порядок сортування',
+        sortDialogSortByHeader: 'Сортувати за',
         sortDialogNotSortedLabel: '(Не відсортовано)',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogCancelBtnLabel: 'Скасувати'

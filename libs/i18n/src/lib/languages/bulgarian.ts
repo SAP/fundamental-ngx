@@ -500,7 +500,7 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         sortDialogSortOrderHeader: 'Сортирано',
         sortDialogSortOrderAsc: 'Възходяща',
         sortDialogSortOrderDesc: 'Низходяща',
-        sortDialogSortByHeader: 'Сортирано по',
+        sortDialogSortByHeader: 'Сортирай по',
         sortDialogNotSortedLabel: '(Несортирано)',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogCancelBtnLabel: 'Отмени'

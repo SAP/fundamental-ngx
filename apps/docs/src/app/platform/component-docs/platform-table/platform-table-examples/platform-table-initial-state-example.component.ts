@@ -12,7 +12,11 @@ import {
     CollectionStringFilter,
     SortDirection,
     TableDataProvider,
-    TableState
+    TableState,
+    TableFilterSelectOption,
+    FilterType,
+    CollectionCustomFilter,
+    FilterNumberStrategy
 } from '@fundamental-ngx/platform/table';
 
 @Component({
@@ -26,9 +30,25 @@ import {
     ]
 })
 export class PlatformTableInitialStateExampleComponent {
+    readonly filterTypeEnum = FilterType;
+    statusFilteringValues: TableFilterSelectOption[] = [
+        { value: 'Out of stock', label: 'Out of stock' },
+        { value: 'Stocked on demand', label: 'Stocked on demand' }
+    ];
+
+    statusColorFilteringValues: TableFilterSelectOption[] = [
+        { value: 'positive', label: 'Positive' },
+        { value: 'negative', label: 'Negative' },
+        { value: 'critical', label: 'Critical' }
+    ];
+
     source: TableDataSource<ExampleItem>;
 
     readonly sortDirectionEnum = SortDirection;
+
+    readonly initialFilterBy: CollectionCustomFilter<FilterNumberStrategy>[] = [
+        { field: 'price.value', strategy: 'greaterThanOrEqualTo', value: { min: 100 } }
+    ];
 
     constructor(datetimeAdapter: DatetimeAdapter<FdDate>) {
         this.source = new TableDataSource(new TableDataProviderExample(datetimeAdapter));
