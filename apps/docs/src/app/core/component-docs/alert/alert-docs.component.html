@@ -48,10 +48,20 @@
 <separator></separator>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+    <p style="margin-bottom: 5px">Static Alert:</p>
+    <fd-alert
+        style="transition: 0.25s all ease-in-out"
+        [type]="data.modifier.type"
+        [dismissible]="data.properties.dismissible"
+        [width]="data.properties.width"
+        [message]="data.properties.message"
+    >
+    </fd-alert>
+    <p style="margin-top: 20px; margin-bottom: 5px">Auto Dismiss Alert:</p>
     <fd-alert
         #alert
         *ngIf="shouldShow"
-        style="margin: 12px; transition: 0.25s all ease-in-out"
+        style="transition: 0.25s all ease-in-out"
         [duration]="data.properties.duration"
         [type]="data.modifier.type"
         [dismissible]="data.properties.dismissible"
@@ -61,5 +71,5 @@
         (onDismiss)="onAlertDismiss()"
     >
     </fd-alert>
-    <button style="margin-top: 12px" fd-button label="Open Dynamic Alert" (click)="openDynamicAlert()"></button>
+    <button style="margin-top: 12px" fd-button label="Open Auto Dismiss Alert" (click)="openDynamicAlert()"></button>
 </playground>
