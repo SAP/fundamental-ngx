@@ -8,7 +8,6 @@ import {
     ContentChild,
     ContentChildren,
     EventEmitter,
-    HostListener,
     Input,
     OnDestroy,
     Optional,
@@ -135,14 +134,6 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    keyDownHandler(event: KeyboardEvent): void {
-        if (this.keyboardSupport) {
-            this._keyboardSupportService.onKeyDown(event);
-        }
     }
 
     /** Method that opens action sheet */
