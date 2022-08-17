@@ -1,0 +1,20 @@
+<label fd-form-label>Default tab specified</label>
+<fd-tab-list defaultTab="three">
+    <fd-tab id="one" title="Link 1"> Content for tab 1 </fd-tab>
+    <fd-tab id="two" title="Link 2"> Content for tab 2 </fd-tab>
+    <fd-tab id="three" title="Link 3"> Content for tab 3 </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<button fd-button (click)="hide = !hide">Toggle first tab</button>
+
+<label fd-form-label
+    >Select default tab on tabs change instead of trying to keep previously selected tab selected</label
+>
+<fd-tab-list [selectDefaultOnTabsChange]="true">
+    <fd-tab *ngIf="!hide" id="one" title="Link 1"> Content for tab 1 </fd-tab>
+    <fd-tab id="two" title="Link 2"> Content for tab 2 </fd-tab>
+    <fd-tab id="three" title="Link 3"> Content for tab 3 </fd-tab>
+</fd-tab-list>
