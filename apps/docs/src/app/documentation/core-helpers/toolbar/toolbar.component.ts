@@ -20,6 +20,7 @@ import {
     FD_LANGUAGE_GEORGIAN,
     FD_LANGUAGE_ITALIAN,
     FD_LANGUAGE_RUSSIAN,
+    FD_LANGUAGE_SPANISH,
     FD_LANGUAGE_TURKISH,
     FD_LANGUAGE_UKRAINIAN
 } from '@fundamental-ngx/i18n';
@@ -84,7 +85,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         // { name: 'Română', value: FD_LANGUAGE_ROMANIAN }, TODO: uncomment when translations are provided
         { name: 'Русский', value: FD_LANGUAGE_RUSSIAN },
         // { name: 'සිංහල', value: FD_LANGUAGE_SINHALA }, TODO: uncomment when translations are provided
-        // { name: 'Española', value: FD_LANGUAGE_SPANISH }, TODO: uncomment when translations are provided
+        { name: 'Española', value: FD_LANGUAGE_SPANISH },
         { name: 'Türkçe', value: FD_LANGUAGE_TURKISH },
         { name: 'Українська', value: FD_LANGUAGE_UKRAINIAN }
     ];
