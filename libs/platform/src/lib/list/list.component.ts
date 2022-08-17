@@ -781,7 +781,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             item.selectionMode = this.selectionMode;
             item.rowSelection = this.rowSelection;
             item._hasByLine = this.hasByLine;
-            item.ariaPosinet = ++i;
+            item.ariaPosinet = ++index;
 
             this._clickSubscription.add(
                 item.itemSelected.subscribe(() => {
