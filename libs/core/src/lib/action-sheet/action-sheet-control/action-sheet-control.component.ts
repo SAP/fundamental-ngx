@@ -4,9 +4,9 @@ import {
     EventEmitter,
     ViewEncapsulation,
     HostListener,
-    Output,
-    ElementRef
+    Output
 } from '@angular/core';
+import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
 
 /**
  * A component used to enforce a certain layout for the action sheet.
@@ -32,21 +32,18 @@ export class ActionSheetControlComponent {
     @Output()
     clicked: EventEmitter<void> = new EventEmitter<void>();
 
+    /** saves element that is focused before dialog opened */
+    private _focusedElementBeforeDialogOpened: HTMLElement | null = null;
+
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(): void {
+        this._focusedElementBeforeDialogOpened = _getFocusedElementPierceShadowDom();
         this.clicked.emit();
     }
 
     /** @hidden */
     _focus(): void {
-        const elemChild = this._elementRef.nativeElement.firstChild;
-        if (elemChild && elemChild.getAttribute('tabindex') !== '-1') {
-            elemChild.tabIndex = '0';
-        }
-        elemChild && elemChild.focus();
+        this._focusedElementBeforeDialogOpened?.focus();
     }
-
-    /** @hidden */
-    constructor(private readonly _elementRef: ElementRef) {}
 }
