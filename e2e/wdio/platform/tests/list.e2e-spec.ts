@@ -42,7 +42,6 @@ describe('List test suite:', () => {
     const {
         noBorderListItems,
         noBorderCompactList,
-        noBorderList,
         footerListItems,
         footerCompactList,
         footer,
@@ -102,10 +101,6 @@ describe('List test suite:', () => {
 
         it('should check border border-style property', () => {
             getCSSPropertyByName(noBorderListItems, borderStyleAttr);
-        });
-
-        it('should check the list has no border', () => {
-            expect(getElementClass(noBorderList)).toContain('no-border');
         });
     });
 
