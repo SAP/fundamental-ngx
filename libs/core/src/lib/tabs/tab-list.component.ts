@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
 import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
-import { debounceTime, delay, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { DestroyedService, KeyUtil, scrollTop } from '@fundamental-ngx/core/utils';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
@@ -239,20 +239,22 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     /** @hidden */
     private _setupTabPanelsChangeListeners(): void {
         this._listenOnTabPanelsAndUpdateStorageStructures();
-        this._listenOnTabPanelsAndSetupStackedContent();
+        this._initStackContentSubscription();
         this._listenOnTabPanelsExpandedChange();
         this._listenOnTabPanelsAndInitiallyExpandTabPanel();
     }
 
     /** @hidden Setup mechanisms required for handling the stacked content behavior */
-    private _listenOnTabPanelsAndSetupStackedContent(): void {
-        if (this.stackContent) {
-            this._tabPanelsChange$
-                .pipe(delay(0), takeUntil(this._onDestroy$))
-                .subscribe(() =>
-                    this._tabArray.filter((tab) => !tab.panel.disabled).forEach((tab) => tab.panel._expand(true))
-                );
-        }
+    private _initStackContentSubscription(): void {
+        this._tabPanelsChange$
+            .pipe(
+                filter(() => this.stackContent),
+                delay(0),
+                takeUntil(this._onDestroy$)
+            )
+            .subscribe(() =>
+                this._tabArray.filter((tab) => !tab.panel.disabled).forEach((tab) => tab.panel._expand(true))
+            );
     }
 
     /** @hidden */
