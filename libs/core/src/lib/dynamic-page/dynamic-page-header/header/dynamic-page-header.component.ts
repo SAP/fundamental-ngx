@@ -1,5 +1,4 @@
 import {
-    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -45,9 +44,7 @@ export const ActionSquashBreakpointPx = 1280;
         }
     ]
 })
-export class DynamicPageHeaderComponent
-    implements OnInit, AfterViewInit, AfterContentInit, OnDestroy, DynamicPageHeader
-{
+export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy, DynamicPageHeader {
     /** @hidden */
     _collapsed = false;
 
@@ -105,13 +102,6 @@ export class DynamicPageHeaderComponent
         this._dynamicPageService.collapsed.pipe(takeUntil(this._onDestroy$)).subscribe((collapsed) => {
             this._collapsed = collapsed;
             this._changeDetRef.markForCheck();
-        });
-    }
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        this._breadcrumbComponent?.tabOut.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
-            this._layoutActions?.toolbarComponent.toolbar.nativeElement.children[0].focus();
         });
     }
 
