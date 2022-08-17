@@ -6,6 +6,7 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
+    forwardRef,
     Input,
     isDevMode,
     OnInit,
@@ -16,11 +17,11 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
-import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { DestroyedService, RtlService } from '@fundamental-ngx/core/utils';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
+import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -36,7 +37,8 @@ import { Placement } from '@fundamental-ngx/core/shared';
 @Component({
     selector: 'fd-breadcrumb',
     host: {
-        class: 'fd-breadcrumb'
+        class: 'fd-breadcrumb',
+        role: 'tree'
     },
     templateUrl: './breadcrumb.component.html',
     styleUrls: ['./breadcrumb.component.scss'],
@@ -65,6 +67,10 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
     @Input()
     reverse = false;
 
+    /** Tabindex of the breadcrumb. */
+    @Input()
+    tabIndex = '0';
+
     /**
      * Event emitted when visible items count is changed.
      */
@@ -82,6 +88,9 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
     private readonly _contentItems: QueryList<BreadcrumbItemComponent>;
 
     /** @hidden */
+    @ContentChildren(forwardRef(() => BreadcrumbItemComponent))
+    breadcrumbItems: QueryList<BreadcrumbItemComponent>;
+
     @ViewChild(MenuComponent)
     private readonly _menuComponent: MenuComponent;
 

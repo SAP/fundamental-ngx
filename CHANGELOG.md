@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.21...v0.36.0-rc.22) (2022-08-17)
+
+
+### Bug Fixes
+
+* **core:** dynamic page a11y ([#7345](https://github.com/SAP/fundamental-ngx/issues/7345)) ([c79d966](https://github.com/SAP/fundamental-ngx/commit/c79d9669b87e945befa30bfb5415217cd5f2b283))
+
 ## [0.36.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.20...v0.36.0-rc.21) (2022-08-17)
 
 

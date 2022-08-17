@@ -16,6 +16,9 @@ export class DynamicPageService {
     subheaderVisibilityChange = new Subject<void>();
 
     /** @hidden */
+    focusLayoutAction = new Subject<void>();
+
+    /** @hidden */
     toggleCollapsed(): void {
         this.collapsed.next(!this.collapsed.value);
     }
