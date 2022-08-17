@@ -5,7 +5,7 @@
     fd-button
     fdType="transparent"
     glyph="edit"
-    [attr.aria-label]="editAriaLabel"
+    [ariaLabel]="editAriaLabel || ('coreUploadCollection.menuEditAriaLabel' | fdTranslate)"
 ></button>
 <button
     *ngIf="!_editMode && allowFileDeletion"
@@ -14,7 +14,7 @@
     fd-button
     fdType="transparent"
     glyph="decline"
-    [attr.aria-label]="deleteAriaLabel"
+    [ariaLabel]="deleteAriaLabel || ('coreUploadCollection.menuDeleteAriaLabel' | fdTranslate)"
 ></button>
 <button
     #okButton
@@ -22,16 +22,16 @@
     (click)="_okButtonClicked($event)"
     fd-button
     fdType="transparent"
-    [attr.aria-label]="okAriaLabel"
+    [ariaLabel]="okAriaLabel || ('coreUploadCollection.menuOkAriaLabel' | fdTranslate)"
 >
-    {{ okText }}
+    {{ okText || ('coreUploadCollection.menuOkText' | fdTranslate) }}
 </button>
 <button
     *ngIf="_editMode"
     (click)="_cancelButtonClicked($event)"
     fd-button
     fdType="transparent"
-    [attr.aria-label]="cancelAriaLabel"
+    [ariaLabel]="cancelAriaLabel || ('coreUploadCollection.menuCancelAriaLabel' | fdTranslate)"
 >
-    {{ cancelText }}
+    {{ cancelText || ('coreUploadCollection.menuCancelText' | fdTranslate) }}
 </button>

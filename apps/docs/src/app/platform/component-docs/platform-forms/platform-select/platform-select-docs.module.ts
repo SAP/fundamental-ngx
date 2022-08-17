@@ -22,6 +22,7 @@ import { PlatformSelectMobileExampleComponent } from './platform-select-examples
 import { PlatformSelectColumnsExampleComponent } from './platform-select-examples/platform-select-columns/platform-select-columns-example.component';
 import { PlatformSelectNoneExampleComponent } from './platform-select-examples/platform-select-none/platform-select-none-example.component';
 import { PlatformSelectNoWrapExampleComponent } from './platform-select-examples/platform-select-nowrap/platform-select-nowrap-example.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -59,6 +60,7 @@ const routes: Routes = [
         PlatformSelectColumnsExampleComponent,
         PlatformSelectNoneExampleComponent,
         PlatformSelectNoWrapExampleComponent
-    ]
+    ],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-select')]
 })
 export class PlatformSelectDocsModules {}

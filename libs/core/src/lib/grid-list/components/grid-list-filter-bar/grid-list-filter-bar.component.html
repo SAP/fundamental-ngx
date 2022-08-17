@@ -3,7 +3,7 @@
     [active]="true"
     [tabindex]="0"
     class="fd-grid-list__filter"
-    aria-label="Cancel"
+    [attr.aria-label]="'coreGridList.filterBarCancelButtonTitle' | fdTranslate"
     (click)="close.emit()"
     (keydown.space)="$event.preventDefault()"
     (keyup.space)="close.emit()"

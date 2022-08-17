@@ -104,6 +104,24 @@
             <button
                 fd-button
                 fdType="transparent"
+                glyph="translate"
+                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--theme-menu"
+                [fdMenu]="true"
+                [fdMenuTrigger]="i18nMenu"
+            ></button>
+
+            <fd-menu
+                #i18nMenu
+                [mobile]="true"
+                [fillControlMode]="null"
+                [mobileConfig]="{ title: 'Language', cancelButtonText: 'Cancel', dialogConfig: { mobile: false } }"
+            >
+                <ng-container *ngTemplateOutlet="i18nTemplate"></ng-container>
+            </fd-menu>
+
+            <button
+                fd-button
+                fdType="transparent"
                 [fdMenu]="true"
                 [fdMenuTrigger]="versionsMenu"
                 class="fd-shellbar__button fd-shellbar__button--menu fd-docs--toolbar__version fd-docs--theme-menu"
@@ -170,6 +188,18 @@
     <li fd-menu-item *ngFor="let theme of themes">
         <div fd-menu-interactive (click)="selectTheme(theme.id)">
             <span fd-menu-title>{{ theme.name }}</span>
+        </div>
+    </li>
+</ng-template>
+
+<ng-template #i18nTemplate>
+    <li class="fd-docs--i18n-menu-tooltip" role="presentation" type="information">
+        <fd-icon glyph="message-information"></fd-icon>
+        <span>Only applies to internal component translations</span>
+    </li>
+    <li fd-menu-item *ngFor="let translation of translations">
+        <div fd-menu-interactive (click)="selectTranslation(translation.value)">
+            <span fd-menu-title>{{ translation.name }}</span>
         </div>
     </li>
 </ng-template>

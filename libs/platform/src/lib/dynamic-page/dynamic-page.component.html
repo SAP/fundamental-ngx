@@ -11,6 +11,14 @@
             <ng-container [ngTemplateOutlet]="titleComponent.breadcrumbTemplate"></ng-container>
         </fd-breadcrumb>
 
+        <fd-dynamic-page-title-content *ngIf="titleComponent.keyInfoComponent">
+            <ng-container [ngTemplateOutlet]="titleComponent.keyInfoComponent.contentTemplateRef"></ng-container>
+        </fd-dynamic-page-title-content>
+
+        <fd-facet type="image" *ngIf="titleComponent.imageComponent">
+            <ng-container [ngTemplateOutlet]="titleComponent.imageComponent.contentTemplateRef"></ng-container>
+        </fd-facet>
+
         <fd-dynamic-page-global-actions *ngIf="titleComponent.globalActionsComponent">
             <ng-container [ngTemplateOutlet]="titleComponent.globalActionsComponent.contentTemplateRef"></ng-container>
         </fd-dynamic-page-global-actions>
@@ -52,7 +60,7 @@
         </ng-container>
     </fd-tab-list>
 
-    <fd-dynamic-page-content *ngIf="!_isTabbed" cdkScrollable>
+    <fd-dynamic-page-content *ngIf="!_isTabbed && contentComponent" cdkScrollable>
         <ng-container [ngTemplateOutlet]="contentComponent.contentTemplateRef"></ng-container>
     </fd-dynamic-page-content>
 

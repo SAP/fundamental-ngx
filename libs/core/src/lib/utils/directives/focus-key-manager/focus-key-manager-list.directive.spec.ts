@@ -21,14 +21,12 @@ describe('FocusKeyManagerList', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent, FocusKeyManagerItemDirective, FocusKeyManagerListDirective],
-                providers: [RtlService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent, FocusKeyManagerItemDirective, FocusKeyManagerListDirective],
+            providers: [RtlService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

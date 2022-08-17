@@ -12,29 +12,38 @@ export class PlatformRadioGroupListItemsExampleComponent {
     favBrand = 'xiomi';
 
     form1 = new FormGroup({
-        example1: new FormControl('')
+        example1: new FormControl(''),
+        radiolo1: new FormControl('')
     });
 
     form2 = new FormGroup({
-        example2: new FormControl('winter')
+        example2: new FormControl('winter'),
+        radiolo2: new FormControl('winter')
     });
 
-    form3 = new FormGroup({});
+    form3 = new FormGroup({
+        radiolo3: new FormControl('winter')
+    });
 
     form3Data = {
         radiolo3: 'spring'
     };
 
-    form4 = new FormGroup({});
+    form4 = new FormGroup({
+        radiolo4: new FormControl('winter')
+    });
     form4Data = {
         radiolo4: 'samsung'
     };
 
     form5 = new FormGroup({
-        example2: new FormControl('')
+        example2: new FormControl(''),
+        radiolo2: new FormControl('')
     });
 
-    form6 = new FormGroup({});
+    form6 = new FormGroup({
+        education: new FormControl('')
+    });
 
     invoiceItems = [
         new Item('1', 'samsung', 'Samsung', 1, 12000),

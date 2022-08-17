@@ -5,7 +5,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { ActionListItemComponent } from './action-list-item.component';
 
-import { ListComponent } from '../list.component';
 import { PlatformListModule } from '../list.module';
 
 export interface Action {
@@ -43,14 +42,12 @@ describe('ActionListItemComponent', () => {
     let component: ActionListItemComponentTestComponent;
     let fixture: ComponentFixture<ActionListItemComponentTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformListModule, RouterTestingModule],
-                declarations: [ActionListItemComponentTestComponent, ActionListItemComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformListModule, RouterTestingModule],
+            declarations: [ActionListItemComponentTestComponent, ActionListItemComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ActionListItemComponentTestComponent);
@@ -120,24 +117,6 @@ describe('ActionListItemComponent', () => {
     });
 });
 
-describe('ActionListItemComponent functions', () => {
-    let fixture: ComponentFixture<ActionListItemComponent>;
-
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformListModule, RouterTestingModule],
-                declarations: [ActionListItemComponent, ListComponent]
-            }).compileComponents();
-        })
-    );
-
-    beforeEach(() => {
-        fixture = TestBed.createComponent(ActionListItemComponent);
-        fixture.detectChanges();
-    });
-});
-
 /** Impertive approach testing*/
 @Component({
     selector: 'fdp-test-action-list-item',
@@ -158,14 +137,12 @@ describe('ActionListItemComponent Imperative', () => {
     let host: TestComponentContentComponent;
     let fixture: ComponentFixture<TestComponentContentComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformListModule, RouterTestingModule],
-                declarations: [TestComponentContentComponent, ActionListItemComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformListModule, RouterTestingModule],
+            declarations: [TestComponentContentComponent, ActionListItemComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponentContentComponent);

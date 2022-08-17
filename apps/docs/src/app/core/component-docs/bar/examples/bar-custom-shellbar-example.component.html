@@ -1,0 +1,29 @@
+<div fd-bar>
+    <div fd-bar-left>
+        <fd-bar-element>
+            <fd-combobox
+                [(ngModel)]="searchTerm"
+                glyph="search"
+                [dropdownValues]="searchTerms"
+                placeholder="Type some text..."
+                maxHeight="250px"
+                [isSearch]="true"
+                [compact]="true"
+            >
+            </fd-combobox>
+        </fd-bar-element>
+    </div>
+
+    <div fd-bar-middle>
+        <fd-bar-element>
+            <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+        </fd-bar-element>
+    </div>
+
+    <div fd-bar-right>
+        <fd-bar-element>
+            <button fd-button glyph="cart" ariaLabel="Add to Cart" ariaLabel="Add to Cart" title="Add to Cart"></button>
+        </fd-bar-element>
+        <fd-avatar [circle]="true" [colorAccent]="1" size="xs" label="Jane Doe"></fd-avatar>
+    </div>
+</div>

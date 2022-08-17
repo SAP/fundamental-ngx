@@ -5,6 +5,7 @@ import { SplitButtonComponent, splitButtonTextClass, splitButtonTextCompactClass
 import { MenuModule } from '../menu/menu.module';
 import { ButtonModule } from '../button/button.module';
 import createSpy = jasmine.createSpy;
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @Component({
     selector: 'fd-test-component',
@@ -36,14 +37,12 @@ describe('SplitButtonComponent', () => {
     let component: DebugElement;
     let componentInstance: SplitButtonComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [MenuModule, ButtonModule],
-                declarations: [SplitButtonComponent, TestComponent]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MenuModule, ButtonModule, I18nModule],
+            declarations: [SplitButtonComponent, TestComponent]
+        });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -114,25 +113,6 @@ describe('SplitButtonComponent', () => {
         expect(textElement.classList.contains(splitButtonTextClass));
         fixture.componentInstance.compact = true;
         expect(textElement.classList.contains(splitButtonTextCompactClass));
-    });
-
-    it('should has aria attributes', () => {
-        fixture.detectChanges();
-        // Default value
-        expect(componentInstance.arialLabel).toBeDefined();
-
-        const wrapperEl: HTMLElement = fixture.nativeElement.querySelector('.fd-button-split');
-        expect(wrapperEl.getAttribute('aria-label')).toBe(componentInstance.arialLabel);
-
-        // Default value
-        expect(componentInstance.expandButtonAriaLabel).toBeDefined();
-        const mainActionBtn = componentInstance.menuActionBtn?.nativeElement as HTMLElement;
-        expect(mainActionBtn.getAttribute('aria-label')).toBe(componentInstance.expandButtonAriaLabel);
-
-        expect(mainActionBtn.getAttribute('title')).toBe(componentInstance.expandButtonAriaLabel);
-        fixture.componentInstance.moreBtnTitle = 'More Actions Title';
-        fixture.detectChanges();
-        expect(mainActionBtn.getAttribute('title')).toBe('More Actions Title');
     });
 
     it('should add is-active class to more-actions button', () => {

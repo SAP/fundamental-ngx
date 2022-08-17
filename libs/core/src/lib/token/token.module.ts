@@ -9,6 +9,7 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { DeprecatedTokenizerContentDensityDirective } from './deprecated-tokenizer-content-density.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,15 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         TokenizerInputDirective,
         DeprecatedTokenizerContentDensityDirective
     ],
-    imports: [CommonModule, InputGroupModule, ButtonModule, PopoverModule, ListModule, ContentDensityModule],
+    imports: [
+        CommonModule,
+        InputGroupModule,
+        ButtonModule,
+        PopoverModule,
+        ListModule,
+        ContentDensityModule,
+        I18nModule
+    ],
     exports: [
         TokenComponent,
         TokenizerComponent,

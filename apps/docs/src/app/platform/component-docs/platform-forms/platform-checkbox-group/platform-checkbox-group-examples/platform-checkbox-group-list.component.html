@@ -38,7 +38,7 @@
         </fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
-<span style="margin-left: 2rem">Sports: {{ form3.controls.sports1?.value }}</span>
+<span style="margin-left: 2rem">Sports: {{ form3.controls.sports?.value }}</span>
 <br />
 <br />
 
@@ -65,7 +65,7 @@
         </fdp-form-field>
 
         <fdp-form-field [rank]="2">
-            <fdp-button contentDensity="compact" type="submit" label="Submit"></fdp-button>
+            <fdp-button fdCompact type="submit" label="Submit"></fdp-button>
         </fdp-form-field>
 
         <ng-template #i18n let-errors>

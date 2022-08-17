@@ -9,9 +9,18 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
 
-import { COMPONENTS } from './examples';
 import { PlatformSliderDocsComponent } from './slider-docs.component';
 import { SliderHeaderComponent } from './slider-header/slider-header.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+import { CommonModule } from '@angular/common';
+import { SliderBasicExampleComponent } from './examples/base/slider-basic-example.component';
+import { SliderRangeExampleComponent } from './examples/range/slider-range-example.component';
+import { SliderTicksAndLabelsExampleComponent } from './examples/ticks-and-labels/slider-ticks-and-labels-example.component';
+import { SliderDisabledExampleComponent } from './examples/disabled/slider-disabled-example.component';
+import { SliderCustomValuesExampleComponent } from './examples/custom-values/slider-custom-values-example.component';
+import { SliderTooltipExampleComponent } from './examples/tooltip/slider-tooltip-example.component';
+import { SliderCozyExampleComponent } from './examples/cozy/slider-cozy-example.component';
+import { SliderFormFieldExampleComponent } from './examples/form-field/slider-form-field-example.component';
 
 const routes: Routes = [
     {
@@ -30,10 +39,23 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         PlatformSliderModule,
         FormsModule,
-        FdpFormGroupModule
+        FdpFormGroupModule,
+        CommonModule
     ],
     exports: [RouterModule],
-    declarations: [SliderHeaderComponent, PlatformSliderDocsComponent, ...COMPONENTS],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    declarations: [
+        SliderHeaderComponent,
+        PlatformSliderDocsComponent,
+        SliderBasicExampleComponent,
+        SliderRangeExampleComponent,
+        SliderTicksAndLabelsExampleComponent,
+        SliderDisabledExampleComponent,
+        SliderCustomValuesExampleComponent,
+        SliderTooltipExampleComponent,
+        SliderCozyExampleComponent,
+        SliderFormFieldExampleComponent
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-slider')]
 })
 export class PlatformSliderDocsModule {}

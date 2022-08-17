@@ -15,23 +15,13 @@
 <!-- View Settings Dialog-->
 <fdp-table-view-settings-dialog [table]="table">
     <fdp-table-view-settings-filter column="price" label="Price" [type]="filterTypeEnum.CUSTOM">
-        <ng-container *fdpViewSettingsFilterCustomDef="let model; let tableDensity = contentDensity">
-            <fdp-form-group #fg1 [compact]="tableDensity !== 'cozy'" columnLayout="XL1-L1-M1-S1" labelLayout="vertical">
+        <ng-container *fdpViewSettingsFilterCustomDef="let model">
+            <fdp-form-group #fg1 columnLayout="XL1-L1-M1-S1" labelLayout="vertical">
                 <fdp-form-field label="Minimum Price">
-                    <fdp-input
-                        [contentDensity]="tableDensity"
-                        type="number"
-                        name="min"
-                        [(ngModel)]="model.min"
-                    ></fdp-input>
+                    <fdp-input type="number" name="min" [(ngModel)]="model.min"></fdp-input>
                 </fdp-form-field>
                 <fdp-form-field label="Maximum Price">
-                    <fdp-input
-                        [contentDensity]="tableDensity"
-                        type="number"
-                        name="max"
-                        [(ngModel)]="model.max"
-                    ></fdp-input>
+                    <fdp-input type="number" name="max" [(ngModel)]="model.max"></fdp-input>
                 </fdp-form-field>
             </fdp-form-group>
         </ng-container>

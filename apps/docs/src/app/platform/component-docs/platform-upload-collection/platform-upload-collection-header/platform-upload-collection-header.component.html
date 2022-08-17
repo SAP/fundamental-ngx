@@ -1,27 +1,28 @@
-<header>Upload Collection</header>
-<fd-info-label label="SAP Ariba Component" title="SAP Ariba Component" color="8"></fd-info-label>
-<description>
-    <p>The upload collection allows users to upload one or more files from different devices.</p>
-    <h3>Usage</h3>
-    <p>Use the upload collection if:</p>
-    <ul>
-        <li>You want to show a list of uploaded files that can be modified.</li>
-        <li>You want to allow users to add or remove files, and to change the file names.</li>
-    </ul>
-    <p>Don't use the upload collection if:</p>
-    <ul>
-        <li>The user can upload only one file to the app. In this case, use the FileUploader control instead.</li>
-    </ul>
+<fd-doc-page>
+    <header>Upload Collection</header>
+    <fd-info-label label="SAP Ariba Component" title="SAP Ariba Component" color="8"></fd-info-label>
+    <description>
+        <p>The upload collection allows users to upload one or more files from different devices.</p>
+        <h3>Usage</h3>
+        <p>Use the upload collection if:</p>
+        <ul>
+            <li>You want to show a list of uploaded files that can be modified.</li>
+            <li>You want to allow users to add or remove files, and to change the file names.</li>
+        </ul>
+        <p>Don't use the upload collection if:</p>
+        <ul>
+            <li>The user can upload only one file to the app. In this case, use the FileUploader control instead.</li>
+        </ul>
 
-    <h3>Required</h3>
-    <ul>
-        <li>
-            To use all CRUD operations need to describe <code class="code-snippet">UploadCollectionService</code> (look
-            at examples)
-        </li>
-    </ul>
-</description>
-<import module="PlatformUploadCollectionModule" subPackage="upload-collection"></import>
+        <h3>Required</h3>
+        <ul>
+            <li>
+                To use all CRUD operations need to describe <code class="code-snippet">UploadCollectionService</code>
+                (look at examples)
+            </li>
+        </ul>
+    </description>
+    <import module="PlatformUploadCollectionModule" subPackage="upload-collection"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs [hasI18n]="true"></fd-header-tabs>
+</fd-doc-page>

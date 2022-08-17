@@ -9,7 +9,6 @@ import { PopoverMobileComponent } from './popover-mobile.component';
     declarations: [PopoverMobileComponent],
     imports: [CommonModule, DialogModule, ButtonModule],
     exports: [PopoverMobileComponent],
-    providers: [DynamicComponentService],
-    entryComponents: [PopoverMobileComponent]
+    providers: [DynamicComponentService]
 })
 export class PopoverMobileModule {}

@@ -7,16 +7,14 @@ import { ComboboxConfig } from '../combobox.config';
 describe('Pipe: ComboboxHighlightPipe', () => {
     let pipe: ComboboxHighlightPipe;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                providers: [ComboboxConfig]
-            }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            providers: [ComboboxConfig]
+        }).compileComponents();
 
-            const comboboxConfig = TestBed.inject(ComboboxConfig);
-            pipe = new ComboboxHighlightPipe(comboboxConfig);
-        })
-    );
+        const comboboxConfig = TestBed.inject(ComboboxConfig);
+        pipe = new ComboboxHighlightPipe(comboboxConfig);
+    }));
 
     it('create an instance', () => {
         expect(pipe).toBeTruthy();

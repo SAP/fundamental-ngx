@@ -81,9 +81,9 @@
         role="img"
     >
     </fd-avatar>
-    <span *ngIf="title" fd-list-title [attr.aria-label]="ariaLabel" [attr.nowrap]="titleWrap" [attr.title]="title">{{
-        title
-    }}</span>
+    <span *ngIf="title" fd-list-title [attr.aria-label]="ariaLabel" [attr.nowrap]="titleWrap" [attr.title]="title">
+        {{ title }}
+    </span>
     <span
         fd-list-secondary
         [attr.aria-label]="secondary"
@@ -173,7 +173,6 @@
         <fd-checkbox
             *ngIf="selectionMode === 'multi'"
             (click)="$event.stopPropagation()"
-            [compact]="contentDensity | isCompactDensity"
             [(ngModel)]="_selected"
             [ariaLabel]="ariaLabel"
             [attr.aria-selected]="_selected"
@@ -184,7 +183,6 @@
             [value]="value"
             [name]="name"
             role="radio"
-            [compact]="contentDensity | isCompactDensity"
             [(ngModel)]="selectionValue"
             [attr.aria-selected]="_selected"
         >
@@ -192,21 +190,18 @@
     </div>
 </ng-template>
 <ng-template #actionsTemplate>
-    <ng-content selector="#secondaryAction"></ng-content>
+    <ng-content select="#secondaryAction"></ng-content>
     <button
         fd-button
         #edit
         [attr.id]="'detail-' + id"
         *ngIf="listType === 'detail'"
         role="button"
-        title="edit"
-        i18n-title="@@standardList.Item.edit"
-        [compact]="contentDensity | isCompactDensity"
         fdType="transparent"
         glyph="edit"
         (click)="_onActionButtonClick('edit')"
-        i18n-aria-label="@@standardList.Item.edit"
-        aria-label="edit"
+        [attr.aria-label]="'platformStandardListItem.detailsActionAriaLabel' | fdTranslate"
+        [attr.title]="'platformStandardListItem.detailsActionAriaLabel' | fdTranslate"
         (keydown)="_onKeyButtonClick($event, 'edit')"
     ></button>
     <button
@@ -215,11 +210,8 @@
         [attr.id]="'delete-' + id"
         *ngIf="selectionMode === 'delete'"
         role="button"
-        title="delete"
-        i18n-title="@@standardList.Item.delete"
-        [compact]="contentDensity | isCompactDensity"
-        i18n-aria-label="@@standardList.Item.delete"
-        aria-label="delete"
+        [attr.aria-label]="'platformStandardListItem.deleteActionAriaLabel' | fdTranslate"
+        [attr.title]="'platformStandardListItem.deleteActionAriaLabel' | fdTranslate"
         fdType="transparent"
         glyph="decline"
         (click)="_onActionButtonClick('delete')"

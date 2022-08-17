@@ -4,6 +4,7 @@ import { OverflowItem } from './overflow-item.interface';
 export type OverflowItemDirectiveContext<T = any> = {
     $implicit: boolean;
     index: number;
+    globalIndex: number;
     first: boolean;
     last: boolean;
     item: T;
@@ -22,10 +23,14 @@ export interface OverflowItemRef<T = any> {
      * Whether the item is hidden.
      */
     hidden: boolean;
+
+    /** Index of the item in the visible or hidden array of Overflow Layout Component's items. */
+    index: number;
+
     /**
      * The index of the item in the array of items.
      */
-    index: number;
+    globalIndex: number;
 
     /** Whether this item is last in the array. */
     first: boolean;

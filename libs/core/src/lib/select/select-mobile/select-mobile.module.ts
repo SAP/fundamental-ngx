@@ -10,7 +10,6 @@ import { SelectMobileComponent } from './select-mobile.component';
     declarations: [SelectMobileComponent],
     imports: [CommonModule, DialogModule, ButtonModule],
     exports: [SelectMobileComponent],
-    providers: [DynamicComponentService],
-    entryComponents: [SelectMobileComponent]
+    providers: [DynamicComponentService]
 })
 export class SelectMobileModule {}

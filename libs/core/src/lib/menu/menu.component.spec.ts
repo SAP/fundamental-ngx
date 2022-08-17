@@ -46,14 +46,12 @@ describe('MenuComponent', () => {
     let menuService: MenuService;
     let fixture: ComponentFixture<TestMenuComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [MenuModule],
-                declarations: [TestMenuComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MenuModule],
+            declarations: [TestMenuComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMenuComponent);

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import '@angular/localize/init';
 
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
@@ -108,14 +107,12 @@ describe('GridListItemComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let gridListComponent: GridListComponent<any>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent],
-                imports: [GridListModule, ButtonModule, AvatarModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [GridListModule, ButtonModule, AvatarModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -163,7 +160,7 @@ describe('GridListItemComponent', () => {
     it('should throw Draft event if click on Draft button', () => {
         spyOn(component, 'draft');
 
-        const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[label="Draft"]'));
+        const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[ng-reflect-label="Draft"]'));
         button.nativeElement.click();
         fixture.detectChanges();
 
@@ -173,7 +170,7 @@ describe('GridListItemComponent', () => {
     it('should throw Locked event if click on Locked button', () => {
         spyOn(component, 'locked');
 
-        const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[label="Locked"]'));
+        const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[ng-reflect-label="Locked"]'));
         button.nativeElement.click();
         fixture.detectChanges();
 

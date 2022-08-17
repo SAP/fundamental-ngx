@@ -22,14 +22,12 @@ describe('NotificationGroupListComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let notificationGroupHeader;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [NotificationModule],
-                declarations: [TestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [NotificationModule],
+            declarations: [TestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

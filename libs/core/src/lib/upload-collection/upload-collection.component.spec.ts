@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { UploadCollectionComponent } from './upload-collection.component';
 
@@ -6,11 +6,11 @@ describe('UploadCollectionComponent', () => {
     let component: UploadCollectionComponent;
     let fixture: ComponentFixture<UploadCollectionComponent>;
 
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
             declarations: [UploadCollectionComponent]
         }).compileComponents();
-    });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(UploadCollectionComponent);

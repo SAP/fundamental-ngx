@@ -62,14 +62,12 @@ describe('OverflowItemsDirective', () => {
     let component: WrapperComponent;
     let fixture: ComponentFixture<WrapperComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [WrapperComponent, TestComponent, OverflowListDirective, OverflowListItemDirective],
-                providers: [ViewportRuler]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [WrapperComponent, TestComponent, OverflowListDirective, OverflowListItemDirective],
+            providers: [ViewportRuler]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(WrapperComponent);

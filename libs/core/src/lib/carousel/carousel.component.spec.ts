@@ -125,14 +125,12 @@ describe('CarouselComponent', () => {
     let component: TestCarouselComponent;
     let fixture: ComponentFixture<TestCarouselComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestCarouselComponent],
-                imports: [CarouselModule, ButtonModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestCarouselComponent],
+            imports: [CarouselModule, ButtonModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestCarouselComponent);
@@ -296,14 +294,12 @@ describe('CarouselComponent Multiple Active Item', () => {
     let component: TestCarouselMultipleActiveItemComponent;
     let fixture: ComponentFixture<TestCarouselMultipleActiveItemComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestCarouselMultipleActiveItemComponent],
-                imports: [CarouselModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestCarouselMultipleActiveItemComponent],
+            imports: [CarouselModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestCarouselMultipleActiveItemComponent);
@@ -510,14 +506,12 @@ describe('CarouselComponent looping navigation', () => {
     let component: TestCarouselLoopingNavigationComponent;
     let fixture: ComponentFixture<TestCarouselLoopingNavigationComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestCarouselLoopingNavigationComponent],
-                imports: [CarouselModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestCarouselLoopingNavigationComponent],
+            imports: [CarouselModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestCarouselLoopingNavigationComponent);

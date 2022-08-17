@@ -7,6 +7,5 @@ export const sections = [
     'fd-time-no-seconds-example ',
     'fd-time-only-hours-example ',
     'fd-time-two-digits-example ',
-    'fd-time-i18n-example ',
     'fd-time-form-example '
 ];

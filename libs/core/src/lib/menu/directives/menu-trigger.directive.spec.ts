@@ -13,13 +13,11 @@ describe('MenuTriggerDirective', () => {
     let directive: MenuTriggerDirective;
     let menu: Partial<MenuComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent, MenuTriggerDirective]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent, MenuTriggerDirective]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

@@ -15,14 +15,12 @@ describe('ButtonComponent', () => {
 
     let component, componentInstance: ButtonComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ButtonModule],
-                declarations: [TestComponent]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ButtonModule],
+            declarations: [TestComponent]
+        });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -72,14 +70,12 @@ describe('ButtonComponent – Disabled', () => {
 
     let component, componentInstance: ButtonComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ButtonModule],
-                declarations: [DisabledTestComponent, AriaDisabledTestComponent]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ButtonModule],
+            declarations: [DisabledTestComponent, AriaDisabledTestComponent]
+        });
+    }));
 
     it('should add is-disabled class to [disabled] button', () => {
         disabledFixture = TestBed.createComponent(DisabledTestComponent);

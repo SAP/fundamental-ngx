@@ -114,36 +114,27 @@
         class="fd-list__form-item"
         *ngIf="(selectionMode === 'multi' || selectionMode === 'single') && !rowSelection"
     >
-        <fd-checkbox
-            *ngIf="selectionMode === 'multi'"
-            role="checkbox"
-            [compact]="contentDensity | isCompactDensity"
-            [(ngModel)]="_selected"
-        >
-        </fd-checkbox>
+        <fd-checkbox *ngIf="selectionMode === 'multi'" role="checkbox" [(ngModel)]="_selected"> </fd-checkbox>
         <fd-radio-button
             *ngIf="selectionMode === 'single'"
             [value]="value"
             [name]="name"
             role="radio"
-            [compact]="contentDensity | isCompactDensity"
             [(ngModel)]="selectionValue"
         >
         </fd-radio-button>
     </div>
 </ng-template>
 <ng-template #actionsTemplate>
-    <ng-content selector="#secondaryAction"></ng-content>
+    <ng-content select="#secondaryAction"></ng-content>
     <button
         fd-button
         *ngIf="listType === 'detail'"
         role="button"
-        compact="contentDensity | isCompactDensity"
         fdType="transparent"
         glyph="edit"
         title="detail"
-        i18n-aria-label="@@objectList.Item.detail"
-        aria-label="detail"
+        [attr.aria-label]="'platformObjectListItem.detailsActionAriaLabel' | fdTranslate"
         (keydown)="_onKeyButtonClick($event, 'edit')"
         (click)="_onActionButtonClick('edit')"
         [attr.id]="'detail-' + id"
@@ -152,9 +143,7 @@
         fd-button
         *ngIf="selectionMode === 'delete'"
         role="button"
-        compact="contentDensity | isCompactDensity"
-        i18n-aria-label="@@objectList.Item.delete"
-        aria-label="delete"
+        [attr.aria-label]="'platformObjectListItem.deleteActionAriaLabel' | fdTranslate"
         title="delete"
         fdType="transparent"
         glyph="decline"

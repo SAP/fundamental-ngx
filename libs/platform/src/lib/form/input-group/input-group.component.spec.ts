@@ -3,14 +3,13 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-
-import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { FormFieldComponent } from '../form-group/form-field/form-field.component';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformInputGroupModule } from './input-group.module';
 import { InputGroupComponent } from './input-group.component';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 const INPUT_GROUP_IDENTIFIER = 'platform-input-group-unit-test';
 
@@ -18,7 +17,7 @@ const INPUT_GROUP_IDENTIFIER = 'platform-input-group-unit-test';
     template: `
         <fdp-input-group
             name="example"
-            [contentDensity]="contentDensity"
+            [fdContentDensity]="contentDensity"
             [disabled]="disabled"
             id="${INPUT_GROUP_IDENTIFIER}"
         >
@@ -34,7 +33,7 @@ const INPUT_GROUP_IDENTIFIER = 'platform-input-group-unit-test';
 class InputGroupHostComponent {
     @ViewChild(InputGroupComponent) inputGroupComponent: InputGroupComponent;
 
-    contentDensity: ContentDensity = 'cozy';
+    contentDensity: ContentDensityMode = ContentDensityMode.COZY;
     disabled = false;
 }
 describe('InputGroup component', () => {
@@ -42,14 +41,12 @@ describe('InputGroup component', () => {
     let fixture: ComponentFixture<InputGroupHostComponent>;
     let inputGroupComponent: InputGroupComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformButtonModule, PlatformInputGroupModule],
-                declarations: [InputGroupHostComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformButtonModule, PlatformInputGroupModule],
+            declarations: [InputGroupHostComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(InputGroupHostComponent);
@@ -136,14 +133,12 @@ describe('Input group within platform form', () => {
     let fixture: ComponentFixture<InputGroupFormTestWrapperComponent>;
     let host: InputGroupFormTestWrapperComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformButtonModule, PlatformInputGroupModule],
-                declarations: [InputGroupFormTestWrapperComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformButtonModule, PlatformInputGroupModule],
+            declarations: [InputGroupFormTestWrapperComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(InputGroupFormTestWrapperComponent);

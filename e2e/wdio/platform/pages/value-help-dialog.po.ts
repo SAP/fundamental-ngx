@@ -42,7 +42,7 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     toolbarButtons = '.fd-toolbar button';
 
     // define conditions form selectors
-    addBtn = 'button[label="Add"]';
+    addBtn = 'button[title="Add Condition"]';
     conditionsInputField = '.fd-popover__control.ng-star-inserted input';
     conditionSelectors = 'fd-popover .fd-select__text-content';
     dropdownOptions = 'ul li[fd-option]';

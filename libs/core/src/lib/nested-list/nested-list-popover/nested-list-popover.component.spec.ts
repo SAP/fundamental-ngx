@@ -9,15 +9,13 @@ describe('NestedListPopoverComponent', () => {
     let component: NestedListPopoverComponent;
     let fixture: ComponentFixture<NestedListPopoverComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PopoverModule],
-                declarations: [NestedListPopoverComponent],
-                providers: [MenuKeyboardService, NestedListKeyboardService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PopoverModule],
+            declarations: [NestedListPopoverComponent],
+            providers: [MenuKeyboardService, NestedListKeyboardService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NestedListPopoverComponent);

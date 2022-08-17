@@ -13,6 +13,13 @@ export const ROUTES: Routes = [
             { path: 'home', component: HomeDocsComponent },
             { path: 'new-component', component: NewComponentComponent },
             {
+                path: 'i18n',
+                loadChildren: () =>
+                    import('../platform/component-docs/i18n/platform-i18n-docs.module').then(
+                        (m) => m.PlatformI18nDocsModule
+                    )
+            },
+            {
                 path: 'action-bar',
                 loadChildren: () =>
                     import('./component-docs/action-bar/action-bar-docs.module').then((m) => m.ActionBarDocsModule)
@@ -114,6 +121,11 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'object-page',
+                loadChildren: () =>
+                    import('./component-docs/object-page/object-page-docs.module').then((m) => m.ObjectPageDocsModule)
+            },
+            {
                 path: 'facets',
                 loadChildren: () => import('./component-docs/facets/facet-docs.module').then((m) => m.FacetDocsModule)
             },
@@ -191,6 +203,11 @@ export const ROUTES: Routes = [
                     import('./component-docs/content-density/content-density-docs.module').then(
                         (m) => m.ContentDensityDocsModule
                     )
+            },
+            {
+                path: 'truncate',
+                loadChildren: () =>
+                    import('./component-docs/truncate/truncate-docs.module').then((m) => m.TruncateDocsModule)
             },
             {
                 path: 'grid-list',

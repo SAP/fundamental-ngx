@@ -117,7 +117,7 @@ export class MultiInputComponent
     /** Search term, or more specifically the value of the inner input field. */
     @Input()
     get searchTerm(): string {
-        return this._searchTermCtrl.value;
+        return this._searchTermCtrl.value ?? '';
     }
     set searchTerm(value: string) {
         this._searchTermCtrl.setValue(value);
@@ -365,7 +365,7 @@ export class MultiInputComponent
 
         this._subscriptions.add(
             this._searchTermCtrl.valueChanges.pipe(distinctUntilChanged()).subscribe((searchTerm) => {
-                this.searchTermChange.emit(searchTerm);
+                this.searchTermChange.emit(searchTerm ?? '');
                 // resetting existing selection state, if any
                 this._rangeSelector.reset();
             })
@@ -615,8 +615,8 @@ export class MultiInputComponent
             return;
         }
         const isExist = this._selectFirstFiltered(searchTerm);
-        if (!isExist && this.allowNewTokens && this.newTokenValidateFn(this._searchTermCtrl.value)) {
-            const newToken = this.newTokenParseFn(this._searchTermCtrl.value);
+        if (!isExist && this.allowNewTokens && this.newTokenValidateFn(this._searchTermCtrl.value ?? '')) {
+            const newToken = this.newTokenParseFn(this._searchTermCtrl.value ?? '');
             this._addNewTokenToDropDownValues(newToken);
             this._handleSelect(true, newToken);
             this._searchTermCtrl.setValue('');
@@ -800,7 +800,7 @@ export class MultiInputComponent
             map(([, , optionItems]) => {
                 const selected = this.selected.map((c) => this._getValueAndLabel(c, optionItems));
                 // not using "searchTerm" value from combineLatest as it will be wrong for late subscribers, if any
-                const searchTerm = this._searchTermCtrl.value;
+                const searchTerm = this._searchTermCtrl.value ?? '';
                 const filtered = this.filterFn(
                     optionItems.map((c) => c.item),
                     searchTerm

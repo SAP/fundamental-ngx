@@ -7,6 +7,7 @@ import { FormControlModule } from '@fundamental-ngx/core/form';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 
 import { FeedInputComponent } from './feed-input.component';
+import { PlatformFeedInputModule } from './feed-input.module';
 import { PlatformButtonModule } from '../button/public_api';
 
 describe('FeedInputComponent', () => {
@@ -17,8 +18,7 @@ describe('FeedInputComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [FormsModule, PlatformButtonModule, AvatarModule, FormControlModule],
-            declarations: [FeedInputComponent]
+            imports: [FormsModule, PlatformButtonModule, AvatarModule, FormControlModule, PlatformFeedInputModule]
         })
             .overrideComponent(FeedInputComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }

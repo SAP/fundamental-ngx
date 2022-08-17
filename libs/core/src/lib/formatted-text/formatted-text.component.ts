@@ -99,7 +99,7 @@ export class FormattedTextComponent implements OnInit, OnChanges {
         this._htmlSanitizer.extendAttrs({
             target: this.convertedLinksDefaultTarget
         });
-        const text = this._htmlSanitizer.sanitizeHtml(this.htmlText);
+        const text = this._htmlSanitizer.sanitizeHtml(this.htmlText ?? '');
         this.formattedText = this.domSanitizer.bypassSecurityTrustHtml(text.trim());
     }
 }

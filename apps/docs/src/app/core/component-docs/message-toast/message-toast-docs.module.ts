@@ -31,7 +31,6 @@ const routes: Routes = [
         MessageToastContentExampleComponent,
         MessageToastExampleComponent
     ],
-    entryComponents: [MessageToastContentExampleComponent],
     providers: [MessageToastService]
 })
 export class MessageToastDocsModule {}

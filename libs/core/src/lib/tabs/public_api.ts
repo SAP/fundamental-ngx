@@ -1,5 +1,4 @@
 export * from './tabs.module';
-export * from './tabs.service';
 export * from './tab-list.component';
 export * from './tab-panel/tab-panel.component';
 export * from './tab-item/tab-item.directive';

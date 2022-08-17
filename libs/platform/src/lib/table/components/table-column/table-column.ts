@@ -2,6 +2,7 @@ import { TemplateRef } from '@angular/core';
 
 import { ColumnAlignValue } from '../../enums/column-align.enum';
 import { FilterableColumnDataType } from '../../enums/filter-type.enum';
+import { FdpColumnResponsiveState } from '../../interfaces/column-responsive-state.interface';
 
 export abstract class TableColumn {
     /** Column unique identifier. */
@@ -48,4 +49,7 @@ export abstract class TableColumn {
 
     /** Whether to apply fd-table-text (text-shadow) to the cell content, if disabled noWrap has no effect. */
     abstract applyText: boolean;
+
+    /** Whether this column is visible */
+    abstract responsiveState: FdpColumnResponsiveState;
 }

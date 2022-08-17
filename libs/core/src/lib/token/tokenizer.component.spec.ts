@@ -31,15 +31,13 @@ describe('TokenizerComponent', () => {
     let component: TokenizerComponent;
     let fixture: ComponentFixture<HostComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [TokenModule],
-                declarations: [HostComponent, FormControlComponent],
-                providers: [RtlService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TokenModule],
+            declarations: [HostComponent, FormControlComponent],
+            providers: [RtlService]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(HostComponent);

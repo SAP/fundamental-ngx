@@ -15,6 +15,7 @@ import { ColumnAlignValue } from '../../enums/column-align.enum';
 import { FilterableColumnDataType } from '../../enums/filter-type.enum';
 import { FdpCellDef, FdpEditableCellDef } from '../../directives/table-cell.directive';
 import { FdpHeaderCellDef } from '../../directives/table-header.directive';
+import { FdpColumnResponsiveState } from '../../interfaces/column-responsive-state.interface';
 
 import { TableColumn } from './table-column';
 import { TableService } from '../../table.service';
@@ -127,6 +128,9 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     set fdpHeaderCellDef(fdpHeaderCellDef: FdpHeaderCellDef) {
         this.headerCellTemplate = fdpHeaderCellDef?.templateRef;
     }
+
+    /** Responsive state of the column. */
+    responsiveState: FdpColumnResponsiveState = 'visible';
 
     /** @hidden */
     private _width: string;

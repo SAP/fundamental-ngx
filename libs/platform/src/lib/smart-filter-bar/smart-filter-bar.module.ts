@@ -14,6 +14,7 @@ import {
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformSelectModule } from '@fundamental-ngx/platform/form';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
@@ -30,6 +31,7 @@ import { SmartFilterBarSubjectDirective } from './directives/smart-filter-bar-su
 import { SmartFilterBarConditionsDialogComponent } from './components/smart-filter-bar-conditions-dialog/smart-filter-bar-conditions-dialog.component';
 import { SmartFilterBarConditionFieldComponent } from './components/smart-filter-bar-condition-field/smart-filter-bar-condition-field.component';
 import { SmartFilterBarService } from './smart-filter-bar.service';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     declarations: [
@@ -45,12 +47,14 @@ import { SmartFilterBarService } from './smart-filter-bar.service';
         FormsModule,
         ReactiveFormsModule,
         PlatformFormGeneratorModule,
+        I18nModule,
         ButtonModule,
         PopoverModule,
         ToolbarModule,
         PlatformButtonModule,
         PlatformInputGroupModule,
         IconModule,
+        BusyIndicatorModule,
         PlatformSearchFieldModule,
         DialogModule,
         ListModule,

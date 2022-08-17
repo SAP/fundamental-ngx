@@ -11,15 +11,13 @@ describe('CalendarMonthViewComponent', () => {
     let fixture: ComponentFixture<CalendarMonthViewComponent<FdDate>>;
     const testMonth = 5;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FdDatetimeModule],
-                declarations: [CalendarMonthViewComponent],
-                providers: [CalendarService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdDatetimeModule],
+            declarations: [CalendarMonthViewComponent],
+            providers: [CalendarService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent<CalendarMonthViewComponent<FdDate>>(CalendarMonthViewComponent);

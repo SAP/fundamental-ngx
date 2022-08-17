@@ -30,7 +30,6 @@
     <fd-form-input-message-group>
         <fd-input-group
             [id]="id + '-input-group-container'"
-            [compact]="contentDensity | isCompactDensity"
             [button]="!readonly"
             [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
             [state]="mobile && isOpen ? null : state"
@@ -64,7 +63,6 @@
                 tabindex="0"
                 [id]="id"
                 [name]="name"
-                [compact]="contentDensity | isCompactDensity"
                 (keydown)="onInputKeydownHandler($event)"
                 [disabled]="disabled"
                 [ngModel]="inputText"
@@ -77,13 +75,15 @@
                 [attr.aria-readonly]="readonly"
             />
         </fd-input-group>
-        <div
-            class="fdp-combobox__count-list-results"
-            role="status"
-            *ngIf="isOpen"
-            i18n="@@platform.Combobox.CountListResults"
-        >
-            {{ _flatSuggestions?.length || 0 }} result list items
+        <div class="fdp-combobox__count-list-results" role="status" *ngIf="isOpen">
+            <ng-container *ngIf="_flatSuggestions?.length || '0' as count">
+                {{
+                    (count === 1
+                        ? 'platformCombobox.countListResultsSingular'
+                        : 'platformCombobox.countListResultsPlural'
+                    ) | fdTranslate: { count: count }
+                }}
+            </ng-container>
         </div>
         <fd-form-message
             *ngIf="mobile || isOpen ? null : !!stateMessage"
@@ -108,7 +108,6 @@
         class="fdp-combobox__list {{ !!stateMessage && 'fdp-combobox__list--message' }}"
         [id]="id + '-result'"
         role="listbox"
-        [compact]="contentDensity | isCompactDensity"
         [byline]="byline"
         [attr.aria-labelledby]="id + '-search'"
         [style.maxHeight]="!mobile && maxHeight"

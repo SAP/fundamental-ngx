@@ -23,14 +23,12 @@ describe('PlatformObjectMarkerComponent', () => {
     let host: TestPlatformPlatformObjectMarkerComponent;
     let fixture: ComponentFixture<TestPlatformPlatformObjectMarkerComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ObjectMarkerModule],
-                declarations: [PlatformObjectMarkerComponent, TestPlatformPlatformObjectMarkerComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ObjectMarkerModule],
+            declarations: [PlatformObjectMarkerComponent, TestPlatformPlatformObjectMarkerComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestPlatformPlatformObjectMarkerComponent);

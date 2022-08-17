@@ -19,15 +19,13 @@ describe('BusyIndicatorExtendedDirective', () => {
     let messageComponent: MessageToastComponent;
     let fixture: ComponentFixture<MessageToastComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent],
-                imports: [BusyIndicatorModule, MessageToastModule],
-                providers: [MessageToastService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [BusyIndicatorModule, MessageToastModule],
+            providers: [MessageToastService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MessageToastComponent);

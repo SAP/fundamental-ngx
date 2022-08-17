@@ -14,6 +14,7 @@ import { PlatformChekboxA11yExampleComponent } from './platform-checkbox-example
 
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformCheckboxModule, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -44,6 +45,7 @@ const routes: Routes = [
         PlatformChekboxNoFormComponent,
         PlatformChekboxTristateComponent,
         PlatformChekboxA11yExampleComponent
-    ]
+    ],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-checkbox')]
 })
 export class CheckboxDocsModule {}

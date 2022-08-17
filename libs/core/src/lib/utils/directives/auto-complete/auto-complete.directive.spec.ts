@@ -18,13 +18,11 @@ describe('AutoCompleteDirective', () => {
     let fixture: ComponentFixture<TestComponent>;
     let directive: AutoCompleteDirective;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [AutoCompleteDirective, TestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [AutoCompleteDirective, TestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

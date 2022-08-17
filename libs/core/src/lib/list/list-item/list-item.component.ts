@@ -126,12 +126,32 @@ export class ListItemComponent
     link = false;
 
     /** @hidden */
-    @ContentChild(CheckboxComponent)
-    checkbox: CheckboxComponent;
+    @ContentChild(RadioButtonComponent)
+    get radio(): RadioButtonComponent {
+        return this._radio;
+    }
 
     /** @hidden */
-    @ContentChild(RadioButtonComponent)
-    radio: RadioButtonComponent;
+    set radio(value: RadioButtonComponent) {
+        this._radio = value;
+        if (this._radio && this._radio.tabIndex == null) {
+            this._radio.tabIndex = -1;
+        }
+    }
+
+    /** @hidden */
+    @ContentChild(CheckboxComponent)
+    get checkbox(): CheckboxComponent {
+        return this._checkbox;
+    }
+
+    /** @hidden */
+    set checkbox(value: CheckboxComponent) {
+        this._checkbox = value;
+        if (this._checkbox && this._checkbox.tabIndexValue == null) {
+            this._checkbox.tabIndexValue = -1;
+        }
+    }
 
     /** @hidden */
     @ContentChildren(ListLinkDirective)
@@ -146,6 +166,12 @@ export class ListItemComponent
 
     /** @hidden */
     private readonly _onLinkListChanged$ = new Subject<void>();
+
+    /** @hidden */
+    private _radio: RadioButtonComponent;
+
+    /** @hidden */
+    private _checkbox: CheckboxComponent;
 
     /** @hidden */
     screenReaderContent = '';

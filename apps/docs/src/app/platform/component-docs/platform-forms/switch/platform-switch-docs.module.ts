@@ -13,6 +13,7 @@ import { SwitchFormsExampleComponent } from './switch-examples/switch-form-examp
 import { SwitchSizesExampleComponent } from './switch-examples/switch-sizes-example/switch-sizes-example.component';
 import { SwitchHeaderComponent } from './switch-header/switch-header.component';
 import { SwitchConfigExampleComponent } from './switch-examples/switch-config-example/switch-config-example.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -36,6 +37,7 @@ const routes: Routes = [
         SwitchFormsExampleComponent,
         SwitchSizesExampleComponent,
         SwitchConfigExampleComponent
-    ]
+    ],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-switch')]
 })
 export class PlatformSwitchDocsModule {}

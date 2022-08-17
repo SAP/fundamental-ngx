@@ -3,14 +3,12 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h4 fd-title [headerSize]="4" i18n="@@platformTableP13GroupDialogHeader">Group</h4>
+                    <h4 fd-title [headerSize]="4">{{ 'platformTable.P13GroupDialogHeader' | fdTranslate }}</h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <fdp-table-reset-button
-                        [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                    ></fdp-table-reset-button>
+                    <fdp-table-reset-button></fdp-table-reset-button>
                 </fd-bar-element>
             </div>
         </ng-template>
@@ -22,9 +20,7 @@
                 class="group-row__select"
                 [value]="rule.columnKey"
                 (valueChange)="_onRuleColumnKeyChange(rule, $event)"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                placeholder="(none)"
-                i18n-placeholder="@@platformTableP13GroupDialogNoneSelectedColumn|Table column select placeholder"
+                [placeholder]="'platformTable.P13GroupDialogNoneSelectedColumnSelectPlaceholder' | fdTranslate"
             >
                 <li fd-option *ngFor="let column of columns" [value]="column.key">
                     {{ column.label }}
@@ -35,9 +31,7 @@
                 class="group-row__checkbox"
                 [ngModel]="rule.showAsColumn"
                 (ngModelChange)="_onRuleShowAsColumnChange(rule, $event)"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                label="Show Field as Column"
-                i18n-label="@@platformTableP13GroupDialogShowFieldAsColumn"
+                [label]="'platformTable.P13GroupDialogShowFieldAsColumnCheckboxLabel' | fdTranslate"
             ></fd-checkbox>
 
             <div class="group-row__actions">
@@ -45,11 +39,8 @@
                     fd-button
                     fdType="transparent"
                     glyph="sys-cancel"
-                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                    i18n-aria-label="platformTableP13GroupDialogRemoveGroup|Remove line aria-label attribute"
-                    aria-label="Remove"
-                    i18n-title="@@platformTableP13GroupDialogRemoveGroup|Remove line title attribute"
-                    title="Remove"
+                    [attr.aria-label]="'platformTable.P13GroupDialogRemoveGroupBtnTitle' | fdTranslate"
+                    [title]="'platformTable.P13GroupDialogRemoveGroupBtnTitle' | fdTranslate"
                     (click)="_removeRule(rule)"
                 ></button>
 
@@ -57,11 +48,8 @@
                     fd-button
                     fdType="transparent"
                     glyph="add"
-                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                    i18n-aria-label="@@platformTableP13GroupDialogAddNewGroup|Add new line aria-label attribute"
-                    aria-label="Add new"
-                    i18n-title="@@platformTableP13GroupDialogAddNewGroup|Add new line title attribute"
-                    title="Add new"
+                    [attr.aria-label]="'platformTable.P13GroupDialogAddNewGroupBtnTitle' | fdTranslate"
+                    [title]="'platformTable.P13GroupDialogAddNewGroupBtnTitle' | fdTranslate"
                     (click)="_addNew(i)"
                 ></button>
             </div>
@@ -74,9 +62,7 @@
                 fd-button
                 fdType="emphasized"
                 fd-dialog-decisive-button
-                i18n-label="@@platformTableP13GroupDialogConfirmationBtn"
-                label="OK"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
+                [label]="'platformTable.P13GroupDialogConfirmationBtnLabel' | fdTranslate"
                 (click)="confirm()"
             ></button>
         </fd-dialog-footer-button>
@@ -87,9 +73,7 @@
                 fdType="transparent"
                 fd-dialog-decisive-button
                 fd-initial-focus
-                i18n-label="@@platformTableP13GroupDialogCancelBtn"
-                label="Cancel"
-                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
+                [label]="'platformTable.P13GroupDialogCancelBtnLabel' | fdTranslate"
                 (click)="cancel()"
             ></button>
         </fd-dialog-footer-button>

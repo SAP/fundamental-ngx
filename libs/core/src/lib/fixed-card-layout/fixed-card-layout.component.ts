@@ -24,7 +24,7 @@ import {
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { CdkDrag, CdkDragDrop, CdkDragEnter, CdkDragStart } from '@angular/cdk/drag-drop';
 import { Subject, Subscription } from 'rxjs';
-import { debounceTime, distinct, filter, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, skip, takeUntil } from 'rxjs/operators';
 
 import { resizeObservable, RtlService, getDocumentFontSize } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
@@ -146,7 +146,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
 
     /** @hidden */
     @ViewChild('layout')
-    _layout: ElementRef;
+    _layout: ElementRef<HTMLElement>;
 
     /** @hidden */
     _cardsArray: CardDefinitionDirective[];
@@ -158,7 +158,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     _cardColumns: CardColumn[];
 
     /** @hidden*/
-    _containerHeight: number;
+    _containerHeight = 0;
 
     /** @hidden handles rtl service */
     _dir = 'ltr';
@@ -184,7 +184,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     _placeholderMargin: boolean;
 
     /** @hidden */
-    _listenResize = false;
+    _listenResize = true;
 
     /** @hidden */
     _hiddenCard: Nullable<CardDefinitionDirective>;
@@ -408,8 +408,10 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     private _listenOnResize(): void {
         resizeObservable(this._layout.nativeElement)
             .pipe(
-                filter(() => this._listenResize),
-                debounceTime(50),
+                debounceTime(20),
+                filter(
+                    (entries) => this._listenResize && !!(entries[0].contentRect.height || entries[0].contentRect.width)
+                ),
                 takeUntil(this._onDestroy$)
             )
             .subscribe(() => this.updateLayout());
@@ -417,7 +419,10 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
 
     /** @hidden Listen card change and distribute cards on column change */
     private _listenOnCardsChange(): void {
-        this._cards.changes.subscribe(() => this._processCards());
+        this._cards.changes.subscribe(() => {
+            this._processCards();
+            this.updateLayout();
+        });
     }
 
     /** @hidden */
@@ -425,8 +430,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
         this._cardsArray = this._cards
             .toArray()
             .sort((firstCard, secondCard) => firstCard.fdCardDef - secondCard.fdCardDef);
-
-        this.updateLayout();
     }
 
     /** @hidden Distribute cards among columns to arrange them in "Z" flow */
@@ -455,7 +458,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
             }
         });
 
-        this._listenOnCardsSizeChange();
+        this._listenOnCardsHeightChange();
     }
 
     /** @hidden */
@@ -507,14 +510,18 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
                     (columnIndex === columnIndexToAddSpace ? spaceToAdd : 0)
             );
 
+        const prevContainerHeight = this._containerHeight;
+
         // +4px because it's the top & bottom borders of card placeholder
         this._containerHeight = Math.ceil(Math.max(...columnsHeights) + 4);
 
-        this._changeDetector.detectChanges();
+        if (this._containerHeight !== prevContainerHeight) {
+            this._changeDetector.detectChanges();
+        }
     }
 
     /** @hidden */
-    private _listenOnCardsSizeChange(): void {
+    private _listenOnCardsHeightChange(): void {
         this._cardsSizeChangeSubscription.unsubscribe();
         this._cardsSizeChangeSubscription = new Subscription();
 
@@ -528,9 +535,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
                     this._cardsSizeChangeSubscription.add(
                         resizeObservable(card.nativeElement)
                             .pipe(
-                                filter(() => this._listenResize),
-                                distinct((resizeEntry) => resizeEntry[0].contentRect.height),
-                                debounceTime(50)
+                                skip(1),
+                                debounceTime(20),
+                                filter(() => this._listenResize && !!this._layout.nativeElement.clientHeight)
                             )
                             .subscribe(() => this._setContainerHeight())
                     );

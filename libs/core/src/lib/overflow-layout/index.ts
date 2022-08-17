@@ -5,6 +5,8 @@ export * from './directives/overflow-item-ref.directive';
 export * from './directives/overflow-layout-item.directive';
 export * from './directives/overflow-item-container-ref.directive';
 export * from './directives/overflow-layout-popover-content.directive';
+export * from './directives/overflow-layout-focusable-item.directive';
+export * from './directives/overflow-layout-item-container.directive';
 export * from './interfaces/overflow-expand.interface';
 export * from './interfaces/overflow-item-ref.interface';
 export * from './interfaces/overflow-item.interface';

@@ -14,6 +14,11 @@ export const ROUTES: Routes = [
             { path: 'home', component: PlatformHomeComponent },
             { path: 'new-component', component: NewComponentComponent },
             {
+                path: 'i18n',
+                loadChildren: () =>
+                    import('./component-docs/i18n/platform-i18n-docs.module').then((m) => m.PlatformI18nDocsModule)
+            },
+            {
                 path: 'button',
                 loadChildren: () =>
                     import('./component-docs/platform-button/platform-button.module').then(

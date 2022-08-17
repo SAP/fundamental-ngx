@@ -9,7 +9,6 @@ import { PlatformMultiInputMobileComponent } from './multi-input-mobile.componen
 @NgModule({
     declarations: [PlatformMultiInputMobileComponent],
     imports: [CommonModule, BarModule, DialogModule, ButtonModule],
-    entryComponents: [PlatformMultiInputMobileComponent],
     exports: [PlatformMultiInputMobileComponent]
 })
 export class PlatformMultiInputMobileModule {}

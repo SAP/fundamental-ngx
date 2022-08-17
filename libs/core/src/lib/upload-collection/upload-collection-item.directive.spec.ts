@@ -2,6 +2,7 @@ import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angul
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { UploadCollectionModule } from './upload-collection.module';
 import { UploadCollectionItemDirective } from './upload-collection-item.directive';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
 @Component({
     template: `
@@ -49,14 +50,12 @@ describe('UploadCollectionItemDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent],
-                imports: [UploadCollectionModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [UploadCollectionModule, IconModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

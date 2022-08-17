@@ -40,7 +40,7 @@
                         *ngIf="!token.readOnly"
                         class="fd-token__close"
                         role="button"
-                        [attr.aria-label]="token.deleteButtonLabel"
+                        [attr.aria-label]="token.deleteButtonLabel || ('coreToken.deleteButtonLabel' | fdTranslate)"
                         (click)="token.closeClickHandler($event)"
                     ></span>
                 </li>

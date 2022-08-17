@@ -164,7 +164,7 @@ export class PopoverComponent
             super.focusAutoCapture = true;
         }
         if (this.popoverControl && this.triggers.includes('click')) {
-            this.popoverControl.makeTabbable();
+            this.popoverControl._tabbable = true;
         }
     }
 

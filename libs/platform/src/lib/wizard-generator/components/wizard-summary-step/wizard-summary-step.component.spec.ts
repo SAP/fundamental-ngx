@@ -8,14 +8,12 @@ describe('WizardSummaryStepComponent', () => {
     let component: WizardSummaryStepComponent;
     let fixture: ComponentFixture<WizardSummaryStepComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformWizardGeneratorModule],
-                providers: [WizardGeneratorService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformWizardGeneratorModule],
+            providers: [WizardGeneratorService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(WizardSummaryStepComponent);

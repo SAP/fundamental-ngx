@@ -15,12 +15,22 @@ export class PlatformCheckboxGroupListComponent {
     // data passing to form
     selectedPhones = { phones: ['Samsung', 'OnePlus'] };
 
-    form1 = new FormGroup({});
-    form2 = new FormGroup({});
-    form3 = new FormGroup({
-        sports: new FormControl(['cycling', 'running'])
+    form1 = new FormGroup({
+        seasons: new FormControl()
     });
-    form4 = new FormGroup({}, { updateOn: 'submit' });
+    form2 = new FormGroup({
+        phones: new FormControl()
+    });
+    form3 = new FormGroup({
+        sports: new FormControl(['cycling', 'running']),
+        sportsDisabled: new FormControl()
+    });
+    form4 = new FormGroup(
+        {
+            frameworks: new FormControl()
+        },
+        { updateOn: 'submit' }
+    );
 
     // template driven
     countrySeason = '';

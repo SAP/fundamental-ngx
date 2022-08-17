@@ -1,4 +1,4 @@
-import { FormGroup, Validators, ValidatorFn } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,16 +6,12 @@ import { Component } from '@angular/core';
     templateUrl: 'platform-checkbox-error-handling.component.html'
 })
 export class PlatformChekboxStyleComponent {
-    customForm: FormGroup;
-    data: SomeObject;
-    validators: ValidatorFn[];
-
-    constructor() {
-        this.customForm = new FormGroup({});
-        this.validators = [Validators.requiredTrue];
-
-        this.data = new SomeObject(true, true);
-    }
+    customForm = new FormGroup({
+        presence: new FormControl(),
+        aggrement: new FormControl()
+    });
+    data = new SomeObject(true, true);
+    validators = [Validators.requiredTrue];
 
     onSubmit(): void {
         alert('Status: ' + this.customForm.status);

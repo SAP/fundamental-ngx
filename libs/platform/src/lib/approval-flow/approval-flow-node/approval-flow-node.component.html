@@ -29,9 +29,8 @@
         fdType="transparent"
         tabindex="0"
         glyph="overflow"
-        i18n-title
         title="Menu"
-        [compact]="true"
+        fdCompact
         [fdMenuTrigger]="menu"
         [disabled]="_isEditActionsAvailable"
         (click)="$event.stopPropagation()"
@@ -49,8 +48,8 @@
                 {{ node.approvers[0].name }}
             </ng-container>
 
-            <ng-template #multipleApprovers i18n="@@platformApprovalFlowNodeMembers">
-                {{ node.approvers.length }} members
+            <ng-template #multipleApprovers>
+                {{ 'platformApprovalFlow.nodeMembersCount' | fdTranslate: { count: node.approvers.length } }}
             </ng-template>
         </div>
 
@@ -59,7 +58,7 @@
                 {{ node.approvers.length > 1 ? node.description : node.approvers[0]?.description }}
             </ng-container>
 
-            <ng-template #variousTeams i18n="@@platformApprovalFlowNodeVariousTeams"> Various teams </ng-template>
+            <ng-template #variousTeams> {{ 'platformApprovalFlow.nodeVariousTeams' | fdTranslate }} </ng-template>
         </div>
 
         <fdp-object-status [status]="_objectStatus" [inverted]="true">
@@ -68,16 +67,21 @@
             </ng-container>
 
             <ng-container *ngIf="checkDueDate && _showDueDateWarning">
-                <ng-container *ngIf="_dueIn === dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusDueToday">
-                    Due today
+                <ng-container *ngIf="_dueIn === dueDateThreshold">
+                    {{ 'platformApprovalFlow.nodeStatusDueToday' | fdTranslate }}
                 </ng-container>
 
-                <ng-container *ngIf="_dueIn < dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusDueInXDays">
-                    Due in {{ dueDateThreshold - _dueIn }} days
+                <ng-container *ngIf="_dueIn < dueDateThreshold">
+                    {{
+                        'platformApprovalFlow.nodeStatusDueInXDays' | fdTranslate: { count: dueDateThreshold - _dueIn }
+                    }}
                 </ng-container>
 
-                <ng-container *ngIf="_dueIn > dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusXDaysOverdue">
-                    {{ _dueIn - dueDateThreshold }} days overdue
+                <ng-container *ngIf="_dueIn > dueDateThreshold">
+                    {{
+                        'platformApprovalFlow.nodeStatusXDaysOverdue'
+                            | fdTranslate: { count: _dueIn - dueDateThreshold }
+                    }}
                 </ng-container>
             </ng-container>
         </fdp-object-status>
@@ -119,9 +123,8 @@
         *ngIf="node.status !== 'approved'"
         fd-button
         glyph="add"
-        i18n-title
         title="Add node"
-        [compact]="true"
+        fdCompact
         class="fdp-approval-flow-node__add"
         [class.fdp-approval-flow-node__add--blank]="this._blank"
         [class.fdp-approval-flow-node__add--before]="
@@ -147,14 +150,14 @@
     ></div>
 </ng-template>
 
-<fd-menu #menu [compact]="true" placement="bottom-end" (isOpenChange)="_onMenuOpen()">
+<fd-menu #menu fdContentDensity placement="bottom-end" (isOpenChange)="_onMenuOpen()">
     <li
         *ngIf="meta?.canAddNodeBefore && !this.node?.actionsConfig?.disableAddBefore"
         fd-menu-item
         (click)="menu.close(); onAdd.emit('before')"
     >
         <div fd-menu-interactive>
-            <span i18n="@@platformApprovalFlowNodeAddApproversBefore" fd-menu-title>Add approvers before</span>
+            <span fd-menu-title>{{ 'platformApprovalFlow.nodeActionAddApproversBefore' | fdTranslate }}</span>
         </div>
     </li>
 
@@ -164,7 +167,7 @@
         (click)="menu.close(); onAdd.emit('after')"
     >
         <div fd-menu-interactive>
-            <span i18n="@@platformApprovalFlowNodeAddApproversAfter" fd-menu-title>Add approvers after</span>
+            <span fd-menu-title>{{ 'platformApprovalFlow.nodeActionAddApproversAfter' | fdTranslate }}</span>
         </div>
     </li>
 
@@ -174,7 +177,7 @@
         (click)="menu.close(); onAdd.emit('parallel')"
     >
         <div fd-menu-interactive>
-            <span i18n="@@platformApprovalFlowNodeAddApproversParallel" fd-menu-title>Add parallel approvers</span>
+            <span fd-menu-title>{{ 'platformApprovalFlow.nodeActionAddApproversParallel' | fdTranslate }}</span>
         </div>
     </li>
 
@@ -184,13 +187,13 @@
         (click)="menu.close(); onEdit.emit()"
     >
         <div fd-menu-interactive>
-            <span i18n="@@platformApprovalFlowNodeEditApprover" fd-menu-title>Edit approver</span>
+            <span fd-menu-title> {{ 'platformApprovalFlow.nodeActionEditApprover' | fdTranslate }}</span>
         </div>
     </li>
 
     <li *ngIf="!this.node?.actionsConfig?.disableRemove" fd-menu-item (click)="menu.close(); onDelete.emit()">
         <div fd-menu-interactive>
-            <span i18n="@@platformApprovalFlowNodeRemoveNode" fd-menu-title>Remove</span>
+            <span fd-menu-title> {{ 'platformApprovalFlow.nodeActionRemove' | fdTranslate }}</span>
         </div>
     </li>
 </fd-menu>

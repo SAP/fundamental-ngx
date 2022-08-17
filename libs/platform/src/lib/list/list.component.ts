@@ -350,6 +350,8 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
      */
     private _dsSubscription: Nullable<Subscription>;
 
+    private _clickSubscription = new Subscription();
+
     /** @hidden */
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
@@ -423,6 +425,10 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
         if (this._dsSubscription) {
             this._dsSubscription.unsubscribe();
+        }
+
+        if (this._clickSubscription) {
+            this._clickSubscription.unsubscribe();
         }
     }
 
@@ -758,20 +764,30 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             this.ariaSetsize = this.listItems.length;
         }
 
+        this._clickSubscription.unsubscribe();
+
+        this._clickSubscription = new Subscription();
+
         this._partialNavigation = this.listItems.some((item) => item.navigationIndicator || item.listType === 'detail');
 
-        this.listItems.forEach((item, i) => {
+        this.listItems.forEach((item, index) => {
             if (!this._partialNavigation) {
                 item.navigated = this.navigated;
                 item.navigationIndicator = this.navigationIndicator;
                 item.listType = this.listType;
             }
 
-            item.contentDensity = this.contentDensity;
+            // item.contentDensity = this.contentDensity; // no need for this
             item.selectionMode = this.selectionMode;
             item.rowSelection = this.rowSelection;
             item._hasByLine = this.hasByLine;
             item.ariaPosinet = ++i;
+
+            this._clickSubscription.add(
+                item.itemSelected.subscribe(() => {
+                    this._keyManager.setActiveItem(index);
+                })
+            );
 
             this.stateChanges.next(item);
         });

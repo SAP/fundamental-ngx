@@ -3,22 +3,30 @@
 </ng-template>
 
 <div class="fd-overflow-layout__items-container" #layoutContainer>
-    <div class="fd-overflow-layout__items" #itemsWrapper>
-        <ng-container *ngFor="let item of _allItems; trackBy: _itemsTrackFn">
-            <div fdOverflowLayoutItemContainer [first]="item.first" [last]="item.last" [softHidden]="item.softHidden">
-                <ng-container *fdOverflowItemContainerRef>
-                    <ng-template
-                        [ngTemplateOutlet]="item.templateRef"
-                        [ngTemplateOutletContext]="{
-                            $implicit: item.hidden,
-                            index: item.index,
-                            first: item.first,
-                            last: item.last
-                        }"
-                    ></ng-template>
-                </ng-container>
-            </div>
-        </ng-container>
+    <div class="fd-overflow-layout__items-wrapper">
+        <div class="fd-overflow-layout__items" #itemsWrapper>
+            <ng-container *ngFor="let item of _allItems; trackBy: _itemsTrackFn">
+                <div
+                    fdOverflowLayoutItemContainer
+                    [first]="item.first"
+                    [last]="item.last"
+                    [softHidden]="item.softHidden"
+                >
+                    <ng-container *fdOverflowItemContainerRef>
+                        <ng-template
+                            [ngTemplateOutlet]="item.templateRef"
+                            [ngTemplateOutletContext]="{
+                                $implicit: item.hidden,
+                                index: item.index,
+                                first: item.first,
+                                last: item.last,
+                                globalIndex: item.globalIndex
+                            }"
+                        ></ng-template>
+                    </ng-container>
+                </div>
+            </ng-container>
+        </div>
     </div>
 </div>
 
@@ -37,13 +45,8 @@
                 [maxWidth]="312"
             >
                 <fd-popover-control>
-                    <button
-                        fd-button
-                        [fdMenu]="true"
-                        i18n="@overflowLayout.moreItemsButton|Overflow Layout more button text"
-                        fdType="transparent"
-                    >
-                        {{ _hiddenItems.length }} more
+                    <button fd-button [fdMenu]="true" fdType="transparent">
+                        {{ 'coreOverflowLayout.moreItemsButton' | fdTranslate: { count: _hiddenItems.length } }}
                     </button>
                 </fd-popover-control>
                 <fd-popover-body>
@@ -55,7 +58,8 @@
                                     $implicit: item.hidden,
                                     index: item.index,
                                     first: item.first,
-                                    last: item.last
+                                    last: item.last,
+                                    globalIndex: item.globalIndex
                                 }"
                             ></ng-template>
                         </ng-container>

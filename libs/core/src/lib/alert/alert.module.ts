@@ -16,7 +16,6 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
     declarations: [AlertComponent, AlertContainerComponent],
     imports: [CommonModule, ButtonModule],
     exports: [AlertComponent, AlertContainerComponent],
-    entryComponents: [AlertContainerComponent, AlertComponent],
     providers: [AlertService, DynamicComponentService]
 })
 export class AlertModule {}

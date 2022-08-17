@@ -4,7 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContentDensity, DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { isOptionItem, OptionItem } from '@fundamental-ngx/platform/shared';
@@ -13,6 +13,7 @@ import { PlatformSelectModule } from '../select.module';
 import { SelectComponent } from '../select/select.component';
 import { FdpSelectionChangeEvent } from '../commons/base-select';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-select-test',
@@ -24,7 +25,7 @@ import { runValueAccessorTests } from 'ngx-cva-test-suite';
                     name="field"
                     placeholder="Select an option"
                     [maxHeight]="maxHeight"
-                    [contentDensity]="contentDensity"
+                    [fdContentDensity]="contentDensity"
                     [list]="fromData"
                     [value]="selectedItem"
                     (selectionChange)="onSelect($event)"
@@ -54,7 +55,7 @@ class SelectStandardComponent {
     selectedItem = null;
     maxHeight: string;
     autoResize = false;
-    contentDensity: ContentDensity = 'cozy';
+    contentDensity: ContentDensityMode = ContentDensityMode.COZY;
 
     customForm = new FormGroup({
         field: new FormControl()
@@ -99,7 +100,7 @@ describe('Select Component default values', () => {
     });
 
     it('Select should have compact display', () => {
-        component.contentDensity = 'compact';
+        component.contentDensity = ContentDensityMode.COMPACT;
 
         fixture.detectChanges();
 

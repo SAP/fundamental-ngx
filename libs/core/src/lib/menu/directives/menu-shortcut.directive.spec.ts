@@ -24,12 +24,10 @@ describe('MenuShortcutDirective', () => {
     let isMobileSubject: Subject<boolean>;
     let directive: MenuShortcutDirective;
 
-    beforeEach(
-        waitForAsync(() => {
-            isMobileSubject = new Subject<boolean>();
-            directive = new MenuShortcutDirective(buildMenuItem(isMobileSubject), elementRefMock);
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        isMobileSubject = new Subject<boolean>();
+        directive = new MenuShortcutDirective(buildMenuItem(isMobileSubject), elementRefMock);
+    }));
 
     it('should create an instance', () => {
         expect(directive).toBeTruthy();

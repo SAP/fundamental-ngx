@@ -1,6 +1,5 @@
 <button
     fd-button
-    fd-button
     aria-label="Open value help dialog"
     title="Open value help dialog"
     glyph="value-help"
@@ -8,24 +7,22 @@
     label="Open value help dialog"
 ></button>
 <br />
-<div fd-form-item *ngIf="actualItems.length">
-    <fd-tokenizer [compact]="true">
-        <fd-token *ngFor="let token of actualItems" [compact]="true" [readOnly]="true">{{ token }}</fd-token>
+<div *ngIf="actualItems.length">
+    <fd-tokenizer fdCompact>
+        <fd-token *ngFor="let token of actualItems" [readOnly]="true">{{ token }}</fd-token>
     </fd-tokenizer>
 </div>
 <fdp-value-help-dialog
     #vhd
+    fdCompact
     dialogTitle="Simple value help dialog"
     uniqueKey="id"
     tokenViewField="name"
-    selectTabTitle="Select from list"
-    defineTabTitle="Define Conditions"
     [formatToken]="formatTokenFn"
     [dataSource]="dataSource"
     (valueChange)="valueChange($event)"
     headerId="fdp-vhd-header-1"
 >
-    <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
     <fdp-value-help-dialog-filter
         *ngFor="let filter of filters; index as i"
         [main]="i < 2"

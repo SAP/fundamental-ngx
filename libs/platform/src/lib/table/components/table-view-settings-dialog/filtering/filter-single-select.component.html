@@ -1,21 +1,19 @@
-<ul fd-list [compact]="contentDensity | isCompactDensity" [selection]="true">
+<ul fd-list [selection]="true">
     <li fd-list-item [selected]="_value === NOT_FILTERED_OPTION_VALUE">
         <fd-radio-button
             name="sort-by"
             [value]="NOT_FILTERED_OPTION_VALUE"
             state="default"
-            [compact]="contentDensity | isCompactDensity"
             [ngModel]="_value"
             (ngModelChange)="_onValueChange($event)"
         ></fd-radio-button>
-        <span fd-list-title i18n="@@platformTableFilterDialogNotFilteredLabel">(Not Filtered)</span>
+        <span fd-list-title>{{ 'platformTable.filterDialogNotFilteredLabel' | fdTranslate }}</span>
     </li>
     <li fd-list-item *ngFor="let option of options" [selected]="option.value === _value">
         <fd-radio-button
             [ngModel]="_value"
             (ngModelChange)="_onValueChange($event)"
             [value]="option.value"
-            [compact]="contentDensity | isCompactDensity"
             name="filtering-settings-single-select"
         ></fd-radio-button>
         <span fd-list-title>{{ option.label }}</span>

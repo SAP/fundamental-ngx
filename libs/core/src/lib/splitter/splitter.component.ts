@@ -31,9 +31,12 @@ export class SplitterComponent {
         return this._defaultPaneId;
     }
 
-    /** aria-label for the pagination item. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * aria-label for the pagination item.
+     */
     @Input()
-    paginationItemAriaLabel = 'Section';
+    paginationItemAriaLabel: string;
 
     /** @hidden */
     _defaultPaneId$ = new Subject<string>();

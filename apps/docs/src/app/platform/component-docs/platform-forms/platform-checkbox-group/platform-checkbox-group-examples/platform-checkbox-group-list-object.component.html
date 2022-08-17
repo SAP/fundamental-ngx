@@ -7,7 +7,7 @@
             [list]="languages"
             [isInline]="true"
             name="languages"
-            contentDensity="compact"
+            fdCompact
             ariaLabel="Programming Languages Known"
             [formControl]="fl1.formControl"
         ></fdp-checkbox-group>
@@ -66,7 +66,7 @@
 <br />
 <p>Disabled checkbox group</p>
 <fdp-form-group [formGroup]="form6">
-    <fdp-form-field #fl3 id="disabled currencies" label="Disabled checkbox Group: " [disabled]="true" [rank]="1">
+    <fdp-form-field #fl3 id="disabled_currencies" label="Disabled checkbox Group: " [disabled]="true" [rank]="1">
         <fdp-checkbox-group
             [list]="countryCurrency"
             name="currencies"
@@ -102,7 +102,7 @@
         <fdp-checkbox-group
             [list]="countryCurrency"
             name="currencies"
-            contentDensity="compact"
+            fdCompact
             ariaLabel="Currencies in country"
             [(ngModel)]="currencies"
         ></fdp-checkbox-group>

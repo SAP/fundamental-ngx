@@ -11,7 +11,6 @@ import {
     ChangeDetectionStrategy
 } from '@angular/core';
 
-import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 
 import { CSS_CLASS_NAME, INPUT_GROUP_CHILD_TOKEN } from './constants';
@@ -49,15 +48,6 @@ export const inputGroupAddonChildProvider: Provider = {
 })
 export class InputGroupAddonComponent implements AfterContentInit {
     /** @hidden */
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this._setButtonControlOptions();
-    }
-    get contentDensity(): ContentDensity {
-        return this._contentDensity;
-    }
-
-    /** @hidden */
     set disabled(disabled: boolean) {
         this._disabled = disabled;
         this._setButtonControlOptions();
@@ -81,9 +71,6 @@ export class InputGroupAddonComponent implements AfterContentInit {
     }
 
     /** @hidden */
-    private _contentDensity: ContentDensity;
-
-    /** @hidden */
     private _disabled = false;
 
     /** @hidden */
@@ -102,7 +89,7 @@ export class InputGroupAddonComponent implements AfterContentInit {
             return;
         }
 
-        button.contentDensity = this._contentDensity;
+        // button.contentDensity = this._contentDensity;
         button.disabled = this._disabled;
 
         button.markForCheck();

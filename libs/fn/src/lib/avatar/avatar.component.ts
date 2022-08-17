@@ -7,7 +7,8 @@ import {
     HostBinding,
     ElementRef,
     ViewChild,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    OnChanges
 } from '@angular/core';
 import { ANY_LANGUAGE_LETTERS_REGEX, applyCssClass, Size } from '@fundamental-ngx/core/utils';
 
@@ -32,7 +33,7 @@ const ALTER_ICON_OPTIONS = {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AvatarComponent implements OnInit {
+export class AvatarComponent implements OnInit, OnChanges {
     /** User's custom classes */
     @Input()
     class = '';
@@ -194,7 +195,7 @@ export class AvatarComponent implements OnInit {
     }
 
     /** @hidden Get an abbreviate from the label or return null if not fit requirements */
-    private _getAbbreviate(label: string, force = false): string | null {
+    private _getAbbreviate(label: string): string | null {
         if (!label || this._bgImage) {
             return null;
         }

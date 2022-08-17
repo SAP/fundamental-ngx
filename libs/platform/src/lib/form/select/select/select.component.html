@@ -1,7 +1,6 @@
 <fd-select
     [placeholder]="placeholder"
     [glyph]="glyph"
-    [compact]="contentDensity | isCompactDensity"
     [disabled]="disabled"
     [readonly]="readonly"
     [closeOnOutsideClick]="closeOnOutsideClick"
@@ -13,7 +12,7 @@
     [attr.aria-labelledby]="value"
     [attr.tooltip]="value"
     [attr.aria-readonly]="readonly"
-    attr.role="listbox"
+    [attr.role]="'listbox'"
     [value]="value"
     [state]="state"
     [stateMessage]="stateMessage"
@@ -30,7 +29,7 @@
     <li
         fd-option
         *ngFor="let item of _optionItems; index as index"
-        [disabled]="item.disabled ? true : false"
+        [disabled]="!!item.disabled"
         [value]="item.value"
         [attr.aria-labelledby]="ariaLabel"
         [attr.aria-disabled]="disabled"

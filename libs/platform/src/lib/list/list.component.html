@@ -1,17 +1,15 @@
-<ng-content selector="fd-toolbar"></ng-content>
+<ng-content select="fd-toolbar"></ng-content>
 <ul
     fd-list
     #fdlist
     [attr.id]="id"
-    [compact]="contentDensity | isCompactDensity"
     [noBorder]="noBorder"
     [selection]="selection"
     [byline]="hasByLine"
-    [class.fd-list--navigation]="navigated"
+    [class.fd-list--navigation]="navigated || navigationIndicator"
     [navigationIndicator]="navigationIndicator"
     style="outline: none"
-    [class.fd-list--navigation]="navigationIndicator"
-    (keydown)="_keyManager.onKeydown($event); _handleKeyDown($event)"
+    (keydown)="_keyManager?.onKeydown($event); _handleKeyDown($event)"
     (change)="_onSelectionChanged($event)"
     [attr.aria-setsize]="ariaSetsize"
     [attr.aria-label]="ariaLabel"
@@ -26,7 +24,7 @@
             [loading]="_loading"
             role="alert"
             [attr.aria-busy]="_loading"
-            [attr.aria-labelledby]="_loading ? 'loadingOnScroll' : ''"
+            [attr.aria-label]="_loading ? ('platformList.loadingAriaLabel' | fdTranslate) : null"
         >
             <div
                 fd-list
@@ -41,7 +39,32 @@
             </div>
         </fd-busy-indicator>
     </ng-container>
-    <ng-container *ngIf="!loadOnScroll && _items.length !== 0; then thenBlock; else elseBlock"></ng-container>
+    <ng-container *ngIf="!loadOnScroll">
+        <ng-template *ngIf="_items.length !== 0; then thenBlock; else elseBlock"> </ng-template>
+        <li
+            #listItem
+            *ngIf="loadMore && !loadOnScroll"
+            (click)="_getMoreData()"
+            fd-list-item
+            (keydown)="_loadOnkeyPress($event)"
+            class="fd-list__item fd-list__item--growing fd-list__item--action"
+            [tabindex]="0"
+            role="button"
+        >
+            <button class="fd-list__title">
+                <fd-busy-indicator
+                    size="m"
+                    class="fd-busy-indicator-custom"
+                    [block]="true"
+                    [loading]="_loading"
+                    role="alert"
+                    [attr.aria-label]="_loading ? ('platformList.loadingAriaLabel' | fdTranslate) : loadTitle"
+                >
+                </fd-busy-indicator>
+                {{ loadTitle }} <ng-content select="#load"></ng-content>
+            </button>
+        </li>
+    </ng-container>
 </ul>
 <div
     #listItem
@@ -75,6 +98,3 @@
 <ng-template #elseBlock>
     <ng-content></ng-content>
 </ng-template>
-
-<span style="display: none" id="loadingOnScroll" i18n="@@list.loading">loading</span>
-<span style="display: none" id="loadingOnbutton" i18n="@@list.loadingtitle">{{ loadTitle }}</span>

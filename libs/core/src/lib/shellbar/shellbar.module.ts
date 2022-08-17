@@ -20,6 +20,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
 import { ShellbarActionsMobileComponent } from './shellbar-actions-mobile/shellbar-actions-mobile.component';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { DeprecatedShellbarCompactDirective } from './deprecated-shellbar-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
@@ -48,6 +49,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         DragDropModule,
         ProductSwitchModule,
         IconModule,
+        I18nModule,
         AvatarModule,
         ContentDensityModule
     ],

@@ -34,13 +34,11 @@ describe('ProgressIndicatorComponent', () => {
     let testComponent: TestProgressIndicatorComponent;
     let fixture: ComponentFixture<TestProgressIndicatorComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ProgressIndicatorComponent, TestProgressIndicatorComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ProgressIndicatorComponent, TestProgressIndicatorComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestProgressIndicatorComponent);

@@ -3,8 +3,6 @@ import { checkElArrIsClickable, checkElementText, checkElementTextValue } from '
 import {
     compactClass,
     borderStyleAttr,
-    compactAttr,
-    compactValue,
     listTypeAttr,
     loadMoreClass,
     multiSelect,
@@ -36,6 +34,8 @@ import {
     getElementSize,
     waitForPresent
 } from '../../driver/wdio';
+
+declare const $$: any;
 
 describe('List test suite:', () => {
     const listPage = new ListPo();
@@ -97,7 +97,7 @@ describe('List test suite:', () => {
         it('should do basic checks', () => {
             checkElArrIsClickable(noBorderListItems);
             checkElementText(noBorderListItems);
-            expect(getAttributeByName(noBorderCompactList, compactAttr)).toBe(compactValue);
+            expect($$(`${noBorderCompactList} > .${compactClass}`)).toBeTruthy();
         });
 
         it('should check border border-style property', () => {
@@ -114,7 +114,7 @@ describe('List test suite:', () => {
             checkElArrIsClickable(footerListItems);
             checkElementText(footerListItems);
             checkElementText(footer);
-            expect(getAttributeByName(footerCompactList, compactAttr)).toBe(compactValue);
+            expect($$(`${footerCompactList} > .${compactClass}`)).toBeTruthy();
         });
     });
 
@@ -123,7 +123,7 @@ describe('List test suite:', () => {
             checkElArrIsClickable(groupHeaderListItems);
             checkElementText(groupHeaderListItems);
             checkElementText(groupHeader);
-            expect(getAttributeByName(groupCompactList, compactAttr)).toBe(compactValue);
+            expect($$(`${groupCompactList} > .${compactClass}`)).toBeTruthy();
         });
     });
 
@@ -139,7 +139,7 @@ describe('List test suite:', () => {
             checkElArrIsClickable(counterListItems);
             checkElementText(counterTitleItems);
             checkElementText(counterCounterItem);
-            expect(getAttributeByName(counterCompactList, compactAttr)).toBe(compactValue);
+            expect($$(`${counterCompactList} > .${compactClass}`)).toBeTruthy();
         });
     });
 

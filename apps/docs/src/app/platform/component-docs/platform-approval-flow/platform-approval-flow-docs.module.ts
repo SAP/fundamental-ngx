@@ -12,6 +12,7 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { PlatformApprovalFlowHeaderComponent } from './platform-approval-flow-header/platform-approval-flow-header.component';
 import { PlatformApprovalFlowDocsComponent } from './platform-approval-flow-docs.component';
 import { PlatformApprovalFlowExampleComponent } from './platform-approval-flow-examples/platform-approval-flow-example.component';
+import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
 
 const routes: Routes = [
     {
@@ -19,7 +20,8 @@ const routes: Routes = [
         component: PlatformApprovalFlowHeaderComponent,
         children: [
             { path: '', component: PlatformApprovalFlowDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.approvalFlow } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.approvalFlow } },
+            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformApprovalFlow') }
         ]
     }
 ];

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 
 import { SmartFilterBarComponent } from './smart-filter-bar.component';
@@ -315,15 +315,13 @@ describe('SmartFilterBarComponent', () => {
         }).compileComponents();
     });
 
-    beforeEach(
-        waitForAsync(async () => {
-            fixture = TestBed.createComponent(TestComponent);
-            component = fixture.componentInstance;
-            fixture.detectChanges();
-            await whenStable(fixture);
-            smartFilterBar = component.smartFilterBar;
-        })
-    );
+    beforeEach(async () => {
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        await whenStable(fixture);
+        smartFilterBar = component.smartFilterBar;
+    });
 
     it('should create', () => {
         expect(component).toBeTruthy();

@@ -69,18 +69,16 @@ describe('WizardComponent', () => {
     let component: WizardComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestWrapperComponent],
-                imports: [WizardModule]
-            })
-                .overrideComponent(WizardComponent, {
-                    set: { changeDetection: ChangeDetectionStrategy.Default }
-                })
-                .compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestWrapperComponent],
+            imports: [WizardModule]
         })
-    );
+            .overrideComponent(WizardComponent, {
+                set: { changeDetection: ChangeDetectionStrategy.Default }
+            })
+            .compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestWrapperComponent);

@@ -29,6 +29,7 @@ import {
 import { PlatformSmartFilterBarObservableExampleComponent } from './platform-smart-filter-bar-examples/platform-smart-filter-bar-observable-example.component';
 import { PlatformSmartFilterBarCustomLabelsExampleComponent } from './platform-smart-filter-bar-examples/platform-smart-filter-bar-custom-labels-example.component';
 import { PlatformSmartFilterBarDynamicPageExampleComponent } from './platform-smart-filter-bar-examples/platform-smart-filter-bar-dynamic-page-example.component';
+import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
 
 const routes: Routes = [
     {
@@ -36,7 +37,8 @@ const routes: Routes = [
         component: PlatformSmartFilterBarHeaderComponent,
         children: [
             { path: '', component: PlatformSmartFilterBarDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.smartFilterBar } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.smartFilterBar } },
+            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformSmartFilterBar') }
         ]
     }
 ];

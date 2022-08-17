@@ -57,14 +57,12 @@ describe('TableComponent internal', () => {
     let fixture: ComponentFixture<TableComponent>;
     let tableService: TableService;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformTableModule],
-                providers: [RtlService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformTableModule],
+            providers: [RtlService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TableComponent);
@@ -193,7 +191,7 @@ describe('TableComponent internal', () => {
         template: `
             <fdp-table
                 [dataSource]="source"
-                contentDensity="compact"
+                fdCompact
                 emptyTableMessage="No data found"
                 [selectionMode]="selection"
                 [rowsClass]="rowsClass"
@@ -231,15 +229,13 @@ describe('TableComponent internal', () => {
         let tableComponent: TableComponent<SourceItem>;
         let dataSourceLastFetchState: TableState;
 
-        beforeEach(
-            waitForAsync(() => {
-                TestBed.configureTestingModule({
-                    imports: [PlatformTableModule, PlatformButtonModule, RouterModule, RouterTestingModule],
-                    declarations: [TableHostComponent],
-                    providers: [RtlService]
-                }).compileComponents();
-            })
-        );
+        beforeEach(waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformTableModule, PlatformButtonModule, RouterModule, RouterTestingModule],
+                declarations: [TableHostComponent],
+                providers: [RtlService]
+            }).compileComponents();
+        }));
 
         beforeEach(() => {
             fixture = TestBed.createComponent(TableHostComponent);
@@ -771,7 +767,7 @@ describe('TableComponent internal', () => {
         template: `
             <fdp-table
                 [dataSource]="source"
-                contentDensity="compact"
+                fdCompact
                 [initialSortBy]="initialSortBy"
                 [initialFilterBy]="initialFilterBy"
                 [initialGroupBy]="initialGroupBy"
@@ -801,15 +797,13 @@ describe('TableComponent internal', () => {
         let fixture: ComponentFixture<TableHostComponent>;
         let tableComponent: TableComponent<SourceItem>;
 
-        beforeEach(
-            waitForAsync(() => {
-                TestBed.configureTestingModule({
-                    imports: [PlatformTableModule, RouterModule, RouterTestingModule],
-                    declarations: [TableHostComponent],
-                    providers: [RtlService]
-                }).compileComponents();
-            })
-        );
+        beforeEach(waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformTableModule, RouterModule, RouterTestingModule],
+                declarations: [TableHostComponent],
+                providers: [RtlService]
+            }).compileComponents();
+        }));
 
         beforeEach(() => {
             fixture = TestBed.createComponent(TableHostComponent);
@@ -867,13 +861,7 @@ describe('TableComponent internal', () => {
 
     @Component({
         template: `
-            <fdp-table
-                [dataSource]="source"
-                contentDensity="compact"
-                [pageScrolling]="true"
-                [pageSize]="50"
-                bodyHeight="20rem"
-            >
+            <fdp-table [dataSource]="source" fdCompact [pageScrolling]="true" [pageSize]="50" bodyHeight="20rem">
                 <fdp-column name="name" key="name" label="Name"></fdp-column>
                 <fdp-column name="description" key="description" label="Description"></fdp-column>
                 <fdp-column name="status" key="status" label="Status"></fdp-column>
@@ -891,15 +879,13 @@ describe('TableComponent internal', () => {
         let fixture: ComponentFixture<TableHostComponent>;
         let tableComponent: TableComponent<SourceItem>;
 
-        beforeEach(
-            waitForAsync(() => {
-                TestBed.configureTestingModule({
-                    imports: [PlatformTableModule, RouterModule, RouterTestingModule],
-                    declarations: [TableHostComponent],
-                    providers: [RtlService]
-                }).compileComponents();
-            })
-        );
+        beforeEach(waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformTableModule, RouterModule, RouterTestingModule],
+                declarations: [TableHostComponent],
+                providers: [RtlService]
+            }).compileComponents();
+        }));
 
         beforeEach(() => {
             fixture = TestBed.createComponent(TableHostComponent);
@@ -1028,7 +1014,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
     @Component({
         template: `
             <fdp-table
-                contentDensity="compact"
+                fdCompact
                 selectionMode="multiple"
                 [dataSource]="source"
                 [isTreeTable]="true"
@@ -1062,15 +1048,13 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
             );
         };
 
-        beforeEach(
-            waitForAsync(() => {
-                TestBed.configureTestingModule({
-                    imports: [PlatformTableModule, RouterModule, RouterTestingModule],
-                    declarations: [TableHostComponent],
-                    providers: [RtlService]
-                }).compileComponents();
-            })
-        );
+        beforeEach(waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformTableModule, RouterModule, RouterTestingModule],
+                declarations: [TableHostComponent],
+                providers: [RtlService]
+            }).compileComponents();
+        }));
 
         beforeEach(() => {
             fixture = TestBed.createComponent(TableHostComponent);

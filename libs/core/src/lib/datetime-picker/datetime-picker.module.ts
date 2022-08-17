@@ -11,6 +11,7 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { FormMessageModule } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { DeprecatedDateTimePickerContentDensityDirective } from './deprecated-date-time-picker-content-density.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
@@ -25,6 +26,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         TimeModule,
         InputGroupModule,
         ButtonModule,
+        I18nModule,
         BarModule,
         SegmentedButtonModule,
         FormMessageModule,

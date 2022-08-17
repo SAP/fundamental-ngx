@@ -33,14 +33,12 @@ describe('GenericTagComponent', () => {
     let testComponent: TestObjectStatusComponent;
     let fixture: ComponentFixture<TestObjectStatusComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestObjectStatusComponent],
-                imports: [GenericTagModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestObjectStatusComponent],
+            imports: [GenericTagModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestObjectStatusComponent);

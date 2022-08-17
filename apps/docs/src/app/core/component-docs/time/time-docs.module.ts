@@ -9,7 +9,6 @@ import { TimeDocsComponent } from './time-docs.component';
 import { TimeOnlyHoursExampleComponent } from './examples/time-only-hours-example.component';
 import { TimeProgrammaticallyExampleComponent } from './examples/time-programmatically-example.component';
 import { TimeNoSecondsExampleComponent } from './examples/time-no-seconds-example.component';
-import { TimeI18nExampleComponent } from './examples/time-i18n-example.component';
 import { TimeFormExampleComponent } from './examples/time-form-example.component';
 import { TimeExampleComponent } from './examples/time-example.component';
 import { Time12ExampleComponent } from './examples/time-12-example.component';
@@ -40,7 +39,6 @@ const routes: Routes = [
         TimeHeaderComponent,
         TimeExampleComponent,
         Time12ExampleComponent,
-        TimeI18nExampleComponent,
         TimeFormExampleComponent,
         TimeTwoDigitsExampleComponent,
         TimeOnlyHoursExampleComponent,

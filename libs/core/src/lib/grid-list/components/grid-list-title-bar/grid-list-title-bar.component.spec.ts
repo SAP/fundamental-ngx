@@ -6,13 +6,11 @@ describe('GridListTitleBarComponent', () => {
     let component: GridListTitleBarComponent;
     let fixture: ComponentFixture<GridListTitleBarComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [GridListModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [GridListModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(GridListTitleBarComponent);

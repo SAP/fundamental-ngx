@@ -10,20 +10,18 @@ describe('PopoverComponent', () => {
     let fixture: ComponentFixture<PopoverComponent>;
     let popoverServiceStub: PopoverServiceStub;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PopoverModule, OverlayModule, A11yModule],
-                providers: [{ provide: PopoverService, useClass: PopoverServiceStub }]
-            })
-                .overrideComponent(PopoverComponent, {
-                    set: {
-                        providers: [{ provide: PopoverService, useClass: PopoverServiceStub }]
-                    }
-                })
-                .compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PopoverModule, OverlayModule, A11yModule],
+            providers: [{ provide: PopoverService, useClass: PopoverServiceStub }]
         })
-    );
+            .overrideComponent(PopoverComponent, {
+                set: {
+                    providers: [{ provide: PopoverService, useClass: PopoverServiceStub }]
+                }
+            })
+            .compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(PopoverComponent);

@@ -29,14 +29,12 @@ describe('RadioButtonComponent', () => {
     let component: TestRadioButtonComponent;
     let fixture: ComponentFixture<TestRadioButtonComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FormsModule],
-                declarations: [RadioButtonComponent, TestRadioButtonComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FormsModule],
+            declarations: [RadioButtonComponent, TestRadioButtonComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestRadioButtonComponent);

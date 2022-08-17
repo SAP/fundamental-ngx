@@ -1,5 +1,5 @@
 import { ButtonType } from '@fundamental-ngx/core/button';
-import { ContentDensity } from '@fundamental-ngx/core/utils';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 export interface WizardNavigationButtons {
     /**
@@ -26,6 +26,6 @@ export interface WizardNavigationButtons {
 
 export interface WizardNavigationButton {
     label: string;
-    contentDensity: ContentDensity;
+    contentDensity: ContentDensityMode;
     type: ButtonType;
 }

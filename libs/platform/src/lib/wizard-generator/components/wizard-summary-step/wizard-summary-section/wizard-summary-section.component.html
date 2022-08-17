@@ -15,8 +15,8 @@
                 </div>
             </div>
             <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
-                <fdp-link href="#" (click)="_editStep($event)" i18n="@@PlatformFormGeneratorSummarySectionEditStep">
-                    Edit
+                <fdp-link href="#" (click)="_editStep($event)">
+                    {{ 'platformWizardGenerator.summarySectionEditStep' | fdTranslate }}
                 </fdp-link>
             </div>
         </div>

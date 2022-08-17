@@ -1,8 +1,7 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
-import { ContentDensityEnum } from '@fundamental-ngx/core/utils';
 
 import { PlatformTableModule } from '../../../table.module';
 import { P13SortingDialogComponent, SortDialogData } from './sorting.component';
@@ -13,19 +12,16 @@ describe('PlatformTableP13SortDialogComponent', () => {
     const dialogRef = new DialogRef();
     const dialogData: SortDialogData = {
         columns: [],
-        collectionSort: [],
-        tableContentDensity: ContentDensityEnum.COZY
+        collectionSort: []
     };
     dialogRef.data = dialogData;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformTableModule, BrowserAnimationsModule],
-                providers: [{ provide: DialogRef, useValue: dialogRef }, DialogConfig]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformTableModule, BrowserAnimationsModule],
+            providers: [{ provide: DialogRef, useValue: dialogRef }, DialogConfig]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(P13SortingDialogComponent);

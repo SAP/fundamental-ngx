@@ -8,15 +8,13 @@ describe('CalendarYearViewComponent', () => {
     let component: CalendarYearViewComponent<FdDate>;
     let fixture: ComponentFixture<CalendarYearViewComponent<FdDate>>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FdDatetimeModule],
-                declarations: [CalendarYearViewComponent],
-                providers: [CalendarService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdDatetimeModule],
+            declarations: [CalendarYearViewComponent],
+            providers: [CalendarService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent<CalendarYearViewComponent<FdDate>>(CalendarYearViewComponent);

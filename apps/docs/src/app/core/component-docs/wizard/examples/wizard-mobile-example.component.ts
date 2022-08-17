@@ -20,6 +20,7 @@ import { WizardService } from '@fundamental-ngx/core/wizard';
     providers: [WizardService]
 })
 export class WizardMobileExampleComponent {
+    contentHeight = '450px';
     example1step1status: WizardStepStatus = 'current';
     example1step2status: WizardStepStatus = 'upcoming';
     example1step3status: WizardStepStatus = 'upcoming';
