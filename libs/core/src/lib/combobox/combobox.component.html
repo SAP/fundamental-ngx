@@ -41,7 +41,6 @@
 
 <ng-template #controlTemplate>
     <fd-input-group
-        [compact]="compact"
         [button]="showDropdownButton"
         [glyph]="showDropdownButton ? glyphValue : null"
         [state]="state"
@@ -76,7 +75,6 @@
             [displayFn]="displayFn"
             [options]="dropdownValues"
             [inputText]="inputText"
-            [compact]="compact"
             [disabled]="disabled"
             [readonly]="readOnly"
             [attr.aria-readonly]="readOnly"
@@ -91,7 +89,7 @@
         />
         <span
             class="fd-input-group__addon fd-input-group__addon--button"
-            [class.fd-input-group__addon--compact]="compact"
+            [class.fd-input-group__addon--compact]="_contentDensityObserver.isCompact$ | async"
             [class.fd-shellbar__input-group-addon]="inShellbar"
             *ngIf="isSearch && showClearButton && inputText && inputText.length > 0"
         >
@@ -101,7 +99,6 @@
                 type="button"
                 [fdType]="inShellbar ? 'standard' : 'transparent'"
                 title="Clear input"
-                [class.fd-button--compact]="compact"
                 [class.fd-shellbar__button]="inShellbar"
                 [attr.tabindex]="buttonFocusable ? 0 : -1"
                 (focus)="clearInputBtnFocus()"
@@ -122,7 +119,6 @@
         fd-list
         class="fd-combobox-custom-list fd-combobox-input-menu-overflow"
         [dropdownMode]="true"
-        [compact]="compact"
         [id]="comboboxId + '-result'"
         role="listbox"
         [attr.aria-labelledby]="comboboxId + '-search'"
@@ -144,7 +140,7 @@
                     [tabindex]="0"
                     class="fd-combobox-list-item"
                     *ngFor="let term of group.value"
-                    [selected]="inputText === (term | displayFnPipe: displayFn)"
+                    [selected]="isSelected(term)"
                     (keyDown)="onItemKeyDownHandler($event, term)"
                     (click)="onMenuClickHandler(term)"
                 >
@@ -162,7 +158,7 @@
                 [tabindex]="0"
                 class="fd-combobox-list-item"
                 *ngFor="let term of displayedValues"
-                [selected]="inputText === (term | displayFnPipe: displayFn)"
+                [selected]="isSelected(term)"
                 (keyDown)="onItemKeyDownHandler($event, term)"
                 (click)="onMenuClickHandler(term)"
             >

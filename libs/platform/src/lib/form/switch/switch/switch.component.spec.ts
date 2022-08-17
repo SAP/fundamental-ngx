@@ -3,7 +3,7 @@ import { Component, QueryList, ViewChildren } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { SwitchComponent, SwitchChangeEvent } from './switch.component';
+import { SwitchChangeEvent, SwitchComponent } from './switch.component';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { PlatformSwitchModule } from '../switch.module';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
@@ -17,7 +17,7 @@ import { runValueAccessorTests } from 'ngx-cva-test-suite';
                     id="switch-0"
                     name="switch-0"
                     ariaLabel="switch-label-0"
-                    ariaLabelledby="switch-labelledby-0"
+                    ariaLabelledBy="switch-labelledby-0"
                     formControlName="switch0"
                     (switchChange)="switchChange($event)"
                 >
@@ -29,9 +29,9 @@ import { runValueAccessorTests } from 'ngx-cva-test-suite';
                     id="switch-1"
                     name="switch-1"
                     ariaLabel="switch-label-1"
-                    ariaLabelledby="switch-labelledby-1"
+                    ariaLabelledBy="switch-labelledby-1"
                     formControlName="switch1"
-                    contentDensity="compact"
+                    fdCompact
                 >
                 </fdp-switch>
             </fdp-form-field>
@@ -41,7 +41,7 @@ import { runValueAccessorTests } from 'ngx-cva-test-suite';
                     id="switch-2"
                     name="switch-2"
                     ariaLabel="switch-label-2"
-                    ariaLabelledby="switch-labelledby-2"
+                    ariaLabelledBy="switch-labelledby-2"
                     formControlName="switch2"
                     semantic="true"
                 >
@@ -53,7 +53,7 @@ import { runValueAccessorTests } from 'ngx-cva-test-suite';
                     id="switch-3"
                     name="switch-3"
                     ariaLabel="switch-label-3"
-                    ariaLabelledby="switch-labelledby-3"
+                    ariaLabelledBy="switch-labelledby-3"
                     formControlName="switch3"
                     semantic="true"
                 >
@@ -83,14 +83,12 @@ describe('SwitchComponent', () => {
     let component: TestSwitchComponent;
     let fixture: ComponentFixture<TestSwitchComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FdpFormGroupModule, ReactiveFormsModule, PlatformSwitchModule],
-                declarations: [TestSwitchComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdpFormGroupModule, ReactiveFormsModule, PlatformSwitchModule],
+            declarations: [TestSwitchComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestSwitchComponent);
@@ -105,16 +103,6 @@ describe('SwitchComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
-
-    it('should have compact applied', async () => {
-        await wait(fixture);
-        fixture.detectChanges();
-
-        const fdpElem = fixture.debugElement.query(By.css('#switch-1'));
-        const switches = component.fdpSwitch.toArray();
-        expect(switches[1]._contentDensity).toEqual('compact');
-        expect(fdpElem).toBeTruthy();
     });
 
     it('should trigger an event after click', async () => {

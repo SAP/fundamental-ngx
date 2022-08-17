@@ -1,27 +1,49 @@
-<header>Wizard generator</header>
-<description>
-    This is a wrapper of the Platform component present in <a routerLink="/core/wizard">@fundamental-ngx/core</a>.
-    <br />
-    It provides ability to dynamically generate Wizard without any user-provided templates.
-    <br />
-    <br />
+<fd-doc-page>
+    <header>Wizard generator</header>
+    <description>
+        This is a wrapper of the Platform component present in <a routerLink="/core/wizard">@fundamental-ngx/core</a>.
+        <br />
+        It provides ability to dynamically generate Wizard without any user-provided templates.
+        <br />
+        <br />
 
-    <h3>Platform specific enhancements:</h3>
-    <ul>
-        <li>Steps are dynamically rendered based on steps object input.</li>
-        <li>Branching logic is based on the steps object input.</li>
-    </ul>
-    <p>
-        Developers can also set default form field parameters by calling <code>withConfig()</code> method of the
-        <code>PlatformWizardGeneratorModule</code> during it's import.
-    </p>
-    <p>
-        For more information on avaliable elements, please see:
-        <a routerLink="/platform/form-generator" fragment="default-configuration">Form generator documentation</a>.
-    </p>
-</description>
-<br />
-<import module="PlatformWizardGeneratorModule" subPackage="wizard-generator"></import>
+        <h3>Platform specific enhancements:</h3>
+        <ul>
+            <li>Steps are dynamically rendered based on steps object input.</li>
+            <li>Branching logic is based on the steps object input.</li>
+        </ul>
+        <p>
+            Developers can also set default form field parameters by calling <code>withConfig()</code> method of the
+            <code>PlatformWizardGeneratorModule</code> during it's import.
+        </p>
+        <p>
+            For more information on avaliable elements, please see:
+            <a routerLink="/platform/form-generator" fragment="default-configuration">Form generator documentation</a>.
+        </p>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+        <h3>Wizard Generator Elements:</h3>
+        <ul>
+            <li><b>input</b>: specifies an input field where the user can enter data.</li>
+            <li><b>number</b>: specifies an input field where the user can enter a number.</li>
+            <li><b>password</b>: specifies an input field where the user can enter a password.</li>
+            <li>
+                <b>checkbox</b>: specifies square boxes which are ticked (checked) when the user select one or more
+                options.
+            </li>
+            <li><b>radio</b>: allows the user to see all options and select one.</li>
+            <li><b>confirm</b>: is a button which allows to gather all the data from the wizard generator.</li>
+            <li><b>editor</b>: is a text-field area where the user can include a short text.</li>
+            <li>
+                <b>select</b>: is a combination of select and option components where the list of option is shown in
+                dropdown format.
+            </li>
+            <li><b>datepicker</b>: is a combination of "input-group", "popover" and "calendar" to select a date.</li>
+            <li><b>switch</b>: is used to activate or deactivate an element.</li>
+            <li><b>multi-input</b>: is an input with multiple selection enabled.</li>
+        </ul>
+    </description>
+    <br />
+    <import module="PlatformWizardGeneratorModule" subPackage="wizard-generator"></import>
+
+    <fd-header-tabs [hasI18n]="true"></fd-header-tabs>
+</fd-doc-page>

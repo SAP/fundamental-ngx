@@ -76,14 +76,12 @@ describe('ButtonComponent', () => {
     let testDirectiveInstance: TestDirective;
     let buttonInstance: ButtonComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, ButtonModule],
-                declarations: [TestDirective, TestComponent, TestProxyComponent]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, ButtonModule],
+            declarations: [TestDirective, TestComponent, TestProxyComponent]
+        });
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(TestComponent);
@@ -107,7 +105,6 @@ describe('ButtonComponent', () => {
     });
 
     it('should handle styles for 2 directives', async () => {
-        buttonInstance.compact = true;
         buttonInstance.fdType = 'standard';
 
         testDirectiveInstance.ngOnInit();
@@ -117,7 +114,6 @@ describe('ButtonComponent', () => {
         const componentClasses = (buttonInstance.elementRef().nativeElement as HTMLElement).className;
 
         expect(componentClasses).toContain('standard');
-        expect(componentClasses).toContain('compact');
         expect(componentClasses).toContain(TEST_DIRECTIVE_CLASS);
     });
 

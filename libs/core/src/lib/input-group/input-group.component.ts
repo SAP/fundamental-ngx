@@ -1,29 +1,25 @@
 import {
-    Component,
-    Input,
-    Output,
-    EventEmitter,
-    forwardRef,
-    ViewEncapsulation,
-    ContentChild,
-    TemplateRef,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
+    Component,
+    ContentChild,
     ElementRef,
+    EventEmitter,
+    forwardRef,
+    Input,
+    isDevMode,
     OnDestroy,
-    OnInit,
-    Optional,
-    AfterViewInit,
+    Output,
+    TemplateRef,
     ViewChild,
-    isDevMode
+    ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { filter, fromEvent, map, merge, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, fromEvent, map, merge, Observable, Subject, takeUntil, debounceTime } from 'rxjs';
 
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { InputGroupPlacement } from './types';
@@ -56,7 +52,7 @@ let addOnInputRandomId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputGroupComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, FormItemControl {
+export class InputGroupComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
     /** @deprecated Input template, use fd-input-group-input directive instead. */
     @Input()
     set inputTemplate(value: TemplateRef<any>) {
@@ -66,6 +62,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, AfterV
 
         this._inputTemplate = value;
     }
+
     get inputTemplate(): TemplateRef<any> {
         return this._inputTemplate;
     }
@@ -76,10 +73,6 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, AfterV
      */
     @Input()
     placement: InputGroupPlacement = 'after';
-
-    /** Whether the input group is in compact mode. */
-    @Input()
-    compact?: boolean;
 
     /** If it is mandatory field */
     @Input()
@@ -248,21 +241,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, AfterV
     }
 
     /** @hidden */
-    constructor(
-        private readonly _elementRef: ElementRef,
-        private readonly _changeDetectorRef: ChangeDetectorRef,
-        @Optional() private readonly _contentDensityService: ContentDensityService
-    ) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._contentDensityService._isCompactDensity.pipe(takeUntil(this._onDestroy$)).subscribe((isCompact) => {
-                this.compact = isCompact;
-                this._changeDetectorRef.markForCheck();
-            });
-        }
-    }
+    constructor(private readonly _elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -336,6 +315,8 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, AfterV
             fromEvent(inputElement, 'focusin').pipe(map(() => true)),
             fromEvent(inputElement, 'focusout').pipe(map(() => false))
         ).pipe(
+            // debounceTime is needed in order to filter subsequent focus-blur events, that happen simultaneously
+            debounceTime(10),
             filter(() => this.showFocus),
             takeUntil(this._onDestroy$)
         );

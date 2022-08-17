@@ -11,7 +11,6 @@
     <fd-popover-control>
         <fd-input-group
             #inputGroupComponent
-            [compact]="compact"
             (addOnButtonClicked)="_addOnButtonClicked()"
             [button]="true"
             [state]="state"
@@ -19,22 +18,21 @@
             [buttonFocusable]="buttonFocusable"
             [isControl]="true"
             [isExpanded]="isOpen"
-            [glyphAriaLabel]="timePickerButtonLabel"
+            [glyphAriaLabel]="timePickerButtonLabel || ('coreTimePicker.timePickerButtonLabel' | fdTranslate)"
             glyph="fob-watch"
         >
             <input
                 type="text"
                 class="fd-input"
                 fd-input-group-input
-                [compact]="compact"
                 [value]="_inputTimeValue"
                 (focusout)="_timeInputChanged($any($event.currentTarget).value)"
                 (keyup.enter)="_timeInputChanged($any($event.currentTarget).value)"
                 [disabled]="disabled"
                 [attr.id]="inputId"
                 [placeholder]="_placeholder"
-                [attr.aria-label]="timePickerInputLabel"
                 [attr.aria-labelledby]="ariaLabelledBy"
+                [attr.aria-label]="timePickerInputLabel || ('coreTimePicker.timePickerInputLabel' | fdTranslate)"
                 [attr.aria-describedby]="_formValueStateMessageId"
                 [attr.aria-required]="required"
             />
@@ -48,7 +46,6 @@
         <fd-time
             *ngIf="isOpen"
             [tablet]="tablet"
-            [compact]="compact"
             [disabled]="disabled"
             [keepTwoDigits]="keepTwoDigitsTime"
             [ngModel]="time"

@@ -6,13 +6,11 @@ describe('MessagePageSubtitleComponent', () => {
     let component: MessagePageSubtitleComponent;
     let fixture: ComponentFixture<MessagePageSubtitleComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [MessagePageSubtitleComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [MessagePageSubtitleComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MessagePageSubtitleComponent);

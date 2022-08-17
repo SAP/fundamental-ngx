@@ -20,7 +20,8 @@ export class FormGeneratorPo extends BaseComponentPo {
     checkbox = '.fd-checkbox[aria-labelledby*="citizen"]';
     submitButton = '.fd-button[type="submit"]';
     calendarInputGroup = '.fd-input-group';
-    mainSpecialitySelect = ' .fd-select__control[aria-labelledby="Main Speciality"]';
+    select = ' .fd-select__control';
+    mainSpecialitySelect = ' .fd-select__control[aria-label="Main Speciality"]';
     errorMessage = '.fd-form-message--error span';
     formValue = 'p.ng-star-inserted';
     sliderPoint = '.fd-slider__handle';

@@ -40,7 +40,7 @@
         <fdp-table-cell *fdpEditableCellDef="let item">
             <form fdpEditableCellForm>
                 <fd-select placeholder="Select an option" [(value)]="item.status">
-                    <fd-option *ngFor="let option of statusOptions" [value]="option">{{ option }}</fd-option>
+                    <li fd-option *ngFor="let option of statusOptions" [value]="option">{{ option }}</li>
                 </fd-select>
             </form>
         </fdp-table-cell>

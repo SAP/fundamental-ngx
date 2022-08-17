@@ -10,8 +10,6 @@ import {
     Input,
     OnChanges,
     OnDestroy,
-    OnInit,
-    Optional,
     Output,
     Renderer2,
     SimpleChanges,
@@ -19,15 +17,15 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, takeUntil, tap } from 'rxjs';
 import { first } from 'rxjs/operators';
-
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { ButtonType } from '@fundamental-ngx/core/button';
 import { MenuComponent, MenuItemComponent } from '@fundamental-ngx/core/menu';
 
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 import { MainAction } from './main-action';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { DestroyedService } from '@fundamental-ngx/core/utils';
 
 export const splitButtonTextClass = 'fd-button-split__text';
 export const splitButtonTextCompactClass = 'fd-button-split__text--compact';
@@ -59,13 +57,10 @@ const splitButtonTextClasses = [splitButtonTextClass, splitButtonTextCompactClas
     templateUrl: 'split-button.component.html',
     styleUrls: ['./split-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [contentDensityObserverProviders()]
 })
-export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDestroy, OnInit, AfterViewInit {
-    /** Whether to apply compact mode to the button. */
-    @Input()
-    compact?: boolean;
-
+export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDestroy, AfterViewInit {
     /** The icon to include in the button. See the icon page for the list of icons. */
     @Input()
     glyph = 'slim-arrow-down';
@@ -83,9 +78,12 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     @Input()
     fdType: ButtonType;
 
-    /** Aria-label attribute used to describe expand button */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria-label attribute used to describe expand button
+     */
     @Input()
-    expandButtonAriaLabel = 'More actions';
+    expandButtonAriaLabel: string;
 
     /** Title attribute used to describe expand button */
     @Input()
@@ -108,7 +106,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** aria-label attribute */
     @Input()
-    arialLabel = 'Split button';
+    arialLabel: string;
 
     /** Event sent when primary button is clicked */
     @Output()
@@ -153,7 +151,8 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     /** @hidden */
     constructor(
         private _cdRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService,
+        private _destroy$: DestroyedService,
+        private _contentDensityObserver: ContentDensityObserver,
         private _renderer: Renderer2
     ) {}
 
@@ -166,18 +165,6 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
             this.mainAction.callback();
         }
         event.stopPropagation();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._contentDensitySubscription.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._cdRef.markForCheck();
-                })
-            );
-        }
     }
 
     /** @hidden */
@@ -208,7 +195,9 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._addButtonTextClass();
+        this._contentDensityObserver.isCompact$
+            .pipe(tap(this._addButtonTextClass), takeUntil(this._destroy$))
+            .subscribe();
     }
 
     /** @hidden */
@@ -218,9 +207,6 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         }
         if ('mainAction' in changes) {
             this._handleMainActionObject();
-        }
-        if ('compact' in changes) {
-            this._addButtonTextClass();
         }
     }
 
@@ -306,18 +292,18 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     }
 
     /** @hidden */
-    private _addButtonTextClass(): void {
+    private _addButtonTextClass = (compact: boolean): void => {
         const textSpanElement = this.mainActionBtn?.nativeElement.querySelector('.fd-button__text');
         if (!textSpanElement) {
             return;
         }
         splitButtonTextClasses.forEach((_class) => this._renderer.removeClass(textSpanElement, _class));
-        if (this.compact) {
+        if (compact) {
             this._renderer.addClass(textSpanElement, splitButtonTextCompactClass);
         } else {
             this._renderer.addClass(textSpanElement, splitButtonTextClass);
         }
-    }
+    };
 
     /** @hidden */
     private _focusTriggerElement(): void {

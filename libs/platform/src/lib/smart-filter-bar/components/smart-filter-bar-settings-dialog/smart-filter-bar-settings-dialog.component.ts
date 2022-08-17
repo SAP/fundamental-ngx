@@ -1,12 +1,14 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
+    Inject,
     OnDestroy,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { asyncScheduler, BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import { asyncScheduler, BehaviorSubject, firstValueFrom, Observable, Subject, Subscription } from 'rxjs';
 import { observeOn, takeUntil } from 'rxjs/operators';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
@@ -24,6 +26,8 @@ import { SmartFilterBarFieldDefinition } from '../../interfaces/smart-filter-bar
 import { SmartFilterSettingsDialogConfig } from '../../interfaces/smart-filter-bar-settings-dialog-config';
 import { FieldFilterItem } from '../../interfaces/smart-filter-bar-field-filter-item';
 import { SmartFilterBarOptionsDataProvider } from './data-provider';
+import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
+import { SmartFilterBarVisibilityCategoryLabels } from '../../interfaces/smart-filter-bar-visibility-category';
 
 @Component({
     selector: 'fdp-smart-filter-bar-settings-dialog',
@@ -50,6 +54,17 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
     _filterVisibilityOptions: SelectItem[] = [];
 
     /** @hidden */
+    loaded = false;
+
+    private readonly _categoryLabelKeys: SmartFilterBarVisibilityCategoryLabels = {
+        all: 'settingsCategoryAll',
+        visible: 'settingsCategoryVisible',
+        active: 'settingsCategoryActive',
+        visibleAndActive: 'settingsCategoryVisibleAndActive',
+        mandatory: 'settingsCategoryMandatory'
+    };
+
+    /** @hidden */
     private _sourceSubscription!: Subscription;
 
     /** @hidden */
@@ -68,9 +83,23 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
 
     /** @hidden */
-    constructor(private _dialogRef: DialogRef<SmartFilterSettingsDialogConfig, string[]>) {
-        this.transformVisibilityLabels();
+    private readonly _translationResolver = new TranslationResolver();
+
+    /** @hidden */
+    constructor(
+        private _dialogRef: DialogRef<SmartFilterSettingsDialogConfig, string[]>,
+        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
+        private readonly _cdr: ChangeDetectorRef
+    ) {
         this.setInitialTableState();
+        this._init();
+    }
+
+    /** @hidden */
+    private async _init(): Promise<void> {
+        await this._transformVisibilityLabels();
+        this.loaded = true;
+        this._cdr.markForCheck();
     }
 
     /** @hidden */
@@ -81,8 +110,22 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
     /**
      * Transforms visibility options into appropriate select item object.
      */
-    transformVisibilityLabels(): void {
-        for (const [selectValue, selectLabel] of Object.entries(this._dialogRef.data.visibilityCategories)) {
+    private async _transformVisibilityLabels(): Promise<void> {
+        let labels = this._dialogRef.data.visibilityCategories;
+        if (!labels) {
+            const lang = await firstValueFrom(this._language$);
+            labels = { ...this._categoryLabelKeys };
+            for (const strategyItem in labels) {
+                if (Object.prototype.hasOwnProperty.call(labels, strategyItem)) {
+                    const translationKey = labels[strategyItem];
+                    labels[strategyItem] = this._translationResolver.resolve(
+                        lang,
+                        'platformSmartFilterBar.' + translationKey
+                    );
+                }
+            }
+        }
+        for (const [selectValue, selectLabel] of Object.entries(labels)) {
             this._filterVisibilityOptions.push({
                 label: selectLabel,
                 value: selectValue

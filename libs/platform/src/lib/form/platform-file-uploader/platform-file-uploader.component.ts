@@ -14,9 +14,9 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
-import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 export class FileUploaderInvalidChangeEvent {
     constructor(
@@ -35,7 +35,8 @@ export class FileUploaderSelectionChangeEvent {
 @Component({
     selector: 'fdp-file-uploader',
     templateUrl: './platform-file-uploader.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [contentDensityObserverProviders()]
 })
 export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
     /** Button value */
@@ -65,17 +66,6 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
     /** Accepted file extensions. Format: `'.png,.jpg'`. */
     @Input()
     accept: string;
-
-    /**
-     * content Density of element: 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-    }
-    get contentDensity(): ContentDensity {
-        return this._contentDensity || 'cozy';
-    }
 
     /** Specifies number of files to allow to select */
     @Input()
@@ -121,6 +111,7 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
     get value(): File {
         return super.getValue();
     }
+
     set value(value: File) {
         super.setValue(value);
     }
@@ -130,7 +121,8 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        readonly contentDensityObserver: ContentDensityObserver
     ) {
         super(_cd, ngControl, ngForm, formField, formControl);
     }

@@ -1,24 +1,20 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { FdDatetimeModule, FdDate } from '../datetime';
+import { FdDate, FdDatetimeModule } from '../datetime';
 
 import { CalendarComponent } from './calendar.component';
 import { CalendarModule } from './calendar.module';
 import { ButtonModule } from '../button/button.module';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 
 describe('CalendarComponent', () => {
     let component: CalendarComponent<FdDate>;
     let fixture: ComponentFixture<CalendarComponent<FdDate>>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FdDatetimeModule, CalendarModule, ButtonModule],
-                providers: [ContentDensityService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdDatetimeModule, CalendarModule, ButtonModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent<CalendarComponent<FdDate>>(CalendarComponent);
@@ -167,10 +163,5 @@ describe('CalendarComponent', () => {
         component.activeView = 'year';
         component.handlePreviousArrowClick();
         expect(component.displayPreviousYearList).toHaveBeenCalled();
-    });
-
-    it('should handle content density when compact input is not provided', () => {
-        component.ngOnInit();
-        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 });

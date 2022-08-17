@@ -9,7 +9,6 @@ import { TimeDocsComponent } from './time-docs.component';
 import { TimeOnlyHoursExampleComponent } from './examples/time-only-hours-example.component';
 import { TimeProgrammaticallyExampleComponent } from './examples/time-programmatically-example.component';
 import { TimeNoSecondsExampleComponent } from './examples/time-no-seconds-example.component';
-import { TimeI18nExampleComponent } from './examples/time-i18n-example.component';
 import { TimeFormExampleComponent } from './examples/time-form-example.component';
 import { TimeExampleComponent } from './examples/time-example.component';
 import { Time12ExampleComponent } from './examples/time-12-example.component';
@@ -18,7 +17,8 @@ import { TimeSizesExampleComponent } from './examples/time-sizes-example.compone
 import { TimeNoSpinnersExampleComponent } from './examples/time-no-spinners-example/time-no-spinners-example.component';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { TimeModule } from '@fundamental-ngx/core/time';
+import { DeprecatedTimeContentDensityDirective, TimeModule } from '@fundamental-ngx/core/time';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -39,7 +39,6 @@ const routes: Routes = [
         TimeHeaderComponent,
         TimeExampleComponent,
         Time12ExampleComponent,
-        TimeI18nExampleComponent,
         TimeFormExampleComponent,
         TimeTwoDigitsExampleComponent,
         TimeOnlyHoursExampleComponent,
@@ -47,6 +46,7 @@ const routes: Routes = [
         TimeProgrammaticallyExampleComponent,
         TimeNoSpinnersExampleComponent,
         TimeSizesExampleComponent
-    ]
+    ],
+    providers: [moduleDeprecationsProvider(DeprecatedTimeContentDensityDirective)]
 })
 export class TimeDocsModule {}

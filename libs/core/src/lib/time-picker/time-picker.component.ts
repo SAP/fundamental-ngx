@@ -21,13 +21,11 @@ import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } fro
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Placement, FormStates, ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
-import { DatetimeAdapter, DATE_TIME_FORMATS, DateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { FormStates, Nullable, Placement, ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
+import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { TimeComponent } from '@fundamental-ngx/core/time';
 import { PopoverFormMessageService, registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 import { PopoverService } from '@fundamental-ngx/core/popover';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
@@ -72,10 +70,6 @@ export class TimePickerComponent<D>
     /** Id attribute for input element inside TimePicker component */
     @Input()
     inputId: string;
-
-    /** Uses compact time picker. */
-    @Input()
-    compact?: boolean;
 
     /** Disables the component. */
     @Input()
@@ -126,11 +120,11 @@ export class TimePickerComponent<D>
 
     /** Aria label for the time picker input. */
     @Input()
-    timePickerInputLabel = 'Time picker input';
+    timePickerInputLabel: string;
 
     /** Aria label for the time picker toggle button. */
     @Input()
-    timePickerButtonLabel = 'Open picker';
+    timePickerButtonLabel: string;
 
     /** Aria-labelledby for the time picker toggle button. */
     @Input()
@@ -332,7 +326,6 @@ export class TimePickerComponent<D>
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         private _popoverFormMessage: PopoverFormMessageService,
-        @Optional() private _contentDensityService: ContentDensityService,
         private _valueStateAriaMessagesService: ValueStateAriaMessageService
     ) {
         if (!this._dateTimeAdapter) {
@@ -346,15 +339,6 @@ export class TimePickerComponent<D>
     ngOnInit(): void {
         this._calculateTimeOptions();
         this._formatTimeInputField();
-
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._changeDetectorRef.markForCheck();
-                })
-            );
-        }
 
         this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._calculateTimeOptions();

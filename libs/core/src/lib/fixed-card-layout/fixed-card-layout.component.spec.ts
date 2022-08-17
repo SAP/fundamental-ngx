@@ -36,15 +36,13 @@ describe('FixedCardLayoutComponent', () => {
     let component: TestFixedCardLayoutComponent;
     let fixture: ComponentFixture<TestFixedCardLayoutComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CardModule, FixedCardLayoutModule],
-                declarations: [TestFixedCardLayoutComponent],
-                providers: [RtlService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CardModule, FixedCardLayoutModule],
+            declarations: [TestFixedCardLayoutComponent],
+            providers: [RtlService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestFixedCardLayoutComponent);
@@ -103,6 +101,7 @@ describe('FixedCardLayoutComponent', () => {
                 }
             } as any;
 
+            component.fixedCardLayout.updateLayout();
             component.fixedCardLayout._onDragDropped(event);
             fixture.detectChanges();
 

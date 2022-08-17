@@ -12,6 +12,7 @@ $fd-table-scrollbar-width: var(--fdScrollbar_Dimension);
 $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(--sapList_BorderWidth, 0.0625rem));
 
 .#{$block} {
+    display: block;
     @mixin fd-rtl {
         @at-root {
             [dir='rtl'] &,
@@ -235,6 +236,7 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
 
     &__empty {
         &-table-message {
+            box-sizing: border-box;
             padding: 1rem;
             text-align: center;
             display: flex;
@@ -371,5 +373,25 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
         width: 4rem;
         min-width: 4rem;
         max-width: 4rem;
+    }
+
+    &__body-table {
+        &.fd-table--pop-in {
+            .fd-table__row--secondary {
+                .fd-table__cell {
+                    border-bottom: var(--sapList_BorderWidth) solid var(--sapList_BorderColor);
+                }
+            }
+
+            .#{$block} {
+                &__header {
+                    .fd-table__cell {
+                        .fd-table__text {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

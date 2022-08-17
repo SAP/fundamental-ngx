@@ -2,12 +2,7 @@ import { SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MultiInputComponent, MultiInputModule } from '@fundamental-ngx/core/multi-input';
-import {
-    ContentDensityService,
-    DEFAULT_CONTENT_DENSITY,
-    DynamicComponentService,
-    RtlService
-} from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 import { firstValueFrom } from 'rxjs';
 
 describe('MultiInputComponent', () => {
@@ -26,27 +21,18 @@ describe('MultiInputComponent', () => {
         fixture.detectChanges();
     }
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [MultiInputModule],
-                providers: [DynamicComponentService, RtlService, ContentDensityService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MultiInputModule],
+            providers: [DynamicComponentService, RtlService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MultiInputComponent);
         component = fixture.componentInstance;
         updateComponentInput('dropdownValues', ['displayedValue', 'displayedValue2']);
         fixture.detectChanges();
-    });
-
-    it('should handle content density when compact input is not provided', () => {
-        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
-        const classList = (fixture.nativeElement as HTMLElement).classList;
-        expect(classList.contains('fd-multi-input')).toBeTrue();
-        expect(classList.contains('fd-multi-input-custom')).toBeTrue();
     });
 
     it('should set placeholder', async () => {

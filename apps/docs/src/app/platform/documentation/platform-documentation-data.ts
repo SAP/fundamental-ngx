@@ -6,7 +6,8 @@ import {
 
 export const guides: SectionInterfaceContent[] = [
     { url: 'platform/home', name: 'Home' },
-    { url: 'platform/new-component', name: 'New Component' }
+    { url: 'platform/new-component', name: 'New Component' },
+    { url: 'platform/i18n', name: 'I18n' }
 ];
 
 export const components: SectionInterfaceContent[] = [

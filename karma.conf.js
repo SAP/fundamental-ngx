@@ -1,7 +1,6 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
-const { join } = require('path');
 const { constants } = require('karma');
 
 module.exports = () => {
@@ -15,6 +14,7 @@ module.exports = () => {
             require('karma-chrome-launcher'),
             require('karma-jasmine-html-reporter'),
             require('karma-coverage'),
+            require('karma-spec-reporter'),
             require('@angular-devkit/build-angular/plugins/karma')
         ],
         client: {
@@ -24,7 +24,7 @@ module.exports = () => {
             dir: 'coverage',
             type: 'html'
         },
-        reporters: ['progress', 'coverage'],
+        reporters: ['spec', 'coverage'],
         port: 9876,
         colors: true,
         logLevel: constants.LOG_INFO,

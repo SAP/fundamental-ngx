@@ -73,7 +73,8 @@ export const API_FILES = {
     carousel: ['CarouselComponent', 'CarouselItemComponent', 'CarouselService'],
     combobox: ['ComboboxComponent'],
     checkbox: ['CheckboxComponent'],
-    contentDensity: [],
+    oldContentDensity: [],
+    contentDensity: ['ContentDensityDirective', 'GlobalContentDensityService', 'ContentDensityStorage'],
     datePicker: ['DatePickerComponent', 'FdDate', 'FdDatetimeAdapter'],
     datetimePicker: ['DatetimePickerComponent', 'FdDate', 'FdDatetimeAdapter'],
     dynamicPage: [
@@ -339,6 +340,7 @@ export const API_FILES = {
     time: ['TimeComponent', 'TimeI18n', 'TimeColumnComponent'],
     timePicker: ['TimePickerComponent', 'FdDate', 'FdDatetimeAdapter'],
     title: ['TitleComponent'],
+    truncate: ['TruncateDirective'],
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
     slider: ['SliderComponent'],

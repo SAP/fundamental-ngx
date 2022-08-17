@@ -10,13 +10,20 @@ import { map } from 'rxjs/operators';
 export function resizeObservable(target: Element, options?: ResizeObserverOptions): Observable<ResizeObserverEntry[]> {
     if ('ResizeObserver' in window) {
         return new Observable((subscriber) => {
+            let animationFrame: number;
             const ro = new ResizeObserver((entries) => {
-                subscriber.next(entries);
+                animationFrame = window.requestAnimationFrame(() => {
+                    subscriber.next(entries);
+                });
             });
 
             ro.observe(target, options);
 
             return function unsubscribe(): void {
+                if (animationFrame) {
+                    window.cancelAnimationFrame(animationFrame);
+                }
+                ro.unobserve(target);
                 ro.disconnect();
             };
         });

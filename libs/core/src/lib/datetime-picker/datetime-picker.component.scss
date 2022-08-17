@@ -40,7 +40,7 @@
         }
 
         &__wrapper {
-            min-width: 20rem;
+            min-width: min(20rem, 90vw);
         }
 
         &__container > *:not(.fd-datetime__active-display-type) {

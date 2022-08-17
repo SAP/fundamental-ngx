@@ -40,7 +40,6 @@
             [state]="state"
             [buttonFocusable]="buttonFocusable"
             [button]="displayAddonButton"
-            [compact]="compact"
             [disabled]="disabled"
             [isExpanded]="open && !mobile && viewModel.displayedOptions.length > 0"
             [isControl]="true"
@@ -50,17 +49,15 @@
         >
             <fd-tokenizer
                 [compactCollapse]="compactCollapse"
-                [compact]="compact"
                 [open]="open"
                 [tokenizerFocusable]="false"
                 (moreClickedEvent)="_moreClicked()"
                 class="fd-multi-input-tokenizer-custom"
-                [class.fd-multi-input-tokenizer-custom--compact]="compact"
+                [class.fd-multi-input-tokenizer-custom--compact]="_contentDensityObserver.isCompact$ | async"
                 tabindex="-1"
             >
                 <fd-token
                     *ngFor="let option of viewModel.selectedOptions; trackBy: valueFn"
-                    [compact]="compact"
                     [disabled]="disabled"
                     (onCloseClick)="_onTokenClick(option.value, false, $event)"
                     (onRemove)="_onTokenClick(option.value, false)"
@@ -78,16 +75,14 @@
                     (onComplete)="_handleComplete($event)"
                     #searchInputElement
                     [displayFn]="displayFn"
-                    [inputText]="_searchTermCtrl.value"
+                    [inputText]="_searchTermCtrl.value || ''"
                     [options]="dropdownValues"
                     [enable]="autoComplete && !mobile"
                     [placeholder]="placeholder"
                     [formControl]="_searchTermCtrl"
-                    [compact]="compact"
                     [attr.aria-required]="required"
                     [attr.aria-label]="ariaLabel"
                     [attr.aria-labelledby]="ariaLabelledBy"
-                    [class.fd-input--compact]="compact"
                     (keydown)="_handleInputKeydown($event)"
                     [attr.id]="inputId"
                 />
@@ -102,7 +97,6 @@
             class="fd-multi-input-menu-overflow"
             [selection]="true"
             [mobileMode]="mobile"
-            [compact]="compact"
             [style.maxHeight]="!mobile ? maxHeight : 'auto'"
             (focusEscapeList)="handleListFocusEscape($event)"
             [style.minWidth]="'100%'"
@@ -110,15 +104,12 @@
             <li
                 *ngFor="let option of viewModel.displayedOptions; index as idx; trackBy: valueFn"
                 fd-list-item
+                [attr.aria-label]="option.label"
                 (click)="_onCheckboxClick(option.value, $event, idx, true)"
                 (keyup)="_onCheckboxKeyup(option.value, $event, idx)"
                 [selected]="option.isSelected"
             >
-                <fd-checkbox
-                    [compact]="compact"
-                    (click)="_onCheckboxClick(option.value, $event, idx)"
-                    [value]="option.isSelected"
-                >
+                <fd-checkbox (click)="_onCheckboxClick(option.value, $event, idx)" [value]="option.isSelected">
                     <!-- TODO -->
                 </fd-checkbox>
 
@@ -144,7 +135,7 @@
         <span
             *ngIf="!itemTemplate"
             fd-list-title
-            [innerHtml]="option.label | highlight: _searchTermCtrl.value:highlight"
+            [innerHtml]="option.label | highlight: _searchTermCtrl.value || '':highlight"
         ></span>
 
         <ng-container *ngIf="itemTemplate">

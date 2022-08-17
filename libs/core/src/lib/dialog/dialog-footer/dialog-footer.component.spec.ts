@@ -33,15 +33,13 @@ class DefaultFooterTestComponent {
 }
 
 describe('DialogFooterComponent', () => {
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [DialogFooterComponent, CustomFooterTestComponent, DefaultFooterTestComponent],
-                imports: [BarModule, TemplateModule],
-                providers: [DialogConfig]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [DialogFooterComponent, CustomFooterTestComponent, DefaultFooterTestComponent],
+            imports: [BarModule, TemplateModule],
+            providers: [DialogConfig]
+        });
+    }));
 
     function setup<V>(testComponent): { fixture: ComponentFixture<V>; component: V } {
         const fixture = TestBed.createComponent(testComponent as any as Type<V>);

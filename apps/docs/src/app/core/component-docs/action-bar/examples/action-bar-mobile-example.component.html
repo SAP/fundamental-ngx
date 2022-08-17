@@ -5,7 +5,7 @@
                 <button
                     aria-label="back"
                     fd-button
-                    [compact]="true"
+                    fdCompact
                     fdType="transparent"
                     [glyph]="navigationArrow$ | async"
                 ></button>
@@ -19,31 +19,36 @@
                     glyph="overflow"
                     fdType="transparent"
                     [fdMenuTrigger]="menu"
-                    [compact]="true"
+                    fdCompact
                 ></button>
 
-                <fd-menu #menu placement="bottom-end" [compact]="true">
-                    <li fd-menu-item>
+                <fd-menu
+                    #menu
+                    placement="bottom-end"
+                    [mobile]="true"
+                    [mobileConfig]="{ title: 'Actions', hasCloseButton: true }"
+                >
+                    <li fd-menu-item (click)="closeMenu()">
                         <div fd-menu-interactive>
                             <span fd-menu-title>Edit</span>
                         </div>
                     </li>
-                    <li fd-menu-item>
+                    <li fd-menu-item (click)="closeMenu()">
                         <div fd-menu-interactive>
                             <span fd-menu-title>Delete</span>
                         </div>
                     </li>
-                    <li fd-menu-item>
+                    <li fd-menu-item (click)="closeMenu()">
                         <div fd-menu-interactive>
                             <span fd-menu-title>Assign</span>
                         </div>
                     </li>
-                    <li fd-menu-item>
+                    <li fd-menu-item (click)="closeMenu()">
                         <div fd-menu-interactive>
                             <span fd-menu-title>Expire</span>
                         </div>
                     </li>
-                    <li fd-menu-item>
+                    <li fd-menu-item (click)="closeMenu()">
                         <div fd-menu-interactive>
                             <span fd-menu-title>Archive</span>
                         </div>

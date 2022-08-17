@@ -17,14 +17,14 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class SliderFormFieldExampleComponent {
     customForm = new FormGroup({
         value1: new FormControl(15),
-        value2: new FormControl([15, 85])
+        value2: new FormControl<[number, number]>([15, 85])
     });
 
-    get value1(): number {
+    get value1(): number | null {
         return this.customForm.controls['value1'].value;
     }
 
-    get value2(): [number, number] {
+    get value2(): [number, number] | null {
         return this.customForm.controls['value2'].value;
     }
 }

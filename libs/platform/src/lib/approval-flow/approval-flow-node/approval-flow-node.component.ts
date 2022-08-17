@@ -39,6 +39,8 @@ const NODE_STATUS_CLASS_MAP = {
 
 const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 
+let defaultId = 0;
+
 @Component({
     selector: 'fdp-approval-flow-node',
     templateUrl: './approval-flow-node.component.html',
@@ -220,6 +222,8 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     @ContentChild(GridListItemComponent)
     _gridListItem: GridListItemComponent<ApprovalGraphNode>;
 
+    readonly approvalFlowNodeId = 'fdp-approval-flow-node-' + defaultId++;
+
     /** @hidden */
     private _subscriptions = new Subscription();
 
@@ -314,8 +318,8 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /** @hidden */
-    _focus(): void {
-        this._gridListItem?.focus();
+    _focus(options?: FocusOptions): void {
+        this._gridListItem?.focus(options);
     }
 
     /** @hidden */

@@ -10,7 +10,7 @@ import { ListModule } from './list.module';
             [multiInputMode]="multiInput"
             [hasMessage]="hasMessage"
             [noBorder]="noBorder"
-            [compact]="compact"
+            [fdCompact]="compact"
             fd-list
         >
             Action Bar Title Test Text
@@ -36,14 +36,12 @@ describe('ListComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent],
-                imports: [ListModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [ListModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

@@ -51,7 +51,7 @@
             type="range"
             [allowNull]="false"
             [rangeHoverEffect]="true"
-            contentDensity="compact"
+            fdCompact
             placeholder="Holiday in between?"
             [formControl]="ffl3.formControl"
             dateRangeInputLabel="date range input mm/dd/yyy"
@@ -63,7 +63,7 @@
         <fdp-date-picker
             name="journeydate"
             type="range"
-            contentDensity="compact"
+            fdCompact
             placeholder="Journey dates?"
             [formControl]="ffl4.formControl"
             dateRangeInputLabel="date range input mm/dd/yyy"
@@ -127,7 +127,7 @@
             name="holiday"
             type="range"
             [allowNull]="false"
-            contentDensity="compact"
+            fdCompact
             placeholder="When are you going to holiday?"
             [(ngModel)]="holidayPicker"
             dateRangeInputLabel="date range input mm/dd/yyy"

@@ -26,7 +26,7 @@ if [ -z "$core"  ]
 then
     echo There are no changes at core
 else
-    npm run lint:core
+    yarn run lint:core
     handle_error
 fi
 
@@ -36,7 +36,7 @@ if [ -z "$platform"  ]
 then
     echo There are no changes at platform
 else
-    npm run lint:platform
+    yarn run lint:platform
     handle_error
 fi
 
@@ -45,7 +45,7 @@ if [ -z "$moment_adapter"  ]
 then
     echo There are no changes at moment-adapter
 else
-    npm run lint:moment-adapter
+    yarn run lint:moment-adapter
     handle_error
 fi
 
@@ -55,6 +55,6 @@ if [ -z "$docs"  ]
 then
     echo There are no changes at docs
 else
-    npm run lint:docs
+    yarn run lint:docs
     handle_error
 fi

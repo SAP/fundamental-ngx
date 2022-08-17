@@ -24,7 +24,7 @@
             fdType="emphasized"
             fd-initial-focus
             [label]="_defaultDialogContent.approveButton!"
-            [compact]="!_defaultDialogConfiguration.mobile"
+            [fdCozy]="_defaultDialogConfiguration.mobile"
             (click)="_approveButtonClicked()"
             [ariaLabel]="_defaultDialogContent?.approveButtonAriaLabel"
             [id]="_defaultDialogContent?.approveButtonId"
@@ -33,7 +33,7 @@
         <fd-button-bar
             *ngIf="_defaultDialogContent?.cancelButton"
             [label]="_defaultDialogContent.cancelButton!"
-            [compact]="!_defaultDialogConfiguration.mobile"
+            [fdCozy]="_defaultDialogConfiguration.mobile"
             (click)="_cancelButtonClicked()"
             [ariaLabel]="_defaultDialogContent?.closeButtonAriaLabel"
             [id]="_defaultDialogContent?.cancelButtonId"

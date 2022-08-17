@@ -12,7 +12,6 @@ import {
     LOCALE_ID,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     ViewChild,
     ViewEncapsulation
@@ -21,12 +20,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { defer, fromEvent, interval, merge, Observable, Subscription, timer } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
-import NumberFormat = Intl.NumberFormat;
 import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { ContentDensityService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { SafeHtml } from '@angular/platform-browser';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
+import NumberFormat = Intl.NumberFormat;
 
 let stepInputUniqueId = 0;
 
@@ -42,6 +42,7 @@ let stepInputUniqueId = 0;
             useExisting: forwardRef(() => StepInputComponent),
             multi: true
         },
+        contentDensityObserverProviders(),
         registerFormItemControl(StepInputComponent)
     ],
     host: {
@@ -81,13 +82,19 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     @Input()
     decrementButtonIcon = 'less';
 
-    /** Sets Increment Button title attribute */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Sets Increment Button title attribute
+     */
     @Input()
-    incrementButtonTitle = 'Increment';
+    incrementButtonTitle: string;
 
-    /** Sets Decrement Button title attribute */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Sets Decrement Button title attribute
+     */
     @Input()
-    decrementButtonTitle = 'Decrement';
+    decrementButtonTitle: string;
 
     /** Sets input aria-label attribute */
     @Input()
@@ -99,7 +106,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Aria defines role description for the Step Input. */
     @Input()
-    ariaRoleDescription = 'Step Input';
+    ariaRoleDescription: string;
 
     /** Sets input id */
     @Input()
@@ -266,7 +273,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         @Inject(LOCALE_ID) locale,
         private _changeDetectorRef: ChangeDetectorRef,
         private readonly _liveAnnouncer: LiveAnnouncer,
-        @Optional() private _contentDensityService: ContentDensityService
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {
         this.locale = locale;
     }
@@ -275,14 +282,6 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     ngOnInit(): void {
         this._numberFormat = this._getNumberFormat();
         this._buildRegExps();
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._changeDetectorRef.markForCheck();
-                })
-            );
-        }
     }
 
     /** @hidden */

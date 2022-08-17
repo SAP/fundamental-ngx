@@ -36,14 +36,12 @@ describe('DisplayListItemComponent', () => {
     let component: DisplayListItemComponentTestComponent;
     let fixture: ComponentFixture<DisplayListItemComponentTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
-                declarations: [DisplayListItemComponentTestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
+            declarations: [DisplayListItemComponentTestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DisplayListItemComponentTestComponent);
@@ -121,23 +119,6 @@ describe('DisplayListItemComponent', () => {
     });
 });
 
-describe('DisplayListItemComponent functions', () => {
-    let fixture: ComponentFixture<DisplayListItemComponent>;
-
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule]
-            }).compileComponents();
-        })
-    );
-
-    beforeEach(() => {
-        fixture = TestBed.createComponent(DisplayListItemComponent);
-        fixture.detectChanges();
-    });
-});
-
 /** Impertive approach testing*/
 @Component({
     selector: 'fdp-test-display-list-item',
@@ -168,14 +149,12 @@ describe('DisplayListItemComponent Imperative', () => {
     let host: TestComponentContentComponent;
     let fixture: ComponentFixture<TestComponentContentComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
-                declarations: [TestComponentContentComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
+            declarations: [TestComponentContentComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponentContentComponent);

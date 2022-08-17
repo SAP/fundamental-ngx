@@ -33,12 +33,11 @@
             *ngIf="_isShownSelectionColumn"
             fd-table-cell
             class="fd-table__cell--fixed fd-table__cell--checkbox"
-            [style]="contentDensity | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth"
+            [style]="contentDensityObserver | async | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth"
         >
             <fd-checkbox
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
                 labelClass="fd-table__checkbox-label"
-                [compact]="contentDensity | isCompactDensity"
                 [tristate]="true"
                 [tristateSelectable]="false"
                 [ngModel]="checkedState"
@@ -103,7 +102,7 @@
                     [noArrow]="true"
                     fd-table-popover
                 >
-                    <ul fd-list [noBorder]="true" [compact]="contentDensity | isCompactDensity">
+                    <ul fd-list [noBorder]="true">
                         <!-- Sorting -->
                         <ng-container *ngIf="column.sortable">
                             <li
@@ -113,7 +112,7 @@
                                 (keyup.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
                             >
                                 <span fd-list-icon glyph="sort-ascending"></span>
-                                <span fd-list-title i18n="@@platformTableHeaderMenuSortAsc">Sort Ascending</span>
+                                <span fd-list-title>{{ 'platformTable.headerMenuSortAsc' | fdTranslate }}</span>
                             </li>
                             <li
                                 class="fd-table__item--clickable"
@@ -122,7 +121,7 @@
                                 (keyup.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
                             >
                                 <span fd-list-icon glyph="sort-descending"></span>
-                                <span fd-list-title i18n="@@platformTableHeaderMenuSortDesc">Sort Descending</span>
+                                <span fd-list-title>{{ 'platformTable.headerMenuSortDesc' | fdTranslate }}</span>
                             </li>
                         </ng-container>
 
@@ -135,7 +134,7 @@
                                 (keyup.enter)="_columnHeaderGroupBy(column.key)"
                             >
                                 <span fd-list-icon></span>
-                                <span fd-list-title i18n="@@platformTableHeaderMenuGroup">Group</span>
+                                <span fd-list-title>{{ 'platformTable.headerMenuGroup' | fdTranslate }}</span>
                             </li>
                         </ng-container>
 
@@ -149,7 +148,7 @@
                                 (keyup.enter)="freezeToColumn(column.name)"
                             >
                                 <span></span>
-                                <span fd-list-title i18n="@@platformTableHeaderMenuFreeze">Freeze</span>
+                                <span fd-list-title>{{ 'platformTable.headerMenuFreeze' | fdTranslate }}</span>
                             </li>
                             <ng-template #unfreezeTpl>
                                 <li
@@ -159,7 +158,7 @@
                                     (keyup.enter)="unfreeze(column.name)"
                                 >
                                     <span></span>
-                                    <span fd-list-title i18n="@@platformTableHeaderMenuUnfreeze">Unfreeze</span>
+                                    <span fd-list-title>{{ 'platformTable.headerMenuUnfreeze' | fdTranslate }}</span>
                                 </li>
                             </ng-template>
                         </ng-container>
@@ -169,15 +168,11 @@
                             <li fd-list-item>
                                 <i fd-list-icon glyph="filter"></i>
                                 <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
-                                    <label
-                                        fd-form-label
-                                        [for]="'fdp-table-column-filtering-' + column.name"
-                                        i18n="@@platformTableHeaderMenuFilter"
-                                        >Filter</label
-                                    >
+                                    <label fd-form-label [for]="'fdp-table-column-filtering-' + column.name">{{
+                                        'platformTable.headerMenuFilter' | fdTranslate
+                                    }}</label>
                                     <input
                                         fd-form-control
-                                        [compact]="contentDensity | isCompactDensity"
                                         [id]="'fdp-table-column-filtering-' + column.name"
                                         (keyup.enter)="_columnHeaderFilterBy(column.key, $any($event.target)?.value)"
                                     />
@@ -227,6 +222,7 @@
             fd-table
             role="presentation"
             class="fdp-table__body-table"
+            [popIn]="_poppingColumns.length > 0"
             [class.fd-table--no-outer-border]="noOuterBorders"
         >
             <thead fd-table-header class="fdp-table__header">
@@ -236,8 +232,8 @@
                 *ngIf="!!this._tableRowsVisible.length || this.loadingState; else emptyTableTemplate"
                 fd-table-body
                 fd-dnd-list
-                [noBorderX]="noBodyBorders"
-                [noBorderY]="noBodyBorders"
+                [noBorderX]="noBorderX"
+                [noBorderY]="noBorderY"
                 [tabIndex]="pageScrolling ? 0 : -1"
                 [items]="_tableRows"
                 [draggable]="_rowsDraggable"
@@ -274,6 +270,7 @@
                         (keydown.enter)="_onRowClick(row)"
                         (keydown.space)="_onRowClick(row, $event)"
                         (started)="_dragDropStart()"
+                        [main]="true"
                     >
                         <td
                             *ngIf="semanticHighlighting"
@@ -293,7 +290,9 @@
                                     fd-table-cell
                                     fd-table-cell-selectable
                                     [style]="
-                                        contentDensity | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
+                                        contentDensityObserver
+                                            | async
+                                            | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
                                     "
                                     [focusable]="true"
                                     [attr.aria-selected]="row.checked"
@@ -309,11 +308,12 @@
                                     role="cell"
                                     fd-table-cell
                                     [style]="
-                                        contentDensity | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
+                                        contentDensityObserver
+                                            | async
+                                            | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
                                     "
                                 >
                                     <fd-checkbox
-                                        [compact]="contentDensity | isCompactDensity"
                                         labelClass="fd-table__checkbox-label"
                                         [ngModel]="row.checked"
                                         (click)="_toggleMultiSelectRow(row, rowIdx, $event)"
@@ -372,9 +372,9 @@
                                         ></ng-container>
                                     </ng-container>
 
-                                    <ng-template #defaultTableCellTemplate>{{
-                                        row?.value | valueByPath: column.key
-                                    }}</ng-template>
+                                    <ng-template #defaultTableCellTemplate>
+                                        {{ row?.value | valueByPath: column.key }}
+                                    </ng-template>
                                 </ng-container>
 
                                 <ng-template #editModeCell>
@@ -387,7 +387,7 @@
                                         <ng-container
                                             *ngTemplateOutlet="
                                                 column.editableColumnCellTemplate;
-                                                context: { $implicit: row.value }
+                                                context: { $implicit: row.value, popping: false }
                                             "
                                         ></ng-container>
                                     </ng-container>
@@ -417,6 +417,43 @@
                             class="fd-table__cell fd-table__cell--mock"
                             [class.fd-table__cell--mock-borderless]="!_cellMockVisible"
                         ></td>
+                    </tr>
+
+                    <tr
+                        *ngIf="row.type === 'item' && _poppingColumns.length > 0"
+                        fd-table-row
+                        [secondary]="true"
+                        [attr.aria-selected]="row.checked"
+                        [class]="row | rowClasses: rowsClass"
+                    >
+                        <td fd-table-cell *ngIf="selectionMode !== SELECTION_MODE.NONE"></td>
+                        <td
+                            fd-table-cell
+                            [tabindex]="-1"
+                            colspan="100%"
+                            [attr.data-nesting-level]="row.level + 1"
+                            [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
+                            [tabindex]="_isTreeRowFirstCell(0, row) ? 0 : -1"
+                            [focusable]="_isTreeRowFirstCell(0, row)"
+                            (click)="_onCellClick(0, row)"
+                            (keyup.enter)="_isTreeRowFirstCell(0, row) && _toggleGroupRow(row)"
+                        >
+                            <div fd-table-text *ngFor="let poppingColumn of _poppingColumns">
+                                <label fd-form-label>{{ poppingColumn.label }}:</label>
+                                <ng-container *ngIf="poppingColumn?.columnCellTemplate; else defaultTableCellTemplate">
+                                    <ng-container
+                                        *ngTemplateOutlet="
+                                            poppingColumn.columnCellTemplate;
+                                            context: { $implicit: row.value, popping: true }
+                                        "
+                                    ></ng-container>
+                                </ng-container>
+
+                                <ng-template #defaultTableCellTemplate>{{
+                                    row?.value | valueByPath: poppingColumn.key
+                                }}</ng-template>
+                            </div>
+                        </td>
                     </tr>
                 </ng-container>
             </tbody>
@@ -478,8 +515,7 @@
                         </div>
                         <div
                             *ngIf="!noDataWrapper.hasChildNodes()"
-                            i18n="@@platformTableEmptyMessage"
-                            [innerText]="emptyTableMessage"
+                            [innerText]="emptyTableMessage || ('platformTable.defaultEmptyMessage' | fdTranslate)"
                         ></div>
                     </ng-container>
                 </div>

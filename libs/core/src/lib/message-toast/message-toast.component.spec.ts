@@ -26,8 +26,7 @@ class TemplateTestComponent {
             provide: MESSAGE_TOAST_CONFIG,
             useValue: new MessageToastConfig()
         }
-    ],
-    entryComponents: [MessageToastComponent, MessageToastContainerComponent, TemplateTestComponent]
+    ]
 })
 class TestModule {}
 
@@ -36,13 +35,11 @@ describe('MessageToastComponent', () => {
     let fixture: ComponentFixture<MessageToastComponent>;
     let service: MessageToastService;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [TestModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MessageToastComponent);

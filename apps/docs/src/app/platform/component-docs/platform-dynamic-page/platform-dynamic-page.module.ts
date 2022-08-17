@@ -5,10 +5,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { FacetModule } from '@fundamental-ngx/core/facets';
+import { TextModule } from '@fundamental-ngx/core/text';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
+import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -21,6 +28,7 @@ import { PlatformDynamicPageResponsivePaddingExampleComponent } from './platform
 import { PlatformDynamicPageSnapScrollExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-snap-scroll-example.component';
 import { PlatformDynamicPageTabbedExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-tabbed-example.component';
 import { PlatformDynamicPageHeaderComponent } from './platform-dynamic-page-header/platform-dynamic-page-header.component';
+import { PlatformDynamicPageFacetsExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-facets-example/platform-dynamic-page-facets-example.component';
 
 const routes: Routes = [
     {
@@ -44,7 +52,14 @@ const routes: Routes = [
         PlatformButtonModule,
         BarModule,
         FlexibleColumnLayoutModule,
-        DynamicPageModule
+        DynamicPageModule,
+        InlineHelpModule,
+        AvatarModule,
+        FacetModule,
+        TextModule,
+        ObjectStatusModule,
+        RatingIndicatorModule,
+        ObjectNumberModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -55,7 +70,8 @@ const routes: Routes = [
         PlatformDynamicPageTabbedExampleComponent,
         PlatformDynamicPageResponsivePaddingExampleComponent,
         PlatformDynamicPageNonCollapsibleExampleComponent,
-        PlatformDynamicPageFlexibleColumnExampleComponent
+        PlatformDynamicPageFlexibleColumnExampleComponent,
+        PlatformDynamicPageFacetsExampleComponent
     ]
 })
 export class PlatformDynamicPageDocsModule {}

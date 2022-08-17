@@ -68,7 +68,9 @@ export function refreshPage(isFullRefresh = false): void {
     } catch {}
     if (!isFullRefresh) {
         const url = browser.getUrl();
-        click(`#toolbar-home-btn`);
+        try {
+            click(`#toolbar-home-btn`);
+        } catch {}
         if (browser.getUrl().includes(`/home`)) {
             goBack();
         } else {
@@ -510,7 +512,7 @@ export function checkElementScreenshot(
     return browser.checkElement($$(selector)[index], tag, options);
 }
 
-function checkSelectorExists(selector: string, index: number = 0): void {
+export function checkSelectorExists(selector: string, index: number = 0): void {
     if ($$(selector)[index] === undefined) {
         throw new Error(`Element with index: ${index} for selector: '${selector}' not found.`);
     }

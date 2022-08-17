@@ -8,13 +8,11 @@ describe('FdDatetimeAdapter', () => {
     let platform: Platform;
     let adapter: FdDatetimeAdapter;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FdDatetimeAdapterModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdDatetimeAdapterModule]
+        }).compileComponents();
+    }));
 
     beforeEach(inject([DatetimeAdapter, Platform], (dateAdapter: FdDatetimeAdapter, _platform: Platform) => {
         adapter = dateAdapter;
@@ -524,14 +522,12 @@ describe('FdDatetimeAdapter', () => {
 describe('FdDatetimeAdapter with LOCALE_ID override', () => {
     let adapter: FdDatetimeAdapter;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FdDatetimeAdapterModule],
-                providers: [{ provide: LOCALE_ID, useValue: 'da-DK' }]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdDatetimeAdapterModule],
+            providers: [{ provide: LOCALE_ID, useValue: 'da-DK' }]
+        }).compileComponents();
+    }));
 
     beforeEach(inject([DatetimeAdapter], (_adapter: FdDatetimeAdapter) => {
         adapter = _adapter;

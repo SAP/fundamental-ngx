@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { RtlService } from '@fundamental-ngx/core/utils';
+import { WizardDialogGeneratorService } from '@fundamental-ngx/platform/wizard-generator';
 
 let componentExampleUniqueId = 0;
 
@@ -9,7 +10,7 @@ let componentExampleUniqueId = 0;
     template: `
         <div class="docs-tile docs-component" [class.docs-tile-example-background]="hasBackground" [id]="id">
             <div class="docs-tile__content docs-tile-content-example">
-                <div class="component-example__features">
+                <div class="component-example__features" fdCompact>
                     <rtl-switch [label]="id2"></rtl-switch>
                     <background-switch [label]="id"></background-switch>
                 </div>
@@ -23,7 +24,8 @@ let componentExampleUniqueId = 0;
     providers: [
         RtlService,
         // Needed in order for dialog service and components to inherit local rtl service.
-        DialogService
+        DialogService,
+        WizardDialogGeneratorService
     ],
     encapsulation: ViewEncapsulation.None
 })

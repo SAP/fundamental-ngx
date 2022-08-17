@@ -15,13 +15,11 @@ describe('LinkComponent', () => {
     let component: LinkComponent;
     let fixture: ComponentFixture<TestLinkComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [LinkComponent, TestLinkComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [LinkComponent, TestLinkComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestLinkComponent);

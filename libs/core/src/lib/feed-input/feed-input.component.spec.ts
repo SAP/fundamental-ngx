@@ -36,14 +36,12 @@ describe('FeedInputComponent', () => {
     let textareaDirective;
     let buttonDirective;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FeedInputModule],
-                declarations: [TestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FeedInputModule],
+            declarations: [TestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

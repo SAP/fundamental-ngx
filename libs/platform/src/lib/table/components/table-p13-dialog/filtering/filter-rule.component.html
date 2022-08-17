@@ -6,86 +6,78 @@
                 class="filter-row__select"
                 fdLayoutGridCol
                 colGrow
-                [compact]="compact"
                 [ngModel]="rule.columnKey"
-                (ngModelChange)="rule.setColumnKey($event)"
-                (ngModelChange)="_onModelChange()"
+                (ngModelChange)="rule.setColumnKey($event); _onModelChange()"
             >
-                <fd-option *ngFor="let column of rule.columns" [value]="column.key">{{ column.label }}</fd-option>
+                <li fd-option *ngFor="let column of rule.columns" [value]="column.key">{{ column.label }}</li>
             </fd-select>
             <!-- Strategy -->
             <fd-select
                 class="filter-row__select"
                 fdLayoutGridCol
                 colGrow
-                [compact]="compact"
                 [ngModel]="rule.strategy"
-                (ngModelChange)="rule.setStrategy($event)"
-                (ngModelChange)="_onModelChange()"
+                (ngModelChange)="rule.setStrategy($event); _onModelChange()"
             >
-                <fd-option *ngFor="let strategy of rule.strategies" [value]="strategy">
+                <li fd-option *ngFor="let strategy of rule.strategies" [value]="strategy">
                     <ng-container [ngSwitch]="strategy">
-                        <span *ngSwitchCase="'between'" i18n="@@platformTableP13FilterStrategyLabelBetween">
-                            between
+                        <span *ngSwitchCase="'between'">
+                            {{ 'platformTable.P13FilterStrategyLabelBetween' | fdTranslate }}
                         </span>
 
-                        <span *ngSwitchCase="'contains'" i18n="@@platformTableP13FilterStrategyLabelContains">
-                            contains
+                        <span *ngSwitchCase="'contains'">
+                            {{ 'platformTable.P13FilterStrategyLabelContains' | fdTranslate }}
                         </span>
 
-                        <span *ngSwitchCase="'beginsWith'" i18n="@@platformTableP13FilterStrategyLabelBeginsWith">
-                            begins with
+                        <span *ngSwitchCase="'beginsWith'">
+                            {{ 'platformTable.P13FilterStrategyLabelBeginsWith' | fdTranslate }}
                         </span>
 
-                        <span *ngSwitchCase="'endsWith'" i18n="@@platformTableP13FilterStrategyLabelEndsWith">
-                            ends with
+                        <span *ngSwitchCase="'endsWith'">
+                            {{ 'platformTable.P13FilterStrategyLabelEndsWith' | fdTranslate }}
                         </span>
 
-                        <span *ngSwitchCase="'equalTo'" i18n="@@platformTableP13FilterStrategyLabelEqualTo">
-                            equal to
+                        <span *ngSwitchCase="'equalTo'">
+                            {{ 'platformTable.P13FilterStrategyLabelEqualTo' | fdTranslate }}
                         </span>
 
-                        <span *ngSwitchCase="'greaterThan'" i18n="@@platformTableP13FilterStrategyLabelGreaterThan">
-                            greater than
+                        <span *ngSwitchCase="'greaterThan'">
+                            {{ 'platformTable.P13FilterStrategyLabelGreaterThan' | fdTranslate }}
                         </span>
 
-                        <span
-                            *ngSwitchCase="'greaterThanOrEqualTo'"
-                            i18n="@@platformTableP13FilterStrategyLabelGreaterThanOrEqualTo"
-                        >
-                            greater than or equal to
+                        <span *ngSwitchCase="'greaterThanOrEqualTo'">
+                            {{ 'platformTable.P13FilterStrategyLabelGreaterThanOrEqualTo' | fdTranslate }}
                         </span>
 
-                        <span *ngSwitchCase="'lessThan'" i18n="@@platformTableP13FilterStrategyLabelLessThan">
-                            less than
+                        <span *ngSwitchCase="'lessThan'">
+                            {{ 'platformTable.P13FilterStrategyLabelLessThan' | fdTranslate }}
                         </span>
 
-                        <span
-                            *ngSwitchCase="'lessThanOrEqualTo'"
-                            i18n="@@platformTableP13FilterStrategyLabelLessThanOrEqualTo"
-                        >
-                            less than or equal to
+                        <span *ngSwitchCase="'lessThanOrEqualTo'">
+                            {{ 'platformTable.P13FilterStrategyLabelLessThanOrEqualTo' | fdTranslate }}
                         </span>
 
-                        <span *ngSwitchCase="'after'" i18n="@@platformTableP13FilterStrategyLabelAfter"> after </span>
-
-                        <span *ngSwitchCase="'onOrAfter'" i18n="@@platformTableP13FilterStrategyLabelOnOrAfter">
-                            on or after
+                        <span *ngSwitchCase="'after'">
+                            {{ 'platformTable.P13FilterStrategyLabelAfter' | fdTranslate }}
                         </span>
 
-                        <span *ngSwitchCase="'before'" i18n="@@platformTableP13FilterStrategyLabelBefore">
-                            before
+                        <span *ngSwitchCase="'onOrAfter'">
+                            {{ 'platformTable.P13FilterStrategyLabelOnOrAfter' | fdTranslate }}
                         </span>
 
-                        <span *ngSwitchCase="'beforeOrOn'" i18n="@@platformTableP13FilterStrategyLabelBeforeOrOn">
-                            before or on
+                        <span *ngSwitchCase="'before'">
+                            {{ 'platformTable.P13FilterStrategyLabelBefore' | fdTranslate }}
                         </span>
 
-                        <span *ngSwitchCaseDefault i18n="@@platformTableP13FilterStrategyLabelNotDefined">
-                            Not Defined
+                        <span *ngSwitchCase="'beforeOrOn'">
+                            {{ 'platformTable.P13FilterStrategyLabelBeforeOrOn' | fdTranslate }}
+                        </span>
+
+                        <span *ngSwitchCaseDefault>
+                            {{ 'platformTable.P13FilterStrategyLabelNotDefined' | fdTranslate }}
                         </span>
                     </ng-container>
-                </fd-option>
+                </li>
             </fd-select>
         </div>
     </div>
@@ -121,7 +113,6 @@
                         <fd-date-picker
                             class="filter-row__input"
                             type="single"
-                            [compact]="compact"
                             [required]="true"
                             [name]="valueKey"
                             [(ngModel)]="rule[valueKey]"
@@ -131,19 +122,20 @@
                     <ng-container *ngSwitchCase="DATA_TYPE.BOOLEAN">
                         <fd-select
                             class="filter-row__select"
-                            [compact]="compact"
                             [name]="valueKey"
                             [(ngModel)]="rule[valueKey]"
                             (ngModelChange)="_onModelChange()"
                             [required]="true"
                         >
-                            <fd-option [value]="undefined" i18n="@@platformTableP13FilterBooleanOptionNotDefined">
-                                &nbsp;
-                            </fd-option>
-                            <fd-option [value]="true" i18n="@@platformTableP13FilterBooleanOptionTrue"> Yes </fd-option>
-                            <fd-option [value]="false" i18n="@@platformTableP13FilterBooleanOptionFalse">
-                                No
-                            </fd-option>
+                            <li fd-option [value]="undefined">
+                                {{ 'platformTable.P13FilterBooleanOptionNotDefined' | fdTranslate }}
+                            </li>
+                            <li fd-option [value]="true">
+                                {{ 'platformTable.P13FilterBooleanOptionTrue' | fdTranslate }}
+                            </li>
+                            <li fd-option [value]="false">
+                                {{ 'platformTable.P13FilterBooleanOptionFalse' | fdTranslate }}
+                            </li>
                         </fd-select>
                     </ng-container>
                     <ng-container *ngSwitchDefault>
@@ -151,7 +143,6 @@
                             type="text"
                             class="filter-row__input"
                             fd-form-control
-                            [compact]="compact"
                             required
                             [name]="valueKey"
                             [(ngModel)]="rule[valueKey]"

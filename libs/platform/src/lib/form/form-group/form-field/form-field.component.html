@@ -16,7 +16,11 @@
 </ng-template>
 
 <ng-template #withFormMessage>
-    <fdp-input-message-group class="fd-col" [class]="_fieldColumnLayoutClass">
+    <fdp-input-message-group
+        class="fd-col"
+        [class]="_fieldColumnLayoutClass"
+        [attr.aria-labelledby]="'fdp-form-label-' + id"
+    >
         <!--
          Todo: we should extend this on FormGroup Level and have error trigger strategy that will be applied to
          all the field e.g.: [triggers]="['mouseenter', 'mouseleave']"

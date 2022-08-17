@@ -1,11 +1,11 @@
 <div class="fdp-approval-flow-user-list__selected-count" *ngIf="_selectedItems.length">
-    {{ _selectedItems.length }}
-
-    <ng-container *ngIf="_selectedItems.length === 1; else multipleItems" i18n="@@platformApprovalFlowSelectedUser">
-        item selected
+    <ng-container *ngIf="_selectedItems.length === 1; else multipleItems">
+        {{ 'platformApprovalFlow.userListSelectedItemsCountSingular' | fdTranslate }}
     </ng-container>
 
-    <ng-template #multipleItems i18n="@@platformApprovalFlowSelectedUsers"> items selected </ng-template>
+    <ng-template #multipleItems>
+        {{ 'platformApprovalFlow.userListSelectedItemsCountPlural' | fdTranslate: { count: _selectedItems.length } }}
+    </ng-template>
 </div>
 
 <fdp-list
@@ -23,6 +23,7 @@
         [avatarSrc]="_user.imgUrl"
         [avatarTitle]="_user.name"
         [description]="_user.description"
+        [ariaLabel]="_user.name"
         [title]="_user.name"
         (click)="$event.stopPropagation(); onUserClick.emit(_user)"
     ></fdp-standard-list-item>

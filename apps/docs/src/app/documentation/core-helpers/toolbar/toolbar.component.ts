@@ -5,11 +5,25 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { filter, fromEvent, Subject } from 'rxjs';
+import { BehaviorSubject, filter, fromEvent, Subject } from 'rxjs';
 import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 import { MenuComponent, MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { ShellbarMenuItem, ShellbarSizes } from '@fundamental-ngx/core/shellbar';
+import {
+    FdLanguage,
+    FD_LANGUAGE,
+    FD_LANGUAGE_ALBANIAN,
+    FD_LANGUAGE_BULGARIAN,
+    FD_LANGUAGE_CZECH,
+    FD_LANGUAGE_ENGLISH,
+    FD_LANGUAGE_FRENCH,
+    FD_LANGUAGE_GEORGIAN,
+    FD_LANGUAGE_ITALIAN,
+    FD_LANGUAGE_RUSSIAN,
+    FD_LANGUAGE_TURKISH,
+    FD_LANGUAGE_UKRAINIAN
+} from '@fundamental-ngx/i18n';
+import { ContentDensityMode, GlobalContentDensityService } from '@fundamental-ngx/core/content-density';
 
 const urlContains = (themeName: string, search: string): boolean => themeName.toLowerCase().includes(search);
 
@@ -30,6 +44,11 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     @ViewChild('themeMenu')
     themeMenu: MenuComponent;
 
+    @ViewChild('i18nMenu')
+    i18nMenu: MenuComponent;
+
+    ContentDensityMode = ContentDensityMode;
+
     highlightJsThemeCss: SafeResourceUrl;
 
     library: Libraries;
@@ -44,6 +63,31 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     };
 
     versions: any[];
+
+    translations = [
+        { name: 'Shqip', value: FD_LANGUAGE_ALBANIAN },
+        // { name: 'العربية', value: FD_LANGUAGE_ARABIC }, TODO: uncomment when translations are provided
+        // { name: 'Беларускі', value: FD_LANGUAGE_BELARUSIAN }, TODO: uncomment when translations are provided
+        { name: 'Български', value: FD_LANGUAGE_BULGARIAN },
+        // { name: '中国人', value: FD_LANGUAGE_CHINESE }, TODO: uncomment when translations are provided
+        // { name: 'Hrvatski', value: FD_LANGUAGE_CROATIAN }, TODO: uncomment when translations are provided
+        { name: 'Český', value: FD_LANGUAGE_CZECH },
+        { name: 'English', value: FD_LANGUAGE_ENGLISH },
+        { name: 'Français', value: FD_LANGUAGE_FRENCH },
+        { name: 'ქართული', value: FD_LANGUAGE_GEORGIAN },
+        // { name: 'Deutsch', value: FD_LANGUAGE_GERMAN }, TODO: uncomment when translations are provided
+        // { name: 'עִברִית', value: FD_LANGUAGE_HEBREW }, TODO: uncomment when translations are provided
+        // { name: 'Hindi', value: FD_LANGUAGE_HINDI }, TODO: uncomment when translations are provided
+        { name: 'Italiano', value: FD_LANGUAGE_ITALIAN },
+        // { name: 'Polski', value: FD_LANGUAGE_POLISH }, TODO: uncomment when translations are provided
+        // { name: 'Português', value: FD_LANGUAGE_PORTUGUESE }, TODO: uncomment when translations are provided
+        // { name: 'Română', value: FD_LANGUAGE_ROMANIAN }, TODO: uncomment when translations are provided
+        { name: 'Русский', value: FD_LANGUAGE_RUSSIAN },
+        // { name: 'සිංහල', value: FD_LANGUAGE_SINHALA }, TODO: uncomment when translations are provided
+        // { name: 'Española', value: FD_LANGUAGE_SPANISH }, TODO: uncomment when translations are provided
+        { name: 'Türkçe', value: FD_LANGUAGE_TURKISH },
+        { name: 'Українська', value: FD_LANGUAGE_UKRAINIAN }
+    ];
 
     items: ShellbarMenuItem[] = [
         {
@@ -71,13 +115,13 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     constructor(
         private _routerService: Router,
-        private _contentDensityService: ContentDensityService,
+        private _contentDensityService: GlobalContentDensityService,
         private _themingService: ThemingService,
         @Inject(CURRENT_LIB) private _currentLib: Libraries,
+        @Inject(FD_LANGUAGE) private langSubject$: BehaviorSubject<FdLanguage>,
         private _route: ActivatedRoute,
         private _domSanitizer: DomSanitizer
     ) {
-        this._themingService.init();
         this.library = this._route.snapshot.data.library || 'core';
 
         this._themingService.currentTheme
@@ -153,8 +197,13 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         this.updateHighlightTheme(themeId);
     }
 
-    selectDensity(density: ContentDensity): void {
-        this._contentDensityService.contentDensity.next(density);
+    selectTranslation(translation: FdLanguage): void {
+        this.langSubject$.next(translation);
+        this.i18nMenu.close();
+    }
+
+    selectDensity(density: ContentDensityMode): void {
+        this._contentDensityService.updateContentDensity(density);
     }
 
     private trustedResourceUrl = (url: string): SafeResourceUrl =>

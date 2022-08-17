@@ -1,16 +1,14 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 
-import { DialogRef, DialogService, DialogConfig } from '@fundamental-ngx/core/dialog';
+import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { isObject } from '@fundamental-ngx/platform/shared';
-import { ContentDensityEnum } from '@fundamental-ngx/core/utils';
 
-import { UploadCollectionItem, UploadCollectionFolder } from '../../models/upload-collection.models';
+import { UploadCollectionFolder, UploadCollectionItem } from '../../models/upload-collection.models';
 import { NewFolderComponent } from '../new-folder/new-folder.component';
 
 export interface MoveToComponentDialogData {
     items: UploadCollectionItem[];
-    contentDensity: ContentDensityEnum;
     currentFolder?: UploadCollectionFolder;
     movableFolders?: UploadCollectionFolder[];
     maxFilenameLength: number;
@@ -21,7 +19,6 @@ export interface MoveToComponentDialogData {
     styles: [
         `
             .fd-list__item--title-background {
-                background-color: #f2f2f2;
                 background-color: var(--sapList_HeaderBackground);
             }
 

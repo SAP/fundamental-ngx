@@ -48,20 +48,19 @@
 
 <ng-template #feedContent let-param>
     <ng-container *ngTemplateOutlet="param"></ng-container>
-    <span
-        fd-truncate
-        [fdTruncateState]="isCollapsed"
-        [fdTruncateChars]="maxChars"
-        [fdTruncateTargetText]="text"
-        (charCountUpdate)="checkCharCount($event)"
-    >
+    <span>
+        {{ isCollapsed ? (text | truncate: maxChars) : text }}
     </span>
     <a
         fd-link
         class="fd-feed-list__link--more"
         *ngIf="!isRichText && hasMore"
         (click)="toggleTextView()"
-        [innerText]="isCollapsed ? moreLabel : lessLabel"
+        [innerText]="
+            isCollapsed
+                ? moreLabel || ('coreFeedListItem.moreLabel' | fdTranslate)
+                : lessLabel || ('coreFeedListItem.lessLabel' | fdTranslate)
+        "
     ></a>
 </ng-template>
 

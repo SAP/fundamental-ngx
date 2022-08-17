@@ -1,0 +1,37 @@
+{
+    "projectType": "library",
+    "root": "libs/core/src/lib/time",
+    "sourceRoot": "libs/core/src/lib/time",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/core/time"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/time/tsconfig.lib.json",
+                "project": "libs/core/src/lib/time/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/time/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/time/test.ts",
+                "tsConfig": "libs/core/src/lib/time/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/time/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/core/src/lib/time/**/*.ts", "libs/core/src/lib/time/**/*.html"]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fd"]
+}

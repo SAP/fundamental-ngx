@@ -125,12 +125,32 @@ export class ListItemComponent
     link = false;
 
     /** @hidden */
-    @ContentChild(CheckboxComponent)
-    checkbox: CheckboxComponent;
+    @ContentChild(RadioButtonComponent)
+    get radio(): RadioButtonComponent {
+        return this._radio;
+    }
 
     /** @hidden */
-    @ContentChild(RadioButtonComponent)
-    radio: RadioButtonComponent;
+    set radio(value: RadioButtonComponent) {
+        this._radio = value;
+        if (this._radio && this._radio.tabIndex == null) {
+            this._radio.tabIndex = -1;
+        }
+    }
+
+    /** @hidden */
+    @ContentChild(CheckboxComponent)
+    get checkbox(): CheckboxComponent {
+        return this._checkbox;
+    }
+
+    /** @hidden */
+    set checkbox(value: CheckboxComponent) {
+        this._checkbox = value;
+        if (this._checkbox && this._checkbox.tabIndexValue == null) {
+            this._checkbox.tabIndexValue = -1;
+        }
+    }
 
     /** @hidden */
     @ContentChildren(ListLinkDirective)
@@ -145,6 +165,12 @@ export class ListItemComponent
 
     /** @hidden */
     private readonly _onLinkListChanged$ = new Subject<void>();
+
+    /** @hidden */
+    private _radio: RadioButtonComponent;
+
+    /** @hidden */
+    private _checkbox: CheckboxComponent;
 
     /** @hidden */
     screenReaderContent = '';
@@ -183,7 +209,8 @@ export class ListItemComponent
         if (
             changes.selectedListItemScreenReaderText ||
             changes.navigatedListItemScreenReaderText ||
-            changes.navigatableListItemScreenReaderText
+            changes.navigatableListItemScreenReaderText ||
+            changes.selected
         ) {
             this._updateScreenReaderText();
         }
@@ -268,18 +295,23 @@ export class ListItemComponent
     private _updateScreenReaderText(): void {
         let content = '';
         if (this.selected) {
-            content += `, ${this.selectedListItemScreenReaderText ?? 'selected'}`;
+            content += this._addTextPart(content, this.selectedListItemScreenReaderText ?? 'selected');
         }
-        if (this.linkDirectives.some((d) => d.navigated)) {
-            content += `, ${this.navigatedListItemScreenReaderText ?? 'navigated'}`;
+        if (this.linkDirectives?.some((d) => d.navigated)) {
+            content += this._addTextPart(content, this.navigatedListItemScreenReaderText ?? 'navigated');
         }
-        if (this.linkDirectives.some((d) => d.navigationIndicator)) {
-            content += `, ${this.navigatableListItemScreenReaderText ?? 'navigatable'}`;
+        if (this.linkDirectives?.some((d) => d.navigationIndicator)) {
+            content += this._addTextPart(content, this.navigatableListItemScreenReaderText ?? 'navigatable');
         }
         if (content.startsWith(', ')) {
             content = content.substring(2);
         }
         this.screenReaderContent = content;
         this._changeDetectorRef.markForCheck();
+    }
+
+    /** @hidden */
+    private _addTextPart(existing: string, toAdd: string): string {
+        return (existing ? ', ' : '') + toAdd;
     }
 }

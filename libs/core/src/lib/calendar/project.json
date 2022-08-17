@@ -1,0 +1,37 @@
+{
+    "projectType": "library",
+    "root": "libs/core/src/lib/calendar",
+    "sourceRoot": "libs/core/src/lib/calendar",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/core/calendar"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/calendar/tsconfig.lib.json",
+                "project": "libs/core/src/lib/calendar/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/calendar/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/calendar/test.ts",
+                "tsConfig": "libs/core/src/lib/calendar/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/calendar/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/core/src/lib/calendar/**/*.ts", "libs/core/src/lib/calendar/**/*.html"]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fd"]
+}

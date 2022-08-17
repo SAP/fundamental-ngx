@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabListComponent } from './tab-list.component';
@@ -23,9 +24,12 @@ import { IconModule } from '@fundamental-ngx/core/icon';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
+import { DeprecatedTabsCompactDirective } from './deprecated-tabs-compact.directive';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
     declarations: [
@@ -44,9 +48,21 @@ import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.compon
         TabItemExpandComponent,
         TabCounterHeaderDirective,
         TabProcessIconDirective,
-        TabSeparatorDirective
+        TabSeparatorDirective,
+        DeprecatedTabsCompactDirective
     ],
-    imports: [CommonModule, IconModule, PopoverModule, ListModule, ButtonModule, MenuModule, ScrollSpyModule],
+    imports: [
+        CommonModule,
+        IconModule,
+        PopoverModule,
+        ListModule,
+        ButtonModule,
+        MenuModule,
+        ScrollSpyModule,
+        ContentDensityModule,
+        I18nModule,
+        OverflowLayoutModule
+    ],
     exports: [
         TabListComponent,
         TabPanelComponent,
@@ -62,7 +78,9 @@ import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.compon
         TabHeaderDirective,
         TabCounterHeaderDirective,
         TabProcessIconDirective,
-        TabSeparatorDirective
+        TabSeparatorDirective,
+        DeprecatedTabsCompactDirective,
+        ContentDensityModule
     ]
 })
 export class TabsModule {}

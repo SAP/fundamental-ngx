@@ -39,7 +39,7 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
     public registrationForm = new FormGroup({
         acceptAll: new FormControl(false),
         agreements: new FormGroup({
-            marketing: new FormControl(undefined),
+            marketing: new FormControl<boolean | undefined>(undefined),
             newsletter: new FormControl(false),
             termsAndConditions: new FormControl(false)
         })
@@ -50,7 +50,7 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
         this.setControlOnAgreementsChange();
     }
 
-    private acceptAll(accept: boolean): void {
+    private acceptAll(accept: boolean | null): void {
         this.registrationForm.get('agreements')?.setValue({
             marketing: accept,
             newsletter: accept,

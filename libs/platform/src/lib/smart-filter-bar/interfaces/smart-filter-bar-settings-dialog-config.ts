@@ -17,7 +17,8 @@ export interface SmartFilterSettingsDialogConfig {
     selectedFilters: string[];
 
     /**
+     * @deprecated use i18n capabilities instead
      * Filters visibility category labels.
      */
-    visibilityCategories: SmartFilterBarVisibilityCategoryLabels;
+    visibilityCategories?: SmartFilterBarVisibilityCategoryLabels;
 }

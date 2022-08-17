@@ -2,8 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild, Input } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { LinkModule } from '@fundamental-ngx/core/link';
-
+import { PlatformLinkModule } from './link.module';
 import { LinkComponent } from './link.component';
 
 /** Standard link functionality tests */
@@ -19,15 +18,12 @@ describe('LinkComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [LinkModule],
-                declarations: [LinkComponent, TestComponent],
-                providers: []
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformLinkModule],
+            declarations: [TestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -67,15 +63,12 @@ describe('LinkComponent Disabled', () => {
     let component: DisabledLinkComponent;
     let fixture: ComponentFixture<DisabledLinkComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [LinkModule],
-                declarations: [LinkComponent, DisabledLinkComponent],
-                providers: []
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformLinkModule],
+            declarations: [DisabledLinkComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DisabledLinkComponent);

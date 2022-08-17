@@ -25,7 +25,6 @@ import {
     executeScriptAfterTagAttr,
     executeScriptBeforeTagAttr,
     getElementArrayLength,
-    getElementClass,
     getElementPlaceholder,
     getElementSize,
     getText,
@@ -70,7 +69,6 @@ describe('Verify Textarea component', () => {
         textareaAutogrowExample,
         textareaCounterExample,
         textareaCounterTemplateExample,
-        textareaI18nExample,
         message
     } = textareaPage;
     const copyPasteBtn = currentPlatformName() === 'Mac OS X' ? 'Command' : 'Control';
@@ -151,7 +149,6 @@ describe('Verify Textarea component', () => {
             expect(getElementPlaceholder(textareaCounterTemplateExample + textarea)).toBe(
                 counterTextareaPlaceholderArr[0]
             );
-            expect(getElementPlaceholder(textareaI18nExample + textarea)).toBe(counterTextareaPlaceholderArr[0]);
         });
 
         describe('if textarea is enabled', () => {
@@ -280,10 +277,6 @@ describe('Verify Textarea component', () => {
             expect(currentText.length).toBe(10);
         });
 
-        it('should check over limit message for i18n textarea', () => {
-            checkOverLimitMessage(textareaI18nExample, 10);
-        });
-
         it('should check over limit message for basic textarea', () => {
             checkOverLimitMessage(textareaBasicExample, 10, 2);
         });
@@ -299,16 +292,6 @@ describe('Verify Textarea component', () => {
 
         it('should check over limit message for counter template textarea', () => {
             checkOverLimitMessage(textareaCounterTemplateExample, 10);
-        });
-
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7284
-        xit('should check that textarea has error styles when we force error', () => {
-            click(textareaI18nExample + textarea);
-            // force error
-            sendKeys(['A', 'Backspace']);
-
-            expect(getElementClass(textareaI18nExample + textarea)).toContain('is-error');
-            expect(isElementDisplayed(message)).toBe(true);
         });
 
         // Disabled due to changes in inline help - now there is an icon instead of text

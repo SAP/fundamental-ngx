@@ -33,13 +33,11 @@ describe('ObjectIdentifierComponent', () => {
     let testComponent: TestObjectIdentifierComponent;
     let fixture: ComponentFixture<TestObjectIdentifierComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ObjectIdentifierComponent, TestObjectIdentifierComponent, LinkComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ObjectIdentifierComponent, TestObjectIdentifierComponent, LinkComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestObjectIdentifierComponent);

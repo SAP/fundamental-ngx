@@ -50,13 +50,13 @@ import platformTableP13GroupTsSrc from '!./platform-table-examples/platform-tabl
 import platformTreeTableDefaultSrc from '!./platform-table-examples/platform-table-tree-example.component.html?raw';
 import platformTreeTableDefaultTsSrc from '!./platform-table-examples/platform-table-tree-example.component.ts?raw';
 import platformTableNavigatableRowSrc from '!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.html?raw';
+import platformTableNoOuterBordersSrc from '!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.html?raw';
 import platformTableNavigatableRowTsSrc from '!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.ts?raw';
+import platformTableNoOuterBordersTsSrc from '!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.ts?raw';
 import platformTableSemanticSrc from '!./platform-table-examples/platform-table-semantic-example.component.html?raw';
 import platformTableSemanticTsSrc from '!./platform-table-examples/platform-table-semantic-example.component.ts?raw';
 import platformTableRowClassSrc from '!./platform-table-examples/platform-table-row-class-example.component.html?raw';
 import platformTableRowClassTsSrc from '!./platform-table-examples/platform-table-row-class-example.component.ts?raw';
-import platformTableNoOuterBordersSrc from '!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.html?raw';
-import platformTableNoOuterBordersTsSrc from '!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.ts?raw';
 import platformTableCustomNoDataMessageSrc from '!./platform-table-examples/platform-table-no-items-template-example.component.html?raw';
 import platformTableCustomNoDataMessageTsSrc from '!./platform-table-examples/platform-table-no-items-template-example.component.ts?raw';
 import platformTableWrappedTextSrc from '!./platform-table-examples/platform-table-wrap-example.component.html?raw';
@@ -65,10 +65,14 @@ import platformTableWrappedTextTsSrc from '!./platform-table-examples/platform-t
 import platformTableEditableRowsSrc from '!./platform-table-examples/editable-rows/platform-table-editable-rows-example.component.html?raw';
 import platformTableEditableRowsTsSrc from '!./platform-table-examples/editable-rows/platform-table-editable-rows-example.component.ts?raw';
 
+import platformResponsiveColumnsSrc from '!./platform-table-examples/platform-table-responsive-columns-example.component.html?raw';
+import platformResponsiveColumnsTsSrc from '!./platform-table-examples/platform-table-responsive-columns-example.component.ts?raw';
+
 import illustrationDialogNoMail from '!../../../../assets/images/sapIllus-Dialog-NoMail.svg?raw';
 
 import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
 import { ExampleItem } from './platform-table-examples/platform-table-data-items-example';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-table-docs',
@@ -83,7 +87,7 @@ export class PlatformTableDocsComponent {
                 properties: {
                     contentDensity: {
                         type: 'string',
-                        enum: ['compact', 'cozy', 'condensed']
+                        enum: [ContentDensityMode.COMPACT, ContentDensityMode.COZY, ContentDensityMode.CONDENSED]
                     },
                     selectionMode: {
                         type: 'string',
@@ -156,7 +160,7 @@ export class PlatformTableDocsComponent {
 
     data: any = {
         table: {
-            contentDensity: 'compact',
+            contentDensity: ContentDensityMode.COMPACT,
             selectionMode: 'none',
             freezeColumnsTo: '',
             noHorizontalBorders: false,
@@ -568,6 +572,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-editable-rows-example',
             component: 'PlatformTableEditableRowsExampleComponent',
             name: 'platform-table-editable-rows-example.component.ts'
+        }
+    ];
+
+    responsiveColumnsFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformResponsiveColumnsSrc,
+            fileName: 'platform-table-responsive-columns-example',
+            name: 'platform-table-responsive-columns-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformResponsiveColumnsTsSrc,
+            fileName: 'platform-table-responsive-columns-example',
+            component: 'PlatformTableResponsiveColumnsExampleComponent',
+            name: 'platform-table-responsive-columns-example.component.ts'
         }
     ];
 

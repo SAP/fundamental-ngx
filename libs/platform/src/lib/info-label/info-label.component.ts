@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@a
 
 import { LabelType } from '@fundamental-ngx/core/info-label';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { IconFont } from '@fundamental-ngx/core/icon';
 
 @Component({
     selector: 'fdp-info-label',
@@ -17,6 +18,13 @@ export class InfoLabelComponent {
      */
     @Input()
     type: LabelType;
+
+    /**
+     * The icon font
+     * Options include: 'SAP-icons', 'BusinessSuiteInAppSymbols' and 'SAP-icons-TNT'
+     */
+    @Input()
+    font: IconFont = 'SAP-icons';
 
     /** glyph define the icon of info label */
     @Input()

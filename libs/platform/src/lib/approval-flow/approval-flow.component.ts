@@ -5,6 +5,7 @@ import {
     ElementRef,
     EventEmitter,
     Inject,
+    Injector,
     Input,
     OnChanges,
     OnDestroy,
@@ -18,10 +19,10 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { combineLatest, fromEvent, merge, Subject, Subscription } from 'rxjs';
-import { debounceTime, switchMap, mapTo, map, startWith, distinctUntilChanged } from 'rxjs/operators';
+import { throttleTime, switchMap, mapTo, map, startWith, distinctUntilChanged } from 'rxjs/operators';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { GridListComponent, GridListSelectionEvent } from '@fundamental-ngx/core/grid-list';
@@ -79,6 +80,8 @@ import {
 } from '@fundamental-ngx/platform/shared';
 import { cloneDeep, uniqBy } from 'lodash-es';
 
+let defaultId = 0;
+
 @Component({
     selector: 'fdp-approval-flow',
     templateUrl: './approval-flow.component.html',
@@ -88,7 +91,7 @@ import { cloneDeep, uniqBy } from 'lodash-es';
 })
 export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     /** Title which is displayed in the header of the Approval Flow component. */
-    @Input() title = 'Approval process';
+    @Input() title: string;
 
     @Input() value: ApprovalProcess;
 
@@ -118,7 +121,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     @Input() isEditAvailable = false;
 
     /** Text label for watchers list */
-    @Input() watchersLabel = 'Watchers';
+    @Input() watchersLabel: string;
 
     /** Enables or disables ability to add parallel nodes */
     @Input() allowAddParallelNodes = true;
@@ -174,10 +177,10 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     @Output() onDataReceived = new EventEmitter<void>();
 
     /** @hidden */
-    @ViewChild('graphContainerEl') _graphContainerEl: ElementRef;
+    @ViewChild('graphContainerEl') _graphContainerEl: ElementRef<HTMLDivElement>;
 
     /** @hidden */
-    @ViewChild('graphEl') _graphEl: ElementRef;
+    @ViewChild('graphEl') _graphEl: ElementRef<HTMLDivElement>;
 
     /** @hidden */
     @ViewChild('gridList') _gridList: GridListComponent<ApprovalGraphNode>;
@@ -199,15 +202,6 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     _isCarousel = false;
-
-    /** @hidden */
-    _carouselScrollX = 0;
-
-    /** @hidden */
-    _carouselStep = 0;
-
-    /** @hidden */
-    _maxCarouselStep = 0;
 
     /** @hidden */
     _graphMetadata: ApprovalGraphMetadata = {};
@@ -250,6 +244,8 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     _dragDropInProgress = false;
 
+    readonly approvalFlowUniqueId = `fdp-approval-flow-${++defaultId}`;
+
     /** @hidden */
     private _editModeInitSub: Subscription;
 
@@ -263,6 +259,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     constructor(
         private readonly _dialogService: DialogService,
         private readonly _cdr: ChangeDetectorRef,
+        private readonly _injector: Injector,
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         @Optional() private readonly _rtlService: RtlService
     ) {}
@@ -359,7 +356,8 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
                     allowSendReminder: this.allowSendRemindersForStatuses.includes(node.status),
                     ...this._defaultDialogOptions
                 }
-            }
+            },
+            this._injector
         );
 
         dialog.afterClosed.subscribe((reminderTargets) => {
@@ -391,7 +389,8 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /** @hidden Watcher's avatar click handler */
-    _onWatcherClick(watcher: ApprovalUser): void {
+    _onWatcherClick(watcher: ApprovalUser, event: Event): void {
+        event.preventDefault();
         this._dialogService.open<ApprovalFlowApproverDetailsDialogRefData>(ApprovalFlowApproverDetailsComponent, {
             data: {
                 watcher,
@@ -406,80 +405,69 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /** Scroll to the next horizontal slide */
-    nextSlide(stepSize = 1): void {
-        this._checkCarouselStatus();
+    nextSlide(dir = 1): void {
+        const threshold = 1;
 
-        if (Math.abs(this._carouselScrollX) === this._scrollDiff) {
-            return;
+        let pos = 0;
+
+        if (dir === 1) {
+            const lastStep = this._carouselStepsRight === 1;
+            const nextStep = this._carouselStepsCount - this._carouselStepsRight + 1;
+            const visibleRightPoint = this._carouselStepSize * nextStep + (lastStep ? 0 : threshold);
+            pos = visibleRightPoint - this._graphEl.nativeElement.clientWidth;
+        } else {
+            const lastStep = this._carouselStepsLeft === 1;
+            const nextStep = this._carouselStepsLeft - 1;
+            pos = this._carouselStepSize * nextStep - (lastStep ? 0 : threshold);
         }
 
-        const newOffset = this._carouselScrollX - this._carouselStepSize * stepSize;
-        const newCarouselStep = this._carouselStep + stepSize;
+        this._setScrollPosition(pos);
 
-        this._carouselScrollX = Math.abs(newOffset) > this._scrollDiff ? -this._scrollDiff : newOffset;
-        this._carouselStep = newCarouselStep <= this._maxCarouselStep ? newCarouselStep : this._maxCarouselStep;
         this._cdr.detectChanges();
     }
 
-    /** Scroll to the previous horizontal slide */
-    previousSlide(stepSize = 1): void {
-        this._checkCarouselStatus();
+    /** @hidden */
+    _setScrollPosition(pos: number): void {
+        this._graphContainerEl.nativeElement.scrollTo({
+            left: pos,
+            behavior: 'smooth'
+        });
+    }
 
-        if (this._carouselStep === 0) {
+    /** @hidden */
+    private _moveColInView(colIndex: number): any {
+        const node = this._graphEl.nativeElement.children[colIndex].firstElementChild;
+        if (!node) {
             return;
         }
 
-        if (this._carouselStep === 1) {
-            this._carouselScrollX = 0;
-        } else {
-            this._carouselScrollX += this._carouselStepSize * stepSize;
-            this._carouselScrollX = this._carouselScrollX <= 0 ? this._carouselScrollX : 0;
-        }
+        const { x: nodeX, width } = node.getBoundingClientRect();
 
-        const newCarouselStep = this._carouselStep - stepSize;
-        this._carouselStep = newCarouselStep > 0 ? newCarouselStep : 0;
-        this._cdr.detectChanges();
+        const delta = this._graphContainerEl.nativeElement.getBoundingClientRect().x;
+
+        const left = nodeX - delta;
+        const right = left + width;
+
+        if (left < 0) {
+            this._setScrollPosition(this._graphContainerEl.nativeElement.scrollLeft + left);
+        } else if (right > this._graphEl.nativeElement.clientWidth) {
+            this._setScrollPosition(
+                this._graphContainerEl.nativeElement.scrollLeft + right - this._graphEl.nativeElement.clientWidth
+            );
+        }
     }
 
     /** @hidden Handle node keydown and focus other node based on which key is pressed */
-    _onNodeKeyDown(
-        event: KeyboardEvent,
-        node: ApprovalGraphNode,
-        firstColumn: boolean,
-        firstNode: boolean,
-        lastColumn: boolean,
-        lastNode: boolean
-    ): void {
-        if (!KeyUtil.isKeyCode(event, [TAB, UP_ARROW, DOWN_ARROW, RIGHT_ARROW, LEFT_ARROW])) {
+    _onNodeKeyDown(event: KeyboardEvent, node: ApprovalGraphNode): void {
+        if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, RIGHT_ARROW, LEFT_ARROW])) {
             return;
         }
 
         const { nodeIndex, columnIndex } = this._graphMetadata[node.id];
-        const isTab = KeyUtil.isKeyCode(event, TAB);
-        const isShift = event.shiftKey;
-        const isTabMoveForwardPossible = !isShift && !lastNode && !lastColumn;
-        const isTabMoveBackwardPossible = isShift && !firstNode && !firstColumn;
-
-        if (isTab && !isTabMoveForwardPossible && !isTabMoveBackwardPossible) {
-            return;
-        }
-
-        if (isTab) {
-            const nodesSequence = getGraphNodes(this._graph).filter((n) => !n.blank && !n.space);
-            const currentNodeIndex = nodesSequence.findIndex((n) => n === node);
-            const diff = isShift ? -1 : 1;
-            const nextNode = nodesSequence[currentNodeIndex + diff];
-
-            if (nextNode) {
-                event.preventDefault();
-                this._focusNode(nextNode, 1);
-                return;
-            }
-        }
 
         event.preventDefault();
 
-        let nextFocusTarget;
+        let nextFocusTarget: ApprovalGraphNode | undefined;
 
         if (typeof nodeIndex === 'number' && typeof columnIndex === 'number') {
             if (KeyUtil.isKeyCode(event, UP_ARROW)) {
@@ -495,8 +483,8 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
             }
         }
 
-        if (nextFocusTarget?.nextNode) {
-            this._focusNode(nextFocusTarget.nextNode, nextFocusTarget.stepSize);
+        if (nextFocusTarget) {
+            this._focusNode(nextFocusTarget);
         }
     }
 
@@ -572,15 +560,19 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     _addNode(source: ApprovalGraphNode, type: ApprovalFlowNodeTarget): void {
         const showNodeTypeSelect = type === 'before' && !source.actionsConfig?.disableAddParallel;
 
-        const dialog = this._dialogService.open<AddNodeDialogRefData>(ApprovalFlowAddNodeComponent, {
-            data: {
-                nodeTarget: type,
-                showNodeTypeSelect,
-                node: Object.assign(getBlankApprovalGraphNode(), { blank: false }),
-                checkDueDate: this.checkDueDate,
-                ...this._defaultDialogOptions
-            }
-        });
+        const dialog = this._dialogService.open<AddNodeDialogRefData>(
+            ApprovalFlowAddNodeComponent,
+            {
+                data: {
+                    nodeTarget: type,
+                    showNodeTypeSelect,
+                    node: Object.assign(getBlankApprovalGraphNode(), { blank: false }),
+                    checkDueDate: this.checkDueDate,
+                    ...this._defaultDialogOptions
+                }
+            },
+            this._injector
+        );
 
         dialog.afterClosed.subscribe((data: AddNodeDialogFormData) => {
             if (!data) {
@@ -656,14 +648,18 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden Open edit node dialog */
     _editNode(node: ApprovalNode): void {
-        const dialog = this._dialogService.open<AddNodeDialogRefData>(ApprovalFlowAddNodeComponent, {
-            data: {
-                isEdit: true,
-                node: Object.assign({}, node),
-                checkDueDate: this.checkDueDate,
-                ...this._defaultDialogOptions
-            }
-        });
+        const dialog = this._dialogService.open<AddNodeDialogRefData>(
+            ApprovalFlowAddNodeComponent,
+            {
+                data: {
+                    isEdit: true,
+                    node: Object.assign({}, node),
+                    checkDueDate: this.checkDueDate,
+                    ...this._defaultDialogOptions
+                }
+            },
+            this._injector
+        );
 
         dialog.afterClosed.subscribe((data: { node: ApprovalNode }) => {
             const updatedNode = data?.node;
@@ -755,10 +751,8 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
             dropTarget.node.targets = [nodeToDrop.id];
 
             this._finishDragDropProcess(nodeToDrop);
-        }
-
-        if (placement === 'before') {
-            const dialog = this._dialogService.open(ApprovalFlowSelectTypeComponent);
+        } else if (placement === 'before') {
+            const dialog = this._dialogService.open(ApprovalFlowSelectTypeComponent, undefined, this._injector);
 
             dialog.afterClosed.subscribe((data: SelectTypeDialogFormData) => {
                 if (!data) {
@@ -781,18 +775,14 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
                 this._finishDragDropProcess(nodeToDrop);
             });
-        }
-
-        if (placement === 'before-all') {
+        } else if (placement === 'before-all') {
             this._deleteNode(nodeToDrop);
 
             const firstColumnNodes = this._graph.columns[0].nodes;
             nodeToDrop.targets = firstColumnNodes.map((node) => node.id);
 
             this._finishDragDropProcess(nodeToDrop);
-        }
-
-        if (placement === 'after-all') {
+        } else if (placement === 'after-all') {
             this._deleteNode(nodeToDrop);
             this._buildView(this._approvalProcess);
 
@@ -847,51 +837,33 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._multipleFinalNodes = nodes.filter((node) => this._graphMetadata[node.id].isFinal).length > 1;
 
         this._cdr.detectChanges();
-        this._checkCarouselStatus();
         this._gridList?.clearSelection();
 
         if (!this._isEditMode) {
-            this._resetCarousel();
+            this._setScrollPosition(0);
         }
     }
 
     /** @hidden Listen window resize and distribute cards on column change */
     private _listenOnResize(): void {
         this._subscriptions.add(
-            fromEvent(window, 'resize')
-                .pipe(debounceTime(60))
+            merge(fromEvent(window, 'resize'), fromEvent(this._graphContainerEl.nativeElement, 'scroll'))
+                .pipe(throttleTime(50, undefined, { leading: true, trailing: true }))
                 .subscribe(() => {
-                    this._resetCarousel();
-                    this._checkCarouselStatus();
+                    this._cdr.detectChanges();
                 })
         );
     }
 
     /** @hidden */
-    private _focusNode(node: ApprovalGraphNode, step: number): void {
+    _focusNode(node: ApprovalGraphNode): void {
         const nodeToFocus = this._nodeComponents.find((comp) => comp.node === node);
 
         if (!nodeToFocus) {
             return;
         }
-
-        const nodeRect = nodeToFocus._nativeElement.getBoundingClientRect();
-        const graphContainerRect = this._graphContainerEl.nativeElement.getBoundingClientRect();
-        const graphVisibilityThreshold = graphContainerRect.width;
-        const nodeOffsetFromContainerEdge = this._rtl
-            ? graphContainerRect.right - nodeRect.right
-            : nodeRect.left - graphContainerRect.left;
-
-        nodeToFocus._focus();
-
-        if (nodeOffsetFromContainerEdge + nodeRect.width > graphVisibilityThreshold) {
-            this.nextSlide(step);
-            return;
-        }
-
-        if (nodeOffsetFromContainerEdge < 0) {
-            this.previousSlide(step);
-        }
+        this._moveColInView(node.colIndex ?? 0);
+        nodeToFocus._focus({ preventScroll: true });
     }
 
     /** @hidden Update node object in local approval process data structure */
@@ -959,75 +931,76 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._previousApprovalProcess = cloneDeep(this._approvalProcess);
     }
 
-    /** @hidden Check if need to add carousel controls */
-    private _checkCarouselStatus(): void {
-        if (!this._graphEl) {
-            return;
-        }
-
-        this._isCarousel = this._graphEl.nativeElement.scrollWidth > this._graphEl.nativeElement.clientWidth;
-        this._maxCarouselStep = Math.ceil(this._scrollDiff / this._carouselStepSize);
-        this._cdr.detectChanges();
-    }
-
-    /** @hidden Reset the current state of carousel */
-    private _resetCarousel(): void {
-        this._carouselStep = 0;
-        this._carouselScrollX = 0;
-    }
-
     /** @hidden */
     private _getNextHorizontalNode = (
         nodeIndex: number,
         columnIndex: number,
-        direction: 'left' | 'right',
-        stepSize = 1
-    ): { nextNode: ApprovalGraphNode | undefined; stepSize: number } => {
+        direction: 'left' | 'right'
+    ): ApprovalGraphNode | undefined => {
         const indexDiff = direction === 'right' ? 1 : -1;
         const nextColumn = this._graph.columns[columnIndex + indexDiff];
         const nextNode = nextColumn?.nodes[nodeIndex];
 
         if (!nextNode) {
-            return { nextNode: undefined, stepSize };
+            return undefined;
         }
 
         if (nextNode.blank || nextNode.space) {
-            return this._getNextHorizontalNode(nodeIndex, columnIndex + indexDiff, direction, stepSize + 1);
+            return this._getNextHorizontalNode(nodeIndex, columnIndex + indexDiff, direction);
         }
 
-        return { nextNode, stepSize };
+        return nextNode;
     };
 
     /** @hidden */
     private _getNextVerticalNode = (
         nodeIndex: number,
         columnIndex: number,
-        direction: 'up' | 'down',
-        stepSize = 1
-    ): { nextNode: ApprovalGraphNode | undefined; stepSize: number } => {
+        direction: 'up' | 'down'
+    ): ApprovalGraphNode | undefined => {
         const indexDiff = direction === 'down' ? 1 : -1;
         const currColumn = this._graph.columns[columnIndex];
         const nextNode = currColumn.nodes[nodeIndex + indexDiff];
 
         if (!nextNode) {
-            return { nextNode: undefined, stepSize };
+            return undefined;
         }
 
         if (nextNode.blank || nextNode.space) {
-            return this._getNextVerticalNode(nodeIndex + indexDiff, columnIndex, direction, stepSize + 1);
+            return this._getNextVerticalNode(nodeIndex + indexDiff, columnIndex, direction);
         }
 
-        return { nextNode, stepSize };
+        return nextNode;
     };
 
     /** @hidden */
     private get _carouselStepSize(): number {
-        return this._graphEl.nativeElement.scrollWidth / this._graphEl.nativeElement.children.length;
+        return this._graphEl.nativeElement.scrollWidth / this._carouselStepsCount;
     }
 
     /** @hidden */
-    private get _scrollDiff(): number {
+    get _scrollDiff(): number {
+        if (!this._graphEl) {
+            return 0;
+        }
         return this._graphEl.nativeElement.scrollWidth - this._graphEl.nativeElement.clientWidth;
+    }
+
+    /** @hidden */
+    get _carouselStepsCount(): number {
+        return this._graphEl.nativeElement.children.length;
+    }
+
+    /** @hidden */
+    get _carouselStepsLeft(): number {
+        return Math.ceil(this._graphContainerEl.nativeElement.scrollLeft / this._carouselStepSize);
+    }
+
+    /** @hidden */
+    get _carouselStepsRight(): number {
+        return Math.ceil(
+            (this._scrollDiff - Math.round(this._graphContainerEl.nativeElement.scrollLeft)) / this._carouselStepSize
+        );
     }
 
     /** @hidden */

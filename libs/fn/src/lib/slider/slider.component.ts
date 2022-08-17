@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -5,6 +6,7 @@ import {
     ElementRef,
     forwardRef,
     HostBinding,
+    HostListener,
     Input,
     OnChanges,
     OnDestroy,
@@ -17,12 +19,13 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { coerceNumberProperty, _isNumberValue } from '@angular/cdk/coercion';
+import { SliderRangeHandles } from '@fundamental-ngx/core/slider';
 
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { SliderControlValue, SliderCustomValue, SliderTickMark, SliderValueTargets } from './slider.model';
-import { RtlService, applyCssClass, CssClassBuilder, KeyUtil } from '@fundamental-ngx/core/utils';
+import { RtlService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 export const SLIDER_VALUE_ACCESSOR = {
@@ -44,26 +47,26 @@ let sliderId = 0;
         class: 'fn-slider'
     }
 })
-export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, CssClassBuilder {
+export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
     /** Slider id, it has some default value if not set.  */
     @Input()
     @HostBinding('attr.id')
     id = 'fn-slider-id-' + sliderId++;
 
-    /** Whether slider should be rendered as vertical. */
     @Input()
-    @HostBinding('class.fn-slider--vertical')
-    vertical = false;
+    @HostBinding('class.fn-slider--range')
+    range = false;
 
-    /** User's custom classes */
+    /** Whether slider is disabled */
     @Input()
-    class: Nullable<string>;
+    @HostBinding('class.is-disabled')
+    disabled = false;
 
     /** Id of the element that labels slider. */
     @Input()
     ariaLabelledBy: Nullable<string>;
 
-    /** Aria label for the slider. */
+    /** Aria-label for the slider. */
     @Input()
     ariaLabel: Nullable<string>;
 
@@ -142,12 +145,34 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     customValues: SliderCustomValue[] = [];
 
     /**
+     * Slider min/max value verbose string.
+     */
+    @Input()
+    ariaValuePrefix = 'value is ';
+
+    /**
      * slider current value verbose string.
      * This will be read only once by screen reader and upon slider value change,
      * this string will not be read.
      */
     @Input()
     singleSliderCurrentValuePrefix = 'Current value is ';
+
+    /**
+     * Range slider handle 1 current value supporting string
+     * This will be read only once by screen reader and upon slider value change,
+     * this string will not be read.
+     */
+    @Input()
+    rangeSliderHandle1CurrentValuePrefix = 'handle 1 value is ';
+
+    /**
+     * Range slider handle 2 current value supporting string
+     * This will be read only once by screen reader and upon slider value change,
+     * this string will not be read.
+     */
+    @Input()
+    rangeSliderHandle2CurrentValuePrefix = 'handle 2 value is ';
 
     /** @hidden */
     _position: number | number[] = 0;
@@ -164,6 +189,12 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             return;
         }
 
+        if (this.range) {
+            this._initRangeMode((value ?? [0.0]) as number[] | SliderTickMark[]);
+        } else {
+            this._initSingeMode((value ?? 0) as number | SliderTickMark);
+        }
+
         this._initSingeMode(value as number | SliderTickMark);
 
         this._value = value;
@@ -174,16 +205,16 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     get _popoverValueRef(): number[] {
-        return [this._position as number];
+        return [this._position as number, this._handle1Value, this._handle2Value];
     }
 
     /** @hidden */
-    @ViewChild('track', { read: ElementRef })
-    trackEl: ElementRef<HTMLDivElement>;
+    @ViewChild('rangeHandle1', { read: ElementRef })
+    rangeHandle1: ElementRef<HTMLElement>;
 
     /** @hidden */
-    @ViewChild('handle', { read: ElementRef })
-    handle: ElementRef<HTMLDivElement>;
+    @ViewChild('rangeHandle2', { read: ElementRef })
+    rangeHandle2: ElementRef<HTMLElement>;
 
     /** @hidden */
     _value: number | SliderTickMark | SliderTickMark[] | number[] = 0;
@@ -201,9 +232,25 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     _isRtl = false;
 
     /**
-     * @hidden slider current value supporting string.
+     * @hidden
+     * whether to use value with a prefix for announcing
      */
-    _singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
+    _useSliderValuePrefix = true;
+
+    /** @hidden */
+    _handle1Position = 0;
+
+    /** @hidden */
+    _handle2Position = 0;
+
+    /** @hidden */
+    _handle1Value = 0;
+
+    /** @hidden */
+    _handle2Value = 0;
+
+    /** @hidden */
+    _rangeProgress = 0;
 
     /** @hidden */
     private _min = 0;
@@ -234,8 +281,14 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         private readonly _elementRef: ElementRef,
         private readonly _cdr: ChangeDetectorRef,
         private readonly _renderer: Renderer2,
+        private readonly _liveAnnouncer: LiveAnnouncer,
         @Optional() private readonly _rtlService: RtlService
     ) {}
+
+    @HostListener('click', ['$event'])
+    onSliderClick(event: MouseEvent): void {
+        this.onTrackClick(event);
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -250,7 +303,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     ngOnChanges(): void {
-        this.buildComponentCssClass();
         this._constructValuesBySteps();
         this._recalcHandlePositions();
     }
@@ -283,21 +335,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         return this.customValues.length > 0 ? this.customValues[this.max as number].label : this.max;
     }
 
-    @applyCssClass
-    /**
-     * @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    buildComponentCssClass(): string[] {
-        const classList = ['fn-slider'];
-        if (this.class) {
-            classList.push(this.class);
-        }
-        return classList;
-    }
-
     /** @hidden */
     elementRef(): ElementRef {
         return this._elementRef;
@@ -326,6 +363,9 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     onTrackClick(event: MouseEvent): void {
+        if (this.disabled || this.range) {
+            return;
+        }
         this.writeValue(this._calculateValueFromPointerPosition(event));
     }
 
@@ -333,7 +373,21 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     onHandleClick(event: MouseEvent): void {
         event.stopPropagation();
         const unsubscribeFromMousemove = this._renderer.listen('document', 'mousemove', (moveEvent) => {
-            this.writeValue(this._calculateValueFromPointerPosition(moveEvent));
+            if (!this.range) {
+                this.writeValue(this._calculateValueFromPointerPosition(moveEvent));
+                return;
+            }
+
+            let handleIndex = SliderRangeHandles.First;
+
+            if (event.target === this.rangeHandle2.nativeElement) {
+                handleIndex = SliderRangeHandles.Second;
+            }
+
+            const value = this._calculateValueFromPointerPosition(moveEvent, false) as number;
+            this._setRangeHandleValueAndPosition(handleIndex, value);
+
+            this.writeValue(this._constructRangeModelValue());
         });
 
         const unsubscribeFromMouseup = this._renderer.listen('document', 'mouseup', () => {
@@ -352,7 +406,16 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
         const diff = event.shiftKey ? this.jump : this.step;
         let newValue: number | SliderTickMark | null = null;
-        const prevValue = this._position as number;
+        let prevValue = this._position as number;
+        let handleIndex = SliderRangeHandles.First;
+
+        if (this.range) {
+            if (event.target === this.rangeHandle2.nativeElement) {
+                prevValue = this._handle2Value;
+                handleIndex = SliderRangeHandles.Second;
+            }
+        }
+
         if (this.isRtl()) {
             if (KeyUtil.isKeyCode(event, LEFT_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
                 newValue = prevValue + diff;
@@ -375,40 +438,32 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             return;
         }
 
-        newValue = this._processNewValue(newValue as number);
+        newValue = this._processNewValue(newValue as number, !this.range);
 
-        this.writeValue(newValue);
-    }
-
-    /** @hidden */
-    _updateValueFromInput(value: string, target: SliderValueTargets): void {
-        const newValue = this._processNewValue(+value) as number;
-        if (target === SliderValueTargets.SINGLE_SLIDER) {
+        if (!this.range) {
             this.writeValue(newValue);
-            this.handle.nativeElement.focus();
+        } else {
+            this._setRangeHandleValueAndPosition(handleIndex, newValue as number);
+            this.writeValue(this._constructRangeModelValue());
         }
     }
 
     /** @hidden reset default prefix on leaving the slider */
     onBlur(): void {
         // reset prefix string for slider current value that need to be announced
-        this._singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
+        this._useSliderValuePrefix = true;
         this._cdr.markForCheck();
     }
 
     /** @hidden */
     private _calculateValueFromPointerPosition(event: MouseEvent, takeCustomValue = true): number | SliderTickMark {
-        const { left, bottom, height, width } = this.trackEl.nativeElement.getBoundingClientRect();
-        const coordinates = this.vertical ? event.clientY : event.clientX;
-        const offset = this.vertical ? bottom : left;
-        const size = this.vertical ? height : width;
+        const { left, width } = this._elementRef.nativeElement.getBoundingClientRect();
+        const coordinates = event.clientX;
+        const offset = left;
+        const size = width;
         let percentage = (coordinates - offset) / size;
 
-        if (this.vertical) {
-            percentage = percentage * -1;
-        }
-
-        if (!this.vertical && this._isRtl) {
+        if (this._isRtl) {
             percentage = 1 - percentage;
         }
 
@@ -427,7 +482,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             newValue = this.min;
         }
 
-        this._singleSliderCurrentValuePrefix = '';
+        this._useSliderValuePrefix = false;
         this._cdr.markForCheck();
 
         const stepDiffArray = this._valuesBySteps
@@ -484,6 +539,12 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     private _recalcHandlePositions(): void {
+        if (this.range) {
+            this._handle1Position = this._calcProgress(this._handle1Value);
+            this._handle2Position = this._calcProgress(this._handle2Value);
+            this._rangeProgress = Math.abs(this._handle2Position - this._handle1Position);
+        }
+
         this._progress = this._calcProgress(this._position as number, true);
     }
 
@@ -584,5 +645,62 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     /** @hidden */
     private _instanceOfCustomValue(object: any): object is SliderCustomValue {
         return !!object && 'value' in object && 'label' in object;
+    }
+
+    /** @hidden */
+    private _setRangeHandleValueAndPosition(handleIndex: SliderRangeHandles, value: number): void {
+        const position = this._calcProgress(value, true);
+
+        if (handleIndex === SliderRangeHandles.First) {
+            this._handle1Value = value;
+            this._handle1Position = position;
+        }
+
+        if (handleIndex === SliderRangeHandles.Second) {
+            this._handle2Value = value;
+            this._handle2Position = position;
+        }
+
+        this._rangeProgress = Math.abs(this._handle2Position - this._handle1Position);
+    }
+
+    /** @hidden */
+    private _constructRangeModelValue(): number[] | SliderTickMark[] {
+        let rangeLowerValue: number | string;
+        let rangeHigherValue: number | string;
+        let rangeValue: number[] | SliderTickMark[] = [
+            Math.min(this._handle1Value, this._handle2Value),
+            Math.max(this._handle1Value, this._handle2Value)
+        ];
+
+        rangeLowerValue = rangeValue[0];
+        rangeHigherValue = rangeValue[1];
+
+        if (this.customValues.length > 0) {
+            const min = this.customValues[rangeValue[0]] || this.customValues[0];
+            const max = this.customValues[rangeValue[1]] || this.customValues[this.customValues.length - 1];
+
+            rangeValue = [min, max];
+            rangeLowerValue = rangeValue[0].label;
+            rangeHigherValue = rangeValue[1].label;
+        }
+        this._liveAnnouncer.announce('range value between ' + rangeLowerValue + ' and ' + rangeHigherValue, 'polite');
+        return rangeValue;
+    }
+
+    /** @hidden */
+    private _initRangeMode(value: number[] | SliderTickMark[]): void {
+        const firstHandle = coerceNumberProperty(value[0], this.min);
+        const secondHandle = coerceNumberProperty(value[1], this.max);
+
+        this._initRangeModeDefault([firstHandle, secondHandle]);
+    }
+
+    /** @hidden */
+    private _initRangeModeDefault([firstHandle, secondHandle]: number[]): void {
+        this._position = [firstHandle, secondHandle];
+
+        this._setRangeHandleValueAndPosition(SliderRangeHandles.First, firstHandle);
+        this._setRangeHandleValueAndPosition(SliderRangeHandles.Second, secondHandle);
     }
 }

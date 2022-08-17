@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Injector, ViewEncapsulation } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { BaseSmartFilterBarConditionField } from './base-smart-filter-bar-condition-field';
 import { SmartFilterBar } from '../../smart-filter-bar.class';
@@ -10,7 +10,7 @@ import { SmartFilterBar } from '../../smart-filter-bar.class';
 })
 export class SmartFilterBarConditionFieldComponent extends BaseSmartFilterBarConditionField {
     /** @hidden */
-    constructor(dialogService: DialogService, smartFilterBar: SmartFilterBar) {
-        super(dialogService, smartFilterBar);
+    constructor(dialogService: DialogService, smartFilterBar: SmartFilterBar, injector: Injector) {
+        super(dialogService, smartFilterBar, injector);
     }
 }

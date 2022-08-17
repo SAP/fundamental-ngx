@@ -71,41 +71,39 @@ xdescribe('FormGeneratorComponent', () => {
     let component: HostComponent;
     let fixture: ComponentFixture<HostComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [
-                    FdpFormGroupModule,
-                    PlatformInputModule,
-                    FormsModule,
-                    ReactiveFormsModule,
-                    PlatformButtonModule,
-                    PlatformCheckboxGroupModule,
-                    PlatformSelectModule,
-                    PlatformRadioGroupModule,
-                    PlatformTextAreaModule,
-                    PlatformInputModule,
-                    PlatformDatePickerModule,
-                    PlatformSwitchModule,
-                    BusyIndicatorModule
-                ],
-                declarations: [
-                    DynamicFormControlDirective,
-                    DynamicFormControlFieldDirective,
-                    DynamicFormGeneratorInputComponent,
-                    FormGeneratorComponent,
-                    HostComponent
-                ],
-                providers: [FormGeneratorService]
-            })
-                .overrideModule(BrowserDynamicTestingModule, {
-                    set: {
-                        entryComponents: [DynamicFormGeneratorInputComponent]
-                    }
-                })
-                .compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                FdpFormGroupModule,
+                PlatformInputModule,
+                FormsModule,
+                ReactiveFormsModule,
+                PlatformButtonModule,
+                PlatformCheckboxGroupModule,
+                PlatformSelectModule,
+                PlatformRadioGroupModule,
+                PlatformTextAreaModule,
+                PlatformInputModule,
+                PlatformDatePickerModule,
+                PlatformSwitchModule,
+                BusyIndicatorModule
+            ],
+            declarations: [
+                DynamicFormControlDirective,
+                DynamicFormControlFieldDirective,
+                DynamicFormGeneratorInputComponent,
+                FormGeneratorComponent,
+                HostComponent
+            ],
+            providers: [FormGeneratorService]
         })
-    );
+            .overrideModule(BrowserDynamicTestingModule, {
+                set: {
+                    entryComponents: [DynamicFormGeneratorInputComponent]
+                }
+            })
+            .compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(HostComponent);

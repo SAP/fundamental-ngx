@@ -7,15 +7,13 @@ import {
     ElementRef,
     forwardRef,
     HostBinding,
+    Inject,
     Input,
     OnDestroy,
-    OnInit,
     Optional,
     QueryList
 } from '@angular/core';
-import { Subscription } from 'rxjs';
-
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { combineLatest, Observable, startWith, Subscription } from 'rxjs';
 
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedItemDirective } from '../nested-item/nested-item.directive';
@@ -24,20 +22,24 @@ import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListInterface } from './nested-list.interface';
 import { NestedListHeaderDirective } from '../nested-list-directives';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
+import {
+    ContentDensityObserver,
+    contentDensityObserverProviders,
+    ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 @Directive({
-    selector: '[fdNestedList], [fd-nested-list]'
+    selector: '[fdNestedList], [fd-nested-list]',
+    providers: [
+        contentDensityObserverProviders({ modifiers: { [ContentDensityMode.COMPACT]: 'fd-nested-list--compact' } })
+    ]
 })
-export class NestedListDirective implements AfterContentInit, NestedListInterface, OnInit, OnDestroy {
+export class NestedListDirective implements AfterContentInit, NestedListInterface, OnDestroy {
     /** In case the user wants to no use icons for items in this list */
     @Input()
     @HostBinding('class.fd-nested-list--text-only')
     textOnly = false;
-
-    /** In case the user wants put compact mode in this list */
-    @Input()
-    @HostBinding('class.fd-nested-list--compact')
-    compact: Nullable<boolean>;
 
     /** Aria defines role description for the Nested List Tree. */
     @Input()
@@ -91,28 +93,22 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     private _tabindex = '-1';
 
     /** @hidden */
+    private readonly _translationResolver = new TranslationResolver();
+
+    /** @hidden */
     constructor(
         @Optional() private _nestedItemService: NestedItemService,
         private _nestedListStateService: NestedListStateService,
         private _nestedListKeyboardService: NestedListKeyboardService,
         private _elementRef: ElementRef,
         private _changeDetectionRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        @Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>,
+        private _contentDensityObserver: ContentDensityObserver
     ) {
         if (this._nestedItemService) {
             this._nestedItemService.list = this;
         }
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                })
-            );
-        }
+        _contentDensityObserver.subscribe();
     }
 
     /** @hidden */
@@ -130,12 +126,15 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
 
         this._setAccessibilityProperties(nestedLevel);
 
-        this.nestedItems.changes.subscribe(() => {
-            this._nestedListKeyboardService.refresh$.next();
-            this._setAriaAttributes(nestedLevel);
-        });
+        const sub = combineLatest([this._language$, this.nestedItems.changes.pipe(startWith(undefined))]).subscribe(
+            ([lang]) => {
+                this._nestedListKeyboardService.refresh$.next();
+                this._setAriaAttributes(nestedLevel, lang);
+            }
+        );
 
-        this._setAriaAttributes(nestedLevel);
+        this._subscriptions.add(sub);
+
         this._handleNestedLevel(nestedLevel);
     }
 
@@ -170,13 +169,19 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     }
 
     /** @hidden */
-    private _setAriaAttributes(level: number): void {
+    private _setAriaAttributes(level: number, lang: FdLanguage): void {
         this.nestedItems.forEach((item, i) => {
             item._ariaLevel = level;
-            item.linkItem.ariaDescribedby = this._nestedListHeader && this._nestedListHeader.id;
-            item.linkItem._ariaLabel = `
-                 Tree Item ${item.linkItem.getTitle()} ${i + 1} of ${this.nestedItems.length}
-                 ${!this._nestedListStateService.selectable && item.linkItem.selected ? this.ariaLabelSelected : ''}`;
+            item.linkItem.ariaDescribedby = this._nestedListHeader?.id || null;
+            item.linkItem._ariaLabel = this._translationResolver.resolve(lang, 'coreNestedList.linkItemAriaLabel', {
+                itemDetails: item.linkItem.getTitle(),
+                index: i + 1,
+                total: this.nestedItems.length,
+                selectedDescription:
+                    !this._nestedListStateService.selectable && item.linkItem.selected
+                        ? ', ' + this.ariaLabelSelected
+                        : ''
+            });
         });
 
         this._changeDetectionRef.detectChanges();

@@ -4,12 +4,6 @@
     "title": "Fundamental Platform Library for Angular ng-add schematic",
     "type": "object",
     "properties": {
-        "translations": {
-            "type": "boolean",
-            "default": true,
-            "description": "Whether translations from Platform library should be added.",
-            "x-prompt": "Add translations available from Fundamental Platform Library to your project?"
-        },
         "project": {
             "type": "string",
             "description": "The name of the project.",

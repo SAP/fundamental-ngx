@@ -21,7 +21,6 @@ import timeOnlyHoursSrcTs from '!./examples/time-only-hours-example.component.ts
 import timeTwoDigitsSrcTs from '!./examples/time-two-digits-example/time-two-digits-example.component.ts?raw';
 import timeTwoDigitsSrcH from '!./examples/time-two-digits-example/time-two-digits-example.component.html?raw';
 
-import timeI18nSrc from '!./examples/time-i18n-example.component.ts?raw';
 import timeFormHtmlSrc from '!./examples/time-form-example.component.html?raw';
 import timeFormTsSrc from '!./examples/time-form-example.component.ts?raw';
 import timeFormScssSrc from '!./examples/time-form-example.component.scss?raw';
@@ -139,15 +138,6 @@ export class TimeDocsComponent {
             code: timeOnlyHoursSrc,
             typescriptFileCode: timeOnlyHoursSrcTs,
             component: 'TimeOnlyHoursExampleComponent'
-        }
-    ];
-
-    timeI18n: ExampleFile[] = [
-        {
-            language: 'typescript',
-            code: timeI18nSrc,
-            fileName: 'time-i18n-example',
-            component: 'TimeI18nExampleComponent'
         }
     ];
 

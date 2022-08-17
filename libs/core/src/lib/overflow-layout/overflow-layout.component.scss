@@ -28,28 +28,40 @@ $fd-block: 'fd-overflow-layout';
     @include fd-reset();
     @include fd-flex() {
         width: 100%;
+        justify-content: space-between;
     }
+
     &__items {
         @include fd-reset();
         @include fd-flex();
+        display: inline-flex;
     }
 
     &__more {
         @include fd-reset();
         @include fd-flex();
+        flex-shrink: 0;
     }
 
     &__items-container {
         @include fd-reset();
-        @include fd-flex() {
-            width: 0;
-            flex: 1 auto;
-        }
+        position: relative;
+    }
+
+    &__items-wrapper {
+        display: inline-flex;
     }
 
     &__popover-container {
         @include fd-reset();
         display: block;
         white-space: normal;
+    }
+
+    &__item {
+        &--soft-hidden {
+            opacity: 0 !important;
+            position: absolute !important;
+        }
     }
 }

@@ -26,14 +26,12 @@ describe('UploadCollectionComponent', () => {
     let component: UploadCollectionComponent;
     let fixture: ComponentFixture<UploadCollectionComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformUploadCollectionModule, RouterModule, RouterTestingModule],
-                providers: [RtlService, DialogService, FilesValidatorService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformUploadCollectionModule, RouterModule, RouterTestingModule],
+            providers: [RtlService, DialogService, FilesValidatorService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(UploadCollectionComponent);
@@ -92,165 +90,150 @@ describe('UploadCollectionComponent', () => {
         expect(component.fileSizeExceed.emit).toHaveBeenCalledWith(fileSizeExceedEvent);
     });
 
-    it(
-        'toolbar: should create new folder',
-        waitForAsync(() => {
-            const newFolderName = 'New Folder 2';
-            const newTemporaryFiles = (<any>component)._generateTemporaryNewFolder(newFolderName);
-            const newFolderData = {
-                ...newTemporaryFiles,
-                status: UploadCollectionItemStatus.SUCCESSFUL
-            };
+    it('toolbar: should create new folder', () => {
+        const newFolderName = 'New Folder 2';
+        const newTemporaryFiles = (<any>component)._generateTemporaryNewFolder(newFolderName);
+        const newFolderData = {
+            ...newTemporaryFiles,
+            status: UploadCollectionItemStatus.SUCCESSFUL
+        };
 
-            const items = [...component.dataSource.dataProvider.items, newFolderData];
+        const items = [...component.dataSource.dataProvider.items, newFolderData];
 
-            spyOn((<any>component)._dialogService, 'open').and.returnValue({ afterClosed: of(newTemporaryFiles.name) });
-            spyOn(<any>component, '_generateTemporaryNewFolder').and.returnValue(newTemporaryFiles);
+        spyOn((<any>component)._dialogService, 'open').and.returnValue({ afterClosed: of(newTemporaryFiles.name) });
+        spyOn(<any>component, '_generateTemporaryNewFolder').and.returnValue(newTemporaryFiles);
 
-            spyOn(component.dataSource, 'newFolder').and.returnValue(of(items));
+        spyOn(component.dataSource, 'newFolder').and.returnValue(of(items));
 
-            component._openNewFolderDialog();
+        component._openNewFolderDialog();
 
-            fixture.detectChanges();
+        fixture.detectChanges();
 
-            expect(component._totalItems).toEqual(3);
-            expect(component._getList().length).toEqual(3);
-            expect(component._visibleList.length).toEqual(3);
+        expect(component._totalItems).toEqual(3);
+        expect(component._getList().length).toEqual(3);
+        expect(component._visibleList.length).toEqual(3);
 
-            const newFolder = component
-                ._getList()
-                .find((item) => item.documentId === newTemporaryFiles.documentId) as UploadCollectionItem;
-            expect(newFolder.name).toEqual(newFolderName);
-        })
-    );
+        const newFolder = component
+            ._getList()
+            .find((item) => item.documentId === newTemporaryFiles.documentId) as UploadCollectionItem;
+        expect(newFolder.name).toEqual(newFolderName);
+    });
 
-    it(
-        'toolbar: should remove item',
-        waitForAsync(() => {
-            const item = component.dataSource.dataProvider.items.pop() as UploadCollectionItem;
-            component._activeItem = item;
+    it('toolbar: should remove item', () => {
+        const item = component.dataSource.dataProvider.items.pop() as UploadCollectionItem;
+        component._activeItem = item;
 
-            spyOn(component.dataSource, 'delete').and.returnValue(of([]));
-            spyOn(component.dataSource, 'open').and.returnValue(of(component.dataSource.dataProvider.items));
+        spyOn(component.dataSource, 'delete').and.returnValue(of([]));
+        spyOn(component.dataSource, 'open').and.returnValue(of(component.dataSource.dataProvider.items));
 
-            component._remove();
+        component._remove();
 
-            fixture.detectChanges();
+        fixture.detectChanges();
 
-            expect(component._totalItems).toEqual(1);
-            expect(component._getList().length).toEqual(1);
-            expect(component._visibleList.length).toEqual(1);
+        expect(component._totalItems).toEqual(1);
+        expect(component._getList().length).toEqual(1);
+        expect(component._visibleList.length).toEqual(1);
 
-            const removedItemNotFound = component._getList().find((i) => i.documentId === item.documentId);
-            expect(removedItemNotFound).toBeFalsy();
-        })
-    );
+        const removedItemNotFound = component._getList().find((i) => i.documentId === item.documentId);
+        expect(removedItemNotFound).toBeFalsy();
+    });
 
     // list
 
-    it(
-        'list: should update file version',
-        waitForAsync(() => {
-            const item = component.dataSource.dataProvider.items[1];
-            component._currentUpdateFileVersion = item as UploadCollectionFile;
+    it('list: should update file version', () => {
+        const item = component.dataSource.dataProvider.items[1];
+        component._currentUpdateFileVersion = item as UploadCollectionFile;
 
-            const file: MockFile = new File([''], 'file1');
-            spyOnProperty(file, 'size').and.returnValue(1024);
-            spyOnProperty(file, 'type').and.returnValue('image/png');
-            const newFile = (<any>component)._generateTemporaryNewFiles([file]);
+        const file: MockFile = new File([''], 'file1');
+        spyOnProperty(file, 'size').and.returnValue(1024);
+        spyOnProperty(file, 'type').and.returnValue('image/png');
+        const newFile = (<any>component)._generateTemporaryNewFiles([file]);
 
-            spyOn(component.dataSource, 'updateVersion').and.returnValue(of(newFile));
+        spyOn(component.dataSource, 'updateVersion').and.returnValue(of(newFile));
 
-            component._selectHandler([file]);
+        component._selectHandler([file]);
 
-            fixture.detectChanges();
+        fixture.detectChanges();
 
-            const updatedFileVersion = component._getList().find((i) => i.documentId === file.name);
-            expect(updatedFileVersion).toBeFalsy();
-        })
-    );
+        const updatedFileVersion = component._getList().find((i) => i.documentId === file.name);
+        expect(updatedFileVersion).toBeFalsy();
+    });
 
-    it(
-        'list: should upload files',
-        waitForAsync(() => {
-            const file1: MockFile = new File([''], 'file1');
-            spyOnProperty(file1, 'size').and.returnValue(1024);
-            const file2: MockFile = new File([''], 'file2');
-            spyOnProperty(file2, 'size').and.returnValue(1048580);
-            const event: File[] = [file1, file2];
+    it('list: should upload files', () => {
+        const file1: MockFile = new File([''], 'file1');
+        spyOnProperty(file1, 'size').and.returnValue(1024);
+        const file2: MockFile = new File([''], 'file2');
+        spyOnProperty(file2, 'size').and.returnValue(1048580);
+        const event: File[] = [file1, file2];
 
-            const newTemporaryFiles = (<any>component)._generateTemporaryNewFiles(event);
-            const newFiles = newTemporaryFiles.map((item) => {
-                delete item.file;
-                item.status = UploadCollectionItemStatus.SUCCESSFUL;
+        const newTemporaryFiles = (<any>component)._generateTemporaryNewFiles(event);
+        const newFiles = newTemporaryFiles.map((item) => {
+            delete item.file;
+            item.status = UploadCollectionItemStatus.SUCCESSFUL;
 
-                return item;
-            });
+            return item;
+        });
 
-            const items = [...component.dataSource.dataProvider.items, ...newFiles];
+        const items = [...component.dataSource.dataProvider.items, ...newFiles];
 
-            spyOn(<any>component, '_generateTemporaryNewFiles').and.returnValue(newTemporaryFiles);
+        spyOn(<any>component, '_generateTemporaryNewFiles').and.returnValue(newTemporaryFiles);
 
-            spyOn(component.dataSource, 'upload').and.returnValue(of(newFiles));
-            spyOn(component.dataSource, 'open').and.returnValue(of(items));
+        spyOn(component.dataSource, 'upload').and.returnValue(of(newFiles));
+        spyOn(component.dataSource, 'open').and.returnValue(of(items));
 
-            component._selectHandler(event);
+        component._selectHandler(event);
 
-            fixture.detectChanges();
+        fixture.detectChanges();
 
-            expect(component._totalItems).toEqual(4);
-            expect(component._getList().length).toEqual(4);
-            expect(component._visibleList.length).toEqual(4);
-        })
-    );
+        expect(component._totalItems).toEqual(4);
+        expect(component._getList().length).toEqual(4);
+        expect(component._visibleList.length).toEqual(4);
+    });
 
     // footer
 
-    it(
-        'list: should show items of page 2',
-        waitForAsync(() => {
-            const newDataProvider = new UploadCollectionDataProviderTest();
-            newDataProvider.items.push(
-                {
-                    documentId: uuidv4(),
-                    type: 'file',
-                    name: `File-3`,
-                    uploadedBy: {
-                        id: uuidv4(),
-                        name: 'Tod G.'
-                    },
-                    url: '',
-                    uploadedOn: new Date(2010, 9, 4),
-                    fileSize: 2048,
-                    version: 1
+    it('list: should show items of page 2', () => {
+        const newDataProvider = new UploadCollectionDataProviderTest();
+        newDataProvider.items.push(
+            {
+                documentId: uuidv4(),
+                type: 'file',
+                name: `File-3`,
+                uploadedBy: {
+                    id: uuidv4(),
+                    name: 'Tod G.'
                 },
-                {
-                    documentId: uuidv4(),
-                    type: 'file',
-                    name: `File-4`,
-                    uploadedBy: {
-                        id: uuidv4(),
-                        name: 'Alex G.'
-                    },
-                    url: '',
-                    uploadedOn: new Date(2010, 9, 4),
-                    fileSize: 2048,
-                    version: 1
-                }
-            );
+                url: '',
+                uploadedOn: new Date(2010, 9, 4),
+                fileSize: 2048,
+                version: 1
+            },
+            {
+                documentId: uuidv4(),
+                type: 'file',
+                name: `File-4`,
+                uploadedBy: {
+                    id: uuidv4(),
+                    name: 'Alex G.'
+                },
+                url: '',
+                uploadedOn: new Date(2010, 9, 4),
+                fileSize: 2048,
+                version: 1
+            }
+        );
 
-            component.itemsPerPage = 3;
-            component.dataSource = new UploadCollectionDataSource(newDataProvider);
+        component.itemsPerPage = 3;
+        component.dataSource = new UploadCollectionDataSource(newDataProvider);
 
-            fixture.detectChanges();
+        fixture.detectChanges();
 
-            component._pageChanged(2);
+        component._pageChanged(2);
 
-            fixture.detectChanges();
+        fixture.detectChanges();
 
-            expect(component._totalItems).toEqual(4);
-            expect(component._getList().length).toEqual(4);
-            expect(component._visibleList.length).toEqual(1);
-        })
-    );
+        expect(component._totalItems).toEqual(4);
+        expect(component._getList().length).toEqual(4);
+        expect(component._visibleList.length).toEqual(1);
+    });
 });

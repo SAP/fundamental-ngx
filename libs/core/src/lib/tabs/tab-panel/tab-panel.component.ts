@@ -12,9 +12,9 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
+import { TabListComponent } from '../tab-list.component';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
 import { TabItemState } from '../tab-item/tab-item.directive';
-import { TabsService } from '../tabs.service';
 import { Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
@@ -92,6 +92,9 @@ export class TabPanelComponent implements OnChanges {
     /** @hidden Event that is emitted when the tab panel . */
     _expandedStateChange = new Subject<TabPanelStateChange>();
 
+    /** @hidden */
+    _forcedVisibility = false;
+
     /** @hidden Whether to display tab panel content */
     private _expanded = false;
 
@@ -99,16 +102,14 @@ export class TabPanelComponent implements OnChanges {
     constructor(
         public elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
-        @Optional() private _tabsService: TabsService
+        @Optional() private readonly _tabsComponent: TabListComponent | null
     ) {}
 
     /** @hidden
      * Thanks to OnPush change strategy detection on tab-list parent component,
      * every change of any property should be reported. */
-    public ngOnChanges(): void {
-        if (this._tabsService) {
-            this._tabsService.tabPanelPropertyChanged.next();
-        }
+    ngOnChanges(): void {
+        this._tabsComponent?.tabPanelPropertyChanged.next();
     }
 
     /** Whether tab panel content is expanded */
@@ -125,8 +126,14 @@ export class TabPanelComponent implements OnChanges {
     _expand(expanded: boolean): void {
         if (this._expanded !== expanded) {
             this._expanded = expanded;
-            expanded ? this.opened.emit() : this.closed.emit();
-            this._changeDetRef.markForCheck();
+
+            if (expanded) {
+                this.opened.emit();
+            } else {
+                this.closed.emit();
+            }
+
+            this._changeDetRef.detectChanges();
         }
     }
 }

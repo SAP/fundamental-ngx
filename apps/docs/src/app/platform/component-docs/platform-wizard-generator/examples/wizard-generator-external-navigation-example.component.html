@@ -11,14 +11,14 @@
             class="fd-bar__element"
             buttonType="ghost"
             *ngIf="!isFirstStep"
-            contentDensity="condensed"
+            fdCondensed
             label="Previous step"
             (click)="goBack()"
         ></fdp-button>
         <fdp-button
             class="fd-bar__element"
             buttonType="emphasized"
-            contentDensity="condensed"
+            fdCondensed
             *ngIf="!isLastStep"
             label="Next step"
             (click)="goNext()"
@@ -26,7 +26,7 @@
         <fdp-button
             class="fd-bar__element"
             buttonType="emphasized"
-            contentDensity="condensed"
+            fdCondensed
             *ngIf="isLastStep"
             label="Finish"
             (click)="finish()"

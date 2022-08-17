@@ -14,13 +14,11 @@ describe('TimeComponent', () => {
     let component: TimeComponent<FdDate>;
     let fixture: ComponentFixture<TimeComponent<FdDate>>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FormsModule, ButtonModule, PipeModule, FdDatetimeModule, TimeModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FormsModule, ButtonModule, PipeModule, FdDatetimeModule, TimeModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent<TimeComponent<FdDate>>(TimeComponent);

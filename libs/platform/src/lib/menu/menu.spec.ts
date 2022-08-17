@@ -55,19 +55,17 @@ describe('Simple Menu', () => {
     let otherButton: ElementRef<HTMLElement>;
     let trigger: MenuTriggerDirective;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformMenuModule],
-                declarations: [SimpleMenuComponent],
-                providers: [RtlService]
-            }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformMenuModule],
+            declarations: [SimpleMenuComponent],
+            providers: [RtlService]
+        }).compileComponents();
 
-            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-                overlayContainerEl = overlayContainer.getContainerElement();
-            })();
-        })
-    );
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SimpleMenuComponent);
@@ -409,19 +407,17 @@ describe('Cascading Menu', () => {
 
     let button: ElementRef<HTMLElement>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformMenuModule],
-                declarations: [CascadingMenuComponent],
-                providers: [RtlService]
-            }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformMenuModule],
+            declarations: [CascadingMenuComponent],
+            providers: [RtlService]
+        }).compileComponents();
 
-            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-                overlayContainerEl = overlayContainer.getContainerElement();
-            })();
-        })
-    );
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CascadingMenuComponent);
@@ -795,19 +791,17 @@ describe('Cascading Menu - Position Before', () => {
 
     let button: ElementRef<HTMLElement>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformMenuModule],
-                declarations: [CascadingBeforeMenuComponent],
-                providers: [RtlService]
-            }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformMenuModule],
+            declarations: [CascadingBeforeMenuComponent],
+            providers: [RtlService]
+        }).compileComponents();
 
-            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-                overlayContainerEl = overlayContainer.getContainerElement();
-            })();
-        })
-    );
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CascadingBeforeMenuComponent);
@@ -921,24 +915,22 @@ describe('Cascading Menu - Position After, RTL', () => {
         rtl: of(true)
     };
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformMenuModule],
-                declarations: [CascadingAfterRTLMenuComponent],
-                providers: [
-                    {
-                        provide: RtlService,
-                        useFactory: () => dirProvider
-                    }
-                ]
-            }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformMenuModule],
+            declarations: [CascadingAfterRTLMenuComponent],
+            providers: [
+                {
+                    provide: RtlService,
+                    useFactory: () => dirProvider
+                }
+            ]
+        }).compileComponents();
 
-            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-                overlayContainerEl = overlayContainer.getContainerElement();
-            })();
-        })
-    );
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CascadingAfterRTLMenuComponent);
@@ -1052,24 +1044,22 @@ describe('Cascading Menu - Position Before, RTL', () => {
         rtl: of(true)
     };
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformMenuModule],
-                declarations: [CascadingBeforeRTLMenuComponent],
-                providers: [
-                    {
-                        provide: RtlService,
-                        useFactory: () => dirProvider
-                    }
-                ]
-            }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformMenuModule],
+            declarations: [CascadingBeforeRTLMenuComponent],
+            providers: [
+                {
+                    provide: RtlService,
+                    useFactory: () => dirProvider
+                }
+            ]
+        }).compileComponents();
 
-            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-                overlayContainerEl = overlayContainer.getContainerElement();
-            })();
-        })
-    );
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CascadingBeforeRTLMenuComponent);
@@ -1174,24 +1164,22 @@ describe('Multiple triggers sharing same menu', () => {
         rtl: of(false)
     };
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformMenuModule],
-                declarations: [MultipleTriggersMenuComponent],
-                providers: [
-                    {
-                        provide: RtlService,
-                        useFactory: () => dirProvider
-                    }
-                ]
-            }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformMenuModule],
+            declarations: [MultipleTriggersMenuComponent],
+            providers: [
+                {
+                    provide: RtlService,
+                    useFactory: () => dirProvider
+                }
+            ]
+        }).compileComponents();
 
-            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-                overlayContainerEl = overlayContainer.getContainerElement();
-            })();
-        })
-    );
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MultipleTriggersMenuComponent);

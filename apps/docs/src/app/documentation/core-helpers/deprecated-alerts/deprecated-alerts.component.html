@@ -1,0 +1,4 @@
+<fd-message-strip type="warning" [dismissible]="false" *ngFor="let deprecation of moduleDeprecations">
+    {{ deprecation.message }}.
+    <a fd-link [routerLink]="deprecation.alternative.link">{{ deprecation.alternative.name }}</a>
+</fd-message-strip>

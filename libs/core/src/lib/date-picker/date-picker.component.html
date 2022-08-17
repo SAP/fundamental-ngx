@@ -11,7 +11,6 @@
     <fd-popover-control>
         <fd-input-group
             #inputGroupComponent
-            [compact]="compact"
             [state]="state"
             [disabled]="disabled"
             [isControl]="true"
@@ -19,23 +18,22 @@
             [buttonFocusable]="buttonFocusable"
             glyph="appointment-2"
             [isExpanded]="isOpen"
-            [glyphAriaLabel]="displayCalendarToggleLabel"
-            [iconTitle]="displayCalendarToggleLabel"
+            [glyphAriaLabel]="displayCalendarToggleLabel || ('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)"
+            [iconTitle]="displayCalendarToggleLabel || ('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)"
             (addOnButtonClicked)="toggleCalendar()"
         >
             <input
                 type="text"
                 class="fd-input"
                 fd-input-group-input
-                [compact]="compact"
                 [disabled]="disabled"
                 [placeholder]="placeholder"
                 [attr.id]="inputId"
                 aria-haspopup="grid"
                 aria-autocomplete="none"
                 [attr.aria-expanded]="isOpen"
-                [attr.aria-label]="_dateInputArialLabel"
                 [attr.aria-labelledby]="ariaLabelledBy"
+                [attr.aria-label]="_dateInputArialLabel || (_dateInputArialLabelKey | fdTranslate)"
                 [attr.aria-required]="required"
                 [attr.aria-describedby]="_formValueStateMessageId"
                 [ngModel]="_inputFieldDate"
@@ -54,7 +52,6 @@
         <fd-calendar
             (closeCalendar)="closeFromCalendar()"
             [activeView]="activeView"
-            [compact]="compact"
             [markWeekends]="markWeekends"
             [specialDaysRules]="specialDaysRules"
             [showWeekNumbers]="showWeekNumbers"
@@ -74,16 +71,32 @@
             [previousButtonDisableFunction]="previousButtonDisableFunction"
             [nextButtonDisableFunction]="nextButtonDisableFunction"
         ></fd-calendar>
+
+        <div *ngIf="showTodayButton" fd-bar barDesign="footer">
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <button fd-button [label]="todayButtonLabel" (click)="onTodayButtonClick()"></button>
+                </fd-bar-element>
+            </div>
+        </div>
     </fd-popover-body>
 </fd-popover>
 
 <div style="display: none" aria-hidden="true">
     <div [attr.id]="_formValueStateMessageId" aria-atomic="true" aria-live="assertive">
         <ng-container [ngSwitch]="state">
-            <ng-container *ngSwitchCase="'success'">{{ valueStateSuccessMessage }}</ng-container>
-            <ng-container *ngSwitchCase="'information'">{{ valueStateInformationMessage }}</ng-container>
-            <ng-container *ngSwitchCase="'warning'">{{ valueStateWarningMessage }}</ng-container>
-            <ng-container *ngSwitchCase="'error'">{{ valueStateErrorMessage }}</ng-container>
+            <ng-container *ngSwitchCase="'success'">{{
+                valueStateSuccessMessage || ('coreDatePicker.valueStateSuccessMessage' | fdTranslate)
+            }}</ng-container>
+            <ng-container *ngSwitchCase="'information'">{{
+                valueStateInformationMessage || ('coreDatePicker.valueStateInformationMessage' | fdTranslate)
+            }}</ng-container>
+            <ng-container *ngSwitchCase="'warning'">{{
+                valueStateWarningMessage || ('coreDatePicker.valueStateWarningMessage' | fdTranslate)
+            }}</ng-container>
+            <ng-container *ngSwitchCase="'error'">{{
+                valueStateErrorMessage || ('coreDatePicker.valueStateErrorMessage' | fdTranslate)
+            }}</ng-container>
         </ng-container>
         {{ _message }}
     </div>

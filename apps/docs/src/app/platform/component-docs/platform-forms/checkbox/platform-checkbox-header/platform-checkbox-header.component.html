@@ -1,20 +1,21 @@
-<header>Checkbox</header>
-<description>
-    This is an extension of the Checkbox component present in
-    <a routerLink="/core/checkbox">ngx-core</a>. <br />
-    For usecase of Multiple checkboxes selection, please see
-    <a routerLink="/platform/checkbox-group">Checkbox Group</a>.
+<fd-doc-page>
+    <header>Checkbox</header>
+    <description>
+        This is an extension of the Checkbox component present in
+        <a routerLink="/core/checkbox">ngx-core</a>. <br />
+        For usecase of Multiple checkboxes selection, please see
+        <a routerLink="/platform/checkbox-group">Checkbox Group</a>.
 
-    <h3>Platform specific enhancements:</h3>
-    <ul>
-        <li>
-            Platform checkbox takes checked state value as a property. so when checkbox is in checked state, control
-            value will be set to value of checkbox.
-        </li>
-        <li>Platform checkbox can be used outside form using "checked" property two way binding.</li>
-    </ul>
-</description>
-<import module="PlatformCheckboxModule" subPackage="form"></import>
+        <h3>Platform specific enhancements:</h3>
+        <ul>
+            <li>
+                Platform checkbox takes checked state value as a property. so when checkbox is in checked state, control
+                value will be set to value of checkbox.
+            </li>
+            <li>Platform checkbox can be used outside form using "checked" property two way binding.</li>
+        </ul>
+    </description>
+    <import module="PlatformCheckboxModule" subPackage="form"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

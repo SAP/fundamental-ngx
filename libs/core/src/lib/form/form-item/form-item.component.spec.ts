@@ -18,13 +18,11 @@ export class TestComponent {
 describe('FormItemComponent', () => {
     let fixture: ComponentFixture<TestComponent>, component: TestComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [FormItemComponent, TestComponent]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [FormItemComponent, TestComponent]
+        });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

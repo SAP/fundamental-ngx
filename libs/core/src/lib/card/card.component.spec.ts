@@ -9,14 +9,13 @@ import {
     CardTitleDirective,
     CardType
 } from '@fundamental-ngx/core/card';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 
 import { CLASS_NAME } from './constants';
 import { getCardModifierClassNameByCardType } from './utils';
 
 @Component({
     template: `
-        <fd-card [badge]="badgeText" [isLoading]="isLoading" [compact]="isCompact" [cardType]="cardType">
+        <fd-card [badge]="badgeText" [isLoading]="isLoading" [fdCompact]="isCompact" [cardType]="cardType">
             <fd-card-header>
                 <h2 fd-card-title>{{ titleText }}</h2>
             </fd-card-header>
@@ -42,20 +41,18 @@ class CardHostTestComponent {
     isCompact: boolean | undefined = undefined;
     cardType: CardType = 'standard';
 }
+
 describe('CardComponent', () => {
     let fixture: ComponentFixture<CardHostTestComponent>;
     let host: CardHostTestComponent;
     let card: CardComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CardModule],
-                declarations: [CardHostTestComponent],
-                providers: [ContentDensityService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CardModule],
+            declarations: [CardHostTestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CardHostTestComponent);
@@ -66,13 +63,6 @@ describe('CardComponent', () => {
 
     it('should create', () => {
         expect(host).toBeTruthy();
-    });
-
-    it('should handle content density when compact input is not provided', () => {
-        spyOn(card, 'buildComponentCssClass');
-        card.ngOnInit();
-        expect(card.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
-        expect(card.buildComponentCssClass).toHaveBeenCalled();
     });
 
     it('should add card className to host', () => {
@@ -120,24 +110,6 @@ describe('CardComponent', () => {
             const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
 
             expect(cardEl.textContent).toEqual(host.loaderText);
-        });
-    });
-
-    describe('compact', () => {
-        it('should has binding', () => {
-            host.isCompact = true;
-            fixture.detectChanges();
-            expect(card.compact).toBe(host.isCompact);
-        });
-
-        it('should apply corresponding className', () => {
-            host.isCompact = true;
-
-            fixture.detectChanges();
-
-            const cardDebugEl = fixture.debugElement.query(By.directive(CardComponent));
-
-            expect(cardDebugEl.nativeElement.className.includes(CLASS_NAME.cardCompact)).toBeTrue();
         });
     });
 

@@ -20,24 +20,22 @@ import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-import { Placement, SpecialDayRule, FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates, Nullable, Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import {
     CalendarComponent,
     CalendarType,
+    CalendarYearGrid,
+    DateRange,
     DaysOfWeek,
     FdCalendarView,
-    DateRange,
-    CalendarYearGrid
+    NavigationButtonDisableFunction
 } from '@fundamental-ngx/core/calendar';
-import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
-import { PopoverFormMessageService, registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { FormItemControl, PopoverFormMessageService, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { PopoverService } from '@fundamental-ngx/core/popover';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
-import { NavigationButtonDisableFunction } from '@fundamental-ngx/core/calendar';
 
 let datePickerCounter = 0;
 
@@ -89,10 +87,6 @@ export class DatePickerComponent<D>
     @Input()
     placeholder = '';
 
-    /** Whether this is the compact input date picker */
-    @Input()
-    compact?: boolean;
-
     /** ID attribute for input element inside DatePicker component */
     @Input()
     inputId: string;
@@ -107,6 +101,7 @@ export class DatePickerComponent<D>
         this._message = message;
         this._popoverFormMessage.message = message;
     }
+
     /** @hidden */
     _message: string | null = null;
 
@@ -117,6 +112,7 @@ export class DatePickerComponent<D>
         this._messageTriggers = triggers;
         this._popoverFormMessage.triggers = triggers;
     }
+
     /** @hidden */
     _messageTriggers: string[] = ['focusin', 'focusout'];
 
@@ -143,41 +139,54 @@ export class DatePickerComponent<D>
     @Input()
     useValidation = true;
 
-    /** Aria-label for the datepicker input. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria-label for the datepicker input.
+     */
     @Input()
-    dateInputLabel = 'Date input';
-
-    /** Aria-label for the datepicker input. */
-    @Input()
-    dateRangeInputLabel = 'Date range input';
-
-    /** Aria-label for the button to show/hide the calendar. */
-    @Input()
-    displayCalendarToggleLabel = 'Open picker';
+    dateInputLabel: string;
 
     /**
+     * @deprecated use i18n capabilities instead
+     * Aria-label for the datepicker input.
+     */
+    @Input()
+    dateRangeInputLabel: string;
+
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria-label for the button to show/hide the calendar.
+     */
+    @Input()
+    displayCalendarToggleLabel: string;
+
+    /**
+     * @deprecated use i18n capabilities instead
      * Value state "success" aria message.
      */
     @Input()
-    valueStateSuccessMessage = 'Value state Success';
+    valueStateSuccessMessage: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Value state "information" aria message.
      */
     @Input()
-    valueStateInformationMessage = 'Value state Information';
+    valueStateInformationMessage: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Value state "warning" aria message.
      */
     @Input()
-    valueStateWarningMessage = 'Value state Warning';
+    valueStateWarningMessage: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Value state "error" aria message.
      */
     @Input()
-    valueStateErrorMessage = 'Value state Error';
+    valueStateErrorMessage: string;
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -206,6 +215,14 @@ export class DatePickerComponent<D>
     @Input()
     closeOnDateChoose = true;
 
+    /** Enables Today-Selection-Button if true */
+    @Input()
+    showTodayButton = false;
+
+    /** Label for Today-Selection-Button */
+    @Input()
+    todayButtonLabel = 'Today';
+
     /**
      * Function used to disable previous button in the calendar header.
      */
@@ -228,6 +245,7 @@ export class DatePickerComponent<D>
         this._state = state || 'default';
         this._popoverFormMessage.messageType = state || 'default';
     }
+
     /** @hidden */
     get state(): FormStates {
         if (this._state == null && this.useValidation && this._isInvalidDateInput) {
@@ -235,6 +253,7 @@ export class DatePickerComponent<D>
         }
         return this._state;
     }
+
     /** @hidden */
     private _state: FormStates = 'default';
 
@@ -295,10 +314,6 @@ export class DatePickerComponent<D>
     @Input()
     inline = true;
 
-    /** aria-label for the date-picker. */
-    @Input()
-    ariaLabel: Nullable<string>;
-
     /** aria-labelledby for element describing date-picker. */
     @Input()
     ariaLabelledBy: Nullable<string>;
@@ -312,6 +327,7 @@ export class DatePickerComponent<D>
     set processInputOnBlur(v: boolean) {
         this._processInputOnBlur = coerceBooleanProperty(v);
     }
+
     get processInputOnBlur(): boolean {
         return this._processInputOnBlur;
     }
@@ -405,10 +421,17 @@ export class DatePickerComponent<D>
      * @hidden
      */
     get _dateInputArialLabel(): string {
-        if (this.ariaLabel) {
-            return this.ariaLabel;
-        }
+        // return either input value or a key for "fdTranslate" pipe
         return this.type === 'range' ? this.dateRangeInputLabel : this.dateInputLabel;
+    }
+
+    /**
+     * Date input aria label key based on type
+     * @hidden
+     */
+    get _dateInputArialLabelKey(): string {
+        // return either input value or a key for "fdTranslate" pipe
+        return this.type === 'range' ? 'coreDatePicker.dateRangeInputLabel' : 'coreDatePicker.dateInputLabel';
     }
 
     /** @hidden */
@@ -417,8 +440,7 @@ export class DatePickerComponent<D>
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        private _popoverFormMessage: PopoverFormMessageService,
-        @Optional() private _contentDensityService: ContentDensityService
+        private _popoverFormMessage: PopoverFormMessageService
     ) {
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -434,14 +456,6 @@ export class DatePickerComponent<D>
             this.formatInputDate(this.selectedDate);
             this._changeDetectionRef.detectChanges();
         });
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._changeDetectionRef.markForCheck();
-                })
-            );
-        }
     }
 
     /** @hidden */
@@ -536,6 +550,20 @@ export class DatePickerComponent<D>
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
             this.onChange(this.selectedRangeDate);
             this._isInvalidDateInput = !this.isModelValid();
+        }
+    }
+
+    /**
+     * @hidden
+     * Method that is triggered when Today-Selection-Button clicked, it changes selected date or date range to today's date
+     */
+    onTodayButtonClick(): void {
+        const todayDate = this._dateTimeAdapter.today();
+        if (this.type === 'single') {
+            this.handleSingleDateChange(todayDate);
+            this.closeFromCalendar();
+        } else if (this.type === 'range') {
+            this.handleRangeDateChange({ start: todayDate, end: todayDate });
         }
     }
 

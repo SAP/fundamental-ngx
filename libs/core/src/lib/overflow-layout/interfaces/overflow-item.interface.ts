@@ -1,11 +1,7 @@
-import { FocusableOption } from '@angular/cdk/a11y';
-import { ElementRef } from '@angular/core';
+import { ElementRef, EventEmitter } from '@angular/core';
+import { OverflowLayoutFocusableItem } from './overflow-focusable-item.interface';
 
-export interface OverflowItem extends FocusableOption {
-    /**
-     * Whether the item is focusable.
-     */
-    focusable: boolean;
+export interface OverflowItem {
     /**
      * Whether to enforce the visibility of the item.
      */
@@ -18,4 +14,12 @@ export interface OverflowItem extends FocusableOption {
      * Whether the item is hidden.
      */
     hidden: boolean;
+    /**
+     * Event emitted when `hidden` property has been changed.
+     */
+    hiddenChange: EventEmitter<boolean>;
+    /**
+     * Focusable item for keyboard navigation.
+     */
+    focusableItem: OverflowLayoutFocusableItem;
 }

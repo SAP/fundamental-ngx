@@ -12,8 +12,8 @@ import {
 @Component({
     selector: 'fd-test-component',
     template: `
-        <button fd-button fd-tile-action-close [compact]="true" fdType="transparent"></button>
-        <button fd-button fd-tile-action-indicator [compact]="true" fdType="transparent"></button>
+        <button fd-button fd-tile-action-close fdCompact fdType="transparent"></button>
+        <button fd-button fd-tile-action-indicator fdCompact fdType="transparent"></button>
         <div #header fd-tile-header [twoColumn]="true">
             <div fd-tile-header-content></div>
         </div>
@@ -79,14 +79,12 @@ export class TestComponent {
 describe('TileDirectives', () => {
     let fixture: ComponentFixture<TestComponent>, component: TestComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [TileModule, ButtonModule],
-                declarations: [TestComponent]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TileModule, ButtonModule],
+            declarations: [TestComponent]
+        });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

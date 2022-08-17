@@ -6,7 +6,8 @@ import {
 
 export const guides: SectionInterfaceContent[] = [
     { url: 'core/home', name: 'Home' },
-    { url: 'core/new-component', name: 'New Component' }
+    { url: 'core/new-component', name: 'New Component' },
+    { url: 'core/i18n', name: 'I18n' }
 ];
 
 export const components: SectionInterfaceContent[] = [
@@ -97,6 +98,7 @@ export const components: SectionInterfaceContent[] = [
 
 export const layouts: SectionInterfaceContent[] = [
     { url: 'core/dynamic-page', name: 'Dynamic Page' },
+    { url: 'core/object-page', name: 'Object Page' },
     { url: 'core/dynamic-side-content', name: 'Dynamic Side Content' },
     { url: 'core/fixed-card-layout', name: 'Fixed Card Layout' },
     { url: 'core/flexible-column-layout', name: 'Flexible Column Layout' },
@@ -111,12 +113,13 @@ export const layouts: SectionInterfaceContent[] = [
 
 export const utilities: SectionInterfaceContent[] = [
     { url: 'core/global-config', name: 'Global Configuration' },
-    { url: 'core/content-density', name: 'Content Density' },
     { url: 'core/infinite-scroll', name: 'Infinite Scroll' },
     { url: 'core/initial-focus', name: 'Initial Focus' },
     { url: 'core/scroll-spy', name: 'Scroll Spy' },
     { url: 'core/theme-switcher', name: 'Theme Switcher API' },
-    { url: 'core/theming', name: 'Theming' }
+    { url: 'core/theming', name: 'Theming' },
+    { url: 'core/content-density', name: 'Content Density' },
+    { url: 'core/truncate', name: 'Truncate' }
 ];
 
 export const adapters: SectionInterfaceContent[] = [

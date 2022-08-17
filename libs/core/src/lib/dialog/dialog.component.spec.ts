@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogComponent } from './dialog.component';
 import { DialogService } from './dialog-service/dialog.service';
 import { DialogModule } from './dialog.module';
@@ -30,8 +30,7 @@ class TemplateTestComponent {
 @NgModule({
     declarations: [TemplateTestComponent],
     imports: [CommonModule, BrowserModule, DialogModule, NoopAnimationsModule],
-    providers: [DialogService],
-    entryComponents: [TemplateTestComponent]
+    providers: [DialogService]
 })
 class TestModule {}
 
@@ -46,22 +45,20 @@ describe('DialogComponent', () => {
     const mockRouter = { events: routerEventsSubject.asObservable() };
     let router: Router;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [TestModule, RouterModule, RouterTestingModule],
-                providers: [
-                    { provide: DialogRef, useValue: dialogRef },
-                    { provide: DialogConfig, useValue: dialogConfig },
-                    { provide: Router, useValue: mockRouter }
-                ]
-            });
-        })
-    );
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [TestModule, RouterModule, RouterTestingModule],
+            providers: [
+                { provide: DialogRef, useValue: dialogRef },
+                { provide: DialogConfig, useValue: dialogConfig },
+                { provide: Router, useValue: mockRouter }
+            ]
+        });
+    });
 
-    function setup(providers: { token: any; provider: { useValue: any } }[] = []): void {
+    async function setup(providers: { token: any; provider: { useValue: any } }[] = []): Promise<void> {
         providers.forEach((provider) => TestBed.overrideProvider(provider.token, provider.provider));
-        TestBed.compileComponents();
+        await TestBed.compileComponents();
 
         fixture = TestBed.createComponent(TemplateTestComponent);
         component = fixture.componentInstance;
@@ -70,21 +67,21 @@ describe('DialogComponent', () => {
         router = TestBed.inject(Router);
     }
 
-    it('should create', () => {
-        setup();
+    it('should create', async () => {
+        await setup();
         expect(component).toBeTruthy();
         expect(dialogComponent).toBeTruthy();
     });
 
-    it('should create w/o Router', () => {
-        setup([{ token: Router, provider: { useValue: null } }]);
+    it('should create w/o Router', async () => {
+        await setup([{ token: Router, provider: { useValue: null } }]);
         expect(router).toBeNull();
         expect(component).toBeTruthy();
         expect(dialogComponent).toBeTruthy();
     });
 
-    it('should hide dialog', () => {
-        setup();
+    it('should hide dialog', async () => {
+        await setup();
 
         dialogRef.hide(true);
         fixture.detectChanges();
@@ -93,8 +90,8 @@ describe('DialogComponent', () => {
         expect(dialogEl).not.toHaveClass('.fd-dialog--active');
     });
 
-    it('should close after esc pressed', () => {
-        setup();
+    it('should close after esc pressed', async () => {
+        await setup();
 
         const dismissSpy = spyOn(dialogRef, 'dismiss');
 
@@ -104,10 +101,10 @@ describe('DialogComponent', () => {
         expect(dismissSpy).toHaveBeenCalled();
     });
 
-    it('should close after backdrop clicked', () => {
+    it('should close after backdrop clicked', async () => {
         const customDialogConfig = { ...new DialogConfig(), backdropClickCloseable: true };
 
-        setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
+        await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
         const dismissSpy = spyOn(dialogRef, 'dismiss');
         fixture.detectChanges();
@@ -118,15 +115,15 @@ describe('DialogComponent', () => {
         expect(dismissSpy).toHaveBeenCalled();
     });
 
-    it('should set custom position', () => {
+    it('should set custom position', async () => {
         const customDialogConfig = { ...new DialogConfig(), position: { bottom: '100px', right: '50px' } };
-        setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
+        await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
         expect(dialogComponent.dialogWindow.nativeElement.style.right).toEqual('50px');
         expect(dialogComponent.dialogWindow.nativeElement.style.bottom).toEqual('100px');
     });
 
-    it('should set custom size', () => {
+    it('should set custom size', async () => {
         const customSize = {
             width: '500px',
             height: '600px',
@@ -137,7 +134,7 @@ describe('DialogComponent', () => {
         };
         const customDialogConfig = { ...new DialogConfig(), ...customSize };
 
-        setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
+        await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
         expect(dialogComponent.dialogWindow.nativeElement.style.width).toEqual(customSize.width);
         expect(dialogComponent.dialogWindow.nativeElement.style.height).toEqual(customSize.height);
@@ -147,46 +144,46 @@ describe('DialogComponent', () => {
         expect(dialogComponent.dialogWindow.nativeElement.style.maxHeight).toEqual(customSize.maxHeight);
     });
 
-    it('should have custom classes', () => {
+    it('should have custom classes', async () => {
         const customDialogConfig = {
             ...new DialogConfig(),
             backdropClass: 'customBackdropClass',
             dialogPanelClass: 'customPanelClass'
         };
-        setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
+        await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
         expect(fixture.nativeElement.querySelector('.fd-dialog')).toHaveClass('customBackdropClass');
         expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass('customPanelClass');
     });
 
-    it('should display in mobile mode', () => {
+    it('should display in mobile mode', async () => {
         const customDialogConfig = { ...new DialogConfig(), mobile: true };
-        setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
+        await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
         expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass('fd-dialog__content--mobile');
     });
 
-    it('should display in mobile mode', () => {
+    it('should display in mobile mode', async () => {
         const customDialogConfig = { ...new DialogConfig(), fullScreen: true };
-        setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
+        await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
         expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass(
             'fd-dialog__content--full-screen'
         );
     });
 
-    it('should display in mobile mode with no stretch', () => {
+    it('should display in mobile mode with no stretch', async () => {
         const customDialogConfig = { ...new DialogConfig(), mobileOuterSpacing: true };
-        setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
+        await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
         expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass(
             'fd-dialog__content--no-mobile-stretch'
         );
     });
 
-    it('should be draggable', () => {
+    it('should be draggable', async () => {
         const customDialogConfig = { ...new DialogConfig(), draggable: true };
-        setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
+        await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
         expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass(
             'fd-dialog__content--draggable-grab'
@@ -195,16 +192,16 @@ describe('DialogComponent', () => {
         fixture.nativeElement.querySelector('fd-dialog-header').dispatchEvent(new MouseEvent('mousedown'));
     });
 
-    it('should be resizable', () => {
+    it('should be resizable', async () => {
         const customDialogConfig = { ...new DialogConfig(), resizable: true };
-        setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
+        await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
         expect(fixture.nativeElement.querySelector('.fd-dialog__resize-handle')).toBeTruthy();
 
         fixture.nativeElement.querySelector('fd-dialog-header').dispatchEvent(new MouseEvent('mousedown'));
     });
 
-    it('should use custom attributes', () => {
+    it('should use custom attributes', async () => {
         const customDialogConfig = {
             ...new DialogConfig(),
             id: 'customId',
@@ -212,7 +209,7 @@ describe('DialogComponent', () => {
             ariaLabelledBy: 'customAriLabelledBy',
             ariaDescribedBy: 'customAriaDescribedBy'
         };
-        setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
+        await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
         const dialogWindowEl = fixture.nativeElement.querySelector('.fd-dialog__content');
 
@@ -222,8 +219,8 @@ describe('DialogComponent', () => {
         expect(dialogWindowEl.getAttribute('aria-describedby')).toEqual(customDialogConfig.ariaDescribedBy);
     });
 
-    it('should close the dialog on router navigation start', () => {
-        setup();
+    it('should close the dialog on router navigation start', async () => {
+        await setup();
         const event = new NavigationStart(42, '/');
         spyOn(dialogRef, 'dismiss');
         routerEventsSubject.next(event);

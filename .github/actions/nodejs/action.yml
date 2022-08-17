@@ -1,0 +1,34 @@
+name: Fundamental-ngx action for Node.js
+description: Node.js setup cache
+
+inputs:
+    node-version:
+        description: Node.js version
+        required: false
+        default: 16.x
+
+runs:
+    using: composite
+    steps:
+        - name: Use Node.js ${{ inputs.node-version }}
+          uses: actions/setup-node@v3
+          with:
+              node-version: ${{ inputs.node-version }}
+        - uses: actions/cache@v3
+          id: node-modules-cache
+          with:
+              path: '**/node_modules/'
+              key: ${{ runner.os }}-${{ inputs.node-version }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+              restore-keys: |
+                  ${{ runner.os }}-${{ inputs.node-version }}-node-modules-
+
+        - shell: bash
+          run: |
+              echo "Show environment Node.js, yarn ..."
+              node -v
+              yarn -v
+
+        - name: Install dependencies
+          if: steps.node-modules-cache.outputs.cache-hit != 'true'
+          run: yarn install --frozen-lockfile
+          shell: bash

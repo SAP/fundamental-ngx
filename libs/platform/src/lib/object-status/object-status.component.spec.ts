@@ -34,14 +34,12 @@ describe('ObjectStatusComponent', () => {
     let host: TestPlatformObjectStatusComponent;
     let fixture: ComponentFixture<TestPlatformObjectStatusComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ObjectStatusModule],
-                declarations: [ObjectStatusComponent, TestPlatformObjectStatusComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ObjectStatusModule],
+            declarations: [ObjectStatusComponent, TestPlatformObjectStatusComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestPlatformObjectStatusComponent);

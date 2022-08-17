@@ -1,5 +1,4 @@
 import {
-    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -10,8 +9,7 @@ import {
     forwardRef,
     HostListener,
     Input,
-    NgZone,
-    OnDestroy,
+    isDevMode,
     OnInit,
     Optional,
     Output,
@@ -19,14 +17,14 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { BehaviorSubject, firstValueFrom, map, startWith, Subscription, tap } from 'rxjs';
-import { TAB } from '@angular/cdk/keycodes';
-import { FocusKeyManager } from '@angular/cdk/a11y';
-
-import { ContentDensityService, ResizeObserverService, RtlService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
+import { DestroyedService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { BehaviorSubject, Subscription, takeUntil } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
+import { FocusKeyManager } from '@angular/cdk/a11y';
+import { TAB } from '@angular/cdk/keycodes';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -40,8 +38,6 @@ import { BreadcrumbItemComponent } from './breadcrumb-item.component';
  * ```
  */
 @Component({
-    // TODO to be discussed
-    // eslint-disable-next-line
     selector: 'fd-breadcrumb',
     host: {
         class: 'fd-breadcrumb',
@@ -50,12 +46,33 @@ import { BreadcrumbItemComponent } from './breadcrumb-item.component';
     templateUrl: './breadcrumb.component.html',
     styleUrls: ['./breadcrumb.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyedService]
 })
-export class BreadcrumbComponent implements AfterViewInit, AfterContentInit, OnInit, OnDestroy {
-    /** Whenever links wrapped inside overflow should be displayed in compact mode  */
+export class BreadcrumbComponent implements OnInit, AfterViewInit {
+    /**
+     * @deprecated
+     * Breadcrumbs component now uses more advanced calculation mechanism without the need of specifying the container element.
+     *
+     * The element to act as the breadcrumb container. When provided, the breadcrumb's responsive collapsing behavior
+     * performs better. When not provided, the immediate parent element's width will be used.
+     */
     @Input()
-    compact?: boolean;
+    set containerElement(_: HTMLElement) {
+        if (isDevMode()) {
+            console.warn(
+                'Breadcrumbs component now uses more advanced calculation mechanism without the need of specifying the container element.'
+            );
+        }
+    }
+
+    /** Whether to append items to the overflow dropdown in reverse order. Default is true. */
+    @Input()
+    reverse = false;
+
+    /** Tabindex of the breadcrumb. */
+    @Input()
+    tabIndex = '0';
 
     /** Allow keyboard navigation through breadcrumb link */
     @Input()
@@ -65,56 +82,57 @@ export class BreadcrumbComponent implements AfterViewInit, AfterContentInit, OnI
     @Output()
     tabOut: EventEmitter<void> = new EventEmitter<void>();
 
+    /**
+     * Event emitted when visible items count is changed.
+     */
+    @Output()
+    visibleItemsCount = new EventEmitter<number>();
+
+    /**
+     * Event emitted when hidden items count is changed.
+     */
+    @Output()
+    hiddenItemsCount = new EventEmitter<number>();
+
+    /** @hidden */
+    @ContentChildren(BreadcrumbItemComponent)
+    private readonly _contentItems: QueryList<BreadcrumbItemComponent>;
+
     /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemComponent))
     breadcrumbItems: QueryList<BreadcrumbItemComponent>;
 
-    /** @hidden */
     @ViewChild(MenuComponent)
-    menuComponent: MenuComponent;
+    private readonly _menuComponent: MenuComponent;
 
     /** @hidden */
-    collapsedBreadcrumbItems: Array<BreadcrumbItemComponent> = [];
-
-    /** @hidden */
-    placement$ = new BehaviorSubject<Placement>('bottom-start');
+    @ViewChild(OverflowLayoutComponent)
+    private readonly _overflowLayout: OverflowLayoutComponent;
 
     /**
-     * The element to act as the breadcrumb container. When provided, the breadcrumb's responsive collapsing behavior
-     * performs better. When not provided, the immediate parent element's width will be used.
+     * @hidden
+     * Array of breadcrumb items.
      */
-    @Input()
-    containerElement: HTMLElement;
-
-    /** Whether to append items to the overflow dropdown in reverse order. Default is true. */
-    @Input()
-    reverse = false;
-
-    @Input()
-    tabIndex = '0';
+    _items: BreadcrumbItemComponent[] = [];
 
     /** @hidden */
-    containerBoundary: number;
+    _placement$ = new BehaviorSubject<Placement>('bottom-start');
 
     /** @hidden */
     private _isRtl = false;
 
     /** @hidden */
-    private _subscriptions = new Subscription();
-
-    /** @hidden */
     private _keyManager: FocusKeyManager<BreadcrumbItemComponent>;
 
     /** @hidden */
-    private _itemToSize = new Map<BreadcrumbItemComponent, number>();
+    private _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(
-        public elementRef: ElementRef<Element>,
-        @Optional() private _rtlService: RtlService,
-        @Optional() private _contentDensityService: ContentDensityService,
-        private _cdRef: ChangeDetectorRef,
-        private _resizeObserver: ResizeObserverService,
-        private _ngZone: NgZone
+        public elementRef: ElementRef<HTMLElement>,
+        private _onDestroy$: DestroyedService,
+        @Optional() private _rtlService: RtlService | null,
+        private _cdr: ChangeDetectorRef
     ) {}
 
     /** @hidden */
@@ -137,80 +155,32 @@ export class BreadcrumbComponent implements AfterViewInit, AfterContentInit, OnI
 
     /** @hidden */
     ngOnInit(): void {
-        if (this._rtlService) {
-            this._subscriptions.add(
-                this._rtlService.rtl.subscribe((value) => {
-                    this._isRtl = value;
-                    this.placement$.next(value ? 'bottom-end' : 'bottom-start');
-                })
-            );
-        }
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._cdRef.markForCheck();
-                })
-            );
+        this._rtlService?.rtl
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((value) => this._placement$.next(value ? 'bottom-end' : 'bottom-start'));
+    }
+
+    /** @hidden */
+    onResize(): void {
+        this._overflowLayout.triggerRecalculation();
+    }
+
+    /**
+     * We catch interactions with item, Enter, Space, Mouse click and Touch click,
+     * if original element had router link we are proxying click to that element
+     * */
+    itemClicked(breadcrumbItem: any, $event: any): void {
+        if (breadcrumbItem.needsClickProxy) {
+            $event.preventDefault();
+            breadcrumbItem.breadcrumbLink.elementRef().nativeElement.click();
         }
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._subscriptions.add(
-            this.breadcrumbItems.changes
-                .pipe(
-                    startWith(this.breadcrumbItems),
-                    map((items) => items.toArray() as BreadcrumbItemComponent[]),
-                    map((items) => items.map((item) => [item, item.width]) as [BreadcrumbItemComponent, number][]),
-                    tap((itemToSize: [BreadcrumbItemComponent, number][]) => (this._itemToSize = new Map(itemToSize)))
-                )
-                .subscribe()
-        );
-        firstValueFrom(this._ngZone.onStable).then(() => {
-            this._subscriptions.add(
-                this._resizeObserver
-                    .observe(this.containerElement || (this.elementRef.nativeElement.parentElement as Element))
-                    .subscribe(() => this.onResize())
-            );
-        });
-    }
+        this._setItems();
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden */
-    onResize(): void {
-        if (!this.elementRef.nativeElement.parentElement) {
-            return;
-        }
-        this.containerBoundary = this.elementRef.nativeElement.parentElement.getBoundingClientRect().width;
-
-        if (this.containerElement) {
-            this.containerBoundary = this.containerElement.getBoundingClientRect().width;
-        }
-
-        let visibleSum = 0;
-        const breadcrumbItemComponents = this.breadcrumbItems.toArray();
-        let i;
-        for (i = breadcrumbItemComponents.length - 1; i >= 0; i--) {
-            const breadcrumbItem = breadcrumbItemComponents[i];
-            const itemSize = this._itemToSize.has(breadcrumbItem)
-                ? (this._itemToSize.get(breadcrumbItem) as number)
-                : breadcrumbItem.width;
-            if (visibleSum + itemSize <= this.containerBoundary) {
-                visibleSum += itemSize;
-                breadcrumbItem.show();
-            } else {
-                break;
-            }
-        }
-        const collapsedBreadcrumbItems = breadcrumbItemComponents.slice(0, ++i);
-        this.collapsedBreadcrumbItems = this.reverse ? collapsedBreadcrumbItems : collapsedBreadcrumbItems.reverse();
-        this.collapsedBreadcrumbItems.forEach((item) => item.hide());
-        this._cdRef.detectChanges();
+        this._contentItems.changes.subscribe(() => this._setItems());
     }
 
     /** @hidden */
@@ -231,8 +201,34 @@ export class BreadcrumbComponent implements AfterViewInit, AfterContentInit, OnI
     }
 
     /** @hidden */
-    keyDownHandle(event: Event): void {
-        this.menuComponent.toggle();
+    _keyDownHandle(event: Event): void {
+        this._menuComponent.toggle();
         event.preventDefault();
+    }
+
+    /** @hidden */
+    _onHiddenChange(isHidden: boolean, breadcrumb: BreadcrumbItemComponent): void {
+        if (!isHidden) {
+            breadcrumb._detach();
+        } else {
+            breadcrumb._attach();
+        }
+    }
+
+    /** @hidden */
+    _onVisibleItemsCountChange(visibleItemsCount: number): void {
+        this.visibleItemsCount.emit(visibleItemsCount);
+    }
+
+    /** @hidden */
+    _onHiddenItemsCountChange(hiddenItemsCount: number): void {
+        this.hiddenItemsCount.emit(hiddenItemsCount);
+    }
+
+    /** @hidden */
+    private _setItems(): void {
+        this._contentItems.forEach((item) => item.setPortal());
+        this._items = this._contentItems.toArray();
+        this._cdr.detectChanges();
     }
 }

@@ -6,13 +6,11 @@ describe('ShellbarLogoComponent', () => {
     let component: ShellbarLogoComponent;
     let fixture: ComponentFixture<ShellbarLogoComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ShellbarLogoComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ShellbarLogoComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ShellbarLogoComponent);

@@ -214,8 +214,8 @@ pre {
     padding: 10px 10px 0 10px;
 }
 
-a,
-a:focus {
+a:not(.fd-link),
+a:not(.fd-link):focus {
     text-decoration: none;
 }
 

@@ -27,13 +27,6 @@ const mockData: SmartFilterSettingsDialogConfig = {
             conditionStrategy: 'or'
         }
     ],
-    visibilityCategories: {
-        all: 'Custom "All" label',
-        visible: 'Custom "Visible" label',
-        active: 'Custom "Active" label',
-        visibleAndActive: 'Custom "Visible and active" label',
-        mandatory: 'Custom "Mandatory" label'
-    },
     filterBy: [],
     selectedFilters: []
 };
@@ -75,11 +68,6 @@ describe('SmartFilterBarSettingsDialogComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('transform custom visibility categories', () => {
-        const mockDataLabels = Object.values(mockData.visibilityCategories);
-        expect(component._filterVisibilityOptions.map((o) => o.label)).toEqual(mockDataLabels);
-    });
-
     it('should apply filtering', () => {
         const filterTypes: SmartFilterBarVisibilityCategory[] = [
             'visibleAndActive',
@@ -90,6 +78,8 @@ describe('SmartFilterBarSettingsDialogComponent', () => {
         ];
 
         const source = component.source.dataProvider as any;
+
+        fixture.detectChanges();
 
         const allFiltersSpy = spyOn(source, '_getAllItems').and.callThrough();
         const mandatoryFiltersSpy = spyOn(source, '_getMandatoryItems').and.callThrough();

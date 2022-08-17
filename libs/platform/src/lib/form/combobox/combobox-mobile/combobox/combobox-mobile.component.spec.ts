@@ -42,18 +42,16 @@ describe('ComboboxMobileComponent', () => {
         }
     }
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [DialogModule, BrowserAnimationsModule],
-                declarations: [ComboboxMobileComponent],
-                providers: [
-                    DynamicComponentService,
-                    { provide: COMBOBOX_COMPONENT, useValue: new ComboboxInputComponent() }
-                ]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [DialogModule, BrowserAnimationsModule],
+            declarations: [ComboboxMobileComponent],
+            providers: [
+                DynamicComponentService,
+                { provide: COMBOBOX_COMPONENT, useValue: new ComboboxInputComponent() }
+            ]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ComboboxMobileComponent);

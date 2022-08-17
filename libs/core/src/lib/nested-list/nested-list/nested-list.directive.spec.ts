@@ -5,12 +5,15 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedListDirective } from './nested-list.directive';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import {
+    ContentDensityGlobalKeyword,
+    ContentDensityMode,
+    LocalContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 @Component({
     template: `
-        <ul fd-nested-list [textOnly]="true" [compact]="compact" #level1List>
+        <ul fd-nested-list [textOnly]="true" [fdContentDensity]="contentDensity" #level1List>
             <li fd-nested-list-item>
                 <a fd-nested-list-link>
                     <span fd-nested-list-title>Link 1</span>
@@ -41,7 +44,7 @@ import { Nullable } from '@fundamental-ngx/core/shared';
     `
 })
 class TestNestedContainerComponent {
-    compact: boolean | undefined = undefined;
+    contentDensity: LocalContentDensityMode = ContentDensityGlobalKeyword;
 
     @ViewChild('level4List', { static: true, read: NestedListDirective })
     level4List: NestedListDirective;
@@ -60,20 +63,13 @@ describe('NestedListDirective', () => {
     let level3List: NestedListDirective;
     let level4List: NestedListDirective;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [NestedListModule],
-                declarations: [TestNestedContainerComponent],
-                providers: [
-                    NestedListKeyboardService,
-                    MenuKeyboardService,
-                    NestedListStateService,
-                    ContentDensityService
-                ]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [NestedListModule],
+            declarations: [TestNestedContainerComponent],
+            providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);
@@ -86,7 +82,7 @@ describe('NestedListDirective', () => {
     });
 
     it('Should add classes', () => {
-        component.compact = true;
+        component.contentDensity = ContentDensityMode.COMPACT;
         fixture.detectChanges();
         expect((level1List as any)._elementRef.nativeElement.classList.contains('fd-nested-list')).toBeTruthy();
         expect(
@@ -101,8 +97,10 @@ describe('NestedListDirective', () => {
     });
 
     it('should handle content density when compact input is not provided', () => {
-        level1List.compact = undefined;
-        level1List.ngOnInit();
-        expect(level1List.compact as Nullable<boolean>).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
+        component.contentDensity = ContentDensityGlobalKeyword;
+        fixture.detectChanges();
+        expect(
+            fixture.nativeElement.querySelector('ul:first-of-type').classList.contains('fd-nested-list--compact')
+        ).toBe(false);
     });
 });

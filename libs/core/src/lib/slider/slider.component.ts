@@ -46,14 +46,13 @@ import {
     SliderValueTargets
 } from './slider.model';
 import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
+import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import {
-    RtlService,
-    ContentDensityService,
-    KeyUtil,
-    applyCssClass,
-    CssClassBuilder
-} from '@fundamental-ngx/core/utils';
-import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+    ContentDensityMode,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -69,7 +68,14 @@ let sliderId = 0;
     styleUrls: ['./slider.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [SLIDER_VALUE_ACCESSOR, registerFormItemControl(SliderComponent)],
+    providers: [
+        SLIDER_VALUE_ACCESSOR,
+        registerFormItemControl(SliderComponent),
+        contentDensityObserverProviders({
+            defaultContentDensity: ContentDensityMode.COMPACT,
+            modifiers: { [ContentDensityMode.COZY]: 'fd-slider--lg' }
+        })
+    ],
     host: {
         '(mouseenter)': 'this._componentHovered$.next(true)',
         '(mouseleave)': 'this._componentHovered$.next(false)'
@@ -82,11 +88,6 @@ export class SliderComponent
     @Input()
     @HostBinding('attr.id')
     id = 'fd-slider-id-' + sliderId++;
-
-    /** Whether to apply cozy mode. */
-    @Input()
-    @HostBinding('class.fd-slider--lg')
-    cozy: Nullable<boolean>;
 
     /** User's custom classes */
     @Input()
@@ -206,25 +207,28 @@ export class SliderComponent
      * slider current value verbose string.
      * This will be read only once by screen reader and upon slider value change,
      * this string will not be read.
+     * @deprecated no longer used, use i18n capabilities instead
      */
     @Input()
-    singleSliderCurrentValuePrefix = 'Current value is ';
+    singleSliderCurrentValuePrefix: string;
 
     /**
      * @hidden range slider handle 1 current value supporting string
      * This will be read only once by screen reader and upon slider value change,
      * this string will not be read.
+     * * @deprecated no longer used, use i18n capabilities instead
      */
     @Input()
-    rangeSliderHandle1CurrentValuePrefix = 'handle 1 value is ';
+    rangeSliderHandle1CurrentValuePrefix: string;
 
     /**
      * @hidden range slider handle 2 current value supporting string
      * This will be read only once by screen reader and upon slider value change,
      * this string will not be read.
+     * * @deprecated no longer used, use i18n capabilities instead
      */
     @Input()
-    rangeSliderHandle2CurrentValuePrefix = 'handle 2 value is ';
+    rangeSliderHandle2CurrentValuePrefix: string;
 
     _position: number | number[] = 0;
 
@@ -306,19 +310,10 @@ export class SliderComponent
     _isRtl = false;
 
     /**
-     * @hidden slider current value supporting string.
+     * @hidden
+     * whether to use value with a prefix for announcing
      */
-    _singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
-
-    /**
-     * @hidden range slider handle 1 current value supporting string
-     */
-    _rangeSliderHandle1CurrentValuePrefix = this.rangeSliderHandle1CurrentValuePrefix;
-
-    /**
-     * @hidden range slider handle 2 current value supporting string
-     */
-    _rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
+    _useSliderValuePrefix = true;
 
     /** @hidden */
     private _min = 0;
@@ -370,8 +365,10 @@ export class SliderComponent
         private readonly _platform: Platform,
         private readonly _liveAnnouncer: LiveAnnouncer,
         @Optional() private readonly _rtlService: RtlService,
-        @Optional() private _contentDensityService: ContentDensityService
-    ) {}
+        readonly _contentDensityObserver: ContentDensityObserver
+    ) {
+        _contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -383,9 +380,6 @@ export class SliderComponent
             this._constructValuesBySteps();
         }
 
-        if (this.cozy === null && this._contentDensityService) {
-            this._subscribeToContentDensity();
-        }
         this.buildComponentCssClass();
     }
 
@@ -659,12 +653,7 @@ export class SliderComponent
             newValue = this.min;
         }
 
-        if (this._isRange) {
-            this._rangeSliderHandle1CurrentValuePrefix = '';
-            this._rangeSliderHandle2CurrentValuePrefix = '';
-        } else {
-            this._singleSliderCurrentValuePrefix = '';
-        }
+        this._useSliderValuePrefix = false;
         this._cdr.markForCheck();
 
         const stepDiffArray = this._valuesBySteps
@@ -838,15 +827,6 @@ export class SliderComponent
         });
     }
 
-    /** @hidden ContentDensity change subscription */
-    private _subscribeToContentDensity(): void {
-        this._contentDensityService?._contentDensityListener.pipe(takeUntil(this._onDestroy$)).subscribe((density) => {
-            this.cozy = density === 'cozy';
-            this.buildComponentCssClass();
-            this._cdr.detectChanges();
-        });
-    }
-
     /** @hidden */
     private _initSingeMode(value: number | SliderTickMark): void {
         if (this.customValues.length > 0) {
@@ -989,12 +969,7 @@ export class SliderComponent
     /** @hidden reset default prefix on leaving the slider */
     private _resetPrefix(): void {
         // reset prefix string for slider current value that need to be announced
-        if (this._isRange) {
-            this._rangeSliderHandle1CurrentValuePrefix = this.rangeSliderHandle1CurrentValuePrefix;
-            this._rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
-        } else {
-            this._singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
-        }
+        this._useSliderValuePrefix = true;
         this._cdr.markForCheck();
     }
 

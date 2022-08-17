@@ -26,13 +26,6 @@
     }
 
     &__version {
-        color: #fff;
-        color: var(--sapShell_TextColor, #fff);
-        line-height: 2.3rem;
-        flex: 0 0 auto;
-        display: inline-block;
-        margin-right: 0.5rem;
-
         @media (max-width: 576px) {
             display: none;
         }
@@ -74,4 +67,19 @@
 
 .fd-docs__product-menu {
     margin: 0 0.5rem;
+}
+
+.fd-docs--i18n-menu-tooltip {
+    padding: 0.5rem 0.75rem;
+    position: relative;
+    height: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: normal;
+    background-color: var(--sapInformationBackground);
+
+    fd-icon {
+        margin-right: 0.5rem;
+    }
 }

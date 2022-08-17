@@ -4,6 +4,7 @@ import {
     Component,
     EventEmitter,
     forwardRef,
+    Injector,
     Input,
     OnDestroy,
     Output,
@@ -95,23 +96,27 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
     get subject(): SmartFilterBarSubjectDirective {
         return this._subject;
     }
+
     /**
      * 'Show filters' button label.
+     * @deprecated use i18n capabilities instead
      */
     @Input()
-    showFiltersLabel = 'Show filters';
+    showFiltersLabel: string;
 
     /**
      * 'Hide filters' button label.
+     * @deprecated use i18n capabilities instead
      */
     @Input()
-    hideFiltersLabel = 'Hide filters';
+    hideFiltersLabel: string;
 
     /**
      * 'Filters' button label.
+     * @deprecated use i18n capabilities instead
      */
     @Input()
-    filtersLabel = 'Filters';
+    filtersLabel: string;
 
     /**
      * Whether smart filter bar background should be transparent.
@@ -126,36 +131,18 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
     }
 
     /**
+     * @deprecated use i18n capabilities instead
      * Condition strategy labels.
      */
     @Input()
-    defineStrategyLabels: SmartFilterBarStrategyLabels = {
-        contains: 'contains',
-        equalTo: 'equal to',
-        between: 'between',
-        beginsWith: 'starts with',
-        endsWith: 'ends with',
-        lessThan: 'less than',
-        lessThanOrEqualTo: 'less than or equal to',
-        greaterThan: 'greater than',
-        greaterThanOrEqualTo: 'greater than or equal to',
-        after: 'after',
-        onOrAfter: 'on or after',
-        before: 'before',
-        beforeOrOn: 'before or on'
-    };
+    defineStrategyLabels: SmartFilterBarStrategyLabels | undefined;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Filters visibility category labels.
      */
     @Input()
-    filtersVisibilityCategoryLabels: SmartFilterBarVisibilityCategoryLabels = {
-        all: 'All',
-        visible: 'Visible',
-        active: 'Active',
-        visibleAndActive: 'Visible and active',
-        mandatory: 'Mandatory'
-    };
+    filtersVisibilityCategoryLabels: SmartFilterBarVisibilityCategoryLabels | undefined;
 
     /**
      * Columns layout.
@@ -201,7 +188,8 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
         private _dialogService: DialogService,
         private _cdr: ChangeDetectorRef,
         private _smartFilterBarService: SmartFilterBarService,
-        private _fgService: FormGeneratorService
+        private _fgService: FormGeneratorService,
+        private _injector: Injector
     ) {
         this._fgService.addComponent(SmartFilterBarConditionFieldComponent, [SMART_FILTER_BAR_RENDERER_COMPONENT]);
     }
@@ -234,13 +222,17 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
             visibilityCategories: this.filtersVisibilityCategoryLabels
         };
 
-        const dialogRef = this._dialogService.open(SmartFilterBarSettingsDialogComponent, {
-            ...dialogConfig,
-            responsivePadding: false,
-            verticalPadding: false,
-            width: '50rem',
-            data: dialogData
-        });
+        const dialogRef = this._dialogService.open(
+            SmartFilterBarSettingsDialogComponent,
+            {
+                ...dialogConfig,
+                responsivePadding: false,
+                verticalPadding: false,
+                width: '50rem',
+                data: dialogData
+            },
+            this._injector
+        );
 
         dialogRef.afterClosed.pipe(take(1)).subscribe((selectedFilters: string[]) => {
             this._setSelectedFilters(selectedFilters);
@@ -461,7 +453,6 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
             choices: column.hasOptions ? this._getFilterDefaultOptions(column.key, column.filterType) : undefined,
             transformer: (itemValue) => getSelectItemValue(itemValue),
             guiOptions: {
-                contentDensity: 'compact',
                 additionalData: {
                     type: 'input',
                     dataType: column.dataType,

@@ -38,13 +38,11 @@ describe('LayoutGridColDirective', () => {
     let directiveElement: LayoutGridColDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestNestedContainerComponent, LayoutGridColDirective, LayoutGridComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestNestedContainerComponent, LayoutGridColDirective, LayoutGridComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);

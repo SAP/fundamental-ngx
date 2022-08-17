@@ -12,7 +12,6 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
     SimpleChanges,
@@ -38,26 +37,20 @@ import {
 import { Subscription } from 'rxjs';
 
 import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
-import {
-    KeyUtil,
-    AutoCompleteEvent,
-    DynamicComponentService,
-    FocusEscapeDirection,
-    ContentDensityService
-} from '@fundamental-ngx/core/utils';
-import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { AutoCompleteEvent, DynamicComponentService, FocusEscapeDirection, KeyUtil } from '@fundamental-ngx/core/utils';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { FormStates, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { FormStates, Nullable, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { ComboboxMobileModule } from './combobox-mobile/combobox-mobile.module';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
 import { ComboboxItem } from './combobox-item';
 import { GroupFunction } from './list-group.pipe';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let comboboxUniqueId = 0;
 
@@ -84,7 +77,8 @@ let comboboxUniqueId = 0;
             multi: true
         },
         registerFormItemControl(ComboboxComponent),
-        MenuKeyboardService
+        MenuKeyboardService,
+        contentDensityObserverProviders()
     ],
     host: {
         '[class.fd-combobox-custom-class]': 'true',
@@ -194,10 +188,6 @@ export class ComboboxComponent
     /** Search function to execute when the Enter key is pressed on the main input. */
     @Input()
     searchFn: () => void;
-
-    /** Whether the search input should be displayed in compact mode. */
-    @Input()
-    compact?: boolean;
 
     /** Whether the matching string should be highlighted during filtration. */
     @Input()
@@ -358,6 +348,9 @@ export class ComboboxComponent
     private _subscriptions = new Subscription();
 
     /** @hidden */
+    private _value: any;
+
+    /** @hidden */
     onChange: (value: any) => void = () => {};
 
     /** @hidden */
@@ -369,7 +362,7 @@ export class ComboboxComponent
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _dynamicComponentService: DynamicComponentService,
-        @Optional() private _contentDensityService: ContentDensityService
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** @hidden */
@@ -378,14 +371,6 @@ export class ComboboxComponent
             this.showDropdownButton = false;
         }
         this._refreshDisplayedValues();
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._cdRef.markForCheck();
-                })
-            );
-        }
     }
 
     /** @hidden */
@@ -468,8 +453,9 @@ export class ComboboxComponent
     }
 
     /** Handle dialog dismissing, closes popover and sets backup data. */
-    dialogDismiss(term: string): void {
-        this.inputText = term;
+    dialogDismiss(term: any): void {
+        this.inputText = this.displayFn(term);
+        this.setValue(term);
         this.isOpenChangeHandle(false);
     }
 
@@ -520,6 +506,7 @@ export class ComboboxComponent
     /** @hidden */
     writeValue(value: any): void {
         this.inputTextValue = this.displayFn(value);
+        this.setValue(value);
         this._cdRef.markForCheck();
     }
 
@@ -624,6 +611,11 @@ export class ComboboxComponent
         this.clearInputBtnFocused = false;
     }
 
+    /** Current select value */
+    getValue(): any {
+        return this._value;
+    }
+
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */
     private _chooseOtherItem(offset: number): void {
         const activeValue: any = this._getOptionObjectByDisplayedValue(this.inputTextValue);
@@ -661,9 +653,7 @@ export class ComboboxComponent
             return contentArray.filter((item) => {
                 if (item) {
                     const term = this.displayFn(item).toLocaleLowerCase();
-                    let retVal;
-                    this.includes ? (retVal = term.includes(searchLower)) : (retVal = term.startsWith(searchLower));
-                    return retVal;
+                    return this.includes ? term.includes(searchLower) : term.startsWith(searchLower);
                 }
             });
         } else if (typeof searchTerm === 'object') {
@@ -678,6 +668,7 @@ export class ComboboxComponent
             this.isOpenChangeHandle(false);
         }
         if (this.fillOnSelect) {
+            this.setValue(term);
             this.inputText = this.displayFn(term);
             this.searchInputElement.nativeElement.value = this.inputText;
             this._cdRef.detectChanges();
@@ -705,10 +696,19 @@ export class ComboboxComponent
 
     /** @hidden */
     private _propagateChange(): void {
-        if (this.communicateByObject) {
-            this.onChange(this._getOptionObjectByDisplayedValue(this.inputTextValue));
+        if (!this.communicateByObject) {
+            this.onChange(this.inputText);
         } else {
-            this.onChange(this.inputTextValue);
+            this.onChange(this.getValue());
+        }
+    }
+
+    /** @hidden */
+    private setValue(value: any): void {
+        if (this.communicateByObject) {
+            this._value = value;
+        } else {
+            this._value = this.displayFn(value);
         }
     }
 
@@ -726,5 +726,10 @@ export class ComboboxComponent
             this._viewContainerRef,
             injector
         );
+    }
+
+    isSelected(term: any): boolean {
+        const termValue = this.communicateByObject ? term : this.displayFn(term);
+        return this.getValue() === termValue;
     }
 }

@@ -29,13 +29,11 @@ class HostComponent {
 xdescribe('DynamicFormControlFieldDirective', () => {
     let fixture: ComponentFixture<HostComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [DynamicFormControlFieldDirective, HostComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [DynamicFormControlFieldDirective, HostComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HostComponent);

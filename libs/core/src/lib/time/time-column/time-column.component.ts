@@ -8,10 +8,12 @@ import {
     HostBinding,
     HostListener,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     Output,
     QueryList,
+    SimpleChanges,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -20,11 +22,12 @@ import { BehaviorSubject, combineLatest, Subject, Subscription } from 'rxjs';
 import { buffer, debounceTime, filter, map, tap } from 'rxjs/operators';
 import { DOWN_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { CarouselDirective, CarouselItemDirective, CarouselConfig, PanEndOutput } from '@fundamental-ngx/core/carousel';
+import { KeyUtil, resizeObservable } from '@fundamental-ngx/core/utils';
+import { CarouselConfig, CarouselDirective, CarouselItemDirective, PanEndOutput } from '@fundamental-ngx/core/carousel';
 
 import { TimeColumnConfig } from './time-column-config';
 import { SelectableViewItem } from '../models';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 let timeColumnUniqueId = 0;
 
@@ -44,15 +47,11 @@ export interface TimeColumnItemOutput<T> {
     }
 })
 export class TimeColumnComponent<K, T extends SelectableViewItem<K> = SelectableViewItem<K>>
-    implements AfterViewInit, OnInit, OnDestroy
+    implements AfterViewInit, OnInit, OnDestroy, OnChanges
 {
     /** items in row */
     @Input()
     rows: T[] = [];
-
-    /** items in row */
-    @Input()
-    compact = false;
 
     /**
      * @Input When set to false, hides the buttons that increment
@@ -64,7 +63,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** Currently chosen, centered time column item */
     @Input()
     set activeValue(activeItem: T | undefined) {
-        if (activeItem == null) {
+        if (!activeItem) {
             // omitting "null" and "undefined"
             return;
         }
@@ -104,7 +103,11 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
 
     /** I18n and labels */
     @Input()
-    timeConfig: TimeColumnConfig;
+    timeConfig: Nullable<TimeColumnConfig>;
+
+    /** I18n and labels */
+    @Input()
+    columnTranslationsPreset: 'seconds' | 'minutes' | 'hours' | 'period';
 
     /**
      * Offset for carousel directive, active item is always the first one.
@@ -147,7 +150,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     @ViewChild('indicator', { read: ElementRef })
     indicator: ElementRef;
 
-    wrapperHeight: string;
+    wrapperHeight: number;
 
     /**
      * Time to wait in milliseconds after the last keydown before
@@ -158,6 +161,8 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
 
     /** @hidden */
     config: CarouselConfig;
+
+    internalTranslationConfig: TimeColumnConfig | null = null;
 
     /** @hidden */
     get currentIndicatorId(): string {
@@ -193,19 +198,21 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden */
     private _viewInit$ = new BehaviorSubject<boolean>(false);
 
+    private _resize$ = new BehaviorSubject<boolean>(false);
+
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
-    constructor(private _changeDetRef: ChangeDetectorRef) {
+    constructor(private _changeDetRef: ChangeDetectorRef, private _elmRef: ElementRef) {
         this._subscriptions.add(
-            combineLatest([this._viewInit$, this._elementsAtOnce$, this._offset$])
+            combineLatest([this._viewInit$, this._elementsAtOnce$, this._offset$, this._resize$])
                 .pipe(
                     filter(([viewInit]) => viewInit),
                     tap(([, elementsAtOnce, offset]) => {
                         const averageHeight =
                             this.items.toArray().reduce((acc, next) => acc + next.getHeight(), 0) / this.items.length;
-                        this.wrapperHeight = `${averageHeight * elementsAtOnce}px`;
+                        this.wrapperHeight = averageHeight * elementsAtOnce;
                         const visibleButNotSelectedElements = Math.floor(elementsAtOnce / 2);
                         if (offset === 0) {
                             this.items.first.element.style.marginTop = `${
@@ -215,6 +222,12 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
                                 visibleButNotSelectedElements * averageHeight
                             }px`;
                         }
+
+                        if (this.activeValue) {
+                            this._pickTime(this._getItem(this.activeValue), false);
+                        }
+
+                        this._changeDetRef.detectChanges();
                     })
                 )
                 .subscribe()
@@ -229,7 +242,19 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._subscriptions.add(
+            resizeObservable(this._elmRef.nativeElement).subscribe(() => {
+                this._resize$.next(true);
+            })
+        );
         this._viewInit$.next(true);
+    }
+
+    /** @hidde */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.columnTranslationsPreset) {
+            this._updateInternalTranslationConfig();
+        }
     }
 
     /** @hidden */
@@ -254,6 +279,15 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
             event.preventDefault();
         } else if (KeyUtil.isKeyType(event, 'numeric') || KeyUtil.isKeyType(event, 'alphabetical')) {
             this._queryKeyDownEvent.next(event.key);
+        }
+    }
+
+    /** @hidden */
+    @HostListener('wheel', ['$event'])
+    mouseScrollHandler(event: WheelEvent): void {
+        event.preventDefault();
+        if (this._active) {
+            event.deltaY > 0 ? this.scrollDown() : this.scrollUp();
         }
     }
 
@@ -466,5 +500,48 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
             this._activeValue = this.items.first.value;
         }
         this._pickTime(this._getItem(this._activeValue), false);
+    }
+
+    /** @hidden */
+    private _updateInternalTranslationConfig(): void {
+        switch (this.columnTranslationsPreset) {
+            case 'seconds':
+                this.internalTranslationConfig = {
+                    increaseLabel: 'coreTime.increaseHoursLabel',
+                    label: 'coreTime.hoursLabel',
+                    decreaseLabel: 'coreTime.decreaseHoursLabel',
+                    navigationInstruction: 'coreTime.navigationInstruction'
+                };
+                break;
+            case 'minutes':
+                this.internalTranslationConfig = {
+                    increaseLabel: 'coreTime.increaseMinutesLabel',
+                    label: 'coreTime.minutesLabel',
+                    decreaseLabel: 'coreTime.decreaseMinutesLabel',
+                    navigationInstruction: 'coreTime.navigationInstruction'
+                };
+                break;
+            case 'hours':
+                this.internalTranslationConfig = {
+                    increaseLabel: 'coreTime.increaseSecondsLabel',
+                    label: 'coreTime.secondsLabel',
+                    decreaseLabel: 'coreTime.decreaseSecondsLabel',
+                    navigationInstruction: 'coreTime.navigationInstruction'
+                };
+                break;
+            case 'period':
+                this.internalTranslationConfig = {
+                    increaseLabel: 'coreTime.increasePeriodLabel',
+                    label: 'coreTime.periodLabel',
+                    decreaseLabel: 'coreTime.decreasePeriodLabel',
+                    navigationInstruction: 'coreTime.navigationInstruction'
+                };
+                break;
+
+            default:
+                this.internalTranslationConfig = null;
+                break;
+        }
+        this._changeDetRef.markForCheck();
     }
 }

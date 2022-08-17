@@ -1,15 +1,14 @@
-let projects: { projectName: string; tags: string[] }[];
-
 const angularJson = require('../../angular.json');
-projects = Object.keys(angularJson.projects).map((projName) => {
+const projects: { projectName: string; tags: string[] }[] = Object.keys(angularJson.projects).map((projName) => {
+    const projectContent = require('../../' + angularJson.projects[projName] + '/project.json');
     return {
         projectName: projName,
-        ...angularJson.projects[projName]
+        ...projectContent
     };
 });
 
 const knownTypes = new Set(['app', 'e2e', 'tools', 'lib']);
-const knownScopes = new Set(['docs', 'fd', 'fdp', 'fn', 'tools', 'datetime-adapter', 'components-e2e']);
+const knownScopes = new Set(['docs', 'fd', 'fdp', 'fn', 'tools', 'datetime-adapter', 'components-e2e', 'i18n']);
 
 describe('Nx projects (nx.json)', () => {
     // generate tests so we have a clear output of which project failed

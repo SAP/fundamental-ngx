@@ -2,32 +2,27 @@ import {
     AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
+    ComponentRef,
     ContentChild,
-    ViewChild,
+    ContentChildren,
     EventEmitter,
     HostListener,
     Input,
     OnDestroy,
     Optional,
     Output,
-    ViewEncapsulation,
-    TemplateRef,
-    ComponentRef,
     QueryList,
-    ContentChildren,
-    ChangeDetectorRef,
-    ViewContainerRef
+    TemplateRef,
+    ViewChild,
+    ViewContainerRef,
+    ViewEncapsulation
 } from '@angular/core';
-import { Subject, merge, Subscription } from 'rxjs';
+import { merge, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
-import {
-    ContentDensityService,
-    DynamicComponentService,
-    FocusEscapeDirection,
-    KeyboardSupportService
-} from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/core/utils';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 
@@ -35,7 +30,7 @@ import { ActionSheetMobileModule } from './action-sheet-mobile/action-sheet-mobi
 import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
 import { ActionSheetControlComponent } from './action-sheet-control/action-sheet-control.component';
-import { ActionSheetItemComponent, ActionSheetClickEvent } from './action-sheet-item/action-sheet-item.component';
+import { ActionSheetClickEvent, ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.component';
 
 @Component({
     selector: 'fd-action-sheet',
@@ -46,18 +41,6 @@ import { ActionSheetItemComponent, ActionSheetClickEvent } from './action-sheet-
     providers: [KeyboardSupportService]
 })
 export class ActionSheetComponent implements AfterContentInit, AfterViewInit, OnDestroy {
-    /** Whether should be displayed in compact mode */
-    @Input()
-    set compact(compact: boolean) {
-        this._compact = compact;
-        this._initializeChildrenState();
-        this._setItemsProperties();
-    }
-
-    get compact(): boolean {
-        return this._compact;
-    }
-
     /** Whether should be displayed in mobile mode */
     @Input()
     mobile = false;
@@ -125,14 +108,10 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    /** @hidden */
-    private _compact: boolean;
-
     constructor(
         private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>,
         private readonly _changeDetectionRef: ChangeDetectorRef,
         private readonly _viewContainerRef: ViewContainerRef,
-        @Optional() private _contentDensityService: ContentDensityService,
         @Optional() private _dynamicComponentService: DynamicComponentService
     ) {}
 
@@ -148,19 +127,6 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     ngAfterViewInit(): void {
         if (this.mobile) {
             this._setUpMobileMode();
-        }
-
-        if (this._compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this._compact = isCompact;
-                    this.actionSheetBody.compact = isCompact;
-                    this.actionSheetItems.forEach((item) => {
-                        item.compact = isCompact;
-                        this._changeDetectionRef.markForCheck();
-                    });
-                })
-            );
         }
     }
 
@@ -214,7 +180,6 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     private _initializeChildrenState(): void {
         if (this.actionSheetBody) {
             this.actionSheetBody.mobile = this.mobile;
-            this.actionSheetBody.compact = this._compact;
         }
     }
 
@@ -227,7 +192,6 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     private _listenOnItemsChange(): void {
         this.actionSheetItems.changes.pipe(startWith(1), takeUntil(this._onDestroy$)).subscribe(() => {
             this._listenOnItemsClick();
-            this._setItemsProperties();
         });
     }
 
@@ -251,11 +215,6 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden Set fake focus on element with passed index */
     private _setItemActive(index: number): void {
         this._keyboardSupportService.keyManager?.setActiveItem(index);
-    }
-
-    /** @hidden */
-    private _setItemsProperties(): void {
-        this.actionSheetItems?.forEach((actionSheetItem) => (actionSheetItem.compact = this._compact));
     }
 
     /** @hidden */

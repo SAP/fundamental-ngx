@@ -35,7 +35,6 @@ const routes: Routes = [
         AlertInlineExampleComponent,
         AlertWidthExampleComponent
     ],
-    entryComponents: [AlertContentComponent],
     providers: [AlertService]
 })
 export class AlertDocsModule {}

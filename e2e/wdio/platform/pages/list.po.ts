@@ -6,20 +6,20 @@ export class ListPo extends BaseComponentPo {
 
     // borderless examples
     noBorderListItems = 'fdp-platform-list-border-less-example li';
-    noBorderCompactList = 'fdp-platform-list-border-less-example fdp-list:nth-of-type(2)';
+    noBorderCompactList = 'fdp-platform-list-border-less-example #compact-list';
     // footer examples
     footerListItems = 'fdp-platform-list-with-footer-example fdp-standard-list-item li';
-    footerCompactList = 'fdp-platform-list-with-footer-example fdp-list:nth-of-type(2)';
+    footerCompactList = 'fdp-platform-list-with-footer-example fdp-list[fdCompact]';
     footer = 'fdp-platform-list-with-footer-example fdp-list-footer li';
     // group header examples
     groupHeaderListItems = 'fdp-platform-list-with-group-header-example fdp-list-item li';
     groupHeader = 'fdp-platform-list-with-group-header-example fdp-list-group-header li';
-    groupCompactList = 'fdp-platform-list-with-group-header-example fdp-list:nth-of-type(2)';
+    groupCompactList = 'fdp-platform-list-with-group-header-example fdp-list[fdCompact]';
     // interactive examples
     interactiveListItems = 'fdp-platform-list-with-group-header fdp-standard-list-item li';
     // counter examples
     counterListItems = 'fdp-platform-list-with-item-counter-example li';
-    counterCompactList = 'fdp-platform-list-with-item-counter-example fdp-list:nth-of-type(2)';
+    counterCompactList = 'fdp-platform-list-with-item-counter-example fdp-list[fdCompact]';
     counterTitleItems = 'fdp-platform-list-with-item-counter-example li span:first-of-type';
     counterCounterItem = 'fdp-platform-list-with-item-counter-example li span:nth-of-type(2)';
     // deletion examples

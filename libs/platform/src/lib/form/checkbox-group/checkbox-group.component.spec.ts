@@ -87,7 +87,12 @@ class TestReactiveCheckboxGroupComponent {
         new Item('3', 'chair', 'Office chair', 50, 5530)
     ];
 
-    form1 = new FormGroup({});
+    form1 = new FormGroup({
+        items: new FormControl(),
+        phones: new FormControl(),
+        visited: new FormControl(),
+        hobbies: new FormControl()
+    });
     formData = { phones: ['Samsung', 'OnePlus'], visited: ['India', 'USA'], hobbies: ['coding', 'gardening'] };
 
     @ViewChildren(CheckboxComponent)
@@ -98,21 +103,19 @@ describe('CheckboxGroup component Reactive Form Test', () => {
     let host: TestReactiveCheckboxGroupComponent;
     let fixture: ComponentFixture<TestReactiveCheckboxGroupComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [
-                    FdpFormGroupModule,
-                    FormModule,
-                    PlatformCheckboxGroupModule,
-                    PlatformCheckboxModule,
-                    FormsModule,
-                    ReactiveFormsModule
-                ],
-                declarations: [TestReactiveCheckboxGroupComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                FdpFormGroupModule,
+                FormModule,
+                PlatformCheckboxGroupModule,
+                PlatformCheckboxModule,
+                FormsModule,
+                ReactiveFormsModule
+            ],
+            declarations: [TestReactiveCheckboxGroupComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestReactiveCheckboxGroupComponent);
@@ -260,13 +263,13 @@ describe('CheckboxGroup component Reactive Form Test', () => {
         fdpCheckboxElem[21].nativeElement.click();
         await wait(fixture);
 
-        expect(host.form1.controls.items.value.sort()).toEqual(['chair', 'coffee', 'pen']);
+        expect(host.form1.controls.items.value?.sort()).toEqual(['chair', 'coffee', 'pen']);
 
         // uncheck checkbox 20
         fdpCheckboxElem[20].nativeElement.click();
         await wait(fixture);
 
-        expect(host.form1.controls.items.value.sort()).toEqual(['chair', 'coffee']);
+        expect(host.form1.controls.items.value?.sort()).toEqual(['chair', 'coffee']);
     });
 });
 
@@ -349,20 +352,12 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
     let host: TestTemplateDrivenCheckboxGroupComponent;
     let fixture: ComponentFixture<TestTemplateDrivenCheckboxGroupComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [
-                    FdpFormGroupModule,
-                    FormModule,
-                    PlatformCheckboxGroupModule,
-                    PlatformCheckboxModule,
-                    FormsModule
-                ],
-                declarations: [TestTemplateDrivenCheckboxGroupComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdpFormGroupModule, FormModule, PlatformCheckboxGroupModule, PlatformCheckboxModule, FormsModule],
+            declarations: [TestTemplateDrivenCheckboxGroupComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestTemplateDrivenCheckboxGroupComponent);
@@ -585,11 +580,11 @@ class TestReactiveCheckboxGroupWithDataComponent {
     ];
 
     form2 = new FormGroup({
-        phones: new FormControl(['Samsung', 'Apple']),
-        visited: new FormControl(['India', 'Australia']),
-        hobbies: new FormControl(['coding', 'gardening']),
-        languages: new FormControl(['python']),
-        fruits: new FormControl(['banana', 'guava'])
+        phones: new FormControl<string[]>(['Samsung', 'Apple']),
+        visited: new FormControl<string[]>(['India', 'Australia']),
+        hobbies: new FormControl<string[]>(['coding', 'gardening']),
+        languages: new FormControl<string[]>(['python']),
+        fruits: new FormControl<string[]>(['banana', 'guava'])
     });
 
     @ViewChildren(CheckboxComponent)
@@ -600,21 +595,19 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
     let host: TestReactiveCheckboxGroupWithDataComponent;
     let fixture: ComponentFixture<TestReactiveCheckboxGroupWithDataComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [
-                    FdpFormGroupModule,
-                    FormModule,
-                    PlatformCheckboxGroupModule,
-                    PlatformCheckboxModule,
-                    FormsModule,
-                    ReactiveFormsModule
-                ],
-                declarations: [TestReactiveCheckboxGroupWithDataComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                FdpFormGroupModule,
+                FormModule,
+                PlatformCheckboxGroupModule,
+                PlatformCheckboxModule,
+                FormsModule,
+                ReactiveFormsModule
+            ],
+            declarations: [TestReactiveCheckboxGroupWithDataComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestReactiveCheckboxGroupWithDataComponent);
@@ -636,7 +629,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('.fd-checkbox__label'));
 
         // pre-select test
-        expect(host.form2.controls.phones.value.sort()).toEqual(['Apple', 'Samsung']);
+        expect(host.form2.controls.phones.value?.sort()).toEqual(['Apple', 'Samsung']);
 
         await wait(fixture);
 
@@ -647,7 +640,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
         fdpCheckboxElem[3].nativeElement.click();
         await wait(fixture);
 
-        expect(host.form2.controls.phones.value.sort()).toEqual(['Redmi', 'Samsung']);
+        expect(host.form2.controls.phones.value?.sort()).toEqual(['Redmi', 'Samsung']);
 
         // de-select checked checkbox on click
         fdpCheckboxElem[3].nativeElement.click();
@@ -656,7 +649,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
         fdpCheckboxElem[2].nativeElement.click();
         await wait(fixture);
 
-        expect(host.form2.controls.phones.value.sort()).toEqual(['OnePlus', 'Samsung']);
+        expect(host.form2.controls.phones.value?.sort()).toEqual(['OnePlus', 'Samsung']);
 
         fdpCheckboxElem[0].nativeElement.click();
         await wait(fixture);
@@ -664,7 +657,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
         fdpCheckboxElem[1].nativeElement.click();
         fixture.detectChanges();
 
-        expect(host.form2.controls.phones.value.sort()).toEqual(['Apple', 'OnePlus']);
+        expect(host.form2.controls.phones.value?.sort()).toEqual(['Apple', 'OnePlus']);
     });
 
     // test cases for checbox group created from list of selectItem Objects.
@@ -673,7 +666,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('.fd-checkbox__label'));
 
         // pre-select test
-        expect(host.form2.controls.visited.value.sort()).toEqual(['Australia', 'India']);
+        expect(host.form2.controls.visited.value?.sort()).toEqual(['Australia', 'India']);
 
         await wait(fixture);
 
@@ -681,7 +674,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
         fdpCheckboxElem[4].nativeElement.click();
         await wait(fixture);
 
-        expect(host.form2.controls.visited.value.sort()).toEqual(['India']);
+        expect(host.form2.controls.visited.value?.sort()).toEqual(['India']);
 
         // de-select checked checkbox on click
         fdpCheckboxElem[5].nativeElement.click();
@@ -699,7 +692,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('.fd-checkbox__label'));
 
         // pre-select test
-        expect(host.form2.controls.hobbies.value.sort()).toEqual(['coding', 'gardening']);
+        expect(host.form2.controls.hobbies.value?.sort()).toEqual(['coding', 'gardening']);
 
         // select checkbox on click
         fdpCheckboxElem[7].nativeElement.click();
@@ -708,7 +701,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
         fdpCheckboxElem[8].nativeElement.click();
         await wait(fixture);
 
-        expect(host.form2.controls.hobbies.value.sort()).toEqual(['coding', 'cooking', 'gardening', 'painting']);
+        expect(host.form2.controls.hobbies.value?.sort()).toEqual(['coding', 'cooking', 'gardening', 'painting']);
 
         // de-select checked checkbox on click
         fdpCheckboxElem[9].nativeElement.click();
@@ -717,7 +710,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
         fdpCheckboxElem[10].nativeElement.click();
         await wait(fixture);
 
-        expect(host.form2.controls.hobbies.value.sort()).toEqual(['cooking', 'painting']);
+        expect(host.form2.controls.hobbies.value?.sort()).toEqual(['cooking', 'painting']);
     });
 
     it('should create checkbox group with enabled and disabled checkboxes from SelectItem object', async () => {

@@ -17,8 +17,7 @@ import {
 import { ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
-import { FormStates, isValidControlState } from '@fundamental-ngx/core/shared';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { FormStates, isValidControlState, Nullable } from '@fundamental-ngx/core/shared';
 
 import { BaseComponent } from '../base';
 import { FormFieldControl } from './form-control';
@@ -199,12 +198,6 @@ export abstract class BaseInput
     }
 
     ngOnInit(): void {
-        super.ngOnInit();
-
-        if (!this.id || !this.name) {
-            throw new Error('form input must have [id] and [name] attribute.');
-        }
-
         if (this.formField) {
             this.formField.registerFormFieldControl(this);
         }

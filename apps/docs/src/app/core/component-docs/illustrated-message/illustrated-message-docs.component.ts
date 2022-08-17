@@ -17,6 +17,9 @@ import illustrationDialogNoMail from '!../../../../assets/images/sapIllus-Dialog
 
 import illustrationSpotNoMail from '!../../../../assets/images/sapIllus-Spot-NoMail.svg?raw';
 
+import illusratedMessageInlineSrc from '!./examples/illustrated-message-inline-example.component.ts?raw';
+import illusratedMessageInlineHtmlSrc from '!./examples/illustrated-message-inline-example.component.html?raw';
+
 @Component({
     selector: 'app-illustrated-message',
     templateUrl: './illustrated-message-docs.component.html'
@@ -84,6 +87,32 @@ export class IllustratedMessageDocsComponent {
             language: 'svg',
             code: illustrationSpotNoMail,
             fileName: 'sapIllus-Spot-NoMail',
+            path: 'src/assets/images'
+        }
+    ];
+
+    illustratedMessageInlineExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: illusratedMessageInlineHtmlSrc,
+            fileName: 'illustrated-message-inline-example'
+        },
+        {
+            language: 'typescript',
+            code: illusratedMessageInlineSrc,
+            fileName: 'illustrated-message-inline-example',
+            component: 'IllustratedMessageInlineExampleComponent'
+        },
+        {
+            language: 'svg',
+            code: illustration,
+            fileName: 'sapIllus-Dialog-NoMail',
+            path: 'src/assets/images'
+        },
+        {
+            language: 'svg',
+            code: illustrationSceneNoMail,
+            fileName: 'sapIllus-Scene-NoMail',
             path: 'src/assets/images'
         }
     ];

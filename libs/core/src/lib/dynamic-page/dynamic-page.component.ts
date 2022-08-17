@@ -29,7 +29,7 @@ import { Nullable } from '@fundamental-ngx/core/shared';
 import { FlexibleColumnLayoutComponent } from '@fundamental-ngx/core/flexible-column-layout';
 
 import { asyncScheduler, fromEvent, Observable, startWith, Subject } from 'rxjs';
-import { debounceTime, delay, map, observeOn, takeUntil } from 'rxjs/operators';
+import { debounceTime, map, observeOn, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-dynamic-page',
@@ -193,7 +193,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
      * - recheck size depending on width of DynamicPage
      */
     private _listenToLayoutChange(): void {
-        this._columnLayout.layoutChange.pipe(takeUntil(this._onDestroy$), delay(1500)).subscribe(() => {
+        this._columnLayout.layoutChange.pipe(debounceTime(50), takeUntil(this._onDestroy$)).subscribe(() => {
             this.refreshSize();
             this._sizeChangeHandle();
         });

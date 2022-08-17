@@ -7,14 +7,12 @@ import { CLASS_NAME } from './constants';
 describe('CardHeaderComponent', () => {
     let fixture: ComponentFixture<CardHeaderComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule],
-                declarations: [CardHeaderComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule],
+            declarations: [CardHeaderComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CardHeaderComponent);

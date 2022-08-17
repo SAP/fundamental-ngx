@@ -1,20 +1,18 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ComboboxComponent, ComboboxModule } from '@fundamental-ngx/core/combobox';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY, DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 
 describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
     let fixture: ComponentFixture<ComboboxComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ComboboxModule],
-                providers: [DynamicComponentService, ContentDensityService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ComboboxModule],
+            providers: [DynamicComponentService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ComboboxComponent);
@@ -54,11 +52,6 @@ describe('ComboboxComponent', () => {
         expect(component.onTouched).toHaveBeenCalled();
     });
 
-    it('should handle content density when compact input is not provided', () => {
-        component.ngOnInit();
-        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
-    });
-
     it('should write value not on dropdown mode', () => {
         component.writeValue('someValue');
         expect(component.inputText).toBe('someValue');
@@ -85,8 +78,8 @@ describe('ComboboxComponent', () => {
         spyOn(component, 'onChange');
         component.communicateByObject = true;
         component.displayFn = (item: any): string => item.displayedValue;
-        component.inputText = 'displayedValue2';
-        expect(component.onChange).toHaveBeenCalledWith({ value: 'value2', displayedValue: 'displayedValue2' });
+        component.onMenuClickHandler(component.dropdownValues[1]);
+        expect(component.onChange).toHaveBeenCalledWith(component.dropdownValues[1]);
     });
 
     it('should handle wrong input entry on dropdown mode', () => {

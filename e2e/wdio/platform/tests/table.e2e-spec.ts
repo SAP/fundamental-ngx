@@ -642,7 +642,7 @@ describe('Table component test suite', () => {
 
             click(tableNavigatableRowIndicatorExample + button, 1);
             expect(getElementClass(tableNavigatableRowIndicatorExample + tableRow, 1)).toBe(
-                'fd-table__row ng-star-inserted'
+                'fd-table__row fd-table__row--main ng-star-inserted'
             );
         });
     });

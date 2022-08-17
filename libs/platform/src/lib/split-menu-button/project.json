@@ -1,0 +1,41 @@
+{
+    "projectType": "library",
+    "root": "libs/platform/src/lib/split-menu-button",
+    "sourceRoot": "libs/platform/src/lib/split-menu-button",
+    "prefix": "fdp",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/platform/split-menu-button"],
+            "options": {
+                "tsConfig": "libs/platform/src/lib/split-menu-button/tsconfig.lib.json",
+                "project": "libs/platform/src/lib/split-menu-button/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/platform/src/lib/split-menu-button/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/platform/src/lib/split-menu-button/test.ts",
+                "tsConfig": "libs/platform/src/lib/split-menu-button/tsconfig.spec.json",
+                "karmaConfig": "libs/platform/src/lib/split-menu-button/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/platform/src/lib/split-menu-button/**/*.ts",
+                    "libs/platform/src/lib/split-menu-button/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fdp"],
+    "implicitDependencies": ["core"]
+}

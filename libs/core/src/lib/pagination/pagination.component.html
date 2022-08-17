@@ -13,7 +13,7 @@
         orientation="horizontal"
         [skipPredicate]="skipItemPredicate"
         class="fd-pagination__nav"
-        [attr.aria-label]="ariaLabel"
+        [attr.aria-label]="ariaLabel || ('corePagination.ariaLabel' | fdTranslate)"
         [attr.aria-labelledby]="displayTotalItems ? _totalPagesElementId : null"
         *ngIf="totalItems >= itemsPerPage"
     >
@@ -23,9 +23,8 @@
             fdType="transparent"
             glyph="media-rewind"
             [disabled]="isFirstPage"
-            [compact]="compact"
-            [ariaLabel]="firstLabel"
-            [title]="firstLabel"
+            [ariaLabel]="firstLabel || ('corePagination.firstLabel' | fdTranslate)"
+            [title]="firstLabel || ('corePagination.firstLabel' | fdTranslate)"
             class="fd-pagination__button fd-pagination__button--mobile"
             [attr.aria-disabled]="isFirstPage"
             (click)="goToFirstPage()"
@@ -40,9 +39,8 @@
             fdType="transparent"
             glyph="navigation-left-arrow"
             [disabled]="isFirstPage"
-            [compact]="compact"
-            [ariaLabel]="previousLabel"
-            [title]="previousLabel"
+            [ariaLabel]="previousLabel || ('corePagination.previousLabel' | fdTranslate)"
+            [title]="previousLabel || ('corePagination.previousLabel' | fdTranslate)"
             class="fd-pagination__button"
             [attr.aria-disabled]="isFirstPage"
             (click)="previousPage()"
@@ -58,9 +56,10 @@
                 fd-focus-key-manager-item
                 fd-button
                 fdType="transparent"
-                [compact]="compact"
-                [ariaLabel]="pageLabel(page)"
-                [title]="nextLabel"
+                [ariaLabel]="
+                    pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate: { pageNumber: page })
+                "
+                [title]="pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate: { pageNumber: page })"
                 class="fd-pagination__link"
                 (click)="goToPage(page)"
                 (keyup.enter)="goToPage(page, $event)"
@@ -76,15 +75,25 @@
             fd-focus-key-manager-item
             fd-button
             fdType="transparent"
-            [compact]="compact"
-            [ariaLabel]="pageLabel(currentPage)"
+            [ariaLabel]="
+                pageLabel
+                    ? pageLabel(currentPage)
+                    : ('corePagination.pageLabel' | fdTranslate: { pageNumber: currentPage })
+            "
             class="fd-pagination__link is-active"
             [attr.aria-current]="true"
         >
             {{ currentPage }}
         </button>
 
-        <label fd-form-label class="fd-pagination__label"> {{ labelBeforeInputMobile }}: </label>
+        <label fd-form-label class="fd-pagination__label">
+            {{
+                labelBeforeInputMobile
+                    ? labelBeforeInputMobile + ':'
+                    : ('corePagination.labelBeforeInputMobile'
+                      | fdTranslate: { pageNumber: currentPage, totalCount: totalItems })
+            }}
+        </label>
 
         <input
             #pageInputElement
@@ -97,18 +106,27 @@
             type="number"
             [max]="_lastPage"
             [state]="currentPageModel.invalid ? 'error' : null"
-            [compact]="compact"
             class="fd-pagination__input"
             #currentPageModel="ngModel"
             [ngModel]="currentPage"
-            [attr.aria-label]="inputAriaLabel(currentPage, _lastPage)"
+            [attr.aria-label]="
+                inputAriaLabel
+                    ? inputAriaLabel(currentPage, totalItems)
+                    : ('corePagination.inputAriaLabel'
+                      | fdTranslate: { pageNumber: currentPage, totalCount: totalItems })
+            "
             (keydown.enter)="goToPage(currentPageModel.value)"
             (keydown.space)="goToPage(currentPageModel.value)"
             (blur)="_restoreInputValue(currentPageModel)"
         />
 
         <label fd-form-label class="fd-pagination__label">
-            {{ labelAfterInputMobile(_lastPage) }}
+            {{
+                labelAfterInputMobile
+                    ? labelAfterInputMobile(_lastPage)
+                    : ('corePagination.labelAfterInputMobile'
+                      | fdTranslate: { pageNumber: currentPage, totalCount: totalItems })
+            }}
         </label>
 
         <!-- Duplicated to preserve the items order for keyboard navigation -->
@@ -118,9 +136,10 @@
                 fd-focus-key-manager-item
                 fd-button
                 fdType="transparent"
-                [compact]="compact"
-                [ariaLabel]="pageLabel(page)"
-                [title]="nextLabel"
+                [ariaLabel]="
+                    pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate: { pageNumber: page })
+                "
+                [title]="pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate: { pageNumber: page })"
                 class="fd-pagination__link"
                 (click)="goToPage(page)"
                 (keyup.enter)="goToPage(page, $event)"
@@ -137,9 +156,8 @@
             fdType="transparent"
             glyph="navigation-right-arrow"
             [disabled]="isLastPage"
-            [compact]="compact"
-            [ariaLabel]="nextLabel"
-            [title]="nextLabel"
+            [ariaLabel]="nextLabel || ('corePagination.nextLabel' | fdTranslate)"
+            [title]="nextLabel || ('corePagination.nextLabel' | fdTranslate)"
             class="fd-pagination__button"
             [attr.aria-disabled]="isLastPage"
             (click)="nextPage()"
@@ -154,9 +172,8 @@
             fdType="transparent"
             glyph="media-forward"
             [disabled]="isLastPage"
-            [compact]="compact"
-            [ariaLabel]="lastLabel"
-            [title]="lastLabel"
+            [ariaLabel]="lastLabel || ('corePagination.lastLabel' | fdTranslate)"
+            [title]="lastLabel || ('corePagination.lastLabel' | fdTranslate)"
             class="fd-pagination__button fd-pagination__button--mobile"
             [attr.aria-disabled]="isLastPage"
             (click)="goToLastPage()"
@@ -177,7 +194,7 @@
 <ng-template #more>
     <span
         class="fd-pagination__more"
-        [class.fd-pagination__more--compact]="compact"
+        [class.fd-pagination__more--compact]="_contentDensityObserver.isCompact$ | async"
         aria-hidden="true"
         aria-label="..."
         role="presentation"
@@ -185,18 +202,17 @@
 </ng-template>
 
 <ng-template #total let-showing="showing">
-    <span fd-form-label class="fd-pagination__total-label"> {{ showing.of }} Results </span>
+    <span fd-form-label class="fd-pagination__total-label">
+        {{ 'corePagination.totalResultsLabel' | fdTranslate: _currentShowing }}
+    </span>
 </ng-template>
 
 <ng-template #perPage let-pageOptions="pageOptions">
-    <label fd-form-label class="fd-pagination__per-page-label">{{ itemsPerPageLabel }}:</label>
+    <label fd-form-label class="fd-pagination__per-page-label">
+        {{ itemsPerPageLabel ? itemsPerPageLabel + ':' : ('corePagination.itemsPerPageLabel' | fdTranslate) }}
+    </label>
 
-    <fd-select
-        [compact]="compact"
-        class="fd-pagination__per-page-select"
-        [value]="itemsPerPage"
-        (valueChange)="_onChangePerPage($event)"
-    >
-        <fd-option *ngFor="let option of pageOptions" [value]="option">{{ option }}</fd-option>
+    <fd-select class="fd-pagination__per-page-select" [value]="itemsPerPage" (valueChange)="_onChangePerPage($event)">
+        <li fd-option *ngFor="let option of pageOptions" [value]="option">{{ option }}</li>
     </fd-select>
 </ng-template>

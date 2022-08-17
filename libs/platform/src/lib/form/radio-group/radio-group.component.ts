@@ -306,7 +306,6 @@ export class RadioGroupComponent
     private _setProperties(button: RadioButtonComponent): void {
         if (button) {
             button.name = this.name;
-            button.contentDensity = this.contentDensity;
             button.state = this.state;
             button.disabled = button.disabled ? button.disabled : this._disabled;
         }

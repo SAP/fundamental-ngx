@@ -1,20 +1,10 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    HostBinding,
-    Input,
-    OnDestroy,
-    OnInit,
-    Optional,
-    ViewChild
-} from '@angular/core';
-import { BaseButton, ButtonType } from '@fundamental-ngx/core/button';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, ViewChild } from '@angular/core';
+import { BaseButton, ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
 import { Subscription } from 'rxjs';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 let randomButtonBarId = 0;
+
 @Component({
     selector: 'fd-button-bar',
     template: `
@@ -24,7 +14,6 @@ let randomButtonBarId = 0;
             [type]="type"
             [glyphPosition]="glyphPosition"
             [glyph]="glyph"
-            [compact]="compact"
             [fdType]="fdType"
             [label]="label"
             [attr.title]="title"
@@ -36,7 +25,7 @@ let randomButtonBarId = 0;
         </button>
     `
 })
-export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy {
+export class ButtonBarComponent extends BaseButton implements OnDestroy {
     /** Whether the element should take the whole width of the container. */
     @Input()
     @HostBinding('class.fd-bar__element--full-width')
@@ -52,10 +41,6 @@ export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy 
     /** adding title to the button */
     @Input()
     title: string;
-
-    /** Whether or not the button is compact. */
-    @Input()
-    compact?: boolean;
 
     /** Aria label attribute value. */
     @Input()
@@ -73,6 +58,7 @@ export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy 
     get id(): string {
         return this._id || this._defaultId;
     }
+
     set id(value: string | null | undefined) {
         this._id = value;
     }
@@ -95,20 +81,8 @@ export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy 
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    constructor(@Optional() private _contentDensityService: ContentDensityService, private _cdRef: ChangeDetectorRef) {
+    constructor(private _cdRef: ChangeDetectorRef) {
         super();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._cdRef.markForCheck();
-                })
-            );
-        }
     }
 
     /** @hidden */

@@ -76,7 +76,7 @@ export class TablePo extends BaseComponentPo {
     playgroundSchemaInput = '.form-control.fd-input';
     toolbarText = '.fd-label.fd-toolbar__overflow-label';
     dropdownList = '.fd-select-options';
-    dropdownOption = 'fd-option.fd-list__item ';
+    dropdownOption = 'li[fd-option].fd-list__item ';
     dialogButton = 'fd-dialog-body .sort-row__actions .fd-button';
     dialogFilters = 'fd-dialog-body .fd-list__item:not(.fd-list__group-header)';
     filterInput = 'fdp-filter-custom input';

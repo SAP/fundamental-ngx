@@ -1,9 +1,12 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, DoCheck } from '@angular/core';
 
-import { ContentDensity } from '@fundamental-ngx/core/utils';
-
 import { CollectionFilter } from '../../../interfaces/collection-filter.interface';
 import { TableViewSettingsFilterComponent } from '../../table-view-settings-dialog/table-view-settings-filter.component';
+import {
+    ContentDensityMode,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 
 /**
  * Custom Select filter type.
@@ -16,16 +19,13 @@ import { TableViewSettingsFilterComponent } from '../../table-view-settings-dial
     selector: 'fdp-filter-custom',
     templateUrl: './filter-custom.component.html',
     // Keep it "Default" intentionally to run ngDoCheck when child template emits changes
-    changeDetection: ChangeDetectionStrategy.Default
+    changeDetection: ChangeDetectionStrategy.Default,
+    providers: [contentDensityObserverProviders()]
 })
 export class FilterCustomComponent implements DoCheck {
     /** ViewSettingsFilter options the filter is created from */
     @Input()
     filter: TableViewSettingsFilterComponent;
-
-    /** Table's content density to be used */
-    @Input()
-    contentDensity: ContentDensity;
 
     /** The filter model */
     @Input()
@@ -44,6 +44,10 @@ export class FilterCustomComponent implements DoCheck {
     @Output()
     valueChange: EventEmitter<unknown> = new EventEmitter<unknown>();
 
+    /** Content Density, comes from table injector */
+    get contentDensity(): ContentDensityMode {
+        return this.contentDensityObserver.value;
+    }
     /**
      * @hidden
      * Currently selected value
@@ -55,6 +59,8 @@ export class FilterCustomComponent implements DoCheck {
      * Last emitted value
      */
     _valueLastEmitted: Record<string, any>;
+
+    constructor(private contentDensityObserver: ContentDensityObserver) {}
 
     /** @hidden */
     ngDoCheck(): void {

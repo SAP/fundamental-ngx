@@ -34,7 +34,7 @@
                                     <input fd-form-control type="text" id="address-3" />
                                 </div>
                                 <fd-wizard-next-step>
-                                    <button fd-button [compact]="true" fdType="emphasized" (click)="goToStep(2)">
+                                    <button fd-button fdCompact fdType="emphasized" (click)="goToStep(2)">
                                         Go to the payment selection page
                                     </button>
                                 </fd-wizard-next-step>
@@ -86,7 +86,7 @@
                                     <button
                                         [disabled]="!paymentSelection"
                                         fd-button
-                                        [compact]="true"
+                                        fdCompact
                                         fdType="emphasized"
                                         (click)="goToStep(3)"
                                     >

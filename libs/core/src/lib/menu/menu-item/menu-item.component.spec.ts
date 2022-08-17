@@ -26,14 +26,12 @@ describe('MenuItemComponent', () => {
     let menuItem: MenuItemComponent;
     let menuInteractive: MenuInteractiveDirective;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestMenuItemComponent],
-                imports: [MenuModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestMenuItemComponent],
+            imports: [MenuModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMenuItemComponent);
@@ -152,25 +150,21 @@ describe('MenuItemComponent nested', () => {
     let nestedMenuItem: MenuItemComponent;
     let menuInteractiveWithNested: MenuInteractiveDirective;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TesNestedMenuItemComponent],
-                imports: [MenuModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TesNestedMenuItemComponent],
+            imports: [MenuModule]
+        }).compileComponents();
+    }));
 
-    beforeEach(
-        waitForAsync(() => {
-            fixture = TestBed.createComponent(TesNestedMenuItemComponent);
-            fixture.detectChanges();
-            menu = fixture.componentInstance.menu;
-            menuItemWithNestedMenu = fixture.componentInstance.menuItemWithNestedMenu;
-            nestedMenuItem = fixture.componentInstance.menuNestedItem;
-            menuInteractiveWithNested = menuItemWithNestedMenu.menuInteractive;
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        fixture = TestBed.createComponent(TesNestedMenuItemComponent);
+        fixture.detectChanges();
+        menu = fixture.componentInstance.menu;
+        menuItemWithNestedMenu = fixture.componentInstance.menuItemWithNestedMenu;
+        nestedMenuItem = fixture.componentInstance.menuNestedItem;
+        menuInteractiveWithNested = menuItemWithNestedMenu.menuInteractive;
+    }));
 
     it('should create', () => {
         expect(menu).toBeTruthy();

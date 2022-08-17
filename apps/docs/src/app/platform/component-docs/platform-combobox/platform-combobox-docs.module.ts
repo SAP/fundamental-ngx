@@ -23,6 +23,8 @@ import { ComboboxStateComponent } from './examples/combobox-states/combobox-stat
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ComboboxBylineExampleComponent } from './examples/combobox-byline/combobox-byline-example.component';
 import { ComboboxLoadingExampleComponent } from './examples/combobox-loading/combobox-loading-example.component';
+import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -30,7 +32,8 @@ const routes: Routes = [
         component: PlatformComboboxHeaderComponent,
         children: [
             { path: '', component: PlatformComboboxDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.combobox } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.combobox } },
+            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformCombobox') }
         ]
     }
 ];
@@ -46,7 +49,14 @@ const routes: Routes = [
         IconModule
     ],
     exports: [RouterModule],
-    providers: [{ provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true }],
+    providers: [
+        {
+            provide: MOBILE_MODE_CONFIG,
+            useValue: COMBOBOX_MOBILE_CONFIG,
+            multi: true
+        },
+        platformContentDensityModuleDeprecationsProvider('fdp-combobox')
+    ],
     declarations: [
         PlatformComboboxHeaderComponent,
         PlatformComboboxDocsComponent,

@@ -5,6 +5,7 @@
         class="fd-wizard-container-wrapper"
         #wrapperContainer
         fdScrollSpy
+        cdkScrollable
         [trackedTags]="['div']"
         (spyChange)="scrollSpyChange($event)"
     >
@@ -12,7 +13,7 @@
             <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
         </div>
     </div>
-    <div *ngIf="!appendToWizard" class="fd-wizard-container-wrapper">
+    <div *ngIf="!appendToWizard" cdkScrollable class="fd-wizard-container-wrapper">
         <div *ngFor="let contentTemplate of contentTemplates">
             <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
         </div>

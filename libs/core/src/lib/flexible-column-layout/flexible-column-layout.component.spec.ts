@@ -55,19 +55,17 @@ describe('FlexibleColumnLayoutComponent', () => {
     let testComponent: TestFlexibleColumnLayoutComponent;
     let fixture: ComponentFixture<TestFlexibleColumnLayoutComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [FlexibleColumnLayoutComponent, TestFlexibleColumnLayoutComponent],
-                providers: [
-                    {
-                        provide: FD_FLEXIBLE_LAYOUT_CONFIG,
-                        useValue: DEFAULT_FLEXIBLE_LAYOUT_CONFIG
-                    }
-                ]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [FlexibleColumnLayoutComponent, TestFlexibleColumnLayoutComponent],
+            providers: [
+                {
+                    provide: FD_FLEXIBLE_LAYOUT_CONFIG,
+                    useValue: DEFAULT_FLEXIBLE_LAYOUT_CONFIG
+                }
+            ]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestFlexibleColumnLayoutComponent);

@@ -12,6 +12,7 @@ import { PlatformNumberStepInputExampleComponent } from './platform-step-input-e
 import { PlatformNumberStepInputFormExampleComponent } from './platform-step-input-examples/platform-number-step-input-reactive-example.component';
 import { PlatformNumberStepInputTemplateFormExampleComponent } from './platform-step-input-examples/platform-number-step-input-template-example.component';
 import { PlatformNumberStepInputStateExampleComponent } from './platform-step-input-examples/platform-number-step-input-state-example.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -39,6 +40,7 @@ const routes: Routes = [
         PlatformNumberStepInputFormExampleComponent,
         PlatformNumberStepInputTemplateFormExampleComponent,
         PlatformNumberStepInputStateExampleComponent
-    ]
+    ],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-number-step-input')]
 })
 export class PlatformStepInputDocsModule {}

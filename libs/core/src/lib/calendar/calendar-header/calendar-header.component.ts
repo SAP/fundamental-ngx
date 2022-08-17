@@ -72,10 +72,6 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     @Input()
     mobileLandscape = false;
 
-    /** Whether compact mode should be included into calendar */
-    @Input()
-    compact = false;
-
     /** Event emitted when the active view should change. */
     @Output()
     readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();

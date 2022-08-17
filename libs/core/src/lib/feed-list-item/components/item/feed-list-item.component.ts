@@ -7,8 +7,7 @@ import {
     SimpleChanges,
     ElementRef,
     OnInit,
-    OnChanges,
-    ChangeDetectorRef
+    OnChanges
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
@@ -49,7 +48,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
      * Max preview characters of Feed text. If you have more than max characters text, you can toggle preview/full text with more/less button.
      */
     @Input()
-    maxChars?: number;
+    maxChars: number;
 
     /**
      * Sets the `aria-label` attribute to the element.
@@ -64,16 +63,18 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     ariaLabelledby: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Text for more button
      */
     @Input()
-    moreLabel = 'More';
+    moreLabel: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Text for less button
      */
     @Input()
-    lessLabel = 'Less';
+    lessLabel: string;
 
     /**
      * Apply rich feed text, please note - we use a formatted text component with this option, it has a list of controlled tags and attibutes.
@@ -88,6 +89,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     @Input()
     mobile = false;
 
+    maxCharsAtDefault = false;
     /**
      * Apply body class by default
      */
@@ -105,11 +107,25 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     hasMore = false;
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(private readonly _elementRef: ElementRef) {}
 
+    setHasMore(): void {
+        if (this.text) {
+            this.hasMore = this.text.length > this.maxChars;
+        }
+    }
+
+    setDefaultMaxChars(): void {
+        this.maxChars = this.mobile ? 300 : 500;
+    }
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
+        if (!this.maxChars) {
+            this.setDefaultMaxChars();
+            this.maxCharsAtDefault = true;
+        }
+        this.setHasMore();
     }
 
     /** @hidden */
@@ -117,6 +133,8 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
         if ('class' in changes || 'isRichText' in changes) {
             this.buildComponentCssClass();
         }
+        this.maxCharsAtDefault && this.setDefaultMaxChars();
+        this.setHasMore();
     }
 
     @applyCssClass
@@ -136,11 +154,5 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     /** @hidden */
     toggleTextView(): void {
         this.isCollapsed = !this.isCollapsed;
-    }
-
-    /** @hidden */
-    checkCharCount(isMore: boolean): void {
-        this.hasMore = isMore;
-        this._changeDetectorRef.detectChanges();
     }
 }

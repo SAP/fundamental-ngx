@@ -43,15 +43,13 @@ describe('PopoverMobileComponent', () => {
     let popoverMobileComponent: PopoverMobileComponent;
     let fixture: ComponentFixture<TestPopoverWrapperComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestPopoverWrapperComponent],
-                imports: [PopoverModule, OverlayModule, A11yModule, PopoverMobileModule],
-                providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestPopoverWrapperComponent],
+            imports: [PopoverModule, OverlayModule, A11yModule, PopoverMobileModule],
+            providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
+        }).compileComponents();
+    }));
 
     beforeEach(() => setup());
 

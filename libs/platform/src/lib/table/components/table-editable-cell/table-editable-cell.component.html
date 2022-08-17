@@ -2,8 +2,7 @@
     <ng-container [ngSwitch]="column.dataType">
         <fdp-input
             *ngSwitchCase="'number'"
-            placeholder="Enter value"
-            i18n-placeholder="@@platformTableEditableCellNumberPlaceholder"
+            [placeholder]="'platformTable.editableCellNumberPlaceholder' | fdTranslate"
             [(ngModel)]="columnValue"
             [name]="_controlUniqName"
             type="number"
@@ -11,16 +10,14 @@
         <fdp-date-picker
             type="single"
             *ngSwitchCase="'date'"
-            placeholder="Enter value"
-            i18n-placeholder="@@platformTableEditableCellDatePlaceholder"
+            [placeholder]="'platformTable.editableCellDatePlaceholder' | fdTranslate"
             [name]="_controlUniqName"
             [allowNull]="false"
             [(ngModel)]="columnValue"
         ></fdp-date-picker>
         <fdp-switch *ngSwitchCase="'boolean'" [(ngModel)]="columnValue" [name]="_controlUniqName"></fdp-switch>
         <fdp-input
-            placeholder="Enter value"
-            i18n-placeholder="@@platformTableEditableCellStringPlaceholder"
+            [placeholder]="'platformTable.editableCellStringPlaceholder' | fdTranslate"
             *ngSwitchDefault
             [(ngModel)]="columnValue"
             [name]="_controlUniqName"

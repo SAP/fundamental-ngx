@@ -29,7 +29,7 @@
                         <button
                             fd-toolbar-item
                             fd-button
-                            [compact]="true"
+                            fdCompact
                             fdType="positive"
                             (click)="closePage($event)"
                             label="Accept"
@@ -38,7 +38,7 @@
                         <button
                             fd-toolbar-item
                             fd-button
-                            [compact]="true"
+                            fdCompact
                             fdType="negative"
                             (click)="closePage($event)"
                             label="Reject"
@@ -99,6 +99,13 @@
                 maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum.
                 Corporis, nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad provident
                 similique, voluptatibus obcaecati perferendis excepturi.
+                <fd-icon
+                    glyph="question-mark"
+                    fd-inline-help="Inline Help Tooltip"
+                    tabindex="0"
+                    aria-describedby="fd-inline-help-default"
+                    ariaLabel="Inline Help Tooltip"
+                ></fd-icon>
                 <br />
                 <br />
                 <br />

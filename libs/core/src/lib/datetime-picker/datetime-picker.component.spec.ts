@@ -11,13 +11,11 @@ describe('DatetimePickerComponent', () => {
     let fixture: ComponentFixture<DatetimePickerComponent<FdDate>>;
     let datetimeFormats: DateTimeFormats;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [DatetimePickerModule, FdDatetimeModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [DatetimePickerModule, FdDatetimeModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent<DatetimePickerComponent<FdDate>>(DatetimePickerComponent);

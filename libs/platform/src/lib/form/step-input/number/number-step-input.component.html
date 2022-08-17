@@ -4,7 +4,7 @@
         [class.is-focus]="focused"
         [class.is-readonly]="!editable"
         [class.is-disabled]="disabled"
-        [class.fd-step-input--compact]="contentDensity | isCompactDensity"
+        [class.fd-step-input--compact]="contentDensityObserver.isCompact"
         [class.fd-step-input--without-buttons]="showLabels"
         [class]="state ? 'is-' + state : ''"
     >
@@ -14,7 +14,6 @@
             type="button"
             fd-button
             fdType="transparent"
-            [compact]="contentDensity | isCompactDensity"
             [glyph]="showLabels ? null : 'less'"
             fdpStepInputDecrement
             [attr.aria-disabled]="disabled || !canDecrement"
@@ -27,7 +26,7 @@
         <input
             #inputElementRef
             class="fd-input fd-input--no-number-spinner fd-step-input__input"
-            [class.fd-input--compact]="contentDensity | isCompactDensity"
+            [class.fd-input--compact]="contentDensityObserver.isCompact"
             [id]="id"
             [name]="name"
             [disabled]="disabled"
@@ -50,7 +49,6 @@
             type="button"
             fd-button
             fdType="transparent"
-            [compact]="contentDensity | isCompactDensity"
             [glyph]="showLabels ? null : 'add'"
             fdpStepInputIncrement
             [attr.aria-disabled]="disabled || !canIncrement"

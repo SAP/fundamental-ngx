@@ -1,14 +1,14 @@
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { TabsModule } from '../tabs.module';
 import { TabNavComponent } from './tab-nav.component';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/services/content-density.service';
 
 @Component({
     selector: 'fd-test-tabs',
     template: `
-        <nav fd-tab-nav>
+        <nav fd-tab-nav [fdCompact]="compact">
             <div fd-tab-item>
                 <a fd-tab-link [active]="true"> Link </a>
             </div>
@@ -27,6 +27,7 @@ class TestNavWrapperComponent {
     @ViewChild('fdTabLink', { read: TabLinkDirective })
     tabLink: TabLinkDirective;
 
+    compact = false;
     showLastTab = true;
 }
 
@@ -34,15 +35,13 @@ describe('TabNavDirective', () => {
     let component: TabNavComponent;
     let fixture: ComponentFixture<TestNavWrapperComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestNavWrapperComponent],
-                imports: [TabsModule],
-                providers: [ContentDensityService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestNavWrapperComponent],
+            imports: [TabsModule],
+            providers: [RtlService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNavWrapperComponent);
@@ -54,16 +53,18 @@ describe('TabNavDirective', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should handle content density when compact input is not provided', () => {
-        spyOn(component, 'buildComponentCssClass');
-        component.ngOnInit();
-        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
-        expect(component.buildComponentCssClass).toHaveBeenCalled();
+    it('should consume content density', () => {
+        fixture.componentInstance.compact = true;
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.fd-tabs--compact')).toBeTruthy();
+        fixture.componentInstance.compact = false;
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.fd-tabs--compact')).toBeFalsy();
     });
 
     it('should handle ngAfterContentInit', () => {
         fixture.componentInstance.tabNavDirective.ngAfterContentInit();
-        expect(fixture.componentInstance.tabNavDirective.tabLinks.length).toBe(4);
+        expect(fixture.componentInstance.tabNavDirective.tabLinks.length).toBe(6);
     });
 
     it('should react on query list change', fakeAsync(() => {
@@ -82,43 +83,16 @@ describe('TabNavDirective', () => {
     it('should react on keydown', fakeAsync(() => {
         fixture.componentInstance.tabNavDirective.ngAfterContentInit();
 
-        spyOn(component, 'selectTab').and.callThrough();
+        const link = component.links.get(2)!;
 
-        fixture.componentInstance.tabLink.keyDown.emit(<any>{ key: 'ArrowRight', preventDefault: () => {} });
-        fixture.componentInstance.tabLink.keyDown.emit(<any>{ key: 'Enter', preventDefault: () => {} });
+        const focusedSpy = spyOn(link.focused, 'emit').and.callThrough();
 
-        tick(10);
-        fixture.detectChanges();
-
-        expect(component.selectTab).toHaveBeenCalledWith(3);
-    }));
-
-    it('should handle disabled state', fakeAsync(() => {
-        fixture.componentInstance.tabNavDirective.ngAfterContentInit();
-
-        spyOn(component, 'selectTab').and.callThrough();
-
-        fixture.componentInstance.tabLink.keyDown.emit(<any>{ key: 'ArrowRight', preventDefault: () => {} });
-        fixture.componentInstance.tabLink.keyDown.emit(<any>{ key: 'Enter', preventDefault: () => {} });
+        component.elementRef().nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowRight' }));
+        link.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
 
         tick(10);
         fixture.detectChanges();
 
-        expect(component.selectTab).toHaveBeenCalledWith(3);
-    }));
-
-    it('should call select tab on service event', fakeAsync(() => {
-        component.ngAfterContentInit();
-        component.selectTab(1);
-
-        tick(10);
-        fixture.detectChanges();
-        spyOn(component as any, 'selectTab').and.callThrough();
-
-        (component as any)._tabsService.tabSelected.next(2);
-
-        tick(10);
-        fixture.detectChanges();
-        expect(component.selectTab).toHaveBeenCalledWith(2);
+        expect(focusedSpy).toHaveBeenCalled();
     }));
 });

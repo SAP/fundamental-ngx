@@ -1,14 +1,5 @@
-import {
-    Directive,
-    ElementRef,
-    HostBinding,
-    HostListener,
-    Inject,
-    Input,
-    OnInit,
-    Optional,
-    SkipSelf
-} from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Inject, Input, OnInit, Optional, Output, SkipSelf } from '@angular/core';
+import { OverflowLayoutFocusableItem } from '../interfaces/overflow-focusable-item.interface';
 import { OverflowItemRef } from '../interfaces/overflow-item-ref.interface';
 import { OverflowItem } from '../interfaces/overflow-item.interface';
 import { OverflowLayoutComponent } from '../overflow-layout.component';
@@ -28,10 +19,6 @@ import { FD_OVERFLOW_ITEM } from '../tokens/overflow-item.token';
     ]
 })
 export class OverflowLayoutItemDirective implements OverflowItem, OnInit {
-    /** Whether the item should be focusable. */
-    @Input()
-    focusable = false;
-
     /** Whether to force the visibility of the item. */
     @Input()
     set forceVisibility(value: boolean) {
@@ -46,6 +33,13 @@ export class OverflowLayoutItemDirective implements OverflowItem, OnInit {
     get forceVisibility(): boolean {
         return this._forceVisibility;
     }
+
+    /**
+     * Event emitted when `hidden` property has been changed.
+     */
+    @Output()
+    hiddenChange = new EventEmitter<boolean>();
+
     /**
      * Whether the item is hidden.
      */
@@ -53,20 +47,17 @@ export class OverflowLayoutItemDirective implements OverflowItem, OnInit {
         return this._overflowItemRef?.hidden === true;
     }
 
-    /** @hidden */
-    @HostBinding('attr.tabindex')
-    private get _tabindex(): number {
-        return this.focusable ? 0 : -1;
+    set hidden(value: boolean) {
+        this.hiddenChange.emit(value);
     }
+
+    /**
+     * Focusable item for keyboard navigation.
+     */
+    focusableItem: OverflowLayoutFocusableItem;
 
     /** @hidden */
     private _forceVisibility = false;
-
-    /** @hidden */
-    @HostListener('focus')
-    onFocus(): void {
-        this._overflowContainer.setFocusedElement(this);
-    }
 
     /** @hidden */
     constructor(
@@ -79,18 +70,5 @@ export class OverflowLayoutItemDirective implements OverflowItem, OnInit {
     ngOnInit(): void {
         this._overflowItemRef?.setElementRef(this.elmRef);
         this._overflowItemRef?.setOverflowItem(this);
-    }
-
-    /**
-     * Focuses connected to the DOM element.
-     */
-    focus(): void {
-        // Since we use detach() method of ViewContainerRef to remove elements from the visible list,
-        // we need to check that element is connected to the DOM.
-        this.elmRef.nativeElement.isConnected
-            ? this.elmRef.nativeElement.focus()
-            : this._overflowItemRef?.elementRef.nativeElement.isConnected
-            ? this._overflowItemRef?.elementRef.nativeElement.focus()
-            : this._overflowItemRef?.overflowItem.elmRef.nativeElement.focus();
     }
 }

@@ -12,9 +12,13 @@ export class PlatformRadioGroupListExampleComponent {
     favoriteOption = '';
     favoriteOption2 = 'Winter';
 
-    form1 = new FormGroup({});
+    form1 = new FormGroup({
+        radiol1: new FormControl('Winter')
+    });
 
-    form2 = new FormGroup({});
+    form2 = new FormGroup({
+        radiol2: new FormControl('')
+    });
     form2Data = { radiol2: 'Winter' };
 
     form3 = new FormGroup({

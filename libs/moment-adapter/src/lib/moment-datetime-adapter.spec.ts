@@ -25,13 +25,11 @@ describe('MomentDatetimeAdapter', () => {
     let platform: Platform;
     let adapter: MomentDatetimeAdapter;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [MomentDatetimeModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MomentDatetimeModule]
+        }).compileComponents();
+    }));
 
     beforeEach(inject([DatetimeAdapter, Platform], (dateAdapter: MomentDatetimeAdapter, _platform: Platform) => {
         adapter = dateAdapter;
@@ -528,14 +526,12 @@ describe('MomentDatetimeAdapter', () => {
 describe('MomentDatetimeAdapter with LOCALE_ID override', () => {
     let adapter: MomentDatetimeAdapter;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [MomentDatetimeModule],
-                providers: [{ provide: LOCALE_ID, useValue: 'da-DK' }]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MomentDatetimeModule],
+            providers: [{ provide: LOCALE_ID, useValue: 'da-DK' }]
+        }).compileComponents();
+    }));
 
     beforeEach(inject([DatetimeAdapter], (_adapter: MomentDatetimeAdapter) => {
         adapter = _adapter;

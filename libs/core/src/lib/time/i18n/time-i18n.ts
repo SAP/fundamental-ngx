@@ -1,10 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 
 /**
+ * @deprecated use i18n capabilities instead
  * Provides i18n support for labels and meridian naming inside the time component.
  */
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class TimeI18n {
+    constructor() {
+        if (isDevMode()) {
+            console.warn('TimeI18n is deprecated and will furtherly be removed. Use i18n capabilities instead.');
+        }
+    }
     /** Aria label for entire component */
     componentAriaName = 'Time picker';
 

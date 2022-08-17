@@ -1,10 +1,10 @@
 <form [formGroup]="tokenizerExampleForm" (ngSubmit)="onSubmit()">
     <div fd-form-item>
-        <fd-tokenizer [compact]="true">
+        <fd-tokenizer fdCompact>
             <fd-token
                 (onCloseClick)="removeToken(token)"
                 *ngFor="let token of tokens"
-                [compact]="true"
+                fdCompact
                 [readOnly]="token.readOnly"
                 >{{ token.text }}</fd-token
             >
@@ -12,7 +12,7 @@
                 formControlName="inputControl"
                 fd-tokenizer-input
                 fd-form-control
-                [compact]="true"
+                fdCompact
                 placeholder="Field placeholder text"
             />
         </fd-tokenizer>

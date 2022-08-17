@@ -92,15 +92,13 @@ describe('NestedItemDirective', () => {
     let fixture: ComponentFixture<TestNestedContainerComponent>;
     let itemService: NestedItemService;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [NestedListModule, PopoverModule],
-                declarations: [TestNestedContainerComponent],
-                providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [NestedListModule, PopoverModule],
+            declarations: [TestNestedContainerComponent],
+            providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);

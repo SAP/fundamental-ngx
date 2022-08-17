@@ -51,14 +51,12 @@ describe('ProductSwitchBodyComponent', () => {
 
     let component, componentInstance: ProductSwitchBodyComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PopoverModule, ButtonModule, DragAndDropModule, DragDropModule],
-                declarations: [ProductSwitchBodyComponent, TestComponent]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PopoverModule, ButtonModule, DragAndDropModule, DragDropModule],
+            declarations: [ProductSwitchBodyComponent, TestComponent]
+        });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -93,6 +91,17 @@ describe('ProductSwitchBodyComponent', () => {
         el.nativeElement.dispatchEvent(keyboardEvent);
 
         expect(document.activeElement).toBe(nextEl);
+    });
+
+    it('should handle keydown arrow right when the last item is focused', () => {
+        spyOn(componentInstance, '_isListMode').and.returnValue(false);
+        const els = fixture.debugElement.queryAll(By.css('li'));
+        const el = els[els.length - 1];
+        el.nativeElement.focus();
+        const keyboardEvent = createKeyboardEvent('keydown', RIGHT_ARROW, 'ArrowRight', el.nativeElement);
+        el.nativeElement.dispatchEvent(keyboardEvent);
+
+        expect(document.activeElement).toBe(els[0].nativeElement);
     });
 
     it('should handle no list keydown arrow left', () => {
