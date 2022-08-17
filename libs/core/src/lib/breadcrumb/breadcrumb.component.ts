@@ -1,5 +1,4 @@
 import {
-    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -8,7 +7,6 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
-    HostListener,
     Input,
     isDevMode,
     OnInit,
@@ -19,13 +17,11 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
-import { DestroyedService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
-import { BehaviorSubject, Subscription, takeUntil } from 'rxjs';
+import { DestroyedService, RtlService } from '@fundamental-ngx/core/utils';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
-import { FocusKeyManager } from '@angular/cdk/a11y';
-import { TAB } from '@angular/cdk/keycodes';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -50,7 +46,7 @@ import { TAB } from '@angular/cdk/keycodes';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DestroyedService]
 })
-export class BreadcrumbComponent implements OnInit, AfterViewInit, AfterContentInit {
+export class BreadcrumbComponent implements OnInit, AfterViewInit {
     /**
      * @deprecated
      * Breadcrumbs component now uses more advanced calculation mechanism without the need of specifying the container element.
@@ -74,14 +70,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit, AfterContentI
     /** Tabindex of the breadcrumb. */
     @Input()
     tabIndex = '0';
-
-    /** Allow keyboard navigation through breadcrumb link */
-    @Input()
-    arrowNavigation = false;
-
-    /** Whenever arrow navigation is allowed it emits an event when Tab key pressed */
-    @Output()
-    tabOut: EventEmitter<void> = new EventEmitter<void>();
 
     /**
      * Event emitted when visible items count is changed.
@@ -120,37 +108,12 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit, AfterContentI
     _placement$ = new BehaviorSubject<Placement>('bottom-start');
 
     /** @hidden */
-    private _isRtl = false;
-
-    /** @hidden */
-    private _keyManager: FocusKeyManager<BreadcrumbItemComponent>;
-
-    /** @hidden */
-    private _subscriptions = new Subscription();
-
-    /** @hidden */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
         private _onDestroy$: DestroyedService,
         @Optional() private _rtlService: RtlService | null,
         private _cdr: ChangeDetectorRef
     ) {}
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        if (this.arrowNavigation) {
-            this._keyManager = new FocusKeyManager<BreadcrumbItemComponent>(this.breadcrumbItems)
-                .withWrap(false)
-                .skipPredicate((item) => !item.breadcrumbLink)
-                .withHorizontalOrientation(this._isRtl ? 'rtl' : 'ltr');
-
-            this._subscriptions.add(
-                this._keyManager.tabOut.subscribe(() => {
-                    this.tabOut.emit();
-                })
-            );
-        }
-    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -180,23 +143,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit, AfterContentI
         this._setItems();
 
         this._contentItems.changes.subscribe(() => this._setItems());
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    handleArrowKeydown(event: KeyboardEvent): void {
-        if (this.arrowNavigation) {
-            if (this._keyManager.activeItem === null) {
-                this._keyManager.setActiveItem(0);
-            }
-
-            // prevent tab key default behaviour to avoid unexpected children focus
-            if (KeyUtil.isKeyCode(event, TAB)) {
-                event.preventDefault();
-            }
-
-            this._keyManager.onKeydown(event);
-        }
     }
 
     /** @hidden */
