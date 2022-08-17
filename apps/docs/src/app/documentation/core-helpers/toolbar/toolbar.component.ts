@@ -14,6 +14,7 @@ import {
     FD_LANGUAGE,
     FD_LANGUAGE_ALBANIAN,
     FD_LANGUAGE_BULGARIAN,
+    FD_LANGUAGE_CZECH,
     FD_LANGUAGE_ENGLISH,
     FD_LANGUAGE_FRENCH,
     FD_LANGUAGE_GEORGIAN,
@@ -70,7 +71,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         { name: 'Български', value: FD_LANGUAGE_BULGARIAN },
         // { name: '中国人', value: FD_LANGUAGE_CHINESE }, TODO: uncomment when translations are provided
         // { name: 'Hrvatski', value: FD_LANGUAGE_CROATIAN }, TODO: uncomment when translations are provided
-        // { name: 'Český', value: FD_LANGUAGE_CZECH }, TODO: uncomment when translations are provided
+        { name: 'Český', value: FD_LANGUAGE_CZECH },
         { name: 'English', value: FD_LANGUAGE_ENGLISH },
         { name: 'Français', value: FD_LANGUAGE_FRENCH },
         { name: 'ქართული', value: FD_LANGUAGE_GEORGIAN },
