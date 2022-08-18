@@ -30,7 +30,7 @@
                             fd-toolbar-item
                             fd-button
                             fdType="positive"
-                            (click)="closePage()"
+                            (click)="handleAction('Page is accepted')"
                             label="Accept"
                             title="Accept"
                         ></button>
@@ -38,7 +38,7 @@
                             fd-toolbar-item
                             fd-button
                             fdType="negative"
-                            (click)="closePage()"
+                            (click)="handleAction('Page is rejected')"
                             label="Reject"
                             title="Reject"
                         ></button>
