@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.23...v0.36.0-rc.24) (2022-08-18)
+
+
+### Features
+
+* **core,platform:** bring Spanish language for i18n ([#8564](https://github.com/SAP/fundamental-ngx/issues/8564)) ([75303df](https://github.com/SAP/fundamental-ngx/commit/75303dfbbc505e809b48fe0a5e515e688d70af8d))
+
 ## [0.36.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.22...v0.36.0-rc.23) (2022-08-18)
 
 
