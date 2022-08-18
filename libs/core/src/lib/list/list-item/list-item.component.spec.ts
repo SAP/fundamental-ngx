@@ -6,7 +6,7 @@ import { ButtonModule } from '../../button/button.module';
 @Component({
     template: `
         <li #directiveElement fd-list-item [noData]="noData" [action]="action" [selected]="selected">
-            <a *ngIf="link" fd-list-link>link</a>
+            <a #linkElement *ngIf="link" fd-list-link>link</a>
             <button fd-button #button></button>
             List Item Test Text
         </li>
@@ -15,6 +15,9 @@ import { ButtonModule } from '../../button/button.module';
 class TestComponent {
     @ViewChild('directiveElement', { read: ElementRef })
     ref: ElementRef;
+
+    @ViewChild('linkElement', { read: ElementRef })
+    linkRef: ElementRef;
 
     @ViewChild('button', { read: ElementRef })
     buttonRef: ElementRef;
@@ -69,5 +72,23 @@ describe('ListItemComponent', () => {
     it('should assign button class', () => {
         fixture.detectChanges();
         expect(component.buttonRef.nativeElement.classList).toContain('fd-list__button');
+    });
+
+    it('should handle keyboard events for the link', () => {
+        component.link = true;
+        fixture.detectChanges();
+        const downEvent = new KeyboardEvent('keydown', {
+            key: 'Space'
+        });
+        component.ref.nativeElement.dispatchEvent(downEvent);
+
+        expect(component.linkRef.nativeElement.classList).toContain('is-active');
+
+        const upEvent = new KeyboardEvent('keyup', {
+            key: 'Space'
+        });
+        component.ref.nativeElement.dispatchEvent(upEvent);
+
+        expect(component.linkRef.nativeElement.classList).not.toContain('is-active');
     });
 });
