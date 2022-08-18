@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.22...v0.36.0-rc.23) (2022-08-18)
+
+
+### Bug Fixes
+
+* **core:** prevent page scroll on up/down arrow key in table ([#8562](https://github.com/SAP/fundamental-ngx/issues/8562)) ([06c8a57](https://github.com/SAP/fundamental-ngx/commit/06c8a576c99b3efe4da579ad4b34be8c0679c3fd))
+
 ## [0.36.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.21...v0.36.0-rc.22) (2022-08-17)
 
 
