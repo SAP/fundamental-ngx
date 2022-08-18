@@ -71,11 +71,13 @@
                         </ng-container>
                     </ng-container>
                 </a>
+
                 <div fd-tab-process-icon *ngIf="mode === 'process' && !last"></div>
             </div>
 
             <div *ngIf="tab.isHeader" fd-tab-separator></div>
         </ng-container>
+
         <ng-container *fdOverflowExpand="let tabs; items: _tabArray">
             <fd-item-expand
                 [fdMenuTrigger]="menu"
@@ -84,6 +86,7 @@
                 (keydown)="_onTriggerKeydown($event, menu)"
             >
             </fd-item-expand>
+
             <fd-menu #menu>
                 <li
                     fd-menu-item

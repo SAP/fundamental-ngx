@@ -282,7 +282,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
 
     /** @hidden */
     private _listenOnTabPanelsAndInitiallyExpandTabPanel(): void {
-        this._tabPanelsChange$.pipe(delay(0), takeUntil(this._onDestroy$)).subscribe(() => {
+        this._tabPanelsChange$.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             const activeTab = this._tabArray.find((_tab) => _tab.active);
             let tab: Nullable<TabInfo>;
 
@@ -322,8 +322,10 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     /** @hidden */
     private _activateExpandableTab(tabPanel: TabPanelComponent, expand: boolean): void {
         const collapse = this.collapsibleTabs && !expand;
+
         this._tabArray.forEach((tab) => {
             const isActive = tab.panel === tabPanel && !collapse;
+
             tab.panel._expand(isActive);
             tab.active = isActive;
         });
@@ -344,6 +346,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         if (detectChanges) {
             this._detectChanges();
         }
+
         this.selectedTabChange.emit(tabPanel);
     }
 

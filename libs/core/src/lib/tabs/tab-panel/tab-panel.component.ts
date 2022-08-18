@@ -5,6 +5,7 @@ import {
     ContentChild,
     ElementRef,
     EventEmitter,
+    HostBinding,
     Input,
     OnChanges,
     Optional,
@@ -33,9 +34,7 @@ export class TabPanelStateChange {
     host: {
         role: 'tabpanel',
         class: 'fd-tabs__panel',
-        '[attr.id]': 'id',
-        '[class.is-expanded]': 'expanded',
-        '[attr.aria-expanded]': 'expanded ? true : null'
+        '[attr.id]': 'id'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -95,6 +94,14 @@ export class TabPanelComponent implements OnChanges {
     /** @hidden */
     _forcedVisibility = false;
 
+    /** @hidden */
+    @HostBinding('class.is-expanded')
+    _expandedClass = false;
+
+    /** @hidden */
+    @HostBinding('attr.aria-expanded')
+    _expandedAria: Nullable<boolean> = null;
+
     /** @hidden Whether to display tab panel content */
     private _expanded = false;
 
@@ -134,6 +141,17 @@ export class TabPanelComponent implements OnChanges {
             }
 
             this._changeDetRef.detectChanges();
+
+            // Done this way to avoid "NG0100: Expression has changed after it was checked"
+            setTimeout(() => {
+                this._updateHost();
+            });
         }
+    }
+
+    /** @hidden */
+    private _updateHost(): void {
+        this._expandedClass = this.expanded;
+        this._expandedAria = this.expanded ? true : null;
     }
 }
