@@ -66,29 +66,6 @@
         </li>
     </ng-container>
 </ul>
-<div
-    #listItem
-    *ngIf="loadMore && !loadOnScroll"
-    (click)="_getMoreData()"
-    fd-list-item
-    (keydown)="_loadOnkeyPress($event)"
-    class="fd-list__item fd-list__item--growing fd-list__item--action"
-    [tabindex]="0"
-    role="button"
->
-    <button class="fd-list__title">
-        <fd-busy-indicator
-            size="m"
-            class="fd-busy-indicator-custom"
-            [block]="true"
-            [loading]="_loading"
-            role="alert"
-            [attr.aria-labelledby]="_loading ? 'loadingOnScroll' : 'loadingOnbutton'"
-        >
-        </fd-busy-indicator>
-        {{ loadTitle }} <ng-content selector="#load"></ng-content>
-    </button>
-</div>
 
 <ng-template #thenBlock>
     <ng-container *ngFor="let item of _items; let i = index">
