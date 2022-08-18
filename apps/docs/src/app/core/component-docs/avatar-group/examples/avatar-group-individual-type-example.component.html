@@ -162,7 +162,7 @@
                             <fd-button-bar
                                 *ngIf="isDetailStage"
                                 (click)="openOverflowMain()"
-                                glyph="navigation-left-arrow"
+                                [glyph]="isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'"
                                 fdType="transparent"
                                 aria-label="Back"
                                 title="Back"

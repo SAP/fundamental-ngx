@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 
 import { PopoverComponent, PopoverBodyComponent } from '@fundamental-ngx/core/popover';
-import { KeyUtil, Size } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService, Size } from '@fundamental-ngx/core/utils';
 import { AvatarGroupDataExampleService } from './avatar-group-data-example.service';
 
 @Component({
@@ -32,7 +32,14 @@ export class AvatarGroupGroupTypeExampleComponent {
         );
     }
 
-    constructor(private readonly avatarGroupDataExampleService: AvatarGroupDataExampleService) {}
+    constructor(
+        private readonly avatarGroupDataExampleService: AvatarGroupDataExampleService,
+        private _rtlService: RtlService
+    ) {}
+
+    get isRtl(): boolean {
+        return this._rtlService.rtl.getValue();
+    }
 
     isOpenChanged(isOpened: boolean): void {
         if (isOpened) {
