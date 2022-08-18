@@ -118,6 +118,7 @@ export class TableComponent implements AfterViewInit, OnDestroy, FdTable {
     _onCellKeydown(event: KeyboardEvent, cell: TableCellDirective): void {
         const cellElement = cell.elementRef.nativeElement;
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
+            event.preventDefault();
             const data = cell.getCellPosition();
             if (!data) {
                 return;
