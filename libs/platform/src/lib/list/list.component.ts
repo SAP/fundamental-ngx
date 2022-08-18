@@ -10,6 +10,7 @@ import {
     forwardRef,
     Host,
     HostListener,
+    Inject,
     Input,
     OnDestroy,
     OnInit,
@@ -25,7 +26,7 @@ import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { NgControl, NgForm } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { isObservable, Observable, of, Subject, Subscription } from 'rxjs';
+import { firstValueFrom, isObservable, Observable, of, Subject, Subscription } from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
@@ -44,6 +45,7 @@ import {
 } from '@fundamental-ngx/platform/shared';
 import { BaseListItem, ListItemDef } from './base-list-item';
 import { ListConfig } from './list.config';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 
 export type SelectionType = 'none' | 'multi' | 'single' | 'delete';
 export type ListType = 'inactive' | 'active' | 'detail';
@@ -91,7 +93,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
     /** Label used on announce message of data was loaded for screen readers */
     @Input()
-    loadingLabel = 'Loading';
+    loadingLabel = '';
 
     /** Wait time for new items */
     @Input()
@@ -276,6 +278,9 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     /** @hidden */
     protected _dataSource: FdpListDataSource<T>;
 
+    /** @hidden */
+    private _translationResolver = new TranslationResolver();
+
     /**
      * @hidden
      * Whether Navigation mode is included to list component
@@ -353,10 +358,14 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     private _clickSubscription = new Subscription();
 
     /** @hidden */
+    private _language: FdLanguage;
+
+    /** @hidden */
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
         public itemEl: ElementRef<HTMLElement>,
         private _liveAnnouncer: LiveAnnouncer,
+        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
         @Optional() @Self() public ngControl: NgControl,
         @Optional() @Self() public ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
@@ -364,6 +373,12 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         protected _listConfig?: ListConfig
     ) {
         super(_changeDetectorRef, ngControl, ngForm, formField, formControl);
+        this._init();
+    }
+
+    /** @hidden */
+    private async _init(): Promise<void> {
+        this._language = await firstValueFrom(this._language$);
     }
 
     /**
@@ -492,7 +507,10 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
                     if (isBlank(data)) {
                         console.error('===Invalid Response recived===');
                     }
-
+                    this.loadingLabel = this._translationResolver.resolve(
+                        this._language,
+                        'platformList.loadingAriaLabel'
+                    );
                     this._liveAnnouncer.announce(this.loadingLabel, 'assertive');
                 }),
                 delay(this.delayTime),
