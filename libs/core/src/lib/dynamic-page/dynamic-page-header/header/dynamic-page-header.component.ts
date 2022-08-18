@@ -13,17 +13,18 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { addClassNameToElement } from '../../utils';
+import { DynamicPageLayoutActionsComponent } from '../actions/dynamic-page-layout-actions.component';
 import { DynamicPageGlobalActionsComponent } from '../actions/dynamic-page-global-actions.component';
 import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-content.component';
-
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 export const ActionSquashBreakpointPx = 1280;
 
@@ -62,6 +63,9 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /** @hidden */
     @ContentChild(DynamicPageGlobalActionsComponent)
     _globalActions: DynamicPageGlobalActionsComponent;
+
+    @ContentChild(DynamicPageLayoutActionsComponent)
+    _layoutActions: DynamicPageLayoutActionsComponent;
 
     /** @hidden */
     @ContentChild(DynamicPageTitleContentComponent)
