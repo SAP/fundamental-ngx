@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.27...v0.36.0-rc.28) (2022-08-19)
+
+
+### Bug Fixes
+
+* **core:** table sorting example fix ([#8568](https://github.com/SAP/fundamental-ngx/issues/8568)) ([3b3f61c](https://github.com/SAP/fundamental-ngx/commit/3b3f61c91688fc5b7ada94d9901e2aa867018df7))
+
 ## [0.36.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.26...v0.36.0-rc.27) (2022-08-19)
 
 
