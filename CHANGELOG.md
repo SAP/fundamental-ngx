@@ -1,4 +1,25 @@
 
+## [0.36.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.24...v0.36.0-rc.25) (2022-08-19)
+
+
+### Bug Fixes
+
+* **platform:** table reset button behaviour ([#8563](https://github.com/SAP/fundamental-ngx/issues/8563)) ([c85e2e2](https://github.com/SAP/fundamental-ngx/commit/c85e2e2f498b5a419120b75104e81f913bc45697))
+
+## [0.36.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.23...v0.36.0-rc.24) (2022-08-18)
+
+
+### Features
+
+* **core,platform:** bring Spanish language for i18n ([#8564](https://github.com/SAP/fundamental-ngx/issues/8564)) ([75303df](https://github.com/SAP/fundamental-ngx/commit/75303dfbbc505e809b48fe0a5e515e688d70af8d))
+
+## [0.36.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.22...v0.36.0-rc.23) (2022-08-18)
+
+
+### Bug Fixes
+
+* **core:** prevent page scroll on up/down arrow key in table ([#8562](https://github.com/SAP/fundamental-ngx/issues/8562)) ([06c8a57](https://github.com/SAP/fundamental-ngx/commit/06c8a576c99b3efe4da579ad4b34be8c0679c3fd))
+
 ## [0.36.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.21...v0.36.0-rc.22) (2022-08-17)
 
 

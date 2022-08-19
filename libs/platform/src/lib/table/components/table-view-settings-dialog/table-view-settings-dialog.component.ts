@@ -68,6 +68,10 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         return this._table;
     }
 
+    /** Whether to allow selecting '(Not sorted)' option in sorting dialog. */
+    @Input()
+    allowDisablingSorting = true;
+
     /** @hidden */
     @ContentChildren(forwardRef(() => TableViewSettingsFilterComponent))
     filters: QueryList<TableViewSettingsFilterComponent>;
@@ -103,7 +107,8 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         const dialogData: SettingsSortDialogData = {
             columns: columns.filter(({ sortable }) => sortable),
             direction: sortBy?.direction,
-            field: sortBy?.field
+            field: sortBy?.field,
+            allowDisablingSorting: this.allowDisablingSorting
         };
 
         const dialogRef = this._dialogService.open(

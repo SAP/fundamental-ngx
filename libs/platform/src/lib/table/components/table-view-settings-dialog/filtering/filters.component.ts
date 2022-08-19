@@ -6,6 +6,7 @@ import {
     forwardRef,
     ViewChild
 } from '@angular/core';
+import equal from 'fast-deep-equal/es6';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
@@ -13,6 +14,7 @@ import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { FilterType } from '../../../enums/filter-type.enum';
 import { CollectionFilter } from '../../../interfaces/collection-filter.interface';
+import { Table } from '../../../table';
 import { TableColumn } from '../../table-column/table-column';
 import { TableViewSettingsFilterComponent } from '../../table-view-settings-dialog/table-view-settings-filter.component';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
@@ -62,9 +64,13 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     /** Table column key associated with the currently selected filter  */
     activeFilterColumnKey: Nullable<string> = null;
 
+    /** @hidden */
     private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     /** Indicates when reset command is available */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
+
+    /** @hidden */
+    private _initialFilters: CollectionFilter[] = [];
 
     /**
      * Current FiltersViewStep component to render.
@@ -75,7 +81,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
      * keeping reference to the conditionally rendered active step.
      * Each "FilterStepView" has template refs for dialog.title and dialog.body template
      * */
-    @ViewChild(FILTERS_VIEW_STEP_TOKEN as any)
+    @ViewChild(FILTERS_VIEW_STEP_TOKEN)
     set setActiveFilterStepView(view: FiltersViewStep) {
         this.activeFilterStepView = view;
         this._cd.detectChanges();
@@ -85,12 +91,18 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     activeFilterStepView: FiltersViewStep;
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef<FiltersDialogData>, private _cd: ChangeDetectorRef) {
+    constructor(
+        public readonly dialogRef: DialogRef<FiltersDialogData>,
+        private readonly _cd: ChangeDetectorRef,
+        private readonly _table: Table
+    ) {
         const dialogData = this.dialogRef.data;
         this.filterBy = [...dialogData.filterBy];
         this.viewSettingsFilters = dialogData.viewSettingsFilters;
         this.columns = dialogData.columns;
-        this._isResetAvailableSubject$.next(this.filterBy.length > 0);
+
+        this._setInitialFilters();
+        this._compareSelectedFilters();
     }
 
     /** Need it to keep activeFilterStepView rendering up to date */
@@ -132,7 +144,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
             this.filterBy.push(filter);
         }
 
-        this._isResetAvailableSubject$.next(this.filterBy.length > 0);
+        this._compareSelectedFilters();
 
         // To fix "Expression has changed after it was checked"
         this._cd.detectChanges();
@@ -140,7 +152,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
 
     /** Reset changes to the initial state */
     reset(): void {
-        this.filterBy = [];
+        this.filterBy = this._initialFilters;
         this._isResetAvailableSubject$.next(false);
         this._cd.detectChanges();
     }
@@ -154,5 +166,19 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     confirm(): void {
         const result: FiltersDialogResultData = { filterBy: this.filterBy };
         this.dialogRef.close(result);
+    }
+
+    /** @hidden */
+    private _setInitialFilters(): void {
+        this._initialFilters = this._table.initialFilterBy ?? [];
+    }
+
+    /** @hidden */
+    private _compareSelectedFilters(): void {
+        if (equal(this._initialFilters, this.filterBy)) {
+            return;
+        }
+
+        this._isResetAvailableSubject$.next(true);
     }
 }
