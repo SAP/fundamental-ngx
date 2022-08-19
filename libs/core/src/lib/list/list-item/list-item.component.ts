@@ -179,7 +179,7 @@ export class ListItemComponent
     _relatedGroupHeaderId: string | null;
 
     /** @hidden */
-    _listItemRole = 'listitem';
+    private _listItemRole = 'listitem';
 
     /** @hidden */
     @HostBinding('attr.aria-describedBy')
