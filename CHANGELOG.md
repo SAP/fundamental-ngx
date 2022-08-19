@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.25...v0.36.0-rc.26) (2022-08-19)
+
+
+### Bug Fixes
+
+* **platform:** list a11y issues ([#7983](https://github.com/SAP/fundamental-ngx/issues/7983)) ([9ebb798](https://github.com/SAP/fundamental-ngx/commit/9ebb798f935c394ef009c2dbeec7b1ad3fccfec0))
+
 ## [0.36.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.24...v0.36.0-rc.25) (2022-08-19)
 
 
