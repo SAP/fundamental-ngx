@@ -8,7 +8,7 @@ import {
     FilterableColumnDataType
 } from '../enums';
 
-interface BaseCollectionFilter<T> {
+export interface BaseCollectionFilter<T> {
     field: string;
     type?: FilterableColumnDataType;
     value: T;
@@ -36,8 +36,9 @@ export interface CollectionSelectFilter extends BaseCollectionFilter<any[]> {
     strategy: FilterDefaultStrategy;
 }
 
-export interface CollectionCustomFilter extends BaseCollectionFilter<{ [key: string]: any }> {
-    strategy: FilterDefaultStrategy;
+export interface CollectionCustomFilter<P extends FilterStrategy = FilterDefaultStrategy>
+    extends BaseCollectionFilter<{ [key: string]: any }> {
+    strategy: P;
 }
 
 export type CollectionFilter =
@@ -46,7 +47,7 @@ export type CollectionFilter =
     | CollectionDateFilter
     | CollectionSelectFilter
     | CollectionBooleanFilter
-    | CollectionCustomFilter;
+    | CollectionCustomFilter<FilterStrategy>;
 
 export type CollectionFilterGroupStrategy = 'and' | 'or';
 

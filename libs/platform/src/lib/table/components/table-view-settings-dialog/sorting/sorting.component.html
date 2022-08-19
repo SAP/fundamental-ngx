@@ -47,7 +47,7 @@
                 <span fd-list-title>{{ 'platformTable.sortDialogSortByHeader' | fdTranslate }}</span>
             </li>
 
-            <li fd-list-item [selected]="field === NOT_SORTED_OPTION_VALUE">
+            <li fd-list-item *ngIf="allowDisablingSorting" [selected]="field === NOT_SORTED_OPTION_VALUE">
                 <fd-radio-button
                     name="sort-by"
                     [value]="NOT_SORTED_OPTION_VALUE"
