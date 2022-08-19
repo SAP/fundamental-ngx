@@ -23,7 +23,6 @@ import listWithMoreButton from '!./platform-list-examples/platform-list-with-mor
 import listWithMoreButtonTs from '!./platform-list-examples/platform-list-with-more-button-example.component?raw';
 import listWithNoData from '!./platform-list-examples/platform-list-with-nodata-example.component.html?raw';
 import listWithUnRead from '!./platform-list-examples/platform-list-with-unread-example.component.html?raw';
-import listWithNoSeperator from '!./platform-list-examples/platform-list-with-no-seperator-example.component.html?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -192,14 +191,6 @@ export class PlatformListDocsComponent {
             language: 'html',
             code: listWithNoData,
             fileName: 'platform-list-with-nodata-example'
-        }
-    ];
-
-    listWithNoSeperator: ExampleFile[] = [
-        {
-            language: 'html',
-            code: listWithNoSeperator,
-            fileName: 'platform-list-with-no-seperator-example'
         }
     ];
 

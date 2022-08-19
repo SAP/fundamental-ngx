@@ -22,7 +22,6 @@ import {
     PlatformListExampleComponent,
     PlatformListWithGroupHeaderExampleComponent,
     PlatformListWithNoDataExampleComponent,
-    PlatformListWithNoSeperatorExampleComponent,
     PlatformListWithUnReadExampleComponent
 } from './platform-list-examples/platform-list-example.component';
 import { PlatformListBorderLessExampleComponent } from './platform-list-examples/platform-list-border-less-example.component';
@@ -85,7 +84,6 @@ const routes: Routes = [
         PlatformListWithButtonsExampleComponent,
         PlatformListWithNoDataExampleComponent,
         PlatformListWithMoreButtonExampleComponent,
-        PlatformListWithNoSeperatorExampleComponent,
         PlatformListWithUnReadExampleComponent
     ],
     providers: [platformContentDensityModuleDeprecationsProvider('fd-list')]

@@ -59,9 +59,6 @@ export class ListPo extends BaseComponentPo {
     // no data examples
     noDataListItems = 'fdp-platform-list-with-nodata-example li';
     noDataCompactList = 'fdp-platform-list-with-nodata-example fdp-list:nth-of-type(2) ul';
-    // no separator examples
-    noSepList = 'fdp-platform-list-with-no-seperator-example ul';
-    noSepListItems = 'fdp-platform-list-with-no-seperator-example li';
     // unread data examples
     unreadListItems = 'fdp-platform-list-with-unread-example li';
     unreadListItemText = 'fdp-platform-list-with-unread-example li span';

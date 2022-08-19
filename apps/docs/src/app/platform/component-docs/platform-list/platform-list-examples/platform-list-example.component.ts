@@ -19,12 +19,6 @@ export class PlatformListWithNoDataExampleComponent {}
 export class PlatformListWithUnReadExampleComponent {}
 
 @Component({
-    selector: 'fdp-platform-list-with-no-seperator-example',
-    templateUrl: './platform-list-with-no-seperator-example.component.html'
-})
-export class PlatformListWithNoSeperatorExampleComponent {}
-
-@Component({
     selector: 'fdp-platform-list-with-group-header-example',
     templateUrl: './platform-list-with-group-header-example.component.html'
 })
