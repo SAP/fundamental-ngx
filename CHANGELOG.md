@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.26...v0.36.0-rc.27) (2022-08-19)
+
+
+### Bug Fixes
+
+* **core:** table arrow prevent default ([#8567](https://github.com/SAP/fundamental-ngx/issues/8567)) ([d98d5cc](https://github.com/SAP/fundamental-ngx/commit/d98d5cc0ddbd19c4d9a6f03e2bf392a149d5bd75))
+
 ## [0.36.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.25...v0.36.0-rc.26) (2022-08-19)
 
 
