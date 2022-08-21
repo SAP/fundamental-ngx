@@ -242,7 +242,7 @@
     "wdio-chromedriver-service": "6.0.4",
     "wdio-html-format-reporter": "0.4.0",
     "wdio-image-comparison-service": "2.0.0",
-    "webdriverio": "7.16.16"
+    "webdriverio": "7.22.0"
   },
   "lint-staged": {
     "*.{js,ts,html,md,scss,css,json,yml}": "nx format:write --files=",
