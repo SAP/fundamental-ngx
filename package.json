@@ -234,7 +234,7 @@
     "rollup": "2.68.0",
     "standard-version": "9.3.2",
     "ts-node": "9.1.1",
-    "typedoc": "0.21.9",
+    "typedoc": "0.23.10",
     "typedoc-plugin-merge-modules": "2.1.1",
     "typescript": "4.7.4",
     "wait-on": "6.0.1",
