@@ -29,6 +29,7 @@ import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/core/ut
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ListFocusItem } from '../list-focus-item.model';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 let listItemUniqueId = 0;
 
@@ -73,7 +74,7 @@ export class ListItemComponent
      * Note, that it is being combined with internal values for this component
      */
     @Input()
-    ariaDescribedBy: string;
+    ariaDescribedBy: Nullable<string>;
 
     /** Whether there is no data inside list item */
     @Input()

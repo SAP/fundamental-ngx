@@ -1,4 +1,53 @@
 
+## [0.36.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.30...v0.36.0-rc.31) (2022-08-22)
+
+
+### Bug Fixes
+
+* **core:** avatar group defect hunting ([#8571](https://github.com/SAP/fundamental-ngx/issues/8571)) ([41d8743](https://github.com/SAP/fundamental-ngx/commit/41d8743a45c6499fa354ef6e1b79ccf576005758))
+
+## [0.36.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.29...v0.36.0-rc.30) (2022-08-22)
+
+
+### Bug Fixes
+
+* **core:** allow click of entire separator in flexible column layout ([#8572](https://github.com/SAP/fundamental-ngx/issues/8572)) ([b2cf2e6](https://github.com/SAP/fundamental-ngx/commit/b2cf2e694822b9dfa0bd60295db134f7e31d2664))
+
+## [0.36.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.28...v0.36.0-rc.29) (2022-08-22)
+
+
+### Bug Fixes
+
+* **docs:** adjust split button docs description ([#8573](https://github.com/SAP/fundamental-ngx/issues/8573)) ([7623e1b](https://github.com/SAP/fundamental-ngx/commit/7623e1b221fcd12135be0aa20b94b6ded7305282))
+
+## [0.36.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.27...v0.36.0-rc.28) (2022-08-19)
+
+
+### Bug Fixes
+
+* **core:** table sorting example fix ([#8568](https://github.com/SAP/fundamental-ngx/issues/8568)) ([3b3f61c](https://github.com/SAP/fundamental-ngx/commit/3b3f61c91688fc5b7ada94d9901e2aa867018df7))
+
+## [0.36.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.26...v0.36.0-rc.27) (2022-08-19)
+
+
+### Bug Fixes
+
+* **core:** table arrow prevent default ([#8567](https://github.com/SAP/fundamental-ngx/issues/8567)) ([d98d5cc](https://github.com/SAP/fundamental-ngx/commit/d98d5cc0ddbd19c4d9a6f03e2bf392a149d5bd75))
+
+## [0.36.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.25...v0.36.0-rc.26) (2022-08-19)
+
+
+### Bug Fixes
+
+* **platform:** list a11y issues ([#7983](https://github.com/SAP/fundamental-ngx/issues/7983)) ([9ebb798](https://github.com/SAP/fundamental-ngx/commit/9ebb798f935c394ef009c2dbeec7b1ad3fccfec0))
+
+## [0.36.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.24...v0.36.0-rc.25) (2022-08-19)
+
+
+### Bug Fixes
+
+* **platform:** table reset button behaviour ([#8563](https://github.com/SAP/fundamental-ngx/issues/8563)) ([c85e2e2](https://github.com/SAP/fundamental-ngx/commit/c85e2e2f498b5a419120b75104e81f913bc45697))
+
 ## [0.36.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.23...v0.36.0-rc.24) (2022-08-18)
 
 

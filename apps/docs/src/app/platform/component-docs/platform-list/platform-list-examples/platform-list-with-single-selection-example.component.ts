@@ -41,7 +41,7 @@ export class PlatformListWithSingleSelectionExampleComponent implements AfterVie
 
     ngAfterViewInit(): void {
         const toolbar = this._elementRef.nativeElement.querySelector('fd-toolbar');
-        this._render.setAttribute(toolbar, 'tabindex', '0');
+        this._render.setAttribute(toolbar, 'tabindex', '-1');
         this._render.setStyle(toolbar, 'outline', 'none');
     }
 

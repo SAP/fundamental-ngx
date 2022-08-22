@@ -96,8 +96,14 @@
 
 <fd-docs-section-title id="sortable" componentName="table"> Column Sorting</fd-docs-section-title>
 <description>
-    Use <code>[sortable]="true"</code> to mark a column as an sortable one.<br />
-    In this example <code>Name</code>, <code>Description</code> and <code>Price</code> columns can be sorted.
+    <p>Use <code>[sortable]="true"</code> to mark a column as an sortable one.</p>
+    <p>
+        Developers can restrict selecting "Not Sorted" option by providing
+        <code>[allowDisablingSorting]="false"</code> input property for the
+        <code>fdp-table-view-settings-dialog</code> component and providing
+        <a routerLink="/platform/table" fragment="initial-state">[initialSortBy]</a> input property of the table.
+    </p>
+    <p>In this example <code>Name</code>, <code>Description</code> and <code>Price</code> columns can be sorted.</p>
 </description>
 <component-example>
     <fdp-platform-table-sortable-example></fdp-platform-table-sortable-example>

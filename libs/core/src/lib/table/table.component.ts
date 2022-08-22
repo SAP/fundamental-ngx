@@ -123,6 +123,7 @@ export class TableComponent implements AfterViewInit, OnDestroy, FdTable {
             if (!data) {
                 return;
             }
+            event.preventDefault();
             const dir = KeyUtil.isKeyCode(event, DOWN_ARROW) ? 1 : -1;
             // if navigating up&down through the rows, attempt to focus the cell in the next row within the same section (e.g. within body)
             const focused = this._focusCellInTableSection(data?.origin, data.row + dir, data?.col);

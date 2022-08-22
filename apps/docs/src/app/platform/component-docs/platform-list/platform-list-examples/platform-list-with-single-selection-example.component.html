@@ -1,5 +1,4 @@
-<h3>Cozy Mode</h3>
-<fd-toolbar fdType="info" [active]="true">
+<fd-toolbar fdType="info" [active]="true" [tabindex]="0">
     <label fd-toolbar-label>{{ _selectedItem }} : selected</label>
 </fd-toolbar>
 <fdp-list
@@ -10,7 +9,6 @@
     (selectedItemChange)="_showItemInfo($event)"
     [selection]="true"
     [ariaMultiselectable]="false"
-    [ariaLabel]="_selectedItem ? _selectedItem + 'selected' : '0 Item selected'"
 >
     <fdp-standard-list-item
         *fdpItemDef="let address"

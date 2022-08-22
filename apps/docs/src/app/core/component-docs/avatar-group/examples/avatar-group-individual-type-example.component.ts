@@ -3,7 +3,7 @@ import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 
 import { AvatarGroupComponent } from '@fundamental-ngx/core/avatar-group';
 import { PopoverComponent, PopoverBodyComponent } from '@fundamental-ngx/core/popover';
-import { KeyUtil, Size } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService, Size } from '@fundamental-ngx/core/utils';
 import { AvatarGroupDataExampleService } from './avatar-group-data-example.service';
 
 @Component({
@@ -26,7 +26,14 @@ export class AvatarGroupIndividualTypeExampleComponent {
         return this.overflowPopoverStage === 'detail';
     }
 
-    constructor(private readonly avatarGroupDataExampleService: AvatarGroupDataExampleService) {}
+    constructor(
+        private readonly avatarGroupDataExampleService: AvatarGroupDataExampleService,
+        private _rtlService: RtlService
+    ) {}
+
+    get isRtl(): boolean {
+        return this._rtlService.rtl.getValue();
+    }
 
     openOverflowDetails(idx: number): void {
         const visibleItemsCount = this.avatarGroup.allItemsCount - this.avatarGroup.overflowItemsCount;
