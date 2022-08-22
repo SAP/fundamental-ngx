@@ -7,6 +7,7 @@ import {
     EventEmitter,
     HostBinding,
     Input,
+    NgZone,
     OnChanges,
     Optional,
     Output,
@@ -16,7 +17,7 @@ import {
 import { TabListComponent } from '../tab-list.component';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
 import { TabItemState } from '../tab-item/tab-item.directive';
-import { Subject } from 'rxjs';
+import { first, Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 let tabPanelUniqueId = 0;
@@ -109,6 +110,7 @@ export class TabPanelComponent implements OnChanges {
     constructor(
         public elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
+        private _ngZone: NgZone,
         @Optional() private readonly _tabsComponent: TabListComponent | null
     ) {}
 
@@ -142,10 +144,7 @@ export class TabPanelComponent implements OnChanges {
 
             this._changeDetRef.detectChanges();
 
-            // Done this way to avoid "NG0100: Expression has changed after it was checked"
-            setTimeout(() => {
-                this._updateHost();
-            });
+            this._ngZone.onStable.pipe(first()).subscribe(() => this._updateHost());
         }
     }
 
