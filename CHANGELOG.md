@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.28...v0.36.0-rc.29) (2022-08-22)
+
+
+### Bug Fixes
+
+* **docs:** adjust split button docs description ([#8573](https://github.com/SAP/fundamental-ngx/issues/8573)) ([7623e1b](https://github.com/SAP/fundamental-ngx/commit/7623e1b221fcd12135be0aa20b94b6ded7305282))
+
 ## [0.36.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.27...v0.36.0-rc.28) (2022-08-19)
 
 
