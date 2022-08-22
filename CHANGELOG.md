@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.30...v0.36.0-rc.31) (2022-08-22)
+
+
+### Bug Fixes
+
+* **core:** avatar group defect hunting ([#8571](https://github.com/SAP/fundamental-ngx/issues/8571)) ([41d8743](https://github.com/SAP/fundamental-ngx/commit/41d8743a45c6499fa354ef6e1b79ccf576005758))
+
 ## [0.36.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.29...v0.36.0-rc.30) (2022-08-22)
 
 
