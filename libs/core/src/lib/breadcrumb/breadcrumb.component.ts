@@ -7,6 +7,7 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
+    HostListener,
     Input,
     isDevMode,
     OnInit,
@@ -17,11 +18,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
-import { DestroyedService, RtlService } from '@fundamental-ngx/core/utils';
+import { DestroyedService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -146,9 +148,36 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
     }
 
     /** @hidden */
-    _keyDownHandle(event: Event): void {
+    _overflowKeyDownHandle(event: Event): void {
         this._menuComponent.toggle();
         event.preventDefault();
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    _arrowKeyDownHandle(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
+            event.preventDefault();
+            const breadcrumbItemElements = this.elementRef.nativeElement.querySelectorAll(
+                '.fd-breadcrumb__item .fd-link'
+            );
+            for (let i = 0; i < breadcrumbItemElements.length; i++) {
+                if (document.activeElement === breadcrumbItemElements[i]) {
+                    if (
+                        breadcrumbItemElements[i - 1] &&
+                        (KeyUtil.isKeyCode(event, UP_ARROW) || KeyUtil.isKeyCode(event, LEFT_ARROW))
+                    ) {
+                        (breadcrumbItemElements[i - 1] as HTMLElement).focus();
+                    } else if (
+                        breadcrumbItemElements[i + 1] &&
+                        (KeyUtil.isKeyCode(event, DOWN_ARROW) || KeyUtil.isKeyCode(event, RIGHT_ARROW))
+                    ) {
+                        (breadcrumbItemElements[i + 1] as HTMLElement).focus();
+                    }
+                    break;
+                }
+            }
+        }
     }
 
     /** @hidden */
