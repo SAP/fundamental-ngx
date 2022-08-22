@@ -35,7 +35,8 @@ export class TabPanelStateChange {
     host: {
         role: 'tabpanel',
         class: 'fd-tabs__panel',
-        '[attr.id]': 'id'
+        '[id]': '_panelId',
+        '[attr.aria-labelledby]': 'id'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -45,11 +46,11 @@ export class TabPanelComponent implements OnChanges {
     @Input()
     id: string = 'fd-tab-panel' + tabPanelUniqueId++;
 
-    /** Aria-label of the tab. Also applied to the tab header. */
+    /** Aria-label of the tab. */
     @Input()
     ariaLabel: Nullable<string>;
 
-    /** Id of the element that labels the tab. Also applied to the tab header. */
+    /** Id of the element that labels the tab. */
     @Input()
     ariaLabelledBy: Nullable<string>;
 
@@ -99,12 +100,13 @@ export class TabPanelComponent implements OnChanges {
     @HostBinding('class.is-expanded')
     _expandedClass = false;
 
-    /** @hidden */
-    @HostBinding('attr.aria-expanded')
-    _expandedAria: Nullable<boolean> = null;
-
     /** @hidden Whether to display tab panel content */
     private _expanded = false;
+
+    /** @hidden */
+    get _panelId(): string {
+        return this.id + '-panel';
+    }
 
     /** @hidden */
     constructor(
@@ -151,6 +153,5 @@ export class TabPanelComponent implements OnChanges {
     /** @hidden */
     private _updateHost(): void {
         this._expandedClass = this.expanded;
-        this._expandedAria = this.expanded ? true : null;
     }
 }

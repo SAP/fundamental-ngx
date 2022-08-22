@@ -75,4 +75,9 @@ export class TabInfo {
     get forcedVisibility(): boolean {
         return this.panel._forcedVisibility;
     }
+
+    /** @hidden */
+    get panelId(): string {
+        return this.panel._panelId;
+    }
 }

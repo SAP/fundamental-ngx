@@ -24,12 +24,14 @@
             >
                 <a
                     fd-tab-link
-                    [attr.aria-controls]="tab.id"
+                    role="tab"
+                    [id]="tab.id"
+                    [attr.aria-controls]="tab.panelId"
                     [attr.aria-label]="tab.ariaLabel || null"
+                    [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
                     fdOverflowLayoutFocusableItem
                     [focusable]="tab.active"
                     [navigable]="!tab.disabled"
-                    [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
                     [active]="tab.active"
                     [disabled]="tab.disabled"
                     (keydown)="_tabHeaderKeydownHandler($event, tab.panel)"
