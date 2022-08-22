@@ -110,6 +110,9 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
     _placement$ = new BehaviorSubject<Placement>('bottom-start');
 
     /** @hidden */
+    private _isRtl = false;
+
+    /** @hidden */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
         private _onDestroy$: DestroyedService,
@@ -119,9 +122,10 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     ngOnInit(): void {
-        this._rtlService?.rtl
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((value) => this._placement$.next(value ? 'bottom-end' : 'bottom-start'));
+        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((value) => {
+            this._isRtl = value;
+            this._placement$.next(value ? 'bottom-end' : 'bottom-start');
+        });
     }
 
     /** @hidden */
@@ -165,12 +169,16 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
                 if (document.activeElement === breadcrumbItemElements[i]) {
                     if (
                         breadcrumbItemElements[i - 1] &&
-                        (KeyUtil.isKeyCode(event, UP_ARROW) || KeyUtil.isKeyCode(event, LEFT_ARROW))
+                        (KeyUtil.isKeyCode(event, UP_ARROW) ||
+                            (!this._isRtl && KeyUtil.isKeyCode(event, LEFT_ARROW)) ||
+                            (this._isRtl && KeyUtil.isKeyCode(event, RIGHT_ARROW)))
                     ) {
                         (breadcrumbItemElements[i - 1] as HTMLElement).focus();
                     } else if (
                         breadcrumbItemElements[i + 1] &&
-                        (KeyUtil.isKeyCode(event, DOWN_ARROW) || KeyUtil.isKeyCode(event, RIGHT_ARROW))
+                        (KeyUtil.isKeyCode(event, DOWN_ARROW) ||
+                            (!this._isRtl && KeyUtil.isKeyCode(event, RIGHT_ARROW)) ||
+                            (this._isRtl && KeyUtil.isKeyCode(event, LEFT_ARROW)))
                     ) {
                         (breadcrumbItemElements[i + 1] as HTMLElement).focus();
                     }

@@ -90,4 +90,17 @@ describe('BreadcrumbComponent', () => {
 
         expect(hiddenItemsCountSpy).toHaveBeenCalledWith(2);
     }));
+
+    it('should test arrow key focus functionality', () => {
+        const breadcrumbLinks = component.elementRef.nativeElement.querySelectorAll('.fd-breadcrumb__item .fd-link');
+        if (breadcrumbLinks) {
+            const firstLink = breadcrumbLinks[0] as HTMLElement;
+            firstLink.focus();
+            component.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+            const secondLink = breadcrumbLinks[1] as HTMLElement;
+            expect(document.activeElement).toBe(secondLink);
+            component.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
+            expect(document.activeElement).toBe(firstLink);
+        }
+    });
 });
