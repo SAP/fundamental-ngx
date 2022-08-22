@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.32...v0.36.0-rc.33) (2022-08-22)
+
+
+### Bug Fixes
+
+* **docs:** alert playground and Inline alert - on page-load alert dismiss ([#8464](https://github.com/SAP/fundamental-ngx/issues/8464)) ([03e8884](https://github.com/SAP/fundamental-ngx/commit/03e8884ccf9663a8d9936cb91959f7ebbc1468c0))
+
 ## [0.36.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.31...v0.36.0-rc.32) (2022-08-22)
 
 
