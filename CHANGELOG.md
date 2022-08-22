@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.31...v0.36.0-rc.32) (2022-08-22)
+
+
+### Bug Fixes
+
+* **core:** space/enter support for list navigation links ([#8570](https://github.com/SAP/fundamental-ngx/issues/8570)) ([6ac68e0](https://github.com/SAP/fundamental-ngx/commit/6ac68e090787a235c879711496487f359fff3816))
+
 ## [0.36.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.30...v0.36.0-rc.31) (2022-08-22)
 
 
