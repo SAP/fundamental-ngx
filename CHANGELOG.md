@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.29...v0.36.0-rc.30) (2022-08-22)
+
+
+### Bug Fixes
+
+* **core:** allow click of entire separator in flexible column layout ([#8572](https://github.com/SAP/fundamental-ngx/issues/8572)) ([b2cf2e6](https://github.com/SAP/fundamental-ngx/commit/b2cf2e694822b9dfa0bd60295db134f7e31d2664))
+
 ## [0.36.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.28...v0.36.0-rc.29) (2022-08-22)
 
 
