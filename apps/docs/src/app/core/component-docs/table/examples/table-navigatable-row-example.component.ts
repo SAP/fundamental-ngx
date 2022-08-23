@@ -9,6 +9,7 @@ interface TableIem {
     column3: string;
     date: string;
     navigatable: boolean;
+    active: boolean;
 }
 
 interface TableMobileItem {
@@ -33,21 +34,24 @@ export class TableNavigatableRowExampleComponent {
             column2: 'Row 1',
             column3: 'Row 1',
             date: '09-07-18',
-            navigatable: true
+            navigatable: true,
+            active: false
         },
         {
             column1: 'user.name@email.com',
             column2: 'Row 2',
             column3: 'Row 2',
             date: '09-07-18',
-            navigatable: false
+            navigatable: false,
+            active: false
         },
         {
             column1: 'user.name@email.com',
             column2: 'Row 3',
             column3: 'Row 3',
             date: '09-07-18',
-            navigatable: true
+            navigatable: true,
+            active: false
         }
     ];
 
@@ -86,5 +90,13 @@ export class TableNavigatableRowExampleComponent {
         if (row.navigatable) {
             alert('Navigation event took place!');
         }
+    }
+
+    setActiveItem(index: number): void {
+        this.navigatableRows.map((item, rowIndex) => {
+            item.active = rowIndex === index;
+            return item;
+        });
+        alert(this.navigatableRows[index]);
     }
 }

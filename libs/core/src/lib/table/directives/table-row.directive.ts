@@ -7,10 +7,12 @@ import {
     Input,
     OnDestroy,
     OnInit,
+    Optional,
     QueryList
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
+import { FdTable } from '../fd-table.interface';
 
 import { TableService } from '../table.service';
 import { TableCellDirective } from './table-cell.directive';
@@ -29,36 +31,48 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     @HostBinding('class.fd-table__row')
     fdTableRowClass = true;
 
-    /** Whether or not the table row is activable */
+    /**  Whether the table row is activable */
     @HostBinding('class.fd-table__row--activable')
     @Input()
     activable = false;
 
-    /** Whether or not the table row is hoverable */
+    /** Whether to highlight active row when clicked. */
+    @Input()
+    highlightActive = false;
+
+    /**  Whether the table row is hoverable */
     @HostBinding('class.fd-table__row--hoverable')
     @Input()
     hoverable = false;
 
-    /** Whether or not the table row is focusable */
+    /**  Whether the table row is focusable */
     @HostBinding('class.fd-table__row--focusable')
     @Input()
     focusable = false;
 
-    /** Whether or not the table row is main row, it's concerned only on pop in mode */
+    /**  Whether the table row is main row, it's concerned only on pop in mode */
     @HostBinding('class.fd-table__row--main')
     @Input()
     main = false;
 
-    /** Whether or not the table row is secondary row, it's concerned only on pop in mode */
+    /**  Whether the table row is secondary row, it's concerned only on pop in mode */
     @HostBinding('class.fd-table__row--secondary')
     @Input()
     secondary = false;
+
+    @HostBinding('class.is-selected')
+    @Input()
+    active = false;
 
     /** @hidden */
     propagateKeysSubscription: Subscription;
 
     /** @hidden */
-    constructor(private _changeDetRef: ChangeDetectorRef, private _tableService: TableService) {}
+    constructor(
+        private _changeDetRef: ChangeDetectorRef,
+        private _tableService: TableService,
+        @Optional() private _table: FdTable
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {

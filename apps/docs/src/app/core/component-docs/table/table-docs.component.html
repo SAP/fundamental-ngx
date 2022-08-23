@@ -142,10 +142,20 @@
     Table with navigatable rows
 </fd-docs-section-title>
 <description>
-    To represent that the row is navigatable put icon or button to the last column and set <code>[activable]</code> and
-    <code>[hoverable]</code> properties of the row Hide navigation icons for the non-navigatable rows. Disable
-    navigation buttons for the non-navigatable rows. Upon navigation event, either the user is taken to a new page, or
-    the event is handled by an implementation such as <code>(click)="myFunction()"</code>
+    <p>
+        To represent that the row is navigatable put icon or button to the last column and set
+        <code>[activable]</code> and <code>[hoverable]</code> properties of the row Hide navigation icons for the
+        non-navigatable rows.
+    </p>
+    <p>Disable navigation buttons for the non-navigatable rows.</p>
+    <p>
+        Upon navigation event, either the user is taken to a new page, or the event is handled by an implementation such
+        as <code>(click)="myFunction()"</code>
+    </p>
+    <p>
+        If you want to keep selected item highlighted, use <code>[active]="true"</code> input property for the selected
+        row.
+    </p>
 </description>
 <component-example>
     <fd-table-navigatable-row-example></fd-table-navigatable-row-example>

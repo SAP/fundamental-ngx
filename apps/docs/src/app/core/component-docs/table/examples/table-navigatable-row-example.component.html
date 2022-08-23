@@ -1,4 +1,6 @@
-<h4 class="table-example-popin-title" id="table-example-popin-title-1">Entire row is navigatable, used with icon</h4>
+<h4 class="table-example-popin-title" id="table-example-popin-title-1">
+    Entire row is navigatable, used with icon and highlighted active item.
+</h4>
 
 <table fd-table aria-label="With navigatable rows" aria-describedby="table-example-popin-title-1">
     <thead fd-table-header [noBorderX]="true">
@@ -17,7 +19,8 @@
             fd-table-row
             [hoverable]="row.navigatable"
             [activable]="row.navigatable"
-            (click)="alert(row)"
+            [active]="row.active"
+            (click)="setActiveItem(i)"
         >
             <td fd-table-cell>
                 <a fd-link href="#">{{ row.column1 }}</a>
