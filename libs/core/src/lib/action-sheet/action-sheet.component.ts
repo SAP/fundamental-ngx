@@ -8,7 +8,6 @@ import {
     ContentChild,
     ContentChildren,
     EventEmitter,
-    HostListener,
     Input,
     OnDestroy,
     Optional,
@@ -118,7 +117,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     ngAfterContentInit(): void {
         this._initializeChildrenState();
-        this._keyboardSupportService.setKeyboardService(this.actionSheetItems, false);
+        this._keyboardSupportService.setKeyboardService(this.actionSheetItems, true);
         this._listenOnItemsChange();
         this._actionControlHandle();
     }
@@ -135,14 +134,6 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    keyDownHandler(event: KeyboardEvent): void {
-        if (this.keyboardSupport) {
-            this._keyboardSupportService.onKeyDown(event);
-        }
     }
 
     /** Method that opens action sheet */
@@ -169,9 +160,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
         this.isOpenChange.emit(isOpen);
 
-        if (isOpen) {
-            this._setItemActive(0);
-        }
+        isOpen ? this._setItemActive(0) : this.actionSheetControl._focus();
 
         this._changeDetectionRef.detectChanges();
     }
