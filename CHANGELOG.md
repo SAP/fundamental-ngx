@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.34...v0.36.0-rc.35) (2022-08-23)
+
+
+### Bug Fixes
+
+* **docs:** remove common  margin for buttons ([#8569](https://github.com/SAP/fundamental-ngx/issues/8569)) ([2fe805f](https://github.com/SAP/fundamental-ngx/commit/2fe805ffc6d5cbd4e674e6cbfc63d9a7b6fdde00))
+
 ## [0.36.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.33...v0.36.0-rc.34) (2022-08-23)
 
 
