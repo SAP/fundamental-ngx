@@ -307,12 +307,19 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     relationKey: string;
 
-    /** Whether row is navigatable.
+    /**
+     * Whether row is navigatable.
      * Pass boolean value to set state for the all rows.
      * Pass string value with the key of the row item's field to compute state for every single row.
      */
     @Input()
     rowNavigatable: string | boolean = false;
+
+    /**
+     * Whether to highlight navigated row.
+     */
+    @Input()
+    highlightNavigatedRow = false;
 
     /** Whether table row can be clicked */
     @Input()
@@ -687,6 +694,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _dragDropInProgress = false;
+
+    /** @hidden */
+    _navigatedRowIndex: number;
 
     /** @hidden */
     get _selectionColumnWidth(): number {
@@ -1352,6 +1362,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         }
 
         const rowIndex = this._tableRows.indexOf(row);
+
+        if (this.highlightNavigatedRow) {
+            this._navigatedRowIndex = rowIndex;
+        }
+
         this.rowNavigate.emit(new TableRowActivateEvent<T>(rowIndex, row.value));
     }
 
