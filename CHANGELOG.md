@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.33...v0.36.0-rc.34) (2022-08-23)
+
+
+### Bug Fixes
+
+* **core:** action-sheet focus bug ([#8458](https://github.com/SAP/fundamental-ngx/issues/8458)) ([5220013](https://github.com/SAP/fundamental-ngx/commit/5220013383eda1a1a7ca4b7e326bfcd0e735374b))
+
 ## [0.36.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.32...v0.36.0-rc.33) (2022-08-22)
 
 
