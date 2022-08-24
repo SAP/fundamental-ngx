@@ -986,7 +986,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         if (this.selectionMode === SelectionMode.SINGLE) {
             this._toggleSingleSelectableRow(row);
         } else if (this.selectionMode === this.SELECTION_MODE.MULTIPLE) {
-            this._toggleMultiSelectRow(row, rowIndex);
+            this._toggleMultiSelectRow(row);
         }
     }
 
@@ -1105,15 +1105,17 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * @hidden
      * Toggle selectable row in SelectionMode.MULTIPLE
      */
-    _toggleMultiSelectRow(rowToToggle: TableRow, index: number, event?: Event): void {
+    _toggleMultiSelectRow(rowToToggle: TableRow, event?: Event): void {
         if (this.selectionMode !== SelectionMode.MULTIPLE) {
             throw new Error('Unexpected selection mode');
         }
         const checked = (rowToToggle.checked = !rowToToggle.checked);
         const rows = this._tableRows;
+        const selectedIndex = this._tableRows.findIndex((row) => row === rowToToggle);
+
         const removed: TableRow<T>[] = [];
         const added: TableRow<T>[] = [];
-        this._rangeSelector.onRangeElementToggled(index, event as PointerEvent | KeyboardEvent);
+        this._rangeSelector.onRangeElementToggled(selectedIndex, event as PointerEvent | KeyboardEvent);
 
         this._rangeSelector.applyValueToEachInRange((idx) => {
             const row = rows[idx];
