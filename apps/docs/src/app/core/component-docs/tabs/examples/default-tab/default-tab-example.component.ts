@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './default-tab-example.component.html'
 })
 export class DefaultTabExampleComponent {
-    hide = false;
+    hide = true;
 }
