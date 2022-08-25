@@ -58,17 +58,11 @@ export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocus
 
     /** @hidden */
     focus(): void {
-        if (!this.skipSelfFocus) {
+        if (this.skipSelfFocus) {
+            this._focusFirstChild();
+        } else {
             this.elementRef.nativeElement.focus();
-            return;
         }
-        const tabbableElement = this._tabbableElementService.getTabbableElement(
-            this.elementRef.nativeElement,
-            false,
-            true
-        );
-        // Try to find first focusable child.
-        tabbableElement?.focus();
     }
 
     /** @hidden */
@@ -76,16 +70,19 @@ export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocus
     private _onFocus(): void {
         this._overflowContainer.setFocusedElement(this);
 
-        if (!this.skipSelfFocus) {
-            return;
+        if (this.skipSelfFocus) {
+            this._focusFirstChild();
         }
+    }
 
+    /** @hidden */
+    private _focusFirstChild(): void {
         const tabbableElement = this._tabbableElementService.getTabbableElement(
             this.elementRef.nativeElement,
             false,
             true
         );
-        // Pass the focus to the first tabbable child element.
+        // Try to find first focusable child.
         tabbableElement?.focus();
     }
 }
