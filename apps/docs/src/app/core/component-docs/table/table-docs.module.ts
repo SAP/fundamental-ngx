@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
@@ -68,7 +69,8 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         RouterModule.forChild(routes),
         SharedDocumentationModule,
-        BusyIndicatorModule
+        BusyIndicatorModule,
+        PopoverModule
     ],
     exports: [RouterModule],
     declarations: [

@@ -97,6 +97,6 @@ export class TableNavigatableRowExampleComponent {
             item.active = rowIndex === index;
             return item;
         });
-        alert(this.navigatableRows[index]);
+        this.alert(this.navigatableRows[index]);
     }
 }

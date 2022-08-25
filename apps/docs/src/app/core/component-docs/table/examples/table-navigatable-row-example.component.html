@@ -20,7 +20,7 @@
             [hoverable]="row.navigatable"
             [activable]="row.navigatable"
             [active]="row.active"
-            (click)="setActiveItem(i)"
+            (click)="row.navigatable ? setActiveItem(i) : null"
         >
             <td fd-table-cell>
                 <a fd-link href="#">{{ row.column1 }}</a>
