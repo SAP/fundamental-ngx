@@ -1,4 +1,5 @@
 import { Directive, ElementRef, HostBinding, HostListener, Inject, Input, OnInit, Optional } from '@angular/core';
+import { TabbableElementService } from '@fundamental-ngx/core/utils';
 import { OverflowLayoutFocusableItem } from '../interfaces/overflow-focusable-item.interface';
 import { OverflowItem } from '../interfaces/overflow-item.interface';
 import { OverflowLayoutComponent } from '../overflow-layout.component';
@@ -8,6 +9,7 @@ import { FD_OVERFLOW_ITEM } from '../tokens/overflow-item.token';
 @Directive({
     selector: '[fdOverflowLayoutFocusableItem], [fdOverflowLayoutItem][focusable]',
     providers: [
+        TabbableElementService,
         {
             provide: FD_OVERFLOW_FOCUSABLE_ITEM,
             useExisting: OverflowLayoutFocusableItemDirective
@@ -23,6 +25,11 @@ export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocus
     @Input()
     navigable = true;
 
+    /** Whether to search for the child focusable items instead of directive's element. */
+    @HostBinding('class.fd-overflow-layout__item--skip-focus')
+    @Input()
+    skipSelfFocus = false;
+
     /** @hidden */
     @HostBinding('attr.tabindex')
     private get _tabindex(): number {
@@ -35,16 +42,11 @@ export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocus
     }
 
     /** @hidden */
-    @HostListener('focus')
-    private _onFocus(): void {
-        this._overflowContainer.setFocusedElement(this);
-    }
-
-    /** @hidden */
     constructor(
         private readonly _overflowContainer: OverflowLayoutComponent,
         @Inject(FD_OVERFLOW_ITEM) @Optional() private readonly _overflowItem: OverflowItem,
-        public readonly elementRef: ElementRef<HTMLElement>
+        public readonly elementRef: ElementRef<HTMLElement>,
+        private readonly _tabbableElementService: TabbableElementService
     ) {}
 
     /** @hidden */
@@ -56,6 +58,34 @@ export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocus
 
     /** @hidden */
     focus(): void {
-        this.elementRef.nativeElement.focus();
+        if (!this.skipSelfFocus) {
+            this.elementRef.nativeElement.focus();
+            return;
+        }
+        const tabbableElement = this._tabbableElementService.getTabbableElement(
+            this.elementRef.nativeElement,
+            false,
+            true
+        );
+        // Try to find first focusable child.
+        tabbableElement?.focus();
+    }
+
+    /** @hidden */
+    @HostListener('focus')
+    private _onFocus(): void {
+        this._overflowContainer.setFocusedElement(this);
+
+        if (!this.skipSelfFocus) {
+            return;
+        }
+
+        const tabbableElement = this._tabbableElementService.getTabbableElement(
+            this.elementRef.nativeElement,
+            false,
+            true
+        );
+        // Pass the focus to the first tabbable child element.
+        tabbableElement?.focus();
     }
 }

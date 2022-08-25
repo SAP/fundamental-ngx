@@ -63,5 +63,12 @@ $fd-block: 'fd-overflow-layout';
             opacity: 0 !important;
             position: absolute !important;
         }
+
+        &--skip-focus {
+            &:focus,
+            &:focus-visible {
+                outline: none;
+            }
+        }
     }
 }

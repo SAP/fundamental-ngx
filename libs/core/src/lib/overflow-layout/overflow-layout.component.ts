@@ -305,6 +305,8 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
                     if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
                         event.preventDefault();
 
+                        console.log('something');
+
                         // passing the event to key manager so, we get a change fired
                         this._overflowLayoutService._keyboardEventsManager.onKeydown(event);
                     }

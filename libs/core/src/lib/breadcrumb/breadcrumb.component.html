@@ -1,7 +1,7 @@
 <fd-overflow-layout
     [reverseHiddenItems]="!reverse"
     showMorePosition="left"
-    [enableKeyboardNavigation]="false"
+    [enableKeyboardNavigation]="true"
     (visibleItemsCount)="_onVisibleItemsCountChange($event)"
     (hiddenItemsCount)="_onHiddenItemsCountChange($event)"
 >
@@ -9,6 +9,9 @@
         <div
             *fdOverflowItemRef="breadcrumb; let hidden"
             fdOverflowLayoutItem
+            [navigable]="!!breadcrumb.breadcrumbLink"
+            [focusable]="true"
+            [skipSelfFocus]="true"
             (hiddenChange)="_onHiddenChange($event, breadcrumb)"
         >
             <ng-template [cdkPortalOutlet]="breadcrumb.portal"></ng-template>
