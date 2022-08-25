@@ -51,7 +51,7 @@ export class BreadcrumbItemComponent implements AfterViewInit {
     constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
-    get needsClickProxy(): boolean {
+    get _needsClickProxy(): boolean {
         return (
             !!this.breadcrumbLink?.elementRef().nativeElement.getAttribute('href') || !!this.breadcrumbLink.routerLink
         );
