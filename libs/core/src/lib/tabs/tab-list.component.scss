@@ -23,6 +23,10 @@
         flex-shrink: 0;
     }
 
+    &__tag {
+        white-space: nowrap;
+    }
+
     &__wrapper {
         flex-grow: 1;
         display: flex;
@@ -32,6 +36,27 @@
         &--collapsible {
             overflow: hidden;
             flex-wrap: nowrap;
+        }
+    }
+
+    .fd-overflow-layout__items-container {
+        .fd-tabs__item:first-child {
+            margin-left: 0.25rem;
+
+            .fd-tabs__link {
+                margin: 0;
+                padding: 0.875rem 0.75rem;
+            }
+        }
+
+        .fd-overflow-layout__item--first {
+            .fd-tabs__item {
+                margin-left: 0;
+                .fd-tabs__link {
+                    margin-left: 0.1875rem;
+                    padding-left: 0;
+                }
+            }
         }
     }
 }

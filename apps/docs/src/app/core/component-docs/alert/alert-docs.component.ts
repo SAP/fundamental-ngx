@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { AlertComponent } from '@fundamental-ngx/core/alert';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import alertExampleHtml from '!./examples/alert-example.component.html?raw';
@@ -9,6 +10,7 @@ import alertComponentAsContentExampleH from '!./examples/alert-component-as-cont
 import alertComponentAsContentExampleScss from '!./examples/alert-component-as-content-example.component.scss?raw';
 import alertInlineExampleHtml from '!./examples/alert-inline-example.component.html?raw';
 import alertInlineExampleScs from '!./examples/alert-inline-example.component.scss?raw';
+import alertInlineExampleTs from '!./examples/alert-inline-example.component.ts?raw';
 import alertWidthExampleHtml from '!./examples/alert-width-example.component.html?raw';
 import alertWidthExampleTs from '!./examples/alert-width-example.component.ts?raw';
 import alertWidthExampleScss from '!./examples/alert-width-example.component.scss?raw';
@@ -16,9 +18,10 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 
 @Component({
     selector: 'app-alert',
-    templateUrl: './alert-docs.component.html'
+    templateUrl: './alert-docs.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AlertDocsComponent {
+export class AlertDocsComponent implements AfterViewInit {
     static schema: any = {
         properties: {
             properties: {
@@ -53,6 +56,8 @@ export class AlertDocsComponent {
         },
         type: 'object'
     };
+
+    shouldShow = true;
 
     data: any = {
         properties: {
@@ -108,6 +113,12 @@ export class AlertDocsComponent {
             scssFileCode: alertInlineExampleScs,
             fileName: 'alert-inline-example',
             code: alertInlineExampleHtml
+        },
+        {
+            language: 'typescript',
+            component: 'AlertInlineExampleComponent',
+            code: alertInlineExampleTs,
+            fileName: 'alert-inline-example'
         }
     ];
 
@@ -128,11 +139,29 @@ export class AlertDocsComponent {
 
     schema: Schema;
 
-    constructor(private schemaFactory: SchemaFactoryService) {
+    @ViewChild('alert')
+    alertComponent: AlertComponent;
+
+    constructor(private _changeDetectorRef: ChangeDetectorRef, private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('alert');
     }
 
     onSchemaValues(data): void {
         this.data = data;
+    }
+
+    /** opens alert */
+    openDynamicAlert(): void {
+        this.shouldShow = true;
+        this._changeDetectorRef.detectChanges();
+        this.alertComponent.open();
+    }
+
+    onAlertDismiss(): void {
+        this.shouldShow = false;
+    }
+
+    ngAfterViewInit(): void {
+        this.openDynamicAlert();
     }
 }

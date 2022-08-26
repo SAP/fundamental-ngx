@@ -222,6 +222,7 @@
             fd-table
             role="presentation"
             class="fdp-table__body-table"
+            [popIn]="_poppingColumns.length > 0"
             [class.fd-table--no-outer-border]="noOuterBorders"
         >
             <thead fd-table-header class="fdp-table__header">
@@ -231,8 +232,8 @@
                 *ngIf="!!this._tableRowsVisible.length || this.loadingState; else emptyTableTemplate"
                 fd-table-body
                 fd-dnd-list
-                [noBorderX]="noBodyBorders"
-                [noBorderY]="noBodyBorders"
+                [noBorderX]="noBorderX"
+                [noBorderY]="noBorderY"
                 [tabIndex]="pageScrolling ? 0 : -1"
                 [items]="_tableRows"
                 [draggable]="_rowsDraggable"
@@ -269,6 +270,7 @@
                         (keydown.enter)="_onRowClick(row)"
                         (keydown.space)="_onRowClick(row, $event)"
                         (started)="_dragDropStart()"
+                        [main]="true"
                     >
                         <td
                             *ngIf="semanticHighlighting"
@@ -370,9 +372,9 @@
                                         ></ng-container>
                                     </ng-container>
 
-                                    <ng-template #defaultTableCellTemplate>{{
-                                        row?.value | valueByPath: column.key
-                                    }}</ng-template>
+                                    <ng-template #defaultTableCellTemplate>
+                                        {{ row?.value | valueByPath: column.key }}
+                                    </ng-template>
                                 </ng-container>
 
                                 <ng-template #editModeCell>
@@ -385,7 +387,7 @@
                                         <ng-container
                                             *ngTemplateOutlet="
                                                 column.editableColumnCellTemplate;
-                                                context: { $implicit: row.value }
+                                                context: { $implicit: row.value, popping: false }
                                             "
                                         ></ng-container>
                                     </ng-container>
@@ -415,6 +417,43 @@
                             class="fd-table__cell fd-table__cell--mock"
                             [class.fd-table__cell--mock-borderless]="!_cellMockVisible"
                         ></td>
+                    </tr>
+
+                    <tr
+                        *ngIf="row.type === 'item' && _poppingColumns.length > 0"
+                        fd-table-row
+                        [secondary]="true"
+                        [attr.aria-selected]="row.checked"
+                        [class]="row | rowClasses: rowsClass"
+                    >
+                        <td fd-table-cell *ngIf="selectionMode !== SELECTION_MODE.NONE"></td>
+                        <td
+                            fd-table-cell
+                            [tabindex]="-1"
+                            colspan="100%"
+                            [attr.data-nesting-level]="row.level + 1"
+                            [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
+                            [tabindex]="_isTreeRowFirstCell(0, row) ? 0 : -1"
+                            [focusable]="_isTreeRowFirstCell(0, row)"
+                            (click)="_onCellClick(0, row)"
+                            (keyup.enter)="_isTreeRowFirstCell(0, row) && _toggleGroupRow(row)"
+                        >
+                            <div fd-table-text *ngFor="let poppingColumn of _poppingColumns">
+                                <label fd-form-label>{{ poppingColumn.label }}:</label>
+                                <ng-container *ngIf="poppingColumn?.columnCellTemplate; else defaultTableCellTemplate">
+                                    <ng-container
+                                        *ngTemplateOutlet="
+                                            poppingColumn.columnCellTemplate;
+                                            context: { $implicit: row.value, popping: true }
+                                        "
+                                    ></ng-container>
+                                </ng-container>
+
+                                <ng-template #defaultTableCellTemplate>{{
+                                    row?.value | valueByPath: poppingColumn.key
+                                }}</ng-template>
+                            </div>
+                        </td>
                     </tr>
                 </ng-container>
             </tbody>

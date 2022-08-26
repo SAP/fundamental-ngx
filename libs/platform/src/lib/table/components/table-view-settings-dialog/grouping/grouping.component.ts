@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
+import equal from 'fast-deep-equal/es6';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { SortDirection } from '../../../enums/sort-direction.enum';
+import { Table } from '../../../table';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 
@@ -54,19 +56,26 @@ export class GroupingComponent implements Resettable {
     readonly NOT_GROUPED_OPTION_VALUE = NOT_GROUPED_OPTION_VALUE;
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef<SettingsGroupDialogData>) {
+    private _initialGrouping: SettingsGroupDialogResultData;
+
+    /** @hidden */
+    constructor(public dialogRef: DialogRef<SettingsGroupDialogData>, private readonly _table: Table) {
         const data = this.dialogRef.data;
 
         this.columns = data.columns || [];
 
         this.direction = data.direction ?? INITIAL_DIRECTION;
         this.field = data.field ?? NOT_GROUPED_OPTION_VALUE;
+
+        this._setInitialGrouping();
+
+        this._compareInitialGrouping();
     }
 
     /** Reset changes to the initial state */
     reset(): void {
-        this.direction = INITIAL_DIRECTION;
-        this.field = NOT_GROUPED_OPTION_VALUE;
+        this.direction = this._initialGrouping.direction;
+        this.field = this._initialGrouping.field;
         this._isResetAvailableSubject$.next(false);
     }
 
@@ -96,7 +105,31 @@ export class GroupingComponent implements Resettable {
     /** @hidden */
     _onModelChange(): void {
         // Use this coercion cause fd-radio-button triggers extra ngModelChange events on initial phase
-        const isInitialDiffers = this.direction !== INITIAL_DIRECTION || this.field !== NOT_GROUPED_OPTION_VALUE;
+        const isInitialDiffers =
+            this.direction !== this._initialGrouping.direction || this.field !== this._initialGrouping.field;
         this._isResetAvailableSubject$.next(isInitialDiffers);
+    }
+
+    /** @hidden */
+    private _setInitialGrouping(): void {
+        const initialGrouping = (this._table.initialGroupBy || [])[0];
+        this._initialGrouping = {
+            field: initialGrouping?.field ?? NOT_GROUPED_OPTION_VALUE,
+            direction: initialGrouping?.direction ?? INITIAL_DIRECTION
+        };
+    }
+
+    /** @hidden */
+    private _compareInitialGrouping(): void {
+        const appliedGrouping: SettingsGroupDialogResultData = {
+            field: this.field,
+            direction: this.direction
+        };
+
+        if (equal(this._initialGrouping, appliedGrouping)) {
+            return;
+        }
+
+        this._isResetAvailableSubject$.next(true);
     }
 }

@@ -10,6 +10,7 @@
             [button]="true"
             [disabled]="false"
             [(ngModel)]="filterVal"
+            (addOnButtonClicked)="filterVal = ''"
         >
         </fd-input-group>
         <button
@@ -53,7 +54,7 @@
         </tr>
     </thead>
     <tbody fd-table-body>
-        <tr *ngFor="let row of displayedRows | sortBy: ascending:'column1' | filter: filterVal:'column1'" fd-table-row>
+        <tr *ngFor="let row of displayedRows | filter: filterVal:'column1' | sortBy: ascending:'column1'" fd-table-row>
             <td fd-table-cell class="fd-has-font-weight-semi">
                 <a fd-link href="#">{{ row.column1 }}</a>
             </td>

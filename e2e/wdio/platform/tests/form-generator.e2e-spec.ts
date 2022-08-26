@@ -41,7 +41,7 @@ describe('Form generator test suite', () => {
         radioButton,
         checkbox,
         submitButton,
-        mainSpecialitySelect,
+        select,
         calendarInputGroup,
         errorMessage,
         radioButtonLabel,
@@ -242,10 +242,7 @@ describe('Form generator test suite', () => {
         checkValidationMessage(section, calendarInputGroup, requiredErrorMessage);
 
         if (section === defaultExample) {
-            expect(getElementClass(section + mainSpecialitySelect)).toContain(
-                'is-error',
-                'element is not highlighted by error'
-            );
+            expect(getElementClass(section + select, 1)).toContain('is-error', 'element is not highlighted by error');
         }
 
         for (let i = 0; i < getElementArrayLength(section + radioButton); i++) {

@@ -11,6 +11,12 @@ import { TableColumn } from './components/table-column/table-column';
 import { TableDataSource } from './domain';
 
 export abstract class Table<T = any> {
+    abstract initialSortBy?: CollectionSort[];
+
+    abstract initialGroupBy: CollectionGroup[];
+
+    abstract initialFilterBy: CollectionFilter[];
+
     /** Sum of widths of fixed columns (semantic highlighting, selection) */
     abstract get _fixedColumnsPadding(): number;
 
@@ -54,6 +60,9 @@ export abstract class Table<T = any> {
 
     /** Get table columns definition list */
     abstract getTableColumns(): TableColumn[];
+
+    /** Get a list of visible table columns. */
+    abstract getVisibleTableColumns(): TableColumn[];
 
     /** Set Sorting rules */
     abstract sort(sortRules: CollectionSort[]): void;

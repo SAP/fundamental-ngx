@@ -253,15 +253,15 @@ describe('Table component test suite', () => {
 
         it('should check ascending sorting by name, description and price', () => {
             scrollIntoView(tableSortableExample);
-            chooseSortOptionBy(tableSortableExample, ellipsisButton, 1);
+            chooseSortOptionBy(tableSortableExample, ellipsisButton, 2);
             expect(getText(tableSortableExample + tableCellDescription).trim()).toBe(descriptionStartTestText);
             expect(getText(tableSortableExample + tableCellDescription, 15).trim()).toBe(descriptionEndTestText);
 
-            chooseSortOptionBy(tableSortableExample, ellipsisButton, 2);
+            chooseSortOptionBy(tableSortableExample, ellipsisButton, 3);
             expect(getText(tableSortableExample + tableCellPrice).trim()).toBe(priceStartTestText);
             expect(getText(tableSortableExample + tableCellPrice, 15).trim()).toBe(priceEndTestText);
 
-            chooseSortOptionBy(tableSortableExample, ellipsisButton, 0);
+            chooseSortOptionBy(tableSortableExample, ellipsisButton, 1);
             expect(getText(tableSortableExample + tableCellName).trim()).toBe(nameStartTestText);
             expect(getText(tableSortableExample + tableCellName, 15).trim()).toBe(nameEndTestText);
         });
@@ -270,16 +270,16 @@ describe('Table component test suite', () => {
             scrollIntoView(tableSortableExample);
             click(tableSortableExample + ellipsisButton);
             click(buttonSortedOrder, 1);
-            click(buttonSortedBy, 1);
+            click(buttonSortedBy, 2);
             click(barButton);
             expect(getText(tableSortableExample + tableCellDescription).trim()).toBe(descriptionEndTestText);
             expect(getText(tableSortableExample + tableCellDescription, 15).trim()).toBe(descriptionStartTestText);
 
-            chooseSortOptionBy(tableSortableExample, ellipsisButton, 2);
+            chooseSortOptionBy(tableSortableExample, ellipsisButton, 3);
             expect(getText(tableSortableExample + tableCellPrice).trim()).toBe(priceEndTestText);
             expect(getText(tableSortableExample + tableCellPrice, 15).trim()).toBe(priceStartTestText);
 
-            chooseSortOptionBy(tableSortableExample, ellipsisButton, 0);
+            chooseSortOptionBy(tableSortableExample, ellipsisButton, 1);
             expect(getText(tableSortableExample + tableCellName).trim()).toBe(nameEndTestText);
             expect(getText(tableSortableExample + tableCellName, 15).trim()).toBe(nameStartTestText);
         });
@@ -642,7 +642,7 @@ describe('Table component test suite', () => {
 
             click(tableNavigatableRowIndicatorExample + button, 1);
             expect(getElementClass(tableNavigatableRowIndicatorExample + tableRow, 1)).toBe(
-                'fd-table__row ng-star-inserted'
+                'fd-table__row fd-table__row--main ng-star-inserted'
             );
         });
     });

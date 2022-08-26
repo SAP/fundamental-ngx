@@ -585,7 +585,7 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         sortDialogSortOrderHeader: 'Порядок сортировки',
         sortDialogSortOrderAsc: 'По росту',
         sortDialogSortOrderDesc: 'по убыванию',
-        sortDialogSortByHeader: 'Порядок сортировки',
+        sortDialogSortByHeader: 'Сортировать по',
         sortDialogNotSortedLabel: '(Не отсортировано)',
         sortDialogConfirmBtnLabel: 'ОК',
         sortDialogCancelBtnLabel: 'Отменить'

@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Directive({
@@ -21,6 +21,8 @@ export class ListLinkDirective implements OnChanges {
 
     /** Emits when some of the properties, that should be read by screenreader, are changed */
     readonly _onReadablePropertyChanged$ = new Subject<void>();
+
+    constructor(public elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {

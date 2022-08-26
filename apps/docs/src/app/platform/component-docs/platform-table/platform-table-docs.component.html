@@ -96,8 +96,14 @@
 
 <fd-docs-section-title id="sortable" componentName="table"> Column Sorting</fd-docs-section-title>
 <description>
-    Use <code>[sortable]="true"</code> to mark a column as an sortable one.<br />
-    In this example <code>Name</code>, <code>Description</code> and <code>Price</code> columns can be sorted.
+    <p>Use <code>[sortable]="true"</code> to mark a column as an sortable one.</p>
+    <p>
+        Developers can restrict selecting "Not Sorted" option by providing
+        <code>[allowDisablingSorting]="false"</code> input property for the
+        <code>fdp-table-view-settings-dialog</code> component and providing
+        <a routerLink="/platform/table" fragment="initial-state">[initialSortBy]</a> input property of the table.
+    </p>
+    <p>In this example <code>Name</code>, <code>Description</code> and <code>Price</code> columns can be sorted.</p>
 </description>
 <component-example>
     <fdp-platform-table-sortable-example></fdp-platform-table-sortable-example>
@@ -467,6 +473,28 @@
 </component-example>
 
 <code-example [exampleFiles]="editableRowsFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="responsive-columns" componentName="table">
+    Hidding columns depending on the table size
+</fd-docs-section-title>
+<description>
+    <p>it is not recommended to use large amount of columns in a table which has small size.</p>
+    <p>
+        In this case developers can use <code>[fdpTableCellResponsive]</code> directive with responsive breakpoints
+        object.
+    </p>
+    <p>
+        This object should contain key as a minimum width of the breakpoint and value whether or not to show column for
+        this size.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-table-responsive-columns-example></fdp-platform-table-responsive-columns-example>
+</component-example>
+
+<code-example [exampleFiles]="responsiveColumnsFiles"></code-example>
 
 <separator></separator>
 

@@ -38,6 +38,7 @@ import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { SaveRowsEvent } from './interfaces/save-rows-event.interface';
 import { EditableTableCell } from './table-cell.class';
+import { TableResponsiveService } from './table-responsive.service';
 
 import { TableService } from './table.service';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
@@ -145,6 +146,7 @@ let tableUniqueId = 0;
         TableService,
         TableScrollDispatcherService,
         TableColumnResizeService,
+        TableResponsiveService,
         contentDensityObserverProviders({
             supportedContentDensity: [
                 ContentDensityMode.COMPACT,
@@ -247,7 +249,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     noBorders = false;
 
-    /** Table body without borders, but header with borders. */
+    /** Table body without any borders, but header with borders. */
     @Input()
     noBodyBorders = false;
 
@@ -255,21 +257,47 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     noOuterBorders = false;
 
+    /** Table body without horizontal borders. */
+    @Input()
+    set noBorderX(value: boolean) {
+        this._noBorderX = value;
+    }
+
+    get noBorderX(): boolean {
+        return this._noBorderX || this.noBodyBorders;
+    }
+
+    /** @Hidden */
+    private _noBorderX = false;
+
+    /** Table body without vertical borders. */
+    @Input()
+    set noBorderY(value: boolean) {
+        this._noBorderY = value;
+    }
+
+    get noBorderY(): boolean {
+        return this._noBorderY || this.noBodyBorders;
+    }
+
+    /** @Hidden */
+    private _noBorderY = false;
+
     /** Initial visible columns. Consist of a list of unique column names */
     @Input()
     initialVisibleColumns: string[];
 
     /** Initial sort options. */
     @Input()
-    initialSortBy: CollectionSort[];
+    initialSortBy: CollectionSort[] = [];
 
     /** Initial filter options. */
     @Input()
-    initialFilterBy: CollectionFilter[];
+    initialFilterBy: CollectionFilter[] = [];
 
     /** Initial group options. */
     @Input()
-    initialGroupBy: CollectionGroup[];
+    initialGroupBy: CollectionGroup[] = [];
 
     /** Whether tree mode is enabled. */
     @Input()
@@ -363,15 +391,15 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Output()
     readonly rowToggleOpenState = new EventEmitter<TableRowToggleOpenStateEvent<T>>();
 
-    /* Event fired when tree rows rearranged through drag & drop. Consider that rows rearranged with their children rows. */
+    /** Event fired when tree rows rearranged through drag & drop. Consider that rows rearranged with their children rows. */
     @Output()
     readonly rowsRearrange = new EventEmitter<TableRowsRearrangeEvent<T>>();
 
-    /* Event fired when row clicked. */
+    /** Event fired when row clicked. */
     @Output()
     readonly rowActivate = new EventEmitter<TableRowActivateEvent<T>>();
 
-    /* Event fired when row navigated. */
+    /** Event fired when row navigated. */
     @Output()
     readonly rowNavigate = new EventEmitter<TableRowActivateEvent<T>>();
 
@@ -388,12 +416,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     readonly cancel = new EventEmitter<void>();
 
     /** Event emitted when data loading is started. */
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() onDataRequested = new EventEmitter<void>();
+    @Output() // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    onDataRequested = new EventEmitter<void>();
 
     /** Event emitted when data loading is finished. */
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() onDataReceived = new EventEmitter<void>();
+    @Output() // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    onDataReceived = new EventEmitter<void>();
 
     /** @hidden */
     @ViewChild('verticalScrollable')
@@ -415,9 +443,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
 
+    /** @hidden */
     @ContentChildren(EditableTableCell, { descendants: true })
     readonly customEditableCells: QueryList<EditableTableCell>;
 
+    /** @hidden */
     @ViewChildren(EditableTableCell)
     readonly editableCells: QueryList<EditableTableCell>;
 
@@ -425,6 +455,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @ViewChildren(TableRowDirective)
     tableRows: QueryList<TableRowDirective>;
 
+    /** @hidden */
     @ViewChildren(NgForm)
     editableCellForms: QueryList<NgForm>;
 
@@ -584,6 +615,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * Columns to be rendered in the template
      */
     _visibleColumns: TableColumn[] = [];
+
+    /**
+     * @hidden
+     * Columns to be rendered as a pop-in columns.
+     */
+    _poppingColumns: TableColumn[] = [];
 
     /**
      * @hidden
@@ -795,8 +832,14 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._cdr.markForCheck();
     }
 
+    /** Get table columns definition list. */
     getTableColumns(): TableColumn[] {
         return this.columns?.toArray() || [];
+    }
+
+    /** Get a list of visible table columns. */
+    getVisibleTableColumns(): TableColumn[] {
+        return this._visibleColumns || [];
     }
 
     /** Set Sorting rules */
@@ -1628,18 +1671,21 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /**
-     * @hidden
-     * Construct visible columns for rendering purpose
+     * Construct visible columns for rendering purpose.
      */
     private _calculateVisibleColumns(): void {
         const columnsDefinition = this.getTableColumns();
         const { columns, groupBy } = this.getTableState();
         const groupedColumnsToHide = groupBy.filter(({ showAsColumn }) => !showAsColumn).map(({ field }) => field);
 
-        this._visibleColumns = columns // need to start mapping from state.columns list to keep right order
+        const allColumns = columns // need to start mapping from state.columns list to keep right order
             .map((name) => columnsDefinition.find((column) => column.name === name))
             .filter((column): column is TableColumn => !!column)
-            .filter(({ key }) => !groupedColumnsToHide.includes(key)); // exclude columns which shouldn't be shown due to the group settings
+            .filter(({ key }) => !groupedColumnsToHide.includes(key));
+
+        this._visibleColumns = allColumns.filter((column) => column.responsiveState === 'visible');
+
+        this._poppingColumns = allColumns.filter((column) => column.responsiveState === 'popping');
 
         this._calculateTableColumnsLength();
     }
@@ -2118,6 +2164,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     private _listenToColumnPropertiesChange(): void {
         this._subscriptions.add(this._tableService.markForCheck$.subscribe(() => this._cdr.markForCheck()));
+        this._subscriptions.add(this._tableService.detectChanges$.subscribe(() => this._cdr.detectChanges()));
     }
 
     /** @hidden */

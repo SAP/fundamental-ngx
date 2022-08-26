@@ -256,6 +256,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     @HostListener('keydown.space', ['$event'])
     _onClick(event: Event): void {
         if (this.clickable) {
+            event.preventDefault();
             this.avatarClicked.emit(event);
             if (this.zoomGlyph) {
                 this.zoomGlyphClicked.next();

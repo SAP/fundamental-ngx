@@ -1,6 +1,7 @@
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import { Table } from '@fundamental-ngx/platform/table';
 
 import { SettingsSortDialogData, SortingComponent } from './sorting.component';
 import { PlatformTableModule } from '../../../table.module';
@@ -13,13 +14,19 @@ describe('PlatformTableSortDialogComponent', () => {
     const dialogData: SettingsSortDialogData = {
         columns: [],
         direction: SortDirection.NONE,
-        field: null
+        field: null,
+        allowDisablingSorting: false
     };
     dialogRef.data = dialogData;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            providers: [{ provide: DialogRef, useValue: dialogRef }, DialogService, DialogConfig],
+            providers: [
+                { provide: DialogRef, useValue: dialogRef },
+                { provide: Table, useValue: {} },
+                DialogService,
+                DialogConfig
+            ],
             imports: [PlatformTableModule, NoopAnimationsModule]
         }).compileComponents();
     }));

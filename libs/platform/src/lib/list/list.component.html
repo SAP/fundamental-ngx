@@ -34,7 +34,7 @@
                 [scrollPercent]="scrollOffsetPercentage"
                 [attr.role]="role"
             >
-                <ng-template *ngIf="_items.length !== 0; then thenBlock; else elseBlock"> </ng-template>
+                <ng-container *ngIf="_items.length !== 0; then thenBlock; else elseBlock"></ng-container>
             </div>
         </fd-busy-indicator>
     </ng-container>

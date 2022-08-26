@@ -1,9 +1,12 @@
 import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
+import equal from 'fast-deep-equal/es6';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { SortDirection } from '../../../enums/sort-direction.enum';
+import { CollectionSort } from '../../../interfaces';
+import { Table } from '../../../table';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 
@@ -16,6 +19,7 @@ export interface SettingsSortDialogData extends TableDialogCommonData {
     direction: SortDirection;
     field: string | null;
     columns: SettingsSortDialogColumn[];
+    allowDisablingSorting: boolean;
 }
 
 export interface SettingsSortDialogResultData {
@@ -38,6 +42,9 @@ export class SortingComponent implements Resettable {
     /** Current selected field */
     field: string | null;
 
+    /** Whether to allow selecting '(Not sorted)' option in sorting dialog. */
+    allowDisablingSorting: boolean;
+
     /** Table columns */
     readonly columns: SettingsSortDialogColumn[] = [];
 
@@ -53,19 +60,27 @@ export class SortingComponent implements Resettable {
     readonly NOT_SORTED_OPTION_VALUE = NOT_SORTED_OPTION_VALUE;
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef<SettingsSortDialogData>) {
+    private _initialSorting: CollectionSort;
+
+    /** @hidden */
+    constructor(public dialogRef: DialogRef<SettingsSortDialogData>, private _table: Table) {
         const data = this.dialogRef.data;
 
         this.columns = data.columns || [];
 
         this.direction = data.direction ?? INITIAL_DIRECTION;
         this.field = data.field ?? NOT_SORTED_OPTION_VALUE;
+        this.allowDisablingSorting = data.allowDisablingSorting;
+
+        this._setInitialSorting();
+
+        this._compareInitialSorting();
     }
 
     /** Reset changes to the initial state */
     reset(): void {
-        this.direction = INITIAL_DIRECTION;
-        this.field = NOT_SORTED_OPTION_VALUE;
+        this.direction = this._initialSorting.direction;
+        this.field = this._initialSorting.field;
         this._isResetAvailableSubject$.next(false);
     }
 
@@ -95,7 +110,38 @@ export class SortingComponent implements Resettable {
     /** @hidden */
     _onModelChange(): void {
         // Use this coercion cause fd-radio-button triggers extra ngModelChange events on initial phase
-        const isInitialDiffers = this.direction !== INITIAL_DIRECTION || this.field !== NOT_SORTED_OPTION_VALUE;
+        const isInitialDiffers =
+            this.direction !== this._initialSorting.direction || this.field !== this._initialSorting.field;
         this._isResetAvailableSubject$.next(isInitialDiffers);
+    }
+
+    /**
+     * @hidden
+     * Since view settings dialog supports only one sorting, get the first one if available.
+     */
+    private _setInitialSorting(): void {
+        const initialSorting = (this._table.initialSortBy || [])[0];
+
+        this._initialSorting = {
+            field: initialSorting?.field ?? NOT_SORTED_OPTION_VALUE,
+            direction: initialSorting?.direction ?? INITIAL_DIRECTION
+        };
+    }
+
+    /**
+     * @hidden
+     * Compare initial sorting with selected one and set reset button if needed.
+     */
+    private _compareInitialSorting(): void {
+        const appliedSorting: CollectionSort = {
+            field: this.field,
+            direction: this.direction
+        };
+
+        if (equal(this._initialSorting, appliedSorting)) {
+            return;
+        }
+
+        this._isResetAvailableSubject$.next(true);
     }
 }

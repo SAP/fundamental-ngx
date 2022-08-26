@@ -5,18 +5,34 @@
     [class]="(mode ? 'fd-tabs--' + mode : '') + (' fd-tabs--' + size)"
     [class.fd-tabs--compact]="_contentDensityObserver.isCompact"
 >
-    <div class="fd-tabs__wrapper" [class.fd-tabs__wrapper--collapsible]="_isCollapsed">
-        <ng-container *ngFor="let tab of _visualOrder.visible; let i = index; let last = last">
-            <div fd-tab-item [header]="tab.isHeader" [tabItemState]="tab.tabState" [attr.aria-selected]="tab.active">
+    <fd-overflow-layout
+        [maxVisibleItems]="maxVisibleTabs"
+        [enableKeyboardNavigation]="true"
+        navigationTrigger="keydown"
+        (hiddenItemsCount)="hiddenItemsCount.emit($event)"
+        (visibleItemsCount)="visibleItemsCount.emit($event)"
+    >
+        <ng-container *ngFor="let tab of _tabArray; let i = index; let last = last">
+            <div
+                fd-tab-item
+                *fdOverflowItemRef="tab"
+                fdOverflowLayoutItem
+                [forceVisibility]="tab.panel._forcedVisibility"
+                [header]="tab.isHeader"
+                [tabItemState]="tab.tabState"
+                [attr.aria-selected]="tab.active"
+            >
                 <a
                     fd-tab-link
-                    [attr.tabindex]="tab.active ? '0' : '-1'"
                     [attr.aria-controls]="tab.id"
                     [attr.aria-label]="tab.ariaLabel || null"
+                    fdOverflowLayoutFocusableItem
+                    [focusable]="tab.active"
+                    [navigable]="!tab.disabled"
                     [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
                     [active]="tab.active"
                     [disabled]="tab.disabled"
-                    (keydown)="_tabHeaderKeyHandler(i, $event)"
+                    (keydown)="_tabHeaderKeydownHandler($event, tab.panel)"
                     (click)="_tabHeaderClickHandler(tab.panel)"
                 >
                     <ng-container *ngTemplateOutlet="tab.titleTemplate || null"></ng-container>
@@ -60,15 +76,34 @@
 
             <div *ngIf="tab.isHeader" fd-tab-separator></div>
         </ng-container>
-    </div>
-
-    <fd-item-expand
-        *ngIf="_isCollapsed"
-        [fdMenuTrigger]="menu"
-        [label]="expandOverflowText"
-        (keydown)="_onTriggerKeydown($event, menu)"
-    >
-    </fd-item-expand>
+        <ng-container *fdOverflowExpand="let tabs; items: _tabArray">
+            <fd-item-expand
+                [fdMenuTrigger]="menu"
+                [label]="expandOverflowText"
+                *ngIf="tabs.length > 0"
+                (keydown)="_onTriggerKeydown($event, menu)"
+            >
+            </fd-item-expand>
+            <fd-menu #menu>
+                <li
+                    fd-menu-item
+                    *ngFor="let tab of tabs"
+                    (onSelect)="_overflowingTabHeaderClickHandler(tab.item.panel)"
+                >
+                    <div fd-menu-interactive>
+                        <ng-container
+                            *ngTemplateOutlet="
+                                !tab.item.titleTemplate && mode === 'icon-only'
+                                    ? iconOnlyTemplate
+                                    : tab.item.titleTemplate || textTitle;
+                                context: { $implicit: tab.item }
+                            "
+                        ></ng-container>
+                    </div>
+                </li>
+            </fd-menu>
+        </ng-container>
+    </fd-overflow-layout>
 </div>
 
 <div
@@ -82,23 +117,6 @@
 >
     <ng-content></ng-content>
 </div>
-
-<fd-menu #menu>
-    <li
-        fd-menu-item
-        *ngFor="let tab of _visualOrder.overflowing"
-        (onSelect)="_overflowingTabHeaderClickHandler(tab.panel)"
-    >
-        <div fd-menu-interactive>
-            <ng-container
-                *ngTemplateOutlet="
-                    !tab.titleTemplate && mode === 'icon-only' ? iconOnlyTemplate : tab.titleTemplate || textTitle;
-                    context: { $implicit: tab }
-                "
-            ></ng-container>
-        </div>
-    </li>
-</fd-menu>
 
 <ng-template #textTitle let-tab>
     <span fd-menu-title>{{ tab.title }}</span>

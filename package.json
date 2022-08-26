@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.36.0-rc.10",
+  "version": "0.36.0-rc.36",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori Angular component library.",
@@ -148,7 +148,7 @@
     "rxjs": "7.5.6",
     "tslib": "2.3.0",
     "webdriver-manager": "12.1.7",
-    "zone.js": "0.11.4"
+    "zone.js": "0.11.7"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "14.1.2",

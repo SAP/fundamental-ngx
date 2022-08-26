@@ -1,11 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, QueryList, ViewChildren } from '@angular/core';
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabListComponent } from './tab-list.component';
 import { TabsModule } from './tabs.module';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { TabInfo } from './tab-utils/tab-info.class';
 
 @Component({
     template: ` <fd-tab-list>
@@ -53,7 +52,6 @@ describe('TabListComponent', () => {
     it('should update tab storing structures', async () => {
         await whenStable(fixture);
         expect(component._tabArray.length).toBe(4);
-        expect(component._visualOrder.visible.length).toBe(4);
     });
 
     it('should select tab', async () => {
@@ -79,7 +77,6 @@ describe('TabListComponent', () => {
         await whenStable(fixture);
 
         expect(component._tabArray.length).toBe(3);
-        expect(component._visualOrder.visible.length).toBe(3);
     });
 
     it('should keep active element after tab panels change', async () => {
@@ -95,16 +92,6 @@ describe('TabListComponent', () => {
         await whenStable(fixture);
 
         expect(tabChangeSpy).toHaveBeenCalled();
-    });
-
-    it('should call select tab on service event', async () => {
-        await whenStable(fixture);
-
-        (component as any)._tabsService.tabSelected.next(2);
-
-        await whenStable(fixture);
-
-        expect(component._tabArray[2].active).toBeTrue();
     });
 });
 
@@ -126,6 +113,9 @@ class TestCollapsibleTabsComponent {
     @ViewChildren(TabPanelComponent)
     tabs: QueryList<TabPanelComponent>;
 
+    @ViewChild(TabListComponent)
+    tabList: TabListComponent;
+
     maxVisibleTabs = 10;
     _tabs = new Array(NUMBER_OF_TABS).fill(null).map((e, i) => `Tab ${i + 1}`);
 }
@@ -134,10 +124,6 @@ describe('TabListComponent', () => {
     let component: TabListComponent;
     let testComponent: TestCollapsibleTabsComponent;
     let fixture: ComponentFixture<TestCollapsibleTabsComponent>;
-    const groupedTabs = (tabList: TabListComponent): TabInfo[][] => [
-        tabList._visualOrder.visible,
-        tabList._visualOrder.overflowing
-    ];
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -157,27 +143,19 @@ describe('TabListComponent', () => {
         expect(testComponent).toBeTruthy();
     });
 
-    it('should collapse tabs', async () => {
-        await whenStable(fixture);
-        const [visibleTabs, overflowingTabs] = groupedTabs(component);
-
-        expect(visibleTabs.length + overflowingTabs.length === NUMBER_OF_TABS).toBeTrue();
-        expect(component._tabArray.length === NUMBER_OF_TABS).toBeTrue();
-        expect(overflowingTabs.length > 0).toBeTrue();
-    });
-
     it('should respect maximum number of visible tabs', async () => {
         await whenStable(fixture);
+
+        const visibleTabsSpy = spyOn(component.visibleItemsCount, 'emit').and.callThrough();
+        const hiddenTabsSpy = spyOn(component.hiddenItemsCount, 'emit').and.callThrough();
 
         testComponent.maxVisibleTabs = 1;
 
         await whenStable(fixture);
 
-        const [visibleTabs, overflowingTabs] = groupedTabs(component);
-
         expect(testComponent._tabs.length).toEqual(10);
-        expect(visibleTabs.length).toEqual(1);
-        expect(overflowingTabs.length).toEqual(9);
+        expect(visibleTabsSpy).toHaveBeenCalledWith(1);
+        expect(hiddenTabsSpy).toHaveBeenCalledWith(9);
     });
 
     it('should collapse active tab', async () => {

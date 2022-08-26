@@ -140,8 +140,6 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     private filter({ filterBy }: TableState): ExampleItem[] {
         let items = this.items;
 
-        console.log(filterBy);
-
         filterBy
             .filter(({ field }) => !!field)
             .forEach((rule) => {

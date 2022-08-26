@@ -13,6 +13,7 @@ import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../cons
 import { DynamicPageGlobalActionsComponent } from '../actions/global-actions/dynamic-page-global-actions.component';
 import { DynamicPageLayoutActionsComponent } from '../actions/layout-actions/dynamic-page-layout-actions.component';
 import { DynamicPageKeyInfoComponent } from '../key-info/dynamic-page-key-info.component';
+import { DynamicPageTitleImageComponent } from './dynamic-page-title-image.component';
 
 /**
  * Dynamic Page Title Component.
@@ -20,7 +21,7 @@ import { DynamicPageKeyInfoComponent } from '../key-info/dynamic-page-key-info.c
  */
 @Component({
     selector: 'fdp-dynamic-page-title',
-    templateUrl: './dynamic-page-title.component.html',
+    template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [
@@ -72,6 +73,10 @@ export class DynamicPageTitleComponent implements DynamicPageHeader {
     /** reference to key-info component */
     @ContentChild(DynamicPageKeyInfoComponent)
     keyInfoComponent: DynamicPageKeyInfoComponent;
+
+    /** reference to image component */
+    @ContentChild(DynamicPageTitleImageComponent)
+    imageComponent: DynamicPageTitleImageComponent;
 
     /**
      * @hidden

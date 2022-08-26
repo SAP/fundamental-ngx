@@ -9,8 +9,7 @@ import {
     navIndicator,
     navUrl,
     noDataText,
-    selectionAttr,
-    listTitleArr
+    selectionAttr
 } from '../fixtures/appData/list-contents';
 import {
     acceptAlert,
@@ -79,8 +78,6 @@ describe('List test suite:', () => {
         unreadListItems,
         multiCheckBoxMark,
         singleRadioBtnInput,
-        noSepList,
-        noSepListItems,
         cozyItem,
         compactItem
     } = listPage;
@@ -102,7 +99,7 @@ describe('List test suite:', () => {
             expect($$(`${noBorderCompactList} > .${compactClass}`)).toBeTruthy();
         });
 
-        it('should check border', () => {
+        it('should check border border-style property', () => {
             getCSSPropertyByName(noBorderListItems, borderStyleAttr);
         });
     });
@@ -292,14 +289,6 @@ describe('List test suite:', () => {
             checkElArrIsClickable(noDataListItems);
             expect(getElementClass(noDataCompactList)).toContain(compactClass);
             checkElementTextValue(noDataListItems, noDataText);
-        });
-    });
-
-    describe('With No Separator examples:', () => {
-        it('should do basic checks and check no data text', () => {
-            checkElArrIsClickable(noSepListItems);
-            checkElementTextValue(noSepListItems, listTitleArr);
-            expect(getElementClass(noSepList)).toContain('no-border');
         });
     });
 

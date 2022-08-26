@@ -14,9 +14,9 @@ export class TabsPo extends CoreBaseComponentPo {
     stackendContentExample = 'fd-stacked-content-example ';
     collapsibleExample = 'fd-tab-collapsible-example ';
     playGroundExample = 'playground ';
-    tabsWrapper = '.fd-tabs__wrapper ';
+    tabsWrapper = '.fd-overflow-layout__items ';
     tab = '.fd-tabs__item';
-    fdTab = '.fd-tabs__wrapper .fd-tabs__item';
+    fdTab = '.fd-overflow-layout__items .fd-tabs__item';
     fdTabFF = '.fd-tabs__link';
     tabCount = '.fd-tabs__count';
     tabTitle = '.fd-tabs__tag';

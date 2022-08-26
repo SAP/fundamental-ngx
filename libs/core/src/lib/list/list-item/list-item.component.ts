@@ -29,6 +29,7 @@ import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/core/ut
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ListFocusItem } from '../list-focus-item.model';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 let listItemUniqueId = 0;
 
@@ -42,7 +43,7 @@ let listItemUniqueId = 0;
     templateUrl: './list-item.component.html',
     host: {
         class: 'fd-list__item',
-        role: 'listitem'
+        '[attr.role]': '_listItemRole'
     },
     styleUrls: ['./list-item.component.scss'],
     providers: [
@@ -73,7 +74,7 @@ export class ListItemComponent
      * Note, that it is being combined with internal values for this component
      */
     @Input()
-    ariaDescribedBy: string;
+    ariaDescribedBy: Nullable<string>;
 
     /** Whether there is no data inside list item */
     @Input()
@@ -179,6 +180,9 @@ export class ListItemComponent
     _relatedGroupHeaderId: string | null;
 
     /** @hidden */
+    private _listItemRole = 'listitem';
+
+    /** @hidden */
     @HostBinding('attr.aria-describedBy')
     get getCombinedAriaDescribedBy(): string | null {
         let describedBy = this.screenReaderContent ? this._uniqueId + '-screenReader-content' : '';
@@ -202,6 +206,9 @@ export class ListItemComponent
     ngAfterContentInit(): void {
         this._listenOnLinkQueryChange();
         this._listenOnButtonQueryChange();
+        if (this.linkDirectives && this.linkDirectives.length) {
+            this._listItemRole += ' button';
+        }
     }
 
     /** @hidden */
@@ -236,9 +243,23 @@ export class ListItemComponent
                 this.selected = !this.selected;
                 this._muteEvent(event);
                 return;
+            } else if (this.link) {
+                this.linkDirectives.first.elementRef.nativeElement.classList.add('is-active');
+                this._muteEvent(event);
             }
         }
         this.keyDown.emit(event);
+    }
+
+    /** @hidden */
+    @HostListener('keyup', ['$event'])
+    keyupHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [ENTER, SPACE]) && this.link) {
+            const _anchorElement = this.linkDirectives.first.elementRef.nativeElement;
+            _anchorElement.classList.remove('is-active');
+            _anchorElement.click();
+            this._muteEvent(event);
+        }
     }
 
     /** Handler for mouse events */

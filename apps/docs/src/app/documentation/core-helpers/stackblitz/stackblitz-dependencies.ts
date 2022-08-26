@@ -1,7 +1,11 @@
 import packageInfo from '../../../../../../../package.json';
 
 export class StackblitzDependencies {
-    private static _libDependencies: string[] = ['@fundamental-ngx/platform', '@fundamental-ngx/core'];
+    private static _libDependencies: string[] = [
+        '@fundamental-ngx/platform',
+        '@fundamental-ngx/core',
+        '@fundamental-ngx/i18n'
+    ];
 
     private static _ngDependencies: string[] = [
         '@angular/animations',

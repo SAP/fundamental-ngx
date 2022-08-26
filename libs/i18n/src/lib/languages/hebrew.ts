@@ -430,7 +430,7 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
         sortDialogSortOrderHeader: 'Sort Order',
         sortDialogSortOrderAsc: 'Ascending',
         sortDialogSortOrderDesc: 'Descending',
-        sortDialogSortByHeader: 'Sorted By',
+        sortDialogSortByHeader: 'Sort By',
         sortDialogNotSortedLabel: '(Not Sorted)',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogCancelBtnLabel: 'Cancel'
