@@ -21,9 +21,9 @@ export abstract class BaseStrategy {
 
     /** @hidden */
     protected _getTwoListFromOne(nodes: TimelineNodeComponent[]): [TimelineNodeComponent[], TimelineNodeComponent[]] {
-        const lastIndexInFirstList = Math.floor(nodes.length / 2);
-        const firstList = nodes.slice(0, lastIndexInFirstList + 1);
-        const secondList = nodes.slice(lastIndexInFirstList + 1, nodes.length);
+        const lastIndexInFirstList = Math.ceil(nodes.length / 2);
+        const firstList = nodes.slice(0, lastIndexInFirstList);
+        const secondList = nodes.slice(lastIndexInFirstList, nodes.length);
         return [firstList, secondList];
     }
 
