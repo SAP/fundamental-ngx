@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.36...v0.36.0-rc.37) (2022-08-26)
+
+
+### Bug Fixes
+
+* **core:** logic for splitting timeline nodes in half ([#8606](https://github.com/SAP/fundamental-ngx/issues/8606)) ([0e47a16](https://github.com/SAP/fundamental-ngx/commit/0e47a1673b8cc9fd7ace581eb0e3dd0fe5d8737c))
+
 ## [0.36.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.35...v0.36.0-rc.36) (2022-08-26)
 
 
