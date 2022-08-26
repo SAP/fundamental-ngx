@@ -17,7 +17,7 @@ import {
 import { ListItemComponent } from './list-item/list-item.component';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
-import { FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/core/utils';
+import { FocusEscapeDirection, KeyboardSupportService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListFocusItem } from './list-focus-item.model';
 import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
@@ -26,6 +26,7 @@ import {
     contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
+import { TAB } from '@angular/cdk/keycodes';
 
 /**
  * The directive that represents a list.
@@ -152,7 +153,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
-        if (this.keyboardSupport) {
+        if (this.keyboardSupport && !KeyUtil.isKeyCode(event, TAB)) {
             this._keyboardSupportService.onKeyDown(event);
         }
     }

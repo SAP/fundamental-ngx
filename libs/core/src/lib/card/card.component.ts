@@ -1,12 +1,15 @@
 import {
+    AfterContentInit,
     ChangeDetectionStrategy,
     Component,
+    ContentChildren,
     ElementRef,
     HostBinding,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
+    QueryList,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -20,6 +23,7 @@ import {
     contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
+import { ListItemComponent } from '@fundamental-ngx/core/list';
 
 let cardId = 0;
 
@@ -37,7 +41,7 @@ let cardId = 0;
         })
     ]
 })
-export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDestroy {
+export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDestroy, AfterContentInit {
     /** Badge */
     @Input() badge: string;
 
@@ -63,6 +67,10 @@ export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDest
     role = 'region';
 
     /** @hidden */
+    @ContentChildren(ListItemComponent, { descendants: true })
+    listItems: QueryList<ListItemComponent>;
+
+    /** @hidden */
     class: string;
 
     /** @hidden */
@@ -81,6 +89,11 @@ export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDest
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this.listItems?.first?.setIsFirst(true);
     }
 
     /** @hidden */
