@@ -4,7 +4,7 @@ import { KeyboardSupportItemInterface } from '../../interfaces/keyboard-support-
 import { merge, Subject } from 'rxjs';
 import { filter, startWith, takeUntil, tap } from 'rxjs/operators';
 import { KeyUtil } from '../../functions';
-import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, hasModifierKey, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 
 export type FocusEscapeDirection = 'up' | 'down';
 
@@ -37,6 +37,15 @@ export class KeyboardSupportService<T> {
     /** @hidden */
     onKeyDown(event: KeyboardEvent): void {
         this._keyManager.onKeydown(event);
+        if (KeyUtil.isKeyCode(event, TAB)) {
+            event.preventDefault();
+            if (hasModifierKey(event, 'shiftKey')) {
+                this.keyManager.setPreviousItemActive();
+            } else {
+                this.keyManager.setNextItemActive();
+            }
+            return;
+        }
     }
 
     /** Destroys KeyboardSupportService dependencies */

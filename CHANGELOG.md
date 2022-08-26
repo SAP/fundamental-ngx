@@ -1,4 +1,60 @@
 
+## [0.36.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.35...v0.36.0-rc.36) (2022-08-26)
+
+
+### Bug Fixes
+
+* **core:** breadcrumb overflow click ([#8599](https://github.com/SAP/fundamental-ngx/issues/8599)) ([1fc1285](https://github.com/SAP/fundamental-ngx/commit/1fc1285d5244e290532fd36536f11130cd919118))
+
+## [0.36.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.34...v0.36.0-rc.35) (2022-08-23)
+
+
+### Bug Fixes
+
+* **docs:** remove common  margin for buttons ([#8569](https://github.com/SAP/fundamental-ngx/issues/8569)) ([2fe805f](https://github.com/SAP/fundamental-ngx/commit/2fe805ffc6d5cbd4e674e6cbfc63d9a7b6fdde00))
+
+## [0.36.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.33...v0.36.0-rc.34) (2022-08-23)
+
+
+### Bug Fixes
+
+* **core:** action-sheet focus bug ([#8458](https://github.com/SAP/fundamental-ngx/issues/8458)) ([5220013](https://github.com/SAP/fundamental-ngx/commit/5220013383eda1a1a7ca4b7e326bfcd0e735374b))
+
+## [0.36.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.32...v0.36.0-rc.33) (2022-08-22)
+
+
+### Bug Fixes
+
+* **docs:** alert playground and Inline alert - on page-load alert dismiss ([#8464](https://github.com/SAP/fundamental-ngx/issues/8464)) ([03e8884](https://github.com/SAP/fundamental-ngx/commit/03e8884ccf9663a8d9936cb91959f7ebbc1468c0))
+
+## [0.36.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.31...v0.36.0-rc.32) (2022-08-22)
+
+
+### Bug Fixes
+
+* **core:** space/enter support for list navigation links ([#8570](https://github.com/SAP/fundamental-ngx/issues/8570)) ([6ac68e0](https://github.com/SAP/fundamental-ngx/commit/6ac68e090787a235c879711496487f359fff3816))
+
+## [0.36.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.30...v0.36.0-rc.31) (2022-08-22)
+
+
+### Bug Fixes
+
+* **core:** avatar group defect hunting ([#8571](https://github.com/SAP/fundamental-ngx/issues/8571)) ([41d8743](https://github.com/SAP/fundamental-ngx/commit/41d8743a45c6499fa354ef6e1b79ccf576005758))
+
+## [0.36.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.29...v0.36.0-rc.30) (2022-08-22)
+
+
+### Bug Fixes
+
+* **core:** allow click of entire separator in flexible column layout ([#8572](https://github.com/SAP/fundamental-ngx/issues/8572)) ([b2cf2e6](https://github.com/SAP/fundamental-ngx/commit/b2cf2e694822b9dfa0bd60295db134f7e31d2664))
+
+## [0.36.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.28...v0.36.0-rc.29) (2022-08-22)
+
+
+### Bug Fixes
+
+* **docs:** adjust split button docs description ([#8573](https://github.com/SAP/fundamental-ngx/issues/8573)) ([7623e1b](https://github.com/SAP/fundamental-ngx/commit/7623e1b221fcd12135be0aa20b94b6ded7305282))
+
 ## [0.36.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.27...v0.36.0-rc.28) (2022-08-19)
 
 

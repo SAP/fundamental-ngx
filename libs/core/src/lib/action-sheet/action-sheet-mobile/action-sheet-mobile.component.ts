@@ -28,6 +28,6 @@ export class ActionSheetMobileComponent {
     /** @hidden */
     toggleOpenState(isOpen: boolean): void {
         this.open = isOpen;
-        this._changeDetectionRef.markForCheck();
+        this._changeDetectionRef.detectChanges();
     }
 }

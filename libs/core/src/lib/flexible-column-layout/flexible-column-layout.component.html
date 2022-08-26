@@ -18,6 +18,7 @@
         *ngIf="_leftColumnSeparator"
         class="fd-flexible-column-layout__separator"
         [attr.aria-label]="separatorAriaLabel"
+        (click)="_handleLeftColumnSeparatorClick()"
     >
         <button
             fd-button
@@ -25,7 +26,6 @@
             fdType="transparent"
             class="fd-flexible-column-layout__button"
             [title]="_leftColumnSeparator === 'left' ? expandTitle : collapseTitle"
-            (click)="_handleLeftColumnSeparatorClick()"
         >
             <i
                 [class]="_leftColumnSeparator ? 'sap-icon--slim-arrow-' + _leftColumnSeparator : ''"
@@ -48,6 +48,7 @@
         *ngIf="_rightColumnSeparator"
         class="fd-flexible-column-layout__separator"
         [attr.aria-label]="separatorAriaLabel"
+        (click)="_handleRightColumnSeparatorClick()"
     >
         <button
             fd-button
@@ -55,7 +56,6 @@
             fdType="transparent"
             class="fd-flexible-column-layout__button"
             [title]="_rightColumnSeparator === 'left' ? expandTitle : collapseTitle"
-            (click)="_handleRightColumnSeparatorClick()"
         >
             <i
                 [class]="_rightColumnSeparator ? 'sap-icon--slim-arrow-' + _rightColumnSeparator : ''"
