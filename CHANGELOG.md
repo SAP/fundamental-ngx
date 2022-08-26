@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.35...v0.36.0-rc.36) (2022-08-26)
+
+
+### Bug Fixes
+
+* **core:** breadcrumb overflow click ([#8599](https://github.com/SAP/fundamental-ngx/issues/8599)) ([1fc1285](https://github.com/SAP/fundamental-ngx/commit/1fc1285d5244e290532fd36536f11130cd919118))
+
 ## [0.36.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.34...v0.36.0-rc.35) (2022-08-23)
 
 
