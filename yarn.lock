@@ -233,10 +233,21 @@
     rxjs "6.6.7"
     source-map "0.7.3"
 
-"@angular-devkit/core@14.1.1", "@angular-devkit/core@^14.0.0":
+"@angular-devkit/core@14.1.1":
   version "14.1.1"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-14.1.1.tgz#eb85672b4135a77933093802a12af4f938f6babe"
   integrity sha512-i5SiU/9xqKbhi5A2kq7ME5KWNXtVIlSLZ/HslGjsolZ4CO0LiZanywcE/HGL7681RVaWVeeSndmKQtqY3mPuNQ==
+  dependencies:
+    ajv "8.11.0"
+    ajv-formats "2.1.1"
+    jsonc-parser "3.1.0"
+    rxjs "6.6.7"
+    source-map "0.7.4"
+
+"@angular-devkit/core@14.2.1", "@angular-devkit/core@^14.0.0":
+  version "14.2.1"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-14.2.1.tgz#7ce14efdb5fce687bb4f13bef03d4b67e971b22e"
+  integrity sha512-lW8oNGuJqr4r31FWBjfWQYkSXdiOHBGOThIEtHvUVBKfPF/oVrupLueCUgBPel+NvxENXdo93uPsqHN7bZbmsQ==
   dependencies:
     ajv "8.11.0"
     ajv-formats "2.1.1"
@@ -274,6 +285,17 @@
     "@angular-devkit/core" "14.0.7"
     jsonc-parser "3.0.0"
     magic-string "0.26.1"
+    ora "5.4.1"
+    rxjs "6.6.7"
+
+"@angular-devkit/schematics@14.2.1":
+  version "14.2.1"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-14.2.1.tgz#9d66080e60ab32d1b44c854cabc8f5cbb421d877"
+  integrity sha512-0U18FwDYt4zROBPrvewH6iBTkf2ozVHN4/gxUb9jWrqVw8mPU5AWc/iYxQLHBSinkr2Egjo1H/i9aBqgJSeh3g==
+  dependencies:
+    "@angular-devkit/core" "14.2.1"
+    jsonc-parser "3.1.0"
+    magic-string "0.26.2"
     ora "5.4.1"
     rxjs "6.6.7"
 
@@ -2957,15 +2979,6 @@
   resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.1.40.tgz#d0e14e7840f9015be38451cac49a1b44f54256ec"
   integrity sha512-H2iEXm10Y7lnZVoYDfweUpCz8BF3UQTxupGTP38R90dnUTI9gc2daqIgvy/E+nBXiE8+1NEC7uiejbcn4/2/nw==
 
-"@schematics/angular@14.0.2":
-  version "14.0.2"
-  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-14.0.2.tgz#b669c59b8e054db14fbf0b44fc337f5f1f886a4e"
-  integrity sha512-DmLD0s4zUGuX+hjkIkW/aZi+JZZFZfhBxhumG9nftWPYT9/AjX3C2YZCarRWJ83jy/K3N9y4cnva0NVqKxTa3A==
-  dependencies:
-    "@angular-devkit/core" "14.0.2"
-    "@angular-devkit/schematics" "14.0.2"
-    jsonc-parser "3.0.0"
-
 "@schematics/angular@14.0.7", "@schematics/angular@~14.0.0":
   version "14.0.7"
   resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-14.0.7.tgz#ca4a5eff0eb7998efab080cc324fbe44ebdd5f06"
@@ -2974,6 +2987,15 @@
     "@angular-devkit/core" "14.0.7"
     "@angular-devkit/schematics" "14.0.7"
     jsonc-parser "3.0.0"
+
+"@schematics/angular@14.2.1":
+  version "14.2.1"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-14.2.1.tgz#00f54cb6b30dc1945b6d344ca225c04dcc12f682"
+  integrity sha512-Dchixep/FMETAMuyFchw9Nryi7tfuZQRumzIOtQpv+KaVtfjvcIlES0KuI0U3Qh7tGIYPBmO3Mkt3oojcl2RBA==
+  dependencies:
+    "@angular-devkit/core" "14.2.1"
+    "@angular-devkit/schematics" "14.2.1"
+    jsonc-parser "3.1.0"
 
 "@schematics/angular@8.3.23":
   version "8.3.23"
@@ -12518,17 +12540,17 @@ magic-string@0.26.1:
   dependencies:
     sourcemap-codec "^1.4.8"
 
+magic-string@0.26.2, magic-string@^0.26.0:
+  version "0.26.2"
+  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.26.2.tgz#5331700e4158cd6befda738bb6b0c7b93c0d4432"
+  integrity sha512-NzzlXpclt5zAbmo6h6jNc8zl2gNRGHvmsZW4IvZhTC4W7k4OlLP+S5YLussa/r3ixNT66KOQfNORlXHSOy/X4A==
+  dependencies:
+    sourcemap-codec "^1.4.8"
+
 magic-string@^0.25.7:
   version "0.25.9"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.9.tgz#de7f9faf91ef8a1c91d02c2e5314c8277dbcdd1c"
   integrity sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==
-  dependencies:
-    sourcemap-codec "^1.4.8"
-
-magic-string@^0.26.0:
-  version "0.26.2"
-  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.26.2.tgz#5331700e4158cd6befda738bb6b0c7b93c0d4432"
-  integrity sha512-NzzlXpclt5zAbmo6h6jNc8zl2gNRGHvmsZW4IvZhTC4W7k4OlLP+S5YLussa/r3ixNT66KOQfNORlXHSOy/X4A==
   dependencies:
     sourcemap-codec "^1.4.8"
 

@@ -174,7 +174,7 @@
     "@nrwl/nx-cloud": "14.1.2",
     "@nrwl/schematics": "8.12.11",
     "@nrwl/workspace": "14.3.6",
-    "@schematics/angular": "14.0.2",
+    "@schematics/angular": "14.2.1",
     "@types/jasmine": "4.0.3",
     "@types/jasminewd2": "2.0.8",
     "@types/lodash-es": "4.17.6",
