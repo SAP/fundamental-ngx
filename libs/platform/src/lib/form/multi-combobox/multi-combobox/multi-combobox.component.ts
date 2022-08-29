@@ -294,6 +294,11 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         const valueIndexes = new Map<any, number>(this._suggestions.map((s, i) => [s.value, i]));
         this._selectedSuggestions.sort((a, b) => valueIndexes.get(a.value)! - valueIndexes.get(b.value)!);
         this._propagateChange();
+
+        this._tokenizer.onResize();
+
+        this._tokenizer.tokenizerInnerEl.nativeElement.scrollLeft =
+            this._tokenizer.tokenizerInnerEl.nativeElement.scrollWidth;
     }
 
     /** @hidden Handle dialog dismissing, closes popover and sets backup data. */
