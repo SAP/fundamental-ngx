@@ -27,7 +27,6 @@ export class TabsPo extends CoreBaseComponentPo {
     expandedList = '.cdk-overlay-container ';
     expandedListItem = this.expandedList + '.fd-menu__title';
     moreBtn = this.collapsibleOverflowExample + '.fd-tabs__item--overflow';
-    tabPanel = this.collapsibleExample + '.fd-tabs__panel';
 
     // playground form
     modeSelect = '#playgroundmode ';
