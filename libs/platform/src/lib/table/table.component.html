@@ -264,6 +264,8 @@
                         [focusable]="rowsActivable || !!row.navigatable"
                         [hoverable]="rowsActivable || _isShownSelectionColumn || !!row.navigatable"
                         [activable]="rowsActivable || !!row.navigatable"
+                        [active]="rowIdx === _navigatedRowIndex"
+                        [highlightActive]="highlightNavigatedRow"
                         [attr.aria-selected]="row.checked"
                         [attr.aria-rowindex]="rowIdx"
                         (click)="_onRowClick(row)"
