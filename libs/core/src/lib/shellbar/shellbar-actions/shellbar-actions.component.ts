@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 
 import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
+import { SelectComponent } from '@fundamental-ngx/core/select';
 import { ProductSwitchComponent } from '@fundamental-ngx/core/product-switch';
 
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
@@ -82,6 +83,10 @@ export class ShellbarActionsComponent {
     /** @hidden */
     @ContentChild(ComboboxComponent)
     comboboxComponent: ComboboxComponent;
+
+    /** @hidden */
+    @ContentChild(SelectComponent, { static: false })
+    selectComponent: SelectComponent;
 
     /** @hidden */
     @ContentChild(ProductSwitchComponent, { static: false })

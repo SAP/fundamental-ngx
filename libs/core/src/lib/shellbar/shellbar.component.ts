@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
+import { SelectComponent } from '@fundamental-ngx/core/select';
 
 export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
 
@@ -44,17 +45,28 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit {
     comboboxComponent: ComboboxComponent;
 
     /** @hidden */
+    @ContentChild(SelectComponent, { static: false })
+    selectComponent: SelectComponent;
+
+    /** @hidden */
     @ContentChildren(forwardRef(() => ButtonComponent))
     buttons: QueryList<ButtonComponent>;
 
     /** @hidden */
     ngAfterContentInit(): void {
         this.applyShellbarModeToButtons();
+        this.applyShellbarModeToSelect();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
         this.applyShellbarModeToCombobox();
+    }
+
+    applyShellbarModeToSelect(): void {
+        if (this.selectComponent) {
+            this.selectComponent.inShellbar = true;
+        }
     }
 
     /** @hidden */

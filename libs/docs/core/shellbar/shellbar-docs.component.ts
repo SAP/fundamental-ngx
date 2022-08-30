@@ -15,6 +15,8 @@ const sideNavShellbarTs = 'shellbar-side-nav/shellbar-side-nav-example.component
 const sideNavResponsiveShellbarTs = 'shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component.ts';
 const sideNavResponsiveShellbarHtml =
     'shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component.html';
+const shellbarSelectExampleHTMLSrc = 'shellbar-select-example.component.html';
+const shellbarSelectExampleTSSrc = 'shellbar-select-example.component.ts';
 
 @Component({
     selector: 'app-shellbar',
@@ -90,6 +92,20 @@ export class ShellbarDocsComponent {
             fileName: 'shellbar-side-nav-responsive-example',
             component: 'ShellbarSideNavResponsiveExampleComponent',
             scssFileCode: getAssetFromModuleAssets(sideNavResponsiveShellbarScss)
+        }
+    ];
+
+    shellbarWithSelect: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(shellbarSelectExampleHTMLSrc),
+            fileName: 'shellbar-select-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ShellbarSelectExampleComponent',
+            code: getAssetFromModuleAssets(shellbarSelectExampleTSSrc),
+            fileName: 'shellbar-select-example'
         }
     ];
 }

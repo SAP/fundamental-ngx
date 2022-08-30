@@ -2,6 +2,10 @@
     <ng-content select="fd-combobox"></ng-content>
 </div>
 
+<div #shellBarSelect *ngIf="selectComponent" class="fd-shellbar__action" [class.fd-shellbar__action--desktop]="true">
+    <ng-content select="fd-select"></ng-content>
+</div>
+
 <div class="fd-shellbar__action fd-shellbar__action--mobile">
     <fd-shellbar-actions-mobile
         [shellbarActions]="shellbarActions"

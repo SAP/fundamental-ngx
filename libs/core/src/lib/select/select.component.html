@@ -31,6 +31,7 @@
         class="fd-select__control"
         role="list"
         #selectControl
+        [class.fd-shellbar__input-group]="inShellbar"
         [class]="state ? 'is-' + state : ''"
         [class.is-active]="_isOpen"
         [class.is-expanded]="_isOpen"
@@ -53,7 +54,14 @@
         (focus)="_onFocus()"
         (blur)="_onBlur()"
     >
-        <div role="listitem" class="fd-select__text-content" [attr.aria-label]="triggerValue">
+        <div
+            role="listitem"
+            class="fd-select__text-content"
+            [class.fd-shellbar__input-group-input]="inShellbar"
+            [class.fd-shellbar__input-group-input--select]="inShellbar"
+            [class.fd-select_text-content-inShellbar]="inShellbar"
+            [attr.aria-label]="triggerValue"
+        >
             <ng-container
                 [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
                 [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: selected }"
@@ -64,14 +72,18 @@
                 {{ triggerValue }}
             </ng-template>
         </div>
-        <button
-            fd-button
-            tabindex="-1"
-            class="fd-button--transparent fd-select__button"
-            *ngIf="!readonly"
-            [disabled]="disabled"
-            [glyph]="glyph"
-        ></button>
+        <div [class.fd-shellbar__input-group-addon]="inShellbar">
+            <button
+                fd-button
+                tabindex="-1"
+                class="fd-button--transparent"
+                [class.fd-select__button]="!inShellbar"
+                [class.fd-shellbar__button]="inShellbar"
+                *ngIf="!readonly"
+                [disabled]="disabled"
+                [glyph]="glyph"
+            ></button>
+        </div>
     </div>
 </ng-template>
 
