@@ -319,7 +319,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     /** @hidden */
     private _getTokenIndexByLabelOrValue(item: SelectableOptionItem): number {
         return this._selectedSuggestions.findIndex(
-            (token) => token.label === item.label || equal(token.value, item.value)
+            (token) => token.label === item.label && equal(token.value, item.value)
         );
     }
 

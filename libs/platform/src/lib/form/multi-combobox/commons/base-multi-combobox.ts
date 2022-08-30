@@ -685,7 +685,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
                 this._suggestions = this._convertToOptionItems(data).map((optionItem: SelectableOptionItem) => {
                     const selectedElement = this._selectedSuggestions.find(
-                        (selectedItem: SelectableOptionItem) => selectedItem.label === optionItem.label
+                        (selectedItem: SelectableOptionItem) => selectedItem.value === optionItem.value
                     );
                     if (selectedElement) {
                         optionItem.selected = selectedElement.selected;
