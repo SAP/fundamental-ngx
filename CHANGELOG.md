@@ -1,4 +1,25 @@
 
+## [0.36.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.36...v0.36.0-rc.37) (2022-08-26)
+
+
+### Bug Fixes
+
+* **core:** logic for splitting timeline nodes in half ([#8606](https://github.com/SAP/fundamental-ngx/issues/8606)) ([0e47a16](https://github.com/SAP/fundamental-ngx/commit/0e47a1673b8cc9fd7ace581eb0e3dd0fe5d8737c))
+
+## [0.36.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.35...v0.36.0-rc.36) (2022-08-26)
+
+
+### Bug Fixes
+
+* **core:** breadcrumb overflow click ([#8599](https://github.com/SAP/fundamental-ngx/issues/8599)) ([1fc1285](https://github.com/SAP/fundamental-ngx/commit/1fc1285d5244e290532fd36536f11130cd919118))
+
+## [0.36.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.34...v0.36.0-rc.35) (2022-08-23)
+
+
+### Bug Fixes
+
+* **docs:** remove common  margin for buttons ([#8569](https://github.com/SAP/fundamental-ngx/issues/8569)) ([2fe805f](https://github.com/SAP/fundamental-ngx/commit/2fe805ffc6d5cbd4e674e6cbfc63d9a7b6fdde00))
+
 ## [0.36.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.33...v0.36.0-rc.34) (2022-08-23)
 
 
