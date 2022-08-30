@@ -318,9 +318,9 @@
                                     <fd-checkbox
                                         labelClass="fd-table__checkbox-label"
                                         [ngModel]="row.checked"
-                                        (click)="_toggleMultiSelectRow(row, rowIdx, $event)"
-                                        (keydown.enter)="_toggleMultiSelectRow(row, rowIdx, $event)"
-                                        (keydown.space)="_toggleMultiSelectRow(row, rowIdx, $event)"
+                                        (click)="_toggleMultiSelectRow(row, $event)"
+                                        (keydown.enter)="_toggleMultiSelectRow(row, $event)"
+                                        (keydown.space)="_toggleMultiSelectRow(row, $event)"
                                     ></fd-checkbox>
                                 </td>
                             </ng-container>
