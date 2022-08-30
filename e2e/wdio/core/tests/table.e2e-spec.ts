@@ -42,6 +42,7 @@ describe('Table test suite', () => {
         dialogContent,
         inputField,
         tableRow,
+        tableSortableExample,
         tableCell,
         markAllCheckboxes,
         tableCheckboxesExample,
@@ -176,25 +177,25 @@ describe('Table test suite', () => {
     });
 
     describe('Check Column Sorting and Filtering example', () => {
+        const tableSelector = tableColumnSortingExample + ' ' + tableSortableExample;
         it('should check filter work correctly', () => {
-            scrollIntoView(tableColumnSortingExample);
             setValue(columnSortingInput, 'Apple');
-            const rowLength = getElementArrayLength(tableColumnSortingExample + tableRow);
+            const rowLength = getElementArrayLength(tableSelector + tableRow);
             expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(tableColumnSortingExample + tableRow + tableCell);
+            const cellLength = getElementArrayLength(tableSelector + tableRow + tableCell);
             for (let i = 0; i < cellLength - 1; i++) {
-                expect(getText(tableColumnSortingExample + tableRow + tableCell, i)).toBe(tableCellArr2[i]);
+                expect(getText(tableSelector + tableRow + tableCell, i)).toBe(tableCellArr2[i]);
             }
         });
 
         it('should check sort ascending and descending work correctly', () => {
             scrollIntoView(tableColumnSortingExample);
             click(sortDescending);
-            const rowsDesc: string[] = getTextArr(tableColumnSortingExample + ' tbody .fd-table__cell:first-child');
+            const rowsDesc: string[] = getTextArr(tableSelector + ' tbody .fd-table__cell:first-child');
             expect(checkSortDirection(rowsDesc, 'desc')).toBe(true);
 
             click(sortAscending);
-            const rowsAsc: string[] = getTextArr(tableColumnSortingExample + ' tbody .fd-table__cell:first-child');
+            const rowsAsc: string[] = getTextArr(tableSelector + ' tbody .fd-table__cell:first-child');
             expect(checkSortDirection(rowsAsc, 'asc')).toBe(true);
         });
     });
