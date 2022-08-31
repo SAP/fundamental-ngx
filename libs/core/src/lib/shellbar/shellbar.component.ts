@@ -2,9 +2,11 @@ import {
     AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
+    ElementRef,
     forwardRef,
     Input,
     QueryList,
@@ -13,7 +15,7 @@ import {
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 import { SelectComponent } from '@fundamental-ngx/core/select';
-import { Subscription } from 'rxjs';
+import { debounceTime, fromEvent, Subject, Subscription, takeUntil } from 'rxjs';
 
 export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
 
@@ -33,6 +35,17 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit {
     /** Size of Shellbar component 's' | 'm' | 'l' | 'xl' */
     @Input()
     size: ShellbarSizes = 'm';
+
+    @Input()
+    responsive = false;
+
+    @Input()
+    sizesWidth = {
+        s: 320,
+        m: 720,
+        l: 1024,
+        xl: 1400
+    };
 
     /**
      * Whether the Shellbar is used with Side Navigation
@@ -56,6 +69,17 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit {
     @ContentChildren(forwardRef(() => ButtonComponent))
     buttons: QueryList<ButtonComponent>;
 
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
+    constructor(private _elementRef: ElementRef, private _cdr: ChangeDetectorRef) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._attachResizeListener();
+    }
+
     /** @hidden */
     ngAfterContentInit(): void {
         this._applyShellbarModeToButtons();
@@ -63,6 +87,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._onResize();
         this._applyShellbarModeToCombobox();
         this._applyShellbarModeToSelect();
     }
@@ -132,5 +157,28 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit {
                 button.elementRef().nativeElement.classList.add('fd-shellbar__button');
             });
         }
+    }
+
+    /** @hidden */
+    private _onResize(): void {
+        if (this.responsive) {
+            if (this._elementRef.nativeElement.offsetWidth > this.sizesWidth.l) {
+                this.size = 'xl';
+            } else if (this._elementRef.nativeElement.offsetWidth > this.sizesWidth.m) {
+                this.size = 'l';
+            } else if (this._elementRef.nativeElement.offsetWidth > this.sizesWidth.s) {
+                this.size = 'm';
+            } else {
+                this.size = 's';
+            }
+            this._cdr.markForCheck();
+        }
+    }
+
+    /** @hidden */
+    private _attachResizeListener(): void {
+        fromEvent(window, 'resize')
+            .pipe(debounceTime(10), takeUntil(this._onDestroy$))
+            .subscribe(() => this._onResize());
     }
 }

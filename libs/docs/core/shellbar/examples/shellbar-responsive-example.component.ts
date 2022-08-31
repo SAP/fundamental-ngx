@@ -7,6 +7,13 @@ import { ShellbarMenuItem, ShellbarUser, ShellbarUserMenu } from '@fundamental-n
     templateUrl: './shellbar-responsive-example.component.html'
 })
 export class ShellbarResponsiveExampleComponent {
+    sizesWidth = {
+        s: 580,
+        m: 720,
+        l: 1024,
+        xl: 1400
+    };
+
     searchTerm: string;
 
     searchTerms = ['Apple', 'Banana', 'Kiwi', 'Strawberry'];
