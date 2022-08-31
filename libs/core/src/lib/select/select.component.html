@@ -34,7 +34,7 @@
         [class.fd-shellbar__input-group]="inShellbar"
         [class]="state ? 'is-' + state : ''"
         [class.is-active]="_isOpen"
-        [class.is-expanded]="_isOpen"
+        [class.is-expanded]="!inShellbar && _isOpen"
         [class.is-disabled]="disabled"
         [class.is-readonly]="readonly"
         [attr.tabindex]="_tabIndex"
@@ -42,7 +42,7 @@
         [attr.aria-active]="_isOpen"
         aria-live="polite"
         [attr.aria-selected]="selected?.selected"
-        [attr.aria-expanded]="_isOpen"
+        [attr.aria-expanded]="!inShellbar && _isOpen"
         [attr.aria-disabled]="disabled"
         [attr.aria-controls]="controlId + '-list-box'"
         [attr.aria-haspopup]="!(this.readonly || this.disabled)"
@@ -76,8 +76,7 @@
             <button
                 fd-button
                 tabindex="-1"
-                class="fd-button--transparent"
-                [class.fd-select__button]="!inShellbar"
+                class="fd-button--transparent fd-select__button"
                 [class.fd-shellbar__button]="inShellbar"
                 *ngIf="!readonly"
                 [disabled]="disabled"
