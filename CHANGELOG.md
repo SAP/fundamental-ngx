@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.39...v0.36.0-rc.40) (2022-08-31)
+
+
+### Features
+
+* **core:** tabs defaultTab and selectDefaultOnTabsChange ([#8566](https://github.com/SAP/fundamental-ngx/issues/8566)) ([66e420b](https://github.com/SAP/fundamental-ngx/commit/66e420b0f1394b97418823c8caa303ac00db9e46))
+
 ## [0.36.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.38...v0.36.0-rc.39) (2022-08-30)
 
 
