@@ -40,15 +40,15 @@ This `Platform UI library` is not going to be only about UI but it needs to also
 
 This example captures several things:
 
-a). How we abstract from assembly that me as developer I don't deal with layouting of elements for labels, contrals, hints, etc..
+a). Abstract from assembly that doesn't require any element layout for labels, contrals, hints, etc..
 
-b). Assembly like this gives pretty big space in terms of different layouts that we want to support in the application (1 column, 2 columns)
+b). Support different layouts in the application (e.g., 1 column, 2 columns).
 
-c). If we need to group information into sections
+c). Group information into sections
 
-d). How we are handling and forms errors
+d). Handle forms errors
 
-e). Dropdown usage. Everything is heppening inside the component that manages the iteration of the items we just pass list of values.
+e). Dropdown usage. We just pass a list of values to the component that manages the iteration of items.
 
 ```html
 <fdp-form-group

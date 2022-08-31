@@ -149,6 +149,7 @@
     "rxjs": "7.5.6",
     "tslib": "2.3.0",
     "webdriver-manager": "12.1.7",
+    "yarn": "1.22.19",
     "zone.js": "0.11.7"
   },
   "devDependencies": {
