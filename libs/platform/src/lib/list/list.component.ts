@@ -1,4 +1,5 @@
 import {
+    AfterViewChecked,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -74,7 +75,10 @@ let nextListGrpHeaderId = 0;
         '[attr.tabindex]': '-1'
     }
 })
-export class ListComponent<T> extends CollectionBaseInput implements OnInit, AfterViewInit, OnDestroy {
+export class ListComponent<T>
+    extends CollectionBaseInput
+    implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy
+{
     /**  An array that holds a list of all selected items**/
     @Input()
     selectedItems: BaseListItem[];
@@ -428,6 +432,14 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
         const indicator = this.itemEl.nativeElement.querySelector('fd-busy-indicator');
         indicator?.setAttribute('aria-label', '');
+    }
+
+    /** @hidden */
+    ngAfterViewChecked(): void {
+        if (this.hasObject) {
+            // object lists should never be compact
+            this._ulElement?.classList.remove('fd-list--compact');
+        }
     }
 
     /** @hidden */
