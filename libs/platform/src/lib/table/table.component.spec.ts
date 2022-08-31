@@ -83,11 +83,11 @@ describe('TableComponent internal', () => {
 
         const emitChangeSpy = spyOn(component.rowSelectionChange, 'emit').and.stub();
 
-        component._toggleMultiSelectRow(component._tableRows[0], 0);
+        component._toggleMultiSelectRow(component._tableRows[0]);
 
         expect(emitChangeSpy).toHaveBeenCalled();
 
-        component._toggleMultiSelectRow(component._tableRows[1], 1);
+        component._toggleMultiSelectRow(component._tableRows[1]);
 
         expect(emitChangeSpy).toHaveBeenCalled();
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(2);

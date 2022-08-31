@@ -307,12 +307,19 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     relationKey: string;
 
-    /** Whether row is navigatable.
+    /**
+     * Whether row is navigatable.
      * Pass boolean value to set state for the all rows.
      * Pass string value with the key of the row item's field to compute state for every single row.
      */
     @Input()
     rowNavigatable: string | boolean = false;
+
+    /**
+     * Whether to highlight navigated row.
+     */
+    @Input()
+    highlightNavigatedRow = false;
 
     /** Whether table row can be clicked */
     @Input()
@@ -689,6 +696,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _dragDropInProgress = false;
 
     /** @hidden */
+    _navigatedRowIndex: number;
+
+    /** @hidden */
     get _selectionColumnWidth(): number {
         return this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensityObserver.value) ?? 0 : 0;
     }
@@ -986,7 +996,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         if (this.selectionMode === SelectionMode.SINGLE) {
             this._toggleSingleSelectableRow(row);
         } else if (this.selectionMode === this.SELECTION_MODE.MULTIPLE) {
-            this._toggleMultiSelectRow(row, rowIndex);
+            this._toggleMultiSelectRow(row);
         }
     }
 
@@ -1105,15 +1115,17 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * @hidden
      * Toggle selectable row in SelectionMode.MULTIPLE
      */
-    _toggleMultiSelectRow(rowToToggle: TableRow, index: number, event?: Event): void {
+    _toggleMultiSelectRow(rowToToggle: TableRow, event?: Event): void {
         if (this.selectionMode !== SelectionMode.MULTIPLE) {
             throw new Error('Unexpected selection mode');
         }
         const checked = (rowToToggle.checked = !rowToToggle.checked);
         const rows = this._tableRows;
+        const selectedIndex = this._tableRows.findIndex((row) => row === rowToToggle);
+
         const removed: TableRow<T>[] = [];
         const added: TableRow<T>[] = [];
-        this._rangeSelector.onRangeElementToggled(index, event as PointerEvent | KeyboardEvent);
+        this._rangeSelector.onRangeElementToggled(selectedIndex, event as PointerEvent | KeyboardEvent);
 
         this._rangeSelector.applyValueToEachInRange((idx) => {
             const row = rows[idx];
@@ -1352,6 +1364,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         }
 
         const rowIndex = this._tableRows.indexOf(row);
+
+        if (this.highlightNavigatedRow) {
+            this._navigatedRowIndex = rowIndex;
+        }
+
         this.rowNavigate.emit(new TableRowActivateEvent<T>(rowIndex, row.value));
     }
 

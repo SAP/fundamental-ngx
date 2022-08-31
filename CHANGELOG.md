@@ -1,4 +1,18 @@
 
+## [0.36.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.38...v0.36.0-rc.39) (2022-08-30)
+
+
+### Bug Fixes
+
+* **platform:** fix random selection of table checkbox ([#8598](https://github.com/SAP/fundamental-ngx/issues/8598)) ([8d16e8d](https://github.com/SAP/fundamental-ngx/commit/8d16e8d305bca0106355d62aa563271b4a2b2501))
+
+## [0.36.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.37...v0.36.0-rc.38) (2022-08-30)
+
+
+### Bug Fixes
+
+* **core,platform:** highlight navigated row ([#8594](https://github.com/SAP/fundamental-ngx/issues/8594)) ([8dbbbb8](https://github.com/SAP/fundamental-ngx/commit/8dbbbb8f12d846e2f988c4219487f53719a03776))
+
 ## [0.36.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.36...v0.36.0-rc.37) (2022-08-26)
 
 

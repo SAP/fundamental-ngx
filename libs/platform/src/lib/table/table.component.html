@@ -264,6 +264,8 @@
                         [focusable]="rowsActivable || !!row.navigatable"
                         [hoverable]="rowsActivable || _isShownSelectionColumn || !!row.navigatable"
                         [activable]="rowsActivable || !!row.navigatable"
+                        [active]="rowIdx === _navigatedRowIndex"
+                        [highlightActive]="highlightNavigatedRow"
                         [attr.aria-selected]="row.checked"
                         [attr.aria-rowindex]="rowIdx"
                         (click)="_onRowClick(row)"
@@ -316,9 +318,9 @@
                                     <fd-checkbox
                                         labelClass="fd-table__checkbox-label"
                                         [ngModel]="row.checked"
-                                        (click)="_toggleMultiSelectRow(row, rowIdx, $event)"
-                                        (keydown.enter)="_toggleMultiSelectRow(row, rowIdx, $event)"
-                                        (keydown.space)="_toggleMultiSelectRow(row, rowIdx, $event)"
+                                        (click)="_toggleMultiSelectRow(row, $event)"
+                                        (keydown.enter)="_toggleMultiSelectRow(row, $event)"
+                                        (keydown.space)="_toggleMultiSelectRow(row, $event)"
                                     ></fd-checkbox>
                                 </td>
                             </ng-container>

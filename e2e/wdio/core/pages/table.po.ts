@@ -44,6 +44,7 @@ export class TablePo extends CoreBaseComponentPo {
     listItem = '.fd-menu__item';
     selectedPage = this.paginationLink + '.is-selected';
     tableCellWOHeader = ' .fd-table__cell:not(.cdk-header-cell)';
+    tableSortableExample = '.fd-table-sortable-example ';
 
     open(): void {
         super.open(this.url);
