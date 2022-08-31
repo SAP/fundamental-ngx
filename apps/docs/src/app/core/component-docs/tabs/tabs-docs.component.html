@@ -130,6 +130,17 @@
 </component-example>
 <code-example [exampleFiles]="collapsibleTab"></code-example>
 
+<fd-docs-section-title id="default-tab" componentName="tabs"> Default Tab</fd-docs-section-title>
+<description>
+    The first tab is the default tab. To specify default tab, use <code>[defaultTab]</code> input property and pass id
+    of the tab. Also, on tabs array change the selected tab kept selected (if possible). If you want to select default
+    tab anyway, use <code>[selectDefaultOnTabsChange]</code> input property.
+</description>
+<component-example>
+    <fd-default-tab-example></fd-default-tab-example>
+</component-example>
+<code-example [exampleFiles]="defaultTab"></code-example>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fd-tab-list [mode]="data.properties.items.mode" [fdCompact]="data.properties.items.compact">
         <fd-tab

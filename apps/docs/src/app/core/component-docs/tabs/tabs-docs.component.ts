@@ -19,6 +19,8 @@ import stackedTabT from '!./examples/tab-stacked-content-example/tab-stacked-con
 import stackedTabH from '!./examples/tab-stacked-content-example/tab-stacked-content-example.component.html?raw';
 import collapsibleTabT from '!./examples/tab-collapsible-example/tab-collapsible-example.component.ts?raw';
 import collapsibleTabH from '!./examples/tab-collapsible-example/tab-collapsible-example.component.html?raw';
+import defaultTabT from '!./examples/default-tab/default-tab-example.component.ts?raw';
+import defaultTabH from '!./examples/default-tab/default-tab-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 
@@ -247,6 +249,16 @@ export class TabsDocsComponent {
             code: tabSelectionSrc,
             fileName: 'tab-selection-example',
             typescriptFileCode: tabSelectionSrcTs,
+            component: 'TabSelectionExampleComponent'
+        }
+    ];
+
+    defaultTab: ExampleFile[] = [
+        {
+            language: 'html',
+            code: defaultTabH,
+            fileName: 'default-tab-example',
+            typescriptFileCode: defaultTabT,
             component: 'TabSelectionExampleComponent'
         }
     ];

@@ -24,12 +24,14 @@
             >
                 <a
                     fd-tab-link
-                    [attr.aria-controls]="tab.id"
+                    role="tab"
+                    [id]="tab.id"
+                    [attr.aria-controls]="tab.panelId"
                     [attr.aria-label]="tab.ariaLabel || null"
+                    [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
                     fdOverflowLayoutFocusableItem
                     [focusable]="tab.active"
                     [navigable]="!tab.disabled"
-                    [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
                     [active]="tab.active"
                     [disabled]="tab.disabled"
                     (keydown)="_tabHeaderKeydownHandler($event, tab.panel)"
@@ -71,11 +73,13 @@
                         </ng-container>
                     </ng-container>
                 </a>
+
                 <div fd-tab-process-icon *ngIf="mode === 'process' && !last"></div>
             </div>
 
             <div *ngIf="tab.isHeader" fd-tab-separator></div>
         </ng-container>
+
         <ng-container *fdOverflowExpand="let tabs; items: _tabArray">
             <fd-item-expand
                 [fdMenuTrigger]="menu"
@@ -84,6 +88,7 @@
                 (keydown)="_onTriggerKeydown($event, menu)"
             >
             </fd-item-expand>
+
             <fd-menu #menu>
                 <li
                     fd-menu-item

@@ -5,7 +5,9 @@ import {
     ContentChild,
     ElementRef,
     EventEmitter,
+    HostBinding,
     Input,
+    NgZone,
     OnChanges,
     Optional,
     Output,
@@ -15,7 +17,7 @@ import {
 import { TabListComponent } from '../tab-list.component';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
 import { TabItemState } from '../tab-item/tab-item.directive';
-import { Subject } from 'rxjs';
+import { first, Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 let tabPanelUniqueId = 0;
@@ -33,9 +35,8 @@ export class TabPanelStateChange {
     host: {
         role: 'tabpanel',
         class: 'fd-tabs__panel',
-        '[attr.id]': 'id',
-        '[class.is-expanded]': 'expanded',
-        '[attr.aria-expanded]': 'expanded ? true : null'
+        '[id]': '_panelId',
+        '[attr.aria-labelledby]': 'id'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -45,11 +46,11 @@ export class TabPanelComponent implements OnChanges {
     @Input()
     id: string = 'fd-tab-panel' + tabPanelUniqueId++;
 
-    /** Aria-label of the tab. Also applied to the tab header. */
+    /** Aria-label of the tab. */
     @Input()
     ariaLabel: Nullable<string>;
 
-    /** Id of the element that labels the tab. Also applied to the tab header. */
+    /** Id of the element that labels the tab. */
     @Input()
     ariaLabelledBy: Nullable<string>;
 
@@ -95,13 +96,23 @@ export class TabPanelComponent implements OnChanges {
     /** @hidden */
     _forcedVisibility = false;
 
+    /** @hidden */
+    @HostBinding('class.is-expanded')
+    _expandedClass = false;
+
     /** @hidden Whether to display tab panel content */
     private _expanded = false;
+
+    /** @hidden */
+    get _panelId(): string {
+        return this.id + '-panel';
+    }
 
     /** @hidden */
     constructor(
         public elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
+        private _ngZone: NgZone,
         @Optional() private readonly _tabsComponent: TabListComponent | null
     ) {}
 
@@ -134,6 +145,13 @@ export class TabPanelComponent implements OnChanges {
             }
 
             this._changeDetRef.detectChanges();
+
+            this._ngZone.onStable.pipe(first()).subscribe(() => this._updateHost());
         }
+    }
+
+    /** @hidden */
+    private _updateHost(): void {
+        this._expandedClass = this.expanded;
     }
 }

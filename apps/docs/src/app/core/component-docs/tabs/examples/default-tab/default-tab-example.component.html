@@ -1,0 +1,18 @@
+<label fd-form-label>Default tab specified</label>
+<fd-tab-list defaultTab="three">
+    <fd-tab id="one" title="Link 1"> Content for tab 1 </fd-tab>
+    <fd-tab id="two" title="Link 2"> Content for tab 2 </fd-tab>
+    <fd-tab id="three" title="Link 3"> Content for tab 3 </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<button fd-button (click)="hide = !hide">{{ hide ? 'Show' : 'Hide' }} first tab</button>
+
+<label fd-form-label> Default (first, if not specified) tab will be selected on tabs array change. </label>
+<fd-tab-list [selectDefaultOnTabsChange]="true">
+    <fd-tab *ngIf="!hide" id="one" title="Link 1"> Content for tab 1 </fd-tab>
+    <fd-tab id="two" title="Link 2"> Content for tab 2 </fd-tab>
+    <fd-tab id="three" title="Link 3"> Content for tab 3 </fd-tab>
+</fd-tab-list>

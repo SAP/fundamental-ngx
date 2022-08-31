@@ -34,7 +34,7 @@ describe('Tabs test suite', () => {
         chooseTabsBtn,
         expandedListItem,
         moreBtn,
-        tabPanel,
+
         modeSelect,
         iconOnlyMode,
         compactCheckBox,
@@ -120,7 +120,7 @@ describe('Tabs test suite', () => {
     it('should check collapsible tabs', () => {
         scrollIntoView(collapsibleExample);
         clickOnTab(collapsibleExample, 2);
-        expect(getAttributeByName(tabPanel, 'aria-expanded', 2)).toEqual('true');
+        expect(getAttributeByName(collapsibleExample + ' ' + fdTabFF, 'aria-selected', 2)).toEqual('true');
     });
 
     it('should check that tabs change according to chosen filter and compact modes', () => {
