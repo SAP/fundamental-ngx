@@ -51,6 +51,7 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
 import { ComboboxItem } from './combobox-item';
 import { GroupFunction } from './list-group.pipe';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 
 let comboboxUniqueId = 0;
 
@@ -326,6 +327,9 @@ export class ComboboxComponent
     /** Keys, that will close popover's body, when dispatched on search input */
     readonly closingKeys: number[] = [ESCAPE];
 
+    /** @hidden */
+    readonly _repositionScrollStrategy: RepositionScrollStrategy;
+
     /** Whether the combobox is opened. */
     open = false;
 
@@ -358,12 +362,15 @@ export class ComboboxComponent
 
     /** @hidden */
     constructor(
+        private readonly _overlay: Overlay,
         private readonly _cdRef: ChangeDetectorRef,
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _dynamicComponentService: DynamicComponentService,
         readonly _contentDensityObserver: ContentDensityObserver
-    ) {}
+    ) {
+        this._repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: true });
+    }
 
     /** @hidden */
     ngOnInit(): void {
