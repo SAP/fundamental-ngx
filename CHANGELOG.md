@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.40...v0.36.0-rc.41) (2022-09-01)
+
+
+### Bug Fixes
+
+* **core:** focus select control on escape press ([#8609](https://github.com/SAP/fundamental-ngx/issues/8609)) ([075f8e1](https://github.com/SAP/fundamental-ngx/commit/075f8e1f80b9b9c1fc1eaaab2c30c4ba237488cf))
+
 ## [0.36.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.39...v0.36.0-rc.40) (2022-08-31)
 
 
