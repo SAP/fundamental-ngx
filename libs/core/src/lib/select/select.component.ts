@@ -33,7 +33,7 @@ import { defer, merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 import { FormStates, Nullable, PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 
@@ -43,6 +43,7 @@ import { FdOptionSelectionChange, OptionComponent } from './option/option.compon
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { SelectMobileModule } from './select-mobile/select-mobile.module';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { ESCAPE } from '@angular/cdk/keycodes';
 
 let selectUniqueId = 0;
 
@@ -650,6 +651,9 @@ export class SelectComponent
             this._isOpen
                 ? this._keyManagerService._handleOpenKeydown(event)
                 : this._keyManagerService._handleClosedKeydown(event);
+        }
+        if (KeyUtil.isKeyCode(event, ESCAPE)) {
+            this._controlElementRef.nativeElement.focus();
         }
     }
 
