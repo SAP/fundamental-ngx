@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
+import { StepInputModule } from '@fundamental-ngx/core/step-input';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -70,6 +72,8 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
         BusyIndicatorModule,
+        SplitButtonModule,
+        StepInputModule,
         PopoverModule
     ],
     exports: [RouterModule],
