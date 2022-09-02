@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.41...v0.36.0-rc.42) (2022-09-02)
+
+
+### Features
+
+* **core,platform:** add Chinese, Polish and Hindi language ([#8638](https://github.com/SAP/fundamental-ngx/issues/8638)) ([666f6af](https://github.com/SAP/fundamental-ngx/commit/666f6af688a725e6d092caf82679c9f58e953a88))
+
 ## [0.36.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.40...v0.36.0-rc.41) (2022-09-01)
 
 
