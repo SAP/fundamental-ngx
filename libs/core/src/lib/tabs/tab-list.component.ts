@@ -205,10 +205,12 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
 
     /** @hidden */
     _highlightActiveTab({ id }: HTMLElement): void {
-        const tab = this._tabArray.find((_tab) => _tab.id === id);
+        const tab = this._tabArray.find((_tab) => _tab.panel._panelId === id);
         if (tab) {
+            if (!tab.active) {
+                this.selectedTabChange.emit(tab.panel);
+            }
             this._activateStackedTab(tab.panel, false);
-            this.selectedTabChange.emit(tab.panel);
         }
     }
 
