@@ -224,7 +224,7 @@
     "lint-staged": "12.4.0",
     "nan": "2.14.2",
     "ng-packagr": "14.0.2",
-    "ngx-cva-test-suite": "~1.0.4",
+    "ngx-cva-test-suite": "~2.0.0",
     "nx": "14.3.6",
     "postcss": "^8.4.8",
     "postcss-import": "14.1.0",
