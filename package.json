@@ -202,7 +202,7 @@
     "eslint-plugin-jsdoc": "37.9.6",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "fs-extra": "10.0.1",
-    "github-assistant": "0.3.3",
+    "github-assistant": "0.3.4",
     "husky": "6.0.0",
     "jasmine-core": "4.1.1",
     "jasmine-marbles": "0.8.4",
