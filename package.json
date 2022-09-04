@@ -156,7 +156,7 @@
     "@angular-devkit/build-angular": "14.0.2",
     "@angular-devkit/core": "14.0.2",
     "@angular-devkit/schematics": "14.0.2",
-    "@angular-eslint/eslint-plugin": "14.02",
+    "@angular-eslint/eslint-plugin": "14.0",
     "@angular-eslint/eslint-plugin-template": "14.0.2",
     "@angular-eslint/template-parser": "14.0.2",
     "@angular/cli": "~14.0.0",
