@@ -575,7 +575,7 @@ export class ComboboxComponent
 
         if (!this.open && !this.mobile) {
             this.handleBlur();
-            this.searchInputElement.nativeElement.focus();
+            this.searchInputElement.nativeElement.focus({ preventScroll: true });
         }
 
         this._cdRef.detectChanges();
