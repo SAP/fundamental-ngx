@@ -19,8 +19,8 @@ import {
     Input,
     OnInit
 } from '@angular/core';
-import { debounceTime, filter, fromEvent, Subject, Subscription } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { debounceTime, filter, fromEvent, startWith, Subject, Subscription } from 'rxjs';
+import { intersectionObservable, KeyUtil } from '@fundamental-ngx/core/utils';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowContainer } from './interfaces/overflow-container.interface';
 import { OverflowExpand } from './interfaces/overflow-expand.interface';
@@ -154,7 +154,7 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
 
     /** @hidden */
     @HostBinding('class')
-    private readonly _initialClass = 'fd-overflow-layout';
+    readonly _initialClass = 'fd-overflow-layout';
 
     /** @hidden */
     private readonly _subscription = new Subscription();
@@ -186,8 +186,51 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         );
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this._setupKeyboardListener();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._subscription.add(
+            this._overflowLayoutService.detectChanges.subscribe(() => {
+                this._cdr.detectChanges();
+            })
+        );
+
+        this._subscription.add(
+            this._overflowLayoutService.onResult.subscribe((result) => {
+                this._hiddenItems = result.hiddenItems;
+                this._showMore = result.showMore;
+
+                this.hiddenItemsCount.emit(result.hiddenItems.length);
+                this.visibleItemsCount.emit(this._allItems.filter((i) => !i.hidden).length);
+
+                this._cdr.detectChanges();
+            })
+        );
+
+        this._subscription.add(
+            this._items.changes.pipe(startWith(() => this._items)).subscribe(() => {
+                this._allItems = this._items.toArray();
+
+                this._cdr.detectChanges();
+            })
+        );
+
+        this._subscription.add(
+            intersectionObservable(this._elementRef.nativeElement).subscribe(() => {
+                this._overflowLayoutService.startListening(this._getConfig());
+
+                this._canListenToResize = true;
+            })
+        );
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscription.unsubscribe();
     }
 
     /**
@@ -197,13 +240,9 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         if (!this._canListenToResize) {
             return;
         }
+
         this._overflowLayoutService.setConfig(this._getConfig());
         this._fillTrigger$.next();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscription.unsubscribe();
     }
 
     /**
@@ -236,39 +275,6 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         if (opened) {
             this._overflowPopoverContent?.focusFirstTabbableElement();
         }
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._subscription.add(
-            this._overflowLayoutService.detectChanges.subscribe(() => {
-                this._cdr.detectChanges();
-            })
-        );
-
-        this._subscription.add(
-            this._overflowLayoutService.onResult.subscribe((result) => {
-                this._hiddenItems = result.hiddenItems;
-                this._showMore = result.showMore;
-                this.hiddenItemsCount.emit(result.hiddenItems.length);
-                this.visibleItemsCount.emit(this._allItems.filter((i) => !i.hidden).length);
-                this._cdr.detectChanges();
-            })
-        );
-
-        this._subscription.add(
-            this._items.changes.subscribe(() => {
-                this._allItems = this._items.toArray();
-                this._cdr.detectChanges();
-            })
-        );
-
-        this._allItems = this._items.toArray();
-        this._cdr.detectChanges();
-
-        this._overflowLayoutService.startListening(this._getConfig());
-
-        this._canListenToResize = true;
     }
 
     /** @hidden */
