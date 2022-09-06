@@ -45,7 +45,7 @@
             *ngIf="loadMore && !loadOnScroll"
             (click)="_getMoreData()"
             fd-list-item
-            (keydown)="_loadOnkeyPress($event)"
+            (keydown)="_loadOnKeyPress($event)"
             class="fd-list__item fd-list__item--growing fd-list__item--action"
             [tabindex]="0"
             role="button"
