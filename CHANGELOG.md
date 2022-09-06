@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.42...v0.36.0-rc.43) (2022-09-06)
+
+
+### Bug Fixes
+
+* **platform:** scroll to end of tokenizer when adding tokens ([#8623](https://github.com/SAP/fundamental-ngx/issues/8623)) ([59c9a08](https://github.com/SAP/fundamental-ngx/commit/59c9a08a1db96e0b1a9d6515bc6d01bae0a21f71))
+
 ## [0.36.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.41...v0.36.0-rc.42) (2022-09-02)
 
 
