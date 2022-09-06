@@ -1,4 +1,4 @@
-<ng-container *ngIf="hintOptions(fieldGroup) as hintOptions; else noHint">
+<ng-container *ngIf="fieldGroup && hintOptions(fieldGroup) as hintOptions; else noHint">
     <ng-template #inlineHelpRef>
         <span fd-link [undecorated]="true">
             <fd-icon
@@ -24,6 +24,6 @@
 </ng-container>
 <ng-template #noHint>
     <h1 class="fd-form-group__header-text">
-        {{ fieldGroup.label }}
+        {{ fieldGroup?.label }}
     </h1>
 </ng-template>

@@ -11,33 +11,31 @@
     <div *ngIf="mainTitle" class="fd-form-header">
         <ng-template [ngTemplateOutlet]="mainTitleTemplate"></ng-template>
     </div>
-    <div class="fd-container fd-form-layout-grid-container" [class.fd-col--compact]="contentDensityObserver.isCompact">
-        <ng-container *ngFor="let row of formRows | keyvalue; trackBy: trackByFn">
-            <div class="fd-row fd-row--top">
-                <ng-container *ngIf="$fieldGroup(row.value) as value">
-                    <div [fieldGroup]="value" fdp-form-group-header *ngIf="value.label"></div>
-                </ng-container>
 
-                <ng-container *ngFor="let fields of row | fieldGroupRowValue | keyvalue; trackBy: trackByFn">
-                    <div
-                        class="fd-form-group fd-col__form-group fd-col"
-                        [class]="xlCol"
-                        [class.fd-col--compact]="contentDensityObserver.isCompact"
-                    >
-                        <div class="fd-form-item fd-row__form-item fd-row">
-                            <div
-                                *ngFor="let field of fields.value; trackBy: trackByFieldName"
-                                class="fd-col fd-col-wrap"
-                                [ngClass]="_inlineColumnLayoutClass"
-                                [style.order]="field.rank"
-                            >
-                                <ng-container *ngTemplateOutlet="field?.renderer || null"></ng-container>
-                            </div>
-                        </div>
+    <div class="fd-container fd-form-layout-grid-container">
+        <div *ngFor="let column of formRows | keyvalue; trackBy: trackByFn" class="fd-row">
+            <div
+                *ngFor="let fields of column | fieldGroupRowValue | keyvalue; trackBy: trackByFn; let index = index"
+                class="fd-col fd-form-group"
+                [class]="xlCol"
+            >
+                <div class="fd-row" *ngIf="$fieldGroup(column.value) as value">
+                    <div class="fd-col">
+                        <div *ngIf="value.label" fdp-form-group-header [fieldGroup]="index === 0 ? value : null"></div>
                     </div>
-                </ng-container>
+                </div>
+
+                <div
+                    *ngFor="let field of fields.value; trackBy: trackByFieldName"
+                    class="fd-row fd-form-item"
+                    [class.fd-form-item--compact]="contentDensityObserver.isCompact"
+                >
+                    <div class="fd-col" [class]="_inlineColumnLayoutClass" [style.order]="field.rank">
+                        <ng-container *ngTemplateOutlet="field?.renderer || null"></ng-container>
+                    </div>
+                </div>
             </div>
-        </ng-container>
+        </div>
     </div>
 </ng-template>
 
