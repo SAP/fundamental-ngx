@@ -176,13 +176,32 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
     moreItemsButtonText: (hiddenItemsCount: number) => string = (count) => `${count} more`;
 
     /** @hidden */
+    private get _config(): OverflowLayoutConfig {
+        return {
+            visibleItems: this._visibleItems,
+            items: this._items,
+            focusableItems: this._focusableOverflowItems,
+            itemsWrapper: this._itemsWrapper.nativeElement,
+            showMoreContainer: this._showMoreContainer.nativeElement,
+            layoutContainerElement: this._layoutContainer.nativeElement,
+            maxVisibleItems: this.maxVisibleItems,
+            direction: this.showMorePosition,
+            enableKeyboardNavigation: this.enableKeyboardNavigation,
+            reverseHiddenItems: this.reverseHiddenItems
+        };
+    }
+
+    /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
         protected _cdr: ChangeDetectorRef,
         protected _overflowLayoutService: OverflowLayoutService
     ) {
         this._subscription.add(
-            this._fillTrigger$.pipe(debounceTime(30)).subscribe(() => this._overflowLayoutService.fitVisibleItems())
+            this._fillTrigger$.pipe(debounceTime(30)).subscribe(() => {
+                this._overflowLayoutService.setConfig(this._config);
+                this._overflowLayoutService.fitVisibleItems();
+            })
         );
     }
 
@@ -221,7 +240,7 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
 
         this._subscription.add(
             intersectionObservable(this._elementRef.nativeElement).subscribe(() => {
-                this._overflowLayoutService.startListening(this._getConfig());
+                this._overflowLayoutService.startListening(this._config);
 
                 this._canListenToResize = true;
             })
@@ -241,7 +260,6 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
             return;
         }
 
-        this._overflowLayoutService.setConfig(this._getConfig());
         this._fillTrigger$.next();
     }
 
@@ -275,22 +293,6 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         if (opened) {
             this._overflowPopoverContent?.focusFirstTabbableElement();
         }
-    }
-
-    /** @hidden */
-    private _getConfig(): OverflowLayoutConfig {
-        return {
-            visibleItems: this._visibleItems,
-            items: this._items,
-            focusableItems: this._focusableOverflowItems,
-            itemsWrapper: this._itemsWrapper.nativeElement,
-            showMoreContainer: this._showMoreContainer.nativeElement,
-            layoutContainerElement: this._layoutContainer.nativeElement,
-            maxVisibleItems: this.maxVisibleItems,
-            direction: this.showMorePosition,
-            enableKeyboardNavigation: this.enableKeyboardNavigation,
-            reverseHiddenItems: this.reverseHiddenItems
-        };
     }
 
     /** @hidden */
