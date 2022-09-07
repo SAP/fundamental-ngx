@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.43...v0.36.0-rc.44) (2022-09-07)
+
+
+### Features
+
+* **core:** table keyboard navigation ([#8635](https://github.com/SAP/fundamental-ngx/issues/8635)) ([7c1f32f](https://github.com/SAP/fundamental-ngx/commit/7c1f32f8bb949c045542946a64909c978d22df27))
+
 ## [0.36.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.42...v0.36.0-rc.43) (2022-09-06)
 
 
