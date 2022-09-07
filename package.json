@@ -170,7 +170,7 @@
     "@nrwl/cli": "14.3.6",
     "@nrwl/devkit": "14.3.6",
     "@nrwl/eslint-plugin-nx": "14.3.6",
-    "@nrwl/linter": "14.3.6",
+    "@nrwl/linter": "14.6.5",
     "@nrwl/nx-cloud": "14.1.2",
     "@nrwl/schematics": "8.12.11",
     "@nrwl/workspace": "14.3.6",
