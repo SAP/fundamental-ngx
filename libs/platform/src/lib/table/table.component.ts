@@ -174,6 +174,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @HostBinding('attr.id')
     id = `fdp-table-${tableUniqueId++}`;
 
+    /** Whether to allow resizing columns by dragging the column edge with mouse. */
+    @Input()
+    enableDragResize = true;
+
     /**
      * Table data source.
      * Can be @type { T[] | Observable<T[]> | TableDataSource<T> }

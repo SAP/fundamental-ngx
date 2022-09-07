@@ -13,7 +13,7 @@
         <ng-container [ngTemplateOutlet]="tableTemplate"></ng-container>
 
         <!-- Table column resizer for visually representing the resizing process -->
-        <fdp-table-column-resizer class="fdp-table__column-resizer"></fdp-table-column-resizer>
+        <fdp-table-column-resizer *ngIf="enableDragResize" class="fdp-table__column-resizer"></fdp-table-column-resizer>
     </div>
 </fd-busy-indicator>
 
