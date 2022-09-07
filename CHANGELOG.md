@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.44...v0.36.0-rc.45) (2022-09-07)
+
+
+### Bug Fixes
+
+* **core:** combobox scroll strategy ([#8626](https://github.com/SAP/fundamental-ngx/issues/8626)) ([492c445](https://github.com/SAP/fundamental-ngx/commit/492c445203a9c8d67e0e475c339828fc79149b27))
+
 ## [0.36.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.43...v0.36.0-rc.44) (2022-09-07)
 
 
