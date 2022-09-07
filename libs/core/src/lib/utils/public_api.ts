@@ -66,6 +66,7 @@ export * from './services/keyboard-support/keyboard-support.service';
 export * from './services/resize-observer.service';
 export * from './services/local-storage.service';
 export * from './services/destroyed.service';
+export * from './services/tabbable-element.service';
 
 export * from './functions';
 
