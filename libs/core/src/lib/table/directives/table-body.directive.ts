@@ -8,12 +8,12 @@ export class TableBodyDirective {
     @HostBinding('class.fd-table__body')
     fdTableBodyClass = true;
 
-    /** Whether or not to show the table body's horizontal borders */
+    /**  Whether to show the table body's horizontal borders */
     @HostBinding('class.fd-table__body--no-horizontal-borders')
     @Input()
     noBorderX = false;
 
-    /** Whether or not to show the table body's vertical borders */
+    /**  Whether to show the table body's vertical borders */
     @HostBinding('class.fd-table__body--no-vertical-borders')
     @Input()
     noBorderY = false;
