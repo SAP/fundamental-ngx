@@ -1,15 +1,4 @@
-import {
-    Directive,
-    ElementRef,
-    EventEmitter,
-    forwardRef,
-    HostBinding,
-    HostListener,
-    Input,
-    Output
-} from '@angular/core';
-
-import { ListFocusItem } from '../list-focus-item.model';
+import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 
 let uniqueId = 0;
 
@@ -19,15 +8,9 @@ let uniqueId = 0;
         '[style.outline]': '"none"',
         '[class.fd-list__item]': 'true',
         '[class.fd-list__group-header]': 'true'
-    },
-    providers: [
-        {
-            provide: ListFocusItem,
-            useExisting: forwardRef(() => ListGroupHeaderDirective)
-        }
-    ]
+    }
 })
-export class ListGroupHeaderDirective extends ListFocusItem {
+export class ListGroupHeaderDirective {
     /** id of an element to be applied */
     @Input()
     @HostBinding('attr.id')
@@ -37,9 +20,7 @@ export class ListGroupHeaderDirective extends ListFocusItem {
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
-    constructor(readonly elementRef: ElementRef) {
-        super(elementRef);
-    }
+    constructor(readonly elementRef: ElementRef) {}
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
