@@ -32,7 +32,7 @@
     </ng-container>
 </fd-toolbar>
 
-<table fd-table aria-label="Column Sorting and Filtering" class="fd-table-sortable-example">
+<table fd-table aria-label="Column Sorting and Filtering" class="fd-table-sortable-example" [allCellsFocusable]="true">
     <thead fd-table-header>
         <tr fd-table-row>
             <th fd-table-cell>Column 1</th>
@@ -59,7 +59,7 @@
 
 <p>Sorting and filtering with inline popover:</p>
 
-<table fd-table aria-label="Column Sorting and Filtering">
+<table fd-table aria-label="Column Sorting and Filtering" [allCellsFocusable]="true">
     <thead fd-table-header>
         <tr fd-table-row>
             <th fd-table-cell>

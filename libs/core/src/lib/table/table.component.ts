@@ -4,15 +4,18 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChildren,
     HostBinding,
     Input,
     OnDestroy,
+    QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil, TabbableElementService } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { TableCellDirective } from './directives/table-cell.directive';
+import { TableRowDirective } from './directives/table-row.directive';
 import { FdTable } from './fd-table.interface';
 import { TableService } from './table.service';
 import {
@@ -20,6 +23,10 @@ import {
     contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
+
+// Since we are searching for focusable cell not by the component but by the element, we need to filter items by classname.
+export const FOCUSABLE_CELL_CLASSNAME = 'fd-table__cell--focusable';
+export const FOCUSABLE_ROW_CLASSNAME = 'fd-table__row--focusable';
 
 /**
  * The component that represents a table.
@@ -38,6 +45,7 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         TableService,
+        TabbableElementService,
         { provide: FdTable, useExisting: TableComponent },
         contentDensityObserverProviders({
             modifiers: {
@@ -82,14 +90,24 @@ export class TableComponent implements AfterViewInit, OnDestroy, FdTable {
     allCellsFocusable = false;
 
     /** @hidden */
+    @ContentChildren(TableCellDirective, { descendants: true })
+    private _cells: QueryList<TableCellDirective>;
+
+    /** @hidden */
+    @ContentChildren(TableRowDirective, { descendants: true })
+    private _rows: QueryList<TableRowDirective>;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(
-        private _tableService: TableService,
-        private _cdr: ChangeDetectorRef,
-        private _contentDensityObserver: ContentDensityObserver
+        private readonly _tableService: TableService,
+        private readonly _cdr: ChangeDetectorRef,
+        private readonly _contentDensityObserver: ContentDensityObserver,
+        private readonly _tabbableElementService: TabbableElementService
     ) {
-        _contentDensityObserver.subscribe();
+        this._contentDensityObserver.subscribe();
     }
 
     /** @hidden */
@@ -108,9 +126,32 @@ export class TableComponent implements AfterViewInit, OnDestroy, FdTable {
     }
 
     /** @hidden */
-    private _propagateKeys(keys: string[]): void {
-        if (keys) {
-            this._tableService.changeKeys([...keys]);
+    _onRowKeydown(event: KeyboardEvent, tableRow: TableRowDirective): void {
+        if (!event.defaultPrevented && KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
+            event.preventDefault();
+
+            const dir = KeyUtil.isKeyCode(event, DOWN_ARROW) ? 1 : -1;
+            const rows = dir === 1 ? this._rows.toArray() : this._rows.toArray().reverse();
+            const currentRowIndex = rows.findIndex((row) => row === tableRow);
+
+            const nextFocusableRow = rows.find((row, index) => index > currentRowIndex && row.focusable);
+
+            if (nextFocusableRow) {
+                this._setCurrentFocusableRow(nextFocusableRow);
+                // Need a delay for tabindex attributes to set.
+                setTimeout(() => {
+                    nextFocusableRow.elementRef.nativeElement.focus();
+                }, 0);
+                return;
+            }
+
+            const parentElm = tableRow.elementRef.nativeElement.parentElement;
+            const sectionElement = dir === 1 ? parentElm?.nextElementSibling : parentElm?.previousElementSibling;
+            const childrenLength = (sectionElement?.children.length ?? 0) - 1;
+            const nextIndex = dir === 1 ? currentRowIndex + dir : childrenLength;
+
+            // If no focusable rows found, try to focus focusable cell instead
+            this._focusCellInTableSection(sectionElement, nextIndex, 0, true);
         }
     }
 
@@ -146,15 +187,47 @@ export class TableComponent implements AfterViewInit, OnDestroy, FdTable {
     }
 
     /** @hidden */
-    private _focusCellInTableSection(tableSectionElement: Nullable<Element>, row: number, col: number): boolean {
+    _setCurrentFocusableCell(cell: TableCellDirective): void {
+        this._cells?.forEach((tableCell) => {
+            tableCell.toggleFocusableState(tableCell === cell);
+        });
+        this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    _setCurrentFocusableRow(row: TableRowDirective): void {
+        this._rows?.forEach((tableRow) => {
+            tableRow.toggleFocusableState(tableRow === row);
+        });
+        this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    private _focusCellInTableSection(
+        tableSectionElement: Nullable<Element>,
+        row: number,
+        col: number,
+        reverse = false
+    ): boolean {
         const targetRow = tableSectionElement?.children.item(row);
-        const targetCell = targetRow?.children.item(col);
-        if (targetCell instanceof HTMLTableCellElement) {
+        const rowChildren = targetRow?.children;
+        const targetCell = reverse ? rowChildren?.item(rowChildren?.length - 1 - col) : rowChildren?.item(col);
+        if (targetCell instanceof HTMLTableCellElement && targetCell.classList.contains(FOCUSABLE_CELL_CLASSNAME)) {
             targetCell.focus();
             return true;
-        } else {
-            // if couldn't find the next cell, but the actual row exists, still treat the operation as success
-            return !!targetRow;
+        } else if (targetRow instanceof HTMLTableRowElement && targetRow.classList.contains(FOCUSABLE_ROW_CLASSNAME)) {
+            targetRow.focus();
+            return true;
+        }
+
+        // if we couldn't find the next cell, but the actual row exists, still treat the operation as success
+        return !!targetRow;
+    }
+
+    /** @hidden */
+    private _propagateKeys(keys: string[]): void {
+        if (keys) {
+            this._tableService.changeKeys([...keys]);
         }
     }
 }

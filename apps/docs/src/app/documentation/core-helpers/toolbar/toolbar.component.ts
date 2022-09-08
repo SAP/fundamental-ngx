@@ -15,10 +15,13 @@ import {
     FD_LANGUAGE_ALBANIAN,
     FD_LANGUAGE_BULGARIAN,
     FD_LANGUAGE_CZECH,
+    FD_LANGUAGE_CHINESE,
     FD_LANGUAGE_ENGLISH,
     FD_LANGUAGE_FRENCH,
     FD_LANGUAGE_GEORGIAN,
+    FD_LANGUAGE_HINDI,
     FD_LANGUAGE_ITALIAN,
+    FD_LANGUAGE_POLISH,
     FD_LANGUAGE_RUSSIAN,
     FD_LANGUAGE_SPANISH,
     FD_LANGUAGE_TURKISH,
@@ -70,7 +73,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         // { name: 'العربية', value: FD_LANGUAGE_ARABIC }, TODO: uncomment when translations are provided
         // { name: 'Беларускі', value: FD_LANGUAGE_BELARUSIAN }, TODO: uncomment when translations are provided
         { name: 'Български', value: FD_LANGUAGE_BULGARIAN },
-        // { name: '中国人', value: FD_LANGUAGE_CHINESE }, TODO: uncomment when translations are provided
+        { name: '简体中文', value: FD_LANGUAGE_CHINESE },
         // { name: 'Hrvatski', value: FD_LANGUAGE_CROATIAN }, TODO: uncomment when translations are provided
         { name: 'Český', value: FD_LANGUAGE_CZECH },
         { name: 'English', value: FD_LANGUAGE_ENGLISH },
@@ -78,9 +81,9 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         { name: 'ქართული', value: FD_LANGUAGE_GEORGIAN },
         // { name: 'Deutsch', value: FD_LANGUAGE_GERMAN }, TODO: uncomment when translations are provided
         // { name: 'עִברִית', value: FD_LANGUAGE_HEBREW }, TODO: uncomment when translations are provided
-        // { name: 'Hindi', value: FD_LANGUAGE_HINDI }, TODO: uncomment when translations are provided
+        { name: 'हिन्दी', value: FD_LANGUAGE_HINDI },
         { name: 'Italiano', value: FD_LANGUAGE_ITALIAN },
-        // { name: 'Polski', value: FD_LANGUAGE_POLISH }, TODO: uncomment when translations are provided
+        { name: 'Polski', value: FD_LANGUAGE_POLISH },
         // { name: 'Português', value: FD_LANGUAGE_PORTUGUESE }, TODO: uncomment when translations are provided
         // { name: 'Română', value: FD_LANGUAGE_ROMANIAN }, TODO: uncomment when translations are provided
         { name: 'Русский', value: FD_LANGUAGE_RUSSIAN },

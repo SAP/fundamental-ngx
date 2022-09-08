@@ -1,4 +1,32 @@
 
+## [0.36.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.44...v0.36.0-rc.45) (2022-09-07)
+
+
+### Bug Fixes
+
+* **core:** combobox scroll strategy ([#8626](https://github.com/SAP/fundamental-ngx/issues/8626)) ([492c445](https://github.com/SAP/fundamental-ngx/commit/492c445203a9c8d67e0e475c339828fc79149b27))
+
+## [0.36.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.43...v0.36.0-rc.44) (2022-09-07)
+
+
+### Features
+
+* **core:** table keyboard navigation ([#8635](https://github.com/SAP/fundamental-ngx/issues/8635)) ([7c1f32f](https://github.com/SAP/fundamental-ngx/commit/7c1f32f8bb949c045542946a64909c978d22df27))
+
+## [0.36.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.42...v0.36.0-rc.43) (2022-09-06)
+
+
+### Bug Fixes
+
+* **platform:** scroll to end of tokenizer when adding tokens ([#8623](https://github.com/SAP/fundamental-ngx/issues/8623)) ([59c9a08](https://github.com/SAP/fundamental-ngx/commit/59c9a08a1db96e0b1a9d6515bc6d01bae0a21f71))
+
+## [0.36.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.41...v0.36.0-rc.42) (2022-09-02)
+
+
+### Features
+
+* **core,platform:** add Chinese, Polish and Hindi language ([#8638](https://github.com/SAP/fundamental-ngx/issues/8638)) ([666f6af](https://github.com/SAP/fundamental-ngx/commit/666f6af688a725e6d092caf82679c9f58e953a88))
+
 ## [0.36.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.40...v0.36.0-rc.41) (2022-09-01)
 
 
