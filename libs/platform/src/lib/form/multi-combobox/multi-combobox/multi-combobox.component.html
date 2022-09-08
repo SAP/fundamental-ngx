@@ -247,7 +247,7 @@
 
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
     <ng-container *ngIf="!optionItemTemplate">
-        <span fd-list-title [attr.title]="optionItem.label">{{ optionItem.label }}</span>
+        <span fd-list-title [attr.title]="optionItem.label">{{ optionItem.label | highlight: inputText }}</span>
     </ng-container>
 
     <ng-container *ngIf="optionItemTemplate">
