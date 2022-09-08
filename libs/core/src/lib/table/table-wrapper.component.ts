@@ -29,7 +29,7 @@ import { FdTableContentDensityProviderParams } from './table.component';
     styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders(FdTableContentDensityProviderParams)]
 })
 export class TableWrapperComponent implements AfterContentInit, OnDestroy {
     private _contentDensitySettings: ContentDensityObserverTarget;
