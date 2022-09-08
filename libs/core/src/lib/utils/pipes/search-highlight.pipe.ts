@@ -5,6 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SearchHighlightPipe implements PipeTransform {
     transform(value: string, args: string, active: boolean = true, includeSpans: boolean = false): string {
+        while (value.includes('<') || value.includes('>')) {
+            value = value.replace('<', '&lt;');
+            value = value.replace('>', '&gt;');
+        }
         let result: string = value;
         if (args && value && active) {
             const testStr: string = args.trim().toLowerCase();
