@@ -9,7 +9,7 @@
         </tr>
     </thead>
     <tbody fd-table-body>
-        <tr fd-table-row [focusable]="true">
+        <tr fd-table-row [focusable]="true" *ngFor="let item of [0, 1, 2, 3, 4, 5]">
             <td fd-table-cell>Whole</td>
             <td fd-table-cell>Row</td>
             <td fd-table-cell>Can also</td>
@@ -34,6 +34,7 @@
             <th fd-table-cell>Column Header</th>
             <th fd-table-cell>Column Header</th>
             <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
         </tr>
     </thead>
     <tbody fd-table-body>
@@ -43,7 +44,7 @@
             </td>
             <td fd-table-cell>
                 <p fd-table-text maxWidth="250px" [noWrap]="true">
-                    {{ row.column2 }}
+                    <fd-step-input [value]="0" inputId="default-input"></fd-step-input>
                 </p>
             </td>
             <td fd-table-cell>
@@ -53,6 +54,22 @@
             </td>
             <td fd-table-cell>{{ row.date }}</td>
             <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
+            <td fd-table-cell>
+                <fd-split-button glyph="menu">
+                    <fd-menu>
+                        <li fd-menu-item>
+                            <div fd-menu-interactive>
+                                <span fd-menu-title>Option 1</span>
+                            </div>
+                        </li>
+                        <li fd-menu-item>
+                            <div fd-menu-interactive>
+                                <span fd-menu-title>Option 2</span>
+                            </div>
+                        </li>
+                    </fd-menu>
+                </fd-split-button>
+            </td>
         </tr>
     </tbody>
 </table>
