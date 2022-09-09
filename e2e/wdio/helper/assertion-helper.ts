@@ -52,6 +52,7 @@ export function checkElementDisplayed(element: string): void {
 export function checkElementText(element: string): void {
     const elLength = getElementArrayLength(element);
     for (let i = 0; elLength > i; i++) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         expect(getText(element, i)).not.toBe(null, '');
     }
