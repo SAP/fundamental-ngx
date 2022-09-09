@@ -28,7 +28,8 @@
         "cloud": {
             "runner": "@nrwl/nx-cloud",
             "options": {
-                "strictlyOrderedTargets": [
+                "strictlyOrderedTargets": ["build", "lint", "test", "e2e"],
+                "cacheableOperations": [
                     "generate-typedoc",
                     "compile-typedoc",
                     "build",
