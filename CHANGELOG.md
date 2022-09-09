@@ -1,4 +1,11 @@
 
+## [0.36.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.46...v0.36.0-rc.47) (2022-09-09)
+
+
+### Features
+
+* **core,platform:** update styles ([#8661](https://github.com/SAP/fundamental-ngx/issues/8661)) ([1e033af](https://github.com/SAP/fundamental-ngx/commit/1e033af1b0320fdd2029d5e901cc7eeb1098271d))
+
 ## [0.36.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.45...v0.36.0-rc.46) (2022-09-08)
 
 
