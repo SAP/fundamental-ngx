@@ -9,4 +9,4 @@
   ignore = 'sh ./ignore.sh'
   environment = { NODE_VERSION = "16.15.1", PYTHON_VERSION="3.7", YARN_FLAGS="--frozen-lockfile" }
   publish = "dist/apps/docs"
-  command = "NODE_OPTIONS=--max_old_space_size=8192 yarn run build-docs-netlify"
+  command = "NODE_OPTIONS=--max_old_space_size=8192 npx nx run-many --target=build --projects=docs --parallel=4 --configuration=\"production-unoptimized\" --base-href=\"/\""
