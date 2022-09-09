@@ -23,19 +23,7 @@ jobs:
             node-version: 14.20.0
             yarn-version: 1.22.19
 
-    initialize_cloud:
-        runs-on: ubuntu-latest
-        name: Initialize Nx Cloud
-        steps:
-            - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
-              with:
-                  node-version: 14.20.0
-            - name: Initialize the Nx Cloud distributed CI run
-              run: npx nx-cloud start-ci-run
-
     run-release:
-        needs: initialize_cloud
         name: Run release
         runs-on: ubuntu-latest
         steps:
@@ -67,11 +55,11 @@ jobs:
               uses: ./.github/actions/parallel-commands
               with:
                   parallel-commands: |
-                      npx nx run-many --target=lint --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter --parallel=2
-                      npx nx run-many --target=build-umbrella --all --parallel=1
+                      npx nx run-many --target=lint --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter --parallel=2 --runner cloud
+                      npx nx run-many --target=build-umbrella --all --parallel=1 --runner cloud
 
             - name: Pack libraries
-              run: npx nx run-many --target=prepare --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter --parallel=3 --projectVersion=${{ steps.bumpVersion.outputs.newVersion }} --pack
+              run: npx nx run-many --target=prepare --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter --parallel=3 --projectVersion=${{ steps.bumpVersion.outputs.newVersion }} --pack --runner cloud
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
 

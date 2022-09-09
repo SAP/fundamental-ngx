@@ -61,11 +61,11 @@ jobs:
               uses: ./.github/actions/parallel-commands
               with:
                   parallel-commands: |
-                      npx nx run-many --target=lint --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter --parallel=2
-                      npx nx run-many --target=build-umbrella --all --parallel=1
+                      npx nx run-many --target=lint --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter --parallel=2 --runner cloud
+                      npx nx run-many --target=build-umbrella --all --parallel=1 --runner cloud
 
             - name: Pack libraries
-              run: npx nx run-many --target=prepare --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter --parallel=3 --projectVersion=${{ steps.bumpVersion.outputs.newVersion }} --pack
+              run: npx nx run-many --target=prepare --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter --parallel=3 --projectVersion=${{ steps.bumpVersion.outputs.newVersion }} --pack --runner cloud
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
@@ -118,7 +118,7 @@ jobs:
               uses: ./.github/actions/nodejs
 
             - name: Run build prod
-              run: npx nx run-many --target=build --projects=docs --configuration=production
+              run: npx nx run-many --target=build --projects=docs --configuration=production --runner cloud
 
             - name: Publish to gh-pages
               uses: JamesIves/github-pages-deploy-action@v4
