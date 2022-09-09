@@ -11,24 +11,8 @@
     },
     "tasksRunnerOptions": {
         "default": {
-            "runner": "nx/tasks-runners/default",
-            "options": {
-                "cacheableOperations": [
-                    "generate-typedoc",
-                    "compile-typedoc",
-                    "build",
-                    "build-umbrella",
-                    "lint",
-                    "test",
-                    "e2e"
-                ],
-                "parallel": 1
-            }
-        },
-        "cloud": {
             "runner": "@nrwl/nx-cloud",
             "options": {
-                "strictlyOrderedTargets": ["build", "lint", "test", "e2e"],
                 "cacheableOperations": [
                     "generate-typedoc",
                     "compile-typedoc",
