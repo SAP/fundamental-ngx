@@ -841,6 +841,12 @@ export class ListGroupHeaderComponent extends BaseListItem implements OnInit {
     @Input()
     groupHeaderTitle?: string;
 
+    /** @deprecated Use `groupHeaderTitle` instead */
+    @Input()
+    set grpheaderTitle(value: string) {
+        this.groupHeaderTitle = value;
+    }
+
     /**
      * @hidden
      * Initialization of the list header component
