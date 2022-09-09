@@ -1,8 +1,7 @@
-import { Directive, ElementRef, HostListener, Optional, Inject, forwardRef } from '@angular/core';
+import { Directive, ElementRef, HostListener, Inject, Optional } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
-
-import { AvatarGroupComponent } from '../avatar-group.component';
 import { AvatarGroupInterface } from '../avatar-group.interface';
+import { AVATAR_GROUP_COMPONENT } from '../tokens';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -16,7 +15,7 @@ export class AvatarGroupItemDirective implements FocusableOption {
     /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
-        @Optional() @Inject(forwardRef(() => AvatarGroupComponent)) private readonly _component: AvatarGroupInterface
+        @Optional() @Inject(AVATAR_GROUP_COMPONENT) private readonly _component: AvatarGroupInterface
     ) {}
 
     /** @hidden */

@@ -1,4 +1,4 @@
-import { ContentDensity } from './../services/content-density.service';
+import { ContentDensity } from '../interfaces/content-density';
 
 /** Determines whether provided value is valid content density */
 export function isValidContentDensity(size: any): size is ContentDensity {

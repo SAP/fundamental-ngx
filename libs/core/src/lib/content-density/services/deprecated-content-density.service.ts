@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, skip, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { isCompact } from '../helpers/density-type-checkers';
 import { DEFAULT_CONTENT_DENSITY } from '../tokens/default-content-density.token';
-import { ContentDensityMode } from '../content-density.types';
+import { ContentDensityMode } from '../types/content-density.mode';
 
 /**
  * Temporary replacement for ContentDensityService

@@ -8,7 +8,7 @@
     },
     "files": ["src/main.ts", "src/polyfills.ts"],
     "include": ["src/*.d.ts", "**/*.ts"],
-    "exclude": ["**/*.spec.ts"],
+    "exclude": ["**/*.spec.ts", "**/e2e/*.ts", "dist"],
     "angularCompilerOptions": {
         "enableIvy": true
     }

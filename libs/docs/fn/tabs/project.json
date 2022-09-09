@@ -1,0 +1,33 @@
+{
+    "sourceRoot": "libs/docs/fn/tabs",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e-noop": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eTsConfig": "libs/docs/fn/tabs/e2e/tsconfig.json",
+                "baseUrl": "http://localhost:4200",
+                "configFile": "libs/docs/fn/tabs/wdio.conf.js"
+            },
+            "outputs": ["allure-results/docs-fn-tabs"]
+        },
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["dist/libs/docs/fn/tabs"],
+            "options": {
+                "project": "libs/docs/fn/tabs/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/docs/fn/tabs/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/docs/fn/tabs/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

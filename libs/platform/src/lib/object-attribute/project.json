@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/platform/src/lib/object-attribute",
     "sourceRoot": "libs/platform/src/lib/object-attribute",
     "prefix": "fdp",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/platform/object-attribute"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/object-attribute/tsconfig.lib.json",
@@ -37,5 +36,5 @@
         }
     },
     "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": ["core"]
+    "implicitDependencies": []
 }

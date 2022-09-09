@@ -1,0 +1,33 @@
+{
+    "sourceRoot": "libs/docs/fn/select",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e-noop": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eTsConfig": "libs/docs/fn/select/e2e/tsconfig.json",
+                "baseUrl": "http://localhost:4200",
+                "configFile": "libs/docs/fn/select/wdio.conf.js"
+            },
+            "outputs": ["allure-results/docs-fn-select"]
+        },
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["dist/libs/docs/fn/select"],
+            "options": {
+                "project": "libs/docs/fn/select/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/docs/fn/select/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/docs/fn/select/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

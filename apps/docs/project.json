@@ -1,5 +1,4 @@
 {
-    "root": "apps/docs",
     "sourceRoot": "apps/docs/src",
     "projectType": "application",
     "prefix": "fundamental-ngx",
@@ -9,9 +8,46 @@
         }
     },
     "targets": {
-        "build": {
-            "executor": "@angular-builders/custom-webpack:browser",
+        "e2e-app": {
+            "executor": "./tools/executors/wdio:e2e-test-app",
+            "configurations": {
+                "affected-local": {
+                    "affected": true,
+                    "devServerTarget": "docs:serve:e2e",
+                    "base": "origin/main",
+                    "head": "HEAD"
+                },
+                "all-local": {
+                    "affected": false,
+                    "devServerTarget": "docs:serve:e2e"
+                },
+                "affected-remote": {
+                    "affected": true
+                },
+                "all-remote": {
+                    "affected": false
+                }
+            },
+            "defaultConfiguration": "affected-local"
+        },
+        "generate-typedoc": {
+            "executor": "nx:run-commands",
             "options": {
+                "commands": [
+                    "npx nx run core:compile-typedoc",
+                    "npx nx run platform:compile-typedoc",
+                    "npx nx run fn:compile-typedoc",
+                    "npx nx run datetime-adapter:compile-typedoc",
+                    "npx nx run moment-adapter:compile-typedoc",
+                    "npx nx run i18n:compile-typedoc"
+                ],
+                "parallel": true
+            }
+        },
+        "build": {
+            "executor": "@nrwl/angular:webpack-browser",
+            "options": {
+                "buildLibsFromSource": false,
                 "outputPath": "dist/apps/docs",
                 "index": "apps/docs/src/index.html",
                 "main": "apps/docs/src/main.ts",
@@ -26,6 +62,36 @@
                         "output": "./assets/theming-base/"
                     },
                     {
+                        "input": ".",
+                        "glob": "README.md",
+                        "output": "./assets"
+                    },
+                    {
+                        "input": ".",
+                        "glob": "NEW_COMPONENT.md",
+                        "output": "./assets"
+                    },
+                    {
+                        "input": ".",
+                        "glob": "PLATFORM_README.md",
+                        "output": "./assets"
+                    },
+                    {
+                        "input": "./libs/core/src/lib",
+                        "glob": "README.md",
+                        "output": "./assets/core"
+                    },
+                    {
+                        "input": "./libs/fn/src/lib",
+                        "glob": "README.md",
+                        "output": "./assets/fn"
+                    },
+                    {
+                        "input": "./libs/docs/typedoc",
+                        "glob": "**/*",
+                        "output": "./assets/typedoc"
+                    },
+                    {
                         "glob": "**/*",
                         "input": "./node_modules/fundamental-styles/dist/theming/",
                         "output": "./assets/fundamental-styles-theming/"
@@ -34,6 +100,41 @@
                         "glob": "**/*",
                         "input": "./node_modules/highlight.js/styles/",
                         "output": "./assets/highlight-js-styles/"
+                    },
+                    {
+                        "glob": "**/examples/**/*",
+                        "input": "libs/docs/core",
+                        "output": "./docs/core"
+                    },
+                    {
+                        "glob": "**/examples/**/*",
+                        "input": "libs/docs/platform",
+                        "output": "./docs/platform"
+                    },
+                    {
+                        "glob": "**/examples/**/*",
+                        "input": "libs/docs/fn",
+                        "output": "./docs/fn"
+                    },
+                    {
+                        "glob": "sort.pipe.ts",
+                        "input": "libs/docs/shared/src/lib/core-helpers/pipes",
+                        "output": "./docs/core/shared/examples"
+                    },
+                    {
+                        "glob": "filter.pipe.ts",
+                        "input": "libs/docs/shared/src/lib/core-helpers/pipes",
+                        "output": "./docs/core/shared/examples"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "libs/docs/shared/src/lib/i18n/examples",
+                        "output": "./docs/platform/i18n/examples"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "libs/docs/shared/src/lib/core-helpers/stackblitz/code-example-stack",
+                        "output": "./stackblitz/example-stack"
                     }
                 ],
                 "styles": [
@@ -64,6 +165,9 @@
                 }
             },
             "configurations": {
+                "serve": {
+                    "buildLibsFromSource": true
+                },
                 "production": {
                     "fileReplacements": [
                         {
@@ -122,12 +226,12 @@
             },
             "outputs": ["{options.outputPath}"],
             "defaultConfiguration": "",
-            "dependsOn": []
+            "dependsOn": ["^build", "generate-typedoc"]
         },
         "serve": {
-            "executor": "@angular-builders/custom-webpack:dev-server",
+            "executor": "@angular-devkit/build-angular:dev-server",
             "options": {
-                "browserTarget": "docs:build"
+                "browserTarget": "docs:build:serve"
             },
             "configurations": {
                 "production": {
@@ -141,6 +245,11 @@
                 },
                 "ar": {
                     "browserTarget": "docs:build:ar"
+                },
+                "e2e": {
+                    "watch": false,
+                    "disableHostCheck": true,
+                    "liveReload": false
                 }
             }
         },
@@ -149,19 +258,6 @@
             "options": {
                 "lintFilePatterns": ["apps/docs/**/*.ts", "apps/docs/**/*.html"]
             }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "apps/docs/src/test.ts",
-                "tsConfig": "apps/docs/tsconfig.spec.json",
-                "karmaConfig": "apps/docs/karma.conf.js",
-                "polyfills": "apps/docs/src/polyfills.ts",
-                "styles": ["node_modules/fundamental-styles/dist/fundamental-styles.css", "apps/docs/src/styles.scss"],
-                "scripts": [],
-                "assets": ["apps/docs/src/favicon.ico", "apps/docs/src/assets"]
-            },
-            "outputs": ["coverage/apps/docs/"]
         }
     },
     "tags": ["scope:docs", "type:app"]

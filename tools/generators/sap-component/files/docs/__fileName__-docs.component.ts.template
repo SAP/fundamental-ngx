@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-
-import <%= propertyName %>DefaultExampleHtml from '!./examples/default/<%= fileName %>-default-example.component.html?raw';
-import <%= propertyName %>DefaultExampleTs from '!./examples/default/<%= fileName %>-default-example.component.ts?raw';
-
-import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+import { ExampleFile, getExampleFile } from '@fundamental-ngx/docs/shared';
 
 @Component({
     selector: 'app-<%= fileName %>',
@@ -11,16 +7,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 })
 export class <%= className %>DocsComponent {
     <%= propertyName %>DefaultExample: ExampleFile[] = [
-        {
-            language: 'html',
-            fileName: '<%= fileName %>-default-example',
-            code: <%= propertyName %>DefaultExampleHtml
-        },
-        {
-            language: 'typescript',
-            code: <%= propertyName %>DefaultExampleTs,
-            fileName: '<%= fileName %>-default-example',
-            component: '<%= className %>DefaultExampleComponent'
-        }
+        getExampleFile('default/<%= fileName %>-default-example.component.html'),
+        getExampleFile('default/<%= fileName %>-default-example.component.ts')
     ];
 }

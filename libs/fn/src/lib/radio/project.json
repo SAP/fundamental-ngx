@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/fn/src/lib/radio",
     "sourceRoot": "libs/fn/src/lib/radio",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/fn/radio"],
             "options": {
                 "tsConfig": "libs/fn/src/lib/radio/tsconfig.lib.json",
@@ -34,5 +33,5 @@
         }
     },
     "tags": ["type:lib", "scope:fn"],
-    "implicitDependencies": ["core"]
+    "implicitDependencies": []
 }

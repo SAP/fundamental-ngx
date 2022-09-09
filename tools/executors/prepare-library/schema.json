@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "type": "object",
+    "cli": "nx",
+    "properties": {
+        "projectVersion": {
+            "type": ["integer", "string"],
+            "description": "Which version of library you want to use for replacing versions in dist files. VERSION_PLACEHOLDER value",
+            "required": false
+        },
+        "pack": {
+            "type": "boolean",
+            "description": "If true is passed it will also yarn pack library",
+            "required": false
+        }
+    }
+}

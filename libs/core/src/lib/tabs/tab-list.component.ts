@@ -29,6 +29,8 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { LIST_COMPONENT } from './tab-list.token';
+import { TabListComponentInterface } from './tab-list-component.interface';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -46,9 +48,16 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders(), DestroyedService]
+    providers: [
+        contentDensityObserverProviders(),
+        DestroyedService,
+        {
+            provide: LIST_COMPONENT,
+            useExisting: forwardRef(() => TabListComponent)
+        }
+    ]
 })
-export class TabListComponent implements AfterContentInit, AfterViewInit, OnDestroy {
+export class TabListComponent implements TabListComponentInterface, AfterContentInit, AfterViewInit, OnDestroy {
     /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
     @Input()
     size: TabSizes = 'm';

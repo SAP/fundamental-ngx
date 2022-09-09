@@ -3,9 +3,9 @@ import { GlobalContentDensityService } from '../services/global-content-density.
 import {
     ContentDensityDefaultKeyword,
     ContentDensityGlobalKeyword,
-    ContentDensityMode,
     LocalContentDensityMode
 } from '../content-density.types';
+import { ContentDensityMode } from '../types/content-density.mode';
 
 export const getChangesSource$ = (params: {
     defaultContentDensity: ContentDensityMode;

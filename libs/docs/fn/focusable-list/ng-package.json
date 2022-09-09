@@ -1,0 +1,7 @@
+{
+    "$schema": "../../../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../../../dist/libs/docs/fn/focusable-list",
+    "lib": {
+        "entryFile": "index.ts"
+    }
+}

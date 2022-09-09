@@ -1,12 +1,12 @@
 name: on-pull-request-or-push
 
 on:
-    pull_request:
-    push:
-        branches:
-            - main
-            - tmp_branch_for_automated_release_do_not_use
-            - hotfix_tmp_branch_for_automated_release_do_not_use
+    workflow_call:
+#    push:
+#        branches:
+#            - main
+#            - tmp_branch_for_automated_release_do_not_use
+#            - hotfix_tmp_branch_for_automated_release_do_not_use
 
 env:
     NX_BRANCH: ${{ github.event.number }}
@@ -43,7 +43,7 @@ jobs:
               with:
                   access_token: ${{ secrets.GITHUB_TOKEN }}
 
-    # install dependencies
+        # install dependencies
     install:
         runs-on: ubuntu-latest
         needs: one_run
@@ -52,7 +52,7 @@ jobs:
             - name: Yarn setup
               uses: ./.github/actions/nodejs
 
-    # lint commit name
+        # lint commit name
     commit_lint:
         runs-on: ubuntu-latest
         needs: install
@@ -167,17 +167,8 @@ jobs:
 
     # run unit tests core
     unit-test:
-        runs-on: ubuntu-latest
+        uses: ./.github/workflows/unit-test.yml
         needs: install
-        strategy:
-            fail-fast: false
-            matrix:
-                lib: [core, platform, moment-adapter, datetime-adapter, fn]
-        steps:
-            - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
-            - run: npx nx test ${{ matrix.lib }} --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
-            - run: yarn run test:coveralls
 
     # run linting
     linting:
@@ -196,8 +187,6 @@ jobs:
     check-workspace-config:
         runs-on: ubuntu-latest
         needs: install
-        strategy:
-            fail-fast: false
         steps:
             - uses: actions/checkout@v3
             - uses: ./.github/actions/nodejs
@@ -281,84 +270,3 @@ jobs:
                   chrome --version
                   sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 & # optional
                   TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.suite }} --baseUrl="http://localhost:4200/"
-
-    # pre-release to npm
-    npm_publish:
-        runs-on: ubuntu-latest
-        needs: install
-        if: ${{ !github.base_ref && (
-            github.ref == 'refs/heads/main'
-            || github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use'
-            || github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use'
-            ) }}
-        steps:
-            - uses: actions/checkout@v3
-              with:
-                  token: ${{ secrets.GHACTIONS }}
-                  submodules: true
-                  fetch-depth: 0
-            - uses: ./.github/actions/nodejs
-            - run: |
-                  echo "STAGE_NAME=Release" >> $GITHUB_ENV
-                  git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
-                  git fetch
-                  git checkout main
-              if: ${{ github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use' }}
-            - run: |
-                  echo "STAGE_NAME=Pre-release" >> $GITHUB_ENV
-                  echo "releaseTag=prerelease" >> $GITHUB_ENV
-                  git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
-                  git fetch
-                  git checkout main
-              if: ${{ github.ref == 'refs/heads/main' }}
-            - run: |
-                  echo "STAGE_NAME=Hotfix-release" >> $GITHUB_ENV
-                  git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
-                  git fetch
-                  git checkout hotfix_tmp_branch_for_automated_release_do_not_use
-              if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
-            - run: bash ./ci-scripts/publish.sh
-              env:
-                  GH_TOKEN: ${{ secrets.GHACTIONS }}
-                  GHACTIONS: ${{ secrets.GHACTIONS }}
-                  TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
-              if: ${{ github.ref == 'refs/heads/main'
-                  || github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use'
-                  }}
-
-            - run: bash ./ci-scripts/hotfix-publish.sh
-              env:
-                  GH_TOKEN: ${{ secrets.GHACTIONS }}
-                  TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
-              if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
-
-            - uses: JS-DevTools/npm-publish@v1
-              with:
-                  package: 'dist/libs/core/package.json'
-                  token: ${{ secrets.NPM_TOKEN }}
-                  tag: ${{ env.releaseTag }}
-            - uses: JS-DevTools/npm-publish@v1
-              with:
-                  package: 'dist/libs/platform/package.json'
-                  token: ${{ secrets.NPM_TOKEN }}
-                  tag: ${{ env.releaseTag }}
-            - uses: JS-DevTools/npm-publish@v1
-              with:
-                  package: 'dist/libs/moment-adapter/package.json'
-                  token: ${{ secrets.NPM_TOKEN }}
-                  tag: ${{ env.releaseTag }}
-            - uses: JS-DevTools/npm-publish@v1
-              with:
-                  package: 'dist/libs/datetime-adapter/package.json'
-                  token: ${{ secrets.NPM_TOKEN }}
-                  tag: ${{ env.releaseTag }}
-            - uses: JS-DevTools/npm-publish@v1
-              with:
-                  package: 'dist/libs/fn/package.json'
-                  token: ${{ secrets.NPM_TOKEN }}
-                  tag: ${{ env.releaseTag }}
-            - uses: JS-DevTools/npm-publish@v1
-              with:
-                  package: 'dist/libs/i18n/package.json'
-                  token: ${{ secrets.NPM_TOKEN }}
-                  tag: ${{ env.releaseTag }}

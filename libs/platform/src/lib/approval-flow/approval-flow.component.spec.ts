@@ -6,7 +6,8 @@ import { of } from 'rxjs';
 
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { RtlService } from '@fundamental-ngx/core/utils';
-import { ApprovalFlowComponent, PlatformApprovalFlowModule } from './public_api';
+import { PlatformApprovalFlowModule } from '../approval-flow/approval-flow.module';
+import { ApprovalFlowComponent } from '../approval-flow/approval-flow.component';
 
 import {
     ApprovalFlowTeamDataSource,

@@ -13,14 +13,30 @@
         "default": {
             "runner": "nx/tasks-runners/default",
             "options": {
-                "cacheableOperations": ["build", "lint", "test", "e2e"],
+                "cacheableOperations": [
+                    "generate-typedoc",
+                    "compile-typedoc",
+                    "build",
+                    "build-umbrella",
+                    "lint",
+                    "test",
+                    "e2e"
+                ],
                 "parallel": 1
             }
         },
         "cloud": {
             "runner": "@nrwl/nx-cloud",
             "options": {
-                "strictlyOrderedTargets": ["build", "lint", "test", "e2e"],
+                "strictlyOrderedTargets": [
+                    "generate-typedoc",
+                    "compile-typedoc",
+                    "build",
+                    "build-umbrella",
+                    "lint",
+                    "test",
+                    "e2e"
+                ],
                 "canTrackAnalytics": false,
                 "showUsageWarnings": true
             }
@@ -41,12 +57,12 @@
         "@nrwl/angular:application": {
             "style": "scss",
             "linter": "eslint",
-            "unitTestRunner": "jest"
+            "unitTestRunner": "karma",
+            "e2eTestRunner": "none"
         },
         "@nrwl/angular:library": {
             "linter": "eslint",
-            "unitTestRunner": "jest",
-            "style": "scss"
+            "unitTestRunner": "karma"
         },
         "@nrwl/angular:component": {
             "style": "scss"
@@ -63,6 +79,9 @@
     "targetDefaults": {
         "build": {
             "dependsOn": ["^build"]
+        },
+        "build-umbrella": {
+            "dependsOn": ["^build-umbrella"]
         }
     }
 }

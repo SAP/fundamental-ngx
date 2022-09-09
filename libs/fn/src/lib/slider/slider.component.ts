@@ -19,12 +19,17 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { coerceNumberProperty, _isNumberValue } from '@angular/cdk/coercion';
-import { SliderRangeHandles } from '@fundamental-ngx/core/slider';
 
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
-import { SliderControlValue, SliderCustomValue, SliderTickMark, SliderValueTargets } from './slider.model';
+import {
+    SliderControlValue,
+    SliderCustomValue,
+    SliderRangeHandles,
+    SliderTickMark,
+    SliderValueTargets
+} from './slider.model';
 import { RtlService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 

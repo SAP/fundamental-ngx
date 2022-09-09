@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
-import { ApprovalNode, ApprovalUser } from '../public_api';
+import { ApprovalNode, ApprovalUser } from '../interfaces';
 import { filterByName } from '../helpers';
 import { ApprovalFlowUserDataSource } from '@fundamental-ngx/platform/shared';
 

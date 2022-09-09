@@ -1,0 +1,30 @@
+{
+    "projectType": "library",
+    "sourceRoot": "libs/docs/schema/src",
+    "prefix": "fundamental-ngx",
+    "targets": {
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/docs/schema/**/*.ts", "libs/docs/schema/**/*.html"]
+            }
+        },
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["dist/libs/docs/schema"],
+            "options": {
+                "project": "libs/docs/schema/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/docs/schema/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/docs/schema/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

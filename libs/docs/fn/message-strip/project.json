@@ -1,0 +1,33 @@
+{
+    "sourceRoot": "libs/docs/fn/message-strip",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e-noop": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eTsConfig": "libs/docs/fn/message-strip/e2e/tsconfig.json",
+                "baseUrl": "http://localhost:4200",
+                "configFile": "libs/docs/fn/message-strip/wdio.conf.js"
+            },
+            "outputs": ["allure-results/docs-fn-message-strip"]
+        },
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["dist/libs/docs/fn/message-strip"],
+            "options": {
+                "project": "libs/docs/fn/message-strip/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/docs/fn/message-strip/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/docs/fn/message-strip/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

@@ -1,10 +1,8 @@
 import { QueryList } from '@angular/core';
-import { OptionComponent } from './option/option.component';
-import { SelectMenuDirective } from './select-menu.directive';
 
 export interface Select {
     hideMenu: () => void;
-    setMenu: (menu: SelectMenuDirective) => void;
-    options: QueryList<OptionComponent>;
-    optionClicked: (option: OptionComponent) => void;
+    setMenu: (menu: any) => void;
+    options: QueryList<any>;
+    optionClicked: (option: any) => void;
 }

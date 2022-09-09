@@ -4,26 +4,33 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { ROUTES } from './core-documentation.routes';
-import { SharedDocumentationModule } from '../documentation/shared-documentation.module';
-import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
-import { CoreDocumentationComponent } from './documentation/core-documentation.component';
-import { HomeDocsComponent } from './component-docs/core-home/core-home.component';
-import { NewComponentComponent } from './component-docs/new-component/new-component.component';
-import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
 import {
     COMBOBOX_MOBILE_CONFIG,
+    CURRENT_LIB,
+    DocsThemeService,
     MENU_MOBILE_CONFIG,
     MULTI_INPUT_MOBILE_CONFIG,
     POPOVER_MOBILE_CONFIG,
     SEARCH_FIELD_MOBILE_CONFIG,
-    SELECT_MOBILE_CONFIG
-} from '../documentation/utilities/consts';
-import { DocsThemeService } from '../documentation/services/docs-theme.service';
-import { CURRENT_LIB } from '../documentation/utilities/libraries';
+    SELECT_MOBILE_CONFIG,
+    SharedDocumentationModule,
+    StackblitzService
+} from '@fundamental-ngx/docs/shared';
+import { CoreDocumentationComponent } from './documentation/core-documentation.component';
+import { HomeDocsComponent } from './component-docs/core-home/core-home.component';
+import { NewComponentComponent } from './component-docs/new-component/new-component.component';
+import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
+import { CoreSchemaModule } from '@fundamental-ngx/docs/core/schema';
 
 @NgModule({
     declarations: [HomeDocsComponent, NewComponentComponent, CoreDocumentationComponent],
-    imports: [SharedDocumentationModule, MarkdownModule.forChild(), RouterModule.forChild(ROUTES), ScrollingModule],
+    imports: [
+        SharedDocumentationModule,
+        MarkdownModule.forChild(),
+        RouterModule.forChild(ROUTES),
+        ScrollingModule,
+        CoreSchemaModule
+    ],
     providers: [
         StackblitzService,
         DocsThemeService,

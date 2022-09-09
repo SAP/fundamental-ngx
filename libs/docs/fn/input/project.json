@@ -1,0 +1,33 @@
+{
+    "sourceRoot": "libs/docs/fn/input",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e-noop": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eTsConfig": "libs/docs/fn/input/e2e/tsconfig.json",
+                "baseUrl": "http://localhost:4200",
+                "configFile": "libs/docs/fn/input/wdio.conf.js"
+            },
+            "outputs": ["allure-results/docs-fn-input"]
+        },
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["dist/libs/docs/fn/input"],
+            "options": {
+                "project": "libs/docs/fn/input/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/docs/fn/input/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/docs/fn/input/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

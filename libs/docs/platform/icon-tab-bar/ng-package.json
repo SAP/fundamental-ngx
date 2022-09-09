@@ -1,0 +1,7 @@
+{
+    "$schema": "../../../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../../../dist/libs/docs/platform/icon-tab-bar",
+    "lib": {
+        "entryFile": "index.ts"
+    }
+}

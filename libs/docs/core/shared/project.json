@@ -1,0 +1,30 @@
+{
+    "projectType": "library",
+    "sourceRoot": "libs/shared/src",
+    "prefix": "fundamental-ngx",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["dist/libs/docs/core/shared"],
+            "options": {
+                "project": "libs/docs/core/shared/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/docs/core/shared/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/docs/core/shared/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/docs/core/shared/**/*.ts", "libs/docs/core/shared/**/*.html"]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

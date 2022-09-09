@@ -1,5 +1,5 @@
-import { ContentDensityMode } from '../content-density.types';
 import { FactorySansProvider, ProviderToken } from '@angular/core';
+import { ContentDensityMode } from '../types/content-density.mode';
 
 export class ContentDensityObserverSettings {
     modifiers?: Partial<Record<ContentDensityMode, string>>;

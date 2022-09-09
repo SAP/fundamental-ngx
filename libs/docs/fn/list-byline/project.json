@@ -1,0 +1,33 @@
+{
+    "sourceRoot": "libs/docs/fn/list-byline",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e-noop": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eTsConfig": "libs/docs/fn/list-byline/e2e/tsconfig.json",
+                "baseUrl": "http://localhost:4200",
+                "configFile": "libs/docs/fn/list-byline/wdio.conf.js"
+            },
+            "outputs": ["allure-results/docs-fn-list-byline"]
+        },
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["dist/libs/docs/fn/list-byline"],
+            "options": {
+                "project": "libs/docs/fn/list-byline/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/docs/fn/list-byline/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/docs/fn/list-byline/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

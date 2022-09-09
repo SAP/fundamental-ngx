@@ -1,4 +1,4 @@
-import { ContentDensityMode } from '../content-density.types';
+import { ContentDensityMode } from '../types/content-density.mode';
 import { Observable } from 'rxjs';
 
 /**

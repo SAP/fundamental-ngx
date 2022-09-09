@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/layout-grid",
     "sourceRoot": "libs/core/src/lib/layout-grid",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/layout-grid"],
             "options": {
                 "tsConfig": "libs/core/src/lib/layout-grid/tsconfig.lib.json",

@@ -25,6 +25,7 @@ import { Nullable } from '@fundamental-ngx/core/shared';
 import { ColorAccent, KeyUtil, RtlService, Size } from '@fundamental-ngx/core/utils';
 import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
 import { AvatarGroupInterface } from './avatar-group.interface';
+import { AVATAR_GROUP_COMPONENT } from './tokens';
 
 export type AvatarGroupType = 'group' | 'individual';
 export type AvatarGroupOverflowButtonColor = 'neutral' | 'random' | ColorAccent;
@@ -36,7 +37,13 @@ let avatarGroupCount = 0;
     templateUrl: './avatar-group.component.html',
     styleUrls: ['./avatar-group.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: AVATAR_GROUP_COMPONENT,
+            useExisting: forwardRef(() => AvatarGroupComponent)
+        }
+    ]
 })
 export class AvatarGroupComponent implements AvatarGroupInterface, OnChanges, OnInit, AfterViewInit, OnDestroy {
     /** Id of the Avatar Group. */
@@ -66,7 +73,7 @@ export class AvatarGroupComponent implements AvatarGroupInterface, OnChanges, On
     overflowItemsCount = 0;
 
     /** @hidden Avatar Group items. */
-    @ContentChildren(forwardRef(() => AvatarGroupItemDirective), { descendants: true })
+    @ContentChildren(AvatarGroupItemDirective, { descendants: true })
     mainItems: QueryList<AvatarGroupItemDirective>;
 
     /** @hidden */

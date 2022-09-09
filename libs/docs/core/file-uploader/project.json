@@ -1,0 +1,32 @@
+{
+    "sourceRoot": "libs/docs/core/file-uploader",
+    "projectType": "library",
+    "prefix": "fundamental-ngx",
+    "targets": {
+        "e2e": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eFiles": ["libs/docs/core/file-uploader/e2e/**/*.e2e-spec.ts"],
+                "devServerTarget": "docs:serve:e2e"
+            },
+            "outputs": ["allure-results/docs-core-file-uploader"]
+        },
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["dist/libs/docs/core/file-uploader"],
+            "options": {
+                "project": "libs/docs/core/file-uploader/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/docs/core/file-uploader/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/docs/core/file-uploader/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

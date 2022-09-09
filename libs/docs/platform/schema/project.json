@@ -1,0 +1,24 @@
+{
+    "sourceRoot": "libs/docs/platform/schema",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["dist/libs/docs/platform/schema"],
+            "options": {
+                "project": "libs/docs/platform/schema/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/docs/platform/schema/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/docs/platform/schema/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

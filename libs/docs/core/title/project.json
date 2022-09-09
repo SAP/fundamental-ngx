@@ -1,0 +1,32 @@
+{
+    "sourceRoot": "libs/docs/core/title",
+    "projectType": "library",
+    "prefix": "fundamental-ngx",
+    "targets": {
+        "e2e": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eFiles": ["libs/docs/core/title/e2e/**/*.e2e-spec.ts"],
+                "devServerTarget": "docs:serve:e2e"
+            },
+            "outputs": ["allure-results/docs-core-title"]
+        },
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["dist/libs/docs/core/title"],
+            "options": {
+                "project": "libs/docs/core/title/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/docs/core/title/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/docs/core/title/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

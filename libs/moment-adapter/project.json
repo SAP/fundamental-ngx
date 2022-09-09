@@ -1,9 +1,25 @@
 {
-    "root": "libs/moment-adapter",
     "sourceRoot": "libs/moment-adapter/src",
     "projectType": "library",
     "prefix": "fd",
     "targets": {
+        "prepare": {
+            "executor": "./tools/executors/prepare-library:prepare",
+            "options": {
+                "schematics": {
+                    "collection": "schematics",
+                    "tsConfig": "tsconfig.schematics.json"
+                },
+                "distPath": "dist/libs/moment-adapter"
+            }
+        },
+        "compile-typedoc": {
+            "executor": "./tools/executors/compile-typedoc:compile-lib",
+            "options": {
+                "outputPath": "libs/docs/typedoc/moment-adapter"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
         "build": {
             "executor": "@nrwl/angular:package",
             "options": {
@@ -15,7 +31,24 @@
                 "production": {
                     "tsConfig": "libs/moment-adapter/tsconfig.lib.prod.json"
                 }
-            }
+            },
+            "outputs": ["dist/libs/moment-adapter"],
+            "defaultConfiguration": "production"
+        },
+        "build-umbrella": {
+            "executor": "@nrwl/angular:package",
+            "options": {
+                "tsConfig": "libs/moment-adapter/tsconfig.lib.json",
+                "project": "libs/moment-adapter/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/moment-adapter/tsconfig.lib.prod.json"
+                }
+            },
+            "outputs": ["dist/libs/moment-adapter"],
+            "defaultConfiguration": "production"
         },
         "lint": {
             "executor": "@nrwl/linter:eslint",

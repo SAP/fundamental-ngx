@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/datetime",
     "sourceRoot": "libs/core/src/lib/datetime",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/datetime"],
             "options": {
                 "tsConfig": "libs/core/src/lib/datetime/tsconfig.lib.json",

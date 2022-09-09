@@ -1,6 +1,6 @@
-import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { JsonValue } from '@angular-devkit/core';
 import { SchematicsException } from '@angular-devkit/schematics';
+import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 
 export function getProjectTargetOptions(
     project: ProjectDefinition,

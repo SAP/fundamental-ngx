@@ -1,7 +1,7 @@
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { ContentDensityStorage } from '../classes/abstract-content-density-storage';
 import { Observable, Subscription } from 'rxjs';
-import { ContentDensityMode } from '../content-density.types';
+import { ContentDensityMode } from '../types/content-density.mode';
 import { DEFAULT_CONTENT_DENSITY } from '../tokens/default-content-density.token';
 
 /**

@@ -1,0 +1,32 @@
+{
+    "sourceRoot": "libs/docs/platform/multi-input",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eFiles": ["libs/docs/platform/multi-input/e2e/**/*.e2e-spec.ts"],
+                "devServerTarget": "docs:serve:e2e"
+            },
+            "outputs": ["allure-results/docs-platform-multi-input"]
+        },
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["dist/libs/docs/platform/multi-input"],
+            "options": {
+                "project": "libs/docs/platform/multi-input/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/docs/platform/multi-input/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/docs/platform/multi-input/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

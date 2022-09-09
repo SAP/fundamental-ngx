@@ -1,0 +1,32 @@
+{
+    "sourceRoot": "libs/docs/platform/icon-tab-bar",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eFiles": ["libs/docs/platform/icon-tab-bar/e2e/**/*.e2e-spec.ts"],
+                "devServerTarget": "docs:serve:e2e"
+            },
+            "outputs": ["allure-results/docs-platform-icon-tab-bar"]
+        },
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["dist/libs/docs/platform/icon-tab-bar"],
+            "options": {
+                "project": "libs/docs/platform/icon-tab-bar/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/docs/platform/icon-tab-bar/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/docs/platform/icon-tab-bar/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

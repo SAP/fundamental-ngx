@@ -1,0 +1,134 @@
+name: Create hotfix release
+
+on:
+    push:
+        branches:
+            - hotfix_tmp_branch_for_automated_release_do_not_use
+env:
+    NX_CLOUD_DISTRIBUTED_EXECUTION: true
+    NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 5
+    NX_BRANCH: ${{ github.event.number || github.ref_name }}
+    NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+    NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+jobs:
+    agents:
+        name: Runner
+        uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.6
+        secrets:
+            NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+            NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+        with:
+            number-of-agents: 5
+            node-version: 14.20.0
+            yarn-version: 1.22.19
+
+    initialize_cloud:
+        runs-on: ubuntu-latest
+        name: Initialize Nx Cloud
+        steps:
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/nodejs
+              with:
+                  node-version: 14.20.0
+            - name: Initialize the Nx Cloud distributed CI run
+              run: npx nx-cloud start-ci-run
+
+    run-release:
+        needs: initialize_cloud
+        name: Run release
+        runs-on: ubuntu-latest
+        steps:
+            - name: Fetch from origin repo
+              uses: actions/checkout@v3
+              with:
+                  ref: hotfix_tmp_branch_for_automated_release_do_not_use # always fetch from hotfix temporary branch
+                  fetch-depth: 0
+                  token: ${{ secrets.GHACTIONS }}
+            - name: Using CI env flags
+              id: ciEnv
+              run: .ci-env/flags.sh
+
+            - name: Setup Node.js and Cache
+              uses: ./.github/actions/nodejs
+
+            - name: Initialize the Nx Cloud distributed CI run
+              run: npx nx-cloud start-ci-run
+
+            - name: Bump Version
+              id: bumpVersion
+              uses: ./.github/actions/bump-version
+              with:
+                  isPrerelease: false
+                  isHotfix: ${{ !steps.ciEnv.outputs.isLatest }}
+                  writeFile: true
+
+            - name: Lint and build
+              uses: ./.github/actions/parallel-commands
+              with:
+                  parallel-commands: |
+                      npx nx run-many --target=lint --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter --parallel=2
+                      npx nx run-many --target=build-umbrella --all --parallel=1
+
+            - name: Pack libraries
+              run: npx nx run-many --target=prepare --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter --parallel=3 --projectVersion=${{ steps.bumpVersion.outputs.newVersion }} --pack
+              env:
+                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
+            - name: Publish packages
+              uses: ./.github/actions/npm-publish
+              with:
+                  projects: '["core", "i18n", "platform", "fn", "moment-adapter", "datetime-adapter"]'
+                  token: ${{ secrets.NPM_TOKEN }}
+                  releaseTag: ${{ steps.bumpVersion.outputs.releaseTag }}
+
+            - name: Update Changelog
+              run: npx conventional-changelog-cli -p angular -i CHANGELOG.md -s
+
+            - uses: ./.github/actions/set-up-git
+              name: Set up git user
+              with:
+                  name: ${{ secrets.GH_NAME }}
+                  email: ${{ secrets.GH_EMAIL }}
+
+            - name: Commit Changes
+              run: |
+                  git add .
+                  git commit -m "chore(release): release v${{ steps.bumpVersion.outputs.newVersion }} [ci skip]" --no-verify
+                  git tag -a v${{ steps.bumpVersion.outputs.newVersion }} -m "chore(release): release v${{ steps.bumpVersion.outputs.newVersion }} [ci skip]"
+                  git push origin v${{ steps.bumpVersion.outputs.newVersion }}
+
+            - name: Delete temporary branch
+              run: |
+                  git push origin --delete hotfix_tmp_branch_for_automated_release_do_not_use
+
+            - name: Generate Release Body
+              id: generate_body
+              uses: ./.github/actions/generate-conventional-release-notes
+
+            - name: Create Release
+              uses: ncipollo/release-action@v1.10.0
+              with:
+                  prerelease: ${{ steps.bumpVersion.outputs.isPrerelease }}
+                  tag: v${{ steps.bumpVersion.outputs.newVersion }}
+                  body: ${{ steps.generate_body.outputs.generatedReleaseNotes }}
+
+            - if: ${{ steps.ciEnv.outputs.isLatest }}
+              name: Update version on main
+              uses: ./.github/actions/update-version-on-main
+              with:
+                  name: ${{ secrets.GH_NAME }}
+                  email: ${{ secrets.GH_EMAIL }}
+                  token: ${{ secrets.GHACTIONS }}
+
+    stop_agents:
+        if: ${{ always() }}
+        needs: run-release
+        name: Nx Cloud - Stop Agents
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/nodejs
+              with:
+                  node-version: 14.20.0
+            - name: Stop all running agents for this CI run
+              run: npx nx-cloud stop-all-agents
