@@ -9,7 +9,7 @@ env:
     NX_BRANCH: ${{ github.event.number || github.ref_name }}
     NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
     NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-    FIREBASE_SERVICE_ACCOUNT_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GCH_FD_NGX_GH }}
+    FIREBASE_SERVICE_ACCOUNT_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN }}
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -111,7 +111,9 @@ jobs:
               with:
                   repoToken: '${{ secrets.GITHUB_TOKEN }}'
                   firebaseServiceAccount: '${{ env.FIREBASE_SERVICE_ACCOUNT_TOKEN }}'
-                  projectId: gch-fd-ngx-gh
+                  projectId: fundamental-ngx-gh
+                  target: fundamental-ngx-gh
+                  expires: 3d
             - name: Test affected on firebase
               if: ${{ steps.firebase_hosting_preview.outputs.details_url }}
               run: |
