@@ -35,9 +35,6 @@ MIT
 @angular/forms
 MIT
 
-@angular/localize
-MIT
-
 @angular/platform-browser
 MIT
 
@@ -279,6 +276,8 @@ Apache-2.0
 @fundamental-ngx/fn/tabs
 
 @fundamental-ngx/fn/utils
+
+@fundamental-ngx/i18n
 
 @fundamental-ngx/moment-adapter
 Apache-2.0
@@ -996,7 +995,7 @@ zone.js
 MIT
 The MIT License
 
-Copyright (c) 2010-2020 Google LLC. https://angular.io/license
+Copyright (c) 2010-2022 Google LLC. https://angular.io/license
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

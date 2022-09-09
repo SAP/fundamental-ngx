@@ -27,36 +27,6 @@
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-		<a name="_markForCheck_" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _mark<wbr>For<wbr>Check$</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_mark<wbr>For<wbr>Check$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-		<a name="_tableLoadingSubject_" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _table<wbr>Loading<wbr>Subject$</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_table<wbr>Loading<wbr>Subject$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-		<a name="_tableStateSubject_" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _table<wbr>State<wbr>Subject$</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_table<wbr>State<wbr>Subject$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="columnsChange" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> columns<wbr>Change</h3>
@@ -161,6 +131,28 @@
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Accessors</h2>
 	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+		<a name="detectChanges_" class="tsd-anchor"></a>
+		<h3>detect<wbr>Changes$</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> detectChanges$<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Listen for immediate changes in table subcomponents (mostly table column)</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
 		<a name="markForCheck_" class="tsd-anchor"></a>
 		<h3>mark<wbr>For<wbr>Check$</h3>
 		<!-- {log decorators} -->
@@ -175,7 +167,7 @@
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Listen for changes in table subcomponents (mostly table column)</p>
+						<p>Listen for soft changes in table subcomponents (mostly table column)</p>
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -270,6 +262,28 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="detectChanges" class="tsd-anchor"></a>
+		<h3>detect<wbr>Changes</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">detect<wbr>Changes<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Notify about changes in table subcomponents (mostly table column) and detect them immediately.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="freezeTo" class="tsd-anchor"></a>
 		<h3>freeze<wbr>To</h3>
 		<!-- {log decorators} -->
@@ -334,7 +348,7 @@
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Notify about changes in table subcomponents (mostly table column)</p>
+						<p>Notify about changes in table subcomponents (mostly table column) and detect them on next detector check.</p>
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>

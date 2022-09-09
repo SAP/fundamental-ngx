@@ -17,21 +17,6 @@
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Inputs</h2>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="contentDensity" class="tsd-anchor"></a>
-		<h3>content<wbr>Density</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">content<wbr>Density<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ContentDensityEnum</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>The content density for which to render upload collection</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="disabled" class="tsd-anchor"></a>
 		<h3>disabled</h3>
 		<!-- {log decorators} -->
@@ -174,30 +159,36 @@
 		<a name="noDataDescription" class="tsd-anchor"></a>
 		<h3>no<wbr>Data<wbr>Description</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">no<wbr>Data<wbr>Description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Drop files to upload, or use the “Add” button.&#x27;</span></div>
+		<div class="tsd-signature tsd-kind-icon">no<wbr>Data<wbr>Description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Allows to set own text for the &#39;No data&#39; description label.</p>
-			</div>
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
+				<dd><p>use i18n capabilities instead
+					Allows to set own text for the &#39;No data&#39; description label.</p>
+				</dd>
+			</dl>
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="noDataText" class="tsd-anchor"></a>
 		<h3>no<wbr>Data<wbr>Text</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">no<wbr>Data<wbr>Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;No files found&#x27;</span></div>
+		<div class="tsd-signature tsd-kind-icon">no<wbr>Data<wbr>Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Allows to set own text for the &#39;No data&#39; text label.</p>
-			</div>
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
+				<dd><p>use i18n capabilities instead
+					Allows to set own text for the &#39;No data&#39; text label.</p>
+				</dd>
+			</dl>
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
@@ -403,7 +394,7 @@
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Upload<wbr>Collection<wbr>Component<span class="tsd-signature-symbol">(</span>_dialogService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DialogService</span>, _filesValidatorService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FilesValidatorService</span>, _cdr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, _contentDensityService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ContentDensityService</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">UploadCollectionComponent</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Upload<wbr>Collection<wbr>Component<span class="tsd-signature-symbol">(</span>_dialogService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DialogService</span>, _filesValidatorService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FilesValidatorService</span>, _cdr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, _injector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Injector</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">UploadCollectionComponent</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -423,7 +414,7 @@
 						<h5>_cdr: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
 					</li>
 					<li>
-						<h5>_contentDensityService: <span class="tsd-signature-type">ContentDensityService</span></h5>
+						<h5>_injector: <span class="tsd-signature-type">Injector</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">UploadCollectionComponent</span></h4>

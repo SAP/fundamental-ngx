@@ -24,10 +24,26 @@
 		<li><span class="tsd-signature-type">AfterViewInit</span></li>
 		<li><span class="tsd-signature-type">OnInit</span></li>
 		<li><span class="tsd-signature-type">OnDestroy</span></li>
+		<li><span class="tsd-signature-type">OnChanges</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="columnTranslationsPreset" class="tsd-anchor"></a>
+		<h3>column<wbr>Translations<wbr>Preset</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">column<wbr>Translations<wbr>Preset<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"seconds"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"minutes"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"hours"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"period"</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>I18n and labels</p>
+			</div>
+		</div>
+	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="id" class="tsd-anchor"></a>
 		<h3>id</h3>
@@ -95,7 +111,7 @@
 		<a name="timeConfig" class="tsd-anchor"></a>
 		<h3>time<wbr>Config</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">time<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TimeColumnConfig</span></div>
+		<div class="tsd-signature tsd-kind-icon">time<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TimeColumnConfig</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -306,6 +322,16 @@
 		</aside>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="internalTranslationConfig" class="tsd-anchor"></a>
+		<h3>internal<wbr>Translation<wbr>Config</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">internal<wbr>Translation<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TimeColumnConfig</span><span class="tsd-signature-symbol"> = null</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="wrapperHeight" class="tsd-anchor"></a>
 		<h3>wrapper<wbr>Height</h3>
 		<!-- {log decorators} -->
@@ -390,6 +416,36 @@
 				<ul class="tsd-parameters">
 					<li>
 						<h5>isDragging: <span class="tsd-signature-type">boolean</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="ngOnChanges" class="tsd-anchor"></a>
+		<h3>ng<wbr>OnChanges</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnChanges<span class="tsd-signature-symbol">(</span>changes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SimpleChanges</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Implementation of OnChanges.ngOnChanges</p>
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">hidde</dt>
+						<dd></dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>changes: <span class="tsd-signature-type">SimpleChanges</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>

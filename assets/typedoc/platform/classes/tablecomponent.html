@@ -8,7 +8,7 @@
 			<p>```html
 				&lt;fdp-table
 				[dataSource]=&quot;source&quot;
-				contentDensity=&quot;compact&quot;
+				fdCompact
 				selectionMode=&quot;multiple&quot;
 			emptyTableMessage=&quot;No data found&quot;&gt;</p>
 		</div>
@@ -79,22 +79,6 @@
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="contentDensity" class="tsd-anchor"></a>
-		<h3>content<wbr>Density</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">content<wbr>Density<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ContentDensity</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>Table</span>.<span>contentDensity</span></p>
-			<ul>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>The content density for which to render table. &#39;cozy&#39; | &#39;compact&#39; | &#39;condensed&#39;</p>
-			</div>
-		</div>
-	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="editableRowSkeleton" class="tsd-anchor"></a>
 		<h3>editable<wbr>Row<wbr>Skeleton</h3>
@@ -114,7 +98,7 @@
 		<a name="emptyTableMessage" class="tsd-anchor"></a>
 		<h3>empty<wbr>Table<wbr>Message</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">empty<wbr>Table<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;No data found&#x27;</span></div>
+		<div class="tsd-signature tsd-kind-icon">empty<wbr>Table<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -141,6 +125,21 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="highlightNavigatedRow" class="tsd-anchor"></a>
+		<h3>highlight<wbr>Navigated<wbr>Row</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">highlight<wbr>Navigated<wbr>Row<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether to highlight navigated row.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="id" class="tsd-anchor"></a>
 		<h3>id</h3>
 		<!-- {log decorators} -->
@@ -155,12 +154,13 @@
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 		<a name="initialFilterBy" class="tsd-anchor"></a>
 		<h3>initial<wbr>Filter<wbr>By</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">initial<wbr>Filter<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CollectionFilter</span><span class="tsd-signature-symbol">[]</span></div>
+		<div class="tsd-signature tsd-kind-icon">initial<wbr>Filter<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CollectionFilter</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 		<aside class="tsd-sources">
+			<p>Overrides <span>Table</span>.<span>initialFilterBy</span></p>
 			<ul>
 			</ul>
 		</aside>
@@ -170,12 +170,13 @@
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 		<a name="initialGroupBy" class="tsd-anchor"></a>
 		<h3>initial<wbr>Group<wbr>By</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">initial<wbr>Group<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CollectionGroup</span><span class="tsd-signature-symbol">[]</span></div>
+		<div class="tsd-signature tsd-kind-icon">initial<wbr>Group<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CollectionGroup</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 		<aside class="tsd-sources">
+			<p>Overrides <span>Table</span>.<span>initialGroupBy</span></p>
 			<ul>
 			</ul>
 		</aside>
@@ -185,12 +186,13 @@
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 		<a name="initialSortBy" class="tsd-anchor"></a>
 		<h3>initial<wbr>Sort<wbr>By</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">initial<wbr>Sort<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CollectionSort</span><span class="tsd-signature-symbol">[]</span></div>
+		<div class="tsd-signature tsd-kind-icon">initial<wbr>Sort<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CollectionSort</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 		<aside class="tsd-sources">
+			<p>Overrides <span>Table</span>.<span>initialSortBy</span></p>
 			<ul>
 			</ul>
 		</aside>
@@ -256,7 +258,7 @@
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Table body without borders, but header with borders.</p>
+				<p>Table body without any borders, but header with borders.</p>
 			</div>
 		</div>
 	</section>
@@ -519,6 +521,88 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="noBorderX" class="tsd-anchor"></a>
+		<h3>no<wbr>BorderX</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> noBorderX<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> noBorderX<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Table body without horizontal borders.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Table body without horizontal borders.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">boolean</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="noBorderY" class="tsd-anchor"></a>
+		<h3>no<wbr>BorderY</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> noBorderY<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> noBorderY<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Table body without vertical borders.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Table body without vertical borders.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">boolean</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
 		<a name="semanticHighlighting" class="tsd-anchor"></a>
 		<h3>semantic<wbr>Highlighting</h3>
 		<!-- {log decorators} -->
@@ -734,6 +818,11 @@
 			<ul>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event fired when row clicked.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="rowNavigate" class="tsd-anchor"></a>
@@ -744,6 +833,11 @@
 			<ul>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event fired when row navigated.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="rowSelectionChange" class="tsd-anchor"></a>
@@ -784,6 +878,11 @@
 			<ul>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event fired when tree rows rearranged through drag &amp; drop. Consider that rows rearranged with their children rows.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 		<a name="save" class="tsd-anchor"></a>
@@ -828,33 +927,20 @@
 		</aside>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="customEditableCells" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> custom<wbr>Editable<wbr>Cells</h3>
+		<a name="contentDensityObserver" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> content<wbr>Density<wbr>Observer</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">custom<wbr>Editable<wbr>Cells<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">EditableTableCell</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<div class="tsd-signature tsd-kind-icon">content<wbr>Density<wbr>Observer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ContentDensityObserver</span></div>
 		<aside class="tsd-sources">
-			<ul>
-			</ul>
 		</aside>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="editableCellForms" class="tsd-anchor"></a>
-		<h3>editable<wbr>Cell<wbr>Forms</h3>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="injector" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> injector</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">editable<wbr>Cell<wbr>Forms<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">NgForm</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<div class="tsd-signature tsd-kind-icon">injector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Injector</span></div>
 		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="editableCells" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> editable<wbr>Cells</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">editable<wbr>Cells<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">EditableTableCell</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
+			<p>Inherited from <span>Table</span>.<span>injector</span></p>
 		</aside>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
@@ -944,6 +1030,28 @@
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+		<a name="_calculateVisibleColumns" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _calculate<wbr>Visible<wbr>Columns</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+			<li class="tsd-signature tsd-kind-icon">_calculate<wbr>Visible<wbr>Columns<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Construct visible columns for rendering purpose.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 		<a name="addFilter" class="tsd-anchor"></a>
 		<h3>add<wbr>Filter</h3>
@@ -1220,7 +1328,7 @@
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Get table columns definition list</p>
+						<p>Get table columns definition list.</p>
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TableColumn</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -1247,6 +1355,29 @@
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TableState</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+		<a name="getVisibleTableColumns" class="tsd-anchor"></a>
+		<h3>get<wbr>Visible<wbr>Table<wbr>Columns</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+			<li class="tsd-signature tsd-kind-icon">get<wbr>Visible<wbr>Table<wbr>Columns<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TableColumn</span><span class="tsd-signature-symbol">[]</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Overrides <span>Table</span>.<span>getVisibleTableColumns</span></p>
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Get a list of visible table columns.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TableColumn</span><span class="tsd-signature-symbol">[]</span></h4>
 			</li>
 		</ul>
 	</section>

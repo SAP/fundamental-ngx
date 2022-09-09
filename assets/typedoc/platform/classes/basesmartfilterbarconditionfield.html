@@ -23,7 +23,7 @@
 		<a name="form" class="tsd-anchor"></a>
 		<h3>form</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormGroup</span></div>
+		<div class="tsd-signature tsd-kind-icon">form<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormGroup</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>BaseDynamicFormGeneratorControl</span>.<span>form</span></p>
 			<ul>
@@ -117,7 +117,7 @@
 		<h3><span class="tsd-flag ts-flagProtected">Protected</span> constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Base<wbr>Smart<wbr>Filter<wbr>Bar<wbr>Condition<wbr>Field<span class="tsd-signature-symbol">(</span>_dialogService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DialogService</span>, _smartFilterBar<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SmartFilterBar</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BaseSmartFilterBarConditionField</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Base<wbr>Smart<wbr>Filter<wbr>Bar<wbr>Condition<wbr>Field<span class="tsd-signature-symbol">(</span>_dialogService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DialogService</span>, _smartFilterBar<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SmartFilterBar</span>, _injector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Injector</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BaseSmartFilterBarConditionField</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -134,6 +134,9 @@
 					<li>
 						<h5>_smartFilterBar: <span class="tsd-signature-type">SmartFilterBar</span></h5>
 					</li>
+					<li>
+						<h5>_injector: <span class="tsd-signature-type">Injector</span></h5>
+					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">BaseSmartFilterBarConditionField</span></h4>
 			</li>
@@ -147,6 +150,14 @@
 		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _dialog<wbr>Service</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">_dialog<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DialogService</span></div>
+		<aside class="tsd-sources">
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+		<a name="_injector" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _injector</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_injector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Injector</span></div>
 		<aside class="tsd-sources">
 		</aside>
 	</section>
@@ -217,30 +228,6 @@
 					</dl>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-		<a name="contentDensity" class="tsd-anchor"></a>
-		<h3>content<wbr>Density</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> contentDensity<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ContentDensity</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>Returns form item content density.</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ContentDensity</span></h4>
 			</li>
 		</ul>
 	</section>

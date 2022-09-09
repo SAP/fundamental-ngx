@@ -77,13 +77,9 @@
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>The default value of this FormControl, used whenever the control is reset without an explicit
-					value. See {@link FormControlOptions#initialValueIsDefault} for more information on configuring
+					value. See {@link FormControlOptions#nonNullable} for more information on configuring
 				a default value.</p>
 			</div>
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">publicapi</dt>
-				<dd></dd>
-			</dl>
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
@@ -421,7 +417,7 @@
 		<h3>parent</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-external">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> parent<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormGroup</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormArray</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> parent<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormGroup</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormArray</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -434,7 +430,7 @@
 						<p>The parent control.</p>
 					</div>
 				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormGroup</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormArray</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormGroup</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormArray</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 			</li>
 		</ul>
 	</section>
@@ -472,7 +468,7 @@
 		<h3>root</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-external">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> root<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AbstractControl</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> root<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AbstractControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -485,7 +481,7 @@
 						<p>Retrieves the top-level ancestor of this control.</p>
 					</div>
 				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AbstractControl</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AbstractControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 			</li>
 		</ul>
 	</section>
@@ -851,12 +847,13 @@
 			</li>
 		</ul>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
 		<a name="get" class="tsd-anchor"></a>
 		<h3>get</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-			<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AbstractControl</span></li>
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
+			<li class="tsd-signature tsd-kind-icon">get&lt;P&gt;<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AbstractControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ɵGetProperty</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ɵGetProperty</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+			<li class="tsd-signature tsd-kind-icon">get&lt;P&gt;<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AbstractControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ɵGetProperty</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ɵGetProperty</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -869,46 +866,48 @@
 					<div class="lead">
 						<p>Retrieves a child control given the control&#39;s name or path.</p>
 					</div>
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">usagenotes</dt>
-						<dd>
-							<a href="#retrieve-a-nested-control" id="retrieve-a-nested-control" style="color: inherit; text-decoration: none;">
-								<h3>Retrieve a nested control</h3>
-							</a>
-							<p>For example, to get a <code>name</code> control nested within a <code>person</code> sub-group:</p>
-							<ul>
-								<li><code>this.form.get(&#39;person.name&#39;);</code></li>
-							</ul>
-							<p>-OR-</p>
-							<ul>
-								<li><code>this.form.get([&#39;person&#39;, &#39;name&#39;]);</code></li>
-							</ul>
-							<a href="#retrieve-a-control-in-a-formarray" id="retrieve-a-control-in-a-formarray" style="color: inherit; text-decoration: none;">
-								<h3>Retrieve a control in a FormArray</h3>
-							</a>
-							<p>When accessing an element inside a FormArray, you can use an element index.
-							For example, to get a <code>price</code> control from the first element in an <code>items</code> array you can use:</p>
-							<ul>
-								<li><code>this.form.get(&#39;items.0.price&#39;);</code></li>
-							</ul>
-							<p>-OR-</p>
-							<ul>
-								<li><code>this.form.get([&#39;items&#39;, 0, &#39;price&#39;]);</code></li>
-							</ul>
-						</dd>
-					</dl>
+					<p>This signature for get supports strings and <code>const</code> arrays (<code>.get([&#39;foo&#39;, &#39;bar&#39;] as const)</code>).</p>
 				</div>
+				<h4 class="tsd-type-parameters-title">Type parameters</h4>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>P<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">readonly (string | number)[]</span></h4>
+					</li>
+				</ul>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>path: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>A dot-delimited string or array of string/number values that define the path to the
-							control.</p>
-						</div>
+						<h5>path: <span class="tsd-signature-type">P</span></h5>
 					</li>
 				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AbstractControl</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AbstractControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ɵGetProperty</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ɵGetProperty</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from FormControl.get</p>
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Retrieves a child control given the control&#39;s name or path.</p>
+					</div>
+					<p>This signature for <code>get</code> supports non-const (mutable) arrays. Inferred type
+					information will not be as robust, so prefer to pass a <code>readonly</code> array if possible.</p>
+				</div>
+				<h4 class="tsd-type-parameters-title">Type parameters</h4>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>P<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h4>
+					</li>
+				</ul>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>path: <span class="tsd-signature-type">P</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AbstractControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ɵGetProperty</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ɵGetProperty</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 			</li>
 		</ul>
 	</section>
@@ -965,6 +964,29 @@
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 				<p>error data for that particular error. If the control or error is not present,
 				null is returned.</p>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+		<a name="getRawValue" class="tsd-anchor"></a>
+		<h3>get<wbr>Raw<wbr>Value</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+			<li class="tsd-signature tsd-kind-icon">get<wbr>Raw<wbr>Value<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from FormControl.getRawValue</p>
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>For a simple FormControl, the raw value is equivalent to the value.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 			</li>
 		</ul>
 	</section>
@@ -1623,18 +1645,18 @@
 					<div class="lead">
 						<p>Resets the form control, marking it <code>pristine</code> and <code>untouched</code>, and resetting
 							the value. The new value will be the provided value (if passed), <code>null</code>, or the initial value
-						if <code>initialValueIsDefault</code> was set in the constructor via {@link FormControlOptions}.</p>
+						if <code>nonNullable</code> was set in the constructor via {@link FormControlOptions}.</p>
 					</div>
 					<pre><code class="language-ts"><span style="color: #008000">// By default, the control will reset to null.</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">dog</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">FormControl</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;spot&#039;</span><span style="color: #000000">);</span>
 <span style="color: #001080">dog</span><span style="color: #000000">.</span><span style="color: #795E26">reset</span><span style="color: #000000">(); </span><span style="color: #008000">// dog.value is null</span>
 
 <span style="color: #008000">// If this flag is set, the control will instead reset to the initial value.</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">cat</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">FormControl</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;tabby&#039;</span><span style="color: #000000">, {</span><span style="color: #001080">initialValueIsDefault:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">});</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">cat</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">FormControl</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;tabby&#039;</span><span style="color: #000000">, {</span><span style="color: #001080">nonNullable:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">});</span>
 <span style="color: #001080">cat</span><span style="color: #000000">.</span><span style="color: #795E26">reset</span><span style="color: #000000">(); </span><span style="color: #008000">// cat.value is &quot;tabby&quot;</span>
 
 <span style="color: #008000">// A value passed to reset always takes precedence.</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">fish</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">FormControl</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;finn&#039;</span><span style="color: #000000">, {</span><span style="color: #001080">initialValueIsDefault:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">});</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">fish</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">FormControl</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;finn&#039;</span><span style="color: #000000">, {</span><span style="color: #001080">nonNullable:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">});</span>
 <span style="color: #001080">fish</span><span style="color: #000000">.</span><span style="color: #795E26">reset</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bubble&#039;</span><span style="color: #000000">); </span><span style="color: #008000">// fish.value is &quot;bubble&quot;</span>
 </code></pre>
 				</div>
@@ -1772,7 +1794,7 @@
 		<h3>set<wbr>Parent</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Parent<span class="tsd-signature-symbol">(</span>parent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormGroup</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormArray</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">set<wbr>Parent<span class="tsd-signature-symbol">(</span>parent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormGroup</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormArray</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -1781,12 +1803,17 @@
 					<ul>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Sets the parent of the control</p>
+					</div>
+				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>parent: <span class="tsd-signature-type">FormGroup</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormArray</span></h5>
+						<h5>parent: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormGroup</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormArray</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
 						<div class="tsd-comment tsd-typography">
-							<p>Sets the parent of the control</p>
+							<p>The new parent.</p>
 						</div>
 					</li>
 				</ul>
