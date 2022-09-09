@@ -70,10 +70,10 @@ jobs:
               uses: ./.github/actions/parallel-commands
               with:
                   parallel-commands: |
-                      npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --parallel=3 --runner cloud
-                      npx nx affected --target=test --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=workspace-tools --parallel=3 --runner cloud
-                      npx nx affected --target=lint --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=core,platform,fn --parallel=3 --runner cloud
-                      npx nx run workspace-tools:test --skip-nx-cache --runner cloud
+                      npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --parallel=3
+                      npx nx affected --target=test --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=workspace-tools --parallel=3
+                      npx nx affected --target=lint --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=core,platform,fn --parallel=3
+                      npx nx run workspace-tools:test --skip-nx-cache
             - name: Format Check
               run: npx nx format:check --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD
               env:
@@ -95,7 +95,7 @@ jobs:
             - uses: ./.github/actions/nodejs
               with:
                   node-version: 14.20.0
-            - run: npx nx run-many --target=build --projects=docs --parallel=3 --configuration=production --runner cloud
+            - run: npx nx run-many --target=build --projects=docs --parallel=3 --configuration=production
             - uses: browser-actions/setup-chrome@latest
               with:
                   chrome-version: stable
@@ -117,11 +117,11 @@ jobs:
             - name: Test affected on firebase
               if: ${{ steps.firebase_hosting_preview.outputs.details_url }}
               run: |
-                  npx nx affected --target=e2e --base=origin/main --head=HEAD --parallel=2 --baseUrl=${{ steps.firebase_hosting_preview.outputs.details_url }} --devServerTarget="" --runner cloud
+                  npx nx affected --target=e2e --base=origin/main --head=HEAD --parallel=2 --baseUrl=${{ steps.firebase_hosting_preview.outputs.details_url }} --devServerTarget=""
             - name: Test affected on local
               if: ${{ !steps.firebase_hosting_preview.outputs.details_url }}
               run: |
-                  NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx run docs:e2e-app --runner cloud
+                  NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx run docs:e2e-app
 
     stop_agents:
         if: ${{ always() }}
