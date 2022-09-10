@@ -11,11 +11,11 @@ const illustratedMessageDialogTsCode = 'illustrated-message-dialog-example.compo
 const illustratedMessageSpotSrc = 'illustrated-message-spot-example.component.html';
 const illustratedMessageSpotTsCode = 'illustrated-message-spot-example.component.ts';
 
-// import illustration from '!../../../../../../apps/docs/src/assets/images/sapIllus-Dialog-NoMail.svg?raw';
-// import illustrationDialogNoMail from '!../../../../../../apps/docs/src/assets/images/sapIllus-Dialog-NoMail.svg?raw';
-// import illustrationSceneNoMail from '!../../../../../../apps/docs/src/assets/images/sapIllus-Scene-NoMail.svg?raw';
-//
-// import illustrationSpotNoMail from '!../../../../../../apps/docs/src/assets/images/sapIllus-Spot-NoMail.svg?raw';
+const illustration = 'assets/images/sapIllus-Dialog-NoMail.svg';
+const illustrationDialogNoMail = 'assets/images/sapIllus-Dialog-NoMail.svg';
+const illustrationSceneNoMail = 'assets/images/sapIllus-Scene-NoMail.svg';
+
+const illustrationSpotNoMail = 'assets/images/sapIllus-Spot-NoMail.svg';
 const illusratedMessageInlineSrc = 'illustrated-message-inline-example.component.ts';
 const illusratedMessageInlineHtmlSrc = 'illustrated-message-inline-example.component.html';
 
@@ -27,24 +27,24 @@ export class IllustratedMessageDocsComponent {
     illustratedMessageExample: ExampleFile[] = [
         {
             language: 'html',
-            code: illustratedMessageSrc,
+            code: getAssetFromModuleAssets(illustratedMessageSrc),
             fileName: 'illustrated-message-example'
         },
         {
             language: 'typescript',
-            code: illustratedMessageTsCode,
+            code: getAssetFromModuleAssets(illustratedMessageTsCode),
             fileName: 'illustrated-message-example',
             component: 'IllustratedMessageExampleComponent'
         },
         {
             language: 'svg',
-            code: 'illustration',
+            code: getAsset(illustration),
             fileName: 'sapIllus-Dialog-NoMail',
             path: 'src/assets/images'
         },
         {
             language: 'svg',
-            code: 'illustrationSceneNoMail',
+            code: getAsset(illustrationSceneNoMail),
             fileName: 'sapIllus-Scene-NoMail',
             path: 'src/assets/images'
         }
@@ -53,18 +53,18 @@ export class IllustratedMessageDocsComponent {
     illustratedMessageDialogExample: ExampleFile[] = [
         {
             language: 'html',
-            code: illustratedMessageDialogSrc,
+            code: getAssetFromModuleAssets(illustratedMessageDialogSrc),
             fileName: 'illustrated-message-dialog-example'
         },
         {
             language: 'typescript',
-            code: illustratedMessageDialogTsCode,
+            code: getAssetFromModuleAssets(illustratedMessageDialogTsCode),
             fileName: 'illustrated-message-dialog-example',
             component: 'IllustratedMessageDialogExampleComponent'
         },
         {
             language: 'svg',
-            code: 'illustrationDialogNoMail',
+            code: getAsset(illustrationDialogNoMail),
             fileName: 'sapIllus-Dialog-NoMail',
             path: 'src/assets/images'
         }
@@ -73,18 +73,18 @@ export class IllustratedMessageDocsComponent {
     illustratedMessageSpotExample: ExampleFile[] = [
         {
             language: 'html',
-            code: illustratedMessageSpotSrc,
+            code: getAssetFromModuleAssets(illustratedMessageSpotSrc),
             fileName: 'illustrated-message-spot-example'
         },
         {
             language: 'typescript',
-            code: illustratedMessageSpotTsCode,
+            code: getAssetFromModuleAssets(illustratedMessageSpotTsCode),
             fileName: 'illustrated-message-spot-example',
             component: 'IllustratedMessageSpotExampleComponent'
         },
         {
             language: 'svg',
-            code: 'illustrationSpotNoMail',
+            code: getAsset(illustrationSpotNoMail),
             fileName: 'sapIllus-Spot-NoMail',
             path: 'src/assets/images'
         }
@@ -93,24 +93,24 @@ export class IllustratedMessageDocsComponent {
     illustratedMessageInlineExample: ExampleFile[] = [
         {
             language: 'html',
-            code: illusratedMessageInlineHtmlSrc,
+            code: getAssetFromModuleAssets(illusratedMessageInlineHtmlSrc),
             fileName: 'illustrated-message-inline-example'
         },
         {
             language: 'typescript',
-            code: illusratedMessageInlineSrc,
+            code: getAssetFromModuleAssets(illusratedMessageInlineSrc),
             fileName: 'illustrated-message-inline-example',
             component: 'IllustratedMessageInlineExampleComponent'
         },
         {
             language: 'svg',
-            code: 'illustration',
+            code: getAsset(illustration),
             fileName: 'sapIllus-Dialog-NoMail',
             path: 'src/assets/images'
         },
         {
             language: 'svg',
-            code: 'illustrationSceneNoMail',
+            code: getAsset(illustrationSceneNoMail),
             fileName: 'sapIllus-Scene-NoMail',
             path: 'src/assets/images'
         }
