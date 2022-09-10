@@ -22,7 +22,7 @@ export class QuickViewPopoverExampleComponent {
         subHeader: {
             title: 'Michael Adams',
             subtitle: 'Account Manager',
-            avatar: 'http://placeimg.com/500/500/people'
+            avatar: 'https://placeimg.com/500/500/people'
         },
         groups: [
             {

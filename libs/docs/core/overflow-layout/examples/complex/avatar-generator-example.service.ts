@@ -78,7 +78,7 @@ export class AvatarGeneratorExampleService {
 
         switch (option) {
             case 1:
-                return { imageUrl: `https://i.pravatar.cc/400?u=${this._generateId()}` }; // 'http://placeimg.com/400/400/people'
+                return { imageUrl: `https://i.pravatar.cc/400?u=${this._generateId()}` }; // 'https://placeimg.com/400/400/people'
             case 2:
                 return { glyph: glyphs[Math.floor(Math.random() * glyphs.length)] };
             case 3:
