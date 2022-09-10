@@ -14,24 +14,6 @@
             "outputs": [
                 "allure-results/docs-<%= projectDirName %>-<%= name %>"
             ]
-        },
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": [
-                "dist/libs/docs/<%= projectDirName %>/<%= name %>"
-            ],
-            "options": {
-                "project": "libs/docs/<%= projectDirName %>/<%= name %>/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/docs/<%= projectDirName %>/<%= name %>/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/docs/<%= projectDirName %>/<%= name %>/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
         }
     },
     "tags": [
