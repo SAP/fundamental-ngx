@@ -10,13 +10,8 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/radio/wdio.conf.js"
             },
-            "outputs": [
-                "allure-results/docs-fn-radio"
-            ]
+            "outputs": ["allure-results/docs-fn-radio"]
         }
     },
-    "tags": [
-        "type:lib",
-        "scope:docs"
-    ]
+    "tags": ["type:lib", "scope:docs"]
 }

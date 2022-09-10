@@ -10,13 +10,8 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/avatar/wdio.conf.js"
             },
-            "outputs": [
-                "allure-results/docs-fn-avatar"
-            ]
+            "outputs": ["allure-results/docs-fn-avatar"]
         }
     },
-    "tags": [
-        "type:lib",
-        "scope:docs"
-    ]
+    "tags": ["type:lib", "scope:docs"]
 }

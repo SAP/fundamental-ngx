@@ -10,13 +10,8 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/search/wdio.conf.js"
             },
-            "outputs": [
-                "allure-results/docs-fn-search"
-            ]
+            "outputs": ["allure-results/docs-fn-search"]
         }
     },
-    "tags": [
-        "type:lib",
-        "scope:docs"
-    ]
+    "tags": ["type:lib", "scope:docs"]
 }

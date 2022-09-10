@@ -10,13 +10,8 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/tabs/wdio.conf.js"
             },
-            "outputs": [
-                "allure-results/docs-fn-tabs"
-            ]
+            "outputs": ["allure-results/docs-fn-tabs"]
         }
     },
-    "tags": [
-        "type:lib",
-        "scope:docs"
-    ]
+    "tags": ["type:lib", "scope:docs"]
 }

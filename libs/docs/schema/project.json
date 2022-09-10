@@ -6,15 +6,9 @@
         "lint": {
             "executor": "@nrwl/linter:eslint",
             "options": {
-                "lintFilePatterns": [
-                    "libs/docs/schema/**/*.ts",
-                    "libs/docs/schema/**/*.html"
-                ]
+                "lintFilePatterns": ["libs/docs/schema/**/*.ts", "libs/docs/schema/**/*.html"]
             }
         }
     },
-    "tags": [
-        "type:lib",
-        "scope:docs"
-    ]
+    "tags": ["type:lib", "scope:docs"]
 }

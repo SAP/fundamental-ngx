@@ -10,13 +10,8 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/segmented-button/wdio.conf.js"
             },
-            "outputs": [
-                "allure-results/docs-fn-segmented-button"
-            ]
+            "outputs": ["allure-results/docs-fn-segmented-button"]
         }
     },
-    "tags": [
-        "type:lib",
-        "scope:docs"
-    ]
+    "tags": ["type:lib", "scope:docs"]
 }

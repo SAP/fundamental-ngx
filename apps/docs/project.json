@@ -164,9 +164,6 @@
                 }
             },
             "configurations": {
-                "serve": {
-                    "buildLibsFromSource": true
-                },
                 "production": {
                     "fileReplacements": [
                         {
@@ -230,7 +227,7 @@
         "serve": {
             "executor": "@angular-devkit/build-angular:dev-server",
             "options": {
-                "browserTarget": "docs:build:serve"
+                "browserTarget": "docs:build"
             },
             "configurations": {
                 "production": {

@@ -3,8 +3,5 @@
     "projectType": "library",
     "prefix": "fdp-doc",
     "targets": {},
-    "tags": [
-        "type:lib",
-        "scope:docs"
-    ]
+    "tags": ["type:lib", "scope:docs"]
 }

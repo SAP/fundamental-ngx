@@ -10,13 +10,8 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/progress-bar/wdio.conf.js"
             },
-            "outputs": [
-                "allure-results/docs-fn-progress-bar"
-            ]
+            "outputs": ["allure-results/docs-fn-progress-bar"]
         }
     },
-    "tags": [
-        "type:lib",
-        "scope:docs"
-    ]
+    "tags": ["type:lib", "scope:docs"]
 }

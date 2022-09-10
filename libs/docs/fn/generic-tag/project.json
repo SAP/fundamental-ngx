@@ -10,13 +10,8 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/generic-tag/wdio.conf.js"
             },
-            "outputs": [
-                "allure-results/docs-fn-generic-tag"
-            ]
+            "outputs": ["allure-results/docs-fn-generic-tag"]
         }
     },
-    "tags": [
-        "type:lib",
-        "scope:docs"
-    ]
+    "tags": ["type:lib", "scope:docs"]
 }

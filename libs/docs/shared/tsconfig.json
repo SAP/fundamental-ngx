@@ -1,9 +1,7 @@
 {
     "extends": "../../../tsconfig.base.json",
     "files": [],
-    "include": [
-        "**/*.ts"
-    ],
+    "include": ["**/*.ts"],
     "compilerOptions": {
         "forceConsistentCasingInFileNames": true,
         "strict": true,
@@ -16,10 +14,5 @@
         "inlineSources": true,
         "types": []
     },
-    "exclude": [
-        "src/test-setup.ts",
-        "**/*.spec.ts",
-        "**/*.test.ts",
-        "**/*.e2e-spec.ts"
-    ]
+    "exclude": ["src/test-setup.ts", "**/*.spec.ts", "**/*.test.ts", "**/*.e2e-spec.ts"]
 }

@@ -10,13 +10,8 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/focusable-list/wdio.conf.js"
             },
-            "outputs": [
-                "allure-results/docs-fn-focusable-list"
-            ]
+            "outputs": ["allure-results/docs-fn-focusable-list"]
         }
     },
-    "tags": [
-        "type:lib",
-        "scope:docs"
-    ]
+    "tags": ["type:lib", "scope:docs"]
 }

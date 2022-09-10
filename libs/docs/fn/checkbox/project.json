@@ -10,13 +10,8 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/checkbox/wdio.conf.js"
             },
-            "outputs": [
-                "allure-results/docs-fn-checkbox"
-            ]
+            "outputs": ["allure-results/docs-fn-checkbox"]
         }
     },
-    "tags": [
-        "type:lib",
-        "scope:docs"
-    ]
+    "tags": ["type:lib", "scope:docs"]
 }

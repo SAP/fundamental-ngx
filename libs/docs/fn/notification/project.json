@@ -10,13 +10,8 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/notification/wdio.conf.js"
             },
-            "outputs": [
-                "allure-results/docs-fn-notification"
-            ]
+            "outputs": ["allure-results/docs-fn-notification"]
         }
     },
-    "tags": [
-        "type:lib",
-        "scope:docs"
-    ]
+    "tags": ["type:lib", "scope:docs"]
 }
