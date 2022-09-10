@@ -45,9 +45,8 @@
             }
         },
         "build": {
-            "executor": "@nrwl/angular:webpack-browser",
+            "executor": "@angular-builders/custom-webpack:browser",
             "options": {
-                "buildLibsFromSource": true,
                 "outputPath": "dist/apps/docs",
                 "index": "apps/docs/src/index.html",
                 "main": "apps/docs/src/main.ts",
