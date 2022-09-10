@@ -70,7 +70,7 @@ jobs:
               uses: ./.github/actions/parallel-commands
               with:
                   parallel-commands: |
-                      npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --parallel=3
+                      npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=docs --parallel=3
                       npx nx affected --target=test --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=workspace-tools --parallel=3
                       npx nx affected --target=lint --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=core,platform,fn --parallel=3
                       npx nx run workspace-tools:test --skip-nx-cache
