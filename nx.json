@@ -13,6 +13,7 @@
         "default": {
             "runner": "@nrwl/nx-cloud",
             "options": {
+                "accessToken": "MzFiYWRhMTItYTAxYi00MGZjLWJmNDEtOTllMzEwZjI5ODNkfHJlYWQ=",
                 "cacheableOperations": [
                     "generate-typedoc",
                     "compile-typedoc",
