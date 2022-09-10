@@ -10,24 +10,13 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/list/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-list"]
-        },
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/docs/fn/list"],
-            "options": {
-                "project": "libs/docs/fn/list/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/docs/fn/list/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/docs/fn/list/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+            "outputs": [
+                "allure-results/docs-fn-list"
+            ]
         }
     },
-    "tags": ["type:lib", "scope:docs"]
+    "tags": [
+        "type:lib",
+        "scope:docs"
+    ]
 }

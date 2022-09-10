@@ -10,24 +10,13 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/message-toast/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-message-toast"]
-        },
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/docs/fn/message-toast"],
-            "options": {
-                "project": "libs/docs/fn/message-toast/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/docs/fn/message-toast/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/docs/fn/message-toast/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+            "outputs": [
+                "allure-results/docs-fn-message-toast"
+            ]
         }
     },
-    "tags": ["type:lib", "scope:docs"]
+    "tags": [
+        "type:lib",
+        "scope:docs"
+    ]
 }

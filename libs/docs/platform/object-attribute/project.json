@@ -6,27 +6,18 @@
         "e2e": {
             "executor": "./tools/executors/wdio:e2e-test",
             "options": {
-                "e2eFiles": ["libs/docs/platform/object-attribute/e2e/**/*.e2e-spec.ts"],
+                "e2eFiles": [
+                    "libs/docs/platform/object-attribute/e2e/**/*.e2e-spec.ts"
+                ],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-platform-object-attribute"]
-        },
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/docs/platform/object-attribute"],
-            "options": {
-                "project": "libs/docs/platform/object-attribute/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/docs/platform/object-attribute/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/docs/platform/object-attribute/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+            "outputs": [
+                "allure-results/docs-platform-object-attribute"
+            ]
         }
     },
-    "tags": ["type:lib", "scope:docs"]
+    "tags": [
+        "type:lib",
+        "scope:docs"
+    ]
 }

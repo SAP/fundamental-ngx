@@ -10,24 +10,13 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/segmented-button/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-segmented-button"]
-        },
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/docs/fn/segmented-button"],
-            "options": {
-                "project": "libs/docs/fn/segmented-button/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/docs/fn/segmented-button/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/docs/fn/segmented-button/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+            "outputs": [
+                "allure-results/docs-fn-segmented-button"
+            ]
         }
     },
-    "tags": ["type:lib", "scope:docs"]
+    "tags": [
+        "type:lib",
+        "scope:docs"
+    ]
 }

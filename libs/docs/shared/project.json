@@ -6,25 +6,15 @@
         "lint": {
             "executor": "@nrwl/linter:eslint",
             "options": {
-                "lintFilePatterns": ["libs/docs/shared/**/*.ts", "libs/docs/shared/**/*.html"]
+                "lintFilePatterns": [
+                    "libs/docs/shared/**/*.ts",
+                    "libs/docs/shared/**/*.html"
+                ]
             }
-        },
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/docs/shared"],
-            "options": {
-                "project": "libs/docs/shared/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/docs/shared/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/docs/shared/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
         }
     },
-    "tags": ["type:lib", "scope:docs"]
+    "tags": [
+        "type:lib",
+        "scope:docs"
+    ]
 }

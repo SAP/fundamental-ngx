@@ -10,24 +10,13 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/notification/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-notification"]
-        },
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/docs/fn/notification"],
-            "options": {
-                "project": "libs/docs/fn/notification/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/docs/fn/notification/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/docs/fn/notification/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+            "outputs": [
+                "allure-results/docs-fn-notification"
+            ]
         }
     },
-    "tags": ["type:lib", "scope:docs"]
+    "tags": [
+        "type:lib",
+        "scope:docs"
+    ]
 }

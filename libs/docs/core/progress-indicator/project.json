@@ -6,27 +6,18 @@
         "e2e": {
             "executor": "./tools/executors/wdio:e2e-test",
             "options": {
-                "e2eFiles": ["libs/docs/core/progress-indicator/e2e/**/*.e2e-spec.ts"],
+                "e2eFiles": [
+                    "libs/docs/core/progress-indicator/e2e/**/*.e2e-spec.ts"
+                ],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-progress-indicator"]
-        },
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/docs/core/progress-indicator"],
-            "options": {
-                "project": "libs/docs/core/progress-indicator/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/docs/core/progress-indicator/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/docs/core/progress-indicator/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+            "outputs": [
+                "allure-results/docs-core-progress-indicator"
+            ]
         }
     },
-    "tags": ["type:lib", "scope:docs"]
+    "tags": [
+        "type:lib",
+        "scope:docs"
+    ]
 }

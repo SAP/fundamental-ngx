@@ -2,23 +2,9 @@
     "sourceRoot": "libs/docs/fn/shared",
     "projectType": "library",
     "prefix": "fdp-doc",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/docs/fn/shared"],
-            "options": {
-                "project": "libs/docs/fn/shared/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/docs/fn/shared/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/docs/fn/shared/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
-        }
-    },
-    "tags": ["type:lib", "scope:docs"]
+    "targets": {},
+    "tags": [
+        "type:lib",
+        "scope:docs"
+    ]
 }

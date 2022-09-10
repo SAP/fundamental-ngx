@@ -6,27 +6,18 @@
         "e2e": {
             "executor": "./tools/executors/wdio:e2e-test",
             "options": {
-                "e2eFiles": ["libs/docs/platform/switch/e2e/**/*.e2e-spec.ts"],
+                "e2eFiles": [
+                    "libs/docs/platform/switch/e2e/**/*.e2e-spec.ts"
+                ],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-platform-switch"]
-        },
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/docs/platform/switch"],
-            "options": {
-                "project": "libs/docs/platform/switch/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/docs/platform/switch/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/docs/platform/switch/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+            "outputs": [
+                "allure-results/docs-platform-switch"
+            ]
         }
     },
-    "tags": ["type:lib", "scope:docs"]
+    "tags": [
+        "type:lib",
+        "scope:docs"
+    ]
 }

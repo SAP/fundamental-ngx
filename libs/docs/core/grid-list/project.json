@@ -6,27 +6,18 @@
         "e2e": {
             "executor": "./tools/executors/wdio:e2e-test",
             "options": {
-                "e2eFiles": ["libs/docs/core/grid-list/e2e/**/*.e2e-spec.ts"],
+                "e2eFiles": [
+                    "libs/docs/core/grid-list/e2e/**/*.e2e-spec.ts"
+                ],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-grid-list"]
-        },
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/docs/core/grid-list"],
-            "options": {
-                "project": "libs/docs/core/grid-list/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/docs/core/grid-list/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/docs/core/grid-list/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+            "outputs": [
+                "allure-results/docs-core-grid-list"
+            ]
         }
     },
-    "tags": ["type:lib", "scope:docs"]
+    "tags": [
+        "type:lib",
+        "scope:docs"
+    ]
 }
