@@ -195,7 +195,7 @@
     "babel-loader": "8.2.4",
     "chromedriver": "99.0.0",
     "coveralls": "3.1.1",
-    "dotenv": "16.0.0",
+    "dotenv": "16.0.2",
     "eslint": "8.15.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.25.4",
