@@ -175,7 +175,7 @@ export class DialogComponent
     buildComponentCssClass(): string[] {
         return [
             this.dialogConfig.hasBackdrop ? 'fd-dialog' : 'fd-dialog--no-backdrop',
-            this.dialogConfig.container !== 'body' ? 'fd-dialog--targeted' : '',
+            this.dialogConfig.container !== 'body' || this.dialogConfig.position ? 'fd-dialog--targeted' : '',
             this.showDialogWindow ? 'fd-dialog--active' : '',
             this._class,
             this.dialogConfig.backdropClass ? this.dialogConfig.backdropClass : ''
