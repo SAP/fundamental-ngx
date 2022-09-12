@@ -1,4 +1,11 @@
 
+### [0.36.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.36.0...v0.36.1-rc.0) (2022-09-12)
+
+
+### Bug Fixes
+
+* **core:** fix dialog positioning when hasBrackdrop is false ([#8636](https://github.com/SAP/fundamental-ngx/issues/8636)) ([6a0ce55](https://github.com/SAP/fundamental-ngx/commit/6a0ce55a92d1ec2323238719885a01302645b3ac))
+
 ## [0.36.0](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.47...v0.36.0) (2022-09-09)
 
 ## [0.36.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.46...v0.36.0-rc.47) (2022-09-09)
