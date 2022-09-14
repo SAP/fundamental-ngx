@@ -125,7 +125,7 @@
     "@angular/platform-browser-dynamic": "14.0.2",
     "@angular/router": "14.0.2",
     "@fundamental-styles/fn": "0.25.0-rc.16",
-    "@nrwl/angular": "14.3.6",
+    "@nrwl/angular": "14.7.5",
     "@nrwl/tao": "14.3.6",
     "@sap-theming/theming-base-content": "11.1.40",
     "@stackblitz/sdk": "1.8.0",
