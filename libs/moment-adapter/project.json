@@ -71,5 +71,6 @@
             "styleext": "scss"
         }
     },
-    "tags": ["type:lib", "scope:datetime-adapter"]
+    "tags": ["type:lib", "scope:datetime-adapter"],
+    "implicitDependencies": ["core"]
 }
