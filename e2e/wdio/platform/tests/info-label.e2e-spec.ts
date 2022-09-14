@@ -61,14 +61,14 @@ describe('Info Label component test suite', () => {
         const labelsArr = elementArray(labelsWithTextArr);
         if (browserIsSafari()) {
             for (let i = 0; i < labelsArr.length; i++) {
-                expect(getText(labelsArr[i].selector)).toEqual(safariInfoLabelText);
+                expect(getText(labelsArr[i].selector).toLowerCase()).toEqual(safariInfoLabelText.toLowerCase());
                 expect(getCSSPropertyByName(labelsWithTextArr, cssAlignmentAttribute, i).value).toEqual(
                     labelContentAlignmentCenter
                 );
             }
         } else {
             for (let i = 0; i < labelsArr.length; i++) {
-                expect(getText(labelsArr[i].selector)).toEqual(infoLabelText);
+                expect(getText(labelsArr[i].selector).toLowerCase()).toEqual(infoLabelText.toLowerCase());
                 expect(getCSSPropertyByName(labelsWithTextArr, cssAlignmentAttribute, i).value).toEqual(
                     labelContentAlignmentCenter
                 );
@@ -82,7 +82,9 @@ describe('Info Label component test suite', () => {
 
         if (browserIsSafari()) {
             for (let i = 0; i < labelsWithIconsArr.length; i++) {
-                expect(getText(labelsWithTextAndIconArr, i)).toEqual(safariIconInfoLabelText);
+                expect(getText(labelsWithTextAndIconArr, i).toLowerCase()).toEqual(
+                    safariIconInfoLabelText.toLowerCase()
+                );
                 expect(getCSSPropertyByName(labelsWithTextAndIconArr, cssAlignmentAttribute, i).value).toEqual(
                     labelContentAlignmentStart
                 );
@@ -96,7 +98,7 @@ describe('Info Label component test suite', () => {
             }
         } else {
             for (let i = 0; i < labelsWithIconsArr.length; i++) {
-                expect(getText(labelsWithTextAndIconArr, i)).toEqual(infoLabelText);
+                expect(getText(labelsWithTextAndIconArr, i).toLowerCase()).toEqual(infoLabelText.toLowerCase());
                 expect(getCSSPropertyByName(labelsWithTextAndIconArr, cssAlignmentAttribute, i).value).toEqual(
                     labelContentAlignmentStart
                 );
@@ -112,16 +114,16 @@ describe('Info Label component test suite', () => {
 
     it('should check info label with a number or an icon', () => {
         if (browserIsSafari()) {
-            expect(getText(labelsWithNumberOrIconArr, 1)).toEqual(safariLargeNumberLabel);
-            expect(getText(labelsWithNumberOrIconArr, 0)).toEqual(numberLabel);
-            expect(getText(labelsWithNumberOrIconArr, 2)).toEqual(decimalLabel);
+            expect(getText(labelsWithNumberOrIconArr, 1).toLowerCase()).toEqual(safariLargeNumberLabel.toLowerCase());
+            expect(getText(labelsWithNumberOrIconArr, 0).toLowerCase()).toEqual(numberLabel.toLowerCase());
+            expect(getText(labelsWithNumberOrIconArr, 2).toLowerCase()).toEqual(decimalLabel.toLowerCase());
             expect(getAttributeByName(labelsWithNumberOrIconArr, labelIconAttribute, 3)).toEqual(
                 labelIconAttributeValue
             );
         } else {
-            expect(getText(labelsWithNumberOrIconArr, 1)).toEqual(largeNumberLabel);
-            expect(getText(labelsWithNumberOrIconArr, 0)).toEqual(numberLabel);
-            expect(getText(labelsWithNumberOrIconArr, 2)).toEqual(decimalLabel);
+            expect(getText(labelsWithNumberOrIconArr, 1).toLowerCase()).toEqual(largeNumberLabel.toLowerCase());
+            expect(getText(labelsWithNumberOrIconArr, 0).toLowerCase()).toEqual(numberLabel.toLowerCase());
+            expect(getText(labelsWithNumberOrIconArr, 2).toLowerCase()).toEqual(decimalLabel.toLowerCase());
             expect(getAttributeByName(labelsWithNumberOrIconArr, labelIconAttribute, 3)).toEqual(
                 labelIconAttributeValue
             );
@@ -133,14 +135,14 @@ describe('Info Label component test suite', () => {
             expect(getElementAriaLabel(accessibilityLabelsArr)).not.toBe(null);
             expect(getAttributeByName(accessibilityLabelsArr, ariaLabelledByAttribute, 1)).not.toBe(null);
 
-            expect(getText(accessibilityLabelsArr, 0)).toEqual(safariAriaLabelExample);
-            expect(getText(accessibilityLabelsArr, 1)).toEqual(safariAriaSuccessLabel);
+            expect(getText(accessibilityLabelsArr, 0).toLowerCase()).toEqual(safariAriaLabelExample.toLowerCase());
+            expect(getText(accessibilityLabelsArr, 1).toLowerCase()).toEqual(safariAriaSuccessLabel.toLowerCase());
         } else {
             expect(getElementAriaLabel(accessibilityLabelsArr)).not.toBe(null);
             expect(getAttributeByName(accessibilityLabelsArr, ariaLabelledByAttribute, 1)).not.toBe(null);
 
-            expect(getText(accessibilityLabelsArr, 0)).toEqual(ariaLabelExample);
-            expect(getText(accessibilityLabelsArr, 1)).toEqual(ariaSuccessLabel);
+            expect(getText(accessibilityLabelsArr, 0).toLowerCase()).toEqual(ariaLabelExample.toLowerCase());
+            expect(getText(accessibilityLabelsArr, 1).toLowerCase()).toEqual(ariaSuccessLabel.toLowerCase());
         }
     });
 
