@@ -1,6 +1,5 @@
 import { ExecutorContext, ProjectConfiguration, readTargetOptions } from '@nrwl/devkit';
 import { copySchematics } from './utils/copy-schematics';
-import { copyReadme } from './utils/copy-readme';
 import { syncVersions } from './utils/sync-versions';
 import { PrepareOptions } from './utils/prepare.options';
 import { PrepareSchema } from './utils/prepare.schema';
@@ -25,9 +24,6 @@ export default async function prepareLibrary(_options: PrepareSchema, context: E
     }
     if (targetOptions?.schematics) {
         await copySchematics(targetOptions, projectConfig, context.projectName as string);
-    }
-    if (targetOptions?.copyReadme) {
-        await copyReadme(targetOptions, projectConfig, context.projectName as string);
     }
     await syncVersions(targetOptions, projectConfig, targetOptions.versionsOverrides, context.projectName as string);
     if (_options.pack) {
