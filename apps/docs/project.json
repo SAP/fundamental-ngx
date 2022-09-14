@@ -256,5 +256,6 @@
             }
         }
     },
-    "tags": ["scope:docs", "type:app"]
+    "tags": ["scope:docs", "type:app"],
+    "implicitDependencies": ["core", "platform", "fn", "i18n", "datetime-adapter", "moment-adapter"]
 }
