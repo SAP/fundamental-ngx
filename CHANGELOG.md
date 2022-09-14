@@ -1,4 +1,11 @@
 
+### [0.36.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.1...v0.36.1-rc.2) (2022-09-14)
+
+
+### Bug Fixes
+
+* **core:** fix label for hour and sec ([#8691](https://github.com/SAP/fundamental-ngx/issues/8691)) ([1dd446e](https://github.com/SAP/fundamental-ngx/commit/1dd446e89e7279e4bd1e43757c95b02c037e349a))
+
 ### [0.36.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.0...v0.36.1-rc.1) (2022-09-14)
 
 
