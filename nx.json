@@ -68,6 +68,9 @@
         },
         "build-umbrella": {
             "dependsOn": ["^build-umbrella"]
+        },
+        "prepare": {
+            "dependsOn": ["build-umbrella"]
         }
     }
 }
