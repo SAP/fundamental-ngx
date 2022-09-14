@@ -2,6 +2,7 @@
     *ngIf="open"
     class="fd-action-sheet__wrapper fd-action-sheet__wrapper--active"
     (click)="_isOpenChangeHandle && _isOpenChangeHandle(false)"
+    cdkTrapFocus
 >
     <ng-container *ngTemplateOutlet="childContent?.actionSheetBodyTemplate || null"></ng-container>
 </div>
