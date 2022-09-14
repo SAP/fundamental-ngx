@@ -505,7 +505,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden */
     private _updateInternalTranslationConfig(): void {
         switch (this.columnTranslationsPreset) {
-            case 'seconds':
+            case 'hours':
                 this.internalTranslationConfig = {
                     increaseLabel: 'coreTime.increaseHoursLabel',
                     label: 'coreTime.hoursLabel',
@@ -521,7 +521,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
                     navigationInstruction: 'coreTime.navigationInstruction'
                 };
                 break;
-            case 'hours':
+            case 'seconds':
                 this.internalTranslationConfig = {
                     increaseLabel: 'coreTime.increaseSecondsLabel',
                     label: 'coreTime.secondsLabel',
