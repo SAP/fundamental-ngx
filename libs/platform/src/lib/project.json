@@ -11,10 +11,6 @@
                     "collection": "../../schematics",
                     "tsConfig": "../../tsconfig.schematics.json"
                 },
-                "copyReadme": {
-                    "readmePath": "../../../../PLATFORM_README.md",
-                    "targetPath": "../../../../dist/libs/platform/PLATFORM_README.md"
-                },
                 "distPath": "dist/libs/platform"
             }
         },
