@@ -1,4 +1,11 @@
 
+### [0.36.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.0...v0.36.1-rc.1) (2022-09-14)
+
+
+### Bug Fixes
+
+* **core,platform:** table defect hunting issues ([#8653](https://github.com/SAP/fundamental-ngx/issues/8653)) ([54e0b4d](https://github.com/SAP/fundamental-ngx/commit/54e0b4ddfb75a5a6e6a97c5a51d26393dcf8a3a4))
+
 ### [0.36.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.36.0...v0.36.1-rc.0) (2022-09-12)
 
 
