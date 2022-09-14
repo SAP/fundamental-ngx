@@ -71,9 +71,9 @@
                         "output": "./assets"
                     },
                     {
-                        "input": ".",
-                        "glob": "PLATFORM_README.md",
-                        "output": "./assets"
+                        "input": "./libs/platform/src/lib",
+                        "glob": "README.md",
+                        "output": "./assets/platform"
                     },
                     {
                         "input": "./libs/core/src/lib",
