@@ -6,8 +6,6 @@ In this guide, we'll explore the library and documentation code base and create 
 
 This repository contains two separate projects - the component library and the documentation application. Different build tasks are used, depending on which project we're building. However, the documentation app consumes the library source directly, so there's no need to compile the library to test changes you're making to a component - simply running the documentation app locally will serve changes to the library immediately.
 
-The documentation code base lies in the `docs` directory and the library source is in the `libs` directory.
-
 ## Generating new component
 
 Creating a new component is pretty straightforward. If you have the `NX Console` plugin, simply open it and run the `sap-component` schematic. This can also be done manually using the command line.
@@ -20,7 +18,7 @@ Running this will scaffold the initial structure for the new component:
 -   new library under the provided project (core/platform/fn)
 -   docs section with the default example
 
-Navigate to http://localhost:4200/fundamental-ngx#/core/poster-editor to start working with the component.
+Serve the app using `yarn start`, and navigate to http://localhost:4200/fundamental-ngx#/core/poster-editor to start working with the component.
 
 Component will be located at `libs/core/src/lib/poster-editor` and example code will be in `libs/docs/core/poster-editor`.
 
@@ -51,8 +49,7 @@ libs/docs/core/poster-editor/examples/
             poster-editor-complex-example.component.ts
 ```
 
-2. Add component exports in the barrel file (index.ts) in the examples folder
-3. Add a new section in `libs/docs/core/poster-editor/poster-editor-docs.component.html`
+2. Add a new section in `libs/docs/core/poster-editor/poster-editor-docs.component.html`
 
 ```html
 <separator></separator>
@@ -65,7 +62,7 @@ libs/docs/core/poster-editor/examples/
 <code-example [exampleFiles]="posterEditorComplexExample"></code-example>
 ```
 
-4. Along with this, it's required to add data for `exampleFiles` binding.
+3. Along with this, it's required to add data for `exampleFiles` binding.
    These files are the actual files of newly added example imported as raw text. This text will be rendered as the example source.
    To add them open `poster-editor-docs.component.ts` and make the following changes
 
@@ -87,7 +84,7 @@ export class PosterEditorDocsComponent {
 }
 ```
 
-5. Ensure examples work with stackblitz
+4. Ensure examples work with stackblitz
 
 After adding new examples, try clicking the "Show Code" and then "StackBlitz" button in the newly added example and ensure it opens correctly.
 
@@ -99,4 +96,4 @@ To test the new component, run `nx test core-poster-editor` to execute the unit 
 
 ### Publishing and testing in external applications
 
-Before proceeding with creating a PR run `yarn run build` and test your changes in an external application. This will build the application and run `npm pack`. After it's done you can install this version of the library in any external application using `npm link` command. More details [here](https://docs.npmjs.com/cli/v8/commands/npm-link)
+Before proceeding with creating a PR run `yarn run build` and test your changes in an external application. This will build the application and run `yarn pack`. After it's done you can install this version of the library in any external application using `yarn link` command. More details [here](https://docs.npmjs.com/cli/v8/commands/npm-link)
