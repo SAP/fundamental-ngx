@@ -27,7 +27,21 @@ export class KeyboardSupportService<T> {
     }
 
     /** @hidden */
-    setKeyboardService(queryList: QueryList<KeyboardSupportItemInterface & T>, wrap?: boolean): void {
+    private _itemList: QueryList<KeyboardSupportItemInterface & T>;
+
+    /** @hidden
+     * allow focus trap for tab key. default is true.
+     */
+    private _focusTrapOnTab = true;
+
+    /** @hidden */
+    setKeyboardService(
+        queryList: QueryList<KeyboardSupportItemInterface & T>,
+        wrap?: boolean,
+        focusTrapOnTab = true
+    ): void {
+        this._itemList = queryList;
+        this._focusTrapOnTab = focusTrapOnTab;
         this._keyManager = new FocusKeyManager(queryList).withWrap(wrap).withHomeAndEnd();
         queryList.changes
             .pipe(takeUntil(this._onDestroy$), startWith(0))
@@ -38,13 +52,19 @@ export class KeyboardSupportService<T> {
     onKeyDown(event: KeyboardEvent): void {
         this._keyManager.onKeydown(event);
         if (KeyUtil.isKeyCode(event, TAB)) {
-            event.preventDefault();
             if (hasModifierKey(event, 'shiftKey')) {
+                if (this.keyManager.activeItem === this._itemList.first && !this._focusTrapOnTab) {
+                    return;
+                }
+                event.preventDefault();
                 this.keyManager.setPreviousItemActive();
             } else {
+                if (this.keyManager.activeItem === this._itemList.last && !this._focusTrapOnTab) {
+                    return;
+                }
+                event.preventDefault();
                 this.keyManager.setNextItemActive();
             }
-            return;
         }
     }
 
