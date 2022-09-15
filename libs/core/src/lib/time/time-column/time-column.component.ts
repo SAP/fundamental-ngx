@@ -303,38 +303,6 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         }
     }
 
-    /** @hidden
-     * set the time for given item value. used by _numericKeyInputHandler.
-     */
-    _pickTimeOnValue(value: number): void {
-        this._pickTime(
-            this.items.find((item) => item.value.value === value),
-            false,
-            true,
-            false
-        );
-        this._keyLog = []; // clear key log
-    }
-
-    /** @hidden
-     * handles numeric key inputs to set time.
-     */
-    _numericKeyInputHandler(event: KeyboardEvent): void {
-        const lastItemValue = this.items.last.value.value; // value of last item in column
-
-        this._numericInputTimeout && clearTimeout(this._numericInputTimeout);
-        this._keyLog.push(event.key);
-        const inputValue = parseInt(this._keyLog.join(''), 10); // converts keyLog elements to a number
-
-        if (inputValue * 10 > lastItemValue || this._keyLog.length === lastItemValue.toString().length) {
-            this._pickTimeOnValue(inputValue);
-        } else {
-            this._numericInputTimeout = setTimeout(() => {
-                this._pickTimeOnValue(inputValue);
-            }, 1000);
-        }
-    }
-
     /** @hidden */
     spinnerButtonKeyupHandle(event: KeyboardEvent, upButton?: boolean): void {
         if (KeyUtil.isKeyCode(event, SPACE)) {
@@ -440,6 +408,38 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      */
     _onFocusIndicator(): void {
         this.activeStateChange.emit();
+    }
+
+    /** @hidden
+     * handles numeric key inputs to set time.
+     */
+    private _numericKeyInputHandler(event: KeyboardEvent): void {
+        const lastItemValue = this.items.last.value.value; // value of last item in column
+
+        this._numericInputTimeout && clearTimeout(this._numericInputTimeout);
+        this._keyLog.push(event.key);
+        const inputValue = parseInt(this._keyLog.join(''), 10); // converts keyLog elements to a number
+
+        if (inputValue * 10 > lastItemValue || this._keyLog.length === lastItemValue.toString().length) {
+            this._pickTimeOnValue(inputValue);
+        } else {
+            this._numericInputTimeout = setTimeout(() => {
+                this._pickTimeOnValue(inputValue);
+            }, 500);
+        }
+    }
+
+    /** @hidden
+     * set the time for given item value. used by _numericKeyInputHandler.
+     */
+    private _pickTimeOnValue(value: number): void {
+        this._pickTime(
+            this.items.find((item) => item.value.value === value),
+            false,
+            true,
+            false
+        );
+        this._keyLog = []; // clear key log
     }
 
     /**
