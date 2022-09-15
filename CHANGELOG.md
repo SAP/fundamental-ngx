@@ -1,4 +1,11 @@
 
+### [0.36.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.2...v0.36.1-rc.3) (2022-09-15)
+
+
+### Bug Fixes
+
+* **platform:** update items on new event ([#8650](https://github.com/SAP/fundamental-ngx/issues/8650)) ([cbf1e2c](https://github.com/SAP/fundamental-ngx/commit/cbf1e2c24cf251cd026e5d4ba31f4c0c725484af))
+
 ### [0.36.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.1...v0.36.1-rc.2) (2022-09-14)
 
 
