@@ -167,7 +167,7 @@
     "@commitlint/cli": "16.1.0",
     "@commitlint/config-conventional": "16.2.1",
     "@commitlint/travis-cli": "16.2.1",
-    "@nrwl/cli": "14.3.6",
+    "@nrwl/cli": "14.7.5",
     "@nrwl/devkit": "14.3.6",
     "@nrwl/eslint-plugin-nx": "14.3.6",
     "@nrwl/linter": "14.3.6",
