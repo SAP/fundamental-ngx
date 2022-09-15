@@ -203,6 +203,16 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
+    /** @hidden
+     * logs numeric key inputs to set time using keyboard input.
+     */
+    private _keyLog: string[] = [];
+
+    /** @hidden
+     * Timeout variable used to set timeout for subsequent numeric key input to set time.
+     */
+    private _numericInputTimeout: ReturnType<typeof setTimeout>;
+
     /** @hidden */
     constructor(private _changeDetRef: ChangeDetectorRef, private _elmRef: ElementRef) {
         this._subscriptions.add(
@@ -277,7 +287,9 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
             this.scrollUp();
             event.preventDefault();
-        } else if (KeyUtil.isKeyType(event, 'numeric') || KeyUtil.isKeyType(event, 'alphabetical')) {
+        } else if (KeyUtil.isKeyType(event, 'numeric')) {
+            this._numericKeyInputHandler(event);
+        } else if (KeyUtil.isKeyType(event, 'alphabetical')) {
             this._queryKeyDownEvent.next(event.key);
         }
     }
@@ -288,6 +300,38 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         event.preventDefault();
         if (this._active) {
             event.deltaY > 0 ? this.scrollDown() : this.scrollUp();
+        }
+    }
+
+    /** @hidden
+     * set the time for given item value. used by _numericKeyInputHandler.
+     */
+    _pickTimeOnValue(value: number): void {
+        this._pickTime(
+            this.items.find((item) => item.value.value === value),
+            false,
+            true,
+            false
+        );
+        this._keyLog = []; // clear key log
+    }
+
+    /** @hidden
+     * handles numeric key inputs to set time.
+     */
+    _numericKeyInputHandler(event: KeyboardEvent): void {
+        const lastItemValue = this.items.last.value.value; // value of last item in column
+
+        this._numericInputTimeout && clearTimeout(this._numericInputTimeout);
+        this._keyLog.push(event.key);
+        const inputValue = parseInt(this._keyLog.join(''), 10); // converts keyLog elements to a number
+
+        if (inputValue * 10 > lastItemValue || this._keyLog.length === lastItemValue.toString().length) {
+            this._pickTimeOnValue(inputValue);
+        } else {
+            this._numericInputTimeout = setTimeout(() => {
+                this._pickTimeOnValue(inputValue);
+            }, 1000);
         }
     }
 
