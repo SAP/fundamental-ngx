@@ -383,16 +383,10 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
     /**
      * @hidden
-     * Instailization of list with selection mode
+     * Initialization of the lis component with selection mode
      */
     ngOnInit(): void {
-        if (this._dsItems.length !== null && this.itemSize !== 0) {
-            this._startIndex = 0;
-            this._lastIndex = this.itemSize;
-            this._items = this._dsItems.slice(this._startIndex, this._lastIndex);
-        } else {
-            this._items = this._dsItems;
-        }
+        this._setItems();
 
         this.stateChanges.next(this._items);
         this.id = `fdp-list-${nextListId++}`;
@@ -487,7 +481,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
      * @hidden
      * load more on enter or space press
      */
-    _loadOnkeyPress(event: KeyboardEvent): void {
+    _loadOnKeyPress(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             this._getMoreData();
         }
@@ -503,7 +497,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         this._loading = true;
         of(this._loadNewItems())
             .pipe(
-                tap((data) => {
+                tap(async (data) => {
                     if (isBlank(data)) {
                         console.error('===Invalid Response recived===');
                     }
@@ -511,7 +505,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
                         this._language,
                         'platformList.loadingAriaLabel'
                     );
-                    this._liveAnnouncer.announce(this.loadingLabel, 'assertive');
+                    await this._liveAnnouncer.announce(this.loadingLabel, 'assertive');
                 }),
                 delay(this.delayTime),
                 takeUntil(this._destroyed)
@@ -589,6 +583,19 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     }
 
     /** @hidden */
+    private _setItems(): void {
+        if (this._dsItems.length !== null && this.itemSize !== 0) {
+            this._startIndex = 0;
+            this._lastIndex = this.itemSize;
+            this._items = this._dsItems.slice(this._startIndex, this._lastIndex);
+        } else {
+            this._items = this._dsItems;
+        }
+
+        this.stateChanges.next(this._items);
+    }
+
+    /** @hidden */
     private _initializeDS(ds: FdpListDataSource<T>): void {
         this._dsItems = [];
         if (isDataSource(this.dataSource)) {
@@ -638,6 +645,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             .subscribe((data) => {
                 this._dsItems = data || [];
                 this.stateChanges.next(this._dsItems);
+                this._setItems();
                 this._cd.markForCheck();
             });
 
@@ -814,30 +822,34 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
 @Component({
     selector: 'fdp-list-footer',
-    template: ` <li #listfooter class="fd-list__footer" [attr.id]="id" role="option">
+    template: ` <li #listFooter class="fd-list__footer" [attr.id]="id" role="option">
         <ng-content></ng-content>
     </li>`
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
-export class ListFooter extends BaseComponent {}
+export class ListFooterComponent extends BaseComponent {}
 
 @Component({
     selector: 'fdp-list-group-header',
     template: ` <li #listItem fd-list-group-header [attr.id]="id" role="option" [tabindex]="0">
-        <span fd-list-title>{{ grpheaderTitle }}</span>
+        <span fd-list-title>{{ groupHeaderTitle }}</span>
         <ng-content></ng-content>
     </li>`,
-    providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeader) }]
+    providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeaderComponent) }]
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
-export class ListGroupHeader extends BaseListItem implements OnInit {
+export class ListGroupHeaderComponent extends BaseListItem implements OnInit {
     /** Displays list goup header title */
     @Input()
-    grpheaderTitle?: string;
+    groupHeaderTitle?: string;
+
+    /** @deprecated Use `groupHeaderTitle` instead */
+    @Input()
+    set grpheaderTitle(value: string) {
+        this.groupHeaderTitle = value;
+    }
 
     /**
      * @hidden
-     * Instailization of list header
+     * Initialization of the list header component
      */
     ngOnInit(): void {
         this.id = `fdp-list-${nextListGrpHeaderId++}`;
