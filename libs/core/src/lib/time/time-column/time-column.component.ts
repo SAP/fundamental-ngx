@@ -290,7 +290,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         } else if (KeyUtil.isKeyType(event, 'numeric')) {
             this._numericKeyInputHandler(event);
         } else if (KeyUtil.isKeyType(event, 'alphabetical')) {
-            this._queryKeyDownEvent.next(event.key);
+            this._alphaKeyInputHandler(event);
         }
     }
 
@@ -411,6 +411,17 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     }
 
     /** @hidden
+     * handles alphabetical key inputs to set period.
+     */
+    private _alphaKeyInputHandler(event: KeyboardEvent): void {
+        if (event.key === 'a' || event.key === 'A') {
+            this._pickTimeOnValue('AM');
+        } else if (event.key === 'p' || event.key === 'P') {
+            this._pickTimeOnValue('PM');
+        }
+    }
+
+    /** @hidden
      * handles numeric key inputs to set time.
      */
     private _numericKeyInputHandler(event: KeyboardEvent): void {
@@ -432,7 +443,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden
      * set the time for given item value. used by _numericKeyInputHandler.
      */
-    private _pickTimeOnValue(value: number): void {
+    private _pickTimeOnValue(value: string | number): void {
         this._pickTime(
             this.items.find((item) => item.value.value === value),
             false,
