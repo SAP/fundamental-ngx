@@ -40,6 +40,7 @@
                 [disabled]="disabled"
                 (mousedown)="_preventFocus($event)"
                 (keydown.enter)="$event.preventDefault()"
+                (keyup.enter)="_buttonClicked($event)"
                 (click)="_buttonClicked($event)"
             >
                 <ng-container *ngIf="!glyph">{{ addOnText }}</ng-container>
