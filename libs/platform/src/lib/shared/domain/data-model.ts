@@ -38,7 +38,7 @@ export interface OptionItem {
      * References to the object instance
      */
     value: any;
-
+    id?: string;
     isGroup?: boolean;
     secondaryText?: string;
     children?: OptionItem[];

@@ -18,7 +18,7 @@
             placeholder="Type some text..."
             [dataSource]="dataSource"
             displayKey="name"
-            lookupKey="name"
+            lookupKey="id"
             [selectedItems]="selectedItems2"
             (selectionChange)="onSelect2($event)"
         ></fdp-multi-combobox>
@@ -60,7 +60,7 @@
             placeholder="Type some text..."
             [dataSource]="dsl"
             displayKey="name"
-            lookupKey="name"
+            lookupKey="id"
             (selectionChange)="onSelect6($event)"
             [selectedItems]="selectedItems6"
             [limitless]="isLimitless"

@@ -120,7 +120,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
     /** @hidden */
     toggleSelection(item: SelectableOptionItem): void {
-        const idx = this._getTokenIndexByLabelOrValue(item);
+        const idx = this._getTokenIndexByIdlOrValue(item);
 
         if (idx === -1) {
             this._selectedSuggestions.push(item);
@@ -317,10 +317,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     }
 
     /** @hidden */
-    private _getTokenIndexByLabelOrValue(item: SelectableOptionItem): number {
-        return this._selectedSuggestions.findIndex(
-            (token) => token.label === item.label && equal(token.value, item.value)
-        );
+    private _getTokenIndexByIdlOrValue(item: SelectableOptionItem): number {
+        return this._selectedSuggestions.findIndex((token) => token.id === item.id || equal(token.value, item.value));
     }
 
     /** @hidden */
