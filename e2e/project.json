@@ -1,8 +1,13 @@
 {
-    "root": "e2e",
     "sourceRoot": "e2e",
     "projectType": "application",
     "targets": {
+        "e2e-test-local": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": ["echo === E2E ===", "yarn run e2e:wdio"]
+            }
+        },
         "lint": {
             "executor": "@nrwl/linter:eslint",
             "options": {

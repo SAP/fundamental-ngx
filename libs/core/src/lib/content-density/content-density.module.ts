@@ -3,7 +3,7 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContentDensityDirective } from './directives/content-density.directive';
 import { DEFAULT_CONTENT_DENSITY } from './tokens/default-content-density.token';
-import { ContentDensityMode, ContentDensityModuleConfig } from './content-density.types';
+import { ContentDensityModuleConfig } from './content-density.types';
 import { ContentDensityStorage } from './classes/abstract-content-density-storage';
 import { MemoryContentDensityStorage } from './providers/memory-content-density-storage';
 import { GlobalContentDensityService } from './services/global-content-density.service';
@@ -12,6 +12,7 @@ import { CONTENT_DENSITY_STORAGE_KEY } from './tokens/content-density-storage-ke
 import { UrlContentDensityStorage } from './providers/url-content-density-storage';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { DeprecatedContentDensityService } from './services/deprecated-content-density.service';
+import { ContentDensityMode } from './types/content-density.mode';
 
 function generateContentDensityStorage(config: ContentDensityModuleConfig): Provider {
     if (config.storage === 'localStorage') {

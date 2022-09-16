@@ -1,7 +1,8 @@
 import { coerceElement } from '@angular/cdk/coercion';
-import { ContentDensityCallbackFn, ContentDensityObserverTarget, ContentDensityMode } from '../content-density.types';
+import { ContentDensityCallbackFn, ContentDensityObserverTarget } from '../content-density.types';
 import { defaultContentDensityObserverConfigs } from '../variables/default-content-density-consumer-config';
 import { ContentDensityObserverSettings } from '../classes/content-density-observer.settings';
+import { ContentDensityMode } from '../types/content-density.mode';
 
 export function contentDensityCallbackFactory(
     consumerConfig: ContentDensityObserverTarget | ContentDensityCallbackFn

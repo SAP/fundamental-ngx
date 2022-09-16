@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/message-toast",
     "sourceRoot": "libs/core/src/lib/message-toast",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/message-toast"],
             "options": {
                 "tsConfig": "libs/core/src/lib/message-toast/tsconfig.lib.json",

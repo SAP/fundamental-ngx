@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "type": "object",
+    "cli": "nx",
+    "properties": {
+        "e2eFiles": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "List of e2e files to run",
+            "required": false
+        },
+        "baseUrl": {
+            "type": "string",
+            "required": false,
+            "description": "The base url of the site you want to use for testing"
+        },
+        "devServerTarget": {
+            "type": "string",
+            "required": false,
+            "description": "The target of the dev server you want to use for testing"
+        }
+    }
+}

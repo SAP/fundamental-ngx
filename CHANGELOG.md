@@ -1,3 +1,14 @@
+## [0.36.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.7...v0.36.1-rc.8) (2022-09-16)
+
+
+
+
+### [0.36.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.6...v0.36.1-rc.7) (2022-09-16)
+
+
+### Bug Fixes
+
+* **core:** remove list-header focus ([#8656](https://github.com/SAP/fundamental-ngx/issues/8656)) ([06b7aee](https://github.com/SAP/fundamental-ngx/commit/06b7aeed2e07e690114d2484aaa68c37374d9067))
 
 ### [0.36.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.5...v0.36.1-rc.6) (2022-09-16)
 

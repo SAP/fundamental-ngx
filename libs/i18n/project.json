@@ -1,10 +1,38 @@
 {
     "projectType": "library",
-    "root": "libs/i18n",
     "sourceRoot": "libs/i18n/src",
     "prefix": "fundamental-ngx",
     "targets": {
+        "prepare": {
+            "executor": "./tools/executors/prepare-library:prepare",
+            "options": {
+                "distPath": "dist/libs/i18n"
+            }
+        },
+        "compile-typedoc": {
+            "executor": "./tools/executors/compile-typedoc:compile-lib",
+            "options": {
+                "outputPath": "libs/docs/typedoc/i18n"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
         "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/i18n"],
+            "options": {
+                "project": "libs/i18n/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/i18n/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/i18n/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "build-umbrella": {
             "executor": "@nrwl/angular:package",
             "outputs": ["dist/libs/i18n"],
             "options": {

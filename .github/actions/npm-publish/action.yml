@@ -1,0 +1,16 @@
+name: Publish library
+description: Publish library to npm repository
+inputs:
+    projects:
+        description: Path to package.json
+        required: true
+    releaseTag:
+        description: Release tag of publish
+        required: true
+    token:
+        description: NPM token
+        required: true
+
+runs:
+    using: node16
+    main: ./index.js

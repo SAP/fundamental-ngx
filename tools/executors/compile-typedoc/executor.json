@@ -1,0 +1,9 @@
+{
+    "executors": {
+        "compile-lib": {
+            "implementation": "./index",
+            "schema": "./schema.json",
+            "description": "Compiles typedocs of library"
+        }
+    }
+}

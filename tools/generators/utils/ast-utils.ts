@@ -65,6 +65,7 @@ export function addModuleOrComponentExportToModule(host: Tree, modulePath: strin
         throw new SchematicsException(`Module not found: ${modulePath}`);
     }
 
+    // @ts-ignore
     const changes = addExportToModule(moduleSource, modulePath, moduleName, src);
     const recorder = host.beginUpdate(modulePath);
 

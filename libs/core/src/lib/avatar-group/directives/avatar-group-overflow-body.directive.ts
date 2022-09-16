@@ -2,19 +2,20 @@ import {
     AfterViewInit,
     ContentChildren,
     Directive,
-    forwardRef,
     HostListener,
     Input,
     OnDestroy,
     Optional,
     QueryList
 } from '@angular/core';
-import { FocusKeyManager } from '@angular/cdk/a11y';
-import { TAB, DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
+import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
-import { AvatarGroupFocusableAvatarDirective } from './avatar-group-focusable-avatar.directive';
+import { HasElementRef, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { AVATAR_GROUP_FOCUSABLE_AVATAR_DIRECTIVE, FocusableWithElementRef } from '../tokens';
+
+// import { AvatarGroupFocusableAvatarDirective } from './avatar-group-focusable-avatar.directive';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -40,11 +41,11 @@ export class AvatarGroupOverflowBodyDirective implements AfterViewInit, OnDestro
     noVerticalScroll = true;
 
     /** @hidden Avatar Group Overflow items. */
-    @ContentChildren(forwardRef(() => AvatarGroupFocusableAvatarDirective), { descendants: true })
-    overflowItems: QueryList<AvatarGroupFocusableAvatarDirective>;
+    @ContentChildren(AVATAR_GROUP_FOCUSABLE_AVATAR_DIRECTIVE, { descendants: true })
+    overflowItems: QueryList<FocusableWithElementRef>;
 
     /** @hidden FocusKeyManager instance */
-    private _keyboardEventsManager: FocusKeyManager<AvatarGroupFocusableAvatarDirective>;
+    private _keyboardEventsManager: FocusKeyManager<HasElementRef>;
 
     /** @hidden */
     private readonly _subscription = new Subscription();
@@ -73,7 +74,9 @@ export class AvatarGroupOverflowBodyDirective implements AfterViewInit, OnDestro
     @HostListener('keyup', ['$event'])
     keyUpHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, TAB)) {
-            const index = this.overflowItems.toArray().findIndex((item) => item._element === event.target);
+            const index = this.overflowItems
+                .toArray()
+                .findIndex((item) => item.elementRef().nativeElement === event.target);
             if (index !== -1) {
                 this._keyboardEventsManager.setActiveItem(index);
             }
@@ -86,7 +89,7 @@ export class AvatarGroupOverflowBodyDirective implements AfterViewInit, OnDestro
     }
 
     /** @hidden */
-    _setActiveItem(item: AvatarGroupFocusableAvatarDirective): void {
+    _setActiveItem(item: FocusableOption & HasElementRef): void {
         this._keyboardEventsManager.setActiveItem(item);
     }
 

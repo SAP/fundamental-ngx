@@ -1,7 +1,7 @@
 import { Directive, Input, isDevMode, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ContentDensityMode } from '../content-density.types';
+import { ContentDensityMode } from '../types/content-density.mode';
 import { ModuleDeprecation } from '@fundamental-ngx/core/utils';
 
 /**

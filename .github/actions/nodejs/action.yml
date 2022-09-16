@@ -14,21 +14,30 @@ runs:
           uses: actions/setup-node@v3
           with:
               node-version: ${{ inputs.node-version }}
+
+        - name: Get yarn cache directory path
+          id: yarn-cache-dir-path
+          run: echo "::set-output name=dir::$(yarn cache dir)"
+          shell: bash
+
+        - name: Use the global Yarn cache if available
+          uses: actions/cache@v3
+          with:
+              path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+              key: ${{ runner.os }}-node-${{ inputs.node_version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+              restore-keys: |
+                  ${{ runner.os }}-node-${{ inputs.node_version }}-yarn-
+
         - uses: actions/cache@v3
-          id: node-modules-cache
+          id: node_modules
+          name: Use project node_modules cache if available
           with:
               path: '**/node_modules/'
               key: ${{ runner.os }}-${{ inputs.node-version }}-node-modules-${{ hashFiles('**/yarn.lock') }}
               restore-keys: |
                   ${{ runner.os }}-${{ inputs.node-version }}-node-modules-
 
-        - shell: bash
-          run: |
-              echo "Show environment Node.js, yarn ..."
-              node -v
-              yarn -v
-
         - name: Install dependencies
-          if: steps.node-modules-cache.outputs.cache-hit != 'true'
+          if: steps.node_modules.outputs.cache-hit != 'true'
           run: yarn install --frozen-lockfile
           shell: bash

@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/upload-collection",
     "sourceRoot": "libs/core/src/lib/upload-collection",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/upload-collection"],
             "options": {
                 "tsConfig": "libs/core/src/lib/upload-collection/tsconfig.lib.json",

@@ -5,6 +5,7 @@ import {
     ContentChild,
     ElementRef,
     EventEmitter,
+    Inject,
     HostBinding,
     Input,
     NgZone,
@@ -14,11 +15,12 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import { TabListComponent } from '../tab-list.component';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
 import { TabItemState } from '../tab-item/tab-item.directive';
 import { first, Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { LIST_COMPONENT } from '../tab-list.token';
+import { TabListComponentInterface } from '../tab-list-component.interface';
 
 let tabPanelUniqueId = 0;
 
@@ -113,7 +115,7 @@ export class TabPanelComponent implements OnChanges {
         public elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
         private _ngZone: NgZone,
-        @Optional() private readonly _tabsComponent: TabListComponent | null
+        @Optional() @Inject(LIST_COMPONENT) private readonly _tabsComponent: TabListComponentInterface | null
     ) {}
 
     /** @hidden

@@ -9,6 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { TimelinePositionControlService } from '../../services/timeline-position-control.service';
+import { TimelineNodeComponentInterface } from './timeline-node-component.interface';
 
 @Component({
     selector: 'fd-timeline-node',
@@ -20,7 +21,7 @@ import { TimelinePositionControlService } from '../../services/timeline-position
         '[class.fd-timeline__node-wrapper--icon]': '!!glyph'
     }
 })
-export class TimelineNodeComponent implements OnInit, OnDestroy {
+export class TimelineNodeComponent implements TimelineNodeComponentInterface, OnInit, OnDestroy {
     /* Glyph of the current timeline node.*/
     @Input()
     glyph: string;

@@ -36,6 +36,7 @@ export * from './drag-and-drop/dnd-list/dnd-list.directive';
 export * from './drag-and-drop/dnd-item/dnd-item.directive';
 export * from './drag-and-drop/dnd-keyboard-group/dnd-keyboard-group.directive';
 export * from './drag-and-drop/dnd-keyboard-item/dnd-keyboard-item.directive';
+export * from './drag-and-drop/dnd.interfaces';
 
 export * from './interfaces/css-class-builder.interface';
 export * from './interfaces/css-style-builder.interface';
@@ -43,6 +44,7 @@ export * from './interfaces/has-element-ref.interface';
 export * from './interfaces/keyboard-support-item.interface';
 export * from './interfaces/module-deprecation.interface';
 export * from './interfaces/require.interface';
+export * from './interfaces/content-density';
 
 export * from './decorators/apply-css-class.decorator';
 export * from './decorators/apply-css-style.decorator';
