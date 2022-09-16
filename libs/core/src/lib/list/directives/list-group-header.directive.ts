@@ -20,6 +20,7 @@ export class ListGroupHeaderDirective {
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
+    /** @hidden */
     constructor(readonly elementRef: ElementRef) {}
 
     /** @hidden */
