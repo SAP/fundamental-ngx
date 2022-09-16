@@ -6,14 +6,11 @@ on:
         - cron: '0 22 * * *'
 
 env:
-    NX_BRANCH: ${{ github.event.number }}
-    NX_RUN_GROUP: ${{ github.run_id }}
+    NX_CLOUD_DISTRIBUTED_EXECUTION: true
+    NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 8
+    NX_BRANCH: ${{ github.event.number || github.ref_name }}
+    NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
     NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-
-    MOZ_HEALESS: 1
-
-    SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
-    SAUCE_ACCESS_KEY: ${{secrets.SAUCE_ACCESS_KEY}}
 
     FIREBASE_CHANNEL: ${{ fromJSON('["", "live"]')[!github.base_ref] }}
     FIREBASE_SERVICE_ACCOUNT_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN }}
@@ -25,187 +22,88 @@ env:
     NODE_OPTIONS: '--max_old_space_size=4096'
 
 jobs:
-    install:
+    agents:
+        name: Ubuntu latest
+        uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.6
+        secrets:
+            NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+            NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+        with:
+            number-of-agents: 8
+            node-version: 14.20.0
+            yarn-version: 1.22.19
+            install-commands: |
+                yarn install --frozen-lockfile
+                export DISPLAY=:99
+                sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+    initialize_cloud:
         runs-on: ubuntu-latest
+        name: Initialize Nx Cloud
         steps:
             - uses: actions/checkout@v3
-            - uses: actions/cache@v2
-              id: cache
+            - uses: ./.github/actions/nodejs
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/setup-node@v2
+                  node-version: 14.20.0
+            - name: Initialize the Nx Cloud distributed CI run
+              run: npx nx-cloud start-ci-run
+    build_test:
+        needs: initialize_cloud
+        runs-on: ubuntu-latest
+        name: Run affected Build and Test commands
+        defaults:
+            run:
+                working-directory: ${{ github.workspace }}
+                shell: bash
+        steps:
+            - uses: actions/checkout@v3
+              name: Checkout
               with:
-                  node-version: 15.11.0
-                  cache: npm
-            - name: install dependencies
-              run: npm ci
+                  fetch-depth: 0
+            - uses: nrwl/nx-set-shas@v2
+              name: Derive appropriate SHAs for base and head for nx-affected commands
+              with:
+                  main-branch-name: main
+            - uses: ./.github/actions/nodejs
+              with:
+                  node-version: 14.20.0
 
-    # build core
-    build-core:
-        needs: install
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
-              with:
-                  path: dist/libs/core
-                  key: dist-core-${{ github.run_id }}
-            - run: npx nx build core --configuration production --runner cloud
+            - uses: wagoid/commitlint-github-action@v3
+              name: Commit lint
 
-    # build platform
-    build-platform:
-        needs: build-core
+            - name: Run Build and Test
+              uses: ./.github/actions/parallel-commands
+              with:
+                  parallel-commands: |
+                      npx nx run-many --target=build --exclude=docs --parallel=3
+                      npx nx run-many --target=test --exclude=workspace-tools --parallel=3
+                      npx nx run-many --target=lint --exclude=core,platform,fn --parallel=3
+                      npx nx run-many workspace-tools:test --skip-nx-cache
+    e2e_test:
+        needs: initialize_cloud
         runs-on: ubuntu-latest
+        name: Run affected e2e commands
+        defaults:
+            run:
+                working-directory: ${{ github.workspace }}
+                shell: bash
         steps:
             - uses: actions/checkout@v3
-            - uses: actions/cache@v2
+              name: Checkout
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
+                  fetch-depth: 0
+            - uses: ./.github/actions/nodejs
               with:
-                  path: dist/libs/core
-                  key: dist-core-${{ github.run_id }}
-            - uses: actions/cache@v2
+                  node-version: 14.20.0
+            - run: npx nx run-many --target=build --projects=docs --parallel=3 --configuration=production
+            - uses: browser-actions/setup-chrome@latest
               with:
-                  path: dist/libs/platform
-                  key: dist-platform-${{ github.run_id }}
-            - run: npx nx build platform --configuration production --runner cloud
-
-    # build moment-adapter
-    build-moment-adapter:
-        needs: build-core
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
-              with:
-                  path: dist/libs/core
-                  key: dist-core-${{ github.run_id }}
-            - uses: actions/cache@v2
-              with:
-                  path: dist/libs/platform
-                  key: dist-platform-${{ github.run_id }}
-            - run: npx nx build moment-adapter --configuration=production --runner cloud
-
-    # build datetime-adapter
-    build-datetime-adapter:
-        needs: build-core
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
-              with:
-                  path: dist/libs/core
-                  key: dist-core-${{ github.run_id }}
-            - uses: actions/cache@v2
-              with:
-                  path: dist/libs/platform
-                  key: dist-platform-${{ github.run_id }}
-            - run: npx nx build datetime-adapter --configuration=production --runner cloud
-
-    # build fn
-    build-fn:
-        needs: build-core
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
-              with:
-                  path: dist/libs/core
-                  key: dist-core-${{ github.run_id }}
-            - run: npx nx build fn --configuration=production --runner cloud
-
-    # build docs
-    build-docs:
-        needs: install
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
-              with:
-                  path: dist/libs/core
-                  key: dist-core-${{ github.run_id }}
-            - uses: actions/cache@v2
-              with:
-                  path: dist/libs/platform
-                  key: dist-platform-${{ github.run_id }}
-            - uses: actions/cache@v2
-              with:
-                  path: dist/apps/docs
-                  key: dist-docs-${{ github.run_id }}
-            #      - run: npm run build-docs -- --configuration production --base-href="fundamental-ngx"
+                  chrome-version: stable
             - run: |
-                  npm run compile-typedoc-all
-                  npm run copy-docs
-                  npx nx build docs --base-href="fundamental-ngx" --runner cloud
-
-    # run unit tests core
-    unit-test-core:
-        runs-on: ubuntu-latest
-        needs: build-core
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
-              with:
-                  path: dist/libs/core
-                  key: dist-core-${{ github.run_id }}
-            - run: npx ng test core --watch false --code-coverage true --browsers=ChromeHeadless
-            - run: npm run test:coveralls
-
-    # run unit tests core
-    unit-test-platform:
-        runs-on: ubuntu-latest
-        needs: build-platform
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
-              with:
-                  path: dist/libs/platform
-                  key: dist-platform-${{ github.run_id }}
-            - run: npx ng test platform --watch false --code-coverage true --browsers=ChromeHeadless
-            - run: npm run test:coveralls
-
-    firebase_preview:
-        runs-on: ubuntu-latest
-        needs: build-docs
-        outputs:
-            output_url: ${{ steps.firebase_hosting_preview.outputs.details_url }}
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/cache@v2
-              with:
-                  path: dist/apps/docs
-                  key: dist-docs-${{ github.run_id }}
+                  export DISPLAY=:99
+                  chrome --version
+                  sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 & # optional
+              env:
+                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
             - uses: FirebaseExtended/action-hosting-deploy@v0
               continue-on-error: true
               id: firebase_hosting_preview
@@ -216,36 +114,25 @@ jobs:
                   target: fundamental-ngx-gh
                   channelId: ${{ env.FIREBASE_CHANNEL }}
                   expires: 1d
-
-    e2e_smoke:
+            - name: Test affected on firebase
+              if: ${{ steps.firebase_hosting_preview.outputs.details_url }}
+              run: |
+                  npx nx run-many --target=e2e --parallel=2 --baseUrl=${{ steps.firebase_hosting_preview.outputs.details_url }} --devServerTarget=""
+            - name: Test affected on local
+              if: ${{ !steps.firebase_hosting_preview.outputs.details_url }}
+              run: |
+                  NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx run docs:e2e-app:all-local
+    stop_agents:
+        if: ${{ always() }}
+        needs:
+            - build_test
+            - e2e_test
+        name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
-        needs: firebase_preview
-
-        strategy:
-            # when one test fails, DO NOT cancel the other
-            # containers, because this will kill Cypress processes
-            # leaving the Dashboard hanging ...
-            # https://github.com/cypress-io/github-action/issues/48
-            fail-fast: false
-            matrix:
-                suite: ['suite platformA', 'suite platformB', 'suite coreA', 'suite coreB']
         steps:
             - uses: actions/checkout@v3
-            - uses: actions/cache@v2
+            - uses: ./.github/actions/nodejs
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/setup-node@v2
-              with:
-                  node-version: 15.11.0
-
-            - name: smoke e2e on saucelabs with localhost
-              env:
-                  CAP_SLUG: ${{ matrix.browser }}
-              run: |
-                  npm rebuild
-                  npm ci
-                  sudo echo "127.0.0.1 sap.dev" | sudo tee -a /etc/hosts
-                  npx ng serve --disable-host-check --ssl --watch false --configuration production &
-                  npx wait-on https://localhost:4200
-                  TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-cron.conf.js --${{ matrix.suite }} --baseUrl="https://sap.dev:4200/"
+                  node-version: 14.20.0
+            - name: Stop all running agents for this CI run
+              run: npx nx-cloud stop-all-agents
