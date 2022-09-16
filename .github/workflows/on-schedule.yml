@@ -2,7 +2,7 @@ name: scheduled-daily-build
 
 on:
     schedule:
-        # Cron time is UTC, set to run at 22:00UTC (01:00 EEST)
+        # Cron time is UTC, set to run at 22:00UTC (01:00 EST)
         - cron: '0 22 * * *'
 
 env:
