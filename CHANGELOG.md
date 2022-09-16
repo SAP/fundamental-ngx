@@ -1,4 +1,20 @@
 
+### [0.36.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.5...v0.36.1-rc.6) (2022-09-16)
+
+
+### Features
+
+* **core:** add time selection using keyboard ([#8695](https://github.com/SAP/fundamental-ngx/issues/8695)) ([fed07fa](https://github.com/SAP/fundamental-ngx/commit/fed07fa58dd85f5881153f1cc62f40536acfa47a))
+
+### [0.36.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.4...v0.36.1-rc.5) (2022-09-16)
+
+
+### Bug Fixes
+
+* **core:** remove list focus trap ([#8690](https://github.com/SAP/fundamental-ngx/issues/8690)) ([186657d](https://github.com/SAP/fundamental-ngx/commit/186657dc199072de4324891282915cefb4a353b7))
+
+### [0.36.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.3...v0.36.1-rc.4) (2022-09-15)
+
 ### [0.36.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.2...v0.36.1-rc.3) (2022-09-15)
 
 
