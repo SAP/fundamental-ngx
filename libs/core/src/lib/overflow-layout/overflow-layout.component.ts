@@ -17,10 +17,11 @@ import {
     AfterViewInit,
     OnDestroy,
     Input,
-    OnInit
+    OnInit,
+    NgZone
 } from '@angular/core';
-import { debounceTime, filter, fromEvent, startWith, Subject, Subscription } from 'rxjs';
-import { intersectionObservable, KeyUtil } from '@fundamental-ngx/core/utils';
+import { debounceTime, filter, first, fromEvent, startWith, Subject, Subscription } from 'rxjs';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowContainer } from './interfaces/overflow-container.interface';
 import { OverflowExpand } from './interfaces/overflow-expand.interface';
@@ -194,6 +195,7 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
     /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
+        private readonly _ngZone: NgZone,
         protected _cdr: ChangeDetectorRef,
         protected _overflowLayoutService: OverflowLayoutService
     ) {
@@ -238,13 +240,14 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
             })
         );
 
-        this._subscription.add(
-            intersectionObservable(this._elementRef.nativeElement).subscribe(() => {
-                this._overflowLayoutService.startListening(this._config);
+        // There might be cases when the elements are not rendered yet, but the component is initialized already.
+        // It may happen when it's inside the components that are wrapping ng-content with ng-containers and so on.
+        // IntersectionObserver is a good solution for this case, but it's hardly manageable when testing.
+        this._ngZone.onStable.pipe(first()).subscribe(() => {
+            this._overflowLayoutService.startListening(this._config);
 
-                this._canListenToResize = true;
-            })
-        );
+            this._canListenToResize = true;
+        });
     }
 
     /** @hidden */

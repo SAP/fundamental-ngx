@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { OverflowLayoutItemDirective } from './directives/overflow-layout-item.directive';
 import { OverflowLayoutComponent } from './overflow-layout.component';
@@ -65,24 +65,27 @@ describe('OverflowLayoutComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should render needed amount of items', () => {
+    it('should render needed amount of items', async () => {
+        await fixture.whenStable();
+
         expect(fixture.debugElement.queryAll(By.directive(OverflowLayoutItemDirective)).length).toEqual(
             component.maxItems
         );
     });
 
-    it('should render automatic amount of items', fakeAsync(() => {
-        tick(1000);
+    it('should render automatic amount of items', async () => {
+        await fixture.whenStable();
+
         const expectedAmount = Math.floor(component.containerWidth / component.elementsWidth);
         const visibleItemsCountSpy = spyOn(component.overflowLayout.visibleItemsCount, 'emit').and.callThrough();
+
         component.maxItems = Infinity;
         fixture.detectChanges();
-
-        tick(1000);
+        await fixture.whenStable();
 
         expect(visibleItemsCountSpy).toHaveBeenCalledWith(expectedAmount);
         expect(fixture.debugElement.queryAll(By.directive(OverflowLayoutItemDirective)).length).toEqual(expectedAmount);
-    }));
+    });
 
     it('should react on items resize', async () => {
         component.elementsWidth = 300;
