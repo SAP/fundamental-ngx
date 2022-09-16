@@ -139,7 +139,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this._keyboardSupportService.setKeyboardService(this._focusItems, false);
+        this._keyboardSupportService.setKeyboardService(this._focusItems, false, false);
         this._listenOnQueryChange();
     }
 
