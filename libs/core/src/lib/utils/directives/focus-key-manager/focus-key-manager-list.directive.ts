@@ -1,10 +1,9 @@
-import { FocusKeyManager } from '@angular/cdk/a11y';
+import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
 import {
     AfterContentInit,
     ChangeDetectorRef,
     ContentChildren,
     Directive,
-    forwardRef,
     Input,
     OnChanges,
     OnDestroy,
@@ -16,7 +15,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { RtlService } from '../../services/rtl.service';
-import { FocusKeyManagerItemDirective } from './focus-key-manager-item.directive';
+import { FOCUSABLE_ITEM } from './focus-key-manager.tokens';
 
 /** Directive to apply Angular Material FocusKeyManager to lists.
  * To be used with FocusKeyManagerItemDirective
@@ -31,19 +30,19 @@ export class FocusKeyManagerListDirective implements OnChanges, AfterContentInit
 
     /** Skip predicate for the FocusKeyManager */
     @Input()
-    skipPredicate: (item: FocusKeyManagerItemDirective) => boolean;
+    skipPredicate: (item: Record<any, any> & FocusableOption) => boolean;
 
     /** @hidden */
-    @ContentChildren(forwardRef(() => FocusKeyManagerItemDirective))
-    readonly _items: QueryList<FocusKeyManagerItemDirective>;
+    @ContentChildren(FOCUSABLE_ITEM)
+    readonly _items: QueryList<FocusableOption>;
 
     /** @hidden */
-    get focusKeyManager(): FocusKeyManager<FocusKeyManagerItemDirective> {
+    get focusKeyManager(): FocusKeyManager<FocusableOption> {
         return this._focusKeyManager;
     }
 
     /** @hidden */
-    private _focusKeyManager: FocusKeyManager<FocusKeyManagerItemDirective>;
+    private _focusKeyManager: FocusKeyManager<FocusableOption>;
 
     /** @hidden */
     private readonly _onDestroy$ = new Subject<void>();
@@ -68,9 +67,7 @@ export class FocusKeyManagerListDirective implements OnChanges, AfterContentInit
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this._focusKeyManager = new FocusKeyManager<FocusKeyManagerItemDirective>(this._items).skipPredicate(
-            this.skipPredicate
-        );
+        this._focusKeyManager = new FocusKeyManager<FocusableOption>(this._items).skipPredicate(this.skipPredicate);
 
         this._applyOrientation();
 
@@ -91,7 +88,7 @@ export class FocusKeyManagerListDirective implements OnChanges, AfterContentInit
     }
 
     /** Focus certain list's item */
-    focusItem(item: number | FocusKeyManagerItemDirective): any {
+    focusItem(item: number | FocusableOption): any {
         if (typeof item === 'number') {
             this._focusKeyManager.setActiveItem(item);
         } else {

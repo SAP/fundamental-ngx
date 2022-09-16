@@ -15,3 +15,4 @@ export * from './directives/message-box-decisive-button.directive';
 export * from './utils/message-box-ref.class';
 export * from './utils/message-box-config.class';
 export * from './utils/message-box-content.class';
+export * from './message-box-content.type';

@@ -5,6 +5,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    forwardRef,
     HostBinding,
     Input,
     OnDestroy,
@@ -54,7 +55,7 @@ export const FdTableContentDensityProviderParams = {
     providers: [
         TableService,
         TabbableElementService,
-        { provide: FdTable, useExisting: TableComponent },
+        { provide: FdTable, useExisting: forwardRef(() => TableComponent) },
         contentDensityObserverProviders(FdTableContentDensityProviderParams)
     ]
 })

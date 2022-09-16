@@ -1,0 +1,17 @@
+{
+    "sourceRoot": "libs/docs/fn/slider",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e-noop": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eTsConfig": "libs/docs/fn/slider/e2e/tsconfig.json",
+                "baseUrl": "http://localhost:4200",
+                "configFile": "libs/docs/fn/slider/wdio.conf.js"
+            },
+            "outputs": ["allure-results/docs-fn-slider"]
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

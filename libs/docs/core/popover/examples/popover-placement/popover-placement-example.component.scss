@@ -1,0 +1,16 @@
+@import 'fundamental-styles/dist/layout.css';
+
+.docs-popover-container {
+    display: flex;
+    max-width: 100%;
+    justify-content: space-between;
+}
+
+.docs-popover-container--horizontal {
+    justify-content: space-evenly;
+    margin: 0 5rem;
+}
+
+.docs-popover-element {
+    margin: 1rem;
+}

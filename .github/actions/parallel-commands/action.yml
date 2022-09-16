@@ -1,0 +1,34 @@
+name: Preparing command utils
+description: Command utils
+
+inputs:
+    parallel-commands:
+        description: Parallel commands
+        required: true
+
+runs:
+    using: composite
+    steps:
+        - name: Prepare command utils
+          run: chmod +x ./.github/actions/parallel-commands/run-commands-in-parallel.sh
+          shell: bash
+        - name: Process parallel commands configuration
+          uses: actions/github-script@v6
+          id: commands
+          env:
+              PARALLEL_COMMANDS: ${{ inputs.parallel-commands }}
+          with:
+              script: |
+                  const parallelCommands = (process.env.PARALLEL_COMMANDS || '').split('\n')
+                    .map(command => command.trim())
+                    .filter(command => command.length > 0)
+                    .map(s => s.replace(/'/g, '%27'));
+
+                  const stringifiedEncodedArrayOfCommands = JSON.stringify(parallelCommands)
+                    .replace(/%27/g, "'\\''");
+
+                  return stringifiedEncodedArrayOfCommands
+              result-encoding: string
+        - name: Run commands in parallel
+          run: ./.github/actions/parallel-commands/run-commands-in-parallel.sh '${{ steps.commands.outputs.result }}'
+          shell: bash

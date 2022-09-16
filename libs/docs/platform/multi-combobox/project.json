@@ -1,0 +1,16 @@
+{
+    "sourceRoot": "libs/docs/platform/multi-combobox",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eFiles": ["libs/docs/platform/multi-combobox/e2e/**/*.e2e-spec.ts"],
+                "devServerTarget": "docs:serve:e2e"
+            },
+            "outputs": ["allure-results/docs-platform-multi-combobox"]
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

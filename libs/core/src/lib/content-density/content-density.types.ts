@@ -1,15 +1,10 @@
 import { Provider } from '@angular/core';
 import { HasElementRef } from '@fundamental-ngx/core/utils';
 import { ContentDensityObserverSettings } from './classes/content-density-observer.settings';
+import { ContentDensityMode } from './types/content-density.mode';
 
 export const ContentDensityGlobalKeyword = 'global';
 export const ContentDensityDefaultKeyword = 'default';
-
-export enum ContentDensityMode {
-    COZY = 'cozy',
-    CONDENSED = 'condensed',
-    COMPACT = 'compact'
-}
 
 export type LocalContentDensityMode =
     | ContentDensityMode

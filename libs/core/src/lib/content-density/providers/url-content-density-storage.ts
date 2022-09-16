@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ContentDensityStorage } from '../classes/abstract-content-density-storage';
 import { DEFAULT_CONTENT_DENSITY } from '../tokens/default-content-density.token';
 import { CONTENT_DENSITY_STORAGE_KEY } from '../tokens/content-density-storage-key.token';
-import { ContentDensityMode } from '../content-density.types';
+import { ContentDensityMode } from '../types/content-density.mode';
 import { BehaviorSubject, distinctUntilChanged, filter, Observable, of } from 'rxjs';
 
 @Injectable()

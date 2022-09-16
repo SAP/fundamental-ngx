@@ -377,7 +377,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     /** @hidden */
-    skipItemPredicate(item: FocusKeyManagerItemDirective): boolean {
+    skipItemPredicate(item: any): boolean {
         return (
             getComputedStyle(item.nativeElement).display === 'none' ||
             item.nativeElement.getAttribute('disabled') === 'true'

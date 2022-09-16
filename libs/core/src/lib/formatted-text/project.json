@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/formatted-text",
     "sourceRoot": "libs/core/src/lib/formatted-text",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/formatted-text"],
             "options": {
                 "tsConfig": "libs/core/src/lib/formatted-text/tsconfig.lib.json",

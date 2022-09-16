@@ -1,13 +1,15 @@
 import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, forwardRef, HostBinding, HostListener, Input } from '@angular/core';
 import { FocusKeyManagerListDirective } from './focus-key-manager-list.directive';
+import { FOCUSABLE_ITEM } from './focus-key-manager.tokens';
 
 /** Directive to apply Angular Material FocusKeyManager to lists.
  * To be used with FocusKeyManagerItemDirective
  */
 @Directive({
-    selector: '[fd-focus-key-manager-item], [fdFocusKeyManagerItem]'
+    selector: '[fd-focus-key-manager-item], [fdFocusKeyManagerItem]',
+    providers: [{ provide: FOCUSABLE_ITEM, useExisting: forwardRef(() => FocusKeyManagerItemDirective) }]
 })
 export class FocusKeyManagerItemDirective implements FocusableOption {
     /** Whether item should be initially focused */
@@ -36,7 +38,7 @@ export class FocusKeyManagerItemDirective implements FocusableOption {
     }
 
     /** @hidden */
-    private get _focusKeyManager(): FocusKeyManager<FocusKeyManagerItemDirective> {
+    private get _focusKeyManager(): FocusKeyManager<FocusableOption> {
         return this._list.focusKeyManager;
     }
 

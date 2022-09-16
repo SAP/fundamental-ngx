@@ -1,5 +1,5 @@
-import { HasElementRef } from '../public_api';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { HasElementRef } from './has-element-ref.interface';
 
 export interface CssClassBuilder extends HasElementRef {
     class: Nullable<string>;

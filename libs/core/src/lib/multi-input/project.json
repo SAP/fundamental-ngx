@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/multi-input",
     "sourceRoot": "libs/core/src/lib/multi-input",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/multi-input"],
             "options": {
                 "tsConfig": "libs/core/src/lib/multi-input/tsconfig.lib.json",

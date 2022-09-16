@@ -1,6 +1,5 @@
-import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
-import { AvatarGroupFocusableAvatarDirective } from './directives/avatar-group-focusable-avatar.directive';
+import { FocusableOption } from '@angular/cdk/a11y';
 
 export interface AvatarGroupInterface {
-    _setActiveItem(item: AvatarGroupFocusableAvatarDirective | AvatarGroupItemDirective): void;
+    _setActiveItem(item: FocusableOption): void;
 }

@@ -4,35 +4,21 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
+    forwardRef,
     Input,
     OnDestroy,
     Output,
     QueryList
 } from '@angular/core';
-import { DndItemDirective, ElementPosition } from '../dnd-item/dnd-item.directive';
 import { merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-
-export type LinkPosition = 'after' | 'before';
-
-export interface ElementChord {
-    x: number;
-    y: number;
-    position: LinkPosition;
-    stickToPosition?: boolean;
-    width: number;
-    height: number;
-}
-
-export interface FdDropEvent<T> {
-    items: Array<T>;
-    replacedItemIndex: number;
-    draggedItemIndex: number;
-}
+import { ElementChord, FdDropEvent, LinkPosition, ElementPosition, DndItem } from '../dnd.interfaces';
+import { DND_ITEM, DND_LIST } from '../tokens';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-dnd-list]'
+    selector: '[fd-dnd-list]',
+    providers: [{ provide: DND_LIST, useExisting: forwardRef(() => DndListDirective) }]
 })
 export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     /**
@@ -66,8 +52,8 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     readonly itemDropped = new EventEmitter<FdDropEvent<T>>();
 
     /** @hidden */
-    @ContentChildren(DndItemDirective)
-    dndItems: QueryList<DndItemDirective>;
+    @ContentChildren(DND_ITEM)
+    dndItems: QueryList<DndItem>;
 
     /** @hidden */
     private _elementsCoordinates: ElementChord[];
@@ -85,7 +71,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     private readonly _onDestroy$ = new Subject<void>();
 
     /** @hidden  */
-    private _dndItemReference: DndItemDirective[];
+    private _dndItemReference: DndItem[];
 
     /** @hidden */
     private _draggable = true;
@@ -114,9 +100,10 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
                 if (isMouseOnElement) {
                     closestItemIndex = index;
 
-                    return element;
+                    return true;
                 }
             }
+            return false;
         });
 
         if (!closestItem) {
@@ -146,7 +133,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     dragStart(index: number): void {
         const draggedItemElement = this._dndItemReference[index].elementRef;
         /** Counting all of the elements's chords */
-        this._elementsCoordinates = this._dndItemReference.map((item: DndItemDirective) =>
+        this._elementsCoordinates = this._dndItemReference.map((item: DndItem) =>
             item.getElementCoordinates(this._isBefore(draggedItemElement, item.elementRef), this.gridMode)
         );
     }

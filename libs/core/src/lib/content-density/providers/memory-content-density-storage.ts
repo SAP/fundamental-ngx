@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ContentDensityStorage } from '../classes/abstract-content-density-storage';
-import { ContentDensityMode } from '../content-density.types';
+import { ContentDensityMode } from '../types/content-density.mode';
 import { DEFAULT_CONTENT_DENSITY } from '../tokens/default-content-density.token';
 
 @Injectable()

@@ -1,0 +1,17 @@
+{
+    "sourceRoot": "libs/docs/fn/focusable-list",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e-noop": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eTsConfig": "libs/docs/fn/focusable-list/e2e/tsconfig.json",
+                "baseUrl": "http://localhost:4200",
+                "configFile": "libs/docs/fn/focusable-list/wdio.conf.js"
+            },
+            "outputs": ["allure-results/docs-fn-focusable-list"]
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

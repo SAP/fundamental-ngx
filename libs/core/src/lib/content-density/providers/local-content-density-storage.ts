@@ -4,7 +4,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { ContentDensityStorage } from '../classes/abstract-content-density-storage';
 import { DEFAULT_CONTENT_DENSITY } from '../tokens/default-content-density.token';
 import { CONTENT_DENSITY_STORAGE_KEY } from '../tokens/content-density-storage-key.token';
-import { ContentDensityMode } from '../content-density.types';
+import { ContentDensityMode } from '../types/content-density.mode';
 
 @Injectable()
 export class LocalContentDensityStorage implements ContentDensityStorage {

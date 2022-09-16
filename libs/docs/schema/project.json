@@ -1,0 +1,14 @@
+{
+    "projectType": "library",
+    "sourceRoot": "libs/docs/schema/src",
+    "prefix": "fundamental-ngx",
+    "targets": {
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/docs/schema/**/*.ts", "libs/docs/schema/**/*.html"]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

@@ -8,7 +8,7 @@ import { QuickViewModule } from '..';
 @Component({
     template: `
         <fd-quick-view-subheader>
-            <fd-avatar image="http://placeimg.com/500/500/people" size="s"></fd-avatar>
+            <fd-avatar image="https://placeimg.com/500/500/people" size="s"></fd-avatar>
             <fd-quick-view-subheader-title> Subheader Title </fd-quick-view-subheader-title>
             <fd-quick-view-subheader-subtitle> Subheader Subtitle</fd-quick-view-subheader-subtitle>
         </fd-quick-view-subheader>

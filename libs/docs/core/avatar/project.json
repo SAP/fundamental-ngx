@@ -1,0 +1,16 @@
+{
+    "sourceRoot": "libs/docs/core/avatar",
+    "projectType": "library",
+    "prefix": "fundamental-ngx",
+    "targets": {
+        "e2e": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eFiles": ["libs/docs/core/avatar/e2e/**/*.e2e-spec.ts"],
+                "devServerTarget": "docs:serve:e2e"
+            },
+            "outputs": ["allure-results/docs-core-avatar"]
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}
