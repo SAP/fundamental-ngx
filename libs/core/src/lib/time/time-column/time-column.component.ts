@@ -414,9 +414,9 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      * handles alphabetical key inputs to set period.
      */
     private _alphaKeyInputHandler(event: KeyboardEvent): void {
-        if (event.key === 'a' || event.key === 'A') {
+        if (event.key.toLowerCase() === 'a') {
             this._pickTimeOnValue('AM');
-        } else if (event.key === 'p' || event.key === 'P') {
+        } else if (event.key.toLowerCase() === 'p') {
             this._pickTimeOnValue('PM');
         }
     }
