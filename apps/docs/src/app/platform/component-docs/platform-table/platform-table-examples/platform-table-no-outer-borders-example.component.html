@@ -1,10 +1,4 @@
-<fdp-table
-    [dataSource]="source"
-    [noOuterBorders]="true"
-    selectionMode="multiple"
-    fdCompact
-    emptyTableMessage="No data found"
->
+<fdp-table [dataSource]="source" [noOuterBorders]="true" selectionMode="multiple" emptyTableMessage="No data found">
     <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false">
         <fdp-table-toolbar-actions>
             <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>

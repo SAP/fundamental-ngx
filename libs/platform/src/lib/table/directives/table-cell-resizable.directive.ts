@@ -65,6 +65,8 @@ export class PlatformTableCellResizableDirective implements AfterViewInit, OnDes
         const data = this._getResizer(event);
 
         if (!data) {
+            // If cursor is out of resizer boundaries, hide it.
+            this._tableColumnResizeService.setInitialResizerPosition(0, this.columnName);
             return;
         }
 

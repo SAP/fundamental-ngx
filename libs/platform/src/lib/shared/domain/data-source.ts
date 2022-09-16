@@ -113,7 +113,7 @@ export abstract class DataProvider<T> {
     protected _matchingStrategy: MatchingStrategy = MatchingStrategy.STARTS_WITH;
     protected _matchingBy: MatchingBy | null = null;
 
-    abstract fetch(params: ProviderParams): Observable<T[]>;
+    abstract fetch(params: ProviderParams, start?: number, end?: number): Observable<T[]>;
 
     /**
      * Tells if this DataProvider supports INSERT, REMOVE
@@ -173,7 +173,7 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
 
     constructor(public dataProvider: DataProvider<any>) {}
 
-    match(predicate: string | Map<string, string> = new Map<string, string>()): void {
+    match(predicate: string | Map<string, string> = new Map<string, string>(), start = 0, end = Infinity): void {
         this._onDataRequested$.next();
         this._dataLoading = true;
         const searchParam = new Map();
@@ -191,7 +191,7 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
         }
 
         this.dataProvider
-            .fetch(searchParam)
+            .fetch(searchParam, start, end)
             .pipe(takeUntil(this._onDestroy$))
             .subscribe(
                 (result: T[]) => {
