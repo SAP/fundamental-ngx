@@ -1,4 +1,27 @@
 
+### [0.36.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.4...v0.36.1-rc.5) (2022-09-16)
+
+
+### Bug Fixes
+
+* **core:** remove list focus trap ([#8690](https://github.com/SAP/fundamental-ngx/issues/8690)) ([186657d](https://github.com/SAP/fundamental-ngx/commit/186657dc199072de4324891282915cefb4a353b7))
+
+### [0.36.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.3...v0.36.1-rc.4) (2022-09-15)
+
+### [0.36.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.2...v0.36.1-rc.3) (2022-09-15)
+
+
+### Bug Fixes
+
+* **platform:** update items on new event ([#8650](https://github.com/SAP/fundamental-ngx/issues/8650)) ([cbf1e2c](https://github.com/SAP/fundamental-ngx/commit/cbf1e2c24cf251cd026e5d4ba31f4c0c725484af))
+
+### [0.36.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.1...v0.36.1-rc.2) (2022-09-14)
+
+
+### Bug Fixes
+
+* **core:** fix label for hour and sec ([#8691](https://github.com/SAP/fundamental-ngx/issues/8691)) ([1dd446e](https://github.com/SAP/fundamental-ngx/commit/1dd446e89e7279e4bd1e43757c95b02c037e349a))
+
 ### [0.36.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.0...v0.36.1-rc.1) (2022-09-14)
 
 

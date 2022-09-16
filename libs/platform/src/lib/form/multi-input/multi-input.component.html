@@ -117,7 +117,7 @@
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">
                 <ng-container *ngIf="!groupItemTemplate">
-                    <fdp-list-group-header [grpheaderTitle]="group.label"></fdp-list-group-header>
+                    <fdp-list-group-header [groupHeaderTitle]="group.label"></fdp-list-group-header>
                 </ng-container>
 
                 <ng-container *ngIf="groupItemTemplate">
