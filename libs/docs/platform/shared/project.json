@@ -1,0 +1,7 @@
+{
+    "sourceRoot": "libs/docs/platform/shared",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {},
+    "tags": ["type:lib", "scope:docs"]
+}

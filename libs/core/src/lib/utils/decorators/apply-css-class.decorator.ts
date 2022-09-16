@@ -1,5 +1,6 @@
 import { ELEMENT_REF_EXCEPTION } from '../interfaces/has-element-ref.interface';
 import { uuidv4 } from '../functions/uuidv4-generator';
+import { CssClassBuilder } from '../interfaces/css-class-builder.interface';
 
 /**
  * Method decorator to apply css class to a component through native element
@@ -13,13 +14,14 @@ import { uuidv4 } from '../functions/uuidv4-generator';
 export function applyCssClass(target: any, propertyKey: string, descriptor: PropertyDescriptor): void {
     const originalMethod = descriptor.value;
     descriptor.value = function (): string[] {
-        if (!this.elementRef) {
+        const self = this as unknown as CssClassBuilder & { _uuidv4?: string };
+        if (!self.elementRef) {
             throw ELEMENT_REF_EXCEPTION;
         }
 
         const classListToApply: string[] = sanitize(originalMethod.apply(this));
 
-        const elementRef = this.elementRef.apply(this);
+        const elementRef = self.elementRef.apply(this);
 
         const nativeElement: HTMLElement & { _classMap?: any } = elementRef?.nativeElement;
 
@@ -28,19 +30,19 @@ export function applyCssClass(target: any, propertyKey: string, descriptor: Prop
                 nativeElement._classMap = {};
             }
 
-            if (!this._uuidv4) {
-                this._uuidv4 = uuidv4();
+            if (!self._uuidv4) {
+                self._uuidv4 = uuidv4();
             }
 
             const currentClassList = Array.from(nativeElement.classList);
 
-            const previousClassListToApply = nativeElement._classMap[this._uuidv4] || [];
+            const previousClassListToApply = nativeElement._classMap[self._uuidv4] || [];
 
             const newClassList = createComponentClassList(currentClassList, previousClassListToApply, classListToApply);
 
             nativeElement.className = newClassList.join(' ');
 
-            nativeElement._classMap[this._uuidv4] = classListToApply;
+            nativeElement._classMap[self._uuidv4] = classListToApply;
         }
 
         return classListToApply;

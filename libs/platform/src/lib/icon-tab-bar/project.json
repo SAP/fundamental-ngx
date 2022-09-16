@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/platform/src/lib/icon-tab-bar",
     "sourceRoot": "libs/platform/src/lib/icon-tab-bar",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/platform/icon-tab-bar"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/icon-tab-bar/tsconfig.lib.json",
@@ -37,5 +36,5 @@
         }
     },
     "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": ["core"]
+    "implicitDependencies": []
 }

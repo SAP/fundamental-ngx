@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/panel",
     "sourceRoot": "libs/core/src/lib/panel",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/panel"],
             "options": {
                 "tsConfig": "libs/core/src/lib/panel/tsconfig.lib.json",

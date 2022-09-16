@@ -25,3 +25,5 @@ export * from './base/dialog-footer-base.class';
 export * from './base/dialog-header-base.class';
 export * from './base/dialog-ref-base.class';
 export * from './utils/dialog.animations';
+
+export * from './dialog.types';

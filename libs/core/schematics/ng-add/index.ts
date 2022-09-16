@@ -8,6 +8,7 @@ import { checkPackageVersion, getPackageVersionFromPackageJson, hasPackage } fro
 import { Schema } from './schema';
 import { updateWorkspace } from '@schematics/angular/utility/workspace';
 import { getProjectTargetOptions } from '../utils/angular-json-utils';
+import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 
 // Needed to queue dependent schematics
 let installTaskId: TaskId;
@@ -31,7 +32,7 @@ export function ngAdd(options: any): Rule {
         addStylePathToConfig(options),
         addAssetsPathToConfig(options),
         addFontsToStyles(options),
-        addThemeToApplication(options),
+        addThemeToApplication(options) as unknown as Rule,
         callAnimationsSchematics(options),
         callFontMigrationSchematics(options)
     ]);
@@ -303,15 +304,18 @@ function resolveStyles(tree: Tree): [string, Buffer] {
     return [path, content];
 }
 
-function addThemeToApplication(options: Schema): Rule {
-    return (_tree, context) =>
+function addThemeToApplication(options: Schema) {
+    return (_tree: any, context: any) =>
         updateWorkspace((workspace) => {
             if (options.theme !== 'custom') {
                 const themeAssets = [
                     `./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/${options.theme}/css_variables.css`,
                     `./node_modules/fundamental-styles/dist/theming/${options.theme}.css`
                 ];
-                const targetOptions = getProjectTargetOptions(workspace.projects.get(options.project), 'build');
+                const targetOptions = getProjectTargetOptions(
+                    workspace.projects.get(options.project) as unknown as ProjectDefinition,
+                    'build'
+                );
                 const styles = targetOptions.styles as (string | { input: string })[];
 
                 for (let i = 0; i < styles.length; i++) {

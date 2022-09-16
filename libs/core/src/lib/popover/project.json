@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/popover",
     "sourceRoot": "libs/core/src/lib/popover",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/popover"],
             "options": {
                 "tsConfig": "libs/core/src/lib/popover/tsconfig.lib.json",

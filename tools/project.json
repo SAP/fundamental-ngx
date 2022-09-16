@@ -1,14 +1,7 @@
 {
-    "root": "tools",
     "sourceRoot": "tools",
     "projectType": "application",
     "targets": {
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["tools/**/*.ts"]
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

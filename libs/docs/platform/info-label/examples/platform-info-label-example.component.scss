@@ -1,0 +1,25 @@
+@import '../../../../../node_modules/fundamental-styles/dist/table.css';
+
+#student {
+    font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#student td,
+#student th {
+    border: 1px solid #f2f2f2;
+    padding: 8px;
+}
+
+#student tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#student th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #d9d9d9;
+    color: #32363a;
+}

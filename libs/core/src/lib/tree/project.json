@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/tree",
     "sourceRoot": "libs/core/src/lib/tree",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/tree"],
             "options": {
                 "tsConfig": "libs/core/src/lib/tree/tsconfig.lib.json",

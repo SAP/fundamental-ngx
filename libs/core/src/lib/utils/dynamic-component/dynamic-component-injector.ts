@@ -7,7 +7,7 @@ export class DynamicComponentInjector implements Injector {
 
     get(token: any, notFoundValue?: any): void;
 
-    get(token: any, notFoundValue?: any, flags?: any): void {
+    get(token: any, notFoundValue?: any, _flags?: any): void {
         const value = this._additionalTokens.get(token);
 
         if (value) {

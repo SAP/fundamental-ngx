@@ -10,11 +10,11 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { BaseButton } from '@fundamental-ngx/core/button';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FnClickedProvider, SelectableItemToken, SelectComponentRootToken } from '@fundamental-ngx/fn/cdk';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
 import { Observable } from 'rxjs';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative';
 
@@ -32,19 +32,16 @@ export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' |
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.type]': 'type',
-        '[class.is-disabled]': 'disabled',
         '[class.fn-button--emphasized]': 'emphasized',
         '[class.fn-button--icon-only]': 'glyph && !label',
-        '[attr.aria-disabled]': 'disabled',
         '[attr.aria-label]': 'ariaLabel',
-        '[disabled]': 'disabled',
         '[class.fn-button--selected]': 'selected',
         '[attr.aria-selected]': 'selected',
         '[value]': 'value'
     },
     providers: [{ provide: SelectableItemToken, useExisting: ButtonComponent }, FnClickedProvider]
 })
-export class ButtonComponent extends BaseButton implements SelectableItemToken<string> {
+export class ButtonComponent implements SelectableItemToken<string> {
     /** The type of the button. Types include:
      * '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative'.
      * Leave empty for default (Standard button).'
@@ -84,6 +81,44 @@ export class ButtonComponent extends BaseButton implements SelectableItemToken<s
     @Input()
     class: string;
 
+    /**
+     * Native type of button element
+     */
+    @Input()
+    type: Nullable<string> = 'button';
+
+    /** Position of glyph related to text */
+    @Input()
+    glyphPosition: 'before' | 'after' = 'before';
+
+    /** The icon to include in the button. See the icon page for the list of icons.
+     * Setter is used to control when css class have to be rebuilded.
+     * Default value is set to ''.
+     */
+    @Input()
+    glyph: Nullable<string>;
+
+    /**
+     * Text rendered inside button component
+     */
+    @Input()
+    label: string;
+
+    /** adding native aria-label to the component */
+    @Input()
+    ariaLabel: Nullable<string>;
+
+    /** Whether button is in toggled state. */
+    @Input()
+    @coerceBoolean
+    toggled = false;
+
+    /** Whether to apply menu mode to the button.
+     * Default value is set to false
+     */
+    @Input()
+    fdMenu = false;
+
     @Output() clicked: Observable<MouseEvent | KeyboardEvent>;
 
     /**
@@ -104,7 +139,6 @@ export class ButtonComponent extends BaseButton implements SelectableItemToken<s
         private _changeDetectorRef: ChangeDetectorRef,
         _clicked: FnClickedProvider
     ) {
-        super();
         this.clicked = _clicked.asObservable();
     }
 

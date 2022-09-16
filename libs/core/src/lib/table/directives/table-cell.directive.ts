@@ -16,6 +16,7 @@ import { DestroyedService, TabbableElementService } from '@fundamental-ngx/core/
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { NumberInput } from '@angular/cdk/coercion';
 import { FdTable } from '../fd-table.interface';
+import { TableCellInterface } from '../table-cell.interface';
 
 export interface TableCellPosition {
     row: number;
@@ -29,7 +30,7 @@ export interface TableCellPosition {
     selector: '[fdTableCell], [fd-table-cell]',
     providers: [DestroyedService, TabbableElementService]
 })
-export class TableCellDirective implements AfterContentInit {
+export class TableCellDirective implements TableCellInterface, AfterContentInit {
     /** Whether to show the table cell's horizontal borders */
     @HostBinding('class.fd-table__cell--no-horizontal-border')
     @Input()

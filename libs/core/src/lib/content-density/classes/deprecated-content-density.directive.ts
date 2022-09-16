@@ -1,6 +1,6 @@
 import { Directive, Input, isDevMode, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ContentDensityMode } from '../content-density.types';
+import { ContentDensityMode } from '../types/content-density.mode';
 import { ModuleDeprecation } from '@fundamental-ngx/core/utils';
 
 const warnedSelectorBases = new Set<string>();

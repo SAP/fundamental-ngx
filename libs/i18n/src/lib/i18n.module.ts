@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FdTranslatePipe } from './pipes/fd-translate.pipe';
-import { FdPatchLanguageDirective } from './directives/patch-language.directive';
+import { FdTranslatePipe } from './pipes';
+import { FdPatchLanguageDirective } from './directives';
 
 @NgModule({
     imports: [CommonModule],

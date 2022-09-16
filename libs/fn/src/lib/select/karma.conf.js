@@ -10,7 +10,7 @@ module.exports = function (config) {
         ...baseConfig,
         coverageIstanbulReporter: {
             ...baseConfig.coverageIstanbulReporter,
-            dir: join(__dirname, '../../../../../coverage/libs/experimental/select')
+            dir: join(__dirname, '../../../../../coverage/libs/fn/select')
         },
         browsers: ['ChromeHeadless']
     });

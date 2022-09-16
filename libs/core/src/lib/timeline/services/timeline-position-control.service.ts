@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TimelineNodeComponent } from '../components/timeline-node/timeline-node.component';
+import { TimelineNodeComponentInterface } from '../components/timeline-node/timeline-node-component.interface';
 import { TimeLinePositionStrategy } from '../types';
 import { BaseStrategy } from './position-strategies/base-strategy';
 import { PositionStrategyFactory } from './position-strategies/position-strategy-factory';
@@ -8,7 +8,7 @@ import { PositionStrategyFactory } from './position-strategies/position-strategy
 export class TimelinePositionControlService {
     /* List of TimelineNodeComponent */
     /** @hidden */
-    private _nodeItems: TimelineNodeComponent[] = [];
+    private _nodeItems: TimelineNodeComponentInterface[] = [];
 
     /* Current position strategy. It depends on axis and layout */
     /** @hidden */
@@ -25,11 +25,12 @@ export class TimelinePositionControlService {
     }
 
     /** Register TimelineNodeComponent */
-    registerNode(node: TimelineNodeComponent): void {
+    registerNode(node: TimelineNodeComponentInterface): void {
         this._nodeItems.push(node);
     }
+
     /** Remove TimelineNodeComponent */
-    removeNode(node: TimelineNodeComponent): void {
+    removeNode(node: TimelineNodeComponentInterface): void {
         this._nodeItems = this._nodeItems.filter((item) => item !== node);
     }
 }

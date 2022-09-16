@@ -17,7 +17,7 @@ import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogDefaultComponent } from '../dialog-default/dialog-default.component';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
-import { DialogContentType } from '../dialog-service/dialog.service';
+import { DialogContentType } from '../dialog.types';
 
 /** Dialog container where the dialog content is embedded. */
 @Component({

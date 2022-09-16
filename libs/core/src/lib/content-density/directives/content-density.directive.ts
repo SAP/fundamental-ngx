@@ -1,9 +1,10 @@
 import { Directive, forwardRef, Input, isDevMode, OnDestroy } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { BehaviorSubject } from 'rxjs';
-import { ContentDensityGlobalKeyword, ContentDensityMode, LocalContentDensityMode } from '../content-density.types';
+import { ContentDensityGlobalKeyword, LocalContentDensityMode } from '../content-density.types';
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 import { isContentDensityMode } from '../helpers/density-type-checkers';
+import { ContentDensityMode } from '../types/content-density.mode';
 
 /**
  * Directive to control the content density of the elements.

@@ -1,0 +1,17 @@
+{
+    "sourceRoot": "libs/docs/fn/message-toast",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e-noop": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eTsConfig": "libs/docs/fn/message-toast/e2e/tsconfig.json",
+                "baseUrl": "http://localhost:4200",
+                "configFile": "libs/docs/fn/message-toast/wdio.conf.js"
+            },
+            "outputs": ["allure-results/docs-fn-message-toast"]
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

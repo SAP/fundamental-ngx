@@ -1,4 +1,4 @@
-import { ELEMENT_REF_EXCEPTION } from '../interfaces/has-element-ref.interface';
+import { ELEMENT_REF_EXCEPTION, HasElementRef } from '../interfaces/has-element-ref.interface';
 import { Hash } from '../datatypes/hash.datatype';
 
 /**
@@ -13,13 +13,14 @@ import { Hash } from '../datatypes/hash.datatype';
 export function applyCssStyle(target: any, propertyKey: string, descriptor: PropertyDescriptor): void {
     const originalMethod = descriptor.value;
     descriptor.value = function (): Hash<number | string> {
-        if (!this.elementRef) {
+        const self = this as unknown as HasElementRef;
+        if (!self.elementRef) {
             throw ELEMENT_REF_EXCEPTION;
         }
 
         const _styles: Hash<number | string> = originalMethod.apply(this);
-        if (this.elementRef()) {
-            const htmlElement = this.elementRef().nativeElement as HTMLElement;
+        if (self.elementRef()) {
+            const htmlElement = self.elementRef().nativeElement as HTMLElement;
             Object.keys(_styles).forEach((key) => {
                 htmlElement.style[key] = _styles[key];
             });

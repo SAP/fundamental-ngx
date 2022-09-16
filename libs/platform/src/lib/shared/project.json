@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/platform/src/lib/shared",
     "sourceRoot": "libs/platform/src/lib/shared",
     "prefix": "fdp",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/platform/shared"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/shared/tsconfig.lib.json",
@@ -33,6 +32,5 @@
             }
         }
     },
-    "tags": ["type:lib", "scope:fdp"],
-    "implicitDependecies": ["core"]
+    "tags": ["type:lib", "scope:fdp"]
 }

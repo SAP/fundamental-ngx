@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/content-density",
     "sourceRoot": "libs/core/src/lib/content-density",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/content-density"],
             "options": {
                 "project": "libs/core/src/lib/content-density/ng-package.json"

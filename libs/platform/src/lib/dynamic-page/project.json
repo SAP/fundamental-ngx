@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/platform/src/lib/dynamic-page",
     "sourceRoot": "libs/platform/src/lib/dynamic-page",
     "prefix": "fdp",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/platform/dynamic-page"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/dynamic-page/tsconfig.lib.json",
@@ -37,5 +36,5 @@
         }
     },
     "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": ["core"]
+    "implicitDependencies": []
 }

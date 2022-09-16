@@ -1,9 +1,9 @@
 import { BaseStrategy } from './base-strategy';
-import { TimelineNodeComponent } from '../../components/timeline-node/timeline-node.component';
+import { TimelineNodeComponentInterface } from '../../components/timeline-node/timeline-node-component.interface';
 
 export class HorizontalSingleSideStrategy extends BaseStrategy {
     /** Calculate styles for timeline nodes */
-    calculateStyles(nodes: TimelineNodeComponent[]): any {
+    calculateStyles(nodes: TimelineNodeComponentInterface[]): any {
         this._setStylesForSingleList(nodes, 'horizontal');
     }
 }
