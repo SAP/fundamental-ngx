@@ -27,7 +27,21 @@ export class KeyboardSupportService<T> {
     }
 
     /** @hidden */
-    setKeyboardService(queryList: QueryList<KeyboardSupportItemInterface & T>, wrap?: boolean): void {
+    private _itemList: QueryList<KeyboardSupportItemInterface & T>;
+
+    /** @hidden
+     * allow tab key navigation. default is true.
+     */
+    private _tabKeyNavigation = true;
+
+    /** @hidden */
+    setKeyboardService(
+        queryList: QueryList<KeyboardSupportItemInterface & T>,
+        wrap?: boolean,
+        tabKeyNavigation = true
+    ): void {
+        this._itemList = queryList;
+        this._tabKeyNavigation = tabKeyNavigation;
         this._keyManager = new FocusKeyManager(queryList).withWrap(wrap).withHomeAndEnd();
         queryList.changes
             .pipe(takeUntil(this._onDestroy$), startWith(0))
@@ -38,13 +52,12 @@ export class KeyboardSupportService<T> {
     onKeyDown(event: KeyboardEvent): void {
         this._keyManager.onKeydown(event);
         if (KeyUtil.isKeyCode(event, TAB)) {
-            event.preventDefault();
-            if (hasModifierKey(event, 'shiftKey')) {
-                this.keyManager.setPreviousItemActive();
-            } else {
-                this.keyManager.setNextItemActive();
+            if (KeyUtil.isKeyCode(event, TAB) && this._tabKeyNavigation) {
+                event.preventDefault();
+                hasModifierKey(event, 'shiftKey')
+                    ? this.keyManager.setPreviousItemActive()
+                    : this.keyManager.setNextItemActive();
             }
-            return;
         }
     }
 
