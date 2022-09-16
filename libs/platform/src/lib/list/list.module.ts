@@ -10,12 +10,16 @@ import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
-import { ListComponent, ListFooter, ListGroupHeader } from './list.component';
-import { ListItemDef } from './base-list-item';
 import { I18nModule } from '@fundamental-ngx/i18n';
+import { ActionListItemModule } from './action-list-item/action-list-item.module';
+import { DisplayListItemModule } from './display-list-item/display-list-item.module';
+import { ListComponent, ListFooterComponent, ListGroupHeaderComponent } from './list.component';
+import { ListItemDef } from './base-list-item';
+import { ObjectListItemModule } from './object-list-item/object-list-item.module';
+import { StandardListItemModule } from './standard-list-item/standard-list-item.module';
 
 @NgModule({
-    declarations: [ListComponent, ListFooter, ListGroupHeader, ListItemDef],
+    declarations: [ListComponent, ListFooterComponent, ListGroupHeaderComponent, ListItemDef],
     imports: [
         CommonModule,
         FormsModule,
@@ -27,15 +31,23 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         BusyIndicatorModule,
         InfiniteScrollModule,
         PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
+        ContentDensityModule,
+        StandardListItemModule,
+        ObjectListItemModule,
+        DisplayListItemModule,
+        ActionListItemModule
     ],
     exports: [
         ListComponent,
-        ListFooter,
-        ListGroupHeader,
+        ListFooterComponent,
+        ListGroupHeaderComponent,
         ListItemDef,
         PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
+        ContentDensityModule,
+        StandardListItemModule,
+        ObjectListItemModule,
+        DisplayListItemModule,
+        ActionListItemModule
     ]
 })
 export class PlatformListModule {}

@@ -3,27 +3,24 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
+    forwardRef,
     HostBinding,
     Input,
     OnDestroy,
     Output
 } from '@angular/core';
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
-import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
+import { DndItem, ElementChord, ElementPosition, LinkPosition } from '../dnd.interfaces';
 import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
-
-export interface ElementPosition {
-    x: number;
-    y: number;
-}
+import { DND_ITEM } from '../tokens';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-dnd-item]',
-    providers: [DragDrop]
+    providers: [DragDrop, { provide: DND_ITEM, useExisting: forwardRef(() => DndItemDirective) }]
 })
-export class DndItemDirective implements AfterContentInit, OnDestroy {
+export class DndItemDirective implements DndItem, AfterContentInit, OnDestroy {
     /**
      * Whether to apply "fd-dnd-item" class.
      * @default true

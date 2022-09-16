@@ -1,8 +1,9 @@
-import { AfterContentInit, Component, ContentChild, forwardRef, HostBinding, HostListener, Input } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, HostBinding, HostListener, Input } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { ListComponent } from '../list.component';
 import { ListNavigationItemArrowDirective } from '../directives/list-navigation-item-arrow.directive';
 import { ListNavigationItemTextDirective } from '../directives/list-navigation-item-text.directive';
+import { LIST_COMPONENT } from '../list-component.token';
+import { ListComponentInterface } from '../list-component.interface';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -38,8 +39,8 @@ export class ListNavigationItemComponent implements AfterContentInit {
     _condensed = false;
 
     /** @hidden */
-    @ContentChild(forwardRef(() => ListComponent))
-    _listComponent: ListComponent;
+    @ContentChild(LIST_COMPONENT)
+    _listComponent: ListComponentInterface;
 
     /** @hidden */
     @ContentChild(ListNavigationItemArrowDirective)

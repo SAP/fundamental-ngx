@@ -1,4 +1,4 @@
-import { Inject, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
+import { Inject, Injectable, Injector, Optional } from '@angular/core';
 
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 import { DialogBaseService } from '@fundamental-ngx/core/dialog';
@@ -6,9 +6,7 @@ import { DialogBaseService } from '@fundamental-ngx/core/dialog';
 import { MESSAGE_BOX_DEFAULT_CONFIG, MessageBoxConfig } from '../utils/message-box-config.class';
 import { MessageBoxRef } from '../utils/message-box-ref.class';
 import { MessageBoxContainerComponent } from '../message-box-container/message-box-container.component';
-import { MessageBoxContent } from '../utils/message-box-content.class';
-
-export type MessageBoxContentType = Type<any> | TemplateRef<any> | MessageBoxContent;
+import { MessageBoxContentType } from '../message-box-content.type';
 
 /** Service used to create a message box. */
 @Injectable()

@@ -1,0 +1,7 @@
+{
+    "sourceRoot": "libs/docs/platform/schema",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {},
+    "tags": ["type:lib", "scope:docs"]
+}

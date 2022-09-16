@@ -45,6 +45,7 @@ module.exports = () => {
         },
         parallelOptions: {
             executors: 3
-        }
+        },
+        failOnEmptyTestSuite: false
     };
 };

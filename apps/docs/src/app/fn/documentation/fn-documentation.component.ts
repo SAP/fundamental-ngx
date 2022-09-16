@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { DocumentationBaseComponent } from '../../documentation/documentation-base.component';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { components, guides, sections } from './fn-documentation-data';
 
 @Component({
     selector: 'fn-documentation',
     styleUrls: ['./fn-documentation.component.scss'],
-    templateUrl: './fn-documentation.component.html'
+    templateUrl: './fn-documentation.component.html',
+    encapsulation: ViewEncapsulation.None
 })
-export class CoreDocumentationComponent extends DocumentationBaseComponent {
+export class CoreDocumentationComponent {
     guides = guides;
     components = components;
     sections = sections;

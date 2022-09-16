@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/shellbar",
     "sourceRoot": "libs/core/src/lib/shellbar",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/shellbar"],
             "options": {
                 "tsConfig": "libs/core/src/lib/shellbar/tsconfig.lib.json",

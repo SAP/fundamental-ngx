@@ -17,7 +17,7 @@ import { MessageBoxConfig } from '../utils/message-box-config.class';
 import { MessageBoxRef } from '../utils/message-box-ref.class';
 import { MessageBoxContent } from '../utils/message-box-content.class';
 import { MessageBoxDefaultComponent } from '../message-box-default/message-box-default.component';
-import { MessageBoxContentType } from '../services/message-box.service';
+import { MessageBoxContentType } from '../message-box-content.type';
 
 /** Message box container where the message box content is embedded. */
 @Component({

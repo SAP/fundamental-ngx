@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 import { BehaviorSubject } from 'rxjs';
 import { ClickedBehaviorModule } from '@fundamental-ngx/fn/cdk';
+import { SharedDocumentationModule } from '@fundamental-ngx/docs/shared';
+import packageJson from '../../../../package.json';
 
 const routes: Routes = [
     {
@@ -50,7 +52,8 @@ const routes: Routes = [
         MarkdownModule.forRoot({ loader: HttpClient }),
         ThemingModule,
         ContentDensityModule.forRoot({ storage: 'localStorage' }),
-        ClickedBehaviorModule.forRoot()
+        ClickedBehaviorModule.forRoot(),
+        SharedDocumentationModule.forRoot(packageJson)
     ],
     bootstrap: [AppComponent],
     providers: [

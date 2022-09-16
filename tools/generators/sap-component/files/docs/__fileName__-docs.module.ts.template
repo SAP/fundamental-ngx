@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { API_FILES } from '../../api-files';
+import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
 import { <%= className %>HeaderComponent } from './<%= name %>-header/<%= name %>-header.component';
 import { <%= className %>DocsComponent } from './<%= name %>-docs.component';
 import { examples } from './examples';
@@ -22,6 +21,7 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, <%= moduleName %>Module],
     exports: [RouterModule],
-    declarations: [examples, <%= className %>DocsComponent, <%= className %>HeaderComponent]
+    declarations: [examples, <%= className %>DocsComponent, <%= className %>HeaderComponent],
+    providers: [currentComponentProvider('<%= name %>')]
 })
 export class <%= className %>DocsModule {}

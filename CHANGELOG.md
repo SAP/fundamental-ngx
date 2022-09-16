@@ -1,3 +1,58 @@
+## [0.36.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.7...v0.36.1-rc.8) (2022-09-16)
+
+
+
+
+### [0.36.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.6...v0.36.1-rc.7) (2022-09-16)
+
+
+### Bug Fixes
+
+* **core:** remove list-header focus ([#8656](https://github.com/SAP/fundamental-ngx/issues/8656)) ([06b7aee](https://github.com/SAP/fundamental-ngx/commit/06b7aeed2e07e690114d2484aaa68c37374d9067))
+
+### [0.36.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.5...v0.36.1-rc.6) (2022-09-16)
+
+
+### Features
+
+* **core:** add time selection using keyboard ([#8695](https://github.com/SAP/fundamental-ngx/issues/8695)) ([fed07fa](https://github.com/SAP/fundamental-ngx/commit/fed07fa58dd85f5881153f1cc62f40536acfa47a))
+
+### [0.36.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.4...v0.36.1-rc.5) (2022-09-16)
+
+
+### Bug Fixes
+
+* **core:** remove list focus trap ([#8690](https://github.com/SAP/fundamental-ngx/issues/8690)) ([186657d](https://github.com/SAP/fundamental-ngx/commit/186657dc199072de4324891282915cefb4a353b7))
+
+### [0.36.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.3...v0.36.1-rc.4) (2022-09-15)
+
+### [0.36.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.2...v0.36.1-rc.3) (2022-09-15)
+
+
+### Bug Fixes
+
+* **platform:** update items on new event ([#8650](https://github.com/SAP/fundamental-ngx/issues/8650)) ([cbf1e2c](https://github.com/SAP/fundamental-ngx/commit/cbf1e2c24cf251cd026e5d4ba31f4c0c725484af))
+
+### [0.36.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.1...v0.36.1-rc.2) (2022-09-14)
+
+
+### Bug Fixes
+
+* **core:** fix label for hour and sec ([#8691](https://github.com/SAP/fundamental-ngx/issues/8691)) ([1dd446e](https://github.com/SAP/fundamental-ngx/commit/1dd446e89e7279e4bd1e43757c95b02c037e349a))
+
+### [0.36.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.0...v0.36.1-rc.1) (2022-09-14)
+
+
+### Bug Fixes
+
+* **core,platform:** table defect hunting issues ([#8653](https://github.com/SAP/fundamental-ngx/issues/8653)) ([54e0b4d](https://github.com/SAP/fundamental-ngx/commit/54e0b4ddfb75a5a6e6a97c5a51d26393dcf8a3a4))
+
+### [0.36.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.36.0...v0.36.1-rc.0) (2022-09-12)
+
+
+### Bug Fixes
+
+* **core:** fix dialog positioning when hasBrackdrop is false ([#8636](https://github.com/SAP/fundamental-ngx/issues/8636)) ([6a0ce55](https://github.com/SAP/fundamental-ngx/commit/6a0ce55a92d1ec2323238719885a01302645b3ac))
 
 ## [0.36.0](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.47...v0.36.0) (2022-09-09)
 

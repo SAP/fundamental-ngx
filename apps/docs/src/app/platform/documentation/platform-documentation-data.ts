@@ -1,8 +1,5 @@
 // BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
-import {
-    SectionInterface,
-    SectionInterfaceContent
-} from '../../documentation/core-helpers/sections-toolbar/section.interface';
+import { SectionInterface, SectionInterfaceContent } from '@fundamental-ngx/docs/shared';
 
 export const guides: SectionInterfaceContent[] = [
     { url: 'platform/home', name: 'Home' },

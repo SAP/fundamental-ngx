@@ -2,11 +2,11 @@ import * as axe from 'axe-core';
 import { createHtmlReport } from 'axe-html-reporter';
 import { execute, open, waitForPresent } from '../driver/wdio';
 import { appURLs } from './app-url';
-import { BaseComponentPo } from '../platform/pages/base-component.po';
+import { PlatformBaseComponentPo } from '../platform-base-component.po';
 
 describe('Accessibility test', () => {
     it('Should check for accessibility issues using Axe', () => {
-        const { title } = new BaseComponentPo();
+        const { title } = new PlatformBaseComponentPo();
         const options = { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] } };
 
         for (const pageUrl in appURLs) {

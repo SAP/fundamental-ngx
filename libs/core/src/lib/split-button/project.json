@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/split-button",
     "sourceRoot": "libs/core/src/lib/split-button",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/split-button"],
             "options": {
                 "tsConfig": "libs/core/src/lib/split-button/tsconfig.lib.json",

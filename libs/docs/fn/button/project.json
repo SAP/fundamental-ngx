@@ -1,0 +1,17 @@
+{
+    "sourceRoot": "libs/docs/fn/button",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e-noop": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eTsConfig": "libs/docs/fn/button/e2e/tsconfig.json",
+                "baseUrl": "http://localhost:4200",
+                "configFile": "libs/docs/fn/button/wdio.conf.js"
+            },
+            "outputs": ["allure-results/docs-fn-button"]
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

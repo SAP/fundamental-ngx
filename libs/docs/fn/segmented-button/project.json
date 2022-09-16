@@ -1,0 +1,17 @@
+{
+    "sourceRoot": "libs/docs/fn/segmented-button",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e-noop": {
+            "executor": "./tools/executors/wdio:e2e-test",
+            "options": {
+                "e2eTsConfig": "libs/docs/fn/segmented-button/e2e/tsconfig.json",
+                "baseUrl": "http://localhost:4200",
+                "configFile": "libs/docs/fn/segmented-button/wdio.conf.js"
+            },
+            "outputs": ["allure-results/docs-fn-segmented-button"]
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

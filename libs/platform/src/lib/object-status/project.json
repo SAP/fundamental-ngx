@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/platform/src/lib/object-status",
     "sourceRoot": "libs/platform/src/lib/object-status",
     "prefix": "fdp",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/platform/object-status"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/object-status/tsconfig.lib.json",
@@ -37,5 +36,5 @@
         }
     },
     "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": ["core"]
+    "implicitDependencies": []
 }

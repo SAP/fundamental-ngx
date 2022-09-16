@@ -203,6 +203,16 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
+    /** @hidden
+     * logs numeric key inputs to set time using keyboard input.
+     */
+    private _keyLog: string[] = [];
+
+    /** @hidden
+     * Timeout variable used to set timeout for subsequent numeric key input to set time.
+     */
+    private _numericInputTimeout: ReturnType<typeof setTimeout>;
+
     /** @hidden */
     constructor(private _changeDetRef: ChangeDetectorRef, private _elmRef: ElementRef) {
         this._subscriptions.add(
@@ -277,8 +287,10 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
             this.scrollUp();
             event.preventDefault();
-        } else if (KeyUtil.isKeyType(event, 'numeric') || KeyUtil.isKeyType(event, 'alphabetical')) {
-            this._queryKeyDownEvent.next(event.key);
+        } else if (KeyUtil.isKeyType(event, 'numeric')) {
+            this._numericKeyInputHandler(event);
+        } else if (KeyUtil.isKeyType(event, 'alphabetical')) {
+            this._alphaKeyInputHandler(event);
         }
     }
 
@@ -398,6 +410,49 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         this.activeStateChange.emit();
     }
 
+    /** @hidden
+     * handles alphabetical key inputs to set period.
+     */
+    private _alphaKeyInputHandler(event: KeyboardEvent): void {
+        if (event.key.toLowerCase() === 'a') {
+            this._pickTimeOnValue('AM');
+        } else if (event.key.toLowerCase() === 'p') {
+            this._pickTimeOnValue('PM');
+        }
+    }
+
+    /** @hidden
+     * handles numeric key inputs to set time.
+     */
+    private _numericKeyInputHandler(event: KeyboardEvent): void {
+        const lastItemValue = this.items.last.value.value; // value of last item in column
+
+        this._numericInputTimeout && clearTimeout(this._numericInputTimeout);
+        this._keyLog.push(event.key);
+        const inputValue = parseInt(this._keyLog.join(''), 10); // converts keyLog elements to a number
+
+        if (inputValue * 10 > lastItemValue || this._keyLog.length === lastItemValue.toString().length) {
+            this._pickTimeOnValue(inputValue);
+        } else {
+            this._numericInputTimeout = setTimeout(() => {
+                this._pickTimeOnValue(inputValue);
+            }, 500);
+        }
+    }
+
+    /** @hidden
+     * set the time for given item value. used by _numericKeyInputHandler.
+     */
+    private _pickTimeOnValue(value: string | number): void {
+        this._pickTime(
+            this.items.find((item) => item.value.value === value),
+            false,
+            true,
+            false
+        );
+        this._keyLog = []; // clear key log
+    }
+
     /**
      * Method triggered by keyboard, or decrement button
      * Args:
@@ -505,7 +560,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden */
     private _updateInternalTranslationConfig(): void {
         switch (this.columnTranslationsPreset) {
-            case 'seconds':
+            case 'hours':
                 this.internalTranslationConfig = {
                     increaseLabel: 'coreTime.increaseHoursLabel',
                     label: 'coreTime.hoursLabel',
@@ -521,7 +576,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
                     navigationInstruction: 'coreTime.navigationInstruction'
                 };
                 break;
-            case 'hours':
+            case 'seconds':
                 this.internalTranslationConfig = {
                     increaseLabel: 'coreTime.increaseSecondsLabel',
                     label: 'coreTime.secondsLabel',

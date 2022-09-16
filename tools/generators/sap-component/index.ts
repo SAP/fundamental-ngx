@@ -1,16 +1,15 @@
 import { strings } from '@angular-devkit/core';
 import {
-    Rule,
+    apply,
+    applyTemplates,
     chain,
     externalSchematic,
-    apply,
-    url,
-    applyTemplates,
-    move,
-    mergeWith,
     MergeStrategy,
+    mergeWith,
+    move,
+    Rule,
     SchematicsException,
-    Tree
+    url
 } from '@angular-devkit/schematics';
 import { formatFiles, updateJsonInTree } from '@nrwl/workspace';
 import { names } from '@nrwl/devkit';
@@ -48,7 +47,8 @@ export default function (schema: SapComponentSchema): Rule {
         }),
         updateComponentFiles(schema),
         (tree) => addEslintJsonOverrides(tree, getProjectName(schema)),
-        addDocsComponents(schema),
+        addDocsLibrary(schema),
+        addDocsLibraryToNx(schema),
         updateDocsRoutes(schema),
         addDocsRouteToNav(schema),
         updateApiFiles(schema),
@@ -56,9 +56,24 @@ export default function (schema: SapComponentSchema): Rule {
     ]);
 }
 
+function addDocsLibraryToNx(schema: SapComponentSchema) {
+    const projectName = `docs-${getProjectName(schema)}`;
+    const pathToSource = `libs/docs/${getProjectDirName(schema)}/${schema.name}`;
+    return chain([
+        updateJsonInTree('angular.json', (angularJson) => {
+            angularJson.projects[projectName] = pathToSource;
+            return angularJson;
+        }),
+        updateJsonInTree('tsconfig.base.json', (tsconfigJson) => {
+            tsconfigJson.compilerOptions.paths[getDocImportPath(schema)] = [`${pathToSource}/index.ts`];
+            return tsconfigJson;
+        })
+    ]);
+}
+
 function updateApiFiles(schema: SapComponentSchema): Rule {
     return (tree) => {
-        const filePath = `apps/docs/src/app/${getProjectDirName(schema)}/api-files.ts`;
+        const filePath = `libs/docs/${getProjectDirName(schema)}/shared/src/lib/api-files.ts`;
         const content = tree.read(filePath);
         const tsSourceFile = ts.createSourceFile(filePath, content?.toString() ?? '', ts.ScriptTarget.Latest, true);
         const statement = getVariableStatement(tsSourceFile, 'API_FILES');
@@ -102,7 +117,7 @@ function updateDocsRoutes(schema: SapComponentSchema): Rule {
         const importValue = `
             {
                 path: '${schema.name}',
-                loadChildren: () => import('./component-docs/${schema.name}/${schema.name}-docs.module')
+                loadChildren: () => import('${getDocImportPath(schema)}')
                     .then((m) => m.${strings.classify(schema.name)}DocsModule)
             }
         `;
@@ -127,9 +142,9 @@ function addDocsRouteToNav(schema: SapComponentSchema): Rule {
 
         const prefixComma = componentsVar.elements.hasTrailingComma ? '' : ', ';
         const importValue = `
-            { 
-                url: '${getProjectDirName(schema)}/${schema.name}', 
-                name: '${startCaseName(schema.name)}' 
+            {
+                url: '${getProjectDirName(schema)}/${schema.name}',
+                name: '${startCaseName(schema.name)}'
             },
         `;
         insert(tree, filePath, [
@@ -138,16 +153,17 @@ function addDocsRouteToNav(schema: SapComponentSchema): Rule {
     };
 }
 
-function addDocsComponents(schema: SapComponentSchema): Rule {
+function addDocsLibrary(schema: SapComponentSchema): Rule {
     const template = apply(url('./files/docs'), [
         applyTemplates({
             ...names(schema.name),
             moduleName: strings.classify(schema.name),
             projectTag: getProjectTag(schema),
             projectDirName: getProjectDirName(schema),
-            startCaseName: startCaseName(schema.name)
+            startCaseName: startCaseName(schema.name),
+            importPath: getDocImportPath(schema)
         }),
-        move(`apps/docs/src/app/${getProjectDirName(schema)}/component-docs/${schema.name}`)
+        move(`libs/docs/${getProjectDirName(schema)}/${schema.name}`)
     ]);
 
     return mergeWith(template, MergeStrategy.Overwrite);
@@ -256,6 +272,10 @@ function getProjectName(schema: SapComponentSchema): string {
 
 function getImportPath(schema: SapComponentSchema): string {
     return `@fundamental-ngx/${getProjectDirName(schema)}/${schema.name}`;
+}
+
+function getDocImportPath(schema: SapComponentSchema): string {
+    return `@fundamental-ngx/docs/${getProjectDirName(schema)}/${schema.name}`;
 }
 
 function getProjectDirName(schema: SapComponentSchema): string {

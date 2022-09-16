@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/object-marker",
     "sourceRoot": "libs/core/src/lib/object-marker",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/object-marker"],
             "options": {
                 "tsConfig": "libs/core/src/lib/object-marker/tsconfig.lib.json",

@@ -34,11 +34,7 @@ export class PlatformTableColumnResizerComponent implements OnInit, OnDestroy {
     /** @hidden */
     @HostBinding('style.display')
     get _resizerDisplay(): string {
-        if (!this._resizerPosition) {
-            return 'none';
-        }
-
-        return 'block';
+        return this._resizerPosition > 0 ? 'block' : 'none';
     }
 
     /** @hidden */

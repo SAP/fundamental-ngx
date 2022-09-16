@@ -2,14 +2,7 @@ import { Injectable, isDevMode } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { isCompactDensity } from '../functions/is-compact-density';
-
-export type ContentDensity = 'cozy' | 'condensed' | 'compact';
-
-export enum ContentDensityEnum {
-    COMPACT = 'compact',
-    COZY = 'cozy',
-    CONDENSED = 'condensed'
-}
+import { ContentDensity } from '../interfaces/content-density';
 
 export const DEFAULT_CONTENT_DENSITY: ContentDensity = 'cozy';
 

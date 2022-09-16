@@ -11,141 +11,111 @@ export const ROUTES: Routes = [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             {
                 path: 'i18n',
-                loadChildren: () =>
-                    import('../platform/component-docs/i18n/platform-i18n-docs.module').then(
-                        (m) => m.PlatformI18nDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/shared').then((m) => m.PlatformI18nDocsModule)
             },
             { path: 'home', component: HomeDocsComponent },
             {
                 path: 'button',
-                loadChildren: () => import('./component-docs/button/button-docs.module').then((m) => m.ButtonDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/fn/button').then((m) => m.ButtonDocsModule)
             },
             {
                 path: 'checkbox',
-                loadChildren: () =>
-                    import('./component-docs/checkbox/checkbox-docs.module').then((m) => m.CheckboxDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/fn/checkbox').then((m) => m.CheckboxDocsModule)
             },
             {
                 path: 'generic-tag',
-                loadChildren: () =>
-                    import('./component-docs/generic-tag/generic-tag-docs.module').then((m) => m.GenericTagDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/fn/generic-tag').then((m) => m.GenericTagDocsModule)
             },
             {
                 path: 'select',
-                loadChildren: () => import('./component-docs/select/select-docs.module').then((m) => m.SelectDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/fn/select').then((m) => m.SelectDocsModule)
             },
             {
                 path: 'tabs',
-                loadChildren: () => import('./component-docs/tabs/tabs-docs.module').then((m) => m.TabsDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/fn/tabs').then((m) => m.TabsDocsModule)
             },
             {
                 path: 'switch',
-                loadChildren: () => import('./component-docs/switch/switch-docs.module').then((m) => m.SwitchDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/fn/switch').then((m) => m.SwitchDocsModule)
             },
             {
                 path: 'progress-bar',
-                loadChildren: () =>
-                    import('./component-docs/progress-bar/progress-bar-docs.module').then(
-                        (m) => m.ProgressBarDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/fn/progress-bar').then((m) => m.ProgressBarDocsModule)
             },
             {
                 path: 'radio',
-                loadChildren: () => import('./component-docs/radio/radio-docs.module').then((m) => m.RadioDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/fn/radio').then((m) => m.RadioDocsModule)
             },
             {
                 path: 'input',
-                loadChildren: () => import('./component-docs/input/input-docs.module').then((m) => m.InputDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/fn/input').then((m) => m.InputDocsModule)
             },
             {
                 path: 'search',
-                loadChildren: () => import('./component-docs/search/search-docs.module').then((m) => m.SearchDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/fn/search').then((m) => m.SearchDocsModule)
             },
             {
                 path: 'slider',
-                loadChildren: () => import('./component-docs/slider/slider-docs.module').then((m) => m.SliderDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/fn/slider').then((m) => m.SliderDocsModule)
             },
             {
                 path: 'segmented-button',
                 loadChildren: () =>
-                    import('./component-docs/segmented-button/segmented-button-docs.module').then(
-                        (m) => m.SegmentedButtonDocsModule
-                    )
+                    import('@fundamental-ngx/docs/fn/segmented-button').then((m) => m.SegmentedButtonDocsModule)
             },
             {
                 path: 'list',
-                loadChildren: () => import('./component-docs/list/list-docs.module').then((m) => m.ListDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/fn/list').then((m) => m.ListDocsModule)
             },
             {
                 path: 'list-byline',
-                loadChildren: () =>
-                    import('./component-docs/list-byline/list-byline-docs.module').then((m) => m.ListBylineDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/fn/list-byline').then((m) => m.ListBylineDocsModule)
             },
             {
                 path: 'avatar',
-                loadChildren: () => import('./component-docs/avatar/avatar-docs.module').then((m) => m.AvatarDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/fn/avatar').then((m) => m.AvatarDocsModule)
             },
             {
                 path: 'info-label',
-                loadChildren: () =>
-                    import('./component-docs/info-label/info-label-docs.module').then((m) => m.InfoLabelDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/fn/info-label').then((m) => m.InfoLabelDocsModule)
             },
             {
                 path: 'message-strip',
                 loadChildren: () =>
-                    import('./component-docs/message-strip/message-strip-docs.module').then(
-                        (m) => m.MessageStripDocsModule
-                    )
+                    import('@fundamental-ngx/docs/fn/message-strip').then((m) => m.MessageStripDocsModule)
             },
             {
                 path: 'object-status',
                 loadChildren: () =>
-                    import('./component-docs/object-status/object-status-docs.module').then(
-                        (m) => m.ObjectStatusDocsModule
-                    )
+                    import('@fundamental-ngx/docs/fn/object-status').then((m) => m.ObjectStatusDocsModule)
             },
             {
                 path: 'selectable-list',
                 loadChildren: () =>
-                    import('./component-docs/utilities/selectable-list/selectable-list-docs.module').then(
-                        (m) => m.SelectableListDocsModule
-                    )
+                    import('@fundamental-ngx/docs/fn/selectable-list').then((m) => m.SelectableListDocsModule)
             },
             {
                 path: 'focusable-list',
                 loadChildren: () =>
-                    import('./component-docs/utilities/focusable-list/focusable-list-docs.module').then(
-                        (m) => m.FocusableListDocsModule
-                    )
+                    import('@fundamental-ngx/docs/fn/focusable-list').then((m) => m.FocusableListDocsModule)
             },
             {
                 path: 'disabled',
-                loadChildren: () =>
-                    import('./component-docs/utilities/fn-disabled/fn-disabled-docs.module').then(
-                        (m) => m.FnDisabledDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/fn/disabled').then((m) => m.FnDisabledDocsModule)
             },
             {
                 path: 'clicked',
-                loadChildren: () =>
-                    import('./component-docs/utilities/fn-clicked/fn-clicked-docs.module').then(
-                        (m) => m.FnClickedDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/fn/clicked').then((m) => m.FnClickedDocsModule)
             },
             {
                 path: 'message-toast',
                 loadChildren: () =>
-                    import('./component-docs/message-toast/message-toast-docs.module').then(
-                        (m) => m.MessageToastDocsModule
-                    )
+                    import('@fundamental-ngx/docs/fn/message-toast').then((m) => m.MessageToastDocsModule)
             },
             {
                 path: 'notification',
                 loadChildren: () =>
-                    import('./component-docs/notification/notification-docs.module').then(
-                        (m) => m.NotificationDocsModule
-                    )
+                    import('@fundamental-ngx/docs/fn/notification').then((m) => m.NotificationDocsModule)
             }
         ]
     }

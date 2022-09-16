@@ -5,6 +5,7 @@ import {
     Component,
     ContentChildren,
     EventEmitter,
+    forwardRef,
     HostBinding,
     HostListener,
     Input,
@@ -26,6 +27,8 @@ import {
     contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
+import { ListComponentInterface } from './list-component.interface';
+import { LIST_COMPONENT } from './list-component.token';
 
 /**
  * The directive that represents a list.
@@ -46,10 +49,14 @@ import {
         KeyboardSupportService,
         contentDensityObserverProviders({
             modifiers: { [ContentDensityMode.COMPACT]: 'fd-list--compact' }
-        })
+        }),
+        {
+            provide: LIST_COMPONENT,
+            useExisting: forwardRef(() => ListComponent)
+        }
     ]
 })
-export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
+export class ListComponent implements ListComponentInterface, OnInit, AfterContentInit, OnDestroy {
     /** Whether dropdown mode is included to component, used for Select and Combobox */
     @Input()
     @HostBinding('class.fd-list--dropdown')
@@ -139,7 +146,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this._keyboardSupportService.setKeyboardService(this._focusItems, false);
+        this._keyboardSupportService.setKeyboardService(this._focusItems, false, false);
         this._listenOnQueryChange();
     }
 

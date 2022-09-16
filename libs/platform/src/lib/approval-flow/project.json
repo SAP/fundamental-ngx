@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/platform/src/lib/approval-flow",
     "sourceRoot": "libs/platform/src/lib/approval-flow",
     "prefix": "fdp",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/platform/approval-flow"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/approval-flow/tsconfig.lib.json",
@@ -37,5 +36,5 @@
         }
     },
     "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": ["core"]
+    "implicitDependencies": []
 }

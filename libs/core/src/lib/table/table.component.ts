@@ -5,6 +5,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    forwardRef,
     HostBinding,
     Input,
     OnDestroy,
@@ -28,6 +29,14 @@ import {
 export const FOCUSABLE_CELL_CLASSNAME = 'fd-table__cell--focusable';
 export const FOCUSABLE_ROW_CLASSNAME = 'fd-table__row--focusable';
 
+export const FdTableContentDensityProviderParams = {
+    modifiers: {
+        [ContentDensityMode.COMPACT]: 'fd-table--compact',
+        [ContentDensityMode.CONDENSED]: 'fd-table--condensed'
+    },
+    supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.CONDENSED, ContentDensityMode.COZY]
+};
+
 /**
  * The component that represents a table.
  * A table is a set of tabular data. Line items can support data, images and actions.
@@ -46,14 +55,8 @@ export const FOCUSABLE_ROW_CLASSNAME = 'fd-table__row--focusable';
     providers: [
         TableService,
         TabbableElementService,
-        { provide: FdTable, useExisting: TableComponent },
-        contentDensityObserverProviders({
-            modifiers: {
-                [ContentDensityMode.COMPACT]: 'fd-table--compact',
-                [ContentDensityMode.CONDENSED]: 'fd-table--condensed'
-            },
-            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.CONDENSED, ContentDensityMode.COZY]
-        })
+        { provide: FdTable, useExisting: forwardRef(() => TableComponent) },
+        contentDensityObserverProviders(FdTableContentDensityProviderParams)
     ]
 })
 export class TableComponent implements AfterViewInit, OnDestroy, FdTable {

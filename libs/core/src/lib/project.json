@@ -1,10 +1,27 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib",
     "sourceRoot": "libs/core/src/lib",
     "prefix": "fd",
+    "buildTarget": "build-umbrella",
     "targets": {
-        "build": {
+        "prepare": {
+            "executor": "./tools/executors/prepare-library:prepare",
+            "options": {
+                "schematics": {
+                    "collection": "../../schematics",
+                    "tsConfig": "../../tsconfig.schematics.json"
+                },
+                "distPath": "dist/libs/core"
+            }
+        },
+        "compile-typedoc": {
+            "executor": "./tools/executors/compile-typedoc:compile-lib",
+            "options": {
+                "outputPath": "libs/docs/typedoc/core"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
+        "build-umbrella": {
             "executor": "@nrwl/angular:package",
             "outputs": ["dist/libs/core"],
             "options": {
@@ -16,15 +33,8 @@
                 "production": {
                     "tsConfig": "libs/core/src/lib/tsconfig.lib.prod.json"
                 }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/test.ts",
-                "tsConfig": "libs/core/src/lib/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/karma.conf.js"
-            }
+            },
+            "defaultConfiguration": "production"
         },
         "lint": {
             "executor": "@nrwl/linter:eslint",
@@ -33,5 +43,6 @@
             }
         }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "tags": ["type:lib", "scope:fd"],
+    "implicitDependencies": ["i18n"]
 }

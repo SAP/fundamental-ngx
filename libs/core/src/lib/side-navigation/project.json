@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/side-navigation",
     "sourceRoot": "libs/core/src/lib/side-navigation",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/side-navigation"],
             "options": {
                 "tsConfig": "libs/core/src/lib/side-navigation/tsconfig.lib.json",

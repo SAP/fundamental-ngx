@@ -1,0 +1,13 @@
+<div style="display: flex; justify-content: center">
+    <fd-carousel width="300px" height="400px">
+        <fd-carousel-item [loading]="loading">
+            <img src="https://placeimg.com/300/300/nature/1" alt="first image" />
+        </fd-carousel-item>
+
+        <fd-carousel-item>
+            <img src="https://placeimg.com/300/300/nature/2" alt="second image" />
+        </fd-carousel-item>
+    </fd-carousel>
+</div>
+
+<button fd-button [label]="loading ? 'Disable loading' : 'Enable loading'" (click)="loading = !loading"></button>

@@ -1,4 +1,4 @@
-import { TimelineNodeComponent } from '../../components/timeline-node/timeline-node.component';
+import { TimelineNodeComponentInterface } from '../../components/timeline-node/timeline-node-component.interface';
 import { TimelineAxis } from '../../types';
 
 export abstract class BaseStrategy {
@@ -12,15 +12,17 @@ export abstract class BaseStrategy {
     private readonly VERTICAL_TOP_LIST_OFFSET = 24;
 
     /** Calculate styles for timeline nodes */
-    abstract calculateStyles(nodes: TimelineNodeComponent[]): any;
+    abstract calculateStyles(nodes: TimelineNodeComponentInterface[]): any;
 
     /** @hidden */
-    protected _getOffset(node: TimelineNodeComponent): number {
+    protected _getOffset(node: TimelineNodeComponentInterface): number {
         return node.glyph ? this.BIG_OFFSET : this.SMALL_OFFSET;
     }
 
     /** @hidden */
-    protected _getTwoListFromOne(nodes: TimelineNodeComponent[]): [TimelineNodeComponent[], TimelineNodeComponent[]] {
+    protected _getTwoListFromOne(
+        nodes: TimelineNodeComponentInterface[]
+    ): [TimelineNodeComponentInterface[], TimelineNodeComponentInterface[]] {
         const lastIndexInFirstList = Math.ceil(nodes.length / 2);
         const firstList = nodes.slice(0, lastIndexInFirstList);
         const secondList = nodes.slice(lastIndexInFirstList, nodes.length);
@@ -28,7 +30,7 @@ export abstract class BaseStrategy {
     }
 
     /** @hidden */
-    protected _setStylesForSingleList(nodes: TimelineNodeComponent[], axis: TimelineAxis): void {
+    protected _setStylesForSingleList(nodes: TimelineNodeComponentInterface[], axis: TimelineAxis): void {
         const [offsetProperty, sizeProperty] =
             axis === 'horizontal' ? ['offsetLeft', 'width'] : ['offsetTop', 'height'];
 
@@ -49,7 +51,7 @@ export abstract class BaseStrategy {
     }
 
     /** @hidden */
-    protected _setStylesForDoubleList(nodes: TimelineNodeComponent[], axis: TimelineAxis): void {
+    protected _setStylesForDoubleList(nodes: TimelineNodeComponentInterface[], axis: TimelineAxis): void {
         const [firstList, secondList] = this._getTwoListFromOne(nodes);
         const [offsetProp, sizeProp, sizeOffsetProp] =
             axis === 'horizontal' ? ['offsetLeft', 'width', 'offsetWidth'] : ['offsetTop', 'height', 'offsetHeight'];

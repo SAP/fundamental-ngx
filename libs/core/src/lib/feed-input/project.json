@@ -1,11 +1,10 @@
 {
     "projectType": "library",
-    "root": "libs/core/src/lib/feed-input",
     "sourceRoot": "libs/core/src/lib/feed-input",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["dist/libs/core/feed-input"],
             "options": {
                 "tsConfig": "libs/core/src/lib/feed-input/tsconfig.lib.json",

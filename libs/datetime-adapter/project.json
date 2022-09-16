@@ -1,10 +1,39 @@
 {
     "projectType": "library",
-    "root": "libs/datetime-adapter",
     "sourceRoot": "libs/datetime-adapter/src",
     "prefix": "fundamental-ngx",
     "targets": {
+        "prepare": {
+            "executor": "./tools/executors/prepare-library:prepare",
+            "options": {
+                "distPath": "dist/libs/datetime-adapter"
+            }
+        },
+        "compile-typedoc": {
+            "executor": "./tools/executors/compile-typedoc:compile-lib",
+            "options": {
+                "outputPath": "libs/docs/typedoc/datetime-adapter"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
         "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/datetime-adapter"],
+            "options": {
+                "project": "libs/datetime-adapter/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/datetime-adapter/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/datetime-adapter/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "build-umbrella": {
             "executor": "@nrwl/angular:package",
             "outputs": ["dist/libs/datetime-adapter"],
             "options": {
@@ -36,5 +65,6 @@
             }
         }
     },
-    "tags": ["type:lib", "scope:datetime-adapter"]
+    "tags": ["type:lib", "scope:datetime-adapter"],
+    "implicitDependencies": ["core"]
 }

@@ -28,6 +28,7 @@
                             {
                                 "sourceTag": "scope:docs",
                                 "onlyDependOnLibsWithTags": [
+                                    "scope:docs",
                                     "scope:fd",
                                     "scope:fdp",
                                     "scope:fn",

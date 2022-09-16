@@ -1,17 +1,14 @@
 import {
     applyState,
     checkElementScreenshot,
-    clickNextElement,
     elementDisplayed,
     getAttributeByName,
-    getAttributeByNameArr,
     getCSSPropertyByName,
     getElementArrayLength,
     getText,
     getTextArr,
     isElementClickable,
-    saveElementScreenshot,
-    scrollIntoView
+    saveElementScreenshot
 } from '../driver/wdio';
 
 export function checkRtlOrientation(element: string, index: number): void {
@@ -26,26 +23,6 @@ export function checkLtrOrientation(element: string, index: number): void {
 
 export function checkIfDisabled(element, attribute: string, value: string, index: number = 0): void {
     expect(getAttributeByName(element, attribute, index)).toBe(value);
-}
-
-export function checkMarkingCheckbox(checkboxArray, sliceStart?: number, sliceEnd?: number): void {
-    const beforeClicking = getAttributeByNameArr(checkboxArray, 'aria-checked', sliceStart, sliceEnd);
-    for (let i = sliceStart; sliceEnd > i; i++) {
-        if (!getAttributeByNameArr(checkboxArray, 'aria-disabled', i)) {
-            scrollIntoView(checkboxArray, i);
-            clickNextElement(checkboxArray, i);
-        }
-    }
-    const afterClickingOnce = getAttributeByNameArr(checkboxArray, 'aria-checked', sliceStart, sliceEnd);
-    for (let i = sliceStart; sliceEnd > i; i++) {
-        if (!getAttributeByNameArr(checkboxArray, 'aria-disabled', i)) {
-            clickNextElement(checkboxArray, i);
-        }
-    }
-    const afterClickingTwice = getAttributeByNameArr(checkboxArray, 'aria-checked', sliceStart, sliceEnd);
-
-    expect(beforeClicking).not.toEqual(afterClickingOnce);
-    expect(afterClickingTwice).toEqual(beforeClicking);
 }
 
 export function checkLabels(
@@ -75,6 +52,8 @@ export function checkElementDisplayed(element: string): void {
 export function checkElementText(element: string): void {
     const elLength = getElementArrayLength(element);
     for (let i = 0; elLength > i; i++) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         expect(getText(element, i)).not.toBe(null, '');
     }
 }

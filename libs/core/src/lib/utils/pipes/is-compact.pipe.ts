@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ContentDensity } from './../services/content-density.service';
+import { ContentDensity } from '../interfaces/content-density';
 import { isCompactDensity } from './../functions/is-compact-density';
 
 @Pipe({ name: 'isCompactDensity' })

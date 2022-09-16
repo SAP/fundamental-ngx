@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "type": "object",
+    "cli": "nx",
+    "properties": {
+        "affected": {
+            "type": "boolean",
+            "required": false,
+            "description": "Whether or not you want to test only affected pages"
+        },
+        "base": {
+            "type": "string",
+            "required": false,
+            "description": "The base branch you want to check affected pages against"
+        },
+        "head": {
+            "type": "string",
+            "required": false,
+            "description": "The head branch you want to check affected pages from"
+        },
+        "baseUrl": {
+            "type": "string",
+            "required": false,
+            "description": "The base url of the site you want to use for testing"
+        },
+        "devServerTarget": {
+            "type": "string",
+            "required": false,
+            "description": "The target of the dev server you want to use for testing"
+        }
+    }
+}
