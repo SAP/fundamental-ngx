@@ -154,7 +154,7 @@
     "karma-webpack": "5.0.0",
     "lint-staged": "12.4.0",
     "nan": "2.14.2",
-    "ng-packagr": "14.1.0",
+    "ng-packagr": "14.2.1",
     "ngx-cva-test-suite": "~1.0.4",
     "nx": "14.5.10",
     "postcss": "^8.4.8",
