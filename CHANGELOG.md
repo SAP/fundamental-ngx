@@ -1,3 +1,12 @@
+## [0.36.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.10...v0.36.1-rc.11) (2022-09-19)
+
+
+### Bug Fixes
+
+* **core:** overflow layout nested struct directives ([#8652](https://github.com/SAP/fundamental-ngx/issues/8652)) ([08391fa](https://github.com/SAP/fundamental-ngx/commit/08391fa666453a65d2f2d6cdd29be4a4fde54f05))
+
+
+
 ## [0.36.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.9...v0.36.1-rc.10) (2022-09-19)
 
 
