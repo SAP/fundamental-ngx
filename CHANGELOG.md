@@ -1,3 +1,12 @@
+## [0.36.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.8...v0.36.1-rc.9) (2022-09-19)
+
+
+### Bug Fixes
+
+* **core:** prevent NaN for itemsContainerWidth ([#8685](https://github.com/SAP/fundamental-ngx/issues/8685)) ([b2ce4d3](https://github.com/SAP/fundamental-ngx/commit/b2ce4d30d0a81296399e2dd59bba6580d4eaae62))
+
+
+
 ## [0.36.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.7...v0.36.1-rc.8) (2022-09-16)
 
 
