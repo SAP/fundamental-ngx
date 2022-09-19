@@ -1,3 +1,12 @@
+## [0.36.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.9...v0.36.1-rc.10) (2022-09-19)
+
+
+### Bug Fixes
+
+* **docs:** increment z-index ([#8696](https://github.com/SAP/fundamental-ngx/issues/8696)) ([810eeeb](https://github.com/SAP/fundamental-ngx/commit/810eeeb240ac4e7fcc731e0baeb0c0b137e6df27))
+
+
+
 ## [0.36.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.8...v0.36.1-rc.9) (2022-09-19)
 
 
