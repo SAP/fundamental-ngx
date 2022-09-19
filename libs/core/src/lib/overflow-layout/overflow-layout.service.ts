@@ -168,7 +168,7 @@ export class OverflowLayoutService implements OnDestroy {
         this._emitResult();
         const containerWidth = this._elRef.nativeElement.getBoundingClientRect().width;
         const itemsContainerWidth = allItems.reduce(
-            (total, item) => total + this._getElementWidth(item.elementRef.nativeElement),
+            (total, item) => total + this._getElementWidth(item.elementRef.nativeElement) || 0,
             0
         );
 
