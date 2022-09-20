@@ -36,7 +36,7 @@ let timePickerCounter = 0;
     selector: 'fd-time-picker',
     templateUrl: './time-picker.component.html',
     host: {
-        '(blur)': 'onTouched()',
+        '(focusout)': 'onTouched()',
         class: 'fd-time-picker fd-timepicker-custom'
     },
     providers: [

@@ -53,7 +53,7 @@ export class StepInputControlDirective {
      * @hidden
      * Handle "blur" event
      */
-    @HostListener('blur')
+    @HostListener('focusout')
     onBlur(): void {
         this.stepInput.onBlur();
     }

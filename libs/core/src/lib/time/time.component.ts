@@ -41,7 +41,7 @@ type MeridianViewItem = SelectableViewItem<Meridian>;
     templateUrl: './time.component.html',
     styleUrls: ['./time.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(focusout)': 'onTouched()'
     },
     providers: [
         {

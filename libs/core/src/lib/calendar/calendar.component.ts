@@ -78,7 +78,7 @@ let calendarUniqueId = 0;
         })
     ],
     host: {
-        '(blur)': 'onTouched()',
+        '(focusout)': 'onTouched()',
         '[attr.id]': 'id',
         class: 'fd-calendar fd-has-display-block'
     },
@@ -425,7 +425,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this.selectedDate = date;
         this._setNavigationButtonsStates();
         this.onChange(date);
-        this.onTouched();
         this.selectedDateChange.emit(date);
         this.closeCalendar.emit();
     }
@@ -439,7 +438,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
             this.selectedRangeDate = { start: dates.start, end: dates.end ? dates.end : dates.start };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
             this.onChange(this.selectedRangeDate);
-            this.onTouched();
             this.closeCalendar.emit();
         }
     }
@@ -460,7 +458,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
                 this.displayNextYearsList();
                 break;
         }
-        this.onTouched();
         this._setNavigationButtonsStates();
     }
 
@@ -480,7 +477,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
                 this.displayPreviousYearsList();
                 break;
         }
-        this.onTouched();
         this._setNavigationButtonsStates();
     }
 

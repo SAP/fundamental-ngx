@@ -166,7 +166,7 @@ export class SplitterResizerComponent implements OnDestroy {
     }
 
     /** @hidden */
-    @HostListener('blur')
+    @HostListener('focusout')
     _onBlur(): void {
         this._isInFocus = false;
 

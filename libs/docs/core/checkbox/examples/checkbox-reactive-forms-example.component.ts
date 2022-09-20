@@ -21,7 +21,10 @@ import { map } from 'rxjs/operators';
 
         <br />
 
-        Form value: {{ registrationForm.getRawValue() | json }}
+        Form value: {{ registrationForm.getRawValue() | json }}<br />
+        Touched: {{ registrationForm.touched }}<br />
+        Dirty: {{ registrationForm.dirty }}<br />
+        Valid: {{ registrationForm.valid }}<br />
     `
 })
 export class CheckboxReactiveFormsExampleComponent implements OnInit {

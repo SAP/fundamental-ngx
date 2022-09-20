@@ -19,7 +19,7 @@
             [disabled]="!canDecrement"
             [title]="decrementButtonTitle || ('coreStepInput.decrementButtonTitle' | fdTranslate)"
             [glyph]="decrementButtonIcon"
-            (click)="onTouched()"
+            (blur)="onTouched()"
             [attr.aria-label]="decrementButtonTitle || ('coreStepInput.decrementButtonTitle' | fdTranslate)"
             [attr.aria-controls]="inputId"
         ></button>
@@ -62,7 +62,7 @@
             [disabled]="!canIncrement"
             [title]="incrementButtonTitle || ('coreStepInput.incrementButtonTitle' | fdTranslate)"
             [glyph]="incrementButtonIcon"
-            (click)="onTouched()"
+            (blur)="onTouched()"
             [attr.aria-label]="incrementButtonTitle || ('coreStepInput.incrementButtonTitle' | fdTranslate)"
             [attr.aria-controls]="inputId"
         ></button>

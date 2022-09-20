@@ -40,10 +40,7 @@ import { FormFieldControl, BaseInput, FormField } from '@fundamental-ngx/platfor
     templateUrl: './date-picker.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FormFieldControl, useExisting: PlatformDatePickerComponent, multi: true }],
-    host: {
-        '(blur)': 'onTouched()'
-    }
+    providers: [{ provide: FormFieldControl, useExisting: PlatformDatePickerComponent, multi: true }]
 })
 export class PlatformDatePickerComponent<D> extends BaseInput {
     /**

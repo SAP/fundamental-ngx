@@ -5,6 +5,7 @@ import {
     DoCheck,
     ElementRef,
     Host,
+    HostListener,
     Input,
     isDevMode,
     OnDestroy,
@@ -344,5 +345,11 @@ export abstract class BaseInput
 
     protected getValue(): any {
         return this._value;
+    }
+
+    /** @hidden */
+    @HostListener('focusout')
+    _onBlur(): void {
+        this.onTouched();
     }
 }

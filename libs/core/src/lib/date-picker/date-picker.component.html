@@ -39,7 +39,7 @@
                 [ngModel]="_inputFieldDate"
                 (keyup.enter)="handleInputChange($any($event.target).value, false)"
                 (ngModelChange)="handleInputChange($event, true)"
-                (blur)="handleInputChange($any($event.target).value, false)"
+                (blur)="onTouched(); handleInputChange($any($event.target).value, false)"
             />
         </fd-input-group>
     </fd-popover-control>

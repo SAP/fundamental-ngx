@@ -38,7 +38,8 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
     templateUrl: './segmented-button.component.html',
     styleUrls: ['./segmented-button.component.scss'],
     host: {
-        role: 'group'
+        role: 'group',
+        '(focusout)': 'onTouched()'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

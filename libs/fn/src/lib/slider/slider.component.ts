@@ -49,7 +49,8 @@ let sliderId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [SLIDER_VALUE_ACCESSOR],
     host: {
-        class: 'fn-slider'
+        class: 'fn-slider',
+        '(focusout)': 'onTouched()'
     }
 })
 export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
@@ -205,7 +206,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         this._value = value;
 
         this.onChange(value);
-        this.onTouched();
     }
 
     /** @hidden */

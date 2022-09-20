@@ -60,7 +60,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     templateUrl: './multi-input.component.html',
     styleUrls: ['./multi-input.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(focusout)': 'onTouched()'
     },
     providers: [
         {

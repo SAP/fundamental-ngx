@@ -42,6 +42,9 @@ export type InputState = 'positive' | 'critical' | 'negative' | 'info';
             useExisting: SelectComponent
         }
     ],
+    host: {
+        '(focusout)': 'onTouched()'
+    },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -161,7 +164,6 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     /** Function called when the select input is clicked. */
     selectInputClicked(event: MouseEvent | KeyboardEvent): void {
         event.preventDefault();
-        this.onTouched();
         this.selectInput.nativeElement.focus();
         this.opened = !this.opened;
     }

@@ -54,7 +54,7 @@ let datePickerCounter = 0;
     templateUrl: './date-picker.component.html',
     styleUrls: ['./date-picker.component.scss'],
     host: {
-        '(blur)': 'onTouched()',
+        '(focusout)': 'onTouched()',
         '[class.fd-date-picker]': 'true',
         '[class.fd-date-picker-custom]': 'inline'
     },
@@ -487,7 +487,6 @@ export class DatePickerComponent<D>
     /** Opens the calendar */
     openCalendar(): void {
         if (!this.disabled) {
-            this.onTouched();
             this.isOpen = true;
             this.isOpenChange.emit(this.isOpen);
             this._changeMessageVisibility();
@@ -496,9 +495,11 @@ export class DatePickerComponent<D>
 
     /** Toggles the calendar open or closed */
     public toggleCalendar(): void {
-        this.onTouched();
         this.isOpen = !this.isOpen;
         this.isOpenChange.emit(this.isOpen);
+        if (!this.isOpen) {
+            this.onTouched();
+        }
         this._changeMessageVisibility();
     }
 

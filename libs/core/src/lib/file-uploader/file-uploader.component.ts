@@ -34,7 +34,7 @@ let fileUploaderInputUniqueId = 0;
     templateUrl: './file-uploader.component.html',
     styleUrls: ['./file-uploader.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(focusout)': 'onTouched()'
     },
     providers: [
         {

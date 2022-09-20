@@ -37,7 +37,8 @@ let switchUniqueId = 0;
     ],
     host: {
         class: 'fn-form__item fn-form__item--check fn-switch-custom',
-        '[attr.id]': 'id'
+        '[attr.id]': 'id',
+        '(focusout)': 'onTouched()'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -167,7 +168,6 @@ export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy 
     set isChecked(value) {
         this.checked = value;
         this.onChange(value);
-        this.onTouched();
         this.checkedChange.emit(value);
     }
 

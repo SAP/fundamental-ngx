@@ -58,7 +58,7 @@ export class AutoCompleteDirective {
     constructor(private readonly _elementRef: ElementRef<HTMLInputElement>) {}
 
     /** @hidden */
-    @HostListener('blur')
+    @HostListener('focusout')
     handleBlur(): void {
         if (Boolean(this.inputText) && !this.mobile) {
             this._element.value = this.inputText;

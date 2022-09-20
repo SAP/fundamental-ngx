@@ -167,13 +167,13 @@ describe('StepInputComponent', () => {
         component.handleFocusIn();
 
         expect(component.focused).toBeTrue();
-        expect(onTouchedSpy).toHaveBeenCalled();
         expect(focusInEventSpy).toHaveBeenCalled();
 
         component.handleFocusOut();
 
         expect(component.focused).toBeFalse();
         expect(focusOutEventSpy).toHaveBeenCalled();
+        expect(onTouchedSpy).toHaveBeenCalled();
     });
 
     it('should display in compact mode', async () => {
