@@ -46,7 +46,7 @@ import {
     SliderValueTargets
 } from './slider.model';
 import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
-import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, KeyUtil, resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import {
     ContentDensityMode,
@@ -368,7 +368,7 @@ export class SliderComponent
         private readonly _liveAnnouncer: LiveAnnouncer,
         @Optional() private readonly _rtlService: RtlService,
         readonly _contentDensityObserver: ContentDensityObserver,
-        private readonly _skeletonConsumer: SkeletonConsumerDirective
+        readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {
         _contentDensityObserver.subscribe();
         _skeletonConsumer.consume();
@@ -377,8 +377,6 @@ export class SliderComponent
     /** @hidden */
     ngOnInit(): void {
         this._subscribeToRtl();
-        this._attachResizeListener();
-        this._onResize();
 
         if (this._valuesBySteps.length === 0) {
             this._constructValuesBySteps();
@@ -399,6 +397,8 @@ export class SliderComponent
     /** @hidden */
     ngAfterViewInit(): void {
         this._listenToInteractionChanges();
+        this._attachResizeListener();
+        this._onResize();
     }
 
     /** @hidden */
@@ -715,15 +715,15 @@ export class SliderComponent
 
     /** @hidden */
     private _attachResizeListener(): void {
-        fromEvent(window, 'resize')
-            .pipe(debounceTime(500), takeUntil(this._onDestroy$))
+        resizeObservable(this._elementRef.nativeElement)
+            .pipe(debounceTime(100), takeUntil(this._onDestroy$))
             .subscribe(() => this._onResize());
     }
 
     /** @hidden */
     private _onResize(): void {
         this._constructTickMarks();
-        this._cdr.markForCheck();
+        this._cdr.detectChanges();
     }
 
     /** @hidden */
