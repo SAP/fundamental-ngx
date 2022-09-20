@@ -10,26 +10,38 @@
         [gridMode]="!_isListMode()"
         (itemDropped)="_productSwitchItemsChangeHandle($event)"
     >
-        <li
-            fd-dnd-item
-            *ngFor="let product of products"
-            tabindex="0"
-            class="fd-product-switch__item"
-            [class.selected]="product.selected"
-            (keydown)="_keyDownHandle($event)"
-            (click)="_itemClick(product, $event)"
-            [draggable]="!product.disabledDragAndDrop && dragAndDropEnabled"
-            [stickInPlace]="!!product.stickToPosition"
-        >
-            <i
-                role="presentation"
-                class="fd-product-switch__icon"
-                [class]="product.icon ? 'sap-icon--' + product.icon : ''"
-            ></i>
-            <div class="fd-product-switch__text">
-                <div class="fd-product-switch__title">{{ product.title }}</div>
-                <div *ngIf="product.subtitle" class="fd-product-switch__subtitle">{{ product.subtitle }}</div>
-            </div>
-        </li>
+        <ng-container *fdSkeletonTemplate="skeletonTemplate">
+            <li
+                fd-dnd-item
+                *ngFor="let product of products"
+                fdSkeletonConsumer
+                tabindex="0"
+                class="fd-product-switch__item"
+                [class.selected]="product.selected"
+                (keydown)="_keyDownHandle($event)"
+                (click)="_itemClick(product, $event)"
+                [draggable]="!product.disabledDragAndDrop && dragAndDropEnabled"
+                [stickInPlace]="!!product.stickToPosition"
+            >
+                <i
+                    role="presentation"
+                    class="fd-product-switch__icon"
+                    [class]="product.icon ? 'sap-icon--' + product.icon : ''"
+                ></i>
+                <div class="fd-product-switch__text">
+                    <div class="fd-product-switch__title">{{ product.title }}</div>
+                    <div *ngIf="product.subtitle" class="fd-product-switch__subtitle">{{ product.subtitle }}</div>
+                </div>
+            </li>
+        </ng-container>
+
+        <ng-template #skeletonTemplate>
+            <li *fdRepeat="3" class="fd-product-switch__item">
+                <fd-skeleton
+                    [width]="_isListMode() ? '40%' : '7rem'"
+                    [height]="_isListMode() ? '100%' : '7rem'"
+                ></fd-skeleton>
+            </li>
+        </ng-template>
     </ul>
 </div>

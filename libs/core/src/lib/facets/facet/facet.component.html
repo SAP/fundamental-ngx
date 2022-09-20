@@ -1,25 +1,41 @@
-<ng-container *ngIf="type === 'image'">
-    <ng-container *ngTemplateOutlet="customContentTemplate"></ng-container>
-</ng-container>
-
-<ng-container *ngIf="type !== 'image'">
-    <h1 *ngIf="facetTitle" fd-title [headerSize]="5" class="fd-margin-bottom--sm" [id]="titleId">{{ facetTitle }}</h1>
-    <ng-container *ngIf="type === 'form'">
-        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
-    </ng-container>
-    <ng-container *ngIf="type === 'key-value' || 'custom'">
+<ng-container *fdSkeletonTemplate="skeletonTemplate">
+    <ng-container *ngIf="type === 'image'">
         <ng-container *ngTemplateOutlet="customContentTemplate"></ng-container>
     </ng-container>
-    <ng-container *ngIf="type === 'rating-indicator'">
-        <span fd-form-label>{{ subtitle }}</span>
-        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+
+    <ng-container *ngIf="type !== 'image'">
+        <h1 *ngIf="facetTitle" fd-title [headerSize]="5" class="fd-margin-bottom--sm" [id]="titleId">
+            {{ facetTitle }}
+        </h1>
+
+        <ng-container *ngIf="type === 'form'">
+            <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="type === 'key-value' || 'custom'">
+            <ng-container *ngTemplateOutlet="customContentTemplate"></ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="type === 'rating-indicator'">
+            <span fd-form-label>{{ subtitle }}</span>
+
+            <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+        </ng-container>
     </ng-container>
+
+    <ng-template #contentTemplate>
+        <ng-content select="fd-facet-content"></ng-content>
+    </ng-template>
+
+    <ng-template #customContentTemplate>
+        <ng-content></ng-content>
+    </ng-template>
 </ng-container>
 
-<ng-template #contentTemplate>
-    <ng-content select="fd-facet-content"></ng-content>
-</ng-template>
-
-<ng-template #customContentTemplate>
-    <ng-content></ng-content>
+<ng-template #skeletonTemplate>
+    <ng-container *fdSkeletonState="false">
+        <fd-facet type="form" *fdRepeat="3">
+            <fd-skeleton width="5rem" height="1rem"></fd-skeleton>
+        </fd-facet>
+    </ng-container>
 </ng-template>

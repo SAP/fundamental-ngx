@@ -6,13 +6,13 @@
 
         <fd-dialog-body>
             <div class="fd-container fd-form-layout-grid-container fd-form-layout-grid-container--vertical">
-                <div class="fd-row">
+                <div class="fd-row" fd-form-item>
                     <div class="fd-col">
-                        <label class="fd-form-label" for="input-2224-name">Name:</label>
+                        <label fd-form-label for="input-2224-name">Name:</label>
                     </div>
                     <div class="fd-col">
                         <input
-                            class="fd-input"
+                            fd-form-control
                             type="text"
                             id="input-2224-name"
                             placeholder="Enter First and Last Name"
@@ -20,17 +20,15 @@
                         />
                     </div>
                 </div>
-                <div class="fd-row">
+                <div class="fd-row" fd-form-item>
                     <div class="fd-col">
-                        <label class="fd-form-label fd-form-label--required" for="input-2334-street"
-                            >Street/No.:
-                        </label>
+                        <label fd-form-label [required]="true" for="input-2334-street">Street/No.: </label>
                     </div>
                     <div class="fd-col">
                         <div class="fd-row">
                             <div class="fd-col fd-col--4">
                                 <input
-                                    class="fd-input"
+                                    fd-form-control
                                     type="text"
                                     id="input-2334-street"
                                     placeholder="Enter address"
@@ -39,7 +37,7 @@
                             </div>
                             <div class="fd-col fd-col--8">
                                 <input
-                                    class="fd-input"
+                                    fd-form-control
                                     type="text"
                                     id="input-2334-number"
                                     aria-label="Street Number"
@@ -50,17 +48,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="fd-row">
+                <div class="fd-row" fd-form-item>
                     <div class="fd-col">
-                        <label class="fd-form-label fd-form-label--required" for="input-2334-zip"
-                            >ZIP Code/City:
-                        </label>
+                        <label fd-form-label [required]="true" for="input-2334-zip">ZIP Code/City: </label>
                     </div>
                     <div class="fd-col">
                         <div class="fd-row">
                             <div class="fd-col fd-col--8">
                                 <input
-                                    class="fd-input"
+                                    fd-form-control
                                     type="text"
                                     id="input-2334-zip"
                                     placeholder="Enter ZIP Code"
@@ -69,7 +65,7 @@
                             </div>
                             <div class="fd-col fd-col--4">
                                 <input
-                                    class="fd-input"
+                                    fd-form-control
                                     type="text"
                                     id="input-2334-city"
                                     placeholder="Enter City"
@@ -80,12 +76,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="fd-row">
+                <div class="fd-row" fd-form-item>
                     <div class="fd-col">
-                        <label class="fd-form-label" for="text-2434-name">Bio:</label>
+                        <label fd-form-label for="text-2434-name">Bio:</label>
                     </div>
                     <div class="fd-col">
-                        <textarea class="fd-textarea" id="text-2434-name">textarea</textarea>
+                        <textarea fd-form-control id="text-2434-name">textarea</textarea>
                     </div>
                 </div>
             </div>
@@ -101,6 +97,7 @@
             ></fd-button-bar>
 
             <fd-button-bar
+                *fdSkeletonState="false"
                 fdInitialFocus
                 label="Cancel"
                 fdCompact
@@ -114,5 +111,5 @@
 <fd-checkbox [(ngModel)]="responsivePadding" label="Responsive Padding"></fd-checkbox>
 <fd-checkbox [(ngModel)]="verticalPadding" label="Vertical Padding"></fd-checkbox>
 
-<button fd-button label="Open from Template" (click)="openDialog(confirmationDialog)"></button>
+<button fd-button label="Open from Template" (click)="openDialog(confirmationDialog)" *fdSkeletonState="false"></button>
 <p>{{ confirmationReason }}</p>

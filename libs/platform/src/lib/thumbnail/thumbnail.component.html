@@ -1,43 +1,60 @@
 <div class="fdp-thumbnail-container" [class.fdp-thumbnail-container--horizontal]="isHorizontal">
-    <fdp-thumbnail-image
-        *ngIf="!isHorizontal"
-        [thumbnailId]="thumbnailId"
-        [mediaList]="mediaList"
-        [maxImages]="maxImagesDisplay"
-        [isHorizontal]="isHorizontal"
-        (thumbnailClicked)="thumbnailClickHandle($event)"
-        (openDetailsDialog)="openDialog($event)"
-    ></fdp-thumbnail-image>
-    <div class="fdp-media-container">
-        <img
-            tabindex="0"
-            *ngIf="selectedMedia.mediaType === 'image'"
-            [attr.title]="selectedMedia.label"
-            [attr.aria-label]="selectedMedia.label"
-            [attr.src]="selectedMedia.mediaUrl"
-            [attr.alt]="selectedMedia.alt"
-            (click)="openDialog()"
-            (keydown.space)="openDialog()"
-        />
-        <video
-            tabindex="0"
-            *ngIf="selectedMedia.mediaType === 'video'"
-            [src]="selectedMedia.mediaUrl"
-            (click)="openDialog()"
-            (keydown.space)="openDialog()"
-            [attr.aria-label]="selectedMedia.label"
-        >
-            {{ selectedMedia.alt }}
-            <track [src]="selectedMedia.captionFile" kind="captions" srclang="en" [label]="selectedMedia.label" />
-            <track [src]="selectedMedia.audioDescFile" kind="descriptions" srclang="en" [label]="selectedMedia.label" />
-        </video>
-    </div>
-    <fdp-thumbnail-image
-        *ngIf="isHorizontal"
-        [mediaList]="mediaList"
-        [maxImages]="maxImagesDisplay"
-        [isHorizontal]="isHorizontal"
-        (thumbnailClicked)="thumbnailClickHandle($event)"
-        (openDetailsDialog)="openDialog($event)"
-    ></fdp-thumbnail-image>
+    <ng-container *fdSkeletonTemplate="skeletonThumbnailImage">
+        <fdp-thumbnail-image
+            *ngIf="!isHorizontal"
+            [thumbnailId]="thumbnailId"
+            [mediaList]="mediaList"
+            [maxImages]="maxImagesDisplay"
+            [isHorizontal]="isHorizontal"
+            (thumbnailClicked)="thumbnailClickHandle($event)"
+            (openDetailsDialog)="openDialog($event)"
+        ></fdp-thumbnail-image>
+
+        <div class="fdp-media-container">
+            <img
+                tabindex="0"
+                *ngIf="selectedMedia.mediaType === 'image'"
+                [attr.title]="selectedMedia.label"
+                [attr.aria-label]="selectedMedia.label"
+                [attr.src]="selectedMedia.mediaUrl"
+                [attr.alt]="selectedMedia.alt"
+                (click)="openDialog()"
+                (keydown.space)="openDialog()"
+            />
+            <video
+                tabindex="0"
+                *ngIf="selectedMedia.mediaType === 'video'"
+                [src]="selectedMedia.mediaUrl"
+                (click)="openDialog()"
+                (keydown.space)="openDialog()"
+                [attr.aria-label]="selectedMedia.label"
+            >
+                {{ selectedMedia.alt }}
+                <track [src]="selectedMedia.captionFile" kind="captions" srclang="en" [label]="selectedMedia.label" />
+                <track
+                    [src]="selectedMedia.audioDescFile"
+                    kind="descriptions"
+                    srclang="en"
+                    [label]="selectedMedia.label"
+                />
+            </video>
+        </div>
+
+        <fdp-thumbnail-image
+            *ngIf="isHorizontal"
+            [mediaList]="mediaList"
+            [maxImages]="maxImagesDisplay"
+            [isHorizontal]="isHorizontal"
+            (thumbnailClicked)="thumbnailClickHandle($event)"
+            (openDetailsDialog)="openDialog($event)"
+        ></fdp-thumbnail-image>
+    </ng-container>
+
+    <ng-template #skeletonThumbnailImage>
+        <fd-skeleton width="5rem" height="5rem"></fd-skeleton>
+
+        <div class="fdp-media-container">
+            <fd-skeleton height="100%"></fd-skeleton>
+        </div>
+    </ng-template>
 </div>

@@ -15,12 +15,9 @@
 
 // the default style display:inline-block is restricting/shrinking the width, therefore we are overriding it to take flex width.
 fdp-input-message-group {
-    .fd-popover-custom {
-        display: inline;
-    }
-
+    &,
     .fd-datetime {
-        .fd-popover-custom {
+        .fd-form-input-message-group.fd-popover-custom {
             display: inline-block;
         }
     }

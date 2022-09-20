@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { IllustratedMessageComponent } from './illustrated-message.component';
 import { IllustratedMessageActionsComponent } from './components/illustrated-message-actions/illustrated-message-actions.component';
 // eslint-disable-next-line max-len
@@ -16,7 +17,7 @@ import { IllustratedMessageTitleDirective } from './directives/illustrated-messa
         IllustratedMessageTextDirective,
         IllustratedMessageTitleDirective
     ],
-    imports: [CommonModule],
+    imports: [CommonModule, SkeletonModule],
     exports: [
         IllustratedMessageComponent,
         IllustratedMessageActionsComponent,

@@ -14,6 +14,7 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 @Component({
     selector: 'fd-object-identifier',
@@ -21,13 +22,15 @@ import { Nullable } from '@fundamental-ngx/core/shared';
         <p class="fd-object-identifier__title" [class.fd-object-identifier__title--bold]="bold">
             <ng-content></ng-content>
         </p>
+
         <p class="fd-object-identifier__text" *ngIf="description">
             {{ description }}
         </p>
     `,
     styleUrls: ['./object-identifier.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: skeletonConsumerProviders()
 })
 export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
     /** Description text */
@@ -53,7 +56,13 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+    /** @hidden */
+    constructor(
+        private _changeDetectorRef: ChangeDetectorRef,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {

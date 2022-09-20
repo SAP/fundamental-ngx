@@ -1,20 +1,36 @@
-<div class="fd-icon-tab-bar" [class]="_cssClassForContainer">
-    <ng-container *ngIf="iconTabType === 'text'">
-        <ng-container *ngTemplateOutlet="textType"></ng-container>
-    </ng-container>
+<ng-container *fdSkeletonTemplate="skeletonTemplate">
+    <div class="fd-icon-tab-bar" [class]="_cssClassForContainer">
+        <ng-container *ngIf="iconTabType === 'text'">
+            <ng-container *ngTemplateOutlet="textType"></ng-container>
+        </ng-container>
 
-    <ng-container *ngIf="iconTabType === 'icon' || iconTabType === 'icon-only'">
-        <ng-container *ngTemplateOutlet="iconType"></ng-container>
-    </ng-container>
+        <ng-container *ngIf="iconTabType === 'icon' || iconTabType === 'icon-only'">
+            <ng-container *ngTemplateOutlet="iconType"></ng-container>
+        </ng-container>
 
-    <ng-container *ngIf="iconTabType === 'filter'">
-        <ng-container *ngTemplateOutlet="filterType"></ng-container>
-    </ng-container>
+        <ng-container *ngIf="iconTabType === 'filter'">
+            <ng-container *ngTemplateOutlet="filterType"></ng-container>
+        </ng-container>
 
-    <ng-container *ngIf="iconTabType === 'process'">
-        <ng-container *ngTemplateOutlet="processType"></ng-container>
-    </ng-container>
-</div>
+        <ng-container *ngIf="iconTabType === 'process'">
+            <ng-container *ngTemplateOutlet="processType"></ng-container>
+        </ng-container>
+    </div>
+</ng-container>
+
+<ng-template #skeletonTemplate>
+    <div class="fd-icon-tab-bar">
+        <ul class="fd-icon-tab-bar__header">
+            <li *fdRepeat="3" class="fd-icon-tab-bar__item">
+                <span class="fd-icon-tab-bar__tab">
+                    <span class="fd-icon-tab-bar__tag">
+                        <fd-skeleton width="5rem" height="1rem"></fd-skeleton>
+                    </span>
+                </span>
+            </li>
+        </ul>
+    </div>
+</ng-template>
 
 <ng-template #processType>
     <fdp-icon-tab-bar-process-type

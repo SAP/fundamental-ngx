@@ -1,12 +1,31 @@
-<div class="fd-message-page__container">
-    <div *ngIf="hasIcon" class="fd-message-page__icon-container">
-        <i role="presentation" class="fd-message-page__icon" [class]="'sap-icon--' + glyph"></i>
+<ng-container *fdSkeletonTemplate="skeletonTemplate">
+    <div class="fd-message-page__container">
+        <div *ngIf="hasIcon" class="fd-message-page__icon-container">
+            <i role="presentation" class="fd-message-page__icon" [class]="'sap-icon--' + glyph" fdSkeletonConsumer></i>
+        </div>
+        <div role="status" aria-live="polite" class="fd-message-page__content">
+            <ng-content select="fd-message-page-title"></ng-content>
+            <ng-content select="fd-message-page-subtitle"></ng-content>
+            <ng-content select="fd-message-page-actions"></ng-content>
+            <ng-content select="fd-message-page-more"></ng-content>
+            <ng-content></ng-content>
+        </div>
     </div>
-    <div role="status" aria-live="polite" class="fd-message-page__content">
-        <ng-content select="fd-message-page-title"></ng-content>
-        <ng-content select="fd-message-page-subtitle"></ng-content>
-        <ng-content select="fd-message-page-actions"></ng-content>
-        <ng-content select="fd-message-page-more"></ng-content>
-        <ng-content></ng-content>
+</ng-container>
+
+<ng-template #skeletonTemplate>
+    <div class="fd-message-page__container">
+        <div *ngIf="hasIcon" class="fd-message-page__icon-container">
+            <fd-skeleton width="5rem" height="5rem"></fd-skeleton>
+        </div>
+
+        <div role="status" aria-live="polite" class="fd-message-page__content">
+            <fd-message-page-title>
+                <fd-skeleton width="10rem" height="1rem"></fd-skeleton>
+            </fd-message-page-title>
+            <fd-message-page-subtitle>
+                <fd-skeleton width="5rem" height="1rem"></fd-skeleton>
+            </fd-message-page-subtitle>
+        </div>
     </div>
-</div>
+</ng-template>

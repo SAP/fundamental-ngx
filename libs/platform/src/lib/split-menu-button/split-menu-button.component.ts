@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 
 import { ButtonType } from '@fundamental-ngx/core/button';
 import { RtlService } from '@fundamental-ngx/core/utils';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { MenuComponent } from '@fundamental-ngx/platform/menu';
 
@@ -33,7 +34,8 @@ import { MenuComponent } from '@fundamental-ngx/platform/menu';
     selector: 'fdp-split-menu-button',
     templateUrl: './split-menu-button.component.html',
     styleUrls: ['split-menu-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: skeletonConsumerProviders()
 })
 export class SplitMenuButtonComponent extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
     /** Whether or not the element should keep a fixed width. The width could change if the text changes length. */
@@ -96,8 +98,15 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
         return this.type ? `fd-button-split--${this.type}` : '';
     }
 
-    constructor(protected _cd: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {
+    /** @hidden */
+    constructor(
+        protected _cd: ChangeDetectorRef,
+        @Optional() private _rtlService: RtlService,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
         super(_cd);
+
+        _skeletonConsumer.consume();
     }
 
     // tabindex for button.

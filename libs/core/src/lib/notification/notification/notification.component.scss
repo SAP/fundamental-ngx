@@ -4,6 +4,10 @@
     display: block;
 }
 
+.fd-notification__title {
+    flex-grow: 1;
+}
+
 // To be removed with the new fund-styles release
 .fd-notification--group .fd-notification__body:last-child {
     border-bottom: var(--sapList_BorderWidth) solid var(--sapList_BorderColor);

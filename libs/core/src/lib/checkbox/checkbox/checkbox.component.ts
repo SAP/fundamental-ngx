@@ -20,6 +20,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FD_CHECKBOX_VALUES_DEFAULT, FdCheckboxValues } from './fd-checkbox-values.interface';
 import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/core/utils';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 import equal from 'fast-deep-equal';
 import { Subscription } from 'rxjs';
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
@@ -47,7 +48,8 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
             multi: true
         },
         registerFormItemControl(CheckboxComponent),
-        contentDensityObserverProviders()
+        contentDensityObserverProviders(),
+        skeletonConsumerProviders()
     ],
     host: { '[attr.tabindex]': '-1' }
 })
@@ -175,9 +177,12 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
         private _changeDetectorRef: ChangeDetectorRef,
         private renderer: Renderer2,
         readonly _contentDensityObserver: ContentDensityObserver,
-        @Optional() @Inject(LIST_ITEM_COMPONENT) private _listItemComponent: ListItemInterface
+        @Optional() @Inject(LIST_ITEM_COMPONENT) private _listItemComponent: ListItemInterface,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {
         this.tabIndexValue = tabIndexValue;
+
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

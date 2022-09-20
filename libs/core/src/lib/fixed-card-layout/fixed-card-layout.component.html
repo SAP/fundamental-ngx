@@ -8,8 +8,8 @@
     orientation="horizontal"
     [customMoveFn]="_customMoveFn"
     [customTransferFn]="_customTransferFn"
-    [disableKeyboardDragDrop]="disableDragDrop"
-    [cdkDropListGroupDisabled]="disableDragDrop"
+    [disableKeyboardDragDrop]="disableDragDrop || _skeletonConsumer.skeletonState"
+    [cdkDropListGroupDisabled]="disableDragDrop || _skeletonConsumer.skeletonState"
     [attr.dir]="_dir"
 >
     <div

@@ -9,20 +9,26 @@ import {
 } from '@angular/core';
 import { applyCssClass } from '@fundamental-ngx/core/utils';
 import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-object-marker]',
-    template: ` <i class="fd-object-marker__icon" [class]="' sap-icon--' + glyph" *ngIf="glyph"></i>
+    template: `
+        <i class="fd-object-marker__icon" [class]="' sap-icon--' + glyph" *ngIf="glyph"></i>
+
         <span *ngIf="label" class="fd-object-marker__text">{{ label }}</span>
-        <ng-content></ng-content>`,
+
+        <ng-content></ng-content>
+    `,
     styleUrls: ['./object-marker.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.tabindex]': 'clickable ? 0 : -1',
         '[attr.role]': 'clickable ? "link" :""'
-    }
+    },
+    providers: skeletonConsumerProviders()
 })
 export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
@@ -42,7 +48,12 @@ export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder
     label: string;
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef) {}
+    constructor(
+        private readonly _elementRef: ElementRef,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     @applyCssClass
     /** CssClassBuilder interface implementation

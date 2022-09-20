@@ -14,6 +14,7 @@ import { PopoverService } from '@fundamental-ngx/core/popover';
 import { BasePopoverClass } from '@fundamental-ngx/core/popover';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 const INLINE_HELP_CLASS = 'fd-popover__inline-help fd-inline-help__content';
 const INLINE_HELP_ICON_CLASS = 'fd-popover__inline-help--icon';
@@ -25,7 +26,7 @@ const INLINE_HELP_ICON_CLASS = 'fd-popover__inline-help--icon';
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-inline-help], [fd-inline-help-template]',
-    providers: [PopoverService],
+    providers: [PopoverService, skeletonConsumerProviders()],
     host: {
         '[class.fd-inline-help__trigger]': 'true'
     }
@@ -59,9 +60,12 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     constructor(
         private _popoverService: PopoverService,
         private _elementRef: ElementRef,
-        @Optional() @Self() private _icon: IconComponent
+        @Optional() @Self() private _icon: IconComponent,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {
         super();
+
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

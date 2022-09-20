@@ -5,6 +5,8 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { ListModule } from '@fundamental-ngx/core/list';
 
 import { CardComponent } from './card.component';
 import { CardHeaderComponent } from './card-header.component';
@@ -49,7 +51,15 @@ const components = [
 
 @NgModule({
     declarations: [...components],
-    imports: [CommonModule, ButtonModule, AvatarModule, ObjectStatusModule, ContentDensityModule],
+    imports: [
+        CommonModule,
+        ButtonModule,
+        AvatarModule,
+        ObjectStatusModule,
+        ContentDensityModule,
+        SkeletonModule,
+        ListModule
+    ],
     exports: [ButtonModule, AvatarModule, ...components, ContentDensityModule]
 })
 export class CardModule {}

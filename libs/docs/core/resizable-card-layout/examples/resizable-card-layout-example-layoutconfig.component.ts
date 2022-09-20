@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
     ResizableCardItemConfig,
     ResizableCardLayoutConfig,
@@ -11,8 +11,11 @@ import {
     styleUrls: ['./resizable-card-layout-example.component.scss']
 })
 export class ResizableCardLayoutExampleLayoutConfigComponent implements OnInit {
+    @ViewChild('overlay')
+    overlay: ElementRef<HTMLElement>;
+
+    fullscreen = false;
     layoutConfig: ResizableCardLayoutConfig;
-    visible = false;
     pageTitle = 'Balenciaga Tripple S Trainers';
     initialRows = 3;
 
@@ -95,12 +98,14 @@ export class ResizableCardLayoutExampleLayoutConfigComponent implements OnInit {
     }
 
     openPage(): void {
-        this.visible = true;
+        this.fullscreen = true;
+        this.overlay.nativeElement.style.width = '100%';
         this._initialData();
     }
 
     closePage(): void {
-        this.visible = false;
+        this.fullscreen = false;
+        this.overlay.nativeElement.style.width = '0%';
     }
 
     onStepChange(event: ResizedEvent): void {

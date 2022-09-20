@@ -1,0 +1,37 @@
+<p>Types</p>
+
+<fd-skeleton width="100px" height="50px"></fd-skeleton>
+
+<fd-skeleton type="circle" width="50px" height="50px"></fd-skeleton>
+
+<!-- When no content & height is specified, the skeleton will be displayed as a line with height set to the font-size property. -->
+<fd-skeleton width="30%"></fd-skeleton>
+
+<p>No animation</p>
+
+<fd-skeleton width="100px" height="50px" [animation]="false"></fd-skeleton>
+
+<fd-skeleton type="circle" height="50px" width="50px" [animation]="false"></fd-skeleton>
+
+<!-- When no content & height is specified, the skeleton will be displayed as a line with height set to the font-size property. -->
+<fd-skeleton width="30%" [animation]="false"></fd-skeleton>
+
+<p>Inferring dimensions from the parent</p>
+
+<h1>
+    <fd-skeleton></fd-skeleton>
+</h1>
+
+<div style="width: 10rem; height: 2rem">
+    <fd-skeleton></fd-skeleton>
+</div>
+
+<p>Inferring dimensions from children</p>
+
+<fd-skeleton>
+    <h1>Some title...</h1>
+</fd-skeleton>
+
+<fd-skeleton>
+    <div style="width: 10rem; height: 2rem"></div>
+</fd-skeleton>

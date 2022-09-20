@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FormMessageModule } from '@fundamental-ngx/core/form';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { RepeatModule } from '@fundamental-ngx/core/utils';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { FormGeneratorComponentsAccessorService } from './form-generator-components-accessor.service';
 import { FormGeneratorComponent } from './form-generator/form-generator.component';
@@ -80,7 +82,9 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         BusyIndicatorModule,
         PlatformMultiComboboxModule,
         PlatformMultiInputModule,
-        ContentDensityModule
+        ContentDensityModule,
+        SkeletonModule,
+        RepeatModule
     ],
     providers: [
         FormGeneratorService,

@@ -5,7 +5,7 @@ import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-
 @Component({
     selector: 'fdp-platform-dynamic-page-responsive-padding-example',
     templateUrl: './platform-dynamic-page-responsive-padding-example.component.html',
-    styleUrls: ['./platform-dynamic-page-responsive-padding-example.component.scss'],
+    styleUrls: ['./platform-dynamic-page.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformDynamicPageResponsivePaddingExampleComponent implements OnDestroy {

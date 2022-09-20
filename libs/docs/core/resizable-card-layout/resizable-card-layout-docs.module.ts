@@ -20,6 +20,7 @@ import { ResizableCardLayoutDocsComponent } from './resizable-card-layout-docs.c
 import { ResizableCardLayoutExampleComponent } from './examples/resizable-card-layout-example.component';
 import { ResizableCardLayoutExampleLayoutConfigComponent } from './examples/resizable-card-layout-example-layoutconfig.component';
 import { ResizableCardLayoutExampleItemConfigComponent } from './examples/resizable-card-layout-example-itemconfig.component';
+import { TextModule } from '@fundamental-ngx/core/text';
 
 const routes: Routes = [
     {
@@ -45,7 +46,8 @@ const routes: Routes = [
         ListModule,
         SegmentedButtonModule,
         TableModule,
-        ToolbarModule
+        ToolbarModule,
+        TextModule
     ],
     exports: [RouterModule],
     declarations: [

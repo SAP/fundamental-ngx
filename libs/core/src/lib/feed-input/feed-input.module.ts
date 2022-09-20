@@ -7,10 +7,11 @@ import { FormControlModule } from '@fundamental-ngx/core/form';
 import { FeedInputTextareaDirective } from './directives/feed-input-textarea.directive';
 import { FeedInputButtonDirective } from './directives/feed-input-button.directive';
 import { FeedInputAvatarDirective } from './directives/feed-input-avatar.directive';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 @NgModule({
     declarations: [FeedInputComponent, FeedInputTextareaDirective, FeedInputButtonDirective, FeedInputAvatarDirective],
-    imports: [CommonModule, AvatarModule, ButtonModule, FormControlModule],
+    imports: [CommonModule, AvatarModule, ButtonModule, FormControlModule, SkeletonModule],
     exports: [FeedInputComponent, FeedInputTextareaDirective, FeedInputButtonDirective, FeedInputAvatarDirective]
 })
 export class FeedInputModule {}

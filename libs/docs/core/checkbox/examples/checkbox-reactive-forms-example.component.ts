@@ -14,8 +14,14 @@ import { map } from 'rxjs/operators';
             ></fd-checkbox>
             <fieldset formGroupName="agreements">
                 <fd-checkbox formControlName="termsAndConditions" label="I accept Terms and Conditions"></fd-checkbox>
-                <fd-checkbox formControlName="marketing" label="I want to receive Marketing Materials"></fd-checkbox>
-                <fd-checkbox formControlName="newsletter" label="I want want to sign for a Newsletter"></fd-checkbox>
+                <br /><fd-checkbox
+                    formControlName="marketing"
+                    label="I want to receive Marketing Materials"
+                ></fd-checkbox>
+                <br /><fd-checkbox
+                    formControlName="newsletter"
+                    label="I want want to sign for a Newsletter"
+                ></fd-checkbox>
             </fieldset>
         </form>
 

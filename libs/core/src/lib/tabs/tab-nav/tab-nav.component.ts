@@ -30,7 +30,7 @@ import {
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-tab-nav]',
-    template: ` <ng-content></ng-content>`,
+    templateUrl: './tab-nav.component.html',
     providers: [contentDensityObserverProviders({ modifiers: { [ContentDensityMode.COMPACT]: 'fd-tabs--compact' } })],
     styleUrls: ['./tab-nav.component.scss'],
     encapsulation: ViewEncapsulation.None,

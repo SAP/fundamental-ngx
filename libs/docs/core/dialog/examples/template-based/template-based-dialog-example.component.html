@@ -5,7 +5,11 @@
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <p id="fd-dialog-body-10" role="dialog">Are you interested in The Great History of Pineapple?</p>
+            <fd-text
+                id="fd-dialog-body-10"
+                role="dialog"
+                text="Are you interested in The Great History of Pineapple?"
+            ></fd-text>
         </fd-dialog-body>
 
         <fd-dialog-footer fdCompact>
@@ -17,6 +21,7 @@
             ></fd-button-bar>
 
             <fd-button-bar
+                *fdSkeletonState="false"
                 fdInitialFocus
                 label="Cancel"
                 (click)="dialog.dismiss('Cancel')"
@@ -26,5 +31,5 @@
     </fd-dialog>
 </ng-template>
 
-<button fd-button label="Open from Template" (click)="openDialog(confirmationDialog)"></button>
+<button fd-button label="Open from Template" (click)="openDialog(confirmationDialog)" *fdSkeletonState="false"></button>
 <p>{{ confirmationReason }}</p>

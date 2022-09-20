@@ -21,6 +21,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Direction } from '@angular/cdk/bidi';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, merge } from 'rxjs';
 
@@ -58,7 +59,7 @@ class CarouselActiveSlides {
     styleUrls: ['./carousel.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [CarouselService],
+    providers: [skeletonConsumerProviders(), CarouselService],
     host: {
         '[style.width]': 'width'
     }
@@ -239,8 +240,11 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         private readonly _renderer: Renderer2,
         private readonly _changeDetectorRef: ChangeDetectorRef,
         private readonly _carouselService: CarouselService,
-        @Optional() private readonly _rtlService: RtlService
-    ) {}
+        @Optional() private readonly _rtlService: RtlService,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnInit(): void {

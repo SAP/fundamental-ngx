@@ -1,0 +1,67 @@
+<fd-doc-page>
+    <header>Skeleton</header>
+
+    <description>
+        Skeleton is the replacement for the old spinner loading component. Using skeleton you can show a placeholder of
+        a certain shape while data is being loaded.
+
+        <p>The idea behind skeleton consists of two parts:</p>
+
+        <h4>Providing state</h4>
+        <ul>
+            <li>
+                <b>Globally</b>. Import skeleton module in your root module using
+                <code>SkeletonModule.forRoot()</code> with optionally passing default skeleton state. Then inject
+                <code>SkeletonGlobalService</code> and use <code>setSkeletonState()</code> to change the global skeleton
+                state.
+
+                <br /><br />
+
+                Consumers which are lower in the tree will react to the state changes.
+
+                <br /><br />
+            </li>
+
+            <li>
+                <b>Locally</b>. Use <code>fdSkeletonState</code> template directive and pass either boolean or 'global'
+                value to it to set skeleton state for an elements tree. The 'global' value means that subtree should
+                react only to the global skeleton state changes.
+
+                <br /><br />
+
+                Optionally pass <code>fdSkeletonStateTemplate</code> to render any custom template instead. If no
+                template is passed then consumers which are lower in the tree will react to the state changes.
+            </li>
+        </ul>
+
+        <h4>Consuming State, Showing Placeholders</h4>
+
+        <ul>
+            <li>
+                <b>Single placeholder</b>. Use <code>fdSkeletonConsumer</code> directive on the element level or add a
+                providers for the directive/component using <code>skeletonConsumerProviders()</code> factory function.
+
+                <br /><br />
+
+                You can pass additional configuration using directive's input properties or by passing an object to the
+                factory function.
+
+                <br /><br />
+            </li>
+
+            <li>
+                <b>Multiple placeholders</b>. Use <code>fdSkeletonTemplate</code> template directive to define template
+                that should be rendered instead.
+            </li>
+        </ul>
+
+        <p>
+            Additionally, to create skeleton templates you can use <code>SkeletonComponent</code> component (included in
+            <code>SkeletonModule</code>).
+        </p>
+    </description>
+
+    <import module="SkeletonModule" subPackage="skeleton"></import>
+
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

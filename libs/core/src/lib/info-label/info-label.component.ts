@@ -8,6 +8,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { IconFont } from '@fundamental-ngx/core/icon';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
@@ -18,7 +19,8 @@ export type LabelType = 'numeric' | 'icon';
     templateUrl: './info-label.component.html',
     styleUrls: ['./info-label.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: skeletonConsumerProviders()
 })
 export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     /** User's custom classes */
@@ -66,7 +68,9 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     ariaLabelledBy: Nullable<string>;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef, private readonly _skeletonConsumer: SkeletonConsumerDirective) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnInit(): void {

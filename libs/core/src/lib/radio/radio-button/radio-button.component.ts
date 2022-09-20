@@ -17,6 +17,7 @@ import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 export type stateType = 'success' | 'error' | 'warning' | 'default' | 'information';
 let uniqueId = 0;
@@ -34,7 +35,8 @@ let uniqueId = 0;
             multi: true
         },
         registerFormItemControl(RadioButtonComponent),
-        contentDensityObserverProviders()
+        contentDensityObserverProviders(),
+        skeletonConsumerProviders()
     ]
 })
 export class RadioButtonComponent
@@ -131,8 +133,11 @@ export class RadioButtonComponent
     /** @hidden */
     constructor(
         private changeDetectionRef: ChangeDetectorRef,
-        readonly _contentDensityObserver: ContentDensityObserver
-    ) {}
+        readonly _contentDensityObserver: ContentDensityObserver,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnDestroy(): void {

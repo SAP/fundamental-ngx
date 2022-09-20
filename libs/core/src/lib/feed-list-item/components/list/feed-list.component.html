@@ -1,1 +1,7 @@
-<ng-content select="fd-feed-list-item"></ng-content>
+<ng-container *fdSkeletonTemplate="skeletonTemplate">
+    <ng-content select="fd-feed-list-item"></ng-content>
+</ng-container>
+
+<ng-template #skeletonTemplate>
+    <ul fd-list></ul>
+</ng-template>

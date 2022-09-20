@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { RepeatModule } from '@fundamental-ngx/core/utils';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+
 import { TableComponent } from './table.component';
 import { TableResponsiveWrapperDirective } from './directives/table-responsive-wrapper.directive';
 import { TableHeaderDirective } from './directives/table-header.directive';
@@ -16,11 +20,10 @@ import { TableTextDirective } from './directives/table-text.directive';
 import { TableIconDirective } from './directives/table-icon.directive';
 import { TableService } from './table.service';
 import { DeprecatedTableCompactDirective } from './deprecated-table-compact.directive';
-import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { DeprecatedTableCondensedDirective } from './deprecated-table-condensed.directive';
 
 @NgModule({
-    imports: [CommonModule, ContentDensityModule],
+    imports: [CommonModule, ContentDensityModule, SkeletonModule, RepeatModule],
     declarations: [
         TableComponent,
         TableResponsiveWrapperDirective,

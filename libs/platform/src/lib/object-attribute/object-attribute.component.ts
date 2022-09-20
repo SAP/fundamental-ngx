@@ -9,13 +9,15 @@ import {
     Renderer2,
     ViewEncapsulation
 } from '@angular/core';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 @Component({
     selector: 'fdp-object-attribute',
     templateUrl: './object-attribute.component.html',
     styleUrls: ['./object-attribute.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: skeletonConsumerProviders()
 })
 export class ObjectAttributeComponent implements OnInit {
     /** label for the element */
@@ -39,7 +41,13 @@ export class ObjectAttributeComponent implements OnInit {
     objectAttributeclick = new EventEmitter<Event>();
 
     /** @hidden */
-    constructor(private _el: ElementRef, private _renderer: Renderer2) {}
+    constructor(
+        private _el: ElementRef,
+        private _renderer: Renderer2,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnInit(): void {

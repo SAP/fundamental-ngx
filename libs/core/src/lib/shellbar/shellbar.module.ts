@@ -6,6 +6,7 @@ import { ProductMenuComponent } from './product-menu/product-menu.component';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 import { ShellbarSubtitleComponent } from './shellbar-subtitle/shellbar-subtitle.component';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
@@ -51,7 +52,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         IconModule,
         I18nModule,
         AvatarModule,
-        ContentDensityModule
+        ContentDensityModule,
+        SkeletonModule
     ],
     exports: [
         ShellbarComponent,

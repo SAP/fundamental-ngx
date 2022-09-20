@@ -9,20 +9,35 @@
     [class.fd-dynamic-page--list-bg]="background === 'list'"
     [attr.aria-label]="ariaLabel"
 >
-    <header class="fd-dynamic-page__header" [class.fd-dynamic-page__header--not-collapsible]="!_headerCollapsible">
-        <div>
-            <div (click)="toggleCollapse()" (keydown.enter)="toggleCollapse()">
-                <ng-content select="fd-dynamic-page-header"></ng-content>
+    <ng-container *fdSkeletonTemplate="skeletonTemplate">
+        <header class="fd-dynamic-page__header" [class.fd-dynamic-page__header--not-collapsible]="!_headerCollapsible">
+            <div>
+                <div (click)="toggleCollapse()" (keydown.enter)="toggleCollapse()">
+                    <ng-content select="fd-dynamic-page-header"></ng-content>
+                </div>
+
+                <ng-content select="fd-dynamic-page-subheader"></ng-content>
             </div>
-            <ng-content select="fd-dynamic-page-subheader"></ng-content>
-        </div>
-    </header>
+        </header>
 
-    <ng-content select="fd-tab-list"></ng-content>
+        <ng-content select="fd-tab-list"></ng-content>
 
-    <ng-content select="fd-dynamic-page-content"></ng-content>
+        <ng-content select="fd-dynamic-page-content"></ng-content>
 
-    <footer>
-        <ng-content select="fd-dynamic-page-footer"></ng-content>
-    </footer>
+        <footer>
+            <ng-content select="fd-dynamic-page-footer"></ng-content>
+        </footer>
+    </ng-container>
+
+    <ng-template #skeletonTemplate>
+        <header class="fd-dynamic-page__header">
+            <div>
+                <div>
+                    <fd-dynamic-page-header></fd-dynamic-page-header>
+                </div>
+            </div>
+        </header>
+
+        <fd-dynamic-page-content></fd-dynamic-page-content>
+    </ng-template>
 </section>

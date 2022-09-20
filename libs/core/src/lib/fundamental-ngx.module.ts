@@ -91,6 +91,7 @@ import { ProgressIndicatorModule } from '@fundamental-ngx/core/progress-indicato
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { ThemingModule } from '@fundamental-ngx/core/theming';
 import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
@@ -190,7 +191,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ScrollbarModule,
         ThemingModule,
         OverflowLayoutModule,
-        ContentDensityModule
+        ContentDensityModule,
+        SkeletonModule
     ]
 })
 export class FundamentalNgxCoreModule {}

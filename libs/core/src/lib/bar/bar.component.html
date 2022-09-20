@@ -1,4 +1,23 @@
-<ng-content select="[fd-bar-left]"></ng-content>
-<ng-content select="[fd-bar-middle]"></ng-content>
-<ng-content select="[fd-bar-right]"></ng-content>
-<ng-content></ng-content>
+<ng-container *fdSkeletonTemplate="skeletonTemplate">
+    <ng-content select="[fd-bar-left]"></ng-content>
+
+    <ng-content select="[fd-bar-middle]"></ng-content>
+
+    <ng-content select="[fd-bar-right]"></ng-content>
+
+    <ng-content></ng-content>
+</ng-container>
+
+<ng-template #skeletonTemplate>
+    <div fd-bar-left>
+        <fd-bar-element>
+            <fd-skeleton width="5rem" height="1rem"></fd-skeleton>
+        </fd-bar-element>
+    </div>
+
+    <div fd-bar-right>
+        <fd-bar-element>
+            <fd-skeleton width="5rem" height="1rem"></fd-skeleton>
+        </fd-bar-element>
+    </div>
+</ng-template>

@@ -28,6 +28,7 @@ import { CarouselConfig, CarouselDirective, CarouselItemDirective, PanEndOutput 
 import { TimeColumnConfig } from './time-column-config';
 import { SelectableViewItem } from '../models';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 let timeColumnUniqueId = 0;
 
@@ -44,7 +45,8 @@ export interface TimeColumnItemOutput<T> {
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-time__col'
-    }
+    },
+    providers: skeletonConsumerProviders()
 })
 export class TimeColumnComponent<K, T extends SelectableViewItem<K> = SelectableViewItem<K>>
     implements AfterViewInit, OnInit, OnDestroy, OnChanges
@@ -214,7 +216,11 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     private _numericInputTimeout: ReturnType<typeof setTimeout>;
 
     /** @hidden */
-    constructor(private _changeDetRef: ChangeDetectorRef, private _elmRef: ElementRef) {
+    constructor(
+        private _changeDetRef: ChangeDetectorRef,
+        private _elmRef: ElementRef,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
         this._subscriptions.add(
             combineLatest([this._viewInit$, this._elementsAtOnce$, this._offset$, this._resize$])
                 .pipe(
@@ -242,6 +248,8 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
                 )
                 .subscribe()
         );
+
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

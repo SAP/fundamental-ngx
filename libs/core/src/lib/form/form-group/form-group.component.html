@@ -1,1 +1,15 @@
-<ng-content></ng-content>
+<ng-container *fdSkeletonTemplate="skeletonTemplate">
+    <ng-content></ng-content>
+</ng-container>
+
+<ng-template #skeletonTemplate>
+    <div class="fd-container">
+        <div class="fd-row">
+            <div *fdRepeat="2" class="fd-col fd-col-md--6">
+                <fd-skeleton style="margin-bottom: 0.5rem" width="60%" height="1rem"></fd-skeleton>
+
+                <fd-skeleton height="2.75rem"></fd-skeleton>
+            </div>
+        </div>
+    </div>
+</ng-template>

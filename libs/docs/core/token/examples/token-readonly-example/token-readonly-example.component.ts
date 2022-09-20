@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
     styles: [
         `
             fd-token {
-                padding-right: 4px;
+                margin-right: 4px;
             }
         `
     ]

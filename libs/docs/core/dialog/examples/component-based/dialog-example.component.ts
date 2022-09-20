@@ -9,11 +9,9 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
             </fd-dialog-header>
 
             <fd-dialog-body>
-                <p id="fd-dialog-body-1" role="dialog" style="text-align: justify; margin: 0">
-                    {{ dialogRef.data.pinnapleDescription }}
-                </p>
+                <fd-text [text]="dialogRef.data.pinnapleDescription" id="fd-dialog-body-1"></fd-text>
                 <ul style="margin-bottom: 0">
-                    <li *ngFor="let fact of dialogRef.data.pineappleFunFacts">
+                    <li *ngFor="let fact of dialogRef.data.pineappleFunFacts" fdSkeletonConsumer>
                         {{ fact }}
                     </li>
                 </ul>
@@ -28,6 +26,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
                 >
                 </fd-button-bar>
                 <fd-button-bar
+                    *fdSkeletonState="false"
                     label="Cancel"
                     fdInitialFocus
                     fdType="transparent"

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { Placement, Nullable } from '@fundamental-ngx/core/shared';
 import { InlineHelpFormPlacement } from '../inline-help-placement.type';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 let formLabelIdCount = 0;
 
@@ -19,7 +20,8 @@ let formLabelIdCount = 0;
     templateUrl: './form-label.component.html',
     styleUrls: ['./form-label.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: skeletonConsumerProviders()
 })
 export class FormLabelComponent implements OnChanges {
     /** Whether form is required. */
@@ -93,6 +95,11 @@ export class FormLabelComponent implements OnChanges {
 
     /** @hidden */
     private _formLabelId = `fd-form-label-${++formLabelIdCount}`;
+
+    /** @hidden */
+    constructor(private readonly _skeletonConsumer: SkeletonConsumerDirective) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnChanges(): void {

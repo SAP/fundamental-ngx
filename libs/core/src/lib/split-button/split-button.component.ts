@@ -26,6 +26,7 @@ import { SplitButtonActionTitle } from './split-button-utils/split-button.direct
 import { MainAction } from './main-action';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { DestroyedService } from '@fundamental-ngx/core/utils';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 export const splitButtonTextClass = 'fd-button-split__text';
 export const splitButtonTextCompactClass = 'fd-button-split__text--compact';
@@ -58,7 +59,7 @@ const splitButtonTextClasses = [splitButtonTextClass, splitButtonTextCompactClas
     styleUrls: ['./split-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [contentDensityObserverProviders()]
+    providers: [skeletonConsumerProviders(), contentDensityObserverProviders()]
 })
 export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDestroy, AfterViewInit {
     /** The icon to include in the button. See the icon page for the list of icons. */
@@ -153,8 +154,11 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         private _cdRef: ChangeDetectorRef,
         private _destroy$: DestroyedService,
         private _contentDensityObserver: ContentDensityObserver,
-        private _renderer: Renderer2
-    ) {}
+        private _renderer: Renderer2,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden Emits event when main button is clicked */
     onMainButtonClick(event: MouseEvent): void {

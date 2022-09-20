@@ -16,7 +16,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-action-bar]',
-    template: ` <ng-content></ng-content>`,
+    templateUrl: './action-bar.component.html',
     host: {
         class: 'fd-action-bar'
     },

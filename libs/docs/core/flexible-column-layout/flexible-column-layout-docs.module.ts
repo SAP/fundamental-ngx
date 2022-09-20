@@ -13,6 +13,7 @@ import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FlexibleColumnLayoutCustomConfigExampleComponent } from './examples/custom-config/flexible-column-layout-custom-config-example.component';
+import { TextModule } from '@fundamental-ngx/core/text';
 
 const routes: Routes = [
     {
@@ -32,7 +33,8 @@ const routes: Routes = [
         FlexibleColumnLayoutModule,
         DynamicPageModule,
         ToolbarModule,
-        ButtonModule
+        ButtonModule,
+        TextModule
     ],
     exports: [RouterModule],
     declarations: [

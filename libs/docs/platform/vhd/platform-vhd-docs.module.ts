@@ -18,6 +18,8 @@ import { TokenModule } from '@fundamental-ngx/core/token';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { PlatformVhdDocsComponent } from './platform-vhd.docs.component';
 import { PlatformVhdHeaderComponent } from './platform-vhd-header/platform-vhd-header.component';
 import {
@@ -29,7 +31,6 @@ import {
     PlatformVhdTokenExampleComponent
 } from './examples';
 import { PlatformVhdLoadingExampleComponent } from './examples/platform-vhd-loading-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -54,7 +55,8 @@ const routes: Routes = [
         TokenModule,
         ToolbarModule,
         PlatformValueHelpDialogModule,
-        CheckboxModule
+        CheckboxModule,
+        SkeletonModule
     ],
     exports: [RouterModule],
     declarations: [

@@ -313,12 +313,17 @@
         <div class="fdp-upload-collection__table-footer" *ngIf="enablePagination">
             <!-- Pagination -->
             <div class="fdp-upload-collection__pagination">
-                <span [id]="id + '-pagination'" class="fdp-upload-collection__pagination--total">
-                    {{
-                        'platformUploadCollection.paginationTotal'
-                            | fdTranslate: { from: _countShowedItems, to: _countNotShowedItems, total: _totalItems }
-                    }}
-                </span>
+                <ng-container *fdSkeletonTemplate="skeletonTotalItemsTemplate">
+                    <span [id]="id + '-pagination'" class="fdp-upload-collection__pagination--total">
+                        {{
+                            'platformUploadCollection.paginationTotal'
+                                | fdTranslate: { from: _countShowedItems, to: _countNotShowedItems, total: _totalItems }
+                        }}
+                    </span>
+                </ng-container>
+
+                <ng-template #skeletonTotalItemsTemplate> </ng-template>
+
                 <fd-pagination
                     [totalItems]="_totalItems"
                     [displayTotalItems]="false"
@@ -331,12 +336,17 @@
 
             <!-- Results per page -->
             <div class="fdp-upload-collection__results">
-                <span class="fdp-upload-collection__results--title">
-                    <span [id]="id + '-results'">
-                        {{ 'platformUploadCollection.resultsPerPage' | fdTranslate }}
+                <ng-container *fdSkeletonTemplate="skeletonPerPageTemplate">
+                    <span class="fdp-upload-collection__results--title">
+                        <span [id]="id + '-results'">
+                            {{ 'platformUploadCollection.resultsPerPage' | fdTranslate }}
+                        </span>
+                        <span *ngIf="_itemsPerPageOptions.length === 0" [innerText]="_itemsPerPage"></span>
                     </span>
-                    <span *ngIf="_itemsPerPageOptions.length === 0" [innerText]="_itemsPerPage"></span>
-                </span>
+                </ng-container>
+
+                <ng-template #skeletonPerPageTemplate> </ng-template>
+
                 <fdp-menu-button
                     *ngIf="_itemsPerPageOptions.length > 0"
                     type="ghost"

@@ -52,6 +52,7 @@
                 </div>
                 <div fd-bar-right>
                     <fd-button-bar
+                        *fdSkeletonState="false"
                         fd-initial-focus
                         glyph="cart"
                         fdType="emphasized"
@@ -67,4 +68,9 @@
     </fd-dialog>
 </ng-template>
 
-<button fd-button label="Open with custom configuration" (click)="openDialog(dialogTemplate)"></button>
+<button
+    fd-button
+    label="Open with custom configuration"
+    (click)="openDialog(dialogTemplate)"
+    *fdSkeletonState="false"
+></button>

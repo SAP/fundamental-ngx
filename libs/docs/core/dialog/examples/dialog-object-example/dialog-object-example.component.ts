@@ -36,7 +36,8 @@ export class DialogObjectExampleComponent {
         this._dialogReference = this._dialogService.open(object, {
             ariaLabelledBy: 'fd-dialog-header-12',
             ariaDescribedBy: 'fd-dialog-body-12',
-            focusTrapped: true
+            focusTrapped: true,
+            backdropClickCloseable: true
         });
 
         this._dialogReference.afterClosed.subscribe(

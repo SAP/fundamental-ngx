@@ -5,110 +5,122 @@
     [class]="(mode ? 'fd-tabs--' + mode : '') + (' fd-tabs--' + size)"
     [class.fd-tabs--compact]="_contentDensityObserver.isCompact"
 >
-    <fd-overflow-layout
-        [maxVisibleItems]="maxVisibleTabs"
-        [enableKeyboardNavigation]="true"
-        navigationTrigger="keydown"
-        (hiddenItemsCount)="hiddenItemsCount.emit($event)"
-        (visibleItemsCount)="visibleItemsCount.emit($event)"
-    >
-        <ng-container *ngFor="let tab of _tabArray; let i = index; let last = last">
-            <div
-                fd-tab-item
-                *fdOverflowItemRef="tab"
-                fdOverflowLayoutItem
-                [forceVisibility]="tab.panel._forcedVisibility"
-                [header]="tab.isHeader"
-                [tabItemState]="tab.tabState"
-                [attr.aria-selected]="tab.active"
-            >
-                <a
-                    fd-tab-link
-                    role="tab"
-                    [id]="tab.id"
-                    [attr.aria-controls]="tab.panelId"
-                    [attr.aria-label]="tab.ariaLabel || null"
-                    [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
-                    fdOverflowLayoutFocusableItem
-                    [focusable]="tab.active"
-                    [navigable]="!tab.disabled"
-                    [active]="tab.active"
-                    [disabled]="tab.disabled"
-                    (keydown)="_tabHeaderKeydownHandler($event, tab.panel)"
-                    (click)="_tabHeaderClickHandler(tab.panel)"
+    <ng-container *fdSkeletonTemplate="skeletonHeaderTemplate">
+        <fd-overflow-layout
+            [maxVisibleItems]="maxVisibleTabs"
+            [enableKeyboardNavigation]="true"
+            navigationTrigger="keydown"
+            (hiddenItemsCount)="hiddenItemsCount.emit($event)"
+            (visibleItemsCount)="visibleItemsCount.emit($event)"
+        >
+            <ng-container *ngFor="let tab of _tabArray; let i = index; let last = last">
+                <div
+                    fd-tab-item
+                    *fdOverflowItemRef="tab"
+                    fdOverflowLayoutItem
+                    [forceVisibility]="tab.panel._forcedVisibility"
+                    [header]="tab.isHeader"
+                    [tabItemState]="tab.tabState"
+                    [attr.aria-selected]="tab.active"
                 >
-                    <ng-container *ngTemplateOutlet="tab.titleTemplate || null"></ng-container>
+                    <a
+                        fd-tab-link
+                        role="tab"
+                        [id]="tab.id"
+                        [attr.aria-controls]="tab.panelId"
+                        [attr.aria-label]="tab.ariaLabel || null"
+                        [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
+                        fdOverflowLayoutFocusableItem
+                        [focusable]="tab.active"
+                        [navigable]="!tab.disabled"
+                        [active]="tab.active"
+                        [disabled]="tab.disabled"
+                        (keydown)="_tabHeaderKeydownHandler($event, tab.panel)"
+                        (click)="_tabHeaderClickHandler(tab.panel)"
+                    >
+                        <ng-container *ngTemplateOutlet="tab.titleTemplate || null"></ng-container>
 
-                    <ng-container *ngIf="!tab.titleTemplate" [ngSwitch]="mode">
-                        <ng-container *ngSwitchCase="'filter'">
-                            <span fd-tab-header *ngIf="tab.isHeader">
-                                <span fd-tab-counter-header *ngIf="tab.count">{{ tab.count }}</span>
-                                <span fd-tab-label *ngIf="tab.title">{{ tab.title }}</span>
-                            </span>
-                            <ng-container *ngIf="!tab.isHeader">
+                        <ng-container *ngIf="!tab.titleTemplate" [ngSwitch]="mode">
+                            <ng-container *ngSwitchCase="'filter'">
+                                <span fd-tab-header *ngIf="tab.isHeader">
+                                    <span fd-tab-counter-header *ngIf="tab.count">{{ tab.count }}</span>
+                                    <span fd-tab-label *ngIf="tab.title">{{ tab.title }}</span>
+                                </span>
+                                <ng-container *ngIf="!tab.isHeader">
+                                    <span fd-tab-icon [icon]="tab.glyph">
+                                        <p fd-tab-count>{{ tab.count }}</p>
+                                    </span>
+                                    <span fd-tab-label>{{ tab.title }}</span>
+                                </ng-container>
+                            </ng-container>
+
+                            <ng-container *ngSwitchCase="'icon-only'">
                                 <span fd-tab-icon [icon]="tab.glyph">
                                     <p fd-tab-count>{{ tab.count }}</p>
                                 </span>
-                                <span fd-tab-label>{{ tab.title }}</span>
+                            </ng-container>
+
+                            <ng-container *ngSwitchCase="'process'">
+                                <span fd-tab-icon *ngIf="tab.glyph" [icon]="tab.glyph"></span>
+                                <div fd-tab-process>
+                                    <span fd-tab-label *ngIf="tab.count">{{ tab.count }}</span>
+                                    <span fd-tab-label *ngIf="tab.title">{{ tab.title }}</span>
+                                </div>
+                            </ng-container>
+
+                            <ng-container *ngSwitchDefault>
+                                <p fd-tab-count *ngIf="tab.count">{{ tab.count }}</p>
+                                <span fd-tab-tag>{{ tab.title }}</span>
                             </ng-container>
                         </ng-container>
+                    </a>
 
-                        <ng-container *ngSwitchCase="'icon-only'">
-                            <span fd-tab-icon [icon]="tab.glyph">
-                                <p fd-tab-count>{{ tab.count }}</p>
-                            </span>
-                        </ng-container>
+                    <div fd-tab-process-icon *ngIf="mode === 'process' && !last"></div>
+                </div>
 
-                        <ng-container *ngSwitchCase="'process'">
-                            <span fd-tab-icon *ngIf="tab.glyph" [icon]="tab.glyph"></span>
-                            <div fd-tab-process>
-                                <span fd-tab-label *ngIf="tab.count">{{ tab.count }}</span>
-                                <span fd-tab-label *ngIf="tab.title">{{ tab.title }}</span>
-                            </div>
-                        </ng-container>
+                <div *ngIf="tab.isHeader" fd-tab-separator></div>
+            </ng-container>
 
-                        <ng-container *ngSwitchDefault>
-                            <p fd-tab-count *ngIf="tab.count">{{ tab.count }}</p>
-                            <span fd-tab-tag>{{ tab.title }}</span>
-                        </ng-container>
-                    </ng-container>
-                </a>
-
-                <div fd-tab-process-icon *ngIf="mode === 'process' && !last"></div>
-            </div>
-
-            <div *ngIf="tab.isHeader" fd-tab-separator></div>
-        </ng-container>
-
-        <ng-container *fdOverflowExpand="let tabs; items: _tabArray">
-            <fd-item-expand
-                [fdMenuTrigger]="menu"
-                [label]="expandOverflowText"
-                *ngIf="tabs.length > 0"
-                (keydown)="_onTriggerKeydown($event, menu)"
-            >
-            </fd-item-expand>
-
-            <fd-menu #menu>
-                <li
-                    fd-menu-item
-                    *ngFor="let tab of tabs"
-                    (onSelect)="_overflowingTabHeaderClickHandler(tab.item.panel)"
+            <ng-container *fdOverflowExpand="let tabs; items: _tabArray">
+                <fd-item-expand
+                    [fdMenuTrigger]="menu"
+                    [label]="expandOverflowText"
+                    *ngIf="tabs.length > 0"
+                    (keydown)="_onTriggerKeydown($event, menu)"
                 >
-                    <div fd-menu-interactive>
-                        <ng-container
-                            *ngTemplateOutlet="
-                                !tab.item.titleTemplate && mode === 'icon-only'
-                                    ? iconOnlyTemplate
-                                    : tab.item.titleTemplate || textTitle;
-                                context: { $implicit: tab.item }
-                            "
-                        ></ng-container>
-                    </div>
-                </li>
-            </fd-menu>
-        </ng-container>
-    </fd-overflow-layout>
+                </fd-item-expand>
+
+                <fd-menu #menu>
+                    <li
+                        fd-menu-item
+                        *ngFor="let tab of tabs"
+                        (onSelect)="_overflowingTabHeaderClickHandler(tab.item.panel)"
+                    >
+                        <div fd-menu-interactive>
+                            <ng-container
+                                *ngTemplateOutlet="
+                                    !tab.item.titleTemplate && mode === 'icon-only'
+                                        ? iconOnlyTemplate
+                                        : tab.item.titleTemplate || textTitle;
+                                    context: { $implicit: tab.item }
+                                "
+                            ></ng-container>
+                        </div>
+                    </li>
+                </fd-menu>
+            </ng-container>
+        </fd-overflow-layout>
+    </ng-container>
+
+    <ng-template #skeletonHeaderTemplate>
+        <div fd-tab-item *fdRepeat="2">
+            <a fd-tab-link>
+                <span fd-tab-tag>
+                    <fd-skeleton width="5rem" height="1rem"></fd-skeleton>
+                </span>
+            </a>
+        </div>
+    </ng-template>
 </div>
 
 <div
@@ -120,7 +132,11 @@
     [scrollSpyDisabled]="_disableScrollSpy"
     (spyChange)="_highlightActiveTab($event)"
 >
-    <ng-content></ng-content>
+    <ng-container *fdSkeletonTemplate="skeletonTemplate">
+        <ng-content></ng-content>
+    </ng-container>
+
+    <ng-template #skeletonTemplate> </ng-template>
 </div>
 
 <ng-template #textTitle let-tab>

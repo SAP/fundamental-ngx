@@ -164,9 +164,9 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
 
     /** @hidden */
     constructor(
-        private readonly _changeDetectorRef: ChangeDetectorRef,
-        private _elRef: ElementRef,
         readonly _contentDensityObserver: ContentDensityObserver,
+        private _elRef: ElementRef,
+        private readonly _changeDetectorRef: ChangeDetectorRef,
         private readonly _onDestroy$: DestroyedService
     ) {}
 

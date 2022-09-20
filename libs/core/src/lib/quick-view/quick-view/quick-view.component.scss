@@ -4,3 +4,7 @@
 .fd-popover__popper .fd-quick-view__content {
     border-radius: var(--sapElement_BorderCornerRadius);
 }
+
+.fd-quick-view__subheader-text {
+    flex-grow: 1;
+}

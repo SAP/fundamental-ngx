@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
             [required]="true"
             inputId="defaultCheckbox"
         ></fd-checkbox>
-        Value: {{ checkboxValue }}
+        <br />Value: {{ checkboxValue }}
     `
 })
 export class CheckboxDefaultExampleComponent {

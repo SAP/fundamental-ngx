@@ -1,28 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({
     selector: 'fd-dynamic-page-tabs-example',
     templateUrl: './dynamic-page-tabs-example.component.html',
-    styles: [
-        `
-            .overlay {
-                height: 100%;
-                width: 100%;
-                position: fixed;
-                z-index: 10;
-                top: 0;
-                left: 0;
-                background-color: rgb(255, 255, 255);
-            }
-            .fd-dynamic-page-section-example {
-                min-height: 20vh;
-            }
-        `
-    ]
+    styleUrls: ['../dynamic-page-example.component.scss']
 })
 export class DynamicPageTabsExampleComponent {
-    visible = false;
+    @ViewChild('overlay')
+    overlay: ElementRef<HTMLElement>;
+
+    fullscreen = false;
 
     stackedTabs = false;
 
@@ -35,13 +23,15 @@ export class DynamicPageTabsExampleComponent {
     }
 
     openPage(stacked: boolean): void {
+        this.fullscreen = true;
+        this.overlay.nativeElement.style.width = '100%';
         this.stackedTabs = stacked;
-        this.visible = true;
         this._openToast('Dynamic Page has been opened');
     }
 
     closePage(): void {
-        this.visible = false;
+        this.fullscreen = false;
+        this.overlay.nativeElement.style.width = '0%';
     }
 
     handleAction(action: string): void {

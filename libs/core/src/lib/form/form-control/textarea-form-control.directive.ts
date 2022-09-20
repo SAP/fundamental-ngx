@@ -4,6 +4,7 @@ import {
     contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -13,14 +14,20 @@ import {
             modifiers: {
                 [ContentDensityMode.COMPACT]: 'fd-textarea--compact'
             }
-        })
+        }),
+        skeletonConsumerProviders({ native: true })
     ],
     host: {
         class: 'fd-textarea'
     }
 })
 export class TextareaFormControlDirective {
-    constructor(private _contentDensityObserver: ContentDensityObserver) {
-        _contentDensityObserver.subscribe();
+    /** @hidden */
+    constructor(
+        private _contentDensityObserver: ContentDensityObserver,
+        private _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        this._contentDensityObserver.subscribe();
+        this._skeletonConsumer.consume();
     }
 }

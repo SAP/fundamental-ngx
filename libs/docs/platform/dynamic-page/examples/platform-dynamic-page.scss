@@ -1,34 +1,35 @@
-.docs-fcl-example-overlay {
+/* All classes below are for the fullscreen functionality */
+.example-overlay {
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 10;
+    z-index: 1001;
     top: 0;
     left: 0;
     background-color: rgb(255, 255, 255);
     overflow-x: hidden;
 }
-
-.docs-fcl-example-overlay-content {
+.example-overlay-content {
+    position: relative;
     width: 100%;
 }
-
-.docs-fcl-example-button {
+.example-button {
     display: flex;
     justify-content: flex-end;
-    padding: 0.5rem 2rem;
+    padding: 3px 1rem;
     background: #394a5d;
 }
-
+.fd-dynamic-page-section-example {
+    min-height: 20vh;
+    display: block;
+}
 .docs-fcl-example-section {
     height: calc(100vh - 3.7rem);
     position: relative;
-
     h2 {
         font-size: 30px;
         margin: 20px;
     }
-
     div {
         button {
             display: flex;

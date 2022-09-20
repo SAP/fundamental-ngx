@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
                 [(ngModel)]="checkboxValue1"
             >
             </fd-checkbox>
-            Value: {{ checkboxValue1 }}
+            <br />Value: {{ checkboxValue1 }}
         </div>
 
         <div>
@@ -22,7 +22,7 @@ import { Component } from '@angular/core';
                 [(ngModel)]="checkboxValue2"
             >
             </fd-checkbox>
-            Value: {{ checkboxValue2 }}
+            <br />Value: {{ checkboxValue2 }}
         </div>
     `
 })

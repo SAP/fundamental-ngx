@@ -5,7 +5,7 @@ import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-
 @Component({
     selector: 'fdp-platform-dynamic-page-example',
     templateUrl: './platform-dynamic-page-example.component.html',
-    styleUrls: ['./platform-dynamic-page-example.component.scss'],
+    styleUrls: ['./platform-dynamic-page.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformDynamicPageExampleComponent implements OnDestroy {

@@ -12,6 +12,7 @@ import {
 } from './input-group-directives';
 import { DeprecatedInputGroupCompactDirective } from './deprecated-input-group-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         InputGroupAddOnDirective,
         DeprecatedInputGroupCompactDirective
     ],
-    imports: [CommonModule, ButtonModule, IconModule, FormsModule, ContentDensityModule],
+    imports: [CommonModule, ButtonModule, IconModule, FormsModule, ContentDensityModule, SkeletonModule],
     exports: [
         InputGroupComponent,
         InputGroupInputDirective,

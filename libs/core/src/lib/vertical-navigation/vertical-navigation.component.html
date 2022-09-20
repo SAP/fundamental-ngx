@@ -1,7 +1,16 @@
 <div class="fd-vertical-nav" [class.fd-vertical-nav--condensed]="condensed">
     <fd-vertical-navigation-main-navigation>
-        <ul fd-list>
+        <ul fd-list *fdSkeletonTemplate="skeletonTemplate">
             <ng-content></ng-content>
         </ul>
+
+        <ng-template #skeletonTemplate>
+            <!-- Double state setting needed to prevent list from showing own skeleton template -->
+            <ul fd-list *fdSkeletonState="false">
+                <li fd-list-navigation-item *fdRepeat="3" style="display: flex; align-items: center">
+                    <fd-skeleton width="40%" height="1rem"></fd-skeleton>
+                </li>
+            </ul>
+        </ng-template>
     </fd-vertical-navigation-main-navigation>
 </div>

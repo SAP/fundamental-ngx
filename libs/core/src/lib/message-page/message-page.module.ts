@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { MessagePageComponent } from './message-page.component';
 import { MessagePageActionsComponent } from './message-page-actions/message-page-actions.component';
 import { MessagePageMoreComponent } from './message-page-more/message-page-more.component';
@@ -15,7 +16,7 @@ import { MessagePageSubtitleComponent } from './message-page-subtitle/message-pa
         MessagePageTitleComponent,
         MessagePageSubtitleComponent
     ],
-    imports: [CommonModule],
+    imports: [CommonModule, SkeletonModule],
     exports: [
         MessagePageComponent,
         MessagePageActionsComponent,

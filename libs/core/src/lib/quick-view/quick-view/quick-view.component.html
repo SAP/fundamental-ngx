@@ -1,8 +1,28 @@
 <div class="fd-quick-view" [id]="id">
-    <ng-content select="fd-quick-view-title"></ng-content>
+    <ng-container *fdSkeletonTemplate="skeletonTemplate">
+        <ng-content select="fd-quick-view-title"></ng-content>
 
-    <div class="fd-quick-view__content">
-        <ng-content select="fd-quick-view-subheader"></ng-content>
-        <ng-content select="fd-quick-view-group"></ng-content>
-    </div>
+        <div class="fd-quick-view__content">
+            <ng-content select="fd-quick-view-subheader"></ng-content>
+            <ng-content select="fd-quick-view-group"></ng-content>
+        </div>
+    </ng-container>
+
+    <ng-template #skeletonTemplate>
+        <div class="fd-quick-view__content">
+            <fd-quick-view-subheader></fd-quick-view-subheader>
+
+            <fd-quick-view-group>
+                <fd-quick-view-group-title>
+                    <fd-skeleton height="2rem" width="2rem"></fd-skeleton>
+                </fd-quick-view-group-title>
+
+                <fd-quick-view-group-item>
+                    <fd-quick-view-group-item-label>
+                        <fd-skeleton width="40%" height="1rem"></fd-skeleton>
+                    </fd-quick-view-group-item-label>
+                </fd-quick-view-group-item>
+            </fd-quick-view-group>
+        </div>
+    </ng-template>
 </div>

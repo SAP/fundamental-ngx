@@ -1,4 +1,5 @@
 <div
+    *fdSkeletonTemplate="skeletonTemplate"
     #gridListItem
     [id]="id"
     tabindex="0"
@@ -197,5 +198,21 @@
                 (click)="_clickOnDraft($event)"
             ></button>
         </ng-container>
+    </div>
+</ng-template>
+
+<ng-template #skeletonTemplate>
+    <div class="fd-grid-list__item">
+        <div class="fd-grid-list__item-body">
+            <fd-avatar fd-grid-list-item-image size="s" glyph="loading"></fd-avatar>
+
+            <div class="fd-grid-list__item-header">
+                <h4 fd-title></h4>
+            </div>
+
+            <div class="fd-grid-list__item-content">
+                <h4 fd-title></h4>
+            </div>
+        </div>
     </div>
 </ng-template>

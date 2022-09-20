@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ContentChild, TemplateRef, ViewEncapsulation } from '@angular/core';
 
+import { skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 import { FormInputMessageGroupComponent } from '@fundamental-ngx/core/form';
 
 /**
@@ -13,7 +14,8 @@ import { FormInputMessageGroupComponent } from '@fundamental-ngx/core/form';
     templateUrl: './input-message-group-with-template.component.html',
     styleUrls: ['./input-message-group-with-template.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: skeletonConsumerProviders()
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class InputMessageGroupWithTemplate extends FormInputMessageGroupComponent {

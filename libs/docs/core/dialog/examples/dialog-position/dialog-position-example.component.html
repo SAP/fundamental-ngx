@@ -5,16 +5,19 @@
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <div id="fd-dialog-body-6" role="dialog">
-                The natural (or most common) pollinator of the pineapple is the hummingbird. Pollination is required for
+            <fd-text
+                id="fd-dialog-body-6"
+                role="dialog"
+                text="The natural (or most common) pollinator of the pineapple is the hummingbird. Pollination is required for
                 seed formation; the presence of seeds negatively affects the quality of the fruit. In Hawaii, where
                 pineapple is cultivated on an agricultural scale, importation of hummingbirds is prohibited for this
-                reason.
-            </div>
+                reason."
+            ></fd-text>
         </fd-dialog-body>
 
         <fd-dialog-footer>
             <fd-button-bar
+                *fdSkeletonState="false"
                 fdType="emphasized"
                 label="Interesting"
                 fdCompact
@@ -26,4 +29,4 @@
     </fd-dialog>
 </ng-template>
 
-<button fd-button label="Open in Bottom Right" (click)="openDialog(dialogTemplate)"></button>
+<button fd-button label="Open in Bottom Right" (click)="openDialog(dialogTemplate)" *fdSkeletonState="false"></button>

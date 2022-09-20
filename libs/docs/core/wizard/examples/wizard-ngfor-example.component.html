@@ -1,10 +1,10 @@
-<button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
+<button fd-button (click)="enterFullscreenExample()" *fdSkeletonState="false">Click to open full screen</button>
 
 <div cdkScrollable cdkTrapFocus class="docs-wizard-example-overlay" #overlay>
     <ng-container *ngIf="fullscreen">
         <div class="docs-wizard-example-overlay-content">
             <div class="docs-wizard-example-button">
-                <button fd-button (click)="exitFullscreenExample($event)">Exit Example</button>
+                <button fd-button (click)="exitFullscreenExample($event)" *fdSkeletonState="false">Exit Example</button>
             </div>
 
             <!-- The Wizard -->

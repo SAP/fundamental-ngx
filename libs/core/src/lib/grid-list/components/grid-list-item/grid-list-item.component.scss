@@ -21,6 +21,10 @@
     }
 
     &__item {
+        &-content {
+            min-width: 100%;
+        }
+
         .drop-area__line--vertical {
             height: 100%;
 

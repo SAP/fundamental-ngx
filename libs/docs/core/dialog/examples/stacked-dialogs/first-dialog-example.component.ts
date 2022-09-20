@@ -11,14 +11,16 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
             </fd-dialog-header>
 
             <fd-dialog-body>
-                <div id="fd-dialog-body-8" role="dialog">
-                    This is the first dialog!<br />
-                    Click the button below to open the second dialog.
-                </div>
+                <fd-text
+                    id="fd-dialog-body-8"
+                    role="dialog"
+                    text="This is the first dialog! Click the button below to open the second dialog."
+                ></fd-text>
             </fd-dialog-body>
 
             <fd-dialog-footer>
                 <fd-button-bar
+                    *fdSkeletonState="false"
                     fd-initial-focus
                     fdType="emphasized"
                     label="Open Second Dialog"

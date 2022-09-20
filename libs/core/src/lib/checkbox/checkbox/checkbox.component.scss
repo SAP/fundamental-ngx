@@ -1,6 +1,8 @@
 @import '~fundamental-styles/dist/checkbox';
 
 fd-checkbox {
+    display: inline-block;
+
     .fd-checkbox__text:empty {
         margin: 0;
     }

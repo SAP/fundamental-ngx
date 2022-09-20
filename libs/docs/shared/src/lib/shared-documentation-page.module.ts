@@ -13,6 +13,7 @@ import { ImportComponent } from './core-helpers/import/import.component';
 import { DirectionalityComponent } from './core-helpers/directionality/directionality.component';
 import { ComponentExampleComponent } from './core-helpers/component-example/component-example.component';
 import { ExampleBackgroundComponent } from './core-helpers/example-background/example-background.component';
+import { SkeletonSwitchComponent } from './core-helpers/skeleton-switch/skeleton-switch.component';
 // services
 import { CopyService } from './services/copy.service';
 import { ApiDocsService } from './services/api-docs.service';
@@ -40,6 +41,7 @@ import { I18nDocsModule } from './core-helpers/i18n-docs/i18n-docs.module';
         CodeExampleComponent,
         DescriptionComponent,
         DirectionalityComponent,
+        SkeletonSwitchComponent,
         DocsSectionTitleComponent,
         ComponentExampleComponent,
         ExampleBackgroundComponent,
@@ -72,6 +74,7 @@ import { I18nDocsModule } from './core-helpers/i18n-docs/i18n-docs.module';
         CodeExampleComponent,
         DescriptionComponent,
         DirectionalityComponent,
+        SkeletonSwitchComponent,
         DocsSectionTitleComponent,
         ComponentExampleComponent,
         ExampleBackgroundComponent,

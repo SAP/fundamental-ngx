@@ -1,3 +1,4 @@
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
 import { IconModule } from '@fundamental-ngx/core/icon';
@@ -20,6 +21,7 @@ export const sharedCoreModules = [
     FormLabelModule,
     LinkModule,
     InfoLabelModule,
+    SkeletonModule,
     AlertModule,
     MessageToastModule
 ];

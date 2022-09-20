@@ -7,23 +7,43 @@
     (keydown.space)="clickable && $event.preventDefault()"
     (keyup.space)="clickable && tileClick.emit()"
 >
-    <div *ngIf="action && type !== 'line'" class="fd-tile__overlay"></div>
+    <ng-container *fdSkeletonTemplate="skeletonTemplate">
+        <div *ngIf="action && type !== 'line'" class="fd-tile__overlay"></div>
 
-    <ng-content select="[fd-tile-action-close]"></ng-content>
+        <ng-content select="[fd-tile-action-close]"></ng-content>
 
-    <ng-content select="[fd-tile-action-indicator]"></ng-content>
+        <ng-content select="[fd-tile-action-indicator]"></ng-content>
 
-    <ng-content select="[fd-badge]"></ng-content>
+        <ng-content select="[fd-badge]"></ng-content>
 
-    <ng-content select="[fd-tile-header]"></ng-content>
+        <ng-content select="[fd-tile-header]"></ng-content>
 
-    <ng-content select="[fd-tile-header-content]"></ng-content>
+        <ng-content select="[fd-tile-header-content]"></ng-content>
 
-    <ng-content select="[fd-tile-content]"></ng-content>
+        <ng-content select="[fd-tile-content]"></ng-content>
 
-    <ng-content select="[fd-tile-footer]"></ng-content>
+        <ng-content select="[fd-tile-footer]"></ng-content>
 
-    <ng-content select="[fd-tile-action-container]"></ng-content>
+        <ng-content select="[fd-tile-action-container]"></ng-content>
 
-    <ng-content></ng-content>
+        <ng-content></ng-content>
+    </ng-container>
+
+    <ng-template #skeletonTemplate>
+        <div fd-tile-header>
+            <h1 fd-tile-title>
+                <fd-skeleton></fd-skeleton>
+            </h1>
+        </div>
+        <div fd-tile-content>
+            <fd-skeleton width="2rem" height="2rem"></fd-skeleton>
+        </div>
+        <div fd-tile-footer>
+            <div fd-tile-section>
+                <span fd-tile-footer-text>
+                    <fd-skeleton></fd-skeleton>
+                </span>
+            </div>
+        </div>
+    </ng-template>
 </div>

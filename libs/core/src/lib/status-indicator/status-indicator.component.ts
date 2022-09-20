@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 export type StatusIndicatorSize = 'sm' | 'md' | 'lg' | 'xl';
 export type StatusIndicatorColor = 'negative' | 'critical' | 'positive';
@@ -39,7 +40,8 @@ export class Point {
         '[attr.tabindex]': 'focusable ? 0 : -1'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: skeletonConsumerProviders()
 })
 export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssClassBuilder, OnInit {
     /**
@@ -164,7 +166,15 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
     pointsArray: string[] = [];
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _cd: ChangeDetectorRef) {}
+    constructor(
+        private _elementRef: ElementRef<HTMLElement>,
+        private _cd: ChangeDetectorRef,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
+
+    /** @hidden */
     class: string;
 
     ngAfterViewInit(): void {

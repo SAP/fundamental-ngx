@@ -32,7 +32,7 @@
             *ngIf="_approvalProcess?.watchers?.length || _isEditMode"
             [attr.aria-label]="watchersLabel"
         >
-            <p class="fdp-approval-flow__watchers-title">
+            <p class="fdp-approval-flow__watchers-title" fdSkeletonConsumer>
                 {{ watchersLabel || ('platformApprovalFlow.defaultWatchersLabel' | fdTranslate) }}
             </p>
 
@@ -61,113 +61,115 @@
             </div>
         </div>
 
-        <ng-container *ngIf="!_graph.errors">
-            <ng-container *ngIf="_graph.columns.length; else emptyApprovalFlowGraph">
-                <div
-                    class="fdp-approval-flow__container"
-                    [class.fdp-approval-flow__container--extra-padding-start]="true"
-                    [class.fdp-approval-flow__container--extra-padding-end]="true"
-                >
+        <ng-container *fdSkeletonTemplate="skeletonTemplate">
+            <ng-container *ngIf="!_graph.errors">
+                <ng-container *ngIf="_graph.columns.length; else emptyApprovalFlowGraph">
                     <div
-                        class="fdp-approval-flow-carousel-controls"
-                        *ngIf="_scrollDiff > 0"
-                        [class.fdp-approval-flow-carousel-controls--edit-mode]="_isEditMode"
-                    >
-                        <button
-                            *ngIf="_carouselStepsLeft > 0"
-                            class="fdp-approval-flow-carousel-controls__button--prev-slide"
-                            [attr.aria-label]="'platformApprovalFlow.prevButtonAriaLabel' | fdTranslate"
-                            (click)="nextSlide(-1)"
-                        >
-                            <fd-icon [glyph]="'navigation-' + (_rtl ? 'right' : 'left') + '-arrow'"></fd-icon>
-                            {{ _carouselStepsLeft }}
-                        </button>
-
-                        <button
-                            *ngIf="_carouselStepsRight > 0"
-                            class="fdp-approval-flow-carousel-controls__button--next-slide"
-                            [attr.aria-label]="'platformApprovalFlow.nextButtonAriaLabel' | fdTranslate"
-                            (click)="nextSlide()"
-                        >
-                            {{ _carouselStepsRight }}
-                            <fd-icon [glyph]="'navigation-' + (_rtl ? 'left' : 'right') + '-arrow'"></fd-icon>
-                        </button>
-                    </div>
-
-                    <div
-                        class="fdp-approval-flow__graph-container"
-                        [class.fdp-approval-flow__graph-container--multiple-root-nodes]="_multipleRootNodes"
-                        [class.fdp-approval-flow__graph-container--multiple-final-nodes]="_multipleFinalNodes"
-                        #graphContainerEl
+                        class="fdp-approval-flow__container"
+                        [class.fdp-approval-flow__container--extra-padding-start]="true"
+                        [class.fdp-approval-flow__container--extra-padding-end]="true"
                     >
                         <div
-                            class="fdp-approval-flow__graph"
-                            #graphEl
-                            [class.fdp-approval-flow__graph--edit-mode]="_isEditMode"
+                            class="fdp-approval-flow-carousel-controls"
+                            *ngIf="_scrollDiff > 0"
+                            [class.fdp-approval-flow-carousel-controls--edit-mode]="_isEditMode"
+                        >
+                            <button
+                                *ngIf="_carouselStepsLeft > 0"
+                                class="fdp-approval-flow-carousel-controls__button--prev-slide"
+                                [attr.aria-label]="'platformApprovalFlow.prevButtonAriaLabel' | fdTranslate"
+                                (click)="nextSlide(-1)"
+                            >
+                                <fd-icon [glyph]="'navigation-' + (_rtl ? 'right' : 'left') + '-arrow'"></fd-icon>
+                                {{ _carouselStepsLeft }}
+                            </button>
+
+                            <button
+                                *ngIf="_carouselStepsRight > 0"
+                                class="fdp-approval-flow-carousel-controls__button--next-slide"
+                                [attr.aria-label]="'platformApprovalFlow.nextButtonAriaLabel' | fdTranslate"
+                                (click)="nextSlide()"
+                            >
+                                {{ _carouselStepsRight }}
+                                <fd-icon [glyph]="'navigation-' + (_rtl ? 'left' : 'right') + '-arrow'"></fd-icon>
+                            </button>
+                        </div>
+
+                        <div
+                            class="fdp-approval-flow__graph-container"
+                            [class.fdp-approval-flow__graph-container--multiple-root-nodes]="_multipleRootNodes"
+                            [class.fdp-approval-flow__graph-container--multiple-final-nodes]="_multipleFinalNodes"
+                            #graphContainerEl
                         >
                             <div
-                                class="fdp-approval-flow__graph-column"
-                                *ngFor="let column of _graph.columns; let columnIndex = index"
+                                class="fdp-approval-flow__graph"
+                                #graphEl
+                                [class.fdp-approval-flow__graph--edit-mode]="_isEditMode"
                             >
-                                <fdp-approval-flow-node
-                                    *ngFor="let node of column.nodes; let nodeIndex = index; trackBy: _trackByFn"
-                                    cdkDrag
-                                    #approvalFlowNode
-                                    [cdkDragDisabled]="_isCdkDragDisabled(node)"
-                                    [node]="node"
-                                    [meta]="_graphMetadata[node.id]"
-                                    [isEdit]="_isEditMode"
-                                    [isNextNodeBlank]="_isNextNodeBlank(node, columnIndex, nodeIndex)"
-                                    [checkDueDate]="checkDueDate"
-                                    [dueDateThreshold]="dueDateThreshold"
-                                    [renderArrow]="columnIndex > 0"
-                                    [allNodesInColumnApproved]="!!column.allNodesApproved"
-                                    (onAdd)="_addNode(node, $event)"
-                                    (onEdit)="_editNode(node)"
-                                    (onDelete)="_onNodeDelete(node)"
-                                    (keydown)="_onNodeKeyDown($event, node)"
-                                    (cdkDragStarted)="_dragDropInProgress = true"
-                                    (cdkDragReleased)="_onNodeDrop(node, $event.source)"
-                                    (cdkDragMoved)="_onNodeDragMoved(node)"
+                                <div
+                                    class="fdp-approval-flow__graph-column"
+                                    *ngFor="let column of _graph.columns; let columnIndex = index"
                                 >
-                                    <!-- Trick with using projection to make grid list items visible for the grid list -->
-                                    <fd-grid-list-item
-                                        type="active"
-                                        [value]="node"
-                                        [selected]="!!node.selected"
-                                        [ariaLabelledBy]="approvalFlowNode.approvalFlowNodeId"
-                                        [disableToolbarClick]="true"
-                                        class="fdp-approval-flow__graph-node-inner"
-                                        [class.fdp-approval-flow__graph-node-inner--edit]="_isEditMode"
-                                        (press)="_onNodeClick(node)"
+                                    <fdp-approval-flow-node
+                                        *ngFor="let node of column.nodes; let nodeIndex = index; trackBy: _trackByFn"
+                                        cdkDrag
+                                        #approvalFlowNode
+                                        [cdkDragDisabled]="_isCdkDragDisabled(node)"
+                                        [node]="node"
+                                        [meta]="_graphMetadata[node.id]"
+                                        [isEdit]="_isEditMode"
+                                        [isNextNodeBlank]="_isNextNodeBlank(node, columnIndex, nodeIndex)"
+                                        [checkDueDate]="checkDueDate"
+                                        [dueDateThreshold]="dueDateThreshold"
+                                        [renderArrow]="columnIndex > 0"
+                                        [allNodesInColumnApproved]="!!column.allNodesApproved"
+                                        (onAdd)="_addNode(node, $event)"
+                                        (onEdit)="_editNode(node)"
+                                        (onDelete)="_onNodeDelete(node)"
+                                        (keydown)="_onNodeKeyDown($event, node)"
+                                        (cdkDragStarted)="_dragDropInProgress = true"
+                                        (cdkDragReleased)="_onNodeDrop(node, $event.source)"
+                                        (cdkDragMoved)="_onNodeDragMoved(node)"
                                     >
-                                        <fd-grid-list-item-toolbar>
-                                            <ng-container *ngIf="_isEditMode">
+                                        <!-- Trick with using projection to make grid list items visible for the grid list -->
+                                        <fd-grid-list-item
+                                            type="active"
+                                            [value]="node"
+                                            [selected]="!!node.selected"
+                                            [ariaLabelledBy]="approvalFlowNode.approvalFlowNodeId"
+                                            [disableToolbarClick]="true"
+                                            class="fdp-approval-flow__graph-node-inner"
+                                            [class.fdp-approval-flow__graph-node-inner--edit]="_isEditMode"
+                                            (press)="_onNodeClick(node)"
+                                        >
+                                            <fd-grid-list-item-toolbar>
+                                                <ng-container *ngIf="_isEditMode">
+                                                    <ng-container
+                                                        [ngTemplateOutlet]="approvalFlowNode._overflowMenuButton"
+                                                    ></ng-container>
+                                                </ng-container>
+                                            </fd-grid-list-item-toolbar>
+
+                                            <fd-avatar
+                                                fd-grid-list-item-image
+                                                [image]="node.approvers.length === 1 ? node.approvers[0].imgUrl : null"
+                                                [label]="node.approvers.length > 1 ? node.description : null"
+                                                size="xs"
+                                                [circle]="true"
+                                            ></fd-avatar>
+
+                                            <ng-template fd-grid-list-item-body>
                                                 <ng-container
-                                                    [ngTemplateOutlet]="approvalFlowNode._overflowMenuButton"
+                                                    [ngTemplateOutlet]="approvalFlowNode._nodeContent"
                                                 ></ng-container>
-                                            </ng-container>
-                                        </fd-grid-list-item-toolbar>
-
-                                        <fd-avatar
-                                            fd-grid-list-item-image
-                                            [image]="node.approvers.length === 1 ? node.approvers[0].imgUrl : null"
-                                            [label]="node.approvers.length > 1 ? node.description : null"
-                                            size="xs"
-                                            [circle]="true"
-                                        ></fd-avatar>
-
-                                        <ng-template fd-grid-list-item-body>
-                                            <ng-container
-                                                [ngTemplateOutlet]="approvalFlowNode._nodeContent"
-                                            ></ng-container>
-                                        </ng-template>
-                                    </fd-grid-list-item>
-                                </fdp-approval-flow-node>
+                                            </ng-template>
+                                        </fd-grid-list-item>
+                                    </fdp-approval-flow-node>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </ng-container>
             </ng-container>
         </ng-container>
     </fd-grid-list>
@@ -253,6 +255,20 @@
                     style="fill: var(--sapIllus_StrokeDetailColor)"
                 ></path>
             </svg>
+        </div>
+    </ng-template>
+
+    <ng-template #skeletonTemplate>
+        <div class="fdp-approval-flow__container">
+            <div class="fdp-approval-flow__graph-container">
+                <div class="fdp-approval-flow__graph">
+                    <div *fdRepeat="2" class="fdp-approval-flow__graph-column">
+                        <div class="fdp-approval-flow-node">
+                            <fd-skeleton height="100%"></fd-skeleton>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </ng-template>
 </ng-container>

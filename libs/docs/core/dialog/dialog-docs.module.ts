@@ -16,6 +16,7 @@ import {
     DialogInnerPopoverComponent,
     DialogInnerPopoverExampleComponent
 } from './examples/dialog-inner-popover/dialog-inner-popover.component';
+import { TextModule } from '@fundamental-ngx/core/text';
 
 const routes: Routes = [
     {
@@ -38,7 +39,8 @@ const routes: Routes = [
         InputGroupModule,
         A11yModule,
         MultiInputModule,
-        CheckboxModule
+        CheckboxModule,
+        TextModule
     ],
     exports: [RouterModule],
     declarations: [

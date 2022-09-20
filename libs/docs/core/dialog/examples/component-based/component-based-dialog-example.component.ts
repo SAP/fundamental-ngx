@@ -5,7 +5,7 @@ import { DialogExampleComponent } from './dialog-example.component';
 @Component({
     selector: 'fd-component-based-dialog-example',
     template: `
-        <button fd-button label="Open from Component" (click)="open()"></button>
+        <button fd-button label="Open from Component" (click)="open()" *fdSkeletonState="false"></button>
         <p>{{ closeReason }}</p>
     `
 })

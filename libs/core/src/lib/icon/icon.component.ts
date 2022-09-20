@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 export type IconFont = 'SAP-icons' | 'BusinessSuiteInAppSymbols' | 'SAP-icons-TNT';
 
@@ -32,7 +33,8 @@ const BusinessSuiteInAppSymbol_PREFIX = 'businessSuiteInAppSymbols';
         role: 'presentation'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: skeletonConsumerProviders()
 })
 export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
     /** The icon name to display. See the icon page for the list of icons
@@ -60,7 +62,9 @@ export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
     _navigationItemIcon = false;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef, private readonly _skeletonConsumer: SkeletonConsumerDirective) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnInit(): void {

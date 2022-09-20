@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 import { PlatformInputModule } from '../input/fdp-input.module';
 import { InputGroupComponent } from './input-group.component';
@@ -23,7 +24,8 @@ import { InputGroupInputComponent } from './input.component';
         FormsModule,
         PlatformInputModule,
         PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
+        ContentDensityModule,
+        SkeletonModule
     ],
     exports: [
         PlatformInputModule,

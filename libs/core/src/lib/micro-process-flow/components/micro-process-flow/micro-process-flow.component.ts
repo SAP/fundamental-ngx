@@ -26,6 +26,7 @@ import {
     contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 @Component({
     selector: 'fd-micro-process-flow',
@@ -44,7 +45,8 @@ import {
         },
         contentDensityObserverProviders({
             modifiers: { [ContentDensityMode.COMPACT]: 'fd-micro-process-flow--compact' }
-        })
+        }),
+        skeletonConsumerProviders()
     ]
 })
 export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -126,9 +128,11 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
     constructor(
         private _cd: ChangeDetectorRef,
         @Optional() private _rtl: RtlService,
-        private _contentDensityObserver: ContentDensityObserver
+        private _contentDensityObserver: ContentDensityObserver,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {
         _contentDensityObserver.subscribe();
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

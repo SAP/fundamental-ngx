@@ -296,11 +296,20 @@
                         [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')"
                         (click)="dialog.close('Continue')"
                     ></fd-button-bar>
-                    <fd-button-bar label="Cancel" (click)="dialog.dismiss('Cancel')"></fd-button-bar>
+                    <fd-button-bar
+                        *fdSkeletonState="false"
+                        label="Cancel"
+                        (click)="dialog.dismiss('Cancel')"
+                    ></fd-button-bar>
                 </div>
             </div>
         </fd-dialog-body>
     </fd-dialog>
 </ng-template>
 
-<button fd-button label="Open Wizard in Dialog" (click)="openDialog(confirmationDialog)"></button>
+<button
+    fd-button
+    label="Open Wizard in Dialog"
+    (click)="openDialog(confirmationDialog)"
+    *fdSkeletonState="false"
+></button>

@@ -9,7 +9,13 @@
         [class.fd-wizard-tall-content]="tallContent"
     >
         <div class="fd-wizard__step-content-container">
-            <ng-content></ng-content>
+            <ng-container *fdSkeletonTemplate="skeletonTemplate">
+                <ng-content></ng-content>
+            </ng-container>
+
+            <ng-template #skeletonTemplate>
+                <fd-skeleton width="60%" height="1rem"></fd-skeleton>
+            </ng-template>
         </div>
     </section>
 </ng-template>

@@ -16,6 +16,7 @@
     <!-- Left Separator -->
     <div
         *ngIf="_leftColumnSeparator"
+        fdSkeletonConsumer
         class="fd-flexible-column-layout__separator"
         [attr.aria-label]="separatorAriaLabel"
         (click)="_handleLeftColumnSeparatorClick()"
@@ -46,6 +47,7 @@
     <!-- Right Separator -->
     <div
         *ngIf="_rightColumnSeparator"
+        fdSkeletonConsumer
         class="fd-flexible-column-layout__separator"
         [attr.aria-label]="separatorAriaLabel"
         (click)="_handleRightColumnSeparatorClick()"

@@ -1,3 +1,29 @@
-.overlay-content {
+/* All classes below are for the fullscreen functionality */
+.example-overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+}
+.example-overlay-content {
+    position: relative;
     width: 100%;
+}
+.example-button {
+    display: flex;
+    justify-content: flex-end;
+    padding: 3px 1rem;
+    background: #394a5d;
+}
+.fd-dynamic-page-section-example {
+    min-height: 20vh;
+    display: block;
+}
+.spacing-item {
+    display: block;
+    height: 10vh;
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 import { TileComponent } from './tile.component';
 import {
@@ -40,7 +41,7 @@ import {
 } from './directives/numeric-content.directives';
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [CommonModule, SkeletonModule],
     exports: [
         TileComponent,
         TileHeaderDirective,

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 import { ActionBarComponent } from './action-bar.component';
 import { ActionBarTitleComponent } from './action-bar-title/action-bar-title.component';
@@ -19,7 +20,7 @@ import { ActionBarMobileDirective } from './action-bar-mobile/action-bar-mobile.
         ActionBarBackDirective,
         ActionBarMobileDirective
     ],
-    imports: [CommonModule],
+    imports: [CommonModule, SkeletonModule],
     exports: [
         ActionBarComponent,
         ActionBarTitleComponent,

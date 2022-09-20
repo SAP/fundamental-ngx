@@ -7,10 +7,11 @@ import { PanelTitleDirective } from './panel-title/panel-title.directive';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { DeprecatedPanelCompactDirective } from './deprecated-panel-compact.directive';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 @NgModule({
     declarations: [PanelComponent, PanelContentDirective, PanelTitleDirective, DeprecatedPanelCompactDirective],
-    imports: [CommonModule, ButtonModule, ContentDensityModule],
+    imports: [CommonModule, ButtonModule, ContentDensityModule, SkeletonModule],
     exports: [
         PanelComponent,
         PanelContentDirective,

@@ -464,6 +464,10 @@ export const ROUTES: Routes = [
                 path: 'overflow-layout',
                 loadChildren: () =>
                     import('@fundamental-ngx/docs/core/overflow-layout').then((m) => m.OverflowLayoutDocsModule)
+            },
+            {
+                path: 'skeleton',
+                loadChildren: () => import('@fundamental-ngx/docs/core/skeleton').then((m) => m.SkeletonDocsModule)
             }
         ]
     }

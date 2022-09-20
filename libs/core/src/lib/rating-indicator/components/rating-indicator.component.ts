@@ -26,6 +26,7 @@ import {
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 let ratingUID = 0;
 
@@ -50,7 +51,8 @@ interface RatingViewItem {
             useExisting: forwardRef(() => RatingIndicatorComponent),
             multi: true
         },
-        registerFormItemControl(RatingIndicatorComponent)
+        registerFormItemControl(RatingIndicatorComponent),
+        skeletonConsumerProviders()
     ]
 })
 export class RatingIndicatorComponent
@@ -187,7 +189,14 @@ export class RatingIndicatorComponent
     private _hideDynamicText = false;
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(
+        private readonly _elementRef: ElementRef,
+        private readonly _changeDetectorRef: ChangeDetectorRef,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
+
     /** @hidden */
     get viewRatingUID(): number {
         return this._ratingUID;

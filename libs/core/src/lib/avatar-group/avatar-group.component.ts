@@ -18,6 +18,7 @@ import {
 import { ViewportRuler } from '@angular/cdk/overlay';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB } from '@angular/cdk/keycodes';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 import { of, Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
@@ -42,7 +43,8 @@ let avatarGroupCount = 0;
         {
             provide: AVATAR_GROUP_COMPONENT,
             useExisting: forwardRef(() => AvatarGroupComponent)
-        }
+        },
+        skeletonConsumerProviders()
     ]
 })
 export class AvatarGroupComponent implements AvatarGroupInterface, OnChanges, OnInit, AfterViewInit, OnDestroy {
@@ -123,7 +125,13 @@ export class AvatarGroupComponent implements AvatarGroupInterface, OnChanges, On
     private _dir: 'ltr' | 'rtl' | null = 'ltr';
 
     /** @hidden */
-    constructor(private readonly _viewportRuler: ViewportRuler, @Optional() private _rtlService: RtlService) {}
+    constructor(
+        private readonly _skeletonConsumer: SkeletonConsumerDirective,
+        private readonly _viewportRuler: ViewportRuler,
+        @Optional() private _rtlService: RtlService
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnInit(): void {

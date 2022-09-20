@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { NullableObject, Nullable } from '@fundamental-ngx/core/shared';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 
@@ -35,7 +36,8 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.tabindex]': 'clickable ? 0 : -1'
-    }
+    },
+    providers: skeletonConsumerProviders()
 })
 export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
@@ -89,7 +91,9 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     _textClass: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef, private readonly _skeletonConsumer: SkeletonConsumerDirective) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnChanges(): void {

@@ -1,224 +1,238 @@
-<button fd-button (click)="openPage()">Click to open full screen</button>
-<div class="overlay" #overlay>
+<button fd-button (click)="openPage()" *fdSkeletonState="false">Click to open full screen</button>
+<div cdkScrollable cdkTrapFocus class="example-overlay" #overlay>
     <ng-container *ngIf="fullscreen">
-        <fdp-dynamic-page ariaLabel="Example Dynamic Page">
-            <fdp-dynamic-page-title [title]="pageTitle" subtitle="Oversized multimaterial sneakers with quilted effect">
-                <!-- breadcrumb content -->
-                <fd-breadcrumb>
-                    <fd-breadcrumb-item>
-                        <a fd-link href="#">Men</a>
-                    </fd-breadcrumb-item>
-                    <fd-breadcrumb-item>
-                        <a fd-link href="#">Shoes</a>
-                    </fd-breadcrumb-item>
-                    <fd-breadcrumb-item>
-                        <a fd-link href="#">Running Shoes</a>
-                    </fd-breadcrumb-item>
-                    <fd-breadcrumb-item>
-                        <span>Jogging</span>
-                    </fd-breadcrumb-item>
-                </fd-breadcrumb>
+        <div class="example-overlay-content">
+            <div class="example-button">
+                <button fd-button (click)="closePage($event)" *fdSkeletonState="false">Exit Example</button>
+            </div>
 
-                <fdp-dynamic-page-key-info> LAST DAY OF SALE </fdp-dynamic-page-key-info>
+            <fdp-dynamic-page ariaLabel="Example Dynamic Page">
+                <fdp-dynamic-page-title
+                    [title]="pageTitle"
+                    subtitle="Oversized multimaterial sneakers with quilted effect"
+                >
+                    <!-- breadcrumb content -->
+                    <fd-breadcrumb>
+                        <fd-breadcrumb-item>
+                            <a fd-link href="#">Men</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <a fd-link href="#">Shoes</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <a fd-link href="#">Running Shoes</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <span>Jogging</span>
+                        </fd-breadcrumb-item>
+                    </fd-breadcrumb>
 
-                <fdp-dynamic-page-title-image>
-                    <fd-avatar image="http://picsum.photos/id/1018/400" size="s"></fd-avatar>
-                </fdp-dynamic-page-title-image>
+                    <fdp-dynamic-page-key-info> LAST DAY OF SALE </fdp-dynamic-page-key-info>
 
-                <fdp-dynamic-page-global-actions>
-                    <!-- global actions -->
-                    <fd-toolbar fdType="transparent" [clearBorder]="true">
-                        <button
-                            fd-toolbar-item
-                            fd-button
-                            fdCompact
-                            fdType="positive"
-                            (click)="closePage($event)"
-                            label="Accept"
-                            title="Accept"
-                        ></button>
-                        <button
-                            fd-toolbar-item
-                            fd-button
-                            fdCompact
-                            fdType="negative"
-                            (click)="closePage($event)"
-                            label="Reject"
-                            title="Reject"
-                        ></button>
-                        <fd-toolbar-separator></fd-toolbar-separator>
-                    </fd-toolbar>
-                </fdp-dynamic-page-global-actions>
-                <fdp-dynamic-page-layout-actions>
-                    <!-- layout actions -->
-                    <fd-toolbar fdType="transparent" [clearBorder]="true">
-                        <button
-                            fd-button
-                            fdType="transparent"
-                            aria-label="Resize"
-                            (click)="resizeClicked($event)"
-                            title="Resize"
+                    <fdp-dynamic-page-title-image>
+                        <fd-avatar image="http://picsum.photos/id/1018/400" size="s"></fd-avatar>
+                    </fdp-dynamic-page-title-image>
+
+                    <fdp-dynamic-page-global-actions>
+                        <!-- global actions -->
+                        <fd-toolbar fdType="transparent" [clearBorder]="true">
+                            <button
+                                fd-toolbar-item
+                                fd-button
+                                fdCompact
+                                fdType="positive"
+                                (click)="closePage($event)"
+                                label="Accept"
+                                title="Accept"
+                            ></button>
+                            <button
+                                fd-toolbar-item
+                                fd-button
+                                fdCompact
+                                fdType="negative"
+                                (click)="closePage($event)"
+                                label="Reject"
+                                title="Reject"
+                            ></button>
+                            <fd-toolbar-separator></fd-toolbar-separator>
+                        </fd-toolbar>
+                    </fdp-dynamic-page-global-actions>
+                    <fdp-dynamic-page-layout-actions>
+                        <!-- layout actions -->
+                        <fd-toolbar fdType="transparent" [clearBorder]="true">
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                aria-label="Resize"
+                                (click)="resizeClicked($event)"
+                                title="Resize"
+                            >
+                                <i class="sap-icon--resize"></i>
+                            </button>
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                aria-label="Exit Fullscreen"
+                                (click)="closePage($event)"
+                                title="Exit Fullscreen"
+                            >
+                                <i class="sap-icon--exitfullscreen"></i>
+                            </button>
+                            <button
+                                fd-buttonxs
+                                fdType="transparent"
+                                aria-label="Close"
+                                (click)="closePage($event)"
+                                title="Close"
+                            >
+                                <i class="sap-icon--decline"></i>
+                            </button>
+                        </fd-toolbar>
+                    </fdp-dynamic-page-layout-actions>
+                </fdp-dynamic-page-title>
+                <fdp-dynamic-page-header
+                    [collapsible]="true"
+                    [pinnable]="true"
+                    [collapsed]="false"
+                    (collapsedChange)="onCollapseChange()"
+                >
+                    <fd-facet-group ariaLabel="Facet Group">
+                        <fd-facet type="form" facetTitle="Technical Data" id="facet1">
+                            <fd-facet-content>
+                                <label fd-form-label [colon]="true" for="form-value-10">Base unit</label>
+                                <fd-text text="Each" id="form-value-10"></fd-text>
+                            </fd-facet-content>
+                            <fd-facet-content>
+                                <label fd-form-label [colon]="true" for="form-value-11">Length</label>
+                                <fd-text text="23.24 Centimeter" id="form-value-11"></fd-text>
+                            </fd-facet-content>
+                            <fd-facet-content>
+                                <label fd-form-label [colon]="true" for="form-value-12">Width</label>
+                                <fd-text text="86.1 Centimeter" id="form-value-12"></fd-text>
+                            </fd-facet-content>
+                            <fd-facet-content>
+                                <label fd-form-label [colon]="true" for="form-value-13">Height</label>
+                                <fd-text text="20.8 Centimeter" id="form-value-13"></fd-text>
+                            </fd-facet-content>
+                        </fd-facet>
+                        <fd-facet
+                            type="rating-indicator"
+                            facetTitle="Rating Indicator"
+                            subtitle="6 reviews"
+                            id="facet2"
                         >
-                            <i class="sap-icon--resize"></i>
-                        </button>
-                        <button
-                            fd-button
-                            fdType="transparent"
-                            aria-label="Exit Fullscreen"
-                            (click)="closePage($event)"
-                            title="Exit Fullscreen"
-                        >
-                            <i class="sap-icon--exitfullscreen"></i>
-                        </button>
-                        <button
-                            fd-button
-                            fdType="transparent"
-                            aria-label="Close"
-                            (click)="closePage($event)"
-                            title="Close"
-                        >
-                            <i class="sap-icon--decline"></i>
-                        </button>
-                    </fd-toolbar>
-                </fdp-dynamic-page-layout-actions>
-            </fdp-dynamic-page-title>
-            <fdp-dynamic-page-header
-                [collapsible]="true"
-                [pinnable]="true"
-                [collapsed]="false"
-                (collapsedChange)="onCollapseChange()"
-            >
-                <fd-facet-group ariaLabel="Facet Group">
-                    <fd-facet type="form" facetTitle="Technical Data" id="facet1">
-                        <fd-facet-content>
-                            <label fd-form-label [colon]="true" for="form-value-10">Base unit</label>
-                            <fd-text text="Each" id="form-value-10"></fd-text>
-                        </fd-facet-content>
-                        <fd-facet-content>
-                            <label fd-form-label [colon]="true" for="form-value-11">Length</label>
-                            <fd-text text="23.24 Centimeter" id="form-value-11"></fd-text>
-                        </fd-facet-content>
-                        <fd-facet-content>
-                            <label fd-form-label [colon]="true" for="form-value-12">Width</label>
-                            <fd-text text="86.1 Centimeter" id="form-value-12"></fd-text>
-                        </fd-facet-content>
-                        <fd-facet-content>
-                            <label fd-form-label [colon]="true" for="form-value-13">Height</label>
-                            <fd-text text="20.8 Centimeter" id="form-value-13"></fd-text>
-                        </fd-facet-content>
-                    </fd-facet>
-                    <fd-facet type="rating-indicator" facetTitle="Rating Indicator" subtitle="6 reviews" id="facet2">
-                        <fd-facet-content>
-                            <fd-rating-indicator
-                                size="md"
-                                dynamicTextIndicator="of"
-                                [value]="2.51"
-                            ></fd-rating-indicator>
-                        </fd-facet-content>
-                    </fd-facet>
-                    <fd-facet type="image" id="facet3">
-                        <fd-avatar title="Nature" image="http://picsum.photos/id/1018/400" size="l"></fd-avatar>
-                    </fd-facet>
-                    <fd-facet type="key-value" facetTitle="Status" id="facet4">
-                        <span
-                            fd-object-status
-                            status="positive"
-                            label="Delivery"
-                            [large]="true"
-                            title="Delivery"
-                            aria-label="Delivery"
-                        ></span>
-                    </fd-facet>
-                    <fd-facet type="key-value" facetTitle="Delivery Time" id="facet5">
-                        <span
-                            fd-object-status
-                            status="critical"
-                            label="12 days"
-                            glyph="shipping-status"
-                            [large]="true"
-                            title="12 days"
-                            aria-label="12 days"
-                        ></span>
-                    </fd-facet>
-                    <fd-facet type="key-value" facetTitle="Assembly Option" id="facet6">
-                        <span
-                            fd-object-status
-                            status="negative"
-                            label="To be selected"
-                            [large]="true"
-                            title="To be selected"
-                            aria-label="To be selected"
-                        ></span>
-                    </fd-facet>
-                    <fd-facet type="key-value" facetTitle="Pricing" id="facet7">
-                        <fd-object-number
-                            [number]="100.88"
-                            [large]="true"
-                            unit="EUR"
-                            status="informative"
-                            [decimal]="2"
-                        ></fd-object-number>
-                    </fd-facet>
-                </fd-facet-group>
-            </fdp-dynamic-page-header>
-            <fdp-dynamic-page-content id="basic">
-                <!-- page content goes here -->
-                Normal Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam totam
-                maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum.
-                Corporis, nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad provident
-                similique, voluptatibus obcaecati perferendis excepturi.
-                <fd-icon
-                    glyph="question-mark"
-                    fd-inline-help="Inline Help Tooltip"
-                    tabindex="0"
-                    aria-describedby="fd-inline-help-default"
-                    ariaLabel="Inline Help Tooltip"
-                ></fd-icon>
-                <br />
-                <br />
-                <br />
-                Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste
-                tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
-                dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis.
-                Similique vel ipsam debitis fuga sequi eveniet perspiciatis?
-                <br />
-                <br />
-                <br />
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo sed
-                odit? Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus inventore,
-                eos iusto sed. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam
-                totam maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore
-                cum. Corporis, nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad provident
-                similique, voluptatibus obcaecati perferendis excepturi.
-                <br />
-                <br />
-                <br />
-                Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste
-                tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
-                dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis.
-                Similique vel ipsam debitis fuga sequi eveniet perspiciatis?
-                <br />
-                <br />
-                <br />
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo sed
-                odit? Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus inventore,
-                eos iusto sed.
-                <br />
-                <br />
-                <br />
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus eligendi dolore omnis veritatis! Et
-                voluptatibus error, commodi, dignissimos nostrum nemo deleniti est cumque fuga reiciendis, fugiat
-                impedit explicabo voluptates at? Normal
-            </fdp-dynamic-page-content>
-            <fdp-dynamic-page-footer>
-                <!-- page footer content goes here -->
-                <div fd-bar barDesign="floating-footer">
-                    <div fd-bar-right>
-                        <fd-button-bar label="Save" fdType="emphasized" (click)="closePage($event)"></fd-button-bar>
-                        <fd-button-bar label="Cancel" (click)="closePage($event)"></fd-button-bar>
+                            <fd-facet-content>
+                                <fd-rating-indicator
+                                    size="md"
+                                    dynamicTextIndicator="of"
+                                    [value]="2.51"
+                                ></fd-rating-indicator>
+                            </fd-facet-content>
+                        </fd-facet>
+                        <fd-facet type="image" id="facet3">
+                            <fd-avatar title="Nature" image="http://picsum.photos/id/1018/400" size="l"></fd-avatar>
+                        </fd-facet>
+                        <fd-facet type="key-value" facetTitle="Status" id="facet4">
+                            <span
+                                fd-object-status
+                                status="positive"
+                                label="Delivery"
+                                [large]="true"
+                                title="Delivery"
+                                aria-label="Delivery"
+                            ></span>
+                        </fd-facet>
+                        <fd-facet type="key-value" facetTitle="Delivery Time" id="facet5">
+                            <span
+                                fd-object-status
+                                status="critical"
+                                label="12 days"
+                                glyph="shipping-status"
+                                [large]="true"
+                                title="12 days"
+                                aria-label="12 days"
+                            ></span>
+                        </fd-facet>
+                        <fd-facet type="key-value" facetTitle="Assembly Option" id="facet6">
+                            <span
+                                fd-object-status
+                                status="negative"
+                                label="To be selected"
+                                [large]="true"
+                                title="To be selected"
+                                aria-label="To be selected"
+                            ></span>
+                        </fd-facet>
+                        <fd-facet type="key-value" facetTitle="Pricing" id="facet7">
+                            <fd-object-number
+                                [number]="100.88"
+                                [large]="true"
+                                unit="EUR"
+                                status="informative"
+                                [decimal]="2"
+                            ></fd-object-number>
+                        </fd-facet>
+                    </fd-facet-group>
+                </fdp-dynamic-page-header>
+                <fdp-dynamic-page-content id="basic">
+                    <!-- page content goes here -->
+                    Normal Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam totam
+                    maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore
+                    cum. Corporis, nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad
+                    provident similique, voluptatibus obcaecati perferendis excepturi.
+                    <fd-icon
+                        glyph="question-mark"
+                        fd-inline-help="Inline Help Tooltip"
+                        tabindex="0"
+                        aria-describedby="fd-inline-help-default"
+                        ariaLabel="Inline Help Tooltip"
+                    ></fd-icon>
+                    <br />
+                    <br />
+                    <br />
+                    Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste
+                    tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
+                    dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae
+                    debitis. Similique vel ipsam debitis fuga sequi eveniet perspiciatis?
+                    <br />
+                    <br />
+                    <br />
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo
+                    sed odit? Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus
+                    inventore, eos iusto sed. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
+                    sunt laboriosam totam maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus nam
+                    repellat, aut ad et tempore cum. Corporis, nobis. Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. Laboriosam ad provident similique, voluptatibus obcaecati perferendis excepturi.
+                    <br />
+                    <br />
+                    <br />
+                    Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste
+                    tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
+                    dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae
+                    debitis. Similique vel ipsam debitis fuga sequi eveniet perspiciatis?
+                    <br />
+                    <br />
+                    <br />
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo
+                    sed odit? Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus
+                    inventore, eos iusto sed.
+                    <br />
+                    <br />
+                    <br />
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus eligendi dolore omnis veritatis! Et
+                    voluptatibus error, commodi, dignissimos nostrum nemo deleniti est cumque fuga reiciendis, fugiat
+                    impedit explicabo voluptates at? Normal
+                </fdp-dynamic-page-content>
+                <fdp-dynamic-page-footer>
+                    <!-- page footer content goes here -->
+                    <div fd-bar barDesign="floating-footer">
+                        <div fd-bar-right>
+                            <fd-button-bar label="Save" fdType="emphasized" (click)="closePage($event)"></fd-button-bar>
+                            <fd-button-bar label="Cancel" (click)="closePage($event)"></fd-button-bar>
+                        </div>
                     </div>
-                </div>
-            </fdp-dynamic-page-footer>
-        </fdp-dynamic-page>
+                </fdp-dynamic-page-footer>
+            </fdp-dynamic-page>
+        </div>
     </ng-container>
 </div>

@@ -5,10 +5,16 @@
     [class.fd-page-footer--md]="size === 'md'"
     [class.fd-page-footer--sm]="size === 'sm'"
 >
-    <div class="fd-page-footer__logo">
-        <ng-content *ngTemplateOutlet="logo"></ng-content>
-    </div>
-    <div class="fd-page-footer__container">
-        <ng-content *ngTemplateOutlet="content"></ng-content>
-    </div>
+    <ng-container *fdSkeletonTemplate="skeletonTemplate">
+        <div class="fd-page-footer__logo">
+            <ng-content *ngTemplateOutlet="logo"></ng-content>
+        </div>
+        <div class="fd-page-footer__container">
+            <ng-content *ngTemplateOutlet="content"></ng-content>
+        </div>
+    </ng-container>
+
+    <ng-template #skeletonTemplate>
+        <fd-skeleton width="40%" height="1rem"></fd-skeleton>
+    </ng-template>
 </div>

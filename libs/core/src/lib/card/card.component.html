@@ -1,15 +1,28 @@
-<ng-container *ngIf="!isLoading; else loaderTmpl">
-    <!-- Badge -->
-    <div *ngIf="badge" class="fd-badge" tabindex="0">{{ badge }}</div>
+<ng-container *fdSkeletonTemplate="skeletonTemplate">
+    <ng-container *ngIf="!isLoading; else loaderTmpl">
+        <!-- Badge -->
+        <div *ngIf="badge" class="fd-badge" tabindex="0">{{ badge }}</div>
 
-    <!-- Header and Content -->
-    <ng-content></ng-content>
+        <!-- Header and Content -->
+        <ng-content></ng-content>
 
-    <!-- Footer -->
-    <ng-content select="fd-card-footer"></ng-content>
+        <!-- Footer -->
+        <ng-content select="fd-card-footer"></ng-content>
+    </ng-container>
+
+    <!-- Loader -->
+    <ng-template #loaderTmpl>
+        <ng-content select="fd-card-loader"></ng-content>
+    </ng-template>
 </ng-container>
 
-<!-- Loader -->
-<ng-template #loaderTmpl>
-    <ng-content select="fd-card-loader"></ng-content>
+<ng-template #skeletonTemplate>
+    <fd-card-header>
+        <h2 fd-card-title>
+            <fd-skeleton width="60%" height="1rem"></fd-skeleton>
+        </h2>
+    </fd-card-header>
+    <fd-card-content>
+        <ul fd-list></ul>
+    </fd-card-content>
 </ng-template>

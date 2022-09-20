@@ -11,6 +11,7 @@ import {
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { HtmlSanitizer } from './utils/html-sanitizer';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 export type LinkTargetType = '' | '_blank' | '_self' | '_top' | '_parent' | '_search';
 
@@ -42,7 +43,8 @@ export type LinkTargetType = '' | '_blank' | '_self' | '_top' | '_parent' | '_se
         `
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: skeletonConsumerProviders()
 })
 export class FormattedTextComponent implements OnInit, OnChanges {
     /**
@@ -78,8 +80,13 @@ export class FormattedTextComponent implements OnInit, OnChanges {
     private _htmlSanitizer!: HtmlSanitizer;
 
     /** @hidden */
-    constructor(private readonly domSanitizer: DomSanitizer) {
+    constructor(
+        private readonly domSanitizer: DomSanitizer,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
         this._htmlSanitizer = new HtmlSanitizer();
+
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

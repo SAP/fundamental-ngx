@@ -1,0 +1,46 @@
+<div class="examples-wrapper" *fdSkeletonState="false">
+    <button fd-button (click)="localLoading = !localLoading">Toggle local state</button>
+
+    <button fd-button (click)="changeGlobalState()">Toggle global state</button>
+</div>
+
+<p>Permanently in the skeleton state because of the value passed to the <code>fdSkeletonState</code> directives</p>
+
+<p *fdSkeletonState="true; template: skeletonTemplate">Content</p>
+
+<ng-template #skeletonTemplate>
+    <p>
+        <fd-skeleton width="100%" height="25px"></fd-skeleton>
+    </p>
+</ng-template>
+
+<p>
+    Will react to global skeleton state changes and render the template passed to
+    <code>fdSkeletonTemplate</code> directive instead
+</p>
+
+<p *fdSkeletonTemplate="globalSkeletonTemplate">Content</p>
+
+<ng-template #globalSkeletonTemplate>
+    <p>
+        <fd-skeleton width="100%" height="25px"></fd-skeleton>
+    </p>
+</ng-template>
+
+<p>
+    Element that listen to global skeleton state changes because of applying <code>fdSkeletonConsumer</code> directive
+    to it
+</p>
+
+<p>
+    <button fdSkeletonConsumer>Button</button>
+</p>
+
+<p>
+    Custom component that listen to global skeleton state changes because it has providers set using
+    <code>skeletonConsumerProviders</code> factory function
+</p>
+
+<p>
+    <fd-skeleton-consumer-example></fd-skeleton-consumer-example>
+</p>

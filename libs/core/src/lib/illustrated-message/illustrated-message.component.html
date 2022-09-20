@@ -1,0 +1,29 @@
+<ng-container *fdSkeletonTemplate="skeletonTemplate">
+    <svg class="fd-illustrated-message__illustration" *ngIf="!noSvg || _inlineSvg">
+        <use [attr.href]="_href"></use>
+    </svg>
+
+    <div *ngIf="_inlineSvg" style="display: none" [innerHTML]="_inlineSvg"></div>
+
+    <ng-content select="[fd-illustrated-message-figcaption]"></ng-content>
+
+    <ng-content select="fd-illustrated-message-actions"></ng-content>
+</ng-container>
+
+<ng-template #skeletonTemplate>
+    <fd-skeleton width="5rem" height="5rem"></fd-skeleton>
+
+    <figcaption fd-illustrated-message-figcaption>
+        <h3 fd-illustrated-message-title>
+            <fd-skeleton
+                width="60%"
+                height="1rem"
+                style="margin: 0 auto"
+                [style.margin-top]="type === 'spot' ? '0.5rem' : 0"
+            ></fd-skeleton>
+        </h3>
+        <p fd-illustrated-message-text>
+            <fd-skeleton width="40%" height="1rem" style="margin: 0 auto"></fd-skeleton>
+        </p>
+    </figcaption>
+</ng-template>

@@ -20,6 +20,7 @@ import {
     NgZone,
     ChangeDetectionStrategy
 } from '@angular/core';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
@@ -51,7 +52,8 @@ let alertUniqueId = 0;
     },
     animations: [alertFadeNgIf],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: skeletonConsumerProviders()
 })
 export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
     /** @hidden */
@@ -122,12 +124,16 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         private cdRef: ChangeDetectorRef,
         private componentFactoryResolver: ComponentFactoryResolver,
         private ngZone: NgZone,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective,
         @Optional() private alertConfig: AlertConfig,
         @Optional() private alertRef: AlertRef
     ) {
         super(elRef);
+
         this._setAlertConfig(alertConfig);
         this._setProperties();
+
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

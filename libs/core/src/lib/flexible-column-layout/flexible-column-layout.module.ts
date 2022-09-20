@@ -4,6 +4,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { cloneDeep, merge } from 'lodash-es';
 import { DEFAULT_FLEXIBLE_LAYOUT_CONFIG, FD_FLEXIBLE_LAYOUT_CONFIG, FlexibleLayoutConfig } from './constants';
 import { FlexibleColumnLayoutComponent } from './flexible-column-layout.component';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 /**
  * Adds Flexible Column Layout functionality to your application.
@@ -14,7 +15,7 @@ import { FlexibleColumnLayoutComponent } from './flexible-column-layout.componen
  */
 @NgModule({
     declarations: [FlexibleColumnLayoutComponent],
-    imports: [CommonModule, ButtonModule],
+    imports: [CommonModule, ButtonModule, SkeletonModule],
     exports: [FlexibleColumnLayoutComponent],
     providers: [
         {

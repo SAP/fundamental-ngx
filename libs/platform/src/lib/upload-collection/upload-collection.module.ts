@@ -18,6 +18,7 @@ import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { FileUploaderModule } from '@fundamental-ngx/core/file-uploader';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
@@ -60,7 +61,8 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         PlatformMenuButtonModule,
         RouterModule,
         PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
+        ContentDensityModule,
+        SkeletonModule
     ],
     exports: [UploadCollectionComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule]
 })

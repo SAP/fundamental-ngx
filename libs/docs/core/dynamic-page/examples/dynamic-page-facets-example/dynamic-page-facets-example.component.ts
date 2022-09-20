@@ -1,37 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'fd-dynamic-page-facets-example',
     templateUrl: './dynamic-page-facets-example.component.html',
-    styles: [
-        `
-            .overlay {
-                height: 100%;
-                width: 100%;
-                position: fixed;
-                z-index: 10;
-                top: 0;
-                left: 0;
-                background-color: rgb(255, 255, 255);
-            }
-            .fd-dynamic-page-section-example {
-                min-height: 20vh;
-            }
-        `
-    ]
+    styleUrls: ['../dynamic-page-example.component.scss']
 })
 export class DynamicPageFacetsExampleComponent {
-    visible = false;
+    @ViewChild('overlay')
+    overlay: ElementRef<HTMLElement>;
+
+    fullscreen = false;
 
     onCollapseChange(): void {
         console.log('collapse changed');
     }
 
     openPage(): void {
-        this.visible = true;
+        this.fullscreen = true;
+        this.overlay.nativeElement.style.width = '100%';
     }
 
     closePage(): void {
-        this.visible = false;
+        this.fullscreen = false;
+        this.overlay.nativeElement.style.width = '0%';
     }
 }

@@ -5,7 +5,7 @@ import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-
 @Component({
     selector: 'fdp-platform-dynamic-page-non-collapsible-example',
     templateUrl: './platform-dynamic-page-non-collapsible-example.component.html',
-    styleUrls: ['./platform-dynamic-page-non-collapsible-example.component.scss'],
+    styleUrls: ['./platform-dynamic-page.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformDynamicPageNonCollapsibleExampleComponent implements OnDestroy {

@@ -22,6 +22,7 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -44,7 +45,7 @@ import { BreadcrumbItemComponent } from './breadcrumb-item.component';
     styleUrls: ['./breadcrumb.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyedService]
+    providers: [DestroyedService, skeletonConsumerProviders()]
 })
 export class BreadcrumbComponent implements OnInit, AfterViewInit {
     /**
@@ -109,11 +110,14 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     constructor(
-        public elementRef: ElementRef<HTMLElement>,
+        public elementRef: ElementRef<Element>,
         private _onDestroy$: DestroyedService,
         @Optional() private _rtlService: RtlService | null,
-        private _cdr: ChangeDetectorRef
-    ) {}
+        private _cdr: ChangeDetectorRef,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnInit(): void {

@@ -1,23 +1,37 @@
 <nav class="fd-side-nav" [class.fd-side-nav--condensed]="condensed || sideNavigationConfiguration?.condensed">
-    <ng-container *ngIf="!sideNavigationConfiguration">
-        <ng-content></ng-content>
-    </ng-container>
-    <ng-container *ngIf="sideNavigationConfiguration">
-        <div fd-side-nav-main *ngIf="sideNavigationConfiguration.mainNavigation">
-            <fd-prepared-nested-list
-                [condensed]="condensed || !!sideNavigationConfiguration.condensed"
-                [first]="true"
-                [list]="sideNavigationConfiguration.mainNavigation"
-            >
-            </fd-prepared-nested-list>
-        </div>
-        <div fd-side-nav-utility *ngIf="sideNavigationConfiguration.utilityNavigation">
-            <fd-prepared-nested-list
-                [condensed]="condensed || !!sideNavigationConfiguration.condensed"
-                [first]="true"
-                [list]="sideNavigationConfiguration.utilityNavigation"
-            >
-            </fd-prepared-nested-list>
-        </div>
+    <ng-container *fdSkeletonTemplate="skeletonTemplate">
+        <ng-container *ngIf="!sideNavigationConfiguration">
+            <ng-content></ng-content>
+        </ng-container>
+        <ng-container *ngIf="sideNavigationConfiguration">
+            <div fd-side-nav-main *ngIf="sideNavigationConfiguration.mainNavigation">
+                <fd-prepared-nested-list
+                    [condensed]="condensed || !!sideNavigationConfiguration.condensed"
+                    [first]="true"
+                    [list]="sideNavigationConfiguration.mainNavigation"
+                >
+                </fd-prepared-nested-list>
+            </div>
+            <div fd-side-nav-utility *ngIf="sideNavigationConfiguration.utilityNavigation">
+                <fd-prepared-nested-list
+                    [condensed]="condensed || !!sideNavigationConfiguration.condensed"
+                    [first]="true"
+                    [list]="sideNavigationConfiguration.utilityNavigation"
+                >
+                </fd-prepared-nested-list>
+            </div>
+        </ng-container>
     </ng-container>
 </nav>
+
+<ng-template #skeletonTemplate>
+    <div fd-side-nav-main>
+        <ul fd-nested-list>
+            <li fd-nested-list-item *fdRepeat="3">
+                <a fd-nested-list-link>
+                    <fd-skeleton style="margin: 0 0.5rem" width="40%" height="1rem"></fd-skeleton>
+                </a>
+            </li>
+        </ul>
+    </div>
+</ng-template>

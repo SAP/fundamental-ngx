@@ -1,3 +1,9 @@
-<ng-content></ng-content>
+<ng-container *fdSkeletonTemplate="skeletonTemplate">
+    <ng-content></ng-content>
 
-<div *ngIf="_showSpacer" class="footer-spacer"></div>
+    <div *ngIf="_showSpacer" class="footer-spacer"></div>
+</ng-container>
+
+<ng-template #skeletonTemplate>
+    <fd-skeleton width="60%" height="1rem" style="margin-bottom: 1rem"></fd-skeleton>
+</ng-template>

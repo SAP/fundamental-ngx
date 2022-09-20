@@ -1,3 +1,11 @@
 <div class="fd-feed-input" [class.is-disabled]="disabled">
-    <ng-content></ng-content>
+    <ng-container *fdSkeletonTemplate="skeletonTemplate">
+        <ng-content></ng-content>
+    </ng-container>
+
+    <ng-template #skeletonTemplate>
+        <fd-skeleton width="3rem" height="2rem" class="fd-feed-input__thumb"></fd-skeleton>
+
+        <fd-skeleton height="2rem"></fd-skeleton>
+    </ng-template>
 </div>

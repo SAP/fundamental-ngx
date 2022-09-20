@@ -16,6 +16,7 @@ import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
 import { IgnoreClickOnSelectionModule } from '@fundamental-ngx/core/utils';
 import { DeprecatedDynamicPageCompactDirective } from './deprecated-dynamic-page-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ToolbarModule,
         PopoverModule,
         IgnoreClickOnSelectionModule,
-        ContentDensityModule
+        ContentDensityModule,
+        SkeletonModule
     ],
     exports: [
         DynamicPageComponent,

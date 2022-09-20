@@ -396,6 +396,7 @@ export class SelectComponent
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }
+
         this._tabIndex = parseInt(_tabIndex, 10) || 0;
     }
 

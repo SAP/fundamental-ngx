@@ -11,6 +11,7 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { applyCssClass } from '@fundamental-ngx/core/utils';
 import { FormStates } from '@fundamental-ngx/core/shared';
 import { CSS_CLASS_NAME, getTypeClassName } from './constants';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 /** @deprecated use FormStates instead */
 export type MessageStates = FormStates;
@@ -27,7 +28,8 @@ export type MessageStates = FormStates;
         'aria-atomic': 'true'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: skeletonConsumerProviders()
 })
 export class FormMessageComponent implements CssClassBuilder, OnInit, OnChanges {
     /** Type of the message. */
@@ -49,7 +51,10 @@ export class FormMessageComponent implements CssClassBuilder, OnInit, OnChanges 
     @Input()
     class: string;
 
-    constructor(private _elementRef: ElementRef) {}
+    /** @hidden */
+    constructor(private _elementRef: ElementRef, private _skeletonConsumer: SkeletonConsumerDirective) {
+        this._skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnChanges(): void {

@@ -16,6 +16,8 @@ import { LinkModule } from '@fundamental-ngx/core/link';
 import { FieldGroupRowValuePipe } from './pipes/field-group-row-value.pipe';
 import { DeprecatedFormGroupCompactDirective } from './deprecated-form-group-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { RepeatModule } from '@fundamental-ngx/core/utils';
 
 const EXPORTABLE_DECLARATIONS = [
     FormGroupComponent,
@@ -39,7 +41,9 @@ const EXPORTABLE_DECLARATIONS = [
         PopoverModule,
         IconModule,
         LinkModule,
-        ContentDensityModule
+        ContentDensityModule,
+        SkeletonModule,
+        RepeatModule
     ],
     exports: [...EXPORTABLE_DECLARATIONS, ContentDensityModule]
 })

@@ -25,6 +25,7 @@ import {
     SplitterPaneContainerOrientation,
     SplitterPaneContainerOrientationType
 } from '../splitter-pane-container/splitter-pane-orientation.enum';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 /** @dynamic */
 @Component({
@@ -36,7 +37,8 @@ import {
         class: 'fd-splitter__resizer',
         '[class.is-active]': '_start != null || _isInFocus',
         '[tabindex]': '0'
-    }
+    },
+    providers: skeletonConsumerProviders()
 })
 export class SplitterResizerComponent implements OnDestroy {
     /** Orientation of the splitter's host pane container. */
@@ -95,8 +97,11 @@ export class SplitterResizerComponent implements OnDestroy {
         private readonly _elementRef: ElementRef<Element>,
         private readonly _cdr: ChangeDetectorRef,
         private readonly _ngZone: NgZone,
-        @Optional() @Inject(DOCUMENT) private readonly _document: Document | null
-    ) {}
+        @Optional() @Inject(DOCUMENT) private readonly _document: Document | null,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnDestroy(): void {

@@ -5,14 +5,17 @@
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <div id="fd-dialog-body-5" role="dialog">
-                Certain bat-pollinated wild pineapples, members of the Bromeliad family, do the exact opposite of most
-                flowers by opening their flowers at night and closing them during the day.
-            </div>
+            <fd-text
+                id="fd-dialog-body-5"
+                role="dialog"
+                text="Certain bat-pollinated wild pineapples, members of the Bromeliad family, do the exact opposite of most
+                flowers by opening their flowers at night and closing them during the day."
+            ></fd-text>
         </fd-dialog-body>
 
         <fd-dialog-footer>
             <fd-button-bar
+                *fdSkeletonState="false"
                 fd-initial-focus
                 fdType="emphasized"
                 label="Interesting"
@@ -24,4 +27,4 @@
     </fd-dialog>
 </ng-template>
 
-<button fd-button label="Open in mobile mode" (click)="openDialog(dialogTemplate)"></button>
+<button fd-button label="Open in mobile mode" (click)="openDialog(dialogTemplate)" *fdSkeletonState="false"></button>

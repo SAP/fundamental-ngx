@@ -30,6 +30,7 @@ import { resizeObservable, RtlService, getDocumentFontSize } from '@fundamental-
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 const REM_IN_PX = getDocumentFontSize();
 const CARD_MINIMUM_WIDTH = REM_IN_PX * 20; // 20rem
@@ -90,7 +91,8 @@ type CardColumn = CardDefinitionDirective[];
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-fixed-card-layout'
-    }
+    },
+    providers: skeletonConsumerProviders({ apply: false })
 })
 export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
     /** Drag drop behavior can be disabled */
@@ -204,7 +206,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     /** @hidden */
     constructor(
         private readonly _changeDetector: ChangeDetectorRef,
-        @Optional() private readonly _rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService,
+        public readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {}
 
     /** @hidden */

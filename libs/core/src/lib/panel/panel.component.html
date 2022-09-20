@@ -5,27 +5,43 @@
     [class]="class"
 >
     <div class="fd-panel__header">
-        <div *ngIf="!fixed" class="fd-panel__expand">
-            <button
-                fd-button
-                fdType="transparent"
-                class="fd-panel__button"
-                [glyph]="_getButtonIcon()"
-                [id]="expandId"
-                [class.is-expanded]="expanded"
-                [attr.aria-expanded]="expanded"
-                [attr.aria-controls]="panelContent?.id"
-                [ariaLabel]="expandAriaLabel"
-                [attr.aria-labelledby]="expandAriaLabelledBy + ' ' + expandId"
-                [title]="expandAriaLabel"
-                (click)="toggleExpand()"
-            ></button>
-        </div>
-        <ng-content select="[fd-panel-title]"></ng-content>
-        <ng-content></ng-content>
+        <ng-container *fdSkeletonTemplate="skeletonHeaderTemplate">
+            <div *ngIf="!fixed" class="fd-panel__expand">
+                <button
+                    fd-button
+                    fdType="transparent"
+                    class="fd-panel__button"
+                    [glyph]="_getButtonIcon()"
+                    [id]="expandId"
+                    [class.is-expanded]="expanded"
+                    [attr.aria-expanded]="expanded"
+                    [attr.aria-controls]="panelContent?.id"
+                    [ariaLabel]="expandAriaLabel"
+                    [attr.aria-labelledby]="expandAriaLabelledBy + ' ' + expandId"
+                    [title]="expandAriaLabel"
+                    (click)="toggleExpand()"
+                ></button>
+            </div>
+
+            <ng-content select="[fd-panel-title]"></ng-content>
+
+            <ng-content></ng-content>
+        </ng-container>
+
+        <ng-template #skeletonHeaderTemplate>
+            <div class="fd-panel__expand">
+                <fd-skeleton width="2rem" height="1rem"></fd-skeleton>
+            </div>
+
+            <fd-skeleton width="40%" height="1rem"></fd-skeleton>
+        </ng-template>
     </div>
 
-    <ng-container *ngIf="expanded || fixed">
-        <ng-content select="[fd-panel-content]"></ng-content>
+    <ng-container *fdSkeletonTemplate="skeletonTemplate">
+        <ng-container *ngIf="expanded || fixed">
+            <ng-content select="[fd-panel-content]"></ng-content>
+        </ng-container>
     </ng-container>
+
+    <ng-template #skeletonTemplate></ng-template>
 </div>

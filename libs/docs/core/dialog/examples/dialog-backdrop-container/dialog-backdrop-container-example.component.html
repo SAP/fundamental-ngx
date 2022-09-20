@@ -1,8 +1,23 @@
-<button fd-button label="Custom Backdrop" (click)="openCustomBackdrop(dialogTemplate)"></button>
+<button
+    fd-button
+    label="Custom Backdrop"
+    (click)="openCustomBackdrop(dialogTemplate)"
+    *fdSkeletonState="false"
+></button>
 
-<button fd-button (click)="openInCustomContainer(dialogTemplate, customContainer)" label="Custom Container"></button>
+<button
+    fd-button
+    (click)="openInCustomContainer(dialogTemplate, customContainer)"
+    label="Custom Container"
+    *fdSkeletonState="false"
+></button>
 
-<button fd-button (click)="openStaticDialog(dialogTemplate, customContainer)" label="Static Dialog"></button>
+<button
+    fd-button
+    (click)="openStaticDialog(dialogTemplate, customContainer)"
+    label="Static Dialog"
+    *fdSkeletonState="false"
+></button>
 
 <div #customContainer style="margin-top: 0.5rem"></div>
 
@@ -14,11 +29,12 @@
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <div id="fd-dialog-body-2" role="dialog">{{ dialog.data }}</div>
+            <fd-text id="fd-dialog-body-2" role="dialog" text="{{ dialog.data }}"></fd-text>
         </fd-dialog-body>
 
         <fd-dialog-footer>
             <fd-button-bar
+                *fdSkeletonState="false"
                 fd-initial-focus
                 fdType="emphasized"
                 label="Close"

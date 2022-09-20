@@ -11,6 +11,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 import { Subscription } from 'rxjs';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { FormItemControl, registerFormItemControl } from './../form-item-control/form-item-control';
@@ -29,7 +30,7 @@ import { FormItemControl, registerFormItemControl } from './../form-item-control
     styleUrls: ['./form-control.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [registerFormItemControl(FormControlComponent)]
+    providers: [skeletonConsumerProviders(), registerFormItemControl(FormControlComponent)]
 })
 export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges, OnDestroy, FormItemControl {
     /**
@@ -80,8 +81,11 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     constructor(
         private _elementRef: ElementRef,
         @Attribute('aria-label') private ariaLabelAttr: string,
-        @Attribute('aria-labelledby') private ariaLabelledByAttr: string
-    ) {}
+        @Attribute('aria-labelledby') private ariaLabelledByAttr: string,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnInit(): void {

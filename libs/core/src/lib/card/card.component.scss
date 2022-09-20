@@ -1,3 +1,7 @@
 @import '~fundamental-styles/dist/numeric-content';
 @import '~fundamental-styles/dist/card';
 @import '~fundamental-styles/dist/badge';
+
+.fd-card__title {
+    flex-grow: 1;
+}

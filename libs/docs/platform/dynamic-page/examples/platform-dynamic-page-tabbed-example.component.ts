@@ -10,7 +10,7 @@ import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-
 @Component({
     selector: 'fdp-platform-dynamic-page-tabbed-example',
     templateUrl: './platform-dynamic-page-tabbed-example.component.html',
-    styleUrls: ['./platform-dynamic-page-tabbed-example.component.scss'],
+    styleUrls: ['./platform-dynamic-page.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformDynamicPageTabbedExampleComponent implements OnDestroy {

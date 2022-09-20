@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { ResizedEvent } from '@fundamental-ngx/core/resizable-card-layout';
 
 @Component({
@@ -8,7 +8,10 @@ import { ResizedEvent } from '@fundamental-ngx/core/resizable-card-layout';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResizableCardLayoutExampleComponent {
-    visible = false;
+    @ViewChild('overlay')
+    overlay: ElementRef<HTMLElement>;
+
+    fullscreen = false;
     pageTitle = 'Balenciaga Tripple S Trainers';
     miniHeaderRowSpan = 4;
     card3MiniHeaderRowSpan = 5;
@@ -32,12 +35,14 @@ export class ResizableCardLayoutExampleComponent {
     showTableHeader = true;
 
     openPage(): void {
-        this.visible = true;
+        this.fullscreen = true;
+        this.overlay.nativeElement.style.width = '100%';
         this._initialData();
     }
 
     closePage(): void {
-        this.visible = false;
+        this.fullscreen = false;
+        this.overlay.nativeElement.style.width = '0%';
     }
 
     onStepChange(event: ResizedEvent): void {

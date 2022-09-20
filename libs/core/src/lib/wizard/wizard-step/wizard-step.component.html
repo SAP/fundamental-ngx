@@ -1,24 +1,39 @@
 <div class="fd-wizard__step-wrapper">
-    <a
-        #progressBarLink
-        class="fd-wizard__step-container"
-        (click)="stepContainerKeypress()"
-        (keypress)="stepContainerKeypress($event)"
-        [style.cursor]="visited ? 'pointer' : 'auto'"
-        [style.pointer-events]="visited ? 'auto' : 'none'"
-        [attr.tabindex]="status === 'current' ? 0 : -1"
-        [attr.aria-roledescription]="ariaRoleDecription"
-    >
-        <ng-content select="fd-wizard-step-indicator"></ng-content>
-        <div class="fd-wizard__label-container" [class.fd-wizard__label-container--optional]="optionalText">
-            <div #wizardLabel>
-                <span class="fd-wizard__label">{{ label }}</span>
-                <span *ngIf="optionalText" class="fd-wizard__optional-text">
-                    {{ optionalText }}
-                </span>
+    <ng-container *fdSkeletonTemplate="skeletonTemplate">
+        <a
+            #progressBarLink
+            class="fd-wizard__step-container"
+            (click)="stepContainerKeypress()"
+            (keypress)="stepContainerKeypress($event)"
+            [style.cursor]="visited ? 'pointer' : 'auto'"
+            [style.pointer-events]="visited ? 'auto' : 'none'"
+            [attr.tabindex]="status === 'current' ? 0 : -1"
+            [attr.aria-roledescription]="ariaRoleDecription"
+        >
+            <ng-content select="fd-wizard-step-indicator"></ng-content>
+            <div class="fd-wizard__label-container" [class.fd-wizard__label-container--optional]="optionalText">
+                <div #wizardLabel>
+                    <span class="fd-wizard__label">{{ label }}</span>
+                    <span *ngIf="optionalText" class="fd-wizard__optional-text">
+                        {{ optionalText }}
+                    </span>
+                </div>
             </div>
-        </div>
-    </a>
+        </a>
+    </ng-container>
+
+    <ng-template #skeletonTemplate>
+        <a class="fd-wizard__step-container">
+            <div class="fd-wizard__label-container">
+                <div>
+                    <span class="fd-wizard__label">
+                        <fd-skeleton width="2rem" height="2rem"></fd-skeleton>
+                    </span>
+                </div>
+            </div>
+        </a>
+    </ng-template>
+
     <span
         *ngIf="!_finalStep || branching"
         class="fd-wizard__connector"

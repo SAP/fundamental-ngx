@@ -16,6 +16,7 @@ import { Subject, merge, fromEvent } from 'rxjs';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 export const isSelectedClass = 'fd-button--toggled';
 export const isDisabledClass = 'is-disabled';
@@ -47,7 +48,8 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => SegmentedButtonComponent),
             multi: true
-        }
+        },
+        skeletonConsumerProviders()
     ]
 })
 export class SegmentedButtonComponent implements AfterContentInit, ControlValueAccessor {
@@ -85,7 +87,13 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     /** @hidden */
     onTouched = (): void => {};
 
-    constructor(private readonly _changeDetRef: ChangeDetectorRef) {}
+    /** @hidden */
+    constructor(
+        private readonly _changeDetRef: ChangeDetectorRef,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {

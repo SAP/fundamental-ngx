@@ -22,9 +22,10 @@ import { NotificationFooterContentDirective } from './directives/notification-fo
 import { NotificationSeparatorDirective } from './directives/notification-separator.directive';
 import { NotificationLimitTitleDirective } from './directives/notification-limit-title.directive';
 import { NotificationLimitDescriptionDirective } from './directives/notification-limit-description.directive';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 @NgModule({
-    imports: [CommonModule, ButtonModule, A11yModule],
+    imports: [CommonModule, ButtonModule, A11yModule, SkeletonModule],
     declarations: [
         NotificationComponent,
         NotificationHeaderComponent,

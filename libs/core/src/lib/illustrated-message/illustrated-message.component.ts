@@ -35,14 +35,7 @@ let illustratedMessageUniqueId = 0;
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-illustrated-message]',
-    template: `
-        <svg class="fd-illustrated-message__illustration" *ngIf="!noSvg || _inlineSvg">
-            <use [attr.href]="_href"></use>
-        </svg>
-        <div *ngIf="_inlineSvg" style="display: none;" [innerHTML]="_inlineSvg"></div>
-        <ng-content select="[fd-illustrated-message-figcaption]"></ng-content>
-        <ng-content select="fd-illustrated-message-actions"></ng-content>
-    `,
+    templateUrl: './illustrated-message.component.html',
     styleUrls: ['./illustrated-message.component.scss'],
 
     encapsulation: ViewEncapsulation.None,

@@ -1,0 +1,13 @@
+<ng-container *fdSkeletonTemplate="skeletonTemplate">
+    <ng-content></ng-content>
+</ng-container>
+
+<ng-template #skeletonTemplate>
+    <div fd-tab-item *fdRepeat="2">
+        <a fd-tab-link>
+            <span fd-tab-tag>
+                <fd-skeleton width="5rem" height="1rem"></fd-skeleton>
+            </span>
+        </a>
+    </div>
+</ng-template>

@@ -11,6 +11,7 @@ import { BarElementDirective } from './directives/bar-element.directive';
 import { ButtonBarComponent } from './button-bar/button-bar.component';
 import { DeprecatedBarContentDensityDirective } from './deprecated-bar-content-density.directive';
 import { DeprecatedBarButtonContentDensityDirective } from './deprecated-bar-button-content-density.directive';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,7 @@ import { DeprecatedBarButtonContentDensityDirective } from './deprecated-bar-but
         DeprecatedBarContentDensityDirective,
         DeprecatedBarButtonContentDensityDirective
     ],
-    imports: [CommonModule, ButtonModule, ContentDensityModule],
+    imports: [CommonModule, ButtonModule, ContentDensityModule, SkeletonModule],
     exports: [
         BarComponent,
         BarLeftDirective,

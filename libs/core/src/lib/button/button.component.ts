@@ -10,6 +10,7 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 import { BaseButton } from './base-button';
 import { Subscription } from 'rxjs';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
@@ -47,7 +48,8 @@ import {
             modifiers: {
                 [ContentDensityMode.COMPACT]: 'fd-button--compact'
             }
-        })
+        }),
+        skeletonConsumerProviders()
     ]
 })
 export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {
@@ -97,10 +99,13 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     constructor(
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _contentDensityObserver: ContentDensityObserver
+        private _contentDensityObserver: ContentDensityObserver,
+        readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {
         super();
+
         _contentDensityObserver.subscribe();
+        _skeletonConsumer.consume();
     }
 
     /** Function runs when component is initialized

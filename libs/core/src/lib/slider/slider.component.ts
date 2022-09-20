@@ -53,6 +53,7 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -74,7 +75,8 @@ let sliderId = 0;
         contentDensityObserverProviders({
             defaultContentDensity: ContentDensityMode.COMPACT,
             modifiers: { [ContentDensityMode.COZY]: 'fd-slider--lg' }
-        })
+        }),
+        skeletonConsumerProviders()
     ],
     host: {
         '(mouseenter)': 'this._componentHovered$.next(true)',
@@ -365,9 +367,11 @@ export class SliderComponent
         private readonly _platform: Platform,
         private readonly _liveAnnouncer: LiveAnnouncer,
         @Optional() private readonly _rtlService: RtlService,
-        readonly _contentDensityObserver: ContentDensityObserver
+        readonly _contentDensityObserver: ContentDensityObserver,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {
         _contentDensityObserver.subscribe();
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

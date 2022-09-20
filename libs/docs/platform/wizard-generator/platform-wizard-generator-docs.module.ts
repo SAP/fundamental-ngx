@@ -16,6 +16,7 @@ import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { PlatformWizardGeneratorDocsComponent } from './platform-wizard-generator-docs.component';
 import { PlatformWizardGeneratorHeaderComponent } from './platform-wizard-generator-header/platform-wizard-generator-header.component';
 import { WizardGeneratorDefaultExampleComponent } from './examples/wizard-generator-default-example.component';
@@ -74,7 +75,8 @@ const routes: Routes = [
         BarModule,
         LayoutGridModule,
         PlatformLinkModule,
-        IconModule
+        IconModule,
+        SkeletonModule
     ],
     providers: [currentComponentProvider('wizard-generator')]
 })

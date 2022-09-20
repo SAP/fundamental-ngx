@@ -31,10 +31,7 @@ import { FocusTrap, ConfigurableFocusTrapFactory } from '@angular/cdk/a11y';
 
 @Component({
     selector: 'fd-notification',
-    template: `
-        <ng-content></ng-content>
-        <ng-container #vc></ng-container>
-    `,
+    templateUrl: `./notification.component.html`,
     styleUrls: ['./notification.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {

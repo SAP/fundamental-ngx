@@ -1,5 +1,15 @@
-<ng-content select="fd-layout-panel-header"></ng-content>
-<ng-content select="fd-layout-panel-filters"></ng-content>
-<ng-content select="fd-layout-panel-body"></ng-content>
-<ng-content select="fd-layout-panel-footer"></ng-content>
-<ng-content></ng-content>
+<ng-container *fdSkeletonTemplate="skeletonTemplate">
+    <ng-content select="fd-layout-panel-header"></ng-content>
+    <ng-content select="fd-layout-panel-filters"></ng-content>
+    <ng-content select="fd-layout-panel-body"></ng-content>
+    <ng-content select="fd-layout-panel-footer"></ng-content>
+    <ng-content></ng-content>
+</ng-container>
+
+<ng-template #skeletonTemplate>
+    <fd-layout-panel-header>
+        <fd-layout-panel-head style="flex-grow: 1">
+            <fd-skeleton width="60%" height="1rem"></fd-skeleton>
+        </fd-layout-panel-head>
+    </fd-layout-panel-header>
+</ng-template>

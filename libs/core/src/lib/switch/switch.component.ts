@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 let switchUniqueId = 0;
 let warnedAboutAriaLabeledBy = false;
@@ -36,7 +37,8 @@ let warnedAboutAriaLabeledBy = false;
             multi: true
         },
         registerFormItemControl(SwitchComponent),
-        contentDensityObserverProviders()
+        contentDensityObserverProviders(),
+        skeletonConsumerProviders()
     ],
     host: {
         class: 'fd-form__item fd-form__item--check fd-switch-custom',
@@ -130,10 +132,14 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     /** @hidden */
     onTouched = (): void => {};
 
+    /** @hidden */
     constructor(
         private readonly _changeDetectorRef: ChangeDetectorRef,
-        readonly _contentDensityObserver: ContentDensityObserver
-    ) {}
+        readonly _contentDensityObserver: ContentDensityObserver,
+        readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnDestroy(): void {

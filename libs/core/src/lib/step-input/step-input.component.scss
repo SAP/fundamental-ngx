@@ -9,6 +9,8 @@
 }
 
 .fd-step-input {
+    display: flex;
+
     &--without-buttons {
         & > .fd-input {
             margin-bottom: 0;

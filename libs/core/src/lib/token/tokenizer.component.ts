@@ -30,6 +30,7 @@ import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { applyCssClass, CssClassBuilder, KeyUtil, resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
 import { TokenComponent } from './token.component';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 @Component({
     selector: 'fd-tokenizer',
@@ -37,7 +38,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     styleUrls: ['./tokenizer.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders()]
+    providers: [skeletonConsumerProviders(), contentDensityObserverProviders()]
 })
 export class TokenizerComponent
     implements AfterViewInit, AfterContentInit, OnDestroy, CssClassBuilder, OnInit, OnChanges
@@ -169,7 +170,8 @@ export class TokenizerComponent
         private _elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService,
-        private _renderer: Renderer2
+        private _renderer: Renderer2,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {
         this._renderer.listen('window', 'click', (e: Event) => {
             if (this.elementRef().nativeElement.contains(e.target) === false) {
@@ -178,6 +180,8 @@ export class TokenizerComponent
                 });
             }
         });
+
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

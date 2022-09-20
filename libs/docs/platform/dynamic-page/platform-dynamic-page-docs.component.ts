@@ -2,36 +2,30 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+
 import { PlatformDynamicPagePageOverflowService } from './examples/platform-dynamic-page-page-overflow.service';
 
 const dynamicPageBasicExample = 'platform-dynamic-page-example.component.html';
-const dynamicPageBasicExampleScss = 'platform-dynamic-page-example.component.scss';
+const dynamicPageBasicExampleScss = 'platform-dynamic-page.scss';
 const dynamicPageBasicExampleTsCode = 'platform-dynamic-page-example.component.ts';
 
 const dynamicPageTabbedExample = 'platform-dynamic-page-tabbed-example.component.html';
-const dynamicPageTabbedExampleScss = 'platform-dynamic-page-tabbed-example.component.scss';
 const dynamicPageTabbedExampleTsCode = 'platform-dynamic-page-tabbed-example.component.ts';
 
 const dynamicPageSnapScrollExample = 'platform-dynamic-page-snap-scroll-example.component.html';
-const dynamicPageSnapScrollExampleScss = 'platform-dynamic-page-snap-scroll-example.component.scss';
 const dynamicPageSnapScrollExampleTsCode = 'platform-dynamic-page-snap-scroll-example.component.ts';
 
 const dynamicPageResponsivePaddingExample = 'platform-dynamic-page-responsive-padding-example.component.html';
-const dynamicPageResponsivePaddingExampleScss = 'platform-dynamic-page-responsive-padding-example.component.scss';
 const dynamicPageResponsivePaddingExampleTsCode = 'platform-dynamic-page-responsive-padding-example.component.ts';
 
 const dynamicPageNonCollapsibleExample = 'platform-dynamic-page-non-collapsible-example.component.html';
-const dynamicPageNonCollapsibleExampleScss = 'platform-dynamic-page-non-collapsible-example.component.scss';
 const dynamicPageNonCollapsibleExampleTsCode = 'platform-dynamic-page-non-collapsible-example.component.ts';
 
 const dynamicPageFlexibleColumnExample = 'platform-dynamic-page-flexible-column-example.component.html';
-const dynamicPageFlexibleColumnExampleScss = 'platform-dynamic-page-flexible-column-example.component.scss';
 const dynamicPageFlexibleColumnExampleTsCode = 'platform-dynamic-page-flexible-column-example.component.ts';
 
 const dynamicPageFacetsExample =
     'platform-dynamic-page-facets-example/platform-dynamic-page-facets-example.component.html';
-const dynamicPageFacetsExampleScss =
-    'platform-dynamic-page-facets-example/platform-dynamic-page-facets-example.component.scss';
 const dynamicPageFacetsExampleTsCode =
     'platform-dynamic-page-facets-example/platform-dynamic-page-facets-example.component.ts';
 
@@ -74,7 +68,7 @@ export class PlatformDynamicPageDocsComponent implements OnInit, OnDestroy {
             language: 'html',
             code: getAssetFromModuleAssets(dynamicPageSnapScrollExample),
             fileName: 'platform-dynamic-page-snap-scroll-example',
-            scssFileCode: getAssetFromModuleAssets(dynamicPageSnapScrollExampleScss)
+            scssFileCode: getAssetFromModuleAssets(dynamicPageBasicExampleScss)
         },
         {
             language: 'typescript',
@@ -97,7 +91,7 @@ export class PlatformDynamicPageDocsComponent implements OnInit, OnDestroy {
             language: 'html',
             code: getAssetFromModuleAssets(dynamicPageTabbedExample),
             fileName: 'platform-dynamic-page-tabbed-example',
-            scssFileCode: getAssetFromModuleAssets(dynamicPageTabbedExampleScss)
+            scssFileCode: getAssetFromModuleAssets(dynamicPageBasicExampleScss)
         },
         {
             language: 'typescript',
@@ -120,7 +114,7 @@ export class PlatformDynamicPageDocsComponent implements OnInit, OnDestroy {
             language: 'html',
             code: getAssetFromModuleAssets(dynamicPageResponsivePaddingExample),
             fileName: 'platform-dynamic-page-responsive-padding-example',
-            scssFileCode: getAssetFromModuleAssets(dynamicPageResponsivePaddingExampleScss)
+            scssFileCode: getAssetFromModuleAssets(dynamicPageBasicExampleScss)
         },
         {
             language: 'typescript',
@@ -143,7 +137,7 @@ export class PlatformDynamicPageDocsComponent implements OnInit, OnDestroy {
             language: 'html',
             code: getAssetFromModuleAssets(dynamicPageNonCollapsibleExample),
             fileName: 'platform-dynamic-page-non-collapsible-example',
-            scssFileCode: getAssetFromModuleAssets(dynamicPageNonCollapsibleExampleScss)
+            scssFileCode: getAssetFromModuleAssets(dynamicPageBasicExampleScss)
         },
         {
             language: 'typescript',
@@ -165,8 +159,7 @@ export class PlatformDynamicPageDocsComponent implements OnInit, OnDestroy {
         {
             language: 'html',
             code: getAssetFromModuleAssets(dynamicPageFlexibleColumnExample),
-            fileName: 'platform-dynamic-page-flexible-column-example',
-            scssFileCode: getAssetFromModuleAssets(dynamicPageFlexibleColumnExampleScss)
+            fileName: 'platform-dynamic-page-flexible-column-example'
         },
         {
             language: 'typescript',
@@ -188,8 +181,7 @@ export class PlatformDynamicPageDocsComponent implements OnInit, OnDestroy {
         {
             language: 'html',
             code: getAssetFromModuleAssets(dynamicPageFacetsExample),
-            fileName: 'platform-dynamic-page-facets-example',
-            scssFileCode: getAssetFromModuleAssets(dynamicPageFacetsExampleScss)
+            fileName: 'platform-dynamic-page-facets-example'
         },
         {
             language: 'typescript',

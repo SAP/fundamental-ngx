@@ -1,43 +1,92 @@
-<div class="fd-dynamic-page__main-container">
-    <div class="fd-dynamic-page__breadcrumb-title-container">
-        <div class="fd-dynamic-page__breadcrumb-container">
-            <nav aria-label="Breadcrumbs" class="fd-dynamic-page__breadcrumb-wrapper" (click)="stopPropagation($event)">
-                <ng-content select="fd-breadcrumb"></ng-content>
-            </nav>
-            <ng-container *ngIf="_actionsSquashed">
-                <ng-container *ngTemplateOutlet="dynamicPageLayoutActionsRef"></ng-container>
-            </ng-container>
-        </div>
-        <div class="fd-dynamic-page__title-container">
-            <ng-container *ngIf="_collapsed">
-                <ng-content select="fd-facet"></ng-content>
-            </ng-container>
+<ng-container *fdSkeletonTemplate="skeletonTemplate">
+    <div class="fd-dynamic-page__main-container">
+        <div class="fd-dynamic-page__breadcrumb-title-container">
+            <div class="fd-dynamic-page__breadcrumb-container">
+                <nav
+                    aria-label="Breadcrumbs"
+                    class="fd-dynamic-page__breadcrumb-wrapper"
+                    (click)="stopPropagation($event)"
+                >
+                    <ng-content select="fd-breadcrumb"></ng-content>
+                </nav>
 
-            <div class="fd-dynamic-page__title-subtitle-container">
-                <div class="fd-dynamic-page__title-container">
-                    <span class="fd-dynamic-page__title" fdIgnoreClickOnSelection>
-                        {{ title }}
-                    </span>
-                    <ng-content select="fd-dynamic-page-title-content"></ng-content>
-                    <div class="fd-dynamic-page__toolbar-container" (click)="stopPropagation($event)">
-                        <ng-container *ngTemplateOutlet="dynamicPageGlobalActionsRef"></ng-container>
-                        <ng-container *ngIf="!_actionsSquashed">
-                            <ng-container *ngTemplateOutlet="dynamicPageLayoutActionsRef"></ng-container>
-                        </ng-container>
+                <ng-container *ngIf="_actionsSquashed">
+                    <ng-container *ngTemplateOutlet="dynamicPageLayoutActionsRef"></ng-container>
+                </ng-container>
+            </div>
+
+            <div class="fd-dynamic-page__title-container">
+                <ng-container *ngIf="_collapsed">
+                    <ng-content select="fd-facet"></ng-content>
+                </ng-container>
+
+                <div class="fd-dynamic-page__title-subtitle-container">
+                    <div class="fd-dynamic-page__title-container">
+                        <span class="fd-dynamic-page__title" fdIgnoreClickOnSelection>
+                            {{ title }}
+                        </span>
+
+                        <ng-content select="fd-dynamic-page-title-content"></ng-content>
+
+                        <div class="fd-dynamic-page__toolbar-container" (click)="stopPropagation($event)">
+                            <ng-container *ngTemplateOutlet="dynamicPageGlobalActionsRef"></ng-container>
+
+                            <ng-container *ngIf="!_actionsSquashed">
+                                <ng-container *ngTemplateOutlet="dynamicPageLayoutActionsRef"></ng-container>
+                            </ng-container>
+                        </div>
                     </div>
-                </div>
-                <div class="fd-dynamic-page__subtitle" *ngIf="_collapsed && subtitle" fdIgnoreClickOnSelection>
-                    {{ subtitle }}
+
+                    <div class="fd-dynamic-page__subtitle" *ngIf="_collapsed && subtitle" fdIgnoreClickOnSelection>
+                        {{ subtitle }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="fd-dynamic-page__subtitle" *ngIf="!_collapsed && subtitle" fdIgnoreClickOnSelection>{{ subtitle }}</div>
 
-<ng-template #dynamicPageGlobalActionsRef>
-    <ng-content select="fd-dynamic-page-global-actions"></ng-content>
-</ng-template>
-<ng-template #dynamicPageLayoutActionsRef>
-    <ng-content select="fd-dynamic-page-layout-actions"></ng-content>
+    <div class="fd-dynamic-page__subtitle" *ngIf="!_collapsed && subtitle" fdIgnoreClickOnSelection>
+        {{ subtitle }}
+    </div>
+
+    <ng-template #dynamicPageGlobalActionsRef>
+        <ng-content select="fd-dynamic-page-global-actions"></ng-content>
+    </ng-template>
+    <ng-template #dynamicPageLayoutActionsRef>
+        <ng-content select="fd-dynamic-page-layout-actions"></ng-content>
+    </ng-template>
+</ng-container>
+
+<ng-template #skeletonTemplate>
+    <div class="fd-dynamic-page__main-container">
+        <div class="fd-dynamic-page__breadcrumb-title-container">
+            <div class="fd-dynamic-page__breadcrumb-container">
+                <nav aria-label="Breadcrumbs" class="fd-dynamic-page__breadcrumb-wrapper">
+                    <fd-skeleton width="40%" height="1rem"></fd-skeleton>
+                </nav>
+
+                <fd-skeleton width="2rem" height="2rem"></fd-skeleton>
+            </div>
+
+            <div class="fd-dynamic-page__title-container">
+                <div class="fd-dynamic-page__title-subtitle-container">
+                    <div class="fd-dynamic-page__title-container">
+                        <span class="fd-dynamic-page__title" style="flex-grow: 1">
+                            <fd-skeleton width="50%" height="1rem"></fd-skeleton>
+                        </span>
+
+                        <div class="fd-dynamic-page__toolbar-container">
+                            <fd-toolbar *fdSkeletonState="false" fdType="transparent" [clearBorder]="true">
+                                <fd-skeleton width="2rem" height="2rem"></fd-skeleton>
+                            </fd-toolbar>
+                        </div>
+                    </div>
+
+                    <div class="fd-dynamic-page__subtitle">
+                        <fd-skeleton width="60%" height="1rem"></fd-skeleton>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </ng-template>

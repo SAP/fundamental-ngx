@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
     selector: 'fd-checkbox-custom-label-example',
     template: `
         <fd-checkbox [(ngModel)]="checkboxValue"> I accept&nbsp;<a href="#">Terms and conditions</a> </fd-checkbox>
-        Value: {{ checkboxValue }}
+        <br />Value: {{ checkboxValue }}
     `
 })
 export class CheckboxCustomLabelExampleComponent {

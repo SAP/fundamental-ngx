@@ -15,6 +15,7 @@ import { ToolbarOverflowPriorityDirective } from './toolbar-overflow-priority.di
 import { ToolbarOverflowGroupDirective } from './toolbar-overflow-group.directive';
 import { DeprecatedToolbarSizeDirective } from './deprecated-toolbar-size.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 const components = [
     ToolbarComponent,
@@ -32,7 +33,7 @@ const components = [
 
 @NgModule({
     declarations: [...components],
-    imports: [CommonModule, ButtonModule, PopoverModule, ContentDensityModule],
+    imports: [CommonModule, ButtonModule, PopoverModule, ContentDensityModule, SkeletonModule],
     exports: [...components, ContentDensityModule]
 })
 export class ToolbarModule {}

@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 /**
  * A token is used to represent contextualizing information.
@@ -28,7 +29,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     styleUrls: ['./token.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders()]
+    providers: [skeletonConsumerProviders(), contentDensityObserverProviders()]
 })
 export class TokenComponent implements AfterViewInit, OnDestroy {
     /** Whether the token is disabled. */
@@ -105,11 +106,15 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     totalCount: number;
 
+    /** @hidden */
     constructor(
         public elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
-        readonly _contentDensityObserver: ContentDensityObserver
-    ) {}
+        readonly _contentDensityObserver: ContentDensityObserver,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {

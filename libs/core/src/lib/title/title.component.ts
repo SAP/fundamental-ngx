@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -20,7 +21,7 @@ export abstract class TitleToken {
     styleUrls: ['./title.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: TitleToken, useExisting: TitleComponent }]
+    providers: [{ provide: TitleToken, useExisting: TitleComponent }, skeletonConsumerProviders()]
 })
 export class TitleComponent extends TitleToken implements OnInit {
     /** The size of the header */
@@ -46,8 +47,10 @@ export class TitleComponent extends TitleToken implements OnInit {
     private _appliedHeaderSize: number;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {
+    constructor(private _elementRef: ElementRef, private readonly _skeletonConsumer: SkeletonConsumerDirective) {
         super();
+
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

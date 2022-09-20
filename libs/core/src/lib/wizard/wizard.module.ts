@@ -13,6 +13,8 @@ import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 import { DeprecatedWizardCompactDirective } from './deprecated-wizard-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { RepeatModule } from '@fundamental-ngx/core/utils';
 
 @NgModule({
     declarations: [
@@ -25,7 +27,16 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         WizardNextStepComponent,
         DeprecatedWizardCompactDirective
     ],
-    imports: [CommonModule, IconModule, ScrollSpyModule, ActionSheetModule, ScrollingModule, ContentDensityModule],
+    imports: [
+        CommonModule,
+        IconModule,
+        ScrollSpyModule,
+        ActionSheetModule,
+        ScrollingModule,
+        ContentDensityModule,
+        SkeletonModule,
+        RepeatModule
+    ],
     exports: [
         WizardComponent,
         WizardNavigationComponent,

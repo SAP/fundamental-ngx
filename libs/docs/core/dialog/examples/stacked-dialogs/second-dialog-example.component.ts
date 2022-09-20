@@ -10,14 +10,16 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
             </fd-dialog-header>
 
             <fd-dialog-body>
-                <div id="fd-dialog-body-9" role="dialog">
-                    This is the second dialog!<br />
-                    It is completely independent from the first dialog and can be controlled separately!
-                </div>
+                <fd-text
+                    id="fd-dialog-body-9"
+                    role="dialog"
+                    text="This is the second dialog! It is completely independent from the first dialog and can be controlled separately!"
+                ></fd-text>
             </fd-dialog-body>
 
             <fd-dialog-footer>
                 <fd-button-bar
+                    *fdSkeletonState="false"
                     fd-initial-focus
                     fdType="emphasized"
                     label="Close"

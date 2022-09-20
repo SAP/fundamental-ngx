@@ -1,72 +1,89 @@
-<form (ngSubmit)="onSubmit.emit($event)" *ngIf="useForm; else body" [id]="id" [name]="name">
-    <ng-container *ngTemplateOutlet="body"></ng-container>
-</form>
+<ng-container *fdSkeletonTemplate="skeletonTemplate">
+    <form (ngSubmit)="onSubmit.emit($event)" *ngIf="useForm; else body" [id]="id" [name]="name">
+        <ng-container *ngTemplateOutlet="body"></ng-container>
+    </form>
 
-<ng-template #body>
-    <!--  Render fields and field groups with assigned columns -->
-    <ng-container *ngTemplateOutlet="fields"></ng-container>
-</ng-template>
+    <ng-template #body>
+        <!--  Render fields and field groups with assigned columns -->
+        <ng-container *ngTemplateOutlet="fields"></ng-container>
+    </ng-template>
 
-<ng-template #fields>
-    <div *ngIf="mainTitle" class="fd-form-header">
-        <ng-template [ngTemplateOutlet]="mainTitleTemplate"></ng-template>
-    </div>
-    <div class="fd-container fd-form-layout-grid-container" [class.fd-col--compact]="contentDensityObserver.isCompact">
-        <ng-container *ngFor="let row of formRows | keyvalue; trackBy: trackByFn">
-            <div class="fd-row fd-row--top">
-                <ng-container *ngIf="$fieldGroup(row.value) as value">
-                    <div [fieldGroup]="value" fdp-form-group-header *ngIf="value.label"></div>
-                </ng-container>
+    <ng-template #fields>
+        <div *ngIf="mainTitle" class="fd-form-header">
+            <ng-template [ngTemplateOutlet]="mainTitleTemplate"></ng-template>
+        </div>
+        <div
+            class="fd-container fd-form-layout-grid-container"
+            [class.fd-col--compact]="contentDensityObserver.isCompact"
+        >
+            <ng-container *ngFor="let row of formRows | keyvalue; trackBy: trackByFn">
+                <div class="fd-row fd-row--top">
+                    <ng-container *ngIf="$fieldGroup(row.value) as value">
+                        <div [fieldGroup]="value" fdp-form-group-header *ngIf="value.label"></div>
+                    </ng-container>
 
-                <ng-container *ngFor="let fields of row | fieldGroupRowValue | keyvalue; trackBy: trackByFn">
-                    <div
-                        class="fd-form-group fd-col__form-group fd-col"
-                        [class]="xlCol"
-                        [class.fd-col--compact]="contentDensityObserver.isCompact"
-                    >
-                        <div class="fd-form-item fd-row__form-item fd-row">
-                            <div
-                                *ngFor="let field of fields.value; trackBy: trackByFieldName"
-                                class="fd-col fd-col-wrap"
-                                [ngClass]="_inlineColumnLayoutClass"
-                                [style.order]="field.rank"
-                            >
-                                <ng-container *ngTemplateOutlet="field?.renderer || null"></ng-container>
+                    <ng-container *ngFor="let fields of row | fieldGroupRowValue | keyvalue; trackBy: trackByFn">
+                        <div
+                            class="fd-form-group fd-col__form-group fd-col"
+                            [class]="xlCol"
+                            [class.fd-col--compact]="contentDensityObserver.isCompact"
+                        >
+                            <div class="fd-form-item fd-row__form-item fd-row">
+                                <div
+                                    *ngFor="let field of fields.value; trackBy: trackByFieldName"
+                                    class="fd-col fd-col-wrap"
+                                    [ngClass]="_inlineColumnLayoutClass"
+                                    [style.order]="field.rank"
+                                >
+                                    <ng-container *ngTemplateOutlet="field?.renderer || null"></ng-container>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </ng-container>
+                </div>
+            </ng-container>
+        </div>
+    </ng-template>
+
+    <!-- For nested form-group -->
+    <ng-content select="fdp-form-group"></ng-content>
+
+    <ng-template #mainTitleTemplate>
+        <span class="fd-form-header__text" *ngIf="!_hintOptions?.text; else withHint">{{ mainTitle }}</span>
+        <ng-template #withHint>
+            <span class="fd-form-header__text">
+                <ng-container *ngIf="_hintOptions.position === 'before'">
+                    <ng-template [ngTemplateOutlet]="hintTemplate"></ng-template>
                 </ng-container>
-            </div>
-        </ng-container>
-    </div>
-</ng-template>
-
-<!-- For nested form-group -->
-<ng-content select="fdp-form-group"></ng-content>
-
-<ng-template #mainTitleTemplate>
-    <span class="fd-form-header__text" *ngIf="!_hintOptions?.text; else withHint">{{ mainTitle }}</span>
-    <ng-template #withHint>
-        <span class="fd-form-header__text">
-            <ng-container *ngIf="_hintOptions.position === 'before'">
-                <ng-template [ngTemplateOutlet]="hintTemplate"></ng-template>
-            </ng-container>
-            {{ mainTitle }}
-            <ng-container *ngIf="_hintOptions.position === 'after'">
-                <ng-template [ngTemplateOutlet]="hintTemplate"></ng-template>
-            </ng-container>
-        </span>
-        <ng-template #hintTemplate>
-            <span fd-link [undecorated]="true">
-                <fd-icon
-                    [ariaLabel]="_hintOptions.text"
-                    [fd-inline-help]="_hintOptions.text"
-                    [glyph]="_hintOptions.glyph"
-                    [placement]="_hintOptions.placement || null"
-                    [triggers]="_hintOptions.trigger || []"
-                    tabindex="0"
-                ></fd-icon>
+                {{ mainTitle }}
+                <ng-container *ngIf="_hintOptions.position === 'after'">
+                    <ng-template [ngTemplateOutlet]="hintTemplate"></ng-template>
+                </ng-container>
             </span>
+            <ng-template #hintTemplate>
+                <span fd-link [undecorated]="true">
+                    <fd-icon
+                        [ariaLabel]="_hintOptions.text"
+                        [fd-inline-help]="_hintOptions.text"
+                        [glyph]="_hintOptions.glyph"
+                        [placement]="_hintOptions.placement || null"
+                        [triggers]="_hintOptions.trigger || []"
+                        tabindex="0"
+                    ></fd-icon>
+                </span>
+            </ng-template>
         </ng-template>
     </ng-template>
+</ng-container>
+
+<ng-template #skeletonTemplate>
+    <div class="fd-container">
+        <div class="fd-row">
+            <div *fdRepeat="2" class="fd-col fd-col-md--6">
+                <fd-skeleton style="margin-bottom: 0.5rem" width="60%" height="1rem"></fd-skeleton>
+
+                <fd-skeleton height="2.75rem"></fd-skeleton>
+            </div>
+        </div>
+    </div>
 </ng-template>

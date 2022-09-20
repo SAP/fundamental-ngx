@@ -1,5 +1,11 @@
 @import '~fundamental-styles/dist/toolbar';
 
-.fd-toolbar > * {
-    flex-shrink: 0;
+.fd-toolbar {
+    > * {
+        flex-shrink: 0;
+    }
+
+    &__title {
+        flex-grow: 1;
+    }
 }

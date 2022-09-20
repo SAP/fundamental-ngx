@@ -8,7 +8,7 @@ interface Option {
 @Component({
     selector: 'fd-dialog-inner-popover-example',
     template: `
-        <button fd-button label="Open from Component" (click)="open()"></button>
+        <button fd-button label="Open from Component" (click)="open()" *fdSkeletonState="false"></button>
         <p>{{ closeReason }}</p>
     `
 })
@@ -72,7 +72,7 @@ export class DialogInnerPopoverComponent {
 
             <fd-dialog-body>
                 <div id="fd-dialog-body-1" role="listbox">
-                    <label for="first-list">The first list of options:</label>
+                    <label fd-form-label for="first-list">The first list of options:</label>
                     <fd-multi-input
                         inputId="first-list"
                         [dropdownValues]="firstOptions"
@@ -82,7 +82,7 @@ export class DialogInnerPopoverComponent {
                         style="margin-bottom: 1rem"
                     ></fd-multi-input>
 
-                    <label for="second-list">The second list of options:</label>
+                    <label fd-form-label for="second-list">The second list of options:</label>
                     <fd-multi-input
                         inputId="second-list"
                         [dropdownValues]="secondOptions"
@@ -102,6 +102,7 @@ export class DialogInnerPopoverComponent {
                 >
                 </fd-button-bar>
                 <fd-button-bar
+                    *fdSkeletonState="false"
                     label="Cancel"
                     fdInitialFocus
                     fdType="transparent"

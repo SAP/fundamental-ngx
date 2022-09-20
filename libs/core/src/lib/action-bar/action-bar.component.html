@@ -1,0 +1,20 @@
+<ng-container *fdSkeletonTemplate="skeletonTemplate">
+    <ng-content></ng-content>
+</ng-container>
+
+<ng-template #skeletonTemplate>
+    <div fd-action-bar-header>
+        <div fd-action-bar-back>
+            <div fd-action-bar-title>
+                <fd-skeleton width="2rem" height="1rem"></fd-skeleton>
+            </div>
+        </div>
+        <div fd-action-bar-title>
+            <fd-skeleton width="40%" height="1rem"></fd-skeleton>
+        </div>
+    </div>
+
+    <p fd-action-bar-description>
+        <fd-skeleton width="40%" height="1rem"></fd-skeleton>
+    </p>
+</ng-template>

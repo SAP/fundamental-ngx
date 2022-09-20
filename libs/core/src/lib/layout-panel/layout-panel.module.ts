@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 import { LayoutPanelComponent } from './layout-panel.component';
 import { LayoutPanelHeaderComponent } from './layout-panel-header/layout-panel-header.component';
@@ -22,7 +23,7 @@ import { LayoutPanelFooterComponent } from './layout-panel-footer/layout-panel-f
         LayoutPanelBodyComponent,
         LayoutPanelFooterComponent
     ],
-    imports: [CommonModule],
+    imports: [CommonModule, SkeletonModule],
     exports: [
         LayoutPanelComponent,
         LayoutPanelHeaderComponent,

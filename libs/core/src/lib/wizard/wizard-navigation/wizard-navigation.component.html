@@ -1,3 +1,11 @@
 <nav class="fd-wizard__navigation" [attr.aria-label]="ariaLabel">
-    <ng-content></ng-content>
+    <ng-container *fdSkeletonTemplate="skeletonTemplate">
+        <ng-content></ng-content>
+    </ng-container>
+
+    <ng-template #skeletonTemplate>
+        <ul fd-wizard-progress-bar size="lg">
+            <li fd-wizard-step *fdRepeat="3"></li>
+        </ul>
+    </ng-template>
 </nav>

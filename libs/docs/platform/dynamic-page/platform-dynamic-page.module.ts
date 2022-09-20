@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
@@ -16,6 +15,7 @@ import { TextModule } from '@fundamental-ngx/core/text';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
@@ -52,13 +52,13 @@ const routes: Routes = [
         BarModule,
         FlexibleColumnLayoutModule,
         DynamicPageModule,
-        InlineHelpModule,
         AvatarModule,
         FacetModule,
         TextModule,
         ObjectStatusModule,
         RatingIndicatorModule,
-        ObjectNumberModule
+        ObjectNumberModule,
+        SkeletonModule
     ],
     exports: [RouterModule],
     declarations: [

@@ -18,6 +18,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { RouterLink, RouterLinkWithHref } from '@angular/router';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { ContentObserver } from '@angular/cdk/observers';
 import { map, startWith, Subject, takeUntil, tap } from 'rxjs';
@@ -42,7 +43,8 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
                 [new Optional(), new Self(), RouterLinkWithHref],
                 [new Optional(), new Self(), RouterLink]
             ]
-        }
+        },
+        skeletonConsumerProviders()
     ]
 })
 export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit, OnDestroy {
@@ -95,11 +97,14 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
         private _elementRef: ElementRef<Element>,
         private contentObserver: ContentObserver,
         private changeDetectorRef: ChangeDetectorRef,
-        @Inject('linkRouterTarget') readonly routerLink: RouterLinkWithHref | RouterLink
+        @Inject('linkRouterTarget') readonly routerLink: RouterLinkWithHref | RouterLink,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {
         if (isDevMode() && this.elementRef().nativeElement.hasAttribute('fd-breadcrumb-link')) {
             console.warn('The fd-breadcrumb-link attribute is deprecated. Please use fd-link instead.');
         }
+
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

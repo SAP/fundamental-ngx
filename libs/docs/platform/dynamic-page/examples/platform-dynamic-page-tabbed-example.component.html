@@ -1,301 +1,201 @@
 <p>Default tabs example:</p>
-<button fd-button (click)="openPage(false)">Click to open full screen</button>
+<button fd-button (click)="openPage(false)" *fdSkeletonState="false">Click to open full screen</button>
 <p>Stacked tabs example:</p>
-<button fd-button (click)="openPage(true)">Click to open full screen</button>
-<div class="overlay" #overlay>
+<button fd-button (click)="openPage(true)" *fdSkeletonState="false">Click to open full screen</button>
+<div cdkScrollable cdkTrapFocus class="example-overlay" #overlay>
     <ng-container *ngIf="fullscreen">
-        <fdp-dynamic-page [stackContent]="stackedTabs" [background]="background" (tabChange)="onTabChanged($event)">
-            <fdp-dynamic-page-title [title]="pageTitle" subtitle="Oversized multimaterial sneakers with quilted effect">
-                <!-- breadcrumb content -->
-                <fd-breadcrumb>
-                    <fd-breadcrumb-item>
-                        <a fd-link href="#">Men</a>
-                    </fd-breadcrumb-item>
-                    <fd-breadcrumb-item>
-                        <a fd-link href="#">Shoes</a>
-                    </fd-breadcrumb-item>
-                    <fd-breadcrumb-item>
-                        <a fd-link href="#">Running Shoes</a>
-                    </fd-breadcrumb-item>
-                    <fd-breadcrumb-item>
-                        <span>Jogging</span>
-                    </fd-breadcrumb-item>
-                </fd-breadcrumb>
+        <div class="example-overlay-content">
+            <div class="example-button">
+                <button fd-button (click)="closePage($event)" *fdSkeletonState="false">Exit Example</button>
+            </div>
 
-                <fdp-dynamic-page-key-info>
-                    <!-- key information content -->
-                    Some random stuff here
-                </fdp-dynamic-page-key-info>
-                <fdp-dynamic-page-global-actions>
-                    <!-- global actions -->
-                    <fd-toolbar fdType="transparent" [clearBorder]="true">
-                        <button
-                            fd-toolbar-item
-                            fd-button
-                            fdCompact
-                            fdType="positive"
-                            (click)="closePage($event)"
-                            label="Accept"
-                            title="Accept"
-                        ></button>
-                        <button
-                            fd-toolbar-item
-                            fd-button
-                            fdCompact
-                            fdType="negative"
-                            (click)="closePage($event)"
-                            label="Reject"
-                            title="Reject"
-                        ></button>
-                        <fd-toolbar-separator></fd-toolbar-separator>
-                    </fd-toolbar>
-                </fdp-dynamic-page-global-actions>
-                <fdp-dynamic-page-layout-actions>
-                    <!-- layout actions -->
-                    <fd-toolbar fdType="transparent" [clearBorder]="true">
-                        <button
-                            fd-button
-                            fdType="transparent"
-                            aria-label="Resize"
-                            (click)="closePage($event)"
-                            title="Resize"
-                        >
-                            <i class="sap-icon--resize"></i>
-                        </button>
-                        <button
-                            fd-button
-                            fdType="transparent"
-                            aria-label="Exit Fullscreen"
-                            (click)="closePage($event)"
-                            title="Exit Fullscreen"
-                        >
-                            <i class="sap-icon--exitfullscreen"></i>
-                        </button>
-                        <button
-                            fd-button
-                            fdType="transparent"
-                            aria-label="Close"
-                            (click)="closePage($event)"
-                            title="Close"
-                        >
-                            <i class="sap-icon--decline"></i>
-                        </button>
-                    </fd-toolbar>
-                </fdp-dynamic-page-layout-actions>
-            </fdp-dynamic-page-title>
-            <fdp-dynamic-page-header
-                [collapsible]="true"
-                [pinnable]="false"
-                [collapsed]="false"
-                (collapsedChange)="onCollapseChange()"
-            >
-                <!-- collapsible header content goes here -->
-                This is the header content. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus
-                corrupti architecto perspiciatis, delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum
-                consequuntur impedit repellendus esse, facere autem optio consequatur nobis?
-            </fdp-dynamic-page-header>
-            <fdp-dynamic-page-content tabLabel="Tab 1" id="tab_1">
-                <!-- page content goes here -->
-                tab1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam totam
-                maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum.
-                Corporis, nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad provident
-                similique, voluptatibus obcaecati perferendis excepturi.
-                <br />
-                <br />
-                <br />
-                Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste
-                tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
-                dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis.
-                Similique vel ipsam debitis fuga sequi eveniet perspiciatis?
-                <br />
-                <br />
-                <br />
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo sed
-                odit? Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus inventore,
-                eos iusto sed. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam
-                totam maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore
-                cum. Corporis, nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad provident
-                similique, voluptatibus obcaecati perferendis excepturi. Velit officiis sunt, debitis eum perspiciatis
-                consectetur? Consequatur consequuntur quia nisi iste tempora aspernatur. Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Neque architecto dignissimos reprehenderit perspiciatis excepturi
-                voluptate. Vel enim eius doloribus amet vitae debitis. Similique vel ipsam debitis fuga sequi eveniet
-                perspiciatis? Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia
-                nisi iste tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
-                dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis.
-                Similique vel ipsam debitis fuga sequi eveniet perspiciatis? Velit officiis sunt, debitis eum
-                perspiciatis consectetur? Consequatur consequuntur quia nisi iste tempora aspernatur. Lorem ipsum dolor
-                sit amet, consectetur adipisicing elit. Neque architecto dignissimos reprehenderit perspiciatis
-                excepturi voluptate. Vel enim eius doloribus amet vitae debitis. Similique vel ipsam debitis fuga sequi
-                eveniet perspiciatis? Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur
-                consequuntur quia nisi iste tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit. Neque architecto dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius
-                doloribus amet vitae debitis. Similique vel ipsam debitis fuga sequi eveniet perspiciatis? Velit
-                officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste tempora
-                aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto dignissimos
-                reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis. Similique
-                vel ipsam debitis fuga sequi eveniet perspiciatis? Velit officiis sunt, debitis eum perspiciatis
-                consectetur? Consequatur consequuntur quia nisi iste tempora aspernatur. Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Neque architecto dignissimos reprehenderit perspiciatis excepturi
-                voluptate. Vel enim eius doloribus amet vitae debitis. Similique vel ipsam debitis fuga sequi eveniet
-                perspiciatis? Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia
-                nisi iste tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
-                dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis.
-                Similique vel ipsam debitis fuga sequi eveniet perspiciatis? Velit officiis sunt, debitis eum
-                perspiciatis consectetur? Consequatur consequuntur quia nisi iste tempora aspernatur. Lorem ipsum dolor
-                sit amet, consectetur adipisicing elit. Neque architecto dignissimos reprehenderit perspiciatis
-                excepturi voluptate. Vel enim eius doloribus amet vitae debitis. Similique vel ipsam debitis fuga sequi
-                eveniet perspiciatis? Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur
-                consequuntur quia nisi iste tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit. Neque architecto dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius
-                doloribus amet vitae debitis. Similique vel ipsam debitis fuga sequi eveniet perspiciatis? Velit
-                officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste tempora
-                aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto dignissimos
-                reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis. Similique
-                vel ipsam debitis fuga sequi eveniet perspiciatis? Velit officiis sunt, debitis eum perspiciatis
-                consectetur? Consequatur consequuntur quia nisi iste tempora aspernatur. Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Neque architecto dignissimos reprehenderit perspiciatis excepturi
-                voluptate. Vel enim eius doloribus amet vitae debitis. Similique vel ipsam debitis fuga sequi eveniet
-                perspiciatis? Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia
-                nisi iste tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
-                dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis.
-                Similique vel ipsam debitis fuga sequi eveniet perspiciatis? Velit officiis sunt, debitis eum
-                perspiciatis consectetur? Consequatur consequuntur quia nisi iste tempora aspernatur. Lorem ipsum dolor
-                sit amet, consectetur adipisicing elit. Neque architecto dignissimos reprehenderit perspiciatis
-                excepturi voluptate. Vel enim eius doloribus amet vitae debitis. Similique vel ipsam debitis fuga sequi
-                eveniet perspiciatis?
-                <br /><br />
-                Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste
-                tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
-                dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis.
-                Similique vel ipsam debitis fuga sequi eveniet perspiciatis? Velit officiis sunt, debitis eum
-                perspiciatis consectetur? Consequatur consequuntur quia nisi iste tempora aspernatur. Lorem ipsum dolor
-                sit amet, consectetur adipisicing elit. Neque architecto dignissimos reprehenderit perspiciatis
-                excepturi voluptate. Vel enim eius doloribus amet vitae debitis. Similique vel ipsam debitis fuga sequi
-                eveniet perspiciatis? Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur
-                consequuntur quia nisi iste tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit. Neque architecto dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius
-                doloribus amet vitae debitis. Similique vel ipsam debitis fuga sequi eveniet perspiciatis? Velit
-                officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste tempora
-                aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto dignissimos
-                reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis. Similique
-                vel ipsam debitis fuga sequi eveniet perspiciatis?
-                <br />
-                <br />
-                <br />
-                Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste
-                tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
-                dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis.
-                Similique vel ipsam debitis fuga sequi eveniet perspiciatis? Reprehenderit sunt laboriosam totam
-                maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum.
-                Corporis, nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad provident
-                similique, voluptatibus obcaecati perferendis excepturi. Reprehenderit sunt laboriosam totam maiores.
-                Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum. Corporis,
-                nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad provident similique,
-                voluptatibus obcaecati perferendis excepturi. Reprehenderit sunt laboriosam totam maiores. Unde quas
-                quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum. Corporis, nobis.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad provident similique, voluptatibus
-                obcaecati perferendis excepturi. Reprehenderit sunt laboriosam totam maiores. Unde quas quis soluta
-                adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum. Corporis, nobis. Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Laboriosam ad provident similique, voluptatibus obcaecati
-                perferendis excepturi. Reprehenderit sunt laboriosam totam maiores. Unde quas quis soluta adipisci
-                mollitia distinctio. Natus nam repellat, aut ad et tempore cum. Corporis, nobis. Lorem ipsum dolor sit
-                amet consectetur adipisicing elit. Laboriosam ad provident similique, voluptatibus obcaecati perferendis
-                excepturi. Reprehenderit sunt laboriosam totam maiores. Unde quas quis soluta adipisci mollitia
-                distinctio. Natus nam repellat, aut ad et tempore cum. Corporis, nobis. Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Laboriosam ad provident similique, voluptatibus obcaecati perferendis
-                excepturi.
-                <br />
-                <br />
-                <br />
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo sed
-                odit? Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus inventore,
-                eos iusto sed.
-            </fdp-dynamic-page-content>
-            <fdp-dynamic-page-content tabLabel="Tab 2" id="tab_2">
-                <!-- page content goes here -->
-                tabs 2 Lorem ipsum dolor sasdasit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam totam
-                maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum.
-                Corporis, nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad provident
-                similique, voluptatibus obcaecati perferendis excepturi.
-                <br />
-                <br />
-                <br />
-                Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste
-                tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
-                dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis.
-                Similique vel ipsam debitis fuga sequi eveniet perspiciatis?
-                <br />
-                <br />
-                <button fd-button (click)="switchTab('tab_1')" title="Switch to tab 1" label="Switch to Tab 1"></button>
-                <br />
-                <br />
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo sed
-                odit? Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus inventore,
-                eos iusto sed. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam
-                totam maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore
-                cum. Corporis, nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad provident
-                similique, voluptatibus obcaecati perferendis excepturi.
-                <br />
-                <br />
-                <br />
-                Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste
-                tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
-                dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis.
-                Similique vel ipsam debitis fuga sequi eveniet perspiciatis?
-                <br />
-                <br />
-                <br />
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo sed
-                odit? Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus inventore,
-                eos iusto sed. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum
-                explicabo sed odit? Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus
-                inventore, eos iusto sed. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit sunt
-                laboriosam totam maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad
-                et tempore cum. Corporis, nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad
-                provident similique, voluptatibus obcaecati perferendis excepturi.
-                <br />
-                <br />
-                <br />
-                Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste
-                tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
-                dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis.
-                Similique vel ipsam debitis fuga sequi eveniet perspiciatis? Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Quaerat veniam libero nostrum explicabo sed odit? Recusandae praesentium voluptatum
-                cum omnis, placeat beatae quasi eum odio doloribus inventore, eos iusto sed. Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Reprehenderit sunt laboriosam totam maiores. Unde quas quis soluta
-                adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum. Corporis, nobis. Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Laboriosam ad provident similique, voluptatibus obcaecati
-                perferendis excepturi.
-                <br />
-                <br />
-                <br />
-                Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste
-                tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
-                dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis.
-                Similique vel ipsam debitis fuga sequi eveniet perspiciatis? Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Quaerat veniam libero nostrum explicabo sed odit? Recusandae praesentium voluptatum
-                cum omnis, placeat beatae quasi eum odio doloribus inventore, eos iusto sed. Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Reprehenderit sunt laboriosam totam maiores. Unde quas quis soluta
-                adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum. Corporis, nobis. Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Laboriosam ad provident similique, voluptatibus obcaecati
-                perferendis excepturi.
-                <br />
-                <br />
-                <br />
-                Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste
-                tempora aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto
-                dignissimos reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis.
-                Similique vel ipsam debitis fuga sequi eveniet perspiciatis?
-            </fdp-dynamic-page-content>
-            <fdp-dynamic-page-footer>
-                <!-- page footer content goes here -->
-                <div fd-bar barDesign="floating-footer">
-                    <div fd-bar-right>
-                        <fd-button-bar label="Save" fdType="emphasized" (click)="closePage($event)"></fd-button-bar>
-                        <fd-button-bar label="Cancel" (click)="closePage($event)"></fd-button-bar>
+            <fdp-dynamic-page [stackContent]="stackedTabs" [background]="background" (tabChange)="onTabChanged($event)">
+                <fdp-dynamic-page-title
+                    [title]="pageTitle"
+                    subtitle="Oversized multimaterial sneakers with quilted effect"
+                >
+                    <!-- breadcrumb content -->
+                    <fd-breadcrumb>
+                        <fd-breadcrumb-item>
+                            <a fd-link href="#">Men</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <a fd-link href="#">Shoes</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <a fd-link href="#">Running Shoes</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <span>Jogging</span>
+                        </fd-breadcrumb-item>
+                    </fd-breadcrumb>
+
+                    <fdp-dynamic-page-key-info>
+                        <!-- key information content -->
+                        Some random stuff here
+                    </fdp-dynamic-page-key-info>
+                    <fdp-dynamic-page-global-actions>
+                        <!-- global actions -->
+                        <fd-toolbar fdType="transparent" [clearBorder]="true">
+                            <button
+                                fd-toolbar-item
+                                fd-button
+                                fdCompact
+                                fdType="positive"
+                                (click)="closePage($event)"
+                                label="Accept"
+                                title="Accept"
+                            ></button>
+                            <button
+                                fd-toolbar-item
+                                fd-button
+                                fdCompact
+                                fdType="negative"
+                                (click)="closePage($event)"
+                                label="Reject"
+                                title="Reject"
+                            ></button>
+                            <fd-toolbar-separator></fd-toolbar-separator>
+                        </fd-toolbar>
+                    </fdp-dynamic-page-global-actions>
+                    <fdp-dynamic-page-layout-actions>
+                        <!-- layout actions -->
+                        <fd-toolbar fdType="transparent" [clearBorder]="true">
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                aria-label="Resize"
+                                (click)="closePage($event)"
+                                title="Resize"
+                            >
+                                <i class="sap-icon--resize"></i>
+                            </button>
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                aria-label="Exit Fullscreen"
+                                (click)="closePage($event)"
+                                title="Exit Fullscreen"
+                            >
+                                <i class="sap-icon--exitfullscreen"></i>
+                            </button>
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                aria-label="Close"
+                                (click)="closePage($event)"
+                                title="Close"
+                            >
+                                <i class="sap-icon--decline"></i>
+                            </button>
+                        </fd-toolbar>
+                    </fdp-dynamic-page-layout-actions>
+                </fdp-dynamic-page-title>
+                <fdp-dynamic-page-header
+                    [collapsible]="true"
+                    [pinnable]="false"
+                    [collapsed]="false"
+                    (collapsedChange)="onCollapseChange()"
+                >
+                    <!-- collapsible header content goes here -->
+                    <fd-text
+                        text="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti architecto
+                        perspiciatis, delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum consequuntur impedit
+                        repellendus esse, facere autem optio consequatur nobis?"
+                    ></fd-text>
+                </fdp-dynamic-page-header>
+                <fdp-dynamic-page-content tabLabel="Tab 1" id="tab_1">
+                    <!-- page content goes here -->
+                    <fd-text
+                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt mollit anim id est laborum."
+                        class="fd-dynamic-page-section-example"
+                    ></fd-text>
+                    <fd-text
+                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt mollit anim id est laborum."
+                        class="fd-dynamic-page-section-example"
+                    ></fd-text>
+                    <fd-text
+                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt mollit anim id est laborum."
+                        class="fd-dynamic-page-section-example"
+                    ></fd-text>
+                    <fd-text
+                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt mollit anim id est laborum."
+                        class="fd-dynamic-page-section-example"
+                    ></fd-text>
+                </fdp-dynamic-page-content>
+                <fdp-dynamic-page-content tabLabel="Tab 2" id="tab_2">
+                    <!-- page content goes here -->
+                    <fd-text
+                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt mollit anim id est laborum."
+                        class="fd-dynamic-page-section-example"
+                    ></fd-text>
+                    <fd-text
+                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt mollit anim id est laborum."
+                        class="fd-dynamic-page-section-example"
+                    ></fd-text>
+                    <fd-text
+                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt mollit anim id est laborum."
+                        class="fd-dynamic-page-section-example"
+                    ></fd-text>
+                    <fd-text
+                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt mollit anim id est laborum."
+                        class="fd-dynamic-page-section-example"
+                    ></fd-text>
+                    <fd-text
+                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt mollit anim id est laborum."
+                        class="fd-dynamic-page-section-example"
+                    ></fd-text>
+                </fdp-dynamic-page-content>
+                <fdp-dynamic-page-footer>
+                    <!-- page footer content goes here -->
+                    <div fd-bar barDesign="floating-footer">
+                        <div fd-bar-right>
+                            <fd-button-bar label="Save" fdType="emphasized" (click)="closePage($event)"></fd-button-bar>
+                            <fd-button-bar
+                                *fdSkeletonState="false"
+                                label="Cancel"
+                                (click)="closePage($event)"
+                            ></fd-button-bar>
+                        </div>
                     </div>
-                </div>
-            </fdp-dynamic-page-footer>
-        </fdp-dynamic-page>
+                </fdp-dynamic-page-footer>
+            </fdp-dynamic-page>
+        </div>
     </ng-container>
 </div>

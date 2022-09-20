@@ -1,1 +1,6 @@
 @import '~fundamental-styles/dist/popover.css';
+
+.fd-list__navigation-item {
+    display: flex;
+    align-items: center;
+}

@@ -5,7 +5,7 @@ import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-
 @Component({
     selector: 'fdp-platform-dynamic-page-snap-scroll-example',
     templateUrl: './platform-dynamic-page-snap-scroll-example.component.html',
-    styleUrls: ['./platform-dynamic-page-snap-scroll-example.component.scss'],
+    styleUrls: ['./platform-dynamic-page.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformDynamicPageSnapScrollExampleComponent implements OnDestroy {

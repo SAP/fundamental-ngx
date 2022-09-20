@@ -1,10 +1,18 @@
 <div fd-bar barDesign="header-with-subheader">
     <div fd-bar-left>
-        <ng-content select="fd-avatar"></ng-content>
+        <ng-container *fdSkeletonTemplate="skeletonTemplate">
+            <ng-content select="fd-avatar"></ng-content>
 
-        <div class="fd-quick-view__subheader-text">
-            <ng-content select="fd-quick-view-subheader-title"></ng-content>
-            <ng-content select="fd-quick-view-subheader-subtitle"></ng-content>
-        </div>
+            <div class="fd-quick-view__subheader-text">
+                <ng-content select="fd-quick-view-subheader-title"></ng-content>
+                <ng-content select="fd-quick-view-subheader-subtitle"></ng-content>
+            </div>
+        </ng-container>
+
+        <ng-template #skeletonTemplate>
+            <div class="fd-quick-view__subheader-text">
+                <fd-skeleton width="40%" height="1rem"></fd-skeleton>
+            </div>
+        </ng-template>
     </div>
 </div>

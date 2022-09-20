@@ -23,6 +23,7 @@ import {
     CssClassBuilder
 } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 let avatarUniqueId = 0;
 
@@ -41,7 +42,8 @@ const ALTER_ICON_OPTIONS = {
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.tabindex]': '_tabindex'
-    }
+    },
+    providers: skeletonConsumerProviders()
 })
 export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnChanges {
     /** User's custom classes */
@@ -208,8 +210,11 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     constructor(
         private _elementRef: ElementRef,
         private _cdr: ChangeDetectorRef,
-        @Attribute('tabindex') private hostTabindex: number | null
-    ) {}
+        @Attribute('tabindex') private hostTabindex: number | null,
+        private readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnInit(): void {

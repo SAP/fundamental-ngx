@@ -1,10 +1,10 @@
-<button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
+<button fd-button (click)="enterFullscreenExample()" *fdSkeletonState="false">Click to open full screen</button>
 
 <div cdkScrollable class="docs-fcl-example-overlay" #overlay>
     <ng-container *ngIf="fullscreen">
         <div class="docs-fcl-example-overlay-content">
             <div class="docs-fcl-example-button">
-                <button fd-button (click)="exitFullscreenExample($event)">Exit Example</button>
+                <button fd-button (click)="exitFullscreenExample($event)" *fdSkeletonState="false">Exit Example</button>
             </div>
 
             <!-- Flexible Column Layout -->
@@ -55,11 +55,11 @@
                             </fd-dynamic-page-layout-actions>
                         </fd-dynamic-page-header>
                         <fd-dynamic-page-subheader [collapsible]="true" [pinnable]="true" [collapsed]="false">
-                            <span>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti
-                                architecto perspiciatis, delectus necessitatibus incidunt numquam asperiores tenetur
-                                iure. Cum consequuntur impedit repellendus esse, facere autem optio consequatur nobis?
-                            </span>
+                            <fd-text
+                                text="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti architecto
+                                perspiciatis, delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum consequuntur impedit
+                                repellendus esse, facere autem optio consequatur nobis?"
+                            ></fd-text>
                         </fd-dynamic-page-subheader>
                         <fd-dynamic-page-content cdkScrollable>
                             <div
@@ -70,14 +70,14 @@
                                     Open Column 3
                                 </button>
                             </div>
-                            <div class="fd-dynamic-page-section-example">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                mollit anim id est laborum.
-                            </div>
+                            <fd-text
+                                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                deserunt mollit anim id est laborum."
+                                class="fd-dynamic-page-section-example"
+                            ></fd-text>
                         </fd-dynamic-page-content>
                     </fd-dynamic-page>
                 </ng-template>
@@ -115,14 +115,14 @@
                             </fd-dynamic-page-layout-actions>
                         </fd-dynamic-page-header>
                         <fd-dynamic-page-content cdkScrollable>
-                            <div class="fd-dynamic-page-section-example">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                mollit anim id est laborum.
-                            </div>
+                            <fd-text
+                                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                deserunt mollit anim id est laborum."
+                                class="fd-dynamic-page-section-example"
+                            ></fd-text>
                         </fd-dynamic-page-content>
                     </fd-dynamic-page>
                 </ng-template>

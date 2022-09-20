@@ -30,6 +30,8 @@ import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { DeprecatedTabsCompactDirective } from './deprecated-tabs-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { RepeatModule } from '@fundamental-ngx/core/utils';
 
 @NgModule({
     declarations: [
@@ -61,7 +63,9 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ScrollSpyModule,
         ContentDensityModule,
         I18nModule,
-        OverflowLayoutModule
+        OverflowLayoutModule,
+        SkeletonModule,
+        RepeatModule
     ],
     exports: [
         TabListComponent,

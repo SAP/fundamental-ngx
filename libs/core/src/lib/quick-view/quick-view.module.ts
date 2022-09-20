@@ -16,9 +16,19 @@ import { TitleModule } from '@fundamental-ngx/core/title';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { FormGroupModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 @NgModule({
-    imports: [CommonModule, TitleModule, BarModule, FormGroupModule, FormItemModule, FormLabelModule, PopoverModule],
+    imports: [
+        CommonModule,
+        TitleModule,
+        BarModule,
+        FormGroupModule,
+        FormItemModule,
+        FormLabelModule,
+        PopoverModule,
+        SkeletonModule
+    ],
     declarations: [
         QuickViewComponent,
         QuickViewTitleComponent,

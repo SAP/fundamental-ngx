@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 
@@ -21,7 +22,8 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
         '[attr.aria-label]': 'ariaLabel'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: skeletonConsumerProviders()
 })
 export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder {
     /**
@@ -68,7 +70,9 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
     _numberPipeConfig = '';
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef, private readonly _skeletonConsumer: SkeletonConsumerDirective) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnChanges(): void {
