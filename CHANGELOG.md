@@ -1,3 +1,12 @@
+## [0.36.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.11...v0.36.1-rc.12) (2022-09-20)
+
+
+### Bug Fixes
+
+* **core:** pagination numbers not displaying in RTL ([#8697](https://github.com/SAP/fundamental-ngx/issues/8697)) ([e1943b5](https://github.com/SAP/fundamental-ngx/commit/e1943b5d5ca5a37a1d563ab0ecf6455671288c72))
+
+
+
 ## [0.36.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.10...v0.36.1-rc.11) (2022-09-19)
 
 
