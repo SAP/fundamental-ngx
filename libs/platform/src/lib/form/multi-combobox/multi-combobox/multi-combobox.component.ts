@@ -41,6 +41,14 @@ import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
+/**
+ * This component can work with both string primitives as well as with complex objects. In order
+ * to use objects user must provide an unique ID to lookupkey, which will be used in comparing
+ * each items of array. It is important to provide lookupkey value as there might be multiple
+ * items with same name but different properties which is to be differently identified otherwise
+ * it will be treated as same objects.
+ */
+
 @Component({
     selector: 'fdp-multi-combobox',
     templateUrl: './multi-combobox.component.html',
