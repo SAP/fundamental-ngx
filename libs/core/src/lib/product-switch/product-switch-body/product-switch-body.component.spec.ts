@@ -1,15 +1,12 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ProductSwitchBodyComponent } from './product-switch-body.component';
-import { ButtonModule } from '../../button/button.module';
 import { ProductSwitchItem } from './product-switch.item';
-import { PopoverModule } from '../../popover/popover.module';
-import { DragAndDropModule } from '../../utils/drag-and-drop/drag-and-drop.module';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { createKeyboardEvent } from '@fundamental-ngx/core/tests';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { ProductSwitchModule } from '../product-switch.module';
 
 @Component({
     selector: 'fd-test-component',
@@ -53,7 +50,7 @@ describe('ProductSwitchBodyComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PopoverModule, ButtonModule, DragAndDropModule, DragDropModule],
+            imports: [ProductSwitchModule],
             declarations: [ProductSwitchBodyComponent, TestComponent]
         });
     }));

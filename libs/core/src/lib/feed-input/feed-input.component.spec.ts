@@ -46,11 +46,11 @@ describe('FeedInputComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
+        fixture.detectChanges();
+
         textareaEl = fixture.debugElement.query(By.css('textarea'));
         hostEl = fixture.debugElement.query(By.css('.fd-feed-input'));
         buttonEl = fixture.debugElement.query(By.css('button'));
-        fixture.detectChanges();
-
         textareaDirective = component.textareaDirective;
         buttonDirective = component.buttonDirective;
     });

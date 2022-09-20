@@ -1,23 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IconTabBarComponent } from './icon-tab-bar.component';
 import { TabConfig } from './interfaces/tab-config.interface';
 import { TabType } from './types';
-import { OverflowListModule, RtlService } from '@fundamental-ngx/core/utils';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { IconModule } from '@fundamental-ngx/core/icon';
-import { IconTabBarTextTypeComponent } from './components/icon-tab-bar-text-type/icon-tab-bar-text-type.component';
-import { IconTabBarIconTypeComponent } from './components/icon-tab-bar-icon-type/icon-tab-bar-icon-type.component';
-import { IconTabBarProcessTypeComponent } from './components/icon-tab-bar-process-type/icon-tab-bar-process-type.component';
-import { IconTabBarFilterTypeComponent } from './components/icon-tab-bar-filter-type/icon-tab-bar-filter-type.component';
-import { IconTabBarPopoverComponent } from './components/popovers/icon-tab-bar-popover/icon-tab-bar-popover.component';
-import { TextTypePopoverComponent } from './components/popovers/text-type-popover/text-type-popover.component';
-import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.directive';
-import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.directive';
-import { IconBarDndContainerDirective } from './directives/dnd/icon-bar-dnd-container.directive';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { generateTestConfig, getGetCenterCoordsOfElement } from './tests-helper';
+import { PlatformIconTabBarModule } from './icon-tab-bar.module';
 
 @Component({
     template: ` <fdp-icon-tab-bar
@@ -46,21 +35,9 @@ let fixture: ComponentFixture<HostComponent>;
 describe('IconTabBarComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [
-                HostComponent,
-                IconTabBarComponent,
-                IconTabBarTextTypeComponent,
-                IconTabBarIconTypeComponent,
-                IconTabBarProcessTypeComponent,
-                IconTabBarFilterTypeComponent,
-                IconTabBarPopoverComponent,
-                TextTypePopoverComponent,
-                IconBarDndListDirective,
-                IconBarDndItemDirective,
-                IconBarDndContainerDirective
-            ],
+            declarations: [HostComponent],
             providers: [RtlService],
-            imports: [IconModule, PopoverModule, OverflowListModule, DragDropModule]
+            imports: [IconModule, PlatformIconTabBarModule]
         }).compileComponents();
     });
 
