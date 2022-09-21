@@ -45,15 +45,15 @@ export class VerticalNavigationComponent implements AfterContentInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this._keyManager = new FocusKeyManager(this._navigationItems)
-            .withHomeAndEnd()
-            .skipPredicate((item) => !item._isItemVisible);
-        this._listenOnQueryChange();
-
         if (this.condensed) {
             this._mainNavigationItems.forEach((navItem) => {
                 navItem._condensed = true;
             });
+        } else {
+            this._keyManager = new FocusKeyManager(this._navigationItems)
+                .withHomeAndEnd()
+                .skipPredicate((item) => !item._isItemVisible);
+            this._listenOnQueryChange();
         }
     }
 
@@ -72,7 +72,9 @@ export class VerticalNavigationComponent implements AfterContentInit {
             this._listenOnItemsClick();
             setTimeout(() => {
                 // using setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
-                this._navigationItems.first._tabIndex = 0;
+                this._navigationItems.forEach((navItem, index) => {
+                    index !== 0 && (navItem._tabIndex = -1);
+                });
             });
         });
     }
@@ -99,6 +101,9 @@ export class VerticalNavigationComponent implements AfterContentInit {
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
-        this._keyManager.onKeydown(event);
+        if (!this.condensed) {
+            this._keyManager.onKeydown(event);
+            event.stopPropagation();
+        }
     }
 }

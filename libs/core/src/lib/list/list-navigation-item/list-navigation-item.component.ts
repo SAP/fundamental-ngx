@@ -45,7 +45,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
 
     /** @hidden */
     @HostBinding('attr.tabindex')
-    _tabIndex = -1;
+    _tabIndex;
 
     /** @hidden */
     @HostBinding('class.fd-list__navigation-item--condensed')
@@ -87,6 +87,8 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     ngAfterContentInit(): void {
         if (this._listComponent) {
             this._isExpandable = true;
+        } else {
+            this._tabIndex = 0;
         }
         if (this._iconComponent) {
             this._iconComponent._navigationItemIcon = true;
