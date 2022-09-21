@@ -1,9 +1,23 @@
-import { AfterContentInit, Component, ContentChild, HostBinding, HostListener, Input } from '@angular/core';
+import {
+    AfterContentInit,
+    AfterViewInit,
+    Component,
+    ContentChild,
+    ElementRef,
+    HostBinding,
+    HostListener,
+    Input
+} from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+import { FocusableOption } from '@angular/cdk/a11y';
+import { Subject } from 'rxjs';
 import { ListNavigationItemArrowDirective } from '../directives/list-navigation-item-arrow.directive';
 import { ListNavigationItemTextDirective } from '../directives/list-navigation-item-text.directive';
 import { LIST_COMPONENT } from '../list-component.token';
 import { ListComponentInterface } from '../list-component.interface';
+import { ListComponent } from '../list.component';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -11,7 +25,7 @@ import { ListComponentInterface } from '../list-component.interface';
     templateUrl: './list-navigation-item.component.html',
     styleUrls: ['./list-navigation-item.component.scss']
 })
-export class ListNavigationItemComponent implements AfterContentInit {
+export class ListNavigationItemComponent implements AfterContentInit, AfterViewInit, FocusableOption {
     /** Whether or not the list item is expanded. */
     @Input()
     @HostBinding('class.is-expanded')
@@ -32,7 +46,7 @@ export class ListNavigationItemComponent implements AfterContentInit {
 
     /** @hidden */
     @HostBinding('attr.tabindex')
-    _tabIndex;
+    _tabIndex = -1;
 
     /** @hidden */
     @HostBinding('class.fd-list__navigation-item--condensed')
@@ -41,6 +55,12 @@ export class ListNavigationItemComponent implements AfterContentInit {
     /** @hidden */
     @ContentChild(LIST_COMPONENT)
     _listComponent: ListComponentInterface;
+
+    /** @hidden
+     * list to expand.
+     */
+    @ContentChild(ListComponent)
+    _subListItems: ListComponent;
 
     /** @hidden */
     @ContentChild(ListNavigationItemArrowDirective)
@@ -57,12 +77,23 @@ export class ListNavigationItemComponent implements AfterContentInit {
     /** @hidden */
     _innerText: string;
 
+    /** @hidden
+     * false if list-item is within unexpanded list (not visible to user until list expanded). default is true
+     */
+    _isItemVisible = true;
+
+    /** @hidden */
+    readonly _focused$ = new Subject<{ focusedWithin: boolean }>();
+
+    /** @hidden */
+    readonly _clicked$ = new Subject<MouseEvent>();
+
+    constructor(private _elementRef: ElementRef) {}
+
     /** @hidden */
     ngAfterContentInit(): void {
         if (this._listComponent) {
             this._isExpandable = true;
-        } else {
-            this._tabIndex = 0;
         }
         if (this._iconComponent) {
             this._iconComponent._navigationItemIcon = true;
@@ -71,10 +102,52 @@ export class ListNavigationItemComponent implements AfterContentInit {
     }
 
     /** @hidden */
+    ngAfterViewInit(): void {
+        this._setIsItemVisible(this.expanded);
+    }
+
+    /** @hidden */
     @HostListener('click', ['$event'])
     onItemClick(event: MouseEvent): void {
         event.stopPropagation();
         this._handleExpandedChanges(!this.expanded);
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    keyDownHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [RIGHT_ARROW])) {
+            event.preventDefault();
+            this._handleExpandedChanges(true);
+        }
+        if (KeyUtil.isKeyCode(event, [LEFT_ARROW])) {
+            event.preventDefault();
+            this._handleExpandedChanges(false);
+        }
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            event.preventDefault();
+            event.stopPropagation();
+            this._handleExpandedChanges(!this.expanded);
+        }
+    }
+
+    /** @hidden */
+    @HostListener('focus', ['$event'])
+    protected onFocus(event: FocusEvent): void {
+        this._focused$.next({
+            focusedWithin: event.target !== this._elementRef?.nativeElement
+        });
+    }
+
+    /** @hidden
+     * set the _isItemVisible of sublist items to true if this(containing) list is expanded.
+     */
+    _setIsItemVisible(value: boolean): void {
+        if (this._isExpandable) {
+            this._subListItems._navItems.forEach((item) => {
+                item._isItemVisible = value;
+            });
+        }
     }
 
     /** @hidden */
@@ -89,11 +162,21 @@ export class ListNavigationItemComponent implements AfterContentInit {
         return retVal;
     }
 
+    focus(): void {
+        this._elementRef.nativeElement.focus();
+    }
+
+    click(): void {
+        this._elementRef?.nativeElement?.click();
+    }
+
     /** @hidden */
     private _handleExpandedChanges(expanded: boolean): void {
         if (this._isExpandable) {
             this.expanded = expanded;
+            this._setIsItemVisible(expanded);
             this._listNavigationItemArrow._setExpanded(this.expanded);
+            !expanded && this.focus();
         }
     }
 }
