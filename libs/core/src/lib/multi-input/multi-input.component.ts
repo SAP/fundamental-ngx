@@ -458,7 +458,7 @@ export class MultiInputComponent
 
     /** Method passed to list component */
     handleListFocusEscape(direction: FocusEscapeDirection): void {
-        if (direction === 'up') {
+        if (direction === 'up' && !this.mobile) {
             this.searchInputElement.nativeElement.focus();
         }
     }
@@ -488,6 +488,10 @@ export class MultiInputComponent
             this.enableParentFocusTrap();
         } else {
             this.disableParentFocusTrap();
+
+            if (this.listComponent) {
+                this.listComponent.setItemActive(0);
+            }
         }
 
         this.tokenizer.removeSelectedTokens();
