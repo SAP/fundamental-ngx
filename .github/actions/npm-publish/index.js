@@ -5,14 +5,13 @@ const { resolve } = require('path');
 
 const run = async () => {
     const projectsMap = JSON.parse(readFileSync('./angular.json', { encoding: 'utf-8' })).projects;
-    const projects = JSON.parse('["core", "i18n", "platform", "fn", "moment-adapter", "datetime-adapter"]').map(
-        (projectName) => {
-            const ngPackage = JSON.parse(
-                readFileSync(`${projectsMap[projectName]}/ng-package.json`, { encoding: 'utf-8' })
-            );
-            return resolve(projectsMap[projectName], ngPackage.dest, 'package.json');
-        }
-    );
+    const projectNames = JSON.parse(getInput('projects'));
+    const projects = projectNames.map((projectName) => {
+        const ngPackage = JSON.parse(
+            readFileSync(`${projectsMap[projectName]}/ng-package.json`, { encoding: 'utf-8' })
+        );
+        return resolve(projectsMap[projectName], ngPackage.dest, 'package.json');
+    });
     const tag = getInput('releaseTag');
     const npmToken = getInput('token');
 
@@ -20,8 +19,7 @@ const run = async () => {
         const result = await npmPublish({
             package: packageJsonPath,
             token: npmToken,
-            tag,
-            dryRun: true
+            tag
         });
         info(`Published ${result.package}@${result.version}`);
     }
