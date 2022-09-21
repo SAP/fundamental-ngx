@@ -20,8 +20,7 @@ const run = async () => {
         const result = await npmPublish({
             package: packageJsonPath,
             token: npmToken,
-            tag,
-            dryRun: true
+            tag
         });
         info(`Published ${result.package}@${result.version}`);
     }
