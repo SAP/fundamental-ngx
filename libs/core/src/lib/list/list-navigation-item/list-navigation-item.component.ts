@@ -17,7 +17,6 @@ import { ListNavigationItemArrowDirective } from '../directives/list-navigation-
 import { ListNavigationItemTextDirective } from '../directives/list-navigation-item-text.directive';
 import { LIST_COMPONENT } from '../list-component.token';
 import { ListComponentInterface } from '../list-component.interface';
-import { ListComponent } from '../list.component';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -55,12 +54,6 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     /** @hidden */
     @ContentChild(LIST_COMPONENT)
     _listComponent: ListComponentInterface;
-
-    /** @hidden
-     * list to expand.
-     */
-    @ContentChild(ListComponent)
-    _subListItems: ListComponent;
 
     /** @hidden */
     @ContentChild(ListNavigationItemArrowDirective)
@@ -144,7 +137,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
      */
     _setIsItemVisible(value: boolean): void {
         if (this._isExpandable) {
-            this._subListItems._navItems.forEach((item) => {
+            this._listComponent?._navItems?.forEach((item) => {
                 item._isItemVisible = value;
             });
         }
