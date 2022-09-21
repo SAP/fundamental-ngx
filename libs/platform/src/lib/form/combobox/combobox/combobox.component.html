@@ -69,7 +69,7 @@
                 (ngModelChange)="searchTermChanged($event)"
                 [placeholder]="placeholder"
                 (focus)="onTouched()"
-                (blur)="_onBlur($event)"
+                (blur)="_onInputBlur($event)"
                 [attr.aria-expanded]="isOpen && _suggestions.length > 0"
                 [readonly]="readonly"
                 [attr.aria-readonly]="readonly"

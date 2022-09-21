@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     forwardRef,
     HostBinding,
@@ -78,7 +79,7 @@ let calendarUniqueId = 0;
         })
     ],
     host: {
-        '(focusout)': 'onTouched()',
+        '(focusout)': '_focusOut($event)',
         '[attr.id]': 'id',
         class: 'fd-calendar fd-has-display-block'
     },
@@ -284,6 +285,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /** @hidden */
     constructor(
+        private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private _contentDensityObserver: ContentDensityObserver,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
@@ -684,5 +686,12 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
             typeof this.nextButtonDisableFunction === 'function' &&
             this.nextButtonDisableFunction(this.selectedDate, this._currentlyDisplayed, this.activeView);
         this._changeDetectorRef.markForCheck();
+    }
+
+    /** @hidden */
+    private _focusOut(event: FocusEvent): void {
+        if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
+            this.onTouched();
+        }
     }
 }

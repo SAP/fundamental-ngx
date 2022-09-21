@@ -95,7 +95,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
     }
 
     /** @hidden */
-    _onBlur(event: FocusEvent): void {
+    _onInputBlur(event: FocusEvent): void {
         if (this.mobile) {
             return;
         }

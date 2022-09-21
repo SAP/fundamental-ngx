@@ -54,7 +54,7 @@ let datePickerCounter = 0;
     templateUrl: './date-picker.component.html',
     styleUrls: ['./date-picker.component.scss'],
     host: {
-        '(focusout)': 'onTouched()',
+        '(blur)': 'onTouched()',
         '[class.fd-date-picker]': 'true',
         '[class.fd-date-picker-custom]': 'inline'
     },
@@ -480,6 +480,7 @@ export class DatePickerComponent<D>
     /** @hidden */
     public closeFromCalendar(): void {
         if (this.type === 'single' && this.closeOnDateChoose) {
+            this.onTouched();
             this.closeCalendar();
         }
     }
