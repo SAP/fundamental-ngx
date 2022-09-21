@@ -1,3 +1,12 @@
+## [0.36.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.12...v0.36.1-rc.13) (2022-09-21)
+
+
+### Bug Fixes
+
+* **ci:** removed npm publish script hardcodes and dry-run ([#8724](https://github.com/SAP/fundamental-ngx/issues/8724)) ([01962f0](https://github.com/SAP/fundamental-ngx/commit/01962f089301e3136bb6665011a4b110a811cd84))
+
+
+
 ## [0.36.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.11...v0.36.1-rc.12) (2022-09-20)
 
 
