@@ -84,8 +84,6 @@ export class MultiComboboxSelectionChangeEvent {
     ) {}
 }
 
-let randomId = 0;
-
 @Directive()
 export abstract class BaseMultiCombobox extends CollectionBaseInput implements OnChanges, AfterViewInit, OnDestroy {
     /** Provides selected items. */
@@ -311,9 +309,6 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /** @hidden */
     protected _dataSource: FdpMultiComboboxDataSource<any>;
-
-    /** @hidden */
-    private _defaultId = `fdp-multi-combobox-lookupkey-${randomId++}`;
 
     /** @hidden */
     private _inputTextValue: string;
@@ -955,10 +950,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         const selectItems: SelectableOptionItem[] = [];
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
-            const lookupKey = this._defaultId;
             selectItems.push({
                 label: value,
-                id: this.lookupValue(value) ? this.lookupValue(value) : lookupKey,
+                id: this.lookupValue(value),
                 value,
                 selected: this.selectedItems?.includes(value) || false
             });
@@ -976,10 +970,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
-            const lookupKey = this._defaultId;
             selectItems.push({
                 label: this.displayValue(value),
-                id: this.lookupValue(value) ? this.lookupValue(value) : lookupKey,
+                id: this.lookupValue(value),
                 value,
                 selected: this.selectedItems?.includes(value) || false
             });
