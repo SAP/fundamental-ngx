@@ -1,3 +1,12 @@
+## [0.36.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.13...v0.36.1-rc.14) (2022-09-21)
+
+
+### Bug Fixes
+
+* **core:** multi input focusing ([#8686](https://github.com/SAP/fundamental-ngx/issues/8686)) ([3a40f69](https://github.com/SAP/fundamental-ngx/commit/3a40f69295a53dba0013ab5405a5d2cc790ff5ac))
+
+
+
 ## [0.36.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.12...v0.36.1-rc.13) (2022-09-21)
 
 
