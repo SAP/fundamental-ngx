@@ -2,7 +2,7 @@
     <header>Skeleton</header>
 
     <description>
-        Skeleton is the replacement for the old spinner loading component. Using skeleton you can show a placeholder of
+        Skeleton is the replacement for the old spinner loading component. Using skeleton you can show a placeholders of
         a certain shape while data is being loaded.
 
         <p>The idea behind skeleton consists of two parts:</p>
@@ -14,23 +14,12 @@
                 <code>SkeletonModule.forRoot()</code> with optionally passing default skeleton state. Then inject
                 <code>SkeletonGlobalService</code> and use <code>setSkeletonState()</code> to change the global skeleton
                 state.
-
-                <br /><br />
-
-                Consumers which are lower in the tree will react to the state changes.
-
-                <br /><br />
             </li>
 
             <li>
                 <b>Locally</b>. Use <code>fdSkeletonState</code> template directive and pass either boolean or 'global'
-                value to it to set skeleton state for an elements tree. The 'global' value means that subtree should
-                react only to the global skeleton state changes.
-
-                <br /><br />
-
-                Optionally pass <code>fdSkeletonStateTemplate</code> to render any custom template instead. If no
-                template is passed then consumers which are lower in the tree will react to the state changes.
+                value to it to set skeleton state for the elements subtree. The 'global' value means that subtree reacts
+                only to the global skeleton state changes.
             </li>
         </ul>
 
@@ -51,7 +40,7 @@
 
             <li>
                 <b>Multiple placeholders</b>. Use <code>fdSkeletonTemplate</code> template directive to define template
-                that should be rendered instead.
+                that should be rendered instead of a real content.
             </li>
         </ul>
 

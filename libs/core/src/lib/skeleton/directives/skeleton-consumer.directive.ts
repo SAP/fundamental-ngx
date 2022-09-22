@@ -122,12 +122,7 @@ export class SkeletonConsumerDirective {
         getChangesSource$(parentStateDirective, service)
             .pipe(
                 distinctUntilChanged(),
-                filter(
-                    () =>
-                        !parentConsumer &&
-                        !parentStateDirective?.fdSkeletonStateTemplate &&
-                        !parentTemplateDirective?.fdSkeletonTemplate
-                ),
+                filter(() => !parentConsumer && !parentTemplateDirective?.fdSkeletonTemplate),
                 takeUntil(onDestroy$)
             )
             .subscribe((skeletonState) => {
