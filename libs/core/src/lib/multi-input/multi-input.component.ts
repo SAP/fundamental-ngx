@@ -60,7 +60,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     templateUrl: './multi-input.component.html',
     styleUrls: ['./multi-input.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(focusout)': '_focusOut($event)'
     },
     providers: [
         {
@@ -723,7 +723,6 @@ export class MultiInputComponent
     /** @hidden */
     private _popoverOpenHandle(open: boolean): void {
         this.open = open;
-        this.onTouched();
     }
 
     /** @hidden */
@@ -812,6 +811,13 @@ export class MultiInputComponent
                 return { selectedOptions: selected, displayedOptions };
             })
         );
+    }
+
+    /** @hidden */
+    private _focusOut(event: FocusEvent): void {
+        if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
+            this.onTouched();
+        }
     }
 }
 

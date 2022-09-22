@@ -78,7 +78,8 @@ let sliderId = 0;
     ],
     host: {
         '(mouseenter)': 'this._componentHovered$.next(true)',
-        '(mouseleave)': 'this._componentHovered$.next(false)'
+        '(mouseleave)': 'this._componentHovered$.next(false)',
+        '(focusout)': 'onTouched()'
     }
 })
 export class SliderComponent
@@ -482,6 +483,7 @@ export class SliderComponent
 
         this._setValue(this._calculateValueFromPointerPosition(event));
         this._updatePopoversPosition();
+        this.handle.nativeElement.focus();
     }
 
     /** @hidden */
@@ -617,7 +619,6 @@ export class SliderComponent
 
         if (emitEvent) {
             this.onChange(value);
-            this.onTouched();
         }
         this._cdr.markForCheck();
     }
