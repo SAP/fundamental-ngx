@@ -4,11 +4,9 @@ $block: fd-skeleton;
 
 /* TODO: To be moved in Fund Styles */
 .#{$block} {
-    --fdSkeletonWidth: 100%;
-
     position: relative;
     color: transparent !important;
-    background-color: transparent !important;
+    background: var(--sapContent_Placeholderloading_Background) !important;
     box-shadow: none !important;
     text-shadow: none !important;
     border: none !important;
@@ -18,8 +16,12 @@ $block: fd-skeleton;
     opacity: 1 !important;
     border-radius: 0.25rem !important;
     min-height: 1em !important;
+    max-height: 100% !important;
     min-width: 1em !important;
+    max-width: 100% !important;
     overflow: hidden !important;
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
 
     *,
     &::placeholder {
@@ -27,62 +29,25 @@ $block: fd-skeleton;
         visibility: hidden !important;
     }
 
+    &::before,
     &::after {
-        content: '' !important;
-        display: block !important;
-        position: absolute !important;
-        border-radius: inherit !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: var(--fdSkeletonWidth) !important;
-        height: 100% !important;
-    }
-
-    &:not(.#{$block}--native) {
-        position: relative !important;
-    }
-
-    &--native {
-        width: var(--fdSkeletonWidth) !important;
-
-        &::after {
-            display: none !important;
-        }
-    }
-
-    &:not(.#{$block}--animated) {
-        &.#{$block}--native,
-        &::after {
-            background: var(--sapContent_Placeholderloading_Background) !important;
-        }
+        display: none !important;
     }
 
     &--animated {
-        &.#{$block}--native,
-        &::after {
-            background-image: var(--sapContent_Placeholderloading_Gradient) !important;
-            background-size: 2000px 100% !important;
-            animation: shimmer 2s linear infinite;
-        }
+        background-image: var(--sapContent_Placeholderloading_Gradient) !important;
+        background-size: 2000px 100% !important;
+        animation: shimmer 2s linear infinite;
     }
 
     &--circle {
-        &.#{$block}--native,
-        &::after {
-            border-radius: 100% !important;
-        }
-    }
-
-    &:not(.#{$block}--text) {
-        &::before {
-            display: none !important;
-        }
+        border-radius: 100% !important;
     }
 
     &--component {
         display: block;
         width: fit-content;
-        height: auto;
+        height: fit-content;
 
         &:empty {
             width: 100%;

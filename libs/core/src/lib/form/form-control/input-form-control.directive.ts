@@ -15,7 +15,7 @@ import { skeletonConsumerProviders, SkeletonConsumerDirective } from '@fundament
                 [ContentDensityMode.COMPACT]: 'fd-input--compact'
             }
         }),
-        skeletonConsumerProviders({ native: true })
+        skeletonConsumerProviders()
     ],
     host: {
         class: 'fd-input'

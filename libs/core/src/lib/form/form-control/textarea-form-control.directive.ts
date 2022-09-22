@@ -15,7 +15,7 @@ import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundament
                 [ContentDensityMode.COMPACT]: 'fd-textarea--compact'
             }
         }),
-        skeletonConsumerProviders({ native: true })
+        skeletonConsumerProviders()
     ],
     host: {
         class: 'fd-textarea'
