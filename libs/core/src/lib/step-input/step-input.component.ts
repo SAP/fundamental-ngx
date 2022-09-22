@@ -26,6 +26,7 @@ import { SafeHtml } from '@angular/platform-browser';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 import NumberFormat = Intl.NumberFormat;
 
 let stepInputUniqueId = 0;
@@ -43,7 +44,8 @@ let stepInputUniqueId = 0;
             multi: true
         },
         contentDensityObserverProviders(),
-        registerFormItemControl(StepInputComponent)
+        registerFormItemControl(StepInputComponent),
+        skeletonConsumerProviders({ width: '10rem', height: '2.25rem' })
     ],
     host: {
         class: 'fd-step-input__container'
@@ -269,13 +271,17 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** @hidden */
     onTouched = (): void => {};
 
+    /** @hidden */
     constructor(
         @Inject(LOCALE_ID) locale,
         private _changeDetectorRef: ChangeDetectorRef,
         private readonly _liveAnnouncer: LiveAnnouncer,
-        readonly _contentDensityObserver: ContentDensityObserver
+        readonly _contentDensityObserver: ContentDensityObserver,
+        readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {
         this.locale = locale;
+
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

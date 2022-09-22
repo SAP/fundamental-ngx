@@ -29,7 +29,7 @@ import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundament
     styleUrls: ['./token.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [skeletonConsumerProviders(), contentDensityObserverProviders()]
+    providers: [skeletonConsumerProviders({ width: '5rem', height: '1.25rem' }), contentDensityObserverProviders()]
 })
 export class TokenComponent implements AfterViewInit, OnDestroy {
     /** Whether the token is disabled. */

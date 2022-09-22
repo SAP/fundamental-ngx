@@ -21,7 +21,7 @@ let formLabelIdCount = 0;
     styleUrls: ['./form-label.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: skeletonConsumerProviders()
+    providers: skeletonConsumerProviders({ height: '1.25rem', width: '60%' })
 })
 export class FormLabelComponent implements OnChanges {
     /** Whether form is required. */

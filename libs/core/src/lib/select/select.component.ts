@@ -44,6 +44,7 @@ import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { SelectMobileModule } from './select-mobile/select-mobile.module';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ESCAPE } from '@angular/cdk/keycodes';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 let selectUniqueId = 0;
 
@@ -78,7 +79,8 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
         },
         registerFormItemControl(SelectComponent),
         SelectKeyManagerService,
-        contentDensityObserverProviders()
+        contentDensityObserverProviders(),
+        skeletonConsumerProviders({ width: '10rem', height: '2.25rem' })
     ]
 })
 export class SelectComponent
@@ -382,6 +384,7 @@ export class SelectComponent
         return this._maxHeight || this._calculatedMaxHeight;
     }
 
+    /** @hidden */
     constructor(
         @Attribute('tabindex') _tabIndex: string,
         @Optional() private readonly _rtlService: RtlService,
@@ -391,13 +394,16 @@ export class SelectComponent
         @Optional() private readonly _dynamicComponentService: DynamicComponentService,
         @Optional() @Self() private readonly ngControl: NgControl,
         @Optional() private readonly _injector: Injector,
-        readonly _contentDensityObserver: ContentDensityObserver
+        readonly _contentDensityObserver: ContentDensityObserver,
+        readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }
 
         this._tabIndex = parseInt(_tabIndex, 10) || 0;
+
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

@@ -37,7 +37,7 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     host: {
         '[attr.tabindex]': 'clickable ? 0 : -1'
     },
-    providers: skeletonConsumerProviders()
+    providers: skeletonConsumerProviders({ width: '5rem', height: '1.25rem' })
 })
 export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */

@@ -76,7 +76,7 @@ let sliderId = 0;
             defaultContentDensity: ContentDensityMode.COMPACT,
             modifiers: { [ContentDensityMode.COZY]: 'fd-slider--lg' }
         }),
-        skeletonConsumerProviders()
+        skeletonConsumerProviders({ width: '10rem', height: '2.25rem' })
     ],
     host: {
         '(mouseenter)': 'this._componentHovered$.next(true)',

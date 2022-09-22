@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 @Component({
@@ -6,7 +7,8 @@ import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
     templateUrl: './form-input-message-group.component.html',
     styleUrls: ['./form-input-message-group.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: skeletonConsumerProviders({ width: '10rem', height: '2.25rem' })
 })
 export class FormInputMessageGroupComponent {
     /*
@@ -52,6 +54,11 @@ export class FormInputMessageGroupComponent {
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** @hidden */
+    constructor(readonly _skeletonConsumer: SkeletonConsumerDirective) {
+        _skeletonConsumer.consume();
+    }
 
     /**
      * Function is called every time message changes isOpen attribute

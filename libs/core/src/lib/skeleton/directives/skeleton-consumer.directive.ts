@@ -13,6 +13,7 @@ import { SkeletonTemplateDirective } from './skeleton-template.directive';
 
 const DEFAULT_SKELETON_CLASS = 'fd-skeleton';
 const SKELETON_ANIMATION_CLASS = 'fd-skeleton--animated';
+const SKELETON_CIRCLE_CLASS = 'fd-skeleton--circle';
 
 const defaultSkeletonConfig: SkeletonObserverConfig = {
     animation: true
@@ -29,12 +30,40 @@ const SKELETON_CONFIG_TOKEN = new InjectionToken<SkeletonObserverConfig>('Skelet
     providers: [DestroyedService]
 })
 export class SkeletonConsumerDirective {
-    /**
-     * Whether to apply animation. True by default.
-     */
+    /** Whether the skeleton is animated. */
     @Input()
     set fdSkeletonConsumerAnimation(value: BooleanInput) {
         this._config.animation = coerceBooleanProperty(value);
+
+        if (this._callbacks.has(this._defaultCallbackFn)) {
+            this._defaultCallbackFn(this._skeletonState);
+        }
+    }
+
+    /** Width of the skeleton. */
+    @Input()
+    set fdSkeletonConsumerWidth(value: string) {
+        this._config.width = value;
+
+        if (this._callbacks.has(this._defaultCallbackFn)) {
+            this._defaultCallbackFn(this._skeletonState);
+        }
+    }
+
+    /** Height of the skeleton. */
+    @Input()
+    set fdSkeletonConsumerHeight(value: string) {
+        this._config.height = value;
+
+        if (this._callbacks.has(this._defaultCallbackFn)) {
+            this._defaultCallbackFn(this._skeletonState);
+        }
+    }
+
+    /** Whether skeleton should be a circle shape. */
+    @Input()
+    set fdSkeletonConsumerCircle(value: BooleanInput) {
+        this._config.circle = coerceBooleanProperty(value);
 
         if (this._callbacks.has(this._defaultCallbackFn)) {
             this._defaultCallbackFn(this._skeletonState);
@@ -59,6 +88,10 @@ export class SkeletonConsumerDirective {
 
         if (this._config?.animation !== false) {
             classesToManage.push(SKELETON_ANIMATION_CLASS);
+        }
+
+        if (this._config?.circle) {
+            classesToManage.push(SKELETON_CIRCLE_CLASS);
         }
 
         return classesToManage;
@@ -159,6 +192,7 @@ export class SkeletonConsumerDirective {
     protected _defaultCallbackFn = (skeletonState): void => {
         this._manageCssClasses(skeletonState);
         this._manageTabIndex(skeletonState);
+        this._manageSize(skeletonState);
     };
 
     /** @hidden */
@@ -182,6 +216,23 @@ export class SkeletonConsumerDirective {
         } else if (this._originalTabIndex != null) {
             this._elementRef.nativeElement.tabIndex = this._originalTabIndex;
             this._originalTabIndex = null;
+        }
+    }
+
+    /** @hidden */
+    private _manageSize(skeletonState: boolean): void {
+        if (skeletonState) {
+            this._config.width && this._elementRef.nativeElement.style.setProperty('width', this._config.width);
+            this._config.height && this._elementRef.nativeElement.style.setProperty('height', this._config.height);
+
+            const display = window.getComputedStyle(this._elementRef.nativeElement).display;
+            if (display === 'inline' || display === 'inline-flex') {
+                this._elementRef.nativeElement.style.setProperty('display', 'inline-block');
+            }
+        } else {
+            this._elementRef.nativeElement.style.removeProperty('width');
+            this._elementRef.nativeElement.style.removeProperty('height');
+            this._elementRef.nativeElement.style.removeProperty('display');
         }
     }
 }

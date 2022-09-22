@@ -30,6 +30,7 @@ import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-m
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
 import { ActionSheetControlComponent } from './action-sheet-control/action-sheet-control.component';
 import { ActionSheetClickEvent, ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.component';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 @Component({
     selector: 'fd-action-sheet',
@@ -37,7 +38,7 @@ import { ActionSheetClickEvent, ActionSheetItemComponent } from './action-sheet-
     styleUrls: ['./action-sheet.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [KeyboardSupportService]
+    providers: [KeyboardSupportService, skeletonConsumerProviders({ width: '5rem', height: '1.625rem' })]
 })
 export class ActionSheetComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Whether should be displayed in mobile mode */
@@ -107,12 +108,16 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(
         private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>,
         private readonly _changeDetectionRef: ChangeDetectorRef,
         private readonly _viewContainerRef: ViewContainerRef,
-        @Optional() private _dynamicComponentService: DynamicComponentService
-    ) {}
+        @Optional() private _dynamicComponentService: DynamicComponentService,
+        readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {

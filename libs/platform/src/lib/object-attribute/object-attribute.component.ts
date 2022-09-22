@@ -17,7 +17,7 @@ import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundament
     styleUrls: ['./object-attribute.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: skeletonConsumerProviders()
+    providers: skeletonConsumerProviders({ width: '5rem', height: '1.25rem' })
 })
 export class ObjectAttributeComponent implements OnInit {
     /** label for the element */

@@ -36,7 +36,7 @@ let uniqueId = 0;
         },
         registerFormItemControl(RadioButtonComponent),
         contentDensityObserverProviders(),
-        skeletonConsumerProviders()
+        skeletonConsumerProviders({ width: '10rem', height: '2.25rem' })
     ]
 })
 export class RadioButtonComponent

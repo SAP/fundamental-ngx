@@ -6,7 +6,7 @@ $block: fd-skeleton;
 .#{$block} {
     position: relative;
     color: transparent !important;
-    background: var(--sapContent_Placeholderloading_Background) !important;
+    background-color: var(--sapContent_Placeholderloading_Background) !important;
     box-shadow: none !important;
     text-shadow: none !important;
     border: none !important;
@@ -20,8 +20,17 @@ $block: fd-skeleton;
     min-width: 1em !important;
     max-width: 100% !important;
     overflow: hidden !important;
-    margin-top: 0.25rem !important;
-    margin-bottom: 0.25rem !important;
+
+    /** Temporary */
+    &:not(.#{$block}--component) {
+        margin-top: 0.25rem !important;
+        margin-bottom: 0.25rem !important;
+
+        .#{$block}:not(.#{$block}--component) {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+    }
 
     *,
     &::placeholder {

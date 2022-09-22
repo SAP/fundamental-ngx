@@ -41,7 +41,7 @@ export class Point {
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: skeletonConsumerProviders()
+    providers: skeletonConsumerProviders({ width: '5rem', height: '2.25rem' })
 })
 export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssClassBuilder, OnInit {
     /**

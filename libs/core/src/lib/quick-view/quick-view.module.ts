@@ -17,6 +17,7 @@ import { BarModule } from '@fundamental-ngx/core/bar';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { FormGroupModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { RepeatModule } from '@fundamental-ngx/core/utils';
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
         FormItemModule,
         FormLabelModule,
         PopoverModule,
-        SkeletonModule
+        SkeletonModule,
+        RepeatModule
     ],
     declarations: [
         QuickViewComponent,

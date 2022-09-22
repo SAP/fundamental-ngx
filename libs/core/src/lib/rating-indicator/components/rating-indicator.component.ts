@@ -52,7 +52,7 @@ interface RatingViewItem {
             multi: true
         },
         registerFormItemControl(RatingIndicatorComponent),
-        skeletonConsumerProviders()
+        skeletonConsumerProviders({ width: '10rem', height: '1.25rem' })
     ]
 })
 export class RatingIndicatorComponent

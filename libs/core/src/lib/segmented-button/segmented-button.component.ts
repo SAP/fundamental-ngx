@@ -49,7 +49,7 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
             useExisting: forwardRef(() => SegmentedButtonComponent),
             multi: true
         },
-        skeletonConsumerProviders()
+        skeletonConsumerProviders({ width: '7.5rem', height: '2.25rem' })
     ]
 })
 export class SegmentedButtonComponent implements AfterContentInit, ControlValueAccessor {

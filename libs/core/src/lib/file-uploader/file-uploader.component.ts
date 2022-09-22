@@ -45,7 +45,7 @@ let fileUploaderInputUniqueId = 0;
         },
         registerFormItemControl(FileUploaderComponent),
         contentDensityObserverProviders(),
-        skeletonConsumerProviders()
+        skeletonConsumerProviders({ width: '10rem', height: '2.25rem' })
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush

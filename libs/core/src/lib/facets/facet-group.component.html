@@ -5,12 +5,12 @@
 <ng-template #skeletonTemplate>
     <ng-container *fdSkeletonState="false">
         <fd-facet type="image">
-            <fd-skeleton width="4rem" height="3.625rem"></fd-skeleton>
+            <fd-skeleton width="4.625rem" height="4.625rem"></fd-skeleton>
         </fd-facet>
 
         <fd-facet type="form" *fdRepeat="3">
             <fd-facet-content *fdRepeat="3">
-                <fd-skeleton width="5rem" height="1rem"></fd-skeleton>
+                <fd-skeleton width="10rem" height="1.25rem"></fd-skeleton>
             </fd-facet-content>
         </fd-facet>
     </ng-container>

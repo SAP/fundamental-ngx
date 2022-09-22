@@ -20,6 +20,7 @@ import { filter, fromEvent, map, merge, Observable, Subject, takeUntil, debounce
 
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { InputGroupPlacement } from './types';
@@ -47,7 +48,8 @@ let addOnInputRandomId = 0;
             useExisting: forwardRef(() => InputGroupComponent),
             multi: true
         },
-        registerFormItemControl(InputGroupComponent)
+        registerFormItemControl(InputGroupComponent),
+        skeletonConsumerProviders({ width: '10rem', height: '2.25rem' })
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -241,7 +243,13 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     }
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(
+        private readonly _elementRef: ElementRef,
+        private readonly _changeDetectorRef: ChangeDetectorRef,
+        readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {

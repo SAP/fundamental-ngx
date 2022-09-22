@@ -48,6 +48,7 @@ import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobi
 import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -70,7 +71,8 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
         },
         MenuKeyboardService,
         registerFormItemControl(MultiInputComponent),
-        contentDensityObserverProviders()
+        contentDensityObserverProviders(),
+        skeletonConsumerProviders({ width: '10rem', height: '2.25rem' })
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -345,8 +347,11 @@ export class MultiInputComponent
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
         @Optional() private readonly _rtlService: RtlService,
-        @Optional() private readonly _focusTrapService: FocusTrapService
-    ) {}
+        @Optional() private readonly _focusTrapService: FocusTrapService,
+        readonly _skeletonConsumer: SkeletonConsumerDirective
+    ) {
+        _skeletonConsumer.consume();
+    }
 
     /** @hidden */
     ngOnInit(): void {

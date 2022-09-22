@@ -29,6 +29,7 @@ import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -58,7 +59,8 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
         },
         registerFormItemControl(DatetimePickerComponent),
         PopoverFormMessageService,
-        PopoverService
+        PopoverService,
+        skeletonConsumerProviders({ height: '2.2rem', width: '10rem' })
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -427,7 +429,8 @@ export class DatetimePickerComponent<D>
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        private _popoverFormMessage: PopoverFormMessageService
+        private _popoverFormMessage: PopoverFormMessageService,
+        readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -438,6 +441,8 @@ export class DatetimePickerComponent<D>
 
         // default model value
         this.date = _dateTimeAdapter.now();
+
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

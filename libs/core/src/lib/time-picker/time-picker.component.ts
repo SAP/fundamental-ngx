@@ -29,6 +29,7 @@ import { PopoverService } from '@fundamental-ngx/core/popover';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 let timePickerCounter = 0;
 
@@ -52,7 +53,8 @@ let timePickerCounter = 0;
         },
         PopoverFormMessageService,
         PopoverService,
-        registerFormItemControl(TimePickerComponent)
+        registerFormItemControl(TimePickerComponent),
+        skeletonConsumerProviders({ width: '10rem', height: '2.25rem' })
     ],
     styleUrls: ['./time-picker.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -326,7 +328,8 @@ export class TimePickerComponent<D>
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         private _popoverFormMessage: PopoverFormMessageService,
-        private _valueStateAriaMessagesService: ValueStateAriaMessageService
+        private _valueStateAriaMessagesService: ValueStateAriaMessageService,
+        readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -334,6 +337,8 @@ export class TimePickerComponent<D>
         if (!this._dateTimeFormats) {
             throw createMissingDateImplementationError('DATE_TIME_FORMATS');
         }
+
+        _skeletonConsumer.consume();
     }
 
     ngOnInit(): void {

@@ -44,7 +44,7 @@ let avatarGroupCount = 0;
             provide: AVATAR_GROUP_COMPONENT,
             useExisting: forwardRef(() => AvatarGroupComponent)
         },
-        skeletonConsumerProviders()
+        skeletonConsumerProviders({ width: '60%', height: '2.75rem' })
     ]
 })
 export class AvatarGroupComponent implements AvatarGroupInterface, OnChanges, OnInit, AfterViewInit, OnDestroy {

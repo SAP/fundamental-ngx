@@ -88,7 +88,7 @@ let searchFieldIdCount = 0;
     styleUrls: ['./search-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [contentDensityObserverProviders(), skeletonConsumerProviders()]
+    providers: [contentDensityObserverProviders(), skeletonConsumerProviders({ width: '10rem', height: '2.25rem' })]
 })
 export class SearchFieldComponent
     extends BaseComponent

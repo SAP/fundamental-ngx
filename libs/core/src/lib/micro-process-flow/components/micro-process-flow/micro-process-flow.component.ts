@@ -46,7 +46,7 @@ import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundament
         contentDensityObserverProviders({
             modifiers: { [ContentDensityMode.COMPACT]: 'fd-micro-process-flow--compact' }
         }),
-        skeletonConsumerProviders()
+        skeletonConsumerProviders({ width: '60%', height: '2.25rem' })
     ]
 })
 export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewInit {

@@ -34,6 +34,7 @@ import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamenta
 import { FormItemControl, PopoverFormMessageService, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 import { createMissingDateImplementationError } from './errors';
 
@@ -71,7 +72,8 @@ let datePickerCounter = 0;
         },
         registerFormItemControl(DatePickerComponent),
         PopoverFormMessageService,
-        PopoverService
+        PopoverService,
+        skeletonConsumerProviders({ height: '2.25rem', width: '10rem' })
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -440,7 +442,8 @@ export class DatePickerComponent<D>
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        private _popoverFormMessage: PopoverFormMessageService
+        private _popoverFormMessage: PopoverFormMessageService,
+        readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -448,6 +451,8 @@ export class DatePickerComponent<D>
         if (!this._dateTimeFormats) {
             throw createMissingDateImplementationError('DATE_TIME_FORMATS');
         }
+
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

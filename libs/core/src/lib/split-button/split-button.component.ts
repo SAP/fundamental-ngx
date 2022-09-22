@@ -59,7 +59,7 @@ const splitButtonTextClasses = [splitButtonTextClass, splitButtonTextCompactClas
     styleUrls: ['./split-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [skeletonConsumerProviders(), contentDensityObserverProviders()]
+    providers: [skeletonConsumerProviders({ width: '7.5rem', height: '2.25rem' }), contentDensityObserverProviders()]
 })
 export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDestroy, AfterViewInit {
     /** The icon to include in the button. See the icon page for the list of icons. */

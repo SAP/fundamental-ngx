@@ -38,7 +38,7 @@ let warnedAboutAriaLabeledBy = false;
         },
         registerFormItemControl(SwitchComponent),
         contentDensityObserverProviders(),
-        skeletonConsumerProviders()
+        skeletonConsumerProviders({ width: '5rem', height: '2.25rem' })
     ],
     host: {
         class: 'fd-form__item fd-form__item--check fd-switch-custom',

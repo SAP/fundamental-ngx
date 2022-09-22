@@ -2,6 +2,10 @@
 @import '~fundamental-styles/dist/input';
 @import '~fundamental-styles/dist/input-group';
 
+fdp-search-field {
+    display: inline-block;
+}
+
 .fdp-search-field {
     /* Remove clear "x" from search field for IE browsers */
     input[type='text']::-ms-clear {

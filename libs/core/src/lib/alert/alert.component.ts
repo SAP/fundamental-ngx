@@ -53,7 +53,7 @@ let alertUniqueId = 0;
     animations: [alertFadeNgIf],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: skeletonConsumerProviders()
+    providers: skeletonConsumerProviders({ height: '2.25rem' })
 })
 export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
     /** @hidden */

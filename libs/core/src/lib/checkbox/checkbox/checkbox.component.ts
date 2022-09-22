@@ -49,7 +49,7 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
         },
         registerFormItemControl(CheckboxComponent),
         contentDensityObserverProviders(),
-        skeletonConsumerProviders()
+        skeletonConsumerProviders({ width: '7.5rem', height: '2.25rem' })
     ],
     host: { '[attr.tabindex]': '-1' }
 })

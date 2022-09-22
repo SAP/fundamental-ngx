@@ -23,7 +23,7 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: skeletonConsumerProviders()
+    providers: skeletonConsumerProviders({ width: '5rem', height: '1.25rem' })
 })
 export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder {
     /**

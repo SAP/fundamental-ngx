@@ -52,6 +52,7 @@ import { ComboboxItem } from './combobox-item';
 import { GroupFunction } from './list-group.pipe';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
+import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundamental-ngx/core/skeleton';
 
 let comboboxUniqueId = 0;
 
@@ -79,7 +80,8 @@ let comboboxUniqueId = 0;
         },
         registerFormItemControl(ComboboxComponent),
         MenuKeyboardService,
-        contentDensityObserverProviders()
+        contentDensityObserverProviders(),
+        skeletonConsumerProviders({ width: '10rem', height: '2.25rem' })
     ],
     host: {
         '[class.fd-combobox-custom-class]': 'true',
@@ -367,9 +369,12 @@ export class ComboboxComponent
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _dynamicComponentService: DynamicComponentService,
-        readonly _contentDensityObserver: ContentDensityObserver
+        readonly _contentDensityObserver: ContentDensityObserver,
+        readonly _skeletonConsumer: SkeletonConsumerDirective
     ) {
         this._repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: true });
+
+        _skeletonConsumer.consume();
     }
 
     /** @hidden */

@@ -20,7 +20,7 @@ export type LabelType = 'numeric' | 'icon';
     styleUrls: ['./info-label.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: skeletonConsumerProviders()
+    providers: skeletonConsumerProviders({ width: '5rem', height: '1.25rem' })
 })
 export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     /** User's custom classes */

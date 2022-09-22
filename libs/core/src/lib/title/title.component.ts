@@ -21,7 +21,10 @@ export abstract class TitleToken {
     styleUrls: ['./title.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: TitleToken, useExisting: TitleComponent }, skeletonConsumerProviders()]
+    providers: [
+        { provide: TitleToken, useExisting: TitleComponent },
+        skeletonConsumerProviders({ width: '60%', height: '2.25rem' })
+    ]
 })
 export class TitleComponent extends TitleToken implements OnInit {
     /** The size of the header */

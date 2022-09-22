@@ -45,7 +45,7 @@ import { SkeletonConsumerDirective, skeletonConsumerProviders } from '@fundament
     styleUrls: ['./breadcrumb.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyedService, skeletonConsumerProviders()]
+    providers: [DestroyedService, skeletonConsumerProviders({ height: '1.25rem', width: '60%' })]
 })
 export class BreadcrumbComponent implements OnInit, AfterViewInit {
     /**

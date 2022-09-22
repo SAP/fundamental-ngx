@@ -5,18 +5,18 @@
 <ng-template #skeletonTemplate>
     <li fd-list-item *fdRepeat="3">
         <span *ngIf="byline" fd-list-thumbnail>
-            <fd-skeleton width="2rem" height="1rem"></fd-skeleton>
+            <fd-skeleton width="2rem" height="1.25rem"></fd-skeleton>
         </span>
         <div *ngIf="!byline" fd-list-title>
-            <fd-skeleton width="40%" height="1rem"></fd-skeleton>
+            <fd-skeleton width="40%" height="1.25rem"></fd-skeleton>
         </div>
         <div *ngIf="byline" fd-list-content>
             <div fd-list-title>
-                <fd-skeleton width="40%" height="1rem"></fd-skeleton>
+                <fd-skeleton width="40%" height="1.25rem"></fd-skeleton>
             </div>
             <div fd-list-byline>
                 <div fd-list-byline-left>
-                    <fd-skeleton width="40%" height="1rem"></fd-skeleton>
+                    <fd-skeleton width="40%" height="1.25rem"></fd-skeleton>
                 </div>
             </div>
         </div>

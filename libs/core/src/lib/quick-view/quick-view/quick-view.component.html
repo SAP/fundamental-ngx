@@ -10,16 +10,14 @@
 
     <ng-template #skeletonTemplate>
         <div class="fd-quick-view__content">
-            <fd-quick-view-subheader></fd-quick-view-subheader>
-
-            <fd-quick-view-group>
+            <fd-quick-view-group *fdSkeletonState="false">
                 <fd-quick-view-group-title>
-                    <fd-skeleton height="2rem" width="2rem"></fd-skeleton>
+                    <fd-skeleton height="3rem" width="3rem"></fd-skeleton>
                 </fd-quick-view-group-title>
 
-                <fd-quick-view-group-item>
+                <fd-quick-view-group-item *fdRepeat="3">
                     <fd-quick-view-group-item-label>
-                        <fd-skeleton width="40%" height="1rem"></fd-skeleton>
+                        <fd-skeleton width="10rem" height="1.25rem"></fd-skeleton>
                     </fd-quick-view-group-item-label>
                 </fd-quick-view-group-item>
             </fd-quick-view-group>

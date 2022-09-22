@@ -49,7 +49,7 @@ import {
                 [ContentDensityMode.COMPACT]: 'fd-button--compact'
             }
         }),
-        skeletonConsumerProviders()
+        skeletonConsumerProviders({ width: '5rem', height: '2.25rem' })
     ]
 })
 export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {

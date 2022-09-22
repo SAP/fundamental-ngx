@@ -1,3 +1,4 @@
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -7,8 +8,6 @@ import {
     SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
-
-export type SkeletonType = 'circle' | 'rectangle';
 
 @Component({
     selector: 'fd-skeleton',
@@ -26,11 +25,16 @@ export class SkeletonComponent implements OnChanges {
     @Input()
     height: string;
 
-    /** Type of the skeleton. */
+    /** Whether skeleton should be a circle shape. */
     @Input()
-    type: SkeletonType = 'rectangle';
+    set circle(value: BooleanInput) {
+        this._circle = coerceBooleanProperty(value);
+    }
+    get circle(): BooleanInput {
+        return this._circle;
+    }
 
-    /** Whether the skeleton has animation. */
+    /** Whether the skeleton is animated. */
     @Input()
     @HostBinding('class.fd-skeleton--animated')
     animation = true;
@@ -45,9 +49,7 @@ export class SkeletonComponent implements OnChanges {
 
     /** @hidden */
     @HostBinding('class.fd-skeleton--circle')
-    get _circleClass(): boolean {
-        return this.type === 'circle';
-    }
+    _circle = false;
 
     /** @hidden */
     @HostBinding('class')
