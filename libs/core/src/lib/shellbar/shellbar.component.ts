@@ -13,6 +13,7 @@ import {
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 import { SelectComponent } from '@fundamental-ngx/core/select';
+import { Subscription } from 'rxjs';
 
 export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
 
@@ -41,6 +42,9 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit {
     sideNav = false;
 
     /** @hidden */
+    private _subscriptions: Subscription = new Subscription();
+
+    /** @hidden */
     @ContentChild(ComboboxComponent, { static: false })
     comboboxComponent: ComboboxComponent;
 
@@ -54,23 +58,54 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.applyShellbarModeToButtons();
-        this.applyShellbarModeToSelect();
+        this._applyShellbarModeToButtons();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.applyShellbarModeToCombobox();
+        this._applyShellbarModeToCombobox();
+        this._applyShellbarModeToSelect();
     }
 
-    applyShellbarModeToSelect(): void {
+    /** to apply view change on select menu open */
+    handleSelectIsOpenChange(): void {
+        this._subscriptions.add(
+            this.selectComponent.isOpenChange.subscribe((isOpen) => {
+                if (isOpen) {
+                    setTimeout(() => {
+                        this.selectComponent._controlElementRef.nativeElement.classList.remove('is-expanded');
+                        this.selectComponent._controlElementRef.nativeElement.setAttribute('aria-expanded', 'false');
+                    });
+                }
+            })
+        );
+    }
+
+    /** @hidden */
+    _applyShellbarModeToSelect(): void {
         if (this.selectComponent) {
-            this.selectComponent.inShellbar = true;
+            this.selectComponent._controlElementRef.nativeElement.style.margin = '0';
+            this.selectComponent._controlElementRef.nativeElement.classList.add('fd-shellbar__input-group');
+
+            this.selectComponent._controlElementRef.nativeElement.children[0].classList.add(
+                'fd-shellbar__input-group-input'
+            );
+            this.selectComponent._controlElementRef.nativeElement.children[0].classList.add(
+                'fd-shellbar__input-group-input--select'
+            );
+            this.selectComponent._controlElementRef.nativeElement.children[1].classList.add(
+                'fd-shellbar__input-group-addon'
+            );
+            this.selectComponent._controlElementRef.nativeElement.children[1].children[0].classList.add(
+                'fd-shellbar__button'
+            );
+
+            this.handleSelectIsOpenChange();
         }
     }
 
     /** @hidden */
-    applyShellbarModeToCombobox(): void {
+    _applyShellbarModeToCombobox(): void {
         if (this.comboboxComponent && this.comboboxComponent.inputGroup) {
             this.comboboxComponent.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group-input');
             this.comboboxComponent.buttons.forEach((button) => {
@@ -91,7 +126,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit {
     }
 
     /** @hidden */
-    applyShellbarModeToButtons(): void {
+    _applyShellbarModeToButtons(): void {
         if (this.buttons && this.buttons.length) {
             this.buttons.forEach((button) => {
                 button.elementRef().nativeElement.classList.add('fd-shellbar__button');

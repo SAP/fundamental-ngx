@@ -31,10 +31,9 @@
         class="fd-select__control"
         role="list"
         #selectControl
-        [class.fd-shellbar__input-group]="inShellbar"
         [class]="state ? 'is-' + state : ''"
         [class.is-active]="_isOpen"
-        [class.is-expanded]="!inShellbar && _isOpen"
+        [class.is-expanded]="_isOpen"
         [class.is-disabled]="disabled"
         [class.is-readonly]="readonly"
         [attr.tabindex]="_tabIndex"
@@ -42,7 +41,7 @@
         [attr.aria-active]="_isOpen"
         aria-live="polite"
         [attr.aria-selected]="selected?.selected"
-        [attr.aria-expanded]="!inShellbar && _isOpen"
+        [attr.aria-expanded]="_isOpen"
         [attr.aria-disabled]="disabled"
         [attr.aria-controls]="controlId + '-list-box'"
         [attr.aria-haspopup]="!(this.readonly || this.disabled)"
@@ -54,13 +53,7 @@
         (focus)="_onFocus()"
         (blur)="_onBlur()"
     >
-        <div
-            role="listitem"
-            class="fd-select__text-content"
-            [class.fd-shellbar__input-group-input]="inShellbar"
-            [class.fd-shellbar__input-group-input--select]="inShellbar"
-            [attr.aria-label]="triggerValue"
-        >
+        <div role="listitem" class="fd-select__text-content" [attr.aria-label]="triggerValue">
             <ng-container
                 [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
                 [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: selected }"
@@ -71,12 +64,11 @@
                 {{ triggerValue }}
             </ng-template>
         </div>
-        <div [class.fd-shellbar__input-group-addon]="inShellbar">
+        <div>
             <button
                 fd-button
                 tabindex="-1"
                 class="fd-button--transparent fd-select__button"
-                [class.fd-shellbar__button]="inShellbar"
                 *ngIf="!readonly"
                 [disabled]="disabled"
                 [glyph]="glyph"
