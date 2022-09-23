@@ -62,8 +62,10 @@
         tabindex="0"
     >
         <ng-container *ngIf="compact || compactCollapse">
-            {{ moreTokensLeft.length + moreTokensRight.length }} {{ moreTerm }}
+            {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length } }}
         </ng-container>
-        <ng-container *ngIf="!compact && !compactCollapse"> {{ hiddenCozyTokenCount }} {{ moreTerm }} </ng-container>
+        <ng-container *ngIf="!compact && !compactCollapse">
+            {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount } }}
+        </ng-container>
     </span>
 </ng-template>

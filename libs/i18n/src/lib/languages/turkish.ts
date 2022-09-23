@@ -130,6 +130,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         deleteButtonLabel: 'Silinebilir',
         ariaRoleDescription: 'jeton'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'Tamam',
         menuCancelText: 'İptal',

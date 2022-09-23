@@ -140,6 +140,9 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         deleteButtonLabel: 'Cancellabile',
         ariaRoleDescription: 'gettone'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'Ok',
         menuCancelText: 'Annulla',

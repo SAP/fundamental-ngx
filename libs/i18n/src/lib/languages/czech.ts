@@ -133,6 +133,9 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         deleteButtonLabel: 'Smazatelné',
         ariaRoleDescription: 'token'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'Ok',
         menuCancelText: 'Zrušit',

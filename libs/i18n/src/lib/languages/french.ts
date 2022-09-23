@@ -132,6 +132,9 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         deleteButtonLabel: 'Supprimable',
         ariaRoleDescription: 'jeton'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'Ok',
         menuCancelText: 'Annuler',

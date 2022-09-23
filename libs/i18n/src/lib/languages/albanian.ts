@@ -137,6 +137,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         deleteButtonLabel: 'E fshishme',
         ariaRoleDescription: 'shenjë'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'Ok',
         menuCancelText: 'Anulo',

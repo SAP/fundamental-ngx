@@ -156,6 +156,9 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         deleteButtonLabel: 'Удаляемый',
         ariaRoleDescription: 'токен'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'ОК',
         menuCancelText: 'Отменить',

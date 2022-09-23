@@ -202,6 +202,9 @@ export interface FdLanguage {
         deleteButtonLabel: FdLanguageKey;
         ariaRoleDescription: FdLanguageKey;
     };
+    coreTokenizer: {
+        moreLabel: FdLanguageKey;
+    };
     coreUploadCollection: {
         menuOkText: FdLanguageKey;
         menuCancelText: FdLanguageKey;

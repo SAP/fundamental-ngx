@@ -131,6 +131,9 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         deleteButtonLabel: 'წაშლადი',
         ariaRoleDescription: 'ტოკენი'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'კარგი',
         menuCancelText: 'გაუქმება',

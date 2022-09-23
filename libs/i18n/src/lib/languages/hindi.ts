@@ -130,6 +130,9 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         deleteButtonLabel: 'हटाने-योग्य',
         ariaRoleDescription: 'टोकन'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'ठीक है',
         menuCancelText: 'रद्द करें',

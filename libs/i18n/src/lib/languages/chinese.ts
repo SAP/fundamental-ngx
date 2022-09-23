@@ -129,6 +129,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         deleteButtonLabel: '可删除',
         ariaRoleDescription: '标签'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: '确定',
         menuCancelText: '取消',

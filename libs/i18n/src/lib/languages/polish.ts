@@ -130,6 +130,9 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         deleteButtonLabel: 'Usuń',
         ariaRoleDescription: 'token'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'Ok',
         menuCancelText: 'Anuluj',
