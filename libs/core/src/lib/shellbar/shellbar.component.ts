@@ -1,5 +1,6 @@
 import {
     AfterContentInit,
+    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
@@ -26,7 +27,7 @@ export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShellbarComponent implements AfterContentInit {
+export class ShellbarComponent implements AfterContentInit, AfterViewInit {
     /** Size of Shellbar component 's' | 'm' | 'l' | 'xl' */
     @Input()
     size: ShellbarSizes = 'm';
@@ -48,14 +49,32 @@ export class ShellbarComponent implements AfterContentInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.applyShellbarModeToCombobox();
         this.applyShellbarModeToButtons();
     }
 
     /** @hidden */
+    ngAfterViewInit(): void {
+        this.applyShellbarModeToCombobox();
+    }
+
+    /** @hidden */
     applyShellbarModeToCombobox(): void {
-        if (this.comboboxComponent) {
-            this.comboboxComponent.inShellbar = true;
+        if (this.comboboxComponent && this.comboboxComponent.inputGroup) {
+            this.comboboxComponent.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group-input');
+            this.comboboxComponent.buttons.forEach((button) => {
+                button.elementRef().nativeElement.classList.add('fd-shellbar__button');
+            });
+
+            this.comboboxComponent.inputGroup
+                .elementRef()
+                .nativeElement.children[0].classList.add('fd-shellbar__input-group');
+
+            this.comboboxComponent.inputGroup.inputGroupAddon.nativeElement.classList.add(
+                'fd-shellbar__input-group-addon'
+            );
+            this.comboboxComponent.inputGroup.buttons.forEach((button) => {
+                button.elementRef().nativeElement.classList.add('fd-shellbar__button');
+            });
         }
     }
 

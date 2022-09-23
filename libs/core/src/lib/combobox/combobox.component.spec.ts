@@ -220,36 +220,4 @@ describe('ComboboxComponent', () => {
         addOns = fixture.nativeElement.querySelectorAll('button');
         expect(addOns.length).toBe(2);
     });
-
-    describe('rendered in shellbar', () => {
-        beforeEach(() => {
-            fixture = TestBed.createComponent(ComboboxComponent);
-            component = fixture.componentInstance;
-            component.dropdownValues = [
-                { value: 'value', displayedValue: 'displayedValue' },
-                { value: 'value2', displayedValue: 'displayedValue2' }
-            ];
-            component.searchFn = () => {};
-            component.inShellbar = true;
-            fixture.detectChanges();
-        });
-
-        it('should add extra classes', () => {
-            component.isSearch = true;
-            (<any>component)._cdRef.detectChanges();
-
-            const inputGroup = fixture.nativeElement.querySelector('.fd-input-group');
-            expect(inputGroup.classList.contains('fd-shellbar__input-group')).toBeTrue();
-
-            const input = fixture.nativeElement.querySelector('.fd-input');
-            expect(input.classList.contains('fd-shellbar__input-group-input')).toBeTrue();
-
-            const addOns = fixture.nativeElement.querySelectorAll('.fd-input-group__addon');
-            addOns.forEach((element) => {
-                expect(element.classList.contains('fd-shellbar__input-group-addon')).toBeTrue();
-                const button = element.querySelector('.fd-button');
-                expect(button.classList.contains('fd-shellbar__button')).toBeTrue();
-            });
-        });
-    });
 });

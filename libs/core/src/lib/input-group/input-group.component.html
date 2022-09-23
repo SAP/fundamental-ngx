@@ -3,7 +3,6 @@
     [class.fd-input-group--inline]="inline"
     [class.is-disabled]="disabled"
     [class.is-readonly]="readonly"
-    [class.fd-shellbar__input-group]="inShellbar"
     [class.fd-input-group--control]="isControl"
     [class.is-focus]="_inputFocused$ | async"
     [class]="state ? 'is-' + state : ' '"
@@ -15,26 +14,17 @@
     <ng-content></ng-content>
 
     <ng-container *ngIf="!addOnElement && (glyph || addOnText)">
-        <span
-            *ngIf="button"
-            fd-input-group-addon
-            [button]="true"
-            [placement]="placement"
-            [class.fd-shellbar__input-group-addon]="inShellbar"
-        >
+        <span #inputGroupAddon *ngIf="button" fd-input-group-addon [button]="true" [placement]="placement">
             <button
                 fd-button
                 class="fd-input-group__button"
                 type="button"
-                [fdType]="inShellbar ? 'standard' : 'transparent'"
+                [fdType]="'transparent'"
                 [id]="_addOnButtonId"
                 [attr.tabindex]="buttonFocusable ? 0 : -1"
                 [attr.title]="iconTitle || glyphAriaLabel || glyph"
                 [glyph]="glyph"
-                [class.fd-shellbar__button]="inShellbar"
-                [class.is-expanded]="isExpanded"
                 [attr.aria-haspopup]="isControl"
-                [attr.aria-expanded]="inShellbar ? isExpanded : null"
                 [ariaLabel]="glyphAriaLabel || glyph || addOnText"
                 [attr.aria-controls]="_inputId"
                 [disabled]="disabled"
@@ -76,7 +66,6 @@
         [(ngModel)]="inputText"
         [id]="_inputId"
         [attr.aria-labelledby]="_inputAriaLabelledBy"
-        [class.fd-shellbar__input-group-input]="inShellbar"
         fd-input-group-input
         [type]="type"
         [disabled]="disabled"

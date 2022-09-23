@@ -11,8 +11,10 @@ import {
     isDevMode,
     OnDestroy,
     Output,
+    QueryList,
     TemplateRef,
     ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -24,6 +26,7 @@ import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { InputGroupPlacement } from './types';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 let addOnNonButtonRandomId = 0;
 let addOnButtonRandomId = 0;
@@ -186,6 +189,14 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     addOnElement: InputGroupAddOnDirective;
 
     /** @hidden */
+    @ViewChildren(ButtonComponent)
+    buttons: QueryList<ButtonComponent>;
+
+    /** @hidden */
+    @ViewChild('inputGroupAddon')
+    inputGroupAddon: ElementRef<HTMLInputElement>;
+
+    /** @hidden */
     _inputTextValue: string;
 
     /** @hidden */
@@ -199,12 +210,6 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
 
     /** @hidden */
     _inputFocused$: Observable<boolean>;
-
-    /**
-     * Whether the input group is in the shellbar. Only for internal use by combobox component.
-     * @hidden
-     */
-    inShellbar = false;
 
     /** @hidden */
     private _inputTemplate: TemplateRef<any>;
@@ -280,13 +285,6 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-
-        this._changeDetectorRef.detectChanges();
-    }
-
-    /** @hidden */
-    setInShellbar(value: boolean): void {
-        this.inShellbar = value;
 
         this._changeDetectorRef.detectChanges();
     }

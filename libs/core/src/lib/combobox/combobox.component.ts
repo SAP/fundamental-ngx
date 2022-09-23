@@ -17,6 +17,7 @@ import {
     SimpleChanges,
     TemplateRef,
     ViewChild,
+    ViewChildren,
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
@@ -59,6 +60,7 @@ import { GroupFunction } from './list-group.pipe';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 let comboboxUniqueId = 0;
 
@@ -307,6 +309,10 @@ export class ComboboxComponent
     inputGroup: InputGroupComponent;
 
     /** @hidden */
+    @ViewChildren(ButtonComponent)
+    buttons: QueryList<ButtonComponent>;
+
+    /** @hidden */
     @ContentChildren(ListMessageDirective)
     listMessages: QueryList<ListMessageDirective>;
 
@@ -339,12 +345,6 @@ export class ComboboxComponent
 
     /** Whether the combobox is opened. */
     open = false;
-
-    /**
-     * Whether or not the input coup is in the shellbar. Only for internal use by combobox component
-     * @hidden
-     */
-    inShellbar = false;
 
     /** @hidden */
     displayedValues: any[] = [];
@@ -401,8 +401,6 @@ export class ComboboxComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._addShellbarClass();
-
         if (this.mobile) {
             this._setUpMobileMode();
         }
@@ -638,16 +636,6 @@ export class ComboboxComponent
     /** Method that reset filtering for displayed values. It overrides displayed values by all possible dropdown values */
     private _resetDisplayedValues(): void {
         this.displayedValues = this.dropdownValues;
-    }
-
-    /** @hidden */
-    private _addShellbarClass(): void {
-        if (this.inShellbar) {
-            this.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group-input');
-            if (this.inputGroup) {
-                this.inputGroup.setInShellbar(true);
-            }
-        }
     }
 
     /** @hidden */
