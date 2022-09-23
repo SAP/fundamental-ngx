@@ -1,3 +1,12 @@
+## [0.36.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.15...v0.36.1-rc.16) (2022-09-23)
+
+
+### Features
+
+* **docs:** added hmr target and swapped executor to nrwl's webpack-server ([#8700](https://github.com/SAP/fundamental-ngx/issues/8700)) ([774269a](https://github.com/SAP/fundamental-ngx/commit/774269ac89cc1b1183d3e3383e9813525f3a69fe))
+
+
+
 ## [0.36.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.14...v0.36.1-rc.15) (2022-09-21)
 
 
