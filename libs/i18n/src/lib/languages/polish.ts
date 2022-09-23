@@ -130,6 +130,9 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         deleteButtonLabel: 'Usuń',
         ariaRoleDescription: 'token'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'Ok',
         menuCancelText: 'Anuluj',
@@ -211,7 +214,11 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         toolbarEditApprover: 'Edytuj zatwierdzającego',
         watchersInputPlaceholder: 'Szukaj tutaj..',
         userListSelectedItemsCountSingular: 'Liczba zaznaczonych elementów: {{ count }}',
-        userListSelectedItemsCountPlural: 'Liczba zaznaczonych elementów: {{ count }}'
+        userListSelectedItemsCountPlural: 'Liczba zaznaczonych elementów: {{ count }}',
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'Użytkownik'

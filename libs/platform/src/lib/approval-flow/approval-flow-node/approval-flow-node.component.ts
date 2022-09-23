@@ -29,6 +29,7 @@ import { ApprovalFlowDropZoneDirective } from './approval-flow-drop-zone.directi
 import { ApprovalGraphNode, ApprovalGraphNodeMetadata, ApprovalStatus } from '../interfaces';
 import { isNodeApproved, isNodeStarted } from '../helpers';
 import { ApprovalFlowNodeTarget } from '../approval-flow-add-node/approval-flow-add-node.component';
+import { TranslationResolver } from '@fundamental-ngx/i18n';
 
 const NODE_STATUS_CLASS_MAP = {
     approved: 'positive',
@@ -226,6 +227,9 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** @hidden */
+    private _translationResolver = new TranslationResolver();
 
     /** @hidden */
     constructor(

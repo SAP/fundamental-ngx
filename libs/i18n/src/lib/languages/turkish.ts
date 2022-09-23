@@ -130,6 +130,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         deleteButtonLabel: 'Silinebilir',
         ariaRoleDescription: 'jeton'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'Tamam',
         menuCancelText: 'İptal',
@@ -211,7 +214,11 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         toolbarEditApprover: 'Onaylayanı düzenle',
         watchersInputPlaceholder: 'Burada ara..',
         userListSelectedItemsCountSingular: '1 eşyayı seçildi',
-        userListSelectedItemsCountPlural: '{{ count }} eşyayılar seçildi'
+        userListSelectedItemsCountPlural: '{{ count }} eşyayılar seçildi',
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'kullanıcı'

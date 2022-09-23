@@ -156,6 +156,9 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         deleteButtonLabel: 'Удаляемый',
         ariaRoleDescription: 'токен'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'ОК',
         menuCancelText: 'Отменить',
@@ -281,7 +284,11 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
                 default:
                     return `Выбрано ${count || 0} элементов`;
             }
-        }
+        },
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'Пользователь'

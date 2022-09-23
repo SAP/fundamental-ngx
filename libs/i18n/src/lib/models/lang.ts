@@ -202,6 +202,9 @@ export interface FdLanguage {
         deleteButtonLabel: FdLanguageKey;
         ariaRoleDescription: FdLanguageKey;
     };
+    coreTokenizer: {
+        moreLabel: FdLanguageKey;
+    };
     coreUploadCollection: {
         menuOkText: FdLanguageKey;
         menuCancelText: FdLanguageKey;
@@ -287,6 +290,10 @@ export interface FdLanguage {
         userListSelectedItemsCountSingular: FdLanguageKey;
         /** @param count */
         userListSelectedItemsCountPlural: FdLanguageKey;
+        statusApproved: FdLanguageKey;
+        statusRejected: FdLanguageKey;
+        statusInProgress: FdLanguageKey;
+        statusNotStarted: FdLanguageKey;
     };
     platformFeedInput: {
         userTitle: FdLanguageKey;

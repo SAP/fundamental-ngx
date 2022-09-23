@@ -132,6 +132,9 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
         deleteButtonLabel: 'Borrar',
         ariaRoleDescription: 'token'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'Ok',
         menuCancelText: 'Cancelar',
@@ -213,7 +216,11 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
         toolbarEditApprover: 'Editar aprobador',
         watchersInputPlaceholder: 'Buscar aquí..',
         userListSelectedItemsCountSingular: '1 elemento seleccionado',
-        userListSelectedItemsCountPlural: '{{ count }} elementos seleccionados'
+        userListSelectedItemsCountPlural: '{{ count }} elementos seleccionados',
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'Usuario'

@@ -26,7 +26,7 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
         datetimeCancelLabel: 'Cancel'
     },
     coreFeedListItem: {
-        moreLabel: 'More',
+        moreLabel: '{{count}} more',
         lessLabel: 'Less'
     },
     coreGridList: {
@@ -102,7 +102,7 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
         tabListExpandButtonText: 'More'
     },
     coreText: {
-        moreLabel: 'More',
+        moreLabel: '{{count}} more',
         lessLabel: 'Less'
     },
     coreTime: {
@@ -129,6 +129,9 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
     coreToken: {
         deleteButtonLabel: 'Deletable',
         ariaRoleDescription: 'token'
+    },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
     },
     coreUploadCollection: {
         menuOkText: 'Ok',
@@ -210,7 +213,11 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
         toolbarEditApprover: 'Edit approver',
         watchersInputPlaceholder: 'Search here..',
         userListSelectedItemsCountSingular: '1 item selected',
-        userListSelectedItemsCountPlural: '{{ count }} items selected'
+        userListSelectedItemsCountPlural: '{{ count }} items selected',
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'User'

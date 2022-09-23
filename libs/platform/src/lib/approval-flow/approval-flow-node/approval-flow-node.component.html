@@ -63,7 +63,18 @@
 
         <fdp-object-status [status]="_objectStatus" [inverted]="true">
             <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">
-                {{ node.status }}
+                <ng-container *ngIf="node.status === 'approved'">{{
+                    'platformApprovalFlow.statusApproved' | fdTranslate
+                }}</ng-container>
+                <ng-container *ngIf="node.status === 'rejected'">{{
+                    'platformApprovalFlow.statusRejected' | fdTranslate
+                }}</ng-container>
+                <ng-container *ngIf="node.status === 'in progress'">{{
+                    'platformApprovalFlow.statusInProgress' | fdTranslate
+                }}</ng-container>
+                <ng-container *ngIf="node.status === 'not started'">{{
+                    'platformApprovalFlow.statusNotStarted' | fdTranslate
+                }}</ng-container>
             </ng-container>
 
             <ng-container *ngIf="checkDueDate && _showDueDateWarning">

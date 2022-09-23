@@ -133,6 +133,9 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         deleteButtonLabel: 'Smazatelné',
         ariaRoleDescription: 'token'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'Ok',
         menuCancelText: 'Zrušit',
@@ -214,7 +217,11 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         toolbarEditApprover: 'Upravit schvalovatele',
         watchersInputPlaceholder: 'Hledej tady..',
         userListSelectedItemsCountSingular: 'Vybrána 1 položka',
-        userListSelectedItemsCountPlural: 'Počet vybraných položek: {{ count }}'
+        userListSelectedItemsCountPlural: 'Počet vybraných položek: {{ count }}',
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'Uživatel'
