@@ -9,7 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { map, merge, Observable, startWith, Subject, takeUntil } from 'rxjs';
+import { delay, map, merge, startWith, Subject, takeUntil } from 'rxjs';
 import { ListNavigationItemComponent } from '@fundamental-ngx/core/list';
 
 @Component({
@@ -25,10 +25,10 @@ export class VerticalNavigationComponent implements AfterContentInit {
     condensed = false;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$ = new Subject<void>();
 
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
-    private readonly _onRefresh$: Subject<void> = new Subject<void>();
+    private readonly _onRefresh$ = new Subject<void>();
 
     /** @hidden */
     @ContentChildren(ListNavigationItemComponent, { descendants: true })
@@ -68,7 +68,7 @@ export class VerticalNavigationComponent implements AfterContentInit {
 
     /** @hidden */
     private _listenOnQueryChange(): void {
-        this._navigationItems.changes.pipe(startWith(0), takeUntil(this._onDestroy$)).subscribe(() => {
+        this._navigationItems.changes.pipe(delay(0), startWith(0), takeUntil(this._onDestroy$)).subscribe(() => {
             this._listenOnItemsClick();
             setTimeout(() => {
                 // using setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
@@ -86,13 +86,12 @@ export class VerticalNavigationComponent implements AfterContentInit {
 
         /** Merge refresh/destroy observables */
         const completion$ = merge(this._onRefresh$, this._onDestroy$);
-        const interactionChangesIndexes: Observable<{ index: number; updateOnly: boolean }>[] =
-            this._navigationItems.map((item, index) =>
-                merge(
-                    item._clicked$.pipe(map(() => ({ index, updateOnly: false }))),
-                    item._focused$.pipe(map(({ focusedWithin }) => ({ index, updateOnly: focusedWithin })))
-                )
-            );
+        const interactionChangesIndexes = this._navigationItems.map((item, index) =>
+            merge(
+                item._clicked$.pipe(map(() => ({ index, updateOnly: false }))),
+                item._focused$.pipe(map((focusedOn) => ({ index, updateOnly: focusedOn })))
+            )
+        );
         merge(...interactionChangesIndexes)
             .pipe(takeUntil(completion$))
             .subscribe(({ index, updateOnly }) => this.setItemActive(index, updateOnly));

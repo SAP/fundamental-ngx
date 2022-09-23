@@ -76,11 +76,12 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     _isItemVisible = true;
 
     /** @hidden */
-    readonly _focused$ = new Subject<{ focusedWithin: boolean }>();
+    readonly _focused$ = new Subject<boolean>();
 
     /** @hidden */
     readonly _clicked$ = new Subject<MouseEvent>();
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -129,9 +130,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     /** @hidden */
     @HostListener('focus', ['$event'])
     protected onFocus(event: FocusEvent): void {
-        this._focused$.next({
-            focusedWithin: event.target !== this._elementRef?.nativeElement
-        });
+        this._focused$.next(event.target !== this._elementRef?.nativeElement);
     }
 
     /** @hidden
@@ -157,10 +156,12 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
         return retVal;
     }
 
+    /** support for FocusKeyManager for arrow key navigation */
     focus(): void {
         this._elementRef.nativeElement.focus();
     }
 
+    /** support for FocusKeyManager for arrow key navigation */
     click(): void {
         this._elementRef?.nativeElement?.click();
     }
