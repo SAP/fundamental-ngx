@@ -1,3 +1,70 @@
+## [0.36.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.15...v0.36.1-rc.16) (2022-09-23)
+
+
+### Features
+
+* **docs:** added hmr target and swapped executor to nrwl's webpack-server ([#8700](https://github.com/SAP/fundamental-ngx/issues/8700)) ([774269a](https://github.com/SAP/fundamental-ngx/commit/774269ac89cc1b1183d3e3383e9813525f3a69fe))
+
+
+
+## [0.36.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.14...v0.36.1-rc.15) (2022-09-21)
+
+
+
+## [0.36.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.13...v0.36.1-rc.14) (2022-09-21)
+
+
+### Bug Fixes
+
+* **core:** multi input focusing ([#8686](https://github.com/SAP/fundamental-ngx/issues/8686)) ([3a40f69](https://github.com/SAP/fundamental-ngx/commit/3a40f69295a53dba0013ab5405a5d2cc790ff5ac))
+
+
+
+## [0.36.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.12...v0.36.1-rc.13) (2022-09-21)
+
+
+### Bug Fixes
+
+* **ci:** removed npm publish script hardcodes and dry-run ([#8724](https://github.com/SAP/fundamental-ngx/issues/8724)) ([01962f0](https://github.com/SAP/fundamental-ngx/commit/01962f089301e3136bb6665011a4b110a811cd84))
+
+
+
+## [0.36.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.11...v0.36.1-rc.12) (2022-09-20)
+
+
+### Bug Fixes
+
+* **core:** pagination numbers not displaying in RTL ([#8697](https://github.com/SAP/fundamental-ngx/issues/8697)) ([e1943b5](https://github.com/SAP/fundamental-ngx/commit/e1943b5d5ca5a37a1d563ab0ecf6455671288c72))
+
+
+
+## [0.36.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.10...v0.36.1-rc.11) (2022-09-19)
+
+
+### Bug Fixes
+
+* **core:** overflow layout nested struct directives ([#8652](https://github.com/SAP/fundamental-ngx/issues/8652)) ([08391fa](https://github.com/SAP/fundamental-ngx/commit/08391fa666453a65d2f2d6cdd29be4a4fde54f05))
+
+
+
+## [0.36.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.9...v0.36.1-rc.10) (2022-09-19)
+
+
+### Bug Fixes
+
+* **docs:** increment z-index ([#8696](https://github.com/SAP/fundamental-ngx/issues/8696)) ([810eeeb](https://github.com/SAP/fundamental-ngx/commit/810eeeb240ac4e7fcc731e0baeb0c0b137e6df27))
+
+
+
+## [0.36.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.8...v0.36.1-rc.9) (2022-09-19)
+
+
+### Bug Fixes
+
+* **core:** prevent NaN for itemsContainerWidth ([#8685](https://github.com/SAP/fundamental-ngx/issues/8685)) ([b2ce4d3](https://github.com/SAP/fundamental-ngx/commit/b2ce4d30d0a81296399e2dd59bba6580d4eaae62))
+
+
+
 ## [0.36.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.7...v0.36.1-rc.8) (2022-09-16)
 
 

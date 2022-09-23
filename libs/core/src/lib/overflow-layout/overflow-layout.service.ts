@@ -5,7 +5,6 @@ import { debounceTime, distinctUntilChanged, filter, Observable, skip, Subject, 
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowLayoutFocusableItem } from './interfaces/overflow-focusable-item.interface';
 import { OverflowItemRef } from './interfaces/overflow-item-ref.interface';
-import { OverflowItem } from './interfaces/overflow-item.interface';
 
 export interface OverflowLayoutConfig {
     items: QueryList<OverflowItemRef>;
@@ -53,9 +52,6 @@ export class OverflowLayoutService implements OnDestroy {
 
     /** @hidden */
     private _hiddenItems: OverflowItemRef[] = [];
-
-    /** @hidden */
-    private _overflowItems: OverflowItem[] = [];
 
     /** @hidden */
     private _detectChanges$ = new Subject<void>();
@@ -168,7 +164,7 @@ export class OverflowLayoutService implements OnDestroy {
         this._emitResult();
         const containerWidth = this._elRef.nativeElement.getBoundingClientRect().width;
         const itemsContainerWidth = allItems.reduce(
-            (total, item) => total + this._getElementWidth(item.elementRef.nativeElement),
+            (total, item) => total + this._getElementWidth(item.elementRef.nativeElement) || 0,
             0
         );
 
