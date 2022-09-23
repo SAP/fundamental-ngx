@@ -212,7 +212,11 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         toolbarEditApprover: '编辑审批者',
         watchersInputPlaceholder: '搜索…',
         userListSelectedItemsCountSingular: '选择了1个项',
-        userListSelectedItemsCountPlural: '选择了{{ count }}个项'
+        userListSelectedItemsCountPlural: '选择了{{ count }}个项',
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: '用户'

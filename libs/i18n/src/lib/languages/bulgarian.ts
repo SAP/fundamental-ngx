@@ -265,7 +265,11 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         toolbarEditApprover: 'Редактирай на одобряващия',
         watchersInputPlaceholder: 'Търси тук...',
         userListSelectedItemsCountSingular: 'Избран е 1 елемент',
-        userListSelectedItemsCountPlural: 'Избрани са {{ count }} елементи'
+        userListSelectedItemsCountPlural: 'Избрани са {{ count }} елементи',
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'User'

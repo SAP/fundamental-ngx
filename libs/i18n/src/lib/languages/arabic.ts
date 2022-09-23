@@ -213,7 +213,11 @@ export const FD_LANGUAGE_ARABIC: FdLanguage = {
         toolbarEditApprover: 'Edit approver',
         watchersInputPlaceholder: 'Search here..',
         userListSelectedItemsCountSingular: '1 item selected',
-        userListSelectedItemsCountPlural: '{{ count }} items selected'
+        userListSelectedItemsCountPlural: '{{ count }} items selected',
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'User'

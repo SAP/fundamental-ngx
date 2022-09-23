@@ -215,7 +215,11 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         toolbarEditApprover: 'შეასწორე დამდასტურებელი',
         watchersInputPlaceholder: 'ძებნა...',
         userListSelectedItemsCountSingular: '1 ელემენტი არჩეულია',
-        userListSelectedItemsCountPlural: '{{ count }} ელემენტი არჩეულია'
+        userListSelectedItemsCountPlural: '{{ count }} ელემენტი არჩეულია',
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'მომხმარებელი'

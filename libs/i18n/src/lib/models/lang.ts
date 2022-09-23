@@ -290,6 +290,10 @@ export interface FdLanguage {
         userListSelectedItemsCountSingular: FdLanguageKey;
         /** @param count */
         userListSelectedItemsCountPlural: FdLanguageKey;
+        statusApproved: FdLanguageKey;
+        statusRejected: FdLanguageKey;
+        statusInProgress: FdLanguageKey;
+        statusNotStarted: FdLanguageKey;
     };
     platformFeedInput: {
         userTitle: FdLanguageKey;

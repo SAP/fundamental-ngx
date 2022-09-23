@@ -284,7 +284,11 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
                 default:
                     return `Выбрано ${count || 0} элементов`;
             }
-        }
+        },
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'Пользователь'

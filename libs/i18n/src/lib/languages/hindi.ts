@@ -214,7 +214,11 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         toolbarEditApprover: 'अनुमोदक संपादित करें',
         watchersInputPlaceholder: 'यहां खोजें..',
         userListSelectedItemsCountSingular: '1 आइटम चुना गया',
-        userListSelectedItemsCountPlural: '{{ count }} आइटम चुने गए'
+        userListSelectedItemsCountPlural: '{{ count }} आइटम चुने गए',
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'उपयोगकर्ता'

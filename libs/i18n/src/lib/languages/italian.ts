@@ -225,7 +225,11 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         toolbarEditApprover: 'Modifica approvatore',
         watchersInputPlaceholder: 'Cerca qui..',
         userListSelectedItemsCountSingular: '1 elemento selezionato',
-        userListSelectedItemsCountPlural: '{{ count }} elementi selezionati'
+        userListSelectedItemsCountPlural: '{{ count }} elementi selezionati',
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'Utente'

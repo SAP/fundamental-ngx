@@ -222,7 +222,11 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         toolbarEditApprover: 'Redakto miratuesin',
         watchersInputPlaceholder: 'Kërko këtu..',
         userListSelectedItemsCountSingular: '1 artikull i zgjedhur',
-        userListSelectedItemsCountPlural: '{{ count }} artikujt të zgjedhur'
+        userListSelectedItemsCountPlural: '{{ count }} artikujt të zgjedhur',
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'Përdoruesi'

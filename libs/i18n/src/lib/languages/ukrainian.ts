@@ -283,7 +283,11 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
                 default:
                     return `Вибрано ${count || 0} елементів`;
             }
-        }
+        },
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'Користувач'
