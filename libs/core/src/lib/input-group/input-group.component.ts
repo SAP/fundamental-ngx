@@ -288,8 +288,8 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     }
 
     /** @hidden */
-    _buttonClicked($event: MouseEvent): void {
-        this.addOnButtonClicked.emit($event);
+    _buttonClicked(event: Event): void {
+        this.addOnButtonClicked.emit(event);
     }
 
     /** @hidden */

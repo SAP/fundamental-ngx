@@ -456,9 +456,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /** @hidden */
     private _refreshPages(): void {
         const pagination = this.paginationObject;
-        const pages = this.paginationService.getPages(pagination);
 
-        this._pages = this._isRtl ? pages.slice().reverse() : pages;
+        this._pages = this.paginationService.getPages(pagination);
 
         const currentPageIndex = this._pages.findIndex((page) => page === this.currentPage);
 
