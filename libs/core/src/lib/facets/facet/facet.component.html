@@ -33,7 +33,7 @@
 </ng-container>
 
 <ng-template #skeletonTemplate>
-    <ng-container *fdSkeletonState="false">
+    <ng-container [fdSkeletonState]="false">
         <fd-facet type="form" *fdRepeat="3">
             <fd-skeleton width="10rem" height="1.25rem"></fd-skeleton>
         </fd-facet>

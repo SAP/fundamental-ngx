@@ -1,9 +1,9 @@
-<button fd-button (click)="openPage()" *fdSkeletonState="false">Click to open full screen</button>
+<button fd-button (click)="openPage()" [fdSkeletonState]="false">Click to open full screen</button>
 <div cdkScrollable cdkTrapFocus class="example-overlay" #overlay>
     <ng-container *ngIf="fullscreen">
         <div class="example-overlay-content">
             <div class="example-button">
-                <button fd-button (click)="closePage()" *fdSkeletonState="false">Exit Example</button>
+                <button fd-button (click)="closePage()" [fdSkeletonState]="false">Exit Example</button>
             </div>
 
             <fd-dynamic-page size="large" ariaLabel="Example Dynamic Page" [autoResponsive]="false">
@@ -142,7 +142,7 @@
                             <fd-button-bar
                                 label="Cancel"
                                 (click)="closePage()"
-                                *fdSkeletonState="false"
+                                [fdSkeletonState]="false"
                             ></fd-button-bar>
                         </div>
                     </div>

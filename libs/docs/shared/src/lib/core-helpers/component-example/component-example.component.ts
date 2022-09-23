@@ -11,7 +11,7 @@ let componentExampleUniqueId = 0;
     template: `
         <div class="docs-tile docs-component" [class.docs-tile-example-background]="hasBackground" [id]="id">
             <div class="docs-tile__content docs-tile-content-example">
-                <div class="component-example__features" fdCompact *fdSkeletonState="false">
+                <div class="component-example__features" fdCompact [fdSkeletonState]="false">
                     <rtl-switch [label]="id2"></rtl-switch>
                     <background-switch [label]="id"></background-switch>
                     <skeleton-switch *ngIf="skeletonSwitch"></skeleton-switch>

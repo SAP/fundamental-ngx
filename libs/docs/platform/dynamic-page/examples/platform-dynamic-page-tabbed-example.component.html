@@ -1,12 +1,12 @@
 <p>Default tabs example:</p>
-<button fd-button (click)="openPage(false)" *fdSkeletonState="false">Click to open full screen</button>
+<button fd-button (click)="openPage(false)" [fdSkeletonState]="false">Click to open full screen</button>
 <p>Stacked tabs example:</p>
-<button fd-button (click)="openPage(true)" *fdSkeletonState="false">Click to open full screen</button>
+<button fd-button (click)="openPage(true)" [fdSkeletonState]="false">Click to open full screen</button>
 <div cdkScrollable cdkTrapFocus class="example-overlay" #overlay>
     <ng-container *ngIf="fullscreen">
         <div class="example-overlay-content">
             <div class="example-button">
-                <button fd-button (click)="closePage($event)" *fdSkeletonState="false">Exit Example</button>
+                <button fd-button (click)="closePage($event)" [fdSkeletonState]="false">Exit Example</button>
             </div>
 
             <fdp-dynamic-page [stackContent]="stackedTabs" [background]="background" (tabChange)="onTabChanged($event)">
@@ -188,7 +188,7 @@
                         <div fd-bar-right>
                             <fd-button-bar label="Save" fdType="emphasized" (click)="closePage($event)"></fd-button-bar>
                             <fd-button-bar
-                                *fdSkeletonState="false"
+                                [fdSkeletonState]="false"
                                 label="Cancel"
                                 (click)="closePage($event)"
                             ></fd-button-bar>

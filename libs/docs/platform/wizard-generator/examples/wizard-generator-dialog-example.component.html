@@ -1,3 +1,3 @@
-<fdp-button (click)="openDialog()" label="Open wizard in dialog" *fdSkeletonState="false"></fdp-button>
+<fdp-button (click)="openDialog()" label="Open wizard in dialog" [fdSkeletonState]="false"></fdp-button>
 
 <p *ngIf="wizardValue">Wizard value: {{ wizardValue | json }}</p>

@@ -4,7 +4,7 @@ import { FirstDialogExampleComponent } from './first-dialog-example.component';
 
 @Component({
     selector: 'fd-dialog-stacked-example',
-    template: '<button fd-button label="Open First Dialog" (click)="openDialog()" *fdSkeletonState="false"></button>'
+    template: '<button fd-button label="Open First Dialog" (click)="openDialog()" [fdSkeletonState]="false"></button>'
 })
 export class DialogStackedExampleComponent {
     constructor(private _dialogService: DialogService) {}

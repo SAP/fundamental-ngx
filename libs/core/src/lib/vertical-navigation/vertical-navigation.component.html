@@ -6,7 +6,7 @@
 
         <ng-template #skeletonTemplate>
             <!-- Double state setting needed to prevent list from showing own skeleton template -->
-            <ul fd-list *fdSkeletonState="false">
+            <ul fd-list [fdSkeletonState]="false">
                 <li fd-list-navigation-item *fdRepeat="3" style="display: flex; align-items: center">
                     <fd-skeleton width="40%" height="1.25rem"></fd-skeleton>
                 </li>

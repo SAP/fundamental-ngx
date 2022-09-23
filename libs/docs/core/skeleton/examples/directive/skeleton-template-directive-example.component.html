@@ -1,12 +1,14 @@
-<div class="examples-wrapper" *fdSkeletonState="false">
+<div class="examples-wrapper" [fdSkeletonState]="false">
     <button fd-button (click)="localLoading = !localLoading">Toggle local state</button>
 
     <button fd-button (click)="changeGlobalState()">Toggle global state</button>
 </div>
 
-<p>Permanently in the skeleton state because of the value passed to the <code>fdSkeletonState</code> directives</p>
+<p>Permanently in the skeleton state because of the value passed to the <code>[fdSkeletonState]</code> directive</p>
 
-<p *fdSkeletonState="true; template: skeletonTemplate">Content</p>
+<div [fdSkeletonState]="true">
+    <p *fdSkeletonTemplate="skeletonTemplate">Content</p>
+</div>
 
 <ng-template #skeletonTemplate>
     <p>

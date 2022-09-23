@@ -3,7 +3,7 @@
 </ng-container>
 
 <ng-template #skeletonTemplate>
-    <ng-container *fdSkeletonState="false">
+    <ng-container [fdSkeletonState]="false">
         <fd-facet type="image">
             <fd-skeleton width="4.625rem" height="4.625rem"></fd-skeleton>
         </fd-facet>

@@ -10,7 +10,7 @@
 
         <fd-dialog-footer>
             <fd-button-bar
-                *fdSkeletonState="false"
+                [fdSkeletonState]="false"
                 fd-initial-focus
                 fdType="emphasized"
                 label="Ok"
@@ -27,23 +27,23 @@
     fd-button
     label="Open self closing Dialog"
     (click)="openCloseDialog(dialogTemplate)"
-    *fdSkeletonState="false"
+    [fdSkeletonState]="false"
 ></button>
 <button
     fd-button
     label="Open self dismissing Dialog"
     (click)="openDismissDialog(dialogTemplate)"
-    *fdSkeletonState="false"
+    [fdSkeletonState]="false"
 ></button>
 <button
     fd-button
     label="Open self hiding Dialog"
     (click)="openHideDialog(dialogTemplate)"
-    *fdSkeletonState="false"
+    [fdSkeletonState]="false"
 ></button>
 <button
     fd-button
     label="Open loading Dialog"
     (click)="openLoadingDialog(dialogTemplate)"
-    *fdSkeletonState="false"
+    [fdSkeletonState]="false"
 ></button>

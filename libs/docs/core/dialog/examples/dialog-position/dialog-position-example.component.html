@@ -17,7 +17,7 @@
 
         <fd-dialog-footer>
             <fd-button-bar
-                *fdSkeletonState="false"
+                [fdSkeletonState]="false"
                 fdType="emphasized"
                 label="Interesting"
                 fdCompact
@@ -29,4 +29,4 @@
     </fd-dialog>
 </ng-template>
 
-<button fd-button label="Open in Bottom Right" (click)="openDialog(dialogTemplate)" *fdSkeletonState="false"></button>
+<button fd-button label="Open in Bottom Right" (click)="openDialog(dialogTemplate)" [fdSkeletonState]="false"></button>

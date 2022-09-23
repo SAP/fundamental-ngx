@@ -19,7 +19,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 
             <fd-dialog-footer>
                 <fd-button-bar
-                    *fdSkeletonState="false"
+                    [fdSkeletonState]="false"
                     fd-initial-focus
                     fdType="emphasized"
                     label="Close"

@@ -2,21 +2,21 @@
     fd-button
     label="Custom Backdrop"
     (click)="openCustomBackdrop(dialogTemplate)"
-    *fdSkeletonState="false"
+    [fdSkeletonState]="false"
 ></button>
 
 <button
     fd-button
     (click)="openInCustomContainer(dialogTemplate, customContainer)"
     label="Custom Container"
-    *fdSkeletonState="false"
+    [fdSkeletonState]="false"
 ></button>
 
 <button
     fd-button
     (click)="openStaticDialog(dialogTemplate, customContainer)"
     label="Static Dialog"
-    *fdSkeletonState="false"
+    [fdSkeletonState]="false"
 ></button>
 
 <div #customContainer style="margin-top: 0.5rem"></div>
@@ -34,7 +34,7 @@
 
         <fd-dialog-footer>
             <fd-button-bar
-                *fdSkeletonState="false"
+                [fdSkeletonState]="false"
                 fd-initial-focus
                 fdType="emphasized"
                 label="Close"

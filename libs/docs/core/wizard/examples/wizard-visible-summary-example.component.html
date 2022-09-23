@@ -297,7 +297,7 @@
                         (click)="dialog.close('Continue')"
                     ></fd-button-bar>
                     <fd-button-bar
-                        *fdSkeletonState="false"
+                        [fdSkeletonState]="false"
                         label="Cancel"
                         (click)="dialog.dismiss('Cancel')"
                     ></fd-button-bar>
@@ -311,5 +311,5 @@
     fd-button
     label="Open Wizard in Dialog"
     (click)="openDialog(confirmationDialog)"
-    *fdSkeletonState="false"
+    [fdSkeletonState]="false"
 ></button>

@@ -5,7 +5,7 @@
     glyph="value-help"
     (click)="vhd.open()"
     label="Open value help dialog"
-    *fdSkeletonState="false"
+    [fdSkeletonState]="false"
 ></button>
 <br />
 <div *ngIf="actualItems.length">

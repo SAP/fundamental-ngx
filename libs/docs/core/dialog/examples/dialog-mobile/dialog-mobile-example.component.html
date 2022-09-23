@@ -15,7 +15,7 @@
 
         <fd-dialog-footer>
             <fd-button-bar
-                *fdSkeletonState="false"
+                [fdSkeletonState]="false"
                 fd-initial-focus
                 fdType="emphasized"
                 label="Interesting"
@@ -27,4 +27,4 @@
     </fd-dialog>
 </ng-template>
 
-<button fd-button label="Open in mobile mode" (click)="openDialog(dialogTemplate)" *fdSkeletonState="false"></button>
+<button fd-button label="Open in mobile mode" (click)="openDialog(dialogTemplate)" [fdSkeletonState]="false"></button>

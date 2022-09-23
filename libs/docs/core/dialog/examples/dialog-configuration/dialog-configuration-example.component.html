@@ -18,7 +18,7 @@
 
         <fd-dialog-footer>
             <fd-button-bar
-                *fdSkeletonState="false"
+                [fdSkeletonState]="false"
                 fd-initial-focus
                 fdType="emphasized"
                 label="Interesting"
@@ -35,16 +35,16 @@
     fd-button
     label="Open draggable Dialog"
     (click)="openDraggableDialog(dialogTemplate)"
-    *fdSkeletonState="false"
+    [fdSkeletonState]="false"
 ></button>
 <button
     fd-button
     (click)="openResizableDialog(dialogTemplate)"
     label="Open resizable Dialog"
-    *fdSkeletonState="false"
+    [fdSkeletonState]="false"
 ></button>
 <button
-    *fdSkeletonState="false"
+    [fdSkeletonState]="false"
     fd-button
     (click)="openClosableByButtonDialog(dialogTemplate)"
     label="Open Dialog closable only with footer button"

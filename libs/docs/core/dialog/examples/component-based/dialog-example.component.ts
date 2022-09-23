@@ -26,7 +26,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
                 >
                 </fd-button-bar>
                 <fd-button-bar
-                    *fdSkeletonState="false"
+                    [fdSkeletonState]="false"
                     label="Cancel"
                     fdInitialFocus
                     fdType="transparent"

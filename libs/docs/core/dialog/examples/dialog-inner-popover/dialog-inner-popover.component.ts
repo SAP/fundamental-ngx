@@ -8,7 +8,7 @@ interface Option {
 @Component({
     selector: 'fd-dialog-inner-popover-example',
     template: `
-        <button fd-button label="Open from Component" (click)="open()" *fdSkeletonState="false"></button>
+        <button fd-button label="Open from Component" (click)="open()" [fdSkeletonState]="false"></button>
         <p>{{ closeReason }}</p>
     `
 })
@@ -102,7 +102,7 @@ export class DialogInnerPopoverComponent {
                 >
                 </fd-button-bar>
                 <fd-button-bar
-                    *fdSkeletonState="false"
+                    [fdSkeletonState]="false"
                     label="Cancel"
                     fdInitialFocus
                     fdType="transparent"

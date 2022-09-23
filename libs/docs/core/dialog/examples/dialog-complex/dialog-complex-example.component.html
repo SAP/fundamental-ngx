@@ -52,7 +52,7 @@
                 </div>
                 <div fd-bar-right>
                     <fd-button-bar
-                        *fdSkeletonState="false"
+                        [fdSkeletonState]="false"
                         fd-initial-focus
                         glyph="cart"
                         fdType="emphasized"
@@ -72,5 +72,5 @@
     fd-button
     label="Open with custom configuration"
     (click)="openDialog(dialogTemplate)"
-    *fdSkeletonState="false"
+    [fdSkeletonState]="false"
 ></button>

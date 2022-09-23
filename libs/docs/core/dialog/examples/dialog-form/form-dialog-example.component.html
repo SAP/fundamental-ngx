@@ -97,7 +97,7 @@
             ></fd-button-bar>
 
             <fd-button-bar
-                *fdSkeletonState="false"
+                [fdSkeletonState]="false"
                 fdInitialFocus
                 label="Cancel"
                 fdCompact
@@ -111,5 +111,10 @@
 <fd-checkbox [(ngModel)]="responsivePadding" label="Responsive Padding"></fd-checkbox>
 <fd-checkbox [(ngModel)]="verticalPadding" label="Vertical Padding"></fd-checkbox>
 
-<button fd-button label="Open from Template" (click)="openDialog(confirmationDialog)" *fdSkeletonState="false"></button>
+<button
+    fd-button
+    label="Open from Template"
+    (click)="openDialog(confirmationDialog)"
+    [fdSkeletonState]="false"
+></button>
 <p>{{ confirmationReason }}</p>
