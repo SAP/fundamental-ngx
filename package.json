@@ -99,7 +99,7 @@
     "@nrwl/nx-plugin": "14.5.10",
     "@nrwl/schematics": "8.12.11",
     "@nrwl/tao": "14.5.10",
-    "@nrwl/workspace": "14.5.10",
+    "@nrwl/workspace": "14.7.13",
     "@schematics/angular": "~14.1.3",
     "@types/jasmine": "3.10.2",
     "@types/jasminewd2": "2.0.8",
