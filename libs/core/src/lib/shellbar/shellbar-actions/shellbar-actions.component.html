@@ -1,4 +1,10 @@
-<div *ngIf="comboboxComponent" class="fd-shellbar__action fd-shellbar__action--desktop">
+<div
+    *ngIf="comboboxComponent"
+    [class.fd-shellbar-actions-combobox--mobile]="fullWidthOnMobile"
+    class="fd-shellbar__action"
+    [class.fd-shellbar__action--desktop]="!enableComboboxForMobileMode"
+    [style.margin]="fullWidthOnMobile ? 0 : ''"
+>
     <button
         #searchButton
         [style.display]="!showCombobox ? '' : 'none'"
@@ -8,10 +14,25 @@
         [glyph]="'search'"
         (click)="onSearchButtonClick()"
     ></button>
-    <ng-content *ngIf="showCombobox" select="fd-combobox"></ng-content>
+    <div
+        style="display: flex; align-items: center; justify-content: center; width: 100%"
+        [style.padding]="fullWidthOnMobile ? '0 1rem' : ''"
+    >
+        <ng-content *ngIf="showCombobox" select="fd-combobox"></ng-content>
+        <button
+            *ngIf="showCombobox && enableComboboxForMobileMode"
+            style="padding: 0 1rem; margin-left: 0.25rem; height: 250px"
+            fd-button
+            fdType="transparent"
+            class="fd-shellbar__button"
+            (click)="showFullWidthCombobox(false)"
+        >
+            Cancel
+        </button>
+    </div>
 </div>
 
-<div #shellBarSelect *ngIf="selectComponent" class="fd-shellbar__action" [class.fd-shellbar__action--desktop]="true">
+<div #shellBarSelect *ngIf="selectComponent" class="fd-shellbar__action fd-shellbar__action--desktop">
     <ng-content select="fd-select"></ng-content>
 </div>
 
@@ -19,6 +40,7 @@
     <fd-shellbar-actions-mobile
         [shellbarActions]="shellbarActions"
         [collapsedItemMenuLabel]="collapsedItemMenuLabel"
+        (showFullWidthCombobox)="showFullWidthCombobox($event)"
     ></fd-shellbar-actions-mobile>
 </div>
 

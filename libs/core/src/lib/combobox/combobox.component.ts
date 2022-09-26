@@ -371,8 +371,13 @@ export class ComboboxComponent
     /** @hidden */
     onTouched = (): void => {};
 
+    get comboboxElement(): HTMLElement {
+        return this._elementRef.nativeElement;
+    }
+
     /** @hidden */
     constructor(
+        private readonly _elementRef: ElementRef,
         private readonly _overlay: Overlay,
         private readonly _cdRef: ChangeDetectorRef,
         private readonly _injector: Injector,
