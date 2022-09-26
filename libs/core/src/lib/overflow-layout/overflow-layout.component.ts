@@ -17,9 +17,10 @@ import {
     AfterViewInit,
     OnDestroy,
     Input,
-    OnInit
+    OnInit,
+    NgZone
 } from '@angular/core';
-import { debounceTime, filter, fromEvent, Subject, Subscription } from 'rxjs';
+import { debounceTime, filter, first, fromEvent, startWith, Subject, Subscription } from 'rxjs';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowContainer } from './interfaces/overflow-container.interface';
@@ -154,7 +155,7 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
 
     /** @hidden */
     @HostBinding('class')
-    private readonly _initialClass = 'fd-overflow-layout';
+    readonly _initialClass = 'fd-overflow-layout';
 
     /** @hidden */
     private readonly _subscription = new Subscription();
@@ -176,18 +177,82 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
     moreItemsButtonText: (hiddenItemsCount: number) => string = (count) => `${count} more`;
 
     /** @hidden */
+    private get _config(): OverflowLayoutConfig {
+        return {
+            visibleItems: this._visibleItems,
+            items: this._items,
+            focusableItems: this._focusableOverflowItems,
+            itemsWrapper: this._itemsWrapper.nativeElement,
+            showMoreContainer: this._showMoreContainer.nativeElement,
+            layoutContainerElement: this._layoutContainer.nativeElement,
+            maxVisibleItems: this.maxVisibleItems,
+            direction: this.showMorePosition,
+            enableKeyboardNavigation: this.enableKeyboardNavigation,
+            reverseHiddenItems: this.reverseHiddenItems
+        };
+    }
+
+    /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
+        private readonly _ngZone: NgZone,
         protected _cdr: ChangeDetectorRef,
         protected _overflowLayoutService: OverflowLayoutService
     ) {
         this._subscription.add(
-            this._fillTrigger$.pipe(debounceTime(30)).subscribe(() => this._overflowLayoutService.fitVisibleItems())
+            this._fillTrigger$.pipe(debounceTime(30)).subscribe(() => {
+                this._overflowLayoutService.setConfig(this._config);
+                this._overflowLayoutService.fitVisibleItems();
+            })
         );
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this._setupKeyboardListener();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._subscription.add(
+            this._overflowLayoutService.detectChanges.subscribe(() => {
+                this._cdr.detectChanges();
+            })
+        );
+
+        this._subscription.add(
+            this._overflowLayoutService.onResult.subscribe((result) => {
+                this._hiddenItems = result.hiddenItems;
+                this._showMore = result.showMore;
+
+                this.hiddenItemsCount.emit(result.hiddenItems.length);
+                this.visibleItemsCount.emit(this._allItems.filter((i) => !i.hidden).length);
+
+                this._cdr.detectChanges();
+            })
+        );
+
+        this._subscription.add(
+            this._items.changes.pipe(startWith(() => this._items)).subscribe(() => {
+                this._allItems = this._items.toArray();
+
+                this._cdr.detectChanges();
+            })
+        );
+
+        // There might be cases when the elements are not rendered yet, but the component is initialized already.
+        // It may happen when it's inside the components that are wrapping ng-content with ng-containers and so on.
+        // IntersectionObserver is a good solution for this case, but it's hardly manageable when testing.
+        this._ngZone.onStable.pipe(first()).subscribe(() => {
+            this._overflowLayoutService.startListening(this._config);
+
+            this._canListenToResize = true;
+        });
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscription.unsubscribe();
     }
 
     /**
@@ -197,13 +262,8 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         if (!this._canListenToResize) {
             return;
         }
-        this._overflowLayoutService.setConfig(this._getConfig());
-        this._fillTrigger$.next();
-    }
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscription.unsubscribe();
+        this._fillTrigger$.next();
     }
 
     /**
@@ -236,55 +296,6 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         if (opened) {
             this._overflowPopoverContent?.focusFirstTabbableElement();
         }
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._subscription.add(
-            this._overflowLayoutService.detectChanges.subscribe(() => {
-                this._cdr.detectChanges();
-            })
-        );
-
-        this._subscription.add(
-            this._overflowLayoutService.onResult.subscribe((result) => {
-                this._hiddenItems = result.hiddenItems;
-                this._showMore = result.showMore;
-                this.hiddenItemsCount.emit(result.hiddenItems.length);
-                this.visibleItemsCount.emit(this._allItems.filter((i) => !i.hidden).length);
-                this._cdr.detectChanges();
-            })
-        );
-
-        this._subscription.add(
-            this._items.changes.subscribe(() => {
-                this._allItems = this._items.toArray();
-                this._cdr.detectChanges();
-            })
-        );
-
-        this._allItems = this._items.toArray();
-        this._cdr.detectChanges();
-
-        this._overflowLayoutService.startListening(this._getConfig());
-
-        this._canListenToResize = true;
-    }
-
-    /** @hidden */
-    private _getConfig(): OverflowLayoutConfig {
-        return {
-            visibleItems: this._visibleItems,
-            items: this._items,
-            focusableItems: this._focusableOverflowItems,
-            itemsWrapper: this._itemsWrapper.nativeElement,
-            showMoreContainer: this._showMoreContainer.nativeElement,
-            layoutContainerElement: this._layoutContainer.nativeElement,
-            maxVisibleItems: this.maxVisibleItems,
-            direction: this.showMorePosition,
-            enableKeyboardNavigation: this.enableKeyboardNavigation,
-            reverseHiddenItems: this.reverseHiddenItems
-        };
     }
 
     /** @hidden */

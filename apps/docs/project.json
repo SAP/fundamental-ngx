@@ -197,27 +197,6 @@
                     "sourceMap": false,
                     "namedChunks": false,
                     "vendorChunk": false
-                },
-                "hmr": {
-                    "budgets": [
-                        {
-                            "type": "anyComponentStyle",
-                            "maximumWarning": "6kb"
-                        }
-                    ],
-                    "optimization": true,
-                    "outputHashing": "all",
-                    "sourceMap": false,
-                    "namedChunks": false,
-                    "extractLicenses": true,
-                    "vendorChunk": false,
-                    "buildOptimizer": true,
-                    "fileReplacements": [
-                        {
-                            "replace": "apps/docs/src/environments/environment.ts",
-                            "with": "apps/docs/src/environments/environment.prod.ts"
-                        }
-                    ]
                 }
             },
             "outputs": ["{options.outputPath}"],
@@ -225,7 +204,7 @@
             "dependsOn": ["^build", "generate-typedoc"]
         },
         "serve": {
-            "executor": "@angular-devkit/build-angular:dev-server",
+            "executor": "@nrwl/angular:webpack-server",
             "options": {
                 "browserTarget": "docs:build"
             },
@@ -233,14 +212,8 @@
                 "production": {
                     "browserTarget": "docs:build:production"
                 },
-                "hmr": {
-                    "browserTarget": "docs:build:hmr"
-                },
-                "fr": {
-                    "browserTarget": "docs:build:fr"
-                },
-                "ar": {
-                    "browserTarget": "docs:build:ar"
+                "hot-module-replacement": {
+                    "hmr": true
                 },
                 "e2e": {
                     "watch": false,
