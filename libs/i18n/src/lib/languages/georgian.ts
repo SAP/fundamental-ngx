@@ -216,10 +216,10 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         watchersInputPlaceholder: 'ძებნა...',
         userListSelectedItemsCountSingular: '1 ელემენტი არჩეულია',
         userListSelectedItemsCountPlural: '{{ count }} ელემენტი არჩეულია',
-        statusApproved: 'approved',
-        statusRejected: 'rejected',
-        statusInProgress: 'in progress',
-        statusNotStarted: 'not started'
+        statusApproved: 'დადასტურებული',
+        statusRejected: 'უარყოფილი',
+        statusInProgress: 'მიმდინარე',
+        statusNotStarted: 'არ დაწყებულა'
     },
     platformFeedInput: {
         userTitle: 'მომხმარებელი'
