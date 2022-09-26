@@ -789,6 +789,12 @@ export class DatePickerComponent<D>
         }
     }
 
+    /** @hidden */
+    _onBlur(event: FocusEvent): void {
+        this.onTouched();
+        this.handleInputChange((event.target as any).value, false);
+    }
+
     /** Method that returns info if single model given is valid */
     private _isSingleModelValid(date: Nullable<D>): boolean {
         return (this._isDateValid(date) && !this.disableFunction(date)) || (!date && this.allowNull);
