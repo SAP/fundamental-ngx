@@ -132,7 +132,7 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         ariaRoleDescription: 'ტოკენი'
     },
     coreTokenizer: {
-        moreLabel: '{{count}} more'
+        moreLabel: '{{count}} სხვა'
     },
     coreUploadCollection: {
         menuOkText: 'კარგი',
