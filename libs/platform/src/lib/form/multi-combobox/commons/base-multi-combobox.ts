@@ -685,7 +685,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
                 this._suggestions = this._convertToOptionItems(data).map((optionItem: SelectableOptionItem) => {
                     const selectedElement = this._selectedSuggestions.find(
-                        (selectedItem: SelectableOptionItem) => selectedItem.label === optionItem.label
+                        (selectedItem: SelectableOptionItem) => selectedItem.id === optionItem.id
                     );
                     if (selectedElement) {
                         optionItem.selected = selectedElement.selected;
@@ -915,6 +915,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             const value = items[i];
             selectItems.push({
                 label: this.displayValue(value),
+                id: this.lookupValue(value),
                 secondaryText: this.objectGet(value, this.secondaryKey),
                 value,
                 selected: this.selectedItems?.includes(value) || false
@@ -934,6 +935,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             const value = items[i];
             selectItems.push({
                 label: value,
+                id: this.lookupValue(value),
                 value,
                 selected: this.selectedItems?.includes(value) || false
             });
@@ -953,6 +955,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             const value = items[i];
             selectItems.push({
                 label: this.displayValue(value),
+                id: this.lookupValue(value),
                 value,
                 selected: this.selectedItems?.includes(value) || false
             });
