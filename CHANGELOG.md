@@ -1,3 +1,12 @@
+## [0.36.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.16...v0.36.1-rc.17) (2022-09-27)
+
+
+### Bug Fixes
+
+* **platform:** fixed multi-combobox same name issue ([#8624](https://github.com/SAP/fundamental-ngx/issues/8624)) ([6880616](https://github.com/SAP/fundamental-ngx/commit/688061678802470f0dc9a19345141b615b59be0d))
+
+
+
 ## [0.36.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.15...v0.36.1-rc.16) (2022-09-23)
 
 

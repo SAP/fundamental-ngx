@@ -11,15 +11,15 @@ import { MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/for
 })
 export class MultiComboboxColumnsExampleComponent {
     dataSource = [
-        { name: 'Apple', type: 'Fruits' },
-        { name: 'Banana', type: 'Fruits' },
-        { name: 'Florida Evergreen Blueberry', type: 'Fruits' },
-        { name: 'Pineapple', type: 'Fruits' },
-        { name: 'Strawberry', type: 'Fruits' },
-        { name: 'Broccoli', type: 'Vegetables' },
-        { name: 'Carrot', type: 'Vegetables' },
-        { name: 'Jalapeño', type: 'Vegetables' },
-        { name: 'Spinach', type: 'Vegetables' }
+        { id: '1', name: 'Apple', type: 'Fruits' },
+        { id: '2', name: 'Banana', type: 'Fruits' },
+        { id: '3', name: 'Florida Evergreen Blueberry', type: 'Fruits' },
+        { id: '4', name: 'Pineapple', type: 'Fruits' },
+        { id: '5', name: 'Strawberry', type: 'Fruits' },
+        { id: '6', name: 'Broccoli', type: 'Vegetables' },
+        { id: '7', name: 'Carrot', type: 'Vegetables' },
+        { id: '8', name: 'Jalapeño', type: 'Vegetables' },
+        { id: '9', name: 'Spinach', type: 'Vegetables' }
     ];
 
     selectedItems = [];
