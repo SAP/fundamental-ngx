@@ -267,6 +267,12 @@ export class SelectComponent
     /** @hidden */
     _selectionModel: SelectionModel<OptionComponent>;
 
+    /** can be used to add class to respective element */
+    inputClass = '';
+    buttonClass = '';
+    selectClass = '';
+    addOnClass = '';
+
     /**
      * @hidden
      * Triggers when component is destroyed

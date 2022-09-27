@@ -3,6 +3,7 @@
     [class.fd-input-group--inline]="inline"
     [class.is-disabled]="disabled"
     [class.is-readonly]="readonly"
+    [ngClass]="inputGroupClass"
     [class.fd-input-group--control]="isControl"
     [class.is-focus]="_inputFocused$ | async"
     [class]="state ? 'is-' + state : ' '"
@@ -14,7 +15,7 @@
     <ng-content></ng-content>
 
     <ng-container *ngIf="!addOnElement && (glyph || addOnText)">
-        <span #inputGroupAddon *ngIf="button" fd-input-group-addon [button]="true" [placement]="placement">
+        <span *ngIf="button" fd-input-group-addon [ngClass]="addOnClass" [button]="true" [placement]="placement">
             <button
                 fd-button
                 class="fd-input-group__button"
@@ -64,6 +65,7 @@
     <input
         *ngIf="!inputTemplate"
         [(ngModel)]="inputText"
+        [ngClass]="inputClass"
         [id]="_inputId"
         [attr.aria-labelledby]="_inputAriaLabelledBy"
         fd-input-group-input

@@ -359,6 +359,10 @@ export class ComboboxComponent
     /** @hidden */
     clearInputBtnFocused = false;
 
+    /** Can be used to add class to respective element */
+    addOnClass = '';
+    buttonClass = '';
+
     /** @hidden */
     private _subscriptions = new Subscription();
 
