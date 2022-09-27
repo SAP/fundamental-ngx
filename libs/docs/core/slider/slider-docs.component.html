@@ -40,6 +40,12 @@
 </component-example>
 <code-example [exampleFiles]="cozy"></code-example>
 
+<fd-docs-section-title id="form" componentName="slider">Slider in a Reactive Form</fd-docs-section-title>
+<component-example>
+    <fd-slider-form-example></fd-slider-form-example>
+</component-example>
+<code-example [exampleFiles]="form"></code-example>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fd-slider
         [(ngModel)]="value"

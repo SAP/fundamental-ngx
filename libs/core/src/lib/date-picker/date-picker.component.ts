@@ -480,6 +480,7 @@ export class DatePickerComponent<D>
     /** @hidden */
     public closeFromCalendar(): void {
         if (this.type === 'single' && this.closeOnDateChoose) {
+            this.onTouched();
             this.closeCalendar();
         }
     }
@@ -487,7 +488,6 @@ export class DatePickerComponent<D>
     /** Opens the calendar */
     openCalendar(): void {
         if (!this.disabled) {
-            this.onTouched();
             this.isOpen = true;
             this.isOpenChange.emit(this.isOpen);
             this._changeMessageVisibility();
@@ -496,9 +496,11 @@ export class DatePickerComponent<D>
 
     /** Toggles the calendar open or closed */
     public toggleCalendar(): void {
-        this.onTouched();
         this.isOpen = !this.isOpen;
         this.isOpenChange.emit(this.isOpen);
+        if (!this.isOpen) {
+            this.onTouched();
+        }
         this._changeMessageVisibility();
     }
 
@@ -785,6 +787,12 @@ export class DatePickerComponent<D>
         if (isOpen && this._calendarComponent) {
             this._calendarComponent.initialFocus();
         }
+    }
+
+    /** @hidden */
+    _onBlur(event: FocusEvent): void {
+        this.onTouched();
+        this.handleInputChange((event.target as any).value, false);
     }
 
     /** Method that returns info if single model given is valid */

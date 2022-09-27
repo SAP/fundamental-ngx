@@ -1,0 +1,10 @@
+<form [formGroup]="customForm">
+    <fd-slider formControlName="sliderControl"></fd-slider>
+</form>
+
+<small>
+    Value: {{ customForm.controls.sliderControl.value }}<br />
+    Form Touched: {{ customForm.touched }}<br />
+    Form Dirty: {{ customForm.dirty }}<br />
+    Form Valid: {{ customForm.valid }}
+</small>

@@ -10,11 +10,13 @@
         >
         </fd-datetime-picker>
         <br />
-        Touched: {{ customForm.controls.date.touched }}<br />
-        Dirty: {{ customForm.controls.date.dirty }}<br />
-        Valid: {{ customForm.controls.date.valid }}<br />
-        Selected Date:
-        {{ customForm.controls.date.value || 'null' }}
+        <small>
+            Touched: {{ customForm.controls.date.touched }}<br />
+            Dirty: {{ customForm.controls.date.dirty }}<br />
+            Valid: {{ customForm.controls.date.valid }}<br />
+            Selected Date:
+            {{ customForm.controls.date.value || 'null' }}
+        </small>
     </div>
     <br /><br />
     <div fd-form-item>
@@ -25,11 +27,6 @@
             formControlName="disabledDate"
         ></fd-datetime-picker>
         <br />
-        Touched: {{ customForm.controls.date.touched }}<br />
-        Dirty: {{ customForm.controls.date.dirty }}<br />
-        Valid: {{ customForm.controls.date.valid }}<br />
-        Disabled: {{ customForm.controls.disabledDate.disabled }}<br />
-        Selected Date:
-        {{ customForm.controls.date.value || 'null' }}
+        <small>Disabled: {{ customForm.controls.disabledDate.disabled }}</small>
     </div>
 </form>

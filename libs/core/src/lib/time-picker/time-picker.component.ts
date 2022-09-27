@@ -36,6 +36,7 @@ let timePickerCounter = 0;
     selector: 'fd-time-picker',
     templateUrl: './time-picker.component.html',
     host: {
+        '(focusout)': '_focusOut($event)',
         '(blur)': 'onTouched()',
         class: 'fd-time-picker fd-timepicker-custom'
     },
@@ -322,6 +323,7 @@ export class TimePickerComponent<D>
     /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
+        private _elementRef: ElementRef,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
@@ -572,6 +574,13 @@ export class TimePickerComponent<D>
         // focus input control every time popup is closed
         if (!isOpen && this._inputElement) {
             this._inputElement.nativeElement.focus();
+        }
+    }
+
+    /** @hidden */
+    private _focusOut(event: FocusEvent): void {
+        if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
+            this.onTouched();
         }
     }
 

@@ -46,10 +46,8 @@ describe('ComboboxComponent', () => {
 
     it('should set inputText', () => {
         spyOn(component, 'onChange');
-        spyOn(component, 'onTouched');
         component.inputText = 'someValue';
         expect(component.onChange).toHaveBeenCalledWith('someValue');
-        expect(component.onTouched).toHaveBeenCalled();
     });
 
     it('should write value not on dropdown mode', () => {

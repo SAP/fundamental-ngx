@@ -42,9 +42,6 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
     selector: 'fd-datetime-picker',
     templateUrl: './datetime-picker.component.html',
     styleUrls: ['./datetime-picker.component.scss'],
-    host: {
-        '(blur)': 'handleOnTouched()'
-    },
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -504,7 +501,6 @@ export class DatetimePickerComponent<D>
 
     /** Toggles the popover. */
     togglePopover(): void {
-        this.handleOnTouched();
         if (this.isOpen) {
             this.closePopover();
         } else {
@@ -532,7 +528,6 @@ export class DatetimePickerComponent<D>
     /** Opens the popover. */
     openPopover(): void {
         if (!this.isOpen && !this.disabled) {
-            this.handleOnTouched();
             this.isOpen = true;
             this._onOpenStateChanged(this.isOpen);
         }
@@ -544,6 +539,7 @@ export class DatetimePickerComponent<D>
             this.onClose.emit();
             this.isOpen = false;
             this._onOpenStateChanged(this.isOpen);
+            this.handleOnTouched();
         }
     }
 

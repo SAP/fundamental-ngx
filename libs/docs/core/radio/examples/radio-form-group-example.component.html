@@ -10,7 +10,12 @@
                 Option {{ value }}
             </fd-radio-button>
         </div>
-        Radio Button Value: {{ customForm.controls.radioInput.value }}
+        <small>
+            Radio Button Value: {{ customForm.controls.radioInput.value }}<br />
+            Radio Button Touched: {{ customForm.controls.radioInput.touched }}<br />
+            Radio Button Dirty: {{ customForm.controls.radioInput.dirty }}<br />
+            Radio Button Valid: {{ customForm.controls.radioInput.valid }} </small
+        ><br />
     </fieldset>
 
     <fieldset fd-fieldset>
@@ -24,7 +29,7 @@
                 Option {{ value }}
             </fd-radio-button>
         </div>
-        Disabled Radio Button Value: {{ customForm.controls.disabledRadio.value }}
+        <small>Disabled Radio Button Value: {{ customForm.controls.disabledRadio.value }}</small>
     </fieldset>
 </form>
 <br /><br />
