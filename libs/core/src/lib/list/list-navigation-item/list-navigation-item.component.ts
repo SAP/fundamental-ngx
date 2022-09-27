@@ -6,10 +6,11 @@ import {
     ElementRef,
     HostBinding,
     HostListener,
-    Input
+    Input,
+    Optional
 } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import { FocusableOption } from '@angular/cdk/a11y';
 import { Subject } from 'rxjs';
@@ -75,6 +76,9 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
      */
     _isItemVisible = true;
 
+    /** @hidden handles rtl service */
+    private _dir: 'ltr' | 'rtl' | null = 'ltr';
+
     /** @hidden */
     readonly _focused$ = new Subject<boolean>();
 
@@ -82,7 +86,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     readonly _clicked$ = new Subject<MouseEvent>();
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef, @Optional() private _rtlService: RtlService) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -99,6 +103,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._subscribeToRtl();
         this._setIsItemVisible(this.expanded);
     }
 
@@ -114,11 +119,11 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     keyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [RIGHT_ARROW])) {
             event.preventDefault();
-            this._handleExpandedChanges(true);
+            this._handleExpandedChanges(this._dir === 'ltr');
         }
         if (KeyUtil.isKeyCode(event, [LEFT_ARROW])) {
             event.preventDefault();
-            this._handleExpandedChanges(false);
+            this._handleExpandedChanges(this._dir !== 'ltr');
         }
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             event.preventDefault();
@@ -174,5 +179,16 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
             this._listNavigationItemArrow._setExpanded(this.expanded);
             !expanded && this.focus();
         }
+    }
+
+    /** @hidden Rtl change subscription */
+    private _subscribeToRtl(): void {
+        if (!this._rtlService) {
+            return;
+        }
+
+        this._rtlService.rtl.subscribe((isRtl) => {
+            this._dir = isRtl ? 'rtl' : 'ltr';
+        });
     }
 }
