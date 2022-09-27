@@ -1,17 +1,29 @@
 <form [formGroup]="customForm">
     <fieldset fd-fieldset>
         <div fd-form-item>
-            <label fd-form-label for="fd-input-group-form-1" id="fd-input-group-form-label-1">Search Input</label>
+            <label fd-form-label for="fd-input-group-form-1" id="fd-input-group-form-label-1">Disabled Input</label>
             <fd-input-group
                 glyph="decline"
                 glyphAriaLabel="Clear"
                 placeholder="Search"
-                formControlName="searchQuery"
+                formControlName="disabledInput"
                 [button]="true"
                 ariaLabelledby="fd-input-group-form-label-1"
             >
             </fd-input-group>
         </div>
-        <small>Search Query Entered: {{ customForm.controls.searchQuery.value }}</small>
+        <small>Disabled Input Value: {{ customForm.controls.disabledInput.value }}</small>
+        <div fd-form-item style="margin-top: 1rem">
+            <label fd-form-label for="fd-input-group-form-2" id="fd-input-group-form-label-2">Enabled Input</label>
+            <fd-input-group formControlName="enabledInput" ariaLabelledby="fd-input-group-form-label-2">
+            </fd-input-group>
+        </div>
+        <small>
+            Enabled Input Form Control Value: {{ customForm.controls.enabledInput.value }}<br />
+            Enabled Input Form Control Touched: {{ customForm.controls.enabledInput.touched }}<br />
+            Enabled Input Form Control Dirty: {{ customForm.controls.enabledInput.dirty }}<br />
+            Enabled Input Form Control Valid: {{ customForm.controls.enabledInput.valid }}
+        </small>
     </fieldset>
 </form>
+<br />

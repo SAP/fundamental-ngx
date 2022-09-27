@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     forwardRef,
     Input,
     OnChanges,
@@ -41,6 +42,7 @@ type MeridianViewItem = SelectableViewItem<Meridian>;
     templateUrl: './time.component.html',
     styleUrls: ['./time.component.scss'],
     host: {
+        '(focusout)': '_focusOut($event)',
         '(blur)': 'onTouched()'
     },
     providers: [
@@ -186,6 +188,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
+        private _elementRef: ElementRef,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         readonly _contentDensityObserver: ContentDensityObserver,
@@ -423,6 +426,13 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     focusActiveColumn(): void {
         const column = this.columns.find(({ active }) => active);
         column?.focus();
+    }
+
+    /** @hidden */
+    private _focusOut(event: FocusEvent): void {
+        if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
+            this.onTouched();
+        }
     }
 
     /**

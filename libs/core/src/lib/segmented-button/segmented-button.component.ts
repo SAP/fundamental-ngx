@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    ElementRef,
     forwardRef,
     HostBinding,
     Input,
@@ -38,7 +39,8 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
     templateUrl: './segmented-button.component.html',
     styleUrls: ['./segmented-button.component.scss'],
     host: {
-        role: 'group'
+        role: 'group',
+        '(focusout)': '_focusOut($event)'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -85,7 +87,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     /** @hidden */
     onTouched = (): void => {};
 
-    constructor(private readonly _changeDetRef: ChangeDetectorRef) {}
+    constructor(private readonly _changeDetRef: ChangeDetectorRef, private readonly _elementRef: ElementRef) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -126,6 +128,13 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     }
 
     /** @hidden */
+    private _focusOut(event: FocusEvent): void {
+        if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
+            this.onTouched();
+        }
+    }
+
+    /** @hidden */
     private _setInitialState(): void {
         this._toggleDisableButtons(this._isDisabled);
         this._pickButtonsByValues(this._currentValue);
@@ -159,8 +168,6 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     /** @hidden */
     private _handleTriggerOnButton(buttonComponent: ButtonComponent): void {
         if (!this._isButtonDisabled(buttonComponent)) {
-            this.onTouched();
-
             if (!this._isButtonSelected(buttonComponent) && !this.toggle) {
                 this._buttons.forEach((button) => this._deselectButton(button));
                 this._selectButton(buttonComponent);

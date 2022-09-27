@@ -26,11 +26,13 @@ import {
                     </fd-date-picker>
                 </div>
                 <br />
-                Touched: {{ customForm.controls.date.touched }}<br />
-                Dirty: {{ customForm.controls.date.dirty }}<br />
-                Valid: {{ customForm.controls.date.valid }}<br />
-                Selected Date:
-                {{ customForm.controls.date.value?.toDateString() || 'null' }}
+                <small>
+                    Touched: {{ customForm.controls.date.touched }}<br />
+                    Dirty: {{ customForm.controls.date.dirty }}<br />
+                    Valid: {{ customForm.controls.date.valid }}<br />
+                    Selected Date:
+                    {{ customForm.controls.date.value?.toDateString() || 'null' }}
+                </small>
             </div>
             <br />
             <br />
@@ -47,14 +49,14 @@ import {
                 <br />
             </div>
 
-            <div>
+            <small>
                 Touched: {{ customForm.controls.disabledDate.touched }}<br />
                 Dirty: {{ customForm.controls.disabledDate.dirty }}<br />
                 Valid: {{ customForm.controls.disabledDate.valid }}<br />
                 Disabled: {{ customForm.controls.disabledDate.disabled }} <br />
                 Selected Date:
                 {{ customForm.controls.disabledDate.value?.toDateString() || 'null' }}
-            </div>
+            </small>
         </form>
     `,
     providers: [

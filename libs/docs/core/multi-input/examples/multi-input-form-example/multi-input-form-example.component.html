@@ -11,7 +11,13 @@
             >
             </fd-multi-input>
         </div>
-        <div fd-form-item>
+        <small>
+            Enabled Multi-Input Value: {{ customForm.controls.selectedValues.value | json }}<br />
+            Enabled Multi-Input Touched: {{ customForm.controls.selectedValues.touched }}<br />
+            Enabled Multi-Input Dirty: {{ customForm.controls.selectedValues.dirty }}<br />
+            Enabled Multi-Input Valid: {{ customForm.controls.selectedValues.valid }} </small
+        ><br />
+        <div fd-form-item style="margin-top: 1rem">
             <label fd-form-label>Disabled Multi Input</label>
             <fd-multi-input
                 formControlName="disabledSelectedValues"
@@ -21,15 +27,6 @@
             >
             </fd-multi-input>
         </div>
+        <small>Disabled Multi-Input Value: {{ customForm.controls.disabledSelectedValues.value | json }}</small>
     </fieldset>
 </form>
-
-Selected Values:
-<span *ngIf="customForm.controls.selectedValues.value">
-    {{ customForm.controls.selectedValues.value | json }}
-</span>
-
-Selected Values:
-<span *ngIf="customForm.controls.disabledSelectedValues.value">
-    {{ customForm.controls.disabledSelectedValues.value | json }}
-</span>

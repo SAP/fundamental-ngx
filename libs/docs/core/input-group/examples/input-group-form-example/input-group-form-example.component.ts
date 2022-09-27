@@ -7,7 +7,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class InputGroupFormExampleComponent {
     customForm = new FormGroup({
-        searchQuery: new FormControl({ value: 'Disabled Value', disabled: true }),
-        number: new FormControl({ value: '123', disabled: false })
+        disabledInput: new FormControl({ value: 'Disabled Value', disabled: true }),
+        enabledInput: new FormControl({ value: '123', disabled: false })
     });
 }

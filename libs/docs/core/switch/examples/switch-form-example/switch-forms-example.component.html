@@ -12,8 +12,13 @@
     <fd-switch formControlName="switch4"></fd-switch>
 </form>
 <br />
+<small>
+    Switch 1: {{ customForm.controls.switch1.value }} <br />
+    Switch 2: {{ customForm.controls.switch2.value }} <br />
+    Switch 3: {{ customForm.controls.switch3.value }} <br />
+    Switch 4: {{ customForm.controls.switch4.value }} <br />
 
-Switch 1: {{ customForm.controls.switch1.value }} <br />
-Switch 2: {{ customForm.controls.switch2.value }} <br />
-Switch 3: {{ customForm.controls.switch3.value }} <br />
-Switch 4: {{ customForm.controls.switch4.value }}
+    Form Touched: {{ customForm.touched }} <br />
+    Form Dirty: {{ customForm.dirty }} <br />
+    Form Valid: {{ customForm.valid }} <br />
+</small>

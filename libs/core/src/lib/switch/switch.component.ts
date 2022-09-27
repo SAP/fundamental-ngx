@@ -40,7 +40,8 @@ let warnedAboutAriaLabeledBy = false;
     ],
     host: {
         class: 'fd-form__item fd-form__item--check fd-switch-custom',
-        '[attr.id]': 'id'
+        '[attr.id]': 'id',
+        '(focusout)': 'onTouched()'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -164,7 +165,6 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     set isChecked(value) {
         this.checked = value;
         this.onChange(value);
-        this.onTouched();
         this.checkedChange.emit(value);
     }
 
