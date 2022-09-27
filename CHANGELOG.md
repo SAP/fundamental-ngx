@@ -1,3 +1,12 @@
+## [0.36.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.17...v0.36.1-rc.18) (2022-09-27)
+
+
+### Bug Fixes
+
+* **core:** improve onTouched handling in core components and add docs ([#8730](https://github.com/SAP/fundamental-ngx/issues/8730)) ([7e602cd](https://github.com/SAP/fundamental-ngx/commit/7e602cd058e2888e8724513823268ff044281bbd))
+
+
+
 ## [0.36.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.16...v0.36.1-rc.17) (2022-09-27)
 
 
