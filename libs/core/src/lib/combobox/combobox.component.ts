@@ -749,4 +749,8 @@ export class ComboboxComponent
         const termValue = this.communicateByObject ? term : this.displayFn(term);
         return this.getValue() === termValue;
     }
+
+    focusSearchInput(): void {
+        this.searchInputElement.nativeElement.focus();
+    }
 }

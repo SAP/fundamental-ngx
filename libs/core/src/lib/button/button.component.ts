@@ -149,4 +149,8 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     detectChanges(): void {
         this._changeDetectorRef.detectChanges();
     }
+
+    focus(): void {
+        this.elementRef().nativeElement.focus();
+    }
 }

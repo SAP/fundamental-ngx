@@ -135,7 +135,7 @@ export class ShellbarActionsComponent implements AfterViewInit {
             });
         }
         this._cdRef.detectChanges();
-        this.comboboxComponent.searchInputElement.nativeElement.focus();
+        this.comboboxComponent.focusSearchInput();
     }
 
     /** called when clicked search button on combobox. hides combobox if input-text is empty */
@@ -145,7 +145,7 @@ export class ShellbarActionsComponent implements AfterViewInit {
                 if (this.comboboxComponent.isEmptyValue) {
                     this.showFullWidthCombobox(false);
                 }
-                this.searchButton.elementRef().nativeElement.focus();
+                this.searchButton.focus();
             })
         );
     }
