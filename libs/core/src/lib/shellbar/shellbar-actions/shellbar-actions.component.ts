@@ -127,11 +127,13 @@ export class ShellbarActionsComponent implements AfterViewInit {
     }
 
     /** called when clicked search button. shows combobox */
-    onSearchButtonClick(): void {
+    onSearchButtonClick(shouldOpenPopover = true): void {
         this.showCombobox = true;
-        setTimeout(() => {
-            this.comboboxComponent.isOpenChangeHandle(true);
-        });
+        if (shouldOpenPopover) {
+            setTimeout(() => {
+                this.comboboxComponent.isOpenChangeHandle(true);
+            });
+        }
         this._cdRef.detectChanges();
         this.comboboxComponent.searchInputElement.nativeElement.focus();
     }

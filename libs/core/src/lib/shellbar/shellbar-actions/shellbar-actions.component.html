@@ -36,7 +36,7 @@
     <ng-content select="fd-select"></ng-content>
 </div>
 
-<div class="fd-shellbar__action fd-shellbar__action--mobile">
+<div *ngIf="!fullWidthOnMobile" class="fd-shellbar__action fd-shellbar__action--mobile">
     <fd-shellbar-actions-mobile
         [shellbarActions]="shellbarActions"
         [collapsedItemMenuLabel]="collapsedItemMenuLabel"
@@ -50,7 +50,7 @@
 
 <ng-content select="fd-shellbar-action"></ng-content>
 
-<ng-container *ngIf="userItem">
+<ng-container *ngIf="userItem && !fullWidthOnMobile">
     <ng-container *ngIf="!userComponent">
         <fd-shellbar-user-menu
             placement="bottom-end"
@@ -60,11 +60,11 @@
         ></fd-shellbar-user-menu>
     </ng-container>
 
-    <ng-container *ngIf="userComponent">
+    <ng-container *ngIf="userComponent && !fullWidthOnMobile">
         <ng-content select="fd-shellbar-user-menu"></ng-content>
     </ng-container>
 </ng-container>
 
-<div *ngIf="productSwitchComponent" class="fd-shellbar__action">
+<div *ngIf="productSwitchComponent && !fullWidthOnMobile" class="fd-shellbar__action">
     <ng-content select="fd-product-switch"></ng-content>
 </div>

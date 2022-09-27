@@ -9,6 +9,7 @@ import {
     ElementRef,
     forwardRef,
     Input,
+    OnInit,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
@@ -16,6 +17,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 import { SelectComponent } from '@fundamental-ngx/core/select';
 import { debounceTime, fromEvent, Subject, Subscription, takeUntil } from 'rxjs';
+import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
 
 export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
 
@@ -31,7 +33,7 @@ export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShellbarComponent implements AfterContentInit, AfterViewInit {
+export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnInit {
     /** Size of Shellbar component 's' | 'm' | 'l' | 'xl' */
     @Input()
     size: ShellbarSizes = 'm';
@@ -60,6 +62,10 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit {
     /** @hidden */
     @ContentChild(ComboboxComponent, { static: false })
     comboboxComponent: ComboboxComponent;
+
+    /** @hidden */
+    @ContentChild(ShellbarActionsComponent)
+    shellbarActionsComponent: ShellbarActionsComponent;
 
     /** @hidden */
     @ContentChild(SelectComponent, { static: false })
@@ -160,18 +166,37 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit {
     }
 
     /** @hidden */
+    _handleSizeChange(currentSize: ShellbarSizes): void {
+        // if size changed and changed to 's' with combobox open.
+        if (currentSize !== this.size && this.size === 's') {
+            if (this.comboboxComponent && this.shellbarActionsComponent.showCombobox) {
+                this.shellbarActionsComponent.showFullWidthCombobox(true);
+            }
+        }
+        // if size was 's' and changed to any other size with combobox open.
+        else if (currentSize === 's' && currentSize !== this.size) {
+            if (this.comboboxComponent && this.shellbarActionsComponent.showCombobox) {
+                this.shellbarActionsComponent.showFullWidthCombobox(false);
+                this.shellbarActionsComponent.onSearchButtonClick(false);
+            }
+        }
+    }
+
+    /** @hidden */
     private _onResize(): void {
         if (this.responsive) {
-            if (this._elementRef.nativeElement.offsetWidth > this.sizesWidth.l) {
+            const currentSize = this.size;
+            if (this._elementRef.nativeElement.offsetWidth > this.sizesWidth.l && currentSize !== 'xl') {
                 this.size = 'xl';
-            } else if (this._elementRef.nativeElement.offsetWidth > this.sizesWidth.m) {
+            } else if (this._elementRef.nativeElement.offsetWidth > this.sizesWidth.m && currentSize !== 'l') {
                 this.size = 'l';
-            } else if (this._elementRef.nativeElement.offsetWidth > this.sizesWidth.s) {
+            } else if (this._elementRef.nativeElement.offsetWidth > this.sizesWidth.s && currentSize !== 'm') {
                 this.size = 'm';
-            } else {
+            } else if (this._elementRef.nativeElement.offsetWidth < this.sizesWidth.s && currentSize !== 's') {
                 this.size = 's';
             }
-            this._cdr.markForCheck();
+            this._handleSizeChange(currentSize);
+            this._cdr.detectChanges();
         }
     }
 
