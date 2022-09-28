@@ -2,7 +2,10 @@ import { Directive, ElementRef, HostBinding, Input, OnChanges, SimpleChanges } f
 import { Subject } from 'rxjs';
 
 @Directive({
-    selector: '[fd-list-link], [fdListLink]'
+    selector: '[fd-list-link], [fdListLink]',
+    host: {
+        '[attr.tabindex]': '-1'
+    }
 })
 export class ListLinkDirective implements OnChanges {
     /** Defines if navigation indicator arrow should be included inside list item */
