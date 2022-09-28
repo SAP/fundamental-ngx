@@ -1,3 +1,12 @@
+## [0.36.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.19...v0.36.1-rc.20) (2022-09-28)
+
+
+### Bug Fixes
+
+* **core,platform:** form grid breaking changes, styles version bump ([#8715](https://github.com/SAP/fundamental-ngx/issues/8715)) ([61c4103](https://github.com/SAP/fundamental-ngx/commit/61c4103f2d9e70be83efe10f4918f0654daf843c))
+
+
+
 ## [0.36.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.18...v0.36.1-rc.19) (2022-09-28)
 
 
