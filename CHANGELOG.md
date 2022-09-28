@@ -1,3 +1,12 @@
+## [0.36.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.18...v0.36.1-rc.19) (2022-09-28)
+
+
+### Bug Fixes
+
+* **core,platform:** remove platform highlighting and account for lt and gt in highlight pipe ([#8658](https://github.com/SAP/fundamental-ngx/issues/8658)) ([d7f8c5b](https://github.com/SAP/fundamental-ngx/commit/d7f8c5b1cd3210f653ac5702a100381142a78842))
+
+
+
 ## [0.36.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.17...v0.36.1-rc.18) (2022-09-27)
 
 
