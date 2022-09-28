@@ -9,14 +9,7 @@ import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
     templateUrl: './multi-combobox-states-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
-    styles: [
-        `
-            fdp-form-group .fd-row__form-item > .fd-col:first-child {
-                margin-bottom: 1rem;
-            }
-        `
-    ]
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
 export class MultiComboboxStatesExampleComponent {
     dataSource = [

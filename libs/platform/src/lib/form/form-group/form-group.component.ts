@@ -80,11 +80,7 @@ import {
 import { generateColumnClass, normalizeColumnLayout } from './helpers';
 import { FormFieldLayoutService } from './services/form-field-layout.service';
 import { FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT } from './fdp-form.tokens';
-import {
-    contentDensityObserverProviders,
-    ContentDensityObserver,
-    ContentDensityMode
-} from '@fundamental-ngx/core/content-density';
+import { contentDensityObserverProviders, ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -173,15 +169,7 @@ type FormGroupField = (FormField | FormFieldGroup) & { hintOptions?: HintOptions
     styleUrls: ['./form-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [
-        formGroupProvider,
-        FormFieldLayoutService,
-        contentDensityObserverProviders({
-            modifiers: {
-                [ContentDensityMode.COZY]: 'fd-form-layout-grid-container'
-            }
-        })
-    ]
+    providers: [formGroupProvider, FormFieldLayoutService, contentDensityObserverProviders()]
 })
 export class FormGroupComponent
     implements FormGroupContainer, OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges

@@ -8,15 +8,7 @@ fdp-form-group {
     display: block;
 }
 
-.fd-form-layout-grid-container {
-    padding: 1rem;
-}
-
 // revert core styles overriding the form label styles
 .fd-form-label {
     overflow: hidden;
-}
-
-.fd-form-group--inline {
-    flex-wrap: wrap;
 }
