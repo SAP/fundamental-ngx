@@ -68,13 +68,15 @@ const replaceInFile = (file: string, versionsDictionary: Record<string, string>)
     return replaced;
 };
 
-const getFiles = (dir: string) => {
+const getFiles = (dir: string, excludeFileTypes = true) => {
     const files = readdirSync(dir, { withFileTypes: true });
     return files
-        .filter((file) => excludedFileTypes.every((fileType) => !file.name.endsWith('.' + fileType)))
+        .filter((file) =>
+            excludeFileTypes ? excludedFileTypes.every((fileType) => !file.name.endsWith('.' + fileType)) : true
+        )
         .map((file) => {
             if (file.isDirectory()) {
-                return getFiles(`${dir}/${file.name}`);
+                return getFiles(`${dir}/${file.name}`, !excludeFileTypes ? false : file.name !== 'schematics');
             }
             return `${dir}/${file.name}`;
         })
