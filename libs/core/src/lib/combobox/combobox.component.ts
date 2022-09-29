@@ -359,8 +359,10 @@ export class ComboboxComponent
     /** @hidden */
     clearInputBtnFocused = false;
 
-    /** Can be used to add class to respective element */
+    /** It can be used to further add css classes to the addOn element of combobox */
     addOnClass = '';
+
+    /** It can be used to further add css classes to the decline button of combobox */
     buttonClass = '';
 
     /** @hidden */

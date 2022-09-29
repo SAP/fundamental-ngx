@@ -211,9 +211,13 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     /** @hidden */
     _inputFocused$: Observable<boolean>;
 
-    /** Can be used to add class to respective element */
+    /** It can be used to further add css classes to the input group */
     inputGroupClass = '';
+
+    /** It can be used to further add css classes to the input group addon */
     addOnClass = '';
+
+    /** It can be used to further add css classes to the input element */
     inputClass = '';
 
     /** @hidden */
