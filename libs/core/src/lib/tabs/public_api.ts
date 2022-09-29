@@ -7,3 +7,4 @@ export * from './tab-nav/tab-nav.component';
 export * from './tab-utils/tab-directives';
 export * from './tab-item-expand/tab-item-expand.component';
 export * from './deprecated-tabs-compact.directive';
+export * from './tab-utils/tab-info.class';

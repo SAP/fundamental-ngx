@@ -121,6 +121,7 @@
             "@fundamental-ngx/core/upload-collection": ["libs/core/src/lib/upload-collection/index.ts"],
             "@fundamental-ngx/core/utils": ["libs/core/src/lib/utils/index.ts"],
             "@fundamental-ngx/core/vertical-navigation": ["libs/core/src/lib/vertical-navigation/index.ts"],
+            "@fundamental-ngx/core/web-components": ["libs/core/src/lib/web-components/index.ts"],
             "@fundamental-ngx/core/wizard": ["libs/core/src/lib/wizard/index.ts"],
             "@fundamental-ngx/datetime-adapter": ["libs/datetime-adapter/src/index.ts"],
             "@fundamental-ngx/fn": ["libs/fn/src/lib/index.ts"],

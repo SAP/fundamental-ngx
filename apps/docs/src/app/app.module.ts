@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
@@ -58,6 +58,7 @@ const routes: Routes = [
             provide: FD_LANGUAGE,
             useValue: new BehaviorSubject(FD_LANGUAGE_ENGLISH)
         }
-    ]
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

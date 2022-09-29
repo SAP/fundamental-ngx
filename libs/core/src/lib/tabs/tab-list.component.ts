@@ -24,10 +24,11 @@ import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.compon
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
-import { TabInfo } from './tab-utils/tab-info.class';
+import { TAB_PANEL_TOKEN, TabInfo } from './tab-utils/tab-info.class';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { WebComponent, WebComponentQuery } from '@fundamental-ngx/core/web-components';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -36,6 +37,9 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
 /**
  * Represents a list of tab-panels.
  */
+@WebComponent({
+    selector: 'fdw-tab-list'
+})
 @Component({
     selector: 'fd-tab-list',
     templateUrl: './tab-list.component.html',
@@ -43,7 +47,7 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
     host: {
         class: 'fd-tabs-custom'
     },
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.ShadowDom,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders(), DestroyedService]
 })
@@ -100,6 +104,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     hiddenItemsCount = new EventEmitter<number>();
 
     /** @hidden */
+    @WebComponentQuery(TAB_PANEL_TOKEN)
     @ContentChildren(forwardRef(() => TabPanelComponent))
     tabPanels: QueryList<TabPanelComponent>;
 

@@ -1,0 +1,40 @@
+{
+    "projectType": "library",
+    "root": "libs/core/src/lib/web-components",
+    "sourceRoot": "libs/core/src/lib/web-components",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/core/web-components"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/web-components/tsconfig.lib.json",
+                "project": "libs/core/src/lib/web-components/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/web-components/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/web-components/test.ts",
+                "tsConfig": "libs/core/src/lib/web-components/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/web-components/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/core/src/lib/web-components/**/*.ts",
+                    "libs/core/src/lib/web-components/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fd"]
+}

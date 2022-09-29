@@ -10,6 +10,7 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
+import { WebComponent } from '@fundamental-ngx/core/web-components';
 import { BaseButton } from './base-button';
 import { Subscription } from 'rxjs';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
@@ -29,6 +30,9 @@ import {
  * <a fd-button label="Button Text"></a>
  * ```
  */
+@WebComponent({
+    selector: 'fdw-button'
+})
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'button[fd-button], a[fd-button]',

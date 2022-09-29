@@ -96,6 +96,7 @@
         "core-upload-collection": "libs/core/src/lib/upload-collection",
         "core-utils": "libs/core/src/lib/utils",
         "core-vertical-navigation": "libs/core/src/lib/vertical-navigation",
+        "core-web-components": "libs/core/src/lib/web-components",
         "core-wizard": "libs/core/src/lib/wizard",
         "datetime-adapter": "libs/datetime-adapter",
         "docs": "apps/docs",

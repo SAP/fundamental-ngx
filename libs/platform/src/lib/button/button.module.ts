@@ -13,3 +13,5 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
     declarations: [ButtonComponent]
 })
 export class PlatformButtonModule {}
+
+console.log({ PlatformButtonModule });

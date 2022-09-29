@@ -12,11 +12,13 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
+import { WebComponent } from '@fundamental-ngx/core/web-components';
 import { TabListComponent } from '../tab-list.component';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
 import { TabItemState } from '../tab-item/tab-item.directive';
 import { Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { TAB_PANEL_TOKEN } from '../tab-utils/tab-info.class';
 
 let tabPanelUniqueId = 0;
 
@@ -27,6 +29,9 @@ export class TabPanelStateChange {
 /**
  * Represents the body of a tab element. It also contains elements pertaining to the associated tab header.
  */
+@WebComponent({
+    selector: 'fdw-tab'
+})
 @Component({
     selector: 'fd-tab',
     templateUrl: './tab-panel.component.html',
@@ -37,8 +42,14 @@ export class TabPanelStateChange {
         '[class.is-expanded]': 'expanded',
         '[attr.aria-expanded]': 'expanded ? true : null'
     },
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    encapsulation: ViewEncapsulation.ShadowDom,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: TAB_PANEL_TOKEN,
+            useExisting: TabPanelComponent
+        }
+    ]
 })
 export class TabPanelComponent implements OnChanges {
     /** Id of the tab. If none is provided, one will be generated. */

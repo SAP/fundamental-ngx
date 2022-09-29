@@ -1,5 +1,6 @@
 import { Directive, forwardRef, Input, isDevMode, OnDestroy } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { WebDirective } from '@fundamental-ngx/core/web-components';
 import { BehaviorSubject } from 'rxjs';
 import { ContentDensityGlobalKeyword, ContentDensityMode, LocalContentDensityMode } from '../content-density.types';
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
@@ -9,6 +10,12 @@ import { isContentDensityMode } from '../helpers/density-type-checkers';
  * Directive to control the content density of the elements.
  * This Directive is used in density controllers and consumers
  */
+@WebDirective({
+    selector: `[fdwContentDensity]:not([fdwCompact]):not([fdwCondensed]):not([fdwCozy]),
+                [fdwCompact]:not([fdwContentDensity]):not([fdwCondensed]):not([fdwCozy]),
+                [fdwCondensed]:not([fdwContentDensity]):not([fdwCompact]):not([fdwCozy]),
+                [fdwCozy]:not([fdwContentDensity]):not([fdwCompact]):not([fdwCondensed])`
+})
 @Directive({
     selector: `[fdContentDensity]:not([fdCompact]):not([fdCondensed]):not([fdCozy]),
                 [fdCompact]:not([fdContentDensity]):not([fdCondensed]):not([fdCozy]),
@@ -46,6 +53,15 @@ export class ContentDensityDirective extends BehaviorSubject<LocalContentDensity
      */
     @Input()
     set fdCompact(val: BooleanInput) {
+        if (coerceBooleanProperty(val)) {
+            this.next(ContentDensityMode.COMPACT);
+        } else {
+            this.next(ContentDensityGlobalKeyword);
+        }
+    }
+
+    @Input()
+    set fdwCompact(val: BooleanInput) {
         if (coerceBooleanProperty(val)) {
             this.next(ContentDensityMode.COMPACT);
         } else {

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -51,6 +51,7 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [examples, TabsHeaderComponent, TabsDocsComponent],
-    providers: [moduleDeprecationsProvider(DeprecatedTabsCompactDirective)]
+    providers: [moduleDeprecationsProvider(DeprecatedTabsCompactDirective)],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class TabsDocsModule {}

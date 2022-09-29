@@ -1,0 +1,7 @@
+{
+    "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../../../../dist/libs/core/web-components",
+    "lib": {
+        "entryFile": "./public_api.ts"
+    }
+}

@@ -11,8 +11,12 @@ import {
 
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { ButtonType, GlyphPosition } from '@fundamental-ngx/core/button';
+import { WebComponent } from '@fundamental-ngx/core/web-components';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
+@WebComponent({
+    selector: 'fdw-button'
+})
 @Component({
     selector: 'fdp-button',
     templateUrl: './button.component.html',

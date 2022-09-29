@@ -1,8 +1,10 @@
-import { TemplateRef } from '@angular/core';
+import { InjectionToken, TemplateRef } from '@angular/core';
 
 import { TabPanelComponent } from '../tab-panel/tab-panel.component';
 import { TabItemState } from '../tab-item/tab-item.directive';
 import { Nullable } from '@fundamental-ngx/core/shared';
+
+export const TAB_PANEL_TOKEN = new InjectionToken('FdTabPanel');
 
 /** @hidden */
 export class TabInfo {
