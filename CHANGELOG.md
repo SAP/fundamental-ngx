@@ -1,3 +1,12 @@
+## [0.36.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.20...v0.36.1-rc.21) (2022-09-30)
+
+
+### Bug Fixes
+
+* **core:** list item with list link tabbed twice ([#8754](https://github.com/SAP/fundamental-ngx/issues/8754)) ([d42d912](https://github.com/SAP/fundamental-ngx/commit/d42d91224ddd34b4d019630c9cffba4ff568563d))
+
+
+
 ## [0.36.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.19...v0.36.1-rc.20) (2022-09-28)
 
 
