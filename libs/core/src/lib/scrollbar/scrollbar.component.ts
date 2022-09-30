@@ -54,6 +54,9 @@ export class ScrollbarComponent {
         return this._alwaysVisible;
     }
 
+    @HostBinding('attr.tabindex')
+    tabindex = 0;
+
     /** @hidden */
     @HostBinding('style.overflow-x')
     get _overflowX(): ScrollbarOverflowOptions {
