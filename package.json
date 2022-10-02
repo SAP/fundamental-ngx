@@ -119,7 +119,7 @@
     "axe-core": "4.4.1",
     "axe-html-reporter": "2.2.0",
     "babel-loader": "8.2.4",
-    "chromedriver": "99.0.0",
+    "chromedriver": "106.0.1",
     "conventional-changelog": "3.1.25",
     "conventional-changelog-angular": "5.0.13",
     "conventional-changelog-cli": "2.2.2",
