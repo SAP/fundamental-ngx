@@ -1,0 +1,52 @@
+{
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/plugins/wdio/src",
+    "projectType": "library",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/libs/plugins/wdio",
+                "main": "libs/plugins/wdio/src/index.ts",
+                "tsConfig": "libs/plugins/wdio/tsconfig.lib.json",
+                "assets": [
+                    "libs/plugins/wdio/*.md",
+                    {
+                        "input": "./libs/plugins/wdio/src",
+                        "glob": "**/!(*.ts)",
+                        "output": "./src"
+                    },
+                    {
+                        "input": "./libs/plugins/wdio/src",
+                        "glob": "**/*.d.ts",
+                        "output": "./src"
+                    },
+                    {
+                        "input": "./libs/plugins/wdio",
+                        "glob": "generators.json",
+                        "output": "."
+                    },
+                    {
+                        "input": "./libs/plugins/wdio",
+                        "glob": "executors.json",
+                        "output": "."
+                    }
+                ]
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": [
+                    "libs/plugins/wdio/**/*.ts",
+                    "libs/plugins/wdio/generators.json",
+                    "libs/plugins/wdio/executors.json",
+                    "libs/plugins/wdio/package.json"
+                ]
+            }
+        }
+    },
+    "tags": ["type:tools", "scope:tools"]
+}

@@ -9,7 +9,7 @@
     },
     "targets": {
         "e2e-app": {
-            "executor": "./tools/executors/wdio:e2e-test-app",
+            "executor": "@fundamental-ngx/wdio:e2e-test-app",
             "configurations": {
                 "affected-local": {
                     "affected": true,

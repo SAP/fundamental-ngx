@@ -1,0 +1,7 @@
+{
+    "name": "@fundamental-ngx/workspace-tools",
+    "version": "0.0.1",
+    "main": "index.js",
+    "executors": "./executors.json",
+    "generators": "./generators.json"
+}

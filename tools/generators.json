@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "@fundamental-ngx/workspace-tools",
+  "version": "0.0.1",
+  "generators": {
+    "create-component": {
+      "factory": "./generators/sap-component/index",
+      "schema": "./generators/sap-component/schema.json",
+      "description": "Create component"
+    }
+  }
+}
