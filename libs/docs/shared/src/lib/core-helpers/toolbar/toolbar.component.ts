@@ -113,7 +113,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
             }
         },
         {
-            name: 'Fiori Next Docs',
+            name: 'BTP Experimental Docs',
             callback: () => {
                 this._routerService.navigate(['fn/home']);
             }

@@ -27,39 +27,39 @@
                 "items": [
                     {
                         "value": "sap_fiori_3",
-                        "label": "Fiori 3 [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_fiori_3]"
+                        "label": "Quartz Light [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_fiori_3]"
                     },
                     {
                         "value": "sap_fiori_3_dark",
-                        "label": "Fiori 3 Dark [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_fiori_3_dark]"
+                        "label": "Quartz Dark [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_fiori_3_dark]"
                     },
                     {
                         "value": "sap_fiori_3_hcb",
-                        "label": "High Contrast Black [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_fiori_3_hcb]"
+                        "label": "Quartz High Contrast Black [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_fiori_3_hcb]"
                     },
                     {
                         "value": "sap_fiori_3_hcw",
-                        "label": "High Contrast White [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_fiori_3_hcw]"
+                        "label": "Quartz High Contrast White [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_fiori_3_hcw]"
                     },
                     {
                         "value": "sap_fiori_3_light_dark",
-                        "label": "Light Dark [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_fiori_3_light_dark]"
+                        "label": "Quartz Light Dark [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_fiori_3_light_dark]"
                     },
                     {
                         "value": "sap_horizon",
-                        "label": "Morning Horizon [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_horizon]"
+                        "label": "Morning Horizon (Light) [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_horizon]"
                     },
                     {
                         "value": "sap_horizon_dark",
-                        "label": "Evening Horizon [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_horizon_dark]"
+                        "label": "Evening Horizon (Dark) [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_horizon_dark]"
                     },
                     {
                         "value": "sap_horizon_hcb",
-                        "label": "High Contrast Black Horizon [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_horizon_hcb]"
+                        "label": "Horizon High Contrast Black [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_horizon_hcb]"
                     },
                     {
                         "value": "sap_horizon_hcw",
-                        "label": "High Contrast White Horizon [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_horizon_hcw]"
+                        "label": "Horizon High Contrast White [Preview: https://sap.github.io/fundamental-ngx/#/core/home?theme=sap_horizon_hcw]"
                     },
                     {
                         "value": "custom",
