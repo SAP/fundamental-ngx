@@ -1,3 +1,12 @@
+## [0.36.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.22...v0.36.1-rc.23) (2022-10-03)
+
+
+### Bug Fixes
+
+* **docs:** netlify update to ubuntu 20.04 ([#8776](https://github.com/SAP/fundamental-ngx/issues/8776)) ([b72ccdc](https://github.com/SAP/fundamental-ngx/commit/b72ccdcb2947b72d42228379e9cd5f5ad6a6e8dc))
+
+
+
 ## [0.36.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.21...v0.36.1-rc.22) (2022-10-03)
 
 
