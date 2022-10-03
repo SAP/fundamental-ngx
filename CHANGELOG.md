@@ -1,3 +1,12 @@
+## [0.36.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.21...v0.36.1-rc.22) (2022-10-03)
+
+
+### Bug Fixes
+
+* **core:** quick view should not use fd-input and should be focus trapped in popovers ([#8753](https://github.com/SAP/fundamental-ngx/issues/8753)) ([7277bf4](https://github.com/SAP/fundamental-ngx/commit/7277bf4d260cfc4122016549ba108b0885a86bb9))
+
+
+
 ## [0.36.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.20...v0.36.1-rc.21) (2022-09-30)
 
 
