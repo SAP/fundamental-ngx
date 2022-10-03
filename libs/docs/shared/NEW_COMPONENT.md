@@ -11,7 +11,7 @@ This repository contains two separate projects - the component library and the d
 Creating a new component is pretty straightforward. If you have the `NX Console` plugin, simply open it and run the `sap-component` schematic. This can also be done manually using the command line.
 
 So in order to generate component named, let's say, "Poster Editor" in "core" package, use `name = poster-editor` `project = core`.
-Using the command line: `npx nx workspace-generator sap-component --name=poster-editor --project=core`.
+Using the command line: `npx nx g @fundamental-ngx/workspace-tools:create-component --name=poster-editor --project=core`.
 
 Running this will scaffold the initial structure for the new component:
 
@@ -68,9 +68,7 @@ libs/docs/core/poster-editor/examples/
 
 ```typescript
 // add imports on top
-// note that raw imports require special path syntax
-import posterEditorComplexExampleHtml from '!./examples/complex/poster-editor-complex-example.component.html?raw';
-import posterEditorComplexExampleTs from '!./examples/complex/poster-editor-complex-example.component.ts?raw';
+import { getExampleFile } from '@fundamental-ngx/docs/shared';
 
 ...
 export class PosterEditorDocsComponent {
@@ -78,7 +76,9 @@ export class PosterEditorDocsComponent {
     // add the binding
     posterEditorComplexExample: ExampleFile[] = [
         getExampleFile('complex/poster-editor-complex-example.component.html'),
-        getExampleFile('complex/poster-editor-complex-example.component.ts')
+        getExampleFile('complex/poster-editor-complex-example.component.ts', {
+          component: 'PosterEditorComplexExampleComponent' // This is needed in case of TS files
+        })
     ];
 
 }
