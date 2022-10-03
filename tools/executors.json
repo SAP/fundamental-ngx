@@ -1,15 +1,15 @@
 {
-  "$schema": "http://json-schema.org/schema",
-  "executors": {
-      "prepare": {
-          "implementation": "./executors/prepare-library/index",
-          "schema": "./executors/prepare-library/schema.json",
-          "description": "Prepares project for publish. Build, copy MDs, schematics, etc."
-      },
-      "compile-typedoc": {
-          "implementation": "./executors/compile-typedoc/index",
-          "schema": "./executors/compile-typedoc/schema.json",
-          "description": "Compiles typedocs of library"
-      }
-  }
+    "$schema": "http://json-schema.org/schema",
+    "executors": {
+        "prepare": {
+            "implementation": "./executors/prepare-library/index",
+            "schema": "./executors/prepare-library/schema.json",
+            "description": "Prepares project for publish. Build, copy MDs, schematics, etc."
+        },
+        "compile-typedoc": {
+            "implementation": "./executors/compile-typedoc/index",
+            "schema": "./executors/compile-typedoc/schema.json",
+            "description": "Compiles typedocs of library"
+        }
+    }
 }
