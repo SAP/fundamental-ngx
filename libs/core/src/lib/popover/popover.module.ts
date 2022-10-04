@@ -11,6 +11,7 @@ import { PopoverComponent } from './popover.component';
 import { A11yModule } from '@angular/cdk/a11y';
 import { PopoverTriggerDirective } from './popover-trigger.directive';
 import { PopoverContainerDirective } from './popover-container/popover-container.directive';
+import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,7 @@ import { PopoverContainerDirective } from './popover-container/popover-container
         PopoverTriggerDirective,
         PopoverContainerDirective
     ],
-    imports: [CommonModule, OverlayModule, A11yModule],
+    imports: [CommonModule, OverlayModule, A11yModule, ScrollbarModule],
     exports: [
         PopoverControlComponent,
         PopoverBodyComponent,
