@@ -1,4 +1,7 @@
+@use '@angular/cdk';
 @import '~fundamental-styles/dist/table';
+
+@include cdk.a11y-visually-hidden();
 
 .fd-table__popover--custom {
     width: 100%;

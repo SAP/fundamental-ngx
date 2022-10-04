@@ -1,5 +1,8 @@
+@use '@angular/cdk';
 @import '~fundamental-styles/dist/input';
 @import '~fundamental-styles/dist/step-input';
+
+@include cdk.a11y-visually-hidden();
 
 .fd-input {
     &.fd-step-input__input.is-hover,
