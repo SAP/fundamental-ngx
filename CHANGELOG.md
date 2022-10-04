@@ -1,3 +1,12 @@
+## [0.36.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.24...v0.36.1-rc.25) (2022-10-04)
+
+
+### Bug Fixes
+
+* **docs:** remove color from pre tag ([#8779](https://github.com/SAP/fundamental-ngx/issues/8779)) ([4f77c6f](https://github.com/SAP/fundamental-ngx/commit/4f77c6f9a39a3b11d5a2595a00bc56a0df584d0e))
+
+
+
 ## [0.36.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.23...v0.36.1-rc.24) (2022-10-04)
 
 
