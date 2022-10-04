@@ -2,7 +2,7 @@ name: Update versions
 
 on:
     workflow_run:
-        workflows: ['Create release']
+        workflows: [Create release, Create hotfix release]
         types:
             - completed
 
