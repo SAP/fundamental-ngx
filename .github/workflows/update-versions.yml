@@ -9,6 +9,7 @@ on:
 jobs:
     check-version-type:
         runs-on: ubuntu-latest
+        if: github.event.workflow_run.conclusion == 'success'
         outputs:
             pre-release: ${{ steps.check-pre-release.outputs.pre-release }}
         steps:
