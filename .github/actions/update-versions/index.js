@@ -11,7 +11,16 @@ const run = async () => {
         url: deploymentUrl
     };
 
-    versionsJson.unshift(newDeploymentUrl);
+    const [major, minor, _] = currentVersion.split('.');
+    const previousMinorIndex = versionsJson.findIndex((version) => version.id.startsWith(`${major}.${minor}`));
+
+    // We should keep only the latest patch version for each minor version
+    // So if it's a new patch version, we should replace the previous patch version deployment url
+    if (previousMinorIndex > -1) {
+        versionsJson[previousMinorIndex] = newDeploymentUrl;
+    } else {
+        versionsJson.unshift(newDeploymentUrl);
+    }
 
     fs.writeFileSync('./versions.json', JSON.stringify(versionsJson, null, 2));
 
