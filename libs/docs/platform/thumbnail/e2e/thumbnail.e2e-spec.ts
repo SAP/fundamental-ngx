@@ -27,85 +27,85 @@ describe('Thumbnail field', () => {
         horizontalMainImg
     } = thumbnailPage;
 
-    beforeAll(() => {
-        thumbnailPage.open();
+    beforeAll(async () => {
+        await thumbnailPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(thumbnailPage.root);
-        waitForElDisplayed(thumbnailPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(thumbnailPage.root);
+        await waitForElDisplayed(thumbnailPage.title);
     }, 1);
 
-    it('should be able to view all thumbnail images', () => {
-        waitForPresent(mainImage);
-        waitForElDisplayed(mainImage);
-        expect(isElementDisplayed(mainImage)).toBeTrue();
-        expect(isElementDisplayed(mainImage, 1)).toBeTrue();
-        expect(isElementDisplayed(mainVideo)).toBeTrue();
+    it('should be able to view all thumbnail images', async () => {
+        await waitForPresent(mainImage);
+        await waitForElDisplayed(mainImage);
+        await expect(await isElementDisplayed(mainImage)).toBeTrue();
+        await expect(await isElementDisplayed(mainImage, 1)).toBeTrue();
+        await expect(await isElementDisplayed(mainVideo)).toBeTrue();
     });
 
-    it('should on click display image for vertical', () => {
-        scrollIntoView(verticalGalleryImages);
-        const arrLength = getElementArrayLength(verticalGalleryImages);
+    it('should on click display image for vertical', async () => {
+        await scrollIntoView(verticalGalleryImages);
+        const arrLength = await getElementArrayLength(verticalGalleryImages);
         for (let i = 0; arrLength - 1 > i; i++) {
-            const imageUrl = getAttributeByName(verticalGalleryImages, 'style', i);
-            click(verticalGalleryImages, i);
-            expect(imageUrl).toContain(getAttributeByName(mainImage, 'src', 0));
+            const imageUrl = await getAttributeByName(verticalGalleryImages, 'style', i);
+            await click(verticalGalleryImages, i);
+            await expect(imageUrl).toContain(await getAttributeByName(mainImage, 'src', 0));
         }
     });
 
-    it('should on click display image for horizontal', () => {
-        scrollIntoView(horizontalGalleryImages);
-        const arrLength = getElementArrayLength(horizontalGalleryImages);
+    it('should on click display image for horizontal', async () => {
+        await scrollIntoView(horizontalGalleryImages);
+        const arrLength = await getElementArrayLength(horizontalGalleryImages);
         for (let i = 0; arrLength > i; i++) {
-            const imageUrl = getAttributeByName(horizontalGalleryImages, 'style', i);
+            const imageUrl = await getAttributeByName(horizontalGalleryImages, 'style', i);
             const trimmedImageUrl = imageUrl
                 .replace('background-image: url("', '')
                 .replace('");', '')
                 .replace('https:', '');
-            click(horizontalGalleryImages, i);
-            expect(getAttributeByName(mainImage, 'src', 1)).toContain(trimmedImageUrl);
+            await click(horizontalGalleryImages, i);
+            await expect(await getAttributeByName(mainImage, 'src', 1)).toContain(trimmedImageUrl);
         }
     });
 
-    it('should be able to close gallery popup', () => {
-        scrollIntoView(verticalGalleryImages, 4);
-        waitForElDisplayed(verticalGalleryImages, 4);
-        clickWithOption(verticalGalleryImages, 4, 5000, { x: 10 });
-        scrollIntoView(galleryDialog);
-        waitForElDisplayed(galleryDialog);
-        click(galleryDialogCloseButton);
+    it('should be able to close gallery popup', async () => {
+        await scrollIntoView(verticalGalleryImages, 4);
+        await waitForElDisplayed(verticalGalleryImages, 4);
+        await clickWithOption(verticalGalleryImages, 4, 5000, { x: 10 });
+        await scrollIntoView(galleryDialog);
+        await waitForElDisplayed(galleryDialog);
+        await click(galleryDialogCloseButton);
 
-        expect(doesItExist(galleryDialog)).toBe(false);
+        await expect(await doesItExist(galleryDialog)).toBe(false);
     });
 
-    it('should be able to switch image in gallery popup', () => {
-        waitForElDisplayed(horizontalGalleryImages);
-        scrollIntoView(horizontalGalleryImages, 2);
-        clickWithOption(horizontalGalleryImages, 2, 5000, { x: 20 });
-        click(horizontalMainImg);
-        waitForElDisplayed(galleryDialog);
-        const startingImage = getAttributeByName(dialogMainImg, 'src');
+    it('should be able to switch image in gallery popup', async () => {
+        await waitForElDisplayed(horizontalGalleryImages);
+        await scrollIntoView(horizontalGalleryImages, 2);
+        await clickWithOption(horizontalGalleryImages, 2, 5000, { x: 20 });
+        await click(horizontalMainImg);
+        await waitForElDisplayed(galleryDialog);
+        const startingImage = await getAttributeByName(dialogMainImg, 'src');
 
-        click(galleryDialogLeftArrowButton);
-        const newImage = getAttributeByName(dialogMainImg, 'src');
-        expect(newImage).not.toBe(startingImage);
+        await click(galleryDialogLeftArrowButton);
+        const newImage = await getAttributeByName(dialogMainImg, 'src');
+        await expect(newImage).not.toBe(startingImage);
 
-        click(galleryDialogRightArrowButton);
-        click(galleryDialogRightArrowButton);
-        const newImage2 = getAttributeByName(dialogMainImg, 'src');
-        expect(newImage2).not.toBe(newImage);
+        await click(galleryDialogRightArrowButton);
+        await click(galleryDialogRightArrowButton);
+        const newImage2 = await getAttributeByName(dialogMainImg, 'src');
+        await expect(newImage2).not.toBe(newImage);
     });
 
-    it('should have rtl orientation', () => {
-        thumbnailPage.checkRtlSwitch();
+    it('should have rtl orientation', async () => {
+        await thumbnailPage.checkRtlSwitch();
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            thumbnailPage.saveExampleBaselineScreenshot();
-            expect(thumbnailPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await thumbnailPage.saveExampleBaselineScreenshot();
+            await expect(await thumbnailPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

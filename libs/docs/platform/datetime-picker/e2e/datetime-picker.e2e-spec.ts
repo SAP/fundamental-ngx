@@ -56,149 +56,153 @@ const {
 describe('Datetime picker suite', () => {
     dateTimePickerPage = new DateTimePicker();
 
-    beforeAll(() => {
-        dateTimePickerPage.open();
+    beforeAll(async () => {
+        await dateTimePickerPage.open();
     }, 1);
 
-    beforeEach(() => {
-        refreshPage();
-        waitForPresent(dateTimePickerPage.root);
-        waitForElDisplayed(dateTimePickerPage.title);
+    beforeEach(async () => {
+        await refreshPage();
+        await waitForPresent(dateTimePickerPage.root);
+        await waitForElDisplayed(dateTimePickerPage.title);
     }, 2);
 
-    it('Verify in all the form factor user is able to see the date picker button and input field ', () => {
-        const buttons = elementArray(datePickerButton);
-        const inputs = elementArray(datePickerInput);
-        expect(buttons.length).toEqual(inputs.length);
+    it('Verify in all the form factor user is able to see the date picker button and input field ', async () => {
+        const buttons = await elementArray(datePickerButton);
+        const inputs = await elementArray(datePickerInput);
+        await expect(buttons.length).toEqual(inputs.length);
         for (let i = 1; i < buttons.length; i++) {
-            waitForElDisplayed(datePickerButton, i);
-            waitForElDisplayed(datePickerInput, i);
+            await waitForElDisplayed(datePickerButton, i);
+            await waitForElDisplayed(datePickerInput, i);
         }
     });
 
-    it('Verify on click on the date picker button', () => {
-        const activeButtons = elementArray(activeDateTimePickerButton);
+    it('Verify on click on the date picker button', async () => {
+        const activeButtons = await elementArray(activeDateTimePickerButton);
         for (let i = 1; i < activeButtons.length; i++) {
-            if (!getElementClass(activeDateTimePickerButton, i).includes('is-disabled')) {
-                sendKeys(['Escape']);
-                scrollIntoView(activeDateTimePickerButton, i);
-                click(activeDateTimePickerButton, i);
-                waitForElDisplayed(calendarExpanded);
+            if (!(await getElementClass(activeDateTimePickerButton, i)).includes('is-disabled')) {
+                await sendKeys(['Escape']);
+                await scrollIntoView(activeDateTimePickerButton, i);
+                await click(activeDateTimePickerButton, i);
+                await waitForElDisplayed(calendarExpanded);
             }
         }
     });
 
-    it('Verify From the day view on the calendar, clicking or tapping a year', () => {
-        sendKeys(['Escape']);
-        scrollIntoView(bottomPage);
-        click(activeDateTimePickerButton, 1);
-        expect(waitForElDisplayed(calendarExpanded)).toBe(true);
-        scrollIntoView(topPage);
-        scrollIntoView(selectYearButton);
-        click(selectYearButton);
-        expect(waitForElDisplayed(calendarYearsSection)).toBe(true);
-        click(dateTimePickerPage.yearInCalendarByValue(year2030));
-        expect(getText(selectYearButton)).toBe(year2030.toString());
+    it('Verify From the day view on the calendar, clicking or tapping a year', async () => {
+        await sendKeys(['Escape']);
+        await scrollIntoView(bottomPage);
+        await click(activeDateTimePickerButton, 1);
+        await expect(await waitForElDisplayed(calendarExpanded)).toBe(true);
+        await scrollIntoView(topPage);
+        await scrollIntoView(selectYearButton);
+        await click(selectYearButton);
+        await expect(await waitForElDisplayed(calendarYearsSection)).toBe(true);
+        await click(await dateTimePickerPage.yearInCalendarByValue(year2030));
+        await expect(await getText(selectYearButton)).toBe(year2030.toString());
     });
 
-    it('Verify by default today date is focused', () => {
-        const activeButtons = elementArray(activeDateTimePickerButton);
+    it('Verify by default today date is focused', async () => {
+        const activeButtons = await elementArray(activeDateTimePickerButton);
         for (let i = 0; i < activeButtons.length; i++) {
             if (i !== 2 && i !== 7 && i !== 11) {
                 // other default days in these calendars
-                if (!getElementClass(activeDateTimePickerButton, i).includes('is-disabled')) {
-                    sendKeys(['Escape']);
-                    scrollIntoView(activeDateTimePickerButton, i);
-                    click(activeDateTimePickerButton, i);
-                    waitForElDisplayed(calendarExpanded);
-                    expect(getText(currentDay, 0)).toContain(new Date().getDate().toString());
+                if (!(await getElementClass(activeDateTimePickerButton, i)).includes('is-disabled')) {
+                    await sendKeys(['Escape']);
+                    await scrollIntoView(activeDateTimePickerButton, i);
+                    await click(activeDateTimePickerButton, i);
+                    await waitForElDisplayed(calendarExpanded);
+                    await expect(await getText(currentDay, 0)).toContain(new Date().getDate().toString());
                 }
             }
         }
     });
 
-    it('Verify on click on the input field ', () => {
-        const activeInputs = elementArray(activeDateTimePickerInput);
+    it('Verify on click on the input field ', async () => {
+        const activeInputs = await elementArray(activeDateTimePickerInput);
         for (let i = 0; i < activeInputs.length; i++) {
-            sendKeys(['Escape']);
-            scrollIntoView(activeDateTimePickerInput, i);
-            setValue(activeDateTimePickerInput, text, i);
-            expect(getValue(activeDateTimePickerInput, i)).toBe(text);
+            await sendKeys(['Escape']);
+            await scrollIntoView(activeDateTimePickerInput, i);
+            await setValue(activeDateTimePickerInput, text, i);
+            await expect(await getValue(activeDateTimePickerInput, i)).toBe(text);
         }
     });
 
-    it('Verify date input field have placeholder', () => {
-        const inputs = elementArray(datePickerInput);
+    it('Verify date input field have placeholder', async () => {
+        const inputs = await elementArray(datePickerInput);
         for (let i = 0; i < inputs.length; i++) {
-            expect(['', null]).not.toContain(getElementPlaceholder(datePickerInput, i));
+            await expect(['', null]).not.toContain(await getElementPlaceholder(datePickerInput, i));
         }
     });
 
-    it('should check LTR and RTL orientation', () => {
-        dateTimePickerPage.checkRtlSwitch();
+    it('should check LTR and RTL orientation', async () => {
+        await dateTimePickerPage.checkRtlSwitch();
     });
 
     it(
         'Verify The user can then choose the desired date from the calendar, and the time from the rotating wheel, ' +
             'For the time, it’s possible to select hours, minutes, and even seconds.',
-        () => {
-            if (browserIsSafari()) {
+        async () => {
+            if (await browserIsSafari()) {
                 // infinite loop on safari
                 return;
             }
-            click(datePickerButton);
-            click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
-            selectHoursAndMinutes();
-            click(okButton);
-            expect(getValue(datePickerInput)).toEqual(date);
+            await click(datePickerButton);
+            await click(await dateTimePickerPage.dayInCalendarButtonByValue('1'));
+            await selectHoursAndMinutes();
+            await click(okButton);
+            await expect(await getValue(datePickerInput)).toEqual(date);
         }
     );
 
-    it('verify selected date is showing in blue background', () => {
-        click(activeDateTimePickerButton, 1);
-        click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
-        click(okButton);
-        click(activeDateTimePickerButton, 1);
-        expect(highlightedColor).toContain(
-            getCSSPropertyByName(dateTimePickerPage.dayInCalendarButtonByValue('1'), 'background-color').value
+    it('verify selected date is showing in blue background', async () => {
+        await click(activeDateTimePickerButton, 1);
+        await click(await dateTimePickerPage.dayInCalendarButtonByValue('1'));
+        await click(okButton);
+        await click(activeDateTimePickerButton, 1);
+        await expect(highlightedColor).toContain(
+            (
+                await getCSSPropertyByName(await dateTimePickerPage.dayInCalendarButtonByValue('1'), 'background-color')
+            ).value
         );
     });
 
-    it('Verify When the user selects cancel the action is aborted and the input field remains unchanged.', () => {
-        if (browserIsSafari()) {
+    it('Verify When the user selects cancel the action is aborted and the input field remains unchanged.', async () => {
+        if (await browserIsSafari()) {
             // infinite loop on safari
             return;
         }
-        click(activeDateTimePickerButton);
-        click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
-        selectHoursAndMinutes();
-        click(cancelButton);
-        expect(getValue(datePickerInput)).not.toEqual(date);
+        await click(activeDateTimePickerButton);
+        await click(await dateTimePickerPage.dayInCalendarButtonByValue('1'));
+        await selectHoursAndMinutes();
+        await click(cancelButton);
+        await expect(await getValue(datePickerInput)).not.toEqual(date);
     });
 
-    it('Verify disabled date time picker', () => {
-        const disabledButtonsArr = elementArray(disabledDateTimePickerButton);
+    it('Verify disabled date time picker', async () => {
+        const disabledButtonsArr = await elementArray(disabledDateTimePickerButton);
         for (let i = 0; i < disabledButtonsArr.length; i++) {
-            waitForUnclickable(disabledDateTimePickerButton, i);
-            waitForUnclickable(disabledDateTimePickerInput, i);
+            await waitForUnclickable(disabledDateTimePickerButton, i);
+            await waitForUnclickable(disabledDateTimePickerInput, i);
         }
     });
 
-    it('Verify compact date time picker', () => {
-        const currentText = getText(compactDateTimePickerInput);
-        scrollIntoView(compactDateTimePickerButton);
-        click(changeDateTimeValueButton);
-        expect(currentText).not.toBe(getValue(compactDateTimePickerInput));
-        expect(getValue(compactDateTimePickerInput)).toBe(compactDate);
+    it('Verify compact date time picker', async () => {
+        const currentText = await getText(compactDateTimePickerInput);
+        await scrollIntoView(compactDateTimePickerButton);
+        await click(changeDateTimeValueButton);
+        await expect(currentText).not.toBe(await getValue(compactDateTimePickerInput));
+        await expect(await getValue(compactDateTimePickerInput)).toBe(compactDate);
     });
 
-    it('Verify date time picker with disabled functions', () => {
-        scrollIntoView(disabledFunctionExample + datePickerButton);
-        click(disabledFunctionExample + datePickerButton);
-        waitForElDisplayed(calendarContainer);
-        const index = dateTimePickerPage.getCurrentDayIndex();
+    it('Verify date time picker with disabled functions', async () => {
+        await scrollIntoView(disabledFunctionExample + datePickerButton);
+        await click(disabledFunctionExample + datePickerButton);
+        await waitForElDisplayed(calendarContainer);
+        const index = await dateTimePickerPage.getCurrentDayIndex();
         if (index) {
-            waitForUnclickable(dateTimePickerPage.dayInDisabledFunctionsCalendarByIndex((index - 1).toString()));
+            await waitForUnclickable(
+                await dateTimePickerPage.dayInDisabledFunctionsCalendarByIndex((index - 1).toString())
+            );
         }
         if (index === 0) {
             // can't click previous day when today's day is index 0
@@ -206,61 +210,61 @@ describe('Datetime picker suite', () => {
         }
     });
 
-    it('verify after the user selects a year, the view changes to the day view. The time remains the same. ', () => {
-        if (browserIsSafari()) {
+    it('verify after the user selects a year, the view changes to the day view. The time remains the same. ', async () => {
+        if (await browserIsSafari()) {
             // infinite loop on safari
             return;
         }
-        click(datePickerButton, 1);
-        selectHoursAndMinutes();
-        click(okButton);
-        scrollIntoView(bottomPage);
-        click(datePickerButton, 1);
-        scrollIntoView(topPage);
-        scrollIntoView(selectYearButton);
-        click(selectYearButton);
-        waitForElDisplayed(dateTimePickerPage.filterCalendarValue('year'));
-        click(firstYearButton);
-        waitForElDisplayed(dateTimePickerPage.filterCalendarValue('day'));
-        scrollIntoView(datePickerButton, 2);
-        click(okButton);
-        expect(getValue(datePickerInput, 1)).toEqual(currentDate);
+        await click(datePickerButton, 1);
+        await selectHoursAndMinutes();
+        await click(okButton);
+        await scrollIntoView(bottomPage);
+        await click(datePickerButton, 1);
+        await scrollIntoView(topPage);
+        await scrollIntoView(selectYearButton);
+        await click(selectYearButton);
+        await waitForElDisplayed(await dateTimePickerPage.filterCalendarValue('year'));
+        await click(firstYearButton);
+        await waitForElDisplayed(await dateTimePickerPage.filterCalendarValue('day'));
+        await scrollIntoView(datePickerButton, 2);
+        await click(okButton);
+        await expect(await getValue(datePickerInput, 1)).toEqual(currentDate);
     });
 
-    it('Verify After the user clicks or taps a month, the view changes to the day view. The time remains the same.', () => {
-        if (browserIsSafari()) {
+    it('Verify After the user clicks or taps a month, the view changes to the day view. The time remains the same.', async () => {
+        if (await browserIsSafari()) {
             // infinite loop on safari
             return;
         }
-        click(datePickerButton);
-        click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
-        selectHoursAndMinutes();
-        click(okButton);
-        scrollIntoView(bottomPage);
-        click(datePickerButton);
-        scrollIntoView(topPage);
-        click(selectMonthButton);
-        waitForElDisplayed(dateTimePickerPage.filterCalendarValue('month'));
-        click(firstMonthButton);
-        waitForElDisplayed(dateTimePickerPage.filterCalendarValue('day'));
-        click(okButton);
-        expect(getValue(datePickerInput)).toEqual(date);
+        await click(datePickerButton);
+        await click(await dateTimePickerPage.dayInCalendarButtonByValue('1'));
+        await selectHoursAndMinutes();
+        await click(okButton);
+        await scrollIntoView(bottomPage);
+        await click(datePickerButton);
+        await scrollIntoView(topPage);
+        await click(selectMonthButton);
+        await waitForElDisplayed(await dateTimePickerPage.filterCalendarValue('month'));
+        await click(firstMonthButton);
+        await waitForElDisplayed(await dateTimePickerPage.filterCalendarValue('day'));
+        await click(okButton);
+        await expect(await getValue(datePickerInput)).toEqual(date);
     });
 
-    it('should check that OK buttons have correct text', () => {
-        const datepickerButtonsLength = getElementArrayLength(datePickerButton);
+    it('should check that OK buttons have correct text', async () => {
+        const datepickerButtonsLength = await getElementArrayLength(datePickerButton);
         for (let i = 0; i < datepickerButtonsLength; i++) {
-            if (!getElementClass(datePickerButton, i).includes('disabled')) {
-                click(datePickerButton, i);
-                expect(getText(okButton + buttonText).trim()).toEqual('Ok');
-                click(okButton);
+            if (!(await getElementClass(datePickerButton, i)).includes('disabled')) {
+                await click(datePickerButton, i);
+                await expect((await getText(okButton + buttonText)).trim()).toEqual('Ok');
+                await click(okButton);
             }
         }
     });
 
     // skipped due to https://github.com/SAP/fundamental-ngx/issues/7112
-    xit('should check that date-time picker does not have error if it contains valid value', () => {
-        scrollIntoView(inputGroup, 8);
+    xit('should check that date-time picker does not have error if it contains valid value', async () => {
+        await scrollIntoView(inputGroup, 8);
         let validDate;
         const currDate = new Date();
         const currMonth = currDate.getMonth() + 1;
@@ -288,20 +292,20 @@ describe('Datetime picker suite', () => {
             )}:${currMinute} ${currentHour.slice(3, 5)}`;
         }
 
-        expect(getValue(datePickerInput, 8)).toBe(validDate);
-        expect(getElementClass(inputGroup, 8)).not.toContain('error');
+        await expect(await getValue(datePickerInput, 8)).toBe(validDate);
+        await expect(await getElementClass(inputGroup, 8)).not.toContain('error');
     });
 });
 
-function selectHoursAndMinutes(hour: number = 1, minute: number = 1): void {
-    while (getText(selectedHours).trim() !== hour.toString()) {
-        scrollIntoView(activeDateTimePickerButton, 1);
-        click(navigationUpArrowButton);
+async function selectHoursAndMinutes(hour: number = 1, minute: number = 1): Promise<void> {
+    while ((await getText(selectedHours)).trim() !== hour.toString()) {
+        await scrollIntoView(activeDateTimePickerButton, 1);
+        await click(navigationUpArrowButton);
     }
-    click(timeColumn, 1);
-    while (getText(selectedMinutes) !== minute.toString()) {
-        click(navigationDownArrowButton);
+    await click(timeColumn, 1);
+    while ((await getText(selectedMinutes)) !== minute.toString()) {
+        await click(navigationDownArrowButton);
     }
-    click(timeColumn, 2);
-    click(period);
+    await click(timeColumn, 2);
+    await click(period);
 }

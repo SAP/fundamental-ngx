@@ -43,30 +43,30 @@ export class DatePickerPo extends CoreBaseComponentPo {
     selectYearButton = 'div:nth-child(3) > button';
     monthAttributeLabel = 'data-fd-calendar-month';
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 
-    getCurrentDayIndex = (): number => {
+    getCurrentDayIndex = async (): Promise<number> => {
         for (let i = 0; i < this.currentMonthCalendarItem.length; i++) {
-            if (getElementClass(this.currentMonthCalendarItem, i).includes('current')) {
+            if ((await getElementClass(this.currentMonthCalendarItem, i)).includes('current')) {
                 return i;
             }
         }
         return -1;
     };
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'date-picker'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'date-picker'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'date-picker'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'date-picker'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 }

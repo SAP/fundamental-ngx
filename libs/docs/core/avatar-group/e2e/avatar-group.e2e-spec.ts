@@ -25,64 +25,64 @@ describe('Avatar test suite', () => {
         contactLinks
     } = avatarGroupPage;
 
-    beforeAll(() => {
-        avatarGroupPage.open();
+    beforeAll(async () => {
+        await avatarGroupPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(avatarGroupPage.root);
-        waitForElDisplayed(avatarGroupPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(avatarGroupPage.root);
+        await waitForElDisplayed(avatarGroupPage.title);
     }, 1);
 
-    it('should have details popup on click', () => {
-        click(firstExampleAvatar);
-        waitForPresent(usedDetailsPopup);
+    it('should have details popup on click', async () => {
+        await click(firstExampleAvatar);
+        await waitForPresent(usedDetailsPopup);
 
-        expect(doesItExist(usedDetailsPopup)).toBe(true, 'user details popup not displayed');
+        await expect(await doesItExist(usedDetailsPopup)).toBe(true, 'user details popup not displayed');
 
-        scrollIntoView(secondExampleAvatar);
-        click(secondExampleAvatar);
-        waitForPresent(usedGroupDetailsPopup);
+        await scrollIntoView(secondExampleAvatar);
+        await click(secondExampleAvatar);
+        await waitForPresent(usedGroupDetailsPopup);
 
-        expect(doesItExist(usedGroupDetailsPopup)).toBe(true, 'group details popup not displayed');
+        await expect(await doesItExist(usedGroupDetailsPopup)).toBe(true, 'group details popup not displayed');
     });
 
-    it('should have individual details on group popup', () => {
-        scrollIntoView(secondExampleAvatar);
-        click(secondExampleAvatar);
-        waitForPresent(usedGroupDetailsPopup);
-        click(popoverUserAvatar);
+    it('should have individual details on group popup', async () => {
+        await scrollIntoView(secondExampleAvatar);
+        await click(secondExampleAvatar);
+        await waitForPresent(usedGroupDetailsPopup);
+        await click(popoverUserAvatar);
 
-        expect(isElementDisplayed(individualCard)).toBe(true, 'user details popup not displayed');
+        await expect(await isElementDisplayed(individualCard)).toBe(true, 'user details popup not displayed');
     });
 
-    it('should Individual to be smaller than group', () => {
-        const individualSize = getElementSize(firstExampleAvatar);
-        const groupSize = getElementSize(secondExampleAvatar);
+    it('should Individual to be smaller than group', async () => {
+        const individualSize = await getElementSize(firstExampleAvatar);
+        const groupSize = await getElementSize(secondExampleAvatar);
 
-        expect(individualSize.height).toBeLessThan(groupSize.height);
-        expect(individualSize.width).toBeLessThan(groupSize.width);
+        await expect(individualSize.height).toBeLessThan(groupSize.height);
+        await expect(individualSize.width).toBeLessThan(groupSize.width);
     });
 
-    it('should check clickability contact details links', () => {
-        click(firstExampleAvatar);
-        checkElArrIsClickable(contactLinks);
-        sendKeys('Escape');
+    it('should check clickability contact details links', async () => {
+        await click(firstExampleAvatar);
+        await checkElArrIsClickable(contactLinks);
+        await sendKeys('Escape');
 
-        scrollIntoView(secondExampleAvatar);
-        click(secondExampleAvatar);
-        waitForPresent(usedGroupDetailsPopup);
-        click(popoverUserAvatar);
-        checkElArrIsClickable(contactLinks);
+        await scrollIntoView(secondExampleAvatar);
+        await click(secondExampleAvatar);
+        await waitForPresent(usedGroupDetailsPopup);
+        await click(popoverUserAvatar);
+        await checkElArrIsClickable(contactLinks);
     });
 
-    it('should check orientation', () => {
-        avatarGroupPage.checkRtlSwitch();
+    it('should check orientation', async () => {
+        await avatarGroupPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', () => {
-        avatarGroupPage.saveExampleBaselineScreenshot();
-        expect(avatarGroupPage.compareWithBaseline()).toBeLessThan(5);
+    xit('should check examples visual regression', async () => {
+        await avatarGroupPage.saveExampleBaselineScreenshot();
+        await expect(await avatarGroupPage.compareWithBaseline()).toBeLessThan(5);
     });
 });

@@ -29,80 +29,80 @@ describe('Fixed card layout test suite', () => {
         disabledCardDiv
     } = fxdCardLayoutPage;
 
-    beforeAll(() => {
-        fxdCardLayoutPage.open();
+    beforeAll(async () => {
+        await fxdCardLayoutPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(fxdCardLayoutPage.root);
-        waitForElDisplayed(fxdCardLayoutPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(fxdCardLayoutPage.root);
+        await waitForElDisplayed(fxdCardLayoutPage.title);
     }, 1);
 
     describe('main checks', () => {
-        it('should check card can be hidden', () => {
-            const cardStartCount = getElementArrayLength(cardDivArr);
+        it('should check card can be hidden', async () => {
+            const cardStartCount = await getElementArrayLength(cardDivArr);
 
-            click(hideCardBtnArr);
-            const cardEndCount = getElementArrayLength(cardDivArr);
-            expect(cardEndCount).toEqual(cardStartCount - 1);
+            await click(hideCardBtnArr);
+            const cardEndCount = await getElementArrayLength(cardDivArr);
+            await expect(cardEndCount).toEqual(cardStartCount - 1);
 
-            click(hideCardBtnArr);
-            const newCardEndCount = getElementArrayLength(cardDivArr);
-            expect(newCardEndCount).toEqual(cardStartCount);
+            await click(hideCardBtnArr);
+            const newCardEndCount = await getElementArrayLength(cardDivArr);
+            await expect(newCardEndCount).toEqual(cardStartCount);
         });
 
-        it('should drag a card from the header', () => {
-            if (browserIsSafari()) {
+        it('should drag a card from the header', async () => {
+            if (await browserIsSafari()) {
                 // test runner drag and drop methods not working properly on safari
                 return;
             }
 
-            const originalFirstCardText = getText(cardDivArr);
+            const originalFirstCardText = await getText(cardDivArr);
 
-            scrollIntoView(cardHeaderArr);
-            checkDragAndDrop(cardHeaderArr, cardContentArr, 4);
-            const newText = getText(cardDivArr);
-            expect(newText).not.toBe(originalFirstCardText);
+            await scrollIntoView(cardHeaderArr);
+            await checkDragAndDrop(cardHeaderArr, cardContentArr, 4);
+            const newText = await getText(cardDivArr);
+            await expect(newText).not.toBe(originalFirstCardText);
         });
 
-        it('should drag a card from the content area', () => {
-            const originalFirstCardText = getText(cardDivArr);
+        it('should drag a card from the content area', async () => {
+            const originalFirstCardText = await getText(cardDivArr);
 
-            scrollIntoView(cardDivArr);
-            checkDragAndDrop(cardContentArr, cardContentArr, 2);
-            const newText = getText(cardDivArr);
-            expect(newText).not.toBe(originalFirstCardText);
+            await scrollIntoView(cardDivArr);
+            await checkDragAndDrop(cardContentArr, cardContentArr, 2);
+            const newText = await getText(cardDivArr);
+            await expect(newText).not.toBe(originalFirstCardText);
         });
 
-        it('should check drag and drop cards swap locations', () => {
-            const originalFirstCardText = getText(cardDivArr);
-            const originalSwapCardText = getText(cardDivArr, 1);
+        it('should check drag and drop cards swap locations', async () => {
+            const originalFirstCardText = await getText(cardDivArr);
+            const originalSwapCardText = await getText(cardDivArr, 1);
 
-            scrollIntoView(cardDivArr);
-            checkDragAndDrop(cardContentArr, cardContentArr, 1);
+            await scrollIntoView(cardDivArr);
+            await checkDragAndDrop(cardContentArr, cardContentArr, 1);
 
-            const newFirstCardText = getText(cardDivArr);
-            const newSwapCardText = getText(cardDivArr, 1);
+            const newFirstCardText = await getText(cardDivArr);
+            const newSwapCardText = await getText(cardDivArr, 1);
 
-            expect(newFirstCardText).not.toBe(originalFirstCardText);
-            expect(newSwapCardText).not.toBe(originalSwapCardText);
+            await expect(newFirstCardText).not.toBe(originalFirstCardText);
+            await expect(newSwapCardText).not.toBe(originalSwapCardText);
         });
 
         // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/7342
-        xit('should check placeholder exists on drag', () => {
-            scrollIntoView(cardDivArr);
+        xit('should check placeholder exists on drag', async () => {
+            await scrollIntoView(cardDivArr);
             const clickElement = cardContentArr;
             const locationElement = cardDivArr;
 
-            const clickXLocation = Math.floor(getElementLocation(clickElement, 0, 'x'));
-            const clickYLocation = Math.floor(getElementLocation(clickElement, 0, 'y'));
-            const startXLocation = Math.floor(getElementLocation(locationElement, 0, 'x'));
-            const startYLocation = Math.floor(getElementLocation(locationElement, 0, 'y'));
-            const endXLocation = Math.floor(getElementLocation(locationElement, 4, 'x'));
-            const endYLocation = Math.floor(getElementLocation(locationElement, 4, 'y'));
+            const clickXLocation = Math.floor(await getElementLocation(clickElement, 0, 'x'));
+            const clickYLocation = Math.floor(await getElementLocation(clickElement, 0, 'y'));
+            const startXLocation = Math.floor(await getElementLocation(locationElement, 0, 'x'));
+            const startYLocation = Math.floor(await getElementLocation(locationElement, 0, 'y'));
+            const endXLocation = Math.floor(await getElementLocation(locationElement, 4, 'x'));
+            const endYLocation = Math.floor(await getElementLocation(locationElement, 4, 'y'));
 
-            browser.performActions([
+            await browser.performActions([
                 {
                     type: 'pointer',
                     id: 'pointer1',
@@ -117,62 +117,62 @@ describe('Fixed card layout test suite', () => {
                 }
             ]);
 
-            expect(elementDisplayed(placeholderCard)).toBe(true);
+            await expect(await elementDisplayed(placeholderCard)).toBe(true);
         });
 
         // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
-        xit('should check columns are reactive', () => {
-            const originalCardColumnsCount = getElementArrayLength(cardColumnArr);
+        xit('should check columns are reactive', async () => {
+            const originalCardColumnsCount = await getElementArrayLength(cardColumnArr);
 
-            click(navigationMenuBtn);
-            waitForInvisibilityOf(pageSidebar);
-            const newCardColumnsCount = getElementArrayLength(cardColumnArr);
-            expect(originalCardColumnsCount).not.toEqual(newCardColumnsCount);
+            await click(navigationMenuBtn);
+            await waitForInvisibilityOf(pageSidebar);
+            const newCardColumnsCount = await getElementArrayLength(cardColumnArr);
+            await expect(originalCardColumnsCount).not.toEqual(newCardColumnsCount);
         });
 
         // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
-        xit('should check cards are reactive to columns', () => {
-            const originalLastCardText = getText(cardDivArr, 8);
+        xit('should check cards are reactive to columns', async () => {
+            const originalLastCardText = await getText(cardDivArr, 8);
 
-            click(navigationMenuBtn, 0);
-            waitForInvisibilityOf(pageSidebar);
-            const newLastCardText = getText(cardDivArr, 8);
-            expect(originalLastCardText).not.toEqual(newLastCardText);
+            await click(navigationMenuBtn, 0);
+            await waitForInvisibilityOf(pageSidebar);
+            const newLastCardText = await getText(cardDivArr, 8);
+            await expect(originalLastCardText).not.toEqual(newLastCardText);
         });
 
-        it('should check drag and drop is disabled', () => {
-            const originalFirstCardText = getText(disabledCardDiv);
+        it('should check drag and drop is disabled', async () => {
+            const originalFirstCardText = await getText(disabledCardDiv);
 
-            scrollIntoView(disableDragBtn);
-            click(disableDragBtn);
-            checkDragAndDrop(disabledCardContent, disabledCardContent, 4);
+            await scrollIntoView(disableDragBtn);
+            await click(disableDragBtn);
+            await checkDragAndDrop(disabledCardContent, disabledCardContent, 4);
 
-            const newFirstCardText = getText(disabledCardDiv);
+            const newFirstCardText = await getText(disabledCardDiv);
 
-            expect(newFirstCardText).toBe(originalFirstCardText);
+            await expect(newFirstCardText).toBe(originalFirstCardText);
         });
 
         describe('Check orientation', () => {
-            it('should check LTR and RTL orientation', () => {
-                fxdCardLayoutPage.checkRtlSwitch();
+            it('should check LTR and RTL orientation', async () => {
+                await fxdCardLayoutPage.checkRtlSwitch();
             });
         });
 
         xdescribe('Check visual regression', () => {
-            it('should check examples visual regression', () => {
-                fxdCardLayoutPage.saveExampleBaselineScreenshot();
-                expect(fxdCardLayoutPage.compareWithBaseline()).toBeLessThan(5);
+            it('should check examples visual regression', async () => {
+                await fxdCardLayoutPage.saveExampleBaselineScreenshot();
+                await expect(await fxdCardLayoutPage.compareWithBaseline()).toBeLessThan(5);
             });
         });
     });
 
-    function checkDragAndDrop(clickElement, endLocation, endLocationIndex): void {
-        const clickXLocation = Math.floor(getElementLocation(clickElement, 0, 'x'));
-        const clickYLocation = Math.floor(getElementLocation(clickElement, 0, 'y'));
-        const endXLocation = Math.floor(getElementLocation(endLocation, endLocationIndex, 'x'));
-        const endYLocation = Math.floor(getElementLocation(endLocation, endLocationIndex, 'y'));
+    async function checkDragAndDrop(clickElement, endLocation, endLocationIndex): Promise<void> {
+        const clickXLocation = Math.floor(await getElementLocation(clickElement, 0, 'x'));
+        const clickYLocation = Math.floor(await getElementLocation(clickElement, 0, 'y'));
+        const endXLocation = Math.floor(await getElementLocation(endLocation, endLocationIndex, 'x'));
+        const endYLocation = Math.floor(await getElementLocation(endLocation, endLocationIndex, 'y'));
 
-        browser.performActions([
+        await browser.performActions([
             {
                 type: 'pointer',
                 id: 'pointer1',

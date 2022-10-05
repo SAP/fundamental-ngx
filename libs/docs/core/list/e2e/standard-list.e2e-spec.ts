@@ -38,198 +38,204 @@ describe('Standard List test suite', () => {
         listItemText
     } = standardListPage;
 
-    beforeAll(() => {
-        standardListPage.open();
+    beforeAll(async () => {
+        await standardListPage.open();
     }, 1);
 
     describe('action list examples', () => {
-        it('should check show more button functionality', () => {
-            const startItemsCount = getElementArrayLength(actionList + listItems);
+        it('should check show more button functionality', async () => {
+            const startItemsCount = await getElementArrayLength(actionList + listItems);
 
-            click(actionList + listItems, startItemsCount - 1);
-            waitForNotDisplayed(actionList + busyIndicator);
+            await click(actionList + listItems, startItemsCount - 1);
+            await waitForNotDisplayed(actionList + busyIndicator);
 
-            expect(getElementArrayLength(actionList + listItems)).not.toEqual(startItemsCount);
+            await expect(await getElementArrayLength(actionList + listItems)).not.toEqual(startItemsCount);
         });
     });
 
     describe('filter and sort list examples', () => {
-        afterEach(() => {
-            refreshPage();
-            waitForElDisplayed(standardListPage.title);
+        afterEach(async () => {
+            await refreshPage();
+            await waitForElDisplayed(standardListPage.title);
         }, 1);
 
-        it('should check ability to search', () => {
-            scrollIntoView(filterAndSortList);
-            click(filterAndSortList + searchBar);
-            setValue(filterAndSortList + searchBar, 'apple');
-            const resultCount = getElementArrayLength(filterAndSortList + listItems);
+        it('should check ability to search', async () => {
+            await scrollIntoView(filterAndSortList);
+            await click(filterAndSortList + searchBar);
+            await setValue(filterAndSortList + searchBar, 'apple');
+            const resultCount = await getElementArrayLength(filterAndSortList + listItems);
             for (let i = 0; i < resultCount; i++) {
-                expect(getText(filterAndSortList + listItems, i).toLowerCase()).toContain('apple');
+                await expect((await getText(filterAndSortList + listItems, i)).toLowerCase()).toContain('apple');
             }
         });
 
-        it('should check the ability to clear search', () => {
-            const startItemCount = getElementArrayLength(filterAndSortList + listItems);
+        it('should check the ability to clear search', async () => {
+            const startItemCount = await getElementArrayLength(filterAndSortList + listItems);
 
-            scrollIntoView(filterAndSortList);
-            click(filterAndSortList + searchBar);
-            setValue(filterAndSortList + searchBar, 'apple');
+            await scrollIntoView(filterAndSortList);
+            await click(filterAndSortList + searchBar);
+            await setValue(filterAndSortList + searchBar, 'apple');
 
-            expect(getElementArrayLength(filterAndSortList + listItems)).not.toEqual(startItemCount);
+            await expect(await getElementArrayLength(filterAndSortList + listItems)).not.toEqual(startItemCount);
 
-            click(filterAndSortList + button);
+            await click(filterAndSortList + button);
 
-            expect(getElementArrayLength(filterAndSortList + listItems)).toEqual(startItemCount);
+            await expect(await getElementArrayLength(filterAndSortList + listItems)).toEqual(startItemCount);
         });
 
-        it('should check the ability to sort', () => {
-            const itemCount = getElementArrayLength(filterAndSortList + listItems);
-            const originalFirstItem = getText(filterAndSortList + listItems);
-            const originalLastItem = getText(filterAndSortList + listItems, itemCount - 1);
+        it('should check the ability to sort', async () => {
+            const itemCount = await getElementArrayLength(filterAndSortList + listItems);
+            const originalFirstItem = await getText(filterAndSortList + listItems);
+            const originalLastItem = await getText(filterAndSortList + listItems, itemCount - 1);
 
-            click(filterAndSortList + button, 2);
+            await click(filterAndSortList + button, 2);
 
-            expect(getText(filterAndSortList + listItems)).toBe(originalLastItem);
-            expect(getText(filterAndSortList + listItems, itemCount - 1)).toBe(originalFirstItem);
+            await expect(await getText(filterAndSortList + listItems)).toBe(originalLastItem);
+            await expect(await getText(filterAndSortList + listItems, itemCount - 1)).toBe(originalFirstItem);
 
-            click(filterAndSortList + button, 1);
+            await click(filterAndSortList + button, 1);
 
-            expect(getText(filterAndSortList + listItems)).toBe(originalFirstItem);
-            expect(getText(filterAndSortList + listItems, itemCount - 1)).toBe(originalLastItem);
+            await expect(await getText(filterAndSortList + listItems)).toBe(originalFirstItem);
+            await expect(await getText(filterAndSortList + listItems, itemCount - 1)).toBe(originalLastItem);
         });
 
-        it('should check the ability to delete an item', () => {
-            const startItemCount = getElementArrayLength(filterAndSortList + listItems);
+        it('should check the ability to delete an item', async () => {
+            const startItemCount = await getElementArrayLength(filterAndSortList + listItems);
 
-            click(filterAndSortList + button, 4);
+            await click(filterAndSortList + button, 4);
 
-            expect(getElementArrayLength(filterAndSortList + listItems)).toEqual(startItemCount - 1);
+            await expect(await getElementArrayLength(filterAndSortList + listItems)).toEqual(startItemCount - 1);
         });
 
-        it('should check deleting all items', () => {
-            const startItemCount = getElementArrayLength(filterAndSortList + listItems);
+        it('should check deleting all items', async () => {
+            const startItemCount = await getElementArrayLength(filterAndSortList + listItems);
             for (let i = 0; i < startItemCount; i++) {
-                click(filterAndSortList + deleteButton);
+                await click(filterAndSortList + deleteButton);
             }
-            expect(getElementArrayLength(filterAndSortList + listItems)).toEqual(1);
-            expect(getText(filterAndSortList + listItemText).trim()).toBe('No results found!');
+            await expect(await getElementArrayLength(filterAndSortList + listItems)).toEqual(1);
+            await expect((await getText(filterAndSortList + listItemText)).trim()).toBe('No results found!');
         });
     });
 
     describe('selection list example', () => {
-        beforeEach(() => {
-            refreshPage();
-            waitForElDisplayed(standardListPage.title);
+        beforeEach(async () => {
+            await refreshPage();
+            await waitForElDisplayed(standardListPage.title);
         }, 1);
 
-        it('check cozy multi-selection functionality', () => {
-            const itemCount = getElementArrayLength(cozyMultiSelectList + listItems);
+        it('check cozy multi-selection functionality', async () => {
+            const itemCount = await getElementArrayLength(cozyMultiSelectList + listItems);
 
-            checkSelections(cozyMultiSelectList, itemCount);
+            await checkSelections(cozyMultiSelectList, itemCount);
 
-            expect(getElementArrayLength(cozyMultiSelectList + selectedItems)).toEqual(itemCount);
+            await expect(await getElementArrayLength(cozyMultiSelectList + selectedItems)).toEqual(itemCount);
         });
 
-        it('check compact multi-selection functionality', () => {
-            const itemCount = getElementArrayLength(compactMultiSelectList + listItems);
+        it('check compact multi-selection functionality', async () => {
+            const itemCount = await getElementArrayLength(compactMultiSelectList + listItems);
 
-            checkSelections(compactMultiSelectList, itemCount);
+            await checkSelections(compactMultiSelectList, itemCount);
 
-            expect(getElementArrayLength(compactMultiSelectList + selectedItems)).toEqual(itemCount);
+            await expect(await getElementArrayLength(compactMultiSelectList + selectedItems)).toEqual(itemCount);
         });
 
-        it('check cozy single-selection functionality', () => {
-            const itemCount = getElementArrayLength(cozySingleSelectList + listItems);
+        it('check cozy single-selection functionality', async () => {
+            const itemCount = await getElementArrayLength(cozySingleSelectList + listItems);
 
-            checkSelections(cozySingleSelectList, itemCount);
+            await checkSelections(cozySingleSelectList, itemCount);
 
-            expect(getElementArrayLength(cozySingleSelectList + selectedItems)).toEqual(1);
+            await expect(await getElementArrayLength(cozySingleSelectList + selectedItems)).toEqual(1);
         });
 
-        it('check compact single-selection functionality', () => {
-            const itemCount = getElementArrayLength(compactSingleSelectList + listItems);
+        it('check compact single-selection functionality', async () => {
+            const itemCount = await getElementArrayLength(compactSingleSelectList + listItems);
 
-            checkSelections(compactSingleSelectList, itemCount);
+            await checkSelections(compactSingleSelectList, itemCount);
 
-            expect(getElementArrayLength(compactSingleSelectList + selectedItems)).toEqual(1);
+            await expect(await getElementArrayLength(compactSingleSelectList + selectedItems)).toEqual(1);
         });
     });
 
     describe('keyboard support example', () => {
-        it('should check keyboard navigation', () => {
-            const itemCount = getElementArrayLength(keyboardSupportList + listItems);
-            click(keyboardSupportList + button);
+        it('should check keyboard navigation', async () => {
+            const itemCount = await getElementArrayLength(keyboardSupportList + listItems);
+            await click(keyboardSupportList + button);
 
-            expect(
-                executeScriptBeforeTagAttr(keyboardSupportList + listItems, pickBorderStyleAttribute(), 0)
+            await expect(
+                await executeScriptBeforeTagAttr(keyboardSupportList + listItems, await pickBorderStyleAttribute(), 0)
             ).toContain('dotted');
 
             for (let i = 1; i < itemCount; i++) {
-                sendKeys('ArrowDown');
-                expect(
-                    executeScriptBeforeTagAttr(keyboardSupportList + listItems, pickBorderStyleAttribute(), i)
+                await sendKeys('ArrowDown');
+                await expect(
+                    await executeScriptBeforeTagAttr(
+                        keyboardSupportList + listItems,
+                        await pickBorderStyleAttribute(),
+                        i
+                    )
                 ).toContain('dotted');
             }
         });
     });
 
     describe('drag and drop examples', () => {
-        it('check drag and drop ability', () => {
-            scrollIntoView(dragAndDropList + listItems);
-            const originalFirstItemText = getText(dragAndDropList + listItems);
-            const startLocationX = Math.floor(getElementLocation(dragAndDropList + listItems, 0, 'x'));
-            const startLocationY = Math.floor(getElementLocation(dragAndDropList + listItems, 0, 'y'));
+        it('check drag and drop ability', async () => {
+            await scrollIntoView(dragAndDropList + listItems);
+            const originalFirstItemText = await getText(dragAndDropList + listItems);
+            const startLocationX = Math.floor(await getElementLocation(dragAndDropList + listItems, 0, 'x'));
+            const startLocationY = Math.floor(await getElementLocation(dragAndDropList + listItems, 0, 'y'));
 
-            if (!browserIsFirefox()) {
+            if (!(await browserIsFirefox())) {
                 // dragAndDrop not working correctly on Saucelabs for Edge/Chrome
                 return;
             }
 
-            clickAndDragElement(startLocationX + 5, startLocationY + 5, startLocationX + 5, startLocationY + 100);
+            await clickAndDragElement(startLocationX + 5, startLocationY + 5, startLocationX + 5, startLocationY + 100);
 
-            expect(getText(dragAndDropList + listItems)).not.toEqual(originalFirstItemText);
+            await expect(await getText(dragAndDropList + listItems)).not.toEqual(originalFirstItemText);
         });
     });
 
     describe('Infinite scroll examples', () => {
-        it('should check scroll loads more items', () => {
-            const initiallyLoadedItemCount = getElementArrayLength(infiniteList + listItems);
+        it('should check scroll loads more items', async () => {
+            const initiallyLoadedItemCount = await getElementArrayLength(infiniteList + listItems);
 
-            scrollIntoView(infiniteList + listItems);
-            click(infiniteList + listItems);
+            await scrollIntoView(infiniteList + listItems);
+            await click(infiniteList + listItems);
             do {
-                sendKeys(['ArrowDown']);
-            } while (doesItExist(busyIndicator) === false);
-            waitForNotDisplayed(busyIndicator);
+                await sendKeys(['ArrowDown']);
+            } while ((await doesItExist(busyIndicator)) === false);
+            await waitForNotDisplayed(busyIndicator);
 
-            expect(getElementArrayLength(infiniteList + listItems)).toBeGreaterThan(initiallyLoadedItemCount);
+            await expect(await getElementArrayLength(infiniteList + listItems)).toBeGreaterThan(
+                initiallyLoadedItemCount
+            );
         });
     });
 
     xdescribe('example block visual regression', () => {
-        it('should check examples visual regression', () => {
-            refreshPage();
-            waitForElDisplayed(standardListPage.title);
-            standardListPage.saveExampleBaselineScreenshot();
-            expect(standardListPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await refreshPage();
+            await waitForElDisplayed(standardListPage.title);
+            await standardListPage.saveExampleBaselineScreenshot();
+            await expect(await standardListPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 
     describe('orientation check', () => {
-        it('should check orientations', () => {
-            standardListPage.checkRtlSwitch();
+        it('should check orientations', async () => {
+            await standardListPage.checkRtlSwitch();
         });
     });
 
-    function checkSelections(exampleSelector: string, count: number): void {
+    async function checkSelections(exampleSelector: string, count: number): Promise<void> {
         for (let i = 0; i < count; i++) {
-            click(exampleSelector + listItems, i);
-            expect(getElementClass(exampleSelector + listItems, i)).toContain('is-selected');
+            await click(exampleSelector + listItems, i);
+            await expect(await getElementClass(exampleSelector + listItems, i)).toContain('is-selected');
         }
     }
 
-    function pickBorderStyleAttribute(): string {
-        return browserIsFirefox() ? 'border-bottom-style' : 'border';
+    async function pickBorderStyleAttribute(): Promise<string> {
+        return (await browserIsFirefox()) ? 'border-bottom-style' : 'border';
     }
 });

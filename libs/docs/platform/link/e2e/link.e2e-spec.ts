@@ -33,128 +33,128 @@ describe('Link component test suite', () => {
         truncatedLink
     } = linkPage;
 
-    beforeAll(() => {
-        linkPage.open();
+    beforeAll(async () => {
+        await linkPage.open();
     }, 1);
 
-    it('should check icon link', () => {
-        const iconLinkAltText = getElementAriaLabel(iconLink);
+    it('should check icon link', async () => {
+        const iconLinkAltText = await getElementAriaLabel(iconLink);
 
-        mouseHoverElement(iconLink);
-        checkLinkData(iconLink);
-        expect(iconLinkAltText).toBe(iconLinkAriaLabel);
-        expect(getElementTitle(iconLink)).toBe(defaultLink_alt_text);
-        expect(isElementClickable(iconLink)).toBe(true);
+        await mouseHoverElement(iconLink);
+        await checkLinkData(iconLink);
+        await expect(iconLinkAltText).toBe(iconLinkAriaLabel);
+        await expect(await getElementTitle(iconLink)).toBe(defaultLink_alt_text);
+        await expect(await isElementClickable(iconLink)).toBe(true);
     });
 
-    it('should check standard links', () => {
-        scrollIntoView(standardLinks);
+    it('should check standard links', async () => {
+        await scrollIntoView(standardLinks);
 
-        const arrL = getElementArrayLength(standardLinks);
+        const arrL = await getElementArrayLength(standardLinks);
         for (let i = 0; arrL > i; i++) {
-            scrollIntoView(standardLinks, i);
-            expect(getElementTitle(standardLinks, i)).toBe(standardLinksAltTextArray[i]);
-            checkLinkData(standardLinks, i);
-            expect(isElementClickable(standardLinks, i)).toBe(true);
+            await scrollIntoView(standardLinks, i);
+            await expect(await getElementTitle(standardLinks, i)).toBe(standardLinksAltTextArray[i]);
+            await checkLinkData(standardLinks, i);
+            await expect(await isElementClickable(standardLinks, i)).toBe(true);
         }
     });
 
-    it('should check emphasized link', () => {
-        const emphasizedLinkAltText = getElementTitle(emphasizedLink);
+    it('should check emphasized link', async () => {
+        const emphasizedLinkAltText = await getElementTitle(emphasizedLink);
 
-        scrollIntoView(emphasizedLink);
-        mouseHoverElement(emphasizedLink);
+        await scrollIntoView(emphasizedLink);
+        await mouseHoverElement(emphasizedLink);
 
-        expect(getElementClass(emphasizedLink)).toContain('emphasized');
-        checkLinkData(emphasizedLink);
-        expect(emphasizedLinkAltText).toBe(defaultLink_alt_text);
-        expect(isElementClickable(emphasizedLink)).toBe(true);
+        await expect(await getElementClass(emphasizedLink)).toContain('emphasized');
+        await checkLinkData(emphasizedLink);
+        await expect(emphasizedLinkAltText).toBe(defaultLink_alt_text);
+        await expect(await isElementClickable(emphasizedLink)).toBe(true);
     });
 
-    it('should check disabled link', () => {
-        const disabledLinkAltText = getElementTitle(disabledLink);
+    it('should check disabled link', async () => {
+        const disabledLinkAltText = await getElementTitle(disabledLink);
 
-        expect(getElementClass(disabledLink)).toContain('disabled');
-        checkDisabledLinkData(disabledLink);
-        expect(disabledLinkAltText).toEqual(defaultLink_alt_text);
-        expect(isElementClickable(disabledLink)).toBe(false);
+        await expect(await getElementClass(disabledLink)).toContain('disabled');
+        await checkDisabledLinkData(disabledLink);
+        await expect(disabledLinkAltText).toEqual(defaultLink_alt_text);
+        await expect(await isElementClickable(disabledLink)).toBe(false);
     });
 
-    it('should check disabled emphasized link', () => {
-        const disabledEmphasizedLinkAltText = getElementTitle(emphasizedDisabledLink);
+    it('should check disabled emphasized link', async () => {
+        const disabledEmphasizedLinkAltText = await getElementTitle(emphasizedDisabledLink);
 
-        expect(getElementClass(emphasizedDisabledLink)).toContain('disabled');
-        expect(getElementClass(emphasizedDisabledLink)).toContain('emphasized');
-        checkDisabledLinkData(emphasizedDisabledLink);
-        expect(disabledEmphasizedLinkAltText).toEqual(defaultLink_alt_text);
-        expect(isElementClickable(emphasizedDisabledLink)).toBe(false);
+        await expect(await getElementClass(emphasizedDisabledLink)).toContain('disabled');
+        await expect(await getElementClass(emphasizedDisabledLink)).toContain('emphasized');
+        await checkDisabledLinkData(emphasizedDisabledLink);
+        await expect(disabledEmphasizedLinkAltText).toEqual(defaultLink_alt_text);
+        await expect(await isElementClickable(emphasizedDisabledLink)).toBe(false);
     });
 
-    it('should check inverted link', () => {
-        const invertedLinkAltText = getElementTitle(invertedLink);
+    it('should check inverted link', async () => {
+        const invertedLinkAltText = await getElementTitle(invertedLink);
 
-        scrollIntoView(invertedLink);
-        mouseHoverElement(invertedLink);
-        expect(getElementClass(invertedLink)).toContain('inverted');
-        checkLinkData(invertedLink);
-        expect(invertedLinkAltText).toBe(defaultLink_alt_text);
-        expect(isElementClickable(invertedLink)).toBe(true);
+        await scrollIntoView(invertedLink);
+        await mouseHoverElement(invertedLink);
+        await expect(await getElementClass(invertedLink)).toContain('inverted');
+        await checkLinkData(invertedLink);
+        await expect(invertedLinkAltText).toBe(defaultLink_alt_text);
+        await expect(await isElementClickable(invertedLink)).toBe(true);
     });
 
-    it('should check truncated link', () => {
-        if (browserIsSafari()) {
+    it('should check truncated link', async () => {
+        if (await browserIsSafari()) {
             // mouse hover doesn't work
             return;
         }
-        const truncatedLinkAltText = getElementTitle(truncatedLink);
+        const truncatedLinkAltText = await getElementTitle(truncatedLink);
 
-        scrollIntoView(truncatedLink);
-        mouseHoverElement(truncatedLink);
-        expect(getElementClass(truncatedLink)).toContain('truncate');
-        checkLinkData(truncatedLink);
-        expect(truncatedLinkAltText).toBe(truncatedLink_alt_text);
-        expect(isElementClickable(truncatedLink)).toBe(true);
-        linkPage.open();
-        waitForElDisplayed(iconLink);
+        await scrollIntoView(truncatedLink);
+        await mouseHoverElement(truncatedLink);
+        await expect(await getElementClass(truncatedLink)).toContain('truncate');
+        await checkLinkData(truncatedLink);
+        await expect(truncatedLinkAltText).toBe(truncatedLink_alt_text);
+        await expect(await isElementClickable(truncatedLink)).toBe(true);
+        await linkPage.open();
+        await waitForElDisplayed(iconLink);
     });
 
-    it('should check link navigation to new page', () => {
-        if (browserIsSafari()) {
+    it('should check link navigation to new page', async () => {
+        if (await browserIsSafari()) {
             // unstable on Safari
             return;
         }
-        waitForElDisplayed(iconLink);
-        checkLinkTarget(iconLink, googleLink, 'input[type="text"]');
-        linkPage.open();
+        await waitForElDisplayed(iconLink);
+        await checkLinkTarget(iconLink, googleLink, 'input[type="text"]');
+        await linkPage.open();
     }, 2);
 
-    it('should check orientation', () => {
-        linkPage.checkRtlSwitch();
+    it('should check orientation', async () => {
+        await linkPage.checkRtlSwitch();
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            linkPage.saveExampleBaselineScreenshot();
-            expect(linkPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await linkPage.saveExampleBaselineScreenshot();
+            await expect(await linkPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
 
-function checkLinkData(element, index: number = 0): void {
-    expect(getAttributeByName(element, 'type', index)).toBe('text');
-    expect([null, '']).not.toContain(getElementTitle(element, index));
-    expect([null, '']).not.toContain(getAttributeByName(element, 'href', index));
+async function checkLinkData(element, index: number = 0): Promise<void> {
+    await expect(await getAttributeByName(element, 'type', index)).toBe('text');
+    await expect([null, '']).not.toContain(await getElementTitle(element, index));
+    await expect([null, '']).not.toContain(await getAttributeByName(element, 'href', index));
 }
 
-function checkLinkTarget(element, site: string, newPageElement): void {
-    click(element);
-    waitForElDisplayed(newPageElement);
-    const newUrl = getCurrentUrl();
-    expect(newUrl).toContain(site);
+async function checkLinkTarget(element, site: string, newPageElement): Promise<void> {
+    await click(element);
+    await waitForElDisplayed(newPageElement);
+    const newUrl = await getCurrentUrl();
+    await expect(newUrl).toContain(site);
 }
 
-function checkDisabledLinkData(element, index: number = 0): void {
-    expect([null, '']).not.toContain(getElementTitle(element, index));
-    expect([null, '']).not.toContain(getElementTitle(element, index));
-    expect(getAttributeByName(element, 'type', index)).toBe('text');
+async function checkDisabledLinkData(element, index: number = 0): Promise<void> {
+    await expect([null, '']).not.toContain(await getElementTitle(element, index));
+    await expect([null, '']).not.toContain(await getElementTitle(element, index));
+    await expect(await getAttributeByName(element, 'type', index)).toBe('text');
 }

@@ -2,6 +2,7 @@ import { InputGroupPo } from './input-group.po';
 import {
     clearValue,
     click,
+    focusElement,
     getElementArrayLength,
     getElementClass,
     getElementPlaceholder,
@@ -34,147 +35,150 @@ describe('Input group component test', () => {
         inputGroup
     } = inputGroupPage;
 
-    beforeAll(() => {
-        inputGroupPage.open();
+    beforeAll(async () => {
+        await inputGroupPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(inputGroupPage.root);
-        waitForElDisplayed(inputGroupPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(inputGroupPage.root);
+        await waitForElDisplayed(inputGroupPage.title);
     }, 2);
 
     describe('Check all placeholders', () => {
-        it('verify inputs have amount placeholder text', () => {
-            const inputLength = getElementArrayLength(inputFields);
-            for (let i = 1; i < inputLength - 10; i++) {
-                expect(getElementPlaceholder(inputFields, i)).toBe('Amount');
+        it('verify inputs have amount placeholder text', async () => {
+            const inputLength = await getElementArrayLength(inputFields);
+            for (let i = 2; i < inputLength - 11; i++) {
+                await expect(await getElementPlaceholder(inputFields, i)).toBe('Amount');
             }
         });
 
-        it('verify Input Group Search placeholder', () => {
-            expect(getElementPlaceholder(inputFields, 9)).toBe('Search');
-            expect(getElementPlaceholder(inputFields, 10)).toBe('Search');
+        it('verify Input Group Search placeholder', async () => {
+            await expect(await getElementPlaceholder(inputFields, 9)).toBe('Search');
+            await expect(await getElementPlaceholder(inputFields, 10)).toBe('Search');
         });
 
-        it('verify Input Group with States placeholder', () => {
-            const inputLength = getElementArrayLength(inputFields);
-            for (let i = 14; i < inputLength - 1; i++) {
-                expect(getElementPlaceholder(inputFields, i)).toBe('Placeholder');
+        it('verify Input Group with States placeholder', async () => {
+            const inputLength = await getElementArrayLength(inputFields);
+            for (let i = 15; i < inputLength - 1; i++) {
+                await expect(await getElementPlaceholder(inputFields, i)).toBe('Placeholder');
             }
         });
     });
 
     describe('Check Input Group Search Component Within Angular Reactive Forms', () => {
-        it('verify that input is disabled', () => {
-            expect(isEnabled(inputFields, 11)).toBe(false);
+        it('verify that input is disabled', async () => {
+            await expect(await isEnabled(inputFields, 11)).toBe(false);
         });
     });
 
     describe('Check all input fields accept values', () => {
-        it('verify eight input fields accept values', () => {
-            const inputLength = getElementArrayLength(inputFields);
+        it('verify eight input fields accept values', async () => {
+            const inputLength = await getElementArrayLength(inputFields);
             for (let i = 1; i < inputLength - 10; i++) {
-                scrollIntoView(inputFields, i);
-                setValue(inputFields, testText, i);
-                expect(getValue(inputFields, i)).toBe(testText);
+                await scrollIntoView(inputFields, i);
+                await setValue(inputFields, testText, i);
+                await expect(await getValue(inputFields, i)).toBe(testText);
             }
         });
 
-        it('verify Input Group Search accept values', () => {
-            scrollIntoView(inputFields, 9);
+        it('verify Input Group Search accept values', async () => {
+            await scrollIntoView(inputFields, 9);
 
-            setValue(inputFields, testText, 9);
-            setValue(inputFields, testText, 10);
+            await setValue(inputFields, testText, 9);
+            await setValue(inputFields, testText, 10);
 
-            expect(getText(inputGroupSearchText)).toBe(smallTestText);
-            expect(getText(inputGroupSearchText, 1)).toBe(smallTestText);
+            await expect(await getText(inputGroupSearchText)).toBe(smallTestText);
+            await expect(await getText(inputGroupSearchText, 1)).toBe(smallTestText);
         });
 
-        it('verify Input Group with complex templates and Input Group with States accept values', () => {
-            const inputLength = getElementArrayLength(inputFields);
+        it('verify Input Group with complex templates and Input Group with States accept values', async () => {
+            const inputLength = await getElementArrayLength(inputFields);
             for (let i = 12; i < inputLength - 1; i++) {
-                scrollIntoView(inputFields, i);
-                setValue(inputFields, testText, i);
-                expect(getValue(inputFields, i)).toBe(testText);
+                await scrollIntoView(inputFields, i);
+                await setValue(inputFields, testText, i);
+                await expect(await getValue(inputFields, i)).toBe(testText);
             }
         });
     });
 
-    it('verify in examples all buttons are clickable', () => {
-        const buttonLength = getElementArrayLength(inputButtons);
+    it('verify in examples all buttons are clickable', async () => {
+        const buttonLength = await getElementArrayLength(inputButtons);
         for (let i = 0; i < buttonLength; i++) {
-            expect(isElementClickable(inputButtons, i)).toBe(true, `button with index ${i} not clickable`);
+            await expect(await isElementClickable(inputButtons, i)).toBe(true, `button with index ${i} not clickable`);
         }
     });
 
-    it('compact be smaller than the default', () => {
-        const defaultHeight = getElementSize(inputFields, 1);
-        const compactHeight = getElementSize(inputFields, 7);
+    it('compact be smaller than the default', async () => {
+        const defaultHeight = await getElementSize(inputFields, 1);
+        const compactHeight = await getElementSize(inputFields, 7);
 
-        expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
+        await expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
     });
 
-    it('verify that icons in Icon add example are present', () => {
-        expect(isElementDisplayed(iconExample + icon)).toBe(true);
+    it('verify that icons in Icon add example are present', async () => {
+        await expect(await isElementDisplayed(iconExample + icon)).toBe(true);
     });
 
-    it('should check input group states', () => {
-        expect(getElementClass(inputGroup, 14)).toContain('information');
-        expect(getElementClass(inputGroup, 15)).toContain('success');
-        expect(getElementClass(inputGroup, 16)).toContain('warning');
-        expect(getElementClass(inputGroup, 17)).toContain('error');
+    it('should check input group states', async () => {
+        await expect(await getElementClass(inputGroup, 15)).toContain('information');
+        await expect(await getElementClass(inputGroup, 16)).toContain('success');
+        await expect(await getElementClass(inputGroup, 17)).toContain('warning');
+        await expect(await getElementClass(inputGroup, 18)).toContain('error');
     });
 
     describe('Check playground', () => {
-        it('inline be smaller than the default', () => {
-            scrollIntoView(playgroundCheckbox);
-            const defaultWidth = getElementSize(inputFields, 18);
-            click(playgroundCheckbox);
-            const inlineWidth = getElementSize(inputFields, 18);
+        it('inline be smaller than the default', async () => {
+            await scrollIntoView(playgroundCheckbox);
+            const defaultWidth = await getElementSize(inputFields, 19);
+            await click(playgroundCheckbox);
+            const inlineWidth = await getElementSize(inputFields, 19);
 
-            expect(defaultWidth.width).toBeGreaterThan(inlineWidth.width);
+            await expect(defaultWidth.width).toBeGreaterThan(inlineWidth.width);
         });
 
-        it('verify placeholder', () => {
-            scrollIntoView(inputFields, 18);
-            setValue(playgroundInputField, 'Search');
-            clearValue(inputFields, 18);
-            expect(getElementPlaceholder(inputFields, 18)).toBe('Search');
+        it('verify placeholder', async () => {
+            await scrollIntoView(inputFields, 19);
+            await setValue(playgroundInputField, 'Search');
+            await clearValue(inputFields, 19);
+            await expect(await getElementPlaceholder(inputFields, 19)).toBe('Search');
         });
 
-        it('verify playground input accept values by ngModel and addOnText', () => {
-            scrollIntoView(inputFields, 18);
-            setValue(playgroundInputField, testText, 1);
-            setValue(playgroundInputField, '$', 2);
+        it('verify playground input accept values by ngModel and addOnText', async () => {
+            await scrollIntoView(inputFields, 19);
+            await setValue(playgroundInputField, testText, 1);
+            await setValue(playgroundInputField, '$', 2);
 
-            expect(getValue(inputFields, 18)).toBe(testText);
-            expect(getText(rightTextAddon)).toContain('$');
+            await expect(await getValue(inputFields, 19)).toBe(testText);
+            await expect(await getText(rightTextAddon)).toContain('$');
         });
 
-        it('verify input button', () => {
-            scrollIntoView(inputFields, 18);
-            click(playgroundCheckbox, 1);
-            expect(isElementClickable(playgroundInputButton)).toBe(true, 'playground button is not clickable');
+        it('verify input button', async () => {
+            await scrollIntoView(inputFields, 18);
+            await click(playgroundCheckbox, 1);
+            await expect(await isElementClickable(playgroundInputButton)).toBe(
+                true,
+                'playground button is not clickable'
+            );
         });
 
-        it('verify disable input', () => {
-            scrollIntoView(playgroundCheckbox, 2);
-            click(playgroundCheckbox, 2);
-            expect(isEnabled(inputFields, 18)).toBe(false, 'input field is active');
+        it('verify disable input', async () => {
+            await scrollIntoView(playgroundCheckbox, 2);
+            await click(playgroundCheckbox, 2);
+            await expect(await isEnabled(inputFields, 19)).toBe(false, 'input field is active');
         });
     });
 
     describe('Check orientation', () => {
-        it('should check RTL and LTR orientation', () => {
-            inputGroupPage.checkRtlSwitch();
+        it('should check RTL and LTR orientation', async () => {
+            await inputGroupPage.checkRtlSwitch();
         });
     });
 
     xdescribe('Should check visual regression', () => {
-        it('should check visual regression for all examples', () => {
-            inputGroupPage.saveExampleBaselineScreenshot();
-            expect(inputGroupPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check visual regression for all examples', async () => {
+            await inputGroupPage.saveExampleBaselineScreenshot();
+            await expect(await inputGroupPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

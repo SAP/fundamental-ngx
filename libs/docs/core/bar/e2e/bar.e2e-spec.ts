@@ -17,79 +17,79 @@ describe('Bar test suite:', () => {
     const { arrowButtons, leftSections, saveCancelButtons, pictures, subMiddleSection, rightSections, middleSections } =
         barPage;
 
-    beforeAll(() => {
-        barPage.open();
+    beforeAll(async () => {
+        await barPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(barPage.root);
-        waitForElDisplayed(barPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(barPage.root);
+        await waitForElDisplayed(barPage.title);
     }, 1);
 
-    it('Verify arrow buttons are clickable', () => {
-        const buttonsLength = getElementArrayLength(arrowButtons);
+    it('Verify arrow buttons are clickable', async () => {
+        const buttonsLength = await getElementArrayLength(arrowButtons);
         for (let i = 0; i < buttonsLength; i++) {
-            scrollIntoView(arrowButtons, i);
-            expect(isElementClickable(arrowButtons, i)).toBe(true);
+            await scrollIntoView(arrowButtons, i);
+            await expect(await isElementClickable(arrowButtons, i)).toBe(true);
         }
     });
 
-    it('Verify bar contains 3 header sections', () => {
-        const leftBarSectionLength = getElementArrayLength(leftSections);
-        const checkRightSections = getElementArrayLength(rightSections);
-        const middleBarSectionLength = getElementArrayLength(middleSections);
+    it('Verify bar contains 3 header sections', async () => {
+        const leftBarSectionLength = await getElementArrayLength(leftSections);
+        const checkRightSections = await getElementArrayLength(rightSections);
+        const middleBarSectionLength = await getElementArrayLength(middleSections);
 
         for (let i = 0; i < leftBarSectionLength; i++) {
-            expect(isElementDisplayed(leftSections, i)).toBe(true);
+            await expect(await isElementDisplayed(leftSections, i)).toBe(true);
         }
 
         for (let i = 0; i < middleBarSectionLength; i++) {
-            expect(isElementDisplayed(middleSections, i)).toBe(true);
+            await expect(await isElementDisplayed(middleSections, i)).toBe(true);
         }
 
         for (let i = 0; i < checkRightSections; i++) {
-            expect(isElementDisplayed(rightSections, i)).toBe(true);
+            await expect(await isElementDisplayed(rightSections, i)).toBe(true);
         }
     });
 
-    it('Verify images is displayed for right sections', () => {
-        const picturesLength = getElementArrayLength(pictures);
+    it('Verify images is displayed for right sections', async () => {
+        const picturesLength = await getElementArrayLength(pictures);
         for (let i = 0; i < picturesLength; i++) {
-            expect(isElementDisplayed(pictures, i)).toBe(true);
+            await expect(await isElementDisplayed(pictures, i)).toBe(true);
         }
     });
 
-    it('Verify bar contain sub middle section', () => {
-        expect(isElementDisplayed(subMiddleSection)).toBe(true);
+    it('Verify bar contain sub middle section', async () => {
+        await expect(await isElementDisplayed(subMiddleSection)).toBe(true);
     });
 
-    it('Verify save and cancel buttons are clickable', () => {
-        const saveCancelButtonsLength = getElementArrayLength(saveCancelButtons);
+    it('Verify save and cancel buttons are clickable', async () => {
+        const saveCancelButtonsLength = await getElementArrayLength(saveCancelButtons);
         for (let i = 0; i < saveCancelButtonsLength; i++) {
-            scrollIntoView(saveCancelButtons, i);
-            expect(isElementClickable(saveCancelButtons, i)).toBe(true);
+            await scrollIntoView(saveCancelButtons, i);
+            await expect(await isElementClickable(saveCancelButtons, i)).toBe(true);
         }
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            const exampleCount = getElementArrayLength(barPage.exampleAreaContainersArr);
+        it('should check examples visual regression', async () => {
+            const exampleCount = await getElementArrayLength(barPage.exampleAreaContainersArr);
             for (let i = 0; i < exampleCount; i++) {
                 // not working for floating footer example (index 5)
                 if (i !== 5) {
-                    scrollIntoView(barPage.exampleAreaContainersArr, i);
-                    saveElementScreenshot(
+                    await scrollIntoView(barPage.exampleAreaContainersArr, i);
+                    await saveElementScreenshot(
                         barPage.exampleAreaContainersArr,
-                        `bar-example-${i}-core-${getImageTagBrowserPlatform()}`,
-                        barPage.getScreenshotFolder(),
+                        `bar-example-${i}-core-${await getImageTagBrowserPlatform()}`,
+                        await barPage.getScreenshotFolder(),
                         i
                     );
-                    expect(
-                        checkElementScreenshot(
+                    await expect(
+                        await checkElementScreenshot(
                             barPage.exampleAreaContainersArr,
-                            `bar-example-${i}-core-${getImageTagBrowserPlatform()}`,
-                            barPage.getScreenshotFolder(),
+                            `bar-example-${i}-core-${await getImageTagBrowserPlatform()}`,
+                            await barPage.getScreenshotFolder(),
                             i
                         )
                     ).toBeLessThan(5);

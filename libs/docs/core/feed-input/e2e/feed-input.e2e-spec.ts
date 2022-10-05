@@ -25,126 +25,126 @@ describe('Verify Feed Input component', () => {
     const feedInputPage = new FeedInputPo();
     const { feedInputTextArea, feedInputAvatar, feedInputButton, feedInputNoAvatar } = new FeedInputPo();
 
-    beforeAll(() => {
-        feedInputPage.open();
+    beforeAll(async () => {
+        await feedInputPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(feedInputPage.root);
-        waitForElDisplayed(feedInputPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(feedInputPage.root);
+        await waitForElDisplayed(feedInputPage.title);
     }, 1);
 
-    it('should have correct placeholder assigned', () => {
-        const feedInputLength = getElementArrayLength(feedInputTextArea);
+    it('should have correct placeholder assigned', async () => {
+        const feedInputLength = await getElementArrayLength(feedInputTextArea);
         for (let i = 0; i < feedInputLength; i++) {
-            expect(getElementPlaceholder(feedInputTextArea, i)).toEqual(default_placeholder);
+            await expect(await getElementPlaceholder(feedInputTextArea, i)).toEqual(default_placeholder);
         }
     });
 
-    it('should have example with avatar image assigned', () => {
-        const inputAvatarLength = getElementArrayLength(feedInputAvatar);
+    it('should have example with avatar image assigned', async () => {
+        const inputAvatarLength = await getElementArrayLength(feedInputAvatar);
         for (let i = 0; i < inputAvatarLength; i++) {
             if (i === 1) {
                 continue;
             }
-            waitForPresent(feedInputAvatar, i);
-            expect(getAttributeByName(feedInputAvatar, 'image', i)).not.toBe('');
-            expect(getAttributeByName(feedInputAvatar, 'image', i)).not.toBeNull();
+            await waitForPresent(feedInputAvatar, i);
+            await expect(await getAttributeByName(feedInputAvatar, 'image', i)).not.toBe('');
+            await expect(await getAttributeByName(feedInputAvatar, 'image', i)).not.toBeNull();
         }
     });
 
-    it('should have example with default avatar assigned', () => {
-        expect(getAttributeByName(feedInputAvatar, 'glyph', 1)).toContain(default_avatar);
+    it('should have example with default avatar assigned', async () => {
+        await expect(await getAttributeByName(feedInputAvatar, 'glyph', 1)).toContain(default_avatar);
     });
 
-    it('should have example with no avatar', () => {
-        waitForElDisplayed(feedInputButton, 2);
-        scrollIntoView(feedInputButton, 2);
-        expect(doesItExist(feedInputNoAvatar)).toBe(false);
+    it('should have example with no avatar', async () => {
+        await waitForElDisplayed(feedInputButton, 2);
+        await scrollIntoView(feedInputButton, 2);
+        await expect(await doesItExist(feedInputNoAvatar)).toBe(false);
     });
 
-    it('should have Send button assigned and to be disabled if no value set in the input', () => {
-        const inputButtonLength = getElementArrayLength(feedInputButton);
+    it('should have Send button assigned and to be disabled if no value set in the input', async () => {
+        const inputButtonLength = await getElementArrayLength(feedInputButton);
         for (let i = 0; inputButtonLength > i; i++) {
-            waitForPresent(feedInputButton, i);
-            scrollIntoView(feedInputButton, i);
-            expect(elementDisplayed(feedInputButton, i)).toBe(true);
-            expect(getAttributeByName(feedInputButton, 'aria-disabled', i)).toBe('true');
+            await waitForPresent(feedInputButton, i);
+            await scrollIntoView(feedInputButton, i);
+            await expect(await elementDisplayed(feedInputButton, i)).toBe(true);
+            await expect(await getAttributeByName(feedInputButton, 'aria-disabled', i)).toBe('true');
         }
     });
 
-    it('should have Send button enabled if value is set in the input', () => {
-        const inputButtonLength = getElementArrayLength(feedInputButton);
+    it('should have Send button enabled if value is set in the input', async () => {
+        const inputButtonLength = await getElementArrayLength(feedInputButton);
         for (let i = 0; i < inputButtonLength; i++) {
             if (i === 3) {
                 continue;
             }
-            waitForPresent(feedInputTextArea, i);
-            scrollIntoView(feedInputTextArea, i);
-            setValue(feedInputTextArea, four_lines_text, i);
-            scrollIntoView(feedInputButton, i);
-            expect(isEnabled(feedInputButton, i)).toBe(true);
+            await waitForPresent(feedInputTextArea, i);
+            await scrollIntoView(feedInputTextArea, i);
+            await setValue(feedInputTextArea, four_lines_text, i);
+            await scrollIntoView(feedInputButton, i);
+            await expect(await isEnabled(feedInputButton, i)).toBe(true);
         }
     });
 
     it(
         'should grow if multiple row text is entered to the input ' +
             'stop growing after max Height option value was reached',
-        () => {
-            waitForPresent(feedInputTextArea);
-            scrollIntoView(feedInputTextArea);
-            const inputButtonLength = getElementArrayLength(feedInputButton);
+        async () => {
+            await waitForPresent(feedInputTextArea);
+            await scrollIntoView(feedInputTextArea);
+            const inputButtonLength = await getElementArrayLength(feedInputButton);
             for (let i = 0; i < inputButtonLength - 1; i++) {
                 if (i === 3) {
                     continue;
                 }
-                clearValue(feedInputTextArea);
-                const feedInputSize1 = getElementSize(feedInputTextArea, i, 'height');
-                setValue(feedInputTextArea, eight_lines_text, i);
-                const feedInputSize2 = getElementSize(feedInputTextArea, i, 'height');
-                addValue(feedInputTextArea, eight_lines_text, i);
-                const feedInputSize3 = getElementSize(feedInputTextArea, i, 'height');
-                expect(feedInputSize1).toBeLessThan(feedInputSize2);
-                expect(feedInputSize2).toBeLessThan(feedInputSize3);
-                expect([183, 188, 189, 184]).toContain(feedInputSize2);
+                await clearValue(feedInputTextArea);
+                const feedInputSize1 = await getElementSize(feedInputTextArea, i);
+                await setValue(feedInputTextArea, eight_lines_text, i);
+                const feedInputSize2 = await getElementSize(feedInputTextArea, i);
+                await addValue(feedInputTextArea, eight_lines_text, i);
+                const feedInputSize3 = await getElementSize(feedInputTextArea, i);
+                await expect(feedInputSize1.height).toBeLessThan(feedInputSize2.height);
+                await expect(feedInputSize2.height).toBeLessThan(feedInputSize3.height);
+                await expect([183, 188, 189, 184]).toContain(feedInputSize2.height);
             }
         }
     );
 
-    it('should have focus stated assigned to elements', () => {
-        const arrLength = getElementArrayLength(feedInputButton);
+    it('should have focus stated assigned to elements', async () => {
+        const arrLength = await getElementArrayLength(feedInputButton);
         for (let i = 0; arrLength > i; i++) {
             if (i === 3) {
                 continue;
             }
-            waitForPresent(feedInputTextArea, i);
-            scrollIntoView(feedInputTextArea, i);
-            setValue(feedInputTextArea, four_lines_text, i);
-            const inputFocusStyle = getCSSPropertyByName(feedInputTextArea, 'outline-style', i).value;
-            sendKeys('Tab');
-            const sendButtonFocusStyle = getCSSPropertyByName(feedInputButton, 'outline-style', i).value;
+            await waitForPresent(feedInputTextArea, i);
+            await scrollIntoView(feedInputTextArea, i);
+            await setValue(feedInputTextArea, four_lines_text, i);
+            const inputFocusStyle = (await getCSSPropertyByName(feedInputTextArea, 'outline-style', i)).value;
+            await sendKeys('Tab');
+            const sendButtonFocusStyle = (await getCSSPropertyByName(feedInputButton, 'outline-style', i)).value;
 
-            expect(emptyValuesArr).not.toContain(sendButtonFocusStyle);
-            expect(emptyValuesArr).not.toContain(inputFocusStyle);
+            await expect(emptyValuesArr).not.toContain(sendButtonFocusStyle);
+            await expect(emptyValuesArr).not.toContain(inputFocusStyle);
         }
     });
 
-    it('should avatar and Send button has correct tooltip', () => {
-        const inputButtonLength = getElementArrayLength(feedInputButton);
+    it('should avatar and Send button has correct tooltip', async () => {
+        const inputButtonLength = await getElementArrayLength(feedInputButton);
         for (let i = 0; i < inputButtonLength; i++) {
-            expect(getElementTitle(feedInputButton, i)).toEqual(send_button_tooltip);
+            await expect(await getElementTitle(feedInputButton, i)).toEqual(send_button_tooltip);
         }
     });
 
-    it('should check RTL', () => {
-        feedInputPage.checkRtlSwitch();
+    it('should check RTL', async () => {
+        await feedInputPage.checkRtlSwitch();
     });
 
     xdescribe('Should check visual regression', () => {
-        it('should check examples visual regression', () => {
-            feedInputPage.saveExampleBaselineScreenshot();
-            expect(feedInputPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await feedInputPage.saveExampleBaselineScreenshot();
+            await expect(await feedInputPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

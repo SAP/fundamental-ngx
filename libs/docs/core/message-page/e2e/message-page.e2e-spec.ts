@@ -15,60 +15,60 @@ describe('Message Page test suite', () => {
     const messagePage = new MessagePagePo();
     const { examples, icons, content, contentTitle, contentSubTitle, contentButton, contentLink } = messagePage;
 
-    beforeAll(() => {
-        messagePage.open();
+    beforeAll(async () => {
+        await messagePage.open();
     }, 1);
 
-    it('should check icons are present', () => {
-        const exampleCount = getElementArrayLength(examples);
+    it('should check icons are present', async () => {
+        const exampleCount = await getElementArrayLength(examples);
         const noIconExample = 6;
 
         for (let i = 0; i < exampleCount; i++) {
             if (i === noIconExample) {
                 continue;
             }
-            scrollIntoView(icons, i);
+            await scrollIntoView(icons, i);
 
-            expect(isElementDisplayed(icons, i)).toBe(true, `icon for example ${i} is not displayed`);
+            await expect(await isElementDisplayed(icons, i)).toBe(true, `icon for example ${i} is not displayed`);
         }
     });
 
-    it('should check content is displayed', () => {
-        const exampleCount = getElementArrayLength(examples);
+    it('should check content is displayed', async () => {
+        const exampleCount = await getElementArrayLength(examples);
 
         for (let i = 0; i < exampleCount; i++) {
-            expect(isElementDisplayed(content, i)).toBe(true, `content for example ${i} not displayed`);
+            await expect(await isElementDisplayed(content, i)).toBe(true, `content for example ${i} not displayed`);
         }
     });
 
-    it('should check content title text', () => {
-        const titleCount = getElementArrayLength(contentTitle);
+    it('should check content title text', async () => {
+        const titleCount = await getElementArrayLength(contentTitle);
 
         for (let i = 0; i < titleCount; i++) {
-            expect(getText(contentTitle, i)).toEqual(titleTextArr[i]);
+            await expect(await getText(contentTitle, i)).toEqual(titleTextArr[i]);
         }
     });
 
-    it('should check content subtitle text', () => {
-        const subtitleCount = getElementArrayLength(contentSubTitle);
+    it('should check content subtitle text', async () => {
+        const subtitleCount = await getElementArrayLength(contentSubTitle);
 
         for (let i = 0; i < subtitleCount; i++) {
-            expect(getText(contentSubTitle, i)).toEqual(subtitleTextArr[i]);
+            await expect(await getText(contentSubTitle, i)).toEqual(subtitleTextArr[i]);
         }
     });
 
-    it('should check content buttons are clickable', () => {
-        checkElArrIsClickable(contentButton);
+    it('should check content buttons are clickable', async () => {
+        await checkElArrIsClickable(contentButton);
     });
 
-    it('should check home page link', () => {
-        click(contentLink);
-        waitForElDisplayed(messagePage.root);
+    it('should check home page link', async () => {
+        await click(contentLink);
+        await waitForElDisplayed(messagePage.root);
 
-        expect(getCurrentUrl()).toContain('/home');
+        await expect(await getCurrentUrl()).toContain('/home');
     });
 
-    it('should check RTL mode', () => {
-        messagePage.checkRtlSwitch();
+    it('should check RTL mode', async () => {
+        await messagePage.checkRtlSwitch();
     });
 });

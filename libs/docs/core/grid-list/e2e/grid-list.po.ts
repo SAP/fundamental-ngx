@@ -41,23 +41,23 @@ export class GridListPo extends CoreBaseComponentPo {
     gridListRadioButton = '.fd-grid-list__item-toolbar .fd-grid-list__radio-label';
     gridListCheckbox = '.fd-grid-list__checkbox-label';
 
-    gridListItemsByMode = (name: string): string => ` [selectionmode="${name}"] fd-grid-list-item`;
+    gridListItemsByMode = async (name: string): Promise<string> => ` [selectionmode="${name}"] fd-grid-list-item`;
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'grid-list'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'grid-list'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'grid-list'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'grid-list'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 }

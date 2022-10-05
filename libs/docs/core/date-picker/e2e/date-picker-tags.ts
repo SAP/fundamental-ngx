@@ -23,6 +23,8 @@ export function getCurrentMonth(withZero: boolean): string {
     if (!withZero) {
         return (date.getMonth() + 1).toString();
     }
+
+    return '';
 }
 
 export function getNextDay(withZero: boolean): string {
@@ -38,12 +40,16 @@ export function getNextDay(withZero: boolean): string {
     if (!withZero) {
         return (date.getDate() + 1).toString();
     }
+
+    return '';
 }
 
-export function getCurrentItemIndex(): number {
-    for (let i = 0; i < getElementArrayLength(altCalendarItem); i++) {
-        if (getElementClass(altCalendarItem, i).includes('is-active')) {
+export async function getCurrentItemIndex(): Promise<number> {
+    for (let i = 0; i < (await getElementArrayLength(altCalendarItem)); i++) {
+        if ((await getElementClass(altCalendarItem, i)).includes('is-active')) {
             return i;
         }
     }
+
+    return -1;
 }

@@ -52,96 +52,99 @@ describe('Time component test', () => {
         formExample3Second
     } = timePage;
 
-    beforeAll(() => {
-        timePage.open();
+    beforeAll(async () => {
+        await timePage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(timePage.root);
-        waitForElDisplayed(timePage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(timePage.root);
+        await waitForElDisplayed(timePage.title);
     }, 2);
 
-    it('Should check that change time by arrows works correct', () => {
+    it('Should check that change time by arrows works correct', async () => {
         for (let i = 0; i < sections.length; i++) {
             if (sections[i] !== noSpinnersExample) {
-                checkClockMoving(sections[i], 'arrowClick');
+                await checkClockMoving(sections[i], 'arrowClick');
             }
         }
     });
 
-    it('Should check that time changing by clicking on another digit', () => {
+    it('Should check that time changing by clicking on another digit', async () => {
         for (let i = 0; i < sections.length; i++) {
-            checkClockMoving(sections[i], 'buttonClick');
+            await checkClockMoving(sections[i], 'buttonClick');
         }
     });
 
-    it('Should check if the button Set Hours to 11 works correctly', () => {
-        click(set11HoursBtn);
-        expect(getText(programmaticallyExample + currentHour).trim()).toEqual('11', 'Current hour is not 11');
+    it('Should check if the button Set Hours to 11 works correctly', async () => {
+        await click(set11HoursBtn);
+        await expect((await getText(programmaticallyExample + currentHour)).trim()).toEqual(
+            '11',
+            'Current hour is not 11'
+        );
     });
 
-    it('should check that Enabled time to equal chosen time', () => {
-        const chosenHourValue = getText(formExample1Hour).trim();
-        click(formExample1Hour);
+    it('should check that Enabled time to equal chosen time', async () => {
+        const chosenHourValue = (await getText(formExample1Hour)).trim();
+        await click(formExample1Hour);
 
-        click(formExample + minutesColumn);
-        const chosenMinuteValue = getText(formExample2Minute).trim();
-        click(formExample2Minute);
+        await click(formExample + minutesColumn);
+        const chosenMinuteValue = (await getText(formExample2Minute)).trim();
+        await click(formExample2Minute);
 
-        click(formExample + secondsColumn);
-        const chosenSecondValue = getText(formExample3Second).trim();
-        click(formExample3Second);
+        await click(formExample + secondsColumn);
+        const chosenSecondValue = (await getText(formExample3Second)).trim();
+        await click(formExample3Second);
 
-        expect(getText(enableTimeRow).trim()).toEqual(
+        await expect((await getText(enableTimeRow)).trim()).toEqual(
             chosenHourValue + 'h ' + chosenMinuteValue + 'm ' + chosenSecondValue + 's',
             'Current value is not equal chosen value'
         );
     });
 
-    it('should check that no-spinner example does not have up/down arrows', () => {
-        expect(doesItExist(noSpinnersExample + hoursColumn + UpArrow)).toBe(false, 'Up Arrow exists');
-        expect(doesItExist(noSpinnersExample + hoursColumn + downArrow)).toBe(false, 'Down arrow exists');
-        click(noSpinnersExample + minutesColumn);
-        expect(doesItExist(noSpinnersExample + minutesColumn + UpArrow)).toBe(false, 'Up Arrow exists');
-        expect(doesItExist(noSpinnersExample + minutesColumn + downArrow)).toBe(false, 'Down arrow exists');
-        click(noSpinnersExample + secondsColumn);
-        expect(doesItExist(noSpinnersExample + secondsColumn + UpArrow)).toBe(false, 'Up Arrow exists');
-        expect(doesItExist(noSpinnersExample + secondsColumn + downArrow)).toBe(false, 'Down arrow exists');
+    it('should check that no-spinner example does not have up/down arrows', async () => {
+        await expect(await doesItExist(noSpinnersExample + hoursColumn + UpArrow)).toBe(false, 'Up Arrow exists');
+        await expect(await doesItExist(noSpinnersExample + hoursColumn + downArrow)).toBe(false, 'Down arrow exists');
+        await click(noSpinnersExample + minutesColumn);
+        await expect(await doesItExist(noSpinnersExample + minutesColumn + UpArrow)).toBe(false, 'Up Arrow exists');
+        await expect(await doesItExist(noSpinnersExample + minutesColumn + downArrow)).toBe(false, 'Down arrow exists');
+        await click(noSpinnersExample + secondsColumn);
+        await expect(await doesItExist(noSpinnersExample + secondsColumn + UpArrow)).toBe(false, 'Up Arrow exists');
+        await expect(await doesItExist(noSpinnersExample + secondsColumn + downArrow)).toBe(false, 'Down arrow exists');
     });
 
-    it('Should check that click and drag works', () => {
+    it('Should check that click and drag works', async () => {
         // method not working on FF
-        if (browserIsFirefox()) {
+        if (await browserIsFirefox()) {
             return;
         }
         for (let i = 0; i < sections.length; i++) {
-            checkScroll(sections[i], 'down');
-            refreshPage();
-            checkScroll(sections[i], 'up');
+            await checkScroll(sections[i], 'down');
+            await refreshPage();
+            await checkScroll(sections[i], 'up');
         }
     });
 
-    it('should check orientation', () => {
-        timePage.checkRtlSwitch();
+    it('should check orientation', async () => {
+        await timePage.checkRtlSwitch();
     });
 
     xdescribe('Visual regression', () => {
-        it('should check examples except dinamyc changes example', () => {
-            const actionSheetCount = getElementArrayLength(exampleAreaContainersArr);
+        it('should check examples except dinamyc changes example', async () => {
+            const actionSheetCount = await getElementArrayLength(exampleAreaContainersArr);
             for (let i = 0; actionSheetCount > i; i++) {
                 if (i !== 3) {
-                    scrollIntoView(exampleAreaContainersArr, i);
-                    saveElementScreenshot(
+                    await scrollIntoView(exampleAreaContainersArr, i);
+                    await saveElementScreenshot(
                         exampleAreaContainersArr,
-                        `time-example-${i}-core-${getImageTagBrowserPlatform()}`,
-                        timePage.getScreenshotFolder()
+                        `time-example-${i}-core-${await getImageTagBrowserPlatform()}`,
+                        await timePage.getScreenshotFolder()
                     );
-                    expect(
-                        checkElementScreenshot(
+                    await expect(
+                        await checkElementScreenshot(
                             exampleAreaContainersArr,
-                            `time-example-${i}-core-${getImageTagBrowserPlatform()}`,
-                            timePage.getScreenshotFolder()
+                            `time-example-${i}-core-${await getImageTagBrowserPlatform()}`,
+                            await timePage.getScreenshotFolder()
                         )
                     ).toBeLessThan(5);
                 }
@@ -149,58 +152,61 @@ describe('Time component test', () => {
         });
     });
 
-    function checkClockMoving(section: string, action: 'arrowClick' | 'buttonClick'): void {
-        const nextHourValue = getNextElementText(section + currentHour);
+    async function checkClockMoving(section: string, action: 'arrowClick' | 'buttonClick'): Promise<void> {
+        const nextHourValue = await getNextElementText(section + currentHour);
         if (action === 'arrowClick') {
-            click(section + downArrow);
+            await click(section + downArrow);
         }
         if (action === 'buttonClick') {
-            clickNextElement(section + currentHour);
+            await clickNextElement(section + currentHour);
         }
-        expect(getText(section + currentHour)).toEqual(nextHourValue, 'Current hour is not equal chosen value');
+        await expect(await getText(section + currentHour)).toEqual(
+            nextHourValue,
+            'Current hour is not equal chosen value'
+        );
 
         if (section !== onlyHoursExample) {
-            click(section + minutesColumn);
-            const previousMinuteValue = getPreviousElementText(section + currentMinute);
+            await click(section + minutesColumn);
+            const previousMinuteValue = await getPreviousElementText(section + currentMinute);
             if (action === 'arrowClick') {
-                click(section + UpArrow);
+                await click(section + UpArrow);
             }
             if (action === 'buttonClick') {
-                clickPreviousElement(section + currentMinute);
+                await clickPreviousElement(section + currentMinute);
             }
-            expect(getText(section + currentMinute)).toEqual(
+            await expect(await getText(section + currentMinute)).toEqual(
                 previousMinuteValue,
                 'Current hour is not equal chosen value'
             );
         }
 
         if (section !== withoutSecondsExample && section !== onlyHoursExample) {
-            click(section + secondsColumn);
-            const previousSecondValue = getPreviousElementText(section + currentSec);
+            await click(section + secondsColumn);
+            const previousSecondValue = await getPreviousElementText(section + currentSec);
             if (action === 'arrowClick') {
-                click(section + UpArrow);
+                await click(section + UpArrow);
             }
             if (action === 'buttonClick') {
-                clickPreviousElement(section + currentSec);
+                await clickPreviousElement(section + currentSec);
             }
-            expect(getText(section + currentSec)).toEqual(
+            await expect(await getText(section + currentSec)).toEqual(
                 previousSecondValue,
                 'Current hour is not equal chosen value'
             );
         }
     }
 
-    function checkScroll(section: string, direction: 'up' | 'down'): void {
+    async function checkScroll(section: string, direction: 'up' | 'down'): Promise<void> {
         let scrollStep, scrollToHour, scrollToMinute, scrollToSec;
 
         if (direction === 'up') {
-            if (getElementClass(section + clockArea) === 'fd-time fd-time--compact') {
+            if ((await getElementClass(section + clockArea)) === 'fd-time fd-time--compact') {
                 scrollStep = 50;
             } else {
                 scrollStep = 100;
             }
         } else if (direction === 'down') {
-            if (getElementClass(section + clockArea) === 'fd-time fd-time--compact') {
+            if ((await getElementClass(section + clockArea)) === 'fd-time fd-time--compact') {
                 scrollStep = -50;
             } else {
                 scrollStep = -100;
@@ -208,41 +214,41 @@ describe('Time component test', () => {
         }
 
         if (direction === 'up') {
-            scrollToHour = getText(section + upperhour);
+            scrollToHour = await getText(section + upperhour);
         }
         if (direction === 'down') {
-            scrollToHour = getText(section + lowerHour);
+            scrollToHour = await getText(section + lowerHour);
         }
-        clickAndMoveElement(section + hoursColumn, 0, scrollStep);
-        expect(getText(section + currentHour)).toEqual(
+        await clickAndMoveElement(section + hoursColumn, 0, scrollStep);
+        await expect(await getText(section + currentHour)).toEqual(
             scrollToHour,
             'The current hour is not equivalent to the hour to which you have scrolled'
         );
 
         if (section !== onlyHoursExample) {
-            click(section + minutesColumn);
+            await click(section + minutesColumn);
             if (direction === 'up') {
-                scrollToMinute = getText(section + upperMinute);
+                scrollToMinute = await getText(section + upperMinute);
             }
             if (direction === 'down') {
-                scrollToMinute = getText(section + lowerMinute);
+                scrollToMinute = await getText(section + lowerMinute);
             }
-            clickAndMoveElement(section + minutesColumn, 0, scrollStep);
-            expect(getText(section + currentMinute)).toEqual(
+            await clickAndMoveElement(section + minutesColumn, 0, scrollStep);
+            await expect(await getText(section + currentMinute)).toEqual(
                 scrollToMinute,
                 'The current hour is not equivalent to the hour to which you have scrolled'
             );
         }
         if (section !== withoutSecondsExample && section !== onlyHoursExample) {
-            click(section + secondsColumn);
+            await click(section + secondsColumn);
             if (direction === 'up') {
-                scrollToSec = getText(section + upperSec);
+                scrollToSec = await getText(section + upperSec);
             }
             if (direction === 'down') {
-                scrollToSec = getText(section + lowerSec);
+                scrollToSec = await getText(section + lowerSec);
             }
-            clickAndMoveElement(section + secondsColumn, 0, scrollStep);
-            expect(getText(section + currentSec)).toEqual(
+            await clickAndMoveElement(section + secondsColumn, 0, scrollStep);
+            await expect(await getText(section + currentSec)).toEqual(
                 scrollToSec,
                 'The current hour is not equivalent to the hour to which you have scrolled'
             );

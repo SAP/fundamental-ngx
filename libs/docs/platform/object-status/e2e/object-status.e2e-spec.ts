@@ -29,71 +29,71 @@ describe('object status test suite', () => {
         status
     } = objectStatusPage;
 
-    beforeAll(() => {
-        objectStatusPage.open();
+    beforeAll(async () => {
+        await objectStatusPage.open();
     }, 1);
 
     describe('default object status example', () => {
-        it('should check default status', () => {
-            expect(getText(defaultExamples + text)).toBe(defaultStatusText);
+        it('should check default status', async () => {
+            await expect(await getText(defaultExamples + text)).toBe(defaultStatusText);
         });
     });
 
     describe('object status text only example', () => {
-        it('should check text values', () => {
-            scrollIntoView(textOnlyExamples + text);
-            checkElementTextValue(textOnlyExamples + text, semanticStatusText);
+        it('should check text values', async () => {
+            await scrollIntoView(textOnlyExamples + text);
+            await checkElementTextValue(textOnlyExamples + text, semanticStatusText);
         });
     });
 
     describe('object status with text and icon example', () => {
-        it('should check text values', () => {
-            scrollIntoView(textAndIconExamples + text);
-            checkElementTextValue(textAndIconExamples + text, semanticStatusText);
+        it('should check text values', async () => {
+            await scrollIntoView(textAndIconExamples + text);
+            await checkElementTextValue(textAndIconExamples + text, semanticStatusText);
         });
 
-        it('should check icons and icon colors', () => {
-            checkElementDisplayed(textAndIconExamples + icons);
+        it('should check icons and icon colors', async () => {
+            await checkElementDisplayed(textAndIconExamples + icons);
         });
     });
 
     describe('object status with generic indication colors example', () => {
-        it('should check text values', () => {
-            scrollIntoView(indicationColorExamples + text);
-            checkElementTextValue(indicationColorExamples + text, indicationColorText);
+        it('should check text values', async () => {
+            await scrollIntoView(indicationColorExamples + text);
+            await checkElementTextValue(indicationColorExamples + text, indicationColorText);
         });
     });
 
     describe('clickable object status example', () => {
-        it('should check statuses are clickable', () => {
-            const statusCount = getElementArrayLength(clickableExamples + status);
+        it('should check statuses are clickable', async () => {
+            const statusCount = await getElementArrayLength(clickableExamples + status);
 
             for (let i = 0; statusCount > i; i++) {
-                scrollIntoView(clickableExamples + status, i);
-                click(clickableExamples + status, i);
-                acceptAlert();
+                await scrollIntoView(clickableExamples + status, i);
+                await click(clickableExamples + status, i);
+                await acceptAlert();
             }
         });
     });
 
     describe('inverted object status example', () => {
         // TODO: write appropriate e2e
-        xit('should check status is inverted', () => {
-            const statusCount = getElementArrayLength(invertedExamples + status);
+        xit('should check status is inverted', async () => {
+            const statusCount = await getElementArrayLength(invertedExamples + status);
 
             for (let i = 0; i < statusCount; i++) {
-                scrollIntoView(invertedExamples + status);
+                await scrollIntoView(invertedExamples + status);
             }
         });
     });
 
     describe('inverted object status with generic indication colors example', () => {
-        it('should check status is inverted', () => {
-            const statusCount = getElementArrayLength(invertedIndicationColorExamples + status);
+        it('should check status is inverted', async () => {
+            const statusCount = await getElementArrayLength(invertedIndicationColorExamples + status);
 
             for (let i = 0; i < statusCount; i++) {
-                scrollIntoView(invertedIndicationColorExamples + status);
-                expect(getElementClass(invertedIndicationColorExamples + status + ' span')).toContain(
+                await scrollIntoView(invertedIndicationColorExamples + status);
+                await expect(await getElementClass(invertedIndicationColorExamples + status + ' span')).toContain(
                     'fd-object-status--inverted'
                 );
             }
@@ -102,27 +102,27 @@ describe('object status test suite', () => {
 
     describe('object status large design example', () => {
         // TODO: write appropriate e2e
-        xit('should check large status', () => {
-            const statusCount = getElementArrayLength(largeExamples + status);
+        xit('should check large status', async () => {
+            const statusCount = await getElementArrayLength(largeExamples + status);
 
             for (let i = 0; i < statusCount; i++) {
-                scrollIntoView(largeExamples + status);
+                await scrollIntoView(largeExamples + status);
             }
         });
     });
 
     describe('Orientation check', () => {
-        it('should check RTL/LTR', () => {
-            objectStatusPage.checkRtlSwitch();
+        it('should check RTL/LTR', async () => {
+            await objectStatusPage.checkRtlSwitch();
         });
     });
 
     xdescribe('Visual regression', () => {
-        it('should check examples visual regression', () => {
-            refreshPage();
-            waitForPresent(defaultExamples + status);
-            objectStatusPage.saveExampleBaselineScreenshot();
-            expect(objectStatusPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await refreshPage();
+            await waitForPresent(defaultExamples + status);
+            await objectStatusPage.saveExampleBaselineScreenshot();
+            await expect(await objectStatusPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

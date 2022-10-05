@@ -26,79 +26,79 @@ describe('Split-button test suite', () => {
         arrowDownBtn
     } = splitButtonPage;
 
-    beforeAll(() => {
-        splitButtonPage.open();
+    beforeAll(async () => {
+        await splitButtonPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(splitButtonPage.root);
-        waitForElDisplayed(splitButtonPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(splitButtonPage.root);
+        await waitForElDisplayed(splitButtonPage.title);
     }, 1);
 
-    it('should expand the menu and button shall invoke drop down menu', () => {
-        checkMenuOpens(buttonBehaviorExample);
-        checkMenuOpens(buttonTypesExample);
-        checkMenuOpens(buttonTemplateExample);
-        checkMenuOpens(buttonPragmaticalExample);
-        checkMenuOpens(iconBehaviorExample);
+    it('should expand the menu and button shall invoke drop down menu', async () => {
+        await checkMenuOpens(buttonBehaviorExample);
+        await checkMenuOpens(buttonTypesExample);
+        await checkMenuOpens(buttonTemplateExample);
+        await checkMenuOpens(buttonPragmaticalExample);
+        await checkMenuOpens(iconBehaviorExample);
     });
 
-    it('Verify split button does not have less than 2 buttons', () => {
-        checkSplitMenuQuantity(buttonBehaviorExample);
-        checkSplitMenuQuantity(iconBehaviorExample);
-        checkSplitMenuQuantity(buttonTypesExample);
-        checkSplitMenuQuantity(buttonTemplateExample);
-        checkSplitMenuQuantity(buttonPragmaticalExample);
+    it('Verify split button does not have less than 2 buttons', async () => {
+        await checkSplitMenuQuantity(buttonBehaviorExample);
+        await checkSplitMenuQuantity(iconBehaviorExample);
+        await checkSplitMenuQuantity(buttonTypesExample);
+        await checkSplitMenuQuantity(buttonTemplateExample);
+        await checkSplitMenuQuantity(buttonPragmaticalExample);
     });
 
-    it('Verify user can choose only one option at a time', () => {
+    it('Verify user can choose only one option at a time', async () => {
         for (let i = 0; i < 2; i++) {
-            click(buttonBehaviorExample + arrowDownBtn);
-            expect(isElementDisplayed(splitMenu)).toBe(true, 'drop-down is not visible');
-            const menuItemValue = getText(splitMenuItem, i);
-            click(splitMenuItem, i);
-            acceptAlert();
-            const mainButtonValue = getText(mainBtn).trim();
-            expect(mainButtonValue).toEqual(menuItemValue, 'value on main button is not equal chosen value');
+            await click(buttonBehaviorExample + arrowDownBtn);
+            await expect(await isElementDisplayed(splitMenu)).toBe(true, 'drop-down is not visible');
+            const menuItemValue = await getText(splitMenuItem, i);
+            await click(splitMenuItem, i);
+            await acceptAlert();
+            const mainButtonValue = (await getText(mainBtn)).trim();
+            await expect(mainButtonValue).toEqual(menuItemValue, 'value on main button is not equal chosen value');
         }
     });
 
-    it('After did choose expand menu should close', () => {
-        click(buttonBehaviorExample + arrowDownBtn);
-        expect(isElementDisplayed(splitMenu)).toBe(true, 'drop-down is not visible');
-        click(splitMenuItem);
-        acceptAlert();
-        expect(doesItExist(splitMenu)).toBe(false, 'drop-down is not closed');
+    it('After did choose expand menu should close', async () => {
+        await click(buttonBehaviorExample + arrowDownBtn);
+        await expect(await isElementDisplayed(splitMenu)).toBe(true, 'drop-down is not visible');
+        await click(splitMenuItem);
+        await acceptAlert();
+        await expect(await doesItExist(splitMenu)).toBe(false, 'drop-down is not closed');
     });
 
-    it('should check RTL and LTR orientation', () => {
-        splitButtonPage.checkRtlSwitch();
+    it('should check RTL and LTR orientation', async () => {
+        await splitButtonPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', () => {
-        splitButtonPage.saveExampleBaselineScreenshot();
-        expect(splitButtonPage.compareWithBaseline()).toBeLessThan(5);
+    xit('should check examples visual regression', async () => {
+        await splitButtonPage.saveExampleBaselineScreenshot();
+        await expect(await splitButtonPage.compareWithBaseline()).toBeLessThan(5);
     });
 
-    function checkMenuOpens(section: string): void {
-        scrollIntoView(section);
-        const itemsLength = getElementArrayLength(section + arrowDownBtn);
+    async function checkMenuOpens(section: string): Promise<void> {
+        await scrollIntoView(section);
+        const itemsLength = await getElementArrayLength(section + arrowDownBtn);
         for (let i = 0; i < itemsLength; i++) {
-            scrollIntoView(section + arrowDownBtn, i);
-            click(section + arrowDownBtn, i);
-            expect(isElementDisplayed(splitMenu)).toBe(true, 'drop-down is not closed');
-            click(section + arrowDownBtn, i);
+            await scrollIntoView(section + arrowDownBtn, i);
+            await click(section + arrowDownBtn, i);
+            await expect(await isElementDisplayed(splitMenu)).toBe(true, 'drop-down is not closed');
+            await click(section + arrowDownBtn, i);
         }
     }
 
-    function checkSplitMenuQuantity(section: string): void {
-        const itemsLength = getElementArrayLength(section + arrowDownBtn);
+    async function checkSplitMenuQuantity(section: string): Promise<void> {
+        const itemsLength = await getElementArrayLength(section + arrowDownBtn);
         for (let i = 0; i < itemsLength; i++) {
-            click(section + arrowDownBtn, i);
-            const splitBtnArr = getElementArrayLength(splitMenuItem);
-            expect(splitBtnArr).toBeGreaterThanOrEqual(2, 'quantity of elements less than two');
-            click(section + arrowDownBtn, i);
+            await click(section + arrowDownBtn, i);
+            const splitBtnArr = await getElementArrayLength(splitMenuItem);
+            await expect(splitBtnArr).toBeGreaterThanOrEqual(2, 'quantity of elements less than two');
+            await click(section + arrowDownBtn, i);
         }
     }
 });

@@ -30,75 +30,75 @@ describe('Tile component test', () => {
         launchTile
     } = tilePage;
 
-    beforeAll(() => {
-        tilePage.open();
+    beforeAll(async () => {
+        await tilePage.open();
     }, 1);
 
-    beforeEach(() => {
-        refreshPage();
-        waitForPresent(tilePage.root);
-        waitForElDisplayed(tilePage.title);
+    beforeEach(async () => {
+        await refreshPage();
+        await waitForPresent(tilePage.root);
+        await waitForElDisplayed(tilePage.title);
     }, 1);
 
-    it('should check that tile clickable', () => {
+    it('should check that tile clickable', async () => {
         for (let i = 0; i < tile.length; i++) {
-            expect(isElementClickable(tile, i)).toBe(true, `tile with index ${i} is not clickable`);
+            await expect(await isElementClickable(tile, i)).toBe(true, `tile with index ${i} is not clickable`);
         }
     });
 
-    it('should check size in default example', () => {
-        expect(getAttributeByName(launchTile, 'size', 1)).toBe('s');
-        expect(getAttributeByName(launchTile, 'size', 3)).toBe('s');
+    it('should check size in default example', async () => {
+        await expect(await getAttributeByName(launchTile, 'size', 1)).toBe('s');
+        await expect(await getAttributeByName(launchTile, 'size', 3)).toBe('s');
     });
 
-    it('should check launch example', () => {
-        checkTileType(launchExample, 'launch');
+    it('should check launch example', async () => {
+        await checkTileType(launchExample, 'launch');
     });
 
-    it('should check kpi example', () => {
-        checkTileType(kpiExample, 'kpi');
+    it('should check kpi example', async () => {
+        await checkTileType(kpiExample, 'kpi');
     });
 
-    it('should check feed example', () => {
-        checkTileType(feedExample, 'feed');
+    it('should check feed example', async () => {
+        await checkTileType(feedExample, 'feed');
     });
 
-    it('should check size of kpi example', () => {
-        expect(getAttributeByName(kpiNumericContent, 'size', 2)).toBe('m');
-        expect(getAttributeByName(kpiNumericContent, 'size', 3)).toBe('m');
-        expect(getAttributeByName(kpiNumericContent, 'size', 4)).toBe('s');
-        expect(getAttributeByName(kpiNumericContent, 'size', 5)).toBe('s');
+    it('should check size of kpi example', async () => {
+        await expect(await getAttributeByName(kpiNumericContent, 'size', 2)).toBe('m');
+        await expect(await getAttributeByName(kpiNumericContent, 'size', 3)).toBe('m');
+        await expect(await getAttributeByName(kpiNumericContent, 'size', 4)).toBe('s');
+        await expect(await getAttributeByName(kpiNumericContent, 'size', 5)).toBe('s');
     });
 
-    it('should check action example', () => {
-        expect(getElementClass(actionExample + tile)).toContain('action');
-        expect(isElementClickable(closeButton)).toBe(true, 'close button is not clickable');
-        expect(isElementClickable(moreButton)).toBe(true, 'more button is not clickable');
+    it('should check action example', async () => {
+        await expect(await getElementClass(actionExample + tile)).toContain('action');
+        await expect(await isElementClickable(closeButton)).toBe(true, 'close button is not clickable');
+        await expect(await isElementClickable(moreButton)).toBe(true, 'more button is not clickable');
     });
 
-    it('should check badge in badge example', () => {
-        expect(isElementDisplayed(bagdeExample + tile + badge)).toBe(true, 'badge lable is not displayed');
+    it('should check badge in badge example', async () => {
+        await expect(await isElementDisplayed(bagdeExample + tile + badge)).toBe(true, 'badge lable is not displayed');
     });
 
-    it('should check two columns in columns example', () => {
-        expect(getElementClass(columnsTileHeader)).toContain('2-col');
-        expect(getElementClass(columnsTileContent)).toContain('2-col');
-        expect(getElementClass(columnsTileFooter)).toContain('2-col');
+    it('should check two columns in columns example', async () => {
+        await expect(await getElementClass(columnsTileHeader)).toContain('2-col');
+        await expect(await getElementClass(columnsTileContent)).toContain('2-col');
+        await expect(await getElementClass(columnsTileFooter)).toContain('2-col');
     });
 
-    xit('should check visual regression for all examples', () => {
-        tilePage.saveExampleBaselineScreenshot();
-        expect(tilePage.compareWithBaseline()).toBeLessThan(5);
+    xit('should check visual regression for all examples', async () => {
+        await tilePage.saveExampleBaselineScreenshot();
+        await expect(await tilePage.compareWithBaseline()).toBeLessThan(5);
     });
 
-    it('should check RTL and LTR orientation', () => {
-        tilePage.checkRtlSwitch();
+    it('should check RTL and LTR orientation', async () => {
+        await tilePage.checkRtlSwitch();
     });
 
-    function checkTileType(section: string, type: string): void {
-        const length = getElementArrayLength(section + fdTile);
+    async function checkTileType(section: string, type: string): Promise<void> {
+        const length = await getElementArrayLength(section + fdTile);
         for (let i = 0; i < length; i++) {
-            expect(getAttributeByName(section + fdTile, 'type', i)).toBe(type);
+            await expect(await getAttributeByName(section + fdTile, 'type', i)).toBe(type);
         }
     }
 });

@@ -14,9 +14,9 @@ export class TokenPo extends CoreBaseComponentPo {
     closeBtn = '.fd-token__close';
     input = '.fd-tokenizer__input';
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 }

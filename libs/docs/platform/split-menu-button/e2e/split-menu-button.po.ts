@@ -18,34 +18,34 @@ export class SplitMenuButtonPo extends PlatformBaseComponentPo {
     iconExArrowBtnArr = 'fdp-platform-split-button-icons-example button:nth-of-type(2)';
     iconBtnAttrArr = 'fdp-platform-split-button-icons-example fdp-split-menu-button';
 
-    checkBtnSelectionChange(array, btnArray, expectation): void {
+    async checkBtnSelectionChange(array, btnArray, expectation): Promise<void> {
         for (let i = 0; i < array.length; i++) {
-            array[i].click();
-            const menuItemsArr = browser.$$(this.menuItemArr);
-            menuItemsArr[1].click();
-            expect(getText(btnArray, i)).toContain(expectation[i]);
+            await array[i].click();
+            const menuItemsArr = await browser.$$(this.menuItemArr);
+            await menuItemsArr[1].click();
+            await expect(await getText(btnArray, i)).toContain(expectation[i]);
         }
     }
 
-    checkSelectionOutput(outputSelector, expectation): void {
-        expect(getText(outputSelector)).toEqual(outputLabel + expectation);
+    async checkSelectionOutput(outputSelector, expectation): Promise<void> {
+        await expect(await getText(outputSelector)).toEqual(outputLabel + expectation);
     }
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'split-menu-button'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'split-menu-button'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, await this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'split-menu-button'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'split-menu-button'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 }

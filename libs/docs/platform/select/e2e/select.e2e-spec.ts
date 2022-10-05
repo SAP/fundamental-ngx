@@ -31,7 +31,6 @@ describe('Select test suite', () => {
         displayText,
         select,
         buttons,
-        options,
         selectedValue_1,
         selectWithTwoColumnsExample,
         selectedValue_2,
@@ -48,152 +47,156 @@ describe('Select test suite', () => {
         inputControl
     } = selectPage;
 
-    beforeAll(() => {
-        selectPage.open();
+    beforeAll(async () => {
+        await selectPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(selectPage.root);
-        waitForElDisplayed(selectPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(selectPage.root);
+        await waitForElDisplayed(selectPage.title);
     }, 2);
 
     describe('Check Select Modes example', () => {
-        it('should be able to select the option for default select', () => {
-            checkOptions(selectModeExample, 2);
-            expect(getText(selectedValue_1)).toBe(testTextValue);
+        it('should be able to select the option for default select', async () => {
+            await checkOptions(selectModeExample, 2);
+            await expect(await getText(selectedValue_1)).toBe(testTextValue);
         });
 
-        it('should be able to select the option for compact select', () => {
-            const textBefore = getText(selectModeExample + displayText, 1);
-            click(selectModeExample + buttons, 1);
-            click(options(7));
-            const textAfter = getText(selectModeExample + displayText, 1);
-            expect(textBefore).not.toEqual(textAfter);
-            expect(getText(selectedValue_1, 1)).toBe(testTextValue);
+        it('should be able to select the option for compact select', async () => {
+            await checkOptions(selectModeExample, 2, 1);
+            await expect(await getText(selectedValue_1, 1)).toBe(testTextValue);
         });
 
-        it('verify select in disabled mode', () => {
-            expect(getAttributeByName(selectModeExample + displayText, 'aria-disabled', 2)).toBe('true');
-            expect(getText(selectedValue_1, 2)).toBe(disableSelectModeValueTestText);
+        it('verify select in disabled mode', async () => {
+            await expect(await getAttributeByName(selectModeExample + displayText, 'aria-disabled', 2)).toBe('true');
+            await expect(await getText(selectedValue_1, 2)).toBe(disableSelectModeValueTestText);
         });
 
-        it('verify select in read only mode', () => {
-            expect(getAttributeByName(selectModeExample + displayText, 'aria-readonly', 3)).toBe('true');
+        it('verify select in read only mode', async () => {
+            await expect(await getAttributeByName(selectModeExample + displayText, 'aria-readonly', 3)).toBe('true');
         });
 
-        it('should check compact select be smaller than basic select', () => {
-            const basicInput = getElementSize(selectModeExample + displayText);
-            const compactInput = getElementSize(selectModeExample + displayText, 1);
+        it('should check compact select be smaller than basic select', async () => {
+            const basicInput = await getElementSize(selectModeExample + displayText);
+            const compactInput = await getElementSize(selectModeExample + displayText, 1);
 
-            expect(basicInput.height).toBeGreaterThan(compactInput.height);
+            await expect(basicInput.height).toBeGreaterThan(compactInput.height);
         });
     });
 
     describe('Check Select with Two Columns example', () => {
-        it('should be able to select the option', () => {
-            checkOptions(selectWithTwoColumnsExample, 22);
-            expect(getText(selectedValue_2)).toBe(selectWithTwoColumnsTestText);
+        it('should be able to select the option', async () => {
+            await checkOptions(selectWithTwoColumnsExample, 2);
+            await expect(await getText(selectedValue_2)).toBe(selectWithTwoColumnsTestText);
         });
     });
 
     describe('Check Select Semantic States example', () => {
-        it('should be able to select the option', () => {
-            const selectLength = getElementArrayLength(selectSemanticStateExample + buttons);
+        it('should be able to select the option', async () => {
+            const selectLength = await getElementArrayLength(selectSemanticStateExample + buttons);
             for (let i = 0; i < selectLength; i++) {
-                const textBefore = getText(selectSemanticStateExample + displayText, i);
-                click(selectSemanticStateExample + buttons, i);
-                click(selectSemanticStateOption, 7);
-                const textAfter = getText(selectSemanticStateExample + displayText, i);
-                expect(textBefore).not.toEqual(textAfter);
+                const textBefore = await getText(selectSemanticStateExample + displayText, i);
+                await click(selectSemanticStateExample + buttons, i);
+                await click(selectSemanticStateOption, 7);
+                const textAfter = await getText(selectSemanticStateExample + displayText, i);
+                await expect(textBefore).not.toEqual(textAfter);
             }
         });
 
-        it('should check input states', () => {
-            scrollIntoView(selectSemanticStateExample);
-            const inputLength = getElementArrayLength(selectSemanticStateExample + inputControl);
+        it('should check input states', async () => {
+            await scrollIntoView(selectSemanticStateExample);
+            const inputLength = await getElementArrayLength(selectSemanticStateExample + inputControl);
             for (let i = 0; i < inputLength; i++) {
-                expect(getElementClass(selectSemanticStateExample + inputControl, i)).toContain(inputStateArr[i]);
+                await expect(await getElementClass(selectSemanticStateExample + inputControl, i)).toContain(
+                    inputStateArr[i]
+                );
             }
         });
     });
 
     describe('Check Custom Control Content With AutoResize example', () => {
-        it('should be able to select the option', () => {
-            checkOptions(customControlContentExample, 48);
+        it('should be able to select the option', async () => {
+            await checkOptions(customControlContentExample, 0);
         });
 
-        it('should check changing width of select after selection', () => {
-            const defaultSelectWidth = getElementSize(customControlContentExample + select, 0, 'width');
+        it('should check changing width of select after selection', async () => {
+            const defaultSelectWidth = await (await getElementSize(customControlContentExample + select, 0)).width;
 
-            checkOptions(customControlContentExample, 48);
-            const newSelectWidth = getElementSize(customControlContentExample + select, 0, 'width');
-            expect(newSelectWidth).toBeGreaterThan(defaultSelectWidth);
+            await checkOptions(customControlContentExample, 0);
+            const newSelectWidth = await (await getElementSize(customControlContentExample + select, 0)).width;
+            await expect(newSelectWidth).toBeGreaterThan(defaultSelectWidth);
         });
     });
 
     describe('Check Select In Mobile Mode example', () => {
-        it('should be able to select the option', () => {
-            checkOptions(selectMobileExample, 59);
-            expect(getText(selectedValue_2, 1)).toBe(mobileExampleTestText);
+        it('should be able to select the option', async () => {
+            await checkOptions(selectMobileExample, 2);
+            await expect(await getText(selectedValue_2, 1)).toBe(mobileExampleTestText);
         });
 
-        it('verify title and close button is clickable', () => {
-            scrollIntoView(selectMobileExample + buttons);
-            click(selectMobileExample + buttons);
+        it('verify title and close button is clickable', async () => {
+            await scrollIntoView(selectMobileExample + buttons);
+            await click(selectMobileExample + buttons);
 
-            expect(getText(mobileTitle)).toBe(titleTestText);
-            expect(isElementClickable(mobileCloseButton)).toBe(true, 'close button not clickable');
+            await expect(await getText(mobileTitle)).toBe(titleTestText);
+            await expect(await isElementClickable(mobileCloseButton)).toBe(true, 'close button not clickable');
         });
     });
 
     describe('Check Select Max Height example', () => {
-        it('should be able to select the option', () => {
-            checkOptions(selectMaxHeightExample, 64);
-            expect(getText(selectedValue_1, 4)).toBe(maxHeightTestText);
+        it('should be able to select the option', async () => {
+            await checkOptions(selectMaxHeightExample, 2);
+            await expect(await getText(selectedValue_1, 4)).toBe(maxHeightTestText);
         });
     });
 
     describe('Check No Value Select example', () => {
-        it('should be able to select the option', () => {
-            checkOptions(selectNoneExample, 90);
-            expect(getText(selectedValue_1, 5)).toBe(maxHeightTestText);
+        it('should be able to select the option', async () => {
+            await checkOptions(selectNoneExample, 3);
+            await expect(await getText(selectedValue_1, 5)).toBe(maxHeightTestText);
         });
     });
 
     describe('Check Do not Wrap the Options example', () => {
-        it('should be able to select the option', () => {
-            checkOptions(selectNowrapExample, 95);
-            expect(getText(selectedValue_1, 6)).toBe(maxHeightTestText);
+        it('should be able to select the option', async () => {
+            await checkOptions(selectNowrapExample, 2);
+            await expect(await getText(selectedValue_1, 6)).toBe(maxHeightTestText);
         });
     });
 
     describe('Check Select In A Reactive Form example', () => {
-        it('should be able to select the option', () => {
-            checkOptions(selectInReactiveForms, 98);
-            expect(getText(selectedValue_2, 2)).toBe(testTextValue6);
-            expect(getText(selectedValue_2, 3)).toBe(testTextValue7);
+        it('should be able to select the option', async () => {
+            await checkOptions(selectInReactiveForms, 0);
+            await expect(await getText(selectedValue_2, 2)).toBe(testTextValue6);
+            await expect(await getText(selectedValue_2, 3)).toBe(testTextValue7);
         });
     });
 
     describe('Check orientation', () => {
-        it('should check RTL and LTR', () => {
-            selectPage.checkRtlSwitch();
+        it('should check RTL and LTR', async () => {
+            await selectPage.checkRtlSwitch();
         });
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            selectPage.saveExampleBaselineScreenshot();
-            expect(selectPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await selectPage.saveExampleBaselineScreenshot();
+            await expect(await selectPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 
-    function checkOptions(selector: string, id: number): void {
-        const textBefore = getText(selector + displayText);
-        click(selector + buttons);
-        click(options(id));
-        const textAfter = getText(selector + displayText);
-        expect(textBefore).not.toEqual(textAfter);
+    async function checkOptions(selector: string, itemIndex: number, index = 0): Promise<void> {
+        const textBefore = await getText(selector + displayText, index);
+        click(selector + buttons, index);
+        if (selector == selectMobileExample) {
+            await (await $('fd-dialog-body .fd-select-options')).waitForDisplayed();
+            await click('fd-dialog-body .fd-select-options .fd-list__item', itemIndex);
+        } else {
+            await (await $('fd-popover-body .fd-select-options')).waitForDisplayed();
+            await click('fd-popover-body .fd-select-options .fd-list__item', itemIndex);
+        }
+        const textAfter = await getText(selector + displayText, index);
+        await expect(textBefore).not.toEqual(textAfter);
     }
 });

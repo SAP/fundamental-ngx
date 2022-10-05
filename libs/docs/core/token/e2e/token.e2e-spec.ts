@@ -28,31 +28,31 @@ describe('Token component test', () => {
         compactTokenizer
     } = tokenPage;
 
-    beforeAll(() => {
-        tokenPage.open();
+    beforeAll(async () => {
+        await tokenPage.open();
     }, 1);
 
-    beforeEach(() => {
-        refreshPage();
-        waitForPresent(tokenPage.root);
-        waitForElDisplayed(tokenPage.title);
+    beforeEach(async () => {
+        await refreshPage();
+        await waitForPresent(tokenPage.root);
+        await waitForElDisplayed(tokenPage.title);
     }, 2);
 
     describe('default example', () => {
-        it('should check tokens clickable in default example', () => {
-            checkElArrIsClickable(defaultExample + token);
+        it('should check tokens clickable in default example', async () => {
+            await checkElArrIsClickable(defaultExample + token);
         });
     });
 
     describe('compact example', () => {
-        it('should check tokens clickable in compact example', () => {
-            checkElArrIsClickable(compactExample + token);
+        it('should check tokens clickable in compact example', async () => {
+            await checkElArrIsClickable(compactExample + token);
         });
 
-        it('should check size of tokens in compact example', () => {
-            const tokensLength = getElementArrayLength(compactExample + token);
+        it('should check size of tokens in compact example', async () => {
+            const tokensLength = await getElementArrayLength(compactExample + token);
             for (let i = 0; i < tokensLength; i++) {
-                expect(getElementClass(compactExample + token, i)).toContain(
+                await expect(await getElementClass(compactExample + token, i)).toContain(
                     'compact',
                     `token with index ${i} is not compact`
                 );
@@ -61,14 +61,14 @@ describe('Token component test', () => {
     });
 
     describe('selected example', () => {
-        it('should check tokens clickable in selected example', () => {
-            checkElArrIsClickable(selectedExample + token);
+        it('should check tokens clickable in selected example', async () => {
+            await checkElArrIsClickable(selectedExample + token);
         });
 
-        it('should check selected example', () => {
-            const tokensLength = getElementArrayLength(selectedExample + token);
+        it('should check selected example', async () => {
+            const tokensLength = await getElementArrayLength(selectedExample + token);
             for (let i = 0; i < tokensLength; i++) {
-                expect(getElementClass(selectedExample + token, i)).toContain(
+                await expect(await getElementClass(selectedExample + token, i)).toContain(
                     'selected',
                     `token with index ${i} is not selected by default but should`
                 );
@@ -77,94 +77,97 @@ describe('Token component test', () => {
     });
 
     describe('read only example', () => {
-        it('should check tokens clickable in read only example', () => {
-            checkElArrIsClickable(readOnlyExample + token);
+        it('should check tokens clickable in read only example', async () => {
+            await checkElArrIsClickable(readOnlyExample + token);
         });
 
-        it('should check that impossible to select token in read only example', () => {
-            const tokensLength = getElementArrayLength(readOnlyExample + token);
+        it('should check that impossible to select token in read only example', async () => {
+            const tokensLength = await getElementArrayLength(readOnlyExample + token);
             for (let i = 0; i < tokensLength; i++) {
-                click(readOnlyExample + token, i);
-                expect(getElementClass(readOnlyExample + token, i)).not.toContain(
+                await click(readOnlyExample + token, i);
+                await expect(await getElementClass(readOnlyExample + token, i)).not.toContain(
                     'selected',
                     `token with index ${i} selected but should not`
                 );
             }
         });
 
-        it('should check that no ability to remove token in read only example', () => {
-            expect(doesItExist(readOnlyExample + closeBtn)).toBe(false);
+        it('should check that no ability to remove token in read only example', async () => {
+            await expect(await doesItExist(readOnlyExample + closeBtn)).toBe(false);
         });
     });
 
     describe('tokenizer example', () => {
-        it('should check tokens clickable in tokenizer example', () => {
-            checkElArrIsClickable(tokenizerExample + token);
+        it('should check tokens clickable in tokenizer example', async () => {
+            await checkElArrIsClickable(tokenizerExample + token);
         });
 
-        it('should check closing tokens in tokenizer example', () => {
-            checkClosingTokens(tokenizerExample);
+        it('should check closing tokens in tokenizer example', async () => {
+            await checkClosingTokens(tokenizerExample);
         });
 
-        it('should check selecting tokens in tokenizer example', () => {
-            checkSelectingTokens(tokenizerExample);
+        it('should check selecting tokens in tokenizer example', async () => {
+            await checkSelectingTokens(tokenizerExample);
         });
 
-        it('should check adding tokens to tokenizer example', () => {
-            checkAddingTokens(tokenizerExample);
+        it('should check adding tokens to tokenizer example', async () => {
+            await checkAddingTokens(tokenizerExample);
         });
     });
 
     describe('compact tokenizer example', () => {
-        it('should check tokens clickable in compact tokenizer example', () => {
-            checkElArrIsClickable(compactTokenizer + token);
+        it('should check tokens clickable in compact tokenizer example', async () => {
+            await checkElArrIsClickable(compactTokenizer + token);
         });
 
-        it('should check closing tokens in compact tokenizer example', () => {
-            checkClosingTokens(compactTokenizer);
+        it('should check closing tokens in compact tokenizer example', async () => {
+            await checkClosingTokens(compactTokenizer);
         });
 
-        it('should check selecting tokens in tokenizer example', () => {
-            checkSelectingTokens(compactTokenizer);
+        it('should check selecting tokens in tokenizer example', async () => {
+            await checkSelectingTokens(compactTokenizer);
         });
 
-        it('should check adding tokens to compact tokenizer example', () => {
-            checkAddingTokens(compactTokenizer);
+        it('should check adding tokens to compact tokenizer example', async () => {
+            await checkAddingTokens(compactTokenizer);
         });
     });
 
-    it('should check orientations', () => {
-        tokenPage.checkRtlSwitch();
+    it('should check orientations', async () => {
+        await tokenPage.checkRtlSwitch();
     });
 
-    function checkAddingTokens(section: string): void {
-        const tokensLengthBefore = getElementArrayLength(section + token);
-        click(section + input);
-        setValue(section + input, 'asd');
-        sendKeys('Enter');
-        const tokensLengthAfter = getElementArrayLength(section + token);
-        expect(tokensLengthAfter).toEqual(tokensLengthBefore + 1, `new token is not created`);
-        expect(getText(section + token, tokensLengthAfter - 1)).toEqual(
+    async function checkAddingTokens(section: string): Promise<void> {
+        const tokensLengthBefore = await getElementArrayLength(section + token);
+        await click(section + input);
+        await setValue(section + input, 'asd');
+        await sendKeys('Enter');
+        const tokensLengthAfter = await getElementArrayLength(section + token);
+        await expect(tokensLengthAfter).toEqual(tokensLengthBefore + 1, `new token is not created`);
+        await expect(await getText(section + token, tokensLengthAfter - 1)).toEqual(
             'asd',
             `token value is not equal entered value`
         );
     }
 
-    function checkSelectingTokens(section: string): void {
-        const tokensLength = getElementArrayLength(section + token) - 1;
+    async function checkSelectingTokens(section: string): Promise<void> {
+        const tokensLength = (await getElementArrayLength(section + token)) - 1;
         for (let i = tokensLength; i !== -1; i--) {
-            scrollIntoView(section + token, i);
-            click(section + token, i);
-            expect(getElementClass(section + token, i)).toContain('selected', `token with index ${i} is not selected`);
+            await scrollIntoView(section + token, i);
+            await click(section + token, i);
+            await expect(await getElementClass(section + token, i)).toContain(
+                'selected',
+                `token with index ${i} is not selected`
+            );
         }
     }
 
-    function checkClosingTokens(section: string): void {
-        const tokensLength = getElementArrayLength(section + closeBtn) - 1;
+    async function checkClosingTokens(section: string): Promise<void> {
+        const tokensLength = (await getElementArrayLength(section + closeBtn)) - 1;
         for (let i = tokensLength; i !== -1; i--) {
-            scrollIntoView(section + closeBtn, i);
-            click(section + closeBtn, i);
+            await scrollIntoView(section + closeBtn, i);
+            await click(section + closeBtn, i);
         }
-        expect(doesItExist(section + token)).toBe(false, 'tokens are not closed');
+        await expect(await doesItExist(section + token)).toBe(false, 'tokens are not closed');
     }
 });

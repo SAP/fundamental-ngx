@@ -34,42 +34,42 @@ describe('multi-combobox test suite', () => {
         mobileExpandButton,
         showSelectedItemsBtn
     } = multiComboboxPage;
-    const mobileExample = 5;
-    const nMoreExample = 4;
-    const twoColumnExample = 8;
+    const mobileExample = 6;
+    const nMoreExample = 5;
+    const twoColumnExample = 9;
     const searchValue = 'app';
 
-    beforeAll(() => {
-        multiComboboxPage.open();
+    beforeAll(async () => {
+        await multiComboboxPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(multiComboboxPage.root);
-        waitForElDisplayed(multiComboboxPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(multiComboboxPage.root);
+        await waitForElDisplayed(multiComboboxPage.title);
     }, 1);
 
     describe('Main checks', () => {
-        it('should open and close list by clicking expand button', () => {
-            const exampleCount = getElementArrayLength(expandButton);
+        it('should open and close list by clicking expand button', async () => {
+            const exampleCount = await getElementArrayLength(expandButton);
             for (let i = 0; i < exampleCount; i++) {
                 if (i !== mobileExample) {
-                    checkInputExpansion(i);
+                    await checkInputExpansion(i);
                 }
             }
         });
 
-        it('should close list when item selected', () => {
-            const exampleCount = getElementArrayLength(expandButton);
+        it('should close list when item selected', async () => {
+            const exampleCount = await getElementArrayLength(expandButton);
             for (let i = 0; i < exampleCount; i++) {
                 if (i !== mobileExample) {
-                    checkListClosedAfterSelection(i);
+                    await checkListClosedAfterSelection(i);
                 }
             }
         });
 
-        it('should be able to select multiple items via checkbox and tokens created for selected items', () => {
-            const exampleCount = getElementArrayLength(expandButton);
+        it('should be able to select multiple items via checkbox and tokens created for selected items', async () => {
+            const exampleCount = await getElementArrayLength(expandButton);
 
             for (let i = 0; i < exampleCount; i++) {
                 if (i === mobileExample) {
@@ -77,58 +77,62 @@ describe('multi-combobox test suite', () => {
                 }
 
                 if (i === nMoreExample) {
-                    expandList(nMoreExample);
-                    selectTwoItems(listItemCheckbox);
-                    const markedItems = getTextArr(selectedListItem).sort();
-                    click(expandButton, nMoreExample);
-                    const tokens = getText(tokenInputField, nMoreExample);
-                    const tokensArr = tokens.split('\n').sort().slice(1);
+                    await expandList(nMoreExample);
+                    await selectTwoItems(listItemCheckbox);
+                    const markedItems = (await getTextArr(selectedListItem)).sort();
+                    await click(expandButton, nMoreExample);
+                    const tokens = await getText(tokenInputField, nMoreExample);
+                    const tokensArr = tokens.split('\n').sort();
 
-                    expect(markedItems).toEqual(tokensArr);
+                    await expect(markedItems).toEqual(tokensArr);
                     continue;
                 }
 
                 if (i === twoColumnExample) {
-                    expandList(twoColumnExample);
-                    selectTwoItems(listItemCheckbox);
-                    const markedItems = getTextArr(selectedListItem).sort().toString();
+                    await expandList(twoColumnExample);
+                    await selectTwoItems(listItemCheckbox);
+                    const markedItems = (await getTextArr(selectedListItem)).sort().toString();
                     const filteredMarkedItems = markedItems.replace('\nFruits', '').replace('\nFruits', '');
-                    click(expandButton, twoColumnExample);
-                    const tokens = getText(tokenInputField, twoColumnExample);
+                    await click(expandButton, twoColumnExample);
+                    const tokens = await getText(tokenInputField, twoColumnExample);
                     const tokensArr = tokens.split('\n').sort().toString();
 
-                    expect(filteredMarkedItems).toEqual(tokensArr);
+                    await expect(filteredMarkedItems).toEqual(tokensArr);
                     continue;
                 }
 
-                checkMultiSelect(i);
+                await checkMultiSelect(i);
             }
         });
 
-        it('should be able to remove token by clicking the X button', () => {
-            const initialTokenCount = getElementArrayLength(token);
-            scrollIntoView(tokenInputField);
-            click(tokenCloseButton);
-            const newTokenCount = getElementArrayLength(token);
+        it('should be able to remove token by clicking the X button', async () => {
+            const initialTokenCount = await getElementArrayLength(token);
+            await scrollIntoView(tokenInputField);
+            await click(tokenCloseButton);
+            const newTokenCount = await getElementArrayLength(token);
 
-            expect(newTokenCount).toEqual(initialTokenCount - 1);
+            await expect(newTokenCount).toEqual(initialTokenCount - 1);
         });
 
-        it('should be able to search by typing and get relevant results', () => {
-            const inputCount = getElementArrayLength(inputField);
+        it('should be able to search by typing and get relevant results', async () => {
+            const inputCount = await getElementArrayLength(inputField);
 
             for (let i = 0; i < inputCount; i++) {
                 if (i !== mobileExample) {
-                    scrollIntoView(inputField, i);
-                    click(inputField, i);
-                    sendKeys(searchValue);
+                    await scrollIntoView(inputField, i);
+                    await click(inputField, i);
+                    await sendKeys(searchValue);
 
-                    expect(waitForElDisplayed(list)).toBe(true, `list ${i} not opened`);
-                    const listItemText = getTextArr(listItem);
+                    if (i == inputCount - 1) {
+                        await browser.pause(500);
+                    }
 
-                    listItemText.forEach((element) => {
-                        expect(element.toString().toLowerCase()).toContain(searchValue);
-                    });
+                    await expect(await waitForElDisplayed(list)).toBe(true, `list ${i} not opened`);
+                    const listItemText = await getTextArr(listItem);
+
+                    for (const element of listItemText) {
+                        await expect(element.toString().toLowerCase()).toContain(searchValue);
+                    }
                 }
             }
         });
@@ -139,122 +143,122 @@ describe('multi-combobox test suite', () => {
         const save = 2;
         const cancel = 3;
 
-        it('should be able to close dialog with X button, cancel button, save button', () => {
-            openMobileList();
-            click(dialogButton, close);
-            expect(doesItExist(dialog)).toBe(false, 'dialog is not closed by x button');
+        it('should be able to close dialog with X button, cancel button, save button', async () => {
+            await openMobileList();
+            await click(dialogButton, close);
+            await expect(await doesItExist(dialog)).toBe(false, 'dialog is not closed by x button');
 
-            openMobileList();
-            click(dialogButton, save);
-            expect(doesItExist(dialog)).toBe(false, 'dialog is not closed by save button');
+            await openMobileList();
+            await click(dialogButton, save);
+            await expect(await doesItExist(dialog)).toBe(false, 'dialog is not closed by save button');
 
-            openMobileList();
-            click(dialogButton, cancel);
-            expect(doesItExist(dialog)).toBe(false, 'dialog is not closed by cancel button');
+            await openMobileList();
+            await click(dialogButton, cancel);
+            await expect(await doesItExist(dialog)).toBe(false, 'dialog is not closed by cancel button');
         });
 
-        it('should be able to make multiple selections', () => {
-            openMobileList();
-            selectTwoItems(dialogListItem);
-            const selectedItems = getTextArr(selectedDialogItem).sort();
-            click(dialogButton, save);
-            const tokens = getTextArr(mobileModeExamples + token).sort();
+        it('should be able to make multiple selections', async () => {
+            await openMobileList();
+            await selectTwoItems(dialogListItem);
+            const selectedItems = (await getTextArr(selectedDialogItem)).sort();
+            await click(dialogButton, save);
+            const tokens = (await getTextArr(mobileModeExamples + token)).sort();
 
-            expect(selectedItems).toEqual(tokens);
+            await expect(selectedItems).toEqual(tokens);
         });
 
-        it('should be able to search by text', () => {
-            openMobileList();
-            click(dialogInput);
-            sendKeys(searchValue);
-            const searchResults = getTextArr(dialogListItem).sort();
+        it('should be able to search by text', async () => {
+            await openMobileList();
+            await click(dialogInput);
+            await sendKeys(searchValue);
+            const searchResults = (await getTextArr(dialogListItem)).sort();
 
-            searchResults.forEach((element) => {
-                expect(element.toString().toLowerCase()).toContain(searchValue);
-            });
+            for (const element of searchResults) {
+                await expect(element.toString().toLowerCase()).toContain(searchValue);
+            }
         });
 
-        it('should be able to toggle selected items view', () => {
+        it('should be able to toggle selected items view', async () => {
             const viewToggle = 1;
 
-            openMobileList();
-            selectTwoItems(dialogListItem);
-            click(dialogButton, viewToggle);
-            const selectedViewItemCount = getElementArrayLength(dialogListItem);
+            await openMobileList();
+            await selectTwoItems(dialogListItem);
+            await click(dialogButton, viewToggle);
+            const selectedViewItemCount = await getElementArrayLength(dialogListItem);
 
-            expect(selectedViewItemCount).toBe(2);
+            await expect(selectedViewItemCount).toBe(2);
         });
     });
 
     // skipped due to https://github.com/SAP/fundamental-ngx/issues/6978
-    xit('should check that items not added if you did not click Save button', () => {
-        scrollIntoView(mobileModeExamples);
-        click(mobileExpandButton);
-        click(dialogListItem);
-        click(showSelectedItemsBtn);
-        expect(doesItExist(mobileModeExamples + token)).toBe(false);
+    xit('should check that items not added if you did not click Save button', async () => {
+        await scrollIntoView(mobileModeExamples);
+        await click(mobileExpandButton);
+        await click(dialogListItem);
+        await click(showSelectedItemsBtn);
+        await expect(await doesItExist(mobileModeExamples + token)).toBe(false);
     });
 
     // skipped due to https://github.com/SAP/fundamental-ngx/issues/7082
-    xit('should check that Show selected Items - Show all items works correct', () => {
-        scrollIntoView(mobileModeExamples);
-        click(mobileExpandButton);
-        click(dialogListItem);
-        click(showSelectedItemsBtn);
-        click(showSelectedItemsBtn);
-        expect(getElementClass(dialogListItem)).toContain('is-selected');
+    xit('should check that Show selected Items - Show all items works correct', async () => {
+        await scrollIntoView(mobileModeExamples);
+        await click(mobileExpandButton);
+        await click(dialogListItem);
+        await click(showSelectedItemsBtn);
+        await click(showSelectedItemsBtn);
+        await expect(await getElementClass(dialogListItem)).toContain('is-selected');
     });
 
     describe('orientation and visual regression checks', () => {
-        it('should check orientation', () => {
-            multiComboboxPage.checkRtlSwitch();
+        it('should check orientation', async () => {
+            await multiComboboxPage.checkRtlSwitch();
         });
 
-        xit('should check examples visual regression', () => {
-            multiComboboxPage.saveExampleBaselineScreenshot();
-            expect(multiComboboxPage.compareWithBaseline()).toBeLessThan(5);
+        xit('should check examples visual regression', async () => {
+            await multiComboboxPage.saveExampleBaselineScreenshot();
+            await expect(await multiComboboxPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 
-    function checkInputExpansion(index: number = 0): void {
-        scrollIntoView(expandButton, index);
-        click(expandButton, index);
-        expect(waitForElDisplayed(list)).toBe(true, `list ${index} not opened`);
-        click(expandButton, index);
-        expect(doesItExist(list)).toBe(false, `list ${index} not closed`);
+    async function checkInputExpansion(index: number = 0): Promise<void> {
+        await scrollIntoView(expandButton, index);
+        await click(expandButton, index);
+        await expect(await waitForElDisplayed(list)).toBe(true);
+        await click(expandButton, index);
+        await expect(await doesItExist(list)).toBe(false);
     }
 
-    function checkListClosedAfterSelection(index: number = 0): void {
-        expandList(index);
-        click(listItem, 1);
-        expect(doesItExist(list)).toBe(false, `list ${index} not closed`);
+    async function checkListClosedAfterSelection(index: number = 0): Promise<void> {
+        await expandList(index);
+        await click(listItem, 1);
+        await expect(await doesItExist(list)).toBe(false, `list ${index} not closed`);
     }
 
-    function checkMultiSelect(index: number = 0): void {
-        expandList(index);
-        selectTwoItems(listItemCheckbox);
-        const markedItems = getTextArr(selectedListItem).sort();
-        click(expandButton, index);
-        const tokens = getText(tokenInputField, index);
+    async function checkMultiSelect(index: number = 0): Promise<void> {
+        await expandList(index);
+        await selectTwoItems(listItemCheckbox);
+        const markedItems = (await getTextArr(selectedListItem)).sort();
+        await click(expandButton, index);
+        const tokens = await getText(tokenInputField, index);
         const tokensArr = tokens.split('\n').sort();
 
-        expect(markedItems).toEqual(tokensArr, `example set ${index} mismatch`);
+        await expect(markedItems).toEqual(tokensArr, `example set ${index} mismatch`);
     }
 
-    function expandList(index: number = 0): void {
-        scrollIntoView(expandButton, index);
-        click(expandButton, index);
-        waitForElDisplayed(list);
+    async function expandList(index: number = 0): Promise<void> {
+        await scrollIntoView(expandButton, index);
+        await click(expandButton, index);
+        await waitForElDisplayed(list);
     }
 
-    function selectTwoItems(selector: string): void {
-        click(selector);
-        click(selector, 1);
+    async function selectTwoItems(selector: string): Promise<void> {
+        await click(selector);
+        await click(selector, 1);
     }
 
-    function openMobileList(): void {
-        scrollIntoView(mobileModeExamples);
-        click(expandButton, mobileExample);
-        waitForElDisplayed(dialog);
+    async function openMobileList(): Promise<void> {
+        await scrollIntoView(mobileModeExamples);
+        await click(expandButton, mobileExample);
+        await waitForElDisplayed(dialog);
     }
 });
