@@ -1,3 +1,12 @@
+## [0.36.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.25...v0.36.1-rc.26) (2022-10-05)
+
+
+### Bug Fixes
+
+* **docs:** fix wrong icon margin for rtl ([#8789](https://github.com/SAP/fundamental-ngx/issues/8789)) ([310521d](https://github.com/SAP/fundamental-ngx/commit/310521d2fdb36e3a0590da29307bf60897e5d4c8))
+
+
+
 ## [0.36.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.24...v0.36.1-rc.25) (2022-10-04)
 
 
