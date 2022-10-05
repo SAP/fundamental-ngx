@@ -31,7 +31,7 @@
                         <ul fd-nested-list>
                             <ng-container
                                 *ngFor="
-                                    let item of $asSectionNestedContent(section.content);
+                                    let item of $asSectionNestedContent(section.content) | sortBy: true:'name';
                                     trackBy: trackBySectionContent
                                 "
                             >
