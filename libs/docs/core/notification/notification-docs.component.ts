@@ -82,13 +82,13 @@ export class NotificationDocsComponent {
     mobile: ExampleFile[] = [
         {
             language: 'typescript',
-            code: mobileTs,
+            code: getAssetFromModuleAssets(mobileTs),
             fileName: 'notification-mobile-example',
             component: 'NotificationMobileExampleComponent'
         },
         {
             language: 'html',
-            code: mobileH,
+            code: getAssetFromModuleAssets(mobileH),
             fileName: 'notification-mobile-example'
         }
     ];
