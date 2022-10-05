@@ -489,7 +489,7 @@ export class MultiInputComponent
         } else {
             this.disableParentFocusTrap();
 
-            if (this.listComponent) {
+            if (this.listComponent && this._searchTermCtrl.value?.length === 0) {
                 this.listComponent.setItemActive(0);
             }
         }
@@ -589,10 +589,6 @@ export class MultiInputComponent
             if (this.listComponent) {
                 this.listComponent.setItemActive(0);
                 event.preventDefault();
-            }
-        } else if (KeyUtil.isKeyType(event, 'alphabetical') || KeyUtil.isKeyType(event, 'numeric')) {
-            if (!this.open) {
-                this.openChangeHandle(true);
             }
         }
     }
