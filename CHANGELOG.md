@@ -1,3 +1,12 @@
+## [0.36.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.26...v0.36.1-rc.27) (2022-10-06)
+
+
+### Bug Fixes
+
+* **core:** fix combobox glyph issue ([#8795](https://github.com/SAP/fundamental-ngx/issues/8795)) ([b406e49](https://github.com/SAP/fundamental-ngx/commit/b406e49d954d9256969679228b7b37f18a9b7add))
+
+
+
 ## [0.36.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.25...v0.36.1-rc.26) (2022-10-05)
 
 
