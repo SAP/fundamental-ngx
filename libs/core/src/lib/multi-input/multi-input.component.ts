@@ -567,6 +567,11 @@ export class MultiInputComponent
             this.searchInputElement.nativeElement.focus();
         }
 
+        if (this._selectionModel.selected.length === 0) {
+            this.searchInputElement.nativeElement.focus();
+            this._changeDetRef.detectChanges();
+        }
+
         // On Mobile mode changes are propagated only on approve.
         this._propagateChange();
     }
