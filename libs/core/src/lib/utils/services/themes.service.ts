@@ -27,6 +27,24 @@ export class ThemesService {
     /** Available themes */
     themes: Theme[] = [
         {
+            id: 'sap_horizon',
+            name: 'Morning Horizon (Light)'
+        },
+        {
+            id: 'sap_horizon_dark',
+            name: 'Evening Horizon (Dark)'
+        },
+        {
+            id: 'sap_horizon_hcb',
+            name: 'Horizon High Contrast Black',
+            description: 'Optimized contrast and accessibiliwty for extremely bright environments'
+        },
+        {
+            id: 'sap_horizon_hcw',
+            name: 'Horizon High Contrast White Horizon',
+            description: 'Optimized contrast and accessibility for extremely dark environments'
+        },
+        {
             id: 'sap_fiori_3',
             name: 'Quartz Light',
             description: 'Use in regular office environment'
@@ -48,25 +66,7 @@ export class ThemesService {
         },
         {
             id: 'sap_fiori_3_light_dark',
-            name: 'Quartz Light Dark'
-        },
-        {
-            id: 'sap_horizon',
-            name: 'Morning Horizon (Light)'
-        },
-        {
-            id: 'sap_horizon_dark',
-            name: 'Evening Horizon (Dark)'
-        },
-        {
-            id: 'sap_horizon_hcb',
-            name: 'Horizon High Contrast Black',
-            description: 'Optimized contrast and accessibility for extremely bright environments'
-        },
-        {
-            id: 'sap_horizon_hcw',
-            name: 'Horizon High Contrast White Horizon',
-            description: 'Optimized contrast and accessibility for extremely dark environments'
+            name: 'Quartz Auto (Depending on the OS Settings)'
         }
     ];
 

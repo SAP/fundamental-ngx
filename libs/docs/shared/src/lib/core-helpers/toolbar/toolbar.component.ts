@@ -74,6 +74,8 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     versions: Version[];
 
+    initialTheme = 'sap_horizon';
+
     translations = [
         { name: 'Shqip', value: FD_LANGUAGE_ALBANIAN },
         // { name: 'العربية', value: FD_LANGUAGE_ARABIC }, TODO: uncomment when translations are provided
@@ -148,6 +150,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.themes = this._themingService.getThemes();
+        this._themingService.setTheme(this.initialTheme);
 
         this._setVersions();
 
