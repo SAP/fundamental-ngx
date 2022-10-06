@@ -1,3 +1,12 @@
+## [0.36.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.27...v0.36.1-rc.28) (2022-10-06)
+
+
+### Bug Fixes
+
+* **docs:** fix broken platform docs of info-label ([#8800](https://github.com/SAP/fundamental-ngx/issues/8800)) ([1385ec7](https://github.com/SAP/fundamental-ngx/commit/1385ec78881356a488b50cbf9cf5faf859b845c3))
+
+
+
 ## [0.36.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.26...v0.36.1-rc.27) (2022-10-06)
 
 
