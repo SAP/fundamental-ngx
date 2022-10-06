@@ -493,7 +493,7 @@ export class ComboboxComponent
 
     /** Get the glyph value based on whether the combobox is used as a search field or not. */
     get glyphValue(): string {
-        return this.isSearch ? 'search' : 'navigation-down-arrow';
+        return this.isSearch ? 'search' : this.glyph;
     }
 
     /** @hidden */
