@@ -102,6 +102,13 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         // setting option items
         this.select._options.forEach((option) => {
             const optionItem = option._getHtmlElement();
+
+            // set title-text items to center - useful for two columns mainly
+            const listTitleText = optionItem.querySelector('.fd-list__title-text');
+            if (listTitleText) {
+                listTitleText.setAttribute('style', 'display:flex; align-items:center');
+            }
+
             // set maxWidth default is 40rem
             if (this.maxWidth) {
                 optionItem.setAttribute('style', 'max-width: ' + this.maxWidth + 'px');
@@ -146,7 +153,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         // setting option items
         this.select._options.forEach((option) => {
             const optionItem = option._getHtmlElement();
-            const titleElement = <HTMLElement>optionItem.querySelector('.fd-list__title');
+            const titleElement = <HTMLElement>optionItem.querySelector('#primary-title');
             this._setOptionAttribute(titleElement, firstColumnProportion);
 
             const secondaryElement = <HTMLElement>optionItem.querySelector('.fd-list__secondary');

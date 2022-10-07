@@ -64,7 +64,7 @@
 
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
     <ng-container *ngIf="!_optionItemTemplate">
-        <span fd-list-title [innerHTML]="optionItem.label"></span>
+        <span fd-list-title id="primary-title" [innerHTML]="optionItem.label"></span>
     </ng-container>
 
     <ng-container *ngIf="_optionItemTemplate">
