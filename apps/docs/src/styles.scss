@@ -215,13 +215,20 @@ pre {
 
 a:not(.fd-link),
 a:not(.fd-link):focus {
+    color: #0a6ed1;
     text-decoration: none;
 }
 
 .fd-playground--markdown {
+    color: var(--sapTextColor);
+
     #fundamental-ngx {
         margin-top: calc(2rem + 10px);
         font-size: 2.2rem;
+    }
+
+    a {
+        color: #0a6ed1;
     }
 
     ol,
@@ -231,7 +238,7 @@ a:not(.fd-link):focus {
 
     pre {
         margin: 25px 0px;
-        background-color: #fff !important;
+        background-color: var(--sapBackgroundColor) !important;
         white-space: pre-wrap;
         white-space: -moz-pre-wrap;
         white-space: -o-pre-wrap;
@@ -243,7 +250,7 @@ a:not(.fd-link):focus {
         word-break: break-all;
         border: 1px solid #ccc;
         border-radius: 4px;
-
+        color: var(--sapTextColor);
         code {
             display: block;
         }
