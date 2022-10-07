@@ -2,7 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import { ApiComponent, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 
 import { PlatformInfoLabelModule } from '@fundamental-ngx/platform/info-label';
 import { PlatformInfoLabelDocsComponent } from './platform-info-label-docs.component';
@@ -37,6 +37,7 @@ const routes: Routes = [
         PlatformInfoLableTextExampleComponent,
         PlatformInfoLableTextIconExampleComponent,
         PlatformInfoLableAriaLabelExampleComponent
-    ]
+    ],
+    providers: [currentComponentProvider('info-label')]
 })
 export class PlatformInfoLabelDocsModule {}

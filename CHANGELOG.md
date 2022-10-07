@@ -1,3 +1,30 @@
+## [0.36.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.28...v0.36.1-rc.29) (2022-10-07)
+
+
+### Bug Fixes
+
+* **core:** enable wrap for key navigation ([#8746](https://github.com/SAP/fundamental-ngx/issues/8746)) ([949bd34](https://github.com/SAP/fundamental-ngx/commit/949bd348a2b9025515ecb00a6c62a2d27176e4f5))
+
+
+
+## [0.36.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.27...v0.36.1-rc.28) (2022-10-06)
+
+
+### Bug Fixes
+
+* **docs:** fix broken platform docs of info-label ([#8800](https://github.com/SAP/fundamental-ngx/issues/8800)) ([1385ec7](https://github.com/SAP/fundamental-ngx/commit/1385ec78881356a488b50cbf9cf5faf859b845c3))
+
+
+
+## [0.36.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.26...v0.36.1-rc.27) (2022-10-06)
+
+
+### Bug Fixes
+
+* **core:** fix combobox glyph issue ([#8795](https://github.com/SAP/fundamental-ngx/issues/8795)) ([b406e49](https://github.com/SAP/fundamental-ngx/commit/b406e49d954d9256969679228b7b37f18a9b7add))
+
+
+
 ## [0.36.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.25...v0.36.1-rc.26) (2022-10-05)
 
 
