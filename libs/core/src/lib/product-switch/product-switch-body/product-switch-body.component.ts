@@ -205,8 +205,15 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     private _handleListArrowUpDown(event: KeyboardEvent, target: HTMLElement): void {
-        const previousElementSibling = <HTMLElement>target.previousElementSibling;
-        const nextElementSibling = <HTMLElement>target.nextElementSibling;
+        const targetIndex = Array.from(target.parentElement?.children ?? []).indexOf(target);
+        const previousElementSibling =
+            targetIndex === 0
+                ? <HTMLElement>target.parentElement?.children[this.products.length - 1]
+                : <HTMLElement>target.previousElementSibling;
+        const nextElementSibling =
+            targetIndex === this.products.length - 1
+                ? <HTMLElement>target.parentElement?.children[0]
+                : <HTMLElement>target.nextElementSibling;
 
         if (this._isListMode() && KeyUtil.isKeyCode(event, DOWN_ARROW) && nextElementSibling) {
             nextElementSibling.focus();
