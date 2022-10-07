@@ -1,3 +1,12 @@
+## [0.36.1-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.29...v0.36.1-rc.30) (2022-10-07)
+
+
+### Bug Fixes
+
+* **docs:** documentation sorting ([#8796](https://github.com/SAP/fundamental-ngx/issues/8796)) ([1ed703b](https://github.com/SAP/fundamental-ngx/commit/1ed703b559d441777dc7eb96ca5d3199d9f6d84f))
+
+
+
 ## [0.36.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.28...v0.36.1-rc.29) (2022-10-07)
 
 
