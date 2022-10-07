@@ -1,3 +1,12 @@
+## [0.36.1-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.30...v0.36.1-rc.31) (2022-10-07)
+
+
+### Bug Fixes
+
+* **core:** add key navigation in vertical navigation ([#8721](https://github.com/SAP/fundamental-ngx/issues/8721)) ([5d43755](https://github.com/SAP/fundamental-ngx/commit/5d4375593ebeb12dc8183cf8955aa8ec675f9142))
+
+
+
 ## [0.36.1-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.29...v0.36.1-rc.30) (2022-10-07)
 
 
