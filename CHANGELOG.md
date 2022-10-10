@@ -1,3 +1,12 @@
+## [0.36.1-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.31...v0.36.1-rc.32) (2022-10-10)
+
+
+### Bug Fixes
+
+* **core,platform:** hiding live announcer element ([#8781](https://github.com/SAP/fundamental-ngx/issues/8781)) ([9b7ef85](https://github.com/SAP/fundamental-ngx/commit/9b7ef853756fd7b8503c1e7f924932db77554b56))
+
+
+
 ## [0.36.1-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.30...v0.36.1-rc.31) (2022-10-07)
 
 
