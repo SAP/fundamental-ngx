@@ -1,6 +1,9 @@
+@use '@angular/cdk';
 @import '~fundamental-styles/dist/button';
 @import '~fundamental-styles/dist/input';
 @import '~fundamental-styles/dist/input-group';
+
+@include cdk.a11y-visually-hidden();
 
 .fdp-search-field {
     /* Remove clear "x" from search field for IE browsers */

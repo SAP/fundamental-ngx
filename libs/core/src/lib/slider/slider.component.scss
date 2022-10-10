@@ -1,5 +1,8 @@
+@use '@angular/cdk';
 @import '~fundamental-styles/dist/slider';
 @import '~fundamental-styles/dist/input';
+
+@include cdk.a11y-visually-hidden();
 
 .fd-popover--slider {
     display: block !important;

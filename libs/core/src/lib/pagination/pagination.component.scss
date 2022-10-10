@@ -1,4 +1,7 @@
+@use '@angular/cdk';
 @import '~fundamental-styles/dist/pagination';
+
+@include cdk.a11y-visually-hidden();
 
 $block: fd-pagination;
 

@@ -1,4 +1,7 @@
+@use '@angular/cdk';
 @import '~fundamental-styles/dist/message-toast';
+
+@include cdk.a11y-visually-hidden();
 
 .fd-message-toast {
     display: block;
