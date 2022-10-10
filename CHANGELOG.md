@@ -1,3 +1,12 @@
+## [0.36.1-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.32...v0.36.1-rc.33) (2022-10-10)
+
+
+### Features
+
+* **docs:** universal switcher ([#8774](https://github.com/SAP/fundamental-ngx/issues/8774)) ([76f3944](https://github.com/SAP/fundamental-ngx/commit/76f39441e4601991405769bc656434eb8878efc8))
+
+
+
 ## [0.36.1-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.31...v0.36.1-rc.32) (2022-10-10)
 
 
