@@ -6,7 +6,13 @@
     [offset]="offset"
     [ariaLabel]="ariaLabel"
 >
-    <fd-dynamic-page-header *ngIf="titleComponent" [title]="titleComponent.title" [subtitle]="titleComponent.subtitle">
+    <fd-dynamic-page-header
+        *ngIf="titleComponent"
+        [title]="titleComponent.title"
+        [titleWrap]="titleComponent.titleWrap"
+        [subtitle]="titleComponent.subtitle"
+        [subtitleWrap]="titleComponent.subtitleWrap"
+    >
         <fd-breadcrumb>
             <ng-container [ngTemplateOutlet]="titleComponent.breadcrumbTemplate"></ng-container>
         </fd-breadcrumb>
