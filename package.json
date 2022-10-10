@@ -119,6 +119,7 @@
     "autoprefixer": "10.4.2",
     "axe-core": "4.4.1",
     "axe-html-reporter": "2.2.0",
+    "axios": "1.1.2",
     "babel-loader": "8.2.4",
     "chromedriver": "99.0.0",
     "conventional-changelog": "3.1.25",
