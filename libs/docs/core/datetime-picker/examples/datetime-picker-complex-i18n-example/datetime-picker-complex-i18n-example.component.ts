@@ -10,6 +10,7 @@ import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import {
     FD_LANGUAGE,
     FD_LANGUAGE_BULGARIAN,
+    FD_LANGUAGE_CHINESE,
     FD_LANGUAGE_ENGLISH,
     FD_LANGUAGE_FRENCH,
     FD_LANGUAGE_POLISH,
@@ -71,6 +72,8 @@ export class DatetimePickerComplexI18nExampleComponent {
             this.langSubject$.next(FD_LANGUAGE_BULGARIAN);
         } else if (locale === 'pl') {
             this.langSubject$.next(FD_LANGUAGE_POLISH);
+        } else if (locale === 'zh') {
+            this.langSubject$.next(FD_LANGUAGE_CHINESE);
         }
     }
 }
