@@ -49,6 +49,11 @@ body {
     position: relative;
     height: 100%;
     overflow: hidden;
+    color: var(--sapTextColor);
+}
+
+a {
+    color: var(--sapLinkColor);
 }
 
 *,
@@ -60,7 +65,7 @@ body {
 
 body {
     margin: 0;
-    background-color: white;
+    background-color: var(--sapBackgroundColor);
     font-family: '72', sans-serif;
 }
 
@@ -256,8 +261,9 @@ a:not(.fd-link):focus {
         padding: 1rem;
         font-size: 13px;
         line-height: 1.42857143;
+        color: var(--sapTextColor);
         word-break: break-all;
-        border: 1px solid #ccc;
+        border: 1px solid var(--sapNeutralBorderColor);
         border-radius: 4px;
         color: var(--sapTextColor);
         code {

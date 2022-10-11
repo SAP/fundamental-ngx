@@ -253,7 +253,7 @@ describe('Radio button group  Test Suite', () => {
         ).toBe('true');
     });
 
-    it('Verify platform radio buttons created with given list of SelectItem objects and have validation error', async () => {
+    xit('Verify platform radio buttons created with given list of SelectItem objects and have validation error', async () => {
         await scrollIntoView(radioButtonInputByIndex(radioButtonWithListOfSelectItemObjects));
         await click(radioButtonLabelByIndex(radioButtonWithListOfSelectItemObjects));
         await expect(await getText(selectedValueLabel, radioButtonWithListOfSelectItemObjects)).toContain(winterValue);
@@ -583,7 +583,7 @@ describe('Radio button group  Test Suite', () => {
         ).toBe('true');
     });
 
-    it('Verify validation for radio group with disabled button and validation error', async () => {
+    xit('Verify validation for radio group with disabled button and validation error', async () => {
         await scrollIntoView(radioButtonInputByIndex(radioButtonHaveValidationError));
         const radioButtonsLength = await getElementArrayLength(
             await radioButtonGroupPage.radioButtonInputByIndex(radioButtonHaveValidationError)
@@ -594,7 +594,7 @@ describe('Radio button group  Test Suite', () => {
         }
     });
 
-    it('Verify validation for radio group with disabled button and validation error', async () => {
+    xit('Verify validation for radio group with disabled button and validation error', async () => {
         await scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledButtonAndValidationError));
         const radioButtonsLength = await getElementArrayLength(
             await radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithDisabledButtonAndValidationError)
@@ -605,7 +605,7 @@ describe('Radio button group  Test Suite', () => {
         }
     });
 
-    it('Verify validation for radio buttons created with given list of SelectItem objects and have validation error', async () => {
+    xit('Verify validation for radio buttons created with given list of SelectItem objects and have validation error', async () => {
         await scrollIntoView(radioButtonInputByIndex(radioButtonWithListOfSelectItemObjects));
         const radioButtonsLength = await getElementArrayLength(
             await radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithListOfSelectItemObjects)

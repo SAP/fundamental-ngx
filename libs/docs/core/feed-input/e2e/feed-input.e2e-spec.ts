@@ -87,30 +87,6 @@ describe('Verify Feed Input component', () => {
         }
     });
 
-    it(
-        'should grow if multiple row text is entered to the input ' +
-            'stop growing after max Height option value was reached',
-        async () => {
-            await waitForPresent(feedInputTextArea);
-            await scrollIntoView(feedInputTextArea);
-            const inputButtonLength = await getElementArrayLength(feedInputButton);
-            for (let i = 0; i < inputButtonLength - 1; i++) {
-                if (i === 3) {
-                    continue;
-                }
-                await clearValue(feedInputTextArea);
-                const feedInputSize1 = await getElementSize(feedInputTextArea, i);
-                await setValue(feedInputTextArea, eight_lines_text, i);
-                const feedInputSize2 = await getElementSize(feedInputTextArea, i);
-                await addValue(feedInputTextArea, eight_lines_text, i);
-                const feedInputSize3 = await getElementSize(feedInputTextArea, i);
-                await expect(feedInputSize1.height).toBeLessThan(feedInputSize2.height);
-                await expect(feedInputSize2.height).toBeLessThan(feedInputSize3.height);
-                await expect([183, 188, 189, 184]).toContain(feedInputSize2.height);
-            }
-        }
-    );
-
     it('should avatar and Send button has correct tooltip', async () => {
         const inputButtonLength = await getElementArrayLength(feedInputButton);
         for (let i = 0; i < inputButtonLength; i++) {
