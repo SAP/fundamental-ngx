@@ -39,12 +39,7 @@
             "executor": "@nrwl/linter:eslint",
             "outputs": ["{options.outputFile}"],
             "options": {
-                "lintFilePatterns": [
-                    "libs/plugins/wdio/**/*.ts",
-                    "libs/plugins/wdio/generators.json",
-                    "libs/plugins/wdio/executors.json",
-                    "libs/plugins/wdio/package.json"
-                ]
+                "lintFilePatterns": ["libs/plugins/wdio/**/*.ts"]
             }
         }
     },

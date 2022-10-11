@@ -32,7 +32,7 @@ async function getSpecFiles(projects: string[], context: ExecutorContext): Promi
     const dependencies = projects.filter(
         (p) => directProjectDependencies.has(p) && projectGraph.nodes[p].data.targets.e2e
     );
-    const specFiles: string[] = [];
+    const e2eFiles: string[] = [];
     for (const dependency of dependencies) {
         const targetOptions: { e2eFiles?: string[] } = readTargetOptions(
             { project: dependency, target: 'e2e', configuration: context.configurationName },
@@ -40,8 +40,8 @@ async function getSpecFiles(projects: string[], context: ExecutorContext): Promi
         );
         if (targetOptions.e2eFiles && targetOptions.e2eFiles.length > 0) {
             logger.info(`Including spec files from ${dependency}`);
-            specFiles.push(...targetOptions.e2eFiles);
+            e2eFiles.push(...targetOptions.e2eFiles);
         }
     }
-    return specFiles;
+    return e2eFiles;
 }
