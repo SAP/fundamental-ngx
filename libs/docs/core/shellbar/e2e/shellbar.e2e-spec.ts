@@ -45,196 +45,199 @@ describe('shellbar test suite', () => {
         sideNavControlBtn
     } = shellbarPage;
 
-    beforeAll(() => {
-        shellbarPage.open();
+    beforeAll(async () => {
+        await shellbarPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(shellbarPage.root);
-        waitForElDisplayed(shellbarPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(shellbarPage.root);
+        await waitForElDisplayed(shellbarPage.title);
     }, 1);
 
     describe('Basic example', () => {
-        it('should open user actions menu on click', () => {
-            scrollIntoView(basicExample);
-            click(basicExample + shellbarAvatar);
-            waitForElDisplayed(popover);
+        it('should open user actions menu on click', async () => {
+            await scrollIntoView(basicExample);
+            await click(basicExample + shellbarAvatar);
+            await waitForElDisplayed(popover);
 
-            expect(isElementDisplayed(popover)).toBe(true, 'popover is not displayed');
+            await expect(await isElementDisplayed(popover)).toBe(true, 'popover is not displayed');
 
-            click(basicExample + shellbarAvatar);
+            await click(basicExample + shellbarAvatar);
 
-            expect(doesItExist(popover)).toBe(false, 'popover is displayed');
+            await expect(await doesItExist(popover)).toBe(false, 'popover is displayed');
         });
 
-        it('should check user action menu items are clickable', () => {
-            scrollIntoView(basicExample);
-            click(basicExample + shellbarAvatar);
-            const menuItemCount = getElementArrayLength(popoverMenuItem);
+        it('should check user action menu items are clickable', async () => {
+            await scrollIntoView(basicExample);
+            await click(basicExample + shellbarAvatar);
+            const menuItemCount = await getElementArrayLength(popoverMenuItem);
 
             for (let i = 0; i < menuItemCount; i++) {
-                expect(isElementClickable(popoverMenuItem, i)).toBe(true, `menu item ${i} is not clickable`);
+                await expect(await isElementClickable(popoverMenuItem, i)).toBe(
+                    true,
+                    `menu item ${i} is not clickable`
+                );
             }
         });
 
-        it('should check logo navigation', () => {
-            scrollIntoView(basicExample);
+        it('should check logo navigation', async () => {
+            await scrollIntoView(basicExample);
 
-            checkLinkTarget(basicExample + shellbarLogoLink, '/core/home', 'input[type="text"]');
-            goBack();
-            waitForElDisplayed(shellbarPage.title);
+            await checkLinkTarget(basicExample + shellbarLogoLink, '/core/home', 'input[type="text"]');
+            await goBack();
+            await waitForElDisplayed(shellbarPage.title);
         });
     });
 
     describe('Links with collapsible menu and product switcher example', () => {
-        it('should check the sizes', () => {
-            scrollIntoView(collapsableExample);
-            click(sizeButtons);
-            const smallShellbar = getElementSize(collapsableShellbar);
-            click(sizeButtons, 1);
-            const mediumShellbar = getElementSize(collapsableShellbar);
-            click(sizeButtons, 2);
-            const largeShellbar = getElementSize(collapsableShellbar);
-            click(sizeButtons, 3);
-            const xlShellbar = getElementSize(collapsableShellbar);
+        it('should check the sizes', async () => {
+            await scrollIntoView(collapsableExample);
+            await click(sizeButtons);
+            const smallShellbar = await getElementSize(collapsableShellbar);
+            await click(sizeButtons, 1);
+            const mediumShellbar = await getElementSize(collapsableShellbar);
+            await click(sizeButtons, 2);
+            const largeShellbar = await getElementSize(collapsableShellbar);
+            await click(sizeButtons, 3);
+            const xlShellbar = await getElementSize(collapsableShellbar);
 
-            expect(smallShellbar.width).toBeLessThan(mediumShellbar.width);
-            expect(mediumShellbar.width).toBeLessThan(largeShellbar.width);
-            expect(largeShellbar.width).toBeLessThan(xlShellbar.width);
+            await expect(smallShellbar.width).toBeLessThan(mediumShellbar.width);
+            await expect(mediumShellbar.width).toBeLessThan(largeShellbar.width);
+            await expect(largeShellbar.width).toBeLessThan(xlShellbar.width);
         });
 
-        it('should check the title dropdown menu', () => {
-            scrollIntoView(collapsableExample);
-            click(collapsableShellbarTitle);
-            waitForElDisplayed(popover);
+        it('should check the title dropdown menu', async () => {
+            await scrollIntoView(collapsableExample);
+            await click(collapsableShellbarTitle);
+            await waitForElDisplayed(popover);
 
-            expect(isElementDisplayed(popover)).toBe(true, 'title popover is not displayed');
-            expect(isElementClickable(popoverMenuItem)).toBe(true, 'popover items not clickable');
+            await expect(await isElementDisplayed(popover)).toBe(true, 'title popover is not displayed');
+            await expect(await isElementClickable(popoverMenuItem)).toBe(true, 'popover items not clickable');
         });
 
-        it('should check the searchbar dropdown', () => {
-            scrollIntoView(collapsableExample);
-            click(searchbarButton);
-            waitForElDisplayed(popover);
+        it('should check the searchbar dropdown', async () => {
+            await scrollIntoView(collapsableExample);
+            await click(searchbarButton);
+            await waitForElDisplayed(popover);
 
-            expect(isElementDisplayed(popover)).toBe(true, 'search popover is not displayed');
-            expect(isElementClickable(searchMenuItem)).toBe(true, 'popover items not clickable');
+            await expect(await isElementDisplayed(popover)).toBe(true, 'search popover is not displayed');
+            await expect(await isElementClickable(searchMenuItem)).toBe(true, 'popover items not clickable');
         });
 
-        it('should check search with text', () => {
-            scrollIntoView(collapsableExample);
-            click(searchField);
-            sendKeys('App');
+        it('should check search with text', async () => {
+            await scrollIntoView(collapsableExample);
+            await click(searchField);
+            await sendKeys('App');
 
-            expect(isElementDisplayed(popover)).toBe(true, 'search popover is not displayed');
-            expect(isElementClickable(searchMenuItem)).toBe(true, 'popover items not clickable');
+            await expect(await isElementDisplayed(popover)).toBe(true, 'search popover is not displayed');
+            await expect(await isElementClickable(searchMenuItem)).toBe(true, 'popover items not clickable');
         });
 
-        it('should check actions', () => {
-            scrollIntoView(collapsableExample);
-            click(actionButton);
+        it('should check actions', async () => {
+            await scrollIntoView(collapsableExample);
+            await click(actionButton);
 
-            if (currentBrowserName() === 'chrome') {
-                expect(isAlertOpen()).toBe(true, 'action not done');
+            if ((await currentBrowserName()) === 'chrome') {
+                await expect(await isAlertOpen()).toBe(true, 'action not done');
             }
 
-            if (currentBrowserName() !== 'chrome') {
-                expect([null, undefined]).not.toContain(getAlertText());
-            }
-        });
-
-        it('should check notifications', () => {
-            scrollIntoView(collapsableExample);
-            click(actionButton, 1);
-
-            if (currentBrowserName() === 'chrome') {
-                expect(isAlertOpen()).toBe(true, 'action not done');
-            }
-
-            if (currentBrowserName() !== 'chrome') {
-                expect([null, undefined]).not.toContain(getAlertText());
+            if ((await currentBrowserName()) !== 'chrome') {
+                await expect([null, undefined]).not.toContain((await getAlertText()) as any);
             }
         });
 
-        it('should check user action menu', () => {
-            scrollIntoView(collapsableExample);
-            click(collapsableExample + shellbarAvatar);
-            waitForElDisplayed(popover);
+        it('should check notifications', async () => {
+            await scrollIntoView(collapsableExample);
+            await click(actionButton, 1);
 
-            expect(isElementDisplayed(popover)).toBe(true, 'popover not displayed');
-            expect(isElementClickable(popoverMenuItem)).toBe(true, 'menu item not clickable');
+            if ((await currentBrowserName()) === 'chrome') {
+                await expect(await isAlertOpen()).toBe(true, 'action not done');
+            }
+
+            if ((await currentBrowserName()) !== 'chrome') {
+                await expect([null, undefined]).not.toContain((await getAlertText()) as any);
+            }
         });
 
-        it('should check apps menu opens on click', () => {
-            openMyApps();
+        it('should check user action menu', async () => {
+            await scrollIntoView(collapsableExample);
+            await click(collapsableExample + shellbarAvatar);
+            await waitForElDisplayed(popover);
 
-            expect(isElementDisplayed(popover)).toBe(true, 'popover not displayed');
+            await expect(await isElementDisplayed(popover)).toBe(true, 'popover not displayed');
+            await expect(await isElementClickable(popoverMenuItem)).toBe(true, 'menu item not clickable');
         });
 
-        it('should check app menu items clickable', () => {
-            openMyApps();
-            const appCount = getElementArrayLength(myApps);
+        it('should check apps menu opens on click', async () => {
+            await openMyApps();
+
+            await expect(await isElementDisplayed(popover)).toBe(true, 'popover not displayed');
+        });
+
+        it('should check app menu items clickable', async () => {
+            await openMyApps();
+            const appCount = await getElementArrayLength(myApps);
 
             for (let i = 0; i < appCount; i++) {
-                expect(isElementClickable(myApps, i)).toBe(true, `app ${i} is not clickable`);
+                await expect(await isElementClickable(myApps, i)).toBe(true, `app ${i} is not clickable`);
             }
         });
 
-        it('should drag and drop apps', () => {
-            openMyApps();
-            const originalCardData = getText(myApps, 4);
+        it('should drag and drop apps', async () => {
+            await openMyApps();
+            const originalCardData = await getText(myApps, 4);
 
-            clickAndMoveElement(myApps, 150, 0, 4);
+            await clickAndMoveElement(myApps, 150, 0, 4);
 
-            expect(getText(myApps, 4)).not.toEqual(originalCardData);
+            await expect(await getText(myApps, 4)).not.toEqual(originalCardData);
         });
     });
 
     describe('shellbar with sidenavigation example', () => {
-        it('should check size nav items clickable', () => {
-            scrollIntoView(sideNavExample);
-            const navItemCount = getElementArrayLength(sideNavItems);
+        it('should check size nav items clickable', async () => {
+            await scrollIntoView(sideNavExample);
+            const navItemCount = await getElementArrayLength(sideNavItems);
 
             for (let i = 0; i < navItemCount; i++) {
-                expect(isElementClickable(sideNavItems, i)).toBe(true, `nav item ${i} is not clickable`);
+                await expect(await isElementClickable(sideNavItems, i)).toBe(true, `nav item ${i} is not clickable`);
             }
         });
 
-        it('should check ability to collapse side nav', () => {
-            scrollIntoView(sideNavExample);
+        it('should check ability to collapse side nav', async () => {
+            await scrollIntoView(sideNavExample);
 
-            expect(isElementDisplayed(sideNavText)).toBe(true, 'nav text is not displayed');
-            expect(isElementDisplayed(sideNavIcons)).toBe(true, 'nav icon is not displayed');
+            await expect(await isElementDisplayed(sideNavText)).toBe(true, 'nav text is not displayed');
+            await expect(await isElementDisplayed(sideNavIcons)).toBe(true, 'nav icon is not displayed');
 
-            click(sideNavControlBtn);
+            await click(sideNavControlBtn);
 
-            expect(isElementDisplayed(sideNavText)).toBe(false, 'nav text is displayed');
-            expect(isElementDisplayed(sideNavIcons)).toBe(true, 'nav icon is not displayed');
+            await expect(await isElementDisplayed(sideNavText)).toBe(false, 'nav text is displayed');
+            await expect(await isElementDisplayed(sideNavIcons)).toBe(true, 'nav icon is not displayed');
         });
     });
 
     describe('visual regression and orientation', () => {
-        it('should check orientation', () => {
-            shellbarPage.checkRtlSwitch();
+        it('should check orientation', async () => {
+            await shellbarPage.checkRtlSwitch();
         });
 
-        xit('should check example block visual regression', () => {
-            shellbarPage.saveExampleBaselineScreenshot();
-            expect(shellbarPage.compareWithBaseline()).toBeLessThan(5);
+        xit('should check example block visual regression', async () => {
+            await shellbarPage.saveExampleBaselineScreenshot();
+            await expect(await shellbarPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 
-    function openMyApps(): void {
-        scrollIntoView(collapsableExample);
-        click(myAppsButton);
-        waitForElDisplayed(popover);
+    async function openMyApps(): Promise<void> {
+        await scrollIntoView(collapsableExample);
+        await click(myAppsButton);
+        await waitForElDisplayed(popover);
     }
 
-    function checkLinkTarget(element, site: string, newPageElement): void {
-        click(element);
-        waitForElDisplayed(newPageElement);
-        const newUrl = getCurrentUrl();
-        expect(newUrl).toContain(site);
+    async function checkLinkTarget(element, site: string, newPageElement): Promise<void> {
+        await click(element);
+        await waitForElDisplayed(newPageElement);
+        const newUrl = await getCurrentUrl();
+        await expect(newUrl).toContain(site);
     }
 });

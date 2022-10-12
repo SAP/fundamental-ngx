@@ -40,178 +40,178 @@ describe('Alert test suite', () => {
         openAlertButton
     } = alertPage;
 
-    beforeAll(() => {
-        alertPage.open();
+    beforeAll(async () => {
+        await alertPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage(true);
-        waitForPresent(alertPage.root);
-        waitForElDisplayed(alertPage.title);
+    afterEach(async () => {
+        await refreshPage(true);
+        await waitForPresent(alertPage.root);
+        await waitForElDisplayed(alertPage.title);
     }, 1);
 
     describe('main checks', () => {
-        it('should check ability to dismiss alert', () => {
-            const dismissableAlertCount = getElementArrayLength(closeAlertButton);
+        it('should check ability to dismiss alert', async () => {
+            const dismissableAlertCount = await getElementArrayLength(closeAlertButton);
 
             for (let i = 0; dismissableAlertCount > i; i++) {
-                click(closeAlertButton, i);
-                expect(isElementDisplayed(closeAlertButton, i)).toBe(false);
+                await click(closeAlertButton, i);
+                await expect(await isElementDisplayed(closeAlertButton, i)).toBe(false);
             }
         });
 
-        it('should check popup alerts appear and disappear', () => {
+        it('should check popup alerts appear and disappear', async () => {
             const openOverlayButtonCount = 3;
-            checkPopupAlert(openOverlayButton, openOverlayButtonCount);
+            await checkPopupAlert(openOverlayButton, openOverlayButtonCount);
         });
 
-        it('should check custom popup alerts appear and disappear', () => {
-            const customAlertCount = getElementArrayLength(openCustomAlertButton);
-            checkPopupAlert(openCustomAlertButton, customAlertCount);
+        it('should check custom popup alerts appear and disappear', async () => {
+            const customAlertCount = await getElementArrayLength(openCustomAlertButton);
+            await checkPopupAlert(openCustomAlertButton, customAlertCount);
         });
 
-        it('should check RTL/LTR orientations', () => {
-            alertPage.checkRtlSwitch();
+        it('should check RTL/LTR orientations', async () => {
+            await alertPage.checkRtlSwitch();
         });
     });
 
     describe('Alert with customizable width example', () => {
-        it('check alert with width 250px', () => {
-            click(openCustomAlertButton);
-            expect(getAttributeByName(popupAlert, 'style')).toContain('width: 250px');
+        it('check alert with width 250px', async () => {
+            await click(openCustomAlertButton);
+            await expect(await getAttributeByName(popupAlert, 'style')).toContain('width: 250px');
         });
 
-        it('check alert with width 550px', () => {
-            click(openCustomAlertButton, 1);
-            expect(getAttributeByName(popupAlert, 'style')).toContain('width: 550px');
+        it('check alert with width 550px', async () => {
+            await click(openCustomAlertButton, 1);
+            await expect(await getAttributeByName(popupAlert, 'style')).toContain('width: 550px');
         });
 
-        it('check alert with width 70 vw', () => {
-            click(openCustomAlertButton, 2);
-            expect(getAttributeByName(popupAlert, 'style')).toContain('width: 70vw');
+        it('check alert with width 70 vw', async () => {
+            await click(openCustomAlertButton, 2);
+            await expect(await getAttributeByName(popupAlert, 'style')).toContain('width: 70vw');
         });
 
-        it('check alert with width 100px', () => {
-            click(openCustomAlertButton, 3);
-            expect(getAttributeByName(popupAlert, 'style')).toContain('width: 100vw');
+        it('check alert with width 100px', async () => {
+            await click(openCustomAlertButton, 3);
+            await expect(await getAttributeByName(popupAlert, 'style')).toContain('width: 100vw');
         });
     });
 
     describe('Playground example', () => {
-        it('should check changing alert text', () => {
+        it('should check changing alert text', async () => {
             const newValue = '123';
-            setValue(messageField, newValue);
-            expect(getText(playgroundAlertText)).toBe(newValue);
-            expect(getText(playgroundAlertText, 1)).toBe(newValue);
+            await setValue(messageField, newValue);
+            await expect(await getText(playgroundAlertText)).toBe(newValue);
+            await expect(await getText(playgroundAlertText, 1)).toBe(newValue);
         });
 
-        it('should check that we can keep alert without test', () => {
-            const defaulTextLength = getText(playgroundAlert).length;
-            click(messageField);
+        it('should check that we can keep alert without test', async () => {
+            const defaulTextLength = (await getText(playgroundAlert)).length;
+            await click(messageField);
             for (let i = 0; i < defaulTextLength; i++) {
-                sendKeys('Backspace');
+                await sendKeys('Backspace');
             }
-            expect(getText(playgroundAlertText, 0)).toBe('');
-            expect(getText(playgroundAlertText, 1)).toBe('');
+            await expect(await getText(playgroundAlertText, 0)).toBe('');
+            await expect(await getText(playgroundAlertText, 1)).toBe('');
         });
 
-        it('should check changing width of the alert', () => {
-            setValue(alertWidthField, '90%');
-            expect(getAttributeByName(playgroundAlert, 'style')).toContain('width: 90%');
-            expect(getAttributeByName(playgroundAlert, 'style', 1)).toContain('width: 90%');
+        it('should check changing width of the alert', async () => {
+            await setValue(alertWidthField, '90%');
+            await expect(await getAttributeByName(playgroundAlert, 'style')).toContain('width: 90%');
+            await expect(await getAttributeByName(playgroundAlert, 'style', 1)).toContain('width: 90%');
         });
 
-        it('should check that we can put different width meter(px, vw, etc.)', () => {
-            setValue(alertWidthField, '100px');
-            expect(getAttributeByName(playgroundAlert, 'style')).toContain('width: 100px');
-            expect(getAttributeByName(playgroundAlert, 'style', 1)).toContain('width: 100px');
+        it('should check that we can put different width meter(px, vw, etc.)', async () => {
+            await setValue(alertWidthField, '100px');
+            await expect(await getAttributeByName(playgroundAlert, 'style')).toContain('width: 100px');
+            await expect(await getAttributeByName(playgroundAlert, 'style', 1)).toContain('width: 100px');
         });
 
-        it('should check that width will not change if miss width meter(%, px, vw_)', () => {
-            setValue(alertWidthField, '90');
-            expect(getAttributeByName(playgroundAlert, 'style')).toContain('width: 100%');
-            expect(getAttributeByName(playgroundAlert, 'style', 1)).toContain('width: 100%');
+        it('should check that width will not change if miss width meter(%, px, vw_)', async () => {
+            await setValue(alertWidthField, '90');
+            await expect(await getAttributeByName(playgroundAlert, 'style')).toContain('width: 100%');
+            await expect(await getAttributeByName(playgroundAlert, 'style', 1)).toContain('width: 100%');
         });
 
-        it('should check changing type of warning', () => {
-            click(playgroundAlert + button);
-            click(select);
-            click(option, 1);
-            expect(getElementClass(playgroundAlert)).toContain('warning');
+        it('should check changing type of warning', async () => {
+            await click(playgroundAlert + button);
+            await click(select);
+            await click(option, 1);
+            await expect(await getElementClass(playgroundAlert)).toContain('warning');
         });
 
-        it('should turn on/turn off dissmising alerts', () => {
-            click(checkbox);
-            expect(doesItExist(playgroundAlert + button)).toBe(false);
-            click(checkbox);
-            expect(doesItExist(playgroundAlert + button)).toBe(true);
+        it('should turn on/turn off dissmising alerts', async () => {
+            await click(checkbox);
+            await expect(await doesItExist(playgroundAlert + button)).toBe(false);
+            await click(checkbox);
+            await expect(await doesItExist(playgroundAlert + button)).toBe(true);
         });
 
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/7189
-        xit('should check close - open alert', () => {
-            scrollIntoView(playgroundAlert);
-            click(playgroundAlert + button);
-            expect(getElementArrayLength(playgroundAlert)).toBe(1);
-            click(openAlertButton);
-            expect(getElementArrayLength(playgroundAlert)).toBe(2);
+        xit('should check close - open alert', async () => {
+            await scrollIntoView(playgroundAlert);
+            await click(playgroundAlert + button);
+            await expect(await getElementArrayLength(playgroundAlert)).toBe(1);
+            await click(openAlertButton);
+            await expect(await getElementArrayLength(playgroundAlert)).toBe(2);
         });
 
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/6405
-        xit('should check that after removing one alert and changing alert mode will not be added one more alert', () => {
-            scrollIntoView(playgroundAlert);
-            click(playgroundAlert + button);
-            click(select);
-            click(option);
-            expect(getElementArrayLength(playgroundAlert)).toBe(1, 'new alert appeared, but should not');
+        xit('should check that after removing one alert and changing alert mode will not be added one more alert', async () => {
+            await scrollIntoView(playgroundAlert);
+            await click(playgroundAlert + button);
+            await click(select);
+            await click(option);
+            await expect(await getElementArrayLength(playgroundAlert)).toBe(1, 'new alert appeared, but should not');
         });
     });
 
-    it('should check RTL/LTR orientations', () => {
-        alertPage.checkRtlSwitch();
+    it('should check RTL/LTR orientations', async () => {
+        await alertPage.checkRtlSwitch();
     });
 
     xdescribe('visual regression', () => {
-        it('should check example blocks visual regression', () => {
-            alertPage.saveExampleBaselineScreenshot();
-            expect(alertPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check example blocks visual regression', async () => {
+            await alertPage.saveExampleBaselineScreenshot();
+            await expect(await alertPage.compareWithBaseline()).toBeLessThan(5);
         });
 
-        it('should check custom alerts visual regression', () => {
-            const customAlertCount = getElementArrayLength(openCustomAlertButton);
+        it('should check custom alerts visual regression', async () => {
+            const customAlertCount = await getElementArrayLength(openCustomAlertButton);
 
             for (let i = 0; customAlertCount > i; i++) {
-                click(openCustomAlertButton, i);
-                waitForPresent(popupAlert);
-                saveElementScreenshot(
+                await click(openCustomAlertButton, i);
+                await waitForPresent(popupAlert);
+                await saveElementScreenshot(
                     popupAlert,
-                    `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`,
-                    alertPage.getScreenshotFolder()
+                    `alert-customPopup-example-${i}-core-${await getImageTagBrowserPlatform()}`,
+                    await alertPage.getScreenshotFolder()
                 );
-                expect(
-                    checkElementScreenshot(
+                await expect(
+                    await checkElementScreenshot(
                         popupAlert,
-                        `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`,
-                        alertPage.getScreenshotFolder()
+                        `alert-customPopup-example-${i}-core-${await getImageTagBrowserPlatform()}`,
+                        await alertPage.getScreenshotFolder()
                     )
                 ).toBeLessThan(5);
-                waitForInvisibilityOf(popupAlert);
+                await waitForInvisibilityOf(popupAlert);
             }
         }, 1);
     });
 
-    function checkPopupAlert(selector: string, count: number): void {
+    async function checkPopupAlert(selector: string, count: number): Promise<void> {
         for (let i = 0; count > i; i++) {
-            click(selector, i);
-            expect(waitForElDisplayed(popupAlert)).toBe(true);
+            await click(selector, i);
+            await expect(await waitForElDisplayed(popupAlert)).toBe(true);
 
-            if (doesItExist(popupAlert + button) === false) {
-                waitForNotDisplayed(popupAlert, 0, 12000);
+            if ((await doesItExist(popupAlert + button)) === false) {
+                await waitForNotDisplayed(popupAlert, 0, 12000);
                 continue;
             }
-            click(popupAlert + button);
+            await click(popupAlert + button);
             // the pause gives the alert time to close before checking if it still exists
-            pause(750);
-            expect(doesItExist(popupAlert)).toBe(false);
+            await pause(750);
+            await expect(await doesItExist(popupAlert)).toBe(false);
         }
     }
 });

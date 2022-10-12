@@ -55,184 +55,184 @@ describe('Toolbar test suite', () => {
         overflowInput
     } = toolbarPage;
 
-    beforeAll(() => {
-        toolbarPage.open();
+    beforeAll(async () => {
+        await toolbarPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(toolbarPage.root);
-        waitForElDisplayed(toolbarPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(toolbarPage.root);
+        await waitForElDisplayed(toolbarPage.title);
     }, 2);
 
-    it('verify info active toolbar is clickable', () => {
-        scrollIntoView(activeInfoToolbar);
-        expect(isElementClickable(activeInfoToolbar)).toBe(true, 'info active toolbar is not clickable');
+    it('verify info active toolbar is clickable', async () => {
+        await scrollIntoView(activeInfoToolbar);
+        await expect(await isElementClickable(activeInfoToolbar)).toBe(true, 'info active toolbar is not clickable');
     });
 
     describe('Check Toolbar Overflow example', () => {
-        it('verify all buttons are clickable', () => {
-            checkClickableButton(overflowButton);
+        it('verify all buttons are clickable', async () => {
+            await checkClickableButton(overflowButton);
         });
 
-        xit('verify checkbox', () => {
+        xit('verify checkbox', async () => {
             const checkboxSquareTag = 'checkbox-square-';
             const checkboxTickTag = 'checkbox-tick-';
-            scrollIntoView(checkbox);
-            click(checkbox);
-            saveElementScreenshot(
+            await scrollIntoView(checkbox);
+            await click(checkbox);
+            await saveElementScreenshot(
                 checkbox,
-                checkboxSquareTag + getImageTagBrowserPlatform(),
-                toolbarPage.getScreenshotFolder()
+                checkboxSquareTag + (await getImageTagBrowserPlatform()),
+                await toolbarPage.getScreenshotFolder()
             );
-            expect(
-                checkElementScreenshot(
+            await expect(
+                await checkElementScreenshot(
                     checkbox,
-                    checkboxSquareTag + getImageTagBrowserPlatform(),
-                    toolbarPage.getScreenshotFolder()
+                    checkboxSquareTag + (await getImageTagBrowserPlatform()),
+                    await toolbarPage.getScreenshotFolder()
                 )
             ).toBeLessThan(5, `element item state mismatch`);
-            click(checkbox);
-            saveElementScreenshot(
+            await click(checkbox);
+            await saveElementScreenshot(
                 checkbox,
-                checkboxTickTag + getImageTagBrowserPlatform(),
-                toolbarPage.getScreenshotFolder()
+                checkboxTickTag + (await getImageTagBrowserPlatform()),
+                await toolbarPage.getScreenshotFolder()
             );
-            expect(
-                checkElementScreenshot(
+            await expect(
+                await checkElementScreenshot(
                     checkbox,
-                    checkboxTickTag + getImageTagBrowserPlatform(),
-                    toolbarPage.getScreenshotFolder()
+                    checkboxTickTag + (await getImageTagBrowserPlatform()),
+                    await toolbarPage.getScreenshotFolder()
                 )
             ).toBeLessThan(5, `element item state mismatch`);
         });
 
-        it('verify dropdown menu', () => {
-            scrollIntoView(dropdownMenu);
-            click(dropdownMenu);
-            const optionLength = getElementArrayLength(dropdownOption);
+        it('verify dropdown menu', async () => {
+            await scrollIntoView(dropdownMenu);
+            await click(dropdownMenu);
+            const optionLength = await getElementArrayLength(dropdownOption);
             for (let i = 0; i < optionLength; i++) {
-                click(dropdownOption, i);
-                expect(getText(inputFieldText).trim()).toBe(fruitArr[i]);
+                await click(dropdownOption, i);
+                await expect((await getText(inputFieldText)).trim()).toBe(fruitArr[i]);
                 if (i !== 3) {
-                    click(dropdownMenu);
+                    await click(dropdownMenu);
                 }
             }
         });
 
-        it('verify date time picker example', () => {
-            if (browserIsSafari()) {
+        it('verify date time picker example', async () => {
+            if (await browserIsSafari()) {
                 // not working correctly
                 return;
             }
-            scrollIntoView(dateTimeButton);
-            click(dateTimeButton);
-            clickDayInCalendarButtonByValue(currentDay);
-            selectHoursMinutesAndPeriod();
-            click(okButton);
-            expect(getValue(dateTimeInput)).toEqual(date);
+            await scrollIntoView(dateTimeButton);
+            await click(dateTimeButton);
+            await clickDayInCalendarButtonByValue(currentDay);
+            await selectHoursMinutesAndPeriod();
+            await click(okButton);
+            await expect(await getValue(dateTimeInput)).toEqual(date);
         });
 
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/7234
-        xit('verify popover split button', () => {
-            scrollIntoView(toolbarOverflowExample + moreButton);
-            click(toolbarOverflowExample + moreButton);
-            expect(getAttributeByName(popoverDropDown, 'aria-expanded')).toBe('false');
-            click(popoverSplitButton);
-            expect(getAttributeByName(popoverDropDown, 'aria-expanded')).toBe('true');
+        xit('verify popover split button', async () => {
+            await scrollIntoView(toolbarOverflowExample + moreButton);
+            await click(toolbarOverflowExample + moreButton);
+            await expect(await getAttributeByName(popoverDropDown, 'aria-expanded')).toBe('false');
+            await click(popoverSplitButton);
+            await expect(await getAttributeByName(popoverDropDown, 'aria-expanded')).toBe('true');
         });
 
-        it('verify popover input has placeholder', () => {
-            scrollIntoView(toolbarOverflowExample + moreButton);
-            if (getElementArrayLength(overflowInput) === 2) {
-                expect(getElementPlaceholder(overflowInput, 1)).toBe(placeholder);
+        it('verify popover input has placeholder', async () => {
+            await scrollIntoView(toolbarOverflowExample + moreButton);
+            if ((await getElementArrayLength(overflowInput)) === 2) {
+                await expect(await getElementPlaceholder(overflowInput, 1)).toBe(placeholder);
             }
-            if (getElementArrayLength(overflowInput) === 1) {
-                click(toolbarOverflowExample + moreButton);
-                waitForPresent(popoverInput);
-                expect(getElementPlaceholder(popoverInput)).toBe(placeholder);
-            }
-        });
-
-        it('verify that possible enter value popover input', () => {
-            scrollIntoView(toolbarOverflowExample + moreButton);
-            if (getElementArrayLength(overflowInput) === 2) {
-                setValue(overflowInput, testText, 1);
-                expect(getValue(overflowInput, 1)).toBe(testText);
-            }
-            if (getElementArrayLength(overflowInput) === 1) {
-                click(toolbarOverflowExample + moreButton);
-                waitForPresent(popoverInput);
-                setValue(popoverInput, testText);
-                expect(getValue(popoverInput)).toBe(testText);
+            if ((await getElementArrayLength(overflowInput)) === 1) {
+                await click(toolbarOverflowExample + moreButton);
+                await waitForPresent(popoverInput);
+                await expect(await getElementPlaceholder(popoverInput)).toBe(placeholder);
             }
         });
 
-        it('verify popover buttons are clickable', () => {
-            scrollIntoView(toolbarOverflowExample + moreButton);
-            click(toolbarOverflowExample + moreButton);
-            checkClickableButton(popoverButton);
+        it('verify that possible enter value popover input', async () => {
+            await scrollIntoView(toolbarOverflowExample + moreButton);
+            if ((await getElementArrayLength(overflowInput)) === 2) {
+                await setValue(overflowInput, testText, 1);
+                await expect(await getValue(overflowInput, 1)).toBe(testText);
+            }
+            if ((await getElementArrayLength(overflowInput)) === 1) {
+                await click(toolbarOverflowExample + moreButton);
+                await waitForPresent(popoverInput);
+                await setValue(popoverInput, testText);
+                await expect(await getValue(popoverInput)).toBe(testText);
+            }
         });
 
-        it('verify popover toggle buttons are work correctly', () => {
-            scrollIntoView(toolbarOverflowExample + moreButton);
-            click(toolbarOverflowExample + moreButton);
-            const toggleButtonLength = getElementArrayLength(popoverToggledButton);
+        it('verify popover buttons are clickable', async () => {
+            await scrollIntoView(toolbarOverflowExample + moreButton);
+            await click(toolbarOverflowExample + moreButton);
+            await checkClickableButton(popoverButton);
+        });
+
+        it('verify popover toggle buttons are work correctly', async () => {
+            await scrollIntoView(toolbarOverflowExample + moreButton);
+            await click(toolbarOverflowExample + moreButton);
+            const toggleButtonLength = await getElementArrayLength(popoverToggledButton);
             for (let i = 0; i < toggleButtonLength; i++) {
-                click(popoverToggledButton, i);
-                expect(getAttributeByName(popoverToggledButton, 'aria-pressed', i)).toBe('true');
+                await click(popoverToggledButton, i);
+                await expect(await getAttributeByName(popoverToggledButton, 'aria-pressed', i)).toBe('true');
             }
         });
     });
 
     describe('Check Toolbar Overflow Priority', () => {
-        it('should check Toolbar Overflow Priority example', () => {
-            checkClickableButton(overflowPriorityButton);
-            click(overflowPriorityExample + moreButton);
-            expect(isElementDisplayed(overflowBody)).toBe(true, 'overflow body id not displayed');
-            expect(isElementClickable(alwaysButton)).toBe(true, 'button is not clickable');
+        it('should check Toolbar Overflow Priority example', async () => {
+            await checkClickableButton(overflowPriorityButton);
+            await click(overflowPriorityExample + moreButton);
+            await expect(await isElementDisplayed(overflowBody)).toBe(true, 'overflow body id not displayed');
+            await expect(await isElementClickable(alwaysButton)).toBe(true, 'button is not clickable');
         });
     });
 
     describe('Check Toolbar Overflow Grouping', () => {
-        it('should check Toolbar Overflow Grouping example', () => {
-            checkClickableButton(overflowGroupingButton);
-            click(overflowGroupingExample + moreButton);
-            expect(isElementDisplayed(overflowBody)).toBe(true, 'overflow body id not displayed');
-            expect(isElementClickable(alwaysButton)).toBe(true, 'button is not clickable');
+        it('should check Toolbar Overflow Grouping example', async () => {
+            await checkClickableButton(overflowGroupingButton);
+            await click(overflowGroupingExample + moreButton);
+            await expect(await isElementDisplayed(overflowBody)).toBe(true, 'overflow body id not displayed');
+            await expect(await isElementClickable(alwaysButton)).toBe(true, 'button is not clickable');
         });
     });
 
     describe('Check orientation', () => {
-        it('should check RTL and LTR orientation', () => {
-            toolbarPage.checkRtlSwitch();
+        it('should check RTL and LTR orientation', async () => {
+            await toolbarPage.checkRtlSwitch();
         });
     });
 
     xdescribe('Should check visual regression', () => {
-        it('should check visual regression for all examples', () => {
-            toolbarPage.saveExampleBaselineScreenshot();
-            expect(toolbarPage.compareWithBaseline()).toBeLessThan(7);
+        it('should check visual regression for all examples', async () => {
+            await toolbarPage.saveExampleBaselineScreenshot();
+            await expect(await toolbarPage.compareWithBaseline()).toBeLessThan(7);
         });
     });
 
-    function selectHoursMinutesAndPeriod(hour: number = 11, minute: number = 1): void {
-        while (getText(selectedHours) !== hour.toString()) {
-            click(navigationUpArrowButton);
+    async function selectHoursMinutesAndPeriod(hour: number = 11, minute: number = 1): Promise<void> {
+        while ((await getText(selectedHours)) !== hour.toString()) {
+            await click(navigationUpArrowButton);
         }
-        click(timeColumn, 1);
-        while (getText(selectedMinutes) !== minute.toString()) {
-            click(navigationDownArrowButton);
+        await click(timeColumn, 1);
+        while ((await getText(selectedMinutes)) !== minute.toString()) {
+            await click(navigationDownArrowButton);
         }
-        click(timeColumn, 2);
-        click(period);
+        await click(timeColumn, 2);
+        await click(period);
     }
 });
 
-function checkClickableButton(selector: string): void {
-    const count = getElementArrayLength(selector);
+async function checkClickableButton(selector: string): Promise<void> {
+    const count = await getElementArrayLength(selector);
     for (let i = 0; i < count; i++) {
-        scrollIntoView(selector, i);
-        expect(isElementClickable(selector)).toBe(true, `button with index ${i} not clickable`);
+        await scrollIntoView(selector, i);
+        await expect(await isElementClickable(selector)).toBe(true, `button with index ${i} not clickable`);
     }
 }

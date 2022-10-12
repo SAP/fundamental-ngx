@@ -3,16 +3,16 @@ import { IconPo } from './icon.po';
 describe('Icon test suite', () => {
     const iconPage = new IconPo();
 
-    beforeAll(() => {
-        iconPage.open();
+    beforeAll(async () => {
+        await iconPage.open();
     }, 1);
 
-    xit('should check visual regression for all examples', () => {
-        iconPage.saveExampleBaselineScreenshot();
-        expect(iconPage.compareWithBaseline()).toBeLessThan(5);
+    xit('should check visual regression for all examples', async () => {
+        await iconPage.saveExampleBaselineScreenshot();
+        await expect(await iconPage.compareWithBaseline()).toBeLessThan(5);
     });
 
-    it('should check orientation', () => {
-        iconPage.checkRtlSwitch();
+    it('should check orientation', async () => {
+        await iconPage.checkRtlSwitch();
     });
 });

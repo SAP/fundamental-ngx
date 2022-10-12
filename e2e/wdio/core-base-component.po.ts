@@ -17,41 +17,44 @@ export class CoreBaseComponentPo {
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
     defaultScreenshotFolder = '/e2e/wdio/baselineScreenshot/core';
 
-    checkRtlSwitch(switchers: string = this.rtlSwitcherArr, areas: string = this.exampleAreaContainersArr): void {
-        const areasArray = elementArray(areas);
+    async checkRtlSwitch(
+        switchers: string = this.rtlSwitcherArr,
+        areas: string = this.exampleAreaContainersArr
+    ): Promise<void> {
+        const areasArray = await elementArray(areas);
         for (let i = 0; i < areasArray.length; i++) {
-            scrollIntoView(switchers, i);
-            click(switchers, i);
-            checkRtlOrientation(areas, i);
-            scrollIntoView(switchers, i);
-            click(switchers, i);
-            checkLtrOrientation(areas, i);
+            await scrollIntoView(switchers, i);
+            await click(switchers, i);
+            await checkRtlOrientation(areas, i);
+            await scrollIntoView(switchers, i);
+            await click(switchers, i);
+            await checkLtrOrientation(areas, i);
         }
     }
 
-    saveExampleBaselineScreenshot(specName: string, options: Record<string, any> = {}): void {
-        const areasArray = elementArray(this.exampleAreaContainersArr);
+    async saveExampleBaselineScreenshot(specName: string, options: Record<string, any> = {}): Promise<void> {
+        const areasArray = await elementArray(this.exampleAreaContainersArr);
         for (let i = 0; i < areasArray.length; i++) {
-            waitForElDisplayed(this.exampleAreaContainersArr, i);
-            scrollIntoView(this.exampleAreaContainersArr, i);
-            saveElementScreenshot(
+            await waitForElDisplayed(this.exampleAreaContainersArr, i);
+            await scrollIntoView(this.exampleAreaContainersArr, i);
+            await saveElementScreenshot(
                 this.exampleAreaContainersArr,
-                `${specName}-example-${i}-core-${getImageTagBrowserPlatform()}`,
+                `${specName}-example-${i}-core-${await getImageTagBrowserPlatform()}`,
                 options,
                 i
             );
         }
     }
 
-    compareWithBaseline(specName: string, options: Record<string, any> = {}): any {
-        const areasArray = elementArray(this.exampleAreaContainersArr);
+    async compareWithBaseline(specName: string, options: Record<string, any> = {}): Promise<any> {
+        const areasArray = await elementArray(this.exampleAreaContainersArr);
         let diff = 0;
         for (let i = 0; i < areasArray.length; i++) {
-            waitForElDisplayed(this.exampleAreaContainersArr, i);
-            scrollIntoView(this.exampleAreaContainersArr, i);
-            diff += checkElementScreenshot(
+            await waitForElDisplayed(this.exampleAreaContainersArr, i);
+            await scrollIntoView(this.exampleAreaContainersArr, i);
+            diff += await checkElementScreenshot(
                 this.exampleAreaContainersArr,
-                `${specName}-example-${i}-core-${getImageTagBrowserPlatform()}`,
+                `${specName}-example-${i}-core-${await getImageTagBrowserPlatform()}`,
                 options,
                 i
             );
@@ -59,11 +62,11 @@ export class CoreBaseComponentPo {
         return diff;
     }
 
-    getScreenshotFolder(componentFolder: string): Record<string, any> {
+    async getScreenshotFolder(componentFolder: string): Promise<Record<string, any>> {
         return { baselineFolder: `${process.cwd()}${this.defaultScreenshotFolder}${componentFolder}` };
     }
 
-    open(url: string): void {
+    async open(url: string): Promise<void> {
         return open('fundamental-ngx#/core' + url);
     }
 }

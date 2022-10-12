@@ -18,71 +18,79 @@ describe('product switch test suite', () => {
     const productSwitchPage = new ProductSwitchPo();
     const { shellbarButton, shellbarSwitchItems, switchItems } = productSwitchPage;
 
-    beforeAll(() => {
-        productSwitchPage.open();
+    beforeAll(async () => {
+        await productSwitchPage.open();
     }, 1);
 
-    beforeEach(() => {
-        refreshPage();
-        waitForPresent(productSwitchPage.root);
-        waitForElDisplayed(productSwitchPage.title);
+    beforeEach(async () => {
+        await refreshPage();
+        await waitForPresent(productSwitchPage.root);
+        await waitForElDisplayed(productSwitchPage.title);
     }, 1);
 
     describe('shellbar example', () => {
-        it('should check ability to open product switch', () => {
-            click(shellbarButton);
+        it('should check ability to open product switch', async () => {
+            await click(shellbarButton);
 
-            expect(isElementDisplayed(shellbarSwitchItems)).toBe(true, 'popover not displayed');
+            await expect(await isElementDisplayed(shellbarSwitchItems)).toBe(true, 'popover not displayed');
         });
 
-        it('should check items are clickable', () => {
-            click(shellbarButton);
-            checkElArrIsClickable(shellbarSwitchItems);
+        it('should check items are clickable', async () => {
+            await click(shellbarButton);
+            await checkElArrIsClickable(shellbarSwitchItems);
         });
 
-        it('should check items are focusable', () => {
-            click(shellbarButton);
-            const itemCount = getElementArrayLength(shellbarSwitchItems);
+        it('should check items are focusable', async () => {
+            await click(shellbarButton);
+            const itemCount = await getElementArrayLength(shellbarSwitchItems);
 
             for (let i = 0; i < itemCount; i++) {
-                applyState('focus', shellbarSwitchItems, i);
-                expect(emptyDataArr).not.toContain(getCSSPropertyByName(shellbarSwitchItems, focusAttribute, i).value);
+                await applyState('focus', shellbarSwitchItems, i);
+                await expect(emptyDataArr).not.toContain(
+                    (
+                        await getCSSPropertyByName(shellbarSwitchItems, focusAttribute, i)
+                    ).value
+                );
             }
         });
 
-        it('should drag and drop apps', () => {
-            click(shellbarButton);
-            const originalCardData = getText(shellbarSwitchItems, 4);
+        it('should drag and drop apps', async () => {
+            await click(shellbarButton);
+            const originalCardData = await getText(shellbarSwitchItems, 4);
 
-            clickAndMoveElement(shellbarSwitchItems, 150, 0, 4);
+            await clickAndMoveElement(shellbarSwitchItems, 150, 0, 4);
 
-            expect(getText(shellbarSwitchItems, 4)).not.toEqual(originalCardData);
+            await expect(await getText(shellbarSwitchItems, 4)).not.toEqual(originalCardData);
         });
     });
 
     describe('main checks', () => {
-        it('should check items are clickable', () => {
-            checkElArrIsClickable(switchItems);
+        it('should check items are clickable', async () => {
+            await checkElArrIsClickable(switchItems);
         });
 
-        it('should check items are focusable', () => {
-            const itemCount = getElementArrayLength(switchItems);
+        it('should check items are focusable', async () => {
+            const itemCount = await getElementArrayLength(switchItems);
 
             for (let i = 0; i < itemCount; i++) {
-                applyState('focus', switchItems, i);
-                expect(emptyDataArr).not.toContain(getCSSPropertyByName(switchItems, focusAttribute, i).value);
+                await applyState('focus', switchItems, i);
+                await expect(emptyDataArr).not.toContain(
+                    (
+                        await getCSSPropertyByName(switchItems, focusAttribute, i)
+                    ).value
+                );
             }
         });
     });
 
     describe('visual regression and orientation', () => {
-        it('should check orientation', () => {
-            productSwitchPage.checkRtlSwitch();
+        it('should check orientation', async () => {
+            await productSwitchPage.checkRtlSwitch();
         });
 
-        xit('should check examples visual regression', () => {
-            productSwitchPage.saveExampleBaselineScreenshot();
-            expect(productSwitchPage.compareWithBaseline()).toBeLessThan(5);
+        xit('should check examples visual regression', async () => {
+            await productSwitchPage.saveExampleBaselineScreenshot();
+            await expect(await productSwitchPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

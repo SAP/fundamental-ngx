@@ -34,9 +34,9 @@ export class WizardGeneratorPO extends PlatformBaseComponentPo {
     dialog = '.fd-dialog ';
     dialogBarButton = this.dialog + '.fd-bar__element ' + this.button;
 
-    open(): void {
-        super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForElDisplayed(this.root);
+        await waitForElDisplayed(this.title);
     }
 }

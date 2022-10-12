@@ -47,15 +47,15 @@ export class CalendarPo extends CoreBaseComponentPo {
     saturdays = this.specialDaysCalendar + this.calendarRow + this.calendarItem + ':nth-child(7):not(.hidden-day)';
     wednesdays = this.standardCalendar + this.calendarRow + this.calendarItem + ':nth-child(4):not(.hidden-day)';
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 
-    setCalendarRange(selector: string, startDateIndex: number, stopDateIndex: number): void {
-        scrollIntoView(selector);
-        click(selector, startDateIndex);
-        click(selector, stopDateIndex);
+    async setCalendarRange(selector: string, startDateIndex: number, stopDateIndex: number): void {
+        await scrollIntoView(selector);
+        await click(selector, startDateIndex);
+        await click(selector, stopDateIndex);
     }
 }

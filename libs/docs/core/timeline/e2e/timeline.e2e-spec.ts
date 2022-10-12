@@ -5,34 +5,34 @@ describe('Timeline test suite', () => {
     const timelinePage = new TimelinePo();
     const { actionButton, showButton, timelinePost, timelineNode } = timelinePage;
 
-    beforeAll(() => {
-        timelinePage.open();
+    beforeAll(async () => {
+        await timelinePage.open();
     }, 1);
 
-    it('should check all action buttons are clickable', () => {
-        checkElArrIsClickable(actionButton);
+    it('should check all action buttons are clickable', async () => {
+        await checkElArrIsClickable(actionButton);
     });
 
-    it('should check each timeline post has a node', () => {
-        const nodeCount = getElementArrayLength(timelineNode);
-        const postCount = getElementArrayLength(timelinePost);
+    it('should check each timeline post has a node', async () => {
+        const nodeCount = await getElementArrayLength(timelineNode);
+        const postCount = await getElementArrayLength(timelinePost);
 
-        expect(postCount).toEqual(nodeCount);
+        await expect(postCount).toEqual(nodeCount);
     });
 
-    it('should check more button expands section and less button collapses section', () => {
-        const postStartingHeight = getElementSize(timelinePost, 5, 'height');
+    it('should check more button expands section and less button collapses section', async () => {
+        const postStartingHeight = await (await getElementSize(timelinePost, 5)).height;
 
-        click(showButton);
-        const postExpandedHeight = getElementSize(timelinePost, 5, 'height');
-        click(showButton);
-        const postCollapsedHeight = getElementSize(timelinePost, 5, 'height');
+        await click(showButton);
+        const postExpandedHeight = await (await getElementSize(timelinePost, 5)).height;
+        await click(showButton);
+        const postCollapsedHeight = await (await getElementSize(timelinePost, 5)).height;
 
-        expect(postStartingHeight).toBeLessThan(postExpandedHeight);
-        expect(postCollapsedHeight).toBeLessThan(postExpandedHeight);
+        await expect(postStartingHeight).toBeLessThan(postExpandedHeight);
+        await expect(postCollapsedHeight).toBeLessThan(postExpandedHeight);
     });
 
-    it('should check RTL mode', () => {
-        timelinePage.checkRtlSwitch();
+    it('should check RTL mode', async () => {
+        await timelinePage.checkRtlSwitch();
     });
 });

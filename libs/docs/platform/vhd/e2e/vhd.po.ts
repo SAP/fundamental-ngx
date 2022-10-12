@@ -59,21 +59,21 @@ export class VhdPo extends PlatformBaseComponentPo {
 
     formInputField = (id: string): string => this.inputFields + `[id="${id}"]`;
 
-    open(): void {
-        super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForElDisplayed(this.pageHeader);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForElDisplayed(this.root);
+        await waitForElDisplayed(this.pageHeader);
     }
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'checkbox'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'checkbox'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, await this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'checkbox'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'checkbox'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 }

@@ -15,71 +15,83 @@ describe('Button test suite:', () => {
     const buttonPage = new ButtonPo();
     const { typeButtons, sizeButtons, iconButtons, stateButton, disableStateButtons, truncatedButton } = buttonPage;
 
-    beforeAll(() => {
-        buttonPage.open();
+    beforeAll(async () => {
+        await buttonPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(buttonPage.root);
-        waitForElDisplayed(buttonPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(buttonPage.root);
+        await waitForElDisplayed(buttonPage.title);
     }, 1);
 
-    it('verify clickable buttons types', () => {
-        const typeButtonsLength = getElementArrayLength(typeButtons);
+    it('verify clickable buttons types', async () => {
+        const typeButtonsLength = await getElementArrayLength(typeButtons);
         for (let i = 0; i < typeButtonsLength; i++) {
-            scrollIntoView(typeButtons, i);
-            expect(isElementClickable(typeButtons, i)).toBe(true, `type button with index ${i} not clickable`);
+            await scrollIntoView(typeButtons, i);
+            await expect(await isElementClickable(typeButtons, i)).toBe(
+                true,
+                `type button with index ${i} not clickable`
+            );
         }
     });
 
-    it('verify clickable size buttons', () => {
-        const sizeButtonsLength = getElementArrayLength(sizeButtons);
+    it('verify clickable size buttons', async () => {
+        const sizeButtonsLength = await getElementArrayLength(sizeButtons);
         for (let i = 0; i < sizeButtonsLength; i++) {
-            scrollIntoView(sizeButtons, i);
-            expect(isElementClickable(sizeButtons, i)).toBe(true, `size button with index ${i} not clickable`);
+            await scrollIntoView(sizeButtons, i);
+            await expect(await isElementClickable(sizeButtons, i)).toBe(
+                true,
+                `size button with index ${i} not clickable`
+            );
         }
     });
 
-    it('verify buttons with icons', () => {
-        const iconButtonsLength = getElementArrayLength(iconButtons);
+    it('verify buttons with icons', async () => {
+        const iconButtonsLength = await getElementArrayLength(iconButtons);
         for (let i = 0; i < iconButtonsLength; i++) {
-            scrollIntoView(iconButtons, i);
-            expect(isElementClickable(iconButtons, i)).toBe(true, `icon button with index ${i} not clickable`);
+            await scrollIntoView(iconButtons, i);
+            await expect(await isElementClickable(iconButtons, i)).toBe(
+                true,
+                `icon button with index ${i} not clickable`
+            );
         }
     });
 
-    it('verify state buttons', () => {
-        scrollIntoView(stateButton);
-        expect(isElementClickable(stateButton)).toBe(true, 'state button not clickable');
+    it('verify state buttons', async () => {
+        await scrollIntoView(stateButton);
+        await expect(await isElementClickable(stateButton)).toBe(true, 'state button not clickable');
     });
 
-    it('verify disable state buttons', () => {
-        expect(getElementClass(disableStateButtons)).toContain('is-disabled', 'button is not disabled');
-        expect(getElementClass(disableStateButtons, 1)).toContain('is-disabled', 'button is not disabled');
+    it('verify disable state buttons', async () => {
+        await expect(await getElementClass(disableStateButtons)).toContain('is-disabled', 'button is not disabled');
+        await expect(await getElementClass(disableStateButtons, 1)).toContain('is-disabled', 'button is not disabled');
     });
 
-    it('should check truncated text button', () => {
-        expect(getElementTitle(truncatedButton)).toContain('Looooooooooong Text Button', 'Text title is not matching');
-        expect(isElementClickable(truncatedButton)).toBe(true, 'truncated button with index disable');
+    it('should check truncated text button', async () => {
+        await expect(await getElementTitle(truncatedButton)).toContain(
+            'Looooooooooong Text Button',
+            'Text title is not matching'
+        );
+        await expect(await isElementClickable(truncatedButton)).toBe(true, 'truncated button with index disable');
     });
 
-    it('should compact be smaller than normal', () => {
-        const normalSize = getElementSize(sizeButtons);
-        const compactSize = getElementSize(sizeButtons, 1);
+    it('should compact be smaller than normal', async () => {
+        const normalSize = await getElementSize(sizeButtons);
+        const compactSize = await getElementSize(sizeButtons, 1);
 
-        expect(normalSize.height).toBeGreaterThan(compactSize.height);
+        await expect(normalSize.height).toBeGreaterThan(compactSize.height);
     });
 
     describe('Check visual regression basic', () => {
-        xit('should check examples visual regression', () => {
-            buttonPage.saveExampleBaselineScreenshot();
-            expect(buttonPage.compareWithBaseline()).toBeLessThan(5);
+        xit('should check examples visual regression', async () => {
+            await buttonPage.saveExampleBaselineScreenshot();
+            await expect(await buttonPage.compareWithBaseline()).toBeLessThan(5);
         });
 
         describe('Check orientation', () => {
-            it('Verify RTL and LTR orientation', () => {
-                buttonPage.checkRtlSwitch();
+            it('Verify RTL and LTR orientation', async () => {
+                await buttonPage.checkRtlSwitch();
             });
         });
     });

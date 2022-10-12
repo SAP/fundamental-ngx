@@ -13,21 +13,21 @@ export class FeedInputPo extends PlatformBaseComponentPo {
     feedInputPlaceholder1 = `.fd-feed-input__textarea[placeholder="${placeholders_array[0]}"]`;
     feedInputPlaceholder2 = `.fd-feed-input__textarea[placeholder="${placeholders_array[2]}"]`;
 
-    open(): void {
-        super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForElDisplayed(this.feedInput);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForElDisplayed(this.root);
+        await waitForElDisplayed(this.feedInput);
     }
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'feed-input'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'feed-input'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, await this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'feed-input'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'feed-input'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 }

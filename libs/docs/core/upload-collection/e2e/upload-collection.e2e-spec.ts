@@ -45,156 +45,158 @@ describe('File uploader component test', () => {
         standardButton
     } = uploadCollectionPage;
 
-    beforeAll(() => {
-        uploadCollectionPage.open();
+    beforeAll(async () => {
+        await uploadCollectionPage.open();
     }, 1);
 
-    beforeEach(() => {
-        refreshPage();
-        waitForPresent(uploadCollectionPage.root);
-        waitForElDisplayed(uploadCollectionPage.title);
+    beforeEach(async () => {
+        await refreshPage();
+        await waitForPresent(uploadCollectionPage.root);
+        await waitForElDisplayed(uploadCollectionPage.title);
     }, 2);
 
     describe('Should check default example', () => {
-        it('should check possible click on file', () => {
-            checkElArrIsClickable(uploadCollectionExample + link);
+        it('should check possible click on file', async () => {
+            await checkElArrIsClickable(uploadCollectionExample + link);
         });
 
-        it('should check possible rename file', () => {
-            checkFileNameChange(uploadCollectionExample);
+        it('should check possible rename file', async () => {
+            await checkFileNameChange(uploadCollectionExample);
         });
 
-        it('should check possible delete file', () => {
-            checkItemDecline(uploadCollectionExample);
+        it('should check possible delete file', async () => {
+            await checkItemDecline(uploadCollectionExample);
         });
     });
 
     describe('Should check Small Mode example', () => {
-        it('should check possible click on file', () => {
-            checkElArrIsClickable(uploadCollectionSmallExample + link);
+        it('should check possible click on file', async () => {
+            await checkElArrIsClickable(uploadCollectionSmallExample + link);
         });
 
-        it('should check possible rename file', () => {
-            checkFileNameChange(uploadCollectionSmallExample);
+        it('should check possible rename file', async () => {
+            await checkFileNameChange(uploadCollectionSmallExample);
         });
 
-        it('should check possible delete file', () => {
-            checkItemDecline(uploadCollectionSmallExample);
+        it('should check possible delete file', async () => {
+            await checkItemDecline(uploadCollectionSmallExample);
         });
 
-        it('should check small item be smaller than basic item', () => {
-            const basicItem = getElementSize(uploadCollectionExample + item);
-            const smallItem = getElementSize(uploadCollectionSmallExample + item);
+        it('should check small item be smaller than basic item', async () => {
+            const basicItem = await getElementSize(uploadCollectionExample + item);
+            const smallItem = await getElementSize(uploadCollectionSmallExample + item);
 
-            expect(smallItem.width).toBeLessThan(basicItem.width);
+            await expect(smallItem.width).toBeLessThan(basicItem.width);
         });
     });
 
     describe('Should check Customization example', () => {
-        it('should check possible click on file', () => {
-            checkElArrIsClickable(uploadCollectionCustomExample + link);
+        it('should check possible click on file', async () => {
+            await checkElArrIsClickable(uploadCollectionCustomExample + link);
         });
 
-        it('should disabled buttons', () => {
-            expect(getAttributeByName(uploadCollectionCustomExample + editButton, 'disabled')).toBe('true');
-            expect(getAttributeByName(uploadCollectionCustomExample + declineButton, 'disabled')).toBe('true');
+        it('should disabled buttons', async () => {
+            await expect(await getAttributeByName(uploadCollectionCustomExample + editButton, 'disabled')).toBe('true');
+            await expect(await getAttributeByName(uploadCollectionCustomExample + declineButton, 'disabled')).toBe(
+                'true'
+            );
         });
 
-        it('should check the editing of the file name', () => {
-            scrollIntoView(uploadCollectionCustomExample);
-            click(uploadCollectionCustomExample + editButton, 1);
-            setValue(uploadCollectionCustomExample + input, testText);
-            click(okButton);
-            expect(getAlertText()).toBe(acceptAlertText);
-            acceptAlert();
-            expect(getText(uploadCollectionCustomExample + link, 2).trim()).toBe(testText + formatArr[2]);
+        it('should check the editing of the file name', async () => {
+            await scrollIntoView(uploadCollectionCustomExample);
+            await click(uploadCollectionCustomExample + editButton, 1);
+            await setValue(uploadCollectionCustomExample + input, testText);
+            await click(okButton);
+            await expect(await getAlertText()).toBe(acceptAlertText);
+            await acceptAlert();
+            await expect((await getText(uploadCollectionCustomExample + link, 2)).trim()).toBe(testText + formatArr[2]);
         });
     });
 
     describe('Should check Complex example', () => {
-        it('should check possible click on file', () => {
-            checkElArrIsClickable(uploadCollectionComplexExample + link);
+        it('should check possible click on file', async () => {
+            await checkElArrIsClickable(uploadCollectionComplexExample + link);
         });
 
-        it('should check possible rename file', () => {
-            checkFileNameChange(uploadCollectionComplexExample);
+        it('should check possible rename file', async () => {
+            await checkFileNameChange(uploadCollectionComplexExample);
         });
 
-        it('should check possible delete file', () => {
-            checkItemDecline(uploadCollectionComplexExample);
+        it('should check possible delete file', async () => {
+            await checkItemDecline(uploadCollectionComplexExample);
         });
 
-        xit('should check upload files', () => {
+        xit('should check upload files', async () => {
             // not working correctly on test runner
-            if (browserIsSafari()) {
+            if (await browserIsSafari()) {
                 return;
             }
-            scrollIntoView(uploadCollectionComplexExample);
-            uploadFile(fileUploaderInputFile, imagePath);
-            const afterUploadItems = getElementArrayLength(uploadCollectionComplexExample + item);
-            expect(afterUploadItems).toEqual(4);
-            expect(getText(uploadCollectionComplexExample + link, 3).trim()).toBe(imageText);
+            await scrollIntoView(uploadCollectionComplexExample);
+            await uploadFile(fileUploaderInputFile, imagePath);
+            const afterUploadItems = await getElementArrayLength(uploadCollectionComplexExample + item);
+            await expect(afterUploadItems).toEqual(4);
+            await expect((await getText(uploadCollectionComplexExample + link, 3)).trim()).toBe(imageText);
         });
 
-        it('should check if file download button is active', () => {
-            scrollIntoView(uploadCollectionComplexExample);
-            click(uploadCollectionComplexExample + checkbox);
-            expect(isElementClickable(uploadCollectionComplexExample + standardButton, 1)).toBe(
+        it('should check if file download button is active', async () => {
+            await scrollIntoView(uploadCollectionComplexExample);
+            await click(uploadCollectionComplexExample + checkbox);
+            await expect(await isElementClickable(uploadCollectionComplexExample + standardButton, 1)).toBe(
                 true,
                 'download button not clickable'
             );
         });
 
-        it('should check functionality delete 2 items', () => {
-            scrollIntoView(uploadCollectionComplexExample);
-            click(uploadCollectionComplexExample + checkbox);
-            click(uploadCollectionComplexExample + checkbox, 1);
-            click(uploadCollectionComplexExample + standardButton, 2);
-            const afterDeleteItems = getElementArrayLength(uploadCollectionComplexExample + item);
-            expect(afterDeleteItems).toEqual(1);
+        it('should check functionality delete 2 items', async () => {
+            await scrollIntoView(uploadCollectionComplexExample);
+            await click(uploadCollectionComplexExample + checkbox);
+            await click(uploadCollectionComplexExample + checkbox, 1);
+            await click(uploadCollectionComplexExample + standardButton, 2);
+            const afterDeleteItems = await getElementArrayLength(uploadCollectionComplexExample + item);
+            await expect(afterDeleteItems).toEqual(1);
         });
     });
 
-    it('should check LTR and RTL orientation', () => {
-        if (browserIsSafari()) {
+    it('should check LTR and RTL orientation', async () => {
+        if (await browserIsSafari()) {
             return;
         }
-        uploadCollectionPage.checkRtlSwitch();
+        await uploadCollectionPage.checkRtlSwitch();
     });
 
     xdescribe('Should check visual regression', () => {
-        it('should check visual regression for all examples', () => {
-            uploadCollectionPage.saveExampleBaselineScreenshot();
-            expect(uploadCollectionPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check visual regression for all examples', async () => {
+            await uploadCollectionPage.saveExampleBaselineScreenshot();
+            await expect(await uploadCollectionPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 
-    function checkFileNameChange(example: string): void {
-        scrollIntoView(example);
+    async function checkFileNameChange(example: string): Promise<void> {
+        await scrollIntoView(example);
         for (let i = 0; i < 3; i++) {
-            click(example + editButton, i);
-            setValue(example + input, testText);
-            click(okButton);
-            expect(getAlertText()).toBe(acceptAlertText);
-            acceptAlert();
-            expect(getText(example + link, i).trim()).toBe(testText + formatArr[i]);
+            await click(example + editButton, i);
+            await setValue(example + input, testText);
+            await click(okButton);
+            await expect(await getAlertText()).toBe(acceptAlertText);
+            await acceptAlert();
+            await expect((await getText(example + link, i)).trim()).toBe(testText + formatArr[i]);
         }
     }
 
-    function checkItemDecline(example: string): void {
-        const itemsBefore = getElementArrayLength(example + declineButton);
+    async function checkItemDecline(example: string): Promise<void> {
+        const itemsBefore = await getElementArrayLength(example + declineButton);
 
-        scrollIntoView(example);
-        click(example + declineButton);
+        await scrollIntoView(example);
+        await click(example + declineButton);
 
         if (example === uploadCollectionComplexExample) {
-            click(emphasizedButton);
+            await click(emphasizedButton);
         }
 
-        expect(getAlertText()).toBe(declineAlertText);
-        acceptAlert();
+        await expect(await getAlertText()).toBe(declineAlertText);
+        await acceptAlert();
 
-        const itemCount = getElementArrayLength(example + item);
-        expect(itemCount).toEqual(itemsBefore - 1);
+        const itemCount = await getElementArrayLength(example + item);
+        await expect(itemCount).toEqual(itemsBefore - 1);
     }
 });

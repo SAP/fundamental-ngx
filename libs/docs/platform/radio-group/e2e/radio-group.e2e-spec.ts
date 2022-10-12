@@ -80,66 +80,78 @@ describe('Radio button group  Test Suite', () => {
         actionButtonByIndex
     } = radioButtonGroupPage;
 
-    beforeAll(() => {
-        radioButtonGroupPage.open();
+    beforeAll(async () => {
+        await radioButtonGroupPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage(true);
-        waitForPresent(radioButtonGroupPage.root);
-        waitForElDisplayed(radioButtonGroupPage.title);
+    afterEach(async () => {
+        await refreshPage(true);
+        await waitForPresent(radioButtonGroupPage.root);
+        await waitForElDisplayed(radioButtonGroupPage.title);
     }, 2);
 
-    it('Verify Radio button buttons can be aligned vertically and horizontally.', () => {
-        const groupButtons = elementArray(formGroup);
+    it('Verify Radio button buttons can be aligned vertically and horizontally.', async () => {
+        const groupButtons = await elementArray(formGroup);
         for (let i = 1; i < groupButtons.length; i++) {
-            expect(orientation).toContain(getAttributeByName(formGroup, 'aria-orientation', i));
+            await expect(orientation).toContain(await getAttributeByName(formGroup, 'aria-orientation', i));
         }
     });
 
-    it('Compact radio group with "default" state and with default selection', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithDefaultStateAndSelectionIndex));
-        click(radioButtonLabelByIndex(radioButtonWithDefaultStateAndSelectionIndex));
-        expect(getText(selectedValueLabel)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonInputByIndex(), ariaChecked)).toBe('true');
+    it('Compact radio group with "default" state and with default selection', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithDefaultStateAndSelectionIndex));
+        await click(radioButtonLabelByIndex(radioButtonWithDefaultStateAndSelectionIndex));
+        await expect(await getText(selectedValueLabel)).toContain(winterValue);
+        await expect(await getAttributeByName(radioButtonInputByIndex(), ariaChecked)).toBe('true');
     });
 
-    it('Verify Inline cozy radio group', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonInlineCozyRadioGroup));
-        click(radioButtonLabelByIndex(radioButtonInlineCozyRadioGroup));
-        expect(getText(selectedValueLabel, radioButtonInlineCozyRadioGroup)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonInlineCozyRadioGroup), ariaChecked)).toBe('true');
+    it('Verify Inline cozy radio group', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonInlineCozyRadioGroup));
+        await click(radioButtonLabelByIndex(radioButtonInlineCozyRadioGroup));
+        await expect(await getText(selectedValueLabel, radioButtonInlineCozyRadioGroup)).toContain(winterValue);
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(radioButtonInlineCozyRadioGroup), ariaChecked)
+        ).toBe('true');
     });
 
-    it('Verify radio group with default property values', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithDefaultPropertyValues));
-        click(radioButtonLabelByIndex(radioButtonWithDefaultPropertyValues));
-        expect(getText(selectedValueLabel, radioButtonWithDefaultPropertyValues)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonWithDefaultPropertyValues), ariaChecked)).toBe(
-            'true'
+    it('Verify radio group with default property values', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithDefaultPropertyValues));
+        await click(radioButtonLabelByIndex(radioButtonWithDefaultPropertyValues));
+        await expect(await getText(selectedValueLabel, radioButtonWithDefaultPropertyValues)).toContain(winterValue);
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(radioButtonWithDefaultPropertyValues), ariaChecked)
+        ).toBe('true');
+    });
+
+    it('Verify radio group with disabled button and validation error', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledButtonAndValidationError));
+        await click(radioButtonLabelByIndex(radioButtonWithDisabledButtonAndValidationError));
+        await expect(await getText(selectedValueLabel, radioButtonWithDisabledButtonAndValidationError)).toContain(
+            januaryValue
+        );
+        await expect(
+            await getAttributeByName(
+                radioButtonInputByIndex(radioButtonWithDisabledButtonAndValidationError),
+                ariaChecked
+            )
+        ).toBe('true');
+        await click(actionButtonByIndex(resetDisabledValidationGroupButtonIndex));
+        await expect(monthNames).not.toContain(
+            await getText(selectedValueLabel, radioButtonWithDisabledButtonAndValidationError)
         );
     });
 
-    it('Verify radio group with disabled button and validation error', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledButtonAndValidationError));
-        click(radioButtonLabelByIndex(radioButtonWithDisabledButtonAndValidationError));
-        expect(getText(selectedValueLabel, radioButtonWithDisabledButtonAndValidationError)).toContain(januaryValue);
-        expect(
-            getAttributeByName(radioButtonInputByIndex(radioButtonWithDisabledButtonAndValidationError), ariaChecked)
+    it('Verify radio group using FormGroup and FormControl', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonUsingFormGroupAndFormControl));
+        await click(radioButtonLabelByIndex(radioButtonUsingFormGroupAndFormControl), marchIndex);
+        await expect(await getText(selectedValueLabel, radioButtonUsingFormGroupAndFormControl)).toContain(marchValue);
+        await expect(
+            await getAttributeByName(
+                radioButtonInputByIndex(radioButtonUsingFormGroupAndFormControl),
+                ngReflectIsDisabled
+            )
         ).toBe('true');
-        click(actionButtonByIndex(resetDisabledValidationGroupButtonIndex));
-        expect(monthNames).not.toContain(getText(selectedValueLabel, radioButtonWithDisabledButtonAndValidationError));
-    });
-
-    it('Verify radio group using FormGroup and FormControl', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonUsingFormGroupAndFormControl));
-        click(radioButtonLabelByIndex(radioButtonUsingFormGroupAndFormControl), marchIndex);
-        expect(getText(selectedValueLabel, radioButtonUsingFormGroupAndFormControl)).toContain(marchValue);
-        expect(
-            getAttributeByName(radioButtonInputByIndex(radioButtonUsingFormGroupAndFormControl), ngReflectIsDisabled)
-        ).toBe('true');
-        expect(
-            getAttributeByName(
+        await expect(
+            await getAttributeByName(
                 radioButtonInputByIndex(radioButtonUsingFormGroupAndFormControl),
                 ariaChecked,
                 marchIndex
@@ -147,126 +159,144 @@ describe('Radio button group  Test Suite', () => {
         ).toBe('true');
     });
 
-    it('Verify inline compact radio group with default selection', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonInlineWithDefaultSelection));
-        click(radioButtonLabelByIndex(radioButtonInlineWithDefaultSelection));
-        expect(getText(selectedValueLabel, radioButtonInlineWithDefaultSelection)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonInlineWithDefaultSelection), ariaChecked)).toBe(
+    it('Verify inline compact radio group with default selection', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonInlineWithDefaultSelection));
+        await click(radioButtonLabelByIndex(radioButtonInlineWithDefaultSelection));
+        await expect(await getText(selectedValueLabel, radioButtonInlineWithDefaultSelection)).toContain(winterValue);
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(radioButtonInlineWithDefaultSelection), ariaChecked)
+        ).toBe('true');
+    });
+
+    it('Verify inline compact radio group', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonInlineCompact));
+        await click(radioButtonLabelByIndex(radioButtonInlineCompact));
+        await expect(await getText(selectedValueLabel, radioButtonInlineCompact)).toContain(winterValue);
+        await expect(await getAttributeByName(radioButtonInputByIndex(radioButtonInlineCompact), ariaChecked)).toBe(
             'true'
         );
     });
 
-    it('Verify inline compact radio group', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonInlineCompact));
-        click(radioButtonLabelByIndex(radioButtonInlineCompact));
-        expect(getText(selectedValueLabel, radioButtonInlineCompact)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonInlineCompact), ariaChecked)).toBe('true');
+    it('Verify radio group using FormGroup and FormControl', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledItem));
+        await click(radioButtonLabelByIndex(radioButtonWithDisabledItem), marchIndex);
+        await expect(await getText(selectedValueLabel, radioButtonWithDisabledItem)).toContain(marchValue);
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(radioButtonWithDisabledItem), ngReflectIsDisabled)
+        ).toBe('true');
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(radioButtonWithDisabledItem), ariaChecked, marchIndex)
+        ).toBe('true');
     });
 
-    it('Verify radio group using FormGroup and FormControl', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledItem));
-        click(radioButtonLabelByIndex(radioButtonWithDisabledItem), marchIndex);
-        expect(getText(selectedValueLabel, radioButtonWithDisabledItem)).toContain(marchValue);
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonWithDisabledItem), ngReflectIsDisabled)).toBe(
-            'true'
-        );
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonWithDisabledItem), ariaChecked, marchIndex)).toBe(
-            'true'
-        );
-    });
-
-    it('Verify radio group with disabled button and validation error', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonHaveValidationError));
-        click(radioButtonLabelByIndex(radioButtonHaveValidationError));
-        expect(getText(selectedValueLabel, radioButtonHaveValidationError).toLowerCase()).toContain(winterValue);
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonHaveValidationError), ariaChecked)).toBe('true');
-        click(actionButtonByIndex(resetHaveValidationErrorIndex));
-        expect(monthNames).not.toContain(getText(selectedValueLabel, radioButtonHaveValidationError));
-    });
-
-    it('Verify platform radio button with None (No selection) value created as an Option', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithNoSelectionValue));
-        click(radioButtonLabelByIndex(radioButtonWithNoSelectionValue));
-        expect(getText(selectedValueLabel, radioButtonWithNoSelectionValue).toLowerCase()).toContain(noneValue);
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonWithNoSelectionValue), ariaChecked)).toBe('true');
-        click(radioButtonLabelByIndex(radioButtonWithNoSelectionValue), 1);
-        expect(getText(selectedValueLabel, radioButtonWithNoSelectionValue).toLowerCase()).toContain(winterValue);
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonWithNoSelectionValue), ariaChecked, 1)).toBe(
-            'true'
-        );
-    });
-
-    it('Verify radio group using FormGroup and FormControl with List of String Values', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithFormGroupAndFormControl));
-        click(radioButtonLabelByIndex(radioButtonWithFormGroupAndFormControl));
-        expect(getText(selectedValueLabel, radioButtonWithFormGroupAndFormControl).toLowerCase()).toContain(
+    it('Verify radio group with disabled button and validation error', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonHaveValidationError));
+        await click(radioButtonLabelByIndex(radioButtonHaveValidationError));
+        await expect((await getText(selectedValueLabel, radioButtonHaveValidationError)).toLowerCase()).toContain(
             winterValue
         );
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonWithFormGroupAndFormControl), ariaChecked)).toBe(
-            'true'
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(radioButtonHaveValidationError), ariaChecked)
+        ).toBe('true');
+        await click(actionButtonByIndex(resetHaveValidationErrorIndex));
+        await expect(monthNames).not.toContain(await getText(selectedValueLabel, radioButtonHaveValidationError));
+    });
+
+    it('Verify platform radio button with None (No selection) value created as an Option', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithNoSelectionValue));
+        await click(radioButtonLabelByIndex(radioButtonWithNoSelectionValue));
+        await expect((await getText(selectedValueLabel, radioButtonWithNoSelectionValue)).toLowerCase()).toContain(
+            noneValue
         );
-    });
-
-    it('Verify Creating platform radio button with list of string values also pre-selection based on control value', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithPreSelection));
-        click(radioButtonLabelByIndex(radioButtonWithPreSelection));
-        expect(getText(selectedValueLabel, radioButtonWithPreSelection).toLowerCase()).toContain(winterValue);
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonWithPreSelection), ariaChecked)).toBe('true');
-    });
-
-    it('Verify Creating platform radio button with given list of string values', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithGivenListOfStringValues));
-        click(radioButtonLabelByIndex(radioButtonWithGivenListOfStringValues));
-        expect(getText(selectedValueLabel, radioButtonWithGivenListOfStringValues).toLowerCase()).toContain(
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(radioButtonWithNoSelectionValue), ariaChecked)
+        ).toBe('true');
+        await click(radioButtonLabelByIndex(radioButtonWithNoSelectionValue), 1);
+        await expect((await getText(selectedValueLabel, radioButtonWithNoSelectionValue)).toLowerCase()).toContain(
             winterValue
         );
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonWithGivenListOfStringValues), ariaChecked)).toBe(
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(radioButtonWithNoSelectionValue), ariaChecked, 1)
+        ).toBe('true');
+    });
+
+    it('Verify radio group using FormGroup and FormControl with List of String Values', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithFormGroupAndFormControl));
+        await click(radioButtonLabelByIndex(radioButtonWithFormGroupAndFormControl));
+        await expect(
+            (await getText(selectedValueLabel, radioButtonWithFormGroupAndFormControl)).toLowerCase()
+        ).toContain(winterValue);
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(radioButtonWithFormGroupAndFormControl), ariaChecked)
+        ).toBe('true');
+    });
+
+    it('Verify Creating platform radio button with list of string values also pre-selection based on control value', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithPreSelection));
+        await click(radioButtonLabelByIndex(radioButtonWithPreSelection));
+        await expect((await getText(selectedValueLabel, radioButtonWithPreSelection)).toLowerCase()).toContain(
+            winterValue
+        );
+        await expect(await getAttributeByName(radioButtonInputByIndex(radioButtonWithPreSelection), ariaChecked)).toBe(
             'true'
         );
     });
 
-    it('Verify platform radio buttons created with given list of SelectItem objects and have validation error', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithListOfSelectItemObjects));
-        click(radioButtonLabelByIndex(radioButtonWithListOfSelectItemObjects));
-        expect(getText(selectedValueLabel, radioButtonWithListOfSelectItemObjects)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonWithListOfSelectItemObjects), ariaChecked)).toBe(
-            'true'
+    it('Verify Creating platform radio button with given list of string values', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithGivenListOfStringValues));
+        await click(radioButtonLabelByIndex(radioButtonWithGivenListOfStringValues));
+        await expect(
+            (await getText(selectedValueLabel, radioButtonWithGivenListOfStringValues)).toLowerCase()
+        ).toContain(winterValue);
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(radioButtonWithGivenListOfStringValues), ariaChecked)
+        ).toBe('true');
+    });
+
+    it('Verify platform radio buttons created with given list of SelectItem objects and have validation error', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithListOfSelectItemObjects));
+        await click(radioButtonLabelByIndex(radioButtonWithListOfSelectItemObjects));
+        await expect(await getText(selectedValueLabel, radioButtonWithListOfSelectItemObjects)).toContain(winterValue);
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(radioButtonWithListOfSelectItemObjects), ariaChecked)
+        ).toBe('true');
+        await click(actionButtonByIndex(resetListOfSelectitemObjectIndex));
+        await expect(seasonsNames).not.toContain(
+            await getText(selectedValueLabel, radioButtonWithListOfSelectItemObjects)
         );
-        click(actionButtonByIndex(resetListOfSelectitemObjectIndex));
-        expect(seasonsNames).not.toContain(getText(selectedValueLabel, radioButtonWithListOfSelectItemObjects));
     });
 
-    it('Verify Vertical radio group', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonVertical));
-        click(radioButtonLabelByIndex(radioButtonVertical));
-        expect(getText(selectedValueLabel, radioButtonVertical)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonVertical), ariaChecked)).toBe('true');
-        click(actionButtonByIndex(resetVerticalRadioGroupButtonIndex));
-        expect(seasonsNames).not.toContain(getText(selectedValueLabel, radioButtonVertical));
+    it('Verify Vertical radio group', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonVertical));
+        await click(radioButtonLabelByIndex(radioButtonVertical));
+        await expect(await getText(selectedValueLabel, radioButtonVertical)).toContain(winterValue);
+        await expect(await getAttributeByName(radioButtonInputByIndex(radioButtonVertical), ariaChecked)).toBe('true');
+        await click(actionButtonByIndex(resetVerticalRadioGroupButtonIndex));
+        await expect(seasonsNames).not.toContain(await getText(selectedValueLabel, radioButtonVertical));
     });
 
-    it('Verify qualification form', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonVerticalQualificationForm));
-        const radioButtonsLength = getElementArrayLength(
-            radioButtonGroupPage.radioButtonInputByIndex(radioButtonVerticalQualificationForm)
+    it('Verify qualification form', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonVerticalQualificationForm));
+        const radioButtonsLength = await getElementArrayLength(
+            await radioButtonGroupPage.radioButtonInputByIndex(radioButtonVerticalQualificationForm)
         );
         for (let i = 0; i < radioButtonsLength; i++) {
-            click(radioButtonLabelByIndex(radioButtonVerticalQualificationForm), i);
-            expect(
-                getAttributeByName(radioButtonInputByIndex(radioButtonVerticalQualificationForm), ariaChecked, i)
+            await click(radioButtonLabelByIndex(radioButtonVerticalQualificationForm), i);
+            await expect(
+                await getAttributeByName(radioButtonInputByIndex(radioButtonVerticalQualificationForm), ariaChecked, i)
             ).toBe('true');
         }
-        click(actionButtonByIndex(resetQualificationFormButtonIndex));
+        await click(actionButtonByIndex(resetQualificationFormButtonIndex));
     });
 
-    it('Verify compact platform radio button created with given list of SelectItem objects.Using FormGroup and FormControl', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithSelectItemsFormGroupAndFormControl));
-        click(radioButtonLabelByIndex(radioButtonWithSelectItemsFormGroupAndFormControl), autumnIndex);
-        expect(getText(selectedValueLabel, radioButtonWithSelectItemsFormGroupAndFormControl - 4)).toContain(
-            autumnValue
-        );
-        expect(
-            getAttributeByName(
+    it('Verify compact platform radio button created with given list of SelectItem objects.Using FormGroup and FormControl', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithSelectItemsFormGroupAndFormControl));
+        await click(radioButtonLabelByIndex(radioButtonWithSelectItemsFormGroupAndFormControl), autumnIndex);
+        await expect(
+            await getText(selectedValueLabel, radioButtonWithSelectItemsFormGroupAndFormControl - 4)
+        ).toContain(autumnValue);
+        await expect(
+            await getAttributeByName(
                 radioButtonInputByIndex(radioButtonWithSelectItemsFormGroupAndFormControl),
                 ariaChecked,
                 autumnIndex
@@ -274,58 +304,70 @@ describe('Radio button group  Test Suite', () => {
         ).toBe('true');
     });
 
-    it('Verify platform radio button creation and pre-selection based on object data passed.', () => {
-        expect(getText(selectedValueLabel, 15)).toContain(springValue);
-        expect(
-            getAttributeByName(
+    it('Verify platform radio button creation and pre-selection based on object data passed.', async () => {
+        await expect(await getText(selectedValueLabel, 15)).toContain(springValue);
+        await expect(
+            await getAttributeByName(
                 radioButtonInputByIndex(radioButtonWithPreSelectionOnObjectDataPassed),
                 ariaChecked,
                 springIndex
             )
         ).toBe('true');
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithPreSelectionOnObjectDataPassed));
-        click(radioButtonLabelByIndex(radioButtonWithPreSelectionOnObjectDataPassed));
-        expect(getText(selectedValueLabel, radioButtonWithPreSelectionOnObjectDataPassed - 4)).toContain(winterValue);
-        expect(
-            getAttributeByName(radioButtonInputByIndex(radioButtonWithPreSelectionOnObjectDataPassed), ariaChecked)
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithPreSelectionOnObjectDataPassed));
+        await click(radioButtonLabelByIndex(radioButtonWithPreSelectionOnObjectDataPassed));
+        await expect(await getText(selectedValueLabel, radioButtonWithPreSelectionOnObjectDataPassed - 4)).toContain(
+            winterValue
+        );
+        await expect(
+            await getAttributeByName(
+                radioButtonInputByIndex(radioButtonWithPreSelectionOnObjectDataPassed),
+                ariaChecked
+            )
         ).toBe('true');
     });
 
-    it('Verify platform radio buttons created with given list of SelectItem objects also pre-selection based on control value', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithPreSelectionBasedOnControlValue));
-        click(radioButtonLabelByIndex(radioButtonWithPreSelectionBasedOnControlValue));
-        expect(getText(selectedValueLabel, radioButtonWithPreSelectionBasedOnControlValue - 5)).toContain(winterValue);
-        expect(
-            getAttributeByName(radioButtonInputByIndex(radioButtonWithPreSelectionBasedOnControlValue), ariaChecked)
+    it('Verify platform radio buttons created with given list of SelectItem objects also pre-selection based on control value', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithPreSelectionBasedOnControlValue));
+        await click(radioButtonLabelByIndex(radioButtonWithPreSelectionBasedOnControlValue));
+        await expect(await getText(selectedValueLabel, radioButtonWithPreSelectionBasedOnControlValue - 5)).toContain(
+            winterValue
+        );
+        await expect(
+            await getAttributeByName(
+                radioButtonInputByIndex(radioButtonWithPreSelectionBasedOnControlValue),
+                ariaChecked
+            )
         ).toBe('true');
     });
 
-    it('Verify platform radio button created with given list of SelectItem objects', () => {
-        scrollIntoView(radioButtonInputByIndex(platformRadioButtonWithSelectiemObject));
-        click(radioButtonLabelByIndex(platformRadioButtonWithSelectiemObject));
-        expect(getText(selectedValueLabel, platformRadioButtonWithSelectiemObject - 5)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonInputByIndex(platformRadioButtonWithSelectiemObject), ariaChecked)).toBe(
-            'true'
+    it('Verify platform radio button created with given list of SelectItem objects', async () => {
+        await scrollIntoView(radioButtonInputByIndex(platformRadioButtonWithSelectiemObject));
+        await click(radioButtonLabelByIndex(platformRadioButtonWithSelectiemObject));
+        await expect(await getText(selectedValueLabel, platformRadioButtonWithSelectiemObject - 5)).toContain(
+            winterValue
         );
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(platformRadioButtonWithSelectiemObject), ariaChecked)
+        ).toBe('true');
     });
 
-    it('Verify platform Radio Button created from Invoice objects. Using LookupKey and DisplayKey.', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithLookupKeyAndDisplayKey));
-        click(radioButtonLabelByIndex(radioButtonWithLookupKeyAndDisplayKey));
-        expect(getText(preferredBrandLabel)).toContain(samsungValue);
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonWithLookupKeyAndDisplayKey), ariaChecked)).toBe(
-            'true'
-        );
+    it('Verify platform Radio Button created from Invoice objects. Using LookupKey and DisplayKey.', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithLookupKeyAndDisplayKey));
+        await click(radioButtonLabelByIndex(radioButtonWithLookupKeyAndDisplayKey));
+        await expect(await getText(preferredBrandLabel)).toContain(samsungValue);
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(radioButtonWithLookupKeyAndDisplayKey), ariaChecked)
+        ).toBe('true');
     });
 
-    it('Verify platform radio buttons Passed as content projection and some radio buttons are disabled', () => {
-        const radioButtonsLength = getElementArrayLength(
-            radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithDisabledContentAndFormcontrol)
+    it('Verify platform radio buttons Passed as content projection and some radio buttons are disabled', async () => {
+        const radioButtonsLength = await getElementArrayLength(
+            await radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithDisabledContentAndFormcontrol)
         );
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledContentAndFormcontrol));
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledContentAndFormcontrol));
         for (let i = 0; i < radioButtonsLength; i++) {
-            expect(
-                getAttributeByName(
+            await expect(
+                await getAttributeByName(
                     radioButtonInputByIndex(radioButtonWithDisabledContentAndFormcontrol),
                     ngReflectIsDisabled,
                     i
@@ -334,72 +376,84 @@ describe('Radio button group  Test Suite', () => {
         }
     });
 
-    xit('Verify platform radio buttons Passed as content projection and some radio buttons are disabled', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithSomeDisabledButtons));
-        expect(
-            getAttributeByName(radioButtonInputByIndex(radioButtonWithSomeDisabledButtons), ngReflectIsDisabled, 2)
+    xit('Verify platform radio buttons Passed as content projection and some radio buttons are disabled', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithSomeDisabledButtons));
+        await expect(
+            await getAttributeByName(
+                radioButtonInputByIndex(radioButtonWithSomeDisabledButtons),
+                ngReflectIsDisabled,
+                2
+            )
         ).toBe('true');
-        expect(
-            getAttributeByName(radioButtonInputByIndex(radioButtonWithSomeDisabledButtons), ngReflectIsDisabled, 3)
+        await expect(
+            await getAttributeByName(
+                radioButtonInputByIndex(radioButtonWithSomeDisabledButtons),
+                ngReflectIsDisabled,
+                3
+            )
         ).toBe('true');
-        click(radioButtonLabelByIndex(platformRadioButtonWithSelectiemObject));
-        expect(getAttributeByName(radioButtonInputByIndex(platformRadioButtonWithSelectiemObject), ariaChecked)).toBe(
-            'true'
-        );
+        await click(radioButtonLabelByIndex(platformRadioButtonWithSelectiemObject));
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(platformRadioButtonWithSelectiemObject), ariaChecked)
+        ).toBe('true');
     });
 
-    it('Verify platform radio button created from list of string values', () => {
-        const radioButtonsLength = getElementArrayLength(
-            radioButtonGroupPage.radioButtonInputByIndex(radioButtonCreatedFromList)
+    it('Verify platform radio button created from list of string values', async () => {
+        const radioButtonsLength = await getElementArrayLength(
+            await radioButtonGroupPage.radioButtonInputByIndex(radioButtonCreatedFromList)
         );
-        scrollIntoView(radioButtonInputByIndex(radioButtonCreatedFromList));
+        await scrollIntoView(radioButtonInputByIndex(radioButtonCreatedFromList));
         for (let i = 0; i < radioButtonsLength; i++) {
-            expect(
-                getAttributeByName(radioButtonInputByIndex(radioButtonCreatedFromList), ngReflectIsDisabled, i)
+            await expect(
+                await getAttributeByName(radioButtonInputByIndex(radioButtonCreatedFromList), ngReflectIsDisabled, i)
             ).toBe('true');
         }
     });
 
-    it('Verify platform radio buttons created from list of SelectItem objects and FormContol is disabled', () => {
-        const radioButtonsLength = getElementArrayLength(
-            radioButtonGroupPage.radioButtonInputByIndex(radioButtonDisabledWithSelectedItem)
+    it('Verify platform radio buttons created from list of SelectItem objects and FormContol is disabled', async () => {
+        const radioButtonsLength = await getElementArrayLength(
+            await radioButtonGroupPage.radioButtonInputByIndex(radioButtonDisabledWithSelectedItem)
         );
-        scrollIntoView(radioButtonInputByIndex(radioButtonDisabledWithSelectedItem));
+        await scrollIntoView(radioButtonInputByIndex(radioButtonDisabledWithSelectedItem));
         for (let i = 0; i < radioButtonsLength; i++) {
-            expect(
-                getAttributeByName(radioButtonInputByIndex(radioButtonDisabledWithSelectedItem), ngReflectIsDisabled, i)
+            await expect(
+                await getAttributeByName(
+                    radioButtonInputByIndex(radioButtonDisabledWithSelectedItem),
+                    ngReflectIsDisabled,
+                    i
+                )
             ).toBe('true');
         }
     });
 
-    it('Verify platform radio buttons created from list of SelectItem objects and some items are disabled', () => {
-        const radioButtonsLength = getElementArrayLength(
-            radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithDisabledButtonsFromSelectitemObject)
+    it('Verify platform radio buttons created from list of SelectItem objects and some items are disabled', async () => {
+        const radioButtonsLength = await getElementArrayLength(
+            await radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithDisabledButtonsFromSelectitemObject)
         );
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledButtonsFromSelectitemObject));
-        expect(
-            getAttributeByName(
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledButtonsFromSelectitemObject));
+        await expect(
+            await getAttributeByName(
                 radioButtonInputByIndex(radioButtonWithDisabledButtonsFromSelectitemObject),
                 ngReflectIsDisabled
             )
         ).toBe('false');
-        expect(
-            getAttributeByName(
+        await expect(
+            await getAttributeByName(
                 radioButtonInputByIndex(radioButtonWithDisabledButtonsFromSelectitemObject),
                 ngReflectIsDisabled,
                 1
             )
         ).toBe('false');
-        expect(
-            getAttributeByName(
+        await expect(
+            await getAttributeByName(
                 radioButtonInputByIndex(radioButtonWithDisabledButtonsFromSelectitemObject),
                 ariaChecked,
                 1
             )
         ).toBe('true');
         for (let i = 2; i < radioButtonsLength; i++) {
-            expect(
-                getAttributeByName(
+            await expect(
+                await getAttributeByName(
                     radioButtonInputByIndex(radioButtonWithDisabledButtonsFromSelectitemObject),
                     ngReflectIsDisabled,
                     i
@@ -408,18 +462,18 @@ describe('Radio button group  Test Suite', () => {
         }
     });
 
-    it('Verify platform radio buttons passed as content projection and group is disabled', () => {
-        if (browserIsFirefox()) {
+    it('Verify platform radio buttons passed as content projection and group is disabled', async () => {
+        if (await browserIsFirefox()) {
             console.log('Skip for FF');
             return;
         }
-        const radioButtonsLength = getElementArrayLength(
-            radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithDisabledButtonsDrivenForm)
+        const radioButtonsLength = await getElementArrayLength(
+            await radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithDisabledButtonsDrivenForm)
         );
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledButtonsDrivenForm));
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledButtonsDrivenForm));
         for (let i = 0; i < radioButtonsLength; i++) {
-            expect(
-                getAttributeByName(
+            await expect(
+                await getAttributeByName(
                     radioButtonInputByIndex(radioButtonWithDisabledButtonsDrivenForm),
                     ngReflectIsDisabled,
                     i
@@ -428,52 +482,63 @@ describe('Radio button group  Test Suite', () => {
         }
     });
 
-    it('Verify platform radio buttons passed as content projection and individual radio button is disabled', () => {
-        const radioButtonsLength = getElementArrayLength(
-            radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithIndividualButtonDisabled)
+    it('Verify platform radio buttons passed as content projection and individual radio button is disabled', async () => {
+        const radioButtonsLength = await getElementArrayLength(
+            await radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithIndividualButtonDisabled)
         );
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithIndividualButtonDisabled));
-        expect(
-            getAttributeByName(radioButtonInputByIndex(radioButtonWithIndividualButtonDisabled), ngReflectIsDisabled)
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithIndividualButtonDisabled));
+        await expect(
+            await getAttributeByName(
+                radioButtonInputByIndex(radioButtonWithIndividualButtonDisabled),
+                ngReflectIsDisabled
+            )
         ).toBe('false');
-        expect(
-            getAttributeByName(radioButtonInputByIndex(radioButtonWithIndividualButtonDisabled), ngReflectIsDisabled, 1)
+        await expect(
+            await getAttributeByName(
+                radioButtonInputByIndex(radioButtonWithIndividualButtonDisabled),
+                ngReflectIsDisabled,
+                1
+            )
         ).toBe('false');
         for (let i = 2; i < radioButtonsLength; i++) {
-            expect(
-                getAttributeByName(
+            await expect(
+                await getAttributeByName(
                     radioButtonInputByIndex(radioButtonWithIndividualButtonDisabled),
                     ngReflectIsDisabled,
                     i
                 )
             ).toBe('true');
         }
-        click(radioButtonLabelByIndex(radioButtonWithIndividualButtonDisabled));
-        expect(getAttributeByName(radioButtonInputByIndex(radioButtonWithIndividualButtonDisabled), ariaChecked)).toBe(
-            'true'
-        );
+        await click(radioButtonLabelByIndex(radioButtonWithIndividualButtonDisabled));
+        await expect(
+            await getAttributeByName(radioButtonInputByIndex(radioButtonWithIndividualButtonDisabled), ariaChecked)
+        ).toBe('true');
     });
 
-    it('Verify platform radio buttons created from list of string values and group is disabled', () => {
-        const radioButtonsLength = getElementArrayLength(
-            radioButtonGroupPage.radioButtonInputByIndex(radioButtonDisabledCreatedFromList)
+    it('Verify platform radio buttons created from list of string values and group is disabled', async () => {
+        const radioButtonsLength = await getElementArrayLength(
+            await radioButtonGroupPage.radioButtonInputByIndex(radioButtonDisabledCreatedFromList)
         );
-        scrollIntoView(radioButtonInputByIndex(radioButtonDisabledCreatedFromList));
+        await scrollIntoView(radioButtonInputByIndex(radioButtonDisabledCreatedFromList));
         for (let i = 0; i < radioButtonsLength; i++) {
-            expect(
-                getAttributeByName(radioButtonInputByIndex(radioButtonDisabledCreatedFromList), ngReflectIsDisabled, i)
+            await expect(
+                await getAttributeByName(
+                    radioButtonInputByIndex(radioButtonDisabledCreatedFromList),
+                    ngReflectIsDisabled,
+                    i
+                )
             ).toBe('true');
         }
     });
 
-    it('Verify platform radio buttons created from list of SelectItem and group is disabled', () => {
-        const radioButtonsLength = getElementArrayLength(
-            radioButtonGroupPage.radioButtonInputByIndex(radioButtonDisabledCreatedFromSelectItem)
+    it('Verify platform radio buttons created from list of SelectItem and group is disabled', async () => {
+        const radioButtonsLength = await getElementArrayLength(
+            await radioButtonGroupPage.radioButtonInputByIndex(radioButtonDisabledCreatedFromSelectItem)
         );
-        scrollIntoView(radioButtonInputByIndex(radioButtonDisabledCreatedFromSelectItem));
+        await scrollIntoView(radioButtonInputByIndex(radioButtonDisabledCreatedFromSelectItem));
         for (let i = 0; i < radioButtonsLength; i++) {
-            expect(
-                getAttributeByName(
+            await expect(
+                await getAttributeByName(
                     radioButtonInputByIndex(radioButtonDisabledCreatedFromSelectItem),
                     ngReflectIsDisabled,
                     i
@@ -482,75 +547,78 @@ describe('Radio button group  Test Suite', () => {
         }
     });
 
-    it('Verify platform radio buttons created from list of SelectItem and individual item has disabled property', () => {
-        const radioButtonsLength = getElementArrayLength(
-            radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithDisabledItemsCreatedFromSelectItem)
+    it('Verify platform radio buttons created from list of SelectItem and individual item has disabled property', async () => {
+        const radioButtonsLength = await getElementArrayLength(
+            await radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithDisabledItemsCreatedFromSelectItem)
         );
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledItemsCreatedFromSelectItem));
-        expect(
-            getAttributeByName(
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledItemsCreatedFromSelectItem));
+        await expect(
+            await getAttributeByName(
                 radioButtonInputByIndex(radioButtonWithDisabledItemsCreatedFromSelectItem),
                 ngReflectIsDisabled
             )
         ).toBe('false');
-        expect(
-            getAttributeByName(
+        await expect(
+            await getAttributeByName(
                 radioButtonInputByIndex(radioButtonWithDisabledItemsCreatedFromSelectItem),
                 ngReflectIsDisabled,
                 1
             )
         ).toBe('false');
         for (let i = 2; i < radioButtonsLength; i++) {
-            expect(
-                getAttributeByName(
+            await expect(
+                await getAttributeByName(
                     radioButtonInputByIndex(radioButtonWithDisabledItemsCreatedFromSelectItem),
                     ngReflectIsDisabled,
                     i
                 )
             ).toBe('true');
         }
-        click(radioButtonLabelByIndex(radioButtonWithDisabledItemsCreatedFromSelectItem));
-        expect(
-            getAttributeByName(radioButtonInputByIndex(radioButtonWithDisabledItemsCreatedFromSelectItem), ariaChecked)
+        await click(radioButtonLabelByIndex(radioButtonWithDisabledItemsCreatedFromSelectItem));
+        await expect(
+            await getAttributeByName(
+                radioButtonInputByIndex(radioButtonWithDisabledItemsCreatedFromSelectItem),
+                ariaChecked
+            )
         ).toBe('true');
     });
 
-    it('Verify validation for radio group with disabled button and validation error', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonHaveValidationError));
-        const radioButtonsLength = getElementArrayLength(
-            radioButtonGroupPage.radioButtonInputByIndex(radioButtonHaveValidationError)
+    it('Verify validation for radio group with disabled button and validation error', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonHaveValidationError));
+        const radioButtonsLength = await getElementArrayLength(
+            await radioButtonGroupPage.radioButtonInputByIndex(radioButtonHaveValidationError)
         );
-        click(actionButtonByIndex(submitRadioButtonHaveValidationError));
+        await click(actionButtonByIndex(submitRadioButtonHaveValidationError));
         for (let i = 0; i < radioButtonsLength; i++) {
-            waitForElDisplayed(radioButtonGroupPage.errorMessage, i);
+            await waitForElDisplayed(radioButtonGroupPage.errorMessage, i);
         }
     });
 
-    it('Verify validation for radio group with disabled button and validation error', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledButtonAndValidationError));
-        const radioButtonsLength = getElementArrayLength(
-            radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithDisabledButtonAndValidationError)
+    it('Verify validation for radio group with disabled button and validation error', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledButtonAndValidationError));
+        const radioButtonsLength = await getElementArrayLength(
+            await radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithDisabledButtonAndValidationError)
         );
-        click(actionButtonByIndex(submitDisabledRadioButtonWithValidationErrorIndex));
+        await click(actionButtonByIndex(submitDisabledRadioButtonWithValidationErrorIndex));
         for (let i = 0; i < radioButtonsLength; i++) {
-            waitForElDisplayed(radioButtonGroupPage.errorMessage, i);
+            await waitForElDisplayed(radioButtonGroupPage.errorMessage, i);
         }
     });
 
-    it('Verify validation for radio buttons created with given list of SelectItem objects and have validation error', () => {
-        scrollIntoView(radioButtonInputByIndex(radioButtonWithListOfSelectItemObjects));
-        const radioButtonsLength = getElementArrayLength(
-            radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithListOfSelectItemObjects)
+    it('Verify validation for radio buttons created with given list of SelectItem objects and have validation error', async () => {
+        await scrollIntoView(radioButtonInputByIndex(radioButtonWithListOfSelectItemObjects));
+        const radioButtonsLength = await getElementArrayLength(
+            await radioButtonGroupPage.radioButtonInputByIndex(radioButtonWithListOfSelectItemObjects)
         );
-        click(actionButtonByIndex(submitRadioButtonWithListOfSelectItemObjects));
+        await click(actionButtonByIndex(submitRadioButtonWithListOfSelectItemObjects));
         for (let i = 0; i < radioButtonsLength; i++) {
-            waitForElDisplayed(radioButtonGroupPage.errorMessage, i);
+            await waitForElDisplayed(radioButtonGroupPage.errorMessage, i);
         }
     });
 
     describe('orientation check', () => {
-        it('should be able to switch to rtl', () => {
-            radioButtonGroupPage.checkRtlSwitch();
+        it('should be able to switch to rtl', async () => {
+            await radioButtonGroupPage.checkRtlSwitch();
         });
     });
 });

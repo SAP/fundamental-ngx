@@ -27,75 +27,78 @@ describe('File uploader component test', () => {
         fileUploaderCompactExample
     } = fileUploaderPage;
 
-    beforeAll(() => {
-        fileUploaderPage.open();
+    beforeAll(async () => {
+        await fileUploaderPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(fileUploaderPage.root);
-        waitForElDisplayed(fileUploaderPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(fileUploaderPage.root);
+        await waitForElDisplayed(fileUploaderPage.title);
     }, 2);
 
-    it('verify placeholders', () => {
-        const arrLength = getElementArrayLength(fileUploaderInput);
+    it('verify placeholders', async () => {
+        const arrLength = await getElementArrayLength(fileUploaderInput);
         for (let i = 0; i < arrLength; i++) {
-            scrollIntoView(fileUploaderInput, i);
-            expect(getAttributeByName(fileUploaderInput, 'placeholder', i)).toBe(placeholderTestTextArr[i]);
+            await scrollIntoView(fileUploaderInput, i);
+            await expect(await getAttributeByName(fileUploaderInput, 'placeholder', i)).toBe(placeholderTestTextArr[i]);
         }
     });
 
-    it('verify browser button', () => {
-        let arrLength = getElementArrayLength(browseButton);
+    it('verify browser button', async () => {
+        let arrLength = await getElementArrayLength(browseButton);
         for (let i = 0; i < arrLength; i++) {
-            scrollIntoView(browseButton, i);
-            expect(isElementClickable(browseButton, i)).toBe(true, `browse button with index ${i} is clickable`);
+            await scrollIntoView(browseButton, i);
+            await expect(await isElementClickable(browseButton, i)).toBe(
+                true,
+                `browse button with index ${i} is clickable`
+            );
         }
 
-        arrLength = getElementArrayLength(browseButtonDisabled);
+        arrLength = await getElementArrayLength(browseButtonDisabled);
         for (let i = 0; i < arrLength; i++) {
-            scrollIntoView(browseButtonDisabled, i);
-            expect(isElementClickable(browseButtonDisabled, i)).toBe(
+            await scrollIntoView(browseButtonDisabled, i);
+            await expect(await isElementClickable(browseButtonDisabled, i)).toBe(
                 false,
                 `browse button with index ${i} is not clickable`
             );
         }
     });
 
-    it('verify compact input smaller than basic', () => {
-        const basicInput = getElementSize(fileUploaderExample + fileUploaderInput);
-        const compactInput = getElementSize(fileUploaderCompactExample + fileUploaderInput);
+    it('verify compact input smaller than basic', async () => {
+        const basicInput = await getElementSize(fileUploaderExample + fileUploaderInput);
+        const compactInput = await getElementSize(fileUploaderCompactExample + fileUploaderInput);
 
-        expect(compactInput.width).toBeLessThan(basicInput.width);
+        await expect(compactInput.width).toBeLessThan(basicInput.width);
     });
 
     // skipped due to issue with file uploader - browser is stuck after uploading file
-    xit('verify file upload', () => {
-        const arrLength = getElementArrayLength(browseButton);
+    xit('verify file upload', async () => {
+        const arrLength = await getElementArrayLength(browseButton);
         for (let i = 0; i < arrLength; i++) {
-            uploadFile(fileUploaderInputFile, imagePath, i);
-            expect(imagePath).toContain(getText(fileSelectedText, i));
-            expect(imagePath).toContain(getAttributeByName(fileUploaderInput, 'title', i).slice(1));
+            await uploadFile(fileUploaderInputFile, imagePath, i);
+            await expect(imagePath).toContain(await getText(fileSelectedText, i));
+            await expect(imagePath).toContain((await getAttributeByName(fileUploaderInput, 'title', i)).slice(1));
         }
     });
 
     // skipped due to issue with file uploader - browser is stuck after uploading file
-    xit('verify file uploaded message', () => {
-        const arrLength = getElementArrayLength(browseButton);
+    xit('verify file uploaded message', async () => {
+        const arrLength = await getElementArrayLength(browseButton);
         for (let i = 0; i < arrLength; i++) {
-            uploadFile(fileUploaderInputFile, imagePath, i);
-            expect(titleValue).toContain(getAlertText());
+            await uploadFile(fileUploaderInputFile, imagePath, i);
+            await expect(titleValue).toContain(await getAlertText());
         }
     });
 
-    it('should check RTL and LTR orientation', () => {
-        fileUploaderPage.checkRtlSwitch();
+    it('should check RTL and LTR orientation', async () => {
+        await fileUploaderPage.checkRtlSwitch();
     });
 
     xdescribe('Should check visual regression', () => {
-        it('should check visual regression for all examples', () => {
-            fileUploaderPage.saveExampleBaselineScreenshot();
-            expect(fileUploaderPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check visual regression for all examples', async () => {
+            await fileUploaderPage.saveExampleBaselineScreenshot();
+            await expect(await fileUploaderPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

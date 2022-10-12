@@ -148,14 +148,14 @@ describe('Table component test suite', () => {
         tableNoOuterBordersExample
     } = tablePage;
 
-    beforeAll(() => {
-        tablePage.open();
+    beforeAll(async () => {
+        await tablePage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(tablePage.root);
-        waitForElDisplayed(tablePage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(tablePage.root);
+        await waitForElDisplayed(tablePage.title);
     }, 1);
 
     if (browserIsSafari()) {
@@ -164,503 +164,542 @@ describe('Table component test suite', () => {
     }
 
     describe('Check Simple Table example', () => {
-        it('should check alert messages', () => {
-            checkAlertMessages(tableDefaultExample);
+        it('should check alert messages', async () => {
+            await checkAlertMessages(tableDefaultExample);
         });
 
-        it('should check table item single selection', () => {
-            findElementInTable(tableDefaultExample, tableCellArr);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableDefaultExample, tableCellArr);
+        });
+
+        it('should check correct operation x button', async () => {
+            await scrollIntoView(tableDefaultExample);
+            await setValue(tableDefaultExample + input, 'Astro');
+            await click(tableDefaultExample + button, 1);
+
+            const filterRowCount = await getElementArrayLength(tableDefaultExample + tableRow);
+            await expect(filterRowCount).toEqual(2);
+
+            await click(tableDefaultExample + button);
+            const nonFilterRowCount = await getElementArrayLength(tableDefaultExample + tableRow);
+            await expect(nonFilterRowCount).toEqual(16);
         });
     });
 
     describe('Check Custom Column Width & Column Resizing', () => {
-        it('should check alert messages', () => {
-            checkAlertMessages(tableCustomWidthExample);
+        it('should check alert messages', async () => {
+            await checkAlertMessages(tableCustomWidthExample);
         });
 
-        it('should check table item single selection', () => {
-            findElementInTable(tableCustomWidthExample, tableCellArr);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableCustomWidthExample, tableCellArr);
         });
     });
 
     describe('Check Activable Rows', () => {
-        it('should check alert messages', () => {
-            checkAlertMessages(tableActivableExample);
+        it('should check alert messages', async () => {
+            await checkAlertMessages(tableActivableExample);
         });
 
-        it('should check table item single selection', () => {
-            findElementInTable(tableActivableExample, tableCellArr);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableActivableExample, tableCellArr);
         });
 
-        it('should check activable row', () => {
-            scrollIntoView(tableActivableExample);
-            expect(getElementClass(tableActivableExample + tableRow)).toContain('fd-table__row--activable');
+        it('should check activable row', async () => {
+            await scrollIntoView(tableActivableExample);
+            await expect(await getElementClass(tableActivableExample + tableRow)).toContain('fd-table__row--activable');
         });
     });
 
     describe('Check Custom Column', () => {
-        it('should check table item single selection', () => {
-            scrollIntoView(tableCustomColumnExample);
-            setValue(tableCustomColumnExample + input, testText);
-            click(tableCustomColumnExample + button, 1);
-            const rowLength = getElementArrayLength(tableCustomColumnExample + tableRow);
-            expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(tableCustomColumnExample + tableRow + tableCellText);
+        it('should check table item single selection', async () => {
+            await scrollIntoView(tableCustomColumnExample);
+            await setValue(tableCustomColumnExample + input, testText);
+            await click(tableCustomColumnExample + button, 1);
+            const rowLength = await getElementArrayLength(tableCustomColumnExample + tableRow);
+            await expect(rowLength).toEqual(1);
+            const cellLength = await getElementArrayLength(tableCustomColumnExample + tableRow + tableCellText);
             for (let i = 0; i < cellLength; i++) {
                 if (i === 1) {
                     continue;
                 }
-                expect(getText(tableCustomColumnExample + tableRow + tableCellText, i).trim()).toBe(tableCellArr6[i]);
+                await expect((await getText(tableCustomColumnExample + tableRow + tableCellText, i)).trim()).toBe(
+                    tableCellArr6[i]
+                );
             }
         });
 
-        it('should check possible to change description', () => {
-            scrollIntoView(tableCustomColumnExample);
-            setValue(tableCustomColumnExample + 'fdp-table-cell input', 'test');
-            expect(getValue(tableCustomColumnExample + 'fdp-table-cell input')).toBe('test');
+        it('should check possible to change description', async () => {
+            await scrollIntoView(tableCustomColumnExample);
+            await setValue(tableCustomColumnExample + 'fdp-table-cell input', 'test');
+            await expect(await getValue(tableCustomColumnExample + 'fdp-table-cell input')).toBe('test');
         });
     });
 
     describe('Check Single Row Selection', () => {
-        it('should check table item single selection', () => {
-            findElementInTable(tableSingleRowSelectionExample, tableCellArr);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableSingleRowSelectionExample, tableCellArr);
         });
 
-        it('should check table item single selection', () => {
-            scrollIntoView(tableSingleRowSelectionExample);
-            click(tableSingleRowSelectionExample + tableRow + tableCell);
-            expect(getAttributeByName(tableSingleRowSelectionExample + tableRow, 'aria-selected')).toBe('true');
+        it('should check table item single selection', async () => {
+            await scrollIntoView(tableSingleRowSelectionExample);
+            await click(tableSingleRowSelectionExample + tableRow + tableCell);
+            await expect(await getAttributeByName(tableSingleRowSelectionExample + tableRow, 'aria-selected')).toBe(
+                'true'
+            );
         });
 
-        it('should check selected row not gets unselected', () => {
-            scrollIntoView(tableSingleRowSelectionExample);
-            setValue(tableSingleRowSelectionExample + input, 'Astro');
-            click(tableSingleRowSelectionExample + button, 1);
-            click(tableSingleRowSelectionExample + tableCell);
-            click(tableSingleRowSelectionExample + button);
-            expect(getAttributeByName(tableSingleRowSelectionExample + tableRow, 'aria-selected', 1)).toBe('true');
+        it('should check selected row not gets unselected', async () => {
+            await scrollIntoView(tableSingleRowSelectionExample);
+            await setValue(tableSingleRowSelectionExample + input, 'Astro');
+            await click(tableSingleRowSelectionExample + button, 1);
+            await click(tableSingleRowSelectionExample + tableCell);
+            await click(tableSingleRowSelectionExample + button);
+            await expect(await getAttributeByName(tableSingleRowSelectionExample + tableRow, 'aria-selected', 1)).toBe(
+                'true'
+            );
         });
     });
 
     describe('Check Multi Row Selection', () => {
-        it('should verify checkboxes', () => {
-            checkAllCheckbox(tableMultipleRowSelectionExample);
+        it('should verify checkboxes', async () => {
+            await checkAllCheckbox(tableMultipleRowSelectionExample);
         });
     });
 
     describe('Check Column Sorting', () => {
-        it('should check table item single selection', () => {
-            findElementInTable(tableSortableExample, tableCellArr);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableSortableExample, tableCellArr);
         });
 
-        it('should check ascending sorting by name, description and price', () => {
-            scrollIntoView(tableSortableExample);
-            chooseSortOptionBy(tableSortableExample, ellipsisButton, 2);
-            expect(getText(tableSortableExample + tableCellDescription).trim()).toBe(descriptionStartTestText);
-            expect(getText(tableSortableExample + tableCellDescription, 15).trim()).toBe(descriptionEndTestText);
+        it('should check ascending sorting by name, description and price', async () => {
+            await scrollIntoView(tableSortableExample);
+            await chooseSortOptionBy(tableSortableExample, ellipsisButton, 2);
+            await expect((await getText(tableSortableExample + tableCellDescription)).trim()).toBe(
+                descriptionStartTestText
+            );
+            await expect((await getText(tableSortableExample + tableCellDescription, 15)).trim()).toBe(
+                descriptionEndTestText
+            );
 
-            chooseSortOptionBy(tableSortableExample, ellipsisButton, 3);
-            expect(getText(tableSortableExample + tableCellPrice).trim()).toBe(priceStartTestText);
-            expect(getText(tableSortableExample + tableCellPrice, 15).trim()).toBe(priceEndTestText);
+            await chooseSortOptionBy(tableSortableExample, ellipsisButton, 3);
+            await expect((await getText(tableSortableExample + tableCellPrice)).trim()).toBe(priceStartTestText);
+            await expect((await getText(tableSortableExample + tableCellPrice, 15)).trim()).toBe(priceEndTestText);
 
-            chooseSortOptionBy(tableSortableExample, ellipsisButton, 1);
-            expect(getText(tableSortableExample + tableCellName).trim()).toBe(nameStartTestText);
-            expect(getText(tableSortableExample + tableCellName, 15).trim()).toBe(nameEndTestText);
+            await chooseSortOptionBy(tableSortableExample, ellipsisButton, 1);
+            await expect((await getText(tableSortableExample + tableCellName)).trim()).toBe(nameStartTestText);
+            await expect((await getText(tableSortableExample + tableCellName, 15)).trim()).toBe(nameEndTestText);
         });
 
-        it('should check descending sorting by name, description and price', () => {
-            scrollIntoView(tableSortableExample);
-            click(tableSortableExample + ellipsisButton);
-            click(buttonSortedOrder, 1);
-            click(buttonSortedBy, 2);
-            click(barButton);
-            expect(getText(tableSortableExample + tableCellDescription).trim()).toBe(descriptionEndTestText);
-            expect(getText(tableSortableExample + tableCellDescription, 15).trim()).toBe(descriptionStartTestText);
+        it('should check descending sorting by name, description and price', async () => {
+            await scrollIntoView(tableSortableExample);
+            await click(tableSortableExample + ellipsisButton);
+            await click(buttonSortedOrder, 1);
+            await click(buttonSortedBy, 2);
+            await click(barButton);
+            await expect((await getText(tableSortableExample + tableCellDescription)).trim()).toBe(
+                descriptionEndTestText
+            );
+            await expect((await getText(tableSortableExample + tableCellDescription, 15)).trim()).toBe(
+                descriptionStartTestText
+            );
 
-            chooseSortOptionBy(tableSortableExample, ellipsisButton, 3);
-            expect(getText(tableSortableExample + tableCellPrice).trim()).toBe(priceEndTestText);
-            expect(getText(tableSortableExample + tableCellPrice, 15).trim()).toBe(priceStartTestText);
+            await chooseSortOptionBy(tableSortableExample, ellipsisButton, 3);
+            await expect((await getText(tableSortableExample + tableCellPrice)).trim()).toBe(priceEndTestText);
+            await expect((await getText(tableSortableExample + tableCellPrice, 15)).trim()).toBe(priceStartTestText);
 
-            chooseSortOptionBy(tableSortableExample, ellipsisButton, 1);
-            expect(getText(tableSortableExample + tableCellName).trim()).toBe(nameEndTestText);
-            expect(getText(tableSortableExample + tableCellName, 15).trim()).toBe(nameStartTestText);
+            await chooseSortOptionBy(tableSortableExample, ellipsisButton, 1);
+            await expect((await getText(tableSortableExample + tableCellName)).trim()).toBe(nameEndTestText);
+            await expect((await getText(tableSortableExample + tableCellName, 15)).trim()).toBe(nameStartTestText);
         });
 
-        it('should check after selecting sorting option popover closed', () => {
-            scrollIntoView(tableSortableExample);
-            click(sortableIcon);
-            click(sortableOption);
-            expect(doesItExist(sortablePopover)).toBe(false, 'sortable popover still displayed');
+        it('should check after selecting sorting option popover closed', async () => {
+            await scrollIntoView(tableSortableExample);
+            await click(sortableIcon);
+            await click(sortableOption);
+            await expect(await doesItExist(sortablePopover)).toBe(false, 'sortable popover still displayed');
         });
     });
 
     describe('Check Column Filtering', () => {
-        it('should check table item single selection', () => {
-            findElementInTable(tableFilterableExample, tableCellArr, 1);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableFilterableExample, tableCellArr, 1);
         });
 
-        it('should check filtering by status color', () => {
-            chooseFilter(2, 1);
-            const rowLength = getElementArrayLength(tableFilterableExample + tableRow);
+        it('should check filtering by status color', async () => {
+            await chooseFilter(2, 1);
+            const rowLength = await getElementArrayLength(tableFilterableExample + tableRow);
             for (let i = 0; i < rowLength; i++) {
-                expect(getText(tableCellStatusColor, i).trim()).toBe('positive');
+                await expect((await getText(tableCellStatusColor, i)).trim()).toBe('positive');
             }
 
-            chooseFilter(2, 2);
-            const tableRowLength = getElementArrayLength(tableFilterableExample + tableRow);
+            await chooseFilter(2, 2);
+            const tableRowLength = await getElementArrayLength(tableFilterableExample + tableRow);
             for (let i = 0; i < tableRowLength; i++) {
-                expect(getText(tableCellStatusColor, i).trim()).toBe('negative');
+                await expect((await getText(tableCellStatusColor, i)).trim()).toBe('negative');
             }
 
-            chooseFilter(2, 3);
-            expect(doesItExist(tableFilterableExample + tableRow)).toBe(false, '');
+            await chooseFilter(2, 3);
+            await expect(await doesItExist(tableFilterableExample + tableRow)).toBe(false, '');
         });
 
-        it('should check filtering by status', () => {
-            chooseFilter(1, 0);
-            const rowLength = getElementArrayLength(tableFilterableExample + tableRow);
+        it('should check filtering by status', async () => {
+            await chooseFilter(1, 0);
+            const rowLength = await getElementArrayLength(tableFilterableExample + tableRow);
             for (let i = 0; i < rowLength; i++) {
-                expect(getText(tableFilterableExample + tableCellStatus, i).trim()).toBe('Out of stock');
+                await expect((await getText(tableFilterableExample + tableCellStatus, i)).trim()).toBe('Out of stock');
             }
-            refreshPage();
-            chooseFilter(1, 1);
-            const tableRowLength = getElementArrayLength(tableFilterableExample + tableRow);
+            await refreshPage();
+            await chooseFilter(1, 1);
+            const tableRowLength = await getElementArrayLength(tableFilterableExample + tableRow);
             for (let i = 0; i < tableRowLength; i++) {
-                expect(getText(tableFilterableExample + tableCellStatus, i).trim()).toBe(tableCellArr[3]);
+                await expect((await getText(tableFilterableExample + tableCellStatus, i)).trim()).toBe(tableCellArr[3]);
             }
         });
 
-        it('should check on filter by price reset button is clickable', () => {
-            scrollIntoView(tableFilterableExample);
-            click(tableFilterableExample + buttonFilter);
-            click(dialogFilters);
-            setValue(filterInput, '10');
-            setValue(filterInput, '40', 1);
-            click(filterButtonOk);
+        it('should check on filter by price reset button is clickable', async () => {
+            await scrollIntoView(tableFilterableExample);
+            await click(tableFilterableExample + buttonFilter);
+            await click(dialogFilters);
+            await setValue(filterInput, '10');
+            await setValue(filterInput, '40', 1);
+            await click(filterButtonOk);
 
-            click(tableFilterableExample + buttonFilter);
-            click(dialogFilters);
-            expect(isElementClickable(filterResetButton)).toBe(true, 'reset button not clickable');
+            await click(tableFilterableExample + buttonFilter);
+            await click(dialogFilters);
+            await expect(await isElementClickable(filterResetButton)).toBe(true, 'reset button not clickable');
         });
     });
 
     describe('Check Column Grouping', () => {
-        it('should check table item single selection', () => {
-            findElementInTable(tableGroupableExample, tableCellArr);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableGroupableExample, tableCellArr);
         });
 
-        it('should verify checkboxes', () => {
-            checkAllCheckbox(tableGroupableExample);
+        it('should verify checkboxes', async () => {
+            await checkAllCheckbox(tableGroupableExample);
         });
 
-        it('should check ascending sorting by name and status', () => {
-            scrollIntoView(tableGroupableExample);
-            chooseSortOptionBy(tableGroupableExample, ellipsisButton, 0);
-            expect(getText(tableGroupableExample + tableCellDescription).trim()).toBe(tableCellArr[1]);
-            expect(getText(tableGroupableExample + tableCellDescription, 15).trim()).toBe(pharetraTestText);
+        it('should check ascending sorting by name and status', async () => {
+            await scrollIntoView(tableGroupableExample);
+            await chooseSortOptionBy(tableGroupableExample, ellipsisButton, 0);
+            await expect((await getText(tableGroupableExample + tableCellDescription)).trim()).toBe(tableCellArr[1]);
+            await expect((await getText(tableGroupableExample + tableCellDescription, 15)).trim()).toBe(
+                pharetraTestText
+            );
 
-            chooseSortOptionBy(tableGroupableExample, ellipsisButton, 1);
-            expect(getText(tableGroupableExample + tableCellDescription).trim()).toBe(nuncTestText);
-            expect(getText(tableGroupableExample + tableCellDescription, 15).trim()).toBe(massaTestText);
+            await chooseSortOptionBy(tableGroupableExample, ellipsisButton, 1);
+            await expect((await getText(tableGroupableExample + tableCellDescription)).trim()).toBe(nuncTestText);
+            await expect((await getText(tableGroupableExample + tableCellDescription, 15)).trim()).toBe(massaTestText);
         });
 
-        it('should check descending sorting by name and status', () => {
-            scrollIntoView(tableGroupableExample);
-            click(tableGroupableExample + ellipsisButton);
-            click(buttonSortedOrder, 1);
-            click(buttonSortedBy, 1);
-            click(barButton);
-            chooseSortOptionBy(tableGroupableExample, ellipsisButton, 0);
-            expect(getText(tableGroupableExample + tableCellDescription).trim()).toBe(pharetraTestText);
-            expect(getText(tableGroupableExample + tableCellDescription, 15).trim()).toBe(tableCellArr[1]);
+        it('should check descending sorting by name and status', async () => {
+            await scrollIntoView(tableGroupableExample);
+            await click(tableGroupableExample + ellipsisButton);
+            await click(buttonSortedOrder, 1);
+            await click(buttonSortedBy, 1);
+            await click(barButton);
+            await chooseSortOptionBy(tableGroupableExample, ellipsisButton, 0);
+            await expect((await getText(tableGroupableExample + tableCellDescription)).trim()).toBe(pharetraTestText);
+            await expect((await getText(tableGroupableExample + tableCellDescription, 15)).trim()).toBe(
+                tableCellArr[1]
+            );
 
-            chooseSortOptionBy(tableGroupableExample, ellipsisButton, 1);
-            expect(getText(tableGroupableExample + tableCellDescription).trim()).toBe(tableCellArr[1]);
-            expect(getText(tableGroupableExample + tableCellDescription, 15).trim()).toBe(
+            await chooseSortOptionBy(tableGroupableExample, ellipsisButton, 1);
+            await expect((await getText(tableGroupableExample + tableCellDescription)).trim()).toBe(tableCellArr[1]);
+            await expect((await getText(tableGroupableExample + tableCellDescription, 15)).trim()).toBe(
                 'integer ac leo pellentesque'
             );
         });
     });
 
     describe('Check Column Freezing', () => {
-        it('should check table item single selection', () => {
-            scrollIntoView(tableFreezableExample + input);
-            setValue(tableFreezableExample + input, tableCellArr[1]);
-            click(tableFreezableExample + button, 1);
-            const rowLength = getElementArrayLength(tableFreezableExample + tableRow);
-            expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(tableFreezableExample + tableRow + tableCellText);
+        it('should check table item single selection', async () => {
+            await scrollIntoView(tableFreezableExample + input);
+            await setValue(tableFreezableExample + input, tableCellArr[1]);
+            await click(tableFreezableExample + button, 1);
+            const rowLength = await getElementArrayLength(tableFreezableExample + tableRow);
+            await expect(rowLength).toEqual(1);
+            const cellLength = await getElementArrayLength(tableFreezableExample + tableRow + tableCellText);
             for (let i = 0; i < cellLength; i++) {
-                expect(getText(tableFreezableExample + tableRow + tableCellText, i).trim()).toBe(tableCellArr[i]);
+                await expect((await getText(tableFreezableExample + tableRow + tableCellText, i)).trim()).toBe(
+                    tableCellArr[i]
+                );
             }
         });
 
-        it('should verify checkboxes', () => {
-            checkAllCheckbox(tableFreezableExample);
+        it('should verify checkboxes', async () => {
+            await checkAllCheckbox(tableFreezableExample);
         });
     });
 
     describe('Check Loading/Busy State', () => {
-        it('should check alert messages', () => {
-            checkAlertMessages(tableLoadingExample);
+        it('should check alert messages', async () => {
+            await checkAlertMessages(tableLoadingExample);
         });
 
-        it('should check busy indicator', () => {
-            scrollIntoView(tableLoadingExample);
-            pause(300);
-            expect(doesItExist(busyIndicator)).toBe(false, 'busy indicator should not be displayed');
+        it('should check busy indicator', async () => {
+            await scrollIntoView(tableLoadingExample);
+            await pause(300);
+            await expect(await doesItExist(busyIndicator)).toBe(false, 'busy indicator should not be displayed');
 
-            setValue(tableLoadingExample + input, 'Astro');
-            click(tableLoadingExample + buttonSearch);
-            expect(doesItExist(busyIndicator)).toBe(true, 'busy indicator should be displayed');
+            await setValue(tableLoadingExample + input, 'Astro');
+            await click(tableLoadingExample + buttonSearch);
+            await expect(await doesItExist(busyIndicator)).toBe(true, 'busy indicator should be displayed');
 
-            pause(300);
-            expect(doesItExist(busyIndicator)).toBe(false, 'busy indicator should not be displayed');
+            await pause(300);
+            await expect(await doesItExist(busyIndicator)).toBe(false, 'busy indicator should not be displayed');
         });
 
-        it('should check table content is not interactive while table is loading', () => {
-            scrollIntoView(tableLoadingExample);
-            setValue(tableLoadingExample + input, 'Astro');
-            click(tableLoadingExample + buttonSearch);
+        it('should check table content is not interactive while table is loading', async () => {
+            await scrollIntoView(tableLoadingExample);
+            await setValue(tableLoadingExample + input, 'Astro');
+            await click(tableLoadingExample + buttonSearch);
 
-            expect(isEnabled(tableLoadingExample + input)).toBe(false, 'input is enable');
+            await expect(await isEnabled(tableLoadingExample + input)).toBe(false, 'input is enable');
         });
     });
 
     describe('Check Page Scrolling', () => {
-        it('should check table item single selection', () => {
-            scrollIntoView(tablePageScrollingExample);
-            setValue(tablePageScrollingExample + input, testText2);
-            click(tablePageScrollingExample + buttonSearch);
-            expect(doesItExist(busyIndicator)).toBe(true, "busy indicator isn't displayed");
-            pause(500);
-            expect(doesItExist(busyIndicator)).toBe(false, 'busy indicator is displayed');
-            const rowLength = getElementArrayLength(tablePageScrollingExample + tableRow);
-            expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(tablePageScrollingExample + tableRow + tableCellText);
+        it('should check table item single selection', async () => {
+            await scrollIntoView(tablePageScrollingExample);
+            await setValue(tablePageScrollingExample + input, testText2);
+            await click(tablePageScrollingExample + buttonSearch);
+            await expect(await doesItExist(busyIndicator)).toBe(true, "busy indicator isn't displayed");
+            await pause(500);
+            await expect(await doesItExist(busyIndicator)).toBe(false, 'busy indicator is displayed');
+            const rowLength = await getElementArrayLength(tablePageScrollingExample + tableRow);
+            await expect(rowLength).toEqual(1);
+            const cellLength = await getElementArrayLength(tablePageScrollingExample + tableRow + tableCellText);
             for (let i = 0; i < cellLength; i++) {
-                scrollIntoView(tablePageScrollingExample + tableRow + tableCellText, i);
-                expect(getText(tablePageScrollingExample + tableRow + tableCellText, i).trim()).toBe(tableCellArr2[i]);
+                await scrollIntoView(tablePageScrollingExample + tableRow + tableCellText, i);
+                await expect((await getText(tablePageScrollingExample + tableRow + tableCellText, i)).trim()).toBe(
+                    tableCellArr2[i]
+                );
             }
         });
 
-        it('should check scroll', () => {
-            scrollIntoView(tablePageScrollingExample);
-            scrollIntoView(tablePageScrollingExample + tableRow, 40);
+        it('should check scroll', async () => {
+            await scrollIntoView(tablePageScrollingExample);
+            await scrollIntoView(tablePageScrollingExample + tableRow, 40);
 
-            expect(getText(tablePageScrollingExample + tableCellName, 40).trim()).toBe('Product name 40');
-            expect(getText(tablePageScrollingExample + tableCellDescription, 40).trim()).toBe(
+            await expect((await getText(tablePageScrollingExample + tableCellName, 40)).trim()).toBe('Product name 40');
+            await expect((await getText(tablePageScrollingExample + tableCellDescription, 40)).trim()).toBe(
                 'Product description goes here 40'
             );
         });
     });
 
     describe('Check Initial State', () => {
-        it('should check table item single selection', () => {
-            scrollIntoView(tableInitialStateExample);
-            setValue(tableInitialStateExample + input, testText3);
-            click(tableInitialStateExample + buttonSearch);
-            const rowLength = getElementArrayLength(tableInitialStateExample + tableRowInitialState);
-            expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(tableInitialStateExample + tableRowInitialState + tableCellText);
+        it('should check table item single selection', async () => {
+            await scrollIntoView(tableInitialStateExample);
+            await setValue(tableInitialStateExample + input, testText3);
+            await click(tableInitialStateExample + buttonSearch);
+            const rowLength = await getElementArrayLength(tableInitialStateExample + tableRowInitialState);
+            await expect(rowLength).toEqual(1);
+            const cellLength = await getElementArrayLength(
+                tableInitialStateExample + tableRowInitialState + tableCellText
+            );
             for (let i = 0; i < cellLength; i++) {
-                expect(getText(tableInitialStateExample + tableRowInitialState + tableCellText, i).trim()).toBe(
-                    tableCellArr3[i]
-                );
+                await expect(
+                    (await getText(tableInitialStateExample + tableRowInitialState + tableCellText, i)).trim()
+                ).toBe(tableCellArr3[i]);
             }
         });
 
-        it('should check cell expanded', () => {
-            scrollIntoView(tableInitialStateExample + tableCellInitialState);
-            click(tableInitialStateExample + tableCellInitialState);
-            click(tableInitialStateExample + tableCellInitialState, 1);
+        it('should check cell expanded', async () => {
+            await scrollIntoView(tableInitialStateExample + tableCellInitialState);
+            await click(tableInitialStateExample + tableCellInitialState);
+            await click(tableInitialStateExample + tableCellInitialState, 1);
 
-            expect(getAttributeByName(tableInitialStateExample + tableCellInitialState, 'aria-expanded')).toBe('false');
-            expect(getAttributeByName(tableInitialStateExample + tableCellInitialState, 'aria-expanded', 1)).toBe(
-                'false'
-            );
+            await expect(
+                await getAttributeByName(tableInitialStateExample + tableCellInitialState, 'aria-expanded')
+            ).toBe('false');
+            await expect(
+                await getAttributeByName(tableInitialStateExample + tableCellInitialState, 'aria-expanded', 1)
+            ).toBe('false');
         });
     });
 
     describe('Check Tree Table', () => {
-        it('should check table item single selection', () => {
-            scrollIntoView(tableTreeExample);
-            setValue(tableTreeExample + input, 'Laptops');
-            click(tableTreeExample + buttonSearch);
-            const rowLength = getElementArrayLength(tableTreeExample + tableRow);
-            expect(rowLength).toEqual(1);
+        it('should check table item single selection', async () => {
+            await scrollIntoView(tableTreeExample);
+            await setValue(tableTreeExample + input, 'Laptops');
+            await click(tableTreeExample + buttonSearch);
+            const rowLength = await getElementArrayLength(tableTreeExample + tableRow);
+            await expect(rowLength).toEqual(1);
         });
 
-        it('should check checkboxes', () => {
-            checkAllCheckbox(tableTreeExample);
+        it('should check checkboxes', async () => {
+            await checkAllCheckbox(tableTreeExample);
         });
 
-        it('should check expanded table row', () => {
-            scrollIntoView(tableTreeExample);
-            const arrowButtonLength = getElementArrayLength(tableTreeExample + arrowButton);
+        it('should check expanded table row', async () => {
+            await scrollIntoView(tableTreeExample);
+            const arrowButtonLength = await getElementArrayLength(tableTreeExample + arrowButton);
             for (let i = 0; i < arrowButtonLength; i++) {
-                click(tableTreeExample + arrowButton, i);
+                await click(tableTreeExample + arrowButton, i);
             }
-            expect(getElementArrayLength(tableTreeExample + tableRow)).toEqual(20);
+            await expect(await getElementArrayLength(tableTreeExample + tableRow)).toEqual(20);
         });
     });
 
     describe('Check Table columns visibility and order', () => {
-        it('should check table item single selection', () => {
-            findElementInTable(tableP13ColumnsExample, tableCellArr4);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableP13ColumnsExample, tableCellArr4);
         });
 
-        it('should check searching and placeholder in dialog', () => {
-            checkPlaceholder(tableP13ColumnsExample, 2);
-            checkSearchingInDialog();
+        it('should check searching and placeholder in dialog', async () => {
+            await checkPlaceholder(tableP13ColumnsExample, 2);
+            await checkSearchingInDialog();
         });
 
-        it('should check sorting of columns', () => {
-            checkSortingColumns(tableP13ColumnsExample, ellipsisButton);
+        it('should check sorting of columns', async () => {
+            await checkSortingColumns(tableP13ColumnsExample, ellipsisButton);
         });
     });
 
     describe('Check Sorting by multiple columns', () => {
-        it('should check table item single selection', () => {
-            findElementInTable(tableP13SortExample, tableCellArr4);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableP13SortExample, tableCellArr4);
         });
 
-        it('should check sorting ascending and descending by name', () => {
-            scrollIntoView(tableP13SortExample);
-            click(tableP13SortExample + ellipsisButton);
-            click(popoverDropdownButton);
-            click(buttonSortedBy);
-            click(footerButtonOk);
-            expect(getText(tableP13SortExample + tableCellName).trim()).toBe(testText);
-            expect(getText(tableP13SortExample + tableCellName, 15).trim()).toBe(nameEndTestText);
+        it('should check sorting ascending and descending by name', async () => {
+            await scrollIntoView(tableP13SortExample);
+            await click(tableP13SortExample + ellipsisButton);
+            await click(popoverDropdownButton);
+            await click(buttonSortedBy);
+            await click(footerButtonOk);
+            await expect((await getText(tableP13SortExample + tableCellName)).trim()).toBe(testText);
+            await expect((await getText(tableP13SortExample + tableCellName, 15)).trim()).toBe(nameEndTestText);
 
-            click(tableP13SortExample + columnHeader);
-            click(filterByColorItem, 1);
-            expect(getText(tableP13SortExample + tableCellName).trim()).toBe(nameEndTestText);
-            expect(getText(tableP13SortExample + tableCellName, 15).trim()).toBe(testText);
+            await click(tableP13SortExample + columnHeader);
+            await click(filterByColorItem, 1);
+            await expect((await getText(tableP13SortExample + tableCellName)).trim()).toBe(nameEndTestText);
+            await expect((await getText(tableP13SortExample + tableCellName, 15)).trim()).toBe(testText);
         });
 
-        it('should check sorting ascending and descending by price', () => {
-            scrollIntoView(tableP13SortExample);
-            click(tableP13SortExample + ellipsisButton);
-            click(buttonAdd);
-            click(buttonRemove);
-            click(popoverDropdownButton);
-            click(buttonSortedBy, 1);
-            click(footerButtonOk);
+        it('should check sorting ascending and descending by price', async () => {
+            await scrollIntoView(tableP13SortExample);
+            await click(tableP13SortExample + ellipsisButton);
+            await click(buttonAdd);
+            await click(buttonRemove);
+            await click(popoverDropdownButton);
+            await click(buttonSortedBy, 1);
+            await click(footerButtonOk);
 
-            expect(getText(tableP13SortExample + tableCellPrice).trim()).toBe(priceStartTestText);
-            expect(getText(tableP13SortExample + tableCellPrice, 15).trim()).toBe(priceEndTestText);
+            await expect((await getText(tableP13SortExample + tableCellPrice)).trim()).toBe(priceStartTestText);
+            await expect((await getText(tableP13SortExample + tableCellPrice, 15)).trim()).toBe(priceEndTestText);
 
-            click(tableP13SortExample + columnHeader, 2);
-            click(filterByColorItem, 1);
-            expect(getText(tableP13SortExample + tableCellPrice).trim()).toBe(priceEndTestText);
-            expect(getText(tableP13SortExample + tableCellPrice, 15).trim()).toBe(priceStartTestText);
+            await click(tableP13SortExample + columnHeader, 2);
+            await click(filterByColorItem, 1);
+            await expect((await getText(tableP13SortExample + tableCellPrice)).trim()).toBe(priceEndTestText);
+            await expect((await getText(tableP13SortExample + tableCellPrice, 15)).trim()).toBe(priceStartTestText);
         });
 
-        it('should check searching and placeholder in dialog', () => {
-            checkPlaceholder(tableP13SortExample, 3);
+        it('should check searching and placeholder in dialog', async () => {
+            await checkPlaceholder(tableP13SortExample, 3);
         });
 
-        it('should check sorting of columns', () => {
-            checkSortingColumns(tableP13SortExample, ellipsisButton, 1);
+        it('should check sorting of columns', async () => {
+            await checkSortingColumns(tableP13SortExample, ellipsisButton, 1);
         });
 
-        it('should check impossible select columns multiple times', () => {
-            scrollIntoView(tableP13SortExample);
-            click(tableP13SortExample + ellipsisButton);
-            click(popoverDropdownButton);
-            expect(isElementDisplayed(dropdownList)).toBe(true);
-            click(dropdownOption);
+        it('should check impossible select columns multiple times', async () => {
+            await scrollIntoView(tableP13SortExample);
+            await click(tableP13SortExample + ellipsisButton);
+            await click(popoverDropdownButton);
+            await expect(await isElementDisplayed(dropdownList)).toBe(true);
+            await click(dropdownOption);
 
-            click(dialogButton, 1);
-            click(popoverDropdownButton, 2);
-            expect(isElementDisplayed(dropdownList)).toBe(true);
-            click(dropdownOption);
+            await click(dialogButton, 1);
+            await click(popoverDropdownButton, 2);
+            await expect(await isElementDisplayed(dropdownList)).toBe(true);
+            await click(dropdownOption);
 
-            click(dialogButton, 3);
-            click(popoverDropdownButton, 4);
-            expect(doesItExist(dropdownList)).toBe(false);
+            await click(dialogButton, 3);
+            await click(popoverDropdownButton, 4);
+            await expect(await doesItExist(dropdownList)).toBe(false);
         });
     });
 
     describe('Check Filtering by multiple columns', () => {
-        it('should check table item single selection', () => {
-            findElementInTable(tableP13FilterExample, tableCellArr5);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableP13FilterExample, tableCellArr5);
         });
 
-        it('should check filtering with include and exclude', () => {
-            scrollIntoView(tableP13FilterExample);
-            click(tableP13FilterExample + ellipsisButton);
-            setValue(dialogInput, astroTestText);
-            click(expandedButton, 1);
-            click(popoverDropdownButton, 2);
-            click(filterByColorItem, 1);
-            setValue(dialogInput, testText7, 1);
-            click(footerButtonOk);
+        it('should check filtering with include and exclude', async () => {
+            await scrollIntoView(tableP13FilterExample);
+            await click(tableP13FilterExample + ellipsisButton);
+            await setValue(dialogInput, astroTestText);
+            await click(expandedButton, 1);
+            await click(popoverDropdownButton, 2);
+            await click(filterByColorItem, 1);
+            await setValue(dialogInput, testText7, 1);
+            await click(footerButtonOk);
 
-            const rowLength = getElementArrayLength(tableP13FilterExample + tableRow);
-            expect(rowLength).toEqual(1);
-            expect(getText(tableP13FilterExample + tableRow + tableCellText).trim()).toBe(testText4);
-            expect(getText(tableP13FilterExample + tableRow + tableCellText, 1).trim()).toBe(testText5);
+            const rowLength = await getElementArrayLength(tableP13FilterExample + tableRow);
+            await expect(rowLength).toEqual(1);
+            await expect((await getText(tableP13FilterExample + tableRow + tableCellText)).trim()).toBe(testText4);
+            await expect((await getText(tableP13FilterExample + tableRow + tableCellText, 1)).trim()).toBe(testText5);
         });
 
-        it('should check searching and placeholder in dialog', () => {
-            checkPlaceholder(tableP13FilterExample, 3);
-            checkSearchingInDialog();
+        it('should check searching and placeholder in dialog', async () => {
+            await checkPlaceholder(tableP13FilterExample, 3);
+            await checkSearchingInDialog();
         });
 
-        it('should check sorting of columns', () => {
-            checkSortingColumns(tableP13FilterExample, ellipsisButton, 1);
+        it('should check sorting of columns', async () => {
+            await checkSortingColumns(tableP13FilterExample, ellipsisButton, 1);
         });
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/7005
-        xit('should check Exclude section in dialog always open', () => {
-            scrollIntoView(tableP13FilterExample);
-            click(tableP13FilterExample + buttonFilter);
-            expect(getAttributeByName(expandedOption, 'aria-expanded')).toBe('false');
+        xit('should check Exclude section in dialog always open', async () => {
+            await scrollIntoView(tableP13FilterExample);
+            await click(tableP13FilterExample + buttonFilter);
+            await expect(await getAttributeByName(expandedOption, 'aria-expanded')).toBe('false');
         });
     });
 
     describe('Check Grouping by multiple columns', () => {
-        it('should check table item single selection', () => {
-            findElementInTable(tableP13GroupExample, tableCellArr4);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableP13GroupExample, tableCellArr4);
         });
 
-        it('should check searching and placeholder in dialog', () => {
-            checkPlaceholder(tableP13GroupExample, 3);
-            checkSearchingInDialog();
+        it('should check searching and placeholder in dialog', async () => {
+            await checkPlaceholder(tableP13GroupExample, 3);
+            await checkSearchingInDialog();
         });
 
-        it('should check sorting of columns', () => {
-            checkSortingColumns(tableP13GroupExample, ellipsisButton, 1);
+        it('should check sorting of columns', async () => {
+            await checkSortingColumns(tableP13GroupExample, ellipsisButton, 1);
         });
     });
 
     describe('Check  Navigatable rows', () => {
-        it('should check example', () => {
-            scrollIntoView(tableNavigatableRowIndicatorExample);
-            click(tableNavigatableRowIndicatorExample + button);
-            checkElArrIsClickable(tableNavigatableRowIndicatorExample + tableRow);
+        it('should check example', async () => {
+            await scrollIntoView(tableNavigatableRowIndicatorExample);
+            await click(tableNavigatableRowIndicatorExample + button);
+            await checkElArrIsClickable(tableNavigatableRowIndicatorExample + tableRow);
 
-            click(tableNavigatableRowIndicatorExample + button, 1);
-            expect(getElementClass(tableNavigatableRowIndicatorExample + tableRow, 1)).toBe(
+            await click(tableNavigatableRowIndicatorExample + button, 1);
+            await expect(await getElementClass(tableNavigatableRowIndicatorExample + tableRow, 1)).toBe(
                 'fd-table__row fd-table__row--main ng-star-inserted'
             );
         });
     });
 
     describe('Checks for all examples', () => {
-        it('should check placeholders in all input fields', () => {
-            const inputLength = getElementArrayLength(inputFields);
+        it('should check placeholders in all input fields', async () => {
+            const inputLength = await getElementArrayLength(inputFields);
             for (let i = 0; i < inputLength; i++) {
-                expect(getElementPlaceholder(inputFields, i)).toBe(placeholderTestText);
+                await expect(await getElementPlaceholder(inputFields, i)).toBe(placeholderTestText);
             }
         });
 
-        it('should check clickability synchronize button', () => {
-            const buttonLength = getElementArrayLength(synchronizeButton);
+        it('should check clickability synchronize button', async () => {
+            const buttonLength = await getElementArrayLength(synchronizeButton);
             for (let i = 0; i < buttonLength; i++) {
-                expect(isElementClickable(synchronizeButton, i)).toBe(
+                await expect(await isElementClickable(synchronizeButton, i)).toBe(
                     true,
                     `synchronize button with index ${i} not clickable`
                 );
@@ -669,255 +708,256 @@ describe('Table component test suite', () => {
     });
 
     describe('Check playground', () => {
-        it('should check table item single selection', () => {
-            scrollIntoView(playgroundExample);
-            setValue(playgroundExample + inputFields, tableCellArr[1]);
-            click(playgroundExample + buttonSearch);
-            const rowLength = getElementArrayLength(playgroundExample + tableRow);
-            expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(playgroundExample + tableRow + tableCellText);
+        it('should check table item single selection', async () => {
+            await scrollIntoView(playgroundExample);
+            await setValue(playgroundExample + inputFields, tableCellArr[1]);
+            await click(playgroundExample + buttonSearch);
+            const rowLength = await getElementArrayLength(playgroundExample + tableRow);
+            await expect(rowLength).toEqual(1);
+            const cellLength = await getElementArrayLength(playgroundExample + tableRow + tableCellText);
             for (let i = 0; i < cellLength; i++) {
-                expect(getText(playgroundExample + tableRow + tableCellText, i).trim()).toBe(tableCellArr[i]);
+                await expect((await getText(playgroundExample + tableRow + tableCellText, i)).trim()).toBe(
+                    tableCellArr[i]
+                );
             }
         });
 
-        it('should check clickability action button', () => {
-            scrollIntoView(playgroundExample);
-            expect(isElementClickable(playgroundExample + button, 1)).toBe(true, ' action button not clickable');
+        it('should check clickability action button', async () => {
+            await scrollIntoView(playgroundExample);
+            await expect(await isElementClickable(playgroundExample + button, 1)).toBe(
+                true,
+                ' action button not clickable'
+            );
         });
 
-        it('should check table content density', () => {
-            scrollIntoView(playgroundExample);
-            click(playgroundContentDensityDropdown);
-            click(optionCompact);
-            expect(getElementClass(playgroundExample + fdpTable)).toContain('fd-table--compact');
+        it('should check table content density', async () => {
+            await scrollIntoView(playgroundExample);
+            await click(playgroundContentDensityDropdown);
+            await click(optionCompact);
+            await expect(await getElementClass(playgroundExample + fdpTable)).toContain('fd-table--compact');
 
-            click(playgroundContentDensityDropdown);
-            click(optionCozy);
-            expect(getElementClass(playgroundExample + fdpTable)).toContain('fdp-table');
+            await click(playgroundContentDensityDropdown);
+            await click(optionCozy);
+            await expect(await getElementClass(playgroundExample + fdpTable)).toContain('fdp-table');
 
-            click(playgroundContentDensityDropdown);
-            click(optionCondensed);
-            expect(getElementClass(playgroundExample + fdpTable)).toContain('fd-table--condensed');
+            await click(playgroundContentDensityDropdown);
+            await click(optionCondensed);
+            await expect(await getElementClass(playgroundExample + fdpTable)).toContain('fd-table--condensed');
         });
 
-        it('should check table selection mode', () => {
-            scrollIntoView(playgroundExample);
-            click(playgroundSelectionModeDropdown);
-            click(optionSingle);
-            expect(getElementClass(playgroundExample + tableCellFixed)).toContain('fd-table__cell--fixed');
+        it('should check table selection mode', async () => {
+            await scrollIntoView(playgroundExample);
+            await click(playgroundSelectionModeDropdown);
+            await click(optionSingle);
+            await expect(await getElementClass(playgroundExample + tableCellFixed)).toContain('fd-table__cell--fixed');
 
-            click(playgroundSelectionModeDropdown);
-            click(optionMultiple);
-            expect(getElementClass(playgroundExample + tableCellFixed)).toContain('fd-table__cell--checkbox');
+            await click(playgroundSelectionModeDropdown);
+            await click(optionMultiple);
+            await expect(await getElementClass(playgroundExample + tableCellFixed)).toContain(
+                'fd-table__cell--checkbox'
+            );
         });
 
-        it('should check table without horizontal borders', () => {
-            scrollIntoView(playgroundExample);
-            click(playgroundExample + checkbox);
-            expect(getElementClass(playgroundExample + fdpTable)).toContain('fd-table--no-horizontal-borders');
+        it('should check table without horizontal borders', async () => {
+            await scrollIntoView(playgroundExample);
+            await click(playgroundExample + checkbox);
+            await expect(await getElementClass(playgroundExample + fdpTable)).toContain(
+                'fd-table--no-horizontal-borders'
+            );
         });
 
-        it('should check table without vertical borders', () => {
-            scrollIntoView(playgroundExample);
-            click(playgroundExample + checkbox, 1);
-            expect(getElementClass(playgroundExample + fdpTable)).toContain('fd-table--no-vertical-borders');
+        it('should check table without vertical borders', async () => {
+            await scrollIntoView(playgroundExample);
+            await click(playgroundExample + checkbox, 1);
+            await expect(await getElementClass(playgroundExample + fdpTable)).toContain(
+                'fd-table--no-vertical-borders'
+            );
         });
 
-        it('should check table without all borders', () => {
-            scrollIntoView(playgroundExample);
-            click(playgroundExample + checkbox, 2);
-            expect(getElementClass(playgroundExample + fdpTable)).toContain(
+        it('should check table without all borders', async () => {
+            await scrollIntoView(playgroundExample);
+            await click(playgroundExample + checkbox, 2);
+            await expect(await getElementClass(playgroundExample + fdpTable)).toContain(
                 'fd-table--no-horizontal-borders fd-table--no-vertical-borders'
             );
         });
 
-        it('should check busy indicator appearance', () => {
-            scrollIntoView(playgroundExample);
-            click(playgroundExample + checkbox, 5);
-            expect(isElementDisplayed(playgroundExample + busyIndicator)).toBe(true, 'busy indicator not displayed');
+        it('should check busy indicator appearance', async () => {
+            await scrollIntoView(playgroundExample);
+            await click(playgroundExample + checkbox, 5);
+            await expect(await isElementDisplayed(playgroundExample + busyIndicator)).toBe(
+                true,
+                'busy indicator not displayed'
+            );
         });
 
-        it('should check changing title and hide element count', () => {
-            scrollIntoView(playgroundExample);
-            setValue(playgroundExample + playgroundSchemaInput, 'test');
+        it('should check changing title and hide element count', async () => {
+            await scrollIntoView(playgroundExample);
+            await setValue(playgroundExample + playgroundSchemaInput, 'test');
 
-            expect(getText(playgroundExample + toolbarText).trim()).toBe('test (30)');
+            await expect((await getText(playgroundExample + toolbarText)).trim()).toBe('test (30)');
 
-            click(playgroundExample + checkbox, 7);
-            expect(getText(playgroundExample + toolbarText).trim()).toBe('test');
+            await click(playgroundExample + checkbox, 7);
+            await expect((await getText(playgroundExample + toolbarText)).trim()).toBe('test');
         });
-    });
-
-    it('should check correct operation x button', () => {
-        scrollIntoView(tableDefaultExample);
-        setValue(tableDefaultExample + input, 'Astro');
-        click(tableDefaultExample + button, 1);
-
-        const filterRowCount = getElementArrayLength(tableDefaultExample + tableRow);
-        expect(filterRowCount).toEqual(2);
-
-        click(tableDefaultExample + button);
-        const nonFilterRowCount = getElementArrayLength(tableDefaultExample + tableRow);
-        expect(nonFilterRowCount).toEqual(16);
     });
 
     describe('Check Custom component to render "No data" message', () => {
-        it('should check alert messages', () => {
-            checkAlertMessages(tableNoItemsTemplateExample);
+        it('should check alert messages', async () => {
+            await checkAlertMessages(tableNoItemsTemplateExample);
         });
     });
 
     describe('Check Semantic Highlighting', () => {
-        it('should check alert messages', () => {
-            checkAlertMessages(tableSemanticExample);
+        it('should check alert messages', async () => {
+            await checkAlertMessages(tableSemanticExample);
         });
 
-        it('should check table item single selection', () => {
-            findElementInTable(tableSemanticExample, tableCellArr);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableSemanticExample, tableCellArr);
         });
     });
 
     describe('Check Row custom CSS class', () => {
-        it('should check table item single selection', () => {
-            findElementInTable(tableRowClassExample, tableCellArr);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableRowClassExample, tableCellArr);
         });
     });
 
     describe('Check Wrapping text in columns', () => {
-        it('should check table item single selection', () => {
-            findElementInTable(tableWrapExample, tableCellArr7);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableWrapExample, tableCellArr7);
         });
 
-        it('should check alert messages', () => {
-            checkAlertMessages(tableWrapExample);
+        it('should check alert messages', async () => {
+            await checkAlertMessages(tableWrapExample);
         });
     });
 
     describe('Check No outer borders', () => {
-        it('should check table item single selection', () => {
-            findElementInTable(tableNoOuterBordersExample, tableCellArr);
+        it('should check table item single selection', async () => {
+            await findElementInTable(tableNoOuterBordersExample, tableCellArr);
         });
 
-        it('should check alert messages', () => {
-            checkAlertMessages(tableNoOuterBordersExample);
+        it('should check alert messages', async () => {
+            await checkAlertMessages(tableNoOuterBordersExample);
         });
 
-        it('should check checkboxes', () => {
-            checkAllCheckbox(tableNoOuterBordersExample);
+        it('should check checkboxes', async () => {
+            await checkAllCheckbox(tableNoOuterBordersExample);
         });
     });
 
     describe('Check input fields', () => {
-        it('should check input fields does not change width', () => {
-            const inputFieldLength = getElementArrayLength(allInputFields);
+        it('should check input fields does not change width', async () => {
+            const inputFieldLength = await getElementArrayLength(allInputFields);
             for (let i = 0; i < inputFieldLength; i++) {
                 if (i === 13) {
                     continue;
                 }
-                const beforeSize = getElementSize(allInputFields, i);
-                scrollIntoView(allInputFields, i);
-                click(allInputFields, i);
-                sendKeys('test');
-                const afterSize = getElementSize(allInputFields, i);
-                expect(beforeSize).toEqual(afterSize);
+                const beforeSize = await getElementSize(allInputFields, i);
+                await scrollIntoView(allInputFields, i);
+                await click(allInputFields, i);
+                await sendKeys('test');
+                const afterSize = await getElementSize(allInputFields, i);
+                await expect(beforeSize).toEqual(afterSize);
             }
         });
     });
 
     describe('Check orientation', () => {
-        it('should check RTL and LTR orientation', () => {
+        it('should check RTL and LTR orientation', async () => {
             const exampleAreaContainersArr = '.fd-doc-component';
             const rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
 
-            const switcherLength = getElementArrayLength(exampleAreaContainersArr);
+            const switcherLength = await getElementArrayLength(exampleAreaContainersArr);
             for (let i = 0; i < switcherLength; i++) {
                 if (i === 13) {
                     continue;
                 }
-                scrollIntoView(rtlSwitcherArr, i);
-                click(rtlSwitcherArr, i);
-                checkRtlOrientation(exampleAreaContainersArr, i);
-                scrollIntoView(rtlSwitcherArr, i);
-                click(rtlSwitcherArr, i);
-                waitForElDisplayed(exampleAreaContainersArr, i);
-                checkLtrOrientation(exampleAreaContainersArr, i);
+                await scrollIntoView(rtlSwitcherArr, i);
+                await click(rtlSwitcherArr, i);
+                await checkRtlOrientation(exampleAreaContainersArr, i);
+                await scrollIntoView(rtlSwitcherArr, i);
+                await click(rtlSwitcherArr, i);
+                await waitForElDisplayed(exampleAreaContainersArr, i);
+                await checkLtrOrientation(exampleAreaContainersArr, i);
             }
         });
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            tablePage.saveExampleBaselineScreenshot();
-            expect(tablePage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await tablePage.saveExampleBaselineScreenshot();
+            await expect(await tablePage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 
-    function checkAlertMessages(selector: string): void {
-        scrollIntoView(selector + button);
-        click(selector + buttonActionOne);
-        expect(getAlertText()).toBe(alertTestText1);
-        acceptAlert();
+    async function checkAlertMessages(selector: string): Promise<void> {
+        await scrollIntoView(selector + button);
+        await click(selector + buttonActionOne);
+        await expect(await getAlertText()).toBe(alertTestText1);
+        await acceptAlert();
 
-        click(selector + buttonActionTwo);
-        expect(getAlertText()).toBe(alertTestText2);
-        acceptAlert();
+        await click(selector + buttonActionTwo);
+        await expect(await getAlertText()).toBe(alertTestText2);
+        await acceptAlert();
     }
 
-    function findElementInTable(selector: string, arr: string[], count: number = 0): void {
-        scrollIntoView(selector + input);
-        setValue(selector + input, testText);
-        click(selector + buttonSearch);
-        const rowLength = getElementArrayLength(selector + tableRow);
-        expect(rowLength).toEqual(1);
-        const cellLength = getElementArrayLength(selector + tableRow + tableCellText);
+    async function findElementInTable(selector: string, arr: string[], count: number = 0): Promise<void> {
+        await scrollIntoView(selector + input);
+        await setValue(selector + input, testText);
+        await click(selector + buttonSearch);
+        const rowLength = await getElementArrayLength(selector + tableRow);
+        await expect(rowLength).toEqual(1);
+        const cellLength = await getElementArrayLength(selector + tableRow + tableCellText);
         for (let i = 0; i < cellLength - count; i++) {
-            expect(getText(selector + tableRow + tableCellText, i).trim()).toBe(arr[i]);
+            await expect((await getText(selector + tableRow + tableCellText, i)).trim()).toBe(arr[i]);
         }
     }
 
-    function chooseSortOptionBy(selector: string, transparentButton: string, index: number): void {
-        click(selector + transparentButton);
-        click(buttonSortedBy, index);
-        click(barButton);
+    async function chooseSortOptionBy(selector: string, transparentButton: string, index: number): Promise<void> {
+        await click(selector + transparentButton);
+        await click(buttonSortedBy, index);
+        await click(barButton);
     }
 
-    function checkAllCheckbox(selector): void {
-        scrollIntoView(selector);
-        click(selector + 'fd-checkbox');
-        const checkboxLength = getElementArrayLength(selector + tableRow);
+    async function checkAllCheckbox(selector): Promise<void> {
+        await scrollIntoView(selector);
+        await click(selector + 'fd-checkbox');
+        const checkboxLength = await getElementArrayLength(selector + tableRow);
         for (let i = 0; i < checkboxLength; i++) {
-            expect(getAttributeByName(selector + tableRow, 'aria-selected', i)).toBe('true');
+            await expect(await getAttributeByName(selector + tableRow, 'aria-selected', i)).toBe('true');
         }
     }
 
-    function chooseFilter(indexFilter: number, indexBy): void {
-        scrollIntoView(tableFilterableExample);
-        click(tableFilterableExample + ellipsisButton);
-        click(filterItem, indexFilter);
-        click(filterByColorItem, indexBy);
-        click(barButton);
+    async function chooseFilter(indexFilter: number, indexBy): Promise<void> {
+        await scrollIntoView(tableFilterableExample);
+        await click(tableFilterableExample + ellipsisButton);
+        await click(filterItem, indexFilter);
+        await click(filterByColorItem, indexBy);
+        await click(barButton);
     }
 
-    function checkPlaceholder(selector: string, index: number = 0): void {
-        scrollIntoView(selector);
-        click(selector + button, index);
-        expect(getElementPlaceholder(dialogCompactInput)).toBe(testTextSearch);
+    async function checkPlaceholder(selector: string, index: number = 0): Promise<void> {
+        await scrollIntoView(selector);
+        await click(selector + button, index);
+        await expect(await getElementPlaceholder(dialogCompactInput)).toBe(testTextSearch);
     }
 
-    function checkSearchingInDialog(): void {
-        setValue(dialogCompactInput, testTextName);
-        const itemLength = getElementArrayLength(dialogItemText);
-        expect(itemLength).toEqual(1);
-        expect(getText(dialogItemText).trim()).toBe(testTextName);
+    async function checkSearchingInDialog(): Promise<void> {
+        await setValue(dialogCompactInput, testTextName);
+        const itemLength = await getElementArrayLength(dialogItemText);
+        await expect(itemLength).toEqual(1);
+        await expect((await getText(dialogItemText)).trim()).toBe(testTextName);
     }
 
-    function checkSortingColumns(selector: string, transparentButton: string, index: number = 0): void {
-        scrollIntoView(selector);
-        click(selector + transparentButton, index);
-        click(dialogMoveToBottom);
-        click(dialogItem);
-        click(footerButtonOk);
-        expect(getText(selector + columnHeader, 3).trim()).toBe(testTextName);
+    async function checkSortingColumns(selector: string, transparentButton: string, index: number = 0): Promise<void> {
+        await scrollIntoView(selector);
+        await click(selector + transparentButton, index);
+        await click(dialogMoveToBottom);
+        await click(dialogItem);
+        await click(footerButtonOk);
+        await expect((await getText(selector + columnHeader, 3)).trim()).toBe(testTextName);
     }
 });

@@ -30,213 +30,213 @@ describe('Select component:', () => {
         displayedText
     } = selectPage;
 
-    beforeAll(() => {
-        selectPage.open();
+    beforeAll(async () => {
+        await selectPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(selectPage.root);
-        waitForElDisplayed(selectPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(selectPage.root);
+        await waitForElDisplayed(selectPage.title);
     }, 2);
 
     describe('Select modes', () => {
-        it('should be able to select the option for default select', () => {
-            const textBefore = getText(selectModesExample + displayedText);
-            click(selectModesExample + buttons);
-            waitForElDisplayed(option, 4);
-            click(option, 4);
-            const textAfter = getText(selectModesExample + displayedText);
-            expect(textBefore).not.toEqual(textAfter);
+        it('should be able to select the option for default select', async () => {
+            const textBefore = await getText(selectModesExample + displayedText);
+            await click(selectModesExample + buttons);
+            await waitForElDisplayed(option, 4);
+            await click(option, 4);
+            const textAfter = await getText(selectModesExample + displayedText);
+            await expect(textBefore).not.toEqual(textAfter);
         });
 
-        it('should be able to select the option for compact select', () => {
-            const textBefore = getText(selectModesExample + displayedText, 1);
-            click(selectModesExample + buttons, 1);
-            waitForElDisplayed(option, 4);
-            click(option, 4);
-            const textAfter = getText(selectModesExample + displayedText, 1);
-            expect(textBefore).not.toEqual(textAfter);
+        it('should be able to select the option for compact select', async () => {
+            const textBefore = await getText(selectModesExample + displayedText, 1);
+            await click(selectModesExample + buttons, 1);
+            await waitForElDisplayed(option, 4);
+            await click(option, 4);
+            const textAfter = await getText(selectModesExample + displayedText, 1);
+            await expect(textBefore).not.toEqual(textAfter);
         });
 
-        it('should check disabled select', () => {
-            expect(isElementClickable(selectModesExample + buttons, 2)).toBe(false);
-            expect(getAttributeByName(selectModesExample + buttons, 'disabled', 2)).toBe('true');
+        it('should check disabled select', async () => {
+            await expect(await isElementClickable(selectModesExample + buttons, 2)).toBe(false);
+            await expect(await getAttributeByName(selectModesExample + buttons, 'disabled', 2)).toBe('true');
         });
     });
 
     describe('Semantic state', () => {
-        it('should be able to select the option Success state', () => {
-            const textBefore = getText(selectSemanticStatesExample + displayedText);
-            click(selectSemanticStatesExample + buttons);
-            waitForElDisplayed(option, 4);
-            click(option, 4);
-            const textAfter = getText(selectSemanticStatesExample + displayedText);
-            expect(textBefore).not.toEqual(textAfter);
+        it('should be able to select the option Success state', async () => {
+            const textBefore = await getText(selectSemanticStatesExample + displayedText);
+            await click(selectSemanticStatesExample + buttons);
+            await waitForElDisplayed(option, 4);
+            await click(option, 4);
+            const textAfter = await getText(selectSemanticStatesExample + displayedText);
+            await expect(textBefore).not.toEqual(textAfter);
         });
 
-        it('should be able to select the option Warning state', () => {
-            const textBefore = getText(selectSemanticStatesExample + displayedText, 1);
-            click(selectSemanticStatesExample + buttons, 1);
-            waitForElDisplayed(option, 4);
-            click(option, 4);
-            const textAfter = getText(selectSemanticStatesExample + displayedText, 1);
-            expect(textBefore).not.toEqual(textAfter);
+        it('should be able to select the option Warning state', async () => {
+            const textBefore = await getText(selectSemanticStatesExample + displayedText, 1);
+            await click(selectSemanticStatesExample + buttons, 1);
+            await waitForElDisplayed(option, 4);
+            await click(option, 4);
+            const textAfter = await getText(selectSemanticStatesExample + displayedText, 1);
+            await expect(textBefore).not.toEqual(textAfter);
         });
 
-        it('should be able to select the option Error state', () => {
-            const textBefore = getText(selectSemanticStatesExample + displayedText, 2);
-            click(selectSemanticStatesExample + buttons, 2);
-            waitForElDisplayed(option, 4);
-            click(option, 4);
-            const textAfter = getText(selectSemanticStatesExample + displayedText, 2);
-            expect(textBefore).not.toEqual(textAfter);
+        it('should be able to select the option Error state', async () => {
+            const textBefore = await getText(selectSemanticStatesExample + displayedText, 2);
+            await click(selectSemanticStatesExample + buttons, 2);
+            await waitForElDisplayed(option, 4);
+            await click(option, 4);
+            const textAfter = await getText(selectSemanticStatesExample + displayedText, 2);
+            await expect(textBefore).not.toEqual(textAfter);
         });
 
-        it('should be able to select the option Information state', () => {
-            const textBefore = getText(selectSemanticStatesExample + displayedText, 3);
-            click(selectSemanticStatesExample + buttons, 3);
-            waitForElDisplayed(option, 4);
-            click(option, 4);
-            const textAfter = getText(selectSemanticStatesExample + displayedText, 3);
-            expect(textBefore).not.toEqual(textAfter);
+        it('should be able to select the option Information state', async () => {
+            const textBefore = await getText(selectSemanticStatesExample + displayedText, 3);
+            await click(selectSemanticStatesExample + buttons, 3);
+            await waitForElDisplayed(option, 4);
+            await click(option, 4);
+            const textAfter = await getText(selectSemanticStatesExample + displayedText, 3);
+            await expect(textBefore).not.toEqual(textAfter);
         });
     });
 
     describe('Custom Control Content', () => {
-        it('should be able to select the option', () => {
-            const textBefore = getText(customControlExample + displayedText);
-            click(customControlExample + buttons);
-            waitForElDisplayed(option, 4);
-            click(option, 4);
-            const textAfter = getText(customControlExample + displayedText);
-            expect(textBefore).not.toEqual(textAfter);
+        it('should be able to select the option', async () => {
+            const textBefore = await getText(customControlExample + displayedText);
+            await click(customControlExample + buttons);
+            await waitForElDisplayed(option, 4);
+            await click(option, 4);
+            const textAfter = await getText(customControlExample + displayedText);
+            await expect(textBefore).not.toEqual(textAfter);
         });
     });
 
     describe('Extended Options', () => {
-        it('should be able to select the option', () => {
-            const textBefore = getText(extendedOptionsExample + displayedText);
-            click(extendedOptionsExample + buttons);
-            waitForElDisplayed(option, 4);
-            click(option, 4);
-            const textAfter = getText(extendedOptionsExample + displayedText);
-            expect(textBefore).not.toEqual(textAfter);
+        it('should be able to select the option', async () => {
+            const textBefore = await getText(extendedOptionsExample + displayedText);
+            await click(extendedOptionsExample + buttons);
+            await waitForElDisplayed(option, 4);
+            await click(option, 4);
+            const textAfter = await getText(extendedOptionsExample + displayedText);
+            await expect(textBefore).not.toEqual(textAfter);
         });
     });
 
     describe('Mobile Mode', () => {
-        it('should be able to select the option', () => {
-            const textBefore = getText(mobileModeExample + displayedText);
-            click(mobileModeExample + buttons);
-            waitForElDisplayed(option);
-            click(option);
-            const textAfter = getText(mobileModeExample + displayedText);
-            expect(textBefore).not.toEqual(textAfter);
+        it('should be able to select the option', async () => {
+            const textBefore = await getText(mobileModeExample + displayedText);
+            await click(mobileModeExample + buttons);
+            await waitForElDisplayed(option);
+            await click(option);
+            const textAfter = await getText(mobileModeExample + displayedText);
+            await expect(textBefore).not.toEqual(textAfter);
         });
     });
 
     describe('Max Height', () => {
-        it('should be able to select the option', () => {
-            const textBefore = getText(maxHeightExample + displayedText);
-            click(maxHeightExample + buttons);
-            waitForElDisplayed(option, 4);
-            click(option, 4);
-            const textAfter = getText(maxHeightExample + displayedText);
-            expect(textBefore).not.toEqual(textAfter);
+        it('should be able to select the option', async () => {
+            const textBefore = await getText(maxHeightExample + displayedText);
+            await click(maxHeightExample + buttons);
+            await waitForElDisplayed(option, 4);
+            await click(option, 4);
+            const textAfter = await getText(maxHeightExample + displayedText);
+            await expect(textBefore).not.toEqual(textAfter);
         });
     });
 
     describe('Adding and Removing Options', () => {
-        it('should be able to select the option', () => {
-            const textBefore = getText(addRemoveOptionExample + displayedText);
-            click(addRemoveOptionExample + buttons, 2);
-            waitForElDisplayed(option, 4);
-            click(option, 4);
-            const textAfter = getText(addRemoveOptionExample + displayedText);
-            expect(textBefore).not.toEqual(textAfter);
+        it('should be able to select the option', async () => {
+            const textBefore = await getText(addRemoveOptionExample + displayedText);
+            await click(addRemoveOptionExample + buttons, 2);
+            await waitForElDisplayed(option, 4);
+            await click(option, 4);
+            const textAfter = await getText(addRemoveOptionExample + displayedText);
+            await expect(textBefore).not.toEqual(textAfter);
         });
 
-        it('should be able to add option', () => {
+        it('should be able to add option', async () => {
             // skipped due to unknown error with click intercepting
-            if (browserIsSafari()) {
+            if (await browserIsSafari()) {
                 return;
             }
-            click(addRemoveOptionExample + buttons, 2);
-            waitForElDisplayed(option, 4);
-            const optionsCountBefore = getElementArrayLength(option);
-            click(addRemoveOptionExample + buttons, 2);
-            click(addRemoveOptionExample + buttons);
-            click(addRemoveOptionExample + buttons, 2);
-            waitForElDisplayed(option, 4);
-            const optionsCountAfterAdding = getElementArrayLength(option);
+            await click(addRemoveOptionExample + buttons, 2);
+            await waitForElDisplayed(option, 4);
+            const optionsCountBefore = await getElementArrayLength(option);
+            await click(addRemoveOptionExample + buttons, 2);
+            await click(addRemoveOptionExample + buttons);
+            await click(addRemoveOptionExample + buttons, 2);
+            await waitForElDisplayed(option, 4);
+            const optionsCountAfterAdding = await getElementArrayLength(option);
 
-            expect(optionsCountBefore).toEqual(optionsCountAfterAdding - 1);
+            await expect(optionsCountBefore).toEqual(optionsCountAfterAdding - 1);
         });
 
-        it('should be able to add remove option', () => {
+        it('should be able to add remove option', async () => {
             // skipped due to unknown error with click intercepting
-            if (browserIsSafari()) {
+            if (await browserIsSafari()) {
                 return;
             }
-            click(addRemoveOptionExample + buttons, 2);
-            waitForElDisplayed(option, 4);
-            const optionsCountBefore = getElementArrayLength(option);
-            click(addRemoveOptionExample + buttons, 2);
-            click(addRemoveOptionExample + buttons, 1);
-            click(addRemoveOptionExample + buttons, 2);
-            waitForElDisplayed(option, 4);
-            const optionsCountAfterRemoving = getElementArrayLength(option);
+            await click(addRemoveOptionExample + buttons, 2);
+            await waitForElDisplayed(option, 4);
+            const optionsCountBefore = await getElementArrayLength(option);
+            await click(addRemoveOptionExample + buttons, 2);
+            await click(addRemoveOptionExample + buttons, 1);
+            await click(addRemoveOptionExample + buttons, 2);
+            await waitForElDisplayed(option, 4);
+            const optionsCountAfterRemoving = await getElementArrayLength(option);
 
-            expect(optionsCountBefore).toEqual(optionsCountAfterRemoving + 1);
+            await expect(optionsCountBefore).toEqual(optionsCountAfterRemoving + 1);
         });
 
-        it('should check that we not able to remove the last option', () => {
-            scrollIntoView(addRemoveOptionExample);
-            click(addRemoveOptionExample + buttons, 2);
-            const optionsCountBefore = getElementArrayLength(overlayContainer + option);
+        it('should check that we not able to remove the last option', async () => {
+            await scrollIntoView(addRemoveOptionExample);
+            await click(addRemoveOptionExample + buttons, 2);
+            const optionsCountBefore = await getElementArrayLength(overlayContainer + option);
             for (let i = 0; i < optionsCountBefore; i++) {
-                click(addRemoveOptionExample + buttons, 1);
+                await click(addRemoveOptionExample + buttons, 1);
             }
-            click(addRemoveOptionExample + buttons, 1);
-            expect(getElementArrayLength(overlayContainer + option)).toBe(1);
+            await click(addRemoveOptionExample + buttons, 1);
+            await expect(await getElementArrayLength(overlayContainer + option)).toBe(1);
         });
     });
 
     describe('Programmatic Control', () => {
-        it('should be able to select the option', () => {
-            const textBefore = getText(programmaticControlExample + displayedText);
-            click(programmaticControlExample + buttons, 3);
-            waitForElDisplayed(option, 5);
-            click(option, 5);
-            const textAfter = getText(programmaticControlExample + displayedText);
-            expect(textBefore).not.toEqual(textAfter);
+        it('should be able to select the option', async () => {
+            const textBefore = await getText(programmaticControlExample + displayedText);
+            await click(programmaticControlExample + buttons, 3);
+            await waitForElDisplayed(option, 5);
+            await click(option, 5);
+            const textAfter = await getText(programmaticControlExample + displayedText);
+            await expect(textBefore).not.toEqual(textAfter);
         });
 
-        it('should be able to control select by buttons', () => {
-            const textBefore = getText(programmaticControlExample + displayedText);
-            click(programmaticControlExample + buttons);
-            const textAfter = getText(programmaticControlExample + displayedText);
+        it('should be able to control select by buttons', async () => {
+            const textBefore = await getText(programmaticControlExample + displayedText);
+            await click(programmaticControlExample + buttons);
+            const textAfter = await getText(programmaticControlExample + displayedText);
 
-            click(programmaticControlExample + buttons, 1);
-            waitForElDisplayed(option, 4);
-            click(programmaticControlExample + buttons, 2);
-            waitForInvisibilityOf(overlayContainer);
+            await click(programmaticControlExample + buttons, 1);
+            await waitForElDisplayed(option, 4);
+            await click(programmaticControlExample + buttons, 2);
+            await waitForInvisibilityOf(overlayContainer);
 
-            expect(textBefore).not.toEqual(textAfter);
+            await expect(textBefore).not.toEqual(textAfter);
         });
     });
 
     describe('Check orientation', () => {
-        it('should check RTL and LTR', () => {
-            selectPage.checkRtlSwitch();
+        it('should check RTL and LTR', async () => {
+            await selectPage.checkRtlSwitch();
         });
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            selectPage.saveExampleBaselineScreenshot();
-            expect(selectPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await selectPage.saveExampleBaselineScreenshot();
+            await expect(await selectPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

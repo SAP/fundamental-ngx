@@ -39,165 +39,196 @@ describe('Button test suite:', () => {
         dropDownOptionByValue
     } = buttonPage;
 
-    beforeAll(() => {
-        buttonPage.open();
+    beforeAll(async () => {
+        await buttonPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(buttonPage.root);
-        waitForElDisplayed(buttonPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(buttonPage.root);
+        await waitForElDisplayed(buttonPage.title);
     }, 1);
 
     describe('Verify all buttons are clickable', () => {
-        it('verify clickable buttons types', () => {
-            const typeButtonsLength = getElementArrayLength(typeButtons);
+        it('verify clickable buttons types', async () => {
+            const typeButtonsLength = await getElementArrayLength(typeButtons);
             for (let i = 0; i < typeButtonsLength; i++) {
-                scrollIntoView(typeButtons, i);
-                expect(isElementClickable(typeButtons, i)).toBe(true, `type button with index ${i} not clickable`);
+                await scrollIntoView(typeButtons, i);
+                await expect(await isElementClickable(typeButtons, i)).toBe(
+                    true,
+                    `type button with index ${i} not clickable`
+                );
             }
         });
 
-        it('verify clickable menu buttons', () => {
-            const menuButtonsLength = getElementArrayLength(menuButtons);
+        it('verify clickable menu buttons', async () => {
+            const menuButtonsLength = await getElementArrayLength(menuButtons);
             for (let i = 0; i < menuButtonsLength; i++) {
-                scrollIntoView(menuButtons, i);
-                expect(isElementClickable(menuButtons, i)).toBe(true, `menu button with index ${i} not clickable`);
+                await scrollIntoView(menuButtons, i);
+                await expect(await isElementClickable(menuButtons, i)).toBe(
+                    true,
+                    `menu button with index ${i} not clickable`
+                );
             }
         });
 
-        it('verify clickable size buttons', () => {
-            const sizeButtonsLength = getElementArrayLength(sizeButtons);
+        it('verify clickable size buttons', async () => {
+            const sizeButtonsLength = await getElementArrayLength(sizeButtons);
             for (let i = 0; i < sizeButtonsLength; i++) {
-                scrollIntoView(sizeButtons, i);
-                expect(isElementClickable(sizeButtons, i)).toBe(true, `size button with index ${i} not clickable`);
+                await scrollIntoView(sizeButtons, i);
+                await expect(await isElementClickable(sizeButtons, i)).toBe(
+                    true,
+                    `size button with index ${i} not clickable`
+                );
             }
         });
 
-        it('verify compact button', () => {
-            scrollIntoView(sizeButtons);
-            const cozySize = getElementSize(sizeButtons);
-            const compactSize = getElementSize(sizeButtons, 1);
-            expect(compactSize.height).toBeLessThan(cozySize.height);
+        it('verify compact button', async () => {
+            await scrollIntoView(sizeButtons);
+            const cozySize = await getElementSize(sizeButtons);
+            const compactSize = await getElementSize(sizeButtons, 1);
+            await expect(compactSize.height).toBeLessThan(cozySize.height);
         });
 
-        it('verify buttons with icons', () => {
-            const iconButtonsLength = getElementArrayLength(iconButtons);
+        it('verify buttons with icons', async () => {
+            const iconButtonsLength = await getElementArrayLength(iconButtons);
             for (let i = 0; i < iconButtonsLength; i++) {
-                scrollIntoView(iconButtons, i);
-                expect(isElementClickable(iconButtons, i)).toBe(true, `icon button with index ${i} not clickable`);
+                await scrollIntoView(iconButtons, i);
+                await expect(await isElementClickable(iconButtons, i)).toBe(
+                    true,
+                    `icon button with index ${i} not clickable`
+                );
             }
         });
 
-        it('verify state buttons', () => {
-            scrollIntoView(stateButton);
-            expect(isElementClickable(stateButton)).toBe(true, `state button with index not clickable`);
+        it('verify state buttons', async () => {
+            await scrollIntoView(stateButton);
+            await expect(await isElementClickable(stateButton)).toBe(true, `state button with index not clickable`);
         });
 
-        it('verify playground button is clickable', () => {
-            scrollIntoView(playgroundButton);
-            expect(isElementClickable(playgroundButton)).toBe(true, `playground button with index not clickable`);
+        it('verify playground button is clickable', async () => {
+            await scrollIntoView(playgroundButton);
+            await expect(await isElementClickable(playgroundButton)).toBe(
+                true,
+                `playground button with index not clickable`
+            );
         });
     });
 
-    it('verify disable state buttons', () => {
-        expect(getAttributeByName(disableStateButtons, 'aria-disabled')).toEqual('true');
-        expect(getAttributeByName(disableStateButtons, 'ng-reflect-disabled', 1)).toBeDefined();
+    it('verify disable state buttons', async () => {
+        await expect(await getAttributeByName(disableStateButtons, 'aria-disabled')).toEqual('true');
+        await expect(await getAttributeByName(disableStateButtons, 'ng-reflect-disabled', 1)).toBeDefined();
     });
 
     describe('Verify playground', () => {
-        it('verify changing text in label', () => {
-            scrollIntoView(inputLabel);
-            setValue(inputLabel, 'test');
-            expect(getText(playgroundButtonText).trim()).toEqual(testText);
+        it('verify changing text in label', async () => {
+            await scrollIntoView(inputLabel);
+            await setValue(inputLabel, 'test');
+            await expect((await getText(playgroundButtonText)).trim()).toEqual(testText);
         });
 
-        it('verify type of dropdown menu', () => {
-            scrollIntoView(dropDownMenu);
-            click(dropDownMenu);
+        it('verify type of dropdown menu', async () => {
+            await scrollIntoView(dropDownMenu);
+            await click(dropDownMenu);
             for (let i = 1; i < fdTypeOptions.length; i++) {
-                click(menuOption, i);
-                click(playgroundButton);
-                expect(getElementClass(playgroundButton)).toContain(fdTypeOptions[i - 1]);
+                await click(menuOption, i);
+                await click(playgroundButton);
+                await expect(await getElementClass(playgroundButton)).toContain(fdTypeOptions[i - 1]);
             }
         });
 
-        it('verify checkbox fdMenu', () => {
-            scrollIntoView(checkboxMenu);
-            click(checkboxMenu);
-            expect(getElementClass(playgroundButton)).toContain('fd-button--menu');
+        it('verify checkbox fdMenu', async () => {
+            await scrollIntoView(checkboxMenu);
+            await click(checkboxMenu);
+            await expect(await getElementClass(playgroundButton)).toContain('fd-button--menu');
         });
 
-        it('verify checkbox compact', () => {
-            scrollIntoView(checkboxCompact);
-            click(checkboxCompact);
-            expect(getElementClass(playgroundButton)).toContain('fd-button--compact');
+        it('verify checkbox compact', async () => {
+            await scrollIntoView(checkboxCompact);
+            await click(checkboxCompact);
+            await expect(await getElementClass(playgroundButton)).toContain('fd-button--compact');
         });
 
-        it('verify icon of dropdown menu', () => {
-            scrollIntoView(dropDownMenu, 1);
-            click(dropDownMenu, 1);
+        it('verify icon of dropdown menu', async () => {
+            await scrollIntoView(dropDownMenu, 1);
+            await click(dropDownMenu, 1);
             for (let i = 0; i < iconOptions.length; i++) {
-                click(dropDownOptionByValue(iconOptions[i]));
-                click(playgroundButton);
-                expect(getElementClass(playgroundButtonIcon)).toContain(iconOptions[i]);
-                click(dropDownMenu, 1);
+                await click(dropDownOptionByValue(iconOptions[i]));
+                await click(playgroundButton);
+                await expect(await getElementClass(playgroundButtonIcon)).toContain(iconOptions[i]);
+                await click(dropDownMenu, 1);
             }
         });
 
-        xit('verify menu checkbox visual regression', () => {
-            scrollIntoView(checkboxMenu);
-            click(checkboxMenu);
-            expect(getAttributeByName(playgroundButton, 'ng-reflect-fd-menu')).toEqual('true');
-            saveElementScreenshot(playgroundButton, buttonPlaygroundTag + 'menu', buttonPage.getScreenshotFolder());
-            expect(
-                checkElementScreenshot(playgroundButton, buttonPlaygroundTag + 'menu', buttonPage.getScreenshotFolder())
+        xit('verify menu checkbox visual regression', async () => {
+            await scrollIntoView(checkboxMenu);
+            await click(checkboxMenu);
+            await expect(await getAttributeByName(playgroundButton, 'ng-reflect-fd-menu')).toEqual('true');
+            await saveElementScreenshot(
+                playgroundButton,
+                buttonPlaygroundTag + 'menu',
+                await buttonPage.getScreenshotFolder()
+            );
+            await expect(
+                await checkElementScreenshot(
+                    playgroundButton,
+                    buttonPlaygroundTag + 'menu',
+                    await buttonPage.getScreenshotFolder()
+                )
             ).toBeLessThan(5, `Playground button mismatch`);
-            click(checkboxMenu);
-            expect(getAttributeByName(playgroundButton, 'ng-reflect-fd-menu')).toEqual('false');
-            saveElementScreenshot(playgroundButton, buttonPlaygroundTag + 'not-menu', buttonPage.getScreenshotFolder());
-            expect(
-                checkElementScreenshot(
+            await click(checkboxMenu);
+            await expect(await getAttributeByName(playgroundButton, 'ng-reflect-fd-menu')).toEqual('false');
+            await saveElementScreenshot(
+                playgroundButton,
+                buttonPlaygroundTag + 'not-menu',
+                await buttonPage.getScreenshotFolder()
+            );
+            await expect(
+                await checkElementScreenshot(
                     playgroundButton,
                     buttonPlaygroundTag + 'not-menu',
-                    buttonPage.getScreenshotFolder()
+                    await buttonPage.getScreenshotFolder()
                 )
             ).toBeLessThan(5, `Playground button mismatch`);
         });
 
-        xit('verify compact checkbox visual regression', () => {
-            scrollIntoView(checkboxCompact);
-            click(checkboxCompact);
-            expect(getAttributeByName(playgroundButton, 'ng-reflect-compact')).toEqual('true');
-            saveElementScreenshot(playgroundButton, buttonPlaygroundTag + 'compact', buttonPage.getScreenshotFolder());
-            expect(
-                checkElementScreenshot(
+        xit('verify compact checkbox visual regression', async () => {
+            await scrollIntoView(checkboxCompact);
+            await click(checkboxCompact);
+            await expect(await getAttributeByName(playgroundButton, 'ng-reflect-compact')).toEqual('true');
+            await saveElementScreenshot(
+                playgroundButton,
+                buttonPlaygroundTag + 'compact',
+                await buttonPage.getScreenshotFolder()
+            );
+            await expect(
+                await checkElementScreenshot(
                     playgroundButton,
                     buttonPlaygroundTag + 'compact',
-                    buttonPage.getScreenshotFolder()
+                    await buttonPage.getScreenshotFolder()
                 )
             ).toBeLessThan(5, `Playground button mismatch`);
-            click(checkboxCompact);
-            expect(getAttributeByName(playgroundButton, 'ng-reflect-compact')).toEqual('false');
-            saveElementScreenshot(
+            await click(checkboxCompact);
+            await expect(await getAttributeByName(playgroundButton, 'ng-reflect-compact')).toEqual('false');
+            await saveElementScreenshot(
                 playgroundButton,
                 buttonPlaygroundTag + 'not-compact',
-                buttonPage.getScreenshotFolder()
+                await buttonPage.getScreenshotFolder()
             );
-            expect(
-                checkElementScreenshot(
+            await expect(
+                await checkElementScreenshot(
                     playgroundButton,
                     buttonPlaygroundTag + 'not-compact',
-                    buttonPage.getScreenshotFolder()
+                    await buttonPage.getScreenshotFolder()
                 )
             ).toBeLessThan(5, `Playground button mismatch`);
         });
     });
 
     xdescribe('Check visual regression basic', () => {
-        it('should check examples visual regression', () => {
-            buttonPage.saveExampleBaselineScreenshot();
-            expect(buttonPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await buttonPage.saveExampleBaselineScreenshot();
+            await expect(await buttonPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

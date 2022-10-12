@@ -25,60 +25,60 @@ describe('Verify Panel', () => {
         actionPanelBtn
     } = panelPage;
 
-    beforeAll(() => {
-        panelPage.open();
+    beforeAll(async () => {
+        await panelPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(panelPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(panelPage.title);
     }, 1);
 
-    it('should have fixed header', () => {
-        waitForPresent(fixedPanelDescription);
-        expect(waitForPresent(fixedPanelDescription)).toBe(true);
+    it('should have fixed header', async () => {
+        await waitForPresent(fixedPanelDescription);
+        await expect(await waitForPresent(fixedPanelDescription)).toBe(true);
     });
 
-    it('should be expandable', () => {
-        const isVisibleContentBefore = waitForElDisplayed(expandablePanelContent);
-        expect(isVisibleContentBefore).toBe(true);
+    it('should be expandable', async () => {
+        const isVisibleContentBefore = await waitForElDisplayed(expandablePanelContent);
+        await expect(isVisibleContentBefore).toBe(true);
 
-        click(expandablePanelBtn);
+        await click(expandablePanelBtn);
 
-        expect(doesItExist(expandablePanelContent)).toBe(false);
-        expect(getText(expandablePanelTitle)).toBe(expandable_panel_header);
+        await expect(await doesItExist(expandablePanelContent)).toBe(false);
+        await expect(await getText(expandablePanelTitle)).toBe(expandable_panel_header);
     });
 
-    it('should compact be smaller than basic', () => {
-        const expandableBtnSize = getElementSize(expandablePanelBtn);
-        const compactBtnSize = getElementSize(compactPanelBtn);
+    it('should compact be smaller than basic', async () => {
+        const expandableBtnSize = await getElementSize(expandablePanelBtn);
+        const compactBtnSize = await getElementSize(compactPanelBtn);
 
-        expect(expandableBtnSize.width).toBeGreaterThan(compactBtnSize.width);
-        expect(expandableBtnSize.height).toBeGreaterThan(compactBtnSize.height);
+        await expect(expandableBtnSize.width).toBeGreaterThan(compactBtnSize.width);
+        await expect(expandableBtnSize.height).toBeGreaterThan(compactBtnSize.height);
     });
 
     it('should scroll content if height is fixed', async () => {
-        const contentRegionHeight = getCSSPropertyByName(fixedHeightPanelContentRegion, 'height').value;
-        const contentActualHeight = getCSSPropertyByName(fixedHeightPanelContent, 'height').value;
-        expect(parseInt(contentRegionHeight, 10)).toBeLessThan(parseInt(contentActualHeight, 10));
+        const contentRegionHeight = (await getCSSPropertyByName(fixedHeightPanelContentRegion, 'height')).value;
+        const contentActualHeight = (await getCSSPropertyByName(fixedHeightPanelContent, 'height')).value;
+        await expect(parseInt(contentRegionHeight, 10)).toBeLessThan(parseInt(contentActualHeight, 10));
     });
 
-    it('should action panel have clickable buttons example ', () => {
-        expect(getText(actionPanelBtn, 0).trim()).toBe(action_panel_edit_button);
-        expect(waitForClickable(actionPanelBtn, 0)).toBe(true);
-        expect(getText(actionPanelBtn, 1).trim()).toBe(action_panel_delete_button);
-        expect(waitForClickable(actionPanelBtn, 1)).toBe(true);
+    it('should action panel have clickable buttons example ', async () => {
+        await expect((await getText(actionPanelBtn, 0)).trim()).toBe(action_panel_edit_button);
+        await expect(await waitForClickable(actionPanelBtn, 0)).toBe(true);
+        await expect((await getText(actionPanelBtn, 1)).trim()).toBe(action_panel_delete_button);
+        await expect(await waitForClickable(actionPanelBtn, 1)).toBe(true);
     });
     describe('orientation check', () => {
-        it('should be able to switch to rtl', () => {
-            panelPage.checkRtlSwitch();
+        it('should be able to switch to rtl', async () => {
+            await panelPage.checkRtlSwitch();
         });
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            panelPage.saveExampleBaselineScreenshot();
-            expect(panelPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await panelPage.saveExampleBaselineScreenshot();
+            await expect(await panelPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

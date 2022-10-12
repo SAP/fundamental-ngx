@@ -22,100 +22,100 @@ describe('Action sheet test suite', () => {
     const { actionSheetMenuButton, actionSheetList, actionSheetListItems, actionSheetListItemButtons, alertMessage } =
         actionSheetPage;
 
-    beforeAll(() => {
-        actionSheetPage.open();
+    beforeAll(async () => {
+        await actionSheetPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(actionSheetPage.root);
-        waitForElDisplayed(actionSheetPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(actionSheetPage.root);
+        await waitForElDisplayed(actionSheetPage.title);
     }, 1);
 
-    it('should check action sheet items are clickable', () => {
-        const actionSheetCount = getElementArrayLength(actionSheetMenuButton);
+    it('should check action sheet items are clickable', async () => {
+        const actionSheetCount = await getElementArrayLength(actionSheetMenuButton);
 
         for (let i = 0; actionSheetCount > i; i++) {
-            click(actionSheetMenuButton, i);
-            checkElArrIsClickable(actionSheetListItemButtons);
+            await click(actionSheetMenuButton, i);
+            await checkElArrIsClickable(actionSheetListItemButtons);
         }
     });
 
-    it('should check compact', () => {
-        click(actionSheetMenuButton, 1);
-        expect(getElementClass(actionSheetListItemButtons)).toContain(compactValue);
+    it('should check compact', async () => {
+        await click(actionSheetMenuButton, 1);
+        await expect(await getElementClass(actionSheetListItemButtons)).toContain(compactValue);
     });
 
-    it('should check alert appears after selection for default action sheet', () => {
-        checkAlertItems(0);
+    it('should check alert appears after selection for default action sheet', async () => {
+        await checkAlertItems(0);
     });
 
-    it('should check alert appears after selection for compact action sheet', () => {
-        checkAlertItems(1);
+    it('should check alert appears after selection for compact action sheet', async () => {
+        await checkAlertItems(1);
     });
-    it('should check alert appears after selection for mobile action sheet', () => {
-        click(actionSheetMenuButton, 2);
-        const actionSheetItemCount = getElementArrayLength(actionSheetListItems);
+    it('should check alert appears after selection for mobile action sheet', async () => {
+        await click(actionSheetMenuButton, 2);
+        const actionSheetItemCount = await getElementArrayLength(actionSheetListItems);
         for (let j = 0; actionSheetItemCount > j; j++) {
             if (j > 3) {
-                click(actionSheetListItemButtons, j);
-                click(actionSheetMenuButton, 2);
+                await click(actionSheetListItemButtons, j);
+                await click(actionSheetMenuButton, 2);
                 continue;
             }
-            click(actionSheetListItemButtons, j);
-            expect(getText(alertMessage)).toEqual(alertMessages[j]);
-            waitForNotDisplayed(alertMessage);
-            click(actionSheetMenuButton, 2);
+            await click(actionSheetListItemButtons, j);
+            await expect(await getText(alertMessage)).toEqual(alertMessages[j]);
+            await waitForNotDisplayed(alertMessage);
+            await click(actionSheetMenuButton, 2);
         }
     });
 
     describe('Check orientation', () => {
-        it('should check orientation', () => {
-            actionSheetPage.checkRtlSwitch();
+        it('should check orientation', async () => {
+            await actionSheetPage.checkRtlSwitch();
         });
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check basic visual regression', () => {
-            actionSheetPage.saveExampleBaselineScreenshot();
-            expect(actionSheetPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check basic visual regression', async () => {
+            await actionSheetPage.saveExampleBaselineScreenshot();
+            await expect(await actionSheetPage.compareWithBaseline()).toBeLessThan(5);
         });
 
-        it('should check action sheet items visual regression', () => {
-            const actionSheetCount = getElementArrayLength(actionSheetMenuButton);
+        it('should check action sheet items visual regression', async () => {
+            const actionSheetCount = await getElementArrayLength(actionSheetMenuButton);
 
             for (let i = 0; actionSheetCount > i; i++) {
-                click(actionSheetMenuButton, i);
-                scrollIntoView(actionSheetList);
-                saveElementScreenshot(
+                await click(actionSheetMenuButton, i);
+                await scrollIntoView(actionSheetList);
+                await saveElementScreenshot(
                     actionSheetList,
-                    `action-sheet-items-example-${i}-core-${getImageTagBrowserPlatform()}`,
-                    actionSheetPage.getScreenshotFolder()
+                    `action-sheet-items-example-${i}-core-${await getImageTagBrowserPlatform()}`,
+                    await actionSheetPage.getScreenshotFolder()
                 );
-                expect(
-                    checkElementScreenshot(
+                await expect(
+                    await checkElementScreenshot(
                         actionSheetList,
-                        `action-sheet-items-example-${i}-core-${getImageTagBrowserPlatform()}`,
-                        actionSheetPage.getScreenshotFolder()
+                        `action-sheet-items-example-${i}-core-${await getImageTagBrowserPlatform()}`,
+                        await actionSheetPage.getScreenshotFolder()
                     )
                 ).toBeLessThan(5);
             }
         });
     });
 
-    function checkAlertItems(i: number): void {
-        click(actionSheetMenuButton, i);
-        const actionSheetItemCount = getElementArrayLength(actionSheetListItems);
+    async function checkAlertItems(i: number): Promise<void> {
+        await click(actionSheetMenuButton, i);
+        const actionSheetItemCount = await getElementArrayLength(actionSheetListItems);
         for (let j = 0; actionSheetItemCount > j; j++) {
             if (j === 4) {
-                click(actionSheetListItemButtons, j);
-                click(actionSheetMenuButton, i);
+                await click(actionSheetListItemButtons, j);
+                await click(actionSheetMenuButton, i);
                 continue;
             }
-            click(actionSheetListItemButtons, j);
-            expect(getText(alertMessage)).toEqual(alertMessages[j]);
-            waitForNotDisplayed(alertMessage);
-            click(actionSheetMenuButton, i);
+            await click(actionSheetListItemButtons, j);
+            await expect(await getText(alertMessage)).toEqual(alertMessages[j]);
+            await waitForNotDisplayed(alertMessage);
+            await click(actionSheetMenuButton, i);
         }
     }
 });

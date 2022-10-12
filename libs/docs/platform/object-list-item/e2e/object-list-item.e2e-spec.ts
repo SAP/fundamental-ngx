@@ -46,107 +46,107 @@ describe('Object list item suite:', () => {
         objDecStatuses
     } = objListPage;
 
-    beforeAll(() => {
-        objListPage.open();
+    beforeAll(async () => {
+        await objListPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(objListPage.root);
-        waitForElDisplayed(objListPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(objListPage.root);
+        await waitForElDisplayed(objListPage.title);
     }, 1);
 
     describe('Basic checks:', () => {
-        it('should check basic interactions and content', () => {
-            checkElArrIsClickable(allObjsList);
-            checkElementDisplayed(allObjAvatars);
-            checkElementDisplayed(allObjNumbers);
-            checkElementText(allObjNumbers);
-            checkElementDisplayed(allObjIcons);
-            checkElementDisplayed(allObjTitles);
-            checkElementText(allObjTitles);
-            checkElementDisplayed(allObjAttrStatusRows);
+        it('should check basic interactions and content', async () => {
+            await checkElArrIsClickable(allObjsList);
+            await checkElementDisplayed(allObjAvatars);
+            await checkElementDisplayed(allObjNumbers);
+            await checkElementText(allObjNumbers);
+            await checkElementDisplayed(allObjIcons);
+            await checkElementDisplayed(allObjTitles);
+            await checkElementText(allObjTitles);
+            await checkElementDisplayed(allObjAttrStatusRows);
         });
     });
 
     describe('Object List Item examples:', () => {
-        it('should check content displayed', () => {
-            checkElementDisplayed(obJListIntro);
-            checkElementDisplayed(objListAttributes);
-            checkElementDisplayed(objListStatuses);
+        it('should check content displayed', async () => {
+            await checkElementDisplayed(obJListIntro);
+            await checkElementDisplayed(objListAttributes);
+            await checkElementDisplayed(objListStatuses);
         });
     });
 
     describe('Object List Item With Row Selection examples:', () => {
-        it('should check content', () => {
-            checkElementDisplayed(obJListSelIntro);
-            checkElementDisplayed(objSelToolbar);
-            elementDisplayed(objListSelAttributes, 2);
-            elementDisplayed(objListSelStatuses, 2);
+        it('should check content', async () => {
+            await checkElementDisplayed(obJListSelIntro);
+            await checkElementDisplayed(objSelToolbar);
+            await elementDisplayed(objListSelAttributes, 2);
+            await elementDisplayed(objListSelStatuses, 2);
         });
 
-        it('should check selection', () => {
-            expect(getText(objSelToolbar)).toBe('0 : Items selected');
-            click(objListSelItem, 0);
-            expect(getText(objSelToolbar)).toBe('1 : Items selected');
+        it('should check selection', async () => {
+            await expect(await getText(objSelToolbar)).toBe('0 : Items selected');
+            await click(objListSelItem, 0);
+            await expect(await getText(objSelToolbar)).toBe('1 : Items selected');
         });
     });
 
     describe('Object List Item With Navigation examples:', () => {
-        it('should check content', () => {
-            const linkCount = getElementArrayLength(objNavLink);
+        it('should check content', async () => {
+            const linkCount = await getElementArrayLength(objNavLink);
             for (let i = 0; linkCount > i; i++) {
-                expect(getAttributeByName(objNavLink, 'href')).not.toBe(null, '');
+                await expect(await getAttributeByName(objNavLink, 'href')).not.toBe('');
             }
-            elementDisplayed(objNavAttributes, 2);
-            elementDisplayed(objNavStatuses, 2);
+            await elementDisplayed(objNavAttributes, 2);
+            await elementDisplayed(objNavStatuses, 2);
         });
 
-        it('should check navigation', () => {
-            click(objNavList);
-            const currentUrl = getCurrentUrl();
-            expect(currentUrl).toContain(navUrl);
-            objListPage.open();
+        it('should check navigation', async () => {
+            await click(objNavList);
+            const currentUrl = await getCurrentUrl();
+            await expect(currentUrl).toContain(navUrl);
+            await objListPage.open();
         });
     });
 
     describe('Object List Item With Row Selection And Navigation examples:', () => {
         // missed attribute "href"
         // https://github.com/SAP/fundamental-ngx/issues/7343
-        xit('should check content', () => {
-            const linkCount = getElementArrayLength(objRowNavLink);
+        xit('should check content', async () => {
+            const linkCount = await getElementArrayLength(objRowNavLink);
             for (let i = 0; linkCount > i; i++) {
-                expect(getAttributeByName(objRowNavLink, 'href')).not.toBe(null, '');
+                await expect(await getAttributeByName(objRowNavLink, 'href')).not.toBe('');
             }
-            elementDisplayed(objRowNavAttributes, 2);
-            elementDisplayed(objRowNavStatuses, 3);
+            await elementDisplayed(objRowNavAttributes, 2);
+            await elementDisplayed(objRowNavStatuses, 3);
         });
 
-        it('should check selection', () => {
-            expect(getText(objRowNavToolbar)).toContain(': is selected');
-            click(objRowNavList, 0);
-            expect(getText(objRowNavToolbar)).toContain('fdp-list-item');
+        it('should check selection', async () => {
+            await expect(await getText(objRowNavToolbar)).toContain(': is selected');
+            await click(objRowNavList, 0);
+            await expect(await getText(objRowNavToolbar)).toContain('fdp-list-item');
         });
     });
 
     describe('Object List Item In Declarative examples:', () => {
-        it('should check content', () => {
-            elementDisplayed(objDecAttributes, 0);
-            elementDisplayed(objDecStatuses, 0);
-            checkElementDisplayed(objDecIntro);
+        it('should check content', async () => {
+            await elementDisplayed(objDecAttributes, 0);
+            await elementDisplayed(objDecStatuses, 0);
+            await checkElementDisplayed(objDecIntro);
         });
     });
 
     describe('check orientation', () => {
-        it('should check RTL and LTR orientation', () => {
-            objListPage.checkRtlSwitch();
+        it('should check RTL and LTR orientation', async () => {
+            await objListPage.checkRtlSwitch();
         });
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            objListPage.saveExampleBaselineScreenshot();
-            expect(objListPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await objListPage.saveExampleBaselineScreenshot();
+            await expect(await objListPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

@@ -35,117 +35,117 @@ describe('Message-strip test suite', () => {
         stateOption
     } = messageStripPage;
 
-    beforeAll(() => {
-        messageStripPage.open();
+    beforeAll(async () => {
+        await messageStripPage.open();
     }, 1);
 
-    beforeEach(() => {
-        refreshPage();
-        waitForPresent(messageStripPage.root);
-        waitForElDisplayed(messageStripPage.title);
+    beforeEach(async () => {
+        await refreshPage();
+        await waitForPresent(messageStripPage.root);
+        await waitForElDisplayed(messageStripPage.title);
     }, 1);
 
-    it('should check message-box status', () => {
+    it('should check message-box status', async () => {
         for (let i = 0; i < sections.length; i++) {
-            checkMessageStatus(sections[i]);
+            await checkMessageStatus(sections[i]);
         }
     });
 
-    it('should check that message-strips in Without Icon example have no icons', () => {
-        const messageLength = getElementArrayLength(noIconExample + messageStrip);
+    it('should check that message-strips in Without Icon example have no icons', async () => {
+        const messageLength = await getElementArrayLength(noIconExample + messageStrip);
         for (let i = 0; i < messageLength; i++) {
-            expect(getElementClass(noIconExample + messageStrip, i)).toContain('no-icon');
+            await expect(await getElementClass(noIconExample + messageStrip, i)).toContain('no-icon');
         }
     });
 
-    it('should check dismissing message', () => {
+    it('should check dismissing message', async () => {
         for (let i = 0; i < sections.length; i++) {
-            checkDismissingMessage(sections[i]);
+            await checkDismissingMessage(sections[i]);
         }
-        checkDismissingMessage(playground);
+        await checkDismissingMessage(playground);
     });
 
-    it('should check width property for messages in Width Example', () => {
-        const messageLength = getElementArrayLength(widthExample + messageStrip);
+    it('should check width property for messages in Width Example', async () => {
+        const messageLength = await getElementArrayLength(widthExample + messageStrip);
         for (let i = 0; i < messageLength; i++) {
-            expect(getAttributeByName(widthExample + messageStrip, 'style', i)).toContain('width:');
+            await expect(await getAttributeByName(widthExample + messageStrip, 'style', i)).toContain('width:');
         }
     });
 
-    it('should check orientation', () => {
-        messageStripPage.checkRtlSwitch();
+    it('should check orientation', async () => {
+        await messageStripPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', () => {
-        messageStripPage.saveExampleBaselineScreenshot();
-        expect(messageStripPage.compareWithBaseline()).toBeLessThan(5);
+    xit('should check examples visual regression', async () => {
+        await messageStripPage.saveExampleBaselineScreenshot();
+        await expect(await messageStripPage.compareWithBaseline()).toBeLessThan(5);
     });
 
     describe('playground constructor test', () => {
-        it('should check choosing states of message-strip', () => {
+        it('should check choosing states of message-strip', async () => {
             for (let i = 0; i < playgroundStates.length; i++) {
-                click(typeSelectionField);
-                click(stateOption, i);
-                expect(getElementClass(messageStripPG)).toContain(playgroundStates[i]);
+                await click(typeSelectionField);
+                await click(stateOption, i);
+                await expect(await getElementClass(messageStripPG)).toContain(playgroundStates[i]);
             }
-            click(resetButton);
-            expect(getElementClass(messageStripPG)).toContain(playgroundStates[0]);
+            await click(resetButton);
+            await expect(await getElementClass(messageStripPG)).toContain(playgroundStates[0]);
         });
 
-        it('should check changing message in message-strip', () => {
-            const defaultMessage = getText(messageStripMessage);
-            setValue(messageInput, customMessage);
-            expect(getText(messageStripMessage).trim()).toEqual(customMessage);
-            click(resetButton);
-            expect(getText(messageStripMessage)).toEqual(defaultMessage);
+        it('should check changing message in message-strip', async () => {
+            const defaultMessage = await getText(messageStripMessage);
+            await setValue(messageInput, customMessage);
+            await expect((await getText(messageStripMessage)).trim()).toEqual(customMessage);
+            await click(resetButton);
+            await expect(await getText(messageStripMessage)).toEqual(defaultMessage);
         });
 
-        it('should check changing width of the message-strip', () => {
-            const defaultWidth = getValue(widthInput);
-            setValue(widthInput, customWidth);
-            expect(getAttributeByName(messageStripPG, 'style')).toContain(`width: ${customWidth}`);
-            click(resetButton);
-            expect(getValue(widthInput)).toEqual(defaultWidth);
+        it('should check changing width of the message-strip', async () => {
+            const defaultWidth = await getValue(widthInput);
+            await setValue(widthInput, customWidth);
+            await expect(await getAttributeByName(messageStripPG, 'style')).toContain(`width: ${customWidth}`);
+            await click(resetButton);
+            await expect(await getValue(widthInput)).toEqual(defaultWidth);
         });
 
-        it('should check working dismissible mode', () => {
-            click(dismissibleCheckbox);
+        it('should check working dismissible mode', async () => {
+            await click(dismissibleCheckbox);
             // checkbox is enabled by default
-            expect(getElementClass(messageStripPG)).not.toContain('dismissible');
-            click(resetButton);
-            expect(getElementClass(messageStripPG)).toContain('dismissible');
+            await expect(await getElementClass(messageStripPG)).not.toContain('dismissible');
+            await click(resetButton);
+            await expect(await getElementClass(messageStripPG)).toContain('dismissible');
         });
 
-        it('should check working icon-noIcon mode', () => {
-            click(noIconCheckbox);
-            expect(getElementClass(messageStripPG)).toContain('no-icon');
-            click(resetButton);
-            expect(getElementClass(messageStripPG)).not.toContain('no-icon');
+        it('should check working icon-noIcon mode', async () => {
+            await click(noIconCheckbox);
+            await expect(await getElementClass(messageStripPG)).toContain('no-icon');
+            await click(resetButton);
+            await expect(await getElementClass(messageStripPG)).not.toContain('no-icon');
         });
     });
 
-    function checkDismissingMessage(section: string): void {
-        const messageLength = getElementArrayLength(section + messageStrip);
+    async function checkDismissingMessage(section: string): Promise<void> {
+        const messageLength = await getElementArrayLength(section + messageStrip);
         let j = 0;
         for (let i = 0; i < messageLength; i++) {
-            if (getElementClass(section + messageStrip, i).includes('dismissible')) {
-                click(section + dismissButton, j);
+            if ((await getElementClass(section + messageStrip, i)).includes('dismissible')) {
+                await click(section + dismissButton, j);
                 j++;
-                expect(isElementDisplayed(section + messageStrip, i)).toBe(false);
+                await expect(await isElementDisplayed(section + messageStrip, i)).toBe(false);
             }
         }
     }
 
-    function checkMessageStatus(section: string): void {
-        const messageLength = getElementArrayLength(section + messageStrip);
+    async function checkMessageStatus(section: string): Promise<void> {
+        const messageLength = await getElementArrayLength(section + messageStrip);
         for (let i = 0; i < messageLength; i++) {
             if (i === 4) {
                 for (let j = 0; j < messageTypes.length; j++) {
-                    expect(getElementClass(section + messageStrip, i)).not.toContain(messageTypes[j]);
+                    await expect(await getElementClass(section + messageStrip, i)).not.toContain(messageTypes[j]);
                 }
                 continue;
             }
-            expect(getElementClass(section + messageStrip, i)).toContain(messageTypes[i]);
+            await expect(await getElementClass(section + messageStrip, i)).toContain(messageTypes[i]);
         }
     }
 });

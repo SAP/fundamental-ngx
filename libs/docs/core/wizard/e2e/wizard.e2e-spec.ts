@@ -52,246 +52,258 @@ describe('Wizard component test', () => {
         radioButtonLabel
     } = wizardPage;
 
-    beforeAll(() => {
-        wizardPage.open();
+    beforeAll(async () => {
+        await wizardPage.open();
     }, 1);
 
-    beforeEach(() => {
-        refreshPage();
-        waitForPresent(wizardPage.root);
-        waitForElDisplayed(wizardPage.title);
+    beforeEach(async () => {
+        await refreshPage();
+        await waitForPresent(wizardPage.root);
+        await waitForElDisplayed(wizardPage.title);
     }, 2);
 
-    it('should check open-closing wizard', () => {
-        checkOpenClose(defaultExample);
-        checkOpenClose(customizableExample);
-        checkOpenClose(branchingExample);
-        checkOpenClose(ngforExample);
-        checkOpenClose(dialogExample);
+    it('should check open-closing wizard', async () => {
+        await checkOpenClose(defaultExample);
+        await checkOpenClose(customizableExample);
+        await checkOpenClose(branchingExample);
+        await checkOpenClose(ngforExample);
+        await checkOpenClose(dialogExample);
     });
 
-    it('should check basic way through default example', () => {
-        click(defaultExample + button);
-        let stepsLength = getElementArrayLength(wizard + step);
-        if (browserIsSafari()) {
+    it('should check basic way through default example', async () => {
+        await click(defaultExample + button);
+        let stepsLength = await getElementArrayLength(wizard + step);
+        if (await browserIsSafari()) {
             stepsLength--;
         }
 
         for (let i = 0; i < stepsLength; i++) {
             if (i !== stepsLength - 1) {
-                expect(getElementClass(wizard + step, i + 1)).toContain('step--upcoming');
+                await expect(await getElementClass(wizard + step, i + 1)).toContain('step--upcoming');
             }
 
             if (i !== 1) {
-                expect(getElementClass(wizard + step, i)).toContain('step--current');
+                await expect(await getElementClass(wizard + step, i)).toContain('step--current');
             }
             if (i === 1) {
-                setValue(fullNameInput, fullName);
-                setValue(firstAdressInput, firstAdress);
-                setValue(secAdressInput, secAdress);
+                await setValue(fullNameInput, fullName);
+                await setValue(firstAdressInput, firstAdress);
+                await setValue(secAdressInput, secAdress);
             }
-            click(wizard + nextStep, i);
-            pause(1000);
+            await click(wizard + nextStep, i);
+            await pause(1000);
             if (i !== 0) {
-                expect(getElementClass(wizard + step, i - 1)).toContain('step--completed');
+                await expect(await getElementClass(wizard + step, i - 1)).toContain('step--completed');
             }
         }
-        expect(getText(savedName)).toEqual(fullName);
-        expect(getText(savedFirstAdress)).toEqual(firstAdress);
-        expect(getText(savedSecAdress)).toEqual(secAdress);
+        await expect(await getText(savedName)).toEqual(fullName);
+        await expect(await getText(savedFirstAdress)).toEqual(firstAdress);
+        await expect(await getText(savedSecAdress)).toEqual(secAdress);
 
-        click(editButton);
-        setValue(fullNameInput, fullName + update);
-        setValue(firstAdressInput, firstAdress + update);
-        setValue(secAdressInput, secAdress + update);
-        click(wizard + nextStep, 3);
+        await click(editButton);
+        await setValue(fullNameInput, fullName + update);
+        await setValue(firstAdressInput, firstAdress + update);
+        await setValue(secAdressInput, secAdress + update);
+        await click(wizard + nextStep, 3);
 
-        expect(getText(savedName)).toEqual(fullName + update);
-        expect(getText(savedFirstAdress)).toEqual(firstAdress + update);
-        expect(getText(savedSecAdress)).toEqual(secAdress + update);
+        await expect(await getText(savedName)).toEqual(fullName + update);
+        await expect(await getText(savedFirstAdress)).toEqual(firstAdress + update);
+        await expect(await getText(savedSecAdress)).toEqual(secAdress + update);
     });
 
-    it('should check navigation by scrolling to the step point', () => {
-        checkStatusStepScroll(branchingExample, 'scroll');
-        checkStatusStepScroll(ngforExample, 'scroll');
-        checkStatusStepScroll(defaultExample, 'scroll');
-        checkStatusStepScroll(customizableExample, 'scroll');
+    it('should check navigation by scrolling to the step point', async () => {
+        await checkStatusStepScroll(branchingExample, 'scroll');
+        await checkStatusStepScroll(ngforExample, 'scroll');
+        await checkStatusStepScroll(defaultExample, 'scroll');
+        await checkStatusStepScroll(customizableExample, 'scroll');
     });
 
-    it('should check navigation by clicking to the step point', () => {
-        checkStatusStepScroll(branchingExample, 'click');
-        checkStatusStepScroll(ngforExample, 'click');
-        checkStatusStepScroll(defaultExample, 'click');
-        checkStatusStepScroll(customizableExample, 'click');
+    it('should check navigation by clicking to the step point', async () => {
+        await checkStatusStepScroll(branchingExample, 'click');
+        await checkStatusStepScroll(ngforExample, 'click');
+        await checkStatusStepScroll(defaultExample, 'click');
+        await checkStatusStepScroll(customizableExample, 'click');
     });
 
-    it('should check that entered value in the field saves after re-open', () => {
-        checkReOpen(defaultExample, wizard);
-        checkReOpen(dialogExample, dialogWizard);
+    it('should check that entered value in the field saves after re-open', async () => {
+        await checkReOpen(defaultExample, wizard);
+        await checkReOpen(dialogExample, dialogWizard);
     });
 
-    it('should check validation for empty fields for dialog example', () => {
-        click(dialogExample + button);
-        click(dialogWizard + buttonsBar + ':nth-child(1) ' + button);
+    it('should check validation for empty fields for dialog example', async () => {
+        await click(dialogExample + button);
+        await click(dialogWizard + buttonsBar + ':nth-child(1) ' + button);
 
-        expect(getElementClass(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toContain('is-disabled');
-        expect(isElementClickable(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toBe(
+        await expect(await getElementClass(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toContain(
+            'is-disabled'
+        );
+        await expect(await isElementClickable(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toBe(
             false,
             'button is clickable'
         );
-        setValue(fullNameInput, fullName);
-        setValue(firstAdressInput, firstAdress);
-        expect(getElementClass(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).not.toContain('is-disabled');
-        expect(isElementClickable(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toBe(
+        await setValue(fullNameInput, fullName);
+        await setValue(firstAdressInput, firstAdress);
+        await expect(await getElementClass(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).not.toContain(
+            'is-disabled'
+        );
+        await expect(await isElementClickable(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toBe(
             true,
             'button is not clickable'
         );
 
         for (let i = 0; i < firstAdressLength; i++) {
-            sendKeys('Backspace');
+            await sendKeys('Backspace');
         }
-        expect(getElementClass(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toContain('is-disabled');
-        expect(isElementClickable(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toBe(
+        await expect(await getElementClass(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toContain(
+            'is-disabled'
+        );
+        await expect(await isElementClickable(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toBe(
             false,
             'button is clickable'
         );
     });
 
-    it('should check confirmation changing payment type in branching example', () => {
+    it('should check confirmation changing payment type in branching example', async () => {
         // skip due to unknown error
-        if (browserIsSafari()) {
+        if (await browserIsSafari()) {
             return;
         }
-        click(branchingExample + button);
-        waitForElDisplayed(wizard + nextStep);
-        click(wizard + nextStep);
-        click(radioButtonLabel);
-        pause(500);
-        expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'radio button is not selected');
-        click(radioButtonLabel, 1);
+        await click(branchingExample + button);
+        await waitForElDisplayed(wizard + nextStep);
+        await click(wizard + nextStep);
+        await click(radioButtonLabel);
+        await pause(500);
+        await expect(await getAttributeByName(radioButton, 'aria-checked')).toBe(
+            'true',
+            'radio button is not selected'
+        );
+        await click(radioButtonLabel, 1);
         // pause for dialog element to be created
-        pause(500);
-        expect(waitForElDisplayed(dialogContainer)).toBe(true, 'dialog container did not open');
-        click(cancelButton);
-        pause(500);
-        expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'focus dissapeared');
-        click(radioButtonLabel, 1);
+        await pause(500);
+        await expect(await waitForElDisplayed(dialogContainer)).toBe(true, 'dialog container did not open');
+        await click(cancelButton);
+        await pause(500);
+        await expect(await getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'focus dissapeared');
+        await click(radioButtonLabel, 1);
         // pause for dialog element to be created
-        pause(500);
-        waitForElDisplayed(dialogContainer);
-        click(continueButton);
-        pause(500);
-        expect(getAttributeByName(radioButton, 'aria-checked', 1)).toBe('true', 'focus did not change');
+        await pause(500);
+        await waitForElDisplayed(dialogContainer);
+        await click(continueButton);
+        await pause(500);
+        await expect(await getAttributeByName(radioButton, 'aria-checked', 1)).toBe('true', 'focus did not change');
     }, 1);
 
-    it('should check navigation in mobile example', () => {
-        click(mobileExample + nextStep);
-        expect(getElementClass(mobileExample + step, 1)).toContain(
+    it('should check navigation in mobile example', async () => {
+        await click(mobileExample + nextStep);
+        await expect(await getElementClass(mobileExample + step, 1)).toContain(
             'step--current',
             'you are not moved to the second step'
         );
-        click(mobileExample + stepContainer);
-        expect(getElementClass(mobileExample + step, 0)).toContain(
+        await click(mobileExample + stepContainer);
+        await expect(await getElementClass(mobileExample + step, 0)).toContain(
             'step--current',
             'you are not moved to the first step'
         );
-        click(mobileExample + nextStep);
-        expect(getElementClass(mobileExample + step, 1)).toContain(
+        await click(mobileExample + nextStep);
+        await expect(await getElementClass(mobileExample + step, 1)).toContain(
             'step--current',
             'button did not direct you to the step 2'
         );
     });
 
-    it('should check compliting form for mobile example', () => {
-        const stepsLength = getElementArrayLength(mobileExample + step) / 2;
+    it('should check compliting form for mobile example', async () => {
+        const stepsLength = (await getElementArrayLength(mobileExample + step)) / 2;
         for (let i = 0; i < stepsLength; i++) {
-            expect(getElementClass(mobileExample + step, i)).toContain('step--current');
-            click(mobileExample + nextStep);
+            await expect(await getElementClass(mobileExample + step, i)).toContain('step--current');
+            await click(mobileExample + nextStep);
         }
-        refreshPage(true);
+        await refreshPage(true);
     });
 
-    it('should check orientations', () => {
-        wizardPage.checkRtlSwitch();
+    it('should check orientations', async () => {
+        await wizardPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', () => {
-        wizardPage.saveExampleBaselineScreenshot();
-        expect(wizardPage.compareWithBaseline()).toBeLessThan(5);
+    xit('should check examples visual regression', async () => {
+        await wizardPage.saveExampleBaselineScreenshot();
+        await expect(await wizardPage.compareWithBaseline()).toBeLessThan(5);
     });
 
-    function checkReOpen(section: string, block: string): void {
-        click(section + button);
+    async function checkReOpen(section: string, block: string): Promise<void> {
+        await click(section + button);
         if (section === defaultExample) {
-            pause(5000);
-            waitForElDisplayed(block + nextStep);
-            click(block + nextStep);
+            await pause(5000);
+            await waitForElDisplayed(block + nextStep);
+            await click(block + nextStep);
         }
         if (section !== defaultExample) {
-            waitForElDisplayed(dialogWizard + buttonsBar + ':nth-child(1) ' + button);
-            click(dialogWizard + buttonsBar + ':nth-child(1) ' + button);
+            await waitForElDisplayed(dialogWizard + buttonsBar + ':nth-child(1) ' + button);
+            await click(dialogWizard + buttonsBar + ':nth-child(1) ' + button);
         }
-        setValue(fullNameInput, fullName);
-        setValue(firstAdressInput, firstAdress);
-        setValue(secAdressInput, secAdress);
+        await setValue(fullNameInput, fullName);
+        await setValue(firstAdressInput, firstAdress);
+        await setValue(secAdressInput, secAdress);
         if (section === defaultExample) {
-            click(block + exitButton);
-            click(section + button);
-            waitForElDisplayed(block + nextStep);
-            click(block + nextStep);
+            await click(block + exitButton);
+            await click(section + button);
+            await waitForElDisplayed(block + nextStep);
+            await click(block + nextStep);
         }
         if (section !== defaultExample) {
-            click(dialogWizard + buttonsBar + ':nth-child(3) ' + button);
-            click(section + button);
+            await click(dialogWizard + buttonsBar + ':nth-child(3) ' + button);
+            await click(section + button);
         }
-        expect(getValue(fullNameInput)).toEqual(fullName);
-        expect(getValue(firstAdressInput)).toEqual(firstAdress);
-        expect(getValue(secAdressInput)).toEqual(secAdress);
+        await expect(await getValue(fullNameInput)).toEqual(fullName);
+        await expect(await getValue(firstAdressInput)).toEqual(firstAdress);
+        await expect(await getValue(secAdressInput)).toEqual(secAdress);
         if (section === defaultExample) {
-            click(block + exitButton);
+            await click(block + exitButton);
         }
         if (section !== defaultExample) {
-            click(dialogWizard + buttonsBar + ':nth-child(3) ' + button);
+            await click(dialogWizard + buttonsBar + ':nth-child(3) ' + button);
         }
     }
 
-    function checkOpenClose(section: string): void {
-        click(section + button);
+    async function checkOpenClose(section: string): Promise<void> {
+        await click(section + button);
         if (section !== dialogExample) {
-            expect(waitForElDisplayed(section + wizard)).toBe(true, `wizard in ${section} did not open`);
-            expect(getAttributeByName(section + wizard, 'style')).toEqual('width: 100%;');
-            click(section + exitButton);
-            expect(isElementDisplayed(section + wizard)).toBe(false, `wizard in ${section} did not close`);
-            expect(getAttributeByName(section + wizard, 'style')).toEqual('width: 0%;');
+            await expect(await waitForElDisplayed(section + wizard)).toBe(true, `wizard in ${section} did not open`);
+            await expect(await getAttributeByName(section + wizard, 'style')).toEqual('width: 100%;');
+            await click(section + exitButton);
+            await expect(await isElementDisplayed(section + wizard)).toBe(false, `wizard in ${section} did not close`);
+            await expect(await getAttributeByName(section + wizard, 'style')).toEqual('width: 0%;');
         }
         if (section === dialogExample) {
-            expect(waitForElDisplayed(dialogWizard)).toBe(true, 'dialog wizard did not open');
-            click(dialogWizard + buttonsBar + ':nth-child(2) ' + button);
-            expect(doesItExist(dialogWizard)).toBe(false, 'dialog wizard did not close, still exist in DOM');
+            await expect(await waitForElDisplayed(dialogWizard)).toBe(true, 'dialog wizard did not open');
+            await click(dialogWizard + buttonsBar + ':nth-child(2) ' + button);
+            await expect(await doesItExist(dialogWizard)).toBe(
+                false,
+                'dialog wizard did not close, still exist in DOM'
+            );
         }
     }
 
-    function checkStatusStepScroll(section: string, method: 'click' | 'scroll'): void {
-        click(section + button);
-        let stepsLength = getElementArrayLength(wizard + step);
-        if (browserIsSafari()) {
+    async function checkStatusStepScroll(section: string, method: 'click' | 'scroll'): Promise<void> {
+        await click(section + button);
+        let stepsLength = await getElementArrayLength(wizard + step);
+        if (await browserIsSafari()) {
             stepsLength--;
         }
         for (let i = 0; i < stepsLength; i++) {
-            click(wizard + step, i);
+            await click(wizard + step, i);
             if (i === stepsLength - 1) {
                 switch (method) {
                     case 'scroll':
-                        scrollIntoView(contentSection);
+                        await scrollIntoView(contentSection);
                         break;
                     case 'click':
-                        click(wizard + stepContainer);
+                        await click(wizard + stepContainer);
                         break;
                 }
-                expect(getElementClass(wizard + step, 0)).toContain('step--current');
-                expect(getElementClass(wizard + step, 1)).toContain('step--upcoming');
+                await expect(await getElementClass(wizard + step, 0)).toContain('step--current');
+                await expect(await getElementClass(wizard + step, 1)).toContain('step--upcoming');
             }
         }
-        click(exitButton);
+        await click(exitButton);
     }
 });

@@ -1,9 +1,9 @@
-export const testTextValue = 'Selected value: PlumsC';
+export const testTextValue = 'Selected value: Plums';
 export const disableSelectModeValueTestText = 'Selected value:watermelonE';
-export const selectWithTwoColumnsTestText = 'Selected Item: Lorem ipsum dolor sit, amet';
+export const selectWithTwoColumnsTestText = 'Selected Item: Pineapple';
 export const titleTestText = 'Title';
-export const mobileExampleTestText = 'Selected: PlumsC';
-export const maxHeightTestText = 'Selected value: "PlumsC"';
-export const testTextValue6 = 'Selected Item: "Apple"';
-export const testTextValue7 = 'Form Selected Item: { "field": "Apple" }';
+export const mobileExampleTestText = 'Selected: Plums';
+export const maxHeightTestText = 'Selected value: "Plums"';
+export const testTextValue6 = 'Selected Item: "A"';
+export const testTextValue7 = 'Form Selected Item: { "field": "A" }';
 export const inputStateArr = ['is-success', 'is-error', 'is-warning', 'is-information'];

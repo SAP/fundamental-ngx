@@ -33,31 +33,31 @@ export class DateTimePicker extends CoreBaseComponentPo {
     calendarItem = '.fd-calendar__table td.fd-calendar__item';
     buttonText = ' .fd-button__text';
 
-    filterCalendarValue = (name: string): string => `[id*="${name}"]`;
+    filterCalendarValue = async (name: string): Promise<string> => `[id*="${name}"]`;
 
-    getOptionById = (id: string): string => `#${id}`;
+    getOptionById = async (id: string): Promise<string> => `#${id}`;
 
-    clickDayInCalendarButtonByValue = (dayNumber: number): void => {
-        click('.fd-calendar__table td.fd-calendar__item:not(.fd-calendar__item--other-month)', dayNumber - 1);
+    clickDayInCalendarButtonByValue = async (dayNumber: number): Promise<void> => {
+        await click('.fd-calendar__table td.fd-calendar__item:not(.fd-calendar__item--other-month)', dayNumber - 1);
     };
 
-    yearInCalendarByValue = (year: number): string => `[data-fd-calendar-year="${year}"]`;
+    yearInCalendarByValue = async (year: number): Promise<string> => `[data-fd-calendar-year="${year}"]`;
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'datetime-picker'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'datetime-picker'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'datetime-picker'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'datetime-picker'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 }
