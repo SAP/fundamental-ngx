@@ -123,6 +123,7 @@
             "@fundamental-ngx/core/utils": ["libs/core/src/lib/utils/index.ts"],
             "@fundamental-ngx/core/vertical-navigation": ["libs/core/src/lib/vertical-navigation/index.ts"],
             "@fundamental-ngx/core/wizard": ["libs/core/src/lib/wizard/index.ts"],
+            "@fundamental-ngx/cx": ["libs/cx/src/lib/index.ts"],
             "@fundamental-ngx/datetime-adapter": ["libs/datetime-adapter/src/index.ts"],
             "@fundamental-ngx/docs/core/action-bar": ["libs/docs/core/action-bar/index.ts"],
             "@fundamental-ngx/docs/core/action-sheet": ["libs/docs/core/action-sheet/index.ts"],

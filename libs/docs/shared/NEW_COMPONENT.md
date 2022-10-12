@@ -15,7 +15,7 @@ Using the command line: `npx nx workspace-generator sap-component --name=poster-
 
 Running this will scaffold the initial structure for the new component:
 
--   new library under the provided project (core/platform/fn)
+-   new library under the provided project (core/platform/fn/cx)
 -   docs section with the default example
 
 Serve the app using `yarn start`, and navigate to http://localhost:4200/fundamental-ngx#/core/poster-editor to start working with the component.
