@@ -1,1 +1,1 @@
-export * from './fundamental-ngx-cx.module';
+export * from './fundamental-ngx.module';

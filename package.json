@@ -15,6 +15,7 @@
   },
   "packageManager": "yarn@1.22.18",
   "scripts": {
+      "scr": "nx workspace-generator sap-component --name=poster-editor --project=cx --dry-run --verbose",
     "preinstall": "npx only-allow yarn",
     "build": "echo Building default app && nx build",
     "build-docs-netlify": "yarn run build -- --configuration=\"production-unoptimized\" --base-href=\"/\"",

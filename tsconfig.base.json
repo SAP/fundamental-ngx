@@ -226,6 +226,7 @@
             "@fundamental-ngx/docs/core/upload-collection": ["libs/docs/core/upload-collection/index.ts"],
             "@fundamental-ngx/docs/core/vertical-navigation": ["libs/docs/core/vertical-navigation/index.ts"],
             "@fundamental-ngx/docs/core/wizard": ["libs/docs/core/wizard/index.ts"],
+            "@fundamental-ngx/docs/cx/shared": ["libs/docs/cx/shared/src/index.ts"],
             "@fundamental-ngx/docs/fn/avatar": ["libs/docs/fn/avatar/index.ts"],
             "@fundamental-ngx/docs/fn/button": ["libs/docs/fn/button/index.ts"],
             "@fundamental-ngx/docs/fn/checkbox": ["libs/docs/fn/checkbox/index.ts"],
