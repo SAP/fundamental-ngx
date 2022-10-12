@@ -1,3 +1,12 @@
+## [0.36.1-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.33...v0.36.1-rc.34) (2022-10-12)
+
+
+### Bug Fixes
+
+* **e2e:** async mode, specs refactoring ([#8803](https://github.com/SAP/fundamental-ngx/issues/8803)) ([3ffa28b](https://github.com/SAP/fundamental-ngx/commit/3ffa28b8ecd7d33904eac16acce0835f0b470e37))
+
+
+
 ## [0.36.1-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.32...v0.36.1-rc.33) (2022-10-10)
 
 
