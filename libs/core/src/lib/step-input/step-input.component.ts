@@ -342,6 +342,9 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         if (this.canIncrement) {
             if (this.value == null && this._firstEmittedValue) {
                 this._value = this._firstEmittedValue;
+                if (this._firstEmittedValue === this.max) {
+                    this._value = this.max;
+                }
             }
             this._value = this._cutFloatingNumberDistortion(this.value!, this.step);
             this._emitChangedValue();
@@ -354,6 +357,9 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         if (this.canDecrement) {
             if (this.value == null && this._firstEmittedValue) {
                 this._value = this._firstEmittedValue;
+                if (this._firstEmittedValue === this.min) {
+                    this._value = this.min;
+                }
             }
             this._value = this._cutFloatingNumberDistortion(this.value!, -this.step);
             this._emitChangedValue();
