@@ -595,6 +595,11 @@ export class MultiInputComponent
                 this.listComponent.setItemActive(0);
                 event.preventDefault();
             }
+        } else if (KeyUtil.isKeyType(event, 'alphabetical') || KeyUtil.isKeyType(event, 'numeric')) {
+            if (!this.open) {
+                this.openChangeHandle(true);
+                this.searchInputElement.nativeElement.focus();
+            }
         }
     }
 
