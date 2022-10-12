@@ -1891,12 +1891,12 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fundamental-styles/fn@0.25.0-rc.23":
-  version "0.25.0-rc.23"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/fn/-/fn-0.25.0-rc.23.tgz#54fd64c9d80b1c6c8e424e21c7a372d26ea64584"
-  integrity sha512-qV7AozjFsktrvdc/f9hGAr1O6bMtLC9xXdlsmVkuexxs6IhTab2fCN+gN4xmT66aKiEGwbCwP3qI4WcnpaOuBA==
+"@fundamental-styles/fn@0.25.0-rc.35":
+  version "0.25.0-rc.35"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/fn/-/fn-0.25.0-rc.35.tgz#7cae1788c666b64778649a36a5a52b431885c23d"
+  integrity sha512-Sw/3ADSGPQiJHoXQY6qy00GVVCZr4K9sCwlT9l5myDyCSs298E2vLkELflVgsPhs5jkSrazJsqBNFJ2MMgcUVQ==
   dependencies:
-    fundamental-styles "0.25.0-rc.23"
+    fundamental-styles "0.25.0-rc.35"
 
 "@gar/promisify@^1.1.3":
   version "1.1.3"
@@ -8910,10 +8910,10 @@ functions-have-names@^1.2.2:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-fundamental-styles@0.25.0-rc.23:
-  version "0.25.0-rc.23"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.25.0-rc.23.tgz#6495bfdcd431f85c86c0175638461c15ebefcab1"
-  integrity sha512-lvcq/+UOFLlPNvaJuo30AQ7zo3ED5UfAMntscf61gxNkMTb3MkuGPyfZuNbOa3SDumjex81ZZRIftF80VTcjbQ==
+fundamental-styles@0.25.0-rc.35:
+  version "0.25.0-rc.35"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.25.0-rc.35.tgz#e543e85f3e4b520da6bd174cfc46f5c0739ef7af"
+  integrity sha512-V2+eV6zsQbRPyJO8jfJOhmWzpBm8VhdlIhb4ov5P96iGb1RhKPu5Oo9xwmP19BALL0yt/aNFw/w7h4p4ax/OAA==
 
 gauge@^3.0.0:
   version "3.0.2"
