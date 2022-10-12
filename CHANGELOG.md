@@ -1,3 +1,12 @@
+## [0.36.1-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.37...v0.36.1-rc.38) (2022-10-12)
+
+
+### Bug Fixes
+
+* **core,platform:** prepare tokenizer and approval flow for translation ([#8734](https://github.com/SAP/fundamental-ngx/issues/8734)) ([24b95d8](https://github.com/SAP/fundamental-ngx/commit/24b95d8941f9eab03b2fb01aecf4f922e2a8bcbf))
+
+
+
 ## [0.36.1-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.36...v0.36.1-rc.37) (2022-10-12)
 
 
