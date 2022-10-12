@@ -130,6 +130,9 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         deleteButtonLabel: 'हटाने-योग्य',
         ariaRoleDescription: 'टोकन'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'ठीक है',
         menuCancelText: 'रद्द करें',
@@ -211,7 +214,11 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         toolbarEditApprover: 'अनुमोदक संपादित करें',
         watchersInputPlaceholder: 'यहां खोजें..',
         userListSelectedItemsCountSingular: '1 आइटम चुना गया',
-        userListSelectedItemsCountPlural: '{{ count }} आइटम चुने गए'
+        userListSelectedItemsCountPlural: '{{ count }} आइटम चुने गए',
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'उपयोगकर्ता'

@@ -131,6 +131,9 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         deleteButtonLabel: 'წაშლადი',
         ariaRoleDescription: 'ტოკენი'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} სხვა'
+    },
     coreUploadCollection: {
         menuOkText: 'კარგი',
         menuCancelText: 'გაუქმება',
@@ -212,7 +215,11 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         toolbarEditApprover: 'შეასწორე დამდასტურებელი',
         watchersInputPlaceholder: 'ძებნა...',
         userListSelectedItemsCountSingular: '1 ელემენტი არჩეულია',
-        userListSelectedItemsCountPlural: '{{ count }} ელემენტი არჩეულია'
+        userListSelectedItemsCountPlural: '{{ count }} ელემენტი არჩეულია',
+        statusApproved: 'დადასტურებული',
+        statusRejected: 'უარყოფილი',
+        statusInProgress: 'მიმდინარე',
+        statusNotStarted: 'არ დაწყებულა'
     },
     platformFeedInput: {
         userTitle: 'მომხმარებელი'

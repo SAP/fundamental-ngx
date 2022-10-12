@@ -132,6 +132,9 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         deleteButtonLabel: 'Supprimable',
         ariaRoleDescription: 'jeton'
     },
+    coreTokenizer: {
+        moreLabel: '{{count}} more'
+    },
     coreUploadCollection: {
         menuOkText: 'Ok',
         menuCancelText: 'Annuler',
@@ -214,7 +217,11 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         toolbarEditApprover: "Editer l'approbateur",
         watchersInputPlaceholder: 'Rechercher ici..',
         userListSelectedItemsCountSingular: '1 élément sélectionné',
-        userListSelectedItemsCountPlural: '{{ count }} éléments sélectionnés'
+        userListSelectedItemsCountPlural: '{{ count }} éléments sélectionnés',
+        statusApproved: 'approved',
+        statusRejected: 'rejected',
+        statusInProgress: 'in progress',
+        statusNotStarted: 'not started'
     },
     platformFeedInput: {
         userTitle: 'Utilisateur'
