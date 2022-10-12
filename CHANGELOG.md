@@ -1,3 +1,12 @@
+## [0.36.1-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.36...v0.36.1-rc.37) (2022-10-12)
+
+
+### Bug Fixes
+
+* **core:** minor CSS bug that is only visible with certain fundamental-styles rc ([#8788](https://github.com/SAP/fundamental-ngx/issues/8788)) ([8c826f9](https://github.com/SAP/fundamental-ngx/commit/8c826f9a5a3ce6ad7dd380ab93bbeb8b107e2c9b))
+
+
+
 ## [0.36.1-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.35...v0.36.1-rc.36) (2022-10-12)
 
 
