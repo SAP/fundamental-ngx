@@ -1,3 +1,12 @@
+## [0.36.1-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.35...v0.36.1-rc.36) (2022-10-12)
+
+
+### Bug Fixes
+
+* **docs:** fix home page color issue for dark themes ([#8809](https://github.com/SAP/fundamental-ngx/issues/8809)) ([49bdbc5](https://github.com/SAP/fundamental-ngx/commit/49bdbc56daff374e293d8fa30aa8842b493f323c))
+
+
+
 ## [0.36.1-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.34...v0.36.1-rc.35) (2022-10-12)
 
 
