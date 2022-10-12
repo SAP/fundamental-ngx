@@ -124,6 +124,9 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
             this._value = this._checkValueLimits(value);
         }
         this.lastEmittedValue = this._value;
+        if (!this._firstEmittedValue && this._value) {
+            this._firstEmittedValue = this._value;
+        }
         if (this._numberFormat) {
             this._updateViewValue();
         }
@@ -265,6 +268,9 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     private _index: any;
 
     /** @hidden */
+    private _firstEmittedValue: number;
+
+    /** @hidden */
     onChange: (value: Nullable<number>) => void = () => {};
 
     /** @hidden */
@@ -318,18 +324,12 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** @hidden */
     get canIncrement(): boolean {
-        if (this.value == null) {
-            return false;
-        }
-        return this.value + this.step <= this._max;
+        return this.value == null || this.value + this.step <= this._max;
     }
 
     /** @hidden */
     get canDecrement(): boolean {
-        if (this.value == null) {
-            return false;
-        }
-        return this.value - this.step >= this._min;
+        return this.value == null || this.value - this.step >= this._min;
     }
 
     /** @hidden */
@@ -340,6 +340,9 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** Increment input value by step value */
     increment(): void {
         if (this.canIncrement) {
+            if (this.value == null && this._firstEmittedValue) {
+                this._value = this._firstEmittedValue;
+            }
             this._value = this._cutFloatingNumberDistortion(this.value!, this.step);
             this._emitChangedValue();
             this._updateViewValue();
@@ -349,6 +352,9 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** Decrement input value by step value */
     decrement(): void {
         if (this.canDecrement) {
+            if (this.value == null && this._firstEmittedValue) {
+                this._value = this._firstEmittedValue;
+            }
             this._value = this._cutFloatingNumberDistortion(this.value!, -this.step);
             this._emitChangedValue();
             this._updateViewValue();
