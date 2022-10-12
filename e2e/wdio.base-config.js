@@ -25,20 +25,6 @@ module.exports = ({ runner, specs, projectName }) => {
         waitforTimeout: 30000,
         connectionRetryTimeout: 200000,
         connectionRetryCount: 3,
-        services: [
-            [
-                'image-comparison',
-                // The options
-                {
-                    // Some options, see the docs for more
-                    baselineFolder: join(process.cwd(), './e2e/wdio/baselineScreenshot/'),
-                    formatImageName: '{tag}-{logName}-{width}x{height}',
-                    screenshotPath: join(process.cwd(), '.tmp/'),
-                    savePerInstance: true,
-                    autoSaveBaseline: true
-                }
-            ]
-        ],
         framework: 'jasmine',
         specFileRetries: 2,
         specFileRetriesDelay: 0,
@@ -93,7 +79,6 @@ module.exports = ({ runner, specs, projectName }) => {
 
         afterTest: function (test, context, { error, result, duration, passed, retries }) {
             if (error !== undefined) {
-                browser.takeScreenshot();
                 const html = browser.getPageSource();
                 AllureReporter.addAttachment('page.html', html, 'text/html');
             }
