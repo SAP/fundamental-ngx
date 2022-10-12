@@ -56,6 +56,13 @@ export class OptionComponent implements OnDestroy, FocusableOption {
     /** Whether this option is hidden */
     hidden = false;
 
+    /**
+     * The displayed value of the option. It shows the selected option in the select's trigger.
+     */
+    get viewValue(): string {
+        return (this.elementRef.nativeElement.textContent || '').trim();
+    }
+
     /** @hidden */
     private readonly _destroyed$ = new Subject<void>();
 

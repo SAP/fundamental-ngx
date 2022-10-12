@@ -21,6 +21,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SelectMenuDirective } from './select-menu.directive';
 import { Select } from './select.interface';
 import { FN_SELECT_PROVIDER } from './select.token';
+import { SelectionModel } from '@angular/cdk/collections';
 /**
  * Select component intended to mimic
  * the behaviour of the native select element.
@@ -79,6 +80,9 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
 
     menu: SelectMenuDirective;
 
+    /** @hidden */
+    _selectionModel: SelectionModel<OptionComponent>;
+
     @Input()
     get value(): any {
         return this._internalValue;
@@ -94,6 +98,19 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         this.onChange(newValue);
     }
 
+    get selected(): OptionComponent {
+        return this._selectionModel.selected[0];
+    }
+
+    /** Retrieves selected value if any. */
+    get triggerValue(): string {
+        const emptyValue = ' ';
+        if (this._selectionModel.isEmpty()) {
+            return this.placeholder || emptyValue;
+        }
+        return this.selected.viewValue || this.placeholder || emptyValue;
+    }
+
     _selectWidth = 0;
 
     /** @hidden */
@@ -106,6 +123,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
 
     /** @hidden */
     ngAfterContentInit(): void {
+        this._selectionModel = new SelectionModel<OptionComponent>(false);
         this._selectWidth = this._elRef.nativeElement.getBoundingClientRect().width;
 
         this._subscriptions.add(
@@ -123,6 +141,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         if (selectedOption) {
             setTimeout(() => {
                 selectedOption.selected = true;
+                this._selectionModel.select(selectedOption);
             });
         }
     }
@@ -130,6 +149,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
+        this._selectionModel.clear();
     }
 
     /** @hidden */
@@ -171,9 +191,11 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         this.options.forEach((option) => {
             option === clickedOption ? (option.selected = true) : (option.selected = false);
         });
-        this.value = clickedOption.value;
+        clickedOption && this._selectionModel.select(clickedOption);
+        this.value = this.selected.value;
         this.hideMenu();
         this._cdRef.detectChanges();
+        console.log(this._selectionModel.selected);
     }
 
     /** @hidden */
