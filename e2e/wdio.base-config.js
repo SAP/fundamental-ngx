@@ -77,9 +77,9 @@ module.exports = ({ runner, specs, projectName }) => {
             browser.setWindowSize(1920, 1080);
         },
 
-        afterTest: function (test, context, { error, result, duration, passed, retries }) {
+        afterTest: async function (test, context, { error, result, duration, passed, retries }) {
             if (error !== undefined) {
-                const html = browser.getPageSource();
+                const html = await browser.getPageSource();
                 AllureReporter.addAttachment('page.html', html, 'text/html');
             }
         }
