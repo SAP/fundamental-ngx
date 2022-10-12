@@ -38,123 +38,132 @@ describe('Feed list item test suite:', () => {
         actionMenuButtonOption
     } = feedListItemPage;
 
-    beforeAll(() => {
-        feedListItemPage.open();
+    beforeAll(async () => {
+        await feedListItemPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(feedListItemPage.root);
-        waitForElDisplayed(feedListItemPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(feedListItemPage.root);
+        await waitForElDisplayed(feedListItemPage.title);
     }, 1);
 
-    it('should check clickability author and reply links', () => {
-        checkClickableLinks(simpleExample);
-        checkClickableLinks(avatarExample);
-        checkClickableLinks(actionExample);
-        checkClickableLinks(footerExample);
-        checkClickableLinks(mobileExample);
+    it('should check clickability author and reply links', async () => {
+        await checkClickableLinks(simpleExample);
+        await checkClickableLinks(avatarExample);
+        await checkClickableLinks(actionExample);
+        await checkClickableLinks(footerExample);
+        await checkClickableLinks(mobileExample);
     });
 
-    it('should check by clicking button "more" displayed more text', () => {
+    it('should check by clicking button "more" displayed more text', async () => {
         // skipped due to unknown error when element not interactable
-        if (browserIsSafari()) {
+        if (await browserIsSafari()) {
             return;
         }
-        checkMoreText(simpleExample);
-        checkMoreText(footerExample);
-        checkMoreText(mobileExample);
+        await checkMoreText(simpleExample);
+        await checkMoreText(footerExample);
+        await checkMoreText(mobileExample);
     });
 
-    it('should check displayed avatars', () => {
-        checkIsAvatarsDisplayed(avatarExample);
-        checkIsAvatarsDisplayed(mobileExample);
+    it('should check displayed avatars', async () => {
+        await checkIsAvatarsDisplayed(avatarExample);
+        await checkIsAvatarsDisplayed(mobileExample);
     });
 
-    it('should check alert text', () => {
-        scrollIntoView(actionSettingsButton);
-        click(actionSettingsButton);
-        expect(alertText).toContain(getAlertText());
+    it('should check alert text', async () => {
+        await scrollIntoView(actionSettingsButton);
+        await click(actionSettingsButton);
+        await expect(alertText).toContain(await getAlertText());
     });
 
-    it('should check clickability popovers menu links', () => {
-        scrollIntoView(actionMenuButton);
-        click(actionMenuButton);
-        const optionLength = getElementArrayLength(actionMenuButtonOption);
+    it('should check clickability popovers menu links', async () => {
+        await scrollIntoView(actionMenuButton);
+        await click(actionMenuButton);
+        const optionLength = await getElementArrayLength(actionMenuButtonOption);
         for (let i = 0; i < optionLength; i++) {
-            expect(isElementClickable(actionMenuButtonOption, i)).toBe(true, `option with index ${i} not clickable`);
+            await expect(await isElementClickable(actionMenuButtonOption, i)).toBe(
+                true,
+                `option with index ${i} not clickable`
+            );
         }
     });
 
-    it('should check clickability buttons in mobile menu', () => {
-        scrollIntoView(mobileExample);
-        click(overflowButton);
-        const optionLength = getElementArrayLength(overflowOption);
+    it('should check clickability buttons in mobile menu', async () => {
+        await scrollIntoView(mobileExample);
+        await click(overflowButton);
+        const optionLength = await getElementArrayLength(overflowOption);
         for (let i = 0; i < optionLength; i++) {
-            expect(isElementClickable(overflowOption, i)).toBe(true, `button with index ${i} not clickable`);
+            await expect(await isElementClickable(overflowOption, i)).toBe(
+                true,
+                `button with index ${i} not clickable`
+            );
         }
     });
 
-    it('should check after click cancel button mobile menu disappears', () => {
-        scrollIntoView(mobileExample);
-        click(overflowButton);
-        expect(doesItExist(mobileMenu)).toBe(true, 'mobile menu not displayed');
+    it('should check after click cancel button mobile menu disappears', async () => {
+        await scrollIntoView(mobileExample);
+        await click(overflowButton);
+        await expect(await doesItExist(mobileMenu)).toBe(true, 'mobile menu not displayed');
 
-        click(optionCancel);
-        expect(doesItExist(mobileMenu)).toBe(false, 'mobile menu still displayed');
+        await click(optionCancel);
+        await expect(await doesItExist(mobileMenu)).toBe(false, 'mobile menu still displayed');
     });
 
-    it('should check that icons are present near menu items', () => {
-        scrollIntoView(actionExample);
-        click(actionMenuButton);
-        const menuItemsLength = getElementArrayLength(actionMenuButtonOption);
+    it('should check that icons are present near menu items', async () => {
+        await scrollIntoView(actionExample);
+        await click(actionMenuButton);
+        const menuItemsLength = await getElementArrayLength(actionMenuButtonOption);
         for (let i = 0; i < menuItemsLength; i++) {
-            expect(isElementDisplayed(actionMenuButtonOption + icon, i)).toBe(true);
+            await expect(await isElementDisplayed(actionMenuButtonOption + icon, i)).toBe(true);
         }
     });
 
-    it('should check RTL and LTR orientation', () => {
-        feedListItemPage.checkRtlSwitch();
+    it('should check RTL and LTR orientation', async () => {
+        await feedListItemPage.checkRtlSwitch();
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check basic visual regression', () => {
-            feedListItemPage.saveExampleBaselineScreenshot();
-            expect(feedListItemPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check basic visual regression', async () => {
+            await feedListItemPage.saveExampleBaselineScreenshot();
+            await expect(await feedListItemPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 
-    function checkClickableLinks(example: string): void {
-        scrollIntoView(example);
-        const linksLength = getElementArrayLength(example + links);
+    async function checkClickableLinks(example: string): Promise<void> {
+        await scrollIntoView(example);
+        const linksLength = await getElementArrayLength(example + links);
         for (let i = 0; i < linksLength; i++) {
-            expect(isElementClickable(example + links)).toBe(true, `link with index ${i} not clickable`);
+            await expect(await isElementClickable(example + links)).toBe(true, `link with index ${i} not clickable`);
         }
     }
 
-    function checkMoreText(example: string): void {
-        scrollIntoView(example);
-        const moreLinkLength = getElementArrayLength(example + linkMore);
+    async function checkMoreText(example: string): Promise<void> {
+        await scrollIntoView(example);
+        const moreLinkLength = await getElementArrayLength(example + linkMore);
         for (let i = 0; i < moreLinkLength; i++) {
             if (i === 3) {
-                expect(getText(example + linkMore, i)).toBe(testTextMore);
-                click(example + linkMore, i);
-                expect(getText(example + linkMore, i)).toBe(testTextLess);
+                await expect(await getText(example + linkMore, i)).toBe(testTextMore);
+                await click(example + linkMore, i);
+                await expect(await getText(example + linkMore, i)).toBe(testTextLess);
             } else {
-                scrollIntoView(example + linkMore, i);
-                const beforeSize = getElementSize(example + paragraphs, i);
-                click(example + linkMore, i);
-                const afterSize = getElementSize(example + paragraphs, i);
-                expect(afterSize.height).toBeGreaterThan(beforeSize.height);
+                await scrollIntoView(example + linkMore, i);
+                const beforeSize = await getElementSize(example + paragraphs, i);
+                await click(example + linkMore, i);
+                const afterSize = await getElementSize(example + paragraphs, i);
+                await expect(afterSize.height).toBeGreaterThan(beforeSize.height);
             }
         }
     }
 
-    function checkIsAvatarsDisplayed(example: string): void {
-        scrollIntoView(example);
-        const avatarLength = getElementArrayLength(example + avatar);
+    async function checkIsAvatarsDisplayed(example: string): Promise<void> {
+        await scrollIntoView(example);
+        const avatarLength = await getElementArrayLength(example + avatar);
         for (let i = 0; i < avatarLength; i++) {
-            expect(isElementDisplayed(example + avatar, i)).toBe(true, `avatar with index ${i} not displayed`);
+            await expect(await isElementDisplayed(example + avatar, i)).toBe(
+                true,
+                `avatar with index ${i} not displayed`
+            );
         }
     }
 });

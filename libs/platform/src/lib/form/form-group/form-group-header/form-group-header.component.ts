@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FieldGroup } from '../../form-helpers';
 import { HintOptions } from '@fundamental-ngx/platform/shared';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -23,7 +24,7 @@ import { HintOptions } from '@fundamental-ngx/platform/shared';
 })
 export class FormGroupHeaderComponent {
     @Input()
-    fieldGroup: FieldGroup;
+    fieldGroup: Nullable<FieldGroup>;
 
     hintOptions(field: FieldGroup): HintOptions | undefined {
         if (field.hintOptions) {

@@ -29,95 +29,103 @@ describe('Switch test suite', () => {
         checkboxes
     } = switchPage;
 
-    beforeAll(() => {
-        switchPage.open();
+    beforeAll(async () => {
+        await switchPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(switchPage.root);
-        waitForElDisplayed(switchPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(switchPage.root);
+        await waitForElDisplayed(switchPage.title);
     }, 1);
 
-    it('Should check turn on/ Turn off switch toggle', () => {
-        checkSwitchingWork(switchSizesExample);
-        checkSwitchingWork(switchFormsExample);
-        checkSwitchingWork(semanticswitchExample);
-        checkSwitchingWork(switchBindingExample);
-        checkSwitchingWork(playGroundSwitchExample);
+    it('Should check turn on/ Turn off switch toggle', async () => {
+        await checkSwitchingWork(switchSizesExample);
+        await checkSwitchingWork(switchFormsExample);
+        await checkSwitchingWork(semanticswitchExample);
+        await checkSwitchingWork(switchBindingExample);
+        await checkSwitchingWork(playGroundSwitchExample);
     });
 
-    it('Should check icons on semantic toggles', () => {
+    it('Should check icons on semantic toggles', async () => {
         for (let i = 0; i < 2; i++) {
-            expect(elementDisplayed(declineIcon, i)).toBe(true, 'decline icon is not displayed');
-            click(semanticSwitch, i);
-            pause(1000);
-            expect(elementDisplayed(declineIcon, i)).toBe(false, 'decline icon is displayed');
-            expect(elementDisplayed(acceptIcon, i)).toBe(true, 'accept icon is not displayed');
+            await expect(await elementDisplayed(declineIcon, i)).toBe(true, 'decline icon is not displayed');
+            await click(semanticSwitch, i);
+            await pause(1000);
+            await expect(await elementDisplayed(declineIcon, i)).toBe(false, 'decline icon is displayed');
+            await expect(await elementDisplayed(acceptIcon, i)).toBe(true, 'accept icon is not displayed');
         }
     });
 
-    it('Should check toggle state changes by click on buttons', () => {
-        click(switchBtn, 1);
-        expect(checkToggleState(switchBindingExample)).toBe(true, 'toggle is not enabled');
-        click(switchBtn, 1);
-        expect(checkToggleState(switchBindingExample)).toBe(false, 'toggle not enabled');
-        click(switchBtn, 0);
-        expect(checkToggleState(switchBindingExample)).toBe(true, 'toggle is not enabled');
+    it('Should check toggle state changes by click on buttons', async () => {
+        await click(switchBtn, 1);
+        await expect(await checkToggleState(switchBindingExample)).toBe(true, 'toggle is not enabled');
+        await click(switchBtn, 1);
+        await expect(await checkToggleState(switchBindingExample)).toBe(false, 'toggle not enabled');
+        await click(switchBtn, 0);
+        await expect(await checkToggleState(switchBindingExample)).toBe(true, 'toggle is not enabled');
     });
 
-    it('should check switch toggle manage by checkboxes', () => {
-        click(checkboxes, 1);
-        expect(checkToggleState(playGroundSwitchExample)).toBe(true, 'toggle is not enabled');
-        click(checkboxes, 2);
-        expect(getElementClass(playGroundSwitchExample + toggle)).not.toContain(
+    it('should check switch toggle manage by checkboxes', async () => {
+        await click(checkboxes, 1);
+        await expect(await checkToggleState(playGroundSwitchExample)).toBe(true, 'toggle is not enabled');
+        await click(checkboxes, 2);
+        await expect(await getElementClass(playGroundSwitchExample + toggle)).not.toContain(
             'fd-switch--compact',
             'toggle is compact'
         );
-        click(checkboxes, 0);
-        expect(getElementClass(playGroundSwitchExample + toggle)).toContain('is-disabled', 'toggle is not disabled');
-        click(checkboxes, 2);
-        expect(getElementClass(playGroundSwitchExample + toggle)).toContain(
+        await click(checkboxes, 0);
+        await expect(await getElementClass(playGroundSwitchExample + toggle)).toContain(
+            'is-disabled',
+            'toggle is not disabled'
+        );
+        await click(checkboxes, 2);
+        await expect(await getElementClass(playGroundSwitchExample + toggle)).toContain(
             'fd-switch--compact',
             'toggle is not compact'
         );
     });
 
-    it('should check RTL and LTR orientation', () => {
-        switchPage.checkRtlSwitch();
+    it('should check RTL and LTR orientation', async () => {
+        await switchPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', () => {
-        switchPage.saveExampleBaselineScreenshot();
-        expect(switchPage.compareWithBaseline()).toBeLessThan(5);
+    xit('should check examples visual regression', async () => {
+        await switchPage.saveExampleBaselineScreenshot();
+        await expect(await switchPage.compareWithBaseline()).toBeLessThan(5);
     });
 
-    function checkSwitchingWork(
+    async function checkSwitchingWork(
         section: string,
-        length: number = getElementArrayLength(section + toggle),
+        length: number | undefined = undefined,
         switchToggle: string = section + toggle,
         flag: string = section + toggleInput
-    ): void {
+    ): Promise<void> {
+        length = length ?? (await getElementArrayLength(section + toggle));
         for (let i = 0; i < length; i++) {
-            if (getElementClass(switchToggle, i) !== disabledToggle) {
-                if (getAttributeByName(flag, 'aria-checked', i) === 'true') {
-                    click(switchToggle, i);
-                    expect(checkToggleState(section, i)).toBe(false, 'toggle is enabled');
+            if ((await getElementClass(switchToggle, i)) !== disabledToggle) {
+                if ((await getAttributeByName(flag, 'aria-checked', i)) === 'true') {
+                    await click(switchToggle, i);
+                    await expect(await checkToggleState(section, i)).toBe(false, 'toggle is enabled');
                 }
-                if (getAttributeByName(flag, 'aria-checked', i) === 'false') {
-                    click(switchToggle, i);
-                    expect(checkToggleState(section, i)).toBe(true, 'toggle is disabled');
+                if ((await getAttributeByName(flag, 'aria-checked', i)) === 'false') {
+                    await click(switchToggle, i);
+                    await expect(await checkToggleState(section, i)).toBe(true, 'toggle is disabled');
                 }
             }
         }
     }
 
-    function checkToggleState(section: string, i: number = 0, flag: string = section + toggleInput): boolean {
-        if (getAttributeByName(section + toggle, 'class', i) !== disabledToggle) {
-            if (getAttributeByName(flag, 'aria-checked', i) === 'true') {
+    async function checkToggleState(
+        section: string,
+        i: number = 0,
+        flag: string = section + toggleInput
+    ): Promise<boolean | undefined> {
+        if ((await getAttributeByName(section + toggle, 'class', i)) !== disabledToggle) {
+            if ((await getAttributeByName(flag, 'aria-checked', i)) === 'true') {
                 return true;
             }
-            if (getAttributeByName(flag, 'aria-checked', i) !== 'true') {
+            if ((await getAttributeByName(flag, 'aria-checked', i)) !== 'true') {
                 return false;
             }
         }

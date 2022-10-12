@@ -25,21 +25,21 @@ export class BusyIndicatorPo extends CoreBaseComponentPo {
     indicatorBlockWrapper = 'fd-busy-indicator-wrapper-example  fd-busy-indicator:nth-child(2)';
     messageToast = '.fd-message-toast-container ';
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'busy-indicator'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'busy-indicator'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'busy-indicator'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'busy-indicator'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 }

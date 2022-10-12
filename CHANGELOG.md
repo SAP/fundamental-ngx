@@ -1,3 +1,169 @@
+## [0.36.1-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.35...v0.36.1-rc.36) (2022-10-12)
+
+
+### Bug Fixes
+
+* **docs:** fix home page color issue for dark themes ([#8809](https://github.com/SAP/fundamental-ngx/issues/8809)) ([49bdbc5](https://github.com/SAP/fundamental-ngx/commit/49bdbc56daff374e293d8fa30aa8842b493f323c))
+
+
+
+## [0.36.1-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.34...v0.36.1-rc.35) (2022-10-12)
+
+
+
+## [0.36.1-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.33...v0.36.1-rc.34) (2022-10-12)
+
+
+### Bug Fixes
+
+* **e2e:** async mode, specs refactoring ([#8803](https://github.com/SAP/fundamental-ngx/issues/8803)) ([3ffa28b](https://github.com/SAP/fundamental-ngx/commit/3ffa28b8ecd7d33904eac16acce0835f0b470e37))
+
+
+
+## [0.36.1-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.32...v0.36.1-rc.33) (2022-10-10)
+
+
+### Features
+
+* **docs:** universal switcher ([#8774](https://github.com/SAP/fundamental-ngx/issues/8774)) ([76f3944](https://github.com/SAP/fundamental-ngx/commit/76f39441e4601991405769bc656434eb8878efc8))
+
+
+
+## [0.36.1-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.31...v0.36.1-rc.32) (2022-10-10)
+
+
+### Bug Fixes
+
+* **core,platform:** hiding live announcer element ([#8781](https://github.com/SAP/fundamental-ngx/issues/8781)) ([9b7ef85](https://github.com/SAP/fundamental-ngx/commit/9b7ef853756fd7b8503c1e7f924932db77554b56))
+
+
+
+## [0.36.1-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.30...v0.36.1-rc.31) (2022-10-07)
+
+
+### Bug Fixes
+
+* **core:** add key navigation in vertical navigation ([#8721](https://github.com/SAP/fundamental-ngx/issues/8721)) ([5d43755](https://github.com/SAP/fundamental-ngx/commit/5d4375593ebeb12dc8183cf8955aa8ec675f9142))
+
+
+
+## [0.36.1-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.29...v0.36.1-rc.30) (2022-10-07)
+
+
+### Bug Fixes
+
+* **docs:** documentation sorting ([#8796](https://github.com/SAP/fundamental-ngx/issues/8796)) ([1ed703b](https://github.com/SAP/fundamental-ngx/commit/1ed703b559d441777dc7eb96ca5d3199d9f6d84f))
+
+
+
+## [0.36.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.28...v0.36.1-rc.29) (2022-10-07)
+
+
+### Bug Fixes
+
+* **core:** enable wrap for key navigation ([#8746](https://github.com/SAP/fundamental-ngx/issues/8746)) ([949bd34](https://github.com/SAP/fundamental-ngx/commit/949bd348a2b9025515ecb00a6c62a2d27176e4f5))
+
+
+
+## [0.36.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.27...v0.36.1-rc.28) (2022-10-06)
+
+
+### Bug Fixes
+
+* **docs:** fix broken platform docs of info-label ([#8800](https://github.com/SAP/fundamental-ngx/issues/8800)) ([1385ec7](https://github.com/SAP/fundamental-ngx/commit/1385ec78881356a488b50cbf9cf5faf859b845c3))
+
+
+
+## [0.36.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.26...v0.36.1-rc.27) (2022-10-06)
+
+
+### Bug Fixes
+
+* **core:** fix combobox glyph issue ([#8795](https://github.com/SAP/fundamental-ngx/issues/8795)) ([b406e49](https://github.com/SAP/fundamental-ngx/commit/b406e49d954d9256969679228b7b37f18a9b7add))
+
+
+
+## [0.36.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.25...v0.36.1-rc.26) (2022-10-05)
+
+
+### Bug Fixes
+
+* **docs:** fix wrong icon margin for rtl ([#8789](https://github.com/SAP/fundamental-ngx/issues/8789)) ([310521d](https://github.com/SAP/fundamental-ngx/commit/310521d2fdb36e3a0590da29307bf60897e5d4c8))
+
+
+
+## [0.36.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.24...v0.36.1-rc.25) (2022-10-04)
+
+
+### Bug Fixes
+
+* **docs:** remove color from pre tag ([#8779](https://github.com/SAP/fundamental-ngx/issues/8779)) ([4f77c6f](https://github.com/SAP/fundamental-ngx/commit/4f77c6f9a39a3b11d5a2595a00bc56a0df584d0e))
+
+
+
+## [0.36.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.23...v0.36.1-rc.24) (2022-10-04)
+
+
+### Bug Fixes
+
+* **core:** popover overflow ([#8755](https://github.com/SAP/fundamental-ngx/issues/8755)) ([0b45c27](https://github.com/SAP/fundamental-ngx/commit/0b45c276f32d669fafd58d37d17d5955f0f6789a))
+
+
+
+## [0.36.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.22...v0.36.1-rc.23) (2022-10-03)
+
+
+### Bug Fixes
+
+* **docs:** netlify update to ubuntu 20.04 ([#8776](https://github.com/SAP/fundamental-ngx/issues/8776)) ([b72ccdc](https://github.com/SAP/fundamental-ngx/commit/b72ccdcb2947b72d42228379e9cd5f5ad6a6e8dc))
+
+
+
+## [0.36.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.21...v0.36.1-rc.22) (2022-10-03)
+
+
+### Bug Fixes
+
+* **core:** quick view should not use fd-input and should be focus trapped in popovers ([#8753](https://github.com/SAP/fundamental-ngx/issues/8753)) ([7277bf4](https://github.com/SAP/fundamental-ngx/commit/7277bf4d260cfc4122016549ba108b0885a86bb9))
+
+
+
+## [0.36.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.20...v0.36.1-rc.21) (2022-09-30)
+
+
+### Bug Fixes
+
+* **core:** list item with list link tabbed twice ([#8754](https://github.com/SAP/fundamental-ngx/issues/8754)) ([d42d912](https://github.com/SAP/fundamental-ngx/commit/d42d91224ddd34b4d019630c9cffba4ff568563d))
+
+
+
+## [0.36.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.19...v0.36.1-rc.20) (2022-09-28)
+
+
+### Bug Fixes
+
+* **core,platform:** form grid breaking changes, styles version bump ([#8715](https://github.com/SAP/fundamental-ngx/issues/8715)) ([61c4103](https://github.com/SAP/fundamental-ngx/commit/61c4103f2d9e70be83efe10f4918f0654daf843c))
+
+
+
+## [0.36.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.18...v0.36.1-rc.19) (2022-09-28)
+
+
+### Bug Fixes
+
+* **core,platform:** remove platform highlighting and account for lt and gt in highlight pipe ([#8658](https://github.com/SAP/fundamental-ngx/issues/8658)) ([d7f8c5b](https://github.com/SAP/fundamental-ngx/commit/d7f8c5b1cd3210f653ac5702a100381142a78842))
+
+
+
+## [0.36.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.17...v0.36.1-rc.18) (2022-09-27)
+
+
+### Bug Fixes
+
+* **core:** improve onTouched handling in core components and add docs ([#8730](https://github.com/SAP/fundamental-ngx/issues/8730)) ([7e602cd](https://github.com/SAP/fundamental-ngx/commit/7e602cd058e2888e8724513823268ff044281bbd))
+
+
+
 ## [0.36.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.16...v0.36.1-rc.17) (2022-09-27)
 
 

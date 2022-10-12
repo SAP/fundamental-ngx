@@ -82,485 +82,503 @@ describe('dialog test suite', () => {
         dialogInput
     } = dialogPage;
 
-    beforeAll(() => {
-        dialogPage.open();
+    beforeAll(async () => {
+        await dialogPage.open();
     }, 1);
 
-    beforeEach(() => {
-        refreshPage();
-        waitForPresent(dialogPage.root);
-        waitForElDisplayed(dialogPage.title);
+    beforeEach(async () => {
+        await refreshPage();
+        await waitForPresent(dialogPage.root);
+        await waitForElDisplayed(dialogPage.title);
     }, 1);
 
     describe('template based dialog example', () => {
-        it('should check dialog dismissal and output', () => {
+        it('should check dialog dismissal and output', async () => {
             const acceptBtn = 0;
             const cancelBtn = 1;
 
-            checkDialogDismissals(templateDialog, button, acceptBtn, continueStatus);
-            checkDialogDismissals(templateDialog, button, cancelBtn, canceledStatus);
-            checkCloseDialogWithEscapeKey(templateDialog, button);
+            await checkDialogDismissals(templateDialog, button, acceptBtn, continueStatus);
+            await checkDialogDismissals(templateDialog, button, cancelBtn, canceledStatus);
+            await checkCloseDialogWithEscapeKey(templateDialog, button);
         });
     });
 
     describe('component based dialog example', () => {
-        it('should check dialog dismissal and output', () => {
+        it('should check dialog dismissal and output', async () => {
             const acceptBtn = 0;
             const cancelBtn = 1;
 
-            checkDialogDismissals(componentDialog, button, acceptBtn, continueStatus);
-            checkDialogDismissals(componentDialog, button, cancelBtn, canceledStatus);
-            checkCloseDialogWithEscapeKey(componentDialog, button);
+            await checkDialogDismissals(componentDialog, button, acceptBtn, continueStatus);
+            await checkDialogDismissals(componentDialog, button, cancelBtn, canceledStatus);
+            await checkCloseDialogWithEscapeKey(componentDialog, button);
         });
     });
 
     describe('object based dialog example', () => {
-        it('should check dialog dismissal and output', () => {
+        it('should check dialog dismissal and output', async () => {
             const closeBtn = 0;
             const acceptBtn = 2;
             const cancelBtn = 3;
 
-            checkDialogDismissals(objectDialog, button, closeBtn, dismissedStatus);
-            checkDialogDismissals(objectDialog, button, acceptBtn, approvedStatus);
-            checkDialogDismissals(objectDialog, button, cancelBtn, canceledStatus);
-            checkCloseDialogWithEscapeKey(objectDialog, button);
+            await checkDialogDismissals(objectDialog, button, closeBtn, dismissedStatus);
+            await checkDialogDismissals(objectDialog, button, acceptBtn, approvedStatus);
+            await checkDialogDismissals(objectDialog, button, cancelBtn, canceledStatus);
+            await checkCloseDialogWithEscapeKey(objectDialog, button);
         });
     });
 
     describe('dialog state examples', () => {
-        it('should check auto dismissal', () => {
+        it('should check auto dismissal', async () => {
             const selfDismissingDialogCount = 3;
 
             for (let i = 0; i < selfDismissingDialogCount; i++) {
-                openDialog(stateDialog, i);
+                await openDialog(stateDialog, i);
                 // expect the dialog to close automatically in 4 seconds
-                expect(waitForNotPresent(dialog)).toBe(true, 'dialog did not close automatically');
+                await expect(await waitForNotPresent(dialog)).toBe(true, 'dialog did not close automatically');
             }
         });
 
-        it('check ability to dismiss alerts', () => {
-            const dialogCount = getElementArrayLength(stateDialog + button);
+        it('check ability to dismiss alerts', async () => {
+            const dialogCount = await getElementArrayLength(stateDialog + button);
 
             for (let i = 0; i < dialogCount; i++) {
-                openDialog(stateDialog, i);
-                closeDialog();
+                await openDialog(stateDialog, i);
+                await closeDialog();
 
-                expect(doesItExist(dialog)).toBe(false, 'dialog did not close');
+                await expect(await doesItExist(dialog)).toBe(false, 'dialog did not close');
             }
         });
 
-        it('check the loading icon', () => {
-            openDialog(stateDialog, 3);
+        it('check the loading icon', async () => {
+            await openDialog(stateDialog, 3);
 
-            expect(isElementDisplayed(dialog + busyIndicator)).toBe(true, 'busy Indicator is not displayed');
-            closeDialog();
+            await expect(await isElementDisplayed(dialog + busyIndicator)).toBe(
+                true,
+                'busy Indicator is not displayed'
+            );
+            await closeDialog();
         });
     });
 
     describe('dialog configuration examples', () => {
-        it('should check dialog is draggable', () => {
-            if (!browserIsFirefox()) {
+        it('should check dialog is draggable', async () => {
+            if (!(await browserIsFirefox())) {
                 // dragAndDrop not working correctly on Saucelabs for Edge/Chrome
                 return;
             }
 
-            openDialog(configurationDialog);
-            const dialogStartLocationX = Math.floor(getElementLocation(dialogContainer, 0, 'x'));
-            const dialogStartLocationY = Math.floor(getElementLocation(dialogContainer, 0, 'y'));
+            await openDialog(configurationDialog);
+            const dialogStartLocationX = Math.floor(await getElementLocation(dialogContainer, 0, 'x'));
+            const dialogStartLocationY = Math.floor(await getElementLocation(dialogContainer, 0, 'y'));
 
-            clickAndDragElement(
+            await clickAndDragElement(
                 dialogStartLocationX + 20,
                 dialogStartLocationY + 10,
                 dialogStartLocationX - 100,
                 dialogStartLocationY - 50
             );
 
-            expect(Math.floor(getElementLocation(dialogContainer, 0, 'x'))).not.toBe(dialogStartLocationX);
-            expect(Math.floor(getElementLocation(dialogContainer, 0, 'y'))).not.toBe(dialogStartLocationY);
-            closeDialog();
+            await expect(Math.floor(await getElementLocation(dialogContainer, 0, 'x'))).not.toBe(dialogStartLocationX);
+            await expect(Math.floor(await getElementLocation(dialogContainer, 0, 'y'))).not.toBe(dialogStartLocationY);
+            await closeDialog();
         });
 
-        it('should check dialog is resizeable', () => {
-            if (browserIsSafari()) {
+        it('should check dialog is resizeable', async () => {
+            if (await browserIsSafari()) {
                 return;
             }
-            openDialog(configurationDialog, 1);
+            await openDialog(configurationDialog, 1);
 
-            checkResizingDialog();
+            await checkResizingDialog();
 
-            closeDialog();
+            await closeDialog();
         });
 
-        it('should check dialog only closes with footer button click', () => {
-            openDialog(configurationDialog, 2);
-            clickWithOption(dialog, 0, 5000, { x: -100, y: -100 });
+        it('should check dialog only closes with footer button click', async () => {
+            await openDialog(configurationDialog, 2);
+            await clickWithOption(dialog, 0, 5000, { x: -100, y: -100 });
 
-            expect(doesItExist(dialog)).toBe(true, 'dialog is closed when it should be open');
-            closeDialog();
+            await expect(await doesItExist(dialog)).toBe(true, 'dialog is closed when it should be open');
+            await closeDialog();
 
-            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
         });
     });
 
     describe('dialog positioning example', () => {
-        it('should check dialog in bottom right', () => {
-            openDialog(positionDialog);
+        it('should check dialog in bottom right', async () => {
+            await openDialog(positionDialog);
 
-            expect(getAttributeByName(dialogContainer2, styleAttribute)).toContain(bottomRightPosition);
-            closeDialog();
+            await expect(await getAttributeByName(dialogContainer2, styleAttribute)).toContain(bottomRightPosition);
+            await closeDialog();
         });
     });
 
     describe('mobile dialog example', () => {
-        it('should check mobile property', () => {
-            openDialog(mobileDialog);
+        it('should check mobile property', async () => {
+            await openDialog(mobileDialog);
 
-            expect(getAttributeByName(dialogContainer2, classAttribute)).toContain(mobileProperty);
-            closeDialog();
+            await expect(await getAttributeByName(dialogContainer2, classAttribute)).toContain(mobileProperty);
+            await closeDialog();
         });
     });
 
     describe('complex dialog example', () => {
-        it('should check dialog selections', () => {
-            refreshPage();
-            waitForPresent(dialogPage.root);
-            waitForElDisplayed(dialogPage.title);
-            openDialog(complexDialog);
-            pause(5000);
-            waitForElDisplayed(dialogItems);
-            const startingPrice = getText(dialogCartOutput);
+        it('should check dialog selections', async () => {
+            await refreshPage();
+            await waitForPresent(dialogPage.root);
+            await waitForElDisplayed(dialogPage.title);
+            await openDialog(complexDialog);
+            await pause(5000);
+            await waitForElDisplayed(dialogItems);
+            const startingPrice = await getText(dialogCartOutput);
 
-            click(dialogItems, 1);
+            await click(dialogItems, 1);
 
-            expect(getText(dialogCartOutput)).not.toEqual(startingPrice);
-            clearAndCloseDialog();
+            await expect(await getText(dialogCartOutput)).not.toEqual(startingPrice);
+            await clearAndCloseDialog();
         });
 
-        it('should check ability to clear dialog/cart', () => {
-            openDialog(complexDialog);
-            pause(5000);
-            waitForElDisplayed(dialogItems);
+        it('should check ability to clear dialog/cart', async () => {
+            await openDialog(complexDialog);
+            await pause(5000);
+            await waitForElDisplayed(dialogItems);
 
-            click(dialogItems, 1);
-            click(dialogItems, 3);
-            click(dialog + button);
+            await click(dialogItems, 1);
+            await click(dialogItems, 3);
+            await click(dialog + button);
 
-            expect(getText(dialogCartOutput).trim()).toEqual(defaultPrice);
-            clearAndCloseDialog();
+            await expect((await getText(dialogCartOutput)).trim()).toEqual(defaultPrice);
+            await clearAndCloseDialog();
         });
 
-        it('should check dialog search', () => {
-            if (browserIsFirefox()) {
+        it('should check dialog search', async () => {
+            if (await browserIsFirefox()) {
                 // skip FF due to unknown issue where FF tries to run openDialog twice
                 return;
             }
-            openDialog(complexDialog);
-            pause(5000);
+            await openDialog(complexDialog);
+            await pause(5000);
 
-            click(searchBar);
-            setValue(searchBar, papayaFruit);
+            await click(searchBar);
+            await setValue(searchBar, papayaFruit);
 
-            expect(getText(dialogItems).toLowerCase()).toContain(papayaFruit);
-            clearAndCloseDialog();
+            await expect((await getText(dialogItems)).toLowerCase()).toContain(papayaFruit);
+            await clearAndCloseDialog();
         });
 
-        it('should check resizing dialog', () => {
-            if (browserIsFirefox() || browserIsSafari()) {
+        it('should check resizing dialog', async () => {
+            if ((await browserIsFirefox()) || (await browserIsSafari())) {
                 // skip FF due to unknown issue where FF tries to run openDialog twice
                 // skip Safari due to dragNdrop does not work
                 return;
             }
-            openDialog(complexDialog);
-            pause(5000);
-            const startStyle = getAttributeByName(dialogContainer, styleAttribute);
+            await openDialog(complexDialog);
+            await pause(5000);
+            const startStyle = await getAttributeByName(dialogContainer, styleAttribute);
 
-            checkResizingDialog(dialogContainer);
-            expect(getAttributeByName(dialogContainer, styleAttribute)).not.toBe(startStyle);
-            clearAndCloseDialog();
+            await checkResizingDialog(dialogContainer);
+            await expect(await getAttributeByName(dialogContainer, styleAttribute)).not.toBe(startStyle);
+            await clearAndCloseDialog();
         }, 1);
     });
 
     describe('stacked dialogs examples', () => {
-        it('should check that there can be multiple dialogs', () => {
-            openDialog(stackedDialog);
+        it('should check that there can be multiple dialogs', async () => {
+            await openDialog(stackedDialog);
 
-            expect(getElementArrayLength(dialog)).toBe(1);
-            click(dialog + button, 1);
-            waitForElDisplayed(dialog, 1);
+            await expect(await getElementArrayLength(dialog)).toBe(1);
+            await click(dialog + button, 1);
+            await waitForElDisplayed(dialog, 1);
 
-            expect(getElementArrayLength(dialog)).toBe(2);
-            click(dialog + button, 3);
-            closeDialog();
+            await expect(await getElementArrayLength(dialog)).toBe(2);
+            await click(dialog + button, 3);
+            await closeDialog();
 
-            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
         });
     });
 
     describe('custom backdrop and container examples', () => {
-        it('should check custom backdrop dialog dismissal', () => {
-            openDialog(customDialog);
+        it('should check custom backdrop dialog dismissal', async () => {
+            await openDialog(customDialog);
 
-            click(dialog + button);
+            await click(dialog + button);
 
-            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
-            openDialog(customDialog);
+            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await openDialog(customDialog);
 
-            click(dialog + button, 1);
+            await click(dialog + button, 1);
 
-            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
         });
 
-        it('should check custom backdrop class', () => {
-            openDialog(customDialog);
+        it('should check custom backdrop class', async () => {
+            await openDialog(customDialog);
 
-            expect(getAttributeByName(dialog, classAttribute)).toContain(customClass);
+            await expect(await getAttributeByName(dialog, classAttribute)).toContain(customClass);
 
-            click(dialog + button);
+            await click(dialog + button);
         });
 
-        it('should check custom container dismissal', () => {
-            click(customDialog + button, 1);
-            waitForElDisplayed(dialog);
-            click(dialog + button);
+        it('should check custom container dismissal', async () => {
+            await click(customDialog + button, 1);
+            await waitForElDisplayed(dialog);
+            await click(dialog + button);
 
-            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
 
-            click(customDialog + button, 1);
-            waitForElDisplayed(dialog);
-            click(dialog + button, 1);
+            await click(customDialog + button, 1);
+            await waitForElDisplayed(dialog);
+            await click(dialog + button, 1);
 
-            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
         });
 
-        it('should check static dialog dismissal', () => {
-            click(customDialog + button, 2);
-            waitForElDisplayed(dialog);
-            click(dialog + button);
+        it('should check static dialog dismissal', async () => {
+            await click(customDialog + button, 2);
+            await waitForElDisplayed(dialog);
+            await click(dialog + button);
 
-            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
 
-            click(customDialog + button, 2);
-            waitForElDisplayed(dialog);
-            click(dialog + button, 1);
+            await click(customDialog + button, 2);
+            await waitForElDisplayed(dialog);
+            await click(dialog + button, 1);
 
-            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
         });
     });
 
     describe('playground examples', () => {
-        afterEach(() => {
-            refreshPage();
-            waitForElDisplayed(dialogPage.title);
+        afterEach(async () => {
+            await refreshPage();
+            await waitForElDisplayed(dialogPage.title);
         }, 1);
 
-        it('should check dialog backdropClickCloseable option', () => {
-            openDialog(playgroundDialog);
-            clickWithOption(dialog, 0, 5000, { x: -100, y: -100 });
+        it('should check dialog backdropClickCloseable option', async () => {
+            await openDialog(playgroundDialog);
+            await clickWithOption(dialog, 0, 5000, { x: -100, y: -100 });
 
-            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
 
-            click(playgroundDialog + checkboxes, 1);
-            openDialog(playgroundDialog);
-            clickWithOption(dialog, 0, 5000, { x: -100, y: -100 });
+            await click(playgroundDialog + checkboxes, 1);
+            await openDialog(playgroundDialog);
+            await clickWithOption(dialog, 0, 5000, { x: -100, y: -100 });
 
-            expect(doesItExist(dialog)).toBe(true, 'dialog is closed when it should be open');
+            await expect(await doesItExist(dialog)).toBe(true, 'dialog is closed when it should be open');
         });
 
-        it('should check dialog escKeyCloseable option', () => {
-            openDialog(playgroundDialog);
-            sendKeys('Escape');
-            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+        it('should check dialog escKeyCloseable option', async () => {
+            await openDialog(playgroundDialog);
+            await sendKeys('Escape');
+            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
 
-            scrollIntoView(playgroundDialog + checkboxes, 2);
-            click(playgroundDialog + checkboxes, 2);
-            openDialog(playgroundDialog);
-            sendKeys('Escape');
+            await scrollIntoView(playgroundDialog + checkboxes, 2);
+            await click(playgroundDialog + checkboxes, 2);
+            await openDialog(playgroundDialog);
+            await sendKeys('Escape');
 
-            expect(doesItExist(dialog)).toBe(true, 'dialog is closed when it should be open');
+            await expect(await doesItExist(dialog)).toBe(true, 'dialog is closed when it should be open');
         });
 
-        it('should check dialog focusTrapped option', () => {
-            openDialog(playgroundDialog);
+        it('should check dialog focusTrapped option', async () => {
+            await openDialog(playgroundDialog);
 
-            expect(emptyValuesArr).not.toContain(getCSSPropertyByName(dialog + button, outlineProperty).value);
+            await expect(emptyValuesArr).not.toContain(
+                (
+                    await getCSSPropertyByName(dialog + button, outlineProperty)
+                ).value
+            );
 
-            closeDialog();
-            click(playgroundDialog + checkboxes, 3);
-            openDialog(playgroundDialog);
+            await closeDialog();
+            await click(playgroundDialog + checkboxes, 3);
+            await openDialog(playgroundDialog);
 
-            expect(emptyValuesArr).not.toContain(getCSSPropertyByName(dialog + button, outlineProperty).value);
+            await expect(emptyValuesArr).not.toContain(
+                (
+                    await getCSSPropertyByName(dialog + button, outlineProperty)
+                ).value
+            );
         });
 
-        it('should check dialog fullScreen option', () => {
-            openDialog(playgroundDialog);
+        it('should check dialog fullScreen option', async () => {
+            await openDialog(playgroundDialog);
 
-            expect(getAttributeByName(dialogContainer2, classAttribute)).not.toContain(fullscreenClass);
+            await expect(await getAttributeByName(dialogContainer2, classAttribute)).not.toContain(fullscreenClass);
 
-            closeDialog();
-            click(playgroundDialog + checkboxes, 4);
-            openDialog(playgroundDialog);
+            await closeDialog();
+            await click(playgroundDialog + checkboxes, 4);
+            await openDialog(playgroundDialog);
 
-            expect(getAttributeByName(dialogContainer2, classAttribute)).toContain(fullscreenClass);
+            await expect(await getAttributeByName(dialogContainer2, classAttribute)).toContain(fullscreenClass);
         });
 
-        it('should check dialog mobile option', () => {
-            openDialog(playgroundDialog);
+        it('should check dialog mobile option', async () => {
+            await openDialog(playgroundDialog);
 
-            expect(getAttributeByName(dialogContainer2, classAttribute)).not.toContain(mobileClass);
+            await expect(await getAttributeByName(dialogContainer2, classAttribute)).not.toContain(mobileClass);
 
-            closeDialog();
-            click(playgroundDialog + checkboxes, 5);
-            openDialog(playgroundDialog);
+            await closeDialog();
+            await click(playgroundDialog + checkboxes, 5);
+            await openDialog(playgroundDialog);
 
-            expect(getAttributeByName(dialogContainer2, classAttribute)).toContain(mobileClass);
+            await expect(await getAttributeByName(dialogContainer2, classAttribute)).toContain(mobileClass);
         });
 
-        it('should check dialog mobileOuterSpacing option', () => {
-            click(playgroundDialog + checkboxes, 5);
-            openDialog(playgroundDialog);
+        it('should check dialog mobileOuterSpacing option', async () => {
+            await click(playgroundDialog + checkboxes, 5);
+            await openDialog(playgroundDialog);
 
-            expect(getAttributeByName(dialogContainer2, classAttribute)).not.toContain(noMobileSpacingClass);
-            closeDialog();
-            click(playgroundDialog + checkboxes, 6);
-            openDialog(playgroundDialog);
+            await expect(await getAttributeByName(dialogContainer2, classAttribute)).not.toContain(
+                noMobileSpacingClass
+            );
+            await closeDialog();
+            await click(playgroundDialog + checkboxes, 6);
+            await openDialog(playgroundDialog);
 
-            expect(getAttributeByName(dialogContainer2, classAttribute)).toContain(noMobileSpacingClass);
+            await expect(await getAttributeByName(dialogContainer2, classAttribute)).toContain(noMobileSpacingClass);
         });
 
-        it('should check dialog draggable option', () => {
-            if (!browserIsFirefox()) {
+        it('should check dialog draggable option', async () => {
+            if (!(await browserIsFirefox())) {
                 // dragAndDrop not working correctly on Saucelabs for Edge/Chrome
                 return;
             }
-            click(playgroundDialog + checkboxes, 7);
-            openDialog(playgroundDialog);
-            const dialogStartLocationX = Math.floor(getElementLocation(dialogContainer, 0, 'x'));
-            const dialogStartLocationY = Math.floor(getElementLocation(dialogContainer, 0, 'y'));
+            await click(playgroundDialog + checkboxes, 7);
+            await openDialog(playgroundDialog);
+            const dialogStartLocationX = Math.floor(await getElementLocation(dialogContainer, 0, 'x'));
+            const dialogStartLocationY = Math.floor(await getElementLocation(dialogContainer, 0, 'y'));
 
-            clickAndDragElement(
+            await clickAndDragElement(
                 dialogStartLocationX + 20,
                 dialogStartLocationY + 10,
                 dialogStartLocationX - 100,
                 dialogStartLocationY - 50
             );
 
-            expect(Math.floor(getElementLocation(dialogContainer, 0, 'x'))).not.toBe(dialogStartLocationX);
-            expect(Math.floor(getElementLocation(dialogContainer, 0, 'y'))).not.toBe(dialogStartLocationY);
+            await expect(Math.floor(await getElementLocation(dialogContainer, 0, 'x'))).not.toBe(dialogStartLocationX);
+            await expect(Math.floor(await getElementLocation(dialogContainer, 0, 'y'))).not.toBe(dialogStartLocationY);
         });
 
-        it('should check dialog resizable option', () => {
-            if (browserIsSafari()) {
+        it('should check dialog resizable option', async () => {
+            if (await browserIsSafari()) {
                 return;
             }
-            openDialog(playgroundDialog);
+            await openDialog(playgroundDialog);
 
-            expect(doesItExist(resizeHandle)).toBe(false, 'resize handle exists when it should not');
+            await expect(await doesItExist(resizeHandle)).toBe(false, 'resize handle exists when it should not');
 
-            closeDialog();
-            click(playgroundDialog + checkboxes, 8);
-            openDialog(playgroundDialog);
+            await closeDialog();
+            await click(playgroundDialog + checkboxes, 8);
+            await openDialog(playgroundDialog);
 
-            checkResizingDialog();
+            await checkResizingDialog();
         });
 
-        it('should check dialog verticalPadding option', () => {
-            openDialog(playgroundDialog);
+        it('should check dialog verticalPadding option', async () => {
+            await openDialog(playgroundDialog);
             // eslint-disable-next-line radix
             const dialogPaddingValue = parseInt(
-                getCSSPropertyByName(dialogBody, topPaddingProperty).value.replace('px', '')
+                (await getCSSPropertyByName(dialogBody, topPaddingProperty)).value.replace('px', '')
             );
 
-            expect(dialogPaddingValue).toBeGreaterThan(0);
+            await expect(dialogPaddingValue).toBeGreaterThan(0);
 
-            closeDialog();
-            click(playgroundDialog + checkboxes, 9);
-            openDialog(playgroundDialog);
+            await closeDialog();
+            await click(playgroundDialog + checkboxes, 9);
+            await openDialog(playgroundDialog);
             // eslint-disable-next-line radix
             const newDialogPaddingValue = parseInt(
-                getCSSPropertyByName(dialogBody, topPaddingProperty).value.replace('px', '')
+                (await getCSSPropertyByName(dialogBody, topPaddingProperty)).value.replace('px', '')
             );
 
-            expect(newDialogPaddingValue).toBe(0);
+            await expect(newDialogPaddingValue).toBe(0);
         });
 
-        it('should check dialog width and height options', () => {
+        it('should check dialog width and height options', async () => {
             // skipped due to getElement size works incorrect in Safari
-            if (browserIsSafari()) {
+            if (await browserIsSafari()) {
                 return;
             }
-            click(playgroundDialog + inputFields);
-            setValue(playgroundDialog + inputFields, '400px');
-            click(playgroundDialog + inputFields, 1);
-            setValue(playgroundDialog + inputFields, '400px', 1);
-            openDialog(playgroundDialog);
+            await click(playgroundDialog + inputFields);
+            await setValue(playgroundDialog + inputFields, '400px');
+            await click(playgroundDialog + inputFields, 1);
+            await setValue(playgroundDialog + inputFields, '400px', 1);
+            await openDialog(playgroundDialog);
 
-            expect(getElementSize(dialogContainer2, 0, 'width')).toBe(400);
-            expect(getElementSize(dialogContainer2, 0, 'height')).toBe(400);
+            await expect(await (await getElementSize(dialogContainer2, 0)).width).toBe(400);
+            await expect(await (await getElementSize(dialogContainer2, 0)).height).toBe(400);
         });
 
-        it('should check dialog min/max width and height options', () => {
-            if (browserIsSafari()) {
+        it('should check dialog min/max width and height options', async () => {
+            if (await browserIsSafari()) {
                 return;
             }
-            click(playgroundDialog + checkboxes, 8);
-            click(playgroundDialog + inputFields, 2);
-            sendKeys('400px');
-            click(playgroundDialog + inputFields, 3);
-            sendKeys('600px');
-            click(playgroundDialog + inputFields, 4);
-            sendKeys('400px');
-            click(playgroundDialog + inputFields, 5);
-            sendKeys('600px');
-            openDialog(playgroundDialog);
-            const handleXLocation = Math.floor(getElementLocation(resizeHandle, 0, 'x'));
-            const handleYLocation = Math.floor(getElementLocation(resizeHandle, 0, 'y'));
+            await click(playgroundDialog + checkboxes, 8);
+            await click(playgroundDialog + inputFields, 2);
+            await sendKeys('400px');
+            await click(playgroundDialog + inputFields, 3);
+            await sendKeys('600px');
+            await click(playgroundDialog + inputFields, 4);
+            await sendKeys('400px');
+            await click(playgroundDialog + inputFields, 5);
+            await sendKeys('600px');
+            await openDialog(playgroundDialog);
+            const handleXLocation = Math.floor(await getElementLocation(resizeHandle, 0, 'x'));
+            const handleYLocation = Math.floor(await getElementLocation(resizeHandle, 0, 'y'));
 
-            clickAndDragElement(handleXLocation + 1, handleYLocation + 1, handleXLocation + 250, handleYLocation + 250);
+            await clickAndDragElement(
+                handleXLocation + 1,
+                handleYLocation + 1,
+                handleXLocation + 250,
+                handleYLocation + 250
+            );
 
-            expect(getElementSize(dialogContainer2, 0, 'width')).toBe(600);
-            expect(getElementSize(dialogContainer2, 0, 'height')).toBe(600);
+            await expect(await (await getElementSize(dialogContainer2, 0)).width).toBe(600);
+            await expect(await (await getElementSize(dialogContainer2, 0)).width).toBe(600);
 
-            const newHandleXLocation = Math.floor(getElementLocation(resizeHandle, 0, 'x'));
-            const newHandleYLocation = Math.floor(getElementLocation(resizeHandle, 0, 'y'));
+            const newHandleXLocation = Math.floor(await getElementLocation(resizeHandle, 0, 'x'));
+            const newHandleYLocation = Math.floor(await getElementLocation(resizeHandle, 0, 'y'));
 
-            clickAndDragElement(
+            await clickAndDragElement(
                 newHandleXLocation + 1,
                 newHandleYLocation + 1,
                 newHandleXLocation - 300,
                 newHandleYLocation - 300
             );
 
-            expect(getElementSize(dialogContainer2, 0, 'width')).toBe(400);
-            expect(getElementSize(dialogContainer2, 0, 'height')).toBe(400);
+            await expect(await (await getElementSize(dialogContainer2, 0)).width).toBe(400);
+            await expect(await (await getElementSize(dialogContainer2, 0)).width).toBe(400);
         });
     });
 
     describe('Form dialog example', () => {
-        it('should check open-closing', () => {
+        it('should check open-closing', async () => {
             const acceptBtn = 0;
             const cancelBtn = 1;
 
-            checkDialogDismissals(formDialog, button, acceptBtn, continueStatus);
-            checkDialogDismissals(formDialog, button, cancelBtn, canceledStatus);
+            await checkDialogDismissals(formDialog, button, acceptBtn, continueStatus);
+            await checkDialogDismissals(formDialog, button, cancelBtn, canceledStatus);
         });
 
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/7195
-        xit('should check required fields validation', () => {
-            openDialog(formDialog);
+        xit('should check required fields validation', async () => {
+            await openDialog(formDialog);
             for (let i = 1; i < 4; i++) {
-                clearValue(dialogInput, i);
-                expect(getElementClass(dialogInput, i)).toContain('is-error');
+                await clearValue(dialogInput, i);
+                await expect(await getElementClass(dialogInput, i)).toContain('is-error');
             }
         });
 
-        it('should check close dialog via escape', () => {
-            checkCloseDialogWithEscapeKey(formDialog, button);
+        it('should check close dialog via escape', async () => {
+            await checkCloseDialogWithEscapeKey(formDialog, button);
         });
 
-        it('should check turn off vertical paddings', () => {
-            click(formDialog + checkboxes, 1);
-            openDialog(formDialog);
-            expect(getElementClass(dialogBody)).not.toContain('no-vertical-padding');
+        it('should check turn off vertical paddings', async () => {
+            await click(formDialog + checkboxes, 1);
+            await openDialog(formDialog);
+            await expect(await getElementClass(dialogBody)).not.toContain('no-vertical-padding');
         });
     });
 
@@ -568,17 +586,17 @@ describe('dialog test suite', () => {
         const complexExample = 12;
         const stackedExample = 13;
 
-        beforeEach(() => {
-            refreshPage();
+        beforeEach(async () => {
+            await refreshPage();
         }, 1);
 
-        it('should check examples visual regression', () => {
-            dialogPage.saveExampleBaselineScreenshot();
-            expect(dialogPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await dialogPage.saveExampleBaselineScreenshot();
+            await expect(await dialogPage.compareWithBaseline()).toBeLessThan(5);
         });
 
-        it('should check each dialog', () => {
-            const dialogCount = getElementArrayLength(dialogExamples + button);
+        it('should check each dialog', async () => {
+            const dialogCount = await getElementArrayLength(dialogExamples + button);
 
             for (let i = 0; i < dialogCount; i++) {
                 if (i === 3 || i === 4 || i === 5 || i === 6) {
@@ -586,171 +604,176 @@ describe('dialog test suite', () => {
                     continue;
                 }
                 if (i === complexExample) {
-                    openDialog(dialogExamples, i);
-                    waitForNotDisplayed(busyIndicator);
-                    waitForElDisplayed(dialogItems);
-                    saveElementScreenshot(
+                    await openDialog(dialogExamples, i);
+                    await waitForNotDisplayed(busyIndicator);
+                    await waitForElDisplayed(dialogItems);
+                    await saveElementScreenshot(
                         dialogContainer2,
-                        `dialog-${i}-${getImageTagBrowserPlatform()}-`,
-                        dialogPage.getScreenshotFolder()
+                        `dialog-${i}-${await getImageTagBrowserPlatform()}-`,
+                        await dialogPage.getScreenshotFolder()
                     );
-                    expect(
-                        checkElementScreenshot(
+                    await expect(
+                        await checkElementScreenshot(
                             dialogContainer2,
-                            `dialog-${i}-${getImageTagBrowserPlatform()}-`,
-                            dialogPage.getScreenshotFolder()
+                            `dialog-${i}-${await getImageTagBrowserPlatform()}-`,
+                            await dialogPage.getScreenshotFolder()
                         )
                     ).toBeLessThan(5, `dialog ${i} screenshot doesn't match baseline`);
-                    click(dialog + button, 2);
+                    await click(dialog + button, 2);
                     continue;
                 }
                 if (i === stackedExample) {
-                    openDialog(dialogExamples, i);
-                    saveElementScreenshot(
+                    await openDialog(dialogExamples, i);
+                    await saveElementScreenshot(
                         dialogContainer2,
-                        `dialog-${i}a-${getImageTagBrowserPlatform()}-`,
-                        dialogPage.getScreenshotFolder()
+                        `dialog-${i}a-${await getImageTagBrowserPlatform()}-`,
+                        await dialogPage.getScreenshotFolder()
                     );
-                    expect(
-                        checkElementScreenshot(
+                    await expect(
+                        await checkElementScreenshot(
                             dialogContainer2,
-                            `dialog-${i}a-${getImageTagBrowserPlatform()}-`,
-                            dialogPage.getScreenshotFolder()
+                            `dialog-${i}a-${await getImageTagBrowserPlatform()}-`,
+                            await dialogPage.getScreenshotFolder()
                         )
                     ).toBeLessThan(5, `dialog ${i}a screenshot doesn't match baseline`);
-                    click(dialog + button, 1);
-                    waitForElDisplayed(dialog, 1);
-                    saveElementScreenshot(
+                    await click(dialog + button, 1);
+                    await waitForElDisplayed(dialog, 1);
+                    await saveElementScreenshot(
                         dialogContainer2,
-                        `dialog-${i}b-${getImageTagBrowserPlatform()}-`,
-                        dialogPage.getScreenshotFolder(),
+                        `dialog-${i}b-${await getImageTagBrowserPlatform()}-`,
+                        await dialogPage.getScreenshotFolder(),
                         1
                     );
-                    expect(
-                        checkElementScreenshot(
+                    await expect(
+                        await checkElementScreenshot(
                             dialogContainer2,
-                            `dialog-${i}b-${getImageTagBrowserPlatform()}-`,
-                            dialogPage.getScreenshotFolder(),
+                            `dialog-${i}b-${await getImageTagBrowserPlatform()}-`,
+                            await dialogPage.getScreenshotFolder(),
                             1
                         )
                     ).toBeLessThan(5, `dialog ${i}b screenshot doesn't match baseline`);
-                    click(dialog + button, 3);
-                    closeDialog();
+                    await click(dialog + button, 3);
+                    await closeDialog();
                     continue;
                 }
-                openDialog(dialogExamples, i);
-                saveElementScreenshot(
+                await openDialog(dialogExamples, i);
+                await saveElementScreenshot(
                     dialogContainer2,
-                    `dialog-${i}-${getImageTagBrowserPlatform()}-`,
-                    dialogPage.getScreenshotFolder()
+                    `dialog-${i}-${await getImageTagBrowserPlatform()}-`,
+                    await dialogPage.getScreenshotFolder()
                 );
-                expect(
-                    checkElementScreenshot(
+                await expect(
+                    await checkElementScreenshot(
                         dialogContainer2,
-                        `dialog-${i}-${getImageTagBrowserPlatform()}-`,
-                        dialogPage.getScreenshotFolder()
+                        `dialog-${i}-${await getImageTagBrowserPlatform()}-`,
+                        await dialogPage.getScreenshotFolder()
                     )
                 ).toBeLessThan(5, `dialog ${i} screenshot doesn't match baseline`);
-                if (doesItExist(dialog) === false) {
+                if ((await doesItExist(dialog)) === false) {
                     continue;
                 }
-                click(dialog + button);
+                await click(dialog + button);
             }
         });
 
-        it('should check custom backdrop example', () => {
-            openDialog(customDialog);
+        it('should check custom backdrop example', async () => {
+            await openDialog(customDialog);
 
-            saveElementScreenshot(
+            await saveElementScreenshot(
                 dialog,
-                `dialog-with-custom-backdrop-${getImageTagBrowserPlatform()}-`,
-                dialogPage.getScreenshotFolder()
+                `dialog-with-custom-backdrop-${await getImageTagBrowserPlatform()}-`,
+                await dialogPage.getScreenshotFolder()
             );
-            expect(
-                checkElementScreenshot(
+            await expect(
+                await checkElementScreenshot(
                     dialog,
-                    `dialog-dialog-with-custom-backdrop-${getImageTagBrowserPlatform()}-`,
-                    dialogPage.getScreenshotFolder()
+                    `dialog-dialog-with-custom-backdrop-${await getImageTagBrowserPlatform()}-`,
+                    await dialogPage.getScreenshotFolder()
                 )
             ).toBeLessThan(25, `dialog with custom backdrop screenshot doesn't match baseline`);
 
-            closeDialog();
+            await closeDialog();
         });
 
-        it('should check playground dialog hasBackdrop option', () => {
-            openDialog(playgroundDialog);
+        it('should check playground dialog hasBackdrop option', async () => {
+            await openDialog(playgroundDialog);
 
-            saveElementScreenshot(
+            await saveElementScreenshot(
                 dialog,
-                `dialog-with-hasBackdrop-${getImageTagBrowserPlatform()}-`,
-                dialogPage.getScreenshotFolder()
+                `dialog-with-hasBackdrop-${await getImageTagBrowserPlatform()}-`,
+                await dialogPage.getScreenshotFolder()
             );
-            expect(
-                checkElementScreenshot(
+            await expect(
+                await checkElementScreenshot(
                     dialog,
-                    `dialog-dialog-with-hasBackdrop-${getImageTagBrowserPlatform()}-`,
-                    dialogPage.getScreenshotFolder()
+                    `dialog-dialog-with-hasBackdrop-${await getImageTagBrowserPlatform()}-`,
+                    await dialogPage.getScreenshotFolder()
                 )
             ).toBeLessThan(25, `dialog with hasBackdrop screenshot doesn't match baseline`);
 
-            closeDialog();
+            await closeDialog();
         });
     });
 
-    function checkDialogDismissals(
+    async function checkDialogDismissals(
         exampleSelector: string,
         dialogSelector: string,
         dialogButtonIndex: number = 0,
         expectation: string,
         selectorIndex: number = 0
-    ): void {
-        scrollIntoView(exampleSelector, selectorIndex);
-        click(exampleSelector + dialogSelector, selectorIndex);
-        waitForElDisplayed(dialog);
-        click(dialog + button, dialogButtonIndex);
+    ): Promise<void> {
+        await scrollIntoView(exampleSelector, selectorIndex);
+        await click(exampleSelector + dialogSelector, selectorIndex);
+        await waitForElDisplayed(dialog);
+        await click(dialog + button, dialogButtonIndex);
 
-        expect(getText(exampleSelector + dialogOutput)).toContain(expectation);
+        await expect(await getText(exampleSelector + dialogOutput)).toContain(expectation);
     }
 
-    function checkCloseDialogWithEscapeKey(
+    async function checkCloseDialogWithEscapeKey(
         exampleSelector: string,
         dialogSelector: string,
         selectorIndex: number = 0
-    ): void {
-        scrollIntoView(exampleSelector, selectorIndex);
-        click(exampleSelector + dialogSelector, selectorIndex);
-        waitForElDisplayed(dialog);
-        sendKeys('Escape');
+    ): Promise<void> {
+        await scrollIntoView(exampleSelector, selectorIndex);
+        await click(exampleSelector + dialogSelector, selectorIndex);
+        await waitForElDisplayed(dialog);
+        await sendKeys('Escape');
 
-        expect(getText(exampleSelector + dialogOutput)).toContain(escapeStatus);
+        await expect(await getText(exampleSelector + dialogOutput)).toContain(escapeStatus);
     }
 
-    function openDialog(dialogSelector: string, index: number = 0): void {
-        scrollIntoView(dialogSelector + button, index);
-        click(dialogSelector + button, index);
-        waitForElDisplayed(dialog);
+    async function openDialog(dialogSelector: string, index: number = 0): Promise<void> {
+        await scrollIntoView(dialogSelector + button, index);
+        await click(dialogSelector + button, index);
+        await waitForElDisplayed(dialog);
     }
 
-    function clearAndCloseDialog(): void {
+    async function clearAndCloseDialog(): Promise<void> {
         // clicks on clear btn
-        click(dialog + button);
+        await click(dialog + button);
         // clicks to close dialog
-        click(dialog + button, 2);
+        await click(dialog + button, 2);
     }
 
-    function closeDialog(): void {
-        click(dialog + button);
+    async function closeDialog(): Promise<void> {
+        await click(dialog + button);
     }
 
-    function checkResizingDialog(container: string = dialogContainer2): void {
-        const elementStartWidth = getElementSize(container, 0, 'width');
-        const elementStartHeight = getElementSize(container, 0, 'height');
-        const handleLocationX = Math.floor(getElementLocation(resizeHandle, 0, 'x'));
-        const handleLocationY = Math.floor(getElementLocation(resizeHandle, 0, 'y'));
+    async function checkResizingDialog(container: string = dialogContainer2): Promise<void> {
+        const elementStartWidth = await (await getElementSize(container, 0)).width;
+        const elementStartHeight = await (await getElementSize(container, 0)).height;
+        const handleLocationX = Math.floor(await getElementLocation(resizeHandle, 0, 'x'));
+        const handleLocationY = Math.floor(await getElementLocation(resizeHandle, 0, 'y'));
 
-        clickAndDragElement(handleLocationX + 1, handleLocationY + 1, handleLocationX + 110, handleLocationY + 100);
+        await clickAndDragElement(
+            handleLocationX + 1,
+            handleLocationY + 1,
+            handleLocationX + 110,
+            handleLocationY + 100
+        );
 
-        expect(getElementSize(container, 0, 'width')).not.toBe(elementStartWidth);
-        expect(getElementSize(container, 0, 'height')).not.toBe(elementStartHeight);
+        await expect(await (await getElementSize(container, 0)).width).not.toBe(elementStartWidth);
+        await expect(await (await getElementSize(container, 0)).height).not.toBe(elementStartHeight);
     }
 });

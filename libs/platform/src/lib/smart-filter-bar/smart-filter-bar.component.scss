@@ -41,11 +41,9 @@ $fd-block: fdp-smart-filter-bar;
     .fd-container.fd-form-layout-grid-container {
         padding: 0;
 
-        .fd-row {
-            .fd-col__form-group {
-                padding-left: 0.25rem;
-                padding-right: 0.25rem;
-            }
+        .fd-row .fd-form-group {
+            padding-left: 0.25rem !important;
+            padding-right: 0.25rem !important;
         }
     }
 
@@ -65,8 +63,8 @@ $fd-block: fdp-smart-filter-bar;
         }
 
         .fd-container.fd-form-layout-grid-container,
-        .fd-container.fd-form-layout-grid-container .fd-row .fd-col__form-group {
-            padding: 0;
+        .fd-container.fd-form-layout-grid-container .fd-row .fd-form-group {
+            padding: 0 !important;
         }
     }
 }

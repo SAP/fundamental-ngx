@@ -91,409 +91,424 @@ describe('Popover test suite', () => {
         scrollCheckbox
     } = popoverPage;
 
-    beforeAll(() => {
-        popoverPage.open();
+    beforeAll(async () => {
+        await popoverPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(popoverPage.root);
-        waitForElDisplayed(popoverPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(popoverPage.root);
+        await waitForElDisplayed(popoverPage.title);
     }, 1);
 
     describe('Check Basic Popovers', () => {
-        it('should check that avatars have popovers', () => {
-            scrollIntoView(avatar);
-            const avatarLength = getElementArrayLength(avatar);
+        it('should check that avatars have popovers', async () => {
+            await scrollIntoView(avatar);
+            const avatarLength = await getElementArrayLength(avatar);
             for (let i = 0; i < avatarLength - 1; i++) {
-                click(avatar, i);
-                expect(isElementDisplayed(popover, 1)).toBe(true, `popover not displayed`);
-                const optionLength = getElementArrayLength(option);
+                await click(avatar, i);
+                await expect(await isElementDisplayed(popover, 1)).toBe(true, `popover not displayed`);
+                const optionLength = await getElementArrayLength(option);
                 for (let j = 3; j < optionLength; j++) {
-                    expect(isElementClickable(option, j)).toBe(true, `option with index ${j} not clickable`);
+                    await expect(await isElementClickable(option, j)).toBe(
+                        true,
+                        `option with index ${j} not clickable`
+                    );
                 }
             }
         });
 
-        it('should check that icon has popover and all options are clickable', () => {
-            scrollIntoView(icon, 1);
-            click(icon, 1);
-            const iconLength = getElementArrayLength(option);
+        it('should check that icon has popover and all options are clickable', async () => {
+            await scrollIntoView(icon, 1);
+            await click(icon, 1);
+            const iconLength = await getElementArrayLength(option);
             for (let i = 3; i < iconLength; i++) {
-                expect(isElementClickable(option, i)).toBe(true, `option with index ${i} not clickable`);
+                await expect(await isElementClickable(option, i)).toBe(true, `option with index ${i} not clickable`);
             }
         });
 
-        it('should check that icon money has popover and all options and arrow button are clickable', () => {
-            scrollIntoView(iconMoney);
-            click(iconMoney);
-            expect(isElementDisplayed(popover, 1)).toBe(true, `popover not displayed`);
-            expect(isElementClickable(standardMoneyButton)).toBe(true, `button not clickable`);
-            expect(getText(barElement, 1)).toBe(headerTestText);
-            const iconMoneyLength = getElementArrayLength(option);
+        it('should check that icon money has popover and all options and arrow button are clickable', async () => {
+            await scrollIntoView(iconMoney);
+            await click(iconMoney);
+            await expect(await isElementDisplayed(popover, 1)).toBe(true, `popover not displayed`);
+            await expect(await isElementClickable(standardMoneyButton)).toBe(true, `button not clickable`);
+            await expect(await getText(barElement, 1)).toBe(headerTestText);
+            const iconMoneyLength = await getElementArrayLength(option);
             for (let i = 3; i < iconMoneyLength; i++) {
-                expect(isElementClickable(option, i)).toBe(true, `option with index ${i} not clickable`);
+                await expect(await isElementClickable(option, i)).toBe(true, `option with index ${i} not clickable`);
             }
         });
 
-        it('should check that basic popover buttons have popovers and all options are clickable', () => {
-            scrollIntoView(basicPopoverButton);
-            const buttonsLength = getElementArrayLength(basicPopoverButton);
+        it('should check that basic popover buttons have popovers and all options are clickable', async () => {
+            await scrollIntoView(basicPopoverButton);
+            const buttonsLength = await getElementArrayLength(basicPopoverButton);
             for (let i = 0; i < buttonsLength; i++) {
-                click(basicPopoverButton, i);
-                expect(isElementDisplayed(popover, 1)).toBe(true, `popover not displayed`);
-                const optionLength = getElementArrayLength(option);
+                await click(basicPopoverButton, i);
+                await expect(await isElementDisplayed(popover, 1)).toBe(true, `popover not displayed`);
+                const optionLength = await getElementArrayLength(option);
                 for (let j = 3; j < optionLength; j++) {
-                    expect(isElementClickable(option, j)).toBe(true, `option with index ${j} not clickable`);
+                    await expect(await isElementClickable(option, j)).toBe(
+                        true,
+                        `option with index ${j} not clickable`
+                    );
                 }
             }
         });
 
-        it('should check that button popover have header, subheader and buttons are clickable', () => {
-            scrollIntoView(basicPopoverButton);
-            click(basicPopoverButton);
-            expect(getText(barElement).trim()).toBe(cozyHeaderTestText);
-            expect(getText(barElement, 1).trim()).toBe(subheaderTestText);
+        it('should check that button popover have header, subheader and buttons are clickable', async () => {
+            await scrollIntoView(basicPopoverButton);
+            await click(basicPopoverButton);
+            await expect((await getText(barElement)).trim()).toBe(cozyHeaderTestText);
+            await expect((await getText(barElement, 1)).trim()).toBe(subheaderTestText);
 
-            expect(isElementClickable(barElement, 2)).toBe(true, `save button not clickable`);
-            expect(isElementClickable(barElement, 3)).toBe(true, `cancel button not clickable`);
+            await expect(await isElementClickable(barElement, 2)).toBe(true, `save button not clickable`);
+            await expect(await isElementClickable(barElement, 3)).toBe(true, `cancel button not clickable`);
         });
     });
 
     describe('Check Simple Popover', () => {
-        it('check that after clicking the button a message with text is displayed', () => {
-            scrollIntoView(simplePopoverButton);
-            click(simplePopoverButton);
-            expect(isElementDisplayed(popoverMessage)).toBe(true, `message not displayed`);
-            expect(getText(popoverMessage)).toBe(popoverTestText);
+        it('check that after clicking the button a message with text is displayed', async () => {
+            await scrollIntoView(simplePopoverButton);
+            await click(simplePopoverButton);
+            await expect(await isElementDisplayed(popoverMessage)).toBe(true, `message not displayed`);
+            await expect(await getText(popoverMessage)).toBe(popoverTestText);
         });
     });
 
     describe('Check Popover with Header and Footer', () => {
-        it('should check that buttons have popovers and all options are clickable', () => {
-            scrollIntoView(headerPopoverButton);
-            const buttonLength = getElementArrayLength(headerPopoverButton);
+        it('should check that buttons have popovers and all options are clickable', async () => {
+            await scrollIntoView(headerPopoverButton);
+            const buttonLength = await getElementArrayLength(headerPopoverButton);
             for (let i = 0; i < buttonLength; i++) {
-                click(headerPopoverButton, i);
-                const optionLength = getElementArrayLength(option);
+                await click(headerPopoverButton, i);
+                const optionLength = await getElementArrayLength(option);
                 for (let j = 3; j < optionLength; j++) {
-                    expect(isElementClickable(option, j)).toBe(true, `option with index ${j} not clickable`);
+                    await expect(await isElementClickable(option, j)).toBe(
+                        true,
+                        `option with index ${j} not clickable`
+                    );
                 }
             }
         });
 
-        it('should check that button "with header" has header', () => {
-            scrollIntoView(headerPopoverButton);
-            click(headerPopoverButton, 1);
-            expect(getText(barElement)).toBe(cozyHeaderTestText);
+        it('should check that button "with header" has header', async () => {
+            await scrollIntoView(headerPopoverButton);
+            await click(headerPopoverButton, 1);
+            await expect(await getText(barElement)).toBe(cozyHeaderTestText);
         });
 
-        it('should check that button "with header and footer" has header and all buttons are clickable', () => {
-            scrollIntoView(headerPopoverButton);
-            click(headerPopoverButton, 2);
-            expect(getText(barElement)).toBe(cozyHeaderTestText);
+        it('should check that button "with header and footer" has header and all buttons are clickable', async () => {
+            await scrollIntoView(headerPopoverButton);
+            await click(headerPopoverButton, 2);
+            await expect(await getText(barElement)).toBe(cozyHeaderTestText);
 
-            expect(isElementClickable(barElement, 1)).toBe(true, `save button not clickable`);
-            expect(isElementClickable(barElement, 2)).toBe(true, `cancel button not clickable`);
+            await expect(await isElementClickable(barElement, 1)).toBe(true, `save button not clickable`);
+            await expect(await isElementClickable(barElement, 2)).toBe(true, `cancel button not clickable`);
         });
 
-        it('should check that button "with header, subHeader and footer" has header, subheader and all buttons are clickable', () => {
-            scrollIntoView(headerPopoverButton);
-            click(headerPopoverButton, 3);
-            expect(getText(barElement)).toBe(cozyHeaderTestText);
-            expect(getText(barElement, 1)).toBe(cozySubheaderTestText);
+        it('should check that button "with header, subHeader and footer" has header, subheader and all buttons are clickable', async () => {
+            await scrollIntoView(headerPopoverButton);
+            await click(headerPopoverButton, 3);
+            await expect(await getText(barElement)).toBe(cozyHeaderTestText);
+            await expect(await getText(barElement, 1)).toBe(cozySubheaderTestText);
 
-            expect(isElementClickable(barElement, 2)).toBe(true, `save button not clickable`);
-            expect(isElementClickable(barElement, 3)).toBe(true, `cancel button not clickable`);
+            await expect(await isElementClickable(barElement, 2)).toBe(true, `save button not clickable`);
+            await expect(await isElementClickable(barElement, 3)).toBe(true, `cancel button not clickable`);
         });
     });
 
     describe('Check Popover Placement', () => {
-        it('should check that arrow buttons have popovers and all options are clickable', () => {
-            scrollIntoView(placementPopoverButton);
-            const buttonsLength = getElementArrayLength(placementPopoverButton);
+        it('should check that arrow buttons have popovers and all options are clickable', async () => {
+            await scrollIntoView(placementPopoverButton);
+            const buttonsLength = await getElementArrayLength(placementPopoverButton);
             for (let i = 0; i < buttonsLength; i++) {
-                scrollIntoView(placementPopoverButton, i);
-                click(placementPopoverButton, i);
-                expect(isElementDisplayed(popover, 1)).toBe(true, `popover not displayed`);
-                const optionLength = getElementArrayLength(option);
+                await scrollIntoView(placementPopoverButton, i);
+                await click(placementPopoverButton, i);
+                await expect(await isElementDisplayed(popover, 1)).toBe(true, `popover not displayed`);
+                const optionLength = await getElementArrayLength(option);
                 for (let j = 3; j < optionLength; j++) {
-                    expect(isElementClickable(option, j)).toBe(true, `option with index ${j} not clickable`);
+                    await expect(await isElementClickable(option, j)).toBe(
+                        true,
+                        `option with index ${j} not clickable`
+                    );
                 }
             }
         });
     });
 
     describe('Check Programmatic Control', () => {
-        it('should check that avatar has popover', () => {
-            scrollIntoView(programmaticAvatar);
-            expect(isElementDisplayed(avatar)).toBe(true, `avatar not displayed`);
-            click(programmaticControlButton);
-            expect(isElementDisplayed(popover, 1)).toBe(true, `popover not displayed`);
-            click(programmaticControlButton, 1);
+        it('should check that avatar has popover', async () => {
+            await scrollIntoView(programmaticAvatar);
+            await expect(await isElementDisplayed(avatar)).toBe(true, `avatar not displayed`);
+            await click(programmaticControlButton);
+            await expect(await isElementDisplayed(popover, 1)).toBe(true, `popover not displayed`);
+            await click(programmaticControlButton, 1);
         });
     });
 
     describe('Check Popovers in Dialogs', () => {
-        it('should check popovers in dialogs example', () => {
-            scrollIntoView(popoverDialogsButton);
-            click(popoverDialogsButton);
-            click(multiInputButton);
-            const optionLength = getElementArrayLength(multiInputOption);
+        it('should check popovers in dialogs example', async () => {
+            await scrollIntoView(popoverDialogsButton);
+            await click(popoverDialogsButton);
+            await click(multiInputButton);
+            const optionLength = await getElementArrayLength(multiInputOption);
             for (let i = 0; i < optionLength; i++) {
-                click(multiInputOption, i);
+                await click(multiInputOption, i);
 
                 if (i !== optionLength - 1) {
-                    click(multiInputButton);
+                    await click(multiInputButton);
                 }
             }
-            const spanLength = getElementArrayLength(multiInputSpan);
+            const spanLength = await getElementArrayLength(multiInputSpan);
             for (let i = 0; i < spanLength; i++) {
-                expect(getText(multiInputSpan, i)).toBe(fruitsTestArr[i]);
+                await expect(await getText(multiInputSpan, i)).toBe(fruitsTestArr[i]);
             }
         });
 
-        it('should check dialog have header and paragraph', () => {
-            scrollIntoView(popoverDialogsButton);
-            click(popoverDialogsButton);
-            expect(getText(popoverDialogsHeader)).toBe(popoverExampleTestText);
-            expect(getText(popoverDialogParagraph)).toBe(popoverParagraphTestText);
+        it('should check dialog have header and paragraph', async () => {
+            await scrollIntoView(popoverDialogsButton);
+            await click(popoverDialogsButton);
+            await expect(await getText(popoverDialogsHeader)).toBe(popoverExampleTestText);
+            await expect(await getText(popoverDialogParagraph)).toBe(popoverParagraphTestText);
         });
 
-        it('should check that after clicking button "Click me!" message appears', () => {
-            scrollIntoView(popoverDialogsButton);
-            click(popoverDialogsButton);
-            click(clickMeButton);
-            expect(isElementDisplayed(popoverDialogMessage)).toBe(true, 'message not displayed');
-            expect(getText(popoverDialogMessage)).toBe(buttonsPopoverTestText);
-            click(clickMeButton);
-            expect(doesItExist(popoverDialogMessage)).toBe(false, 'message still displayed');
+        it('should check that after clicking button "Click me!" message appears', async () => {
+            await scrollIntoView(popoverDialogsButton);
+            await click(popoverDialogsButton);
+            await click(clickMeButton);
+            await expect(await isElementDisplayed(popoverDialogMessage)).toBe(true, 'message not displayed');
+            await expect(await getText(popoverDialogMessage)).toBe(buttonsPopoverTestText);
+            await click(clickMeButton);
+            await expect(await doesItExist(popoverDialogMessage)).toBe(false, 'message still displayed');
         });
 
-        it('should check dialog placeholder', () => {
-            scrollIntoView(popoverDialogsButton);
-            click(popoverDialogsButton);
-            expect(getElementPlaceholder(dialogInput)).toBe(placeholderTestText);
+        it('should check dialog placeholder', async () => {
+            await scrollIntoView(popoverDialogsButton);
+            await click(popoverDialogsButton);
+            await expect(await getElementPlaceholder(dialogInput)).toBe(placeholderTestText);
         });
     });
 
     describe('Check Fill Control Width', () => {
-        it('should check fill control width example', () => {
+        it('should check fill control width example', async () => {
             // skipped due to hoverElement does not work in Safari
-            if (browserIsSafari()) {
+            if (await browserIsSafari()) {
                 return;
             }
-            scrollIntoView(hoverElement);
-            mouseHoverElement(hoverElement);
-            expect(isElementDisplayed(popoverNoArrow)).toBe(true, 'popover not displayed');
-            expect(getText(popoverNoArrow + paragraph)).toBe(popoverTestText2);
-            expect(getText(popoverNoArrow + paragraph, 1)).toBe(popoverTestText3);
+            await scrollIntoView(hoverElement);
+            await mouseHoverElement(hoverElement);
+            await expect(await isElementDisplayed(popoverNoArrow)).toBe(true, 'popover not displayed');
+            await expect(await getText(popoverNoArrow + paragraph)).toBe(popoverTestText2);
+            await expect(await getText(popoverNoArrow + paragraph, 1)).toBe(popoverTestText3);
 
-            mouseHoverElement(popoverNoArrow);
-            expect(doesItExist(popoverNoArrow)).toBe(false, 'popover still displayed');
+            await mouseHoverElement(popoverNoArrow);
+            await expect(await doesItExist(popoverNoArrow)).toBe(false, 'popover still displayed');
         });
     });
 
     describe('Check Different Popover Container', () => {
-        it('should check different popover container example', () => {
-            scrollIntoView(triggerButtonContainer);
-            click(triggerButtonContainer);
-            expect(isElementDisplayed(popoverNoArrow)).toBe(true, 'popover not displayed');
+        it('should check different popover container example', async () => {
+            await scrollIntoView(triggerButtonContainer);
+            await click(triggerButtonContainer);
+            await expect(await isElementDisplayed(popoverNoArrow)).toBe(true, 'popover not displayed');
 
-            click(triggerButtonContainer);
-            expect(doesItExist(popoverNoArrow)).toBe(false, 'popover still displayed');
+            await click(triggerButtonContainer);
+            await expect(await doesItExist(popoverNoArrow)).toBe(false, 'popover still displayed');
         });
 
-        it('should check that after clicking trigger button appears message with text and container have some text', () => {
-            scrollIntoView(triggerButtonContainer);
-            click(triggerButtonContainer);
-            expect(getText(popoverMessage)).toBe(triggerTestText);
-            expect(getText(popoverContainer)).toBe(containerTestText);
+        it('should check that after clicking trigger button appears message with text and container have some text', async () => {
+            await scrollIntoView(triggerButtonContainer);
+            await click(triggerButtonContainer);
+            await expect(await getText(popoverMessage)).toBe(triggerTestText);
+            await expect(await getText(popoverContainer)).toBe(containerTestText);
         });
     });
 
     describe('Check Popover Focus Trap', () => {
-        it('should check that after clicking trigger button has popover and all options are clickable', () => {
-            scrollIntoView(triggerButton2);
-            click(triggerButton2);
-            const buttonLength = getElementArrayLength(option);
+        it('should check that after clicking trigger button has popover and all options are clickable', async () => {
+            await scrollIntoView(triggerButton2);
+            await click(triggerButton2);
+            const buttonLength = await getElementArrayLength(option);
             for (let i = 3; i < buttonLength; i++) {
-                expect(isElementClickable(option, i)).toBe(true, `option with index ${i} not clickable`);
+                await expect(await isElementClickable(option, i)).toBe(true, `option with index ${i} not clickable`);
             }
         });
 
-        it('should check header and clickable buttons', () => {
-            scrollIntoView(triggerButton2);
-            click(triggerButton2);
-            const buttonsLength = getElementArrayLength(barElement);
+        it('should check header and clickable buttons', async () => {
+            await scrollIntoView(triggerButton2);
+            await click(triggerButton2);
+            const buttonsLength = await getElementArrayLength(barElement);
             for (let i = 0; i < buttonsLength; i++) {
                 if (i === 1) {
                     continue;
                 }
-                expect(isElementClickable(barElement)).toBe(true, `button with index ${i} not clickable`);
+                await expect(await isElementClickable(barElement)).toBe(true, `button with index ${i} not clickable`);
             }
-            expect(getText(barElement, 1)).toBe(headerTestText);
+            await expect(await getText(barElement, 1)).toBe(headerTestText);
         });
     });
 
     describe('Check Popover Scroll Example', () => {
-        it('should check that after clicking messages appears', () => {
-            scrollIntoView(scrollButton);
-            const buttonLength = getElementArrayLength(scrollButton);
+        it('should check that after clicking messages appears', async () => {
+            await scrollIntoView(scrollButton);
+            const buttonLength = await getElementArrayLength(scrollButton);
             for (let i = 0; i < buttonLength; i++) {
-                scrollIntoView(scrollButton, i);
-                click(scrollButton, i);
-                expect(isElementDisplayed(scrollMessage)).toBe(true, 'message not displayed');
-                expect(getText(scrollMessage)).toBe(messageTestText);
-                click(scrollButton, i);
+                await scrollIntoView(scrollButton, i);
+                await click(scrollButton, i);
+                await expect(await isElementDisplayed(scrollMessage)).toBe(true, 'message not displayed');
+                await expect(await getText(scrollMessage)).toBe(messageTestText);
+                await click(scrollButton, i);
             }
         });
 
-        it('should check that popover message still present after scrolling', () => {
-            click(scrollButton);
-            scrollIntoView(scrollButton, 1);
-            expect(isElementDisplayed(scrollMessage)).toBe(true, 'message not displayed');
+        it('should check that popover message still present after scrolling', async () => {
+            await click(scrollButton);
+            await scrollIntoView(scrollButton, 1);
+            await expect(await isElementDisplayed(scrollMessage)).toBe(true, 'message not displayed');
         });
 
-        it('should check that popover message disappears after scrolling', () => {
-            click(scrollButton, 2);
-            scrollIntoView(scrollButton, 3);
-            scrollIntoView(scrollButton, 2);
-            expect(doesItExist(scrollMessage)).toBe(false, 'message not displayed');
+        it('should check that popover message disappears after scrolling', async () => {
+            await click(scrollButton, 2);
+            await scrollIntoView(scrollButton, 3);
+            await scrollIntoView(scrollButton, 2);
+            await expect(await doesItExist(scrollMessage)).toBe(false, 'message not displayed');
         });
 
-        it('should check that popover message disappears when you scroll away from message', () => {
+        it('should check that popover message disappears when you scroll away from message', async () => {
             // enable mode when message disappear when you scroll away
-            click(scrollCheckbox);
-            click(scrollButton, 3);
+            await click(scrollCheckbox);
+            await click(scrollButton, 3);
             // scroll to element near the message(in the visible zone)
-            scrollIntoView(scrollButton, 1);
-            scrollIntoView(scrollButton, 3);
-            expect(isElementDisplayed(scrollMessage)).toBe(true, 'message is not displayed');
+            await scrollIntoView(scrollButton, 1);
+            await scrollIntoView(scrollButton, 3);
+            await expect(await isElementDisplayed(scrollMessage)).toBe(true, 'message is not displayed');
             // scroll away
-            scrollIntoView(avatar);
-            scrollIntoView(scrollButton, 3);
-            expect(doesItExist(scrollMessage)).toBe(false);
+            await scrollIntoView(avatar);
+            await scrollIntoView(scrollButton, 3);
+            await expect(await doesItExist(scrollMessage)).toBe(false);
 
             // enable mode when message still present anyway
-            click(scrollCheckbox);
-            click(scrollButton, 3);
-            scrollIntoView(avatar);
-            scrollIntoView(scrollButton, 3);
-            expect(isElementDisplayed(scrollMessage)).toBe(true, 'message is not displayed');
+            await click(scrollCheckbox);
+            await click(scrollButton, 3);
+            await scrollIntoView(avatar);
+            await scrollIntoView(scrollButton, 3);
+            await expect(await isElementDisplayed(scrollMessage)).toBe(true, 'message is not displayed');
         });
     });
 
     describe('Check Dynamic Body Height', () => {
-        it('should check that popover has clickable button', () => {
-            scrollIntoView(plusButton);
-            click(plusButton);
-            click(dynamicButton);
+        it('should check that popover has clickable button', async () => {
+            await scrollIntoView(plusButton);
+            await click(plusButton);
+            await click(dynamicButton);
         });
     });
 
     describe('Check Dropdown Popover', () => {
-        it('should check disable button', () => {
-            scrollIntoView(dropdownButton);
-            expect(getElementClass(dropdownButton, 1)).toContain('is-disabled');
+        it('should check disable button', async () => {
+            await scrollIntoView(dropdownButton);
+            await expect(await getElementClass(dropdownButton, 1)).toContain('is-disabled');
         });
 
-        it('should check that buttons have dropdown and options', () => {
-            scrollIntoView(dropdownButton);
-            const buttonLength = getElementArrayLength(dropdownButton);
+        it('should check that buttons have dropdown and options', async () => {
+            await scrollIntoView(dropdownButton);
+            const buttonLength = await getElementArrayLength(dropdownButton);
             for (let i = 0; i < buttonLength; i++) {
                 if (i === 1) {
                     continue;
                 }
-                click(dropdownButton, i);
-                expect(isElementDisplayed(popover, 1)).toBe(true, 'popover not displayed');
-                const optionsLength = getElementArrayLength(dropdownOption);
+                await click(dropdownButton, i);
+                await expect(await isElementDisplayed(popover, 1)).toBe(true, 'popover not displayed');
+                const optionsLength = await getElementArrayLength(dropdownOption);
                 for (let j = 0; j < optionsLength; j++) {
-                    expect(isElementClickable(dropdownOption, i)).toBe(true, `option with index ${j} not clickable`);
+                    await expect(await isElementClickable(dropdownOption, i)).toBe(
+                        true,
+                        `option with index ${j} not clickable`
+                    );
                 }
             }
         });
     });
 
     describe('Check Popover CDK Placement', () => {
-        it('should check that arrow button is clickable and it has popover and clickable options', () => {
-            scrollIntoView(cdkButton);
-            click(cdkButton, 5);
-            click(cdkButton, 9);
-            scrollIntoView(cdkButton, 12);
-            expect(isElementClickable(cdkButton, 12)).toBe(true, 'arrow button not clickable');
-            expect(isElementDisplayed(popover)).toBe(true, 'popover not displayed');
-            const optionsLength = getElementArrayLength(option);
+        it('should check that arrow button is clickable and it has popover and clickable options', async () => {
+            await scrollIntoView(cdkButton);
+            await click(cdkButton, 5);
+            await click(cdkButton, 9);
+            await scrollIntoView(cdkButton, 12);
+            await expect(await isElementClickable(cdkButton, 12)).toBe(true, 'arrow button not clickable');
+            await expect(await isElementDisplayed(popover)).toBe(true, 'popover not displayed');
+            const optionsLength = await getElementArrayLength(option);
             for (let i = 0; i < optionsLength; i++) {
-                expect(isElementClickable(option, i)).toBe(true, `option with index ${i} not clickable`);
+                await expect(await isElementClickable(option, i)).toBe(true, `option with index ${i} not clickable`);
             }
         });
 
-        it('should check that popover can move around the button', () => {
-            scrollIntoView(cdkButton);
+        it('should check that popover can move around the button', async () => {
+            await scrollIntoView(cdkButton);
             // Origin X
-            click(startButton);
-            expect(getElementClass(startButton)).toContain('toggled');
-            click(centerButton);
-            expect(getElementClass(centerButton)).toContain('toggled');
-            click(endButton);
-            expect(getElementClass(endButton)).toContain('toggled');
+            await click(startButton);
+            await expect(await getElementClass(startButton)).toContain('toggled');
+            await click(centerButton);
+            await expect(await getElementClass(centerButton)).toContain('toggled');
+            await click(endButton);
+            await expect(await getElementClass(endButton)).toContain('toggled');
             // Origin Y
-            click(bottomButton);
-            expect(getElementClass(bottomButton)).toContain('toggled');
-            click(centerButton, 1);
-            expect(getElementClass(centerButton, 1)).toContain('toggled');
-            click(topButton);
-            expect(getElementClass(topButton)).toContain('toggled');
+            await click(bottomButton);
+            await expect(await getElementClass(bottomButton)).toContain('toggled');
+            await click(centerButton, 1);
+            await expect(await getElementClass(centerButton, 1)).toContain('toggled');
+            await click(topButton);
+            await expect(await getElementClass(topButton)).toContain('toggled');
             // // Overlay X
-            click(startButton, 1);
-            expect(getElementClass(startButton, 1)).toContain('toggled');
-            click(centerButton, 2);
-            expect(getElementClass(centerButton, 2)).toContain('toggled');
-            click(endButton, 1);
-            expect(getElementClass(endButton, 1)).toContain('toggled');
+            await click(startButton, 1);
+            await expect(await getElementClass(startButton, 1)).toContain('toggled');
+            await click(centerButton, 2);
+            await expect(await getElementClass(centerButton, 2)).toContain('toggled');
+            await click(endButton, 1);
+            await expect(await getElementClass(endButton, 1)).toContain('toggled');
             // // Overlay Y
-            click(bottomButton, 1);
-            expect(getElementClass(bottomButton, 1)).toContain('toggled');
-            click(centerButton, 3);
-            expect(getElementClass(centerButton, 3)).toContain('toggled');
-            click(topButton, 1);
-            expect(getElementClass(topButton, 1)).toContain('toggled');
+            await click(bottomButton, 1);
+            await expect(await getElementClass(bottomButton, 1)).toContain('toggled');
+            await click(centerButton, 3);
+            await expect(await getElementClass(centerButton, 3)).toContain('toggled');
+            await click(topButton, 1);
+            await expect(await getElementClass(topButton, 1)).toContain('toggled');
         });
     });
 
     describe('Check Responsive Popover in mobile mode Example', () => {
-        it('should check ability add and reset clicks', () => {
-            scrollIntoView(popoverMobileExample + button);
-            click(popoverMobileExample + button);
-            click(mobilePopoverButton);
-            expect(getValue(mobileInput)).toBe('1');
+        it('should check ability add and reset clicks', async () => {
+            await scrollIntoView(popoverMobileExample + button);
+            await click(popoverMobileExample + button);
+            await click(mobilePopoverButton);
+            await expect(await getValue(mobileInput)).toBe('1');
 
-            click(mobilePopoverButton, 1);
-            expect(getValue(mobileInput)).toBe('0');
+            await click(mobilePopoverButton, 1);
+            await expect(await getValue(mobileInput)).toBe('0');
         });
 
-        it('should check alert messages appears', () => {
-            scrollIntoView(popoverMobileExample + button);
-            click(popoverMobileExample + button);
-            click(mobileFooterButton);
-            expect(getAlertText()).toBe(alertText1);
-            acceptAlert();
+        it('should check alert messages appears', async () => {
+            await scrollIntoView(popoverMobileExample + button);
+            await click(popoverMobileExample + button);
+            await click(mobileFooterButton);
+            await expect(await getAlertText()).toBe(alertText1);
+            await acceptAlert();
 
-            click(mobileFooterButton, 1);
-            expect(getAlertText()).toBe(alertText2);
-            acceptAlert();
+            await click(mobileFooterButton, 1);
+            await expect(await getAlertText()).toBe(alertText2);
+            await acceptAlert();
         });
     });
 
-    it('should check orientation', () => {
-        popoverPage.checkRtlSwitch();
+    it('should check orientation', async () => {
+        await popoverPage.checkRtlSwitch();
     });
 
     xdescribe('visual regression', () => {
-        it('should check examples visual regression', () => {
-            popoverPage.saveExampleBaselineScreenshot();
-            expect(popoverPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await popoverPage.saveExampleBaselineScreenshot();
+            await expect(await popoverPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

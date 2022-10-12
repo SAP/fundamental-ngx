@@ -33,75 +33,77 @@ const {
 } = new QuickViewPo();
 
 describe('Quick view  test suite:', () => {
-    beforeAll(() => {
-        quickViewPage.open();
+    beforeAll(async () => {
+        await quickViewPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(quickViewPage.root);
-        waitForElDisplayed(quickViewPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(quickViewPage.root);
+        await waitForElDisplayed(quickViewPage.title);
     }, 1);
 
-    it('should check basic quick view', () => {
-        checkBasicViewInfo();
+    it('should check basic quick view', async () => {
+        await checkBasicViewInfo();
     });
 
-    it('should check quick View in popover with heading', () => {
-        scrollIntoView(popoverWithHeaderButton);
-        click(popoverWithHeaderButton);
-        expect(getText(popoverHeader)).toEqual(popoverHeaderValue);
-        checkPopoverInfo();
+    it('should check quick View in popover with heading', async () => {
+        await scrollIntoView(popoverWithHeaderButton);
+        await click(popoverWithHeaderButton);
+        await expect(await getText(popoverHeader)).toEqual(popoverHeaderValue);
+        await checkPopoverInfo();
     });
 
-    it('should check quick View in popover without heading', () => {
-        scrollIntoView(popoverWithoutHeaderButton);
-        click(popoverWithoutHeaderButton);
-        expect(popoverHeader).not.toBeDisplayed();
-        checkPopoverInfo();
+    it('should check quick View in popover without heading', async () => {
+        await scrollIntoView(popoverWithoutHeaderButton);
+        await click(popoverWithoutHeaderButton);
+
+        const isDisplayed = await $(popoverHeader).isDisplayed();
+        await expect(isDisplayed).toBeFalsy();
+        await checkPopoverInfo();
     });
 
-    it('should check quick view in dialog', () => {
-        click(openDialogButton);
-        checkPopoverInfo();
-        waitForClickable(popoverCancelButton);
-        click(popoverSendReminderButton);
+    it('should check quick view in dialog', async () => {
+        await click(openDialogButton);
+        await checkPopoverInfo();
+        await waitForClickable(popoverCancelButton);
+        await click(popoverSendReminderButton);
     });
 
     describe('check orientation', () => {
-        it('should check RTL orientation', () => {
-            quickViewPage.checkRtlSwitch();
+        it('should check RTL orientation', async () => {
+            await quickViewPage.checkRtlSwitch();
         });
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            quickViewPage.saveExampleBaselineScreenshot();
-            expect(quickViewPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await quickViewPage.saveExampleBaselineScreenshot();
+            await expect(await quickViewPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
 
-function checkPopoverInfo(): void {
-    waitForElDisplayed(popoverAvatar);
-    waitForClickable(mobilePopoverLabel);
-    waitForClickable(phonePopoverLabel);
-    waitForClickable(emailPopoverLabel);
-    expect(getText(mobilePopoverLabel)).toEqual(mobile);
-    expect(getText(phonePopoverLabel)).toEqual(phone);
-    expect(getText(emailPopoverLabel)).toEqual(email);
-    expect(getText(companyPopoverNameLabel)).toEqual(companyName);
-    expect(getText(companyPopoverAddressLabel)).toEqual(address);
+async function checkPopoverInfo(): Promise<void> {
+    await waitForElDisplayed(popoverAvatar);
+    await waitForClickable(mobilePopoverLabel);
+    await waitForClickable(phonePopoverLabel);
+    await waitForClickable(emailPopoverLabel);
+    await expect(await getText(mobilePopoverLabel)).toEqual(mobile);
+    await expect(await getText(phonePopoverLabel)).toEqual(phone);
+    await expect(await getText(emailPopoverLabel)).toEqual(email);
+    await expect(await getText(companyPopoverNameLabel)).toEqual(companyName);
+    await expect(await getText(companyPopoverAddressLabel)).toEqual(address);
 }
 
-function checkBasicViewInfo(): void {
-    waitForElDisplayed(avatar);
-    waitForClickable(mobileLabel);
-    waitForClickable(phoneLabel);
-    waitForClickable(emailLabel);
-    expect(getText(mobileLabel)).toEqual(mobile);
-    expect(getText(phoneLabel)).toEqual(phone);
-    expect(getText(emailLabel)).toEqual(email);
-    expect(getText(companyNameLabel)).toEqual(companyName);
-    expect(getText(companyAddressLabel)).toEqual(address);
+async function checkBasicViewInfo(): Promise<void> {
+    await waitForElDisplayed(avatar);
+    await waitForClickable(mobileLabel);
+    await waitForClickable(phoneLabel);
+    await waitForClickable(emailLabel);
+    await expect(await getText(mobileLabel)).toEqual(mobile);
+    await expect(await getText(phoneLabel)).toEqual(phone);
+    await expect(await getText(emailLabel)).toEqual(email);
+    await expect(await getText(companyNameLabel)).toEqual(companyName);
+    await expect(await getText(companyAddressLabel)).toEqual(address);
 }

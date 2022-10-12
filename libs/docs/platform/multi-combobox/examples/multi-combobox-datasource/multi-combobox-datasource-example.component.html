@@ -69,10 +69,8 @@
         <p>Selected: {{ selectedItems6 | json }}</p>
         <button fd-button (click)="isLimitless = !isLimitless">Toggle Limitless</button>
     </fdp-form-field>
-</fdp-form-group>
 
-<fdp-form-group [noLabelLayout]="false" columnLayout="XL1-L2-M1-S1">
-    <fdp-form-field id="standard" label="Example with 'N more' label" [column]="1">
+    <fdp-form-field id="standard" label="Example with 'N more' label">
         <fdp-multi-combobox
             name="standard"
             placeholder="Type some text..."

@@ -45,21 +45,21 @@ export class InputGroupPo extends PlatformBaseComponentPo {
     exampleAreaContainersArr = '.fd-doc-component';
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.root);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.root);
     }
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'input-group'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'input-group'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, await this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'input-group'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'input-group'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 }

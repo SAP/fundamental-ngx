@@ -19,25 +19,25 @@ export class ObjectNumberPo extends CoreBaseComponentPo {
     decimalObjExamples = 'fd-object-number-decimal-example ' + this.objectNumbers;
     truncationObjExample = 'fd-object-number-truncation-example' + this.objectNumbers;
 
-    objectNumberText = (exampleBlock: string): string => exampleBlock + ' ' + this.objText;
+    objectNumberText = async (exampleBlock: string): Promise<string> => exampleBlock + ' ' + this.objText;
 
-    objectNumberUnit = (exampleBlock: string): string => exampleBlock + ' ' + this.objUnit;
+    objectNumberUnit = async (exampleBlock: string): Promise<string> => exampleBlock + ' ' + this.objUnit;
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'object-number'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'object-number'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'object-number'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'object-number'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 }

@@ -40,114 +40,122 @@ describe('Notification component test', () => {
         forwardButton
     } = notificationPage;
 
-    beforeAll(() => {
-        notificationPage.open();
+    beforeEach(async () => {
+        await notificationPage.open();
     }, 1);
 
-    beforeEach(() => {
-        refreshPage();
-        waitForPresent(notificationPage.root);
-        waitForElDisplayed(notificationPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(notificationPage.root);
+        await waitForElDisplayed(notificationPage.title);
     }, 2);
 
-    it('should check notification with avatar, success indicator and unread title', () => {
-        expect(isElementDisplayed(defaultExample + avatar)).toBe(true, `avatar does not exist`);
-        expect(isElementDisplayed(defaultExample + notificationIndicator + '--success')).toBe(
+    it('should check notification with avatar, success indicator and unread title', async () => {
+        await expect(await isElementDisplayed(defaultExample + avatar)).toBe(true, `avatar does not exist`);
+        await expect(await isElementDisplayed(defaultExample + notificationIndicator + '--success')).toBe(
             true,
             `no success indicator`
         );
     });
 
-    it('should check Notification with error indicator and no avatar', () => {
-        expect(isElementDisplayed(defaultExample + notificationIndicator + '--error')).toBe(true, `no error indicator`);
+    it('should check Notification with error indicator and no avatar', async () => {
+        await expect(await isElementDisplayed(defaultExample + notificationIndicator + '--error')).toBe(
+            true,
+            `no error indicator`
+        );
     });
 
-    it('should check notification with message strip, unread title and custom width', () => {
-        expect(isElementDisplayed(defaultExample + messageStrip)).toBe(true, `message strip is not displayed`);
-        click(defaultExample + messageStrip + button);
-        expect(isElementDisplayed(defaultExample + messageStrip)).toBe(false, `message strip is not hidden`);
+    it('should check notification with message strip, unread title and custom width', async () => {
+        await expect(await isElementDisplayed(defaultExample + messageStrip)).toBe(
+            true,
+            `message strip is not displayed`
+        );
+        await click(defaultExample + messageStrip + button);
+        await expect(await isElementDisplayed(defaultExample + messageStrip)).toBe(
+            false,
+            `message strip is not hidden`
+        );
     });
 
-    it('should check notification in Component as content example', () => {
-        click(asContentExample + button);
-        expect(isElementDisplayed(notificationContainer)).toBe(true, `notification is not opened`);
-        expect(getElementClass(notificationContainer + messageStrip)).toContain('success');
-        click(notificationContainer + button);
-        expect(getText(asContentExample + result)).toContain('Open Button Clicked');
-        click(asContentExample + button);
-        click(notificationContainer + closeButton);
-        expect(getText(asContentExample + result)).toContain('Close Button Click');
+    it('should check notification in Component as content example', async () => {
+        await click(asContentExample + button);
+        await expect(await isElementDisplayed(notificationContainer)).toBe(true, `notification is not opened`);
+        await expect(await getElementClass(notificationContainer + messageStrip)).toContain('success');
+        await click(notificationContainer + button);
+        await expect(await getText(asContentExample + result)).toContain('Open Button Clicked');
+        await click(asContentExample + button);
+        await click(notificationContainer + closeButton);
+        await expect(await getText(asContentExample + result)).toContain('Close Button Click');
     });
 
-    it('should check template as content example', () => {
-        click(openTemplateExample + button);
-        expect(isElementDisplayed(notificationContainer)).toBe(true, `notification is not opened`);
-        waitForNotDisplayed(notificationContainer, 0, 10000);
-        expect(getText(openTemplateExample + result)).toContain('dismissed');
-        click(openTemplateExample + button);
-        click(notificationContainer + button);
-        expect(getText(openTemplateExample + result)).toContain('Open Button Clicked');
-        click(openTemplateExample + button);
-        click(notificationContainer + closeButton);
-        expect(getText(openTemplateExample + result)).toContain('Close Button Click');
+    it('should check template as content example', async () => {
+        await click(openTemplateExample + button);
+        await expect(await isElementDisplayed(notificationContainer)).toBe(true, `notification is not opened`);
+        await waitForNotDisplayed(notificationContainer, 0, 10000);
+        await expect(await getText(openTemplateExample + result)).toContain('dismissed');
+        await click(openTemplateExample + button);
+        await click(notificationContainer + button);
+        await expect(await getText(openTemplateExample + result)).toContain('Open Button Clicked');
+        await click(openTemplateExample + button);
+        await click(notificationContainer + closeButton);
+        await expect(await getText(openTemplateExample + result)).toContain('Close Button Click');
     });
 
     // skipped due to https://github.com/SAP/fundamental-ngx/issues/6533
-    xit('should check group example', () => {
-        click(groupExample + button);
-        expect(isElementDisplayed(cdkOverlay + notification)).toBe(true, `notifications is not opened`);
+    xit('should check group example', async () => {
+        await click(groupExample + button);
+        await expect(await isElementDisplayed(cdkOverlay + notification)).toBe(true, `notifications is not opened`);
         for (let i = 0; i < 3; i++) {
-            click(cdkOverlay + tabsItem, i);
-            expect(isElementDisplayed(cdkOverlay + tabPanel, i)).toBe(true);
+            await click(cdkOverlay + tabsItem, i);
+            await expect(await isElementDisplayed(cdkOverlay + tabPanel, i)).toBe(true);
         }
     });
 
     // skipped due to https://github.com/SAP/fundamental-ngx/issues/6533
-    xit('should check collapsibing in group example', () => {
-        click(groupExample + button);
+    xit('should check collapsibing in group example', async () => {
+        await click(groupExample + button);
         for (let i = 0; i < 3; i++) {
-            scrollIntoView(cdkOverlay + tabsItem, i);
-            click(cdkOverlay + tabsItem, i);
+            await scrollIntoView(cdkOverlay + tabsItem, i);
+            await click(cdkOverlay + tabsItem, i);
             if (i === 3) {
-                scrollIntoView(cdkOverlay + notificationHeader + button);
-                click(cdkOverlay + notificationHeader + button);
-                click(cdkOverlay + notificationHeader + button, 3);
+                await scrollIntoView(cdkOverlay + notificationHeader + button);
+                await click(cdkOverlay + notificationHeader + button);
+                await click(cdkOverlay + notificationHeader + button, 3);
             }
             if (i !== 3) {
-                click(cdkOverlay + notificationHeader + button);
+                await click(cdkOverlay + notificationHeader + button);
             }
-            expect(doesItExist(cdkOverlay + notificationBody)).toBe(false);
+            await expect(await doesItExist(cdkOverlay + notificationBody)).toBe(false);
         }
     });
 
-    it('should check approve actions with notification', () => {
+    it('should check approve actions with notification', async () => {
         for (let i = 0; i < 2; i++) {
-            checkActions('Approve', approveButton, i);
+            await checkActions('Approve', approveButton, i);
         }
     });
 
-    it('should check reject actions with notification', () => {
+    it('should check reject actions with notification', async () => {
         for (let i = 0; i < 2; i++) {
-            checkActions('Reject', rejectButton, i);
+            await checkActions('Reject', rejectButton, i);
         }
     });
 
-    it('should check forward actions with notification', () => {
+    it('should check forward actions with notification', async () => {
         for (let i = 0; i < 2; i++) {
-            checkActions('Forward', forwardButton, i);
+            await checkActions('Forward', forwardButton, i);
         }
     });
 
-    it('should check RTL and LTR orientation', () => {
-        notificationPage.checkRtlSwitch();
+    it('should check RTL and LTR orientation', async () => {
+        await notificationPage.checkRtlSwitch();
     });
 
-    function checkActions(action: string, buttonChoice: string, index: number): void {
-        scrollIntoView(defaultExample + overflowButton, index);
-        click(defaultExample + overflowButton, index);
-        click(buttonChoice);
-        expect(waitForPresent(messageToast)).toBe(true);
-        expect(getText(messageToast)).toBe(`${action} action performed`);
-        pause(1200);
+    async function checkActions(action: string, buttonChoice: string, index: number): Promise<void> {
+        await scrollIntoView(defaultExample + overflowButton, index);
+        await click(defaultExample + overflowButton, index);
+        await click(buttonChoice);
+        await expect(await waitForPresent(messageToast)).toBe(true);
+        await expect(await getText(messageToast)).toBe(`${action} action performed`);
     }
 });

@@ -6,21 +6,21 @@ export class StatusIndicatorPo extends CoreBaseComponentPo {
 
     statusIcon = 'path#status_icon_290-shape-border';
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'status-indicator'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'status-indicator'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'status-indicator'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'status-indicator'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 }

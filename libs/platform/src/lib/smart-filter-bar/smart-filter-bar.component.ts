@@ -17,6 +17,7 @@ import { Validators } from '@angular/forms';
 import { firstValueFrom, Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     CollectionFilter,
@@ -31,7 +32,7 @@ import {
     FormGeneratorComponent,
     FormGeneratorService
 } from '@fundamental-ngx/platform/form';
-import { ColumnLayout, SelectItem } from '@fundamental-ngx/platform/shared';
+import { SelectItem } from '@fundamental-ngx/platform/shared';
 
 import { SmartFilterBarSettingsDialogComponent } from './components/smart-filter-bar-settings-dialog/smart-filter-bar-settings-dialog.component';
 import { SmartFilterBarSubjectDirective } from './directives/smart-filter-bar-subject.directive';
@@ -48,7 +49,17 @@ import { getSelectItemValue } from './helpers';
 import { SmartFilterBarStrategyLabels } from './interfaces/strategy-labels.type';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
-const defaultColumnsLayout = { S: 12, M: 6, L: 4, XL: 3 };
+const defaultColumnsLayout = 'XL4-L3-M2-S1';
+
+function getColumnsNumber(layout: string): number {
+    return Math.max(
+        ...layout.split('-').map((part) => {
+            const matchArray = part.match(/\d+/);
+
+            return matchArray ? parseInt(matchArray[0], 10) : 1;
+        })
+    );
+}
 
 /**
  * Default dialog configuration.
@@ -148,7 +159,7 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
      * Columns layout.
      */
     @Input()
-    filtersColumnLayout: ColumnLayout = defaultColumnsLayout;
+    filtersColumnLayout: Nullable<string> = defaultColumnsLayout;
 
     /**
      * Event emitted when the selected filters have been changed.
@@ -348,6 +359,8 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
      */
     private async _generateForm(columns: SmartFilterBarFieldDefinition[]): Promise<void> {
         const items: DynamicFormFieldItem[] = [];
+        const columnsNumber = getColumnsNumber(this.filtersColumnLayout ?? '');
+        let currentColumn = 1;
 
         if (columns.length === 0) {
             return;
@@ -376,6 +389,13 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
                 default:
                     item = this._generateInputFieldItem(column, item);
                     break;
+            }
+
+            item.guiOptions.column = currentColumn;
+            currentColumn += 1;
+
+            if (currentColumn > columnsNumber) {
+                currentColumn = 1;
             }
 
             items.push(item);

@@ -37,40 +37,40 @@ export class MultiInputPo extends PlatformBaseComponentPo {
 
     selectedDropDownOption = (name: string): string => `//span[text()='${name}']`;
 
-    dropDownOption = (name: string): string =>
-        doesItExist('fdp-standard-list-item .fd-list__content')
+    dropDownOption = async (name: string): Promise<string> =>
+        (await doesItExist('fdp-standard-list-item .fd-list__content'))
             ? `//div[@title="${name}"]/../..`
             : `//span[@title="${name}"]/..`;
 
-    expandDropdown(dropDownSelector: string, index: number = 0, usePause = false): void {
-        sendKeys(['Escape']);
-        usePause && pause(300);
-        scrollIntoView(dropDownSelector, index);
-        click(dropDownSelector, index);
-        waitForElDisplayed(this.expandedDropdown);
+    async expandDropdown(dropDownSelector: string, index: number = 0, usePause = false): Promise<void> {
+        await sendKeys(['Escape']);
+        usePause && (await pause(300));
+        await scrollIntoView(dropDownSelector, index);
+        await click(dropDownSelector, index);
+        await waitForElDisplayed(this.expandedDropdown);
     }
 
-    selectOption(option: string): void {
-        waitForElDisplayed(this.dropDownOption(option));
-        scrollIntoView(this.dropDownOption(option));
-        click(this.dropDownOption(option));
+    async selectOption(option: string): Promise<void> {
+        await waitForElDisplayed(await this.dropDownOption(option));
+        await scrollIntoView(await this.dropDownOption(option));
+        await click(await this.dropDownOption(option));
     }
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'multi-input'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'multi-input'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, await this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'multi-input'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'multi-input'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 }

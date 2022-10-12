@@ -34,9 +34,9 @@ export class NotificationPo extends CoreBaseComponentPo {
     avatar = this.notificationBody + '.fd-avatar';
     messageToast = '.fd-message-toast';
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 }

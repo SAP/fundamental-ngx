@@ -34,101 +34,117 @@ describe('Side-navigation test suite', () => {
         selectChildBtn
     } = sideNavigationPage;
 
-    beforeAll(() => {
-        sideNavigationPage.open();
+    beforeAll(async () => {
+        await sideNavigationPage.open();
     }, 1);
 
-    beforeEach(() => {
-        refreshPage();
-        waitForPresent(sideNavigationPage.root);
-        waitForElDisplayed(sideNavigationPage.title);
+    beforeEach(async () => {
+        await refreshPage();
+        await waitForPresent(sideNavigationPage.root);
+        await waitForElDisplayed(sideNavigationPage.title);
     }, 1);
 
-    it('should check list item select', () => {
+    it('should check list item select', async () => {
         for (let i = 0; i < blockExamples.length; i++) {
             if (blockExamples[i] !== objectExample) {
-                checkIsSelected(blockExamples[i]);
+                await checkIsSelected(blockExamples[i]);
                 continue;
             }
-            checkIsSelected(blockExamples[i], 3);
+            await checkIsSelected(blockExamples[i], 3);
         }
 
-        scrollIntoView(nonSelectableExample + listItemLink);
-        click(nonSelectableExample + listItemLink);
-        expect(getElementClass(nonSelectableExample + listItemLink)).not.toContain('is-selected', 'item is selected');
+        await scrollIntoView(nonSelectableExample + listItemLink);
+        await click(nonSelectableExample + listItemLink);
+        await expect(await getElementClass(nonSelectableExample + listItemLink)).not.toContain(
+            'is-selected',
+            'item is selected'
+        );
     });
 
-    it('should check that items in expanded list choosing correct', () => {
-        checkExpandListIsWorking(condensedObjectExample);
-        checkExpandListIsWorking(condensedExample);
+    it('should check that items in expanded list choosing correct', async () => {
+        await checkExpandListIsWorking(condensedObjectExample);
+        await checkExpandListIsWorking(condensedExample);
     });
-    it('should check that items in multiple levels list choosing correct', () => {
-        checkMultipleLevels(threeLevelsExample);
-        checkMultipleLevels(iconsExample);
-        checkMultipleLevels(objectExample);
+    it('should check that items in multiple levels list choosing correct', async () => {
+        await checkMultipleLevels(threeLevelsExample);
+        await checkMultipleLevels(iconsExample);
+        await checkMultipleLevels(objectExample);
     });
 
-    it('should check work buttons "select child" & "open"', () => {
-        expect(getElementClass(pragmaticalyExample + pointContainsSubList)).toContain(
+    it('should check work buttons "select child" & "open"', async () => {
+        await expect(await getElementClass(pragmaticalyExample + pointContainsSubList)).toContain(
             'is-selected',
             'element with subitems is selected'
         );
-        expect(getElementClass(pragmaticalyExample + subListItem)).toContain('is-selected', 'element is not selected');
-        expect(getElementClass(pragmaticalyExample + expandArrow)).not.toContain(
-            'is-selected',
-            'expanded menu is not closed'
-        );
-        click(selectChildBtn);
-        expect(getElementClass(pragmaticalyExample + pointContainsSubList)).not.toContain(
-            'is-selected',
-            'element with subitems is selected'
-        );
-        expect(getElementClass(pragmaticalyExample + subListItem)).not.toContain(
+        await expect(await getElementClass(pragmaticalyExample + subListItem)).toContain(
             'is-selected',
             'element is not selected'
         );
-        click(openBtn);
-        expect(getElementClass(pragmaticalyExample + expandArrow)).not.toContain(
+        await expect(await getElementClass(pragmaticalyExample + expandArrow)).not.toContain(
+            'is-selected',
+            'expanded menu is not closed'
+        );
+        await click(selectChildBtn);
+        await expect(await getElementClass(pragmaticalyExample + pointContainsSubList)).not.toContain(
+            'is-selected',
+            'element with subitems is selected'
+        );
+        await expect(await getElementClass(pragmaticalyExample + subListItem)).not.toContain(
+            'is-selected',
+            'element is not selected'
+        );
+        await click(openBtn);
+        await expect(await getElementClass(pragmaticalyExample + expandArrow)).not.toContain(
             'is-selected',
             'expanded menu is not closed'
         );
     });
 
-    it('should check RTL and LTR orientation', () => {
-        sideNavigationPage.checkRtlSwitch();
+    it('should check RTL and LTR orientation', async () => {
+        await sideNavigationPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', () => {
-        sideNavigationPage.saveExampleBaselineScreenshot();
-        expect(sideNavigationPage.compareWithBaseline()).toBeLessThan(5);
+    xit('should check examples visual regression', async () => {
+        await sideNavigationPage.saveExampleBaselineScreenshot();
+        await expect(await sideNavigationPage.compareWithBaseline()).toBeLessThan(5);
     });
 
-    function checkIsSelected(section: string, i: number = 0, point: string = section + listItemLink): void {
-        scrollIntoView(point, i);
-        click(point, i);
-        expect(getElementClass(point, i)).toContain('is-selected', 'element is not selected');
+    async function checkIsSelected(
+        section: string,
+        i: number = 0,
+        point: string = section + listItemLink
+    ): Promise<void> {
+        await scrollIntoView(point, i);
+        await click(point, i);
+        await expect(await getElementClass(point, i)).toContain('is-selected', 'element is not selected');
     }
 
-    function checkExpandListIsWorking(section: string, point: string = section + listItemLink): void {
-        click(point, 2);
-        expect(isElementDisplayed(expandList)).toBe(true, 'expanded list is not displayed');
-        const listLength = getElementArrayLength(expandListExample + listItem);
+    async function checkExpandListIsWorking(section: string, point: string = section + listItemLink): Promise<void> {
+        await click(point, 2);
+        await expect(await isElementDisplayed(expandList)).toBe(true, 'expanded list is not displayed');
+        const listLength = await getElementArrayLength(expandListExample + listItem);
         for (let i = 0; i < listLength; i++) {
-            click(expandListExample + listItem, i);
-            expect(getElementClass(expandedListPoint, i)).toContain('is-selected', 'element is not selected');
+            await click(expandListExample + listItem, i);
+            await expect(await getElementClass(expandedListPoint, i)).toContain(
+                'is-selected',
+                'element is not selected'
+            );
         }
     }
 
-    function checkMultipleLevels(section: string): void {
+    async function checkMultipleLevels(section: string): Promise<void> {
         if (section !== objectExample) {
-            click(section + expandArrow);
+            await click(section + expandArrow);
         }
-        expect(isElementDisplayed(subList)).toBe(true, 'expanded list is not displayed');
-        const listLength = getElementArrayLength(section + subListItem);
+        await expect(await isElementDisplayed(subList)).toBe(true, 'expanded list is not displayed');
+        const listLength = await getElementArrayLength(section + subListItem);
         for (let i = 0; i < listLength; i++) {
-            click(section + subListItem, i);
-            expect(getElementClass(section + subListItem, i)).toContain('is-selected', 'element is not selected');
-            expect(getElementClass(section + pointContainsSubList)).toContain(
+            await click(section + subListItem, i);
+            await expect(await getElementClass(section + subListItem, i)).toContain(
+                'is-selected',
+                'element is not selected'
+            );
+            await expect(await getElementClass(section + pointContainsSubList)).toContain(
                 'is-selected',
                 'element with subitems is not selected'
             );

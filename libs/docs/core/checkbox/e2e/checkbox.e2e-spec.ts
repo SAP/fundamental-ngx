@@ -45,22 +45,22 @@ describe('checkbox test suite', () => {
         tristateOutput
     } = checkboxPage;
 
-    beforeAll(() => {
-        checkboxPage.open();
+    beforeAll(async () => {
+        await checkboxPage.open();
     }, 1);
 
     describe('standard checkbox examples', () => {
-        it('should mark checkbox', () => {
-            scrollIntoView(standardCheckbox);
+        it('should mark checkbox', async () => {
+            await scrollIntoView(standardCheckbox);
 
-            expect(executeScriptBeforeTagAttr(standardCheckbox + checkboxLabel, 'content')).toEqual(
+            await expect(await executeScriptBeforeTagAttr(standardCheckbox + checkboxLabel, 'content')).toEqual(
                 emptyString,
                 'mark is present'
             );
 
-            click(standardCheckbox + checkboxLabel);
+            await click(standardCheckbox + checkboxLabel);
 
-            expect(executeScriptBeforeTagAttr(standardCheckbox + checkboxLabel, 'content')).not.toEqual(
+            await expect(await executeScriptBeforeTagAttr(standardCheckbox + checkboxLabel, 'content')).not.toEqual(
                 emptyString,
                 'mark is not present'
             );
@@ -68,288 +68,290 @@ describe('checkbox test suite', () => {
     });
 
     describe('tristate checkbox examples', () => {
-        it('should check the 3 checkbox marking states', () => {
+        it('should check the 3 checkbox marking states', async () => {
             let trimCount;
-            if (browserIsSafari()) {
+            if (await browserIsSafari()) {
                 trimCount = 42;
             } else {
                 trimCount = 39;
             }
-            scrollIntoView(tristateCheckbox);
-            const startValue = getText(tristateOutput).slice(trimCount).trim();
+            await scrollIntoView(tristateCheckbox);
+            const startValue = (await getText(tristateOutput)).slice(trimCount).trim();
 
-            expect(startValue).toEqual('false');
+            await expect(startValue).toEqual('false');
 
-            click(tristateCheckbox + checkboxLabel);
-            const secondValue = getText(tristateOutput).slice(trimCount).trim();
+            await click(tristateCheckbox + checkboxLabel);
+            const secondValue = (await getText(tristateOutput)).slice(trimCount).trim();
 
-            expect(secondValue).toEqual('null');
+            await expect(secondValue).toEqual('null');
 
-            click(tristateCheckbox + checkboxLabel);
-            const thirdValue = getText(tristateOutput).slice(trimCount).trim();
+            await click(tristateCheckbox + checkboxLabel);
+            const thirdValue = (await getText(tristateOutput)).slice(trimCount).trim();
 
-            expect(thirdValue).toEqual('true');
+            await expect(thirdValue).toEqual('true');
 
-            click(tristateCheckbox + checkboxLabel);
-            const fourthValue = getText(tristateOutput).slice(trimCount).trim();
+            await click(tristateCheckbox + checkboxLabel);
+            const fourthValue = (await getText(tristateOutput)).slice(trimCount).trim();
 
-            expect(fourthValue).toEqual(startValue);
+            await expect(fourthValue).toEqual(startValue);
         });
 
-        it('should check 3rd state not markable', () => {
+        it('should check 3rd state not markable', async () => {
             let trimCount;
-            if (browserIsSafari()) {
+            if (await browserIsSafari()) {
                 trimCount = 44;
             } else {
                 trimCount = 41;
             }
-            scrollIntoView(tristateCheckbox);
-            const startValue = getText(tristateOutput, 2).slice(trimCount).trim();
+            await scrollIntoView(tristateCheckbox);
+            const startValue = (await getText(tristateOutput, 2)).slice(trimCount).trim();
 
-            expect(startValue).toEqual('null');
+            await expect(startValue).toEqual('null');
 
-            click(tristateCheckbox + checkboxLabel, 1);
-            const secondValue = getText(tristateOutput, 2).slice(trimCount).trim();
+            await click(tristateCheckbox + checkboxLabel, 1);
+            const secondValue = (await getText(tristateOutput, 2)).slice(trimCount).trim();
 
-            expect(secondValue).toEqual('true');
+            await expect(secondValue).toEqual('true');
 
-            click(tristateCheckbox + checkboxLabel, 1);
-            const thirdValue = getText(tristateOutput, 2).slice(trimCount).trim();
+            await click(tristateCheckbox + checkboxLabel, 1);
+            const thirdValue = (await getText(tristateOutput, 2)).slice(trimCount).trim();
 
-            expect(thirdValue).toEqual('false');
+            await expect(thirdValue).toEqual('false');
 
-            click(tristateCheckbox + checkboxLabel, 1);
-            const fourthValue = getText(tristateOutput, 2).slice(trimCount).trim();
+            await click(tristateCheckbox + checkboxLabel, 1);
+            const fourthValue = (await getText(tristateOutput, 2)).slice(trimCount).trim();
 
-            expect(fourthValue).not.toEqual(startValue);
+            await expect(fourthValue).not.toEqual(startValue);
         });
     });
 
     describe('checkbox custom values examples', () => {
-        it('should check 2 state custom labels', () => {
-            scrollIntoView(customValueCheckbox);
-            if (browserIsSafari()) {
-                let initialTextSafari = getText(customValueCheckbox + 'div')
-                    .slice(-4)
-                    .trim();
-                expect(initialTextSafari).toEqual(customLabelsArr[0]);
+        it('should check 2 state custom labels', async () => {
+            await scrollIntoView(customValueCheckbox);
+            if (await browserIsSafari()) {
+                let initialTextSafari = (await getText(customValueCheckbox + 'div')).slice(-4).trim();
+                await expect(initialTextSafari).toEqual(customLabelsArr[0]);
 
-                click(customValueCheckbox + checkboxLabel);
-                initialTextSafari = getText(customValueCheckbox + 'div')
-                    .slice(-3)
-                    .trim();
-                expect(initialTextSafari).toEqual(customLabelsArr[1]);
+                await click(customValueCheckbox + checkboxLabel);
+                initialTextSafari = (await getText(customValueCheckbox + 'div')).slice(-3).trim();
+                await expect(initialTextSafari).toEqual(customLabelsArr[1]);
             }
-            if (!browserIsSafari()) {
-                const initialTextArr = getText(customValueCheckbox).split('\n');
+            if (!(await browserIsSafari())) {
+                const initialTextArr = (await getText(customValueCheckbox)).split('\n');
                 const firstExampleValue1 = initialTextArr[1].replace('Value: ', '');
 
-                expect(firstExampleValue1).toEqual(customLabelsArr[0]);
+                await expect(firstExampleValue1).toEqual(customLabelsArr[0]);
 
-                click(customValueCheckbox + checkboxLabel);
-                const secondTextArr = getText(customValueCheckbox).split('\n');
+                await click(customValueCheckbox + checkboxLabel);
+                const secondTextArr = (await getText(customValueCheckbox)).split('\n');
                 const firstExampleValue2 = secondTextArr[1].replace('Value: ', '');
 
-                expect(firstExampleValue2).toEqual(customLabelsArr[1]);
+                await expect(firstExampleValue2).toEqual(customLabelsArr[1]);
             }
         });
 
-        it('should check 3 state custom labels', () => {
-            if (browserIsSafari()) {
-                let initialTextSafari = getText(customValueCheckbox + 'div', 2)
-                    .slice(-4)
-                    .trim();
-                expect(initialTextSafari).toEqual(customLabelsArr[0]);
+        it('should check 3 state custom labels', async () => {
+            if (await browserIsSafari()) {
+                let initialTextSafari = (await getText(customValueCheckbox + 'div', 2)).slice(-4).trim();
+                await expect(initialTextSafari).toEqual(customLabelsArr[0]);
 
-                click(customValueCheckbox + checkboxLabel, 1);
-                initialTextSafari = getText(customValueCheckbox + 'div', 2)
-                    .slice(-3)
-                    .trim();
-                expect(initialTextSafari).toEqual(customLabelsArr[1]);
+                await click(customValueCheckbox + checkboxLabel, 1);
+                initialTextSafari = (await getText(customValueCheckbox + 'div', 2)).slice(-3).trim();
+                await expect(initialTextSafari).toEqual(customLabelsArr[1]);
 
-                click(customValueCheckbox + checkboxLabel, 1);
-                initialTextSafari = getText(customValueCheckbox + 'div', 2)
-                    .slice(-23)
-                    .trim();
-                expect(initialTextSafari).toEqual(customLabelsArr[2]);
+                await click(customValueCheckbox + checkboxLabel, 1);
+                initialTextSafari = (await getText(customValueCheckbox + 'div', 2)).slice(-23).trim();
+                await expect(initialTextSafari).toEqual(customLabelsArr[2]);
             }
-            if (!browserIsSafari()) {
-                scrollIntoView(customValueCheckbox);
-                const initialTextArr = getText(customValueCheckbox).split('\n');
+            if (!(await browserIsSafari())) {
+                await scrollIntoView(customValueCheckbox);
+                const initialTextArr = (await getText(customValueCheckbox)).split('\n');
                 const secondExampleValue1 = initialTextArr[3].replace('Value: ', '');
 
-                expect(secondExampleValue1).toEqual(customLabelsArr[0]);
+                await expect(secondExampleValue1).toEqual(customLabelsArr[0]);
 
-                click(customValueCheckbox + checkboxLabel, 1);
-                const secondTextArr = getText(customValueCheckbox).split('\n');
+                await click(customValueCheckbox + checkboxLabel, 1);
+                const secondTextArr = (await getText(customValueCheckbox)).split('\n');
                 const secondExampleValue2 = secondTextArr[3].replace('Value: ', '');
 
-                expect(secondExampleValue2).toEqual(customLabelsArr[1]);
+                await expect(secondExampleValue2).toEqual(customLabelsArr[1]);
 
-                click(customValueCheckbox + checkboxLabel, 1);
-                const thirdTextArr = getText(customValueCheckbox).split('\n');
+                await click(customValueCheckbox + checkboxLabel, 1);
+                const thirdTextArr = (await getText(customValueCheckbox)).split('\n');
                 const secondExampleValue3 = thirdTextArr[3].replace('Value: ', '');
 
-                expect(secondExampleValue3).toEqual(customLabelsArr[2]);
+                await expect(secondExampleValue3).toEqual(customLabelsArr[2]);
             }
         });
     });
 
     describe('checkbox with reactive form examples', () => {
-        afterEach(() => {
-            refreshPage();
-            waitForElDisplayed(checkboxPage.title);
+        afterEach(async () => {
+            await refreshPage();
+            await waitForElDisplayed(checkboxPage.title);
         }, 1);
 
-        it('check that marking accept all will mark/unmark all options', () => {
+        it('check that marking accept all will mark/unmark all options', async () => {
             let allMarked, outputValue;
-            scrollIntoView(reactiveFormCheckbox);
-            const checkboxCount = getElementArrayLength(reactiveFormCheckbox + checkbox);
-            click(reactiveFormCheckbox + checkboxLabel);
+            await scrollIntoView(reactiveFormCheckbox);
+            const checkboxCount = await getElementArrayLength(reactiveFormCheckbox + checkbox);
+            await click(reactiveFormCheckbox + checkboxLabel);
 
             for (let i = 0; i < checkboxCount; i++) {
-                expect(executeScriptBeforeTagAttr(reactiveFormCheckbox + checkboxLabel, 'content', i)).not.toEqual(
-                    emptyString
-                );
+                await expect(
+                    await executeScriptBeforeTagAttr(reactiveFormCheckbox + checkboxLabel, 'content', i)
+                ).not.toEqual(emptyString);
             }
-            const textArr = getText(reactiveFormCheckbox).split('\n');
-            if (browserIsSafari()) {
+            const textArr = (await getText(reactiveFormCheckbox)).split('\n');
+            if (await browserIsSafari()) {
                 outputValue = textArr[1].trim();
                 allMarked = allMarkedTrueSF;
             }
-            if (!browserIsSafari()) {
+            if (!(await browserIsSafari())) {
                 outputValue = textArr[5];
                 allMarked = allMarkedTrue;
             }
 
-            expect(outputValue).toEqual(allMarked, 'marking acceptall doesnt mark all options');
+            await expect(outputValue).toEqual(allMarked, 'marking acceptall doesnt mark all options');
 
-            click(reactiveFormCheckbox + checkboxLabel);
+            await click(reactiveFormCheckbox + checkboxLabel);
 
             for (let i = 0; i < checkboxCount; i++) {
-                expect(executeScriptBeforeTagAttr(reactiveFormCheckbox + checkboxLabel, 'content', i)).toEqual(
-                    emptyString
-                );
+                await expect(
+                    await executeScriptBeforeTagAttr(reactiveFormCheckbox + checkboxLabel, 'content', i)
+                ).toEqual(emptyString);
             }
-            const textArr2 = getText(reactiveFormCheckbox).split('\n');
-            if (browserIsSafari()) {
+            const textArr2 = (await getText(reactiveFormCheckbox)).split('\n');
+            if (await browserIsSafari()) {
                 outputValue = textArr2[1].trim();
                 allMarked = allMarkedFalseSF;
             }
-            if (!browserIsSafari()) {
+            if (!(await browserIsSafari())) {
                 outputValue = textArr2[5];
                 allMarked = allMarkedFalse;
             }
-            expect(outputValue).toEqual(allMarked, 'unmarking acceptall doesnt unmark all options');
+            await expect(outputValue).toEqual(allMarked, 'unmarking acceptall doesnt unmark all options');
         });
 
-        it("check that marking 1 option doesn't mark accept all box", () => {
-            scrollIntoView(reactiveFormCheckbox);
-            click(reactiveFormCheckbox + checkboxLabel, 1);
-            const textArr = getText(reactiveFormCheckbox).split('\n');
+        it("check that marking 1 option doesn't mark accept all box", async () => {
+            await scrollIntoView(reactiveFormCheckbox);
+            await click(reactiveFormCheckbox + checkboxLabel, 1);
+            const textArr = (await getText(reactiveFormCheckbox)).split('\n');
             const outputValue = textArr[5];
 
-            expect(outputValue).not.toContain(acceptAllTrue, 'marking one option marks accept all');
+            await expect(outputValue).not.toContain(acceptAllTrue, 'marking one option marks accept all');
         });
 
-        it('check marking all options marks accept all box', () => {
+        it('check marking all options marks accept all box', async () => {
             let outputValue, allMarked;
-            scrollIntoView(reactiveFormCheckbox);
-            const checkboxCount = getElementArrayLength(reactiveFormCheckbox + checkbox);
+            await scrollIntoView(reactiveFormCheckbox);
+            const checkboxCount = await getElementArrayLength(reactiveFormCheckbox + checkbox);
 
             for (let i = 1; i < checkboxCount; i++) {
-                click(reactiveFormCheckbox + checkboxLabel, i);
+                await click(reactiveFormCheckbox + checkboxLabel, i);
             }
-            const textArr = getText(reactiveFormCheckbox).split('\n');
-            if (!browserIsSafari()) {
+            const textArr = (await getText(reactiveFormCheckbox)).split('\n');
+            if (!(await browserIsSafari())) {
                 outputValue = textArr[5];
                 allMarked = allMarkedTrue;
             }
-            if (browserIsSafari()) {
+            if (await browserIsSafari()) {
                 outputValue = textArr[1].trim();
                 allMarked = allMarkedTrueSF;
             }
-            expect(outputValue).toEqual(allMarked, 'all options not marked');
+            await expect(outputValue).toEqual(allMarked, 'all options not marked');
         });
     });
 
     describe('checkbox with custom label examples', () => {
-        it('should have a custom label', () => {
+        it('should have a custom label', async () => {
             let checkboxLabelText;
-            scrollIntoView(customLabelCheckbox);
-            const textArr = getText(customLabelCheckbox).split('\n');
-            if (!browserIsSafari()) {
+            await scrollIntoView(customLabelCheckbox);
+            const textArr = (await getText(customLabelCheckbox)).split('\n');
+            if (!(await browserIsSafari())) {
                 checkboxLabelText = textArr[0];
             }
-            if (browserIsSafari()) {
+            if (await browserIsSafari()) {
                 checkboxLabelText = textArr[0].slice(1, -14);
             }
 
-            expect([customLabel, altCustomLabel]).toContain(checkboxLabelText);
+            await expect([customLabel, altCustomLabel]).toContain(checkboxLabelText);
         });
 
-        it('should check the checkbox and link are clickable', () => {
-            expect(isElementClickable(customLabelCheckbox + checkboxLabel)).toBe(true, 'checkbox is not clickable');
-            expect(isEnabled(customLabelCheckbox + link)).toBe(true);
+        it('should check the checkbox and link are clickable', async () => {
+            await expect(await isElementClickable(customLabelCheckbox + checkboxLabel)).toBe(
+                true,
+                'checkbox is not clickable'
+            );
+            await expect(await isEnabled(customLabelCheckbox + link)).toBe(true);
         });
     });
 
     describe('checkbox styling properties examples', () => {
-        it('should check states', () => {
-            scrollIntoView(styledCheckbox);
-            const checkboxCount = getElementArrayLength(styledCheckbox + checkbox);
+        it('should check states', async () => {
+            await scrollIntoView(styledCheckbox);
+            const checkboxCount = await getElementArrayLength(styledCheckbox + checkbox);
 
             for (let i = 0; i < checkboxCount; i++) {
-                expect(getAttributeByName(styledCheckbox + checkboxInput, 'class', i)).toContain(stateClassesArr[i]);
+                await expect(await getAttributeByName(styledCheckbox + checkboxInput, 'class', i)).toContain(
+                    stateClassesArr[i]
+                );
             }
         });
 
-        it('should check checkboxes are clickable', () => {
-            const checkboxCount = getElementArrayLength(styledCheckbox + checkbox);
+        it('should check checkboxes are clickable', async () => {
+            const checkboxCount = await getElementArrayLength(styledCheckbox + checkbox);
 
             for (let i = 0; i < checkboxCount; i++) {
                 if (i === 5) {
                     continue;
                 }
-                expect(isElementClickable(styledCheckbox + checkboxLabel, i)).toBe(
+                await expect(await isElementClickable(styledCheckbox + checkboxLabel, i)).toBe(
                     true,
                     `checkbox ${i} is not clickable`
                 );
             }
         });
 
-        it('should check disabled checkbox is not clickable', () => {
-            expect(isElementClickable(styledCheckbox + checkboxLabel, 5)).toBe(false, 'disabled checkbox is clickable');
+        it('should check disabled checkbox is not clickable', async () => {
+            await expect(await isElementClickable(styledCheckbox + checkboxLabel, 5)).toBe(
+                false,
+                'disabled checkbox is clickable'
+            );
         });
     });
 
     describe('general checks', () => {
-        it('should check focus style exists', () => {
-            const checkboxCount = getElementArrayLength(checkboxInput);
+        it('should check focus style exists', async () => {
+            const checkboxCount = await getElementArrayLength(checkboxInput);
 
             for (let i = 0; i < checkboxCount; i++) {
                 if (i === 15) {
                     // disabled checkbox
                     continue;
                 }
-                applyState('focus', checkboxInput, i);
-                expect(emptyDataArr).not.toContain(getCSSPropertyByName(checkboxInput, 'outline-style', i).value);
+                await applyState('focus', checkboxInput, i);
+                await expect(emptyDataArr).not.toContain(
+                    (
+                        await getCSSPropertyByName(checkboxInput, 'outline-style', i)
+                    ).value
+                );
             }
         });
 
-        it('should check orientation', () => {
-            checkboxPage.checkRtlSwitch();
+        it('should check orientation', async () => {
+            await checkboxPage.checkRtlSwitch();
         });
     });
 
     xdescribe('visual regression', () => {
-        beforeAll(() => {
-            refreshPage();
+        beforeAll(async () => {
+            await refreshPage();
         }, 1);
 
-        it('should check example blocks', () => {
-            checkboxPage.saveExampleBaselineScreenshot();
-            expect(checkboxPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check example blocks', async () => {
+            await checkboxPage.saveExampleBaselineScreenshot();
+            await expect(await checkboxPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

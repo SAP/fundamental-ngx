@@ -43,13 +43,13 @@ export class TimePo extends CoreBaseComponentPo {
     formExample2Minute = 'fd-time-form-example .fd-time__col:nth-child(2) .fd-time__item[data-displayed-value="2"]';
     formExample3Second = 'fd-time-form-example .fd-time__col:nth-child(3) .fd-time__item[data-displayed-value="3"]';
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 }

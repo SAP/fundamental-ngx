@@ -53,139 +53,139 @@ describe('Verify Switch component', () => {
         semanticCompactSwitchIconOn
     } = switchPage;
 
-    beforeAll(() => {
-        switchPage.open();
+    beforeAll(async () => {
+        await switchPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(switchPage.root);
-        waitForElDisplayed(switchPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(switchPage.root);
+        await waitForElDisplayed(switchPage.title);
     }, 1);
 
     describe('has default and compact switch and', () => {
-        it('should default change something to active or inactive', () => {
+        it('should default change something to active or inactive', async () => {
             // capture before state
-            waitForPresent(defaultSwitchInput);
-            const isCheckedBefore = getAttributeByName(defaultSwitchInput, 'aria-checked');
-            click(defaultSwitchHandel);
+            await waitForPresent(defaultSwitchInput);
+            const isCheckedBefore = await getAttributeByName(defaultSwitchInput, 'aria-checked');
+            await click(defaultSwitchHandel);
             // capture after state
-            const isCheckedAfter = getAttributeByName(defaultSwitchInput, 'aria-checked');
+            const isCheckedAfter = await getAttributeByName(defaultSwitchInput, 'aria-checked');
 
-            expect(isCheckedBefore).toBe('false', 'Default switch has incorrect state before click');
-            expect(isCheckedAfter).toBe('true', 'Default switch has incorrect state after click');
+            await expect(isCheckedBefore).toBe('false', 'Default switch has incorrect state before click');
+            await expect(isCheckedAfter).toBe('true', 'Default switch has incorrect state after click');
         });
 
-        it('should compact change something to active or inactive', () => {
+        it('should compact change something to active or inactive', async () => {
             // capture before state
-            const isCheckedBefore = getAttributeByName(defaultCompactSwitchInput, 'aria-checked');
-            click(defaultCompactSwitchHandel);
+            const isCheckedBefore = await getAttributeByName(defaultCompactSwitchInput, 'aria-checked');
+            await click(defaultCompactSwitchHandel);
             // capture after state
-            const isCheckedAfter = getAttributeByName(defaultCompactSwitchInput, 'aria-checked');
+            const isCheckedAfter = await getAttributeByName(defaultCompactSwitchInput, 'aria-checked');
 
-            expect(isCheckedBefore).toBe('false', 'Default compact switch has incorrect state before click');
-            expect(isCheckedAfter).toBe('true', 'Default compact switch has incorrect state after click');
+            await expect(isCheckedBefore).toBe('false', 'Default compact switch has incorrect state before click');
+            await expect(isCheckedAfter).toBe('true', 'Default compact switch has incorrect state after click');
         });
 
-        it('should default change state on hover', () => {
-            const handelColorBefore = getCSSPropertyByName(defaultSwitchHandel, 'background-color');
+        it('should default change state on hover', async () => {
+            const handelColorBefore = await getCSSPropertyByName(defaultSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
-            if (browserIsSafari()) {
+            if (await browserIsSafari()) {
                 return;
             }
 
-            mouseHoverElement(defaultSwitchHandel);
-            const handelColorAfter = getCSSPropertyByName(defaultSwitchHandel, 'background-color');
+            await mouseHoverElement(defaultSwitchHandel);
+            const handelColorAfter = await getCSSPropertyByName(defaultSwitchHandel, 'background-color');
 
-            expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
+            await expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
         });
 
-        it('should compact default change state on hover', () => {
-            const handelColorBefore = getCSSPropertyByName(defaultCompactSwitchHandel, 'background-color');
-            if (browserIsIEorSafari()) {
+        it('should compact default change state on hover', async () => {
+            const handelColorBefore = await getCSSPropertyByName(defaultCompactSwitchHandel, 'background-color');
+            if (await browserIsIEorSafari()) {
                 // mouse hover doesn't work for safari
                 return;
             }
-            mouseHoverElement(defaultCompactSwitchHandel);
-            const handelColorAfter = getCSSPropertyByName(defaultCompactSwitchHandel, 'background-color');
+            await mouseHoverElement(defaultCompactSwitchHandel);
+            const handelColorAfter = await getCSSPropertyByName(defaultCompactSwitchHandel, 'background-color');
 
-            expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
+            await expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
         });
 
-        it('compact switch should be smaller than default', () => {
-            waitForPresent(defaultSwitchSizeAttr);
-            waitForElDisplayed(defaultSwitchSizeAttr);
-            waitForPresent(defaultCompactSwitchSizeAttr);
-            waitForElDisplayed(defaultCompactSwitchSizeAttr);
-            const defaultSwitchSize = getElementSize(defaultSwitchSizeAttr);
-            const defaultCompactSwitchSize = getElementSize(defaultCompactSwitchSizeAttr);
+        it('compact switch should be smaller than default', async () => {
+            await waitForPresent(defaultSwitchSizeAttr);
+            await waitForElDisplayed(defaultSwitchSizeAttr);
+            await waitForPresent(defaultCompactSwitchSizeAttr);
+            await waitForElDisplayed(defaultCompactSwitchSizeAttr);
+            const defaultSwitchSize = await getElementSize(defaultSwitchSizeAttr);
+            const defaultCompactSwitchSize = await getElementSize(defaultCompactSwitchSizeAttr);
 
-            expect(defaultSwitchSize.height).toBeGreaterThan(defaultCompactSwitchSize.height, 'height');
-            expect(defaultSwitchSize.width).toBeGreaterThan(defaultCompactSwitchSize.width, 'width');
+            await expect(defaultSwitchSize.height).toBeGreaterThan(defaultCompactSwitchSize.height, 'height');
+            await expect(defaultSwitchSize.width).toBeGreaterThan(defaultCompactSwitchSize.width, 'width');
         });
     });
 
     describe('has disabled and disabled-form switch and ', () => {
-        it('should not be able to interact with disabled switch', () => {
-            scrollIntoView(disabledSwitchInput);
-            const isClickable = isElementClickable(disabledSwitchInput);
-            expect(isClickable).toBe(false);
+        it('should not be able to interact with disabled switch', async () => {
+            await scrollIntoView(disabledSwitchInput);
+            const isClickable = await isElementClickable(disabledSwitchInput);
+            await expect(isClickable).toBe(false);
         });
 
-        it('should not be able to interact with disabled form switch', () => {
+        it('should not be able to interact with disabled form switch', async () => {
             // TODO: Investigate problem with disabled switch in Safari
-            if (browserIsSafari()) {
+            if (await browserIsSafari()) {
                 return;
             }
-            waitForPresent(formDisabledSwitchInput);
-            scrollIntoView(formDisabledSwitchInput);
-            const isClickable = isElementClickable(formDisabledSwitchInput);
-            expect(isClickable).toBe(false);
+            await waitForPresent(formDisabledSwitchInput);
+            await scrollIntoView(formDisabledSwitchInput);
+            const isClickable = await isElementClickable(formDisabledSwitchInput);
+            await expect(isClickable).toBe(false);
         });
 
-        it('should not change state on hover', () => {
-            waitForPresent(disabledSwitchHandel);
-            const handelColorBefore = getCSSPropertyByName(disabledSwitchHandel, 'background-color');
+        it('should not change state on hover', async () => {
+            await waitForPresent(disabledSwitchHandel);
+            const handelColorBefore = await getCSSPropertyByName(disabledSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
-            if (browserIsSafari()) {
+            if (await browserIsSafari()) {
                 return;
             }
-            scrollIntoView(disabledSwitchHandel);
-            mouseHoverElement(disabledSwitchHandel);
-            const handelColorAfter = getCSSPropertyByName(disabledSwitchHandel, 'background-color');
+            await scrollIntoView(disabledSwitchHandel);
+            await mouseHoverElement(disabledSwitchHandel);
+            const handelColorAfter = await getCSSPropertyByName(disabledSwitchHandel, 'background-color');
 
-            expect(handelColorBefore.value).toBe(handelColorAfter.value);
+            await expect(handelColorBefore.value).toBe(handelColorAfter.value);
         });
 
-        it('form should not change state on hover', () => {
-            const handelColorBefore = getCSSPropertyByName(formDisabledSwitchHandel, 'background-color');
+        it('form should not change state on hover', async () => {
+            const handelColorBefore = await getCSSPropertyByName(formDisabledSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
-            if (browserIsSafari()) {
+            if (await browserIsSafari()) {
                 return;
             }
-            scrollIntoView(formDisabledSwitchHandel);
-            mouseHoverElement(formDisabledSwitchHandel);
-            const handelColorAfter = getCSSPropertyByName(formDisabledSwitchHandel, 'background-color');
+            await scrollIntoView(formDisabledSwitchHandel);
+            await mouseHoverElement(formDisabledSwitchHandel);
+            const handelColorAfter = await getCSSPropertyByName(formDisabledSwitchHandel, 'background-color');
 
-            expect(handelColorBefore.value).toBe(handelColorAfter.value);
+            await expect(handelColorBefore.value).toBe(handelColorAfter.value);
         });
     });
 
-    it('should have alternative title or aria-label for all switches', () => {
-        waitForPresent(defaultSwitchInput);
-        const alternativeTextDefaultSwitch = getElementAriaLabel(defaultSwitchLabel);
-        const alternativeTextDefaultCompactSwitch = getElementAriaLabel(defaultCompactSwitchLabel);
-        const alternativeTextDisabledSwitch = getElementAriaLabel(disabledSwitchLabel);
-        const alternativeTextFormDisabledSwitch = getElementAriaLabel(formDisabledSwitchLabel);
-        const alternativeTextSemanticSwitch = getElementAriaLabel(semanticSwitchLabel);
-        const alternativeTextSemanticCompactFormDisabledSwitch = getElementAriaLabel(semanticCompactSwitchLabel);
+    it('should have alternative title or aria-label for all switches', async () => {
+        await waitForPresent(defaultSwitchInput);
+        const alternativeTextDefaultSwitch = await getElementAriaLabel(defaultSwitchLabel);
+        const alternativeTextDefaultCompactSwitch = await getElementAriaLabel(defaultCompactSwitchLabel);
+        const alternativeTextDisabledSwitch = await getElementAriaLabel(disabledSwitchLabel);
+        const alternativeTextFormDisabledSwitch = await getElementAriaLabel(formDisabledSwitchLabel);
+        const alternativeTextSemanticSwitch = await getElementAriaLabel(semanticSwitchLabel);
+        const alternativeTextSemanticCompactFormDisabledSwitch = await getElementAriaLabel(semanticCompactSwitchLabel);
 
-        expect(alternativeTextDefaultSwitch).toBe(default_switch_alternative_text);
-        expect(alternativeTextDefaultCompactSwitch).toBe(default_compact_switch_alternative_text);
-        expect(alternativeTextDisabledSwitch).toBe(disabled_switch_alternative_text);
-        expect(alternativeTextFormDisabledSwitch).toBe(form_disabled_switch_alternative_text);
-        expect(alternativeTextSemanticSwitch).toBe(semantic_switch_alternative_text);
-        expect(alternativeTextSemanticCompactFormDisabledSwitch).toBe(semantic_compact_switch_alternative_text);
+        await expect(alternativeTextDefaultSwitch).toBe(default_switch_alternative_text);
+        await expect(alternativeTextDefaultCompactSwitch).toBe(default_compact_switch_alternative_text);
+        await expect(alternativeTextDisabledSwitch).toBe(disabled_switch_alternative_text);
+        await expect(alternativeTextFormDisabledSwitch).toBe(form_disabled_switch_alternative_text);
+        await expect(alternativeTextSemanticSwitch).toBe(semantic_switch_alternative_text);
+        await expect(alternativeTextSemanticCompactFormDisabledSwitch).toBe(semantic_compact_switch_alternative_text);
     });
     /*
     xit('test accessibility', async ()=> {
@@ -194,78 +194,78 @@ describe('Verify Switch component', () => {
         expect(testResult.violations.length).toBe(0);
     });*/
 
-    it('should have RTL orientation', () => {
-        switchPage.checkRtlSwitch();
+    it('should have RTL orientation', async () => {
+        await switchPage.checkRtlSwitch();
     });
 
     describe('has semantic switch and', () => {
-        it('should change something from positive to negative', () => {
+        it('should change something from positive to negative', async () => {
             // capture before state
-            const isCheckedBefore = getAttributeByName(semanticSwitchInput, 'aria-checked');
-            const onIconStateBefore = getCSSPropertyByName(semanticSwitchIconOn, 'visibility');
-            const offIconStateBefore = getCSSPropertyByName(semanticSwitchIconOff, 'visibility');
-            click(semanticSwitchHandel);
+            const isCheckedBefore = await getAttributeByName(semanticSwitchInput, 'aria-checked');
+            const onIconStateBefore = await getCSSPropertyByName(semanticSwitchIconOn, 'visibility');
+            const offIconStateBefore = await getCSSPropertyByName(semanticSwitchIconOff, 'visibility');
+            await click(semanticSwitchHandel);
             // pause for animation
-            pause(500);
+            await pause(500);
             // capture after state
-            const isCheckedAfter = getAttributeByName(semanticSwitchInput, 'aria-checked');
-            const onIconStateAfter = getCSSPropertyByName(semanticSwitchIconOn, 'visibility');
-            const offIconStateAfter = getCSSPropertyByName(semanticSwitchIconOff, 'visibility');
+            const isCheckedAfter = await getAttributeByName(semanticSwitchInput, 'aria-checked');
+            const onIconStateAfter = await getCSSPropertyByName(semanticSwitchIconOn, 'visibility');
+            const offIconStateAfter = await getCSSPropertyByName(semanticSwitchIconOff, 'visibility');
 
-            expect(isCheckedBefore).toBe('false', 'Semantic switch has incorrect state before click');
-            expect(isCheckedAfter).toBe('true', 'Semantic switch has incorrect state after click');
-            expect(onIconStateBefore.value).toBe('hidden');
-            expect(offIconStateBefore.value).toBe('visible');
-            expect(onIconStateAfter.value).toBe('visible');
-            expect(offIconStateAfter.value).toBe('hidden');
+            await expect(isCheckedBefore).toBe('false', 'Semantic switch has incorrect state before click');
+            await expect(isCheckedAfter).toBe('true', 'Semantic switch has incorrect state after click');
+            await expect(onIconStateBefore.value).toBe('hidden');
+            await expect(offIconStateBefore.value).toBe('visible');
+            await expect(onIconStateAfter.value).toBe('visible');
+            await expect(offIconStateAfter.value).toBe('hidden');
         });
 
-        it('compact should change something from positive to negative', () => {
+        it('compact should change something from positive to negative', async () => {
             // capture before state
-            const isCheckedBefore = getAttributeByName(semanticCompactSwitchInput, 'aria-checked');
-            const onIconStateBefore = getCSSPropertyByName(semanticCompactSwitchIconOn, 'visibility');
-            const offIconStateBefore = getCSSPropertyByName(semanticCompactSwitchIconOff, 'visibility');
-            click(semanticCompactSwitchHandel);
+            const isCheckedBefore = await getAttributeByName(semanticCompactSwitchInput, 'aria-checked');
+            const onIconStateBefore = await getCSSPropertyByName(semanticCompactSwitchIconOn, 'visibility');
+            const offIconStateBefore = await getCSSPropertyByName(semanticCompactSwitchIconOff, 'visibility');
+            await click(semanticCompactSwitchHandel);
             // pause for animation
-            pause(500);
+            await pause(500);
             // capture after state
-            const isCheckedAfter = getAttributeByName(semanticCompactSwitchInput, 'aria-checked');
-            const onIconStateAfter = getCSSPropertyByName(semanticCompactSwitchIconOn, 'visibility');
-            const offIconStateAfter = getCSSPropertyByName(semanticCompactSwitchIconOff, 'visibility');
+            const isCheckedAfter = await getAttributeByName(semanticCompactSwitchInput, 'aria-checked');
+            const onIconStateAfter = await getCSSPropertyByName(semanticCompactSwitchIconOn, 'visibility');
+            const offIconStateAfter = await getCSSPropertyByName(semanticCompactSwitchIconOff, 'visibility');
 
-            expect(isCheckedBefore).toBe('true', 'Semantic compact switch has incorrect state before click');
-            expect(isCheckedAfter).toBe('false', 'Semantic compact switch has incorrect state after click');
-            expect(onIconStateBefore.value).toBe('visible');
-            expect(offIconStateBefore.value).toBe('hidden');
-            expect(onIconStateAfter.value).toBe('hidden');
-            expect(offIconStateAfter.value).toBe('visible');
+            await expect(isCheckedBefore).toBe('true', 'Semantic compact switch has incorrect state before click');
+            await expect(isCheckedAfter).toBe('false', 'Semantic compact switch has incorrect state after click');
+            await expect(onIconStateBefore.value).toBe('visible');
+            await expect(offIconStateBefore.value).toBe('hidden');
+            await expect(onIconStateAfter.value).toBe('hidden');
+            await expect(offIconStateAfter.value).toBe('visible');
         });
 
-        it('should semantic change state on hover', () => {
-            const handelColorBefore = getCSSPropertyByName(semanticSwitchHandel, 'background-color');
+        it('should semantic change state on hover', async () => {
+            const handelColorBefore = await getCSSPropertyByName(semanticSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
-            if (!browserIsIEorSafari()) {
-                scrollIntoView(semanticSwitchHandel);
-                mouseHoverElement(semanticSwitchHandel);
-                const handelColorAfter = getCSSPropertyByName(semanticSwitchHandel, 'background-color');
+            if (!(await browserIsIEorSafari())) {
+                await scrollIntoView(semanticSwitchHandel);
+                await mouseHoverElement(semanticSwitchHandel);
+                const handelColorAfter = await getCSSPropertyByName(semanticSwitchHandel, 'background-color');
 
-                expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
+                await expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
                 return;
             }
             console.log('Skip for Safari and IE');
         });
 
-        it('should semantic compact change state on hover', () => {
-            const handelColorBefore = getCSSPropertyByName(semanticCompactSwitchHandel, 'background-color');
+        it('should semantic compact change state on hover', async () => {
+            const handelColorBefore = await getCSSPropertyByName(semanticCompactSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
-            if (browserIsSafari()) {
+            if (await browserIsSafari()) {
                 return;
             }
-            scrollIntoView(semanticCompactSwitchHandel);
-            mouseHoverElement(semanticCompactSwitchHandel);
-            const handelColorAfter = getCSSPropertyByName(semanticCompactSwitchHandel, 'background-color');
+            await scrollIntoView(semanticCompactSwitchHandel);
+            await mouseHoverElement(semanticCompactSwitchHandel);
+            const handelColorAfter = await getCSSPropertyByName(semanticCompactSwitchHandel, 'background-color');
 
-            expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
+            await expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
         });
 
         // No example given to verify
@@ -274,9 +274,9 @@ describe('Verify Switch component', () => {
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            switchPage.saveExampleBaselineScreenshot();
-            expect(switchPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await switchPage.saveExampleBaselineScreenshot();
+            await expect(await switchPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 

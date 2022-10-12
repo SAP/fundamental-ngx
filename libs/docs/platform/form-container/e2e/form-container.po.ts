@@ -68,9 +68,9 @@ export class FormContainerPo extends PlatformBaseComponentPo {
     isInlineExampleCombobox = this.isInlineExample + 'fdp-combobox input';
     isInlineExampleComboboxBtn = this.isInlineExample + 'fdp-combobox button';
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 }

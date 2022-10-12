@@ -10,6 +10,7 @@ const sliderDisabledTs = 'disabled/slider-disabled-example.component.ts';
 const customValuesTs = 'custom-values/slider-custom-values-example.component.ts';
 const sliderTooltipTs = 'tooltip/slider-tooltip-example.component.ts';
 const sliderCozyTs = 'cozy/slider-cozy-example.component.ts';
+const sliderFormTs = 'form/slider-form-example.component.ts';
 
 const sliderBasicHtml = 'base/slider-basic-example.component.html';
 const sliderRangeHtml = 'range/slider-range-example.component.html';
@@ -18,6 +19,7 @@ const sliderDisabledHtml = 'disabled/slider-disabled-example.component.html';
 const customValuesHtml = 'custom-values/slider-custom-values-example.component.html';
 const sliderTooltipHtml = 'tooltip/slider-tooltip-example.component.html';
 const sliderCozyHtml = 'cozy/slider-cozy-example.component.html';
+const sliderFormHtml = 'form/slider-form-example.component.html';
 
 @Component({
     selector: 'app-slider',
@@ -140,6 +142,20 @@ export class SliderDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(sliderCozyHtml),
             fileName: 'slider-cozy-example'
+        }
+    ];
+
+    form: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(sliderFormTs),
+            fileName: 'slider-form-example',
+            component: 'SliderFormExampleComponent'
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(sliderFormHtml),
+            fileName: 'slider-form-example'
         }
     ];
 

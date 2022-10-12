@@ -31,9 +31,9 @@ export class DynamicPagePo extends CoreBaseComponentPo {
     breadcrumbLink = '.fd-dynamic-page__breadcrumb-wrapper a';
     currentBreadcrumbLink = '.fd-dynamic-page__breadcrumb-wrapper .fd-overflow-layout__item--last span';
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 }

@@ -35,167 +35,171 @@ describe('Search field', () => {
     } = new SearchFieldPo();
     const searchPage = new SearchFieldPo();
 
-    beforeAll(() => {
-        searchPage.open();
+    beforeAll(async () => {
+        await searchPage.open();
     });
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(searchPage.root);
-        waitForElDisplayed(searchPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(searchPage.root);
+        await waitForElDisplayed(searchPage.title);
     });
 
-    it('should be present and enabled', () => {
-        const arrLength = getElementArrayLength(searchFields);
+    it('should be present and enabled', async () => {
+        const arrLength = await getElementArrayLength(searchFields);
         for (let i = 0; arrLength > i; i++) {
-            waitForElDisplayed(searchFields, i);
-            expect(isEnabled(searchFields, i)).toBe(true);
+            await waitForElDisplayed(searchFields, i);
+            await expect(await isEnabled(searchFields, i)).toBe(true);
         }
     });
 
-    it('should have search icon present and enabled', () => {
-        const arrLength = getElementArrayLength(searchIcons);
+    it('should have search icon present and enabled', async () => {
+        const arrLength = await getElementArrayLength(searchIcons);
         for (let i = 0; arrLength > i; i++) {
-            waitForElDisplayed(searchIcons, i);
-            expect(isEnabled(searchIcons, i)).toBe(true);
+            await waitForElDisplayed(searchIcons, i);
+            await expect(await isEnabled(searchIcons, i)).toBe(true);
         }
     });
 
-    it('should have placeholder text', () => {
-        const arrLength = getElementArrayLength(searchFields);
-        const actualPlaceholders = getAttributeByNameArr(searchFields, 'placeholder');
+    it('should have placeholder text', async () => {
+        const arrLength = await getElementArrayLength(searchFields);
+        const actualPlaceholders = await getAttributeByNameArr(searchFields, 'placeholder');
         for (let i = 0; arrLength > i; i++) {
-            waitForElDisplayed(searchFields, i);
-            expect(actualPlaceholders[i]).toBe(search_placeholder);
+            await waitForElDisplayed(searchFields, i);
+            await expect(actualPlaceholders[i]).toBe(search_placeholder);
         }
     });
 
-    it('should submit term by click on search icon ', () => {
-        const arrLength = getElementArrayLength(searchFields);
+    it('should submit term by click on search icon ', async () => {
+        const arrLength = await getElementArrayLength(searchFields);
         for (let i = 0; arrLength > i; i++) {
             if (i !== 6) {
-                setValue(searchFields, 'test', i);
-                click(searchIcons, 0);
+                await setValue(searchFields, 'test', i);
+                await click(searchIcons, 0);
             }
             if (i === 6) {
-                click(searchFields, i);
-                setValue(searchFields, 'test', 7);
-                click(okButton);
+                await click(searchFields, i);
+                await setValue(searchFields, 'test', 7);
+                await click(okButton);
             }
         }
-        expect(getText(cozySearchResult)).toContain('test');
-        expect(getText(compactSearchResult)).toContain('test');
-        expect(getText(cozyWithCategoriesSearch)).toContain('test');
-        expect(getText(compactWithCategoriesSearch)).toContain('test');
-        expect(getText(cozyWithDataSourceSearch)).toContain('test');
+        await expect(await getText(cozySearchResult)).toContain('test');
+        await expect(await getText(compactSearchResult)).toContain('test');
+        await expect(await getText(cozyWithCategoriesSearch)).toContain('test');
+        await expect(await getText(compactWithCategoriesSearch)).toContain('test');
+        await expect(await getText(cozyWithDataSourceSearch)).toContain('test');
 
-        expect(getText(cozySearchResult, 1)).toContain('test');
-        expect(getText(compactSearchResult, 1)).toContain('test');
-        expect(getText(cozyWithCategoriesSearch, 2)).toContain('test');
-        expect(getText(compactWithCategoriesSearch, 2)).toContain('test');
-        expect(getText(cozyWithDataSourceSearch, 2)).toContain('test');
+        await expect(await getText(cozySearchResult, 1)).toContain('test');
+        await expect(await getText(compactSearchResult, 1)).toContain('test');
+        await expect(await getText(cozyWithCategoriesSearch, 2)).toContain('test');
+        await expect(await getText(compactWithCategoriesSearch, 2)).toContain('test');
+        await expect(await getText(cozyWithDataSourceSearch, 2)).toContain('test');
 
-        expect(getText(mobileExampleSearch)).toContain('test');
-        expect(getText(mobileExampleSearch, 1)).toContain('test');
+        await expect(await getText(mobileExampleSearch)).toContain('test');
+        await expect(await getText(mobileExampleSearch, 1)).toContain('test');
     });
 
-    it('should clear search by click on click icon ', () => {
-        const arrLength = getElementArrayLength(searchFields);
+    it('should clear search by click on click icon ', async () => {
+        const arrLength = await getElementArrayLength(searchFields);
         for (let i = 0; arrLength > i; i++) {
             // value without suggestion
             if (i !== 6) {
-                setValue(searchFields, 'test', i);
-                waitForElDisplayed(clearSearchIcon);
-                click(clearSearchIcon);
+                await setValue(searchFields, 'test', i);
+                await waitForElDisplayed(clearSearchIcon);
+                await click(clearSearchIcon);
             }
             if (i === 6) {
-                click(searchFields, i);
-                setValue(searchFields, 'test', 7);
-                waitForElDisplayed(clearSearchIcon, 1);
-                click(clearSearchIcon, 1);
-                click(okButton);
+                await click(searchFields, i);
+                await setValue(searchFields, 'test', 7);
+                await waitForElDisplayed(clearSearchIcon, 1);
+                await click(clearSearchIcon, 1);
+                await click(okButton);
             }
         }
-        expect(getText(cozySearchResult)).not.toContain('test');
-        expect(getText(compactSearchResult)).not.toContain('test');
-        expect(getText(cozyWithCategoriesSearch)).not.toContain('test');
-        expect(getText(compactWithCategoriesSearch)).not.toContain('test');
-        expect(getText(cozyWithDataSourceSearch)).not.toContain('test');
+        await expect(await getText(cozySearchResult)).not.toContain('test');
+        await expect(await getText(compactSearchResult)).not.toContain('test');
+        await expect(await getText(cozyWithCategoriesSearch)).not.toContain('test');
+        await expect(await getText(compactWithCategoriesSearch)).not.toContain('test');
+        await expect(await getText(cozyWithDataSourceSearch)).not.toContain('test');
 
-        expect(getText(cozySearchResult, 1)).not.toContain('test');
-        expect(getText(compactSearchResult, 1)).not.toContain('test');
-        expect(getText(cozyWithCategoriesSearch, 3)).not.toContain('test');
-        expect(getText(compactWithCategoriesSearch, 3)).not.toContain('test');
-        expect(getText(cozyWithDataSourceSearch, 3)).not.toContain('test');
+        await expect(await getText(cozySearchResult, 1)).not.toContain('test');
+        await expect(await getText(compactSearchResult, 1)).not.toContain('test');
+        await expect(await getText(cozyWithCategoriesSearch, 3)).not.toContain('test');
+        await expect(await getText(compactWithCategoriesSearch, 3)).not.toContain('test');
+        await expect(await getText(cozyWithDataSourceSearch, 3)).not.toContain('test');
     });
 
-    it('should have autosuggestion after one latter', () => {
-        const arrLength = getElementArrayLength(searchFields);
+    it('should have autosuggestion after one latter', async () => {
+        const arrLength = await getElementArrayLength(searchFields);
         for (let i = 0; arrLength > i; i++) {
             if (i !== 2 && i !== 6) {
                 // value without suggestion
-                setValue(searchFields, 'ea', i);
-                waitForElDisplayed(autosuggestionItems);
-                getTextArr(autosuggestionItems).forEach((suggestionItemText) => {
-                    expect(suggestionItemText).toContain('ea');
-                });
-                click(clearSearchIcon);
+                await setValue(searchFields, 'ea', i);
+                await waitForElDisplayed(autosuggestionItems);
+                let codemod_placeholder_6978 = await getTextArr(autosuggestionItems);
+
+                for (const suggestionItemText of codemod_placeholder_6978) {
+                    await expect(suggestionItemText).toContain('ea');
+                }
+                await click(clearSearchIcon);
             }
             if (i === 6) {
-                click(searchFields, i);
-                setValue(searchFields, 'ea', 7);
-                waitForElDisplayed(autosuggestionItems);
-                getTextArr(autosuggestionItems).forEach((suggestionItemText) => {
-                    expect(suggestionItemText).toContain('ea');
-                });
+                await click(searchFields, i);
+                await setValue(searchFields, 'ea', 7);
+                await waitForElDisplayed(autosuggestionItems);
+                let codemod_placeholder_9163 = await getTextArr(autosuggestionItems);
+
+                for (const suggestionItemText of codemod_placeholder_9163) {
+                    await expect(suggestionItemText).toContain('ea');
+                }
             }
         }
     });
 
-    it('should compact be smaller than cozy', () => {
-        const defaultCozySize = getElementSize(searchFields, 0, 'height');
-        const defaultCompactSize = getElementSize(searchFields, 1, 'height');
-        const withCategoryCozySize = getElementSize(searchFields, 3, 'height');
-        const withCategoryCompactSize = getElementSize(searchFields, 4, 'height');
+    it('should compact be smaller than cozy', async () => {
+        const defaultCozySize = await getElementSize(searchFields, 0, 'height');
+        const defaultCompactSize = await getElementSize(searchFields, 1, 'height');
+        const withCategoryCozySize = await getElementSize(searchFields, 3, 'height');
+        const withCategoryCompactSize = await getElementSize(searchFields, 4, 'height');
 
-        expect(defaultCozySize).toBeGreaterThan(defaultCompactSize);
-        expect(withCategoryCozySize).toBeGreaterThan(withCategoryCompactSize);
+        await expect(defaultCozySize).toBeGreaterThan(defaultCompactSize);
+        await expect(withCategoryCozySize).toBeGreaterThan(withCategoryCompactSize);
     });
 
-    it('should be able to set category if this option enabled', () => {
+    it('should be able to set category if this option enabled', async () => {
         // TODO: Unskip after fix #4317
-        if (browserIsIE()) {
+        if (await browserIsIE()) {
             console.log('Skip for IE');
             return;
         }
-        const arrLength = getElementArrayLength(searchCategoryBtn);
+        const arrLength = await getElementArrayLength(searchCategoryBtn);
         for (let i = 0; arrLength > i; i++) {
-            click(searchCategoryBtn, i);
-            click(categoryOption);
-            click(searchIcons, i + 3);
+            await click(searchCategoryBtn, i);
+            await click(categoryOption);
+            await click(searchIcons, i + 3);
         }
-        expect(getText(cozyWithCategoriesSearch, 1)).toContain(expected_category);
-        expect(getText(cozyWithCategoriesSearch, 3)).toContain(expected_category);
+        await expect(await getText(cozyWithCategoriesSearch, 1)).toContain(expected_category);
+        await expect(await getText(cozyWithCategoriesSearch, 3)).toContain(expected_category);
 
-        expect(getText(compactWithCategoriesSearch, 1)).toContain(expected_category);
-        expect(getText(compactWithCategoriesSearch, 3)).toContain(expected_category);
+        await expect(await getText(compactWithCategoriesSearch, 1)).toContain(expected_category);
+        await expect(await getText(compactWithCategoriesSearch, 3)).toContain(expected_category);
 
-        expect(getText(cozyWithDataSourceSearch, 1)).toContain(expected_category);
-        expect(getText(cozyWithDataSourceSearch, 3)).toContain(expected_category);
+        await expect(await getText(cozyWithDataSourceSearch, 1)).toContain(expected_category);
+        await expect(await getText(cozyWithDataSourceSearch, 3)).toContain(expected_category);
     });
 
-    it('should check clickability synchronize button', () => {
-        checkElArrIsClickable(synchronizeButton);
+    it('should check clickability synchronize button', async () => {
+        await checkElArrIsClickable(synchronizeButton);
     });
 
-    it('should check rtl switch', () => {
-        searchPage.checkRtlSwitch();
+    it('should check rtl switch', async () => {
+        await searchPage.checkRtlSwitch();
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            searchPage.saveExampleBaselineScreenshot();
-            expect(searchPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await searchPage.saveExampleBaselineScreenshot();
+            await expect(await searchPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

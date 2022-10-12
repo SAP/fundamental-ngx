@@ -5,7 +5,7 @@ export class MultiComboboxPo extends PlatformBaseComponentPo {
 
     mobileModeExamples = 'fdp-multi-combobox-mobile-example ';
 
-    expandButton = '#page-content .fd-input-group .fd-button';
+    expandButton = 'fdp-multi-combobox .fd-input-group .fd-button';
     mobileExpandButton = this.mobileModeExamples + '.fd-input-group .fd-button';
     token = '.fd-token__text';
     tokenCloseButton = '.fd-token .fd-token__close';
@@ -13,31 +13,31 @@ export class MultiComboboxPo extends PlatformBaseComponentPo {
     inputField = this.tokenInputField + ' .fd-input';
     list = '.fd-popover__popper .fd-list';
     listItemCheckbox = this.list + ' fd-checkbox';
-    listItem = this.list + ' .fd-list__item[role="option"]';
-    selectedListItem = this.list + ' .fd-list__item.is-selected';
+    listItem = this.list + ' li.fd-list__item[role="listitem"]';
+    selectedListItem = this.list + ' .fd-list__item.is-selected .fd-list__title';
 
     dialog = '[role="dialog"]';
     dialogButton = this.dialog + ' .fd-button';
-    dialogListItem = this.dialog + ' .fd-list__item[role="option"]';
-    selectedDialogItem = this.dialog + ' .fd-list__item.is-selected';
+    dialogListItem = this.dialog + ' .fd-list__item[role="listitem"]';
+    selectedDialogItem = this.dialog + ' .fd-list__item.is-selected .fd-list__title';
     dialogInput = this.dialog + ' #mobile';
     showSelectedItemsBtn = this.dialog + ' .fd-margin-begin--tiny';
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'multi-combobox'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'multi-combobox'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, await this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'multi-combobox'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'multi-combobox'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 }

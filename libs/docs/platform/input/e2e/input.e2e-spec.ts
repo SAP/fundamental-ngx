@@ -47,160 +47,160 @@ describe('Input should ', () => {
         errorMessage
     } = inputPage;
 
-    beforeAll(() => {
-        inputPage.open();
+    beforeAll(async () => {
+        await inputPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(defaultInput);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(defaultInput);
     }, 1);
 
-    it('have input without label', () => {
-        waitForElDisplayed(defaultInput);
-        expect(doesItExist(autocompleteInputLabel)).toBe(false);
+    it('have input without label', async () => {
+        await waitForElDisplayed(defaultInput);
+        await expect(await doesItExist(autocompleteInputLabel)).toBe(false);
     });
 
-    it('be able to type something with keyboard', () => {
-        waitForElDisplayed(defaultInput);
-        setValue(defaultInput, text);
+    it('be able to type something with keyboard', async () => {
+        await waitForElDisplayed(defaultInput);
+        await setValue(defaultInput, text);
 
-        expect(getValue(defaultInput)).toBe(text);
+        await expect(await getValue(defaultInput)).toBe(text);
     });
 
-    it('have associated label element to describe its purpose', () => {
-        expect(getTextArr(inputsLabels, 0, -2)).toEqual(labelsArray);
-        expect(getText(inputsLabels, 8)).toContain(favoriteColor);
-        expect(getText(inputsLabels, 9)).toContain(maxValidation);
+    it('have associated label element to describe its purpose', async () => {
+        await expect(await getTextArr(inputsLabels, 0, -2)).toEqual(labelsArray);
+        await expect(await getText(inputsLabels, 8)).toContain(favoriteColor);
+        await expect(await getText(inputsLabels, 9)).toContain(maxValidation);
     });
 
-    it('by default accept all kinds of input values – alphabet, numerical, special characters', () => {
-        waitForElDisplayed(defaultInput);
-        setValue(defaultInput, text);
-        addValue(defaultInput, number);
-        addValue(defaultInput, special_characters);
+    it('by default accept all kinds of input values – alphabet, numerical, special characters', async () => {
+        await waitForElDisplayed(defaultInput);
+        await setValue(defaultInput, text);
+        await addValue(defaultInput, number);
+        await addValue(defaultInput, special_characters);
 
-        expect(getValue(defaultInput)).toEqual(text + number + special_characters);
+        await expect(await getValue(defaultInput)).toEqual(text + number + special_characters);
     });
 
-    it('impose any filters on the kind of input values the component receives (text)', () => {
-        waitForElDisplayed(textInput);
-        addValue(textInput, number);
-        addValue(textInput, special_characters);
-        addValue(textInput, text);
+    it('impose any filters on the kind of input values the component receives (text)', async () => {
+        await waitForElDisplayed(textInput);
+        await addValue(textInput, number);
+        await addValue(textInput, special_characters);
+        await addValue(textInput, text);
 
-        expect(getValue(textInput)).toEqual(number + special_characters + text); // ???
+        await expect(await getValue(textInput)).toEqual(number + special_characters + text); // ???
     });
 
-    it('impose any filters on the kind of input values the component receives (number)', () => {
-        if (browserIsSafariorFF()) {
+    it('impose any filters on the kind of input values the component receives (number)', async () => {
+        if (await browserIsSafariorFF()) {
             return;
             // not working on FF and safari, needs investigation
         }
-        waitForElDisplayed(numberInput);
-        click(numberInput);
+        await waitForElDisplayed(numberInput);
+        await click(numberInput);
 
-        addValue(numberInput, number);
-        addValue(numberInput, special_characters);
+        await addValue(numberInput, number);
+        await addValue(numberInput, special_characters);
 
-        expect(getValue(numberInput)).toEqual(number);
+        await expect(await getValue(numberInput)).toEqual(number);
     });
 
-    it('should check increase/decriase value by arrows', () => {
-        waitForElDisplayed(numberInput);
-        click(numberInput);
+    it('should check increase/decriase value by arrows', async () => {
+        await waitForElDisplayed(numberInput);
+        await click(numberInput);
 
-        sendKeys('ArrowUp');
-        expect(getValue(numberInput)).toEqual('1');
+        await sendKeys('ArrowUp');
+        await expect(await getValue(numberInput)).toEqual('1');
 
-        sendKeys('ArrowDown');
-        sendKeys('ArrowDown');
-        expect(getValue(numberInput)).toEqual('-1');
+        await sendKeys('ArrowDown');
+        await sendKeys('ArrowDown');
+        await expect(await getValue(numberInput)).toEqual('-1');
     });
 
-    it('wrap the input characters to the next line', () => {
-        waitForElDisplayed(defaultInput);
-        const heightBefore = getElementSize(defaultInput, 0, 'height');
-        setValue(defaultInput, longLine);
-        const heightAfter = getElementSize(defaultInput, 0, 'height');
+    it('wrap the input characters to the next line', async () => {
+        await waitForElDisplayed(defaultInput);
+        const heightBefore = await (await getElementSize(defaultInput, 0)).height;
+        await setValue(defaultInput, longLine);
+        const heightAfter = await (await getElementSize(defaultInput, 0)).height;
 
-        expect(heightBefore).toBeLessThanOrEqual(heightAfter);
+        await expect(heightBefore).toBeLessThanOrEqual(heightAfter);
     });
 
-    it('enable editing the entered characters', () => {
-        waitForElDisplayed(defaultInput);
-        setValue(defaultInput, text);
-        sendKeys('Backspace');
+    it('enable editing the entered characters', async () => {
+        await waitForElDisplayed(defaultInput);
+        await setValue(defaultInput, text);
+        await sendKeys('Backspace');
 
-        expect(getValue(defaultInput)).toBe(text.slice(0, -1));
-        clearValue(defaultInput);
-        expect(getValue(defaultInput)).toBe('');
+        await expect(await getValue(defaultInput)).toBe(text.slice(0, -1));
+        await clearValue(defaultInput);
+        await expect(await getValue(defaultInput)).toBe('');
     });
 
-    it('check have disabled attr assigned', () => {
-        waitForElDisplayed(disabledInput);
-        expect(isEnabled(disabledInput)).toBe(false);
+    it('check have disabled attr assigned', async () => {
+        await waitForElDisplayed(disabledInput);
+        await expect(await isEnabled(disabledInput)).toBe(false);
     });
 
-    it('have placeholder', () => {
-        expect(getAttributeByNameArr(inputsArray, 'placeholder', 1)).toEqual(placeholdersArray);
+    it('have placeholder', async () => {
+        await expect(await getAttributeByNameArr(inputsArray, 'placeholder', 1)).toEqual(placeholdersArray);
     });
 
-    it('should have error border color', () => {
-        scrollIntoView(messagesComponentsInput);
-        waitForElDisplayed(messagesComponentsInput);
-        click(submitBtn);
-        click(messagesComponentsInput);
-        pause(300);
-        waitForElDisplayed(errorTextAttr);
-        expect(getText(errorTextAttr).trim()).toBe(errorText);
+    it('should have error border color', async () => {
+        await scrollIntoView(messagesComponentsInput);
+        await waitForElDisplayed(messagesComponentsInput);
+        await click(submitBtn);
+        await click(messagesComponentsInput);
+        await pause(300);
+        await waitForElDisplayed(errorTextAttr);
+        await expect((await getText(errorTextAttr)).trim()).toBe(errorText);
     });
 
-    it('should have visual cue for require input', () => {
-        scrollIntoView(requiredInputLabel);
-        pause(2000);
-        expect(executeScriptAfterTagAttr(requiredInputLabel, 'content')).toBe('"*"');
+    it('should have visual cue for require input', async () => {
+        await scrollIntoView(requiredInputLabel);
+        await pause(2000);
+        await expect(await executeScriptAfterTagAttr(requiredInputLabel, 'content')).toBe('"*"');
     });
 
-    it('should have visual cue for information', () => {
-        expect($$(questionMarkSpan)).toBeTruthy();
+    it('should have visual cue for information', async () => {
+        await expect(await $$(questionMarkSpan)).toBeTruthy();
     });
 
-    it('should implement autosuggestion', () => {
-        waitForElDisplayed(autocompleteInput);
-        addValue(autocompleteInput, autocompleteOption);
+    it('should implement autosuggestion', async () => {
+        await waitForElDisplayed(autocompleteInput);
+        await addValue(autocompleteInput, autocompleteOption);
 
-        expect(getElementArrayLength(autocompleteOptions)).toBeGreaterThanOrEqual(2);
-        const autocompleteOptionText = getTextArr(autocompleteOptions);
-        autocompleteOptionText.forEach((option) => {
-            expect(option.toLowerCase()).toContain(autocompleteOption);
-        });
-        pause(3000);
-        click(autocompleteOptions);
-        expect(getValue(autocompleteInput).toLowerCase()).toContain(autocompleteOption);
+        await expect(await getElementArrayLength(autocompleteOptions)).toBeGreaterThanOrEqual(2);
+        const autocompleteOptionText = await getTextArr(autocompleteOptions);
+        for (const option of autocompleteOptionText) {
+            await expect(option.toLowerCase()).toContain(autocompleteOption);
+        }
+        await pause(3000);
+        await click(autocompleteOptions);
+        await expect((await getValue(autocompleteInput)).toLowerCase()).toContain(autocompleteOption);
     });
 
-    it('should compact be smaller than the default', () => {
-        const defaultHeight = getElementSize(defaultInput);
-        const compactHeight = getElementSize(compactInput);
+    it('should compact be smaller than the default', async () => {
+        const defaultHeight = await getElementSize(defaultInput);
+        const compactHeight = await getElementSize(compactInput);
 
-        expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
+        await expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
     });
 
-    it('should check that validation does not work earlier than necessary', () => {
-        scrollIntoView(messagesComponentsInput);
-        click(messagesComponentsInput);
-        expect(doesItExist(errorMessage)).toBe(false);
+    it('should check that validation does not work earlier than necessary', async () => {
+        await scrollIntoView(messagesComponentsInput);
+        await click(messagesComponentsInput);
+        await expect(await doesItExist(errorMessage)).toBe(false);
     });
 
-    it('should check RTL', () => {
-        inputPage.checkRtlSwitch();
+    it('should check RTL', async () => {
+        await inputPage.checkRtlSwitch();
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            inputPage.saveExampleBaselineScreenshot();
-            expect(inputPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await inputPage.saveExampleBaselineScreenshot();
+            await expect(await inputPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

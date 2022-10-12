@@ -18,11 +18,11 @@
     </form>
 
     <div>
-        <small>Touched: {{ customForm.controls.itemOnDropdownMode.touched }}</small>
-        <br />
-        <small>Dirty: {{ customForm.controls.itemOnDropdownMode.dirty }}</small>
-        <br />
-        <small>Json Value: {{ customForm.controls.itemOnDropdownMode.value | json }}</small>
+        <small>
+            Touched: {{ customForm.controls.itemOnDropdownMode.touched }}<br />
+            Dirty: {{ customForm.controls.itemOnDropdownMode.dirty }}<br />
+            Json Value: {{ customForm.controls.itemOnDropdownMode.value | json }}
+        </small>
     </div>
 
     <form [formGroup]="customForm">
@@ -42,10 +42,10 @@
     </form>
 
     <div>
-        <small>Touched: {{ customForm.controls.item.touched }}</small>
-        <br />
-        <small>Dirty: {{ customForm.controls.item.dirty }}</small>
-        <br />
-        <small>Json Value: {{ customForm.controls.item.value | json }}</small>
+        <small>
+            Touched: {{ customForm.controls.item.touched }}<br />
+            Dirty: {{ customForm.controls.item.dirty }}<br />
+            Json Value: {{ customForm.controls.item.value | json }}
+        </small>
     </div>
 </div>

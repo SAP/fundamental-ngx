@@ -52,225 +52,225 @@ describe('Upload collection test suite', () => {
         dialog
     } = uploadCollectionPage;
 
-    beforeAll(() => {
-        uploadCollectionPage.open();
+    beforeAll(async () => {
+        await uploadCollectionPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(uploadCollectionPage.root);
-        waitForElDisplayed(uploadCollectionPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(uploadCollectionPage.root);
+        await waitForElDisplayed(uploadCollectionPage.title);
     }, 1);
 
-    it('should check the possibility of creating table item for Default and Without Pagination and Search examples', () => {
-        checkCreatingFolder(defaultExample);
-        checkCreatingFolder(turnOffExample);
+    it('should check the possibility of creating table item for Default and Without Pagination and Search examples', async () => {
+        await checkCreatingFolder(defaultExample);
+        await checkCreatingFolder(turnOffExample);
     });
 
-    it('should check the possibility of removing table item for Default and Without Pagination and Search examples', () => {
-        checkRemovingItem(defaultExample);
-        checkRemovingItem(turnOffExample);
+    it('should check the possibility of removing table item for Default and Without Pagination and Search examples', async () => {
+        await checkRemovingItem(defaultExample);
+        await checkRemovingItem(turnOffExample);
     });
 
-    it('should check the choice how many items display on page for all examples', () => {
-        checkDisplayedItemsPerPage(defaultExample);
-        checkDisplayedItemsPerPage(disableExample);
-        checkDisplayedItemsPerPage(readonlyExample);
+    it('should check the choice how many items display on page for all examples', async () => {
+        await checkDisplayedItemsPerPage(defaultExample);
+        await checkDisplayedItemsPerPage(disableExample);
+        await checkDisplayedItemsPerPage(readonlyExample);
     });
 
-    it('should check selected pages by clicking each option for all examples', () => {
-        checkSelectedPages(defaultExample);
-        checkSelectedPages(disableExample);
-        checkSelectedPages(readonlyExample);
+    it('should check selected pages by clicking each option for all examples', async () => {
+        await checkSelectedPages(defaultExample);
+        await checkSelectedPages(disableExample);
+        await checkSelectedPages(readonlyExample);
     });
 
-    it('should check selected pages by clicking previous and next link for all examples', () => {
-        checkSelectedPagesByNextPrevious(defaultExample);
-        checkSelectedPagesByNextPrevious(disableExample);
-        checkSelectedPagesByNextPrevious(readonlyExample);
+    it('should check selected pages by clicking previous and next link for all examples', async () => {
+        await checkSelectedPagesByNextPrevious(defaultExample);
+        await checkSelectedPagesByNextPrevious(disableExample);
+        await checkSelectedPagesByNextPrevious(readonlyExample);
     });
 
-    it('should check placeholders all examples', () => {
-        const inputLength = getElementArrayLength(inputFields);
+    it('should check placeholders all examples', async () => {
+        const inputLength = await getElementArrayLength(inputFields);
         for (let i = 0; i < inputLength; i++) {
-            expect(getElementPlaceholder(inputFields, i)).toBe('Search');
+            await expect(await getElementPlaceholder(inputFields, i)).toBe('Search');
         }
     });
 
-    it('should check table column headers displayed correctly for all examples', () => {
-        checkColumnHeaderText(defaultExample);
-        checkColumnHeaderText(disableExample);
-        checkColumnHeaderText(readonlyExample, ' div');
-        checkColumnHeaderText(turnOffExample, ' div');
+    it('should check table column headers displayed correctly for all examples', async () => {
+        await checkColumnHeaderText(defaultExample);
+        await checkColumnHeaderText(disableExample);
+        await checkColumnHeaderText(readonlyExample, ' div');
+        await checkColumnHeaderText(turnOffExample, ' div');
     });
 
-    it('should check searching table contents for all examples', () => {
-        checkAbleToSearch(defaultExample);
-        checkAbleToSearch(disableExample);
-        checkAbleToSearch(readonlyExample);
+    it('should check searching table contents for all examples', async () => {
+        await checkAbleToSearch(defaultExample);
+        await checkAbleToSearch(disableExample);
+        await checkAbleToSearch(readonlyExample);
     });
 
-    it('should check for clickability cancel button in dialog header window', () => {
-        checkClickabilityCancelButton(defaultExample);
-        checkClickabilityCancelButton(defaultExample);
+    it('should check for clickability cancel button in dialog header window', async () => {
+        await checkClickabilityCancelButton(defaultExample);
+        await checkClickabilityCancelButton(defaultExample);
     });
 
     // skip due to https://github.com/SAP/fundamental-ngx/issues/7098
-    xit('should check renaming folder', () => {
-        checkRenaming(turnOffExample);
-        checkRenaming(defaultExample);
+    xit('should check renaming folder', async () => {
+        await checkRenaming(turnOffExample);
+        await checkRenaming(defaultExample);
     });
 
-    xit('should check moving folders', () => {
+    xit('should check moving folders', async () => {
         // skipped due to cannot reproduce failure, needs further investigation
-        if (getCurrentUrl().includes('localhost')) {
+        if ((await getCurrentUrl()).includes('localhost')) {
             return;
         }
-        checkMovingFolders(defaultExample);
-        checkMovingFolders(turnOffExample);
+        await checkMovingFolders(defaultExample);
+        await checkMovingFolders(turnOffExample);
     });
 
-    it('should check orientation', () => {
-        uploadCollectionPage.checkRtlSwitch();
+    it('should check orientation', async () => {
+        await uploadCollectionPage.checkRtlSwitch();
     });
 
-    function checkMovingFolders(selector: string): void {
-        const movedFolderName = getText(selector + fileNameLabel).trim();
-        click(selector + tableItem);
-        click(selector + checkbox, 1);
-        click(selector + ghostButton);
-        pause(1000);
-        const folderName = getText(listItemTitle, 1).trim();
-        click(listItem, 1);
-        click(moveButton);
-        const itemsLength = getElementArrayLength(selector + tableItem);
+    async function checkMovingFolders(selector: string): Promise<void> {
+        const movedFolderName = (await getText(selector + fileNameLabel)).trim();
+        await click(selector + tableItem);
+        await click(selector + checkbox, 1);
+        await click(selector + ghostButton);
+        await pause(1000);
+        const folderName = (await getText(listItemTitle, 1)).trim();
+        await click(listItem, 1);
+        await click(moveButton);
+        const itemsLength = await getElementArrayLength(selector + tableItem);
         for (let i = 0; i < itemsLength; i++) {
-            scrollIntoView(selector + tableItem, i);
-            if (getText(selector + fileNameLabel, i).trim() === folderName) {
-                click(selector + fileNameLabel, i);
+            await scrollIntoView(selector + tableItem, i);
+            if ((await getText(selector + fileNameLabel, i)).trim() === folderName) {
+                await click(selector + fileNameLabel, i);
                 break;
             }
         }
         let j = 0;
-        const subItemsLength = getElementArrayLength(selector + tableItem);
+        const subItemsLength = await getElementArrayLength(selector + tableItem);
         for (let i = 0; i < subItemsLength; i++) {
-            if (getText(selector + fileNameLabel, i).trim() === movedFolderName) {
+            if ((await getText(selector + fileNameLabel, i)).trim() === movedFolderName) {
                 j = 1;
                 break;
             }
         }
-        expect(j).toBe(1);
+        await expect(j).toBe(1);
     }
 
-    function checkRenaming(selector: string): void {
-        scrollIntoView(selector + checkbox);
-        click(selector + checkbox, 1);
-        click(selector + inputFields);
-        sendKeys('Backspace');
-        sendKeys('0');
-        const newName = getValue(selector + inputFields);
-        click(selector + checkbox, 1);
-        waitForNotDisplayed(selector + busyIndicator);
-        expect(getText(selector + fileNameLabel).trim()).toEqual(newName);
+    async function checkRenaming(selector: string): Promise<void> {
+        await scrollIntoView(selector + checkbox);
+        await click(selector + checkbox, 1);
+        await click(selector + inputFields);
+        await sendKeys('Backspace');
+        await sendKeys('0');
+        const newName = await getValue(selector + inputFields);
+        await click(selector + checkbox, 1);
+        await waitForNotDisplayed(selector + busyIndicator);
+        await expect((await getText(selector + fileNameLabel)).trim()).toEqual(newName);
     }
 
-    function checkDisplayedItemsPerPage(selector: string): void {
-        scrollIntoView(selector + buttons);
-        const tenItems = getElementArrayLength(selector + tableItems);
-        expect(tenItems).toEqual(10);
+    async function checkDisplayedItemsPerPage(selector: string): Promise<void> {
+        await scrollIntoView(selector + buttons);
+        const tenItems = await getElementArrayLength(selector + tableItems);
+        await expect(tenItems).toEqual(10);
 
-        click(selector + buttons);
-        click(menuItem);
-        pause(300);
+        await click(selector + buttons);
+        await click(menuItem);
+        await pause(300);
 
-        const fiveItems = getElementArrayLength(selector + tableItems);
-        expect(fiveItems).toEqual(5);
+        const fiveItems = await getElementArrayLength(selector + tableItems);
+        await expect(fiveItems).toEqual(5);
 
-        click(selector + buttons);
-        click(menuItem, 2);
-        pause(300);
+        await click(selector + buttons);
+        await click(menuItem, 2);
+        await pause(300);
 
-        const fifteenItems = getElementArrayLength(selector + tableItems);
-        expect(fifteenItems).toEqual(15);
+        const fifteenItems = await getElementArrayLength(selector + tableItems);
+        await expect(fifteenItems).toEqual(15);
 
-        scrollIntoView(selector + buttons);
-        click(selector + buttons);
-        click(menuItem, 3);
-        pause(300);
+        await scrollIntoView(selector + buttons);
+        await click(selector + buttons);
+        await click(menuItem, 3);
+        await pause(300);
 
-        const twentyItems = getElementArrayLength(selector + tableItems);
-        expect(twentyItems).toEqual(20);
+        const twentyItems = await getElementArrayLength(selector + tableItems);
+        await expect(twentyItems).toEqual(20);
     }
 
-    function checkSelectedPages(selector: string): void {
-        scrollIntoView(selector + tablePages);
-        const linksLength = getElementArrayLength(selector + tablePages);
+    async function checkSelectedPages(selector: string): Promise<void> {
+        await scrollIntoView(selector + tablePages);
+        const linksLength = await getElementArrayLength(selector + tablePages);
         for (let i = 0; i < linksLength; i++) {
-            click(selector + tablePages, i);
-            pause(300);
-            expect(getText(selector + tableResult).trim()).toBe(paginationTestArr[i]);
+            await click(selector + tablePages, i);
+            await pause(300);
+            await expect((await getText(selector + tableResult)).trim()).toBe(paginationTestArr[i]);
         }
     }
 
-    function checkSelectedPagesByNextPrevious(selector: string): void {
-        scrollIntoView(selector + linkNext);
-        click(selector + linkNext);
-        pause(300);
-        expect(getText(selector + tableResult).trim()).toBe(paginationTestArr[1]);
+    async function checkSelectedPagesByNextPrevious(selector: string): Promise<void> {
+        await scrollIntoView(selector + linkNext);
+        await click(selector + linkNext);
+        await pause(300);
+        await expect((await getText(selector + tableResult)).trim()).toBe(paginationTestArr[1]);
 
-        click(selector + linkPrevious);
-        pause(300);
-        expect(getText(selector + tableResult).trim()).toBe(paginationTestArr[0]);
+        await click(selector + linkPrevious);
+        await pause(300);
+        await expect((await getText(selector + tableResult)).trim()).toBe(paginationTestArr[0]);
     }
 
-    function checkColumnHeaderText(selector: string, str: string = ''): void {
-        scrollIntoView(selector + columnHeaders + str);
-        const headerLength = getElementArrayLength(selector + columnHeaders + str);
+    async function checkColumnHeaderText(selector: string, str: string = ''): Promise<void> {
+        await scrollIntoView(selector + columnHeaders + str);
+        const headerLength = await getElementArrayLength(selector + columnHeaders + str);
         for (let i = 0; i < headerLength; i++) {
-            expect(getText(selector + columnHeaders + str, i).trim()).toBe(columnHeaderTestArr[i]);
+            await expect((await getText(selector + columnHeaders + str, i)).trim()).toBe(columnHeaderTestArr[i]);
         }
     }
 
-    function checkAbleToSearch(selector: string): void {
-        scrollIntoView(selector + inputFields);
-        setValue(selector + inputFields, 'Folder');
-        const contentLength = getElementArrayLength(selector + tableContent);
-        expect(contentLength).toEqual(4);
+    async function checkAbleToSearch(selector: string): Promise<void> {
+        await scrollIntoView(selector + inputFields);
+        await setValue(selector + inputFields, 'Folder');
+        const contentLength = await getElementArrayLength(selector + tableContent);
+        await expect(contentLength).toEqual(4);
         for (let i = 0; i < contentLength; i++) {
-            expect(getText(selector + tableContent, i).trim()).toBe(testFolderArr[i]);
+            await expect((await getText(selector + tableContent, i)).trim()).toBe(testFolderArr[i]);
         }
     }
 
-    function checkCreatingFolder(selector: string): void {
-        scrollIntoView(selector);
-        const countBeforeAdd = getText(selector + tableItemCount).trim();
-        expect(countBeforeAdd).toEqual('All files (54)');
-        click(selector + transparentButton);
-        setValue(dialogInputField, testFolder1);
-        click(dialogCreateButton);
-        pause(300);
-        expect(getText(selector + tableItemCount).trim()).toBe('All files (55)');
-        const countAfterAdd = getText(selector + tableItemCount).trim();
-        expect(countAfterAdd).toEqual('All files (55)');
-        expect(getText(selector + tableContent, 4).trim()).toBe(testFolder1);
+    async function checkCreatingFolder(selector: string): Promise<void> {
+        await scrollIntoView(selector);
+        const countBeforeAdd = (await getText(selector + tableItemCount)).trim();
+        await expect(countBeforeAdd).toEqual('All files (54)');
+        await click(selector + transparentButton);
+        await setValue(dialogInputField, testFolder1);
+        await click(dialogCreateButton);
+        await pause(300);
+        await expect((await getText(selector + tableItemCount)).trim()).toBe('All files (55)');
+        const countAfterAdd = (await getText(selector + tableItemCount)).trim();
+        await expect(countAfterAdd).toEqual('All files (55)');
+        await expect((await getText(selector + tableContent, 4)).trim()).toBe(testFolder1);
     }
 
-    function checkRemovingItem(selector: string): void {
-        scrollIntoView(selector);
-        const countBeforeRemove = getText(selector + tableItemCount).trim();
-        expect(countBeforeRemove).toEqual('All files (54)');
-        click(selector + transparentButton, 5);
-        click(menuButton, 3);
-        pause(300);
-        const countAfterRemove = getText(selector + tableItemCount).trim();
-        expect(countAfterRemove).toEqual('All files (53)');
+    async function checkRemovingItem(selector: string): Promise<void> {
+        await scrollIntoView(selector);
+        const countBeforeRemove = (await getText(selector + tableItemCount)).trim();
+        await expect(countBeforeRemove).toEqual('All files (54)');
+        await click(selector + transparentButton, 5);
+        await click(menuButton, 3);
+        await pause(300);
+        const countAfterRemove = (await getText(selector + tableItemCount)).trim();
+        await expect(countAfterRemove).toEqual('All files (53)');
     }
 
-    function checkClickabilityCancelButton(selector: string): void {
-        scrollIntoView(selector + transparentButton);
-        click(defaultExample + transparentButton);
-        waitForElDisplayed(dialog);
-        expect(isElementClickable(dialogCreateButton, 1)).toBe(true, '"Cancel" button not clickable');
-        sendKeys(['Escape']);
+    async function checkClickabilityCancelButton(selector: string): Promise<void> {
+        await scrollIntoView(selector + transparentButton);
+        await click(defaultExample + transparentButton);
+        await waitForElDisplayed(dialog);
+        await expect(await isElementClickable(dialogCreateButton, 1)).toBe(true, '"Cancel" button not clickable');
+        await sendKeys(['Escape']);
     }
 });

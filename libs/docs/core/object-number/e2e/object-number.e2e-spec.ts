@@ -31,41 +31,41 @@ describe('object number test suite', () => {
         boldObjExampleText
     } = objectNumberPage;
 
-    beforeAll(() => {
-        objectNumberPage.open();
+    beforeAll(async () => {
+        await objectNumberPage.open();
     }, 1);
 
     describe('main checks', () => {
-        it('should check elements displayed and unit property', () => {
-            const objectCount = getElementArrayLength(allExamples);
+        it('should check elements displayed and unit property', async () => {
+            const objectCount = await getElementArrayLength(allExamples);
 
             for (let i = 0; i < objectCount; i++) {
-                scrollIntoView(allExamples, i);
-                expect(waitForElDisplayed(allExamples, i)).toBe(true);
-                expect([null, '']).not.toContain(getAttributeByName(allExamples, unitAttr, i));
+                await scrollIntoView(allExamples, i);
+                await expect(await waitForElDisplayed(allExamples, i)).toBe(true);
+                await expect([null, '']).not.toContain(await getAttributeByName(allExamples, unitAttr, i));
             }
         });
     });
 
     describe('basic object number examples', () => {
-        xit('should check values', () => {
-            checkObjectValues(basicExamples, basicExamplesText);
+        xit('should check values', async () => {
+            await checkObjectValues(basicExamples, basicExamplesText);
         });
     });
 
     describe('object number status examples', () => {
-        it('should check object number status examples', () => {
-            checkObjectValues(objStatusExamples, objStatusExamplesText);
+        it('should check object number status examples', async () => {
+            await checkObjectValues(objStatusExamples, objStatusExamplesText);
         });
     });
 
     describe('large object number examples', () => {
-        it('should check values', () => {
-            checkObjectValues(largeObjExamples, styledObjExampleText);
+        it('should check values', async () => {
+            await checkObjectValues(largeObjExamples, styledObjExampleText);
         });
 
-        it('should check large font', () => {
-            const objectCount = getElementArrayLength(largeObjExamples);
+        it('should check large font', async () => {
+            const objectCount = await getElementArrayLength(largeObjExamples);
 
             for (let i = 0; i < objectCount; i++) {
                 // in prod mode missed attr: ng-reflect-large
@@ -75,57 +75,57 @@ describe('object number test suite', () => {
     });
 
     describe('bold object number examples', () => {
-        it('should check values', () => {
-            checkObjectValues(boldObjExamples, styledObjExampleText);
+        it('should check values', async () => {
+            await checkObjectValues(boldObjExamples, styledObjExampleText);
         });
 
-        it('should check bold font', () => {
-            const objectCount = getElementArrayLength(boldObjExamples);
+        it('should check bold font', async () => {
+            const objectCount = await getElementArrayLength(boldObjExamples);
 
             for (let i = 0; i < objectCount; i++) {
-                expect(getElementClass(boldObjExampleText)).toContain('bold');
+                await expect(await getElementClass(boldObjExampleText)).toContain('bold');
             }
         });
     });
 
     describe('object number units examples', () => {
-        it('should check values', () => {
-            checkObjectValues(unitObjExamples, objUnitExamplesText);
+        it('should check values', async () => {
+            await checkObjectValues(unitObjExamples, objUnitExamplesText);
         });
     });
 
     describe('object number decimal examples', () => {
-        it('should check values', () => {
-            checkObjectValues(decimalObjExamples, objDecimalExamplesText);
+        it('should check values', async () => {
+            await checkObjectValues(decimalObjExamples, objDecimalExamplesText);
         });
     });
 
     describe('object number decimal examples', () => {
-        it('should check values', () => {
-            checkObjectValues(truncationObjExample, objTruncationText);
+        it('should check values', async () => {
+            await checkObjectValues(truncationObjExample, objTruncationText);
         });
     });
 
     describe('check orientation', () => {
-        it('should check RTL and LTR', () => {
-            objectNumberPage.checkRtlSwitch();
+        it('should check RTL and LTR', async () => {
+            await objectNumberPage.checkRtlSwitch();
         });
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            objectNumberPage.saveExampleBaselineScreenshot();
-            expect(objectNumberPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await objectNumberPage.saveExampleBaselineScreenshot();
+            await expect(await objectNumberPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
 
-function checkObjectValues(selector, dataArr): void {
-    const objectCount = getElementArrayLength(selector);
+async function checkObjectValues(selector, dataArr): Promise<void> {
+    const objectCount = await getElementArrayLength(selector);
 
     for (let i = 0; i < objectCount; i++) {
-        const unitValue = getAttributeByName(selector, unitAttr, i);
-        const textValue = getText(selector + ' .fd-object-number__text', i).trim();
-        expect(textValue + ' ' + unitValue).toEqual(dataArr[i] + ' ' + unitValue);
+        const unitValue = await getAttributeByName(selector, unitAttr, i);
+        const textValue = (await getText(selector + ' .fd-object-number__text', i)).trim();
+        await expect(textValue + ' ' + unitValue).toEqual(dataArr[i] + ' ' + unitValue);
     }
 }

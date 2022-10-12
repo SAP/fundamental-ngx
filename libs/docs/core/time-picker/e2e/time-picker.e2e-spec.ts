@@ -53,79 +53,91 @@ describe('Time-picker component test', () => {
         frFormat
     } = timePickerPage;
 
-    beforeAll(() => {
-        timePickerPage.open();
+    beforeAll(async () => {
+        await timePickerPage.open();
     }, 1);
 
-    beforeEach(() => {
-        refreshPage();
-        waitForPresent(timePickerPage.root);
-        waitForElDisplayed(timePickerPage.title);
+    beforeEach(async () => {
+        await refreshPage();
+        await waitForPresent(timePickerPage.root);
+        await waitForElDisplayed(timePickerPage.title);
     }, 2);
 
-    it('should check default example', () => {
-        checkTimePickerFormat(defaultExample);
-        checkChoosingTime(defaultExample);
-        setValueByKeyboard(defaultExample);
+    it('should check default example', async () => {
+        await checkTimePickerFormat(defaultExample);
+        await checkChoosingTime(defaultExample);
+        await setValueByKeyboard(defaultExample);
     });
 
-    it('should check formatting example', () => {
-        checkTimePickerFormat(formattingExample);
-        checkChoosingTime(formattingExample);
-        setValueByKeyboard(formattingExample);
+    it('should check formatting example', async () => {
+        await checkTimePickerFormat(formattingExample);
+        await checkChoosingTime(formattingExample);
+        await setValueByKeyboard(formattingExample);
     });
 
-    it('should check disabled time-pickers', () => {
-        expect(getElementClass(disabledExample + inputGroup)).toContain('is-disabled', 'Input is not disabled');
-        expect(getElementClass(formExample + inputGroup, 1)).toContain('is-disabled', 'Input is not disabled');
+    it('should check disabled time-pickers', async () => {
+        await expect(await getElementClass(disabledExample + inputGroup)).toContain(
+            'is-disabled',
+            'Input is not disabled'
+        );
+        await expect(await getElementClass(formExample + inputGroup, 1)).toContain(
+            'is-disabled',
+            'Input is not disabled'
+        );
     });
 
-    it('should check compact example', () => {
-        checkTimePickerFormat(compactExamle);
-        checkChoosingTime(compactExamle);
-        setValueByKeyboard(compactExamle);
+    it('should check compact example', async () => {
+        await checkTimePickerFormat(compactExamle);
+        await checkChoosingTime(compactExamle);
+        await setValueByKeyboard(compactExamle);
     });
 
-    it('should check null validaty example', () => {
-        checkTimePickerFormat(nullExample);
-        click(setToNullButton);
-        expect(getElementClass(nullExample + customTimePicker)).toContain('ng-invalid', 'Valus is valid');
-        expect(getElementClass(nullExample + inputGroup)).toContain('is-error', 'No error message');
-        click(setValidTimeButton);
-        expect(getElementClass(nullExample + customTimePicker)).not.toContain('ng-invalid', 'Value is invalid');
-        expect(getElementClass(nullExample + inputGroup)).not.toContain('is-error', 'Error message is present');
-        checkChoosingTime(nullExample);
-        setValueByKeyboard(nullExample);
+    it('should check null validaty example', async () => {
+        await checkTimePickerFormat(nullExample);
+        await click(setToNullButton);
+        await expect(await getElementClass(nullExample + customTimePicker)).toContain('ng-invalid', 'Valus is valid');
+        await expect(await getElementClass(nullExample + inputGroup)).toContain('is-error', 'No error message');
+        await click(setValidTimeButton);
+        await expect(await getElementClass(nullExample + customTimePicker)).not.toContain(
+            'ng-invalid',
+            'Value is invalid'
+        );
+        await expect(await getElementClass(nullExample + inputGroup)).not.toContain(
+            'is-error',
+            'Error message is present'
+        );
+        await checkChoosingTime(nullExample);
+        await setValueByKeyboard(nullExample);
     });
 
-    it('should check form example', () => {
-        checkTimePickerFormat(formExample);
-        click(formExample + clockIcon);
-        click(currentHour);
-        click(thirdColumn);
-        click(pmButton);
-        expect(getText(selectedTime).trim()).toEqual('12:00 PM');
-        click(amButton);
-        expect(getText(selectedTime).trim()).toEqual('12:00 AM');
-        click(formExample + clockIcon);
-        checkChoosingTime(formExample);
-        setValueByKeyboard(formExample);
+    it('should check form example', async () => {
+        await checkTimePickerFormat(formExample);
+        await click(formExample + clockIcon);
+        await click(currentHour);
+        await click(thirdColumn);
+        await click(pmButton);
+        await expect((await getText(selectedTime)).trim()).toEqual('12:00 PM');
+        await click(amButton);
+        await expect((await getText(selectedTime)).trim()).toEqual('12:00 AM');
+        await click(formExample + clockIcon);
+        await checkChoosingTime(formExample);
+        await setValueByKeyboard(formExample);
     });
 
-    it('should check local example', () => {
-        checkTimePickerFormat(localExample);
-        checkChoosingTime(localExample);
-        setValueByKeyboard(localExample);
+    it('should check local example', async () => {
+        await checkTimePickerFormat(localExample);
+        await checkChoosingTime(localExample);
+        await setValueByKeyboard(localExample);
     });
 
-    it('should check countries formats in local example', () => {
+    it('should check countries formats in local example', async () => {
         const usInputValue = '3:30 PM';
         const usAmValue = 'AM';
         const usPmValue = 'PM';
-        checkCountryFormat(usFormat, usInputValue, usAmValue, usPmValue);
+        await checkCountryFormat(usFormat, usInputValue, usAmValue, usPmValue);
 
         const frInputValue = '15:30';
-        checkCountryFormat(frFormat, frInputValue);
+        await checkCountryFormat(frFormat, frInputValue);
 
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/5751
         // const bgInputValue = '15:30 ч.';
@@ -140,92 +152,103 @@ describe('Time-picker component test', () => {
         const bnInputValue = '৩:৩০ PM';
         const bnAmValue = 'AM';
         const bnPmValue = 'PM';
-        checkCountryFormat(bnFormat, bnInputValue, bnAmValue, bnPmValue);
+        await checkCountryFormat(bnFormat, bnInputValue, bnAmValue, bnPmValue);
 
         // skip due to for unknown issue it fails in Safari
-        if (!browserIsSafari()) {
+        if (!(await browserIsSafari())) {
             const arInputValue = '٣:٣٠ م';
             const arAmValue = 'ص';
             const arPmValue = 'م';
-            checkCountryFormat(arFormat, arInputValue, arAmValue, arPmValue);
+            await checkCountryFormat(arFormat, arInputValue, arAmValue, arPmValue);
         }
     });
 
-    it('should check RTL and LTR orientation', () => {
-        timePickerPage.checkRtlSwitch();
+    it('should check RTL and LTR orientation', async () => {
+        await timePickerPage.checkRtlSwitch();
     });
 
-    xit('should check visual regression for all examples', () => {
-        timePickerPage.saveExampleBaselineScreenshot();
-        expect(timePickerPage.compareWithBaseline()).toBeLessThan(5);
+    xit('should check visual regression for all examples', async () => {
+        await timePickerPage.saveExampleBaselineScreenshot();
+        await expect(await timePickerPage.compareWithBaseline()).toBeLessThan(5);
     });
 
-    function checkCountryFormat(format: string, inputValue?: string, amValue?: string, pmValue?: string): void {
-        refreshPage();
-        click(formatDropDown);
-        expect(isElementDisplayed(formatList)).toBe(true);
-        click(format);
-        expect(getValue(localExample + timeInput).trim()).toEqual(inputValue);
-        click(localExample + clockIcon);
-        if (format !== frFormat && format !== bgFormat) {
-            click(thirdColumn);
-            expect(getText(amButton).trim()).toEqual(amValue);
-            expect(getText(pmButton).trim()).toEqual(pmValue);
+    async function checkCountryFormat(
+        format: string,
+        inputValue: string,
+        amValue?: string,
+        pmValue?: string
+    ): Promise<void> {
+        await refreshPage();
+        await click(formatDropDown);
+        await expect(await isElementDisplayed(formatList)).toBe(true);
+        await click(format);
+        await expect((await getValue(localExample + timeInput)).trim()).toEqual(inputValue);
+        await click(localExample + clockIcon);
+        if (format !== frFormat && format !== bgFormat && amValue && pmValue) {
+            await click(thirdColumn);
+            await expect((await getText(amButton)).trim()).toEqual(amValue);
+            await expect((await getText(pmButton)).trim()).toEqual(pmValue);
         }
         if (format === frFormat || format === bgFormat) {
-            expect(doesItExist(thirdColumn)).toBe(false);
+            await expect(await doesItExist(thirdColumn)).toBe(false);
         }
     }
 
-    function checkChoosingTime(section: string): void {
-        click(section + clockIcon);
-        expect(getElementClass(section + clockIcon)).toContain('is-expanded', 'Time picker is not expanded');
-        expect(isElementDisplayed(timePicker)).toBe(true);
-        const nextHour = getNextElementText(currentHour).trim();
-        clickNextElement(currentHour);
-        click(minutesColumn);
-        const prevMin = getPreviousElementText(currentMinute).trim();
-        clickPreviousElement(currentMinute);
-        const inputValue = getValue(section + timeInput);
+    async function checkChoosingTime(section: string): Promise<void> {
+        await click(section + clockIcon);
+        await expect(await getElementClass(section + clockIcon)).toContain(
+            'is-expanded',
+            'Time picker is not expanded'
+        );
+        await expect(await isElementDisplayed(timePicker)).toBe(true);
+        const nextHour = (await getNextElementText(currentHour)).trim();
+        await clickNextElement(currentHour);
+        await click(minutesColumn);
+        const prevMin = (await getPreviousElementText(currentMinute)).trim();
+        await clickPreviousElement(currentMinute);
+        const inputValue = await getValue(section + timeInput);
         if (section === formExample) {
-            expect(inputValue).toEqual(`${nextHour}:${prevMin} AM`);
+            await expect(inputValue).toEqual(`${nextHour}:${prevMin} AM`);
         }
         if (section === formattingExample) {
-            expect(inputValue).toEqual(`${nextHour}:${prevMin}:00`);
+            await expect(inputValue).toEqual(`${nextHour}:${prevMin}:00`);
         }
         if (section !== formattingExample && section !== formExample) {
-            expect(inputValue).toEqual(`${nextHour}:${prevMin} PM`);
+            await expect(inputValue).toEqual(`${nextHour}:${prevMin} PM`);
         }
-        click(section + clockIcon);
+        await click(section + clockIcon);
     }
 
-    function setValueByKeyboard(section: string): void {
+    async function setValueByKeyboard(section: string): Promise<void> {
         const value = '12:34 AM';
-        clearValue(section + timeInput);
-        setValue(section + timeInput, value);
-        sendKeys('Enter');
+        await clearValue(section + timeInput);
+        await setValue(section + timeInput, value);
+        await sendKeys('Enter');
 
         if (section === formattingExample) {
-            expect(getValue(section + timeInput)).toEqual(`${value}`);
+            await expect(await getValue(section + timeInput)).toEqual(`${value}`);
         }
         if (section !== formattingExample) {
-            expect(getValue(section + timeInput)).toEqual(`${value}`);
+            await expect(await getValue(section + timeInput)).toEqual(`${value}`);
         }
     }
 
-    function checkTimePickerFormat(section: string): void {
-        click(section + clockIcon);
-        expect(doesItExist(hoursColumn)).toBe(true, 'Hours column does not exist');
-        expect(doesItExist(minutesColumn)).toBe(true, 'Minutes column does not exist');
+    async function checkTimePickerFormat(section: string): Promise<void> {
+        await click(section + clockIcon);
+        await expect(await doesItExist(hoursColumn)).toBe(true, 'Hours column does not exist');
+        await expect(await doesItExist(minutesColumn)).toBe(true, 'Minutes column does not exist');
         if (section === formattingExample) {
-            expect(getElementClass(thirdColumn)).not.toContain(
+            await expect(await getElementClass(thirdColumn)).not.toContain(
                 'fd-time__wrapper--meridian',
                 'It is not meridian column'
             );
         }
         if (section !== formattingExample) {
-            expect(getElementClass(thirdColumn)).toContain('fd-time__wrapper--meridian', 'It is not meridian column');
+            await expect(await getElementClass(thirdColumn)).toContain(
+                'fd-time__wrapper--meridian',
+                'It is not meridian column'
+            );
         }
-        click(section + clockIcon);
+        await click(section + clockIcon);
     }
 });

@@ -489,12 +489,11 @@ export class ComboboxComponent
         if (!this.mobile) {
             this._propagateChange();
         }
-        this.onTouched();
     }
 
     /** Get the glyph value based on whether the combobox is used as a search field or not. */
     get glyphValue(): string {
-        return this.isSearch ? 'search' : 'navigation-down-arrow';
+        return this.isSearch ? 'search' : this.glyph;
     }
 
     /** @hidden */
@@ -506,7 +505,6 @@ export class ComboboxComponent
         if (!this.mobile) {
             this._propagateChange();
         }
-        this.onTouched();
         this._cdRef.detectChanges();
     }
 
@@ -569,7 +567,6 @@ export class ComboboxComponent
         }
         if (this.open !== isOpen) {
             this.open = isOpen;
-            this.onTouched();
             this.openChange.emit(isOpen);
         }
 
@@ -601,6 +598,7 @@ export class ComboboxComponent
     /** @hidden */
     handleBlur(): void {
         if (!this.open) {
+            this.onTouched();
             this.handleAutoComplete({
                 term: this.searchInputElement.nativeElement.value,
                 forceClose: false

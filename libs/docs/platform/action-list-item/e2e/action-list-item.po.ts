@@ -8,21 +8,21 @@ export class ActionListItemPo extends PlatformBaseComponentPo {
     cozyItem = 'fdp-platform-action-list-item-border-less-example fdp-list#cozy-list .fd-list__item';
     compactItem = 'fdp-platform-action-list-item-border-less-example fdp-list#compact-list .fd-list__item';
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'action-list-item'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'action-list-item'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, await this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'action-list-item'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'action-list-item'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 }

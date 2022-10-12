@@ -1,4 +1,7 @@
+@use '@angular/cdk';
 @import '~fundamental-styles/dist/select';
+
+@include cdk.a11y-visually-hidden();
 
 .fd-popover__body > :first-child {
     border-radius: 0;

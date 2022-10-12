@@ -40,155 +40,155 @@ describe('Combobox test suite', () => {
         comboBoxInputs
     } = comboBoxPage;
 
-    beforeAll(() => {
-        comboBoxPage.open();
+    beforeAll(async () => {
+        await comboBoxPage.open();
     }, 1);
 
-    beforeEach(() => {
-        refreshPage();
-        waitForPresent(comboBoxPage.root);
-        waitForElDisplayed(comboBoxPage.title);
+    beforeEach(async () => {
+        await refreshPage();
+        await waitForPresent(comboBoxPage.root);
+        await waitForElDisplayed(comboBoxPage.title);
     }, 1);
 
-    it('Verify each combobox consist of input and button', () => {
+    it('Verify each combobox consist of input and button', async () => {
         for (let i = 0; i < activeTypeNames.length; i++) {
-            scrollIntoView(comboBoxButtons(activeTypeNames[i]));
-            waitForElDisplayed(comboBoxButtons(activeTypeNames[i]));
-            scrollIntoView(comboBoxInputs(activeTypeNames[i]));
-            waitForElDisplayed(comboBoxInputs(activeTypeNames[i]));
-            waitForClickable(comboBoxInputs(activeTypeNames[i]));
+            await scrollIntoView(comboBoxButtons(activeTypeNames[i]));
+            await waitForElDisplayed(comboBoxButtons(activeTypeNames[i]));
+            await scrollIntoView(comboBoxInputs(activeTypeNames[i]));
+            await waitForElDisplayed(comboBoxInputs(activeTypeNames[i]));
+            await waitForClickable(comboBoxInputs(activeTypeNames[i]));
         }
         for (let i = 0; i < notActiveTypeNames.length; i++) {
-            scrollIntoView(comboBoxInputs(notActiveTypeNames[i]));
-            waitForElDisplayed(comboBoxInputs(notActiveTypeNames[i]));
+            await scrollIntoView(comboBoxInputs(notActiveTypeNames[i]));
+            await waitForElDisplayed(comboBoxInputs(notActiveTypeNames[i]));
             if (i === 1) {
-                waitForUnclickable(comboBoxInputs(notActiveTypeNames[i]));
+                await waitForUnclickable(comboBoxInputs(notActiveTypeNames[i]));
             }
         }
     });
 
-    it('Verify dropdown expands after clicking on the button', () => {
+    it('Verify dropdown expands after clicking on the button', async () => {
         for (let i = 0; i < activeTypeNames.length; i++) {
-            sendKeys(['Escape']);
-            scrollIntoView(comboBoxButtons(activeTypeNames[i]));
-            pause(200);
-            click(comboBoxButtons(activeTypeNames[i]));
-            pause(500);
-            waitForPresent(comboBoxExpandedButtons(activeTypeNames[i]));
-            waitForPresent(comboBoxDropdownExpanded);
+            await sendKeys(['Escape']);
+            await scrollIntoView(comboBoxButtons(activeTypeNames[i]));
+            await pause(200);
+            await click(comboBoxButtons(activeTypeNames[i]));
+            await pause(500);
+            await waitForPresent(comboBoxExpandedButtons(activeTypeNames[i]));
+            await waitForPresent(comboBoxDropdownExpanded);
         }
     });
 
-    it('Verify each input while typing', () => {
-        if (browserIsIE()) {
+    it('Verify each input while typing', async () => {
+        if (await browserIsIE()) {
             console.log('skip IE');
             return;
         }
         for (let i = 0; i < activeTypeNames.length - 1; i++) {
-            scrollIntoView(comboBoxInputs(activeTypeNames[i]));
-            clearValue(comboBoxInputs(activeTypeNames[i]));
-            setValue(comboBoxInputs(activeTypeNames[i]), appleOption.substring(0, 2));
-            comboBoxPage.selectOption(activeTypeNames[i], appleOption);
-            expect(getValue(comboBoxInputs(activeTypeNames[i]))).toEqual(appleOption);
+            await scrollIntoView(comboBoxInputs(activeTypeNames[i]));
+            await clearValue(comboBoxInputs(activeTypeNames[i]));
+            await setValue(comboBoxInputs(activeTypeNames[i]), appleOption.substring(0, 2));
+            await comboBoxPage.selectOption(activeTypeNames[i], appleOption);
+            await expect(await getValue(comboBoxInputs(activeTypeNames[i]))).toEqual(appleOption);
         }
     });
 
-    it('Verify selected option is highlighted', () => {
-        if (browserIsIE()) {
+    it('Verify selected option is highlighted', async () => {
+        if (await browserIsIE()) {
             console.log('Skip for IE');
             return;
         }
         for (let i = 0; i < activeTypeNames.length; i++) {
-            comboBoxPage.expandDropdown(activeTypeNames[i]);
-            expect(isElementDisplayed(optionsArray)).toBe(true);
-            comboBoxPage.selectOption(activeTypeNames[i], appleOption);
-            expect(doesItExist(optionsArray)).toBe(false);
-            comboBoxPage.expandDropdown(activeTypeNames[i]);
-            waitForElDisplayed(selectedDropDownOption(appleOption));
-            comboBoxPage.selectOption(activeTypeNames[i], bananaOption);
-            expect(doesItExist(optionsArray)).toBe(false);
-            comboBoxPage.expandDropdown(activeTypeNames[i]);
-            waitForElDisplayed(selectedDropDownOption(bananaOption));
+            await comboBoxPage.expandDropdown(activeTypeNames[i]);
+            await expect(await isElementDisplayed(optionsArray)).toBe(true);
+            await comboBoxPage.selectOption(activeTypeNames[i], appleOption);
+            await expect(await doesItExist(optionsArray)).toBe(false);
+            await comboBoxPage.expandDropdown(activeTypeNames[i]);
+            await waitForElDisplayed(selectedDropDownOption(appleOption));
+            await comboBoxPage.selectOption(activeTypeNames[i], bananaOption);
+            await expect(await doesItExist(optionsArray)).toBe(false);
+            await comboBoxPage.expandDropdown(activeTypeNames[i]);
+            await waitForElDisplayed(selectedDropDownOption(bananaOption));
         }
     });
 
-    it('Verify option hint when entering first characters', () => {
-        if (browserIsFirefox()) {
+    it('Verify option hint when entering first characters', async () => {
+        if (await browserIsFirefox()) {
             return;
         }
         for (let i = 0; i < activeTypeNames.length; i++) {
-            scrollIntoView(comboBoxInputs(activeTypeNames[i]));
-            setValue(comboBoxInputs(activeTypeNames[i]), appleOption.substring(0, 2));
-            waitForElDisplayed(comboBoxOptionHint(appleOption.substring(0, 2), appleOption.substring(2)));
+            await scrollIntoView(comboBoxInputs(activeTypeNames[i]));
+            await setValue(comboBoxInputs(activeTypeNames[i]), appleOption.substring(0, 2));
+            await waitForElDisplayed(comboBoxOptionHint(appleOption.substring(0, 2), appleOption.substring(2)));
         }
     });
 
-    it('Verify LTR and RTL orientation', () => {
-        comboBoxPage.checkRtlSwitch();
+    it('Verify LTR and RTL orientation', async () => {
+        await comboBoxPage.checkRtlSwitch();
     });
 
-    it('Verify group headers are not interactive.', () => {
-        const headersQuantity = getElementArrayLength(groupHeader);
-        comboBoxPage.expandDropdown('group');
+    it('Verify group headers are not interactive.', async () => {
+        const headersQuantity = await getElementArrayLength(groupHeader);
+        await comboBoxPage.expandDropdown('group');
         for (let i = 0; i < headersQuantity; i++) {
-            scrollIntoView(groupHeader, i);
-            click(groupHeader, i);
-            waitForElDisplayed(comboBoxDropdownExpanded);
+            await scrollIntoView(groupHeader, i);
+            await click(groupHeader, i);
+            await waitForElDisplayed(comboBoxDropdownExpanded);
         }
     });
 
-    it('Verify navigation by arrow buttons', () => {
-        if (browserIsIE()) {
+    it('Verify navigation by arrow buttons', async () => {
+        if (await browserIsIE()) {
             console.log('Skip for IE');
             return;
         }
         for (let i = 0; i < activeTypeNames.length; i++) {
-            comboBoxPage.expandDropdown(activeTypeNames[i]);
-            const firstOptionText = getText(optionsArray, 0);
-            const secondOptionText = getText(optionsArray, 1);
-            if (getAttributeByName(optionsArray, 'tabindex') === '-1') {
-                sendKeys(['ArrowDown']);
+            await comboBoxPage.expandDropdown(activeTypeNames[i]);
+            const firstOptionText = await getText(optionsArray, 0);
+            const secondOptionText = await getText(optionsArray, 1);
+            if ((await getAttributeByName(optionsArray, 'tabindex')) === '-1') {
+                await sendKeys(['ArrowDown']);
             }
-            sendKeys(['ArrowDown']);
-            sendKeys(['Enter']);
-            let inputText = getText(comboBoxInput, i);
-            checkTextValueContain(firstOptionText, inputText);
-            comboBoxPage.expandDropdown(activeTypeNames[i]);
-            sendKeys(['ArrowDown', 'ArrowDown']);
-            sendKeys(['Enter']);
-            inputText = getText(comboBoxInput, i);
-            checkTextValueContain(secondOptionText, inputText);
+            await sendKeys(['ArrowDown']);
+            await sendKeys(['Enter']);
+            let inputText = await getText(comboBoxInput, i);
+            await checkTextValueContain(firstOptionText, inputText);
+            await comboBoxPage.expandDropdown(activeTypeNames[i]);
+            await sendKeys(['ArrowDown', 'ArrowDown']);
+            await sendKeys(['Enter']);
+            inputText = await getText(comboBoxInput, i);
+            await checkTextValueContain(secondOptionText, inputText);
         }
     });
 
-    it('Verify combobox with two columns while typing', () => {
-        scrollIntoView(comboboxTwoColumns);
-        setValue(comboboxTwoColumns, 'Frui');
-        comboBoxPage.selectOption('columns', 'Banana');
+    it('Verify combobox with two columns while typing', async () => {
+        await scrollIntoView(comboboxTwoColumns);
+        await setValue(comboboxTwoColumns, 'Frui');
+        await comboBoxPage.selectOption('columns', 'Banana');
     });
 
-    it('Verify options sorting', () => {
+    it('Verify options sorting', async () => {
         for (let i = 0; i < activeTypeNames.length; i++) {
-            comboBoxPage.expandDropdown(activeTypeNames[i]);
-            waitForElDisplayed(optionsArray);
-            const textArr = getTextArr(optionsArray, 0, -1);
-            expect(textArr.sort()).toEqual(textArr);
+            await comboBoxPage.expandDropdown(activeTypeNames[i]);
+            await waitForElDisplayed(optionsArray);
+            const textArr = await getTextArr(optionsArray, 0, -1);
+            await expect(textArr.sort()).toEqual(textArr);
         }
     });
 
     // skipped due to https://github.com/SAP/fundamental-ngx/issues/7111
-    xit('should check that value is not present in the input until you click Save', () => {
-        const defaultValue = getValue(mobileComboBoxInput);
-        scrollIntoView(mobileComboBoxInput);
-        click(mobileComboBoxInput);
-        click(optionsArray);
-        expect(getValue(mobileComboBoxInput)).toBe(defaultValue);
+    xit('should check that value is not present in the input until you click Save', async () => {
+        const defaultValue = await getValue(mobileComboBoxInput);
+        await scrollIntoView(mobileComboBoxInput);
+        await click(mobileComboBoxInput);
+        await click(optionsArray);
+        await expect(await getValue(mobileComboBoxInput)).toBe(defaultValue);
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            comboBoxPage.saveExampleBaselineScreenshot();
-            expect(comboBoxPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await comboBoxPage.saveExampleBaselineScreenshot();
+            await expect(await comboBoxPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

@@ -40,206 +40,209 @@ describe('Time picker suite', () => {
         selectedTimeItem
     } = timePickerPage;
 
-    beforeAll(() => {
-        timePickerPage.open();
+    beforeAll(async () => {
+        await timePickerPage.open();
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(timePickerPage.root);
-        waitForElDisplayed(timePickerPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(timePickerPage.root);
+        await waitForElDisplayed(timePickerPage.title);
     }, 1);
 
-    it('Verify on click on the time picker button', () => {
-        const activeButtonsCount = getElementArrayLength(activeTimePickerButton);
+    it('Verify on click on the time picker button', async () => {
+        const activeButtonsCount = await getElementArrayLength(activeTimePickerButton);
         for (let i = 1; i < activeButtonsCount; i++) {
             if (i === 3 || i === 11 || i === 17) {
                 continue;
             }
-            sendKeys(['Escape']);
-            scrollIntoView(activeTimePickerButton, i);
-            click(activeTimePickerButton, i);
-            waitForElDisplayed(timerExpanded);
-            click(activeTimePickerButton, i);
+            await sendKeys(['Escape']);
+            await scrollIntoView(activeTimePickerButton, i);
+            await click(activeTimePickerButton, i);
+            await waitForElDisplayed(timerExpanded);
+            await click(activeTimePickerButton, i);
         }
     });
 
-    it('Verify disabled inputs for time pickers', () => {
-        const disabledInputsCount = getElementArrayLength(disabledInput);
+    it('Verify disabled inputs for time pickers', async () => {
+        const disabledInputsCount = await getElementArrayLength(disabledInput);
         for (let i = 1; i < disabledInputsCount; i++) {
-            scrollIntoView(disabledInput, i);
-            expect(isEnabled(disabledInput, i)).toBe(false);
+            await scrollIntoView(disabledInput, i);
+            await expect(await isEnabled(disabledInput, i)).toBe(false);
         }
     });
 
-    it('Verify disabled buttons for time pickers', () => {
-        const disabledButtonsCount = getElementArrayLength(disabledButton);
+    it('Verify disabled buttons for time pickers', async () => {
+        const disabledButtonsCount = await getElementArrayLength(disabledButton);
         for (let i = 1; i < disabledButtonsCount; i++) {
-            scrollIntoView(disabledButton, i);
-            expect(isEnabled(disabledButton, i)).toBe(false);
+            await scrollIntoView(disabledButton, i);
+            await expect(await isEnabled(disabledButton, i)).toBe(false);
         }
     });
 
-    it('Verify input field have placeholder', () => {
-        const inputsCount = getElementArrayLength(activeTimePickerInput);
+    it('Verify input field have placeholder', async () => {
+        const inputsCount = await getElementArrayLength(activeTimePickerInput);
         for (let i = 0; i < inputsCount; i++) {
-            expect(['', null]).not.toContain(getElementPlaceholder(activeTimePickerInput, i));
+            await expect(['', null]).not.toContain(await getElementPlaceholder(activeTimePickerInput, i));
         }
     });
 
-    it('Verify on click on the input field ', () => {
-        const activeInputsCount = getElementArrayLength(activeTimePickerInput);
+    it('Verify on click on the input field ', async () => {
+        const activeInputsCount = await getElementArrayLength(activeTimePickerInput);
         for (let i = 0; i < activeInputsCount; i++) {
             if (i === 3 || i === 11 || i === 17) {
                 continue;
             }
-            sendKeys(['Escape']);
-            scrollIntoView(activeTimePickerInput, i);
-            setValue(activeTimePickerInput, text, i);
-            expect(getValue(activeTimePickerInput, i)).toBe(text);
-            expect(doesItExist(timerExpanded)).toBe(false);
+            await sendKeys(['Escape']);
+            await scrollIntoView(activeTimePickerInput, i);
+            await setValue(activeTimePickerInput, text, i);
+            await expect(await getValue(activeTimePickerInput, i)).toBe(text);
+            await expect(await doesItExist(timerExpanded)).toBe(false);
         }
     });
 
     // skipped due to infinity cycle on saucelabs
-    xit('Verify user is able to set time', () => {
-        const activeButtonsLength = getElementArrayLength(activeTimePickerButton);
+    xit('Verify user is able to set time', async () => {
+        const activeButtonsLength = await getElementArrayLength(activeTimePickerButton);
         for (let i = 0; i < activeButtonsLength; i++) {
             if (i === 3 || i === 8 || i === 13) {
                 continue;
             }
-            scrollIntoView(activeTimePickerButton, i);
-            click(activeTimePickerButton, i);
-            selectHoursAndMinutes(11);
-            sendKeys(['Escape']);
-            expect(doesItExist(timerExpanded)).toBe(false);
-            expect(getValue(activeTimePickerInput, i)).toBe(time);
+            await scrollIntoView(activeTimePickerButton, i);
+            await click(activeTimePickerButton, i);
+            await selectHoursAndMinutes(11);
+            await sendKeys(['Escape']);
+            await expect(await doesItExist(timerExpanded)).toBe(false);
+            await expect(await getValue(activeTimePickerInput, i)).toBe(time);
         }
     });
 
-    it('Verify null validity for basic time picker ', () => {
-        scrollIntoView(activeTimePickerButton, 5);
-        expect(doesItExist(errorBorder)).toBe(false);
-        click(setToNullButton);
-        expect(doesItExist(errorBorder)).toBe(true);
-        click(setValidTimeButton);
-        expect(doesItExist(errorBorder)).toBe(false);
-        expect(getValue(activeTimePickerInput, 5)).toBe(defaultValidTime);
+    it('Verify null validity for basic time picker ', async () => {
+        await scrollIntoView(activeTimePickerButton, 5);
+        await expect(await doesItExist(errorBorder)).toBe(false);
+        await click(setToNullButton);
+        await expect(await doesItExist(errorBorder)).toBe(true);
+        await click(setValidTimeButton);
+        await expect(await doesItExist(errorBorder)).toBe(false);
+        await expect(await getValue(activeTimePickerInput, 5)).toBe(defaultValidTime);
     });
 
-    it('Verify null validity for time picker with reactive form', () => {
-        scrollIntoView(activeTimePickerButton, 10);
-        expect(doesItExist(errorBorder)).toBe(false);
-        click(setToNullButton, 1);
-        expect(doesItExist(errorBorder)).toBe(true);
-        click(setValidTimeButton, 1);
-        expect(doesItExist(errorBorder)).toBe(false);
-        expect(getValue(activeTimePickerInput, 10)).toBe(altValidTime);
+    it('Verify null validity for time picker with reactive form', async () => {
+        await scrollIntoView(activeTimePickerButton, 10);
+        await expect(await doesItExist(errorBorder)).toBe(false);
+        await click(setToNullButton, 1);
+        await expect(await doesItExist(errorBorder)).toBe(true);
+        await click(setValidTimeButton, 1);
+        await expect(await doesItExist(errorBorder)).toBe(false);
+        await expect(await getValue(activeTimePickerInput, 10)).toBe(altValidTime);
     });
 
-    it('Verify null validity for time picker with template form', () => {
-        scrollIntoView(activeTimePickerButton, 16);
-        expect(doesItExist(errorBorder)).toBe(false);
-        click(setToNullButton, 2);
-        expect(doesItExist(errorBorder)).toBe(true);
-        click(setValidTimeButton, 2);
-        expect(doesItExist(errorBorder)).toBe(false);
-        expect(getValue(activeTimePickerInput, 16)).toBe(defaultValidTime);
+    it('Verify null validity for time picker with template form', async () => {
+        await scrollIntoView(activeTimePickerButton, 16);
+        await expect(await doesItExist(errorBorder)).toBe(false);
+        await click(setToNullButton, 2);
+        await expect(await doesItExist(errorBorder)).toBe(true);
+        await click(setValidTimeButton, 2);
+        await expect(await doesItExist(errorBorder)).toBe(false);
+        await expect(await getValue(activeTimePickerInput, 16)).toBe(defaultValidTime);
     });
 
-    it('should check that basic time picker has 24 hours format', () => {
-        checkTimeFormat('24h', 0);
+    it('should check that basic time picker has 24 hours format', async () => {
+        await checkTimeFormat('24h', 0);
     });
 
-    it('should check that basic time picker has 12 hours format', () => {
-        checkTimeFormat('12h', 1);
+    it('should check that basic time picker has 12 hours format', async () => {
+        await checkTimeFormat('12h', 1);
     });
 
-    it('should check that time picker with reactive forms has 24 hours format', () => {
-        checkTimeFormat('24h', 6);
+    it('should check that time picker with reactive forms has 24 hours format', async () => {
+        await checkTimeFormat('24h', 6);
     });
 
-    it('should check that time picker with reactive forms has 12 hours format', () => {
-        checkTimeFormat('12h', 7);
+    it('should check that time picker with reactive forms has 12 hours format', async () => {
+        await checkTimeFormat('12h', 7);
     });
 
-    it('should check that time picker with template forms has 24 hours format', () => {
-        checkTimeFormat('24h', 12);
+    it('should check that time picker with template forms has 24 hours format', async () => {
+        await checkTimeFormat('24h', 12);
     });
 
-    it('should check that time picker with template forms has 12 hours format', () => {
-        checkTimeFormat('12h', 13);
+    it('should check that time picker with template forms has 12 hours format', async () => {
+        await checkTimeFormat('12h', 13);
     });
 
-    it('Verify LTR / RTL switcher', () => {
-        timePickerPage.checkRtlSwitch();
+    it('Verify LTR / RTL switcher', async () => {
+        await timePickerPage.checkRtlSwitch();
     });
 
     xdescribe('Check visual regression', () => {
-        beforeEach(() => {
-            refreshPage();
-            waitForPresent(timePickerInput);
+        beforeEach(async () => {
+            await refreshPage();
+            await waitForPresent(timePickerInput);
         }, 1);
 
-        it('should check examples visual regression', () => {
-            timePickerPage.saveExampleBaselineScreenshot();
-            expect(timePickerPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await timePickerPage.saveExampleBaselineScreenshot();
+            await expect(await timePickerPage.compareWithBaseline()).toBeLessThan(5);
         });
 
-        it('should check time picker visual regression', () => {
-            scrollIntoView(activeTimePickerButton);
-            click(activeTimePickerButton);
-            waitForElDisplayed(timerExpanded);
-            saveElementScreenshot(
+        it('should check time picker visual regression', async () => {
+            await scrollIntoView(activeTimePickerButton);
+            await click(activeTimePickerButton);
+            await waitForElDisplayed(timerExpanded);
+            await saveElementScreenshot(
                 timerExpanded,
-                `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`,
-                timePickerPage.getScreenshotFolder()
+                `time-picker-expanded-example-platform-${await getImageTagBrowserPlatform()}`,
+                await timePickerPage.getScreenshotFolder()
             );
-            expect(
-                checkElementScreenshot(
+            await expect(
+                await checkElementScreenshot(
                     timerExpanded,
-                    `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`,
-                    timePickerPage.getScreenshotFolder()
+                    `time-picker-expanded-example-platform-${await getImageTagBrowserPlatform()}`,
+                    await timePickerPage.getScreenshotFolder()
                 )
             ).toBeLessThan(5);
         });
     });
 
-    function selectHoursAndMinutes(hour: number = 1, minute: number = 1, day_time: string = ' PM '): void {
-        while (getText(selectedValue).trim() !== ` ${hour.toString()} `) {
-            click(navigationDownArrowButton);
+    async function selectHoursAndMinutes(
+        hour: number = 1,
+        minute: number = 1,
+        day_time: string = ' PM '
+    ): Promise<void> {
+        while ((await getText(selectedValue)).trim() !== ` ${hour.toString()} `) {
+            await click(navigationDownArrowButton);
         }
-        click(timeColumn, 1);
-        while (getText(selectedValue, 1).trim() !== ` ${minute.toString()} `) {
-            click(navigationDownArrowButton);
+        await click(timeColumn, 1);
+        while ((await getText(selectedValue, 1)).trim() !== ` ${minute.toString()} `) {
+            await click(navigationDownArrowButton);
         }
-        click(timeColumn, 2);
-        while (getText(selectedValue, 2).trim() !== day_time) {
-            click(navigationDownArrowButton);
+        await click(timeColumn, 2);
+        while ((await getText(selectedValue, 2)).trim() !== day_time) {
+            await click(navigationDownArrowButton);
         }
     }
 
-    function checkTimeFormat(format: '24h' | '12h', buttonIndex: number = 0): void {
-        click(activeTimePickerButton, buttonIndex);
-        const arr = [];
-        for (let i = 0; i < getElementArrayLength(hoursColumn + columnItem); i++) {
-            // eslint-disable-next-line
-            arr.push(parseInt(getText(hoursColumn + selectedTimeItem)));
-            click(navigationDownArrowButton);
+    async function checkTimeFormat(format: '24h' | '12h', buttonIndex: number = 0): Promise<void> {
+        await click(activeTimePickerButton, buttonIndex);
+        const arr: number[] = [];
+        for (let i = 0; i < (await getElementArrayLength(hoursColumn + columnItem)); i++) {
+            arr.push(parseInt(await getText(hoursColumn + selectedTimeItem)));
+            await click(navigationDownArrowButton);
         }
 
-        const max = arr.reduce(function (a, b) {
+        const max = arr.reduce((a: number, b: number) => {
             return Math.max(a, b);
-        });
+        }, 0);
 
         if (format === '12h') {
-            expect(max).not.toBeGreaterThan(12);
-            click(thirdColumn);
-            expect(getText(thirdColumn + columnItem).trim()).toBe('AM');
-            expect(getText(thirdColumn + columnItem, 1).trim()).toBe('PM');
+            await expect(max).not.toBeGreaterThan(12);
+            await click(thirdColumn);
+            await expect((await getText(thirdColumn + columnItem)).trim()).toBe('AM');
+            await expect((await getText(thirdColumn + columnItem, 1)).trim()).toBe('PM');
         }
         if (format === '24h') {
-            expect(max).toBe(23);
+            await expect(max).toBe(23);
         }
     }
 });

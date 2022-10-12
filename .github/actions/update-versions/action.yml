@@ -1,0 +1,11 @@
+name: Update versions.json
+description: Update versions.json with new version
+
+inputs:
+    url:
+        description: Netlify deployment url
+        required: true
+
+runs:
+    using: node16
+    main: ./index.js

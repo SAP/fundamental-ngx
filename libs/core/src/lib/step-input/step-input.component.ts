@@ -46,7 +46,8 @@ let stepInputUniqueId = 0;
         registerFormItemControl(StepInputComponent)
     ],
     host: {
-        class: 'fd-step-input__container'
+        class: 'fd-step-input__container',
+        '(focusout)': 'handleFocusOut($event)'
     }
 })
 export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor, FormItemControl {
@@ -273,7 +274,8 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         @Inject(LOCALE_ID) locale,
         private _changeDetectorRef: ChangeDetectorRef,
         private readonly _liveAnnouncer: LiveAnnouncer,
-        readonly _contentDensityObserver: ContentDensityObserver
+        readonly _contentDensityObserver: ContentDensityObserver,
+        private readonly _elementRef: ElementRef
     ) {
         this.locale = locale;
     }
@@ -377,13 +379,15 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     handleFocusIn(): void {
         this.focused = true;
         this.onFocusIn.emit();
-        this.onTouched();
     }
 
     /** @hidden */
-    handleFocusOut(): void {
+    handleFocusOut(event: FocusEvent): void {
         this.focused = false;
         this.onFocusOut.emit();
+        if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
+            this.onTouched();
+        }
     }
 
     /** @hidden */

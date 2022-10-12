@@ -58,141 +58,141 @@ describe('Input Group should', () => {
         withFormInputInfoTooltip
     } = inputGroupPage;
 
-    beforeAll(() => {
-        inputGroupPage.open();
-        waitForPresent(leftAlignedTextInput);
+    beforeAll(async () => {
+        await inputGroupPage.open();
+        await waitForPresent(leftAlignedTextInput);
     }, 1);
 
-    beforeEach(() => {
-        refreshPage();
-        waitForPresent(inputGroupPage.root);
-        waitForElDisplayed(inputGroupPage.title);
+    beforeEach(async () => {
+        await refreshPage();
+        await waitForPresent(inputGroupPage.root);
+        await waitForElDisplayed(inputGroupPage.title);
     }, 1);
 
-    it('have associated label element to describe its purpose', () => {
-        expect(getTextArr(standartInputLabelsArr)).toEqual(standardInputLabels);
-        expect(getText(withFormInputLabel)).toEqual(inputWithFormLabel);
+    it('have associated label element to describe its purpose', async () => {
+        await expect(await getTextArr(standartInputLabelsArr)).toEqual(standardInputLabels);
+        await expect(await getText(withFormInputLabel)).toEqual(inputWithFormLabel);
     });
 
-    it('have correct placeholder text', () => {
-        expect(getAttributeByNameArr(standartInputArr, 'placeholder')).toEqual(standardInputPlaceholders);
-        expect(getElementPlaceholder(withFormInput)).toEqual(inputWithFormPlaceholder);
+    it('have correct placeholder text', async () => {
+        await expect(await getAttributeByNameArr(standartInputArr, 'placeholder')).toEqual(standardInputPlaceholders);
+        await expect(await getElementPlaceholder(withFormInput)).toEqual(inputWithFormPlaceholder);
     });
 
-    it('have left text addon and accept values', () => {
-        waitForElDisplayed(leftAlignedTextInputTextAddon);
-        setValue(leftAlignedTextInput, numeric_value);
+    it('have left text addon and accept values', async () => {
+        await waitForElDisplayed(leftAlignedTextInputTextAddon);
+        await setValue(leftAlignedTextInput, numeric_value);
 
-        expect(getText(leftAlignedTextInputTextAddon)).toContain('$');
-        expect(getValue(leftAlignedTextInput)).toBe(numeric_value);
+        await expect(await getText(leftAlignedTextInputTextAddon)).toContain('$');
+        await expect(await getValue(leftAlignedTextInput)).toBe(numeric_value);
     });
 
-    it('have right text addon and accept values', () => {
-        waitForElDisplayed(rightAlignedTextInputTextAddon);
-        setValue(rightAlignedTextInput, numeric_value);
+    it('have right text addon and accept values', async () => {
+        await waitForElDisplayed(rightAlignedTextInputTextAddon);
+        await setValue(rightAlignedTextInput, numeric_value);
 
-        expect(getText(rightAlignedTextInputTextAddon)).toContain('USD');
-        expect(getValue(rightAlignedTextInput)).toBe(numeric_value);
+        await expect(await getText(rightAlignedTextInputTextAddon)).toContain('USD');
+        await expect(await getValue(rightAlignedTextInput)).toBe(numeric_value);
     });
 
-    it('have right and left text addons and accept values', () => {
-        waitForElDisplayed(rightLeftAlignedTextInputTextAddon);
-        setValue(leftAndRightAlignedTextInput, numeric_value);
+    it('have right and left text addons and accept values', async () => {
+        await waitForElDisplayed(rightLeftAlignedTextInputTextAddon);
+        await setValue(leftAndRightAlignedTextInput, numeric_value);
 
-        expect(getText(rightLeftAlignedTextInputTextAddon)).toContain('$');
-        expect(getText(rightLeftAlignedTextInputTextAddon, 1)).toContain('USD');
-        expect(getValue(leftAndRightAlignedTextInput)).toBe(numeric_value);
+        await expect(await getText(rightLeftAlignedTextInputTextAddon)).toContain('$');
+        await expect(await getText(rightLeftAlignedTextInputTextAddon, 1)).toContain('USD');
+        await expect(await getValue(leftAndRightAlignedTextInput)).toBe(numeric_value);
     });
 
-    it('have button, text addons and accept values', () => {
-        waitForElDisplayed(buttonInputSubmitButton);
-        setValue(buttonInput, numeric_value);
+    it('have button, text addons and accept values', async () => {
+        await waitForElDisplayed(buttonInputSubmitButton);
+        await setValue(buttonInput, numeric_value);
 
         // Check if clickable. No logic behind the click
-        expect(getText(buttonInputLeftAndRightTextAddon)).toContain('$');
-        expect(getText(buttonInputLeftAndRightTextAddon, 1)).toContain('USD');
-        expect(isElementClickable(buttonInputSubmitButton)).toBe(true);
-        expect(getValue(buttonInput)).toBe(numeric_value);
+        await expect(await getText(buttonInputLeftAndRightTextAddon)).toContain('$');
+        await expect(await getText(buttonInputLeftAndRightTextAddon, 1)).toContain('USD');
+        await expect(await isElementClickable(buttonInputSubmitButton)).toBe(true);
+        await expect(await getValue(buttonInput)).toBe(numeric_value);
     });
 
-    it('have icon addon and accept values', () => {
-        waitForElDisplayed(iconInputEmailIcon);
-        setValue(iconInput, email_value);
+    it('have icon addon and accept values', async () => {
+        await waitForElDisplayed(iconInputEmailIcon);
+        await setValue(iconInput, email_value);
 
-        expect(getValue(iconInput)).toBe(email_value);
+        await expect(await getValue(iconInput)).toBe(email_value);
     });
 
-    it('compact have button and text addon', () => {
-        waitForElDisplayed(compactGroupInput);
-        setValue(compactGroupInput, string_value);
+    it('compact have button and text addon', async () => {
+        await waitForElDisplayed(compactGroupInput);
+        await setValue(compactGroupInput, string_value);
 
-        expect(getText(compactGroupLeftTextAddon)).toContain('$');
-        expect(getText(compactGroupButtonAddon)).toContain('Submit');
-        expect(isElementClickable(compactGroupButtonAddon)).toBe(true);
-        expect(getValue(compactGroupInput)).toBe(string_value);
+        await expect(await getText(compactGroupLeftTextAddon)).toContain('$');
+        await expect(await getText(compactGroupButtonAddon)).toContain('Submit');
+        await expect(await isElementClickable(compactGroupButtonAddon)).toBe(true);
+        await expect(await getValue(compactGroupInput)).toBe(string_value);
     });
 
-    it('compact be smaller than the default', () => {
-        const defaultHeight = getElementSize(leftAlignedTextInput);
-        const compactHeight = getElementSize(compactGroupInput);
+    it('compact be smaller than the default', async () => {
+        const defaultHeight = await getElementSize(leftAlignedTextInput);
+        const compactHeight = await getElementSize(compactGroupInput);
 
-        expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
+        await expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
     });
 
-    it('check have disabled attr assigned', () => {
-        waitForPresent(disabledInput);
-        scrollIntoView(disabledInput);
+    it('check have disabled attr assigned', async () => {
+        await waitForPresent(disabledInput);
+        await scrollIntoView(disabledInput);
 
-        expect(isEnabled(disabledInput)).toBe(false);
+        await expect(await isEnabled(disabledInput)).toBe(false);
     });
 
-    it('check disabled attr has disabled button', () => {
-        waitForElDisplayed(disabledInput);
-        expect(isElementClickable(disabledInputButton)).toBe(false);
+    it('check disabled attr has disabled button', async () => {
+        await waitForElDisplayed(disabledInput);
+        await expect(await isElementClickable(disabledInputButton)).toBe(false);
     });
 
-    it('with Form input have text and button addons', () => {
-        waitForElDisplayed(withFormInput);
-        setValue(withFormInput, numeric_value);
+    it('with Form input have text and button addons', async () => {
+        await waitForElDisplayed(withFormInput);
+        await setValue(withFormInput, numeric_value);
 
-        expect(getText(withFormInputTextAddon)).toContain('$');
-        expect(getText(withFormInputTextAddon, 1)).toContain('USD');
-        expect(getText(withFormInputButtonAddon)).toContain('Submit');
-        expect(getValue(withFormInput)).toBe(numeric_value);
+        await expect(await getText(withFormInputTextAddon)).toContain('$');
+        await expect(await getText(withFormInputTextAddon, 1)).toContain('USD');
+        await expect(await getText(withFormInputButtonAddon)).toContain('Submit');
+        await expect(await getValue(withFormInput)).toBe(numeric_value);
     });
 
     it('with form input have error tooltip and visual que if empty', async () => {
-        waitForElDisplayed(withFormInput);
-        scrollIntoView(withFormInput);
-        click(withFormInput);
-        click(withFormInputButtonAddon);
-        mouseHoverElement(withFormInput);
+        await waitForElDisplayed(withFormInput);
+        await scrollIntoView(withFormInput);
+        await click(withFormInput);
+        await click(withFormInputButtonAddon);
+        await mouseHoverElement(withFormInput);
 
-        expect($$(withFormInputQuestionMark)).toBeTruthy();
+        await expect(await $$(withFormInputQuestionMark)).toBeTruthy();
 
-        expect(executeScriptAfterTagAttr(withFormInputAsterixMark, 'content')).toBe('"*"');
-        expect(getText(inputGroupPage.withFormInputErrorTooltip).trim()).toEqual('Value is required');
+        await expect(await executeScriptAfterTagAttr(withFormInputAsterixMark, 'content')).toBe('"*"');
+        await expect((await getText(inputGroupPage.withFormInputErrorTooltip)).trim()).toEqual('Value is required');
     });
 
-    it('with form input have info tooltip', () => {
-        if (browserIsIEorSafari()) {
+    it('with form input have info tooltip', async () => {
+        if (await browserIsIEorSafari()) {
             console.log('Skip for IE and Safari');
             return;
         }
-        waitForElDisplayed(withFormInput);
-        scrollIntoView(withFormInput);
-        click(withFormInputQuestionMark);
-        expect(getText(withFormInputInfoTooltip)).toBe('This is tooltip to help');
+        await waitForElDisplayed(withFormInput);
+        await scrollIntoView(withFormInput);
+        await click(withFormInputQuestionMark);
+        await expect(await getText(withFormInputInfoTooltip)).toBe('This is tooltip to help');
     });
 
-    it('should check RTL', () => {
-        inputGroupPage.checkRtlSwitch();
+    it('should check RTL', async () => {
+        await inputGroupPage.checkRtlSwitch();
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            inputGroupPage.saveExampleBaselineScreenshot();
-            expect(inputGroupPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await inputGroupPage.saveExampleBaselineScreenshot();
+            await expect(await inputGroupPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

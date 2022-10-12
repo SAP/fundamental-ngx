@@ -1,40 +1,37 @@
-declare const $$: any;
-declare const $: any;
-
 export function defaultWaitTime(): number {
-    return browser.options.waitforTimeout;
+    return browser.options.waitforTimeout as number;
 }
 
 export function currentPlatformName(): string {
-    return browser.capabilities.platformName;
+    return browser.capabilities['platformName'];
 }
 
 export function currentBrowserName(): string {
-    return browser.capabilities.browserName;
+    return browser.capabilities['browserName'];
 }
 
 export function getImageTagBrowserPlatform(): string {
     return `${currentBrowserName()}-${currentPlatformName()}`;
 }
 
-export function getBaseURL(): string {
+export function getBaseURL(): string | undefined {
     return browser.options.baseUrl;
 }
 
-export function open(path: string = ''): void {
-    browser.url(path);
+export async function open(path: string = ''): Promise<void> {
+    await browser.url(path);
 }
 
-export function pause(waitTime: number = defaultWaitTime()): void {
-    browser.pause(waitTime);
+export async function pause(waitTime: number = defaultWaitTime()): Promise<void> {
+    await browser.pause(waitTime);
 }
 
-export function execute(source): void {
-    browser.execute(source);
+export async function execute(source): Promise<void> {
+    await browser.execute(source);
 }
 
 export function isBrowser(browserName: string): boolean {
-    return browser.capabilities.browserName === browserName;
+    return browser.capabilities['browserName'] === browserName;
 }
 
 export function browserIsIEorSafari(): boolean {
@@ -57,271 +54,322 @@ export function browserIsSafariorFF(): boolean {
     return browserIsSafari() || browserIsFirefox();
 }
 
-export function goBack(): void {
-    browser.back();
+export async function goBack(): Promise<void> {
+    await browser.back();
 }
 
-export function refreshPage(isFullRefresh = false): void {
+export async function refreshPage(isFullRefresh = false): Promise<void> {
     try {
         // alerts block any interactions with the page
-        browser.dismissAlert();
+        await browser.dismissAlert();
     } catch {}
     if (!isFullRefresh) {
-        const url = browser.getUrl();
+        const url = await browser.getUrl();
         try {
-            click(`#toolbar-home-btn`);
+            await click(`#toolbar-home-btn`);
         } catch {}
-        if (browser.getUrl().includes(`/home`)) {
-            goBack();
+        if ((await browser.getUrl()).includes(`/home`)) {
+            await goBack();
         } else {
             // failed to navigate, reset the url and perform full page refresh
-            browser.url(url);
-            if (browserIsSafari()) {
-                pause();
+            await browser.url(url);
+            if (await browserIsSafari()) {
+                await pause();
             }
         }
     } else {
-        browser.refresh();
-        if (browserIsSafari()) {
-            pause();
+        await browser.refresh();
+        if (await browserIsSafari()) {
+            await pause();
         }
     }
 }
 
-export function getAlertText(): string {
+export async function getAlertText(): Promise<string> {
     return browser.getAlertText();
 }
 
-export function acceptAlert(): void {
-    browser.acceptAlert();
+export async function acceptAlert(): Promise<void> {
+    await browser.acceptAlert();
 }
 
-export function isAlertOpen(): boolean {
+export async function isAlertOpen(): Promise<boolean> {
     return browser.isAlertOpen();
 }
 
-export function click(selector: string, index: number = 0, waitTime: number = defaultWaitTime()): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    return $$(selector)[index].click();
+export async function click(selector: string, index: number = 0, waitTime: number = defaultWaitTime()): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
+    return (await $$(selector))[index].click();
 }
 
-export function clickRightMouseBtn(selector: string, index: number = 0, waitTime: number = defaultWaitTime()): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    return $$(selector)[index].click({ button: 'right' });
+export async function clickRightMouseBtn(
+    selector: string,
+    index: number = 0,
+    waitTime: number = defaultWaitTime()
+): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
+    return (await $$(selector))[index].click({ button: 'right' });
 }
 
-export function clickWithOption(
+export async function clickWithOption(
     selector: string,
     index: number = 0,
     waitTime: number = defaultWaitTime(),
     options: Record<string, any>
-): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    return $$(selector)[index].click(options);
+): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
+    return (await $$(selector))[index].click(options);
 }
 
-export function doubleClick(selector: string, index: number = 0, waitTime: number = defaultWaitTime()): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    return $$(selector)[index].doubleClick();
+export async function doubleClick(
+    selector: string,
+    index: number = 0,
+    waitTime: number = defaultWaitTime()
+): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
+    return (await $$(selector))[index].doubleClick();
 }
 
 // Clear value before set new
-export function setValue(selector: string, value: string, index: number = 0, waitTime = defaultWaitTime()): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    $$(selector)[index].clearValue();
-    $$(selector)[index].setValue(value);
+export async function setValue(
+    selector: string,
+    value: string,
+    index: number = 0,
+    waitTime = defaultWaitTime()
+): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
+    await (await $$(selector))[index].clearValue();
+    await (await $$(selector))[index].setValue(value);
 }
 
-export function addValueWithDelay(
+export async function addValueWithDelay(
     selector: string,
     value: string,
     delay: number = 100,
     index: number = 0,
     waitTime = defaultWaitTime()
-): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
     const valueArray = Array.from(value);
     for (const symbol of valueArray) {
-        $$(selector)[index].addValue(symbol);
-        browser.pause(delay);
+        await (await $$(selector))[index].addValue(symbol);
+        await browser.pause(delay);
     }
 }
 
 // add value to existing one
-export function addValue(selector: string, value: string, index: number = 0, waitTime = defaultWaitTime()): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    $$(selector)[index].addValue(value);
+export async function addValue(
+    selector: string,
+    value: string,
+    index: number = 0,
+    waitTime = defaultWaitTime()
+): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
+    await (await $$(selector))[index].addValue(value);
 }
 
-export function getValue(selector: string, index: number = 0, waitTime = defaultWaitTime()): string {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    return $$(selector)[index].getValue();
+export async function getValue(selector: string, index: number = 0, waitTime = defaultWaitTime()): Promise<string> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
+    return (await $$(selector))[index].getValue();
 }
 
-export function getArrValues(selector: string, sliceStart?: number, sliceEnd?: number): string[] {
-    checkSelectorExists(selector);
-    return $$(selector)
-        .slice(sliceStart, sliceEnd)
-        .map((element) => element.getValue());
+export async function getArrValues(selector: string, sliceStart?: number, sliceEnd?: number): Promise<string[]> {
+    await checkSelectorExists(selector);
+    return Promise.all(
+        (await $$(selector)).slice(sliceStart, sliceEnd).map(async (element) => await element.getValue())
+    );
 }
 
-export function getText(selector: string, index: number = 0, waitTime = defaultWaitTime()): string {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    return $$(selector)[index].getText();
+export async function getText(selector: string, index: number = 0, waitTime = defaultWaitTime()): Promise<string> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
+    return (await $$(selector))[index].getText();
 }
 
-export function getTextArr(selector: string, sliceStart?: number, sliceEnd?: number): string[] {
-    checkSelectorExists(selector);
-    return $$(selector)
-        .slice(sliceStart, sliceEnd)
-        .map((element) => element.getText().trim());
+export async function getTextArr(selector: string, sliceStart?: number, sliceEnd?: number): Promise<string[]> {
+    await checkSelectorExists(selector);
+    return Promise.all(
+        (await $$(selector)).slice(sliceStart, sliceEnd).map(async (element) => (await element.getText()).trim())
+    );
 }
 
-export function waitForElDisplayed(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
-    waitForPresent(selector, index);
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+export async function waitForElDisplayed(
+    selector: string,
+    index: number = 0,
+    waitTime = defaultWaitTime()
+): Promise<true | void> {
+    await waitForPresent(selector, index);
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
 }
 
-export function waitForInvisibilityOf(selector: string, index: number = 0): boolean {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].waitForDisplayed({ reverse: true });
+export async function waitForInvisibilityOf(selector: string, index: number = 0): Promise<true | void> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].waitForDisplayed({ reverse: true });
 }
 
-export function waitForNotDisplayed(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].waitForDisplayed({ timeout: waitTime, reverse: true });
+export async function waitForNotDisplayed(
+    selector: string,
+    index: number = 0,
+    waitTime = defaultWaitTime()
+): Promise<true | void> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].waitForDisplayed({ timeout: waitTime, reverse: true });
 }
 
-export function waitForClickable(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].waitForClickable({ timeout: waitTime });
+export async function waitForClickable(
+    selector: string,
+    index: number = 0,
+    waitTime = defaultWaitTime()
+): Promise<true | void> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].waitForClickable({ timeout: waitTime });
 }
 
-export function waitForUnclickable(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].waitForClickable({ timeout: waitTime, reverse: true });
+export async function waitForUnclickable(
+    selector: string,
+    index: number = 0,
+    waitTime = defaultWaitTime()
+): Promise<true | void> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].waitForClickable({ timeout: waitTime, reverse: true });
 }
 
-export function waitForElDisappear(selector: string, waitTime = defaultWaitTime()): boolean {
+export async function waitForElDisappear(selector: string, waitTime = defaultWaitTime()): Promise<true | void> {
     return $(selector).waitForExist({ timeout: waitTime, reverse: true });
 }
 
-export function waitForPresent(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].waitForExist({ timeout: waitTime });
+export async function waitForPresent(
+    selector: string,
+    index: number = 0,
+    waitTime = defaultWaitTime()
+): Promise<true | void> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].waitForExist({ timeout: waitTime });
 }
 
-export function waitForNotPresent(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
-    return $$(selector)[index].waitForExist({ timeout: waitTime, reverse: true });
+export async function waitForNotPresent(
+    selector: string,
+    index: number = 0,
+    waitTime = defaultWaitTime()
+): Promise<true | void> {
+    return (await $$(selector))[index].waitForExist({ timeout: waitTime, reverse: true });
 }
 
-export function isEnabled(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    return $$(selector)[index].isEnabled();
+export async function isEnabled(selector: string, index: number = 0, waitTime = defaultWaitTime()): Promise<boolean> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
+    return (await $$(selector))[index].isEnabled();
 }
 
 // Waits to be empty if text is not passed
-export function waitTextToBePresentInValue(
+export async function waitTextToBePresentInValue(
     selector: string,
     text: string = '',
     index: number = 0,
     waitTime = defaultWaitTime()
-): boolean {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].waitUntil(
-        function (): boolean {
-            return this.getValue() === text;
+): Promise<true | void> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].waitUntil(
+        async function (): Promise<boolean> {
+            return (await this.getValue()) === text;
         },
         { timeout: waitTime, timeoutMsg: `${text} is not present in element ${selector}` }
     );
 }
 
 // Sends to the active element
-export function sendKeys(keys: string | string[]): void {
-    browser.keys(keys);
+export async function sendKeys(keys: string | string[]): Promise<void> {
+    await browser.keys(keys);
 }
 
-export function uploadFile(selector: string, pathToFile: string, index: number = 0): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].setValue(pathToFile);
+export async function uploadFile(selector: string, pathToFile: string, index: number = 0): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].setValue(pathToFile);
 }
 
-export function getAttributeByName(selector: string, attrName: string, index: number = 0): string {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].getAttribute(attrName);
+export async function getAttributeByName(selector: string, attrName: string, index: number = 0): Promise<string> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].getAttribute(attrName);
 }
 
-export function getElementClass(selector: string, index: number = 0): string {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].getAttribute('class');
+export async function getElementClass(selector: string, index: number = 0): Promise<string> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].getAttribute('class');
 }
 
-export function getElementTitle(selector: string, index: number = 0): string {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].getAttribute('title');
+export async function getElementTitle(selector: string, index: number = 0): Promise<string> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].getAttribute('title');
 }
 
-export function getElementAriaLabel(selector: string, index: number = 0): string {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].getAttribute('aria-label');
+export async function getElementAriaLabel(selector: string, index: number = 0): Promise<string> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].getAttribute('aria-label');
 }
 
-export function getElementPlaceholder(selector: string, index: number = 0): string {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].getAttribute('placeholder');
+export async function getElementPlaceholder(selector: string, index: number = 0): Promise<string> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].getAttribute('placeholder');
 }
 
-export function getAttributeByNameArr(
+export async function getAttributeByNameArr(
     selector: string,
     attrName: string,
     sliceStart?: number,
     sliceEnd?: number
-): string[] {
-    checkSelectorExists(selector);
-    return $$(selector)
-        .slice(sliceStart, sliceEnd)
-        .map((element) => element.getAttribute(attrName));
+): Promise<string[]> {
+    await checkSelectorExists(selector);
+    return Promise.all(
+        (await $$(selector)).slice(sliceStart, sliceEnd).map(async (element) => await element.getAttribute(attrName))
+    );
 }
 
 // Returns object (assertions needs to be adapted)
-export function getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): any {
+export async function getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): Promise<any> {
     // TODO: returns WebdriverIO.CSSProperty
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].getCSSProperty(propertyName);
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].getCSSProperty(propertyName);
 }
 
-export function mouseHoverElement(selector: string, index: number = 0, waitTime = defaultWaitTime()): any {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].waitForExist({ timeout: waitTime });
-    $$(selector)[index].moveTo();
+export async function mouseHoverElement(
+    selector: string,
+    index: number = 0,
+    waitTime = defaultWaitTime()
+): Promise<any> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].waitForExist({ timeout: waitTime });
+    await (await $$(selector))[index].moveTo();
 }
 
-export function clearValue(selector: string, index: number = 0, waitTime = defaultWaitTime()): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    $$(selector)[index].clearValue();
+export async function clearValue(selector: string, index: number = 0, waitTime = defaultWaitTime()): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
+    await (await $$(selector))[index].clearValue();
 }
 
-export function getElementSize(selector: string, index?: number): any; // TODO: returns WebdriverIO.SizeReturn;
-export function getElementSize(selector: string, index: number, prop: 'width' | 'height'): number;
-export function getElementSize(selector: string, index: number = 0, prop?: 'width' | 'height'): number {
+export async function getElementSize(selector: string, index: number = 0): Promise<{ width: number; height: number }> {
     // TODO: number | WebdriverIO.SizeReturn;
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].getSize(prop || void 0);
+    await checkSelectorExists(selector, index);
+    return {
+        width: await (await $$(selector))[index].getSize('width'),
+        height: await (await $$(selector))[index].getSize('height')
+    };
 }
 
-export function executeScriptBeforeTagAttr(selector: string, attrName: string, index: number = 0): string {
+export async function executeScriptBeforeTagAttr(
+    selector: string,
+    attrName: string,
+    index: number = 0
+): Promise<string> {
     return browser.execute(
         (projectedSelector, projectedAttrName, projectedIndex) =>
             window.getComputedStyle(document.querySelectorAll(projectedSelector)[projectedIndex], ':before')[
@@ -333,7 +381,11 @@ export function executeScriptBeforeTagAttr(selector: string, attrName: string, i
     );
 }
 
-export function executeScriptAfterTagAttr(selector: string, attrName: string, index: number = 0): string {
+export async function executeScriptAfterTagAttr(
+    selector: string,
+    attrName: string,
+    index: number = 0
+): Promise<string> {
     return browser.execute(
         (projectedSelector, projectedAttrName, projectedIndex) =>
             window.getComputedStyle(document.querySelectorAll(projectedSelector)[projectedIndex], ':after')[
@@ -345,124 +397,143 @@ export function executeScriptAfterTagAttr(selector: string, attrName: string, in
     );
 }
 
-export function getElementArrayLength(selector: string): number {
-    return $$(selector).length;
+export async function getElementArrayLength(selector: string): Promise<number> {
+    return (await $$(selector)).length;
 }
 
-export function elementArray(selector: string): any {
+export async function elementArray(selector: string): Promise<any> {
     // TODO: returns WebdriverIO.ElementArray
     return $$(selector);
 }
 
-export function elementDisplayed(selector: string, index: number = 0): boolean {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].isDisplayed();
+export async function elementDisplayed(selector: string, index: number = 0): Promise<boolean> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].isDisplayed();
 }
 
-export function clickAndHold(selector: string, index: number = 0, waitTime: number = defaultWaitTime()): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    $$(selector)[index].moveTo();
+export async function clickAndHold(
+    selector: string,
+    index: number = 0,
+    waitTime: number = defaultWaitTime()
+): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
+    await (await $$(selector))[index].moveTo();
     return browser.buttonDown();
 }
 
-export function scrollIntoView(selector: string, index: number = 0): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].scrollIntoView();
+export async function scrollIntoView(selector: string, index: number = 0): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].scrollIntoView();
 }
 
-export function isElementClickable(selector: string, index: number = 0): boolean {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].isClickable();
+export async function isElementClickable(selector: string, index: number = 0): Promise<boolean> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].isClickable();
 }
 
-export function isDisplayedInViewport(selector: string, index: number = 0): boolean {
-    return $$(selector)[index].isDisplayedInViewport();
+export async function isDisplayedInViewport(selector: string, index: number = 0): Promise<boolean> {
+    return (await $$(selector))[index].isDisplayedInViewport();
 }
 
-export function waitElementToBeClickable(selector: string, index: number = 0): void {
-    browser.waitUntil((): boolean => $$(selector)[index].isClickable(), { timeout: defaultWaitTime() });
+export async function waitElementToBeClickable(selector: string, index: number = 0): Promise<void> {
+    await browser.waitUntil(async (): Promise<boolean> => await (await $$(selector))[index].isClickable(), {
+        timeout: defaultWaitTime()
+    });
 }
 
-export function doesItExist(selector: string): boolean {
+export async function doesItExist(selector: string): Promise<boolean> {
     return $(selector).isExisting();
 }
 
-export function getCurrentUrl(): string {
+export async function getCurrentUrl(): Promise<string> {
     return browser.getUrl();
 }
 
-export function dragAndDrop(
+export async function dragAndDrop(
     elementToDragSelector: string,
     index: number = 0,
     targetElementSelector: string,
     targetIndex: number = 0
-): void {
-    checkSelectorExists(elementToDragSelector, index);
-    checkSelectorExists(targetElementSelector, index);
-    $$(elementToDragSelector)[index].scrollIntoView();
-    $$(elementToDragSelector)[index].dragAndDrop($$(targetElementSelector)[targetIndex]);
+): Promise<void> {
+    await checkSelectorExists(elementToDragSelector, index);
+    await checkSelectorExists(targetElementSelector, index);
+    await (await $$(elementToDragSelector))[index].scrollIntoView();
+    await (await $$(elementToDragSelector))[index].dragAndDrop((await $$(targetElementSelector))[targetIndex]);
 }
 
-export function clickAndMoveElement(selector: string, offsetX: number, offsetY: number, index: number = 0): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].scrollIntoView();
-    $$(selector)[index].dragAndDrop({ x: offsetX, y: offsetY });
+export async function clickAndMoveElement(
+    selector: string,
+    offsetX: number,
+    offsetY: number,
+    index: number = 0
+): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].scrollIntoView();
+    await (await $$(selector))[index].dragAndDrop({ x: offsetX, y: offsetY });
 }
 
-export function isElementDisplayed(selector: string, index: number = 0): boolean {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].scrollIntoView();
-    return $$(selector)[index].isDisplayed();
+export async function isElementDisplayed(selector: string, index: number = 0): Promise<boolean> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].scrollIntoView();
+    return (await $$(selector))[index].isDisplayed();
 }
 
-export function focusElement(selector: string, index: number = 0): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].scrollIntoView();
-    $$(selector)[index].focus();
+export async function focusElement(selector: string, index: number = 0): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await $$(selector))[index].scrollIntoView();
+    await (await $$(selector))[index]['focus']();
+    await browser.pause(10);
 }
 
-export function mouseButtonDown(button: 0 | 1 | 2 = 0): void {
-    browser.buttonDown(button);
+export async function mouseButtonDown(button: 0 | 1 | 2 = 0): Promise<void> {
+    await browser.buttonDown(button);
 }
 
-export function mouseButtonUp(button: 0 | 1 | 2 = 0): void {
-    browser.buttonUp(button);
+export async function mouseButtonUp(button: 0 | 1 | 2 = 0): Promise<void> {
+    await browser.buttonUp(button);
 }
 
-export function clickNextElement(selector: string, index: number = 0): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].nextElement().click();
+export async function clickNextElement(selector: string, index: number = 0): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await (await $$(selector))[index].nextElement()).click();
 }
 
-export function clickPreviousElement(selector: string, index: number = 0): void {
-    checkSelectorExists(selector, index);
-    $$(selector)[index].previousElement().click();
+export async function clickPreviousElement(selector: string, index: number = 0): Promise<void> {
+    await checkSelectorExists(selector, index);
+    await (await (await $$(selector))[index].previousElement()).click();
 }
 
 export function getElementLocation(selector: string, index?: number): any; // TODO: returns WebdriverIO.LocationReturn
-export function getElementLocation(selector: string, index: number, prop: 'x' | 'y'): number;
-export function getElementLocation(selector: string, index: number = 0, prop?: 'x' | 'y'): number {
+export function getElementLocation(selector: string, index: number, prop: 'x' | 'y'): Promise<number>;
+export async function getElementLocation(selector: string, index: number = 0, prop?: 'x' | 'y'): Promise<number> {
     // TODO: returns WebdriverIO.LocationReturn | number
-    return $$(selector)[index].getLocation(prop || void 0);
+    if (!prop) {
+        return 0;
+    }
+    return (await $$(selector))[index].getLocation(prop);
 }
 
-export function getParentElementCSSProperty(selector: string, prop: string, index: number): string {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].parentElement().getCSSProperty(prop).value;
+export async function getParentElementCSSProperty(
+    selector: string,
+    prop: string,
+    index: number
+): Promise<string | undefined> {
+    await checkSelectorExists(selector, index);
+    return (await (await (await $$(selector))[index].parentElement()).getCSSProperty(prop)).value;
 }
 
-export function addIsActiveClass(selector: string, index: number = 0): void {
-    $$(selector)[index].addIsActiveClass();
+export async function addIsActiveClass(selector: string, index: number = 0): Promise<void> {
+    await (await $$(selector))[index]['addIsActiveClass']();
 }
 
-export function clickAndDragElement(
+export async function clickAndDragElement(
     locationX: number,
     locationY: number,
     newLocationX: number,
     newLocationY: number
-): void {
-    browser.performActions([
+): Promise<void> {
+    await browser.performActions([
         {
             type: 'pointer',
             id: 'pointer1',
@@ -479,46 +550,54 @@ export function clickAndDragElement(
     ]);
 }
 
-export function selectOptionByAttribute(
+export async function selectOptionByAttribute(
     selector: string,
     attribute: string,
     attributeValue: string,
     index: number = 0
-): void {
-    click(selector, index);
-    waitForElDisplayed(`${selector} option[${attribute}="${attributeValue}"]`);
-    $(`${selector} option[${attribute}="${attributeValue}"]`).click();
+): Promise<void> {
+    await click(selector, index);
+    await waitForElDisplayed(`${selector} option[${attribute}="${attributeValue}"]`);
+    await $(`${selector} option[${attribute}="${attributeValue}"]`).click();
 }
 
-export function selectOptionByValueAttribute(selector: string, attributeValue: string, index: number = 0): void {
-    selectOptionByAttribute(selector, 'value', attributeValue, index);
+export async function selectOptionByValueAttribute(
+    selector: string,
+    attributeValue: string,
+    index: number = 0
+): Promise<void> {
+    await selectOptionByAttribute(selector, 'value', attributeValue, index);
 }
 
-export function saveElementScreenshot(
+export async function saveElementScreenshot(
     selector: string,
     tag: string,
     options?: Record<string, any>,
     index: number = 0
-): void {
-    browser.saveElement($$(selector)[index], tag, options);
+): Promise<void> {
+    await browser.saveElement((await $$(selector))[index], tag, options);
 }
 
-export function checkElementScreenshot(
+export async function checkElementScreenshot(
     selector: string,
     tag: string,
     options?: Record<string, any>,
     index: number = 0
-): any {
-    return browser.checkElement($$(selector)[index], tag, options);
+): Promise<any> {
+    return browser.checkElement((await $$(selector))[index], tag, options);
 }
 
-export function checkSelectorExists(selector: string, index: number = 0): void {
-    if ($$(selector)[index] === undefined) {
+export async function checkSelectorExists(selector: string, index: number = 0): Promise<void> {
+    if ((await $$(selector))[index] === undefined) {
         throw new Error(`Element with index: ${index} for selector: '${selector}' not found.`);
     }
 }
 
-export function applyState(state: 'hover' | 'active' | 'focus', selector: string, index: number = 0): void {
+export async function applyState(
+    state: 'hover' | 'active' | 'focus',
+    selector: string,
+    index: number = 0
+): Promise<void> {
     switch (state) {
         case 'hover':
             return mouseHoverElement(selector, index);
@@ -529,20 +608,20 @@ export function applyState(state: 'hover' | 'active' | 'focus', selector: string
     }
 }
 
-export function getPreviousElement(selector: string, index: number = 0): any {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].previousElement();
+export async function getPreviousElement(selector: string, index: number = 0): Promise<any> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].previousElement();
 }
 
-export function getNextElement(selector: string, index: number = 0): any {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].nextElement();
+export async function getNextElement(selector: string, index: number = 0): Promise<any> {
+    await checkSelectorExists(selector, index);
+    return (await $$(selector))[index].nextElement();
 }
 
-export function getPreviousElementText(selector: string, index: number = 0): string {
-    return getPreviousElement(selector, index).getText();
+export async function getPreviousElementText(selector: string, index: number = 0): Promise<string> {
+    return (await getPreviousElement(selector, index)).getText();
 }
 
-export function getNextElementText(selector: string, index: number = 0): string {
-    return getNextElement(selector, index).getText();
+export async function getNextElementText(selector: string, index: number = 0): Promise<string> {
+    return (await getNextElement(selector, index)).getText();
 }

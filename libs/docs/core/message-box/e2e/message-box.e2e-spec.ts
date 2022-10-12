@@ -31,150 +31,153 @@ describe('Message-box test suits', () => {
         messageIcon
     } = messageBoxPage;
 
-    beforeAll(() => {
-        messageBoxPage.open();
+    beforeAll(async () => {
+        await messageBoxPage.open();
     }, 1);
 
     describe('Object based example', () => {
-        it('Should check working of message-boxes', () => {
-            checkMessageBoxWorking(basedObjectExample);
+        it('Should check working of message-boxes', async () => {
+            await checkMessageBoxWorking(basedObjectExample);
         });
-        it('Should check accepting message-box', () => {
-            checkAcceptingMessage(basedObjectExample);
+        it('Should check accepting message-box', async () => {
+            await checkAcceptingMessage(basedObjectExample);
         });
-        it('Should check working of message-boxes', () => {
-            checkDismissingMessage(basedObjectExample);
+        it('Should check working of message-boxes', async () => {
+            await checkDismissingMessage(basedObjectExample);
         });
-        it('should check losing message box by escape button', () => {
-            checkClosingMessageBoxByPressEscape(basedObjectExample);
+        it('should check losing message box by escape button', async () => {
+            await checkClosingMessageBoxByPressEscape(basedObjectExample);
         });
     });
 
     describe('Template message box example', () => {
-        it('Should check working of message-boxes', () => {
-            checkMessageBoxWorking(openTemplateExample);
+        it('Should check working of message-boxes', async () => {
+            await checkMessageBoxWorking(openTemplateExample);
         });
-        it('Should check accepting message-box', () => {
-            checkAcceptingMessage(openTemplateExample);
+        it('Should check accepting message-box', async () => {
+            await checkAcceptingMessage(openTemplateExample);
         });
-        it('Should check working of message-boxes', () => {
-            checkDismissingMessage(openTemplateExample);
+        it('Should check working of message-boxes', async () => {
+            await checkDismissingMessage(openTemplateExample);
         });
-        it('should check losing message box by escape button', () => {
-            checkClosingMessageBoxByPressEscape(openTemplateExample);
+        it('should check losing message box by escape button', async () => {
+            await checkClosingMessageBoxByPressEscape(openTemplateExample);
         });
     });
 
     describe('Component based message box example', () => {
-        it('Should check working of message-boxes', () => {
-            checkMessageBoxWorking(basedComponentExample);
+        it('Should check working of message-boxes', async () => {
+            await checkMessageBoxWorking(basedComponentExample);
         });
-        it('Should check accepting message-box', () => {
-            checkAcceptingMessage(basedComponentExample);
+        it('Should check accepting message-box', async () => {
+            await checkAcceptingMessage(basedComponentExample);
         });
-        it('Should check working of message-boxes', () => {
-            checkDismissingMessage(basedComponentExample);
+        it('Should check working of message-boxes', async () => {
+            await checkDismissingMessage(basedComponentExample);
         });
-        it('should check losing message box by escape button', () => {
-            checkClosingMessageBoxByPressEscape(basedComponentExample);
+        it('should check losing message box by escape button', async () => {
+            await checkClosingMessageBoxByPressEscape(basedComponentExample);
         });
     });
 
     describe('Semantic types example', () => {
-        it('Should check working of message-boxes', () => {
-            checkMessageBoxWorking(sematicTypesExample);
+        it('Should check working of message-boxes', async () => {
+            await checkMessageBoxWorking(sematicTypesExample);
         });
-        it('should check losing message box by escape button', () => {
-            checkClosingMessageBoxByPressEscape(sematicTypesExample);
+        it('should check losing message box by escape button', async () => {
+            await checkClosingMessageBoxByPressEscape(sematicTypesExample);
         });
-        it('Should check message & button types', () => {
-            const buttonsLength = getElementArrayLength(sematicTypesExample + button);
+        it('Should check message & button types', async () => {
+            const buttonsLength = await getElementArrayLength(sematicTypesExample + button);
             for (let i = 0; i < buttonsLength; i++) {
-                expect(getElementClass(sematicTypesExample + button, i)).toContain(
+                await expect(await getElementClass(sematicTypesExample + button, i)).toContain(
                     buttonClassArr[i],
                     `Element type is not ${buttonClassArr[i]}`
                 );
-                click(sematicTypesExample + button, i);
+                await click(sematicTypesExample + button, i);
                 i === buttonsLength - 1
-                    ? expect(doesItExist(messageIcon)).toBe(false, 'Icon exists')
-                    : expect(getElementClass(messageIcon)).toContain(iconsArr[i], `Icon is not ${iconsArr[i]}`);
-                click(okButton);
+                    ? await expect(await doesItExist(messageIcon)).toBe(false, 'Icon exists')
+                    : await expect(await getElementClass(messageIcon)).toContain(
+                          iconsArr[i],
+                          `Icon is not ${iconsArr[i]}`
+                      );
+                await click(okButton);
             }
         });
     });
 
     describe('Position example', () => {
-        it('Should check working of message-boxes', () => {
-            checkMessageBoxWorking(positionExample);
+        it('Should check working of message-boxes', async () => {
+            await checkMessageBoxWorking(positionExample);
         });
-        it('should check losing message box by escape button', () => {
-            checkClosingMessageBoxByPressEscape(positionExample);
+        it('should check losing message box by escape button', async () => {
+            await checkClosingMessageBoxByPressEscape(positionExample);
         });
     });
 
     describe('Mobile example', () => {
-        it('Should check working of message-boxes', () => {
-            checkMessageBoxWorking(mobileExample);
+        it('Should check working of message-boxes', async () => {
+            await checkMessageBoxWorking(mobileExample);
         });
-        it('should check losing message box by escape button', () => {
-            checkClosingMessageBoxByPressEscape(mobileExample);
+        it('should check losing message box by escape button', async () => {
+            await checkClosingMessageBoxByPressEscape(mobileExample);
         });
     });
 
     describe('Complex template example', () => {
-        it('Should check working of message-boxes', () => {
-            checkMessageBoxWorking(complexTemplateExample);
+        it('Should check working of message-boxes', async () => {
+            await checkMessageBoxWorking(complexTemplateExample);
         });
-        it('should check losing message box by escape button', () => {
-            checkClosingMessageBoxByPressEscape(complexTemplateExample);
+        it('should check losing message box by escape button', async () => {
+            await checkClosingMessageBoxByPressEscape(complexTemplateExample);
         });
     });
 
-    it('should check orientation', () => {
-        messageBoxPage.checkRtlSwitch();
+    it('should check orientation', async () => {
+        await messageBoxPage.checkRtlSwitch();
     });
 
     xdescribe('visual regression', () => {
-        it('should check examples visual regression', () => {
-            refreshPage();
-            waitForElDisplayed(messageBoxPage.title);
-            messageBoxPage.saveExampleBaselineScreenshot();
-            expect(messageBoxPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await refreshPage();
+            await waitForElDisplayed(messageBoxPage.title);
+            await messageBoxPage.saveExampleBaselineScreenshot();
+            await expect(await messageBoxPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 
-    function checkClosingMessageBoxByPressEscape(section: string): void {
-        scrollIntoView(section);
-        click(section + button);
-        waitForElDisplayed(messageBox);
-        sendKeys('Escape');
+    async function checkClosingMessageBoxByPressEscape(section: string): Promise<void> {
+        await scrollIntoView(section);
+        await click(section + button);
+        await waitForElDisplayed(messageBox);
+        await sendKeys('Escape');
 
-        expect(doesItExist(messageBox)).toBe(false);
-        refreshPage();
+        await expect(await doesItExist(messageBox)).toBe(false);
+        await refreshPage();
     }
 
-    function checkMessageBoxWorking(section: string): void {
-        const elementLength = getElementArrayLength(section + button);
+    async function checkMessageBoxWorking(section: string): Promise<void> {
+        const elementLength = await getElementArrayLength(section + button);
         for (let i = 0; i < elementLength; i++) {
-            click(section + button, i);
-            expect(isElementDisplayed(messageBox)).toBe(true, 'Message-Box is not displayed');
-            click(okButton);
-            expect(doesItExist(messageBox)).toBe(false, 'Message-Box still displayed');
+            await click(section + button, i);
+            await expect(await isElementDisplayed(messageBox)).toBe(true, 'Message-Box is not displayed');
+            await click(okButton);
+            await expect(await doesItExist(messageBox)).toBe(false, 'Message-Box still displayed');
         }
     }
 
-    function checkAcceptingMessage(section: string): void {
-        click(section + button);
-        click(okButton);
+    async function checkAcceptingMessage(section: string): Promise<void> {
+        await click(section + button);
+        await click(okButton);
         section === basedObjectExample
-            ? expect(getText(section + resultTxt)).toContain('Approved', 'Result is not OK')
-            : expect(getText(section + resultTxt)).toContain('Ok', 'Result is not OK');
+            ? await expect(await getText(section + resultTxt)).toContain('Approved', 'Result is not OK')
+            : await expect(await getText(section + resultTxt)).toContain('Ok', 'Result is not OK');
     }
-    function checkDismissingMessage(section: string): void {
-        click(section + button);
-        click(cancelButton);
+    async function checkDismissingMessage(section: string): Promise<void> {
+        await click(section + button);
+        await click(cancelButton);
         section === basedObjectExample
-            ? expect(getText(section + resultTxt)).toContain('Canceled', 'Result is not Canceled')
-            : expect(getText(section + resultTxt)).toContain('Cancel', 'Result is not Cancel');
+            ? await expect(await getText(section + resultTxt)).toContain('Canceled', 'Result is not Canceled')
+            : await expect(await getText(section + resultTxt)).toContain('Cancel', 'Result is not Cancel');
     }
 });

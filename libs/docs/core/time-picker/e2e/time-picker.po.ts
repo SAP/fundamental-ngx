@@ -19,7 +19,7 @@ export class TimePickerPo extends CoreBaseComponentPo {
     clockIcon = '.fd-input-group__button';
     formatDropDown = this.localExample + '.fd-select__button';
     timePicker = '.fd-time';
-    selectedTime = this.formExample + '> form > div:nth-child(1) > span';
+    selectedTime = this.formExample + '> form > div:nth-child(1) > small > span';
 
     hoursColumn = 'fd-time-column:nth-child(1) ';
     minutesColumn = 'fd-time-column:nth-child(2) ';
@@ -41,29 +41,29 @@ export class TimePickerPo extends CoreBaseComponentPo {
     bnFormat = '.cdk-overlay-container ul[fd-list] li[fd-option]:nth-child(5)';
     arFormat = '.cdk-overlay-container ul[fd-list] li[fd-option]:nth-child(6)';
 
-    openClock(): void {
-        click(this.localExample + this.clockIcon);
+    async openClock(): Promise<void> {
+        await click(this.localExample + this.clockIcon);
     }
 
-    closeClock(): void {
-        click(this.localExample + this.clockIcon);
+    async closeClock(): Promise<void> {
+        await click(this.localExample + this.clockIcon);
     }
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'time-picker'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'time-picker'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'time-picker'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'time-picker'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 }

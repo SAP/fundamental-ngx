@@ -39,161 +39,164 @@ describe('Resizable card layout component:', () => {
         card
     } = resizableCardLayoutPage;
 
-    beforeAll(() => {
-        resizableCardLayoutPage.open();
+    beforeAll(async () => {
+        await resizableCardLayoutPage.open();
     }, 1);
 
-    beforeEach(() => {
-        refreshPage();
-        waitForPresent(resizableCardLayoutPage.root);
-        waitForElDisplayed(resizableCardLayoutPage.title);
+    beforeEach(async () => {
+        await refreshPage();
+        await waitForPresent(resizableCardLayoutPage.root);
+        await waitForElDisplayed(resizableCardLayoutPage.title);
     }, 2);
 
-    it('should check resizing card in examples', () => {
-        if (!browserIsFirefox()) {
-            checkChaningSizeOfCard(defaultExample, 'bigger');
-            checkChaningSizeOfCard(defaultExample, 'smaller', 1);
-            checkChaningSizeOfCard(configExample, 'bigger');
-            checkChaningSizeOfCard(configExample, 'smaller', 2);
-            checkChaningSizeOfCard(itemExample, 'bigger');
-            checkChaningSizeOfCard(itemExample, 'smaller');
+    it('should check resizing card in examples', async () => {
+        if (!(await browserIsFirefox())) {
+            await checkChaningSizeOfCard(defaultExample, 'bigger');
+            await checkChaningSizeOfCard(defaultExample, 'smaller', 1);
+            await checkChaningSizeOfCard(configExample, 'bigger');
+            await checkChaningSizeOfCard(configExample, 'smaller', 2);
+            await checkChaningSizeOfCard(itemExample, 'bigger');
+            await checkChaningSizeOfCard(itemExample, 'smaller');
         }
     });
 
-    it('should check open-closing examples', () => {
+    it('should check open-closing examples', async () => {
         for (let i = 0; i < blockExamples.length; i++) {
-            checkOpenClose(blockExamples[i]);
+            await checkOpenClose(blockExamples[i]);
         }
     });
 
-    it('should check quantity of items in the card after changin size', () => {
-        if (!browserIsFirefox()) {
+    it('should check quantity of items in the card after changin size', async () => {
+        if (!(await browserIsFirefox())) {
             for (let i = 0; i < blockExamples.length; i++) {
-                checkItemQuantity(blockExamples[i]);
+                await checkItemQuantity(blockExamples[i]);
             }
         }
     });
 
-    it('should check collapsible area', () => {
+    it('should check collapsible area', async () => {
         for (let i = 0; i < blockExamples.length; i++) {
-            checkCollapsibleArea(blockExamples[i], 'collapseButton');
-            checkCollapsibleArea(blockExamples[i], 'resizeButton');
+            await checkCollapsibleArea(blockExamples[i], 'collapseButton');
+            await checkCollapsibleArea(blockExamples[i], 'resizeButton');
         }
     });
 
-    it('should check pin button working', () => {
+    it('should check pin button working', async () => {
         for (let i = 0; i < blockExamples.length; i++) {
-            checkPinButtonWorking(blockExamples[i]);
+            await checkPinButtonWorking(blockExamples[i]);
         }
     });
 
-    it('should check changing position of card above/below', () => {
+    it('should check changing position of card above/below', async () => {
         for (let i = 0; i < blockExamples.length; i++) {
-            checkChanginPositionOfCardAround(blockExamples[i]);
+            await checkChanginPositionOfCardAround(blockExamples[i]);
         }
     });
 
-    it('should check orientation', () => {
-        resizableCardLayoutPage.checkRtlSwitch();
+    it('should check orientation', async () => {
+        await resizableCardLayoutPage.checkRtlSwitch();
     });
 
-    xit('should check visual regression for all examples', () => {
-        resizableCardLayoutPage.saveExampleBaselineScreenshot();
-        expect(resizableCardLayoutPage.compareWithBaseline()).toBeLessThan(5);
+    xit('should check visual regression for all examples', async () => {
+        await resizableCardLayoutPage.saveExampleBaselineScreenshot();
+        await expect(await resizableCardLayoutPage.compareWithBaseline()).toBeLessThan(5);
     });
 
-    function checkChanginPositionOfCardAround(section: string): void {
-        click(section + button);
-        const defaultPosition = getAttributeByName(card, 'style', 1);
-        clickAndMoveElement(verticalResize, 500, 0);
-        pause(1500);
-        expect(getAttributeByName(card, 'style', 1)).not.toEqual(defaultPosition);
-        click(closeButton);
+    async function checkChanginPositionOfCardAround(section: string): Promise<void> {
+        await click(section + button);
+        const defaultPosition = await getAttributeByName(card, 'style', 1);
+        await clickAndMoveElement(verticalResize, 500, 0);
+        await pause(1500);
+        await expect(await getAttributeByName(card, 'style', 1)).not.toEqual(defaultPosition);
+        await click(closeButton);
     }
 
-    function checkPinButtonWorking(section: string): void {
-        click(section + button);
-        click(pinButton);
-        expect(getAttributeByName(pinButton, 'aria-selected')).toBe('true');
-        click(closeButton);
+    async function checkPinButtonWorking(section: string): Promise<void> {
+        await click(section + button);
+        await click(pinButton);
+        await expect(await getAttributeByName(pinButton, 'aria-selected')).toBe('true');
+        await click(closeButton);
     }
 
-    function checkCollapsibleArea(section: string, clickbutton: 'collapseButton' | 'resizeButton'): void {
-        click(section + button);
-        clickbutton === 'collapseButton' ? click(collapseButton) : click(resizeButton);
-        expect(isElementDisplayed(collapsibleArea)).toBe(false);
-        clickbutton === 'collapseButton' ? click(collapseButton) : click(resizeButton);
-        expect(isElementDisplayed(collapsibleArea)).toBe(true);
-        click(closeButton);
+    async function checkCollapsibleArea(
+        section: string,
+        clickbutton: 'collapseButton' | 'resizeButton'
+    ): Promise<void> {
+        await click(section + button);
+        clickbutton === 'collapseButton' ? await click(collapseButton) : await click(resizeButton);
+        await expect(await isElementDisplayed(collapsibleArea)).toBe(false);
+        clickbutton === 'collapseButton' ? await click(collapseButton) : await click(resizeButton);
+        await expect(await isElementDisplayed(collapsibleArea)).toBe(true);
+        await click(closeButton);
     }
 
-    function checkItemQuantity(section: string): void {
-        click(section + button);
-        const defaultItemsQuantity = getElementArrayLength(listItem);
-        scrollIntoView(horizontalResize);
-        clickAndMoveElement(horizontalResize, 0, -100);
-        pause(1000);
-        const itemsQuantityAfterChangingSize = getElementArrayLength(listItem);
-        expect(getElementArrayLength(listItem)).toBeLessThan(defaultItemsQuantity);
-        scrollIntoView(horizontalResize);
-        clickAndMoveElement(horizontalResize, 0, 200);
-        pause(1000);
-        expect(getElementArrayLength(listItem)).toBeGreaterThan(itemsQuantityAfterChangingSize);
-        click(closeButton);
+    async function checkItemQuantity(section: string): Promise<void> {
+        await click(section + button);
+        const defaultItemsQuantity = await getElementArrayLength(listItem);
+        await scrollIntoView(horizontalResize);
+        await clickAndMoveElement(horizontalResize, 0, -100);
+        await pause(1000);
+        const itemsQuantityAfterChangingSize = await getElementArrayLength(listItem);
+        await expect(await getElementArrayLength(listItem)).toBeLessThan(defaultItemsQuantity);
+        await scrollIntoView(horizontalResize);
+        await clickAndMoveElement(horizontalResize, 0, 200);
+        await pause(1000);
+        await expect(await getElementArrayLength(listItem)).toBeGreaterThan(itemsQuantityAfterChangingSize);
+        await click(closeButton);
     }
 
-    function checkChaningSizeOfCard(
+    async function checkChaningSizeOfCard(
         section: string,
         size: 'smaller' | 'bigger',
         resizeIndex: number = 0,
         cardIndex: number = 0
-    ): void {
+    ): Promise<void> {
         if (section === defaultExample && size === 'smaller') {
             cardIndex = resizeIndex + 1;
         }
         if (section === configExample && size === 'smaller') {
             cardIndex = resizeIndex;
         }
-        click(section + button);
-        const defaultSize = getAttributeByName(resizableCard, 'style', cardIndex);
+        await click(section + button);
+        const defaultSize = await getAttributeByName(resizableCard, 'style', cardIndex);
         size === 'bigger'
-            ? clickAndMoveElement(verticalResize, 200, 0, resizeIndex)
-            : clickAndMoveElement(verticalResize, -200, 0, resizeIndex);
-        pause(1500);
-        const sizeAfterVerticalMoving = getAttributeByName(resizableCard, 'style', cardIndex);
+            ? await clickAndMoveElement(verticalResize, 200, 0, resizeIndex)
+            : await clickAndMoveElement(verticalResize, -200, 0, resizeIndex);
+        await pause(1500);
+        const sizeAfterVerticalMoving = await getAttributeByName(resizableCard, 'style', cardIndex);
 
-        expect(sizeAfterVerticalMoving).not.toEqual(
+        await expect(sizeAfterVerticalMoving).not.toEqual(
             defaultSize,
             `failed try to make card ${size} vertical for ${section}`
         );
-        scrollIntoView(horizontalResize, resizeIndex);
+        await scrollIntoView(horizontalResize, resizeIndex);
         size === 'bigger'
-            ? clickAndMoveElement(horizontalResize, 0, 300, resizeIndex)
-            : clickAndMoveElement(horizontalResize, 0, -100, resizeIndex);
-        pause(1500);
-        expect(getAttributeByName(resizableCard, 'style', cardIndex)).not.toEqual(
+            ? await clickAndMoveElement(horizontalResize, 0, 300, resizeIndex)
+            : await clickAndMoveElement(horizontalResize, 0, -100, resizeIndex);
+        await pause(1500);
+        await expect(await getAttributeByName(resizableCard, 'style', cardIndex)).not.toEqual(
             sizeAfterVerticalMoving,
             `failed try to make card ${size} horizontal for ${section}`
         );
-        click(closeButton);
+        await click(closeButton);
     }
 
-    function checkOpenClose(section: string): void {
-        click(section + button);
-        expect(isElementDisplayed(dynamicHeader)).toBe(true, 'Dynamic page did not open');
-        click(acceptButton);
-        expect(doesItExist(dynamicHeader)).toBe(false, 'Dynamic page did not close');
+    async function checkOpenClose(section: string): Promise<void> {
+        await click(section + button);
+        await expect(await isElementDisplayed(dynamicHeader)).toBe(true, 'Dynamic page did not open');
+        await click(acceptButton);
+        await expect(await doesItExist(dynamicHeader)).toBe(false, 'Dynamic page did not close');
 
-        click(section + button);
-        click(exitScreen);
-        expect(doesItExist(dynamicHeader)).toBe(false, 'Dynamic page did not close');
+        await click(section + button);
+        await click(exitScreen);
+        await expect(await doesItExist(dynamicHeader)).toBe(false, 'Dynamic page did not close');
 
-        click(section + button);
-        click(rejectButton);
-        expect(doesItExist(dynamicHeader)).toBe(false, 'Dynamic page did not close');
+        await click(section + button);
+        await click(rejectButton);
+        await expect(await doesItExist(dynamicHeader)).toBe(false, 'Dynamic page did not close');
 
-        click(section + button);
-        click(closeButton);
-        expect(doesItExist(dynamicHeader)).toBe(false, 'Dynamic page did not close');
+        await click(section + button);
+        await click(closeButton);
+        await expect(await doesItExist(dynamicHeader)).toBe(false, 'Dynamic page did not close');
     }
 });

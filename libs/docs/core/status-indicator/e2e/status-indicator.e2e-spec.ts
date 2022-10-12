@@ -5,30 +5,30 @@ describe('Status indicator component test', () => {
     const statusIndicatorPage = new StatusIndicatorPo();
     const { statusIcon } = statusIndicatorPage;
 
-    beforeAll(() => {
-        statusIndicatorPage.open();
+    beforeAll(async () => {
+        await statusIndicatorPage.open();
     }, 1);
 
-    it('verify alert text', () => {
+    it('verify alert text', async () => {
         // skip due to unknown error
-        if (browserIsSafari()) {
+        if (await browserIsSafari()) {
             return;
         }
-        scrollIntoView(statusIcon);
-        click(statusIcon);
+        await scrollIntoView(statusIcon);
+        await click(statusIcon);
         const alertTestText = 'clicked on object with 35% fillling';
-        expect(getAlertText()).toBe(alertTestText);
-        acceptAlert();
+        await expect(await getAlertText()).toBe(alertTestText);
+        await acceptAlert();
     });
 
-    it('should check RTL and LTR orientation', () => {
-        statusIndicatorPage.checkRtlSwitch();
+    it('should check RTL and LTR orientation', async () => {
+        await statusIndicatorPage.checkRtlSwitch();
     });
 
     xdescribe('Should check visual regression', () => {
-        it('should check visual regression for all examples', () => {
-            statusIndicatorPage.saveExampleBaselineScreenshot();
-            expect(statusIndicatorPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check visual regression for all examples', async () => {
+            await statusIndicatorPage.saveExampleBaselineScreenshot();
+            await expect(await statusIndicatorPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

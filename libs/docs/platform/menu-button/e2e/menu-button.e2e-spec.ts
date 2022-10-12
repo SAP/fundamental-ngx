@@ -37,121 +37,121 @@ describe('Menu button test suite', () => {
         menuTypeBtnArr
     } = menuBtnPage;
 
-    beforeAll(() => {
-        menuBtnPage.open();
-        waitForPresent(menuBtnPage.root);
-        waitForElDisplayed(menuBtnPage.title);
+    beforeAll(async () => {
+        await menuBtnPage.open();
+        await waitForPresent(menuBtnPage.root);
+        await waitForElDisplayed(menuBtnPage.title);
     }, 1);
 
-    afterEach(() => {
-        refreshPage();
-        waitForPresent(menuBtnPage.root);
-        waitForElDisplayed(menuBtnPage.title);
+    afterEach(async () => {
+        await refreshPage();
+        await waitForPresent(menuBtnPage.root);
+        await waitForElDisplayed(menuBtnPage.title);
     }, 1);
 
     describe('Check general menu button states', () => {
-        it('should check that the arrow icon is present', () => {
-            const arrayLength = getElementArrayLength(btnArrowIconsArr);
+        it('should check that the arrow icon is present', async () => {
+            const arrayLength = await getElementArrayLength(btnArrowIconsArr);
 
             for (let i = 0; arrayLength > i; i++) {
-                expect(isElementDisplayed(btnArrowIconsArr, i)).toBe(true);
+                await expect(await isElementDisplayed(btnArrowIconsArr, i)).toBe(true);
             }
         });
 
-        it('should check selected menu option and close menu', () => {
-            click(cozyBtnArr);
-            click(menuItemArr);
+        it('should check selected menu option and close menu', async () => {
+            await click(cozyBtnArr);
+            await click(menuItemArr);
 
-            expect(getText(cozySelectedItemLabel)).toEqual(selectedItem);
-            expect(isElementDisplayed(menuItemOverlay)).toBe(false);
+            await expect(await getText(cozySelectedItemLabel)).toEqual(selectedItem);
+            await expect(await isElementDisplayed(menuItemOverlay)).toBe(false);
         });
 
-        it('should check menu items visible', () => {
-            click(cozyBtnArr);
-            expect(isElementDisplayed(menuItemOverlay)).toBe(true);
+        it('should check menu items visible', async () => {
+            await click(cozyBtnArr);
+            await expect(await isElementDisplayed(menuItemOverlay)).toBe(true);
         });
 
-        it('should check close menu by clicking menu btn', () => {
-            click(cozyBtnArr);
-            click(cozyBtnArr);
-            expect(isElementDisplayed(menuItemOverlay)).toBe(false);
+        it('should check close menu by clicking menu btn', async () => {
+            await click(cozyBtnArr);
+            await click(cozyBtnArr);
+            await expect(await isElementDisplayed(menuItemOverlay)).toBe(false);
         });
 
-        it('should check closing menu when clicking outside of menu', () => {
-            waitForPresent(cozyBtnArr);
-            click(cozyBtnArr);
-            waitForElDisplayed(menuItemOverlay);
-            expect(isElementDisplayed(menuItemOverlay)).toBe(true);
-            click(sectionTitle);
-            expect(isElementDisplayed(menuItemOverlay)).toBe(false);
+        it('should check closing menu when clicking outside of menu', async () => {
+            await waitForPresent(cozyBtnArr);
+            await click(cozyBtnArr);
+            await waitForElDisplayed(menuItemOverlay);
+            await expect(await isElementDisplayed(menuItemOverlay)).toBe(true);
+            await click(sectionTitle);
+            await expect(await isElementDisplayed(menuItemOverlay)).toBe(false);
         });
     });
 
     describe('Check cozy and compact menu button states', () => {
-        it('should check btn states', () => {
-            const cozyBtnCount = getElementArrayLength(cozyBtnAttrArr);
-            const compactBtnCount = getElementArrayLength(compactBtnAttrArr);
+        it('should check btn states', async () => {
+            const cozyBtnCount = await getElementArrayLength(cozyBtnAttrArr);
+            const compactBtnCount = await getElementArrayLength(compactBtnAttrArr);
 
             for (let i = 0; cozyBtnCount > i; i++) {
-                expect(getAttributeByName(cozyBtnArr, 'aria-disabled', i)).toBe('false');
+                await expect(await getAttributeByName(cozyBtnArr, 'aria-disabled', i)).toBe('false');
             }
 
             for (let j = 0; compactBtnCount > j; j++) {
-                expect(getAttributeByName(compactBtnArr, 'aria-disabled', j)).toBe('false');
+                await expect(await getAttributeByName(compactBtnArr, 'aria-disabled', j)).toBe('false');
             }
 
             for (let k = 0; cozyBtnCount + compactBtnCount > k; k++) {
-                expect(isElementDisplayed(btnWorldIconArr, k)).toBe(true);
+                await expect(await isElementDisplayed(btnWorldIconArr, k)).toBe(true);
             }
         });
 
-        it('should check cozy btn text', () => {
-            const cozyBtnTextArrLength = getElementArrayLength(cozyBtnAttrArr);
+        it('should check cozy btn text', async () => {
+            const cozyBtnTextArrLength = await getElementArrayLength(cozyBtnAttrArr);
 
             for (let i = 0; cozyBtnTextArrLength > i; i++) {
-                expect(getText(cozyBtnAttrArr, i).trim()).toEqual(cozyAndCompactBtnTextArr[i]);
+                await expect((await getText(cozyBtnAttrArr, i)).trim()).toEqual(cozyAndCompactBtnTextArr[i]);
             }
         });
 
-        it('should check compact btn text', () => {
-            const compactBtnTextArrLength = getElementArrayLength(compactBtnAttrArr);
-            const compactBtnArrLength = getElementArrayLength(compactBtnArr);
+        it('should check compact btn text', async () => {
+            const compactBtnTextArrLength = await getElementArrayLength(compactBtnAttrArr);
+            const compactBtnArrLength = await getElementArrayLength(compactBtnArr);
 
             for (let i = 0; compactBtnTextArrLength > i; i++) {
-                expect(getText(compactBtnAttrArr, i).trim()).toEqual(cozyAndCompactBtnTextArr[i]);
+                await expect((await getText(compactBtnAttrArr, i)).trim()).toEqual(cozyAndCompactBtnTextArr[i]);
             }
 
             for (let j = 0; compactBtnArrLength > j; j++) {
-                expect(getElementClass(compactBtnArr, j)).toContain(compactClass);
+                await expect(await getElementClass(compactBtnArr, j)).toContain(compactClass);
             }
         });
     });
 
     describe('Check types of menu buttons', () => {
-        it('should check disabled buttons', () => {
+        it('should check disabled buttons', async () => {
             for (let i = 0; 5 > i; i++) {
-                expect(getAttributeByName(menuTypeBtnArr, disabledState, i)).toEqual('true');
+                await expect(await getAttributeByName(menuTypeBtnArr, disabledState, i)).toEqual('true');
             }
         });
 
-        it('should check long text menu btn with and without icon', () => {
-            expect(getText(menuTypeBtnArr, 11).trim()).toEqual(truncatedBtnText);
-            expect(getAttributeByName(menuTypeBtnArr, tooltipAttr, 11)).toContain(truncatedBtnTooltipText);
-            expect(getText(menuTypeBtnArr, 12).trim()).toEqual(truncatedBtnText);
-            expect(getAttributeByName(menuTypeBtnArr, tooltipAttr, 12)).toBe(truncatedBtnNoIconTooltipText);
+        it('should check long text menu btn with and without icon', async () => {
+            await expect((await getText(menuTypeBtnArr, 11)).trim()).toEqual(truncatedBtnText);
+            await expect(await getAttributeByName(menuTypeBtnArr, tooltipAttr, 11)).toContain(truncatedBtnTooltipText);
+            await expect((await getText(menuTypeBtnArr, 12)).trim()).toEqual(truncatedBtnText);
+            await expect(await getAttributeByName(menuTypeBtnArr, tooltipAttr, 12)).toBe(truncatedBtnNoIconTooltipText);
         });
     });
 
     describe('Check orientations', () => {
-        it('should check LTR/RTL orientation', () => {
-            menuBtnPage.checkRtlSwitch();
+        it('should check LTR/RTL orientation', async () => {
+            await menuBtnPage.checkRtlSwitch();
         });
     });
 
     xdescribe('Check visual regression', () => {
-        it('should check examples visual regression', () => {
-            menuBtnPage.saveExampleBaselineScreenshot();
-            expect(menuBtnPage.compareWithBaseline()).toBeLessThan(5);
+        it('should check examples visual regression', async () => {
+            await menuBtnPage.saveExampleBaselineScreenshot();
+            await expect(await menuBtnPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

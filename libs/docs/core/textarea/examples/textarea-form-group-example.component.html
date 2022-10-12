@@ -22,3 +22,10 @@
         </div>
     </fieldset>
 </form>
+<br />
+<small>
+    Form value: {{ customForm.getRawValue() | json }}<br />
+    Form Touched: {{ customForm.touched }}<br />
+    Form Dirty: {{ customForm.dirty }}<br />
+    Form Valid: {{ customForm.valid }}<br />
+</small>

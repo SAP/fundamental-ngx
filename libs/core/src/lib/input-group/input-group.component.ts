@@ -50,7 +50,10 @@ let addOnInputRandomId = 0;
         registerFormItemControl(InputGroupComponent)
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '(focusout)': '_focusOut($event)'
+    }
 })
 export class InputGroupComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
     /** @deprecated Input template, use fd-input-group-input directive instead. */
@@ -224,7 +227,6 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
         this._inputTextValue = value;
 
         this.onChange(value);
-        this.onTouched();
     }
 
     /** @hidden
@@ -322,5 +324,12 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
         );
 
         this._changeDetectorRef.markForCheck();
+    }
+
+    /** @hidden */
+    private _focusOut(event: FocusEvent): void {
+        if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
+            this.onTouched();
+        }
     }
 }

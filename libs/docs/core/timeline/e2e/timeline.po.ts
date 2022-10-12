@@ -8,9 +8,9 @@ export class TimelinePo extends CoreBaseComponentPo {
     timelinePost = '.fd-timeline__node-wrapper .fd-timeline__post';
     timelineNode = 'div.fd-timeline__node';
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.title);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.title);
     }
 }

@@ -43,38 +43,38 @@ export class ComboBoxPo extends PlatformBaseComponentPo {
     filledComboBoxInputs = (name: string): string =>
         `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//input`;
 
-    expandDropdown(type: string): void {
-        sendKeys(['Escape']);
-        scrollIntoView(this.comboBoxButtons(type));
-        pause(200);
-        click(this.comboBoxButtons(type));
-        pause(500);
-        waitForPresent(this.comboBoxExpandedButtons(type));
-        waitForPresent(this.comboBoxDropdownExpanded);
+    async expandDropdown(type: string): Promise<void> {
+        await sendKeys(['Escape']);
+        await scrollIntoView(await this.comboBoxButtons(type));
+        await pause(200);
+        await click(await this.comboBoxButtons(type));
+        await pause(500);
+        await waitForPresent(await this.comboBoxExpandedButtons(type));
+        await waitForPresent(this.comboBoxDropdownExpanded);
     }
 
-    selectOption(type: string, option: string): void {
-        waitForPresent(this.dropDownOption(option));
-        scrollIntoView(this.dropDownOption(option));
-        click(this.dropDownOption(option));
-        expect(getValue(this.filledComboBoxInputs(type))).toBe(option);
+    async selectOption(type: string, option: string): Promise<void> {
+        await waitForPresent(await this.dropDownOption(option));
+        await scrollIntoView(await this.dropDownOption(option));
+        await click(await this.dropDownOption(option));
+        await expect(await getValue(await this.filledComboBoxInputs(type))).toBe(option);
     }
 
-    open(): void {
-        super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.pageTitle);
+    async open(): Promise<void> {
+        await super.open(this.url);
+        await waitForPresent(this.root);
+        await waitForElDisplayed(this.pageTitle);
     }
 
-    getScreenshotFolder(): Record<string, any> {
+    async getScreenshotFolder(): Promise<Record<string, any>> {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'combobox'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    async saveExampleBaselineScreenshot(specName: string = 'combobox'): Promise<void> {
+        await super.saveExampleBaselineScreenshot(specName, await this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'combobox'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    async compareWithBaseline(specName: string = 'combobox'): Promise<any> {
+        return super.compareWithBaseline(specName, await this.getScreenshotFolder());
     }
 }
