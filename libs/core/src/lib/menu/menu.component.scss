@@ -10,3 +10,7 @@ fd-menu {
         flex-wrap: nowrap;
     }
 }
+
+.fd-popover--menu.fd-popover__popper {
+    overflow: visible !important;
+}

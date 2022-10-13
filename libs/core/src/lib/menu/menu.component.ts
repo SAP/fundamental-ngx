@@ -120,6 +120,14 @@ export class MenuComponent
     private _clickEventListener: null | (() => void);
 
     /** @hidden */
+    private get _popoverConfig(): BasePopoverClass {
+        return {
+            ...this,
+            additionalBodyClass: (this.additionalBodyClass ?? '') + ' fd-popover--menu'
+        };
+    }
+
+    /** @hidden */
     constructor(
         public readonly elementRef: ElementRef,
         @Optional() public readonly dialogConfig: DialogConfig,
@@ -245,7 +253,7 @@ export class MenuComponent
         );
 
         this._popoverService.templateContent = this.menuRootTemplate;
-        this._popoverService.initialise(this._externalTrigger, this);
+        this._popoverService.initialise(this._externalTrigger, this._popoverConfig);
     }
 
     /** @hidden */
