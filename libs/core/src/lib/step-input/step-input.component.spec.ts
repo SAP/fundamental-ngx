@@ -387,14 +387,16 @@ describe('StepInputComponent', () => {
         component.writeValue(null);
         component.decrement();
         expect(component.value).toBe(99);
-        component.writeValue(105);
-        component.max = 105;
+    });
+
+    it('should handle increment/decrement when initial value is max value and input is cleared', () => {
+        component.max = 100;
+        component.min = 100;
         component.writeValue(null);
         component.increment();
-        expect(component.value).toBe(105);
-        component.min = 95;
+        expect(component.value).toBe(100);
         component.writeValue(null);
         component.decrement();
-        expect(component.value).toBe(95);
+        expect(component.value).toBe(100);
     });
 });
