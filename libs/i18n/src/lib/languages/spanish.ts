@@ -543,6 +543,19 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
     platformWizardGenerator: {
         summarySectionEditStep: 'Editar'
     },
+    platformMessagePopover: {
+        allErrors: 'All',
+        defaultErrors: {
+            email: 'Email is invalid',
+            max: 'The field exceeds maximum value',
+            maxLength: 'The field exceeds maximum length',
+            min: 'The field value is less than allowed',
+            minLength: 'The field length is less than allowed',
+            pattern: 'The field value is invalid',
+            required: 'The field is mandatory',
+            requiredTrue: 'The field is mandatory'
+        }
+    },
     fnSlider: {
         minMaxDetails: 'Slider el valor mínimo es {{ min }}, el valor máximo es {{ max }}',
         valueminDetails: 'El valor es {{ value }}',

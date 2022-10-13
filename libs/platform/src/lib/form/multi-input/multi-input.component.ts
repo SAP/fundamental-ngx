@@ -185,7 +185,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         /** @hidden */
         @Optional() @SkipSelf() @Host() formField: FormField,
         /** @hidden */
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
         super(cd, elementRef, ngControl, ngForm, dialogConfig, _multiInputConfig, formField, formControl);

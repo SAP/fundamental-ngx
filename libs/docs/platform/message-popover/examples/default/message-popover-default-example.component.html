@@ -1,0 +1,70 @@
+<p>Template-driven form:</p>
+<fdp-message-popover-form-wrapper #templateDrivenWrapper>
+    <form>
+        <div fd-form-item>
+            <label fd-form-label>Required Input:</label>
+            <fdp-input
+                fdpMessagePopoverFormItem="Required Input"
+                [(ngModel)]="templateFormValue.input1"
+                [required]="true"
+                name="input1"
+            ></fdp-input>
+        </div>
+        <div fd-form-item>
+            <label fd-form-label>Email Input</label>
+            <fdp-input
+                fdpMessagePopoverFormItem="Email Input"
+                type="email"
+                email
+                [(ngModel)]="templateFormValue.input2"
+                [required]="true"
+                name="input2"
+            ></fdp-input>
+        </div>
+        <div fd-bar barDesign="footer">
+            <div fd-bar-left>
+                <fdp-message-popover [wrapper]="templateDrivenWrapper"></fdp-message-popover>
+            </div>
+            <div fd-bar-right>
+                <fdp-button type="submit" title="Submit" label="Submit"></fdp-button>
+            </div>
+        </div>
+    </form>
+</fdp-message-popover-form-wrapper>
+
+<p>Reactive form:</p>
+<p>Submit empty form to see errors.</p>
+<fdp-message-popover-form-wrapper #reactiveWrapper>
+    <form [formGroup]="reactiveFormExample" #reactiveForm>
+        <div fd-form-item>
+            <label fd-form-label>Name:</label>
+            <fdp-input fdpMessagePopoverFormItem="Required Input" formControlName="name" name="name"></fdp-input>
+        </div>
+        <div fd-form-item>
+            <label fd-form-label>Password:</label>
+            <fdp-input
+                fdpMessagePopoverFormItem="Required Input"
+                formControlName="password"
+                name="password"
+                type="password"
+            ></fdp-input>
+        </div>
+        <div fd-form-item>
+            <label fd-form-label>Email address:</label>
+            <fdp-input
+                fdpMessagePopoverFormItem="Email Input"
+                type="email"
+                formControlName="email"
+                name="email"
+            ></fdp-input>
+        </div>
+        <div fd-bar barDesign="footer">
+            <div fd-bar-left>
+                <fdp-message-popover [wrapper]="reactiveWrapper"></fdp-message-popover>
+            </div>
+            <div fd-bar-right>
+                <fdp-button type="submit" title="Submit" label="Submit"></fdp-button>
+            </div>
+        </div>
+    </form>
+</fdp-message-popover-form-wrapper>

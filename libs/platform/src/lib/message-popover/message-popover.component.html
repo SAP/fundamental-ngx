@@ -1,0 +1,53 @@
+<fd-popover #popover placement="top-start" *ngIf="_errorTypes.length > 0">
+    <fd-popover-control>
+        <button
+            fd-button
+            type="button"
+            class="fd-message-popover__trigger fd-message-popover__trigger"
+            [ngClass]="'fd-message-popover__trigger--' + _priorityState"
+            [glyph]="'message-' + _priorityFormState"
+            [label]="_priorityStateItemsCount.toString()"
+        ></button>
+    </fd-popover-control>
+    <fd-popover-body>
+        <div fd-popover-body-header>
+            <div fd-bar barDesign="header" class="fd-bar--growing">
+                <div fd-bar-left>
+                    <fd-segmented-button
+                        [(ngModel)]="_currentErrorType"
+                        *ngIf="currentScreen === 'list'"
+                        (ngModelChange)="_filterErrors()"
+                    >
+                        <button
+                            fd-button
+                            [label]="'platformMessagePopover.allErrors' | fdTranslate"
+                            value="all"
+                        ></button>
+                        <button fd-button *ngFor="let type of _errorTypes" [value]="type.group">
+                            <span fd-object-status [status]="type.state" [glyph]="'message-' + type.group"></span>
+                            <span class="fd-button__text">{{ type.count }}</span>
+                        </button>
+                    </fd-segmented-button>
+                    <button
+                        *ngIf="currentScreen === 'details'"
+                        fd-button
+                        fdType="transparent"
+                        glyph="navigation-left-arrow"
+                        title="Go back"
+                        (click)="_showList()"
+                    ></button>
+                </div>
+                <div fd-bar-right>
+                    <button fd-button fdType="transparent" (click)="popover.close()" glyph="decline"></button>
+                </div>
+            </div>
+        </div>
+        <fdp-message-view
+            [currentScreen]="currentScreen"
+            [filteredErrors]="_filteredErrors"
+            [currentEntry]="currentEntry"
+            (openDetails)="_showDetails($event)"
+            (closePopover)="_closePopover()"
+        ></fdp-message-view>
+    </fd-popover-body>
+</fd-popover>

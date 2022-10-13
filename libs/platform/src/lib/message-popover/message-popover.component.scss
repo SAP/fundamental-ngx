@@ -1,0 +1,12 @@
+@import '~fundamental-styles/dist/message-popover';
+
+.fd-message-view__list {
+    min-width: 20rem;
+    min-height: 10rem;
+
+    .fd-list__link:active,
+    .fd-list__link.is-active {
+        --sapLinkColor: var(--sapList_Active_TextColor);
+        --sapLink_Active_Color: var(--sapList_Active_TextColor);
+    }
+}

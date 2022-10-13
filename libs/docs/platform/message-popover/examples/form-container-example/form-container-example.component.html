@@ -1,0 +1,155 @@
+<fdp-message-popover-form-wrapper #reactiveWrapper="messagePopoverWrapper">
+    <fdp-form-group #personal [formGroup]="personalInfoForm" [useForm]="true" mainTitle="Personal Information">
+        <fdp-form-field
+            #f1
+            id="emailInput"
+            label="Email"
+            placeholder="Start entering email address"
+            [required]="true"
+            [validators]="emailValidator"
+            [column]="1"
+        >
+            <fdp-input type="email" name="emailInput" [formControl]="f1.formControl"></fdp-input>
+            <span *fdpFormFieldError="'email'; type: 'error'"> Email is invalid </span>
+        </fdp-form-field>
+
+        <fdp-form-field
+            #f3
+            id="bio"
+            label="Bio"
+            placeholder="Start entering detailed description"
+            [required]="true"
+            [column]="3"
+        >
+            <fdp-textarea name="bio" [formControl]="f3.formControl"></fdp-textarea>
+        </fdp-form-field>
+
+        <fdp-form-field-group label="Group Label Custom">
+            <fdp-form-field
+                #f4
+                id="addressField"
+                label="Address"
+                placeholder="Start entering address"
+                [required]="true"
+                [rank]="30"
+                [column]="1"
+            >
+                <fdp-input name="addressField" [formControl]="f4.formControl"></fdp-input>
+            </fdp-form-field>
+
+            <fdp-form-field
+                #f5
+                id="streetField"
+                label="Street"
+                placeholder="Start entering street name"
+                [required]="true"
+                [column]="1"
+                [rank]="20"
+            >
+                <fdp-input name="streetField" [formControl]="f5.formControl"></fdp-input>
+            </fdp-form-field>
+
+            <fdp-form-field
+                #f6
+                id="house"
+                label="House Number"
+                placeholder="Start entering number of your house"
+                [required]="true"
+                [rank]="10"
+                [column]="1"
+            >
+                <fdp-input name="house" [formControl]="f6.formControl"></fdp-input>
+            </fdp-form-field>
+        </fdp-form-field-group>
+        <span *fdpFormFieldError="'required'; type: 'error'"> A mandatory field is required </span>
+    </fdp-form-group>
+    <fdp-form-group #business [formGroup]="businessInfoForm" [useForm]="true" mainTitle="Business Information">
+        <fdp-form-field
+            #f7
+            id="companyInput"
+            label="Company name"
+            placeholder="Start entering company name"
+            [required]="true"
+            [column]="1"
+        >
+            <fdp-input name="companyInput" [formControl]="f7.formControl"></fdp-input>
+        </fdp-form-field>
+
+        <fdp-form-field
+            #f8
+            id="weeklyHoursInput"
+            label="Standard Weekly Hours"
+            placeholder="Value should not exceed 40 hours"
+            [required]="true"
+            [validators]="maxValidator"
+            [column]="2"
+        >
+            <fdp-input type="number" name="weeklyHoursInput" [formControl]="f8.formControl"></fdp-input>
+            <span *fdpFormFieldError="'max'; type: 'warning'">
+                <span *fdpFormFieldErrorHeading> Value exceeds maximum limit. </span>
+                <span *fdpFormFieldErrorDescription="let error; as: maxLengthErrorModel">
+                    Value should not exceed {{ error.max }}. Actual value is {{ error.actual }}
+                </span>
+            </span>
+        </fdp-form-field>
+
+        <fdp-form-field
+            #f9
+            id="basicInput3"
+            label="Basic Input 3"
+            placeholder="Start entering detailed description"
+            [required]="true"
+            [column]="3"
+        >
+            <fdp-input name="basicInput3" [formControl]="f9.formControl"></fdp-input>
+        </fdp-form-field>
+
+        <fdp-form-field-group label="Group Label Custom">
+            <fdp-form-field
+                #f10
+                id="fieldGroupInput1"
+                label="Field Group Input 1"
+                placeholder="Start entering detailed description"
+                [required]="true"
+                [rank]="30"
+                [column]="1"
+            >
+                <fdp-input name="fieldGroupInput1" [formControl]="f10.formControl"></fdp-input>
+            </fdp-form-field>
+
+            <fdp-form-field
+                #f11
+                id="fieldGroupInput2"
+                label="Field Group Input 2"
+                placeholder="Start entering detailed description"
+                [required]="true"
+                [column]="1"
+                [rank]="20"
+            >
+                <fdp-input name="fieldGroupInput2" [formControl]="f11.formControl"></fdp-input>
+            </fdp-form-field>
+
+            <fdp-form-field
+                #f12
+                id="fieldGroupInput3"
+                label="Field Group Input 3"
+                placeholder="Start entering detailed description"
+                [required]="true"
+                [rank]="10"
+                [column]="1"
+            >
+                <fdp-input name="fieldGroupInput3" [formControl]="f12.formControl"></fdp-input>
+            </fdp-form-field>
+        </fdp-form-field-group>
+        <span *fdpFormFieldError="'required'; type: 'error'"> A mandatory field is required </span>
+    </fdp-form-group>
+</fdp-message-popover-form-wrapper>
+
+<div fd-bar barDesign="footer">
+    <div fd-bar-left>
+        <fdp-message-popover [wrapper]="reactiveWrapper"></fdp-message-popover>
+    </div>
+    <div fd-bar-right>
+        <fdp-button type="submit" (click)="onSubmit($event)" label="Submit"></fdp-button>
+    </div>
+</div>

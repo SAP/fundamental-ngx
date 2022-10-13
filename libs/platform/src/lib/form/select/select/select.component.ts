@@ -79,7 +79,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         readonly _dynamicComponentService: DynamicComponentService,
         readonly _selectConfig: SelectConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
     ) {
         super(cd, elementRef, ngControl, ngForm, _selectConfig, formField, formControl);
     }

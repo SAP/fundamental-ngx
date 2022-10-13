@@ -95,6 +95,12 @@ fd-popover-body {
             }
         }
     }
+
+    &__body {
+        &--hidden {
+            display: none !important;
+        }
+    }
 }
 
 .cdk-overlay {

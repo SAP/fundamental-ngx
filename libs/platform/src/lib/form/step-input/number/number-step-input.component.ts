@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     Host,
     Inject,
     Input,
@@ -53,17 +54,18 @@ export class NumberStepInputComponent extends StepInputComponent {
     /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
+        elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         config: StepInputConfig,
         renderer: Renderer2,
         @Optional() rtlService: RtlService,
         @Inject(LOCALE_ID) readonly localeId: string,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
-        super(cd, ngControl, ngForm, formField, formControl, config, renderer, rtlService);
+        super(cd, elementRef, ngControl, ngForm, formField, formControl, config, renderer, rtlService);
     }
 
     /** @hidden

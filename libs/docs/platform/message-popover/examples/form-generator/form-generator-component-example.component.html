@@ -1,0 +1,28 @@
+<fdp-message-popover-form-wrapper
+    #formGeneratorWrapper
+    [forms]="formGenerator.formGroup"
+    [formFields]="formGenerator.formFields"
+>
+    <fdp-form-generator
+        #formGenerator
+        columnLayout="XL2-L2-M2-S1"
+        mainTitle="Default Form Generator example"
+        [formItems]="questions"
+        (formSubmitted)="onFormSubmitted($event)"
+        (formCreated)="onFormCreated()"
+    >
+    </fdp-form-generator>
+</fdp-message-popover-form-wrapper>
+
+<div fd-bar barDesign="footer">
+    <div fd-bar-left>
+        <fdp-message-popover [wrapper]="formGeneratorWrapper"></fdp-message-popover>
+    </div>
+    <div fd-bar-right>
+        <fdp-button *ngIf="formCreated" (click)="submitForm()" type="submit" label="Submit form"></fdp-button>
+    </div>
+</div>
+
+<p>Form created: {{ formCreated }}</p>
+
+<p *ngIf="formValue">Form value: {{ formValue | json }}</p>

@@ -4,6 +4,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     forwardRef,
     Host,
@@ -129,14 +130,15 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
 
     /** @hidden */
     constructor(
+        elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         protected _changeDetector: ChangeDetectorRef,
         @Attribute('tabIndexValue') public tabIndexValue: number = 0
     ) {
-        super(_changeDetector, ngControl, ngForm, formField, formControl);
+        super(_changeDetector, elementRef, ngControl, ngForm, formField, formControl);
         // necessary to fulfill baseInput check.
         // case: fdp-checkbox passed in declarative fdp-checkbox-group without id and name.
         this.name = `fdp-checkbox-${nextUniqueId++}`;

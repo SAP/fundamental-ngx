@@ -1,4 +1,5 @@
 import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
+import { FormStates } from '@fundamental-ngx/core/shared';
 import { Observable } from 'rxjs';
 
 import { ContentDensity } from '@fundamental-ngx/core/utils';
@@ -16,7 +17,16 @@ import { DynamicFormGroup } from './dynamic-form-group';
 import { DynamicFormControl, DynamicFormGroupControl } from '../dynamic-form-control';
 
 export type DynamicFormItemChoices = number | string | SelectItem;
-export type DynamicFormItemValidationResult = null | boolean | string;
+/** Advanced error type. Used to render more complex error view with custom error type. */
+export interface DynamicFormItemValidationObject {
+    /** Error heading. */
+    heading: string;
+    /** Error description. */
+    description?: string;
+    /** Error state */
+    type: FormStates;
+}
+export type DynamicFormItemValidationResult = null | boolean | string | DynamicFormItemValidationObject;
 export type DynamicFormItem = DynamicFormFieldGroup | DynamicFormFieldItem;
 
 export interface DynamicFormFieldGroup {

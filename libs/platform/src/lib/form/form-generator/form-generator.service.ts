@@ -33,9 +33,9 @@ export class FormGeneratorService implements OnDestroy {
     readonly forms: Map<string, DynamicFormGroup> = new Map<string, DynamicFormGroup>();
 
     /**
-     * @hidden
+     * Predefined validation error messages.
      */
-    private _validationErrorHints = DEFAULT_VALIDATION_ERRORS;
+    validationErrorHints = DEFAULT_VALIDATION_ERRORS;
 
     /** @hidden */
     private readonly _config: FormGeneratorConfig = defaultFormGeneratorConfig;
@@ -224,7 +224,7 @@ export class FormGeneratorService implements OnDestroy {
      * and it's value is a display text.
      */
     getValidationErrorHints(key: string): string {
-        return this._validationErrorHints[key];
+        return this.validationErrorHints[key];
     }
 
     /**
@@ -233,7 +233,7 @@ export class FormGeneratorService implements OnDestroy {
      * @param value display text.
      */
     addValidationErrorHint(type: string, value: string): void {
-        this._validationErrorHints[type] = value;
+        this.validationErrorHints[type] = value;
     }
 
     /**

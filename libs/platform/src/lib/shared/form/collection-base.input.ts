@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, Host, Input, Optional, Self, SkipSelf } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, Host, Input, Optional, Self, SkipSelf } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
 import { BaseInput } from './base.input';
@@ -51,14 +51,15 @@ export abstract class CollectionBaseInput extends BaseInput {
     displayKey: string;
 
     /** @hidden */
-    constructor(
+    protected constructor(
         cd: ChangeDetectorRef,
+        elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
     ) {
-        super(cd, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, ngForm, formField, formControl);
     }
 
     /** @hidden */

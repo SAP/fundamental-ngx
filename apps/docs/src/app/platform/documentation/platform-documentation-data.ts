@@ -54,7 +54,11 @@ export const components: SectionInterfaceContent[] = [
     { url: 'platform/value-help-dialog', name: 'Value Help Dialog' },
     { url: 'platform/approval-flow', name: 'Approval Flow' },
     { url: 'platform/slider', name: 'Slider' },
-    { url: 'platform/icon-tab-bar', name: 'Icon Tab Bar' }
+    { url: 'platform/icon-tab-bar', name: 'Icon Tab Bar' },
+    {
+        url: 'platform/message-popover',
+        name: 'Message Popover'
+    }
 ];
 
 export const layouts: SectionInterfaceContent[] = [

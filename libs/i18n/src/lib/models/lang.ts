@@ -730,6 +730,19 @@ export interface FdLanguage {
     platformWizardGenerator: {
         summarySectionEditStep: FdLanguageKey;
     };
+    platformMessagePopover: {
+        allErrors: FdLanguageKey;
+        defaultErrors: {
+            required: FdLanguageKey;
+            min: FdLanguageKey;
+            max: FdLanguageKey;
+            requiredTrue: FdLanguageKey;
+            email: FdLanguageKey;
+            minLength: FdLanguageKey;
+            maxLength: FdLanguageKey;
+            pattern: FdLanguageKey;
+        };
+    };
     fnSlider: {
         /**
          * @param min

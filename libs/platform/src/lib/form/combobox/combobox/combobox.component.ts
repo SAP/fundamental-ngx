@@ -72,7 +72,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         readonly _comboboxConfig: ComboboxConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
     ) {
         super(cd, elementRef, ngControl, ngForm, dialogConfig, _comboboxConfig, formField, formControl);
     }

@@ -88,15 +88,16 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
     /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
+        elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         private _renderer: Renderer2,
         protected _hostElementRef: ElementRef<HTMLElement>,
         protected _inputGroupConfig: InputGroupConfig
     ) {
-        super(cd, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, ngForm, formField, formControl);
     }
 
     /** @hidden */

@@ -273,16 +273,16 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     private _secondColumnRatio: number;
 
     /** @hidden */
-    constructor(
+    protected constructor(
         readonly cd: ChangeDetectorRef,
-        protected readonly elementRef: ElementRef,
+        elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @Self() readonly ngForm: NgForm,
         protected selectConfig: SelectConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
     ) {
-        super(cd, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, ngForm, formField, formControl);
     }
 
     /** @hidden */

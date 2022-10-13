@@ -50,7 +50,7 @@ export class FdTranslatePipe implements PipeTransform, OnDestroy {
         this._key$.next(key);
         this._args$.next(args);
 
-        return this._value ?? defaultValue;
+        return this._value || defaultValue;
     }
 
     /** @hidden */

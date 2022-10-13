@@ -7,3 +7,4 @@ export * from './form-group';
 export * from './form-options';
 export * from './inline-layout-collection-base.input';
 export * from './hint-options';
+export * from './form-error';

@@ -1,0 +1,16 @@
+{
+    "sourceRoot": "libs/docs/platform/message-popover",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e": {
+            "executor": "@fundamental-ngx/wdio:e2e-test",
+            "options": {
+                "e2eFiles": ["libs/docs/platform/message-popover/e2e/**/*.e2e-spec.ts"],
+                "devServerTarget": "docs:serve:e2e"
+            },
+            "outputs": ["allure-results/docs-platform-message-popover"]
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

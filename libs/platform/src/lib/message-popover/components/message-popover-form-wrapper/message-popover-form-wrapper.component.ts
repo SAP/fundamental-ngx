@@ -1,0 +1,368 @@
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    ContentChildren,
+    Inject,
+    Input,
+    OnDestroy,
+    QueryList,
+    ViewEncapsulation
+} from '@angular/core';
+import { AbstractControl, ControlContainer, FormGroup, FormGroupDirective, NgForm, NgModel } from '@angular/forms';
+import { Nullable } from '@fundamental-ngx/core/shared';
+import { DestroyedService } from '@fundamental-ngx/core/utils';
+import { FormField, FormFieldControl, FormFieldErrorDirectiveContext } from '@fundamental-ngx/platform/shared';
+import { BehaviorSubject, filter, startWith, Subscription, switchMap, takeUntil, zip } from 'rxjs';
+import { FDP_MESSAGE_POPOVER_CONFIG, MessagePopoverConfig } from '../../default-config';
+import { MessagePopoverFormItemDirective } from '../../directives/message-popover-form-item.directive';
+import { MessagePopoverEntry } from '../../models/message-popover-entry.interface';
+import { MessagePopoverErrorGroup, MessagePopoverErrorText } from '../../models/message-popover-error.interface';
+import { MessagePopoverWrapper } from '../../models/message-popover-wrapper.interface';
+import { convertFormState } from '../../utils';
+
+export type MessagePopoverForm = NgForm | FormGroupDirective;
+
+@Component({
+    selector: 'fdp-message-popover-form-wrapper',
+    templateUrl: './message-popover-form-wrapper.component.html',
+    exportAs: 'messagePopoverWrapper',
+    providers: [DestroyedService],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
+})
+export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper, AfterViewInit, OnDestroy {
+    /**
+     * User-passed forms.
+     */
+    @Input()
+    set forms(forms: MessagePopoverForm | MessagePopoverForm[]) {
+        if (!forms) {
+            return;
+        }
+        if (!Array.isArray(forms)) {
+            forms = [forms];
+        }
+        this._ngForms = forms;
+        this._startListeningForErrors();
+    }
+
+    /** User-passed form fields. */
+    @Input()
+    set formFields(value: FormFieldControl[]) {
+        this._formFields = value;
+        this._listenToFormFieldErrors(value);
+    }
+
+    get formFields(): FormFieldControl[] {
+        return this._formFields;
+    }
+
+    /** @hidden */
+    private _formFields: FormFieldControl[] = [];
+
+    /** @hidden */
+    @ContentChildren(ControlContainer, { descendants: true })
+    private readonly _projectedForm: QueryList<MessagePopoverForm>;
+
+    /** @hidden */
+    @ContentChildren(NgModel, { descendants: true })
+    private readonly _projectedFormItems!: QueryList<NgModel>;
+
+    /** @hidden */
+    @ContentChildren(FormFieldControl, { descendants: true })
+    private readonly _projectedFormFieldControls!: QueryList<FormFieldControl>;
+
+    /** @hidden */
+    @ContentChildren(MessagePopoverFormItemDirective, { descendants: true })
+    private readonly _directiveItems!: QueryList<MessagePopoverFormItemDirective>;
+
+    /** @hidden */
+    private readonly _errors$ = new BehaviorSubject<MessagePopoverErrorGroup[]>([]);
+
+    /** @hidden */
+    private _formErrorsSubscription: Subscription | undefined;
+
+    /** @hidden */
+    private _ngForms: (NgForm | FormGroupDirective)[] = [];
+
+    /** @hidden */
+    private _formItemErrorsSubscription = new Subscription();
+
+    /** @hidden */
+    private _formSubmitted = false;
+
+    /**
+     * Error models Observable. Emitted when form submitted and contains invalid fields.
+     */
+    errors = this._errors$.asObservable();
+
+    /** @hidden */
+    constructor(
+        private readonly _destroy$: DestroyedService,
+        @Inject(FDP_MESSAGE_POPOVER_CONFIG) private readonly _config: MessagePopoverConfig
+    ) {}
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        // Forms are passed via input property.
+        if (this._ngForms.length > 0) {
+            return;
+        }
+        this._ngForms = this._projectedForm?.toArray();
+        this._startListeningForErrors();
+        this._projectedForm?.changes.pipe(takeUntil(this._destroy$)).subscribe(() => {
+            this._ngForms = this._projectedForm.toArray();
+            this._startListeningForErrors();
+        });
+    }
+
+    /**
+     * @hidden
+     * Listens to the form submission and collects form control errors.
+     */
+    private _startListeningForErrors(): void {
+        if (!this._ngForms) {
+            return;
+        }
+        this._formErrorsSubscription?.unsubscribe();
+        this._errors$.next([]);
+
+        const formSubmitEvents = this._ngForms.map((form) =>
+            form.ngSubmit.pipe(
+                switchMap(() =>
+                    form.statusChanges!.pipe(
+                        startWith(form.status),
+                        filter((status: string) => status.toLowerCase() !== 'pending')
+                    )
+                )
+            )
+        );
+
+        this._formErrorsSubscription = zip(...formSubmitEvents)
+            .pipe(takeUntil(this._destroy$))
+            .subscribe(() => {
+                this._formSubmitted = true;
+                const errors =
+                    this._directiveItems.length > 0 ? this._collectPlainFormData() : this._collectAdvancedFormData();
+
+                this._errors$.next(errors);
+            });
+
+        this._listenToFormFieldErrors(this._projectedFormFieldControls.toArray());
+
+        this._projectedFormFieldControls?.changes.subscribe(() => {
+            this._listenToFormFieldErrors(this._projectedFormFieldControls.toArray());
+        });
+    }
+
+    /** @hidden */
+    private _listenToFormFieldErrors(fields: FormFieldControl[]): void {
+        this._formItemErrorsSubscription.unsubscribe();
+
+        this._formItemErrorsSubscription = new Subscription();
+
+        fields?.forEach((field) => {
+            this._formItemErrorsSubscription.add(
+                field.formField?.errorsChange$.subscribe(() => {
+                    if (!this._formSubmitted) {
+                        return;
+                    }
+                    const errors =
+                        this._directiveItems.length > 0
+                            ? this._collectPlainFormData()
+                            : this._collectAdvancedFormData();
+                    this._errors$.next(errors);
+                })
+            );
+        });
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._formItemErrorsSubscription.unsubscribe();
+    }
+
+    /** @hidden */
+    private _collectPlainFormData(): MessagePopoverErrorGroup[] {
+        const errors: MessagePopoverErrorGroup[] = [
+            {
+                errors: []
+            }
+        ];
+
+        const fields = this._directiveItems.toArray();
+
+        this._ngForms.forEach((form) => {
+            Object.keys(form.form.controls).forEach((controlName) => {
+                const control = form.form.get(controlName);
+                const field = fields.find((formField) => formField.control?.name === controlName);
+
+                if (!control?.errors || !field) {
+                    return;
+                }
+
+                const configErrors = Object.keys(this._config.errors);
+
+                Object.keys(control.errors)
+                    .filter((error) => configErrors.includes(error))
+                    .forEach((errorKey) => {
+                        const errorObj = control.errors![errorKey];
+                        const configError = this._config.errors[errorKey];
+                        const isPlainError = typeof configError === 'string';
+                        const errorType = isPlainError ? 'error' : configError.type;
+                        const headingMessage = isPlainError ? configError : configError.heading;
+                        const descriptionMessage = isPlainError ? null : configError.description;
+                        const error: MessagePopoverEntry = {
+                            name: controlName,
+                            type: errorType,
+                            state: convertFormState('error'),
+                            fieldName: field?.label ?? '',
+                            element: field?.elementRef,
+                            heading: {
+                                type: 'string',
+                                error: errorObj,
+                                message: headingMessage
+                            },
+                            description: {
+                                type: 'string',
+                                error: errorObj,
+                                message: descriptionMessage
+                            },
+                            errors: control!.errors
+                        };
+
+                        errors[0].errors.push(error);
+                    });
+            });
+        });
+
+        return errors;
+    }
+
+    /** @hidden */
+    private _collectAdvancedFormData(): MessagePopoverErrorGroup[] {
+        let errors: MessagePopoverErrorGroup[] = [];
+        const fields = this.formFields.length > 0 ? this.formFields : this._projectedFormFieldControls.toArray();
+
+        /**
+         * Iterates over form controls to collect their errors.
+         * @param form Form Group or a collection of Form Groups.
+         */
+        const iterateOverForm = (form: FormGroup | FormGroup[]): MessagePopoverErrorGroup[] => {
+            if (Array.isArray(form)) {
+                form.forEach((formGroup) => {
+                    errors = iterateOverForm(formGroup);
+                });
+                return errors;
+            }
+            Object.keys(form.controls).forEach((controlName) => {
+                const control = form.get(controlName);
+                const field = fields.find((formField) => formField.id === controlName);
+
+                if (control instanceof FormGroup) {
+                    errors = iterateOverForm(control);
+                }
+
+                if (!control?.errors || !field) {
+                    return;
+                }
+
+                Object.keys(control.errors).forEach((errorKey) => {
+                    const errorDirective = field.formField?.groupedErrors.find(
+                        (groupedError) => groupedError.directive.error === errorKey
+                    );
+
+                    const groupName = this._getGroupName(field?.formField);
+                    const error = this._getErrorModel(controlName, groupName, control, field, errorDirective);
+
+                    let errorGroupIndex = errors.findIndex((errorGroup) => errorGroup.group === groupName);
+
+                    if (errorGroupIndex === -1) {
+                        errorGroupIndex =
+                            errors.push({
+                                group: groupName,
+                                errors: []
+                            }) - 1;
+                    }
+
+                    const group = errors[errorGroupIndex];
+
+                    group.errors.push(error);
+                });
+            });
+
+            return errors;
+        };
+
+        return iterateOverForm(this._ngForms.map((form) => form.form));
+    }
+
+    /**
+     * @hidden
+     * Creates error model
+     */
+    private _getErrorModel(
+        controlName: string,
+        groupName: string,
+        control: AbstractControl,
+        field: FormFieldControl,
+        errorDirective?: FormFieldErrorDirectiveContext
+    ): MessagePopoverEntry {
+        return {
+            name: controlName,
+            type: errorDirective?.directive.type ?? 'error',
+            state: convertFormState(errorDirective?.directive.type ?? 'error'),
+            group: groupName,
+            fieldName: field?.formField?.label ?? '',
+            heading: this._getErrorText(field, errorDirective),
+            description: this._getErrorText(field, errorDirective, 'description'),
+            errors: control!.errors,
+            element: field?.elementRef
+        };
+    }
+
+    /**
+     * @hidden
+     * Creates error text based on the type of the error.
+     * @param field Form Field Control.
+     * @param errorDirective Optional Error directive
+     * @param section Section where text should be rendered.
+     */
+    private _getErrorText(
+        field: FormFieldControl,
+        errorDirective: Nullable<FormFieldErrorDirectiveContext>,
+        section: 'heading' | 'description' = 'heading'
+    ): MessagePopoverErrorText {
+        const errorTextObj: MessagePopoverErrorText = {
+            error: errorDirective?.error,
+            type: errorDirective?.directive ? 'directive' : field?.formField?.i18Strings ? 'templateRef' : 'string'
+        };
+
+        if (errorDirective?.directive) {
+            errorTextObj.message =
+                section === 'heading'
+                    ? errorDirective.directive._headingTemplateRef ?? errorDirective.directive._descriptionTemplateRef
+                    : errorDirective.directive._descriptionTemplateRef;
+            return errorTextObj;
+        }
+
+        errorTextObj.message = field?.formField?.i18Strings ?? null;
+        return errorTextObj;
+    }
+
+    /** @hidden */
+    private _getGroupName(formField: Nullable<FormField>): string {
+        const parts: string[] = [];
+
+        if (formField?.formGroupContainer?.mainTitle) {
+            parts.push(formField.formGroupContainer.mainTitle);
+        }
+
+        if (formField?.formFieldGroup?.label) {
+            parts.push(formField.formFieldGroup.label);
+        }
+
+        return parts.join(', ');
+    }
+}

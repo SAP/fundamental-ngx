@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     Host,
     Input,
@@ -97,12 +98,13 @@ export class SliderComponent extends BaseInput {
     /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
+        elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
     ) {
-        super(cd, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, ngForm, formField, formControl);
     }
 
     /** value for slider control */

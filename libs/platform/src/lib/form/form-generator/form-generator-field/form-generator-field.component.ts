@@ -1,9 +1,21 @@
-import { Component, forwardRef, Input, Provider, TemplateRef, ViewChild } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    forwardRef,
+    Input,
+    OnInit,
+    Provider,
+    TemplateRef,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { FieldHintOptions, FormField } from '@fundamental-ngx/platform/shared';
-import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../../form-group/constants';
+import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { DynamicFormControl } from '../dynamic-form-control';
+import { FormGeneratorService } from '../form-generator.service';
 import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
+import { DynamicFormItemValidationObject } from '../interfaces/dynamic-form-item';
 
 const formFieldProvider: Provider = {
     provide: FormField,
@@ -18,10 +30,10 @@ const formGroupChildProvider: Provider = {
 @Component({
     selector: 'fdp-form-generator-field',
     templateUrl: './form-generator-field.component.html',
-    styleUrls: ['./form-generator-field.component.scss'],
-    providers: [formFieldProvider, formGroupChildProvider]
+    providers: [formFieldProvider, formGroupChildProvider],
+    encapsulation: ViewEncapsulation.None
 })
-export class FormGeneratorFieldComponent {
+export class FormGeneratorFieldComponent implements OnInit {
     /**
      * Form control.
      */
@@ -66,7 +78,7 @@ export class FormGeneratorFieldComponent {
     /**
      * Form field component.
      */
-    @ViewChild(FormFieldComponent) fieldRenderer: FormFieldComponent;
+    @ViewChild(FormFieldComponent) fieldRenderer: FormField;
 
     /** @hidden */
     get _placeholder(): string {
@@ -80,5 +92,45 @@ export class FormGeneratorFieldComponent {
             return this.field.formItem?.message as string;
         }
         return '';
+    }
+
+    /** @hidden */
+    _errorModels: { type: string; value: any }[] = [];
+
+    /** @hidden */
+    constructor(private _fgService: FormGeneratorService, private _cdr: ChangeDetectorRef) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._errorModels = this._getErrors();
+        this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    private _getErrors(): { type: string; value: any }[] {
+        const registeredErrors = this._fgService.validationErrorHints;
+
+        const returnErrors: { type: string; value: any }[] = [
+            {
+                type: `${this.field.formItem.name}Validator`,
+                value: null
+            }
+        ];
+
+        Object.entries(registeredErrors).forEach((type) => {
+            const [errorType, errorValue] = type;
+
+            returnErrors.push({
+                type: errorType,
+                value: errorValue
+            });
+        });
+
+        return returnErrors;
+    }
+
+    /** @hidden */
+    _isAdvancedError(error: any): error is DynamicFormItemValidationObject {
+        return error.heading && error.description && error.type;
     }
 }

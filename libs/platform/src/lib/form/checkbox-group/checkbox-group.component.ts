@@ -3,6 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    ElementRef,
     EventEmitter,
     forwardRef,
     Host,
@@ -119,17 +120,19 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
+        elementRef: ElementRef,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         @Optional()
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig
     ) {
         super(
             cd,
+            elementRef,
             _responsiveBreakpointsService,
             ngControl,
             ngForm,

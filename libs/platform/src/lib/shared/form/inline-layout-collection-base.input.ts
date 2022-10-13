@@ -1,6 +1,7 @@
 import {
     ChangeDetectorRef,
     Directive,
+    ElementRef,
     Host,
     Inject,
     Injectable,
@@ -172,16 +173,17 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
     /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
+        elementRef: ElementRef,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         @Optional()
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig?: ResponsiveBreakPointConfig
     ) {
-        super(cd, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, ngForm, formField, formControl);
 
         this._responsiveBreakPointConfig = _defaultResponsiveBreakPointConfig || new ResponsiveBreakPointConfig();
     }

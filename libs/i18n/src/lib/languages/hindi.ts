@@ -535,6 +535,19 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
     platformWizardGenerator: {
         summarySectionEditStep: 'संपादित करें'
     },
+    platformMessagePopover: {
+        allErrors: 'All',
+        defaultErrors: {
+            email: 'Email is invalid',
+            max: 'The field exceeds maximum value',
+            maxLength: 'The field exceeds maximum length',
+            min: 'The field value is less than allowed',
+            minLength: 'The field length is less than allowed',
+            pattern: 'The field value is invalid',
+            required: 'The field is mandatory',
+            requiredTrue: 'The field is mandatory'
+        }
+    },
     fnSlider: {
         minMaxDetails: 'स्लाइडर न्यूनतम मूल्य {{ min }}, अधिकतम मूल्य {{ max }}',
         valueminDetails: 'मूल्य {{ value }}',

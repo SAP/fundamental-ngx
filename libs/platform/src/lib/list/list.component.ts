@@ -249,7 +249,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
     /** @hidden */
     get _ulElement(): Nullable<HTMLUListElement> {
-        return this.itemEl.nativeElement.querySelector('ul');
+        return this.elementRef.nativeElement.querySelector('ul');
     }
 
     /**
@@ -359,16 +359,16 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     /** @hidden */
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
-        public itemEl: ElementRef<HTMLElement>,
+        elementRef: ElementRef,
         private _liveAnnouncer: LiveAnnouncer,
         @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
         @Optional() @Self() public ngControl: NgControl,
         @Optional() @Self() public ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         protected _listConfig?: ListConfig
     ) {
-        super(_changeDetectorRef, ngControl, ngForm, formField, formControl);
+        super(_changeDetectorRef, elementRef, ngControl, ngForm, formField, formControl);
         this._init();
     }
 
@@ -416,7 +416,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         this._updateListItems();
         this.listItems.changes.subscribe(() => this._updateListItems());
 
-        const indicator = this.itemEl.nativeElement.querySelector('fd-busy-indicator');
+        const indicator = this.elementRef.nativeElement.querySelector('fd-busy-indicator');
         indicator?.setAttribute('aria-label', '');
     }
 

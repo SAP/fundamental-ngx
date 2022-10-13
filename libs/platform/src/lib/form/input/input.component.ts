@@ -31,7 +31,7 @@ import {
     Self,
     SkipSelf
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl } from '@angular/forms';
 
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 
@@ -77,19 +77,20 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     @Output() focusChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
+    get inputElementRef(): ElementRef {
         return this._elementRef;
     }
 
     /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
+        elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
-        @Optional() @SkipSelf() ngForm: NgForm,
+        @Optional() @SkipSelf() ngForm: ControlContainer,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
     ) {
-        super(cd, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, ngForm, formField, formControl);
     }
 
     /** @hidden */

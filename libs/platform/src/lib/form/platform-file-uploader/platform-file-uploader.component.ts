@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     Host,
     Input,
@@ -127,13 +128,14 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
     /** @hidden */
     constructor(
         protected _cd: ChangeDetectorRef,
+        elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
-        super(_cd, ngControl, ngForm, formField, formControl);
+        super(_cd, elementRef, ngControl, ngForm, formField, formControl);
     }
 
     /** @hidden */

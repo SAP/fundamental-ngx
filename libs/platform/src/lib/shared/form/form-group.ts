@@ -53,6 +53,11 @@ export abstract class FormGroupContainer {
     gapColumnLayout: ColumnLayout;
 
     /**
+     * Form's main title.
+     */
+    mainTitle?: string;
+
+    /**
      * Attach underlying form field.
      */
     addFormField: (formField: FormField) => void;

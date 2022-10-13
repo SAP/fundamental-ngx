@@ -1,4 +1,5 @@
 import { TemplateRef } from '@angular/core';
+import { FormStates } from '@fundamental-ngx/core/shared';
 
 import { FormField, HintOptions } from '@fundamental-ngx/platform/shared';
 import { FormFieldComponent } from './form-group/form-field/form-field.component';
@@ -34,6 +35,32 @@ export function getField(field: FormField): Field {
     field = isFieldGroupWrapperChild(field) ? field.fieldRenderer : field;
 
     return new Field(field.id, field.rank, field.renderer, field.column);
+}
+
+/**
+ * Returns form state based on priority.
+ * @param states Error states of the form fields.
+ * @param priorityStates Array of prioritized states.
+ * @returns first found form state of `priorityStates`.
+ */
+export function getFormState(
+    states: FormStates[],
+    priorityStates: FormStates[] = ['error', 'warning', 'information', 'success', 'default']
+): FormStates {
+    let priorityState: FormStates = 'default';
+
+    priorityStates.some((state) => {
+        const firstErrorState = states.find((formState) => formState === state);
+
+        if (!firstErrorState) {
+            return false;
+        }
+
+        priorityState = firstErrorState;
+        return true;
+    });
+
+    return priorityState;
 }
 
 export class Field {

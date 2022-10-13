@@ -96,7 +96,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         @Inject(MAP_LIMIT) _mapLimit: number,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
