@@ -23,7 +23,8 @@ import { DatePickerPo } from './date-picker.po';
 import { currentYear, getCurrentItemIndex, getCurrentMonth, getNextDay, invalidDate } from './date-picker-tags';
 import { blockExamples } from './date-picker-contents';
 
-describe('Date picker suite', () => {
+// https://github.com/SAP/fundamental-ngx/issues/8837
+xdescribe('Date picker suite', () => {
     const datePickerPage = new DatePickerPo();
     const {
         defaultExample,

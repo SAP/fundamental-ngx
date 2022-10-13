@@ -73,13 +73,13 @@ export async function refreshPage(isFullRefresh = false): Promise<void> {
         } else {
             // failed to navigate, reset the url and perform full page refresh
             await browser.url(url);
-            if (await browserIsSafari()) {
+            if (browserIsSafari()) {
                 await pause();
             }
         }
     } else {
         await browser.refresh();
-        if (await browserIsSafari()) {
+        if (browserIsSafari()) {
             await pause();
         }
     }
