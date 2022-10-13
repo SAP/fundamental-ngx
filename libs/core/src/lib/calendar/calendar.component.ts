@@ -519,11 +519,19 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     /** Function that allows to switch actually displayed list of year to next year list*/
     displayNextYearList(): void {
         this._yearViewComponent.loadNextYearList();
+        this._currentlyDisplayed = {
+            month: this._currentlyDisplayed.month,
+            year: this._yearViewComponent._firstYearInList
+        };
     }
 
     /** Function that allows to switch actually displayed list of year to previous year list*/
     displayPreviousYearList(): void {
         this._yearViewComponent.loadPreviousYearList();
+        this._currentlyDisplayed = {
+            month: this._currentlyDisplayed.month,
+            year: this._yearViewComponent._firstYearInList
+        };
     }
 
     /** Function that allows to switch actually displayed list of year to next year list*/
