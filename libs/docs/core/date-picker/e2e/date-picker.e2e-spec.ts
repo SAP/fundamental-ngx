@@ -18,7 +18,7 @@ import {
     setValue,
     waitForElDisplayed,
     waitForPresent
-} from '../../../../../e2e/wdio/driver/wdio';
+} from '../../../../../e2e';
 import { DatePickerPo } from './date-picker.po';
 import { currentYear, getCurrentItemIndex, getCurrentMonth, getNextDay, invalidDate } from './date-picker-tags';
 import { blockExamples } from './date-picker-contents';
