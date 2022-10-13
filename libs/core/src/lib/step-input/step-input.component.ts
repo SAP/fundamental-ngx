@@ -339,36 +339,32 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Increment input value by step value */
     increment(): void {
-        if (this.canIncrement) {
-            let _shouldIncrement = true;
-            if (this.value == null && this._firstEmittedValue) {
-                this._value = this._firstEmittedValue;
-                if (this._firstEmittedValue === this.max) {
-                    this._value = this.max;
-                    _shouldIncrement = false;
-                }
-            }
-            if (_shouldIncrement) {
-                this._value = this._cutFloatingNumberDistortion(this.value!, this.step);
-            }
-            this._emitChangedValue();
-            this._updateViewValue();
-        }
+        this._incrementOrDecrement('increment');
     }
 
     /** Decrement input value by step value */
     decrement(): void {
-        if (this.canDecrement) {
-            let _shouldDecrement = true;
+        this._incrementOrDecrement('decrement');
+    }
+
+    /** @hidden */
+    private _incrementOrDecrement(direction: 'increment' | 'decrement'): void {
+        if ((direction === 'increment' && this.canIncrement) || (direction === 'decrement' && this.canDecrement)) {
+            let _shouldChange = true;
             if (this.value == null && this._firstEmittedValue) {
                 this._value = this._firstEmittedValue;
-                if (this._firstEmittedValue === this.min) {
-                    this._value = this.min;
-                    _shouldDecrement = false;
+                let _limit: number;
+                direction === 'increment' ? (_limit = this.max) : (_limit = this.min);
+                if (this._firstEmittedValue === _limit) {
+                    this._value = _limit;
+                    _shouldChange = false;
                 }
             }
-            if (_shouldDecrement) {
-                this._value = this._cutFloatingNumberDistortion(this.value!, -this.step);
+            if (_shouldChange) {
+                this._value =
+                    direction === 'increment'
+                        ? this._cutFloatingNumberDistortion(this.value!, this.step)
+                        : this._cutFloatingNumberDistortion(this.value!, -this.step);
             }
             this._emitChangedValue();
             this._updateViewValue();
