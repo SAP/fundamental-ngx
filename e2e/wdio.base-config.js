@@ -1,6 +1,4 @@
 /* eslint-disable no-undef */
-const { join } = require('path');
-
 module.exports = ({ runner, specs, projectName }) => {
     require('ts-node').register({ transpileOnly: true });
     const AllureReporter = require('@wdio/allure-reporter').default;
