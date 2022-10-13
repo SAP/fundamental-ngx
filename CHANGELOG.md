@@ -1,3 +1,12 @@
+## [0.36.1-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.38...v0.36.1-rc.39) (2022-10-13)
+
+
+### Bug Fixes
+
+* **core:** submenu overflow ([#8824](https://github.com/SAP/fundamental-ngx/issues/8824)) ([5621767](https://github.com/SAP/fundamental-ngx/commit/5621767293c3ac0894f2f2a426098a5d0686d8d0))
+
+
+
 ## [0.36.1-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.37...v0.36.1-rc.38) (2022-10-12)
 
 
