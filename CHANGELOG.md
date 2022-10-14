@@ -1,3 +1,12 @@
+## [0.36.1-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.39...v0.36.1-rc.40) (2022-10-14)
+
+
+### Bug Fixes
+
+* **platform:** fix unread issue in standard list with nav indicator ([#8807](https://github.com/SAP/fundamental-ngx/issues/8807)) ([61742e1](https://github.com/SAP/fundamental-ngx/commit/61742e138cdf9a6becaf97f3b728c750494ffb4c))
+
+
+
 ## [0.36.1-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.38...v0.36.1-rc.39) (2022-10-13)
 
 
