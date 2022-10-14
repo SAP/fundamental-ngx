@@ -1,3 +1,12 @@
+## [0.36.1-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.40...v0.36.1-rc.41) (2022-10-14)
+
+
+### Bug Fixes
+
+* **fn:** remove unused fnResize directive/service ([#8841](https://github.com/SAP/fundamental-ngx/issues/8841)) ([aa0efc0](https://github.com/SAP/fundamental-ngx/commit/aa0efc0116d76a0610e4b2ba976ab3c592677d26))
+
+
+
 ## [0.36.1-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.39...v0.36.1-rc.40) (2022-10-14)
 
 
