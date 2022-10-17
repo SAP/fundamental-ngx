@@ -13,13 +13,15 @@ env:
 
 jobs:
     agents:
+        strategy:
+            matrix:
+                agent: [1, 2, 3, 4, 5]
         name: Runner
-        uses: ./.github/workflows/nx-cloud-agents.yml
-        secrets:
-            NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-            NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-        with:
-            number-of-agents: 5
+        runs-on: ubuntu-latest
+        steps:
+            uses: ./.github/actions/spin-up-ci-runner
+            with:
+                agent-name: ${{ matrix.agent }}
 
     run-release:
         name: Run release

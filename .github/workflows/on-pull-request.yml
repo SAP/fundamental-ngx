@@ -17,117 +17,119 @@ concurrency:
 
 jobs:
     agents:
-        name: Ubuntu latest
-        uses: ./.github/workflows/nx-cloud-agents.yml
-        secrets:
-            NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-            NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-        with:
-            number-of-agents: 8
-
-    initialize_cloud:
-        runs-on: ubuntu-latest
-        name: Initialize Nx Cloud
-        steps:
-            - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
-              with:
-                  node-version: 14.20.0
-            - name: Initialize the Nx Cloud distributed CI run
-              run: npx nx-cloud start-ci-run
-
-    build_test:
-        needs: initialize_cloud
-        runs-on: ubuntu-latest
-        name: Run affected Build and Test commands
-        defaults:
-            run:
-                working-directory: ${{ github.workspace }}
-                shell: bash
-        steps:
-            - uses: actions/checkout@v3
-              name: Checkout
-              with:
-                  fetch-depth: 0
-            - uses: nrwl/nx-set-shas@v2
-              name: Derive appropriate SHAs for base and head for nx-affected commands
-              with:
-                  main-branch-name: main
-            - uses: ./.github/actions/nodejs
-              with:
-                  node-version: 14.20.0
-
-            - uses: wagoid/commitlint-github-action@v3
-              name: Commit lint
-
-            - name: Run Build and Test
-              uses: ./.github/actions/parallel-commands
-              with:
-                  parallel-commands: |
-                      npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=docs --parallel=3
-                      npx nx affected --target=test --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=workspace-tools --parallel=3
-                      npx nx affected --target=lint --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=core,platform,fn --parallel=3
-                      npx nx run workspace-tools:test --skip-nx-cache
-            - name: Format Check
-              run: npx nx format:check --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD
-              env:
-                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
-
-    e2e_test:
-        needs: initialize_cloud
-        runs-on: ubuntu-latest
-        name: Run affected e2e commands
-        defaults:
-            run:
-                working-directory: ${{ github.workspace }}
-                shell: bash
-        steps:
-            - uses: actions/checkout@v3
-              name: Checkout
-              with:
-                  fetch-depth: 0
-            - uses: ./.github/actions/nodejs
-              with:
-                  node-version: 14.20.0
-            - run: npx nx run-many --target=build --projects=docs --parallel=3 --configuration=production
-            - uses: browser-actions/setup-chrome@latest
-              with:
-                  chrome-version: stable
-            - run: |
-                  export DISPLAY=:99
-                  chrome --version
-                  sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 & # optional
-              env:
-                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
-            - uses: FirebaseExtended/action-hosting-deploy@v0
-              continue-on-error: true
-              id: firebase_hosting_preview
-              with:
-                  repoToken: '${{ secrets.GITHUB_TOKEN }}'
-                  firebaseServiceAccount: '${{ env.FIREBASE_SERVICE_ACCOUNT_TOKEN }}'
-                  projectId: fundamental-ngx-gh
-                  target: fundamental-ngx-gh
-                  expires: 3d
-            - name: Test affected on firebase
-              if: ${{ steps.firebase_hosting_preview.outputs.details_url }}
-              run: |
-                  npx nx affected --target=e2e --base=origin/main --head=HEAD --parallel=2 --baseUrl=${{ steps.firebase_hosting_preview.outputs.details_url }} --devServerTarget=""
-            - name: Test affected on local
-              if: ${{ !steps.firebase_hosting_preview.outputs.details_url }}
-              run: |
-                  NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx run docs:e2e-app
-
-    stop_agents:
-        if: ${{ always() }}
-        needs:
-            - build_test
-            - e2e_test
-        name: Nx Cloud - Stop Agents
+        strategy:
+            matrix:
+                agent: [1, 2, 3, 4, 5, 6, 7, 8]
+        name: Runner
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
-              with:
-                  node-version: 14.20.0
-            - name: Stop all running agents for this CI run
-              run: npx nx-cloud stop-all-agents
+            uses: ./.github/actions/spin-up-ci-runner
+            with:
+                agent-name: ${{ matrix.agent }}
+
+        initialize_cloud:
+            runs-on: ubuntu-latest
+            name: Initialize Nx Cloud
+            steps:
+                - uses: actions/checkout@v3
+                - uses: ./.github/actions/nodejs
+                  with:
+                      node-version: 14.20.0
+                - name: Initialize the Nx Cloud distributed CI run
+                  run: npx nx-cloud start-ci-run
+
+        build_test:
+            needs: initialize_cloud
+            runs-on: ubuntu-latest
+            name: Run affected Build and Test commands
+            defaults:
+                run:
+                    working-directory: ${{ github.workspace }}
+                    shell: bash
+            steps:
+                - uses: actions/checkout@v3
+                  name: Checkout
+                  with:
+                      fetch-depth: 0
+                - uses: nrwl/nx-set-shas@v2
+                  name: Derive appropriate SHAs for base and head for nx-affected commands
+                  with:
+                      main-branch-name: main
+                - uses: ./.github/actions/nodejs
+                  with:
+                      node-version: 14.20.0
+
+                - uses: wagoid/commitlint-github-action@v3
+                  name: Commit lint
+
+                - name: Run Build and Test
+                  uses: ./.github/actions/parallel-commands
+                  with:
+                      parallel-commands: |
+                          npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=docs --parallel=3
+                          npx nx affected --target=test --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=workspace-tools --parallel=3
+                          npx nx affected --target=lint --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=core,platform,fn --parallel=3
+                          npx nx run workspace-tools:test --skip-nx-cache
+                - name: Format Check
+                  run: npx nx format:check --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD
+                  env:
+                      NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
+        e2e_test:
+            needs: initialize_cloud
+            runs-on: ubuntu-latest
+            name: Run affected e2e commands
+            defaults:
+                run:
+                    working-directory: ${{ github.workspace }}
+                    shell: bash
+            steps:
+                - uses: actions/checkout@v3
+                  name: Checkout
+                  with:
+                      fetch-depth: 0
+                - uses: ./.github/actions/nodejs
+                  with:
+                      node-version: 14.20.0
+                - run: npx nx run-many --target=build --projects=docs --parallel=3 --configuration=production
+                - uses: browser-actions/setup-chrome@latest
+                  with:
+                      chrome-version: stable
+                - run: |
+                      export DISPLAY=:99
+                      chrome --version
+                      sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 & # optional
+                  env:
+                      NX_CLOUD_DISTRIBUTED_EXECUTION: false
+                - uses: FirebaseExtended/action-hosting-deploy@v0
+                  continue-on-error: true
+                  id: firebase_hosting_preview
+                  with:
+                      repoToken: '${{ secrets.GITHUB_TOKEN }}'
+                      firebaseServiceAccount: '${{ env.FIREBASE_SERVICE_ACCOUNT_TOKEN }}'
+                      projectId: fundamental-ngx-gh
+                      target: fundamental-ngx-gh
+                      expires: 3d
+                - name: Test affected on firebase
+                  if: ${{ steps.firebase_hosting_preview.outputs.details_url }}
+                  run: |
+                      npx nx affected --target=e2e --base=origin/main --head=HEAD --parallel=2 --baseUrl=${{ steps.firebase_hosting_preview.outputs.details_url }} --devServerTarget=""
+                - name: Test affected on local
+                  if: ${{ !steps.firebase_hosting_preview.outputs.details_url }}
+                  run: |
+                      NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx run docs:e2e-app
+
+        stop_agents:
+            if: ${{ always() }}
+            needs:
+                - build_test
+                - e2e_test
+            name: Nx Cloud - Stop Agents
+            runs-on: ubuntu-latest
+            steps:
+                - uses: actions/checkout@v3
+                - uses: ./.github/actions/nodejs
+                  with:
+                      node-version: 14.20.0
+                - name: Stop all running agents for this CI run
+                  run: npx nx-cloud stop-all-agents
