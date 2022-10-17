@@ -1,3 +1,12 @@
+## [0.36.1-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.41...v0.36.1-rc.42) (2022-10-17)
+
+
+### Bug Fixes
+
+* **platform:** conditional directives on table columns issue ([#8844](https://github.com/SAP/fundamental-ngx/issues/8844)) ([69698bc](https://github.com/SAP/fundamental-ngx/commit/69698bc0e9b88daf12dc101944762a063994fa88))
+
+
+
 ## [0.36.1-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.40...v0.36.1-rc.41) (2022-10-14)
 
 
