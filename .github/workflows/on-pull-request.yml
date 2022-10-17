@@ -23,9 +23,9 @@ jobs:
         name: Runner
         runs-on: ubuntu-latest
         steps:
-            uses: ./.github/actions/spin-up-ci-runner
-            with:
-                agent-name: ${{ matrix.agent }}
+            - uses: ./.github/actions/spin-up-ci-runner
+              with:
+                  agent-name: ${{ matrix.agent }}
 
     initialize_cloud:
         runs-on: ubuntu-latest
