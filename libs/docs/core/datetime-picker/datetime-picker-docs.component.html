@@ -86,8 +86,11 @@
 <description>
     <fd-datetime-important componentName="DatetimePicker"></fd-datetime-important>
     <p>
-        To change a locale option in <code>DatePicker</code> component, it is needed to set a locale via
-        <code>DatetimeAdapter.setLocale</code> method.
+        In order to change the locale of the DatetimePicker, both the calendar will need to set its locale via the
+        <code>DatetimeAdapter</code> and the remaining pieces of the component (such as OK/Cancel buttons, "Hrs/Min/Sec"
+        labels) will need to be translated via the <code>fundamental-ngx/i18n</code> module. This is because the
+        <code>CalendarComponent</code> utilizes different localization strategies than the other components of the
+        library. Note the <code>TypeScript</code> example code below to see how this is done.
     </p>
 </description>
 <component-example>
