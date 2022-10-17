@@ -15,14 +15,12 @@ env:
 jobs:
     agents:
         name: Runner
-        uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.6
+        uses: ./.github/workflows/nx-cloud-agents.yml
         secrets:
             NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
             NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
         with:
             number-of-agents: 5
-            node-version: 14.20.0
-            yarn-version: 1.22.19
 
     initialize_cloud:
         runs-on: ubuntu-latest
