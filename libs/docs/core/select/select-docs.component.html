@@ -116,3 +116,25 @@
     <fd-select-forms></fd-select-forms>
 </component-example>
 <code-example [exampleFiles]="selectForm"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-comparator" componentName="select">
+    Select With A Custom Comparator
+</fd-docs-section-title>
+<description>
+    When the list of options provided to the Select Component consists of objects (instead of primitive elements), a
+    custom comparator should be used.
+    <br />
+    This allows the component to compare the selected option with the available options by using the provided custom
+    logic (that should leverage some unique value of an object).
+    <br />
+    If no custom comparator is provided, objects will be compared by reference.
+    <br />
+    Custom comparator can be set by providing the <code>compareWith</code> input:
+    <code>[compareWith]="yourCustomComparator"</code>
+</description>
+<component-example>
+    <fd-select-custom-comparator-example></fd-select-custom-comparator-example>
+</component-example>
+<code-example [exampleFiles]="selectCustomComparator"></code-example>
