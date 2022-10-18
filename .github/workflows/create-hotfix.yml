@@ -13,16 +13,15 @@ env:
 
 jobs:
     agents:
-        strategy:
-            matrix:
-                agent: [1, 2, 3, 4, 5]
         name: Runner
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: ./.github/actions/spin-up-ci-runner
-              with:
-                  agent-name: ${{ matrix.agent }}
+        uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.8
+        secrets:
+            NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+            NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+        with:
+            number-of-agents: 5
+            node-version: 14.20.0
+            yarn-version: 1.22.19
 
     run-release:
         name: Run release
