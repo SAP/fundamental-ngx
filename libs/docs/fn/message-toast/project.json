@@ -4,7 +4,7 @@
     "prefix": "fdp-doc",
     "targets": {
         "e2e-noop": {
-            "executor": "./tools/executors/wdio:e2e-test",
+            "executor": "@fundamental-ngx/wdio:e2e-test",
             "options": {
                 "e2eTsConfig": "libs/docs/fn/message-toast/e2e/tsconfig.json",
                 "baseUrl": "http://localhost:4200",
