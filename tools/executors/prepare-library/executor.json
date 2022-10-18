@@ -1,9 +1,0 @@
-{
-    "executors": {
-        "prepare": {
-            "implementation": "./index",
-            "schema": "./schema.json",
-            "description": "Prepares project for publish. Build, copy MDs, schematics, etc."
-        }
-    }
-}
