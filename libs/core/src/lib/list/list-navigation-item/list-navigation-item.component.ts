@@ -174,10 +174,23 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     /** @hidden */
     private _handleExpandedChanges(expanded: boolean): void {
         if (this._isExpandable) {
+            if (this.expanded === expanded) {
+                return;
+            }
+
             this.expanded = expanded;
             this._setIsItemVisible(expanded);
             this._listNavigationItemArrow._setExpanded(this.expanded);
-            !expanded && this.focus();
+
+            if (expanded) {
+                setTimeout(() => {
+                    this._listComponent._navItems.first.focus();
+                });
+            } else {
+                setTimeout(() => {
+                    this.focus();
+                });
+            }
         }
     }
 
