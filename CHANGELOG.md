@@ -1,3 +1,12 @@
+## [0.36.1-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.44...v0.36.1-rc.45) (2022-10-18)
+
+
+### Bug Fixes
+
+* **docs:** remove hardcoded compact from dialog docs ([#8862](https://github.com/SAP/fundamental-ngx/issues/8862)) ([c97c4e7](https://github.com/SAP/fundamental-ngx/commit/c97c4e794dce9610c7677b93b01c13698368d8d1))
+
+
+
 ## [0.36.1-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.43...v0.36.1-rc.44) (2022-10-18)
 
 
