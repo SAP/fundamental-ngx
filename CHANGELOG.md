@@ -1,3 +1,12 @@
+## [0.36.1-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.47...v0.36.1-rc.48) (2022-10-18)
+
+
+### Bug Fixes
+
+* **core:** condensed mode key navigation ([#8861](https://github.com/SAP/fundamental-ngx/issues/8861)) ([7958342](https://github.com/SAP/fundamental-ngx/commit/7958342b1943b6ae46d107ac3ead917c9ce3f313))
+
+
+
 ## [0.36.1-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.46...v0.36.1-rc.47) (2022-10-18)
 
 
