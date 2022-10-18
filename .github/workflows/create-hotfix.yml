@@ -14,7 +14,7 @@ env:
 jobs:
     agents:
         name: Runner
-        uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.6
+        uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.8
         secrets:
             NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
             NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}

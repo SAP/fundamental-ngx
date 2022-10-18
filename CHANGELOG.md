@@ -1,3 +1,66 @@
+## [0.36.1-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.45...v0.36.1-rc.46) (2022-10-18)
+
+
+### Bug Fixes
+
+* **core:** add key control to scrollbar ([#8780](https://github.com/SAP/fundamental-ngx/issues/8780)) ([07e7dd2](https://github.com/SAP/fundamental-ngx/commit/07e7dd2ac9310011e2c04e37671c5906878f667a))
+* **core:** change year range on arrow button clicks ([#8843](https://github.com/SAP/fundamental-ngx/issues/8843)) ([facb328](https://github.com/SAP/fundamental-ngx/commit/facb328c35daaa8a1c6395876d6e1ac699d0ac5f))
+
+
+
+## [0.36.1-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.44...v0.36.1-rc.45) (2022-10-18)
+
+
+### Bug Fixes
+
+* **docs:** remove hardcoded compact from dialog docs ([#8862](https://github.com/SAP/fundamental-ngx/issues/8862)) ([c97c4e7](https://github.com/SAP/fundamental-ngx/commit/c97c4e794dce9610c7677b93b01c13698368d8d1))
+
+
+
+## [0.36.1-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.43...v0.36.1-rc.44) (2022-10-18)
+
+
+
+## [0.36.1-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.42...v0.36.1-rc.43) (2022-10-17)
+
+
+
+## [0.36.1-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.41...v0.36.1-rc.42) (2022-10-17)
+
+
+### Bug Fixes
+
+* **platform:** conditional directives on table columns issue ([#8844](https://github.com/SAP/fundamental-ngx/issues/8844)) ([69698bc](https://github.com/SAP/fundamental-ngx/commit/69698bc0e9b88daf12dc101944762a063994fa88))
+
+
+
+## [0.36.1-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.40...v0.36.1-rc.41) (2022-10-14)
+
+
+### Bug Fixes
+
+* **fn:** remove unused fnResize directive/service ([#8841](https://github.com/SAP/fundamental-ngx/issues/8841)) ([aa0efc0](https://github.com/SAP/fundamental-ngx/commit/aa0efc0116d76a0610e4b2ba976ab3c592677d26))
+
+
+
+## [0.36.1-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.39...v0.36.1-rc.40) (2022-10-14)
+
+
+### Bug Fixes
+
+* **platform:** fix unread issue in standard list with nav indicator ([#8807](https://github.com/SAP/fundamental-ngx/issues/8807)) ([61742e1](https://github.com/SAP/fundamental-ngx/commit/61742e138cdf9a6becaf97f3b728c750494ffb4c))
+
+
+
+## [0.36.1-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.38...v0.36.1-rc.39) (2022-10-13)
+
+
+### Bug Fixes
+
+* **core:** submenu overflow ([#8824](https://github.com/SAP/fundamental-ngx/issues/8824)) ([5621767](https://github.com/SAP/fundamental-ngx/commit/5621767293c3ac0894f2f2a426098a5d0686d8d0))
+
+
+
 ## [0.36.1-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.37...v0.36.1-rc.38) (2022-10-12)
 
 

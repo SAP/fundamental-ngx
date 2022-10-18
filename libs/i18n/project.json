@@ -4,13 +4,13 @@
     "prefix": "fundamental-ngx",
     "targets": {
         "prepare": {
-            "executor": "./tools/executors/prepare-library:prepare",
+            "executor": "@fundamental-ngx/workspace-tools:prepare",
             "options": {
                 "distPath": "dist/libs/i18n"
             }
         },
         "compile-typedoc": {
-            "executor": "./tools/executors/compile-typedoc:compile-lib",
+            "executor": "@fundamental-ngx/workspace-tools:compile-typedoc",
             "options": {
                 "outputPath": "libs/docs/typedoc/i18n"
             },

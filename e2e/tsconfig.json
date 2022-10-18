@@ -5,7 +5,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "module": "commonjs",
-        "target": "es6",
+        "target": "esnext",
         "types": ["node", "webdriverio/async", "@wdio/jasmine-framework", "wdio-image-comparison-service", "axe-core"]
     },
     "includes": ["wdio/**/*.ts"]

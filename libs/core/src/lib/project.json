@@ -5,7 +5,7 @@
     "buildTarget": "build-umbrella",
     "targets": {
         "prepare": {
-            "executor": "./tools/executors/prepare-library:prepare",
+            "executor": "@fundamental-ngx/workspace-tools:prepare",
             "options": {
                 "schematics": {
                     "collection": "../../schematics",
@@ -15,7 +15,7 @@
             }
         },
         "compile-typedoc": {
-            "executor": "./tools/executors/compile-typedoc:compile-lib",
+            "executor": "@fundamental-ngx/workspace-tools:compile-typedoc",
             "options": {
                 "outputPath": "libs/docs/typedoc/core"
             },

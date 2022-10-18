@@ -19,7 +19,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
                 </ul>
             </fd-dialog-body>
 
-            <fd-dialog-footer fdCompact>
+            <fd-dialog-footer>
                 <fd-button-bar
                     label="Interesting"
                     fdType="emphasized"

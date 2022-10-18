@@ -73,13 +73,13 @@ export async function refreshPage(isFullRefresh = false): Promise<void> {
         } else {
             // failed to navigate, reset the url and perform full page refresh
             await browser.url(url);
-            if (await browserIsSafari()) {
+            if (browserIsSafari()) {
                 await pause();
             }
         }
     } else {
         await browser.refresh();
-        if (await browserIsSafari()) {
+        if (browserIsSafari()) {
             await pause();
         }
     }
@@ -208,7 +208,7 @@ export async function waitForElDisplayed(
 ): Promise<true | void> {
     await waitForPresent(selector, index);
     await checkSelectorExists(selector, index);
-    return (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
+    return await (await $$(selector))[index].waitForDisplayed({ timeout: waitTime });
 }
 
 export async function waitForInvisibilityOf(selector: string, index: number = 0): Promise<true | void> {
@@ -253,7 +253,7 @@ export async function waitForPresent(
     waitTime = defaultWaitTime()
 ): Promise<true | void> {
     await checkSelectorExists(selector, index);
-    return (await $$(selector))[index].waitForExist({ timeout: waitTime });
+    return await (await $$(selector))[index].waitForExist({ timeout: waitTime });
 }
 
 export async function waitForNotPresent(
