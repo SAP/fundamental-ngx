@@ -1,10 +1,12 @@
 import { logger, ProjectConfiguration } from '@nrwl/devkit';
-import { readdirSync, readFileSync, writeFileSync } from 'fs-extra';
+import { readFileSync, writeFileSync } from 'fs-extra';
 import { major } from 'semver';
 import { PrepareOptions } from './prepare.options';
+import { glob } from 'glob';
 
 const packageJson = JSON.parse(readFileSync(`./package.json`, 'utf8'));
-const excludedFileTypes = ['js', 'mjs', 'map', 'ts'];
+const excludedFilesPatterns = ['md', 'mjs', 'map', 'ts'].map((fileType) => `**/*.${fileType}`);
+
 const versions = {
     VERSION_PLACEHOLDER: packageJson.version,
     // As Angular version listed as peerDependency it should be ^X.0.0 to support any minor version
@@ -69,20 +71,7 @@ const replaceInFile = (file: string, versionsDictionary: Record<string, string>)
 };
 
 const getFiles = (dir: string) => {
-    const files = readdirSync(dir, { withFileTypes: true });
-    return files
-        .filter((file) => excludedFileTypes.every((fileType) => !file.name.endsWith('.' + fileType)))
-        .map((file) => {
-            if (file.isDirectory()) {
-                return getFiles(`${dir}/${file.name}`);
-            }
-            return `${dir}/${file.name}`;
-        })
-        .reduce((acc, next) => {
-            if (Array.isArray(next)) {
-                return [...acc, ...next];
-            }
-            acc.push(next);
-            return acc;
-        }, []);
+    return glob.sync(`${dir}/**/*.*`, {
+        ignore: excludedFilesPatterns
+    });
 };
