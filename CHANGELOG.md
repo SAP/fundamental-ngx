@@ -1,3 +1,12 @@
+## [0.36.1-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.46...v0.36.1-rc.47) (2022-10-18)
+
+
+### Bug Fixes
+
+* **core:** fix multi-input bugs ([#8794](https://github.com/SAP/fundamental-ngx/issues/8794)) ([290ff31](https://github.com/SAP/fundamental-ngx/commit/290ff31a45d2c06be189221142c0a183233650f0))
+
+
+
 ## [0.36.1-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.45...v0.36.1-rc.46) (2022-10-18)
 
 
