@@ -195,7 +195,6 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         this.value = this.selected.value;
         this.hideMenu();
         this._cdRef.detectChanges();
-        console.log(this._selectionModel.selected);
     }
 
     /** @hidden */
