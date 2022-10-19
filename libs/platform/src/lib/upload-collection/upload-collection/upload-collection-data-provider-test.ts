@@ -62,7 +62,10 @@ const dataSource: UploadCollectionItem[] = [
 ];
 
 export class UploadCollectionDataProviderTest extends UploadCollectionDataProvider {
+    /** @hidden */
     items: UploadCollectionItem[] = dataSource.map((item) => ({ ...item }));
+
+    /** @hidden */
     private _cancelUploadNewFileIds: (string | number)[] = [];
 
     /** The method is triggered when valid files are selected in the file uploader dialog. */
@@ -227,6 +230,7 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
         );
     }
 
+    /** @hidden */
     runAfterFail({ parentFolderId, items }: UploadEvent): Observable<UploadCollectionItem[]> {
         console.log('runAfterFail', parentFolderId, items);
         const item = items[0];

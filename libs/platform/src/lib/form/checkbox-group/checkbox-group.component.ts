@@ -58,25 +58,23 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
      * value for selected checkboxes.
      */
     @Input()
-    get value(): any[] {
-        return this.getValue();
-    }
-
     set value(selectedValue: any[]) {
         this.setValue(selectedValue);
         this._updateSelectionModelByValue();
+    }
+    get value(): any[] {
+        return this.getValue();
     }
 
     /**
      * To Display multiple checkboxes in a line
      */
     @Input()
-    get isInline(): boolean {
-        return this._inlineCurrentValue$.value;
-    }
-
     set isInline(inline: boolean) {
         this._inlineCurrentValue$.next(inline);
+    }
+    get isInline(): boolean {
+        return this._inlineCurrentValue$.value;
     }
 
     /**
@@ -84,14 +82,13 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
      * Establishes two way binding, when checkbox group used outside form.
      */
     @Input()
-    get checked(): string[] {
-        warnAboutChecked();
-        return this.value;
-    }
-
     set checked(checkedValues: string[]) {
         warnAboutChecked();
         this.value = checkedValues;
+    }
+    get checked(): string[] {
+        warnAboutChecked();
+        return this.value;
     }
 
     /** Children checkboxes passed as content */
@@ -119,6 +116,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     /** @hidden */
     readonly _selectionModel = new SelectionModel(true);
 
+    /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,

@@ -27,11 +27,15 @@ export class PlatformFooterComponent {
     /** defines the padding and size of the footer based on screen */
     size: footerSize = 'xl';
 
+    /** @hidden */
     public screenWidth: any;
+    /** @hidden */
     public screenHeight: any;
 
+    /** @hidden */
     constructor(private _elRef: ElementRef, private readonly _cdRef: ChangeDetectorRef) {}
 
+    /** @hidden */
     @HostListener('window:resize', ['$event'])
     onResize(): void {
         this.screenWidth = window.innerWidth;

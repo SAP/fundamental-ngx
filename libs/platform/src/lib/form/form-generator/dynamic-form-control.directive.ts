@@ -35,6 +35,7 @@ export class DynamicFormControlDirective implements OnInit {
      */
     @Input() form: FormGroup;
 
+    /** Form group name path */
     @Input() formGroupNamePath: string;
 
     /**
@@ -42,6 +43,7 @@ export class DynamicFormControlDirective implements OnInit {
      */
     @Input() formField: FormField;
 
+    /** @hidden */
     constructor(
         private readonly _formGeneratorService: FormGeneratorService,
         private readonly _vcRef: ViewContainerRef,
@@ -49,6 +51,7 @@ export class DynamicFormControlDirective implements OnInit {
         @Optional() @Inject(CONTENT_DENSITY_DIRECTIVE) private contentDensityDirective: Observable<ContentDensityMode>
     ) {}
 
+    /** @hidden */
     ngOnInit(): void {
         const foundComponent = this._formGeneratorService.getComponentDefinitionByType(this.formItem.type);
 

@@ -15,19 +15,24 @@ import { trackByFn } from '../helpers';
     }
 })
 export class ApprovalFlowTeamListComponent {
+    /** Approval flow teams */
     @Input()
     teams: ApprovalTeam[] = [];
 
+    /** Whether in RTL mode */
     @Input()
     isRtl = false;
 
+    /** Selected team ID */
     @Input()
     selectedTeamId: Nullable<string>;
 
+    /** Event emitted on team click */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onTeamClick = new EventEmitter<ApprovalTeam>();
 
+    /** Event emitted on team selection change */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onTeamRadioClick = new EventEmitter<ApprovalTeam>();

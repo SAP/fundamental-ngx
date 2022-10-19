@@ -72,8 +72,10 @@ export interface ValueLabelItem {
     }
 })
 export class SearchFieldSuggestionDirective implements FocusableOption {
+    /** @hidden */
     constructor(private element: ElementRef) {}
 
+    /** @hidden */
     focus(): void {
         this.element.nativeElement.focus();
     }
@@ -111,10 +113,6 @@ export class SearchFieldComponent
 
     /** List of string values to populate suggestion dropdown selection. */
     @Input()
-    get suggestions(): SuggestionItem[] | Observable<SuggestionItem[]> {
-        return this._suggestions;
-    }
-
     set suggestions(value: SuggestionItem[] | Observable<SuggestionItem[]>) {
         this._suggestions = value;
         if (Array.isArray(value)) {
@@ -129,17 +127,19 @@ export class SearchFieldComponent
             this._dropdownValues$ = of([]);
         }
     }
+    get suggestions(): SuggestionItem[] | Observable<SuggestionItem[]> {
+        return this._suggestions;
+    }
 
     /** Datasource for suggestion list */
     @Input()
-    get dataSource(): SearchFieldDataSource<any> {
-        return this._dataSource;
-    }
-
     set dataSource(value: SearchFieldDataSource<any>) {
         if (value) {
             this._initializeDataSource(value);
         }
+    }
+    get dataSource(): SearchFieldDataSource<any> {
+        return this._dataSource;
     }
 
     /** Initial input text. */
@@ -148,13 +148,12 @@ export class SearchFieldComponent
 
     /** List of categories. */
     @Input()
-    get categories(): ValueLabelItem[] {
-        return this._categories;
-    }
-
     set categories(value: ValueLabelItem[]) {
         this._categories = value;
         this._showCategoryDropdown = Array.isArray(value) && value.length > 0;
+    }
+    get categories(): ValueLabelItem[] {
+        return this._categories;
     }
 
     /** Current category, value should be present in categories array */
@@ -304,13 +303,29 @@ export class SearchFieldComponent
     /** @hidden */
     private readonly _dataSourceChanged$ = new Subject<void>();
 
-    @ViewChild('categoryDropdown', { static: false }) categoryDropdown: PopoverComponent;
-    @ViewChild('inputGroup', { static: false }) inputGroup: ElementRef<HTMLElement>;
-    @ViewChild('inputField', { static: false }) inputField: ElementRef<HTMLElement>;
+    /** @hidden */
+    @ViewChild('categoryDropdown', { static: false })
+    categoryDropdown: PopoverComponent;
 
-    @ViewChild('inputFieldTemplate') inputFieldTemplate: TemplateRef<any>;
-    @ViewChild('suggestionMenuTemplate', { static: false }) suggestionMenuTemplate: TemplateRef<any>;
-    @ViewChildren(SearchFieldSuggestionDirective) suggestionItems: QueryList<SearchFieldSuggestionDirective>;
+    /** @hidden */
+    @ViewChild('inputGroup', { static: false })
+    inputGroup: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    @ViewChild('inputField', { static: false })
+    inputField: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    @ViewChild('inputFieldTemplate')
+    inputFieldTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild('suggestionMenuTemplate', { static: false })
+    suggestionMenuTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChildren(SearchFieldSuggestionDirective)
+    suggestionItems: QueryList<SearchFieldSuggestionDirective>;
 
     /** @hidden */
     get searchFieldValue(): SearchInput {
@@ -320,6 +335,7 @@ export class SearchFieldComponent
         };
     }
 
+    /** @hidden */
     constructor(
         private readonly _overlay: Overlay,
         private readonly _viewContainerRef: ViewContainerRef,
@@ -687,6 +703,7 @@ export class SearchFieldComponent
     name: 'suggestionMatches'
 })
 export class SuggestionMatchesPipe implements PipeTransform {
+    /** @hidden */
     transform(values: string[] | null, match: string, mobile = false): string[] {
         if (!values) {
             values = [];

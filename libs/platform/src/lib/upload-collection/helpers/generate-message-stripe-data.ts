@@ -18,6 +18,7 @@ function _groupByTypeAndCount(items: UploadCollectionItem[]): MessageItemsCount 
     );
 }
 
+/** @hidden */
 export function generateMessageStripeData(type: MessageType, options: MessageOptions): Message {
     const newMessage: Message = {
         messageType: type,

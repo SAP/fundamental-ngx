@@ -93,6 +93,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     /** Title which is displayed in the header of the Approval Flow component. */
     @Input() title: string;
 
+    /** Value of the approval flow component. */
     @Input() value: ApprovalProcess;
 
     /** Data source for the users of Approval Flow component. */
@@ -244,6 +245,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     _dragDropInProgress = false;
 
+    /** @hidden */
     readonly approvalFlowUniqueId = `fdp-approval-flow-${++defaultId}`;
 
     /** @hidden */
@@ -311,6 +313,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._setupDataSourceSubscription();
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.value) {
             const process = this.value ?? { watchers: [], nodes: [] };

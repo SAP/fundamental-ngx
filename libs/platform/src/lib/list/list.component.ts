@@ -52,7 +52,9 @@ export type ListType = 'inactive' | 'active' | 'detail';
 export type FdpListDataSource<T> = ListDataSource<T> | Observable<T[]> | T[];
 
 export class SelectionChangeEvent {
+    /** Selected items */
     selectedItems: BaseListItem[];
+    /** Index */
     index: number;
 }
 
@@ -147,22 +149,17 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     @Input()
     selectionMode: SelectionType = 'none';
 
+    /** setter and getter for radio button and checkbox */
     @Input()
+    set value(value: any) {
+        super.setValue(value);
+    }
     get value(): any {
         return super.getValue();
     }
 
-    /** setter and getter for radio button and checkbox */
-    set value(value: any) {
-        super.setValue(value);
-    }
-
     /** setter and getter for row level Selection */
     @Input()
-    get rowSelection(): boolean {
-        return this._rowSelection;
-    }
-
     set rowSelection(value: boolean) {
         this._rowSelection = value;
         if (this._rowSelection) {
@@ -173,25 +170,23 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             }
         }
     }
+    get rowSelection(): boolean {
+        return this._rowSelection;
+    }
 
     /** Datasource for suggestion list */
     @Input()
-    get dataSource(): FdpListDataSource<T> {
-        return this._dataSource;
-    }
-
     set dataSource(value: FdpListDataSource<T>) {
         if (value) {
             this._initializeDS(value);
         }
     }
+    get dataSource(): FdpListDataSource<T> {
+        return this._dataSource;
+    }
 
     /** setter and getter for _navigated */
     @Input()
-    get navigated(): boolean {
-        return this._navigated;
-    }
-
     set navigated(value: boolean) {
         this._navigated = value;
 
@@ -202,38 +197,38 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
         this._ulElement?.classList.add(...classList);
     }
+    get navigated(): boolean {
+        return this._navigated;
+    }
 
     /** setter and getter for _navigationIndicator */
     @Input()
-    get navigationIndicator(): boolean {
-        return this._navigationIndicator;
-    }
-
     set navigationIndicator(value: boolean) {
         this._navigationIndicator = value;
         this._ulElement?.classList.add('fd-list--navigation-indication');
     }
+    get navigationIndicator(): boolean {
+        return this._navigationIndicator;
+    }
 
     /** setter and getter for hasByLine */
     @Input()
-    get hasByLine(): boolean {
-        return this._hasByLine;
-    }
-
     set hasByLine(value: boolean) {
         this._hasByLine = value;
         this._ulElement?.classList.add('fd-list--byline');
     }
+    get hasByLine(): boolean {
+        return this._hasByLine;
+    }
 
     /** setter and getter for hasObject */
     @Input()
-    get hasObject(): boolean {
-        return this._hasObject;
-    }
-
     set hasObject(value: boolean) {
         this._hasObject = value;
         this._ulElement?.classList.add('fd-object-list');
+    }
+    get hasObject(): boolean {
+        return this._hasObject;
     }
 
     /** Event thrown, when selected item is changed */
@@ -355,6 +350,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
      */
     private _dsSubscription: Nullable<Subscription>;
 
+    /** @hidden */
     private _clickSubscription = new Subscription();
 
     /** @hidden */

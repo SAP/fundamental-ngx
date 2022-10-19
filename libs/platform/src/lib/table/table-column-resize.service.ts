@@ -168,6 +168,7 @@ export class TableColumnResizeService implements OnDestroy {
         this._columnsCellMap.set(columnName, [cellElRef, ...columnCells]);
     }
 
+    /** Unregister column's cell. */
     unregisterColumnCell(columnName: string, cellElRef: ElementRef): void {
         const columnCells = this._columnsCellMap.get(columnName) || [];
         const elmIndex = columnCells.findIndex((e) => e.nativeElement === cellElRef.nativeElement);

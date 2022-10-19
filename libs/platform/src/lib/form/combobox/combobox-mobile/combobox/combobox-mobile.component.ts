@@ -45,6 +45,7 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
     /** @hidden */
     private _selectedBackup: string;
 
+    /** @hidden */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
@@ -54,6 +55,7 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
         super(elementRef, dialogService, comboboxComponent, MobileModeControl.COMBOBOX, mobileModes);
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this._listenOnMultiInputOpenChange();
     }
@@ -75,6 +77,7 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
         this._component.dialogApprove();
     }
 
+    /** @hidden */
     private _toggleDialog(open: boolean): void {
         if (!open) {
             return;

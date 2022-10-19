@@ -6,6 +6,11 @@ import { Nullable } from '@fundamental-ngx/core/shared';
 
 /** Dynamic Page collapse change event */
 export class DynamicPageCollapseChangeEvent {
+    /**
+     * Dynamic Page collapse change event
+     * @param source Dynamic Page component
+     * @param payload Collapse state
+     */
     constructor(public source: DynamicPageHeaderComponent, public payload: boolean) {}
 }
 

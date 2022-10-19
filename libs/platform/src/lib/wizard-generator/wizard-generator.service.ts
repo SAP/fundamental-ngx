@@ -46,6 +46,7 @@ export interface StepDependencyFields {
  */
 @Injectable()
 export class WizardGeneratorService {
+    /** @hidden */
     items: PreparedWizardGeneratorItem[];
 
     /**
@@ -90,6 +91,7 @@ export class WizardGeneratorService {
     /** @hidden */
     private _submittedFormRawValues: WizardGeneratorFormsValue = {};
 
+    /** @hidden */
     private _wizardStepIds: string[] = [];
 
     /** @hidden */

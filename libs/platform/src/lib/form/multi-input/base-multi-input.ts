@@ -61,6 +61,11 @@ import { MultiInputConfig } from './multi-input.config';
 export type FdpMultiInputDataSource<T> = MultiInputDataSource<T> | Observable<T[]> | T[];
 
 export class MultiInputSelectionChangeEvent {
+    /**
+     * Multi Input selection change event
+     * @param source Multi Input component
+     * @param payload Selected value
+     */
     constructor(
         public source: PlatformMultiInputComponent,
         public payload: any // Contains selected item
@@ -75,14 +80,13 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /** Datasource for suggestion list */
     @Input()
-    get dataSource(): FdpMultiInputDataSource<any> {
-        return this._dataSource;
-    }
-
     set dataSource(value: FdpMultiInputDataSource<any>) {
         if (value) {
             this._initializeDataSource(value);
         }
+    }
+    get dataSource(): FdpMultiInputDataSource<any> {
+        return this._dataSource;
     }
 
     /** Whether the autocomplete should be enabled; Enabled by default */
@@ -140,15 +144,15 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @Input()
     autoResize = false;
 
+    /** Value of the multi input */
     @Input()
-    get value(): any {
-        return super.getValue();
-    }
-
     set value(value: any) {
         const selectedItems = Array.isArray(value) ? value : [value];
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.setValue(value);
+    }
+    get value(): any {
+        return super.getValue();
     }
 
     /** Event emitted when item is selected. */
@@ -214,6 +218,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** Whether the Multi Input is opened. */
     isOpen = false;
 
+    /** @hidden */
     get canClose(): boolean {
         return !(this.mobile && this.mobileConfig.approveButtonText);
     }
@@ -248,6 +253,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** @hidden emits whenever there're changes to the inputs, that affect the data creation from data source */
     private readonly _updateDataSourceValues$ = new Subject<void>();
 
+    /** @hidden */
     protected _dataSource: FdpMultiInputDataSource<any>;
 
     /** @hidden */
@@ -285,6 +291,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
     };
 
+    /** @hidden */
     constructor(
         readonly cd: ChangeDetectorRef,
         protected readonly elementRef: ElementRef,

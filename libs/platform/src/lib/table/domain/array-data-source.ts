@@ -50,6 +50,7 @@ export class ArrayTableDataProvider<T> extends TableDataProvider<T> {
 }
 
 export class ArrayTableDataSource<T> extends TableDataSource<T> {
+    /** @hidden */
     constructor(data: T[], dateTimeAdapter?: DatetimeAdapter<any>) {
         super(new ArrayTableDataProvider(data, dateTimeAdapter));
     }

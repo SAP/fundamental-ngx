@@ -31,11 +31,16 @@ export const TABLE_SCROLLABLE = new InjectionToken<TableScrollable>('Table Scrol
 
 @Injectable()
 export class TableScrollDispatcherService implements OnDestroy {
+    /** @hidden */
     private _scrollSubject: Subject<TableScrollable> = new Subject();
+    /** @hidden */
     private _verticalScrollSubject: Subject<TableScrollable> = new Subject();
+    /** @hidden */
     private _horizontalScrollSubject: Subject<TableScrollable> = new Subject();
+    /** @hidden */
     private _scrollableSubscriptionsMap: Map<TableScrollable, Subscription> = new Map();
 
+    /** @hidden */
     register(scrollable: TableScrollable): void {
         if (this._scrollableSubscriptionsMap.has(scrollable)) {
             return;
@@ -49,6 +54,7 @@ export class TableScrollDispatcherService implements OnDestroy {
         this._scrollableSubscriptionsMap.set(scrollable, sub);
     }
 
+    /** @hidden */
     deregister(scrollable: TableScrollable): void {
         if (!this._scrollableSubscriptionsMap.has(scrollable)) {
             return;

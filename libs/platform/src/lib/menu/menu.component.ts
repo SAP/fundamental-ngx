@@ -63,15 +63,14 @@ let menuIdCounter = 0;
 export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy {
     /** Menu ID */
     @Input()
-    get id(): string {
-        return this._id;
-    }
-
     set id(id: string) {
         this._id = id;
 
         // Use 'id' property to create menu ID for aria-control purposes.
         this.menuId = MENU_ID_ROOT + id;
+    }
+    get id(): string {
+        return this._id;
     }
 
     /**

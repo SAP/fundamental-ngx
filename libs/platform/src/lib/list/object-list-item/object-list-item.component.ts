@@ -73,6 +73,7 @@ export class ObjectListItemComponent extends BaseListItem {
     @Input()
     transparent: boolean;
 
+    /** @hidden */
     @ContentChildren(ObjectListItemRowComponent)
     children: QueryList<ObjectListItemRowComponent>;
 }

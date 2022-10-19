@@ -605,6 +605,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      */
     private _checkedAny = false;
 
+    /** @hidden */
     get checkedState(): boolean | null {
         if (this._checkedAll) {
             return true;

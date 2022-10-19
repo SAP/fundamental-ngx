@@ -5,6 +5,7 @@ import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Pipe({ name: 'selectionCellStyles' })
 export class SelectionCellStylesPipe implements PipeTransform {
+    /** @hidden */
     transform(
         contentDensity: Nullable<ContentDensityMode>,
         rtl: boolean,

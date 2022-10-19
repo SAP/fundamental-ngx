@@ -99,6 +99,7 @@ export class TableP13DialogComponent implements OnDestroy {
     /** @hidden */
     _table: Table;
 
+    /** @hidden */
     constructor(private readonly _dialogService: DialogService) {}
 
     /** @hidden */

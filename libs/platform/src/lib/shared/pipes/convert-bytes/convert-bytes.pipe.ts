@@ -2,8 +2,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({ name: 'convertBytes' })
 export class ConvertBytesPipe implements PipeTransform {
+    /** @hidden */
     private readonly _sizes: string[] = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
+    /** @hidden */
     transform(bytes: number): string {
         return this._convertBytes(bytes);
     }

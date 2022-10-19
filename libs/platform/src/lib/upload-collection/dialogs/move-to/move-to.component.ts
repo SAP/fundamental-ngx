@@ -57,12 +57,14 @@ export class MoveToComponent implements OnInit {
     /** @hidden */
     _foldersList: UploadCollectionFolder[] = [];
 
+    /** @hidden */
     constructor(
         public readonly dialogRef: DialogRef<MoveToComponentDialogData>,
         private readonly _dialogService: DialogService,
         private readonly _cd: ChangeDetectorRef
     ) {}
 
+    /** @hidden */
     ngOnInit(): void {
         this._init(this._currentFolder ? this._currentFolder.files : this.items);
     }

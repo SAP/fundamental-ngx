@@ -14,7 +14,9 @@ let randomId = 0;
  */
 @Directive()
 export abstract class BaseComponent implements OnDestroy {
+    /** @hidden */
     protected defaultId = `fdp-id-${randomId++}`;
+    /** @hidden */
     protected _disabled = false;
 
     /** Sets the `aria-label` attribute to the element. */
@@ -49,14 +51,14 @@ export abstract class BaseComponent implements OnDestroy {
 
     /** disabled status of the element */
     @Input()
+    set disabled(disabled: boolean) {
+        this._disabled = disabled;
+    }
     get disabled(): boolean {
         return this._disabled;
     }
 
-    set disabled(disabled: boolean) {
-        this._disabled = disabled;
-    }
-
+    /** @hidden */
     constructor(protected _cd: ChangeDetectorRef) {}
 
     /** @hidden */

@@ -115,10 +115,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * Define form field label placement
      */
     @Input()
-    get labelLayout(): LabelLayout {
-        return this._labelLayout;
-    }
-
     set labelLayout(value: LabelLayout) {
         if (isDevMode()) {
             console.warn(
@@ -131,6 +127,9 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
             this._labelLayout === 'horizontal' ? DefaultHorizontalLabelLayout : DefaultVerticalLabelLayout;
         this.fieldColumnLayout =
             this._labelLayout === 'horizontal' ? DefaultHorizontalFieldLayout : DefaultVerticalFieldLayout;
+    }
+    get labelLayout(): LabelLayout {
+        return this._labelLayout;
     }
 
     /**
@@ -164,10 +163,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** object for placing field in column in each screen layout */
     @Input()
-    get columnLayout(): ColumnLayout {
-        return this._columnLayout;
-    }
-
     set columnLayout(layout: ColumnLayout | undefined) {
         if (!layout) {
             return;
@@ -176,15 +171,14 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this._isColumnLayoutEnabled = true;
         this._setLayout();
     }
+    get columnLayout(): ColumnLayout {
+        return this._columnLayout;
+    }
 
     /**
      * Defines label's column layout.
      */
     @Input()
-    get labelColumnLayout(): ColumnLayout {
-        return this._labelColumnLayout;
-    }
-
     set labelColumnLayout(value: ColumnLayout | undefined) {
         if (!value) {
             return;
@@ -193,15 +187,14 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this._labelColumnLayoutClass = generateColumnClass(this._labelColumnLayout);
         this._labelColumnLayout$.next(this._labelColumnLayout);
     }
+    get labelColumnLayout(): ColumnLayout {
+        return this._labelColumnLayout;
+    }
 
     /**
      * Defines field's column layout.
      */
     @Input()
-    get fieldColumnLayout(): ColumnLayout {
-        return this._fieldColumnLayout;
-    }
-
     set fieldColumnLayout(value: ColumnLayout | undefined) {
         if (!value) {
             return;
@@ -211,15 +204,14 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this._fieldColumnLayoutClass = generateColumnClass(this._fieldColumnLayout);
         this._fieldColumnLayout$.next(this._fieldColumnLayout);
     }
+    get fieldColumnLayout(): ColumnLayout {
+        return this._fieldColumnLayout;
+    }
 
     /**
      * Defines gap column layout.
      */
     @Input()
-    get gapColumnLayout(): ColumnLayout {
-        return this._gapColumnLayout;
-    }
-
     set gapColumnLayout(value: ColumnLayout | undefined) {
         if (!value) {
             return;
@@ -228,6 +220,9 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this._gapColumnLayout = normalizeColumnLayout(value);
         this._gapColumnLayoutClass = generateColumnClass(this._gapColumnLayout);
         this._gapColumnLayout$.next(this._gapColumnLayout);
+    }
+    get gapColumnLayout(): ColumnLayout {
+        return this._gapColumnLayout;
     }
 
     /**
@@ -239,22 +234,17 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** Set when form field is a mandatory one. */
     @Input()
-    get required(): boolean {
-        return this._required;
-    }
-
     set required(value: BooleanInput) {
         this._required = coerceBooleanProperty(value);
+    }
+    get required(): boolean {
+        return this._required;
     }
 
     /**
      * Indicates if field is editable
      */
     @Input()
-    get editable(): boolean {
-        return this._editable;
-    }
-
     set editable(value: BooleanInput) {
         const newVal = coerceBooleanProperty(value);
         if (this._editable !== newVal) {
@@ -262,17 +252,19 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
             this._updateControlProperties();
         }
     }
+    get editable(): boolean {
+        return this._editable;
+    }
 
     /**
      * Form field custom width in columns must be between 1 - 12
      */
     @Input()
-    get columns(): Column {
-        return this._columns;
-    }
-
     set columns(value: Column) {
         this._columns = <Column>coerceNumberProperty(value);
+    }
+    get columns(): Column {
+        return this._columns;
     }
 
     /**
@@ -497,6 +489,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this.listenToInlineHelpPlaceRequirementChanges(() => (this.labelColumnLayout ? this : this._groupHost));
     }
 
+    /** @hidden */
     listenToInlineHelpPlaceRequirementChanges(getSource: () => any): void {
         if (this._needsInlineHelpPlaceSubscription) {
             this._needsInlineHelpPlaceSubscription.unsubscribe();

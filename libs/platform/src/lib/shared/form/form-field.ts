@@ -71,5 +71,8 @@ export abstract class FormField {
      */
     unregisterFormFieldControl: (control: FormFieldControl<any>) => void;
 
+    /**
+     * Set default columns layout
+     */
     setDefaultColumnLayout: () => void;
 }

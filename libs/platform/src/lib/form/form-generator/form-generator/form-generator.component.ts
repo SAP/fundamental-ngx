@@ -76,10 +76,6 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      * to be rendered in the form.
      */
     @Input()
-    get formItems(): DynamicFormItem[] {
-        return this._formItems;
-    }
-
     set formItems(formItems: DynamicFormItem[]) {
         this._formItems = formItems.map((item, index) => {
             item = { ...item };
@@ -89,6 +85,9 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
             return item;
         });
         this._generateForm();
+    }
+    get formItems(): DynamicFormItem[] {
+        return this._formItems;
     }
 
     /**
@@ -120,10 +119,6 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      * Defines form field label placement.
      */
     @Input()
-    get labelLayout(): LabelLayout {
-        return this._labelLayout;
-    }
-
     set labelLayout(value: LabelLayout) {
         if (isDevMode()) {
             console.warn(
@@ -136,6 +131,9 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
             this._labelLayout === 'horizontal' ? DefaultHorizontalLabelLayout : DefaultVerticalLabelLayout;
         this.fieldColumnLayout =
             this._labelLayout === 'horizontal' ? DefaultHorizontalFieldLayout : DefaultVerticalFieldLayout;
+    }
+    get labelLayout(): LabelLayout {
+        return this._labelLayout;
     }
 
     /**
@@ -160,6 +158,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     @Input()
     unifiedLayout = true;
 
+    /** Inline column layout */
     @Input()
     inlineColumnLayout: ColumnLayout = DefaultVerticalFieldLayout;
 

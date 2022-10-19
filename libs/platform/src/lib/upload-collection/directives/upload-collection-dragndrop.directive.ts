@@ -73,6 +73,7 @@ export class UploadCollectionDragnDropDirective {
     /** @hidden */
     private elementSelector: string;
 
+    /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef,
         private readonly _filesValidatorService: FilesValidatorService

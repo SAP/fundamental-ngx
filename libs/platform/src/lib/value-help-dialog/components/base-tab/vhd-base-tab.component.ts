@@ -24,5 +24,6 @@ export class VhdBaseTab {
         return VhdTab.defineConditions;
     }
 
+    /** @hidden */
     constructor(readonly _changeDetectorRef: ChangeDetectorRef) {}
 }

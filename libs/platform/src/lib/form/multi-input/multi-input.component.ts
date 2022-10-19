@@ -63,6 +63,7 @@ let uniqueHiddenLabel = 0;
     ]
 })
 export class PlatformMultiInputComponent extends BaseMultiInput implements OnInit, AfterViewInit {
+    /** @hidden */
     protected tokenCountHiddenLabel = `fdp-multi-input-token-count-id-${uniqueHiddenLabel++}`;
 
     /** token  count hidden label */
@@ -77,17 +78,18 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     @Input()
     autofocus = false;
 
+    /** @hidden */
     @ViewChild(ListComponent)
     listTemplateDD: ListComponent<MultiInputOption>;
 
     /** Selected values from the list items. */
     _selected: any[] = [];
 
+    /** Selected items of the multi input. */
     @Input()
     set selected(selectedValue: any[]) {
         this.value = selectedValue;
     }
-
     get selected(): any[] {
         return this._selected;
     }
@@ -98,6 +100,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     @Input()
     selectionMode: SelectionType = 'none';
 
+    /** Whether the list in byline mode. */
     @Input()
     hasByLine = false;
 
@@ -112,13 +115,13 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     /** @hidden Whether the input is disabled. */
     protected _disabled = false;
 
+    /** Whether the multi input is disabled. */
     @Input()
-    get disabled(): boolean {
-        return this._disabled;
-    }
-
     set disabled(value) {
         this._disabled = value;
+    }
+    get disabled(): boolean {
+        return this._disabled;
     }
 
     /**
@@ -157,6 +160,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     @ViewChild('listTemplate')
     listTemplate: TemplateRef<any>;
 
+    /** @hidden */
     constructor(
         /** @hidden */
         readonly cd: ChangeDetectorRef,

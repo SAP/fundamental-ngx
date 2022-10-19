@@ -10,10 +10,14 @@ export interface DynamicFormGroupControls {
 }
 
 export class DynamicFormControlGroup extends FormGroup {
+    /** @hidden */
     public formItem: DynamicFormFieldGroup;
+    /** @hidden */
     public type = 'group';
+    /** @hidden */
     public controls: DynamicFormGroupControls;
 
+    /** @hidden */
     constructor(
         formItem: DynamicFormFieldGroup,
         controls: DynamicFormGroupControls,
@@ -26,7 +30,9 @@ export class DynamicFormControlGroup extends FormGroup {
 }
 
 export class DynamicFormControl extends FormControl {
+    /** @hidden */
     public formItem: PreparedDynamicFormFieldItem;
+    /** @hidden */
     public type = 'field';
 
     /**

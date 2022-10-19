@@ -96,11 +96,12 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
         return this.type ? `fd-button-split--${this.type}` : '';
     }
 
+    /** @hidden */
     constructor(protected _cd: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {
         super(_cd);
     }
 
-    // tabindex for button.
+    /** Tabindex for button. */
     get tabindex(): number {
         return this.disabled ? -1 : 0;
     }

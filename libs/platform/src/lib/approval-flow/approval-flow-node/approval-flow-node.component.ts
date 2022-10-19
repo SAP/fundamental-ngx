@@ -223,6 +223,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     @ContentChild(GridListItemComponent)
     _gridListItem: GridListItemComponent<ApprovalGraphNode>;
 
+    /** @hidden */
     readonly approvalFlowNodeId = 'fdp-approval-flow-node-' + defaultId++;
 
     /** @hidden */

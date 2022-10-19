@@ -60,22 +60,22 @@ export class RadioGroupComponent
     implements AfterViewInit, AfterContentChecked, OnDestroy
 {
     /** Value of selected radio button */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('selected')
-    get value(): any {
-        return super.getValue();
-    }
     set value(newValue: any) {
         super.setValue(newValue);
+    }
+    get value(): any {
+        return super.getValue();
     }
 
     /** To Display Radio buttons in a line */
     @Input()
-    get isInline(): boolean {
-        return this._inlineCurrentValue$.value;
-    }
-
     set isInline(inline: boolean) {
         this._inlineCurrentValue$.next(inline);
+    }
+    get isInline(): boolean {
+        return this._inlineCurrentValue$.value;
     }
 
     /** None value radio button created */
@@ -111,6 +111,7 @@ export class RadioGroupComponent
     /** @hidden FocusKeyManager instance */
     private _keyboardEventsManager: FocusKeyManager<RadioButtonComponent>;
 
+    /** @hidden */
     constructor(
         protected _cd: ChangeDetectorRef,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,

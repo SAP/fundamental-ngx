@@ -15,10 +15,12 @@ export class StepInputIncrementDirective extends StepInputActionButton {
         super();
     }
 
+    /** @hidden */
     canHandleAction(): boolean {
         return !!this.stepInput.canChangeValue;
     }
 
+    /** @hidden */
     runAction(): void {
         this.stepInput.increase();
     }

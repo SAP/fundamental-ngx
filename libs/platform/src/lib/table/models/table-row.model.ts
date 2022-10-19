@@ -7,6 +7,10 @@ export type TableRowState = 'editable' | 'readonly';
  * Used to represent table row in the template
  */
 export class TableRow<T = any> {
+    /**
+     * Table row entity
+     * Used to represent table row in the template
+     */
     constructor(
         /**
          * Row semantic type

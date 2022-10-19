@@ -35,17 +35,21 @@ export interface ItemDef {
 }
 
 export class ActionChangeEvent {
+    /** Action List Item component */
     source: ActionListItemComponent;
 }
 
 export class ModifyItemEvent {
+    /** List Item component */
     source: BaseListItem;
+    /** Action */
     action: 'delete' | 'edit';
 }
 
 @Directive({ selector: '[fdpItemDef]' })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class ListItemDef implements ItemDef {
+    /** @hidden */
     constructor(/** @docs-private */ public templateRef: TemplateRef<any>) {}
 }
 
@@ -244,11 +248,8 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      */
     private _selectionValue: Nullable<string>;
 
+    /** Selection value */
     @Input()
-    get selectionValue(): Nullable<string> {
-        return this._selectionValue;
-    }
-
     set selectionValue(value: Nullable<string>) {
         this._selected = false;
         this._selectionValue = value;
@@ -256,6 +257,10 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
             this._selected = this.value === this._selectionValue;
         }
     }
+    get selectionValue(): Nullable<string> {
+        return this._selectionValue;
+    }
+
     /**
      * @hidden
      * Show navigation for single list

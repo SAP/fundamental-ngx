@@ -19,16 +19,21 @@ export class UploadCollectionDataSource implements DataSource<UploadCollectionIt
     /** Max items for response */
     static readonly MaxLimit = Number.MAX_SAFE_INTEGER;
 
+    /** @hidden */
     protected _dataChanges = new BehaviorSubject<UploadCollectionItem[]>([]);
+    /** @hidden */
     protected _onDataRequested$ = new Subject<void>();
+    /** @hidden */
     protected _onDataReceived$ = new Subject<void>();
-
+    /** @hidden */
     protected _dataLoading = false;
 
+    /** @hidden */
     get isDataLoading(): boolean {
         return this._dataLoading;
     }
 
+    /** @hidden */
     constructor(public readonly dataProvider: UploadCollectionDataProvider) {}
 
     /** Filtering data */
@@ -104,16 +109,20 @@ export class UploadCollectionDataSource implements DataSource<UploadCollectionIt
         return this.dataProvider.cancelUploadNewFile(data).pipe(take(1));
     }
 
+    /** @hidden */
     open(): Observable<UploadCollectionItem[]> {
         return this._dataChanges.asObservable();
     }
 
+    /** @hidden */
     close(): void {}
 
+    /** @hidden */
     onDataRequested(): Observable<void> {
         return this._onDataRequested$.asObservable();
     }
 
+    /** @hidden */
     onDataReceived(): Observable<void> {
         return this._onDataReceived$.asObservable();
     }

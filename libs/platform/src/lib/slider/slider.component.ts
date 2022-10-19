@@ -94,6 +94,7 @@ export class SliderComponent extends BaseInput {
     @Output()
     readonly sliderChange = new EventEmitter<SliderChangeEvent>();
 
+    /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
         @Optional() @Self() ngControl: NgControl,
@@ -106,12 +107,11 @@ export class SliderComponent extends BaseInput {
 
     /** value for slider control */
     @Input()
-    get value(): any {
-        return this.getValue();
-    }
-
     set value(selectValue: any) {
         this.setValue(selectValue);
+    }
+    get value(): any {
+        return this.getValue();
     }
 
     /** @hidden */

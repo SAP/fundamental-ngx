@@ -27,5 +27,6 @@ export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResetButtonComponent {
+    /** @hidden */
     constructor(@Inject(RESETTABLE_TOKEN) public resettable: Resettable) {}
 }

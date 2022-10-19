@@ -80,6 +80,7 @@ export class SmartFilterBarConditionsDialogComponent {
         this._init();
     }
 
+    /** @hidden */
     private async _init(): Promise<void> {
         this.config = this._dialogRef.data;
 
