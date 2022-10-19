@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
  * For a template, add let-messageToast to your ng-template tag. Now using *messageToast* in the template refers to this class.
  */
 export class MessageToastRef {
+    /** @hidden */
     private readonly _afterTimeout = new Subject<void>();
 
     /** Observable that is triggered when the message toast has timed out. */

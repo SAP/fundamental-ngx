@@ -217,16 +217,14 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     /** @hidden */
     onTouched: any = () => {};
 
-    /** Get the value of the text input. */
-    get inputText(): string {
-        return this._inputTextValue;
-    }
-
-    /** Set the value of the text input. */
+    /** Value of the text input. */
     set inputText(value) {
         this._inputTextValue = value;
 
         this.onChange(value);
+    }
+    get inputText(): string {
+        return this._inputTextValue;
     }
 
     /** @hidden

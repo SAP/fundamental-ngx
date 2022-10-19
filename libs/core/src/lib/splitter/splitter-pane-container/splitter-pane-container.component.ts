@@ -430,8 +430,10 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
 
 @Pipe({ name: 'noDefaultPane' })
 export class NoDefaultPanePipe implements PipeTransform {
+    /** @hidden */
     constructor(private readonly _splitterPaneContainer: SplitterPaneContainerComponent) {}
 
+    /** @hidden */
     transform(value: SplitterSplitPaneComponent[], excludingCondition = true): SplitterSplitPaneComponent[] {
         if (!excludingCondition) {
             return value;

@@ -14,6 +14,7 @@ export class DeprecatedContentDensityService implements OnDestroy {
     /** Content Density BehaviourSubject */
     readonly contentDensity = new BehaviorSubject<ContentDensityMode>(this._defaultContentDensity);
 
+    /** @hidden */
     constructor(
         private _contentDensityController: GlobalContentDensityService,
         @Inject(DEFAULT_CONTENT_DENSITY) private _defaultContentDensity: ContentDensityMode

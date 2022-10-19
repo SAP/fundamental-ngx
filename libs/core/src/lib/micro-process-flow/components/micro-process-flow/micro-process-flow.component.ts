@@ -117,6 +117,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
     /** @hidden */
     private _navigationKeys = [LEFT_ARROW, RIGHT_ARROW];
 
+    /** @hidden */
     private _actionKeys = [SPACE, ENTER];
 
     /** @hidden */
@@ -342,6 +343,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
             .reduce((width, item) => item.elRef.nativeElement.offsetWidth + width, 0);
     }
 
+    /** @hidden */
     private _disableFocusableItems(): void {
         this.items.forEach((item) => item.focusableElement?.setFocusable(false));
     }

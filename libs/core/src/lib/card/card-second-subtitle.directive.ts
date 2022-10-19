@@ -19,8 +19,8 @@ export class CardSecondSubtitleDirective implements OnInit, CssClassBuilder {
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
     /** @hidden */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [CLASS_NAME.cardSecondSubtitle];
     }

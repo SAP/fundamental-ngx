@@ -11,6 +11,7 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCompactDirective } from '@fundamen
     ]
 })
 export class DeprecatedFormControlContentDensityDirective extends DeprecatedCompactDirective {
+    /** @hidden */
     constructor() {
         super('input[fd-form-control][compact], textarea[fd-form-control]');
     }

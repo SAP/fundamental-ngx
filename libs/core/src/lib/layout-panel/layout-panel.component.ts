@@ -31,6 +31,7 @@ export class LayoutPanelComponent implements OnChanges, OnInit {
     @HostBinding('class.fd-layout-panel')
     fdLayoutPanelClass = true;
 
+    /** @hidden */
     constructor(private elRef: ElementRef) {}
 
     /** @hidden */
@@ -43,6 +44,7 @@ export class LayoutPanelComponent implements OnChanges, OnInit {
         this._applyBackgroundImage();
     }
 
+    /** @hidden */
     private _applyBackgroundImage(): void {
         if (this.backgroundImage) {
             (this.elRef.nativeElement as HTMLElement).style['background-image'] = 'url("' + this.backgroundImage + '")';

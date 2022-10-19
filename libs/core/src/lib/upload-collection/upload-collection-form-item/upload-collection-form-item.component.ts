@@ -29,17 +29,15 @@ export class UploadCollectionFormItemComponent implements ControlValueAccessor {
     @Output()
     readonly fileNameChanged = new EventEmitter<string>();
 
-    /** Get the value of the text input. */
-    get fileName(): string {
-        return this._fileNameValue;
-    }
-
-    /** Set the value of the text input. */
+    /** Value of the text input. */
     set fileName(value) {
         this._fileNameValue = value;
         this.onChange(value);
         this.onTouched();
         this.fileNameChanged.emit(value);
+    }
+    get fileName(): string {
+        return this._fileNameValue;
     }
 
     /** @hidden */

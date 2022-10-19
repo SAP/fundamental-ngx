@@ -31,6 +31,7 @@ export class WizardStepIndicatorComponent implements OnDestroy {
     @Output()
     stepIndicatorItemClicked = new EventEmitter<WizardStepComponent>();
 
+    /** @hidden */
     @ViewChild(ActionSheetComponent)
     actionSheet: ActionSheetComponent;
 
@@ -40,6 +41,7 @@ export class WizardStepIndicatorComponent implements OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(private _cdRef: ChangeDetectorRef) {}
 
     /** @hidden */

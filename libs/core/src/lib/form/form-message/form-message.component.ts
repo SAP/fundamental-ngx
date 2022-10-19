@@ -49,6 +49,7 @@ export class FormMessageComponent implements CssClassBuilder, OnInit, OnChanges 
     @Input()
     class: string;
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */

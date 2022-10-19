@@ -94,6 +94,7 @@ export class PanelComponent implements OnInit, OnDestroy {
         this._listenRtl();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
     }

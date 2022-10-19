@@ -107,6 +107,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     /** @hidden */
     private _directionPosition: 'left' | 'right' = 'left';
 
+    /** @hidden */
     constructor(
         private readonly _cd: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
@@ -164,19 +165,18 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
         }
     }
 
+    /** @hidden */
     @HostListener('window:resize')
     onResize(): void {
         this._createLayout();
     }
 
-    /** return layout size */
-    get layoutSize(): LayoutSize {
-        return this._layout;
-    }
-
-    /** set layout size. available options are 'sm', 'md', 'lg' and 'xl' */
+    /** Layout size. Available options are 'sm', 'md', 'lg' and 'xl' */
     set layoutSize(layoutSize: LayoutSize) {
         this._layout = layoutSize;
+    }
+    get layoutSize(): LayoutSize {
+        return this._layout;
     }
 
     /**
@@ -224,6 +224,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
         return this._elementRef;
     }
 
+    /** @hidden */
     updateLayout(): void {
         this.resizeCardItems?.forEach((card) => {
             card?.verifyUpdateCardWidth(this.layoutSize);
@@ -437,7 +438,6 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      * Method to loop till this._columns -1 positions and exchange the rank
      * @param currentCardIndex: Index of current card
      */
-
     private _moveCardDown(currentCardIndex: number): void {
         // taking width of adjacent card col-span into account
 

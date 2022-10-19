@@ -30,6 +30,7 @@ export class CardFooterComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _destroyed$ = new Subject<void>();
 
+    /** @hidden */
     constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */

@@ -25,6 +25,7 @@ export class ListLinkDirective implements OnChanges {
     /** Emits when some of the properties, that should be read by screenreader, are changed */
     readonly _onReadablePropertyChanged$ = new Subject<void>();
 
+    /** @hidden */
     constructor(public elementRef: ElementRef) {}
 
     /** @hidden */

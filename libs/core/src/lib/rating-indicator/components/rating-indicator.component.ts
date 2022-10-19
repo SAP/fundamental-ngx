@@ -171,6 +171,7 @@ export class RatingIndicatorComponent
     @Output()
     ratingChanged = new EventEmitter<number>();
 
+    /** @hidden */
     sizeClass = this._getSizeClass(this.size);
     /** @hidden */
     _rates: { id: string; value: number }[] = [];
@@ -280,11 +281,12 @@ export class RatingIndicatorComponent
         return this._elementRef;
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         this.sizeClass = this._getSizeClass(this.size);
 

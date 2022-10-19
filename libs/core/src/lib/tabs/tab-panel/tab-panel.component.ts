@@ -25,6 +25,11 @@ import { TabListComponentInterface } from '../tab-list-component.interface';
 let tabPanelUniqueId = 0;
 
 export class TabPanelStateChange {
+    /**
+     * Tab panel state change event
+     * @param target Tab panel that is being changed
+     * @param state New state of the tab panel
+     */
     constructor(public target: TabPanelComponent, public state: boolean) {}
 }
 

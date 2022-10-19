@@ -6,9 +6,8 @@ import { uuidv4 } from '../functions/uuidv4-generator';
     providedIn: 'root'
 })
 export class FocusTrapService {
+    /** @hidden */
     private _focusTrapInstances: Map<any, FocusTrap> = new Map();
-
-    constructor() {}
 
     /**
      * Creates focus trap instance for defined element

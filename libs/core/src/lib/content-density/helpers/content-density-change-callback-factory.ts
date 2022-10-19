@@ -4,6 +4,7 @@ import { defaultContentDensityObserverConfigs } from '../variables/default-conte
 import { ContentDensityObserverSettings } from '../classes/content-density-observer.settings';
 import { ContentDensityMode } from '../types/content-density.mode';
 
+/** Content density callback factory */
 export function contentDensityCallbackFactory(
     consumerConfig: ContentDensityObserverTarget | ContentDensityCallbackFn
 ): ContentDensityCallbackFn {

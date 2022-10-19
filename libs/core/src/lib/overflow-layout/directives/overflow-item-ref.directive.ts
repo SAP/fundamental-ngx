@@ -24,16 +24,16 @@ export class OverflowItemRefDirective<T = any> implements OverflowItemRef<T> {
      * `fdOverflowLayoutItem` directive.
      */
     overflowItem: OverflowItem;
+
     /**
      * Whether the item is hidden.
      */
-    get hidden(): boolean {
-        return this._hidden;
-    }
-
     set hidden(value: boolean) {
         this._hidden = value;
         this.overflowItem.hiddenChange.emit(value);
+    }
+    get hidden(): boolean {
+        return this._hidden;
     }
 
     /** @hidden */

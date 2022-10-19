@@ -51,6 +51,7 @@ export class MultiInputMobileComponent
     /** @hidden */
     private _selectedBackup: any[];
 
+    /** @hidden */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
@@ -71,6 +72,7 @@ export class MultiInputMobileComponent
         this.dialogRef.hide(true);
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this.dialogRef.close();
         super.onDestroy();

@@ -106,6 +106,7 @@ export class PopoverBodyComponent {
         }
     }
 
+    /** @hidden */
     constructor(
         readonly _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,

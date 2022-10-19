@@ -56,6 +56,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     @Input('fd-inline-help-template')
     inlineHelpTemplate: Nullable<TemplateRef<any>> = null;
 
+    /** @hidden */
     constructor(
         private _popoverService: PopoverService,
         private _elementRef: ElementRef,

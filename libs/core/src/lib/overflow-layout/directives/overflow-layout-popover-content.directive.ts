@@ -46,6 +46,7 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
     @HostBinding('class')
     private readonly _initialClass = 'fd-overflow-layout__popover-container';
 
+    /** @hidden */
     private _dir: 'ltr' | 'rtl' = 'ltr';
 
     /** @hidden */

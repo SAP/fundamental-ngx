@@ -43,6 +43,7 @@ function generateContentDensityStorage(config: ContentDensityModuleConfig): Prov
     declarations: [ContentDensityDirective]
 })
 export class ContentDensityModule {
+    /** Module with providers */
     static forRoot(config?: ContentDensityModuleConfig): ModuleWithProviders<ContentDensityModule> {
         let storage: Provider;
         const conf: ContentDensityModuleConfig = config || { storage: 'memory' };

@@ -12,6 +12,7 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCompactDirective } from '@fundamen
     ]
 })
 export class DeprecatedListContentDensityDirective extends DeprecatedCompactDirective {
+    /** @hidden */
     constructor() {
         super('[fd-list][compact], [fdList]');
     }

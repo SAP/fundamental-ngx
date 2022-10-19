@@ -11,6 +11,7 @@ import { Directive, forwardRef } from '@angular/core';
     ]
 })
 export class DeprecatedTableCompactDirective extends DeprecatedCompactDirective {
+    /** @hidden */
     constructor() {
         super('table[fd-table]');
     }

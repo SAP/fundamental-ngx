@@ -216,6 +216,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     /** Get information about amount of years displayed at once on year view  */
     private _amountOfYearsPerPeriod = 1;
 
+    /** @hidden */
     constructor(
         private _calendarI18nLabels: CalendarI18nLabels,
         private _changeDetRef: ChangeDetectorRef,
@@ -363,6 +364,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         )}`;
     }
 
+    /** @hidden */
     private _calculateMonthNames(): void {
         this._monthNames = this._dateTimeAdapter.getMonthNames('long');
     }

@@ -9,6 +9,7 @@ import { BasePopoverClass } from '@fundamental-ngx/core/popover';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductSwitchComponent extends BasePopoverClass {
+    /** Placement of a popover. */
     @Input()
     placement: Placement = 'bottom-end';
 

@@ -4,6 +4,7 @@ import { Inject, Injectable, Optional } from '@angular/core';
 
 @Injectable()
 export class TabbableElementService {
+    /** @hidden */
     constructor(
         private readonly _checker: InteractivityChecker,
         @Optional() @Inject(DOCUMENT) private readonly _document: Document | null

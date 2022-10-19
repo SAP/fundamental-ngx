@@ -44,8 +44,10 @@ export class FileUploaderDragndropDirective {
     @Output()
     readonly dragLeave = new EventEmitter<void>();
 
+    /** @hidden */
     private elementStateCounter = 0;
 
+    /** @hidden */
     constructor(private _fileUploadService: FileUploaderService) {}
 
     /** @hidden */

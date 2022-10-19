@@ -87,24 +87,24 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** Represents the current page number. */
     @Input()
-    get currentPage(): number {
-        return this._currentPage;
-    }
     set currentPage(value: number) {
         this._currentPage = Math.floor(coerceNumberProperty(value, 1));
+    }
+    get currentPage(): number {
+        return this._currentPage;
     }
 
     /** Represents the number of items per page. */
     @Input()
-    get itemsPerPage(): number {
-        return this._itemsPerPage;
-    }
     set itemsPerPage(value: number) {
         value = Math.floor(coerceNumberProperty(value, DEFAULT_ITEMS_PER_PAGE));
 
         this._itemsPerPage = Math.max(value, 1);
 
         this._updateDisplayedPageSizeOptions();
+    }
+    get itemsPerPage(): number {
+        return this._itemsPerPage;
     }
 
     /**
@@ -124,9 +124,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** Represents the options for items per page. */
     @Input()
-    get itemsPerPageOptions(): number[] {
-        return this._itemsPerPageOptions;
-    }
     set itemsPerPageOptions(value: number[]) {
         this._itemsPerPageOptions = coerceArray<number>(value)
             .map((v) => coerceNumberProperty(v, 0))
@@ -135,6 +132,9 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
             .sort((a, b) => a - b);
 
         this._updateDisplayedPageSizeOptions();
+    }
+    get itemsPerPageOptions(): number[] {
+        return this._itemsPerPageOptions;
     }
 
     /** Whether to display the total number of items. */

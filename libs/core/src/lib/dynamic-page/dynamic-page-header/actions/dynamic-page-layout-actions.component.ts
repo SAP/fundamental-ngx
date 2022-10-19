@@ -23,12 +23,14 @@ import { Subject } from 'rxjs';
     }
 })
 export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions implements AfterContentInit {
+    /** @hidden */
     @ContentChild(ToolbarComponent)
     toolbarComponent: ToolbarComponent;
 
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
     constructor(
         private _elementRef: ElementRef,
         private _renderer: Renderer2,

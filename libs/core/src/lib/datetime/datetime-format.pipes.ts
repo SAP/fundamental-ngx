@@ -6,11 +6,13 @@ import { DatetimeAdapter } from './datetime-adapter';
     name: 'dateFormat'
 })
 export class DateFormatPipe<D> implements PipeTransform {
+    /** @hidden */
     constructor(
         private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {}
 
+    /** Format date object */
     transform(date: D, noDateMessage = ''): string {
         if (date) {
             return this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateInput);
@@ -24,11 +26,13 @@ export class DateFormatPipe<D> implements PipeTransform {
     name: 'dateTimeFormat'
 })
 export class DateTimeFormatPipe<D> implements PipeTransform {
+    /** @hidden */
     constructor(
         private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {}
 
+    /** Format date object */
     transform(date: D, noDateMessage = ''): string {
         if (date) {
             return this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateTimeInput);
@@ -42,8 +46,10 @@ export class DateTimeFormatPipe<D> implements PipeTransform {
     name: 'dateFromNow'
 })
 export class DateFromNowPipe<D> implements PipeTransform {
+    /** @hidden */
     constructor(private _dateTimeAdapter: DatetimeAdapter<D>) {}
 
+    /** Format date object */
     transform(date: D, noDateMessage = ''): string {
         if (this._dateTimeAdapter.fromNow && typeof this._dateTimeAdapter.fromNow === 'function') {
             if (date) {

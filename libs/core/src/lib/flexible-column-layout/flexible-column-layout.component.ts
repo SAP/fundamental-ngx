@@ -172,6 +172,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      */
     private _responsiveFullscreenLayout = false;
 
+    /** @hidden */
     constructor(@Inject(FD_FLEXIBLE_LAYOUT_CONFIG) private readonly _config: FlexibleLayoutConfig) {}
 
     /**

@@ -116,11 +116,11 @@ export class MultiInputComponent
 
     /** Search term, or more specifically the value of the inner input field. */
     @Input()
-    get searchTerm(): string {
-        return this._searchTermCtrl.value ?? '';
-    }
     set searchTerm(value: string) {
         this._searchTermCtrl.setValue(value);
+    }
+    get searchTerm(): string {
+        return this._searchTermCtrl.value ?? '';
     }
 
     /** Id attribute for input element inside MultiInput component */
@@ -133,12 +133,12 @@ export class MultiInputComponent
 
     /** Selected dropdown items. */
     @Input()
-    get selected(): any[] {
-        return this._selectionModel.selected;
-    }
     set selected(values: any[]) {
         this._selectionModel.clear();
         values?.forEach((item) => this._selectionModel.select(item));
+    }
+    get selected(): any[] {
+        return this._selectionModel.selected;
     }
 
     /** user's custom classes */
@@ -405,11 +405,11 @@ export class MultiInputComponent
         this._subscriptions.unsubscribe();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         // TODO: this icon flip may be addressed in styles in the future
         if (this.glyph === 'value-help' && this._dir === 'rtl') {
@@ -576,6 +576,7 @@ export class MultiInputComponent
         this._propagateChange();
     }
 
+    /** @hidden */
     _handleInputKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && !this.mobile) {
             if (event.altKey) {

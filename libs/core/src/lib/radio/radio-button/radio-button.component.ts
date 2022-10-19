@@ -112,6 +112,7 @@ export class RadioButtonComponent
     @Input()
     required = false;
 
+    /** Whether the radio button is checked. */
     get checked(): boolean {
         if (this.value === undefined) {
             return false;

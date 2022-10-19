@@ -8,8 +8,10 @@ import { ContentDensityMode } from '../types/content-density.mode';
 
 @Injectable()
 export class LocalContentDensityStorage implements ContentDensityStorage {
+    /** @hidden */
     private _update$ = new Subject<void>();
 
+    /** @hidden */
     constructor(
         @Inject(DEFAULT_CONTENT_DENSITY) private _defaultContentDensity: ContentDensityMode,
         @Inject(CONTENT_DENSITY_STORAGE_KEY) private _storageKey: string,
@@ -18,6 +20,7 @@ export class LocalContentDensityStorage implements ContentDensityStorage {
         this._initialize();
     }
 
+    /** Content density observable */
     getContentDensity(): Observable<ContentDensityMode> {
         return new Observable<ContentDensityMode>((subscriber) => {
             subscriber.next(this._storage.get(this._storageKey));
@@ -30,12 +33,14 @@ export class LocalContentDensityStorage implements ContentDensityStorage {
         });
     }
 
+    /** Change content density */
     setContentDensity(density: ContentDensityMode): Observable<void> {
         this._storage.set(this._storageKey, density);
         this._update$.next();
         return of(undefined);
     }
 
+    /** @hidden */
     private _initialize(): void {
         if (!this._storage.get(this._storageKey)) {
             this._storage.set(this._storageKey, this._defaultContentDensity);

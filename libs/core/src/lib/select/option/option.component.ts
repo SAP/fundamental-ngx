@@ -22,9 +22,14 @@ let optionUniqueId = 0;
 
 /**
  * Event object emitted by OptionComponent when
- * selected or deselected. *
+ * selected or deselected.
  */
 export class FdOptionSelectionChange {
+    /**
+     * Reference to the OptionComponent that emitted the event.
+     * @param source The option that emitted the event.
+     * @param isUserInput Whether the change in the option's value was a result of a user interaction.
+     */
     constructor(
         /** Reference to the option that emitted the event. */
         readonly source: OptionComponent,
@@ -87,6 +92,7 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
     @Output()
     readonly selectionChange = new EventEmitter<FdOptionSelectionChange>();
 
+    /** @hidden */
     @HostBinding('class.is-selected')
     selected = false;
 
@@ -102,6 +108,7 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
         return this._active;
     }
 
+    /** @hidden */
     readonly _stateChanges = new Subject<void>();
 
     /** @hidden */

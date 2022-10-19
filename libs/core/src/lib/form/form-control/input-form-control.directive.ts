@@ -20,6 +20,7 @@ import {
     }
 })
 export class InputFormControlDirective {
+    /** @hidden */
     constructor(private _contentDensityObserver: ContentDensityObserver) {
         _contentDensityObserver.subscribe();
     }

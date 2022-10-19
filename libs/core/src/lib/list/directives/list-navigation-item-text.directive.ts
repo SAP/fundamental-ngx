@@ -8,6 +8,7 @@ export class ListNavigationItemTextDirective {
     @HostBinding('class.fd-list__navigation-item-text')
     navigationItemTextClass = true;
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */

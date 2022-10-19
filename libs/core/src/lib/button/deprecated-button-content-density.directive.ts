@@ -12,6 +12,7 @@ import { Directive, forwardRef } from '@angular/core';
     ]
 })
 export class DeprecatedButtonContentDensityDirective extends DeprecatedCompactDirective {
+    /** @hidden */
     constructor() {
         super('[fd-button]');
     }

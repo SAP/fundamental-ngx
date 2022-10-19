@@ -28,6 +28,7 @@ export class CarouselDirective implements AfterContentInit {
     @Input()
     active: CarouselItemDirective;
 
+    /** @hidden */
     get carouselService(): CarouselService {
         return this._carouselService;
     }
@@ -60,10 +61,12 @@ export class CarouselDirective implements AfterContentInit {
         this._carouselService.goToItem(item, smooth);
     }
 
+    /** Pick previous carousel item */
     pickPrevious(): void {
         this._carouselService.pickPrevious();
     }
 
+    /** Pick next carousel item */
     pickNext(): void {
         this._carouselService.pickNext();
     }

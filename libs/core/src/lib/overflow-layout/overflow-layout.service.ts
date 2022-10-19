@@ -20,9 +20,16 @@ export interface OverflowLayoutConfig {
 }
 
 export class OverflowLayoutListeningResult {
+    /** Whether to show more button */
     showMore = false;
+
+    /** Overflow item s */
     items: OverflowItemRef[] = [];
+
+    /** Hidden overflow items */
     hiddenItems: OverflowItemRef[] = [];
+
+    /** Visible overflow items */
     visibleItems: OverflowItemRef[] = [];
 }
 
@@ -84,6 +91,7 @@ export class OverflowLayoutService implements OnDestroy {
         this._subscription.unsubscribe();
     }
 
+    /** @hidden */
     startListening(config: OverflowLayoutConfig): void {
         this.setConfig(config);
         this.fitVisibleItems();
@@ -92,10 +100,12 @@ export class OverflowLayoutService implements OnDestroy {
         this._subscribeToRtl();
     }
 
+    /** @hidden */
     setConfig(config: OverflowLayoutConfig): void {
         this.config = config;
     }
 
+    /** @hidden */
     private _emitResult(): void {
         this._result$.next(this.result);
     }

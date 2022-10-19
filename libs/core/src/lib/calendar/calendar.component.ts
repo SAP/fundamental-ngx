@@ -322,6 +322,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         }
     }
 
+    /** @hidden */
     getWeekStartDay(): DaysOfWeek {
         return this.startingDayOfWeek === undefined ? this._adapterStartingDayOfWeek : this.startingDayOfWeek;
     }
@@ -575,12 +576,14 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         this.activeViewChange.emit(this.activeView);
     }
 
+    /** Select year */
     selectedYear(yearSelected: number): void {
         this.activeView = 'day';
         this._currentlyDisplayed.year = yearSelected;
         this.onDaysViewSelected();
     }
 
+    /** Select year range */
     selectedYears(yearsSelected: AggregatedYear): void {
         this.activeView = 'year';
         this._currentlyDisplayed = {

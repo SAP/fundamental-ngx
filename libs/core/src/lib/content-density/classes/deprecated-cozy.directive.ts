@@ -12,6 +12,7 @@ export class DeprecatedCozyDirective
     extends BehaviorSubject<ContentDensityMode>
     implements OnDestroy, ModuleDeprecation
 {
+    /** @deprecated use fdCozy directive instead */
     @Input()
     set cozy(value: BooleanInput) {
         if (isDevMode()) {
@@ -20,17 +21,22 @@ export class DeprecatedCozyDirective
         this.next(coerceBooleanProperty(value) ? ContentDensityMode.COZY : ContentDensityMode.COMPACT);
     }
 
+    /** @hidden */
     readonly message: string;
+
+    /** @hidden */
     readonly alternative = {
         name: 'Use [fdCozy] directive instead',
         link: ['/core', 'content-density']
     };
 
+    /** @hidden */
     constructor(selectorBase: string) {
         super(ContentDensityMode.COMPACT);
         this.message = `Usage of ${selectorBase}[cozy] is deprecated`;
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this.complete();
     }

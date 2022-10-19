@@ -19,6 +19,7 @@ export class NestedListKeyboardService {
      */
     readonly refresh$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
     constructor(@Inject(MenuKeyboardService) private keyboardService: MenuKeyboardService) {}
 
     /**

@@ -9,13 +9,18 @@ export type MessageBoxType = 'error' | 'success' | 'warning' | 'information' | '
 
 /** @hidden */
 export abstract class MessageBoxHost {
+    /** @hidden */
     _messageBoxConfig: MessageBoxConfig | undefined;
 }
 
 @Injectable()
 export class MessageBoxConfig<T = any> extends DialogConfigBase<T> {
+    /** Message box type */
     type?: MessageBoxType;
+    /** Whether to show the semantic icon */
     showSemanticIcon?: boolean = false;
+    /** Custom semantic icon name */
     customSemanticIcon?: string;
+    /** Injector */
     injector?: Injector;
 }

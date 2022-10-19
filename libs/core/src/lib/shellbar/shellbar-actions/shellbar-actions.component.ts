@@ -99,6 +99,7 @@ export class ShellbarActionsComponent {
         }
     }
 
+    /** @hidden */
     public get userItem(): ShellbarUser {
         if (this.userComponent) {
             return this.userComponent.user;

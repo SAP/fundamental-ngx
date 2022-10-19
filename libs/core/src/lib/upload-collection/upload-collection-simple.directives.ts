@@ -24,6 +24,7 @@ export class UploadCollectionThumbnailDirective {}
     host: { class: 'fd-upload-collection__title' }
 })
 export class UploadCollectionTitleDirective {
+    /** @hidden */
     constructor(public elRef: ElementRef) {}
 }
 
@@ -54,8 +55,10 @@ export class UploadCollectionStatusGroupDirective {}
     host: { class: 'fd-upload-collection__status-group-item' }
 })
 export class UploadCollectionStatusItemDirective implements OnInit {
+    /** @hidden */
     constructor(@Optional() @Inject(ObjectStatusComponent) private _objectStatus: ObjectStatusComponent) {}
 
+    /** @hidden */
     ngOnInit(): void {
         if (this._objectStatus) {
             this._objectStatus._textClass += ' fd-upload-collection__status-group-item-text';

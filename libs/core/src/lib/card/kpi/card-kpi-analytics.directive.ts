@@ -20,8 +20,8 @@ export class CardKpiAnalyticsDirective implements OnInit, CssClassBuilder {
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
     /** @hidden */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [CLASS_NAME.cardAnalytics];
     }

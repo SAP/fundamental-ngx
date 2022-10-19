@@ -133,6 +133,7 @@ export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder 
     @HostBinding('attr.aria-label')
     ariaLabel = 'Refresh';
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -145,11 +146,12 @@ export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder 
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-tile__refresh', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
     }
@@ -290,6 +292,7 @@ export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuil
     @Input()
     class: string;
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -303,11 +306,12 @@ export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuil
         this._addCloseIcon();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-tile__action-close', this.class];
     }
@@ -332,6 +336,7 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClass
     @Input()
     class: string;
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -345,11 +350,12 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClass
         this._addIndicatorIcon();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-tile__action-indicator', this.class];
     }

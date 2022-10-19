@@ -21,8 +21,8 @@ export class CardContentComponent implements OnInit, CssClassBuilder {
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
     /** @hidden */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [CLASS_NAME.cardContent];
     }

@@ -13,6 +13,7 @@ export class PopoverContainerDirective implements OnInit, OnDestroy {
     /** @hidden */
     private _destroy$ = new Subject<void>();
 
+    /** @hidden */
     constructor(private _elmRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */

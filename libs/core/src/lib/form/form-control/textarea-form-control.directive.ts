@@ -20,6 +20,7 @@ import {
     }
 })
 export class TextareaFormControlDirective {
+    /** @hidden */
     constructor(private _contentDensityObserver: ContentDensityObserver) {
         _contentDensityObserver.subscribe();
     }

@@ -145,25 +145,30 @@ export class TokenizerComponent
     /** @hidden */
     _showOverflowPopover = true;
 
-    /** @hidden */
-    /* Variable which will keep the index of the first token pressed in the tokenizer*/
+    /** @hidden
+     * Variable which will keep the index of the first token pressed in the tokenizer
+     */
     private _firstElementInSelection: number | null = null;
 
-    /** @hidden */
-    /* Variable which will keep the index of the last token pressed in the tokenizer*/
+    /** @hidden
+     * Variable which will keep the index of the last token pressed in the tokenizer
+     */
     private _lastElementInSelection: number | null = null;
 
-    /** @hidden */
-    /* Flag which will say if the last keyboard and click operation they used was using control*/
+    /** @hidden
+     * Flag which will say if the last keyboard and click operation they used was using control
+     */
     private _ctrlPrevious: boolean;
 
-    /** @hidden */
-    /* Flag which will say if they held shift and clicked highlighting elements before or*/
+    /** @hidden
+     * Flag which will say if they held shift and clicked highlighting elements before or
+     */
     private _directionShiftIsRight: boolean | null = null;
 
     /** An RxJS Subject that will kill the data stream upon destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
     constructor(
         readonly _contentDensityObserver: ContentDensityObserver,
         private _elementRef: ElementRef,
@@ -232,15 +237,17 @@ export class TokenizerComponent
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [this.class];
     }
 
+    /** @hidden */
     elementRef(): ElementRef {
         return this._elementRef;
     }
@@ -527,6 +534,7 @@ export class TokenizerComponent
         elementRef.nativeElement.style.visibility = 'visible';
     }
 
+    /** @hidden */
     private _unsubscribeClicks(): void {
         if (this.tokenListClickSubscriptions && this.tokenListClickSubscriptions.length) {
             this.tokenListClickSubscriptions.forEach((subscription) => {
@@ -535,6 +543,7 @@ export class TokenizerComponent
         }
     }
 
+    /** @hidden */
     private _inputKeydownEvent(): void {
         this.input.elementRef().nativeElement.addEventListener('keydown', (event) => {
             this.handleKeyDown(event, this.tokenList.length);

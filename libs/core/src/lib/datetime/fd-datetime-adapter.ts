@@ -23,8 +23,10 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /** Whether to clamp the date between 1 and 9999 to avoid IE and Edge errors. */
     private readonly _fixYearsRangeIssue: boolean;
 
+    /** @hidden */
     fromNow: undefined;
 
+    /** @hidden */
     constructor(@Optional() @Inject(LOCALE_ID) localeId: string, platform: Platform) {
         super();
 
@@ -33,34 +35,42 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         this._fixYearsRangeIssue = platform.TRIDENT || platform.EDGE;
     }
 
+    /** Get year */
     getYear(date: FdDate): number {
         return date.year;
     }
 
+    /** Get month */
     getMonth(date: FdDate): number {
         return date.month;
     }
 
+    /** Get date */
     getDate(date: FdDate): number {
         return date.day;
     }
 
+    /** Get day of week */
     getDayOfWeek(date: FdDate): number {
         return this._createDateInstanceByFdDate(date).getDay() + 1;
     }
 
+    /** Get hours */
     getHours(date: FdDate): number {
         return date.hour;
     }
 
+    /** Get minutes */
     getMinutes(date: FdDate): number {
         return date.minute;
     }
 
+    /** Get seconds */
     getSeconds(date: FdDate): number {
         return date.second;
     }
 
+    /** Get week number */
     getWeekNumber(fdDate: FdDate): number {
         const date = this._createDateInstanceByFdDate(fdDate);
 
@@ -75,6 +85,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         );
     }
 
+    /** Get month names */
     getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
         const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { month: style, timeZone: 'utc' });
         return range(12, (i) =>
@@ -82,6 +93,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         );
     }
 
+    /** Get date names */
     getDateNames(): string[] {
         const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { day: 'numeric', timeZone: 'utc' });
         return range(31, (i) =>
@@ -89,6 +101,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         );
     }
 
+    /** Get day of week names */
     getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
         const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { weekday: style, timeZone: 'utc' });
         return range(7, (i) =>
@@ -96,17 +109,20 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         );
     }
 
+    /** Get year name */
     getYearName(date: FdDate): string {
         const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { year: 'numeric', timeZone: 'utc' });
         const dateInstance = this._createDateInstanceByFdDate(date);
         return this._stripDirectionalityCharacters(this._format(dateTimeFormat, dateInstance));
     }
 
+    /** Get week name */
     getWeekName(date: FdDate): string {
         const weekNumber = this.getWeekNumber(date);
         return weekNumber.toLocaleString(this.locale);
     }
 
+    /** Get hour names */
     getHourNames({ meridian, twoDigit }: { twoDigit: boolean; meridian: boolean }): string[] {
         return range(24, (hour) => {
             if (meridian) {
@@ -116,14 +132,17 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         });
     }
 
+    /** Get minute names */
     getMinuteNames({ twoDigit }: { twoDigit: boolean }): string[] {
         return range(60, (minute) => minute.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 }));
     }
 
+    /** Get second names */
     getSecondNames({ twoDigit }: { twoDigit: boolean }): string[] {
         return range(60, (second) => second.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 }));
     }
 
+    /** Get day period names */
     getDayPeriodNames(): [string, string] {
         const DEFAULT_PERIODS: [string, string] = [AM_DAY_PERIOD_DEFAULT, PM_DAY_PERIOD_DEFAULT];
 
@@ -151,29 +170,34 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         }
     }
 
+    /** Set hours */
     setHours(date: FdDate, hours: number): FdDate {
         const dateInstance = this._createDateInstanceByFdDate(date);
         dateInstance.setHours(hours);
         return this._createFdDateFromDateInstance(dateInstance);
     }
 
+    /** Set minutes */
     setMinutes(date: FdDate, hours: number): FdDate {
         const dateInstance = this._createDateInstanceByFdDate(date);
         dateInstance.setMinutes(hours);
         return this._createFdDateFromDateInstance(dateInstance);
     }
 
+    /** Set seconds */
     setSeconds(date: FdDate, hours: number): FdDate {
         const dateInstance = this._createDateInstanceByFdDate(date);
         dateInstance.setSeconds(hours);
         return this._createFdDateFromDateInstance(dateInstance);
     }
 
+    /** Get first day of week */
     getFirstDayOfWeek(): number {
         // can't retrieve this info from Intl object or Date object, default to Sunday.
         return 0;
     }
 
+    /** Get number of days in a month */
     getNumDaysInMonth(fdDate: FdDate): number {
         const date = this._createDateInstanceByFdDate(fdDate);
         date.setMonth(date.getMonth() + 1);
@@ -181,18 +205,22 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return date.getDate();
     }
 
+    /** Create a date object */
     createDate(year: number, month = 1, date = 1): FdDate {
         return new FdDate(year, month, date);
     }
 
+    /** Get a today date object */
     today(): FdDate {
         return FdDate.getToday();
     }
 
+    /** Get a now date object */
     now(): FdDate {
         return FdDate.getNow();
     }
 
+    /** Parse any value to date object */
     parse(value: any, parseFormat: Intl.DateTimeFormatOptions = {}): FdDate | null {
         if (!value && value !== 0) {
             return null;
@@ -225,6 +253,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return this._createFdDateFromDateInstance(date);
     }
 
+    /** Format date object to string */
     format(date: FdDate, displayFormat: Intl.DateTimeFormatOptions): string {
         if (!this.isValid(date)) {
             return INVALID_DATE_ERROR;
@@ -244,10 +273,12 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return this._stripDirectionalityCharacters(this._format(dateTimeFormatter, dateInstance));
     }
 
+    /** Add years to a date */
     addCalendarYears(date: FdDate, years: number): FdDate {
         return this.addCalendarMonths(date, years * 12);
     }
 
+    /** Add months to a date */
     addCalendarMonths(fdDate: FdDate, months: number): FdDate {
         const date = this._createDateInstanceByFdDate(fdDate);
 
@@ -262,16 +293,19 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return this._createFdDateFromDateInstance(date);
     }
 
+    /** Add days to a date */
     addCalendarDays(fdDate: FdDate, days: number): FdDate {
         const date = this._createDateInstanceByFdDate(fdDate);
         date.setDate(date.getDate() + days);
         return this._createFdDateFromDateInstance(date);
     }
 
+    /** Clone a date object */
     clone(date: FdDate): FdDate {
         return new FdDate(date.year, date.month, date.day, date.hour, date.minute, date.second);
     }
 
+    /** Check if date object is valid */
     isValid(date: FdDate): date is FdDate {
         if (!(date instanceof FdDate)) {
             return false;
@@ -279,6 +313,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return date.isDateValid();
     }
 
+    /** Check if date between given dates */
     isBetween(dateToCheck: FdDate, startDate: FdDate, endDate: FdDate): boolean {
         const date = this._createDateInstanceByFdDate(dateToCheck);
         const start = this._createDateInstanceByFdDate(startDate);
@@ -286,6 +321,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return date.getTime() > start.getTime() && date.getTime() < end.getTime();
     }
 
+    /** Check if dates are equal */
     datesEqual(date1: FdDate, date2: FdDate): boolean {
         if (!date1 || !date2) {
             return false;
@@ -296,6 +332,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return date1Str === date2Str;
     }
 
+    /** Check if dates and time are equal */
     dateTimesEqual(date1: FdDate, date2: FdDate): boolean {
         if (!date1 || !date2) {
             return false;
@@ -303,10 +340,12 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return this.toIso8601(date1) === this.toIso8601(date2);
     }
 
+    /** Format date object to ISO8601 string */
     toIso8601(fdDate: FdDate): string {
         return toIso8601(fdDate);
     }
 
+    /** Check if a time format includes a day period */
     isTimeFormatIncludesDayPeriod(displayFormat: Intl.DateTimeFormatOptions): boolean {
         if (typeof displayFormat?.hour12 === 'boolean') {
             return displayFormat.hour12;
@@ -316,14 +355,17 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return formattedDateWithPeriodOption === formattedDateNoPeriodOption;
     }
 
+    /** Check if a time format includes hours */
     isTimeFormatIncludesHours(displayFormat: Intl.DateTimeFormatOptions): boolean {
         return typeof displayFormat?.hour === 'string';
     }
 
+    /** Check if a time format includes minutes */
     isTimeFormatIncludesMinutes(displayFormat: Intl.DateTimeFormatOptions): boolean {
         return typeof displayFormat?.minute === 'string';
     }
 
+    /** Check if a time format includes seconds */
     isTimeFormatIncludesSeconds(displayFormat: Intl.DateTimeFormatOptions): boolean {
         return typeof displayFormat?.second === 'string';
     }

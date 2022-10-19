@@ -55,20 +55,21 @@ export class ButtonBarComponent extends BaseButton implements OnDestroy {
 
     /** id for this element */
     @Input()
+    set id(value: string | null | undefined) {
+        this._id = value;
+    }
     get id(): string {
         return this._id || this._defaultId;
     }
 
-    set id(value: string | null | undefined) {
-        this._id = value;
-    }
-
+    /** @hidden */
     _id: string | null | undefined;
 
     /** @hidden */
     @HostBinding('class.fd-bar__element')
     _barElement = true;
 
+    /** @hidden */
     @HostBinding('style.pointer-events')
     get pointerEvents(): string {
         return this._disabled ? 'none' : 'auto';
@@ -81,6 +82,7 @@ export class ButtonBarComponent extends BaseButton implements OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(private _cdRef: ChangeDetectorRef) {
         super();
     }

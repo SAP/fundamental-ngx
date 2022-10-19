@@ -12,6 +12,7 @@ export class DeprecatedCondensedDirective
     extends BehaviorSubject<ContentDensityMode>
     implements OnDestroy, ModuleDeprecation
 {
+    /** @deprecated use fdCondensed directive instead */
     @Input()
     set condensed(value: BooleanInput) {
         if (isDevMode()) {
@@ -20,17 +21,22 @@ export class DeprecatedCondensedDirective
         this.next(coerceBooleanProperty(value) ? ContentDensityMode.CONDENSED : ContentDensityMode.COZY);
     }
 
+    /** @hidden */
     readonly message: string;
+
+    /** @hidden */
     readonly alternative = {
         name: 'Use [fdCondensed] directive instead',
         link: ['/core', 'content-density']
     };
 
+    /** @hidden */
     constructor(selectorBase: string) {
         super(ContentDensityMode.COZY);
         this.message = `Usage of ${selectorBase}[condensed] is deprecated`;
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this.complete();
     }

@@ -21,17 +21,22 @@ export class DeprecatedCompactDirective
         this.next(coerceBooleanProperty(value) ? ContentDensityMode.COMPACT : ContentDensityMode.COZY);
     }
 
+    /** @hidden */
     readonly message: string;
+
+    /** @hidden */
     readonly alternative = {
         name: 'Use [fdCompact] directive instead',
         link: ['/core', 'content-density']
     };
 
+    /** @hidden */
     constructor(selectorBase: string) {
         super(ContentDensityMode.COZY);
         this.message = `Usage of ${selectorBase}[compact] is deprecated`;
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this.complete();
     }

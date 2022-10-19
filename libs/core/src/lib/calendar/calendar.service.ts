@@ -6,7 +6,10 @@ import { EscapeFocusFunction } from './models/common';
 
 @Injectable()
 export class CalendarService {
+    /** Row amount */
     rowAmount = 3;
+
+    /** Column amount */
     colAmount = 4;
 
     /** Event thrown, when the element is selected by space or enter keys */
@@ -27,6 +30,7 @@ export class CalendarService {
     /** Function that is called when the focus would escape the element. */
     focusEscapeFunction: EscapeFocusFunction;
 
+    /** @hidden */
     constructor(@Optional() private _rtlService: RtlService) {}
 
     /**

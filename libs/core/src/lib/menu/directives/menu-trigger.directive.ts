@@ -21,12 +21,15 @@ export class MenuTriggerDirective implements OnDestroy {
         this._setAriaAttributes(menu);
     }
 
+    /** @hidden */
     @HostBinding('attr.aria-haspopup')
     ariaHasPopup: Nullable<boolean>;
 
+    /** @hidden */
     @HostBinding('attr.aria-controls')
     ariaControls: Nullable<string>;
 
+    /** @hidden */
     @HostBinding('attr.aria-expanded')
     ariaExpanded: Nullable<boolean>;
 

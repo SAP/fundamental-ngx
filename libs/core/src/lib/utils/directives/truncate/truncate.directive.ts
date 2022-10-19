@@ -32,6 +32,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit {
      */
     private _defaultStyle: string;
 
+    /** @hidden */
     private takeDefaultStyleOnce = true;
 
     /** @hidden
@@ -70,6 +71,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit {
         this._truncate();
     }
 
+    /** @hidden */
     private _truncate(): void {
         this._truncateTarget = this.rootElement;
 

@@ -24,10 +24,12 @@ export class DeprecatedContentDensityDirective
         this.next(value);
     }
 
+    /** Deprecation message */
     get message(): string {
         return `Usage of ${this.selectorBase}[contentDensity] is deprecated`;
     }
 
+    /** Alternative usage description with a link to the docs */
     get alternative(): any {
         return {
             name: `Use [${this._manuallySet ? `fd${capitalize(this.value)}` : 'fdContentDensity'}] directive instead`,
@@ -35,14 +37,18 @@ export class DeprecatedContentDensityDirective
         };
     }
 
+    /** @hidden */
     selectorBase: string;
 
+    /** @hidden */
     private _manuallySet = false;
 
+    /** @hidden */
     constructor() {
         super(ContentDensityMode.COZY);
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this.complete();
     }

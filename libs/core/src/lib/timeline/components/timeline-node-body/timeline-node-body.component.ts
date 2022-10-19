@@ -12,19 +12,21 @@ import { first } from 'rxjs/operators';
     }
 })
 export class TimelineNodeBodyComponent {
-    /* Text content of timeline node*/
+    /** Text content of timeline node*/
     @Input()
     content: string;
 
-    /*
-      The number of lines to be visible.
-      If user doesn't provide it, all lines will be visible
-    */
+    /**
+     * The number of lines to be visible.
+     * If user doesn't provide it, all lines will be visible
+     */
     @Input()
     maxLines: number;
 
+    /** @hidden */
     constructor(private _ngZone: NgZone, private _timelinePositionControlService: TimelinePositionControlService) {}
 
+    /** @hidden */
     calculatePositions(): void {
         this._ngZone.onStable.pipe(first()).subscribe(() => {
             this._timelinePositionControlService.calculatePositions();

@@ -20,6 +20,7 @@ export class ListIconDirective implements OnChanges, OnInit {
     @HostBinding('attr.role')
     role = 'presentation';
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -32,11 +33,12 @@ export class ListIconDirective implements OnChanges, OnInit {
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-list__icon', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
     }

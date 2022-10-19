@@ -23,6 +23,7 @@ export class DeprecatedToolbarSizeDirective
     extends BehaviorSubject<LocalContentDensityMode>
     implements OnDestroy, ModuleDeprecation
 {
+    /** Size of the toolbar. */
     @Input()
     set size(value: ToolbarSize) {
         switch (value) {
@@ -40,12 +41,16 @@ export class DeprecatedToolbarSizeDirective
         }
     }
 
+    /** @hidden */
     readonly message: string;
+
+    /** @hidden */
     readonly alternative = {
         name: 'Use [fdContentDensity] directive instead',
         link: ['/core', 'content-density']
     };
 
+    /** @hidden */
     constructor() {
         super(ContentDensityMode.COMPACT);
         this.message = `Usage of fd-toolbar[size] is deprecated`;
@@ -54,6 +59,7 @@ export class DeprecatedToolbarSizeDirective
         }
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this.complete();
     }

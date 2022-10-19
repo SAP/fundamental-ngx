@@ -29,6 +29,7 @@ export class DndItemDirective implements DndItem, AfterContentInit, OnDestroy {
     @HostBinding('class.fd-dnd-item')
     applyDragItemClass = true;
 
+    /** Container selector */
     @Input()
     containerSelector?: string;
 
@@ -291,6 +292,7 @@ export class DndItemDirective implements DndItem, AfterContentInit, OnDestroy {
         element.parentNode?.insertBefore(docFrag, element.nextSibling);
     }
 
+    /** @hidden */
     private _listenElementEvents(): void {
         this._subscriptions.add(
             this.released

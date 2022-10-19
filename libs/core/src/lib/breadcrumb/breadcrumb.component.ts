@@ -91,6 +91,7 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
     @ContentChildren(forwardRef(() => BreadcrumbItemComponent))
     breadcrumbItems: QueryList<BreadcrumbItemComponent>;
 
+    /** @hidden */
     @ViewChild(MenuComponent)
     private readonly _menuComponent: MenuComponent;
 

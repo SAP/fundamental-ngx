@@ -53,7 +53,9 @@ export class ActionSheetBodyComponent {
     @Input()
     ariaLabelledby: Nullable<string>;
 
-    @ViewChild('actionSheetElement') actionSheetElementRef: ElementRef<HTMLUListElement>;
+    /** @hidden */
+    @ViewChild('actionSheetElement')
+    actionSheetElementRef: ElementRef<HTMLUListElement>;
 
     /** @hidden */
     constructor(

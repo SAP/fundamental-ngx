@@ -22,6 +22,7 @@ export class NumericContentDirective implements OnInit, OnChanges, CssClassBuild
     @HostBinding('class.fd-numeric-content')
     baseClass = true;
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -34,11 +35,12 @@ export class NumericContentDirective implements OnInit, OnChanges, CssClassBuild
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [
             'fd-numeric-content',
@@ -90,6 +92,7 @@ export class NumericContentLaunchIconDirective implements OnInit, OnChanges, Css
     @Input()
     glyph: string;
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -102,11 +105,12 @@ export class NumericContentLaunchIconDirective implements OnInit, OnChanges, Css
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-numeric-content__launch-icon', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
     }
@@ -144,6 +148,7 @@ export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBu
     @Input()
     glyph: string;
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -156,11 +161,12 @@ export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBu
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-numeric-content__kpi', this.state ? 'fd-numeric-content__kpi--' + this.state : '', this.class];
     }
@@ -194,6 +200,7 @@ export class NumericContentScaleArrowDirective implements OnInit, OnChanges, Css
     @Input()
     glyph: string;
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -206,11 +213,12 @@ export class NumericContentScaleArrowDirective implements OnInit, OnChanges, Css
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-numeric-content__scale-arrow', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
     }
@@ -234,6 +242,7 @@ export class NumericContentScaleDirective implements OnInit, OnChanges, CssClass
     @Input()
     class: string;
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -246,11 +255,12 @@ export class NumericContentScaleDirective implements OnInit, OnChanges, CssClass
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-numeric-content__scale', this.state ? 'fd-numeric-content__scale--' + this.state : '', this.class];
     }
