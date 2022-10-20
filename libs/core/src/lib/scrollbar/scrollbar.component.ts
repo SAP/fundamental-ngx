@@ -55,6 +55,10 @@ export class ScrollbarComponent {
     }
 
     /** @hidden */
+    @HostBinding('attr.tabindex')
+    _tabindex = 0;
+
+    /** @hidden */
     @HostBinding('style.overflow-x')
     get _overflowX(): ScrollbarOverflowOptions {
         if (this.noHorizontalScroll) {

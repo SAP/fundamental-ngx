@@ -93,7 +93,7 @@ export class DialogInnerPopoverComponent {
                 </div>
             </fd-dialog-body>
 
-            <fd-dialog-footer fdCompact>
+            <fd-dialog-footer>
                 <fd-button-bar
                     label="Interesting"
                     fdType="emphasized"

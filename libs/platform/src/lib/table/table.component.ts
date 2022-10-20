@@ -1686,8 +1686,14 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _listenToColumns(): void {
         this.columns.changes.pipe(startWith(null)).subscribe(() => {
             const columns = this.getTableColumns();
+            const prevColumns = this._tableColumnsSubject.getValue().map((column) => column.name);
+            const currentColumns = columns.map((column) => column.name);
+
             this._buildColumnsMap(columns);
             this._tableColumnsSubject.next(columns);
+
+            this._tableService.columnsChange.emit({ previous: currentColumns, current: prevColumns });
+            this._tableService.detectChanges();
         });
     }
 

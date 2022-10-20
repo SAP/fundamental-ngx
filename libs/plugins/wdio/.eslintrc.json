@@ -1,0 +1,21 @@
+{
+    "extends": ["../../../.eslintrc.json"],
+    "ignorePatterns": ["!**/*"],
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+            "rules": {
+                "@typescript-eslint/explicit-function-return-type": "off",
+                "@typescript-eslint/no-var-requires": "off"
+            }
+        },
+        {
+            "files": ["*.ts", "*.tsx"],
+            "rules": {}
+        },
+        {
+            "files": ["*.js", "*.jsx"],
+            "rules": {}
+        }
+    ]
+}

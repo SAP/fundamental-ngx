@@ -330,6 +330,7 @@
         "platform-upload-collection": "libs/platform/src/lib/upload-collection",
         "platform-value-help-dialog": "libs/platform/src/lib/value-help-dialog",
         "platform-wizard-generator": "libs/platform/src/lib/wizard-generator",
+        "plugins-wdio": "libs/plugins/wdio",
         "workspace-tools": "tools"
     }
 }

@@ -8,8 +8,6 @@ export * from './clicked';
 
 export * from './selectable-list';
 
-export * from './resize';
-
 export * from './focusable-list';
 export * from './focusable-item';
 
