@@ -1,3 +1,31 @@
+## [0.36.1-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.47...v0.36.1-rc.48) (2022-10-18)
+
+
+### Bug Fixes
+
+* **core:** condensed mode key navigation ([#8861](https://github.com/SAP/fundamental-ngx/issues/8861)) ([7958342](https://github.com/SAP/fundamental-ngx/commit/7958342b1943b6ae46d107ac3ead917c9ce3f313))
+
+
+
+## [0.36.1-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.46...v0.36.1-rc.47) (2022-10-18)
+
+
+### Bug Fixes
+
+* **core:** fix multi-input bugs ([#8794](https://github.com/SAP/fundamental-ngx/issues/8794)) ([290ff31](https://github.com/SAP/fundamental-ngx/commit/290ff31a45d2c06be189221142c0a183233650f0))
+
+
+
+## [0.36.1-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.45...v0.36.1-rc.46) (2022-10-18)
+
+
+### Bug Fixes
+
+* **core:** add key control to scrollbar ([#8780](https://github.com/SAP/fundamental-ngx/issues/8780)) ([07e7dd2](https://github.com/SAP/fundamental-ngx/commit/07e7dd2ac9310011e2c04e37671c5906878f667a))
+* **core:** change year range on arrow button clicks ([#8843](https://github.com/SAP/fundamental-ngx/issues/8843)) ([facb328](https://github.com/SAP/fundamental-ngx/commit/facb328c35daaa8a1c6395876d6e1ac699d0ac5f))
+
+
+
 ## [0.36.1-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.44...v0.36.1-rc.45) (2022-10-18)
 
 

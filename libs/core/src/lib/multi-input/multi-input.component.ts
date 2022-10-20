@@ -489,7 +489,7 @@ export class MultiInputComponent
         } else {
             this.disableParentFocusTrap();
 
-            if (this.listComponent) {
+            if (this.listComponent && this._searchTermCtrl.value?.length === 0) {
                 this.listComponent.setItemActive(0);
             }
         }
@@ -567,6 +567,11 @@ export class MultiInputComponent
             this.searchInputElement.nativeElement.focus();
         }
 
+        if (this._selectionModel.selected.length === 0) {
+            this.searchInputElement.nativeElement.focus();
+            this._changeDetRef.detectChanges();
+        }
+
         // On Mobile mode changes are propagated only on approve.
         this._propagateChange();
     }
@@ -593,6 +598,7 @@ export class MultiInputComponent
         } else if (KeyUtil.isKeyType(event, 'alphabetical') || KeyUtil.isKeyType(event, 'numeric')) {
             if (!this.open) {
                 this.openChangeHandle(true);
+                this.searchInputElement.nativeElement.focus();
             }
         }
     }

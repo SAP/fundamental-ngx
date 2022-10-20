@@ -1,5 +1,5 @@
 <ng-container *ngIf="!expanded || !_isExpandable || !_condensed || !_listComponent">
-    <ng-content></ng-content
+    <ng-content></ng-content> <ng-container [ngTemplateOutlet]="subListTemplate"></ng-container
     ><span *ngIf="indicated || _childIndicatedAndCollapsed()" class="fd-list__navigation-item-indicator"></span>
 </ng-container>
 <ng-container *ngIf="expanded && _isExpandable && _condensed && _listComponent">
@@ -18,16 +18,10 @@
         class="fd-popover__body fd-popover__body--no-arrow fd-list__navigation-item-popover--second-level"
         aria-hidden="false"
     >
-        <ul class="fd-list">
-            <li
-                *ngFor="let navItem of _listComponent._navItems"
-                class="fd-list__navigation-item fd-list__navigation-item--condensed"
-                [class.fd-list__navigation-item--indicated]="navItem.indicated"
-                tabindex="0"
-            >
-                <span *ngIf="navItem._innerText" class="fd-list__navigation-item-text">{{ navItem._innerText }}</span>
-                <span *ngIf="navItem.indicated" class="fd-list__navigation-item-indicator"></span>
-            </li>
-        </ul>
+        <ng-container [ngTemplateOutlet]="subListTemplate"></ng-container>
     </div>
 </ng-container>
+
+<ng-template #subListTemplate>
+    <ng-content select="[fd-list]"></ng-content>
+</ng-template>
