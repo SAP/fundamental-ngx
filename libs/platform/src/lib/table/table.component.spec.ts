@@ -1201,8 +1201,8 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 calculateTableElementsMetaData();
 
                 expect(tableComponent._tableRows[0].expanded).toBeTrue();
-                expect(tableComponent._tableRows[2].level).toEqual(1);
-                expect(tableComponent._tableRows[3].level).toEqual(2);
+                expect(tableComponent._tableRows[2].level).toEqual(0);
+                expect(tableComponent._tableRows[3].level).toEqual(1);
             });
 
             it('should prevent from dropping row inside itself', () => {
