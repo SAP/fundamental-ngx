@@ -9,7 +9,6 @@ import {
     click,
     getAlertText,
     getAttributeByName,
-    getCSSPropertyByName,
     getCurrentUrl,
     getElementArrayLength,
     getElementClass,
@@ -93,18 +92,6 @@ describe('List test suite:', () => {
         await waitForPresent(listPage.root);
         await waitForElDisplayed(listPage.title);
     }, 1);
-
-    describe('Borderless examples:', () => {
-        it('should do basic checks', async () => {
-            await checkElArrIsClickable(noBorderListItems);
-            await checkElementText(noBorderListItems);
-            await expect(await $$(`${noBorderCompactList} > .${compactClass}`)).toBeTruthy();
-        });
-
-        it('should check border border-style property', async () => {
-            await getCSSPropertyByName(noBorderListItems, borderStyleAttr);
-        });
-    });
 
     describe('Footer examples:', () => {
         it('should do basic checks and check footer', async () => {

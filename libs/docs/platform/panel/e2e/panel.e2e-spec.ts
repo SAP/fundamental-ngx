@@ -3,7 +3,6 @@ import { action_panel_delete_button, action_panel_edit_button, expandable_panel_
 import {
     click,
     doesItExist,
-    getCSSPropertyByName,
     getElementSize,
     getText,
     refreshPage,
@@ -55,12 +54,6 @@ describe('Verify Panel', () => {
 
         await expect(expandableBtnSize.width).toBeGreaterThan(compactBtnSize.width);
         await expect(expandableBtnSize.height).toBeGreaterThan(compactBtnSize.height);
-    });
-
-    it('should scroll content if height is fixed', async () => {
-        const contentRegionHeight = (await getCSSPropertyByName(fixedHeightPanelContentRegion, 'height')).value;
-        const contentActualHeight = (await getCSSPropertyByName(fixedHeightPanelContent, 'height')).value;
-        await expect(parseInt(contentRegionHeight, 10)).toBeLessThan(parseInt(contentActualHeight, 10));
     });
 
     it('should action panel have clickable buttons example ', async () => {
