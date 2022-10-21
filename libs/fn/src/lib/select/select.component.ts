@@ -71,6 +71,20 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     editable = false;
 
     /** @hidden */
+    _inputTextValue = '';
+
+    /** Get the input text of the input. */
+    get inputText(): string {
+        return this._inputTextValue;
+    }
+
+    /** Set the input text of the input. */
+    set inputText(value: string) {
+        this._inputTextValue = value;
+        this.onChange(value);
+    }
+
+    /** @hidden */
     @ContentChildren(OptionComponent)
     options: QueryList<OptionComponent>;
 
@@ -95,20 +109,10 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
                 this._filterItems();
             }
         }
-        this.onChange(newValue);
     }
 
     get selected(): OptionComponent {
         return this._selectionModel.selected[0];
-    }
-
-    /** Retrieves selected value if any. */
-    get triggerValue(): string {
-        const emptyValue = ' ';
-        if (this._selectionModel.isEmpty()) {
-            return this.placeholder || emptyValue;
-        }
-        return this.selected.viewValue || this.placeholder || emptyValue;
     }
 
     _selectWidth = 0;
@@ -193,6 +197,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         });
         clickedOption && this._selectionModel.select(clickedOption);
         this.value = this.selected.value;
+        this.inputText = this.selected.label ? this.selected.label : this.selected._viewValue;
         this.hideMenu();
         this._cdRef.detectChanges();
     }

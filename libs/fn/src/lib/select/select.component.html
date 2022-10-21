@@ -5,7 +5,7 @@
             class="fn-input__text-field"
             type="text"
             [attr.placeholder]="placeholder"
-            [value]="triggerValue"
+            [(ngModel)]="inputText"
             [readonly]="!editable"
         />
         <div class="fn-input__border"></div>
@@ -18,8 +18,8 @@
         [cdkConnectedOverlayOrigin]="trigger"
         [cdkConnectedOverlayOpen]="opened && !_optionsListEmpty"
     >
-        <ul [style.width.px]="_selectWidth" aria-label="Select menu" fnSelectMenu #menu>
+        <div [style.width.px]="_selectWidth" aria-label="Select menu" fnSelectMenu #menu>
             <ng-content></ng-content>
-        </ul>
+        </div>
     </ng-template>
 </div>

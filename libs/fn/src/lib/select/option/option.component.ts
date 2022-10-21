@@ -24,7 +24,7 @@ import { FN_SELECT_PROVIDER } from '../select.token';
  */
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
-    selector: '[fn-option]',
+    selector: 'fn-option, [fn-option]',
     templateUrl: './option.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -45,6 +45,9 @@ export class OptionComponent implements OnDestroy, FocusableOption {
     @Input()
     selected = false;
 
+    @Input()
+    label: string;
+
     /** The tabindex of the option. Default is 0. */
     @Input()
     tabindex = '0';
@@ -57,9 +60,10 @@ export class OptionComponent implements OnDestroy, FocusableOption {
     hidden = false;
 
     /**
-     * The displayed value of the option. It shows the selected option in the select's trigger.
+     * @hidden
+     * The displayed value of the option. Used when label not passed by user. e.g. <fn-option [value]='Apple'> Apple </fn-option>
      */
-    get viewValue(): string {
+    get _viewValue(): string {
         return (this.elementRef.nativeElement.textContent || '').trim();
     }
 
