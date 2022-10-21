@@ -1,3 +1,12 @@
+## [0.36.1-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.50...v0.36.1-rc.51) (2022-10-21)
+
+
+### Bug Fixes
+
+* **fn:** add select module to exported modules ([#8842](https://github.com/SAP/fundamental-ngx/issues/8842)) ([928cdcf](https://github.com/SAP/fundamental-ngx/commit/928cdcfb83dcc1c5fdc126e4330ea3c528a428e4))
+
+
+
 ## [0.36.1-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.49...v0.36.1-rc.50) (2022-10-21)
 
 
