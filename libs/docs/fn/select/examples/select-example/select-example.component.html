@@ -1,10 +1,20 @@
 <div style="width: 200px">
     <fn-select placeholder="Select an option" label="Standard Selector" #selectExample1>
-        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+        <fn-option *ngFor="let option of options" [value]="option" [label]="option"></fn-option>
     </fn-select>
 </div>
-<br />
 
 <p>
     <i>selection: {{ selectExample1.value }}</i>
+</p>
+<br />
+
+<div style="width: 200px">
+    <fn-select placeholder="Select an option" label="Standard Selector" #selectExample2>
+        <fn-option *ngFor="let option of options2" [value]="option" [label]="option.name"></fn-option>
+    </fn-select>
+</div>
+
+<p>
+    <i>selection: {{ selectExample2.value | json }}</i>
 </p>
