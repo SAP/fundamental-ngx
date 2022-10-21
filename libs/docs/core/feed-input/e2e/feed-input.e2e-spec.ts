@@ -4,7 +4,6 @@ import {
     doesItExist,
     elementDisplayed,
     getAttributeByName,
-    getCSSPropertyByName,
     getElementArrayLength,
     getElementPlaceholder,
     getElementSize,
@@ -111,24 +110,6 @@ describe('Verify Feed Input component', () => {
             }
         }
     );
-
-    it('should have focus stated assigned to elements', async () => {
-        const arrLength = await getElementArrayLength(feedInputButton);
-        for (let i = 0; arrLength > i; i++) {
-            if (i === 3) {
-                continue;
-            }
-            await waitForPresent(feedInputTextArea, i);
-            await scrollIntoView(feedInputTextArea, i);
-            await setValue(feedInputTextArea, four_lines_text, i);
-            const inputFocusStyle = (await getCSSPropertyByName(feedInputTextArea, 'outline-style', i)).value;
-            await sendKeys('Tab');
-            const sendButtonFocusStyle = (await getCSSPropertyByName(feedInputButton, 'outline-style', i)).value;
-
-            await expect(emptyValuesArr).not.toContain(sendButtonFocusStyle);
-            await expect(emptyValuesArr).not.toContain(inputFocusStyle);
-        }
-    });
 
     it('should avatar and Send button has correct tooltip', async () => {
         const inputButtonLength = await getElementArrayLength(feedInputButton);

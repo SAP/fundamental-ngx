@@ -3,7 +3,6 @@ import {
     doesItExist,
     elementDisplayed,
     getAttributeByName,
-    getCSSPropertyByName,
     getText,
     pause,
     refreshPage,
@@ -199,19 +198,6 @@ describe('Dynamic Page Layout test suite:', () => {
             await waitForElDisplayed(dynamicPageCollapsibleHeader);
             await click(dynamicPageTitle);
             await expect(await elementDisplayed(dynamicPageCollapsibleHeader)).toBe(false);
-        });
-
-        it('should verify section is expand on expand icon clicks', async () => {
-            await click(flexibleColumnExampleButton);
-            await waitForElDisplayed(openColumnButton);
-            await click(openColumnButton);
-            await waitForElDisplayed(columnSection);
-            const sectionWidthBefore = await getCSSPropertyByName(columnSection, 'width');
-            await waitForElDisplayed(columnSectionExpandIcon);
-            await waitForClickable(columnSectionExpandIcon);
-            await click(columnSectionExpandIcon);
-            const sectionWidthAfter = await getCSSPropertyByName(columnSection, 'width');
-            await expect(sectionWidthBefore > sectionWidthAfter).toBe(false);
         });
     });
 
