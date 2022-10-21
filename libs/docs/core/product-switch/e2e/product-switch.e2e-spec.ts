@@ -3,7 +3,6 @@ import {
     applyState,
     click,
     clickAndMoveElement,
-    getCSSPropertyByName,
     getElementArrayLength,
     getText,
     isElementDisplayed,
@@ -40,20 +39,6 @@ describe('product switch test suite', () => {
             await checkElArrIsClickable(shellbarSwitchItems);
         });
 
-        it('should check items are focusable', async () => {
-            await click(shellbarButton);
-            const itemCount = await getElementArrayLength(shellbarSwitchItems);
-
-            for (let i = 0; i < itemCount; i++) {
-                await applyState('focus', shellbarSwitchItems, i);
-                await expect(emptyDataArr).not.toContain(
-                    (
-                        await getCSSPropertyByName(shellbarSwitchItems, focusAttribute, i)
-                    ).value
-                );
-            }
-        });
-
         it('should drag and drop apps', async () => {
             await click(shellbarButton);
             const originalCardData = await getText(shellbarSwitchItems, 4);
@@ -67,19 +52,6 @@ describe('product switch test suite', () => {
     describe('main checks', () => {
         it('should check items are clickable', async () => {
             await checkElArrIsClickable(switchItems);
-        });
-
-        it('should check items are focusable', async () => {
-            const itemCount = await getElementArrayLength(switchItems);
-
-            for (let i = 0; i < itemCount; i++) {
-                await applyState('focus', switchItems, i);
-                await expect(emptyDataArr).not.toContain(
-                    (
-                        await getCSSPropertyByName(switchItems, focusAttribute, i)
-                    ).value
-                );
-            }
         });
     });
 

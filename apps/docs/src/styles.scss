@@ -219,9 +219,18 @@ a:not(.fd-link):focus {
     text-decoration: none;
 }
 
-.fd-playground--markdown {
+.fd-playground--markdown,
+.api-main-header,
+.fd-tsdoc-container {
     color: var(--sapTextColor);
+}
 
+.fd-tsdoc-container .tsd-panel {
+    background-color: var(--sapBaseColor);
+    box-shadow: var(--sapContent_Shadow0);
+}
+
+.fd-playground--markdown {
     #fundamental-ngx {
         margin-top: calc(2rem + 10px);
         font-size: 2.2rem;

@@ -1,3 +1,16 @@
+## [0.36.1-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.49...v0.36.1-rc.50) (2022-10-21)
+
+
+
+## [0.36.1-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.48...v0.36.1-rc.49) (2022-10-20)
+
+
+### Bug Fixes
+
+* the API documentation colors for dark modes ([#8866](https://github.com/SAP/fundamental-ngx/issues/8866)) ([8485231](https://github.com/SAP/fundamental-ngx/commit/8485231023069a8411707e5f2830cc1c52e3c930))
+
+
+
 ## [0.36.1-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.47...v0.36.1-rc.48) (2022-10-18)
 
 
