@@ -2,7 +2,6 @@ import {
     browserIsSafari,
     click,
     elementArray,
-    getCSSPropertyByName,
     getElementArrayLength,
     getElementClass,
     getElementPlaceholder,
@@ -153,18 +152,6 @@ describe('Datetime picker suite', () => {
             await expect(await getValue(datePickerInput)).toEqual(date);
         }
     );
-
-    it('verify selected date is showing in blue background', async () => {
-        await click(activeDateTimePickerButton, 1);
-        await click(await dateTimePickerPage.dayInCalendarButtonByValue('1'));
-        await click(okButton);
-        await click(activeDateTimePickerButton, 1);
-        await expect(highlightedColor).toContain(
-            (
-                await getCSSPropertyByName(await dateTimePickerPage.dayInCalendarButtonByValue('1'), 'background-color')
-            ).value
-        );
-    });
 
     it('Verify When the user selects cancel the action is aborted and the input field remains unchanged.', async () => {
         if (await browserIsSafari()) {
