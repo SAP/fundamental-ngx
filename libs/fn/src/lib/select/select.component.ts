@@ -81,6 +81,9 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     /** Set the input text of the input. */
     set inputText(value: string) {
         this._inputTextValue = value;
+        if (this.editable) {
+            this._filterItems();
+        }
         this.onChange(value);
     }
 
@@ -105,9 +108,6 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     set value(newValue: any) {
         if (newValue !== this._internalValue) {
             this.writeValue(newValue);
-            if (this.editable) {
-                this._filterItems();
-            }
         }
     }
 
@@ -246,7 +246,8 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     private _filterItems(): void {
         let visibleOptions = 0;
         this.options.forEach((option) => {
-            if (!option.value.toLowerCase().startsWith(this._internalValue.toLowerCase())) {
+            const optionLabel = option.label ? option.label : option._viewValue;
+            if (!optionLabel.toLowerCase().startsWith(this.inputText.toLowerCase())) {
                 option._hide();
             } else {
                 visibleOptions++;
@@ -255,7 +256,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
                     this.opened = true;
                 }
             }
-            option.selected = option.value.toLowerCase() === this._internalValue.toLowerCase();
+            option.selected = option.value === this._internalValue;
         });
 
         visibleOptions > 0 ? (this._optionsListEmpty = false) : (this._optionsListEmpty = true);
