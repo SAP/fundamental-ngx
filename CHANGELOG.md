@@ -1,4 +1,11 @@
 
+### [0.36.1](https://github.com/SAP/fundamental-ngx/compare/v0.36.0...v0.36.1) (2022-10-22)
+
+
+### Bug Fixes
+
+* **core:** empty commit testing release ([30205db](https://github.com/SAP/fundamental-ngx/commit/30205db82ea7af77059f1ee07cbbdd27bf2d6d23))
+
 ## [0.36.0](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.47...v0.36.0) (2022-09-09)
 
 ## [0.36.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.36.0-rc.46...v0.36.0-rc.47) (2022-09-09)
