@@ -17402,10 +17402,10 @@ typedoc-default-themes@^0.12.10:
   resolved "https://registry.yarnpkg.com/typedoc-default-themes/-/typedoc-default-themes-0.12.10.tgz#614c4222fe642657f37693ea62cad4dafeddf843"
   integrity sha512-fIS001cAYHkyQPidWXmHuhs8usjP5XVJjWB8oZGqkTowZaz3v7g3KDZeeqE82FBrmkAnIBOY3jgy7lnPnqATbA==
 
-typedoc-plugin-merge-modules@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/typedoc-plugin-merge-modules/-/typedoc-plugin-merge-modules-2.1.1.tgz#d0365a9c9e5ea2d122d72582c87ced12deda43e4"
-  integrity sha512-nuPYFLmz2rZ01Y601MN7DgORGrXHzbUmnJoFKXEu75llaQCzKonSgiFeAIHQa2yyLZYlJhsYItE9ztLIRtM1rg==
+typedoc-plugin-merge-modules@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/typedoc-plugin-merge-modules/-/typedoc-plugin-merge-modules-4.0.1.tgz#e690a404979cb289bc97e9575f678293293b48f9"
+  integrity sha512-peuoWT/xcpEO71kNuaTBAS2IVwc8qm5tiIXnJc0vW/Cy9HHoVGkYecarkwtLBl5VmrhZjZN6LQNriqYfgHA1+A==
 
 typedoc@0.21.9:
   version "0.21.9"
