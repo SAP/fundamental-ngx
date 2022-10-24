@@ -214,8 +214,8 @@ describe('ComboboxComponent', () => {
         expect(addOns.length).toBe(1);
         component.isSearch = true;
         component.communicateByObject = true;
-        component.displayFn = (item: any): string => item.displayedValue;
-        component.inputText = 'displayedValue2';
+        component.displayFn = (item: any): string => item?.displayedValue ?? '';
+        component.inputText = 'test';
         (<any>component)._cdRef.detectChanges();
         addOns = fixture.nativeElement.querySelectorAll('button');
         expect(addOns.length).toBe(2);

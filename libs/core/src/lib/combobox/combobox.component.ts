@@ -703,10 +703,14 @@ export class ComboboxComponent
 
     /** @hidden */
     private _propagateChange(): void {
-        if (!this.communicateByObject) {
-            this.onChange(this.inputText);
-        } else {
+        if (this.communicateByObject) {
+            const value = this._getOptionObjectByDisplayedValue(this.inputText);
+            if (this.displayFn(value) !== this.displayFn(this.getValue())) {
+                this.setValue(value);
+            }
             this.onChange(this.getValue());
+        } else {
+            this.onChange(this.inputText);
         }
     }
 
