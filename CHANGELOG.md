@@ -1,3 +1,12 @@
+## [0.36.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.36.2-rc.3...v0.36.2-rc.4) (2022-10-24)
+
+
+### Bug Fixes
+
+* **core:** do not disable step input increment/decrement when value is null ([#8840](https://github.com/SAP/fundamental-ngx/issues/8840)) ([8fb3acd](https://github.com/SAP/fundamental-ngx/commit/8fb3acd93de5b6a589e7300b9e6110cd3dc8adea))
+
+
+
 ## [0.36.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.36.2-rc.2...v0.36.2-rc.3) (2022-10-24)
 
 
