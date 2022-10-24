@@ -153,7 +153,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         // setting option items
         this.select._options.forEach((option) => {
             const optionItem = option._getHtmlElement();
-            const titleElement = <HTMLElement>optionItem.querySelector('#primary-title');
+            const titleElement = <HTMLElement>optionItem.querySelector('.fd-list__title-text .fd-list__title');
             this._setOptionAttribute(titleElement, firstColumnProportion);
 
             const secondaryElement = <HTMLElement>optionItem.querySelector('.fd-list__secondary');
