@@ -308,6 +308,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     private _inputTextValue: string;
 
     /** @hidden */
+    private _previousInputText: string;
+
+    /** @hidden */
     private _matchingStrategy: MatchingStrategy = this.multiComboboxConfig.matchingStrategy;
 
     /** @hidden */
@@ -387,6 +390,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     ngAfterViewInit(): void {
         this._initWindowResize();
         this._assignCustomTemplates();
+        this._previousInputText = this.inputText;
         super.ngAfterViewInit();
     }
 
@@ -681,6 +685,8 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
                     this._processingEmptyData();
 
                     return;
+                } else {
+                    this._previousInputText = this.inputText;
                 }
 
                 this._suggestions = this._convertToOptionItems(data).map((optionItem: SelectableOptionItem) => {
@@ -748,7 +754,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /** @hidden */
     private _processingEmptyData(): void {
-        this.inputText = this.inputText.slice(0, -1);
+        this._cd.detectChanges();
+
+        this.inputText = this._previousInputText;
 
         this._setInvalidEntry();
 
