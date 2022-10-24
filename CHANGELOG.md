@@ -1,3 +1,13 @@
+## [0.36.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.36.2-rc.3...v0.36.3-rc.0) (2022-10-24)
+
+
+### Bug Fixes
+
+* **core:** do not disable step input increment/decrement when value is null ([#8840](https://github.com/SAP/fundamental-ngx/issues/8840)) ([8fb3acd](https://github.com/SAP/fundamental-ngx/commit/8fb3acd93de5b6a589e7300b9e6110cd3dc8adea))
+* **platform:** multi combobox bug where inputText is manipulated incorrectly ([#8793](https://github.com/SAP/fundamental-ngx/issues/8793)) ([d414003](https://github.com/SAP/fundamental-ngx/commit/d414003f620914e6a5d4baa0087629aa4d303aeb))
+
+
+
 ### [0.36.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.1...v0.36.2) (2022-10-24)
 
 
