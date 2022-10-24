@@ -52,9 +52,17 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     @Input()
     title: string;
 
+    /** Whether title should wrap instead of truncation. */
+    @Input()
+    titleWrap = false;
+
     /** Subtitle property for dynamic page */
     @Input()
     subtitle: string;
+
+    /** Whether subtitle should wrap instead of truncation. */
+    @Input()
+    subtitleWrap = false;
 
     /** @hidden */
     @ContentChild(BreadcrumbComponent)

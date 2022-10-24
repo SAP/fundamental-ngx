@@ -23,7 +23,6 @@ import {
     browserIsSafari,
     elementArray,
     getAttributeByName,
-    getCSSPropertyByName,
     getElementAriaLabel,
     getText,
     refreshPage,
@@ -52,78 +51,6 @@ xdescribe('Info Label component test suite', () => {
         await waitForPresent(infoLabelPage.root);
         await waitForPresent(infoLabelPage.title);
     }, 1);
-
-    it('should check default label info', async () => {
-        await expect((await getText(defaultLabel)).toLowerCase()).toEqual(defaultLabelText.toLowerCase());
-        await expect((await getCSSPropertyByName(defaultLabel, cssAlignmentAttribute)).value).toEqual(
-            labelContentAlignmentCenter
-        );
-    });
-
-    it('should check info label with text', async () => {
-        const labelsArr = await elementArray(labelsWithTextArr);
-        if (await browserIsSafari()) {
-            for (let i = 0; i < labelsArr.length; i++) {
-                await expect((await getText(await labelsArr[i].selector)).toLowerCase()).toEqual(
-                    safariInfoLabelText.toLowerCase()
-                );
-                await expect((await getCSSPropertyByName(labelsWithTextArr, cssAlignmentAttribute, i)).value).toEqual(
-                    labelContentAlignmentCenter
-                );
-            }
-        } else {
-            for (let i = 0; i < labelsArr.length; i++) {
-                await expect((await getText(await labelsArr[i].selector)).toLowerCase()).toEqual(
-                    infoLabelText.toLowerCase()
-                );
-                await expect((await getCSSPropertyByName(labelsWithTextArr, cssAlignmentAttribute, i)).value).toEqual(
-                    labelContentAlignmentCenter
-                );
-            }
-        }
-    });
-
-    it('should check info label with text and icon', async () => {
-        const labelsWithIconsArr = await elementArray(labelsWithTextAndIconArr);
-        const labelIconsArr = await elementArray(labelsIconArr);
-
-        if (await browserIsSafari()) {
-            for (let i = 0; i < labelsWithIconsArr.length; i++) {
-                await expect((await getText(labelsWithTextAndIconArr, i)).toLowerCase()).toEqual(
-                    safariIconInfoLabelText.toLowerCase()
-                );
-                await expect(
-                    (
-                        await getCSSPropertyByName(labelsWithTextAndIconArr, cssAlignmentAttribute, i)
-                    ).value
-                ).toEqual(labelContentAlignmentStart);
-                await expect(await getAttributeByName(labelsWithTextAndIconArr, labelIconAttribute, i)).toBe(
-                    labelIconAttributeValue,
-                    `failed with index ${i}`
-                );
-            }
-            for (let i = 0; i < labelIconsArr.length; i++) {
-                await expect(await waitForElDisplayed(labelsWithTextAndIconArr, i)).toBe(true);
-            }
-        } else {
-            for (let i = 0; i < labelsWithIconsArr.length; i++) {
-                await expect((await getText(labelsWithTextAndIconArr, i)).toLowerCase()).toEqual(
-                    infoLabelText.toLowerCase()
-                );
-                await expect(
-                    (
-                        await getCSSPropertyByName(labelsWithTextAndIconArr, cssAlignmentAttribute, i)
-                    ).value
-                ).toEqual(labelContentAlignmentStart);
-                await expect(await getAttributeByName(labelsWithTextAndIconArr, labelIconAttribute, i)).toBe(
-                    labelIconAttributeValue
-                );
-            }
-            for (let i = 0; i < labelIconsArr.length; i++) {
-                await expect(await waitForElDisplayed(labelsWithTextAndIconArr, i)).toBe(true);
-            }
-        }
-    });
 
     it('should check info label with a number or an icon', async () => {
         if (await browserIsSafari()) {

@@ -1,0 +1,10 @@
+name: Try to bump styles version
+description: Check if NGX has outdated styles version and tries to bump to the newest version if it doesn't contain breaking changes
+
+outputs:
+    new-styles-version:
+        description: New styles version
+
+runs:
+    using: node16
+    main: ./index.js

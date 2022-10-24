@@ -15,7 +15,11 @@
 
             <div class="fd-dynamic-page__title-subtitle-container">
                 <div class="fd-dynamic-page__title-container">
-                    <span class="fd-dynamic-page__title" fdIgnoreClickOnSelection>
+                    <span
+                        class="fd-dynamic-page__title"
+                        [class.fd-dynamic-page__title--wrap]="titleWrap"
+                        fdIgnoreClickOnSelection
+                    >
                         {{ title }}
                     </span>
                     <ng-content select="fd-dynamic-page-title-content"></ng-content>
@@ -26,14 +30,26 @@
                         </ng-container>
                     </div>
                 </div>
-                <div class="fd-dynamic-page__subtitle" *ngIf="_collapsed && subtitle" fdIgnoreClickOnSelection>
+                <div
+                    *ngIf="_collapsed && subtitle"
+                    class="fd-dynamic-page__subtitle"
+                    [class.fd-dynamic-page__subtitle--wrap]="subtitleWrap"
+                    fdIgnoreClickOnSelection
+                >
                     {{ subtitle }}
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="fd-dynamic-page__subtitle" *ngIf="!_collapsed && subtitle" fdIgnoreClickOnSelection>{{ subtitle }}</div>
+<div
+    *ngIf="!_collapsed && subtitle"
+    class="fd-dynamic-page__subtitle"
+    [class.fd-dynamic-page__subtitle--wrap]="subtitleWrap"
+    fdIgnoreClickOnSelection
+>
+    {{ subtitle }}
+</div>
 
 <ng-template #dynamicPageGlobalActionsRef>
     <ng-content select="fd-dynamic-page-global-actions"></ng-content>

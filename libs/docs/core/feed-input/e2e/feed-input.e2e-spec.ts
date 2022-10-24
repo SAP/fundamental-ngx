@@ -4,7 +4,6 @@ import {
     doesItExist,
     elementDisplayed,
     getAttributeByName,
-    getCSSPropertyByName,
     getElementArrayLength,
     getElementPlaceholder,
     getElementSize,
@@ -85,48 +84,6 @@ describe('Verify Feed Input component', () => {
             await setValue(feedInputTextArea, four_lines_text, i);
             await scrollIntoView(feedInputButton, i);
             await expect(await isEnabled(feedInputButton, i)).toBe(true);
-        }
-    });
-
-    it(
-        'should grow if multiple row text is entered to the input ' +
-            'stop growing after max Height option value was reached',
-        async () => {
-            await waitForPresent(feedInputTextArea);
-            await scrollIntoView(feedInputTextArea);
-            const inputButtonLength = await getElementArrayLength(feedInputButton);
-            for (let i = 0; i < inputButtonLength - 1; i++) {
-                if (i === 3) {
-                    continue;
-                }
-                await clearValue(feedInputTextArea);
-                const feedInputSize1 = await getElementSize(feedInputTextArea, i);
-                await setValue(feedInputTextArea, eight_lines_text, i);
-                const feedInputSize2 = await getElementSize(feedInputTextArea, i);
-                await addValue(feedInputTextArea, eight_lines_text, i);
-                const feedInputSize3 = await getElementSize(feedInputTextArea, i);
-                await expect(feedInputSize1.height).toBeLessThan(feedInputSize2.height);
-                await expect(feedInputSize2.height).toBeLessThan(feedInputSize3.height);
-                await expect([183, 188, 189, 184]).toContain(feedInputSize2.height);
-            }
-        }
-    );
-
-    it('should have focus stated assigned to elements', async () => {
-        const arrLength = await getElementArrayLength(feedInputButton);
-        for (let i = 0; arrLength > i; i++) {
-            if (i === 3) {
-                continue;
-            }
-            await waitForPresent(feedInputTextArea, i);
-            await scrollIntoView(feedInputTextArea, i);
-            await setValue(feedInputTextArea, four_lines_text, i);
-            const inputFocusStyle = (await getCSSPropertyByName(feedInputTextArea, 'outline-style', i)).value;
-            await sendKeys('Tab');
-            const sendButtonFocusStyle = (await getCSSPropertyByName(feedInputButton, 'outline-style', i)).value;
-
-            await expect(emptyValuesArr).not.toContain(sendButtonFocusStyle);
-            await expect(emptyValuesArr).not.toContain(inputFocusStyle);
         }
     });
 

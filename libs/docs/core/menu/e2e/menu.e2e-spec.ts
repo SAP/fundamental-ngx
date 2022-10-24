@@ -4,7 +4,6 @@ import {
     click,
     doesItExist,
     elementDisplayed,
-    getCSSPropertyByName,
     getElementArrayLength,
     getText,
     getTextArr,
@@ -83,41 +82,6 @@ describe('Menu test suite', () => {
         for (let j = 0; j < menuItemsArrLength; j++) {
             await expect(await elementDisplayed(icons, j)).toBe(true, `item with index ${j} does not have icon`);
         }
-    });
-
-    describe('ability to navigate through menu items with tab and arrow keys', () => {
-        it('should navigate through menu items when user uses arrow down and arrow up', async () => {
-            for (let i = 0; i < buttonsArrLength; i++) {
-                await click(menuButtonsArr, i);
-                const menuItemsArrLength = await getElementArrayLength(menuItemsArr);
-                for (let j = 0; j < menuItemsArrLength - 1; j++) {
-                    await sendKeys('ArrowDown');
-                    await expect(emptyValuesArr).not.toContain(
-                        await getCSSPropertyByName(menuItemsArr, 'outline-style', j + 1)
-                    );
-                }
-
-                for (let g = menuItemsArrLength - 1; g > 0; g--) {
-                    await sendKeys('ArrowUp');
-                    await expect(emptyValuesArr).not.toContain(
-                        await getCSSPropertyByName(menuItemsArr, 'outline-style', g - 1)
-                    );
-                }
-            }
-        });
-
-        it('should navigate through menu items when user uses the tab key', async () => {
-            for (let i = 0; i < buttonsArrLength; i++) {
-                await click(menuButtonsArr, i);
-                const menuItemsArrLength = await getElementArrayLength(menuItemsArr);
-                for (let j = 0; j < menuItemsArrLength - 1; j++) {
-                    await sendKeys('Tab');
-                    await expect(emptyValuesArr).not.toContain(
-                        await getCSSPropertyByName(menuItemsArr, 'outline-style', j + 1)
-                    );
-                }
-            }
-        });
     });
 
     // TODO: https://github.com/SAP/fundamental-ngx/issues/8792

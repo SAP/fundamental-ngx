@@ -38,11 +38,19 @@ export class DynamicPageTitleComponent implements DynamicPageHeader {
     @Input()
     title: string;
 
+    /** Whether title should wrap instead of truncation. */
+    @Input()
+    titleWrap = false;
+
     /**
      * Page Subtitle
      */
     @Input()
     subtitle: string;
+
+    /** Whether subtitle should wrap instead of truncation. */
+    @Input()
+    subtitleWrap = false;
 
     /**
      * sets background for content to `list`, `transparent`, or `solid` background color.
