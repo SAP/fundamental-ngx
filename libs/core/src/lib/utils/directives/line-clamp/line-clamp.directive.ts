@@ -97,6 +97,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
         return this._elementRef.nativeElement;
     }
 
+    /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef,
         private readonly _renderer: Renderer2,
