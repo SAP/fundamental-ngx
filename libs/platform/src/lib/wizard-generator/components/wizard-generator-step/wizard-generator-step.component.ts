@@ -197,18 +197,15 @@ export class WizardGeneratorStepComponent implements OnInit, OnDestroy, OnChange
     }
 
     /**
-     * @returns Step submitted forms values.
+     * Returns visible forms in the step.
      */
-    getFormValues(): WizardStepSubmittedForms {
-        return this._submittedForms;
-    }
-
-    /**
-     *
-     * @returns component
-     */
-    getForms(): WizardStepForms {
-        return this._forms;
+    getVisibleForms(): WizardStepForms {
+        return Object.keys(this._forms).reduce((acc, key) => {
+            if (this._visibleFormGroupIds[key] || this._visibleFormGroupIds[key] === undefined) {
+                acc[key] = this._forms[key];
+            }
+            return acc;
+        }, {});
     }
 
     /**
