@@ -1,3 +1,17 @@
+## [0.36.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.36.2-rc.0...v0.36.2-rc.1) (2022-10-24)
+
+
+### Bug Fixes
+
+* **core,platform:** typo in workflow ([#8892](https://github.com/SAP/fundamental-ngx/issues/8892)) ([b849b5f](https://github.com/SAP/fundamental-ngx/commit/b849b5fbb8127a27c1f67d5907fb338ca05082d1))
+
+
+### Features
+
+* **core,platform:** automatically bump styles version ([#8871](https://github.com/SAP/fundamental-ngx/issues/8871)) ([d8e96ce](https://github.com/SAP/fundamental-ngx/commit/d8e96ceb1ae6d9976cacb85d61d99a407d030b72))
+
+
+
 ## [0.36.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.53...v0.36.2-rc.0) (2022-10-22)
 
 
