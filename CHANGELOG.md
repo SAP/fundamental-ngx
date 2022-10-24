@@ -1,3 +1,12 @@
+## [0.36.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.36.2-rc.2...v0.36.2-rc.3) (2022-10-24)
+
+
+### Features
+
+* **core,platform:** dynamic page title & subtitle wrapping ([#8822](https://github.com/SAP/fundamental-ngx/issues/8822)) ([4cdac24](https://github.com/SAP/fundamental-ngx/commit/4cdac249c617ecfe2c99d2926c7fb50e2dcbacfb))
+
+
+
 ## [0.36.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.2-rc.1...v0.36.2-rc.2) (2022-10-24)
 
 
