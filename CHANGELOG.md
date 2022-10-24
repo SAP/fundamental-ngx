@@ -1,4 +1,11 @@
 
+### [0.36.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.1...v0.36.2) (2022-10-24)
+
+
+### Bug Fixes
+
+* **core:** combobox set value to null on clear button press ([d1619e4](https://github.com/SAP/fundamental-ngx/commit/d1619e4ce0074674fee01b997143506d3039b5be))
+
 ### [0.36.1](https://github.com/SAP/fundamental-ngx/compare/v0.36.0...v0.36.1) (2022-10-22)
 
 
