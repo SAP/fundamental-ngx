@@ -87,31 +87,6 @@ describe('Verify Switch component', () => {
             await expect(isCheckedAfter).toBe('true', 'Default compact switch has incorrect state after click');
         });
 
-        it('should default change state on hover', async () => {
-            const handelColorBefore = await getCSSPropertyByName(defaultSwitchHandel, 'background-color');
-            // capture handel color on Mouse hover
-            if (await browserIsSafari()) {
-                return;
-            }
-
-            await mouseHoverElement(defaultSwitchHandel);
-            const handelColorAfter = await getCSSPropertyByName(defaultSwitchHandel, 'background-color');
-
-            await expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
-        });
-
-        it('should compact default change state on hover', async () => {
-            const handelColorBefore = await getCSSPropertyByName(defaultCompactSwitchHandel, 'background-color');
-            if (await browserIsIEorSafari()) {
-                // mouse hover doesn't work for safari
-                return;
-            }
-            await mouseHoverElement(defaultCompactSwitchHandel);
-            const handelColorAfter = await getCSSPropertyByName(defaultCompactSwitchHandel, 'background-color');
-
-            await expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
-        });
-
         it('compact switch should be smaller than default', async () => {
             await waitForPresent(defaultSwitchSizeAttr);
             await waitForElDisplayed(defaultSwitchSizeAttr);
@@ -141,33 +116,6 @@ describe('Verify Switch component', () => {
             await scrollIntoView(formDisabledSwitchInput);
             const isClickable = await isElementClickable(formDisabledSwitchInput);
             await expect(isClickable).toBe(false);
-        });
-
-        it('should not change state on hover', async () => {
-            await waitForPresent(disabledSwitchHandel);
-            const handelColorBefore = await getCSSPropertyByName(disabledSwitchHandel, 'background-color');
-            // capture handel color on Mouse hover
-            if (await browserIsSafari()) {
-                return;
-            }
-            await scrollIntoView(disabledSwitchHandel);
-            await mouseHoverElement(disabledSwitchHandel);
-            const handelColorAfter = await getCSSPropertyByName(disabledSwitchHandel, 'background-color');
-
-            await expect(handelColorBefore.value).toBe(handelColorAfter.value);
-        });
-
-        it('form should not change state on hover', async () => {
-            const handelColorBefore = await getCSSPropertyByName(formDisabledSwitchHandel, 'background-color');
-            // capture handel color on Mouse hover
-            if (await browserIsSafari()) {
-                return;
-            }
-            await scrollIntoView(formDisabledSwitchHandel);
-            await mouseHoverElement(formDisabledSwitchHandel);
-            const handelColorAfter = await getCSSPropertyByName(formDisabledSwitchHandel, 'background-color');
-
-            await expect(handelColorBefore.value).toBe(handelColorAfter.value);
         });
     });
 
@@ -239,33 +187,6 @@ describe('Verify Switch component', () => {
             await expect(offIconStateBefore.value).toBe('hidden');
             await expect(onIconStateAfter.value).toBe('hidden');
             await expect(offIconStateAfter.value).toBe('visible');
-        });
-
-        it('should semantic change state on hover', async () => {
-            const handelColorBefore = await getCSSPropertyByName(semanticSwitchHandel, 'background-color');
-            // capture handel color on Mouse hover
-            if (!(await browserIsIEorSafari())) {
-                await scrollIntoView(semanticSwitchHandel);
-                await mouseHoverElement(semanticSwitchHandel);
-                const handelColorAfter = await getCSSPropertyByName(semanticSwitchHandel, 'background-color');
-
-                await expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
-                return;
-            }
-            console.log('Skip for Safari and IE');
-        });
-
-        it('should semantic compact change state on hover', async () => {
-            const handelColorBefore = await getCSSPropertyByName(semanticCompactSwitchHandel, 'background-color');
-            // capture handel color on Mouse hover
-            if (await browserIsSafari()) {
-                return;
-            }
-            await scrollIntoView(semanticCompactSwitchHandel);
-            await mouseHoverElement(semanticCompactSwitchHandel);
-            const handelColorAfter = await getCSSPropertyByName(semanticCompactSwitchHandel, 'background-color');
-
-            await expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
         });
 
         // No example given to verify

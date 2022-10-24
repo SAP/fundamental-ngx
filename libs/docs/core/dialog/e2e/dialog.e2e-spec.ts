@@ -10,7 +10,6 @@ import {
     clickWithOption,
     doesItExist,
     getAttributeByName,
-    getCSSPropertyByName,
     getElementArrayLength,
     getElementClass,
     getElementLocation,
@@ -382,26 +381,6 @@ describe('dialog test suite', () => {
             await expect(await doesItExist(dialog)).toBe(true, 'dialog is closed when it should be open');
         });
 
-        it('should check dialog focusTrapped option', async () => {
-            await openDialog(playgroundDialog);
-
-            await expect(emptyValuesArr).not.toContain(
-                (
-                    await getCSSPropertyByName(dialog + button, outlineProperty)
-                ).value
-            );
-
-            await closeDialog();
-            await click(playgroundDialog + checkboxes, 3);
-            await openDialog(playgroundDialog);
-
-            await expect(emptyValuesArr).not.toContain(
-                (
-                    await getCSSPropertyByName(dialog + button, outlineProperty)
-                ).value
-            );
-        });
-
         it('should check dialog fullScreen option', async () => {
             await openDialog(playgroundDialog);
 
@@ -474,26 +453,6 @@ describe('dialog test suite', () => {
             await openDialog(playgroundDialog);
 
             await checkResizingDialog();
-        });
-
-        it('should check dialog verticalPadding option', async () => {
-            await openDialog(playgroundDialog);
-            // eslint-disable-next-line radix
-            const dialogPaddingValue = parseInt(
-                (await getCSSPropertyByName(dialogBody, topPaddingProperty)).value.replace('px', '')
-            );
-
-            await expect(dialogPaddingValue).toBeGreaterThan(0);
-
-            await closeDialog();
-            await click(playgroundDialog + checkboxes, 9);
-            await openDialog(playgroundDialog);
-            // eslint-disable-next-line radix
-            const newDialogPaddingValue = parseInt(
-                (await getCSSPropertyByName(dialogBody, topPaddingProperty)).value.replace('px', '')
-            );
-
-            await expect(newDialogPaddingValue).toBe(0);
         });
 
         it('should check dialog width and height options', async () => {
