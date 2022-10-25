@@ -35,8 +35,7 @@ fd-popover-body {
     &__popper {
         max-height: 100%;
         max-width: 100%;
-        overflow: auto;
-
+        display: flex;
         .fd-list {
             border-radius: $fd-popover-border-radius;
 
