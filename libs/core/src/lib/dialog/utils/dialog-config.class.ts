@@ -9,7 +9,7 @@ export const DIALOG_DEFAULT_CONFIG = new InjectionToken<DialogConfig>('Default D
 
 @Injectable()
 export class DialogConfig<T = any> extends DialogConfigBase<T> {
-    /** Whether the dialog should be displayed in full screen mode. */
+    /** @deprecated Use 'mobile' to set the dialog to full-screen mode. */
     fullScreen?: boolean;
 
     /** Whether the dialog should be draggable. */
