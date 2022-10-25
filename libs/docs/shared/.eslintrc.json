@@ -7,7 +7,9 @@
             "extends": ["plugin:@nrwl/nx/angular", "plugin:@angular-eslint/template/process-inline-templates"],
             "rules": {
                 "@angular-eslint/directive-selector": ["off"],
-                "@angular-eslint/component-selector": ["off"]
+                "@angular-eslint/component-selector": ["off"],
+                "jsdoc/require-jsdoc": "off",
+                "grouped-accessor-pairs": "off"
             }
         },
         {

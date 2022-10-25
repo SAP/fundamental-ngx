@@ -39,8 +39,11 @@
                     }
                 ],
                 "@angular-eslint/prefer-output-readonly": ["error"],
-                "@angular-eslint/use-component-selector": ["error"]
-            }
+                "@angular-eslint/use-component-selector": ["error"],
+                "jsdoc/require-jsdoc": "off",
+                "grouped-accessor-pairs": "off"
+            },
+            "plugins": ["@angular-eslint/eslint-plugin", "@typescript-eslint"]
         },
         {
             "files": ["*.html"],
