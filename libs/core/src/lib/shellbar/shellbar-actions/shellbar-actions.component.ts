@@ -8,8 +8,7 @@ import {
     ViewChild,
     ChangeDetectionStrategy,
     AfterViewInit,
-    ChangeDetectorRef,
-    ElementRef
+    ChangeDetectorRef
 } from '@angular/core';
 
 import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
@@ -77,7 +76,10 @@ export class ShellbarActionsComponent implements AfterViewInit {
     /** toggles combobox. Shows combobox if true.*/
     showCombobox = false;
 
-    enableComboboxForMobileMode = false;
+    /** @hidden
+     *  Enable combobox in mobile mode.
+     */
+    _enableComboboxForMobileMode = false;
 
     /** @hidden */
     @ContentChildren(ShellbarActionComponent)
@@ -89,11 +91,11 @@ export class ShellbarActionsComponent implements AfterViewInit {
 
     /** @hidden */
     @ContentChild(ComboboxComponent, { static: false })
-    comboboxComponent: ComboboxComponent;
+    _comboboxComponent: ComboboxComponent;
 
     /** @hidden */
     @ContentChild(SelectComponent, { static: false })
-    selectComponent: SelectComponent;
+    _selectComponent: SelectComponent;
 
     /** @hidden */
     @ContentChild(ProductSwitchComponent, { static: false })
@@ -101,17 +103,14 @@ export class ShellbarActionsComponent implements AfterViewInit {
 
     /** @hidden */
     @ViewChild(ShellbarUserMenuComponent)
-    userComponentView: ShellbarUserMenuComponent;
+    _userComponentView: ShellbarUserMenuComponent;
 
     /** @hidden */
     @ViewChild('searchButton')
-    searchButton: ButtonComponent;
+    _searchButton: ButtonComponent;
 
     /** @hidden */
-    @ViewChild(ComboboxComponent)
-    comboboxElement: ElementRef<HTMLInputElement>;
-
-    fullWidthOnMobile = false;
+    _fullWidthOnMobile = false;
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
@@ -121,65 +120,75 @@ export class ShellbarActionsComponent implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.comboboxComponent) {
-            this.handleComboboxSearchClick();
+        if (this._comboboxComponent) {
+            this._handleComboboxSearchClick();
         }
     }
 
-    /** called when clicked search button. shows combobox */
-    onSearchButtonClick(shouldOpenPopover = true): void {
+    /** @hidden
+     * called when clicked search button. shows combobox
+     */
+    _onSearchButtonClick(shouldOpenPopover = true): void {
         this.showCombobox = true;
         if (shouldOpenPopover) {
             setTimeout(() => {
-                this.comboboxComponent.isOpenChangeHandle(true);
+                this._comboboxComponent.isOpenChangeHandle(true);
             });
         }
         this._cdRef.detectChanges();
-        this.comboboxComponent.focusSearchInput();
+        this._comboboxComponent.focusSearchInput();
     }
 
-    /** called when clicked search button on combobox. hides combobox if input-text is empty */
-    handleComboboxSearchClick(): void {
+    /** @hidden
+     * called when clicked search button on combobox. hides combobox if input-text is empty
+     */
+    _handleComboboxSearchClick(): void {
         this._subscriptions.add(
-            this.comboboxComponent.primaryButtonClicked.subscribe(() => {
-                if (this.comboboxComponent.isEmptyValue) {
-                    this.showFullWidthCombobox(false);
+            this._comboboxComponent.primaryButtonClicked.subscribe(() => {
+                if (this._comboboxComponent.isEmptyValue) {
+                    this._showFullWidthCombobox(false);
                 }
-                this.searchButton.focus();
+                this._searchButton.focus();
             })
         );
     }
 
-    hideCombobox(): void {
+    /** @hidden
+     * hides combobox.
+     */
+    _hideCombobox(): void {
         this.showCombobox = false;
-        this.comboboxComponent.isOpenChangeHandle(false);
+        this._comboboxComponent.isOpenChangeHandle(false);
         this._cdRef.detectChanges();
     }
 
-    /** called for value=false when cancel clicked and for true when search clicked from action sheet*/
-    showFullWidthCombobox(value: boolean): void {
-        this.enableComboboxForMobileMode = value;
+    /** @hidden
+     *  called for value=false when cancel clicked and for true when search clicked from action sheet
+     */
+    _showFullWidthCombobox(value: boolean): void {
+        this._enableComboboxForMobileMode = value;
         if (value) {
-            this.onSearchButtonClick();
-            this.addFullWidthClass(true);
-            this.comboboxComponent.comboboxElement.style.width = '100%';
+            this._onSearchButtonClick();
+            this._addFullWidthClass(true);
+            this._comboboxComponent._comboboxElement.style.width = '100%';
         } else {
-            this.hideCombobox();
-            this.addFullWidthClass(false);
-            this.comboboxComponent.comboboxElement.style.width = '';
+            this._hideCombobox();
+            this._addFullWidthClass(false);
+            this._comboboxComponent._comboboxElement.style.width = '';
         }
     }
 
-    addFullWidthClass(value: boolean): void {
-        this.fullWidthOnMobile = value;
+    /** @hidden */
+    _addFullWidthClass(value: boolean): void {
+        this._fullWidthOnMobile = value;
         this._cdRef.detectChanges();
     }
 
     /** @hidden */
     triggerItems(): void {
         if (this.closePopoverOnSelect) {
-            if (this.userComponentView) {
-                this.userComponentView.menu.close();
+            if (this._userComponentView) {
+                this._userComponentView.menu.close();
             }
             if (this.userComponent) {
                 this.userComponent.menu.close();

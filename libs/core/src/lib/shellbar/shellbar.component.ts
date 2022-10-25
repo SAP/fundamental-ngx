@@ -65,15 +65,15 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
 
     /** @hidden */
     @ContentChild(ShellbarActionsComponent)
-    shellbarActionsComponent: ShellbarActionsComponent;
+    _shellbarActionsComponent: ShellbarActionsComponent;
 
     /** @hidden */
     @ContentChild(SelectComponent, { static: false })
-    selectComponent: SelectComponent;
+    _selectComponent: SelectComponent;
 
     /** @hidden */
     @ContentChildren(forwardRef(() => ButtonComponent))
-    buttons: QueryList<ButtonComponent>;
+    _buttons: QueryList<ButtonComponent>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -98,14 +98,14 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
         this._applyShellbarModeToSelect();
     }
 
-    /** to apply view change on select menu open */
-    handleSelectIsOpenChange(): void {
+    /** @hidden to apply view change on select menu open */
+    _handleSelectIsOpenChange(): void {
         this._subscriptions.add(
-            this.selectComponent.isOpenChange.subscribe((isOpen) => {
+            this._selectComponent.isOpenChange.subscribe((isOpen) => {
                 if (isOpen) {
                     setTimeout(() => {
-                        this.selectComponent._controlElementRef.nativeElement.classList.remove('is-expanded');
-                        this.selectComponent._controlElementRef.nativeElement.setAttribute('aria-expanded', 'false');
+                        this._selectComponent._controlElementRef.nativeElement.classList.remove('is-expanded');
+                        this._selectComponent._controlElementRef.nativeElement.setAttribute('aria-expanded', 'false');
                     });
                 }
             })
@@ -114,13 +114,13 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
 
     /** @hidden */
     _applyShellbarModeToSelect(): void {
-        if (this.selectComponent) {
-            this.selectComponent._controlElementRef.nativeElement.style.margin = '0';
-            this.selectComponent.selectClass = 'fd-shellbar__input-group';
-            this.selectComponent.inputClass = 'fd-shellbar__input-group-input fd-shellbar__input-group-input--select';
-            this.selectComponent.addOnClass = 'fd-shellbar__input-group-addon';
-            this.selectComponent.buttonClass = 'fd-shellbar__button';
-            this.handleSelectIsOpenChange();
+        if (this._selectComponent) {
+            this._selectComponent._controlElementRef.nativeElement.style.margin = '0';
+            this._selectComponent.selectClass = 'fd-shellbar__input-group';
+            this._selectComponent.inputClass = 'fd-shellbar__input-group-input fd-shellbar__input-group-input--select';
+            this._selectComponent.addOnClass = 'fd-shellbar__input-group-addon';
+            this._selectComponent.buttonClass = 'fd-shellbar__button';
+            this._handleSelectIsOpenChange();
         }
     }
 
@@ -129,14 +129,14 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
         if (this.comboboxComponent && this.comboboxComponent.inputGroup) {
             this.comboboxComponent.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group-input');
             this.comboboxComponent.addOnClass = 'fd-shellbar__input-group-addon';
-            this.comboboxComponent.buttons.forEach((button) => {
+            this.comboboxComponent._buttons.forEach((button) => {
                 button.elementRef().nativeElement.classList.add('fd-shellbar__button');
             });
 
             this.comboboxComponent.inputGroup.inputGroupClass = 'fd-shellbar__input-group';
             this.comboboxComponent.inputGroup.addOnClass = 'fd-shellbar__input-group-addon';
             this.comboboxComponent.inputGroup.inputClass = 'fd-shellbar__input-group-input';
-            this.comboboxComponent.inputGroup.buttons.forEach((button) => {
+            this.comboboxComponent.inputGroup._buttons.forEach((button) => {
                 button.elementRef().nativeElement.classList.add('fd-shellbar__button');
                 button.elementRef().nativeElement.setAttribute('aria-expanded', 'true');
             });
@@ -145,8 +145,8 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
 
     /** @hidden */
     _applyShellbarModeToButtons(): void {
-        if (this.buttons && this.buttons.length) {
-            this.buttons.forEach((button) => {
+        if (this._buttons && this._buttons.length) {
+            this._buttons.forEach((button) => {
                 button.elementRef().nativeElement.classList.add('fd-shellbar__button');
             });
         }
@@ -156,15 +156,15 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
     _handleSizeChange(currentSize: ShellbarSizes): void {
         // if size changed and changed to 's' with combobox open.
         if (currentSize !== this.size && this.size === 's') {
-            if (this.comboboxComponent && this.shellbarActionsComponent.showCombobox) {
-                this.shellbarActionsComponent.showFullWidthCombobox(true);
+            if (this.comboboxComponent && this._shellbarActionsComponent.showCombobox) {
+                this._shellbarActionsComponent._showFullWidthCombobox(true);
             }
         }
         // if size was 's' and changed to any other size with combobox open.
         else if (currentSize === 's' && currentSize !== this.size) {
-            if (this.comboboxComponent && this.shellbarActionsComponent.showCombobox) {
-                this.shellbarActionsComponent.showFullWidthCombobox(false);
-                this.shellbarActionsComponent.onSearchButtonClick(false);
+            if (this.comboboxComponent && this._shellbarActionsComponent.showCombobox) {
+                this._shellbarActionsComponent._showFullWidthCombobox(false);
+                this._shellbarActionsComponent._onSearchButtonClick(false);
             }
         }
     }

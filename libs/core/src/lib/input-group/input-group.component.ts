@@ -190,11 +190,11 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
 
     /** @hidden */
     @ViewChildren(ButtonComponent)
-    buttons: QueryList<ButtonComponent>;
+    _buttons: QueryList<ButtonComponent>;
 
     /** @hidden */
     @ViewChild('inputGroupAddon')
-    inputGroupAddon: ElementRef<HTMLInputElement>;
+    _inputGroupAddon: ElementRef<HTMLInputElement>;
 
     /** @hidden */
     _inputTextValue: string;

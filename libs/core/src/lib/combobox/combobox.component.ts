@@ -314,7 +314,7 @@ export class ComboboxComponent
 
     /** @hidden */
     @ViewChildren(ButtonComponent)
-    buttons: QueryList<ButtonComponent>;
+    _buttons: QueryList<ButtonComponent>;
 
     /** @hidden */
     @ContentChildren(ListMessageDirective)
@@ -377,7 +377,8 @@ export class ComboboxComponent
     /** @hidden */
     onTouched = (): void => {};
 
-    get comboboxElement(): HTMLElement {
+    /** @hidden */
+    get _comboboxElement(): HTMLElement {
         return this._elementRef.nativeElement;
     }
 
@@ -752,6 +753,7 @@ export class ComboboxComponent
         return this.getValue() === termValue;
     }
 
+    /** focuses input field of the combobox */
     focusSearchInput(): void {
         this.searchInputElement.nativeElement.focus();
     }

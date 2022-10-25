@@ -33,8 +33,9 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     /** @hidden */
     _showFullWidthCombobox = false;
 
+    /** @hidden */
     @ViewChild(ActionSheetComponent)
-    actionSheetComponent: ActionSheetComponent;
+    _actionSheetComponent: ActionSheetComponent;
 
     @Output() showFullWidthCombobox = new EventEmitter();
 
@@ -48,7 +49,7 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     /** @hidden */
     _showCombobox(): void {
         this.showFullWidthCombobox.emit(true);
-        this.actionSheetComponent.close();
+        this._actionSheetComponent.close();
     }
 
     /** @hidden */
