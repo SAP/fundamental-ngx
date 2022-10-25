@@ -8,5 +8,8 @@
         "target": "esnext",
         "types": ["node", "webdriverio/async", "@wdio/jasmine-framework", "wdio-image-comparison-service", "axe-core"]
     },
+    "ts-node": {
+        "require": ["tsconfig-paths/register"]
+    },
     "includes": ["wdio/**/*.ts"]
 }
