@@ -1,6 +1,6 @@
 <h4>Notification In Popover Dialog</h4>
 
-<button fd-button label="Notification" fdCompact [fdPopoverTrigger]="popoverMobile"></button>
+<button fd-button label="Notification" [fdPopoverTrigger]="popoverMobile"></button>
 
 <fd-popover #popoverMobile [mobile]="true" [mobileConfig]="mobileConfig">
     <ng-template #popoverBodyContent>
@@ -109,7 +109,7 @@
 
 <h4>Notification Group In Popover Dialog</h4>
 
-<button fd-button label="Notification Group" fdCompact [fdPopoverTrigger]="popoverMobileGroup"></button>
+<button fd-button label="Notification Group" [fdPopoverTrigger]="popoverMobileGroup"></button>
 
 <fd-popover #popoverMobileGroup [mobile]="true" [mobileConfig]="mobileConfig">
     <ng-template #popoverBodyContent>
@@ -122,14 +122,13 @@
                                 <h2 fd-notification-title [unread]="true">New Messages (2)</h2>
                             </fd-notification-header>
                             <fd-notification-actions>
-                                <button fd-button label="Accept All" fdCompact *ngIf="expandedByDate"></button>
+                                <button fd-button label="Accept All" *ngIf="expandedByDate"></button>
                                 <button
                                     fd-button
                                     fdType="transparent"
                                     ariaLabel="Close"
                                     glyph="decline"
                                     title="close"
-                                    fdCompact
                                 ></button>
                             </fd-notification-actions>
                         </fd-notification-group-header>
@@ -151,14 +150,13 @@
                                 <h2 fd-notification-title [unread]="true">Today (2)</h2>
                             </fd-notification-header>
                             <fd-notification-actions>
-                                <button fd-button label="Accept All" fdCompact *ngIf="expandedByType1"></button>
+                                <button fd-button label="Accept All" *ngIf="expandedByType1"></button>
                                 <button
                                     fd-button
                                     fdType="transparent"
                                     glyph="decline"
                                     ariaLabel="Close"
                                     title="close"
-                                    fdCompact
                                 ></button>
                             </fd-notification-actions>
                         </fd-notification-group-header>
@@ -171,14 +169,13 @@
                                 <h2 fd-notification-title [unread]="true">Today (2)</h2>
                             </fd-notification-header>
                             <fd-notification-actions>
-                                <button fd-button label="Accept All" fdCompact *ngIf="expandedByType2"></button>
+                                <button fd-button label="Accept All" *ngIf="expandedByType2"></button>
                                 <button
                                     fd-button
                                     fdType="transparent"
                                     glyph="decline"
                                     ariaLabel="Close"
                                     title="close"
-                                    fdCompact
                                 ></button>
                             </fd-notification-actions>
                         </fd-notification-group-header>
@@ -198,7 +195,6 @@
                                     glyph="decline"
                                     ariaLabel="Close"
                                     title="close"
-                                    fdCompact
                                 ></button>
                             </fd-notification-actions>
                         </fd-notification-group-header>
@@ -230,8 +226,8 @@
             </fd-notification-footer>
         </fd-notification-content>
         <fd-notification-actions>
-            <button fd-button [label]="notification.actionButton" fdCompact></button>
-            <button fd-button fdType="transparent" glyph="decline" ariaLabel="Close" title="close" fdCompact></button>
+            <button fd-button [label]="notification.actionButton"></button>
+            <button fd-button fdType="transparent" glyph="decline" ariaLabel="Close" title="close"></button>
         </fd-notification-actions>
     </fd-notification-body>
 </ng-template>
@@ -256,8 +252,8 @@
             </fd-notification-footer>
         </fd-notification-content>
         <fd-notification-actions>
-            <button fd-button [label]="notification.actionButton" fdCompact></button>
-            <button fd-button fdType="transparent" glyph="decline" ariaLabel="Close" title="close" fdCompact></button>
+            <button fd-button [label]="notification.actionButton"></button>
+            <button fd-button fdType="transparent" glyph="decline" ariaLabel="Close" title="close"></button>
         </fd-notification-actions>
     </fd-notification-body>
 </ng-template>
