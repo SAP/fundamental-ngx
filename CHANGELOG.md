@@ -1,3 +1,12 @@
+## [0.36.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.0...v0.36.3-rc.1) (2022-10-25)
+
+
+### Bug Fixes
+
+* **e2e:** tsconfig-paths ([#8833](https://github.com/SAP/fundamental-ngx/issues/8833)) ([9e80cc4](https://github.com/SAP/fundamental-ngx/commit/9e80cc4bcf903aa0b42e9e26395b0c2483e22a86))
+
+
+
 ## [0.36.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.36.2-rc.3...v0.36.3-rc.0) (2022-10-24)
 
 
