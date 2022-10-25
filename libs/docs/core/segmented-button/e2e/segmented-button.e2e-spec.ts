@@ -27,7 +27,7 @@ describe('Select component:', () => {
         chosenValue
     } = segmentedButtonPage;
 
-    await beforeAll(() => {
+    beforeAll(async () => {
         await segmentedButtonPage.open();
     }, 1);
 
@@ -161,7 +161,7 @@ describe('Select component:', () => {
         });
     });
 
-    async function checkDefaultExample(mainSection: string, secondarySection): void {
+    async function checkDefaultExample(mainSection: string, secondarySection): Promise<void> {
         for (let i = 0; i < 3; i++) {
             await click(mainSection + button, i);
             await expect(await getElementClass(mainSection + button, i)).toContain(

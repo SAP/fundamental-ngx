@@ -1,3 +1,25 @@
+## [0.36.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.0...v0.36.3-rc.1) (2022-10-25)
+
+
+### Bug Fixes
+
+* **e2e:** tsconfig-paths ([#8833](https://github.com/SAP/fundamental-ngx/issues/8833)) ([9e80cc4](https://github.com/SAP/fundamental-ngx/commit/9e80cc4bcf903aa0b42e9e26395b0c2483e22a86))
+
+
+
+## [0.36.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.36.2-rc.3...v0.36.3-rc.0) (2022-10-24)
+
+
+### Bug Fixes
+
+* **core:** do not disable step input increment/decrement when value is null ([#8840](https://github.com/SAP/fundamental-ngx/issues/8840)) ([8fb3acd](https://github.com/SAP/fundamental-ngx/commit/8fb3acd93de5b6a589e7300b9e6110cd3dc8adea))
+* **platform:** multi combobox bug where inputText is manipulated incorrectly ([#8793](https://github.com/SAP/fundamental-ngx/issues/8793)) ([d414003](https://github.com/SAP/fundamental-ngx/commit/d414003f620914e6a5d4baa0087629aa4d303aeb))
+
+
+
+### [0.36.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.1...v0.36.2) (2022-10-24)
+
+
 ## [0.36.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.36.2-rc.3...v0.36.2-rc.4) (2022-10-24)
 
 

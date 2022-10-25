@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.36.2-rc.4",
+  "version": "0.36.3-rc.1",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori Angular component library.",
@@ -166,6 +166,7 @@
     "standard-version": "9.3.2",
     "through2": "4.0.2",
     "ts-node": "10.9.1",
+    "tsconfig-paths": "4.1.0",
     "typedoc": "0.21.9",
     "typedoc-plugin-merge-modules": "2.1.1",
     "typescript": "4.7.4",
