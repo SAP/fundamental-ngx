@@ -1,3 +1,12 @@
+## [0.36.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.2...v0.36.3-rc.3) (2022-10-26)
+
+
+### Features
+
+* **core, docs:** add Input() to SelectComponent's compareWith accessor ([#8845](https://github.com/SAP/fundamental-ngx/issues/8845)) ([48026cd](https://github.com/SAP/fundamental-ngx/commit/48026cd764ac7b1cd97af9f46beaf676737f6713))
+
+
+
 ## [0.36.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.1...v0.36.3-rc.2) (2022-10-25)
 
 
