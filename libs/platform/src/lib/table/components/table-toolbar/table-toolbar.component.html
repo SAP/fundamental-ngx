@@ -9,9 +9,11 @@
         <label fd-toolbar-label [id]="tableToolbarTitleId" [class.fd-toolbar__title]="!!title">
             {{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span>
         </label>
-
         <fd-toolbar-spacer></fd-toolbar-spacer>
-
+        <ng-container *ngIf="showExpandCollapseButton">
+            <fdp-button glyph="expand-all" (click)="expandAll()"></fdp-button>
+            <fdp-button glyph="collapse-all" (click)="collapseAll()"></fdp-button>
+        </ng-container>
         <fdp-search-field
             *ngIf="!hideSearchInput"
             style="min-width: 15.5rem"

@@ -930,6 +930,26 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this.recalculateTableColumnWidth();
     }
 
+    /** expand all rows */
+    expandAll(): void {
+        this._tableRows.forEach((e) => {
+            e.expanded = true;
+            e.hidden = false;
+        });
+        this._onTableRowsChanged();
+    }
+
+    /** collapse all rows */
+    collapseAll(): void {
+        this._tableRows.forEach((e) => {
+            e.expanded = false;
+            if (e.parent) {
+                e.hidden = true;
+            }
+        });
+        this._onTableRowsChanged();
+    }
+
     /** Search in table */
     search(searchInput: SearchInput): void {
         this._tableService.search(searchInput);
