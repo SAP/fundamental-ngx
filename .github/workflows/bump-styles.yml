@@ -40,5 +40,5 @@ jobs:
               if: ${{ steps.bump-styles-version.outputs.new-styles-version != '' }}
               run: |
                   git add .
-                  git commit -m "chore(core,platform): bump styles to v${{ needs.check-styles-version.outputs.new-styles-version }}" --no-verify
+                  git commit -m "chore(core,platform): bump fundamental styles to v${{ steps.bump-styles-version.outputs.new-styles-version }}" --no-verify
                   git push
