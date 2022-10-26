@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { TextComponent } from './text.component';
 import { TextModule } from './text.module';
@@ -69,7 +69,7 @@ describe('TextComponent', () => {
         expect(Number(target.style.webkitLineClamp)).toEqual(maxLines);
     });
 
-    it(`should set labels for more and less buttons`, async () => {
+    it(`should set labels for more and less buttons`, fakeAsync(() => {
         const moreLabel = 'label more'.toLowerCase();
         const lessLabel = 'label less'.toLowerCase();
 
@@ -80,7 +80,7 @@ describe('TextComponent', () => {
         component.moreLabel = moreLabel;
         component.lessLabel = lessLabel;
         fixture.detectChanges();
-        await fixture.whenStable();
+        tick();
 
         const button = fixture.nativeElement.querySelector('.fd-text__link--more');
 
@@ -88,10 +88,10 @@ describe('TextComponent', () => {
 
         component.isCollapsed = false;
         fixture.detectChanges();
-        await fixture.whenStable();
+        tick();
 
         expect(button.innerText.toLowerCase()).toEqual(lessLabel);
-    });
+    }));
 
     it('should have ability to toggle text view', () => {
         component.expandable = true;

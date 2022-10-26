@@ -8,7 +8,8 @@ import {
     OnDestroy,
     OnChanges,
     Output,
-    Renderer2
+    Renderer2,
+    ChangeDetectorRef
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -89,8 +90,6 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
     private _lineCount: number;
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef, private readonly _renderer: Renderer2) {}
-
     /**
      * Root native element of clamping box
      */
@@ -99,18 +98,26 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
+    constructor(
+        private readonly _elementRef: ElementRef,
+        private readonly _renderer: Renderer2,
+        private readonly _cdRef: ChangeDetectorRef
+    ) {}
+
+    /** @hidden */
     ngAfterViewInit(): void {
         this._isNativeSupport = typeof this.rootElement.style.webkitLineClamp !== 'undefined';
 
-        if (this.rootElement) {
+        // need to use setTimeout to force recheck of parent elements
+        setTimeout(() => {
             this._checkLineCount();
+        });
 
-            this.windowResize$ = fromEvent(window, 'resize')
-                .pipe(distinctUntilChanged(), debounceTime(200))
-                .subscribe({
-                    next: () => this._checkLineCount()
-                });
-        }
+        this.windowResize$ = fromEvent(window, 'resize')
+            .pipe(distinctUntilChanged(), debounceTime(200))
+            .subscribe({
+                next: () => this._checkLineCount()
+            });
     }
 
     /** @hidden */
