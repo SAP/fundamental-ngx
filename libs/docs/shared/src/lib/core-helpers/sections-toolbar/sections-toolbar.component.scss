@@ -4,8 +4,7 @@
 }
 
 .sidebar {
-    color: #21262c;
-    background-color: var(--sapBackgroundColor);
+    color: var(--sapTextColor);
     transition: 0.3s margin ease-in-out, 0.3s box-shadow ease-in-out;
     z-index: 6;
     width: 255px;
@@ -29,7 +28,7 @@
 }
 
 .nav-item {
-    color: #21262c;
+    color: var(--sapTextColor);
     font-size: 1.05rem;
     position: relative;
     padding: 13px 0 13px 40px;
@@ -85,8 +84,11 @@
 
 .fd-docs-search {
     flex: 0 0 auto;
-    padding: 15px 20px;
-    box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+    padding: 15px 15px;
+    margin: 0 15px;
+
+    border-right: var(--sapList_BorderWidth) solid;
+    border-right-color: var(--sapGroup_ContentBorderColor);
 }
 
 .nav-item-container {

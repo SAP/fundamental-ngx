@@ -1,5 +1,5 @@
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { B, DOWN_ARROW, END, ENTER, ESCAPE, HOME, SPACE, TAB, X } from '@angular/cdk/keycodes';
 import { ModifierKeys } from '@angular/cdk/testing';
 
@@ -7,6 +7,7 @@ import { SelectComponent } from './select.component';
 import { PopoverComponent } from '../popover/popover.component';
 import { SelectModule } from './select.module';
 import { SelectKeyManagerService } from './select-key-manager.service';
+import { OptionComponent } from './option/option.component';
 
 @Component({
     template: `
@@ -70,6 +71,47 @@ class TestFilteringWrapperComponent {
     }
 }
 
+type CarType = { id: string; name: string };
+@Component({
+    template: `
+        <fd-select [value]="selectedCarType" (valueChange)="setCarTypeByCopy($event)" [compareWith]="comparator">
+            <fd-option *ngFor="let carType of carTypes" [value]="carType">{{ carType.name }}</fd-option>
+        </fd-select>
+    `
+})
+class ValueCompareWithSelectComponent {
+    @ViewChild(SelectComponent)
+    selectComponent: SelectComponent;
+
+    @ViewChildren(OptionComponent)
+    options: QueryList<OptionComponent>;
+
+    carTypes: CarType[] = [
+        { id: '1', name: 'Hatchback' },
+        { id: '2', name: 'Sedan' },
+        { id: '3', name: 'Coupe' }
+    ];
+    selectedCarType: CarType = { id: '1', name: 'Hatchback' };
+
+    comparator: ((obj1: CarType, obj2: CarType) => boolean) | null = () => true;
+
+    setCarTypeByCopy(newValue: CarType): void {
+        this.selectedCarType = { ...newValue };
+    }
+
+    useCompareByValue(): void {
+        this.comparator = (obj1: CarType, obj2: CarType) => obj1 && obj2 && obj1.id === obj2.id;
+    }
+
+    useCompareByReference(): void {
+        this.comparator = (obj1: CarType, obj2: CarType) => obj1 === obj2;
+    }
+
+    useNullComparator(): void {
+        this.comparator = null;
+    }
+}
+
 describe('SelectComponent', () => {
     let element: ElementRef;
     let component: SelectComponent;
@@ -79,7 +121,7 @@ describe('SelectComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent, TestFilteringWrapperComponent],
+            declarations: [TestWrapperComponent, TestFilteringWrapperComponent, ValueCompareWithSelectComponent],
             imports: [SelectModule]
         })
             .overrideComponent(SelectComponent, {
@@ -397,6 +439,73 @@ describe('SelectComponent', () => {
 
             expect(_keyService._keyManager.activeItemIndex).toBeDefined();
         }));
+    });
+
+    describe('with value using compareWith', () => {
+        let fixtureCompare: ComponentFixture<ValueCompareWithSelectComponent>;
+        let instance: ValueCompareWithSelectComponent;
+
+        beforeEach(() => {
+            fixtureCompare = TestBed.createComponent(ValueCompareWithSelectComponent);
+            instance = fixtureCompare.componentInstance;
+            fixtureCompare.detectChanges();
+        });
+
+        describe('compare by value', () => {
+            beforeEach(fakeAsync(() => {
+                instance.useCompareByValue();
+                fixtureCompare.detectChanges();
+            }));
+
+            it('should have a selection', async () => {
+                await wait(fixtureCompare);
+
+                const selectedOption = instance.selectComponent.selected as OptionComponent;
+                expect(selectedOption.value.id).toEqual('1');
+                expect(selectedOption.value.name).toEqual('Hatchback');
+            });
+
+            it('should update when making a new selection', async () => {
+                instance.options.last._selectViaInteraction();
+
+                await wait(fixtureCompare);
+
+                const selectedOption = instance.selectComponent.selected as OptionComponent;
+                expect(instance.selectedCarType.id).toEqual('3');
+                expect(instance.selectedCarType.name).toEqual('Coupe');
+                expect(selectedOption.value.id).toEqual('3');
+                expect(selectedOption.value.name).toEqual('Coupe');
+            });
+        });
+
+        describe('compare by reference', () => {
+            beforeEach(fakeAsync(() => {
+                instance.useCompareByReference();
+                fixtureCompare.detectChanges();
+            }));
+
+            it('should initialize with no selection despite having a value', fakeAsync(() => {
+                expect(instance.selectedCarType.id).toBe('1');
+                expect(instance.selectComponent.selected).toBeUndefined();
+            }));
+
+            it('should not update the selection if value is copied on change', async () => {
+                instance.options.first._selectViaInteraction();
+
+                await wait(fixtureCompare);
+
+                expect(instance.selectedCarType.id).toEqual('1');
+                expect(instance.selectComponent.selected).toBeUndefined();
+            });
+        });
+
+        describe('non-function comparator', () => {
+            it('should throw an error when using a non-function comparator', fakeAsync(() => {
+                instance.useNullComparator();
+
+                expect(() => fixtureCompare.detectChanges()).toThrowError();
+            }));
+        });
     });
 });
 

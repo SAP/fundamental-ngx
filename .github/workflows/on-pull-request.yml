@@ -24,7 +24,7 @@ jobs:
             NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
         with:
             number-of-agents: 8
-            node-version: 14.20.0
+            node-version: 16.x
             yarn-version: 1.22.19
             install-commands: |
                 yarn install --frozen-lockfile
@@ -37,8 +37,6 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - uses: ./.github/actions/nodejs
-              with:
-                  node-version: 14.20.0
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
 
@@ -60,8 +58,6 @@ jobs:
               with:
                   main-branch-name: main
             - uses: ./.github/actions/nodejs
-              with:
-                  node-version: 14.20.0
 
             - uses: wagoid/commitlint-github-action@v3
               name: Commit lint
@@ -93,8 +89,6 @@ jobs:
               with:
                   fetch-depth: 0
             - uses: ./.github/actions/nodejs
-              with:
-                  node-version: 14.20.0
             - run: npx nx run-many --target=build --projects=docs --parallel=3 --configuration=production
             - uses: browser-actions/setup-chrome@latest
               with:
@@ -133,7 +127,5 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - uses: ./.github/actions/nodejs
-              with:
-                  node-version: 14.20.0
             - name: Stop all running agents for this CI run
               run: npx nx-cloud stop-all-agents

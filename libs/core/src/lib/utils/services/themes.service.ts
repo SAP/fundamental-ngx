@@ -27,44 +27,46 @@ export class ThemesService {
     /** Available themes */
     themes: Theme[] = [
         {
+            id: 'sap_horizon',
+            name: 'Morning Horizon (Light)'
+        },
+        {
+            id: 'sap_horizon_dark',
+            name: 'Evening Horizon (Dark)'
+        },
+        {
+            id: 'sap_horizon_hcb',
+            name: 'Horizon High Contrast Black',
+            description: 'Optimized contrast and accessibiliwty for extremely bright environments'
+        },
+        {
+            id: 'sap_horizon_hcw',
+            name: 'Horizon High Contrast White Horizon',
+            description: 'Optimized contrast and accessibility for extremely dark environments'
+        },
+        {
             id: 'sap_fiori_3',
-            name: 'Fiori 3',
+            name: 'Quartz Light',
             description: 'Use in regular office environment'
         },
         {
             id: 'sap_fiori_3_dark',
-            name: 'Fiori 3 Dark',
+            name: 'Quartz Dark',
             description: 'Use in dimmed environments'
         },
         {
             id: 'sap_fiori_3_hcb',
-            name: 'High Contrast Black',
+            name: 'Quartz High Contrast Black',
             description: 'Optimized contrast and accessibility for extremely bright environments'
         },
         {
             id: 'sap_fiori_3_hcw',
-            name: 'High Contrast White',
+            name: 'Quartz High Contrast White',
             description: 'Optimized contrast and accessibility for extremely dark environments'
         },
         {
             id: 'sap_fiori_3_light_dark',
-            name: 'Light Dark'
-        },
-        {
-            id: 'sap_horizon',
-            name: 'Morning Horizon'
-        },
-        {
-            id: 'sap_horizon_dark',
-            name: 'Evening Horizon'
-        },
-        {
-            id: 'sap_horizon_hcb',
-            name: 'High Contrast Black Horizon'
-        },
-        {
-            id: 'sap_horizon_hcw',
-            name: 'High Contrast White Horizon'
+            name: 'Quartz Auto (Depending on the OS Settings)'
         }
     ];
 

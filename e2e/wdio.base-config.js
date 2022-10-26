@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 module.exports = ({ runner, specs, projectName }) => {
-    require('ts-node').register({ transpileOnly: true });
+    require('ts-node').register({ transpileOnly: true, files: true, project: './e2e/tsconfig.json' });
     const AllureReporter = require('@wdio/allure-reporter').default;
     runner = runner || 'local';
     projectName = projectName.split(':').join('/');
@@ -17,7 +17,9 @@ module.exports = ({ runner, specs, projectName }) => {
                 }
             }
         ],
-
+        autoCompileOpts: {
+            autoCompile: false
+        },
         logLevel: 'error',
         bail: 0,
         waitforTimeout: 30000,

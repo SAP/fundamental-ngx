@@ -1,0 +1,44 @@
+name: scheduled-styles-bump
+
+on:
+    schedule:
+        # Cron time is UTC, set to run at 22:00UTC (01:00 EST) every 2 days
+        - cron: '0 22 */2 * *'
+
+jobs:
+    check-styles-version:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Fetch from origin repo
+              uses: actions/checkout@v3
+              with:
+                  ref: main # always fetch from main branch
+                  fetch-depth: 0
+                  token: ${{ secrets.GHACTIONS }}
+
+            - name: Setup Node.js and Cache
+              uses: ./.github/actions/nodejs
+
+            - name: Try to bump styles version
+              id: bump-styles-version
+              uses: ./.github/actions/bump-styles-version
+
+            - name: Setup Node.js and Cache
+              if: ${{ steps.bump-styles-version.outputs.new-styles-version != '' }}
+              uses: ./.github/actions/nodejs
+              with:
+                  frozen-lockfile: false
+
+            - name: Set up git user
+              if: ${{ steps.bump-styles-version.outputs.new-styles-version != '' }}
+              uses: ./.github/actions/set-up-git
+              with:
+                  name: ${{ secrets.GH_NAME }}
+                  email: ${{ secrets.GH_EMAIL }}
+
+            - name: Commit Changes
+              if: ${{ steps.bump-styles-version.outputs.new-styles-version != '' }}
+              run: |
+                  git add .
+                  git commit -m "chore(core,platform): bump fundamental styles to v${{ steps.bump-styles-version.outputs.new-styles-version }}" --no-verify
+                  git push
