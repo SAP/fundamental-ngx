@@ -40,7 +40,7 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
     styleUrls: ['./segmented-button.component.scss'],
     host: {
         role: 'group',
-        '(focusout)': '_focusOut($event)'
+        '(click)': '_click($event)'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -129,7 +129,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     }
 
     /** @hidden */
-    private _focusOut(event: FocusEvent): void {
+    private _click(event: MouseEvent): void {
         if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
             this.onTouched();
         }
@@ -159,7 +159,10 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
             fromEvent(htmlElement, 'click'),
             fromEvent<KeyboardEvent>(htmlElement, 'keydown').pipe(
                 filter((event) => KeyUtil.isKeyCode(event, [ENTER, SPACE])),
-                tap((event) => event.preventDefault())
+                tap((event) => {
+                    event.preventDefault();
+                    this.onTouched();
+                })
             )
         );
 
