@@ -357,6 +357,7 @@ export class SelectComponent
     _compareWith = (o1: any, o2: any): boolean => o1 === o2;
 
     /** Function to compare the option values with the selected values. */
+    @Input()
     get compareWith(): (o1: any, o2: any) => boolean {
         return this._compareWith;
     }
