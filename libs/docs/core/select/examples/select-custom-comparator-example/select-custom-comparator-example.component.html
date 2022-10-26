@@ -1,0 +1,7 @@
+<h4>Custom comparator</h4>
+<fd-select [value]="selectedCarType" (valueChange)="setCarTypeByCopy($event)" [compareWith]="comparator">
+    <fd-option *ngFor="let carType of carTypes" [value]="carType">{{ carType.name }}</fd-option>
+</fd-select>
+
+<p>Options matching selected option by value: "{{ optionMatchedByValue }}".</p>
+<p>Options matching selected option by reference: "{{ optionMatchedByReference }}".</p>

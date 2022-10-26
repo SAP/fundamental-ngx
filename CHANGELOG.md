@@ -1,3 +1,26 @@
+## [0.36.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.3...v0.36.3-rc.4) (2022-10-26)
+
+
+### Bug Fixes
+
+* **core:** need to run setTimeout in line clamp logic to force recheck of parents ([#8869](https://github.com/SAP/fundamental-ngx/issues/8869)) ([92ac51a](https://github.com/SAP/fundamental-ngx/commit/92ac51a284521a36f4eb404197a2c869cd2d1f8c))
+* **docs:** bumping styles version commit message ([#8905](https://github.com/SAP/fundamental-ngx/issues/8905)) ([fee4846](https://github.com/SAP/fundamental-ngx/commit/fee484685bdb002b1229d3d0a86f3760911b2e58))
+
+
+
+## [0.36.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.2...v0.36.3-rc.3) (2022-10-26)
+
+
+### Features
+
+* **core, docs:** add Input() to SelectComponent's compareWith accessor ([#8845](https://github.com/SAP/fundamental-ngx/issues/8845)) ([48026cd](https://github.com/SAP/fundamental-ngx/commit/48026cd764ac7b1cd97af9f46beaf676737f6713))
+
+
+
+## [0.36.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.1...v0.36.3-rc.2) (2022-10-25)
+
+
+
 ## [0.36.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.0...v0.36.3-rc.1) (2022-10-25)
 
 

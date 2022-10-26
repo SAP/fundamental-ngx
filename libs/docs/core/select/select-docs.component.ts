@@ -31,6 +31,9 @@ const selectMaxHeightTs = 'select-height/select-max-height-example.component.ts'
 const selectSemanticStateHtml = 'select-semantic-state-example/select-semantic-state-example.component.html';
 const selectSemanticStateTs = 'select-semantic-state-example/select-semantic-state-example.component.ts';
 
+const selectCustomComparatorHtml = 'select-custom-comparator-example/select-custom-comparator-example.component.html';
+const selectCustomComparatorTs = 'select-custom-comparator-example/select-custom-comparator-example.component.ts';
+
 @Component({
     selector: 'fd-select-docs',
     templateUrl: './select-docs.component.html',
@@ -150,6 +153,20 @@ export class SelectDocsComponent {
             fileName: 'select-semantic-state-example',
             typescriptFileCode: getAssetFromModuleAssets(selectSemanticStateTs),
             component: 'SelectSemanticStateExampleComponent'
+        }
+    ];
+
+    selectCustomComparator: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(selectCustomComparatorHtml),
+            fileName: 'select-custom-comparator-example'
+        },
+        {
+            language: 'typescript',
+            component: 'SelectCustomComparatorExample',
+            code: getAssetFromModuleAssets(selectCustomComparatorTs),
+            fileName: 'select-custom-comparator-example'
         }
     ];
 }
