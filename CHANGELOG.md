@@ -1,3 +1,12 @@
+## [0.36.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.4...v0.36.3-rc.5) (2022-10-26)
+
+
+### Bug Fixes
+
+* **platform:** wizard generator hidden form groups visible ([#8891](https://github.com/SAP/fundamental-ngx/issues/8891)) ([aac5aa1](https://github.com/SAP/fundamental-ngx/commit/aac5aa161ec9f479b8a4959a915fac9240f48372))
+
+
+
 ## [0.36.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.3...v0.36.3-rc.4) (2022-10-26)
 
 
