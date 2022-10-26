@@ -1,7 +1,6 @@
 import {
     click,
     elementArray,
-    getCSSPropertyByName,
     getElementClass,
     getElementPlaceholder,
     getText,
@@ -247,12 +246,6 @@ describe('Date picker suite', () => {
         await click(buttonDatePicker);
         await click(dayInCalendarButtonByValue('1'));
         await expect(await getValue(inputDatePicker)).toEqual(date);
-        await click(buttonDatePicker);
-        await expect(highlightedColor).toContain(
-            (
-                await getCSSPropertyByName(dayInCalendarButtonByValue('1'), 'background-color')
-            ).value
-        );
     });
 
     it('verify selecting a year range navigates back to the year view', async () => {

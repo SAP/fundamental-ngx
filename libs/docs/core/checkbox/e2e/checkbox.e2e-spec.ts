@@ -6,7 +6,6 @@ import {
     click,
     executeScriptBeforeTagAttr,
     getAttributeByName,
-    getCSSPropertyByName,
     getElementArrayLength,
     getText,
     isElementClickable,
@@ -322,23 +321,6 @@ describe('checkbox test suite', () => {
     });
 
     describe('general checks', () => {
-        it('should check focus style exists', async () => {
-            const checkboxCount = await getElementArrayLength(checkboxInput);
-
-            for (let i = 0; i < checkboxCount; i++) {
-                if (i === 15) {
-                    // disabled checkbox
-                    continue;
-                }
-                await applyState('focus', checkboxInput, i);
-                await expect(emptyDataArr).not.toContain(
-                    (
-                        await getCSSPropertyByName(checkboxInput, 'outline-style', i)
-                    ).value
-                );
-            }
-        });
-
         it('should check orientation', async () => {
             await checkboxPage.checkRtlSwitch();
         });

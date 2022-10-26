@@ -1,3 +1,131 @@
+## [0.36.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.1...v0.36.3-rc.2) (2022-10-25)
+
+
+
+## [0.36.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.0...v0.36.3-rc.1) (2022-10-25)
+
+
+### Bug Fixes
+
+* **e2e:** tsconfig-paths ([#8833](https://github.com/SAP/fundamental-ngx/issues/8833)) ([9e80cc4](https://github.com/SAP/fundamental-ngx/commit/9e80cc4bcf903aa0b42e9e26395b0c2483e22a86))
+
+
+
+## [0.36.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.36.2-rc.3...v0.36.3-rc.0) (2022-10-24)
+
+
+### Bug Fixes
+
+* **core:** do not disable step input increment/decrement when value is null ([#8840](https://github.com/SAP/fundamental-ngx/issues/8840)) ([8fb3acd](https://github.com/SAP/fundamental-ngx/commit/8fb3acd93de5b6a589e7300b9e6110cd3dc8adea))
+* **platform:** multi combobox bug where inputText is manipulated incorrectly ([#8793](https://github.com/SAP/fundamental-ngx/issues/8793)) ([d414003](https://github.com/SAP/fundamental-ngx/commit/d414003f620914e6a5d4baa0087629aa4d303aeb))
+
+
+
+### [0.36.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.1...v0.36.2) (2022-10-24)
+
+
+## [0.36.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.36.2-rc.3...v0.36.2-rc.4) (2022-10-24)
+
+
+### Bug Fixes
+
+* **core:** do not disable step input increment/decrement when value is null ([#8840](https://github.com/SAP/fundamental-ngx/issues/8840)) ([8fb3acd](https://github.com/SAP/fundamental-ngx/commit/8fb3acd93de5b6a589e7300b9e6110cd3dc8adea))
+* **platform:** multi combobox bug where inputText is manipulated incorrectly ([#8793](https://github.com/SAP/fundamental-ngx/issues/8793)) ([d414003](https://github.com/SAP/fundamental-ngx/commit/d414003f620914e6a5d4baa0087629aa4d303aeb))
+
+
+
+## [0.36.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.36.2-rc.2...v0.36.2-rc.3) (2022-10-24)
+
+
+### Features
+
+* **core,platform:** dynamic page title & subtitle wrapping ([#8822](https://github.com/SAP/fundamental-ngx/issues/8822)) ([4cdac24](https://github.com/SAP/fundamental-ngx/commit/4cdac249c617ecfe2c99d2926c7fb50e2dcbacfb))
+
+
+
+## [0.36.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.36.2-rc.1...v0.36.2-rc.2) (2022-10-24)
+
+
+
+## [0.36.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.36.2-rc.0...v0.36.2-rc.1) (2022-10-24)
+
+
+### Bug Fixes
+
+* **core,platform:** typo in workflow ([#8892](https://github.com/SAP/fundamental-ngx/issues/8892)) ([b849b5f](https://github.com/SAP/fundamental-ngx/commit/b849b5fbb8127a27c1f67d5907fb338ca05082d1))
+
+
+### Features
+
+* **core,platform:** automatically bump styles version ([#8871](https://github.com/SAP/fundamental-ngx/issues/8871)) ([d8e96ce](https://github.com/SAP/fundamental-ngx/commit/d8e96ceb1ae6d9976cacb85d61d99a407d030b72))
+
+
+
+## [0.36.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.53...v0.36.2-rc.0) (2022-10-22)
+
+
+
+### [0.36.1](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.53...v0.36.1) (2022-10-22)
+
+
+## [0.36.1-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.52...v0.36.1-rc.53) (2022-10-22)
+
+
+
+## [0.36.1-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.51...v0.36.1-rc.52) (2022-10-21)
+
+
+
+## [0.36.1-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.50...v0.36.1-rc.51) (2022-10-21)
+
+
+### Bug Fixes
+
+* **fn:** add select module to exported modules ([#8842](https://github.com/SAP/fundamental-ngx/issues/8842)) ([928cdcf](https://github.com/SAP/fundamental-ngx/commit/928cdcfb83dcc1c5fdc126e4330ea3c528a428e4))
+
+
+
+## [0.36.1-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.49...v0.36.1-rc.50) (2022-10-21)
+
+
+
+## [0.36.1-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.48...v0.36.1-rc.49) (2022-10-20)
+
+
+### Bug Fixes
+
+* the API documentation colors for dark modes ([#8866](https://github.com/SAP/fundamental-ngx/issues/8866)) ([8485231](https://github.com/SAP/fundamental-ngx/commit/8485231023069a8411707e5f2830cc1c52e3c930))
+
+
+
+## [0.36.1-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.47...v0.36.1-rc.48) (2022-10-18)
+
+
+### Bug Fixes
+
+* **core:** condensed mode key navigation ([#8861](https://github.com/SAP/fundamental-ngx/issues/8861)) ([7958342](https://github.com/SAP/fundamental-ngx/commit/7958342b1943b6ae46d107ac3ead917c9ce3f313))
+
+
+
+## [0.36.1-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.46...v0.36.1-rc.47) (2022-10-18)
+
+
+### Bug Fixes
+
+* **core:** fix multi-input bugs ([#8794](https://github.com/SAP/fundamental-ngx/issues/8794)) ([290ff31](https://github.com/SAP/fundamental-ngx/commit/290ff31a45d2c06be189221142c0a183233650f0))
+
+
+
+## [0.36.1-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.45...v0.36.1-rc.46) (2022-10-18)
+
+
+### Bug Fixes
+
+* **core:** add key control to scrollbar ([#8780](https://github.com/SAP/fundamental-ngx/issues/8780)) ([07e7dd2](https://github.com/SAP/fundamental-ngx/commit/07e7dd2ac9310011e2c04e37671c5906878f667a))
+* **core:** change year range on arrow button clicks ([#8843](https://github.com/SAP/fundamental-ngx/issues/8843)) ([facb328](https://github.com/SAP/fundamental-ngx/commit/facb328c35daaa8a1c6395876d6e1ac699d0ac5f))
+
+
+
 ## [0.36.1-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.36.1-rc.44...v0.36.1-rc.45) (2022-10-18)
 
 

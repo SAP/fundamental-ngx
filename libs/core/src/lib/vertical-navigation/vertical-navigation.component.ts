@@ -49,12 +49,11 @@ export class VerticalNavigationComponent implements AfterContentInit {
             this._mainNavigationItems.forEach((navItem) => {
                 navItem._condensed = true;
             });
-        } else {
-            this._keyManager = new FocusKeyManager(this._navigationItems)
-                .withHomeAndEnd()
-                .skipPredicate((item) => !item._isItemVisible);
-            this._listenOnQueryChange();
         }
+        this._keyManager = new FocusKeyManager(this._navigationItems)
+            .withHomeAndEnd()
+            .skipPredicate((item) => !item._isItemVisible || (item._condensed && item.expanded));
+        this._listenOnQueryChange();
     }
 
     /** Set fake focus on element with passed index */
@@ -100,9 +99,7 @@ export class VerticalNavigationComponent implements AfterContentInit {
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
-        if (!this.condensed) {
-            this._keyManager.onKeydown(event);
-            event.stopPropagation();
-        }
+        this._keyManager.onKeydown(event);
+        event.stopPropagation();
     }
 }

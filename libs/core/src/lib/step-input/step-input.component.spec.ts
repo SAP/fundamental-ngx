@@ -169,7 +169,7 @@ describe('StepInputComponent', () => {
         expect(component.focused).toBeTrue();
         expect(focusInEventSpy).toHaveBeenCalled();
 
-        component.handleFocusOut();
+        component.handleFocusOut(new FocusEvent('blur'));
 
         expect(component.focused).toBeFalse();
         expect(focusOutEventSpy).toHaveBeenCalled();
@@ -378,5 +378,25 @@ describe('StepInputComponent', () => {
 
         component.handleKeyDown.call(context, keyDownEvent);
         expect(decrementSpy).toHaveBeenCalled();
+    });
+
+    it('should handle the increment/decrement buttons when the input is set to null', () => {
+        component.writeValue(null);
+        component.increment();
+        expect(component.value).toBe(101);
+        component.writeValue(null);
+        component.decrement();
+        expect(component.value).toBe(99);
+    });
+
+    it('should handle increment/decrement when initial value is max value and input is cleared', () => {
+        component.max = 100;
+        component.min = 100;
+        component.writeValue(null);
+        component.increment();
+        expect(component.value).toBe(100);
+        component.writeValue(null);
+        component.decrement();
+        expect(component.value).toBe(100);
     });
 });
