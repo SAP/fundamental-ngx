@@ -256,7 +256,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
                     this.opened = true;
                 }
             }
-            option.selected = option.value === this._internalValue;
+            option.selected = option.value.toLowerCase() === this._internalValue.toLowerCase();
         });
 
         visibleOptions > 0 ? (this._optionsListEmpty = false) : (this._optionsListEmpty = true);

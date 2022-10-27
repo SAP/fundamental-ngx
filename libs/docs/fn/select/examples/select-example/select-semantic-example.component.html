@@ -1,7 +1,7 @@
 <h4>Positive state</h4>
 <div style="width: 200px">
     <fn-select placeholder="Select an option" label="Standard Selector" state="positive" #selectSemanticPositive>
-        <fn-option *ngFor="let option of options" [value]="option" [label]="option"></fn-option>
+        <li fn-option *ngFor="let option of options" [value]="option" [label]="option"></li>
     </fn-select>
 </div>
 <p>
@@ -12,7 +12,7 @@
 <h4>Critical state</h4>
 <div style="width: 200px">
     <fn-select placeholder="Select an option" label="Standard Selector" state="critical" #selectSemanticCritical>
-        <fn-option *ngFor="let option of options" [value]="option" [label]="option"></fn-option>
+        <li fn-option *ngFor="let option of options" [value]="option" [label]="option"></li>
     </fn-select>
 </div>
 <p>
@@ -23,7 +23,7 @@
 <h4>Negative state</h4>
 <div style="width: 200px">
     <fn-select placeholder="Select an option" label="Standard Selector" state="negative" #selectSemanticNegative>
-        <fn-option fn-option *ngFor="let option of options" [value]="option" [label]="option"></fn-option>
+        <li fn-option fn-option *ngFor="let option of options" [value]="option" [label]="option"></li>
     </fn-select>
 </div>
 <p>
@@ -34,7 +34,7 @@
 <h4>Info state</h4>
 <div style="width: 200px">
     <fn-select placeholder="Select an option" label="Standard Selector" state="info" #selectSemanticInfo>
-        <fn-option *ngFor="let option of options" [value]="option" [label]="option"></fn-option>
+        <li fn-option *ngFor="let option of options" [value]="option" [label]="option"></li>
     </fn-select>
 </div>
 <p>

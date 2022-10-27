@@ -1,6 +1,6 @@
 <div style="width: 200px">
     <fn-select placeholder="Select an option" label="Standard Selector" #selectExample1>
-        <fn-option *ngFor="let option of options" [value]="option" [label]="option"></fn-option>
+        <li fn-option *ngFor="let option of options" [value]="option" [label]="option"></li>
     </fn-select>
 </div>
 
@@ -11,7 +11,7 @@
 
 <div style="width: 200px">
     <fn-select placeholder="Select an option" label="Standard Selector" #selectExample2>
-        <fn-option *ngFor="let option of options2" [value]="option" [label]="option.name"></fn-option>
+        <li fn-option *ngFor="let option of options2" [value]="option" [label]="option.name"></li>
     </fn-select>
 </div>
 

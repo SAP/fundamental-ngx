@@ -24,7 +24,7 @@ import { FN_SELECT_PROVIDER } from '../select.token';
  */
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
-    selector: 'fn-option, [fn-option]',
+    selector: '[fn-option]',
     templateUrl: './option.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

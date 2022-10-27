@@ -1,7 +1,7 @@
 <div style="width: 200px">
     <form [formGroup]="customForm">
         <fn-select formControlName="selectControl1" placeholder="Select an option" label="Reactive Form Selector">
-            <fn-option *ngFor="let option of options" [value]="option" [label]="option"></fn-option>
+            <li fn-option *ngFor="let option of options" [value]="option" [label]="option"></li>
         </fn-select>
     </form>
 </div>

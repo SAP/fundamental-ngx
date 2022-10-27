@@ -18,8 +18,8 @@
         [cdkConnectedOverlayOrigin]="trigger"
         [cdkConnectedOverlayOpen]="opened && !_optionsListEmpty"
     >
-        <div [style.width.px]="_selectWidth" aria-label="Select menu" fnSelectMenu #menu>
+        <ul [style.width.px]="_selectWidth" aria-label="Select menu" fnSelectMenu #menu>
             <ng-content></ng-content>
-        </div>
+        </ul>
     </ng-template>
 </div>
