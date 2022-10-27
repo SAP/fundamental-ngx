@@ -11,6 +11,8 @@ fd-menu {
     }
 }
 
-.fd-popover--menu.fd-popover__popper {
-    overflow: visible !important;
+.fd-popover--menu {
+    .fd-scrollbar {
+        overflow: visible !important;
+    }
 }
