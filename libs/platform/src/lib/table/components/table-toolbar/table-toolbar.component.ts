@@ -54,7 +54,7 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
 
     /** Toggle to expand and collapse all feature */
     @Input()
-    showExpandCollapseButton = false;
+    showExpandCollapseButtons = false;
     /** Suggestions for search field. */
     @Input()
     searchSuggestions: SuggestionItem[] = [];

@@ -10,7 +10,7 @@
             {{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span>
         </label>
         <fd-toolbar-spacer></fd-toolbar-spacer>
-        <ng-container *ngIf="showExpandCollapseButton">
+        <ng-container *ngIf="showExpandCollapseButtons">
             <fdp-button glyph="expand-all" (click)="expandAll()"></fdp-button>
             <fdp-button glyph="collapse-all" (click)="collapseAll()"></fdp-button>
         </ng-container>
