@@ -53,7 +53,7 @@ export class CalendarPo extends CoreBaseComponentPo {
         await waitForElDisplayed(this.title);
     }
 
-    async setCalendarRange(selector: string, startDateIndex: number, stopDateIndex: number): void {
+    async setCalendarRange(selector: string, startDateIndex: number, stopDateIndex: number): Promise<void> {
         await scrollIntoView(selector);
         await click(selector, startDateIndex);
         await click(selector, stopDateIndex);

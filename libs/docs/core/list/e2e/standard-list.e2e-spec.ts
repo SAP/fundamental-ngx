@@ -156,28 +156,6 @@ describe('Standard List test suite', () => {
         });
     });
 
-    describe('keyboard support example', () => {
-        it('should check keyboard navigation', async () => {
-            const itemCount = await getElementArrayLength(keyboardSupportList + listItems);
-            await click(keyboardSupportList + button);
-
-            await expect(
-                await executeScriptBeforeTagAttr(keyboardSupportList + listItems, await pickBorderStyleAttribute(), 0)
-            ).toContain('dotted');
-
-            for (let i = 1; i < itemCount; i++) {
-                await sendKeys('ArrowDown');
-                await expect(
-                    await executeScriptBeforeTagAttr(
-                        keyboardSupportList + listItems,
-                        await pickBorderStyleAttribute(),
-                        i
-                    )
-                ).toContain('dotted');
-            }
-        });
-    });
-
     describe('drag and drop examples', () => {
         it('check drag and drop ability', async () => {
             await scrollIntoView(dragAndDropList + listItems);

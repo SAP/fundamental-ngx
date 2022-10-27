@@ -32,7 +32,7 @@ const routes: Routes = [
     {
         path: 'fn',
         data: {
-            library: 'Fiori Next'
+            library: 'BTP Experimental'
         },
         loadChildren: () => import('./fn/fn-documentation.module').then((m) => m.FnDocumentationModule)
     },

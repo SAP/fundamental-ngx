@@ -6,6 +6,10 @@ inputs:
         description: Node.js version
         required: false
         default: 16.x
+    frozen-lockfile:
+        description: Install dependencies from lock file
+        required: false
+        default: 'true'
 
 runs:
     using: composite
@@ -38,6 +42,6 @@ runs:
                   ${{ runner.os }}-${{ inputs.node-version }}-node-modules-
 
         - name: Install dependencies
-          if: steps.node_modules.outputs.cache-hit != 'true'
-          run: yarn install --frozen-lockfile
+          if: inputs.frozen-lockfile != 'true' || steps.node_modules.outputs.cache-hit != 'true'
+          run: yarn install ${{ inputs.frozen-lockfile == 'true' && '--frozen-lockfile' || '' }}
           shell: bash

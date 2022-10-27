@@ -6,7 +6,6 @@ import {
     elementDisplayed,
     getAttributeByName,
     getAttributeByNameArr,
-    getCSSPropertyByName,
     getElementArrayLength,
     getElementClass,
     getElementSize,
@@ -148,29 +147,6 @@ describe('Verify Feed Input component', () => {
 
         await expect(feedInputSize1).toBeLessThanOrEqual(feedInputSize2);
         await expect(feedInputSize2).toEqual(95);
-    });
-
-    it('should have focus stated assigned to elements', async () => {
-        if (await browserIsSafari()) {
-            // button not focused on Safari
-            return;
-        }
-        const arrLength = await getElementArrayLength(feedInputButton);
-        for (let i = 0; arrLength > i; i++) {
-            if (i === 3) {
-                continue;
-            }
-            await waitForPresent(feedInputTextArea, i);
-            await scrollIntoView(feedInputTextArea, i);
-            await setValue(feedInputTextArea, four_lines_text, i);
-            const inputFocusStyle = (await getCSSPropertyByName(feedInputTextArea, 'outline-style', i)).value;
-            await sendKeys('Tab');
-
-            const sendButtonFocusStyle = (await getCSSPropertyByName(feedInputButton, 'outline-style', i)).value;
-
-            await expect(inputFocusStyle).toBe('dotted');
-            await expect(sendButtonFocusStyle).toContain('dotted');
-        }
     });
 
     it('should avatar and Send button has correct tooltip', async () => {

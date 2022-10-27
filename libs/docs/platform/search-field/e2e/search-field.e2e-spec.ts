@@ -14,7 +14,7 @@ import {
 } from '../../../../../e2e';
 import { SearchFieldPo } from './search-field.po';
 import { expected_category, search_placeholder } from './search-field-content';
-import { checkElArrIsClickable } from '../../helper/assertion-helper';
+import { checkElArrIsClickable } from 'e2e/wdio/helper/assertion-helper';
 
 describe('Search field', () => {
     const {
@@ -157,10 +157,10 @@ describe('Search field', () => {
     });
 
     it('should compact be smaller than cozy', async () => {
-        const defaultCozySize = await getElementSize(searchFields, 0, 'height');
-        const defaultCompactSize = await getElementSize(searchFields, 1, 'height');
-        const withCategoryCozySize = await getElementSize(searchFields, 3, 'height');
-        const withCategoryCompactSize = await getElementSize(searchFields, 4, 'height');
+        const defaultCozySize = (await getElementSize(searchFields, 0)).height;
+        const defaultCompactSize = (await getElementSize(searchFields, 1)).height;
+        const withCategoryCozySize = (await getElementSize(searchFields, 3)).height;
+        const withCategoryCompactSize = (await getElementSize(searchFields, 4)).height;
 
         await expect(defaultCozySize).toBeGreaterThan(defaultCompactSize);
         await expect(withCategoryCozySize).toBeGreaterThan(withCategoryCompactSize);
