@@ -24,12 +24,6 @@ fd-popover-body {
                 cursor: auto;
             }
         }
-
-        &-list {
-            .fd-list {
-                overflow: auto;
-            }
-        }
     }
 
     &__popper {
@@ -41,6 +35,7 @@ fd-popover-body {
             max-height: 100%;
             max-width: 100%;
             width: 100%;
+            border-radius: inherit;
         }
 
         .fd-list {
