@@ -5,11 +5,16 @@ export type PluralizationSet1Options = 'zero' | 'one' | 'few' | 'many' | 'other'
  * See details here http://translate.sourceforge.net/wiki/l10n/pluralforms
  */
 export class PluralizationSet1 {
+    /** @hidden */
     private readonly fewInlusive: ReadonlySet<number> = new Set([2, 3, 4]);
+    /** @hidden */
     private readonly fewExclusive: ReadonlySet<number> = new Set([12, 13, 14]);
+    /** @hidden */
     private readonly manyInclusiveTenths: ReadonlySet<number> = new Set([5, 6, 7, 8, 9]);
+    /** @hidden */
     private readonly manyInclusiveHundredths: ReadonlySet<number> = new Set([11, 12, 13, 14]);
 
+    /** @hidden */
     process(num: any): PluralizationSet1Options {
         num = parseInt(num, 10);
         if (!isNaN(num)) {

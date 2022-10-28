@@ -35,6 +35,7 @@ export class FdTranslatePipe implements PipeTransform, OnDestroy {
     /** @hidden */
     private readonly _onDestroy$ = new Subject<void>();
 
+    /** @hidden */
     constructor(@Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>, private _cdr: ChangeDetectorRef) {
         this._instantiateSubscription();
     }
@@ -44,6 +45,7 @@ export class FdTranslatePipe implements PipeTransform, OnDestroy {
         this._onDestroy$.next();
     }
 
+    /** Translate a key with arguments and, optionally, default value */
     transform(key: string, args?: FdLanguageKeyArgs | Record<string, any>, defaultValue = ''): string {
         this._key$.next(key);
         this._args$.next(args);

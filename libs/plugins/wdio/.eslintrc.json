@@ -6,7 +6,9 @@
             "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
             "rules": {
                 "@typescript-eslint/explicit-function-return-type": "off",
-                "@typescript-eslint/no-var-requires": "off"
+                "@typescript-eslint/no-var-requires": "off",
+                "jsdoc/require-jsdoc": "off",
+                "grouped-accessor-pairs": "off"
             }
         },
         {
