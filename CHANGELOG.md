@@ -1,3 +1,12 @@
+## [0.36.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.7...v0.36.3-rc.8) (2022-10-28)
+
+
+### Features
+
+* **core,platform:** require-jsdoc rule ([#8630](https://github.com/SAP/fundamental-ngx/issues/8630)) ([1e79e24](https://github.com/SAP/fundamental-ngx/commit/1e79e241d3a18feeaef1d8437427324ccb06e4e4))
+
+
+
 ## [0.36.3-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.6...v0.36.3-rc.7) (2022-10-28)
 
 
