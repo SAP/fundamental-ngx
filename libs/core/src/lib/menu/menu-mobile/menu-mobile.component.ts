@@ -4,6 +4,7 @@ import {
     Component,
     ElementRef,
     Inject,
+    NgZone,
     OnDestroy,
     OnInit,
     Optional,
@@ -11,11 +12,11 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core/dialog';
+import { DialogBodyComponent, DialogService } from '@fundamental-ngx/core/dialog';
 import { Observable, of } from 'rxjs';
 import { MenuService } from '../services/menu.service';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
-import { map, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith, take, takeUntil } from 'rxjs/operators';
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
 import {
@@ -51,11 +52,20 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     navigationIcon$: Observable<string>;
 
     /** @hidden */
+    @ViewChild(DialogBodyComponent)
+    set _watch(_dialogBody: DialogBodyComponent) {
+        if (_dialogBody) {
+            this._menuService.addKeyboardSupport(_dialogBody.elementRef());
+        }
+    }
+
+    /** @hidden */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
         private _menuService: MenuService,
         private _changeDetectorRef: ChangeDetectorRef,
+        private _ngZone: NgZone,
         @Optional() private _rtlService: RtlService,
         @Inject(MENU_COMPONENT) menuComponent: MenuInterface,
         @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
@@ -83,10 +93,11 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
 
     /** Navigate back to parent level of submenu */
     backToParentLevel(): void {
-        this._menuService.setActive(
-            false,
-            this._menuService.activeNodePath[this._menuService.activeNodePath.length - 1].item
-        );
+        const menuItem = this._menuService.activeNodePath[this._menuService.activeNodePath.length - 1].item;
+        this._menuService.setActive(false, menuItem);
+        this._executeOnStable(() => {
+            menuItem?.focus();
+        });
     }
 
     /** @hidden Opens the Dialog */
@@ -111,6 +122,18 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
             .subscribe((items) => this._setMenuView(items));
     }
 
+    /**
+     * @hidden
+     * Executes a function when the zone is stable.
+     */
+    private _executeOnStable(fn: () => any): void {
+        if (this._ngZone.isStable) {
+            fn();
+        } else {
+            this._ngZone.onStable.pipe(take(1)).subscribe(fn);
+        }
+    }
+
     /** @hidden Sets menu view, title and isSubmenu flag */
     private _setMenuView(items: MenuItemComponent[]): void {
         const lastItem: MenuItemComponent = items[items.length - 1];
@@ -118,6 +141,9 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
         this.title = this._getDialogTitle(lastItem);
         this.view = this._getMenuView(lastItem);
         this._changeDetectorRef.markForCheck();
+        this._executeOnStable(() => {
+            this._menuService.focusedNode?.item?.focus();
+        });
     }
 
     /** @hidden Opens/closes the Dialog based on Menu isOpenChange events */
