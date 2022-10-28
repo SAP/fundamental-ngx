@@ -1,3 +1,12 @@
+## [0.36.3-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.6...v0.36.3-rc.7) (2022-10-28)
+
+
+### Bug Fixes
+
+* **e2e:** removing cross-env from e2e workflow ([#8910](https://github.com/SAP/fundamental-ngx/issues/8910)) ([c58e084](https://github.com/SAP/fundamental-ngx/commit/c58e0844dfc62416bb2a00e8a6023f367b0eb9ec))
+
+
+
 ## [0.36.3-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.5...v0.36.3-rc.6) (2022-10-27)
 
 
