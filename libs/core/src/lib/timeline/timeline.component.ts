@@ -90,8 +90,12 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
     /** @hidden */
     _canShowSecondList = true;
 
-    /** Differ used to find the changes in the data provided by the data source. */
+    /** @hidden
+     * Differ used to find the changes in the data provided by the data source.
+     */
     private _dataDifferForFirstList: IterableDiffer<T>;
+
+    /** @hidden */
     private _dataDifferForSecondList: IterableDiffer<T>;
 
     /** @hidden */
@@ -190,6 +194,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
         );
     }
 
+    /** @hidden */
     private _setPositionStrategy(): void {
         this._timelinePositionControlService.setStrategy(`${this.axis}-${this.layout}` as TimeLinePositionStrategy);
     }

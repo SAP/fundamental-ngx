@@ -11,7 +11,10 @@ export const RTL_LANGUAGE = new InjectionToken<string[]>('RtlLanguage');
  * user can overwrite default languages by using injection token RtlLanguageToken
  */
 export class RtlService {
+    /** RTL value */
     rtl: BehaviorSubject<boolean>;
+
+    /** @hidden */
     constructor(@Optional() @Inject(RTL_LANGUAGE) injectedRtlLanguages: string[]) {
         injectedRtlLanguages = injectedRtlLanguages || DefaultRtlLanguages;
 

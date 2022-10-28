@@ -31,6 +31,7 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
+    /** @hidden */
     @HostBinding('class.fd-form-group')
     fdFormGroupClass = true;
 

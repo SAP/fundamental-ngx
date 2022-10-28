@@ -90,6 +90,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     @HostBinding('class.fd-wizard--responsive-paddings')
     responsivePaddings = false;
 
+    /** Whether to display a summary step.  */
     @Input()
     displaySummaryStep = false;
 
@@ -138,6 +139,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _previousWidth: number;
 
+    /** @hidden */
     constructor(
         private _elRef: ElementRef,
         private readonly _cdRef: ChangeDetectorRef,

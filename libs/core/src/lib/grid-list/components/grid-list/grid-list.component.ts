@@ -100,6 +100,7 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     /** @hidden */
     private readonly _selectedItemsSubject$ = new BehaviorSubject<GridListSelectionEvent<T>>(this._selectedItems);
 
+    /** @hidden */
     readonly _selectedItems$ = this._selectedItemsSubject$.asObservable();
 
     /** @hidden */

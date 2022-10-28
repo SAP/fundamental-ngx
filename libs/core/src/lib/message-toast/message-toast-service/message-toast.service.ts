@@ -12,7 +12,10 @@ import { DynamicComponentService } from '@fundamental-ngx/core/utils';
  */
 @Injectable()
 export class MessageToastService {
+    /** @hidden */
     private _messageToasts: ComponentRef<MessageToastComponent>[] = [];
+
+    /** @hidden */
     private _messageToastContainerRef: ComponentRef<MessageToastContainerComponent> | undefined;
 
     /** @hidden */

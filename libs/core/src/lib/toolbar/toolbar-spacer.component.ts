@@ -27,6 +27,7 @@ export class ToolbarSpacerComponent {
     @Input()
     fixed = false;
 
+    /** @hidden */
     @HostBinding('attr.class')
     get css(): string {
         return `fd-toolbar__spacer ${this.fixed ? 'fd-toolbar__spacer--fixed' : ''} ${this.class}`;

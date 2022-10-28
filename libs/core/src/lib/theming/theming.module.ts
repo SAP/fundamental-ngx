@@ -16,6 +16,7 @@ import { THEMING_CONFIG_TOKEN } from './tokens';
     ]
 })
 export class ThemingModule {
+    /** Module with providers */
     static withConfig(config: Partial<ThemingConfig>): ModuleWithProviders<ThemingModule> {
         return {
             ngModule: ThemingModule,

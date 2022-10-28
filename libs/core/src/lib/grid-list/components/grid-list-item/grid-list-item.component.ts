@@ -209,14 +209,13 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     _isActive = true;
 
     /** @hidden */
-    get gridLayoutClasses(): string[] {
-        return this._gridLayoutClasses;
-    }
-
     set gridLayoutClasses(value: string[]) {
         this._removeClassesNames(this._gridLayoutClasses);
         this._gridLayoutClasses = value;
         this._addClassesNames(this._gridLayoutClasses);
+    }
+    get gridLayoutClasses(): string[] {
+        return this._gridLayoutClasses;
     }
 
     /** @hidden */
@@ -235,11 +234,6 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     _selectedItem?: T;
 
     /** @hidden */
-    get selectionMode(): GridListSelectionMode | undefined {
-        return this._selectionMode;
-    }
-
-    /** @hidden */
     set selectionMode(mode: GridListSelectionMode | undefined) {
         this._selectionMode = mode;
 
@@ -255,6 +249,9 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
 
         this._cd.detectChanges();
     }
+    get selectionMode(): GridListSelectionMode | undefined {
+        return this._selectionMode;
+    }
 
     /** @hidden */
     _index?: number;
@@ -268,6 +265,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     /** @hidden */
     private readonly subscription = new Subscription();
 
+    /** @hidden */
     constructor(
         private readonly _cd: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,

@@ -5,6 +5,7 @@ import escape from 'lodash-es/escape';
     name: 'highlight'
 })
 export class SearchHighlightPipe implements PipeTransform {
+    /** Highlight search term in string. */
     transform(value: string, args: string, active: boolean = true, includeSpans: boolean = false): string {
         value = escape(value);
         let result: string = value;

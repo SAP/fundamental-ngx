@@ -9,7 +9,10 @@ import { OptionsInterface } from './options.interface';
 
 @Injectable()
 export class SelectKeyManagerService {
+    /** @hidden */
     _component: SelectInterface;
+
+    /** @hidden */
     _keyManager: ActiveDescendantKeyManager<OptionsInterface>;
 
     /**

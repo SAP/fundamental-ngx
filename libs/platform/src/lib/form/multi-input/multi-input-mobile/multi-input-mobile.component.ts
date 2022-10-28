@@ -49,6 +49,7 @@ export class PlatformMultiInputMobileComponent
     /** @hidden */
     private _selectedBackup: any[];
 
+    /** @hidden */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
@@ -58,6 +59,7 @@ export class PlatformMultiInputMobileComponent
         super(elementRef, dialogService, multiInputComponent, MobileModeControl.MULTI_INPUT, mobileModes);
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this._listenOnMultiInputOpenChange();
     }
@@ -86,6 +88,7 @@ export class PlatformMultiInputMobileComponent
             .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
+    /** @hidden */
     private _toggleDialog(open: boolean): void {
         if (!open) {
             this._handleApprove();

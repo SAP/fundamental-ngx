@@ -65,6 +65,7 @@ export class PopoverService extends BasePopoverClass {
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
     constructor(
         private _overlay: Overlay,
         private _renderer: Renderer2,

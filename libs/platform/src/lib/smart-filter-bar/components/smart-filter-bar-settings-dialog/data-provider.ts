@@ -3,6 +3,7 @@ import { FieldFilterItem } from '../../interfaces/smart-filter-bar-field-filter-
 import { SmartFilterBarVisibilityCategory } from '../../interfaces/smart-filter-bar-visibility-category';
 
 export class SmartFilterBarOptionsDataProvider extends ArrayTableDataProvider<FieldFilterItem> {
+    /** @hidden */
     constructor(items: FieldFilterItem[]) {
         super(items);
     }

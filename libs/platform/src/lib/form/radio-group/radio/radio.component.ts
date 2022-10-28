@@ -41,11 +41,11 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
 
     /** value for Radio button */
     @Input()
-    get value(): any {
-        return super.getValue();
-    }
     set value(newValue: any) {
         this._value = newValue;
+    }
+    get value(): any {
+        return super.getValue();
     }
 
     /**
@@ -53,17 +53,17 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
      * set state of individual radio.Used by RBG to set radio states
      */
     @Input()
-    get stateType(): FormStates {
-        if (isDevMode()) {
-            console.warn('"stateType" is deprecated. Use "state" instead');
-        }
-        return super.state;
-    }
     set stateType(state: FormStates) {
         if (isDevMode()) {
             console.warn('"stateType" is deprecated. Use "state" instead');
         }
         super.state = state;
+    }
+    get stateType(): FormStates {
+        if (isDevMode()) {
+            console.warn('"stateType" is deprecated. Use "state" instead');
+        }
+        return super.state;
     }
 
     /** used for radio button creation if list value present */
@@ -88,6 +88,7 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     @ViewChild(CoreRadioButtonComponent, { static: false })
     private coreRadioButton: CoreRadioButtonComponent;
 
+    /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
         @Optional() @Self() ngControl: NgControl,

@@ -34,6 +34,7 @@ export class MultiComboboxConfig {
         return useFactory;
     }
 
+    /** @hidden */
     constructor(platformConfig: PlatformConfig) {
         this.contentDensity = platformConfig.contentDensity;
     }

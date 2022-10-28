@@ -6,6 +6,7 @@ import { HorizontalDoubleSidesStrategy } from './horizontal-double-sides-strateg
 import { VerticalSingleSideStrategy } from './vertical-single-side-strategy';
 
 export class PositionStrategyFactory {
+    /** Get timeline position strategy */
     static getStrategy(strategy: TimeLinePositionStrategy): BaseStrategy {
         switch (strategy) {
             case 'vertical-right':

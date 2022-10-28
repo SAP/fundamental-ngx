@@ -11,6 +11,7 @@ export class TimelineNodeOutletContext<T> {
     /** Length of the number of total dataNodes. */
     count?: number;
 
+    /** @hidden */
     constructor(data: T) {
         this.$implicit = data;
     }

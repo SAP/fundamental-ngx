@@ -28,7 +28,7 @@ export const DAYJS_DATE_TIME_ADAPTER_OPTIONS = new InjectionToken<DayjsDatetimeA
     }
 );
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
+/** @hidden */
 export function DAYJS_DATE_TIME_ADAPTER_OPTIONS_FACTORY(): DayjsDatetimeAdapterOptions {
     return {
         useUtc: false,
@@ -50,8 +50,10 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     /** @hidden */
     private _localeData: DateLocale;
 
+    /** @hidden */
     fromNow: undefined;
 
+    /** @hidden */
     constructor(
         @Optional() @Inject(LOCALE_ID) localeId: string,
         @Optional() @Inject(DAYJS_DATE_TIME_ADAPTER_OPTIONS) private _options?: DayjsDatetimeAdapterOptions
@@ -69,6 +71,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         this.setLocale(localeId || dayjs.locale());
     }
 
+    /** Set locale */
     setLocale(locale: string): void {
         if (locale.toLowerCase() === 'en-us') {
             // Handle English locale name as it's a default one and it is different
@@ -99,50 +102,62 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         super.setLocale(locale);
     }
 
+    /** Get year */
     getYear(date: Dayjs): number {
         return date.year();
     }
 
+    /** Get month */
     getMonth(date: Dayjs): number {
         return date.month() + 1;
     }
 
+    /** Get date */
     getDate(date: Dayjs): number {
         return date.date();
     }
 
+    /** Get day of the week */
     getDayOfWeek(date: Dayjs): number {
         return date.day() + 1;
     }
 
+    /** Get hours */
     getHours(date: Dayjs): number {
         return date.hour();
     }
 
+    /** Get minutes */
     getMinutes(date: Dayjs): number {
         return date.minute();
     }
 
+    /** Get seconds */
     getSeconds(date: Dayjs): number {
         return date.second();
     }
 
+    /** Set hours in date object */
     setHours(date: Dayjs, hours: number): Dayjs {
         return date.hour(hours);
     }
 
+    /** Set minutes in date object */
     setMinutes(date: Dayjs, minutes: number): Dayjs {
         return date.minute(minutes);
     }
 
+    /** Set seconds in date object */
     setSeconds(date: Dayjs, seconds: number): Dayjs {
         return date.second(seconds);
     }
 
+    /** Get week number */
     getWeekNumber(date: Dayjs): number {
         return date.week();
     }
 
+    /** Get months names */
     getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
         switch (style) {
             case 'narrow':
@@ -155,10 +170,12 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         }
     }
 
+    /** Get date names */
     getDateNames(): string[] {
         return range(31, (i) => this.createDate(2017, 0, i + 1).format('D'));
     }
 
+    /** Get days of week names */
     getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
         switch (style) {
             case 'narrow':
@@ -171,14 +188,17 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         }
     }
 
+    /** Get year name */
     getYearName(date: Dayjs): string {
         return date.format('YYYY');
     }
 
+    /** Get week name */
     getWeekName(date: Dayjs): string {
         return date.week().toLocaleString(this.locale);
     }
 
+    /** Get hour names */
     getHourNames({ meridian, twoDigit }: { twoDigit: boolean; meridian: boolean }): string[] {
         const format: string = meridian ? (twoDigit ? 'hh' : 'h') : twoDigit ? 'HH' : 'H';
         const dayjsDate = this._createDayjsDate();
@@ -186,6 +206,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         return range(24, (i) => this.clone(dayjsDate).hour(i).format(format));
     }
 
+    /** Get minute names */
     getMinuteNames({ twoDigit }: { twoDigit: boolean }): string[] {
         const format: string = twoDigit ? 'mm' : 'm';
         const dayjsDate = this._createDayjsDate();
@@ -193,6 +214,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         return range(60, (i) => this.clone(dayjsDate).minute(i).format(format));
     }
 
+    /** Get second names */
     getSecondNames({ twoDigit }: { twoDigit: boolean }): string[] {
         const format: string = twoDigit ? 'ss' : 's';
         const dayjsDate = this._createDayjsDate();
@@ -200,7 +222,10 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         return range(60, (i) => this.clone(dayjsDate).second(i).format(format));
     }
 
-    // isLower property is responsible for the lower and upper cases of the result
+    /**
+     *  Get day period names
+     * @param isLower responsible for the lower and upper cases of the result
+     */
     getDayPeriodNames(isLower = false): [string, string] {
         const AM = this._dayjsLocaleData.meridiem?.(6, 0, isLower) ?? (isLower ? 'am' : 'AM');
         const PM = this._dayjsLocaleData.meridiem?.(16, 0, isLower) ?? (isLower ? 'pm' : 'PM');
@@ -208,14 +233,17 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         return [AM, PM];
     }
 
+    /** Get first day of the week */
     getFirstDayOfWeek(): number {
         return this._localeData.firstDayOfWeek;
     }
 
+    /** Get number of days in the month */
     getNumDaysInMonth(date: Dayjs): number {
         return date.daysInMonth();
     }
 
+    /** Try to parse a string to a date object */
     parse(value: any, parseFormat: string = ''): Dayjs | null {
         if (value && typeof value === 'string') {
             return this._createDayjsDate(value, parseFormat);
@@ -227,6 +255,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         return value ? this._createDayjsDate(value).locale(this.locale) : null;
     }
 
+    /** Format a date as a string */
     format(date: Dayjs, displayFormat: string): string {
         if (!date) {
             return '';
@@ -239,6 +268,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         return date.locale(dayjs.locale()).format(displayFormat);
     }
 
+    /** Create date object from values */
     createDate(year: number, month: number, date: number): Dayjs {
         const result = this._createDayjsDate(new Date(year, month - 1, date));
 
@@ -249,26 +279,32 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         return result;
     }
 
+    /** Get today */
     today(): Dayjs {
         return this._createDayjsDate().locale(this.locale).startOf('day');
     }
 
+    /** Get now */
     now(): Dayjs {
         return this._createDayjsDate().locale(this.locale);
     }
 
+    /** Add years to date */
     addCalendarYears(date: Dayjs, years: number): Dayjs {
         return date.add(years, 'year');
     }
 
+    /** Add months to date */
     addCalendarMonths(date: Dayjs, months: number): Dayjs {
         return date.add(months, 'month');
     }
 
+    /** Add days to date */
     addCalendarDays(date: Dayjs, days: number): Dayjs {
         return date.add(days, 'day');
     }
 
+    /** Clone date */
     clone(date: Dayjs): Dayjs {
         if (!date) {
             return date;
@@ -281,6 +317,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         return date.clone();
     }
 
+    /** Compare if dates are equal */
     datesEqual(date1: Dayjs, date2: Dayjs): boolean {
         if (!date1 || !date2) {
             return false;
@@ -289,6 +326,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         return date1.isSame(date2, 'day');
     }
 
+    /** Compare if dates and time are equal */
     dateTimesEqual(date1: Dayjs, date2: Dayjs): boolean {
         if (!date1 || !date2) {
             return false;
@@ -297,6 +335,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         return date1.isSame(date2);
     }
 
+    /** Check if date is in range */
     isBetween(dateToCheck: Dayjs, startDate: Dayjs, endDate: Dayjs): boolean {
         if (!dateToCheck || !startDate || !endDate) {
             return false;
@@ -305,32 +344,38 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         return dateToCheck.isBetween(startDate, endDate);
     }
 
+    /** Check if date is valid date object */
     isValid(date: Nullable<Dayjs>): date is Dayjs {
         return !!date?.isValid();
     }
 
+    /** Convert date to ISO8601 string */
     toIso8601(date: Dayjs): string {
         return date.toISOString();
     }
 
+    /** Check if time format includes day period */
     isTimeFormatIncludesDayPeriod(displayFormat: string): boolean {
         const format = this._prepareFormat(displayFormat);
 
         return !!format.match(/[aA]/);
     }
 
+    /** Check if time format includes hours */
     isTimeFormatIncludesHours(displayFormat: string): boolean {
         const format = this._prepareFormat(displayFormat);
 
         return !!format.match(/[hH]/);
     }
 
+    /** Check if time format includes minutes */
     isTimeFormatIncludesMinutes(displayFormat: string): boolean {
         const format = this._prepareFormat(displayFormat);
 
         return !!format.match(/[m]/);
     }
 
+    /** Check if time format includes seconds */
     isTimeFormatIncludesSeconds(displayFormat: string): boolean {
         const format = this._prepareFormat(displayFormat);
 

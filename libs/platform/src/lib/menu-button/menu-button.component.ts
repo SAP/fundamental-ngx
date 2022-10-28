@@ -39,6 +39,7 @@ export class MenuButtonComponent extends BaseComponent {
     @Output()
     buttonClicked: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
+    /** @hidden */
     constructor(_cd: ChangeDetectorRef) {
         super(_cd);
     }
@@ -53,7 +54,7 @@ export class MenuButtonComponent extends BaseComponent {
         return this.disabled;
     }
 
-    // @hidden tabindex for button.
+    /** @hidden tabindex for button. */
     get tabindex(): number {
         return this.disabled ? -1 : 0;
     }

@@ -6,5 +6,6 @@ import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@ang
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelActionsComponent {
+    /** @hidden */
     @ViewChild(TemplateRef) contentTemplateRef: TemplateRef<any>;
 }

@@ -72,6 +72,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     @ContentChild(DynamicPageGlobalActionsComponent)
     _globalActions: DynamicPageGlobalActionsComponent;
 
+    /** @hidden */
     @ContentChild(DynamicPageLayoutActionsComponent)
     _layoutActions: DynamicPageLayoutActionsComponent;
 

@@ -201,6 +201,7 @@ export class TimePickerComponent<D>
         return this._state ?? 'default';
     }
 
+    /** @hidden */
     private _state: FormStates | null = null;
 
     /**
@@ -302,6 +303,7 @@ export class TimePickerComponent<D>
      */
     _inputTimeValue = '';
 
+    /** @hidden */
     _formValueStateMessageId = `fd-time-picker-form-message-${timePickerCounter++}`;
 
     /** @hidden */
@@ -338,6 +340,7 @@ export class TimePickerComponent<D>
         }
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this._calculateTimeOptions();
         this._formatTimeInputField();
@@ -349,6 +352,7 @@ export class TimePickerComponent<D>
         });
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (
             ['displayHours', 'displayMinutes', 'displaySeconds', 'meridian', 'displayFormat'].some(

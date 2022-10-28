@@ -12,6 +12,7 @@ import { Directive, forwardRef } from '@angular/core';
     ]
 })
 export class DeprecatedTokenizerContentDensityDirective extends DeprecatedCompactDirective {
+    /** @hidden */
     constructor() {
         super('fd-tokenizer[compact], fd-token');
     }

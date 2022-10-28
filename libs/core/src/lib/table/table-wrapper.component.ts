@@ -32,6 +32,7 @@ import { FdTableContentDensityProviderParams } from './table.component';
     providers: [contentDensityObserverProviders(FdTableContentDensityProviderParams)]
 })
 export class TableWrapperComponent implements AfterContentInit, OnDestroy {
+    /** @hidden */
     private _contentDensitySettings: ContentDensityObserverTarget;
 
     /** @hidden */

@@ -4,6 +4,6 @@ import { Directive, ViewContainerRef } from '@angular/core';
     selector: '[fdTimelineFirstListOutlet], [fd-timeline-first-list-outlet]'
 })
 export class TimelineFirstListOutletDirective {
-    /* Ref to ViewContainerRef instance*/
+    /** Ref to ViewContainerRef instance*/
     constructor(public viewContainer: ViewContainerRef) {}
 }

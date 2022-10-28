@@ -23,11 +23,15 @@ export class FilterRuleComponent implements OnDestroy {
     /** Emits when rule state is changed */
     @Output() ruleStateChange: EventEmitter<boolean> = new EventEmitter();
 
+    /** @hidden */
     readonly FILTER_STRATEGY = FILTER_STRATEGY;
 
+    /** @hidden */
     readonly DATA_TYPE = FilterableColumnDataType;
 
-    @ViewChild(NgForm) set ngForm(ngForm: NgForm) {
+    /** @hidden */
+    @ViewChild(NgForm)
+    set ngForm(ngForm: NgForm) {
         if (!ngForm) {
             return;
         }

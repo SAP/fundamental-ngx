@@ -34,6 +34,7 @@ export class OnlyDigitsDirective {
     /** @hidden */
     private _hasDecimalPoint = false;
 
+    /** @hidden */
     constructor(private readonly _el: ElementRef) {
         this._inputElement = this._el.nativeElement;
     }

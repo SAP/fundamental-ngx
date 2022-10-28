@@ -25,7 +25,9 @@ import {
  * In Memory implementation of DataProvider that supports fulltext search
  */
 export abstract class UploadCollectionDataProvider extends DataProvider<UploadCollectionItem> {
+    /** @hidden */
     totalItems = 0;
+    /** @hidden */
     list: UploadCollectionItem[] = [];
 
     abstract items: UploadCollectionItem[];
@@ -57,6 +59,7 @@ export abstract class UploadCollectionDataProvider extends DataProvider<UploadCo
     /** The method is triggered when Cancel button is pressed */
     abstract cancelUploadNewFile(data: CancelUploadNewFileEvent): Observable<UploadCollectionItem[]>;
 
+    /** @hidden */
     fetch(params: Map<string, string | number>): Observable<UploadCollectionItem[]> {
         let currentItems: UploadCollectionItem[] = this.items;
 
@@ -88,6 +91,7 @@ export abstract class UploadCollectionDataProvider extends DataProvider<UploadCo
         return of(_list);
     }
 
+    /** @hidden */
     private _getItemsByPage(items: UploadCollectionItem[], page: number, limit: number): UploadCollectionItem[] {
         const firstDisplayedRow = (page - 1) * limit;
         const _visibleList = items.slice(firstDisplayedRow, firstDisplayedRow + limit);
@@ -99,6 +103,7 @@ export abstract class UploadCollectionDataProvider extends DataProvider<UploadCo
         return _visibleList;
     }
 
+    /** @hidden */
     private _defaultSorting(list: UploadCollectionItem[]): UploadCollectionItem[] {
         let _list: UploadCollectionItem[] = [];
         const groupByType: GroupByType = list.reduce((res: GroupByType, item: UploadCollectionItem) => {

@@ -31,6 +31,7 @@ export class VhdSearchComponent {
     @Input()
     hideAllAdvancedSearchLabel = 'Hide all filters';
 
+    /** @hidden */
     constructor() {
         console.warn(
             '"VhdSearchComponent" is deprecated. Messages from it is no longer in use. ' +

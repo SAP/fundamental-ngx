@@ -59,8 +59,10 @@ export class DynamicFormControlFieldDirective implements OnInit {
      */
     private _shouldShowFormItem: boolean;
 
+    /** @hidden */
     constructor(private readonly _templateRef: TemplateRef<any>, private readonly _viewContainer: ViewContainerRef) {}
 
+    /** @hidden */
     ngOnInit(): void {
         this._updateView();
     }
@@ -86,6 +88,7 @@ export class DynamicFormControlFieldDirective implements OnInit {
         this._control.updateValueAndValidity({ emitEvent: false });
     }
 
+    /** @hidden */
     private _updateView(): void {
         if (this._shouldShowFormItem && this._componentRemoved) {
             this._viewContainer.createEmbeddedView(this._templateRef);

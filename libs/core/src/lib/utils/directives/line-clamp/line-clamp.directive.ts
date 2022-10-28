@@ -85,6 +85,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
     private _originalText: string;
     /** @hidden */
     private windowResize$: Subscription;
+    /** @hidden */
     private _isNativeSupport = true;
     /** @hidden */
     private _lineCount: number;
@@ -133,6 +134,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
         this.refreshClamp();
     }
 
+    /** @hidden */
     reset(): void {
         if (this._lineClampTarget && this._originalText) {
             this._lineClampTarget.textContent = this._originalText;
@@ -142,6 +144,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
         }
     }
 
+    /** @hidden */
     refreshTarget(event: LineClampTargetDirective): void {
         this._lineClampTarget = event.targetElement;
         this._originalText = event.fdLineClampTargetText;
@@ -149,6 +152,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
         this.refreshClamp();
     }
 
+    /** @hidden */
     refreshClamp(): void {
         if (this.fdLineclampState && this._lineCount) {
             this.native();

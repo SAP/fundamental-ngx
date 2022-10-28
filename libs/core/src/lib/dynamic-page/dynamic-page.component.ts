@@ -79,6 +79,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         return this._size;
     }
 
+    /** @hidden */
     _size: DynamicPageResponsiveSize = 'extra-large';
 
     /** Offset in PX

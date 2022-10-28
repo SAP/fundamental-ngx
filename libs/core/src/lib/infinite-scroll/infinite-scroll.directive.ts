@@ -39,6 +39,7 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
         this._subscription.unsubscribe();
     }
 
+    /** @hidden */
     shouldTriggerAction(): boolean {
         const element = this._element.nativeElement;
         const offset: number = element.scrollTop + element.offsetHeight;

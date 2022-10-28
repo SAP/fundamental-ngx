@@ -74,11 +74,11 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
      */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('checked')
-    get value(): any {
-        return this.getValue();
-    }
     set value(selectValue: any) {
         this.setValue(selectValue);
+    }
+    get value(): any {
+        return this.getValue();
     }
 
     /** when true indeterminate state can be selected */
@@ -127,6 +127,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     @ViewChild(FdCheckboxComponent)
     coreCheckbox: FdCheckboxComponent;
 
+    /** @hidden */
     constructor(
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,

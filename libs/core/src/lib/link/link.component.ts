@@ -46,9 +46,11 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
     ]
 })
 export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit, OnDestroy {
+    /** @hidden */
     @ContentChildren(IconComponent)
     iconComponents: QueryList<IconComponent>;
 
+    /** @hidden */
     @ViewChild('content')
     contentSpan: ElementRef<HTMLSpanElement>;
 
@@ -107,10 +109,11 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [
             'fd-link',

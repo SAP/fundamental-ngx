@@ -40,6 +40,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     @Input()
     roleDescription: string;
 
+    /** Thumbnail element ID */
     @Input()
     thumbnailId: string;
 
@@ -47,6 +48,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     @Output()
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
 
+    /** Event emitted when the thumbnail image is clicked and dialog opened */
     @Output()
     openDetailsDialog = new EventEmitter<Media>();
 
@@ -99,12 +101,14 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         return this._rtlService?.rtl.getValue();
     }
 
+    /** @hidden */
     private _setOverlay(): void {
         if (this.mediaList.length > this.maxImages) {
             this.mediaList[this.maxImages - 1].overlayRequired = true;
         }
     }
 
+    /** Open thumbanail image */
     openImage(image: Media, event?: Event): void {
         image.overlayRequired ? this.openDialog(image) : this.thumbnailClick(image, event);
     }

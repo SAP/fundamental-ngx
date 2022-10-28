@@ -114,12 +114,11 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      * In case of having more items in carousel than 1, middle element should be active
      */
     @Input()
-    get offset(): number {
-        return this._offset$.value;
-    }
-
     set offset(value: number) {
         this._offset$.next(value);
+    }
+    get offset(): number {
+        return this._offset$.value;
     }
 
     /**
@@ -150,6 +149,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     @ViewChild('indicator', { read: ElementRef })
     indicator: ElementRef;
 
+    /** @hidden */
     wrapperHeight: number;
 
     /**
@@ -162,6 +162,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden */
     config: CarouselConfig;
 
+    /** @hidden */
     internalTranslationConfig: TimeColumnConfig | null = null;
 
     /** @hidden */
@@ -198,6 +199,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden */
     private _viewInit$ = new BehaviorSubject<boolean>(false);
 
+    /** @hidden */
     private _resize$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */

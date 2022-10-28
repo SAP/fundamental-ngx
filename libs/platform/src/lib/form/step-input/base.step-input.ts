@@ -11,6 +11,11 @@ import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './ste
 
 /** Change event object emitted by Platform Step Input component */
 export class StepInputChangeEvent<T extends StepInputComponent = StepInputComponent, K = number> {
+    /**
+     * Step input selection change event
+     * @param source Step input component
+     * @param payload Selected value
+     */
     constructor(
         /** The source Step Input of the event. */
         public source: T,
@@ -39,14 +44,14 @@ const ALIGN_INPUT_OPTIONS_LIST = [StepInputAlign.Left, StepInputAlign.Center, St
 export abstract class StepInputComponent extends BaseInput implements OnInit {
     /** Sets input value */
     @Input()
-    get value(): Nullable<number> {
-        return super.getValue();
-    }
     set value(value: Nullable<number>) {
         if (value !== this._value) {
             super.setValue(value);
             this._calculateCanDecrementIncrement();
         }
+    }
+    get value(): Nullable<number> {
+        return super.getValue();
     }
 
     /** Sets minimum value boundary */

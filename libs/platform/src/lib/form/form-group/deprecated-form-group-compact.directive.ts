@@ -12,6 +12,7 @@ import { Directive, forwardRef } from '@angular/core';
     ]
 })
 export class DeprecatedFormGroupCompactDirective extends DeprecatedCompactDirective {
+    /** @hidden */
     constructor() {
         super('fdp-form-group');
     }

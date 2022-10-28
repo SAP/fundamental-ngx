@@ -14,6 +14,7 @@ export class PopoverFormMessageService {
     /** @hidden */
     private _hidden = false;
 
+    /** @hidden */
     constructor(private _popoverService: PopoverService) {}
 
     /** @hidden */

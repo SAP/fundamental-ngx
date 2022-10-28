@@ -19,6 +19,7 @@ export type FillingType = 'radial' | 'angled' | 'linearup' | 'lineardown' | 'lin
 export type FillingDirection = 'clockwise' | 'counterclockwise';
 
 export class Point {
+    /** @hidden */
     constructor(public x: number, public y: number) {}
 }
 
@@ -115,6 +116,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
     @Input()
     labelPosition: LablePosition;
 
+    /** Path for the status indicator */
     @Input()
     path: string[];
 
@@ -130,12 +132,12 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
     @Input()
     fillDirection: FillingDirection = 'clockwise';
 
-    get _fillDirection(): FillingDirection {
-        return this.fillDirection;
-    }
-
+    /** @hidden */
     set _fillDirection(direction: FillingDirection) {
         this.fillDirection = direction;
+    }
+    get _fillDirection(): FillingDirection {
+        return this.fillDirection;
     }
 
     /**
@@ -165,8 +167,11 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
 
     /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>, private _cd: ChangeDetectorRef) {}
+
+    /** @hidden */
     class: string;
 
+    /** @hidden */
     ngAfterViewInit(): void {
         this._angleCalculation();
         this._cd.detectChanges();
@@ -178,15 +183,17 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
         this.buildComponentCssClass();
     }
 
+    /** @hidden */
     public ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [
             'fd-status-indicator',
@@ -200,6 +207,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
         ];
     }
 
+    /** @hidden */
     elementRef(): ElementRef<any> {
         return this._elementRef;
     }

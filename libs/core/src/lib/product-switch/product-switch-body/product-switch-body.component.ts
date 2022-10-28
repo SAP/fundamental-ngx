@@ -59,6 +59,7 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(
         private _viewportRuler: ViewportRuler,
         @Optional() private readonly _rtlService: RtlService,

@@ -22,6 +22,7 @@ export class SelectConfig {
         return useFactory;
     }
 
+    /** @hidden */
     constructor(platformConfig: PlatformConfig) {
         this.contentDensity = platformConfig.contentDensity;
     }

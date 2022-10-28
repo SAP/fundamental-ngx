@@ -59,6 +59,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
     /** @hidden */
     _selectedElement?: OptionItem;
 
+    /** @hidden */
     constructor(
         readonly cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,

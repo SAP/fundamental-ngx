@@ -5,6 +5,7 @@ import { Directive, HostBinding } from '@angular/core';
     selector: '[fd-item-footer-byline]'
 })
 export class FeedListFooterBylineDirective {
+    /** @hidden */
     @HostBinding('class.fd-feed-list__footer--byline')
     fdBylineClass = true;
 }

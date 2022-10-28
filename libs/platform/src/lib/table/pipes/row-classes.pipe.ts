@@ -5,6 +5,7 @@ import { TableRow, TableRowClass } from '../models';
 
 @Pipe({ name: 'rowClasses' })
 export class RowClassesPipe implements PipeTransform {
+    /** @hidden */
     transform(row: TableRow, rowsClass: TableRowClass): string {
         const treeRowClass = row.type === TableRowType.TREE ? 'fdp-table__row--tree' : '';
         const rowClasses = this._getRowCustomCssClasses(row, rowsClass);

@@ -80,6 +80,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     /** @hidden */
     private _initiated = false;
 
+    /** @hidden */
     constructor(
         private _eRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,

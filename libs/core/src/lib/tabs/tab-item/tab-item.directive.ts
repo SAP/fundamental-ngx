@@ -60,8 +60,8 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
     /** @hidden */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [
             this.fdTabItemClass ? 'fd-tabs__item' : '',

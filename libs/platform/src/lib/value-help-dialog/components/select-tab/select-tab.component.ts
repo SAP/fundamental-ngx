@@ -25,15 +25,20 @@ let titleUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, AfterViewInit {
+    /** @hidden */
     protected defaultTitleId = `fd-select-tab-title-id-${titleUniqueId++}`;
+    /** @hidden */
     protected defaultCountId = `fd-select-tab-title-count-id-${titleUniqueId++}`;
 
+    /** Select tab title element ID */
     @Input()
     selectTabTitleId: string = this.defaultTitleId;
 
+    /** Select tab count element ID */
     @Input()
     selectTabCountId: string = this.defaultCountId;
 
+    /** Selected items */
     @Input()
     selected: T[] = [];
 
@@ -64,8 +69,8 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     @Input()
     defaultMobileHeaders = 2;
 
-    @Input()
     /** Displayed data for search table */
+    @Input()
     displayedData: T[] = [];
 
     /** Event emitted when row was selected. */
@@ -73,6 +78,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     // eslint-disable-next-line @angular-eslint/no-output-native
     select = new EventEmitter<T[]>();
 
+    /** @hidden */
     @ViewChild(InfiniteScrollDirective) infiniteScrollTable: InfiniteScrollDirective;
 
     /** @hidden indeterminate flag for `select all` checkbox */
@@ -106,13 +112,16 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     get isSingleSelection(): boolean {
         return this.selection === 'single';
     }
+    /** Selection type getters */
     get isOnceSelection(): boolean {
         return this.selection === 'once';
     }
+    /** Selection type getters */
     get isMultiSelection(): boolean {
         return this.selection === 'multi';
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
         Promise.resolve(true).then(() => this._checkScrollAndShowMore());
     }
@@ -198,6 +207,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
         this._refreshTristate();
     }
 
+    /** @hidden */
     private _checkScrollAndShowMore(): void {
         if (this.mobile) {
             return;

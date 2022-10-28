@@ -4,8 +4,8 @@ import { Placement, PopoverFillMode, Nullable } from '@fundamental-ngx/core/shar
 
 @Directive()
 export class BasePopoverClass {
-    @Input()
     /** Whether to close the popover on router navigation start. */
+    @Input()
     closeOnNavigation = true;
 
     /** Whether the popover is disabled. */

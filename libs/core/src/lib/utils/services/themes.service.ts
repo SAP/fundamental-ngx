@@ -76,6 +76,7 @@ export class ThemesService {
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
     constructor(@Optional() private _activatedRoute: ActivatedRoute, private _sanitizer: DomSanitizer) {}
 
     /**

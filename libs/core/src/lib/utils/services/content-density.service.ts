@@ -14,6 +14,7 @@ export class ContentDensityService {
     /** Content Density BehaviourSubject */
     readonly contentDensity = new BehaviorSubject(DEFAULT_CONTENT_DENSITY);
 
+    /** @hidden */
     constructor() {
         if (isDevMode()) {
             console.warn(

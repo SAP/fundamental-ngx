@@ -31,12 +31,11 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
      * @Input date time object representation
      */
     @Input()
-    get value(): D | null {
-        return super.getValue();
-    }
-
     set value(value: D | null) {
         super.setValue(value);
+    }
+    get value(): D | null {
+        return super.getValue();
     }
 
     /**
@@ -158,9 +157,11 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     @Output()
     readonly isOpenChange = new EventEmitter<boolean>();
 
+    /** @hidden */
     @ViewChild(TimePickerComponent)
     timePickerComponent: TimePickerComponent<D>;
 
+    /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
         @Optional() @Self() ngControl: NgControl,

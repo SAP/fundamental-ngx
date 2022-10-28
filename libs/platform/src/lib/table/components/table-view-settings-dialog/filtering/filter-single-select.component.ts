@@ -30,6 +30,7 @@ export class FilterSingleSelectComponent {
     @Output()
     valueChange: EventEmitter<any[]> = new EventEmitter();
 
+    /** @hidden */
     readonly NOT_FILTERED_OPTION_VALUE = NOT_FILTERED_OPTION_VALUE;
 
     /**

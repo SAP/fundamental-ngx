@@ -88,12 +88,12 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
 
     /** Width of the column cells. */
     @Input()
-    get width(): string {
-        return this._width;
-    }
     set width(value: string) {
         this._width = value;
         this._tableColumnResizeService.setCustomWidth(this.name, value);
+    }
+    get width(): string {
+        return this._width;
     }
 
     /** Whether the text should wrap, when text is too long for 1 line */
@@ -113,6 +113,7 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     /** Column header template */
     headerCellTemplate: TemplateRef<any>;
 
+    /** @hidden */
     @ContentChild(FdpCellDef)
     set fdpCellDef(fdpCellDef: FdpCellDef) {
         this.columnCellTemplate = fdpCellDef?.templateRef;
@@ -124,6 +125,7 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
         this.editableColumnCellTemplate = fdpEditableCellDef?.templateRef;
     }
 
+    /** @hidden */
     @ContentChild(FdpHeaderCellDef)
     set fdpHeaderCellDef(fdpHeaderCellDef: FdpHeaderCellDef) {
         this.headerCellTemplate = fdpHeaderCellDef?.templateRef;

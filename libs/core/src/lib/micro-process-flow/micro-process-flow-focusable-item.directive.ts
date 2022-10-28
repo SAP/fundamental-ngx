@@ -39,6 +39,7 @@ export class MicroProcessFlowFocusableItemDirective implements OnInit {
         this._microProcessFlow?.canItemsReceiveFocus.next(false);
     }
 
+    /** @hidden */
     @HostListener('blur')
     onBlur(): void {
         this._microProcessFlow?.canItemsReceiveFocus.next(true);

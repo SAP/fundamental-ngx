@@ -38,8 +38,11 @@ export const RESPONSIVE_BREAKPOINTS_CONFIG = new InjectionToken<ResponsiveBreakP
 
 @Injectable()
 export class ResponsiveBreakPointConfig {
+    /** Large screen */
     L: number = RESPONSIVE_BREAKPOINTS['L'];
+    /** Medium screen */
     M: number = RESPONSIVE_BREAKPOINTS['M'];
+    /** Small screen */
     S: number = RESPONSIVE_BREAKPOINTS['S'];
 }
 
@@ -47,10 +50,15 @@ export class ResponsiveBreakPointConfig {
     providedIn: 'root'
 })
 export class ResponsiveBreakpointsService {
+    /** @hidden */
     breakpoints: Record<string, any> = {};
+    /** @hidden */
     activeBreakpoints: string[];
+    /** @hidden */
     minWidth = 'min-width';
+    /** @hidden */
     maxWidth = 'max-width';
+    /** @hidden */
     unit = 'px';
 
     /** @hidden */
@@ -126,16 +134,15 @@ export class ResponsiveBreakpointsService {
 export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInput implements OnInit {
     /** object to change isInline property based on screen size */
     @Input()
-    get inlineLayout(): InlineLayout {
-        return this._inlineLayout;
-    }
-
     set inlineLayout(layout: InlineLayout | undefined) {
         if (layout) {
             this._inlineLayout = layout;
             this._isInLineLayoutEnabled = true;
         }
         this._setFieldLayout(layout);
+    }
+    get inlineLayout(): InlineLayout {
+        return this._inlineLayout;
     }
 
     /** @hidden */
@@ -162,6 +169,7 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
     /** @hidden */
     private _isInLineLayoutEnabled = false;
 
+    /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,

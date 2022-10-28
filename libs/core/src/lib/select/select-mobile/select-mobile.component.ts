@@ -47,11 +47,15 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    @HostListener('keydown', ['$event']) onItemKeydown(event: KeyboardEvent): void {
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    onItemKeydown(event: KeyboardEvent): void {
         if (event && KeyUtil.isKeyCode(event, [ESCAPE])) {
             this._component.close(true);
         }
     }
+
+    /** @hidden */
     constructor(
         _elementRef: ElementRef,
         _dialogService: DialogService,

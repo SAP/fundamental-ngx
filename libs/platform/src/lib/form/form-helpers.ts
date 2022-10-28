@@ -9,22 +9,27 @@ export interface FieldColumn {
     [key: number]: Array<Field>;
 }
 
+/** @hidden */
 export function isFieldChild(child: unknown): child is FormFieldComponent {
     return child instanceof FormFieldComponent;
 }
 
+/** @hidden */
 export function isFieldGroupWrapperChild(child: unknown): child is FormGeneratorFieldComponent {
     return child instanceof FormGeneratorFieldComponent;
 }
 
+/** @hidden */
 export function isFieldGroupChild(child: unknown): child is FormFieldGroupComponent {
     return child instanceof FormFieldGroupComponent;
 }
 
+/** @hidden */
 export function getFormField(field: FormField | FormGeneratorFieldComponent): FormField {
     return isFieldGroupWrapperChild(field) ? field.fieldRenderer : field;
 }
 
+/** @hidden */
 export function getField(field: FormField): Field {
     field = isFieldGroupWrapperChild(field) ? field.fieldRenderer : field;
 
@@ -32,6 +37,7 @@ export function getField(field: FormField): Field {
 }
 
 export class Field {
+    /** @hidden */
     constructor(
         public name?: string,
         public rank?: number,
@@ -41,5 +47,6 @@ export class Field {
 }
 
 export class FieldGroup {
+    /** @hidden */
     constructor(public label: string, public fields: FieldColumn, public hintOptions?: HintOptions) {}
 }

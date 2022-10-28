@@ -23,6 +23,7 @@ import { WizardGeneratorService } from '../../wizard-generator.service';
     providers: [WizardGeneratorService, FormGeneratorService]
 })
 export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
+    /** @hidden */
     @ViewChild('defaultConfirmationDialogTemplate') defaultConfirmationDialogTemplate: TemplateRef<HTMLElement>;
 
     /**

@@ -47,12 +47,14 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
     @HostBinding('class.fd-object-identifier')
     objectIdentifierClass = true;
 
+    /** @hidden */
     @ContentChildren(LinkComponent)
     linkComponents: QueryList<LinkComponent>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
     constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */

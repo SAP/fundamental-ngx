@@ -107,6 +107,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(
         private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>,
         private readonly _changeDetectionRef: ChangeDetectorRef,

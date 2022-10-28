@@ -276,6 +276,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** @hidden */
     onTouched = (): void => {};
 
+    /** @hidden */
     constructor(
         @Inject(LOCALE_ID) locale,
         private _changeDetectorRef: ChangeDetectorRef,
@@ -298,6 +299,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         this._listenOnButtonsClick();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }

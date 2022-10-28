@@ -12,6 +12,7 @@ import { Directive, forwardRef } from '@angular/core';
     ]
 })
 export class DeprecatedTimepickerCompactDirective extends DeprecatedCompactDirective {
+    /** @hidden */
     constructor() {
         super('fd-time-picker');
     }

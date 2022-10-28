@@ -38,26 +38,33 @@ const INTERVAL_IN_MS = 10;
     }
 })
 export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, OnDestroy {
+    /** Approval flow users */
     @Input()
     users: ApprovalUser[] = [];
 
+    /** Approval flow selected users */
     @Input()
     selectedUsers: ApprovalUser[] = [];
 
+    /** Whether the list is selectable */
     @Input()
     isSelectable = true;
 
+    /** Event emitted on user click */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onUserClick = new EventEmitter<ApprovalUser>();
 
+    /** Event emitted on selection change */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onSelectionChange = new EventEmitter<ApprovalUser[]>();
 
+    /** @hidden */
     @ViewChild(ListComponent)
     list: ListComponent<ApprovalUser>;
 
+    /** @hidden */
     @ViewChildren(StandardListItemComponent)
     listItems: QueryList<StandardListItemComponent>;
 

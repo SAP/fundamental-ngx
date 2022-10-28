@@ -53,6 +53,7 @@ export class FormItemComponent implements AfterViewInit {
     @ContentChild(FORM_ITEM_CONTROL)
     formItemControl?: FormItemControl;
 
+    /** @hidden */
     constructor(private ngZone: NgZone) {}
 
     /** @hidden */

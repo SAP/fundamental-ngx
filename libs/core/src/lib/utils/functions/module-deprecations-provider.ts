@@ -1,6 +1,7 @@
 import { FactorySansProvider, Provider } from '@angular/core';
 import { ModuleDeprecations } from '../tokens/module-deprecations.token';
 
+/** Module deprecations provider */
 export function moduleDeprecationsProvider(classRef: any): Provider {
     return {
         provide: ModuleDeprecations,
@@ -9,6 +10,7 @@ export function moduleDeprecationsProvider(classRef: any): Provider {
     };
 }
 
+/** Module deprecations provider factory */
 export function moduleDeprecationsFactory(factory: FactorySansProvider): Provider {
     return {
         provide: ModuleDeprecations,

@@ -94,6 +94,7 @@ export const PopoverFlippedRtlPlacement: { [key in RtlPlacement]: RtlPlacement }
 };
 
 export class PopoverPosition {
+    /** Get the cdk placement of the popover */
     static getCdkPlacement(placement: Placement, direction?: 'rtl' | 'ltr'): ConnectedPosition {
         const resultCdkPlacement = popoverPlacementMap[placement];
 
@@ -112,6 +113,7 @@ export class PopoverPosition {
         return resultCdkPlacement;
     }
 
+    /** Set arrow position */
     static getArrowPosition(position: ConnectedPosition, rtl?: boolean): ArrowPosition | null {
         let _position: ArrowPosition | null = null;
 
@@ -132,6 +134,7 @@ export class PopoverPosition {
         return _position;
     }
 
+    /** Get margin direction */
     static getMarginDirection(position: ArrowPosition): string {
         const resultPosition = position.replace('start', 'left').replace('end', 'right');
         return 'margin-' + resultPosition;

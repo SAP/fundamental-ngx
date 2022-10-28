@@ -10,6 +10,7 @@
                 "../../../../../.eslintrc-overrides.json"
             ],
             "rules": {
+                "@angular-eslint/no-host-metadata-property": "off",
                 "@angular-eslint/directive-selector": [
                     "error",
                     {
@@ -25,8 +26,11 @@
                         "prefix": "fn",
                         "style": "kebab-case"
                     }
-                ]
-            }
+                ],
+                "jsdoc/require-jsdoc": "off",
+                "grouped-accessor-pairs": "off"
+            },
+            "plugins": ["@angular-eslint/eslint-plugin", "@typescript-eslint"]
         },
         {
             "files": ["*.html"],

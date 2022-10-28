@@ -8,24 +8,31 @@ interface SanitizeWrapper {
 }
 
 export class HtmlSanitizer {
+    /** @hidden */
     tagWhitelist: StringKey<boolean> = {};
+    /** @hidden */
     attributeWhitelist: StringKey<string | boolean> = {};
 
+    /** @hidden */
     private _schemaWhiteList: string[] = ['http', 'https', 'ftp', 'mailto'];
 
+    /** @hidden */
     private _uriAttributes: StringKey<boolean> = {
         href: true
     };
 
+    /** @hidden */
     private _safeWrapper: SanitizeWrapper | null = {
         iframe: null,
         iframeDoc: null
     };
 
+    /** @hidden */
     constructor() {
         this.extendTags();
     }
 
+    /** @hidden */
     get defTagWhitelist(): StringKey<boolean> {
         return {
             A: true,
@@ -55,6 +62,7 @@ export class HtmlSanitizer {
         };
     }
 
+    /** @hidden */
     get defAttributeWhitelist(): StringKey<string | boolean> {
         return {
             class: true,
@@ -69,14 +77,17 @@ export class HtmlSanitizer {
         };
     }
 
+    /** @hidden */
     extendTags(customTags?: StringKey<boolean | string>): void {
         this.tagWhitelist = { ...this.defTagWhitelist, ...customTags, BODY: true };
     }
 
+    /** @hidden */
     extendAttrs(customAttrs?: StringKey<boolean | string>): void {
         this.attributeWhitelist = { ...this.defAttributeWhitelist, ...customAttrs };
     }
 
+    /** @hidden */
     sanitizeHtml(input: string): string {
         input = input.trim();
         if (input.length === 0) {
@@ -96,6 +107,7 @@ export class HtmlSanitizer {
         return resultElement.innerHTML;
     }
 
+    /** @hidden */
     private _makeSanitizedCopy(node: Node): HTMLElement {
         let newNode = node;
         if (node.nodeType === Node.TEXT_NODE) {
@@ -109,6 +121,7 @@ export class HtmlSanitizer {
         return newNode as HTMLElement;
     }
 
+    /** @hidden */
     private _implementTag(node: HTMLElement): HTMLElement {
         const newNode = this._safeWrapper?.iframeDoc?.createElement(node.tagName);
 
@@ -148,6 +161,7 @@ export class HtmlSanitizer {
         return newNode;
     }
 
+    /** @hidden */
     private _extendLinkTarget(node: HTMLElement): HTMLElement {
         if (node.tagName === 'A') {
             const hrefAttr = node.getAttribute('href');
@@ -162,6 +176,7 @@ export class HtmlSanitizer {
         return node;
     }
 
+    /** @hidden */
     private _getSafeWrapper(): SanitizeWrapper | null {
         const iframe = document.createElement('iframe');
         if (iframe.sandbox === undefined) {
@@ -184,16 +199,19 @@ export class HtmlSanitizer {
         return { iframe, iframeDoc };
     }
 
+    /** @hidden */
     private _removeSafeWrapper(): void {
         if (this._safeWrapper?.iframe) {
             document.body.removeChild(this._safeWrapper.iframe);
         }
     }
 
+    /** @hidden */
     private _validateBySchema(value: string | null): boolean {
         return !!value && value.indexOf(':') > -1 && !this._startsWithAny(value, this._schemaWhiteList);
     }
 
+    /** @hidden */
     private _startsWithAny(str: string, substrings: string[]): boolean {
         return !!str && substrings.some((value) => str.indexOf(value) === 0);
     }

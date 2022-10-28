@@ -11,6 +11,7 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCozyDirective } from '@fundamental
     ]
 })
 export class DeprecatedBarContentDensityDirective extends DeprecatedCozyDirective {
+    /** @hidden */
     constructor() {
         super('[fd-bar]');
     }

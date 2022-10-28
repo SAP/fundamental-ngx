@@ -79,10 +79,12 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
     @Output()
     expandedChange = new EventEmitter<boolean>();
 
+    /** @hidden */
     get _expandButtonContentDensity(): LocalContentDensityMode {
         return typeof this.expandCompact === 'undefined' ? 'global' : ContentDensityMode.COMPACT;
     }
 
+    /** @hidden */
     constructor(private _cdRef: ChangeDetectorRef, @Optional() private _rtlService: RtlService, renderer: Renderer2) {
         super(renderer);
     }

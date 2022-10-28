@@ -52,6 +52,7 @@ export class FileUploaderService {
         return allowedExtensions.lastIndexOf(extension) !== -1;
     }
 
+    /** @hidden */
     private _checkSize(fileSize: number, maxSize: number, minSize: number): boolean {
         if (maxSize && fileSize > maxSize) {
             return false;

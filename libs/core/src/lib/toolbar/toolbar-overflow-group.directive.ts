@@ -12,5 +12,7 @@ import { ToolbarItemDirective } from './toolbar-item.directive';
     selector: '[fdOverflowGroup]'
 })
 export class ToolbarOverflowGroupDirective extends ToolbarItemDirective {
-    @Input() fdOverflowGroup = 0;
+    /** The group number of the item. */
+    @Input()
+    fdOverflowGroup = 0;
 }

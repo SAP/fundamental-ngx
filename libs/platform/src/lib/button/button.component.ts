@@ -105,6 +105,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     @HostBinding('attr.tabindex')
     tabIndex = '-1';
 
+    /** @hidden */
     constructor(protected _changeDetector: ChangeDetectorRef, private _elementRef: ElementRef) {
         super(_changeDetector);
     }

@@ -104,6 +104,7 @@ export class TableDataProvider<T> {
         );
     }
 
+    /** @hidden */
     getSelectItemValue(item: any): any {
         return isSelectItem(item) ? item.value : item;
     }

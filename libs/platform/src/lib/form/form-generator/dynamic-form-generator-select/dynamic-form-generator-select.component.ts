@@ -10,6 +10,7 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../prov
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
 })
 export class DynamicFormGeneratorSelectComponent extends BaseDynamicFormGeneratorControl {
+    /** @hidden */
     constructor() {
         super();
     }

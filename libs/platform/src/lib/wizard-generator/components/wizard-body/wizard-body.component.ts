@@ -133,12 +133,11 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     /**
      * @description Array of visible Wizard Steps.
      */
-    get visibleItems(): PreparedWizardGeneratorItem[] {
-        return this._visibleItems || this._wizardGeneratorService.items;
-    }
-
     set visibleItems(items: PreparedWizardGeneratorItem[]) {
         this._visibleItems = items;
+    }
+    get visibleItems(): PreparedWizardGeneratorItem[] {
+        return this._visibleItems || this._wizardGeneratorService.items;
     }
 
     /**
@@ -228,6 +227,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
         };
     }
 
+    /** @hidden */
     stepClicked(stepId: string): void {
         const stepIndex = this._wizardGeneratorService.getStepIndex(stepId);
         this._wizardGeneratorService.setNextStepIndex(stepIndex + 1);

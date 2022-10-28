@@ -41,12 +41,18 @@ export abstract class BaseInput
     extends BaseComponent
     implements FormFieldControl<any>, ControlValueAccessor, OnInit, DoCheck, AfterViewInit, OnDestroy
 {
+    /** @hidden */
     protected defaultId = `fdp-input-id-${randomId++}`;
+    /** @hidden */
     protected _disabled: boolean;
+    /** @hidden */
     protected _value: any;
+    /** @hidden */
     protected _editable = true;
+    /** @hidden */
     protected _destroyed = new Subject<void>();
 
+    /** Input placeholder */
     @Input()
     placeholder: string;
 
@@ -57,19 +63,18 @@ export abstract class BaseInput
      * @default 'default'
      */
     @Input()
-    get state(): FormStates {
-        if (this._state) {
-            return this._state;
-        }
-        return this.controlInvalid ? 'error' : 'default';
-    }
-
     set state(state: FormStates | undefined) {
         if (!state || isValidControlState(state)) {
             this._state = state || 'default';
         } else if (isDevMode()) {
             console.warn(`Provided value "${state}" is not a valid option for FormStates type`);
         }
+    }
+    get state(): FormStates {
+        if (this._state) {
+            return this._state;
+        }
+        return this.controlInvalid ? 'error' : 'default';
     }
 
     /** Holds the message with respect to state */
@@ -83,16 +88,16 @@ export abstract class BaseInput
      */
     protected _state: FormStates;
 
+    /** Whether the input is disabled */
     @Input()
+    set disabled(value: boolean) {
+        this.setDisabledState(value);
+    }
     get disabled(): boolean {
         if (this.ngControl && this.ngControl.disabled !== null) {
             return this.ngControl.disabled;
         }
         return this._disabled;
-    }
-
-    set disabled(value: boolean) {
-        this.setDisabledState(value);
     }
 
     /**
@@ -110,18 +115,9 @@ export abstract class BaseInput
     ariaLabel: Nullable<string>;
 
     /**
-     * Tell  the component if we are in editing mode.
-     *
+     * Tell the component if we are in editing mode.
      */
     @Input()
-    get editable(): boolean {
-        return this._editable;
-    }
-
-    /**
-     * Firing CD, as we can keep switching between editable and non-editable mode
-     *
-     */
     set editable(value: BooleanInput) {
         const newVal = coerceBooleanProperty(value);
         if (this._editable !== newVal) {
@@ -129,6 +125,9 @@ export abstract class BaseInput
             this._cd.markForCheck();
             this.stateChanges.next('editable');
         }
+    }
+    get editable(): boolean {
+        return this._editable;
     }
 
     /**
@@ -166,14 +165,19 @@ export abstract class BaseInput
      */
     readonly stateChanges: Subject<any> = new Subject<any>();
 
+    /** @hidden */
     readonly formField: FormField | null = null;
 
     /** set when input field is mandatory form field */
     required: boolean;
 
+    /** @hidden */
     onChange: (value: any) => void = () => {};
+
+    /** @hidden */
     onTouched = (): void => {};
 
+    /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
         @Optional() @Self() readonly ngControl: NgControl,
@@ -197,6 +201,7 @@ export abstract class BaseInput
         this.formField = formField && !formControl ? formField : null;
     }
 
+    /** @hidden */
     ngOnInit(): void {
         if (this.formField) {
             this.formField.registerFormFieldControl(this);
@@ -234,14 +239,17 @@ export abstract class BaseInput
         this._cd.detectChanges();
     }
 
+    /** @hidden */
     registerOnChange(fn: (_: any) => void): void {
         this.onChange = fn;
     }
 
+    /** @hidden */
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         super.ngOnDestroy();
         this.stateChanges.complete();
@@ -252,6 +260,7 @@ export abstract class BaseInput
         }
     }
 
+    /** @hidden */
     setDisabledState(isDisabled: BooleanInput): void {
         const newState = coerceBooleanProperty(isDisabled);
         this._cd.markForCheck();
@@ -342,6 +351,7 @@ export abstract class BaseInput
         }
     }
 
+    /** @hidden */
     protected getValue(): any {
         return this._value;
     }

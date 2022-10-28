@@ -17,6 +17,7 @@ export class FacetContentComponent implements OnInit {
         this._addClassNameToHostElement(FACET_CLASS_NAME.facetContainer);
     }
 
+    /** @hidden */
     elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
     }

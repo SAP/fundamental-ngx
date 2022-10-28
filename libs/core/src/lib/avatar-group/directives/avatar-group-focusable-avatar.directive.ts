@@ -32,6 +32,7 @@ export class AvatarGroupFocusableAvatarDirective implements FocusableOption, Has
         private readonly _component: AvatarGroupInterface
     ) {}
 
+    /** @hidden */
     elementRef(): ElementRef {
         return this._elementRef;
     }

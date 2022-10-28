@@ -62,6 +62,7 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     @ContentChild(SideNavigationMainDirective)
     sideNavMain: SideNavigationMainDirective;
 
+    /** @hidden */
     @ViewChildren(PreparedNestedListComponent)
     preparedNestedList: QueryList<PreparedNestedListComponent>;
 

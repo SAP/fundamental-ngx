@@ -17,6 +17,7 @@ export class FeedInputAvatarDirective implements OnInit, OnChanges, CssClassBuil
     @Input()
     placeholder: boolean;
 
+    /** @hidden */
     constructor(private readonly _elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */

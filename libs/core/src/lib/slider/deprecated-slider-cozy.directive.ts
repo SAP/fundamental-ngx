@@ -7,6 +7,7 @@ import { Directive, forwardRef } from '@angular/core';
     providers: [{ provide: CONTENT_DENSITY_DIRECTIVE, useExisting: forwardRef(() => DeprecatedSliderCozyDirective) }]
 })
 export class DeprecatedSliderCozyDirective extends DeprecatedCozyDirective {
+    /** @hidden */
     constructor() {
         super('fd-slider');
     }

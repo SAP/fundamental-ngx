@@ -33,6 +33,7 @@ export class NotificationGroupListComponent implements AfterContentInit, OnDestr
     /** @hidden */
     private readonly _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */

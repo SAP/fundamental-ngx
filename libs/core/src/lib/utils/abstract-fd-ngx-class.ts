@@ -10,6 +10,7 @@ import { ElementRef, OnChanges, OnInit, Input, Directive } from '@angular/core';
 /** @hidden */
 @Directive()
 export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
+    /** @hidden */
     private _elementRef: ElementRef;
 
     /** @hidden */
@@ -22,10 +23,12 @@ export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
     /** @hidden */
     abstract _setProperties(): void;
 
+    /** @hidden */
     _setClassToElement(className: string): void {
         (this._elementRef.nativeElement as HTMLElement).classList.value = `${className} ${this.class}`;
     }
 
+    /** @hidden */
     _clearElementClass(): void {
         (this._elementRef.nativeElement as HTMLElement).classList.value = '';
     }

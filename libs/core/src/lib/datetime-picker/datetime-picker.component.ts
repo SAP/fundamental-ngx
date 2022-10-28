@@ -714,6 +714,7 @@ export class DatetimePickerComponent<D>
         return this._dateTimeAdapter.isValid(date);
     }
 
+    /** @hidden */
     private _setInput(dateTime: Nullable<D>): void {
         this._inputFieldDate = dateTime ? this._formatDateTime(dateTime) : '';
         this._changeDetRef.detectChanges();

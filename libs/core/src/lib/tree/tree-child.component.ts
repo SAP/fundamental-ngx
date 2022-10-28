@@ -16,20 +16,27 @@ import { TreeRowObject } from './tree-row-object.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeChildComponent implements OnInit {
+    /** @hidden */
     @Input() row: TreeRowObject;
 
+    /** @hidden */
     @Input() hideChildren: boolean;
 
+    /** @hidden */
     @Input() displayTreeActions: boolean;
 
+    /** @hidden */
     @Output() editClicked: EventEmitter<any> = new EventEmitter<any>();
 
+    /** @hidden */
     @Output() deleteClicked: EventEmitter<any> = new EventEmitter<any>();
 
+    /** @hidden */
     ngOnInit(): void {
         this.hideChildren = false;
     }
 
+    /** @hidden */
     toggleDisplayChildren(hideAll?): void {
         if (hideAll !== undefined) {
             this.hideChildren = hideAll;
@@ -38,6 +45,7 @@ export class TreeChildComponent implements OnInit {
         }
     }
 
+    /** @hidden */
     typeOf(variable?): string {
         let retVal;
         if (typeof variable === 'string') {
@@ -49,12 +57,14 @@ export class TreeChildComponent implements OnInit {
         return retVal;
     }
 
+    /** @hidden */
     editTreeItem(row?): void {
         if (row) {
             this.editClicked.emit(row);
         }
     }
 
+    /** @hidden */
     deleteTreeItem(row?): void {
         if (row) {
             this.deleteClicked.emit(row);

@@ -9,16 +9,16 @@ import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormInputMessageGroupComponent {
-    /*
+    /**
      * To allow user to determine what event he wants to trigger the messages to show
      * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
      */
     @Input()
     triggers: string[] = ['focusin', 'focusout'];
 
-    /*
+    /**
      * Allows the user to decide if he wants to keep the error message after they click outside
-     *  Whether the popover should close when a click is made outside its boundaries.
+     * Whether the popover should close when a click is made outside its boundaries.
      */
     @Input()
     closeOnOutsideClick = false;

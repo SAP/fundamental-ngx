@@ -89,6 +89,7 @@ export class FdDate {
     // eslint-disable-next-line @typescript-eslint/unified-signatures
     constructor(year: number, month?: number, day?: number, hour?: number, minute?: number, second?: number);
 
+    /** Create a date object */
     constructor(...args: any[]) {
         if (args.length === 0) {
             return FdDate.getNow();

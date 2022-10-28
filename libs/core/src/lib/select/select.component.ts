@@ -124,16 +124,16 @@ export class SelectComponent
     @Input()
     placeholder: string;
 
+    /** Value of the select control. */
     @Input()
-    get value(): any {
-        return this._internalValue;
-    }
-
     set value(newValue: any) {
         if (newValue !== this._internalValue) {
             this.writeValue(newValue);
             this._internalValue = newValue;
         }
+    }
+    get value(): any {
+        return this._internalValue;
     }
 
     /** @deprecated
@@ -307,6 +307,7 @@ export class SelectComponent
         this._tabIndex = this.disabled ? -1 : 0;
     }
 
+    /** Selected option. */
     get selected(): OptionComponent {
         return this._selectionModel.selected[0];
     }
@@ -358,10 +359,6 @@ export class SelectComponent
 
     /** Function to compare the option values with the selected values. */
     @Input()
-    get compareWith(): (o1: any, o2: any) => boolean {
-        return this._compareWith;
-    }
-
     set compareWith(fn: (o1: any, o2: any) => boolean) {
         if (typeof fn !== 'function') {
             throw Error('compareWith` must be a function.');
@@ -371,6 +368,9 @@ export class SelectComponent
             // A different comparator means the selection could change.
             this._initializeSelection();
         }
+    }
+    get compareWith(): (o1: any, o2: any) => boolean {
+        return this._compareWith;
     }
 
     /** @hidden */
@@ -383,6 +383,7 @@ export class SelectComponent
         return this._maxHeight || this._calculatedMaxHeight;
     }
 
+    /** @hidden */
     constructor(
         @Attribute('tabindex') _tabIndex: string,
         @Optional() private readonly _rtlService: RtlService,

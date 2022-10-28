@@ -11,6 +11,7 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCompactDirective } from '@fundamen
     ]
 })
 export class DeprecatedNestedListCompactDirective extends DeprecatedCompactDirective {
+    /** @hidden */
     constructor() {
         super('[fdNestedList][compact], [fd-nested-list]');
     }

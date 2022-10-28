@@ -41,12 +41,15 @@ export class ActionBarComponent extends BaseComponent implements OnInit {
     @Output()
     backButtonClick: EventEmitter<void> = new EventEmitter();
 
+    /** @hidden */
     navigationArrow$: Observable<string>;
 
+    /** @hidden */
     constructor(@Optional() private _rtlService: RtlService, _cd: ChangeDetectorRef) {
         super(_cd);
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this.navigationArrow$ = this._rtlService
             ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow')))

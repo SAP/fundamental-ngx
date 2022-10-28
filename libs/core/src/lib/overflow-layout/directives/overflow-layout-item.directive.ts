@@ -43,12 +43,11 @@ export class OverflowLayoutItemDirective implements OverflowItem, OnInit {
     /**
      * Whether the item is hidden.
      */
-    get hidden(): boolean {
-        return this._overflowItemRef?.hidden === true;
-    }
-
     set hidden(value: boolean) {
         this.hiddenChange.emit(value);
+    }
+    get hidden(): boolean {
+        return this._overflowItemRef?.hidden === true;
     }
 
     /**

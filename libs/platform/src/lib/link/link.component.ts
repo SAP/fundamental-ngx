@@ -59,13 +59,11 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
      * sets inverted property.
      */
     @Input()
-    get inverted(): boolean {
-        return this._inverted;
-    }
-
-    /** set incase of Inverted link */
     set inverted(value: boolean) {
         this._inverted = coerceBooleanProperty(value);
+    }
+    get inverted(): boolean {
+        return this._inverted;
     }
 
     /**
@@ -111,6 +109,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     // eslint-disable-next-line @angular-eslint/no-output-native
     click: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
+    /** @hidden */
     @ContentChild(IconComponent)
     icon: IconComponent;
 
@@ -118,10 +117,14 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     @ViewChild('link', { read: ElementRef })
     anchor: ElementRef;
 
+    /** @hidden */
     emphasized = false;
+    /** @hidden */
     subtle = false;
+    /** @hidden */
     private _inverted = false;
 
+    /** @hidden */
     constructor(protected _cd: ChangeDetectorRef, private renderer2: Renderer2) {
         super(_cd);
     }

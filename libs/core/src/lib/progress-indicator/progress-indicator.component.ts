@@ -60,6 +60,7 @@ export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges,
     /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
 
     /** @hidden */

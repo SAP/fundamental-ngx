@@ -228,6 +228,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         }
     }
 
+    /** @hidden */
     private loadFromTemplate(template: TemplateRef<any>): void {
         const context = {
             $implicit: this.alertRef
@@ -235,17 +236,20 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         this.componentRef = this.containerRef.createEmbeddedView(template, context);
     }
 
+    /** @hidden */
     private loadFromComponent(componentType: Type<any>): void {
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentType);
         this.containerRef.clear();
         this.componentRef = this.containerRef.createComponent(componentFactory);
     }
 
+    /** @hidden */
     private loadFromString(contentString: string): void {
         this.containerRef.clear();
         this.message = contentString;
     }
 
+    /** @hidden */
     private _setAlertConfig(alertConfig: AlertConfig): void {
         Object.keys(alertConfig || {})
             .filter((key) => key !== 'data' && key !== 'container')

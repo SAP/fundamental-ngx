@@ -15,7 +15,7 @@
                     "error",
                     {
                         "type": "attribute",
-                        "prefix": "fd",
+                        "prefix": "fn",
                         "style": "camelCase"
                     }
                 ],
@@ -23,10 +23,12 @@
                     "error",
                     {
                         "type": "element",
-                        "prefix": "fd",
+                        "prefix": "fn",
                         "style": "kebab-case"
                     }
-                ]
+                ],
+                "jsdoc/require-jsdoc": "off",
+                "grouped-accessor-pairs": "off"
             },
             "plugins": ["@angular-eslint/eslint-plugin", "@typescript-eslint"]
         },

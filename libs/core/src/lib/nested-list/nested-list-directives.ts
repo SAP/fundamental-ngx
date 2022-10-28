@@ -25,6 +25,7 @@ let uniqueId = 0;
     selector: '[fdNestedDirectivesHeader], [fd-nested-list-header]'
 })
 export class NestedListHeaderDirective {
+    /** Id of the element. */
     @Input()
     @HostBinding('attr.id')
     id: string | null = `fd-nested-list-group-header-${++uniqueId}`;
@@ -33,6 +34,7 @@ export class NestedListHeaderDirective {
     @HostBinding('class.fd-nested-list__group-header')
     fdNestedListHeaderClass = true;
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** Get the header title */
@@ -77,8 +79,8 @@ export class NestedListIconDirective implements CssClassBuilder, OnChanges, OnIn
         this.buildComponentCssClass();
     }
 
+    /** @hidden CssClassBuilder interface implementation */
     @applyCssClass
-    /** CssClassBuilder interface implementation */
     buildComponentCssClass(): string[] {
         return ['fd-nested-list__icon', this.glyph ? `sap-icon--${this.glyph}` : '', this.class];
     }
@@ -144,6 +146,7 @@ export class NestedListExpandIconComponent {
     /** @hidden */
     sideArrowIcon$: Observable<string>;
 
+    /** @hidden */
     constructor(
         private _itemService: NestedItemService,
         private _changeDetRef: ChangeDetectorRef,

@@ -24,13 +24,14 @@ export abstract class CollectionBaseInput extends BaseInput {
      * because we allow to get labels and values using `displayKey` and `lookupKey` inputs accordingly.
      */
     @Input()
+    set list(value: Array<SelectItem | string | object>) {
+        this._list = value;
+    }
     get list(): Array<SelectItem | string | object> {
         return this._list;
     }
 
-    set list(value: Array<SelectItem | string | object>) {
-        this._list = value;
-    }
+    /** @hidden */
     private _list: Array<SelectItem | string | object>;
 
     /**
@@ -49,6 +50,7 @@ export abstract class CollectionBaseInput extends BaseInput {
     @Input()
     displayKey: string;
 
+    /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
         @Optional() @Self() readonly ngControl: NgControl,
@@ -59,6 +61,7 @@ export abstract class CollectionBaseInput extends BaseInput {
         super(cd, ngControl, ngForm, formField, formControl);
     }
 
+    /** @hidden */
     public lookupValue(item: any): string {
         if (isSelectItem(item)) {
             return this.lookupKey && item ? item.value[this.lookupKey] : item.value;
@@ -67,6 +70,7 @@ export abstract class CollectionBaseInput extends BaseInput {
         }
     }
 
+    /** @hidden */
     public displayValue(item: any): string {
         if (isSelectItem(item)) {
             return item.label;
@@ -79,6 +83,7 @@ export abstract class CollectionBaseInput extends BaseInput {
         }
     }
 
+    /** @hidden */
     public objectGet(obj: any, is: string | string[] | undefined): any {
         if (!isJsObject(obj)) {
             return obj;

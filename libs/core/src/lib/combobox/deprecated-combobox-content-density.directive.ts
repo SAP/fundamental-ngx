@@ -12,6 +12,7 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCompactDirective } from '@fundamen
     ]
 })
 export class DeprecatedComboboxContentDensityDirective extends DeprecatedCompactDirective {
+    /** @hidden */
     constructor(private elRef: ElementRef) {
         super('fd-combobox');
     }

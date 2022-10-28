@@ -123,6 +123,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     @ViewChild('wizardLabel', { read: ElementRef })
     wizardLabel: ElementRef;
 
+    /** @hidden */
     @ViewChild('progressBarLink', { read: ElementRef })
     progressBarLink: ElementRef;
 

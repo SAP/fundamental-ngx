@@ -97,6 +97,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** @hidden The class that traps and manages focus within the notification. */
     private _focusTrap: FocusTrap;
 
+    /** @hidden */
     constructor(
         private _elRef: ElementRef,
         private _componentFactoryResolver: ComponentFactoryResolver,

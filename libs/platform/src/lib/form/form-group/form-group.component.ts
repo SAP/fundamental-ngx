@@ -174,6 +174,7 @@ type FormGroupField = (FormField | FormFieldGroup) & { hintOptions?: HintOptions
 export class FormGroupComponent
     implements FormGroupContainer, OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges
 {
+    /** Id for the form group element */
     @Input()
     id: string;
 
@@ -206,10 +207,6 @@ export class FormGroupComponent
      * Defines form field label placement.
      */
     @Input()
-    get labelLayout(): LabelLayout {
-        return this._labelLayout;
-    }
-
     set labelLayout(value: LabelLayout) {
         if (isDevMode()) {
             console.warn(
@@ -222,6 +219,9 @@ export class FormGroupComponent
             this._labelLayout === 'horizontal' ? DefaultHorizontalLabelLayout : DefaultVerticalLabelLayout;
         this.fieldColumnLayout =
             this._labelLayout === 'horizontal' ? DefaultHorizontalFieldLayout : DefaultVerticalFieldLayout;
+    }
+    get labelLayout(): LabelLayout {
+        return this._labelLayout;
     }
 
     /**
@@ -292,12 +292,11 @@ export class FormGroupComponent
 
     /** Whether to wrap all the provided content in a `<form>` */
     @Input()
-    get useForm(): boolean {
-        return this._useForm;
-    }
-
     set useForm(value: BooleanInput) {
         this._useForm = coerceBooleanProperty(value);
+    }
+    get useForm(): boolean {
+        return this._useForm;
     }
 
     /**
@@ -391,6 +390,7 @@ export class FormGroupComponent
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
         private elementRef: ElementRef,

@@ -52,11 +52,11 @@ import { InputGroupInputComponent } from './input.component';
 export class InputGroupComponent extends BaseInput implements OnInit, AfterContentInit, AfterViewInit {
     /** Input value */
     @Input()
-    get value(): any {
-        return super.getValue();
-    }
     set value(value: any) {
         super.setValue(value);
+    }
+    get value(): any {
+        return super.getValue();
     }
 
     /** @hidden */

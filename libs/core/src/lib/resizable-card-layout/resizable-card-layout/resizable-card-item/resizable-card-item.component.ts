@@ -49,17 +49,15 @@ let cardUniqueId = 0;
     encapsulation: ViewEncapsulation.None
 })
 export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
-    /** get card properties from the config */
+    /** Card properties from the config */
     @Input()
-    get config(): ResizableCardItemConfig {
-        return this._config;
-    }
-
-    /** Set card properties from the config received */
     set config(config: ResizableCardItemConfig) {
         this._config = config;
         this._initialSetup();
         this._cd.detectChanges();
+    }
+    get config(): ResizableCardItemConfig {
+        return this._config;
     }
 
     /** set uinque id for the card */
@@ -71,18 +69,11 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     title: string;
 
     /**
-     * return serial order of card.
+     * Serial order of card.
      * cards are sorted based on ranks before displaying layout.
      * card with lower rank will be displayed first in layout than the card with higher rank.
      */
     @Input()
-    get rank(): number {
-        return this._rank;
-    }
-
-    /**
-     * set serial order of card.
-     * */
     set rank(rankValue: number) {
         // determine max value between user given value and default value
         this._rank = rankValue ? rankValue : cardRank++;
@@ -90,76 +81,62 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
             cardRank = rankValue;
         }
     }
+    get rank(): number {
+        return this._rank;
+    }
 
     /**
      * Number of column span card width takes.
      * It will be in step of 20rem.
      */
     @Input()
+    set cardWidthColSpan(colSpan: number) {
+        this._cardWidthColSpan = colSpan;
+        this._setCardWidth();
+    }
     get cardWidthColSpan(): number {
         return this._cardWidthColSpan;
     }
 
     /**
-     * set the number of column span, card will take.
-     * It sets the width of the card accordingly
-     */
-    set cardWidthColSpan(colSpan: number) {
-        this._cardWidthColSpan = colSpan;
-        this._setCardWidth();
-    }
-
-    /**
-     * return number of row span, card height takes.
+     * Number of row span, card height takes.
      * It will be in the step of 1rem.
      */
     @Input()
+    set cardHeightRowSpan(rowSpan: number) {
+        this._cardHeightRowSpan = rowSpan;
+        this._setCardHeight();
+    }
     get cardHeightRowSpan(): number {
         return this._cardHeightRowSpan;
     }
 
     /**
-     * set number of row span, card will take.
-     * It sets the height of the card accordingly
-     */
-    set cardHeightRowSpan(rowSpan: number) {
-        this._cardHeightRowSpan = rowSpan;
-        this._setCardHeight();
-    }
-    /**
-     * return number of row span card mini header height takes.
+     * Number of row span card mini header height takes.
      * Mini Header: The smallest representation of the card is the header.
      * The card can be collapsed to only its header height.
      */
     @Input()
+    set cardMiniHeaderRowSpan(rowSpan: number) {
+        this._cardMiniHeaderRowSpan = rowSpan;
+        this._setCardMiniHeaderHeight();
+    }
     get cardMiniHeaderRowSpan(): number {
         return this._cardMiniHeaderRowSpan;
     }
 
     /**
-     * set number of row span card mini header height takes.
-     */
-    set cardMiniHeaderRowSpan(rowSpan: number) {
-        this._cardMiniHeaderRowSpan = rowSpan;
-        this._setCardMiniHeaderHeight();
-    }
-
-    /**
-     * return number of row span card mini content height takes.
+     * Number of row span card mini content height takes.
      * Mini Content: The minimum height for the card content depends on the card type,
      * and must be as high as the smallest representation of the content.
      */
     @Input()
-    get cardMiniContentRowSpan(): number {
-        return this._cardMiniContentRowSpan ?? 0;
-    }
-
-    /**
-     * set number of row span card mini content height takes.
-     */
     set cardMiniContentRowSpan(rowSpan: number) {
         this._cardMiniContentRowSpan = rowSpan;
         this._setCardMiniContentHeight();
+    }
+    get cardMiniContentRowSpan(): number {
+        return this._cardMiniContentRowSpan ?? 0;
     }
 
     /** Card can be set to resizable=false, to restrict card resize */
@@ -296,6 +273,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(
         private readonly _cd: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
@@ -306,6 +284,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
         }
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
@@ -522,7 +501,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
         );
     }
 
-    // @hidden Return previous height row span of the card
+    /** @hidden Return previous height row span of the card */
     get previousCardHeightRowSpan(): number {
         return this._prevCardHeightRowSpan;
     }
@@ -755,6 +734,18 @@ export interface ResizableCardItemConfig {
 
 /** Object to emit on resize complete */
 export class ResizedEvent {
+    /**
+     * Object to emit on resize complete
+     * @param card
+     * @param prevCardWidth Previous card width
+     * @param prevCardHeight Previous card height
+     * @param cardWidth Current card width
+     * @param cardHeight Current card height
+     * @param cardWidthColSpan Current card width column span
+     * @param cardHeightRowSpan Current card height row span
+     * @param newCardWidthColSpan New card width column span
+     * @param newCardHeightRowSpan New card height row span
+     */
     constructor(
         public card: ResizableCardItemComponent,
         public prevCardWidth: number,

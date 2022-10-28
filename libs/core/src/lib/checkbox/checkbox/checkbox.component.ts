@@ -127,12 +127,11 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
 
     /** Sets values returned by control. */
     @Input()
-    get values(): FdCheckboxValues {
-        return this._values;
-    }
-
     set values(checkboxValues: FdCheckboxValues) {
         this._values = { ...FD_CHECKBOX_VALUES_DEFAULT, ...(checkboxValues ?? {}) };
+    }
+    get values(): FdCheckboxValues {
+        return this._values;
     }
 
     /** @hidden */

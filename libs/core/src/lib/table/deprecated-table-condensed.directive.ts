@@ -11,6 +11,7 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCondensedDirective } from '@fundam
     ]
 })
 export class DeprecatedTableCondensedDirective extends DeprecatedCondensedDirective {
+    /** @hidden */
     constructor() {
         super('table[fd-table]');
     }

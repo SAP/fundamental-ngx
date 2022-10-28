@@ -7,5 +7,11 @@ export interface SearchChange {
 }
 
 export class TableSearchChangeEvent {
+    /**
+     * Table search change event
+     * @param source Table component
+     * @param current Current search (fields, directions)
+     * @param previous Previous search (fields, directions)
+     */
     constructor(public source: Table, public current: SearchInput, public previous: SearchInput) {}
 }

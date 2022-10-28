@@ -12,6 +12,7 @@ import { Directive, forwardRef } from '@angular/core';
     ]
 })
 export class DeprecatedSplitButtonCompactDirective extends DeprecatedCompactDirective {
+    /** @hidden */
     constructor() {
         super('fd-split-button');
     }

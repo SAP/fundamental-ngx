@@ -15,12 +15,15 @@ import { ApprovalUser } from '../interfaces';
     }
 })
 export class ApprovalFlowUserDetailsComponent {
+    /** Approval Flow user */
     @Input()
     user: ApprovalUser;
 
+    /** Approval Flow user details */
     @Input()
     details: Nullable<Observable<any>>;
 
+    /** Approval Flow user details template */
     @Input()
     detailsTemplate: TemplateRef<any>;
 }

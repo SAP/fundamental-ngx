@@ -32,6 +32,11 @@ import { DynamicPageService } from './dynamic-page.service';
 
 /** Dynamic Page tab change event */
 export class DynamicPageTabChangeEvent {
+    /**
+     * Dynamic Page tab change event
+     * @param source Dynamic Page component
+     * @param payload Tab component
+     */
     constructor(public source: DynamicPageContentComponent, public payload: TabPanelComponent) {}
 }
 
@@ -184,6 +189,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         return this._elementRef;
     }
 
+    /** @hidden */
     _onSelectedTabChange(event: TabPanelComponent): void {
         const content = this.contentComponents.find((contentComponent) => contentComponent.id === event.id);
 

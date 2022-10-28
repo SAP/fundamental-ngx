@@ -15,5 +15,7 @@ import { OverflowPriority } from '@fundamental-ngx/core/utils';
     selector: '[fdOverflowPriority]'
 })
 export class ToolbarOverflowPriorityDirective extends ToolbarItemDirective {
-    @Input() fdOverflowPriority: OverflowPriority = 'high';
+    /** The priority of the item. */
+    @Input()
+    fdOverflowPriority: OverflowPriority = 'high';
 }

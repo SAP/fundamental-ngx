@@ -12,6 +12,7 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCompactDirective } from '@fundamen
     ]
 })
 export class DeprecatedActionSheetCompactDirective extends DeprecatedCompactDirective {
+    /** @hidden */
     constructor() {
         super(`[fd-action-sheet-item][compact], fd-action-sheet-body[compact] and fd-action-sheet`);
     }
