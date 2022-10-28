@@ -19,6 +19,7 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { MessageToastModule } from '@fundamental-ngx/core/message-toast';
+import { NotificationMobileExampleComponent } from './examples/notification-mobile/notification-mobile-example.component';
 
 const routes: Routes = [
     {
@@ -44,7 +45,8 @@ const routes: Routes = [
         MenuModule,
         ListModule,
         ActionSheetModule,
-        MessageToastModule
+        MessageToastModule,
+        PopoverModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -54,7 +56,8 @@ const routes: Routes = [
         NotificationOptionsExampleComponent,
         NotificationOpenTemplateExampleComponent,
         NotificationComponentAsContentExampleComponent,
-        NotificationGroupExampleComponent
+        NotificationGroupExampleComponent,
+        NotificationMobileExampleComponent
     ],
     providers: [currentComponentProvider('notification')]
 })
