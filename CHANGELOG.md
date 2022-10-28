@@ -1,3 +1,12 @@
+## [0.36.3-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.8...v0.36.3-rc.9) (2022-10-28)
+
+
+### Bug Fixes
+
+* **core:** solve popover arrow overflow ([#8900](https://github.com/SAP/fundamental-ngx/issues/8900)) ([6b45ef6](https://github.com/SAP/fundamental-ngx/commit/6b45ef6938585a22f3bc8ddff1660fb20791cfd4))
+
+
+
 ## [0.36.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.7...v0.36.3-rc.8) (2022-10-28)
 
 
