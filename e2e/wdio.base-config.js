@@ -1,9 +1,16 @@
 /* eslint-disable no-undef */
+const tsConfig = require('../tsconfig.base.json');
+const tsNode = require('ts-node');
+const tsConfigPaths = require('tsconfig-paths');
+const allureReporter = require('@wdio/allure-reporter').default;
+
 module.exports = ({ runner, specs, projectName }) => {
-    require('ts-node').register({ transpileOnly: true, files: true, project: './e2e/tsconfig.json' });
-    const AllureReporter = require('@wdio/allure-reporter').default;
+    tsNode.register({ transpileOnly: true, files: true, project: './e2e/tsconfig.json' });
+    tsConfigPaths.register({ baseUrl: './', paths: tsConfig.compilerOptions.paths });
+
     runner = runner || 'local';
     projectName = projectName.split(':').join('/');
+
     return {
         runner,
         specs,
@@ -80,7 +87,7 @@ module.exports = ({ runner, specs, projectName }) => {
         afterTest: async function (test, context, { error, result, duration, passed, retries }) {
             if (error !== undefined) {
                 const html = await browser.getPageSource();
-                AllureReporter.addAttachment('page.html', html, 'text/html');
+                allureReporter.addAttachment('page.html', html, 'text/html');
             }
         }
     };
