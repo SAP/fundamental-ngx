@@ -45,6 +45,7 @@ export class OptionComponent implements OnDestroy, FocusableOption {
     @Input()
     selected = false;
 
+    /** Label of the option. Similar to how a native select operates. */
     @Input()
     label: string;
 
@@ -61,7 +62,7 @@ export class OptionComponent implements OnDestroy, FocusableOption {
 
     /**
      * @hidden
-     * The displayed value of the option. Used when label not passed by user. e.g. <fn-option [value]='Apple'> Apple </fn-option>
+     * The displayed value of the option. Used when label not passed by user. e.g. <li fn-option [value]='Apple'> Apple </li>
      */
     get _viewValue(): string {
         return (this.elementRef.nativeElement.textContent || '').trim();

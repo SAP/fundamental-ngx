@@ -111,7 +111,10 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         }
     }
 
-    get selected(): OptionComponent {
+    /** @hidden
+     * Returns selected option
+     */
+    get _selected(): OptionComponent {
         return this._selectionModel.selected[0];
     }
 
@@ -196,8 +199,8 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
             option === clickedOption ? (option.selected = true) : (option.selected = false);
         });
         clickedOption && this._selectionModel.select(clickedOption);
-        this.value = this.selected.value;
-        this.inputText = this.selected.label ? this.selected.label : this.selected._viewValue;
+        this.value = this._selected.value;
+        this.inputText = this._selected.label ? this._selected.label : this._selected._viewValue;
         this.hideMenu();
         this._cdRef.detectChanges();
     }
@@ -247,18 +250,19 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         let visibleOptions = 0;
         this.options.forEach((option) => {
             const optionLabel = option.label ? option.label : option._viewValue;
-            if (!optionLabel.toLowerCase().startsWith(this.inputText.toLowerCase())) {
-                option._hide();
-            } else {
+            if (optionLabel.toLowerCase().startsWith(this.inputText.toLowerCase())) {
                 visibleOptions++;
                 option._show();
-                if (!this.opened) {
-                    this.opened = true;
-                }
+            } else {
+                option._hide();
             }
-            option.selected = option.value.toLowerCase() === this._internalValue.toLowerCase();
-        });
 
+            option.selected = option.value?.toLowerCase() === this.value?.toLowerCase();
+        });
         visibleOptions > 0 ? (this._optionsListEmpty = false) : (this._optionsListEmpty = true);
+
+        if (!this.opened && !this._optionsListEmpty) {
+            this.opened = true;
+        }
     }
 }
