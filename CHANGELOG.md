@@ -1,3 +1,12 @@
+## [0.36.3-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.9...v0.36.3-rc.10) (2022-10-28)
+
+
+### Features
+
+* **core:** notification mobile (in popover) ([#8525](https://github.com/SAP/fundamental-ngx/issues/8525)) ([8118bae](https://github.com/SAP/fundamental-ngx/commit/8118bae082e1616fec0796f23a55a857286066ed))
+
+
+
 ## [0.36.3-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.8...v0.36.3-rc.9) (2022-10-28)
 
 

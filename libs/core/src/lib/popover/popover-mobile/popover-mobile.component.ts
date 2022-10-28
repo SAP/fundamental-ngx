@@ -114,10 +114,11 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     /** @hidden Opens the Dialog */
     private _openDialog(): void {
         this.dialogRef = this._dialogService.open(this._dialogTemplate, {
+            verticalPadding: true,
+            horizontalPadding: true,
             ...this.dialogConfig,
             mobile: true,
             focusTrapped: true,
-            verticalPadding: true,
             escKeyCloseable: false,
             backdropClickCloseable: false,
             container: this._elementRef.nativeElement,

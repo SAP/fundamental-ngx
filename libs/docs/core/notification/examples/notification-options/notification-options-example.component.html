@@ -18,8 +18,8 @@
             </fd-notification-footer>
         </fd-notification-content>
         <fd-notification-actions>
-            <button fd-button label="Open" fdCompact></button>
-            <button fd-button fdType="transparent" ariaLabel="Close" glyph="decline" title="close" fdCompact></button>
+            <button fd-button label="Open"></button>
+            <button fd-button fdType="transparent" ariaLabel="Close" glyph="decline" title="close"></button>
         </fd-notification-actions>
     </fd-notification-body>
 </fd-notification>
@@ -43,8 +43,8 @@
             </fd-notification-footer>
         </fd-notification-content>
         <fd-notification-actions>
-            <button fd-button label="Open" fdCompact></button>
-            <button fd-button fdType="transparent" glyph="decline" title="close" fdCompact></button>
+            <button fd-button label="Open"></button>
+            <button fd-button fdType="transparent" glyph="decline" title="close"></button>
         </fd-notification-actions>
     </fd-notification-body>
 </fd-notification>
@@ -70,7 +70,7 @@
                 </fd-notification-footer>
             </fd-notification-content>
             <fd-notification-actions>
-                <fd-action-sheet fdCompact [noArrow]="true" placement="bottom-end">
+                <fd-action-sheet [noArrow]="true" placement="bottom-end">
                     <fd-action-sheet-control>
                         <button
                             role="menu"
@@ -79,41 +79,20 @@
                             fdType="transparent"
                             glyph="overflow"
                             title="More"
-                            fdCompact
                         ></button>
                     </fd-action-sheet-control>
                     <fd-action-sheet-body>
+                        <li fd-action-sheet-item label="Approve" glyph="accept" (click)="actionPicked('Approve')"></li>
+                        <li fd-action-sheet-item label="Reject" glyph="decline" (click)="actionPicked('Reject')"></li>
                         <li
                             fd-action-sheet-item
-                            fdCompact
-                            label="Approve"
-                            glyph="accept"
-                            (click)="actionPicked('Approve')"
-                        ></li>
-                        <li
-                            fd-action-sheet-item
-                            fdCompact
-                            label="Reject"
-                            glyph="decline"
-                            (click)="actionPicked('Reject')"
-                        ></li>
-                        <li
-                            fd-action-sheet-item
-                            fdCompact
                             label="Forward"
                             glyph="arrow-right"
                             (click)="actionPicked('Forward')"
                         ></li>
                     </fd-action-sheet-body>
                 </fd-action-sheet>
-                <button
-                    fd-button
-                    fdType="transparent"
-                    glyph="decline"
-                    ariaLabel="Close"
-                    title="close"
-                    fdCompact
-                ></button>
+                <button fd-button fdType="transparent" glyph="decline" ariaLabel="Close" title="close"></button>
             </fd-notification-actions>
         </fd-notification-body>
     </fd-notification>

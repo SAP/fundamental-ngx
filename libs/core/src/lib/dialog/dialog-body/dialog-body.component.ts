@@ -18,6 +18,7 @@ import { DialogRef } from '../utils/dialog-ref.class';
     host: {
         '[class.fd-dialog__body]': 'true',
         '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig.verticalPadding',
+        '[class.fd-dialog__body--no-horizontal-padding]': '!dialogConfig.horizontalPadding',
         '[style.min-height]': 'dialogConfig.bodyMinHeight'
     }
 })
