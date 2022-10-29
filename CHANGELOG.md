@@ -1,3 +1,12 @@
+## [0.36.3-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.11...v0.36.3-rc.12) (2022-10-29)
+
+
+### Bug Fixes
+
+* **platform:** fix broken two-columns options in select ([#8805](https://github.com/SAP/fundamental-ngx/issues/8805)) ([81a4b72](https://github.com/SAP/fundamental-ngx/commit/81a4b72a689c2743b683bbe6e9b62d6397428641))
+
+
+
 ## [0.36.3-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.10...v0.36.3-rc.11) (2022-10-28)
 
 
