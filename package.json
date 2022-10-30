@@ -114,7 +114,7 @@
     "@wdio/spec-reporter": "7.7.3",
     "ajv-formats": "2.1.1",
     "angular-cli-ghpages": "1.0.0",
-    "autoprefixer": "10.4.2",
+    "autoprefixer": "10.4.13",
     "axe-core": "4.4.1",
     "axe-html-reporter": "2.2.0",
     "babel-loader": "8.2.4",
