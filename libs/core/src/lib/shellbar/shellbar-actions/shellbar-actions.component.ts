@@ -99,17 +99,21 @@ export class ShellbarActionsComponent implements AfterViewInit {
 
     /** @hidden */
     @ContentChild(ProductSwitchComponent, { static: false })
-    productSwitchComponent: ProductSwitchComponent;
+    _productSwitchComponent: ProductSwitchComponent;
 
     /** @hidden */
     @ViewChild(ShellbarUserMenuComponent)
     _userComponentView: ShellbarUserMenuComponent;
 
-    /** @hidden */
+    /** @hidden
+     * search button when combobox is hidden.
+     */
     @ViewChild('searchButton')
     _searchButton: ButtonComponent;
 
-    /** @hidden */
+    /** @hidden
+     * True when shellbar takes full width of whole shellbar. For example, in 'S' size.
+     */
     _fullWidthOnMobile = false;
 
     /** @hidden */

@@ -40,7 +40,7 @@
     <fd-shellbar-actions-mobile
         [shellbarActions]="shellbarActions"
         [collapsedItemMenuLabel]="collapsedItemMenuLabel"
-        (showFullWidthCombobox)="_showFullWidthCombobox($event)"
+        (_showFullWidthCombobox)="_showFullWidthCombobox($event)"
     ></fd-shellbar-actions-mobile>
 </div>
 
@@ -65,6 +65,6 @@
     </ng-container>
 </ng-container>
 
-<div *ngIf="productSwitchComponent && !_fullWidthOnMobile" class="fd-shellbar__action">
+<div *ngIf="_productSwitchComponent && !_fullWidthOnMobile" class="fd-shellbar__action">
     <ng-content select="fd-product-switch"></ng-content>
 </div>

@@ -38,9 +38,11 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
     @Input()
     size: ShellbarSizes = 'm';
 
+    /** It makes shellbar responsive */
     @Input()
     responsive = false;
 
+    /** Custom width can be given to 's' , 'm' , 'l' and 'xl' sizes.  */
     @Input()
     sizesWidth = {
         s: 320,
