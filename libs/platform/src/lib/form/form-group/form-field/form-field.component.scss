@@ -4,5 +4,9 @@
     white-space: nowrap;
 }
 .fd-form-field-inline-help-container {
-    text-overflow: clip;
+    overflow: visible !important;
+
+    [class*='sap-icon'] {
+        margin: 0;
+    }
 }
