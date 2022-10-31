@@ -25,6 +25,7 @@
     "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
     "focus-trap": "FOCUSTRAP_VER_PLACEHOLDER",
     "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
+    "@fundamental-styles/cx": "FDCXSTYLES_VER_PLACEHOLDER",
     "@fundamental-ngx/i18n": "VERSION_PLACEHOLDER",
     "fast-deep-equal": "FAST_DEEP_EQUAL_VER_PLACEHOLDER",
     "lodash-es": "LODASH_ES_VER_PLACEHOLDER",
