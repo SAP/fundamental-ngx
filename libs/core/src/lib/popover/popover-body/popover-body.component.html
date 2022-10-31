@@ -1,5 +1,4 @@
 <div
-    fd-scrollbar
     class="fd-popover__popper"
     [class.fd-popover__popper--no-arrow]="_noArrow"
     [class.fd-popover__popper--compact]="_contentDensityObserver.isCompact$ | async"
@@ -10,17 +9,19 @@
     [style.min-width.px]="_popoverBodyMinWidth"
     [style.width.px]="_popoverBodyWidth"
 >
-    <ng-content select="[fd-popover-body-header]"></ng-content>
+    <div fd-scrollbar>
+        <ng-content select="[fd-popover-body-header]"></ng-content>
 
-    <ng-content select="[fd-popover-body-subheader]"></ng-content>
+        <ng-content select="[fd-popover-body-subheader]"></ng-content>
 
-    <ng-content></ng-content>
+        <ng-content></ng-content>
 
-    {{ text }}
+        {{ text }}
 
-    <ng-container *ngTemplateOutlet="_templateToDisplay"></ng-container>
+        <ng-container *ngTemplateOutlet="_templateToDisplay"></ng-container>
 
-    <ng-content select="[fd-popover-body-footer]"></ng-content>
+        <ng-content select="[fd-popover-body-footer]"></ng-content>
 
-    <span class="fd-popover__arrow" [class]="_arrowClasses" *ngIf="!_noArrow"></span>
+        <span class="fd-popover__arrow" [class]="_arrowClasses" *ngIf="!_noArrow"></span>
+    </div>
 </div>

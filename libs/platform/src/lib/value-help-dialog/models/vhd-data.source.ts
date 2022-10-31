@@ -4,17 +4,25 @@ import { take } from 'rxjs/operators';
 import { BaseDataProvider, DataProvider, DataSource } from '@fundamental-ngx/platform/shared';
 
 export class ValueHelpDialogDataSource<T> implements DataSource<T> {
+    /** @hidden */
     protected _dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
+    /** @hidden */
     protected _onDataRequested$ = new Subject<void>();
+    /** @hidden */
     protected _onDataReceived$ = new Subject<void>();
 
+    /** @hidden */
     protected _dataLoading = false;
 
+    /** @hidden */
     get isDataLoading(): boolean {
         return this._dataLoading;
     }
 
+    /** @hidden */
     constructor(public dataProvider: DataProvider<T>) {}
+
+    /** @hidden */
     match(predicate?: string | Map<string, string>): void {
         this._onDataRequested$.next();
         this._dataLoading = true;
@@ -42,37 +50,46 @@ export class ValueHelpDialogDataSource<T> implements DataSource<T> {
             );
     }
 
+    /** @hidden */
     open(): Observable<T[]> {
         return this._dataChanges.asObservable();
     }
 
+    /** @hidden */
     onDataRequested(): Observable<void> {
         return this._onDataRequested$.asObservable();
     }
 
+    /** @hidden */
     onDataReceived(): Observable<void> {
         return this._onDataReceived$.asObservable();
     }
 
+    /** @hidden */
     close(): void {}
 }
 
 export class ArrayValueHelpDialogDataSource<T> extends ValueHelpDialogDataSource<T> {
+    /** @hidden */
     constructor(data: T[]) {
         super(new BaseDataProvider(data));
     }
 }
 
 export class ObservableValueHelpDialogDataSource<T> extends ValueHelpDialogDataSource<T> {
+    /** @hidden */
     constructor(data: Observable<T[]>) {
         super(new BaseDataProvider(data));
     }
 }
 
 export class VhdDataProvider<R> extends DataProvider<R> {
+    /** @hidden */
     constructor(public values: R[]) {
         super();
     }
+
+    /** @hidden */
     fetch(params: Map<string, string>): Observable<R[]> {
         let data = this.values;
         const arrayParams = Array.from(params);

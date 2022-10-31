@@ -41,7 +41,9 @@ let titleUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterViewInit {
+    /** @hidden */
     protected defaultId = `fd-title-id-${titleUniqueId++}`;
+    /** @hidden */
     protected defaultSelectId = `fd-select-title-id-${titleUniqueId++}`;
 
     /** title id for the table  */
@@ -52,29 +54,36 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
     @Input()
     selectedId: string = this.defaultSelectId;
 
+    /** @hidden */
     @Input()
     conditions: ExtendedBaseEntity[] = [];
 
-    /** depricated */
+    /** @depricated */
     @Input()
     included: ExtendedIncludedEntity[] = [];
 
-    /** depricated */
+    /** @depricated */
     @Input()
     excluded: ExtendedExcludedEntity[] = [];
+
+    /** @hidden */
     @Input()
     strategyLabels: { [key in keyof (typeof VhdDefineIncludeStrategy | typeof VhdDefineExcludeStrategy)]?: string } =
         {};
 
+    /** @hidden */
     @Output()
     includeChange: EventEmitter<ExtendedIncludedEntity[]> = new EventEmitter<ExtendedIncludedEntity[]>();
 
+    /** @hidden */
     @Output()
     excludeChange: EventEmitter<ExtendedExcludedEntity[]> = new EventEmitter<ExtendedExcludedEntity[]>();
 
+    /** @hidden */
     @Output()
     conditionChange: EventEmitter<BaseEntity[]> = new EventEmitter<BaseEntity[]>();
 
+    /** @hidden */
     _conditions: ExtendedBaseEntity[] = [];
 
     /** @hidden */
@@ -110,6 +119,7 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
         }
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
         this._refreshStrategies();
     }

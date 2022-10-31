@@ -5,6 +5,7 @@ const fileSizeMap = new Map([
     ['TB', 1099511627776]
 ]);
 
+/** Parse file size to bytes */
 export function parserFileSize(fileSize: string): number {
     if (fileSize === '') {
         return 0;

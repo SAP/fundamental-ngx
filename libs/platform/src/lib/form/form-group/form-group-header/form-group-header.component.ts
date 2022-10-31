@@ -23,9 +23,11 @@ import { Nullable } from '@fundamental-ngx/core/shared';
     }
 })
 export class FormGroupHeaderComponent {
+    /** Fields Group */
     @Input()
     fieldGroup: Nullable<FieldGroup>;
 
+    /** Hint options */
     hintOptions(field: FieldGroup): HintOptions | undefined {
         if (field.hintOptions) {
             return field.hintOptions;

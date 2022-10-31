@@ -81,6 +81,7 @@ export class PopoverComponent
     @Input()
     mobile = false;
 
+    /** Config for the popover in mobile mode */
     @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true };
 
@@ -159,10 +160,6 @@ export class PopoverComponent
 
     /** @hidden */
     ngAfterContentInit(): void {
-        if (this.popoverBody && this.popoverBody.notificationGroup) {
-            super.focusTrapped = true;
-            super.focusAutoCapture = true;
-        }
         if (this.popoverControl && this.triggers.includes('click')) {
             this.popoverControl._tabbable = true;
         }

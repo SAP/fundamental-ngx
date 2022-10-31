@@ -477,18 +477,16 @@ export class ComboboxComponent
         return !this.inputText || this.inputText?.trim().length === 0;
     }
 
-    /** Get the input text of the input. */
-    get inputText(): string {
-        return this.inputTextValue;
-    }
-
-    /** Set the input text of the input. */
+    /** Input text of the input. */
     set inputText(value: string) {
         this.inputTextValue = value;
         this.inputTextChange.emit(value);
         if (!this.mobile) {
             this._propagateChange();
         }
+    }
+    get inputText(): string {
+        return this.inputTextValue;
     }
 
     /** Get the glyph value based on whether the combobox is used as a search field or not. */
@@ -701,10 +699,14 @@ export class ComboboxComponent
 
     /** @hidden */
     private _propagateChange(): void {
-        if (!this.communicateByObject) {
-            this.onChange(this.inputText);
-        } else {
+        if (this.communicateByObject) {
+            const value = this._getOptionObjectByDisplayedValue(this.inputText);
+            if (this.displayFn(value) !== this.displayFn(this.getValue())) {
+                this.setValue(value);
+            }
             this.onChange(this.getValue());
+        } else {
+            this.onChange(this.inputText);
         }
     }
 
@@ -733,6 +735,7 @@ export class ComboboxComponent
         );
     }
 
+    /** @hidden */
     isSelected(term: any): boolean {
         const termValue = this.communicateByObject ? term : this.displayFn(term);
         return this.getValue() === termValue;

@@ -47,6 +47,7 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
     /** @hidden */
     private _selectedBackup: SelectableOptionItem[];
 
+    /** @hidden */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,

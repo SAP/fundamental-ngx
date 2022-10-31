@@ -140,6 +140,7 @@ export class DynamicPageSubheaderComponent {
         this._dynamicPageService.pinned.next(this._pinned);
     }
 
+    /** @hidden */
     private _handleCollapsedChange(collapsed: boolean): void {
         if (collapsed === this._collapsed) {
             return;

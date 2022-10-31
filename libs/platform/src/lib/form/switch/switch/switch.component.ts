@@ -49,12 +49,11 @@ export class SwitchComponent extends BaseInput {
     readonly switchChange: EventEmitter<SwitchChangeEvent> = new EventEmitter<SwitchChangeEvent>();
 
     /** value for switch control */
-    get value(): any {
-        return this.getValue();
-    }
-
     set value(selectValue: any) {
         this.setValue(selectValue);
+    }
+    get value(): any {
+        return this.getValue();
     }
 
     /** @hidden
@@ -62,6 +61,7 @@ export class SwitchComponent extends BaseInput {
      */
     switchCurrentValue = false;
 
+    /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
         @Optional() @Self() ngControl: NgControl,

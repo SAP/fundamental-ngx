@@ -31,8 +31,10 @@ export class NewFolderComponent implements AfterViewInit {
     @ViewChild(FormControlComponent)
     private readonly formControl: FormControlComponent;
 
+    /** @hidden */
     constructor(public readonly dialogRef: DialogRef) {}
 
+    /** @hidden */
     ngAfterViewInit(): void {
         const el = this.formControl.elementRef().nativeElement as HTMLInputElement;
         if (el) {

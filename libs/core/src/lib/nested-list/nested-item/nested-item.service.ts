@@ -4,7 +4,9 @@ import { Subject } from 'rxjs';
 
 /** Contains references to popover or list nested components, that are placed as direct children of item component */
 export class NestedItemService {
+    /** @hidden */
     list: NestedListInterface;
+    /** @hidden */
     popover?: NestedListPopoverInterface;
 
     /** Subject fired when expand icon is clicked */

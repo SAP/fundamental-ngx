@@ -39,6 +39,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     @Input()
     state: FormStates | null = null;
 
+    /** Type of the form control. */
     @Input()
     type: string;
 
@@ -67,11 +68,12 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [this.state ? 'is-' + this.state : '', this.class];
     }

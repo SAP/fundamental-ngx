@@ -5,5 +5,6 @@ import { Directive, ElementRef } from '@angular/core';
     selector: '[fd-toolbar-item]'
 })
 export class ToolbarItemDirective {
+    /** @hidden */
     constructor(public elementRef: ElementRef) {}
 }

@@ -12,6 +12,7 @@ import { Directive, forwardRef } from '@angular/core';
     ]
 })
 export class DeprecatedCardContentDensityDirective extends DeprecatedCompactDirective {
+    /** @hidden */
     constructor() {
         super('fd-card');
     }

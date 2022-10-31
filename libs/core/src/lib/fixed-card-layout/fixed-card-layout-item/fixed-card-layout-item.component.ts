@@ -10,6 +10,7 @@ import { FocusableOption } from '@angular/cdk/a11y';
     }
 })
 export class FixedCardLayoutItemComponent implements FocusableOption {
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** Set focus on the element. */

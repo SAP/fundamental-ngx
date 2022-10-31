@@ -22,4 +22,9 @@
             border-top-right-radius: 0;
         }
     }
+
+    .fd-dialog__body--no-horizontal-padding {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }

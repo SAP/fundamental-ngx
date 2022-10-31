@@ -9,7 +9,7 @@
             <ng-container *ngTemplateOutlet="viewBody"></ng-container>
         </fd-dialog-body>
 
-        <fd-dialog-footer>
+        <fd-dialog-footer *ngIf="viewFooter">
             <ng-container *ngTemplateOutlet="viewFooter"></ng-container>
         </fd-dialog-footer>
     </fd-dialog>

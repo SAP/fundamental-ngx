@@ -12,6 +12,7 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCompactDirective } from '@fundamen
     ]
 })
 export class DeprecatedPanelCompactDirective extends DeprecatedCompactDirective {
+    /** @hidden */
     constructor() {
         super('fd-panel');
     }

@@ -34,11 +34,11 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      * value for datetime
      */
     @Input()
-    get value(): D {
-        return super.getValue();
-    }
     set value(value: D) {
         super.setValue(value);
+    }
+    get value(): D {
+        return super.getValue();
     }
 
     /**
@@ -265,6 +265,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
         return !!this.formField?.required;
     }
 
+    /** @hidden */
     constructor(
         protected _cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,

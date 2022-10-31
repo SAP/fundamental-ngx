@@ -184,15 +184,15 @@ export class MenuComponent
         this._popoverService.onDestroy();
     }
 
-    get trigger(): ElementRef {
-        return this._externalTrigger;
-    }
-
+    /** @hidden */
     set trigger(trigger: ElementRef) {
         this._externalTrigger = trigger;
         this._popoverService.initialise(this._externalTrigger);
         this._destroyEventListeners();
         this._listenOnTriggerRefClicks();
+    }
+    get trigger(): ElementRef {
+        return this._externalTrigger;
     }
 
     /** Opens the menu */

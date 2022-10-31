@@ -89,7 +89,9 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     @Input()
     mobile = false;
 
+    /** @hidden */
     maxCharsAtDefault = false;
+
     /**
      * Apply body class by default
      */
@@ -109,15 +111,18 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     /** @hidden */
     constructor(private readonly _elementRef: ElementRef) {}
 
+    /** @hidden */
     setHasMore(): void {
         if (this.text) {
             this.hasMore = this.text.length > this.maxChars;
         }
     }
 
+    /** @hidden */
     setDefaultMaxChars(): void {
         this.maxChars = this.mobile ? 300 : 500;
     }
+
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
@@ -137,11 +142,12 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
         this.setHasMore();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [CSS_CLASS_NAME.item, this.class, this.isRichText ? '' : `${CSS_CLASS_NAME.item}--collapsible`];
     }

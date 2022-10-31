@@ -22,6 +22,7 @@ export class InputGroupConfig {
         return useFactory;
     }
 
+    /** @hidden */
     constructor(platformConfig: PlatformConfig) {
         this.contentDensity = platformConfig.contentDensity;
     }

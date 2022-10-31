@@ -54,15 +54,12 @@ let randomId = 0;
     encapsulation: ViewEncapsulation.None
 })
 export class UploadCollectionComponent implements OnChanges, OnDestroy {
+    /** ID of the upload collection element. If none is provided, one will be generated. */
     @Input()
     id = `fdp-upload-collection-id-${randomId++}`;
 
     /** Defines the number of items on the page */
     @Input()
-    get itemsPerPage(): number | ItemPerPage[] {
-        return this._itemsPerPage;
-    }
-
     set itemsPerPage(value: number | ItemPerPage[]) {
         if (typeof value === 'number') {
             this._itemsPerPage = value;
@@ -85,17 +82,19 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
 
         this._match();
     }
+    get itemsPerPage(): number | ItemPerPage[] {
+        return this._itemsPerPage;
+    }
 
     /** List of items */
     @Input()
-    get dataSource(): FdpUploadCollectionDataSource {
-        return this._dataSource;
-    }
-
     set dataSource(value: FdpUploadCollectionDataSource) {
         if (value) {
             this._initializeDS(value);
         }
+    }
+    get dataSource(): FdpUploadCollectionDataSource {
+        return this._dataSource;
     }
 
     /**
@@ -318,6 +317,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
     /** @hidden */
     private readonly _onDestroy$ = new Subject<void>();
 
+    /** @hidden */
     constructor(
         private readonly _dialogService: DialogService,
         private readonly _filesValidatorService: FilesValidatorService,
@@ -1076,6 +1076,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
         return undefined;
     }
 
+    /** @hidden */
     private _match(): void {
         const query = new Map();
 

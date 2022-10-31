@@ -13,5 +13,6 @@ export class FdpTableHeader {}
 @Directive({ selector: '[fdpHeaderCellDef]' })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FdpHeaderCellDef {
+    /** @hidden */
     constructor(public templateRef: TemplateRef<any>) {}
 }

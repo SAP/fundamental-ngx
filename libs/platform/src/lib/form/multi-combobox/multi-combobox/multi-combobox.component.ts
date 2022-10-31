@@ -83,6 +83,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
      */
     _selectedSuggestions: SelectableOptionItem[] = [];
 
+    /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,

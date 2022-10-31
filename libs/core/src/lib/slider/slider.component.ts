@@ -102,13 +102,8 @@ export class SliderComponent
     @Input()
     ariaLabel: Nullable<string>;
 
-    /** Get Minimum value. */
+    /** Minimum value. */
     @Input()
-    get min(): number {
-        return this._min;
-    }
-
-    /** Set Minimum value. */
     set min(value: number) {
         const newValue = coerceNumberProperty(value, this._min);
         if (((this.max - newValue) / this.step) % 1 !== 0) {
@@ -117,14 +112,12 @@ export class SliderComponent
 
         this._min = value;
     }
-
-    /** Get Maximum value. */
-    @Input()
-    get max(): number {
-        return this._max;
+    get min(): number {
+        return this._min;
     }
 
-    /** Set Maximum value. */
+    /** Maximum value. */
+    @Input()
     set max(value: number) {
         const newValue = coerceNumberProperty(value, this._max);
         if (((newValue - this.min) / this.step) % 1 !== 0) {
@@ -133,14 +126,12 @@ export class SliderComponent
 
         this._max = value;
     }
-
-    /** Get Step value. */
-    @Input()
-    get step(): number {
-        return this._step;
+    get max(): number {
+        return this._max;
     }
 
-    /** Set Step value. */
+    /** Step value. */
+    @Input()
     set step(value: number) {
         const newValue = coerceNumberProperty(value, this._step);
         if (((this.max - this.min) / newValue) % 1 !== 0) {
@@ -149,27 +140,26 @@ export class SliderComponent
 
         this._step = value;
     }
+    get step(): number {
+        return this._step;
+    }
 
     /** Jump value. */
     @Input()
+    set jump(value: number) {
+        this._jump = coerceNumberProperty(value, this._jump);
+    }
     get jump(): number {
         return this._jump;
     }
 
-    /** Set Jump value. */
-    set jump(value: number) {
-        this._jump = coerceNumberProperty(value, this._jump);
-    }
-
     /** Put a label on every N-th tickmark. */
     @Input()
-    get tickmarksBetweenLabels(): number {
-        return this._tickmarksBetweenLabels;
-    }
-
-    /** Set Tickmarks Between Labels value. */
     set tickmarksBetweenLabels(value: number) {
         this._tickmarksBetweenLabels = coerceNumberProperty(value, this._tickmarksBetweenLabels);
+    }
+    get tickmarksBetweenLabels(): number {
+        return this._tickmarksBetweenLabels;
     }
 
     /**
@@ -231,17 +221,16 @@ export class SliderComponent
     @Input()
     rangeSliderHandle2CurrentValuePrefix: string;
 
+    /** @hidden */
     _position: number | number[] = 0;
 
     /** Control value */
     @Input()
-    get value(): SliderControlValue {
-        return this._value;
-    }
-
-    /** Set control value */
     set value(value: SliderControlValue) {
         this._setValue(value);
+    }
+    get value(): SliderControlValue {
+        return this._value;
     }
 
     /** @hidden */
@@ -426,13 +415,13 @@ export class SliderComponent
         return this.customValues.length > 0 ? this.customValues[this.max as number].label : this.max;
     }
 
-    @applyCssClass
     /**
      * @hidden
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [
             'fd-slider',

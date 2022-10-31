@@ -58,6 +58,11 @@ export interface FilenameLengthExceedEventPayload {
 }
 
 export class FilenameLengthExceedEvent {
+    /**
+     * Filename length exceed event payload
+     * @param source Upload Collection component
+     * @param payload Files
+     */
     constructor(public source: UploadCollectionComponent, public payload: FilenameLengthExceedEventPayload) {}
 }
 
@@ -66,6 +71,11 @@ export interface TypeMismatchEventPayload {
 }
 
 export class TypeMismatchEvent {
+    /**
+     * Type mismatch event
+     * @param source Upload Collection component
+     * @param payload Files
+     */
     constructor(public source: UploadCollectionComponent, public payload: TypeMismatchEventPayload) {}
 }
 
@@ -74,6 +84,11 @@ export interface FileSizeExceedEventPayload {
 }
 
 export class FileSizeExceedEvent {
+    /**
+     * Filesize exceed event
+     * @param source Upload Collection component
+     * @param payload Files
+     */
     constructor(public source: UploadCollectionComponent, public payload: FileSizeExceedEventPayload) {}
 }
 

@@ -103,6 +103,7 @@ import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-fi
     providers: []
 })
 export class FundamentalNgxPlatformModule {
+    /** @hidden */
     constructor(injector: Injector) {
         PlatformConfig.setInjector(injector);
     }

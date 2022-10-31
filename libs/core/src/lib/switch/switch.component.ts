@@ -131,6 +131,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     /** @hidden */
     onTouched = (): void => {};
 
+    /** @hidden */
     constructor(
         private readonly _changeDetectorRef: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver
@@ -156,16 +157,14 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
         return `${this.id}-semantic-label`;
     }
 
-    /** Get the isChecked property of the switch. */
-    get isChecked(): boolean {
-        return this.checked;
-    }
-
-    /** Set the isChecked property of the switch. */
+    /** Checked property of the switch. */
     set isChecked(value) {
         this.checked = value;
         this.onChange(value);
         this.checkedChange.emit(value);
+    }
+    get isChecked(): boolean {
+        return this.checked;
     }
 
     /**

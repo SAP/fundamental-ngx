@@ -48,6 +48,7 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedContentDensityDirective } from '@f
     ]
 })
 export class PlatformContentDensityDeprecationDirective extends DeprecatedContentDensityDirective {
+    /** @hidden */
     constructor(private elementRef: ElementRef) {
         super();
         this.selectorBase = elementRef.nativeElement.tagName.toLowerCase();

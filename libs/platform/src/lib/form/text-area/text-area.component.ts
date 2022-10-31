@@ -105,6 +105,12 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
      * @deprecated
      * set state of individual checkbox. Used by CBG to set checkbox states */
     @Input()
+    set stateType(state: FormStates) {
+        if (isDevMode()) {
+            console.warn('"stateType" is deprecated. Use "state" instead');
+        }
+        super.state = state;
+    }
     get stateType(): FormStates {
         if (isDevMode()) {
             console.warn('"stateType" is deprecated. Use "state" instead');
@@ -112,23 +118,10 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         return super.state;
     }
 
-    set stateType(state: FormStates) {
-        if (isDevMode()) {
-            console.warn('"stateType" is deprecated. Use "state" instead');
-        }
-        super.state = state;
-    }
-
     /**
-     * return: The textarea's value
+     * The textarea's value
      */
-    @Input() get value(): any {
-        return super.getValue();
-    }
-
-    /**
-     * set the textarea value
-     */
+    @Input()
     set value(value: any) {
         if (value) {
             super.setValue(value);
@@ -138,6 +131,9 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
             // reset state by resetting value
             super.setValue('');
         }
+    }
+    get value(): any {
+        return super.getValue();
     }
 
     /** @hidden */
@@ -165,6 +161,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
 
     /** for i18n counter message translation */
     private readonly remainingText = 'remaining';
+    /** for i18n counter message translation */
     private readonly excessText = 'excess';
 
     /**
@@ -180,6 +177,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         return this.maxLength > 0 && !this.showExceededText;
     }
 
+    /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
         @Optional() @Self() ngControl: NgControl,

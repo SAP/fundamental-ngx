@@ -10,6 +10,7 @@ export const CSS_CLASS_NAME = {
     messageInformation: 'fd-form-message--information'
 };
 
+/** Get form message CSS class accordingly to its type */
 export function getTypeClassName(size: FormStates): string | null {
     switch (size) {
         case 'error':

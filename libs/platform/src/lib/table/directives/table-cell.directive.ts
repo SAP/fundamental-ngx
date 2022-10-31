@@ -20,6 +20,7 @@ export class FdpTableCell {}
 @Directive({ selector: '[fdpCellDef]' })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FdpCellDef {
+    /** @hidden */
     constructor(public templateRef: TemplateRef<FdpCellDefContext>) {}
 
     /** @hidden */
@@ -31,6 +32,7 @@ export class FdpCellDef {
 @Directive({ selector: '[fdpEditableCellDef]' })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FdpEditableCellDef {
+    /** @hidden */
     constructor(public templateRef: TemplateRef<any>) {}
 }
 
@@ -39,5 +41,6 @@ export class FdpEditableCellDef {
     providers: [{ provide: EditableTableCell, useExisting: FdpEditableCellFormDirective }]
 })
 export class FdpEditableCellFormDirective implements EditableTableCell {
+    /** @hidden */
     constructor(public form: NgForm) {}
 }

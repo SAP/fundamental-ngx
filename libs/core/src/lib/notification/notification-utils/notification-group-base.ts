@@ -17,6 +17,7 @@ export abstract class NotificationGroupBaseDirective implements AfterViewInit, O
     /** @hidden */
     private readonly onDestroy$ = new Subject<void>();
 
+    /** @hidden */
     constructor(private renderer: Renderer2) {}
 
     /** @hidden */

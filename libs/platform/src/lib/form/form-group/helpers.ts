@@ -1,5 +1,6 @@
 import { ColumnLayout, ColumnLayoutGridClass } from '@fundamental-ngx/platform/shared';
 
+/** @hidden */
 export function normalizeColumnLayout(layout: ColumnLayout, defaultColumn = 12): Required<ColumnLayout> {
     layout['S'] = layout['S'] !== undefined ? layout['S'] : defaultColumn;
     layout['M'] = layout['M'] || layout['S'];
@@ -9,6 +10,7 @@ export function normalizeColumnLayout(layout: ColumnLayout, defaultColumn = 12):
     return layout as Required<ColumnLayout>;
 }
 
+/** @hidden */
 export function generateColumnClass(layout: ColumnLayout): string {
     return Object.entries(layout)
         .reduce((overall, value) => {

@@ -39,15 +39,22 @@ export class AutoCompleteDirective {
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onComplete: EventEmitter<AutoCompleteEvent> = new EventEmitter<AutoCompleteEvent>();
 
+    /** @hidden */
     private readonly _completeKeys: number[] = [ENTER];
 
+    /** @hidden */
     private readonly _fillKeys: number[] = [LEFT_ARROW, RIGHT_ARROW];
 
+    /** @hidden */
     private readonly _stopKeys: number[] = [BACKSPACE, DELETE, ESCAPE];
 
+    /** @hidden */
     private oldValue: string;
+
+    /** @hidden */
     private lastKeyUpEvent: KeyboardEvent;
 
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -81,20 +88,24 @@ export class AutoCompleteDirective {
         this.lastKeyUpEvent = event;
     }
 
+    /** @hidden */
     private _typeahead(displayedValue: string): void {
         this._elementRef.nativeElement.value = displayedValue;
         const selectionStartIndex = this.inputText.length;
         this._elementRef.nativeElement.setSelectionRange(selectionStartIndex, displayedValue.length);
     }
 
+    /** @hidden */
     private _isControlKey(event: KeyboardEvent): boolean {
         return KeyUtil.isKeyCode(event, CONTROL) || event.ctrlKey;
     }
 
+    /** @hidden */
     private _defaultDisplay(value: any): string {
         return value;
     }
 
+    /** @hidden */
     private _triggerTypeAhead(): boolean {
         if (
             this.lastKeyUpEvent &&
@@ -107,6 +118,7 @@ export class AutoCompleteDirective {
         }
     }
 
+    /** @hidden */
     private _sendCompleteEvent(forceClose: boolean): void {
         this.onComplete.emit({
             term: this._elementRef.nativeElement.value,

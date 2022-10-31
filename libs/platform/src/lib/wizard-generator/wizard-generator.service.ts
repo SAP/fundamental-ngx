@@ -46,6 +46,7 @@ export interface StepDependencyFields {
  */
 @Injectable()
 export class WizardGeneratorService {
+    /** @hidden */
     items: PreparedWizardGeneratorItem[];
 
     /**
@@ -90,6 +91,7 @@ export class WizardGeneratorService {
     /** @hidden */
     private _submittedFormRawValues: WizardGeneratorFormsValue = {};
 
+    /** @hidden */
     private _wizardStepIds: string[] = [];
 
     /** @hidden */
@@ -342,9 +344,13 @@ export class WizardGeneratorService {
                 continue;
             }
 
-            const forms = component.getForms();
+            const forms = component.getVisibleForms();
 
             for (const form of item?.formGroups ?? []) {
+                if (!forms[form.id]) {
+                    continue;
+                }
+
                 wizardFormValue[item.id][form.id] = formatted
                     ? await this._formGeneratorService.getFormValue(forms[form.id]?.form)
                     : this._formGeneratorService._getFormValueWithoutUngrouped(cloneDeep(forms[form.id]?.form.value));

@@ -36,15 +36,16 @@ export class TableIconDirective implements OnChanges, CssClassBuilder, OnInit {
         this.buildComponentCssClass();
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [
             'fd-table__icon',

@@ -6,5 +6,11 @@ export interface FreezeChange {
 }
 
 export class TableColumnFreezeEvent {
+    /**
+     * Table column freeze event
+     * @param source Table component
+     * @param current Current freezeTo column
+     * @param previous Previous freezeTo column
+     */
     constructor(public source: Table, public current: string, public previous: string | null) {}
 }

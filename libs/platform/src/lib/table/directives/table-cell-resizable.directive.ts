@@ -51,6 +51,7 @@ export class PlatformTableCellResizableDirective implements AfterViewInit, OnDes
         this._tableColumnResizeService?.registerColumnCell(this.columnName, this._elRef);
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._tableColumnResizeService?.unregisterColumnCell(this.columnName, this._elRef);
     }

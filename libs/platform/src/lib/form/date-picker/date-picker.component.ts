@@ -50,12 +50,11 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      * date-picker value set as controller value
      */
     @Input()
-    get value(): DateRange<D> | D {
-        return super.getValue();
-    }
-
     set value(value: DateRange<D> | D) {
         super.setValue(value);
+    }
+    get value(): DateRange<D> | D {
+        return super.getValue();
     }
 
     /** below code taken from core/date-picker */
@@ -143,15 +142,15 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
+    set state(state: FormStates) {
+        super.state = state;
+    }
     get state(): FormStates {
         if (this.fdDatePickerComponent?._isInvalidDateInput || !this._datePickerValid) {
             return 'error';
         }
 
         return super.state;
-    }
-    set state(state: FormStates) {
-        super.state = state;
     }
 
     /**
@@ -160,18 +159,17 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
-    get datepickerState(): FormStates {
-        if (isDevMode()) {
-            console.warn('"datepickerState" is deprecated. Use "state" instead');
-        }
-        return this.state;
-    }
-
     set datepickerState(state: FormStates) {
         if (isDevMode()) {
             console.warn('"datepickerState" is deprecated. Use "state" instead');
         }
         this.state = state;
+    }
+    get datepickerState(): FormStates {
+        if (isDevMode()) {
+            console.warn('"datepickerState" is deprecated. Use "state" instead');
+        }
+        return this.state;
     }
 
     /**
@@ -295,6 +293,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     disableRangeEndFunction: (value: D) => boolean = () => false;
 
+    /** @hidden */
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
         @Optional() @Self() public ngControl: NgControl,
@@ -314,6 +313,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
         }
     }
 
+    /** @hidden */
     writeValue(value: D | DateRange<D> | null): void {
         super.writeValue(value);
         this._changeDetectorRef.detectChanges();
@@ -352,19 +352,23 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
         this.isOpenChange.emit(open);
     };
 
+    /** @hidden */
     handleSelectedDateChange = (fdDate: Nullable<D>): void => {
         this.selectedDateChange.emit(fdDate);
     };
 
+    /** @hidden */
     handleSelectedRangeDateChange = (fdRangeDate: DateRange<D>): void => {
         this.selectedRangeDateChange.emit(fdRangeDate);
     };
 
+    /** @hidden */
     handleActiveViewChange = (fdCalendarView: FdCalendarView): void => {
         this.activeViewChange.emit(fdCalendarView);
     };
 }
 
+/** @hidden */
 export function createMissingDateImplementationError(provider: string): Error {
     return Error(
         `FdpDatePicker: No provider found for ${provider}. You must import one of the following ` +

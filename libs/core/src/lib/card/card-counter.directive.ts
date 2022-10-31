@@ -34,8 +34,8 @@ export class CardCounterDirective implements OnInit, OnChanges, CssClassBuilder 
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
     /** @hidden */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         const objectStatusClasses = buildObjectStatusCssClasses(this);
         return [CLASS_NAME.cardCounter, ...objectStatusClasses];

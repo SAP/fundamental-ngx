@@ -26,6 +26,11 @@ import {
 
 /** Panel change event instance */
 export class PanelExpandChangeEvent {
+    /**
+     * Panel expand change event
+     * @param source Panel component
+     * @param payload Panel expand state
+     */
     constructor(public source: PanelComponent, public payload: boolean) {}
 }
 

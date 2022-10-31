@@ -102,11 +102,16 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
         [ContentDensityMode.COZY]: (): ContentDensityMode => ContentDensityMode.COZY // No alternative here, everyone should support it
     };
 
+    /** @hidden */
     private readonly destroy$: Observable<void>;
+    /** @hidden */
     private changeDetectorRef: ChangeDetectorRef;
+    /** @hidden */
     private contentDensityDirective?: Observable<LocalContentDensityMode>;
+    /** @hidden */
     private contentDensityService?: GlobalContentDensityService;
 
+    /** @hidden */
     constructor(private _injector: Injector, private _providedConfig?: ContentDensityObserverSettings) {
         super(initialContentDensity(_injector, _providedConfig));
         if (_providedConfig?.debug) {
@@ -165,6 +170,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
         }
     }
 
+    /** Check if the given density is supported */
     isSupported(density: ContentDensityMode): boolean {
         return this.configuration.supportedContentDensity.includes(density);
     }

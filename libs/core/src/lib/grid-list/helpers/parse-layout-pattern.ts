@@ -6,6 +6,7 @@ interface ParseLayout {
     };
 }
 
+/** Parse layout pattern */
 export function parseLayoutPattern(pattern: string | undefined, isBaseLayout = true): string[] {
     const parseLayout = pattern && validateAndParseLayoutPattern(pattern, isBaseLayout);
 

@@ -95,6 +95,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         this._subscriptions.unsubscribe();
     }
 
+    /** @hidden */
     constructor(public elementRef: ElementRef) {}
 
     /** @hidden */

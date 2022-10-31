@@ -110,7 +110,7 @@ export class WizardSummaryStepComponent {
 
         for (const step of this._wizardSteps) {
             const component = this._wizardGeneratorService.stepsComponents.get(step.id);
-            const componentForms = component?.getForms();
+            const componentForms = component?.getVisibleForms();
 
             if (!componentForms) {
                 continue;

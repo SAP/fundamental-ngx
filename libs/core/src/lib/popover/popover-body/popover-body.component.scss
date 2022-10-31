@@ -24,18 +24,19 @@ fd-popover-body {
                 cursor: auto;
             }
         }
-
-        &-list {
-            .fd-list {
-                overflow: auto;
-            }
-        }
     }
 
     &__popper {
         max-height: 100%;
         max-width: 100%;
-        overflow: auto;
+        display: flex;
+
+        .fd-scrollbar {
+            max-height: 100%;
+            max-width: 100%;
+            width: 100%;
+            border-radius: inherit;
+        }
 
         .fd-list {
             border-radius: $fd-popover-border-radius;

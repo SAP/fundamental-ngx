@@ -63,6 +63,11 @@ export type TextAlignment = 'left' | 'right';
 export type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
 
 export class ComboboxSelectionChangeEvent {
+    /**
+     * Combobox selection event
+     * @param source Combobox component
+     * @param payload Selected option
+     */
     constructor(
         public source: ComboboxComponent,
         public payload: any // Contains selected item
@@ -77,14 +82,13 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** Datasource for suggestion list */
     @Input()
-    get dataSource(): FdpComboBoxDataSource<any> {
-        return this._dataSource;
-    }
-
     set dataSource(value: FdpComboBoxDataSource<any>) {
         if (value) {
             this._initializeDataSource(value);
         }
+    }
+    get dataSource(): FdpComboBoxDataSource<any> {
+        return this._dataSource;
     }
 
     /** Whether the autocomplete should be enabled; Enabled by default */
@@ -131,15 +135,15 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     @Input()
     autoResize = false;
 
+    /** Value of the combobox */
     @Input()
-    get value(): any {
-        return super.getValue();
-    }
-
     set value(value: any) {
         const selectedItems = coerceArraySafe(value);
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.setValue(value);
+    }
+    get value(): any {
+        return super.getValue();
     }
 
     /**
@@ -211,21 +215,20 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** @hidden */
     _contentDensity: ContentDensity = this.comboboxConfig.contentDensity;
 
-    /** Get the input text of the input. */
-    get inputText(): string {
-        return this._inputTextValue || '';
-    }
-
-    /** Set the input text of the input. */
+    /** Input text of the input. */
     set inputText(value: string) {
         this._inputTextValue = value;
 
         this.onTouched();
     }
+    get inputText(): string {
+        return this._inputTextValue || '';
+    }
 
     /** Whether the combobox is opened. */
     isOpen = false;
 
+    /** Whether a combobox can be closed */
     get canClose(): boolean {
         return !(this.mobile && this.mobileConfig.approveButtonText);
     }
@@ -252,6 +255,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         return this._suggestions.length === 0;
     }
 
+    /** @hidden */
     protected _dataSource: FdpComboBoxDataSource<any>;
 
     /** @hidden */
@@ -300,6 +304,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         return value;
     };
 
+    /** @hidden */
     constructor(
         readonly cd: ChangeDetectorRef,
         protected readonly elementRef: ElementRef,

@@ -9240,10 +9240,10 @@ fundamental-styles@0.25.0-rc.35:
   resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.25.0-rc.35.tgz#e543e85f3e4b520da6bd174cfc46f5c0739ef7af"
   integrity sha512-V2+eV6zsQbRPyJO8jfJOhmWzpBm8VhdlIhb4ov5P96iGb1RhKPu5Oo9xwmP19BALL0yt/aNFw/w7h4p4ax/OAA==
 
-fundamental-styles@0.25.0-rc.47:
-  version "0.25.0-rc.47"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.25.0-rc.47.tgz#41480e14e5b27d88c9964f32662f662f409385dc"
-  integrity sha512-29G8EA/ET32/WJqdpp/5D6jcQYgXIRefgNH8fJQY/1JZwbsyZrvCfx19jkKqxa333RGy+evqwMMYuOkouJ6dqw==
+fundamental-styles@0.25.1-rc.10:
+  version "0.25.1-rc.10"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.25.1-rc.10.tgz#95f9450352514d2583ab3e9d8c65bd936bced9fd"
+  integrity sha512-q16xC4QWki5bsQqq0lKltfhwjNte4CXX8lM5fgM8KmKmXoTWxaJUODyUXr/xhsYgzODYIIh1QqK6YHDaMMusUg==
 
 gauge@^3.0.0:
   version "3.0.2"

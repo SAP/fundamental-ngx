@@ -22,6 +22,11 @@ import { Media } from './thumbnail.interfaces';
 let uniqueId = 0;
 
 export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailComponent, K = Media> {
+    /**
+     * Thumbnail click event
+     * @param source ThumbnailComponent
+     * @param payload Media
+     */
     constructor(
         /** The source Thumbnail Component of the event. */
         public source: T,
@@ -45,6 +50,7 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
     @Input()
     isHorizontal = false;
 
+    /** Max images to display */
     @Input()
     maxImagesDisplay = 5;
 
@@ -83,11 +89,13 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
         this._setOverlay();
     }
 
+    /** @hidden */
     thumbnailClickHandle(selectedMedia: Media): void {
         this.selectedMedia = selectedMedia;
         this.thumbnailClicked.emit(this._createClickEvent(this.selectedMedia));
     }
 
+    /** @hidden */
     openDialog(media: Media = this.selectedMedia): void {
         this.mediaList.forEach((item) => (item.overlayRequired = false));
         this._dialogService.open(ThumbnailDetailsComponent, {

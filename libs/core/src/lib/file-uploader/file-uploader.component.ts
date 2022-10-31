@@ -57,6 +57,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     @ViewChild('fileInput')
     inputRef: ElementRef;
 
+    /** @hidden */
     @ViewChild('textInput')
     inputRefText: ElementRef;
 
@@ -158,6 +159,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(
         private _fileUploadService: FileUploaderService,
         private _changeDetRef: ChangeDetectorRef,
@@ -215,6 +217,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
         this._propagateFiles();
     }
 
+    /** @hidden */
     validateFiles(event: File[]): void {
         if (this.fileLimit && event.length > this.fileLimit) {
             throw new Error('FileLimitError - Selected files count is more than specified limit ');
@@ -231,6 +234,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
         this.invalidFiles = fileOutput.invalidFiles ?? [];
     }
 
+    /** @hidden */
     setInputValue(selectedFiles: File[]): void {
         let fileName = '';
         selectedFiles.forEach((file) => (fileName = fileName.concat(' ' + file.name)));
@@ -279,6 +283,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
         this.invalidFiles = [];
     }
 
+    /** @hidden */
     private _isEmpty(): boolean {
         return this.validFiles.length === 0 && this.invalidFiles.length === 0;
     }

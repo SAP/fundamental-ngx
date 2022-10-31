@@ -50,6 +50,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     /** @hidden Navigation icon name based on RTL */
     navigationIcon$: Observable<string>;
 
+    /** @hidden */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,

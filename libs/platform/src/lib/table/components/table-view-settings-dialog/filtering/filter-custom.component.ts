@@ -60,6 +60,7 @@ export class FilterCustomComponent implements DoCheck {
      */
     _valueLastEmitted: Record<string, any>;
 
+    /** @hidden */
     constructor(private contentDensityObserver: ContentDensityObserver) {}
 
     /** @hidden */

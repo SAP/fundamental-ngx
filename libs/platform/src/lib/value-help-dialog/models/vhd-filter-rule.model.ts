@@ -10,14 +10,22 @@ export interface VhdDefineEntityRule {
 }
 
 export class BaseEntity implements VhdDefineEntityRule {
+    /** @hidden */
     type: VhdDefineType;
+    /** @hidden */
     key = '*';
+    /** @hidden */
     label?: string;
+    /** @hidden */
     strategy: VhdDefineIncludeStrategy | VhdDefineExcludeStrategy;
+    /** @hidden */
     value = '';
+    /** @hidden */
     valueTo = '';
+    /** @hidden */
     valid: boolean;
 
+    /** @hidden */
     constructor(strategy?: VhdDefineIncludeStrategy | VhdDefineExcludeStrategy, key?: string) {
         if (key) {
             this.key = key;
@@ -26,8 +34,10 @@ export class BaseEntity implements VhdDefineEntityRule {
     }
 }
 export class VhdIncludedEntity extends BaseEntity {
+    /** @hidden */
     type: VhdDefineType = VhdDefineType.include;
 }
 export class VhdExcludedEntity extends BaseEntity {
+    /** @hidden */
     type: VhdDefineType = VhdDefineType.exclude;
 }

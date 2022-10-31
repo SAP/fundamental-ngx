@@ -6,11 +6,13 @@ import { Injectable, isDevMode } from '@angular/core';
  */
 @Injectable()
 export class TimeI18n {
+    /** @hidden */
     constructor() {
         if (isDevMode()) {
             console.warn('TimeI18n is deprecated and will furtherly be removed. Use i18n capabilities instead.');
         }
     }
+
     /** Aria label for entire component */
     componentAriaName = 'Time picker';
 

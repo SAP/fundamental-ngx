@@ -61,9 +61,11 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
     @HostBinding('class.has-child')
     hasChildren = false;
 
+    /** @hidden */
     @ContentChild(NestedLinkDirective)
     nestedLink: NestedLinkDirective;
 
+    /** @hidden */
     @ContentChild(NestedListExpandIconComponent)
     nestedExpandIcon: NestedListExpandIconComponent;
 

@@ -54,6 +54,7 @@ export class SmartFilterBarSubjectDirective implements AfterViewInit {
         return this.getDataSource().dataProvider.getFieldOptions(field);
     }
 
+    /** @hidden */
     getDefaultFields(): string[] {
         return this.getSubjectFields()
             ?.filter((f) => f.defaultSelected)

@@ -5,6 +5,7 @@ import { Directive } from '@angular/core';
     selector: '[fd-tab-nav][compact], fd-tab-list[compact]'
 })
 export class DeprecatedTabsCompactDirective extends DeprecatedCompactDirective {
+    /** @hidden */
     constructor() {
         super('[fd-tab-nav][compact], fd-tab-list');
     }

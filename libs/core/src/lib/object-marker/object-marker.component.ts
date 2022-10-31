@@ -44,11 +44,12 @@ export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder
     /** @hidden */
     constructor(private readonly _elementRef: ElementRef) {}
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-object-marker', this.clickable ? 'fd-object-marker--link' : '', this.class];
     }

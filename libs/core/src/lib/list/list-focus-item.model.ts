@@ -8,14 +8,14 @@ export abstract class ListFocusItem implements KeyboardSupportItemInterface {
     /** tab index attribute */
     @Input()
     @HostBinding('attr.tabindex')
+    set tabindex(value: number) {
+        this._tabIndex = coerceNumberProperty(value, -1);
+    }
     get tabindex(): number {
         if (this._isFirstItem && isNaN(this._tabIndex as number)) {
             return 0;
         }
         return this._tabIndex ?? -1;
-    }
-    set tabindex(value: number) {
-        this._tabIndex = coerceNumberProperty(value, -1);
     }
 
     /** @hidden */
@@ -41,6 +41,7 @@ export abstract class ListFocusItem implements KeyboardSupportItemInterface {
         });
     }
 
+    /** @hidden */
     constructor(readonly elementRef: ElementRef) {}
 
     /** @hidden */

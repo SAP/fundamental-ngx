@@ -84,12 +84,14 @@ export class DynamicComponentService {
         componentRef.destroy();
     }
 
+    /** @hidden */
     private _createDependencyMap(services: any[] = []): WeakMap<any, any> {
         const dependencyMap = new WeakMap();
         services.filter((service) => !!service).forEach((service) => dependencyMap.set(service.constructor, service));
         return dependencyMap;
     }
 
+    /** @hidden */
     private _attachToContainer<V>(componentRef: ComponentRef<V>, config: DynamicComponentConfig): void {
         const configObj = Object.assign({}, config);
         const componentEl = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
@@ -100,6 +102,7 @@ export class DynamicComponentService {
         }
     }
 
+    /** @hidden */
     private _createComponent<V>(
         componentType: Type<V>,
         dependenciesMap: WeakMap<any, any>,
@@ -112,6 +115,7 @@ export class DynamicComponentService {
         return componentRef;
     }
 
+    /** @hidden */
     private _passExternalContent<V>(
         componentRef: ComponentRef<V>,
         content: TemplateRef<any> | Type<any> | string | Record<string, any>

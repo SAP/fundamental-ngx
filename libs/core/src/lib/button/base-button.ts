@@ -62,36 +62,33 @@ export class BaseButton {
 
     /** Whether button is in toggled state. */
     @Input()
-    get toggled(): boolean {
-        return this._toggled;
-    }
-
     set toggled(value: BooleanInput) {
         this._toggled = coerceBooleanProperty(value);
+    }
+    get toggled(): boolean {
+        return this._toggled;
     }
 
     /**
      * Native disabled attribute of button element
      */
     @Input()
-    get disabled(): boolean {
-        return this._disabled;
-    }
-
     set disabled(value: BooleanInput) {
         this._disabled = coerceBooleanProperty(value);
+    }
+    get disabled(): boolean {
+        return this._disabled;
     }
 
     /**
      * Native aria-disabled attribute of button element
      */
     @Input('aria-disabled')
-    get ariaDisabled(): boolean {
-        return this._ariaDisabled;
-    }
-
     set ariaDisabled(value: BooleanInput) {
         this._ariaDisabled = coerceBooleanProperty(value);
+    }
+    get ariaDisabled(): boolean {
+        return this._ariaDisabled;
     }
 
     /** @hidden */

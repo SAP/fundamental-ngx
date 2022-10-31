@@ -8,25 +8,32 @@ import { AbstractControl, FormControl, NG_VALIDATORS, ValidationErrors, Validato
     providers: [{ provide: NG_VALIDATORS, useExisting: ConditionCountMessageDirective, multi: true }]
 })
 export class ConditionCountMessageDirective {
+    /** Max characters allowed */
     @Input()
-    get maxCharacters(): number {
-        return this._maxCharacters;
-    }
     set maxCharacters(value: number) {
         this._maxCharacters = <number>coerceNumberProperty(value);
     }
+    get maxCharacters(): number {
+        return this._maxCharacters;
+    }
 
+    /** @hidden */
     private _maxCharacters = Number.MAX_SAFE_INTEGER;
+
+    /** @hidden */
     private readonly validator: ValidatorFn;
 
+    /** @hidden */
     constructor() {
         this.validator = this.checkError();
     }
 
+    /** @hidden */
     validate(control: FormControl): ValidationErrors | null {
         return this.validator(control);
     }
 
+    /** @hidden */
     private checkError(): ValidatorFn {
         return (control: AbstractControl) => {
             if (control.dirty && control.value && control.value.length > this.maxCharacters) {

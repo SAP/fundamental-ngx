@@ -19,6 +19,11 @@ import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platfor
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 export class FileUploaderInvalidChangeEvent {
+    /**
+     * File Uploader invalid change event
+     * @param source File Uploader component
+     * @param payload Value
+     */
     constructor(
         public source: PlatformFileUploaderComponent,
         public payload: File[] // Contains selected item
@@ -26,6 +31,11 @@ export class FileUploaderInvalidChangeEvent {
 }
 
 export class FileUploaderSelectionChangeEvent {
+    /**
+     * File Uploader invalid change event
+     * @param source File Uploader component
+     * @param payload Value
+     */
     constructor(
         public source: PlatformFileUploaderComponent,
         public payload: File[] // Contains selected item
@@ -75,18 +85,17 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
      * @deprecated
      * set state of individual checkbox. Used by CBG to set checkbox states */
     @Input()
-    get stateType(): FormStates {
-        if (isDevMode()) {
-            console.warn('"stateType" is deprecated. Use "state" instead');
-        }
-        return super.state;
-    }
-
     set stateType(state: FormStates) {
         if (isDevMode()) {
             console.warn('"stateType" is deprecated. Use "state" instead');
         }
         super.state = state;
+    }
+    get stateType(): FormStates {
+        if (isDevMode()) {
+            console.warn('"stateType" is deprecated. Use "state" instead');
+        }
+        return super.state;
     }
 
     /** Event emitted when valid file is uploded. */
@@ -108,14 +117,14 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
 
     /** Sets value file data*/
     @Input()
+    set value(value: File) {
+        super.setValue(value);
+    }
     get value(): File {
         return super.getValue();
     }
 
-    set value(value: File) {
-        super.setValue(value);
-    }
-
+    /** @hidden */
     constructor(
         protected _cd: ChangeDetectorRef,
         @Optional() @Self() ngControl: NgControl,

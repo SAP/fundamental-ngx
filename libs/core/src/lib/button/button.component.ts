@@ -111,6 +111,7 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
         this.buildComponentCssClass();
     }
 
+    /** @hidden */
     public ngOnInit(): void {
         this.buildComponentCssClass();
     }
@@ -120,11 +121,12 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
         this._subscriptions.unsubscribe();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [
             'fd-button',
@@ -143,6 +145,7 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
         return this._elementRef;
     }
 
+    /** @hidden */
     detectChanges(): void {
         this._changeDetectorRef.detectChanges();
     }

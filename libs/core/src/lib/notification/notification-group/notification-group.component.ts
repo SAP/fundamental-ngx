@@ -6,10 +6,12 @@ import {
     Input,
     ViewEncapsulation,
     OnChanges,
-    OnInit
+    OnInit,
+    Optional
 } from '@angular/core';
 import { applyCssClass } from '@fundamental-ngx/core/utils';
 import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 
 @Component({
     selector: 'fd-notification-group',
@@ -31,17 +33,22 @@ export class NotificationGroupComponent implements OnChanges, OnInit, CssClassBu
     width: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef, @Optional() private _popover: PopoverComponent) {
+        if (this._popover) {
+            this._popover.focusTrapped = true;
+            this._popover.focusAutoCapture = true;
+        }
+    }
 
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden CssClassBuilder interface implementation
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [
             'fd-notification fd-notification--group fd-notification-custom-block',

@@ -39,6 +39,7 @@ export abstract class MobileModeBase<T extends MobileMode> {
     /** @hidden */
     protected readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
     constructor(
         protected _elementRef: ElementRef,
         protected _dialogService: DialogService,

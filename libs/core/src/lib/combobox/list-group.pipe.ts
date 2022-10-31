@@ -7,6 +7,7 @@ export type GroupFunction<T = any> = (items: T[]) => { [key: string]: T[] };
     name: 'listGroupPipe'
 })
 export class ListGroupPipe<T = any> implements PipeTransform {
+    /** Group items */
     transform(items: any[], group: GroupFunction<T>): KeyValue<string, T[]>[] {
         return Object.entries(group(items)).map(([key, value]) => ({ key, value }));
     }

@@ -72,10 +72,11 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-message-page', this.class];
     }

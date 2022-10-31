@@ -15,6 +15,7 @@ import { FD_OVERFLOW_EXPAND } from '../tokens/overflow-expand.token';
     ]
 })
 export class OverflowExpandDirective<T extends any[] = any[]> implements OverflowExpand<T> {
+    /** Items to expand */
     @Input()
     fdOverflowExpandItems: T;
 

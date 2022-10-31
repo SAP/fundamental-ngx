@@ -26,6 +26,7 @@ export class ApprovalFlowSelectTypeComponent {
     /** @hidden */
     _nodeTypes = APPROVAL_FLOW_NODE_TYPES;
 
+    /** @hidden */
     _toNextSerial = false;
 
     /** @hidden */

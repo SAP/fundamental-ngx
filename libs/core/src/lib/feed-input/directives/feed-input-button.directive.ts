@@ -16,6 +16,7 @@ export class FeedInputButtonDirective implements OnInit {
     @HostBinding('class.is-disabled')
     disabled = true;
 
+    /** @hidden */
     constructor(private readonly _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
 
     /** @hidden */

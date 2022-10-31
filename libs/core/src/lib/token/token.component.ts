@@ -47,21 +47,22 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     @ViewChild('viewContainer', { read: ViewContainerRef })
     readonly _viewContainer: ViewContainerRef;
 
+    /** @hidden */
     private _selected = false;
 
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** Whether the token is selected. */
     @Input()
-    get selected(): boolean {
-        return this._selected;
-    }
-
     set selected(val: boolean) {
         if (this._selected !== val) {
             this._cdRef.markForCheck();
         }
         this._selected = val;
+    }
+    get selected(): boolean {
+        return this._selected;
     }
 
     /** Whether the token is read-only. */
@@ -105,6 +106,7 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     totalCount: number;
 
+    /** @hidden */
     constructor(
         public elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,

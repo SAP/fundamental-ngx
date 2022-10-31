@@ -20,12 +20,15 @@ class MockStorage {
 
 @Injectable({ providedIn: 'root' })
 export class LocalStorageService {
+    /** @hidden */
     private _storage: Storage;
 
+    /** @hidden */
     constructor() {
         typeof localStorage !== 'undefined' ? (this._storage = localStorage) : (this._storage = new MockStorage());
     }
 
+    /** Get item from local storage. */
     get(key: string): any {
         const value = this._storage.getItem(key);
         if (value) {
@@ -34,6 +37,7 @@ export class LocalStorageService {
         return null;
     }
 
+    /** Set item in local storage. */
     set(key: string, value: any): void {
         this._storage.setItem(key, JSON.stringify(value));
     }

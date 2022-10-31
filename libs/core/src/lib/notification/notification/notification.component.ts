@@ -24,6 +24,7 @@ import { NotificationRef } from '../notification-utils/notification-ref';
 import { AbstractFdNgxClass, RtlService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { NotificationConfig } from '../notification-utils/notification-config';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { filter, take, takeUntil } from 'rxjs/operators';
@@ -97,6 +98,13 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** @hidden The class that traps and manages focus within the notification. */
     private _focusTrap: FocusTrap;
 
+    /** @hidden */
+    @HostBinding('class.fd-notification--in-dialog')
+    get _inDialog(): boolean {
+        return this._popover?.mobile;
+    }
+
+    /** @hidden */
     constructor(
         private _elRef: ElementRef,
         private _componentFactoryResolver: ComponentFactoryResolver,
@@ -105,10 +113,12 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         private _focusTrapFactory: ConfigurableFocusTrapFactory,
         @Optional() private _notificationConfig: NotificationConfig,
         @Optional() private _notificationRef: NotificationRef,
-        @Optional() private _rtlService: RtlService
+        @Optional() private _rtlService: RtlService,
+        @Optional() private _popover: PopoverComponent
     ) {
         super(_elRef);
-        this._setNotificationConfig(_notificationConfig);
+
+        this._setNotificationConfig(this._notificationConfig);
     }
 
     /** @hidden */

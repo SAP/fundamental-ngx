@@ -37,17 +37,17 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
      * Holds the control state of select
      */
     @Input()
-    get selectState(): FormStates {
-        if (isDevMode()) {
-            console.warn('"selectState" is deprecated. Use "state" instead');
-        }
-        return super.state;
-    }
     set selectState(state: FormStates) {
         if (isDevMode()) {
             console.warn('"selectState" is deprecated. Use "state" instead');
         }
         super.state = state;
+    }
+    get selectState(): FormStates {
+        if (isDevMode()) {
+            console.warn('"selectState" is deprecated. Use "state" instead');
+        }
+        return super.state;
     }
 
     /**
@@ -55,21 +55,22 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
      * change detections
      */
     @Input()
-    get value(): any {
-        return this._value;
-    }
-
     set value(newValue: any) {
         this.setValue(newValue);
+    }
+    get value(): any {
+        return this._value;
     }
 
     /** Should select be inlined. */
     @Input()
     inline = true;
 
+    /** @hidden */
     @ViewChild(CoreSelect, { static: true })
     select: CoreSelect;
 
+    /** @hidden */
     constructor(
         readonly cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,
@@ -101,6 +102,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         // setting option items
         this.select._options.forEach((option) => {
             const optionItem = option._getHtmlElement();
+
             // set maxWidth default is 40rem
             if (this.maxWidth) {
                 optionItem.setAttribute('style', 'max-width: ' + this.maxWidth + 'px');
@@ -145,7 +147,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         // setting option items
         this.select._options.forEach((option) => {
             const optionItem = option._getHtmlElement();
-            const titleElement = <HTMLElement>optionItem.querySelector('.fd-list__title');
+            const titleElement = <HTMLElement>optionItem.querySelector('.fd-list__title-text .fd-list__title');
             this._setOptionAttribute(titleElement, firstColumnProportion);
 
             const secondaryElement = <HTMLElement>optionItem.querySelector('.fd-list__secondary');

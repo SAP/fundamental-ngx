@@ -22,14 +22,15 @@ import { TimelineNodeComponentInterface } from './timeline-node-component.interf
     }
 })
 export class TimelineNodeComponent implements TimelineNodeComponentInterface, OnInit, OnDestroy {
-    /* Glyph of the current timeline node.*/
+    /** Glyph of the current timeline node.*/
     @Input()
     glyph: string;
 
+    /** Aria label for the current timeline node. */
     @Input()
     ariaLabel = 'timelineitem';
 
-    /* Reference to the line of timeline node*/
+    /** Reference to the line of timeline node*/
     @ViewChild('lineEl')
     lineEl: ElementRef;
 

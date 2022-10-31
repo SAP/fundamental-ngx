@@ -6,6 +6,7 @@ import { COMPLETED_STEP_STATUS, CURRENT_STEP_STATUS } from './constants';
 
 @Injectable()
 export class WizardService {
+    /** @hidden */
     constructor(@Optional() private _rtlService: RtlService) {}
 
     /** @hidden */

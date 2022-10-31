@@ -46,6 +46,10 @@ export type FdpSelectData<T> = SelectOptionItem[] | Observable<T[]> | T[];
  * `FdpSelectionChangeEvent` will be removed in future versions in favour of plain value emission
  */
 export class FdpSelectionChangeEvent {
+    /**
+     * Select selection change event
+     * @param payload selected value
+     */
     constructor(
         public payload: any // Contains selected item
     ) {}
@@ -85,9 +89,16 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     @Input()
     appendTo: ElementRef;
 
+    /** Trigger value */
     @Input()
     triggerValue: string;
 
+    /**
+     * Preset options for the select body width.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
+     * * `equal` will apply a width to the body equivalent to the width of the control.
+     * * Leave blank for no effect.
+     */
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';
 
@@ -138,6 +149,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     @Input()
     noValueLabel: string;
 
+    /** Whether not to wrap text */
     @Input()
     noWrapText = false;
 
@@ -180,16 +192,16 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
 
     /** Data for suggestion list */
     @Input()
-    get list(): any {
-        return this._optionItems;
-    }
-
     set list(value: any) {
         if (value) {
             this._optionItems = this._convertToOptionItems(value);
         }
     }
+    get list(): any {
+        return this._optionItems;
+    }
 
+    /** @hidden */
     get canClose(): boolean {
         return !(this.mobile && this.mobileConfig.approveButtonText);
     }
@@ -260,6 +272,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     /** @hidden */
     private _secondColumnRatio: number;
 
+    /** @hidden */
     constructor(
         readonly cd: ChangeDetectorRef,
         protected readonly elementRef: ElementRef,
@@ -295,6 +308,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
         return this.value.trim().length === 0;
     }
 
+    /** @hidden */
     protected setValue(newValue: any, emitOnChange = true): void {
         if (newValue !== this._value) {
             this.writeValue(newValue);

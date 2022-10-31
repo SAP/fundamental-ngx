@@ -26,6 +26,7 @@ export class FdPatchLanguageDirective implements OnDestroy {
         this._languagePatch$.next(value);
     }
 
+    /** @hidden */
     constructor(
         @SkipSelf() @Inject(FD_LANGUAGE) parentFdLanguage$: Observable<FdLanguage>,
         @Self() @Inject(FD_LANGUAGE) fdLanguageSubject$: BehaviorSubject<FdLanguage>
@@ -38,6 +39,7 @@ export class FdPatchLanguageDirective implements OnDestroy {
             .subscribe((translation) => fdLanguageSubject$.next(translation));
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
     }

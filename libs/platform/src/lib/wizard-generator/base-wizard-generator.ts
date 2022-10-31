@@ -60,22 +60,17 @@ export class BaseWizardGenerator implements OnDestroy {
      * @description Button labels to be used in Wizard navigation
      */
     @Input()
-    get navigationButtonLabels(): WizardNavigationButtons {
-        return this._navigationButtonLabels;
-    }
-
     set navigationButtonLabels(value: WizardNavigationButtons) {
         this._navigationButtonLabels = Object.assign({}, DEFAULT_WIZARD_NAVIGATION_BUTTONS, value);
+    }
+    get navigationButtonLabels(): WizardNavigationButtons {
+        return this._navigationButtonLabels;
     }
 
     /**
      * @description Array of Wizard Steps.
      */
     @Input()
-    get items(): WizardGeneratorItem[] {
-        return this._items;
-    }
-
     set items(items: WizardGeneratorItem[]) {
         this.wizardCreated = false;
         this._wizardGeneratorService.clearWizardStepComponents();
@@ -86,6 +81,9 @@ export class BaseWizardGenerator implements OnDestroy {
             this.wizardCreated = true;
             this._cd.detectChanges();
         });
+    }
+    get items(): WizardGeneratorItem[] {
+        return this._items;
     }
 
     /**
@@ -145,12 +143,11 @@ export class BaseWizardGenerator implements OnDestroy {
     /**
      * @description Array of visible Wizard Steps.
      */
-    get visibleItems(): PreparedWizardGeneratorItem[] {
-        return this._visibleItems || this._items;
-    }
-
     set visibleItems(items: PreparedWizardGeneratorItem[]) {
         this._visibleItems = items;
+    }
+    get visibleItems(): PreparedWizardGeneratorItem[] {
+        return this._visibleItems || this._items;
     }
 
     /**
@@ -185,6 +182,7 @@ export class BaseWizardGenerator implements OnDestroy {
         return nextStep?.summary === true;
     }
 
+    /** Whether the current step is completed */
     get isCurrentStepCompleted(): boolean {
         const currentIndex = this._wizardGeneratorService.getCurrentStepIndex();
         return this._visibleItems[currentIndex]?.completed === true;

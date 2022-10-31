@@ -52,6 +52,7 @@ export type InputType = 'text' | 'number' | 'email' | 'password';
     providers: [{ provide: FormFieldControl, useExisting: InputComponent, multi: true }]
 })
 export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
+    /** Input type */
     @Input()
     type: InputType = 'text';
 
@@ -65,12 +66,11 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
 
     /** return the value in the text box */
     @Input()
-    get value(): any {
-        return super.getValue();
-    }
-
     set value(value: any) {
         super.setValue(value);
+    }
+    get value(): any {
+        return super.getValue();
     }
 
     /** Emits event on focus change */
@@ -81,6 +81,7 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
         return this._elementRef;
     }
 
+    /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
         @Optional() @Self() ngControl: NgControl,
@@ -91,6 +92,7 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
         super(cd, ngControl, ngForm, formField, formControl);
     }
 
+    /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
         if (!this.type || VALID_INPUT_TYPES.indexOf(this.type) === -1) {

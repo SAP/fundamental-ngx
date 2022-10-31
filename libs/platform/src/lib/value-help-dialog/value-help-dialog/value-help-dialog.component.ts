@@ -82,13 +82,13 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
 
     /** Data source */
     @Input()
-    get dataSource(): FdpValueHelpDialogDataSource<any> | undefined {
-        return this._dataSource;
-    }
     set dataSource(value: FdpValueHelpDialogDataSource<any> | undefined) {
         if (value) {
             this._dataSource = this.toDataStream(value);
         }
+    }
+    get dataSource(): FdpValueHelpDialogDataSource<any> | undefined {
+        return this._dataSource;
     }
 
     /** Dialog's custom config */
@@ -321,6 +321,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         return this._currentValue.conditions || [];
     }
 
+    /** @hidden */
     get validConditions(): BaseEntity[] {
         return this._getValidCondition(this.conditionItems);
     }
@@ -335,6 +336,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         return this._elementRef;
     }
 
+    /** @hidden */
     get isShowAllFilters(): boolean {
         return this.filters.length > this.maxShownInitialFilters && this.shownFilterCount > this.maxShownInitialFilters;
     }
@@ -527,6 +529,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         this._changeDetectorRef.markForCheck();
     }
 
+    /** @hidden */
     toggleShownFilters(): void {
         this.shownFilterCount =
             this.maxShownInitialFilters === this.shownFilterCount ? Infinity : this.maxShownInitialFilters;

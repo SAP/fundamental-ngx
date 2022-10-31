@@ -546,10 +546,12 @@ export class ToolbarComponent
         this._changeOverflowVisibleState(false);
     }
 
+    /** @hidden */
     private _changeOverflowVisibleState(visible: boolean): void {
         this.overflowVisibility = of(visible).pipe(debounceTime(1));
     }
 
+    /** @hidden */
     private _changeItemVisibilityState(element: HTMLElement, visible: boolean): void {
         const fadeIn = 'fd-toolbar-fade-in';
         const fadeOut = 'fd-toolbar-fade-out';

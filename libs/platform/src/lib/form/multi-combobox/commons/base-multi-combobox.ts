@@ -73,6 +73,11 @@ export const MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory: (
 export type FdpMultiComboboxDataSource<T> = MultiComboBoxDataSource<T> | Observable<T[]> | T[];
 
 export class MultiComboboxSelectionChangeEvent {
+    /**
+     * Multi Combobox selection change event
+     * @param source Multi Combobox component
+     * @param selectedItems Selected items
+     */
     constructor(
         public source: BaseMultiCombobox,
         public selectedItems: SelectableOptionItem['value'] // Contains selected items
@@ -147,6 +152,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     @Input()
     autoResize = false;
 
+    /** Value of the multi combobox */
     @Input()
     set value(value: any) {
         super.setValue(value, true);
@@ -364,6 +370,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         }
     };
 
+    /** @hidden */
     constructor(
         protected readonly _cd: ChangeDetectorRef,
         protected readonly elementRef: ElementRef,
@@ -378,6 +385,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         super(_cd, ngControl, ngForm, formField, formControl);
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         const dataSourceChange = changes['dataSource'];
 

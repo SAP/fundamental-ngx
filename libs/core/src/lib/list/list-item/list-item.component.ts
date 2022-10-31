@@ -127,30 +127,26 @@ export class ListItemComponent
 
     /** @hidden */
     @ContentChild(RadioButtonComponent)
-    get radio(): RadioButtonComponent {
-        return this._radio;
-    }
-
-    /** @hidden */
     set radio(value: RadioButtonComponent) {
         this._radio = value;
         if (this._radio && this._radio.tabIndex == null) {
             this._radio.tabIndex = -1;
         }
     }
-
-    /** @hidden */
-    @ContentChild(CheckboxComponent)
-    get checkbox(): CheckboxComponent {
-        return this._checkbox;
+    get radio(): RadioButtonComponent {
+        return this._radio;
     }
 
     /** @hidden */
+    @ContentChild(CheckboxComponent)
     set checkbox(value: CheckboxComponent) {
         this._checkbox = value;
         if (this._checkbox && this._checkbox.tabIndexValue == null) {
             this._checkbox.tabIndexValue = -1;
         }
+    }
+    get checkbox(): CheckboxComponent {
+        return this._checkbox;
     }
 
     /** @hidden */
@@ -198,6 +194,7 @@ export class ListItemComponent
     /** @hidden */
     readonly _uniqueId = 'fd-list-item-' + ++listItemUniqueId;
 
+    /** @hidden */
     constructor(public elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
     }

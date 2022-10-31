@@ -53,14 +53,12 @@ export class CarouselService implements OnDestroy {
     /** carousel items query list */
     items: QueryList<CarouselItemInterface>;
 
-    /** return current transition value in px */
-    get currentTransitionPx(): number {
-        return this._currentTransitionPx;
-    }
-
-    /** set current transition value in px */
+    /** Current transition value in px */
     set currentTransitionPx(currentTransitionPx: number) {
         this._currentTransitionPx = currentTransitionPx;
+    }
+    get currentTransitionPx(): number {
+        return this._currentTransitionPx;
     }
 
     /** @hidden */

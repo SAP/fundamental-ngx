@@ -12,11 +12,12 @@ export class TokenizerInputDirective implements OnInit, OnChanges, CssClassBuild
     @Input()
     class: string;
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
+    /** @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-tokenizer__input', this.class];
     }

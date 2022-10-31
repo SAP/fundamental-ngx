@@ -1,3 +1,83 @@
+## [0.36.3-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.13...v0.36.3-rc.14) (2022-10-31)
+
+
+### Bug Fixes
+
+* **core:** set touched state on click/keydown ([#8909](https://github.com/SAP/fundamental-ngx/issues/8909)) ([547425a](https://github.com/SAP/fundamental-ngx/commit/547425a660fc8bc0aa8f891ad461bd1138550a1d))
+
+
+
+## [0.36.3-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.12...v0.36.3-rc.13) (2022-10-29)
+
+
+
+## [0.36.3-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.11...v0.36.3-rc.12) (2022-10-29)
+
+
+### Bug Fixes
+
+* **platform:** fix broken two-columns options in select ([#8805](https://github.com/SAP/fundamental-ngx/issues/8805)) ([81a4b72](https://github.com/SAP/fundamental-ngx/commit/81a4b72a689c2743b683bbe6e9b62d6397428641))
+
+
+
+## [0.36.3-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.10...v0.36.3-rc.11) (2022-10-28)
+
+
+### Bug Fixes
+
+* **core:** combobox set value to null on clear button press ([#8863](https://github.com/SAP/fundamental-ngx/issues/8863)) ([8774599](https://github.com/SAP/fundamental-ngx/commit/8774599eacfb4e8417c5387f68ba95fc18917876))
+
+
+
+## [0.36.3-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.9...v0.36.3-rc.10) (2022-10-28)
+
+
+### Features
+
+* **core:** notification mobile (in popover) ([#8525](https://github.com/SAP/fundamental-ngx/issues/8525)) ([8118bae](https://github.com/SAP/fundamental-ngx/commit/8118bae082e1616fec0796f23a55a857286066ed))
+
+
+
+## [0.36.3-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.8...v0.36.3-rc.9) (2022-10-28)
+
+
+### Bug Fixes
+
+* **core:** solve popover arrow overflow ([#8900](https://github.com/SAP/fundamental-ngx/issues/8900)) ([6b45ef6](https://github.com/SAP/fundamental-ngx/commit/6b45ef6938585a22f3bc8ddff1660fb20791cfd4))
+
+
+
+## [0.36.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.7...v0.36.3-rc.8) (2022-10-28)
+
+
+### Features
+
+* **core,platform:** require-jsdoc rule ([#8630](https://github.com/SAP/fundamental-ngx/issues/8630)) ([1e79e24](https://github.com/SAP/fundamental-ngx/commit/1e79e241d3a18feeaef1d8437427324ccb06e4e4))
+
+
+
+## [0.36.3-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.6...v0.36.3-rc.7) (2022-10-28)
+
+
+### Bug Fixes
+
+* **e2e:** removing cross-env from e2e workflow ([#8910](https://github.com/SAP/fundamental-ngx/issues/8910)) ([c58e084](https://github.com/SAP/fundamental-ngx/commit/c58e0844dfc62416bb2a00e8a6023f367b0eb9ec))
+
+
+
+## [0.36.3-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.5...v0.36.3-rc.6) (2022-10-27)
+
+
+
+## [0.36.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.4...v0.36.3-rc.5) (2022-10-26)
+
+
+### Bug Fixes
+
+* **platform:** wizard generator hidden form groups visible ([#8891](https://github.com/SAP/fundamental-ngx/issues/8891)) ([aac5aa1](https://github.com/SAP/fundamental-ngx/commit/aac5aa161ec9f479b8a4959a915fac9240f48372))
+
+
+
 ## [0.36.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.3...v0.36.3-rc.4) (2022-10-26)
 
 

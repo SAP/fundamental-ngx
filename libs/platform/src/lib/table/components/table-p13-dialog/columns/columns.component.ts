@@ -77,6 +77,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
 
     /** Flag to track disabled state for move-down move-up buttons */
     _moveUpDisabled = true;
+    /** Flag to track disabled state for move-down move-up buttons */
     _moveDownDisabled = true;
 
     /** @hidden */

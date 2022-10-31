@@ -10,7 +10,10 @@ import { DialogRefBase } from '../base/dialog-ref-base.class';
 
 @Injectable()
 export class DialogRef<T = any, P = any> extends DialogRefBase<T, P> {
+    /** @hidden */
     private readonly _onHide = new BehaviorSubject<boolean>(false);
+
+    /** @hidden */
     private readonly _onLoading = new BehaviorSubject<boolean>(false);
 
     /** Observable that is triggered whenever the dialog should be visually hidden or visible.*/

@@ -141,6 +141,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     @ViewChild('contentContainer', { read: ElementRef, static: true })
     contentContainer: ElementRef;
 
+    /** @hidden */
     @ViewChild(OverflowLayoutComponent)
     private _overflowLayout: OverflowLayoutComponent;
 
@@ -175,6 +176,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         this._setupTabPanelsChangeListeners();
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
         this._listenOnPropertiesChange();
     }

@@ -144,10 +144,24 @@
                 "eol-last": "error",
                 "eqeqeq": ["error", "smart"],
                 "guard-for-in": "error",
+                "grouped-accessor-pairs": ["error", "setBeforeGet"],
                 "import/order": "off",
                 "jsdoc/check-alignment": "off",
                 "jsdoc/check-indentation": "off",
                 "jsdoc/newline-after-description": "off",
+                "jsdoc/require-jsdoc": [
+                    "error",
+                    {
+                        "publicOnly": true,
+                        "require": {
+                            "MethodDefinition": true
+                        },
+                        "contexts": ["PropertyDefinition"],
+                        "enableFixer": false,
+                        "checkGetters": "no-setter",
+                        "checkSetters": true
+                    }
+                ],
                 "key-spacing": [
                     "error",
                     {
@@ -227,6 +241,13 @@
                     }
                 ],
                 "valid-typeof": "off"
+            }
+        },
+        {
+            "files": ["*.spec.ts"],
+            "rules": {
+                "jsdoc/require-jsdoc": "off",
+                "grouped-accessor-pairs": "off"
             }
         },
         {

@@ -8,11 +8,13 @@ import { DOCUMENT } from '@angular/common';
 
 @Injectable()
 export class NotificationService {
+    /** @hidden */
     public notifications: {
         notificationComponent: ComponentRef<NotificationComponent>;
         notificationConfig: Readonly<NotificationConfig>;
     }[] = [];
 
+    /** @hidden */
     public containerRef: ComponentRef<NotificationContainer> | null;
 
     /**

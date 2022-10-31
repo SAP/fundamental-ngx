@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChild,
     ElementRef,
     HostListener,
     Renderer2,
@@ -25,7 +24,6 @@ import {
     PopoverPosition
 } from '@fundamental-ngx/core/shared';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { NotificationGroupComponent } from '@fundamental-ngx/core/notification';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /**
@@ -49,10 +47,6 @@ export class PopoverBodyComponent {
     /** @hidden */
     @ViewChild(CdkTrapFocus)
     _cdkTrapFocus: CdkTrapFocus;
-
-    /** @hidden */
-    @ContentChild(NotificationGroupComponent)
-    notificationGroup: NotificationGroupComponent;
 
     /** Whether the popover should have an arrow. */
     _noArrow = true;
@@ -106,6 +100,7 @@ export class PopoverBodyComponent {
         }
     }
 
+    /** @hidden */
     constructor(
         readonly _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,

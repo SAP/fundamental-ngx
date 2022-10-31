@@ -30,15 +30,15 @@ import { MenuItemComponent } from './menu-item.component';
 export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     /** Set Menu Component for which this trigger will be associated. */
     @Input('fdpMenuTriggerFor')
-    get menu(): MenuComponent {
-        return this._menu;
-    }
     set menu(menu: MenuComponent) {
         if (this._menu === menu) {
             return;
         }
         this._menu = menu;
         this._menuCloseSubscription.unsubscribe();
+    }
+    get menu(): MenuComponent {
+        return this._menu;
     }
 
     /** @hidden */

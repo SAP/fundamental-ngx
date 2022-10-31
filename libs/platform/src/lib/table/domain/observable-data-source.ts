@@ -49,6 +49,7 @@ export class ObservableTableDataProvider<T> extends TableDataProvider<T> {
 }
 
 export class ObservableTableDataSource<T> extends TableDataSource<T> {
+    /** @hidden */
     constructor(data: Observable<T[]>, dateTimeAdapter?: DatetimeAdapter<any>) {
         super(new ObservableTableDataProvider(data, dateTimeAdapter));
     }

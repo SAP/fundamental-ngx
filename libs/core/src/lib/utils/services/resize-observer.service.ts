@@ -10,6 +10,7 @@ interface ObservedElement {
 
 @Injectable({ providedIn: 'root' })
 export class ResizeObserverFactory {
+    /** Factory to create ResizeObserver if it's present in browser.  */
     create(callback: ResizeObserverCallback): ResizeObserver | null {
         return typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(callback);
     }
@@ -17,14 +18,18 @@ export class ResizeObserverFactory {
 
 @Injectable({ providedIn: 'root' })
 export class ResizeObserverService implements OnDestroy {
+    /** @hidden */
     private _observedElements = new Map<Element, ObservedElement>();
 
+    /** @hidden */
     constructor(private _resizeObserverFactory: ResizeObserverFactory) {}
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._observedElements.forEach((_, element) => this._cleanupObserver(element));
     }
 
+    /** Observe the given element and emit whenever its size changes. */
     observe(elementOrRef: Element | ElementRef<Element>): Observable<ResizeObserverEntry[]> {
         const element = coerceElement(elementOrRef);
 

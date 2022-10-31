@@ -37,6 +37,8 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
     get tabindex(): string {
         return !this.interactive ? '-1' : this._tabindex;
     }
+
+    /** @hidden */
     private _tabindex = '0';
 
     /** @hidden */
@@ -72,8 +74,8 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
         this.buildComponentCssClass();
     }
 
-    @applyCssClass
     /** @hidden */
+    @applyCssClass
     buildComponentCssClass(): string[] {
         return [CLASS_NAME.cardHeader, !this.interactive ? CLASS_NAME.cardHeaderNonInteractive : ''];
     }

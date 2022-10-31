@@ -40,6 +40,7 @@ export class MenuService {
         return this._rtlService?.rtl.value;
     }
 
+    /** @hidden */
     constructor(private _renderer: Renderer2, @Optional() private readonly _rtlService: RtlService) {}
 
     /** Reference to menu component */
@@ -134,6 +135,7 @@ export class MenuService {
         }
     }
 
+    /** @hidden */
     onDestroy(): void {
         this.removeKeyboardSupport();
     }
@@ -232,6 +234,7 @@ export class MenuService {
         );
     }
 
+    /** @hidden */
     private _handleKey(event: KeyboardEvent): void {
         const focusRight = (node): void => {
             setTimeout(() => this.setFocused(node.children[0].item));

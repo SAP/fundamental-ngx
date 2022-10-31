@@ -8,8 +8,10 @@ import { BehaviorSubject, distinctUntilChanged, filter, Observable, of } from 'r
 
 @Injectable()
 export class UrlContentDensityStorage implements ContentDensityStorage {
+    /** @hidden */
     private _current$: BehaviorSubject<ContentDensityMode>;
 
+    /** @hidden */
     constructor(
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
@@ -19,6 +21,7 @@ export class UrlContentDensityStorage implements ContentDensityStorage {
         this._initialize();
     }
 
+    /** @hidden */
     private _initialize(): void {
         this._current$ = new BehaviorSubject<ContentDensityMode>(this._defaultContentDensity);
 
@@ -29,6 +32,7 @@ export class UrlContentDensityStorage implements ContentDensityStorage {
             });
     }
 
+    /** @hidden */
     private _setUrlQueryParam(density: ContentDensityMode): void {
         const url = new URL(`https://google.com${this._router.url}`);
         url.searchParams.delete(this._storageKey);
@@ -39,10 +43,12 @@ export class UrlContentDensityStorage implements ContentDensityStorage {
         this._router.navigateByUrl(url.pathname + '?' + url.searchParams.toString());
     }
 
+    /** Content density observable */
     getContentDensity(): Observable<ContentDensityMode> {
         return this._current$.asObservable().pipe(distinctUntilChanged());
     }
 
+    /** Change content density */
     setContentDensity(density: ContentDensityMode): Observable<void> {
         this._current$.next(density);
         this._setUrlQueryParam(density);

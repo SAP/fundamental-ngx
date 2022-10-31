@@ -56,6 +56,7 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
     /** @hidden */
     loaded = false;
 
+    /** @hidden */
     private readonly _categoryLabelKeys: SmartFilterBarVisibilityCategoryLabels = {
         all: 'settingsCategoryAll',
         visible: 'settingsCategoryVisible',

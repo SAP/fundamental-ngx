@@ -18,5 +18,6 @@ export class FdpViewSettingsFilterCustomDef {
         return true;
     }
 
+    /** @hidden */
     constructor(public templateRef: TemplateRef<FdpViewSettingsFilterCustomDefContext>) {}
 }

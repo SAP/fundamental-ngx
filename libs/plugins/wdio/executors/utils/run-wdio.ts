@@ -15,7 +15,7 @@ module.exports.config = require('./e2e/wdio.base-config.js')({
 `
     );
     const flags = ` ${baseUrl ? `--baseUrl ${baseUrl}` : ''}`;
-    const command = `npx cross-env TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio ${wdioConfig} ${flags}`;
+    const command = `npx wdio ${wdioConfig} ${flags}`;
     logger.info(`Running command ${command}`);
     return new Promise((resolve, reject) => {
         const testProcess = spawn(command, [], { shell: true });

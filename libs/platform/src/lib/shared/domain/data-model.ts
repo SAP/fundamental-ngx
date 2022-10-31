@@ -49,6 +49,7 @@ export interface SelectableOptionItem extends OptionItem {
     children?: SelectableOptionItem[];
 }
 
+/** @hidden */
 export function isSelectableItem(item: SelectItem): item is SelectItem {
     return (
         item &&
@@ -58,6 +59,7 @@ export function isSelectableItem(item: SelectItem): item is SelectItem {
     );
 }
 
+/** @hidden */
 export function isSelectItem(item: SelectItem): item is SelectItem {
     return item && item.label !== undefined && item.value !== undefined;
 }

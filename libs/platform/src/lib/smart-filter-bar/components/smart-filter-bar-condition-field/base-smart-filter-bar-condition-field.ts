@@ -17,6 +17,7 @@ import { isSelectItem, SelectItem } from '@fundamental-ngx/platform/shared';
     providers: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider]
 })
 export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGeneratorControl {
+    /** @hidden */
     protected constructor(
         protected _dialogService: DialogService,
         protected _smartFilterBar: SmartFilterBar,

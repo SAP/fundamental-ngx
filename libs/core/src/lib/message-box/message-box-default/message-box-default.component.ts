@@ -33,6 +33,7 @@ export class MessageBoxDefaultComponent implements OnInit, AfterViewInit {
     /** @hidden */
     constructor(public _messageBoxConfig: MessageBoxConfig, private _changeDetectorRef: ChangeDetectorRef) {}
 
+    /** @hidden */
     ngOnInit(): void {
         this._footerVisible = !!(this._messageBoxContent.cancelButton || this._messageBoxContent.approveButton);
     }

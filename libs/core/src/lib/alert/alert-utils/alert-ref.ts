@@ -10,6 +10,7 @@ import { Observable, Subject } from 'rxjs';
  * For a template, add let-alert to your ng-template tag. Now using *alert* in the template refers to this class.
  */
 export class AlertRef {
+    /** @hidden */
     private readonly _afterDismissed: Subject<any> = new Subject<any>();
 
     /** Observable that is triggered when the alert is dismissed. */

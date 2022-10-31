@@ -4,5 +4,6 @@ import { Directive, TemplateRef } from '@angular/core';
     selector: '[fdCardFooterActionItem]'
 })
 export class CardFooterActionItemDirective {
+    /** @hidden */
     constructor(readonly templateRef: TemplateRef<void>) {}
 }

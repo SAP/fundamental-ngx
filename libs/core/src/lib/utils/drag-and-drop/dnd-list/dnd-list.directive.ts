@@ -242,6 +242,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         }
     }
 
+    /** @hidden */
     private _changeDraggableState(draggable: boolean): void {
         if (this.dndItems) {
             this.dndItems.forEach((item) => {

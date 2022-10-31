@@ -19,16 +19,26 @@ export class TableService {
     /** @hidden */
     private _detectChanges$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
     readonly tableState$ = this._tableStateSubject$.asObservable();
+    /** @hidden */
     readonly tableLoading$ = this._tableLoadingSubject$.asObservable();
+    /** @hidden */
     readonly tableStateChanges$ = this.tableState$.pipe(skip(1));
 
+    /** @hidden */
     readonly searchChange: EventEmitter<SearchChange> = new EventEmitter<SearchChange>();
+    /** @hidden */
     readonly sortChange: EventEmitter<SortChange> = new EventEmitter<SortChange>();
+    /** @hidden */
     readonly filterChange: EventEmitter<FilterChange> = new EventEmitter<FilterChange>();
+    /** @hidden */
     readonly groupChange: EventEmitter<GroupChange> = new EventEmitter<GroupChange>();
+    /** @hidden */
     readonly freezeChange: EventEmitter<FreezeChange> = new EventEmitter<FreezeChange>();
+    /** @hidden */
     readonly columnsChange: EventEmitter<ColumnsChange> = new EventEmitter<ColumnsChange>();
+    /** @hidden */
     readonly pageChange: EventEmitter<PageChange> = new EventEmitter<PageChange>();
 
     /** Listen for soft changes in table subcomponents (mostly table column) */
