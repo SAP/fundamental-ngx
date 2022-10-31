@@ -11,8 +11,8 @@
         </label>
         <fd-toolbar-spacer></fd-toolbar-spacer>
         <ng-container *ngIf="showExpandCollapseButtons">
-            <fdp-button glyph="expand-all" (click)="expandAll()"></fdp-button>
-            <fdp-button glyph="collapse-all" (click)="collapseAll()"></fdp-button>
+            <fdp-button glyph="expand-all" (click)="_expandAll()"></fdp-button>
+            <fdp-button glyph="collapse-all" (click)="_collapseAll()"></fdp-button>
         </ng-container>
         <fdp-search-field
             *ngIf="!hideSearchInput"

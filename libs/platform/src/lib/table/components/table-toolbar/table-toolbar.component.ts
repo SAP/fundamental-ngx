@@ -159,12 +159,12 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
     }
 
     /** @hidden */
-    expandAll(): void {
+    _expandAll(): void {
         this._table.expandAll();
     }
 
     /** @hidden */
-    collapseAll(): void {
+    _collapseAll(): void {
         this._table.collapseAll();
     }
 }
