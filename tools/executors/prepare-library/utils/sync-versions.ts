@@ -15,6 +15,7 @@ const versions = {
     FAST_DEEP_EQUAL_VER_PLACEHOLDER: packageJson.dependencies['fast-deep-equal'],
     FDSTYLES_VER_PLACEHOLDER: packageJson.dependencies['fundamental-styles'],
     FDNSTYLES_VER_PLACEHOLDER: packageJson.dependencies['@fundamental-styles/fn'],
+    FDCXSTYLES_VER_PLACEHOLDER: packageJson.dependencies['@fundamental-styles/cx'],
     FOCUSTRAP_VER_PLACEHOLDER: packageJson.dependencies['focus-trap'],
     FOCUSVISIBLE_VER_PLACEHOLDER: packageJson.dependencies['focus-visible'],
     LODASH_ES_VER_PLACEHOLDER: packageJson.dependencies['lodash-es'],

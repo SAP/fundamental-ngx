@@ -76,6 +76,11 @@
                         "output": "./assets/platform"
                     },
                     {
+                        "input": "./libs/cx/src/lib",
+                        "glob": "README.md",
+                        "output": "./assets/cx"
+                    },
+                    {
                         "input": "./libs/core/src/lib",
                         "glob": "README.md",
                         "output": "./assets/core"
@@ -99,6 +104,11 @@
                         "glob": "**/*",
                         "input": "./node_modules/highlight.js/styles/",
                         "output": "./assets/highlight-js-styles/"
+                    },
+                    {
+                        "glob": "**/examples/**/*",
+                        "input": "libs/docs/shared",
+                        "output": "./docs/shared"
                     },
                     {
                         "glob": "**/examples/**/*",
