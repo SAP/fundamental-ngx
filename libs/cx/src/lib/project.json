@@ -7,10 +7,6 @@
         "prepare": {
             "executor": "@fundamental-ngx/workspace-tools:prepare",
             "options": {
-                "schematics": {
-                    "collection": "../../schematics",
-                    "tsConfig": "../../tsconfig.schematics.json"
-                },
                 "distPath": "dist/libs/cx"
             }
         },
