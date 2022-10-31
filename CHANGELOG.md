@@ -1,3 +1,12 @@
+## [0.36.3-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.13...v0.36.3-rc.14) (2022-10-31)
+
+
+### Bug Fixes
+
+* **core:** set touched state on click/keydown ([#8909](https://github.com/SAP/fundamental-ngx/issues/8909)) ([547425a](https://github.com/SAP/fundamental-ngx/commit/547425a660fc8bc0aa8f891ad461bd1138550a1d))
+
+
+
 ## [0.36.3-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.12...v0.36.3-rc.13) (2022-10-29)
 
 
