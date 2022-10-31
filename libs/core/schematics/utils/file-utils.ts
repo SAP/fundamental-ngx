@@ -1,7 +1,7 @@
 import { join, Path } from '@angular-devkit/core';
 import { Tree } from '@angular-devkit/schematics';
 
-const STYLESHEET_REGEX = /.*\.(css|scss|less)/;
+const STYLESHEET_REGEX = /.*\.(css|scss|less|sass)/;
 
 export function findStylesheetFiles(tree: Tree, startDirectory: string = '/'): string[] {
     const result: string[] = [];
