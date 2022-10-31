@@ -1,4 +1,4 @@
-# @Fundamental-NGX/Core
+# @Fundamental-NGX/CX
 
 [![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fcx.svg)](//www.npmjs.com/package/@fundamental-ngx/cx)
 ![Build Status](https://github.com/SAP/fundamental-ngx/actions/workflows/on-push-or-pull.yml/badge.svg?branch=main)
@@ -58,11 +58,11 @@ For an existing Angular CLI application,
     To add the entire library, add the following import to your main application module.
 
     ```typescript
-    import { FundamentalNgxCoreModule } from '@fundamental-ngx/cx';
+    import { FundamentalNgxCxModule } from '@fundamental-ngx/cx';
 
     @NgModule({
         ...
-        imports: [FundamentalNgxCoreModule],
+        imports: [FundamentalNgxCxModule],
     })
     export class DemoModule { }
     ```
@@ -73,37 +73,6 @@ For an existing Angular CLI application,
 
     ```typescript
     import { CheckboxModule } from '@fundamental-ngx/cx';
-    ```
-
-    Version 0.31.0 brings new way of importing individual modules, which is prefered way.
-
-    ```typescript
-    import { CheckboxModule } from '@fundamental-ngx/cx/checkbox';
-    ```
-
-    For models prior to 0.10 use `fundamental-ngx`
-
-    ```typescript
-    import { CheckboxModule } from 'fundamental-ngx';
-
-    @NgModule({
-        ...
-        imports: [CheckboxModule],
-    })
-    export class DemoModule { }
-    ```
-
-1. **Provide the RtlService.**
-   In your main application module, add `RtlService` to the list of providers. This service is needed to ensure proper right-to-left functionality for
-   users with their browser set to an RTL language.
-1. **Provide the ContentDensityService.**
-   In your main application module, you will also need to add `ContentDensityService` to the list of providers if you wish to manage the content density of
-   you application from a single point.
-
-1. **Add the component to your HTML.**
-
-    ```html
-    <fd-checkbox label="Fundamental Ngx Checkbox"></fd-checkbox>
     ```
 
 ## <a name="5"></a>5. Known Issues
@@ -119,7 +88,3 @@ If you encounter an issue, you can [create a ticket](https://github.com/SAP/fund
 If you want to contribute, please check the [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md) documentation for contribution guidelines. Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit).
 
 Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/main/NEW_COMPONENT.md) guide on building a new component for the library and creating the necessary documentation for your new component.
-
-## <a name="9"></a>8. Similar Projects
-
-[Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of Fundamental Library Styles
