@@ -1,3 +1,12 @@
+## [0.36.3-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.16...v0.36.3-rc.17) (2022-11-01)
+
+
+### Bug Fixes
+
+* **core:** add key navigation in mobile menu ([#8752](https://github.com/SAP/fundamental-ngx/issues/8752)) ([b758c34](https://github.com/SAP/fundamental-ngx/commit/b758c34429769f8623b59d0f3ed62d13e624e570))
+
+
+
 ## [0.36.3-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.15...v0.36.3-rc.16) (2022-10-31)
 
 
