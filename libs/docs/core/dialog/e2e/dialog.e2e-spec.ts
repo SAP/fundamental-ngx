@@ -39,7 +39,6 @@ import {
     dismissedStatus,
     emptyValuesArr,
     escapeStatus,
-    fullscreenClass,
     mobileClass,
     mobileProperty,
     noMobileSpacingClass,
@@ -379,18 +378,6 @@ describe('dialog test suite', () => {
             await sendKeys('Escape');
 
             await expect(await doesItExist(dialog)).toBe(true, 'dialog is closed when it should be open');
-        });
-
-        it('should check dialog fullScreen option', async () => {
-            await openDialog(playgroundDialog);
-
-            await expect(await getAttributeByName(dialogContainer2, classAttribute)).not.toContain(fullscreenClass);
-
-            await closeDialog();
-            await click(playgroundDialog + checkboxes, 4);
-            await openDialog(playgroundDialog);
-
-            await expect(await getAttributeByName(dialogContainer2, classAttribute)).toContain(fullscreenClass);
         });
 
         it('should check dialog mobile option', async () => {
