@@ -5,4 +5,5 @@ export interface Select {
     setMenu: (menu: any) => void;
     options: QueryList<any>;
     optionClicked: (option: any) => void;
+    editable: boolean;
 }

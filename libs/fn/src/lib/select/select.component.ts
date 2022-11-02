@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { OptionComponent } from './option/option.component';
 import { KeyUtil, resizeObservable } from '@fundamental-ngx/core/utils';
-import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SelectMenuDirective } from './select-menu.directive';
@@ -174,6 +174,9 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         ) {
             event.preventDefault();
             this.opened = true;
+        } else if (KeyUtil.isKeyCode(event, [DOWN_ARROW]) && this.opened) {
+            event.preventDefault();
+            this.options.find((item) => !item.hidden)?.focus();
         }
     }
 

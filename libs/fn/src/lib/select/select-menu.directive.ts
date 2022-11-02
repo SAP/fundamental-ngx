@@ -58,9 +58,10 @@ export class SelectMenuDirective implements AfterViewInit {
             .withWrap()
             .withVerticalOrientation(true)
             .skipPredicate((item) => item.hidden);
-
-        setTimeout(() => {
-            this._focusKeyManager.setFirstItemActive();
-        });
+        if (!this._selectComponent.editable) {
+            setTimeout(() => {
+                this._focusKeyManager.setFirstItemActive();
+            });
+        }
     }
 }
