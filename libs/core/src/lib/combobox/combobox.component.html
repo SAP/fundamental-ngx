@@ -91,7 +91,7 @@
             class="fd-input-group__addon fd-input-group__addon--button"
             [ngClass]="addOnClass"
             [class.fd-input-group__addon--compact]="_contentDensityObserver.isCompact$ | async"
-            [style.display]="isSearch && showClearButton && inputText && inputText.length > 0 ? '' : 'none'"
+            *ngIf="isSearch && showClearButton && inputText && inputText.length > 0"
         >
             <button
                 fd-button
