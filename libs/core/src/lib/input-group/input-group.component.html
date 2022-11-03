@@ -66,9 +66,9 @@
     <input
         *ngIf="!inputTemplate"
         [(ngModel)]="inputText"
-        [ngClass]="inputClass"
         [id]="_inputId"
         [attr.aria-labelledby]="_inputAriaLabelledBy"
+        [ngClass]="inputClass"
         fd-input-group-input
         [type]="type"
         [disabled]="disabled"

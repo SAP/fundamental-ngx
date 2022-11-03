@@ -89,17 +89,17 @@
         />
         <span
             class="fd-input-group__addon fd-input-group__addon--button"
-            [ngClass]="addOnClass"
             [class.fd-input-group__addon--compact]="_contentDensityObserver.isCompact$ | async"
+            [ngClass]="addOnClass"
             *ngIf="isSearch && showClearButton && inputText && inputText.length > 0"
         >
             <button
                 fd-button
                 class="fd-input-group__button"
-                [ngClass]="buttonClass"
                 type="button"
                 fdType="transparent"
                 title="Clear input"
+                [ngClass]="buttonClass"
                 [attr.tabindex]="buttonFocusable ? 0 : -1"
                 (focus)="clearInputBtnFocus()"
                 (blur)="clearInputBtnBlur()"

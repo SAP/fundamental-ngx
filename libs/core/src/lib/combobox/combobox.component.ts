@@ -17,7 +17,6 @@ import {
     SimpleChanges,
     TemplateRef,
     ViewChild,
-    ViewChildren,
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
@@ -60,7 +59,6 @@ import { GroupFunction } from './list-group.pipe';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 let comboboxUniqueId = 0;
 
@@ -311,10 +309,6 @@ export class ComboboxComponent
     /** @hidden */
     @ViewChild(InputGroupComponent)
     inputGroup: InputGroupComponent;
-
-    /** @hidden */
-    @ViewChildren(ButtonComponent)
-    _buttons: QueryList<ButtonComponent>;
 
     /** @hidden */
     @ContentChildren(ListMessageDirective)
@@ -753,8 +747,10 @@ export class ComboboxComponent
         return this.getValue() === termValue;
     }
 
-    /** focuses input field of the combobox */
-    focusSearchInput(): void {
+    /** @hidden
+     * focuses input field of the combobox
+     */
+    _focusSearchInput(): void {
         this.searchInputElement.nativeElement.focus();
     }
 }

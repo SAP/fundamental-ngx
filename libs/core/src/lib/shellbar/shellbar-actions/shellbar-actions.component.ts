@@ -140,7 +140,7 @@ export class ShellbarActionsComponent implements AfterViewInit {
             });
         }
         this._cdRef.detectChanges();
-        this._comboboxComponent.focusSearchInput();
+        this._comboboxComponent._focusSearchInput();
     }
 
     /** @hidden
