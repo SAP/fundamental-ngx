@@ -131,9 +131,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
         if (this.comboboxComponent && this.comboboxComponent.inputGroup) {
             this.comboboxComponent.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group-input');
             this.comboboxComponent.addOnClass = 'fd-shellbar__input-group-addon';
-            this.comboboxComponent._buttons.forEach((button) => {
-                button.elementRef().nativeElement.classList.add('fd-shellbar__button');
-            });
+            this.comboboxComponent.buttonClass = 'fd-shellbar__button';
 
             this.comboboxComponent.inputGroup.inputGroupClass = 'fd-shellbar__input-group';
             this.comboboxComponent.inputGroup.addOnClass = 'fd-shellbar__input-group-addon';
