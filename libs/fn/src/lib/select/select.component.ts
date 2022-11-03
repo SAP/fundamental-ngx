@@ -203,7 +203,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         });
         clickedOption && this._selectionModel.select(clickedOption);
         this.value = this._selected.value;
-        this.inputText = this._selected.label ? this._selected.label : this._selected._viewValue;
+        this.inputText = this._selected._viewValue;
         this.hideMenu();
         this._cdRef.detectChanges();
     }
@@ -252,8 +252,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     private _filterItems(): void {
         let visibleOptions = 0;
         this.options.forEach((option) => {
-            const optionLabel = option.label ? option.label : option._viewValue;
-            if (optionLabel.toLowerCase().startsWith(this.inputText.toLowerCase())) {
+            if (option._viewValue.toLowerCase().startsWith(this.inputText.toLowerCase())) {
                 visibleOptions++;
                 option._show();
             } else {

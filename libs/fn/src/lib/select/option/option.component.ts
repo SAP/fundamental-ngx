@@ -65,7 +65,7 @@ export class OptionComponent implements OnDestroy, FocusableOption {
      * The displayed value of the option. Used when label not passed by user. e.g. <li fn-option [value]='Apple'> Apple </li>
      */
     get _viewValue(): string {
-        return (this.elementRef.nativeElement.textContent || '').trim();
+        return this.label ?? (this.elementRef.nativeElement.textContent || '').trim();
     }
 
     /** @hidden */
