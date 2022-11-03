@@ -25,6 +25,7 @@
                 [attr.tabindex]="buttonFocusable ? 0 : -1"
                 [attr.title]="iconTitle || glyphAriaLabel || glyph"
                 [glyph]="glyph"
+                [class.is-expanded]="isExpanded"
                 [attr.aria-haspopup]="isControl"
                 [ariaLabel]="glyphAriaLabel || glyph || addOnText"
                 [attr.aria-controls]="_inputId"

@@ -31,6 +31,7 @@ describe('shellbar test suite', () => {
         collapsableExample,
         sizeButtons,
         collapsableShellbar,
+        searchButton,
         searchbarButton,
         searchField,
         collapsableShellbarTitle,
@@ -118,7 +119,7 @@ describe('shellbar test suite', () => {
 
         it('should check the searchbar dropdown', async () => {
             await scrollIntoView(collapsableExample);
-            await click(searchbarButton);
+            await click(searchButton);
             await waitForElDisplayed(popover);
 
             await expect(await isElementDisplayed(popover)).toBe(true, 'search popover is not displayed');
@@ -127,6 +128,7 @@ describe('shellbar test suite', () => {
 
         it('should check search with text', async () => {
             await scrollIntoView(collapsableExample);
+            await click(searchButton);
             await click(searchField);
             await sendKeys('App');
 

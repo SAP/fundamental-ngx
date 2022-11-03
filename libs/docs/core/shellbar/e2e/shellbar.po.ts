@@ -18,6 +18,7 @@ export class ShellbarPo extends CoreBaseComponentPo {
     popoverMenuItem = this.popover + '.fd-menu__link';
     button = 'button';
     searchbarButton = 'fd-combobox ' + this.button;
+    searchButton = '#searchButton';
     searchField = 'fd-combobox input';
     searchMenuItem = this.popover + '.fd-list__item';
     actionButton = 'fd-shellbar-action ' + this.button;

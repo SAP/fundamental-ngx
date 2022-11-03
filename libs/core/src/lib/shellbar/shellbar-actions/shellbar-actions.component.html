@@ -7,7 +7,8 @@
 >
     <button
         #searchButton
-        [style.display]="!showCombobox ? '' : 'none'"
+        id="searchButton"
+        *ngIf="!showCombobox"
         fd-button
         fdType="transparent"
         class="fd-shellbar__button"
