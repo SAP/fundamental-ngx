@@ -539,16 +539,16 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         summarySectionEditStep: 'შესწორება'
     },
     platformMessagePopover: {
-        allErrors: 'All',
+        allErrors: 'ყველა',
         defaultErrors: {
-            email: 'Email is invalid',
-            max: 'The field exceeds maximum value',
-            maxLength: 'The field exceeds maximum length',
-            min: 'The field value is less than allowed',
-            minLength: 'The field length is less than allowed',
-            pattern: 'The field value is invalid',
-            required: 'The field is mandatory',
-            requiredTrue: 'The field is mandatory'
+            email: 'ელ-ფოსტა არასწორია',
+            max: 'ველის მნიშვნელობა აღემატება დაშვებულ მაქსიმუმს',
+            maxLength: 'ველის მოცულობა აღემატება დაშვებულ მაქსიმუმს',
+            min: 'ველის მნიშვნელობა აუცილებელ მინიმუმზე ნაკლებია',
+            minLength: 'ველის მოცულობა აუცილებელ მინიმუმზე ნაკლებია',
+            pattern: 'ველის მნიშვნელობა არასწორია',
+            required: 'ველი სავალდებულოა',
+            requiredTrue: 'ველის შეყვანა სავალდებულოა'
         }
     },
     fnSlider: {
