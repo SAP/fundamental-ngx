@@ -1,3 +1,60 @@
+## [0.36.3-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.20...v0.36.3-rc.21) (2022-11-04)
+
+
+### Bug Fixes
+
+* **core, platform:** inline help in form ([#8924](https://github.com/SAP/fundamental-ngx/issues/8924)) ([1e22525](https://github.com/SAP/fundamental-ngx/commit/1e22525c02dd1f3ef70873f201f272323d70bf14))
+
+
+
+## [0.36.3-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.19...v0.36.3-rc.20) (2022-11-04)
+
+
+### Bug Fixes
+
+* **platform:** implementation of expand and collapse all feature in table ([#8903](https://github.com/SAP/fundamental-ngx/issues/8903)) ([463049d](https://github.com/SAP/fundamental-ngx/commit/463049dc2ba54cec96aa8c1818f39e8c7347dc53))
+
+
+
+## [0.36.3-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.18...v0.36.3-rc.19) (2022-11-03)
+
+
+
+## [0.36.3-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.17...v0.36.3-rc.18) (2022-11-01)
+
+
+### Bug Fixes
+
+* **core:** dialog's fund-styles refactoring adoption ([#8913](https://github.com/SAP/fundamental-ngx/issues/8913)) ([412a1b3](https://github.com/SAP/fundamental-ngx/commit/412a1b322ccb3b350da610e3945b4effda9c5c47))
+
+
+
+## [0.36.3-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.16...v0.36.3-rc.17) (2022-11-01)
+
+
+### Bug Fixes
+
+* **core:** add key navigation in mobile menu ([#8752](https://github.com/SAP/fundamental-ngx/issues/8752)) ([b758c34](https://github.com/SAP/fundamental-ngx/commit/b758c34429769f8623b59d0f3ed62d13e624e570))
+
+
+
+## [0.36.3-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.15...v0.36.3-rc.16) (2022-10-31)
+
+
+
+## [0.36.3-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.14...v0.36.3-rc.15) (2022-10-31)
+
+
+
+## [0.36.3-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.13...v0.36.3-rc.14) (2022-10-31)
+
+
+### Bug Fixes
+
+* **core:** set touched state on click/keydown ([#8909](https://github.com/SAP/fundamental-ngx/issues/8909)) ([547425a](https://github.com/SAP/fundamental-ngx/commit/547425a660fc8bc0aa8f891ad461bd1138550a1d))
+
+
+
 ## [0.36.3-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.12...v0.36.3-rc.13) (2022-10-29)
 
 

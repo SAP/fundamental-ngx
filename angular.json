@@ -98,6 +98,7 @@
         "core-utils": "libs/core/src/lib/utils",
         "core-vertical-navigation": "libs/core/src/lib/vertical-navigation",
         "core-wizard": "libs/core/src/lib/wizard",
+        "cx": "libs/cx/src/lib",
         "datetime-adapter": "libs/datetime-adapter",
         "docs": "apps/docs",
         "docs-core-action-bar": "libs/docs/core/action-bar",

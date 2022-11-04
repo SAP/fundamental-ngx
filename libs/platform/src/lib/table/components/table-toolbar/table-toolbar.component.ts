@@ -52,6 +52,9 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
     @Input()
     hideSearchInput = false;
 
+    /** Toggle to expand and collapse all feature */
+    @Input()
+    showExpandCollapseButtons = false;
     /** Suggestions for search field. */
     @Input()
     searchSuggestions: SuggestionItem[] = [];
@@ -153,5 +156,15 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
         this._table.cancel.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._showSaveButton = false;
         });
+    }
+
+    /** @hidden */
+    _expandAll(): void {
+        this._table.expandAll();
+    }
+
+    /** @hidden */
+    _collapseAll(): void {
+        this._table.collapseAll();
     }
 }

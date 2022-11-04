@@ -7,24 +7,3 @@
 .fd-dialog__resize-handle {
     z-index: 1001;
 }
-
-.fd-dialog__content {
-    &--full-screen {
-        width: 100vw;
-        height: 100vh;
-        max-width: 100vw;
-        max-height: 100vh;
-    }
-
-    &--with-header {
-        .fd-dialog__body {
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
-    }
-
-    .fd-dialog__body--no-horizontal-padding {
-        padding-left: 0;
-        padding-right: 0;
-    }
-}

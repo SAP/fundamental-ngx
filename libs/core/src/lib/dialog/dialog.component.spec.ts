@@ -163,15 +163,6 @@ describe('DialogComponent', () => {
         expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass('fd-dialog__content--mobile');
     });
 
-    it('should display in mobile mode', async () => {
-        const customDialogConfig = { ...new DialogConfig(), fullScreen: true };
-        await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
-
-        expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass(
-            'fd-dialog__content--full-screen'
-        );
-    });
-
     it('should display in mobile mode with no stretch', async () => {
         const customDialogConfig = { ...new DialogConfig(), mobileOuterSpacing: true };
         await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
