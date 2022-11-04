@@ -1,3 +1,12 @@
+## [0.36.3-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.19...v0.36.3-rc.20) (2022-11-04)
+
+
+### Bug Fixes
+
+* **platform:** implementation of expand and collapse all feature in table ([#8903](https://github.com/SAP/fundamental-ngx/issues/8903)) ([463049d](https://github.com/SAP/fundamental-ngx/commit/463049dc2ba54cec96aa8c1818f39e8c7347dc53))
+
+
+
 ## [0.36.3-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.18...v0.36.3-rc.19) (2022-11-03)
 
 
