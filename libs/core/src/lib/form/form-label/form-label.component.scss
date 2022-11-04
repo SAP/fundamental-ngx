@@ -24,6 +24,11 @@ $form-label-bottom-spacing: 0.125rem;
 
 .fd-form-label {
     display: inline-block;
+
+    &__inline-help {
+        position: relative;
+        top: 0.125rem;
+    }
 }
 
 .fd-form-label__wrapper {
