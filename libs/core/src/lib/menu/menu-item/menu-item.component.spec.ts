@@ -229,7 +229,7 @@ describe('MenuItemComponent nested', () => {
         expect(menuItemWithNestedMenu.submenuVisible).toBeTrue();
 
         // Hover moves on sibling menu item
-        menu.menuItems.first.menuInteractive.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
+        menu._menuItems.first.menuInteractive.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
         tick();
 
         // the second option submenu gets closed

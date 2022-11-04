@@ -123,7 +123,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** Whether menu item has popup (desktop mode)  */
     get hasPopup(): boolean {
-        return !!this.submenu && (!this.menuService?.menu || !this.menuService?.menu.mobile);
+        return !!this.submenu && (!this.menuService?.menuComponent || !this.menuService?.menuComponent.mobile);
     }
 
     /** Focuses Menu Item interactive element */
@@ -174,7 +174,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
         );
 
         const timerFactory$ = defer(() =>
-            timer(this.menuService ? this.menuService.menu.openOnHoverTime : 0).pipe(takeUntil(mouseLeave$))
+            timer(this.menuService ? this.menuService.menuComponent.openOnHoverTime : 0).pipe(takeUntil(mouseLeave$))
         );
 
         // Set active on hover
