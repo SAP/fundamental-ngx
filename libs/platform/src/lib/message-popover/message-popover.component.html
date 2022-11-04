@@ -1,4 +1,10 @@
-<fd-popover #popover placement="top-start" *ngIf="_errorTypes.length > 0">
+<fd-popover
+    #popover
+    placement="top-start"
+    *ngIf="_errorTypes.length > 0"
+    [focusTrapped]="true"
+    [focusAutoCapture]="true"
+>
     <fd-popover-control>
         <button
             fd-button
@@ -9,7 +15,7 @@
             [label]="_priorityStateItemsCount.toString()"
         ></button>
     </fd-popover-control>
-    <fd-popover-body>
+    <fd-popover-body [disableScrollbar]="true">
         <div fd-popover-body-header>
             <div fd-bar barDesign="header" class="fd-bar--growing">
                 <div fd-bar-left>
@@ -47,7 +53,7 @@
             [filteredErrors]="_filteredErrors"
             [currentEntry]="currentEntry"
             (openDetails)="_showDetails($event)"
-            (closePopover)="_closePopover()"
+            (closePopover)="_closePopover($event)"
         ></fdp-message-view>
     </fd-popover-body>
 </fd-popover>

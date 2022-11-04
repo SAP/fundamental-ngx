@@ -13,11 +13,17 @@ export class MessagePopoverDocsComponent {
 
     messagePopoverContainerExample: ExampleFile[] = [
         getExampleFile('form-container-example/form-container-example.component.html'),
-        getExampleFile('default/form-container-example.component.ts')
+        getExampleFile('form-container-example/form-container-example.component.ts')
     ];
 
     messagePopoverGeneratorExample: ExampleFile[] = [
         getExampleFile('form-generator-example/form-generator-component-example.component.html'),
-        getExampleFile('default/form-generator-component-example.component.ts')
+        getExampleFile('form-generator-example/form-generator-component-example.component.ts')
+    ];
+
+    messagePopoverConfigExample: ExampleFile[] = [
+        getExampleFile('custom-config-example/message-popover-custom-config-example.component.html'),
+        getExampleFile('custom-config-example/message-popover-custom-config-example.component.ts'),
+        getExampleFile('custom-config-example/example-module.ts')
     ];
 }

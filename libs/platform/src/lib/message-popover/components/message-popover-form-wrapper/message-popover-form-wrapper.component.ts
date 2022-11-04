@@ -10,11 +10,11 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup, FormGroupDirective, NgForm, NgModel } from '@angular/forms';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { DestroyedService } from '@fundamental-ngx/core/utils';
 import { FormField, FormFieldControl, FormFieldErrorDirectiveContext } from '@fundamental-ngx/platform/shared';
 import { BehaviorSubject, filter, startWith, Subscription, switchMap, takeUntil, zip } from 'rxjs';
-import { FDP_MESSAGE_POPOVER_CONFIG, MessagePopoverConfig } from '../../default-config';
+import { FDP_MESSAGE_POPOVER_CONFIG, MessagePopoverConfig, MessagePopoverErrorConfig } from '../../default-config';
 import { MessagePopoverFormItemDirective } from '../../directives/message-popover-form-item.directive';
 import { MessagePopoverEntry } from '../../models/message-popover-entry.interface';
 import { MessagePopoverErrorGroup, MessagePopoverErrorText } from '../../models/message-popover-error.interface';
@@ -208,26 +208,23 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
                     .filter((error) => configErrors.includes(error))
                     .forEach((errorKey) => {
                         const errorObj = control.errors![errorKey];
-                        const configError = this._config.errors[errorKey];
-                        const isPlainError = typeof configError === 'string';
-                        const errorType = isPlainError ? 'error' : configError.type;
-                        const headingMessage = isPlainError ? configError : configError.heading;
-                        const descriptionMessage = isPlainError ? null : configError.description;
+
+                        const errorTextModel = this._getConfigErrorModel(errorKey);
                         const error: MessagePopoverEntry = {
                             name: controlName,
-                            type: errorType,
+                            type: errorTextModel.type,
                             state: convertFormState('error'),
                             fieldName: field?.label ?? '',
                             element: field?.elementRef,
                             heading: {
                                 type: 'string',
                                 error: errorObj,
-                                message: headingMessage
+                                message: errorTextModel.heading
                             },
                             description: {
                                 type: 'string',
                                 error: errorObj,
-                                message: descriptionMessage
+                                message: errorTextModel.description
                             },
                             errors: control!.errors
                         };
@@ -274,7 +271,15 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
                     );
 
                     const groupName = this._getGroupName(field?.formField);
-                    const error = this._getErrorModel(controlName, groupName, control, field, errorDirective);
+                    const error = this._getErrorModel(
+                        controlName,
+                        groupName,
+                        control,
+                        field,
+                        errorKey,
+                        errorDirective,
+                        control.errors![errorKey]
+                    );
 
                     let errorGroupIndex = errors.findIndex((errorGroup) => errorGroup.group === groupName);
 
@@ -307,16 +312,27 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         groupName: string,
         control: AbstractControl,
         field: FormFieldControl,
-        errorDirective?: FormFieldErrorDirectiveContext
+        errorKey: string,
+        errorDirective?: FormFieldErrorDirectiveContext,
+        error?: any
     ): MessagePopoverEntry {
+        let state: FormStates = 'error';
+        const configError = this._config.errors[errorKey];
+
+        if (errorDirective?.directive.type) {
+            state = errorDirective.directive.type;
+        } else if (this._isAdvancedError(configError)) {
+            state = configError.type;
+        }
+
         return {
             name: controlName,
-            type: errorDirective?.directive.type ?? 'error',
-            state: convertFormState(errorDirective?.directive.type ?? 'error'),
+            type: state,
+            state: convertFormState(state),
             group: groupName,
             fieldName: field?.formField?.label ?? '',
-            heading: this._getErrorText(field, errorDirective),
-            description: this._getErrorText(field, errorDirective, 'description'),
+            heading: this._getErrorText(field, errorDirective, 'heading', errorKey, error),
+            description: this._getErrorText(field, errorDirective, 'description', errorKey, error),
             errors: control!.errors,
             element: field?.elementRef
         };
@@ -332,12 +348,22 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     private _getErrorText(
         field: FormFieldControl,
         errorDirective: Nullable<FormFieldErrorDirectiveContext>,
-        section: 'heading' | 'description' = 'heading'
+        section: 'heading' | 'description' = 'heading',
+        errorKey: string,
+        error?: any
     ): MessagePopoverErrorText {
         const errorTextObj: MessagePopoverErrorText = {
             error: errorDirective?.error,
             type: errorDirective?.directive ? 'directive' : field?.formField?.i18Strings ? 'templateRef' : 'string'
         };
+
+        if (errorTextObj.type === 'string') {
+            const errorTextModel = this._getConfigErrorModel(errorKey);
+
+            errorTextObj.error = error;
+            errorTextObj.message = errorTextModel[section];
+            return errorTextObj;
+        }
 
         if (errorDirective?.directive) {
             errorTextObj.message =
@@ -364,5 +390,25 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         }
 
         return parts.join(', ');
+    }
+
+    /** @hidden */
+    private _getConfigErrorModel(errorKey: string): MessagePopoverErrorConfig {
+        const configError = this._config.errors[errorKey];
+        const isPlainError = !this._isAdvancedError(configError);
+        const errorType = isPlainError ? 'error' : configError.type;
+        const headingMessage = isPlainError ? configError : configError.heading;
+        const descriptionMessage = isPlainError ? undefined : configError.description;
+
+        return {
+            type: errorType,
+            heading: headingMessage,
+            description: descriptionMessage
+        };
+    }
+
+    /** @hidden */
+    private _isAdvancedError(error: string | MessagePopoverErrorConfig): error is MessagePopoverErrorConfig {
+        return !!error && typeof error !== 'string';
     }
 }

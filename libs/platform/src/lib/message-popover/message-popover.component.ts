@@ -107,8 +107,8 @@ export class MessagePopoverComponent implements OnInit {
     }
 
     /** @hidden */
-    _closePopover(): void {
-        this._popover.close();
+    _closePopover(focusLast = true): void {
+        this._popover.close(focusLast);
     }
 
     /** @hidden */

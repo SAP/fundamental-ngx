@@ -48,7 +48,7 @@ import {
     ResponsiveBreakpointsService
 } from '@fundamental-ngx/platform/shared';
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
-import { getFormState } from '../../form-helpers';
+import { getFormState } from '../../helpers';
 import {
     DefaultHorizontalFieldLayout,
     DefaultHorizontalLabelLayout,

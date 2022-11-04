@@ -19,6 +19,7 @@ import { examples } from './examples';
 import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform/message-popover';
 import { FormGeneratorComponentExample } from './examples/form-generator/form-generator-component-example.component';
 import { FormContainerExampleComponent } from './examples/form-container-example/form-container-example.component';
+import { MessagePopoverCustomConfigExampleComponent } from './examples/custom-config-example/message-popover-custom-config-example.component';
 
 const routes: Routes = [
     {
@@ -53,7 +54,8 @@ const routes: Routes = [
         MessagePopoverDocsComponent,
         MessagePopoverHeaderComponent,
         FormGeneratorComponentExample,
-        FormContainerExampleComponent
+        FormContainerExampleComponent,
+        MessagePopoverCustomConfigExampleComponent
     ],
     providers: [currentComponentProvider('message-popover')]
 })

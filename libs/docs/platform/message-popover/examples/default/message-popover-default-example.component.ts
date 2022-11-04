@@ -8,13 +8,7 @@ import {
     ValidationErrors,
     Validators
 } from '@angular/forms';
-import { FormGroupComponent } from '@fundamental-ngx/platform/form';
 import { delay, Observable, of } from 'rxjs';
-
-interface MaxLengthErrorModel {
-    max: number;
-    actual: number;
-}
 
 @Component({
     selector: 'fdp-message-popover-default-example',
@@ -52,7 +46,7 @@ export class MessagePopoverDefaultExampleComponent {
 
     generateAsyncValidator(): AsyncValidatorFn {
         return (control: AbstractControl): Observable<ValidationErrors | null> =>
-            of(control.value === 'john@doe.com' ? null : { maxlength: true }).pipe(delay(5000));
+            of(control.value === 'john@doe.com' ? null : { maxlength: true }).pipe(delay(500));
     }
 
     onSubmit(event: Event): void {

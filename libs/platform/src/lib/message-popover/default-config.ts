@@ -3,7 +3,7 @@ import { FormStates } from '@fundamental-ngx/core/shared';
 
 export interface MessagePopoverErrorConfig {
     heading: string;
-    description: string;
+    description?: string;
     type: FormStates;
 }
 

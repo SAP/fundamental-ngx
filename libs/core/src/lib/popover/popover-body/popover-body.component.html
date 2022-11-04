@@ -9,19 +9,29 @@
     [style.min-width.px]="_popoverBodyMinWidth"
     [style.width.px]="_popoverBodyWidth"
 >
-    <div fd-scrollbar>
-        <ng-content select="[fd-popover-body-header]"></ng-content>
-
-        <ng-content select="[fd-popover-body-subheader]"></ng-content>
-
-        <ng-content></ng-content>
-
-        {{ text }}
-
-        <ng-container *ngTemplateOutlet="_templateToDisplay"></ng-container>
-
-        <ng-content select="[fd-popover-body-footer]"></ng-content>
-
-        <span class="fd-popover__arrow" [class]="_arrowClasses" *ngIf="!_noArrow"></span>
+    <div fd-scrollbar *ngIf="!disableScrollbar; else rendererWithoutScrollbar">
+        <ng-container *ngTemplateOutlet="renderer"></ng-container>
     </div>
 </div>
+
+<ng-template #rendererWithoutScrollbar>
+    <div>
+        <ng-container *ngTemplateOutlet="renderer"></ng-container>
+    </div>
+</ng-template>
+
+<ng-template #renderer>
+    <ng-content select="[fd-popover-body-header]"></ng-content>
+
+    <ng-content select="[fd-popover-body-subheader]"></ng-content>
+
+    <ng-content></ng-content>
+
+    {{ text }}
+
+    <ng-container *ngTemplateOutlet="_templateToDisplay"></ng-container>
+
+    <ng-content select="[fd-popover-body-footer]"></ng-content>
+
+    <span class="fd-popover__arrow" [class]="_arrowClasses" *ngIf="!_noArrow"></span>
+</ng-template>

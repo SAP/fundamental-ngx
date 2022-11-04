@@ -78,7 +78,7 @@ export class FormGeneratorFieldComponent implements OnInit {
     /**
      * Form field component.
      */
-    @ViewChild(FormFieldComponent) fieldRenderer: FormField;
+    @ViewChild(forwardRef(() => FormFieldComponent)) fieldRenderer: FormField;
 
     /** @hidden */
     get _placeholder(): string {

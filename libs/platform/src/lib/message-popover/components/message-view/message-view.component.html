@@ -53,15 +53,26 @@
 </ng-template>
 
 <div class="fd-message-view">
-    <section class="fd-message-view__list" [@openCloseList]="currentScreen === 'list' ? 'open' : 'closed'" fd-scrollbar>
+    <section
+        class="fd-message-view__list"
+        tabindex="-1"
+        [@openCloseList]="currentScreen === 'list' ? 'open' : 'closed'"
+        fd-scrollbar
+        [overrideTabindex]="false"
+    >
         <ul #listView fd-list class="message-popover__list fd-list--message-view" [navigationIndicator]="true">
             <ng-container *ngFor="let group of filteredErrors">
                 <li fd-list-group-header *ngIf="group.group">
                     <span fd-list-title>{{ group.group }}</span>
                 </li>
-                <ng-container *ngFor="let item of group.errors">
-                    <li fd-list-item [ngClass]="{ 'fd-list__item--byline': !!item.description.message }">
-                        <a fd-list-link [navigationIndicator]="!!item.description.message" (click)="_showDetails(item)">
+                <ng-container *ngFor="let item of group.errors; let i = index">
+                    <li
+                        fd-list-item
+                        [tabindex]="i === 0 ? 0 : -1"
+                        [ngClass]="{ 'fd-list__item--byline': !!item.description.message }"
+                        (click)="_showDetails(item)"
+                    >
+                        <a fd-list-link [navigationIndicator]="!!item.description.message">
                             <span
                                 fd-object-status
                                 class="fd-list__icon"
@@ -70,9 +81,17 @@
                             ></span>
                             <span fd-list-content>
                                 <span fd-list-title>
-                                    <a fd-link (click)="_focusElement($event, item.element)">
+                                    <a
+                                        tabindex="0"
+                                        *ngIf="item.element && !!item.description.message; else textHeading"
+                                        fd-link
+                                        (click)="_focusElement($event, item.element)"
+                                    >
                                         {{ item.fieldName }}
                                     </a>
+                                    <ng-template #textHeading>
+                                        {{ item.fieldName }}
+                                    </ng-template>
                                 </span>
                                 <span class="fd-list__subtitle">
                                     <ng-template

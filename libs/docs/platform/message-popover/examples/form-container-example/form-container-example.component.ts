@@ -1,10 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { FormGroupComponent } from '@fundamental-ngx/platform/form';
 
-interface MaxLengthErrorModel {
+interface MaxErrorModel {
     max: number;
     actual: number;
+}
+
+interface MaxLengthErrorModel {
+    actualLength: number;
+    requiredLength: number;
 }
 
 @Component({
@@ -20,8 +24,10 @@ export class FormContainerExampleComponent {
     validate = [Validators.requiredTrue];
     maxValidator = [Validators.max(40)];
     emailValidator = [Validators.email];
-    trueValidator = [Validators.requiredTrue];
+    maxLengthValidator = [Validators.maxLength(5)];
+    minLengthValidator = [Validators.minLength(5)];
 
+    maxErrorModel: MaxErrorModel;
     maxLengthErrorModel: MaxLengthErrorModel;
 
     @ViewChild('personal', { read: FormGroupDirective })
@@ -36,12 +42,14 @@ export class FormContainerExampleComponent {
     }
 
     onSubmit(event: Event): void {
-        console.log(this.personalForm.form.get('emailInput'));
-
         this.personalForm.form.get('emailInput')?.setValue('invalidEmailAddress.com');
-        this.personalForm.form.get('weeklyHoursInput')?.setValue('400');
+        this.businessForm.form.get('weeklyHoursInput')?.setValue('400');
+        this.businessForm.form.get('companyInput')?.setValue('SomeLongCompanyName');
+        this.businessForm.form.get('basicInput3')?.setValue('Hi');
 
-        this.personalForm.onSubmit(event);
-        this.businessForm.onSubmit(event);
+        setTimeout(() => {
+            this.personalForm.onSubmit(event);
+            this.businessForm.onSubmit(event);
+        });
     }
 }

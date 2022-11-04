@@ -1,19 +1,19 @@
-<fd-docs-section-title id="default" componentName="MessagePopover">
+<fd-docs-section-title id="default" componentName="message-popover">
     Message Popover with Simple forms
 </fd-docs-section-title>
 <description>
     <p>Message popover component supports both template-driven and reactive forms.</p>
     <p>
-        In order for Message popover to listen for the form errors, developers need to wrap their forms into
-        <code>fdp-message-popover-form-wrapper</code>.
+        To define human-readable form item label text, developers need to use
+        <code>fdpMessagePopoverFormItem</code> directive.
     </p>
     <p>
-        Then place <code>dp-message-popover</code> anywhere on the page, and pass instance of
-        <code>fdp-message-popover-form-wrapper</code> to it.
+        <b>IMPORTANT!:</b> Message Popover components bounds to the <code>NgForm</code> content children, and renders
+        errors when <code>ngSubmit</code> event is fired.
     </p>
     <p>
-        <b>IMPORTANT!:</b> Message Popover components bounds to the <code>NgForm</code>, and renders errors when
-        <code>ngSubmit</code> event is fired.
+        Additionally, Message Popover Component supports asynchronous validators by waiting for form status to change
+        from pending to other.
     </p>
 </description>
 <component-example>
@@ -23,22 +23,16 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="form-container" componentName="MessagePopover">
+<fd-docs-section-title id="form-container" componentName="message-popover">
     Message Popover with Form Container component
 </fd-docs-section-title>
 <description>
-    <p>Message popover component supports both template-driven and reactive forms.</p>
+    <p>Message popover can also work with <a routerLink="/platform/form-container">Form Container</a> Component.</p>
+    <p>Syntax is similar with standard usage with some additional features.</p>
+    <p>Form container component also gives more advanced way of defining error texts and their types.</p>
     <p>
-        In order for Message popover to listen for the form errors, developers need to wrap their forms into
-        <code>fdp-message-popover-form-wrapper</code>.
-    </p>
-    <p>
-        Then place <code>dp-message-popover</code> anywhere on the page, and pass instance of
-        <code>fdp-message-popover-form-wrapper</code> to it.
-    </p>
-    <p>
-        <b>IMPORTANT!:</b> Message Popover components bounds to the <code>NgForm</code>, and renders errors when
-        <code>ngSubmit</code> event is fired.
+        By placing <code>*fdpFormFieldError</code> directive with error parameters, developers can define own heading,
+        description and error type.
     </p>
 </description>
 <component-example>
@@ -48,22 +42,37 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="form-generator" componentName="MessagePopover">
+<fd-docs-section-title id="custom-config" componentName="message-popover">
+    Message Popover with custom error configuration
+</fd-docs-section-title>
+<description>
+    <p>Message Popover component comes with predefined common error descriptions.</p>
+    <p>
+        Developers can change these text by using <code>withConfig</code> method of
+        <code>PlatformMessagePopoverModule</code> while importing it into application's module.
+    </p>
+    <p>Error record could a simple string, or an advanced object with heading, description and error type.</p>
+    <p>If string is passed, error type will be automatically threatened as <code>error</code>.</p>
+</description>
+<component-example>
+    <fdp-message-popover-custom-config-example></fdp-message-popover-custom-config-example>
+</component-example>
+<code-example [exampleFiles]="messagePopoverConfigExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="form-generator" componentName="message-popover">
     Message Popover with Form Generator component
 </fd-docs-section-title>
 <description>
-    <p>Message popover component supports both template-driven and reactive forms.</p>
+    <p>Message Popover component can also work with components that have inner forms.</p>
     <p>
-        In order for Message popover to listen for the form errors, developers need to wrap their forms into
-        <code>fdp-message-popover-form-wrapper</code>.
+        For this use-case developers need to pass forms and form fields as corresponding <code>@input</code> properties:
+        <code>forms</code> and <code>formFields</code>.
     </p>
     <p>
-        Then place <code>dp-message-popover</code> anywhere on the page, and pass instance of
-        <code>fdp-message-popover-form-wrapper</code> to it.
-    </p>
-    <p>
-        <b>IMPORTANT!:</b> Message Popover components bounds to the <code>NgForm</code>, and renders errors when
-        <code>ngSubmit</code> event is fired.
+        As an example, <a routerLink="/platform/form-generator">Form Generator</a> component which contains inner form
+        that are not accessible with <code>@ContentChildren</code> for Message Popover.
     </p>
 </description>
 <component-example>

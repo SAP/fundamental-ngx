@@ -5,6 +5,7 @@ import {
     Component,
     ElementRef,
     EventEmitter,
+    HostBinding,
     Input,
     Output,
     ViewChild,
@@ -103,7 +104,7 @@ export class MessageViewComponent implements AfterViewInit {
 
     /** Event emitted when user clicks on the field link to focus on the field itself. */
     @Output()
-    closePopover = new EventEmitter<void>();
+    closePopover = new EventEmitter<boolean>();
 
     /** @hidden */
     @ViewChild('listView', { read: ElementRef })
@@ -112,6 +113,10 @@ export class MessageViewComponent implements AfterViewInit {
     /** @hidden */
     @ViewChild('detailsView', { read: ElementRef })
     private _detailsView: ElementRef;
+
+    /** @Hidden */
+    @HostBinding('class')
+    private readonly _initialClass = 'fd-message-popover__view-container';
 
     /** @hidden */
     constructor(
@@ -132,6 +137,7 @@ export class MessageViewComponent implements AfterViewInit {
     /** @hidden */
     _showDetails(entry: MessagePopoverEntry): void {
         if (!entry.description.message) {
+            this._focusElement(undefined, entry.element);
             return;
         }
         this.currentScreen = 'details';
@@ -139,13 +145,15 @@ export class MessageViewComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    _focusElement(event: MouseEvent, item?: ElementRef): void {
+    _focusElement(event?: MouseEvent, item?: ElementRef): void {
         if (!item?.nativeElement) {
             return;
         }
-        event.stopImmediatePropagation();
-        const tabbableElement = this._tabbableService.getTabbableElement(item.nativeElement);
-        tabbableElement?.focus();
-        this.closePopover.emit();
+        event?.stopImmediatePropagation();
+        this.closePopover.emit(false);
+        setTimeout(() => {
+            const tabbableElement = this._tabbableService.getTabbableElement(item.nativeElement);
+            tabbableElement?.focus();
+        });
     }
 }
