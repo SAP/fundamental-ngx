@@ -931,6 +931,26 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this.recalculateTableColumnWidth();
     }
 
+    /** expand all rows */
+    expandAll(): void {
+        this._tableRows.forEach((e) => {
+            e.expanded = true;
+            e.hidden = false;
+        });
+        this._onTableRowsChanged();
+    }
+
+    /** collapse all rows */
+    collapseAll(): void {
+        this._tableRows.forEach((e) => {
+            e.expanded = false;
+            if (e.parent) {
+                e.hidden = true;
+            }
+        });
+        this._onTableRowsChanged();
+    }
+
     /** Search in table */
     search(searchInput: SearchInput): void {
         this._tableService.search(searchInput);
@@ -1419,8 +1439,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _dragDropUpdateDropRowAttributes(dragRow: TableRow, dropRow: TableRow): void {
-        dragRow.parent = dropRow;
-        dragRow.level = dropRow.level + 1;
+        dragRow.parent = dropRow.parent;
+        dragRow.level = dropRow.level;
 
         if (!this._isTreeRow(dropRow)) {
             dropRow.type = TableRowType.TREE;
@@ -1435,6 +1455,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     private _dragDropRearrangeTreeRows(dragRow: TableRow, dropRow: TableRow): void {
         const allRows = this._tableRows;
+        let rowsBefore: any;
+        let rowsAfter: any;
 
         const dragRowIndex = allRows.findIndex((row) => row === dragRow);
         const dragRowChildren = this._findRowChildren(dragRow);
@@ -1444,8 +1466,13 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         const dropRowIndex = allRows.findIndex((row) => row === dropRow);
         const dropRowChildren = this._findRowChildren(dropRow);
 
-        const rowsBefore = allRows.slice(0, dropRowIndex + dropRowChildren.length + 1);
-        const rowsAfter = allRows.slice(dropRowIndex + dropRowChildren.length + 1);
+        if (dragRowIndex > dropRowIndex) {
+            rowsBefore = allRows.slice(0, dropRowChildren.length + 1 - dropRowIndex);
+            rowsAfter = allRows.slice(dropRowChildren.length + 1 - dropRowIndex);
+        } else {
+            rowsBefore = allRows.slice(0, dropRowIndex + dropRowChildren.length + 1);
+            rowsAfter = allRows.slice(dropRowIndex + dropRowChildren.length + 1);
+        }
 
         this._tableRows = [...rowsBefore, ...rowsToMove, ...rowsAfter];
     }

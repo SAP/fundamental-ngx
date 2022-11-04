@@ -135,4 +135,10 @@ export abstract class Table<T = any> {
 
     /** Cancels editing and discards newly added rows */
     abstract cancelEditing(): void;
+
+    /** Expand all the rows of the table */
+    abstract expandAll(): void;
+
+    /** Collapse all the rows of the table */
+    abstract collapseAll(): void;
 }
