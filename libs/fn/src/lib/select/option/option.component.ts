@@ -45,6 +45,10 @@ export class OptionComponent implements OnDestroy, FocusableOption {
     @Input()
     selected = false;
 
+    /** Label of the option. Similar to how a native select operates. */
+    @Input()
+    label: string;
+
     /** The tabindex of the option. Default is 0. */
     @Input()
     tabindex = '0';
@@ -55,6 +59,14 @@ export class OptionComponent implements OnDestroy, FocusableOption {
 
     /** Whether this option is hidden */
     hidden = false;
+
+    /**
+     * @hidden
+     * The displayed value of the option. Used when label not passed by user. e.g. <li fn-option [value]='Apple'> Apple </li>
+     */
+    get _viewValue(): string {
+        return this.label ?? (this.elementRef.nativeElement.textContent || '').trim();
+    }
 
     /** @hidden */
     private readonly _destroyed$ = new Subject<void>();

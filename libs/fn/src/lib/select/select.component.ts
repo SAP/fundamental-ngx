@@ -15,12 +15,13 @@ import {
 } from '@angular/core';
 import { OptionComponent } from './option/option.component';
 import { KeyUtil, resizeObservable } from '@fundamental-ngx/core/utils';
-import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SelectMenuDirective } from './select-menu.directive';
 import { Select } from './select.interface';
 import { FN_SELECT_PROVIDER } from './select.token';
+import { SelectionModel } from '@angular/cdk/collections';
 /**
  * Select component intended to mimic
  * the behaviour of the native select element.
@@ -70,6 +71,23 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     editable = false;
 
     /** @hidden */
+    _inputTextValue = '';
+
+    /** Get the input text of the input. */
+    get inputText(): string {
+        return this._inputTextValue;
+    }
+
+    /** Set the input text of the input. */
+    set inputText(value: string) {
+        this._inputTextValue = value;
+        if (this.editable) {
+            this._filterItems();
+        }
+        this.onChange(value);
+    }
+
+    /** @hidden */
     @ContentChildren(OptionComponent)
     options: QueryList<OptionComponent>;
 
@@ -79,6 +97,9 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
 
     menu: SelectMenuDirective;
 
+    /** @hidden */
+    _selectionModel: SelectionModel<OptionComponent>;
+
     @Input()
     get value(): any {
         return this._internalValue;
@@ -87,11 +108,14 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     set value(newValue: any) {
         if (newValue !== this._internalValue) {
             this.writeValue(newValue);
-            if (this.editable) {
-                this._filterItems();
-            }
         }
-        this.onChange(newValue);
+    }
+
+    /** @hidden
+     * Returns selected option
+     */
+    get _selected(): OptionComponent {
+        return this._selectionModel.selected[0];
     }
 
     _selectWidth = 0;
@@ -106,6 +130,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
 
     /** @hidden */
     ngAfterContentInit(): void {
+        this._selectionModel = new SelectionModel<OptionComponent>(false);
         this._selectWidth = this._elRef.nativeElement.getBoundingClientRect().width;
 
         this._subscriptions.add(
@@ -123,6 +148,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         if (selectedOption) {
             setTimeout(() => {
                 selectedOption.selected = true;
+                this._selectionModel.select(selectedOption);
             });
         }
     }
@@ -130,6 +156,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
+        this._selectionModel.clear();
     }
 
     /** @hidden */
@@ -147,6 +174,9 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         ) {
             event.preventDefault();
             this.opened = true;
+        } else if (KeyUtil.isKeyCode(event, [DOWN_ARROW]) && this.opened) {
+            event.preventDefault();
+            this.options.find((item) => !item.hidden)?.focus();
         }
     }
 
@@ -171,7 +201,9 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         this.options.forEach((option) => {
             option === clickedOption ? (option.selected = true) : (option.selected = false);
         });
-        this.value = clickedOption.value;
+        clickedOption && this._selectionModel.select(clickedOption);
+        this.value = this._selected.value;
+        this.inputText = this._selected._viewValue;
         this.hideMenu();
         this._cdRef.detectChanges();
     }
@@ -220,18 +252,19 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     private _filterItems(): void {
         let visibleOptions = 0;
         this.options.forEach((option) => {
-            if (!option.value.toLowerCase().startsWith(this._internalValue.toLowerCase())) {
-                option._hide();
-            } else {
+            if (option._viewValue.toLowerCase().startsWith(this.inputText.toLowerCase())) {
                 visibleOptions++;
                 option._show();
-                if (!this.opened) {
-                    this.opened = true;
-                }
+            } else {
+                option._hide();
             }
-            option.selected = option.value.toLowerCase() === this._internalValue.toLowerCase();
-        });
 
+            option.selected = option.value?.toLowerCase() === this.value?.toLowerCase();
+        });
         visibleOptions > 0 ? (this._optionsListEmpty = false) : (this._optionsListEmpty = true);
+
+        if (!this.opened && !this._optionsListEmpty) {
+            this.opened = true;
+        }
     }
 }
