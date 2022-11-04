@@ -6,6 +6,5 @@ export * from './directives/message-popover-form-item.directive';
 export * from './models/message-popover-entry.interface';
 export * from './models/message-popover-error.interface';
 export * from './models/message-popover-wrapper.interface';
-export * from './config';
 export * from './default-config';
 export * from './utils';
