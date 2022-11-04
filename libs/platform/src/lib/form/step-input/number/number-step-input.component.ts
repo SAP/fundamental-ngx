@@ -14,7 +14,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { formatNumber } from '@angular/common';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
@@ -56,6 +56,7 @@ export class NumberStepInputComponent extends StepInputComponent {
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
@@ -65,7 +66,18 @@ export class NumberStepInputComponent extends StepInputComponent {
         @Inject(LOCALE_ID) readonly localeId: string,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
-        super(cd, elementRef, ngControl, ngForm, formField, formControl, config, renderer, rtlService);
+        super(
+            cd,
+            elementRef,
+            ngControl,
+            controlContainer,
+            ngForm,
+            formField,
+            formControl,
+            config,
+            renderer,
+            rtlService
+        );
     }
 
     /** @hidden

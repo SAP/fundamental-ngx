@@ -14,7 +14,7 @@ import {
     SkipSelf,
     ViewChild
 } from '@angular/core';
-import { ControlContainer, ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 import { FormStates, isValidControlState, Nullable } from '@fundamental-ngx/core/shared';
@@ -187,7 +187,8 @@ export abstract class BaseInput
         cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @SkipSelf() readonly ngForm: ControlContainer,
+        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
+        @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl
     ) {
@@ -331,10 +332,11 @@ export abstract class BaseInput
      */
     protected updateErrorState(): void {
         const parent = this.ngForm;
+        const parentControlContainer = this.controlContainer;
         const control = this.ngControl ? (this.ngControl.control as FormControl) : null;
         const newStatusIsError = !!(
             control?.invalid &&
-            (control.dirty || control.touched || (parent as any)?.submitted)
+            (control.dirty || control.touched || parent?.submitted || (parentControlContainer as any)?.submitted)
         );
 
         if (newStatusIsError !== this.controlInvalid) {

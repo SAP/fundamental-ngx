@@ -21,7 +21,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
@@ -118,6 +118,7 @@ export class RadioGroupComponent
         elementRef: ElementRef,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
@@ -130,6 +131,7 @@ export class RadioGroupComponent
             elementRef,
             _responsiveBreakpointsService,
             ngControl,
+            controlContainer,
             ngForm,
             formField,
             formControl,

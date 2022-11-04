@@ -17,7 +17,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { FdCheckboxValues, CheckboxComponent as FdCheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
@@ -132,13 +132,14 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     constructor(
         elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         protected _changeDetector: ChangeDetectorRef,
         @Attribute('tabIndexValue') public tabIndexValue: number = 0
     ) {
-        super(_changeDetector, elementRef, ngControl, ngForm, formField, formControl);
+        super(_changeDetector, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
         // necessary to fulfill baseInput check.
         // case: fdp-checkbox passed in declarative fdp-checkbox-group without id and name.
         this.name = `fdp-checkbox-${nextUniqueId++}`;

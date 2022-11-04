@@ -20,7 +20,7 @@ import {
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import {
     BACKSPACE,
     CONTROL,
@@ -375,6 +375,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         protected readonly _cd: ChangeDetectorRef,
         elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
         protected multiComboboxConfig: MultiComboboxConfig,
@@ -382,7 +383,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         @Inject(MAP_LIMIT) private _mapLimit: number
     ) {
-        super(_cd, elementRef, ngControl, ngForm, formField, formControl);
+        super(_cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
     /** @hidden */

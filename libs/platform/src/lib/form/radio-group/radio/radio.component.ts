@@ -15,7 +15,7 @@ import {
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FocusableOption } from '@angular/cdk/a11y';
 
 import { RadioButtonComponent as CoreRadioButtonComponent } from '@fundamental-ngx/core/radio';
@@ -94,11 +94,12 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl
     ) {
-        super(cd, elementRef, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
 
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;

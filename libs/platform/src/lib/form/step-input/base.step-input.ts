@@ -8,7 +8,7 @@ import {
     ChangeDetectorRef,
     ElementRef
 } from '@angular/core';
-import { NgForm, NgControl } from '@angular/forms';
+import { NgForm, NgControl, ControlContainer } from '@angular/forms';
 import { BehaviorSubject, of } from 'rxjs';
 import { takeUntil, switchMap, map } from 'rxjs/operators';
 
@@ -207,6 +207,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
         ngControl: NgControl,
+        controlContainer: ControlContainer,
         ngForm: NgForm,
         formField: FormField,
         formControl: FormFieldControl,
@@ -214,7 +215,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         private _renderer: Renderer2,
         private _rtlService: RtlService
     ) {
-        super(cd, elementRef, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
     /** @hidden */

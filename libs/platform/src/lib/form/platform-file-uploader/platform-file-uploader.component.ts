@@ -13,7 +13,7 @@ import {
     Self,
     SkipSelf
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
@@ -130,12 +130,13 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
         protected _cd: ChangeDetectorRef,
         elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
-        super(_cd, elementRef, ngControl, ngForm, formField, formControl);
+        super(_cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
     /** @hidden */

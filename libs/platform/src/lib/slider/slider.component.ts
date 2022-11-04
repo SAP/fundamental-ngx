@@ -12,7 +12,7 @@ import {
     SkipSelf,
     ViewEncapsulation
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { SliderTickMark } from '@fundamental-ngx/core/slider';
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
@@ -100,11 +100,12 @@ export class SliderComponent extends BaseInput {
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl
     ) {
-        super(cd, elementRef, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
     /** value for slider control */

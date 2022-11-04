@@ -31,7 +31,7 @@ import {
     Self,
     SkipSelf
 } from '@angular/core';
-import { ControlContainer, NgControl } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 
@@ -86,11 +86,12 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
-        @Optional() @SkipSelf() ngForm: ControlContainer,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
+        @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl
     ) {
-        super(cd, elementRef, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
     /** @hidden */

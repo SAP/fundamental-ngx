@@ -16,7 +16,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, NgControl } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { BACKSPACE, DELETE } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
@@ -182,12 +182,13 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
-        @Optional() @SkipSelf() ngForm: ControlContainer,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
+        @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         protected _textAreaConfig: TextAreaConfig
     ) {
-        super(cd, elementRef, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }

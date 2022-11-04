@@ -18,7 +18,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { RangeSelector } from '@fundamental-ngx/core/utils';
 import { SelectionModel } from '@angular/cdk/collections';
 
@@ -123,6 +123,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
         elementRef: ElementRef,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
@@ -135,6 +136,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
             elementRef,
             _responsiveBreakpointsService,
             ngControl,
+            controlContainer,
             ngForm,
             formField,
             formControl,

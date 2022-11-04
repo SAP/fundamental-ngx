@@ -12,7 +12,7 @@ import {
     Self,
     SkipSelf
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { BehaviorSubject, Subject } from 'rxjs';
 
@@ -171,11 +171,12 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
     private _isInLineLayoutEnabled = false;
 
     /** @hidden */
-    constructor(
+    protected constructor(
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
         @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
@@ -183,7 +184,7 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig?: ResponsiveBreakPointConfig
     ) {
-        super(cd, elementRef, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
 
         this._responsiveBreakPointConfig = _defaultResponsiveBreakPointConfig || new ResponsiveBreakPointConfig();
     }

@@ -11,7 +11,7 @@ import {
     Self,
     SkipSelf
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { SwitchConfig } from './switch.config';
 
@@ -67,12 +67,13 @@ export class SwitchComponent extends BaseInput {
         cd: ChangeDetectorRef,
         elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         protected _switchConfig: SwitchConfig
     ) {
-        super(cd, elementRef, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
     /** update controller on switch state change */
