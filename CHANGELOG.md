@@ -1,3 +1,12 @@
+## [0.36.3-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.20...v0.36.3-rc.21) (2022-11-04)
+
+
+### Bug Fixes
+
+* **core, platform:** inline help in form ([#8924](https://github.com/SAP/fundamental-ngx/issues/8924)) ([1e22525](https://github.com/SAP/fundamental-ngx/commit/1e22525c02dd1f3ef70873f201f272323d70bf14))
+
+
+
 ## [0.36.3-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.19...v0.36.3-rc.20) (2022-11-04)
 
 
