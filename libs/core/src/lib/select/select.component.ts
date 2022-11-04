@@ -267,17 +267,17 @@ export class SelectComponent
     /** @hidden */
     _selectionModel: SelectionModel<OptionComponent>;
 
-    /** It can be used to further add css classes to the select */
-    selectClass = '';
+    /** @hidden It can be used to further add css classes to the select */
+    _selectClass = '';
 
-    /** It can be used to further add css classes to input of the select */
-    inputClass = '';
+    /** @hidden It can be used to further add css classes to input of the select */
+    _inputClass = '';
 
-    /** It can be used to further add css classes to button of the select */
-    buttonClass = '';
+    /** @hidden It can be used to further add css classes to button of the select */
+    _buttonClass = '';
 
-    /** It can be used to further add css classes to addon element of the select */
-    addOnClass = '';
+    /** @hidden It can be used to further add css classes to addon element of the select */
+    _addOnClass = '';
 
     /**
      * @hidden

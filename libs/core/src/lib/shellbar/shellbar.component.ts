@@ -118,10 +118,10 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
     _applyShellbarModeToSelect(): void {
         if (this._selectComponent) {
             this._selectComponent._controlElementRef.nativeElement.style.margin = '0';
-            this._selectComponent.selectClass = 'fd-shellbar__input-group';
-            this._selectComponent.inputClass = 'fd-shellbar__input-group-input fd-shellbar__input-group-input--select';
-            this._selectComponent.addOnClass = 'fd-shellbar__input-group-addon';
-            this._selectComponent.buttonClass = 'fd-shellbar__button';
+            this._selectComponent._selectClass = 'fd-shellbar__input-group';
+            this._selectComponent._inputClass = 'fd-shellbar__input-group-input fd-shellbar__input-group-input--select';
+            this._selectComponent._addOnClass = 'fd-shellbar__input-group-addon';
+            this._selectComponent._buttonClass = 'fd-shellbar__button';
             this._handleSelectIsOpenChange();
         }
     }
@@ -130,12 +130,12 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
     _applyShellbarModeToCombobox(): void {
         if (this.comboboxComponent && this.comboboxComponent.inputGroup) {
             this.comboboxComponent.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group-input');
-            this.comboboxComponent.addOnClass = 'fd-shellbar__input-group-addon';
-            this.comboboxComponent.buttonClass = 'fd-shellbar__button';
+            this.comboboxComponent._addOnClass = 'fd-shellbar__input-group-addon';
+            this.comboboxComponent._buttonClass = 'fd-shellbar__button';
 
-            this.comboboxComponent.inputGroup.inputGroupClass = 'fd-shellbar__input-group';
-            this.comboboxComponent.inputGroup.addOnClass = 'fd-shellbar__input-group-addon';
-            this.comboboxComponent.inputGroup.inputClass = 'fd-shellbar__input-group-input';
+            this.comboboxComponent.inputGroup._inputGroupClass = 'fd-shellbar__input-group';
+            this.comboboxComponent.inputGroup._addOnClass = 'fd-shellbar__input-group-addon';
+            this.comboboxComponent.inputGroup._inputClass = 'fd-shellbar__input-group-input';
             this.comboboxComponent.inputGroup._buttons.forEach((button) => {
                 button.elementRef().nativeElement.classList.add('fd-shellbar__button');
                 button.elementRef().nativeElement.setAttribute('aria-expanded', 'true');

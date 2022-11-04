@@ -31,7 +31,7 @@
         class="fd-select__control"
         role="list"
         #selectControl
-        [ngClass]="selectClass"
+        [ngClass]="_selectClass"
         [class]="state ? 'is-' + state : ''"
         [class.is-active]="_isOpen"
         [class.is-expanded]="_isOpen"
@@ -54,7 +54,7 @@
         (focus)="_onFocus()"
         (blur)="_onBlur()"
     >
-        <div [ngClass]="inputClass" role="listitem" class="fd-select__text-content" [attr.aria-label]="triggerValue">
+        <div [ngClass]="_inputClass" role="listitem" class="fd-select__text-content" [attr.aria-label]="triggerValue">
             <ng-container
                 [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
                 [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: selected }"
@@ -65,12 +65,12 @@
                 {{ triggerValue }}
             </ng-template>
         </div>
-        <div [ngClass]="addOnClass">
+        <div [ngClass]="_addOnClass">
             <button
                 fd-button
                 tabindex="-1"
                 class="fd-button--transparent fd-select__button"
-                [ngClass]="buttonClass"
+                [ngClass]="_buttonClass"
                 *ngIf="!readonly"
                 [disabled]="disabled"
                 [glyph]="glyph"
