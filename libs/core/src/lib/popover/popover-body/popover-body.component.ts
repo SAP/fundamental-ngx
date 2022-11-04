@@ -26,7 +26,6 @@ import {
 } from '@fundamental-ngx/core/shared';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { ScrollbarComponent } from '@fundamental-ngx/core/scrollbar';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -96,10 +95,6 @@ export class PopoverBodyComponent {
     /** Close event from popover body */
     onClose = new Subject<void>();
 
-    /** @hidden */
-    @ViewChild(ScrollbarComponent)
-    _scrollbarComponent: ScrollbarComponent;
-
     /** Handler escape keydown */
     @HostListener('keyup', ['$event'])
     bodyKeyupHandler(event: KeyboardEvent): void {
@@ -150,10 +145,6 @@ export class PopoverBodyComponent {
 
     /** @hidden */
     _focusFirstTabbableElement(): void {
-        // remove tabindex from scrollbar
-        if (this._scrollbarComponent) {
-            this._scrollbarComponent._eleRef.nativeElement.removeAttribute('tabindex');
-        }
         if (this._focusAutoCapture) {
             this._cdkTrapFocus.focusTrap.focusFirstTabbableElement();
         }
