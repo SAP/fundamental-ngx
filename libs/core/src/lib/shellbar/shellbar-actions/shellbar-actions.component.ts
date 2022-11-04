@@ -169,10 +169,10 @@ export class ShellbarActionsComponent implements AfterViewInit {
     /** @hidden
      *  called for value=false when cancel clicked and for true when search clicked from action sheet
      */
-    _showFullWidthCombobox(value: boolean): void {
+    _showFullWidthCombobox(value: boolean, shouldOpenPopover = true): void {
         this._enableComboboxForMobileMode = value;
         if (value) {
-            this._onSearchButtonClick();
+            this._onSearchButtonClick(shouldOpenPopover);
             this._addFullWidthClass(true);
             this._comboboxComponent._comboboxElement.style.width = '100%';
         } else {

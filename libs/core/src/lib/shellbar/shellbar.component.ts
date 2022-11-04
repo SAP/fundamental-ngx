@@ -157,14 +157,16 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
         // if size changed and changed to 's' with combobox open.
         if (currentSize !== this.size && this.size === 's') {
             if (this.comboboxComponent && this._shellbarActionsComponent.showCombobox) {
-                this._shellbarActionsComponent._showFullWidthCombobox(true);
+                const isPopoverOpened = this.comboboxComponent.open;
+                this._shellbarActionsComponent._showFullWidthCombobox(true, isPopoverOpened);
             }
         }
         // if size was 's' and changed to any other size with combobox open.
         else if (currentSize === 's' && currentSize !== this.size) {
             if (this.comboboxComponent && this._shellbarActionsComponent.showCombobox) {
+                const isPopoverOpened = this.comboboxComponent.open;
                 this._shellbarActionsComponent._showFullWidthCombobox(false);
-                this._shellbarActionsComponent._onSearchButtonClick(false);
+                this._shellbarActionsComponent._onSearchButtonClick(isPopoverOpened);
             }
         }
     }
