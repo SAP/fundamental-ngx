@@ -18,8 +18,8 @@ import { MessagePopoverDocsComponent } from './message-popover-docs.component';
 import { examples } from './examples';
 import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform/message-popover';
 import { FormGeneratorComponentExample } from './examples/form-generator/form-generator-component-example.component';
-import { FormContainerExampleComponent } from './examples/form-container-example/form-container-example.component';
-import { MessagePopoverCustomConfigExampleComponent } from './examples/custom-config-example/message-popover-custom-config-example.component';
+import { FormContainerExampleComponent } from './examples/form-container/form-container-example.component';
+import { MessagePopoverCustomConfigExampleComponent } from './examples/custom-config/message-popover-custom-config-example.component';
 
 const routes: Routes = [
     {
