@@ -36,6 +36,13 @@ const routes: Routes = [
         },
         loadChildren: () => import('./fn/fn-documentation.module').then((m) => m.FnDocumentationModule)
     },
+    {
+        path: 'cx',
+        data: {
+            library: 'CX'
+        },
+        loadChildren: () => import('./cx/cx-documentation.module').then((m) => m.CxDocumentationModule)
+    },
     { path: '', redirectTo: 'core', pathMatch: 'full' }
 ];
 

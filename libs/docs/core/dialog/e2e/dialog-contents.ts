@@ -10,7 +10,6 @@ export const mobileProperty = 'fd-dialog__content--mobile';
 export const defaultPrice = 'Total price: 0€';
 export const customClass = 'custom';
 export const outlineProperty = 'outline-style';
-export const fullscreenClass = 'full-screen';
 export const mobileClass = 'mobile';
 export const noMobileSpacingClass = 'no-mobile-stretch';
 export const topPaddingProperty = 'padding-top';

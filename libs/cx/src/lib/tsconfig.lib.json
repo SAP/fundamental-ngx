@@ -1,0 +1,19 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../dist/out-tsc",
+        "target": "es2020",
+        "declaration": true,
+        "declarationMap": true,
+        "types": [],
+        "lib": ["dom", "es2018"]
+    },
+    "angularCompilerOptions": {
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "enableResourceInlining": true
+    },
+    "files": ["./index.ts"],
+    "exclude": ["test.ts", "**/*.spec.ts"],
+    "include": ["**/*.ts"]
+}

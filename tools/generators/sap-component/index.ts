@@ -82,7 +82,7 @@ function updateApiFiles(schema: SapComponentSchema): Rule {
         if (!apiFilesVar || !ts.isObjectLiteralExpression(apiFilesVar)) {
             throw new SchematicsException(`Could not resolve "API_FILES" variable in "${filePath}"`);
         }
-        const prefixComma = apiFilesVar.properties.hasTrailingComma ? '' : ', ';
+        const prefixComma = apiFilesVar.properties.hasTrailingComma || apiFilesVar.properties.length === 0 ? '' : ', ';
         const componentName = strings.classify(`${schema.name}Component`);
         insert(tree, filePath, [
             new InsertChange(
@@ -286,6 +286,8 @@ function getProjectDirName(schema: SapComponentSchema): string {
             return 'platform';
         case 'experimental':
             return 'fn';
+        case 'cx':
+            return 'cx';
         default:
             throw new SchematicsException(`Could not resolve project type from the given value: "${schema.project}"`);
     }
@@ -299,6 +301,8 @@ function getProjectTag(schema: SapComponentSchema): string {
             return 'fdp';
         case 'experimental':
             return 'fn';
+        case 'cx':
+            return 'cx';
         default:
             throw new SchematicsException(`Could not resolve project type from the given value: "${schema.project}"`);
     }
@@ -314,5 +318,5 @@ function startCaseName(str: string): string {
 
 interface SapComponentSchema {
     name: string;
-    project: 'core' | 'platform' | 'experimental';
+    project: 'core' | 'platform' | 'experimental' | 'cx';
 }
