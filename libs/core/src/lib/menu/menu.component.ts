@@ -101,7 +101,7 @@ export class MenuComponent
     _menuRootTemplate: TemplateRef<any>;
 
     /** @hidden Reference to all menu Items */
-    @ContentChildren(MenuItemComponent, { descendants: true })
+    @ContentChildren(MenuItemComponent)
     _menuItems: QueryList<MenuItemComponent>;
 
     /** @hidden Whether use a menu in mobile mode */
