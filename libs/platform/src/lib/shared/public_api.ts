@@ -23,6 +23,7 @@ export * from './form/form-group';
 export * from './form/form-options';
 export * from './form/inline-layout-collection-base.input';
 export * from './form/hint-options';
+export * from './form/form-error';
 
 export * from './pipes/convert-bytes/convert-bytes.pipe';
 export * from './pipes/pipe.module';

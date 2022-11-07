@@ -1,4 +1,4 @@
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -296,14 +296,16 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     /** @hidden */
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
+        elementRef: ElementRef,
         @Optional() @Self() public ngControl: NgControl,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @Self() public ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {
-        super(_changeDetectorRef, ngControl, ngForm, formField, formControl);
+        super(_changeDetectorRef, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
 
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');

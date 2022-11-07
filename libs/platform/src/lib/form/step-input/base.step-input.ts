@@ -1,5 +1,14 @@
-import { Input, Output, EventEmitter, Renderer2, Directive, OnInit, ChangeDetectorRef } from '@angular/core';
-import { NgForm, NgControl } from '@angular/forms';
+import {
+    Input,
+    Output,
+    EventEmitter,
+    Renderer2,
+    Directive,
+    OnInit,
+    ChangeDetectorRef,
+    ElementRef
+} from '@angular/core';
+import { NgForm, NgControl, ControlContainer } from '@angular/forms';
 import { BehaviorSubject, of } from 'rxjs';
 import { takeUntil, switchMap, map } from 'rxjs/operators';
 
@@ -194,17 +203,19 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** @hidden */
-    constructor(
+    protected constructor(
         cd: ChangeDetectorRef,
+        elementRef: ElementRef,
         ngControl: NgControl,
+        controlContainer: ControlContainer,
         ngForm: NgForm,
         formField: FormField,
-        formControl: FormFieldControl<any>,
+        formControl: FormFieldControl,
         protected config: StepInputConfig,
         private _renderer: Renderer2,
         private _rtlService: RtlService
     ) {
-        super(cd, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
     /** @hidden */

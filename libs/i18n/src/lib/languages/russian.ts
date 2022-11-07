@@ -741,6 +741,19 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     platformWizardGenerator: {
         summarySectionEditStep: 'Редактировать'
     },
+    platformMessagePopover: {
+        allErrors: 'Все',
+        defaultErrors: {
+            email: 'Значение поля не соответствует формату E-mail',
+            max: 'Значение поля превышает максимально допустимое',
+            maxLength: 'Длина значения поля превышает максимально допустимое',
+            min: 'Значение поля меньше минимально допустимого',
+            minLength: 'Длина значения поля меньше максимально допустимого',
+            pattern: 'Поле не соответствует формату',
+            required: 'Обязательное поле',
+            requiredTrue: 'Обязательное поле'
+        }
+    },
     fnSlider: {
         minMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',
         valueminDetails: 'Значение равно {{ value }}',

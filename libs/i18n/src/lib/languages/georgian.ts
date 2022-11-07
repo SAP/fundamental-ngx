@@ -538,6 +538,19 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     platformWizardGenerator: {
         summarySectionEditStep: 'შესწორება'
     },
+    platformMessagePopover: {
+        allErrors: 'ყველა',
+        defaultErrors: {
+            email: 'ელ-ფოსტა არასწორია',
+            max: 'ველის მნიშვნელობა აღემატება დაშვებულ მაქსიმუმს',
+            maxLength: 'ველის მოცულობა აღემატება დაშვებულ მაქსიმუმს',
+            min: 'ველის მნიშვნელობა აუცილებელ მინიმუმზე ნაკლებია',
+            minLength: 'ველის მოცულობა აუცილებელ მინიმუმზე ნაკლებია',
+            pattern: 'ველის მნიშვნელობა არასწორია',
+            required: 'ველი სავალდებულოა',
+            requiredTrue: 'ველის შეყვანა სავალდებულოა'
+        }
+    },
     fnSlider: {
         minMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{ min }}, მაქსიმალური - {{ max }}',
         valueminDetails: 'მნიშვნელობა არის {{ value }}',

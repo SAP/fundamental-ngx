@@ -14,7 +14,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { SelectComponent as CoreSelect } from '@fundamental-ngx/core/select';
 import { DynamicComponentService } from '@fundamental-ngx/core/utils';
@@ -75,13 +75,14 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         readonly cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
         @Optional() @Self() readonly ngForm: NgForm,
         readonly _dynamicComponentService: DynamicComponentService,
         readonly _selectConfig: SelectConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
     ) {
-        super(cd, elementRef, ngControl, ngForm, _selectConfig, formField, formControl);
+        super(cd, elementRef, ngControl, controlContainer, ngForm, _selectConfig, formField, formControl);
     }
 
     /** @hidden */

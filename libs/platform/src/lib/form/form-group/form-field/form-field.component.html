@@ -30,7 +30,27 @@
             <ng-content></ng-content>
         </ng-template>
 
-        <fd-form-message *ngIf="hasErrors() && i18Strings" type="error">
+        <ng-container *ngIf="hasErrors() && groupedErrors.length > 0">
+            <fd-form-message *ngFor="let error of groupedErrors" [type]="error.directive.type">
+                <ng-template
+                    [ngIf]="error.directive._headingTemplateRef"
+                    [ngTemplateOutlet]="error.directive._headingTemplateRef"
+                    [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
+                >
+                </ng-template>
+                <ng-container *ngIf="error.directive._headingTemplateRef && error.directive._descriptionTemplateRef">
+                    <br />
+                </ng-container>
+                <ng-template
+                    [ngIf]="error.directive._descriptionTemplateRef"
+                    [ngTemplateOutlet]="error.directive._descriptionTemplateRef"
+                    [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
+                >
+                </ng-template>
+            </fd-form-message>
+        </ng-container>
+
+        <fd-form-message *ngIf="groupedErrors.length === 0 && hasErrors() && i18Strings" type="error">
             <ng-container *ngTemplateOutlet="i18Strings; context: { $implicit: control?.ngControl?.errors }">
             </ng-container>
         </fd-form-message>

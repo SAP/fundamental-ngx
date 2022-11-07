@@ -1,0 +1,42 @@
+{
+    "projectType": "library",
+    "sourceRoot": "libs/platform/src/lib/message-popover",
+    "prefix": "fdp",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["dist/libs/platform/message-popover"],
+            "options": {
+                "project": "libs/platform/src/lib/message-popover/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/platform/src/lib/message-popover/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/platform/src/lib/message-popover/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/platform/src/lib/message-popover/test.ts",
+                "tsConfig": "libs/platform/src/lib/message-popover/tsconfig.spec.json",
+                "karmaConfig": "libs/platform/src/lib/message-popover/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/platform/src/lib/message-popover/**/*.ts",
+                    "libs/platform/src/lib/message-popover/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": ["scope:fdp", "type:lib"],
+    "implicitDependencies": ["core"]
+}

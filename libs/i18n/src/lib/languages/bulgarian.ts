@@ -607,6 +607,19 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     platformWizardGenerator: {
         summarySectionEditStep: 'Редактирай'
     },
+    platformMessagePopover: {
+        allErrors: 'All',
+        defaultErrors: {
+            email: 'Email is invalid',
+            max: 'The field exceeds maximum value',
+            maxLength: 'The field exceeds maximum length',
+            min: 'The field value is less than allowed',
+            minLength: 'The field length is less than allowed',
+            pattern: 'The field value is invalid',
+            required: 'The field is mandatory',
+            requiredTrue: 'The field is mandatory'
+        }
+    },
     fnSlider: {
         minMaxDetails: 'Минималната стойност на плъзгача е {{ min }}, максималната стойност е {{ max }}',
         valueminDetails: 'Стойността е {{ value }}',

@@ -1,4 +1,5 @@
 export * from './form-helpers';
+export * from './helpers';
 
 export * from './auto-complete/auto-complete.directive';
 export * from './auto-complete/auto-complete.module';
@@ -61,6 +62,10 @@ export * from './form-group/form-field-extras/form-field-extras.component';
 export * from './form-group/fdp-form.tokens';
 export * from './form-group/pipes/field-group-row-value.pipe';
 export * from './form-group/deprecated-form-group-compact.directive';
+export * from './form-group/form-field-error/form-field-error.directive';
+export * from './form-group/form-field-error/form-field-error-description.directive';
+export * from './form-group/form-field-error/form-field-error-heading.directive';
+export * from './form-group/form-field-error/tokens';
 
 export * from './input/fdp-input.module';
 export * from './input/input.component';

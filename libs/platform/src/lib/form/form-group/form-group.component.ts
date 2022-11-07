@@ -68,6 +68,7 @@ import {
     isFieldGroupChild,
     isFieldGroupWrapperChild
 } from '../form-helpers';
+import { FormFieldErrorDirective } from './form-field-error/form-field-error.directive';
 import { FormFieldComponent } from './form-field/form-field.component';
 import {
     DefaultGapLayout,
@@ -306,7 +307,7 @@ export class FormGroupComponent
     @Input()
     columnLayout: Nullable<string>;
 
-    /** Whether or not all form items should have identical layout provided for form group */
+    /** Whether all form items should have identical layout provided for form group */
     @Input()
     unifiedLayout = true;
 
@@ -320,6 +321,10 @@ export class FormGroupComponent
     /** @hidden */
     @ContentChild('i18n', { static: true })
     i18Template: TemplateRef<any>;
+
+    /** @hidden */
+    @ContentChildren(FormFieldErrorDirective)
+    private _errorDirectives: QueryList<FormFieldErrorDirective>;
 
     /**
      * @hidden
@@ -630,11 +635,12 @@ export class FormGroupComponent
         }
         formField.setDefaultColumnLayout();
         formField.i18Strings = formField.i18Strings ? formField.i18Strings : this.i18Strings;
+        formField.setErrorDirectives(this._errorDirectives);
     }
 
     /**
      * @hidden
-     * if `columnLayoutType` is given, set those column layouts appropriately. Otherwise a layout will set on 1 column
+     * if `columnLayoutType` is given, set those column layouts appropriately. Otherwise, a layout will set on 1 column
      */
     private _setUserLayout(): void {
         if (this.columnLayout) {

@@ -49,6 +49,7 @@ import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-h
 import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
 import { PlatformIconTabBarModule } from '@fundamental-ngx/platform/icon-tab-bar';
 import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
+import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform/message-popover';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -98,7 +99,8 @@ import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-fi
         PlatformDatePickerModule,
         PlatformFormGeneratorModule,
         PlatformIconTabBarModule,
-        PlatformSmartFilterBarModule
+        PlatformSmartFilterBarModule,
+        PlatformMessagePopoverModule
     ],
     providers: []
 })

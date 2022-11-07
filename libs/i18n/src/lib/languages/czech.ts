@@ -539,6 +539,19 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
     platformWizardGenerator: {
         summarySectionEditStep: 'Upravit'
     },
+    platformMessagePopover: {
+        allErrors: 'All',
+        defaultErrors: {
+            email: 'Email is invalid',
+            max: 'The field exceeds maximum value',
+            maxLength: 'The field exceeds maximum length',
+            min: 'The field value is less than allowed',
+            minLength: 'The field length is less than allowed',
+            pattern: 'The field value is invalid',
+            required: 'The field is mandatory',
+            requiredTrue: 'The field is mandatory'
+        }
+    },
     fnSlider: {
         minMaxDetails: 'Minimální hodnota posuvníku je {{ min }}, maximální hodnota je {{ max }}',
         valueminDetails: 'Hodnota je {{ hodnota }}',

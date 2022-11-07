@@ -14,7 +14,7 @@ import {
     SkipSelf,
     ViewChild
 } from '@angular/core';
-import { ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 import { FormStates, isValidControlState, Nullable } from '@fundamental-ngx/core/shared';
@@ -39,7 +39,7 @@ let randomId = 0;
 @Directive()
 export abstract class BaseInput
     extends BaseComponent
-    implements FormFieldControl<any>, ControlValueAccessor, OnInit, DoCheck, AfterViewInit, OnDestroy
+    implements FormFieldControl, ControlValueAccessor, OnInit, DoCheck, AfterViewInit, OnDestroy
 {
     /** @hidden */
     protected defaultId = `fdp-input-id-${randomId++}`;
@@ -65,7 +65,7 @@ export abstract class BaseInput
     @Input()
     set state(state: FormStates | undefined) {
         if (!state || isValidControlState(state)) {
-            this._state = state || 'default';
+            this._state = state;
         } else if (isDevMode()) {
             console.warn(`Provided value "${state}" is not a valid option for FormStates type`);
         }
@@ -74,7 +74,12 @@ export abstract class BaseInput
         if (this._state) {
             return this._state;
         }
-        return this.controlInvalid ? 'error' : 'default';
+
+        if (!this.controlInvalid) {
+            return 'default';
+        }
+
+        return this.formField?.getPriorityState() || 'error';
     }
 
     /** Holds the message with respect to state */
@@ -83,10 +88,10 @@ export abstract class BaseInput
 
     /**
      * @hidden
-     *  The state of the form control - applies css classes.
-     *  Can be `success`, `error`, `warning`, `information` or 'default'
+     * The state of the form control - applies css classes.
+     * Can be `success`, `error`, `warning`, `information` or 'default'
      */
-    protected _state: FormStates;
+    protected _state: FormStates | undefined;
 
     /** Whether the input is disabled */
     @Input()
@@ -178,12 +183,14 @@ export abstract class BaseInput
     onTouched = (): void => {};
 
     /** @hidden */
-    constructor(
+    protected constructor(
         cd: ChangeDetectorRef,
+        readonly elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
     ) {
         /**
          * We do not use Injector.get() approach here because there is a bug
@@ -325,8 +332,12 @@ export abstract class BaseInput
      */
     protected updateErrorState(): void {
         const parent = this.ngForm;
+        const parentControlContainer = this.controlContainer;
         const control = this.ngControl ? (this.ngControl.control as FormControl) : null;
-        const newStatusIsError = !!(control?.invalid && (control.dirty || control.touched || parent?.submitted));
+        const newStatusIsError = !!(
+            control?.invalid &&
+            (control.dirty || control.touched || parent?.submitted || (parentControlContainer as any)?.submitted)
+        );
 
         if (newStatusIsError !== this.controlInvalid) {
             this._controlInvalid = newStatusIsError;

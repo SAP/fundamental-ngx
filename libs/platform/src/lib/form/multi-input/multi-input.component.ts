@@ -18,7 +18,7 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
@@ -168,6 +168,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         readonly elementRef: ElementRef,
         /** @hidden */
         @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
         /** @hidden */
         @Optional() @Self() readonly ngForm: NgForm,
         /** @hidden */
@@ -185,10 +186,20 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         /** @hidden */
         @Optional() @SkipSelf() @Host() formField: FormField,
         /** @hidden */
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
-        super(cd, elementRef, ngControl, ngForm, dialogConfig, _multiInputConfig, formField, formControl);
+        super(
+            cd,
+            elementRef,
+            ngControl,
+            controlContainer,
+            ngForm,
+            dialogConfig,
+            _multiInputConfig,
+            formField,
+            formControl
+        );
     }
 
     /** Display function. Accepts an object of the same type as the

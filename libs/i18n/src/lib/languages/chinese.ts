@@ -529,6 +529,19 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
     platformWizardGenerator: {
         summarySectionEditStep: '编辑'
     },
+    platformMessagePopover: {
+        allErrors: 'All',
+        defaultErrors: {
+            email: 'Email is invalid',
+            max: 'The field exceeds maximum value',
+            maxLength: 'The field exceeds maximum length',
+            min: 'The field value is less than allowed',
+            minLength: 'The field length is less than allowed',
+            pattern: 'The field value is invalid',
+            required: 'The field is mandatory',
+            requiredTrue: 'The field is mandatory'
+        }
+    },
     fnSlider: {
         minMaxDetails: '滑动条最小值为{{ min }}，最大值为{{ max }}',
         valueminDetails: '值等于{{ value }}',

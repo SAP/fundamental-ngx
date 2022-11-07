@@ -9,21 +9,31 @@ import {
     OnChanges,
     OnDestroy,
     Output,
+    QueryList,
     SimpleChanges,
     ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroupDirective, NgForm } from '@angular/forms';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
-import { ColumnLayout, FieldHintOptions, HintOptions, LabelLayout } from '@fundamental-ngx/platform/shared';
+import {
+    ColumnLayout,
+    FieldHintOptions,
+    FormFieldControl,
+    HintOptions,
+    LabelLayout
+} from '@fundamental-ngx/platform/shared';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { FormGeneratorFieldComponent } from '../form-generator-field/form-generator-field.component';
 
 import { FormGeneratorService } from '../form-generator.service';
 import {
     BaseDynamicFormItemGuiOptions,
     DynamicFormItem,
     DynamicFormItemGuiOptions,
+    DynamicFormItemValidationObject,
     DynamicFormValue
 } from '../interfaces/dynamic-form-item';
 import {
@@ -196,6 +206,22 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     @ViewChild(NgForm)
     ngForm: NgForm;
 
+    /** Inner form group directive. */
+    @ViewChild(FormGroupDirective)
+    formGroup: FormGroupDirective;
+
+    /** Inner form fields */
+    @ViewChildren(FormGeneratorFieldComponent)
+    fields: QueryList<FormGeneratorFieldComponent>;
+
+    /** Array of form field controls. */
+    get formFields(): FormFieldControl[] {
+        return this.fields
+            ?.toArray()
+            .filter((field) => !!field.fieldRenderer?.control)
+            .map((field) => field.fieldRenderer.control!);
+    }
+
     /**
      * @description Dynamically generated form. @see FormGeneratorService
      */
@@ -219,6 +245,9 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      * @hidden
      */
     hintOptions: HintOptions;
+
+    /** @hidden */
+    _errorModels: { type: string; value: any }[] = [];
 
     /**
      * @hidden
@@ -252,6 +281,8 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
             ...defaultFormGeneratorHintOptions,
             ..._providedHintOptions
         };
+
+        this._errorModels = this._getErrors();
     }
 
     /** @hidden */
@@ -311,23 +342,6 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     /**
      * @hidden
      */
-    _getErrors(errors: { [key: string]: any }): { type: string; value: any }[] {
-        return Object.entries(errors).map((e) => {
-            const errorType = e[0];
-            let errorValue = e[1];
-
-            const defaultErrorValue = this._fgService.getValidationErrorHints(errorType);
-
-            if (defaultErrorValue) {
-                errorValue = defaultErrorValue;
-            }
-            return { type: errorType, value: errorValue };
-        });
-    }
-
-    /**
-     * @hidden
-     */
     private async _generateForm(): Promise<void> {
         this.formLoading = true;
 
@@ -353,6 +367,10 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         this._cd.detectChanges();
 
         this.formCreated.emit(this.form);
+
+        this.formGroup.ngSubmit.subscribe(async () => {
+            await this._onSubmit();
+        });
     }
 
     /**
@@ -369,7 +387,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      * This method also calls validation for the form items.
      */
     submit(): void {
-        this.ngForm.ngSubmit.emit();
+        this.formGroup.onSubmit(new Event('submit'));
     }
 
     /** @hidden */
@@ -405,5 +423,26 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
             placement,
             ...formItemHintOptions
         };
+    }
+
+    /** @hidden */
+    _isAdvancedError(error: any): error is DynamicFormItemValidationObject {
+        return error.heading && error.description && error.type;
+    }
+
+    /** @hidden */
+    private _getErrors(): { type: string; value: any }[] {
+        const returnErrors: { type: string; value: any }[] = [];
+        const registeredErrors = this._fgService.validationErrorHints;
+        Object.entries(registeredErrors).forEach((type) => {
+            const [errorType, errorValue] = type;
+
+            returnErrors.push({
+                type: errorType,
+                value: errorValue
+            });
+        });
+
+        return returnErrors;
     }
 }

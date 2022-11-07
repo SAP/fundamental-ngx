@@ -740,6 +740,19 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     platformWizardGenerator: {
         summarySectionEditStep: 'Редагувати'
     },
+    platformMessagePopover: {
+        allErrors: 'Всі',
+        defaultErrors: {
+            email: 'Значення поля не відповідає формату E-mail',
+            max: 'Значення поля перевищує максимально допустиме',
+            maxLength: 'Довжина значення поля перевищує максимально допустиме',
+            min: 'Значення поля менше мінімально допустимого',
+            minLength: 'Довжина значення поля менше максимально допустимого',
+            pattern: 'Поле не відповідає формату',
+            required: "Обов'язкове поле",
+            requiredTrue: "Обов'язкове поле"
+        }
+    },
     fnSlider: {
         minMaxDetails: 'Мінімальне значення слайдера {{min}}, максимальне значення {{ max }}',
         valueminDetails: 'Поточне значення: {{ value }}',

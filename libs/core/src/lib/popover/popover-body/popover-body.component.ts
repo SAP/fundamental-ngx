@@ -4,6 +4,7 @@ import {
     Component,
     ElementRef,
     HostListener,
+    Input,
     Renderer2,
     TemplateRef,
     ViewChild,
@@ -44,6 +45,10 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     providers: [contentDensityObserverProviders()]
 })
 export class PopoverBodyComponent {
+    /** Whether to wrap content with fd-scrollbar directive. */
+    @Input()
+    disableScrollbar = false;
+
     /** @hidden */
     @ViewChild(CdkTrapFocus)
     _cdkTrapFocus: CdkTrapFocus;

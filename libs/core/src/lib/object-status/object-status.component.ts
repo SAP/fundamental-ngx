@@ -10,7 +10,7 @@ import {
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { NullableObject, Nullable } from '@fundamental-ngx/core/shared';
 
-export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
+export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
