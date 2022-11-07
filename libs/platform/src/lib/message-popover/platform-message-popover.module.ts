@@ -10,6 +10,7 @@ import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { InitialFocusModule } from '@fundamental-ngx/core/utils';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
@@ -35,7 +36,8 @@ import { MessagePopoverFormItemDirective } from './directives/message-popover-fo
         LinkModule,
         PlatformObjectStatusModule,
         PlatformButtonModule,
-        I18nModule
+        I18nModule,
+        InitialFocusModule
     ],
     exports: [
         MessagePopoverComponent,

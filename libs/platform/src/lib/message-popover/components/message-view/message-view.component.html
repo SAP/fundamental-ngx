@@ -57,6 +57,7 @@
         class="fd-message-view__list"
         tabindex="-1"
         [@openCloseList]="currentScreen === 'list' ? 'open' : 'closed'"
+        (@openCloseList.done)="_onListAnimationComplete($event)"
         fd-scrollbar
         [overrideTabindex]="false"
     >

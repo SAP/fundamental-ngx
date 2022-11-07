@@ -1,4 +1,5 @@
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
+import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -6,6 +7,7 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
+    Inject,
     Input,
     Output,
     ViewChild,
@@ -119,9 +121,13 @@ export class MessageViewComponent implements AfterViewInit {
     private readonly _initialClass = 'fd-message-popover__view-container';
 
     /** @hidden */
+    private _activeListElement: Nullable<HTMLElement> = null;
+
+    /** @hidden */
     constructor(
         private readonly _destroy$: DestroyedService,
-        private readonly _tabbableService: TabbableElementService
+        private readonly _tabbableService: TabbableElementService,
+        @Inject(DOCUMENT) private readonly _document: Document
     ) {}
 
     /** @hidden */
@@ -136,6 +142,7 @@ export class MessageViewComponent implements AfterViewInit {
 
     /** @hidden */
     _showDetails(entry: MessagePopoverEntry): void {
+        this._activeListElement = this._document.activeElement as HTMLElement;
         if (!entry.description.message) {
             this._focusElement(undefined, entry.element);
             return;
@@ -155,5 +162,13 @@ export class MessageViewComponent implements AfterViewInit {
             const tabbableElement = this._tabbableService.getTabbableElement(item.nativeElement);
             tabbableElement?.focus();
         });
+    }
+
+    /** @hidden */
+    _onListAnimationComplete(event: any): void {
+        if (event.toState === 'open' && this._activeListElement) {
+            this._activeListElement.focus();
+            this._activeListElement = null;
+        }
     }
 }
