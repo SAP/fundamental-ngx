@@ -1,3 +1,21 @@
+## [0.36.3-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.22...v0.36.3-rc.23) (2022-11-04)
+
+
+### Bug Fixes
+
+* **fn:** show selected option label in select ([#8828](https://github.com/SAP/fundamental-ngx/issues/8828)) ([1a1ea1a](https://github.com/SAP/fundamental-ngx/commit/1a1ea1a0c1e81d1b652e22b6036d895d368e5ae8))
+
+
+
+## [0.36.3-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.21...v0.36.3-rc.22) (2022-11-04)
+
+
+### Bug Fixes
+
+* **docs:** update versions workflow ([#8825](https://github.com/SAP/fundamental-ngx/issues/8825)) ([c381d58](https://github.com/SAP/fundamental-ngx/commit/c381d58f4c9196b249332c66355fd70ab41001a3))
+
+
+
 ## [0.36.3-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.20...v0.36.3-rc.21) (2022-11-04)
 
 

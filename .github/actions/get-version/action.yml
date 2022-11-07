@@ -1,0 +1,12 @@
+name: Get version
+description: Get version from package.json and check if pre-release
+
+outputs:
+    pre-release:
+        description: Is prerelease version
+    version:
+        description: Current version
+
+runs:
+    using: node16
+    main: ./index.js

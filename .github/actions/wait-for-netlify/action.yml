@@ -1,0 +1,24 @@
+# Fork of https://github.com/probablyup/wait-for-netlify-action
+name: 'Wait for Netlify Deployment'
+description: 'Waits for the current GitHub commit Netlify deploy to be ready. Useful in combination with tools like Lighthouse or Cypress.'
+
+inputs:
+    site_id:
+        description: 'The Netlify site ID to test against, get this from the Netlify UI under site settings.'
+        required: true
+    max_timeout:
+        description: 'The max time to wait after the deployment is ready for a valid HTTP status code.'
+        required: false
+    commit_sha:
+        description: 'The commit SHA to wait for.'
+        required: true
+
+outputs:
+    deploy_id:
+        description: 'The Netlify deployment ID'
+    url:
+        description: 'The fully qualified deployment URL'
+
+runs:
+    using: node16
+    main: ./index.js

@@ -1,10 +1,20 @@
 <div style="width: 200px">
-    <fn-select [editable]="true" placeholder="Select an option" label="Editable Selector" #selectEditableExample>
-        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+    <fn-select [editable]="true" placeholder="Select an option" label="Editable Selector" #selectEditableExample1>
+        <li fn-option *ngFor="let option of options" [value]="option" [label]="option"></li>
     </fn-select>
 </div>
-<br />
 
 <p>
-    <i>Editable Example selection: {{ selectEditableExample.value }}</i>
+    <i>Editable Example selection: {{ selectEditableExample1.value }}</i>
+</p>
+<br />
+
+<div style="width: 200px">
+    <fn-select [editable]="true" placeholder="Select an option" label="Editable Selector" #selectEditableExample2>
+        <li fn-option *ngFor="let option of options2" [value]="option" [label]="option.name"></li>
+    </fn-select>
+</div>
+
+<p>
+    <i>Editable Example selection: {{ selectEditableExample2.value | json }}</i>
 </p>
