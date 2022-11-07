@@ -1,3 +1,12 @@
+# [0.37.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.1...v0.37.0-rc.2) (2022-11-07)
+
+
+### Features
+
+* **platform:** introduce message popover ([#8927](https://github.com/SAP/fundamental-ngx/issues/8927)) ([f066f06](https://github.com/SAP/fundamental-ngx/commit/f066f06406671fb0b95ee637a2e7689bc82efbd7))
+
+
+
 # [0.37.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.0...v0.37.0-rc.1) (2022-11-07)
 
 
