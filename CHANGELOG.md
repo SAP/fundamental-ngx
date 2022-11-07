@@ -1,3 +1,12 @@
+# [0.37.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.0...v0.37.0-rc.1) (2022-11-07)
+
+
+### Bug Fixes
+
+* **docs:** removed relative paths ([#8945](https://github.com/SAP/fundamental-ngx/issues/8945)) ([f0fe78a](https://github.com/SAP/fundamental-ngx/commit/f0fe78a4a8ea383fb04071190d9022f17bda357d))
+
+
+
 # [0.37.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.23...v0.37.0-rc.0) (2022-11-07)
 
 
