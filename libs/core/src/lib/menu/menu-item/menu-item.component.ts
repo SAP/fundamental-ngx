@@ -12,6 +12,7 @@ import {
     Input,
     OnChanges,
     OnDestroy,
+    OnInit,
     Optional,
     Output,
     QueryList,
@@ -20,7 +21,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { defer, fromEvent, Observable, Subscription, timer } from 'rxjs';
+import { defer, fromEvent, Observable, Subject, Subscription, timer } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 
 import { MenuTitleDirective } from '../directives/menu-title.directive';
@@ -33,10 +34,13 @@ let menuUniqueId = 0;
 
 export interface BaseSubmenu {
     templateRef: TemplateRef<any>;
-    menuItems: QueryList<any>;
+    menuItems: MenuItemComponent[];
     menuService: MenuService;
     ariaLabel: Nullable<string>;
     ariaLabelledby: Nullable<string>;
+    _menuItemsChange$: Observable<void>;
+    _registerItem(item: MenuItemComponent): void;
+    _unregisterItem(item: MenuItemComponent): void;
 }
 
 export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component dependency');
@@ -53,7 +57,7 @@ export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component depend
         '[class.fd-menu__item]': 'true'
     }
 })
-export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterContentInit, OnDestroy {
+export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, AfterContentInit, OnDestroy {
     /** Set the Menu Item as disabled/enabled */
     @Input()
     disabled = false;
@@ -65,6 +69,10 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     /** Reference to sub-menu component */
     @Input()
     submenu: BaseSubmenu | undefined;
+
+    /** Reference to the parent submenu if nested menus created dynamically */
+    @Input()
+    parentSubmenu: BaseSubmenu | undefined;
 
     /** Emitted when the menu item is selected. */
     @Output()
@@ -97,6 +105,14 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     ) {}
 
     /** @hidden */
+    ngOnInit(): void {
+        if (this.parentSubmenu) {
+            this._submenu = this.parentSubmenu;
+            this._submenu._registerItem(this);
+        }
+    }
+
+    /** @hidden */
     ngAfterContentInit(): void {
         this._setMenuService();
         this._initialiseItemState();
@@ -117,6 +133,10 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** @hidden */
     ngOnDestroy(): void {
+        if (this.parentSubmenu) {
+            this._submenu?._unregisterItem(this);
+        }
+
         this._subscriptions.unsubscribe();
         this._hoverSubscriptions.unsubscribe();
     }
@@ -247,7 +267,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     providers: [{ provide: SUBMENU, useExisting: SubmenuComponent }],
     exportAs: 'fdSubmenu'
 })
-export class SubmenuComponent implements BaseSubmenu {
+export class SubmenuComponent implements BaseSubmenu, AfterContentInit {
     /** Aria-label for navigation */
     @Input()
     ariaLabel: Nullable<string>;
@@ -260,8 +280,37 @@ export class SubmenuComponent implements BaseSubmenu {
     @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
 
     /** @hidden Reference to Submenu MenuItems  */
-    @ContentChildren(MenuItemComponent) menuItems: QueryList<MenuItemComponent>;
+    @ContentChildren(MenuItemComponent)
+    _projectedItems: QueryList<MenuItemComponent>;
+
+    /** @hidden */
+    _registeredItems: MenuItemComponent[] = [];
 
     /** @hidden Reference to MenuService used by MenuItems */
     menuService: MenuService;
+
+    /** @hidden */
+    _menuItemsChange$ = new Subject<void>();
+
+    /** @hidden */
+    get menuItems(): MenuItemComponent[] {
+        return this._projectedItems.length ? this._projectedItems.toArray() : this._registeredItems;
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this._projectedItems.changes.subscribe(() => this._menuItemsChange$.next());
+    }
+
+    /** @hidden method for manually registering item when it's not visible for @ContentChildren */
+    _registerItem(item: MenuItemComponent): void {
+        this._registeredItems.push(item);
+        this._menuItemsChange$.next();
+    }
+
+    /** @hidden method for manually unregistering item when it's not visible for @ContentChildren */
+    _unregisterItem(item: MenuItemComponent): void {
+        this._registeredItems = this._registeredItems.filter((i) => i !== item);
+        this._menuItemsChange$.next();
+    }
 }

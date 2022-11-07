@@ -1,3 +1,5 @@
+<h4>Submenus predefined</h4>
+
 <button fd-button label="Menu with submenu" [fdMenu]="true" [fdMenuTrigger]="menu"></button>
 
 <div style="display: inline-block">
@@ -111,3 +113,38 @@
         </a>
     </li>
 </fd-submenu>
+
+<h4>Submenus created dynamically</h4>
+
+<button fd-button label="Complex menu with submenu" [fdMenu]="true" [fdMenuTrigger]="complexMenu"></button>
+
+<div style="display: inline-block">
+    <span style="padding-left: 0.5rem">Active path:</span>
+    <span *ngFor="let active of complexActivePath" style="padding: 0.5rem">
+        {{ active.menuItemTitle.title }}
+    </span>
+</div>
+
+<fd-menu #complexMenu (activePath)="complexActivePath = $event">
+    <ng-container *ngFor="let item of complexMenuItems">
+        <ng-container *ngTemplateOutlet="submenuTemplate; context: { item: item }"></ng-container>
+    </ng-container>
+
+    <!-- Make sure this template is nested in fd-menu -->
+    <ng-template #submenuTemplate let-item="item" let-parentSubmenu="parentSubmenu">
+        <li fd-menu-item [submenu]="item.children.length ? submenu : undefined" [parentSubmenu]="parentSubmenu">
+            <div fd-menu-interactive>
+                <span fd-menu-title>{{ item.title }}</span>
+                <fd-menu-addon *ngIf="item.children.length" [submenuIndicator]="true"></fd-menu-addon>
+            </div>
+        </li>
+
+        <fd-submenu #submenu>
+            <ng-container *ngFor="let subItem of item.children">
+                <ng-container
+                    *ngTemplateOutlet="submenuTemplate; context: { item: subItem, parentSubmenu: submenu }"
+                ></ng-container>
+            </ng-container>
+        </fd-submenu>
+    </ng-template>
+</fd-menu>

@@ -188,7 +188,7 @@ export class MenuService {
                 item: menuItem,
                 parent: null,
                 children: menuItem.submenu
-                    ? menuItem.submenu.menuItems.toArray().map((subMenuItem) => buildNode(subMenuItem))
+                    ? menuItem.submenu.menuItems.map((subMenuItem) => buildNode(subMenuItem))
                     : []
             };
         }
@@ -204,11 +204,13 @@ export class MenuService {
             return map;
         }
 
+        const rootItems = menu._menuItems.filter((rootItem) => !rootItem.parentSubmenu);
+
         /** root item */
         const menuTree: MenuNode = {
             item: null,
             parent: null,
-            children: menu._menuItems.toArray().map((item) => buildNode(item))
+            children: rootItems.map((item) => buildNode(item))
         };
 
         setParents(menuTree, null);

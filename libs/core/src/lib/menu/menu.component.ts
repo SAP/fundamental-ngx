@@ -286,7 +286,7 @@ export class MenuComponent
         this._menuItems.forEach((menuItem) => {
             if (menuItem.submenu?.menuItems) {
                 this._subscriptions.add(
-                    menuItem.submenu.menuItems.changes.subscribe(() => this._menuService.rebuildMenu())
+                    menuItem.submenu._menuItemsChange$.subscribe(() => this._menuService.rebuildMenu())
                 );
             }
         });
