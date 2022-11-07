@@ -97,7 +97,7 @@ describe('MenuComponent', () => {
     }));
 
     it('should select desktop view', () => {
-        const keyboardSupportSpy = spyOn<any>(menu, '_manageKeyboardSupport');
+        const keyboardSupportSpy = spyOn<any>(menu, '_setupPopoverService');
         (<any>menu)._setupView();
 
         menu.open();
