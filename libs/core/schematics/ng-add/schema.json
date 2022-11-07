@@ -17,6 +17,12 @@
             "description": "Whether Angular browser animations should be set up.",
             "x-prompt": "Set up browser animations for Fundamental Library for Angular?"
         },
+        "fonts": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether default fonts from theming should be added to styles file.",
+            "x-prompt": "Add default font imports into styles file?"
+        },
         "theme": {
             "description": "The theme to apply",
             "type": "string",
@@ -68,11 +74,11 @@
                 ]
             }
         },
-        "styleFonts": {
+        "readThemeFromURL": {
             "type": "boolean",
-            "default": true,
-            "description": "Whether default fonts from theming should be added to styles file.",
-            "x-prompt": "Add default font imports into styles file?"
+            "default": false,
+            "description": "Whether to read the theme from the URL.",
+            "x-prompt": "Read theme from URL? Makes difference if theme is not 'Custom'."
         }
     }
 }

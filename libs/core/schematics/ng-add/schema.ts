@@ -1,7 +1,7 @@
 export interface Schema {
     project: string;
     animations: boolean;
-    styleFonts: boolean;
+    fonts: boolean;
     theme:
         | 'sap_fiori_3'
         | 'sap_fiori_3_dark'
@@ -13,4 +13,5 @@ export interface Schema {
         | 'sap_horizon_hcb'
         | 'sap_horizon_hcw'
         | 'custom';
+    readThemeFromURL: boolean;
 }
