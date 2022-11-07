@@ -1,3 +1,20 @@
+# [0.37.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.23...v0.37.0-rc.0) (2022-11-07)
+
+
+### Features
+
+* **core:** assets & styles, fonts, schematics, migrations ([#8479](https://github.com/SAP/fundamental-ngx/issues/8479)) ([6e9e86d](https://github.com/SAP/fundamental-ngx/commit/6e9e86df714e19d2614107ceddcbec30ea2e2c6c))
+
+
+### BREAKING CHANGES
+
+* **core:** * after update with `ng update` you have to run `ng add @fundamental-ngx/core` once again
+
+Co-authored-by: Inna Atanasova <39598672+InnaAtanasova@users.noreply.github.com>
+Co-authored-by: Giorgi Cheishvili <giorgi.cheishvili@outlook.com>
+
+
+
 ## [0.36.3-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.36.3-rc.22...v0.36.3-rc.23) (2022-11-04)
 
 
