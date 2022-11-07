@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { LinkModule } from '@fundamental-ngx/core/link';
+import { ListModule } from '@fundamental-ngx/core/list';
 
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import {
@@ -40,6 +42,7 @@ import { PlatformListWithDeleteButtonExampleComponent } from './examples/platfor
 import { PlatformListWithSelectionExampleComponent } from './examples/platform-list-with-selection-example.component';
 import { PlatformListWithSingleSelectionExampleComponent } from './examples/platform-list-with-single-selection-example.component';
 import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+import { PlatformListFreeContentExampleComponent } from './examples/platform-list-free-content-example.component';
 
 const routes: Routes = [
     {
@@ -57,6 +60,8 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
+        ListModule,
+        LinkModule,
         PlatformListModule,
         StandardListItemModule,
         ButtonModule,
@@ -88,7 +93,8 @@ const routes: Routes = [
         PlatformListWithButtonsExampleComponent,
         PlatformListWithNoDataExampleComponent,
         PlatformListWithMoreButtonExampleComponent,
-        PlatformListWithUnReadExampleComponent
+        PlatformListWithUnReadExampleComponent,
+        PlatformListFreeContentExampleComponent
     ],
     providers: [platformContentDensityModuleDeprecationsProvider('fd-list'), currentComponentProvider('list')]
 })

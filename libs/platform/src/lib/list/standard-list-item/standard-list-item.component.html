@@ -136,8 +136,9 @@
                 [attr.aria-label]="description"
                 [attr.title]="description"
                 [attr.nowrap]="titleWrap"
-                >{{ description }}</span
             >
+                {{ description }}
+            </span>
             <span
                 #rt
                 *ngIf="secondary && !inverted"
