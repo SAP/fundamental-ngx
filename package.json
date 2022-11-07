@@ -52,7 +52,7 @@
     "@fundamental-styles/fn": "0.25.1-rc.16",
     "@fundamental-styles/cx": "0.25.1-rc.16",
     "@nrwl/angular": "14.5.10",
-    "@sap-theming/theming-base-content": "11.1.40",
+    "@sap-theming/theming-base-content": "11.1.44",
     "@stackblitz/sdk": "1.8.0",
     "@types/google.visualization": "0.0.68",
     "@types/node": "14.14.10",
