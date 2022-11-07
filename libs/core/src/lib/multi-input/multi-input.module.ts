@@ -4,7 +4,7 @@ import { MultiInputComponent } from './multi-input.component';
 import { TokenModule } from '@fundamental-ngx/core/token';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { PipeModule } from '@fundamental-ngx/core/utils';
+import { InitialFocusModule, PipeModule } from '@fundamental-ngx/core/utils';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
@@ -29,7 +29,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         CheckboxModule,
         LinkModule,
         AutoCompleteModule,
-        ContentDensityModule
+        ContentDensityModule,
+        InitialFocusModule
     ],
     exports: [MultiInputComponent, DeprecatedMultiInputCompactDirective, ContentDensityModule]
 })

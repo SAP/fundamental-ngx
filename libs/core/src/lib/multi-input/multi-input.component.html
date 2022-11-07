@@ -102,8 +102,10 @@
             [style.minWidth]="'100%'"
         >
             <li
-                *ngFor="let option of viewModel.displayedOptions; index as idx; trackBy: valueFn"
+                *ngFor="let option of viewModel.displayedOptions; index as idx; let isFirst = first; trackBy: valueFn"
                 fd-list-item
+                fdInitialFocus
+                [enabled]="isFirst"
                 [attr.aria-label]="option.label"
                 (click)="_onCheckboxClick(option.value, $event, idx, true)"
                 (keyup)="_onCheckboxKeyup(option.value, $event, idx)"
