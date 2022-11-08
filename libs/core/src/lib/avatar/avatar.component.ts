@@ -307,6 +307,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
 
     /** @hidden */
     private _verifyImageUrl(srcValue: string, onLoadCallback: () => void, onErrorCallback: () => void): void {
+        // Don't load the same image all the time check happens
+        if (srcValue === this._bgImage) {
+            return;
+        }
         const img = new Image();
         img.onload = onLoadCallback.bind(this);
         img.onerror = onErrorCallback.bind(this);

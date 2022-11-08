@@ -108,13 +108,13 @@ describe('Standard  List Item Component with DataSource', () => {
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(waitForAsync(() => {
         fixture = TestBed.createComponent(StandardListItemDataSourceTestComponent);
         fixture.detectChanges();
-    });
+        fixture.whenRenderingDone();
+    }));
 
-    it('Standard list item should retive the data from datasource', () => {
-        fixture.detectChanges();
+    it('Standard list item should retrieve the data from datasource', () => {
         const listElement = fixture.debugElement.queryAll(By.css('.fd-list__item'));
         expect(listElement.length).toBe(4);
     });
