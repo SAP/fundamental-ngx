@@ -25,7 +25,18 @@ import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { firstValueFrom, isObservable, Observable, of, Subject, Subscription } from 'rxjs';
+import {
+    BehaviorSubject,
+    filter,
+    firstValueFrom,
+    isObservable,
+    map,
+    Observable,
+    of,
+    Subject,
+    Subscription,
+    switchMap
+} from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
@@ -47,7 +58,7 @@ import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i
 
 export type SelectionType = 'none' | 'multi' | 'single' | 'delete';
 export type ListType = 'inactive' | 'active' | 'detail';
-export type FdpListDataSource<T> = ListDataSource<T> | Observable<T[]> | T[];
+export type FdpListDataSource<T> = ListDataSource<T> | Observable<T[]> | T[] | null;
 
 export class SelectionChangeEvent {
     /** Selected items */
@@ -354,6 +365,12 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     private _language: FdLanguage;
 
     /** @hidden */
+    private _canRenderItems$ = new BehaviorSubject(false);
+
+    /** @hidden */
+    private _canRenderItems = this._canRenderItems$.asObservable();
+
+    /** @hidden */
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -409,6 +426,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
      * Keyboard manager on list items, set values when passed via array
      */
     ngAfterViewInit(): void {
+        this._canRenderItems$.next(true);
         this._keyManager = new FocusKeyManager<BaseListItem>(this.listItems).withWrap();
 
         this._updateListItems();
@@ -635,12 +653,24 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
          */
         this._dsSubscription = initDataSource
             .open()
-            .pipe(takeUntil(this._destroyed))
+            .pipe(
+                // Set new items when component is fully initiated and all child components are available.
+                switchMap((data) =>
+                    this._canRenderItems.pipe(
+                        filter((canRender) => canRender),
+                        map(() => data)
+                    )
+                ),
+                takeUntil(this._destroyed)
+            )
             .subscribe((data) => {
                 this._dsItems = data || [];
                 this.stateChanges.next(this._dsItems);
                 this._setItems();
-                this._cd.markForCheck();
+                // Trigger change detection when queue is empty.
+                setTimeout(() => {
+                    this._cd.detectChanges();
+                });
             });
 
         // initial data fetch
