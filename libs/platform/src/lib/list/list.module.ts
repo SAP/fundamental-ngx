@@ -13,13 +13,22 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { ActionListItemModule } from './action-list-item/action-list-item.module';
 import { DisplayListItemModule } from './display-list-item/display-list-item.module';
-import { ListComponent, ListFooterComponent, ListGroupHeaderComponent } from './list.component';
+import { ListFooterComponent } from './list-group-footer.component';
+import { ListGroupHeaderComponent } from './list-group-header.component';
+import { ListComponent } from './list.component';
 import { ListItemDef } from './base-list-item';
 import { ObjectListItemModule } from './object-list-item/object-list-item.module';
 import { StandardListItemModule } from './standard-list-item/standard-list-item.module';
+import { FreeContentListItemComponent } from './free-content-list-item/free-content-list-item.component';
 
 @NgModule({
-    declarations: [ListComponent, ListFooterComponent, ListGroupHeaderComponent, ListItemDef],
+    declarations: [
+        ListComponent,
+        ListFooterComponent,
+        ListGroupHeaderComponent,
+        ListItemDef,
+        FreeContentListItemComponent
+    ],
     imports: [
         CommonModule,
         FormsModule,
@@ -47,7 +56,8 @@ import { StandardListItemModule } from './standard-list-item/standard-list-item.
         StandardListItemModule,
         ObjectListItemModule,
         DisplayListItemModule,
-        ActionListItemModule
+        ActionListItemModule,
+        FreeContentListItemComponent
     ]
 })
 export class PlatformListModule {}

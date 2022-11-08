@@ -7,7 +7,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Host,
     HostListener,
     Inject,
@@ -33,7 +32,6 @@ import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import {
     ArrayListDataSource,
-    BaseComponent,
     CollectionBaseInput,
     FormField,
     FormFieldControl,
@@ -59,7 +57,6 @@ export class SelectionChangeEvent {
 }
 
 let nextListId = 0;
-let nextListGrpHeaderId = 0;
 
 /**
  * The List component represents a container for list item types.
@@ -814,41 +811,5 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
             this.stateChanges.next(item);
         });
-    }
-}
-
-@Component({
-    selector: 'fdp-list-footer',
-    template: ` <li #listFooter class="fd-list__footer" [attr.id]="id" role="option">
-        <ng-content></ng-content>
-    </li>`
-})
-export class ListFooterComponent extends BaseComponent {}
-
-@Component({
-    selector: 'fdp-list-group-header',
-    template: ` <li #listItem fd-list-group-header [attr.id]="id" role="option" [tabindex]="0">
-        <span fd-list-title>{{ groupHeaderTitle }}</span>
-        <ng-content></ng-content>
-    </li>`,
-    providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeaderComponent) }]
-})
-export class ListGroupHeaderComponent extends BaseListItem implements OnInit {
-    /** Displays list goup header title */
-    @Input()
-    groupHeaderTitle?: string;
-
-    /** @deprecated Use `groupHeaderTitle` instead */
-    @Input()
-    set grpheaderTitle(value: string) {
-        this.groupHeaderTitle = value;
-    }
-
-    /**
-     * @hidden
-     * Initialization of the list header component
-     */
-    ngOnInit(): void {
-        this.id = `fdp-list-${nextListGrpHeaderId++}`;
     }
 }
