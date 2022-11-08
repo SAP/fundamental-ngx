@@ -88,7 +88,7 @@ describe('MenuComponent', () => {
 
     it('should select mobile view', fakeAsync(() => {
         const mobileViewSpy = spyOn<any>(menu, '_setupMobileMode');
-        menu.setMobileMode = true;
+        menu.mobile = true;
         (<any>menu)._setupView();
 
         fixture.detectChanges();
@@ -97,7 +97,7 @@ describe('MenuComponent', () => {
     }));
 
     it('should select desktop view', () => {
-        const keyboardSupportSpy = spyOn<any>(menu, '_manageKeyboardSupport');
+        const keyboardSupportSpy = spyOn<any>(menu, '_setupPopoverService');
         (<any>menu)._setupView();
 
         menu.open();
@@ -112,11 +112,11 @@ describe('MenuComponent', () => {
         fixture.detectChanges();
         tick();
 
-        expect(menu.menuItems.first.elementRef.nativeElement).toBe(document.activeElement);
+        expect(menu._menuItems.first.elementRef.nativeElement).toBe(document.activeElement);
     }));
 
     it('should open after clicking on trigger on mobiles', () => {
-        menu.setMobileMode = true;
+        menu.mobile = true;
         (<any>menu)._listenOnTriggerRefClicks();
 
         expect(menu.isOpen).toBeFalse();
