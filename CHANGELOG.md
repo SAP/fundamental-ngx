@@ -1,3 +1,12 @@
+# [0.37.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.5...v0.37.0-rc.6) (2022-11-08)
+
+
+### Bug Fixes
+
+* **core,platform:** schematics and deps ([#8952](https://github.com/SAP/fundamental-ngx/issues/8952)) ([d40850c](https://github.com/SAP/fundamental-ngx/commit/d40850c847bf0639098a17a48e718c0287f21fa5))
+
+
+
 # [0.37.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.4...v0.37.0-rc.5) (2022-11-08)
 
 
