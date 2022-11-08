@@ -35,8 +35,8 @@
     "compare-versions": "COMPARE_VERSIONS_VER_PLACEHOLDER"
   },
   "exports": {
-    ".": {
-      "sass": "./styles/fundamental-ngx-core.scss"
+    "./styles/fundamental-ngx-core.css": {
+      "style": "./styles/fundamental-ngx-core.css"
     }
   }
 }

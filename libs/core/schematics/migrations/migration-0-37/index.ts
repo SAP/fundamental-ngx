@@ -19,10 +19,27 @@ function removeStylesFromConfig(): Rule {
                         return;
                     }
 
+                    const themes = [
+                        'sap_horizon',
+                        'sap_horizon_dark',
+                        'sap_horizon_hcb',
+                        'sap_horizon_hcw',
+                        'sap_fiori_3',
+                        'sap_fiori_3_dark',
+                        'sap_fiori_3_hcb',
+                        'sap_fiori_3_hcw',
+                        'sap_fiori_3_light_dark'
+                    ];
+
                     const stylesToRemove = [
                         'node_modules/fundamental-styles/dist/icon.css',
                         './node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_fiori_3/css_variables.css',
-                        './node_modules/fundamental-styles/dist/theming/sap_fiori_3.css'
+                        './node_modules/fundamental-styles/dist/theming/sap_fiori_3.css',
+                        ...themes.map(
+                            (theme) =>
+                                `./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/${theme}/css_variables.css`
+                        ),
+                        ...themes.map((theme) => `./node_modules/fundamental-styles/dist/theming/${theme}.css`)
                     ];
 
                     stylesToRemove.forEach((styleToRemove) => {
