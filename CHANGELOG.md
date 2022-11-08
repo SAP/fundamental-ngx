@@ -1,3 +1,12 @@
+# [0.37.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.7...v0.37.0-rc.8) (2022-11-08)
+
+
+### Features
+
+* **core:** creating submenus dynamically ([#8930](https://github.com/SAP/fundamental-ngx/issues/8930)) ([207ebc5](https://github.com/SAP/fundamental-ngx/commit/207ebc55891fb290f1ed9e893ba96d9fa4691cde))
+
+
+
 # [0.37.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.6...v0.37.0-rc.7) (2022-11-08)
 
 
