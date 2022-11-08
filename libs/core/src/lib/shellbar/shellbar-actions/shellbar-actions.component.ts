@@ -73,8 +73,8 @@ export class ShellbarActionsComponent implements AfterViewInit {
     @Input()
     collapsedItemMenuLabel: string;
 
-    /** toggles combobox. Shows combobox if true.*/
-    showCombobox = false;
+    /** @hidden toggles combobox. Shows combobox if true.*/
+    _showCombobox = false;
 
     /** @hidden
      *  Enable combobox in mobile mode.
@@ -133,7 +133,7 @@ export class ShellbarActionsComponent implements AfterViewInit {
      * called when clicked search button. shows combobox
      */
     _onSearchButtonClick(shouldOpenPopover = true): void {
-        this.showCombobox = true;
+        this._showCombobox = true;
         if (shouldOpenPopover) {
             setTimeout(() => {
                 this._comboboxComponent.isOpenChangeHandle(true);
@@ -161,7 +161,7 @@ export class ShellbarActionsComponent implements AfterViewInit {
      * hides combobox.
      */
     _hideCombobox(): void {
-        this.showCombobox = false;
+        this._showCombobox = false;
         this._comboboxComponent.isOpenChangeHandle(false);
         this._cdRef.detectChanges();
     }
