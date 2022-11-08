@@ -1,3 +1,12 @@
+# [0.37.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.4...v0.37.0-rc.5) (2022-11-08)
+
+
+### Bug Fixes
+
+* **platform:** trigger detection when datasource is changed ([#8949](https://github.com/SAP/fundamental-ngx/issues/8949)) ([ab63eac](https://github.com/SAP/fundamental-ngx/commit/ab63eac3160c89a259038ec5bedc128b41c3a437))
+
+
+
 # [0.37.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.3...v0.37.0-rc.4) (2022-11-08)
 
 
