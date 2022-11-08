@@ -1,3 +1,12 @@
+# [0.37.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.2...v0.37.0-rc.3) (2022-11-08)
+
+
+### Features
+
+* **platform:** free content list item ([#8941](https://github.com/SAP/fundamental-ngx/issues/8941)) ([fd82738](https://github.com/SAP/fundamental-ngx/commit/fd82738253dffd209a5d6afd63bf2c7950577b72))
+
+
+
 # [0.37.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.1...v0.37.0-rc.2) (2022-11-07)
 
 
