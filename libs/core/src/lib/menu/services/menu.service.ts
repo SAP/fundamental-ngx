@@ -27,10 +27,10 @@ export class MenuService {
     activeNodePath: MenuNode[] = [];
 
     /** Collection of active menu nodes */
-    private _isMobileMode: Subject<boolean> = new Subject();
+    private _isMobileMode = new Subject<boolean>();
 
     /** @hidden */
-    private _menu: MenuComponent;
+    private _menuComponent: MenuComponent;
 
     /** @hidden */
     private _destroyKeyboardHandlerListener: () => void;
@@ -43,8 +43,8 @@ export class MenuService {
     constructor(private _renderer: Renderer2, @Optional() private readonly _rtlService: RtlService) {}
 
     /** Reference to menu component */
-    get menu(): MenuComponent {
-        return this._menu;
+    get menuComponent(): MenuComponent {
+        return this._menuComponent;
     }
 
     /** Returns menu mode observable */
@@ -78,6 +78,7 @@ export class MenuService {
         } else {
             this._removeFromActivePath(menuItem);
         }
+
         this._emitActivePath();
     }
 
@@ -91,9 +92,9 @@ export class MenuService {
     }
 
     /** Initializes menu service based on given Menu Component */
-    setMenuRoot(menu: MenuComponent): void {
-        this._menu = menu;
-        this.menuMap = this._buildMenuMap(this._menu);
+    setMenuComponent(menu: MenuComponent): void {
+        this._menuComponent = menu;
+        this.menuMap = this._buildMenuMap(this._menuComponent);
     }
 
     /** Clears Active Node Path and resets Focused Node */
@@ -107,7 +108,7 @@ export class MenuService {
      *  - Validates Active Node Path
      *  - Validates Focused Node */
     rebuildMenu(): void {
-        this.menuMap = this._buildMenuMap(this._menu);
+        this.menuMap = this._buildMenuMap(this._menuComponent);
 
         const deadNode = this.activeNodePath.find((node) => !this.menuMap.has(node.item));
         if (deadNode?.item) {
@@ -146,7 +147,9 @@ export class MenuService {
     /** @hidden Adds given element to the Active Node Path and setts as active*/
     private _addToActivePath(menuItem: MenuItemComponent): void {
         const menuNode = this.menuMap.get(menuItem);
+
         this._removeActiveSibling(menuItem);
+
         if (menuNode) {
             this.activeNodePath.push(menuNode);
             menuNode.item?.setSelected(true);
@@ -183,7 +186,7 @@ export class MenuService {
                 item: menuItem,
                 parent: null,
                 children: menuItem.submenu
-                    ? menuItem.submenu.menuItems.toArray().map((subMenuItem) => buildNode(subMenuItem))
+                    ? menuItem.submenu.menuItems.map((subMenuItem) => buildNode(subMenuItem))
                     : []
             };
         }
@@ -199,11 +202,13 @@ export class MenuService {
             return map;
         }
 
+        const rootItems = menu._menuItems.filter((rootItem) => !rootItem.parentSubmenu);
+
         /** root item */
         const menuTree: MenuNode = {
             item: null,
             parent: null,
-            children: menu.menuItems.toArray().map((item) => buildNode(item))
+            children: rootItems.map((item) => buildNode(item))
         };
 
         setParents(menuTree, null);
@@ -216,9 +221,9 @@ export class MenuService {
         const menuNode = this.menuMap.get(menuItem);
         const children = menuNode?.parent?.children.map((i) => i.item);
         const activeSibling = this.activeNodePath.find((i) => children?.includes(i.item));
-        const activeParentIndex = this.activeNodePath.indexOf(menuNode?.parent as MenuNode);
 
         if (activeSibling) {
+            const activeParentIndex = this.activeNodePath.indexOf(menuNode?.parent as MenuNode);
             this._removeFromActivePath(activeParentIndex !== -1 ? activeSibling.item : this.activeNodePath[0].item);
         }
     }
@@ -275,8 +280,8 @@ export class MenuService {
             if (focusedNode.children.length) {
                 focusRight(focusedNode);
             }
-        } else if (KeyUtil.isKeyCode(event, ESCAPE) && this.menu.closeOnEscapeKey) {
-            this.menu.close();
+        } else if (KeyUtil.isKeyCode(event, ESCAPE) && this.menuComponent.closeOnEscapeKey) {
+            this.menuComponent.close();
         } else {
             matched = false;
         }
@@ -288,7 +293,7 @@ export class MenuService {
 
     /** @hidden Emits an array of active menu items */
     private _emitActivePath(): void {
-        this.menu.activePath.emit(this.activeNodePath.map((node) => node.item) as MenuItemComponent[]);
+        this.menuComponent.activePath.emit(this.activeNodePath.map((node) => node.item) as MenuItemComponent[]);
     }
 
     /** @hidden Depending on direction returns closest enabled sibling of given node */

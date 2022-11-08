@@ -166,7 +166,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.menu.menuItems.forEach((item) => {
+        this.menu._menuItems.forEach((item) => {
             item.menuInteractive._fromSplitButton = true;
         });
         this._setupMenuSubscription();
@@ -174,7 +174,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         this._handleMainActionObject();
 
         if (!this.mainActionTitle && !this.titleTemplate && !this.selected) {
-            this.selectMenuItem(this.menu.menuItems.first);
+            this.selectMenuItem(this.menu._menuItems.first);
         } else if (!this.mainActionTitle && this.selected) {
             this.selectMenuItem(this.selected);
         }
@@ -240,7 +240,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @hidden */
     private _setupMenuItemSubscriptions(): void {
-        this.menu.menuItems.forEach((menuItem) => {
+        this.menu._menuItems.forEach((menuItem) => {
             menuItem.onSelect.pipe(first()).subscribe(() => {
                 if (this.fixedWidth) {
                     this._getMainButtonWidth();
@@ -258,7 +258,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     private _handleMenuItemSelection(menuItem: MenuItemComponent): void {
         if (!this.mainAction || !this.mainAction.keepMainAction) {
             this.selected = menuItem;
-            this.menu.menuItems.forEach((item) => {
+            this.menu._menuItems.forEach((item) => {
                 item.setSelected(false, true);
             });
             menuItem.setSelected(true, true);
@@ -270,7 +270,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @hidden */
     private _setupMenuSubscription(): void {
-        this._menuSubscription = this.menu.menuItems.changes.subscribe(() => {
+        this._menuSubscription = this.menu._menuItems.changes.subscribe(() => {
             this._menuItemSubscriptions.unsubscribe();
             this._menuItemSubscriptions.closed = false;
             this._setupMenuItemSubscriptions();
