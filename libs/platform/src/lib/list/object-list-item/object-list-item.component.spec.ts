@@ -374,11 +374,12 @@ describe('Object  List Item Component with DataSource', () => {
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(waitForAsync(() => {
         fixture = TestBed.createComponent(ObjectListItemDataSourceTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-    });
+        fixture.whenRenderingDone();
+    }));
 
     it('should create', () => {
         expect(component).toBeTruthy();

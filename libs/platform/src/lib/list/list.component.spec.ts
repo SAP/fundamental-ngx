@@ -135,13 +135,13 @@ describe('ListComponent with DataSource', () => {
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(waitForAsync(() => {
         fixture = TestBed.createComponent(ListDataSourceTestComponent);
         fixture.detectChanges();
-    });
+        fixture.whenRenderingDone();
+    }));
 
     it('should receive the data from datasource', () => {
-        fixture.detectChanges();
         const listElement = fixture.debugElement.queryAll(By.css('.fd-list__item'));
         expect(listElement.length).toBe(4);
     });
