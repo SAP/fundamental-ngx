@@ -1,3 +1,12 @@
+# [0.37.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.3...v0.37.0-rc.4) (2022-11-08)
+
+
+### Features
+
+* **platform:** add separate title property ([#8950](https://github.com/SAP/fundamental-ngx/issues/8950)) ([b3970c6](https://github.com/SAP/fundamental-ngx/commit/b3970c647ac9a4809176167e17e8c0214e0a2aba))
+
+
+
 # [0.37.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.2...v0.37.0-rc.3) (2022-11-08)
 
 
