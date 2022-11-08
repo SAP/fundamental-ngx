@@ -34,6 +34,14 @@ export interface ItemDef {
     templateRef: TemplateRef<any>;
 }
 
+export interface ListAdvancedDescription {
+    text: string;
+    ariaLabel?: string;
+    title?: string;
+}
+
+export type ListDescription = string | ListAdvancedDescription;
+
 export class ActionChangeEvent {
     /** Action List Item component */
     source: ActionListItemComponent;
@@ -85,7 +93,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** Description of the title */
     @Input()
-    description: Nullable<string>;
+    description: Nullable<ListDescription>;
 
     /** To invert the status of secondary text */
     @Input()
@@ -104,7 +112,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** attribute to hold secondary text*/
     @Input()
-    secondary?: string;
+    secondary: Nullable<ListDescription>;
 
     /**
      * Enabling this flag causes forcing secondary item directive to not wrap text,
@@ -416,6 +424,11 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             this._onActionButtonClick(action);
         }
+    }
+
+    /** @hidden */
+    _isAdvancedText(text: ListDescription): text is ListAdvancedDescription {
+        return typeof text !== 'string' && !!text.text;
     }
 
     /** @hidden */

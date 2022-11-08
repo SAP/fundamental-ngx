@@ -130,36 +130,18 @@
             {{ title }}
         </div>
         <div class="fd-list__byline fd-list__byline--2-col">
-            <span
-                *ngIf="description"
-                class="fd-list__byline-left"
-                [attr.aria-label]="description"
-                [attr.title]="description"
-                [attr.nowrap]="titleWrap"
-            >
-                {{ description }}
-            </span>
-            <span
-                #rt
-                *ngIf="secondary && !inverted"
-                [attr.aria-label]="secondary"
-                class="fd-list__byline-right"
-                [class]="statusType ? 'fd-list__byline-right--' + statusType : ''"
-                [attr.title]="secondary"
-                [attr.nowrap]="secondaryWrap"
-            >
-                {{ secondary }}
-            </span>
-            <span
-                #rt1
-                class="fd-list__byline-right"
-                *ngIf="inverted"
-                [attr.aria-label]="secondary"
-                [attr.title]="secondary"
-                [attr.nowrap]="secondaryWrap"
-            >
-                <fdp-object-status [status]="statusType" [inverted]="inverted"> {{ secondary }}</fdp-object-status>
-            </span>
+            <ng-container *ngIf="description">
+                <ng-container
+                    [ngTemplateOutlet]="_isAdvancedText(description) ? advancedDescription : simpleDescription"
+                    [ngTemplateOutletContext]="{ $implicit: description }"
+                ></ng-container>
+            </ng-container>
+            <ng-container *ngIf="secondary">
+                <ng-container
+                    [ngTemplateOutlet]="_isAdvancedText(secondary) ? advancedSecondary : simpleSecondary"
+                    [ngTemplateOutletContext]="{ $implicit: secondary }"
+                ></ng-container>
+            </ng-container>
         </div>
     </div>
     <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
@@ -218,4 +200,68 @@
         (click)="_onActionButtonClick('delete')"
         (keydown)="_onKeyButtonClick($event, 'delete')"
     ></button>
+</ng-template>
+
+<ng-template #simpleDescription let-description>
+    <span
+        class="fd-list__byline-left"
+        [attr.aria-label]="description"
+        [attr.title]="description"
+        [attr.nowrap]="titleWrap"
+    >
+        {{ description }}
+    </span>
+</ng-template>
+<ng-template #advancedDescription let-description>
+    <span
+        class="fd-list__byline-left"
+        [attr.aria-label]="description.ariaLabel ?? description.text"
+        [attr.title]="description.title ?? description.text"
+        [attr.nowrap]="titleWrap"
+    >
+        {{ description.text }}
+    </span>
+</ng-template>
+
+<ng-template #simpleSecondary let-secondary>
+    <span
+        *ngIf="!inverted"
+        [attr.aria-label]="secondary"
+        class="fd-list__byline-right"
+        [class]="statusType ? 'fd-list__byline-right--' + statusType : ''"
+        [attr.title]="secondary"
+        [attr.nowrap]="secondaryWrap"
+    >
+        {{ secondary }}
+    </span>
+    <span
+        class="fd-list__byline-right"
+        *ngIf="inverted"
+        [attr.aria-label]="secondary"
+        [attr.title]="secondary"
+        [attr.nowrap]="secondaryWrap"
+    >
+        <fdp-object-status [status]="statusType" [inverted]="inverted"> {{ secondary }}</fdp-object-status>
+    </span>
+</ng-template>
+<ng-template #advancedSecondary let-secondary>
+    <span
+        *ngIf="!inverted"
+        [attr.aria-label]="secondary.ariaLabel ?? secondary.text"
+        class="fd-list__byline-right"
+        [class]="statusType ? 'fd-list__byline-right--' + statusType : ''"
+        [attr.title]="secondary.title ?? secondary.text"
+        [attr.nowrap]="secondaryWrap"
+    >
+        {{ secondary.text }}
+    </span>
+    <span
+        class="fd-list__byline-right"
+        *ngIf="inverted"
+        [attr.aria-label]="secondary.ariaLabel ?? secondary.text"
+        [attr.title]="secondary.title ?? secondary.text"
+        [attr.nowrap]="secondaryWrap"
+    >
+        <fdp-object-status [status]="statusType" [inverted]="inverted"> {{ secondary.text }}</fdp-object-status>
+    </span>
 </ng-template>

@@ -51,7 +51,26 @@
     <span *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap" [attr.title]="title">{{
         title
     }}</span>
+    <ng-container *ngIf="secondary">
+        <ng-container
+            [ngTemplateOutlet]="_isAdvancedText(secondary) ? advancedSecondary : simpleSecondary"
+            [ngTemplateOutletContext]="{ $implicit: secondary }"
+        ></ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template #simpleSecondary let-secondary>
     <span fd-list-secondary [attr.aria-label]="secondary" [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
         {{ secondary }}
+    </span>
+</ng-template>
+<ng-template #advancedSecondary let-secondary>
+    <span
+        fd-list-secondary
+        [attr.aria-label]="secondary.ariaLabel ?? secondary.text"
+        [attr.title]="secondary.title ?? secondary.text"
+        [attr.nowrap]="secondaryWrap"
+    >
+        {{ secondary.text }}
     </span>
 </ng-template>
