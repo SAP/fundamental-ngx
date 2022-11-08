@@ -45,7 +45,6 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 @Component({
     selector: 'fd-shellbar-actions',
     templateUrl: './shellbar-actions.component.html',
-    styleUrls: ['./shellbar-actions.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
