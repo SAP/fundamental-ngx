@@ -1246,6 +1246,28 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount - 1);
             });
+
+            it('should have correct order of items before and after drag and drop', () => {
+                const row1 = tableComponent._tableRowsVisible[0];
+                const draggedRow = tableComponent._tableRowsVisible[1];
+                const row3 = tableComponent._tableRowsVisible[2];
+
+                console.log('before: ', tableComponent._tableRowsVisible);
+
+                tableComponent._dragDropItemDrop({
+                    items: [],
+                    replacedItemIndex: 2,
+                    draggedItemIndex: 1
+                });
+
+                fixture.detectChanges();
+
+                console.log('after: ', tableComponent._tableRowsVisible);
+
+                expect(row1).toEqual(tableComponent._tableRowsVisible[0]);
+                expect(draggedRow).toEqual(tableComponent._tableRowsVisible[3]);
+                expect(row3).toEqual(tableComponent._tableRowsVisible[1]);
+            });
         });
     });
 })();
