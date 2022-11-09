@@ -216,7 +216,7 @@ export class MenuComponent
         }
 
         this._changeDetectorRef.markForCheck();
-        this.menuItems.first.elementRef.nativeElement.focus();
+        this._menuItems.first.elementRef.nativeElement.focus();
     }
 
     /** Closes the menu */
