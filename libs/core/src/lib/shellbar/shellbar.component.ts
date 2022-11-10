@@ -9,6 +9,7 @@ import {
     ElementRef,
     forwardRef,
     Input,
+    OnChanges,
     OnInit,
     QueryList,
     ViewEncapsulation
@@ -33,7 +34,7 @@ export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnInit {
+export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnInit, OnChanges {
     /** Size of Shellbar component 's' | 'm' | 'l' | 'xl' */
     @Input()
     size: ShellbarSizes = 'm';
@@ -86,6 +87,11 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
     /** @hidden */
     ngOnInit(): void {
         this._attachResizeListener();
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this._handleSizeChange();
     }
 
     /** @hidden */
@@ -153,16 +159,16 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
     }
 
     /** @hidden */
-    _handleSizeChange(currentSize: ShellbarSizes): void {
-        // if size changed and changed to 's' with combobox open.
-        if (currentSize !== this.size && this.size === 's') {
+    _handleSizeChange(): void {
+        // if size changed to 's' with combobox open.
+        if (this.size === 's') {
             if (this.comboboxComponent && this._shellbarActionsComponent._showCombobox) {
                 const isPopoverOpened = this.comboboxComponent.open;
                 this._shellbarActionsComponent._showFullWidthCombobox(true, isPopoverOpened);
             }
         }
-        // if size was 's' and changed to any other size with combobox open.
-        else if (currentSize === 's' && currentSize !== this.size) {
+        // size changed to any other size with combobox open.
+        else {
             if (this.comboboxComponent && this._shellbarActionsComponent._showCombobox) {
                 const isPopoverOpened = this.comboboxComponent.open;
                 this._shellbarActionsComponent._showFullWidthCombobox(false);
@@ -171,20 +177,35 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
         }
     }
 
+    /** @hidden change size */
+    _setSize(size: ShellbarSizes): void {
+        this.size = size;
+        this._handleSizeChange();
+    }
+
     /** @hidden */
     private _onResize(): void {
         if (this.responsive) {
+            const shellbarWidth = this._elementRef.nativeElement.offsetWidth;
             const currentSize = this.size;
-            if (this._elementRef.nativeElement.offsetWidth > this.breakPoints.l && currentSize !== 'xl') {
-                this.size = 'xl';
-            } else if (this._elementRef.nativeElement.offsetWidth > this.breakPoints.m && currentSize !== 'l') {
-                this.size = 'l';
-            } else if (this._elementRef.nativeElement.offsetWidth > this.breakPoints.s && currentSize !== 'm') {
-                this.size = 'm';
-            } else if (this._elementRef.nativeElement.offsetWidth < this.breakPoints.s && currentSize !== 's') {
-                this.size = 's';
+
+            if (shellbarWidth > this.breakPoints.l && currentSize !== 'xl') {
+                this._setSize('xl');
+            } else if (
+                shellbarWidth <= this.breakPoints.l &&
+                shellbarWidth > this.breakPoints.m &&
+                currentSize !== 'l'
+            ) {
+                this._setSize('l');
+            } else if (
+                shellbarWidth <= this.breakPoints.m &&
+                shellbarWidth > this.breakPoints.s &&
+                currentSize !== 'm'
+            ) {
+                this._setSize('m');
+            } else if (shellbarWidth <= this.breakPoints.s && currentSize !== 's') {
+                this._setSize('s');
             }
-            this._handleSizeChange(currentSize);
             this._cdr.detectChanges();
         }
     }
