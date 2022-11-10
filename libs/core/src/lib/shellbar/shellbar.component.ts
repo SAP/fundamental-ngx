@@ -44,7 +44,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
 
     /** Custom width can be given to 's' , 'm' , 'l' and 'xl' sizes.  */
     @Input()
-    sizesWidth = {
+    breakPoints = {
         s: 320,
         m: 720,
         l: 1024,
@@ -175,13 +175,13 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
     private _onResize(): void {
         if (this.responsive) {
             const currentSize = this.size;
-            if (this._elementRef.nativeElement.offsetWidth > this.sizesWidth.l && currentSize !== 'xl') {
+            if (this._elementRef.nativeElement.offsetWidth > this.breakPoints.l && currentSize !== 'xl') {
                 this.size = 'xl';
-            } else if (this._elementRef.nativeElement.offsetWidth > this.sizesWidth.m && currentSize !== 'l') {
+            } else if (this._elementRef.nativeElement.offsetWidth > this.breakPoints.m && currentSize !== 'l') {
                 this.size = 'l';
-            } else if (this._elementRef.nativeElement.offsetWidth > this.sizesWidth.s && currentSize !== 'm') {
+            } else if (this._elementRef.nativeElement.offsetWidth > this.breakPoints.s && currentSize !== 'm') {
                 this.size = 'm';
-            } else if (this._elementRef.nativeElement.offsetWidth < this.sizesWidth.s && currentSize !== 's') {
+            } else if (this._elementRef.nativeElement.offsetWidth < this.breakPoints.s && currentSize !== 's') {
                 this.size = 's';
             }
             this._handleSizeChange(currentSize);

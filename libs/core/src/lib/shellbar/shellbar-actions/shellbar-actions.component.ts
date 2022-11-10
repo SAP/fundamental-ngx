@@ -111,7 +111,7 @@ export class ShellbarActionsComponent implements AfterViewInit {
     _searchButton: ButtonComponent;
 
     /** @hidden
-     * True when shellbar takes full width of whole shellbar. For example, in 'S' size.
+     * True when combobox takes full width of whole shellbar. For example, in 'S' size.
      */
     _fullWidthOnMobile = false;
 
@@ -172,17 +172,17 @@ export class ShellbarActionsComponent implements AfterViewInit {
         this._enableComboboxForMobileMode = value;
         if (value) {
             this._onSearchButtonClick(shouldOpenPopover);
-            this._addFullWidthClass(true);
+            this._toggleFullWidthClass(true);
             this._comboboxComponent._comboboxElement.style.width = '100%';
         } else {
             this._hideCombobox();
-            this._addFullWidthClass(false);
+            this._toggleFullWidthClass(false);
             this._comboboxComponent._comboboxElement.style.width = '';
         }
     }
 
     /** @hidden */
-    _addFullWidthClass(value: boolean): void {
+    _toggleFullWidthClass(value: boolean): void {
         this._fullWidthOnMobile = value;
         this._cdRef.detectChanges();
     }
