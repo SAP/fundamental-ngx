@@ -1,3 +1,12 @@
+# [0.37.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.10...v0.37.0-rc.11) (2022-11-10)
+
+
+### Bug Fixes
+
+* **platform:** table drag and drop ([#8830](https://github.com/SAP/fundamental-ngx/issues/8830)) ([cf10e1f](https://github.com/SAP/fundamental-ngx/commit/cf10e1f78cf2d46b839368b65727b0d54a55ed04))
+
+
+
 # [0.37.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.9...v0.37.0-rc.10) (2022-11-09)
 
 
