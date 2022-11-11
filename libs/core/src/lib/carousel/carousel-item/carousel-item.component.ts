@@ -1,12 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    HostBinding,
-    Input,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { CarouselItemInterface } from '../carousel.service';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
@@ -79,7 +71,6 @@ export class CarouselItemComponent implements CarouselItemInterface {
     /** @hidden */
     set visibility(visibility: Visibility) {
         this._visibility = visibility;
-        this._changeDetectorRef.detectChanges();
     }
 
     get visibility(): Visibility {
@@ -87,10 +78,7 @@ export class CarouselItemComponent implements CarouselItemInterface {
     }
 
     /** @hidden */
-    constructor(
-        private readonly _changeDetectorRef: ChangeDetectorRef,
-        private readonly _elementRef: ElementRef<HTMLElement>
-    ) {}
+    constructor(private readonly _elementRef: ElementRef<HTMLElement>) {}
 
     /** Native element  */
     get element(): HTMLElement {
