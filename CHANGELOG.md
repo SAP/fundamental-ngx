@@ -1,3 +1,7 @@
+# [0.37.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.11...v0.37.0-rc.12) (2022-11-11)
+
+
+
 # [0.37.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.10...v0.37.0-rc.11) (2022-11-10)
 
 
