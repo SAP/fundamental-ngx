@@ -11,6 +11,7 @@ import {
     HostBinding,
     HostListener,
     Input,
+    NgZone,
     OnDestroy,
     OnInit,
     Optional,
@@ -21,7 +22,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Direction } from '@angular/cdk/bidi';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { debounceTime, take, takeUntil } from 'rxjs/operators';
 import { Subject, merge } from 'rxjs';
 
 import { resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
@@ -239,6 +240,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         private readonly _renderer: Renderer2,
         private readonly _changeDetectorRef: ChangeDetectorRef,
         private readonly _carouselService: CarouselService,
+        private readonly _zone: NgZone,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
@@ -474,33 +476,37 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** @hidden Initialize carousel with visible items */
     private _initializeCarousel(): void {
-        // Handles navigator button enabled/disabled state
-        this._buttonVisibility();
+        this._zone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
+            // Handles navigator button enabled/disabled state
+            this._buttonVisibility();
 
-        let arrayLength: number;
-        // set page indicator count with fake array, to use in template
-        if (this.loop && this._visibleSlidesNumericCount > 1) {
-            // If loop with multi item visible.
-            arrayLength = this.slides.length;
-        } else {
-            arrayLength = this.slides.length - this._visibleSlidesNumericCount + 1;
-        }
-
-        const pageIndicatorsIfZeroCount = this.slides.length === 0 ? 0 : 1;
-
-        this.pageIndicatorsCountArray = new Array(arrayLength > 0 ? arrayLength : pageIndicatorsIfZeroCount);
-
-        this._goToFirstItem();
-
-        this.slides.forEach((_slide, index) => {
-            if (
-                index >= this.currentActiveSlidesStartIndex &&
-                index < this.currentActiveSlidesStartIndex + this._visibleSlidesNumericCount
-            ) {
-                _slide.visibility = 'visible';
+            let arrayLength: number;
+            // set page indicator count with fake array, to use in template
+            if (this.loop && this._visibleSlidesNumericCount > 1) {
+                // If loop with multi item visible.
+                arrayLength = this.slides.length;
             } else {
-                _slide.visibility = 'hidden';
+                arrayLength = this.slides.length - this._visibleSlidesNumericCount + 1;
             }
+
+            const pageIndicatorsIfZeroCount = this.slides.length === 0 ? 0 : 1;
+
+            this.pageIndicatorsCountArray = new Array(arrayLength > 0 ? arrayLength : pageIndicatorsIfZeroCount);
+
+            this._goToFirstItem();
+
+            this.slides.forEach((_slide, index) => {
+                if (
+                    index >= this.currentActiveSlidesStartIndex &&
+                    index < this.currentActiveSlidesStartIndex + this._visibleSlidesNumericCount
+                ) {
+                    _slide.visibility = 'visible';
+                } else {
+                    _slide.visibility = 'hidden';
+                }
+            });
+
+            this._changeDetectorRef.detectChanges();
         });
     }
 
