@@ -1,3 +1,12 @@
+# [0.37.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.12...v0.37.0-rc.13) (2022-11-14)
+
+
+### Bug Fixes
+
+* **core:** fix expression changed error for carousel ([#8959](https://github.com/SAP/fundamental-ngx/issues/8959)) ([87f4b0d](https://github.com/SAP/fundamental-ngx/commit/87f4b0ddecc48e5adecccbf0d5e2e6b255648350))
+
+
+
 # [0.37.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.11...v0.37.0-rc.12) (2022-11-11)
 
 
