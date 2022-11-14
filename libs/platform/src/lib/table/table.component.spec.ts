@@ -951,7 +951,7 @@ describe('TableComponent internal', () => {
             expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1); // 1 means initial fetch
             const container = tableBodyContainer.nativeElement as HTMLElement;
             await tableBodyScrollTop(container.scrollHeight);
-            expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1);
+            expect(hostComponent.source.fetch).toHaveBeenCalledTimes(2);
         });
 
         // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
