@@ -33,6 +33,10 @@ export class BasePopoverClass {
     @Input()
     closeOnEscapeKey = true;
 
+    /** Whether to wrap content with fd-scrollbar directive. */
+    @Input()
+    disableScrollbar = false;
+
     /**
      * The placement of the popover.
      * It can be one of:
