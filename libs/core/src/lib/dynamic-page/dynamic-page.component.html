@@ -19,8 +19,9 @@
     </header>
 
     <ng-content select="fd-tab-list"></ng-content>
-
-    <ng-content select="fd-dynamic-page-content"></ng-content>
+    <div fd-scrollbar>
+        <ng-content select="fd-dynamic-page-content"></ng-content>
+    </div>
 
     <footer>
         <ng-content select="fd-dynamic-page-footer"></ng-content>
