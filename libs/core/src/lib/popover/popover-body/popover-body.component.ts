@@ -47,6 +47,9 @@ export class PopoverBodyComponent {
     /** Whether to wrap content with fd-scrollbar directive. */
     _disableScrollbar = false;
 
+    /** Should fd-scrollbar have tabindex*/
+    _tabbableScrollbar = true;
+
     /** @hidden */
     @ViewChild(CdkTrapFocus)
     _cdkTrapFocus: CdkTrapFocus;
