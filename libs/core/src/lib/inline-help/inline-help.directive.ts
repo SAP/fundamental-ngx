@@ -15,8 +15,8 @@ import { BasePopoverClass } from '@fundamental-ngx/core/popover';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
-const INLINE_HELP_CLASS = 'fd-popover__inline-help fd-inline-help__content';
-const INLINE_HELP_ICON_CLASS = 'fd-popover__inline-help--icon';
+const INLINE_HELP_CLASS = 'fd-popover__body--inline-help fd-inline-help__content';
+const INLINE_HELP_ICON_CLASS = 'fd-popover__body--inline-help-icon';
 
 /**
  * The component that represents an inline-help.

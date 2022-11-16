@@ -47,8 +47,6 @@ export const GetDefaultPosition = (position: ConnectedPosition[]): ConnectedPosi
  */
 export type PopoverFillMode = 'at-least' | 'equal' | 'fit-content';
 
-export const ARROW_SIZE = '0.5rem';
-
 export type Placement =
     | 'auto-start'
     | 'auto'
@@ -71,12 +69,6 @@ export type RtlPlacement = 'left' | 'left-start' | 'left-end' | 'right' | 'right
 export type XPositions = 'start' | 'center' | 'end';
 export type YPositions = 'top' | 'center' | 'bottom';
 export type ArrowPosition = 'top' | 'bottom' | 'start' | 'end' | 'center';
-
-export const PopoverFlippedXDirection: { [key: string]: ArrowPosition } = {
-    start: 'end',
-    end: 'start',
-    center: 'center'
-};
 
 export const PopoverFlippedYDirection: { [key: string]: YPositions } = {
     bottom: 'top',
@@ -111,32 +103,5 @@ export class PopoverPosition {
         }
 
         return resultCdkPlacement;
-    }
-
-    /** Set arrow position */
-    static getArrowPosition(position: ConnectedPosition, rtl?: boolean): ArrowPosition | null {
-        let _position: ArrowPosition | null = null;
-
-        if (position.overlayY !== position.originY && position.originY !== 'center' && position.overlayY !== 'center') {
-            _position = position.overlayY;
-        } else if (
-            position.overlayX !== position.originX &&
-            position.overlayX !== 'center' &&
-            position.originX !== 'center'
-        ) {
-            _position = position.overlayX;
-
-            if (rtl) {
-                _position = PopoverFlippedXDirection[_position];
-            }
-        }
-
-        return _position;
-    }
-
-    /** Get margin direction */
-    static getMarginDirection(position: ArrowPosition): string {
-        const resultPosition = position.replace('start', 'left').replace('end', 'right');
-        return 'margin-' + resultPosition;
     }
 }
