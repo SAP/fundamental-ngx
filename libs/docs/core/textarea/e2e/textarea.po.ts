@@ -15,7 +15,7 @@ export class TextareaPo extends CoreBaseComponentPo {
 
     helpIcon = '.sap-icon--question-mark';
     helpContent = '.fd-inline-help__content';
-    formMessage = '.fd-popover__popper fd-form-message';
+    formMessage = '.fd-popover__body fd-form-message';
 
     async open(): Promise<void> {
         await super.open(this.url);

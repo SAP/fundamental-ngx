@@ -33,7 +33,7 @@ export class TimePickerPo extends CoreBaseComponentPo {
 
     hoursPoint = this.hoursColumn + '> .fd-time__wrapper ul > li';
 
-    formatList = '.fd-popover__popper';
+    formatList = '.fd-popover__body';
     usFormat = '.cdk-overlay-container ul[fd-list] li[fd-option]:nth-child(1)';
     frFormat = '.cdk-overlay-container ul[fd-list] li[fd-option]:nth-child(2)';
     bgFormat = '.cdk-overlay-container ul[fd-list] li[fd-option]:nth-child(3)';

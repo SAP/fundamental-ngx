@@ -19,7 +19,7 @@ export class SliderPo extends CoreBaseComponentPo {
     sliderHandles = '.fd-slider__handle';
     valueLabels = 'p:nth-of-type(2)';
     sliderTooltip = 'fd-popover-body .fd-slider--tooltip';
-    sliderTooltipInput = 'fd-popover-body .fd-popover__popper input';
+    sliderTooltipInput = 'fd-popover-body .fd-popover__body input';
     sliderTooltipInputFF = 'fd-popover-body .fd-slider--tooltip-wrapper input';
     sliderAttr = 'fd-slider';
     sliderLabels = '.fd-slider__labels';
