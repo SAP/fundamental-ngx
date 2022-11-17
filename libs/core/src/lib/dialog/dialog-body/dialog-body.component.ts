@@ -1,4 +1,4 @@
-import { Component, ElementRef, Optional } from '@angular/core';
+import { Component, ElementRef, HostBinding, Optional } from '@angular/core';
 
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogRef } from '../utils/dialog-ref.class';
@@ -23,6 +23,10 @@ import { DialogRef } from '../utils/dialog-ref.class';
     }
 })
 export class DialogBodyComponent {
+    /** @hidden adds fd-scrollbar class. */
+    @HostBinding('class.fd-scrollbar')
+    _isScrollbar = true;
+
     /** @hidden */
     constructor(
         private _elRef: ElementRef,
