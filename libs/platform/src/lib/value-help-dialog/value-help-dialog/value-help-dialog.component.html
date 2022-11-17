@@ -9,7 +9,7 @@
             </ng-template>
         </fd-dialog-header>
         <fd-dialog-body [dir]="_dir">
-            <div class="fdp-value-help-dialog__content-holder">
+            <div class="fdp-value-help-dialog__content-holder fd-scrollbar">
                 <ng-container *ngIf="mobile">
                     <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
                 </ng-container>
@@ -264,6 +264,7 @@
 
 <ng-template #defineConditionsContent>
     <fdp-define-tab
+        class="fd-scrollbar"
         [strategyLabels]="defineStrategyLabels"
         [conditions]="conditionItems"
         [uid]="id"
