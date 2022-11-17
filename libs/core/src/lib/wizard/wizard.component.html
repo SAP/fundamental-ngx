@@ -2,7 +2,7 @@
     <ng-content select="fd-wizard-navigation"></ng-content>
     <div
         *ngIf="appendToWizard"
-        class="fd-wizard-container-wrapper"
+        class="fd-wizard-container-wrapper fd-scrollbar"
         #wrapperContainer
         fdScrollSpy
         cdkScrollable
@@ -13,7 +13,7 @@
             <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
         </div>
     </div>
-    <div *ngIf="!appendToWizard" cdkScrollable class="fd-wizard-container-wrapper">
+    <div *ngIf="!appendToWizard" cdkScrollable class="fd-wizard-container-wrapper fd-scrollbar">
         <div *ngFor="let contentTemplate of contentTemplates">
             <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
         </div>
