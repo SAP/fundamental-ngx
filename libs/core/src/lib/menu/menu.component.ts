@@ -72,6 +72,17 @@ export class MenuComponent
     @Input()
     focusTrapped = true;
 
+    /**
+     * Whether the popover should automatically move focus into the trapped region upon
+     * initialization and return focus to the previous activeElement upon destruction.
+     */
+    @Input()
+    focusAutoCapture = true;
+
+    /** Should fd-scrollbar have tabindex*/
+    @Input()
+    tabbableScrollbar = false;
+
     /** Open submenu on hover after given milliseconds */
     @Input()
     openOnHoverTime = 0;
