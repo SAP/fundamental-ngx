@@ -355,6 +355,8 @@ describe('SmartFilterBarComponent', () => {
         await whenStable(fixture);
 
         expect(smartFilterBar._showFilterBar).toBeFalse();
-        expect(fixture.nativeElement.querySelector('fdp-form-generator')).toBeNull();
+        expect(fixture.nativeElement.querySelector('.fdp-smart-filter-bar__filters').classList).toContain(
+            'fdp-smart-filter-bar__filters--hidden'
+        );
     });
 });

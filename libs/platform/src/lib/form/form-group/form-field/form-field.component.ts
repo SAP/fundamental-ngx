@@ -497,8 +497,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this._labelColumnLayout$ = new BehaviorSubject(this._labelColumnLayout);
         this._fieldColumnLayout$ = new BehaviorSubject(this._fieldColumnLayout);
         this._gapColumnLayout$ = new BehaviorSubject(this._gapColumnLayout);
-        // provides capability to make a field disabled. useful in reactive form approach.
-        this.formControl = new FormControl({ value: null, disabled: this.disabled });
         // formGroupContainer can be injected only if current form-field is located
         // insight formGroupContainer content.
         // If this is not the case the formGroupContainer
@@ -545,6 +543,11 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     ngOnInit(): void {
+        // provides capability to make a field disabled. useful in reactive form approach.
+        this.formControl =
+            (this.formGroupContainer?.formGroup?.get(this.id) as FormControl) ??
+            new FormControl({ value: null, disabled: this.disabled });
+
         if (this.columns && (this.columns < 1 || this.columns > 12)) {
             throw new Error('[columns] accepts numbers between 1 - 12');
         }

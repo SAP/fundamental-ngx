@@ -274,6 +274,7 @@
         "docs-platform-thumbnail": "libs/docs/platform/thumbnail",
         "docs-platform-time-picker": "libs/docs/platform/time-picker",
         "docs-platform-upload-collection": "libs/docs/platform/upload-collection",
+        "docs-platform-variant-management": "libs/docs/platform/variant-management",
         "docs-platform-vhd": "libs/docs/platform/vhd",
         "docs-platform-wizard-generator": "libs/docs/platform/wizard-generator",
         "docs-schema": "libs/docs/schema",
@@ -332,6 +333,7 @@
         "platform-thumbnail": "libs/platform/src/lib/thumbnail",
         "platform-upload-collection": "libs/platform/src/lib/upload-collection",
         "platform-value-help-dialog": "libs/platform/src/lib/value-help-dialog",
+        "platform-variant-management": "libs/platform/src/lib/variant-management",
         "platform-wizard-generator": "libs/platform/src/lib/wizard-generator",
         "plugins-wdio": "libs/plugins/wdio",
         "workspace-tools": "tools"

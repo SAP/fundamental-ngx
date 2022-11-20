@@ -8,10 +8,10 @@ import {
 } from '@fundamental-ngx/platform/form';
 import { take } from 'rxjs/operators';
 import { SmartFilterBarCondition, SmartFilterBarConditionBuilder } from '../../interfaces/smart-filter-bar-condition';
+import { SmartFilterBarService } from '../../smart-filter-bar.service';
 import { SmartFilterBarConditionsDialogComponent } from '../smart-filter-bar-conditions-dialog/smart-filter-bar-conditions-dialog.component';
 import { SmartFilterBar } from '../../smart-filter-bar.class';
 import { smartFilterBarProvider } from '../../providers/smart-filter-bar.provider';
-import { isSelectItem, SelectItem } from '@fundamental-ngx/platform/shared';
 
 @Directive({
     providers: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider]
@@ -21,6 +21,7 @@ export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGe
     protected constructor(
         protected _dialogService: DialogService,
         protected _smartFilterBar: SmartFilterBar,
+        protected _smartFilterBarService: SmartFilterBarService,
         protected _injector: Injector
     ) {
         super();
@@ -55,18 +56,10 @@ export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGe
         dialogRef.afterClosed.pipe(take(1)).subscribe({
             next: async (conditions: SmartFilterBarCondition[]) => {
                 const field = this.getField();
-                const normalizedConditions = (await this.normalizeConditions(conditions)).map((c: any) => {
-                    if (isSelectItem(c)) {
-                        return c;
-                    }
-
-                    const condition: SelectItem = {
-                        label: c.displayValue,
-                        value: c
-                    };
-
-                    return condition;
-                });
+                const normalizedConditions = await this._smartFilterBarService.getConditionFieldSelectedVariants(
+                    this.formItem,
+                    conditions
+                );
                 field.setValue(normalizedConditions);
             },
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -80,27 +73,5 @@ export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGe
      */
     getField(): DynamicFormControl {
         return this.form.get(`${this.formGroupName}.${this.name}`) as DynamicFormControl;
-    }
-
-    /**
-     * Method for normalizing generated conditions to display in human-readable format.
-     * @param conditions Array of generated conditions.
-     * @returns Formatted array of conditions.
-     */
-    async normalizeConditions(conditions: SmartFilterBarCondition[]): Promise<SmartFilterBarCondition[]> {
-        const normalizedConditions: SmartFilterBarCondition[] = [];
-
-        for (const condition of conditions) {
-            const newCondition = Object.assign({}, condition);
-
-            newCondition.displayValue = await this._smartFilterBar.getDisplayValue(
-                newCondition,
-                this.formItem.guiOptions?.additionalData.type
-            );
-
-            normalizedConditions.push(newCondition);
-        }
-
-        return normalizedConditions;
     }
 }

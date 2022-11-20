@@ -249,10 +249,14 @@ export class PopoverService extends BasePopoverClass {
             this.triggers.forEach((trigger) => {
                 const triggerName = typeof trigger === 'string' ? trigger : trigger.trigger;
                 this._eventRef.push(
-                    this._renderer.listen(this._triggerElement.nativeElement, triggerName, () => {
+                    this._renderer.listen(this._triggerElement.nativeElement, triggerName, (event: Event) => {
                         const closeAction = typeof trigger !== 'object' || !!trigger.closeAction;
                         const openAction = typeof trigger !== 'object' || !!trigger.openAction;
                         this.toggle(openAction, closeAction);
+
+                        if (typeof trigger === 'object' && trigger.stopPropagation) {
+                            event.stopImmediatePropagation();
+                        }
                     })
                 );
             });

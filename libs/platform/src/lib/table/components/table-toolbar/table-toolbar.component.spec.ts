@@ -20,6 +20,7 @@ class TableComponentMock
             | 'emptyRowAdded'
             | 'save'
             | 'cancel'
+            | 'presetChanged'
         >
 {
     openTableSortSettings = new EventEmitter();
@@ -29,6 +30,7 @@ class TableComponentMock
     emptyRowAdded = new EventEmitter();
     save = new EventEmitter();
     cancel = new EventEmitter();
+    presetChanged = new EventEmitter();
 
     search(): void {}
 }

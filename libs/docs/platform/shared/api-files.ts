@@ -115,5 +115,6 @@ export const API_FILES = {
         'MessagePopoverFormWrapperComponent',
         'MessageViewComponent',
         'MessagePopoverFormItemDirective'
-    ]
+    ],
+    variantManagement: ['VariantManagementComponent', 'VariantManagementWrapperComponent']
 };

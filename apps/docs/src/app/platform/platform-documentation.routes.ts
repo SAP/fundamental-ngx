@@ -279,6 +279,13 @@ export const ROUTES: Routes = [
                 path: 'message-popover',
                 loadChildren: () =>
                     import('@fundamental-ngx/docs/platform/message-popover').then((m) => m.MessagePopoverDocsModule)
+            },
+            {
+                path: 'variant-management',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/platform/variant-management').then(
+                        (m) => m.VariantManagementDocsModule
+                    )
             }
         ]
     }

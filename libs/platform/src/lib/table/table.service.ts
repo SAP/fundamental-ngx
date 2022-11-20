@@ -88,11 +88,12 @@ export class TableService {
     }
 
     /** Set new sort rules */
-    setSort(sortRules: CollectionSort[]): void {
+    setSort(sortRules: CollectionSort[] | undefined): void {
         const prevState = this.getTableState();
         const prevSortRules = (prevState && prevState.sortBy) || [];
 
-        const newSortRules: CollectionSort[] = [...sortRules];
+        const newSortRules: CollectionSort[] = sortRules ? [...sortRules] : [];
+
         const state: TableState = { ...prevState, sortBy: newSortRules };
 
         if (!equal(prevSortRules, state.sortBy)) {
@@ -122,11 +123,11 @@ export class TableService {
     }
 
     /** Set new sort rules */
-    setFilters(filterRules: CollectionFilter[]): void {
+    setFilters(filterRules: CollectionFilter[] | undefined): void {
         const prevState = this.getTableState();
         const prevFilterRules = (prevState && prevState.filterBy) || [];
 
-        const newFilterRules: CollectionFilter[] = [...filterRules];
+        const newFilterRules: CollectionFilter[] = filterRules ? [...filterRules] : [];
         const state: TableState = { ...prevState, filterBy: newFilterRules };
 
         if (!equal(prevFilterRules, state.filterBy)) {
@@ -172,11 +173,11 @@ export class TableService {
     }
 
     /** Set group rules */
-    setGroups(groups: CollectionGroup[]): void {
+    setGroups(groups: CollectionGroup[] | undefined): void {
         const prevState = this.getTableState();
         const prevGroups = (prevState && prevState.groupBy) || [];
 
-        const newGroups: CollectionGroup[] = [...groups];
+        const newGroups: CollectionGroup[] = groups ? [...groups] : [];
         const state: TableState = { ...prevState, groupBy: newGroups };
 
         if (!equal(prevGroups, state.groupBy)) {
@@ -206,7 +207,7 @@ export class TableService {
     }
 
     /** Freeze table to column */
-    freezeTo(columnName: string): void {
+    freezeTo(columnName: string | null): void {
         const prevState = this.getTableState();
 
         this.setTableState({ ...prevState, freezeToColumn: columnName });

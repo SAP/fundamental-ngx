@@ -36,6 +36,10 @@ $fd-block: fdp-smart-filter-bar;
 
     .#{$fd-block}__filters {
         @include fd-responsive-paddings();
+
+        &--hidden {
+            display: none !important;
+        }
     }
 
     .fd-container.fd-form-layout-grid-container {

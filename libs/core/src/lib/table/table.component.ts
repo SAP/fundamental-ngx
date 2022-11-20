@@ -131,8 +131,6 @@ export class TableComponent implements AfterViewInit, OnDestroy, FdTable {
     /** @hidden */
     _onRowKeydown(event: KeyboardEvent, tableRow: TableRowDirective): void {
         if (!event.defaultPrevented && KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
-            event.preventDefault();
-
             const dir = KeyUtil.isKeyCode(event, DOWN_ARROW) ? 1 : -1;
             const rows = dir === 1 ? this._rows.toArray() : this._rows.toArray().reverse();
             const currentRowIndex = rows.findIndex((row) => row === tableRow);

@@ -149,4 +149,5 @@ export interface TriggerConfig {
     trigger: string;
     openAction: boolean;
     closeAction: boolean;
+    stopPropagation?: boolean;
 }

@@ -1,0 +1,84 @@
+<fd-popover
+    #popover
+    *ngIf="activeVariant"
+    placement="bottom"
+    [noArrow]="false"
+    [focusAutoCapture]="true"
+    [focusTrapped]="true"
+    additionalBodyClass="fd-variant-management__popover-body"
+    [triggers]="popoverTriggers"
+>
+    <fd-popover-control>
+        <div class="fd-variant-management__header">
+            <h4 fd-title class="fd-variant-management__title" [headerSize]="headerSize">
+                {{ activeVariant.name }}
+            </h4>
+            <ng-container *ngIf="_variantChanged">
+                <span
+                    class="fd-variant-management__dirty-indicator"
+                    [class.fd-variant-management__dirty-indicator--custom]="!!dirtyLabel"
+                >
+                    <ng-template #defaultDirtyIndicator>*</ng-template>
+                    <ng-template
+                        *ngTemplateOutlet="dirtyLabel ? dirtyLabel.templateRef : defaultDirtyIndicator"
+                    ></ng-template>
+                </span>
+            </ng-container>
+            <fdp-menu-button type="transparent"> </fdp-menu-button>
+        </div>
+    </fd-popover-control>
+    <fd-popover-body>
+        <div fd-popover-body-header>
+            <div fd-bar [barDesign]="displaySearch ? 'header-with-subheader' : 'header'">
+                <div fd-bar-left>
+                    <fd-bar-element>
+                        <h5 fd-title>{{ 'platformVariantManagement.myViews' | fdTranslate }}</h5>
+                    </fd-bar-element>
+                </div>
+            </div>
+            <div fd-bar barDesign="header" *ngIf="displaySearch">
+                <div fd-bar-left>
+                    <fd-bar-element>
+                        <fdp-search-field
+                            [placeholder]="'platformVariantManagement.search' | fdTranslate"
+                            (searchSubmit)="_onSearchSubmit($event)"
+                            (cancelSearch)="_cancelSearch()"
+                            [disableRefresh]="true"
+                        ></fdp-search-field>
+                    </fd-bar-element>
+                </div>
+            </div>
+        </div>
+        <ul fd-list>
+            <ng-container *ngFor="let variant of _variants | filter: _filterPhrase:'name'; trackBy: _trackFn">
+                <li fd-list-item (click)="selectVariant(variant)">
+                    <span fd-list-link>
+                        <span fd-list-title>{{ variant.name }}</span>
+                    </span>
+                </li>
+            </ng-container>
+        </ul>
+        <div fd-popover-body-footer>
+            <div fd-bar barDesign="footer">
+                <div fd-bar-right>
+                    <fd-button-bar
+                        fdType="emphasized"
+                        [label]="'platformVariantManagement.save' | fdTranslate"
+                        *ngIf="!activeVariant.readonly && _variantChanged"
+                        (click)="saveCurrentVariant()"
+                    >
+                    </fd-button-bar>
+                    <fd-button-bar
+                        [fdType]="activeVariant.readonly || !_variantChanged ? 'emphasized' : 'transparent'"
+                        [label]="'platformVariantManagement.saveAs' | fdTranslate"
+                        (click)="_openSaveDialog()"
+                    ></fd-button-bar>
+                    <fd-button-bar
+                        [label]="'platformVariantManagement.manage' | fdTranslate"
+                        (click)="_openManageDialog()"
+                    ></fd-button-bar>
+                </div>
+            </div>
+        </div>
+    </fd-popover-body>
+</fd-popover>

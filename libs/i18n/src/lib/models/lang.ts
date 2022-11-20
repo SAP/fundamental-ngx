@@ -743,6 +743,30 @@ export interface FdLanguage {
             pattern: FdLanguageKey;
         };
     };
+    platformVariantManagement: {
+        manage: FdLanguageKey;
+        saveAs: FdLanguageKey;
+        save: FdLanguageKey;
+        myViews: FdLanguageKey;
+        view: FdLanguageKey;
+        setAsDefault: FdLanguageKey;
+        public: FdLanguageKey;
+        applyAutomatically: FdLanguageKey;
+        requiredFieldError: FdLanguageKey;
+        nameTakenFieldError: FdLanguageKey;
+        cancel: FdLanguageKey;
+        manageViews: FdLanguageKey;
+        markAsFavourite: FdLanguageKey;
+        sharing: FdLanguageKey;
+        default: FdLanguageKey;
+        createdBy: FdLanguageKey;
+        removeVariant: FdLanguageKey;
+        search: FdLanguageKey;
+        access: {
+            public: FdLanguageKey;
+            private: FdLanguageKey;
+        };
+    };
     fnSlider: {
         /**
          * @param min

@@ -33,3 +33,5 @@ export * from './testing/event-objects';
 export * from './utils/lang';
 
 export * from './platform-content-density-deprecations';
+export * from './preset-management/preset-management.token';
+export * from './preset-management/preset-managed-component.interface';

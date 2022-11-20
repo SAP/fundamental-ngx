@@ -1,7 +1,9 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChildren,
     EventEmitter,
     forwardRef,
     Injector,
@@ -9,18 +11,20 @@ import {
     OnDestroy,
     Output,
     Provider,
+    QueryList,
+    TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { DestroyedService } from '@fundamental-ngx/core/utils';
 
-import { firstValueFrom, Observable, Subscription } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { BehaviorSubject, debounceTime, filter, firstValueFrom, Observable, Subscription } from 'rxjs';
+import { map, take, takeUntil } from 'rxjs/operators';
 
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
 import {
-    CollectionFilter,
     CollectionFilterGroup,
     FilterableColumnDataType,
     FilterType,
@@ -30,12 +34,15 @@ import {
     DynamicFormFieldItem,
     DynamicFormItem,
     FormGeneratorComponent,
-    FormGeneratorService
+    FormGeneratorService,
+    PreparedDynamicFormFieldItem
 } from '@fundamental-ngx/platform/form';
-import { SelectItem } from '@fundamental-ngx/platform/shared';
+import { FDP_PRESET_MANAGED_COMPONENT, SelectItem } from '@fundamental-ngx/platform/shared';
 
 import { SmartFilterBarSettingsDialogComponent } from './components/smart-filter-bar-settings-dialog/smart-filter-bar-settings-dialog.component';
 import { SmartFilterBarSubjectDirective } from './directives/smart-filter-bar-subject.directive';
+import { SmartFilterBarToolbarItemDirective } from './directives/smart-filter-bar-toolbar-item.directive';
+import { SmartFilterBarManagedPreset, SmartFilterChangeObject } from './interfaces/smart-filter-bar-change';
 import { SmartFilterBarFieldDefinition } from './interfaces/smart-filter-bar-field-definition';
 import { SmartFilterBarDynamicFormFieldItem } from './interfaces/smart-filter-dynamic-form-item';
 import { SmartFilterBarCondition } from './interfaces/smart-filter-bar-condition';
@@ -77,25 +84,26 @@ const smartFilterBarProvider: Provider = {
     useExisting: forwardRef(() => SmartFilterBarComponent)
 };
 
-export interface SmartFilterChangeObject {
-    search: SearchInput | undefined;
-    filterBy: CollectionFilter[] | CollectionFilterGroup[];
-    subject: SmartFilterBarSubjectDirective;
-}
-
 @Component({
     selector: 'fdp-smart-filter-bar',
     templateUrl: './smart-filter-bar.component.html',
     styleUrls: ['./smart-filter-bar.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [smartFilterBarProvider],
+    providers: [
+        smartFilterBarProvider,
+        DestroyedService,
+        {
+            provide: FDP_PRESET_MANAGED_COMPONENT,
+            useExisting: SmartFilterBarComponent
+        }
+    ],
     host: {
         class: 'fdp-smart-filter-bar',
         '[class.fdp-smart-filter-bar--transparent]': 'transparent'
     }
 })
-export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
+export class SmartFilterBarComponent extends SmartFilterBar implements AfterViewInit, OnDestroy {
     /**
      * Subject which will provide configuration data: data source, columns definitions, etc.
      */
@@ -162,6 +170,12 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
     filtersColumnLayout: Nullable<string> = defaultColumnsLayout;
 
     /**
+     * Whether to update filters when they are selected. Otherwise, filters will be applied only by pressing "Go" button.
+     */
+    @Input()
+    liveUpdate = false;
+
+    /**
      * Event emitted when the selected filters have been changed.
      */
     @Output()
@@ -170,16 +184,23 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
     /**
      * Calculated array of filters to apply for the subject's data source.
      */
-    filterBy: CollectionFilter[] | CollectionFilterGroup[] = [];
+    filterBy: CollectionFilterGroup[] = [];
     /**
      * Search field value to apply for the subject's data source.
      */
     search: SearchInput | undefined;
+
+    /** @hidden */
+    @ContentChildren(SmartFilterBarToolbarItemDirective)
+    private readonly _toolbarItemRefs: QueryList<SmartFilterBarToolbarItemDirective>;
+
     /**
      * @hidden
      * Form generator component instance.
      */
     @ViewChild(FormGeneratorComponent) _formGenerator!: FormGeneratorComponent;
+    /** @Hidden */
+    _toolbarItems: TemplateRef<any>[] = [];
     /** @hidden */
     _formItems: DynamicFormItem[] = [];
     /** @hidden */
@@ -195,18 +216,35 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
     private _transparent = false;
 
     /** @hidden */
+    private readonly _formGeneratorReady = new BehaviorSubject<boolean>(false);
+
+    /** @hidden */
+    private _ignorePresetChange = false;
+
+    /** @hidden */
     constructor(
         private _dialogService: DialogService,
         private _cdr: ChangeDetectorRef,
         private _smartFilterBarService: SmartFilterBarService,
         private _fgService: FormGeneratorService,
-        private _injector: Injector
+        private _injector: Injector,
+        private readonly _destroy$: DestroyedService
     ) {
+        super();
         this._fgService.addComponent(SmartFilterBarConditionFieldComponent, [SMART_FILTER_BAR_RENDERER_COMPONENT]);
     }
 
     /** @hidden */
     private _subject!: SmartFilterBarSubjectDirective;
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._toolbarItems = this._toolbarItemRefs.toArray().map((ref) => ref.templateRef);
+
+        this._toolbarItemRefs.changes.subscribe(() => {
+            this._toolbarItems = this._toolbarItemRefs.toArray().map((ref) => ref.templateRef);
+        });
+    }
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -255,11 +293,66 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
         this.search = event;
     }
 
+    /** @hidden */
+    _cancelSearch(): void {
+        this.search = undefined;
+
+        if (this.liveUpdate) {
+            this.submitForm();
+        }
+    }
+
     /**
      * Submits filters and search form.
      */
     submitForm(): void {
         this._formGenerator.submit();
+    }
+
+    /** Method for setting predefined configuration. */
+    async setPreset(data: SmartFilterBarManagedPreset): Promise<void> {
+        this._ignorePresetChange = true;
+        data.filterBy = data.filterBy || [];
+        this.filterBy = data.filterBy;
+        this.search = data.search;
+
+        this._formGeneratorReady.pipe(filter((value) => value)).subscribe(async () => {
+            // Reset form
+            this._fgService.resetForm(this._formGenerator.form);
+
+            // Set new data
+            for (const filterBy of this.filterBy) {
+                const control = this._fgService.getFormControl(this._formGenerator.form, filterBy.field);
+
+                if (!control) {
+                    continue;
+                }
+
+                const formItem = control.formItem as PreparedDynamicFormFieldItem;
+
+                const condition = this._smartFilterBarService.transformCollectionFilter(filterBy);
+
+                const selectedConditions = await this._smartFilterBarService.getConditionFieldSelectedVariants(
+                    formItem,
+                    condition
+                );
+                control?.setValue(selectedConditions);
+            }
+
+            this._setSelectedFilters(this.filterBy.map((filterBy) => filterBy.field));
+
+            const source = this.subject.getDataSource();
+            source.dataProvider.setFilters(this.filterBy, this.search);
+            this.subject.getSubject().fetch();
+        });
+    }
+
+    /** Returns current preset configuration. */
+    getCurrentPreset(): SmartFilterBarManagedPreset {
+        return {
+            search: this.search,
+            filterBy: this.filterBy
+        };
     }
 
     /**
@@ -280,6 +373,20 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
         if (this.subject) {
             this._setSelectedFilters([...this.subject.getDefaultFields(), ...this._selectedFilters]);
         }
+
+        this._formGenerator.form.valueChanges
+            .pipe(
+                filter(() => this.liveUpdate),
+                debounceTime(50),
+                takeUntil(this._destroy$)
+            )
+            .subscribe(async () => {
+                const formValue = await this._fgService.getFormValue(this._formGenerator.form);
+                const conditions = this._generateCollectionFilterGroups(formValue);
+                this._applyFiltering(conditions);
+            });
+
+        this._formGeneratorReady.next(true);
     }
 
     /**
@@ -536,12 +643,20 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
      * @param filters array of filters.
      */
     private _applyFiltering(filters: CollectionFilterGroup[]): void {
+        // Remove empty filter objects.
+        filters = filters.filter((appliedFilter) => appliedFilter.filters?.length > 0);
         // Apply outside filtering and force subject to fetch new data.
         const source = this.subject.getDataSource();
         this.filterBy = filters;
         source.dataProvider.setFilters(filters, this.search);
         this.subject.getSubject().fetch();
-        this.smartFiltersChanged.emit({ search: this.search, filterBy: this.filterBy, subject: this._subject });
+        const emittedValue: SmartFilterBarManagedPreset = { search: this.search, filterBy: this.filterBy };
+        this.smartFiltersChanged.emit({ ...emittedValue, subject: this._subject });
+
+        if (!this._ignorePresetChange) {
+            this.presetChanged.emit(emittedValue);
+        }
+        this._ignorePresetChange = false;
     }
 
     /** @hidden */

@@ -323,7 +323,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      */
     async _onSubmit(): Promise<void> {
         this.form.markAllAsTouched();
-        this._cd.markForCheck();
+        this._cd.detectChanges();
 
         // stop here if form is invalid
         if (this.form.invalid || this.form.pending) {

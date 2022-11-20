@@ -754,6 +754,30 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
             requiredTrue: 'Обязательное поле'
         }
     },
+    platformVariantManagement: {
+        manage: 'Управление',
+        saveAs: 'Сохранить как',
+        save: 'Сохранить',
+        myViews: 'Мои Виды',
+        view: 'Вид',
+        setAsDefault: 'Установить по умолчанию',
+        public: 'Публичный',
+        applyAutomatically: 'Применять автоматически',
+        requiredFieldError: 'Обязательное поле.',
+        nameTakenFieldError: 'Вид с таким именем уже существует. Введите другое имя.',
+        cancel: 'Отменить',
+        manageViews: 'Управление видами',
+        markAsFavourite: 'Отметить как избранное',
+        sharing: 'Совместное использование',
+        default: 'По умолчанию',
+        createdBy: 'Создал(а)',
+        removeVariant: 'Удалить вид',
+        search: 'Поиск',
+        access: {
+            public: 'Публичное',
+            private: 'Приватное'
+        }
+    },
     fnSlider: {
         minMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',
         valueminDetails: 'Значение равно {{ value }}',

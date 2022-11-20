@@ -134,6 +134,11 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
         return this._values;
     }
 
+    /** Whether checkbox should be rendered standalone (without any text). */
+    @HostBinding('class.fd-checkbox--standalone')
+    @Input()
+    standalone = false;
+
     /** @hidden */
     @HostBinding('style.position')
     readonly position = 'relative';

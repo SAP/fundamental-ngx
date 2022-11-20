@@ -1,0 +1,171 @@
+<button fd-button (click)="openPage()">Click to open full screen</button>
+<div class="overlay" #overlay>
+    <ng-container *ngIf="fullscreen">
+        <fdp-variant-management-wrapper>
+            <fdp-dynamic-page ariaLabel="Example Dynamic Page">
+                <fdp-dynamic-page-title>
+                    <fdp-dynamic-page-key-info>
+                        <fdp-variant-management
+                            [variants]="variants"
+                            userName="John Doe"
+                            #variantManager
+                        ></fdp-variant-management>
+                    </fdp-dynamic-page-key-info>
+                    <fdp-dynamic-page-global-actions>
+                        <!-- global actions -->
+                        <fd-toolbar fdType="transparent" [clearBorder]="true">
+                            <button
+                                fd-toolbar-item
+                                fd-button
+                                fdCompact
+                                fdType="positive"
+                                (click)="closePage($event)"
+                                label="Accept"
+                                title="Accept"
+                            ></button>
+                            <button
+                                fd-toolbar-item
+                                fd-button
+                                fdCompact
+                                fdType="negative"
+                                (click)="closePage($event)"
+                                label="Reject"
+                                title="Reject"
+                            ></button>
+                            <fd-toolbar-separator></fd-toolbar-separator>
+                        </fd-toolbar>
+                    </fdp-dynamic-page-global-actions>
+                    <fdp-dynamic-page-layout-actions>
+                        <!-- layout actions -->
+                        <fd-toolbar fdType="transparent" [clearBorder]="true">
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                aria-label="Resize"
+                                (click)="resizeClicked($event)"
+                                title="Resize"
+                            >
+                                <i class="sap-icon--resize"></i>
+                            </button>
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                aria-label="Exit Fullscreen"
+                                (click)="closePage($event)"
+                                title="Exit Fullscreen"
+                            >
+                                <i class="sap-icon--exitfullscreen"></i>
+                            </button>
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                aria-label="Close"
+                                (click)="closePage($event)"
+                                title="Close"
+                            >
+                                <i class="sap-icon--decline"></i>
+                            </button>
+                        </fd-toolbar>
+                    </fdp-dynamic-page-layout-actions>
+                </fdp-dynamic-page-title>
+                <fdp-dynamic-page-header
+                    [collapsible]="true"
+                    [pinnable]="true"
+                    [collapsed]="false"
+                    (collapsedChange)="onCollapseChange()"
+                >
+                    <fdp-smart-filter-bar [liveUpdate]="true" [subject]="subject"></fdp-smart-filter-bar>
+                </fdp-dynamic-page-header>
+                <fdp-dynamic-page-content id="basic">
+                    <fdp-table
+                        fdp-smart-filter-bar-subject
+                        #subject="fdp-smart-filter-bar-subject"
+                        [dataSource]="source"
+                        [trackBy]="trackBy"
+                        emptyTableMessage="No data found"
+                    >
+                        <fdp-column
+                            fdp-smart-filter-bar-field-definition
+                            [smartFilterBarFilterable]="false"
+                            name="name"
+                            key="name"
+                            label="Name"
+                            defaultSelected="true"
+                            align="start"
+                        >
+                        </fdp-column>
+
+                        <fdp-column
+                            fdp-smart-filter-bar-field-definition
+                            name="description"
+                            key="description"
+                            defaultSelected="true"
+                            label="Description"
+                        >
+                        </fdp-column>
+
+                        <fdp-column
+                            fdp-smart-filter-bar-field-definition
+                            [dataType]="dataTypeEnum.NUMBER"
+                            name="price"
+                            key="price.value"
+                            label="Price"
+                            align="end"
+                        >
+                        </fdp-column>
+
+                        <fdp-column
+                            fdp-smart-filter-bar-field-definition
+                            [filterType]="filterTypeEnum.MULTI"
+                            name="status"
+                            key="status"
+                            label="Status"
+                            required="true"
+                            align="center"
+                            hasOptions="true"
+                        >
+                        </fdp-column>
+
+                        <fdp-column
+                            fdp-smart-filter-bar-field-definition
+                            [filterType]="filterTypeEnum.SINGLE"
+                            name="statusColor"
+                            key="statusColor"
+                            label="Status color"
+                            align="center"
+                            hasOptions="true"
+                        >
+                        </fdp-column>
+
+                        <fdp-column
+                            fdp-smart-filter-bar-field-definition
+                            [dataType]="dataTypeEnum.DATE"
+                            name="date"
+                            key="date"
+                            label="Date"
+                        ></fdp-column>
+
+                        <fdp-column
+                            fdp-smart-filter-bar-field-definition
+                            [filterType]="filterTypeEnum.SINGLE"
+                            [dataType]="dataTypeEnum.BOOLEAN"
+                            name="verified"
+                            key="verified"
+                            label="Verified"
+                            hasOptions="true"
+                        ></fdp-column>
+                    </fdp-table>
+                </fdp-dynamic-page-content>
+                <fdp-dynamic-page-footer>
+                    <!-- page footer content goes here -->
+                    <div fd-bar barDesign="floating-footer">
+                        <div fd-bar-right>
+                            <fd-button-bar label="Save" fdType="emphasized" (click)="closePage($event)"></fd-button-bar>
+                            <fd-button-bar label="Cancel" (click)="closePage($event)"></fd-button-bar>
+                        </div>
+                    </div>
+                </fdp-dynamic-page-footer>
+            </fdp-dynamic-page>
+        </fdp-variant-management-wrapper>
+    </ng-container>
+</div>

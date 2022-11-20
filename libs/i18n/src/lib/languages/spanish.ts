@@ -556,6 +556,30 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
             requiredTrue: 'The field is mandatory'
         }
     },
+    platformVariantManagement: {
+        manage: 'Manage',
+        saveAs: 'Save as',
+        save: 'Save',
+        myViews: 'My Views',
+        view: 'View',
+        setAsDefault: 'Set as Default',
+        public: 'Public',
+        applyAutomatically: 'Apply Automatically',
+        requiredFieldError: 'This field is required.',
+        nameTakenFieldError: 'Variant with such name already exists. Please chose a different name.',
+        cancel: 'Cancel',
+        manageViews: 'Manage Views',
+        markAsFavourite: 'Mark as Favourite',
+        sharing: 'Sharing',
+        default: 'Default',
+        createdBy: 'Created By',
+        removeVariant: 'Remove View',
+        search: 'Search',
+        access: {
+            public: 'Public',
+            private: 'Private'
+        }
+    },
     fnSlider: {
         minMaxDetails: 'Slider el valor mínimo es {{ min }}, el valor máximo es {{ max }}',
         valueminDetails: 'El valor es {{ value }}',

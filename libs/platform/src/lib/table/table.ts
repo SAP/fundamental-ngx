@@ -1,4 +1,5 @@
 import { EventEmitter, Injector } from '@angular/core';
+import { PresetManagedComponent } from '@fundamental-ngx/platform/shared';
 import { Observable } from 'rxjs';
 
 import { SaveRowsEvent } from './interfaces/save-rows-event.interface';
@@ -9,13 +10,19 @@ import { CollectionGroup } from './interfaces/collection-group.interface';
 import { SearchInput } from './interfaces/search-field.interface';
 import { TableColumn } from './components/table-column/table-column';
 import { TableDataSource } from './domain';
+import { PlatformTableManagedPreset } from './models';
 
-export abstract class Table<T = any> {
+export abstract class Table<T = any> implements PresetManagedComponent<PlatformTableManagedPreset> {
+    abstract readonly name: string;
+
     abstract initialSortBy?: CollectionSort[];
 
     abstract initialGroupBy: CollectionGroup[];
 
     abstract initialFilterBy: CollectionFilter[];
+
+    /** Event emitted when current preset configuration has been changed. */
+    presetChanged: EventEmitter<PlatformTableManagedPreset>;
 
     /** Sum of widths of fixed columns (semantic highlighting, selection) */
     abstract get _fixedColumnsPadding(): number;
@@ -141,4 +148,10 @@ export abstract class Table<T = any> {
 
     /** Collapse all the rows of the table */
     abstract collapseAll(): void;
+
+    /** Sets selected preset. */
+    abstract setPreset(data: PlatformTableManagedPreset): void;
+
+    /** Returns current preset. */
+    abstract getCurrentPreset(): PlatformTableManagedPreset;
 }
