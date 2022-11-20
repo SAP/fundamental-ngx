@@ -320,10 +320,10 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/cdk@14.1.3":
-  version "14.1.3"
-  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-14.1.3.tgz#eed05c35d2aa3e2f4f8aff787fdfb3fd10a7119e"
-  integrity sha512-NCdBkgnBgZvA4wZ6wXu/T3l4CgmWOs3M5NFKqQ/G2DCVfIbwaTI3G5cSNk6M63geeGwWDaMkk2Uxjgy4qyvaww==
+"@angular/cdk@14.2.7":
+  version "14.2.7"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-14.2.7.tgz#65eb6fbbeed6120fad4e3913aa66f8b74c853ac3"
+  integrity sha512-/tEsYaUbDSnfEmKVvAMramIptmhI67O+9STjOV0i+74XR2NospeK0fkbywIANu1n3w6AHGMotvRWJrjmbCElFg==
   dependencies:
     tslib "^2.3.0"
   optionalDependencies:
