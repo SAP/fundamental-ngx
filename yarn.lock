@@ -2043,10 +2043,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fundamental-styles/cx@0.25.1-rc.16":
-  version "0.25.1-rc.16"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.25.1-rc.16.tgz#84e4e0136e072d34dfe90601e507a73eea0a920e"
-  integrity sha512-QF8gcCk7/b2724b8N6EooHVIiMd7XCkvB3fX1mhWjT3B3sOrGrDqQV+rwEHHh4sAbO7tMhJP8c3cDgg0nqVGRg==
+"@fundamental-styles/cx@0.25.1-rc.20":
+  version "0.25.1-rc.20"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.25.1-rc.20.tgz#c069a81d24d0cdbd4c4840f29d40ed2adade96d9"
+  integrity sha512-Lkdt7nc5EU0/L+YtCTw1NpfiQ9x7KB9A09YAHD8FfXQLZaeXH4+BPjgegilQCtzmtAi0wZhKCX7qTcpY2IrZLw==
 
 "@fundamental-styles/fn@0.25.1-rc.16":
   version "0.25.1-rc.16"
