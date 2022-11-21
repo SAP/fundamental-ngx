@@ -1,19 +1,9 @@
 <button fd-button label="Menu" [fdMenuTrigger]="menu"></button>
 
 <fd-menu #menu>
-    <li fd-menu-item>
+    <li fd-menu-item *ngFor="let option of options">
         <a href="#" fd-menu-interactive>
             <span fd-menu-title>Option 1</span>
-        </a>
-    </li>
-    <li fd-menu-item>
-        <a href="#" fd-menu-interactive>
-            <span fd-menu-title>Option 2</span>
-        </a>
-    </li>
-    <li fd-menu-item>
-        <a href="#" fd-menu-interactive>
-            <span fd-menu-title>Option 3</span>
         </a>
     </li>
 </fd-menu>

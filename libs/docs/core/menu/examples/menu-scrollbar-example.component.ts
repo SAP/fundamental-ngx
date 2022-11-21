@@ -4,4 +4,47 @@ import { Component } from '@angular/core';
     selector: 'fd-menu-scrollbar-example',
     templateUrl: './menu-scrollbar-example.component.html'
 })
-export class MenuScrollbarExampleComponent {}
+export class MenuScrollbarExampleComponent {
+    options = [
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option',
+        'Option'
+    ];
+}
