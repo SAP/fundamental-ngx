@@ -27,13 +27,9 @@ fd-popover-body {
     }
 
     &__body {
-        --fdPopover_Offset: 0rem;
-        --fdPopover_Center_Offset: 0%;
-
         max-height: 100%;
         max-width: 100%;
         display: flex;
-        position: relative;
 
         &--hidden {
             display: none !important;

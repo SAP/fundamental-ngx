@@ -1,5 +1,5 @@
 <div
-    class="fd-popover__body"
+    class="fd-popover__body fd-popover__body--static"
     [class.fd-popover__body--no-arrow]="_noArrow"
     [class.fd-popover__body--compact]="_contentDensityObserver.isCompact$ | async"
     [class]="_arrowClasses + (_additionalBodyClass || '')"
