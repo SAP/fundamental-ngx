@@ -14,6 +14,7 @@ import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-ex
 import { DeprecatedMenuCompactDirective, MenuModule } from '@fundamental-ngx/core/menu';
 import { MenuMobileExampleComponent } from './examples/menu-mobile-example.component';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { MenuScrollbarExampleComponent } from './examples/menu-scrollbar-example.component';
 
 const routes: Routes = [
     {
@@ -36,7 +37,8 @@ const routes: Routes = [
         MenuAddonExampleComponent,
         MenuMobileExampleComponent,
         MenuSeparatorExampleComponent,
-        MenuWithSubmenuExampleComponent
+        MenuWithSubmenuExampleComponent,
+        MenuScrollbarExampleComponent
     ],
     providers: [moduleDeprecationsProvider(DeprecatedMenuCompactDirective), currentComponentProvider('menu')]
 })
