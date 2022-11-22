@@ -6,7 +6,6 @@
         glyphAriaLabel="Clear"
         placeholder="Search"
         [button]="true"
-        fdCompact
         [disabled]="false"
         [(ngModel)]="searchTerm"
         (ngModelChange)="handleSearchTermChange($event)"
@@ -17,7 +16,6 @@
         ariaLabel="Sort ascending"
         title="Sort ascending"
         fd-button
-        fdCompact
         glyph="sort-ascending"
         (click)="changeSort(true)"
     ></button>
@@ -25,7 +23,6 @@
         ariaLabel="Sort descending"
         title="Sort descending"
         fd-button
-        fdCompact
         glyph="sort-descending"
         (click)="changeSort(false)"
     ></button>
@@ -36,14 +33,7 @@
             {{ item }}
         </span>
         <span fd-list-secondary>
-            <button
-                ariaLabel="Remove"
-                title="Remove"
-                fd-button
-                fdCompact
-                glyph="delete"
-                (click)="removeItem(ind)"
-            ></button>
+            <button ariaLabel="Remove" title="Remove" fd-button glyph="delete" (click)="removeItem(ind)"></button>
         </span>
     </li>
     <li fd-list-item [noData]="true" *ngIf="!displayedItems || displayedItems.length === 0">
