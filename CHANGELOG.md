@@ -1,3 +1,12 @@
+# [0.37.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.15...v0.37.0-rc.16) (2022-11-22)
+
+
+### Features
+
+* **core:** add scrollbar to menu ([#8964](https://github.com/SAP/fundamental-ngx/issues/8964)) ([dbb02ff](https://github.com/SAP/fundamental-ngx/commit/dbb02ff2ebe6bb963d527624902967886cf2722f))
+
+
+
 # [0.37.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.14...v0.37.0-rc.15) (2022-11-17)
 
 
