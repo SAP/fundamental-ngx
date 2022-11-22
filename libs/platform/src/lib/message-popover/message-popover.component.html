@@ -4,6 +4,7 @@
     *ngIf="_errorTypes.length > 0"
     [focusTrapped]="true"
     [focusAutoCapture]="true"
+    [disableScrollbar]="true"
 >
     <fd-popover-control>
         <button
@@ -15,7 +16,7 @@
             [label]="_priorityStateItemsCount.toString()"
         ></button>
     </fd-popover-control>
-    <fd-popover-body [disableScrollbar]="true">
+    <fd-popover-body>
         <div fd-popover-body-header>
             <div fd-bar barDesign="header" class="fd-bar--growing">
                 <div fd-bar-left>

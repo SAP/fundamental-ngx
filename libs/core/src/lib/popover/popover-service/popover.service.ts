@@ -406,6 +406,8 @@ export class PopoverService extends BasePopoverClass {
         body._maxWidth = this.maxWidth;
         body._noArrow = this.noArrow;
         body._focusAutoCapture = this.focusAutoCapture;
+        body._disableScrollbar = this.disableScrollbar;
+        body._tabbableScrollbar = this.tabbableScrollbar;
         body._templateToDisplay = this.templateContent!;
         body._closeOnEscapeKey = this.closeOnEscapeKey;
         this._detectChanges();

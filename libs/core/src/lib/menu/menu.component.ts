@@ -72,6 +72,17 @@ export class MenuComponent
     @Input()
     focusTrapped = true;
 
+    /**
+     * Whether the popover should automatically move focus into the trapped region upon
+     * initialization and return focus to the previous activeElement upon destruction.
+     */
+    @Input()
+    focusAutoCapture = true;
+
+    /** Should fd-scrollbar have tabindex*/
+    @Input()
+    tabbableScrollbar = false;
+
     /** Open submenu on hover after given milliseconds */
     @Input()
     openOnHoverTime = 0;
@@ -283,13 +294,17 @@ export class MenuComponent
     private _listenOnMenuItemsChange(): void {
         this._subscriptions.add(this._menuItems.changes.subscribe(() => this._menuService.rebuildMenu()));
 
+        // Whether menu have submenu or not.
+        let isSubmenu = false;
         this._menuItems.forEach((menuItem) => {
             if (menuItem.submenu?.menuItems) {
+                isSubmenu = true;
                 this._subscriptions.add(
                     menuItem.submenu._menuItemsChange$.subscribe(() => this._menuService.rebuildMenu())
                 );
             }
         });
+        this.disableScrollbar = isSubmenu;
     }
 
     /**

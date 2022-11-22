@@ -7,6 +7,7 @@ const menuAddonHtml = 'menu-addon-example.component.html';
 const menuMobileTs = 'menu-mobile-example.component.ts';
 const menuMobileHtml = 'menu-mobile-example.component.html';
 const menuSeparatorHtml = 'menu-separator-example.component.html';
+const menuScrollbarHtml = 'menu-scrollbar-example.component.html';
 const menuWithSubmenuHtml = 'menu-with-submenu-example.component.html';
 const menuWithSubmenuTs = 'menu-with-submenu-example.component.ts';
 
@@ -35,6 +36,14 @@ export class MenuDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(menuSeparatorHtml),
             fileName: 'menu-separator-example'
+        }
+    ];
+
+    menuScrollbar: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(menuScrollbarHtml),
+            fileName: 'menu-scrollbar-example'
         }
     ];
 
