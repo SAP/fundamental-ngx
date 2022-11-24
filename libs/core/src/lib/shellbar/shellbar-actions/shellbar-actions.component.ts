@@ -45,6 +45,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 @Component({
     selector: 'fd-shellbar-actions',
     templateUrl: './shellbar-actions.component.html',
+    styleUrls: ['./shellbar-actions.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
@@ -173,11 +174,9 @@ export class ShellbarActionsComponent implements AfterViewInit {
         if (value) {
             this._onSearchButtonClick(shouldOpenPopover);
             this._toggleFullWidthClass(true);
-            this._comboboxComponent._comboboxElement.style.width = '100%';
         } else {
             this._hideCombobox();
             this._toggleFullWidthClass(false);
-            this._comboboxComponent._comboboxElement.style.width = '';
         }
     }
 
