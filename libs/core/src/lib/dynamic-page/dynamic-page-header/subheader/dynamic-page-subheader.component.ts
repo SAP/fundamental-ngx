@@ -75,6 +75,10 @@ export class DynamicPageSubheaderComponent {
     id = `fd-dynamic-page-header-id-${dynamicPageSubHeaderId++}`;
 
     /**
+     * id for collapsible header
+     */
+    collapsibleHeaderId = `${this.id}-collapsible`;
+    /**
      * aria label for header
      */
     @Input()
