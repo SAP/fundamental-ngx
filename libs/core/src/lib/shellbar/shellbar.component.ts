@@ -12,6 +12,7 @@ import {
     OnChanges,
     OnInit,
     QueryList,
+    SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -90,8 +91,10 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnIni
     }
 
     /** @hidden */
-    ngOnChanges(): void {
-        this._handleSizeChange();
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.size) {
+            this._handleSizeChange();
+        }
     }
 
     /** @hidden */
