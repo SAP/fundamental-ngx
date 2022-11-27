@@ -29,10 +29,10 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@angular-builders/custom-webpack@14.0.0":
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/@angular-builders/custom-webpack/-/custom-webpack-14.0.0.tgz#46f11621fdb919df77c6e38f338906e0690145fa"
-  integrity sha512-6ky8rdW9k2FNcbUeGub2uxZq+wrF2OxIkQtFaPuQ8GKD94YYQHl+AdJT2pnvfoFs4OqsHh1APdwFD5gF4WKi5Q==
+"@angular-builders/custom-webpack@14.1.0":
+  version "14.1.0"
+  resolved "https://registry.yarnpkg.com/@angular-builders/custom-webpack/-/custom-webpack-14.1.0.tgz#433b9fed2d3f78bb2e7e988e1bd365caccffdfef"
+  integrity sha512-FLGDrBOg04cYvzCudeb15LWY2v91dtJ5+AfmP0aS/0T0D0AYmY4uM3FxZeh4jJcWETLvnHVFBCjan6y2Ct9J3A==
   dependencies:
     "@angular-devkit/architect" ">=0.1400.0 < 0.1500.0"
     "@angular-devkit/build-angular" "^14.0.0"
