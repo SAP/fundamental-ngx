@@ -91,7 +91,7 @@
     "@angularclass/hmr": "3.0.0",
     "@babel/core": "7.13.14",
     "@commitlint/cli": "16.1.0",
-    "@commitlint/config-conventional": "16.2.1",
+    "@commitlint/config-conventional": "17.3.0",
     "@jsdevtools/npm-publish": "1.4.3",
     "@nrwl/cli": "14.5.10",
     "@nrwl/devkit": "14.5.10",
