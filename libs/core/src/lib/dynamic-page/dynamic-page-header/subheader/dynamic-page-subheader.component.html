@@ -31,7 +31,7 @@
                     class="fd-dynamic-page__pin-button"
                     [ariaLabel]="_pinned ? unpinAriaLabel : pinAriaLabel"
                     [attr.title]="_pinned ? unpinAriaLabel : pinAriaLabel"
-                    [attr.aria-selected]="_pinned"
+                    [toggled]="_pinned"
                     (click)="togglePinned()"
                     *ngIf="pinnable && !collapsed"
                 >

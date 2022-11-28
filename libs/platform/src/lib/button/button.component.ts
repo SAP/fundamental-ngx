@@ -43,13 +43,18 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     @Input()
     buttonType: ButtonType = 'standard';
 
+    /** Whether button is in toggled state. */
+    @Input()
+    toggled: Nullable<boolean>;
+
     /** arialabel, tooltip for truncated text
      * for acccesiblity of the element */
     @Input()
     title: Nullable<string>;
 
-    /** aria-selected for acccesiblity to
-     *  the native HTML button*/
+    /** @deprecated use toggled input property instead
+     * aria-selected for acccesiblity to the native HTML button
+     */
     @Input()
     ariaSelected: Nullable<boolean>;
 
@@ -72,9 +77,8 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     @Input()
     ariaControlsId: Nullable<string>;
 
-    /**
-     * propagate aria-pressed for accessiblity to
-     * the native HTML button
+    /** @deprecated use toggled input property instead
+     * propagate aria-pressed for accessiblity to the native HTML button
      */
     @Input()
     ariaPressed: Nullable<boolean>;

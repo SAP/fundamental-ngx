@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import { Nullable } from '@fundamental-ngx/core/shared';
@@ -98,5 +98,7 @@ export class BaseButton {
     _ariaDisabled: boolean;
 
     /** @hidden */
+    @HostBinding('class.fd-button--toggled')
+    @HostBinding('attr.aria-pressed')
     _toggled: boolean;
 }
