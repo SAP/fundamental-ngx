@@ -68,7 +68,12 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
+        class: 'fd-select',
+        '[class.fd-select--inline]': 'inline',
+        '[class.fd-select--compact]': '_contentDensityObserver.isCompact',
+        // @deprecated
         '[class.fd-select-custom-class]': 'inline',
+        // @deprecated
         '[class.fd-select-custom-class--mobile]': 'mobile'
     },
     providers: [
@@ -441,6 +446,7 @@ export class SelectComponent
     onTouched = (): void => {};
 
     /** Toggles the open state of the select. */
+    @HostListener('click')
     toggle(): void {
         this._isOpen ? this.close() : this.open();
     }
@@ -648,6 +654,7 @@ export class SelectComponent
     }
 
     /** @hidden */
+    @HostListener('keydown', ['$event'])
     _handleKeydown(event: KeyboardEvent): void {
         if (!this.disabled && !this.readonly) {
             this._isOpen

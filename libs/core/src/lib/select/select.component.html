@@ -1,34 +1,29 @@
 <ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
 
 <ng-template #desktopTemplate>
-    <div
-        class="fd-select"
-        [class.fd-select--compact]="_contentDensityObserver.isCompact"
-        (keydown)="_handleKeydown($event)"
-        (click)="toggle()"
+    <!-- @deprecated class fd-popover-custom-list -->
+    <fd-popover
+        additionalBodyClass="fd-select-dropdown fd-popover-custom-list"
+        [isOpen]="_isOpen"
+        [triggers]="[]"
+        [focusTrapped]="true"
+        [disabled]="disabled || readonly"
+        [appendTo]="appendTo"
+        [closeOnEscapeKey]="true"
+        [fillControlMode]="fillControlMode"
+        [maxWidth]="600"
+        [closeOnOutsideClick]="closeOnOutsideClick"
+        (isOpenChange)="_popoverOpenChangeHandle($event)"
     >
-        <fd-popover
-            additionalBodyClass="fd-popover-custom-list"
-            [isOpen]="_isOpen"
-            [triggers]="[]"
-            [focusTrapped]="true"
-            [disabled]="disabled || readonly"
-            [appendTo]="appendTo"
-            [closeOnEscapeKey]="true"
-            [fillControlMode]="fillControlMode"
-            [maxWidth]="600"
-            [closeOnOutsideClick]="closeOnOutsideClick"
-            (isOpenChange)="_popoverOpenChangeHandle($event)"
-        >
-            <fd-popover-control>
-                <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
-            </fd-popover-control>
+        <fd-popover-control>
+            <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
+        </fd-popover-control>
 
-            <fd-popover-body class="fd-popover-custom-select-body">
-                <ng-container [ngTemplateOutlet]="selectOptionsListTemplate"></ng-container>
-            </fd-popover-body>
-        </fd-popover>
-    </div>
+        <!-- @deprecated class fd-popover-custom-select-body -->
+        <fd-popover-body class="fd-popover-custom-select-body">
+            <ng-container [ngTemplateOutlet]="selectOptionsListTemplate"></ng-container>
+        </fd-popover-body>
+    </fd-popover>
 </ng-template>
 
 <ng-template #selectInputControlTemplate>
@@ -110,14 +105,7 @@
 </ng-template>
 
 <ng-template #mobileTemplate>
-    <div
-        class="fd-select"
-        [class.fd-select--compact]="_contentDensityObserver.isCompact"
-        (keydown)="_handleKeydown($event)"
-        (click)="toggle()"
-    >
-        <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
-    </div>
+    <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
 
     <div #dialogContainer></div>
 </ng-template>
