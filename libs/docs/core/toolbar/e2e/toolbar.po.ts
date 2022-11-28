@@ -23,7 +23,7 @@ export class ToolbarPo extends CoreBaseComponentPo {
     navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
     timeColumn = 'fd-time-column';
     period = '//span[contains(text(), " PM ")]/parent::li';
-    dateTimeButton = '.fd-button--transparent.fd-button--compact';
+    dateTimeButton = '.fd-button--transparent.fd-input-group__button';
     okButton = '[fdtype="emphasized"]';
     dateTimeInput = 'input.fd-input--compact';
     toolbarOverflowExample = 'fd-toolbar-overflow-example';
