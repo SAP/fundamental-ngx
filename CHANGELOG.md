@@ -1,3 +1,12 @@
+# [0.37.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.18...v0.37.0-rc.19) (2022-11-28)
+
+
+### Bug Fixes
+
+* **core:** fix duplicate div ids ([#8984](https://github.com/SAP/fundamental-ngx/issues/8984)) ([a5e90b1](https://github.com/SAP/fundamental-ngx/commit/a5e90b1998997149f5fce0901acfaa8d710471b9))
+
+
+
 # [0.37.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.17...v0.37.0-rc.18) (2022-11-25)
 
 
