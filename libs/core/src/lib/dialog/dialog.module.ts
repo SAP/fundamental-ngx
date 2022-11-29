@@ -21,6 +21,7 @@ import { DialogDefaultComponent } from './dialog-default/dialog-default.componen
 import { DialogCloseButtonComponent } from './dialog-close-button/dialog-close-button.component';
 import { DialogDecisiveButtonDirective } from './directives/dialog-decisive-button.directive';
 import { DialogTitleDirective } from './directives/dialog-title.directive';
+import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 
 const declarations = [
     DialogComponent,
@@ -48,7 +49,8 @@ const declarations = [
         DragDropModule,
         InitialFocusModule,
         BusyIndicatorModule,
-        A11yModule
+        A11yModule,
+        ScrollbarModule
     ],
     exports: [declarations, BarModule, TitleModule, TemplateModule, InitialFocusModule],
     providers: [DialogService, DynamicComponentService]
