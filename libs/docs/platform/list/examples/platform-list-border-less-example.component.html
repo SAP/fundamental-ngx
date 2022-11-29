@@ -1,6 +1,6 @@
 <h3>Imperative Approach</h3>
 <h5>Cozy Mode</h5>
-<fdp-list [noBorder]="true" [dataSource]="_dataSource" id="cozy-list">
+<fdp-list [noBorder]="true" [dataSource]="_itemsArr" id="cozy-list">
     <fdp-standard-list-item *fdpItemDef="let address; let i" [title]="address.name" [ariaLabel]="address.name">
     </fdp-standard-list-item>
 </fdp-list>

@@ -3,13 +3,15 @@ import { Observable, of } from 'rxjs';
 
 import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
 
-const LIST_ELEMENTS: Address[] = [{ name: 'Name1' }, { name: 'Name2' }, { name: 'Name3' }, { name: 'Name4' }];
+const LIST_ELEMENTS: Address[] = new Array(6).fill(undefined).map((_, i) => ({ name: `Name${i + 1}` }));
+
 @Component({
     selector: 'fdp-platform-list-border-less-example',
     templateUrl: './platform-list-border-less-example.component.html'
 })
 export class PlatformListBorderLessExampleComponent {
     _dataSource = new ListDataSource<Address>(new ListDataProvider());
+    _itemsArr: Address[] = LIST_ELEMENTS;
 }
 // it is from application point of to show as example,they refer internal structurs in general
 export interface Address {
