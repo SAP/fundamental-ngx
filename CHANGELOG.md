@@ -1,3 +1,12 @@
+# [0.37.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.19...v0.37.0-rc.20) (2022-11-29)
+
+
+### Bug Fixes
+
+* **core,platform:** fund-styles popover's changes adoption ([#8967](https://github.com/SAP/fundamental-ngx/issues/8967)) ([588b092](https://github.com/SAP/fundamental-ngx/commit/588b092836cc5c789cb70efc91875cb67aba5887))
+
+
+
 # [0.37.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.18...v0.37.0-rc.19) (2022-11-28)
 
 
