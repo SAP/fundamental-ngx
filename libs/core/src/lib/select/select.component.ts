@@ -33,7 +33,7 @@ import { defer, merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 import { FormStates, Nullable, PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, KeyUtil, ModuleDeprecation, RtlService } from '@fundamental-ngx/core/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 
@@ -71,9 +71,9 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
         class: 'fd-select',
         '[class.fd-select--inline]': 'inline',
         '[class.fd-select--compact]': '_contentDensityObserver.isCompact',
-        // @deprecated
+        // @deprecated leaving class fd-select-custom-class for backwards compatibility
         '[class.fd-select-custom-class]': 'inline',
-        // @deprecated
+        // @deprecated leaving class fd-select-custom-class--mobile for backwards compatibility
         '[class.fd-select-custom-class--mobile]': 'mobile'
     },
     providers: [
@@ -782,4 +782,15 @@ export class SelectComponent
             injector
         );
     }
+}
+
+export class DeprecatedSelectCSSClasses implements ModuleDeprecation {
+    /** @hidden */
+    message = `Select CSS classes fd-select--compact, fd-select--compact--mobile, fd-popover-custom-select-body, fd-popover-custom-list are deprecated`;
+
+    /** @hidden */
+    alternative = {
+        name: 'Inspect the elements of the Select component to see the new classes',
+        link: ['/core', 'select']
+    };
 }
