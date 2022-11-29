@@ -5,7 +5,7 @@ export class PopoverPo extends CoreBaseComponentPo {
 
     avatar = 'fd-popover-example .fd-avatar--circle';
     programmaticAvatar = 'fd-popover-programmatic-open-example .fd-avatar--circle';
-    popover = '.fd-popover__popper';
+    popover = '.fd-popover__body';
     button = '.fd-button';
     option = 'li.fd-list__item';
     icon = 'fd-icon.sap-icon--menu2';
@@ -14,7 +14,7 @@ export class PopoverPo extends CoreBaseComponentPo {
     barElement = '.fd-bar__element';
     basicPopoverButton = 'fd-popover-example button';
     simplePopoverButton = 'fd-popover-trigger-example .fd-button--standard';
-    popoverMessage = '.fd-popover__popper--no-arrow div';
+    popoverMessage = '.fd-popover__body--no-arrow div';
     headerPopoverButton = 'fd-popover-complex-example button';
     placementPopoverButton = 'fd-popover-placement-example button';
     programmaticControlButton = 'fd-popover-programmatic-open-example button';
@@ -31,10 +31,10 @@ export class PopoverPo extends CoreBaseComponentPo {
     triggerButton = 'fd-popover-container-example button';
     popoverContainer = 'fd-popover-container-example div';
     scrollButton = 'fd-popover-scroll-example button';
-    scrollMessage = '.fd-popover__popper--no-arrow div';
+    scrollMessage = '.fd-popover__body--no-arrow div';
     scrollCheckbox = 'fd-popover-scroll-example .fd-checkbox__label';
     plusButton = 'fd-popover-dynamic-example button';
-    dynamicButton = '.fd-popover__popper .fd-button';
+    dynamicButton = '.fd-popover__body .fd-button';
     dropdownButton = 'fd-popover-dropdown-example button';
     dropdownOption = 'div.cdk-overlay-connected-position-bounding-box:last-of-type li.fd-list__item';
     cdkButton = 'fd-popover-cdk-placement-example button';
@@ -45,7 +45,7 @@ export class PopoverPo extends CoreBaseComponentPo {
     topButton = this.button + '[value="top"]';
     endButton = this.button + '[value="end"]';
     dialogInput = 'fd-popover-control input';
-    popoverNoArrow = '.fd-popover__popper--no-arrow ';
+    popoverNoArrow = '.fd-popover__body--no-arrow ';
     paragraph = 'p';
     triggerButtonContainer = 'fd-popover-container-example button';
     mobilePopoverButton = 'fd-dialog-body button';

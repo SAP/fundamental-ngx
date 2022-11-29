@@ -25,7 +25,7 @@ export class IconTabBarPO extends PlatformBaseComponentPo {
     expandedList = '.cdk-overlay-container ';
     listItem = this.expandedList + '.fd-icon-tab-bar__list-item';
     span = ' span';
-    popoverTab = '.fd-popover__popper span';
+    popoverTab = '.fd-popover__body span';
 
     async open(): Promise<void> {
         await super.open(this.url);

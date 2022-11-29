@@ -10,7 +10,7 @@ export class InlineHelpPo extends CoreBaseComponentPo {
     inlineHelpStyledIcon = 'fd-inline-help-styled-example fd-icon';
     inlineHelpTemplateExample = 'fd-inline-help-template-example span';
     inlineHelpExampleExtended = '.docs-tile';
-    popover = 'div.fd-popover__popper';
+    popover = 'div.fd-popover__body';
     inlineHelp = '.fd-inline-help__content';
 
     async open(): Promise<void> {

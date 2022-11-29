@@ -26,10 +26,14 @@ fd-popover-body {
         }
     }
 
-    &__popper {
+    &__body {
         max-height: 100%;
         max-width: 100%;
         display: flex;
+
+        &--hidden {
+            display: none !important;
+        }
 
         > .fd-scrollbar {
             max-height: 100%;
@@ -93,12 +97,6 @@ fd-popover-body {
             &:last-child {
                 @include set-list-border-radius(bottom);
             }
-        }
-    }
-
-    &__body {
-        &--hidden {
-            display: none !important;
         }
     }
 }

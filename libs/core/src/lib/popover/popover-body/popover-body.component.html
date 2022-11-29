@@ -1,8 +1,8 @@
 <div
-    class="fd-popover__popper"
-    [class.fd-popover__popper--no-arrow]="_noArrow"
-    [class.fd-popover__popper--compact]="_contentDensityObserver.isCompact$ | async"
-    [class]="_additionalBodyClass"
+    class="fd-popover__body fd-popover__body--static"
+    [class.fd-popover__body--no-arrow]="_noArrow"
+    [class.fd-popover__body--compact]="_contentDensityObserver.isCompact$ | async"
+    [class]="_arrowClasses + (_additionalBodyClass || '')"
     [cdkTrapFocus]="_focusTrapped"
     [style]="_marginStyle"
     [style.max-width.px]="_maxWidth"
@@ -32,6 +32,4 @@
     <ng-container *ngTemplateOutlet="_templateToDisplay"></ng-container>
 
     <ng-content select="[fd-popover-body-footer]"></ng-content>
-
-    <span class="fd-popover__arrow" [class]="_arrowClasses" *ngIf="!_noArrow"></span>
 </ng-template>

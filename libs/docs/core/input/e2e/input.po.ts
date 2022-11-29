@@ -29,7 +29,7 @@ export class InputPo extends CoreBaseComponentPo {
     reactiveSecondaryInput = '#form-input-4';
 
     formMessagePopover = 'fd-form-message';
-    inlineHelpPopover = '.fd-popover__popper li';
+    inlineHelpPopover = '.fd-popover__body li';
     addBtn = '[type="button"][label="Add"]';
 
     requiredInputLabel = '.fd-form-label--required';
@@ -37,7 +37,7 @@ export class InputPo extends CoreBaseComponentPo {
 
     allInputFields = '.fd-doc-component input:not([disabled], [readonly])';
     questionMark = '.sap-icon--question-mark';
-    popoverHelp = 'fd-popover-body .fd-popover__popper ';
+    popoverHelp = 'fd-popover-body .fd-popover__body ';
 
     inputStateExample = 'fd-input-state-example ';
     input = 'input:not([disabled], [readonly])';
