@@ -12,6 +12,7 @@ import {
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { ButtonType, GlyphPosition } from '@fundamental-ngx/core/button';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
+import { ModuleDeprecation } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fdp-button',
@@ -125,4 +126,28 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     public onBtnClick($event: any): void {
         this.buttonClicked.emit($event);
     }
+}
+
+export class DeprecatedButtonAriaSelected implements ModuleDeprecation {
+    /** @hidden */
+    message = 'ariaSelected input property is deprecated.';
+
+    /** @hidden */
+    alternative = {
+        name: 'Use [toggled] input property instead',
+        link: ['/platform', 'button'],
+        fragment: 'state'
+    };
+}
+
+export class DeprecatedButtonAriaPressed implements ModuleDeprecation {
+    /** @hidden */
+    message = 'ariaPressed input property is deprecated.';
+
+    /** @hidden */
+    alternative = {
+        name: 'Use [toggled] input property instead',
+        link: ['/platform', 'button'],
+        fragment: 'state'
+    };
 }
