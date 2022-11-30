@@ -10,7 +10,7 @@
     </button>
 </fd-segmented-button>
 
-<div style="padding: 1rem" class="fd-scrollbar">
+<div fd-scrollbar style="padding: 1rem; overflow: auto">
     <fd-fixed-card-layout (cardDraggedDropped)="cardDraggedDropped($event)">
         <ng-container *ngIf="!isHidden('card1')">
             <fd-card cardType="list" *fdCardDef="1">
