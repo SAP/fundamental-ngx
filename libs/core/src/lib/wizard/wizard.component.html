@@ -2,20 +2,24 @@
     <ng-content select="fd-wizard-navigation"></ng-content>
     <div
         *ngIf="appendToWizard"
-        class="fd-wizard-container-wrapper fd-scrollbar"
+        class="fd-wizard-container-wrapper"
         #wrapperContainer
         fdScrollSpy
         cdkScrollable
         [trackedTags]="['div']"
         (spyChange)="scrollSpyChange($event)"
     >
-        <div *ngFor="let contentTemplate of contentTemplates">
-            <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+        <div fd-scrollbar>
+            <div *ngFor="let contentTemplate of contentTemplates">
+                <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+            </div>
         </div>
     </div>
-    <div *ngIf="!appendToWizard" cdkScrollable class="fd-wizard-container-wrapper fd-scrollbar">
-        <div *ngFor="let contentTemplate of contentTemplates">
-            <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    <div *ngIf="!appendToWizard" cdkScrollable class="fd-wizard-container-wrapper">
+        <div fd-scrollbar>
+            <div *ngFor="let contentTemplate of contentTemplates">
+                <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+            </div>
         </div>
     </div>
     <ng-content></ng-content>
