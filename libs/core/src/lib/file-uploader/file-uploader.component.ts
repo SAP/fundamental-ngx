@@ -5,7 +5,6 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
-    HostBinding,
     Input,
     OnDestroy,
     Output,
@@ -34,7 +33,8 @@ let fileUploaderInputUniqueId = 0;
     templateUrl: './file-uploader.component.html',
     styleUrls: ['./file-uploader.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'onTouched()',
+        class: 'fd-file-uploader'
     },
     providers: [
         {
@@ -49,10 +49,6 @@ let fileUploaderInputUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, FormItemControl {
-    /** @hidden */
-    @HostBinding('class.fd-file-uploader')
-    fdFileInputClass = true;
-
     /** @hidden */
     @ViewChild('fileInput')
     inputRef: ElementRef;
