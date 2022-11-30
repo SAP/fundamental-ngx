@@ -50,7 +50,22 @@
             [tabindex]="0"
             role="button"
         >
+            <ng-template [ngTemplateOutlet]="loadMoreElementContent"></ng-template>
+        </li>
+    </ng-container>
+    <ng-template #loadMoreElementContent>
+        <ng-container *ngIf="loadMoreContent; else defaultContent">
+            <div class="fd-list__title">
+                <ng-template
+                    [ngTemplateOutlet]="loadMoreContent.templateRef"
+                    [ngTemplateOutletContext]="getLoadMoreContentContext()"
+                >
+                </ng-template>
+            </div>
+        </ng-container>
+        <ng-template #defaultContent>
             <button class="fd-list__title">
+                -->
                 <fd-busy-indicator
                     size="m"
                     class="fd-busy-indicator-custom"
@@ -60,10 +75,11 @@
                     [attr.aria-label]="_loading ? ('platformList.loadingAriaLabel' | fdTranslate) : loadTitle"
                 >
                 </fd-busy-indicator>
-                {{ loadTitle }} <ng-content select="#load"></ng-content>
+                {{ loadTitle }}
+                <ng-content select="#load"></ng-content>
             </button>
-        </li>
-    </ng-container>
+        </ng-template>
+    </ng-template>
 </ul>
 
 <ng-template #thenBlock>
