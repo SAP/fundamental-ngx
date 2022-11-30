@@ -9,7 +9,7 @@
             </ng-template>
         </fd-dialog-header>
         <fd-dialog-body [dir]="_dir">
-            <div class="fdp-value-help-dialog__content-holder fd-scrollbar">
+            <div fd-scrollbar class="fdp-value-help-dialog__content-holder">
                 <ng-container *ngIf="mobile">
                     <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
                 </ng-container>
