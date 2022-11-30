@@ -14,12 +14,13 @@ import {
     OnDestroy,
     Output,
     QueryList,
+    ViewChild,
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
-import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
+import { TabListComponent, TabPanelComponent } from '@fundamental-ngx/core/tabs';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
@@ -124,6 +125,10 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     @ContentChildren(DynamicPageContentComponent, { descendants: true })
     contentComponents: QueryList<DynamicPageContentComponent>;
 
+    /** @hidden */
+    @ViewChild(TabListComponent)
+    _tabListComponent: TabListComponent;
+
     /** Reference to tab items components */
     @ViewChildren(TabPanelComponent)
     dynamicPageTabs: QueryList<TabPanelComponent>;
@@ -157,6 +162,8 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     /** @hidden */
     ngAfterViewInit(): void {
         this._cd.detectChanges();
+
+        this._tabListComponent?.headerContainer.nativeElement.classList.add('fd-dynamic-page__tabs');
     }
 
     /** @hidden */
