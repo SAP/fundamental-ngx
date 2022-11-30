@@ -8,6 +8,7 @@
         [noAdditionalContent]="true"
         [formName]="form.id"
         [formItems]="form.formItems"
+        [hint]="form.guiOptions?.hint!"
         [unifiedLayout]="unifiedLayout"
         (formCreated)="onFormCreated($event, form.id)"
         (formSubmittedStatus)="onFormSubmitted($event, form.id)"
