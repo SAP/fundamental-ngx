@@ -75,7 +75,7 @@ export class PopoverBodyComponent {
     _closeOnEscapeKey = false;
 
     /** Classes added to arrow element */
-    _arrowClasses: string;
+    _arrowClasses = '';
 
     /** Additional style to put margin into body component, to give a place for arrow */
     _marginStyle: Nullable<string> = null;
