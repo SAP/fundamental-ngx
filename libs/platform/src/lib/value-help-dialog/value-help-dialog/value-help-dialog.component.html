@@ -263,15 +263,16 @@
 </ng-template>
 
 <ng-template #defineConditionsContent>
-    <fdp-define-tab
-        class="fd-scrollbar"
-        [strategyLabels]="defineStrategyLabels"
-        [conditions]="conditionItems"
-        [uid]="id"
-        [tabTitle]="defineTabTitle || ('platformVHD.defineTabTitle' | fdTranslate)"
-        [mobile]="mobile"
-        (conditionChange)="onConditionChange($event)"
-    ></fdp-define-tab>
+    <div fd-scrollbar>
+        <fdp-define-tab
+            [strategyLabels]="defineStrategyLabels"
+            [conditions]="conditionItems"
+            [uid]="id"
+            [tabTitle]="defineTabTitle || ('platformVHD.defineTabTitle' | fdTranslate)"
+            [mobile]="mobile"
+            (conditionChange)="onConditionChange($event)"
+        ></fdp-define-tab>
+    </div>
 </ng-template>
 
 <ng-template #dialogTitleText>
