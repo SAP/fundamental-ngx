@@ -20,13 +20,19 @@ export class WizardGeneratorDefaultExampleComponent {
                 {
                     title: '1. Product Type',
                     id: 'productType',
+                    guiOptions: {
+                        hint: 'Hint on the group header'
+                    },
                     formItems: [
                         {
                             name: 'product',
                             message: 'Select appropriate product type',
                             type: 'select',
                             choices: ['Mobile', 'Tablet', 'Desktop'],
-                            validators: [Validators.required]
+                            validators: [Validators.required],
+                            guiOptions: {
+                                hint: 'Hint on the field'
+                            }
                         }
                     ]
                 }

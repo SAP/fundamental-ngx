@@ -1,5 +1,6 @@
-import { DynamicFormFieldGroup, DynamicFormFieldItem, DynamicFormGroup } from '@fundamental-ngx/platform/form';
 import { Observable } from 'rxjs';
+import { DynamicFormFieldGroup, DynamicFormFieldItem, DynamicFormGroup } from '@fundamental-ngx/platform/form';
+import { HintOptions } from '@fundamental-ngx/platform/shared';
 import { WizardGeneratorDependencyFields, WizardGeneratorFormsValue } from './wizard-generator-item.interface';
 
 export interface WizardGeneratorFormGroup {
@@ -36,6 +37,19 @@ export interface WizardGeneratorFormGroup {
      * @description Object of dependency fields that are used with `when` function
      */
     dependencyFields?: WizardGeneratorDependencyFields;
+
+    /**
+     * @description
+     * Additional set of options that can affect UI of the form item form control.
+     */
+    guiOptions?: WizardGeneratorFormGroupGuiOptions;
+}
+
+export interface WizardGeneratorFormGroupGuiOptions {
+    /**
+     * Hint options. Either only text or full config
+     */
+    hint?: string | HintOptions;
 }
 
 export type WizardGeneratorFormItem = WizardGeneratorFormGroupItem | WizardGeneratorFormFieldItem;
