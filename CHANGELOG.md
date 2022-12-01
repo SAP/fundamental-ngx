@@ -1,3 +1,12 @@
+# [0.37.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.22...v0.37.0-rc.23) (2022-12-01)
+
+
+### Bug Fixes
+
+* **platform:** dynamic page tabs padding ([#9016](https://github.com/SAP/fundamental-ngx/issues/9016)) ([4ac7486](https://github.com/SAP/fundamental-ngx/commit/4ac74864416fde5ed6712b976243c5fe3cf64e97))
+
+
+
 # [0.37.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.21...v0.37.0-rc.22) (2022-12-01)
 
 
