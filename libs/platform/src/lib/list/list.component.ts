@@ -656,7 +656,6 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
                 takeUntil(this._destroyed)
             )
             .subscribe((data) => {
-                console.log({ data });
                 this._dsItems = data || [];
                 this.stateChanges.next(this._dsItems);
                 this._setItems();
