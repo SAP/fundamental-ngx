@@ -8,5 +8,9 @@ $block: fd-vertical-nav;
 
         max-width: unset;
         max-height: unset;
+
+        &.fd-list__navigation-item-popover--first-level {
+            z-index: 1001;
+        }
     }
 }
