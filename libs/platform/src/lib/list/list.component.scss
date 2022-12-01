@@ -1,1 +1,8 @@
 @import '~fundamental-styles/dist/list';
+
+.fd-list__item {
+    &--custom-content {
+        height: fit-content !important;
+        min-height: var(--fdList_Item_Action_Height);
+    }
+}

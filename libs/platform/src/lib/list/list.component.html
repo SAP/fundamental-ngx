@@ -46,6 +46,7 @@
             (click)="_getMoreData()"
             fd-list-item
             (keydown)="_loadOnKeyPress($event)"
+            [class.fd-list__item--custom-content]="loadMoreContent"
             class="fd-list__item fd-list__item--growing fd-list__item--action"
             [tabindex]="0"
             role="button"
@@ -65,7 +66,6 @@
         </ng-container>
         <ng-template #defaultContent>
             <button class="fd-list__title">
-                -->
                 <fd-busy-indicator
                     size="m"
                     class="fd-busy-indicator-custom"

@@ -9,7 +9,7 @@ export class LoadMoreContentDirective {
     constructor(readonly templateRef: TemplateRef<LoadMoreContentContext>) {}
 }
 
-export interface LoadMoreContentContext {
+interface _LoadMoreContentContext {
     loadTitle: string;
     loading: boolean;
     loadingLabel: Observable<string>;
@@ -18,4 +18,8 @@ export interface LoadMoreContentContext {
         end: number;
     };
     total: number;
+}
+
+export interface LoadMoreContentContext extends _LoadMoreContentContext {
+    $implicit: _LoadMoreContentContext;
 }

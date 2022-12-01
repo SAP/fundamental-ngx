@@ -399,7 +399,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
     /** Get context for load more button */
     getLoadMoreContentContext(): LoadMoreContentContext {
-        return {
+        const $implicit = {
             loadTitle: this.loadTitle,
             loading: this._loading,
             loadingLabel: (() => {
@@ -415,6 +415,10 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
                 end: this._lastIndex
             },
             total: this._dsItems.length
+        };
+        return {
+            $implicit,
+            ...$implicit
         };
     }
 
