@@ -15,7 +15,14 @@
         </fd-action-sheet-control>
 
         <fd-action-sheet-body>
-            <li fd-action-sheet-item tabindex="-1" [glyph]="'search'" [label]="'Search'" (click)="_showCombobox()"></li>
+            <li
+                fd-action-sheet-item
+                *ngIf="isComboboxExist"
+                tabindex="-1"
+                [glyph]="'search'"
+                [label]="'Search'"
+                (click)="_showCombobox()"
+            ></li>
             <li
                 fd-action-sheet-item
                 *ngFor="let action of shellbarActions"

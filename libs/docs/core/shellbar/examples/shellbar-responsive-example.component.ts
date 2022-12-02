@@ -18,6 +18,9 @@ export class ShellbarResponsiveExampleComponent {
 
     searchTerms = ['Apple', 'Banana', 'Kiwi', 'Strawberry'];
 
+    options: string[] = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+    selectedValue = this.options[0];
+
     productMenuControl = 'Corporate Portal';
 
     productMenuItems: ShellbarMenuItem[] = [

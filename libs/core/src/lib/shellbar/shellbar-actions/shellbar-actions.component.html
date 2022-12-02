@@ -32,7 +32,7 @@
     </div>
 </div>
 
-<div #shellBarSelect *ngIf="_selectComponent" class="fd-shellbar__action fd-shellbar__action--desktop">
+<div #shellBarSelect *ngIf="_selectComponent" class="fd-shellbar__action">
     <ng-content select="fd-select"></ng-content>
 </div>
 
@@ -40,6 +40,7 @@
     <fd-shellbar-actions-mobile
         [shellbarActions]="shellbarActions"
         [collapsedItemMenuLabel]="collapsedItemMenuLabel"
+        [isComboboxExist]="_comboboxComponent !== undefined"
         (_showFullWidthCombobox)="_showFullWidthCombobox($event)"
     ></fd-shellbar-actions-mobile>
 </div>

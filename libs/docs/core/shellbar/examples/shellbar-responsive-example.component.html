@@ -32,3 +32,35 @@
         ></fd-combobox>
     </fd-shellbar-actions>
 </fd-shellbar>
+
+<div style="margin-top: 30px">
+    <fd-shellbar [responsive]="true" [breakPoints]="breakPoints">
+        <fd-shellbar-logo>
+            <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+        </fd-shellbar-logo>
+
+        <fd-product-menu [control]="productMenuControl" [closePopoverOnSelect]="true" [items]="productMenuItems">
+        </fd-product-menu>
+
+        <fd-shellbar-subtitle> Subtitle </fd-shellbar-subtitle>
+
+        <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
+            <fd-shellbar-action
+                *ngFor="let action of actions"
+                [glyph]="action.glyph"
+                [callback]="action.callback"
+                [label]="action.label"
+                [notificationCount]="action.notificationCount"
+                [notificationLabel]="action.notificationLabel"
+            ></fd-shellbar-action>
+
+            <fd-product-switch>
+                <fd-product-switch-body [products]="productSwitcher"> </fd-product-switch-body>
+            </fd-product-switch>
+
+            <fd-select placeholder="Select an option" [(value)]="selectedValue">
+                <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+            </fd-select>
+        </fd-shellbar-actions>
+    </fd-shellbar>
+</div>

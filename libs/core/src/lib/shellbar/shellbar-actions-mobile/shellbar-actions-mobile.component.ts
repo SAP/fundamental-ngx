@@ -28,6 +28,10 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     collapsedItemMenuLabel: string;
 
     /** @hidden */
+    @Input()
+    isComboboxExist = false;
+
+    /** @hidden */
     totalNotifications: number;
 
     /** @hidden */
