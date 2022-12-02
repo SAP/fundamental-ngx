@@ -2944,10 +2944,10 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
-"@sap-theming/theming-base-content@11.1.44":
-  version "11.1.44"
-  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.1.44.tgz#6c54172d061d2339c3d299fb316e29168d25589e"
-  integrity sha512-as6QILm2my7mzJ8kUbWS1dn4/LejsPvJnjo9JDfoEZoItxkxrJGCDdV5ytpdm0rXjgdWjO5CdgO1rBHFgaH6vA==
+"@sap-theming/theming-base-content@11.1.47":
+  version "11.1.47"
+  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.1.47.tgz#cc3ff8525d31959e1e3f0155590aeb01bc7e9e79"
+  integrity sha512-zECFqiKT0umvytsADQNU6L8UScWDezb6IffOIihbkNAf4pfemQL4jBRmGlI1wu3Lfolhk3o2XRow575vkt/Ucg==
 
 "@schematics/angular@14.1.3", "@schematics/angular@~14.1.0", "@schematics/angular@~14.1.3":
   version "14.1.3"
