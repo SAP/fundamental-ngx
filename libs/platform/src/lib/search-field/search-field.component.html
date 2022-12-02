@@ -68,6 +68,7 @@
                 *ngIf="isLoading || (!isLoading && !_isSearchDone)"
             >
                 <button
+                    *ngIf="!disableSearch"
                     [title]="'platformSearchField.submitButtonTitle' | fdTranslate"
                     class="fdp-search-field__submit fd-input-group__button fd-button fd-button--transparent"
                     [attr.id]="_submitId"

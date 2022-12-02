@@ -111,6 +111,10 @@ export class SearchFieldComponent
     @Input()
     disableRefresh = false;
 
+    /** Whether display search button */
+    @Input()
+    disableSearch = false;
+
     /** List of string values to populate suggestion dropdown selection. */
     @Input()
     set suggestions(value: SuggestionItem[] | Observable<SuggestionItem[]>) {
