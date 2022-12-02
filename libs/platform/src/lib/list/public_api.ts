@@ -14,3 +14,4 @@ export * from './standard-list-item/standard-list-item.component';
 export * from './free-content-list-item/free-content-list-item.component';
 export * from './list-group-footer.component';
 export * from './list-group-header.component';
+export * from './load-more-content.directive';

@@ -1,3 +1,29 @@
+<h3>With default load more content</h3>
+
 <fdp-list [dataSource]="_dataSource" [loadMore]="true" [itemSize]="5" [delayTime]="2000" loadTitle="Show More">
     <fdp-standard-list-item *fdpItemDef="let user" [title]="user.firstName"></fdp-standard-list-item>
+</fdp-list>
+
+<h3>With custom load more content</h3>
+<fdp-list [dataSource]="_dataSource" [loadMore]="true" [itemSize]="5" [delayTime]="2000" loadTitle="Show More">
+    <fdp-standard-list-item *fdpItemDef="let user" [title]="user.firstName"></fdp-standard-list-item>
+    <ng-container *fdpListLoadMoreContent="let data">
+        <fd-busy-indicator
+            size="m"
+            class="fd-busy-indicator-custom"
+            [block]="true"
+            [loading]="data.loading"
+            role="alert"
+            [attr.aria-label]="data.loadingLabel | async"
+        >
+        </fd-busy-indicator>
+        <div *ngIf="!data.loading" style="display: flex; flex-direction: column; width: 100%">
+            <div style="margin: 0.813rem 0">
+                <b>
+                    {{ data.loadTitle }}
+                </b>
+            </div>
+            <div style="padding-bottom: 0.875rem">[ {{ data.lastChunk.end }} / {{ data.total }} ]</div>
+        </div>
+    </ng-container>
 </fdp-list>

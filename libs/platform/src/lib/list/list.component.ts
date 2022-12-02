@@ -55,6 +55,7 @@ import {
 import { BaseListItem, ListItemDef } from './base-list-item';
 import { ListConfig } from './list.config';
 import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { LoadMoreContentDirective, LoadMoreContentContext } from './load-more-content.directive';
 
 export type SelectionType = 'none' | 'multi' | 'single' | 'delete';
 export type ListType = 'inactive' | 'active' | 'detail';
@@ -251,6 +252,10 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     @ContentChild(ListItemDef)
     listItemDef: ListItemDef;
 
+    /** Load More List item content */
+    @ContentChild(LoadMoreContentDirective)
+    loadMoreContent: LoadMoreContentDirective;
+
     /** Child items of the List. */
     @ContentChildren(BaseListItem, { descendants: true })
     listItems: QueryList<BaseListItem>;
@@ -392,6 +397,31 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         this._language = await firstValueFrom(this._language$);
     }
 
+    /** Get context for load more button */
+    getLoadMoreContentContext(): LoadMoreContentContext {
+        const $implicit = {
+            loadTitle: this.loadTitle,
+            loading: this._loading,
+            loadingLabel: (() => {
+                if (this._loading) {
+                    return this._language$.pipe(
+                        map((language) => this._translationResolver.resolve(language, 'platformList.loadingAriaLabel'))
+                    );
+                }
+                return of(this.loadingLabel);
+            })(),
+            lastChunk: {
+                start: this._startIndex,
+                end: this._lastIndex
+            },
+            total: this._dsItems.length
+        };
+        return {
+            $implicit,
+            ...$implicit
+        };
+    }
+
     /**
      * @hidden
      * Initialization of the lis component with selection mode
@@ -511,7 +541,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             .pipe(
                 tap(async (data) => {
                     if (isBlank(data)) {
-                        console.error('===Invalid Response recived===');
+                        console.error('===Invalid Response received===');
                     }
                     this.loadingLabel = this._translationResolver.resolve(
                         this._language,

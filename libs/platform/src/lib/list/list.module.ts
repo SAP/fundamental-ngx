@@ -20,6 +20,7 @@ import { ListItemDef } from './base-list-item';
 import { ObjectListItemModule } from './object-list-item/object-list-item.module';
 import { StandardListItemModule } from './standard-list-item/standard-list-item.module';
 import { FreeContentListItemComponent } from './free-content-list-item/free-content-list-item.component';
+import { LoadMoreContentDirective } from './load-more-content.directive';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import { FreeContentListItemComponent } from './free-content-list-item/free-cont
         ListFooterComponent,
         ListGroupHeaderComponent,
         ListItemDef,
-        FreeContentListItemComponent
+        FreeContentListItemComponent,
+        LoadMoreContentDirective
     ],
     imports: [
         CommonModule,
@@ -57,7 +59,8 @@ import { FreeContentListItemComponent } from './free-content-list-item/free-cont
         ObjectListItemModule,
         DisplayListItemModule,
         ActionListItemModule,
-        FreeContentListItemComponent
+        FreeContentListItemComponent,
+        LoadMoreContentDirective
     ]
 })
 export class PlatformListModule {}
