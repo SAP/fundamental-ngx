@@ -1,3 +1,18 @@
+# [0.37.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.23...v0.37.0-rc.24) (2022-12-02)
+
+
+### Bug Fixes
+
+* **core:** vertical nav regression ([#9023](https://github.com/SAP/fundamental-ngx/issues/9023)) ([b672810](https://github.com/SAP/fundamental-ngx/commit/b67281064cd6f7b3dd25004b00f5753f0ea78d91))
+* **platform:** fixed data source limitation of 5 items in the list ([#9014](https://github.com/SAP/fundamental-ngx/issues/9014)) ([8beaae7](https://github.com/SAP/fundamental-ngx/commit/8beaae780601502d36fd99e34336f41e13da643c))
+
+
+### Features
+
+* **platform:** custom load more content on lists ([#9019](https://github.com/SAP/fundamental-ngx/issues/9019)) ([3e83ada](https://github.com/SAP/fundamental-ngx/commit/3e83ada2a9d688e4a1f4a32ac09a8aa418214158))
+
+
+
 # [0.37.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.22...v0.37.0-rc.23) (2022-12-01)
 
 
