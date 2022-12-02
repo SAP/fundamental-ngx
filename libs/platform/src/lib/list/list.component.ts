@@ -370,10 +370,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     private _language: FdLanguage;
 
     /** @hidden */
-    private _canRenderItems$ = new BehaviorSubject(false);
-
-    /** @hidden */
-    private _canRenderItems = this._canRenderItems$.asObservable();
+    private _afterViewInit$ = new BehaviorSubject(false);
 
     /** @hidden */
     constructor(
@@ -456,7 +453,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
      * Keyboard manager on list items, set values when passed via array
      */
     ngAfterViewInit(): void {
-        this._canRenderItems$.next(true);
+        this._afterViewInit$.next(true);
         this._keyManager = new FocusKeyManager<BaseListItem>(this.listItems).withWrap();
 
         this._updateListItems();
@@ -685,12 +682,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             .open()
             .pipe(
                 // Set new items when component is fully initiated and all child components are available.
-                switchMap((data) =>
-                    this._canRenderItems.pipe(
-                        filter((canRender) => canRender),
-                        map(() => data)
-                    )
-                ),
+                this._waitForViewInit(),
                 takeUntil(this._destroyed)
             )
             .subscribe((data) => {
@@ -871,5 +863,18 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
             this.stateChanges.next(item);
         });
+    }
+
+    /** @hidden */
+    private _waitForViewInit<SourceDataType>() {
+        return (source: Observable<SourceDataType>): Observable<SourceDataType> =>
+            source.pipe(
+                switchMap((src) =>
+                    this._afterViewInit$.pipe(
+                        filter((afterViewInit) => afterViewInit),
+                        map(() => src)
+                    )
+                )
+            );
     }
 }
