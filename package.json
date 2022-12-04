@@ -137,7 +137,7 @@
     "git-semver-tags": "4.1.1",
     "github-assistant": "0.3.3",
     "husky": "6.0.0",
-    "jasmine-core": "4.2.0",
+    "jasmine-core": "4.5.0",
     "jasmine-marbles": "0.8.4",
     "jasmine-spec-reporter": "7.0.0",
     "karma": "6.4.0",
