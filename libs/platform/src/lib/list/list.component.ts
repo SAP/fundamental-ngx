@@ -33,6 +33,7 @@ import {
     map,
     Observable,
     of,
+    startWith,
     Subject,
     Subscription,
     switchMap
@@ -55,7 +56,8 @@ import {
 import { BaseListItem, ListItemDef } from './base-list-item';
 import { ListConfig } from './list.config';
 import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
-import { LoadMoreContentDirective, LoadMoreContentContext } from './load-more-content.directive';
+import { LoadMoreContentContext, LoadMoreContentDirective } from './load-more-content.directive';
+import { FdpListComponent } from './fdpListComponent.token';
 
 export type SelectionType = 'none' | 'multi' | 'single' | 'delete';
 export type ListType = 'inactive' | 'active' | 'detail';
@@ -80,7 +82,10 @@ let nextListId = 0;
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FormFieldControl, useExisting: ListComponent, multi: true }],
+    providers: [
+        { provide: FormFieldControl, useExisting: ListComponent, multi: true },
+        { provide: FdpListComponent, useExisting: ListComponent }
+    ],
     host: {
         '[attr.tabindex]': '-1'
     }
@@ -163,6 +168,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     set value(value: any) {
         super.setValue(value);
     }
+
     get value(): any {
         return super.getValue();
     }
@@ -179,6 +185,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             }
         }
     }
+
     get rowSelection(): boolean {
         return this._rowSelection;
     }
@@ -190,6 +197,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             this._initializeDS(value);
         }
     }
+
     get dataSource(): FdpListDataSource<T> {
         return this._dataSource;
     }
@@ -206,6 +214,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
         this._ulElement?.classList.add(...classList);
     }
+
     get navigated(): boolean {
         return this._navigated;
     }
@@ -216,6 +225,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         this._navigationIndicator = value;
         this._ulElement?.classList.add('fd-list--navigation-indication');
     }
+
     get navigationIndicator(): boolean {
         return this._navigationIndicator;
     }
@@ -226,6 +236,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         this._hasByLine = value;
         this._ulElement?.classList.add('fd-list--byline');
     }
+
     get hasByLine(): boolean {
         return this._hasByLine;
     }
@@ -236,6 +247,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         this._hasObject = value;
         this._ulElement?.classList.add('fd-object-list');
     }
+
     get hasObject(): boolean {
         return this._hasObject;
     }
@@ -364,9 +376,6 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     private _dsSubscription: Nullable<Subscription>;
 
     /** @hidden */
-    private _clickSubscription = new Subscription();
-
-    /** @hidden */
     private _language: FdLanguage;
 
     /** @hidden */
@@ -456,8 +465,9 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         this._afterViewInit$.next(true);
         this._keyManager = new FocusKeyManager<BaseListItem>(this.listItems).withWrap();
 
-        this._updateListItems();
-        this.listItems.changes.subscribe(() => this._updateListItems());
+        this._subscriptions.add(
+            this.listItems.changes.pipe(startWith(this.listItems)).subscribe(() => this._updateListItems())
+        );
 
         const indicator = this.elementRef.nativeElement.querySelector('fd-busy-indicator');
         indicator?.setAttribute('aria-label', '');
@@ -473,10 +483,6 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
         if (this._dsSubscription) {
             this._dsSubscription.unsubscribe();
-        }
-
-        if (this._clickSubscription) {
-            this._clickSubscription.unsubscribe();
         }
     }
 
@@ -817,6 +823,18 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         });
     }
 
+    /** @hidden */
+    _setupListItem(item: BaseListItem): void {
+        item.selectionMode = this.selectionMode;
+        item.rowSelection = this.rowSelection;
+        item._hasByLine = this.hasByLine;
+        item.itemSelected.subscribe(() => {
+            this._keyManager.setActiveItem(this.listItems.toArray().indexOf(item));
+        });
+
+        this.stateChanges.next(item);
+    }
+
     /**
      * @hidden
      * Setting values from list to list items
@@ -836,10 +854,6 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             this.ariaSetsize = this.listItems.length;
         }
 
-        this._clickSubscription.unsubscribe();
-
-        this._clickSubscription = new Subscription();
-
         this._partialNavigation = this.listItems.some((item) => item.navigationIndicator || item.listType === 'detail');
 
         this.listItems.forEach((item, index) => {
@@ -849,19 +863,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
                 item.listType = this.listType;
             }
 
-            // item.contentDensity = this.contentDensity; // no need for this
-            item.selectionMode = this.selectionMode;
-            item.rowSelection = this.rowSelection;
-            item._hasByLine = this.hasByLine;
             item.ariaPosinet = index;
-
-            this._clickSubscription.add(
-                item.itemSelected.subscribe(() => {
-                    this._keyManager.setActiveItem(index);
-                })
-            );
-
-            this.stateChanges.next(item);
         });
     }
 
