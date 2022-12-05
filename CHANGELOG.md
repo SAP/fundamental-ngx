@@ -1,3 +1,12 @@
+# [0.37.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.27...v0.37.0-rc.28) (2022-12-05)
+
+
+### Bug Fixes
+
+* **core:** select custom width & refactoring ([#9008](https://github.com/SAP/fundamental-ngx/issues/9008)) ([f74083e](https://github.com/SAP/fundamental-ngx/commit/f74083e0969418ebb749b1337fc12d530eaf7ec9))
+
+
+
 # [0.37.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.26...v0.37.0-rc.27) (2022-12-05)
 
 
