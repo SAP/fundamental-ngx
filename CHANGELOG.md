@@ -1,3 +1,12 @@
+# [0.37.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.24...v0.37.0-rc.25) (2022-12-05)
+
+
+### Bug Fixes
+
+* **platform:** fixed list item change detection latency ([#9033](https://github.com/SAP/fundamental-ngx/issues/9033)) ([83467b2](https://github.com/SAP/fundamental-ngx/commit/83467b23c3e5bf8f4613ec0385fbf97aedec9f34))
+
+
+
 # [0.37.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.23...v0.37.0-rc.24) (2022-12-02)
 
 
