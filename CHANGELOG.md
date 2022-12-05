@@ -1,3 +1,12 @@
+# [0.37.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.26...v0.37.0-rc.27) (2022-12-05)
+
+
+### Features
+
+* **platform:** add input property to disable search button in search-field ([#9032](https://github.com/SAP/fundamental-ngx/issues/9032)) ([9c74d3a](https://github.com/SAP/fundamental-ngx/commit/9c74d3ab75505cf0d90eeda9d2be08a5f2508205))
+
+
+
 # [0.37.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.25...v0.37.0-rc.26) (2022-12-05)
 
 
