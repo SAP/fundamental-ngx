@@ -1,3 +1,12 @@
+# [0.37.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.25...v0.37.0-rc.26) (2022-12-05)
+
+
+### Bug Fixes
+
+* **platform,docs:** added missing export of PlatformMultiComboboxModule ([#9044](https://github.com/SAP/fundamental-ngx/issues/9044)) ([2871c4f](https://github.com/SAP/fundamental-ngx/commit/2871c4fffbe2656ddc043e5c918183f78112b150))
+
+
+
 # [0.37.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.24...v0.37.0-rc.25) (2022-12-05)
 
 
