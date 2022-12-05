@@ -359,7 +359,7 @@ describe('dynamic side content test suite', () => {
 
     async function checkPiningArea(): Promise<void> {
         await click(pinButton);
-        await expect(await getAttributeByName(pinButton, 'aria-selected')).toBe('true', 'area is not pinned');
+        await expect(await getAttributeByName(pinButton, 'aria-pressed')).toBe('true', 'area is not pinned');
         const articlesLength = await getElementArrayLength(article);
         await scrollIntoView(article, articlesLength - 1);
         await expect(await isElementDisplayed(collapsibleHeader)).toBe(
