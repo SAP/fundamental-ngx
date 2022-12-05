@@ -245,7 +245,7 @@ describe('Approval flow', () => {
             await sendKeys('Julie');
 
             await pause(1000);
-
+            // re triggering e2e
             await click(selectItem);
             await click(bottomMenuItems);
             const watchersCountAfter = await getElementArrayLength(watchersAvatar);
