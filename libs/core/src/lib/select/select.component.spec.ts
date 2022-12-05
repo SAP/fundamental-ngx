@@ -417,7 +417,7 @@ describe('SelectComponent', () => {
             element = fixtureFilter.componentInstance.selectElement;
             fixtureFilter.detectChanges();
 
-            triggerControl = fixtureFilter.nativeElement.querySelector('div.fd-select');
+            triggerControl = fixtureFilter.nativeElement.querySelector('fd-select');
         });
 
         it('should make active second option "bbb" when start typing "b"', fakeAsync(() => {

@@ -15,7 +15,11 @@ import { SelectSemanticStateExampleComponent } from './examples/select-semantic-
 import { SelectModeExampleComponent } from './examples/select-mode-example/select-mode-example.component';
 import { SelectMobileExampleComponent } from './examples/select-mobile-example/select-mobile-example.component';
 import { SelectCustomComparatorExample } from './examples/select-custom-comparator-example/select-custom-comparator-example.component';
-import { DeprecatedSelectCompactDirective, SelectModule } from '@fundamental-ngx/core/select';
+import {
+    DeprecatedSelectCompactDirective,
+    DeprecatedSelectCSSClasses,
+    SelectModule
+} from '@fundamental-ngx/core/select';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { FormModule } from '@fundamental-ngx/core/form';
@@ -56,6 +60,10 @@ const routes: Routes = [
         SelectSemanticStateExampleComponent,
         SelectCustomComparatorExample
     ],
-    providers: [moduleDeprecationsProvider(DeprecatedSelectCompactDirective), currentComponentProvider('select')]
+    providers: [
+        moduleDeprecationsProvider(DeprecatedSelectCompactDirective),
+        moduleDeprecationsProvider(DeprecatedSelectCSSClasses),
+        currentComponentProvider('select')
+    ]
 })
 export class SelectDocsModules {}
