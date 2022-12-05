@@ -1,4 +1,16 @@
 
+### [0.35.5](https://github.com/SAP/fundamental-ngx/compare/v0.35.4...v0.35.5) (2022-12-05)
+
+
+### Features
+
+* **core:** creating submenus dynamically ([#8930](https://github.com/SAP/fundamental-ngx/issues/8930)) ([5f0727a](https://github.com/SAP/fundamental-ngx/commit/5f0727ad44e88ca8518ab70273d5efb2549425b9))
+
+
+### Bug Fixes
+
+* **core:** submenu overflow ([#8824](https://github.com/SAP/fundamental-ngx/issues/8824)) ([6e619ce](https://github.com/SAP/fundamental-ngx/commit/6e619ce04896cb11a60a481178145b59f2be5e72))
+
 ### [0.35.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.13...v0.35.4) (2022-07-30)
 
 ### [0.35.4-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.12...v0.35.4-rc.13) (2022-07-29)
