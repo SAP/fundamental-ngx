@@ -27,7 +27,8 @@ import {
     PlatformDatetimePickerModule,
     PlatformTimePickerModule,
     PlatformDatePickerModule,
-    PlatformFormGeneratorModule
+    PlatformFormGeneratorModule,
+    PlatformMultiComboboxModule
 } from '@fundamental-ngx/platform/form';
 import { PlatformInfoLabelModule } from '@fundamental-ngx/platform/info-label';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
@@ -98,6 +99,7 @@ import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform/message-
         PlatformTimePickerModule,
         PlatformDatePickerModule,
         PlatformFormGeneratorModule,
+        PlatformMultiComboboxModule,
         PlatformIconTabBarModule,
         PlatformSmartFilterBarModule,
         PlatformMessagePopoverModule
