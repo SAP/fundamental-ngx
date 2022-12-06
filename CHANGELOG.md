@@ -1,3 +1,25 @@
+# [0.37.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.28...v0.37.0-rc.29) (2022-12-06)
+
+
+### Bug Fixes
+
+* **core,platform:** button toggled state ([#9010](https://github.com/SAP/fundamental-ngx/issues/9010)) ([c964c1b](https://github.com/SAP/fundamental-ngx/commit/c964c1b79950de8bc5b434a2893e0dce238f6188))
+
+
+### BREAKING CHANGES
+
+* **core,platform:** * segmented button: using `toggled` input property instead of `aria-selected` attribute is now required
+
+* fix(core,platform): button toggled state
+
+* fix(docs): button deprecations
+
+* fix(e2e): update
+
+* fix(platform): select secondary item selector
+
+
+
 # [0.37.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.27...v0.37.0-rc.28) (2022-12-05)
 
 
