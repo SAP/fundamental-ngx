@@ -4,6 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { ThemingModule } from '@fundamental-ngx/core/theming';
 import { AppComponent } from './app.component';
@@ -59,7 +60,8 @@ const routes: Routes = [
         ThemingModule,
         ContentDensityModule.forRoot({ storage: 'localStorage' }),
         ClickedBehaviorModule.forRoot(),
-        SharedDocumentationModule.forRoot(packageJson)
+        SharedDocumentationModule.forRoot(packageJson),
+        SkeletonModule
     ],
     bootstrap: [AppComponent],
     providers: [

@@ -1,0 +1,21 @@
+@import '~fundamental-styles/dist/layout-grid';
+
+$block: fd-skeleton;
+
+.fd-skeleton {
+    display: inline-block;
+    cursor: wait;
+
+    &__canvas {
+        display: block;
+        fill: var(--sapContent_Placeholderloading_Background);
+    }
+
+    &--animated {
+        .#{$block}__canvas {
+            --fdSkeletonGradientMiddleColor: #999;
+
+            fill: url(#skeletonGradient);
+        }
+    }
+}
