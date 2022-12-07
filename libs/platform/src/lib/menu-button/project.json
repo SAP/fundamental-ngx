@@ -1,11 +1,12 @@
 {
+    "name": "platform-menu-button",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/menu-button",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/menu-button"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/menu-button"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/menu-button/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/menu-button/ng-package.json",

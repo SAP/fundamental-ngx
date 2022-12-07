@@ -1,11 +1,12 @@
 {
+    "name": "platform-dynamic-page",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/dynamic-page",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/dynamic-page"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/dynamic-page"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/dynamic-page/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/dynamic-page/ng-package.json",

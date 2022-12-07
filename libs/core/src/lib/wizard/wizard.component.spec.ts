@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-
-import { WizardComponent, WizardModule } from '@fundamental-ngx/core/wizard';
+import { WizardComponent } from './wizard.component';
+import { WizardModule } from './wizard.module';
 
 @Component({
     template: `

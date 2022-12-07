@@ -1,11 +1,12 @@
 {
+    "name": "core-pagination",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/pagination",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/pagination"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/pagination"],
             "options": {
                 "tsConfig": "libs/core/src/lib/pagination/tsconfig.lib.json",
                 "project": "libs/core/src/lib/pagination/ng-package.json",

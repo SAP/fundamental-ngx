@@ -1,11 +1,12 @@
 {
+    "name": "core-mobile-mode",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/mobile-mode",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/mobile-mode"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/mobile-mode"],
             "options": {
                 "tsConfig": "libs/core/src/lib/mobile-mode/tsconfig.lib.json",
                 "project": "libs/core/src/lib/mobile-mode/ng-package.json",

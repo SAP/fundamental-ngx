@@ -1,11 +1,12 @@
 {
+    "name": "platform-value-help-dialog",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/value-help-dialog",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/value-help-dialog"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/value-help-dialog"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/value-help-dialog/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/value-help-dialog/ng-package.json",

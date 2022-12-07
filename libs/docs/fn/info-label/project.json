@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-info-label",
     "sourceRoot": "libs/docs/fn/info-label",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/info-label/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-info-label"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-info-label"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

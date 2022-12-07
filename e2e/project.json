@@ -1,4 +1,5 @@
 {
+    "name": "components-e2e",
     "sourceRoot": "e2e",
     "projectType": "application",
     "targets": {

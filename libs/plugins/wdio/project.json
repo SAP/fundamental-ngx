@@ -1,4 +1,5 @@
 {
+    "name": "plugins-wdio",
     "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/plugins/wdio/src",
     "projectType": "library",

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { NestedListModule } from '../nested-list.module';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';

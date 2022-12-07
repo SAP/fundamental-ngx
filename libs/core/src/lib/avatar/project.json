@@ -1,11 +1,12 @@
 {
+    "name": "core-avatar",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/avatar",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/avatar"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/avatar"],
             "options": {
                 "tsConfig": "libs/core/src/lib/avatar/tsconfig.lib.json",
                 "project": "libs/core/src/lib/avatar/ng-package.json",

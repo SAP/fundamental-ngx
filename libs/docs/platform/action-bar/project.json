@@ -1,4 +1,5 @@
 {
+    "name": "docs-platform-action-bar",
     "sourceRoot": "libs/docs/platform/action-bar",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/platform/action-bar/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-platform-action-bar"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-platform-action-bar"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

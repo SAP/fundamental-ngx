@@ -1,11 +1,12 @@
 {
+    "name": "core-scrollbar",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/scrollbar",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/scrollbar"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/scrollbar"],
             "options": {
                 "tsConfig": "libs/core/src/lib/scrollbar/tsconfig.lib.json",
                 "project": "libs/core/src/lib/scrollbar/ng-package.json",

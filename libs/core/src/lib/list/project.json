@@ -1,11 +1,12 @@
 {
+    "name": "core-list",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/list",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/list"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/list"],
             "options": {
                 "tsConfig": "libs/core/src/lib/list/tsconfig.lib.json",
                 "project": "libs/core/src/lib/list/ng-package.json",

@@ -4,7 +4,7 @@ import { ComboboxMobileComponent } from './combobox-mobile.component';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { EventEmitter } from '@angular/core';
-import { DialogModule } from '../../dialog/dialog.module';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
 import { RouterTestingModule } from '@angular/router/testing';

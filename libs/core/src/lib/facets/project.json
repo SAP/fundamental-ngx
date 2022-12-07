@@ -1,11 +1,12 @@
 {
+    "name": "core-facets",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/facets",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/facets"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/facets"],
             "options": {
                 "tsConfig": "libs/core/src/lib/facets/tsconfig.lib.json",
                 "project": "libs/core/src/lib/facets/ng-package.json",

@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-scroll-spy",
     "sourceRoot": "libs/docs/core/scroll-spy",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/scroll-spy/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-scroll-spy"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-scroll-spy"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

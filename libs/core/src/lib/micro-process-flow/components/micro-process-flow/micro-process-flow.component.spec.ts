@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
+import { MicroProcessFlowModule } from '../../micro-process-flow.module';
 import { MicroProcessFlowComponent } from './micro-process-flow.component';
 
 @Component({

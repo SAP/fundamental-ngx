@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-content-density",
     "sourceRoot": "libs/docs/core/content-density",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/content-density/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-content-density"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-content-density"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

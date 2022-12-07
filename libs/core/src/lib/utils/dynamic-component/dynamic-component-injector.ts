@@ -4,8 +4,19 @@ export class DynamicComponentInjector implements Injector {
     /** @hidden */
     constructor(private _parentInjector: Injector, private _additionalTokens: WeakMap<any, any>) {}
 
+    /**
+     *
+     * @param token
+     * @param notFoundValue
+     * @param flags
+     */
     get<T>(token: Type<T> | InjectionToken<T>, notFoundValue?: T, flags?: InjectFlags): T;
 
+    /**
+     *
+     * @param token
+     * @param notFoundValue
+     */
     get(token: any, notFoundValue?: any): void;
 
     /** @hidden */

@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-message-toast",
     "sourceRoot": "libs/docs/fn/message-toast",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/message-toast/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-message-toast"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-message-toast"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

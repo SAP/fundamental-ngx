@@ -1,5 +1,9 @@
 {
     "extends": "./tsconfig.json",
     "files": ["./src/index.ts"],
-    "exclude": ["**/*.spec.ts"]
+    "exclude": ["**/*.spec.ts"],
+    "compilerOptions": {
+        "target": "ES2022",
+        "useDefineForClassFields": false
+    }
 }

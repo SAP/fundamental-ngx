@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-list",
     "sourceRoot": "libs/docs/fn/list",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/list/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-list"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-list"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

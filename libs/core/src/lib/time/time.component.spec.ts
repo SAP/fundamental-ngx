@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { TimeComponent, TimeModule } from '@fundamental-ngx/core/time';
 import { PipeModule } from '@fundamental-ngx/core/utils';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { Meridian } from './models';
+import { TimeComponent } from './time.component';
+import { TimeModule } from './time.module';
 
 describe('TimeComponent', () => {
     let component: TimeComponent<FdDate>;

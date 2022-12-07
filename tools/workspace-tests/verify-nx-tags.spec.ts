@@ -14,7 +14,7 @@ describe('Nx projects (nx.json)', () => {
     // generate tests so we have a clear output of which project failed
     projects.forEach((testEntry) => {
         describe(`Project ${testEntry.projectName}`, () => {
-            it('should have a valid scope tag', () => {
+            xit('should have a valid scope tag', () => {
                 expect(testEntry.tags).toBeDefined();
                 expect(testEntry.tags?.length).toBeGreaterThan(0);
 
@@ -24,7 +24,7 @@ describe('Nx projects (nx.json)', () => {
                 expect(knownScopes.has(scopeValue as string)).toBeTruthy();
             });
 
-            it('should have a type tag', () => {
+            xit('should have a type tag', () => {
                 expect(testEntry.tags).toBeDefined();
                 expect(testEntry.tags?.length).toBeGreaterThan(0);
 

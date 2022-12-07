@@ -2,10 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { AvatarGroupComponent, AvatarGroupModule, AvatarGroupType } from '@fundamental-ngx/core/avatar-group';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { Size } from '@fundamental-ngx/core/utils';
+import { AvatarGroupComponent, AvatarGroupType } from './avatar-group.component';
+import { AvatarGroupModule } from './avatar-group.module';
 
 const NUMBER_OF_ITEMS = 20;
 

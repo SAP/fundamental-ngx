@@ -1,11 +1,12 @@
 {
+    "name": "core-grid-list",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/grid-list",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/grid-list"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/grid-list"],
             "options": {
                 "tsConfig": "libs/core/src/lib/grid-list/tsconfig.lib.json",
                 "project": "libs/core/src/lib/grid-list/ng-package.json",

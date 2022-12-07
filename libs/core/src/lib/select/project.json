@@ -1,11 +1,12 @@
 {
+    "name": "core-select",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/select",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/select"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/select"],
             "options": {
                 "tsConfig": "libs/core/src/lib/select/tsconfig.lib.json",
                 "project": "libs/core/src/lib/select/ng-package.json",

@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-action-sheet",
     "sourceRoot": "libs/docs/core/action-sheet",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/action-sheet/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-action-sheet"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-action-sheet"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

@@ -1,4 +1,5 @@
 {
+    "name": "docs-platform-multi-combobox",
     "sourceRoot": "libs/docs/platform/multi-combobox",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/platform/multi-combobox/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-platform-multi-combobox"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-platform-multi-combobox"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

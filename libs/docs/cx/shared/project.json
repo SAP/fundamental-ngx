@@ -10,5 +10,6 @@
             }
         }
     },
-    "tags": ["type:lib", "scope:docs"]
+    "tags": ["type:lib", "scope:docs"],
+    "name": "docs-cx-shared"
 }

@@ -7,7 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AlertContainerComponent } from '../alert-utils/alert-container.component';
 import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { AlertRef } from '../alert-utils/alert-ref';
-import { ButtonModule } from '../../button/button.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { AlertConfig } from '../alert-utils/alert-config';
 
 @Component({

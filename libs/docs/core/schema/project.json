@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-schema",
     "projectType": "library",
     "sourceRoot": "libs/schema/src",
     "prefix": "fundamental-ngx",

@@ -1,5 +1,5 @@
 {
-    "extends": "../tsconfig.base.json",
+    "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "../dist/out-tsc",
         "rootDir": ".",
@@ -7,5 +7,6 @@
         "target": "es5",
         "types": ["node"]
     },
-    "include": ["**/*.ts"]
+    "include": ["**/*.ts"],
+    "exclude": ["test.ts", "**/*.spec.ts"]
 }

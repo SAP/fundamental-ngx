@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-grid-list",
     "sourceRoot": "libs/docs/core/grid-list",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/grid-list/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-grid-list"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-grid-list"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

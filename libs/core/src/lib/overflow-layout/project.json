@@ -1,11 +1,12 @@
 {
+    "name": "core-overflow-layout",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/overflow-layout",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/overflow-layout"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/overflow-layout"],
             "options": {
                 "project": "libs/core/src/lib/overflow-layout/ng-package.json"
             },

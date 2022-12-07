@@ -1,11 +1,12 @@
 {
+    "name": "fn-list",
     "projectType": "library",
     "sourceRoot": "libs/fn/src/lib/list",
     "prefix": "fn",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/fn/list"],
+            "outputs": ["{workspaceRoot}/dist/libs/fn/list"],
             "options": {
                 "project": "libs/fn/src/lib/list/ng-package.json"
             },

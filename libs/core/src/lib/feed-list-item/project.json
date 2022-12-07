@@ -1,11 +1,12 @@
 {
+    "name": "core-feed-list-item",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/feed-list-item",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/feed-list-item"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/feed-list-item"],
             "options": {
                 "tsConfig": "libs/core/src/lib/feed-list-item/tsconfig.lib.json",
                 "project": "libs/core/src/lib/feed-list-item/ng-package.json",

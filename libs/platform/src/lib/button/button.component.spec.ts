@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformButtonModule } from './button.module';
 
 import { ButtonComponent } from './button.component';
 

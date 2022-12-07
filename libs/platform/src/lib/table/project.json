@@ -1,11 +1,12 @@
 {
+    "name": "platform-table",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/table",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/table"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/table"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/table/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/table/ng-package.json",

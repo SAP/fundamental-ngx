@@ -7,8 +7,8 @@ import {
     InputGroupInputDirective,
     InputGroupTextareaDirective
 } from './input-group-directives';
-import { ButtonModule } from '../button/button.module';
-import { IconModule } from '../icon/icon.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { IconModule } from '@fundamental-ngx/core/icon';
 import { first } from 'rxjs/operators';
 
 describe('InputGroupComponent', () => {

@@ -1,11 +1,12 @@
 {
+    "name": "core-combobox",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/combobox",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/combobox"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/combobox"],
             "options": {
                 "tsConfig": "libs/core/src/lib/combobox/tsconfig.lib.json",
                 "project": "libs/core/src/lib/combobox/ng-package.json",

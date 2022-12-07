@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-alert",
     "sourceRoot": "libs/docs/core/alert",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/alert/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-alert"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-alert"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-input",
     "sourceRoot": "libs/docs/fn/input",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/input/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-input"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-input"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

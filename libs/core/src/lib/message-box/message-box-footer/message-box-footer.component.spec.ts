@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, Type, ViewChild } from '@angular/core';
 
-import { TemplateModule } from '../../utils/directives/template/template.module';
+import { TemplateModule } from '@fundamental-ngx/core/utils';
 import { MessageBoxFooterComponent, MessageBoxButtonClass } from './message-box-footer.component';
 import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.class';
-import { BarModule } from '../../bar/bar.module';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import { whenStable } from '@fundamental-ngx/core/tests';
 
 @Component({

@@ -1,11 +1,12 @@
 {
+    "name": "core-illustrated-message",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/illustrated-message",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/illustrated-message"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/illustrated-message"],
             "options": {
                 "tsConfig": "libs/core/src/lib/illustrated-message/tsconfig.lib.json",
                 "project": "libs/core/src/lib/illustrated-message/ng-package.json",

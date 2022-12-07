@@ -1,11 +1,12 @@
 {
+    "name": "core-segmented-button",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/segmented-button",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/segmented-button"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/segmented-button"],
             "options": {
                 "tsConfig": "libs/core/src/lib/segmented-button/tsconfig.lib.json",
                 "project": "libs/core/src/lib/segmented-button/ng-package.json",

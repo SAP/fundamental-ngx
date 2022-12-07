@@ -1,11 +1,12 @@
 {
+    "name": "core-breadcrumb",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/breadcrumb",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/breadcrumb"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/breadcrumb"],
             "options": {
                 "tsConfig": "libs/core/src/lib/breadcrumb/tsconfig.lib.json",
                 "project": "libs/core/src/lib/breadcrumb/ng-package.json",

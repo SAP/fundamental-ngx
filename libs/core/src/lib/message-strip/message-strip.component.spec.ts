@@ -2,7 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { MessageStripComponent, MessageStripModule } from '@fundamental-ngx/core/message-strip';
+
+import { MessageStripComponent } from './message-strip.component';
+import { MessageStripModule } from './message-strip.module';
 
 @Component({
     template: ` <fd-message-strip> A dismissible normal message strip. </fd-message-strip> `

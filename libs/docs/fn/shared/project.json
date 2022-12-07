@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-shared",
     "sourceRoot": "libs/docs/fn/shared",
     "projectType": "library",
     "prefix": "fdp-doc",

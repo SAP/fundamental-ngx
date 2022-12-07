@@ -2,8 +2,8 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SplitButtonComponent, splitButtonTextClass, splitButtonTextCompactClass } from './split-button.component';
-import { MenuModule } from '../menu/menu.module';
-import { ButtonModule } from '../button/button.module';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import createSpy = jasmine.createSpy;
 import { I18nModule } from '@fundamental-ngx/i18n';
 

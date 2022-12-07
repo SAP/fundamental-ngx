@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TimelineNodeComponent } from '@fundamental-ngx/core/timeline';
+import { TimelineNodeComponent } from '../components/timeline-node/timeline-node.component';
 
 import { TimelinePositionControlService } from './timeline-position-control.service';
 import { HorizontalSingleSideStrategy } from './position-strategies/horizontal-single-side-strategy';

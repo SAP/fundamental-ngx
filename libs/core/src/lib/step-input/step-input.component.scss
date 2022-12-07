@@ -1,6 +1,6 @@
 @use '@angular/cdk';
-@import '~fundamental-styles/dist/input';
-@import '~fundamental-styles/dist/step-input';
+@import '~fundamental-styles/dist/input.css';
+@import '~fundamental-styles/dist/step-input.css';
 
 @include cdk.a11y-visually-hidden();
 

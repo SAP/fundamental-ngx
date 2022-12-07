@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-notification",
     "sourceRoot": "libs/docs/fn/notification",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/notification/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-notification"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-notification"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

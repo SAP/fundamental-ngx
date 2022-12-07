@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-segmented-button",
     "sourceRoot": "libs/docs/fn/segmented-button",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/segmented-button/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-segmented-button"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-segmented-button"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { TimeColumnComponent, TimeModule } from '@fundamental-ngx/core/time';
-
 import { SelectableViewItem } from '../models';
+import { TimeModule } from '../time.module';
+import { TimeColumnComponent } from './time-column.component';
 
 describe('TimeColumnComponent', () => {
     let component: TimeColumnComponent<unknown>;

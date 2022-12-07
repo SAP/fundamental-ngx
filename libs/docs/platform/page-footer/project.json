@@ -1,4 +1,5 @@
 {
+    "name": "docs-platform-page-footer",
     "sourceRoot": "libs/docs/platform/page-footer",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/platform/page-footer/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-platform-page-footer"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-platform-page-footer"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

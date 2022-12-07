@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { AvatarModule, AvatarComponent, AvatarColor } from '@fundamental-ngx/fn/avatar';
+import { AvatarModule } from './avatar.module';
+import { AvatarComponent, AvatarColor } from './avatar.component';
 
 @Component({
     selector: 'fn-test-avatar',

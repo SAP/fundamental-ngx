@@ -1,11 +1,12 @@
 {
+    "name": "core-infinite-scroll",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/infinite-scroll",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/infinite-scroll"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/infinite-scroll"],
             "options": {
                 "tsConfig": "libs/core/src/lib/infinite-scroll/tsconfig.lib.json",
                 "project": "libs/core/src/lib/infinite-scroll/ng-package.json",

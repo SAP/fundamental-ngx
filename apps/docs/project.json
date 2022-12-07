@@ -1,4 +1,5 @@
 {
+    "name": "docs",
     "sourceRoot": "apps/docs/src",
     "projectType": "application",
     "prefix": "fundamental-ngx",
@@ -174,6 +175,9 @@
                 }
             },
             "configurations": {
+                "development": {
+                    "tsConfig": "apps/docs/tsconfig.app.json"
+                },
                 "production": {
                     "fileReplacements": [
                         {
@@ -210,11 +214,11 @@
                 }
             },
             "outputs": ["{options.outputPath}"],
-            "defaultConfiguration": "",
+            "defaultConfiguration": "development",
             "dependsOn": ["^build", "generate-typedoc"]
         },
         "serve": {
-            "executor": "@nrwl/angular:webpack-server",
+            "executor": "@nrwl/angular:webpack-dev-server",
             "options": {
                 "browserTarget": "docs:build"
             },
@@ -230,7 +234,8 @@
                     "disableHostCheck": true,
                     "liveReload": false
                 }
-            }
+            },
+            "defaultConfiguration": "hot-module-replacement"
         },
         "lint": {
             "executor": "@nrwl/linter:eslint",

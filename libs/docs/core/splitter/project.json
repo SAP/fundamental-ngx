@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-splitter",
     "sourceRoot": "libs/docs/core/splitter",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/splitter/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-splitter"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-splitter"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

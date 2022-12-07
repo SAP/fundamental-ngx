@@ -1,11 +1,12 @@
 {
+    "name": "core-micro-process-flow",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/micro-process-flow",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/micro-process-flow"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/micro-process-flow"],
             "options": {
                 "tsConfig": "libs/core/src/lib/micro-process-flow/tsconfig.lib.json",
                 "project": "libs/core/src/lib/micro-process-flow/ng-package.json",

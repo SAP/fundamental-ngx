@@ -1,11 +1,12 @@
 {
+    "name": "core-dynamic-side-content",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/dynamic-side-content",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/dynamic-side-content"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/dynamic-side-content"],
             "options": {
                 "tsConfig": "libs/core/src/lib/dynamic-side-content/tsconfig.lib.json",
                 "project": "libs/core/src/lib/dynamic-side-content/ng-package.json",

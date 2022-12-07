@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-object-status",
     "sourceRoot": "libs/docs/fn/object-status",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/object-status/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-object-status"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-object-status"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

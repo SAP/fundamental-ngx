@@ -1,11 +1,12 @@
 {
+    "name": "fn-progress-bar",
     "projectType": "library",
     "sourceRoot": "libs/fn/src/lib/progress-bar",
     "prefix": "fn",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/fn/progress-bar"],
+            "outputs": ["{workspaceRoot}/dist/libs/fn/progress-bar"],
             "options": {
                 "project": "libs/fn/src/lib/progress-bar/ng-package.json"
             },

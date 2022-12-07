@@ -1,11 +1,12 @@
 {
+    "name": "platform-object-attribute",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/object-attribute",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/object-attribute"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/object-attribute"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/object-attribute/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/object-attribute/ng-package.json",

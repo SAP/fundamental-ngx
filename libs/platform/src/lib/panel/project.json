@@ -1,11 +1,12 @@
 {
+    "name": "platform-panel",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/panel",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/panel"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/panel"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/panel/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/panel/ng-package.json",

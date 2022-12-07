@@ -1,11 +1,12 @@
 {
+    "name": "core-slider",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/slider",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/slider"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/slider"],
             "options": {
                 "tsConfig": "libs/core/src/lib/slider/tsconfig.lib.json",
                 "project": "libs/core/src/lib/slider/ng-package.json",

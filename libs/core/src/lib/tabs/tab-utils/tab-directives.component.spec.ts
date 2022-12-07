@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { TabIconComponent, TabsModule } from '@fundamental-ngx/core/tabs';
+import { TabsModule } from '../tabs.module';
+import { TabIconComponent } from './tab-directives';
 
 @Component({
     template: ` <li fd-tab-icon #directiveElement></li> `

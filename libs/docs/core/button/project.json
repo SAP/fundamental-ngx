@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-button",
     "sourceRoot": "libs/docs/core/button",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/button/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-button"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-button"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

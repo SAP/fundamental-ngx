@@ -8,7 +8,7 @@ import { createKeyboardEvent } from '@fundamental-ngx/core/tests';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { RtlService } from '@fundamental-ngx/core/utils';
-import { PlatformMenuModule } from '../menu/menu.module';
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { SplitMenuButtonComponent } from './split-menu-button.component';
 import { PlatformSplitMenuButtonModule } from './split-menu-button.module';
 

@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, ContentChild, Directive, ElementRef, OnChanges, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { ButtonComponent, ButtonModule } from '@fundamental-ngx/core/button';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '../interfaces/css-class-builder.interface';
+import { applyCssClass } from './apply-css-class.decorator';
 
 const TEST_DIRECTIVE_CLASS = 'fd-test-directive';
 

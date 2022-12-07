@@ -1,11 +1,12 @@
 {
+    "name": "core-info-label",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/info-label",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/info-label"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/info-label"],
             "options": {
                 "tsConfig": "libs/core/src/lib/info-label/tsconfig.lib.json",
                 "project": "libs/core/src/lib/info-label/ng-package.json",

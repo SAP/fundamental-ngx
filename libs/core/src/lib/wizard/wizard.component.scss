@@ -1,4 +1,4 @@
-@import '~fundamental-styles/dist/wizard';
+@import '~fundamental-styles/dist/wizard.css';
 
 @mixin fd-wizard-responsive-paddings() {
     @media (max-width: 599px) {

@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-slider",
     "sourceRoot": "libs/docs/fn/slider",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/slider/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-slider"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-slider"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

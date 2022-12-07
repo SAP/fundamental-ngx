@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 
-import { DynamicSideContentSideComponent } from '@fundamental-ngx/core/dynamic-side-content';
+import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
 
 import { DYNAMIC_SIDE_CONTENT_CLASS_NAME } from './constants';
 
