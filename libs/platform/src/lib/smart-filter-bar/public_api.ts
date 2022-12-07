@@ -18,3 +18,4 @@ export * from './interfaces/smart-filter-bar-change';
 export * from './constants';
 export * from './providers/smart-filter-bar.provider';
 export * from './smart-filter-bar.class';
+export * from './directives/smart-filter-bar-toolbar-item.directive';
