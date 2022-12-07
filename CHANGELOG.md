@@ -1,3 +1,12 @@
+# [0.37.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.30...v0.37.0-rc.31) (2022-12-07)
+
+
+### Bug Fixes
+
+* **core,platform:** form message appearance ([#9048](https://github.com/SAP/fundamental-ngx/issues/9048)) ([ea187d9](https://github.com/SAP/fundamental-ngx/commit/ea187d92d16f354e614cdd375f50b0c22aaa3a3a))
+
+
+
 # [0.37.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.29...v0.37.0-rc.30) (2022-12-07)
 
 
