@@ -22,7 +22,7 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     abstract initialFilterBy: CollectionFilter[];
 
     /** Event emitted when current preset configuration has been changed. */
-    presetChanged: EventEmitter<PlatformTableManagedPreset>;
+    abstract presetChanged: EventEmitter<PlatformTableManagedPreset>;
 
     /** Sum of widths of fixed columns (semantic highlighting, selection) */
     abstract get _fixedColumnsPadding(): number;

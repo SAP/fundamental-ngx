@@ -382,6 +382,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     editableRowSkeleton: T;
 
     /** Event emitted when current preset configuration has been changed. */
+    @Output()
     presetChanged = new EventEmitter<PlatformTableManagedPreset>();
 
     /** Event fired when table selection has changed. */
