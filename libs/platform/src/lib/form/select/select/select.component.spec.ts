@@ -192,7 +192,15 @@ describe('Select component Reactive Form Test', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, PlatformSelectModule, FormsModule, ReactiveFormsModule],
+            imports: [
+                FdpFormGroupModule,
+                FormModule,
+                FormsModule,
+                ReactiveFormsModule,
+                CommonModule,
+                PlatformSelectModule
+            ],
+            providers: [DynamicComponentService, MenuKeyboardService],
             declarations: [TestReactiveSelectComponent]
         }).compileComponents();
     }));
