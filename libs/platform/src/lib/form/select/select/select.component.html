@@ -39,6 +39,11 @@
             [ngTemplateOutlet]="listItem"
             [ngTemplateOutletContext]="{ optionItem: item, index: index }"
         ></ng-container>
+        <ng-container
+            secondary
+            [ngTemplateOutlet]="secondaryTextSource"
+            [ngTemplateOutletContext]="{ optionItem: item }"
+        ></ng-container>
     </li>
 </fd-select>
 
@@ -54,17 +59,12 @@
             [ngTemplateOutlet]="optionItemSource"
             [ngTemplateOutletContext]="{ optionItem: optionItem, index: index }"
         ></ng-container>
-
-        <ng-container
-            [ngTemplateOutlet]="secondaryTextSource"
-            [ngTemplateOutletContext]="{ optionItem: optionItem }"
-        ></ng-container>
     </ng-container>
 </ng-template>
 
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
     <ng-container *ngIf="!_optionItemTemplate">
-        <span fd-list-title [innerHTML]="optionItem.label"></span>
+        <span [innerHTML]="optionItem.label"></span>
     </ng-container>
 
     <ng-container *ngIf="_optionItemTemplate">
