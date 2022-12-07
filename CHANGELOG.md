@@ -1,3 +1,12 @@
+# [0.37.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.29...v0.37.0-rc.30) (2022-12-07)
+
+
+### Bug Fixes
+
+* **platform:** select multi column options ([#9053](https://github.com/SAP/fundamental-ngx/issues/9053)) ([164fd7c](https://github.com/SAP/fundamental-ngx/commit/164fd7c877f6fc0e2732f038e53603ca7d98bf3b))
+
+
+
 # [0.37.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.37.0-rc.28...v0.37.0-rc.29) (2022-12-06)
 
 
