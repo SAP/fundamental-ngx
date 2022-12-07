@@ -56,7 +56,7 @@ export class VariantManagementManagedTestComponent implements PresetManagedCompo
     ]
 })
 export class VariantManagementTestComponent implements VariantManagement<DummyPresetModel> {
-    activeVariant: Variant = new VariantItem({ data: defaultDummyPreset });
+    activeVariant: Variant = new VariantItem({ data: { dummyComponent: defaultDummyPreset } });
     activeVariantChangeSubject: BehaviorSubject<Variant | null> = new BehaviorSubject<Variant | null>(
         this.activeVariant
     );
