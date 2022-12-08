@@ -5,7 +5,7 @@
     [ngTemplateOutletContext]="_toolbarContext"
 ></ng-container>
 
-<fd-busy-indicator [loading]="loadingState" [block]="true">
+<fd-busy-indicator [loading]="loadingState && _firstLoadingDone" [block]="true">
     <!-- Table Container -->
     <div class="fdp-table__container" role="table" #tableContainer>
         <!-- Table header outlet -->
@@ -229,7 +229,7 @@
                 <ng-container [ngTemplateOutlet]="tableHeaderRowTemplate"></ng-container>
             </thead>
             <tbody
-                *ngIf="!!this._tableRowsVisible.length || this.loadingState; else emptyTableTemplate"
+                *ngIf="!!this._tableRowsVisible.length; else emptyTableTemplate"
                 fd-table-body
                 fd-dnd-list
                 [noBorderX]="noBorderX"
@@ -507,7 +507,15 @@
 
 <!-- Empty Table Message -->
 <ng-template #emptyTableTemplate>
-    <tbody fd-table-body class="fdp-table__empty">
+    <tbody *ngIf="!_firstLoadingDone" fd-table-body>
+        <tr fd-table-row role="row" *fdRepeat="3">
+            <td fd-table-cell *fdRepeat="_tableColumnsLength">
+                <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="60%"></fd-skeleton>
+            </td>
+        </tr>
+    </tbody>
+
+    <tbody *ngIf="_firstLoadingDone" fd-table-body class="fdp-table__empty">
         <tr fd-table-row role="row">
             <td fd-table-cell class="fd-table__cell--no-data" [attr.colspan]="_tableColumnsLength">
                 <div class="fdp-table__empty-table-message">

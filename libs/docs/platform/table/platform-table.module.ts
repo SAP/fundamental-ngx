@@ -54,6 +54,7 @@ import { PlatformTableWrapExampleComponent } from './examples/platform-table-wra
 import { PlatformTableEditableRowsExampleComponent } from './examples/editable-rows/platform-table-editable-rows-example.component';
 import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 import { PlatformTableResponsiveColumnsExampleComponent } from './examples/platform-table-responsive-columns-example.component';
+import { PlatformTableInitialLoadingExampleComponent } from './examples/initial-loading/platform-table-initial-loading-example.component';
 
 const routes: Routes = [
     {
@@ -115,7 +116,8 @@ const routes: Routes = [
         PlatformTableNoOuterBordersExampleComponent,
         PlatformTableWrapExampleComponent,
         PlatformTableEditableRowsExampleComponent,
-        PlatformTableResponsiveColumnsExampleComponent
+        PlatformTableResponsiveColumnsExampleComponent,
+        PlatformTableInitialLoadingExampleComponent
     ],
     providers: [
         RtlService,
