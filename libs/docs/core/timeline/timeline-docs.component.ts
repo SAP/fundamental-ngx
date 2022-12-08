@@ -8,6 +8,8 @@ const timelineTemplateExampleHtml = 'timeline-template-example.component.html';
 const timelineHorizontalAxisExampleTs = 'timeline-horizontal-axis-example.component.ts';
 const timelineHorizontalDoubleExampleTs = 'timeline-horizontal-double-side-example.component.ts';
 const timelineVerticalAxisExampleTs = 'timeline-vertical-double-side-example.component.ts';
+const timelineLoadingExampleHtml = 'loading/timeline-loading-example.component.html';
+const timelineLoadingExampleTs = 'loading/timeline-loading-example.component.ts';
 
 @Component({
     selector: 'fd-timeline-docs',
@@ -83,6 +85,19 @@ export class TimelineDocsComponent {
             language: 'typescript',
             code: getAssetFromModuleAssets(timelineBasicDataExampleTs),
             name: 'timeline-horizontal-axis-example.component.ts'
+        }
+    ];
+
+    timelineLoadingExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(timelineLoadingExampleHtml),
+            name: 'timeline-loading-example.html'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(timelineLoadingExampleTs),
+            name: 'timeline-loading-example.ts'
         }
     ];
 }
