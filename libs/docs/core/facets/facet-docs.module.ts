@@ -15,6 +15,7 @@ import { FacetsDocsComponent } from './facets-docs.component';
 import { CustomFacetExampleComponent } from './examples/custom-facet-example.component';
 import {
     FacetGroupExampleComponent,
+    FacetLoadingExampleComponent,
     FormFacetExampleComponent,
     FormLinkFacetExampleComponent,
     ImageFacetExampleComponent,
@@ -23,6 +24,7 @@ import {
     RatingIndicatorFacetExampleComponent
 } from './examples/facet-examples.component';
 import { FacetDocsHeaderComponent } from './facet-header/facet-docs-header.component';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 const routes: Routes = [
     {
@@ -46,7 +48,8 @@ const routes: Routes = [
         FacetModule,
         IconModule,
         LinkModule,
-        TextModule
+        TextModule,
+        SkeletonModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -59,7 +62,8 @@ const routes: Routes = [
         KeyValueFacetAlignmentExampleComponent,
         ImageFacetExampleComponent,
         RatingIndicatorFacetExampleComponent,
-        CustomFacetExampleComponent
+        CustomFacetExampleComponent,
+        FacetLoadingExampleComponent
     ],
     providers: [currentComponentProvider('facets')]
 })

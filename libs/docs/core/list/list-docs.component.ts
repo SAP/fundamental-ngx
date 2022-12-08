@@ -23,6 +23,7 @@ const listFilterH = 'list-data-example/list-data-example.component.html';
 const infiniteScrollSrcHtml = 'list-infinite-scroll-example.component.html';
 const infiniteScrollSrcTs = 'list-infinite-scroll-example.component.ts';
 const listInteractiveHtml = 'list-interactive-example/list-interactive-example.component.html';
+const listLoadingHtml = 'list-loading-example/list-loading-example.component.html';
 
 @Component({
     selector: 'app-list',
@@ -182,6 +183,14 @@ export class ListDocsComponent {
             code: getAssetFromModuleAssets(infiniteScrollSrcTs),
             fileName: 'list-infinite-scroll-example',
             component: 'ListInfiniteScrollExampleComponent'
+        }
+    ];
+
+    loadingCode: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(listLoadingHtml),
+            fileName: 'list-loading-example'
         }
     ];
 }

@@ -19,6 +19,7 @@ import { CardCalendarExampleComponent } from './examples/calendar-card/card-cale
 import { CardQuickViewExampleComponent } from './examples/quick-view-card/card-quick-view-example.component';
 import { CardListExampleComponent } from './examples/list-card/card-list-example.component';
 import { CardLinkListExampleComponent } from './examples/link-list-card/card-link-list-example.component';
+import { CardLoadingExampleComponent } from './examples/card-loading/card-loading-example.component';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
@@ -34,7 +35,8 @@ import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { LinkModule } from '@fundamental-ngx/core/link';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/core/utils';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 const routes: Routes = [
     {
@@ -65,7 +67,9 @@ const routes: Routes = [
         InfoLabelModule,
         SelectModule,
         MenuModule,
-        LinkModule
+        LinkModule,
+        SkeletonModule,
+        RepeatModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -83,7 +87,8 @@ const routes: Routes = [
         CardCalendarExampleComponent,
         CardQuickViewExampleComponent,
         CardListExampleComponent,
-        CardLinkListExampleComponent
+        CardLinkListExampleComponent,
+        CardLoadingExampleComponent
     ],
     providers: [moduleDeprecationsProvider(DeprecatedCalendarContentDensityDirective), currentComponentProvider('card')]
 })

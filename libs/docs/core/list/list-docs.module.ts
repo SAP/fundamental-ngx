@@ -7,6 +7,17 @@ import {
     SharedDocumentationPageModule
 } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { DeprecatedListContentDensityDirective, ListModule } from '@fundamental-ngx/core/list';
+import { LinkModule } from '@fundamental-ngx/core/link';
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
+import { RadioModule } from '@fundamental-ngx/core/radio';
+import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
+import { DragAndDropModule, moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/core/utils';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+
 import { ListHeaderComponent } from './list-header/list-header.component';
 import { ListDocsComponent } from './list-docs.component';
 import { ListInfiniteScrollExampleComponent } from './examples/list-infinite-scroll-example.component';
@@ -25,15 +36,7 @@ import { ListKeyboardExampleComponent } from './examples/list-keyboard-example/l
 import { ListNavIndicatorExampleComponent } from './examples/list-nav-indicator-example/list-nav-indicator-example.component';
 import { ListDataExampleComponent } from './examples/list-data-example/list-data-example.component';
 import { ListInteractiveExampleComponent } from './examples/list-interactive-example/list-interactive-example.component';
-import { DeprecatedListContentDensityDirective, ListModule } from '@fundamental-ngx/core/list';
-import { LinkModule } from '@fundamental-ngx/core/link';
-import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
-import { RadioModule } from '@fundamental-ngx/core/radio';
-import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
-import { DragAndDropModule, moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
-import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
-import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { ListLoadingExampleComponent } from './examples/list-loading-example/list-loading-examples.component';
 
 const routes: Routes = [
     {
@@ -59,7 +62,9 @@ const routes: Routes = [
         BusyIndicatorModule,
         ToolbarModule,
         InputGroupModule,
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        SkeletonModule,
+        RepeatModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -78,7 +83,8 @@ const routes: Routes = [
         ListKeyboardExampleComponent,
         ListNavIndicatorExampleComponent,
         ListDataExampleComponent,
-        ListInteractiveExampleComponent
+        ListInteractiveExampleComponent,
+        ListLoadingExampleComponent
     ],
     providers: [moduleDeprecationsProvider(DeprecatedListContentDensityDirective), currentComponentProvider('list')]
 })
