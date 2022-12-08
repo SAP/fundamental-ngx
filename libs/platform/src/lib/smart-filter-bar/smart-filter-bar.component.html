@@ -10,6 +10,7 @@
             (inputChange)="_onSearchInputChange($event)"
             (searchSubmit)="submitForm()"
             (cancelSearch)="_cancelSearch()"
+            [disabled]="_loading"
             [disableRefresh]="true"
             [placeholder]="'platformSmartFilterBar.searchPlaceholder' | fdTranslate"
         ></fdp-search-field>
@@ -19,9 +20,10 @@
             buttonType="emphasized"
             *ngIf="!liveUpdate"
             fd-toolbar-item
+            [disabled]="_loading"
             [label]="'platformSmartFilterBar.submitButtonLabel' | fdTranslate"
         ></fdp-button>
-        <fdp-button (click)="submitForm()" fd-toolbar-item glyph="synchronize"></fdp-button>
+        <fdp-button (click)="submitForm()" fd-toolbar-item glyph="synchronize" [disabled]="_loading"></fdp-button>
         <fdp-button
             (click)="showFilteringSettings()"
             [label]="
@@ -31,6 +33,7 @@
                       | fdTranslate : { filtersCount: _selectedFilters.length })
             "
             fd-toolbar-item
+            [disabled]="_loading"
         ></fdp-button>
         <fdp-button
             (click)="_toggleFilterBar()"
@@ -42,6 +45,7 @@
             "
             buttonType="transparent"
             fd-toolbar-item
+            [disabled]="_loading"
         ></fdp-button>
     </fd-toolbar>
 </div>
