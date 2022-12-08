@@ -119,8 +119,15 @@
                     </div>
                 </td>
             </tr>
-            <tr fd-table-row *ngIf="!displayedData.length">
-                <td colspan="100%">
+            <ng-container *ngIf="loading && !displayedData.length">
+                <tr fd-table-row *fdRepeat="3">
+                    <td fd-table-cell *fdRepeat="3">
+                        <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="60%"></fd-skeleton>
+                    </td>
+                </tr>
+            </ng-container>
+            <tr fd-table-row *ngIf="!loading && !displayedData.length">
+                <td fd-table-cell colspan="100%">
                     <div class="fdp-value-help-dialog__empty-message">
                         {{ emptyTableMessage || ('platformVHD.searchTableEmptyMessage' | fdTranslate) }}
                     </div>

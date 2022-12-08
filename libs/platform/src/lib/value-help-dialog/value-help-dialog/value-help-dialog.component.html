@@ -189,64 +189,85 @@
                 *ngIf="isOpenAdvanced && _hasAdvanced"
                 class="fdp-value-help-dialog__advanced-filters"
             >
-                <fd-layout-grid
-                    [class.fdp-value-help-dialog__with-toggle-all]="filters.length > maxShownInitialFilters"
-                >
-                    <div fdLayoutGridRow>
-                        <ng-container
-                            *ngFor="
-                                let filter of _displayedFilters | slice : 0 : shownFilterCount + 1;
-                                trackBy: _trackByFilterFn
-                            "
-                        >
-                            <ng-container *ngIf="filter.advanced">
-                                <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="6" [colXl]="3">
-                                    <label class="fd-form-group__header" fd-form-label [for]="'input' + filter.key"
-                                        >{{ filter.label }}:</label
-                                    >
-                                    <input
-                                        [(ngModel)]="filter.value"
-                                        fd-form-control
-                                        type="text"
-                                        [name]="'search-by-' + filter.label"
-                                        [id]="'input' + filter.key"
-                                    />
-                                </div>
-                            </ng-container>
-                        </ng-container>
-
-                        <div
-                            colGrow
-                            [fdLayoutGridCol]="12"
-                            [colMd]="12"
-                            [colLg]="6"
-                            [colXl]="3"
-                            *ngIf="filters.length > maxShownInitialFilters"
-                            class="fdp-value-help-dialog__toggle-filters"
-                        >
-                            <button
-                                fd-button
-                                fdType="transparent"
-                                (click)="toggleShownFilters()"
-                                [label]="
-                                    (isShowAllFilters
-                                        ? 'platformVHD.searchHideAllAdvancedSearchLabel'
-                                        : 'platformVHD.searchShowAllAdvancedSearchLabel'
-                                    ) | fdTranslate
+                <fd-busy-indicator [loading]="loadingState && _firstLoadingDone" [block]="true">
+                    <fd-layout-grid
+                        *ngIf="_firstLoadingDone; else filtersLoading"
+                        [class.fdp-value-help-dialog__with-toggle-all]="filters.length > maxShownInitialFilters"
+                    >
+                        <div fdLayoutGridRow>
+                            <ng-container
+                                *ngFor="
+                                    let filter of _displayedFilters | slice: 0:shownFilterCount + 1;
+                                    trackBy: _trackByFilterFn
                                 "
-                            ></button>
+                            >
+                                <ng-container *ngIf="filter.advanced">
+                                    <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="6" [colXl]="3">
+                                        <label class="fd-form-group__header" fd-form-label [for]="'input' + filter.key"
+                                        >{{ filter.label }}:</label
+                                        >
+                                        <input
+                                            [(ngModel)]="filter.value"
+                                            fd-form-control
+                                            type="text"
+                                            [name]="'search-by-' + filter.label"
+                                            [id]="'input' + filter.key"
+                                        />
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+
+                            <div
+                                colGrow
+                                [fdLayoutGridCol]="12"
+                                [colMd]="12"
+                                [colLg]="6"
+                                [colXl]="3"
+                                *ngIf="filters.length > maxShownInitialFilters"
+                                class="fdp-value-help-dialog__toggle-filters"
+                            >
+                                <button
+                                    fd-button
+                                    fdType="transparent"
+                                    (click)="toggleShownFilters()"
+                                    [label]="
+                                        (isShowAllFilters
+                                            ? 'platformVHD.searchHideAllAdvancedSearchLabel'
+                                            : 'platformVHD.searchShowAllAdvancedSearchLabel'
+                                        ) | fdTranslate
+                                    "
+                                ></button>
+                            </div>
                         </div>
-                    </div>
-                </fd-layout-grid>
+                    </fd-layout-grid>
+
+                    <ng-template #filtersLoading>
+                        <fd-skeleton width="100%" height="100px">
+                            <svg:rect x="0" y="0" rx="4" width="15%" height="8" />
+                            <svg:rect x="0" y="20" rx="4" width="25%" height="16" />
+
+                            <svg:rect x="35%" y="0" rx="4" width="15%" height="8" />
+                            <svg:rect x="35%" y="20" rx="4" width="25%" height="16" />
+
+                            <svg:rect x="0" y="60" rx="4" width="15%" height="8" />
+                            <svg:rect x="0" y="80" rx="4" width="25%" height="16" />
+                        </fd-skeleton>
+                    </ng-template>
+                </fd-busy-indicator>
             </div>
         </form>
     </ng-container>
 </ng-template>
 
 <ng-template #selectionContent>
-    <fd-busy-indicator [loading]="loadingState" [block]="true" class="fdp-value-help-dialog__table-busy-indicator">
+    <fd-busy-indicator
+        [loading]="loadingState && _firstLoadingDone"
+        [block]="true"
+        class="fdp-value-help-dialog__table-busy-indicator"
+    >
         <fdp-select-tab
             [selected]="selectedItems"
+            [loading]="loadingState && !_firstLoadingDone"
             [uid]="id"
             [displayedData]="_displayedData"
             [tabTitle]="selectTabTitle || ('platformVHD.selectTabTitle' | fdTranslate)"
