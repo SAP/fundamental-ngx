@@ -1,0 +1,68 @@
+<ul fd-list [byline]="true">
+    <li fd-list-item>
+        <a fd-list-link>
+            <span fd-list-thumbnail><fd-icon glyph="activate"></fd-icon></span>
+            <div fd-list-content>
+                <div fd-list-title>Title</div>
+                <div fd-list-byline>Byline Text</div>
+            </div>
+        </a>
+    </li>
+    <li fd-list-item>
+        <a fd-list-link>
+            <span fd-list-thumbnail><fd-icon glyph="employee"></fd-icon></span>
+            <div fd-list-content>
+                <div fd-list-title>List item with no byline</div>
+            </div>
+        </a>
+    </li>
+    <li fd-list-item>
+        <a fd-list-link>
+            <span fd-list-thumbnail><fd-icon glyph="calendar"></fd-icon></span>
+            <div fd-list-content>
+                <div fd-list-title>List Item With Two-Column Byline</div>
+                <div fd-list-byline [twoCol]="true">
+                    <div fd-list-byline-left>First text item in Byline (Standard text item)</div>
+                    <div fd-list-byline-right>Second text item in Byline (Can be semantic (Status) or not)</div>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
+
+<h4>Navigation Indicator</h4>
+
+If only a subset of the list items are navigable you should indicate those by displaying a navigation arrow. This is
+achieved by applying the <code>[navigationIndicator]</code> input to the ul element. Also you will need to add the
+<code>[navigationIndicator]</code> and <code>[navigated]</code> inputs to any navigable <code>fd-list-link</code>
+directives. Do not show arrows if all items are navigable. In this case use a byline list with navigation.
+
+<ul fd-list [byline]="true" [navigationIndicator]="true">
+    <li fd-list-item>
+        <a fd-list-link>
+            <span fd-list-thumbnail><fd-icon glyph="activate"></fd-icon></span>
+            <div fd-list-content>
+                <div fd-list-title>Title</div>
+                <div fd-list-byline>Byline Text</div>
+            </div>
+        </a>
+    </li>
+    <li fd-list-item aria-roledescription="has details">
+        <a fd-list-link [navigationIndicator]="true" [navigated]="true">
+            <span fd-list-thumbnail><fd-icon glyph="employee"></fd-icon></span>
+            <div fd-list-content>
+                <div fd-list-title>List item with no byline</div>
+            </div>
+        </a>
+    </li>
+    <li fd-list-item>
+        <span fd-list-thumbnail><fd-icon glyph="calendar"></fd-icon></span>
+        <div fd-list-content>
+            <div fd-list-title>List Item With Two-Column Byline</div>
+            <div fd-list-byline [twoCol]="true">
+                <div fd-list-byline-left>First text item in Byline (Standard text item)</div>
+                <div fd-list-byline-right>Second text item in Byline (Can be semantic (Status) or not)</div>
+            </div>
+        </div>
+    </li>
+</ul>

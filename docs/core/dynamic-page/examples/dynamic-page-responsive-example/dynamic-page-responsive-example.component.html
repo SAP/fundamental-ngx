@@ -1,0 +1,143 @@
+<button fd-button (click)="openPage()">Click to open full screen</button>
+<div class="overlay" *ngIf="visible">
+    <fd-dynamic-page ariaLabel="Example Dynamic Page">
+        <fd-dynamic-page-header
+            title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+            subtitle="sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+        >
+            <!-- breadcrumb content -->
+            <fd-breadcrumb [fdCompact]="compact">
+                <fd-breadcrumb-item>
+                    <a fd-link href="#">Men</a>
+                </fd-breadcrumb-item>
+                <fd-breadcrumb-item>
+                    <a fd-link href="#">Shoes</a>
+                </fd-breadcrumb-item>
+                <fd-breadcrumb-item>
+                    <a fd-link href="#">Running Shoes</a>
+                </fd-breadcrumb-item>
+                <fd-breadcrumb-item>
+                    <span>Jogging</span>
+                </fd-breadcrumb-item>
+            </fd-breadcrumb>
+
+            <fd-dynamic-page-title-content [fdCompact]="compact"> Key Info </fd-dynamic-page-title-content>
+
+            <fd-dynamic-page-global-actions>
+                <fd-toolbar fdType="transparent" [clearBorder]="true" [size]="compact ? 'compact' : 'cozy'">
+                    <ng-container [fdCompact]="compact">
+                        <button
+                            fd-toolbar-item
+                            fd-button
+                            fdType="positive"
+                            (click)="handleAction('Page is accepted')"
+                            label="Accept"
+                            title="Accept"
+                        ></button>
+                        <button
+                            fd-toolbar-item
+                            fd-button
+                            fdType="negative"
+                            (click)="handleAction('Page is rejected')"
+                            label="Reject"
+                            title="Reject"
+                        ></button>
+                    </ng-container>
+                    <fd-toolbar-separator></fd-toolbar-separator>
+                </fd-toolbar>
+            </fd-dynamic-page-global-actions>
+            <fd-dynamic-page-layout-actions>
+                <!-- layout actions -->
+                <fd-toolbar fdType="transparent" [clearBorder]="true" [size]="compact ? 'compact' : 'cozy'">
+                    <ng-container [fdCompact]="compact">
+                        <button fd-button fdType="transparent" ariaLabel="Resize" title="Resize">
+                            <i class="sap-icon--resize"></i>
+                        </button>
+                        <button
+                            fd-button
+                            fdType="transparent"
+                            ariaLabel="Exit Fullscreen"
+                            (click)="closePage()"
+                            title="Exit Fullscreen"
+                        >
+                            <i class="sap-icon--exitfullscreen"></i>
+                        </button>
+                        <button fd-button fdType="transparent" ariaLabel="Close" (click)="closePage()" title="Close">
+                            <i class="sap-icon--decline"></i>
+                        </button>
+                    </ng-container>
+                </fd-toolbar>
+            </fd-dynamic-page-layout-actions>
+        </fd-dynamic-page-header>
+        <fd-dynamic-page-subheader
+            [collapsible]="true"
+            [pinnable]="true"
+            [collapsed]="false"
+            (collapsedChange)="onCollapseChange()"
+        >
+            <!-- collapsible header content goes here -->
+            <span
+                >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti architecto
+                perspiciatis, delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum consequuntur impedit
+                repellendus esse, facere autem optio consequatur nobis?</span
+            >
+        </fd-dynamic-page-subheader>
+        <fd-dynamic-page-content cdkScrollable>
+            <div
+                class="fd-dynamic-page-section-example"
+                style="display: flex; align-items: center; justify-content: center"
+            >
+                <button
+                    fd-button
+                    (click)="compact = !compact"
+                    [fdCompact]="compact"
+                    [label]="'Change to ' + (compact ? 'Cozy' : 'Compact')"
+                ></button>
+            </div>
+            <div class="fd-dynamic-page-section-example">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </div>
+            <div class="fd-dynamic-page-section-example">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </div>
+            <div class="fd-dynamic-page-section-example">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </div>
+            <div class="fd-dynamic-page-section-example">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </div>
+            <div class="fd-dynamic-page-section-example">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </div>
+        </fd-dynamic-page-content>
+        <fd-dynamic-page-footer>
+            <!-- page footer content goes here -->
+            <div fd-bar barDesign="floating-footer" [cozy]="!compact">
+                <div fd-bar-right [fdCompact]="compact">
+                    <fd-button-bar label="Save" fdType="emphasized" (click)="closePage()"></fd-button-bar>
+                    <fd-button-bar label="Cancel" (click)="closePage()"></fd-button-bar>
+                </div>
+            </div>
+        </fd-dynamic-page-footer>
+    </fd-dynamic-page>
+</div>

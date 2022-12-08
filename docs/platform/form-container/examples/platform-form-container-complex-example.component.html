@@ -1,0 +1,89 @@
+<fdp-form-group #fg1 [formGroup]="form" mainTitle="XL2-L2-M2-S1" columnLayout="XL2-L2-M2-S1">
+    <fdp-form-field
+        #ff1
+        id="basicTextarea22"
+        label="Basic Textarea"
+        placeholder="Start entering detailed description"
+        hint="This is tooltip help"
+        [column]="1"
+        [rank]="1"
+        hintPlacement="left"
+    >
+        <fdp-textarea name="basicTextarea22" [formControl]="ff1.formControl"></fdp-textarea>
+    </fdp-form-field>
+    <fdp-form-field #ff8 id="switch1" label="Switch" [column]="1" [rank]="2">
+        <fdp-switch
+            [formControl]="ff8.formControl"
+            name="switch-1"
+            ariaLabel="switch-label"
+            ariaLabelledby="switch-label"
+            fdCozy
+            [semantic]="false"
+        >
+        </fdp-switch>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #ff3
+        label="Input Field"
+        id="inputField"
+        [column]="1"
+        [rank]="3"
+        placeholder="Field placeholder text"
+    >
+        <fdp-input name="inputField" id="inputField" type="text" [formControl]="ff3.formControl"> </fdp-input>
+    </fdp-form-field>
+    <fdp-form-field
+        #ff7
+        id="number"
+        label="Step Input"
+        placeholder="Things quantity"
+        hint="This is tooltip to help"
+        [column]="2"
+        [rank]="7"
+        hintPlacement="left"
+    >
+        <fdp-number-step-input name="qty" [formControl]="ff7.formControl"></fdp-number-step-input>
+    </fdp-form-field>
+
+    <fdp-form-field #ff5 id="seasons6" label="Checkbox group " [rank]="4">
+        <fdp-checkbox-group
+            [list]="seasons"
+            name="seasons6"
+            [isInline]="true"
+            ariaLabel="My favourite Seasons"
+            [formControl]="ff5.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+    <fdp-form-field
+        #ff2
+        id="qty"
+        label="Input Group"
+        placeholder="Things quantity"
+        [column]="2"
+        [rank]="5"
+        [required]="true"
+    >
+        <fdp-input-group name="qty" [formControl]="ff2.formControl">
+            <fdp-input-group-addon>$</fdp-input-group-addon>
+            <fdp-input-group-input type="number"></fdp-input-group-input>
+            <fdp-input-group-addon>USD</fdp-input-group-addon>
+            <fdp-input-group-addon>
+                <fdp-button label="Submit"></fdp-button>
+            </fdp-input-group-addon>
+        </fdp-input-group>
+    </fdp-form-field>
+    <fdp-form-field #ff6 id="radioc1" [column]="2" [rank]="6" label="Radio Group ">
+        <fdp-radio-group name="radioc1" fdCompact selected="spring" [isInline]="true" [formControl]="ff6.formControl">
+            <fdp-radio-button value="winter">Winter</fdp-radio-button>
+            <fdp-radio-button value="spring">Spring</fdp-radio-button>
+            <fdp-radio-button value="summer">Summer</fdp-radio-button>
+            <fdp-radio-button value="autumn">Autumn</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <span *ngIf="errors.required"> Value is required </span>
+    </ng-template>
+</fdp-form-group>
+<br />

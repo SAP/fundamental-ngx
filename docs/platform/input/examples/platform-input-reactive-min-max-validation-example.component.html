@@ -1,0 +1,29 @@
+<form #myForm="ngForm">
+    <fdp-form-group #fg>
+        <fdp-form-field
+            #ffl1
+            label="Maximum Minimum Validation example"
+            id="input11"
+            name="reactiveFormInput"
+            [rank]="1"
+            placeholder="Field placeholder text"
+            [validators]="inputValidator"
+        >
+            <fdp-input
+                name="input11"
+                [formControl]="ffl1.formControl"
+                type="text"
+                ariaLabelledBy="input-required input-valueMinError input-valueMaxError"
+            >
+            </fdp-input>
+        </fdp-form-field>
+        <ng-template #i18n let-errors>
+            <span id="input-required" *ngIf="errors.required">Value required</span>
+            <span id="input-valueMinError" *ngIf="errors.minlength"> Value must be more than {{ MIN_VALUE }} </span>
+            <span id="input-valueMaxError" *ngIf="errors.maxlength"> Value must be less than {{ MAX_VALUE }} </span>
+        </ng-template>
+    </fdp-form-group>
+
+    <pre>Form result: {{ fg.formGroup.value | json }}</pre>
+    <pre>Form result: {{ fg.formGroup.status }}</pre>
+</form>

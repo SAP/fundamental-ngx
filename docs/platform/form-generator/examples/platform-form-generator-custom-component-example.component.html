@@ -1,0 +1,12 @@
+<fdp-form-generator
+    [formItems]="questions"
+    mainTitle="Custom element in Form Generator example"
+    (formSubmitted)="onFormSubmitted($event)"
+    (formCreated)="onFormCreated()"
+>
+    <fdp-button type="submit" label="Submit form"></fdp-button>
+</fdp-form-generator>
+
+<p>Form created: {{ formCreated }}</p>
+
+<p *ngIf="formValue">Form value: {{ formValue | json }}</p>

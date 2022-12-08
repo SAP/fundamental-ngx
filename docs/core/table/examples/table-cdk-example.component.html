@@ -1,0 +1,50 @@
+<fd-table-wrapper>
+    <table
+        cdk-table
+        aria-label="With Angular CDK"
+        [dataSource]="dataSource"
+        #table
+        cdkDropList
+        [cdkDropListData]="dataSource"
+        (cdkDropListDropped)="dropRow($event)"
+    >
+        <ng-container cdkColumnDef="column1">
+            <th fd-table-cell cdk-header-cell *cdkHeaderCellDef>Column 1</th>
+            <td fd-table-cell cdk-cell *cdkCellDef="let cell" cdkDragHandle class="fd-has-font-weight-semi">
+                <a fd-link href="#">{{ cell.column1 }}</a>
+            </td>
+        </ng-container>
+
+        <ng-container cdkColumnDef="column2">
+            <th fd-table-cell cdk-header-cell *cdkHeaderCellDef>Column 2</th>
+            <td fd-table-cell cdk-cell *cdkCellDef="let cell">{{ cell.column2 }}</td>
+        </ng-container>
+
+        <ng-container cdkColumnDef="column3">
+            <th fd-table-cell cdk-header-cell *cdkHeaderCellDef>Column 3</th>
+            <td fd-table-cell cdk-cell *cdkCellDef="let cell">{{ cell.column3 }}</td>
+        </ng-container>
+
+        <ng-container cdkColumnDef="date">
+            <th fd-table-cell cdk-header-cell *cdkHeaderCellDef>Date</th>
+            <td fd-table-cell cdk-cell *cdkCellDef="let cell">{{ cell.date }}</td>
+        </ng-container>
+
+        <ng-container cdkColumnDef="type">
+            <th fd-table-cell cdk-header-cell *cdkHeaderCellDef>Type</th>
+            <td fd-table-cell cdk-cell *cdkCellDef="let cell">
+                <fd-icon [glyph]="cell.type"></fd-icon>
+            </td>
+        </ng-container>
+
+        <tr cdk-header-row fd-table-row *cdkHeaderRowDef="displayedColumns"></tr>
+        <tr
+            cdk-row
+            cdkDrag
+            fd-table-row
+            [cdkDragData]="row"
+            *cdkRowDef="let row; columns: displayedColumns"
+            style="cursor: grab"
+        ></tr>
+    </table>
+</fd-table-wrapper>

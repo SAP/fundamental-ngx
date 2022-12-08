@@ -1,0 +1,61 @@
+<div class="base-row">
+    <strong>Popover with ratings data and size=xs(extra small)</strong>
+    <pre>Rating Data: {{ testRatingData1 | json }}</pre>
+    <fd-rating-indicator
+        ariaLabel="Rating indicator"
+        size="xs"
+        [displayAllRatings]="true"
+        [ratings]="testRatingData1"
+        #rate1
+    ></fd-rating-indicator>
+    <p>
+        Rate average: {{ rate1.ratingAverage.toFixed(2) }} Total ratings: {{ rate1.totalRatings }} Select rate:
+        {{ rate1.viewValue }}
+    </p>
+</div>
+<div class="base-row">
+    <strong>Popover with ratings data and size=compact</strong>
+    <pre>Rating Data: {{ testRatingData2 | json }}</pre>
+    <fd-rating-indicator
+        ariaLabel="Rating indicator"
+        [indicatorCapacity]="7"
+        size="compact"
+        [displayAllRatings]="true"
+        [ratings]="testRatingData2"
+        #rate2
+    ></fd-rating-indicator>
+    <p>
+        Rate average: {{ rate2.ratingAverage.toFixed(2) }} Total ratings: {{ rate2.totalRatings }} Select rate:
+        {{ rate2.viewValue }}
+    </p>
+</div>
+<div class="base-row">
+    <strong>Popover with ratings data and size=lg(large)</strong>
+    <pre>Rating Data: {{ testRatingData3 | json }}</pre>
+    <fd-rating-indicator
+        ariaLabel="Rating indicator"
+        size="lg"
+        [displayAllRatings]="true"
+        [ratings]="testRatingData3"
+        #rate3
+    ></fd-rating-indicator>
+    <p>
+        Rate average: {{ rate3.ratingAverage.toFixed(2) }} Total ratings: {{ rate3.totalRatings }} Select rate:
+        {{ rate3.viewValue }}
+    </p>
+</div>
+<div class="base-row">
+    <strong>Wrong ratings data</strong>
+    <pre>Rating Data: {{ testRatingData4 | json }}</pre>
+    <fd-rating-indicator
+        ariaLabel="Rating indicator"
+        size="lg"
+        [displayAllRatings]="true"
+        [ratings]="testRatingData4"
+        #rate4
+    ></fd-rating-indicator>
+    <span>
+        Rate average: {{ rate4.ratingAverage.toFixed(2) }} Total ratings: {{ rate4.totalRatings }} Select rate:
+        {{ rate4.viewValue }}
+    </span>
+</div>

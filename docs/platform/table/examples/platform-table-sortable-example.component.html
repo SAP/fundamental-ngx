@@ -1,0 +1,14 @@
+<fdp-table #table [dataSource]="source" (sortChange)="logSortChange($event)" emptyTableMessage="No data found">
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false"> </fdp-table-toolbar>
+
+    <fdp-column name="name" key="name" label="Name" align="start" [sortable]="true"> </fdp-column>
+
+    <fdp-column name="description" key="description" label="Description" [sortable]="true"> </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price" align="end" [sortable]="true"> </fdp-column>
+
+    <fdp-column name="status" key="status" label="Status" align="center"> </fdp-column>
+</fdp-table>
+
+<!-- View Settings Dialog-->
+<fdp-table-view-settings-dialog [table]="table"></fdp-table-view-settings-dialog>

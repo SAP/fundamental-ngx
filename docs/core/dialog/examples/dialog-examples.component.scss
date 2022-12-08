@@ -1,0 +1,8 @@
+.fd-button {
+    margin-right: 1rem;
+}
+
+:host-context([dir='rtl']) .fd-button {
+    margin-left: 1rem;
+    margin-right: 0;
+}

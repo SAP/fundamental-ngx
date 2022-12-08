@@ -1,0 +1,21 @@
+<h3>Cozy Mode</h3>
+<fdp-list [noBorder]="true" [role]="'listbox'" id="cozy-list">
+    <fdp-action-list-item
+        *ngFor="let item of items"
+        [role]="'option'"
+        [title]="item.title"
+        (actionClicked)="_actionedRow($event)"
+    >
+    </fdp-action-list-item>
+</fdp-list>
+
+<h3>Compact Mode</h3>
+<fdp-list fdCompact [noBorder]="true" [role]="'listbox'" id="compact-list">
+    <fdp-action-list-item
+        *ngFor="let item of items"
+        [role]="'option'"
+        [title]="item.title"
+        (actionClicked)="_actionedRow($event)"
+    >
+    </fdp-action-list-item>
+</fdp-list>

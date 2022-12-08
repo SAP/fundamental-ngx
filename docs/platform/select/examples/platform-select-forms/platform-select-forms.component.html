@@ -1,0 +1,15 @@
+<fdp-form-group [noLabelLayout]="false" [formGroup]="customForm">
+    <fdp-form-field id="field" [rank]="4">
+        <fdp-select
+            width="7rem"
+            name="field"
+            placeholder="Select an option"
+            [list]="fromData"
+            [value]="selectedItem"
+            (selectionChange)="onSelect($event)"
+            formControlName="field"
+        ></fdp-select>
+        <p>Selected Item: {{ selectedItem | json }}</p>
+        <p>Form Selected Item: {{ customForm.getRawValue() | json }}</p>
+    </fdp-form-field>
+</fdp-form-group>

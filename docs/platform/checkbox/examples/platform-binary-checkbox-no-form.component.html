@@ -1,0 +1,19 @@
+<h3>Binary Checkbox With Value</h3>
+<fdp-checkbox name="orion" label="Orion" title="Orion" [values]="{ trueValue: 'orion' }" [(checked)]="orion">
+</fdp-checkbox>
+<div>value: {{ orion }}</div>
+
+<fdp-checkbox name="cygnus" label="Cygnus" title="Cygnus" [(checked)]="cygnus" [values]="{ trueValue: 'cygnus' }">
+</fdp-checkbox>
+<div>value: {{ cygnus }}</div>
+<br />
+<br />
+<h3>Binary Checkbox Without Value</h3>
+<fdp-checkbox name="lyra" label="Lyra" title="Lyra" [(checked)]="lyra"> </fdp-checkbox>
+<div>value: {{ lyra }}</div>
+
+<fdp-checkbox name="gemini" label="Gemini" title="Gemini" [(checked)]="gemini"> </fdp-checkbox>
+<div>value: {{ gemini }}</div>
+
+<h3>Disabled Checkbox</h3>
+<fdp-checkbox name="orion" label="Orion" title="Orion" [(checked)]="orion" [disabled]="true"> </fdp-checkbox>

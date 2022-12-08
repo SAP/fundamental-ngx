@@ -1,0 +1,25 @@
+<fdp-form-group>
+    <fdp-form-field id="semantic-switch" label="Default Semantic Switch" [rank]="1">
+        <fdp-switch
+            name="semantic-switch"
+            ariaLabel="Semantic Switch"
+            ariaLabelledBy="semantic-switch-label"
+            [semantic]="true"
+            (switchChange)="onSwitchChange()"
+        >
+        </fdp-switch>
+    </fdp-form-field>
+
+    <fdp-form-field id="semantic-switch-compact" label="Default Semantic Compact Switch" [rank]="1">
+        <fdp-switch
+            name="semantic-switch-compact"
+            ariaLabel="Semantic Switch Compact"
+            ariaLabelledBy="semantic-switch-compact-label"
+            fdCompact
+            [semantic]="true"
+            [(ngModel)]="switched"
+            (switchChange)="onSwitchChange()"
+        >
+        </fdp-switch>
+    </fdp-form-field>
+</fdp-form-group>

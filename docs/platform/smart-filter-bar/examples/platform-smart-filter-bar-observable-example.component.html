@@ -1,0 +1,74 @@
+<fdp-smart-filter-bar [subject]="subject"></fdp-smart-filter-bar>
+<br />
+<h4 fd-title>Line Items</h4>
+<br />
+<fdp-table
+    fdp-smart-filter-bar-subject
+    #subject="fdp-smart-filter-bar-subject"
+    [dataSource]="source"
+    [trackBy]="trackBy"
+    emptyTableMessage="No data found"
+>
+    <fdp-column fdp-smart-filter-bar-field-definition name="name" key="name" label="Name" required="true" align="start">
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        name="description"
+        key="description"
+        required="true"
+        label="Description"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [dataType]="dataTypeEnum.NUMBER"
+        name="price"
+        key="price.value"
+        label="Price"
+        align="end"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [filterType]="filterTypeEnum.MULTI"
+        name="status"
+        key="status"
+        label="Status"
+        required="true"
+        align="center"
+        hasOptions="true"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [filterType]="filterTypeEnum.SINGLE"
+        name="statusColor"
+        key="statusColor"
+        label="Status color"
+        align="center"
+        hasOptions="true"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [dataType]="dataTypeEnum.DATE"
+        name="date"
+        key="date"
+        label="Date"
+    ></fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [filterType]="filterTypeEnum.SINGLE"
+        [dataType]="dataTypeEnum.BOOLEAN"
+        name="verified"
+        key="verified"
+        label="Verified"
+        hasOptions="true"
+    ></fdp-column>
+</fdp-table>

@@ -1,0 +1,71 @@
+<fd-split-button
+    [mainAction]="{ mainActionTitle: 'Disabled Button' }"
+    [disabled]="true"
+    (primaryButtonClicked)="primaryButtonClicked()"
+>
+    <fd-menu>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 2</span>
+            </div>
+        </li>
+    </fd-menu>
+</fd-split-button>
+
+<fd-split-button [mainAction]="{ mainActionTitle: 'Default Button' }" (primaryButtonClicked)="primaryButtonClicked()">
+    <fd-menu>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+    </fd-menu>
+</fd-split-button>
+
+<fd-split-button
+    fdType="emphasized"
+    [mainAction]="{ mainActionTitle: 'Emphasized Button' }"
+    (primaryButtonClicked)="primaryButtonClicked()"
+>
+    <fd-menu>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 2</span>
+            </div>
+        </li>
+    </fd-menu>
+</fd-split-button>
+
+<fd-split-button
+    fdType="transparent"
+    [mainAction]="{ mainActionTitle: 'Light Button' }"
+    (primaryButtonClicked)="primaryButtonClicked()"
+>
+    <fd-menu>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+        <li fd-menu-item (click)="itemClicked()">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 2</span>
+            </div>
+        </li>
+    </fd-menu>
+</fd-split-button>

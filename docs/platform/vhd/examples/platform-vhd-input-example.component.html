@@ -1,0 +1,107 @@
+<div fd-form-item>
+    <label fd-form-label for="test-selection-type-single">Selection type: single</label>
+    <fd-input-group>
+        <input fd-input-group-input fd-form-control id="test-selection-type-single" [value]="valuesSingle?.name" />
+        <span fd-input-group-addon [button]="true">
+            <button
+                fd-button
+                aria-label="Open value help dialog"
+                title="Open value help dialog"
+                glyph="value-help"
+                fdCompact
+                fdType="transparent"
+                (click)="vhd1.open()"
+            ></button>
+        </span>
+    </fd-input-group>
+</div>
+<fdp-value-help-dialog
+    #vhd1
+    dialogTitle="Single select value help dialog"
+    uniqueKey="id"
+    tokenViewField="name"
+    searchSelection="single"
+    tabs="select"
+    [dataSource]="dataSource"
+    (valueChange)="vhd1ValueChange($event)"
+    headerId="fdp-vhd-header-4"
+>
+    <fdp-value-help-dialog-filter
+        *ngFor="let filter of filters; index as i"
+        [main]="i < 2"
+        [key]="filter.key"
+        [label]="filter.label"
+        [advanced]="filter.advanced"
+    ></fdp-value-help-dialog-filter>
+</fdp-value-help-dialog>
+<br />
+<div fd-form-item>
+    <label fd-form-label for="test-selection-type-single">Selection type: multi</label>
+    <fd-token fd-toolbar-item *ngFor="let item of valuesMulti" fdCompact [readOnly]="true">
+        {{ item.name }}
+    </fd-token>
+    <br *ngIf="valuesMulti && valuesMulti?.length" />
+    <button
+        fd-button
+        fdCompact
+        (click)="vhd2.open()"
+        aria-label="Open value help dialog"
+        label="Open and select"
+    ></button>
+</div>
+<fdp-value-help-dialog
+    #vhd2
+    dialogTitle="Multi select value help dialog"
+    uniqueKey="id"
+    tokenViewField="name"
+    searchSelection="multi"
+    tabs="select"
+    [dataSource]="dataSource"
+    (valueChange)="vhd2ValueChange($event)"
+    headerId="fdp-vhd-header-5"
+>
+    <fdp-value-help-dialog-filter
+        *ngFor="let filter of filters; index as i"
+        [main]="i < 2"
+        [key]="filter.key"
+        [label]="filter.label"
+        [advanced]="filter.advanced"
+    ></fdp-value-help-dialog-filter>
+</fdp-value-help-dialog>
+<br />
+<div fd-form-item>
+    <label fd-form-label for="test-selection-type-once">Selection type: once</label>
+    <fd-input-group>
+        <input fd-input-group-input fd-form-control id="test-selection-type-once" [value]="valuesOnce?.name" />
+        <span fd-input-group-addon [button]="true">
+            <button
+                fd-button
+                aria-label="Open value help dialog"
+                title="Open value help dialog"
+                glyph="value-help"
+                fdCompact
+                fdType="transparent"
+                (click)="vhd3.open()"
+            ></button>
+        </span>
+    </fd-input-group>
+</div>
+<fdp-value-help-dialog
+    #vhd3
+    dialogTitle="Once select value help dialog"
+    uniqueKey="id"
+    tokenViewField="name"
+    searchSelection="once"
+    tabs="select"
+    [dataSource]="dataSource"
+    (valueChange)="vhd3ValueChange($event)"
+    headerId="fdp-vhd-header-6"
+>
+    <fdp-value-help-dialog-filter
+        *ngFor="let filter of filters; index as i"
+        [main]="i < 2"
+        [key]="filter.key"
+        [label]="filter.label"
+        [advanced]="filter.advanced"
+    ></fdp-value-help-dialog-filter>
+</fdp-value-help-dialog>

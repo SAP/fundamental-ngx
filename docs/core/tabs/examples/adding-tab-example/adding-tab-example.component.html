@@ -1,0 +1,8 @@
+<fd-tab-list>
+    <fd-tab *ngFor="let tab of tabs" [title]="tab.title">
+        {{ tab.content }}
+    </fd-tab>
+</fd-tab-list>
+
+<button fd-button label="Add a Tab" (click)="addTab()"></button>
+<button fd-button label="Remove a Tab" (click)="removeTab()"></button>

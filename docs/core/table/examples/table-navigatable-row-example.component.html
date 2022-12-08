@@ -1,0 +1,174 @@
+<h4 class="table-example-popin-title" id="table-example-popin-title-1">
+    Entire row is navigatable, used with icon and highlighted active item.
+</h4>
+
+<table fd-table aria-label="With navigatable rows" aria-describedby="table-example-popin-title-1">
+    <thead fd-table-header [noBorderX]="true">
+        <tr fd-table-row>
+            <th fd-table-cell>Column 1</th>
+            <th fd-table-cell>Column 2</th>
+            <th fd-table-cell>Column 3</th>
+            <th fd-table-cell>Date</th>
+            <th fd-table-cell></th>
+        </tr>
+    </thead>
+
+    <tbody fd-table-body [noBorderX]="true">
+        <tr
+            *ngFor="let row of navigatableRows; let i = index"
+            fd-table-row
+            [hoverable]="row.navigatable"
+            [activable]="row.navigatable"
+            [active]="row.active"
+            (click)="row.navigatable ? setActiveItem(i) : null"
+        >
+            <td fd-table-cell>
+                <a fd-link href="#">{{ row.column1 }}</a>
+            </td>
+
+            <td fd-table-cell>
+                {{ row.column2 }}
+            </td>
+
+            <td fd-table-cell>
+                {{ row.column3 }}
+            </td>
+
+            <td fd-table-cell>
+                {{ row.date }}
+            </td>
+
+            <td fd-table-cell [fitContent]="true" [noPadding]="true">
+                <i
+                    *ngIf="row.navigatable"
+                    title="Navigate"
+                    fd-table-icon
+                    [glyph]="isRtl ? 'slim-arrow-left' : 'slim-arrow-right'"
+                    [navigation]="true"
+                    role="presentation"
+                ></i>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<br />
+
+<h4 class="table-example-popin-title-2">Row with navigation button</h4>
+
+<table fd-table aria-label="With navigatable rows" aria-describedby="table-example-popin-title-2">
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>Column 1</th>
+            <th fd-table-cell>Column 2</th>
+            <th fd-table-cell>Column 3</th>
+            <th fd-table-cell>Column 4</th>
+            <th fd-table-cell></th>
+        </tr>
+    </thead>
+
+    <tbody fd-table-body>
+        <tr *ngFor="let row of navigatableRows" fd-table-row>
+            <td fd-table-cell>
+                <a fd-link href="#">{{ row.column1 }}</a>
+            </td>
+
+            <td fd-table-cell>
+                <p fd-table-text>{{ row.column2 }}</p>
+            </td>
+
+            <td fd-table-cell>
+                {{ row.column3 }}
+            </td>
+
+            <td fd-table-cell>
+                {{ row.date }}
+            </td>
+
+            <td fd-table-cell [fitContent]="true">
+                <button
+                    class="fd-button fd-button--transparent"
+                    [disabled]="!row.navigatable"
+                    title="Navigate"
+                    routerLink="/core/home"
+                    aria-label="navigation"
+                >
+                    <i [class]="isRtl ? 'sap-icon--navigation-left-arrow' : 'sap-icon--navigation-right-arrow'"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="max-width: 450px">
+    <h4 class="table-example-popin-title-3">Mobile Mode</h4>
+
+    <table
+        fd-table
+        [popIn]="true"
+        [noBorderX]="true"
+        [noBorderY]="true"
+        [responsive]="true"
+        aria-label="With navigatable rows"
+        aria-describedby="table-example-popin-title-3"
+    >
+        <thead fd-table-header>
+            <tr fd-table-row>
+                <th fd-table-cell>Fruit Description</th>
+                <th fd-table-cell>Price</th>
+                <th fd-table-cell></th>
+            </tr>
+        </thead>
+
+        <tbody fd-table-body>
+            <ng-container *ngFor="let fruit of fruits">
+                <tr
+                    fd-table-row
+                    [main]="true"
+                    [activable]="fruit.navigatable"
+                    [hoverable]="fruit.navigatable"
+                    (click)="alert(fruit)"
+                >
+                    <td fd-table-cell>
+                        <p fd-table-text [title]="true">{{ fruit.name }}</p>
+                        <p fd-table-text>{{ fruit.country }}</p>
+                    </td>
+
+                    <td fd-table-cell [fitContent]="true">
+                        {{ fruit.price }}
+                    </td>
+
+                    <td fd-table-cell [fitContent]="true" [noPadding]="true">
+                        <i
+                            *ngIf="fruit.navigatable"
+                            title="Navigate"
+                            fd-table-icon
+                            [glyph]="isRtl ? 'slim-arrow-left' : 'slim-arrow-right'"
+                            [navigation]="true"
+                            role="presentation"
+                        ></i>
+                    </td>
+                </tr>
+
+                <tr fd-table-row [secondary]="true">
+                    <td fd-table-cell colspan="100%">
+                        <p fd-table-text>
+                            <label fd-form-label>Status:</label>
+                            <span fd-object-status [status]="fruit.status">{{ fruit.statusName }}</span>
+                        </p>
+
+                        <p fd-table-text>
+                            <label fd-form-label>Date Of Expire:</label>
+                            {{ fruit.dateOfExpire }}
+                        </p>
+
+                        <p fd-table-text>
+                            <label fd-form-label>Description:</label>
+                            {{ fruit.description }}
+                        </p>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

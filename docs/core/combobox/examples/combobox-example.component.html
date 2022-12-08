@@ -1,0 +1,90 @@
+<div class="examples-column">
+    <div fd-form-item>
+        <label fd-form-label for="comboboxID1">Standard</label>
+        <fd-combobox
+            inputId="comboboxID1"
+            ariaLabel="Standard"
+            maxHeight="250px"
+            placeholder="Type some text..."
+            [dropdownValues]="fruits"
+            [(ngModel)]="searchTermOne"
+        >
+        </fd-combobox>
+    </div>
+    <small>Search Term: {{ searchTermOne }}</small>
+
+    <div fd-form-item>
+        <label fd-form-label for="comboboxID2">Disable Highlighting</label>
+        <fd-combobox
+            inputId="comboboxID2"
+            ariaLabel="Disable Highlighting"
+            maxHeight="250px"
+            placeholder="Type some text..."
+            [highlighting]="false"
+            [dropdownValues]="fruits"
+            [(ngModel)]="searchTermTwo"
+        >
+        </fd-combobox>
+    </div>
+    <small>Search Term: {{ searchTermTwo }}</small>
+
+    <div fd-form-item>
+        <label fd-form-label for="comboboxID3">Disable Auto Complete</label>
+        <fd-combobox
+            inputId="comboboxID3"
+            ariaLabel="Disable Auto Complete"
+            maxHeight="250px"
+            placeholder="Type some text..."
+            [autoComplete]="false"
+            [dropdownValues]="fruits"
+            [(ngModel)]="searchTermThree"
+        >
+        </fd-combobox>
+    </div>
+    <small>Search Term: {{ searchTermThree }}</small>
+
+    <div fd-form-item>
+        <label fd-form-label for="comboboxID4">Compact</label>
+        <fd-combobox
+            inputId="comboboxID4"
+            ariaLabel="Compact"
+            maxHeight="250px"
+            placeholder="Type some text..."
+            fdCompact
+            [dropdownValues]="fruits"
+            [(ngModel)]="searchTermFour"
+        >
+        </fd-combobox>
+    </div>
+    <small>Search Term: {{ searchTermFour }}</small>
+
+    <div fd-form-item>
+        <label fd-form-label for="comboboxID5">Readonly</label>
+        <fd-combobox
+            inputId="comboboxID5"
+            ariaLabel="Readonly"
+            [readOnly]="true"
+            maxHeight="250px"
+            placeholder="Type some text..."
+            [dropdownValues]="fruits"
+            [(ngModel)]="searchTermFive"
+        >
+        </fd-combobox>
+    </div>
+    <small>Search Term: {{ searchTermFive }}</small>
+
+    <div fd-form-item>
+        <label fd-form-label for="comboboxID6">Hide Addon Button</label>
+        <fd-combobox
+            inputId="comboboxID6"
+            ariaLabel="Hide Addon Button"
+            maxHeight="250px"
+            placeholder="Type some text..."
+            [dropdownValues]="fruits"
+            [showDropdownButton]="false"
+            [(ngModel)]="searchTermSix"
+        >
+        </fd-combobox>
+    </div>
+    <small>Search Term: {{ searchTermSix }}</small>
+</div>

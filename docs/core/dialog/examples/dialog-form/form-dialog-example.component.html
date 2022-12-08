@@ -1,0 +1,118 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 id="fd-dialog-header-10" fd-title>The History of Pineapple</h1>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <div
+                class="fd-container fd-form-layout-grid-container fd-form-layout-grid-container--vertical fd-form-group"
+            >
+                <div class="fd-row fd-form-item">
+                    <div class="fd-col">
+                        <label class="fd-form-label" for="input-2224-name">Name:</label>
+                    </div>
+                    <div class="fd-col">
+                        <input
+                            class="fd-input"
+                            type="text"
+                            id="input-2224-name"
+                            placeholder="Enter First and Last Name"
+                            value="Amelia Perry"
+                        />
+                    </div>
+                </div>
+                <div class="fd-row fd-form-item">
+                    <div class="fd-col">
+                        <label class="fd-form-label fd-form-label--required" for="input-2334-street"
+                            >Street/No.:
+                        </label>
+                    </div>
+                    <div class="fd-col">
+                        <div class="fd-row">
+                            <div class="fd-col fd-col--4">
+                                <input
+                                    class="fd-input"
+                                    type="text"
+                                    id="input-2334-street"
+                                    placeholder="Enter address"
+                                    value="Myrtle St."
+                                />
+                            </div>
+                            <div class="fd-col fd-col--8">
+                                <input
+                                    class="fd-input"
+                                    type="text"
+                                    id="input-2334-number"
+                                    aria-label="Street Number"
+                                    placeholder="Enter Street Number"
+                                    value="495"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fd-row fd-form-item">
+                    <div class="fd-col">
+                        <label class="fd-form-label fd-form-label--required" for="input-2334-zip"
+                            >ZIP Code/City:
+                        </label>
+                    </div>
+                    <div class="fd-col">
+                        <div class="fd-row">
+                            <div class="fd-col fd-col--8">
+                                <input
+                                    class="fd-input"
+                                    type="text"
+                                    id="input-2334-zip"
+                                    placeholder="Enter ZIP Code"
+                                    value="43823"
+                                />
+                            </div>
+                            <div class="fd-col fd-col--4">
+                                <input
+                                    class="fd-input"
+                                    type="text"
+                                    id="input-2334-city"
+                                    placeholder="Enter City"
+                                    aria-label="City"
+                                    value="Downtown"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fd-row fd-form-item">
+                    <div class="fd-col">
+                        <label class="fd-form-label" for="text-2434-name">Bio:</label>
+                    </div>
+                    <div class="fd-col">
+                        <textarea class="fd-textarea" id="text-2434-name">textarea</textarea>
+                    </div>
+                </div>
+            </div>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                fdType="emphasized"
+                label="Interested"
+                (click)="dialog.close('Continue')"
+                ariaLabel="Interested Emphasized"
+            ></fd-button-bar>
+
+            <fd-button-bar
+                fdInitialFocus
+                label="Cancel"
+                (click)="dialog.dismiss('Cancel')"
+                ariaLabel="Cancel"
+            ></fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<fd-checkbox [(ngModel)]="responsivePadding" label="Responsive Padding"></fd-checkbox>
+<fd-checkbox [(ngModel)]="verticalPadding" label="Vertical Padding"></fd-checkbox>
+
+<button fd-button label="Open from Template" (click)="openDialog(confirmationDialog)"></button>
+<p>{{ confirmationReason }}</p>

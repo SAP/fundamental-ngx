@@ -1,0 +1,141 @@
+<div class="fd-docs-flex-display-helper">
+    <fd-popover
+        placement="right-start"
+        [noArrow]="false"
+        [focusAutoCapture]="true"
+        [focusTrapped]="true"
+        (isOpenChange)="isOpenChangePopover1($event)"
+    >
+        <fd-popover-control>
+            <button
+                fd-button
+                label="Open Popover"
+                [attr.aria-controls]="data.id + '-1'"
+                [attr.aria-expanded]="isOpened1"
+                [attr.aria-haspopup]="true"
+            ></button>
+        </fd-popover-control>
+
+        <fd-popover-body [id]="data.id + '-1'" role="tooltip">
+            <fd-quick-view [id]="data.id">
+                <fd-quick-view-title align="middle">{{ data.title }}</fd-quick-view-title>
+
+                <fd-quick-view-subheader>
+                    <fd-avatar [image]="data.subHeader.avatar" size="s"></fd-avatar>
+                    <fd-quick-view-subheader-title>
+                        {{ data.subHeader.title }}
+                    </fd-quick-view-subheader-title>
+                    <fd-quick-view-subheader-subtitle>
+                        {{ data.subHeader.subtitle }}
+                    </fd-quick-view-subheader-subtitle>
+                </fd-quick-view-subheader>
+
+                <fd-quick-view-group
+                    *ngFor="let group of data.groups; let i = index"
+                    [attr.aria-labelledby]="getGroupId(i, group)"
+                >
+                    <fd-quick-view-group-title [id]="getGroupId(i, group)">
+                        {{ group.title }}
+                    </fd-quick-view-group-title>
+                    <fd-quick-view-group-item *ngFor="let item of group.items">
+                        <fd-quick-view-group-item-label>
+                            {{ item.label }}
+                        </fd-quick-view-group-item-label>
+                        <fd-quick-view-group-item-content>
+                            <ng-container [ngSwitch]="item.label">
+                                <a
+                                    *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
+                                    [href]="'tel:' + item.value"
+                                    [innerText]="item.value"
+                                    fd-link
+                                    fd-quick-view-group-item-content-element
+                                ></a>
+                                <a
+                                    *ngSwitchCase="'Email'"
+                                    [href]="'mailto:' + item.value"
+                                    [innerText]="item.value"
+                                    fd-link
+                                    fd-quick-view-group-item-content-element
+                                ></a>
+                                <div
+                                    *ngSwitchDefault
+                                    [innerText]="item.value"
+                                    fd-quick-view-group-item-content-element
+                                ></div>
+                            </ng-container>
+                        </fd-quick-view-group-item-content>
+                    </fd-quick-view-group-item>
+                </fd-quick-view-group>
+            </fd-quick-view>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover
+        placement="right-start"
+        [noArrow]="false"
+        [focusAutoCapture]="true"
+        [focusTrapped]="true"
+        (isOpenChange)="isOpenChangePopover2($event)"
+    >
+        <fd-popover-control>
+            <button
+                fd-button
+                label="Open Popover Without Heading"
+                [attr.aria-controls]="data.id + '-2'"
+                [attr.aria-expanded]="isOpened2"
+                [attr.aria-haspopup]="true"
+            ></button>
+        </fd-popover-control>
+
+        <fd-popover-body [id]="data.id + '-2'" role="tooltip">
+            <fd-quick-view [id]="data.id + '-without-heading'">
+                <fd-quick-view-subheader>
+                    <fd-avatar [image]="data.subHeader.avatar" size="s"></fd-avatar>
+                    <fd-quick-view-subheader-title>
+                        {{ data.subHeader.title }}
+                    </fd-quick-view-subheader-title>
+                    <fd-quick-view-subheader-subtitle>
+                        {{ data.subHeader.subtitle }}
+                    </fd-quick-view-subheader-subtitle>
+                </fd-quick-view-subheader>
+
+                <fd-quick-view-group
+                    *ngFor="let group of data.groups; let i = index"
+                    [attr.aria-labelledby]="getGroupId(i, group)"
+                >
+                    <fd-quick-view-group-title [id]="getGroupId(i, group)">
+                        {{ group.title }}
+                    </fd-quick-view-group-title>
+                    <fd-quick-view-group-item *ngFor="let item of group.items">
+                        <fd-quick-view-group-item-label>
+                            {{ item.label }}
+                        </fd-quick-view-group-item-label>
+                        <fd-quick-view-group-item-content>
+                            <ng-container [ngSwitch]="item.label">
+                                <a
+                                    *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
+                                    [href]="'tel:' + item.value"
+                                    [innerText]="item.value"
+                                    fd-link
+                                    fd-quick-view-group-item-content-element
+                                ></a>
+                                <a
+                                    *ngSwitchCase="'Email'"
+                                    [href]="'mailto:' + item.value"
+                                    [innerText]="item.value"
+                                    fd-link
+                                    fd-quick-view-group-item-content-element
+                                ></a>
+                                <div
+                                    *ngSwitchDefault
+                                    [innerText]="item.value"
+                                    fd-quick-view-group-item-content-element
+                                ></div>
+                            </ng-container>
+                        </fd-quick-view-group-item-content>
+                    </fd-quick-view-group-item>
+                </fd-quick-view-group>
+            </fd-quick-view>
+        </fd-popover-body>
+    </fd-popover>
+</div>

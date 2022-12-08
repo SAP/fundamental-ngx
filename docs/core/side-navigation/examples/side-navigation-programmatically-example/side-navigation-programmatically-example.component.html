@@ -1,0 +1,69 @@
+<fd-side-nav [selectable]="false">
+    <div fd-side-nav-main>
+        <ul fd-nested-list [textOnly]="true">
+            <li fd-nested-list-item>
+                <a fd-nested-list-link>
+                    <span fd-nested-list-title>Link 1</span>
+                </a>
+            </li>
+            <li fd-nested-list-item>
+                <a fd-nested-list-link>
+                    <span fd-nested-list-title>Link 2</span>
+                </a>
+            </li>
+            <li fd-nested-list-item [(expanded)]="open">
+                <div fd-nested-list-content [selected]="selected">
+                    <a fd-nested-list-link>
+                        <span fd-nested-list-title>Link 3</span>
+                    </a>
+                    <button fd-nested-list-expand-icon></button>
+                </div>
+                <ul fd-nested-list>
+                    <li fd-nested-list-item>
+                        <a fd-nested-list-link [selected]="selected">
+                            <span fd-nested-list-title>Link 1 {{ selected }}</span>
+                        </a>
+                    </li>
+                    <li fd-nested-list-item>
+                        <a fd-nested-list-link>
+                            <span fd-nested-list-title>Link 2</span>
+                        </a>
+                    </li>
+                    <li fd-nested-list-item>
+                        <a fd-nested-list-link>
+                            <span fd-nested-list-title>Link 3</span>
+                        </a>
+                    </li>
+                    <li fd-nested-list-item>
+                        <a fd-nested-list-link>
+                            <span fd-nested-list-title>Link 4</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li fd-nested-list-item>
+                <a fd-nested-list-link>
+                    <span fd-nested-list-title>Link 4</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div fd-side-nav-utility>
+        <ul fd-nested-list [textOnly]="true">
+            <li fd-nested-list-item>
+                <a fd-nested-list-link>
+                    <span fd-nested-list-title>Link 1</span>
+                </a>
+            </li>
+            <li fd-nested-list-item>
+                <a fd-nested-list-link>
+                    <span fd-nested-list-title>Link 2</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</fd-side-nav>
+
+<button fd-button [label]="selected ? 'Unselect Child' : 'Select Child'" (click)="selected = !selected"></button>
+<button fd-button [label]="open ? 'Close' : 'Open'" (click)="open = !open"></button>

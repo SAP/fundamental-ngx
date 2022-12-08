@@ -1,0 +1,40 @@
+<fdp-form-group #fg>
+    <fdp-form-field
+        #ffl1
+        label="File Uploader Minimium"
+        id="input1-min-file"
+        name="fileUploader-min"
+        [rank]="1"
+        placeholder="Field placeholder text"
+    >
+        <fdp-file-uploader
+            id="input1-min-file"
+            name="fileUploader-min"
+            ariaLabel="Choose file"
+            ariaLabelledBy="input1"
+            placeholder="Choose File to upload"
+            buttonLabel="Browse"
+            buttonAriaLabel="browse file"
+            minFileSize="20KB"
+            [multiple]="true"
+            [(ngModel)]="files"
+            (selectionChange)="handleFileSelection($event)"
+            (invalidFileChange)="handleInvalidFileSelection($event)"
+        ></fdp-file-uploader>
+    </fdp-form-field>
+</fdp-form-group>
+<br /><br />
+
+Files Selected:
+<br />
+<span *ngFor="let file of this.files">
+    <span class="green">{{ file.name }} </span><br
+/></span>
+
+<br />
+
+Invalid Files:
+<br />
+<span *ngFor="let file of invalidFiles">
+    <span class="red">{{ file.name }} </span><br />
+</span>

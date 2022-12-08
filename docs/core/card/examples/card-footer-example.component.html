@@ -1,0 +1,107 @@
+<h5>Footer Actions Example</h5>
+<fd-card cardType="list">
+    <fd-card-header>
+        <h2 fd-card-title>Card Title</h2>
+    </fd-card-header>
+    <fd-card-content>
+        <ul fd-list [noBorder]="true">
+            <li fd-list-item>
+                <span fd-list-title> item 1 </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title> item 2 </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title> item 3 </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title> item 4 </span>
+            </li>
+        </ul>
+    </fd-card-content>
+    <fd-card-footer>
+        <button *fdCardFooterActionItem fd-button fdType="positive">Start</button>
+        <button *fdCardFooterActionItem fd-button fdType="positive">Center</button>
+        <button *fdCardFooterActionItem fd-button fdType="negative">End</button>
+    </fd-card-footer>
+</fd-card>
+
+<h5>Footer Actions With Overflow Example</h5>
+<fd-card cardType="list">
+    <fd-card-header>
+        <h2 fd-card-title>Card Title</h2>
+    </fd-card-header>
+    <fd-card-content>
+        <ul fd-list [noBorder]="true">
+            <li fd-list-item>
+                <span fd-list-title> item 1 </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title> item 2 </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title> item 3 </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title> item 4 </span>
+            </li>
+        </ul>
+    </fd-card-content>
+    <fd-card-footer>
+        <button *fdCardFooterActionItem fd-button fdType="positive">Start</button>
+        <button *fdCardFooterActionItem fd-button fdType="positive">Center</button>
+        <button *fdCardFooterActionItem fd-button fdType="negative">End</button>
+        <ng-template fdCardFooterActionItem>
+            <button fd-button fdType="transparent" glyph="overflow" [fdMenuTrigger]="menuIcons"></button>
+            <fd-menu #menuIcons>
+                <li fd-menu-item>
+                    <a fd-menu-interactive href="#">
+                        <fd-menu-addon position="before" glyph="cart"></fd-menu-addon>
+                        <span fd-menu-title>Option 1</span>
+                    </a>
+                </li>
+
+                <li fd-menu-item>
+                    <a fd-menu-interactive href="#">
+                        <fd-menu-addon position="before" glyph="accept"></fd-menu-addon>
+                        <span fd-menu-title>Option 2</span>
+                        <fd-menu-addon glyph="decline"></fd-menu-addon>
+                    </a>
+                </li>
+
+                <li fd-menu-item>
+                    <a fd-menu-interactive href="#">
+                        <span fd-menu-title>Option 3</span>
+                        <fd-menu-addon glyph="menu"></fd-menu-addon>
+                    </a>
+                </li>
+            </fd-menu>
+        </ng-template>
+    </fd-card-footer>
+</fd-card>
+
+<h5>Footer With Link</h5>
+<fd-card cardType="list">
+    <fd-card-header>
+        <h2 fd-card-title>Card Title</h2>
+    </fd-card-header>
+    <fd-card-content>
+        <ul fd-list [noBorder]="true">
+            <li fd-list-item>
+                <span fd-list-title> item 1 </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title> item 2 </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title> item 3 </span>
+            </li>
+            <li fd-list-item>
+                <span fd-list-title> item 4 </span>
+            </li>
+        </ul>
+    </fd-card-content>
+    <fd-card-footer>
+        <a fd-link>Link to some action or details page</a>
+    </fd-card-footer>
+</fd-card>

@@ -1,0 +1,40 @@
+<div>
+    <fd-multi-input
+        [dropdownValues]="originalData"
+        placeholder="Search here"
+        [displayFn]="displayFunc"
+        [allowNewTokens]="true"
+        [newTokenParseFn]="parseFunc"
+        [(ngModel)]="selected"
+        (selectedChange)="multiSelectChange()"
+    >
+    </fd-multi-input>
+    <br />
+    <button
+        fd-button
+        fd-button
+        aria-label="Open value help dialog"
+        title="Open value help dialog"
+        glyph="value-help"
+        (click)="vhd.open()"
+        label="Open value help dialog"
+    ></button>
+</div>
+<fdp-value-help-dialog
+    #vhd
+    dialogTitle="Multiple selection"
+    uniqueKey="id"
+    tokenViewField="name"
+    [dataSource]="dataSource"
+    [value]="currentValue"
+    (valueChange)="valueChange($event)"
+    headerId="fdp-vhd-header-7"
+>
+    <fdp-value-help-dialog-filter
+        *ngFor="let filter of filters; index as i"
+        [main]="i < 2"
+        [key]="filter.key"
+        [label]="filter.label"
+        [advanced]="filter.advanced"
+    ></fdp-value-help-dialog-filter>
+</fdp-value-help-dialog>

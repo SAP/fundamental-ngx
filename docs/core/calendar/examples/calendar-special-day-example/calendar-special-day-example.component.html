@@ -1,0 +1,15 @@
+<fd-calendar [specialDaysRules]="specialDays"></fd-calendar>
+<div>
+    <fd-checkbox [ngModel]="markWeekends" (ngModelChange)="markWeekends = $event; refreshRules()">
+        Mark Weekends
+    </fd-checkbox>
+    <fd-checkbox [ngModel]="markNextWeek" (ngModelChange)="markNextWeek = $event; refreshRules()">
+        Mark Next 7 days
+    </fd-checkbox>
+    <fd-checkbox [ngModel]="markAllMondays" (ngModelChange)="markAllMondays = $event; refreshRules()">
+        Mark All Mondays
+    </fd-checkbox>
+    <fd-checkbox [ngModel]="markPastDays" (ngModelChange)="markPastDays = $event; refreshRules()">
+        Mark Past Days
+    </fd-checkbox>
+</div>

@@ -1,0 +1,151 @@
+<h3>Checkbox group created from passed checkboxes and value is required</h3>
+<fdp-form-group [formGroup]="form1" [object]="favorites">
+    <fdp-form-field #fl1 id="fruitsEx" label="My favorite fruits:" [required]="true" [rank]="1">
+        <fdp-checkbox-group
+            [isInline]="true"
+            name="fruits"
+            ariaLabel="My favorite fruits"
+            [formControl]="fl1.formControl"
+        >
+            <fdp-checkbox [values]="{ trueValue: 'apple' }" label="Apple"></fdp-checkbox>
+            <fdp-checkbox [values]="{ trueValue: 'banana' }" label="Banana"></fdp-checkbox>
+            <fdp-checkbox [values]="{ trueValue: 'grapes' }" label="Grapes"></fdp-checkbox>
+        </fdp-checkbox-group>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <ng-container *ngIf="errors.required">
+            <span role="alert" aria-atomic="true">Value is required.</span>
+        </ng-container>
+    </ng-template>
+</fdp-form-group>
+<span style="margin-left: 2rem">Favorites: {{ form1.controls.fruitsEx?.value }}</span>
+
+<h3>Checkbox group created from list of values and value is required</h3>
+<fdp-form-group [formGroup]="form2">
+    <fdp-form-field #fl2 id="fruits1" label="My favorite fruits:" [required]="true" [rank]="1">
+        <fdp-checkbox-group
+            [isInline]="false"
+            name="fruits"
+            [list]="fruits"
+            ariaLabel="My favorite fruits"
+            [formControl]="fl2.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <ng-container *ngIf="errors.required">
+            <span role="alert" aria-atomic="true">Value is required.</span>
+        </ng-container>
+    </ng-template>
+</fdp-form-group>
+<span style="margin-left: 2rem">Favorites: {{ form2.controls.fruits1?.value }}</span>
+
+<h3>Checkboxes with different context</h3>
+<div>Qualification form</div>
+<fdp-form-group #fg [formGroup]="form1">
+    <fdp-form-field
+        #ffr1
+        id="education"
+        [validators]="validators"
+        hintPlacement="left"
+        [rank]="1"
+        [i18Strings]="graduation"
+    >
+        <fdp-checkbox name="education" title="minimum education level" [formControl]="ffr1.formControl"
+            >Graduated</fdp-checkbox
+        >
+    </fdp-form-field>
+
+    <fdp-form-field
+        #ffr2
+        id="engineering"
+        [validators]="validators"
+        hintPlacement="left"
+        [rank]="2"
+        [i18Strings]="engineering"
+    >
+        <fdp-checkbox name="engineering" title="have engineering degree" [formControl]="ffr2.formControl">
+            Engineering completed
+        </fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #ffr3 id="work" [validators]="validators" hintPlacement="left" [rank]="3" [i18Strings]="work">
+        <fdp-checkbox name="work" title="Work experience" [formControl]="ffr3.formControl">
+            5 year of work experience
+        </fdp-checkbox>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true"> Value is required </span>
+        <span *ngIf="errors.invalid" role="alert" aria-atomic="true"> Value is invalid </span>
+    </ng-template>
+
+    <ng-template #graduation let-errors>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true"> Graduation is mandatory </span>
+    </ng-template>
+
+    <ng-template #engineering let-errors>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true"> Engineering is mandatory </span>
+    </ng-template>
+
+    <ng-template #work let-errors>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true">
+            Minimum 5 years of work experience required
+        </span>
+    </ng-template>
+</fdp-form-group>
+
+<h3>Checkbox group created from list of SelectItem Objects and value is required</h3>
+<fdp-form-group [formGroup]="form3">
+    <fdp-form-field #fl3 id="language" label="Languages Known:" [required]="true" [rank]="1">
+        <fdp-checkbox-group
+            [isInline]="true"
+            name="language"
+            [list]="languages"
+            ariaLabel="Languages Known"
+            [formControl]="fl3.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <ng-container *ngIf="errors.required">
+            <span role="alert" aria-atomic="true">Value is required.</span>
+        </ng-container>
+    </ng-template>
+</fdp-form-group>
+<span style="margin-left: 2rem">Languages Known: {{ form3.controls.language?.value }}</span>
+
+<h3>Checkbox with same context</h3>
+<fdp-form-group #fg [formGroup]="form4">
+    <fdp-form-field id="apple" [rank]="1" [validators]="validators" [i18Strings]="apple">
+        <fdp-checkbox name="apple" title="apple" formControlName="apple">Apple</fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field id="banana" hintPlacement="left" [rank]="2" [validators]="validators" [i18Strings]="banana">
+        <fdp-checkbox name="engineering" title="banana" formControlName="banana">Banana</fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field id="grapes" [validators]="validators" hintPlacement="left" [rank]="3" [i18Strings]="grape">
+        <fdp-checkbox name="grapes" title="grapes" formControlName="grapes">Grapes</fdp-checkbox>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <ng-container *ngIf="errors.required">
+            <span role="alert" aria-atomic="true">Value is required.</span>
+        </ng-container>
+    </ng-template>
+
+    <ng-template #apple let-errors>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true"> Apple is mandatory </span>
+    </ng-template>
+
+    <ng-template #banana let-errors>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true"> Banana is mandatory </span>
+    </ng-template>
+
+    <ng-template #grape let-errors>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true"> Grape is mandatory </span>
+    </ng-template>
+</fdp-form-group>
+<span style="margin-left: 2rem">Favorites: {{ form4.getRawValue() | json }}</span>

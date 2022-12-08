@@ -1,0 +1,15 @@
+<button fd-button label="Element focused, when keyboard service goes before list" (click)="focusFirst()"></button>
+<ul fd-list (focusEscapeList)="handleFocusEscape($event)">
+    <li fd-list-item>
+        <span fd-list-title> List item 1 </span>
+    </li>
+    <li fd-list-item>
+        <span fd-list-title> List item 2 </span>
+    </li>
+    <li fd-list-item>
+        <span fd-list-title> List item 3 </span>
+    </li>
+    <li fd-list-item>
+        <span fd-list-title> List item 4 </span>
+    </li>
+</ul>

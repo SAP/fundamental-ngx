@@ -1,0 +1,150 @@
+<h4>Submenus predefined</h4>
+
+<button fd-button label="Menu with submenu" [fdMenu]="true" [fdMenuTrigger]="menu"></button>
+
+<div style="display: inline-block">
+    <span style="padding-left: 0.5rem">Active path:</span>
+    <span *ngFor="let active of activePath" style="padding: 0.5rem">
+        {{ active.menuItemTitle.title }}
+    </span>
+</div>
+
+<fd-menu #menu (activePath)="activePath = $event">
+    <li fd-menu-item [submenu]="fruits">
+        <div fd-menu-interactive>
+            <span fd-menu-title>Fruits</span>
+            <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
+        </div>
+    </li>
+
+    <li fd-menu-item [submenu]="vegetables">
+        <div fd-menu-interactive>
+            <span fd-menu-title>Vegetables</span>
+            <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
+        </div>
+    </li>
+
+    <li fd-menu-item [submenu]="milkProducts">
+        <div fd-menu-interactive>
+            <span fd-menu-title>Milk products</span>
+            <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
+        </div>
+    </li>
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Meat</span>
+        </a>
+    </li>
+</fd-menu>
+
+<fd-submenu #fruits>
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Pineapple</span>
+        </a>
+    </li>
+
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Banana</span>
+        </a>
+    </li>
+</fd-submenu>
+
+<fd-submenu #vegetables>
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Cucumber</span>
+        </a>
+    </li>
+
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Onion</span>
+        </a>
+    </li>
+</fd-submenu>
+
+<fd-submenu #milkProducts>
+    <li fd-menu-item [submenu]="cheeses">
+        <div fd-menu-interactive>
+            <span fd-menu-title>Cheese</span>
+            <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
+        </div>
+    </li>
+
+    <li fd-menu-item [submenu]="yogurts">
+        <div fd-menu-interactive>
+            <span fd-menu-title>Yogurts</span>
+            <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
+        </div>
+    </li>
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Butter</span>
+        </a>
+    </li>
+</fd-submenu>
+
+<fd-submenu #cheeses>
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Parmesan</span>
+        </a>
+    </li>
+
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Brie</span>
+        </a>
+    </li>
+</fd-submenu>
+
+<fd-submenu #yogurts>
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Greek</span>
+        </a>
+    </li>
+
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Natural</span>
+        </a>
+    </li>
+</fd-submenu>
+
+<h4>Submenus created dynamically</h4>
+
+<button fd-button label="Complex menu with submenu" [fdMenu]="true" [fdMenuTrigger]="complexMenu"></button>
+
+<div style="display: inline-block">
+    <span style="padding-left: 0.5rem">Active path:</span>
+    <span *ngFor="let active of complexActivePath" style="padding: 0.5rem">
+        {{ active.menuItemTitle.title }}
+    </span>
+</div>
+
+<fd-menu #complexMenu (activePath)="complexActivePath = $event">
+    <ng-container *ngFor="let item of complexMenuItems">
+        <ng-container *ngTemplateOutlet="submenuTemplate; context: { item: item }"></ng-container>
+    </ng-container>
+
+    <!-- Make sure this template is nested in fd-menu -->
+    <ng-template #submenuTemplate let-item="item" let-parentSubmenu="parentSubmenu">
+        <li fd-menu-item [submenu]="item.children.length ? submenu : undefined" [parentSubmenu]="parentSubmenu">
+            <div fd-menu-interactive>
+                <span fd-menu-title>{{ item.title }}</span>
+                <fd-menu-addon *ngIf="item.children.length" [submenuIndicator]="true"></fd-menu-addon>
+            </div>
+        </li>
+
+        <fd-submenu #submenu>
+            <ng-container *ngFor="let subItem of item.children">
+                <ng-container
+                    *ngTemplateOutlet="submenuTemplate; context: { item: subItem, parentSubmenu: submenu }"
+                ></ng-container>
+            </ng-container>
+        </fd-submenu>
+    </ng-template>
+</fd-menu>

@@ -1,0 +1,87 @@
+<fd-micro-process-flow>
+    <fd-micro-process-flow-item>
+        <fd-popover placement="top" [focusTrapped]="true" [focusAutoCapture]="true" title="menu2">
+            <fd-popover-control>
+                <fd-micro-process-flow-icon
+                    fd-micro-process-flow-focusable-item
+                    glyph="product"
+                ></fd-micro-process-flow-icon>
+            </fd-popover-control>
+            <fd-popover-body *ngIf="list1 && list1.length">
+                <ul fd-list>
+                    <li fd-list-item *ngFor="let option of list1">
+                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                    </li>
+                </ul>
+            </fd-popover-body>
+        </fd-popover>
+    </fd-micro-process-flow-item>
+    <fd-micro-process-flow-item state="positive" [intermediate]="true">
+        <fd-popover placement="left" [focusTrapped]="true" [focusAutoCapture]="true" title="menu2">
+            <fd-popover-control>
+                <fd-micro-process-flow-icon
+                    fd-micro-process-flow-focusable-item
+                    glyph="pending"
+                ></fd-micro-process-flow-icon>
+            </fd-popover-control>
+            <fd-popover-body *ngIf="list1 && list1.length">
+                <ul fd-list>
+                    <li fd-list-item *ngFor="let option of list1">
+                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                    </li>
+                </ul>
+            </fd-popover-body>
+        </fd-popover>
+    </fd-micro-process-flow-item>
+    <fd-micro-process-flow-item state="information">
+        <fd-popover placement="right" [focusTrapped]="true" [focusAutoCapture]="true" title="menu2">
+            <fd-popover-control>
+                <fd-micro-process-flow-icon
+                    fd-micro-process-flow-focusable-item
+                    glyph="phone"
+                ></fd-micro-process-flow-icon>
+            </fd-popover-control>
+            <fd-popover-body *ngIf="list1 && list1.length">
+                <ul fd-list>
+                    <li fd-list-item *ngFor="let option of list1">
+                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                    </li>
+                </ul>
+            </fd-popover-body>
+        </fd-popover>
+    </fd-micro-process-flow-item>
+    <fd-micro-process-flow-item state="negative">
+        <fd-popover placement="bottom" [focusTrapped]="true" [focusAutoCapture]="true" title="menu2">
+            <fd-popover-control>
+                <fd-micro-process-flow-icon
+                    fd-micro-process-flow-focusable-item
+                    glyph="map"
+                ></fd-micro-process-flow-icon>
+            </fd-popover-control>
+            <fd-popover-body *ngIf="list1 && list1.length">
+                <ul fd-list>
+                    <li fd-list-item *ngFor="let option of list1">
+                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                    </li>
+                </ul>
+            </fd-popover-body>
+        </fd-popover>
+    </fd-micro-process-flow-item>
+    <fd-micro-process-flow-item state="critical">
+        <fd-popover placement="top" [focusTrapped]="true" [focusAutoCapture]="true" title="menu2">
+            <fd-popover-control>
+                <fd-micro-process-flow-icon
+                    fd-micro-process-flow-focusable-item
+                    glyph="log"
+                ></fd-micro-process-flow-icon>
+            </fd-popover-control>
+            <fd-popover-body *ngIf="list1 && list1.length">
+                <ul fd-list>
+                    <li fd-list-item *ngFor="let option of list1">
+                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                    </li>
+                </ul>
+            </fd-popover-body>
+        </fd-popover>
+    </fd-micro-process-flow-item>
+</fd-micro-process-flow>

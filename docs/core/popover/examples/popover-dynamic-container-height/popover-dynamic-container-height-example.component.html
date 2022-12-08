@@ -1,0 +1,20 @@
+<div fdPopoverContainer>
+    <div *ngIf="showOverflowContainer" style="height: 200px"></div>
+    <button fd-button (click)="resetOverflowContainer()">Change height in 2 seconds</button>
+
+    <div class="fd-docs-flex-display-helper">
+        <fd-popover title="photo 1 in circle">
+            <fd-popover-control>
+                <fd-avatar
+                    size="s"
+                    [circle]="true"
+                    ariaLabel="photo 1 in circle"
+                    image="http://picsum.photos/id/1018/400"
+                ></fd-avatar>
+            </fd-popover-control>
+            <fd-popover-body>
+                <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+</div>

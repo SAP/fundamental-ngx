@@ -1,0 +1,11 @@
+<span *ngFor="let theme of themes" style="padding: 10px">
+    <button fd-button (click)="changeQueryUrl(theme.id)" [label]="theme.name"></button>
+</span>
+
+<br /><br />
+<label fd-form-label> Theming detected by <code>getThemeFromURL</code> method: </label>
+{{ themeFromUrl | json }}
+
+<!--Uncomment if used standalone-->
+<link rel="stylesheet" *ngIf="cssUrl" [href]="cssUrl" />
+<link rel="stylesheet" *ngIf="cssCustomUrl" [href]="cssCustomUrl" />

@@ -1,0 +1,19 @@
+<nav fd-tab-nav>
+    <div fd-tab-item>
+        <a fd-tab-link [active]="rla1.isActive" [routerLink]="'tab1'" routerLinkActive #rla1="routerLinkActive">
+            Tab 1
+        </a>
+    </div>
+    <div fd-tab-item>
+        <a fd-tab-link [active]="rla2.isActive" [routerLink]="'tab2'" routerLinkActive #rla2="routerLinkActive">
+            Tab 2
+        </a>
+    </div>
+    <div fd-tab-item>
+        <a fd-tab-link [active]="rla3.isActive" [routerLink]="'tab3'" routerLinkActive #rla3="routerLinkActive">
+            Tab 3
+        </a>
+    </div>
+</nav>
+
+<router-outlet></router-outlet>

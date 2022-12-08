@@ -1,0 +1,56 @@
+<fdp-form-group
+    #ffg
+    [formGroup]="datetimePickerForm"
+    [object]="formData"
+    (onSubmit)="onSubmit()"
+    mainTitle="Datetime Picker with XL3-L1-M1-S1 form layout"
+    columnLayout="XL3-L1-M1-S1"
+>
+    <fdp-form-field
+        #ffl1
+        id="simple"
+        [column]="1"
+        [required]="true"
+        [validators]="requiredDateValidator"
+        placeholder="MM/dd/YYYY, hh:mm"
+        label="Date:"
+    >
+        <fdp-datetime-picker name="simple" [formControl]="ffl1.formControl"></fdp-datetime-picker>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #ffl2
+        id="withAllowNull"
+        [required]="true"
+        [column]="2"
+        label="With allowNull not enabled to disallow input from taking null value:"
+    >
+        <fdp-datetime-picker
+            name="withAllowNull"
+            [allowNull]="false"
+            placeholder="Enter a date mandatorily"
+            [formControl]="ffl2.formControl"
+        >
+        </fdp-datetime-picker>
+    </fdp-form-field>
+
+    <fdp-form-field #ffl3 id="storedDate" [column]="3" [required]="true" label="Passing datetime through form object:">
+        <fdp-datetime-picker
+            name="storedDate"
+            placeholder="Pre-filled datetime"
+            [formControl]="ffl3.formControl"
+            [allowNull]="false"
+        >
+        </fdp-datetime-picker>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true">Value is required</span>
+        <span *ngIf="errors.dateValidation" role="alert" aria-atomic="true">Date is invalid</span>
+    </ng-template>
+</fdp-form-group>
+
+<button fd-button name="submitBtn" (click)="onSubmit()">Submit</button>
+<div>form valid: {{ datetimePickerForm?.valid }}</div>
+
+<div *ngIf="stringValue">form value: {{ stringValue }}</div>

@@ -1,0 +1,294 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog" class="fd-wizard-example">
+        <fd-dialog-header>
+            <h2 fd-title [headerSize]="2">Checkout</h2>
+        </fd-dialog-header>
+        <fd-dialog-body>
+            <fd-wizard [appendToWizard]="false" [displaySummaryStep]="true">
+                <fd-wizard-navigation>
+                    <ul fd-wizard-progress-bar size="sm" role="list" aria-label="Wizard Steps">
+                        <li
+                            fd-wizard-step
+                            [status]="step1status"
+                            (statusChange)="statusChanged(1, $event)"
+                            label="Product Type"
+                            ariaLabel="Step 1: Product Type"
+                            (keydown)="handleFocus($event, 0)"
+                        >
+                            <fd-wizard-step-indicator>1</fd-wizard-step-indicator>
+                            <fd-wizard-content size="sm">
+                                <h3 fd-title>1. Product Type</h3>
+                                <fd-message-strip type="information" [dismissible]="false">
+                                    The Wizard control is supposed to break down large tasks, into smaller steps, easier
+                                    for the user to work with.
+                                </fd-message-strip>
+                                <div>
+                                    Sed fermentum, mi et tristique ullamcorper, sapien sapien faucibus sem, quis pretium
+                                    nibh lorem malesuada diam. Nulla quis arcu aliquet, feugiat massa semper, volutpat
+                                    diam. Nam vitae ante posuere, molestie neque sit amet, dapibus velit. Maecenas
+                                    eleifend tempor lorem. Mauris vitae elementum mi, sed eleifend ligula. Nulla tempor
+                                    vulputate dolor, nec dignissim quam convallis ut. Praesent vitae commodo felis, ut
+                                    iaculis felis. Fusce quis eleifend sapien, eget facilisis nibh. Suspendisse est
+                                    velit, scelerisque ut commodo eget, dignissim quis metus. Cras faucibus consequat
+                                    gravida. Curabitur vitae quam felis. Phasellus ac leo eleifend, commodo tortor et,
+                                    varius quam. Aliquam erat volutpat
+                                </div>
+                            </fd-wizard-content>
+                        </li>
+                        <li
+                            fd-wizard-step
+                            [status]="step2status"
+                            (statusChange)="statusChanged(2, $event)"
+                            label="Customer Information"
+                            ariaLabel="Step 2: Customer Information"
+                            (keydown)="handleFocus($event, 1)"
+                        >
+                            <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
+                            <fd-wizard-content size="sm">
+                                <h3 fd-title>2. Customer Information</h3>
+                                <fd-message-strip type="information" [dismissible]="false">
+                                    As the developer, you are in charge of whether or not to disable the next step
+                                    button depending on if the user has provided all required information.
+                                </fd-message-strip>
+                                <div>
+                                    Cras tellus leo, volutpat vitae ullamcorper eu, posuere malesuada nisl. Integer
+                                    pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero
+                                    sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec
+                                    pulvinar, sapien et viverra imperdiet, orci erat porttitor nulla, eget commodo metus
+                                    nibh nec ipsum. Aliquam lacinia euismod metus, sollicitudin pellentesque purus
+                                    volutpat eget. Pellentesque egestas erat quis eros convallis mattis. Mauris
+                                    hendrerit sapien a malesu corper eu, posuere malesuada nisl. Integer pellentesque
+                                    leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem.
+                                    Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar,
+                                    sapien corper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui
+                                    vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus,
+                                    molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien
+                                </div>
+                                <div fd-form-item>
+                                    <label fd-form-label [required]="true" for="input-1">Enter Full Name:</label>
+                                    <input
+                                        fd-form-control
+                                        type="text"
+                                        id="input-1"
+                                        placeholder="Name"
+                                        aria-required="true"
+                                        [(ngModel)]="fullName"
+                                        autocomplete="off"
+                                    />
+                                </div>
+                                <div fd-form-item>
+                                    <label fd-form-label [required]="true" for="input-2">Enter Address Line 1:</label>
+                                    <input
+                                        fd-form-control
+                                        type="text"
+                                        id="input-2"
+                                        placeholder="Address Line 1"
+                                        aria-required="true"
+                                        [(ngModel)]="addressLine1"
+                                        autocomplete="off"
+                                    />
+                                </div>
+                                <div fd-form-item>
+                                    <label fd-form-label for="input-3">Enter Address Line 2:</label>
+                                    <input
+                                        fd-form-control
+                                        type="text"
+                                        id="input-3"
+                                        placeholder="Address Line 2"
+                                        aria-required="true"
+                                        [(ngModel)]="addressLine2"
+                                        autocomplete="off"
+                                    />
+                                </div>
+                            </fd-wizard-content>
+                        </li>
+                        <li
+                            fd-wizard-step
+                            [status]="step3status"
+                            (statusChange)="statusChanged(3, $event)"
+                            label="Additional Information"
+                            optionalText="(Optional)"
+                            ariaLabel="Step 3: Additional Information"
+                            (keydown)="handleFocus($event, 2)"
+                        >
+                            <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
+                            <fd-wizard-content size="sm">
+                                <h3 fd-title>3. Additional Information</h3>
+                                <fd-message-strip type="information" [dismissible]="false">
+                                    Some steps may not require any input from the customer to progress to the next step.
+                                </fd-message-strip>
+                                <div>
+                                    Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam
+                                    in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui.
+                                    Donec ppellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in
+                                    libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec
+                                    pulvinar, sapien corper eu, posuere malesuada nisl. Integer pellentesque leo sit
+                                    amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse
+                                    arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien
+                                </div>
+                            </fd-wizard-content>
+                        </li>
+                        <li
+                            fd-wizard-step
+                            [status]="step4status"
+                            (statusChange)="statusChanged(4, $event)"
+                            label="Pricing and Payment"
+                            ariaLabel="Step 4: Pricing and Payment"
+                            (keydown)="handleFocus($event, 3)"
+                        >
+                            <fd-wizard-step-indicator>4</fd-wizard-step-indicator>
+                            <fd-wizard-content size="sm">
+                                <h3 fd-title>4. Payment</h3>
+                                <div>
+                                    Sed fermentum, mi et tristique ullamcorper, sapien sapien faucibus sem, quis pretium
+                                    nibh lorem malesuada diam. Nulla quis arcu aliquet, feugiat massa semper, volutpat
+                                    diam. Nam vitae ante posuere, molestie neque sit amet, dapibus velit. Maecenas
+                                    eleifend tempor lorem. Mauris vitae elementum mi, sed eleifend ligula. Nulla tempor
+                                    vulputate dolor, nec dignissim quam convallis ut. Praesent vitae commodo felis, ut
+                                    iaculis felis. Fusce quis eleifend sapien, eget facilisis nibh. Suspendisse est
+                                    velit, scelerisque ut commodo eget, dignissim quis metus. Cras faucibus consequat
+                                    gravida. Curabitur vitae quam felis. Phasellus ac leo eleifend, commodo tortor et,
+                                    varius quam. Aliquam erat volutpat
+                                </div>
+                            </fd-wizard-content>
+                        </li>
+                        <li
+                            fd-wizard-step
+                            [status]="summaryStatus"
+                            [isSummary]="true"
+                            label="Summary"
+                            ariaLabel="Step 5: Summary"
+                            (statusChange)="statusChanged(5, $event)"
+                            (keydown)="handleFocus($event, 4)"
+                        >
+                            <fd-wizard-step-indicator>5</fd-wizard-step-indicator>
+                            <fd-wizard-content size="sm">
+                                <h4 class="fd-title fd-title--h4" id="product-type-title">1. Product Type</h4>
+                                <fd-layout-grid style="margin-bottom: 2rem">
+                                    <div fdLayoutGridRow>
+                                        <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
+                                            <label fd-form-label style="float: right">Type:</label>
+                                        </div>
+                                        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <label fd-form-label style="color: black">Mobile</label>
+                                        </div>
+                                        <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <a
+                                                [routerLink]="['./']"
+                                                fd-link
+                                                (click)="goToStep(1)"
+                                                aria-labelledby="product-type-title"
+                                                >Edit</a
+                                            >
+                                        </div>
+                                    </div>
+                                </fd-layout-grid>
+                                <h4 class="fd-title fd-title--h4" id="customer-information-title">
+                                    2. Customer Information
+                                </h4>
+                                <fd-layout-grid>
+                                    <div fdLayoutGridRow>
+                                        <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
+                                            <label fd-form-label style="float: right">Full Name:</label><br />
+                                            <label fd-form-label style="float: right">Address Line 1:</label><br />
+                                            <label fd-form-label style="float: right">Address Line 2:</label><br />
+                                        </div>
+                                        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <label fd-form-label style="color: black">{{ fullName }}</label
+                                            ><br />
+                                            <label fd-form-label style="color: black">{{ addressLine1 }}</label
+                                            ><br />
+                                            <label fd-form-label style="color: black">{{ addressLine2 }}</label
+                                            ><br />
+                                        </div>
+                                        <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <br />
+                                            <br />
+                                            <br />
+                                            <a
+                                                [routerLink]="['./']"
+                                                fd-link
+                                                (click)="goToStep(2)"
+                                                aria-labelledby="customer-information-title"
+                                                >Edit</a
+                                            >
+                                        </div>
+                                    </div>
+                                </fd-layout-grid>
+                                <h4 class="fd-title fd-title--h4" id="additional-information-id">
+                                    3. Additional Information
+                                </h4>
+                                <fd-layout-grid>
+                                    <div fdLayoutGridRow>
+                                        <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
+                                            <label fd-form-label style="float: right">Name:</label><br />
+                                            <label fd-form-label style="float: right">Weight:</label><br />
+                                            <label fd-form-label style="float: right">Delicious:</label><br />
+                                            <label fd-form-label style="float: right">Description:</label>
+                                        </div>
+                                        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <label fd-form-label style="color: black">Pineapple</label><br />
+                                            <label fd-form-label style="color: black">1kg</label><br />
+                                            <label fd-form-label style="color: black">Yes</label><br />
+                                            <label fd-form-label style="color: black">n/a</label>
+                                        </div>
+                                        <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <br />
+                                            <br />
+                                            <br />
+                                            <a
+                                                [routerLink]="['./']"
+                                                fd-link
+                                                (click)="goToStep(3)"
+                                                aria-labelledby="additional-information-id"
+                                                >Edit</a
+                                            >
+                                        </div>
+                                    </div>
+                                </fd-layout-grid>
+                                <h4 class="fd-title fd-title--h4">4. Payment Information</h4>
+                                <fd-layout-grid>
+                                    <div fdLayoutGridRow>
+                                        <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
+                                            <label fd-form-label style="float: right">Payment Type:</label><br />
+                                        </div>
+                                        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <label fd-form-label style="color: black"></label><br />
+                                        </div>
+                                        <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <a [routerLink]="['./']" fd-link (click)="goToStep(4)">Edit</a>
+                                        </div>
+                                    </div>
+                                </fd-layout-grid>
+                            </fd-wizard-content>
+                        </li>
+                    </ul>
+                </fd-wizard-navigation>
+            </fd-wizard>
+            <div fd-bar barDesign="floating-footer">
+                <div fd-bar-right>
+                    <fd-button-bar
+                        *ngIf="step1status !== 'current'"
+                        label="Previous Step"
+                        (click)="goToStep(currentStep - 1)"
+                    ></fd-button-bar>
+                    <fd-button-bar
+                        *ngIf="summaryStatus !== 'current'"
+                        [label]="step4status === 'current' ? 'Review' : 'Next Step'"
+                        [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')"
+                        (click)="goToStep(currentStep + 1)"
+                    ></fd-button-bar>
+                    <fd-button-bar
+                        *ngIf="summaryStatus === 'current'"
+                        label="Finish"
+                        [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')"
+                        (click)="dialog.close('Continue')"
+                    ></fd-button-bar>
+                    <fd-button-bar label="Cancel" (click)="dialog.dismiss('Cancel')"></fd-button-bar>
+                </div>
+            </div>
+        </fd-dialog-body>
+    </fd-dialog>
+</ng-template>
+
+<button fd-button label="Open Wizard in Dialog" (click)="openDialog(confirmationDialog)"></button>

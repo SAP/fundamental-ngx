@@ -1,0 +1,8 @@
+<fd-multi-input
+    [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
+    placeholder="Search here..."
+    fdCompact
+    [(ngModel)]="selected"
+></fd-multi-input>
+
+Selected: {{ selected | json }}

@@ -1,0 +1,31 @@
+<div>
+    <fd-popover class="fd-popover" [triggers]="[]" [isOpen]="open" #typeahead>
+        <fd-popover-control>
+            <fdp-input
+                type="text"
+                id="form-input-10"
+                name="autoCompletTextInput"
+                placeholder="Enter the sport name"
+                [(ngModel)]="inputText"
+                (input)="onSearchChange()"
+            >
+            </fdp-input>
+        </fd-popover-control>
+        <fd-popover-body>
+            <nav class="fd-menu">
+                <ul fd-menu-list class="fd-menu__list">
+                    <li
+                        fd-menu-list-item
+                        class="fd-menu__item"
+                        *ngFor="let option of options"
+                        (click)="onItemClick(option)"
+                    >
+                        <span class="fd-menu__link">
+                            {{ option }}
+                        </span>
+                    </li>
+                </ul>
+            </nav>
+        </fd-popover-body>
+    </fd-popover>
+</div>

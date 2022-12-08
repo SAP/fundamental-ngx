@@ -1,0 +1,66 @@
+<fdp-form-group #fg1 [formGroup]="form" mainTitle="XL2-L2-M2-S1" columnLayout="XL2-L2-M2-S1">
+    <fdp-form-field-group label="Form field column layout">
+        <fdp-form-field
+            #ff1
+            id="basicTextarea-ex1"
+            label="XL: 1, L: 2, M: 1, S: 1"
+            placeholder="XL: 1, L: 2, M: 1, S: 1"
+            hint="XL: 1, L: 2, M: 1, S: 1"
+            [columnLayout]="{ XL: 1, L: 2, M: 1, S: 1 }"
+            [rank]="1"
+            hintPlacement="left"
+        >
+            <fdp-textarea name="basicTextarea-ex1" [formControl]="ff1.formControl"></fdp-textarea>
+        </fdp-form-field>
+        <fdp-form-field
+            #ff2
+            id="seasons0-ex1"
+            label="XL: 1, L: 1, M: 2, S: 1"
+            hint="XL: 1, L: 1, M: 2, S: 1"
+            hintPlacement="left"
+            [columnLayout]="{ XL: 1, L: 1, M: 2, S: 1 }"
+            [rank]="2"
+        >
+            <fdp-checkbox-group
+                [list]="seasons"
+                name="seasons0-ex1"
+                [isInline]="true"
+                ariaLabel="My favourite Seasons"
+                [formControl]="ff2.formControl"
+            ></fdp-checkbox-group>
+        </fdp-form-field>
+        <fdp-form-field
+            #ff3
+            id="basicTextarea2-ex1"
+            label="XL: 2, L: 2, M: 1, S: 1"
+            placeholder="XL: 2, L: 2, M: 1, S: 1"
+            hint="XL: 2, L: 2, M: 1, S: 1"
+            [columnLayout]="{ XL: 2, L: 2, M: 1, S: 1 }"
+            [rank]="3"
+        >
+            <fdp-textarea name="basicTextarea2-ex1" [formControl]="ff3.formControl"></fdp-textarea>
+        </fdp-form-field>
+        <fdp-form-field
+            #ff5
+            id="basicTextarea3-ex1"
+            label="XL: 2, L: 2, M: 2, S: 1"
+            placeholder="XL: 2, L: 2, M: 2, S: 1"
+            hint="XL: 2, L: 2, M: 2, S: 1"
+            [columnLayout]="{ XL: 2, L: 2, M: 2, S: 1 }"
+            [rank]="5"
+        >
+            <fdp-textarea name="basicTextarea3-ex1" [formControl]="ff5.formControl"></fdp-textarea>
+        </fdp-form-field>
+        <fdp-form-field
+            #ff6
+            id="basicTextarea6-ex1"
+            label="XL: 2, L: 1, M: 1, S: 1"
+            placeholder="XL: 2, L: 1, M: 1, S: 1"
+            hint="XL: 2, L: 1, M: 1, S: 1"
+            [columnLayout]="{ XL: 2, L: 1, M: 1, S: 1 }"
+            [rank]="6"
+        >
+            <fdp-textarea name="basicTextarea6-ex1" [formControl]="ff6.formControl"></fdp-textarea>
+        </fdp-form-field>
+    </fdp-form-field-group>
+</fdp-form-group>

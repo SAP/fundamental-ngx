@@ -1,0 +1,26 @@
+<form #myForm="ngForm" autocomplete="off">
+    <fdp-form-group>
+        <fdp-form-field
+            #ffl1
+            label="Default Multi Input Field"
+            id="input-complex"
+            name="reactiveFormInput"
+            [rank]="1"
+            placeholder="Field placeholder text"
+        >
+            <fdp-multi-input
+                [formControl]="ffl1.formControl"
+                type="text"
+                placeholder="Field placeholder text"
+                id="fdp-id-complex"
+                name="fdp-name"
+                [dataSource]="list_elements"
+                displayKey="state"
+                description="description"
+                [showSecondaryText]="true"
+                [hasByLine]="true"
+            >
+            </fdp-multi-input>
+        </fdp-form-field>
+    </fdp-form-group>
+</form>

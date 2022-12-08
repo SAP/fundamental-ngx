@@ -1,0 +1,55 @@
+<div class="docs-timeline-example-container">
+    <div class="docs-timeline-example-container__col docs-timeline-example-container__col--left">
+        <fd-timeline [dataSource]="data" [trackBy]="trackBy">
+            <fd-timeline-node *fd-timeline-node-def="let node">
+                <fd-timeline-node-header>
+                    <fd-avatar
+                        [circle]="true"
+                        size="xs"
+                        [label]="node.user.name"
+                        [image]="node.user.avatar"
+                    ></fd-avatar>
+                    <fd-timeline-node-header-info>
+                        <span fd-timeline-node-header-info-title>{{ node.user.name }}</span>
+                        <span fd-timeline-node-header-info-text>{{ node.title }}</span>
+                        <div fd-timeline-header-info-sub-title>{{ node.date | date: 'short' }}</div>
+                    </fd-timeline-node-header-info>
+                </fd-timeline-node-header>
+
+                <fd-timeline-node-body [content]="node.post"></fd-timeline-node-body>
+
+                <fd-timeline-node-footer>
+                    <button fd-button label="Action 1" fdType="transparent" fdCompact></button>
+                    <button fd-button label="Action 2" fdType="transparent" fdCompact></button>
+                </fd-timeline-node-footer>
+            </fd-timeline-node>
+        </fd-timeline>
+    </div>
+
+    <div class="docs-timeline-example-container__col docs-timeline-example-container__col--right">
+        <fd-timeline [dataSource]="data" [trackBy]="trackBy">
+            <fd-timeline-node *fd-timeline-node-def="let node" [glyph]="node.glyph">
+                <fd-timeline-node-header>
+                    <fd-avatar
+                        [circle]="true"
+                        size="xs"
+                        [label]="node.user.name"
+                        [image]="node.user.avatar"
+                    ></fd-avatar>
+                    <fd-timeline-node-header-info>
+                        <span fd-timeline-node-header-info-title>{{ node.user.name }}</span>
+                        <span fd-timeline-node-header-info-text>{{ node.title }}</span>
+                        <div fd-timeline-header-info-sub-title>{{ node.date | date: 'short' }}</div>
+                    </fd-timeline-node-header-info>
+                </fd-timeline-node-header>
+
+                <fd-timeline-node-body [content]="node.post" [maxLines]="3"></fd-timeline-node-body>
+
+                <fd-timeline-node-footer>
+                    <button fd-button label="Action 1" fdType="transparent" fdCompact></button>
+                    <button fd-button label="Action 2" fdType="transparent" fdCompact></button>
+                </fd-timeline-node-footer>
+            </fd-timeline-node>
+        </fd-timeline>
+    </div>
+</div>

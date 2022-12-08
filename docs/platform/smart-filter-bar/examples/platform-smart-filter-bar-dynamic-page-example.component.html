@@ -1,0 +1,126 @@
+<button fd-button (click)="openPage()">Click to open full screen</button>
+<div class="overlay" *ngIf="visible">
+    <fd-dynamic-page size="large" ariaLabel="Example Dynamic Page">
+        <fd-dynamic-page-header
+            title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+            subtitle="sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+        >
+            <fd-dynamic-page-layout-actions>
+                <!-- layout actions -->
+                <fd-toolbar fdType="transparent" [clearBorder]="true" fdCompact>
+                    <button fd-button fdType="transparent" ariaLabel="Resize" title="Resize">
+                        <i class="sap-icon--resize"></i>
+                    </button>
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        ariaLabel="Exit Fullscreen"
+                        (click)="closePage()"
+                        title="Exit Fullscreen"
+                    >
+                        <i class="sap-icon--exitfullscreen"></i>
+                    </button>
+                    <button fd-button fdType="transparent" ariaLabel="Close" (click)="closePage()" title="Close">
+                        <i class="sap-icon--decline"></i>
+                    </button>
+                </fd-toolbar>
+            </fd-dynamic-page-layout-actions>
+        </fd-dynamic-page-header>
+        <fd-dynamic-page-subheader
+            [collapsible]="true"
+            [pinnable]="true"
+            [collapsed]="false"
+            (collapsedChange)="onCollapseChange()"
+        >
+            <fdp-smart-filter-bar transparent="true" [subject]="subject"></fdp-smart-filter-bar>
+        </fd-dynamic-page-subheader>
+        <fd-dynamic-page-content cdkScrollable>
+            <fdp-table
+                fdp-smart-filter-bar-subject
+                #subject="fdp-smart-filter-bar-subject"
+                [dataSource]="source"
+                [trackBy]="trackBy"
+                emptyTableMessage="No data found"
+            >
+                <fdp-column
+                    fdp-smart-filter-bar-field-definition
+                    name="name"
+                    key="name"
+                    label="Name"
+                    defaultSelected="true"
+                    align="start"
+                >
+                </fdp-column>
+
+                <fdp-column
+                    fdp-smart-filter-bar-field-definition
+                    name="description"
+                    key="description"
+                    defaultSelected="true"
+                    label="Description"
+                >
+                </fdp-column>
+
+                <fdp-column
+                    fdp-smart-filter-bar-field-definition
+                    [dataType]="dataTypeEnum.NUMBER"
+                    name="price"
+                    key="price.value"
+                    label="Price"
+                    align="end"
+                >
+                </fdp-column>
+
+                <fdp-column
+                    fdp-smart-filter-bar-field-definition
+                    [filterType]="filterTypeEnum.MULTI"
+                    name="status"
+                    key="status"
+                    label="Status"
+                    required="true"
+                    align="center"
+                    hasOptions="true"
+                >
+                </fdp-column>
+
+                <fdp-column
+                    fdp-smart-filter-bar-field-definition
+                    [filterType]="filterTypeEnum.SINGLE"
+                    name="statusColor"
+                    key="statusColor"
+                    label="Status color"
+                    align="center"
+                    hasOptions="true"
+                >
+                </fdp-column>
+
+                <fdp-column
+                    fdp-smart-filter-bar-field-definition
+                    [dataType]="dataTypeEnum.DATE"
+                    name="date"
+                    key="date"
+                    label="Date"
+                ></fdp-column>
+
+                <fdp-column
+                    fdp-smart-filter-bar-field-definition
+                    [filterType]="filterTypeEnum.SINGLE"
+                    [dataType]="dataTypeEnum.BOOLEAN"
+                    name="verified"
+                    key="verified"
+                    label="Verified"
+                    hasOptions="true"
+                ></fdp-column>
+            </fdp-table>
+        </fd-dynamic-page-content>
+        <fd-dynamic-page-footer>
+            <!-- page footer content goes here -->
+            <div fd-bar barDesign="floating-footer">
+                <div fd-bar-right>
+                    <fd-button-bar label="Save" fdType="emphasized" (click)="closePage()"></fd-button-bar>
+                    <fd-button-bar label="Cancel" (click)="closePage()"></fd-button-bar>
+                </div>
+            </div>
+        </fd-dynamic-page-footer>
+    </fd-dynamic-page>
+</div>

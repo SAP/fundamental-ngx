@@ -1,0 +1,77 @@
+<label fd-form-label>Icon Only Tabs Built by passing parameters</label>
+<fd-tab-list mode="icon-only">
+    <fd-tab glyph="menu" count="40"> Content for tab 1 </fd-tab>
+    <fd-tab glyph="cart" count="17"> Content for tab 2 </fd-tab>
+    <fd-tab glyph="edit" count="12"> Content for tab 3 </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<label fd-form-label>Compact Icon Only Tabs Built by passing parameters</label>
+<fd-tab-list mode="icon-only" fdCompact>
+    <fd-tab glyph="menu" count="40"> Content for tab 1 </fd-tab>
+    <fd-tab glyph="cart" count="17"> Content for tab 2 </fd-tab>
+    <fd-tab glyph="edit" count="12"> Content for tab 3 </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<label fd-form-label>Icon Only Tabs Built by defining own template</label>
+<fd-tab-list mode="icon-only">
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-icon icon="menu">
+                <p fd-tab-count>11</p>
+            </span>
+        </ng-template>
+        Content for tab 1
+    </fd-tab>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-icon icon="cart">
+                <p fd-tab-count>12</p>
+            </span>
+        </ng-template>
+        Content for tab 2
+    </fd-tab>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-icon icon="delete">
+                <p fd-tab-count>13</p>
+            </span>
+        </ng-template>
+        Content for tab 3
+    </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<label fd-form-label>Icon Only Tabs Built by defining own template with routerLink</label>
+<nav fd-tab-nav mode="icon-only">
+    <div fd-tab-item>
+        <a fd-tab-link [active]="rla1.isActive" [routerLink]="'tab1'" routerLinkActive #rla1="routerLinkActive">
+            <span fd-tab-icon icon="delete">
+                <p fd-tab-count>11</p>
+            </span>
+        </a>
+    </div>
+    <div fd-tab-item>
+        <a fd-tab-link [active]="rla2.isActive" [routerLink]="'tab2'" routerLinkActive #rla2="routerLinkActive">
+            <span fd-tab-icon icon="cart">
+                <p fd-tab-count>12</p>
+            </span>
+        </a>
+    </div>
+    <div fd-tab-item>
+        <a fd-tab-link [active]="rla3.isActive" [routerLink]="'tab3'" routerLinkActive #rla3="routerLinkActive">
+            <span fd-tab-icon icon="delete">
+                <p fd-tab-count>13</p>
+            </span>
+        </a>
+    </div>
+</nav>
+
+<router-outlet></router-outlet>

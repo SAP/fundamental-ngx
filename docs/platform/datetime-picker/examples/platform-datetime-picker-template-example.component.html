@@ -1,0 +1,12 @@
+<fdp-form-group #fdpForm mainTitle="Datetime Picker with XL2-L2-M1-S1 form layout" columnLayout="XL2-L2-M1-S1">
+    <fdp-form-field id="simple" [column]="1" [required]="true" placeholder="Enter a date" label="Date:">
+        <fdp-datetime-picker name="simple" [(ngModel)]="date"></fdp-datetime-picker>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true">Value is required</span>
+        <span *ngIf="errors.dateValidation" role="alert" aria-atomic="true">Date is invalid</span>
+    </ng-template>
+</fdp-form-group>
+
+<div>form valid: {{ fdpForm?.formGroup?.valid }}</div>

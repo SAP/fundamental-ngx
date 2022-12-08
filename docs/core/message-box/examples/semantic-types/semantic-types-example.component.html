@@ -1,0 +1,18 @@
+<div style="display: flex; justify-content: space-between">
+    <button fd-button label="Confirmation type" (click)="open('confirmation')"></button>
+    <button fd-button fdType="emphasized" label="Information type" (click)="open('information')"></button>
+    <button fd-button fdType="negative" label="Error type" (click)="open('error')"></button>
+    <button fd-button fdType="attention" label="Warning type" (click)="open('warning')"></button>
+    <button fd-button fdType="positive" label="Success type" (click)="open('success')"></button>
+    <button
+        fd-button
+        fdType="positive"
+        label="Success type & custom icon"
+        (click)="open('success', false, 'thumb-up')"
+    ></button>
+    <button fd-button fdType="positive" label="Success type & no icon" (click)="open('success', false)"></button>
+</div>
+
+<span aria-hidden="true" style="display: none" id="fd-message-box-semantic-types-header" [innerText]="title"></span>
+<span aria-hidden="true" style="display: none" id="fd-message-box-semantic-types-body" [innerText]="content"></span>
+<span aria-hidden="true" style="display: none" id="fd-message-box-semantic-types-types" [innerText]="types"></span>

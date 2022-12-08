@@ -1,0 +1,10 @@
+<fd-multi-input
+    [dropdownValues]="(dropdownValues$ | async) || []"
+    placeholder="Search here..."
+    [(ngModel)]="selected"
+    (searchTermChange)="searchValue$.next($event)"
+    [displayFn]="displayFn"
+    [valueFn]="valueFn"
+></fd-multi-input>
+
+Selected: {{ selected | json }}

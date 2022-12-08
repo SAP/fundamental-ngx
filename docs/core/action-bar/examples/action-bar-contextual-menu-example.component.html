@@ -1,0 +1,44 @@
+<div fd-action-bar>
+    <div fd-action-bar-header>
+        <div fd-action-bar-title>Page Title</div>
+        <div fd-action-bar-actions>
+            <button
+                fd-button
+                aria-label="More"
+                aria-haspopup="true"
+                glyph="overflow"
+                fdType="transparent"
+                [fdMenuTrigger]="menu"
+                fdCompact
+            ></button>
+
+            <fd-menu #menu placement="bottom-end" fdCompact>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Edit</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Delete</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Assign</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Expire</span>
+                    </div>
+                </li>
+                <li fd-menu-item>
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Archive</span>
+                    </div>
+                </li>
+            </fd-menu>
+        </div>
+    </div>
+</div>

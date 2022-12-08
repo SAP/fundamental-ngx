@@ -1,0 +1,139 @@
+<main class="fd-page">
+    <div *ngIf="true" class="fd-page__content fd-has-background-color-neutral-2">
+        <fdp-form-group #fg4 [formGroup]="form">
+            <fdp-form-field
+                #ff1
+                id="growingDisabledTextarea"
+                label="Textarea with growing=false and growingMaxLines=7"
+                placeholder="Start entering something. Growing is not enabled, but growingMaxLines of 7 is given, so it is restricted to a height of 7 lines."
+                hint="This is tooltip help"
+                [rank]="10"
+                hintPlacement="left"
+                style="width: auto"
+            >
+                <fdp-textarea
+                    name="growingDisabledTextarea"
+                    [formControl]="ff1.formControl"
+                    [growingMaxLines]="7"
+                    [cols]="10"
+                    wrapType="hard"
+                >
+                </fdp-textarea>
+            </fdp-form-field>
+            <fdp-form-field
+                #ff11
+                id="growingDisabledHeightTextarea"
+                label="Textarea with growing=false and height='80px'"
+                placeholder="Start entering something.  Growing is not enabled, but height is set, so it is restricted to a height of 80px"
+                hint="This is tooltip help"
+                [rank]="10"
+                hintPlacement="left"
+                [validators]="textareaValidator"
+            >
+                <fdp-textarea
+                    [formControl]="ff11.formControl"
+                    name="growingDisabledHeightTextarea"
+                    [growing]="false"
+                    [showExceededText]="true"
+                    [maxLength]="6"
+                    [cols]="10"
+                    height="80px"
+                    wrapType="hard"
+                >
+                </fdp-textarea>
+            </fdp-form-field>
+
+            <fdp-form-field
+                #ff2
+                id="growingMaxLinesTextarea"
+                label="Textarea with growing=true and growingMaxLines=5"
+                [placeholder]="
+                    'Start entering something. It will grow until growingMaxLines number of lines are visible.'
+                "
+                hint="This is tooltip help"
+                [rank]="10"
+                hintPlacement="left"
+            >
+                <fdp-textarea
+                    [formControl]="ff2.formControl"
+                    name="growingMaxLinesTextarea"
+                    [growing]="true"
+                    [growingMaxLines]="5"
+                    [cols]="10"
+                    wrapType="hard"
+                >
+                </fdp-textarea>
+            </fdp-form-field>
+
+            <fdp-form-field
+                #ff3
+                id="growingHeightTextarea"
+                label="Textarea with growing=true and height='80px'"
+                placeholder="Start entering something. It will grow until height is reached."
+                hint="This is tooltip help"
+                [rank]="10"
+                hintPlacement="left"
+                [validators]="textareaValidator"
+            >
+                <fdp-textarea
+                    [formControl]="ff3.formControl"
+                    name="growingHeightTextarea"
+                    [growing]="true"
+                    [showExceededText]="true"
+                    [maxLength]="6"
+                    [cols]="10"
+                    height="80px"
+                    wrapType="hard"
+                    [value]="tValue"
+                >
+                </fdp-textarea>
+            </fdp-form-field>
+
+            <fdp-form-field
+                #ff4
+                id="growingTextarea"
+                label="Textarea with growingMaxLines and height both set"
+                placeholder="Start entering something. Preference will be given to grow by height."
+                hint="This is tooltip help"
+                [rank]="10"
+                hintPlacement="left"
+            >
+                <fdp-textarea
+                    [formControl]="ff4.formControl"
+                    name="growingTextarea"
+                    [growing]="true"
+                    [growingMaxLines]="3"
+                    [cols]="10"
+                    height="80px"
+                    wrapType="hard"
+                >
+                </fdp-textarea>
+            </fdp-form-field>
+
+            <fdp-form-field
+                #ff5
+                id="growingOptionsDisabledTextarea"
+                label="Textarea with growing=true neither height nor growingMaxLines set"
+                placeholder="Start entering something. It will keep growing."
+                hint="This is tooltip help"
+                [rank]="10"
+                hintPlacement="left"
+            >
+                <fdp-textarea
+                    name="growingOptionsDisabledTextarea"
+                    [formControl]="ff5.formControl"
+                    [growing]="true"
+                    [cols]="10"
+                    wrapType="hard"
+                >
+                </fdp-textarea>
+            </fdp-form-field>
+            <ng-template #i18n let-errors>
+                <span *ngIf="errors.required"> Value is required </span>
+                <span role="alert" aria-atomic="true" *ngIf="errors.maxlength">
+                    Please get your character count under limit.
+                </span>
+            </ng-template>
+        </fdp-form-group>
+    </div>
+</main>

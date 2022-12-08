@@ -1,0 +1,80 @@
+<p>
+    This is an example of a
+    <fdp-link href="http://www.google.com" [title]="'Extra info as tooltip text'">
+        <fd-icon glyph="chain-link"></fd-icon>
+        standard
+    </fdp-link>
+    link.
+</p>
+<br />
+
+<div>
+    This is an example of a
+    <fdp-link href="http://www.google.com" [title]="'Extra info as tooltip text'" linkType="subtle"> subtle </fdp-link>
+    link.
+</div>
+<br />
+
+<p>Example of a text link.</p>
+<fdp-link [id]="'regular-text-link'" href="fundamental-ngx#/platform/home" [title]="'Regular link description'">
+    text
+</fdp-link>
+<br />
+<br />
+<p>Example of an external link.</p>
+<fdp-link href="https://www.google.com" [title]="'opens a external webpage'" target="_blank">
+    navigates to external webpage
+</fdp-link>
+<br />
+<br />
+<p>Example of an internal page link.</p>
+<fdp-link href="fundamental-ngx#/platform/home" [title]="'opens a internal page'" target="_blank">
+    navigates to internal page
+</fdp-link>
+<br />
+<br />
+<p>Example of opening link in new tab.</p>
+<fdp-link [id]="'new-tab-link'" href="https://www.google.com" [title]="'opens in new tab'" target="_blank">
+    navigation opens in new tab
+</fdp-link>
+<br />
+<br />
+<p>Example of using link to download file.</p>
+<fdp-link
+    [id]="'start-download'"
+    href="assets/headshot-male.jpg"
+    [title]="'click link to start download'"
+    download="pagedownloaded.jpeg"
+>
+    download image
+</fdp-link>
+<br />
+<br />
+<p>Example of using image file as link.</p>
+<fdp-link [id]="'img-link'" href="https://www.google.com" [title]="'On click you will get to target page'">
+    <img src="https://picsum.photos/id/1021/50/50" />
+</fdp-link>
+<br />
+<br />
+<p>Example for specifiying media resolution.</p>
+<fdp-link
+    [id]="'media-link'"
+    href="https://picsum.photos/id/1016/500/500"
+    [title]="'target web is printable for resolution:300dpi'"
+    media="print and (resolution:300dpi)"
+    hreflang="en"
+>
+    Link compatible for media resolution
+</fdp-link>
+<br />
+<br />
+<p>Example for specifiying relation between documents.</p>
+<fdp-link
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    rel="stylesheet"
+    [title]="'Specify relation between document'"
+>
+    Specify relation between document
+</fdp-link>
+<br />
+<br />

@@ -1,0 +1,59 @@
+<div class="base-row">
+    <h4>Default Slider: <code>[min]="0" [max]="100" [step]="1"</code></h4>
+    <fn-slider [(ngModel)]="value"> </fn-slider>
+    <p>
+        <i>Value: {{ value }}</i>
+    </p>
+</div>
+
+<br /><br /><br />
+
+<div class="base-row">
+    <h4>Slider with negative min value <code>[min]="-100"</code></h4>
+    <fn-slider [(ngModel)]="value1" [min]="-100"> </fn-slider>
+    <p>
+        <i>Value: {{ value1 }}</i>
+    </p>
+</div>
+
+<br /><br /><br />
+
+<div class="base-row">
+    <h4>Slider with <code>[min]="-50" [max]="50" [step]="5"</code> values.</h4>
+    <fn-slider [(ngModel)]="value2" [min]="-50" [max]="50" [step]="5"> </fn-slider>
+    <p>
+        <i>Value: {{ value2 }}</i>
+    </p>
+</div>
+
+<br /><br /><br />
+
+<div class="base-row">
+    <h4>Slider with <code>[min]="-1" [max]="1" [step]="0.2"</code> values.</h4>
+    <fn-slider [(ngModel)]="value4" [min]="-1" [max]="1" [step]="0.2"> </fn-slider>
+    <p>
+        <i>Value: {{ value4 }}</i>
+    </p>
+</div>
+
+<br /><br /><br />
+
+<div class="base-row">
+    <h4>Slider with <code>[disabled]="true"</code>.</h4>
+    <fn-slider [(ngModel)]="value" [disabled]="true"> </fn-slider>
+    <p>
+        <i>Value: {{ value4 }}</i>
+    </p>
+</div>
+
+<br /><br /><br />
+
+<div class="base-row">
+    <h4>Range slider with <code>[value]="[25, 75]"</code></h4>
+    <div>
+        <fn-slider [(ngModel)]="rangeValue" [range]="true"> </fn-slider>
+    </div>
+    <p>
+        <i>Value: {{ rangeValue }}</i>
+    </p>
+</div>

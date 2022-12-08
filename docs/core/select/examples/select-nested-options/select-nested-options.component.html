@@ -1,0 +1,24 @@
+<fd-select [(value)]="selectedValue" [extendedBodyTemplate]="true" [controlTemplate]="customSelectTemplate">
+    <li fd-list-group-header>
+        <span fd-list-title>Fruits</span>
+    </li>
+    <li fd-option *ngFor="let option of fruits" [value]="option">
+        <i fd-list-icon glyph="add"></i>
+        <span fd-list-title>{{ option.name }}</span>
+        <span fd-list-secondary>{{ option.kCal }} kcal</span>
+    </li>
+
+    <li fd-list-group-header>
+        <span fd-list-title>Vegetables</span>
+    </li>
+    <li fd-option *ngFor="let option of vegetables" [value]="option">
+        <i fd-list-icon glyph="add"></i>
+        <span fd-list-title>{{ option.name }}</span>
+        <span fd-list-secondary>{{ option.kCal }} kcal</span>
+    </li>
+
+    <ng-template #customSelectTemplate let-selected="selected">
+        {{ selected?.value.name || 'Select an option' }}
+    </ng-template>
+</fd-select>
+<small style="display: block">Selected value: {{ selectedValue | json }}</small>

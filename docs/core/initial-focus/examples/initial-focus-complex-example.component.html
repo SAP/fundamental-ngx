@@ -1,0 +1,44 @@
+<div class="fd-initial-focus-control-buttons">
+    <button fd-button (click)="showExample('select')">Show initial focus for select</button>
+    <button fd-button (click)="showExample('combobox')">Show initial focus for combobox</button>
+    <button fd-button (click)="showExample('datepicker')">Show initial focus for date picker</button>
+    <button fd-button (click)="showExample('textarea')">Show initial focus for slider</button>
+</div>
+
+<div class="fd-initial-focus-examples">
+    <div *ngIf="currentExample === 'select'">
+        <fd-select fd-initial-focus=".fd-select__button" placeholder="Autofocusable select">
+            <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+        </fd-select>
+    </div>
+    <div *ngIf="currentExample === 'combobox'">
+        <fd-combobox
+            fd-initial-focus
+            inputId="comboboxID1"
+            ariaLabel="Standard"
+            maxHeight="250px"
+            placeholder="Autofocusable combobox"
+            [dropdownValues]="options"
+        >
+        </fd-combobox>
+    </div>
+    <div *ngIf="currentExample === 'datepicker'">
+        <fd-date-picker
+            fd-initial-focus=".fd-input-group__button"
+            type="single"
+            inputId="datePicker"
+            [(ngModel)]="date"
+        ></fd-date-picker>
+    </div>
+    <div *ngIf="currentExample === 'textarea'">
+        <div fd-form-item>
+            <fd-slider
+                fd-initial-focus
+                [focusLastElement]="true"
+                mode="range"
+                tooltipMode="editable"
+                [showTicks]="true"
+            ></fd-slider>
+        </div>
+    </div>
+</div>

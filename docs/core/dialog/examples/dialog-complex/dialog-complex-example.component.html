@@ -1,0 +1,68 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <ng-template fdTemplate="header">
+                <div fd-bar-left>
+                    <fd-bar-element>
+                        <h1 id="fd-dialog-header-3" fd-title>Fresh Market</h1>
+                    </fd-bar-element>
+                </div>
+                <div fd-bar-right>
+                    <fd-button-bar label="Clear" ariaLabel="Clear" (click)="clear()"></fd-button-bar>
+                </div>
+            </ng-template>
+
+            <ng-template fdTemplate="subheader">
+                <div fd-bar-middle>
+                    <fd-bar-element [fullWidth]="true">
+                        <fd-input-group
+                            fd-initial-focus
+                            glyph="search"
+                            placement="after"
+                            placeholder="Search"
+                            [button]="true"
+                            [buttonFocusable]="false"
+                            [(ngModel)]="searchedPhrase"
+                        >
+                        </fd-input-group>
+                    </fd-bar-element>
+                </div>
+            </ng-template>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <ul *ngIf="(dialogRef.onLoading | async) === false" fd-list>
+                <li
+                    *ngFor="let fruit of filterFruits(fruitCollection, searchedPhrase)"
+                    fd-list-item
+                    [selected]="isSelected(fruit.id)"
+                    (click)="selectFruit(fruit)"
+                >
+                    <span fd-list-title>{{ fruit.name }}</span>
+                    <span fd-list-secondary>{{ fruit.price }} €</span>
+                </li>
+            </ul>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <ng-template fdTemplate="footer">
+                <div fd-bar-left>
+                    <fd-bar-element> Total price: {{ totalPrice }}€ </fd-bar-element>
+                </div>
+                <div fd-bar-right>
+                    <fd-button-bar
+                        fd-initial-focus
+                        glyph="cart"
+                        fdType="emphasized"
+                        label="Checkout"
+                        (click)="checkout()"
+                        ariaLabel="Checkout Emphasized"
+                    >
+                    </fd-button-bar>
+                </div>
+            </ng-template>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<button fd-button label="Open with custom configuration" (click)="openDialog(dialogTemplate)"></button>

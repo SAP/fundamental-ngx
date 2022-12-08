@@ -1,0 +1,23 @@
+<form [formGroup]="customForm" class="flex-form">
+    <div fd-form-item>
+        <fd-calendar calType="single" formControlName="date" [startingDayOfWeek]="1"></fd-calendar>
+        <small>
+            Touched: {{ customForm.controls.date.touched }}<br />
+            Dirty: {{ customForm.controls.date.dirty }}<br />
+            Valid: {{ customForm.controls.date.valid }}<br />
+            Selected Date: {{ customForm.controls.date.value?.toDateString() || 'null' }}<br />
+        </small>
+        <button fd-button label="Set Invalid Single Date" (click)="setInvalid()"></button>
+    </div>
+    <div fd-form-item>
+        <fd-calendar calType="range" formControlName="dateRange" [startingDayOfWeek]="1"></fd-calendar>
+        <small>
+            Touched: {{ customForm.controls.dateRange.touched }}<br />
+            Dirty: {{ customForm.controls.dateRange.dirty }}<br />
+            Selected Start Date: {{ customForm.controls.dateRange.value?.start?.toDateString() || 'null' }} <br />
+            Selected End Date: {{ customForm.controls.dateRange.value?.end?.toDateString() || 'null' }} <br />
+            Valid: {{ customForm.controls.dateRange.valid }}<br />
+        </small>
+        <button fd-button label="Set Invalid Range Date" (click)="setInvalidRange()"></button>
+    </div>
+</form>

@@ -1,0 +1,24 @@
+<fd-popover>
+    <fd-popover-control>
+        <button fd-button label="Dropdown Popover" [fdMenu]="true"></button>
+    </fd-popover-control>
+    <fd-popover-body>
+        <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+    </fd-popover-body>
+</fd-popover>
+<fd-popover [disabled]="true">
+    <fd-popover-control>
+        <button fd-button label="Disabled Dropdown Popover" [disabled]="true" [fdMenu]="true"></button>
+    </fd-popover-control>
+    <fd-popover-body>
+        <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+    </fd-popover-body>
+</fd-popover>
+<fd-popover>
+    <fd-popover-control>
+        <button fd-button label="Dropdown with icon" glyph="filter" [fdMenu]="true"></button>
+    </fd-popover-control>
+    <fd-popover-body>
+        <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+    </fd-popover-body>
+</fd-popover>

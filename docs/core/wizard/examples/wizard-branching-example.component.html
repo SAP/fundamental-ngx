@@ -1,0 +1,149 @@
+<button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
+
+<div cdkScrollable cdkTrapFocus class="docs-wizard-example-overlay" #overlay>
+    <ng-container *ngIf="fullscreen">
+        <div class="docs-wizard-example-overlay-content">
+            <div class="docs-wizard-example-button">
+                <button fd-button (click)="exitFullscreenExample($event)">Exit Example</button>
+            </div>
+
+            <!-- The Wizard -->
+            <fd-wizard>
+                <fd-wizard-navigation>
+                    <ul fd-wizard-progress-bar size="xl" aria-label="Wizard Steps">
+                        <li
+                            fd-wizard-step
+                            [status]="step1status"
+                            (statusChange)="statusChanged(1, $event)"
+                            label="Step 1: One Line"
+                            ariaLabel="Step 1: One Line"
+                            (keydown)="handleFocus($event, 0)"
+                        >
+                            <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
+                            <fd-wizard-content size="xl">
+                                <div fd-form-item>
+                                    <label fd-form-label for="address-1">Address Line 1</label>
+                                    <input fd-form-control type="text" id="address-1" />
+                                </div>
+                                <div fd-form-item>
+                                    <label fd-form-label for="address-2">Address Line 2</label>
+                                    <input fd-form-control type="text" id="address-2" />
+                                </div>
+                                <div fd-form-item>
+                                    <label fd-form-label for="address-3">City, State, and Zip</label>
+                                    <input fd-form-control type="text" id="address-3" />
+                                </div>
+                                <fd-wizard-next-step>
+                                    <button fd-button fdCompact fdType="emphasized" (click)="goToStep(2)">
+                                        Go to the payment selection page
+                                    </button>
+                                </fd-wizard-next-step>
+                            </fd-wizard-content>
+                        </li>
+                        <li
+                            fd-wizard-step
+                            [branching]="true"
+                            [status]="step2status"
+                            (statusChange)="statusChanged(2, $event)"
+                            label="Step 2: Payment Selection"
+                            ariaLabel="Step 2: Payment Selection"
+                            (keydown)="handleFocus($event, 1)"
+                        >
+                            <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
+                            <fd-wizard-content size="xl">
+                                <fieldset fd-fieldset>
+                                    <legend fd-form-legend>Please select a payment type:</legend>
+                                    <fd-form-group>
+                                        <div fd-form-item>
+                                            <fd-radio-button
+                                                #bankButton
+                                                value="bank"
+                                                id="radio-1"
+                                                name="radio-name-1"
+                                                [(ngModel)]="paymentSelection"
+                                                (ngModelChange)="paymentSelectionChanged(confirmationDialog)"
+                                                aria-label="Bank Transfer"
+                                            >
+                                                Bank Transfer
+                                            </fd-radio-button>
+                                        </div>
+                                        <div fd-form-item>
+                                            <fd-radio-button
+                                                #creditButton
+                                                value="credit"
+                                                id="radio-2"
+                                                name="radio-name-1"
+                                                [(ngModel)]="paymentSelection"
+                                                (ngModelChange)="paymentSelectionChanged(confirmationDialog)"
+                                                aria-label="Credit Card"
+                                            >
+                                                Credit Card
+                                            </fd-radio-button>
+                                        </div>
+                                    </fd-form-group>
+                                </fieldset>
+                                <fd-wizard-next-step>
+                                    <button
+                                        [disabled]="!paymentSelection"
+                                        fd-button
+                                        fdCompact
+                                        fdType="emphasized"
+                                        (click)="goToStep(3)"
+                                    >
+                                        Go to Payment Details Page
+                                    </button>
+                                </fd-wizard-next-step>
+                            </fd-wizard-content>
+                        </li>
+                        <li
+                            *ngIf="step2status === 'completed'"
+                            fd-wizard-step
+                            [status]="step3status"
+                            (statusChange)="statusChanged(3, $event)"
+                            [label]="
+                                paymentSelection === 'bank' ? 'Step 3: Bank Details' : 'Step 3: Credit Card Details'
+                            "
+                            ariaLabel="Step 3: Bank Details"
+                            (keydown)="handleFocus($event, 2)"
+                        >
+                            <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
+                            <fd-wizard-content size="xl">
+                                <div fd-form-item>
+                                    <label fd-form-label for="payment"
+                                        >Enter your
+                                        {{ paymentSelection === 'bank' ? 'bank' : 'credit card' }} details:</label
+                                    >
+                                    <input fd-form-control type="text" id="payment" />
+                                </div>
+                            </fd-wizard-content>
+                        </li>
+                    </ul>
+                </fd-wizard-navigation>
+                <div fd-bar barDesign="footer">
+                    <div fd-bar-right>
+                        <fd-button-bar label="Save"></fd-button-bar>
+                        <fd-button-bar label="Cancel"></fd-button-bar>
+                    </div>
+                </div>
+            </fd-wizard>
+        </div>
+    </ng-container>
+</div>
+
+<ng-template let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <button fd-dialog-close-button (click)="dialog.dismiss()"></button>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            Are you sure you want to change the payment type ? This will discard your progress.
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar fdType="emphasized" label="Continue" type="submit" (click)="dialog.close('Continue')">
+            </fd-button-bar>
+            <fd-button-bar fd-initial-focus label="Cancel" (click)="dialog.dismiss()"> </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>

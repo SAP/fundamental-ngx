@@ -1,0 +1,11 @@
+<fd-select
+    placeholder="Select an option"
+    stateMessage="Select your favourite fruit"
+    state="information"
+    [(value)]="selectedValue"
+    [mobile]="true"
+    [mobileConfig]="mobileConfig"
+>
+    <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+</fd-select>
+<small style="display: block">Selected value: {{ selectedValue }}</small>

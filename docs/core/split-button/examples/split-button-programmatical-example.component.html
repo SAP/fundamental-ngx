@@ -1,0 +1,20 @@
+<fd-split-button [mainAction]="{ mainActionTitle: 'Action Button' }" [selected]="selectedOption">
+    <fd-menu #menu [closeOnOutsideClick]="false">
+        <li fd-menu-item #option1>
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+        <li fd-menu-item #option2>
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 2</span>
+            </div>
+        </li>
+    </fd-menu>
+</fd-split-button>
+
+<button label="Open" class="docs-button" fd-button (click)="menu.open()"></button>
+<button label="Close" class="docs-button" fd-button (click)="menu.close()"></button>
+
+<button label="Select Option 1" class="docs-button" fd-button (click)="select(option1)"></button>
+<button label="Select Option 2" class="docs-button" fd-button (click)="select(option2)"></button>

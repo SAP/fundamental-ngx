@@ -1,0 +1,9 @@
+.docs-timeline-example-container {
+    display: flex;
+    justify-content: space-around;
+
+    &__col {
+        width: 500px;
+        padding: 0.5rem;
+    }
+}

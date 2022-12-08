@@ -1,0 +1,35 @@
+<main class="fd-page">
+    <div *ngIf="true" class="fd-page__content fd-has-background-color-neutral-2">
+        <fdp-form-group #fg3>
+            <fdp-form-field
+                #ff3
+                id="templateExample"
+                label="Detailed description"
+                placeholder="Start entering detailed description"
+                hint="This is tooltip help"
+                [rank]="10"
+                hintPlacement="left"
+                [validators]="textareaValidator"
+            >
+                <fdp-textarea
+                    name="templateExample"
+                    [growingMaxLines]="3"
+                    [cols]="10"
+                    [growing]="true"
+                    [maxLength]="10"
+                    [showExceededText]="true"
+                    wrapType="hard"
+                    [(ngModel)]="tValue"
+                >
+                </fdp-textarea>
+            </fdp-form-field>
+
+            <ng-template #i18n let-errors>
+                <span role="alert" aria-atomic="true" *ngIf="errors.required"> Value is required </span>
+                <span role="alert" aria-atomic="true" *ngIf="errors.maxlength">
+                    Please get your character count under limit.
+                </span>
+            </ng-template>
+        </fdp-form-group>
+    </div>
+</main>

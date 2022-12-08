@@ -1,0 +1,27 @@
+<main class="fd-page">
+    <div class="fd-page__content fd-has-background-color-neutral-2">
+        <fdp-form-group>
+            <fdp-form-field
+                id="quantity-template-driven"
+                label="Quantity"
+                placeholder="Things quantity"
+                hint="This is tooltip to help"
+                zone="zLeft"
+                [rank]="10"
+                hintPlacement="left"
+                [validators]="stepInputQtyValidators"
+            >
+                <fdp-number-step-input
+                    [id]="'quantity-template-driven'"
+                    name="qty"
+                    [(ngModel)]="qty"
+                ></fdp-number-step-input>
+            </fdp-form-field>
+
+            <ng-template #i18n let-errors>
+                <span *ngIf="errors.required"> Value is required </span>
+            </ng-template>
+        </fdp-form-group>
+    </div>
+    <pre>Qty: {{ qty }}</pre>
+</main>

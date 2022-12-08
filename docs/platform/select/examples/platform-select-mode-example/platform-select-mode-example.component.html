@@ -1,0 +1,16 @@
+<h4>Default select</h4>
+<fdp-select placeholder="Select an option" (selectionChange)="onSelect1($event)" [list]="option"> </fdp-select>
+<small style="display: block">Selected value: {{ selectedValue1 }}</small>
+
+<h4>Compact select</h4>
+<fdp-select placeholder="Select an option" fdCompact (selectionChange)="onSelect2($event)" [list]="option">
+</fdp-select>
+<small style="display: block">Selected value: {{ selectedValue2 }}</small>
+
+<h4>Select in disabled mode</h4>
+<fdp-select placeholder="Select an option" [disabled]="true" [value]="selectedValue3" [list]="option"> </fdp-select>
+<small style="display: block">Selected value:{{ selectedValue3 }} </small>
+
+<h4>Select in read-only mode</h4>
+<fdp-select placeholder="Select an option" [value]="selectedValue4" [list]="option" [readonly]="true"> </fdp-select>
+<small style="display: block">Selected value: {{ selectedValue4 }}</small>

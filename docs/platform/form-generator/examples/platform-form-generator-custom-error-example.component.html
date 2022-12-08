@@ -1,0 +1,7 @@
+<fdp-form-generator
+    [formItems]="formItems"
+    mainTitle="Custom validation in Form Generator example"
+    (formCreated)="onFormCreated()"
+></fdp-form-generator>
+
+<fdp-button *ngIf="formCreated" (click)="submitForm()" type="submit" label="Submit form"></fdp-button>

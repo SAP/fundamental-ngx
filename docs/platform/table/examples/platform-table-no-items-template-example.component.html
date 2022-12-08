@@ -1,0 +1,25 @@
+<fdp-table [dataSource]="source">
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false">
+        <fdp-table-toolbar-actions>
+            <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>
+            <fdp-button label="Action Two" (click)="alert('Action Two')"></fdp-button>
+        </fdp-table-toolbar-actions>
+    </fdp-table-toolbar>
+
+    <fdp-column name="name" key="name" label="Name" align="start"> </fdp-column>
+
+    <fdp-column name="description" key="description" label="Description"> </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price" align="end"> </fdp-column>
+
+    <fdp-column name="status" key="status" label="Status" align="center"> </fdp-column>
+
+    <fdp-table-no-data-wrapper>
+        <figure fd-illustrated-message [svgConfig]="sceneConfig">
+            <figcaption fd-illustrated-message-figcaption>
+                <h3 fd-illustrated-message-title>No matching items found.</h3>
+                <p fd-illustrated-message-text>Check the filter settings.</p>
+            </figcaption>
+        </figure>
+    </fdp-table-no-data-wrapper>
+</fdp-table>

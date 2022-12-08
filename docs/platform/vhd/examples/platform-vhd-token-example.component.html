@@ -1,0 +1,28 @@
+<button
+    fd-button
+    fd-button
+    aria-label="Open value help dialog"
+    title="Open value help dialog"
+    glyph="value-help"
+    (click)="vhd.open()"
+    label="Open value help dialog"
+></button>
+
+<fdp-value-help-dialog
+    #vhd
+    dialogTitle="Custom token function"
+    uniqueKey="id"
+    tokenViewField="name"
+    [dataSource]="dataSource"
+    [tokenizerFn]="tokenizerFn"
+    (valueChange)="valueChange($event)"
+    headerId="fdp-vhd-header-3"
+>
+    <fdp-value-help-dialog-filter
+        *ngFor="let filter of filters; index as i"
+        [main]="i < 2"
+        [key]="filter.key"
+        [label]="filter.label"
+        [advanced]="filter.advanced || hasAdvanced"
+    ></fdp-value-help-dialog-filter>
+</fdp-value-help-dialog>

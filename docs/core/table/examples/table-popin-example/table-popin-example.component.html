@@ -1,0 +1,227 @@
+<div style="max-width: 450px; padding-bottom: 50px">
+    <h4 class="table-example-popin-title">Mobile Mode</h4>
+    <table
+        fd-table
+        [popIn]="true"
+        [noBorderX]="true"
+        [noBorderY]="true"
+        [responsive]="true"
+        aria-label="Pop In Mode on Responsive Table Mobile Mode"
+    >
+        <thead fd-table-header>
+            <tr fd-table-row>
+                <th fd-table-cell>Fruit Description</th>
+                <th fd-table-cell>Price</th>
+                <th fd-table-cell></th>
+            </tr>
+        </thead>
+        <tbody fd-table-body>
+            <ng-container *ngFor="let fruit of fruits">
+                <tr fd-table-row [main]="true" [activable]="true">
+                    <td fd-table-cell>
+                        <p fd-table-text [title]="true">{{ fruit.name }}</p>
+                        <p fd-table-text>{{ fruit.country }}</p>
+                    </td>
+                    <td fd-table-cell [fitContent]="true">
+                        {{ fruit.price }}
+                    </td>
+                    <td fd-table-cell [fitContent]="true" [noPadding]="true">
+                        <ng-container *ngIf="navigationArrow$ | async as navigationArrow">
+                            <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
+                        </ng-container>
+                    </td>
+                </tr>
+                <tr fd-table-row [secondary]="true">
+                    <td fd-table-cell colspan="100%">
+                        <p fd-table-text>
+                            <label fd-form-label>Status:</label>
+                            <span fd-object-status [status]="fruit.status">{{ fruit.statusName }}</span>
+                        </p>
+                        <p fd-table-text>
+                            <label fd-form-label>Date Of Expire:</label>
+                            {{ fruit.dateOfExpire }}
+                        </p>
+                        <p fd-table-text>
+                            <label fd-form-label>Description:</label>
+                            {{ fruit.description }}
+                        </p>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+
+<div style="max-width: 768px; padding-bottom: 50px">
+    <h4 class="table-example-popin-title">Tablet Mode</h4>
+    <table
+        fd-table
+        [popIn]="true"
+        [noBorderX]="true"
+        [noBorderY]="true"
+        [responsive]="true"
+        aria-label="Pop In Mode on Responsive Table Tablet Mode"
+    >
+        <thead fd-table-header>
+            <tr fd-table-row>
+                <th fd-table-cell>Fruit Description</th>
+                <th fd-table-cell>Price</th>
+                <th fd-table-cell>Status</th>
+                <th fd-table-cell>Date Of Expire</th>
+                <th fd-table-cell></th>
+            </tr>
+        </thead>
+        <tbody fd-table-body>
+            <ng-container *ngFor="let fruit of fruits">
+                <tr fd-table-row [main]="true" [activable]="true">
+                    <td fd-table-cell>
+                        <p fd-table-text [title]="true">{{ fruit.name }}</p>
+                        <p fd-table-text>{{ fruit.country }}</p>
+                    </td>
+                    <td fd-table-cell [fitContent]="true">
+                        {{ fruit.price }}
+                    </td>
+                    <td fd-table-cell [fitContent]="true">
+                        <span fd-object-status [status]="fruit.status">{{ fruit.statusName }}</span>
+                    </td>
+                    <td fd-table-cell [fitContent]="true">
+                        {{ fruit.dateOfExpire }}
+                    </td>
+                    <td fd-table-cell [fitContent]="true" [noPadding]="true">
+                        <ng-container *ngIf="navigationArrow$ | async as navigationArrow">
+                            <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
+                        </ng-container>
+                    </td>
+                </tr>
+                <tr fd-table-row [secondary]="true">
+                    <td fd-table-cell colspan="100%">
+                        <p fd-table-text>
+                            <label fd-form-label>Description: </label>
+                            {{ fruit.description }}
+                        </p>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+
+<div style="max-width: 1200px; padding-bottom: 50px">
+    <h4 class="table-example-popin-title">Desktop Mode</h4>
+    <table fd-table [noBorderX]="true" [responsive]="true" aria-label="Pop In Mode on Responsive Table Tablet Mode">
+        <thead fd-table-header>
+            <tr fd-table-row>
+                <th fd-table-cell>Name</th>
+                <th fd-table-cell>Price</th>
+                <th fd-table-cell>Country</th>
+                <th fd-table-cell>Status</th>
+                <th fd-table-cell>Date Of Expire</th>
+                <th fd-table-cell>Description</th>
+                <th fd-table-cell></th>
+            </tr>
+        </thead>
+        <tbody fd-table-body>
+            <ng-container *ngFor="let fruit of fruits">
+                <tr fd-table-row [main]="true" [activable]="true">
+                    <td fd-table-cell>
+                        {{ fruit.name }}
+                    </td>
+                    <td fd-table-cell>
+                        {{ fruit.country }}
+                    </td>
+                    <td fd-table-cell>
+                        {{ fruit.price }}
+                    </td>
+                    <td fd-table-cell>
+                        <span fd-object-status [status]="fruit.status">{{ fruit.statusName }}</span>
+                    </td>
+                    <td fd-table-cell>
+                        {{ fruit.dateOfExpire }}
+                    </td>
+                    <td fd-table-cell>
+                        {{ fruit.description }}
+                    </td>
+                    <td fd-table-cell [fitContent]="true" [noPadding]="true">
+                        <ng-container *ngIf="navigationArrow$ | async as navigationArrow">
+                            <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
+                        </ng-container>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+
+<div style="max-width: 450px; padding-bottom: 50px">
+    <h4 class="table-example-popin-title">Popin Mobile Mode with Checkboxes</h4>
+    <table
+        fd-table
+        [popIn]="true"
+        [noBorderX]="true"
+        [noBorderY]="true"
+        [responsive]="true"
+        aria-label="Popin Mobile Mode with Checkboxes"
+    >
+        <thead fd-table-header>
+            <tr fd-table-row>
+                <th fd-table-cell>
+                    <fd-checkbox
+                        aria-label="Select all"
+                        title="Select all"
+                        name="allCheckbox"
+                        [tristate]="true"
+                        [ngModel]="masterCheckbox"
+                        (ngModelChange)="selectMaster($event)"
+                    ></fd-checkbox>
+                </th>
+                <th fd-table-cell>Fruit Description</th>
+                <th fd-table-cell>Price</th>
+                <th fd-table-cell></th>
+            </tr>
+        </thead>
+        <tbody fd-table-body>
+            <ng-container *ngFor="let fruit of fruits; let ind = index">
+                <tr fd-table-row [main]="true" [attr.aria-selected]="fruit.checked">
+                    <td fd-table-cell>
+                        <fd-checkbox
+                            [attr.aria-label]="'Select row ' + (ind + 1)"
+                            [attr.title]="'Select row ' + (ind + 1)"
+                            name="firstCheckbox{{ fruit.name }}"
+                            [ngModel]="fruit.checked"
+                            (ngModelChange)="select(ind, $event)"
+                        ></fd-checkbox>
+                    </td>
+                    <td fd-table-cell>
+                        <p fd-table-text [title]="true">{{ fruit.name }}</p>
+                        <p fd-table-text>{{ fruit.country }}</p>
+                    </td>
+                    <td fd-table-cell [fitContent]="true">
+                        {{ fruit.price }}
+                    </td>
+                    <td fd-table-cell [fitContent]="true" [noPadding]="true">
+                        <ng-container *ngIf="navigationArrow$ | async as navigationArrow">
+                            <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
+                        </ng-container>
+                    </td>
+                </tr>
+                <tr fd-table-row [secondary]="true" [attr.aria-selected]="fruit.checked">
+                    <td fd-table-cell></td>
+                    <td fd-table-cell colspan="100%">
+                        <p fd-table-text>
+                            <label fd-form-label>Status:</label>
+                            <span fd-object-status [status]="fruit.status">{{ fruit.statusName }}</span>
+                        </p>
+                        <p fd-table-text>
+                            <label fd-form-label>Date Of Expire:</label>
+                            {{ fruit.dateOfExpire }}
+                        </p>
+                        <p fd-table-text>
+                            <label fd-form-label>Description:</label>
+                            {{ fruit.description }}
+                        </p>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

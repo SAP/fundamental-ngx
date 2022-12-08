@@ -1,0 +1,15 @@
+<a
+    fd-object-status
+    [clickable]="true"
+    label="Hover on me to see inline help"
+    [fd-inline-help-template]="templateRef"
+    placement="bottom"
+    aria-labelledby="tooltip-message1"
+></a>
+
+<ng-template #templateRef>
+    <div style="display: flex; align-items: center">
+        <fd-icon glyph="alert" size="l" style="margin-right: 0.25rem"></fd-icon> There can be placed everything.
+        <span id="tooltip-message1" style="display: none">There can be placed everything.</span>
+    </div>
+</ng-template>

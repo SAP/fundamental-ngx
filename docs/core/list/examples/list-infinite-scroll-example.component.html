@@ -1,0 +1,13 @@
+<fd-busy-indicator size="l" class="fd-busy-indicator-custom" [block]="true" [loading]="loading" ariaLive="off">
+    <ul
+        fd-list
+        fdInfiniteScroll
+        style="overflow-y: scroll; max-height: 250px"
+        [scrollOffset]="40"
+        (onScrollAction)="scrollHandler()"
+    >
+        <li fd-list-item *ngFor="let item of items">
+            {{ item }}
+        </li>
+    </ul>
+</fd-busy-indicator>

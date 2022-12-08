@@ -1,0 +1,38 @@
+.fd-overflow-layout.fd-avatar-group {
+    justify-content: start;
+    .fd-overflow-layout__item {
+        position: relative;
+        &:not(:first-child) {
+            fd-avatar {
+                margin-left: -1rem;
+            }
+        }
+        &:hover {
+            z-index: 20;
+        }
+    }
+
+    .fd-button {
+        height: 3rem;
+        max-height: 3rem;
+        min-height: 3rem;
+        min-width: 3rem;
+        font-size: 1.125rem;
+        border-radius: 25rem;
+        border-width: var(--fdAvatarGroup_MoreButton_Border);
+    }
+
+    .fd-overflow-layout__more {
+        margin-left: -1rem;
+    }
+}
+
+.fd-overflow-layout__popover-container--avatar-group {
+    max-height: 18.5rem;
+    .fd-popover__body-content {
+        padding: 0.75rem;
+        .fd-avatar {
+            margin: 0.25rem;
+        }
+    }
+}

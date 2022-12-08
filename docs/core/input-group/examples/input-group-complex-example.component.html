@@ -1,0 +1,35 @@
+<div fd-form-item>
+    <label
+        fd-form-label
+        for="input-group-complex-1"
+        id="fd-input-group-complex-label-1"
+        title="Input Group with complex button addon."
+        >Input Group with complex button addon.
+    </label>
+    <fd-input-group id="input-group-complex-1">
+        <input aria-labelledby="fd-input-group-complex-label-1" fd-input-group-input fd-form-control />
+        <span fd-input-group-addon [button]="true">
+            <button fd-button title="Calendar" glyph="calendar" fdType="transparent"></button>
+        </span>
+    </fd-input-group>
+</div>
+
+<br />
+
+<div fd-form-item>
+    <label
+        fd-form-label
+        for="input-group-complex-2"
+        id="fd-input-group-complex-label-2"
+        title="Input Group with complex span addon."
+        >Input Group with complex span addon.
+    </label>
+    <fd-input-group id="input-group-complex-2">
+        <input
+            aria-labelledby="fd-input-group-complex-label-2 fd-input-group-complex-addon-2"
+            fd-input-group-input
+            fd-form-control
+        />
+        <span id="fd-input-group-complex-addon-2" fd-input-group-addon>Addon</span>
+    </fd-input-group>
+</div>

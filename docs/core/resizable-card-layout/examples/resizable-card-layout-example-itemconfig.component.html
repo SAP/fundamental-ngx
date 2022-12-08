@@ -1,0 +1,199 @@
+<button fd-button (click)="openPage()">Click to open full screen</button>
+<div class="fd-docs-overlay-page" *ngIf="visible">
+    <fd-dynamic-page size="large" ariaLabel="Example Dynamic Page" [autoResponsive]="false">
+        <fd-dynamic-page-header
+            title="Resizable card layout with item config object."
+            subtitle="Here card configuration object is passed at card level."
+        >
+            <fd-breadcrumb>
+                <fd-breadcrumb-item>
+                    <a fd-link href="#">Men</a>
+                </fd-breadcrumb-item>
+                <fd-breadcrumb-item>
+                    <a fd-link href="#">Shoes</a>
+                </fd-breadcrumb-item>
+                <fd-breadcrumb-item>
+                    <a fd-link href="#">Running Shoes</a>
+                </fd-breadcrumb-item>
+                <fd-breadcrumb-item>
+                    <span>Jogging</span>
+                </fd-breadcrumb-item>
+            </fd-breadcrumb>
+
+            <fd-dynamic-page-global-actions>
+                <!-- global actions -->
+                <fd-toolbar fdType="transparent" [clearBorder]="true">
+                    <button
+                        fd-toolbar-item
+                        fd-button
+                        fdCompact
+                        fdType="positive"
+                        (click)="closePage()"
+                        label="Accept"
+                        title="Accept"
+                    ></button>
+                    <button
+                        fd-toolbar-item
+                        fd-button
+                        fdCompact
+                        fdType="negative"
+                        (click)="closePage()"
+                        label="Reject"
+                        title="Reject"
+                    ></button>
+                    <fd-toolbar-separator></fd-toolbar-separator>
+                </fd-toolbar>
+            </fd-dynamic-page-global-actions>
+            <fd-dynamic-page-layout-actions>
+                <!-- layout actions -->
+                <fd-toolbar fdType="transparent" [clearBorder]="true">
+                    <button fd-button fdType="transparent" aria-label="Resize" title="Resize">
+                        <i class="sap-icon--resize"></i>
+                    </button>
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        aria-label="Exit Fullscreen"
+                        (click)="closePage()"
+                        title="Exit Fullscreen"
+                    >
+                        <i class="sap-icon--exitfullscreen"></i>
+                    </button>
+                    <button fd-button fdType="transparent" aria-label="Close" (click)="closePage()" title="Close">
+                        <i class="sap-icon--decline"></i>
+                    </button>
+                </fd-toolbar>
+            </fd-dynamic-page-layout-actions>
+        </fd-dynamic-page-header>
+        <fd-dynamic-page-subheader [collapsible]="true" [pinnable]="true" [collapsed]="false">
+            <!-- collapsible header content goes here -->
+            <span
+                >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti architecto
+                perspiciatis, delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum consequuntur impedit
+                repellendus esse, facere autem optio consequatur nobis?</span
+            >
+        </fd-dynamic-page-subheader>
+        <fd-dynamic-page-content class="fd-docs-center-align" cdkScrollable>
+            <fd-resizable-card-layout (stepChange)="onStepChange($event)">
+                <fd-resizable-card-item [config]="layoutConfig[0]">
+                    <fd-card>
+                        <fd-card-header>
+                            <h2 fd-card-title>Card Title 1</h2>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <ng-container *ngFor="let data of card1Data">
+                                    <li fd-list-item>
+                                        <span fd-list-title> item {{ data }} </span>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </fd-resizable-card-item>
+
+                <fd-resizable-card-item [config]="layoutConfig[1]">
+                    <fd-card>
+                        <fd-card-header>
+                            <h2 fd-card-title>Card Title 2</h2>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <ng-container *ngFor="let data of card2Data">
+                                    <li fd-list-item>
+                                        <span fd-list-title> item {{ data }} </span>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </fd-resizable-card-item>
+
+                <fd-resizable-card-item [config]="layoutConfig[2]">
+                    <fd-card>
+                        <fd-card-header>
+                            <h2 fd-card-title>Card Title 3</h2>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <ng-container *ngFor="let data of card3Data">
+                                    <li fd-list-item>
+                                        <span fd-list-title> item {{ data }} </span>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </fd-resizable-card-item>
+
+                <fd-resizable-card-item [config]="layoutConfig[3]">
+                    <fd-card>
+                        <fd-card-header>
+                            <h2 fd-card-title>Card Title 4</h2>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <ng-container *ngFor="let data of card4Data">
+                                    <li fd-list-item>
+                                        <span fd-list-title> item {{ data }} </span>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </fd-resizable-card-item>
+
+                <fd-resizable-card-item [config]="layoutConfig[4]">
+                    <fd-card>
+                        <fd-card-header>
+                            <h2 fd-card-title>Card Title 5</h2>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <ng-container *ngFor="let data of card5Data">
+                                    <li fd-list-item>
+                                        <span fd-list-title> item {{ data }} </span>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </fd-resizable-card-item>
+
+                <fd-resizable-card-item [config]="layoutConfig[5]">
+                    <fd-card>
+                        <fd-card-header>
+                            <h2 fd-card-title>Card Title 6</h2>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <ng-container *ngFor="let data of card6Data">
+                                    <li fd-list-item>
+                                        <span fd-list-title> item {{ data }} </span>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </fd-resizable-card-item>
+
+                <fd-resizable-card-item [config]="layoutConfig[6]">
+                    <fd-card>
+                        <fd-card-header>
+                            <h2 fd-card-title>Card Title 7</h2>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <ng-container *ngFor="let data of card7Data">
+                                    <li fd-list-item>
+                                        <span fd-list-title> item {{ data }} </span>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </fd-resizable-card-item>
+            </fd-resizable-card-layout>
+        </fd-dynamic-page-content>
+    </fd-dynamic-page>
+</div>

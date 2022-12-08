@@ -1,0 +1,15 @@
+<label fd-form-label for="input-group-disabled" id="input-group-disabled-label">Disabled</label>
+<fdp-input-group
+    [id]="'input-group-disabled'"
+    [disabled]="true"
+    name="example"
+    ariaLabelledBy="input-group-disabled-label input-group-disabled-left-addon-aria-label-dollar"
+>
+    <fdp-input-group-addon>$</fdp-input-group-addon>
+    <fdp-input-group-input></fdp-input-group-input>
+    <fdp-input-group-addon>
+        <fdp-button label="Submit"></fdp-button>
+    </fdp-input-group-addon>
+</fdp-input-group>
+
+<span aria-hidden="true" style="display: none" id="input-group-disabled-left-addon-aria-label-dollar">Currency: $</span>

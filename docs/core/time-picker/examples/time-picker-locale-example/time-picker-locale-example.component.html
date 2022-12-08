@@ -1,0 +1,19 @@
+<div fd-form-item>
+    <label fd-form-label for="localeSelect">Locale option</label>
+    <fd-select
+        id="localeSelect"
+        (valueChange)="setLocale($event)"
+        placeholder="Select locale option"
+        [(value)]="locale"
+    >
+        <li fd-option *ngFor="let locale of locales" [value]="locale">{{ locale }}</li>
+    </fd-select>
+</div>
+<div fd-form-item>
+    <label fd-form-label for="localeTimePicker">Time</label>
+    <fd-time-picker id="localeTimePicker" [(ngModel)]="time" [spinnerButtons]="false"></fd-time-picker>
+</div>
+
+<br />
+Selected Time:
+<ng-container *ngIf="time"> {{ time.toDate() | date: 'shortTime' }} </ng-container>

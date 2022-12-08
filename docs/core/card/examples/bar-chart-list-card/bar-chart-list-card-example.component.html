@@ -1,0 +1,38 @@
+<fd-card cardType="list">
+    <fd-card-header [interactive]="false">
+        <h2 fd-card-title>Bar Chart List Card</h2>
+        <span fd-card-counter>4 of 10</span>
+    </fd-card-header>
+    <fd-card-content>
+        <ul fd-list [byline]="true">
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Contact A</div>
+                    <div fd-list-byline><fd-card-bar [value]="45"></fd-card-bar></div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Contract B</div>
+                    <div fd-list-byline><fd-card-bar [value]="91" color="#da5a1b"></fd-card-bar></div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Contract C</div>
+                    <div fd-list-byline>
+                        <fd-card-bar [value]="27" color="#c67a0c"></fd-card-bar>
+                    </div>
+                </div>
+            </li>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-itle>Contract D</div>
+                    <div fd-list-byline>
+                        <fd-card-bar [value]="73" color="#358a4d"></fd-card-bar>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </fd-card-content>
+</fd-card>

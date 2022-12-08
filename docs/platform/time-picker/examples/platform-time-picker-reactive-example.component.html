@@ -1,0 +1,88 @@
+<fdp-form-group [formGroup]="timePickerForm" (onSubmit)="onSubmit()">
+    <fdp-form-field
+        #ffl1
+        id="24-hour"
+        [rank]="1"
+        [required]="true"
+        placeholder="hh:mm:ss"
+        [validators]="requiredTimeValidator"
+        label="24-Hour Time Picker:"
+    >
+        <fdp-time-picker
+            name="24-hour"
+            [formControl]="ffl1.formControl"
+            [displayFormat]="displayFormat"
+        ></fdp-time-picker>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #ffl2
+        id="12-hour"
+        [rank]="1"
+        [required]="true"
+        placeholder="hh:mm:ss"
+        [validators]="requiredTimeValidator"
+        label="12-Hour Time Picker:"
+    >
+        <fdp-time-picker name="12-hour" [meridian]="true" [formControl]="ffl2.formControl"></fdp-time-picker>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #ffl3
+        id="without-seconds"
+        [rank]="1"
+        [required]="true"
+        placeholder="hh:mm"
+        [validators]="requiredTimeValidator"
+        label="Time Picker Without Seconds:"
+    >
+        <fdp-time-picker
+            name="without-seconds"
+            [displaySeconds]="false"
+            [formControl]="ffl3.formControl"
+        ></fdp-time-picker>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #ffl4
+        id="compact"
+        [rank]="1"
+        [required]="true"
+        placeholder="hh:mm:ss"
+        [validators]="requiredTimeValidator"
+        label="Compact Time Picker:"
+    >
+        <fdp-time-picker name="compact" fdCompact [formControl]="ffl4.formControl"></fdp-time-picker>
+    </fdp-form-field>
+
+    <fdp-form-field
+        id="nullValidity"
+        [rank]="1"
+        [required]="true"
+        placeholder="hh:mm:ss"
+        [validators]="requiredTimeValidator"
+        label="Null Validity:"
+    >
+        <fdp-time-picker name="nullValidity" [allowNull]="false" formControlName="nullValidity"></fdp-time-picker>
+
+        <br />
+        <br />
+        <fd-segmented-button>
+            <button fd-button label="Set To Null" (click)="setNull()"></button>
+            <button fd-button label="Set Valid Time" (click)="setValid()"></button>
+        </fd-segmented-button>
+    </fdp-form-field>
+
+    <fdp-form-field id="disableExample" [rank]="1" placeholder="hh:mm:ss" label="Disabled Time Picker:">
+        <fdp-time-picker name="disableExample" formControlName="disableExample"></fdp-time-picker>
+    </fdp-form-field>
+
+    <fdp-form-field id="submitBtn" [rank]="8">
+        <button fd-button name="submitBtn" (click)="onSubmit()">Submit</button>
+    </fdp-form-field>
+    <ng-template #i18n let-errors>
+        <span *ngIf="errors.required"> Value is required </span>
+    </ng-template>
+</fdp-form-group>
+
+<span>form status: {{ timePickerForm?.valid }}</span>

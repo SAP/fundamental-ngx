@@ -1,0 +1,85 @@
+Cozy Split Menu Button:
+<ng-container fdCozy>
+    <fdp-split-menu-button
+        [menu]="menu1"
+        [buttonLabel]="label1"
+        [title]="label1"
+        icon="world"
+        type="standard"
+        title="Default behavior for split menu button"
+        menuTitle="More options"
+        [fixedWidth]="false"
+        (primaryButtonClick)="onPrimaryButtonClick1()"
+    >
+    </fdp-split-menu-button>
+    <fdp-menu #menu1 xPosition="after">
+        <fdp-menu-item (itemSelect)="onItemSelect1('Option 1')">Option 1</fdp-menu-item>
+        <fdp-menu-item (itemSelect)="onItemSelect1('Option 2')">Option 2</fdp-menu-item>
+        <fdp-menu-item (itemSelect)="onItemSelect1('Option 3')">Option 3</fdp-menu-item>
+    </fdp-menu>
+</ng-container>
+<br />
+selected value: {{ selectedItem1 }} <br /><br />
+
+Compact Split Menu Button:
+<!--Although, it could be also applied by wrapping both elements inside ng-content[fdCompact]-->
+<fdp-split-menu-button
+    fdCompact
+    [menu]="menu2"
+    [buttonLabel]="label2"
+    [title]="label2"
+    icon="world"
+    type="standard"
+    title="option with longer text gets truncated"
+    menuTitle="More options"
+    [fixedWidth]="false"
+    (primaryButtonClick)="onPrimaryButtonClick2()"
+>
+</fdp-split-menu-button>
+<fdp-menu #menu2 xPosition="after" fdCompact>
+    <fdp-menu-item (itemSelect)="onItemSelect2('Option 1')">Option 1</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect2('Option 2 with long text')">Option 2 with long text</fdp-menu-item>
+</fdp-menu>
+<br />
+selected value: {{ selectedItem2 }} <br /><br />
+
+Split Menu Button with only Icon and Without icon & text. fixedWidth=false.
+<br />
+<fdp-split-menu-button
+    [menu]="menu3"
+    icon="world"
+    [buttonLabel]="label3"
+    [title]="title3"
+    menuTitle="More options"
+    [fixedWidth]="false"
+    ariaLabel="Split button with icon"
+    type="standard"
+    (primaryButtonClick)="onPrimaryButtonClick3()"
+>
+</fdp-split-menu-button>
+<fdp-menu #menu3 xPosition="after">
+    <fdp-menu-item (itemSelect)="onItemSelect3('')">Option 1 with blank value</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect3('Option 2 with text')">Option 2 with text</fdp-menu-item>
+</fdp-menu>
+<br />
+selected value: {{ selectedItem3 }}
+
+<h2>Disabled split menu button</h2>
+<fdp-split-menu-button
+    [menu]="menu4"
+    icon="world"
+    [buttonLabel]="label3"
+    [title]="title3"
+    menuTitle="More options"
+    [fixedWidth]="false"
+    ariaLabel="Split button with icon"
+    type="standard"
+    [disabled]="true"
+    (primaryButtonClick)="onPrimaryButtonClick3()"
+>
+</fdp-split-menu-button>
+<fdp-menu #menu4 xPosition="after">
+    <fdp-menu-item (itemSelect)="onItemSelect3('')">Option 1 with blank value</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect3('Option 2 with text')">Option 2 with text</fdp-menu-item>
+</fdp-menu>
+<br />

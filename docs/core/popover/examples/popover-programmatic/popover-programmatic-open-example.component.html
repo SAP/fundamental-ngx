@@ -1,0 +1,18 @@
+<fd-popover
+    [(isOpen)]="isOpen"
+    [triggers]="[]"
+    [closeOnOutsideClick]="false"
+    [noArrow]="false"
+    placement="bottom"
+    title="photo 1"
+>
+    <fd-popover-control>
+        <fd-avatar size="s" [circle]="true" ariaLabel="photo 1" image="http://picsum.photos/id/1018/400"></fd-avatar>
+    </fd-popover-control>
+    <fd-popover-body>
+        <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+    </fd-popover-body>
+</fd-popover>
+
+<button fd-button label="Open Popover" (click)="this.isOpen = true"></button>
+<button fd-button label="Close Popover" (click)="this.isOpen = false"></button>

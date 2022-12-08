@@ -1,0 +1,80 @@
+<main class="fd-page">
+    <div *ngIf="true" class="fd-page__content fd-has-background-color-neutral-2">
+        <fdp-form-group #fg1 [formGroup]="form" [object]="data">
+            <fdp-form-field
+                #ff1
+                id="basicTextarea"
+                label="Basic Textarea with Platform Forms"
+                placeholder="Start entering detailed description"
+                hint="This is tooltip help"
+                [rank]="10"
+                hintPlacement="left"
+            >
+                <fdp-textarea name="basicTextarea" [formControl]="ff1.formControl"></fdp-textarea>
+            </fdp-form-field>
+
+            <fdp-form-field
+                #ff2
+                id="readonlyDescription"
+                label="Readonly Textarea"
+                placeholder="Start entering detailed description"
+                hint="This is tooltip help"
+                [rank]="10"
+                hintPlacement="left"
+            >
+                <fdp-textarea name="readonlyDescription" [formControl]="ff2.formControl" [readonly]="true">
+                </fdp-textarea>
+            </fdp-form-field>
+
+            <fdp-form-field
+                #ff3
+                id="disabledDescription"
+                label="Disabled Textarea"
+                placeholder="Start entering detailed description"
+                hint="This is tooltip help"
+                [rank]="10"
+                hintPlacement="left"
+            >
+                <fdp-textarea name="disabledDescription" [disabled]="true" value="this is a disabled textarea">
+                </fdp-textarea>
+            </fdp-form-field>
+
+            <fdp-form-field
+                #ff4
+                id="compactTextarea"
+                label="Compact Textarea"
+                placeholder="Start entering detailed description"
+                hint="This is tooltip help"
+                [rank]="10"
+                hintPlacement="left"
+            >
+                <fdp-textarea name="compactTextarea" [formControl]="ff4.formControl" fdCompact> </fdp-textarea>
+            </fdp-form-field>
+        </fdp-form-group>
+
+        <div fd-form-item>
+            <label fd-form-label for="textarea-1">Textarea without Platform Forms</label>
+            <fdp-textarea
+                [id]="'textarea-1'"
+                name="textarea-1"
+                placeholder="write something here"
+                [maxLength]="10"
+                [showExceededText]="true"
+                [growing]="true"
+                [growingMaxLines]="5"
+                [cols]="10"
+                wrapType="soft"
+                #textarea
+            >
+            </fdp-textarea>
+            <fd-form-message
+                *ngIf="textarea.value && textarea.value.length > 10"
+                type="warning"
+                aria-live="assertive"
+                aria-atomic="true"
+                >This is an example warning when used without forms.
+            </fd-form-message>
+        </div>
+        <br />
+    </div>
+</main>

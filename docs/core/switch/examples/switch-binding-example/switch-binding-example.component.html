@@ -1,0 +1,16 @@
+<!-- Requires FormsModule -->
+<label fd-form-label> Switch 1 </label>
+<fd-switch [(ngModel)]="firstSwitch"></fd-switch>
+
+<!-- Does not require FormsModule -->
+<label fd-form-label> Switch 2 </label>
+<fd-switch [(checked)]="secondSwitch"></fd-switch>
+
+<button fd-button label="Switch Both" (click)="switchBoth()"></button>
+<button fd-button label="Switch 1" (click)="switchOne()"></button>
+<button fd-button label="Switch 2" (click)="switchTwo()"></button>
+
+<div aria-live="polite" style="margin-top: 15px">
+    Switch 1: {{ firstSwitch }} <br />
+    Switch 2: {{ secondSwitch }} <br />
+</div>

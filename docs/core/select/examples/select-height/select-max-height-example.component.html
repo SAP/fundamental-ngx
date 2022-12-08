@@ -1,0 +1,4 @@
+<fd-select placeholder="Select an option" [(value)]="selectedValue" maxHeight="250px">
+    <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+</fd-select>
+<small style="display: block">Selected value: {{ selectedValue }}</small>

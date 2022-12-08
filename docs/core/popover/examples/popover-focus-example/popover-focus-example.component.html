@@ -1,0 +1,24 @@
+<fd-popover [closeOnEscapeKey]="true" [focusTrapped]="true" [focusAutoCapture]="true">
+    <fd-popover-control>
+        <button fd-button>Trigger</button>
+    </fd-popover-control>
+    <fd-popover-body style="min-width: 400px">
+        <div fd-popover-body-header>
+            <div fd-bar barDesign="header">
+                <div fd-bar-left>
+                    <fd-button-bar glyph="navigation-left-arrow" fdType="standard" ariaLabel="Back"></fd-button-bar>
+                    <fd-bar-element>Header</fd-bar-element>
+                </div>
+            </div>
+        </div>
+        <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+        <div fd-popover-body-footer>
+            <div fd-bar barDesign="footer" [cozy]="true">
+                <div fd-bar-right>
+                    <fd-button-bar label="Save" fdType="emphasized"></fd-button-bar>
+                    <fd-button-bar label="Cancel"></fd-button-bar>
+                </div>
+            </div>
+        </div>
+    </fd-popover-body>
+</fd-popover>

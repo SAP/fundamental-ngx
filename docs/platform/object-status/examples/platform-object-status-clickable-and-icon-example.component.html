@@ -1,0 +1,49 @@
+<fdp-object-status
+    status="negative"
+    glyph="message-information"
+    [clickable]="true"
+    (objectStatusClick)="showObjectStatus()"
+    label="Negative"
+    ariaLabel="Object status Negative Clickable"
+></fdp-object-status>
+<fdp-object-status
+    status="critical"
+    glyph="message-warning"
+    [clickable]="true"
+    (objectStatusClick)="showObjectStatus()"
+    label="Critical"
+    ariaLabel="Object status Critical Clickable"
+></fdp-object-status>
+<fdp-object-status
+    status="positive"
+    glyph="message-success"
+    [clickable]="true"
+    (objectStatusClick)="showObjectStatus()"
+    label="Positive"
+    ariaLabel="Object status Positive Clickable"
+></fdp-object-status>
+<fdp-object-status
+    status="informative"
+    glyph="message-information"
+    [clickable]="true"
+    (objectStatusClick)="showObjectStatus()"
+    label="Informative"
+    ariaLabel="Object status Informative Clickable"
+></fdp-object-status>
+<fdp-object-status
+    [clickable]="true"
+    (objectStatusClick)="showObjectStatus()"
+    label="Default"
+    ariaLabel="Object status Default Clickable"
+></fdp-object-status>
+<br />
+<br />
+<ng-container *ngFor="let item of items">
+    <fdp-object-status
+        [indicationColor]="item"
+        [label]="'Indication Color' + item"
+        [clickable]="true"
+        (objectStatusClick)="showAlert(item)"
+        [ariaLabel]="'Object status Indication Color' + item + 'Clickable'"
+    ></fdp-object-status>
+</ng-container>

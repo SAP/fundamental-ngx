@@ -1,0 +1,34 @@
+<fdp-form-group #fg>
+    <fdp-form-field
+        #ffl1
+        label="File Uploader Compact"
+        id="input2"
+        name="compactFileUploader"
+        [rank]="1"
+        placeholder="Field placeholder text"
+    >
+        <fdp-file-uploader
+            fdCompact
+            id="input1-compact"
+            name="compactFileUploader"
+            ariaLabel="Choose file"
+            ariaLabelledBy="input2"
+            placeholder="Choose File to upload"
+            buttonLabel="Browse"
+            buttonAriaLabel="browse file"
+            accept=".png,.jpg,.jpeg"
+            [(ngModel)]="files"
+            [multiple]="true"
+            (selectionChange)="handleFileSelection($event)"
+        ></fdp-file-uploader>
+    </fdp-form-field>
+</fdp-form-group>
+<br /><br />
+
+Files Selected:
+<br />
+<span *ngFor="let file of this.files">
+    <span class="green">{{ file.name }} </span><br
+/></span>
+
+<br />

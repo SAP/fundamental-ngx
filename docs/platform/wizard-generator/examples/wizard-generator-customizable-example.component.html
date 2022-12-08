@@ -1,0 +1,96 @@
+<fdp-button (click)="openDialog()" label="Open customized wizard in dialog"></fdp-button>
+
+<ng-template let-goNext="goNext" #goNextTemplate>
+    <fdp-button
+        class="fd-bar__element"
+        fdCondensed
+        buttonType="emphasized"
+        label="Custom next button"
+        (click)="goNext()"
+    ></fdp-button>
+</ng-template>
+
+<ng-template let-goBack="goBack" #goBackTemplate>
+    <fdp-button
+        class="fd-bar__element"
+        fdCondensed
+        buttonType="ghost"
+        label="Custom back button"
+        (click)="goBack()"
+    ></fdp-button>
+</ng-template>
+
+<ng-template let-finish="finish" #finishTemplate>
+    <fdp-button
+        class="fd-bar__element"
+        fdCondensed
+        buttonType="emphasized"
+        label="Custom finish button"
+        (click)="finish()"
+    ></fdp-button>
+</ng-template>
+
+<ng-template let-cancel="cancel" #cancelTemplate>
+    <fdp-button
+        class="fd-bar__element"
+        fdCondensed
+        buttonType="ghost"
+        label="Custom cancel button"
+        (click)="cancel()"
+    ></fdp-button>
+</ng-template>
+
+<ng-template let-goNext="goNext" #reviewButtonTemplate>
+    <fdp-button
+        class="fd-bar__element"
+        fdCondensed
+        buttonType="emphasized"
+        label="Custom review button"
+        (click)="goNext()"
+    ></fdp-button>
+</ng-template>
+
+<ng-template #summaryStepTemplate let-steps="steps" let-editStep="editStep">
+    <ng-container *ngFor="let step of steps; trackBy: trackFn">
+        <h4 fd-title [headerSize]="4">{{ step.name }} step</h4>
+        <ng-container *ngFor="let group of step.forms">
+            <h4 fd-title [headerSize]="6">{{ group.title }} form</h4>
+            <fd-layout-grid style="margin-bottom: 2rem">
+                <div fdLayoutGridRow>
+                    <div [fdLayoutGridCol]="4" [colMd]="4" [colLg]="4" [colXl]="4">
+                        <div *ngFor="let item of group.items">
+                            <label fd-form-label> {{ item.label }}: </label>
+                        </div>
+                    </div>
+                    <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                        <div *ngFor="let item of group.items">
+                            <label fd-form-label>
+                                {{ item.value || '-' }}
+                            </label>
+                        </div>
+                    </div>
+                    <div [fdLayoutGridCol]="1" [colMd]="2" [colLg]="2" [colXl]="2">
+                        <fdp-link href="#" (click)="_editStep($event, step.id, editStep)"> Edit </fdp-link>
+                    </div>
+                </div>
+            </fd-layout-grid>
+        </ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template let-dialog let-dialogConfig="dialogConfig" #confirmationDialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <button fd-dialog-close-button (click)="dialog.dismiss()"></button>
+        </fd-dialog-header>
+
+        <fd-dialog-body> This is custom confirmation dialog. </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar fdType="emphasized" label="Yes" type="submit" (click)="dialog.close(true)"> </fd-button-bar>
+            <fd-button-bar fd-initial-focus label="No" (click)="dialog.dismiss()"> </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<p *ngIf="wizardValue">Wizard value: {{ wizardValue | json }}</p>

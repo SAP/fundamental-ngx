@@ -1,0 +1,74 @@
+<label fd-form-label>Default behavior:</label>
+<fd-split-button (primaryButtonClicked)="alert('primary button clicked')">
+    <fd-menu>
+        <li fd-menu-item (click)="alert('option1 clicked')">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+        <li fd-menu-item (click)="alert('option2 clicked')">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 2</span>
+            </div>
+        </li>
+    </fd-menu>
+</fd-split-button>
+
+<br /><br />
+
+<label fd-form-label>Additional Main Action:</label>
+<fd-split-button (primaryButtonClicked)="alert('primary button clicked')" [mainAction]="mainActionObject">
+    <fd-menu>
+        <li fd-menu-item (click)="alert('option1 clicked')">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+        <li fd-menu-item (click)="alert('option2 clicked')">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 2 with long text</span>
+            </div>
+        </li>
+    </fd-menu>
+</fd-split-button>
+
+<br /><br />
+
+<label fd-form-label>Constant Main Action:</label>
+<fd-split-button
+    (primaryButtonClicked)="alert('primary button clicked')"
+    [mainAction]="{ mainActionTitle: 'Primary Button', keepMainAction: true }"
+>
+    <fd-menu>
+        <li fd-menu-item (click)="alert('option1 clicked')">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+        <li fd-menu-item (click)="alert('option2 clicked')">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 2 with long text</span>
+            </div>
+        </li>
+    </fd-menu>
+</fd-split-button>
+
+<br /><br />
+
+<label fd-form-label>Button with Flexible Width</label>
+<fd-split-button (primaryButtonClicked)="alert('primary button clicked')" [fixedWidth]="false">
+    <fd-menu>
+        <li fd-menu-item (click)="alert('option1 clicked')">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 1</span>
+            </div>
+        </li>
+        <li fd-menu-item (click)="alert('option2 clicked')">
+            <div fd-menu-interactive>
+                <span fd-menu-title>Option 2 with long text</span>
+            </div>
+        </li>
+    </fd-menu>
+</fd-split-button>
+
+<br /><br />

@@ -1,0 +1,41 @@
+<fdp-page-footer [logo]="logo" [content]="content"></fdp-page-footer>
+<ng-template #logo>
+    <img src="/assets/images/logo-sap.svg" alt="" aria-label="sap icon Image" />
+</ng-template>
+
+<ng-template #content>
+    <div class="fd-page-footer__row">
+        <fdp-link
+            class="fd-page-footer__row-item"
+            id="fd-icon-link"
+            href="/"
+            [title]="'On click you will get to target page'"
+        >
+            <fd-icon glyph="chain-link"></fd-icon>
+            Supported Browser
+        </fdp-link>
+    </div>
+    <div class="fd-page-footer__row">
+        <fdp-link
+            class="fd-page-footer__row-item"
+            id="fd-img-link-1"
+            href="/"
+            [title]="'On click you will get to target page'"
+        >
+            <img class="fd-page-footer__row-image" src="https://picsum.photos/id/1021/50/50" />
+            Security Disclosure
+        </fdp-link>
+        <fdp-link
+            class="fd-page-footer__row-item"
+            id="fd-img-link-2"
+            href="/"
+            [title]="'On click you will get to target page'"
+        >
+            <img class="fd-page-footer__row-image" src="https://picsum.photos/id/1021/50/50" />
+            Privacy Statement
+        </fdp-link>
+    </div>
+    <div class="fd-page-footer__text">
+        <span class="fd-form-label"> 1992-2021 @copyright all right reserved.</span>
+    </div>
+</ng-template>

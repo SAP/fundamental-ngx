@@ -1,0 +1,40 @@
+<fdp-form-group #fg>
+    <fdp-form-field
+        #ffl1
+        label="File Uploader Types"
+        id="input1-types"
+        name="fileUploader-types"
+        [rank]="1"
+        placeholder="Field placeholder text"
+    >
+        <fdp-file-uploader
+            id="input1-types"
+            name="fileUploader-types"
+            ariaLabel="Choose file"
+            ariaLabelledBy="input1-types"
+            placeholder="Choose File to upload"
+            buttonLabel="Drag a .png file on me!"
+            buttonAriaLabel="Drag a .png file on me!"
+            accept=".png"
+            [(ngModel)]="files"
+            [multiple]="true"
+            (selectionChange)="handleFileSelection($event)"
+            (invalidFileChange)="handleInvalidFileSelection($event)"
+        ></fdp-file-uploader>
+    </fdp-form-field>
+</fdp-form-group>
+<br /><br />
+
+Files Selected:
+<br />
+<span *ngFor="let file of this.files">
+    <span class="green">{{ file.name }} </span><br
+/></span>
+
+<br />
+
+Invalid Files:
+<br />
+<span *ngFor="let file of invalidFiles">
+    <span class="red">{{ file.name }} </span><br />
+</span>

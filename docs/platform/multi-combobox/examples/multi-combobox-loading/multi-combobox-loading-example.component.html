@@ -1,0 +1,17 @@
+<fdp-form-group [noLabelLayout]="false">
+    <fdp-form-field id="combobox-loading" label="Combobox with loading">
+        <fd-busy-indicator [loading]="loading" ariaLabel="loading" title="Please Wait">
+            <fdp-multi-combobox
+                name="loading"
+                placeholder="Type some text..."
+                displayKey="name"
+                [dataSource]="dataSource"
+                (selectionChange)="onSelect($event)"
+                (onDataRequested)="onDataRequested()"
+                (onDataReceived)="onDataReceived()"
+                [selectedItems]="selectedItems"
+            ></fdp-multi-combobox>
+            <p>Selected: {{ selectedItems | json }}</p>
+        </fd-busy-indicator>
+    </fdp-form-field>
+</fdp-form-group>

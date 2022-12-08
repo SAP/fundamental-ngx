@@ -1,0 +1,72 @@
+<h3>Cozy multi-selection list</h3>
+<ul fd-list [selection]="true">
+    <li fd-list-item *ngFor="let item of cozyObject" [selected]="item.selected">
+        <fd-checkbox [(ngModel)]="item.selected"></fd-checkbox>
+        <span fd-list-title>
+            {{ item.label }}
+        </span>
+    </li>
+</ul>
+
+<h3>Compact multi-selection list</h3>
+
+<ul fd-list fdCompact [selection]="true">
+    <li fd-list-item *ngFor="let item of compactObject" [selected]="item.selected">
+        <fd-checkbox [(ngModel)]="item.selected" fdCompact></fd-checkbox>
+        <span fd-list-title>
+            {{ item.label }}
+        </span>
+    </li>
+</ul>
+
+<h3>Cozy single-selection list</h3>
+
+<ul fd-list [selection]="true">
+    <li fd-list-item [selected]="selectionValue === 'radio1'">
+        <fd-radio-button name="radio1" id="radio1" value="radio1" [(ngModel)]="selectionValue"></fd-radio-button>
+        <span fd-list-title> List item 1 </span>
+    </li>
+    <li fd-list-item [selected]="selectionValue === 'radio2'">
+        <fd-radio-button name="radio1" id="radio2" value="radio2" [(ngModel)]="selectionValue"></fd-radio-button>
+        <span fd-list-title> List item 2 </span>
+    </li>
+    <li fd-list-item [selected]="selectionValue === 'radio3'">
+        <fd-radio-button name="radio1" id="radio3" value="radio3" [(ngModel)]="selectionValue"></fd-radio-button>
+        <span fd-list-title> List item 3 </span>
+    </li>
+</ul>
+
+<h3>Compact single-selection list</h3>
+
+<ul fd-list [selection]="true" fdCompact>
+    <li fd-list-item [selected]="selectionValueTwo === 'radio1'">
+        <fd-radio-button
+            name="radio2"
+            id="radio12"
+            value="radio1"
+            fdCompact
+            [(ngModel)]="selectionValueTwo"
+        ></fd-radio-button>
+        <span fd-list-title> List item 1 </span>
+    </li>
+    <li fd-list-item [selected]="selectionValueTwo === 'radio2'">
+        <fd-radio-button
+            name="radio2"
+            id="radio22"
+            value="radio2"
+            fdCompact
+            [(ngModel)]="selectionValueTwo"
+        ></fd-radio-button>
+        <span fd-list-title> List item 2 </span>
+    </li>
+    <li fd-list-item [selected]="selectionValueTwo === 'radio3'">
+        <fd-radio-button
+            name="radio2"
+            id="radio32"
+            value="radio3"
+            fdCompact
+            [(ngModel)]="selectionValueTwo"
+        ></fd-radio-button>
+        <span fd-list-title> List item 3 </span>
+    </li>
+</ul>

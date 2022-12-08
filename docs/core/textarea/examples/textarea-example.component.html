@@ -1,0 +1,20 @@
+<h4 fd-form-header>Form Header</h4>
+<br />
+<div fd-form-item>
+    <label fd-form-label [colon]="true" for="textarea-11">Default textarea</label>
+    <textarea fd-form-control id="textarea-11" placeholder="Field placeholder text"></textarea>
+</div>
+<div fd-form-item>
+    <label fd-form-label [required]="true" for="textarea-12">Required textarea:</label>
+    <textarea fd-form-control id="textarea-12" placeholder="Field placeholder text" aria-required="true"></textarea>
+</div>
+<div fd-form-item>
+    <label fd-form-label [required]="true" for="textarea-13">Compact and Required textarea:</label>
+    <textarea
+        fd-form-control
+        id="textarea-13"
+        fdCompact
+        placeholder="Field placeholder text"
+        aria-required="true"
+    ></textarea>
+</div>

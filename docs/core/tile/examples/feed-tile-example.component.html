@@ -1,0 +1,51 @@
+<fd-tile [double]="true" type="feed">
+    <div fd-tile-header>
+        <h1 fd-tile-title>Feed Tile Title Text sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</h1>
+        <h2 fd-tile-subtitle>Feed Tile Subtitle Text</h2>
+    </div>
+    <div fd-tile-content [twoColumn]="true">
+        <div fd-tile-section>
+            <div fd-tile-content-text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt magna aliqua.
+            </div>
+            <div fd-tile-content-byline>About 1 minute ago.</div>
+        </div>
+        <div fd-tile-section>
+            <div fd-numeric-content>
+                <div fd-numeric-content-kpi-container>
+                    <div fd-numeric-content-kpi>35</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div fd-tile-footer>
+        <div fd-tile-footer-text>Footer</div>
+    </div>
+</fd-tile>
+
+<br />
+
+<fd-tile [double]="true" type="feed" size="s">
+    <div fd-tile-header>
+        <h1 fd-tile-title>Feed Tile Title Text sed do eiusmod</h1>
+        <h2 fd-tile-subtitle>Feed Tile Subtitle Text</h2>
+    </div>
+    <div fd-tile-content [twoColumn]="true">
+        <div fd-tile-section>
+            <div fd-tile-content-text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt magna aliqua.
+            </div>
+            <div fd-tile-content-byline>About 1 minute ago.</div>
+        </div>
+        <div fd-tile-section>
+            <div fd-numeric-content>
+                <div fd-numeric-content-kpi-container>
+                    <div fd-numeric-content-kpi state="negative">35</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div fd-tile-footer>
+        <div fd-tile-footer-text>Footer</div>
+    </div>
+</fd-tile>

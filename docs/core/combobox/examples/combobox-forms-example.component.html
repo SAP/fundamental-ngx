@@ -1,0 +1,51 @@
+<div class="examples-column">
+    <form [formGroup]="customForm">
+        <div fd-form-item>
+            <label fd-form-label [required]="true">Combobox with communication via Objects</label>
+            <fd-combobox
+                state="information"
+                [communicateByObject]="true"
+                placeholder="Type some text..."
+                formControlName="itemOnDropdownMode"
+                [required]="true"
+                [displayFn]="myDisplayFunction"
+                [dropdownValues]="dropdownValues"
+            >
+                <li fd-list-message type="information">More information</li>
+            </fd-combobox>
+            <fd-form-message type="information">More information</fd-form-message>
+        </div>
+    </form>
+
+    <div>
+        <small>
+            Touched: {{ customForm.controls.itemOnDropdownMode.touched }}<br />
+            Dirty: {{ customForm.controls.itemOnDropdownMode.dirty }}<br />
+            Json Value: {{ customForm.controls.itemOnDropdownMode.value | json }}
+        </small>
+    </div>
+
+    <form [formGroup]="customForm">
+        <div fd-form-item>
+            <label fd-form-label>Combobox with communication via displayed value</label>
+            <fd-combobox
+                state="information"
+                formControlName="item"
+                placeholder="Type some text..."
+                [displayFn]="myDisplayFunction"
+                [dropdownValues]="dropdownValues"
+            >
+                <li fd-list-message type="information">More information</li>
+            </fd-combobox>
+            <fd-form-message type="information">More information</fd-form-message>
+        </div>
+    </form>
+
+    <div>
+        <small>
+            Touched: {{ customForm.controls.item.touched }}<br />
+            Dirty: {{ customForm.controls.item.dirty }}<br />
+            Json Value: {{ customForm.controls.item.value | json }}
+        </small>
+    </div>
+</div>

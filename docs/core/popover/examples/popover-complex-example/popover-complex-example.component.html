@@ -1,0 +1,79 @@
+<div class="fd-docs-flex-display-helper">
+    <fd-popover>
+        <fd-popover-control>
+            <button fd-button label="Simple"></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover>
+        <fd-popover-control>
+            <button fd-button label="With Header"></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div fd-popover-body-header>
+                <div fd-bar [cozy]="true" id="popover-bar-header-1">
+                    <div fd-bar-left>
+                        <fd-bar-element>Cozy Header</fd-bar-element>
+                    </div>
+                </div>
+            </div>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover [focusTrapped]="true" [focusAutoCapture]="true">
+        <fd-popover-control>
+            <button fd-button label="With Header And Footer"></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div fd-popover-body-header>
+                <div fd-bar [cozy]="true" id="popover-bar-header-2">
+                    <div fd-bar-left>
+                        <fd-bar-element>Cozy Header</fd-bar-element>
+                    </div>
+                </div>
+            </div>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+            <div fd-popover-body-footer>
+                <div fd-bar barDesign="footer" [cozy]="true">
+                    <div fd-bar-right>
+                        <fd-button-bar label="Save" fdType="emphasized"></fd-button-bar>
+                        <fd-button-bar label="Cancel" fdType="standard"></fd-button-bar>
+                    </div>
+                </div>
+            </div>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover [focusTrapped]="true" [focusAutoCapture]="true">
+        <fd-popover-control>
+            <button fd-button label="With Header, SubHeader And Footer"></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div fd-popover-body-header>
+                <div fd-bar [cozy]="true" id="popover-bar-header-3">
+                    <div fd-bar-left>
+                        <fd-bar-element>Cozy Header</fd-bar-element>
+                    </div>
+                </div>
+                <div fd-bar [cozy]="true" id="popover-bar-header-4">
+                    <div fd-bar-middle>
+                        <fd-bar-element>Cozy SubHeader</fd-bar-element>
+                    </div>
+                </div>
+            </div>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+            <div fd-popover-body-footer>
+                <div fd-bar barDesign="footer" [cozy]="true">
+                    <div fd-bar-right>
+                        <fd-button-bar label="Save" fdType="emphasized"></fd-button-bar>
+                        <fd-button-bar label="Cancel" fdType="standard"></fd-button-bar>
+                    </div>
+                </div>
+            </div>
+        </fd-popover-body>
+    </fd-popover>
+</div>

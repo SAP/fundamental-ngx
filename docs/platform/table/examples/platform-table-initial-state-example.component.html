@@ -1,0 +1,63 @@
+<fdp-table
+    #table
+    [dataSource]="source"
+    [initialVisibleColumns]="['updatedOn', 'name', 'price', 'status']"
+    [initialSortBy]="[{ field: 'price.value', direction: sortDirectionEnum.ASC }]"
+    [initialFilterBy]="initialFilterBy"
+    [initialGroupBy]="[{ field: 'verified', direction: sortDirectionEnum.NONE, showAsColumn: true }]"
+>
+    <fdp-table-toolbar title="Order Items"></fdp-table-toolbar>
+
+    <fdp-column name="name" key="name" label="Name" [sortable]="true" [groupable]="true" [filterable]="true">
+    </fdp-column>
+
+    <fdp-column
+        name="description"
+        key="description"
+        label="Description"
+        [sortable]="true"
+        [groupable]="true"
+        [filterable]="true"
+    >
+    </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price" [sortable]="true" [groupable]="true" [filterable]="true">
+    </fdp-column>
+
+    <fdp-column name="verified" key="verified" label="Verified" [groupable]="true"> </fdp-column>
+
+    <fdp-column name="status" key="status" label="Status" [sortable]="true" [groupable]="true" [filterable]="true">
+    </fdp-column>
+</fdp-table>
+
+<!-- View Settings Dialog-->
+<fdp-table-view-settings-dialog [table]="table" [allowDisablingSorting]="false">
+    <fdp-table-view-settings-filter column="price" label="Price" [type]="filterTypeEnum.CUSTOM">
+        <ng-container *fdpViewSettingsFilterCustomDef="let model">
+            <fdp-form-group #fg1 columnLayout="XL1-L1-M1-S1" labelLayout="vertical">
+                <fdp-form-field label="Minimum Price">
+                    <fdp-input type="number" name="min" [(ngModel)]="model.min"></fdp-input>
+                </fdp-form-field>
+                <fdp-form-field label="Maximum Price">
+                    <fdp-input type="number" name="max" [(ngModel)]="model.max"></fdp-input>
+                </fdp-form-field>
+            </fdp-form-group>
+        </ng-container>
+    </fdp-table-view-settings-filter>
+
+    <fdp-table-view-settings-filter
+        column="status"
+        [type]="filterTypeEnum.MULTI"
+        label="Status"
+        [values]="statusFilteringValues"
+    >
+    </fdp-table-view-settings-filter>
+
+    <fdp-table-view-settings-filter
+        column="statusColor"
+        [type]="filterTypeEnum.SINGLE"
+        label="Status Color"
+        [values]="statusColorFilteringValues"
+    >
+    </fdp-table-view-settings-filter>
+</fdp-table-view-settings-dialog>

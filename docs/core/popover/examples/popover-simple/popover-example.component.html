@@ -1,0 +1,95 @@
+<div class="fd-docs-flex-display-helper">
+    <fd-popover title="photo 1 in circle">
+        <fd-popover-control>
+            <fd-avatar
+                size="s"
+                [circle]="true"
+                ariaLabel="photo 1 in circle"
+                image="http://picsum.photos/id/1018/400"
+            ></fd-avatar>
+        </fd-popover-control>
+        <fd-popover-body>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover placement="top" title="menu2">
+        <fd-popover-control>
+            <fd-icon glyph="menu2" ariaLabel="menu2"></fd-icon>
+        </fd-popover-control>
+        <fd-popover-body>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover placement="bottom" title="money-bills" [focusAutoCapture]="true" [focusTrapped]="true">
+        <fd-popover-control>
+            <fd-avatar size="m" glyph="money-bills" ariaLabel="money-bills" [colorAccent]="3"></fd-avatar>
+        </fd-popover-control>
+        <fd-popover-body style="min-width: 400px">
+            <div fd-popover-body-header id="popover-bar-simple-header-1">
+                <div fd-bar barDesign="header">
+                    <div fd-bar-left>
+                        <fd-button-bar glyph="navigation-left-arrow" fdType="standard" ariaLabel="Back"></fd-button-bar>
+                        <fd-bar-element>Header</fd-bar-element>
+                    </div>
+                </div>
+            </div>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover [focusTrapped]="true" [focusAutoCapture]="true">
+        <fd-popover-control>
+            <button fd-button label="Sample"></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div fd-popover-body-header id="popover-bar-simple-header-2">
+                <div fd-bar barDesign="header-with-subheader" [cozy]="true">
+                    <div fd-bar-left>
+                        <fd-bar-element>Cozy Header</fd-bar-element>
+                    </div>
+                </div>
+                <div fd-bar barDesign="subheader" [cozy]="true" id="popover-bar-simple-header-3">
+                    <div fd-bar-middle>
+                        <fd-bar-element [fullWidth]="true"
+                            >SubHeader Middle section with Full Width Element
+                        </fd-bar-element>
+                    </div>
+                </div>
+            </div>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+            <div fd-popover-body-footer>
+                <div fd-bar barDesign="footer" [cozy]="true">
+                    <div fd-bar-right>
+                        <fd-button-bar label="Save" fdType="emphasized"></fd-button-bar>
+                        <fd-button-bar label="Cancel"></fd-button-bar>
+                    </div>
+                </div>
+            </div>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover placement="bottom" title="circle photo">
+        <fd-popover-control>
+            <fd-avatar
+                size="s"
+                [circle]="true"
+                ariaLabel="circle photo"
+                image="https://picsum.photos/id/2/400/400"
+            ></fd-avatar>
+        </fd-popover-control>
+        <fd-popover-body>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover placement="bottom" [fixedPosition]="true" [noArrow]="false">
+        <fd-popover-control>
+            <button fd-button label="Fixed Position"></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+        </fd-popover-body>
+    </fd-popover>
+</div>

@@ -1,0 +1,183 @@
+<fdp-approval-flow
+    title="Basic Approval Flow Demo"
+    [value]="approvalProcess"
+    [userDetailsTemplate]="userDetailsTemplate"
+    [userDataSource]="userDataSource"
+    [watcherDataSource]="watcherDataSource"
+    [teamDataSource]="teamDataSource"
+    [checkDueDate]="checkDueDate"
+    [allowSendRemindersForStatuses]="sendReminderStatuses"
+    [isEditAvailable]="editModeEnabled"
+    [disableSaveButton]="disableSaveButton"
+    [disableExitButton]="disableExitButton"
+    (nodeClick)="nodeClick($event)"
+    (afterNodeAdd)="afterNodeAdd($event)"
+    (afterNodeEdit)="afterNodeEdit($event)"
+    (valueChange)="valueChanged($event)"
+    (sendReminders)="sendReminders($event)"
+>
+</fdp-approval-flow>
+
+<ng-template #userDetailsTemplate let-data="data">
+    <h4 style="margin-bottom: 1rem">Contact info</h4>
+
+    <p style="display: flex; flex-direction: column" *ngIf="data?.phone">
+        <span>Mobile</span>
+        <a [href]="'tel:' + data.phone">{{ data.phone }}</a>
+    </p>
+
+    <p style="display: flex; flex-direction: column" *ngIf="data?.phone">
+        <span>Phone</span>
+        <a [href]="'tel:' + data.phone">{{ data.phone }}</a>
+    </p>
+
+    <p style="display: flex; flex-direction: column" *ngIf="data?.email">
+        <span>E-mail</span>
+        <a [href]="'mailto:' + data.email">{{ data.email }}</a>
+    </p>
+
+    <h4 style="margin-top: 1.5rem; margin-bottom: 1rem">Company</h4>
+
+    <p style="display: flex; flex-direction: column">
+        <span>Name</span>
+        <span>Company A{{ data?.email }}</span>
+    </p>
+
+    <p style="display: flex; flex-direction: column">
+        <span>Address</span>
+        <span>481 West Street, Anytown OH, 83749, USA</span>
+    </p>
+</ng-template>
+
+<ng-template let-messageToast #reminderTemplate>
+    <ng-container *ngIf="messageToast.data.targets.length === 1; else multipleReceivers">
+        Reminder has been sent to {{ messageToast.data.targets[0].name }}
+    </ng-container>
+
+    <ng-template #multipleReceivers>
+        Reminder has been sent to {{ messageToast.data.targets.length }} members of
+        {{ messageToast.data.node.description }}
+    </ng-template>
+</ng-template>
+
+<!-- Playground code below, not related to the component itself -->
+
+<p>
+    Selected example:
+    <select [(ngModel)]="selectedExample" (ngModelChange)="changeExampleData()">
+        <option *ngFor="let example of examples" [value]="example">{{ example | titlecase }}</option>
+    </select>
+</p>
+<p>Enable "Edit mode": <input type="checkbox" [(ngModel)]="editModeEnabled" /></p>
+<p>Enable due date warnings: <input type="checkbox" [(ngModel)]="checkDueDate" /></p>
+<p>
+    Set all statuses to "Not Started":
+    <input type="checkbox" [(ngModel)]="setNotStartedStatuses" (ngModelChange)="setNotStarted()" />
+</p>
+<p>
+    Disable all node actions:
+    <input type="checkbox" [(ngModel)]="nodeActionsDisabled" (ngModelChange)="toggleNodeActions($event)" />
+</p>
+<p>Disable certain node actions:</p>
+<div>
+    <p>
+        <input
+            id="disableAddingNodeBefore"
+            [disabled]="nodeActionsDisabled"
+            type="checkbox"
+            [(ngModel)]="nodeActionsConfig.disableAddBefore"
+            (ngModelChange)="toggleSpecificNodeAction('disableAddBefore', $event)"
+        />
+        <label for="disableAddingNodeBefore">Disable adding before</label>
+    </p>
+
+    <p>
+        <input
+            id="disableAddingNodeAfter"
+            [disabled]="nodeActionsDisabled"
+            type="checkbox"
+            [(ngModel)]="nodeActionsConfig.disableAddAfter"
+            (ngModelChange)="toggleSpecificNodeAction('disableAddAfter', $event)"
+        />
+        <label for="disableAddingNodeAfter">Disable adding after</label>
+    </p>
+
+    <p>
+        <input
+            id="disableAddingNodeParallel"
+            [disabled]="nodeActionsDisabled"
+            type="checkbox"
+            [(ngModel)]="nodeActionsConfig.disableAddParallel"
+            (ngModelChange)="toggleSpecificNodeAction('disableAddParallel', $event)"
+        />
+        <label for="disableAddingNodeParallel">Disable adding parallel</label>
+    </p>
+
+    <p>
+        <input
+            id="disableEditingNode"
+            [disabled]="nodeActionsDisabled"
+            type="checkbox"
+            [(ngModel)]="nodeActionsConfig.disableEdit"
+            (ngModelChange)="toggleSpecificNodeAction('disableEdit', $event)"
+        />
+        <label for="disableEditingNode">Disable editing</label>
+    </p>
+
+    <p>
+        <input
+            id="disableRemovingNode"
+            [disabled]="nodeActionsDisabled"
+            type="checkbox"
+            [(ngModel)]="nodeActionsConfig.disableRemove"
+            (ngModelChange)="toggleSpecificNodeAction('disableRemove', $event)"
+        />
+        <label for="disableRemovingNode">Disable removing</label>
+    </p>
+</div>
+<p style="display: flex; align-items: center; flex-wrap: wrap">
+    Allow sending reminders to approvers with statuses:
+    <fd-multi-input
+        style="margin-left: 0.5rem"
+        fdCompact
+        [dropdownValues]="allStatuses"
+        [(ngModel)]="sendReminderStatuses"
+    ></fd-multi-input>
+</p>
+<p>Disable certain node actions for newly added nodes:</p>
+<div>
+    <p>
+        <input
+            id="disableAddingNodeBeforeForNewNodes"
+            [disabled]="nodeActionsDisabled"
+            type="checkbox"
+            [(ngModel)]="nodeActionsConfigForNewNodes.disableAddBefore"
+            (ngModelChange)="newNodeSettingsChange()"
+        />
+        <label for="disableAddingNodeBeforeForNewNodes">Disable adding before</label>
+    </p>
+
+    <p>
+        <input
+            id="disableAddingNodeAfterForNewNodes"
+            [disabled]="nodeActionsDisabled"
+            type="checkbox"
+            [(ngModel)]="nodeActionsConfigForNewNodes.disableAddAfter"
+            (ngModelChange)="newNodeSettingsChange()"
+        />
+        <label for="disableAddingNodeAfterForNewNodes">Disable adding after</label>
+    </p>
+
+    <p>
+        <input
+            id="disableAddingNodeParallelForNewNodes"
+            [disabled]="nodeActionsDisabled"
+            type="checkbox"
+            [(ngModel)]="nodeActionsConfigForNewNodes.disableAddParallel"
+            (ngModelChange)="newNodeSettingsChange()"
+        />
+        <label for="disableAddingNodeParallelForNewNodes">Disable adding parallel</label>
+    </p>
+</div>
+<p>Disable "Save" button: <input type="checkbox" [(ngModel)]="disableSaveButton" /></p>
+<p>Disable "Exit" button: <input type="checkbox" [(ngModel)]="disableExitButton" /></p>

@@ -1,0 +1,16 @@
+<fdp-table
+    [dataSource]="source"
+    selectionMode="multiple"
+    emptyTableMessage="No data found"
+    (rowSelectionChange)="onRowSelectionChange($event)"
+>
+    <fdp-table-toolbar title="Order Items" [hideItemCount]="false" [hideSearchInput]="true"> </fdp-table-toolbar>
+
+    <fdp-column name="name" key="name" label="Name" align="start"> </fdp-column>
+
+    <fdp-column name="description" key="description" label="Description"> </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price" align="end"> </fdp-column>
+
+    <fdp-column name="status" key="status" label="Status" align="center"> </fdp-column>
+</fdp-table>

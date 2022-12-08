@@ -1,0 +1,63 @@
+<fd-upload-collection>
+    <li
+        fd-list-item
+        fd-upload-collection-item
+        *ngFor="let file of files"
+        [fileName]="file.fileName"
+        [extension]="file.extension"
+        (deleteClicked)="deleteClicked($event, file)"
+        (fileNameChanged)="fileNameChanged($event)"
+    >
+        <span fd-list-thumbnail fd-upload-collection-thumbnail><fd-icon [glyph]="file.icon"></fd-icon></span>
+        <div fd-list-content>
+            <div fd-upload-collection-title-container>
+                <a href="#" fd-link fd-list-title fd-upload-collection-title></a>
+                <fd-upload-collection-form-item></fd-upload-collection-form-item>
+                <span
+                    *ngIf="file.marker1"
+                    fd-object-marker
+                    [glyph]="file.marker1"
+                    title="Favorite"
+                    aria-label="Favorite Icon"
+                ></span>
+                <span
+                    *ngIf="file.marker2"
+                    fd-object-marker
+                    [glyph]="file.marker2"
+                    title="Flag"
+                    aria-label="Favorite Flag"
+                ></span>
+            </div>
+            <div fd-upload-collection-description>
+                This is the file description
+                <span fd-upload-collection-text-separator></span>
+                This is an additional description
+            </div>
+            <div fd-upload-collection-status-group>
+                <span
+                    fd-object-status
+                    fd-upload-collection-status-item
+                    status="negative"
+                    label="Negative Object Status"
+                    title="Object status Negative"
+                    aria-label="Object status Negative"
+                ></span>
+                <span fd-upload-collection-text-separator></span>
+                <span
+                    fd-object-status
+                    fd-upload-collection-status-item
+                    status="positive"
+                    label="Positive Object Status"
+                    title="Object status Positive"
+                    aria-label="Object status Positive"
+                ></span>
+            </div>
+        </div>
+        <fd-upload-collection-button-group
+            [allowFileDeletion]="!!file.allowDelete"
+            [allowFileNameEdit]="!!file.allowEdit"
+            [disableFileDeletion]="!!file.disableDeletion"
+            [disableFileNameEdit]="!!file.disableEdit"
+        ></fd-upload-collection-button-group>
+    </li>
+</fd-upload-collection>

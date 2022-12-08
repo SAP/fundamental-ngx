@@ -1,0 +1,73 @@
+<fdp-smart-filter-bar [subject]="subject"></fdp-smart-filter-bar>
+<br />
+<h4 fd-title>Line Items</h4>
+<br />
+<fdp-table
+    fdp-smart-filter-bar-subject
+    #subject="fdp-smart-filter-bar-subject"
+    [dataSource]="source"
+    [trackBy]="trackBy"
+    emptyTableMessage="No data found"
+>
+    <fdp-column fdp-smart-filter-bar-field-definition name="name" key="name" label="Name" align="start"> </fdp-column>
+
+    <fdp-column fdp-smart-filter-bar-field-definition name="description" key="description" label="Description">
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [dataType]="dataTypeEnum.NUMBER"
+        name="price"
+        key="price.value"
+        label="Price"
+        [filterType]="filterTypeEnum.CUSTOM"
+        customFilterType="price-slider"
+        defaultSelected="true"
+        align="end"
+        hasOptions="true"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [filterType]="filterTypeEnum.MULTI"
+        name="status"
+        key="status"
+        label="Status"
+        align="center"
+        hasOptions="true"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [filterType]="filterTypeEnum.SINGLE"
+        name="statusColor"
+        key="statusColor"
+        label="Status color"
+        align="center"
+        hasOptions="true"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [dataType]="dataTypeEnum.DATE"
+        name="date"
+        key="date"
+        label="Date"
+        [filterType]="filterTypeEnum.CUSTOM"
+        customFilterType="date-renderer"
+        defaultSelected="true"
+    ></fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        [filterType]="filterTypeEnum.SINGLE"
+        [dataType]="dataTypeEnum.BOOLEAN"
+        name="verified"
+        key="verified"
+        label="Verified"
+        hasOptions="true"
+    ></fdp-column>
+</fdp-table>

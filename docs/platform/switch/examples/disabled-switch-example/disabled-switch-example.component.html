@@ -1,0 +1,23 @@
+<fdp-form-group [formGroup]="customForm">
+    <fdp-form-field id="switch-disabled" label="Default disabled Switch" [rank]="1">
+        <fdp-switch
+            name="switch-disabled"
+            ariaLabel="Switch disabled"
+            ariaLabelledBy="switch-disabled-label"
+            fdCozy
+            [semantic]="false"
+            [disabled]="true"
+        >
+        </fdp-switch>
+    </fdp-form-field>
+
+    <fdp-form-field id="form-switch-disabled" label="Form Default disabled Switch" [rank]="1">
+        <fdp-switch
+            name="form-switch-disabled"
+            ariaLabel="Form Switch disabled"
+            ariaLabelledBy="form-switch-disabled-label"
+            formControlName="fieldDisable"
+        >
+        </fdp-switch>
+    </fdp-form-field>
+</fdp-form-group>

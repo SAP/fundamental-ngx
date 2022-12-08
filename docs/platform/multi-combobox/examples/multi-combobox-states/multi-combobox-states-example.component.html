@@ -1,0 +1,68 @@
+<fdp-form-group [noLabelLayout]="false" mainTitle="Playground" columnLayout="XL2-L2-M1-S1">
+    <fdp-form-field id="multi-combobox-states" label="Select state" [column]="1">
+        <fdp-combobox
+            name="multi-combobox-states"
+            placeholder="Select state"
+            [dataSource]="states"
+            [value]="selectedState"
+            (selectionChange)="onSelectState($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+    <fdp-form-field id="multi-combobox-state-1" label="Selected state" [column]="2">
+        <fdp-multi-combobox
+            name="multi-combobox-state-1"
+            placeholder="Type some text..."
+            displayKey="name"
+            [state]="selectedState"
+            [stateMessage]="selectedState + ' state message'"
+            [dataSource]="dataSource"
+        >
+        </fdp-multi-combobox>
+    </fdp-form-field>
+</fdp-form-group>
+
+<fdp-form-group mainTitle="States" columnLayout="XL2-L2-M1-S1">
+    <fdp-form-field id="multi-combobox-state-success" label="Success state" [column]="1">
+        <fdp-multi-combobox
+            name="multi-combobox-state-success"
+            placeholder="Type some text..."
+            state="success"
+            stateMessage="Success state message"
+            displayKey="name"
+            [dataSource]="dataSource"
+        ></fdp-multi-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="multi-combobox-state-error" label="Error state" [column]="2">
+        <fdp-multi-combobox
+            name="multi-combobox-error-state"
+            placeholder="Type some text..."
+            state="error"
+            stateMessage="Error state message"
+            displayKey="name"
+            [dataSource]="dataSource"
+        ></fdp-multi-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="multi-combobox-state-warning" label="Warning state" [column]="1">
+        <fdp-multi-combobox
+            name="multi-combobox-warning-state"
+            placeholder="Type some text..."
+            state="warning"
+            stateMessage="Warning state message"
+            displayKey="name"
+            [dataSource]="dataSource"
+        ></fdp-multi-combobox>
+    </fdp-form-field>
+
+    <fdp-form-field id="multi-combobox-state-info" label="Information state" [column]="2">
+        <fdp-multi-combobox
+            name="multi-combobox-information-state"
+            placeholder="Type some text..."
+            state="information"
+            stateMessage="Information state message"
+            displayKey="name"
+            [dataSource]="dataSource"
+        ></fdp-multi-combobox>
+    </fdp-form-field>
+</fdp-form-group>

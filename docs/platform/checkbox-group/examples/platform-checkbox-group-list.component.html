@@ -1,0 +1,131 @@
+<h3>Reactive Form Examples:</h3>
+<h3>Checkboxes created from given list of values</h3>
+<p>Inline checkboxes</p>
+<fdp-form-group [formGroup]="form1">
+    <fdp-form-field #fl1 id="seasons" label="My favorite Seasons: " [rank]="1">
+        <fdp-checkbox-group
+            [list]="seasons"
+            name="fav-seasons"
+            [isInline]="true"
+            ariaLabel="My favorite Seasons"
+            [formControl]="fl1.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem">Seasons: {{ form1.controls.seasons?.value }}</span>
+<br />
+<br />
+
+<p>Pre-selection based on value passed</p>
+<fdp-form-group [formGroup]="form2" [object]="selectedPhones">
+    <fdp-form-field #fl2 id="phones" label="Phones interested in:" [rank]="1">
+        <fdp-checkbox-group
+            [list]="phonesList"
+            name="brands"
+            ariaLabel="Phones interested"
+            [formControl]="fl2.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem">Available brands: {{ form2.controls.phones?.value }}</span>
+<br />
+<br />
+
+<p>Pre-selection based on value passed from formGroup</p>
+<fdp-form-group [formGroup]="form3">
+    <fdp-form-field #fl4 id="sports1" label="Sports I Play:" [rank]="1">
+        <fdp-checkbox-group [list]="sports" name="sports" ariaLabel="Sports I Play" formControlName="sports">
+        </fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem">Sports: {{ form3.controls.sports?.value }}</span>
+<br />
+<br />
+
+<p>Disabled checkbox group</p>
+<fdp-form-group [formGroup]="form3">
+    <fdp-form-field #fl3 id="sportsDisabled" label="Disabled checkbox Group: " [disabled]="true" [rank]="1">
+        <fdp-checkbox-group [list]="sports" name="sports" ariaLabel="Disabled checkbox" [formControl]="fl3.formControl">
+        </fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<br />
+
+<h3>Checkbox value triggered by Action</h3>
+<form #actionForm="ngForm" [formGroup]="form4">
+    <fdp-form-group [formGroup]="form4">
+        <fdp-form-field #fl4 id="frameworks" label="My favorite frameworks:" [rank]="1">
+            <fdp-checkbox-group
+                [isInline]="false"
+                name="frameworks"
+                [list]="frameworks"
+                ariaLabel="My favorite frameworks"
+                [formControl]="fl4.formControl"
+            ></fdp-checkbox-group>
+        </fdp-form-field>
+
+        <fdp-form-field [rank]="2">
+            <fdp-button fdCompact type="submit" label="Submit"></fdp-button>
+        </fdp-form-field>
+
+        <ng-template #i18n let-errors>
+            <ng-container *ngIf="errors.required">
+                <span role="alert" aria-atomic="true">Value is required.</span>
+            </ng-container>
+        </ng-template>
+    </fdp-form-group>
+</form>
+<span style="margin-left: 2rem">Favorites: {{ form4.controls.frameworks?.value }}</span>
+
+<br />
+<br />
+
+<hr />
+
+<h3>Template Driven Form</h3>
+<h3>Checkboxes created from given list of values</h3>
+<p>Inline checkboxes</p>
+<fdp-form-group>
+    <fdp-form-field id="weather" label="My favorite Weather:" [rank]="1">
+        <fdp-checkbox-group
+            [list]="seasons"
+            name="seasons-fav"
+            [isInline]="true"
+            ariaLabel="My favorite Weather"
+            [(ngModel)]="countrySeason"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem">Weather: {{ countrySeason }}</span>
+<br />
+<br />
+
+<p>Pre-selection based on value passed</p>
+<fdp-form-group>
+    <fdp-form-field id="sports" label="Sports interested in:" [rank]="1">
+        <fdp-checkbox-group [list]="sports" name="sports" ariaLabel="Sports interested in" [(ngModel)]="selectedSports">
+        </fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem">Sports: {{ selectedSports }}</span>
+<br />
+<br />
+
+<p>Disabled checkbox group</p>
+<fdp-form-group>
+    <fdp-form-field id="sportsDisabled" label="Disabled checkbox Group:" [rank]="1">
+        <fdp-checkbox-group [list]="sports" name="sports" [disabled]="true" ariaLabel="Disabled checkbox">
+        </fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+
+<h3>Checkbox group outside form</h3>
+<fdp-checkbox-group
+    [list]="dishes"
+    name="fav-dishes"
+    [isInline]="true"
+    ariaLabel="My favorite dishes"
+    [(checked)]="selectedDishes"
+></fdp-checkbox-group>
+
+<span style="margin-left: 2rem">Selected dishes: {{ selectedDishes }}</span>

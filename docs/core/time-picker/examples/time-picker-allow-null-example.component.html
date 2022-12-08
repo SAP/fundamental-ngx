@@ -1,0 +1,10 @@
+<fd-time-picker [allowNull]="false" [formControl]="timeObject"> </fd-time-picker>
+<br />
+
+Selected Time:
+<ng-container *ngIf="timeObject.value">{{ timeObject.value?.toDate() | date: 'shortTime' }} </ng-container>
+
+<br />
+<br />
+<button fd-button label="Set To Null" (click)="setNull()"></button>
+<button fd-button label="Set Valid Time" (click)="setValid()"></button>

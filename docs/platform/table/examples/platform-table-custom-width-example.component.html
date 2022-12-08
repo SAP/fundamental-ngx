@@ -1,0 +1,16 @@
+<fdp-table [dataSource]="source" emptyTableMessage="No data found">
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false">
+        <fdp-table-toolbar-actions>
+            <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>
+            <fdp-button label="Action Two" (click)="alert('Action Two')"></fdp-button>
+        </fdp-table-toolbar-actions>
+    </fdp-table-toolbar>
+
+    <fdp-column name="name" key="name" label="Name" align="start" width="200px"> </fdp-column>
+
+    <fdp-column name="description" key="description" label="Description" width="30rem"> </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price" align="end" width="120px"> </fdp-column>
+
+    <fdp-column name="status" key="status" label="Status" align="center" width="20%"> </fdp-column>
+</fdp-table>

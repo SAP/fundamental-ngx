@@ -1,0 +1,10 @@
+<div
+    fdInfiniteScroll
+    (onScrollAction)="loadMoreElements()"
+    [scrollPercent]="80"
+    style="max-height: 120px; overflow-y: scroll; border: 1px solid black"
+>
+    <div *ngFor="let element of displayedElements" style="height: 30px">
+        {{ element.label }}
+    </div>
+</div>

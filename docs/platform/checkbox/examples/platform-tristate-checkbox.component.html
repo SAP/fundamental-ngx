@@ -1,0 +1,196 @@
+<h3>Reactive Form: TriState Checkbox With Value and Without Value</h3>
+<fdp-form-group [formGroup]="cities" [object]="citiesData" columnLayout="XL2-L2-M1-S1">
+    <fdp-form-field #paris id="paris" label="Paris" [column]="1" [rank]="1">
+        <fdp-checkbox
+            name="paris-cb"
+            [values]="{ trueValue: 'Yes' }"
+            [tristate]="true"
+            [tristateSelectable]="true"
+            [formControl]="paris.formControl"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #doha id="doha" label="Doha" [column]="1" [rank]="3">
+        <fdp-checkbox
+            name="doha-cb"
+            [values]="{ trueValue: 'Yes' }"
+            [tristate]="true"
+            [tristateSelectable]="true"
+            [formControl]="doha.formControl"
+        >
+        </fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #amsterdam id="amsterdam" label="Amsterdam" [column]="1" [rank]="5">
+        <fdp-checkbox
+            name="amsterdam-cb"
+            [values]="{ trueValue: 'Yes' }"
+            [tristate]="true"
+            [tristateSelectable]="true"
+            [formControl]="amsterdam.formControl"
+        >
+        </fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #venice id="venice" label="Venice" [column]="2" [rank]="2">
+        <fdp-checkbox
+            name="venice-cb"
+            [tristate]="true"
+            [tristateSelectable]="true"
+            [formControl]="venice.formControl"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #kyoto id="kyoto" label="Kyoto" [column]="2" [rank]="4">
+        <fdp-checkbox
+            name="kyoto-cb"
+            [tristate]="true"
+            [tristateSelectable]="true"
+            [formControl]="kyoto.formControl"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #barcelona id="barcelona" label="Barcelona" [column]="2" [rank]="6">
+        <fdp-checkbox
+            name="barcelona-cb"
+            [tristate]="true"
+            [tristateSelectable]="true"
+            [formControl]="barcelona.formControl"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #athens id="athens" label="athens: tristateSelectable false" [column]="1" [rank]="7">
+        <fdp-checkbox
+            name="athens-cb"
+            [values]="{ trueValue: 'Yes' }"
+            [tristate]="true"
+            [tristateSelectable]="false"
+            [formControl]="athens.formControl"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field #sydney id="sydney" label="Sydney: tristateSelectable false" [column]="2" [rank]="8">
+        <fdp-checkbox
+            name="sydney-cb"
+            [tristate]="true"
+            [tristateSelectable]="false"
+            [formControl]="sydney.formControl"
+        ></fdp-checkbox>
+    </fdp-form-field>
+</fdp-form-group>
+<div>form value: {{ cities.getRawValue() | json }}</div>
+<br />
+<br />
+<h3>Template Driven Form: TriState Checkbox With Value and Without Value</h3>
+<fdp-form-group columnLayout="XL2-L2-M1-S1">
+    <fdp-form-field id="havana" label="Havana" [column]="1" [rank]="1">
+        <fdp-checkbox
+            name="havana-cb"
+            [values]="{ trueValue: 'Yes' }"
+            [tristate]="true"
+            [tristateSelectable]="true"
+            [(ngModel)]="havana"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field id="beirut" label="Beirut" [column]="1" [rank]="3">
+        <fdp-checkbox
+            name="beirut-cb"
+            [values]="{ trueValue: 'Yes' }"
+            [tristate]="true"
+            [tristateSelectable]="true"
+            [(ngModel)]="beirut"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field id="budapest" label="Budapest" [column]="1" [rank]="5">
+        <fdp-checkbox
+            name="budapest-cb"
+            [values]="{ trueValue: 'Yes' }"
+            [tristate]="true"
+            [tristateSelectable]="true"
+            [(ngModel)]="budapest"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field id="lisbon" label="Lisbon" [column]="2" [rank]="2">
+        <fdp-checkbox name="lisbon-cb" [tristate]="true" [tristateSelectable]="true" [(ngModel)]="lisbon">
+        </fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field id="istanbul" label="Istanbul" [column]="2" [rank]="4">
+        <fdp-checkbox
+            name="istanbul-cb"
+            [tristate]="true"
+            [tristateSelectable]="true"
+            [(ngModel)]="istanbul"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field id="busan" label="Busan" [column]="2" [rank]="6">
+        <fdp-checkbox name="busan-cb" [tristate]="true" [tristateSelectable]="true" [(ngModel)]="busan"></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field id="dubrovnik" label="Dubrovnik: tristateSelectable false" [column]="1" [rank]="7">
+        <fdp-checkbox
+            name="dubrovnik-cb"
+            [values]="{ trueValue: 'Yes' }"
+            [tristate]="true"
+            [tristateSelectable]="false"
+            [(ngModel)]="dubrovnik"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field id="jaipur" label="Jaipur: tristateSelectable false" [column]="2" [rank]="7">
+        <fdp-checkbox name="jaipur-cb" [tristate]="true" [tristateSelectable]="false" [(ngModel)]="jaipur">
+        </fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field [column]="1">
+        <div>Havana: {{ havana }}</div>
+        <div>Beirut: {{ beirut }}</div>
+        <div>Budapest: {{ budapest }}</div>
+        <div>Dubrovnik: {{ dubrovnik }}</div>
+    </fdp-form-field>
+
+    <fdp-form-field [column]="2">
+        <div>Lisbon: {{ lisbon }}</div>
+        <div>Istanbul: {{ istanbul }}</div>
+        <div>Busan: {{ busan }}</div>
+        <div>Jaipur: {{ jaipur }}</div>
+    </fdp-form-field>
+</fdp-form-group>
+
+<h3>TriState Checkbox Used with Multiple checkboxes</h3>
+<form #form="ngForm" [formGroup]="registrationForm">
+    <fdp-form-group #fgtristate [formGroup]="registrationForm">
+        <fdp-form-field #ffr1 id="acceptAll" label="Accept All" [column]="1" [rank]="1">
+            <fdp-checkbox
+                name="all"
+                [tristate]="true"
+                [tristateSelectable]="false"
+                [checked]="false"
+                [formControl]="ffr1.formControl"
+            ></fdp-checkbox>
+        </fdp-form-field>
+    </fdp-form-group>
+    <div style="padding-left: 2rem; border: black solid">
+        <fdp-form-group class="padding-top:0%;" #checkboxes [formGroup]="agreementsFormGroup" [object]="choices">
+            <fdp-form-field #ffr2 id="termsAndConditions" label="I accept Terms and Conditions" [rank]="3">
+                <fdp-checkbox name="termsAndConditions-cb" [formControl]="ffr2.formControl"> </fdp-checkbox>
+            </fdp-form-field>
+
+            <fdp-form-field #ffr3 id="marketing" label="I want to receive Marketing Materials" [rank]="3">
+                <fdp-checkbox name="marketing-cb" [formControl]="ffr3.formControl"></fdp-checkbox>
+            </fdp-form-field>
+
+            <fdp-form-field #ffr4 id="newsletter" label="I want to sign for a Newsletter" [rank]="4">
+                <fdp-checkbox name="newsletter-cb" [formControl]="ffr4.formControl"> </fdp-checkbox>
+            </fdp-form-field>
+
+            <ng-template #i18n let-errors>
+                <ng-container *ngIf="errors.required"> value is required </ng-container>
+            </ng-template>
+        </fdp-form-group>
+    </div>
+</form>

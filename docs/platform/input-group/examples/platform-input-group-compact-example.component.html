@@ -1,0 +1,15 @@
+<label fd-form-label for="input-group-compact" id="input-group-compact-label">Compact</label>
+<fdp-input-group
+    [id]="'input-group-compact'"
+    name="example"
+    fdCompact
+    ariaLabelledBy="input-group-compact-label input-group-compact-left-addon-aria-label-dollar"
+>
+    <fdp-input-group-addon>$</fdp-input-group-addon>
+    <fdp-input-group-input></fdp-input-group-input>
+    <fdp-input-group-addon>
+        <fdp-button label="Submit"></fdp-button>
+    </fdp-input-group-addon>
+</fdp-input-group>
+
+<span aria-hidden="true" style="display: none" id="input-group-compact-left-addon-aria-label-dollar">Currency: $</span>

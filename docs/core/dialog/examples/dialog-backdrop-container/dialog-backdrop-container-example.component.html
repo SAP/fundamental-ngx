@@ -1,0 +1,31 @@
+<button fd-button label="Custom Backdrop" (click)="openCustomBackdrop(dialogTemplate)"></button>
+
+<button fd-button (click)="openInCustomContainer(dialogTemplate, customContainer)" label="Custom Container"></button>
+
+<button fd-button (click)="openStaticDialog(dialogTemplate, customContainer)" label="Static Dialog"></button>
+
+<div #customContainer style="margin-top: 0.5rem"></div>
+
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+    <fd-dialog [dialogRef]="dialog" [dialogConfig]="dialogConfig">
+        <fd-dialog-header>
+            <h1 id="fd-dialog-header-2" fd-title>Backdrop Configuration</h1>
+            <button fd-dialog-close-button (click)="dialog.dismiss()" title="close"></button>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <div id="fd-dialog-body-2" role="dialog">{{ dialog.data }}</div>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                fd-initial-focus
+                fdType="emphasized"
+                label="Close"
+                (click)="dialog.close()"
+                ariaLabel="Close Emphasized"
+            >
+            </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>

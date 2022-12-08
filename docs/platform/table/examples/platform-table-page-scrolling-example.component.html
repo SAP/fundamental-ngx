@@ -1,0 +1,17 @@
+<fdp-table
+    [dataSource]="source"
+    [pageScrolling]="true"
+    [pageSize]="50"
+    bodyHeight="20rem"
+    [loading]="!!(loading | async)"
+>
+    <fdp-table-toolbar title="Order Items"> </fdp-table-toolbar>
+
+    <fdp-column name="name" key="name" label="Name" align="start"> </fdp-column>
+
+    <fdp-column name="description" key="description" label="Description"> </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price" align="end"> </fdp-column>
+
+    <fdp-column name="status" key="status" label="Status" align="center"> </fdp-column>
+</fdp-table>

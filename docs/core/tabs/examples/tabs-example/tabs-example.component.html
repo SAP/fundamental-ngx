@@ -1,0 +1,65 @@
+<label fd-form-label>Simple Tabs Built by Passing Title Parameter</label>
+<fd-tab-list>
+    <fd-tab title="Link 1"> Content for tab 1 </fd-tab>
+    <fd-tab title="Link 2"> Content for tab 2 </fd-tab>
+    <fd-tab title="Link 3"> Content for tab 3 </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<label fd-form-label>Semantic Tabs Built by Passing Title Parameter</label>
+<fd-tab-list>
+    <fd-tab title="Success" tabState="success"> Content for tab 1 </fd-tab>
+    <fd-tab title="Error" tabState="error"> Content for tab 2 </fd-tab>
+    <fd-tab title="Warning" tabState="warning"> Content for tab 3 </fd-tab>
+    <fd-tab title="Information" tabState="information"> Content for tab 4 </fd-tab>
+    <fd-tab title="Neutral" tabState="neutral"> Content for tab 5 </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<label fd-form-label>Simple Tabs Built by Defining Template</label>
+<fd-tab-list>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-tag>Link 1</span>
+        </ng-template>
+        Content for tab 1
+    </fd-tab>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-tag>Link 2</span>
+        </ng-template>
+        Content for tab 2
+    </fd-tab>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-tag>Link 3</span>
+        </ng-template>
+        Content for tab 3
+    </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<label fd-form-label>Simple Tabs Built by defining own template and with routerLink</label>
+<nav fd-tab-nav>
+    <div fd-tab-item>
+        <a fd-tab-link [active]="rla1.isActive" [routerLink]="'tab1'" routerLinkActive #rla1="routerLinkActive">
+            <span fd-tab-tag>Link 1</span>
+        </a>
+    </div>
+    <div fd-tab-item>
+        <a fd-tab-link [active]="rla2.isActive" [routerLink]="'tab2'" routerLinkActive #rla2="routerLinkActive">
+            <span fd-tab-tag>Link 2</span>
+        </a>
+    </div>
+    <div fd-tab-item>
+        <a fd-tab-link [active]="rla3.isActive" [routerLink]="'tab3'" routerLinkActive #rla3="routerLinkActive">
+            <span fd-tab-tag>Link 3</span>
+        </a>
+    </div>
+</nav>

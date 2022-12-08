@@ -1,0 +1,22 @@
+<fdp-form-generator
+    [formItems]="formItemsAutoHintPlacement"
+    mainTitle="Hints will be automatically moved to the input if screen size is >= M breakpoint"
+>
+    <fdp-button type="submit" label="Submit form"></fdp-button>
+</fdp-form-generator>
+
+<fdp-form-generator [formItems]="formItemsLabelHintPlacement" mainTitle="Hints will be always on label">
+    <fdp-button type="submit" label="Submit form"></fdp-button>
+</fdp-form-generator>
+
+<fdp-form-generator [formItems]="formItemsHintOnGroupHeader" mainTitle="Group headers can have hints">
+    <fdp-button type="submit" label="Submit form"></fdp-button>
+</fdp-form-generator>
+
+<fdp-form-generator
+    [formItems]="formItemsHintOnGroupHeader"
+    [hint]="formGeneratorMainHint"
+    mainTitle="Form generator with hint"
+>
+    <fdp-button type="submit" label="Submit form"></fdp-button>
+</fdp-form-generator>

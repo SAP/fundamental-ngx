@@ -1,0 +1,75 @@
+<table fd-table aria-label="Focusable">
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell [focusable]="true" [activable]="true" [hoverable]="true">Every</th>
+            <th fd-table-cell [focusable]="true" [activable]="true" [hoverable]="true">Single</th>
+            <th fd-table-cell [focusable]="true" [activable]="true" [hoverable]="true">Cell</th>
+            <th fd-table-cell [focusable]="true" [activable]="true" [hoverable]="true">Can be</th>
+            <th fd-table-cell [focusable]="true" [activable]="true" [hoverable]="true">Focused</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <tr fd-table-row [focusable]="true" *ngFor="let item of [0, 1, 2, 3, 4, 5]">
+            <td fd-table-cell>Whole</td>
+            <td fd-table-cell>Row</td>
+            <td fd-table-cell>Can also</td>
+            <td fd-table-cell>Be</td>
+            <td fd-table-cell>Focused</td>
+        </tr>
+    </tbody>
+</table>
+
+<br />
+
+<span
+    >It's also possible to set <code>[allCellsFocusable]="true"</code> in order to not apply the input to each cell
+    seperately
+</span>
+
+<table fd-table aria-label="Default" [allCellsFocusable]="true">
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <tr *ngFor="let row of tableRows" fd-table-row>
+            <td fd-table-cell>
+                <a fd-link href="#">{{ row.column1 }}</a>
+            </td>
+            <td fd-table-cell>
+                <p fd-table-text maxWidth="250px" [noWrap]="true">
+                    <fd-step-input [value]="0" inputId="default-input"></fd-step-input>
+                </p>
+            </td>
+            <td fd-table-cell>
+                <p fd-table-text maxWidth="250px">
+                    {{ row.column3 }}
+                </p>
+            </td>
+            <td fd-table-cell>{{ row.date }}</td>
+            <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
+            <td fd-table-cell>
+                <fd-split-button glyph="menu">
+                    <fd-menu>
+                        <li fd-menu-item>
+                            <div fd-menu-interactive>
+                                <span fd-menu-title>Option 1</span>
+                            </div>
+                        </li>
+                        <li fd-menu-item>
+                            <div fd-menu-interactive>
+                                <span fd-menu-title>Option 2</span>
+                            </div>
+                        </li>
+                    </fd-menu>
+                </fd-split-button>
+            </td>
+        </tr>
+    </tbody>
+</table>

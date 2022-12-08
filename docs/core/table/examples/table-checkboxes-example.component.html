@@ -1,0 +1,150 @@
+<span>Table With Checkbox Cozy Mode</span>
+<table fd-table fdCozy aria-label="With Checkboxes Cozy Mode">
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>
+                <fd-checkbox
+                    aria-label="Select all"
+                    title="Select all"
+                    [tristate]="true"
+                    [ngModel]="checkboxValue"
+                    (ngModelChange)="selectAll($event, 'cozy')"
+                ></fd-checkbox>
+            </th>
+            <th fd-table-cell>Column 1</th>
+            <th fd-table-cell>Column 2</th>
+            <th fd-table-cell>Column 3</th>
+            <th fd-table-cell>Date</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <tr *ngFor="let row of tableRows; let i = index" fd-table-row [attr.aria-selected]="row.checked">
+            <td fd-table-cell>
+                <fd-checkbox
+                    [attr.aria-label]="'Select row ' + (i + 1)"
+                    [attr.title]="'Select row ' + (i + 1)"
+                    [value]="row.checked"
+                    (click)="select(i, $event, 'cozy')"
+                ></fd-checkbox>
+            </td>
+            <td fd-table-cell>
+                <a fd-link href="#">{{ row.column1 }}</a>
+            </td>
+            <td fd-table-cell>
+                <span fd-table-text>{{ row.column2 }}</span>
+            </td>
+            <td fd-table-cell>
+                <span fd-table-text>{{ row.column3 }}</span>
+            </td>
+            <td fd-table-cell>
+                <span fd-table-text>{{ row.date }}</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<br />
+
+<span>Table With Checkbox Compact Mode</span>
+<table fd-table fdCompact aria-label="With Checkboxes Compact Mode">
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>
+                <fd-checkbox
+                    aria-label="Select all"
+                    title="Select all"
+                    [tristate]="true"
+                    [ngModel]="checkboxValueCompact"
+                    (ngModelChange)="selectAll($event, 'compact')"
+                ></fd-checkbox>
+            </th>
+            <th fd-table-cell>Column 1</th>
+            <th fd-table-cell>Column 2</th>
+            <th fd-table-cell>Column 3</th>
+            <th fd-table-cell>Date</th>
+            <th fd-table-cell>Type</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <tr
+            *ngFor="let row of tableRowsCompact; let i = index"
+            fd-table-row
+            [attr.aria-selected]="tableRowsCompact[i].checked"
+        >
+            <td fd-table-cell>
+                <fd-checkbox
+                    [value]="tableRowsCompact[i].checked"
+                    [attr.aria-label]="'Select row ' + (i + 1)"
+                    [attr.title]="'Select row ' + (i + 1)"
+                    (click)="select(i, $event, 'compact')"
+                ></fd-checkbox>
+            </td>
+            <td fd-table-cell>
+                <a fd-link href="#">{{ row.column1 }}</a>
+            </td>
+            <td fd-table-cell>
+                <span fd-table-text>{{ row.column2 }}</span>
+            </td>
+            <td fd-table-cell>
+                <span fd-table-text>{{ row.column3 }}</span>
+            </td>
+            <td fd-table-cell>
+                <span fd-table-text>{{ row.date }}</span>
+            </td>
+            <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
+        </tr>
+    </tbody>
+</table>
+
+<br />
+
+<span>Table With Checkbox Condensed Mode</span>
+<table fd-table fdCondensed aria-label="With Checkboxes Condensed Mode">
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>
+                <fd-checkbox
+                    aria-label="Select all"
+                    title="Select all"
+                    [tristate]="true"
+                    [ngModel]="checkboxValueCondensed"
+                    (ngModelChange)="selectAll($event, 'condensed')"
+                ></fd-checkbox>
+            </th>
+            <th fd-table-cell>Column 1</th>
+            <th fd-table-cell>Column 2</th>
+            <th fd-table-cell>Column 3</th>
+            <th fd-table-cell>Date</th>
+            <th fd-table-cell>Type</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <tr
+            *ngFor="let row of tableRowsCondensed; let i = index"
+            fd-table-row
+            [attr.aria-selected]="tableRowsCondensed[i].checked"
+        >
+            <td fd-table-cell>
+                <fd-checkbox
+                    [value]="tableRowsCondensed[i].checked"
+                    [attr.aria-label]="'Select row ' + (i + 1)"
+                    [attr.title]="'Select row ' + (i + 1)"
+                    (click)="select(i, $event, 'condensed')"
+                ></fd-checkbox>
+            </td>
+            <td fd-table-cell>
+                <a fd-link href="#">{{ row.column1 }}</a>
+            </td>
+            <td fd-table-cell>
+                <span fd-table-text>{{ row.column2 }}</span>
+            </td>
+            <td fd-table-cell>
+                <span fd-table-text>{{ row.column3 }}</span>
+            </td>
+            <td fd-table-cell>
+                <span fd-table-text>{{ row.date }}</span>
+            </td>
+            <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,74 @@
+<fd-tab-list>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-tag>Link 1</span>
+        </ng-template>
+        Content for tab 1
+    </fd-tab>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-tag>Link 2</span>
+        </ng-template>
+        Content for tab 2
+    </fd-tab>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-tag>Link 3</span>
+        </ng-template>
+        Content for tab 3
+    </fd-tab>
+</fd-tab-list>
+
+<fd-tab-list>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <p fd-tab-count>12</p>
+            <span fd-tab-tag>Link 1</span>
+        </ng-template>
+        Content for tab 1
+    </fd-tab>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <p fd-tab-count>13</p>
+            <span fd-tab-tag>Link 2</span>
+        </ng-template>
+        Content for tab 2
+    </fd-tab>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <p fd-tab-count>14</p>
+            <span fd-tab-tag>Link 3</span>
+        </ng-template>
+        Content for tab 3
+    </fd-tab>
+</fd-tab-list>
+
+<fd-tab-list mode="filter">
+    <fd-tab [header]="true">
+        <ng-template fd-tab-title-template>
+            <span fd-tab-header>
+                <span fd-tab-counter-header>100</span>
+                <span fd-tab-label>Description</span>
+            </span>
+        </ng-template>
+        Content for tab 1
+    </fd-tab>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-icon icon="edit">
+                <p fd-tab-count>35</p>
+            </span>
+            <span fd-tab-label>Description</span>
+        </ng-template>
+        Content for tab 2
+    </fd-tab>
+    <fd-tab title="Tab 3">
+        <ng-template fd-tab-title-template>
+            <span fd-tab-icon icon="edit">
+                <p fd-tab-count>35</p>
+            </span>
+            <span fd-tab-label>Description</span>
+        </ng-template>
+        Content for tab 3
+    </fd-tab>
+</fd-tab-list>

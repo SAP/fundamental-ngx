@@ -1,0 +1,15 @@
+<label fd-form-label id="lang-select">Languages</label>
+<div class="example">
+    <fd-select
+        (valueChange)="setLocale($event)"
+        placeholder="Select an option"
+        [(value)]="locale"
+        ariaLabelledBy="lang-select"
+    >
+        <li fd-option *ngFor="let option of ['en-ca', 'fr', 'bg', 'pl', 'zh']" [value]="option">
+            {{ option }}
+        </li>
+    </fd-select>
+</div>
+
+<fd-datetime-picker [placeholder]="placeholder" [(ngModel)]="date"></fd-datetime-picker>

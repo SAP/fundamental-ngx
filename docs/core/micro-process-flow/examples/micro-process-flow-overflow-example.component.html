@@ -1,0 +1,19 @@
+<p>Default transition:</p>
+<fd-micro-process-flow>
+    <fd-micro-process-flow-item *ngFor="let item of items" [state]="item.state">
+        <fd-micro-process-flow-icon
+            fd-micro-process-flow-focusable-item
+            [glyph]="item.icon"
+        ></fd-micro-process-flow-icon>
+    </fd-micro-process-flow-item>
+</fd-micro-process-flow>
+
+<p>Custom transition:</p>
+<fd-micro-process-flow [transitionSpeed]="200" transitionTimingFunction="cubic-bezier(.4,.01,.165,.99)">
+    <fd-micro-process-flow-item *ngFor="let item of items" [state]="item.state">
+        <fd-micro-process-flow-icon
+            fd-micro-process-flow-focusable-item
+            [glyph]="item.icon"
+        ></fd-micro-process-flow-icon>
+    </fd-micro-process-flow-item>
+</fd-micro-process-flow>

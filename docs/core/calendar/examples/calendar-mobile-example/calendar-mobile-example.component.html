@@ -1,0 +1,70 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #landScapeDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-body>
+            <fd-calendar
+                #landscapeCalendar
+                [mobileLandscape]="true"
+                [ngModel]="datePicked"
+                [escapeFocusFunction]="noop"
+                (closeClicked)="dialog.close()"
+            ></fd-calendar>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                fdType="emphasized"
+                label="Ok"
+                [fdCompact]="false"
+                (click)="dialog.close('Continue'); dateChanged(landscapeCalendar.selectedDate)"
+            >
+            </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<button
+    fd-button
+    label="Open Calendar in landscape mobile mode"
+    style="margin-right: 10px"
+    (click)="openLandScapeDialog(landScapeDialog)"
+></button>
+
+<ng-template let-dialog let-dialogConfig="dialogConfig" #portraitDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h3 fd-title>Pick a date</h3>
+            <button fd-dialog-close-button fd-calendar-close-button [mobile]="true" (click)="dialog.close()"></button>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <fd-calendar
+                #portraitCalendar
+                [mobilePortrait]="true"
+                [ngModel]="datePicked"
+                [escapeFocusFunction]="noop"
+                (closeClicked)="dialog.close()"
+            ></fd-calendar>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                fdType="emphasized"
+                label="Ok"
+                [fdCompact]="false"
+                (click)="dialog.close('Continue'); dateChanged(portraitCalendar.selectedDate)"
+            >
+            </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<button
+    fd-button
+    label="Open Calendar in portrait mobile mode"
+    style="margin-right: 10px"
+    (click)="openPortraitDialog(portraitDialog)"
+></button>
+
+<br /><br />
+
+<div>Selected Date: {{ datePicked.toDate() | date: 'shortDate' }}</div>

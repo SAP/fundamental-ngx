@@ -1,0 +1,11 @@
+<fd-combobox
+    maxHeight="250px"
+    placeholder="Type some text..."
+    [groupFn]="groupFunc"
+    [displayFn]="displayFunc"
+    [dropdownValues]="dropdownValues"
+    [(ngModel)]="searchTerm"
+>
+</fd-combobox>
+
+<small style="display: block">Search Term: {{ searchTerm }}</small>

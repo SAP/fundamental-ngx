@@ -1,0 +1,100 @@
+<div class="step-input-example-container">
+    <div class="step-input-example">
+        <label fd-form-label for="number">Default Number Step Input</label>
+        <fdp-number-step-input [id]="'number'" name="number"></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label fd-form-label for="compact">Compact</label>
+        <fdp-number-step-input
+            fdCompact
+            [id]="'compact'"
+            name="compact"
+            [value]="value"
+            (valueChange)="onValueChange($event)"
+        ></fdp-number-step-input>
+        <br />
+        <small>value: {{ value }}</small>
+    </div>
+    <div class="step-input-example">
+        <label fd-form-label for="minMaxLimits">Min Max limits <small>(min: -20, max: 20)</small></label>
+        <fdp-number-step-input
+            [id]="'minMaxLimits'"
+            name="minMaxLimits"
+            [value]="0"
+            [min]="-20"
+            [max]="20"
+        ></fdp-number-step-input>
+    </div>
+</div>
+
+<div class="step-input-example-container">
+    <div class="step-input-example">
+        <label fd-form-label for="precision">Precision</label>
+        <fdp-number-step-input
+            [id]="'precision'"
+            name="precision"
+            [value]="0"
+            [precision]="2"
+            [step]="0.25"
+        ></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label fd-form-label for="stepNumberDisabled">Disabled</label>
+        <fdp-number-step-input
+            [id]="'stepNumberDisabled'"
+            name="stepNumberDisabled"
+            [value]="50"
+            [disabled]="true"
+        ></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label fd-form-label for="stepNumberReadOnly">Read Only</label>
+        <fdp-number-step-input
+            [id]="'stepNumberReadOnly'"
+            name="stepNumberReadOnly"
+            [value]="50"
+            [editable]="false"
+        ></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label fd-form-label for="stepNumberDescription">With description</label>
+        <fdp-number-step-input
+            [id]="'stepNumberDescription'"
+            name="stepNumberDescription"
+            description="PC"
+            [value]="25"
+        ></fdp-number-step-input>
+    </div>
+</div>
+
+<label>Horizontal alignment in the input field</label>
+<br />
+<div class="step-input-example-container">
+    <div class="step-input-example">
+        <label fd-form-label for="alignmentLeft">Left</label>
+        <fdp-number-step-input
+            [id]="'alignmentLeft'"
+            name="alignment"
+            [align]="stepInputAlign.Left"
+            [value]="100"
+        ></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label fd-form-label for="alignmentCenter">Center</label>
+        <fdp-number-step-input
+            [id]="'alignmentCenter'"
+            name="alignment"
+            [align]="stepInputAlign.Center"
+            [value]="100"
+        ></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label fd-form-label for="alignmentRight">Right</label>
+        <fdp-number-step-input
+            [id]="'alignmentRight'"
+            name="alignment"
+            [align]="stepInputAlign.Right"
+            [value]="100"
+        ></fdp-number-step-input>
+    </div>
+</div>

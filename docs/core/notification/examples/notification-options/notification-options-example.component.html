@@ -1,0 +1,153 @@
+<h4>Notification with avatar, success indicator and unread title</h4>
+<fd-notification>
+    <fd-notification-body>
+        <fd-avatar [circle]="true" size="xs" glyph="batch-payments"></fd-avatar>
+        <fd-notification-content>
+            <fd-notification-header>
+                <div fd-notification-indicator type="success"></div>
+                <h2 fd-notification-title [unread]="true">Your leave request has been accepted</h2>
+            </fd-notification-header>
+            <p fd-notification-paragraph>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+            </p>
+            <fd-notification-footer>
+                <span fd-notification-footer-content>SAP Analytics Cloud</span>
+                <span fd-notification-separator></span>
+                <span fd-notification-footer-content>Just Now</span>
+            </fd-notification-footer>
+        </fd-notification-content>
+        <fd-notification-actions>
+            <button fd-button label="Open"></button>
+            <button fd-button fdType="transparent" ariaLabel="Close" glyph="decline" title="close"></button>
+        </fd-notification-actions>
+    </fd-notification-body>
+</fd-notification>
+
+<h4>Notification with error indicator and no avatar</h4>
+<fd-notification>
+    <fd-notification-body>
+        <fd-notification-content>
+            <fd-notification-header>
+                <div fd-notification-indicator type="error"></div>
+                <h2 fd-notification-title>Your leave request has been accepted</h2>
+            </fd-notification-header>
+            <p fd-notification-paragraph>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+            </p>
+            <fd-notification-footer>
+                <span fd-notification-footer-content>Author name</span>
+                <span fd-notification-separator></span>
+                <span fd-notification-footer-content>7 minutes ago</span>
+            </fd-notification-footer>
+        </fd-notification-content>
+        <fd-notification-actions>
+            <button fd-button label="Open"></button>
+            <button fd-button fdType="transparent" glyph="decline" title="close"></button>
+        </fd-notification-actions>
+    </fd-notification-body>
+</fd-notification>
+
+<h4>Notification with message strip, unread title and custom width</h4>
+<div style="max-width: 100%; overflow: auto">
+    <fd-notification width="30rem">
+        <fd-message-strip type="warning" marginBottom="1rem"> A dismissible warning message strip. </fd-message-strip>
+        <fd-notification-body>
+            <fd-avatar [circle]="true" size="xs" glyph="batch-payments"></fd-avatar>
+            <fd-notification-content>
+                <fd-notification-header>
+                    <h2 fd-notification-title [unread]="true">Your leave request has been accepted</h2>
+                </fd-notification-header>
+                <p fd-notification-paragraph>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.
+                </p>
+                <fd-notification-footer>
+                    <span fd-notification-footer-content>SAP Ariba</span>
+                    <span fd-notification-separator></span>
+                    <span fd-notification-footer-content>7 minutes ago</span>
+                </fd-notification-footer>
+            </fd-notification-content>
+            <fd-notification-actions>
+                <fd-action-sheet [noArrow]="true" placement="bottom-end">
+                    <fd-action-sheet-control>
+                        <button
+                            role="menu"
+                            ariaLabel="More"
+                            fd-button
+                            fdType="transparent"
+                            glyph="overflow"
+                            title="More"
+                        ></button>
+                    </fd-action-sheet-control>
+                    <fd-action-sheet-body>
+                        <li fd-action-sheet-item label="Approve" glyph="accept" (click)="actionPicked('Approve')"></li>
+                        <li fd-action-sheet-item label="Reject" glyph="decline" (click)="actionPicked('Reject')"></li>
+                        <li
+                            fd-action-sheet-item
+                            label="Forward"
+                            glyph="arrow-right"
+                            (click)="actionPicked('Forward')"
+                        ></li>
+                    </fd-action-sheet-body>
+                </fd-action-sheet>
+                <button fd-button fdType="transparent" glyph="decline" ariaLabel="Close" title="close"></button>
+            </fd-notification-actions>
+        </fd-notification-body>
+    </fd-notification>
+</div>
+
+<h4>Notification in mobile mode</h4>
+<div style="max-width: 400px">
+    <fd-notification [mobile]="true">
+        <fd-notification-body>
+            <fd-notification-content>
+                <fd-notification-header>
+                    <div fd-notification-indicator type="information"></div>
+                    <h2 fd-notification-title [unread]="true">Your leave request has been accepted</h2>
+                </fd-notification-header>
+                <p fd-notification-paragraph>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.
+                </p>
+                <fd-notification-footer>
+                    <span fd-notification-footer-content>Author name</span>
+                    <span fd-notification-separator></span>
+                    <span fd-notification-footer-content>Timestamp</span>
+                </fd-notification-footer>
+            </fd-notification-content>
+            <fd-notification-actions>
+                <fd-action-sheet [mobile]="true">
+                    <fd-action-sheet-control>
+                        <button fd-button fdType="transparent" glyph="overflow" title="overflow"></button>
+                    </fd-action-sheet-control>
+                    <fd-action-sheet-body>
+                        <li
+                            fd-action-sheet-item
+                            label="Approve"
+                            glyph="accept"
+                            (click)="actionPicked('Approve')"
+                            [isCloseButton]="true"
+                        ></li>
+                        <li
+                            fd-action-sheet-item
+                            label="Reject"
+                            glyph="decline"
+                            (click)="actionPicked('Reject')"
+                            [isCloseButton]="true"
+                        ></li>
+                        <li
+                            fd-action-sheet-item
+                            label="Forward"
+                            glyph="arrow-right"
+                            (click)="actionPicked('Forward')"
+                            [isCloseButton]="true"
+                        ></li>
+                        <li fd-action-sheet-item label="Cancel" [negative]="true" [isCloseButton]="true"></li>
+                    </fd-action-sheet-body>
+                </fd-action-sheet>
+            </fd-notification-actions>
+        </fd-notification-body>
+    </fd-notification>
+</div>

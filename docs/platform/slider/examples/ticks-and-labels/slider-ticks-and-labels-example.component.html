@@ -1,0 +1,34 @@
+<div class="base-row">
+    <p>
+        You can apply tick marks to the slider. The tick marks are related to the step property and are responsive. If
+        the distance between 2 tick marks is less than 8 px, all tick marks except for the first and last disappear.
+        <br />
+        To apply tick marks to the slider set <code>[showTicks]</code> as <code>true</code>
+    </p>
+    <fdp-slider id="slider-ticks" name="slider-ticks" [(ngModel)]="value" [max]="50" [showTicks]="true"> </fdp-slider>
+    <p>Value: {{ value }}</p>
+    <hr />
+</div>
+
+<div class="base-row">
+    <p>
+        If tick marks are set, you can define labels for the tick marks. The labels are displayed below the tick marks
+        and show the corresponding value of the tick mark. You can also define labels only for specific tick marks if
+        you don’t need a label for every tick mark on the slider.
+        <br />
+        To apply tick marks to the slider set <code>[showTicks]</code> as <code>true</code> and
+        <code>[showTicksLabels]</code> as <code>true</code>
+    </p>
+    <fdp-slider
+        id="slider-ticks-and-labels"
+        name="slider-ticks-and-labels"
+        [(ngModel)]="value1"
+        [max]="50"
+        tooltipMode="readonly"
+        [tickmarksBetweenLabels]="2"
+        [showTicks]="true"
+        [showTicksLabels]="true"
+    >
+    </fdp-slider>
+    <p>Value: {{ value1 }}</p>
+</div>

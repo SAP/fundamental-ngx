@@ -1,0 +1,43 @@
+<div class="examples-column">
+    <div fd-form-item>
+        <label fd-form-label>Byline combobox</label>
+        <fd-combobox
+            placeholder="Type some text..."
+            [dropdownValues]="values"
+            [itemTemplate]="template"
+            [displayFn]="displayFunction"
+            (itemClicked)="selected = $event"
+            [(ngModel)]="searchTerm"
+            [isSearch]="true"
+            [byline]="true"
+        ></fd-combobox>
+
+        <small style="display: block">Search Term: {{ searchTerm }}</small>
+        <small style="display: block">Returned from itemClicked Event: {{ selected | json }}</small>
+    </div>
+
+    <div fd-form-item>
+        <label fd-form-label>Byline mobile combobox</label>
+        <fd-combobox
+            placeholder="Search here..."
+            [dropdownValues]="values"
+            [itemTemplate]="template"
+            [displayFn]="displayFunction"
+            [(ngModel)]="searchTerm2"
+            [byline]="true"
+            [mobile]="true"
+            [mobileConfig]="mobileConfig"
+        ></fd-combobox>
+
+        <small style="display: block">Search Term: {{ searchTerm2 }}</small>
+    </div>
+
+    <!-- Note that in this case you are responsible for highlighting. -->
+    <ng-template #template let-item>
+        <span fd-list-thumbnail><fd-icon [glyph]="item.icon"></fd-icon></span>
+        <div fd-list-content>
+            <div fd-list-title>{{ item.name }}</div>
+            <div fd-list-byline>Byline Text for {{ item.name }}</div>
+        </div>
+    </ng-template>
+</div>

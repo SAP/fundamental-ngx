@@ -1,0 +1,32 @@
+<form [formGroup]="customForm">
+    <fieldset fd-fieldset>
+        <div fd-form-item>
+            <label fd-form-label [required]="true">Valid Multi Input</label>
+            <fd-multi-input
+                [state]="isValid() ? 'success' : 'error'"
+                formControlName="selectedValues"
+                [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
+                placeholder="Search Here..."
+                [required]="true"
+            >
+            </fd-multi-input>
+        </div>
+        <small>
+            Enabled Multi-Input Value: {{ customForm.controls.selectedValues.value | json }}<br />
+            Enabled Multi-Input Touched: {{ customForm.controls.selectedValues.touched }}<br />
+            Enabled Multi-Input Dirty: {{ customForm.controls.selectedValues.dirty }}<br />
+            Enabled Multi-Input Valid: {{ customForm.controls.selectedValues.valid }} </small
+        ><br />
+        <div fd-form-item style="margin-top: 1rem">
+            <label fd-form-label>Disabled Multi Input</label>
+            <fd-multi-input
+                formControlName="disabledSelectedValues"
+                [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
+                placeholder="Search Here..."
+                state="information"
+            >
+            </fd-multi-input>
+        </div>
+        <small>Disabled Multi-Input Value: {{ customForm.controls.disabledSelectedValues.value | json }}</small>
+    </fieldset>
+</form>

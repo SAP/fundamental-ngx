@@ -1,0 +1,22 @@
+<h3>Declarative Approach</h3>
+<fdp-list [role]="'listbox'">
+    <fdp-action-list-item title="Action 1" [role]="'option'" (actionClicked)="_actionedRow($event)">
+    </fdp-action-list-item>
+    <fdp-action-list-item title="Action 2" [role]="'option'" (actionClicked)="_actionedRow($event)">
+    </fdp-action-list-item>
+    <fdp-action-list-item title="Action 3" [role]="'option'" (actionClicked)="_actionedRow($event)">
+    </fdp-action-list-item>
+    <fdp-action-list-item title="Action 4" [role]="'option'" (actionClicked)="_actionedRow($event)">
+    </fdp-action-list-item>
+</fdp-list>
+
+<h3>Imperative Approach</h3>
+<fdp-list [role]="'listbox'">
+    <fdp-action-list-item
+        *ngFor="let item of items"
+        [role]="'option'"
+        [title]="item.title"
+        (actionClicked)="_actionedRow($event)"
+    >
+    </fdp-action-list-item>
+</fdp-list>

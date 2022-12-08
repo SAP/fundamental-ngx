@@ -1,0 +1,78 @@
+<fd-shellbar [sideNav]="true">
+    <button
+        fd-shellbar-side-nav
+        fd-button
+        fdType="transparent"
+        glyph="menu2"
+        style="width: 2.75rem"
+        (click)="condensed = !condensed"
+    ></button>
+
+    <fd-shellbar-logo>
+        <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+    </fd-shellbar-logo>
+</fd-shellbar>
+
+<div class="shellbar-sidenav-content-example">
+    <fd-side-nav [condensed]="condensed" [collapseWidth]="768">
+        <div fd-side-nav-main>
+            <ul fd-nested-list [textOnly]="false">
+                <li fd-nested-list-item>
+                    <a fd-nested-list-link>
+                        <i fd-nested-list-icon glyph="menu"></i>
+                        <span fd-nested-list-title>Link 1</span>
+                    </a>
+                </li>
+                <li fd-nested-list-item>
+                    <a fd-nested-list-link>
+                        <i fd-nested-list-icon glyph="home"></i>
+                        <span fd-nested-list-title>Link 2</span>
+                    </a>
+                </li>
+                <li fd-nested-list-item>
+                    <a fd-nested-list-link>
+                        <i fd-nested-list-icon glyph="settings"></i>
+                        <span fd-nested-list-title>Link 3</span>
+                    </a>
+                </li>
+                <li fd-nested-list-item>
+                    <a fd-nested-list-link>
+                        <i fd-nested-list-icon glyph="settings"></i>
+                        <span fd-nested-list-title>Link 4</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div fd-side-nav-utility>
+            <ul fd-nested-list [textOnly]="false">
+                <li fd-nested-list-item>
+                    <a fd-nested-list-link>
+                        <i fd-nested-list-icon glyph="menu"></i>
+                        <span fd-nested-list-title>Link 1</span>
+                    </a>
+                </li>
+                <li fd-nested-list-item>
+                    <a fd-nested-list-link>
+                        <i fd-nested-list-icon glyph="home"></i>
+                        <span fd-nested-list-title>Link 2</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </fd-side-nav>
+
+    <fd-layout-panel style="width: 100%">
+        <fd-layout-panel-header>
+            <fd-layout-panel-head>
+                <h2 fd-layout-panel-title>Sample Page Title</h2>
+                <fd-layout-panel-description>Sample Description</fd-layout-panel-description>
+            </fd-layout-panel-head>
+            <fd-layout-panel-actions> Sample Text </fd-layout-panel-actions>
+        </fd-layout-panel-header>
+
+        <fd-layout-panel-body> Sample Body </fd-layout-panel-body>
+
+        <fd-layout-panel-footer> Sample Footer </fd-layout-panel-footer>
+    </fd-layout-panel>
+</div>

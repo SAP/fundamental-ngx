@@ -1,0 +1,30 @@
+<table fd-table aria-label="Default">
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <tr *ngFor="let row of tableRows" fd-table-row>
+            <td fd-table-cell>
+                <a fd-link href="#">{{ row.column1 }}</a>
+            </td>
+            <td fd-table-cell>
+                <p fd-table-text maxWidth="250px" [noWrap]="true">
+                    {{ row.column2 }}
+                </p>
+            </td>
+            <td fd-table-cell>
+                <p fd-table-text maxWidth="250px">
+                    {{ row.column3 }}
+                </p>
+            </td>
+            <td fd-table-cell>{{ row.date }}</td>
+            <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
+        </tr>
+    </tbody>
+</table>

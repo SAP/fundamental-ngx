@@ -1,0 +1,15 @@
+<fdp-form-group [noLabelLayout]="false" columnLayout="XL2-L2-M1-S1">
+    <fdp-form-field id="loading" label="Loading" [column]="1">
+        <fd-busy-indicator [loading]="loading" ariaLabel="loading" title="Please Wait">
+            <fdp-combobox
+                name="Loading example"
+                placeholder="Type some text..."
+                (onDataRequested)="onDataRequested()"
+                (onDataReceived)="onDataReceived()"
+                [dataSource]="dataSource"
+                [(ngModel)]="selectedItem"
+            ></fdp-combobox>
+        </fd-busy-indicator>
+        <fdp-form-field-extras>Selected: {{ selectedItem }}</fdp-form-field-extras>
+    </fdp-form-field>
+</fdp-form-group>

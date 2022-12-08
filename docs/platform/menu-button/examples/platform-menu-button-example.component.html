@@ -1,0 +1,203 @@
+<div>Menu Button Disabled</div>
+<fdp-menu-button
+    [id]="'menu-button-15'"
+    label="Default Disabled Button"
+    icon="world"
+    [disabled]="true"
+    [title]="'disabled menu button'"
+    [fdpMenuTriggerFor]="basicMenu"
+>
+</fdp-menu-button>
+
+<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<fdp-menu-button
+    [id]="'menu-button-16'"
+    fdCompact
+    icon="world"
+    [disabled]="true"
+    title="disabled menu button with only icon"
+    [fdpMenuTriggerFor]="basicMenu"
+>
+</fdp-menu-button>
+
+<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<fdp-menu-button
+    [id]="'menu-button-17'"
+    fdCompact
+    [disabled]="true"
+    [fdpMenuTriggerFor]="basicMenu"
+    title="disabled menu button without icon and text"
+>
+</fdp-menu-button>
+
+<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<fdp-menu-button
+    [id]="'menu-button-18'"
+    fdCompact
+    label="Default Button"
+    [disabled]="true"
+    [fdpMenuTriggerFor]="basicMenu"
+>
+</fdp-menu-button>
+
+<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<fdp-menu-button
+    [id]="'menu-button-19'"
+    fdCompact
+    label="Default Button"
+    [disabled]="true"
+    type="emphasized"
+    [fdpMenuTriggerFor]="basicMenu"
+>
+</fdp-menu-button>
+<br />
+<br />
+
+<div>Menu Button with and without Icon</div>
+<fdp-menu-button
+    [id]="'menu-button-20'"
+    label="Default Button"
+    icon="world"
+    [disabled]="false"
+    [fdpMenuTriggerFor]="basicMenu"
+>
+</fdp-menu-button>
+
+<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<fdp-menu-button [id]="'menu-button-21'" label="Default Button" [disabled]="false" [fdpMenuTriggerFor]="basicMenu">
+</fdp-menu-button>
+
+<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<fdp-menu-button
+    [id]="'menu-button-22'"
+    icon="world"
+    [disabled]="false"
+    title="menu button with icon"
+    ariaLabel="menu button with icon"
+    [fdpMenuTriggerFor]="basicMenu"
+>
+</fdp-menu-button>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+<br />
+<br />
+<div>Compact Menu Button with and without Icon</div>
+<fdp-menu-button
+    [id]="'menu-button-24'"
+    fdCompact
+    label="Default Button"
+    icon="world"
+    [disabled]="false"
+    [fdpMenuTriggerFor]="basicMenuCompact"
+>
+</fdp-menu-button>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<fdp-menu-button
+    [id]="'menu-button-25'"
+    fdCompact
+    label="Default Button"
+    [disabled]="false"
+    [fdpMenuTriggerFor]="basicMenuCompact"
+>
+</fdp-menu-button>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<fdp-menu-button
+    [id]="'menu-button-26'"
+    fdCompact
+    icon="world"
+    [disabled]="false"
+    title="compact menu button with only icon"
+    ariaLabel="compact menu button with icon"
+    [fdpMenuTriggerFor]="basicMenuCompact"
+>
+</fdp-menu-button>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+<br />
+<br />
+<div>Long text Menu Button with and without Icon</div>
+<fdp-menu-button
+    [id]="'menu-button-28'"
+    label="Default Button with long text"
+    icon="world"
+    [disabled]="false"
+    [fdpMenuTriggerFor]="basicMenu"
+    title="Default menu button with icon and long text"
+    width="100px"
+>
+</fdp-menu-button>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<fdp-menu-button
+    [disabled]="false"
+    label="Default Button with long text"
+    title="Default menu button with long text"
+    [fdpMenuTriggerFor]="basicMenu"
+    width="100px"
+>
+</fdp-menu-button>
+
+<fdp-menu #basicMenu id="basic-menu">
+    <fdp-menu-item (itemSelect)="onItemSelect('First Item')">First Item</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Second Item')">Second Item</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Third Item')">Third Item</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #basicMenuCompact id="basic-menu-compact" fdCompact>
+    <fdp-menu-item (itemSelect)="onItemSelect('First Item')">First Item</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Second Item')">Second Item</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Third Item')">Third Item</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #cascadeMenu id="cascade-menu">
+    <fdp-menu-item [fdpMenuTriggerFor]="fruitMenu">Fruits</fdp-menu-item>
+    <fdp-menu-item [fdpMenuTriggerFor]="vegetableMenu">Vegetables</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #fruitMenu id="fruit-menu">
+    <fdp-menu-item [fdpMenuTriggerFor]="appleMenu">Apple</fdp-menu-item>
+    <fdp-menu-item [fdpMenuTriggerFor]="bananaMenu">Banana</fdp-menu-item>
+    <fdp-menu-item [fdpMenuTriggerFor]="orangeMenu">Orange</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #appleMenu id="apple-menu">
+    <fdp-menu-item (itemSelect)="onItemSelect('Braeburn Apple')">Braeburn Apple</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Fuji Apple')">Fuji Apple</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Gala Apple')">Gala Apple</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Honeycrisp Apple')">Honeycrisp Apple</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Red Delicious Apple')">Red Delicious Apple</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #bananaMenu id="banana-menu">
+    <fdp-menu-item (itemSelect)="onItemSelect('Cavendish Banana')">Cavendish Banana</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Lady Finger Banana')">Lady Finger Banana</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Red Banana')">Red Banana</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #orangeMenu id="orange-menu">
+    <fdp-menu-item (itemSelect)="onItemSelect('Blood Orange')">Blood Orange</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Navel Orange')">Navel Orange</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Valencia Orange')">Valencia Orange</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #vegetableMenu id="vegetable-menu">
+    <fdp-menu-item [fdpMenuTriggerFor]="carrotMenu">Carrot</fdp-menu-item>
+    <fdp-menu-item [fdpMenuTriggerFor]="lettuceMenu">Lettuce</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #carrotMenu id="carrot-menu">
+    <fdp-menu-item (itemSelect)="onItemSelect('Nantes Carrot')">Nantes Carrot</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Imperator Carrot')">Imperator Carrot</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Chantenay Carrot')">Chantenay Carrot</fdp-menu-item>
+</fdp-menu>
+
+<fdp-menu #lettuceMenu id="lettuce-menu">
+    <fdp-menu-item (itemSelect)="onItemSelect('Arugula')">Arugula</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Belgian Endive')">Belgian Endive</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Butter Lettuce')">Butter Lettuce</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Iceberg Lettuce')">Iceberg Lettuce</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Red Leaf Lettuce')">Red Leaf Lettuce</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Romaine Lettuce')">Romaine Lettuce</fdp-menu-item>
+</fdp-menu>
+<br />
+<br />
+<div><label>Item Selected:</label> {{ item }}</div>

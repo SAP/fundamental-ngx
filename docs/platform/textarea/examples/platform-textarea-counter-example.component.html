@@ -1,0 +1,56 @@
+<main class="fd-page">
+    <div *ngIf="true" class="fd-page__content fd-has-background-color-neutral-2">
+        <fdp-form-group #fg2 [formGroup]="form">
+            <fdp-form-field
+                #ff2
+                id="detailedDescription"
+                label="When showExceededText is true and value set exceeds limit"
+                placeholder="Start entering detailed description"
+                [rank]="10"
+                [required]="true"
+                [validators]="textareaValidator"
+            >
+                <fdp-textarea
+                    formControlName="detailedDescription"
+                    name="detailedDescription"
+                    [maxLength]="10"
+                    [showExceededText]="true"
+                >
+                </fdp-textarea>
+            </fdp-form-field>
+
+            <fdp-form-field
+                #ff3
+                id="noCounterMessageInteraction"
+                label="When showExceededText is false and value set exceeds limit"
+                placeholder="Start entering. Counter message will not be shown, but if an initial value is set whose length > maxLength, excess text is removed on Backpress"
+                [rank]="10"
+                [required]="true"
+                [validators]="textareaNoCounterMessageValidator"
+            >
+                <fdp-textarea
+                    formControlName="noCounterMessageInteraction"
+                    name="noCounterMessageInteraction"
+                    [maxLength]="10"
+                    [showExceededText]="false"
+                    value="Some value that crosses max length"
+                >
+                </fdp-textarea>
+            </fdp-form-field>
+
+            <fdp-form-field id="submit-button" [rank]="20">
+                <fdp-button type="submit" (click)="onSubmit()" label="Submit"></fdp-button>
+            </fdp-form-field>
+
+            <ng-template #i18n let-errors>
+                <span *ngIf="errors.required" role="alert" aria-atomic="true"> Value is required </span>
+                <span *ngIf="errors.maxlength" role="alert" aria-atomic="true">
+                    Please get your character count under limit.
+                </span>
+            </ng-template>
+        </fdp-form-group>
+    </div>
+</main>
+
+<pre>Form result: {{ form.value | json }}</pre>
+<pre>Form Status: {{ form.status | json }}</pre>

@@ -1,0 +1,16 @@
+<fdp-table #table [dataSource]="source">
+    <fdp-table-toolbar title="Order Items"></fdp-table-toolbar>
+
+    <fdp-column name="name" key="name" label="Name"> </fdp-column>
+
+    <fdp-column name="description" key="description" label="Description"> </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price"> </fdp-column>
+
+    <fdp-column name="verified" key="verified" label="Verified"> </fdp-column>
+
+    <fdp-column name="status" key="status" label="Status"> </fdp-column>
+</fdp-table>
+
+<!-- Connect P13 Dialog to the table -->
+<fdp-table-p13-dialog [table]="table"></fdp-table-p13-dialog>

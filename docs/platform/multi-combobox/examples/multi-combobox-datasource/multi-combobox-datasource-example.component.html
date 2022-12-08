@@ -1,0 +1,83 @@
+<fdp-form-group [noLabelLayout]="false">
+    <fdp-form-field id="array-of-strings" label="Array of Strings">
+        <fdp-multi-combobox
+            [autoResize]="true"
+            name="array-of-strings"
+            placeholder="Type some text..."
+            [dataSource]="dataSourceStrings"
+            [selectedItems]="selectedItems1"
+            (selectionChange)="onSelect1($event)"
+        ></fdp-multi-combobox>
+        <p>Selected: {{ selectedItems1 }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="array-of-objects" label="Array of Objects">
+        <fdp-multi-combobox
+            [autoResize]="true"
+            name="array-of-objects"
+            placeholder="Type some text..."
+            [dataSource]="dataSource"
+            displayKey="name"
+            lookupKey="id"
+            [selectedItems]="selectedItems2"
+            (selectionChange)="onSelect2($event)"
+        ></fdp-multi-combobox>
+        <p>Selected: {{ selectedItems2 | json }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="observable" label="Observable">
+        <fdp-multi-combobox
+            [autoResize]="true"
+            name="observable"
+            placeholder="Type some text..."
+            [dataSource]="dataSourceOf"
+            displayKey="name"
+            lookupKey="id"
+            (selectionChange)="onSelect3($event)"
+            [selectedItems]="selectedItems3"
+        ></fdp-multi-combobox>
+        <p>Selected: {{ selectedItems3 | json }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="ds" label="Data Source">
+        <fdp-multi-combobox
+            [autoResize]="true"
+            name="ds"
+            placeholder="Type some text..."
+            [dataSource]="ds"
+            displayKey="name"
+            lookupKey="id"
+            (selectionChange)="onSelect4($event)"
+            [selectedItems]="selectedItems4"
+        ></fdp-multi-combobox>
+        <p>Selected: {{ selectedItems4 | json }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="ds-limitless" label="Data Source (Limitless)">
+        <fdp-multi-combobox
+            [autoResize]="true"
+            name="dsLimitless"
+            placeholder="Type some text..."
+            [dataSource]="dsl"
+            displayKey="name"
+            lookupKey="id"
+            (selectionChange)="onSelect6($event)"
+            [selectedItems]="selectedItems6"
+            [limitless]="isLimitless"
+        ></fdp-multi-combobox>
+        <p>Limitless: {{ isLimitless }}</p>
+        <p>Selected: {{ selectedItems6 | json }}</p>
+        <button fd-button (click)="isLimitless = !isLimitless">Toggle Limitless</button>
+    </fdp-form-field>
+
+    <fdp-form-field id="standard" label="Example with 'N more' label">
+        <fdp-multi-combobox
+            name="standard"
+            placeholder="Type some text..."
+            [dataSource]="dataSourceStrings"
+            (selectionChange)="onSelect5($event)"
+            [selectedItems]="selectedItems5"
+        ></fdp-multi-combobox>
+        <p>Selected: {{ selectedItems5 }}</p>
+    </fdp-form-field>
+</fdp-form-group>

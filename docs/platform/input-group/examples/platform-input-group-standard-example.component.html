@@ -1,0 +1,69 @@
+<label fd-form-label for="input-group-left-aligned" id="input-group-left-aligned-label">Left aligned text addon</label>
+<fdp-input-group
+    [id]="'input-group-left-aligned'"
+    name="leftTextAddon"
+    placeholder="Enter value"
+    ariaLabelledBy="input-group-left-aligned-label input-group-left-addon-aria-label-dollar"
+>
+    <fdp-input-group-addon>$</fdp-input-group-addon>
+    <fdp-input-group-input type="number"></fdp-input-group-input>
+</fdp-input-group>
+
+<label fd-form-label for="input-group-right-aligned" id="input-group-right-aligned-label"
+    >Right aligned text addon</label
+>
+<fdp-input-group
+    [id]="'input-group-right-aligned'"
+    name="rightTextAddon"
+    placeholder="Enter value"
+    ariaLabelledBy="input-group-right-aligned-label input-group-right-addon-aria-label"
+>
+    <fdp-input-group-input type="number"></fdp-input-group-input>
+    <fdp-input-group-addon>USD</fdp-input-group-addon>
+</fdp-input-group>
+
+<label fd-form-label for="input-group-left-right-aligned" id="input-group-left-right-aligned-label"
+    >Left and right aligned text addons</label
+>
+<fdp-input-group
+    [id]="'input-group-left-right-aligned'"
+    name="leftAndRightAddonsExample"
+    placeholder="Enter value"
+    ariaLabelledBy="input-group-left-right-aligned-label input-group-left-addon-aria-label-dollar input-group-right-addon-aria-label"
+>
+    <fdp-input-group-addon>$</fdp-input-group-addon>
+    <fdp-input-group-input type="number"></fdp-input-group-input>
+    <fdp-input-group-addon>USD</fdp-input-group-addon>
+</fdp-input-group>
+
+<label fd-form-label for="input-group-button-as-addon" id="input-group-button-as-addon-label">Button as an addon</label>
+<fdp-input-group
+    [id]="'input-group-button-as-addon'"
+    name="donation"
+    placeholder="Enter value"
+    ariaLabelledBy="input-group-button-as-addon-label input-group-left-addon-aria-label-dollar input-group-right-addon-aria-label"
+>
+    <fdp-input-group-addon>$</fdp-input-group-addon>
+    <fdp-input-group-input type="number"></fdp-input-group-input>
+    <fdp-input-group-addon>USD</fdp-input-group-addon>
+    <fdp-input-group-addon>
+        <fdp-button label="Submit"></fdp-button>
+    </fdp-input-group-addon>
+</fdp-input-group>
+
+<label fd-form-label for="input-group-icon-as-addon" id="input-group-icon-as-addon-label">Icon as an addon</label>
+<fdp-input-group
+    [id]="'input-group-icon-as-addon'"
+    name="employee"
+    placeholder="Email"
+    ariaLabelledBy="input-group-icon-as-addon-label input-group-left-addon-aria-label-icon-email"
+>
+    <fdp-input-group-addon>
+        <fd-icon glyph="email" title="Email"></fd-icon>
+    </fdp-input-group-addon>
+    <fdp-input-group-input type="email"></fdp-input-group-input>
+</fdp-input-group>
+
+<span aria-hidden="true" style="display: none" id="input-group-left-addon-aria-label-dollar">Currency: $</span>
+<span aria-hidden="true" style="display: none" id="input-group-left-addon-aria-label-icon-email">Email icon</span>
+<span aria-hidden="true" style="display: none" id="input-group-right-addon-aria-label">Format: USD</span>

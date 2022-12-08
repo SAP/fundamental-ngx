@@ -1,0 +1,12 @@
+<div style="padding: 100px; text-align: center">
+    <fd-popover [appendTo]="element" style="display: block">
+        <fd-popover-control>
+            <button fd-button>Trigger</button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div style="padding: 12px">This popover is connected to other element</div>
+        </fd-popover-body>
+    </fd-popover>
+</div>
+
+<div style="border: 1px dashed black; padding: 10px" #element>Container</div>

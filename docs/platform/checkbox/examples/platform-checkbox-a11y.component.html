@@ -1,0 +1,24 @@
+<h3>Checkbox A11y Examples using aria-label, aria-labelledby, aria-disabled and title</h3>
+<p id="checkboxLable">checkbox using aria-labelledby</p>
+<fdp-form-group>
+    <fdp-form-field id="a11y1" [noLabelLayout]="true" [rank]="1">
+        <fdp-checkbox
+            name="checkboxA11y1"
+            ariaLabel="checkbox using aria-label"
+            [(ngModel)]="checkboxA11y1"
+        ></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field id="a11y2" [rank]="2">
+        <fdp-checkbox name="checkboxA11y2" ariaLabelledBy="checkboxLable" [(ngModel)]="checkboxA11y2"></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field id="a11y3" label="Disabled checkbox using aria-disabled" [rank]="3">
+        <fdp-checkbox
+            name="checkboxA11y3"
+            title="It is a disabled checkbox"
+            [disabled]="true"
+            [(ngModel)]="checkboxA11y3"
+        ></fdp-checkbox>
+    </fdp-form-field>
+</fdp-form-group>

@@ -1,0 +1,21 @@
+<form #myForm="ngForm">
+    <fdp-form-group [formGroup]="formGroupRegister">
+        <fdp-form-field
+            #ffl1
+            label="My Favorite Colors"
+            id="input9"
+            name="reactiveFormInput"
+            [rank]="1"
+            placeholder="Field placeholder text"
+            [required]="true"
+        >
+            <fdp-input name="input9" [formControl]="ffl1.formControl" type="text" ariaLabelledBy="label"> </fdp-input>
+        </fdp-form-field>
+        <ng-template #i18n let-errors>
+            <span role="alert" *ngIf="errors.required">
+                Pellentesque metus lacus commodo eget justo ut rutrum varius nunc</span
+            >
+        </ng-template>
+    </fdp-form-group>
+    <fdp-button type="submit" (click)="onSubmit()" label="Submit"></fdp-button>
+</form>

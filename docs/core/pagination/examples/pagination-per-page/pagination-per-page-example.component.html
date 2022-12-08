@@ -1,0 +1,54 @@
+<div>
+    <h3><code>[itemsPerPage]=15</code> Default property for items per page</h3>
+    <fd-pagination
+        fd-toolbar-item
+        [totalItems]="totalItems"
+        [itemsPerPage]="15"
+        [currentPage]="currentPage1"
+        (pageChangeStart)="pageChanged1($event)"
+        ariaLabel="Pagination with itemsPerPage property"
+    ></fd-pagination>
+</div>
+<div>
+    <h3><code>[itemsPerPageOptions]="[4,8,16]"</code> - Default select template for items per page options</h3>
+    <fd-pagination
+        fd-toolbar-item
+        [totalItems]="totalItems"
+        [itemsPerPage]="4"
+        [itemsPerPageOptions]="[4, 8, 16]"
+        [currentPage]="currentPage2"
+        (pageChangeStart)="pageChanged2($event)"
+        ariaLabel="Pagination with itemsPerPageOptions property"
+    ></fd-pagination>
+</div>
+<div>
+    <h3>Custom items per page - list of buttons</h3>
+    <p>Use <code>let-pageOptions="pageOptions"</code> on the template to get the list of options from component</p>
+    <p>Use <code>let-onSelect="onSelect"</code> to pass the selection callback to the pagination component</p>
+    <fd-pagination
+        fd-toolbar-item
+        [totalItems]="totalItems"
+        [currentPage]="currentPage3"
+        [itemsPerPage]="5"
+        [itemsPerPageOptions]="[2, 5, 100]"
+        [itemsPerPageTemplate]="itemsPerPageCustom"
+        (pageChangeStart)="pageChanged3($event)"
+        ariaLabel="Pagination with custom items"
+        #pagination
+    ></fd-pagination>
+
+    <ng-template #itemsPerPageCustom let-onSelect="onSelect" let-pageOptions="pageOptions">
+        <fd-segmented-button
+            [ngModel]="customItemsPerPage"
+            (ngModelChange)="onSelect($event); customItemsPerPage = $event"
+        >
+            <button
+                fd-button
+                [label]="count + ''"
+                [attr.aria-label]="'Show ' + count + ' items per page'"
+                [attr.value]="count"
+                *ngFor="let count of pageOptions"
+            ></button>
+        </fd-segmented-button>
+    </ng-template>
+</div>

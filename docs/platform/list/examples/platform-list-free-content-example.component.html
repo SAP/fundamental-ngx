@@ -1,0 +1,30 @@
+<h3>Imperative Approach</h3>
+<fdp-list [navigated]="true" [navigationIndicator]="true" [dataSource]="_dataSource">
+    <fdp-free-content-list-item *fdpItemDef="let item; let i">
+        <a fd-list-link [navigationIndicator]="true" [navigated]="!!item.navigated">
+            <i *ngIf="item.icon" fd-list-icon [glyph]="item.icon"></i>
+            <span fd-list-title>{{ item.name }}</span>
+        </a>
+    </fdp-free-content-list-item>
+</fdp-list>
+
+<h3>Declarative Approach</h3>
+<fdp-list [navigated]="true" [navigationIndicator]="true">
+    <fdp-free-content-list-item>
+        <a fd-list-link [navigationIndicator]="true">
+            <i fd-list-icon glyph="history"></i>
+            <span fd-list-title> Link List item 1 </span>
+        </a>
+    </fdp-free-content-list-item>
+    <fdp-free-content-list-item>
+        <a fd-list-link [navigationIndicator]="true" [navigated]="true">
+            <i fd-list-icon glyph="cart"></i>
+            <span fd-list-title> Link List item 2 </span>
+        </a>
+    </fdp-free-content-list-item>
+    <fdp-free-content-list-item>
+        <a fd-list-link [navigationIndicator]="true">
+            <span fd-list-title> Link List item 3</span>
+        </a>
+    </fdp-free-content-list-item>
+</fdp-list>

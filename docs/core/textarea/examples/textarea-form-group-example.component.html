@@ -1,0 +1,31 @@
+<form [formGroup]="customForm">
+    <fieldset fd-fieldset>
+        <div fd-form-item>
+            <label fd-form-label [colon]="true" for="textarea-21">Textarea</label>
+            <textarea
+                formControlName="textAreaControl"
+                fd-form-control
+                id="textarea-21"
+                placeholder="Field placeholder text"
+            ></textarea>
+            Textarea Value: {{ customForm.controls.textAreaControl.value }}
+        </div>
+        <div fd-form-item>
+            <label fd-form-label [colon]="true" for="textarea-22">Disabled Textarea</label>
+            <textarea
+                formControlName="disabledTextAreaControl"
+                fd-form-control
+                id="textarea-22"
+                placeholder="Field placeholder text"
+            ></textarea>
+            Textarea Value: {{ customForm.controls.disabledTextAreaControl.value }}
+        </div>
+    </fieldset>
+</form>
+<br />
+<small>
+    Form value: {{ customForm.getRawValue() | json }}<br />
+    Form Touched: {{ customForm.touched }}<br />
+    Form Dirty: {{ customForm.dirty }}<br />
+    Form Valid: {{ customForm.valid }}<br />
+</small>

@@ -1,0 +1,21 @@
+<form [formGroup]="customForm" class="flex-form">
+    <div>
+        <div fd-form-item>
+            <label fd-form-label>Date Picker</label>
+            <fd-date-picker
+                [disableFunction]="disableFunction"
+                [message]="isValid() ? 'This is valid(success) DatePicker' : 'This is invalid(error) DatePicker'"
+                [state]="isValid() ? 'success' : 'error'"
+                formControlName="date"
+            >
+            </fd-date-picker>
+        </div>
+        <br />
+        <small>
+            Touched: {{ customForm.controls.date.touched }}<br />
+            Dirty: {{ customForm.controls.date.dirty }}<br />
+            Valid: {{ customForm.controls.date.valid }}<br />
+            Selected Date: {{ customForm.controls.date.value?.toDateString() || 'null' }}
+        </small>
+    </div>
+</form>

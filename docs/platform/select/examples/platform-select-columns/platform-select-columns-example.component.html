@@ -1,0 +1,22 @@
+<fdp-form-group [noLabelLayout]="false">
+    <fdp-form-field id="columns" label="Two Columns" [rank]="4">
+        <fdp-select
+            name="columns"
+            width="7rem"
+            [firstColumnRatio]="2"
+            [secondColumnRatio]="4"
+            placeholder="Select an option"
+            [list]="option"
+            displayKey="label"
+            secondaryKey="secondaryText"
+            [showSecondaryText]="true"
+            secondaryTextAlignment="right"
+            (selectionChange)="onSelect($event)"
+            [controlTemplate]="customSelectTemplate"
+        ></fdp-select>
+        <p>Selected Item: {{ selectedItem }}</p>
+    </fdp-form-field>
+</fdp-form-group>
+<ng-template #customSelectTemplate let-selected="selected">
+    {{ selected?.value || 'Select an option' }}
+</ng-template>

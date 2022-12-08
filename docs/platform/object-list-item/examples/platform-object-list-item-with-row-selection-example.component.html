@@ -1,0 +1,55 @@
+<fd-toolbar fdType="info" [active]="true">
+    <label fd-toolbar-label>{{ _selectedItems.length }} : Items selected</label>
+</fd-toolbar>
+<fdp-list
+    [hasObject]="true"
+    [dataSource]="_dataSource"
+    [(ngModel)]="_selectedItems"
+    selectionMode="multi"
+    (selectedItemChange)="_showItemInfo($event)"
+    [rowSelection]="true"
+    [ariaMultiselectable]="true"
+    [ariaLabel]="_selectedItems.length > 0 ? _selectedItems.length + 'Items selected' : '0 Items selected'"
+>
+    <fdp-object-list-item
+        *fdpItemDef="let product"
+        [title]="product.title"
+        [introductionText]="product.introductionText"
+        [currency]="product.currency"
+        [amount]="product.amount"
+        [image]="product.image"
+    >
+        <fdp-object-list-item-row [attributeLabel]="product.attribute1">
+            <span
+                fd-object-marker
+                [title]="product.tip1"
+                [glyph]="product.gylp1"
+                aria-label="Favourite Icon with Text"
+            ></span>
+            <span
+                fd-object-marker
+                [title]="product.tip2"
+                [glyph]="product.gylp2"
+                aria-label="Flag Icon with Text"
+            ></span>
+        </fdp-object-list-item-row>
+        <fdp-object-list-item-row [attributeLabel]="product.attribute2">
+            <span
+                fd-object-status
+                [status]="product.status1"
+                [glyph]="product.statusgyph1"
+                [label]="product.statuslabel1"
+                [inverted]="product.inverted1"
+            ></span>
+        </fdp-object-list-item-row>
+        <fdp-object-list-item-row [attributeLabel]="product.attribute3">
+            <span
+                fd-object-status
+                [status]="product.status2"
+                [glyph]="product.statusgyph2"
+                [label]="product.statuslabel2"
+                [inverted]="product.inverted2"
+            ></span>
+        </fdp-object-list-item-row>
+    </fdp-object-list-item>
+</fdp-list>

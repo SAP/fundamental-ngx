@@ -1,0 +1,54 @@
+<div style="width: 50%; display: inline-block">
+    <button fd-button label="Menu with icons" [fdMenu]="true" [fdMenuTrigger]="menuIcons"></button>
+
+    <fd-menu #menuIcons>
+        <li fd-menu-item>
+            <a fd-menu-interactive href="#">
+                <fd-menu-addon position="before" glyph="cart"></fd-menu-addon>
+                <span fd-menu-title>Option 1</span>
+            </a>
+        </li>
+
+        <li fd-menu-item>
+            <a fd-menu-interactive href="#">
+                <fd-menu-addon position="before" glyph="accept"></fd-menu-addon>
+                <span fd-menu-title>Option 2</span>
+                <fd-menu-addon glyph="decline"></fd-menu-addon>
+            </a>
+        </li>
+
+        <li fd-menu-item>
+            <a fd-menu-interactive href="#">
+                <span fd-menu-title>Option 3</span>
+                <fd-menu-addon glyph="menu"></fd-menu-addon>
+            </a>
+        </li>
+    </fd-menu>
+</div>
+
+<div style="width: 50%; display: inline-block">
+    <button fd-button label="Menu with shortcuts" [fdMenu]="true" [fdMenuTrigger]="menuShortcut"></button>
+
+    <fd-menu #menuShortcut>
+        <li fd-menu-item>
+            <a fd-menu-interactive href="#">
+                <span fd-menu-title>Save</span>
+                <span fd-menu-shortcut>Ctrl + S</span>
+            </a>
+        </li>
+
+        <li fd-menu-item>
+            <a fd-menu-interactive href="#">
+                <span fd-menu-title>Print</span>
+                <span fd-menu-shortcut>Ctrl + P</span>
+            </a>
+        </li>
+
+        <li fd-menu-item>
+            <a fd-menu-interactive href="#">
+                <span fd-menu-title>Close Tab</span>
+                <span fd-menu-shortcut>Ctrl + W</span>
+            </a>
+        </li>
+    </fd-menu>
+</div>

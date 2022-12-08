@@ -1,0 +1,60 @@
+<fdp-form-group [noLabelLayout]="false" mainTitle="Combobox playground" columnLayout="XL2-L2-M1-S1" fdCompact>
+    <fdp-form-field id="combobox-states" label="Select state" [column]="1">
+        <fdp-combobox
+            name="combobox-states"
+            placeholder="Select state"
+            [dataSource]="states"
+            [value]="states[0]"
+            (selectionChange)="onSelectState($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+    <fdp-form-field id="combobox-state" label="Combobox with selected state" [column]="2">
+        <fdp-combobox
+            name="combobox-state"
+            placeholder="Type some text..."
+            [state]="selectedState"
+            [stateMessage]="selectedState + ' state message'"
+            [dataSource]="dataSource"
+        >
+        </fdp-combobox>
+    </fdp-form-field>
+</fdp-form-group>
+
+<fdp-form-group [noLabelLayout]="false" mainTitle="Static states" columnLayout="XL2-L2-M1-S1" fdCompact>
+    <fdp-form-field id="combobox-state-success" label="Combobox with success state" [column]="1">
+        <fdp-combobox
+            name="combobox-state"
+            placeholder="Type some text..."
+            state="success"
+            stateMessage="Success state message"
+            [dataSource]="dataSource"
+        ></fdp-combobox>
+    </fdp-form-field>
+    <fdp-form-field id="combobox-state-error" label="Combobox with error state" [column]="2">
+        <fdp-combobox
+            name="combobox-state"
+            placeholder="Type some text..."
+            state="error"
+            stateMessage="Error state message"
+            [dataSource]="dataSource"
+        ></fdp-combobox>
+    </fdp-form-field>
+    <fdp-form-field id="combobox-state-warning" label="Combobox with warning state" [column]="1">
+        <fdp-combobox
+            name="combobox-state"
+            placeholder="Type some text..."
+            state="warning"
+            stateMessage="Warning state message"
+            [dataSource]="dataSource"
+        ></fdp-combobox>
+    </fdp-form-field>
+    <fdp-form-field id="combobox-state-info" label="Combobox with information state" [column]="2">
+        <fdp-combobox
+            name="combobox-state"
+            placeholder="Type some text..."
+            state="information"
+            stateMessage="Information state message"
+            [dataSource]="dataSource"
+        ></fdp-combobox>
+    </fdp-form-field>
+</fdp-form-group>

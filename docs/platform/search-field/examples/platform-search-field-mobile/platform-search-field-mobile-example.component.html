@@ -1,0 +1,17 @@
+<fdp-search-field
+    placeholder="Search"
+    [mobile]="true"
+    [mobileConfig]="mobileConfig"
+    [suggestions]="suggestions"
+    (searchSubmit)="onSearchSubmit($event)"
+    (inputChange)="onInputChange($event)"
+></fdp-search-field>
+
+<div class="result-block">
+    <div class="result-field">
+        <label>Input Change Text: </label><span>{{ inputText }}</span>
+    </div>
+    <div class="result-field">
+        <label>Search Submit Term: </label><span>{{ searchTerm }}</span>
+    </div>
+</div>

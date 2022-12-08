@@ -1,0 +1,54 @@
+<button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
+
+<div cdkScrollable cdkTrapFocus class="docs-wizard-example-overlay" #overlay>
+    <ng-container *ngIf="fullscreen">
+        <div class="docs-wizard-example-overlay-content">
+            <div class="docs-wizard-example-button">
+                <button fd-button (click)="exitFullscreenExample($event)">Exit Example</button>
+            </div>
+
+            <!-- The Wizard -->
+            <fd-wizard>
+                <fd-wizard-navigation>
+                    <ul fd-wizard-progress-bar size="md" role="list" aria-label="Wizard Steps">
+                        <li
+                            fd-wizard-step
+                            *ngFor="let step of steps; let i = index"
+                            [status]="step.status"
+                            (statusChange)="step.status = $event"
+                            [label]="step.label"
+                            [ariaLabel]="step.label"
+                            (keydown)="handleFocus($event, i)"
+                        >
+                            <fd-wizard-step-indicator [glyph]="step.glyph"></fd-wizard-step-indicator>
+                            <fd-wizard-content size="md">
+                                <h3 fd-title>{{ i + 1 }}. {{ step.label }}</h3>
+                                <fd-message-strip type="information" [dismissible]="false">
+                                    {{ step.messageStrip }}
+                                </fd-message-strip>
+                                <p style="margin-bottom: 0px">
+                                    {{ step.contentText }}
+                                </p>
+                                <fd-wizard-next-step *ngIf="i !== steps.length - 1">
+                                    <button fd-button fdCompact fdType="emphasized" (click)="goToStep(i + 2)">
+                                        Go to Step {{ i + 2 }}
+                                    </button>
+                                </fd-wizard-next-step>
+                            </fd-wizard-content>
+                        </li>
+                    </ul>
+                </fd-wizard-navigation>
+                <div fd-bar barDesign="footer">
+                    <div fd-bar-right>
+                        <fd-bar-element>
+                            <button fd-button label="Save" fdType="transparent" fdCompact></button>
+                        </fd-bar-element>
+                        <fd-bar-element>
+                            <button fd-button label="Cancel" fdType="transparent" fdCompact></button>
+                        </fd-bar-element>
+                    </div>
+                </div>
+            </fd-wizard>
+        </div>
+    </ng-container>
+</div>

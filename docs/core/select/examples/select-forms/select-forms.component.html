@@ -1,0 +1,19 @@
+<h4>Default select</h4>
+<form [formGroup]="customForm">
+    <fd-select formControlName="selectControl" [required]="true">
+        <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+    </fd-select>
+</form>
+<small style="display: block">Value: {{ customForm.controls.selectControl.value }}</small>
+<small style="display: block">Touched: {{ customForm.touched }}</small>
+<small style="display: block">Dirty: {{ customForm.dirty }}</small>
+<small style="display: block">Status: {{ customForm.status }}</small>
+
+<h4>Disabled select</h4>
+<form [formGroup]="disabledForm">
+    <fd-select formControlName="disabledControl">
+        <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+    </fd-select>
+</form>
+<small style="display: block">Value: {{ disabledForm.controls.disabledControl.value }}</small>
+<small style="display: block">Status: {{ disabledForm.status }}</small>

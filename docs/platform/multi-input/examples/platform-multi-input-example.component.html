@@ -1,0 +1,22 @@
+<fdp-form-group>
+    <fdp-form-field
+        label="Default Multi Input Field"
+        id="multi-input-simple"
+        name="reactiveFormInput"
+        [rank]="1"
+        placeholder="Field placeholder text"
+    >
+        <fdp-multi-input
+            placeholder="Field placeholder text"
+            type="text"
+            id="fdp-id-default"
+            name="input1"
+            [dataSource]="_datasource"
+            (selectionChange)="showValues($event)"
+            displayKey="state"
+            [autofocus]="true"
+            [(ngModel)]="selected"
+        >
+        </fdp-multi-input>
+    </fdp-form-field>
+</fdp-form-group>

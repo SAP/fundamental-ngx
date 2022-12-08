@@ -1,0 +1,9 @@
+<fdp-select
+    placeholder="Select an option"
+    (selectionChange)="onSelect($event)"
+    width="7rem"
+    [noWrapText]="true"
+    [list]="option"
+>
+</fdp-select>
+<small style="display: block">Selected value: {{ selectedValue | json }}</small>

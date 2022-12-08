@@ -1,0 +1,30 @@
+<main class="fd-page">
+    <div class="fd-page__content fd-has-background-color-neutral-2">
+        <h4>Enter value between {{ MIN_VALUE }} and {{ MAX_VALUE }}</h4>
+        <fdp-form-group #fg>
+            <fdp-form-field
+                #formField
+                id="reactive-form-qty"
+                label="Quantity"
+                placeholder="Things quantity"
+                [required]="true"
+                [validators]="stepInputQtyValidators"
+            >
+                <fdp-number-step-input
+                    [id]="'reactive-form-qty'"
+                    ariaLabelledBy="step-input-valueRequiredError step-input-valueMinError step-input-valueMaxError"
+                    name="qty"
+                    [formControl]="formField.formControl"
+                ></fdp-number-step-input>
+            </fdp-form-field>
+
+            <ng-template #i18n let-errors>
+                <span id="step-input-valueRequiredError" *ngIf="errors.required"> Value is required </span>
+                <span id="step-input-valueMinError" *ngIf="errors.min"> Value must be more than {{ MIN_VALUE }} </span>
+                <span id="step-input-valueMaxError" *ngIf="errors.max"> Value must be less than {{ MAX_VALUE }} </span>
+            </ng-template>
+        </fdp-form-group>
+    </div>
+    <pre>Form result: {{ fg.formGroup.value | json }}</pre>
+    <pre>Form Status: {{ fg.formGroup.status }}</pre>
+</main>

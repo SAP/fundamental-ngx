@@ -1,0 +1,5 @@
+<fd-progress-indicator [valueNow]="animationValue" [animate]="true"></fd-progress-indicator>
+<fd-progress-indicator [valueNow]="noAnimationValue"></fd-progress-indicator>
+
+<button fd-button (click)="animationValue = 90" style="margin-right: 5px">Set top example to 90</button>
+<button fd-button (click)="noAnimationValue = 90">Set bottom example to 90</button>

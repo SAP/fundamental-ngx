@@ -1,0 +1,23 @@
+<fd-grid-list selectionMode="singleSelect" (selectionChange)="onSelectionChange($event)">
+    <fd-grid-list-title-bar title="Products">
+        <span fd-grid-list-title-bar-additional-title-item [innerText]="'(' + list.length + ')'"></span>
+    </fd-grid-list-title-bar>
+
+    <fd-grid-list-item
+        *ngFor="let item of list"
+        [type]="item.type"
+        [counter]="item.counter"
+        [value]="item.id"
+        [selected]="item.selected"
+        [noPadding]="true"
+        (press)="press($event)"
+        (detail)="detail($event)"
+        (navigate)="navigate($event)"
+    >
+        <fd-grid-list-item-toolbar *ngIf="item.toolbarText">{{ item.toolbarText }}</fd-grid-list-item-toolbar>
+
+        <ng-template fd-grid-list-item-body>
+            <img [src]="item.url" alt="Image" />
+        </ng-template>
+    </fd-grid-list-item>
+</fd-grid-list>

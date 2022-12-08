@@ -1,0 +1,112 @@
+<fdp-form-group mainTitle="Header" columnLayout="XL3-L2-M1-S1">
+    <fdp-form-field
+        #f1
+        id="basicInput1"
+        label="Basic Input 1"
+        placeholder="Start entering detailed description"
+        [column]="1"
+    >
+        <fdp-input name="basicInput1" [formControl]="f1.formControl"></fdp-input>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #f2
+        id="basicInput2"
+        label="Basic Input 2"
+        placeholder="Start entering detailed description"
+        [column]="2"
+    >
+        <fdp-input name="basicInput2" [formControl]="f2.formControl"></fdp-input>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #f3
+        id="basicInput3"
+        label="Basic Input 3"
+        placeholder="Start entering detailed description"
+        [column]="3"
+    >
+        <fdp-input name="basicInput3" [formControl]="f3.formControl"></fdp-input>
+    </fdp-form-field>
+
+    <fdp-form-field-group label="Group Label Custom">
+        <fdp-form-field
+            #f4
+            id="fieldGroupInput1"
+            label="Field Group Input 1"
+            placeholder="Start entering detailed description"
+            [rank]="30"
+            [column]="1"
+        >
+            <fdp-input name="fieldGroupInput1" [formControl]="f4.formControl"></fdp-input>
+        </fdp-form-field>
+
+        <fdp-form-field
+            #f5
+            id="fieldGroupInput2"
+            label="Field Group Input 2"
+            placeholder="Start entering detailed description"
+            [column]="1"
+            [rank]="20"
+        >
+            <fdp-input name="fieldGroupInput2" [formControl]="f5.formControl"></fdp-input>
+        </fdp-form-field>
+
+        <fdp-form-field
+            #f6
+            id="fieldGroupInput3"
+            label="Field Group Input 3"
+            placeholder="Start entering detailed description"
+            [rank]="10"
+            [column]="1"
+        >
+            <fdp-input name="fieldGroupInput3" [formControl]="f6.formControl"></fdp-input>
+        </fdp-form-field>
+    </fdp-form-field-group>
+
+    <fdp-form-field-group label="Group Label Custom 2">
+        <fdp-form-field
+            #ff1
+            id="basicTextarea1"
+            label="Basic Textarea"
+            placeholder="Start entering detailed description"
+            hint="This is tooltip help"
+            [column]="1"
+            [rank]="20"
+            hintPlacement="left"
+        >
+            <fdp-textarea name="basicTextarea1" [formControl]="ff1.formControl"></fdp-textarea>
+        </fdp-form-field>
+        <fdp-form-field #ff8 id="switch1" label="Switch" [column]="2" [rank]="10">
+            <fdp-switch
+                [formControl]="ff8.formControl"
+                name="switch-1"
+                ariaLabel="switch-label"
+                ariaLabelledby="switch-label"
+                fdCozy
+                [semantic]="false"
+            >
+            </fdp-switch>
+        </fdp-form-field>
+    </fdp-form-field-group>
+
+    <fdp-form-field
+        #f9
+        id="basicInput4"
+        label="Basic Input 4"
+        placeholder="Start entering detailed description"
+        [column]="1"
+    >
+        <fdp-input name="basicInput222" [formControl]="f9.formControl"></fdp-input>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #f9
+        id="basicInput5"
+        label="Basic Input 5"
+        placeholder="Start entering detailed description"
+        [column]="2"
+    >
+        <fdp-input name="basicInput5" [formControl]="f9.formControl"></fdp-input>
+    </fdp-form-field>
+</fdp-form-group>

@@ -1,0 +1,45 @@
+<fdp-wizard-generator
+    [appendToWizard]="false"
+    [items]="stepItems"
+    [title]="wizardTitle"
+    (wizardFinished)="wizardFinished($event)"
+>
+    <ng-template fdp-wizard-generator-go-next-button let-goNext="goNext">
+        <fdp-button fdCondensed buttonType="emphasized" label="Custom next button" (click)="goNext()"></fdp-button>
+    </ng-template>
+    <ng-template fdp-wizard-generator-review-button let-goNext="goNext">
+        <fdp-button fdCondensed buttonType="emphasized" label="Custom review button" (click)="goNext()"></fdp-button>
+    </ng-template>
+    <ng-template fdp-wizard-generator-finish-button let-finish="finish">
+        <fdp-button fdCondensed buttonType="emphasized" label="Custom finish button" (click)="finish()"></fdp-button>
+    </ng-template>
+    <ng-template fdp-wizard-generator-summary-step let-steps="steps" let-editStep="editStep">
+        <ng-container *ngFor="let step of steps; trackBy: trackFn">
+            <h4 fd-title [headerSize]="4">{{ step.name }} step</h4>
+            <ng-container *ngFor="let group of step.forms">
+                <h4 fd-title [headerSize]="6">{{ group.title }} form</h4>
+                <fd-layout-grid style="margin-bottom: 2rem">
+                    <div fdLayoutGridRow>
+                        <div [fdLayoutGridCol]="4" [colMd]="4" [colLg]="4" [colXl]="4">
+                            <div *ngFor="let item of group.items">
+                                <label fd-form-label> {{ item.label }}: </label>
+                            </div>
+                        </div>
+                        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                            <div *ngFor="let item of group.items">
+                                <label fd-form-label>
+                                    {{ item.value || '-' }}
+                                </label>
+                            </div>
+                        </div>
+                        <div [fdLayoutGridCol]="1" [colMd]="2" [colLg]="2" [colXl]="2">
+                            <fdp-link href="#" (click)="_editStep($event, step.id, editStep)"> Edit </fdp-link>
+                        </div>
+                    </div>
+                </fd-layout-grid>
+            </ng-container>
+        </ng-container>
+    </ng-template>
+</fdp-wizard-generator>
+
+<p *ngIf="wizardValue">Wizard value: {{ wizardValue | json }}</p>

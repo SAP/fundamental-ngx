@@ -1,0 +1,25 @@
+<fd-layout-grid>
+    <div fdLayoutGridRow>
+        <div [fdLayoutGridCol]="6">
+            <example-layout-grid-block>Size: 6</example-layout-grid-block>
+        </div>
+    </div>
+
+    <div fdLayoutGridRow>
+        <div *ngFor="let column of [1, 2]" [fdLayoutGridCol]="4">
+            <example-layout-grid-block>Size: 4</example-layout-grid-block>
+        </div>
+    </div>
+
+    <div fdLayoutGridRow>
+        <div *ngFor="let column of [1, 2, 3, 4, 5]" [fdLayoutGridCol]="2">
+            <example-layout-grid-block>Size: 2</example-layout-grid-block>
+        </div>
+    </div>
+
+    <div fdLayoutGridRow>
+        <div *ngFor="let column of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]" [fdLayoutGridCol]="1">
+            <example-layout-grid-block>Size: 1</example-layout-grid-block>
+        </div>
+    </div>
+</fd-layout-grid>

@@ -1,0 +1,19 @@
+<fd-feed-input aria-label="Feed input">
+    <fd-avatar
+        fdFeedInputAvatar
+        image="https://avatars.dicebear.com/api/human/fe.svg?m=6&b=%23f5f0f0&mood[]=surprised"
+        size="s"
+        role="img"
+        aria-label="John Doe"
+        title="John Doe"
+    ></fd-avatar>
+
+    <textarea
+        fd-form-control
+        fdFeedInputTextarea
+        [fdFeedInputTextareaMaxRows]="7"
+        placeholder="Post something here"
+    ></textarea>
+
+    <button fdFeedInputButton aria-label="Send" title="Send"></button>
+</fd-feed-input>

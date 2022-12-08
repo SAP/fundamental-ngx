@@ -1,0 +1,91 @@
+<label fd-form-label>Icon Process Tabs Built by passing properties</label>
+<fd-tab-list mode="process">
+    <fd-tab glyph="edit" count="11 of 100 items" title="Title 1"> Content for tab 1 </fd-tab>
+    <fd-tab glyph="cart" count="12 of 100 items" title="Title 2"> Content for tab 2 </fd-tab>
+    <fd-tab glyph="menu" count="13 of 100 items" title="Title 3"> Content for tab 3 </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<label fd-form-label>Compact Process Tabs Built by passing properties</label>
+<fd-tab-list mode="process" fdCompact>
+    <fd-tab glyph="edit" count="11 of 100 items" title="Title 1"> Content for tab 1 </fd-tab>
+    <fd-tab glyph="cart" count="12 of 100 items" title="Title 2"> Content for tab 2 </fd-tab>
+    <fd-tab glyph="menu" count="13 of 100 items" title="Title 3"> Content for tab 3 </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<label fd-form-label>Process Tabs Built by defining own template</label>
+<fd-tab-list mode="process">
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-icon icon="menu"></span>
+            <div fd-tab-process>
+                <span fd-tab-label>11 of 100</span>
+                <span fd-tab-label>Title 1</span>
+            </div>
+        </ng-template>
+        Content for tab 1
+    </fd-tab>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-icon icon="edit"></span>
+            <div fd-tab-process>
+                <span fd-tab-label>12 of 100</span>
+                <span fd-tab-label>Title 2</span>
+            </div>
+        </ng-template>
+        Content for tab 2
+    </fd-tab>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-icon icon="search"></span>
+            <div fd-tab-process>
+                <span fd-tab-label>13 of 100</span>
+                <span fd-tab-label>Title 3</span>
+            </div>
+        </ng-template>
+        Content for tab 3
+    </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<label fd-form-label>Process Tabs Built by defining own template with routerLink</label>
+<nav fd-tab-nav mode="process">
+    <div fd-tab-item>
+        <a fd-tab-link [active]="rla1.isActive" [routerLink]="'tab1'" routerLinkActive #rla1="routerLinkActive">
+            <span fd-tab-icon icon="menu"></span>
+            <div fd-tab-process>
+                <span fd-tab-label>11 of 100</span>
+                <span fd-tab-label>Title 1</span>
+            </div>
+        </a>
+        <div fd-tab-process-icon></div>
+    </div>
+    <div fd-tab-item>
+        <a fd-tab-link [active]="rla2.isActive" [routerLink]="'tab2'" routerLinkActive #rla2="routerLinkActive">
+            <span fd-tab-icon icon="edit"></span>
+            <div fd-tab-process>
+                <span fd-tab-label>12 of 100</span>
+                <span fd-tab-label>Title 2</span>
+            </div>
+        </a>
+        <div fd-tab-process-icon></div>
+    </div>
+    <div fd-tab-item>
+        <a fd-tab-link [active]="rla3.isActive" [routerLink]="'tab3'" routerLinkActive #rla3="routerLinkActive">
+            <span fd-tab-icon icon="search"></span>
+            <div fd-tab-process>
+                <span fd-tab-label>13 of 100</span>
+                <span fd-tab-label>Title 3</span>
+            </div>
+        </a>
+    </div>
+</nav>
+
+<router-outlet name="process"></router-outlet>

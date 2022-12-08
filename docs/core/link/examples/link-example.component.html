@@ -1,0 +1,19 @@
+<a [routerLink]="['./']" fd-link aria-label="Standard">Standard Link</a> <br /><br />
+<a [routerLink]="['./']" fd-link [emphasized]="true" aria-label="Emphasized">Emphasized Link</a>
+<br /><br />
+<a fd-link [disabled]="true" aria-disabled="true">Disabled Link</a>
+<br /><br />
+<a [routerLink]="['./']" fd-link aria-label="Icon right">
+    Icon Right Link
+    <fd-icon [glyph]="arrowRight$ | async"></fd-icon>
+</a>
+<br /><br />
+<a [routerLink]="['./']" fd-link aria-label="Icon left">
+    <fd-icon [glyph]="arrowLeft$ | async"></fd-icon>
+    Icon Left Link
+</a>
+<br /><br />
+
+<div style="background-color: var(--sapShellColor); padding: 10px">
+    <a fd-link [routerLink]="['./']" fragment="inverted" aria-label="Inverted" [inverted]="true">Inverted Link</a>
+</div>

@@ -1,0 +1,7 @@
+<fdp-wizard-generator
+    [items]="stepItems"
+    [responsivePaddings]="false"
+    (wizardFinished)="wizardFinished($event)"
+></fdp-wizard-generator>
+
+<p *ngIf="wizardValue">Wizard value: {{ wizardValue | json }}</p>

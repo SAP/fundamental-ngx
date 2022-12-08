@@ -1,0 +1,69 @@
+<div class="fd-inline-help-example">
+    <span id="fd-inline-help-default">Default</span>
+    <fd-icon
+        glyph="question-mark"
+        fd-inline-help="Inline Help Tooltip"
+        tabindex="0"
+        aria-describedby="fd-inline-help-default"
+        ariaLabel="Inline Help Tooltip"
+    ></fd-icon>
+</div>
+
+<div class="fd-inline-help-example">
+    <span id="fd-inline-help-left">Left Position</span>
+    <fd-icon
+        glyph="question-mark"
+        fd-inline-help="Inline Help Tooltip"
+        placement="left"
+        tabindex="0"
+        ariaLabel="Inline Help Tooltip"
+        aria-describedby="fd-inline-help-left"
+    ></fd-icon>
+</div>
+
+<div class="fd-inline-help-example">
+    <span id="fd-inline-help-right">Right Position</span>
+    <fd-icon
+        glyph="question-mark"
+        fd-inline-help="Inline Help Tooltip"
+        placement="right"
+        tabindex="0"
+        ariaLabel="Inline Help Tooltip"
+        aria-describedby="fd-inline-help-right"
+    ></fd-icon>
+</div>
+
+<div class="fd-inline-help-example">
+    <span id="fd-inline-help-top">Top Position</span>
+    <fd-icon
+        glyph="question-mark"
+        fd-inline-help="Inline Help Tooltip"
+        placement="top"
+        tabindex="0"
+        ariaLabel="Inline Help Tooltip"
+        aria-describedby="fd-inline-help-top"
+    ></fd-icon>
+</div>
+
+<div class="fd-inline-help-example">
+    <span id="fd-inline-help-bottom">Bottom Position</span>
+    <fd-icon
+        glyph="question-mark"
+        fd-inline-help="Inline Help Tooltip"
+        placement="bottom"
+        tabindex="0"
+        ariaLabel="Inline Help Tooltip"
+        aria-describedby="fd-inline-help-bottom"
+    ></fd-icon>
+</div>
+
+<div class="fd-inline-help-example">
+    <input
+        fd-form-control
+        fd-inline-help="Inline Help Tooltip"
+        [placement]="rtlDirection$ | async"
+        placeholder="Inline help inside input"
+        ariaLabel="Inline Help Tooltip"
+        aria-describedby="fd-inline-help-input"
+    />
+</div>

@@ -1,0 +1,8 @@
+<fn-segmented-button [(ngModel)]="segments" multiple>
+    <button fn-button label="Button" fnType="layout" value="value1"></button>
+    <button fn-button label="Button" fnType="layout" value="value2"></button>
+    <button fn-button label="Button" fnType="layout" value="value3"></button>
+    <button fn-button label="Button" fnType="layout" value="value4"></button>
+</fn-segmented-button>
+
+<small style="display: block; margin-top: 15px">Selected items: {{ segments | json }}</small>

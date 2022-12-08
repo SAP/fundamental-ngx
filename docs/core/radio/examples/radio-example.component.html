@@ -1,0 +1,268 @@
+<h4 fd-form-header>Radio Buttons Examples</h4>
+<br />
+<fieldset fd-fieldset>
+    <legend fd-form-legend>Radio buttons</legend>
+    <fd-form-group>
+        <div fd-form-item>
+            <fd-radio-button value="val1" [id]="'radio-1'" name="radio-name-1" [(ngModel)]="optionVariable">
+                Option One
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button value="val2" [id]="'radio-2'" name="radio-name-1" [(ngModel)]="optionVariable">
+                Option One
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button value="val3" [id]="'radio-3'" name="radio-name-1" [(ngModel)]="optionVariable">
+                Option One
+            </fd-radio-button>
+        </div>
+    </fd-form-group>
+</fieldset>
+
+<fieldset fd-fieldset>
+    <legend fd-form-legend>Radio buttons disabled</legend>
+    <fd-form-group>
+        <div fd-form-item>
+            <fd-radio-button
+                value="val1"
+                [id]="'radio-4'"
+                name="radio-name-2"
+                [disabled]="true"
+                [(ngModel)]="optionTwoVariable"
+            >
+                Option One
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button value="val2" [id]="'radio-5'" name="radio-name-2" [(ngModel)]="optionTwoVariable">
+                Option One
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button value="val3" [id]="'radio-6'" name="radio-name-2" [(ngModel)]="optionTwoVariable">
+                Option One
+            </fd-radio-button>
+        </div>
+    </fd-form-group>
+</fieldset>
+
+<fieldset fd-fieldset>
+    <legend fd-form-legend>Radio buttons</legend>
+    <fd-form-group [isInline]="true">
+        <div fd-form-item>
+            <fd-radio-button value="val1" [id]="'radio-7'" name="radio-name-3" [(ngModel)]="optionThreeVariable">
+                Option One
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button value="val2" [id]="'radio-8'" name="radio-name-3" [(ngModel)]="optionThreeVariable">
+                Option One
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button value="val3" [id]="'radio-9'" name="radio-name-3" [(ngModel)]="optionThreeVariable">
+                Option One
+            </fd-radio-button>
+        </div>
+    </fd-form-group>
+</fieldset>
+
+<fieldset fd-fieldset>
+    <legend fd-form-legend>Radio button States</legend>
+    <fd-form-group>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-4"
+                [id]="'radio-12'"
+                value="val0"
+                state="default"
+                [(ngModel)]="optionFourVariable"
+            >
+                Default Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                [id]="'radio-13'"
+                name="radio-name-4"
+                state="success"
+                value="val1"
+                [(ngModel)]="optionFourVariable"
+            >
+                Valid(Success) Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-4"
+                [id]="'radio-14'"
+                value="val2"
+                state="warning"
+                [(ngModel)]="optionFourVariable"
+            >
+                Warning Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-4"
+                [id]="'radio-15'"
+                value="val3"
+                state="error"
+                [(ngModel)]="optionFourVariable"
+            >
+                Invalid(Error) Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-4"
+                [id]="'radio-16'"
+                value="val4"
+                state="information"
+                [(ngModel)]="optionFourVariable"
+            >
+                Information Option
+            </fd-radio-button>
+        </div>
+    </fd-form-group>
+</fieldset>
+
+<fieldset fd-fieldset>
+    <legend fd-form-legend>Radio button States compact mode</legend>
+    <fd-form-group>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-5"
+                [id]="'radio-17'"
+                value="val0"
+                state="default"
+                fdCompact
+                [(ngModel)]="optionFiveVariable"
+            >
+                Default Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-5"
+                [id]="'radio-18'"
+                state="success"
+                value="val1"
+                fdCompact
+                [(ngModel)]="optionFiveVariable"
+            >
+                Valid(Success) Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-5"
+                [id]="'radio-19'"
+                value="val2"
+                state="warning"
+                fdCompact
+                [(ngModel)]="optionFiveVariable"
+            >
+                Warning Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-5"
+                [id]="'radio-20'"
+                value="val3"
+                state="error"
+                fdCompact
+                [(ngModel)]="optionFiveVariable"
+            >
+                Invalid(Error) Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-5"
+                [id]="'radio-21'"
+                value="val4"
+                state="information"
+                fdCompact
+                [(ngModel)]="optionFiveVariable"
+            >
+                Information Option
+            </fd-radio-button>
+        </div>
+    </fd-form-group>
+</fieldset>
+
+<fieldset fd-fieldset>
+    <legend fd-form-legend>Radio button States disabled mode</legend>
+    <fd-form-group>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-6"
+                [id]="'radio-22'"
+                value="val0"
+                state="default"
+                fdCompact
+                [disabled]="true"
+                [(ngModel)]="optionSixVariable"
+            >
+                Default Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-6"
+                [id]="'radio-23'"
+                state="success"
+                value="val1"
+                fdCompact
+                [disabled]="true"
+                [(ngModel)]="optionSixVariable"
+            >
+                Valid(Success) Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-6"
+                [id]="'radio-24'"
+                value="val2"
+                state="warning"
+                fdCompact
+                [disabled]="true"
+                [(ngModel)]="optionSixVariable"
+            >
+                Warning Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-6"
+                [id]="'radio-25'"
+                value="val3"
+                state="error"
+                fdCompact
+                [disabled]="true"
+                [(ngModel)]="optionSixVariable"
+            >
+                Invalid(Error) Option
+            </fd-radio-button>
+        </div>
+        <div fd-form-item>
+            <fd-radio-button
+                name="radio-name-6"
+                [id]="'radio-26'"
+                value="val4"
+                state="information"
+                fdCompact
+                [disabled]="true"
+                [(ngModel)]="optionSixVariable"
+            >
+                Information Option
+            </fd-radio-button>
+        </div>
+    </fd-form-group>
+</fieldset>

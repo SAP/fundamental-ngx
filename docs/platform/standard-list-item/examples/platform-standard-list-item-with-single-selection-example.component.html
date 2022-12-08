@@ -1,0 +1,25 @@
+<fd-toolbar fdType="info" [active]="true">
+    <label role="status" fd-toolbar-label>Selected item: {{ _selectedItems?.[0]?.name || 'none' }}</label>
+</fd-toolbar>
+<fdp-list
+    [selection]="true"
+    [dataSource]="_dataSource"
+    selectionMode="single"
+    [selectedItems]="_selectedItems"
+    (selectedItemChange)="selectionChange($event)"
+    [hasByLine]="true"
+    [ariaMultiselectable]="false"
+    [ariaLabel]="_selectedItems ? _selectedItems + 'selected' : '0 Item selected'"
+>
+    <fdp-standard-list-item
+        *fdpItemDef="let address"
+        [avatarSrc]="address.img"
+        [avatarTitle]="address.imgInfo"
+        [description]="address.description"
+        [secondary]="address.info"
+        [title]="address.name"
+        [name]="address.name"
+        [value]="address.name"
+    >
+    </fdp-standard-list-item>
+</fdp-list>

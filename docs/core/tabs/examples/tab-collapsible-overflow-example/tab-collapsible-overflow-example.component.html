@@ -1,0 +1,16 @@
+<label fd-form-label>Collapsible overflow</label>
+<fd-tab-list [collapseOverflow]="true">
+    <fd-tab *ngFor="let tab of tabs" [title]="tab.title">
+        {{ tab.content }}
+    </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<label fd-form-label>Collapsible overflow with limited number of maximum visible tabs to 8</label>
+<fd-tab-list [collapseOverflow]="true" [maxVisibleTabs]="8">
+    <fd-tab *ngFor="let tab of tabs" [title]="tab.title">
+        {{ tab.content }}
+    </fd-tab>
+</fd-tab-list>

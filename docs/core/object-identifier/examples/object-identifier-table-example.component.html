@@ -1,0 +1,20 @@
+<table fd-table>
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>Product</th>
+            <th fd-table-cell>Country</th>
+            <th fd-table-cell>Price</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <tr *ngFor="let row of tableRows" fd-table-row>
+            <td fd-table-cell>
+                <fd-object-identifier [description]="row.column1Description" [medium]="true">
+                    {{ row.column1 }}
+                </fd-object-identifier>
+            </td>
+            <td fd-table-cell>{{ row.column2 }}</td>
+            <td fd-table-cell>{{ row.column3 }}</td>
+        </tr>
+    </tbody>
+</table>

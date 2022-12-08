@@ -1,0 +1,106 @@
+<fd-toolbar>
+    <label fd-toolbar-label>
+        <span fd-title>Uploads ({{ files.length }})</span>
+    </label>
+    <fd-toolbar-spacer></fd-toolbar-spacer>
+    <fd-file-uploader
+        #fileUploader
+        (selectedFilesChanged)="selectedFilesChanged($event)"
+        ariaLabel="Choose files"
+        ariaLabelledBy="Choose files"
+        placeholder="Choose Files to upload"
+        buttonLabel="Upload"
+        buttonAriaLabel="browse files"
+        [multiple]="true"
+        fdCompact
+        [inputHidden]="true"
+        [(ngModel)]="uploaderFiles"
+    >
+    </fd-file-uploader>
+    <button fd-button fdCompact [disabled]="getFilesSelected() === 0" (click)="alert('Download button clicked')">
+        Download
+    </button>
+    <button fd-button fdCompact [disabled]="getFilesSelected() < 2" (click)="deleteMultiple()">Delete Multiple</button>
+</fd-toolbar>
+
+<fd-upload-collection [selection]="true">
+    <li
+        fd-list-item
+        fd-upload-collection-item
+        *ngFor="let file of files; let idx = index"
+        [fileName]="file.fileName"
+        [extension]="file.extension"
+        (deleteClicked)="openDeleteDialog($event, file, deleteDialog)"
+        (fileNameChanged)="fileNameChanged($event)"
+        [selected]="file.selected"
+    >
+        <fd-checkbox [(ngModel)]="file.selected" (click)="onCheckboxClick(file, idx, $event)"></fd-checkbox>
+        <span fd-list-thumbnail fd-upload-collection-thumbnail><fd-icon [glyph]="file.icon"></fd-icon></span>
+        <div fd-list-content>
+            <div fd-upload-collection-title-container>
+                <a href="#" fd-link fd-list-title fd-upload-collection-title></a>
+                <fd-upload-collection-form-item></fd-upload-collection-form-item>
+                <span
+                    *ngIf="file.marker1"
+                    fd-object-marker
+                    [glyph]="file.marker1"
+                    title="Favorite"
+                    aria-label="Favorite Icon"
+                ></span>
+                <span
+                    *ngIf="file.marker2"
+                    fd-object-marker
+                    [glyph]="file.marker2"
+                    title="Flag"
+                    aria-label="Favorite Flag"
+                ></span>
+            </div>
+            <div fd-upload-collection-description>
+                This is the file description
+                <span fd-upload-collection-text-separator></span>
+                This is an additional description
+            </div>
+            <div fd-upload-collection-status-group>
+                <span
+                    fd-object-status
+                    fd-upload-collection-status-item
+                    status="negative"
+                    label="Negative Object Status"
+                    title="Object status Negative"
+                    aria-label="Object status Negative"
+                ></span>
+                <span fd-upload-collection-text-separator></span>
+                <span
+                    fd-object-status
+                    fd-upload-collection-status-item
+                    status="positive"
+                    label="Positive Object Status"
+                    title="Object status Positive"
+                    aria-label="Object status Positive"
+                ></span>
+            </div>
+        </div>
+        <fd-upload-collection-button-group></fd-upload-collection-button-group>
+    </li>
+</fd-upload-collection>
+
+<fd-message-page glyph="attachment" *ngIf="!files.length" style="margin-top: 30px">
+    <fd-message-page-title>No files found. </fd-message-page-title>
+    <fd-message-page-subtitle> Use the "Upload" button to upload files. </fd-message-page-subtitle>
+</fd-message-page>
+
+<ng-template let-dialog let-dialogConfig="dialogConfig" #deleteDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 fd-title>Delete Confirmation</h1>
+        </fd-dialog-header>
+        <fd-dialog-body>
+            <p role="dialog">Are you sure you want to delete this file?</p>
+        </fd-dialog-body>
+
+        <fd-dialog-footer fdCozy>
+            <fd-button-bar fdType="emphasized" label="Yes" (click)="dialog.close('Yes')"> </fd-button-bar>
+            <fd-button-bar label="Cancel" (click)="dialog.dismiss()"> </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>

@@ -1,0 +1,28 @@
+<fdp-form-group [noLabelLayout]="false">
+    <fdp-form-field id="group" label="Group with Key">
+        <fdp-multi-combobox
+            name="group"
+            placeholder="Type some text..."
+            [dataSource]="dataSource"
+            displayKey="name"
+            [group]="true"
+            groupKey="type"
+            (selectionChange)="onSelect($event)"
+            [selectedItems]="selectedItems"
+        ></fdp-multi-combobox>
+        <p>Selected: {{ selectedItems | json }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="group-without-key" label="Group without Key">
+        <fdp-multi-combobox
+            name="group-without-key"
+            placeholder="Type some text..."
+            [dataSource]="dataSource"
+            displayKey="name"
+            [group]="true"
+            (selectionChange)="onSelect1($event)"
+            [selectedItems]="selectedItems1"
+        ></fdp-multi-combobox>
+        <p>Selected: {{ selectedItems1 | json }}</p>
+    </fdp-form-field>
+</fdp-form-group>

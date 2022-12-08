@@ -1,0 +1,21 @@
+<fdp-form-group #ffg [formGroup]="form">
+    <fdp-form-field #ffl1 id="format1" label="date picker with custom output format">
+        <fdp-date-picker name="format1" [formControl]="ffl1.formControl" placeholder="mm/dd/yyyy"></fdp-date-picker>
+    </fdp-form-field>
+
+    <fdp-form-field #ffl2 id="format2" label="range date picker custom format">
+        <fdp-date-picker
+            name="format2"
+            placeholder="mm/dd/yy // mm/dd/yy"
+            type="range"
+            [formControl]="ffl2.formControl"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+</fdp-form-group>
+
+<div>Selected Date: {{ form.controls.format1?.value?.toDateString() }}</div>
+<br />
+<br />
+<div>Selected First Date: {{ form.controls.format2?.value?.start?.toDateString() }}</div>
+<div>Selected Last Date: {{ form.controls.format2?.value?.end?.toDateString() }}</div>

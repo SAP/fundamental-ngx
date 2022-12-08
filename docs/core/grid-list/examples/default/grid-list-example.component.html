@@ -1,0 +1,57 @@
+<fd-grid-list>
+    <fd-grid-list-title-bar [title]="'Products'">
+        <span fd-grid-list-title-bar-additional-title-item [innerText]="'(' + list.length + ')'"></span>
+
+        <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
+
+        <button
+            fd-button
+            fdType="transparent"
+            glyph="sort"
+            aria-labelledby="grid-list-title-bar-1 grid-list-button-1"
+            aria-label="Sort"
+            title="Sort"
+            fdCompact
+            (click)="showAlert('Sort')"
+        ></button>
+        <button
+            fd-button
+            fdType="transparent"
+            glyph="filter"
+            aria-label="Filter"
+            title="Filter"
+            fdCompact
+            (click)="showAlert('Filter')"
+        ></button>
+        <button
+            fd-button
+            fdType="transparent"
+            glyph="group-2"
+            aria-label="Group"
+            title="Group"
+            fdCompact
+            (click)="showAlert('Group')"
+        ></button>
+    </fd-grid-list-title-bar>
+
+    <fd-grid-list-item
+        *ngFor="let item of list"
+        [type]="item.type"
+        [counter]="item.counter"
+        [title]="item.title"
+        [description]="item.description"
+        (navigate)="navigate()"
+    >
+        <fd-avatar fd-grid-list-item-image image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+
+        <ng-template fd-grid-list-item-body>
+            <p>781 Main Street</p>
+            <p>Anytown, SD 57401</p>
+            <p>USA</p>
+            <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
+        </ng-template>
+    </fd-grid-list-item>
+</fd-grid-list>
+
+<span aria-hidden="true" style="display: none" id="grid-list-button-1">Sort</span>
+<span aria-hidden="true" style="display: none" id="grid-list-title-bar-1">Products with {{ list.length }} items</span>

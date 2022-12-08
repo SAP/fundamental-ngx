@@ -1,0 +1,132 @@
+<h3>Use With Reactive Form</h3>
+<p>Compact radio group with 'default' state and with default selection</p>
+<fdp-form-group [formGroup]="form1">
+    <fdp-form-field #ffl1 id="radioc1" [rank]="1">
+        <fdp-radio-group name="radioc1" fdCompact selected="spring" [isInline]="false" [formControl]="ffl1.formControl">
+            <fdp-radio-button value="winter">Winter</fdp-radio-button>
+            <fdp-radio-button value="spring">Spring</fdp-radio-button>
+            <fdp-radio-button value="summer">Summer</fdp-radio-button>
+            <fdp-radio-button value="autumn">Autumn</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+<p style="margin-left: 2rem">Selected value: {{ form1.controls.radioc1?.value }}</p>
+<br />
+
+<p>Inline cozy radio group</p>
+<fdp-form-group [formGroup]="form2">
+    <fdp-form-field #ffl2 id="radioc2" [rank]="1">
+        <fdp-radio-group name="radioc2" fdCozy [isInline]="true" [formControl]="ffl2.formControl">
+            <fdp-radio-button value="winter">Winter</fdp-radio-button>
+            <fdp-radio-button value="spring">Spring</fdp-radio-button>
+            <fdp-radio-button value="summer">Summer</fdp-radio-button>
+            <fdp-radio-button value="autumn">Autumn</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+<p style="margin-left: 2rem">Selected value: {{ form2.controls.radioc2?.value }}</p>
+<br />
+
+<p>Radio group with default property values</p>
+<fdp-form-group [formGroup]="form3" [object]="form3Data">
+    <fdp-form-field #ffl3 id="radioc3" [rank]="1">
+        <fdp-radio-group name="radioc3" [isInline]="true" [formControl]="ffl3.formControl">
+            <fdp-radio-button value="winter">Winter</fdp-radio-button>
+            <fdp-radio-button value="spring">Spring</fdp-radio-button>
+            <fdp-radio-button value="summer">Summer</fdp-radio-button>
+            <fdp-radio-button value="autumn">Autumn</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+<p style="margin-left: 2rem">Selected value: {{ form3.controls.radioc3?.value }}</p>
+<br />
+
+<p>Radio group with disabled button and validation error</p>
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <fdp-form-group [formGroup]="form4">
+        <fdp-form-field #ffl4 id="radioc4" [rank]="1" [required]="true" label="select your favorite month">
+            <fdp-radio-group
+                name="radioc4"
+                fdCompact
+                [isInline]="true"
+                ariaLabel="select your favorite month"
+                [formControl]="ffl4.formControl"
+            >
+                <fdp-radio-button value="january">January</fdp-radio-button>
+                <fdp-radio-button value="february">February</fdp-radio-button>
+                <fdp-radio-button value="march">March</fdp-radio-button>
+                <fdp-radio-button value="april">April</fdp-radio-button>
+            </fdp-radio-group>
+            <fdp-button fdCompact type="submit" label="Submit"></fdp-button>
+            <fdp-button
+                fdCompact
+                type="reset"
+                style="margin: 2rem 2rem 0 2rem"
+                label="Reset"
+                (click)="onReset()"
+            ></fdp-button>
+        </fdp-form-field>
+
+        <ng-template #i18n let-errors>
+            <ng-container *ngIf="errors.required">
+                <span>Value is required.</span>
+            </ng-container>
+        </ng-template>
+    </fdp-form-group>
+</form>
+<p style="margin-left: 2rem">Selected value: {{ form4.controls.radioc4?.value }}</p>
+<br />
+
+<p>Radio group using FormGroup and FormControl</p>
+<fdp-form-group [formGroup]="form5">
+    <fdp-form-field id="radioc5" [rank]="1">
+        <fdp-radio-group name="radioc5" fdCompact selected="march" [isInline]="false" formControlName="month">
+            <fdp-radio-button value="january" [disabled]="true">January</fdp-radio-button>
+            <fdp-radio-button value="february">February</fdp-radio-button>
+            <fdp-radio-button value="march">March</fdp-radio-button>
+            <fdp-radio-button value="april">April</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+<p style="margin-left: 2rem">Selected value: {{ form5.controls.month?.value }}</p>
+
+<hr />
+<h3>Use With Template Driven Form</h3>
+<p>Inline compact radio group with default selection</p>
+<fdp-form-group>
+    <fdp-form-field id="radioc6" [rank]="1">
+        <fdp-radio-group name="radioc6" fdCompact [isInline]="true" [(ngModel)]="favoriteSeason">
+            <fdp-radio-button value="winter">Winter</fdp-radio-button>
+            <fdp-radio-button value="spring">Spring</fdp-radio-button>
+            <fdp-radio-button value="summer">Summer</fdp-radio-button>
+            <fdp-radio-button value="autumn">Autumn</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+<p style="margin-left: 2rem">Selected Value: {{ favoriteSeason }}</p>
+
+<p>Inline compact radio group</p>
+<fdp-form-group>
+    <fdp-form-field id="radioc7" [rank]="1">
+        <fdp-radio-group name="radioc7" fdCompact [isInline]="true" [(ngModel)]="favoriteSeason2">
+            <fdp-radio-button value="winter">Winter</fdp-radio-button>
+            <fdp-radio-button value="spring">Spring</fdp-radio-button>
+            <fdp-radio-button value="summer">Summer</fdp-radio-button>
+            <fdp-radio-button value="autumn">Autumn</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+<p style="margin-left: 2rem">Selected Value: {{ favoriteSeason2 }}</p>
+
+<p>Radio group with disabled item</p>
+<fdp-form-group>
+    <fdp-form-field id="radioc8" [rank]="1">
+        <fdp-radio-group name="radioc8" fdCompact [isInline]="false" [(ngModel)]="favoriteMonth">
+            <fdp-radio-button value="january" [disabled]="true">January</fdp-radio-button>
+            <fdp-radio-button value="february">February</fdp-radio-button>
+            <fdp-radio-button value="march">March</fdp-radio-button>
+            <fdp-radio-button value="april">April</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+<p style="margin-left: 2rem">Selected Value: {{ favoriteMonth }}</p>

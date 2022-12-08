@@ -1,0 +1,61 @@
+<main class="fd-page">
+    <div *ngIf="true" class="fd-page__content fd-has-background-color-neutral-2">
+        <fdp-form-group #fg2 [formGroup]="form" mainTitle="XL3-L2-M2-S1" columnLayout="XL3-L2-M2-S1">
+            <fdp-form-field
+                #ff1
+                id="basicTextarea18"
+                label="Basic Textarea with Platform Forms"
+                placeholder="Start entering detailed description"
+                hint="This is tooltip help"
+                [column]="1"
+                [rank]="1"
+                hintPlacement="left"
+            >
+                <fdp-textarea name="basicTextarea18" [formControl]="ff1.formControl"></fdp-textarea>
+            </fdp-form-field>
+            <fdp-form-field #ff2 id="seasons5" label="My favourite Seasons:" [column]="1" [rank]="2">
+                <fdp-checkbox-group
+                    [list]="seasons"
+                    name="seasons5"
+                    [isInline]="true"
+                    ariaLabel="My favourite Seasons"
+                    [formControl]="ff2.formControl"
+                ></fdp-checkbox-group>
+            </fdp-form-field>
+            <fdp-form-field
+                #ff3
+                id="basicTextarea19"
+                label="Basic Textarea with Platform Forms 2"
+                placeholder="Start entering detailed description"
+                hint="This is tooltip help"
+                [column]="1"
+                [rank]="3"
+            >
+                <fdp-textarea name="basicTextarea19" [formControl]="ff3.formControl"></fdp-textarea>
+            </fdp-form-field>
+            <fdp-form-field
+                #ff5
+                id="basicTextarea20"
+                label="Basic Textarea with Platform Forms 5"
+                placeholder="Start entering detailed description"
+                hint="This is tooltip help"
+                [column]="2"
+                [rank]="5"
+            >
+                <fdp-textarea name="basicTextarea20" [formControl]="ff5.formControl"></fdp-textarea>
+            </fdp-form-field>
+            <fdp-form-field
+                #ff6
+                id="basicTextarea21"
+                label="Basic Textarea with Platform Forms 6"
+                placeholder="Start entering detailed description"
+                hint="This is tooltip help"
+                [column]="2"
+                [rank]="6"
+            >
+                <fdp-textarea name="basicTextarea21" [formControl]="ff6.formControl"></fdp-textarea>
+            </fdp-form-field>
+        </fdp-form-group>
+        <br />
+    </div>
+</main>

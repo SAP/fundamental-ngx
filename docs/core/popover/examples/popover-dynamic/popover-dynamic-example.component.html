@@ -1,0 +1,16 @@
+<fd-popover
+    #popoverComponent
+    [closeOnOutsideClick]="true"
+    [focusTrapped]="true"
+    [noArrow]="false"
+    title="top"
+    [focusAutoCapture]="true"
+>
+    <fd-popover-control>
+        <button fd-button glyph="add"></button>
+    </fd-popover-control>
+    <fd-popover-body>
+        <button style="margin: 1rem" fd-button (click)="updatePopover()">Click me to show the avatar</button>
+        <fd-avatar *ngIf="showAvatar" [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
+    </fd-popover-body>
+</fd-popover>

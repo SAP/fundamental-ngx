@@ -1,0 +1,27 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 id="fd-dialog-header-5" fd-title>Wild pineapples</h1>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <div id="fd-dialog-body-5" role="dialog">
+                Certain bat-pollinated wild pineapples, members of the Bromeliad family, do the exact opposite of most
+                flowers by opening their flowers at night and closing them during the day.
+            </div>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                fd-initial-focus
+                fdType="emphasized"
+                label="Interesting"
+                (click)="dialog.close()"
+                ariaLabel="Interesting Emphasized"
+            >
+            </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<button fd-button label="Open in mobile mode" (click)="openDialog(dialogTemplate)"></button>

@@ -1,0 +1,7 @@
+<span *ngFor="let theme of themes" style="padding: 10px">
+    <button fd-button (click)="selectTheme(theme.id)" [label]="theme.name"></button>
+</span>
+
+<!--Uncomment if used standalone-->
+<link rel="stylesheet" *ngIf="cssUrl" [href]="cssUrl" />
+<link rel="stylesheet" *ngIf="cssCustomUrl" [href]="cssCustomUrl" />

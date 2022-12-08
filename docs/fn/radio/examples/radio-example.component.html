@@ -1,0 +1,48 @@
+<div style="display: flex; flex-direction: column; width: 200px">
+    <fn-radio-button [isGroup]="true" value="val1" id="radio-1" name="radio-name-1" [(ngModel)]="optionVariable">
+        First
+    </fn-radio-button>
+    <fn-radio-button [isGroup]="true" value="val2" id="radio-2" name="radio-name-1" [(ngModel)]="optionVariable">
+        Second
+    </fn-radio-button>
+    <fn-radio-button [isGroup]="true" value="val3" id="radio-3" name="radio-name-1" [(ngModel)]="optionVariable">
+        Third
+    </fn-radio-button>
+</div>
+<br /><br /><br />
+<fieldset>
+    <legend>Radio buttons disabled</legend>
+    <div fn-form-item>
+        <fn-radio-button
+            value="val1"
+            id="radio-4"
+            name="radio-name-2"
+            [disabled]="true"
+            [(ngModel)]="optionTwoVariable"
+        >
+            Option One
+        </fn-radio-button>
+    </div>
+    <div fn-form-item>
+        <fn-radio-button value="val2" id="radio-5" name="radio-name-2" [(ngModel)]="optionTwoVariable">
+            Option Two
+        </fn-radio-button>
+    </div>
+    <div fn-form-item>
+        <fn-radio-button value="val3" id="radio-6" name="radio-name-2" [(ngModel)]="optionTwoVariable">
+            Option Three
+        </fn-radio-button>
+    </div>
+</fieldset>
+<br /><br /><br />
+<form>
+    <fn-radio-button value="val1" id="radio-7" name="radio-name-3" [(ngModel)]="optionThreeVariable">
+        Angular
+    </fn-radio-button>
+    <fn-radio-button value="val2" id="radio-8" name="radio-name-3" [(ngModel)]="optionThreeVariable">
+        React
+    </fn-radio-button>
+    <fn-radio-button value="val3" id="radio-9" name="radio-name-3" [(ngModel)]="optionThreeVariable">
+        Vue
+    </fn-radio-button>
+</form>

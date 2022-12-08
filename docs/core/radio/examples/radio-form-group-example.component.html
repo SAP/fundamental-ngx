@@ -1,0 +1,35 @@
+<form [formGroup]="customForm" class="flex-form">
+    <fieldset fd-fieldset>
+        <div fd-form-item *ngFor="let value of radioInput.values">
+            <fd-radio-button
+                [selectedValue]="customForm.controls.radioInput.value"
+                [value]="value"
+                [name]="radioInput.name"
+                [formControlName]="radioInput.formControlName"
+            >
+                Option {{ value }}
+            </fd-radio-button>
+        </div>
+        <small>
+            Radio Button Value: {{ customForm.controls.radioInput.value }}<br />
+            Radio Button Touched: {{ customForm.controls.radioInput.touched }}<br />
+            Radio Button Dirty: {{ customForm.controls.radioInput.dirty }}<br />
+            Radio Button Valid: {{ customForm.controls.radioInput.valid }} </small
+        ><br />
+    </fieldset>
+
+    <fieldset fd-fieldset>
+        <div fd-form-item *ngFor="let value of disabledRadio.values">
+            <fd-radio-button
+                [selectedValue]="customForm.controls.disabledRadio.value"
+                [value]="value"
+                [name]="disabledRadio.name"
+                [formControlName]="disabledRadio.formControlName"
+            >
+                Option {{ value }}
+            </fd-radio-button>
+        </div>
+        <small>Disabled Radio Button Value: {{ customForm.controls.disabledRadio.value }}</small>
+    </fieldset>
+</form>
+<br /><br />

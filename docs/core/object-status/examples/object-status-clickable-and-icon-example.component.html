@@ -1,0 +1,44 @@
+<a
+    fd-object-status
+    status="negative"
+    glyph="message-error"
+    [clickable]="true"
+    label="Negative"
+    aria-label="Object Status Negative"
+></a>
+<a
+    fd-object-status
+    status="critical"
+    glyph="message-warning"
+    [clickable]="true"
+    label="Critical"
+    aria-label="Object Status Critical"
+></a>
+<a
+    fd-object-status
+    status="positive"
+    glyph="message-success"
+    [clickable]="true"
+    label="Positive"
+    aria-label="Object Status Positive"
+></a>
+<a
+    fd-object-status
+    status="informative"
+    glyph="message-information"
+    [clickable]="true"
+    label="Informative"
+    aria-label="Object Status Informative"
+></a>
+<a fd-object-status [clickable]="true" label="Default" aria-label="Object Status Default"></a>
+<br />
+<br />
+<ng-container *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8]">
+    <a
+        fd-object-status
+        [indicationColor]="item"
+        [clickable]="true"
+        label="Indication Color"
+        aria-label="Object Status Indication Color"
+    ></a>
+</ng-container>

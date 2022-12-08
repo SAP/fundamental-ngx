@@ -1,0 +1,36 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 id="fd-dialog-header-4" fd-title>Origin of the Pineapple Word</h1>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <div id="fd-dialog-body-4" role="dialog">
+                The word pineapple in English was first recorded in 1398, when it was originally used to describe the
+                reproductive organs of conifer trees (now termed pine cones). When European explorers discovered this
+                tropical fruit they called them pineapples (term first recorded in that sense in 1664) because of their
+                resemblance to what is now known as the pine cone. The term pine cone was first recorded in 1694, and
+                was used to replace the original meaning of pineapple.
+            </div>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                fd-initial-focus
+                fdType="emphasized"
+                label="Interesting"
+                (click)="dialog.close()"
+                ariaLabel="Interesting Emphasized"
+            >
+            </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<button fd-button label="Open draggable Dialog" (click)="openDraggableDialog(dialogTemplate)"></button>
+<button fd-button (click)="openResizableDialog(dialogTemplate)" label="Open resizable Dialog"></button>
+<button
+    fd-button
+    (click)="openClosableByButtonDialog(dialogTemplate)"
+    label="Open Dialog closable only with footer button"
+></button>

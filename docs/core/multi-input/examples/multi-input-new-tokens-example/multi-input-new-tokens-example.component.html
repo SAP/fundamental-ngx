@@ -1,0 +1,13 @@
+<fd-multi-input
+    [dropdownValues]="values"
+    [allowNewTokens]="true"
+    [displayFn]="displayFunc"
+    [newTokenParseFn]="parseFunc"
+    [newTokenValidateFn]="validateFunc"
+    [(ngModel)]="selected"
+></fd-multi-input>
+
+Selected: [<span *ngFor="let item of selected; let i = index">{{
+    i === selected.length - 1 ? item.name : item.name + ','
+}}</span
+>]

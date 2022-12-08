@@ -1,0 +1,44 @@
+<fd-feed-list aria-label="Feed List Item with action and footer">
+    <fd-feed-list-item
+        authorTitle="Author with very looong tiiiiiitttttttttttttttleeeeeeeeeeeeeeeeeeeeee"
+        authorLink="http://example.com/"
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        ariaLabel="Feed list item example"
+    >
+        <fd-feed-list-footer>
+            <small fd-item-footer-byline>Aug 20, 2020</small>
+            <small fd-item-footer-byline>
+                <a target="_blank" href="http://example.com/branch" class="fd-link">Reply link</a>
+            </small>
+        </fd-feed-list-footer>
+    </fd-feed-list-item>
+</fd-feed-list>
+<br />
+<fd-feed-list aria-label="Feed List Item with footer only">
+    <fd-feed-list-item
+        authorTitle="Author without link"
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        ariaLabel="Feed list item example"
+    >
+        <fd-feed-list-footer>
+            <fd-toolbar>
+                <label fd-toolbar-label>Feed list item</label>
+                <fd-toolbar-separator></fd-toolbar-separator>
+                <label fd-toolbar-label>toolbar in footer</label>
+            </fd-toolbar>
+        </fd-feed-list-footer>
+    </fd-feed-list-item>
+</fd-feed-list>
+<br />
+<fd-feed-list aria-label="Feed List Item with footer only">
+    <fd-feed-list-item
+        authorTitle="Author without link"
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        ariaLabel="Feed list item example"
+    >
+        <fd-feed-list-footer>
+            <hr />
+            <strong><em>Custom footer note without any styles</em></strong>
+        </fd-feed-list-footer>
+    </fd-feed-list-item>
+</fd-feed-list>

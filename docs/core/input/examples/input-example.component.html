@@ -1,0 +1,25 @@
+<h4 fd-form-header>Examples</h4>
+<br />
+<div fd-form-item>
+    <label fd-form-label for="input-1">Default Input</label>
+    <input fd-form-control type="text" id="input-1" placeholder="Field placeholder text" />
+</div>
+<div fd-form-item>
+    <label fd-form-label [required]="true" for="input-2">Required Input:</label>
+    <input fd-form-control type="text" id="input-2" placeholder="Field placeholder text" aria-required="true" />
+</div>
+<div fd-form-item>
+    <label fd-form-label for="input-3">Password</label>
+    <input fd-form-control type="password" id="input-3" placeholder="Field placeholder text" aria-required="true" />
+</div>
+<div fd-form-item>
+    <label fd-form-label for="input-4">Compact</label>
+    <input
+        fd-form-control
+        fdCompact
+        type="password"
+        id="input-4"
+        placeholder="Field placeholder text"
+        aria-required="true"
+    />
+</div>

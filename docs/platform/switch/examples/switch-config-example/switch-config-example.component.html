@@ -1,0 +1,7 @@
+<fdp-form-group [object]="model" #fg>
+    <fdp-form-field #ff id="switch" label="Switch with Config" [rank]="4">
+        <fdp-switch name="switch" [formControl]="ff.formControl"></fdp-switch>
+    </fdp-form-field>
+</fdp-form-group>
+
+<div style="padding-left: 2rem">form value: {{ fg.formGroup.getRawValue() | json }}</div>

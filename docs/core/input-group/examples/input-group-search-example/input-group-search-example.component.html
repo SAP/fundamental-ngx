@@ -1,0 +1,33 @@
+<div fd-form-item>
+    <label fd-form-label for="fd-input-group-search-1" id="fd-input-group-search-label-1">Search input</label>
+    <fd-input-group
+        glyph="decline"
+        glyphAriaLabel="Clear"
+        placeholder="Search"
+        [button]="true"
+        [disabled]="false"
+        [(ngModel)]="searchTerm"
+        (addOnButtonClicked)="searchTerm = ''"
+    >
+    </fd-input-group>
+    <small>Search term: {{ searchTerm }}</small>
+</div>
+
+<br />
+
+<div fd-form-item>
+    <label fd-form-label for="fd-input-group-search-2" id="fd-input-group-search-label-2"
+        >Search input with search type</label
+    >
+    <fd-input-group
+        type="search"
+        glyph="search"
+        glyphAriaLabel="Search"
+        placeholder="Search"
+        [button]="true"
+        [disabled]="false"
+        [(ngModel)]="searchTermSecond"
+    >
+    </fd-input-group>
+    <small>Search term: {{ searchTermSecond }}</small>
+</div>

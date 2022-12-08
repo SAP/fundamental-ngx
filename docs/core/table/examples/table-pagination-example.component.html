@@ -1,0 +1,40 @@
+<table fd-table aria-label="With Pagination">
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <tr *ngFor="let row of displayedRows; let i = index" fd-table-row>
+            <td fd-table-cell>
+                <a fd-link href="#">{{ row.column1 }}</a>
+            </td>
+            <td fd-table-cell>{{ row.date }}</td>
+            <td fd-table-cell>
+                <fd-icon [glyph]="row.type"></fd-icon>
+                {{ row.column1 }}
+            </td>
+        </tr>
+    </tbody>
+    <br />
+    <tfoot fd-table-footer>
+        <tr>
+            <td colspan="3">
+                <div>
+                    <fd-pagination
+                        fd-toolbar-item
+                        [totalItems]="tableRows.length"
+                        [itemsPerPage]="itemsPerPage"
+                        [itemsPerPageOptions]="itemsPerPageOptions"
+                        [currentPage]="currentPage"
+                        (pageChangeStart)="newPageClicked($event)"
+                        (itemsPerPageChange)="itemsPerPageChange($event)"
+                        ariaLabel="Table pagination"
+                    ></fd-pagination>
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>

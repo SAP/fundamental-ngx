@@ -1,0 +1,38 @@
+<form #upload="ngForm" (ngSubmit)="onSubmit()">
+    <fdp-form-group [formGroup]="customForm">
+        <fdp-form-field
+            #ffl1
+            label="File Uploader Reactive"
+            id="input1"
+            name="reactiveFormInput"
+            [rank]="1"
+            [required]="true"
+            placeholder="Choose file to upload"
+        >
+            <fdp-file-uploader
+                id="input1"
+                name="reactiveFormInput"
+                [formControl]="ffl1.formControl"
+                ariaLabel="Choose file"
+                ariaLabelledBy="input1"
+                placeholder="Choose file to upload"
+                buttonLabel="Browse"
+                buttonAriaLabel="browse file"
+                accept=".png,.jpg"
+                [multiple]="true"
+                (selectionChange)="handleFileSelection($event)"
+            ></fdp-file-uploader>
+        </fdp-form-field>
+        <ng-template #i18n let-errors>
+            <span *ngIf="errors.required">File required</span>
+        </ng-template>
+    </fdp-form-group>
+    <fdp-button fdCompact type="submit" style="margin-left: 2rem" label="Submit"></fdp-button>
+</form>
+<br /><br />
+
+Files Selected:
+<br />
+<span *ngFor="let file of files">
+    <span class="green">{{ file.name }} </span><br
+/></span>

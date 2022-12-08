@@ -1,0 +1,11 @@
+<fdp-list
+    [dataSource]="_dataSource"
+    [loadMore]="true"
+    [loadOnScroll]="true"
+    [itemSize]="6"
+    [delayTime]="2000"
+    [scrollOffsetPercentage]="20"
+    maxHeight="200px"
+>
+    <fdp-standard-list-item *fdpItemDef="let user" [title]="user.firstName"></fdp-standard-list-item>
+</fdp-list>

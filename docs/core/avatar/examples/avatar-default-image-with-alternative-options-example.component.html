@@ -1,0 +1,45 @@
+<!-- should display "JD" from content -->
+<fd-avatar
+    size="xs"
+    image="http://example.com/1.jpeg"
+    alterIcon="content|alt|backup|default-icon"
+    backupImage="http://picsum.photos/id/1018/400"
+>
+    John Doe
+</fd-avatar>
+
+<!-- should display "JD" from alt -->
+<fd-avatar
+    size="s"
+    image="http://example.com/2.jpeg"
+    alterIcon="content|alt|backup|default-icon"
+    backupImage="http://picsum.photos/id/1018/400"
+    alt="John Doe"
+>
+</fd-avatar>
+
+<!-- should display backupImage -->
+<fd-avatar
+    size="m"
+    image="http://example.com/3.jpeg"
+    alterIcon="content|alt|backup|default-icon"
+    backupImage="https://picsum.photos/200/300.jpg"
+>
+</fd-avatar>
+
+<!-- should display default icon, because there's no backupImage url provided -->
+<fd-avatar size="l" image="http://example.com/4.jpeg" alterIcon="alt|content|backup|default-icon"> </fd-avatar>
+
+<!-- should display default icon, because backupImage is not loadable -->
+<fd-avatar size="xl" image="http://example.com/5.jpeg" alterIcon="custom" backupImage="http://example.com/6.jpeg">
+</fd-avatar>
+
+<!-- should load image -->
+<fd-avatar
+    size="xl"
+    [contain]="true"
+    image="http://example.com/4.jpeg"
+    alterIcon="alt|content|backup|default-icon"
+    backupImage="http://picsum.photos/id/1018/400"
+>
+</fd-avatar>

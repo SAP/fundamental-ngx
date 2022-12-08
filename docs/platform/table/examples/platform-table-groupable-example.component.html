@@ -1,0 +1,21 @@
+<fdp-table
+    #table
+    [dataSource]="source"
+    (rowSelectionChange)="logSelectionChange($event)"
+    (groupChange)="logGroupChange($event)"
+    selectionMode="multiple"
+    emptyTableMessage="No data found"
+>
+    <fdp-table-toolbar title="Order Items" [hideItemCount]="false"> </fdp-table-toolbar>
+
+    <fdp-column name="name" key="name" label="Name" align="start" [groupable]="true"> </fdp-column>
+
+    <fdp-column name="description" key="description" label="Description"> </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price" align="end"> </fdp-column>
+
+    <fdp-column name="status" key="status" label="Status" align="center" [groupable]="true"> </fdp-column>
+</fdp-table>
+
+<!-- View Settings Dialog-->
+<fdp-table-view-settings-dialog [table]="table"></fdp-table-view-settings-dialog>

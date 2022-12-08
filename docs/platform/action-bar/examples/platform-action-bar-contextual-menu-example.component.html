@@ -1,0 +1,17 @@
+<fdp-action-bar
+    id="actionbar_with_menu"
+    fdCompact
+    [title]="'Page Action bar component'"
+    [showBackButton]="true"
+    (backButtonClick)="onBackButtonClick()"
+    description="Action bar description from the component."
+>
+    <fdp-action-button-group>
+        <fdp-button glyph="overflow" [fdpMenuTriggerFor]="basicMenu" [title]="'More'"></fdp-button>
+        <fdp-menu #basicMenu id="basic-menu" fdContentDensity>
+            <fdp-menu-item>First Item</fdp-menu-item>
+            <fdp-menu-item>Second Item</fdp-menu-item>
+            <fdp-menu-item>Third Item</fdp-menu-item>
+        </fdp-menu>
+    </fdp-action-button-group>
+</fdp-action-bar>

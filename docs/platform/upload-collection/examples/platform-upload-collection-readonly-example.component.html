@@ -1,0 +1,12 @@
+<fdp-upload-collection
+    [dataSource]="dataSource"
+    maxFileSize="1mb"
+    [maxFilenameLength]="20"
+    [readonly]="true"
+    [mimeTypes]="mimeTypes"
+    [fileTypes]="fileTypes"
+    [itemsPerPage]="itemsPerPage"
+    (typeMismatch)="typeMismatch($event)"
+    (filenameLengthExceed)="filenameLengthExceed($event)"
+    (fileSizeExceed)="fileSizeExceed($event)"
+></fdp-upload-collection>

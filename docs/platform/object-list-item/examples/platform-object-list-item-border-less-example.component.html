@@ -1,0 +1,41 @@
+<h3>Cozy Mode</h3>
+<fdp-list [noBorder]="true" [hasObject]="true">
+    <fdp-object-list-item
+        *ngFor="let item of items"
+        [introductionText]="item.introductionText"
+        selectionMode="delete"
+        [title]="item.title"
+        [currency]="item.currency"
+        [amount]="item.amount"
+        [decimal]="item.decimal"
+        [image]="item.image"
+        [link]="item.link"
+    >
+        <fdp-object-list-item-row [attributeLabel]="item.attribute1">
+            <span
+                fd-object-marker
+                [title]="item.tip1"
+                [glyph]="item.gylp1"
+                aria-label="Favourite Icon with Text"
+            ></span>
+        </fdp-object-list-item-row>
+        <fdp-object-list-item-row [attributeLabel]="item.attribute2">
+            <span
+                fd-object-status
+                [status]="item.status1"
+                [glyph]="item.statusgyph1"
+                [label]="item.statuslabel1"
+                [inverted]="item.inverted1"
+            ></span>
+        </fdp-object-list-item-row>
+        <fdp-object-list-item-row [attributeLabel]="item.attribute3">
+            <span
+                fd-object-status
+                [status]="item.status2"
+                [glyph]="item.statusgyph2"
+                [label]="item.statuslabel2"
+                [inverted]="item.inverted2"
+            ></span>
+        </fdp-object-list-item-row>
+    </fdp-object-list-item>
+</fdp-list>

@@ -1,0 +1,21 @@
+<fd-toolbar fdType="info" [active]="true" [tabindex]="0">
+    <label fd-toolbar-label>{{ _selectedItem }} : selected</label>
+</fd-toolbar>
+<fdp-list
+    [noBorder]="true"
+    [dataSource]="_dataSource"
+    selectionMode="single"
+    [(ngModel)]="_selectedItem"
+    (selectedItemChange)="_showItemInfo($event)"
+    [selection]="true"
+    [ariaMultiselectable]="false"
+>
+    <fdp-standard-list-item
+        *fdpItemDef="let address"
+        [title]="address.name"
+        name="radio1"
+        [value]="address.id"
+        [id]="address.id"
+    >
+    </fdp-standard-list-item>
+</fdp-list>

@@ -1,0 +1,84 @@
+<div class="base-row">
+    <div>
+        Wrong size protection, you can use only:
+        <strong><pre class="inline-code">'xs' | 'sm' | 'md' | 'lg' | 'cozy' | 'compact' | 'condensed'</pre></strong>
+    </div>
+    <fd-rating-indicator
+        ariaLabel="Rating indicator"
+        size="xs"
+        [value]="0.1"
+        dynamicTextIndicator="ooofff"
+        (ratingChanged)="onRatingChanged($event)"
+        #rate1
+    ></fd-rating-indicator>
+    <span
+        >Initial size:
+        <pre class="inline-code">xsssss</pre>
+        View size:
+        <pre class="inline-code">md</pre>
+    </span>
+</div>
+<div class="base-row">
+    <fd-rating-indicator
+        ariaLabel="Rating indicator"
+        [totalRatings]="2"
+        size="xs"
+        name="ngmodel-rating"
+        [(ngModel)]="modelValue"
+        (ngModelChange)="onRatingChanged($event)"
+        #rateWithModel
+    ></fd-rating-indicator>
+    <span>View rate: {{ rateWithModel.viewValue }}</span>
+    <div>
+        <input type="number" min="0" max="10" step="0.1" name="example-rating2" [(ngModel)]="modelValue" />
+    </div>
+</div>
+<div class="base-row">
+    <fd-rating-indicator
+        ariaLabel="Rating indicator"
+        [totalRatings]="2"
+        size="xs"
+        [value]="0.51"
+        (ratingChanged)="onRatingChanged($event)"
+        #rate3
+    ></fd-rating-indicator>
+    Initial Rate: 0.51<br />
+    View rate: {{ rate3.viewValue }}
+</div>
+<div class="base-row">
+    <fd-rating-indicator
+        ariaLabel="Rating indicator"
+        [totalRatings]="2"
+        size="xs"
+        [value]="2.51"
+        #rate4
+    ></fd-rating-indicator>
+    Initial Rate: 2.51<br />
+    View rate: {{ rate4.viewValue }}
+</div>
+<div class="base-row">
+    <fd-rating-indicator
+        ariaLabel="Rating indicator"
+        [totalRatings]="2"
+        size="xs"
+        [value]="4.99"
+        #rate5
+    ></fd-rating-indicator>
+    <span>Initial Rate: 4.99 View rate: {{ rate5.viewValue }}</span>
+</div>
+<div class="base-row">
+    <fd-rating-indicator ariaLabel="Rating indicator" [totalRatings]="2" size="xs" [value]="1231312312312313.99" #rate6>
+    </fd-rating-indicator>
+    <span>Initial Rate: 1231312312312313.99 (Wrong value) View rate: {{ rate6.viewValue }}</span>
+</div>
+<div class="base-row">
+    <p><strong>Disabled Rating indicator</strong></p>
+    <fd-rating-indicator
+        ariaLabel="Rating indicator"
+        [totalRatings]="1"
+        [value]="3.34"
+        [disabled]="true"
+        [allowHalves]="true"
+        (ratingChanged)="onRatingChanged($event)"
+    ></fd-rating-indicator>
+</div>

@@ -1,0 +1,45 @@
+<fdp-table #table [dataSource]="source" (filterChange)="logFilterChange($event)" emptyTableMessage="No data found">
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false"> </fdp-table-toolbar>
+
+    <fdp-column name="name" key="name" label="Name" align="start" [filterable]="true"> </fdp-column>
+
+    <fdp-column name="description" key="description" label="Description" [filterable]="true"> </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price" align="end"> </fdp-column>
+
+    <fdp-column name="status" key="status" label="Status" align="center"></fdp-column>
+
+    <fdp-column name="statusColor" key="statusColor" label="Status Color" align="center"> </fdp-column>
+</fdp-table>
+
+<!-- View Settings Dialog-->
+<fdp-table-view-settings-dialog [table]="table">
+    <fdp-table-view-settings-filter column="price" label="Price" [type]="filterTypeEnum.CUSTOM">
+        <ng-container *fdpViewSettingsFilterCustomDef="let model">
+            <fdp-form-group #fg1 columnLayout="XL1-L1-M1-S1" labelLayout="vertical">
+                <fdp-form-field label="Minimum Price">
+                    <fdp-input type="number" name="min" [(ngModel)]="model.min"></fdp-input>
+                </fdp-form-field>
+                <fdp-form-field label="Maximum Price">
+                    <fdp-input type="number" name="max" [(ngModel)]="model.max"></fdp-input>
+                </fdp-form-field>
+            </fdp-form-group>
+        </ng-container>
+    </fdp-table-view-settings-filter>
+
+    <fdp-table-view-settings-filter
+        column="status"
+        [type]="filterTypeEnum.MULTI"
+        label="Status"
+        [values]="statusFilteringValues"
+    >
+    </fdp-table-view-settings-filter>
+
+    <fdp-table-view-settings-filter
+        column="statusColor"
+        [type]="filterTypeEnum.SINGLE"
+        label="Status Color"
+        [values]="statusColorFilteringValues"
+    >
+    </fdp-table-view-settings-filter>
+</fdp-table-view-settings-dialog>

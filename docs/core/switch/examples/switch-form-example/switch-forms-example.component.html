@@ -1,0 +1,24 @@
+<form [formGroup]="customForm">
+    <label fd-form-label [required]="true"> Form Switch 1 </label>
+    <fd-switch [required]="true" formControlName="switch1"></fd-switch>
+
+    <label fd-form-label> Form Switch 2 </label>
+    <fd-switch formControlName="switch2"></fd-switch>
+
+    <label fd-form-label> Disabled Form Switch 3 </label>
+    <fd-switch formControlName="switch3"></fd-switch>
+
+    <label fd-form-label> Disabled Form Switch 4 </label>
+    <fd-switch formControlName="switch4"></fd-switch>
+</form>
+<br />
+<small>
+    Switch 1: {{ customForm.controls.switch1.value }} <br />
+    Switch 2: {{ customForm.controls.switch2.value }} <br />
+    Switch 3: {{ customForm.controls.switch3.value }} <br />
+    Switch 4: {{ customForm.controls.switch4.value }} <br />
+
+    Form Touched: {{ customForm.touched }} <br />
+    Form Dirty: {{ customForm.dirty }} <br />
+    Form Valid: {{ customForm.valid }} <br />
+</small>

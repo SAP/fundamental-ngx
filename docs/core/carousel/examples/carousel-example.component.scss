@@ -1,0 +1,16 @@
+.fd-card-wrapper-example {
+    width: 300px;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.overlay {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    overflow: auto;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+}

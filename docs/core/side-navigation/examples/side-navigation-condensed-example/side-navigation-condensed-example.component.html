@@ -1,0 +1,74 @@
+<fd-side-nav [condensed]="true">
+    <div fd-side-nav-main>
+        <ul fd-nested-list>
+            <li fd-nested-list-item>
+                <a fd-nested-list-link>
+                    <i fd-nested-list-icon glyph="home"></i>
+                    <span fd-nested-list-title>Link 1</span>
+                </a>
+            </li>
+            <li fd-nested-list-item>
+                <a fd-nested-list-link>
+                    <i fd-nested-list-icon glyph="appointment-2"></i>
+                    <span fd-nested-list-title>Link 2</span>
+                </a>
+            </li>
+            <li fd-nested-list-item>
+                <fd-nested-list-popover>
+                    <div fd-nested-list-content [selected]="true">
+                        <a fd-nested-list-link>
+                            <i fd-nested-list-icon glyph="settings"></i>
+                            <span fd-nested-list-title>Link 3</span>
+                        </a>
+                        <button fd-nested-list-expand-icon></button>
+                    </div>
+                    <ul fd-nested-list>
+                        <li fd-nested-list-item>
+                            <a fd-nested-list-link>
+                                <span fd-nested-list-title>Link 1</span>
+                            </a>
+                        </li>
+                        <li fd-nested-list-item>
+                            <a fd-nested-list-link>
+                                <span fd-nested-list-title>Link 2</span>
+                            </a>
+                        </li>
+                        <li fd-nested-list-item>
+                            <a fd-nested-list-link>
+                                <span fd-nested-list-title>Link 3</span>
+                            </a>
+                        </li>
+                        <li fd-nested-list-item>
+                            <a fd-nested-list-link>
+                                <span fd-nested-list-title>Link 4</span>
+                            </a>
+                        </li>
+                    </ul>
+                </fd-nested-list-popover>
+            </li>
+            <li fd-nested-list-item>
+                <a fd-nested-list-link>
+                    <i fd-nested-list-icon glyph="activity-items"></i>
+                    <span fd-nested-list-title>Link 4</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div fd-side-nav-utility>
+        <ul fd-nested-list [textOnly]="false">
+            <li fd-nested-list-item>
+                <a fd-nested-list-link>
+                    <i fd-nested-list-icon glyph="notification-2"></i>
+                    <span fd-nested-list-title>Link 1</span>
+                </a>
+            </li>
+            <li fd-nested-list-item>
+                <a fd-nested-list-link>
+                    <i fd-nested-list-icon glyph="world"></i>
+                    <span fd-nested-list-title>Link 2</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</fd-side-nav>

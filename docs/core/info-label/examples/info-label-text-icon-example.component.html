@@ -1,0 +1,38 @@
+<div style="display: flex">
+    <div style="margin: 0 10px">
+        <div style="margin-top: 10px" *ngFor="let item of ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']">
+            <fd-info-label
+                type="icon"
+                glyph="hide"
+                label="Info label"
+                [color]="item"
+                title="Info Label with Icon"
+            ></fd-info-label>
+        </div>
+    </div>
+
+    <div style="margin: 0 10px">
+        <div style="margin-top: 10px" *ngFor="let item of ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']">
+            <fd-info-label
+                type="icon"
+                glyph="component"
+                font="BusinessSuiteInAppSymbols"
+                label="Info label"
+                [color]="item"
+                title="Info Label with Icon"
+            ></fd-info-label>
+        </div>
+    </div>
+    <div style="margin: 0 10px">
+        <div style="margin-top: 10px" *ngFor="let item of ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']">
+            <fd-info-label
+                type="icon"
+                glyph="technicalsystem"
+                font="SAP-icons-TNT"
+                label="Info label"
+                [color]="item"
+                title="Info Label with Icon"
+            ></fd-info-label>
+        </div>
+    </div>
+</div>

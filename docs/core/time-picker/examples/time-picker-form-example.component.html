@@ -1,0 +1,40 @@
+<form [formGroup]="customForm" class="flex-form">
+    <div fd-form-item>
+        <label fd-form-label [required]="true" for="timePickerFormExample1">Time</label>
+        <fd-time-picker
+            inputId="timePickerFormExample1"
+            formControlName="time"
+            [state]="customForm.get('time')?.valid ? 'success' : 'error'"
+            [required]="true"
+            [message]="customForm.get('time')?.valid ? 'Valid Time' : 'Invalid Time'"
+        >
+        </fd-time-picker>
+        <br />
+        <small
+            >Selected Time:
+            <span *ngIf="customForm.controls.time.value">
+                {{ customForm.controls.time.value?.toDate() | date: 'shortTime' }}
+            </span>
+        </small>
+        <small>Touched: {{ customForm.controls.time.touched }}</small>
+        <small>Dirty: {{ customForm.controls.time.dirty }}</small>
+        <small>Valid: {{ customForm.controls.time.valid }}</small>
+    </div>
+    <div fd-form-item>
+        <label fd-form-label for="timePickerFormExample2">Disabled Time picker</label>
+        <fd-time-picker
+            inputId="timePickerFormExample2"
+            formControlName="disabledTime"
+            state="information"
+            message="More Information"
+        ></fd-time-picker>
+        <br />
+        <small
+            >Selected Time:
+            <span *ngIf="customForm.controls.disabledTime.value">
+                {{ customForm.controls.disabledTime.value?.toDate() | date: 'shortTime' }}
+            </span>
+        </small>
+        <small>Disabled: {{ customForm.controls.disabledTime.disabled }}</small>
+    </div>
+</form>

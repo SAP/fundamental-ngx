@@ -1,0 +1,51 @@
+<fd-feed-list aria-label="Feed List Item with user link example">
+    <fd-feed-list-item
+        authorTitle="John Doe"
+        authorLink="http://example.com/"
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        maxRows="2"
+        ariaLabel="Feed list item example"
+    >
+        <fd-feed-list-action>
+            <button
+                aria-label="action"
+                fd-button
+                fdType="transparent"
+                fdCompact
+                glyph="action-settings"
+                (click)="onClick()"
+            ></button>
+        </fd-feed-list-action>
+    </fd-feed-list-item>
+</fd-feed-list>
+<br />
+<fd-feed-list aria-label="Feed List Item with user link example">
+    <fd-feed-list-item
+        authorTitle="Author with very looong tiiiiiitttttttttttttttleeeeeeeeeeeeeeeeeeeeee"
+        authorLink="http://example.com/"
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        maxRows="2"
+        ariaLabel="Feed list item example"
+    >
+        <fd-feed-list-action>
+            <fd-action-sheet fdCompact #actionSheet>
+                <fd-action-sheet-control>
+                    <button fd-button fdCompact glyph="overflow" fdType="transparent" title="Actions"></button>
+                </fd-action-sheet-control>
+
+                <fd-action-sheet-body>
+                    <li fd-action-sheet-item fdCompact label="Edit" glyph="edit" (click)="actionSheet.close()"></li>
+                    <li fd-action-sheet-item fdCompact label="Share" glyph="share" (click)="actionSheet.close()"></li>
+                    <li
+                        fd-action-sheet-item
+                        fdCompact
+                        label="Delete"
+                        glyph="delete"
+                        [negative]="true"
+                        (click)="actionSheet.close()"
+                    ></li>
+                </fd-action-sheet-body>
+            </fd-action-sheet>
+        </fd-feed-list-action>
+    </fd-feed-list-item>
+</fd-feed-list>

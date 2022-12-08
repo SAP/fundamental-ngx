@@ -1,0 +1,10 @@
+<div fd-form-item>
+    <label fd-form-label>Combobox with open state subscription</label>
+    <fd-combobox
+        maxHeight="250px"
+        placeholder="Combobox with open state subscription"
+        [dropdownValues]="dropdownValues"
+        (openChange)="handleIsOpenChange($event)"
+    >
+    </fd-combobox>
+</div>

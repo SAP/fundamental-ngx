@@ -1,0 +1,35 @@
+<form #myForm="ngForm">
+    <fdp-form-group [formGroup]="formTypesGroupRegister">
+        <fdp-form-field #ffl1 label="Default Input Field" id="input1" [rank]="1" placeholder="Field placeholder text">
+            <fdp-input name="input1" type="text"> </fdp-input>
+        </fdp-form-field>
+        <fdp-form-field #ffl1 label="Text Input Field" id="input2" [rank]="1" placeholder="Field placeholder text">
+            <fdp-input name="input2" type="text"> </fdp-input>
+        </fdp-form-field>
+        <fdp-form-field #ffl1 label="Number Input Field" id="input3" [rank]="1" placeholder="Field placeholder text">
+            <fdp-input name="input3" type="number"></fdp-input>
+        </fdp-form-field>
+        <fdp-form-field #ffl1 label="Compact Input Field" id="input4" [rank]="1" placeholder="Field placeholder text">
+            <fdp-input name="input4" type="text" fdCompact></fdp-input>
+        </fdp-form-field>
+        <fdp-form-field #ffl1 label="ReadOnly Input Field" id="input5" [rank]="1" placeholder="Field placeholder text">
+            <fdp-input name="input5" type="text" [readonly]="true"></fdp-input>
+        </fdp-form-field>
+        <fdp-form-field #ffl1 label="Disabled Input Field" id="input6" [rank]="1" placeholder="Field placeholder text">
+            <fdp-input name="input6" type="text" [disabled]="true"></fdp-input>
+        </fdp-form-field>
+        <fdp-form-field
+            #ffl1
+            label="Inline Help Input Field"
+            id="input7"
+            [rank]="1"
+            placeholder="Field placeholder text"
+            hint="Lorem ipsum dolor sit amet, consectetur adipiscing."
+        >
+            <fdp-input name="input7" type="text"></fdp-input>
+        </fdp-form-field>
+        <fdp-form-field #ffl1 label="Password Input Field" id="input8" [rank]="1" placeholder="Field placeholder text">
+            <fdp-input name="input8" type="password"></fdp-input>
+        </fdp-form-field>
+    </fdp-form-group>
+</form>

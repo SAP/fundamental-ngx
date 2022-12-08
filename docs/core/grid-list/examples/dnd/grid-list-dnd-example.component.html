@@ -1,0 +1,64 @@
+<fd-grid-list fd-dnd-list [items]="list" [gridMode]="true" (itemDropped)="itemsChangeHandle($event)">
+    <fd-grid-list-title-bar [title]="'Products'">
+        <span fd-grid-list-title-bar-additional-title-item [innerText]="'(' + list.length + ')'"></span>
+
+        <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
+
+        <ng-container fdCompact>
+            <button
+                fd-button
+                fdType="transparent"
+                glyph="sort"
+                aria-label="Sort"
+                aria-labelledby="grid-list-title-bar-dnd-1 grid-list-button-dnd-1"
+                title="Sort"
+                (click)="showAlert('Sort')"
+            ></button>
+            <button
+                fd-button
+                fdType="transparent"
+                glyph="filter"
+                aria-label="Filter"
+                title="Filter"
+                (click)="showAlert('Filter')"
+            ></button>
+            <button
+                fd-button
+                fdType="transparent"
+                glyph="group-2"
+                aria-label="Group"
+                title="Group"
+                (click)="showAlert('Group')"
+            ></button>
+        </ng-container>
+    </fd-grid-list-title-bar>
+
+    <fd-grid-list-item
+        *ngFor="let item of list"
+        [value]="item.id"
+        [title]="item.title"
+        [description]="item.description"
+        fd-dnd-item
+        containerSelector=".fd-grid-list__item"
+        type="navigation"
+        (navigate)="navigate($event)"
+    >
+        <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
+
+        <fd-avatar fd-grid-list-item-image image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+
+        <ng-template fd-grid-list-item-body>
+            <p>781 Main Street</p>
+            <p>Anytown, SD 57401</p>
+            <p>USA</p>
+            <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
+        </ng-template>
+
+        <fd-grid-list-item-footer-bar> Footer Item </fd-grid-list-item-footer-bar>
+    </fd-grid-list-item>
+</fd-grid-list>
+
+<span aria-hidden="true" style="display: none" id="grid-list-button-dnd-1">Sort</span>
+<span aria-hidden="true" style="display: none" id="grid-list-title-bar-dnd-1"
+    >Products with {{ list.length }} items</span
+>

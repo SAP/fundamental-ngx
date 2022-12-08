@@ -1,0 +1,56 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    height: 190px;
+    position: relative;
+}
+
+.item {
+    height: 40px;
+    display: flex;
+    align-items: center;
+
+    &:last-child {
+        height: 220px;
+        align-items: flex-start;
+        padding-top: 10px;
+    }
+}
+
+.list-container {
+    border: 1px dashed black;
+    overflow: auto;
+    flex-grow: 1;
+}
+
+.header-container {
+    flex-direction: column;
+    display: flex;
+    width: 140px;
+    .header-item {
+        display: inline-block;
+    }
+}
+
+.middle-marker-container {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    height: 0;
+    width: calc(100% - 140px);
+    .marker {
+        height: 1px;
+        border: 0.5px dashed black;
+    }
+}
+
+.icon {
+    opacity: 0;
+}
+
+.selected {
+    font-weight: bold;
+    .icon {
+        opacity: 1;
+    }
+}

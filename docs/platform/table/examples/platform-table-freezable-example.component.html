@@ -1,0 +1,18 @@
+<div style="width: 600px">
+    <fdp-table
+        [dataSource]="source"
+        selectionMode="multiple"
+        freezeColumnsTo="description"
+        (columnFreeze)="onColumnFreezeChange($event)"
+    >
+        <fdp-table-toolbar title="Order Line Items" [hideItemCount]="true"> </fdp-table-toolbar>
+
+        <fdp-column name="name" key="name" label="Name" align="start" width="200px"> </fdp-column>
+
+        <fdp-column name="description" key="description" label="Description" width="200px"> </fdp-column>
+
+        <fdp-column name="price" key="price.value" label="Price" align="end" width="100px"> </fdp-column>
+
+        <fdp-column name="status" key="status" label="Status" align="center" width="200px"> </fdp-column>
+    </fdp-table>
+</div>

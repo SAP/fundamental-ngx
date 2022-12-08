@@ -1,0 +1,8 @@
+<fd-multi-input
+    [dropdownValues]="values"
+    placeholder="Search here..."
+    [(ngModel)]="selected"
+    [displayFn]="displayFunc"
+></fd-multi-input>
+
+Selected: {{ selected | json }}

@@ -1,0 +1,27 @@
+<fdp-table
+    #table
+    [dataSource]="source"
+    emptyTableMessage="No data found"
+    rowNavigatable="navigatable"
+    [highlightNavigatedRow]="true"
+    bodyHeight="132px"
+    (rowNavigate)="onRowNavigate($event)"
+>
+    <fdp-table-toolbar title="Order Items" [hideItemCount]="true" [hideSearchInput]="true">
+        <fdp-table-toolbar-actions>
+            <span>Second row navigation, custom function: </span>
+
+            <fdp-button label="Set" (click)="setRowNavigation()"></fdp-button>
+
+            <fdp-button label="Remove" (click)="removeRowNavigation()"></fdp-button>
+        </fdp-table-toolbar-actions>
+    </fdp-table-toolbar>
+
+    <fdp-column name="name" key="name" label="Name" align="start"></fdp-column>
+
+    <fdp-column name="description" key="description" label="Description"></fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price" align="end"></fdp-column>
+
+    <fdp-column name="status" key="status" label="Status" align="center"></fdp-column>
+</fdp-table>

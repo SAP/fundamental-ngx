@@ -1,0 +1,18 @@
+<h4>Search in template-driven form:</h4>
+<fn-search [(ngModel)]="searchOne" placeholder="Search..."></fn-search>
+<br />
+<i>search value: {{ searchOne }}</i>
+
+<h4>Disabled state:</h4>
+<fn-search [disabled]="true" placeholder="Search..."></fn-search>
+
+<h4>Search in reactive form:</h4>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <fn-search formControlName="search" placeholder="Search..."></fn-search>
+    <br /><br />
+    <button fn-button type="submit" label="Submit"></button>
+</form>
+
+<p *ngIf="formValue">
+    <i>Form value: {{ formValue | json }}</i>
+</p>

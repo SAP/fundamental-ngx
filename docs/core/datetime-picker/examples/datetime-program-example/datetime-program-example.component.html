@@ -1,0 +1,9 @@
+<fd-datetime-picker [(ngModel)]="date"></fd-datetime-picker>
+
+<br />
+<br />
+<button label="Change" fd-button (click)="changeDay()"></button>
+
+<br />
+<br />
+Selected: {{ date || 'null' }}

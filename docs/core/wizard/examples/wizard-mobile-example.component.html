@@ -1,0 +1,127 @@
+<div style="display: flex; justify-content: space-around; flex-wrap: wrap">
+    <fd-wizard [appendToWizard]="false" [contentHeight]="contentHeight">
+        <fd-wizard-navigation>
+            <ul fd-wizard-progress-bar size="sm" role="list" aria-label="Wizard Steps">
+                <li
+                    fd-wizard-step
+                    [status]="example1step1status"
+                    (statusChange)="statusChanged(1, 1, $event)"
+                    label="Step 1: One Line"
+                    ariaLabel="Step 1: One Line"
+                    (keydown)="handleFocus($event, 0)"
+                >
+                    <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
+                    <fd-wizard-content size="sm">
+                        Sed fermentum, mi et tristique ullamcorper, sapien sapien faucibus sem, quis pretium nibh lorem
+                        malesuada diam. Nulla quis arcu aliquet, feugiat massa semper, volutpat diam. Nam vitae ante
+                        posuere, molestie neque sit amet, dapibus velit. Maecenas eleifend tempor lorem. Mauris vitae
+                        elementum mi, sed eleifend ligula. Nulla tempor vulputate dolor, nec dignissim quam convallis
+                        ut.
+                        <fd-wizard-next-step>
+                            <button fd-button fdType="emphasized" (click)="example1goToStep(2)">Go to Step 2</button>
+                        </fd-wizard-next-step>
+                    </fd-wizard-content>
+                </li>
+                <li
+                    fd-wizard-step
+                    [status]="example1step2status"
+                    (statusChange)="statusChanged(1, 2, $event)"
+                    label="Step 2: Very long label that truncates on the second line"
+                    ariaLabel="Step 2: Very long label that truncates on the second line"
+                    (keydown)="handleFocus($event, 1)"
+                >
+                    <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
+                    <fd-wizard-content size="sm">
+                        Wizard Content for step 2
+                        <fd-wizard-next-step>
+                            <button fd-button fdType="emphasized" (click)="example1goToStep(3)">Go to Step 3</button>
+                        </fd-wizard-next-step>
+                    </fd-wizard-content>
+                </li>
+                <li
+                    fd-wizard-step
+                    [status]="example1step3status"
+                    label="Step 3"
+                    ariaLabel="Step 3"
+                    (statusChange)="statusChanged(1, 3, $event)"
+                    (keydown)="handleFocus($event, 2)"
+                >
+                    <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
+                    <fd-wizard-content>
+                        Wizard Content for step 3
+                        <fd-wizard-next-step>
+                            <button fd-button fdType="emphasized" (click)="finish1Wizard()">Submit</button>
+                        </fd-wizard-next-step>
+                    </fd-wizard-content>
+                </li>
+            </ul>
+        </fd-wizard-navigation>
+        <div fd-bar barDesign="floating-footer">
+            <div fd-bar-right>
+                <fd-button-bar label="Save"></fd-button-bar>
+                <fd-button-bar label="Cancel"></fd-button-bar>
+            </div>
+        </div>
+    </fd-wizard>
+
+    <fd-wizard [appendToWizard]="false" [contentHeight]="contentHeight">
+        <fd-wizard-navigation>
+            <ul fd-wizard-progress-bar size="sm">
+                <li
+                    fd-wizard-step
+                    [status]="example2step1status"
+                    (statusChange)="statusChanged(2, 1, $event)"
+                    label="Step 1: One Line"
+                    ariaLabel="Step 1: One Line"
+                    (keydown)="handleFocus1($event, 0)"
+                >
+                    <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
+                    <fd-wizard-content size="sm">
+                        <img src="https://picsum.photos/id/1023/220/220" role="presentation" />
+                        <fd-wizard-next-step [floating]="true">
+                            <button fd-button fdType="emphasized" (click)="example2goToStep(2)">Go to Step 2</button>
+                        </fd-wizard-next-step>
+                    </fd-wizard-content>
+                </li>
+                <li
+                    fd-wizard-step
+                    [status]="example2step2status"
+                    (statusChange)="statusChanged(2, 2, $event)"
+                    label="Step 2: Very long label that truncates on the second line"
+                    ariaLabel="Step 2: Very long label that truncates on the second line"
+                    (keydown)="handleFocus1($event, 1)"
+                >
+                    <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
+                    <fd-wizard-content size="sm">
+                        Wizard Content for step 2
+                        <fd-wizard-next-step [floating]="true">
+                            <button fd-button fdType="emphasized" (click)="example2goToStep(3)">Go to Step 3</button>
+                        </fd-wizard-next-step>
+                    </fd-wizard-content>
+                </li>
+                <li
+                    fd-wizard-step
+                    [status]="example2step3status"
+                    label="Step 3"
+                    ariaLabel="Step 3"
+                    (statusChange)="statusChanged(2, 3, $event)"
+                    (keydown)="handleFocus1($event, 2)"
+                >
+                    <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
+                    <fd-wizard-content>
+                        Wizard Content for step 3
+                        <fd-wizard-next-step [floating]="true">
+                            <button fd-button fdType="emphasized" (click)="finish2Wizard()">Submit</button>
+                        </fd-wizard-next-step>
+                    </fd-wizard-content>
+                </li>
+            </ul>
+        </fd-wizard-navigation>
+        <div fd-bar barDesign="floating-footer">
+            <div fd-bar-right>
+                <fd-button-bar label="Save"></fd-button-bar>
+                <fd-button-bar label="Cancel"></fd-button-bar>
+            </div>
+        </div>
+    </fd-wizard>
+</div>

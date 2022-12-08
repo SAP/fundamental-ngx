@@ -1,0 +1,12 @@
+<fd-tab-list>
+    <fd-tab #tab1 title="Tab 1"> Tab 1 </fd-tab>
+    <fd-tab #tab2 title="Tab 2"> Tab 2 </fd-tab>
+    <fd-tab #tab3 title="Tab 3"> Tab 3 </fd-tab>
+</fd-tab-list>
+
+<div class="example-controls-set">
+    <label fd-form-label>Activate tab:</label>
+    <button fd-button label="Tab 1" (click)="tab1.open(true)"></button>
+    <button fd-button label="Tab 2" (click)="tab2.open(true)"></button>
+    <button fd-button label="Tab 3" (click)="tab3.open(true)"></button>
+</div>

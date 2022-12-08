@@ -1,0 +1,75 @@
+<div style="min-height: 300px">
+    <fdp-form-group [noLabelLayout]="false" columnLayout="XL3-L2-M1-S1">
+        <fdp-form-field id="standard" label="Standard" [column]="1">
+            <fdp-combobox
+                name="standard"
+                placeholder="Type some text..."
+                [dataSource]="dataSource"
+                (selectionChange)="onSelect1($event)"
+            ></fdp-combobox>
+            <fdp-form-field-extras> Selected: {{ selectedItem1 }} </fdp-form-field-extras>
+        </fdp-form-field>
+
+        <fdp-form-field id="compact" label="Compact" [column]="1">
+            <fdp-combobox
+                name="compact"
+                placeholder="Type some text..."
+                fdCompact
+                [dataSource]="dataSource"
+                (selectionChange)="onSelect2($event)"
+            ></fdp-combobox>
+            <fdp-form-field-extras> Selected: {{ selectedItem2 }} </fdp-form-field-extras>
+        </fdp-form-field>
+
+        <fdp-form-field id="readonly" label="ReadOnly" [column]="3">
+            <fdp-combobox
+                name="readonly"
+                placeholder="Type some text..."
+                [dataSource]="dataSource"
+                [value]="selectedItem3"
+                [readonly]="true"
+                (selectionChange)="onSelect3($event)"
+            ></fdp-combobox>
+            <fdp-form-field-extras> Selected: {{ selectedItem3 }} </fdp-form-field-extras>
+        </fdp-form-field>
+
+        <fdp-form-field id="disabled" label="Disabled" [column]="3">
+            <fdp-combobox
+                name="disabled"
+                placeholder="Type some text..."
+                [dataSource]="dataSource"
+                [value]="selectedItem4"
+                [disabled]="true"
+                (selectionChange)="onSelect4($event)"
+            ></fdp-combobox>
+            <fdp-form-field-extras> Selected: {{ selectedItem4 }} </fdp-form-field-extras>
+        </fdp-form-field>
+
+        <fdp-form-field id="max-height" label="Max Height" [column]="2">
+            <fdp-combobox
+                name="disabled"
+                placeholder="Type some text..."
+                [dataSource]="dataSource"
+                maxHeight="400px"
+                (selectionChange)="onSelect5($event)"
+            ></fdp-combobox>
+            <fdp-form-field-extras> Selected: {{ selectedItem5 }} </fdp-form-field-extras>
+        </fdp-form-field>
+
+        <fdp-form-field
+            id="auto-resize"
+            label="Auto-Resize"
+            [column]="2"
+            hint="The width of the option list adapts to its content. The minimum width is the input field plus the dropdown arrow."
+        >
+            <fdp-combobox
+                name="auto-Resize"
+                placeholder="Type some text..."
+                [dataSource]="dataSourceAutoResize"
+                [autoResize]="true"
+                (selectionChange)="onSelect6($event)"
+            ></fdp-combobox>
+            <fdp-form-field-extras> Selected: {{ selectedItem6 }} </fdp-form-field-extras>
+        </fdp-form-field>
+    </fdp-form-group>
+</div>

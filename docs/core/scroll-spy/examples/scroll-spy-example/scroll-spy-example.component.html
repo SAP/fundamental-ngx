@@ -1,0 +1,10 @@
+<div class="header-container">
+    <div class="header-item" *ngFor="let item of items" [class.selected]="selectedSpy === item.id">
+        <span class="fd-scroll-spy-example-icon-class icon"> <fd-icon glyph="arrow-right"></fd-icon> </span
+        >{{ item.name }}
+    </div>
+</div>
+
+<div class="list-container" fdScrollSpy [trackedTags]="['div']" (spyChange)="selectedSpy = $event.id">
+    <div class="item" *ngFor="let item of items" [id]="item.id">{{ item.name }}</div>
+</div>

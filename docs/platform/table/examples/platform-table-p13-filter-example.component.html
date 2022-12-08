@@ -1,0 +1,24 @@
+<fdp-table #table [dataSource]="source">
+    <fdp-table-toolbar title="Order Items"></fdp-table-toolbar>
+
+    <fdp-column name="name" key="name" label="Name" [filterable]="true" [dataType]="dataTypeEnum.STRING"> </fdp-column>
+
+    <fdp-column name="description" key="description" label="Description"> </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price" [filterable]="true" [dataType]="dataTypeEnum.NUMBER">
+    </fdp-column>
+
+    <fdp-column name="updatedOn" key="date" label="Updated On" [filterable]="true" [dataType]="dataTypeEnum.DATE">
+        <fdp-table-cell *fdpCellDef="let item">
+            {{ item.date?.toDateString() }}
+        </fdp-table-cell>
+    </fdp-column>
+
+    <fdp-column name="verified" key="verified" label="Verified" [filterable]="true" [dataType]="dataTypeEnum.BOOLEAN">
+    </fdp-column>
+</fdp-table>
+
+<!-- Connect P13 Dialog to the table -->
+<fdp-table-p13-dialog [table]="table">
+    <fdp-table-p13n-filter></fdp-table-p13n-filter>
+</fdp-table-p13-dialog>

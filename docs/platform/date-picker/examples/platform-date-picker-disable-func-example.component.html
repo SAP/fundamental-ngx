@@ -1,0 +1,18 @@
+<fdp-form-group #ffg [formGroup]="customForm">
+    <fdp-form-field
+        #ffl1
+        id="offDay"
+        [rank]="1"
+        placeholder="Off day in current month"
+        label="Disable dates other than this month"
+    >
+        <fdp-date-picker
+            name="offDay"
+            type="single"
+            [disableFunction]="disableFunction"
+            [formControl]="ffl1.formControl"
+            dateInputLabel="date input mm/dd/yyy"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+</fdp-form-group>

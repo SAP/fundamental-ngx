@@ -1,0 +1,28 @@
+<table fd-table [keys]="displayedColumns" aria-label="Customizable Columns">
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell *ngFor="let column of displayedColumns" [key]="column">{{ column | uppercase }}</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <tr *ngFor="let row of dataSource" fd-table-row>
+            <td fd-table-cell key="column1">
+                <a fd-link href="#">{{ row.column1 }}</a>
+            </td>
+            <td fd-table-cell key="column2">{{ row.column2 }}</td>
+            <td fd-table-cell key="column3">{{ row.column3 }}</td>
+            <td fd-table-cell key="date">{{ row.date }}</td>
+            <td fd-table-cell key="type"><fd-icon [glyph]="row.type"></fd-icon></td>
+        </tr>
+    </tbody>
+</table>
+
+<br />
+<br />
+
+Chosen Columns: {{ displayedColumns }}
+
+<br />
+<br />
+
+<button fd-button label="Open Table Customization" (click)="openDialog()"></button>

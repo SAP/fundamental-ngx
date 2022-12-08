@@ -1,0 +1,12 @@
+<h4>Mobile Mode Select</h4>
+<fdp-select
+    width="7rem"
+    name="mobile"
+    placeholder="select an option"
+    [mobile]="true"
+    displayKey="name"
+    [list]="option"
+    [mobileConfig]="mobileConfig"
+    (selectionChange)="onSelect($event)"
+></fdp-select>
+<p>Selected: {{ selectedItem }}</p>

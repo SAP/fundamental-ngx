@@ -1,0 +1,47 @@
+<h3>Checkbox Error Handling</h3>
+<fdp-form-group #fg [formGroup]="customForm" [object]="data" columnLayout="XL2-L1-M1-S1">
+    <fdp-form-field
+        #ffr1
+        id="presence"
+        [validators]="validators"
+        label="Your presence is necessary"
+        hint="hint text"
+        hintPlacement="left"
+        [rank]="10"
+        [column]="1"
+        [required]="true"
+    >
+        <fdp-checkbox name="presence-cb" title="title text" [formControl]="ffr1.formControl"></fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #ffr2
+        id="aggrement"
+        [validators]="validators"
+        hint="hint text"
+        hintPlacement="left"
+        [rank]="15"
+        [column]="2"
+        [required]="true"
+    >
+        <fdp-checkbox
+            name="aggrement-cb"
+            title="Do you Agree with Terms and Conditions"
+            [formControl]="ffr2.formControl"
+        >
+            Do you Agree with <a fd-link href="#"> Terms and Conditions</a>?
+        </fdp-checkbox>
+    </fdp-form-field>
+
+    <fdp-form-field id="button-1" [rank]="20" [column]="2">
+        <fdp-button buttonType="emphasized" (click)="onSubmit()" label="Submit"></fdp-button>
+    </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true"> Value is required </span>
+        <span *ngIf="errors.invalid" role="alert" aria-atomic="true"> Value is invalid </span>
+    </ng-template>
+</fdp-form-group>
+
+<p>Form value: {{ customForm.getRawValue() | json }}</p>
+<p>Form Status: {{ customForm.status | json }}</p>

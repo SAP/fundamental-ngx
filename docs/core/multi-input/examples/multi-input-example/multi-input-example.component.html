@@ -1,0 +1,63 @@
+<label fd-label for="multiInput">Multi Input</label>
+<fd-multi-input
+    inputId="multiInput"
+    [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
+    placeholder="Search here..."
+    [(ngModel)]="selected"
+></fd-multi-input>
+
+Selected: {{ selected | json }}
+
+<br /><br />
+
+<label fd-label for="disabledMultiInput1">Disabled Multi Input</label>
+<fd-multi-input
+    inputId="disabledMultiInput1"
+    [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
+    placeholder="Search here..."
+    [disabled]="true"
+    [(ngModel)]="secondSelected"
+></fd-multi-input>
+
+Selected: {{ secondSelected | json }}
+
+<br /><br />
+
+<label fd-label for="noAddonMultiInput1">Hidden Addon Button</label>
+<fd-multi-input
+    inputId="noAddonMultiInput1"
+    [dropdownValues]="['Kiwi', 'Apple', 'Banana', 'Pineapple', 'Tomato']"
+    placeholder="Search here..."
+    [(ngModel)]="thirdSelected"
+    [displayAddonButton]="false"
+></fd-multi-input>
+
+Selected: {{ thirdSelected | json }}
+
+<br /><br />
+
+<label fd-label for="multiInputDisabledAutoComplete">Disable Auto Complete</label>
+<fd-multi-input
+    inputId="multiInputDisabledAutoComplete"
+    [autoComplete]="false"
+    [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
+    placeholder="Search here..."
+    [displayAddonButton]="false"
+    [(ngModel)]="selectedDisabledAutoComplete"
+></fd-multi-input>
+
+Selected: {{ selectedDisabledAutoComplete | json }}
+
+<br /><br />
+
+<label fd-label for="multiInputDisabledAutoComplete">With Object Values</label>
+<fd-multi-input
+    inputId="multiInputWithObjectValues"
+    [dropdownValues]="objectValues"
+    [displayFn]="objectValuesDisplayFn"
+    [valueFn]="objectValuesValueFn"
+    placeholder="Search here..."
+    [(ngModel)]="selectedObjectValues"
+></fd-multi-input>
+
+Selected: {{ selectedObjectValues | json }}

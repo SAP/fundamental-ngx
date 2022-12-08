@@ -1,0 +1,19 @@
+<fdp-form-group #fg>
+    <fdp-form-field
+        #ffl1
+        label="Default Multi Input Field"
+        id="input-simple"
+        name="reactiveFormInput"
+        [rank]="1"
+        placeholder="Field placeholder text"
+    >
+        <fdp-multi-input
+            [formControl]="ffl1.formControl"
+            placeholder="Field placeholder text"
+            type="text"
+            id="fdp-id-disabled"
+            name="input1"
+        >
+        </fdp-multi-input>
+    </fdp-form-field>
+</fdp-form-group>

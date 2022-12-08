@@ -1,0 +1,75 @@
+<div style="display: inline-block; width: 50%">
+    <button fd-button label="Menu" [fdMenu]="true" [fdMenuTrigger]="menu"></button>
+
+    <fd-menu #menu>
+        <li fd-menu-item>
+            <a href="#" fd-menu-interactive>
+                <span fd-menu-title>Create New</span>
+            </a>
+        </li>
+
+        <li fd-menu-item>
+            <a href="#" fd-menu-interactive>
+                <span fd-menu-title>Open Existing</span>
+            </a>
+        </li>
+
+        <li fd-menu-item>
+            <a href="#" fd-menu-interactive>
+                <span fd-menu-title>Save Current</span>
+            </a>
+        </li>
+
+        <fd-menu-separator></fd-menu-separator>
+
+        <li fd-menu-item>
+            <a href="#" fd-menu-interactive>
+                <span fd-menu-title>Export As</span>
+            </a>
+        </li>
+
+        <li fd-menu-item>
+            <a href="#" fd-menu-interactive>
+                <span fd-menu-title>Print</span>
+            </a>
+        </li>
+    </fd-menu>
+</div>
+
+<div style="display: inline-block; width: 50%">
+    <button fd-button label="Compact Menu" [fdMenu]="true" fdCompact [fdMenuTrigger]="menuCompact"></button>
+
+    <fd-menu #menuCompact fdCompact>
+        <li fd-menu-item>
+            <a href="#" fd-menu-interactive>
+                <span fd-menu-title>Create New</span>
+            </a>
+        </li>
+
+        <li fd-menu-item>
+            <a href="#" fd-menu-interactive>
+                <span fd-menu-title>Open Existing</span>
+            </a>
+        </li>
+
+        <li fd-menu-item>
+            <a href="#" fd-menu-interactive>
+                <span fd-menu-title>Save Current</span>
+            </a>
+        </li>
+
+        <fd-menu-separator></fd-menu-separator>
+
+        <li fd-menu-item>
+            <a href="#" fd-menu-interactive>
+                <span fd-menu-title>Export As</span>
+            </a>
+        </li>
+
+        <li fd-menu-item>
+            <a href="#" fd-menu-interactive>
+                <span fd-menu-title>Print</span>
+            </a>
+        </li>
+    </fd-menu>
+</div>

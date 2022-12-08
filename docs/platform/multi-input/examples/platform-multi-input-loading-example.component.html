@@ -1,0 +1,19 @@
+<fdp-form-group>
+    <fdp-form-field label="Loading" id="multi-input-loading">
+        <fd-busy-indicator [loading]="loading" ariaLabel="loading" title="Please Wait">
+            <fdp-multi-input
+                placeholder="Field placeholder text"
+                type="text"
+                id="fdp-id-loading"
+                name="input-loading"
+                [dataSource]="dataSource"
+                displayKey="state"
+                [autofocus]="true"
+                (onDataRequested)="onDataRequested()"
+                (onDataReceived)="onDataReceived()"
+                [(ngModel)]="selected"
+            >
+            </fdp-multi-input>
+        </fd-busy-indicator>
+    </fdp-form-field>
+</fdp-form-group>

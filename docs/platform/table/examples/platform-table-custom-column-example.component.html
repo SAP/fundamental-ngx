@@ -1,0 +1,33 @@
+<fdp-table [dataSource]="source" emptyTableMessage="No data found" (rowSelectionChange)="onRowSelectionChange($event)">
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="true" [hideSearchInput]="false"> </fdp-table-toolbar>
+
+    <fdp-column name="name" key="name">
+        <fdp-table-header *fdpHeaderCellDef>Name</fdp-table-header>
+        <fdp-table-cell *fdpCellDef="let item">{{ item.name }}</fdp-table-cell>
+    </fdp-column>
+
+    <fdp-column name="description" key="description">
+        <fdp-table-header *fdpHeaderCellDef>Description</fdp-table-header>
+        <fdp-table-cell *fdpCellDef="let item">
+            <fdp-input
+                type="text"
+                name="description"
+                placeholder="Enter the description"
+                [(ngModel)]="item.description"
+            >
+            </fdp-input>
+        </fdp-table-cell>
+    </fdp-column>
+
+    <fdp-column name="price" key="price.value">
+        <fdp-table-header *fdpHeaderCellDef>Price</fdp-table-header>
+        <fdp-table-cell *fdpCellDef="let item"> {{ item.price.value }} {{ item.price.currency }} </fdp-table-cell>
+    </fdp-column>
+
+    <fdp-column name="status" key="status">
+        <fdp-table-header *fdpHeaderCellDef>Status</fdp-table-header>
+        <fdp-table-cell *fdpCellDef="let item">
+            <span fd-object-status [status]="item.statusColor">{{ item.status }}</span>
+        </fdp-table-cell>
+    </fdp-column>
+</fdp-table>

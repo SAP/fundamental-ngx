@@ -1,0 +1,37 @@
+<div style="max-width: 350px; position: relative">
+    <fd-feed-list [mobile]="true" aria-label="Feed List Item with mobile view">
+        <fd-feed-list-item
+            authorTitle="John Doe"
+            authorLink="http://example.com/"
+            text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            ariaLabel="Feed list item example"
+        >
+            <fd-feed-list-avatar>
+                <fd-avatar
+                    image="https://avatars.dicebear.com/api/human/fe.svg?m=6&b=%23f5f0f0&mood[]=surprised"
+                    size="s"
+                ></fd-avatar>
+            </fd-feed-list-avatar>
+            <fd-feed-list-action>
+                <fd-action-sheet [mobile]="true">
+                    <fd-action-sheet-control>
+                        <button fd-button fdCompact glyph="overflow"></button>
+                    </fd-action-sheet-control>
+
+                    <fd-action-sheet-body>
+                        <li fd-action-sheet-item label="Button 1" glyph="attachment"></li>
+                        <li fd-action-sheet-item label="Button 2" glyph="add"></li>
+                        <li fd-action-sheet-item label="Button 3" glyph="print"></li>
+                        <li fd-action-sheet-item label="Cancel" [negative]="true" [isCloseButton]="true"></li>
+                    </fd-action-sheet-body>
+                </fd-action-sheet>
+            </fd-feed-list-action>
+            <fd-feed-list-footer>
+                <small fd-item-footer-byline>Aug 20, 2020</small>
+                <small fd-item-footer-byline>
+                    <a target="_blank" href="http://example.com/branch" class="fd-link">Reply link</a>
+                </small>
+            </fd-feed-list-footer>
+        </fd-feed-list-item>
+    </fd-feed-list>
+</div>

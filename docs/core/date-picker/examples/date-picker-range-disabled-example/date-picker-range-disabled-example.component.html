@@ -1,0 +1,24 @@
+<div *ngIf="customForm">
+    <form [formGroup]="customForm">
+        <fd-date-picker
+            type="range"
+            style="width: 300px"
+            formControlName="dates"
+            [state]="isValid() ? 'success' : 'error'"
+            [message]="!isValid() ? 'Format is not valid' : ''"
+            [disableRangeEndFunction]="disabledEndFunction"
+            [disableRangeStartFunction]="disabledStartFunction"
+        ></fd-date-picker>
+    </form>
+    <small>
+        Touched: {{ customForm.controls.dates.touched }}<br />
+        Dirty: {{ customForm.controls.dates.dirty }}<br />
+        Valid: {{ customForm.controls.dates.valid }}<br />
+
+        Range Start Date:
+        {{ customForm.controls.dates.value?.start?.toDateString() || 'null' }}
+        <br />
+        Range End Date:
+        {{ customForm.controls.dates.value?.end?.toDateString() || 'null' }}
+    </small>
+</div>

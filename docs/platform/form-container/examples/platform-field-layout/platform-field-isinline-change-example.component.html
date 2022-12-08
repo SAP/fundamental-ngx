@@ -1,0 +1,79 @@
+<fdp-form-group #fg1 [formGroup]="form" mainTitle="XL1-L1-M1-S1" columnLayout="XL1-L1-M1-S1">
+    <fdp-form-field-group label="Form field inline layout">
+        <fdp-form-field
+            #ff1
+            id="basicTextarea-ex2"
+            label="Basic Textarea with Platform Forms"
+            placeholder="Start entering detailed description"
+            hint="This is tooltip help"
+            [column]="1"
+            [rank]="1"
+            hintPlacement="left"
+        >
+            <fdp-textarea name="basicTextarea-ex2" [formControl]="ff1.formControl"></fdp-textarea>
+        </fdp-form-field>
+        <fdp-form-field
+            #ff2
+            id="seasons0-ex2"
+            hint="XL: true, L: false, M: true, S: false"
+            label="Checkbox group inline value: XL: true, L: false, M: true, S: false"
+            [column]="1"
+            [rank]="2"
+        >
+            <fdp-checkbox-group
+                [list]="seasons"
+                name="seasons0-ex2"
+                [inlineLayout]="{ XL: true, L: false, M: true, S: false }"
+                ariaLabel="My favourite Seasons"
+                [formControl]="ff2.formControl"
+            ></fdp-checkbox-group>
+        </fdp-form-field>
+        <fdp-form-field
+            #ff3
+            id="basicTextarea2-ex2"
+            label="Select an option"
+            placeholder="Select your choice"
+            hint="This is tooltip help"
+            [column]="1"
+            [rank]="3"
+        >
+            <fdp-select placeholder="Select an option" [list]="option"></fdp-select>
+        </fdp-form-field>
+        <fdp-form-field
+            #ff5
+            id="basicTextarea3-ex2"
+            label="Basic Textarea with Platform Forms 2"
+            placeholder="Start entering detailed description"
+            hint="This is tooltip help"
+            [column]="1"
+            [rank]="5"
+        >
+            <fdp-textarea name="basicTextarea3-ex2" [formControl]="ff5.formControl"></fdp-textarea>
+        </fdp-form-field>
+        <fdp-form-field
+            #ff6
+            id="basicRadioGroup-ex2"
+            label="Radio group button: XL: false, L: true, M: false, S: true"
+            hint="XL: false, L: true, M: false, S: true"
+            [column]="1"
+            [rank]="6"
+        >
+            <fdp-radio-group
+                [inlineLayout]="{ XL: false, L: true, M: false, S: true }"
+                name="radio-ex2"
+                [list]="seasons"
+                ariaLabel="select favourite Season"
+                [formControl]="ff6.formControl"
+            ></fdp-radio-group>
+        </fdp-form-field>
+
+        <fdp-form-field #ff7 id="combobox" label="Combobox" [column]="1" [rank]="7">
+            <fdp-combobox
+                name="combobox"
+                placeholder="Type some text..."
+                [dataSource]="dataSource"
+                [formControl]="ff7.formControl"
+            ></fdp-combobox>
+        </fdp-form-field>
+    </fdp-form-field-group>
+</fdp-form-group>

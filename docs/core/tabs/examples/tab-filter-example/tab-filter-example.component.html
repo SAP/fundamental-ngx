@@ -1,0 +1,84 @@
+<label fd-form-label>Filter Tabs Built by passing parameters</label>
+<fd-tab-list mode="filter">
+    <fd-tab [header]="true" count="100" title="items"> Content for tab 1 </fd-tab>
+    <fd-tab glyph="cart" count="12" title="Title 1"> Content for tab 2 </fd-tab>
+    <fd-tab glyph="menu" count="13" title="Title 2"> Content for tab 3 </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<label fd-form-label>Compact Filter Tabs Built by passing parameters</label>
+<fd-tab-list mode="filter" fdCompact>
+    <fd-tab [header]="true" count="100" title="items"> Content for tab 1 </fd-tab>
+    <fd-tab glyph="cart" count="12" title="Title 1"> Content for tab 2 </fd-tab>
+    <fd-tab glyph="menu" count="13" title="Title 2"> Content for tab 3 </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<label fd-form-label>Filter Tabs Built by defining own template</label>
+<fd-tab-list mode="filter">
+    <fd-tab [header]="true">
+        <ng-template fd-tab-title-template>
+            <span fd-tab-header>
+                <span fd-tab-counter-header>100</span>
+                <span fd-tab-label>items</span>
+            </span>
+        </ng-template>
+        Content for tab 1
+    </fd-tab>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-icon icon="edit">
+                <p fd-tab-count>11</p>
+            </span>
+            <span fd-tab-label>Title 1</span>
+        </ng-template>
+        Content for tab 2
+    </fd-tab>
+    <fd-tab>
+        <ng-template fd-tab-title-template>
+            <span fd-tab-icon icon="menu">
+                <p fd-tab-count>12</p>
+            </span>
+            <span fd-tab-label>Title 2</span>
+        </ng-template>
+        Content for tab 3
+    </fd-tab>
+</fd-tab-list>
+
+<br />
+<br />
+
+<label fd-form-label>Filter Tabs Built by defining own template with routerLink</label>
+<nav fd-tab-nav mode="filter">
+    <div fd-tab-item [header]="true">
+        <a fd-tab-link [active]="rla1.isActive" [routerLink]="'tab1'" routerLinkActive #rla1="routerLinkActive">
+            <span fd-tab-header>
+                <span fd-tab-counter-header>100</span>
+                <span fd-tab-label>items</span>
+            </span>
+        </a>
+    </div>
+    <div fd-tab-separator></div>
+    <div fd-tab-item>
+        <a fd-tab-link [active]="rla2.isActive" [routerLink]="'tab2'" routerLinkActive #rla2="routerLinkActive">
+            <span fd-tab-icon icon="edit">
+                <p fd-tab-count>11</p>
+            </span>
+            <span fd-tab-label>Title 1</span>
+        </a>
+    </div>
+    <div fd-tab-item>
+        <a fd-tab-link [active]="rla3.isActive" [routerLink]="'tab3'" routerLinkActive #rla3="routerLinkActive">
+            <span fd-tab-icon icon="menu">
+                <p fd-tab-count>12</p>
+            </span>
+            <span fd-tab-label>Title 2</span>
+        </a>
+    </div>
+</nav>
+
+<router-outlet></router-outlet>

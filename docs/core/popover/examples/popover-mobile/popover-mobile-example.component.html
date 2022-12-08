@@ -1,0 +1,32 @@
+<button fd-button [fdPopoverTrigger]="popoverMobile">Open Mobile Popover</button>
+
+<fd-popover #popoverMobile [mobile]="true" [mobileConfig]="{ title: 'Mobile Popover', hasCloseButton: true }">
+    <ng-template #popoverBodyContent>
+        <div class="form-container">
+            <div fd-form-item>
+                <label fd-form-label for="input-1">Count clicks:</label>
+                <input
+                    fd-form-control
+                    type="text"
+                    id="input-1"
+                    placeholder="Field placeholder text"
+                    [disabled]="true"
+                    [(ngModel)]="clickCount"
+                />
+            </div>
+            <br />
+            <div fd-form-item>
+                <button fd-button (click)="addClick()" fdType="emphasized">Add Click</button>
+            </div>
+            <br />
+            <div fd-form-item>
+                <button fd-button (click)="reset()" fdType="attention">Reset</button>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #popoverFooterContent>
+        <fd-button-bar label="Accept" fdType="positive" (click)="accept()"> </fd-button-bar>
+        <fd-button-bar label="Decline" fdType="negative" (click)="decline()"> </fd-button-bar>
+    </ng-template>
+</fd-popover>

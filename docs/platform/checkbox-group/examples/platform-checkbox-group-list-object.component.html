@@ -1,0 +1,162 @@
+<h3>Reactive Form Examples:</h3>
+<h3>Checkboxes created from from list of selectItem Objects</h3>
+<p>Inline checkboxes</p>
+<fdp-form-group [formGroup]="form4">
+    <fdp-form-field #fl1 id="languages" label="Programming Languages Known: " [rank]="1">
+        <fdp-checkbox-group
+            [list]="languages"
+            [isInline]="true"
+            name="languages"
+            fdCompact
+            ariaLabel="Programming Languages Known"
+            [formControl]="fl1.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem">Languages: {{ form4.controls.languages?.value }}</span>
+<br />
+<br />
+
+<p>Pre-selection based on control value passed</p>
+<fdp-form-group [formGroup]="form5" [object]="visited">
+    <fdp-form-field #fl2 id="visited" label="Country visited: " [rank]="1">
+        <fdp-checkbox-group
+            [list]="countryVisited"
+            name="visited"
+            ariaLabel="Country visited"
+            [formControl]="fl2.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem">Visited Country: {{ form5.controls.visited?.value }}</span>
+<br />
+<br />
+
+<p>Pre-selection based on control value passed from formGroup</p>
+<fdp-form-group [formGroup]="form6">
+    <fdp-form-field #fl4 id="currencies" label="Currencies Exchanging: " [rank]="1">
+        <fdp-checkbox-group
+            [list]="countryCurrency"
+            name="currency"
+            ariaLabel="Currencies Exchanging"
+            formControlName="currencies"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem">Currencies: {{ form6.controls.currencies?.value }}</span>
+
+<br />
+<br />
+<p>Lookup key and Display key usages.</p>
+<fdp-form-group [formGroup]="form7">
+    <fdp-form-field #fl5 id="items" label="Purchased Items: " [rank]="1">
+        <fdp-checkbox-group
+            [list]="invoiceItems"
+            name="invoices"
+            lookupKey="item"
+            displayKey="itemType"
+            ariaLabel="Purchased Items"
+            [formControl]="fl5.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem">Purchased Items: {{ form7.controls.items?.value }}</span>
+
+<br />
+<br />
+<p>Disabled checkbox group</p>
+<fdp-form-group [formGroup]="form6">
+    <fdp-form-field #fl3 id="disabled_currencies" label="Disabled checkbox Group: " [disabled]="true" [rank]="1">
+        <fdp-checkbox-group
+            [list]="countryCurrency"
+            name="currencies"
+            ariaLabel="Currencies"
+            [formControl]="fl3.formControl"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+
+<hr />
+
+<h3>Template Driven Form</h3>
+<h3>Checkboxes created from from list of selectItem Objects</h3>
+<p>Inline checkboxes</p>
+<fdp-form-group>
+    <fdp-form-field id="languages known" label="Programming Languages Known: " [rank]="1">
+        <fdp-checkbox-group
+            [list]="languages"
+            [isInline]="true"
+            name="languages"
+            ariaLabel="Programming Languages Known"
+            [(ngModel)]="languagesKnown"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem">Languages: {{ languagesKnown }}</span>
+<br />
+<br />
+
+<p>Pre-selection based on value passed</p>
+<fdp-form-group>
+    <fdp-form-field id="currency" label="Currencies in country: " [rank]="1">
+        <fdp-checkbox-group
+            [list]="countryCurrency"
+            name="currencies"
+            fdCompact
+            ariaLabel="Currencies in country"
+            [(ngModel)]="currencies"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem">Currencies: {{ currencies }}</span>
+
+<br />
+<br />
+<p>Lookup key and Display key usages.</p>
+<fdp-form-group>
+    <fdp-form-field id="items1" label="Purchased Items: " [rank]="1">
+        <fdp-checkbox-group
+            [list]="invoiceItems"
+            name="items"
+            lookupKey="item"
+            displayKey="itemType"
+            ariaLabel="Purchased Items"
+            [(ngModel)]="itemsData"
+        ></fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+<span style="margin-left: 2rem">Purchased Items: {{ itemsData }}</span>
+<br />
+<br />
+<p>Disabled checkbox group</p>
+<fdp-form-group>
+    <fdp-form-field id="disabled currency" label="Disabled checkbox Group: " [rank]="1">
+        <fdp-checkbox-group [list]="countryCurrency" [disabled]="true" name="currencies" ariaLabel="Disabled checkbox">
+        </fdp-checkbox-group>
+    </fdp-form-field>
+</fdp-form-group>
+
+<h3>Checkbox group outside form</h3>
+<fdp-checkbox-group
+    [list]="languages"
+    name="languages"
+    [isInline]="true"
+    ariaLabel="My known languages"
+    [(checked)]="selectedDishes"
+>
+</fdp-checkbox-group>
+
+<span style="margin-left: 2rem">Selected dishes: {{ selectedDishes }}</span>
+
+<h3>Checkbox group outside form using displayKey and lookupKey:</h3>
+<fdp-checkbox-group
+    [list]="invoiceItems"
+    name="invoices"
+    lookupKey="item"
+    displayKey="itemType"
+    ariaLabel="Purchased Items"
+    [(checked)]="selectedInvoices"
+>
+</fdp-checkbox-group>
+
+<span style="margin-left: 2rem">Selected invoices: {{ selectedInvoices }}</span>

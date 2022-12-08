@@ -1,0 +1,243 @@
+<button fd-button (click)="openPage()">Click to open full screen</button>
+<div class="overlay" *ngIf="visible">
+    <fd-toolbar>
+        <label fd-toolbar-label>Resize browser's window to adjust amount of visible slides.</label>
+        <fd-toolbar-spacer></fd-toolbar-spacer>
+        <button
+            fd-toolbar-item
+            fd-button
+            fdCompact
+            fdType="negative"
+            (click)="closePage()"
+            label="Close"
+            title="Close"
+        ></button>
+    </fd-toolbar>
+    <div #carousel style="display: flex; justify-content: center">
+        <fd-carousel visibleSlidesCount="auto" width="100%">
+            <fd-carousel-item>
+                <div class="fd-card-wrapper-example">
+                    <fd-card badge="New" cardType="list">
+                        <fd-card-header>
+                            <h2 fd-card-title>Card One</h2>
+                            <h3 fd-card-subtitle>Card One Subtitle</h3>
+                            <span fd-card-counter status="positive">3 of 10</span>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <li fd-list-item>
+                                    <span fd-list-title> item 1 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 2 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 3 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 4 </span>
+                                </li>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </div>
+            </fd-carousel-item>
+
+            <fd-carousel-item>
+                <div class="fd-card-wrapper-example">
+                    <fd-card badge="New" cardType="list">
+                        <fd-card-header>
+                            <h2 fd-card-title>Card Two Title</h2>
+                            <h3 fd-card-subtitle>Card Two Subtitle</h3>
+                            <span fd-card-counter status="positive">3 of 10</span>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <li fd-list-item>
+                                    <span fd-list-title> item 1 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 2 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 3 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 4 </span>
+                                </li>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </div>
+            </fd-carousel-item>
+
+            <fd-carousel-item>
+                <div class="fd-card-wrapper-example">
+                    <fd-card badge="New" cardType="list">
+                        <fd-card-header>
+                            <h2 fd-card-title>Card Three Title</h2>
+                            <h3 fd-card-subtitle>Card Three Subtitle</h3>
+                            <span fd-card-counter status="positive">3 of 10</span>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <li fd-list-item>
+                                    <span fd-list-title> item 1 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 2 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 3 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 4 </span>
+                                </li>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </div>
+            </fd-carousel-item>
+
+            <fd-carousel-item>
+                <div class="fd-card-wrapper-example">
+                    <fd-card badge="New" cardType="list">
+                        <fd-card-header>
+                            <h2 fd-card-title>Card Four Title</h2>
+                            <h3 fd-card-subtitle>Card Four Subtitle</h3>
+                            <span fd-card-counter status="positive">3 of 10</span>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <li fd-list-item>
+                                    <span fd-list-title> item 1 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 2 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 3 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 4 </span>
+                                </li>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </div>
+            </fd-carousel-item>
+
+            <fd-carousel-item>
+                <div class="fd-card-wrapper-example">
+                    <fd-card badge="New" cardType="list">
+                        <fd-card-header>
+                            <h2 fd-card-title>Card Five Title</h2>
+                            <h3 fd-card-subtitle>Card Five Subtitle</h3>
+                            <span fd-card-counter status="positive">3 of 10</span>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <li fd-list-item>
+                                    <span fd-list-title> item 1 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 2 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 3 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 4 </span>
+                                </li>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </div>
+            </fd-carousel-item>
+
+            <fd-carousel-item>
+                <div class="fd-card-wrapper-example">
+                    <fd-card badge="New" cardType="list">
+                        <fd-card-header>
+                            <h2 fd-card-title>Card Six Title</h2>
+                            <h3 fd-card-subtitle>Card Six Subtitle</h3>
+                            <span fd-card-counter status="positive">3 of 10</span>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <li fd-list-item>
+                                    <span fd-list-title> item 1 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 2 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 3 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 4 </span>
+                                </li>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </div>
+            </fd-carousel-item>
+
+            <fd-carousel-item>
+                <div class="fd-card-wrapper-example">
+                    <fd-card badge="New" cardType="list">
+                        <fd-card-header>
+                            <h2 fd-card-title>Card Seven Title</h2>
+                            <h3 fd-card-subtitle>Card Seven Subtitle</h3>
+                            <span fd-card-counter status="positive">3 of 10</span>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <li fd-list-item>
+                                    <span fd-list-title> item 1 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 2 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 3 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 4 </span>
+                                </li>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </div>
+            </fd-carousel-item>
+
+            <fd-carousel-item>
+                <div class="fd-card-wrapper-example">
+                    <fd-card badge="New" cardType="list">
+                        <fd-card-header>
+                            <h2 fd-card-title>Card Eight Title</h2>
+                            <h3 fd-card-subtitle>Card Eight Subtitle</h3>
+                            <span fd-card-counter status="positive">3 of 10</span>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <ul fd-list [noBorder]="true">
+                                <li fd-list-item>
+                                    <span fd-list-title> item 1 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 2 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 3 </span>
+                                </li>
+                                <li fd-list-item>
+                                    <span fd-list-title> item 4 </span>
+                                </li>
+                            </ul>
+                        </fd-card-content>
+                    </fd-card>
+                </div>
+            </fd-carousel-item>
+        </fd-carousel>
+    </div>
+</div>

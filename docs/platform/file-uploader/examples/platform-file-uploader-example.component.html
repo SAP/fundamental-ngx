@@ -1,0 +1,43 @@
+<fdp-form-group #fg>
+    <fdp-form-field
+        #ffl1
+        label="File Uploader Example"
+        id="input1"
+        name="defaultFileUploaderSample"
+        [rank]="1"
+        placeholder="Choose file to upload"
+        [required]="true"
+    >
+        <fdp-file-uploader
+            ariaLabel="Choose file"
+            ariaLabelledBy="input1"
+            id="input1"
+            name="defaultFileUploaderSample"
+            placeholder="Choose file to upload"
+            buttonLabel="Browse"
+            buttonAriaLabel="browse file"
+            accept=".png,.jpg"
+            [(ngModel)]="files"
+            [multiple]="true"
+            (selectionChange)="handleFileSelection($event)"
+            (invalidFileChange)="handleInvalidFileSelection($event)"
+        ></fdp-file-uploader>
+        <span *fdpFormFieldError="'required'; type: 'error'"> This field is required </span>
+    </fdp-form-field>
+</fdp-form-group>
+
+<br /><br />
+
+Files Selected:
+<br />
+<span *ngFor="let file of this.files">
+    <span class="green">{{ file.name }} </span><br
+/></span>
+
+<br />
+
+Invalid Files:
+<br />
+<span *ngFor="let file of invalidFiles">
+    <span class="red">{{ file.name }} </span><br />
+</span>
