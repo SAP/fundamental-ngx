@@ -117,7 +117,7 @@ specialDay: SpecialDayRule[] = [
     calendarSingleSource: ExampleFile[] = [
         {
             language: 'typescript',
-            code: getAssetFromModuleAssets(this.exampleFunctionsHtml),
+            code: this.exampleFunctionsHtml,
             component: 'CalendarSingleExampleComponent',
             fileName: 'calendar-single-example',
             name: 'Example Block/Disable Functions'
