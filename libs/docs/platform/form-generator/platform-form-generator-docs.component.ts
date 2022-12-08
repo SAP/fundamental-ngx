@@ -31,6 +31,9 @@ const inlineHelpSrc = 'platform-form-generator-inline-help-example.component.ts'
 
 const defaultConfigSrc = 'platform-form-generator-global-config-example.ts';
 
+const loadingFormGeneratorhtml = 'loading/platform-form-generator-loading-example.component.html';
+const loadingFormGeneratorSrc = 'loading/platform-form-generator-loading-example.component.ts';
+
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 
 @Component({
@@ -175,6 +178,20 @@ export class PlatformFormGeneratorDocsComponent {
             code: getAssetFromModuleAssets(inlineHelpSrc),
             fileName: 'platform-form-generator-inline-help-example',
             component: 'PlatformFormGeneratorInlineHelpExampleComponent'
+        }
+    ];
+
+    loadingFormGenerator: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(loadingFormGeneratorhtml),
+            fileName: 'platform-form-generator-loading-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(loadingFormGeneratorSrc),
+            fileName: 'platform-form-generator-loading-example',
+            component: 'PlatformFormGeneratorLoadingExampleComponent'
         }
     ];
 
