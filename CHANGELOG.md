@@ -1,3 +1,12 @@
+## [0.37.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.37.1-rc.0...v0.37.1-rc.1) (2022-12-09)
+
+
+### Bug Fixes
+
+* **core:** fixed deprecated tab list compact directive ([#9061](https://github.com/SAP/fundamental-ngx/issues/9061)) ([086ba59](https://github.com/SAP/fundamental-ngx/commit/086ba594b857cae78cd48fae4e69c3df1304f3af))
+
+
+
 ## [0.37.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.37.0...v0.37.1-rc.0) (2022-12-09)
 
 
