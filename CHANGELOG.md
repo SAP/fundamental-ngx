@@ -1,3 +1,12 @@
+## [0.37.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.37.1-rc.1...v0.37.1-rc.2) (2022-12-09)
+
+
+### Bug Fixes
+
+* **docs:** fix automatic-slides example in carousel ([#9059](https://github.com/SAP/fundamental-ngx/issues/9059)) ([808b5c9](https://github.com/SAP/fundamental-ngx/commit/808b5c968388787f4012da4d5a7fb18acc913b54))
+
+
+
 ## [0.37.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.37.1-rc.0...v0.37.1-rc.1) (2022-12-09)
 
 
