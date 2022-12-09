@@ -46,7 +46,7 @@
     </fd-toolbar>
 </div>
 
-<div class="fdp-smart-filter-bar__filters" [class.fdp-smart-filter-bar__filters--hidden]="!_showFilterBar">
+<div class="fdp-smart-filter-bar__filters" [hidden]="!_showFilterBar">
     <fdp-form-generator
         (formCreated)="_onFormCreated()"
         (formSubmitted)="_onFormSubmitted($event)"

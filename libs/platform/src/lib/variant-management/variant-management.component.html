@@ -50,7 +50,12 @@
             </div>
         </div>
         <ul fd-list>
-            <ng-container *ngFor="let variant of _variants | filter: _filterPhrase:'name'; trackBy: _trackFn">
+            <ng-container
+                *ngFor="
+                    let variant of _variants | filter: { searchTerm: _filterPhrase, key: 'name' };
+                    trackBy: _trackFn
+                "
+            >
                 <li fd-list-item (click)="selectVariant(variant)">
                     <span fd-list-link>
                         <span fd-list-title>{{ variant.name }}</span>
