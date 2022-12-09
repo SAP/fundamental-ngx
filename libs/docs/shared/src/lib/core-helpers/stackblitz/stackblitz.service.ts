@@ -96,7 +96,9 @@ export class StackblitzService {
 
             if (generatedFiles?.ts) {
                 defaultProjectInfo.files[generatedFiles.ts.path] = generatedFiles.ts.code;
-                stackBlitzFiles.push(this.getStackBlitzTsFile(example, mainComponent));
+                if (!example.pure) {
+                    stackBlitzFiles.push(this.getStackBlitzTsFile(example, mainComponent));
+                }
             }
         }
 
@@ -159,11 +161,14 @@ export class ${componentName} {}`;
     private getFileBasis(file: ExampleFile): string {
         if (file.service) {
             return file.fileName + '.service';
-        } else if (file.pipe) {
-            return file.fileName + '.pipe';
-        } else {
-            return file.fileName + '.component';
         }
+        if (file.pipe) {
+            return file.fileName + '.pipe';
+        }
+        if (file.pure) {
+            return file.fileName + '';
+        }
+        return file.fileName + '.component';
     }
 
     /** this function transform that-word, or that_word to ThatWord */
