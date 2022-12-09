@@ -16,7 +16,8 @@ const wizardDialogHtml = 'wizard-dialog-example.component.html';
 const wizardDialogTs = 'wizard-dialog-example.component.ts';
 const wizardNgForHtml = 'wizard-ngfor-example.component.html';
 const wizardNgForTs = 'wizard-ngfor-example.component.ts';
-
+const wizardLoadingHtml = 'loading/wizard-loading-example.component.html';
+const wizardLoadingTs = 'loading/wizard-loading-example.component.ts';
 const wizardVisibleSummaryHtml = 'wizard-visible-summary-example.component.html';
 const wizardVisibleSummaryTs = 'wizard-visible-summary-example.component.ts';
 
@@ -127,6 +128,21 @@ export class WizardDocsComponent {
             code: getAssetFromModuleAssets(wizardVisibleSummaryTs),
             fileName: 'wizard-visible-summary-example',
             component: 'WizardVisibleSummaryExampleComponent'
+        }
+    ];
+
+    wizardLoadingExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(wizardLoadingHtml),
+            fileName: 'wizard-loading-example',
+            scssFileCode: getAssetFromModuleAssets(wizardScss)
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(wizardLoadingTs),
+            fileName: 'wizard-loading-example',
+            component: 'WizardLoadingExampleComponent'
         }
     ];
 }

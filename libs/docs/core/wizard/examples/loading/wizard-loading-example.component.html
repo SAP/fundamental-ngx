@@ -1,0 +1,32 @@
+<button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
+
+<div cdkScrollable cdkTrapFocus class="docs-wizard-example-overlay" #overlay>
+    <ng-container *ngIf="fullscreen">
+        <div class="docs-wizard-example-overlay-content">
+            <div class="docs-wizard-example-button">
+                <button fd-button (click)="exitFullscreenExample($event)">Exit Example</button>
+            </div>
+
+            <!-- The Wizard -->
+            <fd-wizard>
+                <fd-wizard-navigation>
+                    <ul fd-wizard-progress-bar size="lg" role="list" aria-label="Wizard Steps">
+                        <li *fdRepeat="3; let i = index" fd-wizard-step [status]="i === 0 ? 'current' : 'upcoming'">
+                            <fd-skeleton type="rectangle" width="32px" height="32px"></fd-skeleton>
+
+                            <fd-wizard-content size="lg">
+                                <fd-skeleton type="text" width="60%"></fd-skeleton>
+                            </fd-wizard-content>
+                        </li>
+                    </ul>
+                </fd-wizard-navigation>
+                <div fd-bar barDesign="footer">
+                    <div fd-bar-right>
+                        <fd-button-bar label="Save"></fd-button-bar>
+                        <fd-button-bar label="Cancel"></fd-button-bar>
+                    </div>
+                </div>
+            </fd-wizard>
+        </div>
+    </ng-container>
+</div>
