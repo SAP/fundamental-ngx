@@ -6,6 +6,7 @@ export interface ExampleFile<
     code: ProvidedCodeType;
     scssFileCode?: ProvidedScssCodeType;
     standalone?: boolean;
+    pure?: boolean;
     language: string;
     fileName?: string;
     entryComponent?: boolean;
