@@ -174,6 +174,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     ngAfterViewInit(): void {
         setTimeout(() => {
+            if (this._subscriptions.closed) {
+                return;
+            }
+
             // fixes ExpressionChangedAfterItHasBeenCheckedError
             this._setContentTemplates();
             this._subscriptions.add(

@@ -27,6 +27,8 @@ import { WizardGeneratorComponent } from './components/wizard-generator/wizard-g
 import { WizardGeneratorSummaryStepDirective } from './directives/wizard-generator-summary-step.directive';
 import { WizardGeneratorReviewButtonDirective } from './directives/wizard-generator-review-button.directive';
 import { I18nModule } from '@fundamental-ngx/i18n';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { RepeatModule } from '@fundamental-ngx/core/utils';
 
 /**
  * Adds Wizard Generator functionality to your application.
@@ -59,7 +61,9 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         LayoutGridModule,
         TitleModule,
         FormLabelModule,
-        PlatformLinkModule
+        PlatformLinkModule,
+        SkeletonModule,
+        RepeatModule
     ],
     exports: [
         WizardGeneratorComponent,
