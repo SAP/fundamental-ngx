@@ -746,6 +746,7 @@ export interface FdLanguage {
     platformVariantManagement: {
         manage: FdLanguageKey;
         saveAs: FdLanguageKey;
+        saveView: FdLanguageKey;
         save: FdLanguageKey;
         myViews: FdLanguageKey;
         view: FdLanguageKey;

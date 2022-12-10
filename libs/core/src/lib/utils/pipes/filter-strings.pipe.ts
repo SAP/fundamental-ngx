@@ -2,9 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Pipe({
-    name: 'filter'
+    name: 'fdFilterStrings'
 })
-export class FilterPipe implements PipeTransform {
+export class FilterStringsPipe implements PipeTransform {
     /**
      * Performs filtering.
      * @param values Array of items.

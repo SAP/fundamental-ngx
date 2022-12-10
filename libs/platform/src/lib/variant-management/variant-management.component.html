@@ -52,7 +52,7 @@
         <ul fd-list>
             <ng-container
                 *ngFor="
-                    let variant of _variants | filter: { searchTerm: _filterPhrase, key: 'name' };
+                    let variant of _variants | fdFilterStrings : { searchTerm: _filterPhrase, key: 'name' };
                     trackBy: _trackFn
                 "
             >

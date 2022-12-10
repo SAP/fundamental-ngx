@@ -6,7 +6,6 @@ import { SaveDialogContext } from '../../models/save-dialog.model';
 @Component({
     selector: 'fdp-manage-variant-item',
     templateUrl: './manage-variant-item.component.html',
-    styleUrls: ['./manage-variant-item.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

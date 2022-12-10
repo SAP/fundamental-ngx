@@ -559,6 +559,7 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
     platformVariantManagement: {
         manage: 'Manage',
         saveAs: 'Save as',
+        saveView: 'Save View',
         save: 'Save',
         myViews: 'My Views',
         view: 'View',

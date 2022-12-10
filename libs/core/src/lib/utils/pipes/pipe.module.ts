@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { DisplayFnPipe } from './displayFn.pipe';
-import { FilterPipe } from './filter.pipe';
+import { FilterStringsPipe } from './filter-strings.pipe';
 import { SearchHighlightPipe } from './search-highlight.pipe';
 import { TwoDigitsPipe } from './two-digits.pipe';
 import { SafePipe } from './safe.pipe';
@@ -18,7 +18,7 @@ import { TruncatePipe } from './truncate.pipe';
         ValueByPathPipe,
         IsCompactDensityPipe,
         TruncatePipe,
-        FilterPipe
+        FilterStringsPipe
     ],
     exports: [
         DisplayFnPipe,
@@ -28,7 +28,7 @@ import { TruncatePipe } from './truncate.pipe';
         ValueByPathPipe,
         IsCompactDensityPipe,
         TruncatePipe,
-        FilterPipe
+        FilterStringsPipe
     ]
 })
 export class PipeModule {}

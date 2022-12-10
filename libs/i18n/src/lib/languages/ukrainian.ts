@@ -756,6 +756,7 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     platformVariantManagement: {
         manage: 'Управління',
         saveAs: 'Зберегти як',
+        saveView: 'Зберегти Вид',
         save: 'Зберегти',
         myViews: 'Мої Види',
         view: 'Вид',
