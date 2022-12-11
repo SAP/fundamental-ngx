@@ -1,5 +1,5 @@
 @use '@angular/cdk';
-@import '~fundamental-styles/dist/message-toast.css';
+@import 'fundamental-styles/dist/message-toast';
 
 @include cdk.a11y-visually-hidden();
 

@@ -1,5 +1,5 @@
 @use '@angular/cdk';
-@import '~fundamental-styles/dist/scrollbar.css';
+@import 'fundamental-styles/dist/scrollbar';
 
 @include cdk.a11y-visually-hidden();
 

@@ -1,7 +1,7 @@
 @use '@angular/cdk';
-@import '~fundamental-styles/dist/button.css';
-@import '~fundamental-styles/dist/input.css';
-@import '~fundamental-styles/dist/input-group.css';
+@import 'fundamental-styles/dist/button';
+@import 'fundamental-styles/dist/input';
+@import 'fundamental-styles/dist/input-group';
 
 @include cdk.a11y-visually-hidden();
 
