@@ -164,7 +164,6 @@ describe('PlatformDatetimePickerComponent', () => {
 
         expect(inputGroupEl.nativeElement.classList.contains('is-error')).not.toBeTrue();
 
-        // @ts-expect-error fault tolerance test
         const invalidDate = new FdDate(null);
         datetimePicker.value = invalidDate;
         datetimePicker.handleDatetimeInputChange(invalidDate);
