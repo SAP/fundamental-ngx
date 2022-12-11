@@ -150,7 +150,7 @@
     "karma-parallel": "0.3.1",
     "karma-sauce-launcher": "4.3.6",
     "karma-sourcemap-loader": "0.3.8",
-    "karma-spec-reporter": "0.0.32",
+    "karma-spec-reporter": "0.0.35",
     "karma-typescript": "5.5.3",
     "karma-typescript-angular2-transform": "5.5.3",
     "karma-webpack": "5.0.0",
