@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-list-byline",
     "sourceRoot": "libs/docs/fn/list-byline",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/list-byline/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-list-byline"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-list-byline"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

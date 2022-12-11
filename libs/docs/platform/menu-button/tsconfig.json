@@ -7,7 +7,7 @@
         "strict": true,
         "noImplicitReturns": false,
         "noFallthroughCasesInSwitch": true,
-        "target": "es2020",
+        "target": "es2022",
         "outDir": "../../../../dist/out-tsc",
         "declaration": true,
         "declarationMap": true,

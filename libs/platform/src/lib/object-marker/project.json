@@ -1,11 +1,12 @@
 {
+    "name": "platform-object-marker",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/object-marker",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/object-marker"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/object-marker"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/object-marker/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/object-marker/ng-package.json",

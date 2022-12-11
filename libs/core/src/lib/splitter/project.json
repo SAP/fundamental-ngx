@@ -1,11 +1,12 @@
 {
+    "name": "core-splitter",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/splitter",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/splitter"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/splitter"],
             "options": {
                 "tsConfig": "libs/core/src/lib/splitter/tsconfig.lib.json",
                 "project": "libs/core/src/lib/splitter/ng-package.json",

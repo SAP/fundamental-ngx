@@ -4,8 +4,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { SelectComponent, SelectMobileModule, SelectModule } from '@fundamental-ngx/core/select';
 import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN, whenStable } from '@fundamental-ngx/core/tests';
+import { SelectComponent } from '../select.component';
+import { SelectModule } from '../select.module';
+import { SelectMobileModule } from './select-mobile.module';
 
 const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true };
 

@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NestedListPopoverComponent } from './nested-list-popover.component';
-import { PopoverModule } from '../../popover/popover.module';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
-import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 
 describe('NestedListPopoverComponent', () => {
     let component: NestedListPopoverComponent;

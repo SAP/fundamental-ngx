@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-
-import { MenuComponent, MenuInteractiveDirective, MenuItemComponent, MenuModule } from '@fundamental-ngx/core/menu';
+import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
+import { MenuComponent } from '../menu.component';
+import { MenuModule } from '../menu.module';
+import { MenuItemComponent } from './menu-item.component';
 
 @Component({
     template: `

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ListModule } from '../list.module';
-import { ButtonModule } from '../../button/button.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     template: `

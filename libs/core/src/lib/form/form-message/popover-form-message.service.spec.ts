@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PopoverService } from '../../popover/popover-service/popover.service';
 import { PopoverFormMessageService } from './popover-form-message.service';
-import { PopoverModule } from '../../popover/popover.module';
+import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
 import { Component } from '@angular/core';
 
 @Component({

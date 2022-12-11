@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ObjectIdentifierComponent } from './object-identifier.component';
-import { LinkComponent } from '../link/link.component';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 
 @Component({
     selector: 'fd-test-object-identifier',

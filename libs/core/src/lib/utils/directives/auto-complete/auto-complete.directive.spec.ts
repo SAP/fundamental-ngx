@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { AutoCompleteDirective } from '@fundamental-ngx/core/utils';
+import { AutoCompleteDirective } from './auto-complete.directive';
 
 @Component({
     template: ` <input [options]="values" fd-auto-complete />`

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SegmentedButtonComponent } from '@fundamental-ngx/fn/segmented-button';
+import { SegmentedButtonComponent } from './segmented-button.component';
 import { Component, Directive, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { SelectableItemToken } from '@fundamental-ngx/fn/cdk';
 import { Observable, Subject } from 'rxjs';

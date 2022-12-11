@@ -1,11 +1,12 @@
 {
+    "name": "fn-segmented-button",
     "projectType": "library",
     "sourceRoot": "libs/fn/src/lib/segmented-button",
     "prefix": "fn",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/fn/segmented-button"],
+            "outputs": ["{workspaceRoot}/dist/libs/fn/segmented-button"],
             "options": {
                 "project": "libs/fn/src/lib/segmented-button/ng-package.json"
             },

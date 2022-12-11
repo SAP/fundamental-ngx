@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-scrollbar",
     "sourceRoot": "libs/docs/core/scrollbar",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/scrollbar/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-scrollbar"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-scrollbar"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

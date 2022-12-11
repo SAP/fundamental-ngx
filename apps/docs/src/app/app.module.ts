@@ -53,7 +53,6 @@ const routes: Routes = [
         HttpClientModule,
         RouterModule.forRoot(routes, {
             useHash: true,
-            relativeLinkResolution: 'legacy',
             preloadingStrategy: PreloadAllModules
         }),
         MarkdownModule.forRoot({ loader: HttpClient }),

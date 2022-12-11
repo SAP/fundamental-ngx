@@ -1,8 +1,8 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { MessageToastComponent, MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { BusyIndicatorModule } from '../busy-indicator.module';
 
 @Component({
     template: `<ng-template #testTemplate let-messageToast>

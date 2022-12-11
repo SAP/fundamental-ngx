@@ -1,8 +1,8 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
-import { ButtonComponent, ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from './button.component';
+import { ButtonModule } from './button.module';
 
 @Component({
     selector: 'fd-test-component',

@@ -1,11 +1,12 @@
 {
+    "name": "core-checkbox",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/checkbox",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/checkbox"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/checkbox"],
             "options": {
                 "tsConfig": "libs/core/src/lib/checkbox/tsconfig.lib.json",
                 "project": "libs/core/src/lib/checkbox/ng-package.json",

@@ -1,11 +1,12 @@
 {
+    "name": "core-nested-list",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/nested-list",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/nested-list"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/nested-list"],
             "options": {
                 "tsConfig": "libs/core/src/lib/nested-list/tsconfig.lib.json",
                 "project": "libs/core/src/lib/nested-list/ng-package.json",

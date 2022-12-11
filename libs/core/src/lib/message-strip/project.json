@@ -1,11 +1,12 @@
 {
+    "name": "core-message-strip",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/message-strip",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/message-strip"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/message-strip"],
             "options": {
                 "tsConfig": "libs/core/src/lib/message-strip/tsconfig.lib.json",
                 "project": "libs/core/src/lib/message-strip/ng-package.json",

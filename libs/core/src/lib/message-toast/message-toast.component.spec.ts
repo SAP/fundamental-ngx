@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MessageToastComponent } from './message-toast.component';
 import { MessageToastContainerComponent } from './message-toast-utils/message-toast-container.component';
 import { MessageToastService } from './message-toast-service/message-toast.service';
-import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { MessageToastConfig } from './message-toast-utils/message-toast-config';
 import { MESSAGE_TOAST_CONFIG } from './constants';
 

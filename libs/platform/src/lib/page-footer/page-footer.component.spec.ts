@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlatformLinkModule } from '../link/link.module';
+import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import { PlatformFooterComponent } from './page-footer.component';
 import { PlatformPageFooterModule } from './page-footer.module';
 

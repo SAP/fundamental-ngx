@@ -1,11 +1,12 @@
 {
+    "name": "core-radio",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/radio",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/radio"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/radio"],
             "options": {
                 "tsConfig": "libs/core/src/lib/radio/tsconfig.lib.json",
                 "project": "libs/core/src/lib/radio/ng-package.json",

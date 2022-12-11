@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { DialogCloseButtonComponent, DialogModule } from '@fundamental-ngx/core/dialog';
+import { DialogModule } from '../dialog.module';
+import { DialogCloseButtonComponent } from './dialog-close-button.component';
 
 describe('DialogCloseButtonComponent', () => {
     let component: DialogCloseButtonComponent;

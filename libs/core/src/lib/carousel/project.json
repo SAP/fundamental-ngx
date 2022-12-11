@@ -1,11 +1,12 @@
 {
+    "name": "core-carousel",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/carousel",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/carousel"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/carousel"],
             "options": {
                 "tsConfig": "libs/core/src/lib/carousel/tsconfig.lib.json",
                 "project": "libs/core/src/lib/carousel/ng-package.json",

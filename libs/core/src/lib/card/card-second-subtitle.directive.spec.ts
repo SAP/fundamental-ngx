@@ -2,7 +2,7 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { CardSecondSubtitleDirective } from '@fundamental-ngx/core/card';
+import { CardSecondSubtitleDirective } from './card-second-subtitle.directive';
 
 import { CLASS_NAME } from './constants';
 

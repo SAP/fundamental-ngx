@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-disabled",
     "sourceRoot": "libs/docs/fn/fn-disabled",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/fn-disabled/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-fn-disabled"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-fn-disabled"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

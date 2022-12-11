@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { ProductMenuComponent, ShellbarModule } from '@fundamental-ngx/core/shellbar';
+import { ShellbarModule } from '../shellbar.module';
+import { ProductMenuComponent } from './product-menu.component';
 
 describe('ProductMenuComponent', () => {
     let component: ProductMenuComponent;

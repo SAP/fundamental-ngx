@@ -1,11 +1,12 @@
 {
+    "name": "platform-list",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/list",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/list"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/list"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/list/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/list/ng-package.json",

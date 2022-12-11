@@ -1,11 +1,12 @@
 {
+    "name": "core-tests",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/tests",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/tests"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/tests"],
             "options": {
                 "tsConfig": "libs/core/src/lib/tests/tsconfig.lib.json",
                 "project": "libs/core/src/lib/tests/ng-package.json",

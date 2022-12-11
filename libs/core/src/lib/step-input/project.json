@@ -1,11 +1,12 @@
 {
+    "name": "core-step-input",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/step-input",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/step-input"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/step-input"],
             "options": {
                 "tsConfig": "libs/core/src/lib/step-input/tsconfig.lib.json",
                 "project": "libs/core/src/lib/step-input/ng-package.json",

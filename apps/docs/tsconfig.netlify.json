@@ -4,7 +4,9 @@
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "outDir": "../../dist/out-tsc",
-        "types": ["node"]
+        "types": ["node"],
+        "target": "ES2022",
+        "useDefineForClassFields": false
     },
     "exclude": ["**/*.spec.ts"],
     "include": ["**/*.ts"]

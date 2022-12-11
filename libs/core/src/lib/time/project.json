@@ -1,11 +1,12 @@
 {
+    "name": "core-time",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/time",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/time"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/time"],
             "options": {
                 "tsConfig": "libs/core/src/lib/time/tsconfig.lib.json",
                 "project": "libs/core/src/lib/time/ng-package.json",

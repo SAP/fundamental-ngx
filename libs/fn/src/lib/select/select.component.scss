@@ -1,8 +1,8 @@
-@import '~@angular/cdk/overlay-prebuilt';
+@import '~@angular/cdk/overlay-prebuilt.css';
 
-@import '~@fundamental-styles/fn/dist/fn-input';
+@import '~@fundamental-styles/fn/dist/fn-input.css';
 // TODO: After component is migrated to ngx, remove styling and use component.
-@import '~@fundamental-styles/fn/dist/fn-nested-button';
+@import '~@fundamental-styles/fn/dist/fn-nested-button.css';
 
 // TODO: address in fundamental-styles
 .fn-input {

@@ -1,11 +1,12 @@
 {
+    "name": "core-theming",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/theming",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/theming"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/theming"],
             "options": {
                 "tsConfig": "libs/core/src/lib/theming/tsconfig.lib.json",
                 "project": "libs/core/src/lib/theming/ng-package.json",

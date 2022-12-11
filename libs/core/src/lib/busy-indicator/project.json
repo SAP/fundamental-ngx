@@ -1,11 +1,12 @@
 {
+    "name": "core-busy-indicator",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/busy-indicator",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/busy-indicator"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/busy-indicator"],
             "options": {
                 "tsConfig": "libs/core/src/lib/busy-indicator/tsconfig.lib.json",
                 "project": "libs/core/src/lib/busy-indicator/ng-package.json",

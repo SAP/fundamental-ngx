@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { PopoverModule } from '../../popover/popover.module';
-import { ButtonModule } from '../../button/button.module';
-import { DragAndDropModule } from '../../utils/drag-and-drop/drag-and-drop.module';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DragAndDropModule } from '@fundamental-ngx/core/utils';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ProductSwitchComponent } from './product-switch.component';
 import { ProductSwitchModule } from '../product-switch.module';

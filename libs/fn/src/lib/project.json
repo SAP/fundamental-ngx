@@ -1,4 +1,5 @@
 {
+    "name": "fn",
     "projectType": "library",
     "sourceRoot": "libs/fn/src/lib",
     "prefix": "fn",
@@ -23,7 +24,7 @@
         },
         "build-umbrella": {
             "executor": "@nrwl/angular:package",
-            "outputs": ["dist/libs/fn"],
+            "outputs": ["{workspaceRoot}/dist/libs/fn"],
             "options": {
                 "tsConfig": "libs/fn/src/lib/tsconfig.lib.json",
                 "project": "libs/fn/src/lib/ng-package.json",

@@ -8,7 +8,7 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
 
 import { FeedInputComponent } from './feed-input.component';
 import { PlatformFeedInputModule } from './feed-input.module';
-import { PlatformButtonModule } from '../button/public_api';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
 describe('FeedInputComponent', () => {
     let component: FeedInputComponent;

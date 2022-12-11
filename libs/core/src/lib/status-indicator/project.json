@@ -1,11 +1,12 @@
 {
+    "name": "core-status-indicator",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/status-indicator",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/status-indicator"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/status-indicator"],
             "options": {
                 "tsConfig": "libs/core/src/lib/status-indicator/tsconfig.lib.json",
                 "project": "libs/core/src/lib/status-indicator/ng-package.json",

@@ -1,8 +1,10 @@
 import { ElementRef } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { RatingIndicatorComponent, RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { first } from 'rxjs/operators';
+
+import { RatingIndicatorComponent } from './rating-indicator.component';
+import { RatingIndicatorModule } from '../rating-indicator.module';
 
 const prefix = 'fd-rating-indicator';
 

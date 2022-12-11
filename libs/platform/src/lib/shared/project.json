@@ -1,11 +1,12 @@
 {
+    "name": "platform-shared",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/shared",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/shared"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/shared"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/shared/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/shared/ng-package.json",

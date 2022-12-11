@@ -2,13 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import {
-    CardComponent,
-    CardContentComponent,
-    CardModule,
-    CardTitleDirective,
-    CardType
-} from '@fundamental-ngx/core/card';
+import { CardComponent } from './card.component';
+import { CardContentComponent } from './card-content.component';
+import { CardModule } from './card.module';
+import { CardTitleDirective } from './card-title.directive';
+import { CardType } from './constants';
 
 import { CLASS_NAME } from './constants';
 import { getCardModifierClassNameByCardType } from './utils';

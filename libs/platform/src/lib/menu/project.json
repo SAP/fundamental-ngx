@@ -1,11 +1,12 @@
 {
+    "name": "platform-menu",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/menu",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/menu"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/menu"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/menu/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/menu/ng-package.json",

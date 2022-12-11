@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { FdDate, FdDatetimeModule } from '../datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 
 import { CalendarComponent } from './calendar.component';
 import { CalendarModule } from './calendar.module';
-import { ButtonModule } from '../button/button.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 describe('CalendarComponent', () => {
     let component: CalendarComponent<FdDate>;

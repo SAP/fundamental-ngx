@@ -1,4 +1,3 @@
-import { SelectableItemToken, SelectComponentRootToken, SelectionService } from '@fundamental-ngx/fn/cdk';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
     AfterViewInit,
@@ -13,6 +12,10 @@ import {
 } from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { Subject } from 'rxjs';
+
+import { SelectableItemToken } from './selectable-item.token';
+import { SelectionService } from './selection.service';
+import { SelectComponentRootToken } from './select-component-root.token';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector

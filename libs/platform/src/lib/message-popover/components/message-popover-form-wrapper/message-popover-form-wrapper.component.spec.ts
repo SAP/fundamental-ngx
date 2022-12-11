@@ -10,7 +10,7 @@ import {
     Validators
 } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform/message-popover';
+import { PlatformMessagePopoverModule } from '../../platform-message-popover.module';
 import { MessagePopoverErrorGroup } from '../../models/message-popover-error.interface';
 
 import { MessagePopoverFormWrapperComponent } from './message-popover-form-wrapper.component';

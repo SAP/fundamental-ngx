@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
+import { AvatarGroupModule } from '../avatar-group.module';
 
 @Component({
     template: `<fd-avatar #directiveElement fd-avatar-group-focusable-avatar></fd-avatar>`

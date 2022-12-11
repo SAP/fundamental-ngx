@@ -5,13 +5,12 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import {
-    PopoverComponent,
-    PopoverMobileComponent,
-    PopoverMobileModule,
-    PopoverModule
-} from '@fundamental-ngx/core/popover';
+
 import { MOBILE_CONFIG_TEST_TOKEN, whenStable } from '@fundamental-ngx/core/tests';
+import { PopoverComponent } from '../popover.component';
+import { PopoverModule } from '../popover.module';
+import { PopoverMobileComponent } from './popover-mobile.component';
+import { PopoverMobileModule } from './popover-mobile.module';
 
 const MOBILE_CONFIG: MobileModeConfig = { title: 'Test popover title' };
 

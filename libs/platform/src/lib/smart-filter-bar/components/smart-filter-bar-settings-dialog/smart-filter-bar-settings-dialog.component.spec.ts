@@ -1,10 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SmartFilterBarSettingsDialogComponent } from './smart-filter-bar-settings-dialog.component';
-import {
-    PlatformSmartFilterBarModule,
-    SmartFilterSettingsDialogConfig
-} from '@fundamental-ngx/platform/smart-filter-bar';
+import { PlatformSmartFilterBarModule, SmartFilterSettingsDialogConfig } from '../../public_api';
 import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
 import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';

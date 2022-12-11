@@ -1,11 +1,12 @@
 {
+    "name": "platform-action-bar",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/action-bar",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/action-bar"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/action-bar"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/action-bar/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/action-bar/ng-package.json",

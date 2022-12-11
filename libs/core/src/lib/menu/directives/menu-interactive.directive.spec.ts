@@ -1,6 +1,6 @@
 import { waitForAsync } from '@angular/core/testing';
 import { MenuInteractiveDirective } from './menu-interactive.directive';
-import { MockElementRef } from '../../scroll-spy/scroll-spy.directive.spec';
+import { MockElementRef } from '@fundamental-ngx/core/tests';
 
 describe('MenuLinkDirective', () => {
     let directive: MenuInteractiveDirective;

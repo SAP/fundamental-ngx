@@ -1,11 +1,12 @@
 {
+    "name": "core-text",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/text",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/text"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/text"],
             "options": {
                 "tsConfig": "libs/core/src/lib/text/tsconfig.lib.json",
                 "project": "libs/core/src/lib/text/ng-package.json",

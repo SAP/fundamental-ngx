@@ -1,11 +1,12 @@
 {
+    "name": "core-bar",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/bar",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/bar"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/bar"],
             "options": {
                 "tsConfig": "libs/core/src/lib/bar/tsconfig.lib.json",
                 "project": "libs/core/src/lib/bar/ng-package.json",

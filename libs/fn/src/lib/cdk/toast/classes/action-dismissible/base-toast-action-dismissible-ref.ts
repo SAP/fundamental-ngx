@@ -2,8 +2,12 @@ import { OverlayRef } from '@angular/cdk/overlay';
 import { Observable, Subject } from 'rxjs';
 import { BaseToastDurationDismissibleRef } from '../duration-dismissible/base-toast-duration-dismissible-ref';
 import { BaseToastDurationDismissibleContainerComponent } from '../duration-dismissible/base-toast-duration-dismissible-container.component';
+import { BaseToastConfig } from '../base-toast-config';
 
-export abstract class BaseToastActionDismissibleRef<T = any, P = any> extends BaseToastDurationDismissibleRef<T, P> {
+export abstract class BaseToastActionDismissibleRef<
+    T = any,
+    P extends BaseToastConfig<T> = any
+> extends BaseToastDurationDismissibleRef<T, P> {
     /** Subject for notifying the user that the Toast action-dismissible was called. */
     protected readonly onAction$ = new Subject<string | null>();
 

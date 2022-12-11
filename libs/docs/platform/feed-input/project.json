@@ -1,4 +1,5 @@
 {
+    "name": "docs-platform-feed-input",
     "sourceRoot": "libs/docs/platform/feed-input",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/platform/feed-input/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-platform-feed-input"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-platform-feed-input"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

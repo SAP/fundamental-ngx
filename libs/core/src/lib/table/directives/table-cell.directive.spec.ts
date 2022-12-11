@@ -2,7 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
-import { TableCellDirective, TableModule } from '@fundamental-ngx/core/table';
+import { TableModule } from '../table.module';
+import { TableCellDirective } from './table-cell.directive';
 
 @Component({
     template: `

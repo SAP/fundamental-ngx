@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-tabs",
     "sourceRoot": "libs/docs/fn/tabs",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/tabs/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-tabs"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-tabs"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

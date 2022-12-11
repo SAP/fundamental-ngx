@@ -1,8 +1,7 @@
 import { waitForAsync, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { first } from 'rxjs/operators';
 
-import { DatetimeAdapter, FdDatetimeAdapter, FdDatetimeModule } from '../../../datetime';
-import { FdDate } from '../../../datetime/fd-date';
+import { DatetimeAdapter, FdDatetimeAdapter, FdDatetimeModule, FdDate } from '@fundamental-ngx/core/datetime';
 import { CalendarService } from '../../calendar.service';
 import { CalendarDay } from '../../models/calendar-day';
 import { CalendarDayViewComponent } from './calendar-day-view.component';

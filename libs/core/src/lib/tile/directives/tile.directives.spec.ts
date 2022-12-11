@@ -2,12 +2,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import {
-    TileActionCloseDirective,
-    TileActionIndicatorDirective,
-    TileModule,
-    TileRefreshDirective
-} from '@fundamental-ngx/core/tile';
+import { TileModule } from '../tile.module';
+import { TileActionCloseDirective, TileActionIndicatorDirective, TileRefreshDirective } from './tile.directives';
 
 @Component({
     selector: 'fd-test-component',

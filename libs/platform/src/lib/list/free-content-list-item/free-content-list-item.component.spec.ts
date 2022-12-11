@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
+import { PlatformListModule } from '../list.module';
 
 @Component({
     selector: 'fdp-standard-list-item-test',

@@ -1,11 +1,12 @@
 {
+    "name": "core-message-box",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/message-box",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/message-box"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/message-box"],
             "options": {
                 "tsConfig": "libs/core/src/lib/message-box/tsconfig.lib.json",
                 "project": "libs/core/src/lib/message-box/ng-package.json",

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { CardLoaderComponent } from '@fundamental-ngx/core/card';
+import { CardLoaderComponent } from './card-loader.component';
 
 import { CLASS_NAME } from './constants';
 

@@ -1,11 +1,12 @@
 {
+    "name": "core-time-picker",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/time-picker",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/time-picker"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/time-picker"],
             "options": {
                 "tsConfig": "libs/core/src/lib/time-picker/tsconfig.lib.json",
                 "project": "libs/core/src/lib/time-picker/ng-package.json",

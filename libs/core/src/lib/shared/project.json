@@ -1,11 +1,12 @@
 {
+    "name": "core-shared",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/shared",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/shared"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/shared"],
             "options": {
                 "tsConfig": "libs/core/src/lib/shared/tsconfig.lib.json",
                 "project": "libs/core/src/lib/shared/ng-package.json",

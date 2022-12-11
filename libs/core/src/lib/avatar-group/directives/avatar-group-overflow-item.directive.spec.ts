@@ -1,7 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
+import { AvatarGroupModule } from '../avatar-group.module';
 
 @Component({
     template: `<div #directiveElement fd-avatar-group-overflow-item>Avatar Group Overflow Item</div>`

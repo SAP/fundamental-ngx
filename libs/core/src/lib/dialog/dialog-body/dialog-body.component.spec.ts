@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DialogBodyComponent } from './dialog-body.component';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogRef } from '../utils/dialog-ref.class';
-import { BusyIndicatorModule } from '../../busy-indicator/busy-indicator.module';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 
 describe('DialogBodyComponent', () => {
     let component: DialogBodyComponent;

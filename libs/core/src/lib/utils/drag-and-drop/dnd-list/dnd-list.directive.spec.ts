@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { DndListDirective, ElementChord } from './dnd-list.directive';
+import { DndListDirective } from './dnd-list.directive';
 import { Component, ViewChild } from '@angular/core';
 import { DndItemDirective } from '../dnd-item/dnd-item.directive';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ElementChord } from '../dnd.interfaces';
 
 @Component({
     template: `

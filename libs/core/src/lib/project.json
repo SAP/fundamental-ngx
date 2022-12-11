@@ -1,4 +1,5 @@
 {
+    "name": "core",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib",
     "prefix": "fd",
@@ -23,7 +24,7 @@
         },
         "build-umbrella": {
             "executor": "@nrwl/angular:package",
-            "outputs": ["dist/libs/core"],
+            "outputs": ["{workspaceRoot}/dist/libs/core"],
             "options": {
                 "tsConfig": "libs/core/src/lib/tsconfig.lib.json",
                 "project": "libs/core/src/lib/ng-package.json",

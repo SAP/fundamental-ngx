@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-flexible-column-layout",
     "sourceRoot": "libs/docs/core/flexible-column-layout",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/flexible-column-layout/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-flexible-column-layout"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-flexible-column-layout"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

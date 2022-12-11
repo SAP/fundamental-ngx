@@ -1,11 +1,12 @@
 {
+    "name": "core-file-uploader",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/file-uploader",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/file-uploader"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/file-uploader"],
             "options": {
                 "tsConfig": "libs/core/src/lib/file-uploader/tsconfig.lib.json",
                 "project": "libs/core/src/lib/file-uploader/ng-package.json",

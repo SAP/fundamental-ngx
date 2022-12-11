@@ -3,9 +3,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { SliderComponent, SliderModule } from '@fundamental-ngx/core/slider';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { ContentDensityMode, mockedLocalContentDensityDirective } from '@fundamental-ngx/core/content-density';
+
+import { SliderComponent } from './slider.component';
+import { SliderModule } from './slider.module';
 
 const { contentDensityDirectiveProvider, setContentDensity } = mockedLocalContentDensityDirective(
     ContentDensityMode.COMPACT
