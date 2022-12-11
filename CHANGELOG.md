@@ -1,3 +1,44 @@
+# [0.38.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.37.2-rc.0...v0.38.0-rc.0) (2022-12-11)
+
+
+### chore
+
+* angular 15 and nx 15 support ([#9078](https://github.com/SAP/fundamental-ngx/issues/9078)) ([b44398a](https://github.com/SAP/fundamental-ngx/commit/b44398a9c5ab28254cb8910a98238755d8b013f1))
+
+
+### BREAKING CHANGES
+
+* **
+
+* Updated @angular library to v15;
+* Updated nx library to v15;
+* Updated other third-party libraries to latest version;
+* Applied necessary migrations;
+* Adjusted unit tests;
+* For projects without unit tests angular failed karma execution with error that no tests were found, so filler test (dummy) was added to such projects;
+* Build target now ES2022
+* `RouterLinkWithHref` is now deprecated and removed from `@fundamental-ngx/core/link`.
+* Value help dialog data provider generic type should be extended from object.
+
+**Before**:
+```typescript
+class ExampleVhdDataProvider<T> extends VhdDataProvider<T> {
+    fetch(params: Map<string, string>): Observable<T[]> {
+        return super.fetch(params).pipe(delay(300));
+    }
+}
+```
+**Now:**
+```typescript
+class ExampleVhdDataProvider<T extends object> extends VhdDataProvider<T> {
+    fetch(params: Map<string, string>): Observable<T[]> {
+        return super.fetch(params).pipe(delay(300));
+    }
+}
+```
+
+
+
 ## [0.37.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.37.1...v0.37.2-rc.0) (2022-12-11)
 
 
