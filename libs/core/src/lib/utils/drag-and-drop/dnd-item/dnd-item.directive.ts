@@ -261,7 +261,7 @@ export class DndItemDirective implements DndItem, AfterContentInit, OnDestroy {
     }
 
     /** @hidden */
-    private _getOffsetToParent(element: Element): { x: number; y: number } | undefined {
+    private _getOffsetToParent(element: Element): { x: number; y: number } | void {
         const parentElement = element.parentElement;
         if (!parentElement) {
             return;

@@ -105,7 +105,7 @@ export class ThemesService {
     }
 
     /** Method to get once theme object directly from url. */
-    getThemesFromURL(param?: string): ThemeServiceOutput | undefined {
+    getThemesFromURL(param?: string): ThemeServiceOutput | void {
         const paramName = param || 'theme';
 
         const nativeTheme = this._getNativeParameterByName(paramName);
