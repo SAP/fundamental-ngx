@@ -1,4 +1,4 @@
-@import '~fundamental-styles/dist/progress-indicator.css';
+@import 'fundamental-styles/dist/progress-indicator';
 
 .fd-progress-indicator__progress-bar--animated {
     -webkit-transition: min-width 0.5s ease-in-out, width 0.5s ease-in-out;
