@@ -1,3 +1,12 @@
+# [0.38.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.38.0-rc.0...v0.38.0-rc.1) (2022-12-11)
+
+
+### Bug Fixes
+
+* correct styles import ([#9080](https://github.com/SAP/fundamental-ngx/issues/9080)) ([d8b61a0](https://github.com/SAP/fundamental-ngx/commit/d8b61a07ae763b805722ba12b8f04a8e9e19c304))
+
+
+
 # [0.38.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.37.2-rc.0...v0.38.0-rc.0) (2022-12-11)
 
 
