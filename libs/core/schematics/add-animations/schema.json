@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$id": "fundamental-ngx-add-animations",
+    "title": "Fundamental Library for Angular add-animations schematic",
+    "type": "object",
+    "properties": {
+        "project": {
+            "type": "string",
+            "description": "The name of the project.",
+            "$default": {
+                "$source": "projectName"
+            }
+        },
+        "animations": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether Angular browser animations should be set up.",
+            "x-prompt": "Set up browser animations for Fundamental Library for Angular?"
+        }
+    }
+}
