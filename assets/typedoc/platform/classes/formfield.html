@@ -1,0 +1,586 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>FormField base class.</p>
+		</div>
+		<p>This class is used to create form field components.</p>
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">FormField</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel">
+	<h3>Implemented by</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">FormFieldComponent</span></li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Constructors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+		<a name="constructor" class="tsd-anchor"></a>
+		<h3>constructor</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Form<wbr>Field<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormField</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+				</aside>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FormField</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="column" class="tsd-anchor"></a>
+		<h3>column</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">column<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L39">libs/platform/src/lib/shared/form/form-field.ts:39</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Define form field column belongs</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="columns" class="tsd-anchor"></a>
+		<h3>columns</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">columns<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Column</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L35">libs/platform/src/lib/shared/form/form-field.ts:35</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Form field custom width in columns must be between 1 - 12</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="control" class="tsd-anchor"></a>
+		<h3>control</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">control<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L64">libs/platform/src/lib/shared/form/form-field.ts:64</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>A reference to the underlying FormFieldControl.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="editable" class="tsd-anchor"></a>
+		<h3>editable</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">editable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L47">libs/platform/src/lib/shared/form/form-field.ts:47</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Indicates if field is editable</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="errorDirectives" class="tsd-anchor"></a>
+		<h3>error<wbr>Directives</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">error<wbr>Directives<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormError</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L82">libs/platform/src/lib/shared/form/form-field.ts:82</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Combined Error directives.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="errorsChange_" class="tsd-anchor"></a>
+		<h3>errors<wbr>Change$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">errors<wbr>Change$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L88">libs/platform/src/lib/shared/form/form-field.ts:88</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted when errors being changed.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="formFieldGroup" class="tsd-anchor"></a>
+		<h3>form<wbr>Field<wbr>Group</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">form<wbr>Field<wbr>Group<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FormFieldGroup</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L73">libs/platform/src/lib/shared/form/form-field.ts:73</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Form fields&#39;s group.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="formGroupContainer" class="tsd-anchor"></a>
+		<h3>form<wbr>Group<wbr>Container</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">form<wbr>Group<wbr>Container<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FormGroupContainer</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L76">libs/platform/src/lib/shared/form/form-field.ts:76</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Frm field&#39;s Form Container.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="getPriorityState" class="tsd-anchor"></a>
+		<h3>get<wbr>Priority<wbr>State</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">get<wbr>Priority<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L105">libs/platform/src/lib/shared/form/form-field.ts:105</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Gets field error priority state.</p>
+			</div>
+		</div>
+		<div class="tsd-type-declaration">
+			<h4>Type declaration</h4>
+			<ul class="tsd-parameters">
+				<li class="tsd-parameter-signature">
+					<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormStates</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets field error priority state.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FormStates</span></h4>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="groupErrors" class="tsd-anchor"></a>
+		<h3>group<wbr>Errors</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">group<wbr>Errors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L108">libs/platform/src/lib/shared/form/form-field.ts:108</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Groups errors.</p>
+			</div>
+		</div>
+		<div class="tsd-type-declaration">
+			<h4>Type declaration</h4>
+			<ul class="tsd-parameters">
+				<li class="tsd-parameter-signature">
+					<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Groups errors.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="groupedErrors" class="tsd-anchor"></a>
+		<h3>grouped<wbr>Errors</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">grouped<wbr>Errors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormFieldErrorDirectiveContext</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L79">libs/platform/src/lib/shared/form/form-field.ts:79</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Grouped errors.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="hintPlacement" class="tsd-anchor"></a>
+		<h3>hint<wbr>Placement</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">hint<wbr>Placement<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HintPlacement</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L60">libs/platform/src/lib/shared/form/form-field.ts:60</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Define hint placement</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="i18Strings" class="tsd-anchor"></a>
+		<h3>i18<wbr>Strings</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">i18<wbr>Strings<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L43">libs/platform/src/lib/shared/form/form-field.ts:43</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Translations template reference</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="id" class="tsd-anchor"></a>
+		<h3>id</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L22">libs/platform/src/lib/shared/form/form-field.ts:22</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Form field id</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="label" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> label</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L70">libs/platform/src/lib/shared/form/form-field.ts:70</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Form field label</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="labelLayout" class="tsd-anchor"></a>
+		<h3>label<wbr>Layout</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">label<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LabelLayout</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L56">libs/platform/src/lib/shared/form/form-field.ts:56</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
+				<dd><p>Define form field label placement</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="ngControl" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> ng<wbr>Control</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">ng<wbr>Control<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NgControl</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L85">libs/platform/src/lib/shared/form/form-field.ts:85</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Form control</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="noLabelLayout" class="tsd-anchor"></a>
+		<h3>no<wbr>Label<wbr>Layout</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">no<wbr>Label<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L51">libs/platform/src/lib/shared/form/form-field.ts:51</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Indicates when form field label should not be displayed</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="rank" class="tsd-anchor"></a>
+		<h3>rank</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">rank<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L27">libs/platform/src/lib/shared/form/form-field.ts:27</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Rank is used for ordering.
+				Than lower number then higher priority</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="registerFormFieldControl" class="tsd-anchor"></a>
+		<h3>register<wbr>Form<wbr>Field<wbr>Control</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">register<wbr>Form<wbr>Field<wbr>Control<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L93">libs/platform/src/lib/shared/form/form-field.ts:93</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Register underlying form control</p>
+			</div>
+		</div>
+		<div class="tsd-type-declaration">
+			<h4>Type declaration</h4>
+			<ul class="tsd-parameters">
+				<li class="tsd-parameter-signature">
+					<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>control<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Register underlying form control</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>control: <span class="tsd-signature-type">FormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="renderer" class="tsd-anchor"></a>
+		<h3>renderer</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">renderer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L31">libs/platform/src/lib/shared/form/form-field.ts:31</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Form field template reference</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="required" class="tsd-anchor"></a>
+		<h3>required</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">required<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L68">libs/platform/src/lib/shared/form/form-field.ts:68</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Set when form field is a mandatory one.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="setDefaultColumnLayout" class="tsd-anchor"></a>
+		<h3>set<wbr>Default<wbr>Column<wbr>Layout</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">set<wbr>Default<wbr>Column<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L102">libs/platform/src/lib/shared/form/form-field.ts:102</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Set default columns layout</p>
+			</div>
+		</div>
+		<div class="tsd-type-declaration">
+			<h4>Type declaration</h4>
+			<ul class="tsd-parameters">
+				<li class="tsd-parameter-signature">
+					<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Set default columns layout</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="setErrorDirectives" class="tsd-anchor"></a>
+		<h3>set<wbr>Error<wbr>Directives</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">set<wbr>Error<wbr>Directives<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L111">libs/platform/src/lib/shared/form/form-field.ts:111</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Sets error directives from parent container</p>
+			</div>
+		</div>
+		<div class="tsd-type-declaration">
+			<h4>Type declaration</h4>
+			<ul class="tsd-parameters">
+				<li class="tsd-parameter-signature">
+					<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>directives<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FormError</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets error directives from parent container</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>directives: <span class="tsd-signature-type">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FormError</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="unregisterFormFieldControl" class="tsd-anchor"></a>
+		<h3>unregister<wbr>Form<wbr>Field<wbr>Control</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">unregister<wbr>Form<wbr>Field<wbr>Control<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/shared/form/form-field.ts#L97">libs/platform/src/lib/shared/form/form-field.ts:97</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Unregister underlying form control</p>
+			</div>
+		</div>
+		<div class="tsd-type-declaration">
+			<h4>Type declaration</h4>
+			<ul class="tsd-parameters">
+				<li class="tsd-parameter-signature">
+					<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>control<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Unregister underlying form control</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>control: <span class="tsd-signature-type">FormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</section>
+</section>
+</div>

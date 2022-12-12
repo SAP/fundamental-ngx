@@ -1,0 +1,196 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">ClickedEventPlugin</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Constructors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+		<a name="constructor" class="tsd-anchor"></a>
+		<h3>constructor</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Clicked<wbr>Event<wbr>Plugin<span class="tsd-signature-symbol">(</span>document<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Document</span>, platformId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ClickedEventPlugin</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/33451d7/libs/fn/src/lib/cdk/clicked/clicked-event.plugin.ts#L10">libs/fn/src/lib/cdk/clicked/clicked-event.plugin.ts:10</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>document: <span class="tsd-signature-type">Document</span></h5>
+					</li>
+					<li>
+						<h5>platformId: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ClickedEventPlugin</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="addEventListener" class="tsd-anchor"></a>
+		<h3>add<wbr>Event<wbr>Listener</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">add<wbr>Event<wbr>Listener<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span>, eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, handler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventHandlerFunction</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/33451d7/libs/fn/src/lib/cdk/clicked/clicked-event.plugin.ts#L12">libs/fn/src/lib/cdk/clicked/clicked-event.plugin.ts:12</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>element: <span class="tsd-signature-type">HTMLElement</span></h5>
+					</li>
+					<li>
+						<h5>eventName: <span class="tsd-signature-type">string</span></h5>
+					</li>
+					<li>
+						<h5>handler: <span class="tsd-signature-type">EventHandlerFunction</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">function</span></h4>
+				<ul class="tsd-parameters">
+					<li class="tsd-parameter-signature">
+						<ul class="tsd-signatures tsd-kind-type-literal">
+							<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>$event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>$event: <span class="tsd-signature-type">Event</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="addGlobalEventListener" class="tsd-anchor"></a>
+		<h3>add<wbr>Global<wbr>Event<wbr>Listener</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">add<wbr>Global<wbr>Event<wbr>Listener<span class="tsd-signature-symbol">(</span>higherOrderElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, handler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventHandlerFunction</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HandlerRemoveFunction</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/33451d7/libs/fn/src/lib/cdk/clicked/clicked-event.plugin.ts#L16">libs/fn/src/lib/cdk/clicked/clicked-event.plugin.ts:16</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>higherOrderElement: <span class="tsd-signature-type">string</span></h5>
+					</li>
+					<li>
+						<h5>eventName: <span class="tsd-signature-type">string</span></h5>
+					</li>
+					<li>
+						<h5>handler: <span class="tsd-signature-type">EventHandlerFunction</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HandlerRemoveFunction</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+		<a name="parseHigherOrderElement" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> parse<wbr>Higher<wbr>Order<wbr>Element</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+			<li class="tsd-signature tsd-kind-icon">parse<wbr>Higher<wbr>Order<wbr>Element<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventTarget</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/33451d7/libs/fn/src/lib/cdk/clicked/clicked-event.plugin.ts#L25">libs/fn/src/lib/cdk/clicked/clicked-event.plugin.ts:25</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>selector: <span class="tsd-signature-type">string</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">EventTarget</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+		<a name="setupEventBinding" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> setup<wbr>Event<wbr>Binding</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+			<li class="tsd-signature tsd-kind-icon">setup<wbr>Event<wbr>Binding<span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventTarget</span>, handler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventHandlerFunction</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HandlerRemoveFunction</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/33451d7/libs/fn/src/lib/cdk/clicked/clicked-event.plugin.ts#L45">libs/fn/src/lib/cdk/clicked/clicked-event.plugin.ts:45</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>target: <span class="tsd-signature-type">EventTarget</span></h5>
+					</li>
+					<li>
+						<h5>handler: <span class="tsd-signature-type">EventHandlerFunction</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HandlerRemoveFunction</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="supports" class="tsd-anchor"></a>
+		<h3>supports</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">supports<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/33451d7/libs/fn/src/lib/cdk/clicked/clicked-event.plugin.ts#L41">libs/fn/src/lib/cdk/clicked/clicked-event.plugin.ts:41</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>eventName: <span class="tsd-signature-type">string</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>

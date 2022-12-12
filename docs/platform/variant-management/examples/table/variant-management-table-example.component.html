@@ -1,0 +1,30 @@
+<fdp-variant-management-wrapper>
+    <fdp-table #table [dataSource]="source" name="renamedPlatformTable">
+        <fdp-table-toolbar title="Order Items">
+            <fdp-table-toolbar-left-actions>
+                <fdp-variant-management
+                    [variants]="variants"
+                    userName="John Doe"
+                    #variantManager
+                ></fdp-variant-management>
+            </fdp-table-toolbar-left-actions>
+        </fdp-table-toolbar>
+
+        <fdp-column [filterable]="true" name="name" key="name" label="Name" [sortable]="true"> </fdp-column>
+
+        <fdp-column name="description" key="description" label="Description"> </fdp-column>
+
+        <fdp-column name="price" key="price.value" label="Price" [sortable]="true"> </fdp-column>
+
+        <fdp-column name="verified" key="verified" label="Verified"> </fdp-column>
+
+        <fdp-column [groupable]="true" name="status" key="status" label="Status"> </fdp-column>
+    </fdp-table>
+</fdp-variant-management-wrapper>
+
+<!-- Connect P13 Dialog to the table -->
+<fdp-table-p13-dialog [table]="table">
+    <fdp-table-p13-sort></fdp-table-p13-sort>
+    <fdp-table-p13-group></fdp-table-p13-group>
+    <fdp-table-p13-filter></fdp-table-p13-filter>
+</fdp-table-p13-dialog>

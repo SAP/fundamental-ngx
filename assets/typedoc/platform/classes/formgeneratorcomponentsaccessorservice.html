@@ -1,0 +1,115 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>Since form generator service most probably will be provided by parent component,
+				so that forms map does not interfere with other form generators,
+			Components Accessor is a separate service with a global scope, which can be also provided per component.</p>
+		</div>
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">FormGeneratorComponentsAccessorService</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Constructors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+		<a name="constructor" class="tsd-anchor"></a>
+		<h3>constructor</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Form<wbr>Generator<wbr>Components<wbr>Accessor<wbr>Service<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormGeneratorComponentsAccessorService</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+				</aside>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FormGeneratorComponentsAccessorService</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="addComponent" class="tsd-anchor"></a>
+		<h3>add<wbr>Component</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">add<wbr>Component<span class="tsd-signature-symbol">(</span>component<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BaseDynamicFormGeneratorControl</span><span class="tsd-signature-symbol">&gt;</span>, types<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/form/form-generator/form-generator-components-accessor.service.ts#L23">libs/platform/src/lib/form/form-generator/form-generator-components-accessor.service.ts:23</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">description</dt>
+						<dd><p>Adds custom component to the list of available components for the form generator items.</p>
+						</dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>component: <span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BaseDynamicFormGeneratorControl</span><span class="tsd-signature-symbol">&gt;</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>Angular component.</p>
+						</div>
+					</li>
+					<li>
+						<h5>types: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>types of the form item.</p>
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="getComponentDefinitionByType" class="tsd-anchor"></a>
+		<h3>get<wbr>Component<wbr>Definition<wbr>ByType</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">get<wbr>Component<wbr>Definition<wbr>ByType<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormComponentDefinition</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/9f64283/libs/platform/src/lib/form/form-generator/form-generator-components-accessor.service.ts#L56">libs/platform/src/lib/form/form-generator/form-generator-components-accessor.service.ts:56</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">description</dt>
+						<dd><p>Returns best-matched component based on provided <code>type</code> argument</p>
+						</dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>type: <span class="tsd-signature-type">string</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>form item type</p>
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormComponentDefinition</span></h4>
+				<p>@see FormComponentDefinition Component definition for the form item</p>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>
