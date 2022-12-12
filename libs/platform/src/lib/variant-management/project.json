@@ -1,11 +1,12 @@
 {
+    "name": "platform-variant-management",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/variant-management",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:package",
-            "outputs": ["dist/libs/platform/variant-management"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/variant-management"],
             "options": {
                 "project": "libs/platform/src/lib/variant-management/ng-package.json"
             },

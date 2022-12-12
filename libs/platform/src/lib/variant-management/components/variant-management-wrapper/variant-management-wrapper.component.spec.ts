@@ -1,9 +1,9 @@
 import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FDP_PRESET_MANAGED_COMPONENT, PresetManagedComponent } from '@fundamental-ngx/platform/shared';
-import { Variant } from '@fundamental-ngx/platform/variant-management';
 import { BehaviorSubject } from 'rxjs';
 import { VariantManagement } from '../../models/variant-management';
+import { Variant } from '../../models/variant.interface';
 import { FDP_VARIANT_MANAGEMENT } from '../../tokens';
 import { VariantItem } from '../../variant-item.class';
 
