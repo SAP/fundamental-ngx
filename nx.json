@@ -77,6 +77,12 @@
     "namedInputs": {
         "default": ["{projectRoot}/**/*", "sharedGlobals"],
         "sharedGlobals": ["{workspaceRoot}/angular.json", "{workspaceRoot}/tsconfig.json", "{workspaceRoot}/nx.json"],
-        "production": ["default"]
+        "production": [
+            "default",
+            "!{projectRoot}/**/*.spec.[jt]s",
+            "!{projectRoot}/tsconfig.spec.json",
+            "!{projectRoot}/karma.conf.js",
+            "!{projectRoot}/.eslintrc.json"
+        ]
     }
 }

@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit.emit($event)" *ngIf="useForm; else body" [id]="id" [name]="name">
+<form #nativeForm (ngSubmit)="onSubmit.emit($event)" *ngIf="useForm; else body" [id]="id" [name]="name">
     <ng-container *ngTemplateOutlet="body"></ng-container>
 </form>
 

@@ -548,6 +548,31 @@ export const FD_LANGUAGE_CROATIAN: FdLanguage = {
             requiredTrue: 'The field is mandatory'
         }
     },
+    platformVariantManagement: {
+        manage: 'Manage',
+        saveAs: 'Save as',
+        saveView: 'Save View',
+        save: 'Save',
+        myViews: 'My Views',
+        view: 'View',
+        setAsDefault: 'Set as Default',
+        public: 'Public',
+        applyAutomatically: 'Apply Automatically',
+        requiredFieldError: 'This field is required.',
+        nameTakenFieldError: 'Variant with such name already exists. Please chose a different name.',
+        cancel: 'Cancel',
+        manageViews: 'Manage Views',
+        markAsFavourite: 'Mark as Favourite',
+        sharing: 'Sharing',
+        default: 'Default',
+        createdBy: 'Created By',
+        removeVariant: 'Remove View',
+        search: 'Search',
+        access: {
+            public: 'Public',
+            private: 'Private'
+        }
+    },
     fnSlider: {
         minMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',
         valueminDetails: 'Value is {{ value }}',

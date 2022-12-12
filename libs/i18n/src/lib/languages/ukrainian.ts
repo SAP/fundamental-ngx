@@ -753,6 +753,31 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
             requiredTrue: "Обов'язкове поле"
         }
     },
+    platformVariantManagement: {
+        manage: 'Управління',
+        saveAs: 'Зберегти як',
+        saveView: 'Зберегти Вид',
+        save: 'Зберегти',
+        myViews: 'Мої Види',
+        view: 'Вид',
+        setAsDefault: 'Встановити за замовчуванням',
+        public: 'Публічний',
+        applyAutomatically: 'Застосовувати автоматично',
+        requiredFieldError: "Обов'язкове поле.",
+        nameTakenFieldError: "Вид з таким ім'ям вже існує. Введіть інше ім'я.",
+        cancel: 'Скасувати',
+        manageViews: 'Управління видами',
+        markAsFavourite: 'Позначити як обране',
+        sharing: 'Спільне використання',
+        default: 'За замовчуванням',
+        createdBy: 'Створив(ла)',
+        removeVariant: 'Видалити вид',
+        search: 'Пошук',
+        access: {
+            public: 'Публічне',
+            private: 'Приватне'
+        }
+    },
     fnSlider: {
         minMaxDetails: 'Мінімальне значення слайдера {{min}}, максимальне значення {{ max }}',
         valueminDetails: 'Поточне значення: {{ value }}',

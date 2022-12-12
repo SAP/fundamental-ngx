@@ -29,3 +29,4 @@ export * from '@fundamental-ngx/platform/wizard-generator';
 export * from '@fundamental-ngx/platform/icon-tab-bar';
 export * from '@fundamental-ngx/platform/smart-filter-bar';
 export * from '@fundamental-ngx/platform/message-popover';
+export * from '@fundamental-ngx/platform/variant-management';

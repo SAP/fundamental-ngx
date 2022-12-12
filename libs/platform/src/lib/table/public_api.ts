@@ -26,6 +26,7 @@ export * from './components/table-p13-dialog/sorting/sorting.component';
 export * from './components/table-toolbar/table-toolbar';
 export * from './components/table-toolbar/table-toolbar-actions.component';
 export * from './components/table-toolbar/table-toolbar.component';
+export * from './components/table-toolbar/table-toolbar-left-actions.component';
 
 export * from './components/table-view-settings-dialog/table-view-settings-dialog.component';
 export * from './components/table-view-settings-dialog/table-view-settings-filter.component';

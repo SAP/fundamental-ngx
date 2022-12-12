@@ -39,9 +39,10 @@ import {
     QueryList,
     SimpleChanges,
     TemplateRef,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormGroup, NgForm } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
@@ -317,6 +318,12 @@ export class FormGroupComponent
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onSubmit: EventEmitter<any> = new EventEmitter<any>();
+
+    /**
+     * Native form element. Available with `[useForm]="true"` input property.
+     */
+    @ViewChild('nativeForm', { read: NgForm })
+    nativeForm: NgForm;
 
     /** @hidden */
     @ContentChild('i18n', { static: true })

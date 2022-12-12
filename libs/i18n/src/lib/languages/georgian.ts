@@ -551,6 +551,31 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
             requiredTrue: 'ველის შეყვანა სავალდებულოა'
         }
     },
+    platformVariantManagement: {
+        manage: 'მართვა',
+        saveAs: 'შენახვა როგორც',
+        saveView: 'ვარიანტის შენახვა',
+        save: 'შენახვა',
+        myViews: 'ჩემი ვარიანტები',
+        view: 'ვარიანტი',
+        setAsDefault: 'ნაგულისხმევად გამოყენება',
+        public: 'საჯარო',
+        applyAutomatically: 'ავტომატურად გამოყენება',
+        requiredFieldError: 'ეს ველი სავალდებულოა.',
+        nameTakenFieldError: 'ვარიანტი ამ სახელით უკვე არსებობს. გთხოვთ, გამოიყენოთ სხვა სახელი.',
+        cancel: 'გაუქმება',
+        manageViews: 'ვარიანტების მართვა',
+        markAsFavourite: 'ფავორიტად მონიშვნა',
+        sharing: 'ხილვადობა',
+        default: 'ნაგულისხმევი',
+        createdBy: 'შემქმნელი',
+        removeVariant: 'ვარიანტის წაშლა',
+        search: 'ძებნა',
+        access: {
+            public: 'საჯარო',
+            private: 'პირადი'
+        }
+    },
     fnSlider: {
         minMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{ min }}, მაქსიმალური - {{ max }}',
         valueminDetails: 'მნიშვნელობა არის {{ value }}',

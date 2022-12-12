@@ -51,6 +51,7 @@ import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-
 import { PlatformIconTabBarModule } from '@fundamental-ngx/platform/icon-tab-bar';
 import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
 import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform/message-popover';
+import { VariantManagementModule } from '@fundamental-ngx/platform/variant-management';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -102,7 +103,8 @@ import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform/message-
         PlatformMultiComboboxModule,
         PlatformIconTabBarModule,
         PlatformSmartFilterBarModule,
-        PlatformMessagePopoverModule
+        PlatformMessagePopoverModule,
+        VariantManagementModule
     ],
     providers: []
 })

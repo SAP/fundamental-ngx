@@ -1,12 +1,17 @@
 import { Injectable, Type } from '@angular/core';
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { BaseDynamicFormGeneratorControl, FormGeneratorService } from '@fundamental-ngx/platform/form';
 import {
+    BaseDynamicFormGeneratorControl,
+    FormGeneratorService,
+    PreparedDynamicFormFieldItem
+} from '@fundamental-ngx/platform/form';
+import {
+    CollectionFilterGroup,
     FilterableColumnDataType,
     FilterAllStrategy,
     getFilterStrategiesBasedOnDataType
 } from '@fundamental-ngx/platform/table';
-import { isSelectItem, selectStrategy } from '@fundamental-ngx/platform/shared';
+import { isSelectItem, SelectItem, selectStrategy } from '@fundamental-ngx/platform/shared';
 
 import { SmartFilterBarCustomFilterConfig } from './interfaces/smart-filter-bar-custom-filter-config';
 import { SmartFilterBarCondition } from './interfaces/smart-filter-bar-condition';
@@ -140,6 +145,68 @@ export class SmartFilterBarService {
             default:
                 return `${value1}`;
         }
+    }
+
+    /**
+     * Method for normalizing generated conditions to display in human-readable format.
+     * @returns Formatted array of conditions.
+     * @param formItem
+     * @param conditions
+     */
+    async normalizeConditions(
+        formItem: PreparedDynamicFormFieldItem,
+        conditions: SmartFilterBarCondition[]
+    ): Promise<SmartFilterBarCondition[]> {
+        const normalizedConditions: SmartFilterBarCondition[] = [];
+
+        for (const condition of conditions) {
+            const newCondition = Object.assign({}, condition);
+
+            newCondition.displayValue = await this.getDisplayValue(
+                newCondition,
+                formItem.guiOptions?.additionalData.type
+            );
+
+            normalizedConditions.push(newCondition);
+        }
+
+        return normalizedConditions;
+    }
+
+    /**
+     * Returns formatted condition variants.
+     */
+    async getConditionFieldSelectedVariants(
+        formItem: PreparedDynamicFormFieldItem,
+        conditions: SmartFilterBarCondition[]
+    ): Promise<SelectItem[]> {
+        return (await this.normalizeConditions(formItem, conditions)).map((c: any) => {
+            if (isSelectItem(c)) {
+                return c;
+            }
+
+            const condition: SelectItem = {
+                label: c.displayValue,
+                value: c
+            };
+
+            return condition;
+        });
+    }
+
+    /**
+     * Transforms collection filter into smart filter bar condition.
+     */
+    transformCollectionFilter(filterGroup: CollectionFilterGroup): SmartFilterBarCondition[] {
+        return filterGroup.filters.map((filter) => {
+            const condition: SmartFilterBarCondition = {
+                operator: filter.strategy,
+                value: filter.value,
+                value2: filter.value2
+            };
+
+            return condition;
+        });
     }
 
     /**

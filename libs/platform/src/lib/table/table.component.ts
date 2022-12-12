@@ -31,7 +31,7 @@ import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap }
 
 import { FdDropEvent, RangeSelector, resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
 import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
-import { isDataSource, isString } from '@fundamental-ngx/platform/shared';
+import { FDP_PRESET_MANAGED_COMPONENT, isDataSource, isString } from '@fundamental-ngx/platform/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { cloneDeep, get } from 'lodash-es';
 import { Nullable } from '@fundamental-ngx/core/shared';
@@ -70,6 +70,7 @@ import {
     FilterChange,
     FreezeChange,
     GroupChange,
+    PlatformTableManagedPreset,
     RowComparator,
     SortChange,
     TableColumnFreezeEvent,
@@ -157,7 +158,11 @@ let tableUniqueId = 0;
                 [ContentDensityMode.COMPACT]: 'fd-table--compact',
                 [ContentDensityMode.CONDENSED]: 'fd-table--condensed'
             }
-        })
+        }),
+        {
+            provide: FDP_PRESET_MANAGED_COMPONENT,
+            useExisting: TableComponent
+        }
     ],
     host: {
         class: 'fdp-table',
@@ -169,7 +174,11 @@ let tableUniqueId = 0;
     }
 })
 export class TableComponent<T = any> extends Table<T> implements AfterViewInit, OnDestroy, OnChanges, OnInit {
-    /** Id for the Table. */
+    /** Component name used in Preset managed component. */
+    @Input()
+    name = 'platformTable';
+
+    /** ID for the Table. */
     @Input()
     @HostBinding('attr.id')
     id = `fdp-table-${tableUniqueId++}`;
@@ -371,6 +380,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** Used to construct empty row object for editing. */
     @Input()
     editableRowSkeleton: T;
+
+    /** Event emitted when current preset configuration has been changed. */
+    @Output()
+    presetChanged = new EventEmitter<PlatformTableManagedPreset>();
 
     /** Event fired when table selection has changed. */
     @Output()
@@ -741,6 +754,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private readonly _rangeSelector = new RangeSelector();
 
     /** @hidden */
+    private _currentPreset: PlatformTableManagedPreset = {};
+
+    /** @hidden */
     constructor(
         private readonly _ngZone: NgZone,
         private readonly _cdr: ChangeDetectorRef,
@@ -1107,6 +1123,48 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         this._resetEditState();
         this.save.emit(event);
+    }
+
+    /** Sets current preset for the Table. */
+    setPreset(data: PlatformTableManagedPreset): void {
+        this._currentPreset = data;
+        const newState: TableState = Object.assign({}, this._getDefaultPresetState(), data);
+        this._tableService.setSort(newState.sortBy);
+        this._tableService.setFilters(newState.filterBy);
+        this._tableService.setGroups(newState.groupBy);
+        this.setColumns(newState.columns);
+        this._tableService.search(newState.searchInput);
+        this._tableService.freezeTo(newState.freezeToColumn);
+        this.pageSize = newState.page.pageSize;
+        this._tableService.setCurrentPage(newState.page.currentPage);
+        this._tableService.setTableState(newState);
+    }
+
+    /** Returns current preset configuration. */
+    getCurrentPreset(): PlatformTableManagedPreset {
+        if (!this._currentPreset) {
+            return this.getTableState();
+        }
+        // We need to return object as similar as the original preset.
+        const currentPreset = { ...this._currentPreset };
+        const presetKeys = Object.keys(currentPreset);
+        const currentState = this.getTableState();
+
+        Object.keys(currentState).forEach((stateKey) => {
+            // Skip state entry if it's not present in preset and doesn't have any value.
+            if (
+                stateKey === 'columnKeys' ||
+                ((!currentState[stateKey] ||
+                    (Array.isArray(currentState[stateKey]) && currentState[stateKey]?.length === 0)) &&
+                    !presetKeys.includes(stateKey))
+            ) {
+                return;
+            }
+
+            currentPreset[stateKey] = currentState[stateKey];
+        });
+
+        return currentPreset;
     }
 
     // Private API
@@ -1525,6 +1583,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _listenToTableStateChanges(): void {
+        this._subscriptions.add(
+            this._tableService.tableStateChanges$.subscribe(() => {
+                this.presetChanged.emit(this.getCurrentPreset());
+            })
+        );
         this._subscriptions.add(
             merge(
                 // Events that should trigger DataSource.fetch()
@@ -2287,5 +2350,26 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._addedItems = [];
         this._forceSemanticHighlighting = false;
         this._setTableRows(this._dataSourceTableRows);
+    }
+
+    /** @hidden */
+    private _getDefaultPresetState(): TableState {
+        const tableState = this._tableService.getTableState();
+        return {
+            columnKeys: tableState.columnKeys,
+            sortBy: [],
+            filterBy: [],
+            groupBy: [],
+            columns: tableState.columns,
+            searchInput: {
+                category: null,
+                text: ''
+            },
+            freezeToColumn: null,
+            page: {
+                pageSize: 0,
+                currentPage: 1
+            }
+        };
     }
 }

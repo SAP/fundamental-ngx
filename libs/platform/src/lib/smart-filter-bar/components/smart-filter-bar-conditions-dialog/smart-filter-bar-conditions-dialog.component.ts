@@ -120,6 +120,7 @@ export class SmartFilterBarConditionsDialogComponent {
      * Submits all condition forms.
      */
     applyConditions(): void {
+        this._cdr.detectChanges();
         this._submittedForms = [];
         this.formGenerators.toArray().forEach((formGenerator) => formGenerator.submit());
     }
@@ -133,16 +134,18 @@ export class SmartFilterBarConditionsDialogComponent {
     _onFormSubmitted(form: SmartFilterBarCondition): void {
         this._submittedForms.push(form);
 
-        if (this._submittedForms.length === this.formGenerators.length) {
-            const formsResult = this._submittedForms.map((f) => {
-                f.value = f.value1 !== undefined ? f.value1 : f.value;
-                return f;
-            });
-
-            this._dialogRef.close(
-                formsResult.filter((c: SmartFilterBarCondition) => c.value !== undefined && c.value !== null)
-            );
+        if (this._submittedForms.length !== this.formGenerators.length) {
+            return;
         }
+
+        const formsResult = this._submittedForms.map((f) => {
+            f.value = f.value1 !== undefined ? f.value1 : f.value;
+            return f;
+        });
+
+        this._dialogRef.close(
+            formsResult.filter((c: SmartFilterBarCondition) => c.value !== undefined && c.value !== null)
+        );
     }
 
     /** @hidden */

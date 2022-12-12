@@ -58,6 +58,10 @@ export const components: SectionInterfaceContent[] = [
     {
         url: 'platform/message-popover',
         name: 'Message Popover'
+    },
+    {
+        url: 'platform/variant-management',
+        name: 'Variant Management'
     }
 ];
 

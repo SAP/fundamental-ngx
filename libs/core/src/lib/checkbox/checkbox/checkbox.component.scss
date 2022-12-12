@@ -8,4 +8,10 @@ fd-checkbox {
     .fd-checkbox__label {
         user-select: none;
     }
+
+    &.fd-checkbox--standalone {
+        .fd-checkbox__label {
+            margin: 0;
+        }
+    }
 }

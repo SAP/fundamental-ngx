@@ -100,6 +100,10 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     @Input()
     values: FdCheckboxValues;
 
+    /** Whether checkbox should be rendered standalone (without any text). */
+    @Input()
+    standalone = false;
+
     /**
      * Emitting checked event for non-form checkbox
      */

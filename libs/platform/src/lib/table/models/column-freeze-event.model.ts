@@ -1,7 +1,7 @@
 import { Table } from '../table';
 
 export interface FreezeChange {
-    current: string;
+    current: string | null;
     previous: string | null;
 }
 
@@ -12,5 +12,5 @@ export class TableColumnFreezeEvent {
      * @param current Current freezeTo column
      * @param previous Previous freezeTo column
      */
-    constructor(public source: Table, public current: string, public previous: string | null) {}
+    constructor(public source: Table, public current: string | null, public previous: string | null) {}
 }
