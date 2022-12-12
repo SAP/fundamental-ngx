@@ -1,3 +1,12 @@
+# [0.38.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.38.0-rc.1...v0.38.0-rc.2) (2022-12-12)
+
+
+### Features
+
+* **core:** split schematics into separate steps ([#9083](https://github.com/SAP/fundamental-ngx/issues/9083)) ([36eed1e](https://github.com/SAP/fundamental-ngx/commit/36eed1ea71f8f129e2363cbbb6dcd7223ecc1aa9))
+
+
+
 # [0.38.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.38.0-rc.0...v0.38.0-rc.1) (2022-12-11)
 
 
