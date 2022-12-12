@@ -5,6 +5,36 @@
             "description": "Adds @fundamental-ngx/core to the project.",
             "factory": "./ng-add/index#ngAdd",
             "schema": "./ng-add/schema.json"
+        },
+        "proceed-with-schematics": {
+            "description": "Adds @fundamental-ngx/core to the project.",
+            "factory": "./ng-add/index#proceedWithSchematics",
+            "schema": "./ng-add/schema.json",
+            "private": true
+        },
+        "add-dependencies": {
+            "description": "Adds external libraries as a dependencies for @fundamental-ngx/core",
+            "factory": "./add-dependencies/index#addDependencies",
+            "schema": "./add-dependencies/schema.json",
+            "private": true
+        },
+        "add-styles": {
+            "description": "Adds necessary style files for @fundamental-ngx/core",
+            "factory": "./add-styles/index#addStyles",
+            "schema": "./add-styles/schema.json",
+            "private": true
+        },
+        "add-theming": {
+            "description": "Adds theming capability for @fundamental-ngx/core",
+            "factory": "./add-theming/index#addTheming",
+            "schema": "./add-theming/schema.json",
+            "private": true
+        },
+        "add-animations": {
+            "description": "Adds animations module to the project",
+            "factory": "./add-animations/index#addAnimations",
+            "schema": "./add-animations/schema.json",
+            "private": true
         }
     }
 }
