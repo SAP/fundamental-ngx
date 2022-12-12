@@ -12,7 +12,7 @@ import {
 import { DestroyedService } from '@fundamental-ngx/core/utils';
 import { FDP_PRESET_MANAGED_COMPONENT, PresetManagedComponent } from '@fundamental-ngx/platform/shared';
 import equal from 'fast-deep-equal';
-import { filter, Subscription, takeUntil } from 'rxjs';
+import { filter, startWith, Subscription, takeUntil } from 'rxjs';
 import { VariantManagement } from '../../models/variant-management';
 import { FDP_VARIANT_MANAGEMENT, FDP_VARIANT_MANAGEMENT_WRAPPER } from '../../tokens';
 
@@ -93,11 +93,12 @@ export class VariantManagementWrapperComponent implements AfterViewInit, OnDestr
     /** @hidden */
     ngAfterViewInit(): void {
         this._setPresets();
-        this._listenToPresetChanges();
 
-        this._managedComponents?.changes.pipe(takeUntil(this._destroy$)).subscribe(() => {
-            this._listenToPresetChanges();
-        });
+        this._managedComponents?.changes
+            .pipe(startWith(this._managedComponents), takeUntil(this._destroy$))
+            .subscribe(() => {
+                this._listenToPresetChanges();
+            });
     }
 
     /** @hidden */
