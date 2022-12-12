@@ -1,7 +1,7 @@
 {
     "projectType": "library",
     "sourceRoot": "libs/cx/src/lib",
-    "prefix": "fd",
+    "prefix": "cx",
     "buildTarget": "build-umbrella",
     "targets": {
         "prepare": {
@@ -39,6 +39,6 @@
             }
         }
     },
-    "tags": ["type:lib", "scope:fd"],
+    "tags": ["type:lib", "scope:cx"],
     "implicitDependencies": ["i18n"]
 }

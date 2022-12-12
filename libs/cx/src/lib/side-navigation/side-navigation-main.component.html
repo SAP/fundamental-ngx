@@ -1,0 +1,18 @@
+<button
+    *ngIf="_showScrollUpButton"
+    fd-button
+    fdType="standard"
+    glyph="navigation-up-arrow"
+    fdx-side-nav-button
+    (click)="_scrollItems('up')"
+></button>
+<ng-content></ng-content>
+<button
+    *ngIf="_showScrollDownButton"
+    #scrollDownButton
+    fd-button
+    fdType="standard"
+    glyph="navigation-down-arrow"
+    fdx-side-nav-button
+    (click)="_scrollItems('down')"
+></button>

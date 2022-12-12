@@ -1,0 +1,39 @@
+{
+    "projectType": "library",
+    "sourceRoot": "libs/cx/src/lib/side-navigation",
+    "prefix": "cx",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["dist/libs/cx/side-navigation"],
+            "options": {
+                "tsConfig": "libs/cx/src/lib/side-navigation/tsconfig.lib.json",
+                "project": "libs/cx/src/lib/side-navigation/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/cx/src/lib/side-navigation/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/cx/src/lib/side-navigation/test.ts",
+                "tsConfig": "libs/cx/src/lib/side-navigation/tsconfig.spec.json",
+                "karmaConfig": "libs/cx/src/lib/side-navigation/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/cx/src/lib/side-navigation/**/*.ts",
+                    "libs/cx/src/lib/side-navigation/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:cx"]
+}

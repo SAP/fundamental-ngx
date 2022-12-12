@@ -1,0 +1,38 @@
+<fd-doc-page>
+    <header>Side Navigation</header>
+
+    <description>
+        The Side Navigation can display structures of up to three levels.
+
+        <h2>In the Wide variant:</h2>
+        <ul>
+            <li>The first levels always shows an icon</li>
+            <li>If first-level items have children, they show the expand/collapse arrows</li>
+            <li>Second level items do not display an icon and are not indented</li>
+            <li>If second-level items have children, they show the expand/collapse arrows</li>
+            <li>Third level items do not display an icon and are indented by 2 rem (32px)</li>
+        </ul>
+
+        <h2>In the Narrow variant:</h2>
+        <ul>
+            <li>The first levels always shows an icon</li>
+            <li>If first-level items have children, they show the expand/collapse arrows</li>
+            <li>
+                If first-level items have children, and they are clicked, the popover displays the First-level item in
+                bold letters, then the second level items in regular.
+            </li>
+            <li>Second level items do not display an icon and are not indented</li>
+            <li>If second-level items have children, they show the expand/collapse arrows</li>
+            <li>Third level items do not display an icon and are indented by 2 rem (32px)</li>
+        </ul>
+
+        <h2>A note about height:</h2>
+        It is advised to place the side nav in a container of fixed height, or have it occupy the full height of the
+        screen. Otherwise the height of the side nav will change based upon the expanding and collapsing of items with
+        children.
+    </description>
+
+    <import module="CxSideNavigationModule" subPackage="side-navigation"></import>
+
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

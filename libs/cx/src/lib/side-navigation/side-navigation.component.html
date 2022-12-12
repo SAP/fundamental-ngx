@@ -1,0 +1,28 @@
+<nav
+    class="fdx-side-nav"
+    [class.fdx-side-nav--dynamic-width]="dynamicWidth"
+    [class.fdx-side-nav--narrow]="narrow"
+    [class.fdx-side-nav--condensed]="condensed || sideNavigationConfiguration?.condensed"
+>
+    <ng-container *ngIf="!sideNavigationConfiguration">
+        <ng-content></ng-content>
+    </ng-container>
+    <ng-container *ngIf="sideNavigationConfiguration">
+        <div fdx-side-nav-main *ngIf="sideNavigationConfiguration.mainNavigation">
+            <fdx-prepared-nested-list
+                [condensed]="condensed || !!sideNavigationConfiguration.condensed"
+                [first]="true"
+                [list]="sideNavigationConfiguration.mainNavigation"
+            >
+            </fdx-prepared-nested-list>
+        </div>
+        <div fdx-side-nav-utility *ngIf="sideNavigationConfiguration.utilityNavigation">
+            <fdx-prepared-nested-list
+                [condensed]="condensed || !!sideNavigationConfiguration.condensed"
+                [first]="true"
+                [list]="sideNavigationConfiguration.utilityNavigation"
+            >
+            </fdx-prepared-nested-list>
+        </div>
+    </ng-container>
+</nav>

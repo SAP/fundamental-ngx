@@ -7,7 +7,12 @@ export const guides: SectionInterfaceContent[] = [
     { url: 'cx/i18n', name: 'I18n' }
 ];
 
-export const components: SectionInterfaceContent[] = [];
+export const components: SectionInterfaceContent[] = [
+    {
+        url: 'cx/side-navigation',
+        name: 'Side Navigation'
+    }
+];
 
 export const sections: SectionInterface[] = [
     {

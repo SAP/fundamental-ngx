@@ -1,0 +1,17 @@
+<fd-popover
+    [placement]="placement$ | async"
+    [triggers]="['click']"
+    [noArrow]="false"
+    [isOpen]="open"
+    (isOpenChange)="handleOpenChange($event)"
+    [scrollStrategy]="_closeScrollStrategy"
+>
+    <fd-popover-control>
+        <ng-content select="[fdx-nested-list-link]"></ng-content>
+        <ng-content select="[fdx-nested-list-content]"></ng-content>
+    </fd-popover-control>
+    <fd-popover-body class="fdx-side-nav__popover-body fdx-nested-list--text-only">
+        <ng-content select="[fdx-nested-list]"></ng-content>
+        <ng-content select="fdx-prepared-nested-list"></ng-content>
+    </fd-popover-body>
+</fd-popover>

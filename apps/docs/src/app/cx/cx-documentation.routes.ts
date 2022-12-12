@@ -15,6 +15,11 @@ export const ROUTES: Routes = [
             {
                 path: 'i18n',
                 loadChildren: () => import('@fundamental-ngx/docs/shared').then((m) => m.PlatformI18nDocsModule)
+            },
+            {
+                path: 'side-navigation',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/cx/side-navigation').then((m) => m.SideNavigationDocsModule)
             }
         ]
     }

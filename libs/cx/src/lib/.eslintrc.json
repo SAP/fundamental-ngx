@@ -15,7 +15,7 @@
                     "error",
                     {
                         "type": "attribute",
-                        "prefix": "fdp",
+                        "prefix": "fdx",
                         "style": "camelCase"
                     }
                 ],
@@ -23,7 +23,7 @@
                     "error",
                     {
                         "type": "element",
-                        "prefix": "fdp",
+                        "prefix": "fdx",
                         "style": "kebab-case"
                     }
                 ]
