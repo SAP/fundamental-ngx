@@ -1,3 +1,12 @@
+# [0.38.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.38.0-rc.2...v0.38.0-rc.3) (2022-12-12)
+
+
+### Features
+
+* **platform:** introduce variant management component ([#9051](https://github.com/SAP/fundamental-ngx/issues/9051)) ([751c55c](https://github.com/SAP/fundamental-ngx/commit/751c55c3694d5941c406866608d17aee7587bffd))
+
+
+
 # [0.38.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.38.0-rc.1...v0.38.0-rc.2) (2022-12-12)
 
 
