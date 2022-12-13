@@ -1,3 +1,12 @@
+## [0.38.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.38.0...v0.38.1-rc.0) (2022-12-13)
+
+
+### Bug Fixes
+
+* **docs:** removing hardcoded density ([#8983](https://github.com/SAP/fundamental-ngx/issues/8983)) ([1c789a7](https://github.com/SAP/fundamental-ngx/commit/1c789a76a3ab74c9dc04cfccf0fb81cadb2ee9c4))
+
+
+
 # [0.38.0](https://github.com/SAP/fundamental-ngx/compare/v0.38.0-rc.3...v0.38.0) (2022-12-12)
 
 
