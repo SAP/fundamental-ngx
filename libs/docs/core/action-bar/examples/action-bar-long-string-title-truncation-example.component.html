@@ -1,21 +1,15 @@
 <div fd-action-bar>
     <div fd-action-bar-header>
         <div fd-action-bar-back>
-            <button
-                aria-label="back"
-                fd-button
-                fdCompact
-                fdType="transparent"
-                [glyph]="navigationArrow$ | async"
-            ></button>
+            <button aria-label="back" fd-button fdType="transparent" [glyph]="navigationArrow$ | async"></button>
         </div>
         <div fd-action-bar-title>
             Page Title Demo for very very very very very very very very very very very very very very very very very
             very very long text
         </div>
         <div fd-action-bar-actions>
-            <button fd-button label="Cancel" fdCompact></button>
-            <button fd-button label="Save" fdCompact fdType="emphasized"></button>
+            <button fd-button label="Cancel"></button>
+            <button fd-button label="Save" fdType="emphasized"></button>
         </div>
     </div>
     <p fd-action-bar-description [withBackBtn]="true">
