@@ -51,7 +51,7 @@
                                         index as selectedIndex;
                                         trackBy: _trackBySelectedFn
                                     "
-                                    >{{ !!tokenizerFn ? (item | displayFnPipe: tokenizerFn) : item[tokenViewField] }}
+                                    >{{ !!tokenizerFn ? (item | displayFnPipe : tokenizerFn) : item[tokenViewField] }}
                                 </fd-token>
                                 <fd-token
                                     fd-toolbar-item
@@ -195,7 +195,7 @@
                     <div fdLayoutGridRow>
                         <ng-container
                             *ngFor="
-                                let filter of _displayedFilters | slice: 0:shownFilterCount + 1;
+                                let filter of _displayedFilters | slice : 0 : shownFilterCount + 1;
                                 trackBy: _trackByFilterFn
                             "
                         >
@@ -357,7 +357,8 @@
                         (click)="switchTab(_tabTypes.selectFromList)"
                         [title]="
                             'platformVHD.selectMobileTabTitle'
-                                | fdTranslate: { title: selectTabTitle || ('platformVHD.selectTabTitle' | fdTranslate) }
+                                | fdTranslate
+                                    : { title: selectTabTitle || ('platformVHD.selectTabTitle' | fdTranslate) }
                         "
                     ></fd-button-bar>
                 </fd-bar-element>
@@ -375,7 +376,8 @@
                         glyph="navigation-right-arrow"
                         [title]="
                             'platformVHD.selectMobileTabTitle'
-                                | fdTranslate: { title: defineTabTitle || ('platformVHD.defineTabTitle' | fdTranslate) }
+                                | fdTranslate
+                                    : { title: defineTabTitle || ('platformVHD.defineTabTitle' | fdTranslate) }
                         "
                         (click)="switchTab(_tabTypes.defineConditions)"
                     >
@@ -418,7 +420,7 @@
 
 <ng-template #conditionValue let-item="item">
     <span *ngIf="item.strategy !== 'empty' && item.strategy !== 'not_empty'; else emptyCondition">
-        {{ item | displayFnPipe: conditionDisplayFn:_displayedFilters }}
+        {{ item | displayFnPipe : conditionDisplayFn : _displayedFilters }}
     </span>
     <ng-template #emptyCondition>
         <ng-container *ngIf="item.strategy === 'not_empty'; else emptyConditionText">

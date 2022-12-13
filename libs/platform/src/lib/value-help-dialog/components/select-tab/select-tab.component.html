@@ -1,6 +1,6 @@
 <div class="table-header">
     <h5 fd-title role="heading" aria-level="5">
-        {{ 'platformVHD.selectTabDisplayCountLabel' | fdTranslate: { count: displayedData.length } }}
+        {{ 'platformVHD.selectTabDisplayCountLabel' | fdTranslate : { count: displayedData.length } }}
     </h5>
 </div>
 <div
@@ -25,11 +25,11 @@
         <label [id]="selectTabCountId" fd-form-label class="fdp-value-help-dialog__hidden_label">
             {{
                 'platformVHD.selectTabCountHiddenA11yLabel'
-                    | fdTranslate: { rowCount: displayedData.length, colCount: _tableFilters.main.length }
+                    | fdTranslate : { rowCount: displayedData.length, colCount: _tableFilters.main.length }
             }}
         </label>
         <label [id]="selectTabTitleId" fd-form-label class="fdp-value-help-dialog__hidden_label">
-            {{ 'platformVHD.selectTabDisplayCountLabel' | fdTranslate: { count: displayedData.length } }}
+            {{ 'platformVHD.selectTabDisplayCountLabel' | fdTranslate : { count: displayedData.length } }}
         </label>
         <thead fd-table-header>
             <tr fd-table-row *ngIf="displayedData.length && _tableFilters">
@@ -55,7 +55,7 @@
         <tbody fd-table-body>
             <ng-container
                 *ngFor="
-                    let row of displayedData | slice: _shownFrom:_shownCount;
+                    let row of displayedData | slice : _shownFrom : _shownCount;
                     trackBy: _trackByTableRowFn;
                     index as i
                 "

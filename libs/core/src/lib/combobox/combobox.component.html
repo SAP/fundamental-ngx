@@ -28,7 +28,7 @@
     <span
         fd-list-title
         *ngIf="!itemTemplate"
-        [innerHTML]="term | displayFnPipe: displayFn | highlight: inputText:highlighting && filterHighlight"
+        [innerHTML]="term | displayFnPipe : displayFn | highlight : inputText : highlighting && filterHighlight"
     >
     </span>
     <ng-container *ngIf="itemTemplate">
@@ -129,7 +129,7 @@
     >
         <ng-content></ng-content>
         <ng-container *ngIf="groupFn">
-            <ng-container *ngFor="let group of displayedValues | listGroupPipe: groupFn">
+            <ng-container *ngFor="let group of displayedValues | listGroupPipe : groupFn">
                 <li role="group" fd-list-group-header [tabindex]="0">
                     <span fd-list-title>{{ group.key }}</span>
                 </li>
