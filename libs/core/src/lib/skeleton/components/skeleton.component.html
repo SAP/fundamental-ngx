@@ -3,8 +3,8 @@
         <linearGradient id="skeletonGradient">
             <stop offset="0" stop-color="var(--sapContent_Placeholderloading_Background)"></stop>
 
-            <stop offset="0.5" stop-color="var(--fdSkeletonGradientMiddleColor)">
-                <animate attributeName="offset" values="0; 1" dur="2s" repeatCount="indefinite" />
+            <stop class="fd-skeleton__middle">
+                <animate attributeName="offset" values="0; 0; 0.5; 1; 1" dur="2s" repeatCount="indefinite" />
             </stop>
 
             <stop offset="1" stop-color="var(--sapContent_Placeholderloading_Background)"></stop>
