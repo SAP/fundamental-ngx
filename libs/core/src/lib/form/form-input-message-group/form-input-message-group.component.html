@@ -1,12 +1,13 @@
 <fd-popover
     class="fd-form-input-message-group"
-    additionalBodyClass="fd-popover__popper--input-message-group"
+    additionalBodyClass="fd-popover__body--input-message-group"
     [placement]="placement"
     [triggers]="triggers"
     [noArrow]="noArrow"
     [closeOnEscapeKey]="closeOnEscapeKey"
     [fillControlMode]="fillControlMode"
     [closeOnOutsideClick]="closeOnOutsideClick"
+    [disableScrollbar]="true"
     [isOpen]="isOpen"
     (isOpenChange)="openChanged($event)"
 >

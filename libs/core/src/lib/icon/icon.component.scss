@@ -1,5 +1,6 @@
-@import '~fundamental-styles/dist/icon';
+@import 'fundamental-styles/dist/icon';
 
 [class*='sap-icon'].fd-inline-help__trigger {
     padding: 0 0.25rem;
+    outline-offset: -0.125rem;
 }

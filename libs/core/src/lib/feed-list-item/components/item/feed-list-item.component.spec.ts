@@ -2,8 +2,8 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FeedListItemComponent } from './feed-list-item.component';
-import { PipeModule } from '../../../utils/public_api';
-import { LinkModule } from '../../../link/public_api';
+import { PipeModule } from '@fundamental-ngx/core/utils';
+import { LinkModule } from '@fundamental-ngx/core/link';
 import { I18nModule } from '@fundamental-ngx/i18n';
 
 const componentClassPrefix = 'fd-feed-list__item';

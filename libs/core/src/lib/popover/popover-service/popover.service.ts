@@ -110,7 +110,7 @@ export class PopoverService extends BasePopoverClass {
     }
 
     /** Closes the popover. */
-    close(): void {
+    close(focusActiveElement = true): void {
         if (this._overlayRef) {
             this._overlayRef.dispose();
 
@@ -120,7 +120,7 @@ export class PopoverService extends BasePopoverClass {
                 this.isOpenChange.emit(this.isOpen);
             }
 
-            this._focusLastActiveElementBeforeOpen();
+            this._focusLastActiveElementBeforeOpen(focusActiveElement);
         }
     }
 
@@ -249,10 +249,14 @@ export class PopoverService extends BasePopoverClass {
             this.triggers.forEach((trigger) => {
                 const triggerName = typeof trigger === 'string' ? trigger : trigger.trigger;
                 this._eventRef.push(
-                    this._renderer.listen(this._triggerElement.nativeElement, triggerName, () => {
+                    this._renderer.listen(this._triggerElement.nativeElement, triggerName, (event: Event) => {
                         const closeAction = typeof trigger !== 'object' || !!trigger.closeAction;
                         const openAction = typeof trigger !== 'object' || !!trigger.openAction;
                         this.toggle(openAction, closeAction);
+
+                        if (typeof trigger === 'object' && trigger.stopPropagation) {
+                            event.stopImmediatePropagation();
+                        }
                     })
                 );
             });
@@ -406,6 +410,8 @@ export class PopoverService extends BasePopoverClass {
         body._maxWidth = this.maxWidth;
         body._noArrow = this.noArrow;
         body._focusAutoCapture = this.focusAutoCapture;
+        body._disableScrollbar = this.disableScrollbar;
+        body._tabbableScrollbar = this.tabbableScrollbar;
         body._templateToDisplay = this.templateContent!;
         body._closeOnEscapeKey = this.closeOnEscapeKey;
         this._detectChanges();
@@ -429,16 +435,16 @@ export class PopoverService extends BasePopoverClass {
     }
 
     /** @hidden */
-    private _focusFirstTabbableElement(): void {
-        if (this.focusAutoCapture) {
+    private _focusFirstTabbableElement(focusLastElement = true): void {
+        if (focusLastElement && this.focusAutoCapture) {
             this._lastActiveElement = <HTMLElement>document.activeElement;
             this._getPopoverBody()?._focusFirstTabbableElement();
         }
     }
 
     /** @hidden */
-    private _focusLastActiveElementBeforeOpen(): void {
-        if (this.focusAutoCapture && this._lastActiveElement) {
+    private _focusLastActiveElementBeforeOpen(focusLastElement = true): void {
+        if (focusLastElement && this.focusAutoCapture && this._lastActiveElement) {
             this._lastActiveElement.focus();
         }
     }

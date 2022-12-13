@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-select",
     "sourceRoot": "libs/docs/fn/select",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/select/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-select"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-select"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

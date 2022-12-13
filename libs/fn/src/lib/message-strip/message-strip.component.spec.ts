@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { createMouseEvent } from '@fundamental-ngx/platform/shared';
+import { createMouseEvent } from '@fundamental-ngx/core/tests';
 
 import { MessageStripComponent, MessageStripState } from './message-strip.component';
 import { MessageStripModule } from './message-strip.module';

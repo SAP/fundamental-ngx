@@ -27,7 +27,8 @@ import {
     PlatformDatetimePickerModule,
     PlatformTimePickerModule,
     PlatformDatePickerModule,
-    PlatformFormGeneratorModule
+    PlatformFormGeneratorModule,
+    PlatformMultiComboboxModule
 } from '@fundamental-ngx/platform/form';
 import { PlatformInfoLabelModule } from '@fundamental-ngx/platform/info-label';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
@@ -49,6 +50,8 @@ import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-h
 import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
 import { PlatformIconTabBarModule } from '@fundamental-ngx/platform/icon-tab-bar';
 import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
+import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform/message-popover';
+import { VariantManagementModule } from '@fundamental-ngx/platform/variant-management';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -97,8 +100,11 @@ import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-fi
         PlatformTimePickerModule,
         PlatformDatePickerModule,
         PlatformFormGeneratorModule,
+        PlatformMultiComboboxModule,
         PlatformIconTabBarModule,
-        PlatformSmartFilterBarModule
+        PlatformSmartFilterBarModule,
+        PlatformMessagePopoverModule,
+        VariantManagementModule
     ],
     providers: []
 })

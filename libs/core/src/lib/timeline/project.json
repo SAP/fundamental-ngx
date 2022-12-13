@@ -1,11 +1,12 @@
 {
+    "name": "core-timeline",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/timeline",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/timeline"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/timeline"],
             "options": {
                 "tsConfig": "libs/core/src/lib/timeline/tsconfig.lib.json",
                 "project": "libs/core/src/lib/timeline/ng-package.json",

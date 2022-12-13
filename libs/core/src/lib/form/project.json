@@ -1,11 +1,12 @@
 {
+    "name": "core-form",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/form",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/form"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/form"],
             "options": {
                 "tsConfig": "libs/core/src/lib/form/tsconfig.lib.json",
                 "project": "libs/core/src/lib/form/ng-package.json",

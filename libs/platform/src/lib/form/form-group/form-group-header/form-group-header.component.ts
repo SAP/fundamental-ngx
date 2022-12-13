@@ -7,15 +7,6 @@ import { Nullable } from '@fundamental-ngx/core/shared';
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fdp-form-group-header]',
     templateUrl: './form-group-header.component.html',
-    styles: [
-        `
-            h1.fd-form-group__header-text {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-        `
-    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
@@ -28,10 +19,11 @@ export class FormGroupHeaderComponent {
     fieldGroup: Nullable<FieldGroup>;
 
     /** Hint options */
-    hintOptions(field: FieldGroup): HintOptions | undefined {
-        if (field.hintOptions) {
-            return field.hintOptions;
+    get hintOptions(): HintOptions | undefined {
+        if (this.fieldGroup?.hintOptions) {
+            return this.fieldGroup.hintOptions;
         }
+
         return;
     }
 }

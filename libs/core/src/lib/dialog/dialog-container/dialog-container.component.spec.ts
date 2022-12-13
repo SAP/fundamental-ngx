@@ -6,6 +6,7 @@ import { DialogContainerComponent } from '../dialog-container/dialog-container.c
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { whenStable } from '@fundamental-ngx/core/tests';
 
 const TEXT_CONTENT = 'Hello there';

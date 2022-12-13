@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-checkbox",
     "sourceRoot": "libs/docs/fn/checkbox",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/checkbox/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-checkbox"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-checkbox"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

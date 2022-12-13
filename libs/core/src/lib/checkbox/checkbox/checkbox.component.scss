@@ -1,4 +1,4 @@
-@import '~fundamental-styles/dist/checkbox';
+@import 'fundamental-styles/dist/checkbox';
 
 fd-checkbox {
     .fd-checkbox__text:empty {
@@ -7,5 +7,11 @@ fd-checkbox {
 
     .fd-checkbox__label {
         user-select: none;
+    }
+
+    &.fd-checkbox--standalone {
+        .fd-checkbox__label {
+            margin: 0;
+        }
     }
 }

@@ -23,6 +23,8 @@ const carouselErrorMessageTs = 'carousel-error-message-example.component.ts';
 const carouselErrorMessageHtml = 'carousel-error-message-example.component.html';
 const carouselLoadingContentTs = 'carousel-loading-content-example.component.ts';
 const carouselLoadingContentHtml = 'carousel-loading-content-example.component.html';
+const carouselAutoSlidesTs = 'carousel-auto-slides-example.component.ts';
+const carouselAutoSlidesHtml = 'carousel-auto-slides-example.component.html';
 
 @Component({
     selector: 'app-input',
@@ -178,6 +180,21 @@ export class CarouselDocsComponent {
             fileName: 'carousel-loading-content-example',
             component: 'CarouselLoadingContentExampleComponent',
             code: getAssetFromModuleAssets(carouselLoadingContentHtml)
+        }
+    ];
+
+    carouselAutoSlides: ExampleFile[] = [
+        {
+            language: 'typescript',
+            fileName: 'carousel-auto-slides-example',
+            component: 'CarouselAutoSlidesExampleComponent',
+            code: getAssetFromModuleAssets(carouselAutoSlidesTs)
+        },
+        {
+            language: 'html',
+            fileName: 'carousel-auto-slides-example',
+            component: 'CarouselAutoSlidesExampleComponent',
+            code: getAssetFromModuleAssets(carouselAutoSlidesHtml)
         }
     ];
 }

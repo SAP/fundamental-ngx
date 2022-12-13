@@ -83,7 +83,7 @@ export class ObservableValueHelpDialogDataSource<T> extends ValueHelpDialogDataS
     }
 }
 
-export class VhdDataProvider<R> extends DataProvider<R> {
+export class VhdDataProvider<R extends object> extends DataProvider<R> {
     /** @hidden */
     constructor(public values: R[]) {
         super();

@@ -1,11 +1,12 @@
 {
+    "name": "platform-object-status",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/object-status",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/object-status"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/object-status"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/object-status/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/object-status/ng-package.json",

@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed, fakeAsync, waitForAsync } from '@angular/cor
 
 import { SideNavigationComponent } from './side-navigation.component';
 import { Component, ViewChild } from '@angular/core';
-import { NestedListModule } from '../nested-list/nested-list.module';
-import { MenuKeyboardService } from '../menu/menu-keyboard.service';
+import { NestedListModule } from '@fundamental-ngx/core/nested-list';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { SideNavigationMainDirective } from './side-navigation-main.directive';
 
 @Component({

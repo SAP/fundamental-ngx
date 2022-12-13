@@ -1,4 +1,5 @@
 {
+    "name": "docs-platform-shared",
     "sourceRoot": "libs/docs/platform/shared",
     "projectType": "library",
     "prefix": "fdp-doc",

@@ -77,7 +77,7 @@ describe('Flexible column layout component test', () => {
     it('should check pin in dynamic example', async () => {
         await click(dynamicExample + button);
         await click(columnButton);
-        await expect(await getAttributeByName(pinButton, 'aria-selected')).toBe(
+        await expect(await getAttributeByName(pinButton, 'aria-pressed')).toBe(
             'false',
             'pin is selected, but should not be'
         );
@@ -85,7 +85,7 @@ describe('Flexible column layout component test', () => {
         await expect(await getAttributeByName(pinButton, 'title')).toBe('Pin Header');
         await pause(1000);
         await click(pinButton);
-        await expect(await getAttributeByName(pinButton, 'aria-selected')).toBe('true', 'pin is not selected');
+        await expect(await getAttributeByName(pinButton, 'aria-pressed')).toBe('true', 'pin is not selected');
         await expect(await getAttributeByName(pinButton, 'aria-label')).toBe('Unpin Header');
         await expect(await getAttributeByName(pinButton, 'title')).toBe('Unpin Header');
     });

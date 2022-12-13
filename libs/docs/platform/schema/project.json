@@ -1,4 +1,5 @@
 {
+    "name": "docs-platform-schema",
     "sourceRoot": "libs/docs/platform/schema",
     "projectType": "library",
     "prefix": "fdp-doc",

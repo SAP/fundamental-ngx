@@ -77,6 +77,7 @@ import { SelectionCellStylesPipe } from './pipes/selection-cell-styles.pipe';
 import { RowClassesPipe } from './pipes/row-classes.pipe';
 import { ColumnResizableSidePipe } from './pipes/column-resizable-side.pipe';
 import { PlatformTableColumnResponsiveDirective } from './directives/platform-table-column-responsive.directive';
+import { TableToolbarLeftActionsComponent } from './components/table-toolbar/table-toolbar-left-actions.component';
 
 const EXPORTABLE_DECLARATIONS = [
     TableComponent,
@@ -122,7 +123,8 @@ const EXPORTABLE_DECLARATIONS = [
     GetAvailableSortColumnsPipe,
     TableEditableCellComponent,
     FdpEditableCellFormDirective,
-    PlatformTableColumnResponsiveDirective
+    PlatformTableColumnResponsiveDirective,
+    TableToolbarLeftActionsComponent
 ];
 
 @NgModule({
@@ -158,6 +160,11 @@ const EXPORTABLE_DECLARATIONS = [
         ContentDensityModule
     ],
     declarations: [...EXPORTABLE_DECLARATIONS],
-    exports: [...EXPORTABLE_DECLARATIONS, PlatformContentDensityDeprecationsModule, ContentDensityModule]
+    exports: [
+        ...EXPORTABLE_DECLARATIONS,
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule,
+        TableToolbarLeftActionsComponent
+    ]
 })
 export class PlatformTableModule {}

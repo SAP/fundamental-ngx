@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-form-message",
     "sourceRoot": "libs/docs/core/form-message",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/form-message/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-form-message"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-form-message"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

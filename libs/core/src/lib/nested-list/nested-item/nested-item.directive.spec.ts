@@ -1,7 +1,7 @@
 import { NestedItemDirective } from './nested-item.directive';
 import { Component, ViewChild } from '@angular/core';
-import { PopoverModule } from '../../popover/popover.module';
-import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
 import { NestedListExpandIconComponent } from '../nested-list-directives';
 import { NestedListModule } from '../nested-list.module';

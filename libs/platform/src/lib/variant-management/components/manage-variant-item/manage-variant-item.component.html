@@ -1,0 +1,85 @@
+<fd-dialog>
+    <fd-dialog-header>
+        <h1 fd-title>{{ 'platformVariantManagement.saveView' | fdTranslate }}</h1>
+    </fd-dialog-header>
+
+    <fd-dialog-body>
+        <fdp-form-group #formContainer [formGroup]="_form" [unifiedLayout]="false" [useForm]="true">
+            <fdp-form-field
+                id="name"
+                [label]="'platformVariantManagement.view' | fdTranslate"
+                [column]="1"
+                [rank]="1"
+                hintPlacement="left"
+                [required]="true"
+                [validators]="_nameValidator"
+                [labelColumnLayout]="{ S: 12 }"
+                [fieldColumnLayout]="{ S: 12 }"
+                [gapColumnLayout]="{ S: 12 }"
+            >
+                <fdp-input name="name" formControlName="name"></fdp-input>
+            </fdp-form-field>
+            <fdp-form-field
+                id="isDefault"
+                [noLabelLayout]="true"
+                [labelColumnLayout]="{ S: 12 }"
+                [fieldColumnLayout]="{ S: 12 }"
+                [gapColumnLayout]="{ S: 12 }"
+            >
+                <fdp-checkbox
+                    name="isDefault"
+                    formControlName="isDefault"
+                    [label]="'platformVariantManagement.setAsDefault' | fdTranslate"
+                ></fdp-checkbox>
+            </fdp-form-field>
+            <fdp-form-field
+                id="access"
+                [noLabelLayout]="true"
+                [labelColumnLayout]="{ S: 12 }"
+                [fieldColumnLayout]="{ S: 12 }"
+                [gapColumnLayout]="{ S: 12 }"
+            >
+                <fdp-checkbox
+                    [values]="{ trueValue: 'public', falseValue: 'private' }"
+                    name="access"
+                    formControlName="access"
+                    [label]="'platformVariantManagement.public' | fdTranslate"
+                ></fdp-checkbox>
+            </fdp-form-field>
+            <fdp-form-field
+                id="applyAutomatically"
+                [noLabelLayout]="true"
+                [labelColumnLayout]="{ S: 12 }"
+                [fieldColumnLayout]="{ S: 12 }"
+                [gapColumnLayout]="{ S: 12 }"
+            >
+                <fdp-checkbox
+                    name="applyAutomatically"
+                    formControlName="applyAutomatically"
+                    [label]="'platformVariantManagement.applyAutomatically' | fdTranslate"
+                ></fdp-checkbox>
+            </fdp-form-field>
+            <span *fdpFormFieldError="'required'">
+                {{ 'platformVariantManagement.requiredFieldError' | fdTranslate }}
+            </span>
+            <span *fdpFormFieldError="'nameTaken'">
+                {{ 'platformVariantManagement.nameTakenFieldError' | fdTranslate }}
+            </span>
+        </fdp-form-group>
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-button-bar
+            fdType="emphasized"
+            [label]="'platformVariantManagement.save' | fdTranslate"
+            (click)="_submitForm()"
+            ariaLabel="Interested Emphasized"
+        ></fd-button-bar>
+
+        <fd-button-bar
+            [label]="'platformVariantManagement.cancel' | fdTranslate"
+            (click)="dialog.dismiss('Cancel')"
+            ariaLabel="Cancel"
+        ></fd-button-bar>
+    </fd-dialog-footer>
+</fd-dialog>

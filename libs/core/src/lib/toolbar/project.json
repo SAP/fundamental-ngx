@@ -1,11 +1,12 @@
 {
+    "name": "core-toolbar",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/toolbar",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/toolbar"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/toolbar"],
             "options": {
                 "tsConfig": "libs/core/src/lib/toolbar/tsconfig.lib.json",
                 "project": "libs/core/src/lib/toolbar/ng-package.json",

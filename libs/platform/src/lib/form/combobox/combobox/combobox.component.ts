@@ -16,7 +16,7 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
@@ -64,6 +64,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         readonly cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
         readonly _dynamicComponentService: DynamicComponentService,
@@ -72,9 +73,19 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         readonly _comboboxConfig: ComboboxConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
     ) {
-        super(cd, elementRef, ngControl, ngForm, dialogConfig, _comboboxConfig, formField, formControl);
+        super(
+            cd,
+            elementRef,
+            ngControl,
+            controlContainer,
+            ngForm,
+            dialogConfig,
+            _comboboxConfig,
+            formField,
+            formControl
+        );
     }
     /** @hidden */
     ngOnInit(): void {

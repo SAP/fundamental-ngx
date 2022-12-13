@@ -2,8 +2,8 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SplitButtonComponent, splitButtonTextClass, splitButtonTextCompactClass } from './split-button.component';
-import { MenuModule } from '../menu/menu.module';
-import { ButtonModule } from '../button/button.module';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import createSpy = jasmine.createSpy;
 import { I18nModule } from '@fundamental-ngx/i18n';
 
@@ -61,17 +61,17 @@ describe('SplitButtonComponent', () => {
         spyOn(componentInstance, 'selectMenuItem');
         componentInstance.mainActionTitle = null as any;
         componentInstance.ngAfterContentInit();
-        expect(componentInstance.selectMenuItem).toHaveBeenCalledWith(componentInstance.menu.menuItems.first);
-        expect(componentInstance.selected).toBe(componentInstance.menu.menuItems.first);
+        expect(componentInstance.selectMenuItem).toHaveBeenCalledWith(componentInstance.menu._menuItems.first);
+        expect(componentInstance.selected).toBe(componentInstance.menu._menuItems.first);
     });
 
     it('should handle content init - selected item', () => {
         spyOn(componentInstance, 'selectMenuItem');
-        componentInstance.selected = componentInstance.menu.menuItems.last;
+        componentInstance.selected = componentInstance.menu._menuItems.last;
         componentInstance.mainActionTitle = null as any;
         componentInstance.ngAfterContentInit();
-        expect(componentInstance.selectMenuItem).toHaveBeenCalledWith(componentInstance.menu.menuItems.last);
-        componentInstance.menu.menuItems.last.onSelect.emit();
+        expect(componentInstance.selectMenuItem).toHaveBeenCalledWith(componentInstance.menu._menuItems.last);
+        componentInstance.menu._menuItems.last.onSelect.emit();
         fixture.detectChanges();
         expect(componentInstance.mainActionTitle).toBe('Option 2');
     });
@@ -97,7 +97,7 @@ describe('SplitButtonComponent', () => {
         const mouseEvent = new MouseEvent('click');
         spyOn(mouseEvent, 'stopPropagation');
         spyOn(componentInstance.primaryButtonClicked, 'emit');
-        componentInstance.selected = componentInstance.menu.menuItems.first;
+        componentInstance.selected = componentInstance.menu._menuItems.first;
         spyOn(componentInstance.selected.elementRef.nativeElement, 'click');
 
         componentInstance.onMainButtonClick(mouseEvent);

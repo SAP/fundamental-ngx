@@ -1,0 +1,45 @@
+@import 'fundamental-styles/dist/message-popover';
+
+.fd-message-popover__view-container {
+    border-bottom-left-radius: var(--fdPopover_Border_Radius);
+    border-bottom-right-radius: var(--fdPopover_Border_Radius);
+    overflow: hidden;
+    display: block;
+    max-height: 40vh;
+
+    .fd-message-view {
+        .fd-list__item:first-child {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            &:before {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+        }
+
+        .fd-list__item:last-child {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            &:before {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+    }
+}
+
+.fd-message-view__list {
+    min-width: 20rem;
+    min-height: 10rem;
+    max-height: 40vh;
+
+    .fd-link {
+        font-size: inherit;
+    }
+
+    .fd-list__link:active,
+    .fd-list__link.is-active {
+        --sapLinkColor: var(--sapList_Active_TextColor);
+        --sapLink_Active_Color: var(--sapList_Active_TextColor);
+    }
+}

@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
-import { MessagePageComponent, MessagePageModule } from '@fundamental-ngx/core/message-page';
+import { MessagePageComponent } from './message-page.component';
+import { MessagePageModule } from './message-page.module';
 
 @Component({
     selector: 'fd-message-page-test',

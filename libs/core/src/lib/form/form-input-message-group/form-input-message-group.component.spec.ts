@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { FormInputMessageGroupComponent } from './form-input-message-group.component';
-import { PopoverModule } from '../../popover/popover.module';
 import { CommonModule } from '@angular/common';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 
 describe('FormInputMessageGroupComponent', () => {
     let component: FormInputMessageGroupComponent;

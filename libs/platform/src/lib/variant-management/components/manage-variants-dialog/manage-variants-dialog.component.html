@@ -1,0 +1,101 @@
+<fd-dialog>
+    <fd-dialog-header>
+        <h1 id="fd-dialog-header-1" fd-title>
+            {{ 'platformVariantManagement.manageViews' | fdTranslate }}
+        </h1>
+    </fd-dialog-header>
+
+    <fd-dialog-body>
+        <fdp-table [dataSource]="_source" [noVerticalBorders]="true" class="fd-variant-management__table">
+            <fdp-column name="favourite" key="favourite">
+                <fdp-table-cell *fdpCellDef="let item; as: _variantModel">
+                    <fd-icon
+                        class="fd-variant-management__favourite-state"
+                        [class.fd-variant-management__favourite-state--active]="item.favourite"
+                        [ariaLabel]="'platformVariantManagement.markAsFavourite' | fdTranslate"
+                        tabindex="0"
+                        (click)="_markAsFavourite(item)"
+                        glyph="favorite"
+                    ></fd-icon>
+                </fdp-table-cell>
+            </fdp-column>
+            <fdp-column [label]="'platformVariantManagement.view' | fdTranslate" name="name" key="name">
+                <fdp-table-cell *fdpCellDef="let item; as: _variantModel">
+                    <fdp-input *ngIf="!item.readonly" [(ngModel)]="item.name"></fdp-input>
+                    <ng-container *ngIf="item.readonly">{{ item.name }}</ng-container>
+                </fdp-table-cell>
+            </fdp-column>
+            <fdp-column [label]="'platformVariantManagement.sharing' | fdTranslate" name="access" key="access">
+                <fdp-table-cell *fdpCellDef="let item; as: _variantModel">
+                    {{
+                        (item.access === 'public'
+                            ? 'platformVariantManagement.access.public'
+                            : 'platformVariantManagement.access.private'
+                        ) | fdTranslate
+                    }}
+                </fdp-table-cell>
+            </fdp-column>
+            <fdp-column
+                [label]="'platformVariantManagement.default' | fdTranslate"
+                name="isDefault"
+                key="isDefault"
+                align="center"
+            >
+                <fdp-table-cell *fdpCellDef="let item; as: _variantModel">
+                    <fd-radio-button
+                        [value]="true"
+                        [id]="'radio-' + item.id"
+                        name="is-variant-default"
+                        [(ngModel)]="item.isDefault"
+                    ></fd-radio-button>
+                </fdp-table-cell>
+            </fdp-column>
+            <fdp-column
+                [label]="'platformVariantManagement.applyAutomatically' | fdTranslate"
+                name="applyAutomatically"
+                key="applyAutomatically"
+                align="center"
+            >
+                <fdp-table-cell *fdpCellDef="let item; as: _variantModel">
+                    <fdp-checkbox
+                        class="fd-variant-management__centered-checkbox"
+                        [standalone]="true"
+                        name="applyAutomatically"
+                        [(ngModel)]="item.applyAutomatically"
+                    ></fdp-checkbox>
+                </fdp-table-cell>
+            </fdp-column>
+            <fdp-column
+                [label]="'platformVariantManagement.createdBy' | fdTranslate"
+                name="createdBy"
+                key="createdBy"
+            ></fdp-column>
+            <fdp-column name="actions">
+                <fdp-table-cell *fdpCellDef="let item; as: _variantModel">
+                    <fdp-button
+                        *ngIf="!item.readonly"
+                        buttonType="transparent"
+                        glyph="decline"
+                        [title]="'platformVariantManagement.removeVariant' | fdTranslate"
+                        (click)="_removeVariant(item)"
+                    ></fdp-button>
+                </fdp-table-cell>
+            </fdp-column>
+        </fdp-table>
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-button-bar
+            fdType="emphasized"
+            [label]="'platformVariantManagement.save' | fdTranslate"
+            (click)="_saveVariants()"
+            ariaLabel="Interested Emphasized"
+        ></fd-button-bar>
+
+        <fd-button-bar
+            [label]="'platformVariantManagement.cancel' | fdTranslate"
+            (click)="dialog.dismiss('Cancel')"
+            [ariaLabel]="'platformVariantManagement.cancel' | fdTranslate"
+        ></fd-button-bar>
+    </fd-dialog-footer>
+</fd-dialog>

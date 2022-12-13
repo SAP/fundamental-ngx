@@ -1,4 +1,5 @@
 {
+    "name": "cx",
     "projectType": "library",
     "sourceRoot": "libs/cx/src/lib",
     "prefix": "cx",
@@ -19,7 +20,7 @@
         },
         "build-umbrella": {
             "executor": "@nrwl/angular:package",
-            "outputs": ["dist/libs/cx"],
+            "outputs": ["{workspaceRoot}/dist/libs/cx"],
             "options": {
                 "tsConfig": "libs/cx/src/lib/tsconfig.lib.json",
                 "project": "libs/cx/src/lib/ng-package.json",

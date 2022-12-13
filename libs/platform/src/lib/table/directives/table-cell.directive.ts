@@ -1,9 +1,9 @@
-import { Directive, TemplateRef } from '@angular/core';
+import { Directive, Input, TemplateRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EditableTableCell } from '../table-cell.class';
 
-export interface FdpCellDefContext {
-    $implicit: any;
+export interface FdpCellDefContext<T = any> {
+    $implicit: T;
     popping: boolean;
 }
 
@@ -19,9 +19,12 @@ export class FdpTableCell {}
  */
 @Directive({ selector: '[fdpCellDef]' })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
-export class FdpCellDef {
+export class FdpCellDef<T = any> {
+    /** Property to support typings. */
+    @Input()
+    fdpCellDefAs: T;
     /** @hidden */
-    constructor(public templateRef: TemplateRef<FdpCellDefContext>) {}
+    constructor(public templateRef: TemplateRef<FdpCellDefContext<T>>) {}
 
     /** @hidden */
     static ngTemplateContextGuard(dir: FdpCellDef, ctx: FdpCellDefContext): ctx is FdpCellDefContext {

@@ -16,7 +16,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { BACKSPACE, DELETE } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
@@ -180,13 +180,15 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     /** @hidden */
     constructor(
         cd: ChangeDetectorRef,
+        elementRef: ElementRef,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         protected _textAreaConfig: TextAreaConfig
     ) {
-        super(cd, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }
@@ -195,7 +197,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     /** @hidden */
     ngOnInit(): void {
         if (!this.wrapType || VALID_WRAP_TYPES.indexOf(this.wrapType) === -1) {
-            throw new Error(`Textarea wrap type $ {this.wrapType} is not supported`);
+            throw new Error(`Textarea wrap type ${this.wrapType} is not supported`);
         }
         // if not custom set, set counter to max length value, else it calculates remaining/exceeded characters.
         if (!this.value) {

@@ -1,11 +1,12 @@
 {
+    "name": "platform-info-label",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/info-label",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/info-label"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/info-label"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/info-label/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/info-label/ng-package.json",

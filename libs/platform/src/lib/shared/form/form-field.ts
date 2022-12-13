@@ -1,6 +1,12 @@
-import { TemplateRef } from '@angular/core';
+import { QueryList, TemplateRef } from '@angular/core';
+import { NgControl } from '@angular/forms';
+import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
+import { Subject } from 'rxjs';
 
 import { FormFieldControl } from './form-control';
+import { FormError, FormFieldErrorDirectiveContext } from './form-error';
+import { FormFieldGroup } from './form-field-group';
+import { FormGroupContainer } from './form-group';
 import { LabelLayout, Column, HintPlacement } from './form-options';
 
 /**
@@ -55,24 +61,52 @@ export abstract class FormField {
     /**
      * A reference to the underlying FormFieldControl.
      */
-    control: FormFieldControl<any> | null;
+    control: FormFieldControl | null;
     /**
      * Set when form field is a mandatory one.
      */
     required: boolean;
     /** Form field label */
     label?: string;
+
+    /** Form fields's group. */
+    formFieldGroup: Nullable<FormFieldGroup>;
+
+    /** Frm field's Form Container. */
+    formGroupContainer: Nullable<FormGroupContainer>;
+
+    /** Grouped errors. */
+    groupedErrors: FormFieldErrorDirectiveContext[];
+
+    /** Combined Error directives. */
+    errorDirectives: FormError[];
+
+    /** Form control */
+    ngControl?: NgControl;
+
+    /** Event emitted when errors being changed. */
+    errorsChange$: Subject<void>;
+
     /**
      * Register underlying form control
      */
-    registerFormFieldControl: (control: FormFieldControl<any>) => void;
+    registerFormFieldControl: (control: FormFieldControl) => void;
     /**
      * Unregister underlying form control
      */
-    unregisterFormFieldControl: (control: FormFieldControl<any>) => void;
+    unregisterFormFieldControl: (control: FormFieldControl) => void;
 
     /**
      * Set default columns layout
      */
     setDefaultColumnLayout: () => void;
+
+    /** Gets field error priority state. */
+    getPriorityState: () => FormStates;
+
+    /** Groups errors. */
+    groupErrors: () => void;
+
+    /** Sets error directives from parent container */
+    setErrorDirectives: (directives: QueryList<FormError>) => void;
 }

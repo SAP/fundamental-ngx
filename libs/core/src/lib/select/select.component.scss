@@ -1,25 +1,17 @@
 @use '@angular/cdk';
-@import '~fundamental-styles/dist/select';
+@import 'fundamental-styles/dist/select';
 
 @include cdk.a11y-visually-hidden();
 
-.fd-popover__body > :first-child {
-    border-radius: 0;
-}
-
-// TODO: Remove after issue on styles addressed.
-.fd-select__text-content {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1rem;
+.fd-select {
     display: block;
-}
-
-.fd-select-custom-class {
-    display: inline-block;
     max-width: 100%;
-}
 
-.fd-popover-custom-select-body {
-    max-width: 100%;
+    .fd-popover-custom {
+        min-width: 100%;
+    }
+
+    &--inline {
+        display: inline-block;
+    }
 }

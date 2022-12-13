@@ -3,8 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { CarouselComponent, CarouselModule } from '@fundamental-ngx/core/carousel';
 import { whenStable } from '@fundamental-ngx/core/tests';
+import { CarouselComponent } from './carousel.component';
+import { CarouselModule } from './carousel.module';
 
 @Component({
     selector: 'fd-test-carousel',

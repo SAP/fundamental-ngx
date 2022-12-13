@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { ShellbarModule, ShellbarUserMenuComponent } from '@fundamental-ngx/core/shellbar';
+import { ShellbarModule } from '../shellbar.module';
+import { ShellbarUserMenuComponent } from './shellbar-user-menu.component';
 
 describe('UserMenuComponent', () => {
     let component: ShellbarUserMenuComponent;

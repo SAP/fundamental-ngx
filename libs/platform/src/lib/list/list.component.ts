@@ -7,7 +7,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Host,
     HostListener,
     Inject,
@@ -23,17 +22,28 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { firstValueFrom, isObservable, Observable, of, Subject, Subscription } from 'rxjs';
+import {
+    BehaviorSubject,
+    filter,
+    firstValueFrom,
+    isObservable,
+    map,
+    Observable,
+    of,
+    startWith,
+    Subject,
+    Subscription,
+    switchMap
+} from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import {
     ArrayListDataSource,
-    BaseComponent,
     CollectionBaseInput,
     FormField,
     FormFieldControl,
@@ -46,10 +56,12 @@ import {
 import { BaseListItem, ListItemDef } from './base-list-item';
 import { ListConfig } from './list.config';
 import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { LoadMoreContentContext, LoadMoreContentDirective } from './load-more-content.directive';
+import { FdpListComponent } from './fdpListComponent.token';
 
 export type SelectionType = 'none' | 'multi' | 'single' | 'delete';
 export type ListType = 'inactive' | 'active' | 'detail';
-export type FdpListDataSource<T> = ListDataSource<T> | Observable<T[]> | T[];
+export type FdpListDataSource<T> = ListDataSource<T> | Observable<T[]> | T[] | null;
 
 export class SelectionChangeEvent {
     /** Selected items */
@@ -59,7 +71,6 @@ export class SelectionChangeEvent {
 }
 
 let nextListId = 0;
-let nextListGrpHeaderId = 0;
 
 /**
  * The List component represents a container for list item types.
@@ -71,7 +82,10 @@ let nextListGrpHeaderId = 0;
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FormFieldControl, useExisting: ListComponent, multi: true }],
+    providers: [
+        { provide: FormFieldControl, useExisting: ListComponent, multi: true },
+        { provide: FdpListComponent, useExisting: ListComponent }
+    ],
     host: {
         '[attr.tabindex]': '-1'
     }
@@ -154,6 +168,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     set value(value: any) {
         super.setValue(value);
     }
+
     get value(): any {
         return super.getValue();
     }
@@ -170,6 +185,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             }
         }
     }
+
     get rowSelection(): boolean {
         return this._rowSelection;
     }
@@ -181,6 +197,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             this._initializeDS(value);
         }
     }
+
     get dataSource(): FdpListDataSource<T> {
         return this._dataSource;
     }
@@ -197,6 +214,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
         this._ulElement?.classList.add(...classList);
     }
+
     get navigated(): boolean {
         return this._navigated;
     }
@@ -207,6 +225,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         this._navigationIndicator = value;
         this._ulElement?.classList.add('fd-list--navigation-indication');
     }
+
     get navigationIndicator(): boolean {
         return this._navigationIndicator;
     }
@@ -217,6 +236,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         this._hasByLine = value;
         this._ulElement?.classList.add('fd-list--byline');
     }
+
     get hasByLine(): boolean {
         return this._hasByLine;
     }
@@ -227,6 +247,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         this._hasObject = value;
         this._ulElement?.classList.add('fd-object-list');
     }
+
     get hasObject(): boolean {
         return this._hasObject;
     }
@@ -243,13 +264,17 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     @ContentChild(ListItemDef)
     listItemDef: ListItemDef;
 
+    /** Load More List item content */
+    @ContentChild(LoadMoreContentDirective)
+    loadMoreContent: LoadMoreContentDirective;
+
     /** Child items of the List. */
     @ContentChildren(BaseListItem, { descendants: true })
     listItems: QueryList<BaseListItem>;
 
     /** @hidden */
     get _ulElement(): Nullable<HTMLUListElement> {
-        return this.itemEl.nativeElement.querySelector('ul');
+        return this.elementRef.nativeElement.querySelector('ul');
     }
 
     /**
@@ -351,30 +376,56 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     private _dsSubscription: Nullable<Subscription>;
 
     /** @hidden */
-    private _clickSubscription = new Subscription();
+    private _language: FdLanguage;
 
     /** @hidden */
-    private _language: FdLanguage;
+    private _afterViewInit$ = new BehaviorSubject(false);
 
     /** @hidden */
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
-        public itemEl: ElementRef<HTMLElement>,
+        elementRef: ElementRef,
         private _liveAnnouncer: LiveAnnouncer,
         @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
         @Optional() @Self() public ngControl: NgControl,
+        @Optional() @Self() public controlContainer: ControlContainer,
         @Optional() @Self() public ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         protected _listConfig?: ListConfig
     ) {
-        super(_changeDetectorRef, ngControl, ngForm, formField, formControl);
+        super(_changeDetectorRef, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
         this._init();
     }
 
     /** @hidden */
     private async _init(): Promise<void> {
         this._language = await firstValueFrom(this._language$);
+    }
+
+    /** Get context for load more button */
+    getLoadMoreContentContext(): LoadMoreContentContext {
+        const $implicit = {
+            loadTitle: this.loadTitle,
+            loading: this._loading,
+            loadingLabel: (() => {
+                if (this._loading) {
+                    return this._language$.pipe(
+                        map((language) => this._translationResolver.resolve(language, 'platformList.loadingAriaLabel'))
+                    );
+                }
+                return of(this.loadingLabel);
+            })(),
+            lastChunk: {
+                start: this._startIndex,
+                end: this._lastIndex
+            },
+            total: this._dsItems.length
+        };
+        return {
+            $implicit,
+            ...$implicit
+        };
     }
 
     /**
@@ -411,12 +462,14 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
      * Keyboard manager on list items, set values when passed via array
      */
     ngAfterViewInit(): void {
+        this._afterViewInit$.next(true);
         this._keyManager = new FocusKeyManager<BaseListItem>(this.listItems).withWrap();
 
-        this._updateListItems();
-        this.listItems.changes.subscribe(() => this._updateListItems());
+        this._subscriptions.add(
+            this.listItems.changes.pipe(startWith(this.listItems)).subscribe(() => this._updateListItems())
+        );
 
-        const indicator = this.itemEl.nativeElement.querySelector('fd-busy-indicator');
+        const indicator = this.elementRef.nativeElement.querySelector('fd-busy-indicator');
         indicator?.setAttribute('aria-label', '');
     }
 
@@ -430,10 +483,6 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
         if (this._dsSubscription) {
             this._dsSubscription.unsubscribe();
-        }
-
-        if (this._clickSubscription) {
-            this._clickSubscription.unsubscribe();
         }
     }
 
@@ -495,7 +544,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             .pipe(
                 tap(async (data) => {
                     if (isBlank(data)) {
-                        console.error('===Invalid Response recived===');
+                        console.error('===Invalid Response received===');
                     }
                     this.loadingLabel = this._translationResolver.resolve(
                         this._language,
@@ -637,12 +686,19 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
          */
         this._dsSubscription = initDataSource
             .open()
-            .pipe(takeUntil(this._destroyed))
+            .pipe(
+                // Set new items when component is fully initiated and all child components are available.
+                this._waitForViewInit(),
+                takeUntil(this._destroyed)
+            )
             .subscribe((data) => {
                 this._dsItems = data || [];
                 this.stateChanges.next(this._dsItems);
                 this._setItems();
-                this._cd.markForCheck();
+                // Trigger change detection when queue is empty.
+                setTimeout(() => {
+                    this._cd.detectChanges();
+                });
             });
 
         // initial data fetch
@@ -767,6 +823,18 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         });
     }
 
+    /** @hidden */
+    _setupListItem(item: BaseListItem): void {
+        item.selectionMode = this.selectionMode;
+        item.rowSelection = this.rowSelection;
+        item._hasByLine = this.hasByLine;
+        item.itemSelected.subscribe(() => {
+            this._keyManager.setActiveItem(this.listItems.toArray().indexOf(item));
+        });
+
+        this.stateChanges.next(item);
+    }
+
     /**
      * @hidden
      * Setting values from list to list items
@@ -786,10 +854,6 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             this.ariaSetsize = this.listItems.length;
         }
 
-        this._clickSubscription.unsubscribe();
-
-        this._clickSubscription = new Subscription();
-
         this._partialNavigation = this.listItems.some((item) => item.navigationIndicator || item.listType === 'detail');
 
         this.listItems.forEach((item, index) => {
@@ -799,55 +863,20 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
                 item.listType = this.listType;
             }
 
-            // item.contentDensity = this.contentDensity; // no need for this
-            item.selectionMode = this.selectionMode;
-            item.rowSelection = this.rowSelection;
-            item._hasByLine = this.hasByLine;
             item.ariaPosinet = index;
-
-            this._clickSubscription.add(
-                item.itemSelected.subscribe(() => {
-                    this._keyManager.setActiveItem(index);
-                })
-            );
-
-            this.stateChanges.next(item);
         });
     }
-}
 
-@Component({
-    selector: 'fdp-list-footer',
-    template: ` <li #listFooter class="fd-list__footer" [attr.id]="id" role="option">
-        <ng-content></ng-content>
-    </li>`
-})
-export class ListFooterComponent extends BaseComponent {}
-
-@Component({
-    selector: 'fdp-list-group-header',
-    template: ` <li #listItem fd-list-group-header [attr.id]="id" role="option" [tabindex]="0">
-        <span fd-list-title>{{ groupHeaderTitle }}</span>
-        <ng-content></ng-content>
-    </li>`,
-    providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeaderComponent) }]
-})
-export class ListGroupHeaderComponent extends BaseListItem implements OnInit {
-    /** Displays list goup header title */
-    @Input()
-    groupHeaderTitle?: string;
-
-    /** @deprecated Use `groupHeaderTitle` instead */
-    @Input()
-    set grpheaderTitle(value: string) {
-        this.groupHeaderTitle = value;
-    }
-
-    /**
-     * @hidden
-     * Initialization of the list header component
-     */
-    ngOnInit(): void {
-        this.id = `fdp-list-${nextListGrpHeaderId++}`;
+    /** @hidden */
+    private _waitForViewInit<SourceDataType>() {
+        return (source: Observable<SourceDataType>): Observable<SourceDataType> =>
+            source.pipe(
+                switchMap((src) =>
+                    this._afterViewInit$.pipe(
+                        filter((afterViewInit) => afterViewInit),
+                        map(() => src)
+                    )
+                )
+            );
     }
 }

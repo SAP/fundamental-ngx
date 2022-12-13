@@ -2,7 +2,6 @@
     [hint]="hintOptions"
     [placeholder]="_placeholder"
     [id]="formFieldName"
-    [i18Strings]="i18n"
     [column]="field.formItem?.guiOptions?.column || 1"
     [columnLayout]="field.formItem?.guiOptions?.columnLayout"
     [colon]="field.formItem?.guiOptions?.appendColon === true"
@@ -17,6 +16,27 @@
     [formGroup]="form"
     #formField
 >
+    <ng-container *ngFor="let error of _errorModels">
+        <span *fdpFormFieldError="error.type; let directiveError">
+            <ng-container *ngIf="_isAdvancedError(directiveError)">
+                <ng-container *ngIf="directiveError.heading">
+                    <span *fdpFormFieldErrorHeading="let validationError; type: directiveError.type">
+                        {{ validationError.heading }}
+                    </span>
+                </ng-container>
+                <ng-container *ngIf="directiveError.description">
+                    <span *fdpFormFieldErrorDescription="let validationError">
+                        {{ validationError.description }}
+                    </span>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!_isAdvancedError(directiveError)">
+                <span *fdpFormFieldErrorHeading="let validationError">
+                    {{ error.value ? error.value : validationError }}
+                </span>
+            </ng-container>
+        </span>
+    </ng-container>
     <ng-container
         [formField]="formField"
         [form]="form"

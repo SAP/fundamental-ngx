@@ -1,6 +1,6 @@
 @use '@angular/cdk';
-@import '~fundamental-styles/dist/slider';
-@import '~fundamental-styles/dist/input';
+@import 'fundamental-styles/dist/slider';
+@import 'fundamental-styles/dist/input';
 
 @include cdk.a11y-visually-hidden();
 
@@ -8,7 +8,7 @@
     display: block !important;
 }
 
-.fd-popover__popper.fd-slider--tooltip-popover {
+.fd-popover__body.fd-slider--tooltip-popover {
     top: -7px !important;
     overflow: hidden;
 

@@ -16,7 +16,7 @@ import {
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import {
     BACKSPACE,
     CONTROL,
@@ -305,17 +305,18 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     };
 
     /** @hidden */
-    constructor(
+    protected constructor(
         readonly cd: ChangeDetectorRef,
-        protected readonly elementRef: ElementRef,
+        elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
         protected comboboxConfig: ComboboxConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
     ) {
-        super(cd, ngControl, ngForm, formField, formControl);
+        super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }
 
     /** @hidden */

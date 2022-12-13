@@ -1,4 +1,5 @@
 {
+    "name": "docs-platform-search-field",
     "sourceRoot": "libs/docs/platform/search-field",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/platform/search-field/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-platform-search-field"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-platform-search-field"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

@@ -1,11 +1,12 @@
 {
+    "name": "fn-object-status",
     "projectType": "library",
     "sourceRoot": "libs/fn/src/lib/object-status",
     "prefix": "fn",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/fn/object-status"],
+            "outputs": ["{workspaceRoot}/dist/libs/fn/object-status"],
             "options": {
                 "project": "libs/fn/src/lib/object-status/ng-package.json"
             },

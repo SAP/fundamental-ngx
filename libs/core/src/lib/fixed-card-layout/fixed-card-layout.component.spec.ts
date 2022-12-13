@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CardModule } from '@fundamental-ngx/core/card';
-import { FixedCardLayoutComponent, FixedCardLayoutModule } from '@fundamental-ngx/core/fixed-card-layout';
+import { FixedCardLayoutComponent, FixedCardLayoutModule } from './public_api';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { RtlService } from '@fundamental-ngx/core/utils';
 

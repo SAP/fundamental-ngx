@@ -1,11 +1,12 @@
 {
+    "name": "platform-approval-flow",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/approval-flow",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/approval-flow"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/approval-flow"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/approval-flow/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/approval-flow/ng-package.json",

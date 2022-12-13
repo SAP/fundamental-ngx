@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import {
+    DeprecatedButtonAriaPressed,
+    DeprecatedButtonAriaSelected,
+    PlatformButtonModule
+} from '@fundamental-ngx/platform/button';
 
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
@@ -16,6 +20,7 @@ import {
     PlatformButtonTypesExampleComponent
 } from './examples/platform-button-examples.component';
 import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -40,6 +45,11 @@ const routes: Routes = [
         PlatformButtonTruncateExampleComponent,
         PlatformButtonStateExampleComponent
     ],
-    providers: [platformContentDensityModuleDeprecationsProvider('fdp-button'), currentComponentProvider('button')]
+    providers: [
+        platformContentDensityModuleDeprecationsProvider('fdp-button'),
+        moduleDeprecationsProvider(DeprecatedButtonAriaPressed),
+        moduleDeprecationsProvider(DeprecatedButtonAriaSelected),
+        currentComponentProvider('button')
+    ]
 })
 export class PlatformButtonDocsModule {}

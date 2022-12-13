@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { GridListModule, GridListTitleBarComponent } from '@fundamental-ngx/core/grid-list';
+import { GridListModule } from '../../grid-list.module';
+import { GridListTitleBarComponent } from './grid-list-title-bar.component';
 
 describe('GridListTitleBarComponent', () => {
     let component: GridListTitleBarComponent;

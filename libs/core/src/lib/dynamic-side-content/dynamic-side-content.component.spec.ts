@@ -4,15 +4,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
-import {
-    DYNAMIC_SIDE_CONTENT_CLASS_NAME,
-    DynamicSideContentPosition,
-    DynamicSideContentSize
-} from '@fundamental-ngx/core/dynamic-side-content';
-import { DynamicSideContentMainComponent } from '@fundamental-ngx/core/dynamic-side-content';
-import { DynamicSideContentSideComponent } from '@fundamental-ngx/core/dynamic-side-content';
-import { DynamicSideContentComponent } from '@fundamental-ngx/core/dynamic-side-content';
-import { DynamicSideContentModule } from '@fundamental-ngx/core/dynamic-side-content';
+import { DynamicSideContentPosition, DynamicSideContentSize, DYNAMIC_SIDE_CONTENT_CLASS_NAME } from './constants';
+import { DynamicSideContentMainComponent } from './dynamic-side-content-main.component';
+import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
+import { DynamicSideContentComponent } from './dynamic-side-content.component';
+import { DynamicSideContentModule } from './dynamic-side-content.module';
 
 @Component({
     template: `

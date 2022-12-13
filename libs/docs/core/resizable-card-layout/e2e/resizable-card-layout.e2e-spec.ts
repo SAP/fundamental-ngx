@@ -114,7 +114,7 @@ describe('Resizable card layout component:', () => {
     async function checkPinButtonWorking(section: string): Promise<void> {
         await click(section + button);
         await click(pinButton);
-        await expect(await getAttributeByName(pinButton, 'aria-selected')).toBe('true');
+        await expect(await getAttributeByName(pinButton, 'aria-pressed')).toBe('true');
         await click(closeButton);
     }
 

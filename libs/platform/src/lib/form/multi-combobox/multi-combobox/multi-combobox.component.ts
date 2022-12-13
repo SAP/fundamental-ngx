@@ -16,7 +16,7 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import equal from 'fast-deep-equal';
 
@@ -88,6 +88,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
         readonly _dynamicComponentService: DynamicComponentService,
@@ -96,11 +97,22 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         @Inject(MAP_LIMIT) _mapLimit: number,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
-        super(cd, elementRef, ngControl, ngForm, dialogConfig, _multiComboboxConfig, formField, formControl, _mapLimit);
+        super(
+            cd,
+            elementRef,
+            ngControl,
+            controlContainer,
+            ngForm,
+            dialogConfig,
+            _multiComboboxConfig,
+            formField,
+            formControl,
+            _mapLimit
+        );
     }
 
     /** @hidden */

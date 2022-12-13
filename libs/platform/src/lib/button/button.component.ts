@@ -12,6 +12,7 @@ import {
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { ButtonType, GlyphPosition } from '@fundamental-ngx/core/button';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
+import { ModuleDeprecation } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fdp-button',
@@ -43,13 +44,18 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     @Input()
     buttonType: ButtonType = 'standard';
 
+    /** Whether button is in toggled state. */
+    @Input()
+    toggled: Nullable<boolean>;
+
     /** arialabel, tooltip for truncated text
      * for acccesiblity of the element */
     @Input()
     title: Nullable<string>;
 
-    /** aria-selected for acccesiblity to
-     *  the native HTML button*/
+    /** @deprecated use toggled input property instead
+     * aria-selected for acccesiblity to the native HTML button
+     */
     @Input()
     ariaSelected: Nullable<boolean>;
 
@@ -72,9 +78,8 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     @Input()
     ariaControlsId: Nullable<string>;
 
-    /**
-     * propagate aria-pressed for accessiblity to
-     * the native HTML button
+    /** @deprecated use toggled input property instead
+     * propagate aria-pressed for accessiblity to the native HTML button
      */
     @Input()
     ariaPressed: Nullable<boolean>;
@@ -121,4 +126,28 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     public onBtnClick($event: any): void {
         this.buttonClicked.emit($event);
     }
+}
+
+export class DeprecatedButtonAriaSelected implements ModuleDeprecation {
+    /** @hidden */
+    message = 'ariaSelected input property is deprecated.';
+
+    /** @hidden */
+    alternative = {
+        name: 'Use [toggled] input property instead',
+        link: ['/platform', 'button'],
+        fragment: 'state'
+    };
+}
+
+export class DeprecatedButtonAriaPressed implements ModuleDeprecation {
+    /** @hidden */
+    message = 'ariaPressed input property is deprecated.';
+
+    /** @hidden */
+    alternative = {
+        name: 'Use [toggled] input property instead',
+        link: ['/platform', 'button'],
+        fragment: 'state'
+    };
 }

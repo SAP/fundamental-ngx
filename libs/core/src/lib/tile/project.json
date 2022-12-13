@@ -1,11 +1,12 @@
 {
+    "name": "core-tile",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/tile",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/tile"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/tile"],
             "options": {
                 "tsConfig": "libs/core/src/lib/tile/tsconfig.lib.json",
                 "project": "libs/core/src/lib/tile/ng-package.json",

@@ -214,9 +214,9 @@ export class PopoverComponent
     }
 
     /** Closes the popover. */
-    close(): void {
+    close(focusActiveElement = true): void {
         this.isOpen = false;
-        this._popoverService.close();
+        this._popoverService.close(focusActiveElement);
         this.isOpenChange.emit(this.isOpen);
         this._cdr.markForCheck();
     }

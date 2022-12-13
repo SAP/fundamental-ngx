@@ -1,11 +1,12 @@
 {
+    "name": "core-date-picker",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/date-picker",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/date-picker"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/date-picker"],
             "options": {
                 "tsConfig": "libs/core/src/lib/date-picker/tsconfig.lib.json",
                 "project": "libs/core/src/lib/date-picker/ng-package.json",

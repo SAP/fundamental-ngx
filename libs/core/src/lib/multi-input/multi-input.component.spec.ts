@@ -1,9 +1,10 @@
 import { SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { MultiInputComponent, MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 import { firstValueFrom } from 'rxjs';
+import { MultiInputComponent } from './multi-input.component';
+import { MultiInputModule } from './multi-input.module';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;

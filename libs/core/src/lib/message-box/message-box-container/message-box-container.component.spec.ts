@@ -3,14 +3,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import {
-    MessageBoxConfig,
-    MessageBoxContainerComponent,
-    MessageBoxContent,
-    MessageBoxModule,
-    MessageBoxRef
-} from '@fundamental-ngx/core/message-box';
 import { whenStable } from '@fundamental-ngx/core/tests';
+import { MessageBoxModule } from '../message-box.module';
+import { MessageBoxConfig } from '../utils/message-box-config.class';
+import { MessageBoxContent } from '../utils/message-box-content.class';
+import { MessageBoxRef } from '../utils/message-box-ref.class';
+import { MessageBoxContainerComponent } from './message-box-container.component';
 
 @Component({ template: '<ng-template #template></ng-template>' })
 class TestComponent {

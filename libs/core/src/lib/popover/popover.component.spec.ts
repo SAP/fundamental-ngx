@@ -3,7 +3,9 @@ import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import { OverlayModule } from '@angular/cdk/overlay';
 
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { PopoverComponent, PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
+import { PopoverService } from './popover-service/popover.service';
+import { PopoverComponent } from './popover.component';
+import { PopoverModule } from './popover.module';
 
 describe('PopoverComponent', () => {
     let component: PopoverComponent;

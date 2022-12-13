@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit.emit($event)" *ngIf="useForm; else body" [id]="id" [name]="name">
+<form #nativeForm (ngSubmit)="onSubmit.emit($event)" *ngIf="useForm; else body" [id]="id" [name]="name">
     <ng-container *ngTemplateOutlet="body"></ng-container>
 </form>
 
@@ -43,28 +43,28 @@
 <ng-content select="fdp-form-group"></ng-content>
 
 <ng-template #mainTitleTemplate>
-    <span class="fd-form-header__text" *ngIf="!_hintOptions?.text; else withHint">{{ mainTitle }}</span>
-    <ng-template #withHint>
-        <span class="fd-form-header__text">
-            <ng-container *ngIf="_hintOptions.position === 'before'">
-                <ng-template [ngTemplateOutlet]="hintTemplate"></ng-template>
-            </ng-container>
-            {{ mainTitle }}
-            <ng-container *ngIf="_hintOptions.position === 'after'">
-                <ng-template [ngTemplateOutlet]="hintTemplate"></ng-template>
-            </ng-container>
+    <ng-container *ngIf="_hintOptions?.text && _hintOptions.position === 'before'">
+        <ng-template [ngTemplateOutlet]="hintTemplate"></ng-template>
+    </ng-container>
+
+    <h5 class="fd-form-header__text">
+        {{ mainTitle }}
+    </h5>
+
+    <ng-container *ngIf="_hintOptions?.text && _hintOptions.position === 'after'">
+        <ng-template [ngTemplateOutlet]="hintTemplate"></ng-template>
+    </ng-container>
+
+    <ng-template #hintTemplate>
+        <span fd-link [undecorated]="true">
+            <fd-icon
+                [ariaLabel]="_hintOptions.text"
+                [fd-inline-help]="_hintOptions.text"
+                [glyph]="_hintOptions.glyph"
+                [placement]="_hintOptions.placement || null"
+                [triggers]="_hintOptions.trigger || []"
+                tabindex="0"
+            ></fd-icon>
         </span>
-        <ng-template #hintTemplate>
-            <span fd-link [undecorated]="true">
-                <fd-icon
-                    [ariaLabel]="_hintOptions.text"
-                    [fd-inline-help]="_hintOptions.text"
-                    [glyph]="_hintOptions.glyph"
-                    [placement]="_hintOptions.placement || null"
-                    [triggers]="_hintOptions.trigger || []"
-                    tabindex="0"
-                ></fd-icon>
-            </span>
-        </ng-template>
     </ng-template>
 </ng-template>

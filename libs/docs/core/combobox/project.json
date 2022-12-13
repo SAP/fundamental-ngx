@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-combobox",
     "sourceRoot": "libs/docs/core/combobox",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/combobox/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-combobox"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-combobox"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

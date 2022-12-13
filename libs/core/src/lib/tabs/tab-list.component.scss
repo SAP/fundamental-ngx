@@ -1,14 +1,14 @@
-@import '~fundamental-styles/dist/tabs';
+@import 'fundamental-styles/dist/tabs';
 
 .fd-tabs-custom {
     display: flex;
     flex-direction: column;
     height: 100%;
-}
 
-.is-disabled {
-    pointer-events: none;
-    opacity: 0.4;
+    .is-disabled {
+        pointer-events: none;
+        opacity: 0.4;
+    }
 }
 
 .fd-tabs {
@@ -59,33 +59,5 @@
                 }
             }
         }
-    }
-}
-
-// Temporary solution until the next styles release
-.fd-tabs__item--success .fd-tabs__link .fd-tabs__tag {
-    color: #107e3e;
-    color: var(--sapSuccessColor, #107e3e);
-}
-.fd-tabs__item--error .fd-tabs__link .fd-tabs__tag {
-    color: #b00;
-    color: var(--sapErrorColor, #b00);
-}
-.fd-tabs__item--warning .fd-tabs__link .fd-tabs__tag {
-    color: #e9730c;
-    color: var(--sapWarningColor, #e9730c);
-}
-.fd-tabs__item--information .fd-tabs__link .fd-tabs__tag {
-    color: #0a6ed1;
-    color: var(--sapInformationColor, #0a6ed1);
-}
-.fd-tabs__item--neutral .fd-tabs__link .fd-tabs__tag {
-    border-right-color: #6a6d70;
-    border-right-color: var(--sapNeutralBorderColor, #6a6d70);
-}
-.fd-tabs--filter .fd-tabs__link.is-selected {
-    &::after {
-        background-color: #0854a0;
-        background-color: var(--fdTabs_Selected_Color, var(--sapSelectedColor, #0854a0));
     }
 }

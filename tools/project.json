@@ -1,4 +1,5 @@
 {
+    "name": "workspace-tools",
     "sourceRoot": "tools",
     "projectType": "library",
     "targets": {
@@ -7,8 +8,8 @@
             "outputs": ["{options.outputPath}"],
             "options": {
                 "outputPath": "dist/tools",
-                "main": "libs/tools/index.ts",
-                "tsConfig": "libs/tools/tsconfig.tools.json",
+                "main": "tools/index.ts",
+                "tsConfig": "tools/tsconfig.tools.json",
                 "assets": [
                     {
                         "input": "./tools",

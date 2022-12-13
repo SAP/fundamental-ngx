@@ -1,0 +1,70 @@
+<fd-docs-section-title id="default" componentName="variant-management">
+    Variant Management Standard Usage
+</fd-docs-section-title>
+<description>
+    <p>Variant management consists of two main components:</p>
+    <ul>
+        <li><strong>Wrapper</strong>: <code>fdp-variant-management-wrapper</code></li>
+        <li><strong>Renderer</strong>: <code>fdp-variant-management</code></li>
+    </ul>
+    <p>
+        <strong>Wrapper</strong> component listens to the preset changes in components, thus, it should wrap all
+        <code>PresetManagedComponent</code> components.
+    </p>
+    <p>
+        <strong>Renderer</strong> component can be placed anywhere on the page, and the instance of it should be passed
+        back to the <strong>Wrapper</strong> component.
+    </p>
+    <p>
+        For the cases when <strong>Renderer</strong> component is placed inside <strong>Wrapper</strong> component and
+        reachable with <code>@ContentChild</code> decorator, Wrapper will automatically find it, so users don't need to
+        pass it instance directly.
+    </p>
+    <p>Developers can define custom Author name via <code>[userName]</code> input property.</p>
+    <p>
+        Variant object contains of <code>data</code> property, which should contain key-value object, where key is the
+        preset-managed component name, and the value is actual preset configuration.
+    </p>
+    <p>
+        In case variant management is used with multiple identical components, component's name can be set individually
+        via <code>[name]</code> Input property.
+    </p>
+</description>
+<component-example>
+    <fdp-doc-variant-management-default-example></fdp-doc-variant-management-default-example>
+</component-example>
+<code-example [exampleFiles]="variantManagementDefaultExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="table" componentName="variant-management">
+    Variant Management with Table
+</fd-docs-section-title>
+<description>
+    <p>
+        Variant Management component supports configuring all table properties such as: search, filters, columns,
+        pagination, grouping, sorting.
+    </p>
+</description>
+<component-example>
+    <fdp-doc-variant-management-table-example></fdp-doc-variant-management-table-example>
+</component-example>
+<code-example [exampleFiles]="variantManagementTableExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="dynamic-page" componentName="variant-management">
+    Variant Management with Dynamic Page
+</fd-docs-section-title>
+<description>
+    <p>Variant Management component can also be used inside Dynamic Page component.</p>
+    <p>
+        <strong>Please note:</strong> if you have multiple controlled components inside Dynamic page in different
+        sections (header, content, etc.), you would need to wrap whole dynamic page in order for all components to be
+        recognized.
+    </p>
+</description>
+<component-example>
+    <fdp-doc-variant-management-dynamic-page-example></fdp-doc-variant-management-dynamic-page-example>
+</component-example>
+<code-example [exampleFiles]="variantManagementDynamicPageExample"></code-example>

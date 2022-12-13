@@ -550,6 +550,44 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'
     },
+    platformMessagePopover: {
+        allErrors: 'All',
+        defaultErrors: {
+            email: 'Email is invalid',
+            max: 'The field exceeds maximum value',
+            maxLength: 'The field exceeds maximum length',
+            min: 'The field value is less than allowed',
+            minLength: 'The field length is less than allowed',
+            pattern: 'The field value is invalid',
+            required: 'The field is mandatory',
+            requiredTrue: 'The field is mandatory'
+        }
+    },
+    platformVariantManagement: {
+        manage: 'Manage',
+        saveAs: 'Save as',
+        saveView: 'Save View',
+        save: 'Save',
+        myViews: 'My Views',
+        view: 'View',
+        setAsDefault: 'Set as Default',
+        public: 'Public',
+        applyAutomatically: 'Apply Automatically',
+        requiredFieldError: 'This field is required.',
+        nameTakenFieldError: 'Variant with such name already exists. Please chose a different name.',
+        cancel: 'Cancel',
+        manageViews: 'Manage Views',
+        markAsFavourite: 'Mark as Favourite',
+        sharing: 'Sharing',
+        default: 'Default',
+        createdBy: 'Created By',
+        removeVariant: 'Remove View',
+        search: 'Search',
+        access: {
+            public: 'Public',
+            private: 'Private'
+        }
+    },
     fnSlider: {
         minMaxDetails: 'Il valore minimo dello slider è {{ min }}, il valore massimo è {{ max }}',
         valueminDetails: 'Il valore è  {{ value }}',

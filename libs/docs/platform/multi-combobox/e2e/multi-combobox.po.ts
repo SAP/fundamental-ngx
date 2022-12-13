@@ -11,7 +11,7 @@ export class MultiComboboxPo extends PlatformBaseComponentPo {
     tokenCloseButton = '.fd-token .fd-token__close';
     tokenInputField = '.fdp-multi-combobox-tokenizer-custom';
     inputField = this.tokenInputField + ' .fd-input';
-    list = '.fd-popover__popper .fd-list';
+    list = '.fd-popover__body .fd-list';
     listItemCheckbox = this.list + ' fd-checkbox';
     listItem = this.list + ' li.fd-list__item[role="listitem"]';
     selectedListItem = this.list + ' .fd-list__item.is-selected .fd-list__title';

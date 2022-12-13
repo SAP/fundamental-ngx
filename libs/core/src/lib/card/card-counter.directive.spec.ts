@@ -2,8 +2,8 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { CardCounterDirective } from '@fundamental-ngx/core/card';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
+import { CardCounterDirective } from './card-counter.directive';
 
 import { CLASS_NAME } from './constants';
 

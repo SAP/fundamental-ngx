@@ -33,9 +33,9 @@ export class FormGeneratorService implements OnDestroy {
     readonly forms: Map<string, DynamicFormGroup> = new Map<string, DynamicFormGroup>();
 
     /**
-     * @hidden
+     * Predefined validation error messages.
      */
-    private _validationErrorHints = DEFAULT_VALIDATION_ERRORS;
+    validationErrorHints = DEFAULT_VALIDATION_ERRORS;
 
     /** @hidden */
     private readonly _config: FormGeneratorConfig = defaultFormGeneratorConfig;
@@ -167,6 +167,8 @@ export class FormGeneratorService implements OnDestroy {
         form: DynamicFormGroup | DynamicFormControlGroup,
         renderValue = false
     ): Promise<DynamicFormValue> {
+        await this._triggerFieldsOnchange(form);
+
         const formValue = cloneDeep(form.value);
 
         for (const [i, control] of Object.entries(form.controls)) {
@@ -184,7 +186,6 @@ export class FormGeneratorService implements OnDestroy {
 
             if (formItem.transformer) {
                 const obj = formItem.transformer(formValue[i], formValue, formItem);
-
                 formValue[i] = await this._getFunctionValue(obj);
             }
 
@@ -224,7 +225,7 @@ export class FormGeneratorService implements OnDestroy {
      * and it's value is a display text.
      */
     getValidationErrorHints(key: string): string {
-        return this._validationErrorHints[key];
+        return this.validationErrorHints[key];
     }
 
     /**
@@ -233,7 +234,7 @@ export class FormGeneratorService implements OnDestroy {
      * @param value display text.
      */
     addValidationErrorHint(type: string, value: string): void {
-        this._validationErrorHints[type] = value;
+        this.validationErrorHints[type] = value;
     }
 
     /**
@@ -277,6 +278,18 @@ export class FormGeneratorService implements OnDestroy {
         }
 
         return control as DynamicFormGroupControl;
+    }
+
+    /** Resets the form to it's initial state. */
+    resetForm(form: DynamicFormGroup): void {
+        for (const control of Object.values(form.controls)) {
+            if (control instanceof DynamicFormControlGroup) {
+                this.resetForm(control);
+                return;
+            }
+            // Get default value
+            control.setValue(control.formItem.default);
+        }
     }
 
     /** @hidden */
@@ -484,5 +497,22 @@ export class FormGeneratorService implements OnDestroy {
         });
 
         return formItems;
+    }
+
+    /** @hidden */
+    private async _triggerFieldsOnchange(form: DynamicFormGroup | DynamicFormControlGroup): Promise<void> {
+        for (const control of Object.values(form.controls)) {
+            const formItem = control.formItem;
+
+            if (!this.isFormFieldItem(formItem)) {
+                await this._triggerFieldsOnchange(control as DynamicFormControlGroup);
+                continue;
+            }
+
+            if (formItem.onchange) {
+                const obj = formItem.onchange(control.value, this.forms, control as DynamicFormControl);
+                await this._getFunctionValue(obj);
+            }
+        }
     }
 }

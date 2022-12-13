@@ -1,11 +1,12 @@
 {
+    "name": "core-card",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/card",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/card"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/card"],
             "options": {
                 "tsConfig": "libs/core/src/lib/card/tsconfig.lib.json",
                 "project": "libs/core/src/lib/card/ng-package.json",

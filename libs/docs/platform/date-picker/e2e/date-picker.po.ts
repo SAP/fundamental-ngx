@@ -7,7 +7,7 @@ export class DatePicker extends PlatformBaseComponentPo {
     inputDatePicker = 'fd-date-picker input';
     buttonDatePicker = 'fd-date-picker button';
 
-    calendarExpanded = '.fd-popover__popper fd-calendar';
+    calendarExpanded = '.fd-popover__body fd-calendar';
     calendarYearsSection = '.fd-calendar__content--years';
 
     currentDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';

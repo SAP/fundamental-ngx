@@ -1,11 +1,12 @@
 {
+    "name": "core-object-identifier",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/object-identifier",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/object-identifier"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/object-identifier"],
             "options": {
                 "tsConfig": "libs/core/src/lib/object-identifier/tsconfig.lib.json",
                 "project": "libs/core/src/lib/object-identifier/ng-package.json",

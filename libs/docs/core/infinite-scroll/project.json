@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-infinite-scroll",
     "sourceRoot": "libs/docs/core/infinite-scroll",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/infinite-scroll/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-infinite-scroll"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-infinite-scroll"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

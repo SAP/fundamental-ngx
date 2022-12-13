@@ -119,6 +119,11 @@ export class ButtonComponent implements SelectableItemToken<string> {
     @Input()
     fdMenu = false;
 
+    @Input()
+    @coerceBoolean
+    @HostBinding('class.is-disabled')
+    disabled: BooleanInput = false;
+
     @Output() clicked: Observable<MouseEvent | KeyboardEvent>;
 
     /**
@@ -127,6 +132,18 @@ export class ButtonComponent implements SelectableItemToken<string> {
     @HostBinding('attr.class')
     get fnTypeClass(): string {
         return ['fn-button', this.fnType ? `fn-button--${this.fnType}` : '', this.class].filter((c) => !!c).join(' ');
+    }
+
+    /** @Hidden */
+    @HostBinding('attr.aria-disabled')
+    private get _ariaDisabled(): 'true' | null {
+        return this.disabled ? 'true' : null;
+    }
+
+    /** @hidden */
+    @HostBinding('disabled')
+    private get _disabledAttr(): Nullable<boolean> {
+        return this.disabled ? true : null;
     }
 
     /** @hidden */

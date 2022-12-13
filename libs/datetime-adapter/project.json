@@ -1,4 +1,5 @@
 {
+    "name": "datetime-adapter",
     "projectType": "library",
     "sourceRoot": "libs/datetime-adapter/src",
     "prefix": "fundamental-ngx",
@@ -18,7 +19,7 @@
         },
         "build": {
             "executor": "@nrwl/angular:package",
-            "outputs": ["dist/libs/datetime-adapter"],
+            "outputs": ["{workspaceRoot}/dist/libs/datetime-adapter"],
             "options": {
                 "project": "libs/datetime-adapter/ng-package.json",
                 "updateBuildableProjectDepsInPackageJson": false
@@ -35,7 +36,7 @@
         },
         "build-umbrella": {
             "executor": "@nrwl/angular:package",
-            "outputs": ["dist/libs/datetime-adapter"],
+            "outputs": ["{workspaceRoot}/dist/libs/datetime-adapter"],
             "options": {
                 "project": "libs/datetime-adapter/ng-package.json",
                 "updateBuildableProjectDepsInPackageJson": false

@@ -23,6 +23,8 @@ const listWithMoreButton = 'platform-list-with-more-button-example.component.htm
 const listWithMoreButtonTs = 'platform-list-with-more-button-example.component.ts';
 const listWithNoData = 'platform-list-with-nodata-example.component.html';
 const listWithUnRead = 'platform-list-with-unread-example.component.html';
+const listWithFreeContentHtml = 'platform-list-free-content-example.component.html';
+const listWithFreeContentTs = 'platform-list-free-content-example.component.ts';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 
@@ -199,6 +201,20 @@ export class PlatformListDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(listWithUnRead),
             fileName: 'platform-list-with-unread-example'
+        }
+    ];
+
+    listWithFreeContent: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(listWithFreeContentHtml),
+            fileName: 'platform-list-free-content-example'
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformListFreeContentExampleComponent',
+            code: getAssetFromModuleAssets(listWithFreeContentTs),
+            fileName: 'platform-list-free-content-example'
         }
     ];
 }

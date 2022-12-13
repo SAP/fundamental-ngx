@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-selectable-list",
     "sourceRoot": "libs/docs/fn/selectable-list",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/selectable-list/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-selectable-list"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-selectable-list"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

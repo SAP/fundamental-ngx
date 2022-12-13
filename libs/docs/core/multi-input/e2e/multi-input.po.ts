@@ -24,7 +24,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
     simpleExampleTokens = 'fd-multi-input-example fd-tokenizer fd-token';
     simpleHiddenAddonExampleTokens = 'fd-multi-input-example fd-multi-input:nth-of-type(3) fd-tokenizer fd-token';
     compactExampleTokens = 'fd-multi-input-compact-example fd-tokenizer fd-token';
-    popover = '.fd-popover__popper';
+    popover = '.fd-popover__body';
     checkboxInput = this.popover + ' fd-checkbox';
     listItem = this.popover + ' .fd-list__item';
     dialogCheckbox = '.fd-dialog fd-checkbox';

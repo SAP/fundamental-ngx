@@ -54,9 +54,15 @@ export class ScrollbarComponent {
         return this._alwaysVisible;
     }
 
+    /** Whether to force apply tabindex attribute. */
+    @Input()
+    overrideTabindex = true;
+
     /** @hidden */
     @HostBinding('attr.tabindex')
-    _tabindex = 0;
+    get _tabindex(): number | null {
+        return this.overrideTabindex ? 0 : null;
+    }
 
     /** @hidden */
     @HostBinding('style.overflow-x')

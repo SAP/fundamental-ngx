@@ -1,0 +1,43 @@
+{
+    "name": "platform-variant-management",
+    "projectType": "library",
+    "sourceRoot": "libs/platform/src/lib/variant-management",
+    "prefix": "fdp",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["{workspaceRoot}/dist/libs/platform/variant-management"],
+            "options": {
+                "project": "libs/platform/src/lib/variant-management/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/platform/src/lib/variant-management/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/platform/src/lib/variant-management/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/platform/src/lib/variant-management/test.ts",
+                "tsConfig": "libs/platform/src/lib/variant-management/tsconfig.spec.json",
+                "karmaConfig": "libs/platform/src/lib/variant-management/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/platform/src/lib/variant-management/**/*.ts",
+                    "libs/platform/src/lib/variant-management/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": ["scope:fdp", "type:lib"],
+    "implicitDependencies": ["core"]
+}

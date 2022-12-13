@@ -1201,8 +1201,8 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 calculateTableElementsMetaData();
 
                 expect(tableComponent._tableRows[0].expanded).toBeTrue();
-                expect(tableComponent._tableRows[2].level).toEqual(1);
-                expect(tableComponent._tableRows[3].level).toEqual(2);
+                expect(tableComponent._tableRows[2].level).toEqual(0);
+                expect(tableComponent._tableRows[3].level).toEqual(1);
             });
 
             it('should prevent from dropping row inside itself', () => {
@@ -1245,6 +1245,80 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 calculateTableElementsMetaData();
 
                 expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount - 1);
+            });
+
+            it('should have correct order of items before and after drag and drop', () => {
+                const row1 = tableComponent._tableRowsVisible[0];
+                const draggedRow = tableComponent._tableRowsVisible[1];
+                const row3 = tableComponent._tableRowsVisible[2];
+
+                tableComponent._dragDropItemDrop({
+                    items: [],
+                    replacedItemIndex: 2,
+                    draggedItemIndex: 1
+                });
+
+                fixture.detectChanges();
+
+                expect(row1).toEqual(tableComponent._tableRowsVisible[0]);
+                expect(draggedRow).toEqual(tableComponent._tableRowsVisible[3]);
+                expect(row3).toEqual(tableComponent._tableRowsVisible[1]);
+            });
+
+            it('should correctly drag and drop first element to last element', () => {
+                const draggedRow = tableComponent._tableRowsVisible[0];
+
+                tableComponent._dragDropItemDrop({
+                    items: [],
+                    replacedItemIndex: 9,
+                    draggedItemIndex: 0
+                });
+
+                fixture.detectChanges();
+
+                expect(draggedRow).toEqual(tableComponent._tableRowsVisible[10]);
+            });
+
+            it('should correctly drag and drop last element to first element', () => {
+                const draggedRow = tableComponent._tableRowsVisible[9];
+
+                tableComponent._dragDropItemDrop({
+                    items: [],
+                    replacedItemIndex: 0,
+                    draggedItemIndex: 9
+                });
+
+                fixture.detectChanges();
+
+                expect(draggedRow).toEqual(tableComponent._tableRowsVisible[2]);
+            });
+
+            it('should correctly drag and drop first element to in-between', () => {
+                const draggedRow = tableComponent._tableRowsVisible[0];
+
+                tableComponent._dragDropItemDrop({
+                    items: [],
+                    replacedItemIndex: 5,
+                    draggedItemIndex: 0
+                });
+
+                fixture.detectChanges();
+
+                expect(draggedRow).toEqual(tableComponent._tableRowsVisible[6]);
+            });
+
+            it('should correctly drag and drop last element to in-between', () => {
+                const draggedRow = tableComponent._tableRowsVisible[9];
+
+                tableComponent._dragDropItemDrop({
+                    items: [],
+                    replacedItemIndex: 5,
+                    draggedItemIndex: 9
+                });
+
+                fixture.detectChanges();
+
+                expect(draggedRow).toEqual(tableComponent._tableRowsVisible[5]);
             });
         });
     });

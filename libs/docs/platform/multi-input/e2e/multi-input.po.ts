@@ -26,7 +26,7 @@ export class MultiInputPo extends PlatformBaseComponentPo {
     selectedToken = "span[role='button']";
     dropdownOptionText = this.dropdownOptions + 'span';
     dropdownOptionTextValueHelp = '[role="option"]';
-    validationPopover = '.fd-popover__popper .fd-form-message';
+    validationPopover = '.fd-popover__body .fd-form-message';
     compactExampleTokens = 'fdp-platform-multi-input-compact-example fd-token';
     errorMessage = '.fd-form-message--error span';
     declineButton = '.fd-button[glyph=decline]';

@@ -15,6 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 import { SearchInput, SuggestionItem } from '../../interfaces/search-field.interface';
 import { Table } from '../../table';
 import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
+import { TableToolbarLeftActionsComponent } from './table-toolbar-left-actions.component';
 import { TableToolbarWithTemplate, TABLE_TOOLBAR } from './table-toolbar';
 import { TableService } from '../../table.service';
 
@@ -52,6 +53,9 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
     @Input()
     hideSearchInput = false;
 
+    /** Toggle to expand and collapse all feature */
+    @Input()
+    showExpandCollapseButtons = false;
     /** Suggestions for search field. */
     @Input()
     searchSuggestions: SuggestionItem[] = [];
@@ -65,6 +69,10 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
     tableToolbarActionsComponent: TableToolbarActionsComponent;
 
     /** @hidden */
+    @ContentChild(TableToolbarLeftActionsComponent)
+    _tableToolbarLeftActionsComponent: TableToolbarLeftActionsComponent;
+
+    /** @hidden */
     @ViewChild(TemplateRef)
     contentTemplateRef: TemplateRef<any>;
 
@@ -73,6 +81,9 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
 
     /** @hidden */
     _showSaveButton = false;
+
+    /** @hidden */
+    _searchInputText = '';
 
     /** @hidden */
     readonly tableLoading$: Observable<boolean> = this._tableService.tableLoading$;
@@ -153,5 +164,19 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
         this._table.cancel.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._showSaveButton = false;
         });
+
+        this._table.presetChanged.pipe(takeUntil(this._onDestroy$)).subscribe((state) => {
+            this._searchInputText = state.searchInput?.text ?? '';
+        });
+    }
+
+    /** @hidden */
+    _expandAll(): void {
+        this._table.expandAll();
+    }
+
+    /** @hidden */
+    _collapseAll(): void {
+        this._table.collapseAll();
     }
 }

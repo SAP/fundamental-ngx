@@ -4,13 +4,10 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import {
-    ActionSquashBreakpointPx,
-    DynamicPageHeaderComponent,
-    DynamicPageModule,
-    DynamicPageService
-} from '@fundamental-ngx/core/dynamic-page';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { DynamicPageModule } from '../../dynamic-page.module';
+import { DynamicPageService } from '../../dynamic-page.service';
+import { ActionSquashBreakpointPx, DynamicPageHeaderComponent } from './dynamic-page-header.component';
 
 @Component({
     template: ` <fd-dynamic-page-header [title]="title" [subtitle]="subtitle">

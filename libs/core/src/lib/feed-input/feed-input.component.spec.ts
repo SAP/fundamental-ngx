@@ -2,11 +2,9 @@ import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import {
-    FeedInputButtonDirective,
-    FeedInputModule,
-    FeedInputTextareaDirective
-} from '@fundamental-ngx/core/feed-input';
+import { FeedInputTextareaDirective } from './directives/feed-input-textarea.directive';
+import { FeedInputButtonDirective } from './directives/feed-input-button.directive';
+import { FeedInputModule } from './feed-input.module';
 
 @Component({
     template: `

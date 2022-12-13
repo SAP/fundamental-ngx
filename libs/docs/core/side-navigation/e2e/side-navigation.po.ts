@@ -19,7 +19,7 @@ export class SideNavigationPo extends CoreBaseComponentPo {
     pointContainsSubList = '.has-child ';
     expandArrow = this.pointContainsSubList + 'button';
     expandListExample = 'fd-popover-body ';
-    expandedListPoint = '.fd-popover__popper ul li a';
+    expandedListPoint = '.fd-popover__body ul li a';
     subList = '.level-2';
     subListItem = this.subList + ' li a';
     condensedObjectSelected = 'fd-nested-list__link ng-star-inserted is-selected';

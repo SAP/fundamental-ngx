@@ -1,1 +1,16 @@
-@import '~fundamental-styles/dist/vertical-nav';
+@import 'fundamental-styles/dist/vertical-nav';
+
+$block: fd-vertical-nav;
+
+.#{$block} {
+    .fd-popover__body {
+        --fdPopover_Offset: 100%;
+
+        max-width: unset;
+        max-height: unset;
+
+        &.fd-list__navigation-item-popover--first-level {
+            z-index: 1001;
+        }
+    }
+}

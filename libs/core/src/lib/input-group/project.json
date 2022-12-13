@@ -1,11 +1,12 @@
 {
+    "name": "core-input-group",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/input-group",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/input-group"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/input-group"],
             "options": {
                 "tsConfig": "libs/core/src/lib/input-group/tsconfig.lib.json",
                 "project": "libs/core/src/lib/input-group/ng-package.json",

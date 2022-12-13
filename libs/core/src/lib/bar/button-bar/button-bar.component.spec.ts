@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ButtonBarComponent } from './button-bar.component';
-import { ButtonModule } from '../../button/button.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 describe('ButtonBarComponent', () => {
     let component: ButtonBarComponent;

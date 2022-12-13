@@ -1,11 +1,14 @@
 import {
     AfterViewChecked,
+    AfterViewInit,
     ChangeDetectorRef,
     Directive,
     ElementRef,
     EventEmitter,
     HostListener,
+    inject,
     Input,
+    OnDestroy,
     OnInit,
     Output,
     TemplateRef,
@@ -13,14 +16,15 @@ import {
 } from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { ContentDensity, KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { BaseComponent, isPresent } from '@fundamental-ngx/platform/shared';
-import { ListType, SelectionType } from './list.component';
+import { ListComponent, ListType, SelectionType } from './list.component';
 import { ListConfig } from './list.config';
 import { ActionListItemComponent } from './action-list-item/action-list-item.component';
+import { FdpListComponent } from './fdpListComponent.token';
 
 export const IS_ACTIVE_CLASS = 'is-active';
 let nextListItemId = 0;
@@ -33,6 +37,14 @@ export type StatusType = 'negative' | 'critical' | 'positive' | 'informative';
 export interface ItemDef {
     templateRef: TemplateRef<any>;
 }
+
+export interface ListAdvancedDescription {
+    text: string;
+    ariaLabel?: string;
+    title?: string;
+}
+
+export type ListDescription = string | ListAdvancedDescription;
 
 export class ActionChangeEvent {
     /** Action List Item component */
@@ -58,7 +70,7 @@ export class ListItemDef implements ItemDef {
  * this can be extended to reduce the code duplication across list Item components.
  */
 @Directive()
-export class BaseListItem extends BaseComponent implements OnInit, AfterViewChecked {
+export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
     /** define label for screen reader */
     @Input()
     ariaLabelledBy: string;
@@ -85,7 +97,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** Description of the title */
     @Input()
-    description: Nullable<string>;
+    description: Nullable<ListDescription>;
 
     /** To invert the status of secondary text */
     @Input()
@@ -104,7 +116,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** attribute to hold secondary text*/
     @Input()
-    secondary?: string;
+    secondary: Nullable<ListDescription>;
 
     /**
      * Enabling this flag causes forcing secondary item directive to not wrap text,
@@ -212,9 +224,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      */
     _hasByLine = false;
 
-    /** @hidden */
-    _contentDensity: ContentDensity = this._listConfig.contentDensity;
-
     /**
      * @hidden
      * Whether listitem has row level selection enabled
@@ -232,6 +241,9 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      * get the focused element for key manager
      */
     _focused: boolean;
+
+    /** @hidden */
+    private _listComponent = inject<ListComponent<unknown>>(FdpListComponent);
 
     /** @hidden */
     constructor(
@@ -269,6 +281,17 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         this.id = `fdp-list-item-${nextListItemId++}`;
     }
 
+    /** @hidden */
+    ngOnDestroy(): void {
+        super.ngOnDestroy();
+        this.itemSelected.complete();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._listComponent._setupListItem(this);
+    }
+
     /**
      * @hidden
      * To detect changes from parent-listbox to list item
@@ -276,20 +299,20 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      * will be deducted in list item
      */
     ngAfterViewChecked(): void {
-        const currentitem: Nullable<HTMLLIElement> = this.itemEl.nativeElement.querySelector('li');
-        if (!currentitem) {
+        const currentItem: Nullable<HTMLLIElement> = this.itemEl.nativeElement.querySelector('li');
+        if (!currentItem) {
             return;
         }
 
-        currentitem.setAttribute('role', 'option');
-        const parentNode = currentitem.parentNode instanceof HTMLElement && currentitem.parentNode;
+        currentItem.setAttribute('role', 'option');
+        const parentNode = currentItem.parentNode instanceof HTMLElement && currentItem.parentNode;
         if (parentNode) {
             parentNode.removeAttribute('title');
             parentNode.removeAttribute('aria-label');
         }
 
         if (this.rowSelection || this.selectionMode === 'multi' || this.selectionMode === 'single') {
-            currentitem.setAttribute('aria-selected', `${!!this._selected}`);
+            currentItem.setAttribute('aria-selected', `${!!this._selected}`);
         }
 
         this._changeDetectorRef.detectChanges();
@@ -416,6 +439,11 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             this._onActionButtonClick(action);
         }
+    }
+
+    /** @hidden */
+    _isAdvancedText(text: ListDescription): text is ListAdvancedDescription {
+        return typeof text !== 'string' && !!text.text;
     }
 
     /** @hidden */

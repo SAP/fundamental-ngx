@@ -12,7 +12,7 @@ export class SplitButtonPo extends CoreBaseComponentPo {
     mainBtn = '.fd-button__text';
     arrowDownBtn = 'fd-split-button .fd-button:nth-of-type(2)';
     button = '.fd-button';
-    splitMenu = 'div.fd-popover__popper';
+    splitMenu = 'div.fd-popover__body';
     splitMenuItem = '.fd-menu__list li';
 
     async open(): Promise<void> {

@@ -1,9 +1,9 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 
-import { IconModule } from '../../../icon/icon.module';
-import { ButtonModule } from '../../../button/button.module';
-import { FdDate, FdDatetimeModule } from '../../../datetime';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { CalendarService } from '../../calendar.service';
 import { CalendarAggregatedYear } from '../../models/aggregated-year';
 import { CalendarAggregatedYearViewComponent } from './calendar-aggregated-year-view.component';

@@ -1,4 +1,5 @@
 {
+    "name": "docs-platform-panel",
     "sourceRoot": "libs/docs/platform/panel",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/platform/panel/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-platform-panel"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-platform-panel"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

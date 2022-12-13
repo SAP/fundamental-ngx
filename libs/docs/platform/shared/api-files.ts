@@ -109,5 +109,12 @@ export const API_FILES = {
         'SmartFilterBarSubjectDirective',
         'SmartFilterBarOptionsDataProvider',
         'SmartFilterBarSettingsDialogComponent'
-    ]
+    ],
+    messagePopover: [
+        'MessagePopoverComponent',
+        'MessagePopoverFormWrapperComponent',
+        'MessageViewComponent',
+        'MessagePopoverFormItemDirective'
+    ],
+    variantManagement: ['VariantManagementComponent', 'VariantManagementWrapperComponent']
 };

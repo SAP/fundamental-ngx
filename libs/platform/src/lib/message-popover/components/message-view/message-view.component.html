@@ -1,0 +1,134 @@
+<ng-template #headingTemplate let-item>
+    <ng-template #directiveHeading>
+        <ng-template
+            [ngTemplateOutlet]="item.heading.message || item.description.message"
+            [ngTemplateOutletContext]="{ $implicit: item.heading.error }"
+        ></ng-template>
+    </ng-template>
+    <ng-template #i18nHeading>
+        <ng-template
+            [ngTemplateOutlet]="item.heading.message"
+            [ngTemplateOutletContext]="{ $implicit: item.errors }"
+        ></ng-template>
+    </ng-template>
+    <ng-template #stringHeading>
+        {{ item.heading.message | fdTranslate: { error: item.heading.error }:item.heading.message }}
+    </ng-template>
+    <ng-template
+        [ngTemplateOutlet]="
+            item.heading.type === 'directive'
+                ? directiveHeading
+                : item.heading.type === 'string'
+                ? stringHeading
+                : i18nHeading
+        "
+    ></ng-template>
+</ng-template>
+
+<ng-template #descriptionTemplate let-item>
+    <ng-template #directiveDescription>
+        <ng-template
+            [ngTemplateOutlet]="item.description.message!"
+            [ngTemplateOutletContext]="{ $implicit: item.description.error }"
+        ></ng-template>
+    </ng-template>
+    <ng-template #i18nDescription>
+        <ng-template
+            [ngTemplateOutlet]="item.description.message!"
+            [ngTemplateOutletContext]="{ $implicit: item.errors }"
+        ></ng-template>
+    </ng-template>
+    <ng-template #stringDescription>
+        {{ item.description.message | fdTranslate: { error: item.description.error }:item.description.message }}
+    </ng-template>
+    <ng-template
+        [ngTemplateOutlet]="
+            item.heading.type === 'directive'
+                ? directiveDescription
+                : item.heading.type === 'string'
+                ? stringDescription
+                : i18nDescription
+        "
+    ></ng-template>
+</ng-template>
+
+<div class="fd-message-view">
+    <section
+        class="fd-message-view__list"
+        tabindex="-1"
+        [@openCloseList]="currentScreen === 'list' ? 'open' : 'closed'"
+        (@openCloseList.done)="_onListAnimationComplete($event)"
+        fd-scrollbar
+        [overrideTabindex]="false"
+    >
+        <ul #listView fd-list class="message-popover__list fd-list--message-view" [navigationIndicator]="true">
+            <ng-container *ngFor="let group of filteredErrors">
+                <li fd-list-group-header *ngIf="group.group">
+                    <span fd-list-title>{{ group.group }}</span>
+                </li>
+                <ng-container *ngFor="let item of group.errors; let i = index">
+                    <li
+                        fd-list-item
+                        [tabindex]="i === 0 ? 0 : -1"
+                        [ngClass]="{ 'fd-list__item--byline': !!item.description.message }"
+                        (click)="_showDetails(item)"
+                    >
+                        <a fd-list-link [navigationIndicator]="!!item.description.message">
+                            <span
+                                fd-object-status
+                                class="fd-list__icon"
+                                [status]="item.state"
+                                [glyph]="'message-' + item.type"
+                            ></span>
+                            <span fd-list-content>
+                                <span fd-list-title>
+                                    <a
+                                        tabindex="0"
+                                        *ngIf="item.element && !!item.description.message; else textHeading"
+                                        fd-link
+                                        (click)="_focusElement($event, item.element)"
+                                    >
+                                        {{ item.fieldName }}
+                                    </a>
+                                    <ng-template #textHeading>
+                                        {{ item.fieldName }}
+                                    </ng-template>
+                                </span>
+                                <span class="fd-list__subtitle">
+                                    <ng-template
+                                        [ngTemplateOutlet]="headingTemplate"
+                                        [ngTemplateOutletContext]="{ $implicit: item }"
+                                    ></ng-template>
+                                </span>
+                            </span>
+                        </a>
+                    </li>
+                </ng-container>
+            </ng-container>
+        </ul>
+    </section>
+    <section class="fd-message-view__details" [@openCloseDetails]="currentScreen === 'details' ? 'open' : 'closed'">
+        <div #detailsView>
+            <ng-container *ngIf="currentEntry">
+                <span class="fd-message-view__details-title">
+                    <span
+                        fd-object-status
+                        class="fd-message-view__icon"
+                        [status]="currentEntry.state"
+                        [glyph]="'message-' + currentEntry.type"
+                    ></span>
+                    <ng-template
+                        [ngTemplateOutlet]="headingTemplate"
+                        [ngTemplateOutletContext]="{ $implicit: currentEntry }"
+                    ></ng-template>
+                </span>
+                <span class="fd-message-view__details-description" *ngIf="currentEntry.description.message">
+                    <ng-template
+                        [ngTemplateOutlet]="descriptionTemplate"
+                        [ngTemplateOutletContext]="{ $implicit: currentEntry }"
+                    ></ng-template>
+                </span>
+            </ng-container>
+        </div>
+    </section>
+</div>

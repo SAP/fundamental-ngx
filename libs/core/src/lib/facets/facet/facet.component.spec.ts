@@ -4,14 +4,17 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { FacetComponent, FacetContentComponent, FacetModule } from '@fundamental-ngx/core/facets';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { TextModule } from '@fundamental-ngx/core/text';
-import { FACET_CLASS_NAME } from '@fundamental-ngx/core/facets';
+
+import { FacetComponent } from './facet.component';
+import { FacetContentComponent } from '../content/facet-content.component';
+import { FacetModule } from '../facet.module';
+import { FACET_CLASS_NAME } from '../constants';
 
 @Component({
     template: `

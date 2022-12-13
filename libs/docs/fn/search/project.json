@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-search",
     "sourceRoot": "libs/docs/fn/search",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/search/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-search"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-search"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

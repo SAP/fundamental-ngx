@@ -1,4 +1,5 @@
 {
+    "name": "platform",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib",
     "prefix": "fdp",
@@ -23,7 +24,7 @@
         },
         "build-umbrella": {
             "executor": "@nrwl/angular:package",
-            "outputs": ["dist/libs/platform"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/ng-package.json",

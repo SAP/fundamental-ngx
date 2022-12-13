@@ -1,11 +1,12 @@
 {
+    "name": "core-icon",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/icon",
     "prefix": "fd",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/core/icon"],
+            "outputs": ["{workspaceRoot}/dist/libs/core/icon"],
             "options": {
                 "tsConfig": "libs/core/src/lib/icon/tsconfig.lib.json",
                 "project": "libs/core/src/lib/icon/ng-package.json",

@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { ToolbarComponent, ToolbarItemDirective, ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { ToolbarItemDirective } from './toolbar-item.directive';
+import { ToolbarComponent } from './toolbar.component';
+import { ToolbarModule } from './toolbar.module';
 
 describe('ToolbarComponent', () => {
     let toolbar: ToolbarComponent;

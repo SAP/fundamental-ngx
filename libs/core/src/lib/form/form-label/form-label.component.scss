@@ -1,4 +1,4 @@
-@import '~fundamental-styles/dist/form-label';
+@import 'fundamental-styles/dist/form-label';
 
 $form-label-inline-help-placement-space: 0rem;
 $form-label-bottom-spacing: 0.125rem;
@@ -24,6 +24,11 @@ $form-label-bottom-spacing: 0.125rem;
 
 .fd-form-label {
     display: inline-block;
+
+    &__inline-help {
+        position: relative;
+        top: 0.125rem;
+    }
 }
 
 .fd-form-label__wrapper {

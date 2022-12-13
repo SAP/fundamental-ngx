@@ -1,3 +1,4 @@
+import { Nullable } from '@fundamental-ngx/core/shared';
 import {
     FilterStrategy,
     FilterDateStrategy,
@@ -12,7 +13,7 @@ export interface BaseCollectionFilter<T> {
     field: string;
     type?: FilterableColumnDataType;
     value: T;
-    value2?: T;
+    value2?: Nullable<T>;
     exclude?: boolean;
     strategy?: FilterStrategy;
 }

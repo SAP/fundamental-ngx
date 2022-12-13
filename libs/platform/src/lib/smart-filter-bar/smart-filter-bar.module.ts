@@ -32,6 +32,7 @@ import { SmartFilterBarConditionsDialogComponent } from './components/smart-filt
 import { SmartFilterBarConditionFieldComponent } from './components/smart-filter-bar-condition-field/smart-filter-bar-condition-field.component';
 import { SmartFilterBarService } from './smart-filter-bar.service';
 import { I18nModule } from '@fundamental-ngx/i18n';
+import { SmartFilterBarToolbarItemDirective } from './directives/smart-filter-bar-toolbar-item.directive';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         SmartFilterBarFieldDefinitionDirective,
         SmartFilterBarSubjectDirective,
         SmartFilterBarConditionsDialogComponent,
-        SmartFilterBarConditionFieldComponent
+        SmartFilterBarConditionFieldComponent,
+        SmartFilterBarToolbarItemDirective
     ],
     imports: [
         CommonModule,
@@ -71,7 +73,8 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         SmartFilterBarFieldDefinitionDirective,
         SmartFilterBarSubjectDirective,
         SmartFilterBarConditionsDialogComponent,
-        SmartFilterBarConditionFieldComponent
+        SmartFilterBarConditionFieldComponent,
+        SmartFilterBarToolbarItemDirective
     ],
     providers: [SmartFilterBarService, FormGeneratorService]
 })

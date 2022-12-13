@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DialogHeaderComponent } from './dialog-header.component';
 import { Component, Type, ViewChild } from '@angular/core';
 import { DialogConfig } from '../utils/dialog-config.class';
-import { TemplateModule } from '../../utils/directives/template/template.module';
-import { BarModule } from '../../bar/bar.module';
+import { TemplateModule } from '@fundamental-ngx/core/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
 
 @Component({
     template: `

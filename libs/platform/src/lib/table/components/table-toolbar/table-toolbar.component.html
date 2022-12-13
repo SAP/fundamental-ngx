@@ -9,13 +9,21 @@
         <label fd-toolbar-label [id]="tableToolbarTitleId" [class.fd-toolbar__title]="!!title">
             {{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span>
         </label>
-
+        <ng-container *ngIf="_tableToolbarLeftActionsComponent">
+            <fd-toolbar-separator></fd-toolbar-separator>
+            <ng-container *ngTemplateOutlet="_tableToolbarLeftActionsComponent._contentTemplateRef"></ng-container>
+        </ng-container>
         <fd-toolbar-spacer></fd-toolbar-spacer>
-
+        <ng-container *ngIf="showExpandCollapseButtons">
+            <fdp-button glyph="expand-all" (click)="_expandAll()"></fdp-button>
+            <fdp-button glyph="collapse-all" (click)="_collapseAll()"></fdp-button>
+            <fd-toolbar-spacer></fd-toolbar-spacer>
+        </ng-container>
         <fdp-search-field
             *ngIf="!hideSearchInput"
             style="min-width: 15.5rem"
             [placeholder]="'platformTable.toolbarSearchPlaceholder' | fdTranslate"
+            [inputText]="_searchInputText"
             [disabled]="!!(tableLoading$ | async)"
             [suggestions]="searchSuggestions"
             [ariaLabelledBy]="tableToolbarTitleId"

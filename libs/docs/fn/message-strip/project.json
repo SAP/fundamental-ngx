@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-message-strip",
     "sourceRoot": "libs/docs/fn/message-strip",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/message-strip/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-message-strip"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-message-strip"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

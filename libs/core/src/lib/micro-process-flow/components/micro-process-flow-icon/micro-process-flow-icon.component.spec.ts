@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
+import { MicroProcessFlowModule } from '../../micro-process-flow.module';
 
 const ICON_NAME = 'add';
 const FONT_NAME = 'SAP-icons';

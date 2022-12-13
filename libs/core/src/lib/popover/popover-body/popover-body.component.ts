@@ -4,7 +4,6 @@ import {
     Component,
     ElementRef,
     HostListener,
-    Renderer2,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -16,13 +15,7 @@ import { CdkTrapFocus } from '@angular/cdk/a11y';
 
 import { Subject } from 'rxjs';
 
-import {
-    ARROW_SIZE,
-    ArrowPosition,
-    Nullable,
-    PopoverFlippedXDirection,
-    PopoverPosition
-} from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
@@ -44,6 +37,12 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     providers: [contentDensityObserverProviders()]
 })
 export class PopoverBodyComponent {
+    /** Whether to wrap content with fd-scrollbar directive. */
+    _disableScrollbar = false;
+
+    /** Should fd-scrollbar have tabindex*/
+    _tabbableScrollbar = true;
+
     /** @hidden */
     @ViewChild(CdkTrapFocus)
     _cdkTrapFocus: CdkTrapFocus;
@@ -76,7 +75,7 @@ export class PopoverBodyComponent {
     _closeOnEscapeKey = false;
 
     /** Classes added to arrow element */
-    _arrowClasses: string[] = [];
+    _arrowClasses = '';
 
     /** Additional style to put margin into body component, to give a place for arrow */
     _marginStyle: Nullable<string> = null;
@@ -104,29 +103,44 @@ export class PopoverBodyComponent {
     constructor(
         readonly _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _renderer2: Renderer2,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** @hidden */
     _setArrowStyles(position: ConnectionPositionPair, rtl: 'rtl' | 'ltr'): void {
-        this._arrowClasses = [];
-
-        const arrowDirection = PopoverPosition.getArrowPosition(position, rtl === 'rtl');
-        this._arrowClasses.push(`fd-popover__arrow--${arrowDirection}`);
-
-        if (arrowDirection === 'top' || arrowDirection === 'bottom') {
-            let _position: string = position.overlayX;
-            if (rtl === 'rtl') {
-                _position = PopoverFlippedXDirection[_position];
-            }
-            this._arrowClasses.push(`fd-popover__arrow-x--${_position}`);
-        } else if (arrowDirection === 'start' || arrowDirection === 'end') {
-            this._arrowClasses.push(`fd-popover__arrow-y--${position.overlayY}`);
+        if (this._noArrow) {
+            this._arrowClasses = '';
+            return;
         }
 
-        this._removeOldMarginsStyle();
-        this._addMarginStyle(arrowDirection);
+        if (
+            position.overlayY !== position.originY &&
+            position.originY !== 'center' &&
+            position.overlayY !== 'center' &&
+            position.overlayX === position.originX
+        ) {
+            this._arrowClasses =
+                `fd-popover__body--${position.overlayY === 'top' ? 'below' : 'above'}` +
+                ` fd-popover__body--arrow-${position.overlayY}` +
+                ` fd-popover__body--arrow-x-${position.originX} `;
+        } else if (
+            position.overlayX !== position.originX &&
+            position.overlayX !== 'center' &&
+            position.originX !== 'center' &&
+            position.originY === position.overlayY
+        ) {
+            let overlayX = position.overlayX;
+            if (rtl === 'rtl') {
+                overlayX = position.overlayX === 'end' ? 'start' : 'end';
+            }
+
+            this._arrowClasses =
+                `fd-popover__body--${overlayX === 'start' ? 'after' : 'before'}` +
+                ` fd-popover__body--arrow-${overlayX === 'start' ? 'left' : 'right'}` +
+                ` fd-popover__body--arrow-y-${position.originY} `;
+        } else {
+            this._arrowClasses = 'fd-popover__body--no-arrow';
+        }
 
         this.detectChanges();
     }
@@ -143,22 +157,5 @@ export class PopoverBodyComponent {
         if (this._focusAutoCapture) {
             this._cdkTrapFocus.focusTrap.focusFirstTabbableElement();
         }
-    }
-
-    /** @hidden */
-    private _addMarginStyle(arrowDirection: ArrowPosition | null): void {
-        if (arrowDirection) {
-            this._renderer2.setStyle(
-                this._elementRef.nativeElement,
-                PopoverPosition.getMarginDirection(arrowDirection),
-                ARROW_SIZE
-            );
-        }
-    }
-
-    /** @hidden */
-    private _removeOldMarginsStyle(): void {
-        const margins = ['margin-top', 'margin-right', 'margin-bottom', 'margin-left'];
-        margins.forEach((margin) => this._renderer2.removeStyle(this._elementRef.nativeElement, margin));
     }
 }

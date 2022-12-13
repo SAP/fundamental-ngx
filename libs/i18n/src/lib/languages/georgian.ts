@@ -538,6 +538,44 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     platformWizardGenerator: {
         summarySectionEditStep: 'შესწორება'
     },
+    platformMessagePopover: {
+        allErrors: 'ყველა',
+        defaultErrors: {
+            email: 'ელ-ფოსტა არასწორია',
+            max: 'ველის მნიშვნელობა აღემატება დაშვებულ მაქსიმუმს',
+            maxLength: 'ველის მოცულობა აღემატება დაშვებულ მაქსიმუმს',
+            min: 'ველის მნიშვნელობა აუცილებელ მინიმუმზე ნაკლებია',
+            minLength: 'ველის მოცულობა აუცილებელ მინიმუმზე ნაკლებია',
+            pattern: 'ველის მნიშვნელობა არასწორია',
+            required: 'ველი სავალდებულოა',
+            requiredTrue: 'ველის შეყვანა სავალდებულოა'
+        }
+    },
+    platformVariantManagement: {
+        manage: 'მართვა',
+        saveAs: 'შენახვა როგორც',
+        saveView: 'ვარიანტის შენახვა',
+        save: 'შენახვა',
+        myViews: 'ჩემი ვარიანტები',
+        view: 'ვარიანტი',
+        setAsDefault: 'ნაგულისხმევად გამოყენება',
+        public: 'საჯარო',
+        applyAutomatically: 'ავტომატურად გამოყენება',
+        requiredFieldError: 'ეს ველი სავალდებულოა.',
+        nameTakenFieldError: 'ვარიანტი ამ სახელით უკვე არსებობს. გთხოვთ, გამოიყენოთ სხვა სახელი.',
+        cancel: 'გაუქმება',
+        manageViews: 'ვარიანტების მართვა',
+        markAsFavourite: 'ფავორიტად მონიშვნა',
+        sharing: 'ხილვადობა',
+        default: 'ნაგულისხმევი',
+        createdBy: 'შემქმნელი',
+        removeVariant: 'ვარიანტის წაშლა',
+        search: 'ძებნა',
+        access: {
+            public: 'საჯარო',
+            private: 'პირადი'
+        }
+    },
     fnSlider: {
         minMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{ min }}, მაქსიმალური - {{ max }}',
         valueminDetails: 'მნიშვნელობა არის {{ value }}',

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { AvatarComponent, AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarModule } from './avatar.module';
+import { AvatarComponent } from './avatar.component';
 
 @Component({
     selector: 'fd-test-object-status',

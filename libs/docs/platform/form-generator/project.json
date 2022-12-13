@@ -1,4 +1,5 @@
 {
+    "name": "docs-platform-form-generator",
     "sourceRoot": "libs/docs/platform/form-generator",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/platform/form-generator/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-platform-form-generator"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-platform-form-generator"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

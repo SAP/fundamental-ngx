@@ -16,4 +16,12 @@ export class SelectEditableExampleComponent {
         'Tomato',
         'Strawberry'
     ];
+
+    options2: { name: string; kCal: string }[] = [
+        { name: 'Apple', kCal: '49.05' },
+        { name: 'Apple', kCal: '50' },
+        { name: 'Kiwi', kCal: '36' },
+        { name: 'Tomato', kCal: '24' },
+        { name: 'Strawberry', kCal: '32' }
+    ];
 }

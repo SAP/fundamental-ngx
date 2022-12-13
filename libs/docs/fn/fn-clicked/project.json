@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-clicked",
     "sourceRoot": "libs/docs/fn/fn-clicked",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/fn-clicked/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-fn-clicked"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-fn-clicked"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

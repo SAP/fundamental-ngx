@@ -1,4 +1,5 @@
 {
+    "name": "docs-platform-list",
     "sourceRoot": "libs/docs/platform/list",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/platform/list/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-platform-list"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-platform-list"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

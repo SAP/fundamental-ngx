@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-shared",
     "projectType": "library",
     "sourceRoot": "libs/shared/src",
     "prefix": "fundamental-ngx",

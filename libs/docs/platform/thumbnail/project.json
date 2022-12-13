@@ -1,4 +1,5 @@
 {
+    "name": "docs-platform-thumbnail",
     "sourceRoot": "libs/docs/platform/thumbnail",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/platform/thumbnail/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-platform-thumbnail"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-platform-thumbnail"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

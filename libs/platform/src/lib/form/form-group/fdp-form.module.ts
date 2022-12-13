@@ -16,6 +16,9 @@ import { LinkModule } from '@fundamental-ngx/core/link';
 import { FieldGroupRowValuePipe } from './pipes/field-group-row-value.pipe';
 import { DeprecatedFormGroupCompactDirective } from './deprecated-form-group-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { FormFieldErrorDirective } from './form-field-error/form-field-error.directive';
+import { FormFieldErrorHeadingDirective } from './form-field-error/form-field-error-heading.directive';
+import { FormFieldErrorDescriptionDirective } from './form-field-error/form-field-error-description.directive';
 
 const EXPORTABLE_DECLARATIONS = [
     FormGroupComponent,
@@ -25,7 +28,10 @@ const EXPORTABLE_DECLARATIONS = [
     FormFieldControlExtrasComponent,
     FormGroupHeaderComponent,
     FieldGroupRowValuePipe,
-    DeprecatedFormGroupCompactDirective
+    DeprecatedFormGroupCompactDirective,
+    FormFieldErrorDirective,
+    FormFieldErrorHeadingDirective,
+    FormFieldErrorDescriptionDirective
 ];
 
 @NgModule({

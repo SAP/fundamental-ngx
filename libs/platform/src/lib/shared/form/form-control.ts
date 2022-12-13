@@ -1,7 +1,10 @@
+import { ElementRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { Observable } from 'rxjs';
+import { FormField } from './form-field';
 
-export abstract class FormFieldControl<T> {
+export abstract class FormFieldControl<T = any> {
     /**
      * Each input control has always a value. Need to make sure we keep a convention for
      * input fields
@@ -27,11 +30,6 @@ export abstract class FormFieldControl<T> {
      * This should be coming from Parent.
      */
     editable: boolean;
-
-    // /**
-    //  *  Components works in two sizes compact or cozy
-    //  */
-    // contentDensity: ContentDensity;
 
     /**
      * The height of the extra content at the bottom of the form control,
@@ -61,6 +59,13 @@ export abstract class FormFieldControl<T> {
     /** Whether control has errors */
     readonly controlInvalid: boolean;
 
+    /** Corresponding element reference. */
+    readonly elementRef: ElementRef;
+
+    /** Form field instance. */
+    formField: Nullable<FormField>;
+
+    /** Method for focusing on the element */
     abstract focus(event?: MouseEvent): void;
 
     /**

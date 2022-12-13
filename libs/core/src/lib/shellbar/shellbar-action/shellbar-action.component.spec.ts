@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ShellbarActionComponent } from './shellbar-action.component';
-import { ButtonModule } from '../../button/button.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 describe('ShellbarActionComponent', () => {
     let component: ShellbarActionComponent;

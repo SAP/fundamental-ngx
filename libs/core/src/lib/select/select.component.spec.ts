@@ -4,7 +4,7 @@ import { B, DOWN_ARROW, END, ENTER, ESCAPE, HOME, SPACE, TAB, X } from '@angular
 import { ModifierKeys } from '@angular/cdk/testing';
 
 import { SelectComponent } from './select.component';
-import { PopoverComponent } from '../popover/popover.component';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { SelectModule } from './select.module';
 import { SelectKeyManagerService } from './select-key-manager.service';
 import { OptionComponent } from './option/option.component';
@@ -417,7 +417,7 @@ describe('SelectComponent', () => {
             element = fixtureFilter.componentInstance.selectElement;
             fixtureFilter.detectChanges();
 
-            triggerControl = fixtureFilter.nativeElement.querySelector('div.fd-select');
+            triggerControl = fixtureFilter.nativeElement.querySelector('fd-select');
         });
 
         it('should make active second option "bbb" when start typing "b"', fakeAsync(() => {

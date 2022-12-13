@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-timeline",
     "sourceRoot": "libs/docs/core/timeline",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/timeline/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-timeline"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-timeline"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

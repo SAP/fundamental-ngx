@@ -34,7 +34,7 @@ describe('InlineHelpDirective', () => {
     });
 
     it('should show the inline help on hover', () => {
-        const selector = '.fd-popover__popper.fd-inline-help__content';
+        const selector = '.fd-popover__body.fd-inline-help__content';
         expect(document.body.querySelector(selector)).toBeFalsy();
         component.ref.nativeElement.dispatchEvent(new Event('mouseenter'));
         expect(document.body.querySelector(selector)).toBeTruthy();
@@ -43,7 +43,7 @@ describe('InlineHelpDirective', () => {
     });
 
     it('should hide the inline help if host element is destroyed', () => {
-        const selector = '.fd-popover__popper.fd-inline-help__content';
+        const selector = '.fd-popover__body.fd-inline-help__content';
         expect(document.body.querySelector(selector)).toBeFalsy();
         component.ref.nativeElement.dispatchEvent(new Event('mouseenter'));
         expect(document.body.querySelector(selector)).toBeTruthy();

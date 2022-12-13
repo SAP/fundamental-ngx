@@ -1,11 +1,12 @@
 {
+    "name": "platform-form",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/form",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/form"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/form"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/form/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/form/ng-package.json",

@@ -741,6 +741,44 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     platformWizardGenerator: {
         summarySectionEditStep: 'Редактировать'
     },
+    platformMessagePopover: {
+        allErrors: 'Все',
+        defaultErrors: {
+            email: 'Значение поля не соответствует формату E-mail',
+            max: 'Значение поля превышает максимально допустимое',
+            maxLength: 'Длина значения поля превышает максимально допустимое',
+            min: 'Значение поля меньше минимально допустимого',
+            minLength: 'Длина значения поля меньше максимально допустимого',
+            pattern: 'Поле не соответствует формату',
+            required: 'Обязательное поле',
+            requiredTrue: 'Обязательное поле'
+        }
+    },
+    platformVariantManagement: {
+        manage: 'Управление',
+        saveAs: 'Сохранить как',
+        saveView: 'Сохранить Вид',
+        save: 'Сохранить',
+        myViews: 'Мои Виды',
+        view: 'Вид',
+        setAsDefault: 'Установить по умолчанию',
+        public: 'Публичный',
+        applyAutomatically: 'Применять автоматически',
+        requiredFieldError: 'Обязательное поле.',
+        nameTakenFieldError: 'Вид с таким именем уже существует. Введите другое имя.',
+        cancel: 'Отменить',
+        manageViews: 'Управление видами',
+        markAsFavourite: 'Отметить как избранное',
+        sharing: 'Совместное использование',
+        default: 'По умолчанию',
+        createdBy: 'Создал(а)',
+        removeVariant: 'Удалить вид',
+        search: 'Поиск',
+        access: {
+            public: 'Публичное',
+            private: 'Приватное'
+        }
+    },
     fnSlider: {
         minMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',
         valueminDetails: 'Значение равно {{ value }}',

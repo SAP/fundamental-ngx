@@ -33,6 +33,14 @@ export class BasePopoverClass {
     @Input()
     closeOnEscapeKey = true;
 
+    /** Whether to wrap content with fd-scrollbar directive. */
+    @Input()
+    disableScrollbar = false;
+
+    /** Should fd-scrollbar have tabindex*/
+    @Input()
+    tabbableScrollbar = true;
+
     /**
      * The placement of the popover.
      * It can be one of:
@@ -141,4 +149,5 @@ export interface TriggerConfig {
     trigger: string;
     openAction: boolean;
     closeAction: boolean;
+    stopPropagation?: boolean;
 }

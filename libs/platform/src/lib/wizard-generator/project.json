@@ -1,11 +1,12 @@
 {
+    "name": "platform-wizard-generator",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/wizard-generator",
     "prefix": "fdp",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/platform/wizard-generator"],
+            "outputs": ["{workspaceRoot}/dist/libs/platform/wizard-generator"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/wizard-generator/tsconfig.lib.json",
                 "project": "libs/platform/src/lib/wizard-generator/ng-package.json",

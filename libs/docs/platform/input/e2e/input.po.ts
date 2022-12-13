@@ -22,7 +22,7 @@ export class InputPo extends PlatformBaseComponentPo {
     inputsArray = 'input.fd-input';
     autocompleteInput = 'input#form-input-10';
     autocompleteInputLabel = 'fdp-platform-input-auto-complete-validation-example label';
-    autocompleteOptions = '.fd-popover__popper li';
+    autocompleteOptions = '.fd-popover__body li';
     errorMessage = '.fd-form-message--error span';
 
     async open(): Promise<void> {

@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-
-import { MenuComponent, MenuInteractiveDirective, MenuItemComponent, MenuModule } from '@fundamental-ngx/core/menu';
+import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
+import { MenuComponent } from '../menu.component';
+import { MenuModule } from '../menu.module';
+import { MenuItemComponent } from './menu-item.component';
 
 @Component({
     template: `
@@ -229,7 +231,7 @@ describe('MenuItemComponent nested', () => {
         expect(menuItemWithNestedMenu.submenuVisible).toBeTrue();
 
         // Hover moves on sibling menu item
-        menu.menuItems.first.menuInteractive.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
+        menu._menuItems.first.menuInteractive.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
         tick();
 
         // the second option submenu gets closed

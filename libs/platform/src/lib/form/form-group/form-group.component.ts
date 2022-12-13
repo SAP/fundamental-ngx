@@ -39,9 +39,10 @@ import {
     QueryList,
     SimpleChanges,
     TemplateRef,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormGroup, NgForm } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
@@ -68,6 +69,7 @@ import {
     isFieldGroupChild,
     isFieldGroupWrapperChild
 } from '../form-helpers';
+import { FormFieldErrorDirective } from './form-field-error/form-field-error.directive';
 import { FormFieldComponent } from './form-field/form-field.component';
 import {
     DefaultGapLayout,
@@ -306,7 +308,7 @@ export class FormGroupComponent
     @Input()
     columnLayout: Nullable<string>;
 
-    /** Whether or not all form items should have identical layout provided for form group */
+    /** Whether all form items should have identical layout provided for form group */
     @Input()
     unifiedLayout = true;
 
@@ -317,9 +319,19 @@ export class FormGroupComponent
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onSubmit: EventEmitter<any> = new EventEmitter<any>();
 
+    /**
+     * Native form element. Available with `[useForm]="true"` input property.
+     */
+    @ViewChild('nativeForm', { read: NgForm })
+    nativeForm: NgForm;
+
     /** @hidden */
     @ContentChild('i18n', { static: true })
     i18Template: TemplateRef<any>;
+
+    /** @hidden */
+    @ContentChildren(FormFieldErrorDirective)
+    private _errorDirectives: QueryList<FormFieldErrorDirective>;
 
     /**
      * @hidden
@@ -630,11 +642,12 @@ export class FormGroupComponent
         }
         formField.setDefaultColumnLayout();
         formField.i18Strings = formField.i18Strings ? formField.i18Strings : this.i18Strings;
+        formField.setErrorDirectives(this._errorDirectives);
     }
 
     /**
      * @hidden
-     * if `columnLayoutType` is given, set those column layouts appropriately. Otherwise a layout will set on 1 column
+     * if `columnLayoutType` is given, set those column layouts appropriately. Otherwise, a layout will set on 1 column
      */
     private _setUserLayout(): void {
         if (this.columnLayout) {

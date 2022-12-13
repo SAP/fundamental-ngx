@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-progress-bar",
     "sourceRoot": "libs/docs/fn/progress-bar",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/progress-bar/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-progress-bar"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-progress-bar"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { PlatformSliderModule } from '../../slider/slider.module';
+import { PlatformSliderModule } from '@fundamental-ngx/platform/slider';
 import { FormGeneratorComponentsAccessorService } from './form-generator-components-accessor.service';
 import { FormGeneratorService } from './form-generator.service';
 import { DynamicFormFieldItem } from './interfaces/dynamic-form-item';

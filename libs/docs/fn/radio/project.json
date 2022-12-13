@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-radio",
     "sourceRoot": "libs/docs/fn/radio",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/radio/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-radio"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-radio"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

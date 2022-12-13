@@ -1,4 +1,5 @@
 {
+    "name": "docs-core-dialog",
     "sourceRoot": "libs/docs/core/dialog",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -9,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/dialog/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-dialog"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-dialog"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

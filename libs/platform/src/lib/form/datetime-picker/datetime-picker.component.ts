@@ -14,7 +14,7 @@ import {
     SkipSelf,
     ViewChild
 } from '@angular/core';
-import { NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { CalendarYearGrid, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
@@ -268,16 +268,17 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     /** @hidden */
     constructor(
         protected _cd: ChangeDetectorRef,
-        readonly elementRef: ElementRef,
+        elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
         // Use here @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {
-        super(_cd, ngControl, ngForm, formField, formControl);
+        super(_cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
 
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');

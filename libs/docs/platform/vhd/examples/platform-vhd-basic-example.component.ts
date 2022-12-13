@@ -113,7 +113,7 @@ export class PlatformVhdBasicExampleComponent {
 }
 
 // Simulating real http request by adding 300ms delay to the DataProvider's "fetch" method
-class DelayedVhdDataProvider<T> extends VhdDataProvider<T> {
+class DelayedVhdDataProvider<T extends object> extends VhdDataProvider<T> {
     fetch(params: Map<string, string>): Observable<T[]> {
         return super.fetch(params).pipe(delay(300));
     }

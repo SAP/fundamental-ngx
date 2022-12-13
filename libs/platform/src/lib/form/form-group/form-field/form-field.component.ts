@@ -5,6 +5,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
+    ContentChildren,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -17,6 +18,7 @@ import {
     Optional,
     Output,
     Provider,
+    QueryList,
     Self,
     SimpleChanges,
     SkipSelf,
@@ -25,6 +27,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { uniqBy } from 'lodash-es';
 import { BehaviorSubject, combineLatest, filter, Observable, Subject, Subscription, tap } from 'rxjs';
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
@@ -32,8 +35,10 @@ import {
     Column,
     ColumnLayout,
     FieldHintOptions,
+    FormError,
     FormField,
     FormFieldControl,
+    FormFieldErrorDirectiveContext,
     FormFieldGroup,
     FormGroupContainer,
     HintPlacement,
@@ -42,7 +47,8 @@ import {
     ResponsiveBreakPointConfig,
     ResponsiveBreakpointsService
 } from '@fundamental-ngx/platform/shared';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
+import { getFormState } from '../../helpers';
 import {
     DefaultHorizontalFieldLayout,
     DefaultHorizontalLabelLayout,
@@ -50,6 +56,7 @@ import {
     DefaultVerticalLabelLayout,
     FORM_GROUP_CHILD_FIELD_TOKEN
 } from '../constants';
+import { FormFieldErrorDirective } from '../form-field-error/form-field-error.directive';
 import { generateColumnClass, normalizeColumnLayout } from '../helpers';
 import { FormFieldControlExtrasComponent } from '../form-field-extras/form-field-extras.component';
 import { InputMessageGroupWithTemplate } from '../../input-message-group-with-template/input-message-group-with-template.component';
@@ -306,11 +313,20 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     formFieldExtras?: ElementRef<HTMLElement>;
 
     /** @hidden */
+    @ContentChildren(FormFieldErrorDirective)
+    private _errorDirectiveQuery: QueryList<FormError>;
+
+    /** @hidden */
     @ViewChild('labelCol') labelCol?: ElementRef<HTMLDivElement>;
 
     /** @hidden */
     @ViewChild(InputMessageGroupWithTemplate, { read: ElementRef })
     inputMessageGroup: ElementRef<HTMLElement>;
+
+    /** Combined Error directives from field itself and parent form container. */
+    get errorDirectives(): FormError[] {
+        return uniqBy([...this._errorDirectives, ...this._formGroupErrorDirectives], 'error');
+    }
 
     /** @hidden */
     isHorizontal$: Observable<boolean>;
@@ -318,7 +334,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     /**
      * Child FormFieldControl
      */
-    control: FormFieldControl<any> | null;
+    control: FormFieldControl | null;
 
     /** @hidden */
     _labelColumnLayoutClass: string;
@@ -333,6 +349,15 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * hint and hint placement coerced to the FieldHintOptions
      */
     hintOptions: FieldHintOptions = defaultFormFieldHintOptions as unknown as FieldHintOptions;
+
+    /** @hidden */
+    _errorDirectives: FormError[] = [];
+
+    /** Grouped errors. */
+    groupedErrors: FormFieldErrorDirectiveContext[] = [];
+
+    /** Event emited when errors object being changed. */
+    errorsChange$ = new Subject<void>();
 
     /**
      * @hidden
@@ -386,6 +411,15 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     private _fieldColumnLayout: ColumnLayout;
     /** @hidden */
     private _gapColumnLayout: ColumnLayout;
+
+    /** @hidden */
+    private _formGroupErrorDirectives: FormError[] = [];
+
+    /** @hidden */
+    private _formGroupErrorDirectivesSubscription: Subscription;
+
+    /** @hidden */
+    private _errorDirectivesCdr: Subscription;
 
     /** @hidden whether label and control are vertically aligned */
     private get _isHorizontalAlignment(): boolean {
@@ -463,8 +497,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this._labelColumnLayout$ = new BehaviorSubject(this._labelColumnLayout);
         this._fieldColumnLayout$ = new BehaviorSubject(this._fieldColumnLayout);
         this._gapColumnLayout$ = new BehaviorSubject(this._gapColumnLayout);
-        // provides capability to make a field disabled. useful in reactive form approach.
-        this.formControl = new FormControl({ value: null, disabled: this.disabled });
         // formGroupContainer can be injected only if current form-field is located
         // insight formGroupContainer content.
         // If this is not the case the formGroupContainer
@@ -511,6 +543,11 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     ngOnInit(): void {
+        // provides capability to make a field disabled. useful in reactive form approach.
+        this.formControl =
+            (this.formGroupContainer?.formGroup?.get(this.id) as FormControl) ??
+            new FormControl({ value: null, disabled: this.disabled });
+
         if (this.columns && (this.columns < 1 || this.columns > 12)) {
             throw new Error('[columns] accepts numbers between 1 - 12');
         }
@@ -571,6 +608,11 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._assignErrorDirectives();
+
+        this._errorDirectiveQuery.changes.pipe(takeUntil(this._destroyed$)).subscribe(() => {
+            this._assignErrorDirectives();
+        });
         this._updateControlProperties();
         this._validateErrorHandler();
         this._cd.detectChanges();
@@ -582,18 +624,21 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this._removeFromFormGroup();
         this._destroyed$.next();
         this._destroyed$.complete();
+        this._errorDirectivesCdr?.unsubscribe();
+        this._formGroupErrorDirectivesSubscription?.unsubscribe();
     }
 
     /** @hidden */
     hasErrors(): boolean {
-        return this._editable && !!this.control?.controlInvalid;
+        const result = this._editable && !!this.control?.controlInvalid;
+        return result;
     }
 
     /**
      * Register underlying form control
      * @param formFieldControl
      */
-    registerFormFieldControl(formFieldControl: FormFieldControl<any>): void {
+    registerFormFieldControl(formFieldControl: FormFieldControl): void {
         if (this.control) {
             throw Error('Form field can contain only one FormFieldControl');
         }
@@ -605,13 +650,15 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
             // need to call explicitly detectChanges() instead of markForCheck before the
             // modified validation state of the control passes over checked phase
             this.onChange.emit('stateChanges');
+            this.groupErrors();
             this._cd.detectChanges();
         });
 
         // Refresh UI when value changes
         if (formFieldControl?.ngControl?.valueChanges) {
             formFieldControl.ngControl.valueChanges.pipe(takeUntil(this._destroyed$)).subscribe(() => {
-                // this.onChange.emit('valueChanges');
+                this.onChange.emit('valueChanges');
+                this.groupErrors();
                 this._cd.markForCheck();
             });
         }
@@ -659,7 +706,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * Unregister underlying form control
      * @param formFieldControl
      */
-    unregisterFormFieldControl(formFieldControl: FormFieldControl<any>): void {
+    unregisterFormFieldControl(formFieldControl: FormFieldControl): void {
         if (formFieldControl !== this.control) {
             return;
         }
@@ -669,9 +716,72 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this._removeControlFromFormGroup();
     }
 
+    /**
+     * Groups
+     */
+    groupErrors(): void {
+        // Queue task because firing it right away may cause error with showing empty message.
+        setTimeout(() => {
+            this.groupedErrors = [];
+            const errors = this.control?.ngControl?.errors;
+            if (!errors) {
+                return [];
+            }
+
+            this.errorDirectives.forEach((directive) => {
+                if (!errors[directive.error]) {
+                    return;
+                }
+
+                this.groupedErrors.push({
+                    directive,
+                    error: errors[directive.error]
+                });
+            });
+            this.errorsChange$.next();
+            this._cd.markForCheck();
+        });
+    }
+
+    /**
+     * Gets prioritized control state based on the error types it has.
+     */
+    getPriorityState(): FormStates {
+        if (this.groupedErrors.length === 0) {
+            return this.hasErrors() ? 'error' : 'default';
+        }
+
+        return getFormState(this.groupedErrors.map((error) => error.directive.type));
+    }
+
+    /**
+     * Sets error directives.
+     */
+    setErrorDirectives(directives: QueryList<FormError>): void {
+        this._formGroupErrorDirectivesSubscription?.unsubscribe();
+
+        if (!directives) {
+            return;
+        }
+
+        this._formGroupErrorDirectives = directives.toArray();
+
+        this._formGroupErrorDirectivesSubscription = directives.changes
+            .pipe(takeUntil(this._destroyed$))
+            .subscribe(() => {
+                this._formGroupErrorDirectives = directives.toArray();
+            });
+    }
+
     /** @hidden */
     private _validateErrorHandler(): void {
-        if (this._editable && this.control && this._hasValidators() && !this.i18Strings) {
+        if (
+            this._editable &&
+            this.control &&
+            this._hasValidators() &&
+            !this.i18Strings &&
+            this.errorDirectives.length === 0
+        ) {
             throw new Error('Validation strings are required for the any provided validations.');
         }
     }
@@ -799,5 +909,21 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
                 ...this.hint
             };
         }
+    }
+
+    /** @hidden */
+    private _assignErrorDirectives(): void {
+        this._errorDirectivesCdr?.unsubscribe();
+        this._errorDirectives = this._errorDirectiveQuery.toArray();
+        this._errorDirectivesCdr = new Subscription();
+
+        this._errorDirectives.forEach((directive) => {
+            this._errorDirectivesCdr.add(
+                directive.detectChanges$.subscribe(() => {
+                    this.groupErrors();
+                    this._cd.detectChanges();
+                })
+            );
+        });
     }
 }

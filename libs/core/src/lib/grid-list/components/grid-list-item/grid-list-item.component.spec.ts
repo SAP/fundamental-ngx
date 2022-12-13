@@ -4,7 +4,8 @@ import { By } from '@angular/platform-browser';
 
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { GridListComponent, GridListModule } from '@fundamental-ngx/core/grid-list';
+import { GridListModule } from '../../grid-list.module';
+import { GridListComponent } from '../grid-list/grid-list.component';
 
 @Component({
     template: `

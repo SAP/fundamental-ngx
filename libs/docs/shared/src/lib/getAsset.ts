@@ -31,7 +31,7 @@ export const getExampleFile = (exampleFileName: string, exampleFile: Partial<Exa
     const fileExtension = getFileExtensionFromName(exampleFileName);
     const language = fileExtensionToLanguage[fileExtension] || fileExtension;
     return {
-        fileName: exampleFileName.replace(new RegExp(`(.)?(component|directive)?.${fileExtension}$`), ''),
+        fileName: exampleFileName.replace(new RegExp(`.(component.|directive.)?${fileExtension}$`), ''),
         name: exampleFileName,
         language,
         code: getAssetFromModuleAssets(exampleFileName),

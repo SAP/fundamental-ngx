@@ -1,19 +1,29 @@
-import { SchematicContext, Tree } from '@angular-devkit/schematics';
-import { addModuleImportToModule, findModuleFromOptions } from '@angular/cdk/schematics';
+import { Rule, Tree, SchematicContext, chain } from '@angular-devkit/schematics';
+import { findModuleFromOptions, addModuleImportToModule } from '@angular/cdk/schematics';
+import { Schema } from '../models/schema';
 import { hasModuleImport } from '../utils/ng-module-utils';
 
-const browserAnimationsModuleName = 'BrowserAnimationsModule';
-const noopAnimationsModuleName = 'NoopAnimationsModule';
+export function addAnimations(options: Schema): Rule {
+    return chain([addAnimationsModule(options)]);
+}
 
-// Configures animations modules
-export function addAnimations(options: any): any {
+function addAnimationsModule(options: Schema): any {
     return async (tree: Tree, context: SchematicContext) => {
-        const modulePath = await findModuleFromOptions(tree, options);
+        const browserAnimationsModuleName = 'BrowserAnimationsModule';
+        const noopAnimationsModuleName = 'NoopAnimationsModule';
+        const modulePath = await findModuleFromOptions(tree, options as any);
+
+        if (!modulePath) {
+            context.logger.warn(
+                `⚠️ Could not set up animations because root module not found. Please manually set up animations.`
+            );
+            return;
+        }
 
         if (options.animations) {
             if (hasModuleImport(tree, modulePath, noopAnimationsModuleName)) {
                 context.logger.warn(
-                    `Could not set up "${browserAnimationsModuleName} because "${noopAnimationsModuleName}" is already imported. Please manually set up browser animations.`
+                    `⚠️ Could not set up "${browserAnimationsModuleName} because "${noopAnimationsModuleName}" is already imported. Please manually set up browser animations.`
                 );
 
                 return tree;
@@ -21,7 +31,7 @@ export function addAnimations(options: any): any {
 
             if (hasModuleImport(tree, modulePath, browserAnimationsModuleName)) {
                 context.logger.info(
-                    `✅️ Import of ${browserAnimationsModuleName} already present in root module. Skipping.`
+                    `✅️ Import of ${browserAnimationsModuleName} already present in app module. Skipping.`
                 );
 
                 return tree;
@@ -34,7 +44,7 @@ export function addAnimations(options: any): any {
                 '@angular/platform-browser/animations'
             );
 
-            context.logger.info(`✅️ Added ${browserAnimationsModuleName} to root module.`);
+            context.logger.info(`✅️ Added ${browserAnimationsModuleName} to app module.`);
 
             return tree;
         }
@@ -42,7 +52,7 @@ export function addAnimations(options: any): any {
         if (!hasModuleImport(tree, modulePath, browserAnimationsModuleName)) {
             addModuleImportToModule(tree, modulePath, noopAnimationsModuleName, '@angular/platform-browser/animations');
 
-            context.logger.info(`✅️ Added ${noopAnimationsModuleName} to root module.`);
+            context.logger.info(`✅️ Added ${noopAnimationsModuleName} to app module.`);
         }
 
         return tree;

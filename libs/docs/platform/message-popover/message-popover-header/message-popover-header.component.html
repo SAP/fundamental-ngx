@@ -1,0 +1,26 @@
+<fd-doc-page>
+    <header>Message Popover</header>
+
+    <description>
+        <p>Message Popover is a combination of components that allow to render form errors in a human-readable list.</p>
+        <p>This component can be used along with such technologies:</p>
+        <ul>
+            <li><a fd-link href="https://angular.io/guide/forms" target="_blank">Template-driven forms</a></li>
+            <li><a fd-link href="https://angular.io/guide/reactive-forms">Reactive forms forms</a></li>
+            <li><a fd-link routerLink="/platform/form-container">Form Container component</a></li>
+            <li><a fd-link routerLink="/platform/form-generator">Form Generator component</a></li>
+        </ul>
+        <p>
+            In order for Message popover to listen for the form errors, developers need to wrap their forms into
+            <code>fdp-message-popover-form-wrapper</code>.
+        </p>
+        <p>
+            Then place <code>fdp-message-popover</code> anywhere on the page, and pass instance of
+            <code>fdp-message-popover-form-wrapper</code> to it.
+        </p>
+    </description>
+
+    <import module="MessagePopoverModule" subPackage="message-popover"></import>
+
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

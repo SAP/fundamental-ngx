@@ -1,4 +1,5 @@
 {
+    "name": "docs-fn-avatar",
     "sourceRoot": "libs/docs/fn/avatar",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "baseUrl": "http://localhost:4200",
                 "configFile": "libs/docs/fn/avatar/wdio.conf.js"
             },
-            "outputs": ["allure-results/docs-fn-avatar"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-avatar"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

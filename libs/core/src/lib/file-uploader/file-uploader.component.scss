@@ -1,2 +1,6 @@
-@import '~fundamental-styles/dist/input';
-@import '~fundamental-styles/dist/file-uploader';
+@import 'fundamental-styles/dist/input';
+@import 'fundamental-styles/dist/file-uploader';
+
+.fd-file-uploader {
+    display: flex;
+}

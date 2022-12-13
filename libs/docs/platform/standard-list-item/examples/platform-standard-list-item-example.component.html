@@ -5,7 +5,11 @@
         [title]="'List item 1'"
         avatarSrc="https://placeimg.com/400/400/nature"
         avatarTitle="nature"
-        description="First text item in Byline (Standard text item)"
+        [description]="{
+            text: 'First text item in Byline (Standard text item)',
+            title: 'Separate text for a description title'
+        }"
+        [unRead]="true"
     >
     </fdp-standard-list-item>
     <fdp-standard-list-item

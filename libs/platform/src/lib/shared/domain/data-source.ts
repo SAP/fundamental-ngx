@@ -264,6 +264,8 @@ export class SearchFieldDataSource<T> extends ComboBoxDataSource<T> {
 
 export class ListDataSource<T> extends ComboBoxDataSource<T> {
     /** @hidden */
+    limitless = true;
+    /** @hidden */
     constructor(public dataProvider: DataProvider<any>) {
         super(dataProvider);
     }
