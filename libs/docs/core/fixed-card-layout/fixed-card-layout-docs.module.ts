@@ -21,6 +21,7 @@ import { FormModule } from '@fundamental-ngx/core/form';
 import { FixedCardLayoutCustomWidthExampleComponent } from './examples/custom-width/fixed-card-layout-custom-width-example.component';
 import { FixedCardLayoutCustomColumnWidthExampleComponent } from './examples/custom-column-width/fixed-card-layout-custom-column-width-example.component';
 import { FixedCardLayoutMaxColumnsExampleComponent } from './examples/max-columns/fixed-card-layout-max-columns-example.component';
+import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 
 const routes: Routes = [
     {
@@ -45,7 +46,8 @@ const routes: Routes = [
         SegmentedButtonModule,
         TableModule,
         ToolbarModule,
-        FormModule
+        FormModule,
+        ScrollbarModule
     ],
     exports: [RouterModule],
     declarations: [

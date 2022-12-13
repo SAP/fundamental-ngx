@@ -130,7 +130,7 @@ describe('WizardComponent', () => {
     }));
 
     it('should handleStepOrStatusChanges', fakeAsync(() => {
-        spyOn(component.wrapperContainer.nativeElement, 'scrollTo');
+        spyOn(component.wrapperContainer.nativeElement.children[0], 'scrollTo');
 
         component.ngAfterViewInit();
         tick(10);
@@ -138,7 +138,7 @@ describe('WizardComponent', () => {
         component.steps.first.statusChange.emit();
         tick(10);
 
-        expect(component.wrapperContainer.nativeElement.scrollTo).toHaveBeenCalled();
+        expect(component.wrapperContainer.nativeElement.children[0].scrollTo).toHaveBeenCalled();
     }));
 
     it('should handleScrollSpyChange', fakeAsync(() => {

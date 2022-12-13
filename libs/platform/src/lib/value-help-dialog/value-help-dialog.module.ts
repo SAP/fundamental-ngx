@@ -34,6 +34,7 @@ import { VhdBaseTab } from './components/base-tab/vhd-base-tab.component';
 import { SelectTabComponent } from './components/select-tab/select-tab.component';
 import { DefineTabComponent } from './components/define-tab/define-tab.component';
 import { ConditionCountMessageDirective } from './directives/condition-count-message.directive';
+import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 
 @NgModule({
     declarations: [
@@ -72,7 +73,8 @@ import { ConditionCountMessageDirective } from './directives/condition-count-mes
         InfiniteScrollModule,
         PlatformSearchFieldModule,
         ContentDensityModule,
-        PlatformContentDensityDeprecationsModule
+        PlatformContentDensityDeprecationsModule,
+        ScrollbarModule
     ],
     exports: [
         PlatformValueHelpDialogComponent,

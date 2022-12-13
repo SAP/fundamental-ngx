@@ -3,7 +3,7 @@
     <button fd-button [value]="480">Set custom minimum card width</button>
 </fd-segmented-button>
 
-<div style="padding: 1rem; overflow: auto">
+<div fd-scrollbar style="padding: 1rem; overflow: auto">
     <fd-fixed-card-layout [cardMinimumWidth]="cardMinimumWidth">
         <ng-container>
             <fd-card cardType="list" *fdCardDef="1">

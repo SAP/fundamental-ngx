@@ -11,6 +11,7 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { TimelineHorizontalAxisExampleComponent } from './examples/timeline-horizontal-axis-example.component';
 import { TimelineHorizontalDoubleSideExampleComponent } from './examples/timeline-horizontal-double-side-example.component';
 import { TimelineVerticalDoubleSideExampleComponent } from './examples/timeline-vertical-double-side-example.component';
+import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 
 const routes: Routes = [
     {
@@ -32,7 +33,13 @@ const routes: Routes = [
         TimelineHorizontalDoubleSideExampleComponent,
         TimelineVerticalDoubleSideExampleComponent
     ],
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TimelineModule, AvatarModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        TimelineModule,
+        AvatarModule,
+        ScrollbarModule
+    ],
     exports: [RouterModule],
     providers: [currentComponentProvider('timeline')]
 })
