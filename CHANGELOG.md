@@ -1,3 +1,12 @@
+## [0.38.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.0...v0.38.1-rc.1) (2022-12-13)
+
+
+### Features
+
+* **core:** apply fiori scrollbar to components ([#8962](https://github.com/SAP/fundamental-ngx/issues/8962)) ([b5c6435](https://github.com/SAP/fundamental-ngx/commit/b5c6435633ed66fc8d2636bea82b1128e8d9617d))
+
+
+
 ## [0.38.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.38.0...v0.38.1-rc.0) (2022-12-13)
 
 
