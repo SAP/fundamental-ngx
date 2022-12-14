@@ -26,7 +26,6 @@ const listWithUnRead = 'platform-list-with-unread-example.component.html';
 const listWithFreeContentHtml = 'platform-list-free-content-example.component.html';
 const listWithFreeContentTs = 'platform-list-free-content-example.component.ts';
 const loadingListSrc = 'loading/platform-list-loading-example.component.html';
-const loadingListTs = 'loading/platform-list-loading-example.component.ts';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 
@@ -224,12 +223,6 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(loadingListSrc),
-            fileName: 'platform-list-loading-example'
-        },
-        {
-            language: 'typescript',
-            component: 'PlatformListBorderLessExampleComponent',
-            code: getAssetFromModuleAssets(loadingListTs),
             fileName: 'platform-list-loading-example'
         }
     ];

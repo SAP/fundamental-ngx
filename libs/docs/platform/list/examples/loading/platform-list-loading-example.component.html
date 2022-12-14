@@ -1,3 +1,7 @@
-<fdp-list [dataSource]="_dataSource" [itemSize]="6" [delayTime]="2000" [scrollOffsetPercentage]="20" maxHeight="200px">
-    <fdp-standard-list-item *fdpItemDef="let user" [title]="user.firstName"></fdp-standard-list-item>
-</fdp-list>
+<h4>Default list</h4>
+
+<fdp-list></fdp-list>
+
+<h4>Byline list</h4>
+
+<fdp-list [hasByLine]="true"></fdp-list>

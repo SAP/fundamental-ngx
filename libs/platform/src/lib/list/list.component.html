@@ -88,10 +88,21 @@
     </ng-container>
 </ng-template>
 <ng-template #elseBlock>
-    <ng-container *ngIf="dataSource && !_firstLoadingDone">
-        <li fd-list-item *fdRepeat="3">
-            <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="40%"></fd-skeleton>
-        </li>
+    <ng-container *ngIf="!listItems.length && !_firstLoadingDone">
+        <ng-container *ngIf="!hasByLine; else bylineLoading">
+            <li fd-list-item *fdRepeat="3">
+                <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="40%"></fd-skeleton>
+            </li>
+        </ng-container>
+        <ng-template #bylineLoading>
+            <li fd-list-item *fdRepeat="3">
+                <fd-skeleton width="100%" height="48px" style="margin: auto 0">
+                    <svg:rect x="0" y="0" width="48" height="48" rx="4" />
+                    <svg:rect x="60" y="0" width="40%" height="12" rx="4" />
+                    <svg:rect x="60" y="20" width="30%" height="8" rx="4" />
+                </fd-skeleton>
+            </li>
+        </ng-template>
     </ng-container>
     <ng-content></ng-content>
 </ng-template>
