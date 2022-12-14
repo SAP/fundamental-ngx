@@ -1,0 +1,34 @@
+<button fd-button (click)="loading = !loading" style="margin-bottom: 1rem">Toggle loading</button>
+
+<ul fd-list [byline]="true">
+    <ng-container *ngIf="!loading; else loadingTemplate">
+        <li fd-list-item *fdRepeat="3">
+            <span fd-list-thumbnail><fd-icon glyph="activate"></fd-icon></span>
+
+            <div fd-list-content>
+                <div fd-list-title [wrap]="true">
+                    Long Title - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut laoreet lorem.
+                    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean
+                    sagittis aliquam justo et suscipit. Nam molestie, magna at elementum pulvinar, nisi enim venenatis
+                    ante, id convallis mi neque nec risus.
+                </div>
+                <div fd-list-byline [wrap]="true">
+                    Long byline text - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut laoreet
+                    lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
+                    Aenean sagittis aliquam justo et suscipit. Nam molestie, magna at elementum pulvinar, nisi enim
+                    venenatis ante, id convallis mi neque nec risus.
+                </div>
+            </div>
+        </li>
+    </ng-container>
+</ul>
+
+<ng-template #loadingTemplate>
+    <li fd-list-item *fdRepeat="3">
+        <fd-skeleton width="100%" height="48px" style="margin: auto 0">
+            <svg:rect x="0" y="0" width="48" height="48" rx="4" />
+            <svg:rect x="60" y="0" width="40%" height="12" rx="4" />
+            <svg:rect x="60" y="20" width="30%" height="8" rx="4" />
+        </fd-skeleton>
+    </li>
+</ng-template>
