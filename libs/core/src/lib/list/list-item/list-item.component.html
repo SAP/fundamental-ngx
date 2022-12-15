@@ -5,10 +5,12 @@
     </div>
 </ng-container>
 
+<span *ngIf="unread && _displayUnreadIndicator" class="sap-icon--circle-task-2 fd-list__notification"></span>
+
 <ng-content></ng-content>
 
 <span *ngIf="counter || counter === 0" class="fd-list__item-counter">
-    {{ counter | number: '1.0-2' }}
+    {{ counter | number : '1.0-2' }}
 </span>
 
 <span

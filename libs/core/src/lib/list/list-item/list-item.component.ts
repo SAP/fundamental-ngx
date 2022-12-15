@@ -10,9 +10,11 @@ import {
     forwardRef,
     HostBinding,
     HostListener,
+    Inject,
     Input,
     OnChanges,
     OnDestroy,
+    Optional,
     Output,
     QueryList,
     SimpleChanges,
@@ -27,9 +29,11 @@ import { startWith, takeUntil } from 'rxjs/operators';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/core/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { FD_LIST_UNREAD_INDICATOR } from '../list-component.token';
 import { ListFocusItem } from '../list-focus-item.model';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { ListUnreadIndicator } from '../list-unread-indicator.interface';
 
 let listItemUniqueId = 0;
 
@@ -42,8 +46,7 @@ let listItemUniqueId = 0;
     selector: '[fdListItem] ,[fd-list-item]',
     templateUrl: './list-item.component.html',
     host: {
-        class: 'fd-list__item',
-        '[attr.role]': '_listItemRole'
+        class: 'fd-list__item'
     },
     styleUrls: ['./list-item.component.scss'],
     providers: [
@@ -176,7 +179,13 @@ export class ListItemComponent
     _relatedGroupHeaderId: string | null;
 
     /** @hidden */
+    @HostBinding('attr.role')
     private _listItemRole = 'listitem';
+
+    /** @hidden */
+    get _displayUnreadIndicator(): boolean {
+        return !!this._unreadIndicator?.unreadIndicator;
+    }
 
     /** @hidden */
     @HostBinding('attr.aria-describedBy')
@@ -195,7 +204,11 @@ export class ListItemComponent
     readonly _uniqueId = 'fd-list-item-' + ++listItemUniqueId;
 
     /** @hidden */
-    constructor(public elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
+    constructor(
+        public readonly elementRef: ElementRef,
+        private readonly _changeDetectorRef: ChangeDetectorRef,
+        @Optional() @Inject(FD_LIST_UNREAD_INDICATOR) private readonly _unreadIndicator?: ListUnreadIndicator
+    ) {
         super(elementRef);
     }
 
@@ -203,6 +216,7 @@ export class ListItemComponent
     ngAfterContentInit(): void {
         this._listenOnLinkQueryChange();
         this._listenOnButtonQueryChange();
+
         if (this.linkDirectives && this.linkDirectives.length) {
             this._listItemRole += ' button';
         }
@@ -277,7 +291,7 @@ export class ListItemComponent
 
     /** @hidden */
     private _listenOnLinkQueryChange(): void {
-        this.linkDirectives.changes.pipe(takeUntil(this._onDestroy$), startWith(0)).subscribe(() => {
+        this.linkDirectives.changes.pipe(startWith(this.linkDirectives), takeUntil(this._onDestroy$)).subscribe(() => {
             this._onLinkListChanged$.next();
             this.link = this.linkDirectives.length > 0;
             if (this.link) {
@@ -291,7 +305,7 @@ export class ListItemComponent
 
     /** @hidden */
     private _listenOnButtonQueryChange(): void {
-        this.buttons.changes.pipe(takeUntil(this._onDestroy$), startWith(0)).subscribe(() => {
+        this.buttons.changes.pipe(startWith(0), takeUntil(this._onDestroy$)).subscribe(() => {
             this.buttons.forEach(this._addClassToButtons);
         });
     }

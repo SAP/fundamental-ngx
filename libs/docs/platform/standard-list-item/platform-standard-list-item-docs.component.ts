@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 
 const sliSrc = 'platform-standard-list-item-example.component.html';
+const unreadListItemSrc = 'platform-standard-list-unread-example.component.html';
 const borderLessSLISrc = 'platform-standard-list-item-border-less-example.component.html';
 const borderLessSLITs = 'platform-standard-list-item-border-less-example.component.ts';
 const sliWithSecondaryType = 'platform-standard-list-item-with-secondary-type-example.component.html';
@@ -28,6 +29,14 @@ export class PlatformStandardListItemDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(sliSrc),
             fileName: 'platform-standard-list-item-example'
+        }
+    ];
+
+    unreadListItem: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(unreadListItemSrc),
+            fileName: 'platform-standard-list-unread-example'
         }
     ];
 
