@@ -23,7 +23,7 @@ export const getAssetFromModuleAssets = (
     currentLib: string = inject(CURRENT_LIB),
     currentComponent: string = inject(CURRENT_COMPONENT)
 ): Promise<string> => {
-    const path = `/docs/${currentLib}/${currentComponent}/examples/${fileName}`;
+    const path = `docs/${currentLib}/${currentComponent}/examples/${fileName}`;
     return getAsset(path);
 };
 

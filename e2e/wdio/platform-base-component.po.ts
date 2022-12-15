@@ -68,6 +68,6 @@ export class PlatformBaseComponentPo {
     }
 
     async open(url: string): Promise<void> {
-        return open('fundamental-ngx#/platform' + url);
+        return open('#/platform' + url);
     }
 }
