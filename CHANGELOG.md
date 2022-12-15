@@ -1,3 +1,12 @@
+## [0.38.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.2...v0.38.1-rc.3) (2022-12-15)
+
+
+### Features
+
+* **core,platform:** skeleton loading ([#9062](https://github.com/SAP/fundamental-ngx/issues/9062)) ([53dd8a1](https://github.com/SAP/fundamental-ngx/commit/53dd8a1e816250119b5d84b333765f5c0e2ccf80))
+
+
+
 ## [0.38.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.1...v0.38.1-rc.2) (2022-12-15)
 
 
