@@ -33,7 +33,7 @@
             *ngIf="_isShownSelectionColumn"
             fd-table-cell
             class="fd-table__cell--fixed fd-table__cell--checkbox"
-            [style]="contentDensityObserver | async | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth"
+            [style]="contentDensityObserver | async | selectionCellStyles : _rtl : _semanticHighlightingColumnWidth"
         >
             <fd-checkbox
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
@@ -49,7 +49,9 @@
             <th
                 fd-table-cell
                 role="columnheader"
-                [fdpTableCellResizable]="colIdx | columnResizableSide: _visibleColumns.length:_isShownNavigationColumn"
+                [fdpTableCellResizable]="
+                    colIdx | columnResizableSide : _visibleColumns.length : _isShownNavigationColumn
+                "
                 [columnName]="column.name"
                 [id]="id + '__' + column.name"
                 [attr.aria-colindex]="colIdx"
@@ -259,7 +261,7 @@
                         #tableRow
                         role="row"
                         [applyDragItemClass]="_rowsDraggable"
-                        [class]="row | rowClasses: rowsClass"
+                        [class]="row | rowClasses : rowsClass"
                         [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
                         [focusable]="rowsActivable || !!row.navigatable"
                         [hoverable]="rowsActivable || _isShownSelectionColumn || !!row.navigatable"
@@ -294,7 +296,7 @@
                                     [style]="
                                         contentDensityObserver
                                             | async
-                                            | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
+                                            | selectionCellStyles : _rtl : _semanticHighlightingColumnWidth
                                     "
                                     [focusable]="true"
                                     [attr.aria-selected]="row.checked"
@@ -312,7 +314,7 @@
                                     [style]="
                                         contentDensityObserver
                                             | async
-                                            | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
+                                            | selectionCellStyles : _rtl : _semanticHighlightingColumnWidth
                                     "
                                 >
                                     <fd-checkbox
@@ -330,7 +332,7 @@
                             *ngFor="let column of _visibleColumns; let colIdx = index"
                             fd-table-cell
                             [fdpTableCellResizable]="
-                                colIdx | columnResizableSide: _visibleColumns.length:_isShownNavigationColumn
+                                colIdx | columnResizableSide : _visibleColumns.length : _isShownNavigationColumn
                             "
                             [columnName]="column.name"
                             role="cell"
@@ -375,7 +377,7 @@
                                     </ng-container>
 
                                     <ng-template #defaultTableCellTemplate>
-                                        {{ row?.value | valueByPath: column.key }}
+                                        {{ row?.value | valueByPath : column.key }}
                                     </ng-template>
                                 </ng-container>
 
@@ -398,7 +400,7 @@
                                         <fdp-table-editable-cell
                                             [row]="row"
                                             [column]="column"
-                                            [columnValue]="row?.value | valueByPath: column.key"
+                                            [columnValue]="row?.value | valueByPath : column.key"
                                         ></fdp-table-editable-cell>
                                     </ng-template>
                                 </ng-template>
@@ -426,7 +428,7 @@
                         fd-table-row
                         [secondary]="true"
                         [attr.aria-selected]="row.checked"
-                        [class]="row | rowClasses: rowsClass"
+                        [class]="row | rowClasses : rowsClass"
                     >
                         <td fd-table-cell *ngIf="selectionMode !== SELECTION_MODE.NONE"></td>
                         <td
@@ -452,7 +454,7 @@
                                 </ng-container>
 
                                 <ng-template #defaultTableCellTemplate>{{
-                                    row?.value | valueByPath: poppingColumn.key
+                                    row?.value | valueByPath : poppingColumn.key
                                 }}</ng-template>
                             </div>
                         </td>

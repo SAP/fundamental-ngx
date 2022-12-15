@@ -197,14 +197,14 @@
                         <div fdLayoutGridRow>
                             <ng-container
                                 *ngFor="
-                                    let filter of _displayedFilters | slice: 0:shownFilterCount + 1;
+                                    let filter of _displayedFilters | slice : 0 : shownFilterCount + 1;
                                     trackBy: _trackByFilterFn
                                 "
                             >
                                 <ng-container *ngIf="filter.advanced">
                                     <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="6" [colXl]="3">
                                         <label class="fd-form-group__header" fd-form-label [for]="'input' + filter.key"
-                                        >{{ filter.label }}:</label
+                                            >{{ filter.label }}:</label
                                         >
                                         <input
                                             [(ngModel)]="filter.value"
