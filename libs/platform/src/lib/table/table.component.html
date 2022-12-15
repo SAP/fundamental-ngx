@@ -5,7 +5,7 @@
     [ngTemplateOutletContext]="_toolbarContext"
 ></ng-container>
 
-<fd-busy-indicator [loading]="loadingState" [block]="true">
+<fd-busy-indicator [loading]="loadingState && _firstLoadingDone" [block]="true">
     <!-- Table Container -->
     <div class="fdp-table__container" role="table" #tableContainer>
         <!-- Table header outlet -->
@@ -33,7 +33,7 @@
             *ngIf="_isShownSelectionColumn"
             fd-table-cell
             class="fd-table__cell--fixed fd-table__cell--checkbox"
-            [style]="contentDensityObserver | async | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth"
+            [style]="contentDensityObserver | async | selectionCellStyles : _rtl : _semanticHighlightingColumnWidth"
         >
             <fd-checkbox
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
@@ -49,7 +49,9 @@
             <th
                 fd-table-cell
                 role="columnheader"
-                [fdpTableCellResizable]="colIdx | columnResizableSide: _visibleColumns.length:_isShownNavigationColumn"
+                [fdpTableCellResizable]="
+                    colIdx | columnResizableSide : _visibleColumns.length : _isShownNavigationColumn
+                "
                 [columnName]="column.name"
                 [id]="id + '__' + column.name"
                 [attr.aria-colindex]="colIdx"
@@ -229,7 +231,7 @@
                 <ng-container [ngTemplateOutlet]="tableHeaderRowTemplate"></ng-container>
             </thead>
             <tbody
-                *ngIf="!!this._tableRowsVisible.length || this.loadingState; else emptyTableTemplate"
+                *ngIf="!!this._tableRowsVisible.length; else emptyTableTemplate"
                 fd-table-body
                 fd-dnd-list
                 [noBorderX]="noBorderX"
@@ -259,7 +261,7 @@
                         #tableRow
                         role="row"
                         [applyDragItemClass]="_rowsDraggable"
-                        [class]="row | rowClasses: rowsClass"
+                        [class]="row | rowClasses : rowsClass"
                         [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
                         [focusable]="rowsActivable || !!row.navigatable"
                         [hoverable]="rowsActivable || _isShownSelectionColumn || !!row.navigatable"
@@ -294,7 +296,7 @@
                                     [style]="
                                         contentDensityObserver
                                             | async
-                                            | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
+                                            | selectionCellStyles : _rtl : _semanticHighlightingColumnWidth
                                     "
                                     [focusable]="true"
                                     [attr.aria-selected]="row.checked"
@@ -312,7 +314,7 @@
                                     [style]="
                                         contentDensityObserver
                                             | async
-                                            | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
+                                            | selectionCellStyles : _rtl : _semanticHighlightingColumnWidth
                                     "
                                 >
                                     <fd-checkbox
@@ -330,7 +332,7 @@
                             *ngFor="let column of _visibleColumns; let colIdx = index"
                             fd-table-cell
                             [fdpTableCellResizable]="
-                                colIdx | columnResizableSide: _visibleColumns.length:_isShownNavigationColumn
+                                colIdx | columnResizableSide : _visibleColumns.length : _isShownNavigationColumn
                             "
                             [columnName]="column.name"
                             role="cell"
@@ -375,7 +377,7 @@
                                     </ng-container>
 
                                     <ng-template #defaultTableCellTemplate>
-                                        {{ row?.value | valueByPath: column.key }}
+                                        {{ row?.value | valueByPath : column.key }}
                                     </ng-template>
                                 </ng-container>
 
@@ -398,7 +400,7 @@
                                         <fdp-table-editable-cell
                                             [row]="row"
                                             [column]="column"
-                                            [columnValue]="row?.value | valueByPath: column.key"
+                                            [columnValue]="row?.value | valueByPath : column.key"
                                         ></fdp-table-editable-cell>
                                     </ng-template>
                                 </ng-template>
@@ -426,7 +428,7 @@
                         fd-table-row
                         [secondary]="true"
                         [attr.aria-selected]="row.checked"
-                        [class]="row | rowClasses: rowsClass"
+                        [class]="row | rowClasses : rowsClass"
                     >
                         <td fd-table-cell *ngIf="selectionMode !== SELECTION_MODE.NONE"></td>
                         <td
@@ -452,7 +454,7 @@
                                 </ng-container>
 
                                 <ng-template #defaultTableCellTemplate>{{
-                                    row?.value | valueByPath: poppingColumn.key
+                                    row?.value | valueByPath : poppingColumn.key
                                 }}</ng-template>
                             </div>
                         </td>
@@ -507,7 +509,15 @@
 
 <!-- Empty Table Message -->
 <ng-template #emptyTableTemplate>
-    <tbody fd-table-body class="fdp-table__empty">
+    <tbody *ngIf="!_firstLoadingDone" fd-table-body>
+        <tr fd-table-row role="row" *fdRepeat="3">
+            <td fd-table-cell *fdRepeat="_tableColumnsLength">
+                <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="60%"></fd-skeleton>
+            </td>
+        </tr>
+    </tbody>
+
+    <tbody *ngIf="_firstLoadingDone" fd-table-body class="fdp-table__empty">
         <tr fd-table-row role="row">
             <td fd-table-cell class="fd-table__cell--no-data" [attr.colspan]="_tableColumnsLength">
                 <div class="fdp-table__empty-table-message">

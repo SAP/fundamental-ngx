@@ -264,6 +264,11 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         return this.loading ?? this._internalLoadingState;
     }
 
+    /** @hidden
+     * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
+     */
+    _firstLoadingDone = false;
+
     /** @hidden */
     private _internalLoadingState = false;
 
@@ -566,15 +571,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         if (this.showSelectionTab) {
             this._dsSubscription = new Subscription();
 
-            const dsSub = this.openDataStream()
-                .pipe(takeUntil(this._destroyed))
-                .subscribe((data) => {
-                    this._displayedData = data.slice();
-                    this._changeDetectorRef.markForCheck();
-                });
-
-            this._dsSubscription.add(dsSub);
-
             this._dsSubscription.add(
                 ds?.onDataRequested().subscribe(() => {
                     this._internalLoadingState = true;
@@ -585,9 +581,19 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
             this._dsSubscription.add(
                 ds?.onDataReceived().subscribe(() => {
                     this._internalLoadingState = false;
+                    this._firstLoadingDone = true;
                     this.onDataReceived.emit();
                 })
             );
+
+            const dsSub = this.openDataStream()
+                .pipe(takeUntil(this._destroyed))
+                .subscribe((data) => {
+                    this._displayedData = data.slice();
+                    this._changeDetectorRef.markForCheck();
+                });
+
+            this._dsSubscription.add(dsSub);
         }
     }
 

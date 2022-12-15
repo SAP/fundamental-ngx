@@ -18,13 +18,14 @@ const listWithSingleSelectionTs = 'platform-list-with-single-selection-example.c
 const listWithNavigation = 'platform-list-with-navigation-example.component.html';
 const listWithNavigationTs = 'platform-list-with-navigation-example.component.ts';
 const listWithInfiniteScroll = 'platform-list-with-infinite-scroll-example.component.html';
-const listWithInfiniteScrollTs = 'platform-list-with-infinite-scroll-example.component.ts';
+const listWithInfiniteScrollTs = 'platform-list-loading-example.component.ts';
 const listWithMoreButton = 'platform-list-with-more-button-example.component.html';
 const listWithMoreButtonTs = 'platform-list-with-more-button-example.component.ts';
 const listWithNoData = 'platform-list-with-nodata-example.component.html';
 const listWithUnRead = 'platform-list-with-unread-example.component.html';
 const listWithFreeContentHtml = 'platform-list-free-content-example.component.html';
 const listWithFreeContentTs = 'platform-list-free-content-example.component.ts';
+const loadingListSrc = 'loading/platform-list-loading-example.component.html';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 
@@ -215,6 +216,14 @@ export class PlatformListDocsComponent {
             component: 'PlatformListFreeContentExampleComponent',
             code: getAssetFromModuleAssets(listWithFreeContentTs),
             fileName: 'platform-list-free-content-example'
+        }
+    ];
+
+    loadingList: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(loadingListSrc),
+            fileName: 'platform-list-loading-example'
         }
     ];
 }

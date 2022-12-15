@@ -24,7 +24,9 @@ import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { WizardVisibleSummaryExampleComponent } from './examples/wizard-visible-summary-example.component';
 import { A11yModule } from '@angular/cdk/a11y';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/core/utils';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { WizardLoadingExampleComponent } from './examples/loading/wizard-loading-example.component';
 
 const routes: Routes = [
     {
@@ -50,7 +52,9 @@ const routes: Routes = [
         TitleModule,
         LayoutGridModule,
         DialogModule,
-        A11yModule
+        A11yModule,
+        SkeletonModule,
+        RepeatModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -62,7 +66,8 @@ const routes: Routes = [
         WizardBranchingExampleComponent,
         WizardDialogExampleComponent,
         WizardNgForExampleComponent,
-        WizardVisibleSummaryExampleComponent
+        WizardVisibleSummaryExampleComponent,
+        WizardLoadingExampleComponent
     ],
     providers: [moduleDeprecationsProvider(DeprecatedWizardCompactDirective), currentComponentProvider('wizard')]
 })

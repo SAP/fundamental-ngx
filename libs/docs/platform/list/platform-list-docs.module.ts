@@ -43,6 +43,7 @@ import { PlatformListWithSelectionExampleComponent } from './examples/platform-l
 import { PlatformListWithSingleSelectionExampleComponent } from './examples/platform-list-with-single-selection-example.component';
 import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 import { PlatformListFreeContentExampleComponent } from './examples/platform-list-free-content-example.component';
+import { PlatformListLoadingExampleComponent } from './examples/loading/platform-list-loading-example.component';
 
 const routes: Routes = [
     {
@@ -94,7 +95,8 @@ const routes: Routes = [
         PlatformListWithNoDataExampleComponent,
         PlatformListWithMoreButtonExampleComponent,
         PlatformListWithUnReadExampleComponent,
-        PlatformListFreeContentExampleComponent
+        PlatformListFreeContentExampleComponent,
+        PlatformListLoadingExampleComponent
     ],
     providers: [platformContentDensityModuleDeprecationsProvider('fd-list'), currentComponentProvider('list')]
 })

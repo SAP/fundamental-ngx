@@ -8,6 +8,7 @@ const cardBarChartListExampleScss = 'bar-chart-list-card/bar-chart-list-card-exa
 const cardBarScss = 'bar-chart-list-card/card-bar.component.scss';
 
 const cardExampleHtml = 'card-example.component.html';
+const cardLoadingExampleHtml = 'card-loading/card-loading-example.component.html';
 const cardExampleTs = 'card-example.component.ts';
 const cardCompactExampleHtml = 'card-compact-example.component.html';
 const cardLoaderExampleHtml = 'card-loader-example.component.html';
@@ -220,6 +221,14 @@ export class CardDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(cardLinkListHtml),
             fileName: 'card-link-list-example'
+        }
+    ];
+
+    loading: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(cardLoadingExampleHtml),
+            fileName: 'card-example'
         }
     ];
 }

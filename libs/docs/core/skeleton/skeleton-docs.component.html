@@ -1,0 +1,45 @@
+<fd-docs-section-title id="component" componentName="skeleton">Component</fd-docs-section-title>
+
+<description>
+    <h4>Input properties</h4>
+
+    <ul>
+        <li><b>type</b> - specifies the shape of a skeleton, <code>'rectangle' | 'circle' | 'text'</code></li>
+
+        <li><b>textLines</b> - specifies the number of lines, default is 3</li>
+
+        <li><b>width</b> - specifies the width of the skeleton, string</li>
+
+        <li><b>height</b> - specifies the height of the skeleton, string</li>
+
+        <li><b>animation</b> - specifies whether the skeleton is animated, boolean, default is true</li>
+    </ul>
+</description>
+
+<component-example>
+    <fd-skeleton-component-example></fd-skeleton-component-example>
+</component-example>
+
+<code-example [exampleFiles]="component"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="complex" componentName="skeleton">Complex templates</fd-docs-section-title>
+
+<description>
+    It's possible to define complex loading templates by yourself. You can project any SVG elements in Skeleton
+    component, colors and animation will be applied automatically.
+
+    <br /><br />
+
+    Besides this, we provide predefined loading templates for components that most likely would need it, please see
+    components docs.
+</description>
+
+<component-example>
+    <fd-skeleton-complex-example></fd-skeleton-complex-example>
+</component-example>
+
+<code-example [exampleFiles]="complex"></code-example>
+
+<separator></separator>

@@ -1,4 +1,7 @@
-<div [class.fd-timeline__list--empty]="!_canShowFirstList" class="fd-timeline__list fd-timeline__list--first">
+<div
+    [class.fd-timeline__list--empty]="!_canShowFirstList && !_loading"
+    class="fd-timeline__list fd-timeline__list--first"
+>
     <ng-container fdTimelineFirstListOutlet></ng-container>
 </div>
 <div class="fd-timeline__main-line"></div>
@@ -9,3 +12,17 @@
 >
     <ng-container fdTimelineSecondListOutlet></ng-container>
 </div>
+
+<ng-template #loadingTemplate>
+    <fd-timeline-node *fdRepeat="3">
+        <fd-timeline-node-header>
+            <fd-skeleton width="100%" height="32px">
+                <svg:circle cx="16" cy="16" r="16" rx="4"></svg:circle>
+                <svg:rect x="37" y="0" width="120" height="12" rx="4"></svg:rect>
+                <svg:rect x="37" y="20" width="80" height="8" rx="4"></svg:rect>
+            </fd-skeleton>
+        </fd-timeline-node-header>
+
+        <fd-skeleton type="text"></fd-skeleton>
+    </fd-timeline-node>
+</ng-template>

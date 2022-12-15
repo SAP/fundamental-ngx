@@ -1,4 +1,4 @@
-<ng-container *ngIf="wizardCreated">
+<ng-container *ngIf="wizardCreated; else loadingTemplate">
     <fdp-wizard-body
         [navigationButtonLabels]="_navigationButtonLabels"
         [goNextButtonTemplate]="goNextButtonTemplate"
@@ -24,3 +24,20 @@
         (finish)="finish()"
     ></fdp-wizard-body>
 </ng-container>
+
+<!-- The Wizard -->
+<ng-template #loadingTemplate>
+    <fd-wizard>
+        <fd-wizard-navigation>
+            <ul fd-wizard-progress-bar size="lg" role="list" aria-label="Wizard Steps">
+                <li *fdRepeat="3; let i = index" fd-wizard-step [status]="i === 0 ? 'current' : 'upcoming'">
+                    <fd-skeleton type="rectangle" width="32px" height="32px"></fd-skeleton>
+
+                    <fd-wizard-content size="lg">
+                        <fd-skeleton type="text" width="60%"></fd-skeleton>
+                    </fd-wizard-content>
+                </li>
+            </ul>
+        </fd-wizard-navigation>
+    </fd-wizard>
+</ng-template>

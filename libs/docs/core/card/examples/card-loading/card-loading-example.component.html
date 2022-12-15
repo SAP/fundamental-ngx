@@ -1,0 +1,48 @@
+<fd-card>
+    <fd-card-header>
+        <fd-skeleton type="text" textLines="1" styles="margin: auto 0"></fd-skeleton>
+    </fd-card-header>
+    <fd-card-content>
+        <ul fd-list [noBorder]="true">
+            <li fd-list-item *fdRepeat="3">
+                <fd-skeleton type="text" width="30%" textLines="1" styles="margin: auto 0"></fd-skeleton>
+            </li>
+        </ul>
+    </fd-card-content>
+</fd-card>
+
+<br />
+<br />
+
+<h3>Card header can be at the bottom as well</h3>
+<fd-card class="fd-docs-example-card-fix-width">
+    <fd-card-content>
+        <fd-skeleton type="rectangle" width="100%" height="300px"></fd-skeleton>
+    </fd-card-content>
+    <fd-card-header>
+        <h2 fd-card-title>
+            <fd-skeleton type="text" textLines="1" styles="margin: auto 0"></fd-skeleton>
+        </h2>
+    </fd-card-header>
+</fd-card>
+
+<br />
+<br />
+
+<h3>Card header with avatar, subtitle, counter and badge</h3>
+<fd-card badge="New" cardType="list">
+    <fd-card-header>
+        <fd-skeleton width="100%" height="48px">
+            <svg:circle cx="24" cy="24" r="24" />
+            <svg:rect x="60" y="0" rx="4" width="80%" height="12" />
+            <svg:rect x="60" y="20" rx="4" width="50%" height="8" />
+        </fd-skeleton>
+    </fd-card-header>
+    <fd-card-content>
+        <ul fd-list [noBorder]="true">
+            <li fd-list-item *fdRepeat="3">
+                <fd-skeleton type="text" width="30%" textLines="1" styles="margin: auto 0"></fd-skeleton>
+            </li>
+        </ul>
+    </fd-card-content>
+</fd-card>

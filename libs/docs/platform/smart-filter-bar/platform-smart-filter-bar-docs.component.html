@@ -109,3 +109,22 @@
     <fdp-platform-smart-filter-bar-dynamic-page-example></fdp-platform-smart-filter-bar-dynamic-page-example>
 </component-example>
 <code-example [exampleFiles]="sfbDynamicPage"></code-example>
+
+<fd-docs-section-title id="loading" componentName="smart-filter-bar">Initial Loading</fd-docs-section-title>
+<description>
+    <p>
+        As the Smart Filter Bar component supports as input a data source that can return observable, it will
+        automatically show skeleton placeholders while data is being loaded.
+    </p>
+
+    <p>
+        Please note, that skeleton placeholders only shown before items are loaded for the first time. Every subsequent
+        loading will be shown with busy indicator.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-smart-filter-bar-loading-example></fdp-platform-smart-filter-bar-loading-example>
+</component-example>
+<code-example [exampleFiles]="sfbLoading"></code-example>
+
+<separator></separator>

@@ -12,6 +12,7 @@ import { TimelineHorizontalAxisExampleComponent } from './examples/timeline-hori
 import { TimelineHorizontalDoubleSideExampleComponent } from './examples/timeline-horizontal-double-side-example.component';
 import { TimelineVerticalDoubleSideExampleComponent } from './examples/timeline-vertical-double-side-example.component';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
+import { TimelineLoadingExampleComponent } from './examples/loading/timeline-loading-example.component';
 
 const routes: Routes = [
     {
@@ -31,7 +32,8 @@ const routes: Routes = [
         TimelineBasicExampleComponent,
         TimelineHorizontalAxisExampleComponent,
         TimelineHorizontalDoubleSideExampleComponent,
-        TimelineVerticalDoubleSideExampleComponent
+        TimelineVerticalDoubleSideExampleComponent,
+        TimelineLoadingExampleComponent
     ],
     imports: [
         RouterModule.forChild(routes),

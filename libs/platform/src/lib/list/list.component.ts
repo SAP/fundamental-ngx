@@ -283,6 +283,11 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
      */
     _loading = false;
 
+    /** @hidden
+     * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
+     */
+    _firstLoadingDone = false;
+
     /**
      * @hidden
      * keyManger to handle keybord events used in template
@@ -700,6 +705,15 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
                     this._cd.detectChanges();
                 });
             });
+
+        this._dsSubscription.add(initDataSource.onDataRequested().subscribe(() => (this._loading = true)));
+
+        this._dsSubscription.add(
+            initDataSource.onDataReceived().subscribe(() => {
+                this._loading = false;
+                this._firstLoadingDone = true;
+            })
+        );
 
         // initial data fetch
         initDataSource.match('*');

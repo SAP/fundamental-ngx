@@ -59,6 +59,7 @@ describe('Form generator test suite', () => {
         await refreshPage();
         await waitForPresent(formGeneratorPage.root);
         await waitForElDisplayed(formGeneratorPage.title);
+        await pause(300);
         if ((await doesItExist(busyIndicator)) === true) {
             await pause(2000);
         }
@@ -188,6 +189,7 @@ describe('Form generator test suite', () => {
     });
 
     async function checkPasswordValidation(section: string): Promise<void> {
+        await waitForElDisplayed(section);
         await scrollIntoView(section + passwordInput);
         await setValue(section + passwordInput, simplePassword);
         await checkValidationMessage(section, passwordInput, passwordConditionsErrorMessage);
@@ -196,6 +198,7 @@ describe('Form generator test suite', () => {
     }
 
     async function checkBirthdayValidation(section: string): Promise<void> {
+        await waitForElDisplayed(section);
         await scrollIntoView(section + dateInput);
         await setValue(section + dateInput, invalidBirthday);
         await checkValidationMessage(section, calendarInputGroup, birthdayYearErrorMessage);
@@ -204,6 +207,7 @@ describe('Form generator test suite', () => {
     }
 
     async function checkPermissionsValidation(section: string): Promise<void> {
+        await waitForElDisplayed(section);
         await scrollIntoView(section + radioButtonLabel, 1);
         await checkValidationMessage(section, radioButtonLabel, termsErrorMesssage, 1);
         await click(section + radioButtonLabel);
@@ -211,6 +215,7 @@ describe('Form generator test suite', () => {
     }
 
     async function checkFrameworkValidation(section: string): Promise<void> {
+        await waitForElDisplayed(section);
         await scrollIntoView(section + radioButtonLabel);
         await checkValidationMessage(section, radioButtonLabel, frameworkErrorMessage, 3);
         await checkValidationMessage(section, radioButtonLabel, frameworkErrorMessage, 4);
@@ -219,6 +224,7 @@ describe('Form generator test suite', () => {
     }
 
     async function checkFormValidation(section: string): Promise<void> {
+        await waitForElDisplayed(section);
         await scrollIntoView(section);
         await click(section + nameInput);
 

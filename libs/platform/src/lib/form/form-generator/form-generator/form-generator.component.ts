@@ -87,13 +87,11 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      */
     @Input()
     set formItems(formItems: DynamicFormItem[]) {
-        this._formItems = formItems.map((item, index) => {
-            item = { ...item };
+        if (!formItems) {
+            return;
+        }
 
-            item.rank = item.rank || index;
-
-            return item;
-        });
+        this._formItems = formItems.map((item, index) => ({ ...item, rank: item.rank || index }));
         this._generateForm();
     }
     get formItems(): DynamicFormItem[] {
@@ -241,6 +239,11 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      */
     formLoading = true;
 
+    /** @hidden
+     * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
+     */
+    _firstLoadingDone = false;
+
     /**
      * @hidden
      */
@@ -363,6 +366,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
             });
 
         this.formLoading = false;
+        this._firstLoadingDone = true;
 
         this._cd.detectChanges();
 

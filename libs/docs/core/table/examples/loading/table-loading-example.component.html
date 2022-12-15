@@ -1,0 +1,26 @@
+<button fd-button (click)="loading = !loading" style="margin-bottom: 1rem">Toggle loading</button>
+
+<table fd-table aria-label="Default">
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>Column 1</th>
+            <th fd-table-cell>Column 2</th>
+            <th fd-table-cell>Column 3</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <ng-container *ngIf="!loading; else loadingTemplate">
+            <tr fd-table-row *fdRepeat="3; let rowI = index">
+                <td fd-table-cell *fdRepeat="3; let colI = index">Row {{ rowI + 1 }}, Col {{ colI + 1 }}</td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+
+<ng-template #loadingTemplate>
+    <tr fd-table-row *fdRepeat="3">
+        <td fd-table-cell *fdRepeat="3">
+            <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="60%"></fd-skeleton>
+        </td>
+    </tr>
+</ng-template>

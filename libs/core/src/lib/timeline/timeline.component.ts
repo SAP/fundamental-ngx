@@ -14,6 +14,7 @@ import {
     OnInit,
     QueryList,
     SimpleChanges,
+    TemplateRef,
     TrackByFunction,
     ViewChild,
     ViewContainerRef,
@@ -49,7 +50,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
      * Data array to render
      */
     @Input()
-    dataSource: T[] = [];
+    dataSource: T[];
 
     /**
      * Tracking function that will be used to check the differences in data changes.
@@ -89,6 +90,13 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
 
     /** @hidden */
     _canShowSecondList = true;
+
+    /** @hidden */
+    _loading = true;
+
+    /** @hidden */
+    @ViewChild('loadingTemplate')
+    _loadingTemplate: TemplateRef<any>;
 
     /** @hidden
      * Differ used to find the changes in the data provided by the data source.
@@ -157,8 +165,13 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
      */
     /** @hidden */
     private switchDataSource(data: T[]): void {
+        this._loading = true;
         if (!data) {
             this._firstListOutlet.viewContainer.clear();
+            this._firstListOutlet.viewContainer.createEmbeddedView(this._loadingTemplate);
+            this._cd.detectChanges();
+            this._timelinePositionControlService.calculatePositions();
+            this._cd.detectChanges();
             return;
         }
         if (this._nodeDefs) {
@@ -167,6 +180,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
             this._renderNodeChanges(second, this._dataDifferForSecondList, this._secondListOutlet?.viewContainer);
             this._cd.detectChanges();
             this._timelinePositionControlService.calculatePositions();
+            this._loading = false;
             this._cd.detectChanges();
         }
     }

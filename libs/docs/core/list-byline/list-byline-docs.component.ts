@@ -13,6 +13,7 @@ const bylineInteractiveTs = 'list-byline-interactive-example/list-byline-interac
 const bylineInteractiveHtml = 'list-byline-interactive-example/list-byline-interactive-example.component.html';
 const bylineWrapTs = 'list-byline-wrap-example/list-byline-wrap-example.component.ts';
 const bylineWrapHtml = 'list-byline-wrap-example/list-byline-wrap-example.component.html';
+const bylineLoadingSrcHtml = 'list-byline-loading-example/list-byline-loading-example.component.html';
 
 @Component({
     selector: 'app-list-byline',
@@ -96,6 +97,14 @@ export class ListBylineDocsComponent {
             code: getAssetFromModuleAssets(bylineWrapTs),
             fileName: 'list-byline-wrap-example',
             component: 'ListBylineWrapExampleComponent'
+        }
+    ];
+
+    listBylineLoading: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(bylineLoadingSrcHtml),
+            fileName: 'list-byline-loading-example'
         }
     ];
 }

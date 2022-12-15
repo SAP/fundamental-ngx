@@ -1,5 +1,6 @@
 <div class="fd-wizard__step-wrapper">
     <a
+        *ngIf="label || optionalText"
         #progressBarLink
         class="fd-wizard__step-container"
         (click)="stepContainerKeypress()"
@@ -19,6 +20,9 @@
             </div>
         </div>
     </a>
+
+    <ng-content></ng-content>
+
     <span
         *ngIf="!_finalStep || branching"
         class="fd-wizard__connector"

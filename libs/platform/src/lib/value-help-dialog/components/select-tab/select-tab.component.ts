@@ -42,6 +42,10 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     @Input()
     selected: T[] = [];
 
+    /** Loading state */
+    @Input()
+    loading = false;
+
     /** Actual filters */
     @Input()
     filters: VhdFilter[] = [];
