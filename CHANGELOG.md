@@ -1,3 +1,12 @@
+## [0.38.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.1...v0.38.1-rc.2) (2022-12-15)
+
+
+### Bug Fixes
+
+* **platform:** correct import syntax ([#9095](https://github.com/SAP/fundamental-ngx/issues/9095)) ([7afa08a](https://github.com/SAP/fundamental-ngx/commit/7afa08a3228d3dde3a2048a9ce14814a4014c116))
+
+
+
 ## [0.38.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.0...v0.38.1-rc.1) (2022-12-13)
 
 
