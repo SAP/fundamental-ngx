@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import {
     SectionInterface,
     SectionInterfaceContent,
@@ -6,6 +6,7 @@ import {
     SectionInterfaceContentNested
 } from './section.interface';
 import { BehaviorSubject } from 'rxjs';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 const SMALL_SCREEN_BREAKPOINT = 992;
 @Component({
@@ -29,6 +30,8 @@ export class SectionsToolbarComponent implements OnInit, OnChanges {
     private get _smallScreen(): boolean {
         return window.innerWidth < SMALL_SCREEN_BREAKPOINT;
     }
+
+    private readonly _liveAnnouncer: LiveAnnouncer = inject(LiveAnnouncer);
 
     /** @hidden type enforcing */
     $asSectionNestedContent = (sectionContent: SectionInterfaceContent[]): SectionInterfaceContentNested[] =>
@@ -71,6 +74,17 @@ export class SectionsToolbarComponent implements OnInit, OnChanges {
                 })
                 .filter(({ content }) => content.length);
         }
+
+        if (!preparedSearchTerm) {
+            return;
+        }
+
+        const totalItemsCount = this.displayedSections.reduce(
+            (prevValue, currentValue) => prevValue + currentValue.content.length,
+            0
+        );
+
+        this._liveAnnouncer.announce(`${totalItemsCount} search results found.`);
     }
 
     onKeypressHandler(event: KeyboardEvent): void {
