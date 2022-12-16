@@ -1,3 +1,12 @@
+## [0.38.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.4...v0.38.1-rc.5) (2022-12-16)
+
+
+### Bug Fixes
+
+* **docs:** fixed asset urls so now links work properly ([#9097](https://github.com/SAP/fundamental-ngx/issues/9097)) ([8e96a01](https://github.com/SAP/fundamental-ngx/commit/8e96a01438988aa97d06b236a1f5645c21064d1f))
+
+
+
 ## [0.38.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.3...v0.38.1-rc.4) (2022-12-15)
 
 
