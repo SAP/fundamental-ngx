@@ -1,3 +1,12 @@
+## [0.38.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.5...v0.38.1-rc.6) (2022-12-16)
+
+
+### Bug Fixes
+
+* **docs:** add live announcer for sidebar search ([#9099](https://github.com/SAP/fundamental-ngx/issues/9099)) ([08afa68](https://github.com/SAP/fundamental-ngx/commit/08afa689bffdd5bb4b9067f7cb2e45f55b39b7ee))
+
+
+
 ## [0.38.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.4...v0.38.1-rc.5) (2022-12-16)
 
 
