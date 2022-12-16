@@ -80,8 +80,6 @@ describe('Approval flow', () => {
         detailsDialogUserTeamButton,
         detailsDialogParallelSerialSelectOption,
         messageStrip,
-        messageStripUndoLink,
-        messageStripCancelUndoMessage,
         topActionButtons,
         approvalFlowNodeActionMenu,
         approvalFlowNodeActionMenuItem,
@@ -453,47 +451,6 @@ describe('Approval flow', () => {
             await click(footerButtons);
 
             await expect(await getElementArrayLength(nodeCardInfo)).toEqual(startingNodeCount + 1);
-        });
-
-        // skip due to found issue https://github.com/SAP/fundamental-ngx/issues/6903
-        xit('should be able to undo added approval node', async () => {
-            const approvalFlowNodeCountBefore = await getElementArrayLength(approvalFlowNode);
-
-            await click(editExampleButton);
-            await waitForElDisplayed(addNode);
-            await click(addNode);
-            await click(detailsDialogUserTeamButton);
-            await waitForElDisplayed(detailsDialogTeamMemberCheckBox);
-            await click(detailsDialogTeamMemberCheckBox, 4);
-            await click(detailsDialogSendReminderBtn);
-            await waitForElDisplayed(detailsDialogSendReminderBtn);
-            await click(detailsDialogSendReminderBtn);
-            const approvalFlowNodeCountAfterAdding = await getElementArrayLength(approvalFlowNode);
-            await waitForElDisplayed(messageStripUndoLink);
-            await click(messageStripUndoLink);
-            await waitForNotDisplayed(messageStripUndoLink);
-
-            const approvalFlowNodeCountAfterUndo = await getElementArrayLength(approvalFlowNode);
-
-            await expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfterAdding - 1);
-            await expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfterUndo);
-        });
-
-        // skip due to https://github.com/SAP/fundamental-ngx/issues/6903
-        xit('should be able to cancel undo', async () => {
-            await click(editExampleButton);
-            await waitForElDisplayed(addNode);
-            await click(addNode);
-            await click(detailsDialogUserTeamButton);
-            await waitForElDisplayed(detailsDialogTeamMemberCheckBox);
-            await click(detailsDialogTeamMemberCheckBox, 4);
-            await click(detailsDialogSendReminderBtn);
-            await waitForElDisplayed(detailsDialogSendReminderBtn);
-            await click(detailsDialogSendReminderBtn);
-            await waitForElDisplayed(messageStripCancelUndoMessage);
-            await click(messageStripCancelUndoMessage);
-
-            await expect(await doesItExist(messageStrip)).toBe(false);
         });
     });
 
