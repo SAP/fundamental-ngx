@@ -1,40 +1,16 @@
 <fd-toolbar [shouldOverflow]="true">
-    <button fd-toolbar-item fd-button fdCompact label="Button"></button>
-    <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="always" label="Always"></button>
-    <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="never" label="Never"></button>
+    <button fd-toolbar-item fd-button label="Button"></button>
+    <button fd-toolbar-item fd-button fdOverflowPriority="always" label="Always"></button>
+    <button fd-toolbar-item fd-button fdOverflowPriority="never" label="Never"></button>
+    <button fd-toolbar-item fd-button fdOverflowPriority="low" [fdOverflowGroup]="1" label="Gr 1 / Low"></button>
+    <button fd-toolbar-item fd-button fdOverflowPriority="low" [fdOverflowGroup]="2" label="Gr 2 / Low"></button>
     <button
         fd-toolbar-item
         fd-button
-        fdCompact
-        fdOverflowPriority="low"
-        [fdOverflowGroup]="1"
-        label="Gr 1 / Low"
-    ></button>
-    <button
-        fd-toolbar-item
-        fd-button
-        fdCompact
-        fdOverflowPriority="low"
-        [fdOverflowGroup]="2"
-        label="Gr 2 / Low"
-    ></button>
-    <button
-        fd-toolbar-item
-        fd-button
-        fdCompact
         fdOverflowPriority="disappear"
         [fdOverflowGroup]="2"
         label="Gr 2 / Disappear"
     ></button>
-    <button fd-toolbar-item fd-button fdCompact fdOverflowPriority="low" [fdOverflowGroup]="2" label="Gr 2 / Low">
-        " >
-    </button>
-    <button
-        fd-toolbar-item
-        fd-button
-        fdCompact
-        fdOverflowPriority="high"
-        [fdOverflowGroup]="1"
-        label="Gr 1 / High"
-    ></button>
+    <button fd-toolbar-item fd-button fdOverflowPriority="low" [fdOverflowGroup]="2" label="Gr 2 / Low">" ></button>
+    <button fd-toolbar-item fd-button fdOverflowPriority="high" [fdOverflowGroup]="1" label="Gr 1 / High"></button>
 </fd-toolbar>

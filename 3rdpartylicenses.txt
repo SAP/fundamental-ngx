@@ -212,6 +212,8 @@ Apache-2.0
 
 @fundamental-ngx/core/side-navigation
 
+@fundamental-ngx/core/skeleton
+
 @fundamental-ngx/core/slider
 
 @fundamental-ngx/core/split-button

@@ -1,4 +1,4 @@
-<div style="overflow: auto; height: 500px">
+<div fd-scrollbar style="height: 500px">
     <fd-timeline [dataSource]="data" [axis]="axis" [layout]="layout">
         <fd-timeline-node *fdTimelineNodeDef="let node" [glyph]="node.glyph">
             <fd-timeline-node-header>
@@ -6,7 +6,7 @@
                 <fd-timeline-node-header-info>
                     <span fdTimelineNodeHeaderInfoTitle>{{ node.user.name }}</span>
                     <span fdTimelineNodeHeaderInfoText>{{ node.title }}</span>
-                    <div fdTimelineHeaderInfoSubTitle>{{ node.date | date: 'short' }}</div>
+                    <div fdTimelineHeaderInfoSubTitle>{{ node.date | date : 'short' }}</div>
                 </fd-timeline-node-header-info>
             </fd-timeline-node-header>
 

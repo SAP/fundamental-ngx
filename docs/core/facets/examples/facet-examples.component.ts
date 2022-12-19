@@ -48,3 +48,12 @@ export class KeyValueFacetAlignmentExampleComponent {}
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RatingIndicatorFacetExampleComponent {}
+
+@Component({
+    selector: 'fd-facet-loading-example',
+    templateUrl: './facet-loading-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class FacetLoadingExampleComponent {
+    loading = true;
+}
