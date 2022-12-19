@@ -151,6 +151,12 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     @Input()
     unRead: boolean;
 
+    /**
+     * Whether to display unread notification circle.
+     */
+    @Input()
+    displayUnreadNotification = false;
+
     /** radio button value */
     @Input()
     value: string;

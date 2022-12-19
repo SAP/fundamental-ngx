@@ -28,6 +28,7 @@ import { PlatformStandardListItemWithNavigationExampleComponent } from './exampl
 import { PlatformStandardListItemWithSingleSelectionExampleComponent } from './examples/platform-standard-list-item-with-single-selection-example.component';
 import { PlatformStandardListItemWithSelectionExampleComponent } from './examples/platform-standard-list-item-with-selection-example.component';
 import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+import { PlatformStandardListUnreadExampleComponent } from './examples/platform-standard-list-unread-example.component';
 
 const routes: Routes = [
     {
@@ -63,7 +64,8 @@ const routes: Routes = [
         PlatformStandardListItemWithNavigationExampleComponent,
         PlatformStandardListItemWithSingleSelectionExampleComponent,
         PlatformStandardListItemWithInvertedSecondaryTypeExampleComponent,
-        PlatformNonByLineStandardListItemExampleComponent
+        PlatformNonByLineStandardListItemExampleComponent,
+        PlatformStandardListUnreadExampleComponent
     ],
     providers: [
         platformContentDensityModuleDeprecationsProvider('fdp-list'),

@@ -11,6 +11,7 @@ import { ListModule } from './list.module';
             [hasMessage]="hasMessage"
             [noBorder]="noBorder"
             [fdCompact]="compact"
+            [unreadIndicator]="unreadIndicator"
             fd-list
         >
             Action Bar Title Test Text
@@ -30,6 +31,8 @@ class TestComponent {
     hasMessage = false;
 
     noBorder = false;
+
+    unreadIndicator = false;
 }
 
 describe('ListComponent', () => {
@@ -69,5 +72,12 @@ describe('ListComponent', () => {
         expect(component.ref.nativeElement.classList).toContain('fd-list--compact');
         expect(component.ref.nativeElement.classList).toContain('fd-list--multi-input');
         expect(component.ref.nativeElement.classList).toContain('fd-list--dropdown');
+    });
+
+    it('should add unread indicator', () => {
+        component.unreadIndicator = true;
+        fixture.detectChanges();
+
+        expect(component.ref.nativeElement.classList).toContain('fd-list--unread-indicator');
     });
 });
