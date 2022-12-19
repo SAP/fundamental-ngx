@@ -76,7 +76,12 @@
     },
     "namedInputs": {
         "default": ["{projectRoot}/**/*", "sharedGlobals"],
-        "sharedGlobals": ["{workspaceRoot}/angular.json", "{workspaceRoot}/tsconfig.json", "{workspaceRoot}/nx.json"],
+        "sharedGlobals": [
+            "{workspaceRoot}/package.json",
+            "{workspaceRoot}/angular.json",
+            "{workspaceRoot}/tsconfig.json",
+            "{workspaceRoot}/nx.json"
+        ],
         "production": [
             "default",
             "!{projectRoot}/**/*.spec.[jt]s",
