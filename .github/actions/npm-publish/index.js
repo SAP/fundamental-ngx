@@ -3,6 +3,30 @@ const { npmPublish } = require('@jsdevtools/npm-publish');
 const { readFileSync } = require('fs');
 const { resolve } = require('path');
 
+async function publish({ currentTryNumber = 1, packageJsonPath, tag, token, access, retryCount }) {
+    try {
+        const result = await npmPublish({
+            package: packageJsonPath,
+            token,
+            tag,
+            access
+        });
+        info(`Published ${result.package}@${result.version}`);
+    } catch (e) {
+        if (currentTryNumber < retryCount) {
+            await publish({
+                currentTryNumber: currentTryNumber + 1,
+                packageJsonPath,
+                tag,
+                token,
+                access
+            });
+        } else {
+            throw e;
+        }
+    }
+}
+
 const run = async () => {
     const projectsMap = JSON.parse(readFileSync('./angular.json', { encoding: 'utf-8' })).projects;
     const projectNames = JSON.parse(getInput('projects'));
@@ -14,16 +38,16 @@ const run = async () => {
     });
     const tag = getInput('releaseTag');
     const npmToken = getInput('token');
-
+    const retryCount = 3;
     for (const packageJsonPath of projects) {
-        const result = await npmPublish({
-            package: packageJsonPath,
-            token: npmToken,
+        await publish({
+            packageJsonPath,
             tag,
-            access: 'public'
+            token: npmToken,
+            access: 'public',
+            retryCount
         });
-        info(`Published ${result.package}@${result.version}`);
     }
 };
 
-run().catch((e) => console.log(e));
+run();
