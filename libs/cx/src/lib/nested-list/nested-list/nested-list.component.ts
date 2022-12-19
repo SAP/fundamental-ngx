@@ -30,17 +30,7 @@ import {
 } from '@fundamental-ngx/core/content-density';
 
 @Component({
-    template: `
-        <!--li fdx-nested-list-item *ngIf="popoverTitle" class="fdx-nested-list__item--header">
-            <h3 class="fdx-nested-list__link" *ngIf="!hasNavigation">
-                <span class="fdx-nested-list__title">{{ popoverTitle }}</span>
-            </h3>
-            <a fdx-nested-list-link *ngIf="hasNavigation" tabindex="0">
-                <span fdx-nested-list-title>{{ popoverTitle }}</span>
-            </a>
-        </li-->
-        <ng-content></ng-content>
-    `,
+    template: ` <ng-content></ng-content> `,
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[cxNestedList], [fdx-nested-list], ul[fdx-nested-list]',
     providers: [

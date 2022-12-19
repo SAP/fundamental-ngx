@@ -8,7 +8,6 @@ import { NestedListItem, NestedListModel } from '../nested-list-model';
 @Component({
     selector: 'fdx-prepared-nested-list',
     templateUrl: './prepared-nested-list.component.html',
-    styleUrls: ['./prepared-nested-list.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
