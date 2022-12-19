@@ -9,7 +9,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { ExampleFile } from '../code-example/example-file';
-import hljs from 'highlight.js/lib';
+import hljs from 'highlight.js';
 
 @Component({
     selector: 'fd-code-snippet',
@@ -49,6 +49,6 @@ export class CodeSnippetComponent implements AfterViewInit, OnChanges {
     ngAfterViewInit(): void {
         /** Highlight.js init */
         const elementRef = this.fileBasedElementRef || this.contentBasedElementRef;
-        hljs.highlightBlock(elementRef.nativeElement);
+        hljs.highlightElement(elementRef.nativeElement);
     }
 }
