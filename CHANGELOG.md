@@ -1,3 +1,12 @@
+## [0.38.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.1...v0.38.2-rc.2) (2022-12-19)
+
+
+### Bug Fixes
+
+* **ci:** npm publish always set to public and added gh publish for hotfix latest ([#9112](https://github.com/SAP/fundamental-ngx/issues/9112)) ([95d9582](https://github.com/SAP/fundamental-ngx/commit/95d95827b447aa1b40606cdfc10970613f1be80d))
+
+
+
 ## [0.38.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.0...v0.38.2-rc.1) (2022-12-19)
 
 
