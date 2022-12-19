@@ -1,3 +1,12 @@
+## [0.38.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.38.1...v0.38.2-rc.0) (2022-12-19)
+
+
+### Features
+
+* **core,platform:** add unread indicator ([#9094](https://github.com/SAP/fundamental-ngx/issues/9094)) ([b73efbf](https://github.com/SAP/fundamental-ngx/commit/b73efbfd669168f0feb32ff8bcb4f9b8d43453e2))
+
+
+
 ## [0.38.1](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.7...v0.38.1) (2022-12-19)
 
 
