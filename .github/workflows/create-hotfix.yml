@@ -108,7 +108,30 @@ jobs:
                   name: ${{ secrets.GH_NAME }}
                   email: ${{ secrets.GH_EMAIL }}
                   token: ${{ secrets.GHACTIONS }}
+    gh_pages:
+        name: Github Pages deploy
+        runs-on: ubuntu-latest
+        needs: run-release
+        if: ${{ jobs.run-release.steps.ciEnv.outputs.isLatest }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                  ref: main # always fetch from main branch
+                  token: ${{ secrets.GHACTIONS }}
 
+            - name: Setup Node.js and Cache
+              uses: ./.github/actions/nodejs
+
+            - name: Run build prod
+              run: npx nx run-many --target=build --projects=docs --configuration=production
+
+            - name: Publish to gh-pages
+              uses: JamesIves/github-pages-deploy-action@v4
+              with:
+                  folder: dist/apps/docs
+                  token: ${{ secrets.GHACTIONS }}
+                  repository-name: ${{ github.repository }}
     stop_agents:
         if: ${{ always() }}
         needs: run-release
