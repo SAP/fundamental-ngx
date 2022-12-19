@@ -58,6 +58,7 @@ import { ListConfig } from './list.config';
 import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { LoadMoreContentContext, LoadMoreContentDirective } from './load-more-content.directive';
 import { FdpListComponent } from './fdpListComponent.token';
+import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/core/list';
 
 export type SelectionType = 'none' | 'multi' | 'single' | 'delete';
 export type ListType = 'inactive' | 'active' | 'detail';
@@ -84,53 +85,60 @@ let nextListId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         { provide: FormFieldControl, useExisting: ListComponent, multi: true },
-        { provide: FdpListComponent, useExisting: ListComponent }
+        { provide: FdpListComponent, useExisting: ListComponent },
+        {
+            provide: FD_LIST_UNREAD_INDICATOR,
+            useExisting: ListComponent
+        }
     ],
     host: {
         '[attr.tabindex]': '-1'
     }
 })
-export class ListComponent<T> extends CollectionBaseInput implements OnInit, AfterViewInit, OnDestroy {
-    /**  An array that holds a list of all selected items**/
+export class ListComponent<T>
+    extends CollectionBaseInput
+    implements ListUnreadIndicator, OnInit, AfterViewInit, OnDestroy
+{
+    /**  An array that holds a list of all selected items. **/
     @Input()
     selectedItems: BaseListItem[];
 
-    /** define size of items for screen reader */
+    /** define size of items for screen reader. */
     @Input()
     ariaSetsize: number;
 
-    /** Defines whether items are multiseletable for screen reader */
+    /** Defines whether items are multiselectable for screen reader. */
     @Input()
     ariaMultiselectable: boolean;
 
-    /** Title used on button when data loads on button click */
+    /** Title used on button when data loads on button click. */
     @Input()
     loadTitle: string;
 
-    /** Label used on announce message of data was loaded for screen readers */
+    /** Label used on announce message of data was loaded for screen readers. */
     @Input()
     loadingLabel = '';
 
-    /** Wait time for new items */
+    /** Wait time for new items. */
     @Input()
     delayTime: number;
 
-    /** Items to be loaded at once */
+    /** Items to be loaded at once. */
     @Input()
     itemSize = 0;
 
-    /** Enables lazy loadMore of data */
+    /** Enables lazy loadMore of data. */
     @Input()
     loadMore: boolean;
 
     /**
      * Enables data load on scroll for true
-     * false: enables data loading on button click
+     * false: enables data loading on button click.
      */
     @Input()
     loadOnScroll: boolean;
 
-    /** define the role to custom requirement */
+    /** define the role to custom requirement. */
     @Input()
     role = 'listbox';
 
@@ -138,19 +146,19 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     @Input()
     listType: ListType = 'active';
 
-    /** Max height for viewport to display scroll */
+    /** Max height for viewport to display scroll. */
     @Input()
     maxHeight: string;
 
-    /** Whether list component has removed borders */
+    /** Whether list component has removed borders. */
     @Input()
     noBorder = false;
 
-    /** Scroll offset percentage to trigger scroll event */
+    /** Scroll offset percentage to trigger scroll event. */
     @Input()
     scrollOffsetPercentage: number;
 
-    /** enables selection styles */
+    /** Eenables selection styles. */
     @Input()
     selection = false;
 
@@ -158,12 +166,12 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
      * The type of the selection. Types include:
      * 'none'| 'multi' | 'single'|'delete'.
      * Leave empty for default ().'
-     * Default value is set to ''
+     * Default value is set to 'none'.
      */
     @Input()
     selectionMode: SelectionType = 'none';
 
-    /** setter and getter for radio button and checkbox */
+    /** setter and getter for radio button and checkbox. */
     @Input()
     set value(value: any) {
         super.setValue(value);
@@ -173,7 +181,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         return super.getValue();
     }
 
-    /** setter and getter for row level Selection */
+    /** setter and getter for row level Selection. */
     @Input()
     set rowSelection(value: boolean) {
         this._rowSelection = value;
@@ -190,7 +198,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         return this._rowSelection;
     }
 
-    /** Datasource for suggestion list */
+    /** Datasource for suggestion list. */
     @Input()
     set dataSource(value: FdpListDataSource<T>) {
         if (value) {
@@ -202,7 +210,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         return this._dataSource;
     }
 
-    /** setter and getter for _navigated */
+    /** setter and getter for _navigated. */
     @Input()
     set navigated(value: boolean) {
         this._navigated = value;
@@ -219,7 +227,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         return this._navigated;
     }
 
-    /** setter and getter for _navigationIndicator */
+    /** setter and getter for _navigationIndicator. */
     @Input()
     set navigationIndicator(value: boolean) {
         this._navigationIndicator = value;
@@ -230,7 +238,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         return this._navigationIndicator;
     }
 
-    /** setter and getter for hasByLine */
+    /** setter and getter for hasByLine. */
     @Input()
     set hasByLine(value: boolean) {
         this._hasByLine = value;
@@ -241,7 +249,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         return this._hasByLine;
     }
 
-    /** setter and getter for hasObject */
+    /** setter and getter for hasObject. */
     @Input()
     set hasObject(value: boolean) {
         this._hasObject = value;
@@ -251,6 +259,10 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     get hasObject(): boolean {
         return this._hasObject;
     }
+
+    /** Whether to display unread notification indicator. */
+    @Input()
+    unreadIndicator = false;
 
     /** Event thrown, when selected item is changed */
     @Output()
@@ -282,6 +294,11 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
      * To display loading symbol
      */
     _loading = false;
+
+    /** @hidden
+     * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
+     */
+    _firstLoadingDone = false;
 
     /**
      * @hidden
@@ -700,6 +717,15 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
                     this._cd.detectChanges();
                 });
             });
+
+        this._dsSubscription.add(initDataSource.onDataRequested().subscribe(() => (this._loading = true)));
+
+        this._dsSubscription.add(
+            initDataSource.onDataReceived().subscribe(() => {
+                this._loading = false;
+                this._firstLoadingDone = true;
+            })
+        );
 
         // initial data fetch
         initDataSource.match('*');

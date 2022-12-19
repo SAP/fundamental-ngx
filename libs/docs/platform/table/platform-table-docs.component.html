@@ -499,6 +499,25 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="initial-loading" componentName="table">Initial Loading</fd-docs-section-title>
+<description>
+    <p>
+        As the Table component supports as input a data source that can return observable, it will automatically show
+        skeleton placeholders while data is being loaded.
+    </p>
+
+    <p>
+        Please note, that skeleton placeholders only shown before items are loaded for the first time. Every subsequent
+        loading will be shown with busy indicator.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-table-initial-loading-example></fdp-platform-table-initial-loading-example>
+</component-example>
+<code-example [exampleFiles]="initialLoading"></code-example>
+
+<separator></separator>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fdp-table
         [fdContentDensity]="data.table.contentDensity"

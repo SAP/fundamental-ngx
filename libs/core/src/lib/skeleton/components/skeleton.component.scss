@@ -1,0 +1,41 @@
+@import 'fundamental-styles/dist/layout-grid';
+
+$block: fd-skeleton;
+
+.fd-skeleton {
+    display: inline-block;
+    cursor: wait;
+
+    &__canvas {
+        display: block;
+        fill: var(--sapContent_Placeholderloading_Background);
+    }
+
+    &__middle {
+        stop-color: var(--fdSkeletonGradientMiddleColor);
+        animation: fd-skeleton-shimmer 2s linear infinite;
+    }
+
+    &--animated {
+        .#{$block}__canvas {
+            --fdSkeletonGradientMiddleColor: #999;
+
+            fill: url(#skeletonGradient);
+        }
+    }
+}
+
+@keyframes fd-skeleton-shimmer {
+    0% {
+        stop-color: var(--sapContent_Placeholderloading_Background);
+    }
+    35% {
+        stop-color: var(--fdSkeletonGradientMiddleColor);
+    }
+    65% {
+        stop-color: var(--fdSkeletonGradientMiddleColor);
+    }
+    100% {
+        stop-color: var(--sapContent_Placeholderloading_Background);
+    }
+}

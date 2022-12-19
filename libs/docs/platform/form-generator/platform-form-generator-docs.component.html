@@ -171,3 +171,22 @@
     the fields.
 </description>
 <fd-code-snippet language="typescript" [contentBased]="true">{{ defaultConfigExample }}</fd-code-snippet>
+
+<fd-docs-section-title id="loading" componentName="form-generator"> Initial loading </fd-docs-section-title>
+<description>
+    <p>
+        Before form is created or no form items are provided it will automatically show skeleton placeholders while data
+        is being loaded.
+    </p>
+
+    <p>
+        Please note, that skeleton placeholders only shown before items are loaded for the first time. Every subsequent
+        loading will be shown with busy indicator.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-form-generator-loading-example></fdp-platform-form-generator-loading-example>
+</component-example>
+<code-example [exampleFiles]="loadingFormGenerator"></code-example>
+
+<separator></separator>

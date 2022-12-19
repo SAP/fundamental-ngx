@@ -1,3 +1,87 @@
+## [0.38.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.1...v0.38.2-rc.2) (2022-12-19)
+
+
+### Bug Fixes
+
+* **ci:** npm publish always set to public and added gh publish for hotfix latest ([#9112](https://github.com/SAP/fundamental-ngx/issues/9112)) ([95d9582](https://github.com/SAP/fundamental-ngx/commit/95d95827b447aa1b40606cdfc10970613f1be80d))
+
+
+
+## [0.38.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.0...v0.38.2-rc.1) (2022-12-19)
+
+
+### Bug Fixes
+
+* invalidate nx cache on package.json change ([#9111](https://github.com/SAP/fundamental-ngx/issues/9111)) ([8e8bcad](https://github.com/SAP/fundamental-ngx/commit/8e8bcadbdf9e4cebe16b1de69bc342c25a45b8ad))
+
+
+
+## [0.38.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.38.1...v0.38.2-rc.0) (2022-12-19)
+
+
+### Features
+
+* **core,platform:** add unread indicator ([#9094](https://github.com/SAP/fundamental-ngx/issues/9094)) ([b73efbf](https://github.com/SAP/fundamental-ngx/commit/b73efbfd669168f0feb32ff8bcb4f9b8d43453e2))
+
+
+
+## [0.38.1](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.7...v0.38.1) (2022-12-19)
+
+
+
+## [0.38.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.6...v0.38.1-rc.7) (2022-12-18)
+
+
+
+## [0.38.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.5...v0.38.1-rc.6) (2022-12-16)
+
+
+### Bug Fixes
+
+* **docs:** add live announcer for sidebar search ([#9099](https://github.com/SAP/fundamental-ngx/issues/9099)) ([08afa68](https://github.com/SAP/fundamental-ngx/commit/08afa689bffdd5bb4b9067f7cb2e45f55b39b7ee))
+
+
+
+## [0.38.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.4...v0.38.1-rc.5) (2022-12-16)
+
+
+### Bug Fixes
+
+* **docs:** fixed asset urls so now links work properly ([#9097](https://github.com/SAP/fundamental-ngx/issues/9097)) ([8e96a01](https://github.com/SAP/fundamental-ngx/commit/8e96a01438988aa97d06b236a1f5645c21064d1f))
+
+
+
+## [0.38.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.3...v0.38.1-rc.4) (2022-12-15)
+
+
+
+## [0.38.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.2...v0.38.1-rc.3) (2022-12-15)
+
+
+### Features
+
+* **core,platform:** skeleton loading ([#9062](https://github.com/SAP/fundamental-ngx/issues/9062)) ([53dd8a1](https://github.com/SAP/fundamental-ngx/commit/53dd8a1e816250119b5d84b333765f5c0e2ccf80))
+
+
+
+## [0.38.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.1...v0.38.1-rc.2) (2022-12-15)
+
+
+### Bug Fixes
+
+* **platform:** correct import syntax ([#9095](https://github.com/SAP/fundamental-ngx/issues/9095)) ([7afa08a](https://github.com/SAP/fundamental-ngx/commit/7afa08a3228d3dde3a2048a9ce14814a4014c116))
+
+
+
+## [0.38.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.38.1-rc.0...v0.38.1-rc.1) (2022-12-13)
+
+
+### Features
+
+* **core:** apply fiori scrollbar to components ([#8962](https://github.com/SAP/fundamental-ngx/issues/8962)) ([b5c6435](https://github.com/SAP/fundamental-ngx/commit/b5c6435633ed66fc8d2636bea82b1128e8d9617d))
+
+
+
 ## [0.38.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.38.0...v0.38.1-rc.0) (2022-12-13)
 
 

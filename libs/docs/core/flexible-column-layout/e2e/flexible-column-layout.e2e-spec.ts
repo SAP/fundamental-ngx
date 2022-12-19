@@ -110,11 +110,6 @@ describe('Flexible column layout component test', () => {
         await flexibleColumnLayoutPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', async () => {
-        await flexibleColumnLayoutPage.saveExampleBaselineScreenshot();
-        await expect(await flexibleColumnLayoutPage.compareWithBaseline()).toBeLessThan(5);
-    });
-
     async function checkColumnWidth(section: string): Promise<void> {
         await click(section + button);
         await expect(await getAttributeByName(column, 'style', 0)).toContain('width: 100%');

@@ -413,5 +413,6 @@ export const API_FILES = {
         'OverflowLayoutItemDirective',
         'OverflowItemContainerRefDirective',
         'OverflowLayoutPopoverContentDirective'
-    ]
+    ],
+    skeleton: ['SkeletonComponent']
 };

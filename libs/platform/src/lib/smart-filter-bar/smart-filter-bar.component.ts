@@ -202,11 +202,17 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     /** @Hidden */
     _toolbarItems: TemplateRef<any>[] = [];
     /** @hidden */
-    _formItems: DynamicFormItem[] = [];
+    _formItems: DynamicFormItem[];
     /** @hidden */
     _selectedFilters: string[] = [];
     /** @hidden */
     _showFilterBar = true;
+
+    /** @hidden */
+    get _loading(): boolean {
+        return this._subject?.getDataSource() ? this._subject.getDataSource().isDataLoading : true;
+    }
+
     /** @hidden */
     private _subscriptions = new Subscription();
     /** @hidden */

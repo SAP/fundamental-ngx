@@ -28,6 +28,7 @@ import { PlatformFormGeneratorCustomFieldLayoutExampleComponent } from './exampl
 import { PlatformFormGeneratorGroupingExampleComponent } from './examples/platform-form-generator-grouping-example.component';
 import { PlatformFormGeneratorInlineHelpExampleComponent } from './examples/platform-form-generator-inline-help-example.component';
 import { TableModule } from '@fundamental-ngx/core/table';
+import { PlatformFormGeneratorLoadingExampleComponent } from './examples/loading/platform-form-generator-loading-example.component';
 
 const routes: Routes = [
     {
@@ -66,7 +67,8 @@ const routes: Routes = [
         PlatformFormGeneratorNoColonsExampleComponent,
         PlatformFormGeneratorCustomFieldLayoutExampleComponent,
         PlatformFormGeneratorGroupingExampleComponent,
-        PlatformFormGeneratorInlineHelpExampleComponent
+        PlatformFormGeneratorInlineHelpExampleComponent,
+        PlatformFormGeneratorLoadingExampleComponent
     ],
     providers: [currentComponentProvider('form-generator')]
 })

@@ -741,6 +741,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         return this.loading ?? this._internalLoadingState;
     }
 
+    /** @hidden
+     * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
+     */
+    _firstLoadingDone = false;
+
     /** @hidden */
     private _addedItems: T[] = [];
 
@@ -2218,6 +2223,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             dataSourceStream.onDataReceived().subscribe(() => {
                 this.onDataReceived.emit();
                 this._internalLoadingState = false;
+                this._firstLoadingDone = true;
                 this._tableService.setTableLoading(this.loadingState);
             })
         );

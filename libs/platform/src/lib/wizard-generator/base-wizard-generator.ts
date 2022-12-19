@@ -75,6 +75,10 @@ export class BaseWizardGenerator implements OnDestroy {
         this.wizardCreated = false;
         this._wizardGeneratorService.clearWizardStepComponents();
 
+        if (!items) {
+            return;
+        }
+
         this._wizardGeneratorService.prepareWizardItems(items).then((newItems) => {
             this._items = newItems;
             this._visibleItems = newItems;

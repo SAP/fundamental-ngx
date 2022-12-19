@@ -34,6 +34,7 @@ import {
 import { PlatformSmartFilterBarObservableExampleComponent } from './examples/platform-smart-filter-bar-observable-example.component';
 import { PlatformSmartFilterBarCustomLabelsExampleComponent } from './examples/platform-smart-filter-bar-custom-labels-example.component';
 import { PlatformSmartFilterBarDynamicPageExampleComponent } from './examples/platform-smart-filter-bar-dynamic-page-example.component';
+import { PlatformSmartFilterBarLoadingExampleComponent } from './examples/loading/platform-smart-filter-bar-loading-example.component';
 
 const routes: Routes = [
     {
@@ -75,7 +76,8 @@ const routes: Routes = [
         PlatformSmartFilterBarDateRendererComponent,
         PlatformSmartFilterBarObservableExampleComponent,
         PlatformSmartFilterBarCustomLabelsExampleComponent,
-        PlatformSmartFilterBarDynamicPageExampleComponent
+        PlatformSmartFilterBarDynamicPageExampleComponent,
+        PlatformSmartFilterBarLoadingExampleComponent
     ],
     providers: [currentComponentProvider('smart-filter-bar')]
 })

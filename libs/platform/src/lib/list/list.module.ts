@@ -5,12 +5,14 @@ import { CommonModule } from '@angular/common';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { PipeModule } from '@fundamental-ngx/core/utils';
+import { PipeModule, RepeatModule } from '@fundamental-ngx/core/utils';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { I18nModule } from '@fundamental-ngx/i18n';
+
 import { ActionListItemModule } from './action-list-item/action-list-item.module';
 import { DisplayListItemModule } from './display-list-item/display-list-item.module';
 import { ListFooterComponent } from './list-group-footer.component';
@@ -46,7 +48,9 @@ import { LoadMoreContentDirective } from './load-more-content.directive';
         StandardListItemModule,
         ObjectListItemModule,
         DisplayListItemModule,
-        ActionListItemModule
+        ActionListItemModule,
+        RepeatModule,
+        SkeletonModule
     ],
     exports: [
         ListComponent,

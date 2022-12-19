@@ -1,0 +1,31 @@
+<h3>Types</h3>
+
+<p><b>Rectangle</b></p>
+<fd-skeleton type="rectangle" width="100px" height="50px"></fd-skeleton>
+
+<fd-skeleton style="margin: 0 1rem" type="rectangle" width="100px" height="50px" [animated]="false"></fd-skeleton>
+
+<p><b>Circle</b></p>
+<fd-skeleton type="circle" width="50px"></fd-skeleton>
+
+<fd-skeleton style="margin: 0 1rem" type="circle" height="50px" [animated]="false"></fd-skeleton>
+
+<p>
+    <b>Note:</b> Setting <code>height</code> <b> or </b> <code>width</code> can be omitted as circle is always a square.
+</p>
+
+<p><b>Text</b></p>
+<p>3 lines, default</p>
+<fd-skeleton type="text" width="100px"></fd-skeleton>
+
+<fd-skeleton style="margin: 0 1rem" type="text" width="100px" [animated]="false"></fd-skeleton>
+
+<p>2 lines</p>
+<fd-skeleton type="text" width="100px" textLines="2"></fd-skeleton>
+
+<fd-skeleton style="margin: 0 1rem" type="text" width="100px" textLines="2" [animated]="false"></fd-skeleton>
+
+<p>
+    <b>Note:</b> Last line is 60% of width if there is more than 1 line. Setting <code>height</code> isn't necessary as
+    it can be calculated from number of lines.
+</p>

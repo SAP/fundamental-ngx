@@ -4250,10 +4250,10 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha512-S2Hw0TtNkMJhIabBwIojKL9YHO5T0n5eNqWJ7Lrlel/zDbftQpxpapi8tZs3X1HWa+u+QeydGmzzNU0m09+Rcg==
 
-angular-cli-ghpages@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/angular-cli-ghpages/-/angular-cli-ghpages-1.0.0.tgz#b03de99b4355ad3d668d8749cfbcc6a9a4c7c07d"
-  integrity sha512-TUmAPOP/a8dzOC0D5juBnxeWQzx7DXz1WNvoOijDpbPGYFcQJKSsnsjk+Wx5aydbXvzS4YuE7Nh2VvfEKlLa+Q==
+angular-cli-ghpages@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/angular-cli-ghpages/-/angular-cli-ghpages-1.0.5.tgz#7eb285e3625195bdff1d1b33d20907b3ac7d1d8b"
+  integrity sha512-utdXObMRFs3TqAsc4Km6/7pNnQoWTwgBbCDq2/8VgejId1Ft66Uh6TkA12EMpao7eH+WRRhv6VfWgui4oRucPQ==
   dependencies:
     commander "^3.0.0-0"
     fs-extra "^9.0.1"
@@ -9025,10 +9025,10 @@ fundamental-styles@0.25.1-rc.16:
   resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.25.1-rc.16.tgz#8560a5e1411ac3dfbf6d593ba4cd7b1f3124f3d5"
   integrity sha512-/ETPbzv98pMtqT5nNODkamxDBJsDPJ4KG/f5XEAvExvdx0+IvESuZQES6n1F3He1o1zMGLJj4HVqp4UJFiRGsQ==
 
-fundamental-styles@0.26.0-rc.41:
-  version "0.26.0-rc.41"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.26.0-rc.41.tgz#da6a0e4d649f1d5941e3d5e1d4369581a92bdf17"
-  integrity sha512-V4Y3ACozQvN91LulWB08ZPFYVC8dGjfgy9HURoJX2KnB+aDk/s7aaSBbtC4imb9iL/qGOGAr+alhlwV5/TlZVA==
+fundamental-styles@0.26.0-rc.45:
+  version "0.26.0-rc.45"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.26.0-rc.45.tgz#c700d68c5bd7c51fc37ca65d5efef2a76b608978"
+  integrity sha512-M7Sbc0ur+L0CMku5yKli+D2Imi6fIilvFxQQ0twc2JctYIMw4R9vnbztVMbc8KUWC4KtDS3IRxmRHzw4sbM/sQ==
 
 gauge@^3.0.0:
   version "3.0.2"

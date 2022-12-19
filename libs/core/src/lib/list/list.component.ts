@@ -5,7 +5,6 @@ import {
     Component,
     ContentChildren,
     EventEmitter,
-    forwardRef,
     HostBinding,
     HostListener,
     Input,
@@ -28,7 +27,8 @@ import {
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 import { ListComponentInterface } from './list-component.interface';
-import { LIST_COMPONENT } from './list-component.token';
+import { FD_LIST_COMPONENT, FD_LIST_UNREAD_INDICATOR } from './list-component.token';
+import { ListUnreadIndicator } from './list-unread-indicator.interface';
 
 /**
  * The directive that represents a list.
@@ -51,12 +51,16 @@ import { LIST_COMPONENT } from './list-component.token';
             modifiers: { [ContentDensityMode.COMPACT]: 'fd-list--compact' }
         }),
         {
-            provide: LIST_COMPONENT,
-            useExisting: forwardRef(() => ListComponent)
+            provide: FD_LIST_COMPONENT,
+            useExisting: ListComponent
+        },
+        {
+            provide: FD_LIST_UNREAD_INDICATOR,
+            useExisting: ListComponent
         }
     ]
 })
-export class ListComponent implements ListComponentInterface, OnInit, AfterContentInit, OnDestroy {
+export class ListComponent implements ListComponentInterface, ListUnreadIndicator, OnInit, AfterContentInit, OnDestroy {
     /** Whether dropdown mode is included to component, used for Select and Combobox */
     @Input()
     @HostBinding('class.fd-list--dropdown')
@@ -100,6 +104,11 @@ export class ListComponent implements ListComponentInterface, OnInit, AfterConte
     @Input()
     @HostBinding('class.fd-list--byline')
     byline = false;
+
+    /** Whether to display unread notification indicator. */
+    @HostBinding('class.fd-list--unread-indicator')
+    @Input()
+    unreadIndicator = false;
 
     /** Event thrown, when focus escapes the list */
     @Output()

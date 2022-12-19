@@ -103,7 +103,7 @@
     <div
         class="fdp-search-field__suggestion-dropdown"
         [attr.dir]="_dir"
-        *ngIf="(_dropdownValues$ | async | suggestionMatches: inputText:mobile)?.length"
+        *ngIf="(_dropdownValues$ | async | suggestionMatches : inputText : mobile)?.length"
     >
         <nav
             class="fd-menu"
@@ -117,12 +117,12 @@
                 <li
                     fdpSearchFieldSuggestion
                     class="fdp-search-field__suggestion-item fd-menu__item fd-menu__link"
-                    *ngFor="let value of _dropdownValues$ | async | suggestionMatches: inputText:mobile"
+                    *ngFor="let value of _dropdownValues$ | async | suggestionMatches : inputText : mobile"
                     (keydown.enter)="onItemClick(value)"
                     (keydown.tab)="onItemClick(value)"
                     (keyup.space)="onItemClick(value); $event.stopPropagation()"
                     (click)="onItemClick(value)"
-                    [innerHTML]="value | highlight: inputText:true:true"
+                    [innerHTML]="value | highlight : inputText : true : true"
                     role="menuitem"
                 ></li>
             </ul>

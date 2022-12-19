@@ -16,7 +16,7 @@ import { FocusableOption } from '@angular/cdk/a11y';
 import { Subject } from 'rxjs';
 import { ListNavigationItemArrowDirective } from '../directives/list-navigation-item-arrow.directive';
 import { ListNavigationItemTextDirective } from '../directives/list-navigation-item-text.directive';
-import { LIST_COMPONENT } from '../list-component.token';
+import { FD_LIST_COMPONENT } from '../list-component.token';
 import { ListComponentInterface } from '../list-component.interface';
 
 @Component({
@@ -53,7 +53,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     _condensed = false;
 
     /** @hidden */
-    @ContentChild(LIST_COMPONENT)
+    @ContentChild(FD_LIST_COMPONENT)
     _listComponent: ListComponentInterface;
 
     /** @hidden */

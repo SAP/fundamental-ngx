@@ -30,6 +30,7 @@ import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { DeprecatedTabsCompactDirective } from './deprecated-tabs-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 
 @NgModule({
     declarations: [
@@ -61,7 +62,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ScrollSpyModule,
         ContentDensityModule,
         I18nModule,
-        OverflowLayoutModule
+        OverflowLayoutModule,
+        ScrollbarModule
     ],
     exports: [
         TabListComponent,

@@ -67,6 +67,6 @@ export class CoreBaseComponentPo {
     }
 
     async open(url: string): Promise<void> {
-        return open('fundamental-ngx#/core' + url);
+        return open('#/core' + url);
     }
 }

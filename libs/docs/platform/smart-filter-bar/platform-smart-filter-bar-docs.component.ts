@@ -16,6 +16,9 @@ const platformSfbCustomLabelsTsCode = 'platform-smart-filter-bar-custom-labels-e
 const platformSfbDynamicPageSrc = 'platform-smart-filter-bar-dynamic-page-example.component.html';
 const platformSfbDynamicPageTsCode = 'platform-smart-filter-bar-dynamic-page-example.component.ts';
 
+const platformLoadingSfbSrc = 'loading/platform-smart-filter-bar-loading-example.component.html';
+const platformLoadingSfbTsCode = 'loading/platform-smart-filter-bar-loading-example.component.ts';
+
 @Component({
     selector: 'app-smart-filter-bar',
     templateUrl: './platform-smart-filter-bar-docs.component.html'
@@ -88,6 +91,20 @@ export class PlatformSmartFilterBarDocsComponent {
             code: getAssetFromModuleAssets(platformSfbDynamicPageTsCode),
             fileName: 'platform-smart-filter-bar-dynamic-page-example',
             component: 'PlatformSmartFilterBarDynamicPageExampleComponent'
+        }
+    ];
+
+    sfbLoading: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformLoadingSfbSrc),
+            fileName: 'platform-smart-filter-bar-loading-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformLoadingSfbTsCode),
+            fileName: 'platform-smart-filter-bar-loading-example',
+            component: 'PlatformSmartFilterBarLoadingExampleComponent'
         }
     ];
 }

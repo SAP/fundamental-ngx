@@ -11,7 +11,7 @@ import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { TableModule } from '@fundamental-ngx/core/table';
-import { PipeModule } from '@fundamental-ngx/core/utils';
+import { PipeModule, RepeatModule } from '@fundamental-ngx/core/utils';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { LinkModule } from '@fundamental-ngx/core/link';
@@ -26,6 +26,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 import { PlatformValueHelpDialogComponent } from './value-help-dialog/value-help-dialog.component';
 import { VhdFilterComponent } from './components/value-help-dialog-filter/value-help-dialog-filter.component';
@@ -34,6 +35,7 @@ import { VhdBaseTab } from './components/base-tab/vhd-base-tab.component';
 import { SelectTabComponent } from './components/select-tab/select-tab.component';
 import { DefineTabComponent } from './components/define-tab/define-tab.component';
 import { ConditionCountMessageDirective } from './directives/condition-count-message.directive';
+import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 
 @NgModule({
     declarations: [
@@ -72,7 +74,10 @@ import { ConditionCountMessageDirective } from './directives/condition-count-mes
         InfiniteScrollModule,
         PlatformSearchFieldModule,
         ContentDensityModule,
-        PlatformContentDensityDeprecationsModule
+        PlatformContentDensityDeprecationsModule,
+        ScrollbarModule,
+        SkeletonModule,
+        RepeatModule
     ],
     exports: [
         PlatformValueHelpDialogComponent,

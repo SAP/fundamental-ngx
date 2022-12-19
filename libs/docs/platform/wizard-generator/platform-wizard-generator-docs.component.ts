@@ -43,6 +43,9 @@ const whenConditionTsExample = 'wizard-generator-visibility-between-steps-exampl
 const specialElementsHtmlExamples = 'wizard-generator-special-elements-example.component.html';
 const specialElementsTsExamples = 'wizard-generator-special-elements-example.component.ts';
 
+const loadingHtmlExample = 'loading/wizard-generator-loading-example.component.html';
+const loadingTsExample = 'loading/wizard-generator-loading-example.component.ts';
+
 @Component({
     selector: 'fdp-platform-wizard-generator-docs',
     templateUrl: './platform-wizard-generator-docs.component.html'
@@ -229,6 +232,7 @@ export class PlatformWizardGeneratorDocsComponent {
             component: 'WizardGeneratorVisibilityBetweenStepsExampleComponent'
         }
     ];
+
     specialElementsExample: ExampleFile[] = [
         {
             language: 'html',
@@ -243,6 +247,20 @@ export class PlatformWizardGeneratorDocsComponent {
         }
     ];
     specialElementsExamplesHTML: string;
+
+    loadingExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(loadingHtmlExample),
+            fileName: 'wizard-generator-loading-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(loadingTsExample),
+            fileName: 'wizard-generator-loading-example',
+            component: 'WizardGeneratorLoadingExampleComponent'
+        }
+    ];
 
     constructor() {}
 }

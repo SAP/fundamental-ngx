@@ -1,0 +1,40 @@
+<svg width="100%" height="100%" class="fd-skeleton__canvas">
+    <defs>
+        <linearGradient id="skeletonGradient">
+            <stop offset="0" stop-color="var(--sapContent_Placeholderloading_Background)"></stop>
+
+            <stop class="fd-skeleton__middle">
+                <animate attributeName="offset" values="0; 0; 0.5; 1; 1" dur="2s" repeatCount="indefinite" />
+            </stop>
+
+            <stop offset="1" stop-color="var(--sapContent_Placeholderloading_Background)"></stop>
+        </linearGradient>
+
+        <mask [id]="_id">
+            <ng-container *ngIf="type === 'rectangle'">
+                <rect x="0" y="0" width="100%" rx="4" height="100%"></rect>
+            </ng-container>
+
+            <ng-container *ngIf="type === 'circle'">
+                <circle cx="50%" cy="50%" r="50%"></circle>
+            </ng-container>
+
+            <ng-container *ngIf="type === 'text'">
+                <ng-container *ngFor="let line of [].constructor(textLines); let i = index">
+                    <rect
+                        x="0"
+                        [attr.y]="i * 20"
+                        width="100%"
+                        rx="4"
+                        height="8"
+                        [attr.width]="i > 0 && i + 1 === textLines ? '60%' : '100%'"
+                    ></rect>
+                </ng-container>
+            </ng-container>
+
+            <ng-content></ng-content>
+        </mask>
+    </defs>
+
+    <rect x="0" y="0" width="100%" height="100%" [attr.mask]="'url(#' + _id + ')'"></rect>
+</svg>

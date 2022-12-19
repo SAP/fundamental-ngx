@@ -67,6 +67,9 @@ const platformTableEditableRowsTsSrc = 'editable-rows/platform-table-editable-ro
 const platformResponsiveColumnsSrc = 'platform-table-responsive-columns-example.component.html';
 const platformResponsiveColumnsTsSrc = 'platform-table-responsive-columns-example.component.ts';
 
+const platformInitialLoadingSrc = 'initial-loading/platform-table-initial-loading-example.component.html';
+const platformInitialLoadingTsSrc = 'initial-loading/platform-table-initial-loading-example.component.ts';
+
 const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
 
 import { TableDataProviderExample } from './examples/platform-table-data-provider-example';
@@ -511,6 +514,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-responsive-columns-example',
             component: 'PlatformTableResponsiveColumnsExampleComponent',
             name: 'platform-table-responsive-columns-example.component.ts'
+        }
+    ];
+
+    initialLoading: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformInitialLoadingSrc),
+            fileName: 'platform-table-initial-loading-example',
+            name: 'platform-table-initial-loading-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformInitialLoadingTsSrc),
+            fileName: 'platform-table-initial-loading-example',
+            component: 'PlatformTableInitialLoadingExampleComponent',
+            name: 'platform-table-initial-loading-example.component.ts'
         }
     ];
 

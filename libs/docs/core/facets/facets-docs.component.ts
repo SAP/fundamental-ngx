@@ -11,6 +11,7 @@ const ImageFacetExample = 'image-facet-example.component.html';
 const RatingIndicatorFacetExample = 'rating-indicator-facet-example.component.html';
 const CustomFacetExample = 'custom-facet-example.component.html';
 const CustomFacetExampleTsCode = 'custom-facet-example.component.ts';
+const FacetLoadingExample = 'facet-loading-example.component.html';
 
 @Component({
     selector: 'app-facet',
@@ -81,6 +82,14 @@ export class FacetsDocsComponent {
             code: getAssetFromModuleAssets(CustomFacetExampleTsCode),
             fileName: 'custom-facet-example',
             component: 'CustomFacetExampleComponent'
+        }
+    ];
+
+    facetLoading: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(FacetLoadingExample),
+            fileName: 'facet-loading-example'
         }
     ];
 }

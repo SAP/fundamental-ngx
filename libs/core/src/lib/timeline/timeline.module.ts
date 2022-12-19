@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { TextModule } from '@fundamental-ngx/core/text';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { RepeatModule } from '@fundamental-ngx/core/utils';
 
 import { TimelineComponent } from './timeline.component';
 import { TimelineNodeDefDirective } from './directives/timeline-node-def.directive';
@@ -32,7 +34,7 @@ import { TimelineSecondListOutletDirective } from './directives/timeline-second-
         TimelineHeaderInfoSubTitleDirective,
         TimelineSecondListOutletDirective
     ],
-    imports: [CommonModule, IconModule, TextModule],
+    imports: [CommonModule, IconModule, TextModule, SkeletonModule, RepeatModule],
     exports: [
         TimelineComponent,
         TimelineNodeDefDirective,

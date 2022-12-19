@@ -2,7 +2,7 @@
 <ng-container *ngIf="navigationIndicator || (navigated && !(noDataText !== null && noDataText !== undefined))">
     <li
         #listItem
-        [class.fd-list__item--unread]="unRead"
+        [unread]="unRead"
         fd-list-item
         [attr.id]="id"
         [selected]="_selected"
@@ -35,7 +35,7 @@
 <ng-container *ngIf="!navigationIndicator && !navigated && !(noDataText !== null && noDataText !== undefined)">
     <li
         #listItem
-        [class.fd-list__item--unread]="unRead"
+        [unread]="unRead"
         fd-list-item
         [attr.id]="id"
         [selected]="_selected"

@@ -174,6 +174,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     ngAfterViewInit(): void {
         setTimeout(() => {
+            if (this._subscriptions.closed) {
+                return;
+            }
+
             // fixes ExpressionChangedAfterItHasBeenCheckedError
             this._setContentTemplates();
             this._subscriptions.add(
@@ -399,12 +403,15 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             _fromScrollToCurrentStep = true;
             this.steps.forEach((step, index) => {
                 if (step.status === CURRENT_STEP_STATUS && (!step.isSummary || this.displaySummaryStep)) {
-                    const child = this.wrapperContainer.nativeElement.children[index] as HTMLElement;
+                    const child = this.wrapperContainer.nativeElement.children[0].children[index] as HTMLElement;
                     const wizardNavigationHeight = this._elRef.nativeElement.querySelector(
                         '.' + WIZARD_NAVIGATION_CLASS
                     ).clientHeight;
 
-                    scrollTop(this.wrapperContainer.nativeElement, child.offsetTop - wizardNavigationHeight);
+                    scrollTop(
+                        this.wrapperContainer.nativeElement.children[0],
+                        child.offsetTop - wizardNavigationHeight
+                    );
                 }
             });
             this._setUpScrollListener();
@@ -466,7 +473,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 }
             }
         });
-        this._getLastNonSummaryStep().stepIndicator.setStackedItems(this.stackedStepsRight);
+        this._getLastNonSummaryStep().stepIndicator?.setStackedItems(this.stackedStepsRight);
     }
 
     /** @hidden */
@@ -546,8 +553,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         setTimeout(() => {
             this.stackedStepsLeft = [];
             this.stackedStepsRight = [];
-            this.steps.first.stepIndicator.setStackedItems(this.stackedStepsLeft);
-            this._getLastNonSummaryStep().stepIndicator.setStackedItems(this.stackedStepsRight);
+            this.steps.first.stepIndicator?.setStackedItems(this.stackedStepsLeft);
+            this._getLastNonSummaryStep().stepIndicator?.setStackedItems(this.stackedStepsRight);
             this._resetStepClasses();
             let i = 0;
             while (this._anyStepIsTooNarrow() && i < this.steps.length - 1) {
@@ -600,9 +607,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     scrollSpyChange($event: HTMLElement): void {
         if (!_fromScrollToCurrentStep) {
             this.steps.forEach((step) => {
-                if (step._stepId.toString() === $event.children[0].id) {
+                if (step._stepId.toString() === $event.children[0].children[0].id) {
                     step.status = CURRENT_STEP_STATUS;
-                } else if (step._stepId < parseInt($event.children[0].id, 10)) {
+                } else if (step._stepId < parseInt($event.children[0].children[0].id, 10)) {
                     step.status = COMPLETED_STEP_STATUS;
                 } else {
                     step.status = UPCOMING_STEP_STATUS;

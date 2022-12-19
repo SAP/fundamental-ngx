@@ -8,6 +8,7 @@ import { ScrollSpyExampleComponent } from './examples/scroll-spy-example/scroll-
 import { ScrollSpyHeaderComponent } from './scroll-spy-header/scroll-spy-header.component';
 import { ScrollSpyDocsComponent } from './scroll-spy-docs.component';
 import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
+import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 
 const routes: Routes = [
     {
@@ -21,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ScrollSpyModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ScrollSpyModule, ScrollbarModule],
     exports: [RouterModule],
     declarations: [
         ScrollSpyDocsComponent,

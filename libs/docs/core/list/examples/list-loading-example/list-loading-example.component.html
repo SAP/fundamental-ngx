@@ -1,0 +1,15 @@
+<button fd-button (click)="loading = !loading" style="margin-bottom: 1rem">Toggle loading</button>
+
+<ul fd-list>
+    <ng-container *ngIf="!loading; else loadingTemplate">
+        <li fd-list-item *fdRepeat="3">
+            <span fd-list-title> List item 1 </span>
+        </li>
+    </ng-container>
+</ul>
+
+<ng-template #loadingTemplate>
+    <li fd-list-item *fdRepeat="3">
+        <fd-skeleton type="text" width="40%" textLines="1" style="margin: auto 0"></fd-skeleton>
+    </li>
+</ng-template>

@@ -17,7 +17,7 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { TableModule } from '@fundamental-ngx/core/table';
-import { PipeModule } from '@fundamental-ngx/core/utils';
+import { PipeModule, RepeatModule } from '@fundamental-ngx/core/utils';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DragAndDropModule } from '@fundamental-ngx/core/utils';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
@@ -28,6 +28,7 @@ import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-fiel
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 import { TableComponent } from './table.component';
 import { TableColumnComponent } from './components/table-column/table-column.component';
@@ -157,7 +158,9 @@ const EXPORTABLE_DECLARATIONS = [
         PlatformDatePickerModule,
         PlatformSwitchModule,
         PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
+        ContentDensityModule,
+        SkeletonModule,
+        RepeatModule
     ],
     declarations: [...EXPORTABLE_DECLARATIONS],
     exports: [
