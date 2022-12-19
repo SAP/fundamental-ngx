@@ -19,7 +19,8 @@ const run = async () => {
         const result = await npmPublish({
             package: packageJsonPath,
             token: npmToken,
-            tag
+            tag,
+            access: 'public'
         });
         info(`Published ${result.package}@${result.version}`);
     }
