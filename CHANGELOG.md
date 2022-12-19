@@ -1,3 +1,12 @@
+## [0.38.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.0...v0.38.2-rc.1) (2022-12-19)
+
+
+### Bug Fixes
+
+* invalidate nx cache on package.json change ([#9111](https://github.com/SAP/fundamental-ngx/issues/9111)) ([8e8bcad](https://github.com/SAP/fundamental-ngx/commit/8e8bcadbdf9e4cebe16b1de69bc342c25a45b8ad))
+
+
+
 ## [0.38.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.38.1...v0.38.2-rc.0) (2022-12-19)
 
 
