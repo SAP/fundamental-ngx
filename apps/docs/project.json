@@ -167,7 +167,7 @@
                         "bundleName": "sap_horizon_fonts"
                     }
                 ],
-                "scripts": ["node_modules/marked/lib/marked.js"],
+                "scripts": ["node_modules/marked/marked.min.js"],
                 "allowedCommonJsDependencies": ["moment", "highlight.js", "focus-trap", "@angularclass/hmr"],
                 "vendorChunk": true,
                 "extractLicenses": false,

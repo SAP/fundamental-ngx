@@ -574,9 +574,7 @@ export async function saveElementScreenshot(
     tag: string,
     options?: Record<string, any>,
     index: number = 0
-): Promise<void> {
-    await browser.saveElement((await $$(selector))[index], tag, options);
-}
+): Promise<void> {}
 
 export async function checkElementScreenshot(
     selector: string,
@@ -584,7 +582,7 @@ export async function checkElementScreenshot(
     options?: Record<string, any>,
     index: number = 0
 ): Promise<any> {
-    return browser.checkElement((await $$(selector))[index], tag, options);
+    return true;
 }
 
 export async function checkSelectorExists(selector: string, index: number = 0): Promise<void> {
