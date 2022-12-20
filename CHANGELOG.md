@@ -1,3 +1,12 @@
+## [0.38.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.3...v0.38.2-rc.4) (2022-12-20)
+
+
+### Bug Fixes
+
+* **core:** wizard scroll on top after step change ([#9116](https://github.com/SAP/fundamental-ngx/issues/9116)) ([4d2c4da](https://github.com/SAP/fundamental-ngx/commit/4d2c4da9888a395bd1a61d1af814adc7d75d0d9c))
+
+
+
 ## [0.38.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.2...v0.38.2-rc.3) (2022-12-20)
 
 
