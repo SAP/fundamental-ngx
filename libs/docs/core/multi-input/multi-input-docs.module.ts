@@ -19,6 +19,7 @@ import { DeprecatedMultiInputCompactDirective, MultiInputModule } from '@fundame
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { MultiInputDropdownWidthExampleComponent } from './examples/multi-input-dropdown-width-example/multi-input-dropdown-width-example.component';
 
 const routes: Routes = [
     {
@@ -53,7 +54,8 @@ const routes: Routes = [
         MultiInputNewTokensExampleComponent,
         MultiInputMobileExampleComponent,
         MultiInputIncludesExampleComponent,
-        MultiInputCustomItemExampleComponent
+        MultiInputCustomItemExampleComponent,
+        MultiInputDropdownWidthExampleComponent
     ],
     providers: [
         moduleDeprecationsProvider(DeprecatedMultiInputCompactDirective),

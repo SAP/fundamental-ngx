@@ -6,6 +6,7 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
+    HostListener,
     Injector,
     Input,
     OnChanges,
@@ -59,9 +60,6 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     selector: 'fd-multi-input',
     templateUrl: './multi-input.component.html',
     styleUrls: ['./multi-input.component.scss'],
-    host: {
-        '(focusout)': '_focusOut($event)'
-    },
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -231,7 +229,20 @@ export class MultiInputComponent
 
     /** Max width of multi input body in PX */
     @Input()
-    bodyMaxWidth: Nullable<number>;
+    bodyMaxWidth: 'none' | 'container' | number = 'none';
+
+    /** @hidden */
+    get _popoverMaxWidth(): Nullable<number> {
+        if (this.bodyMaxWidth === 'none') {
+            return null;
+        }
+
+        if (typeof this.bodyMaxWidth === 'number') {
+            return this.bodyMaxWidth;
+        }
+
+        return this._elementRef.nativeElement.getBoundingClientRect().width;
+    }
 
     /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
     @Input()
@@ -339,7 +350,7 @@ export class MultiInputComponent
     /** @hidden */
     constructor(
         readonly _contentDensityObserver: ContentDensityObserver,
-        private readonly _elementRef: ElementRef,
+        private readonly _elementRef: ElementRef<HTMLElement>,
         private readonly _changeDetRef: ChangeDetectorRef,
         private readonly _dynamicComponentService: DynamicComponentService,
         private readonly _injector: Injector,
@@ -825,8 +836,9 @@ export class MultiInputComponent
     }
 
     /** @hidden */
+    @HostListener('focusout', ['$event'])
     private _focusOut(event: FocusEvent): void {
-        if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
+        if (!this._elementRef.nativeElement.contains(event.relatedTarget as Node)) {
             this.onTouched();
         }
     }
