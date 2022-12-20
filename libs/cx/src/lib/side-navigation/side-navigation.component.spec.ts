@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, fakeAsync, waitForAsync } from '@angular/cor
 
 import { SideNavigationComponent } from './side-navigation.component';
 import { Component, ViewChild } from '@angular/core';
-import { CxNestedListModule } from '../nested-list/nested-list.module';
+import { CxNestedListModule } from '@fundamental-ngx/cx/nested-list';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { SideNavigationMainComponent } from './side-navigation-main.component';
 
