@@ -1,0 +1,67 @@
+<label fd-label for="dropdownExampleInput1">Default Multi Input</label>
+<fd-multi-input
+    inputId="dropdownExampleInput1"
+    [dropdownValues]="[
+        'SomeLongTextToShowThatWidthWillGrowWithTheContent',
+        'Banana',
+        'Pineapple',
+        'Tomato',
+        'Kiwi',
+        'Strawberry',
+        'Blueberry',
+        'Orange'
+    ]"
+    placeholder="Search here..."
+    [(ngModel)]="selected"
+    style="width: 200px"
+></fd-multi-input>
+
+Selected: {{ selected | json }}
+
+<br /><br />
+
+<label fd-label for="dropdownExampleInput2">Strict Multi Input dropdown width</label>
+<fd-multi-input
+    inputId="dropdownExampleInput2"
+    [dropdownValues]="[
+        'SomeLongTextToShowThatWidthWillGrowWithTheContent',
+        'Banana',
+        'Pineapple',
+        'Tomato',
+        'Kiwi',
+        'Strawberry',
+        'Blueberry',
+        'Orange'
+    ]"
+    placeholder="Search here..."
+    [bodyMaxWidth]="200"
+    [(ngModel)]="selected"
+    style="width: 200px"
+></fd-multi-input>
+
+Selected: {{ selected | json }}
+
+<br /><br />
+
+<label fd-label for="dropdownExampleInput3">Dynamic Multi Input dropdown width</label>
+<fd-multi-input
+    inputId="dropdownExampleInput3"
+    [dropdownValues]="[
+        'SomeLongTextToShowThatWidthWillGrowWithTheContent',
+        'Banana',
+        'Pineapple',
+        'Tomato',
+        'Kiwi',
+        'Strawberry',
+        'Blueberry',
+        'Orange'
+    ]"
+    placeholder="Search here..."
+    [bodyMaxWidth]="'container'"
+    [(ngModel)]="selected"
+    style="width: 250px"
+></fd-multi-input>
+
+Selected: {{ selected | json }}
+
+<br /><br />

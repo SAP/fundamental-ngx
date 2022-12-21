@@ -32,6 +32,9 @@ const mobileT = 'multi-input-mobile-example/multi-input-mobile-example.component
 const customH = 'multi-input-custom-item-example/multi-input-custom-item-example.component.html';
 const customT = 'multi-input-custom-item-example/multi-input-custom-item-example.component.ts';
 
+const widthH = 'multi-input-dropdown-width-example/multi-input-dropdown-width-example.component.html';
+const widthT = 'multi-input-dropdown-width-example/multi-input-dropdown-width-example.component.ts';
+
 @Component({
     selector: 'app-multi-input-docs',
     templateUrl: './multi-input-docs.component.html',
@@ -175,6 +178,20 @@ export class MultiInputDocsComponent {
             component: 'MultiInputCustomItemExampleComponent',
             code: getAssetFromModuleAssets(customT),
             fileName: 'multi-input-custom-item-example'
+        }
+    ];
+
+    customWidth: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(widthH),
+            fileName: 'multi-input-dropdown-width-example'
+        },
+        {
+            language: 'typescript',
+            component: 'MultiInputDropdownWidthExampleComponent',
+            code: getAssetFromModuleAssets(widthT),
+            fileName: 'multi-input-dropdown-width-example'
         }
     ];
 }
