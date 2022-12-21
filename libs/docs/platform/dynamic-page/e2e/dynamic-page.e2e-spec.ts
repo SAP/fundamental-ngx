@@ -129,8 +129,9 @@ describe('Dynamic Page Layout test suite:', () => {
             await click(tabbesExampleButton);
             await waitForElDisplayed(dynamicPage);
             await waitForElDisplayed(dynamicPageTabs);
-            const firstTabSelected = await getAttributeByName(dynamicPageTabs, 'aria-selected');
-            const secondTabSelected = await getAttributeByName(dynamicPageTabs, 'aria-selected', 1);
+            const tabLinks = dynamicPageTabs + ' ' + '.fd-tabs__link';
+            const firstTabSelected = await getAttributeByName(tabLinks, 'aria-selected');
+            const secondTabSelected = await getAttributeByName(tabLinks, 'aria-selected', 1);
             await expect(firstTabSelected).toBe('true');
             await expect(secondTabSelected).toBe('false');
             await expect(await getText(dynamicPageTabsContent)).toContain('tab1');
@@ -140,9 +141,10 @@ describe('Dynamic Page Layout test suite:', () => {
             await click(tabbesExampleButton);
             await waitForElDisplayed(dynamicPage);
             await waitForElDisplayed(dynamicPageTabs);
+            const tabLinks = dynamicPageTabs + ' ' + '.fd-tabs__link';
             await click(dynamicPageTabs, 1);
-            const firstTabSelected = await getAttributeByName(dynamicPageTabs, 'aria-selected');
-            const secondTabSelected = await getAttributeByName(dynamicPageTabs, 'aria-selected', 1);
+            const firstTabSelected = await getAttributeByName(tabLinks, 'aria-selected');
+            const secondTabSelected = await getAttributeByName(tabLinks, 'aria-selected', 1);
 
             await expect(firstTabSelected).toBe('false');
             await expect(secondTabSelected).toBe('true');
