@@ -227,7 +227,12 @@ export class MultiInputComponent
     @Input()
     showAllButton = true;
 
-    /** Max width of multi input body in PX */
+    /**
+     * Max width of multi input body.
+     * `none` will not limit width of the dropdown.
+     * `container` will limit width of the dropdown to the width of the multi-input itself.
+     * `number` will limit width of the dropdown by provided number in pixels.
+     */
     @Input()
     bodyMaxWidth: 'none' | 'container' | number = 'none';
 
