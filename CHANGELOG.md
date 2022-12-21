@@ -1,3 +1,12 @@
+## [0.38.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.5...v0.38.2-rc.6) (2022-12-21)
+
+
+### Bug Fixes
+
+* **core:** removed forbidden aria-selected attribute from div ([#9117](https://github.com/SAP/fundamental-ngx/issues/9117)) ([9f79963](https://github.com/SAP/fundamental-ngx/commit/9f799634e3e9906f39eb67900c5b930cd59cc94a))
+
+
+
 ## [0.38.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.4...v0.38.2-rc.5) (2022-12-21)
 
 
