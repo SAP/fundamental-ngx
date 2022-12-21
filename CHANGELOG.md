@@ -1,3 +1,12 @@
+## [0.38.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.4...v0.38.2-rc.5) (2022-12-21)
+
+
+### Features
+
+* **core:** multi input dropdown width ([#9113](https://github.com/SAP/fundamental-ngx/issues/9113)) ([065ce87](https://github.com/SAP/fundamental-ngx/commit/065ce87a7fc9b8b162b87abfdd280ebfb6452a6e))
+
+
+
 ## [0.38.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.3...v0.38.2-rc.4) (2022-12-20)
 
 
