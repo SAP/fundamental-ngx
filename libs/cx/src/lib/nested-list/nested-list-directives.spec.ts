@@ -1,13 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
+import { NestedItemService } from './nested-item/nested-item.service';
 import {
-    NestedItemService,
-    NestedListExpandIconComponent,
     NestedListIconDirective,
-    CxNestedListModule,
-    NestedListTitleDirective
-} from '@fundamental-ngx/cx/nested-list';
+    NestedListTitleDirective,
+    NestedListExpandIconComponent
+} from './nested-list-directives';
+import { CxNestedListModule } from './nested-list.module';
 
 @Component({
     template: `

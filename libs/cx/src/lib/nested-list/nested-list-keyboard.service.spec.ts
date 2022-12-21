@@ -44,7 +44,7 @@ describe('NestedListKeyboardSupportService', () => {
         object = {
             nestedItems: toArray()
         };
-        service = new NestedListKeyboardService(new MenuKeyboardService());
+        service = new NestedListKeyboardService(new MenuKeyboardService(), null);
     });
 
     it('Should return all of the items', () => {
