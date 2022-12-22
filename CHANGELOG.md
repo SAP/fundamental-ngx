@@ -1,3 +1,12 @@
+## [0.38.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.7...v0.38.2-rc.8) (2022-12-22)
+
+
+### Bug Fixes
+
+* **core:** fix missing popover arrow ([#9119](https://github.com/SAP/fundamental-ngx/issues/9119)) ([d01b137](https://github.com/SAP/fundamental-ngx/commit/d01b1371d1b93a1a2c17513261423722b38789bb))
+
+
+
 ## [0.38.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.6...v0.38.2-rc.7) (2022-12-22)
 
 
