@@ -1,3 +1,12 @@
+## [0.38.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.6...v0.38.2-rc.7) (2022-12-22)
+
+
+### Bug Fixes
+
+* component generator fix ([#9120](https://github.com/SAP/fundamental-ngx/issues/9120)) ([abb07b2](https://github.com/SAP/fundamental-ngx/commit/abb07b2066337783150b9f562775853ba0f9719e))
+
+
+
 ## [0.38.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.5...v0.38.2-rc.6) (2022-12-21)
 
 
