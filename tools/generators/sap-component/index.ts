@@ -171,20 +171,8 @@ function updateLibraryData(tree: Tree, schema: SapComponentSchema): void {
 
         const config = angularJson.projects[oldName];
 
-        // since we're placing everything in the root of the library, need to update configs
-        // config.sourceRoot = config.root;
-        // config.architect.build.outputs[0] = config.architect.build.outputs[0].replace('/src/lib', '');
-        // config.architect.test.options.main = config.architect.test.options.main.replace('src/test.ts', 'test.ts');
-        // config.architect.lint.options.lintFilePatterns = config.architect.lint.options.lintFilePatterns.map((str) =>
-        //     str.replace('src/**', '**')
-        // );
-
         angularJson.projects[newName] = config;
         delete angularJson.projects[oldName];
-
-        // if (schema.project === 'platform') {
-        //     angularJson.projects[newName].implicitDependencies = ['core'];
-        // }
 
         writeJson(tree, '/angular.json', angularJson);
     }

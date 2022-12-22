@@ -7,7 +7,6 @@ import { offsetFromRoot, readProjectConfiguration, Tree } from '@nrwl/devkit';
  */
 export function addEslintJsonOverrides(tree: Tree, projectName: string): Rule {
     const project = readProjectConfiguration(tree, projectName);
-    // const project = workspaceJson.projects[projectName];
     const eslintPath = `${project.root}/.eslintrc.json`;
     if (!tree.exists(eslintPath)) {
         throw new Error(`Could not find ".eslintrc.json" at "${project.root}"`);
