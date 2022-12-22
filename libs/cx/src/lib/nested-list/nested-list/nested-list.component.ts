@@ -172,7 +172,7 @@ export class NestedListComponent implements AfterContentInit, NestedListInterfac
 
         let retVal = filteredParentElements.length;
 
-        if (element?.classList?.contains('fdx-side-nav__popover-body')) {
+        if (this._nestedItemService?.popover) {
             retVal += 1;
         }
 
