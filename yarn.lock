@@ -1764,7 +1764,7 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fundamental-styles/cx@0.25.3-rc.5":
+"@fundamental-styles/cx@0.26.3-rc.5":
   version "0.26.3-rc.5"
   resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.26.3-rc.5.tgz#a0a5cad6faf66f000a0d851fd1267a24f38a32a1"
   integrity sha512-uWaz4Fmaq+/ZnifJ4Tf0/Etinut1u5oYatbiVKuvl3wjtdIZQ5J7XDH+rr2qDRUij5P1eQEOgJqA0IvPZm7K3Q==
