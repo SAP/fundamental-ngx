@@ -1,3 +1,12 @@
+## [0.38.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.8...v0.38.2-rc.9) (2022-12-23)
+
+
+### Features
+
+* **core:** custom icon placement on core button ([#9092](https://github.com/SAP/fundamental-ngx/issues/9092)) ([204b99f](https://github.com/SAP/fundamental-ngx/commit/204b99f9b3a994b3ab12efd030288d57706b777b))
+
+
+
 ## [0.38.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.7...v0.38.2-rc.8) (2022-12-22)
 
 
