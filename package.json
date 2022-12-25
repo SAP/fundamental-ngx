@@ -75,7 +75,7 @@
   },
   "devDependencies": {
     "@actions/core": "1.10.0",
-    "@angular-builders/custom-webpack": "15.0.0-beta.0",
+    "@angular-builders/custom-webpack": "15.0.0",
     "@angular-devkit/build-angular": "15.0.2",
     "@angular-devkit/core": "15.0.2",
     "@angular-devkit/schematics": "15.0.2",

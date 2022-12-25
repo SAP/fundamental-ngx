@@ -25,10 +25,10 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@angular-builders/custom-webpack@15.0.0-beta.0":
-  version "15.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@angular-builders/custom-webpack/-/custom-webpack-15.0.0-beta.0.tgz#a474601a679a712e3dd64904074adb08b52d3a44"
-  integrity sha512-pMjpKTHgCsYhIDmdr27DhYJnjTqpDVdI5QF7SJ/4nJ9iLOukDH/ru2x89KUOsfXeT1XKsYMI7uCgURohUurULQ==
+"@angular-builders/custom-webpack@15.0.0":
+  version "15.0.0"
+  resolved "https://registry.yarnpkg.com/@angular-builders/custom-webpack/-/custom-webpack-15.0.0.tgz#bc05c5fdc1153ae2f48417f6529034282398940d"
+  integrity sha512-i8ZQ7rJ+RTy73MivvIdNAa8sZpiDy9wHBetAEyYSlGtjaSB3lntEFtBw9edfyRkpbifw53QA/N5haOwox987/Q==
   dependencies:
     "@angular-devkit/architect" ">=0.1500.0 < 0.1600.0"
     "@angular-devkit/build-angular" "^15.0.0"
