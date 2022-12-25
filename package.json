@@ -93,7 +93,7 @@
     "@nrwl/cli": "15.3.0",
     "@nrwl/devkit": "15.3.0",
     "@nrwl/eslint-plugin-nx": "15.3.0",
-    "@nrwl/linter": "15.3.0",
+    "@nrwl/linter": "15.4.1",
     "@nrwl/nx-cloud": "15.0.2",
     "@nrwl/nx-plugin": "15.3.0",
     "@nrwl/schematics": "8.12.11",
