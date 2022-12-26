@@ -1,17 +1,19 @@
 <ng-container #viewContainer></ng-container>
 
 <ng-template #menuRootTemplate>
-    <nav
-        class="fd-menu"
-        [id]="id"
-        [attr.aria-labelledby]="ariaLabelledby"
-        [attr.aria-label]="ariaLabel"
-        role="menu"
-        [class.fd-menu--compact]="_contentDensityObserver.isCompact$ | async"
-        [class.fd-menu--mobile]="mobile"
-    >
-        <ul role="none" class="fd-menu__list fd-menu__list--no-shadow">
-            <ng-content></ng-content>
-        </ul>
-    </nav>
+    <div class="fd-popover__wrapper--visible">
+        <nav
+            class="fd-menu"
+            [id]="id"
+            [attr.aria-labelledby]="ariaLabelledby"
+            [attr.aria-label]="ariaLabel"
+            role="menu"
+            [class.fd-menu--compact]="_contentDensityObserver.isCompact$ | async"
+            [class.fd-menu--mobile]="mobile"
+        >
+            <ul role="none" class="fd-menu__list fd-menu__list--no-shadow">
+                <ng-content></ng-content>
+            </ul>
+        </nav>
+    </div>
 </ng-template>
