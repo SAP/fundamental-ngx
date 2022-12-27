@@ -73,6 +73,6 @@ export class SideNavigationMainComponent implements AfterContentInit {
 
     /** @hidden */
     _scrollItems(direction: 'up' | 'down'): void {
-        this.elementRef.nativeElement.scrollBy({ top: direction === 'up' ? -54 : 54, left: 0, behavior: 'smooth' });
+        this.elementRef.nativeElement.scrollBy({ top: direction === 'up' ? -52 : 52, left: 0, behavior: 'smooth' });
     }
 }
