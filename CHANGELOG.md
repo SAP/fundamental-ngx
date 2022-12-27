@@ -1,3 +1,12 @@
+## [0.38.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.9...v0.38.2-rc.10) (2022-12-27)
+
+
+### Bug Fixes
+
+* **core:** breadcrumb overflow icon ([#9140](https://github.com/SAP/fundamental-ngx/issues/9140)) ([5992fcd](https://github.com/SAP/fundamental-ngx/commit/5992fcd86b7b992d8cb957e25dd6a6389a2efc37))
+
+
+
 ## [0.38.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.8...v0.38.2-rc.9) (2022-12-23)
 
 
