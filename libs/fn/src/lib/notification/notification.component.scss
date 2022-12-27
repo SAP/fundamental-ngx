@@ -1,7 +1,7 @@
-@import '@angular/cdk/overlay-prebuilt.css';
+@import '@angular/cdk/overlay-prebuilt';
 // TODO: After component is migrated to ngx, remove styling and use component.
-@import '@fundamental-styles/fn/dist/fn-nested-button.css';
-@import '@fundamental-styles/fn/dist/fn-notification.css';
+@import '@fundamental-styles/fn/dist/fn-nested-button';
+@import '@fundamental-styles/fn/dist/fn-notification';
 
 .fn-toast-overlay-container {
     .cdk-overlay-pane {
