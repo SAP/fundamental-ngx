@@ -20,7 +20,7 @@ module.exports = ({ runner, specs, projectName }) => {
             {
                 browserName: 'chrome',
                 'goog:chromeOptions': {
-                    args: ['--window-size=1920,1080', '--headless']
+                    args: ['--window-size=1920,1080']
                 }
             }
         ],
