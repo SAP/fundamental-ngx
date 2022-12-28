@@ -1,6 +1,6 @@
 import { logger, ProjectConfiguration } from '@nrwl/devkit';
 import { readFileSync, writeFileSync } from 'fs-extra';
-import { major } from 'semver';
+import { major, minor } from 'semver';
 import { PrepareOptions } from './prepare.options';
 import { glob } from 'glob';
 
@@ -11,7 +11,7 @@ const versions = {
     VERSION_PLACEHOLDER: packageJson.version,
     // As Angular version listed as peerDependency it should be ^X.0.0 to support any minor version
     ANGULAR_VER_PLACEHOLDER: `^${major(packageJson.dependencies['@angular/core'])}.0.0`,
-    RXJS_VER_PLACEHOLDER: packageJson.dependencies.rxjs,
+    RXJS_VER_PLACEHOLDER: `^${major(packageJson.dependencies.rxjs)}.${minor(packageJson.dependencies.rxjs)}.0`,
     FAST_DEEP_EQUAL_VER_PLACEHOLDER: packageJson.dependencies['fast-deep-equal'],
     FDSTYLES_VER_PLACEHOLDER: packageJson.dependencies['fundamental-styles'],
     FDNSTYLES_VER_PLACEHOLDER: packageJson.dependencies['@fundamental-styles/fn'],
@@ -19,9 +19,13 @@ const versions = {
     FOCUSTRAP_VER_PLACEHOLDER: packageJson.dependencies['focus-trap'],
     FOCUSVISIBLE_VER_PLACEHOLDER: packageJson.dependencies['focus-visible'],
     LODASH_ES_VER_PLACEHOLDER: packageJson.dependencies['lodash-es'],
-    COMPARE_VERSIONS_VER_PLACEHOLDER: packageJson.dependencies['compare-versions'],
-    DAYJS_VER_PLACEHOLDER: packageJson.dependencies['dayjs'],
-    THEMING_VER_PLACEHOLDER: packageJson.dependencies['@sap-theming/theming-base-content']
+    COMPARE_VERSIONS_VER_PLACEHOLDER: `^${major(packageJson.dependencies['compare-versions'])}.${minor(
+        packageJson.dependencies['compare-versions']
+    )}.0`,
+    DAYJS_VER_PLACEHOLDER: `^${major(packageJson.dependencies.dayjs)}.${minor(packageJson.dependencies.dayjs)}.0`,
+    THEMING_VER_PLACEHOLDER: `^${major(packageJson.dependencies['@sap-theming/theming-base-content'])}.${minor(
+        packageJson.dependencies['@sap-theming/theming-base-content']
+    )}.0`
 };
 
 const transformOverrideParamToPlaceholderKey = (param: string): keyof typeof versions => {
