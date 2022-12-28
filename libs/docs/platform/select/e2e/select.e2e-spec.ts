@@ -74,7 +74,7 @@ describe('Select test suite', () => {
         });
 
         it('verify select in read only mode', async () => {
-            await expect(await getAttributeByName(selectModeExample + displayText, 'aria-readonly', 3)).toBe('true');
+            await expect(await getElementClass(selectModeExample + displayText, 3)).toContain('is-readonly');
         });
 
         it('should check compact select be smaller than basic select', async () => {

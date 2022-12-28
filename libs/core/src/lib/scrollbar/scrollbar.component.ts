@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 export type ScrollbarOverflowOptions = 'auto' | 'scroll' | 'hidden';
@@ -92,6 +92,16 @@ export class ScrollbarComponent {
 
     /** @hidden */
     private _alwaysVisible = false;
+
+    /**
+     * @hidden
+     */
+    constructor(private _elementRef: ElementRef<HTMLElement>) {}
+
+    /** method to invoke scroll */
+    scroll(options: ScrollToOptions): void {
+        this._elementRef.nativeElement.scroll(options);
+    }
 
     /** @hidden */
     private get _overflow(): ScrollbarOverflowOptions {

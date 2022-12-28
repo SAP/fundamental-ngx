@@ -1,5 +1,6 @@
-import { SchematicsException, Tree } from '@angular-devkit/schematics';
-import { addExportToModule, parseSourceFile } from '@angular/cdk/schematics';
+import { SchematicsException } from '@angular-devkit/schematics';
+import { addExportToModule } from '@angular/cdk/schematics';
+import { Tree } from '@nrwl/devkit';
 import { InsertChange } from '@schematics/angular/utility/change';
 import * as ts from 'typescript';
 
@@ -59,23 +60,23 @@ export function getPropertyAssignmentByName(
  * @param src src location to export
  */
 export function addModuleOrComponentExportToModule(host: Tree, modulePath: string, moduleName: string, src: string) {
-    const moduleSource = parseSourceFile(host, modulePath);
+    const moduleSource = host.read(modulePath)?.toString();
 
     if (!moduleSource) {
         throw new SchematicsException(`Module not found: ${modulePath}`);
     }
 
+    const moduleDefinition = ts.createSourceFile(modulePath, moduleSource, ts.ScriptTarget.Latest, true);
+
     // @ts-ignore
-    const changes = addExportToModule(moduleSource, modulePath, moduleName, src);
-    const recorder = host.beginUpdate(modulePath);
+    const changes = addExportToModule(moduleDefinition, modulePath, moduleName, src);
 
     changes.forEach((change) => {
         if (change instanceof InsertChange) {
-            recorder.insertLeft(change.pos, change.toAdd);
+            const contents = host.read(modulePath);
+            host.write(modulePath, `${contents?.slice(0, change.pos)}${change.toAdd}${contents?.slice(change.pos)}`);
         }
     });
-
-    host.commitUpdate(recorder);
 }
 
 /**
@@ -94,5 +95,5 @@ export function replaceContentInFile(
     }
     let indexTs = tree.read(filePath)?.toString() ?? '';
     replacements.forEach(([replacer, replaceValue]) => (indexTs = indexTs.replace(replacer, replaceValue)));
-    tree.overwrite(filePath, indexTs);
+    tree.write(filePath, indexTs);
 }

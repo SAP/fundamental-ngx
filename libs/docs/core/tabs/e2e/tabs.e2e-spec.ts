@@ -97,10 +97,11 @@ describe('Tabs test suite', () => {
             return;
         }
         await click(chooseTabsBtn, 1);
-        await expect(await getAttributeByName(SelectionExample + fdTab, 'aria-selected', 1)).toEqual('true');
+        const tabLinkSelector = SelectionExample + fdTab + ' ' + fdTabFF;
+        await expect(await getAttributeByName(tabLinkSelector, 'aria-selected', 1)).toEqual('true');
         await click(chooseTabsBtn);
-        await expect(await getAttributeByName(SelectionExample + fdTab, 'aria-selected', 0)).toEqual('true');
-        await expect(await getAttributeByName(SelectionExample + fdTab, 'aria-selected', 1)).toEqual('false');
+        await expect(await getAttributeByName(tabLinkSelector, 'aria-selected', 0)).toEqual('true');
+        await expect(await getAttributeByName(tabLinkSelector, 'aria-selected', 1)).toEqual('false');
     });
 
     it('check collapsible overflow', async () => {
@@ -184,19 +185,20 @@ describe('Tabs test suite', () => {
         if (section !== collapsibleOverflowExample) {
             length = await getElementArrayLength(section + fdTab);
         }
+        const tabLinkElSelector = section + fdTab + ' ' + fdTabFF;
         for (let i = 0; i < length; i++) {
             if (section === collapsibleExample && i === 0) {
                 await click(section + fdTab, i);
-                if ((await getAttributeByName(section + fdTab, 'aria-selected', i)) === 'true') {
+                if ((await getAttributeByName(tabLinkElSelector, 'aria-selected', i)) === 'true') {
                     return false;
                 }
             }
             if (section === stackendContentExample && i === 0) {
-                await expect(await getAttributeByName(section + fdTab, 'aria-selected', i)).toEqual('true');
+                await expect(await getAttributeByName(tabLinkElSelector, 'aria-selected', i)).toEqual('true');
             }
             if (section !== collapsibleExample && section !== stackendContentExample && i !== 0) {
                 await click(section + fdTab, i);
-                if ((await getAttributeByName(section + fdTab, 'aria-selected', i)) !== 'true') {
+                if ((await getAttributeByName(tabLinkElSelector, 'aria-selected', i)) !== 'true') {
                     return false;
                 }
             }

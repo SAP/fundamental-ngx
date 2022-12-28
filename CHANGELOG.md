@@ -1,3 +1,124 @@
+## [0.38.2](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.16...v0.38.2) (2022-12-28)
+
+
+
+## [0.38.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.15...v0.38.2-rc.16) (2022-12-28)
+
+
+### Bug Fixes
+
+* fixed i18n package dependencies ([#9146](https://github.com/SAP/fundamental-ngx/issues/9146)) ([7f3bd7e](https://github.com/SAP/fundamental-ngx/commit/7f3bd7ea8e4d05facf8be9747101e757e3cfd78d))
+
+
+
+## [0.38.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.14...v0.38.2-rc.15) (2022-12-28)
+
+
+### Bug Fixes
+
+* **ci:** fixed versions of our 3rd party dependencies ([#9145](https://github.com/SAP/fundamental-ngx/issues/9145)) ([619b3bb](https://github.com/SAP/fundamental-ngx/commit/619b3bb4b4eec8c273a00422f1dbbf291dd80bf7))
+
+
+
+## [0.38.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.13...v0.38.2-rc.14) (2022-12-28)
+
+
+### Bug Fixes
+
+* **core:** submenu visibility ([#9139](https://github.com/SAP/fundamental-ngx/issues/9139)) ([a0bdf39](https://github.com/SAP/fundamental-ngx/commit/a0bdf3970ebaf93778c7fdd2fa657953984f1952))
+
+
+
+## [0.38.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.12...v0.38.2-rc.13) (2022-12-28)
+
+
+### Bug Fixes
+
+* **core:** added i18n package installation in core's ng-add ([#9144](https://github.com/SAP/fundamental-ngx/issues/9144)) ([524f897](https://github.com/SAP/fundamental-ngx/commit/524f8971c1bb8543bce7892f780c9f1bdba6b790))
+
+
+
+## [0.38.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.11...v0.38.2-rc.12) (2022-12-28)
+
+
+### Bug Fixes
+
+* removed not recommended aria attribute on `div` ([#9141](https://github.com/SAP/fundamental-ngx/issues/9141)) ([bfcf006](https://github.com/SAP/fundamental-ngx/commit/bfcf0064761c3867fa81c965481fe6f771300a14))
+
+
+
+## [0.38.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.10...v0.38.2-rc.11) (2022-12-27)
+
+
+### Bug Fixes
+
+* **core,fn,docs:** fixed incorrect import paths from styles ([#9142](https://github.com/SAP/fundamental-ngx/issues/9142)) ([85756d8](https://github.com/SAP/fundamental-ngx/commit/85756d894f09d7480bda83d9c37c7bb4e8812a64))
+
+
+
+## [0.38.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.9...v0.38.2-rc.10) (2022-12-27)
+
+
+### Bug Fixes
+
+* **core:** breadcrumb overflow icon ([#9140](https://github.com/SAP/fundamental-ngx/issues/9140)) ([5992fcd](https://github.com/SAP/fundamental-ngx/commit/5992fcd86b7b992d8cb957e25dd6a6389a2efc37))
+
+
+
+## [0.38.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.8...v0.38.2-rc.9) (2022-12-23)
+
+
+### Features
+
+* **core:** custom icon placement on core button ([#9092](https://github.com/SAP/fundamental-ngx/issues/9092)) ([204b99f](https://github.com/SAP/fundamental-ngx/commit/204b99f9b3a994b3ab12efd030288d57706b777b))
+
+
+
+## [0.38.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.7...v0.38.2-rc.8) (2022-12-22)
+
+
+### Bug Fixes
+
+* **core:** fix missing popover arrow ([#9119](https://github.com/SAP/fundamental-ngx/issues/9119)) ([d01b137](https://github.com/SAP/fundamental-ngx/commit/d01b1371d1b93a1a2c17513261423722b38789bb))
+
+
+
+## [0.38.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.6...v0.38.2-rc.7) (2022-12-22)
+
+
+### Bug Fixes
+
+* component generator fix ([#9120](https://github.com/SAP/fundamental-ngx/issues/9120)) ([abb07b2](https://github.com/SAP/fundamental-ngx/commit/abb07b2066337783150b9f562775853ba0f9719e))
+
+
+
+## [0.38.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.5...v0.38.2-rc.6) (2022-12-21)
+
+
+### Bug Fixes
+
+* **core:** removed forbidden aria-selected attribute from div ([#9117](https://github.com/SAP/fundamental-ngx/issues/9117)) ([9f79963](https://github.com/SAP/fundamental-ngx/commit/9f799634e3e9906f39eb67900c5b930cd59cc94a))
+
+
+
+## [0.38.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.4...v0.38.2-rc.5) (2022-12-21)
+
+
+### Features
+
+* **core:** multi input dropdown width ([#9113](https://github.com/SAP/fundamental-ngx/issues/9113)) ([065ce87](https://github.com/SAP/fundamental-ngx/commit/065ce87a7fc9b8b162b87abfdd280ebfb6452a6e))
+
+
+
+## [0.38.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.3...v0.38.2-rc.4) (2022-12-20)
+
+
+### Bug Fixes
+
+* **core:** wizard scroll on top after step change ([#9116](https://github.com/SAP/fundamental-ngx/issues/9116)) ([4d2c4da](https://github.com/SAP/fundamental-ngx/commit/4d2c4da9888a395bd1a61d1af814adc7d75d0d9c))
+
+
+
 ## [0.38.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.2...v0.38.2-rc.3) (2022-12-20)
 
 

@@ -1,5 +1,5 @@
 @import 'fundamental-styles/dist/popover';
-@import '~@angular/cdk/overlay-prebuilt.css';
+@import '@angular/cdk/overlay-prebuilt';
 
 $block: fd-popover;
 $fd-popover-border-radius: var(--fdPopover_Border_Radius);

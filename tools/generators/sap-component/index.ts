@@ -1,19 +1,7 @@
 import { strings } from '@angular-devkit/core';
-import {
-    apply,
-    applyTemplates,
-    chain,
-    externalSchematic,
-    MergeStrategy,
-    mergeWith,
-    move,
-    Rule,
-    SchematicsException,
-    url
-} from '@angular-devkit/schematics';
-import { formatFiles, updateJsonInTree } from '@nrwl/workspace';
+import { readJson, Tree, writeJson, formatFiles, generateFiles } from '@nrwl/devkit';
+import { SchematicsException } from '@angular-devkit/schematics';
 import { names } from '@nrwl/devkit';
-import { insert, InsertChange } from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
 import {
     addModuleOrComponentExportToModule,
@@ -23,243 +11,232 @@ import {
     replaceContentInFile
 } from '../utils/ast-utils';
 import { addEslintJsonOverrides } from '../utils/linting';
+import { componentGenerator, libraryGenerator, UnitTestRunner } from '@nrwl/angular/generators';
+import path from 'path';
 
-export default function (schema: SapComponentSchema): Rule {
-    return chain([
-        externalSchematic('@nrwl/angular', 'lib', {
-            name: schema.name,
-            directory: `${getProjectDirName(schema)}/src/lib`,
-            tags: [`scope:${getProjectTag(schema)}`, 'type:lib'].join(','),
-            unitTestRunner: 'karma',
-            prefix: getProjectTag(schema),
-            publishable: true,
-            importPath: getImportPath(schema)
-        }),
-        updateLibraryData(schema),
-        externalSchematic('@nrwl/angular', 'component', {
-            project: getProjectName(schema),
-            name: schema.name,
-            style: 'scss',
-            flat: true,
-            changeDetection: 'OnPush',
-            viewEncapsulation: 'None',
-            path: `libs/${getProjectDirName(schema)}/src/lib/${schema.name}`
-        }),
-        updateComponentFiles(schema),
-        (tree) => addEslintJsonOverrides(tree, getProjectName(schema)),
-        addDocsLibrary(schema),
-        addDocsLibraryToNx(schema),
-        updateDocsRoutes(schema),
-        addDocsRouteToNav(schema),
-        updateApiFiles(schema),
-        formatFiles()
-    ]);
+export default async function (tree: Tree, schema: SapComponentSchema) {
+    await libraryGenerator(tree, {
+        name: schema.name,
+        directory: `${getProjectDirName(schema)}/src/lib`,
+        tags: [`scope:${getProjectTag(schema)}`, 'type:lib'].join(','),
+        unitTestRunner: UnitTestRunner.Karma,
+        prefix: getProjectTag(schema),
+        publishable: true,
+        importPath: getImportPath(schema),
+        style: 'scss',
+        changeDetection: 'OnPush',
+        viewEncapsulation: 'None'
+    });
+
+    updateLibraryData(tree, schema);
+
+    await componentGenerator(tree, {
+        project: getProjectName(schema),
+        name: schema.name,
+        style: 'scss',
+        flat: true,
+        changeDetection: 'OnPush',
+        viewEncapsulation: 'None',
+        path: `libs/${getProjectDirName(schema)}/src/lib/${schema.name}`,
+        export: true
+    });
+
+    updateComponentFiles(tree, schema);
+    addEslintJsonOverrides(tree, getProjectName(schema));
+    addDocsLibrary(tree, schema);
+    addDocsLibraryToNx(tree, schema);
+    updateDocsRoutes(tree, schema);
+    addDocsRouteToNav(tree, schema);
+    updateApiFiles(tree, schema);
+    formatFiles(tree);
+
+    return;
 }
 
-function addDocsLibraryToNx(schema: SapComponentSchema) {
+function addDocsLibraryToNx(tree: Tree, schema: SapComponentSchema) {
     const projectName = `docs-${getProjectName(schema)}`;
     const pathToSource = `libs/docs/${getProjectDirName(schema)}/${schema.name}`;
-    return chain([
-        updateJsonInTree('angular.json', (angularJson) => {
-            angularJson.projects[projectName] = pathToSource;
-            return angularJson;
-        }),
-        updateJsonInTree('tsconfig.base.json', (tsconfigJson) => {
-            tsconfigJson.compilerOptions.paths[getDocImportPath(schema)] = [`${pathToSource}/index.ts`];
-            return tsconfigJson;
-        })
-    ]);
+    const angularJson = readJson(tree, '/angular.json');
+    angularJson.projects[projectName] = pathToSource;
+    writeJson(tree, '/angular.json', angularJson);
+
+    const tsconfigJson = readJson(tree, '/tsconfig.base.json');
+    tsconfigJson.compilerOptions.paths[getDocImportPath(schema)] = [`${pathToSource}/index.ts`];
+    writeJson(tree, '/tsconfig.base.json', tsconfigJson);
 }
 
-function updateApiFiles(schema: SapComponentSchema): Rule {
-    return (tree) => {
-        const filePath = `libs/docs/${getProjectDirName(schema)}/shared/api-files.ts`;
-        const content = tree.read(filePath);
-        const tsSourceFile = ts.createSourceFile(filePath, content?.toString() ?? '', ts.ScriptTarget.Latest, true);
-        const statement = getVariableStatement(tsSourceFile, 'API_FILES');
-        const apiFilesVar = statement && getVariableValue(statement);
+function updateApiFiles(tree: Tree, schema: SapComponentSchema) {
+    const filePath = `libs/docs/${getProjectDirName(schema)}/shared/src/lib/api-files.ts`;
+    const content = tree.read(filePath);
+    const tsSourceFile = ts.createSourceFile(filePath, content?.toString() ?? '', ts.ScriptTarget.Latest, true);
+    const statement = getVariableStatement(tsSourceFile, 'API_FILES');
+    const apiFilesVar = statement && getVariableValue(statement);
 
-        if (!apiFilesVar || !ts.isObjectLiteralExpression(apiFilesVar)) {
-            throw new SchematicsException(`Could not resolve "API_FILES" variable in "${filePath}"`);
+    if (!apiFilesVar || !ts.isObjectLiteralExpression(apiFilesVar)) {
+        throw new SchematicsException(`Could not resolve "API_FILES" variable in "${filePath}"`);
+    }
+    const prefixComma = apiFilesVar.properties.hasTrailingComma || apiFilesVar.properties.length === 0 ? '' : ', ';
+    const componentName = strings.classify(`${schema.name}Component`);
+
+    tree.write(
+        filePath,
+        `${content?.slice(0, apiFilesVar.properties.end)}${prefixComma}"${strings.camelize(
+            schema.name
+        )}": [ '${componentName}' ]${content?.slice(apiFilesVar.properties.end)}`
+    );
+}
+
+function updateDocsRoutes(tree: Tree, schema: SapComponentSchema) {
+    const filePath = `apps/docs/src/app/${getProjectDirName(schema)}/${getProjectDirName(
+        schema
+    )}-documentation.routes.ts`;
+    const content = tree.read(filePath);
+    const tsSourceFile = ts.createSourceFile(filePath, content?.toString() ?? '', ts.ScriptTarget.Latest, true);
+    const statement = getVariableStatement(tsSourceFile, 'ROUTES');
+    const routesVar = statement && getVariableValue(statement);
+
+    if (!routesVar || !ts.isArrayLiteralExpression(routesVar)) {
+        throw new SchematicsException(`Could not resolve "children" property in "${filePath}"`);
+    }
+    const routesValues = routesVar.elements[0] as ts.ObjectLiteralExpression;
+    const childrenProp = getPropertyAssignmentByName(routesValues.properties, 'children')?.initializer;
+    if (!childrenProp || !ts.isArrayLiteralExpression(childrenProp)) {
+        throw new SchematicsException(`Could not resolve "children" property in "${filePath}"`);
+    }
+
+    const prefixComma = childrenProp.elements.hasTrailingComma ? '' : ', ';
+    const importValue = `
+        {
+            path: '${schema.name}',
+            loadChildren: () => import('${getDocImportPath(schema)}')
+                .then((m) => m.${strings.classify(schema.name)}DocsModule)
         }
-        const prefixComma = apiFilesVar.properties.hasTrailingComma || apiFilesVar.properties.length === 0 ? '' : ', ';
-        const componentName = strings.classify(`${schema.name}Component`);
-        insert(tree, filePath, [
-            new InsertChange(
-                filePath,
-                apiFilesVar.properties.end,
-                `${prefixComma}"${strings.camelize(schema.name)}": [ '${componentName}' ]`
-            )
-        ]);
-    };
+    `;
+
+    tree.write(
+        filePath,
+        `${content?.slice(0, childrenProp.elements.end)}${prefixComma}${importValue}${content?.slice(
+            childrenProp.elements.end
+        )}`
+    );
 }
 
-function updateDocsRoutes(schema: SapComponentSchema): Rule {
-    return (tree) => {
-        const filePath = `apps/docs/src/app/${getProjectDirName(schema)}/${getProjectDirName(
-            schema
-        )}-documentation.routes.ts`;
-        const content = tree.read(filePath);
-        const tsSourceFile = ts.createSourceFile(filePath, content?.toString() ?? '', ts.ScriptTarget.Latest, true);
-        const statement = getVariableStatement(tsSourceFile, 'ROUTES');
-        const routesVar = statement && getVariableValue(statement);
+function addDocsRouteToNav(tree: Tree, schema: SapComponentSchema) {
+    const filePath = `apps/docs/src/app/${getProjectDirName(schema)}/documentation/${getProjectDirName(
+        schema
+    )}-documentation-data.ts`;
 
-        if (!routesVar || !ts.isArrayLiteralExpression(routesVar)) {
-            throw new SchematicsException(`Could not resolve "children" property in "${filePath}"`);
-        }
-        const routesValues = routesVar.elements[0] as ts.ObjectLiteralExpression;
-        const childrenProp = getPropertyAssignmentByName(routesValues.properties, 'children')?.initializer;
-        if (!childrenProp || !ts.isArrayLiteralExpression(childrenProp)) {
-            throw new SchematicsException(`Could not resolve "children" property in "${filePath}"`);
-        }
+    const content = tree.read(filePath);
+    const tsSourceFile = ts.createSourceFile(filePath, content?.toString() ?? '', ts.ScriptTarget.Latest, true);
+    const statement = getVariableStatement(tsSourceFile, 'components');
+    const componentsVar = statement && getVariableValue(statement);
 
-        const prefixComma = childrenProp.elements.hasTrailingComma ? '' : ', ';
-        const importValue = `
-            {
-                path: '${schema.name}',
-                loadChildren: () => import('${getDocImportPath(schema)}')
-                    .then((m) => m.${strings.classify(schema.name)}DocsModule)
-            }
-        `;
-        insert(tree, filePath, [new InsertChange(filePath, childrenProp.elements.end, `${prefixComma}${importValue}`)]);
-    };
+    if (!componentsVar || !ts.isArrayLiteralExpression(componentsVar)) {
+        throw new SchematicsException(`Could not resolve "components" variable in "${filePath}"`);
+    }
+
+    const prefixComma = componentsVar.elements.hasTrailingComma ? '' : ', ';
+    const importValue = `
+        {
+            url: '${getProjectDirName(schema)}/${schema.name}',
+            name: '${startCaseName(schema.name)}'
+        },
+    `;
+
+    tree.write(
+        filePath,
+        `${content?.slice(0, componentsVar.elements.end)}${prefixComma}${importValue}${content?.slice(
+            componentsVar.elements.end
+        )}`
+    );
 }
 
-function addDocsRouteToNav(schema: SapComponentSchema): Rule {
-    return (tree) => {
-        const filePath = `apps/docs/src/app/${getProjectDirName(schema)}/documentation/${getProjectDirName(
-            schema
-        )}-documentation-data.ts`;
-
-        const content = tree.read(filePath);
-        const tsSourceFile = ts.createSourceFile(filePath, content?.toString() ?? '', ts.ScriptTarget.Latest, true);
-        const statement = getVariableStatement(tsSourceFile, 'components');
-        const componentsVar = statement && getVariableValue(statement);
-
-        if (!componentsVar || !ts.isArrayLiteralExpression(componentsVar)) {
-            throw new SchematicsException(`Could not resolve "components" variable in "${filePath}"`);
-        }
-
-        const prefixComma = componentsVar.elements.hasTrailingComma ? '' : ', ';
-        const importValue = `
-            {
-                url: '${getProjectDirName(schema)}/${schema.name}',
-                name: '${startCaseName(schema.name)}'
-            },
-        `;
-        insert(tree, filePath, [
-            new InsertChange(filePath, componentsVar.elements.end, `${prefixComma}${importValue}`)
-        ]);
-    };
+function addDocsLibrary(tree: Tree, schema: SapComponentSchema) {
+    generateFiles(tree, path.join(__dirname, 'files/docs'), `libs/docs/${getProjectDirName(schema)}/${schema.name}`, {
+        ...names(schema.name),
+        moduleName: strings.classify(schema.name),
+        projectTag: getProjectTag(schema),
+        projectDirName: getProjectDirName(schema),
+        startCaseName: startCaseName(schema.name),
+        importPath: getDocImportPath(schema)
+    });
 }
 
-function addDocsLibrary(schema: SapComponentSchema): Rule {
-    const template = apply(url('./files/docs'), [
-        applyTemplates({
-            ...names(schema.name),
-            moduleName: strings.classify(schema.name),
-            projectTag: getProjectTag(schema),
-            projectDirName: getProjectDirName(schema),
-            startCaseName: startCaseName(schema.name),
-            importPath: getDocImportPath(schema)
-        }),
-        move(`libs/docs/${getProjectDirName(schema)}/${schema.name}`)
-    ]);
-
-    return mergeWith(template, MergeStrategy.Overwrite);
-}
-
-function updateLibraryData(schema: SapComponentSchema): Rule {
+function updateLibraryData(tree: Tree, schema: SapComponentSchema): void {
     const oldName = `${getProjectDirName(schema)}-src-lib-${schema.name}`;
     const newName = `${getProjectDirName(schema)}-${schema.name}`;
-    return chain([
-        updateJsonInTree('/angular.json', (angularJson) => {
-            const config = angularJson.projects[oldName];
 
-            // since we're placing everything in the root of the library, need to update configs
-            config.sourceRoot = config.root;
-            config.architect.build.outputs[0] = config.architect.build.outputs[0].replace('/src/lib', '');
-            config.architect.test.options.main = config.architect.test.options.main.replace('src/test.ts', 'test.ts');
-            config.architect.lint.options.lintFilePatterns = config.architect.lint.options.lintFilePatterns.map((str) =>
-                str.replace('src/**', '**')
-            );
+    function updateAngularJson() {
+        const angularJson = readJson(tree, '/angular.json');
 
-            angularJson.projects[newName] = config;
-            delete angularJson.projects[oldName];
+        const config = angularJson.projects[oldName];
 
-            if (schema.project === 'platform') {
-                angularJson.projects[newName].implicitDependencies = ['core'];
-            }
+        angularJson.projects[newName] = config;
+        delete angularJson.projects[oldName];
 
-            return angularJson;
-        }),
-        updateJsonInTree('/tsconfig.base.json', (tsconfigJson) => {
-            tsconfigJson.compilerOptions.paths[getImportPath(schema)][0] = tsconfigJson.compilerOptions.paths[
-                getImportPath(schema)
-            ][0].replace('src/index.ts', 'index.ts');
-            return tsconfigJson;
-        }),
-        move(`${getLibraryDirectory(schema)}/src/test.ts`, `${getLibraryDirectory(schema)}/test.ts`),
-        (tree) => {
-            const newModulePath = `${getLibraryDirectory(schema)}/${schema.name}.module.ts`;
-            // renaming module file name and moving it to the root of library
-            tree.rename(`${getLibraryDirectory(schema)}/src/lib/${oldName}.module.ts`, newModulePath);
-            // update imports and move files to the root
-            const indexTsContent = `export * from './${schema.name}.module';\nexport * from './${schema.name}.component';\n`;
-            tree.create(`${getLibraryDirectory(schema)}/index.ts`, indexTsContent);
-            tree.delete(`${getLibraryDirectory(schema)}/src/index.ts`);
-            // update paths for moved files
-            replaceContentInFile(tree, `${getLibraryDirectory(schema)}/ng-package.json`, [
-                ['"src/index.ts"', '"./index.ts"']
-            ]);
-            replaceContentInFile(tree, `${getLibraryDirectory(schema)}/tsconfig.lib.json`, [
-                ['"src/test.ts"', '"./test.ts"']
-            ]);
-            replaceContentInFile(tree, `${getLibraryDirectory(schema)}/tsconfig.spec.json`, [
-                ['"src/test.ts"', '"./test.ts"']
-            ]);
-            // renaming module class name
-            const oldModuleName = strings.classify(oldName);
-            replaceContentInFile(tree, newModulePath, [[oldModuleName, strings.classify(schema.name)]]);
-            // add component to exports of the created module
-            addModuleOrComponentExportToModule(
-                tree,
-                newModulePath,
-                strings.classify(schema.name) + 'Component',
-                `./${schema.name}.component`
-            );
+        writeJson(tree, '/angular.json', angularJson);
+    }
 
-            // add created module to exports of root package module
-            const moduleName = `fundamental-ngx${
-                schema.project === 'experimental' ? '-' + getProjectTag(schema) : ''
-            }.module.ts`;
-            addModuleOrComponentExportToModule(
-                tree,
-                `${getLibraryDirectory(schema, false)}/${moduleName}`,
-                strings.classify(schema.name) + 'Module',
-                getImportPath(schema)
-            );
+    function updateTsConfig() {
+        const tsconfigJson = readJson(tree, '/tsconfig.base.json');
 
-            // add created module to exports from root package's public_api.ts
-            let modulePublicApiContent =
-                tree.read(`${getLibraryDirectory(schema, false)}/public_api.ts`)?.toString() ?? '';
-            modulePublicApiContent = modulePublicApiContent + `export * from '${getImportPath(schema)}';\n`;
-            tree.overwrite(`${getLibraryDirectory(schema, false)}/public_api.ts`, modulePublicApiContent);
-        }
-    ]);
+        tsconfigJson.compilerOptions.paths[getImportPath(schema)][0] = tsconfigJson.compilerOptions.paths[
+            getImportPath(schema)
+        ][0].replace('src/index.ts', 'index.ts');
+
+        writeJson(tree, '/tsconfig.base.json', tsconfigJson);
+    }
+
+    function treeManipulations() {
+        const newModulePath = `${getLibraryDirectory(schema)}/${schema.name}.module.ts`;
+        // renaming module file name and moving it to the root of library
+        tree.rename(`${getLibraryDirectory(schema)}/src/lib/${oldName}.module.ts`, newModulePath);
+        // update imports and move files to the root
+        const indexTsContent = `export * from './${schema.name}.module';\n`;
+        tree.write(`${getLibraryDirectory(schema)}/index.ts`, indexTsContent);
+        tree.delete(`${getLibraryDirectory(schema)}/src/index.ts`);
+        // update paths for moved files
+        replaceContentInFile(tree, `${getLibraryDirectory(schema)}/ng-package.json`, [
+            ['"src/index.ts"', '"./index.ts"']
+        ]);
+        replaceContentInFile(tree, `${getLibraryDirectory(schema)}/tsconfig.lib.json`, [
+            ['"src/test.ts"', '"./test.ts"']
+        ]);
+        replaceContentInFile(tree, `${getLibraryDirectory(schema)}/tsconfig.spec.json`, [
+            ['"src/test.ts"', '"./test.ts"']
+        ]);
+        // renaming module class name
+        const oldModuleName = strings.classify(oldName);
+        replaceContentInFile(tree, newModulePath, [[oldModuleName, strings.classify(schema.name)]]);
+
+        // add created module to exports of root package module
+        const moduleName = `fundamental-ngx${
+            schema.project === 'experimental' ? '-' + getProjectTag(schema) : ''
+        }.module.ts`;
+        addModuleOrComponentExportToModule(
+            tree,
+            `${getLibraryDirectory(schema, false)}/${moduleName}`,
+            strings.classify(schema.name) + 'Module',
+            getImportPath(schema)
+        );
+
+        // add created module to exports from root package's public_api.ts
+        let modulePublicApiContent = tree.read(`${getLibraryDirectory(schema, false)}/public_api.ts`)?.toString() ?? '';
+        modulePublicApiContent = modulePublicApiContent + `export * from '${getImportPath(schema)}';\n`;
+        tree.write(`${getLibraryDirectory(schema, false)}/public_api.ts`, modulePublicApiContent);
+    }
+
+    updateAngularJson();
+    updateTsConfig();
+    treeManipulations();
 }
 
-function updateComponentFiles(schema: SapComponentSchema): Rule {
-    const template = apply(url('./files/lib'), [
-        applyTemplates({
-            ...names(schema.name),
-            project: getProjectDirName(schema),
-            props: []
-        }),
-        move(getLibraryDirectory(schema))
-    ]);
-
-    return mergeWith(template, MergeStrategy.Overwrite);
+function updateComponentFiles(tree: Tree, schema: SapComponentSchema) {
+    generateFiles(tree, path.join(__dirname, 'files/lib'), getLibraryDirectory(schema), {
+        ...names(schema.name),
+        project: getProjectDirName(schema),
+        props: []
+    });
 }
 
 function getLibraryDirectory(schema: SapComponentSchema, withComponentFolder = true): string {

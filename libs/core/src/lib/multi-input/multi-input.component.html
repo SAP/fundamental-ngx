@@ -10,7 +10,7 @@
                 (isOpenChange)="openChangeHandle($event)"
                 (input)="!open && openChangeHandle(true)"
                 [triggers]="[]"
-                [maxWidth]="bodyMaxWidth"
+                [maxWidth]="_popoverMaxWidth"
                 [focusTrapped]="true"
                 [disabled]="disabled"
                 [fillControlMode]="fillControlMode"
@@ -135,7 +135,7 @@
         <span
             *ngIf="!itemTemplate"
             fd-list-title
-            [innerHtml]="option.label | highlight: _searchTermCtrl.value || '':highlight"
+            [innerHtml]="option.label | highlight : _searchTermCtrl.value || '' : highlight"
         ></span>
 
         <ng-container *ngIf="itemTemplate">

@@ -27,6 +27,7 @@ import { WizardContentComponent } from './wizard-content/wizard-content.componen
 import { ACTIVE_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS, COMPLETED_STEP_STATUS } from './constants';
 import { WIZARD } from './wizard-injection-token';
 import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
+import { ScrollbarComponent } from '@fundamental-ngx/core/scrollbar';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
@@ -117,6 +118,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     @ViewChild('wrapperContainer')
     wrapperContainer: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    @ViewChild(ScrollbarComponent)
+    scrollbar: ScrollbarComponent;
 
     /** @hidden */
     contentTemplates: TemplateRef<any>[] = [];
@@ -416,6 +421,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             });
             this._setUpScrollListener();
         }
+        this.scrollbar.scroll({ top: 0, behavior: 'smooth' });
     }
 
     /** @hidden */

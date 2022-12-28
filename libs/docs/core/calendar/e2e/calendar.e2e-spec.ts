@@ -249,17 +249,23 @@ describe('calendar test suite', () => {
         it('should check ability to mark next week', async () => {
             await click(specialDaysCalendar + calendarOptions, 1);
             let tomorrowsDayIndex = (await getCurrentDayIndex(specialDaysCalendar)) + 1;
-            if (tomorrowsDayIndex + 7 > (await getElementArrayLength(specialDaysCalendar + calendarItem))) {
-                await click(specialDaysCalendar + rightArrowBtn);
-                tomorrowsDayIndex = (await getCurrentDayIndex(specialDaysCalendar, 'is-active')) + 1;
-            }
-            for (let i = tomorrowsDayIndex; i < tomorrowsDayIndex + 7; i++) {
+            const nextMonthButton = specialDaysCalendar + rightArrowBtn;
+            const currentDayIndex = await getCurrentDayIndex(specialDaysCalendar);
+            let nextWeekDaysQuantity = 0;
+            const initialDaysQuantity = await getElementArrayLength(specialDaysCalendar + calendarItem);
+            for (let i = currentDayIndex + 1; i < initialDaysQuantity; i++) {
                 await expect(await getElementClass(specialDaysCalendar + calendarItem, i)).toContain('special-day');
+                nextWeekDaysQuantity++;
             }
-            await click(specialDaysCalendar + calendarOptions, 1);
-            for (let i = tomorrowsDayIndex; i < tomorrowsDayIndex + 7; i++) {
-                await expect(await getElementClass(specialDaysCalendar + calendarItem, i)).not.toContain('special-day');
+            if (tomorrowsDayIndex + 7 > initialDaysQuantity) {
+                await click(nextMonthButton);
+                const rest = 7 - nextWeekDaysQuantity;
+                for (let i = 0; i < rest; i++) {
+                    await expect(await getElementClass(specialDaysCalendar + calendarItem, i)).toContain('special-day');
+                    nextWeekDaysQuantity++;
+                }
             }
+            expect(nextWeekDaysQuantity).toBe(7);
         });
 
         it('should check ability to mark all Mondays', async () => {
