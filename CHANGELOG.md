@@ -1,3 +1,12 @@
+## [0.38.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.15...v0.38.2-rc.16) (2022-12-28)
+
+
+### Bug Fixes
+
+* fixed i18n package dependencies ([#9146](https://github.com/SAP/fundamental-ngx/issues/9146)) ([7f3bd7e](https://github.com/SAP/fundamental-ngx/commit/7f3bd7ea8e4d05facf8be9747101e757e3cfd78d))
+
+
+
 ## [0.38.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.14...v0.38.2-rc.15) (2022-12-28)
 
 
