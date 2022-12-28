@@ -1,3 +1,12 @@
+## [0.38.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.10...v0.38.2-rc.11) (2022-12-27)
+
+
+### Bug Fixes
+
+* **core,fn,docs:** fixed incorrect import paths from styles ([#9142](https://github.com/SAP/fundamental-ngx/issues/9142)) ([85756d8](https://github.com/SAP/fundamental-ngx/commit/85756d894f09d7480bda83d9c37c7bb4e8812a64))
+
+
+
 ## [0.38.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.9...v0.38.2-rc.10) (2022-12-27)
 
 
