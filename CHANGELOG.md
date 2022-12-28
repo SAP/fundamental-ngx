@@ -1,3 +1,12 @@
+## [0.38.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.14...v0.38.2-rc.15) (2022-12-28)
+
+
+### Bug Fixes
+
+* **ci:** fixed versions of our 3rd party dependencies ([#9145](https://github.com/SAP/fundamental-ngx/issues/9145)) ([619b3bb](https://github.com/SAP/fundamental-ngx/commit/619b3bb4b4eec8c273a00422f1dbbf291dd80bf7))
+
+
+
 ## [0.38.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.13...v0.38.2-rc.14) (2022-12-28)
 
 
