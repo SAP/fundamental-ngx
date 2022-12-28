@@ -1,3 +1,12 @@
+## [0.38.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.12...v0.38.2-rc.13) (2022-12-28)
+
+
+### Bug Fixes
+
+* **core:** added i18n package installation in core's ng-add ([#9144](https://github.com/SAP/fundamental-ngx/issues/9144)) ([524f897](https://github.com/SAP/fundamental-ngx/commit/524f8971c1bb8543bce7892f780c9f1bdba6b790))
+
+
+
 ## [0.38.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.11...v0.38.2-rc.12) (2022-12-28)
 
 
