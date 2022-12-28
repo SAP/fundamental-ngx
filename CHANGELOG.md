@@ -1,3 +1,12 @@
+## [0.38.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.13...v0.38.2-rc.14) (2022-12-28)
+
+
+### Bug Fixes
+
+* **core:** submenu visibility ([#9139](https://github.com/SAP/fundamental-ngx/issues/9139)) ([a0bdf39](https://github.com/SAP/fundamental-ngx/commit/a0bdf3970ebaf93778c7fdd2fa657953984f1952))
+
+
+
 ## [0.38.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.12...v0.38.2-rc.13) (2022-12-28)
 
 
