@@ -1,3 +1,12 @@
+## [0.38.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.11...v0.38.2-rc.12) (2022-12-28)
+
+
+### Bug Fixes
+
+* removed not recommended aria attribute on `div` ([#9141](https://github.com/SAP/fundamental-ngx/issues/9141)) ([bfcf006](https://github.com/SAP/fundamental-ngx/commit/bfcf0064761c3867fa81c965481fe6f771300a14))
+
+
+
 ## [0.38.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.10...v0.38.2-rc.11) (2022-12-27)
 
 
