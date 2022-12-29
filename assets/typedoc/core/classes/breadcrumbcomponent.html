@@ -1,0 +1,177 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.</p>
+		</div>
+		<pre><code class="language-html"><span style="color: #800000">&lt;fd-breadcrumb&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;fd-breadcrumb-item&gt;</span>
+<span style="color: #000000">        </span><span style="color: #800000">&lt;a</span><span style="color: #000000"> </span><span style="color: #FF0000">fd-link</span><span style="color: #000000"> </span><span style="color: #FF0000">[routerLink]</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;&#039;#&#039;&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">Breadcrumb Link</span><span style="color: #800000">&lt;/a&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;/fd-breadcrumb-item&gt;</span>
+<span style="color: #800000">&lt;/fd-breadcrumb&gt;</span>
+</code></pre>
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">BreadcrumbComponent</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel">
+	<h3>Implements</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">AfterViewInit</span></li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="elementRef" class="tsd-anchor"></a>
+		<h3>element<wbr>Ref</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="hiddenItemsCount" class="tsd-anchor"></a>
+		<h3>hidden<wbr>Items<wbr>Count</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">hidden<wbr>Items<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/core/src/lib/breadcrumb/breadcrumb.component.ts#L84">libs/core/src/lib/breadcrumb/breadcrumb.component.ts:84</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted when hidden items count is changed.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="reverse" class="tsd-anchor"></a>
+		<h3>reverse</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">reverse<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/core/src/lib/breadcrumb/breadcrumb.component.ts#L68">libs/core/src/lib/breadcrumb/breadcrumb.component.ts:68</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether to append items to the overflow dropdown in reverse order. Default is true.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="tabIndex" class="tsd-anchor"></a>
+		<h3>tab<wbr>Index</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">tab<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;0&#x27;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/core/src/lib/breadcrumb/breadcrumb.component.ts#L72">libs/core/src/lib/breadcrumb/breadcrumb.component.ts:72</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Tabindex of the breadcrumb.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="visibleItemsCount" class="tsd-anchor"></a>
+		<h3>visible<wbr>Items<wbr>Count</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">visible<wbr>Items<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/core/src/lib/breadcrumb/breadcrumb.component.ts#L78">libs/core/src/lib/breadcrumb/breadcrumb.component.ts:78</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted when visible items count is changed.</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Accessors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
+		<a name="containerElement" class="tsd-anchor"></a>
+		<h3>container<wbr>Element</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> containerElement<span class="tsd-signature-symbol">(</span>_<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/core/src/lib/breadcrumb/breadcrumb.component.ts#L58">libs/core/src/lib/breadcrumb/breadcrumb.component.ts:58</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
+						<dd><p>Breadcrumbs component now uses more advanced calculation mechanism without the need of specifying the container element.</p>
+							<p>The element to act as the breadcrumb container. When provided, the breadcrumb&#39;s responsive collapsing behavior
+							performs better. When not provided, the immediate parent element&#39;s width will be used.</p>
+						</dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>_: <span class="tsd-signature-type">HTMLElement</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="itemClicked" class="tsd-anchor"></a>
+		<h3>item<wbr>Clicked</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">item<wbr>Clicked<span class="tsd-signature-symbol">(</span>breadcrumbItem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BreadcrumbItemComponent</span>, $event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/core/src/lib/breadcrumb/breadcrumb.component.ts#L135">libs/core/src/lib/breadcrumb/breadcrumb.component.ts:135</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>We catch interactions with item, Enter, Space, Mouse click and Touch click,
+						if original element had router link we are proxying click to that element</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>breadcrumbItem: <span class="tsd-signature-type">BreadcrumbItemComponent</span></h5>
+					</li>
+					<li>
+						<h5>$event: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>
