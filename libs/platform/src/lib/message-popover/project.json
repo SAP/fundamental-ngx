@@ -5,20 +5,10 @@
     "prefix": "fdp",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/message-popover"],
+            "executor": "nx:run-commands",
             "options": {
-                "project": "libs/platform/src/lib/message-popover/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/message-popover/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/platform/src/lib/message-popover/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+                "command": "echo This should not be called && exit 1"
+            }
         },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",

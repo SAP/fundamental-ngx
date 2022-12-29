@@ -23,7 +23,7 @@
         </a>
     </li>
     <li
-        *ngFor="let item of _tabs | slice: 1; let idx = index; trackBy: _trackByTab"
+        *ngFor="let item of _tabs | slice : 1; let idx = index; trackBy: _trackByTab"
         [class]="item.cssClasses"
         class="fd-icon-tab-bar__item"
         role="presentation"

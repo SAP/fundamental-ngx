@@ -5,17 +5,9 @@
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/calendar"],
+            "executor": "nx:run-commands",
             "options": {
-                "tsConfig": "libs/core/src/lib/calendar/tsconfig.lib.json",
-                "project": "libs/core/src/lib/calendar/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/calendar/tsconfig.lib.prod.json"
-                }
+                "command": "echo This should not be called && exit 1"
             }
         },
         "test": {

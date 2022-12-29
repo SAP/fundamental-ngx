@@ -9,6 +9,12 @@
         }
     },
     "targets": {
+        "something": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "echo This should not be called && exit 1"
+            }
+        },
         "e2e-app": {
             "executor": "@fundamental-ngx/wdio:e2e-test-app",
             "configurations": {
@@ -215,7 +221,7 @@
             },
             "outputs": ["{options.outputPath}"],
             "defaultConfiguration": "development",
-            "dependsOn": ["^build", "generate-typedoc"]
+            "dependsOn": ["^build-umbrella", "generate-typedoc"]
         },
         "serve": {
             "executor": "@nrwl/angular:webpack-dev-server",

@@ -8,15 +8,7 @@
             "runner": "@nrwl/nx-cloud",
             "options": {
                 "accessToken": "MzFiYWRhMTItYTAxYi00MGZjLWJmNDEtOTllMzEwZjI5ODNkfHJlYWQ=",
-                "cacheableOperations": [
-                    "generate-typedoc",
-                    "compile-typedoc",
-                    "build",
-                    "build-umbrella",
-                    "lint",
-                    "test",
-                    "e2e"
-                ],
+                "cacheableOperations": ["generate-typedoc", "compile-typedoc", "build-umbrella", "lint", "test", "e2e"],
                 "canTrackAnalytics": false,
                 "showUsageWarnings": true
             }
@@ -57,12 +49,9 @@
     },
     "$schema": "./node_modules/nx/schemas/nx-schema.json",
     "targetDefaults": {
-        "build": {
-            "dependsOn": ["^build"],
-            "inputs": ["production", "^production"]
-        },
         "build-umbrella": {
-            "dependsOn": ["^build-umbrella"]
+            "dependsOn": ["^build-umbrella"],
+            "inputs": ["production", "^production"]
         },
         "prepare": {
             "dependsOn": ["build-umbrella"]

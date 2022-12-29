@@ -43,7 +43,10 @@
         </tr>
     </thead>
     <tbody fd-table-body>
-        <tr *ngFor="let row of displayedRows | filter: filterVal:'column1' | sortBy: ascending:'column1'" fd-table-row>
+        <tr
+            *ngFor="let row of displayedRows | filter : filterVal : 'column1' | sortBy : ascending : 'column1'"
+            fd-table-row
+        >
             <td fd-table-cell class="fd-has-font-weight-semi">
                 <a fd-link href="#">{{ row.column1 }}</a>
             </td>
@@ -109,7 +112,7 @@
     </thead>
     <tbody fd-table-body>
         <tr
-            *ngFor="let row of displayedRows2 | filter: filterVal2:'column1' | sortBy: ascending2:'column1'"
+            *ngFor="let row of displayedRows2 | filter : filterVal2 : 'column1' | sortBy : ascending2 : 'column1'"
             fd-table-row
         >
             <td fd-table-cell class="fd-has-font-weight-semi">

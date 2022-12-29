@@ -70,7 +70,7 @@ jobs:
               uses: ./.github/actions/parallel-commands
               with:
                   parallel-commands: |
-                      npx nx run-many --target=build --exclude=docs --parallel=3
+                      npx nx run-many --target=build-umbrella --parallel=3
                       npx nx run-many --target=test --exclude=workspace-tools --parallel=3
                       npx nx run-many --target=lint --exclude=core,platform,fn --parallel=3
                       npx nx run-many workspace-tools:test --skip-nx-cache

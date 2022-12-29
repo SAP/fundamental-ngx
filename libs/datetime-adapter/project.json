@@ -18,21 +18,10 @@
             "outputs": ["{options.outputPath}"]
         },
         "build": {
-            "executor": "@nrwl/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/datetime-adapter"],
+            "executor": "nx:run-commands",
             "options": {
-                "project": "libs/datetime-adapter/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/datetime-adapter/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/datetime-adapter/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+                "command": "echo This should not be called && exit 1"
+            }
         },
         "build-umbrella": {
             "executor": "@nrwl/angular:package",

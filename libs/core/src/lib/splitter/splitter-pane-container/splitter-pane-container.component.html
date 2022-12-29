@@ -15,7 +15,7 @@
                 *ngTemplateOutlet="
                     panesTemplate;
                     context: {
-                        panes: _activePanes | noDefaultPane: _defaultPane?.isOnCanvas && _activePanes.length > 1
+                        panes: _activePanes | noDefaultPane : _defaultPane?.isOnCanvas && _activePanes.length > 1
                     }
                 "
             ></ng-container>

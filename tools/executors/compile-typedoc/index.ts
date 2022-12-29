@@ -12,7 +12,7 @@ export default async function compileTypedocs(_options: any, context: ExecutorCo
         },
         context
     );
-    const { buildTarget = 'build' } = context.workspace.projects[context.projectName as string] as any;
+    const { buildTarget = 'build-umbrella' } = context.workspace.projects[context.projectName as string] as any;
     const { tsConfig } = readTargetOptions({ project: context.projectName as string, target: buildTarget }, context);
     execSync(
         `npx typedoc --out ${outputPath} ${projectPath} --tsconfig ${tsConfig} --hideGenerator --theme apps/docs/src/fd-typedoc`,

@@ -8,20 +8,20 @@
         <fn-slider-handle
             (mousedown)="onHandleClick($event)"
             (keydown)="onKeyDown($event)"
-            [ariaLabel]="ariaLabel || 'fnSlider.minMaxDetails' | fdTranslate: { min: minValue, max: maxValue }"
-            [ariaValueMax]="'fnSlider.valuemaxDetails' | fdTranslate: { value: maxValue }"
-            [ariaValueMin]="'fnSlider.valueminDetails' | fdTranslate: { value: minValue }"
+            [ariaLabel]="ariaLabel || 'fnSlider.minMaxDetails' | fdTranslate : { min: minValue, max: maxValue }"
+            [ariaValueMax]="'fnSlider.valuemaxDetails' | fdTranslate : { value: maxValue }"
+            [ariaValueMin]="'fnSlider.valueminDetails' | fdTranslate : { value: minValue }"
             [ariaLabelledBy]="ariaLabelledBy"
             [ariaValueNow]="
                 _useSliderValuePrefix
                     ? ('fnSlider.valueNowDetails'
-                      | fdTranslate: { value: getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER) })
+                      | fdTranslate : { value: getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER) })
                     : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
             "
             [ariaValueText]="
                 _useSliderValuePrefix
                     ? ('fnSlider.valueNowDetails'
-                      | fdTranslate: { value: getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER) })
+                      | fdTranslate : { value: getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER) })
                     : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
             "
         ></fn-slider-handle>
@@ -39,20 +39,20 @@
             #rangeHandle1
             (mousedown)="onHandleClick($event)"
             (keydown)="onKeyDown($event)"
-            [ariaLabel]="ariaLabel || 'fnSlider.minMaxDetails' | fdTranslate: { min: minValue, max: maxValue }"
-            [ariaValueMax]="'fnSlider.valuemaxDetails' | fdTranslate: { value: maxValue }"
-            [ariaValueMin]="'fnSlider.valueminDetails' | fdTranslate: { value: minValue }"
+            [ariaLabel]="ariaLabel || 'fnSlider.minMaxDetails' | fdTranslate : { min: minValue, max: maxValue }"
+            [ariaValueMax]="'fnSlider.valuemaxDetails' | fdTranslate : { value: maxValue }"
+            [ariaValueMin]="'fnSlider.valueminDetails' | fdTranslate : { value: minValue }"
             [ariaLabelledBy]="ariaLabelledBy"
             [ariaValueNow]="
                 _useSliderValuePrefix
                     ? ('fnSlider.valueNowDetails'
-                      | fdTranslate: { value: getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1) })
+                      | fdTranslate : { value: getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1) })
                     : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
             "
             [ariaValueText]="
                 _useSliderValuePrefix
                     ? ('fnSlider.valueNowDetails'
-                      | fdTranslate: { value: getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1) })
+                      | fdTranslate : { value: getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1) })
                     : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
             "
         ></fn-slider-handle>
@@ -61,20 +61,20 @@
             #rangeHandle2
             (mousedown)="onHandleClick($event)"
             (keydown)="onKeyDown($event)"
-            [ariaLabel]="ariaLabel || 'fnSlider.minMaxDetails' | fdTranslate: { min: minValue, max: maxValue }"
-            [ariaValueMax]="'fnSlider.valuemaxDetails' | fdTranslate: { value: maxValue }"
-            [ariaValueMin]="'fnSlider.valueminDetails' | fdTranslate: { value: minValue }"
+            [ariaLabel]="ariaLabel || 'fnSlider.minMaxDetails' | fdTranslate : { min: minValue, max: maxValue }"
+            [ariaValueMax]="'fnSlider.valuemaxDetails' | fdTranslate : { value: maxValue }"
+            [ariaValueMin]="'fnSlider.valueminDetails' | fdTranslate : { value: minValue }"
             [ariaLabelledBy]="ariaLabelledBy"
             [ariaValueNow]="
                 _useSliderValuePrefix
                     ? ('fnSlider.valueNowDetails'
-                      | fdTranslate: { value: getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2) })
+                      | fdTranslate : { value: getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2) })
                     : getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)
             "
             [ariaValueText]="
                 _useSliderValuePrefix
                     ? ('fnSlider.valueNowDetails'
-                      | fdTranslate: { value: getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2) })
+                      | fdTranslate : { value: getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2) })
                     : getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)
             "
         ></fn-slider-handle>

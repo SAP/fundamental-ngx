@@ -81,7 +81,7 @@
                     (count === 1
                         ? 'platformCombobox.countListResultsSingular'
                         : 'platformCombobox.countListResultsPlural'
-                    ) | fdTranslate: { count: count }
+                    ) | fdTranslate : { count: count }
                 }}
             </ng-container>
         </div>
@@ -187,7 +187,7 @@
 
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
     <ng-container *ngIf="!optionItemTemplate">
-        <span [attr.title]="optionItem.label" [innerHTML]="optionItem.label | highlight: inputText"></span>
+        <span [attr.title]="optionItem.label" [innerHTML]="optionItem.label | highlight : inputText"></span>
     </ng-container>
 
     <ng-container *ngIf="optionItemTemplate">
@@ -205,7 +205,7 @@
                 [style.text-align]="secondaryTextAlignment"
                 fd-list-secondary
                 [attr.title]="optionItem.secondaryText"
-                [innerHTML]="optionItem.secondaryText | highlight: inputText"
+                [innerHTML]="optionItem.secondaryText | highlight : inputText"
             ></span>
         </ng-container>
 

@@ -5,20 +5,10 @@
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/content-density"],
+            "executor": "nx:run-commands",
             "options": {
-                "project": "libs/core/src/lib/content-density/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/content-density/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/core/src/lib/content-density/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+                "command": "echo This should not be called && exit 1"
+            }
         },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",

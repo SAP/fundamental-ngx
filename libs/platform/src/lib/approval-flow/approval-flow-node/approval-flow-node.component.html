@@ -49,7 +49,7 @@
             </ng-container>
 
             <ng-template #multipleApprovers>
-                {{ 'platformApprovalFlow.nodeMembersCount' | fdTranslate: { count: node.approvers.length } }}
+                {{ 'platformApprovalFlow.nodeMembersCount' | fdTranslate : { count: node.approvers.length } }}
             </ng-template>
         </div>
 
@@ -86,14 +86,14 @@
 
                 <ng-container *ngIf="_dueIn < dueDateThreshold">
                     {{
-                        'platformApprovalFlow.nodeStatusDueInXDays' | fdTranslate: { count: dueDateThreshold - _dueIn }
+                        'platformApprovalFlow.nodeStatusDueInXDays' | fdTranslate : { count: dueDateThreshold - _dueIn }
                     }}
                 </ng-container>
 
                 <ng-container *ngIf="_dueIn > dueDateThreshold">
                     {{
                         'platformApprovalFlow.nodeStatusXDaysOverdue'
-                            | fdTranslate: { count: _dueIn - dueDateThreshold }
+                            | fdTranslate : { count: _dueIn - dueDateThreshold }
                     }}
                 </ng-container>
             </ng-container>

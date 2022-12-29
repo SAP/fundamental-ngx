@@ -50,7 +50,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
                     </li>
 
                     <li
-                        *ngFor="let column of columns | filter: filterPhrase:'key'"
+                        *ngFor="let column of columns | filter : filterPhrase : 'key'"
                         cdkDrag
                         fd-list-item
                         [selected]="column.checked"

@@ -5,20 +5,10 @@
     "prefix": "fn",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/fn/info-label"],
+            "executor": "nx:run-commands",
             "options": {
-                "project": "libs/fn/src/lib/info-label/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/fn/src/lib/info-label/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/fn/src/lib/info-label/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+                "command": "echo This should not be called && exit 1"
+            }
         },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",

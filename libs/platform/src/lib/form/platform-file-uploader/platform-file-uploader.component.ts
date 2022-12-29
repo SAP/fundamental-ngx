@@ -101,10 +101,12 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
 
     /** Event emitted when valid file is uploded. */
     @Output()
-    selectionChange: EventEmitter<FileUploaderSelectionChangeEvent> = new EventEmitter<FileUploaderSelectionChangeEvent>();
+    selectionChange: EventEmitter<FileUploaderSelectionChangeEvent> =
+        new EventEmitter<FileUploaderSelectionChangeEvent>();
     /** Event emitted when invalid file is uploded. */
     @Output()
-    invalidFileChange: EventEmitter<FileUploaderInvalidChangeEvent> = new EventEmitter<FileUploaderInvalidChangeEvent>();
+    invalidFileChange: EventEmitter<FileUploaderInvalidChangeEvent> =
+        new EventEmitter<FileUploaderInvalidChangeEvent>();
 
     /** Files upladed hidden field to store file data */
     files: File[];

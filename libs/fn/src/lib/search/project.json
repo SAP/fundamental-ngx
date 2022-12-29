@@ -5,17 +5,9 @@
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/fn/search"],
+            "executor": "nx:run-commands",
             "options": {
-                "tsConfig": "libs/fn/src/lib/search/tsconfig.lib.json",
-                "project": "libs/fn/src/lib/search/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/fn/src/lib/search/tsconfig.lib.prod.json"
-                }
+                "command": "echo This should not be called && exit 1"
             }
         },
         "test": {

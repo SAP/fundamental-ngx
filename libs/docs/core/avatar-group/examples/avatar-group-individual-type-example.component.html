@@ -188,7 +188,7 @@
                     <ng-container *ngIf="overflowPopoverStage === 'main'">
                         <div
                             *ngFor="
-                                let person of people | slice: -1 * avatarGroup_IndividualType.overflowItemsCount;
+                                let person of people | slice : -1 * avatarGroup_IndividualType.overflowItemsCount;
                                 let idx = index
                             "
                             fd-avatar-group-overflow-item

@@ -11,7 +11,7 @@
                 <label [id]="selectedId" fd-form-label class="fdp-value-help-dialog__hidden_label">
                     {{
                         'platformVHD.defineConditionSelectedValueHiddenA11yLabel'
-                            | fdTranslate: { value: item.strategy }
+                            | fdTranslate : { value: item.strategy }
                     }}</label
                 >
                 <fd-select
@@ -215,7 +215,7 @@
 
 <ng-template #countError let-count>
     <fd-form-message type="error" *ngIf="count && count > 7">
-        {{ 'platformVHD.defineConditionMaxCountError' | fdTranslate: { count: 7 } }}
+        {{ 'platformVHD.defineConditionMaxCountError' | fdTranslate : { count: 7 } }}
     </fd-form-message>
 </ng-template>
 

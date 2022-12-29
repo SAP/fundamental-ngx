@@ -28,7 +28,7 @@
         [class.fd-grid-list__highlight--negative]="status === 'warning'"
         [class.fd-grid-list__highlight--critical]="status === 'error'"
         [class.fd-grid-list__highlight--neutral]="status === 'neutral'"
-        [attr.aria-label]="'coreGridList.listItemStatusAriaLabel' | fdTranslate: { status: status }"
+        [attr.aria-label]="'coreGridList.listItemStatusAriaLabel' | fdTranslate : { status: status }"
     ></span>
 
     <ng-container *ngIf="selectionMode === 'singleSelect'">
@@ -63,7 +63,7 @@
         <span
             *ngIf="counter"
             class="fd-grid-list__item-counter"
-            [attr.aria-label]="'coreGridList.listItemCounterAriaLabel' | fdTranslate: { count: counter }"
+            [attr.aria-label]="'coreGridList.listItemCounterAriaLabel' | fdTranslate : { count: counter }"
             [innerText]="counter"
         ></span>
 

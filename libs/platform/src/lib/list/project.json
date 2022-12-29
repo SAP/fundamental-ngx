@@ -5,17 +5,9 @@
     "prefix": "fdp",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/list"],
+            "executor": "nx:run-commands",
             "options": {
-                "tsConfig": "libs/platform/src/lib/list/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/list/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/list/tsconfig.lib.prod.json"
-                }
+                "command": "echo This should not be called && exit 1"
             }
         },
         "test": {

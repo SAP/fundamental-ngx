@@ -22,7 +22,7 @@
     (mouseleave)="onMouseLeave($event)"
     (click)="clicked($event)"
     [attr.aria-roledescription]="
-        media ? ('platformLink.roleDescriptionWithMedia' | fdTranslate: { media: media }) : null
+        media ? ('platformLink.roleDescriptionWithMedia' | fdTranslate : { media: media }) : null
     "
 >
     <ng-content></ng-content>

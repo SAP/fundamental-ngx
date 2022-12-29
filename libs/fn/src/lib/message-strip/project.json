@@ -5,20 +5,10 @@
     "prefix": "fn",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/fn/message-strip"],
+            "executor": "nx:run-commands",
             "options": {
-                "project": "libs/fn/src/lib/message-strip/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/fn/src/lib/message-strip/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/fn/src/lib/message-strip/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+                "command": "echo This should not be called && exit 1"
+            }
         },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",

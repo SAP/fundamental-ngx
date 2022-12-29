@@ -57,9 +57,11 @@
                 fd-button
                 fdType="transparent"
                 [ariaLabel]="
-                    pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate: { pageNumber: page })
+                    pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate : { pageNumber: page })
                 "
-                [title]="pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate: { pageNumber: page })"
+                [title]="
+                    pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate : { pageNumber: page })
+                "
                 class="fd-pagination__link"
                 (click)="goToPage(page)"
                 (keyup.enter)="goToPage(page, $event)"
@@ -78,7 +80,7 @@
             [ariaLabel]="
                 pageLabel
                     ? pageLabel(currentPage)
-                    : ('corePagination.pageLabel' | fdTranslate: { pageNumber: currentPage })
+                    : ('corePagination.pageLabel' | fdTranslate : { pageNumber: currentPage })
             "
             class="fd-pagination__link is-active"
             [attr.aria-current]="true"
@@ -91,7 +93,7 @@
                 labelBeforeInputMobile
                     ? labelBeforeInputMobile + ':'
                     : ('corePagination.labelBeforeInputMobile'
-                      | fdTranslate: { pageNumber: currentPage, totalCount: totalItems })
+                      | fdTranslate : { pageNumber: currentPage, totalCount: totalItems })
             }}
         </label>
 
@@ -113,7 +115,7 @@
                 inputAriaLabel
                     ? inputAriaLabel(currentPage, totalItems)
                     : ('corePagination.inputAriaLabel'
-                      | fdTranslate: { pageNumber: currentPage, totalCount: totalItems })
+                      | fdTranslate : { pageNumber: currentPage, totalCount: totalItems })
             "
             (keydown.enter)="goToPage(currentPageModel.value)"
             (keydown.space)="goToPage(currentPageModel.value)"
@@ -125,7 +127,7 @@
                 labelAfterInputMobile
                     ? labelAfterInputMobile(_lastPage)
                     : ('corePagination.labelAfterInputMobile'
-                      | fdTranslate: { pageNumber: currentPage, totalCount: totalItems })
+                      | fdTranslate : { pageNumber: currentPage, totalCount: totalItems })
             }}
         </label>
 
@@ -137,9 +139,11 @@
                 fd-button
                 fdType="transparent"
                 [ariaLabel]="
-                    pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate: { pageNumber: page })
+                    pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate : { pageNumber: page })
                 "
-                [title]="pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate: { pageNumber: page })"
+                [title]="
+                    pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate : { pageNumber: page })
+                "
                 class="fd-pagination__link"
                 (click)="goToPage(page)"
                 (keyup.enter)="goToPage(page, $event)"
@@ -203,7 +207,7 @@
 
 <ng-template #total let-showing="showing">
     <span fd-form-label class="fd-pagination__total-label">
-        {{ 'corePagination.totalResultsLabel' | fdTranslate: _currentShowing }}
+        {{ 'corePagination.totalResultsLabel' | fdTranslate : _currentShowing }}
     </span>
 </ng-template>
 
