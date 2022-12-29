@@ -1,0 +1,531 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="tsd-signature-type">DynamicFormFieldItem</span>
+			<ul class="tsd-hierarchy">
+				<li>
+					<span class="target">WizardGeneratorFormFieldItem</span>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+		<a name="asyncValidators" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> async<wbr>Validators</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">async<wbr>Validators<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AsyncValidatorFn</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AsyncValidatorFn</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>DynamicFormFieldItem</span>.<span>asyncValidators</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L153">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:153</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>The list of async validators applied to the form item.</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+		<a name="choices" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> choices</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">choices<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DynamicFormItemChoices</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>DynamicFormFieldItem</span>.<span>choices</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L120">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:120</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>The list of available options to select.</p>
+				</dd>
+				<dt class="fd-tsd-comment-tag-pill">param</dt>
+				<dd><p>raw form item value.</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+		<a name="controlType" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> control<wbr>Type</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">control<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">InputType</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>DynamicFormFieldItem</span>.<span>controlType</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L81">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:81</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>Additional set of options that can affect UI of the form item form control.</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+		<a name="default" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> default</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>DynamicFormFieldItem</span>.<span>default</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L113">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:113</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>Default value of the form item.</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+		<a name="dependencyFields" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> dependency<wbr>Fields</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">dependency<wbr>Fields<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WizardGeneratorDependencyFields</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/wizard-generator/interfaces/wizard-generator-form-group.interface.ts#L68">libs/platform/src/lib/wizard-generator/interfaces/wizard-generator-form-group.interface.ts:68</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>Object of dependency fields that are used with <code>when</code> function</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+		<a name="guiOptions" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> gui<wbr>Options</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">gui<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DynamicFormItemGuiOptions</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>DynamicFormFieldItem</span>.<span>guiOptions</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L222">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:222</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>Additional set of options that can affect UI of the form item form control.</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+		<a name="message" class="tsd-anchor"></a>
+		<h3>message</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>DynamicFormFieldItem</span>.<span>message</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L94">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:94</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>Display name of the form item.</p>
+				</dd>
+				<dt class="fd-tsd-comment-tag-pill">param</dt>
+				<dd><p>the form value hash.</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+		<a name="name" class="tsd-anchor"></a>
+		<h3>name</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>DynamicFormFieldItem</span>.<span>name</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L87">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:87</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>Name of the form item in form.</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+		<a name="placeholder" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> placeholder</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">placeholder<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>DynamicFormFieldItem</span>.<span>placeholder</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L101">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:101</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>Display placeholder of the form item.</p>
+				</dd>
+				<dt class="fd-tsd-comment-tag-pill">param</dt>
+				<dd><p>the form value hash.</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+		<a name="rank" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> rank</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">rank<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>DynamicFormFieldItem</span>.<span>rank</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L229">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:229</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>Rank is used for ordering.
+					Than lower number then higher priority.</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+		<a name="required" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> required</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">required<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>DynamicFormFieldItem</span>.<span>required</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L158">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:158</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>Set when form item is a mandatory one.</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+		<a name="type" class="tsd-anchor"></a>
+		<h3>type</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>DynamicFormFieldItem</span>.<span>type</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L75">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:75</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>Type of the form item. E.g. input, textarea, checkbox, etc.</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+		<a name="useMessageAsPlaceholder" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> use<wbr>Message<wbr>AsPlaceholder</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">use<wbr>Message<wbr>AsPlaceholder<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>DynamicFormFieldItem</span>.<span>useMessageAsPlaceholder</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L107">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:107</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>If true, will fall back to <code>message</code> property if <code>placeholder</code> was not provided.</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+		<a name="validators" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> validators</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">validators<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ValidatorFn</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>DynamicFormFieldItem</span>.<span>validators</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L147">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:147</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>The list of validators applied to the form item.</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+		<a name="onchange" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> onchange</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">onchange<span class="tsd-signature-symbol">(</span>fieldValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, forms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DynamicFormGroup</span><span class="tsd-signature-symbol">&gt;</span>, control<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicFormControl</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>DynamicFormFieldItem</span>.<span>onchange</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L205">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:205</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">description</dt>
+						<dd><p>Callback function that is triggered after field value has been changed.</p>
+						</dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>fieldValue: <span class="tsd-signature-type">any</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>Field value.</p>
+						</div>
+					</li>
+					<li>
+						<h5>forms: <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DynamicFormGroup</span><span class="tsd-signature-symbol">&gt;</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>All available forms stored in form generator service.</p>
+						</div>
+					</li>
+					<li>
+						<h5>control: <span class="tsd-signature-type">DynamicFormControl</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>Dynamic form control.</p>
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+		<a name="transformer" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> transformer</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">transformer<span class="tsd-signature-symbol">(</span>formItemValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, formValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">DynamicFormValue</span>, formItem<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">DynamicFormFieldItem</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>DynamicFormFieldItem</span>.<span>transformer</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L167">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:167</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">description</dt>
+						<dd><p>Transforms raw form item value.</p>
+						</dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> formItemValue: <span class="tsd-signature-type">any</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>raw form item value.</p>
+						</div>
+					</li>
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> formValue: <span class="tsd-signature-type">DynamicFormValue</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>the form value hash.</p>
+						</div>
+					</li>
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> formItem: <span class="tsd-signature-type">DynamicFormFieldItem</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>@see DynamicFormFieldItem</p>
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+				<p>updated form item value to be used in the form value hash.</p>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+		<a name="validate" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> validate</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">validate<span class="tsd-signature-symbol">(</span>formItemValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, formValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">DynamicFormValue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicFormItemValidationResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DynamicFormItemValidationResult</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DynamicFormItemValidationResult</span><span class="tsd-signature-symbol">&gt;</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>DynamicFormFieldItem</span>.<span>validate</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L135">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:135</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">description</dt>
+						<dd><p>Receive the user input and form value hash.
+								Should return null if the value is valid, and an error message (String) or <code>false</code> otherwise.
+							If <code>false</code> is returned, a default error message is provided.</p>
+						</dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> formItemValue: <span class="tsd-signature-type">any</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>raw form item value.</p>
+						</div>
+					</li>
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> formValue: <span class="tsd-signature-type">DynamicFormValue</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>the form value hash.</p>
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DynamicFormItemValidationResult</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DynamicFormItemValidationResult</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DynamicFormItemValidationResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
+				<p>null or String</p>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+		<a name="valueRenderer" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> value<wbr>Renderer</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">value<wbr>Renderer<span class="tsd-signature-symbol">(</span>formItemValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, formValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">DynamicFormValue</span>, formItem<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">DynamicFormFieldItem</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>DynamicFormFieldItem</span>.<span>valueRenderer</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L180">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:180</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">description</dt>
+						<dd><p>Transforms raw form item value for render purposes.</p>
+						</dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> formItemValue: <span class="tsd-signature-type">any</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>raw form item value.</p>
+						</div>
+					</li>
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> formValue: <span class="tsd-signature-type">DynamicFormValue</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>the form value hash.</p>
+						</div>
+					</li>
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> formItem: <span class="tsd-signature-type">DynamicFormFieldItem</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>@see DynamicFormFieldItem</p>
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+				<p>updated form item value to be used in the form value hash for rendering purposes.</p>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+		<a name="when" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> when</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">when<span class="tsd-signature-symbol">(</span>formValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicFormValue</span>, forms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DynamicFormGroup</span><span class="tsd-signature-symbol">&gt;</span>, control<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicFormGroupControl</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>DynamicFormFieldItem</span>.<span>when</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/48c30a691/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L193">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:193</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">description</dt>
+						<dd><p>Should return true or false depending on whether this form item should be asked.</p>
+						</dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>formValue: <span class="tsd-signature-type">DynamicFormValue</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>the form value hash.</p>
+						</div>
+					</li>
+					<li>
+						<h5>forms: <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DynamicFormGroup</span><span class="tsd-signature-symbol">&gt;</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>All available forms stored in form generator service.</p>
+						</div>
+					</li>
+					<li>
+						<h5>control: <span class="tsd-signature-type">DynamicFormGroupControl</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>Dynamic form control.</p>
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+				<p>Boolean</p>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>
