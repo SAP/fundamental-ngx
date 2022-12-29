@@ -4,22 +4,6 @@
     "sourceRoot": "libs/platform/src/lib/message-popover",
     "prefix": "fdp",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/message-popover"],
-            "options": {
-                "project": "libs/platform/src/lib/message-popover/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/message-popover/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/platform/src/lib/message-popover/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

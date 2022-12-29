@@ -4,22 +4,6 @@
     "sourceRoot": "libs/platform/src/lib/variant-management",
     "prefix": "fdp",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/variant-management"],
-            "options": {
-                "project": "libs/platform/src/lib/variant-management/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/variant-management/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/platform/src/lib/variant-management/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

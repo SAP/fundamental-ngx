@@ -3,7 +3,6 @@
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib",
     "prefix": "fdp",
-    "buildTarget": "build-umbrella",
     "targets": {
         "prepare": {
             "executor": "@fundamental-ngx/workspace-tools:prepare",
@@ -22,7 +21,7 @@
             },
             "outputs": ["{options.outputPath}"]
         },
-        "build-umbrella": {
+        "build": {
             "executor": "@nrwl/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/platform"],
             "options": {

@@ -4,20 +4,6 @@
     "sourceRoot": "libs/core/src/lib/theming",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/theming"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/theming/tsconfig.lib.json",
-                "project": "libs/core/src/lib/theming/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/theming/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

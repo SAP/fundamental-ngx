@@ -3,7 +3,6 @@
     "projectType": "library",
     "sourceRoot": "libs/cx/src/lib",
     "prefix": "fd",
-    "buildTarget": "build-umbrella",
     "targets": {
         "prepare": {
             "executor": "@fundamental-ngx/workspace-tools:prepare",
@@ -18,7 +17,7 @@
             },
             "outputs": ["{options.outputPath}"]
         },
-        "build-umbrella": {
+        "build": {
             "executor": "@nrwl/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/cx"],
             "options": {

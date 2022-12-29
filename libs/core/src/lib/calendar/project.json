@@ -4,20 +4,6 @@
     "sourceRoot": "libs/core/src/lib/calendar",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/calendar"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/calendar/tsconfig.lib.json",
-                "project": "libs/core/src/lib/calendar/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/calendar/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

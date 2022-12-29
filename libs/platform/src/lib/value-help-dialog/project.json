@@ -4,20 +4,6 @@
     "sourceRoot": "libs/platform/src/lib/value-help-dialog",
     "prefix": "fdp",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/value-help-dialog"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/value-help-dialog/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/value-help-dialog/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/value-help-dialog/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

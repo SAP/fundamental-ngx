@@ -4,20 +4,6 @@
     "sourceRoot": "libs/core/src/lib/mobile-mode",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/mobile-mode"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/mobile-mode/tsconfig.lib.json",
-                "project": "libs/core/src/lib/mobile-mode/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/mobile-mode/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

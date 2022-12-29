@@ -4,20 +4,6 @@
     "sourceRoot": "libs/core/src/lib/time-picker",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/time-picker"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/time-picker/tsconfig.lib.json",
-                "project": "libs/core/src/lib/time-picker/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/time-picker/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

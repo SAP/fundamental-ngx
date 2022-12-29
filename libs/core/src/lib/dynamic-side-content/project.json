@@ -4,20 +4,6 @@
     "sourceRoot": "libs/core/src/lib/dynamic-side-content",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/dynamic-side-content"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/dynamic-side-content/tsconfig.lib.json",
-                "project": "libs/core/src/lib/dynamic-side-content/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/dynamic-side-content/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

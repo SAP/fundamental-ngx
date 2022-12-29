@@ -4,20 +4,6 @@
     "sourceRoot": "libs/platform/src/lib/split-menu-button",
     "prefix": "fdp",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/split-menu-button"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/split-menu-button/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/split-menu-button/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/split-menu-button/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

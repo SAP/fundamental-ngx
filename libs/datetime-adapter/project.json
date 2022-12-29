@@ -34,23 +34,6 @@
             },
             "defaultConfiguration": "production"
         },
-        "build-umbrella": {
-            "executor": "@nrwl/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/datetime-adapter"],
-            "options": {
-                "project": "libs/datetime-adapter/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/datetime-adapter/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/datetime-adapter/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

@@ -4,20 +4,6 @@
     "sourceRoot": "libs/platform/src/lib/menu",
     "prefix": "fdp",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/menu"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/menu/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/menu/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/menu/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

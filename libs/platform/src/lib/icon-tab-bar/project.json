@@ -4,20 +4,6 @@
     "sourceRoot": "libs/platform/src/lib/icon-tab-bar",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/icon-tab-bar"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/icon-tab-bar/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/icon-tab-bar/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/icon-tab-bar/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

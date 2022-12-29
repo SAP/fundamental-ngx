@@ -3,37 +3,6 @@
     "sourceRoot": "tools",
     "projectType": "library",
     "targets": {
-        "build": {
-            "executor": "@nrwl/js:tsc",
-            "outputs": ["{options.outputPath}"],
-            "options": {
-                "outputPath": "dist/tools",
-                "main": "tools/index.ts",
-                "tsConfig": "tools/tsconfig.tools.json",
-                "assets": [
-                    {
-                        "input": "./tools",
-                        "glob": "**/!(*.ts)",
-                        "output": "./tools"
-                    },
-                    {
-                        "input": "./tools",
-                        "glob": "**/*.d.ts",
-                        "output": "./tools"
-                    },
-                    {
-                        "input": "./tools",
-                        "glob": "generators.json",
-                        "output": "."
-                    },
-                    {
-                        "input": "./tools",
-                        "glob": "executors.json",
-                        "output": "."
-                    }
-                ]
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

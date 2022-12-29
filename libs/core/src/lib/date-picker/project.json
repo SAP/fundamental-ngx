@@ -4,20 +4,6 @@
     "sourceRoot": "libs/core/src/lib/date-picker",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/date-picker"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/date-picker/tsconfig.lib.json",
-                "project": "libs/core/src/lib/date-picker/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/date-picker/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

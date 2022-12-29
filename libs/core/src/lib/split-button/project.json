@@ -4,20 +4,6 @@
     "sourceRoot": "libs/core/src/lib/split-button",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/split-button"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/split-button/tsconfig.lib.json",
-                "project": "libs/core/src/lib/split-button/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/split-button/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

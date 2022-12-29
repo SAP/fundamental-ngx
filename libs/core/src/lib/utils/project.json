@@ -4,20 +4,6 @@
     "sourceRoot": "libs/core/src/lib/utils",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/utils"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/utils/tsconfig.lib.json",
-                "project": "libs/core/src/lib/utils/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/utils/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

@@ -4,20 +4,6 @@
     "sourceRoot": "libs/core/src/lib/layout-grid",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/layout-grid"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/layout-grid/tsconfig.lib.json",
-                "project": "libs/core/src/lib/layout-grid/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/layout-grid/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {
