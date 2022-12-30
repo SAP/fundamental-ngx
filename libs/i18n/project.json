@@ -34,23 +34,6 @@
             },
             "defaultConfiguration": "production"
         },
-        "build-umbrella": {
-            "executor": "@nrwl/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/i18n"],
-            "options": {
-                "project": "libs/i18n/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/i18n/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/i18n/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
-        },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {

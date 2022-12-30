@@ -8,15 +8,7 @@
             "runner": "@nrwl/nx-cloud",
             "options": {
                 "accessToken": "MzFiYWRhMTItYTAxYi00MGZjLWJmNDEtOTllMzEwZjI5ODNkfHJlYWQ=",
-                "cacheableOperations": [
-                    "generate-typedoc",
-                    "compile-typedoc",
-                    "build",
-                    "build-umbrella",
-                    "lint",
-                    "test",
-                    "e2e"
-                ],
+                "cacheableOperations": ["generate-typedoc", "compile-typedoc", "build", "lint", "test", "e2e"],
                 "canTrackAnalytics": false,
                 "showUsageWarnings": true
             }
@@ -61,11 +53,8 @@
             "dependsOn": ["^build"],
             "inputs": ["production", "^production"]
         },
-        "build-umbrella": {
-            "dependsOn": ["^build-umbrella"]
-        },
         "prepare": {
-            "dependsOn": ["build-umbrella"]
+            "dependsOn": ["build"]
         },
         "test": {
             "inputs": ["default", "^default", "{workspaceRoot}/karma.conf.js"]

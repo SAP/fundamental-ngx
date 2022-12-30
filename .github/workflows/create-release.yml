@@ -60,7 +60,7 @@ jobs:
               with:
                   parallel-commands: |
                       npx nx run-many --target=lint --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter,cx --parallel=2
-                      npx nx run-many --target=build-umbrella --all --parallel=1
+                      npx nx run-many --target=build --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter,cx --all --parallel=1
 
             - name: Pack libraries
               run: npx nx run-many --target=prepare --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter,cx --parallel=3 --projectVersion=${{ steps.bumpVersion.outputs.newVersion }} --pack
