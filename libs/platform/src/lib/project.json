@@ -41,6 +41,14 @@
             "options": {
                 "lintFilePatterns": ["libs/platform/src/lib/**/*.ts", "libs/platform/src/lib/**/*.html"]
             }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/platform/src/lib/test.ts",
+                "tsConfig": "libs/platform/src/lib/tsconfig.spec.json",
+                "karmaConfig": "libs/platform/src/lib/karma.conf.js"
+            }
         }
     },
     "tags": ["type:lib", "scope:fdp"],

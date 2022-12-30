@@ -3,7 +3,7 @@ import { DialogContentBase } from '../base/dialog-content-base.class';
 
 export class DialogDefaultContent extends DialogContentBase {
     /** Dialog Body */
-    content?: TemplateRef<any>;
+    declare content?: TemplateRef<any>;
 
     /** Subheader Body */
     subHeader?: TemplateRef<any>;

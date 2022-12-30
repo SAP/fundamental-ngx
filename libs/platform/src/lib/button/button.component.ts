@@ -87,7 +87,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     /** Specifies a name to
      *  the native HTML button */
     @Input()
-    name: string;
+    declare name: string;
 
     /** Specifies the type to
      *  the native HTML button */

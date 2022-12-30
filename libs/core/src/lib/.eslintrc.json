@@ -23,7 +23,7 @@
                     "error",
                     {
                         "type": "element",
-                        "prefix": "fdp",
+                        "prefix": "fd",
                         "style": "kebab-case"
                     }
                 ]

@@ -77,7 +77,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
      * Whether the textarea is readonly
      */
     @Input()
-    readonly: boolean;
+    declare readonly: boolean;
 
     /** The maximum number of characters allowed to enter.
      * If `showExceededText` is false, `maxLength` has native textarea's behavior of disallowing typing beyond `maxLength`.

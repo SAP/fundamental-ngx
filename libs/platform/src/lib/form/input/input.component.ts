@@ -62,7 +62,7 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
      * Input group will not be able to set required value to input, until `required` is input through the`@Input` property.
      */
     @Input()
-    required: boolean;
+    declare required: boolean;
 
     /** return the value in the text box */
     @Input()

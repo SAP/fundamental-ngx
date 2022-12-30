@@ -46,7 +46,7 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
 export class ComboboxComponent extends BaseCombobox implements ComboboxInterface, OnInit, AfterViewInit {
     /** @hidden */
     @ViewChild('searchInputElement')
-    searchInputElement: ElementRef<HTMLInputElement>;
+    declare searchInputElement: ElementRef<HTMLInputElement>;
 
     /** @hidden */
     @ViewChild('controlTemplate')

@@ -154,11 +154,11 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden */
     @ViewChild('controlTemplate')
-    controlTemplate: TemplateRef<any>;
+    declare controlTemplate: TemplateRef<any>;
 
     /** @hidden */
     @ViewChild('listTemplate')
-    listTemplate: TemplateRef<any>;
+    declare listTemplate: TemplateRef<any>;
 
     /** @hidden */
     constructor(

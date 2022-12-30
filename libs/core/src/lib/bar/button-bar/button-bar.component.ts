@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, ViewChild } from '@angular/core';
 import { BaseButton, ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
 import { Subscription } from 'rxjs';
-import { Nullable } from '@fundamental-ngx/core/shared';
 
 let randomButtonBarId = 0;
 
@@ -41,10 +40,6 @@ export class ButtonBarComponent extends BaseButton implements OnDestroy {
     /** adding title to the button */
     @Input()
     title: string;
-
-    /** Aria label attribute value. */
-    @Input()
-    ariaLabel: Nullable<string | null>;
 
     /** the aria-labelledby ids to be associated with this element */
     @Input()

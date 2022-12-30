@@ -3,5 +3,5 @@ import { TemplateRef } from '@angular/core';
 
 export class MessageBoxContent extends DialogContentBase {
     /** @hidden */
-    content?: TemplateRef<any> | string;
+    declare content?: TemplateRef<any> | string;
 }

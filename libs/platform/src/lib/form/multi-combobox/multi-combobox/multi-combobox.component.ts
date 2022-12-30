@@ -71,7 +71,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
     /** @hidden */
     @ViewChild('listTemplate')
-    listTemplate: TemplateRef<any>;
+    declare listTemplate: TemplateRef<any>;
 
     /** @hidden */
     @ViewChild(TokenizerComponent)

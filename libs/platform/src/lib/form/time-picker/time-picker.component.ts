@@ -83,7 +83,7 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
      * Otherwise It can be set to a default value
      */
     @Input()
-    placeholder: string;
+    declare placeholder: string;
 
     /** Aria label for the time picker input. */
     @Input()

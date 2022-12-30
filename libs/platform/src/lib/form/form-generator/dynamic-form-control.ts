@@ -15,7 +15,7 @@ export class DynamicFormControlGroup extends FormGroup {
     /** @hidden */
     public type = 'group';
     /** @hidden */
-    public controls: DynamicFormGroupControls;
+    public declare controls: DynamicFormGroupControls;
 
     /** @hidden */
     constructor(

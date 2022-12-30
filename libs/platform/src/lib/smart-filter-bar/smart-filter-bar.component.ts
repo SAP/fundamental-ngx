@@ -154,7 +154,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      * Condition strategy labels.
      */
     @Input()
-    defineStrategyLabels: SmartFilterBarStrategyLabels | undefined;
+    declare defineStrategyLabels: SmartFilterBarStrategyLabels | undefined;
 
     /**
      * @deprecated use i18n capabilities instead

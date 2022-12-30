@@ -57,7 +57,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
 
     /** aria label for the page */
     @Input()
-    ariaLabel: Nullable<string>;
+    declare ariaLabel: Nullable<string>;
 
     /** Whether or not tabs should be stacked. */
     @Input()

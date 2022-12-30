@@ -181,7 +181,7 @@ export class SearchFieldComponent
      * Not shown in the UI, only visible by the screen-readers.
      */
     @Input()
-    ariaLabel: Nullable<string>;
+    declare ariaLabel: Nullable<string>;
 
     /**
      * Id of elements (separated by space) for setting aria-labelledby for search input

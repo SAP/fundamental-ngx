@@ -44,7 +44,7 @@ export abstract class BaseInput
     /** @hidden */
     protected defaultId = `fdp-input-id-${randomId++}`;
     /** @hidden */
-    protected _disabled: boolean;
+    protected declare _disabled: boolean;
     /** @hidden */
     protected _value: any;
     /** @hidden */
@@ -113,11 +113,11 @@ export abstract class BaseInput
 
     /** Binds to control aria-labelledBy attribute */
     @Input()
-    ariaLabelledBy: Nullable<string>;
+    declare ariaLabelledBy: Nullable<string>;
 
     /** Sets control aria-label attribute value */
     @Input()
-    ariaLabel: Nullable<string>;
+    declare ariaLabel: Nullable<string>;
 
     /**
      * Tell the component if we are in editing mode.
