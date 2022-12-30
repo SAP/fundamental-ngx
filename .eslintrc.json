@@ -37,7 +37,8 @@
                                 ]
                             }
                         ],
-                        "enforceBuildableLibDependency": true
+                        "enforceBuildableLibDependency": true,
+                        "allowCircularSelfDependency": true
                     }
                 ]
             }
