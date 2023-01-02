@@ -2410,6 +2410,13 @@
   dependencies:
     nx "15.3.0"
 
+"@nrwl/cli@15.4.2":
+  version "15.4.2"
+  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-15.4.2.tgz#b9b33181094b06fa25693ad2ddf3ce320bfcb54e"
+  integrity sha512-k/sGhqHhXsZakJxaWLmbyDJkQd/klqBEBChax3IHXAgIO9kG0lVwXHzENRqbfw3Z8TdKEZQ4IFwBJt9Dao6bCg==
+  dependencies:
+    nx "15.4.2"
+
 "@nrwl/cli@8.12.11":
   version "8.12.11"
   resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-8.12.11.tgz#3be261a04c18edc4c4133f0e7078b9c23802f0a8"
@@ -2589,6 +2596,13 @@
   integrity sha512-alyzKKSgfgPwQ/FUozvk43VGOZHyNMiSM6Udl49ZaQwT77GXRFkrOu21odW6dciWPd3iUOUjfJISNqrEJmxvpw==
   dependencies:
     nx "15.3.0"
+
+"@nrwl/tao@15.4.2":
+  version "15.4.2"
+  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-15.4.2.tgz#cfcd736ddb1c7258f886b30059e8d2d1b7e23af5"
+  integrity sha512-c/hYhWMjEBvucO9cGL2h2lqH7f+4gb8DJJiuNRPwfvF+sQITLXpl9wASHlpG2unDrtnLjGFo73u5XUUqGiSKvA==
+  dependencies:
+    nx "15.4.2"
 
 "@nrwl/tao@8.12.11":
   version "8.12.11"
@@ -13428,6 +13442,47 @@ nx@15.3.0:
     yargs "^17.6.2"
     yargs-parser "21.1.1"
 
+nx@15.4.2:
+  version "15.4.2"
+  resolved "https://registry.yarnpkg.com/nx/-/nx-15.4.2.tgz#58acf4ec2097977b7e454737397054ca65f32731"
+  integrity sha512-np8eJfiBy2I8RZOWCKHr1oeUMHdqLQc7V6ihrzEQe2ZYUl9CSibtKvx0v8YGToHj/vYCiolRPhliFV5sFxgWlg==
+  dependencies:
+    "@nrwl/cli" "15.4.2"
+    "@nrwl/tao" "15.4.2"
+    "@parcel/watcher" "2.0.4"
+    "@yarnpkg/lockfile" "^1.1.0"
+    "@yarnpkg/parsers" "^3.0.0-rc.18"
+    "@zkochan/js-yaml" "0.0.6"
+    axios "^1.0.0"
+    chalk "4.1.0"
+    chokidar "^3.5.1"
+    cli-cursor "3.1.0"
+    cli-spinners "2.6.1"
+    cliui "^7.0.2"
+    dotenv "~10.0.0"
+    enquirer "~2.3.6"
+    fast-glob "3.2.7"
+    figures "3.2.0"
+    flat "^5.0.2"
+    fs-extra "^10.1.0"
+    glob "7.1.4"
+    ignore "^5.0.4"
+    js-yaml "4.1.0"
+    jsonc-parser "3.2.0"
+    minimatch "3.0.5"
+    npm-run-path "^4.0.1"
+    open "^8.4.0"
+    semver "7.3.4"
+    string-width "^4.2.3"
+    strong-log-transformer "^2.1.0"
+    tar-stream "~2.2.0"
+    tmp "~0.2.1"
+    tsconfig-paths "^3.9.0"
+    tslib "^2.3.0"
+    v8-compile-cache "2.3.0"
+    yargs "^17.6.2"
+    yargs-parser "21.1.1"
+
 oauth-sign@~0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
@@ -18533,7 +18588,7 @@ yargs-parser@10.0.0:
   dependencies:
     camelcase "^4.1.0"
 
-yargs-parser@21.1.1, yargs-parser@>=21.0.1, yargs-parser@^21.0.0, yargs-parser@^21.1.1:
+yargs-parser@21.1.1, yargs-parser@>=21.0.1, yargs-parser@^21.1.1:
   version "21.1.1"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-21.1.1.tgz#9096bceebf990d21bb31fa9516e0ede294a77d35"
   integrity sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==
@@ -18563,7 +18618,7 @@ yargs@17.1.1:
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
 
-yargs@17.6.2, yargs@^17.3.1, yargs@^17.6.2:
+yargs@17.6.2, yargs@^17.0.0, yargs@^17.2.1, yargs@^17.3.1, yargs@^17.6.2:
   version "17.6.2"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.6.2.tgz#2e23f2944e976339a1ee00f18c77fedee8332541"
   integrity sha512-1/9UrdHjDZc0eOU0HxOHoS78C69UD3JRMvzlJ7S79S2nTaWRA/whGCTV8o9e/N/1Va9YIV7Q4sOxD8VV4pCWOw==
@@ -18606,19 +18661,6 @@ yargs@^16.0.0, yargs@^16.0.3, yargs@^16.1.1, yargs@^16.2.0:
     string-width "^4.2.0"
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
-
-yargs@^17.0.0, yargs@^17.2.1:
-  version "17.6.0"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.6.0.tgz#e134900fc1f218bc230192bdec06a0a5f973e46c"
-  integrity sha512-8H/wTDqlSwoSnScvV2N/JHfLWOKuh5MVla9hqLjK3nsfyy6Y4kDSYSvkU5YCUEPOSnRXfIyx3Sq+B/IWudTo4g==
-  dependencies:
-    cliui "^8.0.1"
-    escalade "^3.1.1"
-    get-caller-file "^2.0.5"
-    require-directory "^2.1.1"
-    string-width "^4.2.3"
-    y18n "^5.0.5"
-    yargs-parser "^21.0.0"
 
 yarn-install@^1.0.0:
   version "1.0.0"
