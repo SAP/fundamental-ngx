@@ -131,7 +131,7 @@
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsdoc": "39.6.4",
     "eslint-plugin-prefer-arrow": "1.2.3",
-    "fs-extra": "10.1.0",
+    "fs-extra": "11.1.0",
     "git-semver-tags": "4.1.1",
     "github-assistant": "0.3.4",
     "husky": "8.0.2",
