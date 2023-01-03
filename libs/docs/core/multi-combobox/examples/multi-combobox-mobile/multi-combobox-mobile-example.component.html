@@ -1,0 +1,14 @@
+<p>Mobile Mode Combobox:</p>
+
+<fd-multi-combobox
+    name="mobile"
+    placeholder="Type some text..."
+    displayKey="name"
+    id="mobile"
+    [dataSource]="dataSource"
+    [mobile]="true"
+    [mobileConfig]="mobileConfig"
+    (selectionChange)="onSelect($event)"
+    [selectedItems]="selectedItems"
+></fd-multi-combobox>
+<p>Selected: {{ selectedItems | json }}</p>

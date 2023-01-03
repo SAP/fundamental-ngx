@@ -1,0 +1,25 @@
+<p>Group with Key:</p>
+<fd-multi-combobox
+    name="group"
+    placeholder="Type some text..."
+    [dataSource]="dataSource"
+    displayKey="name"
+    [group]="true"
+    groupKey="type"
+    (selectionChange)="onSelect($event)"
+    [selectedItems]="selectedItems"
+></fd-multi-combobox>
+<p>Selected: {{ selectedItems | json }}</p>
+
+<p>Group without Key:</p>
+
+<fd-multi-combobox
+    name="group-without-key"
+    placeholder="Type some text..."
+    [dataSource]="dataSource"
+    displayKey="name"
+    [group]="true"
+    (selectionChange)="onSelect1($event)"
+    [selectedItems]="selectedItems1"
+></fd-multi-combobox>
+<p>Selected: {{ selectedItems1 | json }}</p>

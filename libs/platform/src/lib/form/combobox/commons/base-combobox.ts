@@ -6,6 +6,7 @@ import {
     ElementRef,
     EventEmitter,
     Host,
+    Inject,
     Input,
     OnDestroy,
     Optional,
@@ -41,8 +42,7 @@ import {
     coerceArraySafe,
     CollectionBaseInput,
     ComboBoxDataSource,
-    FormField,
-    FormFieldControl,
+    PlatformFormFieldControl,
     isDataSource,
     isFunction,
     isJsObject,
@@ -51,13 +51,15 @@ import {
     MatchingBy,
     MatchingStrategy,
     ObservableComboBoxDataSource,
-    OptionItem
+    OptionItem,
+    PlatformFormField
 } from '@fundamental-ngx/platform/shared';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { ComboboxComponent } from '../combobox/combobox.component';
 import { ComboboxConfig } from '../combobox.config';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 export type TextAlignment = 'left' | 'right';
 export type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
@@ -313,8 +315,8 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
         protected comboboxConfig: ComboboxConfig,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
     ) {
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }

@@ -91,7 +91,11 @@ export const components: SectionInterfaceContent[] = [
     { url: 'core/splitter', name: 'Splitter/Responsive Splitter' },
     { url: 'core/progress-indicator', name: 'Progress Indicator' },
     { url: 'core/scrollbar', name: 'Scrollbar' },
-    { url: 'core/skeleton', name: 'Skeleton' }
+    { url: 'core/skeleton', name: 'Skeleton' },
+    {
+        url: 'core/multi-combobox',
+        name: 'Multi Combobox'
+    }
 ];
 
 export const layouts: SectionInterfaceContent[] = [

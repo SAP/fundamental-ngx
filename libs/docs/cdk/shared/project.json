@@ -1,0 +1,15 @@
+{
+    "projectType": "library",
+    "sourceRoot": "libs/shared/src",
+    "prefix": "fundamental-ngx",
+    "targets": {
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/docs/core/shared/**/*.ts", "libs/docs/core/shared/**/*.html"]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:docs"],
+    "name": "docs-cdk-shared"
+}

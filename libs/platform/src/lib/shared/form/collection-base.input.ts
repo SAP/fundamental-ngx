@@ -1,11 +1,12 @@
-import { ChangeDetectorRef, Directive, ElementRef, Host, Input, Optional, Self, SkipSelf } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, Host, Inject, Input, Optional, Self, SkipSelf } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { BaseInput } from './base.input';
-import { FormField } from './form-field';
-import { FormFieldControl } from './form-control';
 import { isFunction, isJsObject, isString } from '../utils/lang';
 import { isSelectItem, SelectItem } from '../domain/data-model';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { PlatformFormFieldControl } from './form-control';
+import { PlatformFormField } from './form-field';
 
 /**
  * Defines specific behavior for Input controls which deals with list of values including:
@@ -57,8 +58,8 @@ export abstract class CollectionBaseInput extends BaseInput {
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
     ) {
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }

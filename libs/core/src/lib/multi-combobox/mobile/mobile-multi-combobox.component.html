@@ -1,0 +1,62 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 fd-title fd-dialog-title *ngIf="mobileConfig?.title" [innerText]="mobileConfig.title"></h1>
+            <button
+                fd-dialog-close-button
+                *ngIf="mobileConfig?.hasCloseButton"
+                [mobile]="true"
+                (click)="handleDismiss()"
+            ></button>
+            <ng-template fdTemplate="subheader">
+                <div fd-bar-middle>
+                    <fd-bar-element [fullWidth]="true">
+                        <ng-container *ngTemplateOutlet="childContent?.controlTemplate || null"></ng-container>
+
+                        <button
+                            *ngIf="selectedShown$ | async"
+                            fd-button
+                            glyph="multiselect-all"
+                            fdType="emphasized"
+                            [title]="'platformMultiCombobox.mobileShowAllItemsButton' | fdTranslate"
+                            [attr.aria-label]="'platformMultiCombobox.mobileShowAllItemsButton' | fdTranslate"
+                            class="fd-margin-begin--tiny"
+                            (click)="showSelected()"
+                        ></button>
+
+                        <button
+                            *ngIf="(selectedShown$ | async) === false"
+                            fd-button
+                            glyph="multiselect-all"
+                            fdType="transparent"
+                            [title]="'platformMultiCombobox.mobileShowSelectedItemsButton' | fdTranslate"
+                            [attr.aria-label]="'platformMultiCombobox.mobileShowSelectedItemsButton' | fdTranslate"
+                            class="fd-margin-begin--tiny"
+                            (click)="showSelected()"
+                        ></button>
+                    </fd-bar-element>
+                </div>
+            </ng-template>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <ng-container *ngTemplateOutlet="childContent?.listTemplate || null"></ng-container>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                *ngIf="mobileConfig?.approveButtonText"
+                fdType="emphasized"
+                [label]="mobileConfig.approveButtonText!"
+                (click)="handleApprove()"
+            >
+            </fd-button-bar>
+            <fd-button-bar
+                *ngIf="mobileConfig?.cancelButtonText"
+                [label]="mobileConfig.cancelButtonText!"
+                (click)="handleDismiss()"
+            >
+            </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>

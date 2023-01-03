@@ -12,7 +12,11 @@ import {
 import { AbstractControl, ControlContainer, FormGroup, FormGroupDirective, NgForm, NgModel } from '@angular/forms';
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { DestroyedService } from '@fundamental-ngx/core/utils';
-import { FormField, FormFieldControl, FormFieldErrorDirectiveContext } from '@fundamental-ngx/platform/shared';
+import {
+    PlatformFormField,
+    PlatformFormFieldControl,
+    FormFieldErrorDirectiveContext
+} from '@fundamental-ngx/platform/shared';
 import { BehaviorSubject, filter, startWith, Subscription, switchMap, takeUntil, zip } from 'rxjs';
 import { FDP_MESSAGE_POPOVER_CONFIG, MessagePopoverConfig, MessagePopoverErrorConfig } from '../../default-config';
 import { MessagePopoverFormItemDirective } from '../../directives/message-popover-form-item.directive';
@@ -49,17 +53,17 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
 
     /** User-passed form fields. */
     @Input()
-    set formFields(value: FormFieldControl[]) {
+    set formFields(value: PlatformFormFieldControl[]) {
         this._formFields = value;
         this._listenToFormFieldErrors(value);
     }
 
-    get formFields(): FormFieldControl[] {
+    get formFields(): PlatformFormFieldControl[] {
         return this._formFields;
     }
 
     /** @hidden */
-    private _formFields: FormFieldControl[] = [];
+    private _formFields: PlatformFormFieldControl[] = [];
 
     /** @hidden */
     @ContentChildren(ControlContainer, { descendants: true })
@@ -70,8 +74,8 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     private readonly _projectedFormItems!: QueryList<NgModel>;
 
     /** @hidden */
-    @ContentChildren(FormFieldControl, { descendants: true })
-    private readonly _projectedFormFieldControls!: QueryList<FormFieldControl>;
+    @ContentChildren(PlatformFormFieldControl, { descendants: true })
+    private readonly _projectedFormFieldControls!: QueryList<PlatformFormFieldControl>;
 
     /** @hidden */
     @ContentChildren(MessagePopoverFormItemDirective, { descendants: true })
@@ -157,7 +161,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     }
 
     /** @hidden */
-    private _listenToFormFieldErrors(fields: FormFieldControl[]): void {
+    private _listenToFormFieldErrors(fields: PlatformFormFieldControl[]): void {
         this._formItemErrorsSubscription.unsubscribe();
 
         this._formItemErrorsSubscription = new Subscription();
@@ -311,7 +315,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         controlName: string,
         groupName: string,
         control: AbstractControl,
-        field: FormFieldControl,
+        field: PlatformFormFieldControl,
         errorKey: string,
         errorDirective?: FormFieldErrorDirectiveContext,
         error?: any
@@ -346,7 +350,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
      * @param section Section where text should be rendered.
      */
     private _getErrorText(
-        field: FormFieldControl,
+        field: PlatformFormFieldControl,
         errorDirective: Nullable<FormFieldErrorDirectiveContext>,
         section: 'heading' | 'description' = 'heading',
         errorKey: string,
@@ -378,7 +382,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     }
 
     /** @hidden */
-    private _getGroupName(formField: Nullable<FormField>): string {
+    private _getGroupName(formField: Nullable<PlatformFormField>): string {
         const parts: string[] = [];
 
         if (formField?.formGroupContainer?.mainTitle) {

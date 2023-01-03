@@ -1,0 +1,40 @@
+{
+    "name": "core-multi-combobox",
+    "projectType": "library",
+    "sourceRoot": "libs/core/src/lib/multi-combobox",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["{workspaceRoot}/dist/libs/core/multi-combobox"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/multi-combobox/tsconfig.lib.json",
+                "project": "libs/core/src/lib/multi-combobox/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/multi-combobox/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/multi-combobox/test.ts",
+                "tsConfig": "libs/core/src/lib/multi-combobox/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/multi-combobox/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/core/src/lib/multi-combobox/**/*.ts",
+                    "libs/core/src/lib/multi-combobox/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fd"]
+}

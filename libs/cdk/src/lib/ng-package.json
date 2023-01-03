@@ -1,0 +1,17 @@
+{
+    "$schema": "../../../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../../../dist/libs/cdk",
+    "deleteDestPath": true,
+    "lib": {
+        "entryFile": "./public_api.ts"
+    },
+    "allowedNonPeerDependencies": [
+        "@sap-theming/theming-base-content",
+        "focus-trap",
+        "fundamental-styles",
+        "lodash-es",
+        "compare-versions",
+        "@fundamental-ngx/i18n",
+        "fast-deep-equal"
+    ]
+}

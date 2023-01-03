@@ -24,6 +24,7 @@ import {
     ElementRef,
     EventEmitter,
     Host,
+    Inject,
     Input,
     OnInit,
     Optional,
@@ -32,8 +33,9 @@ import {
     SkipSelf
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
-import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 
 const VALID_INPUT_TYPES = ['text', 'number', 'email', 'password'];
 
@@ -49,7 +51,7 @@ export type InputType = 'text' | 'number' | 'email' | 'password';
     templateUrl: 'input.component.html',
     styleUrls: ['./input.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FormFieldControl, useExisting: InputComponent, multi: true }]
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: InputComponent, multi: true }]
 })
 export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     /** Input type */
@@ -88,8 +90,8 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
     ) {
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }

@@ -1,7 +1,7 @@
 import { Directive, Inject, Injector, Input, OnInit, Optional, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { PreparedDynamicFormFieldItem } from './interfaces/dynamic-form-item';
 import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
 import { FormGeneratorService } from './form-generator.service';
@@ -41,12 +41,12 @@ export class DynamicFormControlDirective implements OnInit {
     /**
      * @description Reference to the @see FormFieldComponent
      */
-    @Input() formField: FormField;
+    @Input() formField: PlatformFormField;
 
     /**
      * Control field instance.
      */
-    formFieldControl: FormFieldControl;
+    formFieldControl: PlatformFormFieldControl;
 
     /** @hidden */
     constructor(
@@ -92,6 +92,6 @@ export class DynamicFormControlDirective implements OnInit {
         componentRef.instance.formField = this.formField;
         componentRef.instance.formGroupName = this.formGroupNamePath;
 
-        this.formFieldControl = componentRef.instance as unknown as FormFieldControl;
+        this.formFieldControl = componentRef.instance as unknown as PlatformFormFieldControl;
     }
 }

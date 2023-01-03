@@ -1,9 +1,10 @@
 import { QueryList, TemplateRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
+import { FormField } from '@fundamental-ngx/cdk/forms';
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { Subject } from 'rxjs';
 
-import { FormFieldControl } from './form-control';
+import { PlatformFormFieldControl } from './form-control';
 import { FormError, FormFieldErrorDirectiveContext } from './form-error';
 import { FormFieldGroup } from './form-field-group';
 import { FormGroupContainer } from './form-group';
@@ -15,7 +16,7 @@ import { LabelLayout, Column, HintPlacement } from './form-options';
  * This class is used to create form field components.
  *
  */
-export abstract class FormField {
+export abstract class PlatformFormField extends FormField {
     /**
      * Form field id
      */
@@ -61,7 +62,7 @@ export abstract class FormField {
     /**
      * A reference to the underlying FormFieldControl.
      */
-    control: FormFieldControl | null;
+    control: PlatformFormFieldControl | null;
     /**
      * Set when form field is a mandatory one.
      */
@@ -90,11 +91,11 @@ export abstract class FormField {
     /**
      * Register underlying form control
      */
-    registerFormFieldControl: (control: FormFieldControl) => void;
+    // registerFormFieldControl: (control: FormFieldControl) => void;
     /**
      * Unregister underlying form control
      */
-    unregisterFormFieldControl: (control: FormFieldControl) => void;
+    // unregisterFormFieldControl: (control: PlatformFormFieldControl) => void;
 
     /**
      * Set default columns layout

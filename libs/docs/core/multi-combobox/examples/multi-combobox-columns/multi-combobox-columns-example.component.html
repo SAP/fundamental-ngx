@@ -1,0 +1,14 @@
+<fd-multi-combobox
+    name="columns"
+    placeholder="Type some text..."
+    [autoResize]="true"
+    [dataSource]="dataSource"
+    displayKey="name"
+    lookupKey="id"
+    secondaryKey="type"
+    [showSecondaryText]="true"
+    secondaryTextAlignment="right"
+    (selectionChange)="onSelect($event)"
+    [selectedItems]="selectedItems"
+></fd-multi-combobox>
+<p>Selected Item: {{ selectedItems | json }}</p>

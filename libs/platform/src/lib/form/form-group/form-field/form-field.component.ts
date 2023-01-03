@@ -27,6 +27,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { FD_FORM_FIELD, FormFieldControl } from '@fundamental-ngx/cdk/forms';
 import { uniqBy } from 'lodash-es';
 import { BehaviorSubject, combineLatest, filter, Observable, Subject, Subscription, tap } from 'rxjs';
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
@@ -36,8 +37,7 @@ import {
     ColumnLayout,
     FieldHintOptions,
     FormError,
-    FormField,
-    FormFieldControl,
+    PlatformFormFieldControl,
     FormFieldErrorDirectiveContext,
     FormFieldGroup,
     FormGroupContainer,
@@ -45,7 +45,8 @@ import {
     LabelLayout,
     RESPONSIVE_BREAKPOINTS_CONFIG,
     ResponsiveBreakPointConfig,
-    ResponsiveBreakpointsService
+    ResponsiveBreakpointsService,
+    PlatformFormField
 } from '@fundamental-ngx/platform/shared';
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { getFormState } from '../../helpers';
@@ -71,7 +72,7 @@ import { defaultFormFieldHintOptions } from '../config/default-form-field-hint-o
 let defaultId = 0;
 
 const formFieldProvider: Provider = {
-    provide: FormField,
+    provide: FD_FORM_FIELD,
     useExisting: forwardRef(() => FormFieldComponent)
 };
 
@@ -94,7 +95,9 @@ const formGroupChildProvider: Provider = {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [formFieldProvider, formGroupChildProvider, FormFieldLayoutService]
 })
-export class FormFieldComponent implements FormField, AfterContentInit, AfterViewInit, OnDestroy, OnInit, OnChanges {
+export class FormFieldComponent
+    implements PlatformFormField, AfterContentInit, AfterViewInit, OnDestroy, OnInit, OnChanges
+{
     /** Form field label */
     @Input()
     label: string;
@@ -334,7 +337,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     /**
      * Child FormFieldControl
      */
-    control: FormFieldControl | null;
+    control: PlatformFormFieldControl | null;
 
     /** @hidden */
     _labelColumnLayoutClass: string;
@@ -643,7 +646,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
             throw Error('Form field can contain only one FormFieldControl');
         }
 
-        this.control = formFieldControl;
+        this.control = formFieldControl as PlatformFormFieldControl;
 
         formFieldControl.stateChanges.pipe(startWith(null), takeUntil(this._destroyed$)).subscribe(() => {
             this._updateControlProperties();

@@ -21,7 +21,7 @@ import { Subject, Subscription } from 'rxjs';
 import {
     ColumnLayout,
     FieldHintOptions,
-    FormFieldControl,
+    PlatformFormFieldControl,
     HintOptions,
     LabelLayout
 } from '@fundamental-ngx/platform/shared';
@@ -213,7 +213,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     fields: QueryList<FormGeneratorFieldComponent>;
 
     /** Array of form field controls. */
-    get formFields(): FormFieldControl[] {
+    get formFields(): PlatformFormFieldControl[] {
         return this.fields
             ?.toArray()
             .filter((field) => !!field.fieldRenderer?.control)

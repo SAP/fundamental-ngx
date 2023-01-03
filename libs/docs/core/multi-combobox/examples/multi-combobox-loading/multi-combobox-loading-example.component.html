@@ -1,0 +1,14 @@
+<fd-busy-indicator [loading]="loading" ariaLabel="loading" title="Please Wait">
+    <fd-multi-combobox
+        name="loading"
+        placeholder="Type some text..."
+        displayKey="name"
+        [dataSource]="dataSource"
+        (selectionChange)="onSelect($event)"
+        (onDataRequested)="onDataRequested()"
+        (onDataReceived)="onDataReceived()"
+        [selectedItems]="selectedItems"
+    ></fd-multi-combobox>
+</fd-busy-indicator>
+
+<p>Selected: {{ selectedItems | json }}</p>

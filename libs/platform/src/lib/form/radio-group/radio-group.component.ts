@@ -24,13 +24,14 @@ import {
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { merge, Subject } from 'rxjs';
 
 import {
-    FormField,
-    FormFieldControl,
+    PlatformFormFieldControl,
     InLineLayoutCollectionBaseInput,
+    PlatformFormField,
     RESPONSIVE_BREAKPOINTS_CONFIG,
     ResponsiveBreakPointConfig,
     ResponsiveBreakpointsService,
@@ -54,7 +55,7 @@ let nextUniqueId = 0;
     templateUrl: './radio-group.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => RadioGroupComponent), multi: true }]
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => RadioGroupComponent), multi: true }]
 })
 export class RadioGroupComponent
     extends InLineLayoutCollectionBaseInput
@@ -120,8 +121,8 @@ export class RadioGroupComponent
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         @Optional()
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig

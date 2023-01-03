@@ -11,13 +11,14 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
+import { FD_FORM_FIELD } from '@fundamental-ngx/cdk/forms';
 
 import {
     ColumnLayout,
-    FormField,
     FormFieldGroup,
     FormGroupContainer,
-    HintOptions
+    HintOptions,
+    PlatformFormField
 } from '@fundamental-ngx/platform/shared';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
 
@@ -111,8 +112,8 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
     /**
      * Get form fields wrapped into form field group
      */
-    @ContentChildren(FormField, { descendants: true })
-    fields: QueryList<FormField>;
+    @ContentChildren(FD_FORM_FIELD, { descendants: true })
+    fields: QueryList<PlatformFormField>;
 
     /** @hidden */
     constructor(@Optional() formGroupContainer: FormGroupContainer) {

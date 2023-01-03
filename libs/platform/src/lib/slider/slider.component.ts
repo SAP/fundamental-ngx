@@ -5,6 +5,7 @@ import {
     ElementRef,
     EventEmitter,
     Host,
+    Inject,
     Input,
     Optional,
     Output,
@@ -13,9 +14,10 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { SliderTickMark } from '@fundamental-ngx/core/slider';
-import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
 
 export type SliderCustomValue = Omit<SliderTickMark, 'position'>;
 
@@ -34,7 +36,7 @@ export class SliderChangeEvent<T extends SliderControlValue = any> {
     templateUrl: './slider.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FormFieldControl, useExisting: SliderComponent, multi: true }]
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: SliderComponent, multi: true }]
 })
 export class SliderComponent extends BaseInput {
     /** User's custom classes */
@@ -102,8 +104,8 @@ export class SliderComponent extends BaseInput {
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
     ) {
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }

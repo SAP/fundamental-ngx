@@ -5,6 +5,7 @@ import {
     ElementRef,
     EventEmitter,
     Host,
+    Inject,
     Input,
     isDevMode,
     OnInit,
@@ -16,8 +17,9 @@ import {
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
-import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 export class FileUploaderInvalidChangeEvent {
     /**
@@ -101,10 +103,12 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
 
     /** Event emitted when valid file is uploded. */
     @Output()
-    selectionChange: EventEmitter<FileUploaderSelectionChangeEvent> = new EventEmitter<FileUploaderSelectionChangeEvent>();
+    selectionChange: EventEmitter<FileUploaderSelectionChangeEvent> =
+        new EventEmitter<FileUploaderSelectionChangeEvent>();
     /** Event emitted when invalid file is uploded. */
     @Output()
-    invalidFileChange: EventEmitter<FileUploaderInvalidChangeEvent> = new EventEmitter<FileUploaderInvalidChangeEvent>();
+    invalidFileChange: EventEmitter<FileUploaderInvalidChangeEvent> =
+        new EventEmitter<FileUploaderInvalidChangeEvent>();
 
     /** Files upladed hidden field to store file data */
     files: File[];
@@ -132,8 +136,8 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
         super(_cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
