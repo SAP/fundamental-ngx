@@ -6,6 +6,7 @@ import {
     ElementRef,
     EventEmitter,
     Host,
+    Inject,
     Input,
     isDevMode,
     Optional,
@@ -19,8 +20,9 @@ import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FocusableOption } from '@angular/cdk/a11y';
 
 import { RadioButtonComponent as CoreRadioButtonComponent } from '@fundamental-ngx/core/radio';
-import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { FormStates } from '@fundamental-ngx/core/shared';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 let uniqueId = 0;
 
@@ -96,8 +98,8 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
     ) {
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
 

@@ -1,14 +1,14 @@
 import { forwardRef, InjectionToken, Provider } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { FD_FORM_FIELD } from '@fundamental-ngx/cdk/forms';
 
-import { FormField } from '@fundamental-ngx/platform/shared';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../../form-group/constants';
 import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { DynamicFormFieldItem } from '../interfaces/dynamic-form-item';
 import { FormGeneratorConfig } from '../interfaces/form-generator-module-config';
 
 export const dynamicFormFieldProvider: Provider = {
-    provide: FormField,
+    provide: FD_FORM_FIELD,
     useExisting: forwardRef(() => FormFieldComponent)
 };
 

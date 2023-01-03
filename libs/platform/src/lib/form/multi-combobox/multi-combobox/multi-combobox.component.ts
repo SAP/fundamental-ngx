@@ -7,6 +7,7 @@ import {
     Host,
     Inject,
     Injector,
+    isDevMode,
     OnInit,
     Optional,
     Self,
@@ -18,6 +19,7 @@ import {
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import equal from 'fast-deep-equal';
 
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/core/utils';
@@ -25,10 +27,10 @@ import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import {
     DATA_PROVIDERS,
     DataProvider,
-    FormField,
-    FormFieldControl,
     MultiComboBoxDataSource,
     OptionItem,
+    PlatformFormField,
+    PlatformFormFieldControl,
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
 
@@ -40,6 +42,8 @@ import { MultiComboboxConfig } from '../multi-combobox.config';
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+
+let deprecationWarningShown = false;
 
 /**
  * This component can work with both string primitives as well as with complex objects. In order
@@ -57,7 +61,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     encapsulation: ViewEncapsulation.None,
     providers: [
         {
-            provide: FormFieldControl,
+            provide: FD_FORM_FIELD_CONTROL,
             useExisting: MultiComboboxComponent,
             multi: true
         },
@@ -96,8 +100,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         readonly _multiComboboxConfig: MultiComboboxConfig,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         @Inject(MAP_LIMIT) _mapLimit: number,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
@@ -113,6 +117,13 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             formControl,
             _mapLimit
         );
+
+        if (!deprecationWarningShown && isDevMode()) {
+            console.warn(
+                `[DEPRECATION] Platform Multi Combobox component is deprecated since v0.39.0. Please migrate to Core's version.`
+            );
+            deprecationWarningShown = true;
+        }
     }
 
     /** @hidden */

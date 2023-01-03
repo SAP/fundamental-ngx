@@ -1,0 +1,52 @@
+@import 'fundamental-styles/dist/margins';
+
+$block: fd-multi-combobox;
+
+.#{$block} {
+    &-tokenizer-custom {
+        width: calc(100% - 2.25rem);
+        &--compact {
+            width: calc(100% - 2rem);
+        }
+    }
+
+    &-input-group-custom {
+        display: inline-block;
+    }
+
+    &__list-container {
+        .fd-list {
+            .fd-list__item {
+                &.fd-list__group-header {
+                    padding: 0 1rem;
+                }
+
+                .fd-list__title {
+                    // TODO: to investigate (in "two columns" template the second column align not properly)
+                    max-width: inherit;
+                }
+            }
+
+            &.fd-list--compact {
+                .fd-list__item {
+                    &.fd-list__group-header {
+                        padding: 0 0.5rem;
+                    }
+                }
+            }
+        }
+
+        fd-form-message {
+            display: block;
+            max-width: 100%;
+            border-radius: 0 !important;
+        }
+    }
+}
+
+.fd-dialog__body {
+    fd-form-message {
+        display: block;
+        max-width: 100%;
+    }
+}

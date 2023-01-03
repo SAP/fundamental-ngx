@@ -19,18 +19,19 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { RangeSelector } from '@fundamental-ngx/core/utils';
 import { SelectionModel } from '@angular/cdk/collections';
 
 import {
-    FormField,
-    FormFieldControl,
     InLineLayoutCollectionBaseInput,
     RESPONSIVE_BREAKPOINTS_CONFIG,
     ResponsiveBreakPointConfig,
     ResponsiveBreakpointsService,
     coerceArraySafe,
-    SelectItem
+    SelectItem,
+    PlatformFormField,
+    PlatformFormFieldControl
 } from '@fundamental-ngx/platform/shared';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 
@@ -52,7 +53,7 @@ const warnAboutChecked = (): void => {
     templateUrl: './checkbox-group.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => CheckboxGroupComponent), multi: true }]
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => CheckboxGroupComponent), multi: true }]
 })
 export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     /**
@@ -125,8 +126,13 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional()
+        @SkipSelf()
+        @Host()
+        @Inject(FD_FORM_FIELD_CONTROL)
+        @Inject(FD_FORM_FIELD_CONTROL)
+        formControl: PlatformFormFieldControl,
         @Optional()
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig

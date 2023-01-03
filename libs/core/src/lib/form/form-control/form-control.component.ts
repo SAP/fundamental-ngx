@@ -80,7 +80,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef,
+        public elmRef: ElementRef,
         @Attribute('aria-label') private ariaLabelAttr: string,
         @Attribute('aria-labelledby') private ariaLabelledByAttr: string
     ) {}
@@ -102,6 +102,6 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
 
     /** @hidden */
     elementRef(): ElementRef<any> {
-        return this._elementRef;
+        return this.elmRef;
     }
 }

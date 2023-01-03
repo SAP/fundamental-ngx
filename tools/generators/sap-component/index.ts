@@ -265,6 +265,8 @@ function getProjectDirName(schema: SapComponentSchema): string {
             return 'fn';
         case 'cx':
             return 'cx';
+        case 'cdk':
+            return 'cdk';
         default:
             throw new SchematicsException(`Could not resolve project type from the given value: "${schema.project}"`);
     }
@@ -280,6 +282,8 @@ function getProjectTag(schema: SapComponentSchema): string {
             return 'fn';
         case 'cx':
             return 'cx';
+        case 'cdk':
+            return 'fd';
         default:
             throw new SchematicsException(`Could not resolve project type from the given value: "${schema.project}"`);
     }
@@ -295,5 +299,5 @@ function startCaseName(str: string): string {
 
 interface SapComponentSchema {
     name: string;
-    project: 'core' | 'platform' | 'experimental' | 'cx';
+    project: 'core' | 'platform' | 'experimental' | 'cx' | 'cdk';
 }

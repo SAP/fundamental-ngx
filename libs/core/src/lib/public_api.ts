@@ -95,3 +95,4 @@ export * from '@fundamental-ngx/core/utils';
 export * from '@fundamental-ngx/core/overflow-layout';
 export * from '@fundamental-ngx/core/skeleton';
 export * from '@fundamental-ngx/core/content-density';
+export * from '@fundamental-ngx/core/multi-combobox';

@@ -6,6 +6,7 @@ import {
     ElementRef,
     EventEmitter,
     Host,
+    Inject,
     Input,
     OnChanges,
     OnDestroy,
@@ -40,8 +41,7 @@ import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import {
     CollectionBaseInput,
-    FormField,
-    FormFieldControl,
+    PlatformFormFieldControl,
     isDataSource,
     isFunction,
     isJsObject,
@@ -52,11 +52,13 @@ import {
     MultiInputOption,
     ArrayMultiInputDataSource,
     ObservableMultiInputDataSource,
-    MultiInputDataSource
+    MultiInputDataSource,
+    PlatformFormField
 } from '@fundamental-ngx/platform/shared';
 import { PlatformMultiInputComponent } from './multi-input.component';
 import { TextAlignment } from '../combobox';
 import { MultiInputConfig } from './multi-input.config';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 export type FdpMultiInputDataSource<T> = MultiInputDataSource<T> | Observable<T[]> | T[];
 
@@ -300,8 +302,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
         protected multiInputConfig: MultiInputConfig,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
     ) {
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }

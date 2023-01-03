@@ -468,6 +468,11 @@ export const ROUTES: Routes = [
             {
                 path: 'skeleton',
                 loadChildren: () => import('@fundamental-ngx/docs/core/skeleton').then((m) => m.SkeletonDocsModule)
+            },
+            {
+                path: 'multi-combobox',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/core/multi-combobox').then((m) => m.MultiComboboxDocsModule)
             }
         ]
     }

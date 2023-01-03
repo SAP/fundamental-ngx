@@ -17,7 +17,12 @@ import {
 import { ListItemComponent } from './list-item/list-item.component';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
-import { FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/core/utils';
+import {
+    FocusEscapeDirection,
+    KeyboardSupportService,
+    LIST_ITEM_COMPONENT,
+    ListItemInterface
+} from '@fundamental-ngx/core/utils';
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListFocusItem } from './list-focus-item.model';
 import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
@@ -119,8 +124,8 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     hasNavigation = false;
 
     /** @hidden */
-    @ContentChildren(ListItemComponent)
-    items: QueryList<ListItemComponent>;
+    @ContentChildren(LIST_ITEM_COMPONENT)
+    items: QueryList<ListItemInterface>;
 
     /** @hidden */
     @ContentChildren(ListNavigationItemComponent)

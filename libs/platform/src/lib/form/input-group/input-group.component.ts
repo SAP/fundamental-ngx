@@ -9,6 +9,7 @@ import {
     ElementRef,
     forwardRef,
     Host,
+    Inject,
     Input,
     OnInit,
     Optional,
@@ -20,8 +21,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { startWith } from 'rxjs/operators';
-import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { InputComponent } from '../input/input.component';
 
 import { CSS_CLASS_NAME, INPUT_GROUP_CHILD_TOKEN } from './constants';
@@ -47,7 +49,7 @@ import { InputGroupInputComponent } from './input.component';
     styleUrls: ['./input-group.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => InputGroupComponent), multi: true }]
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => InputGroupComponent), multi: true }]
 })
 export class InputGroupComponent extends BaseInput implements OnInit, AfterContentInit, AfterViewInit {
     /** Input value */
@@ -92,8 +94,8 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         private _renderer: Renderer2,
         protected _hostElementRef: ElementRef<HTMLElement>,
         protected _inputGroupConfig: InputGroupConfig

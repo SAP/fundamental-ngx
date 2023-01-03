@@ -1,0 +1,95 @@
+<fd-docs-section-title id="data-source" componentName="multi-combobox">DataSource</fd-docs-section-title>
+<description>
+    Input <code>[dataSource]</code> has this type
+    <code>
+        type FdpMultiComboboxDataSource&lt;T&gt; = MultiComboBoxDataSource&lt;T&gt; | Observable&lt;T[]&gt; | T[]
+    </code>
+</description>
+<component-example>
+    <fd-multi-combobox-datasource-example></fd-multi-combobox-datasource-example>
+</component-example>
+<code-example [exampleFiles]="multiComboboxDatasourceExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="mobile" componentName="multi-combobox">Multi-Combobox Mobile Mode</fd-docs-section-title>
+<description>
+    To use Multi-Combobox in mobile mode:
+    <ul>
+        <li>import <code>MultiComboboxMobileModule</code></li>
+        <li>Set <code>[mobile]</code> property to true</li>
+        <li>
+            Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
+            look of the control
+        </li>
+    </ul>
+
+    Multi-Combobox Mobile Mode can be configured <strong>globally</strong> by providing
+    <code>MOBILE_MODE_CONFIG</code> token. Check
+    <a routerLink="/core/global-config" fragment="mobile-mode-config">Global Configuration page</a> for more
+    information.
+</description>
+<component-example>
+    <fd-multi-combobox-mobile-example></fd-multi-combobox-mobile-example>
+</component-example>
+<code-example [exampleFiles]="multiComboboxMobileExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="group" componentName="multi-combobox"> Multi-Combobox with Groups </fd-docs-section-title>
+<description>
+    Multi-Combobox with Groups. Note that a <code>group</code> and <code>groupKey</code> is required
+</description>
+<component-example>
+    <fd-multi-combobox-group-example></fd-multi-combobox-group-example>
+</component-example>
+<code-example [exampleFiles]="multiComboboxGroupExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="columns" componentName="multi-combobox">
+    Multi-Combobox with Two Columns
+</fd-docs-section-title>
+<description>
+    Multi-Combobox with two columns of information. Note that a <code>secondaryKey</code> and
+    <code>showSecondaryText</code> is required
+</description>
+<component-example>
+    <fd-multi-combobox-columns-example></fd-multi-combobox-columns-example>
+</component-example>
+<code-example [exampleFiles]="multiComboboxColumnsExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="states" componentName="multi-combobox"> Multi Combobox states. </fd-docs-section-title>
+<description>
+    The Multi Combobox component with states.
+    <ul>
+        <li>Set <code>[state]</code>property to: <code>'success' | 'error' | 'warning' | 'information'</code></li>
+    </ul>
+</description>
+<component-example>
+    <fd-multi-combobox-states-example></fd-multi-combobox-states-example>
+</component-example>
+<code-example [exampleFiles]="multiComboboxStatesExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="reactive-form" componentName="multi-combobox"> Reactive Form </fd-docs-section-title>
+<description> The Multi-Combobox component may also be used within Angular Reactive Forms. </description>
+<component-example>
+    <fd-multi-combobox-forms-example></fd-multi-combobox-forms-example>
+</component-example>
+<code-example [exampleFiles]="multiComboboxFormExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="loading" componentName="multi-combobox"> Loading </fd-docs-section-title>
+<description>
+    Combobox exposes <code>onDataRequested</code> and <code>onDataReceived</code> outputs, that can be used to implement
+    external loading logic. These events are tied to the querying process through dataSource.
+</description>
+<component-example>
+    <fd-multi-combobox-loading-example></fd-multi-combobox-loading-example>
+</component-example>
+<code-example [exampleFiles]="multiComboboxLoadingExample"></code-example>

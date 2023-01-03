@@ -1,8 +1,8 @@
-import { FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
 import { Observable } from 'rxjs';
 import { MessagePopoverErrorGroup } from './message-popover-error.interface';
 
 export interface MessagePopoverWrapper {
-    formFields: FormFieldControl[];
+    formFields: PlatformFormFieldControl[];
     errors: Observable<MessagePopoverErrorGroup[]>;
 }

@@ -6,6 +6,7 @@ import {
     Component,
     ElementRef,
     Host,
+    Inject,
     Input,
     isDevMode,
     Optional,
@@ -15,11 +16,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { SelectComponent as CoreSelect } from '@fundamental-ngx/core/select';
 import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { FormStates } from '@fundamental-ngx/core/shared';
-import { FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { BaseSelect } from '../commons/base-select';
 import { SelectConfig } from '../select.config';
 
@@ -29,7 +31,7 @@ import { SelectConfig } from '../select.config';
     styleUrls: ['./select.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FormFieldControl, useExisting: SelectComponent, multi: true }]
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: SelectComponent, multi: true }]
 })
 export class SelectComponent extends BaseSelect implements AfterViewInit, AfterViewChecked {
     /**
@@ -79,8 +81,8 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         @Optional() @Self() readonly ngForm: NgForm,
         readonly _dynamicComponentService: DynamicComponentService,
         readonly _selectConfig: SelectConfig,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
     ) {
         super(cd, elementRef, ngControl, controlContainer, ngForm, _selectConfig, formField, formControl);
     }

@@ -51,12 +51,12 @@ import { resizeObservable } from '@fundamental-ngx/core/utils';
 import {
     ColumnLayout,
     FieldHintOptions,
-    FormField,
     FormFieldGroup,
     FormGroupContainer,
     HintOptions,
     HintPlacement,
-    LabelLayout
+    LabelLayout,
+    PlatformFormField
 } from '@fundamental-ngx/platform/shared';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import {
@@ -83,6 +83,7 @@ import { generateColumnClass, normalizeColumnLayout } from './helpers';
 import { FormFieldLayoutService } from './services/form-field-layout.service';
 import { FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT } from './fdp-form.tokens';
 import { contentDensityObserverProviders, ContentDensityObserver } from '@fundamental-ngx/core/content-density';
+import { FormField } from '@fundamental-ngx/cdk/forms';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -475,7 +476,7 @@ export class FormGroupComponent
     }
 
     /** @hidden */
-    addFormField(formField: FormField): void {
+    addFormField(formField: PlatformFormField): void {
         // It's needed to set default FormField properties
         // on early stage otherwise validation errors
         // will be thrown on FormField level (e.g. i18string are not defined)
@@ -485,7 +486,7 @@ export class FormGroupComponent
     }
 
     /** @hidden */
-    removeFormField(formField: FormField): void {
+    removeFormField(formField: PlatformFormField): void {
         this._removeDirectFormGroupChild(formField);
     }
 
@@ -634,7 +635,7 @@ export class FormGroupComponent
      * field we are using here a setter method to initialize the
      *
      */
-    private _updateFormFieldProperties(formField: FormField): void {
+    private _updateFormFieldProperties(formField: PlatformFormField): void {
         if (this.unifiedLayout) {
             formField.hintPlacement = this._hintPlacement;
             formField.editable = this.editable;
@@ -691,7 +692,7 @@ export class FormGroupComponent
     }
 
     /** @hidden */
-    private _removeDirectFormGroupChild(child: FormField | FormFieldGroup): void {
+    private _removeDirectFormGroupChild(child: PlatformFormField | FormFieldGroup): void {
         this._formGroupDirectChildren = this._formGroupDirectChildren.filter((_child) => _child !== child);
     }
 

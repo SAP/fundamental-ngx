@@ -1,0 +1,37 @@
+{
+    "name": "cdk-data-source",
+    "projectType": "library",
+    "sourceRoot": "libs/cdk/src/lib/data-source",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["{workspaceRoot}/dist/libs/cdk/data-source"],
+            "options": {
+                "tsConfig": "libs/cdk/src/lib/data-source/tsconfig.lib.json",
+                "project": "libs/cdk/src/lib/data-source/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/cdk/src/lib/data-source/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/cdk/src/lib/data-source/test.ts",
+                "tsConfig": "libs/cdk/src/lib/data-source/tsconfig.spec.json",
+                "karmaConfig": "libs/cdk/src/lib/data-source/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/cdk/src/lib/data-source/**/*.ts", "libs/cdk/src/lib/data-source/**/*.html"]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fd"]
+}

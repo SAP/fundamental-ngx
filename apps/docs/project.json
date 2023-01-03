@@ -245,5 +245,5 @@
         }
     },
     "tags": ["scope:docs", "type:app"],
-    "implicitDependencies": ["core", "platform", "fn", "i18n", "datetime-adapter", "moment-adapter"]
+    "implicitDependencies": ["core", "platform", "fn", "i18n", "cdk", "datetime-adapter", "moment-adapter"]
 }
