@@ -4,7 +4,6 @@
     "projects": {
         "cdk": "libs/cdk/src/lib",
         "cdk-data-source": "libs/cdk/src/lib/data-source",
-        "cdk-focusable-item": "libs/cdk/src/lib/focusable-item",
         "cdk-forms": "libs/cdk/src/lib/forms",
         "cdk-utils": "libs/cdk/src/lib/utils",
         "components-e2e": "e2e",

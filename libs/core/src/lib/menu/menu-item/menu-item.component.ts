@@ -28,7 +28,7 @@ import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
 import { MenuService } from '../services/menu.service';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 let menuUniqueId = 0;
 

@@ -20,7 +20,7 @@ import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-import { FormStates, Nullable, Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
+import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import {
     CalendarComponent,
     CalendarType,
@@ -36,6 +36,8 @@ import { PopoverService } from '@fundamental-ngx/core/popover';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 let datePickerCounter = 0;
 

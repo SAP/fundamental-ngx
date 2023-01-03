@@ -17,7 +17,7 @@ import { formatNumber } from '@angular/common';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { StepInputChangeEvent, StepInputComponent } from '../base.step-input';
 import { StepInputConfig } from '../step-input.config';

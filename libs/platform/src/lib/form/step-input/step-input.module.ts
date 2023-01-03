@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
-import { OnlyDigitsModule, PipeModule } from '@fundamental-ngx/core/utils';
+import { OnlyDigitsModule, PipeModule } from '@fundamental-ngx/cdk/utils';
 import { StepInputDecrementDirective } from './step-input-decrement.directive';
 import { StepInputIncrementDirective } from './step-input-increment.directive';
 import { StepInputControlDirective } from './step-input-control.directive';

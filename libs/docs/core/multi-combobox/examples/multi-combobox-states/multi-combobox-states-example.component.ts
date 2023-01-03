@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 @Component({
     selector: 'fd-multi-combobox-states-example',

@@ -16,7 +16,7 @@ import { FocusableOption } from '@angular/cdk/a11y';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { Subject } from 'rxjs';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { MenuInteractiveDirective } from '@fundamental-ngx/core/menu';
 
 @Component({

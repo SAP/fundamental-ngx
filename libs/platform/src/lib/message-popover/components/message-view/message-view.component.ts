@@ -13,8 +13,8 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/core/shared';
-import { DestroyedService, resizeObservable, TabbableElementService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { DestroyedService, resizeObservable, TabbableElementService } from '@fundamental-ngx/cdk/utils';
 import { debounceTime, takeUntil } from 'rxjs';
 import { MessagePopoverEntry } from '../../models/message-popover-entry.interface';
 import { MessagePopoverErrorGroup } from '../../models/message-popover-error.interface';

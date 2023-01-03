@@ -1,7 +1,7 @@
 import { Directive, HostListener, SkipSelf } from '@angular/core';
 import { DOWN_ARROW, PAGE_DOWN, PAGE_UP, UP_ARROW } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { StepInputComponent } from './base.step-input';
 
 /**

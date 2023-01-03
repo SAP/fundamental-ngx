@@ -16,7 +16,7 @@ import {
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
 export type LinkType = 'standard' | 'emphasized' | 'subtle';

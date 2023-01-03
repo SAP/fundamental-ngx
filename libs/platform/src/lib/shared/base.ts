@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Directive, Input, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 let randomId = 0;
 

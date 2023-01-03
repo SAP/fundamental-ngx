@@ -21,8 +21,8 @@ import {
     GridListSelectionActions,
     GridListSelectionEvent
 } from './../../models/grid-list-selection.models';
-import { RangeSelector } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { RangeSelector } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { GridList } from './grid-list-base.component';
 
 let gridListUniqueId = 0;
@@ -30,7 +30,7 @@ let gridListUniqueId = 0;
 @Component({
     selector: 'fd-grid-list',
     templateUrl: './grid-list.component.html',
-    styleUrls: ['./grid-list.component.scss', '../../../utils/drag-and-drop/drag-and-drop.scss'],
+    styleUrls: ['./grid-list.component.scss', '../../../../../../cdk/src/lib/utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: GridList, useExisting: GridListComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush

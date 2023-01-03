@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 import { MessageStates } from '@fundamental-ngx/core/form';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     selector: '[fd-list-message], [fdListMessage]'

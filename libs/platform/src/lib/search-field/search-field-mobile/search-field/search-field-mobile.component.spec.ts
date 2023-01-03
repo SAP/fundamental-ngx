@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs';
 
 import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 
 import { SEARCH_FIELD_COMPONENT, SearchFieldMobileInterface } from '../search-field-mobile.interface';

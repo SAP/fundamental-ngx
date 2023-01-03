@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { MultiComboboxComponent } from '../../multi-combobox/multi-combobox.component';
 import { MultiComboboxMobileComponent } from '../multi-combobox/multi-combobox-mobile.component';

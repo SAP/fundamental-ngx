@@ -18,10 +18,10 @@ import {
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
-import { FormStates, isValidControlState, Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { BaseComponent } from '../base';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates, isValidControlState } from '@fundamental-ngx/cdk/forms';
 import { PlatformFormFieldControl } from './form-control';
 import { PlatformFormField } from './form-field';
 

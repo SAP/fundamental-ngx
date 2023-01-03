@@ -1,7 +1,7 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { OptionItem } from '@fundamental-ngx/platform/shared';
 
 export interface AutoCompleteEvent {

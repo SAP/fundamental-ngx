@@ -15,8 +15,8 @@ import { CdkTrapFocus } from '@angular/cdk/a11y';
 
 import { Subject } from 'rxjs';
 
-import { Nullable } from '@fundamental-ngx/core/shared';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /**

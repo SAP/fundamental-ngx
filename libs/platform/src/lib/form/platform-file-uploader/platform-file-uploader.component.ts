@@ -16,10 +16,10 @@ import {
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
-import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export class FileUploaderInvalidChangeEvent {
     /**

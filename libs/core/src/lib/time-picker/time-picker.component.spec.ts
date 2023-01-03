@@ -9,7 +9,7 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { TimeModule } from '@fundamental-ngx/core/time';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { TimePickerComponent } from './time-picker.component';
 import { TimePickerModule } from './time-picker.module';

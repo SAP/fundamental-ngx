@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of } from 'rxjs';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
 import { TableDataProvider, TableDataSource } from './domain';

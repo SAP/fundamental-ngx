@@ -4,7 +4,7 @@ import { ProductSwitchBodyComponent } from './product-switch-body.component';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ProductSwitchItem } from './product-switch.item';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { DragAndDropModule } from '@fundamental-ngx/core/utils';
+import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';

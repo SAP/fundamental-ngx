@@ -17,7 +17,7 @@ import { SelectModule } from '@fundamental-ngx/core/select';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { DeprecatedTimepickerCompactDirective, TimePickerModule } from '@fundamental-ngx/core/time-picker';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

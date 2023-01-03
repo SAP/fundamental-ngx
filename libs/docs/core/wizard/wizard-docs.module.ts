@@ -24,7 +24,7 @@ import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { WizardVisibleSummaryExampleComponent } from './examples/wizard-visible-summary-example.component';
 import { A11yModule } from '@angular/cdk/a11y';
-import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/cdk/utils';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { WizardLoadingExampleComponent } from './examples/loading/wizard-loading-example.component';
 

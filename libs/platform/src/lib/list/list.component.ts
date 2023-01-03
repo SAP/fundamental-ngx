@@ -41,8 +41,8 @@ import {
 } from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     ArrayListDataSource,
     CollectionBaseInput,

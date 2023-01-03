@@ -17,8 +17,8 @@ import {
 import { Subscription } from 'rxjs';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { GridListItemBodyDirective } from '../../directives/grid-list-item-body.directive';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';

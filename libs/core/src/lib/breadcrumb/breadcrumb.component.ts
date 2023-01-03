@@ -17,7 +17,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
-import { DestroyedService, RtlService } from '@fundamental-ngx/core/utils';
+import { DestroyedService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';

@@ -13,8 +13,8 @@ import {
     AfterContentChecked
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 import { CSS_CLASS_NAME } from '../../constants';
 import { FeedListItemComponent } from '../item/feed-list-item.component';

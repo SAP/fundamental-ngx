@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { TextModule } from '@fundamental-ngx/core/text';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
-import { RepeatModule } from '@fundamental-ngx/core/utils';
+import { RepeatModule } from '@fundamental-ngx/cdk/utils';
 
 import { TimelineComponent } from './timeline.component';
 import { TimelineNodeDefDirective } from './directives/timeline-node-def.directive';

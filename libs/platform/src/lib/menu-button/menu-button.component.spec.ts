@@ -6,7 +6,7 @@ import { ENTER } from '@angular/cdk/keycodes';
 
 import { ButtonModule, ButtonType } from '@fundamental-ngx/core/button';
 import { IconModule } from '@fundamental-ngx/core/icon';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { createKeyboardEvent } from '@fundamental-ngx/platform/shared';
 import { MenuItemComponent, PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { MenuButtonComponent } from './menu-button.component';

@@ -1,5 +1,5 @@
 import { TemplateRef } from '@angular/core';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Subject } from 'rxjs';
 
 export interface FormFieldErrorContext<T> {

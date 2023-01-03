@@ -15,7 +15,7 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 import { ObjectPageDocsComponent } from './object-page-docs.component';
 import { ObjectPageExampleComponent } from './examples/object-page-example.component';
 

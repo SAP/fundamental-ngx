@@ -1,7 +1,7 @@
 import { ElementRef } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { MessagePopoverErrorText } from './message-popover-error.interface';
 
 export interface MessagePopoverEntry {

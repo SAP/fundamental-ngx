@@ -20,7 +20,7 @@ import { isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import {
     ArrayValueHelpDialogDataSource,

@@ -21,7 +21,7 @@ import {
 import { startWith } from 'rxjs/operators';
 
 import { TabListComponent, TabPanelComponent } from '@fundamental-ngx/core/tabs';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentHostComponent } from './dynamic-page-content/dynamic-page-content-host.component';

@@ -21,7 +21,7 @@ import {
     NgZone
 } from '@angular/core';
 import { debounceTime, filter, first, fromEvent, startWith, Subject, Subscription } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowContainer } from './interfaces/overflow-container.interface';
 import { OverflowExpand } from './interfaces/overflow-expand.interface';

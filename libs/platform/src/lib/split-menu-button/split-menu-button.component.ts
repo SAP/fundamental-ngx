@@ -15,7 +15,7 @@ import {
 import { Subscription } from 'rxjs';
 
 import { ButtonType } from '@fundamental-ngx/core/button';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { MenuComponent } from '@fundamental-ngx/platform/menu';
 

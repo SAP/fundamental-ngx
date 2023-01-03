@@ -10,7 +10,7 @@ import {
     ChangeDetectorRef,
     OnChanges
 } from '@angular/core';
-import { ANY_LANGUAGE_LETTERS_REGEX, applyCssClass, Size } from '@fundamental-ngx/core/utils';
+import { ANY_LANGUAGE_LETTERS_REGEX, applyCssClass, Size } from '@fundamental-ngx/cdk/utils';
 
 export const AVATAR_COLORS = ['indigo', 'crimson', 'cyan', 'lime', 'pink', 'yellow', 'teal'] as const;
 

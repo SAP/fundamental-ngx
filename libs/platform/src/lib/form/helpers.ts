@@ -1,4 +1,4 @@
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 /**
  * Returns form state based on priority.

@@ -17,7 +17,7 @@ import { NestedListContentDirective } from '../nested-content/nested-list-conten
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedItemInterface } from './nested-item.interface';
 import { NestedItemService } from './nested-item.service';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 let sideNavigationItemUniqueId = 0;
 

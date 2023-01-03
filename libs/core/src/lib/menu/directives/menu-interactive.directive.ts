@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostBinding } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-menu-interactive]',

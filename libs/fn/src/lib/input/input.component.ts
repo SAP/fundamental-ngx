@@ -12,7 +12,7 @@ import {
     forwardRef
 } from '@angular/core';
 import { InputBase } from './input-base';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/cdk/utils';
 import {
     DisabledBehavior,
     FN_DISABLED_DIRECTIVE,

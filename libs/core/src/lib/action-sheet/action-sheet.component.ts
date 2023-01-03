@@ -21,7 +21,7 @@ import {
 import { merge, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
-import { DynamicComponentService, FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/cdk/utils';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 

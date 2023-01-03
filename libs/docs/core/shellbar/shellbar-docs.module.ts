@@ -15,7 +15,7 @@ import { TileModule } from '@fundamental-ngx/core/tile';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { ShellbarSideNavResponsiveExampleComponent } from './examples/shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

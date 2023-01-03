@@ -9,7 +9,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { KeyboardSupportItemInterface } from '@fundamental-ngx/core/utils';
+import { KeyboardSupportItemInterface } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 export interface ActionSheetClickEvent {

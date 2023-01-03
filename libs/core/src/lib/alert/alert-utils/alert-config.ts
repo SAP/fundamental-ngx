@@ -1,5 +1,4 @@
-import { DynamicComponentConfig } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable, DynamicComponentConfig } from '@fundamental-ngx/cdk/utils';
 
 /**
  * @deprecated

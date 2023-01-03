@@ -27,7 +27,7 @@ import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@an
 import { fromEvent, merge, Subject, Subscription } from 'rxjs';
 import { filter, mapTo, takeUntil, debounceTime } from 'rxjs/operators';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
-import { applyCssClass, CssClassBuilder, KeyUtil, resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, KeyUtil, resizeObservable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { TokenComponent } from './token.component';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 

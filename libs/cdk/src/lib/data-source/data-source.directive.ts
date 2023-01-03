@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, Inject, Input, Output } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/core/utils';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { isDataSource } from './helpers/is-datasource';

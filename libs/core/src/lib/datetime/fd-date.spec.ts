@@ -1,5 +1,5 @@
 import { FdDate } from './index';
-import { INVALID_DATE_ERROR } from '@fundamental-ngx/core/utils';
+import { INVALID_DATE_ERROR } from '@fundamental-ngx/cdk/utils';
 
 describe('FdDate', () => {
     it('should create FdDate instance of now by new with no parameters', () => {

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { OnlyDigitsModule } from '@fundamental-ngx/core/utils';
+import { OnlyDigitsModule } from '@fundamental-ngx/cdk/utils';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { I18nModule } from '@fundamental-ngx/i18n';
 

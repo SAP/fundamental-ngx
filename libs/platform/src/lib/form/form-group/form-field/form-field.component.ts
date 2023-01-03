@@ -27,7 +27,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
-import { FD_FORM_FIELD, FormFieldControl } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD, FormFieldControl, FormStates } from '@fundamental-ngx/cdk/forms';
 import { uniqBy } from 'lodash-es';
 import { BehaviorSubject, combineLatest, filter, Observable, Subject, Subscription, tap } from 'rxjs';
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
@@ -48,7 +48,7 @@ import {
     ResponsiveBreakpointsService,
     PlatformFormField
 } from '@fundamental-ngx/platform/shared';
-import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { getFormState } from '../../helpers';
 import {
     DefaultHorizontalFieldLayout,

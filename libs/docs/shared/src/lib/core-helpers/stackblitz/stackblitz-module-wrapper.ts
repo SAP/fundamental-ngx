@@ -55,7 +55,7 @@ export class StackblitzModuleWrapper {
         return `
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 ${defaultImports}
 ${imports}
 

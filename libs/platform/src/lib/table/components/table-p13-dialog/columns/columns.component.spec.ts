@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { PlatformTableModule } from '../../../table.module';
 import { ColumnsDialogData, P13ColumnsDialogComponent } from './columns.component';

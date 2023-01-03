@@ -9,7 +9,7 @@ import {
     OnChanges,
     HostBinding
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 export type ProgressBarState = 'positive' | 'critical' | 'negative';
 

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { PipeModule } from '@fundamental-ngx/core/utils';
+import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { TokenModule } from '@fundamental-ngx/core/token';

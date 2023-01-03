@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { PipeModule, RepeatModule } from '@fundamental-ngx/core/utils';
+import { PipeModule, RepeatModule } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';

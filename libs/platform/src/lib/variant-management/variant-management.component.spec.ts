@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { PipeModule } from '@fundamental-ngx/core/utils';
+import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { Variant } from './models/variant.interface';
 import { VariantItem } from './variant-item.class';

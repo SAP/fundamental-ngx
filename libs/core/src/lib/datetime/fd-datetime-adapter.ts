@@ -1,7 +1,7 @@
 import { Platform } from '@angular/cdk/platform';
 import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 
-import { INVALID_DATE_ERROR, LETTERS_UNICODE_RANGE } from '@fundamental-ngx/core/utils';
+import { INVALID_DATE_ERROR, LETTERS_UNICODE_RANGE } from '@fundamental-ngx/cdk/utils';
 
 import { DatetimeAdapter } from './datetime-adapter';
 import { FdDate } from './fd-date';

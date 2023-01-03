@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     selector: '[fdListIcon], [fd-list-icon]'

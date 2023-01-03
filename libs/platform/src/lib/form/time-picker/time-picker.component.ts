@@ -17,10 +17,10 @@ import {
     ViewChild
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
 import { TimePickerComponent } from '@fundamental-ngx/core/time-picker';
-import { Placement, FormStates } from '@fundamental-ngx/core/shared';
+import { Placement } from '@fundamental-ngx/core/shared';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 
 @Component({

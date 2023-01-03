@@ -20,7 +20,7 @@ import {
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-import { RangeSelector } from '@fundamental-ngx/core/utils';
+import { RangeSelector } from '@fundamental-ngx/cdk/utils';
 import { SelectionModel } from '@angular/cdk/collections';
 
 import {

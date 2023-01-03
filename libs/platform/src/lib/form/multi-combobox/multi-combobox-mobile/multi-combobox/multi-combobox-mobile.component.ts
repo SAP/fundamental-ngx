@@ -20,7 +20,7 @@ import {
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { SelectableOptionItem } from '@fundamental-ngx/platform/shared';
 import { MULTICOMBOBOX_COMPONENT, MultiComboboxInterface } from '../../multi-combobox.interface';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fdp-multi-combobox-mobile',

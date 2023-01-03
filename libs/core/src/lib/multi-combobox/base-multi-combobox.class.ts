@@ -26,19 +26,20 @@ import {
 import { MatchingStrategy } from '@fundamental-ngx/cdk/data-source';
 import {
     CvaDirective,
+    FormStates,
     isOptionItem,
     isSelectableOptionItem,
     SelectableOptionItem,
     SelectItem
 } from '@fundamental-ngx/cdk/forms';
-import { coerceArraySafe, isFunction, isJsObject, isString } from '@fundamental-ngx/cdk/utils';
+import { coerceArraySafe, isFunction, isJsObject, isString, Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import { FormItemControl } from '@fundamental-ngx/core/form';
 import { FD_LIST_COMPONENT, ListComponentInterface } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { FormStates, Nullable, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
-import { ContentDensity, RangeSelector, TemplateDirective } from '@fundamental-ngx/core/utils';
+import { ContentDensity, RangeSelector, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { FdMultiComboboxAcceptableDataSource } from './data-source/multi-combobox-data-source';

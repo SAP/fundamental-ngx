@@ -10,7 +10,7 @@ import {
     Optional,
     QueryList
 } from '@angular/core';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { OptionComponent } from './option/option.component';
 import { Select } from './select.interface';
 import { FN_SELECT_PROVIDER } from './select.token';

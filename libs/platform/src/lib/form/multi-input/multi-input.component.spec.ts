@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DATA_PROVIDERS, DataProvider } from '@fundamental-ngx/platform/shared';
 import { StandardListItemModule } from '@fundamental-ngx/platform/list';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';

@@ -22,12 +22,12 @@ import { BehaviorSubject, combineLatest, Subject, Subscription } from 'rxjs';
 import { buffer, debounceTime, filter, map, tap } from 'rxjs/operators';
 import { DOWN_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
-import { KeyUtil, resizeObservable } from '@fundamental-ngx/core/utils';
+import { KeyUtil, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { CarouselConfig, CarouselDirective, CarouselItemDirective, PanEndOutput } from '@fundamental-ngx/core/carousel';
 
 import { TimeColumnConfig } from './time-column-config';
 import { SelectableViewItem } from '../models';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 let timeColumnUniqueId = 0;
 

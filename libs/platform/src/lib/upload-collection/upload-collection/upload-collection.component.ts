@@ -15,7 +15,7 @@ import {
 import { Subject, Subscription } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 
-import { uuidv4 } from '@fundamental-ngx/core/utils';
+import { uuidv4 } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
 import { ColumnAlign, SelectionMode, TableRowSelectionChangeEvent } from '@fundamental-ngx/platform/table';
 import { isDataSource } from '@fundamental-ngx/platform/shared';

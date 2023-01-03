@@ -28,7 +28,7 @@ import { WizardGeneratorSummaryStepDirective } from './directives/wizard-generat
 import { WizardGeneratorReviewButtonDirective } from './directives/wizard-generator-review-button.directive';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
-import { RepeatModule } from '@fundamental-ngx/core/utils';
+import { RepeatModule } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Adds Wizard Generator functionality to your application.

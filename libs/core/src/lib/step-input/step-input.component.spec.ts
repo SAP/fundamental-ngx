@@ -3,7 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { StepInputComponent } from './step-input.component';
 import { StepInputModule } from './step-input.module';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 const initialValue = 100;
 

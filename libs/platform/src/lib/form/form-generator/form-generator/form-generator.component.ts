@@ -25,7 +25,7 @@ import {
     HintOptions,
     LabelLayout
 } from '@fundamental-ngx/platform/shared';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormGeneratorFieldComponent } from '../form-generator-field/form-generator-field.component';
 
 import { FormGeneratorService } from '../form-generator.service';

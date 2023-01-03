@@ -6,7 +6,7 @@ import {
     MobileModeConfigToken,
     MobileModeControl
 } from '@fundamental-ngx/core/mobile-mode';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import { takeUntil } from 'rxjs/operators';
 import { MultiComboboxInterface } from '../models/multi-combobox.interface';

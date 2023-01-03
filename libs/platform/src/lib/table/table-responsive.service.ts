@@ -1,5 +1,5 @@
 import { ElementRef, Inject, Injectable, OnDestroy } from '@angular/core';
-import { resizeObservable } from '@fundamental-ngx/core/utils';
+import { resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { TableColumn } from './components';

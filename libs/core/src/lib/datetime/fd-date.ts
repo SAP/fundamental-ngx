@@ -1,5 +1,5 @@
 import { isValidByParams, toIso8601 } from './fd-date.utils';
-import { INVALID_DATE_ERROR } from '@fundamental-ngx/core/utils';
+import { INVALID_DATE_ERROR } from '@fundamental-ngx/cdk/utils';
 
 /**
  * FdDate class is used to represent date and time.

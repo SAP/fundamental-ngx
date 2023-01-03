@@ -13,7 +13,7 @@ import {
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { BasePopoverClass } from '@fundamental-ngx/core/popover';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 const INLINE_HELP_CLASS = 'fd-popover__body--inline-help fd-inline-help__content';
 const INLINE_HELP_ICON_CLASS = 'fd-popover__body--inline-help-icon';

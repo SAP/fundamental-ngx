@@ -2,12 +2,12 @@ import { AfterViewInit, ContentChildren, Directive, Input, QueryList } from '@an
 import { map, startWith, takeUntil, tap } from 'rxjs/operators';
 import { FocusableItem, FocusableListService } from './focusable-list.service';
 import { FocusableItemDirective } from '../focusable-item/focusable-item.directive';
-import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     selector: '[fnFocusableList]',
     exportAs: 'fnFocusableList',
-    providers: [FocusableListService, DestroyedBehavior]
+    providers: [FocusableListService, DestroyedService]
 })
 export class FocusableListDirective implements AfterViewInit {
     @Input()
@@ -18,7 +18,7 @@ export class FocusableListDirective implements AfterViewInit {
 
     @ContentChildren(FocusableItemDirective) focusableItems!: QueryList<FocusableItemDirective>;
 
-    constructor(private _focusableListService: FocusableListService, private _destroy$: DestroyedBehavior) {}
+    constructor(private _focusableListService: FocusableListService, private _destroy$: DestroyedService) {}
 
     ngAfterViewInit(): void {
         this.focusableItems.changes

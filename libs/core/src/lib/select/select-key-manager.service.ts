@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { UP_ARROW, DOWN_ARROW, ENTER, SPACE, HOME, TAB, END, ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
 
 import { SelectInterface } from './select.interface';
@@ -19,7 +19,7 @@ export class SelectKeyManagerService {
      * Sets up a key manager to listen to keyboard events on the overlay panel.
      * @hidden
      */
-    _initKeyManager(_component: SelectInterface): void {
+    _initKeyManager(): void {
         this._keyManager = new ActiveDescendantKeyManager<OptionsInterface>(this._component._options)
             .withTypeAhead(this._component.typeaheadDebounceInterval)
             .withVerticalOrientation()

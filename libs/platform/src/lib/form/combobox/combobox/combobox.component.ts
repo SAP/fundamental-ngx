@@ -19,7 +19,7 @@ import {
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import {
     ComboBoxDataSource,

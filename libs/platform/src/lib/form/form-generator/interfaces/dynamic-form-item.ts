@@ -1,8 +1,8 @@
 import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Observable } from 'rxjs';
 
-import { ContentDensity } from '@fundamental-ngx/core/utils';
+import { ContentDensity } from '@fundamental-ngx/cdk/utils';
 import {
     ColumnLayout,
     FieldHintOptions,

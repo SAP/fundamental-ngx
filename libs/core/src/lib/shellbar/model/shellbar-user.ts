@@ -1,4 +1,4 @@
-import { ColorAccent } from '@fundamental-ngx/core/utils';
+import { ColorAccent } from '@fundamental-ngx/cdk/utils';
 
 export interface ShellbarUser {
     /** Initials of user name */

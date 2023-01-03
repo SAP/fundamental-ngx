@@ -2,7 +2,7 @@ import { ElementRef, InjectionToken } from '@angular/core';
 import { MobileModeConfig } from './mobile-mode-config';
 import { MobileMode } from './mobile-control.interface';
 import { Subject } from 'rxjs';
-import { MOBILE_CONFIG_ERROR } from '@fundamental-ngx/core/utils';
+import { MOBILE_CONFIG_ERROR } from '@fundamental-ngx/cdk/utils';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { DialogService } from '@fundamental-ngx/core/dialog';

@@ -16,8 +16,8 @@ import {
 } from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { BaseComponent, isPresent } from '@fundamental-ngx/platform/shared';

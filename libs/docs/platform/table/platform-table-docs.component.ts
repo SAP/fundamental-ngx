@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import {
     TableColumnFreezeEvent,

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { Placement, Nullable } from '@fundamental-ngx/core/shared';
+import { Placement } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Label to be linked to a form control.

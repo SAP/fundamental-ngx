@@ -8,7 +8,7 @@ import { MenuComponent } from './menu.component';
 import { MenuItemComponent } from './menu-item.component';
 import { MenuTriggerDirective } from './menu-trigger.directive';
 import { PlatformMenuModule } from './menu.module';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { createKeyboardEvent, createMouseEvent } from '@fundamental-ngx/platform/shared';
 
 function mouseClickOnElement(el: Element): void {

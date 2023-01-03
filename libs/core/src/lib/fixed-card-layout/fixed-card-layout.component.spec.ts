@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { FixedCardLayoutComponent, FixedCardLayoutModule } from './public_api';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     template: `

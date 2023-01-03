@@ -9,8 +9,8 @@ import {
     ChangeDetectorRef,
     OnInit
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export type StatusIndicatorSize = 'sm' | 'md' | 'lg' | 'xl';
 export type StatusIndicatorColor = 'negative' | 'critical' | 'positive';

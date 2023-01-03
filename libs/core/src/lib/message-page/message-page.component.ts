@@ -7,7 +7,7 @@ import {
     ViewEncapsulation,
     OnInit
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 export type MessagePageType = '' | 'filter' | 'search' | 'no-items' | 'error';
 

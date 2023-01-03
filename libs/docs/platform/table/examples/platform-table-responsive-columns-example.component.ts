@@ -7,7 +7,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { DestroyedService, resizeObservable } from '@fundamental-ngx/core/utils';
+import { DestroyedService, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { TableComponent, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
 import { Observable, of } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

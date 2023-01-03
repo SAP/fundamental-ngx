@@ -2,12 +2,12 @@ import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { BehaviorSubject, filter, first, ReplaySubject } from 'rxjs';
 import { FN_FOCUSABLE_ITEM_DIRECTIVE } from './focusable.tokens';
-import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
 import { HasElementRef } from '../has-element-ref';
 import { FocusableItemViewModifier } from './focusable-item-view-modifier.interface';
 import { setFocusable } from './set-focusable';
 import { FocusableObserver } from './focusable.observer';
 import { takeUntil, tap } from 'rxjs/operators';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     selector: '[fnFocusableItem]',
@@ -16,7 +16,7 @@ import { takeUntil, tap } from 'rxjs/operators';
             provide: FN_FOCUSABLE_ITEM_DIRECTIVE,
             useExisting: FocusableItemDirective
         },
-        DestroyedBehavior
+        DestroyedService
     ]
 })
 export class FocusableItemDirective
@@ -38,7 +38,7 @@ export class FocusableItemDirective
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
         private _focusableObserver: FocusableObserver,
-        private _destroy$: DestroyedBehavior
+        private _destroy$: DestroyedService
     ) {
         super(1);
         this._focusableObserver

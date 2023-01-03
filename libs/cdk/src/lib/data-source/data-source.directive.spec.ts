@@ -1,5 +1,5 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import { DestroyedService } from '@fundamental-ngx/core/utils';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { isObservable, Observable, of } from 'rxjs';
 import { BaseDataProvider } from './base/base-data-provider.class';
 import { BaseDataSource } from './base/base-data-source.class';

@@ -39,7 +39,7 @@ import { ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keyc
 import { merge, Observable, Subscription } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { MenuItemComponent } from './menu-item.component';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 

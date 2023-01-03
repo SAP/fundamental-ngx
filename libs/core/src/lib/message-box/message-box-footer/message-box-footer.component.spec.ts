@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, Type, ViewChild } from '@angular/core';
 
-import { TemplateModule } from '@fundamental-ngx/core/utils';
+import { TemplateModule } from '@fundamental-ngx/cdk/utils';
 import { MessageBoxFooterComponent, MessageBoxButtonClass } from './message-box-footer.component';
 import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.class';
 import { BarModule } from '@fundamental-ngx/core/bar';

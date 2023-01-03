@@ -2,7 +2,7 @@ import { Subject } from 'rxjs';
 import { Injectable, Output } from '@angular/core';
 import { DefaultMenuItem } from './default-menu-item.class';
 import { ListItemComponent } from '@fundamental-ngx/core/list';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
 @Injectable()

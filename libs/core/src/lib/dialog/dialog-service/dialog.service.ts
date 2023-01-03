@@ -1,7 +1,7 @@
 import { Inject, Injectable, Injector, Optional } from '@angular/core';
 import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
 import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../utils/dialog-config.class';
-import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogBaseService } from '../base/dialog-base.service';
 import { DialogContentType } from '../dialog.types';

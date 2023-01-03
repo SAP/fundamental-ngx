@@ -21,9 +21,9 @@ import {
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { NotificationRef } from '../notification-utils/notification-ref';
-import { AbstractFdNgxClass, RtlService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { AbstractFdNgxClass, RtlService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { NotificationConfig } from '../notification-utils/notification-config';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { BehaviorSubject, Subject } from 'rxjs';

@@ -21,7 +21,7 @@ import { DeprecatedListContentDensityDirective, ListModule } from '@fundamental-
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { RadioModule } from '@fundamental-ngx/core/radio';
-import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/cdk/utils';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { ListBylineUnreadExampleComponent } from './examples/list-byline-unread-example/list-byline-unread-example.component';
 

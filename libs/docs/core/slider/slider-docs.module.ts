@@ -16,7 +16,7 @@ import { COMPONENTS } from './examples';
 import { SliderDocsComponent } from './slider-docs.component';
 import { SliderHeaderComponent } from './slider-header/slider-header.component';
 import { DeprecatedSliderCozyDirective, SliderModule } from '@fundamental-ngx/core/slider';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

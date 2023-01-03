@@ -1,7 +1,7 @@
 import { Directive, Input } from '@angular/core';
 
 import { ToolbarItemDirective } from './toolbar-item.directive';
-import { OverflowPriority } from '@fundamental-ngx/core/utils';
+import { OverflowPriority } from '@fundamental-ngx/cdk/utils';
 
 /** Individual child elements can be "prioritized" for the overflow behavior using the `fdOverflowPriority` attribute directive.
  * The values for prioritization are as follows:

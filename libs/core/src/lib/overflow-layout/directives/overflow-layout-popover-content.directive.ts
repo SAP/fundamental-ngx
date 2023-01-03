@@ -1,7 +1,7 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { Directive, HostBinding, HostListener, Inject, Input, Optional } from '@angular/core';
-import { DestroyedService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { DestroyedService, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { takeUntil } from 'rxjs';
 import { OverflowContainer } from '../interfaces/overflow-container.interface';
 import { OverflowLayoutFocusableItem } from '../interfaces/overflow-focusable-item.interface';

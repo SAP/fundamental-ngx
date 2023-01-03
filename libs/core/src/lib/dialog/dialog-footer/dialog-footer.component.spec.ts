@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DialogFooterComponent, DialogButtonClass } from './dialog-footer.component';
 import { Component, Type, ViewChild } from '@angular/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { TemplateModule } from '@fundamental-ngx/core/utils';
+import { TemplateModule } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '../utils/dialog-config.class';
 
 @Component({

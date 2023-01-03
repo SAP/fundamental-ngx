@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
-import { uuidv4 } from '@fundamental-ngx/core/utils';
+import { uuidv4 } from '@fundamental-ngx/cdk/utils';
 import { UploadCollectionDataProvider } from '../domain/upload-collection-data-provider';
 import {
     CancelUploadNewFileEvent,

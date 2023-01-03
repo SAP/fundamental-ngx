@@ -1,7 +1,7 @@
 import { QueryList, TemplateRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { FormField } from '@fundamental-ngx/cdk/forms';
-import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
+import { FormField, FormStates } from '@fundamental-ngx/cdk/forms';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Subject } from 'rxjs';
 
 import { PlatformFormFieldControl } from './form-control';

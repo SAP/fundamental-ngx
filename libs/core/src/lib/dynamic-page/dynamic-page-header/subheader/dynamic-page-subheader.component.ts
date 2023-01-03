@@ -11,7 +11,7 @@ import {
     ChangeDetectorRef
 } from '@angular/core';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { DynamicPageConfig } from '../../dynamic-page.config';
 import { DynamicPageService } from '../../dynamic-page.service';

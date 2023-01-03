@@ -6,7 +6,7 @@ import { ThemeSwitcherHeaderComponent } from './theme-switcher-header/theme-swit
 import { ThemeSwitcherDocsComponent } from './theme-switcher-docs.component';
 import { examples } from './examples';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { ThemesService } from '@fundamental-ngx/core/utils';
+import { ThemesService } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

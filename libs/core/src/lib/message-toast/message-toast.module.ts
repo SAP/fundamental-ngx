@@ -6,7 +6,7 @@ import { MessageToastConfig } from './message-toast-utils/message-toast-config';
 import { MessageToastComponent } from './message-toast.component';
 import { MessageToastService } from './message-toast-service/message-toast.service';
 import { MessageToastContainerComponent } from './message-toast-utils/message-toast-container.component';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Adds Message Toast functionality to your application.

@@ -14,7 +14,7 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FnClickedProvider, SelectableItemToken, SelectComponentRootToken } from '@fundamental-ngx/fn/cdk';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
 import { Observable } from 'rxjs';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative';
 

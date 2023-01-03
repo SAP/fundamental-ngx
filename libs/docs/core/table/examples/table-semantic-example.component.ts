@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TableStatuses } from '@fundamental-ngx/core/table';
-import { RangeSelector } from '@fundamental-ngx/core/utils';
+import { RangeSelector } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-table-semantic-example',

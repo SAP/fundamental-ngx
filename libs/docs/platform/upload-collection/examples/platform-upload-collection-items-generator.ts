@@ -1,4 +1,4 @@
-import { uuidv4 } from '@fundamental-ngx/core/utils';
+import { uuidv4 } from '@fundamental-ngx/cdk/utils';
 import {
     UploadCollectionFile,
     UploadCollectionFolder,

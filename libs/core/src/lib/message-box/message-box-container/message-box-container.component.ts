@@ -10,9 +10,9 @@ import {
     ViewChild,
     ViewContainerRef
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { DynamicComponentContainer } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentContainer } from '@fundamental-ngx/cdk/utils';
 import { MessageBoxConfig } from '../utils/message-box-config.class';
 import { MessageBoxRef } from '../utils/message-box-ref.class';
 import { MessageBoxContent } from '../utils/message-box-content.class';

@@ -92,6 +92,11 @@
                         "output": "./assets/fn"
                     },
                     {
+                        "input": "./libs/cdk/src/lib",
+                        "glob": "README.md",
+                        "output": "./assets/cdk"
+                    },
+                    {
                         "input": "./libs/docs/typedoc",
                         "glob": "**/*",
                         "output": "./assets/typedoc"

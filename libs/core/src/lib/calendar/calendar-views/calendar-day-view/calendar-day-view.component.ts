@@ -17,7 +17,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { SpecialDayRule, Nullable } from '@fundamental-ngx/core/shared';
+import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 import equal from 'fast-deep-equal';
 
 import { DateRange } from '../../models/date-range';
@@ -28,6 +28,7 @@ import { CalendarType, DaysOfWeek } from '../../types';
 import { CalendarService } from '../../calendar.service';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /** Component representing the day view of the calendar. */
 @Component({

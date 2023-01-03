@@ -12,8 +12,8 @@ import { NgForm, NgControl, ControlContainer } from '@angular/forms';
 import { BehaviorSubject, of } from 'rxjs';
 import { takeUntil, switchMap, map } from 'rxjs/operators';
 
-import { ContentDensity, RtlService } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { ContentDensity, RtlService } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { StepInputConfig } from './step-input.config';
 import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './step-input.util';

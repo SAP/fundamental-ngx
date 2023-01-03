@@ -35,7 +35,7 @@ import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { LinkModule } from '@fundamental-ngx/core/link';
-import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/cdk/utils';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 const routes: Routes = [

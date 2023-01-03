@@ -44,6 +44,13 @@ const routes: Routes = [
         },
         loadChildren: () => import('./cx/cx-documentation.module').then((m) => m.CxDocumentationModule)
     },
+    {
+        path: 'cdk',
+        data: {
+            library: 'CDK'
+        },
+        loadChildren: () => import('./cdk/cdk-documentation.module').then((m) => m.CDKDocumentationModule)
+    },
     { path: '', redirectTo: 'core', pathMatch: 'full' }
 ];
 

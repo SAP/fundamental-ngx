@@ -23,7 +23,7 @@ import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
-import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import {
     DATA_PROVIDERS,

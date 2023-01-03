@@ -37,7 +37,7 @@ import {
     ResponsiveBreakpointsService,
     SelectItem
 } from '@fundamental-ngx/platform/shared';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 
 import { RadioButtonComponent } from './radio/radio.component';
 

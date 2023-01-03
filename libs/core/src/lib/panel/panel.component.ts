@@ -16,8 +16,8 @@ import {
 import { Subscription } from 'rxjs';
 
 import { PanelContentDirective } from './panel-content/panel-content.directive';
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let panelUniqueId = 0;

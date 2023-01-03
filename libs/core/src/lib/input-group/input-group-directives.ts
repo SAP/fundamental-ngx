@@ -10,9 +10,9 @@ import {
     Renderer2
 } from '@angular/core';
 import { InputGroupPlacement } from './types';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityObserver,
     contentDensityObserverProviders,

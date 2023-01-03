@@ -12,7 +12,7 @@ import { FileUploaderCompactExampleComponent } from './examples/file-uploader-co
 import { FileUploaderMinExampleComponent } from './examples/file-uploader-min-example/file-uploader-min-example.component';
 import { FileUploaderTruncationExampleComponent } from './examples/file-uploader-truncation-example/file-uploader-truncation-example.component';
 import { DeprecatedFileUploaderContentDensityDirective, FileUploaderModule } from '@fundamental-ngx/core/file-uploader';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

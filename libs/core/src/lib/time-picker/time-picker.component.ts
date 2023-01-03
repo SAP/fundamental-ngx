@@ -21,7 +21,7 @@ import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } fro
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { FormStates, Nullable, Placement, ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
+import { Placement, ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { TimeComponent } from '@fundamental-ngx/core/time';
 import { PopoverFormMessageService, registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
@@ -29,6 +29,8 @@ import { PopoverService } from '@fundamental-ngx/core/popover';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 let timePickerCounter = 0;
 

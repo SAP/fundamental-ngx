@@ -14,7 +14,7 @@ import {
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { filter, startWith, takeUntil, tap } from 'rxjs/operators';
 import { Subject, merge, fromEvent } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 

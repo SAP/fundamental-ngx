@@ -13,7 +13,7 @@ import {
 import { IconTabBarItem } from './interfaces/icon-tab-bar-item.interface';
 import { TabConfig } from './interfaces/tab-config.interface';
 import { IconTabBarBackground, IconTabBarSize, TabDestinyMode, TabType } from './types';
-import { ContentDensityService, RtlService } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconFont } from '@fundamental-ngx/core/icon';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';

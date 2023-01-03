@@ -15,7 +15,7 @@ import { ShellbarTitleComponent } from './shellbar-title/shellbar-title.componen
 
 import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.component';
 import { IconModule } from '@fundamental-ngx/core/icon';
-import { DragAndDropModule } from '@fundamental-ngx/core/utils';
+import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';

@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IconTabBarProcessTypeComponent } from './icon-tab-bar-process-type.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { generateTestConfig } from '../../tests-helper';
-import { OverflowListDirective } from '@fundamental-ngx/core/utils';
+import { OverflowListDirective } from '@fundamental-ngx/cdk/utils';
 import { of } from 'rxjs';
 import { IconTabBarComponent } from '../../icon-tab-bar.component';
 

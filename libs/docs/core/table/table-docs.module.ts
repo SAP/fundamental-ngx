@@ -45,7 +45,7 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
-import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/cdk/utils';
 import { SkeletonModule } from '../../../core/src/lib/skeleton';
 import { TableLoadingExampleComponent } from './examples/loading/table-loading-example.component';
 

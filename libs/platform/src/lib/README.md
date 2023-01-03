@@ -30,7 +30,7 @@ See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/home) f
 
 To download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
 
-Fundamental Library for Angular is intended for use with Angular 8 or newer.
+Fundamental Library for Angular is intended for use with Angular 15 or newer.
 
 Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 
