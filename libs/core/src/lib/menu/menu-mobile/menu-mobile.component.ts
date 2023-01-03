@@ -17,7 +17,7 @@ import { Observable, of } from 'rxjs';
 import { MenuService } from '../services/menu.service';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { map, startWith, take, takeUntil } from 'rxjs/operators';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
 import {
     MOBILE_MODE_CONFIG,

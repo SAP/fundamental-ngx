@@ -8,8 +8,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { KeyboardSupportService, Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';

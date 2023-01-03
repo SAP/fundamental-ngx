@@ -2,7 +2,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
-import { DragAndDropModule } from '@fundamental-ngx/core/utils';
+import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
 import { CardDefinitionDirective, FixedCardLayoutComponent } from './fixed-card-layout.component';
 
 @NgModule({

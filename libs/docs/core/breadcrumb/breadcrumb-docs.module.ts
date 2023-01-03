@@ -9,7 +9,7 @@ import {
 import { BreadcrumbHeaderComponent } from './breadcrumb-header/breadcrumb-header.component';
 import { BreadcrumbDocsComponent } from './breadcrumb-docs.component';
 import { BreadcrumbModule, DeprecatedBreadcrumbsCompactDirective } from '@fundamental-ngx/core/breadcrumb';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

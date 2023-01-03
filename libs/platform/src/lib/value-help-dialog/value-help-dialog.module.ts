@@ -11,7 +11,7 @@ import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { TableModule } from '@fundamental-ngx/core/table';
-import { PipeModule, RepeatModule } from '@fundamental-ngx/core/utils';
+import { PipeModule, RepeatModule } from '@fundamental-ngx/cdk/utils';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { LinkModule } from '@fundamental-ngx/core/link';

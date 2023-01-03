@@ -21,7 +21,7 @@ import { ViewportRuler } from '@angular/cdk/scrolling';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { SplitterComponent } from '../splitter.component';
 import { SplitterPaneResizeEvent } from '../interfaces/splitter-pane-resize-event.interface';

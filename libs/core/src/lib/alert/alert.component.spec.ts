@@ -7,7 +7,7 @@ import { AlertContainerComponent } from './alert-utils/alert-container.component
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { AlertConfig } from './alert-utils/alert-config';
 

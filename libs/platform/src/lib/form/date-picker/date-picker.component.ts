@@ -16,13 +16,14 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
 import { CalendarType, CalendarYearGrid, DateRange, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { DatePickerComponent as FdDatePickerComponent } from '@fundamental-ngx/core/date-picker';
-import { Placement, SpecialDayRule, FormStates, Nullable } from '@fundamental-ngx/core/shared';
+import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { PlatformFormFieldControl, BaseInput, PlatformFormField } from '@fundamental-ngx/platform/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * The Platform date picker component is a wrapper around fd-date-picker using platform form.

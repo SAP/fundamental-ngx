@@ -11,7 +11,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { TabColorAssociations } from '../../interfaces/tab-color-associations.interface';

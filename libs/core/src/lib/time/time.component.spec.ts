@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { PipeModule } from '@fundamental-ngx/core/utils';
+import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { Meridian } from './models';

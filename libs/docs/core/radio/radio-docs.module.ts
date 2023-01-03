@@ -7,7 +7,7 @@ import { RadioDocsComponent } from './radio-docs.component';
 import { examples } from './examples';
 import { DeprecatedRadioButtonCompactDirective, RadioModule } from '@fundamental-ngx/core/radio';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

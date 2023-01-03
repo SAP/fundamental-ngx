@@ -37,10 +37,16 @@ import {
 import { Subscription } from 'rxjs';
 
 import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
-import { AutoCompleteEvent, DynamicComponentService, FocusEscapeDirection, KeyUtil } from '@fundamental-ngx/core/utils';
+import {
+    AutoCompleteEvent,
+    DynamicComponentService,
+    FocusEscapeDirection,
+    KeyUtil,
+    Nullable
+} from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { FormStates, Nullable, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -52,6 +58,7 @@ import { ComboboxItem } from './combobox-item';
 import { GroupFunction } from './list-group.pipe';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 let comboboxUniqueId = 0;
 

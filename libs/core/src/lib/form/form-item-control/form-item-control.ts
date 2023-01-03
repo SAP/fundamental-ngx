@@ -1,5 +1,5 @@
 import { ElementRef, InjectionToken, Provider, Type } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /** An injection token, that should be used with all controls, that can be put inside `fd-form-item` */
 export const FORM_ITEM_CONTROL = new InjectionToken<FormItemControl>('Form Item Control');

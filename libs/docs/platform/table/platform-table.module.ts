@@ -9,7 +9,7 @@ import { TableModule } from '@fundamental-ngx/core/table';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformInputModule } from '@fundamental-ngx/platform/form';

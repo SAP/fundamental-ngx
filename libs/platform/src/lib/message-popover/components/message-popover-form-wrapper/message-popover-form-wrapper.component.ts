@@ -10,8 +10,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup, FormGroupDirective, NgForm, NgModel } from '@angular/forms';
-import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
-import { DestroyedService } from '@fundamental-ngx/core/utils';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { DestroyedService, Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     PlatformFormField,
     PlatformFormFieldControl,

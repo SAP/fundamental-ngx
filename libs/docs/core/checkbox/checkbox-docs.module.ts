@@ -7,7 +7,7 @@ import { CheckboxDocsComponent } from './checkbox-docs.component';
 import { examples } from './examples';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { CheckboxModule, DeprecatedCheckboxContentDensityDirective } from '@fundamental-ngx/core/checkbox';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

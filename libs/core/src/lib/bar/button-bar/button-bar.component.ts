@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, ViewChild } from '@angular/core';
 import { BaseButton, ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
 import { Subscription } from 'rxjs';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 let randomButtonBarId = 0;
 

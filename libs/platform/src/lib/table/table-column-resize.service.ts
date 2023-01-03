@@ -2,7 +2,7 @@ import { ElementRef, Injectable, OnDestroy, Optional } from '@angular/core';
 import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { TABLE_COLUMN_MIN_WIDTH } from './constants';
 import { TableScrollDispatcherService } from './table-scroll-dispatcher.service';

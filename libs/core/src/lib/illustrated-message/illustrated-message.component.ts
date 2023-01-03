@@ -12,8 +12,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { applyCssClass, RequireOnlyOne } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, RequireOnlyOne } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { fromEvent, Subscription } from 'rxjs';
 
 export interface SvgConfig {

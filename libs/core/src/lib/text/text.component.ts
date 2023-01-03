@@ -7,7 +7,7 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /** Type of hyphenation */
 export type HyphenationType = 'none' | 'manual' | 'auto' | null;

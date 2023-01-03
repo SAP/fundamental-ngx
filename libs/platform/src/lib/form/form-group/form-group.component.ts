@@ -47,7 +47,7 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 
-import { resizeObservable } from '@fundamental-ngx/core/utils';
+import { resizeObservable } from '@fundamental-ngx/cdk/utils';
 import {
     ColumnLayout,
     FieldHintOptions,
@@ -58,7 +58,7 @@ import {
     LabelLayout,
     PlatformFormField
 } from '@fundamental-ngx/platform/shared';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     Field,
     FieldColumn,

@@ -1,1 +1,2 @@
-export * from './public_api';
+// KEEP FOR BACKWARDS COMPATIBILITY
+export * from '@fundamental-ngx/cdk/utils';

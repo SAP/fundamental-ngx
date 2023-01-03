@@ -21,7 +21,7 @@ import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } fro
 import { Subscription } from 'rxjs';
 
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
-import { Nullable, SpecialDayRule } from '@fundamental-ngx/core/shared';
+import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 
 import { DateRange } from './models/date-range';
 import { CalendarCurrent } from './models/calendar-current';
@@ -41,6 +41,7 @@ import {
     contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 let calendarUniqueId = 0;
 

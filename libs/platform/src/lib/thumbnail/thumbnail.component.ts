@@ -12,7 +12,7 @@ import {
     forwardRef
 } from '@angular/core';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { ThumbnailDetailsComponent } from './thumbnail-details/thumbnail-details.component';

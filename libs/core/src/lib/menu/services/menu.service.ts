@@ -1,7 +1,7 @@
 import { ElementRef, Injectable, Optional, Renderer2 } from '@angular/core';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu.component';
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { DOWN_ARROW, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';

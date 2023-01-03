@@ -1,6 +1,6 @@
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { TabsModule } from '../tabs.module';
 import { TabNavComponent } from './tab-nav.component';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';

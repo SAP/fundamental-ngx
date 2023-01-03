@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-grid-list-more-btn',

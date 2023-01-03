@@ -24,7 +24,7 @@ import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { CalendarModule, DeprecatedCalendarContentDensityDirective } from '@fundamental-ngx/core/calendar';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { CalendarDisabledNavigationButtonsExampleComponent } from './examples/calendar-disabled-navigation-buttons-example/calendar-disabled-navigation-buttons-example.component';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

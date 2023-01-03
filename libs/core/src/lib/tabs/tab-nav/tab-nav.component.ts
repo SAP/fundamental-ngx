@@ -20,7 +20,7 @@ import { TabItemDirective } from '../tab-item/tab-item.directive';
 import { merge, Subject, Subscription } from 'rxjs';
 import { TabModes, TabSizes } from '../tab-list.component';
 import { takeUntil } from 'rxjs/operators';
-import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityObserver,
     contentDensityObserverProviders,

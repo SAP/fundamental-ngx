@@ -27,7 +27,7 @@ import { takeUntil } from 'rxjs/operators';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { ListComponent } from '@fundamental-ngx/core/list';
-import { ContentDensityService, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     CollectionBaseInput,
     PlatformFormFieldControl,

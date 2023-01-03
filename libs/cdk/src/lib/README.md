@@ -1,8 +1,8 @@
-# @Fundamental-NGX/CX
+# @Fundamental-NGX/CDK
 
-[![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fcx.svg)](//www.npmjs.com/package/@fundamental-ngx/cx)
+[![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fcdk.svg)](//www.npmjs.com/package/@fundamental-ngx/cdk)
 ![Build Status](https://github.com/SAP/fundamental-ngx/actions/workflows/on-push-or-pull.yml/badge.svg?branch=main)
-![npm](https://img.shields.io/npm/dm/@fundamental-ngx/cx?label=npm%20downloads)
+![npm](https://img.shields.io/npm/dm/@fundamental-ngx/cdk?label=npm%20downloads)
 [![Slack](https://img.shields.io/badge/slack-ui--fundamentals-blue.svg?logo=slack)](https://ui-fundamentals.slack.com)
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP/fundamental-ngx)](https://api.reuse.software/info/github.com/SAP/fundamental-ngx)
 
@@ -20,9 +20,10 @@
 
 ## <a name="1"></a>1. Description
 
-The `@fundamental-ngx/cx` library is a set of [Angular](https://angular.io/) components built using [Fundamental Library Styles](https://sap.github.io/fundamental-styles/).
+The `@fundamental-ngx/cdk` library is a set of utilities and [Angular](https://angular.io/) directives aimed to help developers build custom UI components with common interaction patterns.
 
-The Fundamental Library Styles is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
+It includes common behaviour for working with `DataSources` and `ControlValueAccessors`.
+Additionally, it contains injectable helpers to easily control the `rxjs` subscriptions in your components, focusable/selectable list helpers and many more.
 
 See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/home) for examples and API details.
 
@@ -30,7 +31,7 @@ See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/home) f
 
 To download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
 
-Fundamental Library for Angular is intended for use with Angular 8 or newer.
+Fundamental Library for Angular is intended for use with Angular 15 or newer.
 
 Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 
@@ -45,24 +46,22 @@ For an existing Angular CLI application,
 0. **Video tutorial**
    [How to use the Fundamental Core Library](https://www.youtube.com/watch?v=i4VIiuzD2Fg)
 
-1. **Install Fundamental-NGX.**
-   `ng add @fundamental-ngx/cx`
-   For models prior to 0.10 use `fundamental-ngx`
+1. **Install Fundamental-NGX CDK.**
+   `ng add @fundamental-ngx/cdk`
+   For versions prior to 0.10 use `fundamental-ngx`
 
     _If you do not use the Angular CLI or if this command does not work for you, please see the [full installation guide](https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide)._
 
-1. **Edit your tsconfig.**
-   Edit the `target` in your `tsconfig.json` to `es5`. The library is incompatible with later versions.
-1. **Import the modules you want to use.**
+2. **Import the modules you want to use.**
 
     To add the entire library, add the following import to your main application module.
 
     ```typescript
-    import { FundamentalNgxCxModule } from '@fundamental-ngx/cx';
+    import { FundamentalNgxCDKModule } from '@fundamental-ngx/cx';
 
     @NgModule({
         ...
-        imports: [FundamentalNgxCxModule],
+        imports: [FundamentalNgxCDKModule],
     })
     export class DemoModule { }
     ```
@@ -72,7 +71,7 @@ For an existing Angular CLI application,
     For example, to use Switchs, add the following import to your main application module.
 
     ```typescript
-    import { CheckboxModule } from '@fundamental-ngx/cx';
+    import { CvaDirective } from '@fundamental-ngx/cdk/forms';
     ```
 
 ## <a name="5"></a>5. Known Issues

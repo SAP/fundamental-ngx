@@ -11,13 +11,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {
-    applyDatasourceDirective,
     DataSourceDirective,
     FD_DATA_SOURCE_TRANSFORMER,
     isDataSource,
     MatchingBy
 } from '@fundamental-ngx/cdk/data-source';
-import { addCvaDirective } from '@fundamental-ngx/cdk/forms';
+import { CvaDirective } from '@fundamental-ngx/cdk/forms';
 import {
     AutoCompleteEvent,
     DestroyedService,
@@ -25,7 +24,7 @@ import {
     FocusEscapeDirection,
     KeyUtil,
     resizeObservable
-} from '@fundamental-ngx/core/utils';
+} from '@fundamental-ngx/cdk/utils';
 
 import equal from 'fast-deep-equal';
 import { isObservable, skip, startWith, Subscription, timer } from 'rxjs';
@@ -77,7 +76,20 @@ export function toMultiComboboxDataStream<T>(
     styleUrls: ['./multi-combobox.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    hostDirectives: [addCvaDirective, applyDatasourceDirective],
+    hostDirectives: [
+        {
+            directive: CvaDirective,
+            // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+            inputs: ['id', 'placeholder', 'state', 'stateMessage', 'disabled', 'readonly', 'name']
+        },
+        {
+            directive: DataSourceDirective,
+            // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+            inputs: ['dataSource'],
+            // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
+            outputs: ['dataChanged']
+        }
+    ],
     providers: [
         contentDensityObserverProviders(),
         {

@@ -6,7 +6,7 @@ import { FormModule } from '@fundamental-ngx/core/form';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { SliderModule } from '@fundamental-ngx/core/slider';
 import { StepInputModule } from '@fundamental-ngx/core/step-input';
-import { InitialFocusModule } from '@fundamental-ngx/core/utils';
+import { InitialFocusModule } from '@fundamental-ngx/cdk/utils';
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
 import { InitialFocusHeaderComponent } from './initial-focus-header/initial-focus-header.component';

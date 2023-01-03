@@ -19,7 +19,7 @@ import { NestedItemInterface } from '../nested-item/nested-item.interface';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListPopoverInterface } from './nested-list-popover.interface';
 import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { Placement } from '@fundamental-ngx/core/shared';
 
 @Component({

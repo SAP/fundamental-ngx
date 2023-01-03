@@ -8,7 +8,7 @@ import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { TitleModule } from '@fundamental-ngx/core/title';
 import { RadioModule } from '@fundamental-ngx/core/radio';
-import { PipeModule } from '@fundamental-ngx/core/utils';
+import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {

@@ -19,7 +19,7 @@ import {
     MobileModeControl
 } from '@fundamental-ngx/core/mobile-mode';
 import { DialogService } from '@fundamental-ngx/core/dialog';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { MULTIINPUT_COMPONENT, PlatformMultiInputInterface } from '../multi-input.interface';
 
 @Component({

@@ -39,13 +39,14 @@ import { takeUntil, skip } from 'rxjs/operators';
 import equal from 'fast-deep-equal';
 
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
-import { RangeSelector } from '@fundamental-ngx/core/utils';
-import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/core/utils';
+import { RangeSelector } from '@fundamental-ngx/cdk/utils';
+import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { ListComponent } from '@fundamental-ngx/core/list';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { PopoverFillMode, FormStates } from '@fundamental-ngx/core/shared';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import {
     ArrayMultiComboBoxDataSource,
     coerceArraySafe,

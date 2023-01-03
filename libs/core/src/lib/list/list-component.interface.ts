@@ -1,5 +1,5 @@
 import { QueryList } from '@angular/core';
-import { ListItemInterface } from '@fundamental-ngx/core/utils';
+import { ListItemInterface } from '@fundamental-ngx/cdk/utils';
 
 export interface ListComponentInterface {
     _navItems: QueryList<{

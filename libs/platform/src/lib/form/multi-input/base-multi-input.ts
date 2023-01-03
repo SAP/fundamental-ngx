@@ -36,7 +36,7 @@ import { combineLatest, fromEvent, isObservable, Observable, Subject, Subscripti
 import { takeUntil, startWith } from 'rxjs/operators';
 
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
-import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/core/utils';
+import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import {

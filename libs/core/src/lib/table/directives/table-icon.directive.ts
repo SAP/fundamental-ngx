@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     selector: '[fdTableIcon], [fd-table-icon]'

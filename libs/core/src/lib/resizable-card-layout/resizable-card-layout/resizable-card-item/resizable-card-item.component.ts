@@ -13,8 +13,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Subscription } from 'rxjs';
 
 export type ResizeDirection = 'vertical' | 'horizontal' | 'both';

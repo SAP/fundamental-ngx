@@ -4,7 +4,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { IconModule } from '@fundamental-ngx/core/icon';
-import { OverflowListModule } from '@fundamental-ngx/core/utils';
+import { OverflowListModule } from '@fundamental-ngx/cdk/utils';
 
 import { IconTabBarComponent } from './icon-tab-bar.component';
 import { IconTabBarTextTypeComponent } from './components/icon-tab-bar-text-type/icon-tab-bar-text-type.component';

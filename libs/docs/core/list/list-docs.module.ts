@@ -12,7 +12,7 @@ import { LinkModule } from '@fundamental-ngx/core/link';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
-import { DragAndDropModule, moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/core/utils';
+import { DragAndDropModule, moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';

@@ -6,7 +6,7 @@ import { FN_READONLY_DIRECTIVE } from './fn-readonly.token';
 import { ReadonlyBehavior } from './readonly-behavior.interface';
 import { setReadonlyState } from './set-readonly-state';
 import { ReadonlyObserver } from './readonly.observer';
-import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     selector: '[fnReadonly]',
@@ -15,7 +15,7 @@ import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
             provide: FN_READONLY_DIRECTIVE,
             useExisting: ReadonlyBehaviorDirective
         },
-        DestroyedBehavior
+        DestroyedService
     ]
 })
 export class ReadonlyBehaviorDirective
@@ -37,7 +37,7 @@ export class ReadonlyBehaviorDirective
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
         private _readonlyObserver: ReadonlyObserver,
-        private _destroy$: DestroyedBehavior
+        private _destroy$: DestroyedService
     ) {
         super(1);
     }

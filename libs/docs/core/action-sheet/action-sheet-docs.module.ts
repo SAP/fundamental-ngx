@@ -6,7 +6,7 @@ import { ActionSheetDocsComponent } from './action-sheet-docs.component';
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { examples } from './examples';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Optional, HostBinding, HostListener, Input, Inject, forwardRef } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
 
-import { HasElementRef } from '@fundamental-ngx/core/utils';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 
 import { AvatarGroupOverflowBodyDirective } from './avatar-group-overflow-body.directive';
 import { AvatarGroupInterface } from '../avatar-group.interface';

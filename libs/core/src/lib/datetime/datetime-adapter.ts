@@ -1,5 +1,5 @@
 import { Observable, Subject } from 'rxjs';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Datetime Adapter is an abstract class that must be implemented by each adapter.

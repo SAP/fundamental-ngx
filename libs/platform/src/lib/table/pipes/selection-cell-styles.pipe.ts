@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { SELECTION_COLUMN_WIDTH } from '../constants';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Pipe({ name: 'selectionCellStyles' })
 export class SelectionCellStylesPipe implements PipeTransform {

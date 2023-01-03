@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { PlatformApprovalFlowModule } from '@fundamental-ngx/platform/approval-flow';
 import { MessageToastModule } from '@fundamental-ngx/core/message-toast';
 import {

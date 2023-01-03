@@ -29,7 +29,7 @@ import {
     verticalResizeStep,
     horizontalResizeOffset
 } from './resizable-card-item/resizable-card-item.component';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 export type LayoutSize = 'sm' | 'md' | 'lg' | 'xl';
 export type ResizableCardLayoutConfig = Array<ResizableCardItemConfig>;

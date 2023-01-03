@@ -5,7 +5,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormMessageModule } from '@fundamental-ngx/core/form';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CalendarModule, CalendarType, DateRange } from '@fundamental-ngx/core/calendar';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';

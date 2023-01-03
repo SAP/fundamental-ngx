@@ -19,7 +19,7 @@ import {
 import { fromEvent, Subject, throttleTime } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 
 import {
     SplitterPaneContainerOrientation,

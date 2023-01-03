@@ -11,7 +11,7 @@ import { ComboboxHeaderComponent } from './combobox-header/combobox-header.compo
 import { ComboboxDocsComponent } from './combobox-docs.component';
 import { examples } from './examples';
 import { ComboboxBylineExampleComponent } from './examples/combobox-byline-example.component';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

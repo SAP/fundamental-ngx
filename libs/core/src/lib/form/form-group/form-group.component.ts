@@ -8,8 +8,8 @@ import {
     OnChanges,
     OnInit
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Represents a form group element.

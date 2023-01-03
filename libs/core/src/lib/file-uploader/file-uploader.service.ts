@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { parserFileSize } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { parserFileSize } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export interface FileUploadOutput {
     validFiles?: File[];

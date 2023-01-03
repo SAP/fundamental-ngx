@@ -1,7 +1,7 @@
 import { FocusableOption } from '@angular/cdk/a11y';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
-import { AbstractFdNgxClass, KeyUtil } from '@fundamental-ngx/core/utils';
+import { AbstractFdNgxClass, KeyUtil } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Tab link for nav mode

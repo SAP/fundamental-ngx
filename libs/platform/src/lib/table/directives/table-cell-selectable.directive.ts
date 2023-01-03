@@ -1,7 +1,7 @@
 import { Directive, HostListener } from '@angular/core';
 import { SPACE } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector

@@ -15,7 +15,7 @@ import {
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { dialogFadeNgIf } from './utils/dialog.animations';
 import { DialogConfig } from './utils/dialog-config.class';

@@ -7,9 +7,9 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { CSS_CLASS_NAME, getTypeClassName } from './constants';
 
 /** @deprecated use FormStates instead */

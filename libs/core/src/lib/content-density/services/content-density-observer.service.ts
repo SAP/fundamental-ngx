@@ -11,7 +11,7 @@ import { defaultContentDensityObserverConfigs } from '../variables/default-conte
 import { contentDensityCallbackFactory } from '../helpers/content-density-change-callback-factory';
 import { isCompact, isCondensed, isCozy } from '../helpers/density-type-checkers';
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
-import { DestroyedService } from '@fundamental-ngx/core/utils';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserverSettings } from '../classes/content-density-observer.settings';
 import { ContentDensityMode } from '../types/content-density.mode';
 

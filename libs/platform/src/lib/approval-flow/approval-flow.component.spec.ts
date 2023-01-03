@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 
 import { DialogService } from '@fundamental-ngx/core/dialog';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { PlatformApprovalFlowModule } from '../approval-flow/approval-flow.module';
 import { ApprovalFlowComponent } from '../approval-flow/approval-flow.component';
 

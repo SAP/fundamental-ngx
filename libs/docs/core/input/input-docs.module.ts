@@ -12,7 +12,7 @@ import {
 } from './examples/input-examples.component';
 import { DeprecatedFormControlContentDensityDirective, FormModule } from '@fundamental-ngx/core/form';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

@@ -12,8 +12,8 @@ import {
 import { merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { GetDefaultPosition, PopoverPosition, Nullable } from '@fundamental-ngx/core/shared';
+import { RtlService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { GetDefaultPosition, PopoverPosition } from '@fundamental-ngx/core/shared';
 
 import { BasePopoverClass } from '../base/base-popover.class';
 import { PopoverBodyComponent } from '../popover-body/popover-body.component';

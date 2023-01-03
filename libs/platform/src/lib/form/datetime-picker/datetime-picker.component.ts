@@ -15,12 +15,12 @@ import {
     ViewChild
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
 import { CalendarYearGrid, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
-import { Placement, SpecialDayRule, FormStates } from '@fundamental-ngx/core/shared';
+import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { createMissingDateImplementationError } from './errors';
 

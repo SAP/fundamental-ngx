@@ -21,8 +21,7 @@ import {
     ChangeDetectionStrategy
 } from '@angular/core';
 import { alertFadeNgIf } from './alert-utils/alert-animations';
-import { AbstractFdNgxClass } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { AbstractFdNgxClass, Nullable } from '@fundamental-ngx/cdk/utils';
 import { AlertRef } from './alert-utils/alert-ref';
 import { AlertConfig } from './alert-utils/alert-config';
 

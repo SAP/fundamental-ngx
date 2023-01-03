@@ -1,6 +1,6 @@
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input } from '@angular/core';
-import { KeyboardSupportItemInterface } from '@fundamental-ngx/core/utils';
+import { KeyboardSupportItemInterface } from '@fundamental-ngx/cdk/utils';
 import { Subject } from 'rxjs';
 
 @Directive()

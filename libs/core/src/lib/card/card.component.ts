@@ -10,7 +10,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 import { CardType, CLASS_NAME } from './constants';
 import { Subscription } from 'rxjs';

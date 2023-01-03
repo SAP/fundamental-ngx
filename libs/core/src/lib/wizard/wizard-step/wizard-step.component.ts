@@ -16,8 +16,8 @@ import {
     ViewChild
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { WizardContentComponent } from '../wizard-content/wizard-content.component';
 import { WizardStepIndicatorComponent } from '../wizard-step-indicator/wizard-step-indicator.component';

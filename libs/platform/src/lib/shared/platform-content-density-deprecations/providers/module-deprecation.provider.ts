@@ -1,6 +1,6 @@
 import { Provider } from '@angular/core';
 import { DeprecatedContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { moduleDeprecationsFactory } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsFactory } from '@fundamental-ngx/cdk/utils';
 
 /** @hidden */
 export function platformContentDensityModuleDeprecationsProvider(selectorBase: string): Provider {

@@ -15,7 +15,7 @@ import {
 
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DATA_PROVIDERS, DataProvider, isOptionItem } from '@fundamental-ngx/platform/shared';
 
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';

@@ -15,7 +15,7 @@ import { DOCUMENT } from '@angular/common';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { TableColumnResizeService } from '../../table-column-resize.service';
 

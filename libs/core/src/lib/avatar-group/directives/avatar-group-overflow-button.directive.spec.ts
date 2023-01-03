@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
-import { Size } from '@fundamental-ngx/core/utils';
+import { Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarGroupModule } from '../avatar-group.module';
 import { AvatarGroupOverflowButtonColor } from '../avatar-group.component';
 

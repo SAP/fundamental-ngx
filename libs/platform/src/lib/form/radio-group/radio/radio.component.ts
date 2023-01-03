@@ -21,7 +21,7 @@ import { FocusableOption } from '@angular/cdk/a11y';
 
 import { RadioButtonComponent as CoreRadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 let uniqueId = 0;

@@ -19,8 +19,8 @@ import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { SelectComponent as CoreSelect } from '@fundamental-ngx/core/select';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { BaseSelect } from '../commons/base-select';
 import { SelectConfig } from '../select.config';

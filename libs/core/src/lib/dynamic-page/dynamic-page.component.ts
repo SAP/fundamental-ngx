@@ -15,7 +15,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { resizeObservable } from '@fundamental-ngx/core/utils';
+import { resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
 import { DynamicPageSubheaderComponent } from './dynamic-page-header/subheader/dynamic-page-subheader.component';
@@ -25,7 +25,7 @@ import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
 import { DynamicPageService } from './dynamic-page.service';
 import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
 import { TabListComponent } from '@fundamental-ngx/core/tabs';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FlexibleColumnLayoutComponent } from '@fundamental-ngx/core/flexible-column-layout';
 
 import { asyncScheduler, fromEvent, Observable, startWith, Subject } from 'rxjs';

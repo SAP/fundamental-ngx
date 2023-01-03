@@ -8,7 +8,7 @@ import {
     TemplateRef
 } from '@angular/core';
 
-import { TemplateDirective } from '@fundamental-ngx/core/utils';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Directive()

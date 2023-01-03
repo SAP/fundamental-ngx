@@ -22,7 +22,7 @@ import {
 } from '@angular/core';
 import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 
-import { applyCssClass, CssClassBuilder, OVERFLOW_PRIORITY_SCORE, OverflowPriority } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, OVERFLOW_PRIORITY_SCORE, OverflowPriority } from '@fundamental-ngx/cdk/utils';
 import { fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, delay, distinctUntilChanged, filter, takeWhile } from 'rxjs/operators';
 import { ToolbarItemDirective } from './toolbar-item.directive';

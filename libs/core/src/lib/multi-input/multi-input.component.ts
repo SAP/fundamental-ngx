@@ -28,7 +28,7 @@ import { distinctUntilChanged, first, map, startWith } from 'rxjs/operators';
 
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { FormStates, Nullable, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
@@ -40,15 +40,17 @@ import {
     FocusEscapeDirection,
     FocusTrapService,
     KeyUtil,
+    Nullable,
     RangeSelector,
     RtlService,
     uuidv4
-} from '@fundamental-ngx/core/utils';
+} from '@fundamental-ngx/cdk/utils';
 
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a

@@ -12,9 +12,9 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { KeyUtil, TabbableElementService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, TabbableElementService } from '@fundamental-ngx/cdk/utils';
 import { Subscription } from 'rxjs';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { TableCellDirective } from './directives/table-cell.directive';
 import { TableRowDirective } from './directives/table-row.directive';
 import { FdTable } from './fd-table.interface';

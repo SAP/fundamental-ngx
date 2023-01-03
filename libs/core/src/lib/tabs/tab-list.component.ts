@@ -19,7 +19,7 @@ import {
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
 import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { DestroyedService, KeyUtil, scrollTop } from '@fundamental-ngx/core/utils';
+import { DestroyedService, KeyUtil, scrollTop } from '@fundamental-ngx/cdk/utils';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
@@ -27,7 +27,7 @@ import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabInfo } from './tab-utils/tab-info.class';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { LIST_COMPONENT } from './tab-list.token';
 import { TabListComponentInterface } from './tab-list-component.interface';

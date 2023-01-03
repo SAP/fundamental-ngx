@@ -2,7 +2,7 @@ import { ElementRef, EventEmitter, Inject, OnDestroy, QueryList, Injectable } fr
 import { DOCUMENT } from '@angular/common';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export const DEFAULT_TRANSITION_DURATION = '150ms';
 

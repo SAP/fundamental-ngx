@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { WizardDialogGeneratorService } from '@fundamental-ngx/platform/wizard-generator';
 
 let componentExampleUniqueId = 0;

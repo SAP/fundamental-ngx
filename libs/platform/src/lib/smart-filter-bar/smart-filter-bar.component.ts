@@ -17,12 +17,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { DestroyedService } from '@fundamental-ngx/core/utils';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 import { BehaviorSubject, debounceTime, filter, firstValueFrom, Observable, Subscription } from 'rxjs';
 import { map, take, takeUntil } from 'rxjs/operators';
 
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     CollectionFilterGroup,

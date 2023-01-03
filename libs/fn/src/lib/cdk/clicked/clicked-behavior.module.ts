@@ -13,9 +13,7 @@ const ClickedBehaviorModuleForRootLoadedOnce = new InjectionToken<boolean>(
     exports: [ClickedDirective]
 })
 export class ClickedBehaviorModule {
-    constructor(
-        @Inject(ClickedBehaviorModuleForRootLoadedOnce) private clickedBehaviorModuleForRootLoadedOnce: boolean
-    ) {
+    constructor(@Inject(ClickedBehaviorModuleForRootLoadedOnce) clickedBehaviorModuleForRootLoadedOnce: boolean) {
         if (!clickedBehaviorModuleForRootLoadedOnce && isDevMode()) {
             console.warn(
                 'ClickedBehaviorModule.forRoot() was not called from RootModule, you will not be able to use (fnClicked) events'

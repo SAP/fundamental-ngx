@@ -26,7 +26,7 @@ import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
 import { ToolbarOverflowExampleComponent } from './examples/toolbar-overflow-example.component';
 import { TitleModule } from '@fundamental-ngx/core/title';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const examples = [
     ToolbarTypeExampleComponent,

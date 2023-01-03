@@ -1,6 +1,6 @@
 import { ElementRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormFieldControl } from '@fundamental-ngx/cdk/forms';
 import { Observable } from 'rxjs';
 import { PlatformFormField } from './form-field';

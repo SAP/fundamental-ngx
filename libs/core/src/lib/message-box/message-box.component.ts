@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogBase, dialogFadeNgIf } from '@fundamental-ngx/core/dialog';
 
 import { MessageBoxHost, MessageBoxConfig } from './utils/message-box-config.class';

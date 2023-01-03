@@ -1,5 +1,5 @@
 import { Component, Inject, Optional } from '@angular/core';
-import { ModuleDeprecation, ModuleDeprecations } from '@fundamental-ngx/core/utils';
+import { ModuleDeprecation, ModuleDeprecations } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-deprecated-alerts',

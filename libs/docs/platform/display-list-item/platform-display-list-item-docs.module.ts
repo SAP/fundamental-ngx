@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DragAndDropModule } from '@fundamental-ngx/core/utils';
+import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { DisplayListItemModule, PlatformListModule } from '@fundamental-ngx/platform/list';

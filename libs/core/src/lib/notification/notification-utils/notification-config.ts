@@ -1,4 +1,4 @@
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Configuration for opening a notification with the NotificationService.

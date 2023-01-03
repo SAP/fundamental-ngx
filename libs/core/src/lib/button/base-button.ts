@@ -1,7 +1,7 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export type GlyphPosition = 'before' | 'after';
 

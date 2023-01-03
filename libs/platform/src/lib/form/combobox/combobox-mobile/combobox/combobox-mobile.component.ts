@@ -20,7 +20,7 @@ import {
 } from '@fundamental-ngx/core/mobile-mode';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../../combobox.interface';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fdp-combobox-mobile',

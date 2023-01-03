@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { SelectMobileComponent } from './select-mobile.component';
 
 @NgModule({

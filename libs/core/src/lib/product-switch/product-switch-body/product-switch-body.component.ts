@@ -14,8 +14,8 @@ import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, TAB, UP_ARROW } from
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { Subscription } from 'rxjs';
 
-import { FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { FdDropEvent, RtlService } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 
 import { ProductSwitchItem } from './product-switch.item';
 
@@ -25,7 +25,10 @@ const containerWidthPx = 776;
 @Component({
     selector: 'fd-product-switch-body',
     templateUrl: './product-switch-body.component.html',
-    styleUrls: ['./product-switch-body.component.scss', '../../utils/drag-and-drop/drag-and-drop.scss'],
+    styleUrls: [
+        './product-switch-body.component.scss',
+        '../../../../../cdk/src/lib/utils/drag-and-drop/drag-and-drop.scss'
+    ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

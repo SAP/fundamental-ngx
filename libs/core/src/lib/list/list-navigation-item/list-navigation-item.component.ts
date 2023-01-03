@@ -10,7 +10,7 @@ import {
     Optional
 } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import { FocusableOption } from '@angular/cdk/a11y';
 import { Subject } from 'rxjs';

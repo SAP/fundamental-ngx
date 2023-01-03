@@ -1,5 +1,5 @@
 import { Directive, Input } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export type WizardSize = 'sm' | 'md' | 'lg' | 'xl';
 

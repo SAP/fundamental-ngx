@@ -2,8 +2,8 @@
     "name": "cdk-utils",
     "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
-    "sourceRoot": "libs/cdk/src/lib/utils/src",
-    "prefix": "fd",
+    "sourceRoot": "libs/cdk/src/lib/utils",
+    "prefix": "fx",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:package",

@@ -12,9 +12,9 @@ import {
     Renderer2,
     ViewEncapsulation
 } from '@angular/core';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { Subscription } from 'rxjs';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { NotificationGroupBaseDirective } from '../notification-utils/notification-group-base';
 import { ContentDensityMode, LocalContentDensityMode } from '@fundamental-ngx/core/content-density';
 

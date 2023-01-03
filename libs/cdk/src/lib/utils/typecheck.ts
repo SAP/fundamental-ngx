@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs';
 
 /** @hidden */
-export function isJsObject(o: any): boolean {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function isJsObject(o: any): o is object | Function {
     return o !== null && (typeof o === 'function' || typeof o === 'object');
 }
 
@@ -11,17 +12,17 @@ export function isPresent(obj: any): boolean {
 }
 
 /** @hidden */
-export function isBlank(obj: any): boolean {
+export function isBlank(obj: any): obj is undefined | null {
     return obj === undefined || obj === null;
 }
 
 /** @hidden */
-export function isBoolean(obj: any): boolean {
+export function isBoolean(obj: any): obj is boolean {
     return typeof obj === 'boolean';
 }
 
 /** @hidden */
-export function isNumber(obj: any): boolean {
+export function isNumber(obj: any): obj is number {
     return typeof obj === 'number';
 }
 
@@ -36,7 +37,8 @@ export function isFunction(obj: any): boolean {
 }
 
 /** @hidden */
-export function isType(obj: any): boolean {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function isType(obj: any): obj is Function {
     return isFunction(obj);
 }
 

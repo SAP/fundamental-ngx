@@ -23,7 +23,7 @@ import {
 import { firstValueFrom, Observable, Subscription } from 'rxjs';
 import { NgModel } from '@angular/forms';
 
-import { FocusKeyManagerItemDirective, FocusKeyManagerListDirective, RtlService } from '@fundamental-ngx/core/utils';
+import { FocusKeyManagerItemDirective, FocusKeyManagerListDirective, RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { Pagination } from './pagination.model';
 import { PaginationService } from './pagination.service';

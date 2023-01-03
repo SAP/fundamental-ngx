@@ -5,7 +5,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { MenuModule } from '@fundamental-ngx/core/menu';
-import { DynamicComponentService, PipeModule } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, PipeModule } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 

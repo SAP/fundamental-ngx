@@ -12,9 +12,9 @@ import {
     SkipSelf,
     ViewEncapsulation
 } from '@angular/core';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Subscription } from 'rxjs';
-import { ContentDensityService, CssClassBuilder, applyCssClass } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { FormItemComponent } from '../form-item/form-item.component';
 
 /**

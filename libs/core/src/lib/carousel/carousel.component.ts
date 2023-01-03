@@ -25,7 +25,7 @@ import { Direction } from '@angular/cdk/bidi';
 import { debounceTime, take, takeUntil } from 'rxjs/operators';
 import { Subject, merge } from 'rxjs';
 
-import { resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
+import { resizeObservable, RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
 import { CarouselResourceStringsEN, FdCarouselResourceStrings } from './i18n/carousel-resources';

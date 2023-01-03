@@ -1,5 +1,5 @@
 import { Provider } from '@angular/core';
-import { consumerProviderFactory, DestroyedService } from '@fundamental-ngx/core/utils';
+import { consumerProviderFactory, DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '../services/content-density-observer.service';
 import { ContentDensityObserverSettings } from '../classes/content-density-observer.settings';
 

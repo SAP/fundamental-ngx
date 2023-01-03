@@ -2,7 +2,7 @@ import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntil, tap } from 'rxjs/operators';
 import { BehaviorSubject, filter, ReplaySubject } from 'rxjs';
-import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { DisabledBehavior } from './disabled-behavior.interface';
 import { setDisabledState } from './set-disabled-state';
 import { FN_DISABLED_DIRECTIVE } from './fn-disabled.token';
@@ -16,7 +16,7 @@ import { FnClickedProvider } from '../clicked';
             provide: FN_DISABLED_DIRECTIVE,
             useExisting: DisabledBehaviorDirective
         },
-        DestroyedBehavior,
+        DestroyedService,
         FnClickedProvider
     ]
 })
@@ -40,7 +40,7 @@ export class DisabledBehaviorDirective
 
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
-        private _destroy$: DestroyedBehavior,
+        private _destroy$: DestroyedService,
         private _clicked: FnClickedProvider
     ) {
         super(1);

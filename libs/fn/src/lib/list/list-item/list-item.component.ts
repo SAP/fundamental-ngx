@@ -12,7 +12,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {
-    DestroyedBehavior,
     FnDisabledProvider,
     FnFocusableItemProvider,
     FnReadonlyProvider,
@@ -33,6 +32,7 @@ import { CheckboxContext } from '../list-item-checkbox.directive';
 import { ListComponent } from '../list/list.component';
 import { distinctUntilChanged, map, Observable } from 'rxjs';
 import { BooleanInput, coerceArray } from '@angular/cdk/coercion';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fn-list-item, [fn-list-item]',
@@ -42,7 +42,7 @@ import { BooleanInput, coerceArray } from '@angular/cdk/coercion';
     host: {
         '[class.fn-list__item]': 'true'
     },
-    providers: [DestroyedBehavior, FnDisabledProvider, FnReadonlyProvider, FnFocusableItemProvider]
+    providers: [DestroyedService, FnDisabledProvider, FnReadonlyProvider, FnFocusableItemProvider]
 })
 export class ListItemComponent {
     @Input()
@@ -72,7 +72,7 @@ export class ListItemComponent {
 
     constructor(
         private _cd: ChangeDetectorRef,
-        private _destroy$: DestroyedBehavior,
+        private _destroy$: DestroyedService,
         @Optional() private _selectionService: SelectionService,
         @Optional() @Inject(SelectableItemToken) private _selectableItem: SelectableItemToken,
         @Optional() @Inject(ListComponent) private _listComponent: ListComponent | null,

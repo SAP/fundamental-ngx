@@ -19,10 +19,10 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FD_CHECKBOX_VALUES_DEFAULT, FdCheckboxValues } from './fd-checkbox-values.interface';
-import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/core/utils';
+import { LIST_ITEM_COMPONENT, ListItemInterface, Nullable } from '@fundamental-ngx/cdk/utils';
 import equal from 'fast-deep-equal';
 import { Subscription } from 'rxjs';
-import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import {
     ContentDensityMode,

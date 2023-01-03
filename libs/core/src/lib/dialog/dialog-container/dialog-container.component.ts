@@ -11,7 +11,7 @@ import {
     ViewContainerRef
 } from '@angular/core';
 
-import { applyCssClass, CssClassBuilder, DynamicComponentContainer } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, DynamicComponentContainer } from '@fundamental-ngx/cdk/utils';
 
 import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogConfig } from '../utils/dialog-config.class';
