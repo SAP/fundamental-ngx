@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     templateUrl: './default-example.component.html',
     styles: [
         `
-            [fnSelectableList] {
+            [fdSelectableList] {
                 border: 1px dashed #dedede;
             }
 

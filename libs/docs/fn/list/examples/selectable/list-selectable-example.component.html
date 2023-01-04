@@ -1,9 +1,9 @@
-<ul fn-list fnSelectableList #fnListSelectable="fnSelectableList" [(selected)]="selectedItems" multiple toggle>
+<ul fn-list fdSelectableList #fnListSelectable="fdSelectableList" [(selected)]="selectedItems" multiple toggle>
     <li fn-list-group-header position="end">Selected items: {{ selectedItems.length }}</li>
     <li fn-list-item fnSelectableItem value="1">
         <ng-template fnListItemTitle> Selectable item with everything default</ng-template>
     </li>
-    <li fn-list-item [fnSelectableItem]="false">
+    <li fn-list-item [fdSelectableItem]="false">
         <ng-template fnListItemTitle> Selectable item, but is excluded from selection</ng-template>
     </li>
     <li fn-list-item fnSelectableItem value="3">
@@ -15,7 +15,7 @@
         </fn-checkbox>
         <ng-template fnListItemTitle> Selectable item and has checkbox</ng-template>
     </li>
-    <li fn-list-item fnSelectableItem value="4" #item="fnSelectableItem">
+    <li fn-list-item fdSelectableItem value="4" #item="fdSelectableItem">
         <ng-template fnListItemTitle> Selectable item and has button for toggle</ng-template>
         <button
             *fnListItemActions
