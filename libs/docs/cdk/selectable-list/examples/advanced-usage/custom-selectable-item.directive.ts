@@ -1,4 +1,4 @@
-import { FN_SELECTABLE_ITEM_PROVIDER, SelectableItemToken } from '@fundamental-ngx/fn/cdk';
+import { FN_SELECTABLE_ITEM_PROVIDER, SelectableItemToken } from '@fundamental-ngx/cdk/utils';
 import { Directive, ElementRef, forwardRef } from '@angular/core';
 
 @Directive({
@@ -10,7 +10,7 @@ import { Directive, ElementRef, forwardRef } from '@angular/core';
         }
     ]
 })
-export class CustomSelectableItemDirective implements Partial<SelectableItemToken<string>> {
+export class CustomSelectableItemDirective implements Partial<SelectableItemToken<HTMLElement, string>> {
     private _isSelected = false;
 
     constructor(private _elementRef: ElementRef<HTMLElement>) {}

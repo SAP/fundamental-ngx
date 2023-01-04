@@ -89,24 +89,6 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('@fundamental-ngx/docs/fn/object-status').then((m) => m.ObjectStatusDocsModule)
             },
-            // {
-            //     path: 'selectable-list',
-            //     loadChildren: () =>
-            //         import('@fundamental-ngx/docs/fn/selectable-list').then((m) => m.SelectableListDocsModule)
-            // },
-            // {
-            //     path: 'focusable-list',
-            //     loadChildren: () =>
-            //         import('@fundamental-ngx/docs/fn/focusable-list').then((m) => m.FocusableListDocsModule)
-            // },
-            // {
-            //     path: 'disabled',
-            //     loadChildren: () => import('@fundamental-ngx/docs/fn/disabled').then((m) => m.FnDisabledDocsModule)
-            // },
-            // {
-            //     path: 'clicked',
-            //     loadChildren: () => import('@fundamental-ngx/docs/fn/clicked').then((m) => m.FnClickedDocsModule)
-            // },
             {
                 path: 'message-toast',
                 loadChildren: () =>

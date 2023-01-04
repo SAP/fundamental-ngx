@@ -6,7 +6,7 @@ import { InputHeaderComponent } from './input-header/input-header.component';
 import { InputDocsComponent } from './input-docs.component';
 import { InputExampleComponent, InputStateExampleComponent } from './examples/input-examples.component';
 import { InputModule } from '@fundamental-ngx/fn/input';
-import { DisabledBehaviorModule, ReadonlyBehaviorModule } from '@fundamental-ngx/fn/cdk';
+import { DisabledBehaviorModule, ReadonlyBehaviorModule } from '@fundamental-ngx/cdk/utils';
 import { InputFormExampleComponent } from './examples/input-form-example.component';
 
 const routes: Routes = [
