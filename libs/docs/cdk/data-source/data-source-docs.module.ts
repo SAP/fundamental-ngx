@@ -6,6 +6,7 @@ import { DataSourceHeaderComponent } from './data-source-header/data-source-head
 import { DataSourceDocsComponent } from './data-source-docs.component';
 import { examples } from './examples';
 import { DataSourceModule } from '@fundamental-ngx/cdk/data-source';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 const routes: Routes = [
     {
@@ -19,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, DataSourceModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, DataSourceModule, SelectModule],
     exports: [RouterModule],
     declarations: [examples, DataSourceDocsComponent, DataSourceHeaderComponent],
     providers: [currentComponentProvider('data-source')]

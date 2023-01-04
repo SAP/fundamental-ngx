@@ -18,7 +18,7 @@ import {
     FN_DISABLED_DIRECTIVE,
     FN_READONLY_DIRECTIVE,
     ReadonlyBehavior
-} from '@fundamental-ngx/fn/cdk';
+} from '@fundamental-ngx/cdk/utils';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({

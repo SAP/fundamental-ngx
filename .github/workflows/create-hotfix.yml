@@ -55,18 +55,18 @@ jobs:
               uses: ./.github/actions/parallel-commands
               with:
                   parallel-commands: |
-                      npx nx run-many --target=lint --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter,cx --parallel=2
+                      npx nx run-many --target=lint --projects=i18n,cdk,core,platform,fn,moment-adapter,datetime-adapter,cx --parallel=2
                       npx nx run-many --target=build-umbrella --all --parallel=1
 
             - name: Pack libraries
-              run: npx nx run-many --target=prepare --projects=i18n,core,platform,fn,moment-adapter,datetime-adapter,cx --parallel=3 --projectVersion=${{ steps.bumpVersion.outputs.newVersion }} --pack
+              run: npx nx run-many --target=prepare --projects=i18n,cdk,core,platform,fn,moment-adapter,datetime-adapter,cx --parallel=3 --projectVersion=${{ steps.bumpVersion.outputs.newVersion }} --pack
               env:
                   NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
             - name: Publish packages
               uses: ./.github/actions/npm-publish
               with:
-                  projects: '["core", "i18n", "platform", "fn", "moment-adapter", "datetime-adapter", "cx"]'
+                  projects: '["cdk", "core", "i18n", "platform", "fn", "moment-adapter", "datetime-adapter", "cx"]'
                   token: ${{ secrets.NPM_TOKEN }}
                   releaseTag: ${{ steps.bumpVersion.outputs.releaseTag }}
 

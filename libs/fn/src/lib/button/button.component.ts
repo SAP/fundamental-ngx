@@ -11,7 +11,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { FnClickedProvider, SelectableItemToken, SelectComponentRootToken } from '@fundamental-ngx/fn/cdk';
+import { FnClickedProvider, SelectableItemToken, SelectComponentRootToken } from '@fundamental-ngx/cdk/utils';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
 import { Observable } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -41,7 +41,7 @@ export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' |
     },
     providers: [{ provide: SelectableItemToken, useExisting: ButtonComponent }, FnClickedProvider]
 })
-export class ButtonComponent implements SelectableItemToken<string> {
+export class ButtonComponent implements SelectableItemToken<HTMLButtonElement | HTMLAnchorElement, string> {
     /** The type of the button. Types include:
      * '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative'.
      * Leave empty for default (Standard button).'

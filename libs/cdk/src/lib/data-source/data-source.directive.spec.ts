@@ -5,7 +5,7 @@ import { BaseDataProvider } from './base/base-data-provider.class';
 import { BaseDataSource } from './base/base-data-source.class';
 import { DataSourceDirective } from './data-source.directive';
 import { isDataSource } from './helpers/is-datasource';
-import { DataSource, DataSourceProvider } from './models/data-source';
+import { DataSource, DataSourceParser, DataSourceProvider } from './models/data-source';
 
 export const dataProviderData = [1, 2, 3, 4, 5];
 export const arrayData = [6, 7, 8, 9];
@@ -31,26 +31,28 @@ export class MockObservableDataSource extends BaseDataSource<number> {
     }
 }
 
-export function mockDataSourceParser(source: DataSource): DataSourceProvider | undefined {
-    if (isDataSource(source)) {
-        return source;
-    }
+export class mockDataSourceParser implements DataSourceParser {
+    parse(source: DataSource): DataSourceProvider | undefined {
+        if (isDataSource(source)) {
+            return source;
+        }
 
-    if (Array.isArray(source)) {
-        return new MockArrayDataSource();
-    }
+        if (Array.isArray(source)) {
+            return new MockArrayDataSource();
+        }
 
-    if (isObservable(source)) {
-        return new MockObservableDataSource();
-    }
+        if (isObservable(source)) {
+            return new MockObservableDataSource();
+        }
 
-    return undefined;
+        return undefined;
+    }
 }
 
 describe('DataSourceDirective', () => {
     let directive: DataSourceDirective<any>;
     beforeEach(() => {
-        directive = new DataSourceDirective(new DestroyedService(), mockDataSourceParser);
+        directive = new DataSourceDirective(new DestroyedService(), new mockDataSourceParser());
     });
     it('should create an instance', () => {
         expect(directive).toBeTruthy();

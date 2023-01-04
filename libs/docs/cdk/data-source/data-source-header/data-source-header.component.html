@@ -2,10 +2,22 @@
     <header>Data Source</header>
 
     <description>
-        <!-- TODO: description -->
+        <p>
+            <code>DataSourceDirective</code> is a standalone directive that includes most common logic when working with
+            the data sources.
+        </p>
+        <p>
+            It handles opening and closing the data stream with the help of the class that implements
+            <code>DataSourceParser</code> interface.
+        </p>
+        <p>This class can be provided via <code>FD_DATA_SOURCE_TRANSFORMER</code> Injection Token.</p>
+        <p>
+            Additionaly, it will emit events when the data inside data provider has been changed, or the data source
+            object has been changed completely.
+        </p>
     </description>
 
-    <import module="DataSourceModule" subPackage="data-source"></import>
+    <import module="DataSourceDirective" subPackage="data-source"></import>
 
     <fd-header-tabs></fd-header-tabs>
 </fd-doc-page>

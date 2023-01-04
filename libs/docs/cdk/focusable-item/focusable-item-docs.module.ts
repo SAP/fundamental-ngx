@@ -5,7 +5,7 @@ import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
 import { FocusableItemHeaderComponent } from './focusable-item-header/focusable-item-header.component';
 import { FocusableItemDocsComponent } from './focusable-item-docs.component';
 import { examples } from './examples';
-import { FocusableItemModule } from '@fundamental-ngx/cdk/focusable-item';
+import { FocusableItemModule } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

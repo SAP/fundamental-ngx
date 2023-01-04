@@ -1,6 +1,6 @@
 import { Directive, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { isDataSource } from './helpers/is-datasource';
 import { DataSource, DataSourceParser, DataSourceProvider } from './models/data-source';
@@ -45,13 +45,20 @@ export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = Data
     /**
      * Emits when the data source object has been changed.
      */
-    readonly dataSourceChanged = new Subject<void>();
+    @Output()
+    readonly dataSourceChanged = new EventEmitter<void>();
 
     /**
      * Event emitted when datasource content has been changed.
      */
     @Output()
-    dataChanged = new EventEmitter<T[]>();
+    readonly dataChanged = new EventEmitter<T[]>();
+
+    /**
+     * Event emitted when data provider loading state has been changed.
+     */
+    @Output()
+    readonly isLoading = new EventEmitter<boolean>();
 
     /** @hidden */
     constructor(
@@ -77,6 +84,13 @@ export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = Data
 
         this._dsSubscription.add(
             this.dataSourceProvider
+                .onDataLoading()
+                .pipe(takeUntil(this._destroyed$))
+                .subscribe((isLoading) => this.isLoading.emit(isLoading))
+        );
+
+        this._dsSubscription.add(
+            this.dataSourceProvider
                 .open()
                 .pipe(takeUntil(this._destroyed$))
                 .subscribe((data) => {
@@ -88,6 +102,6 @@ export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = Data
 
     /** @Hidden */
     private _toDataStream(source: DataSource<T>): P | undefined {
-        return this._dataSourceTransformer ? this._dataSourceTransformer(source) : undefined;
+        return this._dataSourceTransformer ? this._dataSourceTransformer.parse(source) : undefined;
     }
 }

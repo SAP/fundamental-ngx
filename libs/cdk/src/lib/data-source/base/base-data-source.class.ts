@@ -4,10 +4,14 @@ import { DataSourceProvider } from '../models/data-source';
 import { BaseDataProvider } from './base-data-provider.class';
 
 export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
-    /** @hidden */
+    /**
+     * Max limit of items to be returned.
+     */
     static readonly MaxLimit = 5;
 
-    /** @hidden */
+    /**
+     * Whether to enable limit of max items.
+     */
     limitless = false;
 
     /** @hidden */
@@ -22,6 +26,9 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
     protected _dataLoading = false;
 
     /** @hidden */
+    protected readonly _dataLoading$ = new BehaviorSubject<boolean>(false);
+
+    /** @hidden */
     get isDataLoading(): boolean {
         return this._dataLoading;
     }
@@ -31,10 +38,16 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
         this.match('*');
     }
 
-    /** @hidden */
+    /**
+     * Searches through the data source with defined parameters.
+     * @param predicate Search query.
+     * @param start start index.
+     * @param end end index.
+     */
     match(predicate: string | Map<string, string> = new Map<string, string>(), start = 0, end = Infinity): void {
         this._onDataRequested$.next();
         this._dataLoading = true;
+        this._dataLoading$.next(true);
         const searchParam = new Map();
 
         if (typeof predicate === 'string') {
@@ -56,6 +69,7 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
                 next: (result: T[]) => {
                     this._onDataReceived$.next();
                     this._dataLoading = false;
+                    this._dataLoading$.next(false);
                     this.dataChanges.next(result);
                 },
                 error: () => {
@@ -65,24 +79,43 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
             });
     }
 
-    /** @hidden */
+    /**
+     * Opens the stream
+     * @returns Observable of data source objects.
+     */
     open(): Observable<T[]> {
         return this.dataChanges.asObservable().pipe(takeUntil(this._onDestroy$));
     }
 
-    /** @hidden */
+    /**
+     * Closes the stream
+     */
     close(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
-    /** @hidden */
+    /**
+     * Emitted when new data has been requested.
+     * @returns Observable
+     */
     onDataRequested(): Observable<void> {
         return this._onDataRequested$.asObservable();
     }
 
-    /** @hidden */
+    /**
+     * Emitted when new data has been received.
+     * @returns Observable
+     */
     onDataReceived(): Observable<void> {
         return this._onDataReceived$.asObservable();
+    }
+
+    /**
+     * Emitted when loading state has been changed.
+     * @returns Observable.
+     */
+    onDataLoading(): Observable<boolean> {
+        return this._dataLoading$.asObservable();
     }
 }
