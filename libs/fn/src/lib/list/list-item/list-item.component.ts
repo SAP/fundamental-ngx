@@ -17,7 +17,7 @@ import {
     FnReadonlyProvider,
     SelectableItemToken,
     SelectionService
-} from '@fundamental-ngx/fn/cdk';
+} from '@fundamental-ngx/cdk/utils';
 import {
     FN_LIST_ACTIONS,
     FN_LIST_BYLINE,
@@ -73,7 +73,7 @@ export class ListItemComponent {
     constructor(
         private _cd: ChangeDetectorRef,
         private _destroy$: DestroyedService,
-        @Optional() private _selectionService: SelectionService,
+        @Optional() private _selectionService: SelectionService<HTMLElement>,
         @Optional() @Inject(SelectableItemToken) private _selectableItem: SelectableItemToken,
         @Optional() @Inject(ListComponent) private _listComponent: ListComponent | null,
         private _elementRef: ElementRef<HTMLElement>,

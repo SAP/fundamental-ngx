@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './button.component';
 import { FormsModule } from '@angular/forms';
 import { IconModule } from '@fundamental-ngx/core/icon';
-import { DisabledBehaviorModule, ReadonlyBehaviorModule } from '@fundamental-ngx/fn/cdk';
+import { DisabledBehaviorModule, ReadonlyBehaviorModule } from '@fundamental-ngx/cdk/utils';
 
 @NgModule({
     declarations: [ButtonComponent],

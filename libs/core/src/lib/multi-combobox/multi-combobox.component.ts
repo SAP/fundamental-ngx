@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import {
     DataSourceDirective,
+    DataSourceParser,
     FD_DATA_SOURCE_TRANSFORMER,
     isDataSource,
     MatchingBy
@@ -48,26 +49,26 @@ import { flattenGroups, getSelectItemByInputValue, getTokenIndexByIdlOrValue } f
 
 export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory: () => 12 });
 
-/**
- * Transforms plain array or observable into DataSource class.
- * @param source
- */
-export function toMultiComboboxDataStream<T>(
-    source: FdMultiComboboxAcceptableDataSource<T>
-): FdMultiComboBoxDataSource<T> | undefined {
-    if (isDataSource(source)) {
-        return source as FdMultiComboBoxDataSource<T>;
-    }
+export class MultiComboboxDataSourceParser<T> implements DataSourceParser<T, FdMultiComboBoxDataSource<T>> {
+    /**
+     * Transforms plain array or observable into DataSource class.
+     * @param source
+     */
+    parse(source: FdMultiComboboxAcceptableDataSource<T>): FdMultiComboBoxDataSource<T> | undefined {
+        if (isDataSource(source)) {
+            return source as FdMultiComboBoxDataSource<T>;
+        }
 
-    if (Array.isArray(source)) {
-        return new ArrayMultiComboBoxDataSource<T>(source);
-    }
+        if (Array.isArray(source)) {
+            return new ArrayMultiComboBoxDataSource<T>(source);
+        }
 
-    if (isObservable(source)) {
-        return new ObservableMultiComboBoxDataSource<T>(source);
-    }
+        if (isObservable(source)) {
+            return new ObservableMultiComboBoxDataSource<T>(source);
+        }
 
-    return undefined;
+        return undefined;
+    }
 }
 
 @Component({
@@ -94,7 +95,7 @@ export function toMultiComboboxDataStream<T>(
         contentDensityObserverProviders(),
         {
             provide: FD_DATA_SOURCE_TRANSFORMER,
-            useValue: toMultiComboboxDataStream
+            useClass: MultiComboboxDataSourceParser
         },
         {
             provide: MULTI_COMBOBOX_COMPONENT,

@@ -1,1 +1,8 @@
-<fd-data-source></fd-data-source>
+<p>Current sata source:</p>
+<p>{{ currentDataSource }}</p>
+<p>Current data:</p>
+<p>{{ isLoading ? 'Loading...' : currentData }}</p>
+
+<fd-select placeholder="Select datasource" [(value)]="currentDataSource" (valueChange)="changeDataSource($event)">
+    <li fd-option *ngFor="let option of dataSourceOptions" [value]="option">{{ option }}</li>
+</fd-select>

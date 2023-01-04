@@ -32,6 +32,24 @@ export const ROUTES: Routes = [
                 path: 'focusable-item',
                 loadChildren: () =>
                     import('@fundamental-ngx/docs/cdk/focusable-item').then((m) => m.FocusableItemDocsModule)
+            },
+            {
+                path: 'selectable-list',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/cdk/selectable-list').then((m) => m.SelectableListDocsModule)
+            },
+            {
+                path: 'focusable-list',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/cdk/focusable-list').then((m) => m.FocusableListDocsModule)
+            },
+            {
+                path: 'disabled',
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/disabled').then((m) => m.FnDisabledDocsModule)
+            },
+            {
+                path: 'clicked',
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/clicked').then((m) => m.FnClickedDocsModule)
             }
         ]
     }

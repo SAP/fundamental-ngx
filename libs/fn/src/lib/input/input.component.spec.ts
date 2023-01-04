@@ -1,5 +1,5 @@
 import { FormsModule } from '@angular/forms';
-import { DisabledBehaviorModule, ReadonlyBehaviorModule } from '@fundamental-ngx/fn/cdk';
+import { DisabledBehaviorModule, ReadonlyBehaviorModule } from '@fundamental-ngx/cdk/utils';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 

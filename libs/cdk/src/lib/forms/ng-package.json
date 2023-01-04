@@ -1,7 +1,17 @@
 {
     "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
-    "dest": "../../../../../dist/libs/cdk/forms",
+    "dest": "../../../../../dist/libs/cdk/data-source",
+    "deleteDestPath": true,
     "lib": {
         "entryFile": "./index.ts"
-    }
+    },
+    "allowedNonPeerDependencies": [
+        "@sap-theming/theming-base-content",
+        "focus-trap",
+        "fundamental-styles",
+        "lodash-es",
+        "compare-versions",
+        "@fundamental-ngx/i18n",
+        "fast-deep-equal"
+    ]
 }

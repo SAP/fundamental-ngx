@@ -1,0 +1,18 @@
+{
+    "name": "docs-fn-selectable-list",
+    "sourceRoot": "libs/docs/fn/selectable-list",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e-noop": {
+            "executor": "@fundamental-ngx/wdio:e2e-test",
+            "options": {
+                "e2eTsConfig": "libs/docs/fn/selectable-list/e2e/tsconfig.json",
+                "baseUrl": "http://localhost:4200",
+                "configFile": "libs/docs/fn/selectable-list/wdio.conf.js"
+            },
+            "outputs": ["{workspaceRoot}/allure-results/docs-fn-selectable-list"]
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

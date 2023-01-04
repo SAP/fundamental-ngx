@@ -277,7 +277,7 @@ export class RatingIndicatorComponent
     }
 
     /** @hidden */
-    elementRef(): ElementRef<RatingIndicatorComponent> {
+    elementRef(): ElementRef<RatingIndicatorComponent & HTMLElement> {
         return this._elementRef;
     }
 

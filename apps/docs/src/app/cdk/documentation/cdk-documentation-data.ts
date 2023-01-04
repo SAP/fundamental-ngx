@@ -7,7 +7,7 @@ export const guides: SectionInterfaceContent[] = [
     { url: 'cdk/i18n', name: 'I18n' }
 ];
 
-export const components: SectionInterfaceContent[] = [
+export const directives: SectionInterfaceContent[] = [
     {
         url: 'cdk/forms',
         name: 'Forms'
@@ -26,13 +26,32 @@ export const components: SectionInterfaceContent[] = [
     }
 ];
 
+export const utilities: SectionInterfaceContent[] = [
+    {
+        url: 'cdk/typecheck',
+        name: 'Type check'
+    },
+    {
+        url: 'cdk/focus-trap',
+        name: 'Focus trap'
+    },
+    {
+        url: 'cdk/tabbable',
+        name: 'Tabbable element'
+    }
+];
+
 export const sections: SectionInterface[] = [
     {
         header: 'Guides',
         content: guides
     },
     {
-        header: 'Components',
-        content: components
+        header: 'Directives',
+        content: directives
+    },
+    {
+        header: 'Utilities',
+        content: utilities
     }
 ];

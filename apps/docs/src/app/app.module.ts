@@ -10,7 +10,7 @@ import { ThemingModule } from '@fundamental-ngx/core/theming';
 import { AppComponent } from './app.component';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 import { BehaviorSubject } from 'rxjs';
-import { ClickedBehaviorModule } from '@fundamental-ngx/fn/cdk';
+import { ClickedBehaviorModule } from '@fundamental-ngx/cdk/utils';
 import { SharedDocumentationModule } from '@fundamental-ngx/docs/shared';
 import packageJson from '../../../../package.json';
 

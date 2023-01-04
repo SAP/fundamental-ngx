@@ -6,10 +6,11 @@ export interface DataSourceProvider<T = any> {
     isDataLoading: boolean;
     onDataRequested(): Observable<void>;
     onDataReceived(): Observable<void>;
+    onDataLoading(): Observable<boolean>;
 }
 
 export type DataSource<T = any> = DataSourceProvider<T> | Observable<T[]> | T[];
 
-export type DataSourceParser<T = any, P extends DataSourceProvider = DataSourceProvider<T>> = (
-    source: DataSource<T>
-) => P | undefined;
+export interface DataSourceParser<T = any, P extends DataSourceProvider = DataSourceProvider<T>> {
+    parse(source: DataSource<T>): P | undefined;
+}

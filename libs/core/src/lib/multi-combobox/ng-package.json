@@ -1,6 +1,6 @@
 {
     "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
-    "dest": "../../../../../dist/libs/core/src/lib/multi-combobox",
+    "dest": "../../../../../dist/libs/core/multi-combobox",
     "lib": {
         "entryFile": "./index.ts"
     }

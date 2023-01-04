@@ -2,7 +2,7 @@ import 'focus-visible';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputComponent } from './input.component';
-import { DisabledBehaviorModule, ReadonlyBehaviorModule } from '@fundamental-ngx/fn/cdk';
+import { DisabledBehaviorModule, ReadonlyBehaviorModule } from '@fundamental-ngx/cdk/utils';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({

@@ -14,7 +14,7 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { FnClickedProvider } from '@fundamental-ngx/fn/cdk';
+import { FnClickedProvider } from '@fundamental-ngx/cdk/utils';
 import { Subject, takeUntil } from 'rxjs';
 import { Select } from '../select.interface';
 import { FN_SELECT_PROVIDER } from '../select.token';
