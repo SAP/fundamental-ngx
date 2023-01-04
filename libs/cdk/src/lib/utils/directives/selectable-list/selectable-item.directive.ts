@@ -21,8 +21,8 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
         FnClickedProvider
     ]
 })
-export class SelectableItemDirective<ValueType extends Element = HTMLElement>
-    implements SelectableItemToken<ValueType>
+export class SelectableItemDirective<ElementType extends Element = HTMLElement, ValueType = any>
+    implements SelectableItemToken<ElementType, ValueType>
 {
     /** @hidden */
     @Input()
@@ -38,14 +38,14 @@ export class SelectableItemDirective<ValueType extends Element = HTMLElement>
 
     /** @hidden */
     @Input()
-    set fnSelectableItem(value: BooleanInput) {
+    set fdSelectableItem(value: BooleanInput) {
         const isSelectable = coerceBooleanProperty(value);
         if (isSelectable !== this._selectable) {
             this._selectable = isSelectable;
         }
     }
 
-    get fnSelectableItem(): boolean {
+    get fdSelectableItem(): boolean {
         let selectable = this._selectable;
         if (typeof this.provider?.fnSelectableItem !== 'undefined') {
             selectable = this.provider.fnSelectableItem;
@@ -70,11 +70,13 @@ export class SelectableItemDirective<ValueType extends Element = HTMLElement>
 
     /** @hidden */
     constructor(
-        @Optional() @Inject(FN_SELECTABLE_ITEM_PROVIDER) private provider: Partial<SelectableItemToken<ValueType>>,
+        @Optional()
+        @Inject(FN_SELECTABLE_ITEM_PROVIDER)
+        private provider: Partial<SelectableItemToken<ElementType, ValueType>>,
         private disabled$: FnDisabledProvider,
         private readonly$: FnReadonlyProvider,
-        private selectionService: SelectionService<ValueType>,
-        private _elementRef: ElementRef<ValueType>,
+        private selectionService: SelectionService<ElementType, ValueType>,
+        private _elementRef: ElementRef<ElementType>,
         private _cd: ChangeDetectorRef,
         _clicked: FnClickedProvider
     ) {
@@ -108,7 +110,7 @@ export class SelectableItemDirective<ValueType extends Element = HTMLElement>
     }
 
     /** @hidden */
-    elementRef(): ElementRef<ValueType> {
+    elementRef(): ElementRef<ElementType> {
         return this._elementRef;
     }
 
