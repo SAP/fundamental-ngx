@@ -34,7 +34,7 @@
                 target="_blank"
                 fd-link
                 [attr.title]="authorTitle"
-                [attr.href]="authorLink | safe: 'url'"
+                [attr.href]="authorLink | safe : 'url'"
                 [emphasized]="true"
             >
                 <ng-container *ngTemplateOutlet="authorTitleTemplate"></ng-container>
@@ -49,11 +49,12 @@
 <ng-template #feedContent let-param>
     <ng-container *ngTemplateOutlet="param"></ng-container>
     <span>
-        {{ isCollapsed ? (text | truncate: maxChars) : text }}
+        {{ isCollapsed ? (text | truncate : maxChars) : text }}
     </span>
     <a
         fd-link
         class="fd-feed-list__link--more"
+        tabindex="0"
         *ngIf="!isRichText && hasMore"
         (click)="toggleTextView()"
         [innerText]="

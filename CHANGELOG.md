@@ -1,3 +1,12 @@
+## [0.38.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.38.2...v0.38.3-rc.0) (2023-01-02)
+
+
+### Bug Fixes
+
+* **core:** feed list item more el tabindex ([#9158](https://github.com/SAP/fundamental-ngx/issues/9158)) ([4a17a2b](https://github.com/SAP/fundamental-ngx/commit/4a17a2b4e5813bec9badcec531f2b307add7029a))
+
+
+
 ## [0.38.2](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.16...v0.38.2) (2022-12-28)
 
 
