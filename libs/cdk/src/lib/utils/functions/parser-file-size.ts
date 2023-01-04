@@ -17,11 +17,14 @@ export function parserFileSize(fileSize: string): number {
         const unit = sizes[1].replace(/ +/g, '').toUpperCase();
         const unitSize = fileSizeMap.get(unit);
 
-        if (isNaN(size) || !unitSize) {
+        if (isNaN(size)) {
             throw new Error('FileSizeError - Invalid File size please check.');
         }
         if (unit === 'B' || unit === 'BYTE' || unit === 'BYTES') {
             return size;
+        }
+        if (!unitSize) {
+            throw new Error('FileSizeError - Invalid File size please check.');
         } else {
             return unitSize * size;
         }

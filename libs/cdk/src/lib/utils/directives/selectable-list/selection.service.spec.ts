@@ -21,7 +21,7 @@ import { SelectComponentRootToken } from './select-component-root.token';
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[testDirective]'
 })
-class TestDirective implements SelectableItemToken<string> {
+class TestDirective implements SelectableItemToken<HTMLElement, string> {
     @Input('testDirective') value!: string;
     selected!: boolean;
 
@@ -65,7 +65,7 @@ class HostComponent implements SelectComponentRootToken<string>, AfterViewInit {
     selectedChange = new Subject<string | string[]>();
     @ViewChildren(TestDirective) items!: QueryList<TestDirective>;
 
-    constructor(public readonly selectionService: SelectionService<string>) {
+    constructor(public readonly selectionService: SelectionService<HTMLElement, string>) {
         selectionService.registerRootComponent(this);
         selectionService.setValue(this.value);
     }
@@ -81,7 +81,7 @@ class HostComponent implements SelectComponentRootToken<string>, AfterViewInit {
 
 describe('SelectionService', () => {
     let component: HostComponent;
-    let selectionService: SelectionService;
+    let selectionService: SelectionService<HTMLElement, string>;
     let fixture: ComponentFixture<HostComponent>;
 
     beforeEach(async () => {

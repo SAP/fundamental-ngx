@@ -283,7 +283,7 @@ function getProjectTag(schema: SapComponentSchema): string {
         case 'cx':
             return 'cx';
         case 'cdk':
-            return 'fd';
+            return 'fdk';
         default:
             throw new SchematicsException(`Could not resolve project type from the given value: "${schema.project}"`);
     }
