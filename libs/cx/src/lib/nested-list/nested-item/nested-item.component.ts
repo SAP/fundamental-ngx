@@ -215,12 +215,10 @@ export class NestedItemComponent implements AfterContentInit, NestedItemInterfac
 
     /** Method that focuses link item*/
     focus(): void {
-        if (!this.display) {
-            if (this.contentItem) {
-                this.contentItem.focus();
-            } else if (this.linkItem) {
-                this.linkItem.focus();
-            }
+        if (this.contentItem) {
+            this.contentItem.focus();
+        } else if (this.linkItem) {
+            this.linkItem.focus();
         }
     }
 
