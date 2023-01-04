@@ -1,41 +1,37 @@
 {
     "name": "cdk-utils",
-    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/cdk/src/lib/utils",
     "prefix": "fx",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
-            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["{workspaceRoot}/dist/libs/cdk/utils"],
             "options": {
-                "project": "libs/cdk/src/lib/utils/ng-package.json"
+                "tsConfig": "libs/cdk/src/lib/utils/tsconfig.lib.json",
+                "project": "libs/cdk/src/lib/utils/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
             },
             "configurations": {
                 "production": {
                     "tsConfig": "libs/cdk/src/lib/utils/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/cdk/src/lib/utils/tsconfig.lib.json"
                 }
-            },
-            "defaultConfiguration": "production"
+            }
         },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {
+                "main": "libs/cdk/src/lib/utils/test.ts",
                 "tsConfig": "libs/cdk/src/lib/utils/tsconfig.spec.json",
-                "karmaConfig": "libs/cdk/src/lib/utils/karma.conf.js",
-                "polyfills": ["zone.js", "zone.js/testing"]
+                "karmaConfig": "libs/cdk/src/lib/utils/karma.conf.js"
             }
         },
         "lint": {
             "executor": "@nrwl/linter:eslint",
-            "outputs": ["{options.outputFile}"],
             "options": {
                 "lintFilePatterns": ["libs/cdk/src/lib/utils/**/*.ts", "libs/cdk/src/lib/utils/**/*.html"]
             }
         }
     },
-    "tags": ["scope:fd", "type:lib"]
+    "tags": ["type:lib", "scope:fd"]
 }
