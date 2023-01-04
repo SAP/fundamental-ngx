@@ -1,3 +1,12 @@
+## [0.38.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.38.3-rc.0...v0.38.3-rc.1) (2023-01-04)
+
+
+### Bug Fixes
+
+* **core:** remove timeline node tab index ([#9159](https://github.com/SAP/fundamental-ngx/issues/9159)) ([e7d4673](https://github.com/SAP/fundamental-ngx/commit/e7d46732d5eaa0fd27259ec0c31a9206095cc553))
+
+
+
 ## [0.38.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.38.2...v0.38.3-rc.0) (2023-01-02)
 
 
