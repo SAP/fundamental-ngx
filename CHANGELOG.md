@@ -1,3 +1,12 @@
+## [0.38.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.38.3-rc.1...v0.38.3-rc.2) (2023-01-04)
+
+
+### Bug Fixes
+
+* **core:** dynamic footer z-index must be higher than that of fd-scrollbar ([#9156](https://github.com/SAP/fundamental-ngx/issues/9156)) ([97afb7c](https://github.com/SAP/fundamental-ngx/commit/97afb7c41b489589e8dfd7dfda547a24ab81268e))
+
+
+
 ## [0.38.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.38.3-rc.0...v0.38.3-rc.1) (2023-01-04)
 
 
