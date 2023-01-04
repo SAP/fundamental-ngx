@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Self } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/fn/button';
-import { SelectableItemToken } from '@fundamental-ngx/fn/cdk';
+import { SelectableItemToken } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -12,7 +12,7 @@ import { SelectableItemToken } from '@fundamental-ngx/fn/cdk';
         }
     ]
 })
-export class CustomButtonDirective implements SelectableItemToken<string> {
+export class CustomButtonDirective implements SelectableItemToken<HTMLElement, string> {
     clicked;
 
     constructor(@Self() private buttonComponent: ButtonComponent) {

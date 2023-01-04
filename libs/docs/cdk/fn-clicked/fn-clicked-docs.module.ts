@@ -5,7 +5,7 @@ import { FnClickedDocsComponent } from './fn-clicked-docs.component';
 import { FnClickedHeaderComponent } from './fn-clicked-header/fn-clicked-header.component';
 import { currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { BasicExampleComponent } from './examples/basic-example/basic-example.component';
-import { ClickedBehaviorModule, FocusableItemModule } from '@fundamental-ngx/fn/cdk';
+import { ClickedBehaviorModule, FocusableItemModule } from '@fundamental-ngx/cdk/utils';
 import { ProviderExampleComponent } from './examples/provider-example/provider-example.component';
 import { UsageWithProviderDirective } from './examples/provider-example/usage-with-provider.directive';
 

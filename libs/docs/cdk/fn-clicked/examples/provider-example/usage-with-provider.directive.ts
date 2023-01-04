@@ -1,5 +1,5 @@
 import { Directive, Output } from '@angular/core';
-import { FnClickedProvider } from '@fundamental-ngx/fn/cdk';
+import { FnClickedProvider } from '@fundamental-ngx/cdk/utils';
 import { Observable } from 'rxjs';
 
 @Directive({

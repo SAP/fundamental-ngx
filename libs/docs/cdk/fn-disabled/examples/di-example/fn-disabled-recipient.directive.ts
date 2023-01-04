@@ -1,5 +1,5 @@
 import { Directive, ElementRef } from '@angular/core';
-import { DisabledViewModifier, FnDisabledProvider } from '@fundamental-ngx/fn/cdk';
+import { DisabledViewModifier, FnDisabledProvider } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector

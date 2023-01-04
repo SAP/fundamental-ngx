@@ -5,7 +5,7 @@ import { API_FILES } from '@fundamental-ngx/docs/fn/shared';
 import { SelectableListDocsComponent } from './selectable-list-docs.component';
 import { SelectableListHeaderComponent } from './selectable-list-header/selectable-list-header.component';
 import { DefaultExampleComponent } from './examples/default-example/default-example.component';
-import { SelectableListModule } from '@fundamental-ngx/fn/cdk';
+import { SelectableListModule } from '@fundamental-ngx/cdk/utils';
 import { AdvancedUsageComponent } from './examples/advanced-usage/advanced-usage.component';
 import { CustomSelectableItemDirective } from './examples/advanced-usage/custom-selectable-item.directive';
 

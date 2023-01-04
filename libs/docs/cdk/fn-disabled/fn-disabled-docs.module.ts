@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClickedBehaviorModule, DisabledBehaviorModule, FocusableListModule } from '@fundamental-ngx/fn/cdk';
+import { ClickedBehaviorModule, DisabledBehaviorModule, FocusableListModule } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/fn/button';
 import { FnDisabledHeaderComponent } from './fn-disabled-header/fn-disabled-header.component';
 import { DiExampleComponent } from './examples/di-example/di-example.component';
