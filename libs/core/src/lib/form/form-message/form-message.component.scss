@@ -2,7 +2,7 @@
 
 .fd-form-message {
     &--embedded {
-        display: block;
+        display: flex;
         box-shadow: none;
         max-width: 100%;
     }
