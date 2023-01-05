@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { DestroyedService, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk';
-import { BaseCvaControl, CvaDirective } from '@fundamental-ngx/cdk/forms';
+import { CvaControl, CvaDirective } from '@fundamental-ngx/cdk/forms';
 import { cloneDeep } from 'lodash-es';
 import { takeUntil } from 'rxjs';
 
@@ -30,7 +30,7 @@ export class FormsDefaultExampleComponent {
         <ng-container [formGroup]="form" *ngFor="let option of _options">
             <fd-checkbox
                 [formControlName]="option"
-                [state]="cvaDirective?.state || 'default'"
+                [state]="cvaControl.cvaDirective?.state || 'default'"
                 label="option"
             ></fd-checkbox>
         </ng-container>
@@ -43,11 +43,12 @@ export class FormsDefaultExampleComponent {
         }
     ],
     providers: [
+        CvaControl,
         DestroyedService,
         { provide: FD_FORM_FIELD_CONTROL, useExisting: CustomCdkControlExampleComponent, multi: true }
     ]
 })
-export class CustomCdkControlExampleComponent<T> extends BaseCvaControl<T> {
+export class CustomCdkControlExampleComponent<T> {
     @Input()
     set options(options: string[]) {
         this.form = this._formBuilder.group(
@@ -63,13 +64,13 @@ export class CustomCdkControlExampleComponent<T> extends BaseCvaControl<T> {
     _options: string[];
 
     form: FormGroup;
+    cvaControl: CvaControl<T> = inject(CvaControl);
+    _destroy$ = inject(DestroyedService);
 
-    constructor(private readonly _formBuilder: FormBuilder) {
-        super();
-    }
+    constructor(private readonly _formBuilder: FormBuilder) {}
 
     ngOnInit(): void {
-        super.ngOnInit();
+        this.cvaControl.listenToChanges();
         this.form?.valueChanges.pipe(takeUntil(this._destroy$)).subscribe(() => {
             const formValue = Object.entries(cloneDeep(this.form.value)).reduce((acc, [currentKey, currentValue]) => {
                 if (currentValue) {
@@ -77,7 +78,7 @@ export class CustomCdkControlExampleComponent<T> extends BaseCvaControl<T> {
                 }
                 return acc;
             }, {});
-            this.cvaDirective?.setValue(Object.keys(formValue), true);
+            this.cvaControl.cvaDirective?.setValue(Object.keys(formValue), true);
         });
     }
 }

@@ -1,7 +1,7 @@
 export * from './forms.module';
 
 export * from './cva/cva.directive';
-export * from './cva/base-cva-control.class';
+export * from './cva/cva-control.class';
 export * from './models/cva';
 export * from './models/form-error';
 export * from './models/form-field';

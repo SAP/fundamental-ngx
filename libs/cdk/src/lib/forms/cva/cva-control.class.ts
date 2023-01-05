@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Directive, inject, OnDestroy, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { ChangeDetectorRef, inject, Injectable } from '@angular/core';
+import { takeUntil } from 'rxjs';
 import { CvaDirective } from './cva.directive';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Base ControlValueAccessor control class.
@@ -8,8 +9,8 @@ import { CvaDirective } from './cva.directive';
  *
  * This class performs generic change detection based on `CvaDirective` outputs.
  */
-@Directive()
-export abstract class BaseCvaControl<T> implements OnInit, OnDestroy {
+@Injectable()
+export class CvaControl<T> {
     /**
      * Control value accessor directive instance.
      */
@@ -24,22 +25,16 @@ export abstract class BaseCvaControl<T> implements OnInit, OnDestroy {
     protected _changeDetector = inject(ChangeDetectorRef);
 
     /** @Hidden */
-    protected _destroy$ = new Subject<void>();
+    protected _destroy$ = inject(DestroyedService);
 
     /** @hidden */
-    ngOnInit(): void {
+    listenToChanges(): void {
         this.cvaDirective?.markForCheck.pipe(takeUntil(this._destroy$)).subscribe(() => {
-            this._changeDetector.markForCheck();
+            this._changeDetector.detectChanges();
         });
 
         this.cvaDirective?.detectChanges.pipe(takeUntil(this._destroy$)).subscribe(() => {
             this._changeDetector.detectChanges();
         });
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._destroy$.next();
-        this._destroy$.complete();
     }
 }

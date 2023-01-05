@@ -25,7 +25,7 @@ import {
 } from '@angular/core';
 import { MatchingStrategy } from '@fundamental-ngx/cdk/data-source';
 import {
-    BaseCvaControl,
+    CvaControl,
     CvaDirective,
     FormStates,
     isOptionItem,
@@ -33,14 +33,22 @@ import {
     SelectableOptionItem,
     SelectItem
 } from '@fundamental-ngx/cdk/forms';
-import { coerceArraySafe, isFunction, isJsObject, isString, Nullable } from '@fundamental-ngx/cdk/utils';
+import {
+    coerceArraySafe,
+    ContentDensity,
+    isFunction,
+    isJsObject,
+    isString,
+    Nullable,
+    RangeSelector,
+    TemplateDirective
+} from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import { FormItemControl } from '@fundamental-ngx/core/form';
 import { FD_LIST_COMPONENT, ListComponentInterface } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
-import { ContentDensity, RangeSelector, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { FdMultiComboboxAcceptableDataSource } from './data-source/multi-combobox-data-source';
@@ -62,8 +70,10 @@ export class MultiComboboxSelectionChangeEvent {
 }
 
 @Directive()
-export abstract class BaseMultiCombobox<T = any> extends BaseCvaControl<T> {
+export abstract class BaseMultiCombobox<T = any> {
     // Injection section
+    /** @hidden */
+    cvaControl: CvaControl<T> = inject(CvaControl);
 
     /** Control Value Accessor directive for forms support. */
     readonly _cva = inject(CvaDirective, {
