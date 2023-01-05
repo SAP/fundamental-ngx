@@ -1,14 +1,15 @@
 import {
     AfterViewInit,
-    ChangeDetectorRef,
     Directive,
     DoCheck,
     ElementRef,
+    EventEmitter,
     inject,
     Input,
     isDevMode,
     OnDestroy,
     OnInit,
+    Output,
     ViewChild
 } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
@@ -25,8 +26,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 let randomId = 0;
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fdCva]',
+    selector: '[fdkCva]',
     standalone: true
 })
 export class CvaDirective<T = any>
@@ -64,7 +64,7 @@ export class CvaDirective<T = any>
     value: T;
 
     /** @hidden */
-    constructor(private readonly _cd: ChangeDetectorRef) {
+    constructor() {
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }
@@ -158,7 +158,7 @@ export class CvaDirective<T = any>
         const newVal = coerceBooleanProperty(value);
         if (this._editable !== newVal) {
             this._editable = newVal;
-            this._cd.markForCheck();
+            this._markForCheck();
             this.stateChanges.next('editable');
         }
     }
@@ -171,6 +171,18 @@ export class CvaDirective<T = any>
      */
     @Input()
     name: string;
+
+    /**
+     * Emits when change detection is needed.
+     */
+    @Output()
+    detectChanges = new EventEmitter<void>();
+
+    /**
+     * Emits when mark for changes detection is needed.
+     */
+    @Output()
+    markForCheck = new EventEmitter<void>();
 
     /** @hidden */
     protected _subscriptions = new Subscription();
@@ -202,7 +214,7 @@ export class CvaDirective<T = any>
 
     /** @hidden */
     readonly formField: FormField | null = inject(FD_FORM_FIELD, {
-        self: true,
+        skipSelf: true,
         optional: true
     });
 
@@ -235,7 +247,7 @@ export class CvaDirective<T = any>
         if (this.ngControl) {
             this._subscriptions.add(
                 this.ngControl.statusChanges?.subscribe(() => {
-                    this._cd.markForCheck();
+                    this._markForCheck();
                 })
             );
         }
@@ -248,7 +260,7 @@ export class CvaDirective<T = any>
         } else {
             this.ariaLabelledBy += ' ' + labelAndHelpId;
         }
-        this._cd.markForCheck();
+        this._markForCheck();
     }
 
     /** @hidden */
@@ -273,7 +285,7 @@ export class CvaDirective<T = any>
     /** @hidden */
     setDisabledState(isDisabled: BooleanInput): void {
         const newState = coerceBooleanProperty(isDisabled);
-        this._cd.markForCheck();
+        this._markForCheck();
         if (newState !== this._disabled) {
             this._disabled = newState;
             this.stateChanges.next('setDisabledState');
@@ -287,7 +299,7 @@ export class CvaDirective<T = any>
     writeValue(value: T): void {
         this.value = value;
         this.stateChanges.next('writeValue');
-        this._cd.markForCheck();
+        this._markForCheck();
     }
 
     /**
@@ -346,7 +358,7 @@ export class CvaDirective<T = any>
         if (newStatusIsError !== this.controlInvalid) {
             this._controlInvalid = newStatusIsError;
             this.stateChanges.next('updateErrorState');
-            this._cd.markForCheck();
+            this._markForCheck();
         }
     }
 
@@ -362,7 +374,17 @@ export class CvaDirective<T = any>
             if (emitOnChange) {
                 this.onChange(value);
             }
-            this._cd.markForCheck();
+            this._markForCheck();
         }
+    }
+
+    /** @hidden */
+    private _markForCheck(): void {
+        this.markForCheck.emit();
+    }
+
+    /** @hidden */
+    private _detectChanges(): void {
+        this.detectChanges.emit();
     }
 }

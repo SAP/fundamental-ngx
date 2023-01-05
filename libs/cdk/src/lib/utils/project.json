@@ -2,7 +2,7 @@
     "name": "cdk-utils",
     "projectType": "library",
     "sourceRoot": "libs/cdk/src/lib/utils",
-    "prefix": "fx",
+    "prefix": "fdk",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",

@@ -6,7 +6,7 @@ export abstract class SelectableItemToken<ElementType extends Element = HTMLElem
     implements HasElementRef<ElementType>
 {
     abstract value: TValue;
-    abstract fnSelectableItem?: boolean;
+    abstract fdkSelectableItem?: boolean;
 
     abstract elementRef(): ElementRef<ElementType>;
 

@@ -8,7 +8,8 @@ import { FOCUSABLE_ITEM } from './focus-key-manager.tokens';
  * To be used with FocusKeyManagerItemDirective
  */
 @Directive({
-    selector: '[fd-focus-key-manager-item], [fdFocusKeyManagerItem]',
+    selector: '[fdkFocusKeyManagerItem], [fd-focus-key-manager-item], [fdFocusKeyManagerItem]',
+    standalone: true,
     providers: [{ provide: FOCUSABLE_ITEM, useExisting: forwardRef(() => FocusKeyManagerItemDirective) }]
 })
 export class FocusKeyManagerItemDirective implements FocusableOption {

@@ -1,7 +1,8 @@
 import { Directive, ElementRef } from '@angular/core';
 
 @Directive({
-    selector: '[fdOverflowListItem], [fd-overflow-list-item]'
+    selector: '[fdkOverflowListItem], [fdOverflowListItem], [fd-overflow-list-item]',
+    standalone: true
 })
 export class OverflowListItemDirective {
     /** @hidden */

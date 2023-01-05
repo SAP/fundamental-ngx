@@ -2,7 +2,7 @@
     "name": "cdk-data-source",
     "projectType": "library",
     "sourceRoot": "libs/cdk/src/lib/data-source",
-    "prefix": "fx",
+    "prefix": "fdk",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",

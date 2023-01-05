@@ -9,6 +9,9 @@ import {
 } from '../helpers/common';
 import { MatchBy, MatchingBy, MatchingStrategy } from '../models/matching-strategy';
 
+/**
+ * Base data provider class.
+ */
 export abstract class BaseDataProvider<T> {
     /** @hidden */
     protected _keyPath: string;
@@ -37,6 +40,9 @@ export abstract class BaseDataProvider<T> {
     }
 }
 
+/**
+ * Default data provider class used for other components to extend from.
+ */
 export class DataProvider<T> extends BaseDataProvider<T> {
     /** @hidden */
     constructor(protected values: Observable<T[]> | T[]) {

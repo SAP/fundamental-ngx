@@ -1,16 +1,16 @@
 import { ElementRef, Inject, Injectable, NgZone, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
 import { BehaviorSubject, combineLatest, firstValueFrom, Observable, ReplaySubject, Subject } from 'rxjs';
 import { distinctUntilChanged, startWith, takeUntil, tap } from 'rxjs/operators';
-import { FN_DISABLED_DIRECTIVE } from './fn-disabled.token';
+import { FDK_DISABLED_DIRECTIVE } from './fdk-disabled.token';
 import { DisabledObserver } from './disabled.observer';
 import { DisabledBehavior } from './disabled-behavior.interface';
 import { DisabledViewModifier } from './disabled-view-modifier.interface';
 import { DefaultDisabledViewModifier } from './default-disabled-view-modifier';
 
 @Injectable()
-export class FnDisabledProvider extends ReplaySubject<boolean> implements DisabledBehavior, OnDestroy {
+export class FdkDisabledProvider extends ReplaySubject<boolean> implements DisabledBehavior, OnDestroy {
     /** @Hidden */
-    fdDisabled = false;
+    fdkDisabled = false;
     /** @Hidden */
     private readonly _destroy$ = new Subject<void>();
     /** @hidden */
@@ -25,8 +25,8 @@ export class FnDisabledProvider extends ReplaySubject<boolean> implements Disabl
         private ngZone: NgZone,
         private elementRef: ElementRef<HTMLElement>,
         private disabledObserver: DisabledObserver,
-        @Optional() @Self() @Inject(FN_DISABLED_DIRECTIVE) private selfDisabled$?: DisabledBehavior,
-        @Optional() @SkipSelf() @Inject(FN_DISABLED_DIRECTIVE) private parentDisabled$?: DisabledBehavior
+        @Optional() @Self() @Inject(FDK_DISABLED_DIRECTIVE) private selfDisabled$?: DisabledBehavior,
+        @Optional() @SkipSelf() @Inject(FDK_DISABLED_DIRECTIVE) private parentDisabled$?: DisabledBehavior
     ) {
         super(1);
         combineLatest([this._disabledChange$, this._viewModifiers$])
@@ -37,7 +37,7 @@ export class FnDisabledProvider extends ReplaySubject<boolean> implements Disabl
             .subscribe();
         this._disabledChange$
             .pipe(
-                tap((isDisabled) => (this.fdDisabled = isDisabled)),
+                tap((isDisabled) => (this.fdkDisabled = isDisabled)),
                 tap((isDisabled) => this.next(isDisabled)),
                 takeUntil(this._destroy$)
             )
@@ -72,7 +72,7 @@ export class FnDisabledProvider extends ReplaySubject<boolean> implements Disabl
         if (this.parentDisabled$) {
             this.parentDisabled$
                 .pipe(
-                    startWith(this.parentDisabled$.fdDisabled),
+                    startWith(this.parentDisabled$.fdkDisabled),
                     tap((d) => (parentDisabled = d)),
                     distinctUntilChanged(),
                     tap(() => {
@@ -90,7 +90,7 @@ export class FnDisabledProvider extends ReplaySubject<boolean> implements Disabl
         if (this.selfDisabled$) {
             this.selfDisabled$
                 .pipe(
-                    startWith(this.selfDisabled$.fdDisabled),
+                    startWith(this.selfDisabled$.fdkDisabled),
                     tap((d) => (selfDisabled = d)),
                     distinctUntilChanged(),
                     tap((isDisabled) => {

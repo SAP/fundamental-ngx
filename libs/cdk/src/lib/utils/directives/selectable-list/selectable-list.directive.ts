@@ -6,8 +6,9 @@ import { SelectableItemToken } from './selectable-item.token';
 import { coerceBoolean } from '../../decorators/coerce-boolean';
 
 @Directive({
-    selector: '[fdSelectableList]',
-    exportAs: 'fdSelectableList',
+    selector: '[fdkSelectableList]',
+    exportAs: 'fdkSelectableList',
+    standalone: true,
     providers: [
         {
             provide: SelectComponentRootToken,

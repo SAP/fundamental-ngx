@@ -7,7 +7,7 @@ import { DataSource, DataSourceParser, DataSourceProvider } from './models/data-
 import { FD_DATA_SOURCE_TRANSFORMER } from './tokens';
 
 @Directive({
-    selector: '[fdDataSource]',
+    selector: '[fdkDataSource]',
     standalone: true,
     providers: [DestroyedService]
 })

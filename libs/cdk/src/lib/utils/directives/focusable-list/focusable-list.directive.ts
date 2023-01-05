@@ -5,8 +5,9 @@ import { FocusableItemDirective } from '../focusable-item/focusable-item.directi
 import { DestroyedService } from '../../services/destroyed.service';
 
 @Directive({
-    selector: '[fdFocusableList]',
-    exportAs: 'fdFocusableList',
+    selector: '[fdkFocusableList]',
+    exportAs: 'fdkFocusableList',
+    standalone: true,
     providers: [FocusableListService, DestroyedService]
 })
 export class FocusableListDirective implements AfterViewInit {
@@ -33,7 +34,7 @@ export class FocusableListDirective implements AfterViewInit {
                 tap((items: FocusableItemDirective[]): void => {
                     const focusableItems: FocusableItem[] = items.map((item, index) => ({
                         index,
-                        focusable: () => item.fdFocusableItem,
+                        focusable: () => item.fdkFocusableItem,
                         elementRef: () => item.elementRef(),
                         focus: () => item.elementRef().nativeElement.focus()
                     }));

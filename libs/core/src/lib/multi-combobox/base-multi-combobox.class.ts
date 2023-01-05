@@ -25,6 +25,7 @@ import {
 } from '@angular/core';
 import { MatchingStrategy } from '@fundamental-ngx/cdk/data-source';
 import {
+    BaseCvaControl,
     CvaDirective,
     FormStates,
     isOptionItem,
@@ -61,7 +62,7 @@ export class MultiComboboxSelectionChangeEvent {
 }
 
 @Directive()
-export abstract class BaseMultiCombobox<T = any> {
+export abstract class BaseMultiCombobox<T = any> extends BaseCvaControl<T> {
     // Injection section
 
     /** Control Value Accessor directive for forms support. */

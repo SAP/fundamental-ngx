@@ -1,7 +1,8 @@
 import { Directive, ElementRef } from '@angular/core';
 
 @Directive({
-    selector: '[fdResizeHandle], [fd-resize-handle]'
+    selector: '[fdkResizeHandle], [fdResizeHandle], [fd-resize-handle]',
+    standalone: true
 })
 export class ResizeHandleDirective {
     /** @hidden */

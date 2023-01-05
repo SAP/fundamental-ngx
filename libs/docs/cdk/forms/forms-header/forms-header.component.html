@@ -1,8 +1,27 @@
 <fd-doc-page>
-    <header>Forms</header>
+    <header>Control value accessor</header>
 
     <description>
-        <!-- TODO: description -->
+        <p>
+            Forms module exposes standalone <code>CvaDirective</code> which implements
+            <code>ControlValueAccessor</code> interface for more productive form-related components development.
+        </p>
+        <p>
+            Additionally, <code>Forms</code> package exposes models and tokens for form items such as
+            <code>FormField</code>, <code>FormState</code> and <code>FormFieldControl</code>, which are widely used in
+            <a routerLink="/platform/home">platform</a> package.
+        </p>
+        <p>
+            By providing these tokens and implementing respective interfaces, developers can create custom form controls
+            which would be recognizable by <a routerLink="/platform/form-container">Platform's Form Container</a>.
+        </p>
+        <p>Control value accessor directive supports following features:</p>
+        <ul>
+            <li>Both template-driven and reactive forms;</li>
+            <li>Automatic state detection of the control;</li>
+            <li>Value read/write with respective events emitted;</li>
+            <li>Disabled state;</li>
+        </ul>
     </description>
 
     <import module="FormsModule" subPackage="forms"></import>

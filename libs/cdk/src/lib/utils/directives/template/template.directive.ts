@@ -1,11 +1,12 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector: '[fdTemplate]'
+    selector: '[fdkTemplate], [fdTemplate]',
+    standalone: true
 })
 export class TemplateDirective {
     /** Name of the template */
-    @Input('fdTemplate')
+    @Input('fdkTemplate')
     name: string;
 
     /** @hidden */

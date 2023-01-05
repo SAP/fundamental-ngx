@@ -3,7 +3,7 @@ import { SelectableListDirective } from './selectable-list.directive';
 import { SelectableItemDirective } from './selectable-item.directive';
 
 @NgModule({
-    declarations: [SelectableListDirective, SelectableItemDirective],
+    imports: [SelectableListDirective, SelectableItemDirective],
     exports: [SelectableListDirective, SelectableItemDirective]
 })
 export class SelectableListModule {}

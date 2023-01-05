@@ -2,7 +2,6 @@ import { Injectable, OnDestroy, Renderer2 } from '@angular/core';
 import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
 import { finalize, fromEvent, merge, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
-import { DestroyedService } from '../../services/destroyed.service';
 import { getNativeElement } from '../../helpers/get-native-element';
 import { HasElementRef } from '../../interfaces/has-element-ref.interface';
 
@@ -22,7 +21,10 @@ export class FocusableListService implements OnDestroy {
     private readonly _refresh$ = new Subject<void>();
 
     /** @hidden */
-    constructor(private _renderer: Renderer2, private readonly _destroy$: DestroyedService) {}
+    private readonly _destroy$ = new Subject<void>();
+
+    /** @hidden */
+    constructor(private _renderer: Renderer2) {}
 
     /**
      * Initializes the focusable list service with items and configuration.
@@ -61,5 +63,6 @@ export class FocusableListService implements OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this._destroy$.next();
+        this._destroy$.complete();
     }
 }

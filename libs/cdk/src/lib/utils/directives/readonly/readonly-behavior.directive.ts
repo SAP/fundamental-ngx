@@ -2,16 +2,17 @@ import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntil, tap } from 'rxjs/operators';
-import { FN_READONLY_DIRECTIVE } from './fn-readonly.token';
+import { FDK_READONLY_DIRECTIVE } from './fdk-readonly.token';
 import { ReadonlyBehavior } from './readonly-behavior.interface';
 import { setReadonlyState } from './set-readonly-state';
 import { DestroyedService } from '../../services/destroyed.service';
 
 @Directive({
-    selector: '[fdReadonly]',
+    selector: '[fdkReadonly]',
+    standalone: true,
     providers: [
         {
-            provide: FN_READONLY_DIRECTIVE,
+            provide: FDK_READONLY_DIRECTIVE,
             useExisting: ReadonlyBehaviorDirective
         },
         DestroyedService
@@ -23,11 +24,11 @@ export class ReadonlyBehaviorDirective
 {
     /** @Hidden */
     @Input()
-    set fdReadonly(value: BooleanInput) {
+    set fdkReadonly(value: BooleanInput) {
         this._readonlyInput$.next(coerceBooleanProperty(value));
     }
 
-    get fdReadonly(): boolean {
+    get fdkReadonly(): boolean {
         return this._readonly;
     }
 

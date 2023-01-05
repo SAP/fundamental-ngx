@@ -13,19 +13,19 @@ const diRecipientExampleTs = 'di-example/fn-disabled-recipient.directive.ts';
     templateUrl: './fn-disabled-docs.component.html',
     encapsulation: ViewEncapsulation.None
 })
-export class FnDisabledDocsComponent {
+export class fdkDisabledDocsComponent {
     defaultExample: ExampleFile[] = [
         {
             code: getAssetFromModuleAssets(defaultExampleHtml),
             language: 'html',
             fileName: 'fn-disabled-default-example',
-            component: 'FnDisabledDefaultExample'
+            component: 'fdkDisabledDefaultExample'
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
             language: 'ts',
             fileName: 'fn-disabled-default-example',
-            component: 'FnDisabledDefaultExample'
+            component: 'fdkDisabledDefaultExample'
         }
     ];
     diExample: ExampleFile[] = [
@@ -33,19 +33,19 @@ export class FnDisabledDocsComponent {
             code: getAssetFromModuleAssets(diExampleHtml),
             language: 'html',
             fileName: 'fn-disabled-di-example',
-            component: 'FnDisabledDIExample'
+            component: 'fdkDisabledDIExample'
         },
         {
             code: getAssetFromModuleAssets(diExampleTs),
             language: 'ts',
             fileName: 'fn-disabled-di-example',
-            component: 'FnDisabledDIExample'
+            component: 'fdkDisabledDIExample'
         },
         {
             code: getAssetFromModuleAssets(diRecipientExampleTs),
             language: 'ts',
             fileName: 'fn-disabled-recipient.directive',
-            component: 'FnDisabledRecipientDirective'
+            component: 'fdkDisabledRecipientDirective'
         }
     ];
 

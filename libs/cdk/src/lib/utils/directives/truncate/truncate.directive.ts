@@ -3,14 +3,15 @@ import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { Nullable } from '../../models/nullable';
 
 @Directive({
-    selector: '[fdTruncate], [fd-truncate]'
+    selector: '[fdkTruncate], [fdTruncate], [fd-truncate]',
+    standalone: true
 })
 export class TruncateDirective implements OnChanges, AfterViewInit {
     /**
      * Width in pixel for truncation of an element , by default
      */
     @Input()
-    set fdTruncateWidth(value: Nullable<number>) {
+    set fdkTruncateWidth(value: Nullable<number>) {
         this._customWidthCount = coerceNumberProperty(value);
     }
 
@@ -18,7 +19,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit {
      * Truncating state
      */
     @Input()
-    fdTruncateState = false;
+    fdkTruncateState = false;
 
     /** @hidden */
     private _customWidthCount = 200;
@@ -79,6 +80,6 @@ export class TruncateDirective implements OnChanges, AfterViewInit {
         }
         this.setDefaultStyle();
         this._truncationStyle = `${this._defaultStyle} max-width: ${this._customWidthCount}px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`;
-        this._truncateTarget.style.cssText = this.fdTruncateState ? this._truncationStyle : this._defaultStyle;
+        this._truncateTarget.style.cssText = this.fdkTruncateState ? this._truncationStyle : this._defaultStyle;
     }
 }

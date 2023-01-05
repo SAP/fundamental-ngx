@@ -19,7 +19,8 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { KeyUtil } from '../../functions';
 
 @Directive({
-    selector: '[fdOnlyDigits], [fd-only-digits]'
+    selector: '[fdkOnlyDigits], [fdOnlyDigits], [fd-only-digits]',
+    standalone: true
 })
 export class OnlyDigitsDirective {
     /** Allow using decimal */

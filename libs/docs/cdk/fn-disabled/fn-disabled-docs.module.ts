@@ -2,22 +2,22 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClickedBehaviorModule, DisabledBehaviorModule, FocusableListModule } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/fn/button';
-import { FnDisabledHeaderComponent } from './fn-disabled-header/fn-disabled-header.component';
+import { fdkDisabledHeaderComponent } from './fn-disabled-header/fn-disabled-header.component';
 import { DiExampleComponent } from './examples/di-example/di-example.component';
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/fn/shared';
-import { FnDisabledDocsComponent } from './fn-disabled-docs.component';
+import { fdkDisabledDocsComponent } from './fn-disabled-docs.component';
 import { DefaultExampleComponent } from './examples/default-example/default-example.component';
-import { FnDisabledRecipientDirective } from './examples/di-example/fn-disabled-recipient.directive';
+import { fdkDisabledRecipientDirective } from './examples/di-example/fn-disabled-recipient.directive';
 
 const routes: Routes = [
     {
         path: '',
-        component: FnDisabledHeaderComponent,
+        component: fdkDisabledHeaderComponent,
         children: [
             {
                 path: '',
-                component: FnDisabledDocsComponent
+                component: fdkDisabledDocsComponent
             },
             { path: 'api', component: ApiComponent, data: { content: API_FILES.tabs } }
         ]
@@ -35,12 +35,12 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
-        FnDisabledHeaderComponent,
-        FnDisabledDocsComponent,
+        fdkDisabledHeaderComponent,
+        fdkDisabledDocsComponent,
         DefaultExampleComponent,
         DiExampleComponent,
-        FnDisabledRecipientDirective
+        fdkDisabledRecipientDirective
     ],
     providers: [currentComponentProvider('fn-disabled')]
 })
-export class FnDisabledDocsModule {}
+export class fdkDisabledDocsModule {}

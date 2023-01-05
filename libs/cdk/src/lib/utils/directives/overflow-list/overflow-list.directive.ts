@@ -16,7 +16,8 @@ import { OverflowListItemDirective } from './overflow-list-item.directive';
 import { ViewportRuler } from '@angular/cdk/overlay';
 
 @Directive({
-    selector: '[fdOverflowList], [fd-overflow-list]'
+    selector: '[fdkOverflowList], [fdOverflowList], [fd-overflow-list]',
+    standalone: true
 })
 export class OverflowListDirective implements AfterViewInit, OnDestroy {
     /**

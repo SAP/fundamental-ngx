@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { DataSourceComponent } from './data-source.component';
+import { DataSourceDirective } from './data-source.directive';
 
 @NgModule({
-    imports: [CommonModule],
-    declarations: [DataSourceComponent],
-    exports: [DataSourceComponent]
+    imports: [DataSourceDirective],
+    exports: [DataSourceDirective]
 })
 export class DataSourceModule {}

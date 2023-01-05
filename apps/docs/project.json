@@ -47,7 +47,7 @@
             }
         },
         "build": {
-            "executor": "@nrwl/angular:webpack-browser",
+            "executor": "@angular-devkit/build-angular:browser-esbuild",
             "options": {
                 "outputPath": "dist/apps/docs",
                 "index": "apps/docs/src/index.html",
@@ -133,6 +133,11 @@
                         "output": "./docs/fn"
                     },
                     {
+                        "glob": "**/examples/**/*",
+                        "input": "libs/docs/cdk",
+                        "output": "./docs/cdk"
+                    },
+                    {
                         "glob": "sort.pipe.ts",
                         "input": "libs/docs/shared/src/lib/core-helpers/pipes",
                         "output": "./docs/core/shared/examples"
@@ -175,10 +180,7 @@
                 "buildOptimizer": false,
                 "sourceMap": true,
                 "optimization": false,
-                "namedChunks": true,
-                "customWebpackConfig": {
-                    "path": "./webpack.config.js"
-                }
+                "namedChunks": true
             },
             "configurations": {
                 "development": {

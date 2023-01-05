@@ -79,9 +79,9 @@ export abstract class InputBase implements AfterViewInit, OnDestroy {
         if (this.disabledByForm) {
             this.disabled = true;
         } else {
-            this.disabled = this.disabled$?.fdDisabled;
+            this.disabled = this.disabled$?.fdkDisabled;
         }
-        this.readonly = this.readonly$?.fdReadonly;
+        this.readonly = this.readonly$?.fdkReadonly;
         this._cdRef.detectChanges();
     }
 }

@@ -2,7 +2,7 @@
     "name": "cdk-forms",
     "projectType": "library",
     "sourceRoot": "libs/cdk/src/lib/forms",
-    "prefix": "fx",
+    "prefix": "fdk",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",

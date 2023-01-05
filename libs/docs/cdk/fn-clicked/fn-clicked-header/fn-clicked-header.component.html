@@ -7,11 +7,11 @@
         handlers for all three of these events. To eliminate that much-repeated code, utilize the
         <code>fnClicked</code> directive. The syntax is very simple, instead of writing
         <code>(click)="onClickHandler($event)"</code>, you will write
-        <code>(fnClicked)="onClickHandler($event)"</code>
+        <code>(fdkClicked)="onClickHandler($event)"</code>
         and it will catch both "keydown.enter" and "keydown.space" events alongside the regular "click" event.
     </p>
     <p>
-        <code>(fnClicked)</code> also works with the <code>@HostListener</code> decorator and with
+        <code>(fdkClicked)</code> also works with the <code>@HostListener</code> decorator and with
         <code>Renderer2.listen</code>
     </p>
     <p>
