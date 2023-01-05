@@ -47,7 +47,7 @@
             }
         },
         "build": {
-            "executor": "@angular-devkit/build-angular:browser-esbuild",
+            "executor": "@nrwl/angular:webpack-browser",
             "options": {
                 "outputPath": "dist/apps/docs",
                 "index": "apps/docs/src/index.html",
