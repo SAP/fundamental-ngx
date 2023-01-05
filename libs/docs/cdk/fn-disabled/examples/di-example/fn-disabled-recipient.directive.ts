@@ -1,13 +1,13 @@
 import { Directive, ElementRef } from '@angular/core';
-import { DisabledViewModifier, FnDisabledProvider } from '@fundamental-ngx/cdk/utils';
+import { DisabledViewModifier, FdkDisabledProvider } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fnDisabledRecipient]',
-    providers: [FnDisabledProvider]
+    selector: '[fdkDisabledRecipient]',
+    providers: [FdkDisabledProvider]
 })
-export class FnDisabledRecipientDirective implements DisabledViewModifier {
-    constructor(private _disabled$: FnDisabledProvider, private _elementRef: ElementRef) {
+export class fdkDisabledRecipientDirective implements DisabledViewModifier {
+    constructor(private _disabled$: FdkDisabledProvider, private _elementRef: ElementRef) {
         this._disabled$.addViewModifier(this);
     }
 

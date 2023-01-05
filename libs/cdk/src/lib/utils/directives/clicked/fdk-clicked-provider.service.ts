@@ -2,15 +2,16 @@ import { ElementRef, Inject, Injectable, OnDestroy, Renderer2 } from '@angular/c
 import { Subject } from 'rxjs';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { ClickedEventPlugin } from './clicked-event.plugin';
+import { ClickedDirective } from './clicked.directive';
 
 @Injectable()
-export class FnClickedProvider extends Subject<MouseEvent | KeyboardEvent> implements OnDestroy {
+export class FdkClickedProvider extends Subject<MouseEvent | KeyboardEvent> implements OnDestroy {
     /** @hidden */
     private _preventDefault = true;
     /** @hidden */
     private _listeners!: Array<() => void>;
     /** @hidden */
-    private readonly _fnClickedEventManagerPluginLoaded: boolean;
+    private readonly _fdkClickedEventManagerPluginLoaded: boolean;
 
     /** @hidden */
     constructor(
@@ -19,7 +20,7 @@ export class FnClickedProvider extends Subject<MouseEvent | KeyboardEvent> imple
         @Inject(EVENT_MANAGER_PLUGINS) private eventManagerPlugins: any[]
     ) {
         super();
-        this._fnClickedEventManagerPluginLoaded = eventManagerPlugins.some((em) => em instanceof ClickedEventPlugin);
+        this._fdkClickedEventManagerPluginLoaded = eventManagerPlugins.some((em) => em instanceof ClickedEventPlugin);
         this._initialize();
     }
 
@@ -36,8 +37,8 @@ export class FnClickedProvider extends Subject<MouseEvent | KeyboardEvent> imple
 
     /** @hidden */
     private _initialize(): void {
-        const eventsList: string[] = this._fnClickedEventManagerPluginLoaded
-            ? ['fnClicked']
+        const eventsList: string[] = this._fdkClickedEventManagerPluginLoaded
+            ? [ClickedDirective.eventName]
             : ['click', 'keydown.enter', 'keydown.space'];
         this._listeners = eventsList.map((eventName) =>
             this._renderer.listen(this._elementRef.nativeElement, eventName, (event: MouseEvent | KeyboardEvent) => {

@@ -1,8 +1,8 @@
 <fd-docs-section-title id="simple" componentName="FnClicked">Basic example</fd-docs-section-title>
 <description>
     <p>
-        Simply add <code>(fnClicked)</code> to the desired element. In the example below, <code>div</code> also has the
-        <code>[fnFocusableItem]</code> directive added to allow focus on the <code>div</code>
+        Simply add <code>(fdkClicked)</code> to the desired element. In the example below, <code>div</code> also has the
+        <code>[fdkFocusableItem]</code> directive added to allow focus on the <code>div</code>
     </p>
 </description>
 <component-example [hasBackground]="false">
@@ -15,10 +15,10 @@
 >
 <description>
     <p>
-        In some cases you might not want to include <code>(fnClicked)</code> event in your application, but want to have
-        that unified event on disposal. For that reason you can include into your component's providers
+        In some cases you might not want to include <code>(fdkClicked)</code> event in your application, but want to
+        have that unified event on disposal. For that reason you can include into your component's providers
         <code>FnClickedProvider</code> and use it as an output, or as a notifier for your internal needs. This provider
-        will work in both cases, whether <code>(fnClicked)</code> is available or not.
+        will work in both cases, whether <code>(fdkClicked)</code> is available or not.
     </p>
 </description>
 <component-example [hasBackground]="false">

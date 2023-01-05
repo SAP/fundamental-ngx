@@ -1,15 +1,14 @@
 import { ElementRef, Inject, Injectable, NgZone, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
-import { BehaviorSubject, combineLatest, filter, firstValueFrom, Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, combineLatest, filter, firstValueFrom, Observable, ReplaySubject, Subject } from 'rxjs';
 import { FocusableItemViewModifier } from './focusable-item-view-modifier.interface';
-import { FN_FOCUSABLE_ITEM_DIRECTIVE } from './focusable.tokens';
+import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable.tokens';
 import { FocusableItemDirective } from './focusable-item.directive';
 import { FocusableObserver } from './focusable.observer';
 import { DefaultFocusableItemViewModifier } from './default-focusable-item-view-modifier';
 import { map, startWith, takeUntil, tap } from 'rxjs/operators';
-import { DestroyedService } from '../../services/destroyed.service';
 
 @Injectable()
-export class FnFocusableItemProvider extends ReplaySubject<boolean> implements FocusableItemViewModifier, OnDestroy {
+export class FdkFocusableItemProvider extends ReplaySubject<boolean> implements FocusableItemViewModifier, OnDestroy {
     /** @hidden */
     focusable = true;
     /** @hidden */
@@ -23,13 +22,15 @@ export class FnFocusableItemProvider extends ReplaySubject<boolean> implements F
     private _focusableObserver$!: Observable<boolean>;
 
     /** @hidden */
+    private readonly _destroy$ = new Subject<void>();
+
+    /** @hidden */
     constructor(
         private ngZone: NgZone,
         private elementRef: ElementRef<HTMLElement>,
         private focusableObserver: FocusableObserver,
-        private readonly _destroy$: DestroyedService,
-        @Optional() @Self() @Inject(FN_FOCUSABLE_ITEM_DIRECTIVE) private selfFocusable$?: FocusableItemDirective,
-        @Optional() @SkipSelf() @Inject(FN_FOCUSABLE_ITEM_DIRECTIVE) private parentFocusable$?: FocusableItemDirective
+        @Optional() @Self() @Inject(FDK_FOCUSABLE_ITEM_DIRECTIVE) private selfFocusable$?: FocusableItemDirective,
+        @Optional() @SkipSelf() @Inject(FDK_FOCUSABLE_ITEM_DIRECTIVE) private parentFocusable$?: FocusableItemDirective
     ) {
         super(1);
         combineLatest([this._focusableChange$, this._viewModifiers$])
@@ -50,6 +51,7 @@ export class FnFocusableItemProvider extends ReplaySubject<boolean> implements F
     /** @hidden */
     ngOnDestroy(): void {
         this._destroy$.next();
+        this._destroy$.complete();
         this.complete();
         if (this._focusableObserver$) {
             this.focusableObserver.unobserve(this.elementRef);

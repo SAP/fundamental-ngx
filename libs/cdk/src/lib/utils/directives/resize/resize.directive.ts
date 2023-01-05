@@ -22,7 +22,8 @@ interface ResizeMove {
 }
 
 @Directive({
-    selector: '[fdResize], [fd-resize-handle]'
+    selector: '[fdkResize], [fdResize], [fd-resize-handle]',
+    standalone: true
 })
 export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** Element limiting resizable container growth */

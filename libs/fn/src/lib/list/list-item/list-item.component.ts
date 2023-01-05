@@ -12,9 +12,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {
-    FnDisabledProvider,
-    FnFocusableItemProvider,
-    FnReadonlyProvider,
+    FdkDisabledProvider,
+    FdkFocusableItemProvider,
+    FdkReadonlyProvider,
     SelectableItemToken,
     SelectionService
 } from '@fundamental-ngx/cdk/utils';
@@ -42,7 +42,7 @@ import { DestroyedService } from '@fundamental-ngx/cdk/utils';
     host: {
         '[class.fn-list__item]': 'true'
     },
-    providers: [DestroyedService, FnDisabledProvider, FnReadonlyProvider, FnFocusableItemProvider]
+    providers: [DestroyedService, FdkDisabledProvider, FdkReadonlyProvider, FdkFocusableItemProvider]
 })
 export class ListItemComponent {
     @Input()
@@ -77,9 +77,9 @@ export class ListItemComponent {
         @Optional() @Inject(SelectableItemToken) private _selectableItem: SelectableItemToken,
         @Optional() @Inject(ListComponent) private _listComponent: ListComponent | null,
         private _elementRef: ElementRef<HTMLElement>,
-        private _disabledProvider: FnDisabledProvider,
-        private _readonlyProvider: FnReadonlyProvider,
-        _focusableItemProvider: FnFocusableItemProvider
+        private _disabledProvider: FdkDisabledProvider,
+        private _readonlyProvider: FdkReadonlyProvider,
+        _focusableItemProvider: FdkFocusableItemProvider
     ) {
         _focusableItemProvider.setFocusable(true);
         if (this._selectionService && this._selectableItem) {

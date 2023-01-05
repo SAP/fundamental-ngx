@@ -5,15 +5,15 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     templateUrl: './advanced-usage.component.html',
     styles: [
         `
-            [fdSelectableList] {
+            [fdkSelectableList] {
                 border: 1px dashed #dedede;
             }
 
-            [fnSelectableItem] {
+            [fdkSelectableItem] {
                 cursor: pointer;
             }
 
-            [fnSelectableItem].item-is-selected {
+            [fdkSelectableItem].item-is-selected {
                 background-color: #dedede;
             }
         `

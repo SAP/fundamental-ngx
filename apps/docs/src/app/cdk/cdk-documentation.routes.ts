@@ -17,7 +17,7 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/shared').then((m) => m.PlatformI18nDocsModule)
             },
             {
-                path: 'forms',
+                path: 'control-value-accessor',
                 loadChildren: () => import('@fundamental-ngx/docs/cdk/forms').then((m) => m.FormsDocsModule)
             },
             {
@@ -45,7 +45,7 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'disabled',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/disabled').then((m) => m.FnDisabledDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/disabled').then((m) => m.fdkDisabledDocsModule)
             },
             {
                 path: 'clicked',

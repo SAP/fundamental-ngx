@@ -8,7 +8,8 @@ import { IgnoreClickOnSelectionDirectiveToken } from './tokens';
  * which include selection
  */
 @Directive({
-    selector: '[fdIgnoreClickOnSelection]',
+    selector: '[fdkIgnoreClickOnSelection], [fdIgnoreClickOnSelection]',
+    standalone: true,
     providers: [
         {
             provide: IgnoreClickOnSelectionDirectiveToken,

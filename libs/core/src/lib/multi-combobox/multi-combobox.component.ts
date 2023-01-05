@@ -123,6 +123,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
     /** @hidden */
     ngOnInit(): void {
+        super.ngOnInit();
         this._openDataStream();
     }
 

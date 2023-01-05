@@ -1,6 +1,7 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/common';
+import { ClickedDirective } from './clicked.directive';
 
 type EventHandlerFunction = ($event: Event) => void;
 type HandlerRemoveFunction = () => void;
@@ -27,7 +28,7 @@ export class ClickedEventPlugin {
 
     /** @hidden */
     supports(eventName: string): boolean {
-        return eventName === 'fnClicked';
+        return eventName === ClickedDirective.eventName;
     }
 
     /** @hidden */

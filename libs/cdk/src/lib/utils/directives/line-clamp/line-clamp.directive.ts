@@ -16,8 +16,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Nullable } from '../../models/nullable';
 
 @Directive({
-    selector: '[fdLineclampTarget], [fd-lineclamp-target]',
-    exportAs: 'fdLineClampTarget'
+    selector: '[fdkLineClampTarget], [fdLineClampTarget], [fd-lineclamp-target]',
+    exportAs: 'fdLineClampTarget',
+    standalone: true
 })
 export class LineClampTargetDirective implements OnChanges, AfterViewInit {
     /**
@@ -53,8 +54,9 @@ export class LineClampTargetDirective implements OnChanges, AfterViewInit {
 }
 
 @Directive({
-    selector: '[fdLineClamp], [fd-lineclamp]',
-    exportAs: 'fdLineClamp'
+    selector: '[fdkLineClamp], [fdLineClamp], [fd-lineclamp]',
+    exportAs: 'fdLineClamp',
+    standalone: true
 })
 export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
     /**

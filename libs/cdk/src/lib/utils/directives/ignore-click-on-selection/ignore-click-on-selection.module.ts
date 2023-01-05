@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { IgnoreClickOnSelectionDirective } from './ignore-click-on-selection.directive';
 
 @NgModule({
-    declarations: [IgnoreClickOnSelectionDirective],
-    imports: [CommonModule],
+    imports: [IgnoreClickOnSelectionDirective],
     exports: [IgnoreClickOnSelectionDirective]
 })
 export class IgnoreClickOnSelectionModule {}

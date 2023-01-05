@@ -1,8 +1,8 @@
 <h5>Single selection</h5>
 
-<div fdSelectableList [selected]="selectedItemIndex" (selectedChange)="selectedItemIndex = $event">
+<div fdkSelectableList [selected]="selectedItemIndex" (selectedChange)="selectedItemIndex = $event">
     <ng-container *ngFor="let item of selectableItems; let index = index">
-        <div fdSelectableItem [value]="index + 1" [class.selected]="selectedItemIndex === index + 1">
+        <div fdkSelectableItem [value]="index + 1" [class.selected]="selectedItemIndex === index + 1">
             selectable #{{ index + 1 }}
         </div>
     </ng-container>
@@ -10,11 +10,11 @@
 
 <h5>Multiple selection</h5>
 
-<div fdSelectableList [selected]="multipleSelectionValues" multiple>
+<div fdkSelectableList [selected]="multipleSelectionValues" multiple>
     <ng-container *ngFor="let item of selectableItems; let index = index">
         <div
-            fdSelectableItem
-            #selectable="fdSelectableItem"
+            fdkSelectableItem
+            #selectable="fdkSelectableItem"
             [value]="index + 1"
             [class.selected]="selectable.getSelected()"
         >
@@ -25,11 +25,11 @@
 
 <h5>Allow `toggle`</h5>
 
-<div fdSelectableList [selected]="toggleSelectionValues" multiple toggle>
+<div fdkSelectableList [selected]="toggleSelectionValues" multiple toggle>
     <ng-container *ngFor="let item of selectableItems; let index = index">
         <div
-            fdSelectableItem
-            #selectable="fdSelectableItem"
+            fdkSelectableItem
+            #selectable="fdkSelectableItem"
             [value]="index + 1"
             [class.selected]="selectable.getSelected()"
         >

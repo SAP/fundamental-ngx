@@ -8,7 +8,8 @@ export interface AutoCompleteEvent {
 }
 
 @Directive({
-    selector: '[fdAutoComplete], [fd-auto-complete]'
+    selector: '[fdkAutoComplete], [fdAutoComplete], [fd-auto-complete]',
+    standalone: true
 })
 export class AutoCompleteDirective {
     /** Values that will fill missing text in the input. */

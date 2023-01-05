@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsComponent } from './forms.component';
+import { CvaDirective } from './cva/cva.directive';
 
 @NgModule({
-    imports: [CommonModule],
-    declarations: [FormsComponent],
-    exports: [FormsComponent]
+    imports: [CvaDirective],
+    exports: [CvaDirective]
 })
 export class FormsModule {}

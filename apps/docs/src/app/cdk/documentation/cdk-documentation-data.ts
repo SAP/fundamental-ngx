@@ -9,8 +9,8 @@ export const guides: SectionInterfaceContent[] = [
 
 export const directives: SectionInterfaceContent[] = [
     {
-        url: 'cdk/forms',
-        name: 'Forms'
+        url: 'cdk/control-value-accessor',
+        name: 'Control Value Accessor'
     },
     {
         url: 'cdk/data-source',
@@ -21,8 +21,20 @@ export const directives: SectionInterfaceContent[] = [
         name: 'Utils'
     },
     {
-        url: 'cdk/focusable-item',
-        name: 'Focusable Item'
+        url: 'cdk/focusable-list',
+        name: 'Focusable List'
+    },
+    {
+        url: 'cdk/selectable-list',
+        name: 'Selectable List'
+    },
+    {
+        url: 'cdk/disabled',
+        name: 'Disabled Behaviour'
+    },
+    {
+        url: 'cdk/clicked',
+        name: 'Clicked Behaviour'
     }
 ];
 

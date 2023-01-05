@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { InitialFocusDirective } from './initial-focus.directive';
 
 @NgModule({
-    imports: [CommonModule],
-    exports: [InitialFocusDirective],
-    declarations: [InitialFocusDirective]
+    imports: [InitialFocusDirective],
+    exports: [InitialFocusDirective]
 })
 export class InitialFocusModule {}

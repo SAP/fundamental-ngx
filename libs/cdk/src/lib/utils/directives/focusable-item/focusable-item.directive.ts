@@ -1,7 +1,7 @@
 import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { BehaviorSubject, filter, first, ReplaySubject } from 'rxjs';
-import { FN_FOCUSABLE_ITEM_DIRECTIVE } from './focusable.tokens';
+import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable.tokens';
 import { FocusableItemViewModifier } from './focusable-item-view-modifier.interface';
 import { setFocusable } from './set-focusable';
 import { FocusableObserver } from './focusable.observer';
@@ -10,10 +10,11 @@ import { DestroyedService } from '../../services/destroyed.service';
 import { HasElementRef } from '../../interfaces/has-element-ref.interface';
 
 @Directive({
-    selector: '[fdFocusableItem]',
+    selector: '[fdkFocusableItem]',
+    standalone: true,
     providers: [
         {
-            provide: FN_FOCUSABLE_ITEM_DIRECTIVE,
+            provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
             useExisting: FocusableItemDirective
         },
         DestroyedService
@@ -25,11 +26,11 @@ export class FocusableItemDirective
 {
     /** Whether the item is focusable. */
     @Input()
-    set fdFocusableItem(val: BooleanInput) {
+    set fdkFocusableItem(val: BooleanInput) {
         this._viewInit$.pipe(filter(Boolean), first()).subscribe(() => this.setFocusable(coerceBooleanProperty(val)));
     }
 
-    get fdFocusableItem(): boolean {
+    get fdkFocusableItem(): boolean {
         return this._focusable;
     }
 

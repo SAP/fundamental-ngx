@@ -5,4 +5,4 @@ export * from './set-focusable';
 export * from './focusable-item-view-modifier.interface';
 export * from './focusable.observer';
 export * from './default-focusable-item-view-modifier';
-export * from './fn-focusable-item.provider';
+export * from './fdk-focusable-item-provider.service';

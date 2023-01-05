@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ReadonlyBehaviorDirective } from './readonly-behavior.directive';
 
 @NgModule({
-    declarations: [ReadonlyBehaviorDirective],
+    imports: [ReadonlyBehaviorDirective],
     exports: [ReadonlyBehaviorDirective]
 })
 export class ReadonlyBehaviorModule {}

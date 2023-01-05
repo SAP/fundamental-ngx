@@ -5,20 +5,20 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     templateUrl: './default-example.component.html',
     styles: [
         `
-            [fnFocusableList] {
+            [fdkFocusableList] {
                 border: 1px dashed #dedede;
             }
 
-            [fnFocusableItem] {
+            [fdkFocusableItem] {
                 cursor: pointer;
                 padding: 5px 7px;
             }
 
-            span[fnFocusableItem] {
+            span[fdkFocusableItem] {
                 display: inline-block;
             }
 
-            [fnFocusableItem]:focus {
+            [fdkFocusableItem]:focus {
                 background-color: #dedede;
             }
         `

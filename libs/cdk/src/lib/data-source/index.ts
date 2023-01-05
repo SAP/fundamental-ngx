@@ -1,6 +1,5 @@
 export * from './data-source.module';
 
-export * from './data-source.component';
 export * from './data-source.directive';
 export * from './models/data-source';
 export * from './models/matching-strategy';

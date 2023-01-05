@@ -3,7 +3,8 @@ import { take } from 'rxjs/operators';
 import { TabbableElementService } from '../../services/tabbable-element.service';
 
 @Directive({
-    selector: '[fdInitialFocus], [fd-initial-focus]',
+    selector: '[fdkInitialFocus], [fdInitialFocus], [fd-initial-focus]',
+    standalone: true,
     providers: [TabbableElementService]
 })
 export class InitialFocusDirective implements AfterViewInit {

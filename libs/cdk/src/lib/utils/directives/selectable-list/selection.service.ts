@@ -89,7 +89,7 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
         if (this._items$) {
             this._items$
                 .pipe(
-                    map((items) => items.filter((itm) => itm.fnSelectableItem !== false)),
+                    map((items) => items.filter((itm) => itm.fdkSelectableItem !== false)),
                     switchMap((items: SelectableItemToken<ElementType, ValueType>[]) => {
                         const clickedEvents$ = items.map((item) => item.clicked.pipe(map(() => item)));
                         return merge(...clickedEvents$);
@@ -128,7 +128,7 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
 
     /** @hidden */
     selectItem(item: SelectableItemToken<ElementType, ValueType>): void {
-        if (item.fnSelectableItem !== false) {
+        if (item.fdkSelectableItem !== false) {
             const val: ValueType[] = [item.value, ...this._value];
             const properValues = this._getProperValues(val as SelectableListValueType<ElementType>);
             this._value$.next(properValues);

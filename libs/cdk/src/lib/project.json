@@ -2,7 +2,7 @@
     "name": "cdk",
     "projectType": "library",
     "sourceRoot": "libs/cdk/src/lib",
-    "prefix": "fx",
+    "prefix": "fdk",
     "buildTarget": "build-umbrella",
     "targets": {
         "prepare": {

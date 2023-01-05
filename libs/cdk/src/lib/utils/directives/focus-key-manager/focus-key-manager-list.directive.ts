@@ -21,7 +21,8 @@ import { FOCUSABLE_ITEM } from './focus-key-manager.tokens';
  * To be used with FocusKeyManagerItemDirective
  */
 @Directive({
-    selector: `[fd-focus-key-manager-list], [fdFocusKeyManagerList]`
+    selector: `[fdkFocusKeyManagerList], [fd-focus-key-manager-list], [fdFocusKeyManagerList]`,
+    standalone: true
 })
 export class FocusKeyManagerListDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** Orientation for the FocusKeyManager */

@@ -1,24 +1,25 @@
 import { ChangeDetectorRef, Directive, ElementRef, Inject, Input, Optional, Output } from '@angular/core';
 import { merge, Observable } from 'rxjs';
 import { SelectableItemToken } from './selectable-item.token';
-import { FN_SELECTABLE_ITEM_PROVIDER } from './selectable-list.tokens';
-import { FnDisabledProvider } from '../disabled';
-import { FnReadonlyProvider } from '../readonly';
+import { FDK_SELECTABLE_ITEM_PROVIDER } from './selectable-list.tokens';
+import { FdkDisabledProvider } from '../disabled';
+import { FdkReadonlyProvider } from '../readonly';
 import { SelectionService } from './selection.service';
-import { FnClickedProvider } from '../clicked';
+import { FdkClickedProvider } from '../clicked';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Directive({
-    selector: '[fdSelectableItem]',
-    exportAs: 'fdSelectableItem',
+    selector: '[fdkSelectableItem]',
+    exportAs: 'fdkSelectableItem',
+    standalone: true,
     providers: [
         {
             provide: SelectableItemToken,
             useExisting: SelectableItemDirective
         },
-        FnReadonlyProvider,
-        FnDisabledProvider,
-        FnClickedProvider
+        FdkReadonlyProvider,
+        FdkDisabledProvider,
+        FdkClickedProvider
     ]
 })
 export class SelectableItemDirective<ElementType extends Element = HTMLElement, ValueType = any>
@@ -38,22 +39,22 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
 
     /** @hidden */
     @Input()
-    set fdSelectableItem(value: BooleanInput) {
+    set fdkSelectableItem(value: BooleanInput) {
         const isSelectable = coerceBooleanProperty(value);
         if (isSelectable !== this._selectable) {
             this._selectable = isSelectable;
         }
     }
 
-    get fdSelectableItem(): boolean {
+    get fdkSelectableItem(): boolean {
         let selectable = this._selectable;
-        if (typeof this.provider?.fnSelectableItem !== 'undefined') {
-            selectable = this.provider.fnSelectableItem;
+        if (typeof this.provider?.fdkSelectableItem !== 'undefined') {
+            selectable = this.provider.fdkSelectableItem;
         }
         return (
             selectable &&
-            (!this.disabled$ || !this.disabled$?.fdDisabled) &&
-            (!this.readonly$ || !this.readonly$?.fdReadonly)
+            (!this.disabled$ || !this.disabled$?.fdkDisabled) &&
+            (!this.readonly$ || !this.readonly$?.fdkReadonly)
         );
     }
 
@@ -71,14 +72,14 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
     /** @hidden */
     constructor(
         @Optional()
-        @Inject(FN_SELECTABLE_ITEM_PROVIDER)
+        @Inject(FDK_SELECTABLE_ITEM_PROVIDER)
         private provider: Partial<SelectableItemToken<ElementType, ValueType>>,
-        private disabled$: FnDisabledProvider,
-        private readonly$: FnReadonlyProvider,
+        private disabled$: FdkDisabledProvider,
+        private readonly$: FdkReadonlyProvider,
         private selectionService: SelectionService<ElementType, ValueType>,
         private _elementRef: ElementRef<ElementType>,
         private _cd: ChangeDetectorRef,
-        _clicked: FnClickedProvider
+        _clicked: FdkClickedProvider
     ) {
         this.clicked = this.provider?.clicked || _clicked.asObservable();
         this._listenToDisablingEvents();
@@ -128,7 +129,7 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
 
     /** @hidden */
     private _updateSelectionAndSelectableWatcher(): void {
-        if (this.disabled$?.fdDisabled) {
+        if (this.disabled$?.fdkDisabled) {
             this.selectionService.deselectItem(this);
         }
         this._updateSelectableWatcher();

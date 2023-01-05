@@ -7,17 +7,22 @@
             the data sources.
         </p>
         <p>
+            Since it's a standalone directive, users don't need to manually apply it to a desired component. This can be
+            done with <code>hostDirectives</code> object of the <code>@Component</code> or
+            <code>@Directive</code> decorator.
+        </p>
+        <p>
             It handles opening and closing the data stream with the help of the class that implements
             <code>DataSourceParser</code> interface.
         </p>
         <p>This class can be provided via <code>FD_DATA_SOURCE_TRANSFORMER</code> Injection Token.</p>
         <p>
-            Additionaly, it will emit events when the data inside data provider has been changed, or the data source
+            Additionally, it will emit events when the data inside data provider has been changed, or the data source
             object has been changed completely.
         </p>
     </description>
 
-    <import module="DataSourceDirective" subPackage="data-source"></import>
+    <import module="DataSourceModule" subPackage="data-source"></import>
 
     <fd-header-tabs></fd-header-tabs>
 </fd-doc-page>

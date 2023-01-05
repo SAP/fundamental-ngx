@@ -1,16 +1,16 @@
 import { Directive, Output } from '@angular/core';
-import { FnClickedProvider } from '@fundamental-ngx/cdk/utils';
+import { FdkClickedProvider } from '@fundamental-ngx/cdk/utils';
 import { Observable } from 'rxjs';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fnClickedUsageWithProvider]',
-    providers: [FnClickedProvider]
+    providers: [FdkClickedProvider]
 })
 export class UsageWithProviderDirective {
     @Output() anyOutputName: Observable<MouseEvent | KeyboardEvent>;
 
-    constructor(_clicked: FnClickedProvider) {
+    constructor(_clicked: FdkClickedProvider) {
         this.anyOutputName = _clicked;
     }
 }

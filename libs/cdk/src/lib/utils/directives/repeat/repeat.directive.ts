@@ -4,7 +4,8 @@ import { Directive, Input, OnChanges, SimpleChanges, TemplateRef, ViewContainerR
  * Directive to repeatably render template N times.
  */
 @Directive({
-    selector: '[fdRepeat]'
+    selector: '[fdkRepeat], [fdRepeat]',
+    standalone: true
 })
 export class RepeatDirective implements OnChanges {
     /** Number of times to render a template. */
