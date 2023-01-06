@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { TemplateDirective } from './template.directive';
+import { TemplateDirective, DeprecatedTemplateSelectorDirective } from './template.directive';
 
 @NgModule({
-    imports: [TemplateDirective],
-    exports: [TemplateDirective]
+    imports: [TemplateDirective, DeprecatedTemplateSelectorDirective],
+    exports: [TemplateDirective, DeprecatedTemplateSelectorDirective]
 })
 export class TemplateModule {}

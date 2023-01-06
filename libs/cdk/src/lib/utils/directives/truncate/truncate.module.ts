@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 
-import { TruncateDirective } from './truncate.directive';
+import { TruncateDirective, DeprecatedTruncateSelectorDirective } from './truncate.directive';
 
 @NgModule({
-    imports: [TruncateDirective],
-    exports: [TruncateDirective]
+    imports: [TruncateDirective, DeprecatedTruncateSelectorDirective],
+    exports: [TruncateDirective, DeprecatedTruncateSelectorDirective]
 })
 export class TruncateModule {}

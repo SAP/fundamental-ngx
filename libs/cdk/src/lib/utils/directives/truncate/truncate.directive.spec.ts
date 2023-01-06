@@ -6,13 +6,13 @@ import { TruncateDirective } from './truncate.directive';
 
 @Component({
     template: `
-        <span fd-truncate [fdTruncateState]="true" [fdTruncateWidth]="pixLength">
+        <span fdkTruncate [fdkTruncateState]="true" [fdkTruncateWidth]="pixLength">
             This element should by truncated by width as fdTruncateWidth is provided
         </span>
-        <span fd-truncate [fdTruncateState]="false" [fdTruncateWidth]="pixLength">
+        <span fdkTruncate [fdkTruncateState]="false" [fdkTruncateWidth]="pixLength">
             This element should not be truncated as fdTruncateState is false
         </span>
-        <span style="color:red;" fd-truncate [fdTruncateState]="true">
+        <span style="color:red;" fdkTruncate [fdkTruncateState]="true">
             This element should not be truncated as fdTruncateState is false
         </span>
     `
@@ -32,7 +32,8 @@ describe('TruncateDirective', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, TruncateDirective]
+            declarations: [TestComponent],
+            imports: [TruncateDirective]
         });
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;

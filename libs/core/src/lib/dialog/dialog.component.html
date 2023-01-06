@@ -3,11 +3,11 @@
     role="dialog"
     tabindex="-1"
     aria-modal="true"
-    fdResize
+    fdkResize
     cdkTrapFocus
     cdkDrag
     cdkDragBoundary=".fd-dialog"
-    [fdResizeBoundary]="elementRef()?.nativeElement"
+    [fdkResizeBoundary]="elementRef()?.nativeElement"
     class="fd-dialog__content"
     [class]="dialogConfig.dialogPanelClass"
     [class.cdk-drag]="dialogConfig.draggable"
@@ -20,7 +20,7 @@
     [class.fd-dialog__content--draggable-grab]="dialogConfig.draggable && !isDragged"
     [class.fd-dialog__content--draggable-grabbing]="dialogConfig.draggable && isDragged"
     [cdkDragDisabled]="!dialogConfig.draggable"
-    [fdResizeDisabled]="!dialogConfig.resizable"
+    [fdkResizeDisabled]="!dialogConfig.resizable"
     [@dialog-fade]
     [attr.id]="dialogConfig.id"
     [attr.aria-label]="dialogConfig.ariaLabel"
@@ -31,7 +31,7 @@
     (cdkDragEnded)="isDragged = false"
     (onResizeEnd)="adjustResponsivePadding()"
 >
-    <span fdResizeHandle *ngIf="dialogConfig.resizable" class="fd-dialog__resize-handle"></span>
+    <span fdkResizeHandle *ngIf="dialogConfig.resizable" class="fd-dialog__resize-handle"></span>
 
     <div cdkDragHandle [cdkDragHandleDisabled]="!dialogConfig.draggable">
         <ng-content select="fd-dialog-header"></ng-content>

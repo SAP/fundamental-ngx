@@ -16,8 +16,7 @@ import { delay } from 'rxjs/operators';
 import { DND_ITEM } from '../tokens';
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-dnd-item]',
+    selector: '[fdkDndItem], [fd-dnd-item]',
     providers: [DragDrop, { provide: DND_ITEM, useExisting: forwardRef(() => DndItemDirective) }]
 })
 export class DndItemDirective implements DndItem, AfterContentInit, OnDestroy {

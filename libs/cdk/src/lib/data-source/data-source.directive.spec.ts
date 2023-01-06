@@ -1,17 +1,17 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { isObservable, Observable, of } from 'rxjs';
-import { BaseDataProvider } from './base/base-data-provider.class';
+import { AbstractDataProvider } from './base/abstract-data-provider.class';
 import { BaseDataSource } from './base/base-data-source.class';
 import { DataSourceDirective } from './data-source.directive';
 import { isDataSource } from './helpers/is-datasource';
-import { DataSource, DataSourceParser, DataSourceProvider } from './models/data-source';
+import { DataSource, DataSourceParser, DataSourceProvider } from './models';
 
 export const dataProviderData = [1, 2, 3, 4, 5];
 export const arrayData = [6, 7, 8, 9];
 
-export class MockDataProvider extends BaseDataProvider<any> {
-    constructor(public items) {
+export class MockDataProvider extends AbstractDataProvider<any> {
+    constructor(public items: any[]) {
         super();
     }
     fetch(): Observable<any[]> {
@@ -22,12 +22,14 @@ export class MockDataProvider extends BaseDataProvider<any> {
 export class MockArrayDataSource extends BaseDataSource<number> {
     constructor() {
         super(new MockDataProvider(arrayData));
+        this.match('*');
     }
 }
 
 export class MockObservableDataSource extends BaseDataSource<number> {
     constructor() {
         super(new MockDataProvider(dataProviderData));
+        this.match('*');
     }
 }
 
@@ -64,6 +66,8 @@ describe('DataSourceDirective', () => {
         directive.dataSource = arrayData;
 
         tick(2000);
+
+        console.log(arrayData);
 
         expect(emitSpy).toHaveBeenCalled();
         expect(emitSpy).toHaveBeenCalledWith(arrayData);

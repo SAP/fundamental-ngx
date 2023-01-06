@@ -23,8 +23,8 @@ import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.cl
  *
  * Complex header:
  * <fd-message-box-header>
- *     <ng-template fdTemplate="header"><!--Content--></ng-template>
- *     <ng-template fdTemplate="subheader"><!--Content--></ng-template>
+ *     <ng-template fdkTemplate="header"><!--Content--></ng-template>
+ *     <ng-template fdkTemplate="subheader"><!--Content--></ng-template>
  * </fd-message-box-header>
  * ```
  */

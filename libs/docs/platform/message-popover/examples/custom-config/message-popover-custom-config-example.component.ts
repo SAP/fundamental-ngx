@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { FDP_MESSAGE_POPOVER_CONFIG, MessagePopoverConfig } from '@fundamental-ngx/platform/message-popover';
 
@@ -73,7 +73,7 @@ export class MessagePopoverCustomConfigExampleComponent {
     @ViewChild('business', { read: FormGroupDirective })
     businessForm: FormGroupDirective;
 
-    constructor() {
+    constructor(private readonly _cd: ChangeDetectorRef) {
         this.personalInfoForm = new FormGroup({});
         this.businessInfoForm = new FormGroup({});
     }
@@ -87,6 +87,7 @@ export class MessagePopoverCustomConfigExampleComponent {
         setTimeout(() => {
             this.personalForm.onSubmit(event);
             this.businessForm.onSubmit(event);
+            this._cd.detectChanges();
         });
     }
 }

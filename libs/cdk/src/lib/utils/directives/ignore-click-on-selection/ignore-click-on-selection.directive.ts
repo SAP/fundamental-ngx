@@ -1,6 +1,24 @@
 import { Directive, ElementRef, HostListener, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { IgnoreClickOnSelectionDirectiveToken } from './tokens';
+import {
+    DeprecatedSelector,
+    FD_DEPRECATED_DIRECTIVE_SELECTOR,
+    getDeprecatedModel
+} from '../../deprecated-selector.class';
+
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[fdIgnoreClickOnSelection]',
+    standalone: true,
+    providers: [
+        {
+            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
+            useValue: getDeprecatedModel('[fdkIgnoreClickOnSelection]', '[fdIgnoreClickOnSelection]')
+        }
+    ]
+})
+export class DeprecatedIgnoreClickOnSelectionDirective extends DeprecatedSelector {}
 
 /**
  * Directive will stop propagation and prevent default of click, if selected area is coming from

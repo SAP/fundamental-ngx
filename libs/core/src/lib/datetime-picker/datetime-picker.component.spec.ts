@@ -180,6 +180,7 @@ const DATE_TIME_PICKER_IDENTIFIER = 'core-date-time-picker-unit-test';
 
 runValueAccessorTests({
     component: DatetimePickerComponent,
+    name: 'Datetime picker',
     testModuleMetadata: {
         imports: [DatetimePickerModule, FdDatetimeModule]
     },

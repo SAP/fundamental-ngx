@@ -1,11 +1,35 @@
 import { AfterViewInit, Directive, ElementRef, Input, NgZone } from '@angular/core';
 import { take } from 'rxjs/operators';
+import {
+    DeprecatedSelector,
+    FD_DEPRECATED_DIRECTIVE_SELECTOR,
+    getDeprecatedModel
+} from '../../deprecated-selector.class';
 import { TabbableElementService } from '../../services/tabbable-element.service';
+
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[fdInitialFocus], [fd-initial-focus]',
+    standalone: true,
+    providers: [
+        {
+            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
+            useValue: getDeprecatedModel('[fdkInitialFocus]', '[fdInitialFocus], [fd-initial-focus]')
+        }
+    ]
+})
+export class DeprecatedInitialFocusDirective extends DeprecatedSelector {}
 
 @Directive({
     selector: '[fdkInitialFocus], [fdInitialFocus], [fd-initial-focus]',
     standalone: true,
-    providers: [TabbableElementService]
+    providers: [
+        TabbableElementService,
+        {
+            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
+            useValue: getDeprecatedModel('[fdkInitialFocus]', '[fdInitialFocus], [fd-initial-focus]')
+        }
+    ]
 })
 export class InitialFocusDirective implements AfterViewInit {
     /**

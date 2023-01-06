@@ -3,6 +3,24 @@ import { map, startWith, takeUntil, tap } from 'rxjs/operators';
 import { FocusableItem, FocusableListService } from './focusable-list.service';
 import { FocusableItemDirective } from '../focusable-item/focusable-item.directive';
 import { DestroyedService } from '../../services/destroyed.service';
+import {
+    DeprecatedSelector,
+    FD_DEPRECATED_DIRECTIVE_SELECTOR,
+    getDeprecatedModel
+} from '../../deprecated-selector.class';
+
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[fnFocusableList]',
+    standalone: true,
+    providers: [
+        {
+            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
+            useValue: getDeprecatedModel('[fdkFocusableList]', '[fnFocusableList]')
+        }
+    ]
+})
+export class DeprecatedFocusableListDirective extends DeprecatedSelector {}
 
 @Directive({
     selector: '[fdkFocusableList]',

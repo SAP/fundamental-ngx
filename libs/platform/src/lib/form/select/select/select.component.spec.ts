@@ -243,6 +243,7 @@ const SELECT_IDENTIFIER = 'platform-select-unit-test';
 
 runValueAccessorTests({
     component: SelectComponent,
+    name: 'Select',
     testModuleMetadata: {
         imports: [PlatformSelectModule]
     },

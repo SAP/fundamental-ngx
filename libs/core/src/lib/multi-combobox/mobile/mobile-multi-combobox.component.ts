@@ -9,15 +9,18 @@ import {
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import { takeUntil } from 'rxjs/operators';
-import { MultiComboboxInterface } from '../models/multi-combobox.interface';
-import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.interface';
+import { MobileMultiComboboxInterface } from '../models/multi-combobox.interface';
+import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
 
 @Component({
     selector: 'fd-mobile-multi-combobox',
     templateUrl: './mobile-multi-combobox.component.html',
     styleUrls: ['./mobile-multi-combobox.component.scss']
 })
-export class MobileMultiComboboxComponent extends MobileModeBase<MultiComboboxInterface> implements OnInit, OnDestroy {
+export class MobileMultiComboboxComponent
+    extends MobileModeBase<MobileMultiComboboxInterface>
+    implements OnInit, OnDestroy
+{
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -41,7 +44,7 @@ export class MobileMultiComboboxComponent extends MobileModeBase<MultiComboboxIn
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
-        @Inject(MULTI_COMBOBOX_COMPONENT) multiComboboxComponent: MultiComboboxInterface,
+        @Inject(MULTI_COMBOBOX_COMPONENT) multiComboboxComponent: MobileMultiComboboxInterface,
         @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
     ) {
         super(elementRef, dialogService, multiComboboxComponent, MobileModeControl.MULTI_COMBOBOX, mobileModes);

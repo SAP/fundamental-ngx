@@ -21,7 +21,7 @@ const OPTIONS = [
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiComboboxLoadingExampleComponent {
-    dataSource = new FdMultiComboBoxDataSource(new DelayedBaseDataProvider(OPTIONS));
+    dataSource = new FdMultiComboBoxDataSource(new DelayedDataProvider(OPTIONS));
 
     selectedItems = [];
     loading = false;
@@ -30,16 +30,16 @@ export class MultiComboboxLoadingExampleComponent {
         this.selectedItems = item.selectedItems;
     }
 
-    onDataRequested(): void {
+    dataRequested(): void {
         this.loading = true;
     }
-    onDataReceived(): void {
+    dataReceived(): void {
         this.loading = false;
     }
 }
 
 // Simulating real http request by adding 300ms delay to the DataProvider's "fetch" method
-class DelayedBaseDataProvider<T> extends DataProvider<T> {
+class DelayedDataProvider<T> extends DataProvider<T> {
     fetch(params: Map<string, any>): Observable<T[]> {
         return super.fetch(params).pipe(delay(300));
     }

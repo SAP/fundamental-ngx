@@ -23,7 +23,8 @@ describe('LineClampDirective', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, LineClampDirective, LineClampTargetDirective]
+            declarations: [TestComponent],
+            imports: [LineClampDirective, LineClampTargetDirective]
         });
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;

@@ -2,14 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RtlService } from './services/rtl.service';
 import { ThemesService } from './services/themes.service';
-import { KeyboardSupportService } from './services/keyboard-support/keyboard-support.service';
-import { FocusTrapService } from './services/focus-trap.service';
 import {
     AutoCompleteModule,
     ClickedBehaviorModule,
     DisabledBehaviorModule,
     FocusableItemModule,
     FocusableListModule,
+    InitialFocusModule,
     LineClampModule,
     OnlyDigitsModule,
     OverflowListModule,
@@ -42,7 +41,8 @@ import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
         ClickedBehaviorModule,
         FocusableListModule,
         FocusableItemModule,
-        DisabledBehaviorModule
+        DisabledBehaviorModule,
+        InitialFocusModule
     ],
     exports: [
         FocusableItemModule,
@@ -62,8 +62,9 @@ import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
         ClickedBehaviorModule,
         FocusableListModule,
         FocusableItemModule,
-        DisabledBehaviorModule
+        DisabledBehaviorModule,
+        InitialFocusModule
     ],
-    providers: [RtlService, ThemesService, KeyboardSupportService, FocusTrapService]
+    providers: [RtlService, ThemesService]
 })
 export class UtilsModule {}

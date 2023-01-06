@@ -1,9 +1,9 @@
-import { Directive, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, Inject, Input, OnDestroy, Output } from '@angular/core';
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { isDataSource } from './helpers/is-datasource';
-import { DataSource, DataSourceParser, DataSourceProvider } from './models/data-source';
+import { DataSource, DataSourceParser, DataSourceProvider } from './models';
 import { FD_DATA_SOURCE_TRANSFORMER } from './tokens';
 
 @Directive({
@@ -11,7 +11,9 @@ import { FD_DATA_SOURCE_TRANSFORMER } from './tokens';
     standalone: true,
     providers: [DestroyedService]
 })
-export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = DataSourceProvider<T>> {
+export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = DataSourceProvider<T>>
+    implements OnDestroy
+{
     /**
      * Data source.
      * @param source
@@ -21,7 +23,7 @@ export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = Data
         this._dataSource = source;
         this.dataSourceChanged.next();
 
-        this._initializeDataSource(this._dataSource);
+        this._initializeDataSource();
     }
 
     get dataSource(): DataSource<T> {
@@ -67,14 +69,14 @@ export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = Data
     ) {}
 
     /** @hidden */
-    private _initializeDataSource(ds: DataSource<T>): void {
+    private _initializeDataSource(): void {
         if (isDataSource(this.dataSource)) {
-            this.dataSourceProvider?.close();
+            this.dataSourceProvider?.unsubscribe();
 
             this._dsSubscription?.unsubscribe();
         }
         // Convert whatever comes in as DataSource, so we can work with it identically
-        this.dataSourceProvider = this._toDataStream(ds);
+        this.dataSourceProvider = this._toDataStream(this.dataSource);
 
         if (!this.dataSourceProvider) {
             return;
@@ -83,21 +85,23 @@ export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = Data
         this._dsSubscription = new Subscription();
 
         this._dsSubscription.add(
-            this.dataSourceProvider
-                .onDataLoading()
+            this.dataSourceProvider.dataLoading
                 .pipe(takeUntil(this._destroyed$))
                 .subscribe((isLoading) => this.isLoading.emit(isLoading))
         );
 
         this._dsSubscription.add(
-            this.dataSourceProvider
-                .open()
-                .pipe(takeUntil(this._destroyed$))
-                .subscribe((data) => {
-                    this.dataChanged.emit(data);
-                    this.dataChanged$.next(data);
-                })
+            this.dataSourceProvider.dataChanges.pipe(takeUntil(this._destroyed$)).subscribe((data) => {
+                this.dataChanged.emit(data);
+                this.dataChanged$.next(data);
+            })
         );
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.dataSourceProvider?.unsubscribe();
+        this._dsSubscription?.unsubscribe();
     }
 
     /** @Hidden */

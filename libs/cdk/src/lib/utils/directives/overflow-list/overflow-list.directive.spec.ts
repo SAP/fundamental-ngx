@@ -64,7 +64,8 @@ describe('OverflowItemsDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [WrapperComponent, TestComponent, OverflowListDirective, OverflowListItemDirective],
+            declarations: [WrapperComponent, TestComponent],
+            imports: [OverflowListDirective, OverflowListItemDirective],
             providers: [ViewportRuler]
         }).compileComponents();
     }));

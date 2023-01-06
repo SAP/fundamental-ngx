@@ -9,7 +9,7 @@ import { Observable, Subject } from 'rxjs';
     selector: '[fnTestSelection]',
     providers: [{ provide: SelectableItemToken, useExisting: TestSelectionDirective }]
 })
-class TestSelectionDirective implements SelectableItemToken<string> {
+class TestSelectionDirective implements SelectableItemToken<HTMLElement, string> {
     @Input('fnTestSelection') value!: string;
     selected = false;
 

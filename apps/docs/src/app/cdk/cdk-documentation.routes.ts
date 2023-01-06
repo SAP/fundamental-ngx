@@ -25,10 +25,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/cdk/data-source').then((m) => m.DataSourceDocsModule)
             },
             {
-                path: 'utils',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/utils').then((m) => m.UtilsDocsModule)
-            },
-            {
                 path: 'focusable-item',
                 loadChildren: () =>
                     import('@fundamental-ngx/docs/cdk/focusable-item').then((m) => m.FocusableItemDocsModule)
@@ -45,11 +41,20 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'disabled',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/disabled').then((m) => m.fdkDisabledDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/disabled').then((m) => m.DisabledDocsModule)
             },
             {
                 path: 'clicked',
-                loadChildren: () => import('@fundamental-ngx/docs/cdk/clicked').then((m) => m.FnClickedDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/clicked').then((m) => m.ClickedDocsModule)
+            },
+            {
+                path: 'tabbable',
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/tabbable').then((m) => m.TabbableDocsModule)
+            },
+            {
+                path: 'initial-focus',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/cdk/initial-focus').then((m) => m.InitialFocusDocsModule)
             }
         ]
     }

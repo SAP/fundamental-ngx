@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { ReadonlyBehaviorDirective } from './readonly-behavior.directive';
+import { ReadonlyBehaviorDirective, DeprecatedReadonlyBehaviorDirective } from './readonly-behavior.directive';
 
 @NgModule({
-    imports: [ReadonlyBehaviorDirective],
-    exports: [ReadonlyBehaviorDirective]
+    imports: [ReadonlyBehaviorDirective, DeprecatedReadonlyBehaviorDirective],
+    exports: [ReadonlyBehaviorDirective, DeprecatedReadonlyBehaviorDirective]
 })
 export class ReadonlyBehaviorModule {}

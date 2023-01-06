@@ -1,12 +1,12 @@
 <ul
     class="fd-icon-tab-bar__header"
     role="tablist"
-    fdOverflowList
+    fdkOverflowList
     [isRtl]="isRtl"
     [overflowOffset]="100"
     (overflowChanged)="_recalculateVisibleItems($event)"
 >
-    <li *ngIf="showTotalTab" class="fd-icon-tab-bar__item" role="presentation" fdOverflowListItem>
+    <li *ngIf="showTotalTab" class="fd-icon-tab-bar__item" role="presentation" fdkOverflowListItem>
         <a
             (click)="_totalTab && _selectItem(_totalTab)"
             (keydown)="_keyDownHandler($event, _totalTab, 0)"
@@ -23,11 +23,11 @@
         </a>
     </li>
     <li
-        *ngFor="let item of _tabs | slice: 1; let idx = index; trackBy: _trackByTab"
+        *ngFor="let item of _tabs | slice : 1; let idx = index; trackBy: _trackByTab"
         [class]="item.cssClasses"
         class="fd-icon-tab-bar__item"
         role="presentation"
-        fdOverflowListItem
+        fdkOverflowListItem
         [attr.aria-hidden]="item.hidden"
     >
         <a

@@ -61,7 +61,7 @@ describe('SelectKeyManagerService', () => {
     });
 
     it('should intialize the key manager', () => {
-        service._initKeyManager(_component.selectComponent);
+        service._initKeyManager();
         fixture.detectChanges();
         expect(service._keyManager).not.toBeUndefined();
     });

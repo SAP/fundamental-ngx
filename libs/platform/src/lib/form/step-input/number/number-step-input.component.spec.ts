@@ -549,6 +549,7 @@ const STEP_INPUT_IDENTIFIER = 'platform-step-input-unit-test';
 
 runValueAccessorTests({
     component: NumberStepInputComponent,
+    name: 'Number step input',
     testModuleMetadata: {
         imports: [PlatformStepInputModule]
     },

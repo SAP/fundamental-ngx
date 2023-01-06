@@ -9,7 +9,7 @@
     </div>
 
     <nav
-        fd-focus-key-manager-list
+        fdkFocusKeyManagerList
         orientation="horizontal"
         [skipPredicate]="skipItemPredicate"
         class="fd-pagination__nav"
@@ -18,7 +18,7 @@
         *ngIf="totalItems >= itemsPerPage"
     >
         <button
-            fd-focus-key-manager-item
+            fdkFocusKeyManagerItem
             fd-button
             fdType="transparent"
             glyph="media-rewind"
@@ -34,7 +34,7 @@
         ></button>
 
         <button
-            fd-focus-key-manager-item
+            fdkFocusKeyManagerItem
             fd-button
             fdType="transparent"
             glyph="navigation-left-arrow"
@@ -53,13 +53,15 @@
         <ng-container *ngFor="let page of _pagesBeforeCurrent">
             <button
                 *ngIf="page !== _moreElementValue; else more"
-                fd-focus-key-manager-item
+                fdkFocusKeyManagerItem
                 fd-button
                 fdType="transparent"
                 [ariaLabel]="
-                    pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate: { pageNumber: page })
+                    pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate : { pageNumber: page })
                 "
-                [title]="pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate: { pageNumber: page })"
+                [title]="
+                    pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate : { pageNumber: page })
+                "
                 class="fd-pagination__link"
                 (click)="goToPage(page)"
                 (keyup.enter)="goToPage(page, $event)"
@@ -72,13 +74,13 @@
 
         <button
             #currentPageElement
-            fd-focus-key-manager-item
+            fdkFocusKeyManagerItem
             fd-button
             fdType="transparent"
             [ariaLabel]="
                 pageLabel
                     ? pageLabel(currentPage)
-                    : ('corePagination.pageLabel' | fdTranslate: { pageNumber: currentPage })
+                    : ('corePagination.pageLabel' | fdTranslate : { pageNumber: currentPage })
             "
             class="fd-pagination__link is-active"
             [attr.aria-current]="true"
@@ -91,13 +93,13 @@
                 labelBeforeInputMobile
                     ? labelBeforeInputMobile + ':'
                     : ('corePagination.labelBeforeInputMobile'
-                      | fdTranslate: { pageNumber: currentPage, totalCount: totalItems })
+                      | fdTranslate : { pageNumber: currentPage, totalCount: totalItems })
             }}
         </label>
 
         <input
             #pageInputElement
-            fd-focus-key-manager-item
+            fdkFocusKeyManagerItem
             fd-form-control
             fd-only-digits
             required
@@ -113,7 +115,7 @@
                 inputAriaLabel
                     ? inputAriaLabel(currentPage, totalItems)
                     : ('corePagination.inputAriaLabel'
-                      | fdTranslate: { pageNumber: currentPage, totalCount: totalItems })
+                      | fdTranslate : { pageNumber: currentPage, totalCount: totalItems })
             "
             (keydown.enter)="goToPage(currentPageModel.value)"
             (keydown.space)="goToPage(currentPageModel.value)"
@@ -125,7 +127,7 @@
                 labelAfterInputMobile
                     ? labelAfterInputMobile(_lastPage)
                     : ('corePagination.labelAfterInputMobile'
-                      | fdTranslate: { pageNumber: currentPage, totalCount: totalItems })
+                      | fdTranslate : { pageNumber: currentPage, totalCount: totalItems })
             }}
         </label>
 
@@ -133,13 +135,15 @@
         <ng-container *ngFor="let page of _pagesAfterCurrent">
             <button
                 *ngIf="page !== _moreElementValue; else more"
-                fd-focus-key-manager-item
+                fdkFocusKeyManagerItem
                 fd-button
                 fdType="transparent"
                 [ariaLabel]="
-                    pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate: { pageNumber: page })
+                    pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate : { pageNumber: page })
                 "
-                [title]="pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate: { pageNumber: page })"
+                [title]="
+                    pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate : { pageNumber: page })
+                "
                 class="fd-pagination__link"
                 (click)="goToPage(page)"
                 (keyup.enter)="goToPage(page, $event)"
@@ -151,7 +155,7 @@
         </ng-container>
 
         <button
-            fd-focus-key-manager-item
+            fdkFocusKeyManagerItem
             fd-button
             fdType="transparent"
             glyph="navigation-right-arrow"
@@ -167,7 +171,7 @@
         ></button>
 
         <button
-            fd-focus-key-manager-item
+            fdkFocusKeyManagerItem
             fd-button
             fdType="transparent"
             glyph="media-forward"
@@ -203,7 +207,7 @@
 
 <ng-template #total let-showing="showing">
     <span fd-form-label class="fd-pagination__total-label">
-        {{ 'corePagination.totalResultsLabel' | fdTranslate: _currentShowing }}
+        {{ 'corePagination.totalResultsLabel' | fdTranslate : _currentShowing }}
     </span>
 </ng-template>
 

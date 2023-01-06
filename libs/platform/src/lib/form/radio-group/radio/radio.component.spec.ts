@@ -132,6 +132,7 @@ const RADIO_BUTTON_IDENTIFIER = 'platform-radio-button-unit-test';
 
 runValueAccessorTests({
     component: RadioButtonComponent,
+    name: 'Radio',
     testModuleMetadata: {
         imports: [FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule]
     },

@@ -16,6 +16,5 @@ export function registerFormItemControl(control: Type<FormItemControl>): Provide
 /** Set of fields of FormItemControl component */
 export interface FormItemControl {
     ariaLabelledBy: Nullable<string>;
-
     elmRef?: ElementRef;
 }

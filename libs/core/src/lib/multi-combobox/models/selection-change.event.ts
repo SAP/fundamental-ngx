@@ -1,5 +1,5 @@
 import { SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
-import { MultiComboboxComponent } from '../multi-combobox.component';
+import { BaseMultiCombobox } from '../base-multi-combobox.class';
 
 export class MultiComboboxSelectionChangeEvent {
     /**
@@ -8,7 +8,7 @@ export class MultiComboboxSelectionChangeEvent {
      * @param selectedItems Selected items
      */
     constructor(
-        public source: MultiComboboxComponent,
+        public source: BaseMultiCombobox,
         public selectedItems: SelectableOptionItem['value'] // Contains selected items
     ) {}
 }

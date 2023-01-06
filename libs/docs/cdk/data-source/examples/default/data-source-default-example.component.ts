@@ -4,7 +4,7 @@ import {
     DataSourceDirective,
     DataSourceParser,
     BaseDataSource,
-    BaseDataProvider,
+    AbstractDataProvider,
     DataProvider,
     isDataSource,
     FD_DATA_SOURCE_TRANSFORMER
@@ -12,23 +12,20 @@ import {
 import { delay, isObservable, Observable, of, takeUntil } from 'rxjs';
 
 export class ExampleDataSource<T> extends BaseDataSource<T> {
-    limitless = false;
-    constructor(public dataProvider: BaseDataProvider<T>) {
+    constructor(public dataProvider: AbstractDataProvider<T>) {
         super(dataProvider);
+        // Search for items instantly.
+        this.match('*');
     }
 }
 
 export class ArrayExampleDataSource<T> extends ExampleDataSource<T> {
-    limitless = true;
-    /** @hidden */
     constructor(data: T[]) {
         super(new DataProvider(data));
     }
 }
 
 export class ObservableExampleDataSource<T> extends ExampleDataSource<T> {
-    limitless = false;
-    /** @hidden */
     constructor(data: Observable<T[]>) {
         super(new DataProvider(data));
     }
@@ -80,6 +77,7 @@ export class ExampleDataSourceParser<T> implements DataSourceParser<T, ExampleDa
 })
 export class DataSourceDefaultExampleComponent implements OnInit {
     arrayDataSource = new Array(20).fill(null).map((_v, i) => i);
+    classDataSource = new Array(20).fill(null).map((_v, i) => i + 10);
 
     currentData: number[] = [];
 
@@ -118,7 +116,7 @@ export class DataSourceDefaultExampleComponent implements OnInit {
                 this.dataSourceDirective.dataSource = of(this.arrayDataSource).pipe(delay(3000));
                 break;
             case 'class':
-                this.dataSourceDirective.dataSource = new ExampleDataSource(new DataProvider(this.arrayDataSource));
+                this.dataSourceDirective.dataSource = new ExampleDataSource(new DataProvider(this.classDataSource));
                 break;
         }
     }

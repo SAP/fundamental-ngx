@@ -1,7 +1,7 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
-            <ng-template fdTemplate="header">
+            <ng-template fdkTemplate="header">
                 <div fd-bar-left>
                     <fd-bar-element>
                         <h1 id="fd-dialog-header-3" fd-title>Fresh Market</h1>
@@ -12,7 +12,7 @@
                 </div>
             </ng-template>
 
-            <ng-template fdTemplate="subheader">
+            <ng-template fdkTemplate="subheader">
                 <div fd-bar-middle>
                     <fd-bar-element [fullWidth]="true">
                         <fd-input-group
@@ -45,7 +45,7 @@
         </fd-dialog-body>
 
         <fd-dialog-footer>
-            <ng-template fdTemplate="footer">
+            <ng-template fdkTemplate="footer">
                 <div fd-bar-left>
                     <fd-bar-element> Total price: {{ totalPrice }}€ </fd-bar-element>
                 </div>

@@ -2,7 +2,7 @@ import { InteractivityChecker } from '@angular/cdk/a11y';
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, Optional } from '@angular/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TabbableElementService {
     /** @hidden */
     constructor(

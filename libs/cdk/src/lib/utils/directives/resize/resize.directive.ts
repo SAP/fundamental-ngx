@@ -15,6 +15,24 @@ import { ResizeHandleDirective } from './resize-handle.directive';
 import { fromEvent, merge, Observable, Subscription } from 'rxjs';
 import { filter, map, mapTo, pairwise, takeUntil, tap } from 'rxjs/operators';
 import { RtlService } from '../../services/rtl.service';
+import {
+    DeprecatedSelector,
+    FD_DEPRECATED_DIRECTIVE_SELECTOR,
+    getDeprecatedModel
+} from '../../deprecated-selector.class';
+
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[fdResize], [fd-resize]',
+    standalone: true,
+    providers: [
+        {
+            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
+            useValue: getDeprecatedModel('[fdkResize]', '[fdResize], [fd-resize]')
+        }
+    ]
+})
+export class DeprecatedResizeDirective extends DeprecatedSelector {}
 
 interface ResizeMove {
     x: number;
@@ -22,26 +40,26 @@ interface ResizeMove {
 }
 
 @Directive({
-    selector: '[fdkResize], [fdResize], [fd-resize-handle]',
+    selector: '[fdkResize], [fdResize], [fd-resize]',
     standalone: true
 })
 export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** Element limiting resizable container growth */
     // eslint-disable-next-line @angular-eslint/no-input-rename
-    @Input('fdResizeBoundary') resizeBoundary: string | HTMLElement = 'body';
+    @Input('fdkResizeBoundary') resizeBoundary: string | HTMLElement = 'body';
 
     /** Whether resizable behaviour should be disabled */
     // eslint-disable-next-line @angular-eslint/no-input-rename
-    @Input('fdResizeDisabled') disabled = false;
+    @Input('fdkResizeDisabled') disabled = false;
 
     /** Localization of resize handle inside resizable container */
     // eslint-disable-next-line @angular-eslint/no-input-rename
-    @Input('fdResizeHandleLocation') resizeHandleLocation: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' =
+    @Input('fdkResizeHandleLocation') resizeHandleLocation: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' =
         'bottom-right';
 
     /** Resize handle reference - should be used if Resize handle is not a ContentChild of resizable container */
     // eslint-disable-next-line @angular-eslint/no-input-rename
-    @Input('fdResizeResizeHandleRef') set setResizeHandleReference(value: ResizeHandleDirective) {
+    @Input('fdkResizeResizeHandleRef') set setResizeHandleReference(value: ResizeHandleDirective) {
         this.resizeHandleReference = value;
     }
 

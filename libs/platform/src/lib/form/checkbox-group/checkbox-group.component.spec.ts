@@ -766,6 +766,7 @@ const CHECKBOX_GROUP_IDENTIFIER = 'platform-checkbox-group-unit-test';
 
 runValueAccessorTests({
     component: CheckboxGroupComponent,
+    name: 'Checkbox group',
     testModuleMetadata: {
         imports: [PlatformCheckboxGroupModule]
     },

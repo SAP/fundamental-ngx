@@ -1,13 +1,12 @@
 import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
-import { addCvaDirective } from '../helpers/cva';
 import { CvaDirective } from './cva.directive';
 
 let UNIQUE_ID = 0;
 
 @Component({
-    selector: 'fd-cva-test-control',
+    selector: 'fdk-cva-test-control',
     template: `
         <input
             #comboboxInput
@@ -19,7 +18,7 @@ let UNIQUE_ID = 0;
             (blur)="onBlur()"
         />
     `,
-    hostDirectives: [addCvaDirective]
+    hostDirectives: [CvaDirective]
 })
 export class TestComponent implements ControlValueAccessor, AfterViewInit {
     @ViewChild('comboboxInput') comboboxInput: ElementRef<HTMLInputElement>;

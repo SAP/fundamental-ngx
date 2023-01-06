@@ -9,5 +9,6 @@ export const API_FILES = {
     forms: ['FormsComponent'],
     dataSource: ['DataSourceComponent'],
     utils: ['UtilsComponent'],
-    focusableItem: ['FocusableItemComponent']
+    focusableItem: ['FocusableItemComponent'],
+    tabbable: ['']
 };

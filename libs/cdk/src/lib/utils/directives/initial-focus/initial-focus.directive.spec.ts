@@ -24,7 +24,8 @@ describe('InitialFocusDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, InitialFocusDirective]
+            declarations: [TestComponent],
+            imports: [InitialFocusDirective]
         }).compileComponents();
     }));
 

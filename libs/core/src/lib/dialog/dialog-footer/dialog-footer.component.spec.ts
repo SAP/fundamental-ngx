@@ -9,7 +9,7 @@ import { DialogConfig } from '../utils/dialog-config.class';
 @Component({
     template: `
         <fd-dialog-footer>
-            <ng-template fdTemplate="footer">
+            <ng-template fdkTemplate="footer">
                 <div fd-bar-middle>
                     <button>Custom button</button>
                 </div>

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { DisabledBehaviorDirective } from './disabled-behavior.directive';
+import { DisabledBehaviorDirective, DeprecatedDisabledBehaviorDirective } from './disabled-behavior.directive';
 
 @NgModule({
-    declarations: [DisabledBehaviorDirective],
-    exports: [DisabledBehaviorDirective]
+    imports: [DisabledBehaviorDirective, DeprecatedDisabledBehaviorDirective],
+    exports: [DisabledBehaviorDirective, DeprecatedDisabledBehaviorDirective]
 })
 export class DisabledBehaviorModule {}

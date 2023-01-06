@@ -3,73 +3,57 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
-    Inject,
+    ContentChildren,
+    ElementRef,
+    EventEmitter,
     InjectionToken,
     Injector,
+    Input,
     OnInit,
+    Output,
+    QueryList,
+    TemplateRef,
+    ViewChild,
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import {
-    DataSourceDirective,
-    DataSourceParser,
-    FD_DATA_SOURCE_TRANSFORMER,
-    isDataSource,
-    MatchingBy
-} from '@fundamental-ngx/cdk/data-source';
-import { CvaControl, CvaDirective } from '@fundamental-ngx/cdk/forms';
+import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER } from '@fundamental-ngx/cdk/data-source';
+import { CvaControl, CvaDirective, SelectItem } from '@fundamental-ngx/cdk/forms';
 import {
     AutoCompleteEvent,
+    coerceArraySafe,
+    ContentDensity,
     DestroyedService,
     DynamicComponentService,
     FocusEscapeDirection,
     KeyUtil,
-    resizeObservable
+    Nullable,
+    resizeObservable,
+    TemplateDirective
 } from '@fundamental-ngx/cdk/utils';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { FD_LIST_COMPONENT, ListComponentInterface } from '@fundamental-ngx/core/list';
 
 import equal from 'fast-deep-equal';
-import { isObservable, skip, startWith, Subscription, timer } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FormItemControl } from '@fundamental-ngx/core/form';
+import { TokenizerComponent } from '@fundamental-ngx/core/token';
 
 import { SelectableOptionItem, OptionItem } from '@fundamental-ngx/cdk/forms';
 import { BaseMultiCombobox } from './base-multi-combobox.class';
 import { MobileMultiComboboxComponent } from './mobile/mobile-multi-combobox.component';
 import { MobileMultiComboboxModule } from './mobile/mobile-multi-combobox.module';
+import { MULTI_COMBOBOX_COMPONENT } from './multi-combobox.token';
 
-import { MULTI_COMBOBOX_COMPONENT } from './multi-combobox.interface';
-import {
-    ArrayMultiComboBoxDataSource,
-    FdMultiComboboxAcceptableDataSource,
-    FdMultiComboBoxDataSource,
-    ObservableMultiComboBoxDataSource
-} from './data-source/multi-combobox-data-source';
+import { MultiComboboxDataSourceParser } from './data-source/multi-combobox-data-source-parser';
 
-import { flattenGroups, getSelectItemByInputValue, getTokenIndexByIdlOrValue } from './helpers';
+import { getSelectItemByInputValue, getTokenIndexByIdlOrValue } from './helpers';
+import { MultiComboboxSelectionChangeEvent } from './models/selection-change.event';
 
 export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory: () => 12 });
-
-export class MultiComboboxDataSourceParser<T> implements DataSourceParser<T, FdMultiComboBoxDataSource<T>> {
-    /**
-     * Transforms plain array or observable into DataSource class.
-     * @param source
-     */
-    parse(source: FdMultiComboboxAcceptableDataSource<T>): FdMultiComboBoxDataSource<T> | undefined {
-        if (isDataSource(source)) {
-            return source as FdMultiComboBoxDataSource<T>;
-        }
-
-        if (Array.isArray(source)) {
-            return new ArrayMultiComboBoxDataSource<T>(source);
-        }
-
-        if (isObservable(source)) {
-            return new ObservableMultiComboBoxDataSource<T>(source);
-        }
-
-        return undefined;
-    }
-}
 
 @Component({
     selector: 'fd-multi-combobox',
@@ -106,17 +90,251 @@ export class MultiComboboxDataSourceParser<T> implements DataSourceParser<T, FdM
     ]
 })
 export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implements AfterViewInit, OnInit {
+    /** Provides selected items. */
+    @Input()
+    set selectedItems(value: T[]) {
+        this._selectedItems = coerceArraySafe(value);
+    }
+    get selectedItems(): T[] {
+        return this._selectedItems;
+    }
     /** @hidden */
-    private _dataSourceChanged = false;
+    private _selectedItems: T[] = [];
+
+    /** Provides maximum height for the optionPanel. */
+    @Input()
+    maxHeight = '250px';
+
+    /**
+     * Whether AddOn Button should be focusable
+     * @default true
+     */
+    @Input()
+    buttonFocusable = true;
+
+    /** Whether the autocomplete should be enabled; Enabled by default. */
+    @Input()
+    autoComplete = true;
+
+    /**
+     * TODO: Name of the entity for which DataProvider will be loaded. You can either pass list of
+     * items or use this entityClass and internally we should be able to do lookup to some registry
+     * and retrieve the best matching DataProvider that is set on application level
+     */
+    @Input()
+    entityClass: string;
+
+    /** Whether the multi-combobox should be built on mobile mode. */
+    @Input()
+    mobile = false;
+
+    /** Multi Combobox Mobile Configuration, it's applied only, when mobile is enabled. */
+    @Input()
+    mobileConfig: MobileModeConfig;
+
+    /** Tells the multi-combobox if we need to group items. */
+    @Input()
+    group = false;
+
+    /** A field name to use to group data by (support dotted notation). */
+    @Input()
+    groupKey: string;
+
+    /** The field to show data in secondary column. */
+    @Input()
+    secondaryKey: string;
+
+    /** Show the second column (applicable for two columns layout). */
+    @Input()
+    showSecondaryText = false;
+
+    /** Horizontally align text inside the second column (applicable for two columns layout). */
+    @Input()
+    secondaryTextAlignment: 'left' | 'right' = 'right';
+
+    /** Turns on/off Adjustable Width feature. */
+    @Input()
+    autoResize = true;
+
+    /** Value of the multi combobox */
+    @Input()
+    set value(value: T[]) {
+        this.setValue(value, true);
+    }
+    get value(): T[] {
+        return this._cva.value;
+    }
+
+    /**
+     * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
+     * * `equal` will apply a width to the body equivalent to the width of the control.
+     * * 'fit-content' will apply width needed to properly display items inside, independent of control.
+     */
+    @Input()
+    fillControlMode: PopoverFillMode = 'at-least';
+
+    /** Sets title attribute to addon button. */
+    @Input()
+    addonIconTitle: string;
+
+    /** Sets invalid entry message. */
+    @Input()
+    invalidEntryMessage = 'Invalid entry';
+
+    /** Turns limitless mode, ON or OFF */
+    @Input()
+    limitless: boolean;
+
+    /**
+     * Used in filters and any kind of comparators when we work with objects and this identify
+     * unique field name based on which we are going to do the job
+     */
+    @Input()
+    lookupKey: string;
+
+    /**
+     * When we deal with unknown object we can use `displayKey` to retrieve value from specific
+     * property of the object to act as display value.
+     *
+     * @See ComboBox, Select, RadioGroup, CheckBox Group
+     */
+    @Input()
+    displayKey: string;
+
+    /**
+     * List of values, it can be of type SelectItem, string or any object.
+     * Generic object type is among the list of types,
+     * because we allow to get labels and values using `displayKey` and `lookupKey` inputs accordingly.
+     */
+    @Input()
+    list: Array<SelectItem | string | object>;
+
+    /** Time in ms for how long message of invalid entry should be displayed. */
+    @Input()
+    invalidEntryDisplayTime = 3000;
+
+    /** Event emitted when item is selected. */
+    @Output()
+    selectionChange = new EventEmitter<MultiComboboxSelectionChangeEvent>();
+
+    /** @hidden Emits event when the menu is opened/closed. */
+    @Output()
+    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** Event emitted when data loading is started. */
+    @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    dataRequested = new EventEmitter<void>();
+
+    /** Event emitted when data loading is finished. */
+    @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    dataReceived = new EventEmitter<void>();
+
+    /** @hidden */
+    @ViewChild(FD_LIST_COMPONENT)
+    private readonly listComponent: ListComponentInterface;
+
+    /** @hidden */
+    @ViewChild('searchInputElement')
+    readonly searchInputElement: Nullable<FormItemControl>;
+
+    /** @hidden */
+    @ContentChildren(TemplateDirective)
+    private readonly customTemplates: QueryList<TemplateDirective>;
+
+    /** @hidden */
+    @ViewChild('mobileControlTemplate')
+    private readonly mobileControlTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild('listTemplate')
+    private readonly listTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild(TokenizerComponent)
+    private readonly _tokenizer: TokenizerComponent;
+
+    /** @hidden */
+    @ViewChild('inputGroup', { read: ElementRef })
+    private readonly _inputGroup: ElementRef<HTMLElement>;
+
+    /**
+     * @hidden
+     * Custom Option item Template.
+     */
+    optionItemTemplate: TemplateRef<any>;
+
+    /**
+     * @hidden
+     * Custom Group Header item Template.
+     */
+    groupItemTemplate: TemplateRef<any>;
+
+    /**
+     * @hidden
+     * Custom Secondary item Template.
+     */
+    secondaryItemTemplate: TemplateRef<any>;
+
+    /**
+     * @hidden
+     * Custom Selected option item Template.
+     */
+    selectedItemTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    _contentDensity: ContentDensity = this._multiComboboxConfig?.contentDensity ?? 'cozy';
+
+    /** Set the input text of the input. */
+    set inputText(value: string) {
+        this._inputTextValue = value;
+
+        this._cva.onTouched();
+    }
+
+    /** Get the input text of the input. */
+    get inputText(): string {
+        return this._inputTextValue || '';
+    }
+
+    /** Is empty search field. */
+    get isEmptyValue(): boolean {
+        return this.inputText.trim().length === 0;
+    }
+
+    /** @hidden */
+    get isGroup(): boolean {
+        return !!(this.group && this.groupKey);
+    }
+
+    /** Whether the Multi Input is opened. */
+    isOpen = false;
+
+    /**
+     * @hidden
+     * Max width of list container
+     */
+    maxWidth: number;
+
+    /**
+     * @hidden
+     * Min width of list container
+     */
+    minWidth: number;
+
+    /**
+     * @hidden
+     * Need for opening mobile version
+     */
+    openChange = new Subject<boolean>();
 
     /** @hidden */
     constructor(
-        public readonly dataSourceDirective: DataSourceDirective<T, FdMultiComboBoxDataSource<T>>,
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
-        private readonly _destroyed$: DestroyedService,
-        readonly _dynamicComponentService: DynamicComponentService,
-        @Inject(FD_MAP_LIMIT) private readonly _mapLimit: number
+        private readonly _dynamicComponentService: DynamicComponentService
     ) {
         super();
 
@@ -518,130 +736,6 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         }
     }
 
-    /**
-     * @hidden
-     * Prepares the data stream and subscribes to it.
-     */
-    private _openDataStream(): void {
-        const dataSourceProvider = this.dataSourceDirective.dataSourceProvider;
-
-        if (!dataSourceProvider) {
-            throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
-        }
-
-        dataSourceProvider.limitless = this.limitless;
-
-        dataSourceProvider.dataProvider.setLookupKey(this.lookupKey);
-        const matchingBy: MatchingBy = {
-            firstBy: this._displayFn
-        };
-
-        if (this.secondaryKey) {
-            matchingBy.secondaryBy = this._secondaryFn;
-        }
-
-        dataSourceProvider.dataProvider.setMatchingBy(matchingBy);
-        dataSourceProvider.dataProvider.setMatchingStrategy(this._matchingStrategy);
-
-        // initial data fetch
-        const map = new Map();
-        map.set('query', '*');
-
-        if (!this.limitless) {
-            map.set('limit', this._mapLimit);
-        }
-
-        dataSourceProvider.match(map);
-
-        this._dsSubscription = new Subscription();
-
-        this._dsSubscription.add(
-            this.dataSourceDirective.dataSourceProvider?.onDataRequested().subscribe(this.onDataRequested)
-        );
-        this._dsSubscription.add(
-            this.dataSourceDirective.dataSourceProvider?.onDataReceived().subscribe(this.onDataReceived)
-        );
-
-        this.dataSourceDirective.dataSourceChanged.pipe(startWith(true), takeUntil(this._destroyed$)).subscribe(() => {
-            this._dataSourceChanged = true;
-        });
-
-        this.dataSourceDirective.dataChanged$.pipe(skip(0), takeUntil(this._destroyed$)).subscribe((data) => {
-            if (data.length === 0) {
-                this._processingEmptyData();
-                return;
-            }
-
-            this._previousInputText = this.inputText;
-
-            this._parseDataSourceValue(data);
-
-            this._cva.stateChanges.next('initDataSource.open().');
-
-            this._cd.markForCheck();
-        });
-    }
-
-    /**
-     * Parses the data from the data stream and updates the model if needed.
-     * @param data array of objects from the data stream.
-     */
-    private _parseDataSourceValue(data: T[]): void {
-        this._convertDataSourceSuggestions(data);
-
-        const selectedSuggestionsLength = this._selectedSuggestions.length;
-        if (selectedSuggestionsLength > 0) {
-            for (let i = 0; i < selectedSuggestionsLength; i++) {
-                const selectedSuggestion = this._selectedSuggestions[i];
-                const idx = this._suggestions.findIndex((item) => equal(item.value, selectedSuggestion.value));
-
-                if (idx !== -1) {
-                    this._suggestions[idx].selected = true;
-                }
-            }
-        }
-
-        if (this._dataSourceChanged) {
-            this._flatSuggestions = this.isGroup ? flattenGroups(this._suggestions) : this._suggestions;
-            this._fullFlatSuggestions = this._flatSuggestions;
-
-            this._setSelectedSuggestions();
-
-            this._mapAndUpdateModel();
-
-            this._dataSourceChanged = false;
-        }
-    }
-
-    /**
-     * Transforms plain array into `SelectableOptionItem<T>`
-     * @param data
-     */
-    private _convertDataSourceSuggestions(data: T[]): void {
-        this._suggestions = this._convertToOptionItems(data).map((optionItem) => {
-            const selectedElement = this._selectedSuggestions.find((selectedItem) => selectedItem.id === optionItem.id);
-            if (selectedElement) {
-                optionItem.selected = selectedElement.selected;
-            }
-            return optionItem;
-        });
-    }
-
-    /** @hidden */
-    private _processingEmptyData(): void {
-        this.inputText = this._previousInputText;
-
-        this._setInvalidEntry();
-
-        if (this._timerSub$) {
-            this._timerSub$.unsubscribe();
-        }
-
-        this._timerSub$ = timer(this.invalidEntryDisplayTime).subscribe(() => this._unsetInvalidEntry());
-
-        this._cd.detectChanges();
-    }
-
     /** @hidden */
     private _initWindowResize(): void {
         this._getOptionsListWidth();
@@ -663,5 +757,28 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         this.maxWidth = this.autoResize ? window.innerWidth - scrollBarWidth - rect.left : this.minWidth;
         this.minWidth = rect.width - 2;
         this._cd.detectChanges();
+    }
+
+    /**
+     * @hidden
+     * Assign custom templates
+     */
+    private _assignCustomTemplates(): void {
+        this.customTemplates.forEach((template) => {
+            switch (template.getName()) {
+                case 'optionItemTemplate':
+                    this.optionItemTemplate = template.templateRef;
+                    break;
+                case 'groupItemTemplate':
+                    this.groupItemTemplate = template.templateRef;
+                    break;
+                case 'secondaryItemTemplate':
+                    this.secondaryItemTemplate = template.templateRef;
+                    break;
+                case 'selectedItemTemplate':
+                    this.selectedItemTemplate = template.templateRef;
+                    break;
+            }
+        });
     }
 }

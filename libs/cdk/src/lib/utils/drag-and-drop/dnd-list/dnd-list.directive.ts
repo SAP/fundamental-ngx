@@ -16,8 +16,7 @@ import { ElementChord, FdDropEvent, LinkPosition, ElementPosition, DndItem } fro
 import { DND_ITEM, DND_LIST } from '../tokens';
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-dnd-list]',
+    selector: '[fdkDndList], [fd-dnd-list]',
     providers: [{ provide: DND_LIST, useExisting: forwardRef(() => DndListDirective) }]
 })
 export class DndListDirective<T> implements AfterContentInit, OnDestroy {

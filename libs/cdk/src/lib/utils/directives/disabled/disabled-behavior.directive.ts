@@ -8,9 +8,28 @@ import { FDK_DISABLED_DIRECTIVE } from './fdk-disabled.token';
 import { DisabledViewModifier } from './disabled-view-modifier.interface';
 import { FdkClickedProvider } from '../clicked';
 import { DestroyedService } from '../../services/destroyed.service';
+import {
+    DeprecatedSelector,
+    FD_DEPRECATED_DIRECTIVE_SELECTOR,
+    getDeprecatedModel
+} from '../../deprecated-selector.class';
+
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[fnDisabled]',
+    standalone: true,
+    providers: [
+        {
+            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
+            useValue: getDeprecatedModel('[fdkDisabled]', '[fnDisabled]')
+        }
+    ]
+})
+export class DeprecatedDisabledBehaviorDirective extends DeprecatedSelector {}
 
 @Directive({
     selector: '[fdkDisabled]',
+    standalone: true,
     providers: [
         {
             provide: FDK_DISABLED_DIRECTIVE,

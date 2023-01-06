@@ -2,7 +2,8 @@
 <description>
     Input <code>[dataSource]</code> has this type
     <code>
-        type FdpMultiComboboxDataSource&lt;T&gt; = MultiComboBoxDataSource&lt;T&gt; | Observable&lt;T[]&gt; | T[]
+        type FdMultiComboboxAcceptableDataSource&lt;T&gt; = FdMultiComboBoxDataSource&lt;T&gt; | Observable&lt;T[]&gt; |
+        T[];
     </code>
 </description>
 <component-example>
@@ -86,7 +87,7 @@
 
 <fd-docs-section-title id="loading" componentName="multi-combobox"> Loading </fd-docs-section-title>
 <description>
-    Combobox exposes <code>onDataRequested</code> and <code>onDataReceived</code> outputs, that can be used to implement
+    Combobox exposes <code>dataRequested</code> and <code>dataReceived</code> outputs, that can be used to implement
     external loading logic. These events are tied to the querying process through dataSource.
 </description>
 <component-example>

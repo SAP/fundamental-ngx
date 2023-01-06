@@ -9,7 +9,7 @@ import { RtlService } from '../../services/rtl.service';
  * This directive is used to provide drag & drop with keyboard support.
  * It should be used together with directive fdDndKeyboardItem.
  */
-@Directive({ selector: '[fdDndKeyboardGroup]' })
+@Directive({ selector: '[fdkDndKeyboardGroup], [fdDndKeyboardGroup]' })
 export class DndKeyboardGroupDirective {
     /** Group of items */
     @Input()

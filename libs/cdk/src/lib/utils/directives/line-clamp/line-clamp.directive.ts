@@ -14,6 +14,37 @@ import {
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Nullable } from '../../models/nullable';
+import {
+    DeprecatedSelector,
+    FD_DEPRECATED_DIRECTIVE_SELECTOR,
+    getDeprecatedModel
+} from '../../deprecated-selector.class';
+
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[fdLineClampTarget], [fd-lineclamp-target]',
+    standalone: true,
+    providers: [
+        {
+            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
+            useValue: getDeprecatedModel('[fdkLineClampTarget]', '[fdLineClampTarget], [fd-lineclamp-target]')
+        }
+    ]
+})
+export class DeprecatedLineClampTargetDirective extends DeprecatedSelector {}
+
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[fdLineClamp], [fd-lineclamp]',
+    standalone: true,
+    providers: [
+        {
+            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
+            useValue: getDeprecatedModel('[fdkLineClampTarget]', '[fdLineClamp], [fd-lineclamp]')
+        }
+    ]
+})
+export class DeprecatedLineClampDirective extends DeprecatedSelector {}
 
 @Directive({
     selector: '[fdkLineClampTarget], [fdLineClampTarget], [fd-lineclamp-target]',

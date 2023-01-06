@@ -10,7 +10,7 @@ import { whenStable } from '@fundamental-ngx/core/tests';
 @Component({
     template: `
         <fd-message-box-footer>
-            <ng-template fdTemplate="footer">
+            <ng-template fdkTemplate="footer">
                 <div fd-bar-middle>
                     <button>Custom button</button>
                 </div>

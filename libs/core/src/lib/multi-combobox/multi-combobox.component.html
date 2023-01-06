@@ -59,7 +59,7 @@
 
                 <input
                     #searchInputElement
-                    fd-auto-complete
+                    fdkAutoComplete
                     (onComplete)="_onCompleteTerm($event)"
                     [options]="_suggestions"
                     [inputText]="inputText"
@@ -114,7 +114,7 @@
         [glyphAriaLabel]="this._cva.ariaLabel"
     >
         <input
-            fd-auto-complete
+            fdkAutoComplete
             (onComplete)="_onCompleteTerm($event)"
             [options]="_suggestions"
             [inputText]="inputText"

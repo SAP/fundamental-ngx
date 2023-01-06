@@ -1,11 +1,29 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { KeyUtil } from '../../functions/key-util';
+import {
+    DeprecatedSelector,
+    FD_DEPRECATED_DIRECTIVE_SELECTOR,
+    getDeprecatedModel
+} from '../../deprecated-selector.class';
 
 export interface AutoCompleteEvent {
     term: string;
     forceClose: boolean;
 }
+
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[fdAutoComplete], [fd-auto-complete]',
+    standalone: true,
+    providers: [
+        {
+            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
+            useValue: getDeprecatedModel('[fdkAutoComplete]', '[fdAutoComplete], [fd-auto-complete]')
+        }
+    ]
+})
+export class DeprecatedAutoCompleteDirective extends DeprecatedSelector {}
 
 @Directive({
     selector: '[fdkAutoComplete], [fdAutoComplete], [fd-auto-complete]',

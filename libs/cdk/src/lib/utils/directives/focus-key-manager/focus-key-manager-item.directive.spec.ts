@@ -25,7 +25,8 @@ describe('FocusKeyManagerItem', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, FocusKeyManagerItemDirective, FocusKeyManagerListDirective]
+            declarations: [TestComponent],
+            imports: [FocusKeyManagerItemDirective, FocusKeyManagerListDirective]
         }).compileComponents();
     }));
 

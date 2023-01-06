@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { ResizeDirective } from './resize.directive';
-import { ResizeHandleDirective } from './resize-handle.directive';
+import { ResizeDirective, DeprecatedResizeDirective } from './resize.directive';
+import { ResizeHandleDirective, DeprecatedResizeHandleDirective } from './resize-handle.directive';
 
 @NgModule({
-    imports: [ResizeDirective, ResizeHandleDirective],
-    exports: [ResizeDirective, ResizeHandleDirective]
+    imports: [ResizeDirective, DeprecatedResizeDirective, ResizeHandleDirective, DeprecatedResizeHandleDirective],
+    exports: [ResizeDirective, DeprecatedResizeDirective, ResizeHandleDirective, DeprecatedResizeHandleDirective]
 })
 export class ResizeModule {}

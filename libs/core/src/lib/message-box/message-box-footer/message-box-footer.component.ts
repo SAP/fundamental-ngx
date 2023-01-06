@@ -12,7 +12,7 @@ export const MessageBoxButtonClass = 'fd-message-box__decisive-button';
  *
  * Complex footer:
  * <fd-message-box-footer>
- *     <ng-template fdTemplate="footer"><!--Content--></ng-template>
+ *     <ng-template fdkTemplate="footer"><!--Content--></ng-template>
  * </fd-message-box-footer>
  * ```
  * */

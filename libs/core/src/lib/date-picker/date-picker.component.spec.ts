@@ -447,6 +447,7 @@ class DateTimePickerHostComponent {
 
 runValueAccessorTests<DatePickerComponent<FdDate>, DateTimePickerHostComponent>({
     component: DatePickerComponent,
+    name: 'Date picker',
     testModuleMetadata: {
         imports: [DatePickerModule, FdDatetimeModule],
         declarations: [DateTimePickerHostComponent]

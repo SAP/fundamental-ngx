@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 
-import { OnlyDigitsDirective } from './only-digits.directive';
+import { OnlyDigitsDirective, DeprecatedOnlyDigitsDirective } from './only-digits.directive';
 
 @NgModule({
-    imports: [OnlyDigitsDirective],
-    exports: [OnlyDigitsDirective]
+    imports: [OnlyDigitsDirective, DeprecatedOnlyDigitsDirective],
+    exports: [OnlyDigitsDirective, DeprecatedOnlyDigitsDirective]
 })
 export class OnlyDigitsModule {}

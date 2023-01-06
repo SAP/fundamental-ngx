@@ -116,7 +116,6 @@ export const layouts: SectionInterfaceContent[] = [
 export const utilities: SectionInterfaceContent[] = [
     { url: 'core/global-config', name: 'Global Configuration' },
     { url: 'core/infinite-scroll', name: 'Infinite Scroll' },
-    { url: 'core/initial-focus', name: 'Initial Focus' },
     { url: 'core/scroll-spy', name: 'Scroll Spy' },
     { url: 'core/theme-switcher', name: 'Theme Switcher API' },
     { url: 'core/theming', name: 'Theming' },

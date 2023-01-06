@@ -17,10 +17,6 @@ export const directives: SectionInterfaceContent[] = [
         name: 'Data Source'
     },
     {
-        url: 'cdk/utils',
-        name: 'Utils'
-    },
-    {
         url: 'cdk/focusable-list',
         name: 'Focusable List'
     },
@@ -35,18 +31,14 @@ export const directives: SectionInterfaceContent[] = [
     {
         url: 'cdk/clicked',
         name: 'Clicked Behaviour'
+    },
+    {
+        url: 'cdk/initial-focus',
+        name: 'Initial Focus'
     }
 ];
 
 export const utilities: SectionInterfaceContent[] = [
-    {
-        url: 'cdk/typecheck',
-        name: 'Type check'
-    },
-    {
-        url: 'cdk/focus-trap',
-        name: 'Focus trap'
-    },
     {
         url: 'cdk/tabbable',
         name: 'Tabbable element'

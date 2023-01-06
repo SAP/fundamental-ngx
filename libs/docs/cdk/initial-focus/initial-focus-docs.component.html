@@ -1,0 +1,31 @@
+<fd-docs-section-title id="default" componentName="InitialFocus">Basic initial focus</fd-docs-section-title>
+<description>
+    <p>Initial focus directive is designed to ease setting initial focus on some element.</p>
+</description>
+<component-example>
+    <fdk-initial-focus-default-example></fdk-initial-focus-default-example>
+</component-example>
+<code-example [exampleFiles]="initialFocusDefaultExample"></code-example>
+<separator></separator>
+<fd-docs-section-title id="nested" componentName="InitialFocus"
+    >Initial focus with nested elements</fd-docs-section-title
+>
+<description>
+    <p>By default, initial focus directive will try to focus element to which this directive is applied.</p>
+
+    <p>If this element is not focusable or tabbable, it will try to find such element in it's children.</p>
+
+    <p>
+        Developers can change order of search for the tabbable elements by providing
+        <code>[focusLastElement]="true"</code> input property.
+    </p>
+
+    <p>
+        Additionally, developers can specify CSS selector of the focusable element manually, to focus on a specific
+        element.
+    </p>
+</description>
+<component-example>
+    <fdk-initial-focus-nested-elements-example></fdk-initial-focus-nested-elements-example>
+</component-example>
+<code-example [exampleFiles]="initialFocusNestedElementExample"></code-example>

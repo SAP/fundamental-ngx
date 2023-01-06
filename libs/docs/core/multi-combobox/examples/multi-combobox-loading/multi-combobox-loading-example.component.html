@@ -5,8 +5,8 @@
         displayKey="name"
         [dataSource]="dataSource"
         (selectionChange)="onSelect($event)"
-        (onDataRequested)="onDataRequested()"
-        (onDataReceived)="onDataReceived()"
+        (dataRequested)="dataRequested()"
+        (dataReceived)="dataReceived()"
         [selectedItems]="selectedItems"
     ></fd-multi-combobox>
 </fd-busy-indicator>

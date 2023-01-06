@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 @Component({
-    template: '<ng-template fdTemplate="Header">Template content</ng-template>'
+    template: '<ng-template fdkTemplate="Header">Template content</ng-template>'
 })
 class TestComponent {
     @ViewChild(TemplateDirective) templateDirectiveRef: TemplateDirective;
@@ -15,7 +15,8 @@ describe('TemplateDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, TemplateDirective]
+            declarations: [TestComponent],
+            imports: [TemplateDirective]
         }).compileComponents();
     }));
 

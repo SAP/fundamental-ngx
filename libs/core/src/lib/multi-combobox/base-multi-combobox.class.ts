@@ -10,73 +10,51 @@ import {
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
-import {
-    ChangeDetectorRef,
-    ContentChildren,
-    Directive,
-    ElementRef,
-    EventEmitter,
-    inject,
-    Input,
-    Output,
-    QueryList,
-    TemplateRef,
-    ViewChild
-} from '@angular/core';
-import { MatchingStrategy } from '@fundamental-ngx/cdk/data-source';
+import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, inject } from '@angular/core';
+import { DataSourceDirective, MatchingBy, MatchingStrategy } from '@fundamental-ngx/cdk/data-source';
 import {
     CvaControl,
     CvaDirective,
     FormStates,
     isOptionItem,
     isSelectableOptionItem,
-    SelectableOptionItem,
-    SelectItem
+    SelectableOptionItem
 } from '@fundamental-ngx/cdk/forms';
 import {
     coerceArraySafe,
-    ContentDensity,
+    DestroyedService,
     isFunction,
     isJsObject,
     isString,
     Nullable,
-    RangeSelector,
-    TemplateDirective
+    RangeSelector
 } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import { FormItemControl } from '@fundamental-ngx/core/form';
-import { FD_LIST_COMPONENT, ListComponentInterface } from '@fundamental-ngx/core/list';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { TokenizerComponent } from '@fundamental-ngx/core/token';
 import equal from 'fast-deep-equal';
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
-import { FdMultiComboboxAcceptableDataSource } from './data-source/multi-combobox-data-source';
-import { displayValue, lookupValue, objectGet } from './helpers';
+import { BehaviorSubject, skip, startWith, Subscription, takeUntil, timer } from 'rxjs';
+import {
+    FdMultiComboboxAcceptableDataSource,
+    FdMultiComboBoxDataSource
+} from './data-source/multi-combobox-data-source';
+import { displayValue, flattenGroups, lookupValue, objectGet } from './helpers';
+import { MultiComboboxSelectionChangeEvent } from './models/selection-change.event';
 import { MultiComboboxConfig } from './multi-combobox-config';
+import { FD_MAP_LIMIT } from './multi-combobox.component';
 
 export type TextAlignment = 'left' | 'right';
-
-export class MultiComboboxSelectionChangeEvent {
-    /**
-     * Multi Combobox selection change event
-     * @param source Multi Combobox component
-     * @param selectedItems Selected items
-     */
-    constructor(
-        public source: BaseMultiCombobox,
-        public selectedItems: SelectableOptionItem['value'] // Contains selected items
-    ) {}
-}
 
 @Directive()
 export abstract class BaseMultiCombobox<T = any> {
     // Injection section
     /** @hidden */
-    cvaControl: CvaControl<T> = inject(CvaControl);
+    readonly cvaControl: CvaControl<T> = inject(CvaControl);
+
+    /** @hidden */
+    readonly dataSourceDirective: DataSourceDirective<T, FdMultiComboBoxDataSource<T>> = inject(DataSourceDirective);
 
     /** Control Value Accessor directive for forms support. */
-    readonly _cva = inject(CvaDirective, {
+    readonly _cva = inject(CvaDirective<T>, {
         self: true
     });
 
@@ -94,243 +72,17 @@ export abstract class BaseMultiCombobox<T = any> {
     /** @hidden */
     protected readonly _cd = inject(ChangeDetectorRef);
 
-    // Input section
-
-    /** Provides selected items. */
-    @Input()
-    set selectedItems(value: T[]) {
-        this._selectedItems = coerceArraySafe(value);
-    }
-    get selectedItems(): T[] {
-        return this._selectedItems;
-    }
     /** @hidden */
-    private _selectedItems: T[] = [];
+    protected readonly _mapLimit = inject(FD_MAP_LIMIT);
 
-    /** Provides maximum height for the optionPanel. */
-    @Input()
-    maxHeight = '250px';
-
-    /**
-     * Whether AddOn Button should be focusable
-     * @default true
-     */
-    @Input()
-    buttonFocusable = true;
-
-    /** Whether the autocomplete should be enabled; Enabled by default. */
-    @Input()
-    autoComplete = true;
-
-    /**
-     * TODO: Name of the entity for which DataProvider will be loaded. You can either pass list of
-     * items or use this entityClass and internally we should be able to do lookup to some registry
-     * and retrieve the best matching DataProvider that is set on application level
-     */
-    @Input()
-    entityClass: string;
-
-    /** Whether the multi-combobox should be built on mobile mode. */
-    @Input()
-    mobile = false;
-
-    /** Multi Combobox Mobile Configuration, it's applied only, when mobile is enabled. */
-    @Input()
-    mobileConfig: MobileModeConfig;
-
-    /** Tells the multi-combobox if we need to group items. */
-    @Input()
-    group = false;
-
-    /** A field name to use to group data by (support dotted notation). */
-    @Input()
-    groupKey: string;
-
-    /** The field to show data in secondary column. */
-    @Input()
-    secondaryKey: string;
-
-    /** Show the second column (applicable for two columns layout). */
-    @Input()
-    showSecondaryText = false;
-
-    /** Horizontally align text inside the second column (applicable for two columns layout). */
-    @Input()
-    secondaryTextAlignment: TextAlignment = 'right';
-
-    /** Turns on/off Adjustable Width feature. */
-    @Input()
-    autoResize = true;
-
-    /** Value of the multi combobox */
-    @Input()
-    set value(value: T[]) {
-        this.setValue(value, true);
-    }
-    get value(): T[] {
-        return this._cva.value;
-    }
-
-    /**
-     * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
-     * * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
-     * * `equal` will apply a width to the body equivalent to the width of the control.
-     * * 'fit-content' will apply width needed to properly display items inside, independent of control.
-     */
-    @Input()
-    fillControlMode: PopoverFillMode = 'at-least';
-
-    /** Sets title attribute to addon button. */
-    @Input()
-    addonIconTitle: string;
-
-    /** Sets invalid entry message. */
-    @Input()
-    invalidEntryMessage = 'Invalid entry';
-
-    /** Turns limitless mode, ON or OFF */
-    @Input()
-    limitless: boolean;
-
-    /**
-     * Used in filters and any kind of comparators when we work with objects and this identify
-     * unique field name based on which we are going to do the job
-     */
-    @Input()
-    lookupKey: string;
-
-    /**
-     * When we deal with unknown object we can use `displayKey` to retrieve value from specific
-     * property of the object to act as display value.
-     *
-     * @See ComboBox, Select, RadioGroup, CheckBox Group
-     */
-    @Input()
-    displayKey: string;
-
-    /**
-     * List of values, it can be of type SelectItem, string or any object.
-     * Generic object type is among the list of types,
-     * because we allow to get labels and values using `displayKey` and `lookupKey` inputs accordingly.
-     */
-    @Input()
-    set list(value: Array<SelectItem | string | object>) {
-        this._list = value;
-    }
-    get list(): Array<SelectItem | string | object> {
-        return this._list;
-    }
-
-    /** Time in ms for how long message of invalid entry should be displayed. */
-    @Input()
-    invalidEntryDisplayTime = 3000;
-
-    /** @hidden */
-    private _list: Array<SelectItem | string | object>;
-
-    /** Event emitted when item is selected. */
-    @Output()
-    selectionChange = new EventEmitter<MultiComboboxSelectionChangeEvent>();
-
-    /** @hidden Emits event when the menu is opened/closed. */
-    @Output()
-    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-    /** Event emitted when data loading is started. */
-    @Output()
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    onDataRequested = new EventEmitter<void>();
-
-    /** Event emitted when data loading is finished. */
-    @Output()
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    onDataReceived = new EventEmitter<void>();
-
-    /** @hidden */
-    @ViewChild(FD_LIST_COMPONENT)
-    protected readonly listComponent: ListComponentInterface;
-
-    /** @hidden */
-    @ViewChild('searchInputElement')
-    protected readonly searchInputElement: FormItemControl | undefined;
-
-    /** @hidden */
-    @ContentChildren(TemplateDirective)
-    protected readonly customTemplates: QueryList<TemplateDirective>;
-
-    /** @hidden */
-    @ViewChild('mobileControlTemplate')
-    protected readonly mobileControlTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    @ViewChild('listTemplate')
-    protected readonly listTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    @ViewChild(TokenizerComponent)
-    protected readonly _tokenizer: TokenizerComponent;
-
-    /** @hidden */
-    @ViewChild('inputGroup', { read: ElementRef })
-    protected readonly _inputGroup: ElementRef<HTMLElement>;
+    /** @Hidden */
+    protected readonly _destroyed$ = inject(DestroyedService);
 
     /**
      * @hidden
      * List of selected suggestions
      */
     _selectedSuggestions: SelectableOptionItem<T>[] = [];
-
-    /**
-     * @hidden
-     * Custom Option item Template.
-     */
-    optionItemTemplate: TemplateRef<any>;
-
-    /**
-     * @hidden
-     * Custom Group Header item Template.
-     */
-    groupItemTemplate: TemplateRef<any>;
-
-    /**
-     * @hidden
-     * Custom Secondary item Template.
-     */
-    secondaryItemTemplate: TemplateRef<any>;
-
-    /**
-     * @hidden
-     * Custom Selected option item Template.
-     */
-    selectedItemTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    _contentDensity: ContentDensity = this._multiComboboxConfig?.contentDensity ?? 'cozy';
-
-    /** Set the input text of the input. */
-    set inputText(value: string) {
-        this._inputTextValue = value;
-
-        this._cva.onTouched();
-    }
-
-    /** Get the input text of the input. */
-    get inputText(): string {
-        return this._inputTextValue || '';
-    }
-
-    /** Is empty search field. */
-    get isEmptyValue(): boolean {
-        return this.inputText.trim().length === 0;
-    }
-
-    /** @hidden */
-    get isGroup(): boolean {
-        return !!(this.group && this.groupKey);
-    }
-
-    /** Whether the Multi Input is opened. */
-    isOpen = false;
 
     /**
      * @hidden
@@ -347,23 +99,24 @@ export abstract class BaseMultiCombobox<T = any> {
     /** @hidden */
     _fullFlatSuggestions: SelectableOptionItem[] = [];
 
-    /**
-     * @hidden
-     * Max width of list container
-     */
-    maxWidth: number;
+    abstract selectedItems: T[];
+    abstract group: boolean;
+    abstract groupKey: string;
+    abstract displayKey: string;
+    abstract secondaryKey: string;
+    abstract showSecondaryText: boolean;
+    abstract lookupKey: string;
+    abstract invalidEntryMessage: string;
+    abstract invalidEntryDisplayTime: number;
+    abstract limitless: boolean;
+    abstract isGroup: boolean;
+    abstract inputText: string;
 
-    /**
-     * @hidden
-     * Min width of list container
-     */
-    minWidth: number;
+    abstract searchInputElement: Nullable<FormItemControl>;
 
-    /**
-     * @hidden
-     * Need for opening mobile version
-     */
-    openChange = new Subject<boolean>();
+    abstract selectionChange: EventEmitter<MultiComboboxSelectionChangeEvent>;
+    abstract dataReceived: EventEmitter<void>;
+    abstract dataRequested: EventEmitter<void>;
 
     /** @hidden */
     selectedShown$ = new BehaviorSubject(false);
@@ -415,6 +168,9 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /** @hidden */
     protected readonly _rangeSelector = new RangeSelector();
+
+    /** @hidden */
+    private _dataSourceChanged = false;
 
     /** @hidden */
     protected _displayFn = (value: any): string => displayValue(value, this.displayKey);
@@ -624,29 +380,6 @@ export abstract class BaseMultiCombobox<T = any> {
         return selectItems;
     }
 
-    /**
-     * @hidden
-     * Assign custom templates
-     */
-    protected _assignCustomTemplates(): void {
-        this.customTemplates.forEach((template) => {
-            switch (template.getName()) {
-                case 'optionItemTemplate':
-                    this.optionItemTemplate = template.templateRef;
-                    break;
-                case 'groupItemTemplate':
-                    this.groupItemTemplate = template.templateRef;
-                    break;
-                case 'secondaryItemTemplate':
-                    this.secondaryItemTemplate = template.templateRef;
-                    break;
-                case 'selectedItemTemplate':
-                    this.selectedItemTemplate = template.templateRef;
-                    break;
-            }
-        });
-    }
-
     /** @hidden */
     protected _setInvalidEntry(): void {
         if (this._previousState || this._previousStateMessage) {
@@ -693,5 +426,129 @@ export abstract class BaseMultiCombobox<T = any> {
         this._cva.onChange(selectedItems);
 
         this._emitChangeEvent();
+    }
+
+    /**
+     * @hidden
+     * Prepares the data stream and subscribes to it.
+     */
+    protected _openDataStream(): void {
+        const dataSourceProvider = this.dataSourceDirective.dataSourceProvider;
+
+        if (!dataSourceProvider) {
+            throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
+        }
+
+        dataSourceProvider.limitless = this.limitless;
+
+        dataSourceProvider.dataProvider.setLookupKey(this.lookupKey);
+        const matchingBy: MatchingBy = {
+            firstBy: this._displayFn
+        };
+
+        if (this.secondaryKey) {
+            matchingBy.secondaryBy = this._secondaryFn;
+        }
+
+        dataSourceProvider.dataProvider.setMatchingBy(matchingBy);
+        dataSourceProvider.dataProvider.setMatchingStrategy(this._matchingStrategy);
+
+        // initial data fetch
+        const map = new Map();
+        map.set('query', '*');
+
+        if (!this.limitless) {
+            map.set('limit', this._mapLimit);
+        }
+
+        dataSourceProvider.match(map);
+
+        this._dsSubscription = new Subscription();
+
+        this._dsSubscription.add(
+            this.dataSourceDirective.dataSourceProvider?.dataRequested.subscribe(this.dataRequested)
+        );
+        this._dsSubscription.add(
+            this.dataSourceDirective.dataSourceProvider?.dataReceived.subscribe(this.dataReceived)
+        );
+
+        this.dataSourceDirective.dataSourceChanged.pipe(startWith(true), takeUntil(this._destroyed$)).subscribe(() => {
+            this._dataSourceChanged = true;
+        });
+
+        this.dataSourceDirective.dataChanged$.pipe(skip(0), takeUntil(this._destroyed$)).subscribe((data) => {
+            if (data.length === 0) {
+                this._processingEmptyData();
+                return;
+            }
+
+            this._previousInputText = this.inputText;
+
+            this._parseDataSourceValue(data);
+
+            this._cva.stateChanges.next('initDataSource.open().');
+
+            this._cd.markForCheck();
+        });
+    }
+
+    /**
+     * Parses the data from the data stream and updates the model if needed.
+     * @param data array of objects from the data stream.
+     */
+    protected _parseDataSourceValue(data: T[]): void {
+        this._convertDataSourceSuggestions(data);
+
+        const selectedSuggestionsLength = this._selectedSuggestions.length;
+        if (selectedSuggestionsLength > 0) {
+            for (let i = 0; i < selectedSuggestionsLength; i++) {
+                const selectedSuggestion = this._selectedSuggestions[i];
+                const idx = this._suggestions.findIndex((item) => equal(item.value, selectedSuggestion.value));
+
+                if (idx !== -1) {
+                    this._suggestions[idx].selected = true;
+                }
+            }
+        }
+
+        if (this._dataSourceChanged) {
+            this._flatSuggestions = this.isGroup ? flattenGroups(this._suggestions) : this._suggestions;
+            this._fullFlatSuggestions = this._flatSuggestions;
+
+            this._setSelectedSuggestions();
+
+            this._mapAndUpdateModel();
+
+            this._dataSourceChanged = false;
+        }
+    }
+
+    /**
+     * Transforms plain array into `SelectableOptionItem<T>`
+     * @param data
+     */
+    protected _convertDataSourceSuggestions(data: T[]): void {
+        this._suggestions = this._convertToOptionItems(data).map((optionItem) => {
+            const selectedElement = this._selectedSuggestions.find((selectedItem) => selectedItem.id === optionItem.id);
+            if (selectedElement) {
+                optionItem.selected = selectedElement.selected;
+            }
+            return optionItem;
+        });
+    }
+
+    /** @hidden */
+    protected _processingEmptyData(): void {
+        this.inputText = this._previousInputText;
+
+        this._setInvalidEntry();
+
+        if (this._timerSub$) {
+            this._timerSub$.unsubscribe();
+        }
+
+        this._timerSub$ = timer(this.invalidEntryDisplayTime).subscribe(() => this._unsetInvalidEntry());
+
+        this._cd.detectChanges();
     }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 interface MaxErrorModel {
@@ -36,7 +36,7 @@ export class FormContainerExampleComponent {
     @ViewChild('business', { read: FormGroupDirective })
     businessForm: FormGroupDirective;
 
-    constructor() {
+    constructor(private readonly _cd: ChangeDetectorRef) {
         this.personalInfoForm = new FormGroup({});
         this.businessInfoForm = new FormGroup({});
     }
@@ -50,6 +50,7 @@ export class FormContainerExampleComponent {
         setTimeout(() => {
             this.personalForm.onSubmit(event);
             this.businessForm.onSubmit(event);
+            this._cd.detectChanges();
         });
     }
 }

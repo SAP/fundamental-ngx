@@ -510,8 +510,8 @@
 <!-- Empty Table Message -->
 <ng-template #emptyTableTemplate>
     <tbody *ngIf="!_firstLoadingDone" fd-table-body>
-        <tr fd-table-row role="row" *fdRepeat="3">
-            <td fd-table-cell *fdRepeat="_tableColumnsLength">
+        <tr fd-table-row role="row" *fdkRepeat="3">
+            <td fd-table-cell *fdkRepeat="_tableColumnsLength">
                 <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="60%"></fd-skeleton>
             </td>
         </tr>

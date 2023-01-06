@@ -191,11 +191,6 @@ export const ROUTES: Routes = [
                     import('@fundamental-ngx/docs/core/infinite-scroll').then((m) => m.InfiniteScrollDocsModule)
             },
             {
-                path: 'initial-focus',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/core/initial-focus').then((m) => m.InitialFocusDocsModule)
-            },
-            {
                 path: 'inline-help',
                 loadChildren: () => import('@fundamental-ngx/docs/core/inline-help').then((m) => m.InlineHelpDocsModule)
             },

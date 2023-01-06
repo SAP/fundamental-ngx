@@ -1,5 +1,5 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { QueryList } from '@angular/core';
+import { Injectable, QueryList } from '@angular/core';
 import { KeyboardSupportItemInterface } from '../../interfaces/keyboard-support-item.interface';
 import { merge, Subject } from 'rxjs';
 import { filter, startWith, takeUntil, tap } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { DOWN_ARROW, hasModifierKey, TAB, UP_ARROW } from '@angular/cdk/keycodes
 
 export type FocusEscapeDirection = 'up' | 'down';
 
+@Injectable({ providedIn: 'root' })
 export class KeyboardSupportService<T> {
     /** Subject that is thrown, when focus escapes the list */
     focusEscapeList = new Subject<FocusEscapeDirection>();

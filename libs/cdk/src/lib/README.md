@@ -57,7 +57,7 @@ For an existing Angular CLI application,
     To add the entire library, add the following import to your main application module.
 
     ```typescript
-    import { FundamentalNgxCDKModule } from '@fundamental-ngx/cx';
+    import { FundamentalNgxCDKModule } from '@fundamental-ngx/cdk';
 
     @NgModule({
         ...
@@ -68,10 +68,10 @@ For an existing Angular CLI application,
 
     To include an individual Angular Fundamental component in your application, you only need to import the relevant module.
 
-    For example, to use Switchs, add the following import to your main application module.
+    For example, to use Drag&Drop directive, add the following import to your main application module.
 
     ```typescript
-    import { CvaDirective } from '@fundamental-ngx/cdk/forms';
+    import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
     ```
 
 ## <a name="5"></a>5. Known Issues
@@ -84,6 +84,6 @@ If you encounter an issue, you can [create a ticket](https://github.com/SAP/fund
 
 ## <a name="7"></a>7. Contributing
 
-If you want to contribute, please check the [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md) documentation for contribution guidelines. Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit).
+If you want to contribute, please check the [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md) documentation for contribution guidelines. Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit).
 
 Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/main/NEW_COMPONENT.md) guide on building a new component for the library and creating the necessary documentation for your new component.

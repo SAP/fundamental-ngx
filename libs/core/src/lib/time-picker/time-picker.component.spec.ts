@@ -211,6 +211,7 @@ class TimePickerHostComponent {
 
 runValueAccessorTests<TimePickerComponent<FdDate>, TimePickerHostComponent>({
     component: TimePickerComponent,
+    name: 'Time picker',
     testModuleMetadata: {
         imports: [TimePickerModule, FdDatetimeModule],
         declarations: [TimePickerHostComponent]

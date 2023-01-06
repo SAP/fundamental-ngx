@@ -422,6 +422,7 @@ class PlatformDatePickerHostComponent {
 
 runValueAccessorTests<PlatformDatePickerComponent<FdDate>, PlatformDatePickerHostComponent>({
     component: PlatformDatePickerComponent,
+    name: 'Date Picker',
     testModuleMetadata: {
         imports: [PlatformDatePickerModule, FdDatetimeModule],
         declarations: [PlatformDatePickerHostComponent]

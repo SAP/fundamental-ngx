@@ -8,7 +8,7 @@
                 *ngIf="mobileConfig?.hasCloseButton"
                 (click)="handleDismiss()"
             ></button>
-            <ng-template fdTemplate="subheader">
+            <ng-template fdkTemplate="subheader">
                 <div fd-bar-middle>
                     <fd-bar-element class="custom-multi-input-mobile-control-element">
                         <ng-container *ngTemplateOutlet="childContent?.controlTemplate || null"></ng-container>

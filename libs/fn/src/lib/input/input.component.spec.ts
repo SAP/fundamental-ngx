@@ -63,6 +63,7 @@ const INPUT_IDENTIFIER = 'fn-input-unit-test';
 
 runValueAccessorTests({
     component: InputComponent,
+    name: 'Input',
     testModuleMetadata: {
         imports: [InputModule]
     },

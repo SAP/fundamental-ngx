@@ -1,11 +1,11 @@
-import { BaseDataProvider, BaseDataSource, DataProvider } from '@fundamental-ngx/cdk/data-source';
+import { AbstractDataProvider, BaseDataSource, DataProvider } from '@fundamental-ngx/cdk/data-source';
 import { Observable } from 'rxjs';
 
 export class FdMultiComboBoxDataSource<T> extends BaseDataSource<T> {
     /** @hidden */
     limitless = false;
     /** @hidden */
-    constructor(public dataProvider: BaseDataProvider<T>) {
+    constructor(public dataProvider: AbstractDataProvider<T>) {
         super(dataProvider);
     }
 }

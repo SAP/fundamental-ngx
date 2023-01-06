@@ -16,6 +16,27 @@ import { Subject } from 'rxjs';
 
 import { RtlService } from '../../services/rtl.service';
 import { FOCUSABLE_ITEM } from './focus-key-manager.tokens';
+import {
+    DeprecatedSelector,
+    FD_DEPRECATED_DIRECTIVE_SELECTOR,
+    getDeprecatedModel
+} from '../../deprecated-selector.class';
+
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[fd-focus-key-manager-list], [fdFocusKeyManagerList]',
+    standalone: true,
+    providers: [
+        {
+            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
+            useValue: getDeprecatedModel(
+                '[fdkFocusKeyManagerList]',
+                '[fd-focus-key-manager-list], [fdFocusKeyManagerList]'
+            )
+        }
+    ]
+})
+export class DeprecatedFocusKeyManagerListDirective extends DeprecatedSelector {}
 
 /** Directive to apply Angular Material FocusKeyManager to lists.
  * To be used with FocusKeyManagerItemDirective

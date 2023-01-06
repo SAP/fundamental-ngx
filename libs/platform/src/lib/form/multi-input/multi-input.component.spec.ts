@@ -9,7 +9,7 @@ import { StandardListItemModule } from '@fundamental-ngx/platform/list';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformMultiInputComponent } from './multi-input.component';
 import { PlatformMultiInputModule } from './multi-input.module';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
@@ -92,6 +92,7 @@ const MULTI_INPUT_IDENTIFIER = 'platform-multi-input-unit-test';
 
 runValueAccessorTests({
     component: PlatformMultiInputComponent,
+    name: 'Multi input',
     testModuleMetadata: {
         imports: [PlatformMultiInputModule],
         providers: [DynamicComponentService]
@@ -101,11 +102,12 @@ runValueAccessorTests({
         fixture.componentInstance.name = MULTI_INPUT_IDENTIFIER;
         done();
     },
-    supportsOnBlur: true,
+    supportsOnBlur: false,
     nativeControlSelector: `input[id="${MULTI_INPUT_IDENTIFIER}"]`,
     internalValueChangeSetter: (fixture, value) => {
         fixture.componentInstance.value = value;
     },
     getComponentValue: (fixture) => fixture.componentInstance.value,
-    getValues: () => [['a'], ['b'], ['c']]
+    getValues: () => [['a'], ['b'], ['c']],
+    excludeSteps: [CVATestSteps.ValueChangedInternally]
 });

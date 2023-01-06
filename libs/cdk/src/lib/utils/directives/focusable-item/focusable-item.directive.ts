@@ -8,6 +8,24 @@ import { FocusableObserver } from './focusable.observer';
 import { takeUntil, tap } from 'rxjs/operators';
 import { DestroyedService } from '../../services/destroyed.service';
 import { HasElementRef } from '../../interfaces/has-element-ref.interface';
+import {
+    DeprecatedSelector,
+    FD_DEPRECATED_DIRECTIVE_SELECTOR,
+    getDeprecatedModel
+} from '../../deprecated-selector.class';
+
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[fnFocusableItem]',
+    standalone: true,
+    providers: [
+        {
+            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
+            useValue: getDeprecatedModel('[fdkFocusableItem]', '[fnFocusableItem]')
+        }
+    ]
+})
+export class DeprecatedFocusableItemDirective extends DeprecatedSelector {}
 
 @Directive({
     selector: '[fdkFocusableItem]',

@@ -1,5 +1,23 @@
 import { Directive, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs';
+import {
+    DeprecatedSelector,
+    FD_DEPRECATED_DIRECTIVE_SELECTOR,
+    getDeprecatedModel
+} from '../../deprecated-selector.class';
+
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[fnClicked]',
+    standalone: true,
+    providers: [
+        {
+            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
+            useValue: getDeprecatedModel('[fdkClicked]', '[fnClicked]')
+        }
+    ]
+})
+export class DeprecatedClickedDirective extends DeprecatedSelector {}
 
 @Directive({
     selector: '[fdkClicked]'

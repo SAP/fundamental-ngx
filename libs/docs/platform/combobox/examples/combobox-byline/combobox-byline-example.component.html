@@ -8,7 +8,7 @@
             [byline]="true"
             (selectionChange)="onSelect($event)"
         >
-            <ng-template fdTemplate="optionItemTemplate" let-item let-index="index">
+            <ng-template fdkTemplate="optionItemTemplate" let-item let-index="index">
                 <span fd-list-thumbnail><fd-icon [glyph]="item.icon"></fd-icon></span>
                 <div fd-list-content>
                     <div fd-list-titie>{{ item.name }}</div>
@@ -28,7 +28,7 @@
             [mobileConfig]="mobileConfig"
             (selectionChange)="onSelect2($event)"
         >
-            <ng-template fdTemplate="optionItemTemplate" let-item let-index="index">
+            <ng-template fdkTemplate="optionItemTemplate" let-item let-index="index">
                 <span fd-list-thumbnail><fd-icon [glyph]="item.icon"></fd-icon></span>
                 <div fd-list-content>
                     <div fd-list-titie>{{ item.name }}</div>

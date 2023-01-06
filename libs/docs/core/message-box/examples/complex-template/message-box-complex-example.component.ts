@@ -7,7 +7,7 @@ import { MessageBoxRef } from '@fundamental-ngx/core/message-box';
     template: `
         <fd-message-box>
             <fd-message-box-header>
-                <ng-template fdTemplate="header">
+                <ng-template fdkTemplate="header">
                     <div fd-bar-left>
                         <fd-bar-element>
                             <fd-message-box-semantic-icon glyph="activate"></fd-message-box-semantic-icon>
@@ -30,7 +30,7 @@ import { MessageBoxRef } from '@fundamental-ngx/core/message-box';
             </fd-message-box-body>
 
             <fd-message-box-footer>
-                <ng-template fdTemplate="footer">
+                <ng-template fdkTemplate="footer">
                     <div fd-bar-middle>
                         <fd-button-bar
                             fd-initial-focus
