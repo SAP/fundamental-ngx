@@ -17,7 +17,7 @@ import {
     isDataSource,
     MatchingBy
 } from '@fundamental-ngx/cdk/data-source';
-import { CvaDirective } from '@fundamental-ngx/cdk/forms';
+import { CvaControl, CvaDirective } from '@fundamental-ngx/cdk/forms';
 import {
     AutoCompleteEvent,
     DestroyedService,
@@ -92,6 +92,7 @@ export class MultiComboboxDataSourceParser<T> implements DataSourceParser<T, FdM
         }
     ],
     providers: [
+        CvaControl,
         contentDensityObserverProviders(),
         {
             provide: FD_DATA_SOURCE_TRANSFORMER,
@@ -100,7 +101,8 @@ export class MultiComboboxDataSourceParser<T> implements DataSourceParser<T, FdM
         {
             provide: MULTI_COMBOBOX_COMPONENT,
             useExisting: MultiComboboxComponent
-        }
+        },
+        DestroyedService
     ]
 })
 export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implements AfterViewInit, OnInit {
@@ -123,7 +125,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
     /** @hidden */
     ngOnInit(): void {
-        super.ngOnInit();
+        this.cvaControl.listenToChanges();
         this._openDataStream();
     }
 

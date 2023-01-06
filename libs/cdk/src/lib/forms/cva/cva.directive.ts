@@ -21,13 +21,14 @@ import { FormStates } from '../models/form-state';
 import { FormField } from '../models/form-field';
 import { FormFieldControl } from '../models/form-field-control';
 import { FD_FORM_FIELD } from '../tokens/form-field.token';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { DestroyedService, Nullable } from '@fundamental-ngx/cdk/utils';
 
 let randomId = 0;
 
 @Directive({
     selector: '[fdkCva]',
-    standalone: true
+    standalone: true,
+    providers: [DestroyedService]
 })
 export class CvaDirective<T = any>
     implements BaseCVA, FormFieldControl, OnInit, DoCheck, AfterViewInit, OnDestroy, ControlValueAccessor
