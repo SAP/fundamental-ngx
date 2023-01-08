@@ -20,6 +20,7 @@ export interface SvgConfig {
     scene?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
     dialog?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
     spot?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
+    dot?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
 }
 
 export interface SvgItemConfig {
@@ -28,30 +29,22 @@ export interface SvgItemConfig {
     file: string;
 }
 
-export type IllustratedMessageType = 'scene' | 'dialog' | 'spot';
+export type IllustratedMessageType = 'scene' | 'dialog' | 'spot' | 'dot';
 
 let illustratedMessageUniqueId = 0;
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-illustrated-message]',
-    template: `
-        <svg class="fd-illustrated-message__illustration" *ngIf="!noSvg || _inlineSvg">
-            <use [attr.href]="_href"></use>
-        </svg>
-        <div *ngIf="_inlineSvg" style="display: none;" [innerHTML]="_inlineSvg"></div>
-        <ng-content select="[fd-illustrated-message-figcaption]"></ng-content>
-        <ng-content select="fd-illustrated-message-actions"></ng-content>
-    `,
+    templateUrl: './illustrated-message.component.html',
     styleUrls: ['./illustrated-message.component.scss'],
-
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IllustratedMessageComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit, CssClassBuilder {
     /**
      * The type of the Illustrated Message
-     * Options include: 'scene' | 'spot' | 'dialog'
+     * Options include: 'scene' | 'spot' | 'dialog' | 'dot'.
      * The default type is set to 'scene'
      */
     @Input()
@@ -162,6 +155,10 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
                 case 'spot':
                     inlineSvg = this.svgConfig.spot?.file;
                     this._href = `${this.svgConfig.spot?.url || ''}#${this.svgConfig.spot?.id}`;
+                    break;
+                case 'dot':
+                    inlineSvg = this.svgConfig.dot?.file;
+                    this._href = `${this.svgConfig.dot?.url || ''}#${this.svgConfig.dot?.id}`;
                     break;
             }
         }
