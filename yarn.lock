@@ -129,10 +129,21 @@
     "@angular-devkit/architect" "0.1500.2"
     rxjs "6.6.7"
 
-"@angular-devkit/core@15.0.2", "@angular-devkit/core@^15.0.0", "@angular-devkit/core@^15.0.0-next.0":
+"@angular-devkit/core@15.0.2":
   version "15.0.2"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-15.0.2.tgz#47a822ab2cde0afc7fdd4ca101f3fe5353f05358"
   integrity sha512-XkdNKyeYvnCq0zWuEda163muUV38ifNyK6EjrbhI5pQWNg7myxtDmLenjtpXLGLZwjxqsart2l/uoYsk1xQCmQ==
+  dependencies:
+    ajv "8.11.0"
+    ajv-formats "2.1.1"
+    jsonc-parser "3.2.0"
+    rxjs "6.6.7"
+    source-map "0.7.4"
+
+"@angular-devkit/core@15.0.5", "@angular-devkit/core@^15.0.0", "@angular-devkit/core@^15.0.0-next.0":
+  version "15.0.5"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-15.0.5.tgz#ae4f22b0385130e608b2c5cdff5f0e4840f047f9"
+  integrity sha512-SxLvbpqcQfb1qRykZjqRUG/8uC1FYpneyNV9S9YglXg4JhCFhfc9AnKxuu9Bm/O8V7FghOIlGWGglCdPHra0pw==
   dependencies:
     ajv "8.11.0"
     ajv-formats "2.1.1"
@@ -151,12 +162,23 @@
     rxjs "6.4.0"
     source-map "0.7.3"
 
-"@angular-devkit/schematics@15.0.2", "@angular-devkit/schematics@~15.0.1":
+"@angular-devkit/schematics@15.0.2":
   version "15.0.2"
   resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-15.0.2.tgz#5177dab4382eeebe84f4768c3368799ef99cef48"
   integrity sha512-FqimOzQCwRGmz/NPPiK6QpAxI+qpy8rYQRlWRWSOfQgjb+cl4rD2isllalYvzO+5mmb88fwJ7bj9cP2X5khpcg==
   dependencies:
     "@angular-devkit/core" "15.0.2"
+    jsonc-parser "3.2.0"
+    magic-string "0.26.7"
+    ora "5.4.1"
+    rxjs "6.6.7"
+
+"@angular-devkit/schematics@15.0.5", "@angular-devkit/schematics@~15.0.1":
+  version "15.0.5"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-15.0.5.tgz#696f76dd7fcd82caf67700b61f6339ea68d7fe2e"
+  integrity sha512-S3YN1Q/iOOXA9ipWbh+bDaTJwc0Wb0uPqSUJov+L/EojNi9xglY80bLwVdL2OHZV2e+62dhkvQ4REM3hZT2/Hg==
+  dependencies:
+    "@angular-devkit/core" "15.0.5"
     jsonc-parser "3.2.0"
     magic-string "0.26.7"
     ora "5.4.1"
@@ -15625,7 +15647,7 @@ rxjs@6.6.7, rxjs@^6.4.0, rxjs@^6.5.4, rxjs@^6.5.5:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@7.5.7, rxjs@^7.5.4, rxjs@^7.5.5:
+rxjs@7.5.7:
   version "7.5.7"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.7.tgz#2ec0d57fdc89ece220d2e702730ae8f1e49def39"
   integrity sha512-z9MzKh/UcOqB3i20H6rtrlaE/CgjLOvheWK/9ILrbhROGTweAi1BaFsTT9FbwZi5Trr1qNRs+MXkhmR06awzQA==
@@ -15639,17 +15661,10 @@ rxjs@^5.5.6:
   dependencies:
     symbol-observable "1.0.1"
 
-rxjs@^7.2.0:
+rxjs@^7.2.0, rxjs@^7.5.4, rxjs@^7.5.5, rxjs@^7.5.6, rxjs@^7.5.7:
   version "7.8.0"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.0.tgz#90a938862a82888ff4c7359811a595e14e1e09a4"
   integrity sha512-F2+gxDshqmIub1KdvZkaEfGDwLNpPvk9Fs6LD/MyQxNgMds/WH9OdDDXOmxUZpME+iSK3rQCctkL0DYyytUqMg==
-  dependencies:
-    tslib "^2.1.0"
-
-rxjs@^7.5.6, rxjs@^7.5.7:
-  version "7.6.0"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.6.0.tgz#361da5362b6ddaa691a2de0b4f2d32028f1eb5a2"
-  integrity sha512-DDa7d8TFNUalGC9VqXvQ1euWNN7sc63TrUCuM9J998+ViviahMIjKSOU7rfcgFOF+FCD71BhDRv4hrFz+ImDLQ==
   dependencies:
     tslib "^2.1.0"
 
