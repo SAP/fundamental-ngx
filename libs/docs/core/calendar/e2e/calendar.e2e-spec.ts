@@ -248,14 +248,20 @@ describe('calendar test suite', () => {
 
         it('should check ability to mark next week', async () => {
             await click(specialDaysCalendar + calendarOptions, 1);
-            let tomorrowsDayIndex = (await getCurrentDayIndex(specialDaysCalendar)) + 1;
-            const nextMonthButton = specialDaysCalendar + rightArrowBtn;
             const currentDayIndex = await getCurrentDayIndex(specialDaysCalendar);
+            const tomorrowsDayIndex = currentDayIndex + 1;
+            const nextMonthButton = specialDaysCalendar + rightArrowBtn;
             let nextWeekDaysQuantity = 0;
             const initialDaysQuantity = await getElementArrayLength(specialDaysCalendar + calendarItem);
-            for (let i = currentDayIndex + 1; i < initialDaysQuantity; i++) {
-                await expect(await getElementClass(specialDaysCalendar + calendarItem, i)).toContain('special-day');
-                nextWeekDaysQuantity++;
+            for (let i = tomorrowsDayIndex; i < initialDaysQuantity; i++) {
+                if (nextWeekDaysQuantity < 7) {
+                    await expect(await getElementClass(specialDaysCalendar + calendarItem, i)).toContain('special-day');
+                    nextWeekDaysQuantity++;
+                } else {
+                    await expect(await getElementClass(specialDaysCalendar + calendarItem, i)).not.toContain(
+                        'special-day'
+                    );
+                }
             }
             if (tomorrowsDayIndex + 7 > initialDaysQuantity) {
                 await click(nextMonthButton);
