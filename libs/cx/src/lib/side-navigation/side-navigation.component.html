@@ -5,9 +5,13 @@
     [class.fdx-side-nav--condensed]="condensed || sideNavigationConfiguration?.condensed"
 >
     <ng-container *ngIf="!sideNavigationConfiguration">
-        <ng-content></ng-content>
+        <ng-container *ngTemplateOutlet="scrollUp"></ng-container>
+        <ng-content select="[fdx-side-nav-main]"></ng-content>
+        <ng-container *ngTemplateOutlet="scrollDown"></ng-container>
+        <ng-content select="[fdx-side-nav-utility]"></ng-content>
     </ng-container>
     <ng-container *ngIf="sideNavigationConfiguration">
+        <ng-container *ngTemplateOutlet="scrollUp"></ng-container>
         <div fdx-side-nav-main *ngIf="sideNavigationConfiguration.mainNavigation">
             <fdx-prepared-nested-list
                 [condensed]="condensed || !!sideNavigationConfiguration.condensed"
@@ -16,6 +20,7 @@
             >
             </fdx-prepared-nested-list>
         </div>
+        <ng-container *ngTemplateOutlet="scrollDown"></ng-container>
         <div fdx-side-nav-utility *ngIf="sideNavigationConfiguration.utilityNavigation">
             <fdx-prepared-nested-list
                 [condensed]="condensed || !!sideNavigationConfiguration.condensed"
@@ -26,3 +31,28 @@
         </div>
     </ng-container>
 </nav>
+
+<ng-template #scrollUp>
+    <div class="fdx-side-nav__button-container fdx-side-nav__button-container--top" *ngIf="_showScrollUpButton">
+        <button
+            fd-button
+            fdType="standard"
+            glyph="navigation-up-arrow"
+            fdx-side-nav-button
+            (click)="_scrollItems('up')"
+        ></button>
+    </div>
+</ng-template>
+
+<ng-template #scrollDown>
+    <div class="fdx-side-nav__button-container fdx-side-nav__button-container--bottom" *ngIf="_showScrollDownButton">
+        <button
+            #scrollDownButton
+            fd-button
+            fdType="standard"
+            glyph="navigation-down-arrow"
+            fdx-side-nav-button
+            (click)="_scrollItems('down')"
+        ></button>
+    </div>
+</ng-template>

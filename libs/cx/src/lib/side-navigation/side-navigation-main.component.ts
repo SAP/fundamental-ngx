@@ -8,7 +8,6 @@ import {
     ElementRef,
     HostBinding,
     QueryList,
-    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { NestedListComponent } from '@fundamental-ngx/cx/nested-list';
@@ -17,7 +16,7 @@ import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fdx-side-nav-main, div[fdx-side-nav-main]',
-    templateUrl: './side-navigation-main.component.html',
+    template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -31,18 +30,8 @@ export class SideNavigationMainComponent implements AfterContentInit {
     _inputGroups: QueryList<InputGroupComponent>;
 
     /** @hidden */
-    @ViewChild('scrollDownButton', { read: ElementRef })
-    _scrollDownButton: ElementRef;
-
-    /** @hidden */
     @HostBinding('class.fdx-side-nav__main-navigation')
     classSideNavMainNavigation = true;
-
-    /** @hidden */
-    _showScrollUpButton = false;
-
-    /** @hidden */
-    _showScrollDownButton = false;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
@@ -57,22 +46,5 @@ export class SideNavigationMainComponent implements AfterContentInit {
         this._inputGroups.forEach((input) => {
             input.elementRef.nativeElement.classList.add('fdx-side-nav__input-group');
         });
-    }
-
-    /** @hidden */
-    _setupScrollButtons(): void {
-        setTimeout(() => {
-            if (this._elementRef.nativeElement.scrollHeight > this._elementRef.nativeElement.clientHeight) {
-                this._elementRef.nativeElement.style.overflowY = 'hidden';
-                this._showScrollUpButton = true;
-                this._showScrollDownButton = true;
-                this._cdRef.detectChanges();
-            }
-        });
-    }
-
-    /** @hidden */
-    _scrollItems(direction: 'up' | 'down'): void {
-        this.elementRef.nativeElement.scrollBy({ top: direction === 'up' ? -52 : 52, left: 0, behavior: 'smooth' });
     }
 }

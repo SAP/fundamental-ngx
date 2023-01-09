@@ -38,15 +38,13 @@
 
 .fdx-side-nav {
     .fd-button {
-        z-index: 1;
-        left: 0.875rem;
+        margin-left: 0.875rem !important;
     }
 
     .fdx-side-nav__button {
         min-height: 2.25rem;
         overflow: hidden;
         position: sticky;
-        z-index: 2;
     }
 }
 .fdx-side-nav--compact {

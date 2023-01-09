@@ -1,14 +1,17 @@
 import {
     AfterContentInit,
     AfterViewInit,
+    ChangeDetectorRef,
     Component,
     ContentChild,
+    ElementRef,
     HostBinding,
     HostListener,
     Input,
     OnDestroy,
     OnInit,
     QueryList,
+    ViewChild,
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
@@ -80,10 +83,24 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     preparedNestedList: QueryList<PreparedNestedListComponent>;
 
     /** @hidden */
+    @ViewChild('scrollDownButton', { read: ElementRef })
+    _scrollDownButton: ElementRef;
+
+    /** @hidden */
+    _showScrollUpButton = false;
+
+    /** @hidden */
+    _showScrollDownButton = false;
+
+    /** @hidden */
     private _keyboardSubscription = new Subscription();
 
     /** @hidden */
-    constructor(private keyboardService: NestedListKeyboardService, private nestedListState: NestedListStateService) {
+    constructor(
+        private keyboardService: NestedListKeyboardService,
+        private nestedListState: NestedListStateService,
+        private _cdRef: ChangeDetectorRef
+    ) {
         this._keyboardSubscription = this.keyboardService.refresh$.subscribe(() => {
             /** Refresh list of elements, that are being supported by keyboard */
             this.keyboardService.refreshItems(this.getLists());
@@ -107,7 +124,7 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
             this.keyboardService.refreshItems(this.getLists());
         }
         if (this.sideNavMain && this.narrow) {
-            this.sideNavMain._setupScrollButtons();
+            this._setupScrollButtons();
             this.sideNavMain.list.nestedItems.forEach((item) => {
                 item._narrow = true;
             });
@@ -132,6 +149,30 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
         if (this.collapseWidth) {
             this.condensed = window.innerWidth <= this.collapseWidth;
         }
+    }
+
+    /** @hidden */
+    _setupScrollButtons(): void {
+        setTimeout(() => {
+            if (
+                this.sideNavMain.elementRef.nativeElement.scrollHeight >
+                this.sideNavMain.elementRef.nativeElement.clientHeight
+            ) {
+                this.sideNavMain.elementRef.nativeElement.style.overflowY = 'hidden';
+                this._showScrollUpButton = true;
+                this._showScrollDownButton = true;
+                this._cdRef.detectChanges();
+            }
+        });
+    }
+
+    /** @hidden */
+    _scrollItems(direction: 'up' | 'down'): void {
+        this.sideNavMain.elementRef.nativeElement.scrollBy({
+            top: direction === 'up' ? -52 : 52,
+            left: 0,
+            behavior: 'smooth'
+        });
     }
 
     /**
