@@ -51,9 +51,11 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
             this._buildDayViewGrid();
         }
     }
+
     get currentlyDisplayed(): CalendarCurrent {
         return this._currentlyDisplayed;
     }
+
     /** @hidden */
     private _currentlyDisplayed: CalendarCurrent;
 
@@ -66,9 +68,11 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
             this._changeSelectedSingleDay(dayFromDate, this._calendarDayList);
         }
     }
+
     get selectedDate(): Nullable<D> {
         return this._selectedDate;
     }
+
     /** @hidden */
     private _selectedDate: Nullable<D>;
 
@@ -88,9 +92,11 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
             this._changeSelectedRangeDays(dateRange, this._calendarDayList);
         }
     }
+
     get selectedRangeDate(): DateRange<D> {
         return this._selectedRangeDate;
     }
+
     /** @hidden */
     private _selectedRangeDate: DateRange<D>;
 
