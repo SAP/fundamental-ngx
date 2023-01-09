@@ -17,6 +17,5 @@ export class IllustratedMessageInlineExampleComponent implements AfterViewInit {
             scene: { file: await getAsset(sceneSvg), id: 'sapIllus-Scene-NoMail-1' },
             dialog: { file: await getAsset(dialogSvg), id: 'sapIllus-Dialog-NoMail' }
         };
-        console.log(this.sceneConfig);
     }
 }

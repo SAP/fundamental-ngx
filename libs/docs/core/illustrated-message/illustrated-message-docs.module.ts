@@ -13,6 +13,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { IllustratedMessageInlineExampleComponent } from './examples/illustrated-message-inline-example.component';
+import { IllustratedMessageDotExampleComponent } from './examples/illustrated-message-dot-example.component';
 
 const routes: Routes = [
     {
@@ -41,6 +42,7 @@ const routes: Routes = [
         IllustratedMessageExampleComponent,
         IllustratedMessageDialogExampleComponent,
         IllustratedMessageSpotExampleComponent,
+        IllustratedMessageDotExampleComponent,
         IllustratedMessageInlineExampleComponent
     ],
     providers: [currentComponentProvider('illustrated-message')]

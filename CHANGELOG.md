@@ -1,3 +1,12 @@
+## [0.38.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.38.3-rc.2...v0.38.3-rc.3) (2023-01-08)
+
+
+### Features
+
+* **core:** added illustrated message dot type ([#9183](https://github.com/SAP/fundamental-ngx/issues/9183)) ([c32fb27](https://github.com/SAP/fundamental-ngx/commit/c32fb27ac752db1f5e5c1a0bae45c3daf24f53b5))
+
+
+
 ## [0.38.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.38.3-rc.1...v0.38.3-rc.2) (2023-01-04)
 
 
