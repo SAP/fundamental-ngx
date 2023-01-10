@@ -80,6 +80,19 @@ function addExternalLibraries(options: Schema): Rule {
             });
         }
 
+        if (
+            !hasPackage(tree, '@fundamental-ngx/cdk') ||
+            checkPackageVersion(tree, '@fundamental-ngx/cdk', 'VERSION_PLACEHOLDER', '<')
+        ) {
+            dependencies.push({
+                type: NodeDependencyType.Default,
+                // Will be replaced with the real version during sync-version script run
+                version: `VERSION_PLACEHOLDER`,
+                name: '@fundamental-ngx/cdk',
+                overwrite: true
+            });
+        }
+
         dependencies.forEach((dependency) => {
             addPackageJsonDependency(tree, dependency);
 
