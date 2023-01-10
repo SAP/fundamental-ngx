@@ -26,6 +26,10 @@
                                 "onlyDependOnLibsWithTags": ["scope:fd", "scope:i18n"]
                             },
                             {
+                                "sourceTag": "scope:cx",
+                                "onlyDependOnLibsWithTags": ["scope:fd", "scope:cx", "scope:i18n"]
+                            },
+                            {
                                 "sourceTag": "scope:docs",
                                 "onlyDependOnLibsWithTags": [
                                     "scope:docs",
@@ -33,7 +37,8 @@
                                     "scope:fdp",
                                     "scope:fn",
                                     "scope:datetime-adapter",
-                                    "scope:i18n"
+                                    "scope:i18n",
+                                    "scope:cx"
                                 ]
                             }
                         ],

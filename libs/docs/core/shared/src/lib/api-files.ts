@@ -261,7 +261,7 @@ export const API_FILES = {
         'SideNavigationComponent',
         'SideNavigationModel',
         'SideNavigationUtilityDirective',
-        'SideNavigationMainDirective',
+        'SideNavigationMainComponent',
         'NestedListDirective',
         'NestedListPopoverComponent',
         'NestedListHeaderDirective',

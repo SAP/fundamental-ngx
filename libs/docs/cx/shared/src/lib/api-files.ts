@@ -5,4 +5,6 @@
  * Include the suffix i.e. Directive or Component.
  * Names are sorted in the ApiComponent so order does not matter.
  */
-export const API_FILES = {};
+export const API_FILES = {
+    sideNavigation: ['SideNavigationComponent']
+};

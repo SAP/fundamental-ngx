@@ -245,6 +245,11 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     constructor(private readonly _elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */
+    get elementRef(): ElementRef<HTMLElement> {
+        return this._elementRef;
+    }
+
+    /** @hidden */
     ngAfterViewInit(): void {
         this._listenInputFocus();
     }
