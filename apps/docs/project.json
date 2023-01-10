@@ -127,6 +127,11 @@
                         "output": "./docs/fn"
                     },
                     {
+                        "glob": "**/examples/**/*",
+                        "input": "libs/docs/cx",
+                        "output": "./docs/cx"
+                    },
+                    {
                         "glob": "sort.pipe.ts",
                         "input": "libs/docs/shared/src/lib/core-helpers/pipes",
                         "output": "./docs/core/shared/examples"
