@@ -41,5 +41,5 @@
         }
     },
     "tags": ["type:lib", "scope:cx"],
-    "implicitDependencies": ["i18n"]
+    "implicitDependencies": ["i18n", "core"]
 }
