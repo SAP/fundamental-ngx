@@ -28,8 +28,8 @@ describe('MobileMultiComboboxComponent', () => {
             cancelButtonText: 'cancel',
             hasCloseButton: true
         },
-        dialogDismiss: () => {},
-        dialogApprove: () => {},
+        _dialogDismiss: () => {},
+        _dialogApprove: () => {},
         openChange: new EventEmitter<boolean>()
     };
 
@@ -55,8 +55,8 @@ describe('MobileMultiComboboxComponent', () => {
                 cancelButtonText: 'cancel',
                 hasCloseButton: true
             },
-            dialogDismiss: () => {},
-            dialogApprove: () => {},
+            _dialogDismiss: () => {},
+            _dialogApprove: () => {},
             openChange: new EventEmitter<boolean>()
         };
         fixture = TestBed.createComponent(MobileMultiComboboxComponent);
@@ -77,7 +77,7 @@ describe('MobileMultiComboboxComponent', () => {
         anyComponent._component.mobile = true;
         component.ngOnInit();
         anyComponent._component.openChange.emit(true);
-        spyOn(anyComponent._component, 'dialogApprove');
+        spyOn(anyComponent._component, '_dialogApprove');
         fixture.detectChanges();
 
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
@@ -85,14 +85,14 @@ describe('MobileMultiComboboxComponent', () => {
         fixture.detectChanges();
         component.handleApprove();
 
-        expect(anyComponent._component.dialogApprove).toHaveBeenCalled();
+        expect(anyComponent._component._dialogApprove).toHaveBeenCalled();
     });
 
     it('should open and close with dismiss', () => {
         anyComponent._component.mobile = true;
         component.ngOnInit();
         anyComponent._component.openChange.emit(true);
-        spyOn(anyComponent._component, 'dialogDismiss');
+        spyOn(anyComponent._component, '_dialogDismiss');
         fixture.detectChanges();
 
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
@@ -100,6 +100,6 @@ describe('MobileMultiComboboxComponent', () => {
         fixture.detectChanges();
         component.handleDismiss();
 
-        expect(anyComponent._component.dialogDismiss).toHaveBeenCalled();
+        expect(anyComponent._component._dialogDismiss).toHaveBeenCalled();
     });
 });

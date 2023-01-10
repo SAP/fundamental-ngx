@@ -65,24 +65,24 @@ export class MobileMultiComboboxComponent
         const isSelectedShown = this.selectedShown$.getValue();
 
         if (isSelectedShown) {
-            this._component.searchTermChanged();
+            this._component._searchTermChanged();
             this.selectedShown$.next(false);
             return;
         }
 
-        this._component.moreClicked();
+        this._component._moreClicked();
     }
 
     /** @hidden */
     handleDismiss(): void {
         this.dialogRef.dismiss();
-        this._component.dialogDismiss(this._selectedBackup);
+        this._component._dialogDismiss(this._selectedBackup);
     }
 
     /** @hidden */
     handleApprove(): void {
         this.dialogRef.close();
-        this._component.dialogApprove();
+        this._component._dialogApprove();
     }
 
     /** @hidden */

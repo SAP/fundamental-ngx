@@ -512,7 +512,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * @hidden
      * Handle dialog dismissing, closes popover and sets backup data.
      */
-    dialogDismiss(backup: SelectableOptionItem[]): void {
+    _dialogDismiss(backup: SelectableOptionItem[]): void {
         this._selectedSuggestions = [...backup];
         this.inputText = '';
         this._showList(false);
@@ -523,7 +523,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * @hidden
      * Handle dialog approval, closes popover and propagates data changes.
      */
-    dialogApprove(): void {
+    _dialogApprove(): void {
         this.inputText = '';
         this._showList(false);
         this._propagateChange(true);

@@ -22,8 +22,8 @@ export interface MobileMultiComboboxInterface extends MobileMode, MultiCombobox 
     selectedShown$: BehaviorSubject<boolean>;
     openChange: Subject<boolean>;
 
-    moreClicked(): void;
-    dialogApprove(): void;
-    dialogDismiss(backup: SelectableOptionItem[]): void;
-    searchTermChanged(term?: string): void;
+    _moreClicked(): void;
+    _dialogApprove(): void;
+    _dialogDismiss(backup: SelectableOptionItem[]): void;
+    _searchTermChanged(term?: string): void;
 }
