@@ -11,6 +11,7 @@
         "lodash-es",
         "fast-deep-equal",
         "compare-versions",
-        "@fundamental-ngx/i18n"
+        "@fundamental-ngx/i18n",
+        "@fundamental-ngx/cdk"
     ]
 }
