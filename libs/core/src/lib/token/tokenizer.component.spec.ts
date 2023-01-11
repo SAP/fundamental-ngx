@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { DEFAULT_CONTENT_DENSITY, RtlService } from '@fundamental-ngx/core/utils';
+import { DEFAULT_CONTENT_DENSITY, RtlService } from '@fundamental-ngx/cdk/utils';
 import { TokenComponent } from './token.component';
 import { TokenModule } from './token.module';
 import { TokenizerComponent } from './tokenizer.component';

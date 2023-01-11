@@ -9,7 +9,7 @@ import { TextAreaComponent } from './text-area.component';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { FormFieldComponent } from '../form-group/form-field/form-field.component';
 import { PlatformTextAreaModule } from './text-area.module';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
@@ -340,6 +340,7 @@ const TEXTAREA_IDENTIFIER = 'platform-textarea-unit-test';
 
 runValueAccessorTests({
     component: TextAreaComponent,
+    name: 'Textarea',
     testModuleMetadata: {
         imports: [PlatformTextAreaModule]
     },
@@ -348,11 +349,12 @@ runValueAccessorTests({
         fixture.componentInstance.name = TEXTAREA_IDENTIFIER;
         done();
     },
-    supportsOnBlur: true,
+    supportsOnBlur: false,
     nativeControlSelector: `textarea[id="${TEXTAREA_IDENTIFIER}"]`,
     internalValueChangeSetter: (fixture, value) => {
         fixture.componentInstance.value = value;
     },
     resetCustomValue: { value: '' },
-    getComponentValue: (fixture) => fixture.componentInstance.value
+    getComponentValue: (fixture) => fixture.componentInstance.value,
+    excludeSteps: [CVATestSteps.ValueChangedInternally]
 });

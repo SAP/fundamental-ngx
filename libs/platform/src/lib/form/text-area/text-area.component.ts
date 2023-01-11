@@ -7,6 +7,7 @@ import {
     ElementRef,
     Host,
     HostListener,
+    Inject,
     Input,
     isDevMode,
     OnInit,
@@ -19,10 +20,11 @@ import {
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { BACKSPACE, DELETE } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
-import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { TextAreaConfig } from './text-area.config';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 const VALID_WRAP_TYPES = ['hard', 'soft', 'off'];
 
@@ -40,7 +42,7 @@ export type WrapType = 'hard' | 'soft' | 'off';
     encapsulation: ViewEncapsulation.None,
     providers: [
         {
-            provide: FormFieldControl,
+            provide: FD_FORM_FIELD_CONTROL,
             useExisting: TextAreaComponent,
             multi: true
         }
@@ -166,7 +168,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
 
     /**
      * @hidden
-     * @see FormFieldControl.extraContentHeightPx
+     * @see PlatformFormFieldControl.extraContentHeightPx
      */
     get extraContentHeightPx(): number | undefined {
         return this._textareaCounter?.nativeElement.offsetHeight;
@@ -184,8 +186,8 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         protected _textAreaConfig: TextAreaConfig
     ) {
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);

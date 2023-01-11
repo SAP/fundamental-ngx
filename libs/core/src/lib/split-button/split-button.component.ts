@@ -25,7 +25,7 @@ import { MenuComponent, MenuItemComponent } from '@fundamental-ngx/core/menu';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 import { MainAction } from './main-action';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { DestroyedService } from '@fundamental-ngx/core/utils';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 export const splitButtonTextClass = 'fd-button-split__text';
 export const splitButtonTextCompactClass = 'fd-button-split__text--compact';

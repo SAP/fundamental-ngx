@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { PipeModule } from '@fundamental-ngx/core/utils';
+import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
 import { PlatformDatetimePickerComponent } from './datetime-picker.component';

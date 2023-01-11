@@ -1,5 +1,5 @@
 import { Provider } from '@angular/core';
-import { HasElementRef } from '@fundamental-ngx/core/utils';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserverSettings } from './classes/content-density-observer.settings';
 import { ContentDensityMode } from './types/content-density.mode';
 

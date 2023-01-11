@@ -20,7 +20,7 @@ import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } fro
 import { Subject, Subscription } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { FormStates, Nullable, Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
+import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { CalendarComponent, CalendarYearGrid, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
 import { FormItemControl, PopoverFormMessageService, registerFormItemControl } from '@fundamental-ngx/core/form';
@@ -29,6 +29,8 @@ import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,

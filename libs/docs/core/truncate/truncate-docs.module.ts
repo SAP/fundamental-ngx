@@ -5,7 +5,7 @@ import { API_FILES } from '@fundamental-ngx/docs/core/shared';
 import { TruncateDocsHeaderComponent } from './truncate-docs-header/truncate-docs-header.component';
 import { TruncateDocsComponent } from './truncate-docs.component';
 import { TruncateExampleComponent } from './examples/truncate-example.component';
-import { PipeModule, TruncateModule } from '@fundamental-ngx/core/utils';
+import { PipeModule, TruncateModule } from '@fundamental-ngx/cdk/utils';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { TruncateTextExampleComponent } from './examples/truncate-text-example.component';
 

@@ -5,6 +5,7 @@ import {
     DoCheck,
     ElementRef,
     Host,
+    Inject,
     Input,
     isDevMode,
     OnDestroy,
@@ -17,11 +18,12 @@ import {
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
-import { FormStates, isValidControlState, Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { BaseComponent } from '../base';
-import { FormFieldControl } from './form-control';
-import { FormField } from './form-field';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates, isValidControlState } from '@fundamental-ngx/cdk/forms';
+import { PlatformFormFieldControl } from './form-control';
+import { PlatformFormField } from './form-field';
 
 let randomId = 0;
 
@@ -39,7 +41,7 @@ let randomId = 0;
 @Directive()
 export abstract class BaseInput
     extends BaseComponent
-    implements FormFieldControl, ControlValueAccessor, OnInit, DoCheck, AfterViewInit, OnDestroy
+    implements PlatformFormFieldControl, ControlValueAccessor, OnInit, DoCheck, AfterViewInit, OnDestroy
 {
     /** @hidden */
     protected defaultId = `fdp-input-id-${randomId++}`;
@@ -171,7 +173,7 @@ export abstract class BaseInput
     readonly stateChanges: Subject<any> = new Subject<any>();
 
     /** @hidden */
-    readonly formField: FormField | null = null;
+    readonly formField: PlatformFormField | null = null;
 
     /** set when input field is mandatory form field */
     required: boolean;
@@ -189,8 +191,8 @@ export abstract class BaseInput
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
     ) {
         /**
          * We do not use Injector.get() approach here because there is a bug

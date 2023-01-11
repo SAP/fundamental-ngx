@@ -23,7 +23,7 @@ import {
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

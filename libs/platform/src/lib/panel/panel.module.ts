@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PanelModule } from '@fundamental-ngx/core/panel';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
-import { PipeModule } from '@fundamental-ngx/core/utils';
+import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';

@@ -1,0 +1,16 @@
+<fd-docs-section-title id="default" componentName="Forms"> Forms Standard Usage </fd-docs-section-title>
+<description>
+    <p>
+        In order to start using the ControlValueAccessor directive, add it to the <code>hostDirectives</code> property
+        of your component and expose respective inputs and outputs.
+    </p>
+    <p>
+        For a correct work of the component, developers would need to provide <code>CvaControl</code> class for the
+        component, and call it's <code>listenToChanges</code> method.
+    </p>
+    <p>This will automatically apply change detection when state of the CVA Directive has been changed.</p>
+</description>
+<component-example>
+    <fundamental-ngx-forms-default-example></fundamental-ngx-forms-default-example>
+</component-example>
+<code-example [exampleFiles]="formsDefaultExample"></code-example>

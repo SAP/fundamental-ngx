@@ -2,7 +2,7 @@ import { Inject, Injectable, InjectionToken, isDevMode, LOCALE_ID, Optional } fr
 import moment, { Locale, LongDateFormatSpec, Moment, MomentFormatSpecification, MomentInput } from 'moment';
 
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));

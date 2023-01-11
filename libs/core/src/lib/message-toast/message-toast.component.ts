@@ -22,7 +22,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { MessageToastConfig } from './message-toast-utils/message-toast-config';
 import { MessageToastRef } from './message-toast-utils/message-toast-ref';
 

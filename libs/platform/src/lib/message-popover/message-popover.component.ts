@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
-import { DestroyedService } from '@fundamental-ngx/core/utils';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { DestroyedService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { getFormState } from '@fundamental-ngx/platform/form';
 import { countBy, flatten } from 'lodash-es';
 import { takeUntil } from 'rxjs';

@@ -7,7 +7,7 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { ColorAccent } from '@fundamental-ngx/core/utils';
+import { ColorAccent } from '@fundamental-ngx/cdk/utils';
 
 import { BaseListItem, StatusType } from '../base-list-item';
 import { ObjectListItemRowComponent } from './object-list-item-row.component';

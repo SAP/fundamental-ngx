@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core/utils';
+import { ContentDensity, ContentDensityService } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-content-density-example',

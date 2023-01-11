@@ -4,7 +4,7 @@ import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { PlatformStepInputModule } from '../step-input.module';
@@ -549,6 +549,7 @@ const STEP_INPUT_IDENTIFIER = 'platform-step-input-unit-test';
 
 runValueAccessorTests({
     component: NumberStepInputComponent,
+    name: 'Number step input',
     testModuleMetadata: {
         imports: [PlatformStepInputModule]
     },

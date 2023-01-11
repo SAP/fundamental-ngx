@@ -13,7 +13,7 @@ import { DeprecatedPaginationCompactDirective, PaginationModule } from '@fundame
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

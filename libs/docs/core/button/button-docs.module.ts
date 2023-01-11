@@ -14,7 +14,7 @@ import {
 } from './examples/button-examples.component';
 import { ButtonModule, DeprecatedButtonContentDensityDirective } from '@fundamental-ngx/core/button';
 import { CarouselModule } from '@fundamental-ngx/core/carousel';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

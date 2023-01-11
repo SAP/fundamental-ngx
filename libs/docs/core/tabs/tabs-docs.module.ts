@@ -16,7 +16,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

@@ -26,8 +26,8 @@ import { CdkDrag, CdkDragDrop, CdkDragEnter, CdkDragStart } from '@angular/cdk/d
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, skip, takeUntil } from 'rxjs/operators';
 
-import { resizeObservable, RtlService, getDocumentFontSize } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { resizeObservable, RtlService, getDocumentFontSize } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 

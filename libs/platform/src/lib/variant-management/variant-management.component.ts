@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { PopoverComponent, TriggerConfig } from '@fundamental-ngx/core/popover';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { HeaderSizes } from '@fundamental-ngx/core/title';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import equal from 'fast-deep-equal';

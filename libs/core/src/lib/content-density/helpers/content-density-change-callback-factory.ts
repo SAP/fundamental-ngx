@@ -25,8 +25,11 @@ export function contentDensityCallbackFactory(
         Object.values(settings.modifiers).forEach((className) => {
             element.classList.remove(className);
         });
-        if (settings.modifiers[contentDensityMode]) {
-            element.classList.add(settings.modifiers[contentDensityMode]);
+
+        const modifier = settings.modifiers[contentDensityMode];
+
+        if (modifier) {
+            element.classList.add(modifier);
         }
     };
 }

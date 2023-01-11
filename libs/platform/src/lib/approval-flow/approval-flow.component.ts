@@ -24,7 +24,7 @@ import { CdkDrag } from '@angular/cdk/drag-drop';
 import { combineLatest, fromEvent, merge, Subject, Subscription } from 'rxjs';
 import { throttleTime, switchMap, mapTo, map, startWith, distinctUntilChanged } from 'rxjs/operators';
 
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { GridListComponent, GridListSelectionEvent } from '@fundamental-ngx/core/grid-list';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 

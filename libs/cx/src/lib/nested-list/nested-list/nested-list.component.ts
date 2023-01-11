@@ -21,7 +21,7 @@ import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListInterface } from './nested-list.interface';
 import { NestedListHeaderDirective } from '../nested-list-directives';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
 import {
     ContentDensityObserver,

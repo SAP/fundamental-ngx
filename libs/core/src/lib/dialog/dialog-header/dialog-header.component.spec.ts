@@ -3,20 +3,20 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DialogHeaderComponent } from './dialog-header.component';
 import { Component, Type, ViewChild } from '@angular/core';
 import { DialogConfig } from '../utils/dialog-config.class';
-import { TemplateModule } from '@fundamental-ngx/core/utils';
+import { TemplateModule } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 
 @Component({
     template: `
         <fd-dialog-header>
-            <ng-template fdTemplate="header">
+            <ng-template fdkTemplate="header">
                 <div fd-bar-right>
                     <fd-bar-element>
                         <button>Custom button</button>
                     </fd-bar-element>
                 </div>
             </ng-template>
-            <ng-template fdTemplate="subheader">
+            <ng-template fdkTemplate="subheader">
                 <div fd-bar-middle>
                     <fd-bar-element>
                         <input id="customInput" />

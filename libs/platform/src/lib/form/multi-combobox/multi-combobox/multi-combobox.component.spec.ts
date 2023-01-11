@@ -5,7 +5,7 @@ import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/t
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { DATA_PROVIDERS, DataProvider, isSelectableOptionItem } from '@fundamental-ngx/platform/shared';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';

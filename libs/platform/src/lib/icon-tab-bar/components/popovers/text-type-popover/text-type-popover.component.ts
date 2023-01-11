@@ -12,7 +12,7 @@ import {
     ViewChildren
 } from '@angular/core';
 
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
 import { IconTabBarItem } from '../../../interfaces/icon-tab-bar-item.interface';

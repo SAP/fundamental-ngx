@@ -1,7 +1,7 @@
 import { Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { PopoverComponent } from './popover.component';
 
 @Directive({

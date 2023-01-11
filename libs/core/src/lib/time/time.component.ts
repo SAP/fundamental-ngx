@@ -21,7 +21,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { Meridian, SelectableViewItem } from './models';
 import { createMissingDateImplementationError } from './errors';

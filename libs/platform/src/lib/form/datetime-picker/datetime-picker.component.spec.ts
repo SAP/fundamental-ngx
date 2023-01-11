@@ -183,6 +183,7 @@ const DATE_TIME_PICKER_IDENTIFIER = 'platform-date-time-picker-unit-test';
 
 runValueAccessorTests({
     component: PlatformDatetimePickerComponent,
+    name: 'Datetime picker',
     testModuleMetadata: {
         imports: [PlatformDatetimePickerModule, FdDatetimeModule]
     },

@@ -11,7 +11,7 @@ import {
 import { WizardStepComponent } from '../wizard-step/wizard-step.component';
 import { ActionSheetComponent } from '@fundamental-ngx/core/action-sheet';
 import { Subscription } from 'rxjs';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-wizard-step-indicator',

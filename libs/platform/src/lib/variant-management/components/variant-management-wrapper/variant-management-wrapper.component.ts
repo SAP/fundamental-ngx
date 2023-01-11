@@ -9,7 +9,7 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/core/utils';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { FDP_PRESET_MANAGED_COMPONENT, PresetManagedComponent } from '@fundamental-ngx/platform/shared';
 import equal from 'fast-deep-equal';
 import { filter, startWith, Subscription, takeUntil } from 'rxjs';

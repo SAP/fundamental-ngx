@@ -10,9 +10,9 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from './../form-item-control/form-item-control';
 
 /**
@@ -80,7 +80,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef,
+        public elmRef: ElementRef,
         @Attribute('aria-label') private ariaLabelAttr: string,
         @Attribute('aria-labelledby') private ariaLabelledByAttr: string
     ) {}
@@ -102,6 +102,6 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
 
     /** @hidden */
     elementRef(): ElementRef<any> {
-        return this._elementRef;
+        return this.elmRef;
     }
 }

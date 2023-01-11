@@ -1,9 +1,9 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 
-import { Size } from '@fundamental-ngx/core/utils';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { getRandomColorAccent } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { Size } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { getRandomColorAccent } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 import { AvatarGroupOverflowButtonColor } from '../avatar-group.component';
 

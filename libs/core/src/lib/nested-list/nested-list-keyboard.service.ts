@@ -4,7 +4,7 @@ import { Inject, Injectable } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { NestedItemInterface } from './nested-item/nested-item.interface';
 import { NestedListInterface } from './nested-list/nested-list.interface';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 
 /**

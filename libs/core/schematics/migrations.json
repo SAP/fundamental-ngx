@@ -4,6 +4,11 @@
             "version": "0.37",
             "description": "Removes icon font files, font styles, styles from config and notifies about necessity of running add schematics again.",
             "factory": "./migrations/migration-0-37/index"
+        },
+        "migration-0-39": {
+            "version": "0.39",
+            "description": "Replaces old directive selector from core's package with new one from cdk package",
+            "factory": "./migrations/migration-0-39/index"
         }
     }
 }

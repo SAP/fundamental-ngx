@@ -8,8 +8,8 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { FormStates } from '@fundamental-ngx/core/shared';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 export enum STATE_ICON {
     information = 'information',

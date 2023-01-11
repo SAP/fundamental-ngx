@@ -16,12 +16,14 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
 import { CalendarType, CalendarYearGrid, DateRange, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { DatePickerComponent as FdDatePickerComponent } from '@fundamental-ngx/core/date-picker';
-import { Placement, SpecialDayRule, FormStates, Nullable } from '@fundamental-ngx/core/shared';
-import { FormFieldControl, BaseInput, FormField } from '@fundamental-ngx/platform/shared';
+import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
+import { PlatformFormFieldControl, BaseInput, PlatformFormField } from '@fundamental-ngx/platform/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * The Platform date picker component is a wrapper around fd-date-picker using platform form.
@@ -40,7 +42,7 @@ import { FormFieldControl, BaseInput, FormField } from '@fundamental-ngx/platfor
     templateUrl: './date-picker.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FormFieldControl, useExisting: PlatformDatePickerComponent, multi: true }],
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: PlatformDatePickerComponent, multi: true }],
     host: {
         '(blur)': 'onTouched()'
     }
@@ -300,8 +302,8 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
         @Optional() @Self() public ngControl: NgControl,
         @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @Self() public ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {

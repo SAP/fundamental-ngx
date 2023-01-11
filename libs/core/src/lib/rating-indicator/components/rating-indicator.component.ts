@@ -23,8 +23,8 @@ import {
     RatingIndicatorSize,
     RatingIndicatorSizeEnum
 } from '../constants';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 
 let ratingUID = 0;
@@ -277,7 +277,7 @@ export class RatingIndicatorComponent
     }
 
     /** @hidden */
-    elementRef(): ElementRef<RatingIndicatorComponent> {
+    elementRef(): ElementRef<RatingIndicatorComponent & HTMLElement> {
         return this._elementRef;
     }
 

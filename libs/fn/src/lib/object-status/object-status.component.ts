@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, HostBinding } from '@angular/core';
 import { IconFont } from '@fundamental-ngx/core/icon';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export type ObjectStatusState = 'positive' | 'critical' | 'negative' | 'info';
 

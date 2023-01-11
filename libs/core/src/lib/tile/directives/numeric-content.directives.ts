@@ -1,6 +1,6 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 export type NumericContentState = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
 export type NumericContentSize = 's' | 'm' | 'l';

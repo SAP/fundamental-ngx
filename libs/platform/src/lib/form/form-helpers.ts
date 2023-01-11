@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 
-import { FormField, HintOptions } from '@fundamental-ngx/platform/shared';
+import { PlatformFormField, HintOptions } from '@fundamental-ngx/platform/shared';
 import { FormFieldComponent } from './form-group/form-field/form-field.component';
 import { FormFieldGroupComponent } from './form-group/form-field-group/form-field-group.component';
 import { FormGeneratorFieldComponent } from './form-generator/form-generator-field/form-generator-field.component';
@@ -10,7 +10,7 @@ export interface FieldColumn {
 }
 
 /** @hidden */
-export function isFieldChild(child: unknown): child is FormFieldComponent {
+export function isFieldChild(child: unknown): child is PlatformFormField {
     return child instanceof FormFieldComponent;
 }
 
@@ -25,12 +25,12 @@ export function isFieldGroupChild(child: unknown): child is FormFieldGroupCompon
 }
 
 /** @hidden */
-export function getFormField(field: FormField | FormGeneratorFieldComponent): FormField {
+export function getFormField(field: PlatformFormField | FormGeneratorFieldComponent): PlatformFormField {
     return isFieldGroupWrapperChild(field) ? field.fieldRenderer : field;
 }
 
 /** @hidden */
-export function getField(field: FormField): Field {
+export function getField(field: PlatformFormField): Field {
     field = isFieldGroupWrapperChild(field) ? field.fieldRenderer : field;
 
     return new Field(field.id, field.rank, field.renderer, field.column);

@@ -9,7 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { IconFont } from '@fundamental-ngx/core/icon';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 export type GenericTagState = 'positive' | 'critical' | 'negative' | 'info';
 

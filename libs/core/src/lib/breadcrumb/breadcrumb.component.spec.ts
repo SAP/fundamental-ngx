@@ -9,7 +9,7 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkModule } from '@fundamental-ngx/core/link';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { BreadcrumbComponent } from './breadcrumb.component';
 import { whenStable } from '@fundamental-ngx/core/tests';

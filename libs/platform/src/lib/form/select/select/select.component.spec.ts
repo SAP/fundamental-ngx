@@ -4,7 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { isOptionItem, OptionItem } from '@fundamental-ngx/platform/shared';
@@ -243,6 +243,7 @@ const SELECT_IDENTIFIER = 'platform-select-unit-test';
 
 runValueAccessorTests({
     component: SelectComponent,
+    name: 'Select',
     testModuleMetadata: {
         imports: [PlatformSelectModule]
     },

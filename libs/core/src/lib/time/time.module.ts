@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { TimeComponent } from './time.component';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { PipeModule } from '@fundamental-ngx/core/utils';
+import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { TimeColumnComponent } from './time-column/time-column.component';
 import { CarouselModule } from '@fundamental-ngx/core/carousel';
 import { DeprecatedTimeContentDensityDirective } from './deprecated-time-content-density.directive';

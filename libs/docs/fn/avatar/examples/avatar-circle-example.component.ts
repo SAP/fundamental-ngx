@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { Size } from '@fundamental-ngx/core/utils';
+import { Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarColor } from '@fundamental-ngx/fn/avatar';
 
 @Component({

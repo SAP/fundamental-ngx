@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { SliderComponent } from './slider.component';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { SliderPositionDirective } from './slider-position.directive';
-import { OnlyDigitsModule } from '@fundamental-ngx/core/utils';
+import { OnlyDigitsModule } from '@fundamental-ngx/cdk/utils';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { DeprecatedSliderCozyDirective } from './deprecated-slider-cozy.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';

@@ -29,12 +29,12 @@ import set from 'lodash-es/set';
 import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
-import { FdDropEvent, RangeSelector, resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
+import { FdDropEvent, RangeSelector, resizeObservable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
 import { FDP_PRESET_MANAGED_COMPONENT, isDataSource, isString } from '@fundamental-ngx/platform/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { cloneDeep, get } from 'lodash-es';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { SaveRowsEvent } from './interfaces/save-rows-event.interface';
 import { EditableTableCell } from './table-cell.class';

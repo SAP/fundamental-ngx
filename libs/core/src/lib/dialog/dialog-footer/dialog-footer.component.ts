@@ -13,7 +13,7 @@ export const DialogButtonClass = 'fd-dialog__decisive-button';
  *
  * Complex footer:
  * <fd-dialog-footer>
- *     <ng-template fdTemplate="footer"><!--Content--></ng-template>
+ *     <ng-template fdkTemplate="footer"><!--Content--></ng-template>
  * </fd-dialog-footer>
  * ```
  * */

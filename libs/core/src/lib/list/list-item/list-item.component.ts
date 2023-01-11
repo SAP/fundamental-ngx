@@ -26,13 +26,13 @@ import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { ListLinkDirective } from '../directives/list-link.directive';
 import { merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { FD_LIST_UNREAD_INDICATOR } from '../list-component.token';
 import { ListFocusItem } from '../list-focus-item.model';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ListUnreadIndicator } from '../list-unread-indicator.interface';
 
 let listItemUniqueId = 0;

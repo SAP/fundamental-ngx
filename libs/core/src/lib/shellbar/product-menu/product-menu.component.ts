@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
-import { Placement, PopoverFillMode, Nullable } from '@fundamental-ngx/core/shared';
+import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * The component that represents a product menu.

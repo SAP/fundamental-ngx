@@ -1,5 +1,5 @@
 import { Directive, ElementRef, OnInit, OnDestroy } from '@angular/core';
-import { resizeObservable } from '@fundamental-ngx/core/utils';
+import { resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 

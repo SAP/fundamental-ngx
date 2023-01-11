@@ -14,7 +14,7 @@ import { GridListDocsComponent } from './grid-list-docs.component';
 import { GridListHeaderComponent } from './grid-list-header/grid-list-header.component';
 import { COMPONENTS } from './examples';
 import { GridListModule } from '@fundamental-ngx/core/grid-list';
-import { DragAndDropModule } from '@fundamental-ngx/core/utils';
+import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { TitleModule } from '@fundamental-ngx/core/title';

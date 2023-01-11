@@ -17,16 +17,16 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { defer, fromEvent, interval, merge, Observable, Subscription, timer } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 import { SafeHtml } from '@angular/platform-browser';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import NumberFormat = Intl.NumberFormat;
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 let stepInputUniqueId = 0;
 

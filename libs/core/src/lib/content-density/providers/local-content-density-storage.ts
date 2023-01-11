@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { LocalStorageService } from '@fundamental-ngx/core/utils';
+import { LocalStorageService } from '@fundamental-ngx/cdk/utils';
 import { Observable, of, Subject } from 'rxjs';
 import { ContentDensityStorage } from '../classes/abstract-content-density-storage';
 import { DEFAULT_CONTENT_DENSITY } from '../tokens/default-content-density.token';

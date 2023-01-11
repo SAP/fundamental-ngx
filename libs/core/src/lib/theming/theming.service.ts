@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { cloneDeep, merge } from 'lodash-es';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { THEME_SWITCHER_ROUTER_MISSING_ERROR } from '@fundamental-ngx/core/utils';
+import { THEME_SWITCHER_ROUTER_MISSING_ERROR } from '@fundamental-ngx/cdk/utils';
 import { BaseThemingConfig } from './config';
 import { ThemingConfig } from './interfaces/theming-config.interface';
 import { STANDARD_THEMES } from './standard-themes';

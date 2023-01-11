@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DocsThemeService, ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { ThemeServiceOutput } from '@fundamental-ngx/core/utils';
+import { ThemeServiceOutput } from '@fundamental-ngx/cdk/utils';
 
 const themeSwitcherSrc = 'theme-switcher-example.component.html';
 const themeUrlSrc = 'theme-url-example.component.html';

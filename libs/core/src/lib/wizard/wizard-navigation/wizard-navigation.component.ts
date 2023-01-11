@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, Input, Optional } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { WIZARD, WizardComponentInterface } from '../wizard-injection-token';
 
 @Component({

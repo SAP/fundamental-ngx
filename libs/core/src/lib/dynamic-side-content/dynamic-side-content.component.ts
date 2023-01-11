@@ -23,8 +23,8 @@ import {
 import { getPositionClassName, getSizeClassName } from './utils';
 import { DynamicSideContentMainComponent } from './dynamic-side-content-main.component';
 import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 let componentId = 0;
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ThemeServiceOutput } from '@fundamental-ngx/core/utils';
+import { ThemeServiceOutput } from '@fundamental-ngx/cdk/utils';
 import { Subject } from 'rxjs';
 
 @Injectable()

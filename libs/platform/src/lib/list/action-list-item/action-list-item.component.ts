@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 
 import { ListConfig } from '../list.config';
 import { ActionChangeEvent, BaseListItem, IS_ACTIVE_CLASS } from '../base-list-item';

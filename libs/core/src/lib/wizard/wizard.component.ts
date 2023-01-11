@@ -19,8 +19,8 @@ import {
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { DialogBodyComponent } from '@fundamental-ngx/core/dialog';
-import { scrollTop } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { scrollTop } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { WizardStepComponent } from './wizard-step/wizard-step.component';
 import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
 import { WizardContentComponent } from './wizard-content/wizard-content.component';

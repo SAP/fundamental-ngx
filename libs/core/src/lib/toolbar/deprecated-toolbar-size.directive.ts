@@ -5,7 +5,7 @@ import {
     LocalContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 import { BehaviorSubject } from 'rxjs';
-import { ModuleDeprecation } from '@fundamental-ngx/core/utils';
+import { ModuleDeprecation } from '@fundamental-ngx/cdk/utils';
 
 type ToolbarSize = 'cozy' | 'compact' | 'condensed' | null;
 

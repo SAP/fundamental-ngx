@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AlertComponent } from './alert.component';
 import { AlertService } from './alert-service/alert.service';
 import { AlertContainerComponent } from './alert-utils/alert-container.component';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 
 /**

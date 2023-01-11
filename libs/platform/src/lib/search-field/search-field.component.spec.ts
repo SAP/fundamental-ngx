@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 import { Observable, of } from 'rxjs';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { createKeyboardEvent, DataProvider, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
 import { PlatformSearchFieldModule } from './search-field.module';
 import { SearchFieldComponent, SearchInput, SuggestionItem, ValueLabelItem } from './search-field.component';

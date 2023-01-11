@@ -14,7 +14,7 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { FnClickedProvider } from '@fundamental-ngx/fn/cdk';
+import { FdkClickedProvider } from '@fundamental-ngx/cdk/utils';
 import { Subject, takeUntil } from 'rxjs';
 import { Select } from '../select.interface';
 import { FN_SELECT_PROVIDER } from '../select.token';
@@ -28,7 +28,7 @@ import { FN_SELECT_PROVIDER } from '../select.token';
     templateUrl: './option.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [FnClickedProvider],
+    providers: [FdkClickedProvider],
     host: {
         role: 'option',
         class: 'fn-select__item',
@@ -81,7 +81,7 @@ export class OptionComponent implements OnDestroy, FocusableOption {
         private _elRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
         @Optional() @Inject(FN_SELECT_PROVIDER) private _selectComponent: Select | null,
-        private _clicked: FnClickedProvider
+        private _clicked: FdkClickedProvider
     ) {
         this._clicked.pipe(takeUntil(this._destroyed$)).subscribe(() => {
             this.optionClicked.emit(this);

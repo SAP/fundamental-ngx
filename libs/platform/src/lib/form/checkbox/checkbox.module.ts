@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
-import { PipeModule } from '@fundamental-ngx/core/utils';
+import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from './checkbox.component';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { FormItemModule } from '@fundamental-ngx/core/form';

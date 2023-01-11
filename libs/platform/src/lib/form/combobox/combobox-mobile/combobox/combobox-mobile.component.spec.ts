@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs';
 
 import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../../combobox.interface';
 import { ComboboxMobileComponent } from './combobox-mobile.component';

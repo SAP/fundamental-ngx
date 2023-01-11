@@ -22,7 +22,7 @@ import {
     DeprecatedDateTimePickerContentDensityDirective
 } from '@fundamental-ngx/core/datetime-picker';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import { moduleDeprecationsProvider, PipeModule } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider, PipeModule } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

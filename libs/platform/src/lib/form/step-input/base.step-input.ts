@@ -12,9 +12,9 @@ import { NgForm, NgControl, ControlContainer } from '@angular/forms';
 import { BehaviorSubject, of } from 'rxjs';
 import { takeUntil, switchMap, map } from 'rxjs/operators';
 
-import { ContentDensity, RtlService } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
-import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { ContentDensity, RtlService } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { StepInputConfig } from './step-input.config';
 import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './step-input.util';
 
@@ -209,8 +209,8 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         ngControl: NgControl,
         controlContainer: ControlContainer,
         ngForm: NgForm,
-        formField: FormField,
-        formControl: FormFieldControl,
+        formField: PlatformFormField,
+        formControl: PlatformFormFieldControl,
         protected config: StepInputConfig,
         private _renderer: Renderer2,
         private _rtlService: RtlService

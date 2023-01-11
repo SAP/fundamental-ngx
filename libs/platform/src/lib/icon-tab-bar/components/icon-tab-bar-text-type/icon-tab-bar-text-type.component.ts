@@ -10,7 +10,7 @@ import {
     ViewChild,
     ViewChildren
 } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';

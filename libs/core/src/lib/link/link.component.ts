@@ -18,7 +18,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { map, startWith, Subject, takeUntil, tap } from 'rxjs';
 import { DomPortal, Portal } from '@angular/cdk/portal';
 import { IconComponent } from '@fundamental-ngx/core/icon';

@@ -7,7 +7,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import { WizardGeneratorFormsValue, WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';

@@ -8,7 +8,7 @@ import { IconModule } from '@fundamental-ngx/core/icon';
 import { TitleModule } from '@fundamental-ngx/core/title';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
-import { DynamicComponentService, InitialFocusModule, ResizeModule, TemplateModule } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, InitialFocusModule, ResizeModule, TemplateModule } from '@fundamental-ngx/cdk/utils';
 
 import { DialogComponent } from './dialog.component';
 import { DialogHeaderComponent } from './dialog-header/dialog-header.component';

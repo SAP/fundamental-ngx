@@ -12,8 +12,8 @@ import {
     HostListener
 } from '@angular/core';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { DestroyedService, TabbableElementService } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { DestroyedService, TabbableElementService } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { NumberInput } from '@angular/cdk/coercion';
 import { FdTable } from '../fd-table.interface';
 import { TableCellInterface } from '../table-cell.interface';

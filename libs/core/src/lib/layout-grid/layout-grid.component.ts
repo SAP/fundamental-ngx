@@ -9,8 +9,8 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 import { CSS_CLASS_NAME } from './constants';
 import { LayoutGridRowDirective } from './directives/layout-grid-row.directive';

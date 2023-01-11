@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { ThemeServiceOutput, ThemesService } from '@fundamental-ngx/core/utils';
+import { ThemeServiceOutput, ThemesService } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-theme-switcher-example',

@@ -13,7 +13,7 @@ import {
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-object-identifier',

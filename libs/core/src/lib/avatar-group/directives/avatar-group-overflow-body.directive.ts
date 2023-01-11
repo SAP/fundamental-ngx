@@ -12,7 +12,7 @@ import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 
-import { HasElementRef, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { HasElementRef, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { AVATAR_GROUP_FOCUSABLE_AVATAR_DIRECTIVE, FocusableWithElementRef } from '../tokens';
 
 // import { AvatarGroupFocusableAvatarDirective } from './avatar-group-focusable-avatar.directive';

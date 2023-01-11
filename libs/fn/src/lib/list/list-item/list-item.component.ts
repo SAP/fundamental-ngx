@@ -12,13 +12,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {
-    DestroyedBehavior,
-    FnDisabledProvider,
-    FnFocusableItemProvider,
-    FnReadonlyProvider,
+    FdkDisabledProvider,
+    FdkFocusableItemProvider,
+    FdkReadonlyProvider,
     SelectableItemToken,
     SelectionService
-} from '@fundamental-ngx/fn/cdk';
+} from '@fundamental-ngx/cdk/utils';
 import {
     FN_LIST_ACTIONS,
     FN_LIST_BYLINE,
@@ -33,6 +32,7 @@ import { CheckboxContext } from '../list-item-checkbox.directive';
 import { ListComponent } from '../list/list.component';
 import { distinctUntilChanged, map, Observable } from 'rxjs';
 import { BooleanInput, coerceArray } from '@angular/cdk/coercion';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fn-list-item, [fn-list-item]',
@@ -42,7 +42,7 @@ import { BooleanInput, coerceArray } from '@angular/cdk/coercion';
     host: {
         '[class.fn-list__item]': 'true'
     },
-    providers: [DestroyedBehavior, FnDisabledProvider, FnReadonlyProvider, FnFocusableItemProvider]
+    providers: [DestroyedService, FdkDisabledProvider, FdkReadonlyProvider, FdkFocusableItemProvider]
 })
 export class ListItemComponent {
     @Input()
@@ -72,14 +72,14 @@ export class ListItemComponent {
 
     constructor(
         private _cd: ChangeDetectorRef,
-        private _destroy$: DestroyedBehavior,
-        @Optional() private _selectionService: SelectionService,
+        private _destroy$: DestroyedService,
+        @Optional() private _selectionService: SelectionService<HTMLElement>,
         @Optional() @Inject(SelectableItemToken) private _selectableItem: SelectableItemToken,
         @Optional() @Inject(ListComponent) private _listComponent: ListComponent | null,
         private _elementRef: ElementRef<HTMLElement>,
-        private _disabledProvider: FnDisabledProvider,
-        private _readonlyProvider: FnReadonlyProvider,
-        _focusableItemProvider: FnFocusableItemProvider
+        private _disabledProvider: FdkDisabledProvider,
+        private _readonlyProvider: FdkReadonlyProvider,
+        _focusableItemProvider: FdkFocusableItemProvider
     ) {
         _focusableItemProvider.setFocusable(true);
         if (this._selectionService && this._selectableItem) {

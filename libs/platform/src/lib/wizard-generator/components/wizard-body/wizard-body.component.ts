@@ -14,7 +14,7 @@ import { firstValueFrom, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { PreparedWizardGeneratorItem, WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
 import { WizardNavigationButtons } from '../../interfaces/wizard-navigation-buttons.interface';

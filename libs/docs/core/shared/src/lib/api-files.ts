@@ -414,5 +414,12 @@ export const API_FILES = {
         'OverflowItemContainerRefDirective',
         'OverflowLayoutPopoverContentDirective'
     ],
-    skeleton: ['SkeletonComponent']
+    skeleton: ['SkeletonComponent'],
+    multiCombobox: [
+        'MultiComboboxComponent',
+        'MobileMultiComboboxComponent',
+        'MultiComboboxSelectionChangeEvent',
+        'MultiComboboxDataSourceParser',
+        'FdMultiComboBoxDataSource'
+    ]
 };

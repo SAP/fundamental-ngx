@@ -1,0 +1,18 @@
+{
+    "name": "docs-cdk-disabled",
+    "sourceRoot": "libs/docs/cdk/disabled",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e-noop": {
+            "executor": "@fundamental-ngx/wdio:e2e-test",
+            "options": {
+                "e2eTsConfig": "libs/docs/cdk/disabled/e2e/tsconfig.json",
+                "baseUrl": "http://localhost:4200",
+                "configFile": "libs/docs/cdk/disabled/wdio.conf.js"
+            },
+            "outputs": ["{workspaceRoot}/allure-results/docs-cdk-disabled"]
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

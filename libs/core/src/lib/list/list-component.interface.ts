@@ -1,4 +1,5 @@
 import { QueryList } from '@angular/core';
+import { ListItemInterface } from '@fundamental-ngx/cdk/utils';
 
 export interface ListComponentInterface {
     _navItems: QueryList<{
@@ -8,4 +9,8 @@ export interface ListComponentInterface {
         _isItemVisible: boolean;
         focus(): void;
     }>;
+
+    setItemActive(index: number): void;
+
+    items: QueryList<ListItemInterface>;
 }

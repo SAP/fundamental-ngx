@@ -10,7 +10,7 @@ import { GlobalContentDensityService } from './services/global-content-density.s
 import { LocalContentDensityStorage } from './providers/local-content-density-storage';
 import { CONTENT_DENSITY_STORAGE_KEY } from './tokens/content-density-storage-key.token';
 import { UrlContentDensityStorage } from './providers/url-content-density-storage';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { ContentDensityService } from '@fundamental-ngx/cdk/utils';
 import { DeprecatedContentDensityService } from './services/deprecated-content-density.service';
 import { ContentDensityMode } from './types/content-density.mode';
 

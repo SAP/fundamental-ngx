@@ -5,7 +5,7 @@
 
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { AfterViewInit, ChangeDetectorRef, Directive, Input, OnDestroy } from '@angular/core';
-import { DisabledBehavior, ReadonlyBehavior } from '@fundamental-ngx/fn/cdk';
+import { DisabledBehavior, ReadonlyBehavior } from '@fundamental-ngx/cdk/utils';
 import { Subscription, merge, Observable } from 'rxjs';
 
 export type InputState = 'positive' | 'critical' | 'negative' | 'info';
@@ -79,9 +79,9 @@ export abstract class InputBase implements AfterViewInit, OnDestroy {
         if (this.disabledByForm) {
             this.disabled = true;
         } else {
-            this.disabled = this.disabled$?.fnDisabled;
+            this.disabled = this.disabled$?.fdkDisabled;
         }
-        this.readonly = this.readonly$?.fnReadonly;
+        this.readonly = this.readonly$?.fdkReadonly;
         this._cdRef.detectChanges();
     }
 }

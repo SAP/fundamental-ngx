@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
-import { PipeModule } from '@fundamental-ngx/core/utils';
+import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { SplitMenuButtonComponent } from './split-menu-button.component';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 

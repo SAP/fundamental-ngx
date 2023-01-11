@@ -3,7 +3,7 @@ import { NgModule, TemplateRef, Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { MessageToastService } from './message-toast.service';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { MessageToastComponent } from '../message-toast.component';
 import { MessageToastContainerComponent } from '../message-toast-utils/message-toast-container.component';
 import { MessageToastRef } from '../message-toast-utils/message-toast-ref';

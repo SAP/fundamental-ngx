@@ -145,6 +145,7 @@ const TIME_PICKER_IDENTIFIER = 'platform-time-picker-unit-test';
 
 runValueAccessorTests({
     component: PlatformTimePickerComponent,
+    name: 'Time picker',
     testModuleMetadata: {
         imports: [PlatformTimePickerModule, FdDatetimeModule]
     },

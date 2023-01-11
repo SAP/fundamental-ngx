@@ -25,6 +25,7 @@ import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import {
     BehaviorSubject,
     filter,
@@ -40,18 +41,18 @@ import {
 } from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     ArrayListDataSource,
     CollectionBaseInput,
-    FormField,
-    FormFieldControl,
     isBlank,
     isDataSource,
     isPresent,
     ListDataSource,
-    ObservableListDataSource
+    ObservableListDataSource,
+    PlatformFormField,
+    PlatformFormFieldControl
 } from '@fundamental-ngx/platform/shared';
 import { BaseListItem, ListItemDef } from './base-list-item';
 import { ListConfig } from './list.config';
@@ -84,7 +85,7 @@ let nextListId = 0;
     styleUrls: ['./list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        { provide: FormFieldControl, useExisting: ListComponent, multi: true },
+        { provide: FD_FORM_FIELD_CONTROL, useExisting: ListComponent, multi: true },
         { provide: FdpListComponent, useExisting: ListComponent },
         {
             provide: FD_LIST_UNREAD_INDICATOR,
@@ -407,8 +408,8 @@ export class ListComponent<T>
         @Optional() @Self() public ngControl: NgControl,
         @Optional() @Self() public controlContainer: ControlContainer,
         @Optional() @Self() public ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         protected _listConfig?: ListConfig
     ) {
         super(_changeDetectorRef, elementRef, ngControl, controlContainer, ngForm, formField, formControl);

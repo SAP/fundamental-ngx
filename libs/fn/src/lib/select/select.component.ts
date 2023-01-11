@@ -14,7 +14,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { OptionComponent } from './option/option.component';
-import { KeyUtil, resizeObservable } from '@fundamental-ngx/core/utils';
+import { KeyUtil, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';

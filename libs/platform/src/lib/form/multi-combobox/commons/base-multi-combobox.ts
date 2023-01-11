@@ -39,19 +39,19 @@ import { takeUntil, skip } from 'rxjs/operators';
 import equal from 'fast-deep-equal';
 
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
-import { RangeSelector } from '@fundamental-ngx/core/utils';
-import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/core/utils';
+import { RangeSelector } from '@fundamental-ngx/cdk/utils';
+import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { ListComponent } from '@fundamental-ngx/core/list';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { PopoverFillMode, FormStates } from '@fundamental-ngx/core/shared';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import {
     ArrayMultiComboBoxDataSource,
     coerceArraySafe,
     CollectionBaseInput,
-    FormField,
-    FormFieldControl,
+    PlatformFormFieldControl,
     isDataSource,
     isFunction,
     isJsObject,
@@ -62,11 +62,13 @@ import {
     MatchingStrategy,
     MultiComboBoxDataSource,
     ObservableMultiComboBoxDataSource,
+    PlatformFormField,
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
 
 import { TextAlignment } from '../../combobox';
 import { MultiComboboxConfig } from '../multi-combobox.config';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 export const MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory: () => 12 });
 
@@ -379,8 +381,8 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
         protected multiComboboxConfig: MultiComboboxConfig,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         @Inject(MAP_LIMIT) private _mapLimit: number
     ) {
         super(_cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);

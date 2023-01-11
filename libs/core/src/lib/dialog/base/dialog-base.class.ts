@@ -13,7 +13,7 @@ import { ESCAPE } from '@angular/cdk/keycodes';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 
-import { KeyUtil, RtlService, FocusTrapService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService, FocusTrapService } from '@fundamental-ngx/cdk/utils';
 
 import { DialogConfigBase } from './dialog-config-base.class';
 import { DialogRefBase } from './dialog-ref-base.class';

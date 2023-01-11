@@ -8,6 +8,7 @@ import {
     EventEmitter,
     forwardRef,
     Host,
+    Inject,
     Input,
     isDevMode,
     Optional,
@@ -18,9 +19,10 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { FdCheckboxValues, CheckboxComponent as FdCheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 
 /** Change event object emitted by Platform Checkbox. */
 export class PlatformCheckboxChange {
@@ -40,7 +42,7 @@ let nextUniqueId = 0;
     templateUrl: './checkbox.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => CheckboxComponent), multi: true }]
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => CheckboxComponent), multi: true }]
 })
 export class CheckboxComponent extends BaseInput implements AfterViewInit {
     /**
@@ -138,8 +140,8 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         protected _changeDetector: ChangeDetectorRef,
         @Attribute('tabIndexValue') public tabIndexValue: number = 0
     ) {

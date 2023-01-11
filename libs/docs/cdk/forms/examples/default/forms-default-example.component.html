@@ -1,0 +1,38 @@
+<fdp-form-group #fg1 [useForm]="true" [formGroup]="form" mainTitle="Custom control in form container">
+    <fdp-form-field
+        #ff1
+        id="customControl"
+        label="Custom control"
+        [column]="1"
+        [rank]="1"
+        hintPlacement="left"
+        [required]="true"
+    >
+        <fdk-custom-control-example
+            tabindex="0"
+            name="customControl"
+            [options]="['one', 'two', 'three']"
+            [formControl]="ff1.formControl"
+        ></fdk-custom-control-example>
+        <ng-template #i18n let-errors>
+            <span *ngIf="errors.required" role="alert" aria-atomic="true"> Value is required </span>
+        </ng-template>
+    </fdp-form-field>
+    <fdp-form-field
+        #ff2
+        id="customControl2"
+        label="Multi-combobox control"
+        [column]="1"
+        [rank]="2"
+        hintPlacement="left"
+        [required]="true"
+        placeholder="Select something"
+    >
+        <fd-multi-combobox [formControl]="ff2.formControl" [dataSource]="['one', 'two', 'three']"></fd-multi-combobox>
+        <ng-template #i18n let-errors>
+            <span *ngIf="errors.required" role="alert" aria-atomic="true"> Value is required </span>
+        </ng-template>
+    </fdp-form-field>
+</fdp-form-group>
+
+<button fd-button (click)="submit()">Submit</button>

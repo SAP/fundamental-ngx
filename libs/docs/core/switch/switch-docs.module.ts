@@ -11,7 +11,7 @@ import { SemanticSwitchExampleComponent } from './examples/semantic-switch-examp
 import { DisabledSwitchExampleComponent } from './examples/disabled-switch-example/disabled-switch-example.component';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { DeprecatedSwitchCompactDirective, SwitchModule } from '@fundamental-ngx/core/switch';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {
