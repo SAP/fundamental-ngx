@@ -9,13 +9,13 @@
         ></button>
         <ng-container *ngIf="_defaultDialogContent?.subHeader">
             <ng-template fdkTemplate="subheader">
-                <ng-container *ngTemplateOutlet="_defaultDialogContent.subHeader!"></ng-container>
+                <ng-container *ngTemplateOutlet="_defaultDialogContent!.subHeader!"></ng-container>
             </ng-template>
         </ng-container>
     </fd-dialog-header>
 
     <fd-dialog-body *ngIf="_defaultDialogContent?.content">
-        <ng-container *ngTemplateOutlet="_defaultDialogContent.content!"></ng-container>
+        <ng-container *ngTemplateOutlet="_defaultDialogContent?.content!"></ng-container>
     </fd-dialog-body>
 
     <fd-dialog-footer *ngIf="_showFooter()">
@@ -23,7 +23,7 @@
             *ngIf="_defaultDialogContent?.approveButton"
             fdType="emphasized"
             fd-initial-focus
-            [label]="_defaultDialogContent.approveButton!"
+            [label]="_defaultDialogContent?.approveButton || ''"
             [fdCozy]="_defaultDialogConfiguration.mobile"
             (click)="_approveButtonClicked()"
             [ariaLabel]="_defaultDialogContent?.approveButtonAriaLabel"
@@ -32,7 +32,7 @@
         </fd-button-bar>
         <fd-button-bar
             *ngIf="_defaultDialogContent?.cancelButton"
-            [label]="_defaultDialogContent.cancelButton!"
+            [label]="_defaultDialogContent?.cancelButton || ''"
             [fdCozy]="_defaultDialogConfiguration.mobile"
             (click)="_cancelButtonClicked()"
             [ariaLabel]="_defaultDialogContent?.closeButtonAriaLabel"

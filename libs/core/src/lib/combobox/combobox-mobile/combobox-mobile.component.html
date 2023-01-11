@@ -1,7 +1,7 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
-            <h1 fd-title *ngIf="mobileConfig?.title">{{ mobileConfig?.title }}</h1>
+            <h1 fd-title *ngIf="mobileConfig?.title">{{ mobileConfig.title }}</h1>
             <button
                 title="Close"
                 fd-dialog-close-button

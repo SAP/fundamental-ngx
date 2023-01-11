@@ -73,7 +73,7 @@ export class PanelComponent implements OnInit, OnDestroy {
 
     /** Reference to panel content */
     @ContentChild(PanelContentDirective)
-    panelContent: PanelContentDirective;
+    panelContent: Nullable<PanelContentDirective>;
 
     /** @hidden */
     _rtl = false;

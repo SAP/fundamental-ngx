@@ -19,7 +19,10 @@
 </ng-container>
 
 <ng-container *ngIf="!stackedItems || stackedItems.length <= 1">
-    <span class="fd-wizard__step-indicator" (click)="stepItemClicked(stackedItems?.[0], $event)">
+    <span
+        class="fd-wizard__step-indicator"
+        (click)="stepItemClicked(stackedItems.length ? stackedItems[0] : undefined, $event)"
+    >
         <ng-container *ngTemplateOutlet="stepIndicatorContent"></ng-container>
     </span>
 </ng-container>
