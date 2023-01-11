@@ -23,6 +23,7 @@ import {
     contentDensityObserverProviders,
     defaultContentDensityObserverConfigs
 } from '@fundamental-ngx/core/content-density';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /** Panel change event instance */
 export class PanelExpandChangeEvent {
@@ -109,11 +110,11 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
 
     /** @hidden */
     @ContentChild(PanelContentComponent)
-    _panelContentComponent: PanelContentComponent;
+    _panelContentComponent: Nullable<PanelContentComponent>;
 
     /** @hidden */
     @ViewChild(PanelTitleDirective)
-    _panelTitleDirective: PanelTitleDirective;
+    _panelTitleDirective: Nullable<PanelTitleDirective>;
 
     /** @hidden id of the title element */
     _titleId: string = 'fdp-panel-title-' + platformPanelTitleUniqueId++;

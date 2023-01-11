@@ -305,7 +305,7 @@ export class ListComponent<T>
      * @hidden
      * keyManger to handle keybord events used in template
      */
-    _keyManager: FocusKeyManager<BaseListItem>;
+    _keyManager: Nullable<FocusKeyManager<BaseListItem>>;
 
     /** @hidden */
     _items: T[] = [];
@@ -856,7 +856,7 @@ export class ListComponent<T>
         item.rowSelection = this.rowSelection;
         item._hasByLine = this.hasByLine;
         item.itemSelected.subscribe(() => {
-            this._keyManager.setActiveItem(this.listItems.toArray().indexOf(item));
+            this._keyManager?.setActiveItem(this.listItems.toArray().indexOf(item));
         });
 
         this.stateChanges.next(item);

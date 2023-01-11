@@ -16,6 +16,7 @@ import { ApprovalFlowAddNodeViewService, VIEW_MODES } from '../services/approval
 import { displayTeamFn, displayUserFn, filterByName, trackByFn } from '../helpers';
 import { ApprovalNode, ApprovalTeam, ApprovalUser } from '../interfaces';
 import { ApprovalFlowTeamDataSource, ApprovalFlowUserDataSource } from '@fundamental-ngx/platform/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export interface AddNodeDialogRefData {
     isEdit?: boolean;
@@ -95,7 +96,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     _selectedApprovers: ApprovalUser[] = [];
 
     /** @hidden */
-    _selectedTeam: ApprovalTeam;
+    _selectedTeam: Nullable<ApprovalTeam>;
 
     /** @hidden */
     _selectedTeamArray: ApprovalTeam[] = [];

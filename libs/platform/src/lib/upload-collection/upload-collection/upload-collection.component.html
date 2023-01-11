@@ -26,7 +26,7 @@
                         <span>
                             {{
                                 'platformUploadCollection.breadcrumbLabelAllFilesWithTotal'
-                                    | fdTranslate: { total: _totalItems }
+                                    | fdTranslate : { total: _totalItems }
                             }}
                         </span>
                     </ng-template>
@@ -134,7 +134,7 @@
             <fdp-table
                 *ngIf="_visibleList.length > 0"
                 [dataSource]="_visibleList"
-                [loading]="dataSource?.isDataLoading"
+                [loading]="dataSource.isDataLoading"
                 selectionMode="multiple"
                 emptyTableMessage=""
                 [noHorizontalBorders]="true"
@@ -207,7 +207,7 @@
                 <fdp-column name="uploadedOn" label="Uploaded on" width="5rem">
                     <fdp-table-cell
                         *fdpCellDef="let item"
-                        [innerText]="item.uploadedOn | date: 'shortDate'"
+                        [innerText]="item.uploadedOn | date : 'shortDate'"
                     ></fdp-table-cell>
                 </fdp-column>
 
@@ -316,7 +316,7 @@
                 <span [id]="id + '-pagination'" class="fdp-upload-collection__pagination--total">
                     {{
                         'platformUploadCollection.paginationTotal'
-                            | fdTranslate: { from: _countShowedItems, to: _countNotShowedItems, total: _totalItems }
+                            | fdTranslate : { from: _countShowedItems, to: _countNotShowedItems, total: _totalItems }
                     }}
                 </span>
                 <fd-pagination
@@ -514,19 +514,19 @@
 
 <ng-template #messageNewFolder let-payload="payload" let-messageStripType="messageStripType">
     <ng-container *ngIf="messageStripType === 'error'; else foldersCreated">
-        {{ 'platformUploadCollection.messageCreateFailed' | fdTranslate: { folderName: payload.folder.name } }}
+        {{ 'platformUploadCollection.messageCreateFailed' | fdTranslate : { folderName: payload.folder.name } }}
     </ng-container>
     <ng-template #foldersCreated>
-        {{ 'platformUploadCollection.messageCreateSuccess' | fdTranslate: { folderName: payload.folder.name } }}
+        {{ 'platformUploadCollection.messageCreateSuccess' | fdTranslate : { folderName: payload.folder.name } }}
     </ng-template>
 </ng-template>
 
 <ng-template #messageUpdateVersion let-payload="payload" let-messageStripType="messageStripType">
     <ng-container *ngIf="messageStripType === 'error'; else versionUpdated">
-        {{ 'platformUploadCollection.messageUpdateVersionFailed' | fdTranslate: { folderName: payload.item.name } }}
+        {{ 'platformUploadCollection.messageUpdateVersionFailed' | fdTranslate : { folderName: payload.item.name } }}
     </ng-container>
     <ng-template #versionUpdated>
-        {{ 'platformUploadCollection.messageUpdateVersionSuccess' | fdTranslate: { folderName: payload.item.name } }}
+        {{ 'platformUploadCollection.messageUpdateVersionSuccess' | fdTranslate : { folderName: payload.item.name } }}
     </ng-template>
 </ng-template>
 
@@ -534,13 +534,13 @@
     <ng-container *ngIf="messageStripType === 'error'; else fileRenamed">
         {{
             'platformUploadCollection.messageFileRenameFailed'
-                | fdTranslate: { from: payload.item.name, to: payload.fileName }
+                | fdTranslate : { from: payload.item.name, to: payload.fileName }
         }}
     </ng-container>
     <ng-template #fileRenamed>
         {{
             'platformUploadCollection.messageFileRenameSuccess'
-                | fdTranslate: { from: payload.item.name, to: payload.fileName }
+                | fdTranslate : { from: payload.item.name, to: payload.fileName }
         }}
     </ng-template>
 </ng-template>
@@ -550,32 +550,32 @@
         <ng-container *ngIf="messageStripType === 'error'; else foldersAndFilesRemoved">
             {{
                 'platformUploadCollection.messageRemoveFoldersAndFilesFailed'
-                    | fdTranslate: { foldersCount: count.folder, filesCount: count.file }
+                    | fdTranslate : { foldersCount: count.folder, filesCount: count.file }
             }}
         </ng-container>
         <ng-template #foldersAndFilesRemoved>
             {{
                 'platformUploadCollection.messageRemoveFoldersAndFilesSuccess'
-                    | fdTranslate: { foldersCount: count.folder, filesCount: count.file }
+                    | fdTranslate : { foldersCount: count.folder, filesCount: count.file }
             }}
         </ng-template>
     </ng-container>
 
     <ng-container *ngIf="payload.items.length > 1 && count.folder && !count.file">
         <ng-container *ngIf="messageStripType === 'error'; else foldersRemoved">
-            {{ 'platformUploadCollection.messageRemoveFoldersFailed' | fdTranslate: { foldersCount: count.folder } }}
+            {{ 'platformUploadCollection.messageRemoveFoldersFailed' | fdTranslate : { foldersCount: count.folder } }}
         </ng-container>
         <ng-template #foldersRemoved>
-            {{ 'platformUploadCollection.messageRemoveFoldersSuccess' | fdTranslate: { foldersCount: count.folder } }}
+            {{ 'platformUploadCollection.messageRemoveFoldersSuccess' | fdTranslate : { foldersCount: count.folder } }}
         </ng-template>
     </ng-container>
 
     <ng-container *ngIf="payload.items.length > 1 && count.file && !count.folder">
         <ng-container *ngIf="messageStripType === 'error'; else filesRemoved">
-            {{ 'platformUploadCollection.messageRemoveFilesFailed' | fdTranslate: { filesCount: count.file } }}
+            {{ 'platformUploadCollection.messageRemoveFilesFailed' | fdTranslate : { filesCount: count.file } }}
         </ng-container>
         <ng-template #filesRemoved>
-            {{ 'platformUploadCollection.messageRemoveFilesSuccess' | fdTranslate: { filesCount: count.file } }}
+            {{ 'platformUploadCollection.messageRemoveFilesSuccess' | fdTranslate : { filesCount: count.file } }}
         </ng-template>
     </ng-container>
 
@@ -583,13 +583,13 @@
         <ng-container *ngIf="messageStripType === 'error'; else oneItemRemoved">
             {{
                 'platformUploadCollection.messageRemoveFileOrFolderFailed'
-                    | fdTranslate: { name: payload.items[0].name }
+                    | fdTranslate : { name: payload.items[0].name }
             }}
         </ng-container>
         <ng-template #oneItemRemoved>
             {{
                 'platformUploadCollection.messageRemoveFileOrFolderSuccess'
-                    | fdTranslate: { name: payload.items[0].name }
+                    | fdTranslate : { name: payload.items[0].name }
             }}
         </ng-template>
     </ng-container>
@@ -602,7 +602,7 @@
                 (payload.to
                     ? 'platformUploadCollection.messageMoveFoldersAndFilesFailed'
                     : 'platformUploadCollection.messageMoveRootFoldersAndFilesFailed'
-                ) | fdTranslate: { foldersCount: count.folder, filesCount: count.file, to: payload.to?.name }
+                ) | fdTranslate : { foldersCount: count.folder, filesCount: count.file, to: payload.to?.name }
             }}
         </ng-container>
         <ng-template #filesAndFoldersMovedTo>
@@ -610,7 +610,7 @@
                 (payload.to
                     ? 'platformUploadCollection.messageMoveFoldersAndFilesSuccess'
                     : 'platformUploadCollection.messageMoveRootFoldersAndFilesSuccess'
-                ) | fdTranslate: { foldersCount: count.folder, filesCount: count.file, to: payload.to?.name }
+                ) | fdTranslate : { foldersCount: count.folder, filesCount: count.file, to: payload.to?.name }
             }}
         </ng-template>
     </ng-container>
@@ -621,7 +621,7 @@
                 (payload.to
                     ? 'platformUploadCollection.messageMoveFoldersFailed'
                     : 'platformUploadCollection.messageMoveRootFoldersFailed'
-                ) | fdTranslate: { foldersCount: count.folder, to: payload.to?.name }
+                ) | fdTranslate : { foldersCount: count.folder, to: payload.to?.name }
             }}
         </ng-container>
         <ng-template #foldersMovedTo>
@@ -629,7 +629,7 @@
                 (payload.to
                     ? 'platformUploadCollection.messageMoveFoldersSuccess'
                     : 'platformUploadCollection.messageMoveRootFoldersSuccess'
-                ) | fdTranslate: { foldersCount: count.folder, to: payload.to?.name }
+                ) | fdTranslate : { foldersCount: count.folder, to: payload.to?.name }
             }}
         </ng-template>
     </ng-container>
@@ -640,7 +640,7 @@
                 (payload.to
                     ? 'platformUploadCollection.messageMoveFilesFailed'
                     : 'platformUploadCollection.messageMoveRootFilesFailed'
-                ) | fdTranslate: { filesCount: count.file, to: payload.to?.name }
+                ) | fdTranslate : { filesCount: count.file, to: payload.to?.name }
             }}
         </ng-container>
         <ng-template #filesMovedTo>
@@ -648,7 +648,7 @@
                 (payload.to
                     ? 'platformUploadCollection.messageMoveFilesSuccess'
                     : 'platformUploadCollection.messageMoveRootFilesSuccess'
-                ) | fdTranslate: { filesCount: count.file, to: payload.to?.name }
+                ) | fdTranslate : { filesCount: count.file, to: payload.to?.name }
             }}
         </ng-template>
     </ng-container>
@@ -659,7 +659,7 @@
                 (payload.to
                     ? 'platformUploadCollection.messageMoveFileOrFolderFailed'
                     : 'platformUploadCollection.messageMoveRootFileOrFolderFailed'
-                ) | fdTranslate: { name: payload.items[0].name, to: payload.to?.name }
+                ) | fdTranslate : { name: payload.items[0].name, to: payload.to?.name }
             }}
         </ng-container>
         <ng-template #oneItemMovedTo>
@@ -667,7 +667,7 @@
                 (payload.to
                     ? 'platformUploadCollection.messageMoveFileOrFolderSuccess'
                     : 'platformUploadCollection.messageMoveRootFileOrFolderSuccess'
-                ) | fdTranslate: { name: payload.items[0].name, to: payload.to?.name }
+                ) | fdTranslate : { name: payload.items[0].name, to: payload.to?.name }
             }}
         </ng-template>
     </ng-container>
@@ -677,14 +677,14 @@
     <ng-container *ngIf="payload.items.length > 1">
         {{
             'platformUploadCollection.messageFileTypeMismatchPlural'
-                | fdTranslate: { filesCount: payload.items.length, allowedTypes: _getAllowedTypes() }
+                | fdTranslate : { filesCount: payload.items.length, allowedTypes: _getAllowedTypes() }
         }}
     </ng-container>
 
     <ng-container *ngIf="payload.items.length === 1">
         {{
             'platformUploadCollection.messageFileTypeMismatchSingular'
-                | fdTranslate: { fileName: payload.items[0].name, allowedTypes: _getAllowedTypes() }
+                | fdTranslate : { fileName: payload.items[0].name, allowedTypes: _getAllowedTypes() }
         }}
     </ng-container>
 </ng-template>
@@ -693,14 +693,14 @@
     <ng-container *ngIf="payload.items.length > 1">
         {{
             'platformUploadCollection.messageFileSizeExceededPlural'
-                | fdTranslate: { filesCount: payload.items.length, maxFileSize: maxFileSize || 0 }
+                | fdTranslate : { filesCount: payload.items.length, maxFileSize: maxFileSize || 0 }
         }}
     </ng-container>
 
     <ng-container *ngIf="payload.items.length === 1">
         {{
             'platformUploadCollection.messageFileSizeExceededSingular'
-                | fdTranslate: { fileName: payload.items[0].name, maxFileSize: maxFileSize || 0 }
+                | fdTranslate : { fileName: payload.items[0].name, maxFileSize: maxFileSize || 0 }
         }}
     </ng-container>
 </ng-template>
@@ -709,14 +709,14 @@
     <ng-container *ngIf="payload.items.length > 1">
         {{
             'platformUploadCollection.messageFileNameLengthExceededPlural'
-                | fdTranslate: { filesCount: payload.items.length, maxFilenameLength: maxFilenameLength || 0 }
+                | fdTranslate : { filesCount: payload.items.length, maxFilenameLength: maxFilenameLength || 0 }
         }}
     </ng-container>
 
     <ng-container *ngIf="payload.items.length === 1">
         {{
             'platformUploadCollection.messageFileNameLengthExceededSingular'
-                | fdTranslate: { fileName: payload.items[0].name, maxFilenameLength: maxFilenameLength || 0 }
+                | fdTranslate : { fileName: payload.items[0].name, maxFilenameLength: maxFilenameLength || 0 }
         }}
     </ng-container>
 </ng-template>

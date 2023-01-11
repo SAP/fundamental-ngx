@@ -11,7 +11,7 @@
                 <label [id]="selectedId" fd-form-label class="fdp-value-help-dialog__hidden_label">
                     {{
                         'platformVHD.defineConditionSelectedValueHiddenA11yLabel'
-                            | fdTranslate: { value: item.strategy }
+                            | fdTranslate : { value: item.strategy }
                     }}</label
                 >
                 <fd-select
@@ -80,7 +80,7 @@
                                 />
                                 <ng-container
                                     [ngTemplateOutlet]="countError"
-                                    [ngTemplateOutletContext]="{ $implicit: item.value?.length }"
+                                    [ngTemplateOutletContext]="{ $implicit: item.value && item.value.length }"
                                 ></ng-container>
                             </fd-form-input-message-group>
                         </div>
@@ -101,7 +101,7 @@
                                 />
                                 <ng-container
                                     [ngTemplateOutlet]="countError"
-                                    [ngTemplateOutletContext]="{ $implicit: item.valueTo?.length }"
+                                    [ngTemplateOutletContext]="{ $implicit: item.value && item.value.length }"
                                 ></ng-container>
                             </fd-form-input-message-group>
                         </div>
@@ -124,7 +124,7 @@
                                 <ng-container *ngIf="valueModel.invalid">
                                     <ng-container
                                         [ngTemplateOutlet]="countError"
-                                        [ngTemplateOutletContext]="{ $implicit: item.value?.length }"
+                                        [ngTemplateOutletContext]="{ $implicit: item.value && item.value.length }"
                                     ></ng-container>
                                 </ng-container>
                             </fd-form-input-message-group>
@@ -215,7 +215,7 @@
 
 <ng-template #countError let-count>
     <fd-form-message type="error" *ngIf="count && count > 7">
-        {{ 'platformVHD.defineConditionMaxCountError' | fdTranslate: { count: 7 } }}
+        {{ 'platformVHD.defineConditionMaxCountError' | fdTranslate : { count: 7 } }}
     </fd-form-message>
 </ng-template>
 
