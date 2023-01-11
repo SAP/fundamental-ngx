@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { NestedListTitleDirective } from '../nested-list-directives';
 import { NestedItemService } from '../nested-item/nested-item.service';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     selector: '[fdNestedLink], [fd-nested-list-link]'

@@ -1,4 +1,4 @@
-import { NullableObject } from '@fundamental-ngx/core/shared';
+import { NullableObject } from '@fundamental-ngx/cdk/utils';
 import { SemanticColor } from '../types';
 
 /** This is config that user should provide to input */

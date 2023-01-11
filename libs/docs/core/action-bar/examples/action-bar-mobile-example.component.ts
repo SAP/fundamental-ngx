@@ -4,7 +4,7 @@ import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-action-bar-mobile-example',

@@ -21,8 +21,8 @@ import { DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB } from '@angular/cdk
 import { of, Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import { Nullable } from '@fundamental-ngx/core/shared';
-import { ColorAccent, KeyUtil, RtlService, Size } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ColorAccent, KeyUtil, RtlService, Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
 import { AvatarGroupInterface } from './avatar-group.interface';
 import { AVATAR_GROUP_COMPONENT } from './tokens';

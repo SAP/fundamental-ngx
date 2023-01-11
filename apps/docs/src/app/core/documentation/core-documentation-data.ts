@@ -91,7 +91,11 @@ export const components: SectionInterfaceContent[] = [
     { url: 'core/splitter', name: 'Splitter/Responsive Splitter' },
     { url: 'core/progress-indicator', name: 'Progress Indicator' },
     { url: 'core/scrollbar', name: 'Scrollbar' },
-    { url: 'core/skeleton', name: 'Skeleton' }
+    { url: 'core/skeleton', name: 'Skeleton' },
+    {
+        url: 'core/multi-combobox',
+        name: 'Multi Combobox'
+    }
 ];
 
 export const layouts: SectionInterfaceContent[] = [
@@ -112,7 +116,6 @@ export const layouts: SectionInterfaceContent[] = [
 export const utilities: SectionInterfaceContent[] = [
     { url: 'core/global-config', name: 'Global Configuration' },
     { url: 'core/infinite-scroll', name: 'Infinite Scroll' },
-    { url: 'core/initial-focus', name: 'Initial Focus' },
     { url: 'core/scroll-spy', name: 'Scroll Spy' },
     { url: 'core/theme-switcher', name: 'Theme Switcher API' },
     { url: 'core/theming', name: 'Theming' },

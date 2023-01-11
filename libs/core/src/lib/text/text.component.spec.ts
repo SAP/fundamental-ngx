@@ -3,7 +3,7 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { TextComponent } from './text.component';
 import { TextModule } from './text.module';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { LineClampModule, PipeModule } from '@fundamental-ngx/core/utils';
+import { LineClampModule, PipeModule } from '@fundamental-ngx/cdk/utils';
 
 describe('TextComponent', () => {
     let component: TextComponent;

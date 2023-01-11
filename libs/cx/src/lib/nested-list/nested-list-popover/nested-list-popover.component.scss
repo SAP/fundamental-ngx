@@ -1,0 +1,24 @@
+.fdx-side-nav--condensed {
+    .fd-popover-container-custom {
+        .fdx-nested-list__title {
+            display: inline-flex;
+        }
+    }
+
+    .fdx-nested-list__popover-header {
+        box-shadow: 0 0 0.25rem 0 rgba(0, 0, 0, 0.15), inset 0 -0.0625rem 0 0 #d9d9d9;
+    }
+
+    .fd-popover-custom {
+        display: block;
+    }
+
+    [dir='rtl'] &,
+    &[dir='rtl'] {
+        .fd-popover-container-custom {
+            .fdx-nested-list__link {
+                padding-left: 1rem;
+            }
+        }
+    }
+}

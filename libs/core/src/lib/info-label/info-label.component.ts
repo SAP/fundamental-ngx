@@ -8,8 +8,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { IconFont } from '@fundamental-ngx/core/icon';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export type LabelType = 'numeric' | 'icon';
 

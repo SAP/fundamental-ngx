@@ -20,6 +20,7 @@
     "@angular/animations": "ANGULAR_VER_PLACEHOLDER",
     "@angular/router": "ANGULAR_VER_PLACEHOLDER",
     "@angular/cdk": "ANGULAR_VER_PLACEHOLDER",
+    "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
     "rxjs": "RXJS_VER_PLACEHOLDER"
   },
   "dependencies": {

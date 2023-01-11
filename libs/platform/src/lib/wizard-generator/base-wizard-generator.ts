@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Directive, EventEmitter, Input, OnDestroy, Output } 
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, finalize, takeUntil } from 'rxjs/operators';
 
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import {
     PreparedWizardGeneratorItem,

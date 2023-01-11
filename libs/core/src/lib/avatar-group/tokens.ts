@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
-import { HasElementRef } from '@fundamental-ngx/core/utils';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { AvatarGroupInterface } from './avatar-group.interface';
 
 export type FocusableWithElementRef = FocusableOption & HasElementRef;

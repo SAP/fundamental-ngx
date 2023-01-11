@@ -11,7 +11,7 @@ import { ButtonSplitOptionsExampleComponent } from './examples/split-button-opti
 import { ButtonSplitTypesIconsComponent } from './examples/split-button-icons-example.component';
 import { ButtonSplitBehaviorsComponent } from './examples/split-button-behaviors-example.component';
 import { DeprecatedSplitButtonCompactDirective, SplitButtonModule } from '@fundamental-ngx/core/split-button';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

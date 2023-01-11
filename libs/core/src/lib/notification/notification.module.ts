@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { A11yModule } from '@angular/cdk/a11y';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { NotificationContainer } from './notification-utils/notification-container';
 import { NotificationService } from './notification-service/notification.service';
 import { NotificationComponent } from './notification/notification.component';

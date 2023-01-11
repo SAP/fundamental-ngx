@@ -12,7 +12,7 @@ import { TokenReadOnlyExampleComponent } from './examples/token-readonly-example
 import { TokenizerCompactExampleComponent } from './examples/tokenizer-compact-example/tokenizer-compact-example.component';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { DeprecatedTokenizerContentDensityDirective, TokenModule } from '@fundamental-ngx/core/token';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

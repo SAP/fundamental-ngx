@@ -21,3 +21,4 @@ export * from './list-focus-item.model';
 export * from './deprecated-list-content-density,directive';
 export * from './list-unread-indicator.interface';
 export * from './list-component.token';
+export * from './list-component.interface';

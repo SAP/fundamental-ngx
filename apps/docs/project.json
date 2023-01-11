@@ -40,7 +40,8 @@
                     "npx nx run fn:compile-typedoc",
                     "npx nx run datetime-adapter:compile-typedoc",
                     "npx nx run moment-adapter:compile-typedoc",
-                    "npx nx run i18n:compile-typedoc"
+                    "npx nx run i18n:compile-typedoc",
+                    "npx nx run cdk:compile-typedoc"
                 ],
                 "parallel": true
             }
@@ -92,6 +93,11 @@
                         "output": "./assets/fn"
                     },
                     {
+                        "input": "./libs/cdk/src/lib",
+                        "glob": "README.md",
+                        "output": "./assets/cdk"
+                    },
+                    {
                         "input": "./libs/docs/typedoc",
                         "glob": "**/*",
                         "output": "./assets/typedoc"
@@ -125,6 +131,16 @@
                         "glob": "**/examples/**/*",
                         "input": "libs/docs/fn",
                         "output": "./docs/fn"
+                    },
+                    {
+                        "glob": "**/examples/**/*",
+                        "input": "libs/docs/cdk",
+                        "output": "./docs/cdk"
+                    },
+                    {
+                        "glob": "**/examples/**/*",
+                        "input": "libs/docs/cx",
+                        "output": "./docs/cx"
                     },
                     {
                         "glob": "sort.pipe.ts",
@@ -169,10 +185,7 @@
                 "buildOptimizer": false,
                 "sourceMap": true,
                 "optimization": false,
-                "namedChunks": true,
-                "customWebpackConfig": {
-                    "path": "./webpack.config.js"
-                }
+                "namedChunks": true
             },
             "configurations": {
                 "development": {
@@ -245,5 +258,5 @@
         }
     },
     "tags": ["scope:docs", "type:app"],
-    "implicitDependencies": ["core", "platform", "fn", "i18n", "datetime-adapter", "moment-adapter"]
+    "implicitDependencies": ["cdk", "core", "platform", "fn", "i18n", "datetime-adapter", "moment-adapter"]
 }

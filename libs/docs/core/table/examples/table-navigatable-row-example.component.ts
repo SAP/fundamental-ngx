@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 
 interface TableIem {

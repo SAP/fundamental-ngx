@@ -13,7 +13,7 @@ import {
     ElementRef
 } from '@angular/core';
 
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
 import { SPACE } from '@angular/cdk/keycodes';

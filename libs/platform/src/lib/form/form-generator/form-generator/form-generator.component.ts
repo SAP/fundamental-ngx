@@ -21,11 +21,11 @@ import { Subject, Subscription } from 'rxjs';
 import {
     ColumnLayout,
     FieldHintOptions,
-    FormFieldControl,
+    PlatformFormFieldControl,
     HintOptions,
     LabelLayout
 } from '@fundamental-ngx/platform/shared';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormGeneratorFieldComponent } from '../form-generator-field/form-generator-field.component';
 
 import { FormGeneratorService } from '../form-generator.service';
@@ -213,7 +213,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     fields: QueryList<FormGeneratorFieldComponent>;
 
     /** Array of form field controls. */
-    get formFields(): FormFieldControl[] {
+    get formFields(): PlatformFormFieldControl[] {
         return this.fields
             ?.toArray()
             .filter((field) => !!field.fieldRenderer?.control)

@@ -1,6 +1,6 @@
 <fd-dialog fdCompact>
     <fd-dialog-header [class.show-search]="_selectMode && !_userToShowDetails">
-        <ng-template fdTemplate="header">
+        <ng-template fdkTemplate="header">
             <p>
                 <ng-container *ngIf="!_selectMode && !_data.isEdit">
                     {{ 'platformApprovalFlow.addNodeDialogHeaderAddApprovers' | fdTranslate }}

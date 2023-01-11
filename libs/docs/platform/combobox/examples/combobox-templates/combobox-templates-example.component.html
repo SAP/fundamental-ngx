@@ -7,7 +7,7 @@
             displayKey="name"
             (selectionChange)="onSelect($event)"
         >
-            <ng-template fdTemplate="optionItemTemplate" let-item let-index="index">
+            <ng-template fdkTemplate="optionItemTemplate" let-item let-index="index">
                 <div class="fd-template-container-div">
                     <fd-icon glyph="accept" class="fd-template-icon"></fd-icon>
                     <span class="fd-template-text" [innerText]="item.name"></span>
@@ -27,7 +27,7 @@
             groupKey="type"
             (selectionChange)="onSelect1($event)"
         >
-            <ng-template fdTemplate="groupItemTemplate" let-item>
+            <ng-template fdkTemplate="groupItemTemplate" let-item>
                 <li class="fd-list__group-header" [innerText]="'Type: ' + item.label"></li>
             </ng-template>
         </fdp-combobox>
@@ -43,7 +43,7 @@
             [showSecondaryText]="true"
             (selectionChange)="onSelect2($event)"
         >
-            <ng-template fdTemplate="secondaryItemTemplate" let-item>
+            <ng-template fdkTemplate="secondaryItemTemplate" let-item>
                 <span class="fd-list__secondary" [innerText]="item.type"></span>
             </ng-template>
         </fdp-combobox>
@@ -58,7 +58,7 @@
             displayKey="name"
             (selectionChange)="onSelect3($event)"
         >
-            <ng-template fdTemplate="selectedItemTemplate" let-item>
+            <ng-template fdkTemplate="selectedItemTemplate" let-item>
                 <div class="fd-template-container-div">
                     <fd-icon glyph="accept" class="fd-template-icon"></fd-icon>
                     <span [innerText]="item.name"></span>

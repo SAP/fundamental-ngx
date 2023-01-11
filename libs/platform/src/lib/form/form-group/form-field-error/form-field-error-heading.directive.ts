@@ -1,5 +1,5 @@
 import { Directive, Inject, Input, Optional, TemplateRef } from '@angular/core';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { FormError, FormErrorHeading, FormFieldErrorContext } from '@fundamental-ngx/platform/shared';
 import { FDP_FORM_ERROR_DIRECTIVE } from './tokens';
 

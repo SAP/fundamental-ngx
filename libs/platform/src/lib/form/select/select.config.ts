@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ContentDensity } from '@fundamental-ngx/core/utils';
+import { ContentDensity } from '@fundamental-ngx/cdk/utils';
 import { PlatformConfig } from '@fundamental-ngx/platform/shared';
 
 /**

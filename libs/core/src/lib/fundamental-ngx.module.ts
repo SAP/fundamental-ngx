@@ -13,7 +13,6 @@ import { CarouselModule } from '@fundamental-ngx/core/carousel';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { DragAndDropModule, OnlyDigitsModule } from '@fundamental-ngx/core/utils';
 import { FacetModule } from '@fundamental-ngx/core/facets';
 import { FeedListItemModule } from '@fundamental-ngx/core/feed-list-item';
 import { FeedInputModule } from '@fundamental-ngx/core/feed-input';
@@ -93,6 +92,7 @@ import { ThemingModule } from '@fundamental-ngx/core/theming';
 import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { MultiComboboxModule } from '@fundamental-ngx/core/multi-combobox';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -113,7 +113,6 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         CheckboxModule,
         DatePickerModule,
         DatetimePickerModule,
-        DragAndDropModule,
         DynamicPageModule,
         DynamicSideContentModule,
         FacetModule,
@@ -177,7 +176,6 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         DynamicSideContentModule,
         SliderModule,
         SplitterModule,
-        OnlyDigitsModule,
         IllustratedMessageModule,
         StatusIndicatorModule,
         GridListModule,
@@ -192,7 +190,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ThemingModule,
         OverflowLayoutModule,
         ContentDensityModule,
-        SkeletonModule
+        SkeletonModule,
+        MultiComboboxModule
     ]
 })
 export class FundamentalNgxCoreModule {}

@@ -1,6 +1,6 @@
 import { Inject, Injectable, Injector, Optional } from '@angular/core';
 
-import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogBaseService } from '@fundamental-ngx/core/dialog';
 
 import { MESSAGE_BOX_DEFAULT_CONFIG, MessageBoxConfig } from '../utils/message-box-config.class';

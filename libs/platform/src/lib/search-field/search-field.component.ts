@@ -34,8 +34,8 @@ import { Direction } from '@angular/cdk/bidi';
 import { firstValueFrom, fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 
-import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';

@@ -1,5 +1,5 @@
 import { ComponentRef, Inject, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
-import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { NotificationComponent } from '../notification/notification.component';
 import { NotificationContainer } from '../notification-utils/notification-container';
 import { NotificationConfig } from '../notification-utils/notification-config';

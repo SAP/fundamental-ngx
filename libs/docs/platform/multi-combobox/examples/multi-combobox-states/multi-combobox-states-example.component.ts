@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';

@@ -8,7 +8,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
         <fd-dialog>
             <fd-dialog-header>
                 <h1 fd-title>Table Customization</h1>
-                <ng-template fdTemplate="subheader">
+                <ng-template fdkTemplate="subheader">
                     <div fd-bar-middle fdCompact>
                         <fd-bar-element>
                             <button
@@ -50,7 +50,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
                     </li>
 
                     <li
-                        *ngFor="let column of columns | filter: filterPhrase:'key'"
+                        *ngFor="let column of columns | filter : filterPhrase : 'key'"
                         cdkDrag
                         fd-list-item
                         [selected]="column.checked"

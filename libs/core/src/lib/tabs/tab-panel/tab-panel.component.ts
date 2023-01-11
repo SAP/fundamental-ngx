@@ -18,7 +18,7 @@ import {
 import { TabTitleDirective } from '../tab-utils/tab-directives';
 import { TabItemState } from '../tab-item/tab-item.directive';
 import { first, Subject } from 'rxjs';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { LIST_COMPONENT } from '../tab-list.token';
 import { TabListComponentInterface } from '../tab-list-component.interface';
 

@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 
-import { FormField } from './form-field';
+import { PlatformFormField } from './form-field';
 import { FormFieldGroup } from './form-field-group';
 import { LabelLayout, ColumnLayout } from './form-options';
 
@@ -60,11 +60,11 @@ export abstract class FormGroupContainer {
     /**
      * Attach underlying form field.
      */
-    addFormField: (formField: FormField) => void;
+    addFormField: (formField: PlatformFormField) => void;
     /**
      * Detach underlying form field.
      */
-    removeFormField: (formField: FormField) => void;
+    removeFormField: (formField: PlatformFormField) => void;
     /**
      * Attach formControl.
      */

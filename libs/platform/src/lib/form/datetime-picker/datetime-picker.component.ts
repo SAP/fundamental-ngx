@@ -15,19 +15,20 @@ import {
     ViewChild
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
 import { CalendarYearGrid, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
-import { Placement, SpecialDayRule, FormStates } from '@fundamental-ngx/core/shared';
-import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
+import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { createMissingDateImplementationError } from './errors';
 
 @Component({
     selector: 'fdp-datetime-picker',
     templateUrl: './datetime-picker.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FormFieldControl, useExisting: PlatformDatetimePickerComponent, multi: true }]
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: PlatformDatetimePickerComponent, multi: true }]
 })
 export class PlatformDatetimePickerComponent<D> extends BaseInput implements AfterViewInit {
     /**
@@ -272,8 +273,8 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @Self() readonly ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         // Use here @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats

@@ -10,7 +10,7 @@ import equal from 'fast-deep-equal/es6';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { FilterType } from '../../../enums/filter-type.enum';
 import { CollectionFilter } from '../../../interfaces/collection-filter.interface';

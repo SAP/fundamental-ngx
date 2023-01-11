@@ -7,8 +7,7 @@ import {
     ViewEncapsulation,
     OnInit
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { NullableObject, Nullable } from '@fundamental-ngx/core/shared';
+import { applyCssClass, CssClassBuilder, NullableObject, Nullable } from '@fundamental-ngx/cdk/utils';
 
 export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
 

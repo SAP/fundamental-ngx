@@ -1,0 +1,27 @@
+<div style="height: 500px">
+    <fdx-side-nav>
+        <div fdx-side-nav-main>
+            <div fd-form-item>
+                <fd-input-group
+                    glyph="decline"
+                    glyphAriaLabel="Clear"
+                    placeholder="Search"
+                    [button]="true"
+                    [disabled]="false"
+                    [(ngModel)]="searchTerm"
+                    (ngModelChange)="handleSearchTermChange($event)"
+                    (addOnButtonClicked)="searchTerm = ''"
+                >
+                </fd-input-group>
+            </div>
+            <ul fdx-nested-list>
+                <li fdx-nested-list-item *ngFor="let item of displayedItems">
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon [glyph]="item.glyph"></i>
+                        <span fdx-nested-list-title>{{ item.text }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </fdx-side-nav>
+</div>

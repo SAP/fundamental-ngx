@@ -2,7 +2,7 @@
     <ul
         class="fd-icon-tab-bar__header"
         role="tablist"
-        fdOverflowList
+        fdkOverflowList
         [isRtl]="isRtl"
         [overflowOffset]="100"
         fdpIconBarDndList
@@ -12,7 +12,7 @@
         <li
             *ngFor="let item of _tabs; let idx = index; trackBy: _trackByTab"
             [class]="item.cssClasses"
-            fdOverflowListItem
+            fdkOverflowListItem
             fdpIconBarDndItem
             [dndSeparatorClass]="['fd-icon-tab-bar__item--dnd-separator']"
             [dndItemData]="item"

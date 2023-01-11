@@ -45,5 +45,5 @@
         }
     },
     "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": ["core"]
+    "implicitDependencies": ["cdk", "core"]
 }

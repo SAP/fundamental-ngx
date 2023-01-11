@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { resizeObservable } from '@fundamental-ngx/core/utils';
+import { resizeObservable } from '@fundamental-ngx/cdk/utils';
 
 export type ProgressIndicatorState = 'informative' | 'positive' | 'critical' | 'negative';
 

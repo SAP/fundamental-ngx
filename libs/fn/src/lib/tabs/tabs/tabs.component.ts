@@ -11,7 +11,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { TabComponent } from '../tab/tab.component';
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import { TabItemDirective } from '../tab-item.directive';
 

@@ -6,6 +6,7 @@ const INPUT_IDENTIFIER = 'platform-input-unit-test';
 
 runValueAccessorTests({
     component: InputComponent,
+    name: 'Input',
     testModuleMetadata: {
         imports: [PlatformInputModule]
     },

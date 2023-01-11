@@ -5,7 +5,7 @@ import { MessageToastComponent } from '../message-toast.component';
 import { MessageToastContainerComponent } from '../message-toast-utils/message-toast-container.component';
 import { MessageToastRef } from '../message-toast-utils/message-toast-ref';
 import { MessageToastConfig } from '../message-toast-utils/message-toast-config';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Service for generating message toasts dynamically.

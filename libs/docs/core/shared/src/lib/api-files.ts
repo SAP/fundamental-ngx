@@ -261,7 +261,7 @@ export const API_FILES = {
         'SideNavigationComponent',
         'SideNavigationModel',
         'SideNavigationUtilityDirective',
-        'SideNavigationMainDirective',
+        'SideNavigationMainComponent',
         'NestedListDirective',
         'NestedListPopoverComponent',
         'NestedListHeaderDirective',
@@ -414,5 +414,12 @@ export const API_FILES = {
         'OverflowItemContainerRefDirective',
         'OverflowLayoutPopoverContentDirective'
     ],
-    skeleton: ['SkeletonComponent']
+    skeleton: ['SkeletonComponent'],
+    multiCombobox: [
+        'MultiComboboxComponent',
+        'MobileMultiComboboxComponent',
+        'MultiComboboxSelectionChangeEvent',
+        'MultiComboboxDataSourceParser',
+        'FdMultiComboBoxDataSource'
+    ]
 };

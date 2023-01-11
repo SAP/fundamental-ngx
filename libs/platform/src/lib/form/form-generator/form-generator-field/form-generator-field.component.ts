@@ -9,7 +9,8 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { FieldHintOptions, FormField } from '@fundamental-ngx/platform/shared';
+import { FD_FORM_FIELD } from '@fundamental-ngx/cdk/forms';
+import { FieldHintOptions, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../../form-group/constants';
 import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { DynamicFormControl } from '../dynamic-form-control';
@@ -18,7 +19,7 @@ import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
 import { DynamicFormItemValidationObject } from '../interfaces/dynamic-form-item';
 
 const formFieldProvider: Provider = {
-    provide: FormField,
+    provide: FD_FORM_FIELD,
     useExisting: forwardRef(() => FormGeneratorFieldComponent)
 };
 
@@ -78,7 +79,7 @@ export class FormGeneratorFieldComponent implements OnInit {
     /**
      * Form field component.
      */
-    @ViewChild(forwardRef(() => FormFieldComponent)) fieldRenderer: FormField;
+    @ViewChild(forwardRef(() => FormFieldComponent)) fieldRenderer: PlatformFormField;
 
     /** @hidden */
     get _placeholder(): string {

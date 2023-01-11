@@ -20,7 +20,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import { GridListItemComponent } from '@fundamental-ngx/core/grid-list';

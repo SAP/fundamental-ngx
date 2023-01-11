@@ -1,6 +1,6 @@
 <fd-dialog>
     <fd-dialog-header [class.show-search]="!_userToShowDetails && _isListMode">
-        <ng-template fdTemplate="header">
+        <ng-template fdkTemplate="header">
             <p>
                 <fd-icon
                     *ngIf="_userToShowDetails && _data.node?.approvers && _data.node!.approvers!.length > 1"

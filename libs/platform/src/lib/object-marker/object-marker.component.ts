@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fdp-object-marker',

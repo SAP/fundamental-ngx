@@ -18,11 +18,12 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { filter, fromEvent, map, merge, Observable, Subject, takeUntil, debounceTime } from 'rxjs';
 
-import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { InputGroupPlacement } from './types';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 let addOnNonButtonRandomId = 0;
 let addOnButtonRandomId = 0;
@@ -242,6 +243,11 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
 
     /** @hidden */
     constructor(private readonly _elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
+
+    /** @hidden */
+    get elementRef(): ElementRef<HTMLElement> {
+        return this._elementRef;
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {

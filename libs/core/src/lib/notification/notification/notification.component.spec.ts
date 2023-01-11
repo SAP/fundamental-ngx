@@ -7,7 +7,7 @@ import { NotificationModule } from '../notification.module';
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({

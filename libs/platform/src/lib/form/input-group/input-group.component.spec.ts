@@ -215,6 +215,7 @@ describe('Input group within platform form', () => {
 
 runValueAccessorTests<InputGroupComponent, InputGroupHostComponent>({
     component: InputGroupComponent,
+    name: 'Input Group',
     testModuleMetadata: {
         imports: [CommonModule, PlatformButtonModule, PlatformInputGroupModule],
         declarations: [InputGroupHostComponent]

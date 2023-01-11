@@ -5,7 +5,7 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { CarouselModule } from '@fundamental-ngx/core/carousel';
 import { DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ThumbnailImageComponent } from './thumbnail-image/thumbnail-image.component';
 import { ThumbnailDetailsComponent } from './thumbnail-details/thumbnail-details.component';
 import { ThumbnailComponent } from './thumbnail.component';

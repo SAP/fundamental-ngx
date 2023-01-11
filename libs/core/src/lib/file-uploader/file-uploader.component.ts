@@ -15,10 +15,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { stateType } from '@fundamental-ngx/core/radio';
 import { FileUploaderService, FileUploadOutput } from './file-uploader.service';
 import { Subscription } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let fileUploaderInputUniqueId = 0;

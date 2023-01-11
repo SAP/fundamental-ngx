@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FieldGroup } from '../../form-helpers';
 import { HintOptions } from '@fundamental-ngx/platform/shared';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector

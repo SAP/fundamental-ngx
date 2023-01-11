@@ -1,0 +1,13 @@
+<form [formGroup]="customForm">
+    <fd-multi-combobox
+        name="field"
+        placeholder="Type some text..."
+        [dataSource]="dataSource"
+        displayKey="name"
+        (selectionChange)="onSelect($event)"
+        formControlName="field"
+        [selectedItems]="selectedItems"
+    ></fd-multi-combobox>
+    <p>Selected Item: {{ selectedItems | json }}</p>
+    <p>Form Selected Item: {{ customForm.getRawValue() | json }}</p>
+</form>

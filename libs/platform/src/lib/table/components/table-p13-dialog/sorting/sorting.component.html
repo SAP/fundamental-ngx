@@ -1,6 +1,6 @@
 <fd-dialog class="fdp-table-p13-sorting-dialog">
     <fd-dialog-header>
-        <ng-template fdTemplate="header">
+        <ng-template fdkTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
                     <h4 fd-title [headerSize]="4">
@@ -26,7 +26,7 @@
             >
                 <li
                     fd-option
-                    *ngFor="let column of columns | getAvailableSortColumns: rules:rule.columnKey"
+                    *ngFor="let column of columns | getAvailableSortColumns : rules : rule.columnKey"
                     [value]="column.key"
                 >
                     {{ column.label }}

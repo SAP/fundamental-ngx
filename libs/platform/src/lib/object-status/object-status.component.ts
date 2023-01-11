@@ -9,9 +9,9 @@ import {
 } from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export type IndicationColorType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 

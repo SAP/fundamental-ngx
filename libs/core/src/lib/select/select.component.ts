@@ -32,8 +32,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { defer, merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
-import { FormStates, Nullable, PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { DynamicComponentService, KeyUtil, ModuleDeprecation, RtlService } from '@fundamental-ngx/core/utils';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { DynamicComponentService, KeyUtil, ModuleDeprecation, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 
@@ -44,10 +44,11 @@ import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { SelectMobileModule } from './select-mobile/select-mobile.module';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ESCAPE } from '@angular/cdk/keycodes';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 let selectUniqueId = 0;
 
-/** @deprecated use `import { FormStates } from "@fundamental-ngx/core/shared"` instead */
+/** @deprecated use `import { FormStates } from "@fundamental-ngx/cdk/forms"` instead */
 export type SelectControlState = FormStates;
 
 const SELECT_HEADER_IDENTIFIER = '.fd-list__group-header';
@@ -415,7 +416,7 @@ export class SelectComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._keyManagerService._initKeyManager(this);
+        this._keyManagerService._initKeyManager();
         this._setupMobileMode();
     }
 

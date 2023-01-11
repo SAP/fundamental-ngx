@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { Size } from '@fundamental-ngx/core/utils';
+import { Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarGroupComponent, AvatarGroupType } from './avatar-group.component';
 import { AvatarGroupModule } from './avatar-group.module';
 

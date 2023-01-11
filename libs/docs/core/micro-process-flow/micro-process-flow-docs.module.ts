@@ -24,7 +24,7 @@ import { MicroProcessFlowIndependentItemsExampleComponent } from './examples/mic
 import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { MicroProcessFlowCustomWidthExampleComponent } from './examples/micro-process-flow-custom-width-example.component';
 import { MicroProcessFlowObjectBetweenNodesExampleComponent } from './examples/micro-process-flow-object-between-nodes-example.component';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

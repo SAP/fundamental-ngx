@@ -237,6 +237,7 @@ const CHECKBOX_IDENTIFIER = 'platform-checkbox-unit-test';
 
 runValueAccessorTests({
     component: CheckboxComponent,
+    name: 'Checkbox',
     testModuleMetadata: {
         imports: [PlatformCheckboxModule]
     },

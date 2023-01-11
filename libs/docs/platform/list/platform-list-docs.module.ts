@@ -19,7 +19,7 @@ import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
-import { DragAndDropModule } from '@fundamental-ngx/core/utils';
+import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
 import { FdpFormGroupModule, PlatformInputModule } from '@fundamental-ngx/platform/form';

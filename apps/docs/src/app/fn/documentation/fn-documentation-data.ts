@@ -50,25 +50,6 @@ export const components: SectionInterfaceContent[] = [
     }
 ];
 
-export const utilities: SectionInterfaceContent[] = [
-    {
-        url: 'fn/selectable-list',
-        name: 'Selectable List'
-    },
-    {
-        url: 'fn/focusable-list',
-        name: 'Focusable List'
-    },
-    {
-        url: 'fn/disabled',
-        name: 'Disabled'
-    },
-    {
-        url: 'fn/clicked',
-        name: 'Clicked'
-    }
-];
-
 export const sections: SectionInterface[] = [
     {
         header: 'Guides',
@@ -77,9 +58,5 @@ export const sections: SectionInterface[] = [
     {
         header: 'Components',
         content: components
-    },
-    {
-        header: 'Utilities',
-        content: utilities
     }
 ];

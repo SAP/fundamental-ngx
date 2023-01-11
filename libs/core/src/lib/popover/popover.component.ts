@@ -23,7 +23,7 @@ import {
 import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import { DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BasePopoverClass } from './base/base-popover.class';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';

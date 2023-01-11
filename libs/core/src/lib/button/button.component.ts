@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { BaseButton } from './base-button';
 import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityObserver,
     contentDensityObserverProviders,

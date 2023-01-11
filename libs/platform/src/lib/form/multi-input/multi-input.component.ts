@@ -20,18 +20,19 @@ import {
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
-import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import {
     DATA_PROVIDERS,
     DataProvider,
-    FormField,
-    FormFieldControl,
+    PlatformFormFieldControl,
     MultiInputDataSource,
     MultiInputOption,
-    isFunction
+    isFunction,
+    PlatformFormField
 } from '@fundamental-ngx/platform/shared';
 import { ListComponent, SelectionType } from '@fundamental-ngx/platform/list';
 
@@ -55,7 +56,7 @@ let uniqueHiddenLabel = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
-            provide: FormFieldControl,
+            provide: FD_FORM_FIELD_CONTROL,
             useExisting: forwardRef(() => PlatformMultiInputComponent),
             multi: true
         },
@@ -184,9 +185,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         /** @hidden */
         readonly _multiInputConfig: MultiInputConfig,
         /** @hidden */
-        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
         /** @hidden */
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         readonly contentDensityObserver: ContentDensityObserver
     ) {
         super(

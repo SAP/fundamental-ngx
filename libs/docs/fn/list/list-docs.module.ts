@@ -8,7 +8,7 @@ import { API_FILES } from '@fundamental-ngx/docs/fn/shared';
 import { ListHeaderComponent } from './list-header/list-header.component';
 import { ListDocsComponent } from './list-docs.component';
 import { examples } from './examples';
-import { SelectableListModule } from '@fundamental-ngx/fn/cdk';
+import { SelectableListModule } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

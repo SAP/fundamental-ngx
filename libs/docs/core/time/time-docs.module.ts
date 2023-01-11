@@ -17,7 +17,7 @@ import { TimeNoSpinnersExampleComponent } from './examples/time-no-spinners-exam
 import { FormModule } from '@fundamental-ngx/core/form';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { DeprecatedTimeContentDensityDirective, TimeModule } from '@fundamental-ngx/core/time';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

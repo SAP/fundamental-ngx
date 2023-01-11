@@ -191,11 +191,6 @@ export const ROUTES: Routes = [
                     import('@fundamental-ngx/docs/core/infinite-scroll').then((m) => m.InfiniteScrollDocsModule)
             },
             {
-                path: 'initial-focus',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/core/initial-focus').then((m) => m.InitialFocusDocsModule)
-            },
-            {
                 path: 'inline-help',
                 loadChildren: () => import('@fundamental-ngx/docs/core/inline-help').then((m) => m.InlineHelpDocsModule)
             },
@@ -468,6 +463,11 @@ export const ROUTES: Routes = [
             {
                 path: 'skeleton',
                 loadChildren: () => import('@fundamental-ngx/docs/core/skeleton').then((m) => m.SkeletonDocsModule)
+            },
+            {
+                path: 'multi-combobox',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/core/multi-combobox').then((m) => m.MultiComboboxDocsModule)
             }
         ]
     }

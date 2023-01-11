@@ -23,11 +23,11 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BasePopoverClass, PopoverService } from '@fundamental-ngx/core/popover';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
 import { MenuMobileModule } from './menu-mobile/menu-mobile.module';

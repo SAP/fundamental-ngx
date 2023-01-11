@@ -1,5 +1,5 @@
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 /**
  * Converts Form State into Object status type.

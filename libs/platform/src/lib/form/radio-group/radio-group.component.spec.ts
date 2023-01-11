@@ -494,6 +494,7 @@ const RADIO_GROUP_IDENTIFIER = 'platform-radio-group-unit-test';
 
 runValueAccessorTests({
     component: RadioGroupComponent,
+    name: 'Radio group',
     testModuleMetadata: {
         imports: [PlatformRadioGroupModule]
     },

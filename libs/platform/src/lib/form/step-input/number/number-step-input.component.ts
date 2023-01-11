@@ -15,9 +15,10 @@ import {
 } from '@angular/core';
 import { formatNumber } from '@angular/common';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { StepInputChangeEvent, StepInputComponent } from '../base.step-input';
 import { StepInputConfig } from '../step-input.config';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -42,7 +43,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        { provide: FormFieldControl, useExisting: NumberStepInputComponent, multi: true },
+        { provide: FD_FORM_FIELD_CONTROL, useExisting: NumberStepInputComponent, multi: true },
         { provide: StepInputComponent, useExisting: NumberStepInputComponent },
         contentDensityObserverProviders()
     ]
@@ -58,8 +59,8 @@ export class NumberStepInputComponent extends StepInputComponent {
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() controlContainer: ControlContainer,
         @Optional() @SkipSelf() ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         config: StepInputConfig,
         renderer: Renderer2,
         @Optional() rtlService: RtlService,

@@ -179,6 +179,7 @@ const SWITCH_IDENTIFIER = 'platform-switch-unit-test';
 
 runValueAccessorTests({
     component: SwitchComponent,
+    name: 'Switch',
     testModuleMetadata: {
         imports: [PlatformSwitchModule]
     },

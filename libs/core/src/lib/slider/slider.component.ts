@@ -37,7 +37,7 @@ import {
 } from 'rxjs/operators';
 
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     SliderControlValue,
     SliderCustomValue,
@@ -46,7 +46,7 @@ import {
     SliderValueTargets
 } from './slider.model';
 import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
-import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import {
     ContentDensityMode,

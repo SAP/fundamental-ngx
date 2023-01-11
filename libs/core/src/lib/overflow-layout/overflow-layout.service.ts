@@ -1,6 +1,6 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { ElementRef, Injectable, OnDestroy, Optional, QueryList } from '@angular/core';
-import { resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
+import { resizeObservable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { debounceTime, distinctUntilChanged, filter, Observable, skip, Subject, Subscription } from 'rxjs';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowLayoutFocusableItem } from './interfaces/overflow-focusable-item.interface';

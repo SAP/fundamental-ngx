@@ -1,10 +1,13 @@
 import { ElementRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FormFieldControl } from '@fundamental-ngx/cdk/forms';
 import { Observable } from 'rxjs';
-import { FormField } from './form-field';
+import { PlatformFormField } from './form-field';
 
-export abstract class FormFieldControl<T = any> {
+export type FdpFormFieldControl<T = any> = FormFieldControl<T>;
+
+export abstract class PlatformFormFieldControl<T = any> implements FormFieldControl<T> {
     /**
      * Each input control has always a value. Need to make sure we keep a convention for
      * input fields
@@ -63,7 +66,7 @@ export abstract class FormFieldControl<T = any> {
     readonly elementRef: ElementRef;
 
     /** Form field instance. */
-    formField: Nullable<FormField>;
+    formField: Nullable<PlatformFormField>;
 
     /** Method for focusing on the element */
     abstract focus(event?: MouseEvent): void;

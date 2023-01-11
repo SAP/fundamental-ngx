@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { merge, Observable, of, Subject } from 'rxjs';
 import { delay, map, takeUntil, tap } from 'rxjs/operators';
 
-import { uuidv4 } from '@fundamental-ngx/core/utils';
+import { uuidv4 } from '@fundamental-ngx/cdk/utils';
 import {
     CancelUploadNewFileEvent,
     DeleteEvent,

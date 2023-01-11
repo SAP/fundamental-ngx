@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 
 import { DialogService } from '@fundamental-ngx/core/dialog';
-import { RtlService, uuidv4 } from '@fundamental-ngx/core/utils';
+import { RtlService, uuidv4 } from '@fundamental-ngx/cdk/utils';
 import { FileSizeExceedEvent } from '../models/upload-collection-events.models';
 import {
     UploadCollectionFile,

@@ -22,7 +22,7 @@ import {
     DeprecatedBarContentDensityDirective
 } from '@fundamental-ngx/core/bar';
 import { BarWithTitleExampleComponent } from './examples/bar-with-title-example.component';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 import { TitleModule } from '@fundamental-ngx/core/title';
 import { BarCustomShellbarExampleComponent } from './examples/bar-custom-shellbar-example.component';
 

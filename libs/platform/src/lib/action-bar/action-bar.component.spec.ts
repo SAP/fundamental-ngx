@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { PlatformActionBarModule } from './action-bar.module';
 import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({

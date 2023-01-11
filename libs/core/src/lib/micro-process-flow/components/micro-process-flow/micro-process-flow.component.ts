@@ -15,7 +15,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, startWith } from 'rxjs/operators';
 import { MicroProcessFlowFocusableItemDirective } from '../../micro-process-flow-focusable-item.directive';

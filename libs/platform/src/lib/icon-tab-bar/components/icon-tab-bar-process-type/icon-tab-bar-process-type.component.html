@@ -2,7 +2,7 @@
     class="fd-icon-tab-bar__header"
     role="tablist"
     [class.fd-icon-tab-bar__header--left-offset]="_showLeftBtn"
-    fdOverflowList
+    fdkOverflowList
     [isRtl]="isRtl"
     [overflowOffset]="_offsetOverflowDirective"
     (overflowChanged)="_recalculateVisibleItems($event)"
@@ -25,7 +25,7 @@
         [class]="item.cssClasses"
         class="fd-icon-tab-bar__item"
         role="presentation"
-        fdOverflowListItem
+        fdkOverflowListItem
         [attr.aria-hidden]="item.hidden"
     >
         <a

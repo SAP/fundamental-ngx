@@ -1,7 +1,7 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #container>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header [dir]="_dir">
-            <ng-template fdTemplate="header">
+            <ng-template fdkTemplate="header">
                 <ng-container *ngTemplateOutlet="mobile ? mobileDialogTitle : desktopDialogTitle"></ng-container>
                 <ng-container *ngIf="!mobile">
                     <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
@@ -24,7 +24,7 @@
             </div>
         </fd-dialog-body>
         <fd-dialog-footer [dir]="_dir">
-            <ng-template fdTemplate="footer">
+            <ng-template fdkTemplate="footer">
                 <div
                     class="fdp-value-help-dialog__row fdp-value-help-dialog__selection-row"
                     [attr.aria-label]="'platformVHD.selectionBarLabel' | fdTranslate"

@@ -1,4 +1,4 @@
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { EventPayload } from './upload-collection-events.models';
 
 export enum UploadCollectionItemStatus {

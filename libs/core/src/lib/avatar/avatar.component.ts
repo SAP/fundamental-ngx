@@ -21,8 +21,8 @@ import {
     applyCssClass,
     getRandomColorAccent,
     CssClassBuilder
-} from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
+} from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 let avatarUniqueId = 0;
 

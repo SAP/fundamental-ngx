@@ -9,10 +9,10 @@ import {
     Output
 } from '@angular/core';
 
-import { Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonType, GlyphPosition } from '@fundamental-ngx/core/button';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
-import { ModuleDeprecation } from '@fundamental-ngx/core/utils';
+import { ModuleDeprecation } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fdp-button',

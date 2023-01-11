@@ -17,8 +17,9 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { BehaviorSubject, Subject } from 'rxjs';
 
 import { CollectionBaseInput } from './collection-base.input';
-import { FormFieldControl } from './form-control';
-import { FormField } from './form-field';
+import { PlatformFormFieldControl } from './form-control';
+import { PlatformFormField } from './form-field';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 export interface InlineLayout {
     XL?: boolean;
@@ -178,8 +179,8 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
         @Optional()
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig?: ResponsiveBreakPointConfig

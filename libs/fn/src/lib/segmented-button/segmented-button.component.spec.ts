@@ -2,14 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SegmentedButtonComponent } from './segmented-button.component';
 import { Component, Directive, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
-import { SelectableItemToken } from '@fundamental-ngx/fn/cdk';
+import { SelectableItemToken } from '@fundamental-ngx/cdk/utils';
 import { Observable, Subject } from 'rxjs';
 
 @Directive({
     selector: '[fnTestSelection]',
     providers: [{ provide: SelectableItemToken, useExisting: TestSelectionDirective }]
 })
-class TestSelectionDirective implements SelectableItemToken<string> {
+class TestSelectionDirective implements SelectableItemToken<HTMLElement, string> {
     @Input('fnTestSelection') value!: string;
     selected = false;
 

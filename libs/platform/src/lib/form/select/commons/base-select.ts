@@ -6,6 +6,7 @@ import {
     ElementRef,
     EventEmitter,
     Host,
+    Inject,
     Input,
     OnDestroy,
     Optional,
@@ -26,18 +27,19 @@ import { takeUntil } from 'rxjs/operators';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { ListComponent } from '@fundamental-ngx/core/list';
-import { ContentDensityService, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     CollectionBaseInput,
-    FormField,
-    FormFieldControl,
+    PlatformFormFieldControl,
     isJsObject,
     isOptionItem,
-    isString
+    isString,
+    PlatformFormField
 } from '@fundamental-ngx/platform/shared';
 import { SelectConfig } from '../select.config';
 import { TextAlignment } from '../../combobox';
 import { SelectOptionItem } from './../models/select.models';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 export type FdpSelectData<T> = SelectOptionItem[] | Observable<T[]> | T[];
 
@@ -280,8 +282,8 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
         @Optional() @SkipSelf() readonly controlContainer: ControlContainer,
         @Optional() @Self() readonly ngForm: NgForm,
         protected selectConfig: SelectConfig,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl
     ) {
         super(cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
     }

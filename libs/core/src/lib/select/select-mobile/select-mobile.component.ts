@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 
 import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
 import { DialogService } from '@fundamental-ngx/core/dialog';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeConfigToken,

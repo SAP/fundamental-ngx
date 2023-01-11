@@ -15,7 +15,7 @@ import { Subject } from 'rxjs';
 import { FocusableOption, FocusOrigin } from '@angular/cdk/a11y';
 import { ENTER, hasModifierKey, SPACE } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { OptionsInterface } from '../options.interface';
 
 let optionUniqueId = 0;

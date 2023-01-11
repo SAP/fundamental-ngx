@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
 import { Injectable, Optional } from '@angular/core';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { EscapeFocusFunction } from './models/common';
 
 @Injectable()

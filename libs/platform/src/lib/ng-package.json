@@ -5,5 +5,12 @@
     "lib": {
         "entryFile": "./public_api.ts"
     },
-    "allowedNonPeerDependencies": ["focus-trap", "xml2js", "lodash-es", "fast-deep-equal", "@fundamental-ngx/i18n"]
+    "allowedNonPeerDependencies": [
+        "focus-trap",
+        "xml2js",
+        "lodash-es",
+        "fast-deep-equal",
+        "@fundamental-ngx/i18n",
+        "@fundamental-ngx/cdk"
+    ]
 }

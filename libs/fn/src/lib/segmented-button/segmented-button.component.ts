@@ -22,7 +22,7 @@ import {
     SelectableListValueType,
     SelectComponentRootToken,
     SelectionService
-} from '@fundamental-ngx/fn/cdk';
+} from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fn-segmented-button',
@@ -95,7 +95,7 @@ export class SegmentedButtonComponent<T = any>
 
     /** @hidden */
     @ContentChildren(SelectableItemToken)
-    buttons!: QueryList<SelectableItemToken<string>>;
+    buttons!: QueryList<SelectableItemToken<HTMLElement, string>>;
 
     /** @hidden */
     destroy$: Subject<void> = new Subject();
@@ -109,7 +109,10 @@ export class SegmentedButtonComponent<T = any>
     };
 
     /** @hidden */
-    constructor(private selectionService: SelectionService, private changeDetectorRef: ChangeDetectorRef) {
+    constructor(
+        private selectionService: SelectionService<HTMLElement, string>,
+        private changeDetectorRef: ChangeDetectorRef
+    ) {
         this.selectionService.registerRootComponent(this);
     }
 

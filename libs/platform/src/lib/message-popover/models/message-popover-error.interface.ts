@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { MessagePopoverEntry } from './message-popover-entry.interface';
 
 export interface MessagePopoverError {
