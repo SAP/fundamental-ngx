@@ -6,6 +6,7 @@ import {
     FdDatetimeAdapter,
     FD_DATETIME_FORMATS
 } from '@fundamental-ngx/core/datetime';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fdp-date-picker-update-on-blur-example',
@@ -34,5 +35,5 @@ import {
     ]
 })
 export class PlatformDatePickerUpdateOnBlurExampleComponent {
-    date = FdDate.getNow();
+    date: Nullable<FdDate> = FdDate.getNow();
 }

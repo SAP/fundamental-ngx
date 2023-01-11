@@ -6,6 +6,7 @@ import {
     VhdValueChangeEvent,
     ValueHelpDialogDataSource
 } from '@fundamental-ngx/platform/value-help-dialog';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 interface ExampleTestModel {
     id: number;
@@ -54,7 +55,7 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
 export class PlatformVhdMobileExampleComponent implements OnInit {
     filters: FilterData[];
     dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
-    selectedValue: ExampleTestModel;
+    selectedValue: Nullable<ExampleTestModel>;
     currentValue: Partial<VhdValue> = {};
 
     ngOnInit(): void {

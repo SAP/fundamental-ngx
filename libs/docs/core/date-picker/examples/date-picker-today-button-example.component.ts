@@ -7,6 +7,7 @@ import {
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { DateRange } from '@fundamental-ngx/core/calendar';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-date-picker-today-button-example',
@@ -43,9 +44,9 @@ import { DateRange } from '@fundamental-ngx/core/calendar';
     ]
 })
 export class DatePickerTodayButtonExampleComponent {
-    date = FdDate.getNow();
+    date: Nullable<FdDate> = FdDate.getNow();
 
-    selectedRange: DateRange<FdDate>;
+    selectedRange: Nullable<DateRange<FdDate>>;
 
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {
         const today = this.datetimeAdapter.today();

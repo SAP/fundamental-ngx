@@ -6,6 +6,7 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-date-picker-position-example',
@@ -25,5 +26,5 @@ import {
     ]
 })
 export class DatePickerPositionExampleComponent {
-    date = FdDate.getNow();
+    date: Nullable<FdDate> = FdDate.getNow();
 }
