@@ -1,3 +1,12 @@
+# [0.39.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.0...v0.39.0-rc.1) (2023-01-11)
+
+
+### Bug Fixes
+
+* update release badge for correct workflow ([#9206](https://github.com/SAP/fundamental-ngx/issues/9206)) ([cb51240](https://github.com/SAP/fundamental-ngx/commit/cb512404413825947629e6786ff3264906a7a690))
+
+
+
 # [0.39.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.38.3-rc.4...v0.39.0-rc.0) (2023-01-11)
 
 
