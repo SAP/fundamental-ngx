@@ -1,3 +1,24 @@
+# [0.39.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.38.3-rc.4...v0.39.0-rc.0) (2023-01-11)
+
+
+### Features
+
+* core multi-combobox & cdk package ([#9176](https://github.com/SAP/fundamental-ngx/issues/9176)) ([fefac19](https://github.com/SAP/fundamental-ngx/commit/fefac1929380f482a9786b09513779548281256c))
+
+
+### BREAKING CHANGES
+
+* - Introduced new package: `@fundamental-ngx/cdk`;
+- Core's Utils subpackage has been completely moved to `@fundamental-ngx/cdk` subpackage;
+- BTP Experimental's `cdk` subpackage (`@fundamental-ngx/fn/cdk`) has been completely moved to `@fundamental-ngx/cdk`;
+- The following directive selectors are now deprecated: `[fdAutoComplete], [fd-auto-complete], [fnClicked], [fnDisabled], [fd-focus-key-manager-item], [fdFocusKeyManagerItem], [fd-focus-key-manager-list], [fdFocusKeyManagerList], [fnFocusableItem], [fnFocusableList], [fdIgnoreClickOnSelection], [fdInitialFocus], [fd-initial-focus], [fdLineClamp], [fd-lineclamp], [fdOnlyDigits], [fd-only-digits], [fdOverflowListItem], [fd-overflow-list-item], [fdOverflowList], [fd-overflow-list], [fnReadonly], [fdRepeat], [fdResizeHandle], [fd-resize-handle], [fdResize], [fd-resize], [fdTemplate], [fdTruncate], [fd-truncate]`. Instead of `fd*` and `fn*` prefix, use `fdk*` prefix;
+- Platform form field provider now relies on Injection token `FD_FORM_FIELD` instead of abstract class `FormField`;
+- Platform `FormField` abstract class has been renamed to `PlatformFormField` to remove misunderstanding between CDK's FormField and Platform's FormField;
+- Platform `FormFieldControl` provider has been replaced with `FD_FORM_FIELD_CONTROL` Injection token.
+- Introduced Multi-combobox component in Core library;
+
+
+
 ## [0.38.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.38.3-rc.3...v0.38.3-rc.4) (2023-01-10)
 
 
