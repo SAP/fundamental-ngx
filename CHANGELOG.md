@@ -1,3 +1,12 @@
+# [0.39.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.1...v0.39.0-rc.2) (2023-01-11)
+
+
+### Bug Fixes
+
+* **cx:** css import for side nav ([#9205](https://github.com/SAP/fundamental-ngx/issues/9205)) ([dfd0140](https://github.com/SAP/fundamental-ngx/commit/dfd0140eead95a370ff69921dc2d0b7f9ccdd31b))
+
+
+
 # [0.39.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.0...v0.39.0-rc.1) (2023-01-11)
 
 
