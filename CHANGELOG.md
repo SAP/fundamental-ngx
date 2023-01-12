@@ -1,3 +1,12 @@
+# [0.39.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.3...v0.39.0-rc.4) (2023-01-12)
+
+
+### Bug Fixes
+
+* **core,platform,docs:** build warnings ([#9182](https://github.com/SAP/fundamental-ngx/issues/9182)) ([629111c](https://github.com/SAP/fundamental-ngx/commit/629111cc33cdd75992f12fffe320b232e2ce9333))
+
+
+
 # [0.39.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.2...v0.39.0-rc.3) (2023-01-12)
 
 
