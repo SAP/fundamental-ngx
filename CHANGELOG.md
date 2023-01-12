@@ -1,3 +1,12 @@
+# [0.39.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.2...v0.39.0-rc.3) (2023-01-12)
+
+
+### Bug Fixes
+
+* **core:** correct null validation ([#9198](https://github.com/SAP/fundamental-ngx/issues/9198)) ([e8d6956](https://github.com/SAP/fundamental-ngx/commit/e8d69565c49f48b243441455d6fc2b2659501c38))
+
+
+
 # [0.39.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.1...v0.39.0-rc.2) (2023-01-11)
 
 
