@@ -63,11 +63,8 @@ describe('DatetimePickerComponent', () => {
         component.allowNull = true;
         component.handleInputChange('', true);
 
-        const today = new FdDate();
-
         expect(component.onChange).toHaveBeenCalledWith(null);
-        // not comparing time as it may face difference by 1 second
-        expect(component.date?.toDateString()).toEqual(today.toDateString());
+        expect(component.date).toBeNull();
     });
 
     it('should not update input with invalid time', () => {

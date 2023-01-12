@@ -570,7 +570,7 @@ export class DatetimePickerComponent<D>
      * @hidden
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
      */
-    writeValue(selected: D): void {
+    writeValue(selected: Nullable<D>): void {
         this.date = this._parseDate(selected);
         this._isInvalidDateInput = !this._isModelValid(this.date);
         if (this.isCurrentModelValid()) {
@@ -668,6 +668,7 @@ export class DatetimePickerComponent<D>
         this._inputFieldDate = inputStr ?? '';
         if (!inputStr) {
             this._isInvalidDateInput = !this.allowNull;
+            this.date = null;
             this.onChange(null);
             return;
         }
@@ -713,7 +714,7 @@ export class DatetimePickerComponent<D>
 
     /** Method that provides information if FdDateTime passed as arg has properly types and is valid */
     private _isModelValid(date: Nullable<D>): boolean {
-        return this._dateTimeAdapter.isValid(date);
+        return (date === null && this.allowNull) || this._dateTimeAdapter.isValid(date);
     }
 
     /** @hidden */
