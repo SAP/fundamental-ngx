@@ -6,8 +6,8 @@ import { FocusableItemViewModifier } from './focusable-item-view-modifier.interf
 import { setFocusable } from './set-focusable';
 import { FocusableObserver } from './focusable.observer';
 import { takeUntil, tap } from 'rxjs/operators';
-import { DestroyedService } from '../../services/destroyed.service';
-import { HasElementRef } from '../../interfaces/has-element-ref.interface';
+import { DestroyedService } from '../../services';
+import { HasElementRef } from '../../interfaces';
 import {
     DeprecatedSelector,
     FD_DEPRECATED_DIRECTIVE_SELECTOR,
@@ -64,6 +64,10 @@ export class FocusableItemDirective
         private _destroy$: DestroyedService
     ) {
         super(1);
+
+        // Focusable by default
+        this.setFocusable(true);
+
         this._focusableObserver
             .observe(this._elementRef)
             .pipe(

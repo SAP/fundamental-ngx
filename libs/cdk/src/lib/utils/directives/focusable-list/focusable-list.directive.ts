@@ -8,6 +8,7 @@ import {
     FD_DEPRECATED_DIRECTIVE_SELECTOR,
     getDeprecatedModel
 } from '../../deprecated-selector.class';
+import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from '../focusable-item';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -38,7 +39,7 @@ export class FocusableListDirective implements AfterViewInit {
     contentDirection: 'ltr' | 'rtl' | null = 'ltr';
 
     /** @hidden */
-    @ContentChildren(FocusableItemDirective) private _focusableItems: QueryList<FocusableItemDirective>;
+    @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE) private _focusableItems: QueryList<FocusableItemDirective>;
 
     /** @hidden */
     constructor(private _focusableListService: FocusableListService, private _destroy$: DestroyedService) {}
