@@ -1,3 +1,12 @@
+# [0.39.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.4...v0.39.0-rc.5) (2023-01-12)
+
+
+### Features
+
+* **platform:** change and apply smart filter bar events ([#9207](https://github.com/SAP/fundamental-ngx/issues/9207)) ([2e7fa69](https://github.com/SAP/fundamental-ngx/commit/2e7fa69753fd0f6a1550e518205b9de19a90db34))
+
+
+
 # [0.39.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.3...v0.39.0-rc.4) (2023-01-12)
 
 
