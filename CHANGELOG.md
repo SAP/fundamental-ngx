@@ -1,3 +1,12 @@
+# [0.39.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.5...v0.39.0-rc.6) (2023-01-12)
+
+
+### Features
+
+* **ci:** cdk scope for commits ([#9208](https://github.com/SAP/fundamental-ngx/issues/9208)) ([2b6f5f7](https://github.com/SAP/fundamental-ngx/commit/2b6f5f7d4456f572b9f7b9656418932e2010a798))
+
+
+
 # [0.39.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.4...v0.39.0-rc.5) (2023-01-12)
 
 
