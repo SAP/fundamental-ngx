@@ -182,6 +182,18 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     smartFiltersChanged: EventEmitter<SmartFilterChangeObject> = new EventEmitter<SmartFilterChangeObject>();
 
     /**
+     * Event emitted when selected filters has been applied (User clicked on Go button).
+     */
+    @Output()
+    smartFiltersApplied: EventEmitter<SmartFilterChangeObject> = new EventEmitter<SmartFilterChangeObject>();
+
+    /**
+     * Event emitted when search input field value has been changed.
+     */
+    @Output()
+    searchInputChanged: EventEmitter<SearchInput> = new EventEmitter<SearchInput>();
+
+    /**
      * Calculated array of filters to apply for the subject's data source.
      */
     filterBy: CollectionFilterGroup[] = [];
@@ -297,6 +309,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     /** @hidden */
     _onSearchInputChange(event: SearchInput): void {
         this.search = event;
+        this.searchInputChanged.emit(event);
     }
 
     /** @hidden */
@@ -380,17 +393,15 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
             this._setSelectedFilters([...this.subject.getDefaultFields(), ...this._selectedFilters]);
         }
 
-        this._formGenerator.form.valueChanges
-            .pipe(
-                filter(() => this.liveUpdate),
-                debounceTime(50),
-                takeUntil(this._destroy$)
-            )
-            .subscribe(async () => {
-                const formValue = await this._fgService.getFormValue(this._formGenerator.form);
-                const conditions = this._generateCollectionFilterGroups(formValue);
-                this._applyFiltering(conditions);
-            });
+        this._formGenerator.form.valueChanges.pipe(debounceTime(50), takeUntil(this._destroy$)).subscribe(async () => {
+            const conditions = await this.getFormattedConditions();
+            this.smartFiltersChanged.emit({ filterBy: conditions, search: this.search, subject: this.subject });
+
+            if (!this.liveUpdate) {
+                return;
+            }
+            this._applyFiltering(conditions);
+        });
 
         this._formGeneratorReady.next(true);
     }
@@ -401,6 +412,15 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     _toggleFilterBar(): void {
         this._showFilterBar = !this._showFilterBar;
         this._cdr.markForCheck();
+    }
+
+    /**
+     * Formats raw filters object into array of grouped filters.
+     * @returns Array of grouped filters.
+     */
+    async getFormattedConditions(): Promise<CollectionFilterGroup[]> {
+        const formValue = await this._fgService.getFormValue(this._formGenerator.form);
+        return this._generateCollectionFilterGroups(formValue);
     }
 
     /** @hidden */
@@ -433,7 +453,8 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
                 collectionFilterGroups.push(filterGroup);
             });
 
-        return collectionFilterGroups;
+        // Remove empty filter objects.
+        return collectionFilterGroups.filter((filterGroup) => filterGroup.filters?.length > 0);
     }
 
     /** @hidden */
@@ -649,15 +670,13 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      * @param filters array of filters.
      */
     private _applyFiltering(filters: CollectionFilterGroup[]): void {
-        // Remove empty filter objects.
-        filters = filters.filter((appliedFilter) => appliedFilter.filters?.length > 0);
         // Apply outside filtering and force subject to fetch new data.
         const source = this.subject.getDataSource();
         this.filterBy = filters;
         source.dataProvider.setFilters(filters, this.search);
         this.subject.getSubject().fetch();
         const emittedValue: SmartFilterBarManagedPreset = { search: this.search, filterBy: this.filterBy };
-        this.smartFiltersChanged.emit({ ...emittedValue, subject: this._subject });
+        this.smartFiltersApplied.emit({ ...emittedValue, subject: this._subject });
 
         if (!this._ignorePresetChange) {
             this.presetChanged.emit(emittedValue);

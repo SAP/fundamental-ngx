@@ -1,4 +1,13 @@
-<fdp-smart-filter-bar fdCompact [subject]="subject"></fdp-smart-filter-bar>
+<button fd-button (click)="logFilters(smartFilterBar)">Log current set of filters</button>
+<br />
+<br />
+<fdp-smart-filter-bar
+    #smartFilterBar
+    (smartFiltersApplied)="filtersChanged($event, 'applied')"
+    (smartFiltersChanged)="filtersChanged($event, 'changed')"
+    fdCompact
+    [subject]="subject"
+></fdp-smart-filter-bar>
 <br />
 <h4 fd-title>Line Items</h4>
 <br />

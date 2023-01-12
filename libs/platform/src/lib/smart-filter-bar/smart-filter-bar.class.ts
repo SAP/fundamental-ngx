@@ -1,5 +1,6 @@
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { PresetManagedComponent } from '@fundamental-ngx/platform/shared';
+import { CollectionFilterGroup, SearchInput } from '@fundamental-ngx/platform/table';
 import { SmartFilterBarManagedPreset } from './interfaces/smart-filter-bar-change';
 import { SmartFilterBarCondition } from './interfaces/smart-filter-bar-condition';
 import { SmartFilterBarStrategyLabels } from './interfaces/strategy-labels.type';
@@ -17,6 +18,8 @@ export abstract class SmartFilterBar implements PresetManagedComponent<SmartFilt
     /** @hidden */
     defineStrategyLabels?: SmartFilterBarStrategyLabels;
 
+    abstract search: SearchInput | undefined;
+
     /** @hidden */
     abstract getDisplayValue(condition: SmartFilterBarCondition, filterType: string): Promise<string>;
 
@@ -25,4 +28,6 @@ export abstract class SmartFilterBar implements PresetManagedComponent<SmartFilt
 
     /** Returns current preset configuration. */
     abstract getCurrentPreset(): SmartFilterBarManagedPreset;
+
+    abstract getFormattedConditions(): Promise<CollectionFilterGroup[]>;
 }

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FdDate } from '@fundamental-ngx/core/datetime';
+import { SmartFilterBar, SmartFilterChangeObject } from '@fundamental-ngx/platform';
 import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 
 @Component({
@@ -16,6 +17,16 @@ export class PlatformSmartFilterBarBasicExampleComponent {
 
     trackBy(_: number, item: ExampleItem): number {
         return item.id;
+    }
+
+    filtersChanged(filters: SmartFilterChangeObject, type: string): void {
+        console.log(`Filters has been ${type}. Current value: `, filters);
+    }
+
+    async logFilters(filterBar: SmartFilterBar): Promise<void> {
+        const conditions = await filterBar.getFormattedConditions();
+        const search = filterBar.search;
+        console.log({ search, conditions });
     }
 }
 
