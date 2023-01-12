@@ -5,7 +5,7 @@ import { NestedItemDirective } from './nested-item/nested-item.directive';
 import {
     NestedListExpandIconComponent,
     NestedListHeaderDirective,
-    NestedListIconDirective,
+    NestedListIconComponent,
     NestedListTitleDirective
 } from './nested-list-directives';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
@@ -27,7 +27,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         NestedListDirective,
         NestedLinkDirective,
         NestedItemDirective,
-        NestedListIconDirective,
+        NestedListIconComponent,
         NestedListTitleDirective,
         NestedListHeaderDirective,
         NestedListPopoverComponent,
@@ -40,7 +40,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         NestedListDirective,
         NestedLinkDirective,
         NestedItemDirective,
-        NestedListIconDirective,
+        NestedListIconComponent,
         NestedListTitleDirective,
         NestedListHeaderDirective,
         NestedListPopoverComponent,

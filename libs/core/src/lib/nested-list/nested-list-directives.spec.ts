@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NestedItemService } from './nested-item/nested-item.service';
 import {
     NestedListExpandIconComponent,
-    NestedListIconDirective,
+    NestedListIconComponent,
     NestedListTitleDirective
 } from './nested-list-directives';
 import { NestedListModule } from './nested-list.module';
@@ -22,14 +22,14 @@ class TestNestedContainerComponent {
     @ViewChild(NestedListExpandIconComponent)
     expandIconElement: NestedListExpandIconComponent;
 
-    @ViewChild(NestedListIconDirective)
-    iconElement: NestedListIconDirective;
+    @ViewChild(NestedListIconComponent)
+    iconElement: NestedListIconComponent;
 }
 
 describe('NestedListDirectives', () => {
     let component: TestNestedContainerComponent;
     let expandIconElement: NestedListExpandIconComponent;
-    let iconElement: NestedListIconDirective;
+    let iconElement: NestedListIconComponent;
     let titleElement: NestedListTitleDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
