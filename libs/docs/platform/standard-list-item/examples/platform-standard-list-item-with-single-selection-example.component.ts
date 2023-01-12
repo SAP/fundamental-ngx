@@ -72,6 +72,6 @@ export class PlatformStandardListItemWithSingleSelectionExampleComponent impleme
     }
 
     selectionChange(event: SelectionChangeEvent): void {
-        this._selectedItems = event.selectedItems;
+        this._selectedItems = event.selectedItems || [];
     }
 }

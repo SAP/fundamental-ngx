@@ -7,12 +7,13 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-date-picker-allow-null-example',
     template: ` <fd-date-picker [allowNull]="false" type="single" [(ngModel)]="date"></fd-date-picker>
         <br />
-        <div>Selected Date: {{ date?.toDateString() || 'null' }}</div>`,
+        <div>Selected Date: {{ date?.toDateString() }}</div>`,
     providers: [
         {
             provide: DatetimeAdapter,
@@ -25,5 +26,5 @@ import {
     ]
 })
 export class DatePickerAllowNullExampleComponent {
-    date = FdDate.getNow();
+    date: Nullable<FdDate> = FdDate.getNow();
 }

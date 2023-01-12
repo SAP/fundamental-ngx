@@ -18,6 +18,7 @@ import { SideNavigationMainDirective } from './side-navigation-main.directive';
 import { SideNavigationModel } from './side-navigation-model';
 import { PreparedNestedListComponent } from '@fundamental-ngx/core/nested-list';
 import { NestedListStateService } from '@fundamental-ngx/core/nested-list';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * The side-navigation is a wrapping component representing
@@ -35,7 +36,7 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
      * Side navigation configuration, to pass whole model object, instead of creating HTML from scratch
      */
     @Input()
-    sideNavigationConfiguration: SideNavigationModel;
+    sideNavigationConfiguration: Nullable<SideNavigationModel>;
 
     /** Whether condensed mode is included */
     @Input()

@@ -23,7 +23,7 @@
     </fdp-form-group>
 </form>
 
-<p style="margin-left: 2rem">Selected value: {{ form1.controls.radiol1?.value }}</p>
+<p style="margin-left: 2rem">Selected value: {{ form1.controls.radiol1.value }}</p>
 <br />
 
 <p>Platform radio button with None (No selection) value created as an Option</p>
@@ -41,7 +41,7 @@
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Selected value: {{ form2.controls.radiol2?.value }}</p>
+<p style="margin-left: 2rem">Selected value: {{ form2.controls.radiol2.value }}</p>
 <br />
 
 <p>Radio group using FormGroup and FormControl</p>
@@ -50,7 +50,7 @@
         <fdp-radio-group name="radiol3" [list]="seasons" [isInline]="true" formControlName="month"></fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
-<p style="margin-left: 2rem">Selected value: {{ form3.controls.month?.value }}</p>
+<p style="margin-left: 2rem">Selected value: {{ form3.controls.month.value }}</p>
 
 <hr />
 <h3>Use With Template Driven Form</h3>

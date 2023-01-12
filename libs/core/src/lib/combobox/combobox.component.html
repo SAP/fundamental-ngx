@@ -17,7 +17,7 @@
         <fd-popover-control>
             <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
         </fd-popover-control>
-        <fd-popover-body [hidden]="!displayedValues?.length">
+        <fd-popover-body [hidden]="!displayedValues.length">
             <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
             <ng-content></ng-content>
         </fd-popover-body>
@@ -110,7 +110,7 @@
         </span>
     </fd-input-group>
     <div [id]="comboboxId + '-list-results'" class="fd-combobox-count-list-results">
-        {{ displayedValues?.length || 0 }} result list items
+        {{ displayedValues.length || 0 }} result list items
     </div>
 </ng-template>
 

@@ -36,7 +36,7 @@ export class WizardStepIndicatorComponent implements OnDestroy {
     actionSheet: ActionSheetComponent;
 
     /** @hidden */
-    stackedItems: WizardStepComponent[];
+    stackedItems: WizardStepComponent[] = [];
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -62,7 +62,7 @@ export class WizardStepIndicatorComponent implements OnDestroy {
 
     /** @hidden */
     setStackedItems(items: WizardStepComponent[]): void {
-        this.stackedItems = items;
+        this.stackedItems = items || [];
         this._cdRef.detectChanges();
     }
 }

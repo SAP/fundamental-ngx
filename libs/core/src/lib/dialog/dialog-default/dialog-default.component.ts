@@ -1,4 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
@@ -11,7 +12,7 @@ import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 })
 export class DialogDefaultComponent implements AfterViewInit {
     /** @hidden */
-    _defaultDialogContent: DialogDefaultContent;
+    _defaultDialogContent: Nullable<DialogDefaultContent>;
 
     /** @hidden */
     _defaultDialogConfiguration: DialogConfig;
@@ -29,23 +30,23 @@ export class DialogDefaultComponent implements AfterViewInit {
     /** Whether there is a approve button, or cancel button text */
     _showFooter(): boolean {
         return (
-            this._defaultDialogContent &&
+            !!this._defaultDialogContent &&
             !!(this._defaultDialogContent.cancelButton || this._defaultDialogContent.approveButton)
         );
     }
 
     /** @hidden */
     _closeButtonClicked(): void {
-        this._defaultDialogContent.closeButtonCallback?.();
+        this._defaultDialogContent?.closeButtonCallback?.();
     }
 
     /** @hidden */
     _approveButtonClicked(): void {
-        this._defaultDialogContent.approveButtonCallback?.();
+        this._defaultDialogContent?.approveButtonCallback?.();
     }
 
     /** @hidden */
     _cancelButtonClicked(): void {
-        this._defaultDialogContent.cancelButtonCallback?.();
+        this._defaultDialogContent?.cancelButtonCallback?.();
     }
 }

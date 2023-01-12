@@ -56,7 +56,7 @@
                 [id]="id + '__' + column.name"
                 [attr.aria-colindex]="colIdx"
                 [ngClass]="'fdp-table__col--' + column.name"
-                [class.fd-table__cell--fixed]="_freezableColumns?.has(column.name)"
+                [class.fd-table__cell--fixed]="_freezableColumns.has(column.name)"
                 [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
                 [ngStyle]="
                     column
@@ -338,7 +338,7 @@
                             role="cell"
                             [headers]="id + '__' + column.name"
                             [ngClass]="'fdp-table__col--' + column.name"
-                            [class.fd-table__cell--fixed]="_freezableColumns?.has(column.name)"
+                            [class.fd-table__cell--fixed]="_freezableColumns.has(column.name)"
                             [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
                             [class.fd-table__cell--expand]="_isTreeRowFirstCell(colIdx, row)"
                             [ngStyle]="

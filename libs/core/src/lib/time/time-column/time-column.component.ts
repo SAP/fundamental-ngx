@@ -62,7 +62,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
 
     /** Currently chosen, centered time column item */
     @Input()
-    set activeValue(activeItem: T | undefined) {
+    set activeValue(activeItem: Nullable<T>) {
         if (!activeItem) {
             // omitting "null" and "undefined"
             return;
@@ -73,7 +73,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         this._activeValue = activeItem;
     }
 
-    get activeValue(): T {
+    get activeValue(): Nullable<T> {
         return this._activeValue;
     }
 
@@ -188,7 +188,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     private _queryKeyDownEvent: Subject<string> = new Subject<string>();
 
     /** @hidden */
-    private _activeValue: T;
+    private _activeValue: Nullable<T>;
 
     /** @hidden */
     private _activeCarouselItem: CarouselItemDirective;
@@ -345,7 +345,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         this._activeValue = _item.value;
 
         this.activeValueChange.emit({
-            value: this._activeValue,
+            value: this._activeValue!,
             after: output.after
         });
 
@@ -488,7 +488,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      * Returns item with passed value
      * @hidden
      */
-    private _getItem(_item: T): CarouselItemDirective | undefined {
+    private _getItem(_item: Nullable<T>): CarouselItemDirective | undefined {
         return this.items.find((item) => item.value === _item);
     }
 

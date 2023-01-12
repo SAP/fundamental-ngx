@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NestedListComponent } from '../nested-list/nested-list.component';
 import { NestedListItem, NestedListModel } from '../nested-list-model';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Component for internal usage, allows to generate the nested list from defined object.
@@ -26,7 +27,7 @@ export class PreparedNestedListComponent {
 
     /** List configuration*/
     @Input()
-    list: NestedListModel;
+    list: Nullable<NestedListModel>;
 
     /**
      * @hidden

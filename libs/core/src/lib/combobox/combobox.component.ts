@@ -505,7 +505,7 @@ export class ComboboxComponent
     _handleClearSearchTerm(): void {
         this.inputTextValue = '';
         this.inputTextChange.emit('');
-        this.displayedValues = this.dropdownValues;
+        this.displayedValues = this.dropdownValues || [];
         this.searchInputElement.nativeElement.focus();
         if (!this.mobile) {
             this._propagateChange();
@@ -637,7 +637,7 @@ export class ComboboxComponent
 
     /** Method that reset filtering for displayed values. It overrides displayed values by all possible dropdown values */
     private _resetDisplayedValues(): void {
-        this.displayedValues = this.dropdownValues;
+        this.displayedValues = this.dropdownValues || [];
     }
 
     /** @hidden */
@@ -669,7 +669,7 @@ export class ComboboxComponent
         } else if (typeof searchTerm === 'object') {
             return contentArray.filter((item) => item === searchTerm);
         }
-        return contentArray;
+        return contentArray || [];
     }
 
     /** @hidden */
@@ -700,7 +700,7 @@ export class ComboboxComponent
         if (this.inputText) {
             this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
         } else {
-            this.displayedValues = this.dropdownValues;
+            this.displayedValues = this.dropdownValues || [];
         }
     }
 
