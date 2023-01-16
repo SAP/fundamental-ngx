@@ -92,8 +92,7 @@
             {{
                 labelBeforeInputMobile
                     ? labelBeforeInputMobile + ':'
-                    : ('corePagination.labelBeforeInputMobile'
-                      | fdTranslate : { pageNumber: currentPage, totalCount: totalItems })
+                    : ('corePagination.labelBeforeInputMobile' | fdTranslate)
             }}
         </label>
 
@@ -113,9 +112,9 @@
             [ngModel]="currentPage"
             [attr.aria-label]="
                 inputAriaLabel
-                    ? inputAriaLabel(currentPage, totalItems)
+                    ? inputAriaLabel(currentPage, _totalPages)
                     : ('corePagination.inputAriaLabel'
-                      | fdTranslate : { pageNumber: currentPage, totalCount: totalItems })
+                      | fdTranslate : { pageNumber: currentPage, totalCount: _totalPages })
             "
             (keydown.enter)="goToPage(currentPageModel.value)"
             (keydown.space)="goToPage(currentPageModel.value)"
@@ -127,7 +126,7 @@
                 labelAfterInputMobile
                     ? labelAfterInputMobile(_lastPage)
                     : ('corePagination.labelAfterInputMobile'
-                      | fdTranslate : { pageNumber: currentPage, totalCount: totalItems })
+                      | fdTranslate : { pageNumber: currentPage, totalCount: _totalPages })
             }}
         </label>
 
