@@ -4,6 +4,7 @@ import { finalize, fromEvent, merge, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { getNativeElement } from '../../helpers/get-native-element';
 import { HasElementRef } from '../../interfaces/has-element-ref.interface';
+import { FocusableListDirective } from './focusable-list.directive';
 
 interface FocusableListConfig {
     wrap?: boolean;
@@ -17,6 +18,7 @@ export type FocusableItem = FocusableOption & HasElementRef & { focusable: (() =
 export class FocusableListService implements OnDestroy {
     /** @hidden */
     private keyManager?: FocusKeyManager<FocusableItem>;
+
     /** @hidden */
     private readonly _refresh$ = new Subject<void>();
 
@@ -31,33 +33,50 @@ export class FocusableListService implements OnDestroy {
      * @param items Focusable list items.
      * @param config Initialization configuration.
      */
-    initialize(items: FocusableItem[], config: FocusableListConfig = {}): void {
+    initialize(items: FocusableItem[], list: FocusableListDirective, config: FocusableListConfig = {}): void {
         this._refresh$.next();
+
         let keyManager = new FocusKeyManager<any>(items);
+
         if (config.wrap !== false) {
             keyManager = keyManager.withWrap();
         }
+
         if (config.direction === 'horizontal') {
             keyManager = keyManager.withHorizontalOrientation(config.contentDirection || 'ltr'); // should be replaced
         }
-        keyManager.skipPredicate((item) => {
-            const focusable = typeof item.focusable === 'boolean' ? item.focusable : item.focusable();
-            return !focusable;
-        });
+
+        keyManager.skipPredicate((item) => !(typeof item.focusable === 'boolean' ? item.focusable : item.focusable()));
+
         this.keyManager = keyManager;
+
         const events$ = items.map((item) => fromEvent<KeyboardEvent>(getNativeElement(item), 'keydown'));
         const focusListenerDestroyers = items.map((item) =>
             this._renderer.listen(getNativeElement(item), 'focus', () => this.keyManager?.setActiveItem(item.index))
         );
+
         merge(...events$)
             .pipe(
-                tap((keydownEvent: KeyboardEvent) => this.keyManager?.onKeydown(keydownEvent)),
+                tap((keydownEvent: KeyboardEvent) => {
+                    list.next({ list, event: keydownEvent, activeItemIndex: this.keyManager?.activeItemIndex });
+
+                    if (keydownEvent.defaultPrevented) {
+                        return;
+                    }
+
+                    this.keyManager?.onKeydown(keydownEvent);
+                }),
                 takeUntil(merge(this._refresh$, this._destroy$)),
-                finalize(() => {
-                    focusListenerDestroyers.forEach((d) => d());
-                })
+                finalize(() => focusListenerDestroyers.forEach((d) => d()))
             )
             .subscribe();
+    }
+
+    /**
+     * Set active item in list.
+     */
+    setActiveItem(index: number): void {
+        this.keyManager?.setActiveItem(index);
     }
 
     /** @hidden */

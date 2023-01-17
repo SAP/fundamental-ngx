@@ -1,7 +1,7 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { BehaviorSubject, filter, first, ReplaySubject } from 'rxjs';
-import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable.tokens';
+import { BehaviorSubject, filter, first } from 'rxjs';
+import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
 import { FocusableItemViewModifier } from './focusable-item-view-modifier.interface';
 import { setFocusable } from './set-focusable';
 import { FocusableObserver } from './focusable.observer';
@@ -38,10 +38,7 @@ export class DeprecatedFocusableItemDirective extends DeprecatedSelector {}
         DestroyedService
     ]
 })
-export class FocusableItemDirective
-    extends ReplaySubject<boolean>
-    implements HasElementRef, OnDestroy, AfterViewInit, FocusableItemViewModifier
-{
+export class FocusableItemDirective implements HasElementRef, AfterViewInit, FocusableItemViewModifier {
     /** Whether the item is focusable. */
     @Input()
     set fdkFocusableItem(val: BooleanInput) {
@@ -63,8 +60,6 @@ export class FocusableItemDirective
         private _focusableObserver: FocusableObserver,
         private _destroy$: DestroyedService
     ) {
-        super(1);
-
         // Focusable by default
         this.setFocusable(true);
 
@@ -75,7 +70,6 @@ export class FocusableItemDirective
                     if (isFocusable !== this._focusable) {
                         this.setFocusable(isFocusable);
                         this._focusable = isFocusable;
-                        this.next(isFocusable);
                     }
                 }),
                 takeUntil(this._destroy$)
@@ -96,10 +90,5 @@ export class FocusableItemDirective
     /** Element reference. */
     elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.complete();
     }
 }
