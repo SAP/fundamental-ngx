@@ -44,7 +44,7 @@ export class DeprecatedFocusableItemDirective extends DeprecatedSelector {}
     ]
 })
 export class FocusableItemDirective implements HasElementRef {
-    /** Whether the item is focusable. */
+    /** Whether the item is focusable. Default is true. */
     @Input()
     set fdkFocusableItem(val: BooleanInput) {
         this._focusable = coerceBooleanProperty(val);
@@ -55,7 +55,21 @@ export class FocusableItemDirective implements HasElementRef {
         return this._focusable;
     }
 
-    /** Function, that returns a string to be announced by screen-reader whenever cell receives focus */
+    /** Whether tabbable child should be focused instead. Default is false. */
+    @Input()
+    set fdkFocusableItemFocusChild(val: BooleanInput) {
+        this._focusChild = coerceBooleanProperty(val);
+        this.setTabbable(this._focusable);
+    }
+
+    get fdkFocusableItemFocusChild(): boolean {
+        return this._focusChild;
+    }
+
+    /** @hidden */
+    private _focusChild = false;
+
+    /** Function, that returns a string to be announced by screen-reader whenever item which is in grid receives focus. */
     @Input()
     cellFocusedEventAnnouncer: (position: ItemPosition) => string = this._defaultItemFocusedEventAnnouncer;
 
@@ -107,6 +121,10 @@ export class FocusableItemDirective implements HasElementRef {
     setTabbable(state: boolean): void {
         this._tabbable = state;
 
+        if (!this.fdkFocusableItemFocusChild) {
+            return;
+        }
+
         if (state) {
             this._enableTabbableElements();
         } else {
@@ -128,16 +146,20 @@ export class FocusableItemDirective implements HasElementRef {
             return;
         }
 
-        const tabbableElement = this._tabbableElementService.getTabbableElement(
-            this.elementRef().nativeElement,
-            false,
-            true
-        );
+        if (this.fdkFocusableItemFocusChild) {
+            const tabbableElement = this._tabbableElementService.getTabbableElement(
+                this.elementRef().nativeElement,
+                false,
+                true
+            );
 
-        tabbableElement?.focus();
+            tabbableElement?.focus();
+        }
 
-        this._liveAnnouncer.clear();
-        await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(this._position));
+        if (this._position) {
+            this._liveAnnouncer.clear();
+            await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(this._position));
+        }
     }
 
     /** @hidden */
