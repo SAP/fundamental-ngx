@@ -1,7 +1,7 @@
 import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
-import { TabbableElementService } from '../../services';
+import { DestroyedService, TabbableElementService } from '../../services';
 import { HasElementRef } from '../../interfaces';
 import {
     DeprecatedSelector,
@@ -9,6 +9,8 @@ import {
     getDeprecatedModel
 } from '../../deprecated-selector.class';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { FocusableObserver } from './focusable.observer';
+import { takeUntil } from 'rxjs';
 
 export interface ItemPosition {
     row: number;
@@ -37,7 +39,8 @@ export class DeprecatedFocusableItemDirective extends DeprecatedSelector {}
         {
             provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
             useExisting: FocusableItemDirective
-        }
+        },
+        DestroyedService
     ]
 })
 export class FocusableItemDirective implements HasElementRef {
@@ -80,9 +83,20 @@ export class FocusableItemDirective implements HasElementRef {
     /** @hidden */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
+        private _focusableObserver: FocusableObserver,
+        private _destroy$: DestroyedService,
         private _tabbableElementService: TabbableElementService,
         private _liveAnnouncer: LiveAnnouncer
-    ) {}
+    ) {
+        this._focusableObserver
+            .observe(this._elementRef, false)
+            .pipe(takeUntil(this._destroy$))
+            .subscribe((isFocusable) => {
+                if (isFocusable !== this.fdkFocusableItem) {
+                    this.fdkFocusableItem = isFocusable;
+                }
+            });
+    }
 
     /** Element reference. */
     elementRef(): ElementRef<HTMLElement> {

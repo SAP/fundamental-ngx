@@ -16,7 +16,7 @@ export class FocusableObserver {
     constructor(private _attributeObserver: AttributeObserver) {}
 
     /** @Hidden */
-    static isFocusable(element: Element): boolean {
+    static isFocusable(element: Element, respectTabIndex: boolean): boolean {
         if (ReadonlyObserver.isReadonly(element)) {
             return false;
         }
@@ -27,14 +27,17 @@ export class FocusableObserver {
         if (isNaN(tabIndex)) {
             return isElementFocusableByDefault(element);
         }
-        return tabIndex > -1;
+        return !respectTabIndex || tabIndex > -1;
     }
 
     /** @hidden */
-    observe(element: HasElementRef<Element> | Element | ElementRef<Element>): Observable<boolean> {
+    observe(
+        element: HasElementRef<Element> | Element | ElementRef<Element>,
+        respectTabIndex = true
+    ): Observable<boolean> {
         const nativeElement = getNativeElement(element);
         return this._attributeObserver.observe(nativeElement).pipe(
-            map(() => FocusableObserver.isFocusable(nativeElement)),
+            map(() => FocusableObserver.isFocusable(nativeElement, respectTabIndex)),
             distinctUntilChanged()
         );
     }

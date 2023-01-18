@@ -118,7 +118,9 @@ export class FocusableListDirective implements AfterViewInit {
 
     /** Set active item in list */
     setActiveItem(index: number): void {
-        this.keyManager?.setActiveItem(index);
+        if (this._focusableItems.get(index)?.fdkFocusableItem) {
+            this.keyManager?.setActiveItem(index);
+        }
     }
 
     /** @hidden */
