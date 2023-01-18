@@ -8,6 +8,14 @@ import {
     FD_DEPRECATED_DIRECTIVE_SELECTOR,
     getDeprecatedModel
 } from '../../deprecated-selector.class';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+
+export interface ItemPosition {
+    row: number;
+    col: number;
+    totalRows: number;
+    totalCols: number;
+}
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -44,6 +52,13 @@ export class FocusableItemDirective implements HasElementRef {
         return this._focusable;
     }
 
+    /** Function, that returns a string to be announced by screen-reader whenever cell receives focus */
+    @Input()
+    cellFocusedEventAnnouncer: (position: ItemPosition) => string = this._defaultItemFocusedEventAnnouncer;
+
+    /** @hidden */
+    private _position: ItemPosition;
+
     /** @hidden */
     private _focusable = true;
 
@@ -65,7 +80,8 @@ export class FocusableItemDirective implements HasElementRef {
     /** @hidden */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
-        private _tabbableElementService: TabbableElementService
+        private _tabbableElementService: TabbableElementService,
+        private _liveAnnouncer: LiveAnnouncer
     ) {}
 
     /** Element reference. */
@@ -85,8 +101,13 @@ export class FocusableItemDirective implements HasElementRef {
     }
 
     /** @hidden */
+    _setPosition(position: ItemPosition): void {
+        this._position = position;
+    }
+
+    /** @hidden */
     @HostListener('focusin')
-    _onFocusin(): void {
+    async _onFocusin(): Promise<void> {
         if (this._timerId != null) {
             clearTimeout(this._timerId);
             this._timerId = null;
@@ -100,6 +121,9 @@ export class FocusableItemDirective implements HasElementRef {
         );
 
         tabbableElement?.focus();
+
+        this._liveAnnouncer.clear();
+        await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(this._position));
     }
 
     /** @hidden */
@@ -128,5 +152,10 @@ export class FocusableItemDirective implements HasElementRef {
                 this._tabbableElements.set(elm, elm.tabIndex);
                 elm.tabIndex = -1;
             });
+    }
+
+    /** @hidden */
+    private _defaultItemFocusedEventAnnouncer(position: ItemPosition): string {
+        return `Column ${position.col + 1} of ${position.totalCols}, row: ${position.row + 1} of ${position.totalRows}`;
     }
 }

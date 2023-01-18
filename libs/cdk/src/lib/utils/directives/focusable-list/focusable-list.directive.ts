@@ -83,6 +83,9 @@ export class FocusableListDirective implements AfterViewInit {
     private keyManager?: FocusKeyManager<FocusableItem>;
 
     /** @hidden */
+    private _position: { row: number; totalRows: number };
+
+    /** @hidden */
     private readonly _refreshItems$ = new Subject<void>();
 
     /** @hidden */
@@ -121,6 +124,19 @@ export class FocusableListDirective implements AfterViewInit {
     /** Set active item in list */
     setActiveItem(index: number): void {
         this.keyManager?.setActiveItem(index);
+    }
+
+    /** @hidden */
+    _setPosition(position: { row: number; totalRows: number }): void {
+        this._position = position;
+
+        this._focusableItems.changes
+            .pipe(startWith(this._focusableItems), takeUntil(this._destroy$))
+            .subscribe((items) =>
+                items.forEach((item, index) =>
+                    item._setPosition({ ...this._position, col: index, totalCols: this._focusableItems.length })
+                )
+            );
     }
 
     /** @hidden */

@@ -34,6 +34,14 @@ export class FocusableGridDirective implements AfterViewInit {
     /** @hidden */
     ngAfterViewInit(): void {
         this._focusableLists.changes
+            .pipe(startWith(this._focusableLists), takeUntil(this._destroy$))
+            .subscribe((lists) =>
+                lists.forEach((list, index) =>
+                    list._setPosition({ row: index, totalRows: this._focusableLists.length })
+                )
+            );
+
+        this._focusableLists.changes
             .pipe(
                 startWith(this._focusableLists),
                 map((queryList: QueryList<FocusableListDirective>) =>
