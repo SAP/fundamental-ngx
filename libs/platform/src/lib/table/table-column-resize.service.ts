@@ -242,22 +242,8 @@ export class TableColumnResizeService implements OnDestroy {
         this._markForCheck.next();
     }
 
-    /** Update column resizer position. */
-    private _updateResizerPositionOnMouseMove(): void {
-        this._resizerMoveSubscription = fromEvent<MouseEvent>(document, 'mousemove')
-            .pipe(debounceTime(10))
-            .subscribe((event) => {
-                const clientStartX = this._clientStartX ?? 0;
-                const diffX = this._rtl ? clientStartX - event.clientX : event.clientX - clientStartX;
-
-                this._resizerPosition = (this._startX ?? 0) + diffX;
-
-                this._markForCheck.next();
-            });
-    }
-
     /** Update columns width after resizing, prevent from having too small columns. */
-    private _processResize(diffX: number): void {
+    _processResize(diffX: number): void {
         const columnWidth = this._columnsCellMap
             .get(this._resizedColumn)?.[0]
             ?.nativeElement.getBoundingClientRect().width;
@@ -294,5 +280,19 @@ export class TableColumnResizeService implements OnDestroy {
 
         this._fixedColumnsWidthMap.set(this._resizedColumn, columnWidth + diffX + 'px');
         this.updateFrozenColumnsWidthAfterResize(this._resizedColumn, diffX);
+    }
+
+    /** Update column resizer position. */
+    private _updateResizerPositionOnMouseMove(): void {
+        this._resizerMoveSubscription = fromEvent<MouseEvent>(document, 'mousemove')
+            .pipe(debounceTime(10))
+            .subscribe((event) => {
+                const clientStartX = this._clientStartX ?? 0;
+                const diffX = this._rtl ? clientStartX - event.clientX : event.clientX - clientStartX;
+
+                this._resizerPosition = (this._startX ?? 0) + diffX;
+
+                this._markForCheck.next();
+            });
     }
 }
