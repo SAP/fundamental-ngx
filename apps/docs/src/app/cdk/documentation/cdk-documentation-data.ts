@@ -21,6 +21,10 @@ export const directives: SectionInterfaceContent[] = [
         name: 'Focusable List'
     },
     {
+        url: 'cdk/focusable-grid',
+        name: 'Focusable Grid'
+    },
+    {
         url: 'cdk/selectable-list',
         name: 'Selectable List'
     },
