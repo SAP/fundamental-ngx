@@ -54,6 +54,9 @@ export class FocusableItemDirective implements HasElementRef {
     private _tabbable = true;
 
     /** @hidden */
+    private _timerId: number | null;
+
+    /** @hidden */
     @HostBinding('attr.tabindex')
     get _tabindex(): number {
         return this._tabbable ? 0 : -1;
@@ -84,6 +87,12 @@ export class FocusableItemDirective implements HasElementRef {
     /** @hidden */
     @HostListener('focusin')
     _onFocusin(): void {
+        if (this._timerId != null) {
+            clearTimeout(this._timerId);
+            this._timerId = null;
+            return;
+        }
+
         const tabbableElement = this._tabbableElementService.getTabbableElement(
             this.elementRef().nativeElement,
             false,
@@ -91,6 +100,12 @@ export class FocusableItemDirective implements HasElementRef {
         );
 
         tabbableElement?.focus();
+    }
+
+    /** @hidden */
+    @HostListener('focusout')
+    _onFocusout(): void {
+        this._timerId = setTimeout(() => (this._timerId = null));
     }
 
     /** @hidden */
