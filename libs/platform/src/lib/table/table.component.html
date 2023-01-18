@@ -47,6 +47,7 @@
 
         <ng-container *ngFor="let column of _visibleColumns; let colIdx = index; trackBy: _columnTrackBy">
             <th
+                [focusable]="true"
                 fd-table-cell
                 role="columnheader"
                 [fdpTableCellResizable]="
@@ -226,6 +227,7 @@
             class="fdp-table__body-table"
             [popIn]="_poppingColumns.length > 0"
             [class.fd-table--no-outer-border]="noOuterBorders"
+            [allCellsFocusable]="true"
         >
             <thead fd-table-header class="fdp-table__header">
                 <ng-container [ngTemplateOutlet]="tableHeaderRowTemplate"></ng-container>
@@ -298,7 +300,6 @@
                                             | async
                                             | selectionCellStyles : _rtl : _semanticHighlightingColumnWidth
                                     "
-                                    [focusable]="true"
                                     [attr.aria-selected]="row.checked"
                                     (click)="_toggleSingleSelectableRow(row)"
                                     (keydown.enter)="_toggleSingleSelectableRow(row)"
@@ -353,8 +354,6 @@
                             "
                             [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
                             [attr.data-nesting-level]="colIdx === 0 ? row.level + 1 : null"
-                            [tabindex]="_isTreeRowFirstCell(colIdx, row) ? 0 : -1"
-                            [focusable]="_isTreeRowFirstCell(colIdx, row)"
                             (click)="_onCellClick(colIdx, row)"
                             (keyup.enter)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
                         >
@@ -433,12 +432,9 @@
                         <td fd-table-cell *ngIf="selectionMode !== SELECTION_MODE.NONE"></td>
                         <td
                             fd-table-cell
-                            [tabindex]="-1"
                             colspan="100%"
                             [attr.data-nesting-level]="row.level + 1"
                             [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
-                            [tabindex]="_isTreeRowFirstCell(0, row) ? 0 : -1"
-                            [focusable]="_isTreeRowFirstCell(0, row)"
                             (click)="_onCellClick(0, row)"
                             (keyup.enter)="_isTreeRowFirstCell(0, row) && _toggleGroupRow(row)"
                         >
@@ -473,7 +469,6 @@
             class="fd-table__cell--group fd-table__cell--fixed fd-table__cell--expand"
             tabindex="0"
             role="cell"
-            [focusable]="true"
             [attr.colspan]="_tableColumnsLength"
             [attr.aria-expanded]="row.expanded"
             [attr.data-nesting-level]="row.level + 1"
