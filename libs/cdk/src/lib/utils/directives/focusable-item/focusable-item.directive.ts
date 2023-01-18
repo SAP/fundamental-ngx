@@ -57,12 +57,12 @@ export class FocusableItemDirective implements HasElementRef {
 
     /** Whether tabbable child should be focused instead. Default is false. */
     @Input()
-    set fdkFocusableItemFocusChild(val: BooleanInput) {
+    set focusChild(val: BooleanInput) {
         this._focusChild = coerceBooleanProperty(val);
         this.setTabbable(this._focusable);
     }
 
-    get fdkFocusableItemFocusChild(): boolean {
+    get focusChild(): boolean {
         return this._focusChild;
     }
 
@@ -121,7 +121,7 @@ export class FocusableItemDirective implements HasElementRef {
     setTabbable(state: boolean): void {
         this._tabbable = state;
 
-        if (!this.fdkFocusableItemFocusChild) {
+        if (!this.focusChild) {
             return;
         }
 
@@ -146,7 +146,7 @@ export class FocusableItemDirective implements HasElementRef {
             return;
         }
 
-        if (this.fdkFocusableItemFocusChild) {
+        if (this.focusChild) {
             const tabbableElement = this._tabbableElementService.getTabbableElement(
                 this.elementRef().nativeElement,
                 false,

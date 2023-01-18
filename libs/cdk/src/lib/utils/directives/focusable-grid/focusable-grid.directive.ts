@@ -1,3 +1,4 @@
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { AfterViewInit, ContentChildren, Directive, Input, QueryList } from '@angular/core';
 import { merge, startWith, switchMap, takeUntil } from 'rxjs';
@@ -17,16 +18,26 @@ export class FocusableGridDirective implements AfterViewInit {
     @Input()
     contentDirection: 'ltr' | 'rtl' | null = 'ltr';
 
-    /** Whether after pressing right (left in rtl mode) on the last item in row first item of the next row should be made active. */
+    /** Whether the item in the previous/next row should be selected when going out of the first/last cell in the row. Default is false. */
     @Input()
-    wrapHorizontally = false;
+    set wrapHorizontally(value: BooleanInput) {
+        this._wrapHorizontally = coerceBooleanProperty(value);
+    }
 
-    /** Specify which item to select in next row if its length smaller than current index. Nullish value means do not select. */
+    get wrapHorizontally(): boolean {
+        return this._wrapHorizontally;
+    }
+
+    /** Specify which item to select in prev/next row if its length smaller than current index. Nullish value means do not select. Default is null. */
     @Input()
-    shortRowFocusableItem: Nullable<'first' | 'last'> = null;
+    shortRowFocus: Nullable<'first' | 'last'> = null;
 
     /** @hidden */
-    @ContentChildren(FDK_FOCUSABLE_LIST_DIRECTIVE) private readonly _focusableLists: QueryList<FocusableListDirective>;
+    private _wrapHorizontally = false;
+
+    /** @hidden */
+    @ContentChildren(FDK_FOCUSABLE_LIST_DIRECTIVE)
+    private readonly _focusableLists: QueryList<FocusableListDirective>;
 
     /** @hidden */
     constructor(private readonly _destroy$: DestroyedService) {}
@@ -124,10 +135,10 @@ export class FocusableGridDirective implements AfterViewInit {
             return activeIndex;
         }
 
-        if (this.shortRowFocusableItem == null) {
+        if (this.shortRowFocus == null) {
             return null;
         }
 
-        return this.shortRowFocusableItem === 'first' ? 0 : list._focusableItems.length - 1;
+        return this.shortRowFocus === 'first' ? 0 : list._focusableItems.length - 1;
     }
 }
