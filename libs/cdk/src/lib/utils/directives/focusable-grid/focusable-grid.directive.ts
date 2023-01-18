@@ -13,13 +13,17 @@ import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective } from '../focusab
     providers: [DestroyedService]
 })
 export class FocusableGridDirective implements AfterViewInit {
+    /** Direction of the content. */
+    @Input()
+    contentDirection: 'ltr' | 'rtl' | null = 'ltr';
+
     /** Whether after pressing right (left in rtl mode) on the last item in row first item of the next row should be made active. */
     @Input()
     wrapHorizontally = false;
 
-    /** Specifies which item to select in next row if its length smaller than current index. Nullish value means do not select. */
+    /** Specify which item to select in next row if its length smaller than current index. Nullish value means do not select. */
     @Input()
-    shortRowItem: Nullable<'first' | 'last'> = 'first';
+    shortRowFocusableItem: Nullable<'first' | 'last'> = null;
 
     /** @hidden */
     @ContentChildren(FDK_FOCUSABLE_LIST_DIRECTIVE) private readonly _focusableLists: QueryList<FocusableListDirective>;
@@ -32,7 +36,21 @@ export class FocusableGridDirective implements AfterViewInit {
         this._focusableLists.changes
             .pipe(
                 startWith(this._focusableLists),
-                map((queryList: QueryList<FocusableListDirective>) => merge(...queryList.toArray())),
+                map((queryList: QueryList<FocusableListDirective>) =>
+                    merge(...queryList.toArray().map((list) => list._itemFocused$))
+                ),
+                switchMap((subject) => subject),
+                tap(() => this._focusableLists.forEach((list) => list.setItemsTabbable(false))),
+                takeUntil(this._destroy$)
+            )
+            .subscribe();
+
+        this._focusableLists.changes
+            .pipe(
+                startWith(this._focusableLists),
+                map((queryList: QueryList<FocusableListDirective>) =>
+                    merge(...queryList.toArray().map((list) => list._keydown$))
+                ),
                 switchMap((subject) => subject),
                 tap(({ event, list, activeItemIndex }) => this._onKeydown(event, list, activeItemIndex)),
                 takeUntil(this._destroy$)
@@ -55,6 +73,12 @@ export class FocusableGridDirective implements AfterViewInit {
         let nextRowIndex: number | null = null;
         let nextRowItemIndex = activeItemIndex;
 
+        const isFirstItemLtr = activeItemIndex === 0 && this.contentDirection !== 'rtl';
+        const isLastItemRtl = activeItemIndex === list._focusableItems.length - 1 && this.contentDirection === 'rtl';
+
+        const isFirstItemRtl = activeItemIndex === 0 && this.contentDirection === 'rtl';
+        const isLastItemLtr = activeItemIndex === list._focusableItems.length - 1 && this.contentDirection !== 'rtl';
+
         switch (event.keyCode) {
             case UP_ARROW:
                 event.preventDefault();
@@ -65,14 +89,14 @@ export class FocusableGridDirective implements AfterViewInit {
                 nextRowIndex = currentRowIndex + 1;
                 break;
             case LEFT_ARROW:
-                if (this.wrapHorizontally && activeItemIndex === 0) {
+                if (this.wrapHorizontally && (isFirstItemLtr || isLastItemRtl)) {
                     event.preventDefault();
                     nextRowIndex = currentRowIndex - 1;
                     nextRowItemIndex = lists[nextRowIndex]?._focusableItems.length - 1;
                 }
                 break;
             case RIGHT_ARROW:
-                if (this.wrapHorizontally && activeItemIndex === list._focusableItems.length - 1) {
+                if (this.wrapHorizontally && (isFirstItemRtl || isLastItemLtr)) {
                     event.preventDefault();
                     nextRowIndex = currentRowIndex + 1;
                     nextRowItemIndex = 0;
@@ -86,7 +110,7 @@ export class FocusableGridDirective implements AfterViewInit {
                 return;
             }
 
-            lists[nextRowIndex]._focusableListService.setActiveItem(itemIndex);
+            lists[nextRowIndex].setActiveItem(itemIndex);
         }
     }
 
@@ -96,10 +120,10 @@ export class FocusableGridDirective implements AfterViewInit {
             return activeIndex;
         }
 
-        if (this.shortRowItem == null) {
+        if (this.shortRowFocusableItem == null) {
             return null;
         }
 
-        return this.shortRowItem === 'first' ? 0 : list._focusableItems.length - 1;
+        return this.shortRowFocusableItem === 'first' ? 0 : list._focusableItems.length - 1;
     }
 }

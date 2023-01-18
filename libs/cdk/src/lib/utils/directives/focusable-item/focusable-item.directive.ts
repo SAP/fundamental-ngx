@@ -1,12 +1,7 @@
-import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { BehaviorSubject, filter, first } from 'rxjs';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
-import { FocusableItemViewModifier } from './focusable-item-view-modifier.interface';
-import { setFocusable } from './set-focusable';
-import { FocusableObserver } from './focusable.observer';
-import { takeUntil, tap } from 'rxjs/operators';
-import { DestroyedService } from '../../services';
+import { TabbableElementService } from '../../services';
 import { HasElementRef } from '../../interfaces';
 import {
     DeprecatedSelector,
@@ -34,15 +29,15 @@ export class DeprecatedFocusableItemDirective extends DeprecatedSelector {}
         {
             provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
             useExisting: FocusableItemDirective
-        },
-        DestroyedService
+        }
     ]
 })
-export class FocusableItemDirective implements HasElementRef, AfterViewInit, FocusableItemViewModifier {
+export class FocusableItemDirective implements HasElementRef {
     /** Whether the item is focusable. */
     @Input()
     set fdkFocusableItem(val: BooleanInput) {
-        this._viewInit$.pipe(filter(Boolean), first()).subscribe(() => this.setFocusable(coerceBooleanProperty(val)));
+        this._focusable = coerceBooleanProperty(val);
+        this.setTabbable(this._focusable);
     }
 
     get fdkFocusableItem(): boolean {
@@ -51,44 +46,72 @@ export class FocusableItemDirective implements HasElementRef, AfterViewInit, Foc
 
     /** @hidden */
     private _focusable = true;
+
     /** @hidden */
-    private readonly _viewInit$ = new BehaviorSubject(false);
+    private _tabbableElements = new Map<HTMLElement, number>();
+
+    /** @hidden */
+    private _tabbable = true;
+
+    /** @hidden */
+    @HostBinding('attr.tabindex')
+    get _tabindex(): number {
+        return this._tabbable ? 0 : -1;
+    }
 
     /** @hidden */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
-        private _focusableObserver: FocusableObserver,
-        private _destroy$: DestroyedService
-    ) {
-        // Focusable by default
-        this.setFocusable(true);
-
-        this._focusableObserver
-            .observe(this._elementRef)
-            .pipe(
-                tap((isFocusable) => {
-                    if (isFocusable !== this._focusable) {
-                        this.setFocusable(isFocusable);
-                        this._focusable = isFocusable;
-                    }
-                }),
-                takeUntil(this._destroy$)
-            )
-            .subscribe();
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._viewInit$.next(true);
-    }
-
-    /** Sets focusable state of the element. */
-    setFocusable = (isFocusable: boolean): void => {
-        setFocusable(this, isFocusable);
-    };
+        private _tabbableElementService: TabbableElementService
+    ) {}
 
     /** Element reference. */
     elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
+    }
+
+    /** Set tabbable state */
+    setTabbable(state: boolean): void {
+        this._tabbable = state;
+
+        if (state) {
+            this._enableTabbableElements();
+        } else {
+            this._disableTabbableElements();
+        }
+    }
+
+    /** @hidden */
+    @HostListener('focusin')
+    _onFocusin(): void {
+        const tabbableElement = this._tabbableElementService.getTabbableElement(
+            this.elementRef().nativeElement,
+            false,
+            true
+        );
+
+        tabbableElement?.focus();
+    }
+
+    /** @hidden */
+    private _enableTabbableElements(): void {
+        if (this._tabbableElements.size === 0) {
+            return;
+        }
+
+        this._tabbableElements.forEach((tabIndex, element) => (element.tabIndex = tabIndex));
+        this._tabbable = false;
+    }
+
+    /** @hidden */
+    private _disableTabbableElements(): void {
+        // Since we cannot select by tabindex attribute (links, inputs, buttons might not have one but still can be focusable),
+        // Select all elements from the cell and filter by tabIndex property.
+        Array.from(this.elementRef().nativeElement.querySelectorAll<HTMLElement>('*'))
+            .filter((elm) => elm.tabIndex >= 0)
+            .forEach((elm) => {
+                this._tabbableElements.set(elm, elm.tabIndex);
+                elm.tabIndex = -1;
+            });
     }
 }

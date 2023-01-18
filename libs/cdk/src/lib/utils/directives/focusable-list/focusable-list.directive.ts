@@ -1,6 +1,5 @@
-import { AfterViewInit, ContentChildren, Directive, Input, QueryList } from '@angular/core';
-import { map, startWith, takeUntil, tap } from 'rxjs/operators';
-import { FocusableItem, FocusableListService } from './focusable-list.service';
+import { AfterViewInit, ContentChildren, Directive, Input, QueryList, Renderer2 } from '@angular/core';
+import { finalize, map, startWith, takeUntil, tap } from 'rxjs/operators';
 import { FocusableItemDirective } from '../focusable-item/focusable-item.directive';
 import { DestroyedService } from '../../services/destroyed.service';
 import {
@@ -10,14 +9,25 @@ import {
 } from '../../deprecated-selector.class';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from '../focusable-item';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE } from './focusable-list.tokens';
-import { ReplaySubject } from 'rxjs';
+import { fromEvent, merge, Subject } from 'rxjs';
 import { Nullable } from '../../models/nullable';
+import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
+import { HasElementRef } from '../../interfaces';
+import { getNativeElement } from '../../helpers';
 
-export interface FocusableListEvent {
+export interface FocusableListKeydownEvent {
     list: FocusableListDirective;
     event: KeyboardEvent;
     activeItemIndex: Nullable<number>;
 }
+
+interface FocusableListConfig {
+    wrap?: boolean;
+    direction?: 'vertical' | 'horizontal';
+    contentDirection?: 'ltr' | 'rtl' | null;
+}
+
+export type FocusableItem = FocusableOption & HasElementRef & { focusable: (() => boolean) | boolean; index: number };
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -41,11 +51,10 @@ export class DeprecatedFocusableListDirective extends DeprecatedSelector {}
             provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
             useExisting: FocusableListDirective
         },
-        FocusableListService,
         DestroyedService
     ]
 })
-export class FocusableListDirective extends ReplaySubject<FocusableListEvent> implements AfterViewInit {
+export class FocusableListDirective implements AfterViewInit {
     /** Direction of navigation. Always horizontal when in grid. */
     @Input()
     navigationDirection: 'horizontal' | 'vertical' = 'vertical';
@@ -61,12 +70,23 @@ export class FocusableListDirective extends ReplaySubject<FocusableListEvent> im
     wrap = false;
 
     /** @hidden */
-    @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE) public readonly _focusableItems: QueryList<FocusableItemDirective>;
+    @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
+    public readonly _focusableItems: QueryList<FocusableItemDirective>;
 
     /** @hidden */
-    constructor(public readonly _focusableListService: FocusableListService, private _destroy$: DestroyedService) {
-        super(1);
-    }
+    public readonly _itemFocused$ = new Subject<void>();
+
+    /** @hidden */
+    public readonly _keydown$ = new Subject<FocusableListKeydownEvent>();
+
+    /** @hidden */
+    private keyManager?: FocusKeyManager<FocusableItem>;
+
+    /** @hidden */
+    private readonly _refreshItems$ = new Subject<void>();
+
+    /** @hidden */
+    constructor(private _renderer: Renderer2, private _destroy$: DestroyedService) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -82,13 +102,71 @@ export class FocusableListDirective extends ReplaySubject<FocusableListEvent> im
                         focus: () => item.elementRef().nativeElement.focus()
                     }));
 
-                    this._focusableListService.initialize(focusableItems, this, {
+                    this._initializeFocusManager(focusableItems, this, {
                         direction: this.navigationDirection,
                         contentDirection: this.contentDirection,
                         wrap: this.wrap
                     });
                 }),
                 takeUntil(this._destroy$)
+            )
+            .subscribe();
+    }
+
+    /** Set list's items tabbable state */
+    setItemsTabbable(state: boolean): void {
+        this._focusableItems.forEach((item) => item.setTabbable(state));
+    }
+
+    /** Set active item in list */
+    setActiveItem(index: number): void {
+        this.keyManager?.setActiveItem(index);
+    }
+
+    /** @hidden */
+    private _initializeFocusManager(
+        items: FocusableItem[],
+        list: FocusableListDirective,
+        config: FocusableListConfig = {}
+    ): void {
+        this._refreshItems$.next();
+
+        let keyManager = new FocusKeyManager<any>(items);
+
+        if (config.wrap !== false) {
+            keyManager = keyManager.withWrap();
+        }
+
+        if (config.direction === 'horizontal') {
+            keyManager = keyManager.withHorizontalOrientation(config.contentDirection || 'ltr'); // should be replaced
+        }
+
+        keyManager.skipPredicate((item) => !(typeof item.focusable === 'boolean' ? item.focusable : item.focusable()));
+
+        this.keyManager = keyManager;
+
+        const events$ = items.map((item) => fromEvent<KeyboardEvent>(getNativeElement(item), 'keydown'));
+        const focusListenerDestroyers = items.map((item) =>
+            this._renderer.listen(getNativeElement(item), 'focus', () => {
+                this._itemFocused$.next();
+                this._focusableItems.forEach((i) => i.setTabbable(i.elementRef() === item.elementRef()));
+                this.keyManager?.setActiveItem(item.index);
+            })
+        );
+
+        merge(...events$)
+            .pipe(
+                tap((event: KeyboardEvent) => {
+                    this._keydown$.next({ list, event, activeItemIndex: this.keyManager?.activeItemIndex });
+
+                    if (event.defaultPrevented) {
+                        return;
+                    }
+
+                    this.keyManager?.onKeydown(event);
+                }),
+                takeUntil(merge(this._refreshItems$, this._destroy$)),
+                finalize(() => focusListenerDestroyers.forEach((d) => d()))
             )
             .subscribe();
     }
