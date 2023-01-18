@@ -1,6 +1,6 @@
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { AfterViewInit, ContentChildren, Directive, Input, QueryList } from '@angular/core';
-import { map, merge, startWith, switchMap, takeUntil, tap } from 'rxjs';
+import { merge, startWith, switchMap, takeUntil } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { Nullable } from '../../models/nullable';
 import { DestroyedService } from '../../services';
@@ -44,26 +44,22 @@ export class FocusableGridDirective implements AfterViewInit {
         this._focusableLists.changes
             .pipe(
                 startWith(this._focusableLists),
-                map((queryList: QueryList<FocusableListDirective>) =>
+                switchMap((queryList: QueryList<FocusableListDirective>) =>
                     merge(...queryList.toArray().map((list) => list._itemFocused$))
                 ),
-                switchMap((subject) => subject),
-                tap(() => this._focusableLists.forEach((list) => list.setItemsTabbable(false))),
                 takeUntil(this._destroy$)
             )
-            .subscribe();
+            .subscribe(() => this._focusableLists.forEach((list) => list._setItemsTabbable(false)));
 
         this._focusableLists.changes
             .pipe(
                 startWith(this._focusableLists),
-                map((queryList: QueryList<FocusableListDirective>) =>
+                switchMap((queryList: QueryList<FocusableListDirective>) =>
                     merge(...queryList.toArray().map((list) => list._keydown$))
                 ),
-                switchMap((subject) => subject),
-                tap(({ event, list, activeItemIndex }) => this._onKeydown(event, list, activeItemIndex)),
                 takeUntil(this._destroy$)
             )
-            .subscribe();
+            .subscribe(({ event, list, activeItemIndex }) => this._onKeydown(event, list, activeItemIndex));
     }
 
     /** @hidden */

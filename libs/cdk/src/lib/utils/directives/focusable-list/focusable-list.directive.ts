@@ -116,14 +116,14 @@ export class FocusableListDirective implements AfterViewInit {
             .subscribe();
     }
 
-    /** Set list's items tabbable state */
-    setItemsTabbable(state: boolean): void {
-        this._focusableItems.forEach((item) => item.setTabbable(state));
-    }
-
     /** Set active item in list */
     setActiveItem(index: number): void {
         this.keyManager?.setActiveItem(index);
+    }
+
+    /** @hidden */
+    _setItemsTabbable(state: boolean): void {
+        this._focusableItems.forEach((item) => item.setTabbable(state));
     }
 
     /** @hidden */
