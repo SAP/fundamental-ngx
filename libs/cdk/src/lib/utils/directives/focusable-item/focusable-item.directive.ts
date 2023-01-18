@@ -12,9 +12,9 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { FocusableObserver } from './focusable.observer';
 import { takeUntil } from 'rxjs';
 
-export interface ItemPosition {
-    row: number;
-    col: number;
+export interface FocusableItemPosition {
+    rowIndex: number;
+    colIndex: number;
     totalRows: number;
     totalCols: number;
 }
@@ -66,15 +66,15 @@ export class FocusableItemDirective implements HasElementRef {
         return this._focusChild;
     }
 
-    /** @hidden */
-    private _focusChild = false;
-
     /** Function, that returns a string to be announced by screen-reader whenever item which is in grid receives focus. */
     @Input()
-    cellFocusedEventAnnouncer: (position: ItemPosition) => string = this._defaultItemFocusedEventAnnouncer;
+    cellFocusedEventAnnouncer: (position: FocusableItemPosition) => string = this._defaultItemFocusedEventAnnouncer;
 
     /** @hidden */
-    private _position: ItemPosition;
+    _position: FocusableItemPosition;
+
+    /** @hidden */
+    private _focusChild = false;
 
     /** @hidden */
     private _focusable = true;
@@ -133,11 +133,6 @@ export class FocusableItemDirective implements HasElementRef {
     }
 
     /** @hidden */
-    _setPosition(position: ItemPosition): void {
-        this._position = position;
-    }
-
-    /** @hidden */
     @HostListener('focusin')
     async _onFocusin(): Promise<void> {
         if (this._timerId != null) {
@@ -191,7 +186,9 @@ export class FocusableItemDirective implements HasElementRef {
     }
 
     /** @hidden */
-    private _defaultItemFocusedEventAnnouncer(position: ItemPosition): string {
-        return `Column ${position.col + 1} of ${position.totalCols}, row: ${position.row + 1} of ${position.totalRows}`;
+    private _defaultItemFocusedEventAnnouncer(position: FocusableItemPosition): string {
+        return `Column ${position.colIndex + 1} of ${position.totalCols}, row: ${position.rowIndex + 1} of ${
+            position.totalRows
+        }`;
     }
 }

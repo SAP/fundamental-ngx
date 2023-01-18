@@ -1,10 +1,11 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { AfterViewInit, ContentChildren, Directive, Input, QueryList } from '@angular/core';
+import { AfterViewInit, ContentChildren, Directive, EventEmitter, Input, Output, QueryList } from '@angular/core';
 import { merge, startWith, switchMap, takeUntil } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { Nullable } from '../../models/nullable';
 import { DestroyedService } from '../../services';
+import { FocusableItemPosition } from '../focusable-item';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective } from '../focusable-list';
 
 @Directive({
@@ -32,6 +33,10 @@ export class FocusableGridDirective implements AfterViewInit {
     @Input()
     shortRowFocus: Nullable<'first' | 'last'> = null;
 
+    /** Event emitted when item focused, contains item's position info. */
+    @Output()
+    readonly itemFocused = new EventEmitter<FocusableItemPosition>();
+
     /** @hidden */
     private _wrapHorizontally = false;
 
@@ -48,7 +53,7 @@ export class FocusableGridDirective implements AfterViewInit {
             .pipe(startWith(this._focusableLists), takeUntil(this._destroy$))
             .subscribe((lists) =>
                 lists.forEach((list, index) =>
-                    list._setPosition({ row: index, totalRows: this._focusableLists.length })
+                    list._setGridPosition({ rowIndex: index, totalRows: this._focusableLists.length })
                 )
             );
 
@@ -56,11 +61,15 @@ export class FocusableGridDirective implements AfterViewInit {
             .pipe(
                 startWith(this._focusableLists),
                 switchMap((queryList: QueryList<FocusableListDirective>) =>
-                    merge(...queryList.toArray().map((list) => list._itemFocused$))
+                    merge(...queryList.toArray().map((list) => list._gridItemFocused$))
                 ),
                 takeUntil(this._destroy$)
             )
-            .subscribe(() => this._focusableLists.forEach((list) => list._setItemsTabbable(false)));
+            .subscribe((focusedEvent) => {
+                this.itemFocused.emit(focusedEvent);
+
+                this._focusableLists.forEach((list) => list._setItemsTabbable(false));
+            });
 
         this._focusableLists.changes
             .pipe(

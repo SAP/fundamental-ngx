@@ -1,6 +1,15 @@
-import { AfterViewInit, ContentChildren, Directive, Input, QueryList, Renderer2 } from '@angular/core';
+import {
+    AfterViewInit,
+    ContentChildren,
+    Directive,
+    EventEmitter,
+    Input,
+    Output,
+    QueryList,
+    Renderer2
+} from '@angular/core';
 import { finalize, map, startWith, takeUntil, tap } from 'rxjs/operators';
-import { FocusableItemDirective } from '../focusable-item/focusable-item.directive';
+import { FocusableItemDirective, FocusableItemPosition } from '../focusable-item/focusable-item.directive';
 import { DestroyedService } from '../../services/destroyed.service';
 import {
     DeprecatedSelector,
@@ -12,8 +21,13 @@ import { FDK_FOCUSABLE_LIST_DIRECTIVE } from './focusable-list.tokens';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { Nullable } from '../../models/nullable';
 import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
-import { HasElementRef } from '../../interfaces';
 import { getNativeElement } from '../../helpers';
+import { HasElementRef } from '../../interfaces';
+
+export interface FocusableListItemFocusedEvent {
+    index: number;
+    total: number;
+}
 
 export interface FocusableListKeydownEvent {
     list: FocusableListDirective;
@@ -27,7 +41,7 @@ interface FocusableListConfig {
     contentDirection?: 'ltr' | 'rtl' | null;
 }
 
-export type FocusableItem = FocusableOption & HasElementRef & { focusable: (() => boolean) | boolean; index: number };
+export type FocusableItem = FocusableOption & HasElementRef & { index: number; focusable: (() => boolean) | boolean };
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -69,21 +83,25 @@ export class FocusableListDirective implements AfterViewInit {
     @Input()
     wrap = false;
 
+    /** Event emitted when item focused, contains item's position info. */
+    @Output()
+    readonly itemFocused = new EventEmitter<FocusableListItemFocusedEvent>();
+
     /** @hidden */
     @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
     public readonly _focusableItems: QueryList<FocusableItemDirective>;
 
     /** @hidden */
-    public readonly _itemFocused$ = new Subject<void>();
+    public readonly _gridItemFocused$ = new Subject<FocusableItemPosition>();
 
     /** @hidden */
     public readonly _keydown$ = new Subject<FocusableListKeydownEvent>();
 
     /** @hidden */
-    private keyManager?: FocusKeyManager<FocusableItem>;
+    private _gridPosition: { rowIndex: number; totalRows: number };
 
     /** @hidden */
-    private _position: { row: number; totalRows: number };
+    private _keyManager?: FocusKeyManager<FocusableItem>;
 
     /** @hidden */
     private readonly _refreshItems$ = new Subject<void>();
@@ -119,7 +137,7 @@ export class FocusableListDirective implements AfterViewInit {
     /** Set active item in list */
     setActiveItem(index: number): void {
         if (this._focusableItems.get(index)?.fdkFocusableItem) {
-            this.keyManager?.setActiveItem(index);
+            this._keyManager?.setActiveItem(index);
         }
     }
 
@@ -129,14 +147,19 @@ export class FocusableListDirective implements AfterViewInit {
     }
 
     /** @hidden */
-    _setPosition(position: { row: number; totalRows: number }): void {
-        this._position = position;
+    _setGridPosition(position: { rowIndex: number; totalRows: number }): void {
+        this._gridPosition = position;
 
         this._focusableItems.changes
             .pipe(startWith(this._focusableItems), takeUntil(this._destroy$))
             .subscribe((items) =>
-                items.forEach((item, index) =>
-                    item._setPosition({ ...this._position, col: index, totalCols: this._focusableItems.length })
+                items.forEach(
+                    (item, index) =>
+                        (item._position = {
+                            ...this._gridPosition,
+                            colIndex: index,
+                            totalCols: this._focusableItems.length
+                        })
                 )
             );
     }
@@ -161,27 +184,36 @@ export class FocusableListDirective implements AfterViewInit {
 
         keyManager.skipPredicate((item) => !(typeof item.focusable === 'boolean' ? item.focusable : item.focusable()));
 
-        this.keyManager = keyManager;
+        this._keyManager = keyManager;
 
         const events$ = items.map((item) => fromEvent<KeyboardEvent>(getNativeElement(item), 'keydown'));
-        const focusListenerDestroyers = items.map((item) =>
+        const focusListenerDestroyers = items.map((item, index) =>
             this._renderer.listen(getNativeElement(item), 'focus', () => {
-                this._itemFocused$.next();
-                this._focusableItems.forEach((i) => i.setTabbable(i.elementRef() === item.elementRef()));
-                this.keyManager?.setActiveItem(item.index);
+                const directiveItem = this._focusableItems.get(index);
+                if (!directiveItem) {
+                    return;
+                }
+
+                if (this._gridPosition) {
+                    this._gridItemFocused$.next(directiveItem._position);
+                }
+
+                this.itemFocused.next({ index: item.index, total: items.length });
+                this._focusableItems.forEach((i) => i.setTabbable(i === directiveItem));
+                this._keyManager?.setActiveItem(item.index);
             })
         );
 
         merge(...events$)
             .pipe(
                 tap((event: KeyboardEvent) => {
-                    this._keydown$.next({ list, event, activeItemIndex: this.keyManager?.activeItemIndex });
+                    this._keydown$.next({ list, event, activeItemIndex: this._keyManager?.activeItemIndex });
 
                     if (event.defaultPrevented) {
                         return;
                     }
 
-                    this.keyManager?.onKeydown(event);
+                    this._keyManager?.onKeydown(event);
                 }),
                 takeUntil(merge(this._refreshItems$, this._destroy$)),
                 finalize(() => focusListenerDestroyers.forEach((d) => d()))

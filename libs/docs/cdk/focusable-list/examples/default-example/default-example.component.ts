@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FocusableListItemFocusedEvent } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fundamental-ngx-focusable-list-default-example',
@@ -29,5 +30,7 @@ export class DefaultExampleComponent {
     focusableItems = new Array(5).fill(undefined);
     selectedItemIndex = 2;
 
-    constructor() {}
+    itemFocused(event: FocusableListItemFocusedEvent): void {
+        console.log(event);
+    }
 }
