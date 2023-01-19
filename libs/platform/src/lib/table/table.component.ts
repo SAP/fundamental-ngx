@@ -771,11 +771,19 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     @HostListener('keydown', ['$event'])
     _onKeyDown(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, LEFT_ARROW) && event.shiftKey && this._headerCellFocused) {
+        if (
+            (KeyUtil.isKeyCode(event, LEFT_ARROW) || (this._rtl && KeyUtil.isKeyCode(event, RIGHT_ARROW))) &&
+            event.shiftKey &&
+            this._headerCellFocused
+        ) {
             this._tableColumnResizeService._processResize(-32);
             event.preventDefault();
             event.stopImmediatePropagation();
-        } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW) && event.shiftKey && this._headerCellFocused) {
+        } else if (
+            (KeyUtil.isKeyCode(event, RIGHT_ARROW) || (this._rtl && KeyUtil.isKeyCode(event, LEFT_ARROW))) &&
+            event.shiftKey &&
+            this._headerCellFocused
+        ) {
             this._tableColumnResizeService._processResize(32);
             event.preventDefault();
             event.stopImmediatePropagation();
