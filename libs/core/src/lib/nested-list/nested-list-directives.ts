@@ -7,17 +7,14 @@ import {
     HostBinding,
     HostListener,
     Input,
-    OnChanges,
-    OnInit,
     Optional,
     ViewEncapsulation
 } from '@angular/core';
 import { NestedItemService } from './nested-item/nested-item.service';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 
 let uniqueId = 0;
 
@@ -43,20 +40,12 @@ export class NestedListHeaderDirective {
     }
 }
 
-@Directive({
-    selector: '[fdNestedDirectivesIcon], [fd-nested-list-icon]'
+@Component({
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[fdNestedDirectivesIcon], [fd-nested-list-icon]',
+    template: `<ng-content></ng-content>`
 })
-export class NestedListIconDirective implements CssClassBuilder, OnChanges, OnInit {
-    /** The property allows user to pass additional css classes */
-    @Input()
-    class = '';
-
-    /**
-     * The icon name to display. See the icon page for the list of icons
-     * here: https://sap.github.io/fundamental-ngx/icon
-     */
-    @Input() glyph: string;
-
+export class NestedListIconComponent extends IconComponent {
     /** Role attribute */
     @Input()
     @HostBinding('attr.role')
@@ -65,30 +54,6 @@ export class NestedListIconDirective implements CssClassBuilder, OnChanges, OnIn
     /** @hidden */
     @HostBinding('class.fd-nested-list__icon')
     fdNestedListIconClass = true;
-
-    /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden CssClassBuilder interface implementation */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return ['fd-nested-list__icon', this.glyph ? `sap-icon--${this.glyph}` : '', this.class];
-    }
-
-    /** HasElementRef interface implementation */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
-    }
 }
 
 @Directive({

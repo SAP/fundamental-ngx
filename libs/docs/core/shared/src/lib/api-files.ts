@@ -265,7 +265,7 @@ export const API_FILES = {
         'NestedListDirective',
         'NestedListPopoverComponent',
         'NestedListHeaderDirective',
-        'NestedListIconDirective',
+        'NestedListIconComponent',
         'NestedListItem',
         'NestedListModel',
         'NestedListLink',
