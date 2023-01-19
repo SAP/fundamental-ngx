@@ -249,6 +249,11 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     /** @hidden */
+    get _totalPages(): number {
+        return this.paginationService.getTotalPages(this.paginationObject);
+    }
+
+    /** @hidden */
     get _totalPagesElementId(): string {
         return this.id + '__total';
     }

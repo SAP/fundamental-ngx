@@ -1,3 +1,12 @@
+# [0.39.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.6...v0.39.0-rc.7) (2023-01-16)
+
+
+### Bug Fixes
+
+* **core:** pagination mobile displaying total items count instead of total pages ([#9210](https://github.com/SAP/fundamental-ngx/issues/9210)) ([0775372](https://github.com/SAP/fundamental-ngx/commit/0775372d679bd4cd7a804d6264aa5c5d9a39eea9))
+
+
+
 # [0.39.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.5...v0.39.0-rc.6) (2023-01-12)
 
 
