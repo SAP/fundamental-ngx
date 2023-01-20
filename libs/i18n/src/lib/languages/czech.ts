@@ -66,7 +66,8 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         ariaLabel: 'Přepínač produktu'
     },
     coreShellbar: {
-        collapsedItemMenuLabel: 'Nabídka sbalených položek'
+        collapsedItemMenuLabel: 'Nabídka sbalených položek',
+        cancel: 'Cancel'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimální hodnota posuvníku je {{ min }}, maximální hodnota je {{ max }}',

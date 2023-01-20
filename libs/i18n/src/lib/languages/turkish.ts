@@ -66,7 +66,8 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         ariaLabel: 'Ürün Anahtarı'
     },
     coreShellbar: {
-        collapsedItemMenuLabel: 'Daraltılmış Öğe Menüsü'
+        collapsedItemMenuLabel: 'Daraltılmış Öğe Menüsü',
+        cancel: 'Cancel'
     },
     coreSlider: {
         singleMinMaxDetails: ' Kaydırıcının {{ min }} minimum değeri, {{ max }} maksimum değeri',

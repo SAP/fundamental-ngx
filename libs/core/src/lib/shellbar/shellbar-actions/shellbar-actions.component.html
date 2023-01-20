@@ -2,16 +2,27 @@
     <ng-content select="fd-combobox"></ng-content>
 </div>
 
+<!-- <ng-container cdkPortalOutlet></ng-container> -->
+
+<!-- If portal outlet placed outside div, it will be added to the end of the root container. So this div actually keeps outlet in desired place. -->
+<div class="fd-shellbar__action" cdkPortalOutlet>
+    <!-- <ng-container cdkPortalOutlet></ng-container> -->
+</div>
+
 <div class="fd-shellbar__action fd-shellbar__action--mobile">
     <fd-shellbar-actions-mobile
         [shellbarActions]="shellbarActions"
         [collapsedItemMenuLabel]="collapsedItemMenuLabel"
+        [searchExists]="!!_searchPortal"
+        (showSearch)="toggleSearch()"
     ></fd-shellbar-actions-mobile>
 </div>
 
 <div class="fd-shellbar__action fd-shellbar__action--desktop">
     <ng-content></ng-content>
 </div>
+
+<fd-shellbar-action *ngIf="_addSearchIcon && !showSearch" glyph="search" [callback]="toggleSearch"></fd-shellbar-action>
 
 <ng-content select="fd-shellbar-action"></ng-content>
 

@@ -91,7 +91,8 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         ariaLabel: 'Переключатель'
     },
     coreShellbar: {
-        collapsedItemMenuLabel: 'Свернутое меню элементов'
+        collapsedItemMenuLabel: 'Свернутое меню элементов',
+        cancel: 'Отмена'
     },
     coreSlider: {
         singleMinMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',

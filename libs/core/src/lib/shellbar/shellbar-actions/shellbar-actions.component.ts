@@ -6,7 +6,11 @@ import {
     ViewEncapsulation,
     ContentChild,
     ViewChild,
-    ChangeDetectionStrategy
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    inject,
+    Output,
+    EventEmitter
 } from '@angular/core';
 
 import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
@@ -16,6 +20,8 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
+import { CdkPortalOutlet, DomPortal } from '@angular/cdk/portal';
+import { ShellbarSizes } from '../shellbar.component';
 
 /**
  * The component that represents shellbar actions.
@@ -67,6 +73,12 @@ export class ShellbarActionsComponent {
     @Input()
     collapsedItemMenuLabel: string;
 
+    /**
+     * Event emitted when search opened.
+     */
+    @Output()
+    searchOpen = new EventEmitter<boolean>();
+
     /** @hidden */
     @ContentChildren(ShellbarActionComponent)
     shellbarActions: QueryList<ShellbarActionComponent>;
@@ -88,16 +100,28 @@ export class ShellbarActionsComponent {
     productSwitchComponent: ProductSwitchComponent;
 
     /** @hidden */
-    triggerItems(): void {
-        if (this.closePopoverOnSelect) {
-            if (this.userComponentView) {
-                this.userComponentView.menu.close();
-            }
-            if (this.userComponent) {
-                this.userComponent.menu.close();
-            }
-        }
-    }
+    @ViewChild(CdkPortalOutlet)
+    portal: CdkPortalOutlet;
+
+    /** @hidden */
+    _addSearchIcon = false;
+
+    /** @hidden */
+    _searchPortal: DomPortal;
+
+    /** @hidden */
+    showSearch = false;
+
+    /** @hidden */
+    private readonly _cd = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    currentSize: ShellbarSizes;
+
+    /** @hidden */
+    toggleSearch: () => void = () => {
+        this.setSearchVisibility(!this.showSearch);
+    };
 
     /** @hidden */
     public get userItem(): ShellbarUser {
@@ -106,5 +130,57 @@ export class ShellbarActionsComponent {
         } else {
             return this.user;
         }
+    }
+
+    /** @hidden */
+    attachSearch(portal: DomPortal, size: ShellbarSizes): void {
+        this._searchPortal = portal;
+        this._addSearchIcon = true;
+        this.currentSize = size;
+        this._toggleSearchPortal(this.showSearch);
+        this._cd.detectChanges();
+    }
+
+    /** @hidden */
+    detachSearch(): void {
+        if (this.portal?.hasAttached()) {
+            this.portal.detach();
+        }
+
+        this._addSearchIcon = false;
+
+        this._cd.detectChanges();
+    }
+
+    /** @hidden */
+    triggerItems(): void {
+        if (!this.closePopoverOnSelect) {
+            return;
+        }
+        this.userComponentView?.menu.close();
+        this.userComponent?.menu.close();
+    }
+
+    /** @hidden */
+    setSearchVisibility(visible: boolean): void {
+        this.showSearch = visible;
+        this.searchOpen.emit(this.showSearch);
+
+        if (this.currentSize === 's') {
+            return;
+        }
+
+        this._toggleSearchPortal(visible);
+    }
+
+    /** @hidden */
+    private _toggleSearchPortal(visible: boolean): void {
+        if (visible) {
+            this.portal.detach();
+            this.portal.attach(this._searchPortal);
+        } else {
+            this.portal.detach();
+        }
+        this._cd.detectChanges();
     }
 }

@@ -1,3 +1,21 @@
+<fd-docs-section-title id="how-it-works" componentName="shellbar"> How it works </fd-docs-section-title>
+<description>
+    <ul>
+        <li>The shellbar should be placed inside the shell layout container.</li>
+        <li>The shellbar is fluid and responsive by default with proper margins and padding built in.</li>
+        <li>The shellbar actions are duplicated into the overflow menu on mobile screens.</li>
+        <li>
+            Product menu data gets passed as inputs to the <code>&lt;fd-product-menu></code> component. The user, user
+            menu and product switcher are passed as inputs to the <code>&lt;fd-shellbar-actions></code> component. Data
+            for each action gets passed as inputs to the <code>&lt;fd-shellbar-action></code> component. The response to
+            clicks on any of these items is handled via callback functions for each object. See the 'collapsible'
+            example to gain an understanding of how this works.
+        </li>
+    </ul>
+</description>
+
+<separator></separator>
+
 <fd-docs-section-title id="basic" componentName="shellbar"> Basic </fd-docs-section-title>
 <description>
     This example shows the minimum shellbar for a single application product with only user settings. If no user
@@ -14,18 +32,31 @@
     Links with collapsible menu and product switcher.
 </fd-docs-section-title>
 <description>
-    The shellbar can have 4 different sizes <code>'s' | 'm' | 'l' | 'xl'</code>, where <code>"m"</code> is default one.
-    <br />
-    When a product has multiple links, the product links should collapse into an overflow menu on mobile screens (<code
-        >s</code
-    >
-    size). All actions, except for the user menu, should be collapsed.
-    <br />
-    <code>ProductSwitchComponent</code> and <code>ProductMenuComponent</code> have properties straight from popover
-    component, so some customisation can be added, by passing inputs ex. <code>[position]="'bottom-end'"</code>.
+    <p>The shellbar can have 4 different sizes <code>'s' | 'm' | 'l' | 'xl'</code>.</p>
+    <p>
+        When a product has multiple links, the product links should collapse into an overflow menu on mobile screens
+        (<code>s</code> size).
+    </p>
+    <p>All actions, except for the user menu, should be collapsed.</p>
+    <p>
+        <code>ProductSwitchComponent</code> and <code>ProductMenuComponent</code> have properties straight from popover
+        component, so some customisation can be added, by passing inputs ex. <code>[position]="'bottom-end'"</code>.
+    </p>
 </description>
 <component-example>
     <fd-shellbar-collapsible-example></fd-shellbar-collapsible-example>
+</component-example>
+<code-example [exampleFiles]="shellbarCollapsible"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="responsive" componentName="shellbar"> Responsive Shellbar </fd-docs-section-title>
+<description>
+    If no <code>size</code> Input property provided, Shellbar will automatically determine which size to apply based on
+    the current width of it.
+</description>
+<component-example>
+    <fd-shellbar-responsive-example></fd-shellbar-responsive-example>
 </component-example>
 <code-example [exampleFiles]="shellbarCollapsible"></code-example>
 
@@ -57,21 +88,3 @@
     <fd-shellbar-side-nav-responsive-example></fd-shellbar-side-nav-responsive-example>
 </component-example>
 <code-example [exampleFiles]="shellbarSideNavResponsive"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="how-it-works" componentName="shellbar"> How it works </fd-docs-section-title>
-<description>
-    <ul>
-        <li>The shellbar should be placed inside the shell layout container.</li>
-        <li>The shellbar is fluid and responsive by default with proper margins and padding built in.</li>
-        <li>The shellbar actions are duplicated into the overflow menu on mobile screens.</li>
-        <li>
-            Product menu data gets passed as inputs to the <code>&lt;fd-product-menu></code> component. The user, user
-            menu and product switcher are passed as inputs to the <code>&lt;fd-shellbar-actions></code> component. Data
-            for each action gets passed as inputs to the <code>&lt;fd-shellbar-action></code> component. The response to
-            clicks on any of these items is handled via callback functions for each object. See the 'collapsible'
-            example to gain an understanding of how this works.
-        </li>
-    </ul>
-</description>

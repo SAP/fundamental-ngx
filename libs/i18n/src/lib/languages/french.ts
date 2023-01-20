@@ -67,7 +67,8 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         ariaLabel: 'Échange de produit'
     },
     coreShellbar: {
-        collapsedItemMenuLabel: "Menu d'éléments réduit"
+        collapsedItemMenuLabel: "Menu d'éléments réduit",
+        cancel: 'Cancel'
     },
     coreSlider: {
         singleMinMaxDetails: 'La valeur minimale du curseur est {{ min }}, la valeur maximale est {{ max }}',

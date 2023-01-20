@@ -87,7 +87,8 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         ariaLabel: 'Продуктов превключвател'
     },
     coreShellbar: {
-        collapsedItemMenuLabel: 'Collapsed Item Menu'
+        collapsedItemMenuLabel: 'Collapsed Item Menu',
+        cancel: 'Cancel'
     },
     coreSlider: {
         singleMinMaxDetails: 'Минималната стойност на плъзгача е {{ min }}, максималната стойност е {{ max }}',

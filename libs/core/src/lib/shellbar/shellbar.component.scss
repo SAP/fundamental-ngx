@@ -1,1 +1,11 @@
 @import 'fundamental-styles/dist/shellbar';
+
+fd-shellbar-actions {
+    .fd-shellbar__search-field {
+        min-width: 15rem;
+    }
+}
+
+.fd-shellbar__action.fd-shellbar__action--desktop:empty {
+    display: none;
+}

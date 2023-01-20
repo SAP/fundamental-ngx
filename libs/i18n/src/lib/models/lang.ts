@@ -102,6 +102,7 @@ export interface FdLanguage {
     };
     coreShellbar: {
         collapsedItemMenuLabel: FdLanguageKey;
+        cancel: FdLanguageKey;
     };
     coreSlider: {
         /**

@@ -6,7 +6,7 @@
                 fdType="transparent"
                 glyph="overflow"
                 class="fd-shellbar__button"
-                [attr.aria-label]="collapsedItemMenuLabel"
+                [attr.aria-label]="collapsedItemMenuLabel || ('coreShellbar.collapsedItemMenuLabel' | fdTranslate)"
             >
                 <span *ngIf="totalNotifications" class="fd-button__badge">
                     {{ totalNotifications }}
@@ -15,6 +15,14 @@
         </fd-action-sheet-control>
 
         <fd-action-sheet-body>
+            <li
+                fd-action-sheet-item
+                *ngIf="searchExists"
+                tabindex="-1"
+                [glyph]="'search'"
+                [label]="'Search'"
+                (click)="showSearch.emit()"
+            ></li>
             <li
                 fd-action-sheet-item
                 *ngFor="let action of shellbarActions"

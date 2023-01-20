@@ -47,6 +47,9 @@ import { SearchFieldMobileComponent } from './search-field-mobile/search-field/s
 import { PlatformSearchFieldMobileModule } from './search-field-mobile/search-field-mobile.module';
 import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
+import { SearchComponent } from '@fundamental-ngx/core/shared';
+import equal from 'fast-deep-equal';
 
 export interface SearchInput {
     text: string;
@@ -83,18 +86,45 @@ export class SearchFieldSuggestionDirective implements FocusableOption {
 
 let searchFieldIdCount = 0;
 
+type Appearance = SearchComponent['appearance'] | undefined;
+
 @Component({
     selector: 'fdp-search-field',
     templateUrl: './search-field.component.html',
     styleUrls: ['./search-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [contentDensityObserverProviders()]
+    providers: [
+        contentDensityObserverProviders(),
+        {
+            provide: FD_SHELLBAR_SEARCH_COMPONENT,
+            useExisting: SearchFieldComponent
+        }
+    ]
 })
 export class SearchFieldComponent
     extends BaseComponent
-    implements OnInit, OnChanges, OnDestroy, SearchFieldMobileInterface
+    implements OnInit, OnChanges, OnDestroy, SearchFieldMobileInterface, SearchComponent
 {
+    /** Type of component used to render the categories dropdown. */
+    @Input()
+    categoryMode: 'menu' | 'select' = 'menu';
+
+    /** Additional appearance configuration. */
+    @Input()
+    set appearance(value: Appearance) {
+        if (equal(value, this.appearance)) {
+            return;
+        }
+
+        this._appearance = value;
+        this._cd.detectChanges();
+    }
+
+    get appearance(): Appearance {
+        return this._appearance;
+    }
+
     /** Place holder text for search input field. */
     @Input()
     placeholder: string;
@@ -205,6 +235,10 @@ export class SearchFieldComponent
     @Input()
     searchSuggestionNavigateMessage: string;
 
+    /** Whether to always show search button. */
+    @Input()
+    forceSearchButton = false;
+
     /** Input change event. */
     @Output()
     inputChange: EventEmitter<SearchInput> = new EventEmitter();
@@ -308,6 +342,9 @@ export class SearchFieldComponent
     private readonly _dataSourceChanged$ = new Subject<void>();
 
     /** @hidden */
+    private _appearance: Appearance;
+
+    /** @hidden */
     @ViewChild('categoryDropdown', { static: false })
     categoryDropdown: PopoverComponent;
 
@@ -341,6 +378,7 @@ export class SearchFieldComponent
 
     /** @hidden */
     constructor(
+        public elementRef: ElementRef<HTMLElement>,
         private readonly _overlay: Overlay,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
