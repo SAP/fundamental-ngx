@@ -4,9 +4,11 @@ import {
     Directive,
     EventEmitter,
     Input,
+    OnChanges,
     Output,
     QueryList,
-    Renderer2
+    Renderer2,
+    SimpleChanges
 } from '@angular/core';
 import { finalize, map, startWith, takeUntil, tap } from 'rxjs/operators';
 import { FocusableItemDirective, FocusableItemPosition } from '../focusable-item/focusable-item.directive';
@@ -68,10 +70,10 @@ export class DeprecatedFocusableListDirective extends DeprecatedSelector {}
         DestroyedService
     ]
 })
-export class FocusableListDirective implements AfterViewInit {
-    /** Direction of navigation. Always horizontal when in grid. */
+export class FocusableListDirective implements OnChanges, AfterViewInit {
+    /** Direction of navigation. Should be set to 'grid' when list is a part of grid. */
     @Input()
-    navigationDirection: 'horizontal' | 'vertical' = 'vertical';
+    navigationDirection: 'horizontal' | 'vertical' | 'grid' = 'vertical';
 
     /** Direction of the content. */
     @Input()
@@ -110,6 +112,27 @@ export class FocusableListDirective implements AfterViewInit {
     constructor(private _renderer: Renderer2, private _destroy$: DestroyedService) {}
 
     /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (!this._keyManager) {
+            return;
+        }
+
+        if (changes.wrap) {
+            this._keyManager = this._keyManager.withWrap(changes.wrap.currentValue);
+        }
+
+        if (changes.contentDirection) {
+            if (changes.contentDirection.currentValue === 'vertical') {
+                this._keyManager = this._keyManager.withVerticalOrientation(true);
+                this._keyManager = this._keyManager.withHorizontalOrientation(null);
+            } else {
+                this._keyManager = this._keyManager.withVerticalOrientation(false);
+                this._keyManager = this._keyManager.withHorizontalOrientation(this.contentDirection || 'ltr');
+            }
+        }
+    }
+
+    /** @hidden */
     ngAfterViewInit(): void {
         this._focusableItems.changes
             .pipe(
@@ -123,8 +146,10 @@ export class FocusableListDirective implements AfterViewInit {
                         focus: () => item.elementRef().nativeElement.focus()
                     }));
 
+                    const direction = this.navigationDirection === 'grid' ? 'horizontal' : this.navigationDirection;
+
                     this._initializeFocusManager(focusableItems, this, {
-                        direction: this.navigationDirection,
+                        direction,
                         contentDirection: this.contentDirection,
                         wrap: this.wrap
                     });
@@ -180,6 +205,7 @@ export class FocusableListDirective implements AfterViewInit {
 
         if (config.direction === 'horizontal') {
             keyManager = keyManager.withHorizontalOrientation(config.contentDirection || 'ltr'); // should be replaced
+            keyManager = keyManager.withVerticalOrientation(false);
         }
 
         keyManager.skipPredicate((item) => !(typeof item.focusable === 'boolean' ? item.focusable : item.focusable()));
