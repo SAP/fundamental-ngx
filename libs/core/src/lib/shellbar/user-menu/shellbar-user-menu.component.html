@@ -31,7 +31,7 @@
             [placement]="placement"
             [fillControlMode]="fillControlMode"
             [closeOnEscapeKey]="closeOnEscapeKey"
-            [noArrow]="false"
+            [noArrow]="noArrow"
             [closeOnOutsideClick]="closeOnOutsideClick"
         >
             <li fd-menu-item *ngFor="let item of userMenu" (click)="itemClick(item, $event)">
