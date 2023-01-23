@@ -1,3 +1,12 @@
+# [0.39.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.9...v0.39.0-rc.10) (2023-01-23)
+
+
+### Bug Fixes
+
+* **platform:** allow for shift+arrow key column resize when header is focused ([#9243](https://github.com/SAP/fundamental-ngx/issues/9243)) ([7aa8cf1](https://github.com/SAP/fundamental-ngx/commit/7aa8cf1c2a1e6d3b10d4da7f4e94ad99954c9f3e))
+
+
+
 # [0.39.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.8...v0.39.0-rc.9) (2023-01-23)
 
 
