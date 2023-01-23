@@ -1,3 +1,12 @@
+# [0.39.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.7...v0.39.0-rc.8) (2023-01-19)
+
+
+### Bug Fixes
+
+* **core,cx:** nested list icon should extend fd-icon ([#9211](https://github.com/SAP/fundamental-ngx/issues/9211)) ([f86deaf](https://github.com/SAP/fundamental-ngx/commit/f86deaf39a8c7a103c4adcc582972f6b7e9afb6f))
+
+
+
 # [0.39.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.6...v0.39.0-rc.7) (2023-01-16)
 
 
