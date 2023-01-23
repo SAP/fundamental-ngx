@@ -117,12 +117,12 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
             return;
         }
 
-        if (changes.wrap) {
+        if (changes['wrap']) {
             this._keyManager = this._keyManager.withWrap(changes.wrap.currentValue);
         }
 
-        if (changes.contentDirection) {
-            if (changes.contentDirection.currentValue === 'vertical') {
+        if (changes['contentDirection']) {
+            if (changes['contentDirection'].currentValue === 'vertical') {
                 this._keyManager = this._keyManager.withVerticalOrientation(true);
                 this._keyManager = this._keyManager.withHorizontalOrientation(null);
             } else {
@@ -205,6 +205,8 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
 
         if (config.direction === 'horizontal') {
             keyManager = keyManager.withHorizontalOrientation(config.contentDirection || 'ltr'); // should be replaced
+
+            // Vertical is enabled by default, so let's disable it here in consistency purposes
             keyManager = keyManager.withVerticalOrientation(false);
         }
 
