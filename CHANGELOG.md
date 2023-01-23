@@ -1,3 +1,12 @@
+# [0.39.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.8...v0.39.0-rc.9) (2023-01-23)
+
+
+### Bug Fixes
+
+* **platform:** dynamnic form item should support select secondaryText etc ([#9252](https://github.com/SAP/fundamental-ngx/issues/9252)) ([b959835](https://github.com/SAP/fundamental-ngx/commit/b959835f95d2da26cbb406187a602b158401f55b))
+
+
+
 # [0.39.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.7...v0.39.0-rc.8) (2023-01-19)
 
 
