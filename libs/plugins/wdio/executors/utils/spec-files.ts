@@ -20,7 +20,7 @@ async function getSpecFiles(projects: string[], context: ExecutorContext): Promi
     const directProjectDependencies = projectGraph.nodes[context.projectName as string].data.files.reduce(
         (deps, file) => {
             if (file.deps) {
-                file.deps.filter((dep) => !!context.workspace.projects[dep]).forEach((dep: string) => deps.add(dep));
+                file.deps.filter((dep) => !!context.workspace?.projects[dep]).forEach((dep: string) => deps.add(dep));
             }
             return deps;
         },
@@ -30,7 +30,7 @@ async function getSpecFiles(projects: string[], context: ExecutorContext): Promi
         return [];
     }
     const dependencies = projects.filter(
-        (p) => directProjectDependencies.has(p) && projectGraph.nodes[p].data.targets.e2e
+        (p) => directProjectDependencies.has(p) && projectGraph.nodes[p].data.targets?.e2e
     );
     const e2eFiles: string[] = [];
     for (const dependency of dependencies) {
