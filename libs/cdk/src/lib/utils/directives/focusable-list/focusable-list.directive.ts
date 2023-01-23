@@ -118,7 +118,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
         }
 
         if (changes['wrap']) {
-            this._keyManager = this._keyManager.withWrap(changes.wrap.currentValue);
+            this._keyManager = this._keyManager.withWrap(changes['wrap'].currentValue);
         }
 
         if (changes['contentDirection']) {
@@ -127,7 +127,9 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
                 this._keyManager = this._keyManager.withHorizontalOrientation(null);
             } else {
                 this._keyManager = this._keyManager.withVerticalOrientation(false);
-                this._keyManager = this._keyManager.withHorizontalOrientation(this.contentDirection || 'ltr');
+                this._keyManager = this._keyManager.withHorizontalOrientation(
+                    changes['contentDirection'].currentValue || 'ltr'
+                );
             }
         }
     }
