@@ -15,6 +15,7 @@ import {
 import { InputType } from '../../input/input.component';
 import { DynamicFormGroup } from './dynamic-form-group';
 import { DynamicFormControl, DynamicFormGroupControl } from '../dynamic-form-control';
+import { TextAlignment } from '../../combobox';
 
 export type DynamicFormItemChoices = number | string | SelectItem;
 /** Advanced error type. Used to render more complex error view with custom error type. */
@@ -227,6 +228,15 @@ export interface DynamicFormFieldItem {
      * Than lower number then higher priority.
      */
     rank?: number;
+
+    /** The field to show data in secondary column */
+    secondaryKey?: string;
+
+    /** Show the second column (Applicable for two columns layout) */
+    showSecondaryText?: boolean;
+
+    /** Horizontally align text inside the second column (Applicable for two columns layout) */
+    secondaryTextAlignment?: TextAlignment;
 }
 
 type PreparedDynamicFormFieldItemFields = {
