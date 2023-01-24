@@ -47,6 +47,12 @@ Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 
 If you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues).
 
+Angular Versions Support: Our versions offer Angular support. More information can be found [here](https://github.com/SAP/fundamental-ngx/wiki/Angular-Versions-Support).
+
+-   Features and enhancements are developed to the latest version of fundamental-ngx.
+
+-   Bugfixes could be downported to the latest ngx version, which which is compiled with second last Angular version.
+
 ## <a name="5"></a>5. Contributing
 
 If you want to contribute, please check the [CONTRIBUTING.md](https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md) documentation for contribution guidelines. Please follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit).
