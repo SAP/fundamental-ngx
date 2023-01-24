@@ -883,7 +883,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         this._cdr.detectChanges();
 
-        if (this.expandOnInit === true) {
+        if (this.expandOnInit) {
             this.expandAll();
         }
     }
