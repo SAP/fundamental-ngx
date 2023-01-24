@@ -8,6 +8,7 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
+    HostListener,
     Injector,
     Input,
     NgZone,
@@ -29,7 +30,7 @@ import set from 'lodash-es/set';
 import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
-import { FdDropEvent, RangeSelector, resizeObservable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { FdDropEvent, KeyUtil, RangeSelector, resizeObservable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
 import { FDP_PRESET_MANAGED_COMPONENT, isDataSource, isString } from '@fundamental-ngx/platform/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
@@ -91,6 +92,7 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
+import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -569,6 +571,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         return this._isShownNavigationColumnSubject.getValue();
     }
 
+    /** @hidden */
+    private get _headerCellFocused(): boolean {
+        return document.activeElement?.tagName.toLowerCase() === 'th';
+    }
+
     /**
      * @hidden
      * Table Column Map. Where key is column key and value is column
@@ -764,6 +771,28 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _currentPreset: PlatformTableManagedPreset = {};
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    _onKeyDown(event: KeyboardEvent): void {
+        if (
+            (KeyUtil.isKeyCode(event, LEFT_ARROW) || (this._rtl && KeyUtil.isKeyCode(event, RIGHT_ARROW))) &&
+            event.shiftKey &&
+            this._headerCellFocused
+        ) {
+            this._tableColumnResizeService._processResize(-32);
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        } else if (
+            (KeyUtil.isKeyCode(event, RIGHT_ARROW) || (this._rtl && KeyUtil.isKeyCode(event, LEFT_ARROW))) &&
+            event.shiftKey &&
+            this._headerCellFocused
+        ) {
+            this._tableColumnResizeService._processResize(32);
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }
 
     /** @hidden */
     constructor(
