@@ -1,3 +1,12 @@
+# [0.39.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.11...v0.39.0-rc.12) (2023-01-25)
+
+
+### Features
+
+* **cdk:** focusable list & item upgrade, focusable grid feature and docs ([#9242](https://github.com/SAP/fundamental-ngx/issues/9242)) ([d8997b5](https://github.com/SAP/fundamental-ngx/commit/d8997b5fed10e94a05e0025f72be0fb9f296cd9b))
+
+
+
 # [0.39.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.10...v0.39.0-rc.11) (2023-01-25)
 
 
