@@ -1,0 +1,19 @@
+<div fdkFocusableGrid wrapHorizontally (itemFocused)="itemFocused($event)">
+    <div *ngFor="let list of [].constructor(3); let rowIndex = index" fdkFocusableList navigationDirection="grid">
+        <span *ngFor="let item of [].constructor(3); let columnIndex = index" fdkFocusableItem focusChild>
+            <ng-container *ngIf="columnIndex === 0"> Content {{ rowIndex + 1 }} - {{ columnIndex + 1 }} </ng-container>
+
+            <ng-container *ngIf="columnIndex === 1">
+                <input placeholder="Content {{ rowIndex + 1 }} - {{ columnIndex + 1 }}" />
+            </ng-container>
+
+            <ng-container *ngIf="columnIndex === 2">
+                <a href="#">Link</a>
+
+                <a href="#">Link</a>
+
+                <a href="#">Link</a>
+            </ng-container>
+        </span>
+    </div>
+</div>
