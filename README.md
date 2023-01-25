@@ -51,7 +51,7 @@ Angular Versions Support: Our versions offer Angular support. More information c
 
 -   Features and enhancements are developed to the latest version of fundamental-ngx.
 
--   Bugfixes could be downported to the latest ngx version, which which is compiled with second last Angular version.
+-   Bugfixes can be downported to the latest ngx version, which is compiled with the second last Angular version.
 
 ## <a name="5"></a>5. Contributing
 
