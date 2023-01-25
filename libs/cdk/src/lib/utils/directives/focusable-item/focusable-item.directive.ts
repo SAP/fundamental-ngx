@@ -66,7 +66,7 @@ export class FocusableItemDirective implements HasElementRef {
         return this._focusChild;
     }
 
-    /** Function, that returns a string to be announced by screen-reader whenever item which is in grid receives focus. */
+    /** Function, which returns a string to be announced by screen-reader whenever an item which is in grid receives focus. */
     @Input()
     cellFocusedEventAnnouncer: (position: FocusableItemPosition) => string = this._defaultItemFocusedEventAnnouncer;
 
