@@ -1,6 +1,7 @@
 import { BooleanInput } from '@angular/cdk/coercion';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
+import { FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fn-list, [fn-list]',
@@ -12,7 +13,8 @@ import { coerceBoolean } from '@fundamental-ngx/fn/utils';
     host: {
         '[class]': `'fn-list ' + (class || '')`,
         '[class.fn-list--byline]': 'byline'
-    }
+    },
+    hostDirectives: [FocusableListDirective]
 })
 export class ListComponent {
     @Input()
