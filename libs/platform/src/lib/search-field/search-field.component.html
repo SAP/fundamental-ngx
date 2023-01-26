@@ -110,6 +110,7 @@
             tabindex="-1"
             [class.fd-menu--compact]="contentDensityObserver.isCompact"
             [class.fd-menu--mobile]="mobile"
+            [class.fd-menu--overflow]="!mobile"
             [attr.id]="_menuId"
             (keydown)="onKeydown($event)"
         >
