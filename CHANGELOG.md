@@ -1,3 +1,12 @@
+# [0.39.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.12...v0.39.0-rc.13) (2023-01-26)
+
+
+### Bug Fixes
+
+* **platform:** add fix for Search Field suggestions menu overflow ([#9237](https://github.com/SAP/fundamental-ngx/issues/9237)) ([5244793](https://github.com/SAP/fundamental-ngx/commit/52447939ed6b92c2fc502d75279211309dc28216))
+
+
+
 # [0.39.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.11...v0.39.0-rc.12) (2023-01-25)
 
 
