@@ -40,6 +40,11 @@ export const ROUTES: Routes = [
                     import('@fundamental-ngx/docs/cdk/focusable-list').then((m) => m.FocusableListDocsModule)
             },
             {
+                path: 'focusable-grid',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/cdk/focusable-grid').then((m) => m.FocusableGridDocsModule)
+            },
+            {
                 path: 'disabled',
                 loadChildren: () => import('@fundamental-ngx/docs/cdk/disabled').then((m) => m.DisabledDocsModule)
             },

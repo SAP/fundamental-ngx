@@ -13,8 +13,8 @@ import {
 } from '@angular/core';
 import {
     FdkDisabledProvider,
-    FdkFocusableItemProvider,
     FdkReadonlyProvider,
+    FocusableItemDirective,
     SelectableItemToken,
     SelectionService
 } from '@fundamental-ngx/cdk/utils';
@@ -42,7 +42,8 @@ import { DestroyedService } from '@fundamental-ngx/cdk/utils';
     host: {
         '[class.fn-list__item]': 'true'
     },
-    providers: [DestroyedService, FdkDisabledProvider, FdkReadonlyProvider, FdkFocusableItemProvider]
+    providers: [DestroyedService, FdkDisabledProvider, FdkReadonlyProvider],
+    hostDirectives: [FocusableItemDirective]
 })
 export class ListItemComponent {
     @Input()
@@ -78,10 +79,8 @@ export class ListItemComponent {
         @Optional() @Inject(ListComponent) private _listComponent: ListComponent | null,
         private _elementRef: ElementRef<HTMLElement>,
         private _disabledProvider: FdkDisabledProvider,
-        private _readonlyProvider: FdkReadonlyProvider,
-        _focusableItemProvider: FdkFocusableItemProvider
+        private _readonlyProvider: FdkReadonlyProvider
     ) {
-        _focusableItemProvider.setFocusable(true);
         if (this._selectionService && this._selectableItem) {
             this.checkboxContext$ = this._selectionService.value$.pipe(
                 map((v) => coerceArray(v)),
