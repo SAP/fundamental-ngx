@@ -24,6 +24,7 @@ export * from './truncate/truncate.directive';
 export * from './truncate/truncate.module';
 export * from './focusable-item';
 export * from './focusable-list';
+export * from './focusable-grid';
 export * from './readonly';
 export * from './disabled';
 export * from './clicked';
