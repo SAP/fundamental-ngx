@@ -172,7 +172,9 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     private _setAriaAttributes(level: number, lang: FdLanguage): void {
         this.nestedItems.forEach((item, i) => {
             item._ariaLevel = level;
-            if (item.linkItem) {
+            if (!item.linkItem) {
+                return;
+            } else {
                 item.linkItem.ariaDescribedby = this._nestedListHeader?.id || null;
                 item.linkItem._ariaLabel = this._translationResolver.resolve(lang, 'coreNestedList.linkItemAriaLabel', {
                     itemDetails: item.linkItem.getTitle(),
