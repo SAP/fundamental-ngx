@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, View
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { InlineHelpFormPlacement } from '../inline-help-placement.type';
+import { TriggerConfig } from '@fundamental-ngx/core/popover';
 
 let formLabelIdCount = 0;
 
@@ -54,7 +55,7 @@ export class FormLabelComponent implements OnChanges {
 
     /** Trigger event names for the inline help. */
     @Input()
-    inlineHelpTriggers: string[] = ['mouseenter', 'mouseleave', 'focusin', 'focusout'];
+    inlineHelpTriggers: (string | TriggerConfig)[] = ['mouseenter', 'mouseleave', 'focusin', 'focusout'];
 
     /**
      * The placement of the inline help.
