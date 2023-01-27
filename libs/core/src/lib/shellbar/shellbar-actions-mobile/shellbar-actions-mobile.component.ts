@@ -25,7 +25,9 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     @Input()
     collapsedItemMenuLabel: string;
 
-    /** @hidden */
+    /**
+     * Whether the search is present in the shellbar.
+     */
     @Input()
     searchExists = false;
 

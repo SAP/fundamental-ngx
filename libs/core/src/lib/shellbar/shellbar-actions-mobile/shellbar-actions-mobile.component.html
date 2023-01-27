@@ -1,5 +1,5 @@
 <div class="fd-shellbar-collapse">
-    <fd-action-sheet placement="bottom-end">
+    <fd-action-sheet placement="bottom-end" #actionSheet>
         <fd-action-sheet-control>
             <button
                 fd-button
@@ -21,7 +21,7 @@
                 tabindex="-1"
                 [glyph]="'search'"
                 [label]="'coreShellbar.search' | fdTranslate"
-                (click)="showSearch.emit()"
+                (click)="showSearch.emit(); actionSheet.close()"
             ></li>
             <li
                 fd-action-sheet-item

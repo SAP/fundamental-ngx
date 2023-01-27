@@ -13,8 +13,8 @@ import {
     EventEmitter
 } from '@angular/core';
 
-import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
-import { ProductSwitchComponent } from '@fundamental-ngx/core/product-switch';
+import { FD_COMBOBOX_COMPONENT, ComboboxInterface } from '@fundamental-ngx/core/combobox';
+import { FD_PRODUCT_SWITCH_COMPONENT, ProductSwitchComponent } from '@fundamental-ngx/core/product-switch';
 
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
@@ -22,6 +22,9 @@ import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 import { CdkPortalOutlet, DomPortal } from '@angular/cdk/portal';
 import { ShellbarSizes } from '../shellbar.component';
+import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
+import { SearchComponent } from '@fundamental-ngx/core/shared';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * The component that represents shellbar actions.
@@ -80,7 +83,7 @@ export class ShellbarActionsComponent {
     searchOpen = new EventEmitter<boolean>();
 
     /** @hidden */
-    @ContentChildren(ShellbarActionComponent)
+    @ContentChildren(FD_SHELLBAR_ACTION_COMPONENT)
     shellbarActions: QueryList<ShellbarActionComponent>;
 
     /** @hidden */
@@ -92,16 +95,16 @@ export class ShellbarActionsComponent {
     userComponentView: ShellbarUserMenuComponent;
 
     /** @hidden */
-    @ContentChild(ComboboxComponent)
-    comboboxComponent: ComboboxComponent;
+    @ContentChild(FD_COMBOBOX_COMPONENT)
+    comboboxComponent: ComboboxInterface;
 
     /** @hidden */
-    @ContentChild(ProductSwitchComponent, { static: false })
+    @ContentChild(FD_PRODUCT_SWITCH_COMPONENT, { static: false })
     productSwitchComponent: ProductSwitchComponent;
 
     /** @hidden */
     @ViewChild(CdkPortalOutlet)
-    portal: CdkPortalOutlet;
+    _portalOutlet: CdkPortalOutlet;
 
     /** @hidden */
     _addSearchIcon = false;
@@ -109,18 +112,23 @@ export class ShellbarActionsComponent {
     /** @hidden */
     _searchPortal: DomPortal;
 
-    /** @hidden */
+    /**
+     * Whether to show the search field.
+     */
     showSearch = false;
 
     /** @hidden */
     private readonly _cd = inject(ChangeDetectorRef);
 
     /** @hidden */
+    private _searchComponent: Nullable<SearchComponent>;
+
+    /** @hidden */
     currentSize: ShellbarSizes;
 
     /** @hidden */
-    toggleSearch: () => void = () => {
-        this.setSearchVisibility(!this.showSearch);
+    _toggleSearch: () => void = () => {
+        this._setSearchVisibility(!this.showSearch);
     };
 
     /** @hidden */
@@ -133,18 +141,19 @@ export class ShellbarActionsComponent {
     }
 
     /** @hidden */
-    attachSearch(portal: DomPortal, size: ShellbarSizes): void {
+    _attachSearch(portal: DomPortal, searchComponent: Nullable<SearchComponent>, size: ShellbarSizes): void {
         this._searchPortal = portal;
         this._addSearchIcon = true;
         this.currentSize = size;
+        this._searchComponent = searchComponent;
         this._toggleSearchPortal(this.showSearch);
         this._cd.detectChanges();
     }
 
     /** @hidden */
-    detachSearch(): void {
-        if (this.portal?.hasAttached()) {
-            this.portal.detach();
+    _detachSearch(): void {
+        if (this._portalOutlet?.hasAttached()) {
+            this._portalOutlet.detach();
         }
 
         this._addSearchIcon = false;
@@ -153,7 +162,7 @@ export class ShellbarActionsComponent {
     }
 
     /** @hidden */
-    triggerItems(): void {
+    _triggerItems(): void {
         if (!this.closePopoverOnSelect) {
             return;
         }
@@ -162,7 +171,7 @@ export class ShellbarActionsComponent {
     }
 
     /** @hidden */
-    setSearchVisibility(visible: boolean): void {
+    _setSearchVisibility(visible: boolean): void {
         this.showSearch = visible;
         this.searchOpen.emit(this.showSearch);
 
@@ -170,17 +179,20 @@ export class ShellbarActionsComponent {
             return;
         }
 
-        this._toggleSearchPortal(visible);
+        this._toggleSearchPortal(visible, visible);
     }
 
     /** @hidden */
-    private _toggleSearchPortal(visible: boolean): void {
+    private _toggleSearchPortal(visible: boolean, focusSearch = false): void {
         if (visible) {
-            this.portal.detach();
-            this.portal.attach(this._searchPortal);
+            this._portalOutlet.detach();
+            this._portalOutlet.attach(this._searchPortal);
         } else {
-            this.portal.detach();
+            this._portalOutlet.detach();
         }
         this._cd.detectChanges();
+        if (focusSearch) {
+            this._searchComponent?.focus();
+        }
     }
 }

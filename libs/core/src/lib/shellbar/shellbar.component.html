@@ -15,7 +15,7 @@
     <div hidden>
         <ng-content></ng-content>
     </div>
-    <div class="fd-shellbar__group fd-shellbar__group--center fd-shellbar__group--mobile-flex" *ngIf="_searchComponent">
+    <div class="fd-shellbar__group fd-shellbar__group--center fd-shellbar__group--mobile-flex" *ngIf="searchComponent">
         <div class="fd-shellbar__action fd-shellbar__action--grow">
             <ng-container cdkPortalOutlet #searchPortalOutlet></ng-container>
         </div>

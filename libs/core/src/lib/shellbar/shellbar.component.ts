@@ -86,25 +86,27 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private _actions: ShellbarActionsComponent;
 
     /** @hidden */
-    searchPortal: DomPortal;
+    private _searchPortal: DomPortal;
 
     /** @hidden */
     @ViewChild('searchPortalOutlet', { static: false, read: CdkPortalOutlet })
-    searchPortalOutlet: CdkPortalOutlet;
+    private readonly _searchPortalOutlet: CdkPortalOutlet;
 
-    /** @hidden */
+    /**
+     * Search component placed inside the shellbar
+     */
     @ContentChild(FD_SHELLBAR_SEARCH_COMPONENT, { descendants: true, static: false })
-    set searchComponent(component: SearchComponent) {
+    set searchComponent(component: Nullable<SearchComponent>) {
         this._searchComponent = component;
         if (!component) {
             return;
         }
 
-        if (this.searchPortal?.isAttached) {
-            this.searchPortal.detach();
+        if (this._searchPortal?.isAttached) {
+            this._searchPortal.detach();
         }
 
-        this.searchPortal = new DomPortal(component.elementRef.nativeElement);
+        this._searchPortal = new DomPortal(component.elementRef.nativeElement);
         component.categoryMode = 'select';
         component.disableRefresh = true;
         component.forceSearchButton = true;
@@ -125,7 +127,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         this._searchSubmitSubscription = component.searchSubmit.pipe(takeUntil(this._destroy$)).subscribe((state) => {
             if (!state.text) {
                 this._showMobileSearch = false;
-                this._actions.setSearchVisibility(false);
+                this._actions._setSearchVisibility(false);
                 this._cd.detectChanges();
             }
         });
@@ -133,12 +135,12 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         this._cd.detectChanges();
     }
 
-    get searchComponent(): SearchComponent {
-        return this._searchComponent!;
+    get searchComponent(): Nullable<SearchComponent> {
+        return this._searchComponent;
     }
 
     /** @hidden */
-    _searchComponent: SearchComponent | undefined = undefined;
+    private _searchComponent: Nullable<SearchComponent>;
 
     /** @hidden */
     @ViewChild('shellbar')
@@ -218,13 +220,13 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
             }
 
             if (showSearch) {
-                this._attachSearch();
+                this._attachSearch(true);
             } else {
                 this._detachSearch();
             }
         });
         this._currentSize$.pipe(distinctUntilChanged(), takeUntil(this._destroy$)).subscribe((size) => {
-            if (!this.searchPortal) {
+            if (!this._searchPortal) {
                 return;
             }
 
@@ -253,7 +255,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     /** @hidden */
     _closeMobileSearch(): void {
         this._showMobileSearch = false;
-        this._actions.setSearchVisibility(false);
+        this._actions._setSearchVisibility(false);
         this._cd.detectChanges();
     }
 
@@ -291,24 +293,28 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    private _attachSearch(): void {
-        if (this.searchPortalOutlet?.hasAttached()) {
+    private _attachSearch(shouldFocus = false): void {
+        if (this._searchPortalOutlet?.hasAttached()) {
             return;
         }
 
-        this._actions.detachSearch();
-        this.searchPortalOutlet?.attach(this.searchPortal);
+        this._actions._detachSearch();
+        this._searchPortalOutlet?.attach(this._searchPortal);
+
+        if (shouldFocus) {
+            this._searchComponent?.focus();
+        }
     }
 
     /** @hidden */
     private _detachSearch(): void {
-        if (!this.searchPortalOutlet?.hasAttached()) {
-            this._actions.attachSearch(this.searchPortal, this._currentSize);
+        if (!this._searchPortalOutlet?.hasAttached()) {
+            this._actions._attachSearch(this._searchPortal, this._searchComponent, this._currentSize);
             return;
         }
 
-        this.searchPortalOutlet.detach();
+        this._searchPortalOutlet.detach();
 
-        this._actions.attachSearch(this.searchPortal, this._currentSize);
+        this._actions._attachSearch(this._searchPortal, this._searchComponent, this._currentSize);
     }
 }

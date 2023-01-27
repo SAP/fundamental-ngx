@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
 
 /**
  * The component that represents a shellbar action.
@@ -16,7 +17,13 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
     selector: 'fd-shellbar-action',
     templateUrl: './shellbar-action.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: FD_SHELLBAR_ACTION_COMPONENT,
+            useExisting: ShellbarActionComponent
+        }
+    ]
 })
 export class ShellbarActionComponent {
     /** The glyph (icon) name */

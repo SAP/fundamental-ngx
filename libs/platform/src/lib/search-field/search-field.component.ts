@@ -438,6 +438,14 @@ export class SearchFieldComponent
         }
     }
 
+    /**
+     * Focuses the search input field.
+     */
+    focus(): void {
+        this.inputField.nativeElement.focus();
+        this._cd.detectChanges();
+    }
+
     /** Capturing onKeydown of input element */
     onKeydown(event: KeyboardEvent): void {
         if (!event) {
@@ -615,7 +623,7 @@ export class SearchFieldComponent
         }
         this._suggestionOverlayRef.detach();
         if (focus) {
-            this.inputField.nativeElement.focus();
+            this.focus();
         }
         this._showDropdown = false;
     }
@@ -631,7 +639,7 @@ export class SearchFieldComponent
         this._isSearchDone = false;
 
         this.closeSuggestionMenu(false);
-        this.inputField.nativeElement.focus();
+        this.focus();
     }
 
     /** @hidden */
