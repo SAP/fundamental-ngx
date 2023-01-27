@@ -383,6 +383,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     editableRowSkeleton: T;
 
+    /** Whether all rows should be collapsed by default after the table is loaded. */
+    @Input()
+    expandOnInit = false;
+
     /** Event emitted when current preset configuration has been changed. */
     @Output()
     presetChanged = new EventEmitter<PlatformTableManagedPreset>();
@@ -878,6 +882,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._listenToTableContainerMouseLeave();
 
         this._cdr.detectChanges();
+
+        if (this.expandOnInit) {
+            this.expandAll();
+        }
     }
 
     /** @hidden */
