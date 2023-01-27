@@ -9,45 +9,9 @@ import { SuggestionItem, SearchInput } from '@fundamental-ngx/platform/search-fi
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformSearchFieldBasicExampleComponent {
-    suggestions: SuggestionItem[] = [
-        {
-            value: 'Apple'
-        },
-        {
-            value: 'Banana'
-        },
-        {
-            value: 'Blueberry'
-        },
-        {
-            value: 'Cherry'
-        },
-        {
-            value: 'Grape'
-        },
-        {
-            value: 'Lemon'
-        },
-        {
-            value: 'Lime'
-        },
-        {
-            value: 'Orange'
-        },
-        {
-            value: 'Peach'
-        },
-        {
-            value: 'Pineapple'
-        },
-        {
-            value: 'Plum'
-        },
-        {
-            value: 'Raspberry'
-        }
-    ];
-
+    suggestions: SuggestionItem[] = Array.from({ length: 40 }, (element, index) => ({
+        value: `List Item ${index + 1}`
+    }));
     searchTerm = '';
     inputText = '';
 

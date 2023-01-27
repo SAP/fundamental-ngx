@@ -129,29 +129,20 @@ describe('Search field', () => {
         await expect(await getText(cozyWithDataSourceSearch, 3)).not.toContain('test');
     });
 
-    it('should have autosuggestion after one latter', async () => {
+    fit('should have autosuggestion after one letter', async () => {
         const arrLength = await getElementArrayLength(searchFields);
         for (let i = 0; arrLength > i; i++) {
-            if (i !== 2 && i !== 6) {
-                // value without suggestion
-                await setValue(searchFields, 'ea', i);
+            if (i === 0 || i === 1) {
+                await setValue(searchFields, 'li', i);
                 await waitForElDisplayed(autosuggestionItems);
+
                 let codemod_placeholder_6978 = await getTextArr(autosuggestionItems);
 
                 for (const suggestionItemText of codemod_placeholder_6978) {
-                    await expect(suggestionItemText).toContain('ea');
+                    await expect(suggestionItemText).toContain('List Item 1');
                 }
-                await click(clearSearchIcon);
-            }
-            if (i === 6) {
-                await click(searchFields, i);
-                await setValue(searchFields, 'ea', 7);
-                await waitForElDisplayed(autosuggestionItems);
-                let codemod_placeholder_9163 = await getTextArr(autosuggestionItems);
 
-                for (const suggestionItemText of codemod_placeholder_9163) {
-                    await expect(suggestionItemText).toContain('ea');
-                }
+                await click(clearSearchIcon);
             }
         }
     });

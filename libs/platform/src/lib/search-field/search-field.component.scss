@@ -38,11 +38,13 @@
 }
 
 .fdp-search-field__suggestion-dropdown {
-    position: static;
-    width: 100%;
-
-    .fd-menu {
+    .fd-menu--overflow {
+        top: 0;
         max-width: none;
+        min-height: 10rem;
+        max-height: 100%;
+        position: absolute;
+        background-color: var(--sapList_Background);
     }
 
     .fd-menu__list {

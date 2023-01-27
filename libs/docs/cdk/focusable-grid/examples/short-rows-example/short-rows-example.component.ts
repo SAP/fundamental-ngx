@@ -1,18 +1,19 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FocusableListItemFocusedEvent } from '@fundamental-ngx/cdk/utils';
 
 @Component({
-    selector: 'fundamental-ngx-focusable-list-default-example',
-    templateUrl: './default-example.component.html',
+    selector: 'fundamental-ngx-focusable-grid-short-rows-default-example',
+    templateUrl: './short-rows-example.component.html',
     styles: [
         `
             [fdkFocusableList] {
-                border: 1px dashed #dedede;
+                display: flex;
             }
 
             [fdkFocusableItem] {
+                flex-grow: 1;
                 cursor: pointer;
                 padding: 5px 7px;
+                border: 1px dashed #dedede;
             }
 
             span[fdkFocusableItem] {
@@ -30,11 +31,6 @@ import { FocusableListItemFocusedEvent } from '@fundamental-ngx/cdk/utils';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefaultExampleComponent {
-    focusableItems = new Array(5).fill(undefined);
-    selectedItemIndex = 2;
-
-    itemFocused(event: FocusableListItemFocusedEvent): void {
-        console.log(event);
-    }
+export class ShortRowsExampleComponent {
+    constructor() {}
 }
