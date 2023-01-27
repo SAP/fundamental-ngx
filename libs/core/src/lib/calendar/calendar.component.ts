@@ -439,7 +439,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      */
     selectedRangeDateChanged(dates: DateRange<D>): void {
         if (dates) {
-            this.selectedRangeDate = { start: dates.start, end: dates.end ? dates.end : dates.start };
+            this.selectedRangeDate = { start: dates.start, end: dates.end };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
             this.onChange(this.selectedRangeDate);
             this.closeCalendar.emit();

@@ -526,6 +526,9 @@ export class DatePickerComponent<D>
             this.onChange(date);
             this.formatInputDate(date);
             this._isInvalidDateInput = !this.isModelValid();
+            if (this.closeOnDateChoose && this.type === 'single') {
+                this.closeCalendar();
+            }
         }
     }
 
@@ -544,16 +547,18 @@ export class DatePickerComponent<D>
      * Method that is triggered by events from calendar component, when there is selected range date changed
      */
     public handleRangeDateChange(dates: DateRange<D>): void {
-        if (
-            dates &&
-            (!this._dateTimeAdapter.datesEqual(this.selectedRangeDate.start, dates.start) ||
-                !this._dateTimeAdapter.datesEqual(this.selectedRangeDate.end, dates.end))
-        ) {
+        const startChanged = !this._dateTimeAdapter.datesEqual(dates.start, this.selectedRangeDate.start);
+        const endChanged = !this._dateTimeAdapter.datesEqual(dates.end, this.selectedRangeDate.end);
+        if (dates && (startChanged || endChanged)) {
+            const shouldClose = this.closeOnDateChoose && dates.end !== null;
             this._inputFieldDate = this._formatDateRange(dates);
             this.selectedRangeDate = { start: dates.start, end: dates.end };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
             this.onChange(this.selectedRangeDate);
             this._isInvalidDateInput = !this.isModelValid();
+            if (shouldClose) {
+                this.closeCalendar();
+            }
         }
     }
 
