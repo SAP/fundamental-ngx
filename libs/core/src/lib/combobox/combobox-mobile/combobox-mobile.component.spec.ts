@@ -24,6 +24,7 @@ describe('ComboboxMobileComponent', () => {
     let comboboxInputComponent: ComboboxInterface = {
         inputText: 'someInputText',
         mobile: false,
+        inShellbar: false,
         mobileConfig: {
             title: 'title',
             approveButtonText: 'approve',

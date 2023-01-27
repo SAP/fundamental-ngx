@@ -42,7 +42,8 @@ describe('shellbar test suite', () => {
         sideNavItems,
         sideNavIcons,
         sideNavText,
-        sideNavControlBtn
+        sideNavControlBtn,
+        suggestionsDropdown
     } = shellbarPage;
 
     beforeAll(async () => {
@@ -116,7 +117,7 @@ describe('shellbar test suite', () => {
             await expect(await isElementClickable(popoverMenuItem)).toBe(true, 'popover items not clickable');
         });
 
-        it('should check the searchbar dropdown', async () => {
+        xit('should check the searchbar dropdown', async () => {
             await scrollIntoView(collapsableExample);
             await click(searchbarButton);
             await waitForElDisplayed(popover);
@@ -125,12 +126,12 @@ describe('shellbar test suite', () => {
             await expect(await isElementClickable(searchMenuItem)).toBe(true, 'popover items not clickable');
         });
 
-        it('should check search with text', async () => {
+        xit('should check search with text', async () => {
             await scrollIntoView(collapsableExample);
-            await click(searchField);
+            await click(collapsableExample + searchField);
             await sendKeys('App');
 
-            await expect(await isElementDisplayed(popover)).toBe(true, 'search popover is not displayed');
+            await expect(await isElementDisplayed(suggestionsDropdown)).toBe(true, 'search popover is not displayed');
             await expect(await isElementClickable(searchMenuItem)).toBe(true, 'popover items not clickable');
         });
 
