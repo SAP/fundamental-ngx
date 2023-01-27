@@ -25,6 +25,16 @@ import {
     ENTER,
     ESCAPE,
     LEFT_ARROW,
+    NUMPAD_EIGHT,
+    NUMPAD_FIVE,
+    NUMPAD_FOUR,
+    NUMPAD_NINE,
+    NUMPAD_ONE,
+    NUMPAD_SEVEN,
+    NUMPAD_SIX,
+    NUMPAD_THREE,
+    NUMPAD_TWO,
+    NUMPAD_ZERO,
     RIGHT_ARROW,
     SHIFT,
     TAB,
@@ -288,6 +298,21 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         LEFT_ARROW
     ];
 
+    /** Keys, that are numbers from number keypad */
+    private readonly _numberPadNumberKeys: number[] = [
+        NUMPAD_ZERO,
+        NUMPAD_ONE,
+        NUMPAD_TWO,
+        NUMPAD_THREE,
+        NUMPAD_FOUR,
+        NUMPAD_FIVE,
+        NUMPAD_SIX,
+        NUMPAD_SEVEN,
+        NUMPAD_SEVEN,
+        NUMPAD_EIGHT,
+        NUMPAD_NINE
+    ];
+
     /** @hidden */
     private _displayFn = (value: any): string => this.displayValue(value);
 
@@ -470,11 +495,15 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
             this.isOpenChangeHandle(false);
         } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this._nonOpeningKeys)) {
-            this.isOpenChangeHandle(true);
+            if (!KeyUtil.isKeyCode(event, this._numberPadNumberKeys)) {
+                this.isOpenChangeHandle(true);
+            }
             const acceptedKeys =
                 !KeyUtil.isKeyCode(event, BACKSPACE) &&
                 !KeyUtil.isKeyType(event, 'alphabetical') &&
-                !KeyUtil.isKeyType(event, 'numeric');
+                !KeyUtil.isKeyType(event, 'numeric') &&
+                !KeyUtil.isKeyCode(event, this._numberPadNumberKeys);
+
             if (this.isEmptyValue && acceptedKeys) {
                 this.listComponent?.setItemActive(0);
             }
