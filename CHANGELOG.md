@@ -1,4 +1,11 @@
 
+### [0.35.6](https://github.com/SAP/fundamental-ngx/compare/v0.35.5...v0.35.6) (2023-01-27)
+
+
+### Bug Fixes
+
+* **platform:** sync between fdp-cols and visible cols ([3af153f](https://github.com/SAP/fundamental-ngx/commit/3af153f8e96415280c2bc68adfa60c0fbd3eca8a))
+
 ### [0.35.5](https://github.com/SAP/fundamental-ngx/compare/v0.35.4...v0.35.5) (2022-12-05)
 
 
