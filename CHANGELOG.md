@@ -1,3 +1,12 @@
+# [0.39.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.17...v0.39.0-rc.18) (2023-01-27)
+
+
+### Bug Fixes
+
+* **platform:** fix form generator inline help open/close issue ([#9282](https://github.com/SAP/fundamental-ngx/issues/9282)) ([e04790d](https://github.com/SAP/fundamental-ngx/commit/e04790d1692b1e303502f4668106e3225e641fec))
+
+
+
 # [0.39.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.16...v0.39.0-rc.17) (2023-01-27)
 
 
