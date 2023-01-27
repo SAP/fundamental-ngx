@@ -1668,6 +1668,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _listenToColumns(): void {
         this.columns.changes.pipe(startWith(null)).subscribe(() => {
             const columns = this.getTableColumns();
+            this.setColumns(columns.map((column) => column.name));
             this._buildColumnsMap(columns);
             this._tableColumnsSubject.next(columns);
         });
