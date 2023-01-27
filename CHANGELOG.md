@@ -1,3 +1,12 @@
+# [0.39.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.15...v0.39.0-rc.16) (2023-01-27)
+
+
+### Bug Fixes
+
+* **platform:** unable to enter numeric values using numeric keypad in combobox ([#9270](https://github.com/SAP/fundamental-ngx/issues/9270)) ([1b95715](https://github.com/SAP/fundamental-ngx/commit/1b95715c9fd65abca80818a7728955f4c5d194a3))
+
+
+
 # [0.39.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.14...v0.39.0-rc.15) (2023-01-27)
 
 
