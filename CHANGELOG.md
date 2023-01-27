@@ -1,3 +1,13 @@
+# [0.39.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.13...v0.39.0-rc.14) (2023-01-27)
+
+
+### Bug Fixes
+
+* **ci:** fixed agents timeout when running e2e tests on local ([#9284](https://github.com/SAP/fundamental-ngx/issues/9284)) ([d441b69](https://github.com/SAP/fundamental-ngx/commit/d441b69a81e3acad5d89cd2b29eafd603b396490))
+* **core:** allow shellbar-user-menu noArrow ([#9268](https://github.com/SAP/fundamental-ngx/issues/9268)) ([7891102](https://github.com/SAP/fundamental-ngx/commit/78911021b55454e9940a4142cd34757e73ee0114))
+
+
+
 # [0.39.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.12...v0.39.0-rc.13) (2023-01-26)
 
 
