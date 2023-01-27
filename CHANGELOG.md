@@ -1,3 +1,12 @@
+# [0.39.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.14...v0.39.0-rc.15) (2023-01-27)
+
+
+### Bug Fixes
+
+* **core:** date-picker respects closeOnDateChoose input now ([#9195](https://github.com/SAP/fundamental-ngx/issues/9195)) ([40fade5](https://github.com/SAP/fundamental-ngx/commit/40fade537c1ef3c11c460f0813b9222889712b9b))
+
+
+
 # [0.39.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.13...v0.39.0-rc.14) (2023-01-27)
 
 
