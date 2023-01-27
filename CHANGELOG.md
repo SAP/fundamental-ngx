@@ -1,3 +1,12 @@
+# [0.39.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.16...v0.39.0-rc.17) (2023-01-27)
+
+
+### Bug Fixes
+
+* **platform:** add property expandOnInit to platform tree table ([#9253](https://github.com/SAP/fundamental-ngx/issues/9253)) ([20ade48](https://github.com/SAP/fundamental-ngx/commit/20ade48a04e5a1396fe447cf51772322c5b8042f))
+
+
+
 # [0.39.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.15...v0.39.0-rc.16) (2023-01-27)
 
 
