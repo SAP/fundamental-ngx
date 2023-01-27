@@ -210,6 +210,13 @@ describe('TableComponent internal', () => {
                 <fdp-column name="status" key="status" label="Status"></fdp-column>
 
                 <fdp-column name="verified" key="isVerified" label="Client Verified"></fdp-column>
+
+                <fdp-column
+                    *ngIf="showInvisibleColumn"
+                    name="invisible"
+                    key="isInvisible"
+                    label="Invisible Column"
+                ></fdp-column>
             </fdp-table>
         `
     })
@@ -221,6 +228,7 @@ describe('TableComponent internal', () => {
         /** So big so table column won't grow on any device */
         customColumnWidth = 10000;
         rowsClass: TableRowClass<any> = 'class';
+        showInvisibleColumn = false;
     }
 
     describe('TableComponent Host', async () => {
@@ -272,6 +280,13 @@ describe('TableComponent internal', () => {
 
         it('should render table', () => {
             expect(tableComponent).toBeTruthy();
+        });
+
+        it('should render hidden column when condition changes', () => {
+            expect(tableComponent.columns.length).toEqual(4);
+            hostComponent.showInvisibleColumn = true;
+            fixture.detectChanges();
+            expect(tableComponent.columns.length).toEqual(5);
         });
 
         describe('column template', () => {
@@ -787,7 +802,7 @@ describe('TableComponent internal', () => {
             { field: 'name', value: 'Product 5', strategy: 'beginsWith', exclude: false }
         ];
         initialGroupBy: CollectionGroup[] = [{ field: 'status', direction: SortDirection.NONE, showAsColumn: true }];
-        initialColumns: string[] = ['name', 'status'];
+        initialColumns: string[] = ['name', 'description', 'status'];
 
         source = new TableDataSource(new TableDataProviderMock());
     }
