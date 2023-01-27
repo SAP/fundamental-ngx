@@ -1,0 +1,22 @@
+<fd-docs-section-title id="simple" componentName="focusableGrid">Basic example</fd-docs-section-title>
+<description>
+    To automatically focus cell's focusable child and remove it from tab sequence, use <code>focusChild</code> input
+    property of the <code>[fdkFocusableItem]</code> directive. <br /><br />
+    To enable wrapping to move focus to the prev/next row when there are no more items in the row in the given
+    direction, use <code>wrapHorizontally</code> input property of the <code>[fdkFocusableGrid]</code> directive.
+</description>
+<component-example [hasBackground]="false">
+    <fundamental-ngx-focusable-grid-default-example></fundamental-ngx-focusable-grid-default-example>
+</component-example>
+<code-example [exampleFiles]="defaultExample"></code-example>
+
+<fd-docs-section-title id="short-rows" componentName="focusableGrid">Short rows</fd-docs-section-title>
+<description>
+    To specify which cell to focus in "short row" (row with less cells than the rest of the rows), use
+    <code>shortRowFocus</code> input property of the <code>[fdkFocusableGrid]</code> directive. It accepts
+    <code>'first' | 'last' | null</code>, where <code>null</code> means to do not move focus (default).
+</description>
+<component-example [hasBackground]="false">
+    <fundamental-ngx-focusable-grid-short-rows-default-example></fundamental-ngx-focusable-grid-short-rows-default-example>
+</component-example>
+<code-example [exampleFiles]="shortRows"></code-example>

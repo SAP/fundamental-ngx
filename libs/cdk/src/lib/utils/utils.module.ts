@@ -6,6 +6,7 @@ import {
     AutoCompleteModule,
     ClickedBehaviorModule,
     DisabledBehaviorModule,
+    FocusableGridModule,
     FocusableItemModule,
     FocusableListModule,
     InitialFocusModule,
@@ -26,6 +27,7 @@ import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
         CommonModule,
         FocusableItemModule,
         FocusableListModule,
+        FocusableGridModule,
         DragAndDropModule,
         OnlyDigitsModule,
         TruncateModule,
@@ -39,14 +41,12 @@ import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
         SelectableListModule,
         ReadonlyBehaviorModule,
         ClickedBehaviorModule,
-        FocusableListModule,
-        FocusableItemModule,
-        DisabledBehaviorModule,
         InitialFocusModule
     ],
     exports: [
         FocusableItemModule,
         FocusableListModule,
+        FocusableGridModule,
         DragAndDropModule,
         OnlyDigitsModule,
         TruncateModule,
@@ -60,9 +60,6 @@ import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
         SelectableListModule,
         ReadonlyBehaviorModule,
         ClickedBehaviorModule,
-        FocusableListModule,
-        FocusableItemModule,
-        DisabledBehaviorModule,
         InitialFocusModule
     ],
     providers: [RtlService, ThemesService]

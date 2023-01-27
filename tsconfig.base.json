@@ -136,6 +136,7 @@
             "@fundamental-ngx/docs/cdk/clicked": ["libs/docs/cdk/clicked/index.ts"],
             "@fundamental-ngx/docs/cdk/data-source": ["libs/docs/cdk/data-source/index.ts"],
             "@fundamental-ngx/docs/cdk/disabled": ["libs/docs/cdk/disabled/index.ts"],
+            "@fundamental-ngx/docs/cdk/focusable-grid": ["libs/docs/cdk/focusable-grid/index.ts"],
             "@fundamental-ngx/docs/cdk/focusable-item": ["libs/docs/cdk/focusable-item/index.ts"],
             "@fundamental-ngx/docs/cdk/focusable-list": ["libs/docs/cdk/focusable-list/index.ts"],
             "@fundamental-ngx/docs/cdk/forms": ["libs/docs/cdk/forms/index.ts"],

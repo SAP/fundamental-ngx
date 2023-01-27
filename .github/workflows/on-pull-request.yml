@@ -112,6 +112,11 @@ jobs:
               if: ${{ steps.firebase_hosting_preview.outputs.details_url }}
               run: |
                   npx nx affected --target=e2e --base=origin/main --head=HEAD --parallel=2 --baseUrl=${{ steps.firebase_hosting_preview.outputs.details_url }} --devServerTarget=""
+
+            - name: Stopping agents # They're no longer needed, so we can stop them to avoid them going on timeout
+              if: ${{ !steps.firebase_hosting_preview.outputs.details_url }}
+              run: npx nx-cloud stop-all-agents
+
             - name: Test affected on local
               if: ${{ !steps.firebase_hosting_preview.outputs.details_url }}
               run: |

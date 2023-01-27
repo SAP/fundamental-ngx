@@ -55,8 +55,8 @@ describe('CalendarComponent', () => {
         spyOn(component.closeCalendar, 'emit');
         spyOn(component, 'onChange');
         component.selectedRangeDateChanged({ start: date1, end: null });
-        expect(component.onChange).toHaveBeenCalledWith({ start: date1, end: date1 });
-        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date1, end: date1 });
+        expect(component.onChange).toHaveBeenCalledWith({ start: date1, end: null });
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date1, end: null });
         expect(component.closeCalendar.emit).toHaveBeenCalled();
     });
 
