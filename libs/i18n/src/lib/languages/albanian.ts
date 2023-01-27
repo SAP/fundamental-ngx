@@ -73,7 +73,8 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     },
     coreShellbar: {
         collapsedItemMenuLabel: 'Menyja e artikullit të palosur',
-        cancel: 'Cancel'
+        cancel: 'Cancel',
+        search: 'Search'
     },
     coreSlider: {
         singleMinMaxDetails: 'Vlera minimale e rrëshqitësit është {{ min }}, vlera maksimale është {{ max }}',

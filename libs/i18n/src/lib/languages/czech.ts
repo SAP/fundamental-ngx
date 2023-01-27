@@ -67,7 +67,8 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
     },
     coreShellbar: {
         collapsedItemMenuLabel: 'Nabídka sbalených položek',
-        cancel: 'Cancel'
+        cancel: 'Cancel',
+        search: 'Search'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimální hodnota posuvníku je {{ min }}, maximální hodnota je {{ max }}',

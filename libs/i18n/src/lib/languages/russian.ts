@@ -92,7 +92,8 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     },
     coreShellbar: {
         collapsedItemMenuLabel: 'Свернутое меню элементов',
-        cancel: 'Отмена'
+        cancel: 'Отмена',
+        search: 'Поиск'
     },
     coreSlider: {
         singleMinMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',

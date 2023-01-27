@@ -91,7 +91,8 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     },
     coreShellbar: {
         collapsedItemMenuLabel: 'Згорнуте меню елементів',
-        cancel: 'Відміна'
+        cancel: 'Відміна',
+        search: 'Пошук'
     },
     coreSlider: {
         singleMinMaxDetails: 'Мінімальне значення слайдера {{min}}, максимальне значення {{ max }}',

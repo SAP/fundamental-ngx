@@ -67,7 +67,8 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
     },
     coreShellbar: {
         collapsedItemMenuLabel: 'छोटा किया गया आइटम मेनू',
-        cancel: 'Cancel'
+        cancel: 'Cancel',
+        search: 'Search'
     },
     coreSlider: {
         singleMinMaxDetails: 'स्लाइडर न्यूनतम मूल्य है {{ min }}, अधिकतम मूल्य है {{ max }}',

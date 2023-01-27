@@ -68,7 +68,8 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
     },
     coreShellbar: {
         collapsedItemMenuLabel: "Menu d'éléments réduit",
-        cancel: 'Cancel'
+        cancel: 'Cancel',
+        search: 'Search'
     },
     coreSlider: {
         singleMinMaxDetails: 'La valeur minimale du curseur est {{ min }}, la valeur maximale est {{ max }}',

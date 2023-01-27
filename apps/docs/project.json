@@ -240,7 +240,7 @@
                     "browserTarget": "docs:build:production"
                 },
                 "hot-module-replacement": {
-                    "hmr": false
+                    "hmr": true
                 },
                 "e2e": {
                     "watch": false,

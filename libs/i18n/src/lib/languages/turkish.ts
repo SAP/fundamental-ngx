@@ -67,7 +67,8 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
     },
     coreShellbar: {
         collapsedItemMenuLabel: 'Daraltılmış Öğe Menüsü',
-        cancel: 'Cancel'
+        cancel: 'Cancel',
+        search: 'Search'
     },
     coreSlider: {
         singleMinMaxDetails: ' Kaydırıcının {{ min }} minimum değeri, {{ max }} maksimum değeri',

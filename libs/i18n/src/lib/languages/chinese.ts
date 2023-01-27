@@ -67,7 +67,8 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
     },
     coreShellbar: {
         collapsedItemMenuLabel: '折叠的项目菜单',
-        cancel: 'Cancel'
+        cancel: 'Cancel',
+        search: 'Search'
     },
     coreSlider: {
         singleMinMaxDetails: '滑动条最小值为{{ min }}，最大值为{{ max }}',

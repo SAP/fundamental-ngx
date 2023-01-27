@@ -68,7 +68,8 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
     },
     coreShellbar: {
         collapsedItemMenuLabel: 'Item de menu contraído',
-        cancel: 'Cancel'
+        cancel: 'Cancel',
+        search: 'Search'
     },
     coreSlider: {
         singleMinMaxDetails: 'Slider el valor mínimo es {{ min }}, el valor máximo es {{ max }}',

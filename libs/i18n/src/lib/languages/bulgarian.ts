@@ -88,7 +88,8 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     },
     coreShellbar: {
         collapsedItemMenuLabel: 'Collapsed Item Menu',
-        cancel: 'Cancel'
+        cancel: 'Cancel',
+        search: 'Search'
     },
     coreSlider: {
         singleMinMaxDetails: 'Минималната стойност на плъзгача е {{ min }}, максималната стойност е {{ max }}',

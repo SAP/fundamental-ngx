@@ -20,7 +20,7 @@
                 *ngIf="searchExists"
                 tabindex="-1"
                 [glyph]="'search'"
-                [label]="'Search'"
+                [label]="'coreShellbar.search' | fdTranslate"
                 (click)="showSearch.emit()"
             ></li>
             <li

@@ -68,7 +68,8 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     },
     coreShellbar: {
         collapsedItemMenuLabel: 'დამალული ელემენტი',
-        cancel: 'Cancel'
+        cancel: 'Cancel',
+        search: 'Search'
     },
     coreSlider: {
         singleMinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{ min }}, მაქსიმუმი - {{ max }}',
