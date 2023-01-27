@@ -1,3 +1,13 @@
+## [0.38.3](https://github.com/SAP/fundamental-ngx/compare/v0.38.2...v0.38.3) (2023-01-27)
+
+
+### Bug Fixes
+
+* **ci:** added execution permissions ([018eb8a](https://github.com/SAP/fundamental-ngx/commit/018eb8a11f7c527303fbaaac2daae88f2115acbf))
+* **ci:** hotfix script fixed ([36d6af5](https://github.com/SAP/fundamental-ngx/commit/36d6af57aed77a948c884146cdd528f1262d4d5f))
+
+
+
 ## [0.38.2](https://github.com/SAP/fundamental-ngx/compare/v0.38.2-rc.16...v0.38.2) (2022-12-28)
 
 
