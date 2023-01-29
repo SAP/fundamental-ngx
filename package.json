@@ -128,7 +128,7 @@
     "dotenv": "16.0.3",
     "eslint": "8.28.0",
     "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jsdoc": "39.6.4",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "fs-extra": "10.1.0",
