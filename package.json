@@ -55,7 +55,7 @@
     "@sap-theming/theming-base-content": "11.1.47",
     "@stackblitz/sdk": "1.8.1",
     "@types/google.visualization": "0.0.68",
-    "@types/node": "14.14.10",
+    "@types/node": "18.11.18",
     "compare-versions": "5.0.1",
     "core-js": "3.26.1",
     "dayjs": "1.11.6",
