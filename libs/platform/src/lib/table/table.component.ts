@@ -1404,7 +1404,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             return;
         }
 
-        event?.preventDefault();
+        if (event) {
+            const eventTarget = event.target as HTMLElement;
+            if (eventTarget.tagName !== 'INPUT' && eventTarget.tagName !== 'TEXTAREA') {
+                event.preventDefault();
+            }
+        }
 
         if (row.navigatable) {
             this._emitRowNavigate(row);
