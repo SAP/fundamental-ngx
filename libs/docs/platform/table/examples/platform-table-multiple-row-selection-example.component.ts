@@ -36,6 +36,7 @@ export interface ExampleItem {
     statusColor?: string;
     date: FdDate;
     verified: boolean;
+    checked?: boolean;
 }
 
 /**
@@ -93,7 +94,8 @@ const ITEMS: ExampleItem[] = [
         status: 'Stocked on demand',
         statusColor: 'informative',
         date: new FdDate(2020, 1, 7),
-        verified: true
+        verified: true,
+        checked: false
     },
     {
         name: 'Astro Laptop 1516',
@@ -105,7 +107,8 @@ const ITEMS: ExampleItem[] = [
         status: 'Out of stock',
         statusColor: 'negative',
         date: new FdDate(2020, 2, 5),
-        verified: true
+        verified: true,
+        checked: true
     },
     {
         name: 'Astro Phone 6',

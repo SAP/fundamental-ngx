@@ -331,6 +331,14 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     rowNavigatable: string | boolean = false;
 
     /**
+     * Whether row is checked when selection is enabled.
+     * Pass boolean value to set state for the all rows.
+     * Pass string value with the key of the row item's field to compute state for every single row.
+     */
+    @Input()
+    rowChecked: string | boolean = false;
+
+    /**
      * Whether to highlight navigated row.
      */
     @Input()
@@ -837,6 +845,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             );
 
             this._calculateIsShownNavigationColumn();
+        }
+
+        if ('rowChecked' in changes) {
+            this._tableRows.forEach((row) => (row.checked = this._isRowChecked(row.value, this.rowChecked)));
         }
     }
 
@@ -1723,6 +1735,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             const isNewItem = this._addedItems.includes(item);
             const row = new TableRow(TableRowType.ITEM, !!selectedRowsMap.get(item), index, item);
             row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
+            row.checked = this._isRowChecked(item, this.rowChecked);
             row.state = isNewItem ? 'editable' : 'readonly';
             return row;
         });
@@ -1748,6 +1761,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
             row.expanded = false;
             row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
+            row.checked = this._isRowChecked(item, this.rowChecked);
             rows.push(row);
 
             if (hasChildren) {
@@ -2372,6 +2386,20 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         }
 
         return !!rowNavigatable;
+    }
+
+    /** @hidden */
+    private _isRowChecked(row: T, rowChecked: string | boolean): boolean {
+        if (!row) {
+            return false;
+        }
+
+        /** If key of the of the row's item field passed */
+        if (isString(rowChecked)) {
+            return !!row[rowChecked as string];
+        }
+
+        return !!rowChecked;
     }
 
     /**
