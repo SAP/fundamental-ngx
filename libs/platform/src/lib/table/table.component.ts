@@ -37,7 +37,6 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { cloneDeep, get } from 'lodash-es';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
-import { SaveRowsEvent } from './interfaces/save-rows-event.interface';
 import { EditableTableCell } from './table-cell.class';
 import { TableResponsiveService } from './table-responsive.service';
 
@@ -84,7 +83,8 @@ import {
     TableRowSelectionChangeEvent,
     TableRowsRearrangeEvent,
     TableRowToggleOpenStateEvent,
-    TableSortChangeEvent
+    TableSortChangeEvent,
+    SaveRowsEvent
 } from './models';
 import { TableColumnResizeService } from './table-column-resize.service';
 import {
@@ -1179,12 +1179,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * Emits save event and resets editable rows array.
      */
     saveRows(): void {
-        const event: SaveRowsEvent<T> = {
-            items: [...this._addedItems],
-            done: () => {
-                this._tableDataSource.fetch(this.getTableState());
-            }
-        };
+        const event = new SaveRowsEvent<T>(() => {
+            this._tableDataSource.fetch(this.getTableState());
+        }, [...this._addedItems]);
 
         const forms = [...this.customEditableCells.toArray(), ...this.editableCells.toArray()].map((t) => t.form);
 
