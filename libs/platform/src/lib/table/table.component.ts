@@ -1405,8 +1405,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         }
 
         if (event) {
-            const eventTarget = event.target as HTMLElement;
-            if (eventTarget.tagName !== 'INPUT' && eventTarget.tagName !== 'TEXTAREA') {
+            const eventTarget = event.target as HTMLInputElement;
+            if (
+                eventTarget.type === 'checkbox' ||
+                (eventTarget.tagName !== 'INPUT' && eventTarget.tagName !== 'TEXTAREA')
+            ) {
                 event.preventDefault();
             }
         }
