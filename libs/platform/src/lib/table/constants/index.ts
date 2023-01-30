@@ -26,6 +26,10 @@ export const DEFAULT_TABLE_STATE: Readonly<TableState> = {
 
 export const DEFAULT_HIGHLIGHTING_KEY = 'semantic';
 
+export const DEFAULT_SELECTABLE_KEY = 'selectable';
+
+export const DEFAULT_SELECTED_KEY = 'selected';
+
 export const EDITABLE_ROW_SEMANTIC_STATE = 'information';
 
 export const SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH = 6;

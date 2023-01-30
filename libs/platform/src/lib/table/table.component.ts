@@ -53,6 +53,8 @@ import {
 } from './enums';
 import {
     DEFAULT_HIGHLIGHTING_KEY,
+    DEFAULT_SELECTABLE_KEY,
+    DEFAULT_SELECTED_KEY,
     DEFAULT_TABLE_STATE,
     EDITABLE_ROW_SEMANTIC_STATE,
     SELECTION_COLUMN_WIDTH,
@@ -359,6 +361,46 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _forceSemanticHighlighting = false;
+
+    /** Value with the key of the row item's field to enable selecting.  */
+    @Input()
+    set selectedKey(value: string) {
+        this._selectedKey = value;
+    }
+
+    get selectedKey(): string {
+        if (!this._selectedKey && this._forceSelected) {
+            return DEFAULT_SELECTED_KEY;
+        }
+
+        return this._selectedKey;
+    }
+
+    /** @hidden */
+    private _selectedKey: string;
+
+    /** @hidden */
+    private _forceSelected = false;
+
+    /** Value with the key of the row item's field to enable selecting.  */
+    @Input()
+    set selectableKey(value: string) {
+        this._selectableKey = value;
+    }
+
+    get selectableKey(): string {
+        if (!this._selectableKey && this._forceSelectable) {
+            return DEFAULT_SELECTABLE_KEY;
+        }
+
+        return this._selectableKey;
+    }
+
+    /** @hidden */
+    private _selectableKey: string;
+
+    /** @hidden */
+    private _forceSelectable = false;
 
     /**
      * Tracking function that will be used to check the differences in data changes.
@@ -1086,7 +1128,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     toggleSelectableRow(rowIndex: number): void {
         const row = this._tableRows[rowIndex];
 
-        if (!row) {
+        if (!row || row.value[this.selectableKey] === false) {
             return;
         }
 
@@ -1156,8 +1198,13 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * Adds empty row for editing at the beginning of the rows array.
      */
     addRow(): void {
-        const newRow = this._buildNewRowSkeleton();
         this._forceSemanticHighlighting = true;
+        this._forceSelected = true;
+        this._forceSelectable = true;
+
+        const newRow = this._buildNewRowSkeleton();
+        newRow[this.selectableKey] = true;
+        newRow[this.selectedKey] = false;
         newRow[this.semanticHighlighting] = EDITABLE_ROW_SEMANTIC_STATE;
 
         this._addedItems.unshift(newRow);
@@ -1748,7 +1795,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         return source.map((item: T, index: number) => {
             const isNewItem = this._addedItems.includes(item);
-            const row = new TableRow(TableRowType.ITEM, !!selectedRowsMap.get(item), index, item);
+            const row = new TableRow(
+                TableRowType.ITEM,
+                item[this.selectedKey] ?? !!selectedRowsMap.get(item),
+                index,
+                item
+            );
             row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
             row.state = isNewItem ? 'editable' : 'readonly';
             return row;
@@ -1768,7 +1820,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 item[this.relationKey].length;
             const row = new TableRow(
                 hasChildren ? TableRowType.TREE : TableRowType.ITEM,
-                !!selectedRowsMap.get(item),
+                item[this.selectedKey] ?? !!selectedRowsMap.get(item),
                 index,
                 item
             );
@@ -2245,7 +2297,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _isSelectableRow(row: TableRow): boolean {
-        return this._isItemRow(row) || this._isTreeRow(row);
+        return (this._isItemRow(row) || this._isTreeRow(row)) && row.value[this.selectableKey] !== false;
     }
 
     /** @hidden */
@@ -2439,6 +2491,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._newTableRows = [];
         this._addedItems = [];
         this._forceSemanticHighlighting = false;
+        this._forceSelected = false;
+        this._forceSelectable = false;
         this._setTableRows(this._dataSourceTableRows);
     }
 
