@@ -183,16 +183,20 @@ export class NestedListComponent implements AfterContentInit, NestedListInterfac
     private _setAriaAttributes(level: number, lang: FdLanguage): void {
         this.nestedItems.forEach((item, i) => {
             item._ariaLevel = level;
-            item.linkItem.ariaDescribedby = this._nestedListHeader?.id || null;
-            item.linkItem._ariaLabel = this._translationResolver.resolve(lang, 'coreNestedList.linkItemAriaLabel', {
-                itemDetails: item.linkItem.getTitle(),
-                index: i + 1,
-                total: this.nestedItems.length,
-                selectedDescription:
-                    !this._nestedListStateService.selectable && item.linkItem.selected
-                        ? ', ' + this.ariaLabelSelected
-                        : ''
-            });
+            if (!item.linkItem) {
+                return;
+            } else {
+                item.linkItem.ariaDescribedby = this._nestedListHeader?.id || null;
+                item.linkItem._ariaLabel = this._translationResolver.resolve(lang, 'coreNestedList.linkItemAriaLabel', {
+                    itemDetails: item.linkItem.getTitle(),
+                    index: i + 1,
+                    total: this.nestedItems.length,
+                    selectedDescription:
+                        !this._nestedListStateService.selectable && item.linkItem.selected
+                            ? ', ' + this.ariaLabelSelected
+                            : ''
+                });
+            }
         });
 
         this._changeDetectionRef.detectChanges();
