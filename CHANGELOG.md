@@ -1,3 +1,12 @@
+# [0.39.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.18...v0.39.0-rc.19) (2023-01-30)
+
+
+### Bug Fixes
+
+* **platform:** more clear typedoc for checkbox component ([#9302](https://github.com/SAP/fundamental-ngx/issues/9302)) ([dbc186d](https://github.com/SAP/fundamental-ngx/commit/dbc186d3034482c643656f0a2b9112a47c4c89d4))
+
+
+
 # [0.39.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.17...v0.39.0-rc.18) (2023-01-27)
 
 
