@@ -70,4 +70,8 @@ export class PlatformMultiInputExampleComponent {
     showValues(item: MultiInputSelectionChangeEvent): void {
         this.selectedItem2 = item.payload;
     }
+
+    searchTermChange(text: string): void {
+        console.log(text);
+    }
 }
