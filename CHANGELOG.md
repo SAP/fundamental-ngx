@@ -1,3 +1,12 @@
+# [0.39.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.20...v0.39.0-rc.21) (2023-01-30)
+
+
+### Bug Fixes
+
+* **core,cx:** error when no linkItem provided ([#9274](https://github.com/SAP/fundamental-ngx/issues/9274)) ([6703931](https://github.com/SAP/fundamental-ngx/commit/67039310190f858ac2faf8393cc148cb10a58f98))
+
+
+
 # [0.39.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.19...v0.39.0-rc.20) (2023-01-30)
 
 
