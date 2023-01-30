@@ -1,3 +1,62 @@
+# [0.39.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.19...v0.39.0-rc.20) (2023-01-30)
+
+
+
+# [0.39.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.18...v0.39.0-rc.19) (2023-01-30)
+
+
+### Bug Fixes
+
+* **platform:** more clear typedoc for checkbox component ([#9302](https://github.com/SAP/fundamental-ngx/issues/9302)) ([dbc186d](https://github.com/SAP/fundamental-ngx/commit/dbc186d3034482c643656f0a2b9112a47c4c89d4))
+
+
+
+# [0.39.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.17...v0.39.0-rc.18) (2023-01-27)
+
+
+### Bug Fixes
+
+* **platform:** fix form generator inline help open/close issue ([#9282](https://github.com/SAP/fundamental-ngx/issues/9282)) ([e04790d](https://github.com/SAP/fundamental-ngx/commit/e04790d1692b1e303502f4668106e3225e641fec))
+
+
+
+# [0.39.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.16...v0.39.0-rc.17) (2023-01-27)
+
+
+### Bug Fixes
+
+* **platform:** add property expandOnInit to platform tree table ([#9253](https://github.com/SAP/fundamental-ngx/issues/9253)) ([20ade48](https://github.com/SAP/fundamental-ngx/commit/20ade48a04e5a1396fe447cf51772322c5b8042f))
+
+
+
+# [0.39.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.15...v0.39.0-rc.16) (2023-01-27)
+
+
+### Bug Fixes
+
+* **platform:** unable to enter numeric values using numeric keypad in combobox ([#9270](https://github.com/SAP/fundamental-ngx/issues/9270)) ([1b95715](https://github.com/SAP/fundamental-ngx/commit/1b95715c9fd65abca80818a7728955f4c5d194a3))
+
+
+
+# [0.39.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.14...v0.39.0-rc.15) (2023-01-27)
+
+
+### Bug Fixes
+
+* **core:** date-picker respects closeOnDateChoose input now ([#9195](https://github.com/SAP/fundamental-ngx/issues/9195)) ([40fade5](https://github.com/SAP/fundamental-ngx/commit/40fade537c1ef3c11c460f0813b9222889712b9b))
+
+
+
+# [0.39.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.13...v0.39.0-rc.14) (2023-01-27)
+
+
+### Bug Fixes
+
+* **ci:** fixed agents timeout when running e2e tests on local ([#9284](https://github.com/SAP/fundamental-ngx/issues/9284)) ([d441b69](https://github.com/SAP/fundamental-ngx/commit/d441b69a81e3acad5d89cd2b29eafd603b396490))
+* **core:** allow shellbar-user-menu noArrow ([#9268](https://github.com/SAP/fundamental-ngx/issues/9268)) ([7891102](https://github.com/SAP/fundamental-ngx/commit/78911021b55454e9940a4142cd34757e73ee0114))
+
+
+
 # [0.39.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.12...v0.39.0-rc.13) (2023-01-26)
 
 

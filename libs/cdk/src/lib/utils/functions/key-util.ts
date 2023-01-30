@@ -14,7 +14,17 @@ import {
     HOME,
     LEFT_ARROW,
     META,
+    NUMPAD_EIGHT,
+    NUMPAD_FIVE,
+    NUMPAD_FOUR,
     NUMPAD_MINUS,
+    NUMPAD_NINE,
+    NUMPAD_ONE,
+    NUMPAD_SEVEN,
+    NUMPAD_SIX,
+    NUMPAD_THREE,
+    NUMPAD_TWO,
+    NUMPAD_ZERO,
     PAGE_DOWN,
     PAGE_UP,
     RIGHT_ARROW,
@@ -51,7 +61,17 @@ const keyMap: Map<number, string[]> = new Map([
     [PAGE_UP, ['PageUp']],
     [PAGE_DOWN, ['PageDown']],
     [DASH, ['-']],
-    [NUMPAD_MINUS, ['-']]
+    [NUMPAD_MINUS, ['-']],
+    [NUMPAD_ZERO, ['NumPad0']],
+    [NUMPAD_ONE, ['NumPad1']],
+    [NUMPAD_TWO, ['NumPad2']],
+    [NUMPAD_THREE, ['NumPad3']],
+    [NUMPAD_FOUR, ['NumPad4']],
+    [NUMPAD_FIVE, ['NumPad5']],
+    [NUMPAD_SIX, ['NumPad6']],
+    [NUMPAD_SEVEN, ['NumPad7']],
+    [NUMPAD_EIGHT, ['NumPad8']],
+    [NUMPAD_NINE, ['NumPad9']]
 ]);
 
 export class KeyUtil {

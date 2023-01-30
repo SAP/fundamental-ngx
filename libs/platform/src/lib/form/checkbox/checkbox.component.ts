@@ -73,7 +73,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     // this is undesired to have "checked" input instead of "value"
     // but it was done this way initially and we have to keep this in order to not break anything
     /**
-     * value for checkbox control
+     * Checked state of the checkbox control.
      */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('checked')
@@ -88,7 +88,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     @Input()
     tristateSelectable = false;
 
-    /** value for checkbox control */
+    /** value for checkbox control when it's state is checked. */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('value')
     set checkboxTrueValue(trueValue: any) {
