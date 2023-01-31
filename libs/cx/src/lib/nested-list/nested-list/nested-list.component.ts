@@ -76,7 +76,7 @@ export class NestedListComponent implements AfterContentInit, NestedListInterfac
     private _nestedListHeader: NestedListHeaderDirective;
 
     /** @hidden */
-    @ContentChildren(NestedListComponent, { descendants: true })
+    @ContentChildren(forwardRef(() => NestedListComponent), { descendants: true })
     private _nestedLists: QueryList<NestedListComponent>;
 
     /** @hidden */
