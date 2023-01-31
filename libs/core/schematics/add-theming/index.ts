@@ -136,7 +136,7 @@ function _addThemingModuleInit(options: Schema, tree: Tree, workspace: Workspace
     const appModulePath = getAppModulePath(tree, mainPath);
     const appModuleName = bootstrapModuleCall.arguments[0].getText();
     const appModuleSourceFile = getSourceFile(tree, appModulePath);
-    const appModuleClassIdentifierNode = findNode(appModuleSourceFile, ts.SyntaxKind.Identifier, appModuleName);
+    const appModuleClassIdentifierNode = findNode(appModuleSourceFile as any, ts.SyntaxKind.Identifier, appModuleName);
 
     if (!appModuleClassIdentifierNode) {
         throw new SchematicsException(`❌ App module declaration not found.`);
@@ -144,14 +144,14 @@ function _addThemingModuleInit(options: Schema, tree: Tree, workspace: Workspace
 
     const changes: Change[] = [];
 
-    changes.push(insertImport(appModuleSourceFile, appModulePath, `ThemingService`, `@fundamental-ngx/core/theming`));
+    changes.push(insertImport(appModuleSourceFile as any, appModulePath, `ThemingService`, `@fundamental-ngx/core/theming`));
 
     const appModuleClass = appModuleClassIdentifierNode.parent;
     const appModuleCtr = findNodes(appModuleClass, ts.SyntaxKind.Constructor)[0];
 
     if (appModuleCtr) {
         const ctrBlock = findNodes(appModuleCtr, ts.SyntaxKind.Block)[0];
-        const ctrParameters = (appModuleCtr as ts.ConstructorDeclaration).parameters;
+        const ctrParameters = (appModuleCtr as unknown as ts.ConstructorDeclaration).parameters;
 
         changes.push(
             new InsertChange(
