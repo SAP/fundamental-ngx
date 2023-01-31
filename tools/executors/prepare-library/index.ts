@@ -6,7 +6,13 @@ import { PrepareSchema } from './utils/prepare.schema';
 import pack from './utils/pack';
 
 export default async function prepareLibrary(_options: PrepareSchema, context: ExecutorContext) {
-    const projectConfig: ProjectConfiguration = context.workspace.projects[context.projectName as string];
+    const projectConfig: ProjectConfiguration = (() => {
+        const config: ProjectConfiguration = context.workspace?.projects[context.projectName as string] as unknown as ProjectConfiguration;
+        if (!config) {
+            throw new Error(`No project found for ${context.projectName}`);
+        }
+        return config;
+    })();
     let targetOptions: PrepareOptions = readTargetOptions(
         { project: context.projectName as string, target: context.targetName as string },
         context
