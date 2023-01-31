@@ -229,10 +229,6 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             this._setUpMobileMode();
         }
 
-        if (this.autofocus) {
-            this.searchInputElement.nativeElement.focus();
-        }
-
         this.tokenizer._showOverflowPopover = false;
     }
 
@@ -244,16 +240,20 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     }
 
     /** @hidden */
-    addToArray(value: any): void {
-        const index = this.selected.findIndex((selectvalue) => selectvalue.label === value.label);
+    addToArray(value: any, focusOnInput = true): void {
+        const index = this.selected.findIndex((selectvalue) => selectvalue.value === value.value);
         if (index === -1) {
             this.selected.push(value);
-            if (!this.mobile) {
-                this.close();
-            }
+        } else {
+            this.selected.splice(index, 1);
+        }
+        if (!this.mobile && focusOnInput) {
+            this.close();
         }
         this._updateModel(this.selected);
-        this.searchInputElement.nativeElement.focus();
+        if (focusOnInput) {
+            this.searchInputElement.nativeElement.focus();
+        }
         this.emitChangeEvent(value ? this.selected : null);
         this._cd.detectChanges();
     }

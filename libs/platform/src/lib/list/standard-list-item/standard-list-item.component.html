@@ -158,6 +158,7 @@
             (click)="$event.stopPropagation()"
             [(ngModel)]="_selected"
             [ariaLabel]="ariaLabel"
+            (ngModelChange)="_onCheckboxModelChange()"
             [attr.aria-selected]="_selected"
         >
         </fd-checkbox>

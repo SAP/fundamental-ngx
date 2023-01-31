@@ -209,10 +209,10 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     _contentDensity: ContentDensity = this.multiInputConfig.contentDensity;
 
     /** @hidden */
-    controlTemplate: TemplateRef<any>;
+    abstract controlTemplate: TemplateRef<any>;
 
     /** @hidden */
-    listTemplate: TemplateRef<any>;
+    abstract listTemplate: TemplateRef<any>;
 
     /** input text of the input. */
     inputText: string;

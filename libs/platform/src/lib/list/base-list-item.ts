@@ -195,6 +195,12 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     @Output()
     itemSelected = new EventEmitter<ModifyItemEvent>();
 
+    /**
+     * Event emitted for selected item through the checkbox.
+     */
+    @Output()
+    itemCheckboxSelected = new EventEmitter<ModifyItemEvent>();
+
     /** Event sent when delete, details or any other action buttons are clicked */
     @Output()
     buttonClicked = new EventEmitter<ModifyItemEvent>();
@@ -424,6 +430,13 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
         if (isPresent(this.anchor) && KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             this.anchor.nativeElement.classList.remove(IS_ACTIVE_CLASS);
         }
+    }
+
+    /** @hidden */
+    _onCheckboxModelChange(): void {
+        const event = new ModifyItemEvent();
+        event.source = this;
+        this.itemCheckboxSelected.emit(event);
     }
 
     /**
