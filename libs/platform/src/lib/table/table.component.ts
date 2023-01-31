@@ -1083,6 +1083,23 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         }
     }
 
+    /**
+     * Sets the checked state of the row.
+     * @param rowIndex Index of the row.
+     * @param value Value of the checked state.
+     */
+    setRowCheckedState(rowIndex: number, value: boolean): void {
+        const row = this._tableRows[rowIndex];
+
+        if (!row) {
+            return;
+        }
+
+        if (row.checked !== value) {
+            this.toggleSelectableRow(rowIndex);
+        }
+    }
+
     /** Remove the row navigation */
     removeRowNavigation(rowIndex: number): void {
         const row = this._tableRows[rowIndex];
