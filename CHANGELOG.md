@@ -1,3 +1,13 @@
+# [0.39.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.21...v0.39.0-rc.22) (2023-01-31)
+
+
+### Bug Fixes
+
+* **core:** schematics type incompatibility ([#9310](https://github.com/SAP/fundamental-ngx/issues/9310)) ([381dfe6](https://github.com/SAP/fundamental-ngx/commit/381dfe61644c24fb3be994ffa3591949c0079ed4))
+* **platform:** add public function for checking of rows ([#9290](https://github.com/SAP/fundamental-ngx/issues/9290)) ([a8ff941](https://github.com/SAP/fundamental-ngx/commit/a8ff941b0b2e14714fb8c3e42a25b077db176875))
+
+
+
 # [0.39.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.20...v0.39.0-rc.21) (2023-01-30)
 
 
