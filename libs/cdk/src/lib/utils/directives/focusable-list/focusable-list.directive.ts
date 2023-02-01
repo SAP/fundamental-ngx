@@ -22,7 +22,7 @@ import {
     FD_DEPRECATED_DIRECTIVE_SELECTOR,
     getDeprecatedModel
 } from '../../deprecated-selector.class';
-import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from '../focusable-item';
+import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableObserver } from '../focusable-item';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE } from './focusable-list.tokens';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { Nullable } from '../../models/nullable';
@@ -155,8 +155,18 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
         private _renderer: Renderer2,
         private _destroy$: DestroyedService,
         private _elementRef: ElementRef<HTMLElement>,
-        private _liveAnnouncer: LiveAnnouncer
-    ) {}
+        private _liveAnnouncer: LiveAnnouncer,
+        private _focusableObserver: FocusableObserver
+    ) {
+        this._focusableObserver
+            .observe(this._elementRef, false)
+            .pipe(takeUntil(this._destroy$))
+            .subscribe((isFocusable) => {
+                if (!isFocusable && isFocusable !== this.focusable) {
+                    this.focusable = isFocusable;
+                }
+            });
+    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -232,7 +242,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
 
         this._focusableItems.find((item, itemIndex) => {
             if (itemIndex >= index && item.fdkFocusableItem) {
-                avaiableIndex = index;
+                avaiableIndex = itemIndex;
                 return true;
             }
 
