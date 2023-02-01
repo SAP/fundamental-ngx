@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { PipeModule } from '@fundamental-ngx/cdk/utils';
+import { InitialFocusModule, PipeModule } from '@fundamental-ngx/cdk/utils';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { TokenModule } from '@fundamental-ngx/core/token';
@@ -28,7 +28,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         PlatformAutoCompleteModule,
         FormModule,
         PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
+        ContentDensityModule,
+        InitialFocusModule
     ],
     exports: [PlatformMultiInputComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule]
 })

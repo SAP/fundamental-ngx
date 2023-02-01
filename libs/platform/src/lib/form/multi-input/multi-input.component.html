@@ -58,7 +58,7 @@
                 [attr.aria-posinset]="i"
                 [attr.aria-setsize]="selected.length"
             >
-                <span [innerText]="token.label | displayFnPipe: displayFn"></span>
+                <span [innerText]="token.label | displayFnPipe : displayFn"></span>
             </fd-token>
 
             <input
@@ -88,6 +88,8 @@
                 [attr.aria-required]="required"
                 [attr.aria-describedby]="tokenHiddenId"
                 aria-roledescription="Multi Value Input"
+                fdkInitialFocus
+                [enabled]="autofocus"
             />
         </fd-tokenizer>
     </fd-input-group>
@@ -109,6 +111,7 @@
                 [description]="listItem.description || ''"
                 [avatarSrc]="listItem.avatarSrc"
                 (itemSelected)="addToArray(listItem)"
+                (itemCheckboxSelected)="addToArray(listItem, false)"
                 (buttonClicked)="deleteToken(listItem)"
                 role="option"
             >
@@ -131,6 +134,7 @@
                     *ngFor="let optionItem of group.children; let i = index"
                     [title]="optionItem.label"
                     (itemSelected)="addToArray(optionItem)"
+                    (itemCheckboxSelected)="addToArray(optionItem, false)"
                     (buttonClicked)="deleteToken(optionItem)"
                     role="option"
                 >
