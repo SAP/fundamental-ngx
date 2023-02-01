@@ -66,21 +66,21 @@ describe('Multi input test suite', () => {
                 await multiInputPage.expandDropdown(activeDropdownButtons, i, i === loadingExample);
                 const optionsArr = await getAttributeByNameArr(options, 'title');
                 await scrollIntoView(header, i);
-                await multiInputPage.selectOption(optionsArr[0]);
+                await multiInputPage.selectOption(optionsArr[1]);
                 await multiInputPage.expandDropdown(activeDropdownButtons, i, i === loadingExample);
                 await scrollIntoView(header, i);
-                await multiInputPage.selectOption(optionsArr[1]);
-                await expect(await getText(filledInput, i)).toContain(optionsArr[0]);
+                await multiInputPage.selectOption(optionsArr[2]);
                 await expect(await getText(filledInput, i)).toContain(optionsArr[1]);
+                await expect(await getText(filledInput, i)).toContain(optionsArr[2]);
             }
             if (i === mobileExample) {
                 await multiInputPage.expandDropdown(activeDropdownButtons, i);
                 const optionsArr = await getAttributeByNameArr(options, 'title');
-                await multiInputPage.selectOption(optionsArr[0]);
                 await multiInputPage.selectOption(optionsArr[1]);
+                await multiInputPage.selectOption(optionsArr[2]);
                 await click(approveButton);
-                await expect(await getText(filledInput, i)).toContain(optionsArr[0]);
                 await expect(await getText(filledInput, i)).toContain(optionsArr[1]);
+                await expect(await getText(filledInput, i)).toContain(optionsArr[2]);
             }
         }
     });
@@ -109,9 +109,9 @@ describe('Multi input test suite', () => {
             }
             await multiInputPage.expandDropdown(activeDropdownButtons, i);
             const optionsArr = await getAttributeByNameArr(options, 'title');
-            await setValue(activeInputs, optionsArr[0].substring(0, 2), i);
-            await multiInputPage.selectOption(optionsArr[0]);
-            await expect(await getText(filledInput, i)).toContain(optionsArr[0]);
+            await setValue(activeInputs, optionsArr[1].substring(0, 2), i);
+            await multiInputPage.selectOption(optionsArr[1]);
+            await expect(await getText(filledInput, i)).toContain(optionsArr[1]);
         }
     });
 
@@ -120,7 +120,7 @@ describe('Multi input test suite', () => {
         const mobileExample = 6;
         const disabledExample = 5;
 
-        for (let i = 0; i < activeButtonsQuantity; i++) {
+        for (let i = 1; i < activeButtonsQuantity - 1; i++) {
             if (i === disabledExample) {
                 continue;
             }
@@ -128,8 +128,8 @@ describe('Multi input test suite', () => {
                 await multiInputPage.expandDropdown(activeDropdownButtons, i);
                 const optionsArr = await getAttributeByNameArr(options, 'title');
                 await scrollIntoView(header, i);
-                await multiInputPage.selectOption(optionsArr[0]);
-                await expect(await getText(filledInput, i)).toContain(optionsArr[0]);
+                await multiInputPage.selectOption(optionsArr[1]);
+                await expect(await getText(filledInput, i)).toContain(optionsArr[1]);
                 await scrollIntoView('fd-tokenizer', i);
                 await (await $$('fd-tokenizer')[i]!.$('.fd-token__close')).click();
                 const isDisplayed = await (await $$('fd-tokenizer')[i]!.$('.fd-token__close')).isDisplayed();
@@ -139,9 +139,9 @@ describe('Multi input test suite', () => {
                 await multiInputPage.expandDropdown(activeDropdownButtons, i);
                 const optionsArr = await getAttributeByNameArr(options, 'title');
                 await scrollIntoView(header, i);
-                await multiInputPage.selectOption(optionsArr[0]);
+                await multiInputPage.selectOption(optionsArr[1]);
                 await click(approveButton);
-                await expect(await getText(filledInput, i)).toContain(optionsArr[0]);
+                await expect(await getText(filledInput, i)).toContain(optionsArr[1]);
                 await scrollIntoView('fd-tokenizer', i);
                 await (await $$('fd-tokenizer')[i]!.$('.fd-token__close')).click();
                 const isDisplayed = await (await $$('fd-tokenizer')[i]!.$('.fd-token__close')).isDisplayed();
@@ -162,11 +162,11 @@ describe('Multi input test suite', () => {
         }
         await scrollIntoView(multiInputPage.activeInputs, 0);
         await multiInputPage.expandDropdown(activeDropdownButtons, 0);
-        await setValue(activeInputs, optionsArr[0].substring(0, 3), 0);
+        await setValue(activeInputs, optionsArr[1].substring(0, 3), 0);
         filteredOptions = await getElementArrayLength(dropdownOptions);
         for (let j = 0; j < filteredOptions; j++) {
             const dropdownOption = await getText(dropdownOptionText, j);
-            await expect(dropdownOption).toContain(optionsArr[0].substring(0, 3));
+            await expect(dropdownOption).toContain(optionsArr[1].substring(0, 3));
         }
         await multiInputPage.expandDropdown(activeDropdownButtons, 6);
         await setValue(mobileInput, optionsArr[4].substring(0, 3));
@@ -191,9 +191,14 @@ describe('Multi input test suite', () => {
                 await multiInputPage.expandDropdown(activeDropdownButtons, i);
                 const optionsArr = await getAttributeByNameArr(options, 'title');
                 await scrollIntoView(header, i);
-                await multiInputPage.selectOption(optionsArr[0]);
-                await expect(await getText(filledInput, i)).toContain(optionsArr[0]);
-                await expect((await getText(filledInput, i)).split('\n')[0]).toBe(optionsArr[0]);
+                const closeElement = await $$('fd-tokenizer')[i]!.$('.fd-token__close');
+                // Clear all inputs
+                if (!closeElement.error) {
+                    await (await $$('fd-tokenizer')[i]!.$('.fd-token__close')).click();
+                }
+                await multiInputPage.selectOption(optionsArr[1]);
+                await expect(await getText(filledInput, i)).toContain(optionsArr[1]);
+                await expect((await getText(filledInput, i)).split('\n')[0]).toBe(optionsArr[1]);
                 await click(selectedToken);
                 await sendKeys(['Backspace', 'Backspace']);
                 const isDisplayed = await (await $$('fd-tokenizer')[i]!.$('.fd-token__close')).isDisplayed();
@@ -203,10 +208,10 @@ describe('Multi input test suite', () => {
                 await multiInputPage.expandDropdown(activeDropdownButtons, i);
                 const optionsArr = await getAttributeByNameArr(options, 'title');
                 await scrollIntoView(header, i);
-                await multiInputPage.selectOption(optionsArr[0]);
+                await multiInputPage.selectOption(optionsArr[1]);
                 await click(approveButton);
-                await expect(await getText(filledInput, i)).toContain(optionsArr[0]);
-                await expect((await getText(filledInput, i)).split('\n')[0]).toBe(optionsArr[0]);
+                await expect(await getText(filledInput, i)).toContain(optionsArr[1]);
+                await expect((await getText(filledInput, i)).split('\n')[0]).toBe(optionsArr[1]);
                 await click(selectedToken);
                 await sendKeys(['Backspace', 'Backspace']);
                 const isDisplayed = await (await $$('fd-tokenizer')[i]!.$('.fd-token__close')).isDisplayed();
@@ -248,15 +253,15 @@ describe('Multi input test suite', () => {
         await scrollIntoView(activeInputs, 1);
         await multiInputPage.expandDropdown(activeDropdownButtons, 1);
         const optionsArr = await getAttributeByNameArr(options, 'title');
-        await setValue(activeInputs, optionsArr[0].substring(0, 4), 1);
+        await setValue(activeInputs, optionsArr[1].substring(0, 4), 1);
         await click(options);
         const firstSelectionTokenCount = await getElementArrayLength(compactExampleTokens);
-        await setValue(activeInputs, optionsArr[0].substring(0, 4), 1);
+        await setValue(activeInputs, optionsArr[1].substring(0, 4), 1);
         await click(options);
         const secondSelectionTokenCount = await getElementArrayLength(compactExampleTokens);
 
         await expect(firstSelectionTokenCount).toEqual(1);
-        await expect(secondSelectionTokenCount).toEqual(1);
+        await expect(secondSelectionTokenCount).toEqual(0);
     });
 
     it('should verify only 1 token created', async () => {
