@@ -10,6 +10,7 @@ export const COMBOBOX_COMPONENT = new InjectionToken<string[]>('ComboboxInterfac
 export interface ComboboxInterface extends MobileMode {
     inputText: string;
     openChange: EventEmitter<boolean>;
+    inShellbar: boolean;
 
     getValue(): any;
     dialogApprove(): void;

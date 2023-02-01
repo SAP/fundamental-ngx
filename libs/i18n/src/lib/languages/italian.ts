@@ -72,7 +72,9 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         ariaLabel: 'Commutatore del prodotto'
     },
     coreShellbar: {
-        collapsedItemMenuLabel: 'Menu di voci compresso'
+        collapsedItemMenuLabel: 'Menu di voci compresso',
+        cancel: 'Cancel',
+        search: 'Search'
     },
     coreSlider: {
         singleMinMaxDetails:

@@ -16,7 +16,11 @@ export class TestComponent {
     constructor(public tableResponsiveService: TableResponsiveService) {}
 }
 
-export class TableMock {}
+export class TableMock {
+    getVisibleTableColumns(): TableColumn[] {
+        return [];
+    }
+}
 
 export class TableColumnMock {
     responsiveState: FdpColumnResponsiveState;

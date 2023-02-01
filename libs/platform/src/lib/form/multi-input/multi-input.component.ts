@@ -34,7 +34,7 @@ import {
     isFunction,
     PlatformFormField
 } from '@fundamental-ngx/platform/shared';
-import { ListComponent, SelectionType } from '@fundamental-ngx/platform/list';
+import { ListComponent, ModifyItemEvent, SelectionType } from '@fundamental-ngx/platform/list';
 
 import { InputType } from '../input/input.component';
 import { AutoCompleteEvent } from '../auto-complete/auto-complete.directive';
@@ -45,6 +45,7 @@ import { MULTIINPUT_COMPONENT } from './multi-input.interface';
 import { MultiInputConfig } from './multi-input.config';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import equal from 'fast-deep-equal';
 
 let uniqueHiddenLabel = 0;
 
@@ -240,8 +241,20 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     }
 
     /** @hidden */
+    _checkboxSelected(value: any, event: ModifyItemEvent): void {
+        const isSelected = event.source._selected;
+        const index = this.selected.findIndex((selectvalue) => equal(selectvalue, value));
+
+        if (isSelected && index > -1) {
+            return;
+        }
+
+        this.addToArray(value, false);
+    }
+
+    /** @hidden */
     addToArray(value: any, focusOnInput = true): void {
-        const index = this.selected.findIndex((selectvalue) => selectvalue.value === value.value);
+        const index = this.selected.findIndex((selectvalue) => equal(selectvalue, value));
         if (index === -1) {
             this.selected.push(value);
         } else {

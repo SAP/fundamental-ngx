@@ -67,7 +67,9 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
         ariaLabel: 'Cambio de producto'
     },
     coreShellbar: {
-        collapsedItemMenuLabel: 'Item de menu contraído'
+        collapsedItemMenuLabel: 'Item de menu contraído',
+        cancel: 'Cancel',
+        search: 'Search'
     },
     coreSlider: {
         singleMinMaxDetails: 'Slider el valor mínimo es {{ min }}, el valor máximo es {{ max }}',

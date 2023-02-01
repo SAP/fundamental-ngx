@@ -4,5 +4,6 @@
 
 export * from './interfaces/popover-position';
 export * from './interfaces/special-day-rule';
+export * from './interfaces/search-component.interface';
 export * from './tokens/dynamic-page-header.token';
 export * from './services/value-state-message.service';

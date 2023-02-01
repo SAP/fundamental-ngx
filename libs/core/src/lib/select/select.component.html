@@ -31,7 +31,7 @@
         class="fd-select__control"
         role="list"
         #selectControl
-        [class]="state ? 'is-' + state : ''"
+        [class]="_selectControlClass"
         [class.is-active]="_isOpen"
         [class.is-expanded]="_isOpen"
         [class.is-disabled]="disabled"
@@ -67,7 +67,7 @@
         <button
             fd-button
             tabindex="-1"
-            class="fd-button--transparent fd-select__button"
+            class="fd-button--transparent fd-select__button {{ selectDropdownButtonClass }}"
             *ngIf="!readonly"
             [disabled]="disabled"
             [glyph]="glyph"

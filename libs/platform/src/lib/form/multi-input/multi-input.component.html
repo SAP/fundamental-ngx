@@ -110,8 +110,8 @@
                 [title]="listItem.label"
                 [description]="listItem.description || ''"
                 [avatarSrc]="listItem.avatarSrc"
-                (itemSelected)="addToArray(listItem)"
-                (itemCheckboxSelected)="addToArray(listItem, false)"
+                (itemSelected)="selectionMode !== 'multi' && addToArray(listItem, true)"
+                (itemCheckboxSelected)="_checkboxSelected(listItem, $event)"
                 (buttonClicked)="deleteToken(listItem)"
                 role="option"
             >
@@ -133,7 +133,7 @@
                 <fdp-standard-list-item
                     *ngFor="let optionItem of group.children; let i = index"
                     [title]="optionItem.label"
-                    (itemSelected)="addToArray(optionItem)"
+                    (itemSelected)="addToArray(optionItem, true)"
                     (itemCheckboxSelected)="addToArray(optionItem, false)"
                     (buttonClicked)="deleteToken(optionItem)"
                     role="option"

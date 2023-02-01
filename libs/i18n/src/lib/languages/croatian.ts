@@ -66,7 +66,9 @@ export const FD_LANGUAGE_CROATIAN: FdLanguage = {
         ariaLabel: 'Product Switch'
     },
     coreShellbar: {
-        collapsedItemMenuLabel: 'Collapsed Item Menu'
+        collapsedItemMenuLabel: 'Collapsed Item Menu',
+        cancel: 'Cancel',
+        search: 'Search'
     },
     coreSlider: {
         singleMinMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',

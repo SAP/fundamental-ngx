@@ -59,6 +59,7 @@ import { GroupFunction } from './list-group.pipe';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { FD_COMBOBOX_COMPONENT } from './tokens';
 
 let comboboxUniqueId = 0;
 
@@ -86,7 +87,11 @@ let comboboxUniqueId = 0;
         },
         registerFormItemControl(ComboboxComponent),
         MenuKeyboardService,
-        contentDensityObserverProviders()
+        contentDensityObserverProviders(),
+        {
+            provide: FD_COMBOBOX_COMPONENT,
+            useExisting: ComboboxComponent
+        }
     ],
     host: {
         '[class.fd-combobox-custom-class]': 'true',

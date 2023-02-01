@@ -7,7 +7,6 @@
         [attr.id]="id"
         [selected]="_selected"
         [tabindex]="-1"
-        (click)="_onItemClick()"
         (keydown)="_onKeyDown($event)"
         (keyup)="_onKeyUp($event)"
         class="fd-list__item--link"
@@ -47,7 +46,6 @@
         [attr.aria-level]="ariaLevel"
         [attr.aria-posinet]="ariaPosinet"
         [class.fd-list__item--inactive]="listType === 'inactive'"
-        (click)="_onItemClick()"
         [attr.role]="role"
     >
         <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>

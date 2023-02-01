@@ -2,7 +2,9 @@ import {
     AfterContentChecked,
     ChangeDetectionStrategy,
     Component,
+    EventEmitter,
     Input,
+    Output,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
@@ -23,8 +25,18 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     @Input()
     collapsedItemMenuLabel: string;
 
+    /**
+     * Whether the search is present in the shellbar.
+     */
+    @Input()
+    searchExists = false;
+
     /** @hidden */
     totalNotifications: number;
+
+    /** @hidden */
+    @Output()
+    showSearch = new EventEmitter<void>();
 
     /** @hidden */
     actionClicked(item: ShellbarActionComponent, event: MouseEvent): void {

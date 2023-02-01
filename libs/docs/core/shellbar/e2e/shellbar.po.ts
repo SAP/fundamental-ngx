@@ -9,6 +9,7 @@ export class ShellbarPo extends CoreBaseComponentPo {
     sideNavExample = 'fd-shellbar-side-nav-example ';
 
     // element selectors
+    suggestionsDropdown = '.fdp-search-field__suggestion-dropdown';
     popover = 'fd-popover-body ';
     shellbar = '.fd-shellbar';
     shellbarTitle = 'fd-shellbar-title';
@@ -17,9 +18,9 @@ export class ShellbarPo extends CoreBaseComponentPo {
     shellbarAvatar = 'fd-avatar';
     popoverMenuItem = this.popover + '.fd-menu__link';
     button = 'button';
-    searchbarButton = 'fd-combobox ' + this.button;
-    searchField = 'fd-combobox input';
-    searchMenuItem = this.popover + '.fd-list__item';
+    searchbarButton = 'fdp-search-field ' + this.button;
+    searchField = 'fdp-search-field input';
+    searchMenuItem = this.suggestionsDropdown + ' .fd-menu__item';
     actionButton = 'fd-shellbar-action ' + this.button;
     myAppsButton = 'fd-product-switch ' + this.button;
     myApps = 'fd-product-switch-body li';

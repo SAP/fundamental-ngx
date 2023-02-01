@@ -19,6 +19,8 @@ import {
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
+import { FD_BUTTON_COMPONENT } from './tokens';
+
 /**
  * Button directive, used to enhance standard HTML buttons.
  *
@@ -47,7 +49,11 @@ import {
             modifiers: {
                 [ContentDensityMode.COMPACT]: 'fd-button--compact'
             }
-        })
+        }),
+        {
+            provide: FD_BUTTON_COMPONENT,
+            useExisting: ButtonComponent
+        }
     ]
 })
 export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {

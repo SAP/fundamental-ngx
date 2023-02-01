@@ -15,7 +15,9 @@ import { TileModule } from '@fundamental-ngx/core/tile';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { ShellbarSideNavResponsiveExampleComponent } from './examples/shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
+import { InitialFocusModule, moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
+import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
+import { ShellbarResponsiveExampleComponent } from './examples/shellbar-responsive-example/shellbar-responsive-example.component';
 
 const routes: Routes = [
     {
@@ -38,16 +40,18 @@ const routes: Routes = [
         ProductSwitchModule,
         TileModule,
         LayoutPanelModule,
-        SegmentedButtonModule
+        SegmentedButtonModule,
+        PlatformSearchFieldModule
     ],
-    exports: [RouterModule],
+    exports: [RouterModule, ShellbarResponsiveExampleComponent],
     declarations: [
         ShellbarDocsComponent,
         ShellbarDocsHeaderComponent,
         ShellbarBasicExampleComponent,
         ShellbarSideNavExampleComponent,
         ShellbarCollapsibleExampleComponent,
-        ShellbarSideNavResponsiveExampleComponent
+        ShellbarSideNavResponsiveExampleComponent,
+        ShellbarResponsiveExampleComponent
     ],
     providers: [moduleDeprecationsProvider(DeprecatedShellbarCompactDirective), currentComponentProvider('shellbar')]
 })

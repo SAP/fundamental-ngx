@@ -1,18 +1,20 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
 import { ShellbarMenuItem, ShellbarSizes, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core/shellbar';
 import { SearchInput, SuggestionItem, ValueLabelItem } from '@fundamental-ngx/platform/search-field';
 
 @Component({
-    selector: 'fd-shellbar-collapsible-example',
-    templateUrl: './shellbar-collapsible-example.component.html'
+    selector: 'fd-shellbar-responsive-example',
+    templateUrl: './shellbar-responsive-example.component.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShellbarCollapsibleExampleComponent {
-    currentSize: ShellbarSizes = 'xl';
+export class ShellbarResponsiveExampleComponent {
+    currentSize: ShellbarSizes = 'm';
 
     sizesWidth = {
         s: 320,
-        m: 720,
+        m: 600,
         l: 1024,
         xl: 1900
     };

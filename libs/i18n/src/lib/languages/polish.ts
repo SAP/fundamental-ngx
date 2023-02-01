@@ -66,7 +66,9 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         ariaLabel: 'Przełącznik Produktu'
     },
     coreShellbar: {
-        collapsedItemMenuLabel: 'Ukryty Element Menu'
+        collapsedItemMenuLabel: 'Ukryty Element Menu',
+        cancel: 'Cancel',
+        search: 'Search'
     },
     coreSlider: {
         singleMinMaxDetails: 'Minimalna wartość {{ min }}, maksymalna wartość {{ max }}',

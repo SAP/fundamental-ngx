@@ -13,3 +13,4 @@ export * from './shellbar-title/shellbar-title.component';
 export * from './user-menu/shellbar-user-menu.component';
 export * from './shellbar-actions-mobile/shellbar-actions-mobile.component';
 export * from './deprecated-shellbar-compact.directive';
+export * from './tokens';

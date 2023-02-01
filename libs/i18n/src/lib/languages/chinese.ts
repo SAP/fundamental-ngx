@@ -66,7 +66,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         ariaLabel: '产品切换'
     },
     coreShellbar: {
-        collapsedItemMenuLabel: '折叠的项目菜单'
+        collapsedItemMenuLabel: '折叠的项目菜单',
+        cancel: 'Cancel',
+        search: 'Search'
     },
     coreSlider: {
         singleMinMaxDetails: '滑动条最小值为{{ min }}，最大值为{{ max }}',

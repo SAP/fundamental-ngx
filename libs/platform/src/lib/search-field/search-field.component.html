@@ -4,6 +4,36 @@
     <ng-container *ngTemplateOutlet="inputFieldTemplate"></ng-container>
 </ng-template>
 
+<ng-template #searchCategoryMenu>
+    <button
+        class="fdp-search-field__category-button fd-input-group__button fd-button fd-button--menu {{
+            appearance?.categoryButtonClass
+        }}"
+        [class.fd-button--compact]="contentDensityObserver.isCompact"
+        [fdpMenuTriggerFor]="categoryMenu"
+    >
+        <span class="fdp-search-field__category-label" *ngIf="!hideCategoryLabel">
+            {{ _currentCategory?.label || categoryLabel }}
+        </span>
+    </button>
+    <fdp-menu #categoryMenu>
+        <fdp-menu-item *ngFor="let category of categories" (itemSelect)="setCurrentCategory(category)"
+            >{{ category.label }}
+        </fdp-menu-item>
+    </fdp-menu>
+</ng-template>
+
+<ng-template #searchCategorySelect>
+    <fd-select
+        [placeholder]="categoryLabel"
+        [selectControlClass]="appearance?.categoryButtonClass"
+        [selectDropdownButtonClass]="appearance?.categoryDropdownButtonClass"
+        (valueChange)="setCurrentCategory($event)"
+    >
+        <li fd-option *ngFor="let category of categories" [value]="category">{{ category.label }}</li>
+    </fd-select>
+</ng-template>
+
 <ng-template #inputFieldTemplate>
     <div
         class="fdp-search-field"
@@ -11,27 +41,25 @@
         [class.is-loading]="isLoading"
         [class.hide-category-label]="hideCategoryLabel"
     >
-        <div #inputGroup class="fdp-search-field__input-group fd-input-group" [class.is-focus]="isFocused">
+        <div
+            #inputGroup
+            class="fdp-search-field__input-group fd-input-group {{ appearance?.searchClass }}"
+            [class.is-focus]="isFocused"
+        >
             <span
-                class="fd-input-group__addon fd-input-group__addon--button"
+                class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.searchCategoryClass }}"
                 [class.fd-input-group__addon--compact]="contentDensityObserver.isCompact"
                 *ngIf="_showCategoryDropdown"
             >
-                <button
-                    class="fdp-search-field__category-button fd-input-group__button fd-button fd-button--menu"
-                    [class.fd-button--compact]="contentDensityObserver.isCompact"
-                    [fdpMenuTriggerFor]="categoryMenu"
-                >
-                    <span class="fdp-search-field__category-label" *ngIf="!hideCategoryLabel">
-                        {{ _currentCategory?.label || categoryLabel }}
-                    </span>
-                </button>
+                <ng-template
+                    *ngTemplateOutlet="categoryMode === 'select' ? searchCategorySelect : searchCategoryMenu"
+                ></ng-template>
             </span>
             <input
                 #inputField
                 type="search"
                 [attr.placeholder]="placeholder"
-                class="fdp-search-field__input fd-input fd-input-group__input"
+                class="fdp-search-field__input fd-input fd-input-group__input {{ appearance?.searchFieldClass }}"
                 [attr.id]="_inputId"
                 [attr.disabled]="disabled ? '' : null"
                 [attr.aria-label]="ariaLabel"
@@ -47,13 +75,14 @@
                 (click)="mobile && openMobileMode()"
             />
             <span
-                class="fd-input-group__addon fd-input-group__addon--button"
+                class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }}"
                 [class.fd-input-group__addon--compact]="contentDensityObserver.isCompact"
                 *ngIf="inputText && inputText.length > 0"
             >
                 <button
                     [title]="'platformSearchField.clearButtonTitle' | fdTranslate"
-                    class="fdp-search-field__clear fd-input-group__button fd-button fd-button--transparent"
+                    class="fdp-search-field__clear fd-button fd-button--transparent {{ appearance?.buttonClass }}"
+                    [class.fd-input-group__button]="!appearance?.removeGroupButtonClass"
                     [attr.disabled]="disabled ? '' : null"
                     [class.fd-button--compact]="contentDensityObserver.isCompact"
                     [attr.id]="_clearId"
@@ -63,14 +92,17 @@
                 </button>
             </span>
             <span
-                class="fd-input-group__addon fd-input-group__addon--button"
+                class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }} {{
+                    appearance?.searchSubmitClass
+                }}"
                 [class.fd-input-group__addon--compact]="contentDensityObserver.isCompact"
-                *ngIf="isLoading || (!isLoading && !_isSearchDone)"
+                *ngIf="forceSearchButton || isLoading || (!isLoading && !_isSearchDone)"
             >
                 <button
                     *ngIf="!disableSearch"
                     [title]="'platformSearchField.submitButtonTitle' | fdTranslate"
-                    class="fdp-search-field__submit fd-input-group__button fd-button fd-button--transparent"
+                    class="fdp-search-field__submit fd-button fd-button--transparent {{ appearance?.buttonClass }}"
+                    [class.fd-input-group__button]="!appearance?.removeGroupButtonClass"
                     [attr.id]="_submitId"
                     [attr.disabled]="disabled ? '' : null"
                     [class.fd-button--compact]="contentDensityObserver.isCompact"
@@ -80,13 +112,17 @@
                 </button>
             </span>
             <span
-                class="fd-input-group__addon fd-input-group__addon--button"
+                class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }} {{
+                    appearance?.searchSubmitClass
+                }}"
                 [class.fd-input-group__addon--compact]="contentDensityObserver.isCompact"
                 *ngIf="!disableRefresh && !isLoading && (_isRefresh || _isSearchDone)"
             >
                 <button
                     [title]="'platformSearchField.synchronizeButtonTitle' | fdTranslate"
-                    class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent"
+                    class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent {{
+                        appearance?.buttonClass
+                    }}"
                     [attr.disabled]="disabled ? '' : null"
                     [class.fd-button--compact]="contentDensityObserver.isCompact"
                     [attr.id]="_refreshId"
@@ -130,9 +166,3 @@
         </nav>
     </div>
 </ng-template>
-
-<fdp-menu #categoryMenu>
-    <fdp-menu-item *ngFor="let category of categories" (itemSelect)="setCurrentCategory(category)"
-        >{{ category.label }}
-    </fdp-menu-item>
-</fdp-menu>

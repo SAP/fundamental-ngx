@@ -90,7 +90,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         ariaLabel: 'Перемикач'
     },
     coreShellbar: {
-        collapsedItemMenuLabel: 'Згорнуте меню елементів'
+        collapsedItemMenuLabel: 'Згорнуте меню елементів',
+        cancel: 'Відміна',
+        search: 'Пошук'
     },
     coreSlider: {
         singleMinMaxDetails: 'Мінімальне значення слайдера {{min}}, максимальне значення {{ max }}',

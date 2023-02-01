@@ -87,7 +87,7 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
         contentDensityObserverProviders()
     ]
 })
-export class SelectComponent
+export class SelectComponent<T = any>
     implements
         ControlValueAccessor,
         SelectInterface,
@@ -206,13 +206,21 @@ export class SelectComponent
     @Input()
     inline = true;
 
+    /** Additional classname for the select control element. */
+    @Input()
+    selectControlClass: Nullable<string>;
+
+    /** Additional classname for the select dropdown button element. */
+    @Input()
+    selectDropdownButtonClass: Nullable<string>;
+
     /** Event emitted when the popover open state changes. */
     @Output()
     readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Event emitted when the selected value of the select changes. */
     @Output()
-    readonly valueChange = new EventEmitter<any>();
+    readonly valueChange = new EventEmitter<T>();
 
     /** @hidden */
     @ContentChildren(OptionComponent, { descendants: true })
@@ -272,6 +280,13 @@ export class SelectComponent
      * Triggers when component is destroyed
      */
     readonly _destroy = new Subject<void>();
+
+    /** @hidden */
+    get _selectControlClass(): string {
+        return [this.state ? `is-${this.state}` : '', this.selectControlClass]
+            .filter((className) => !!className)
+            .join(' ');
+    }
 
     /**
      * @hidden
