@@ -1,9 +1,20 @@
 <fd-docs-section-title id="simple" componentName="focusableGrid">Basic example</fd-docs-section-title>
 <description>
-    To automatically focus cell's focusable child and remove it from tab sequence, use <code>focusChild</code> input
-    property of the <code>[fdkFocusableItem]</code> directive. <br /><br />
-    To enable wrapping to move focus to the prev/next row when there are no more items in the row in the given
-    direction, use <code>wrapHorizontally</code> input property of the <code>[fdkFocusableGrid]</code> directive.
+    <p>
+        To automatically focus cell's focusable child and remove it from tab sequence, use <code>focusChild</code> input
+        property of the <code>[fdkFocusableItem]</code> directive. <br /><br />
+    </p>
+
+    <p>
+        To enable wrapping to move focus to the prev/next row when there are no more items in the row in the given
+        direction, use <code>wrapHorizontally</code> input property of the <code>[fdkFocusableGrid]</code> directive.
+    </p>
+
+    <p>
+        It's even possible to have whole focusable row, to achieve this, use <code>focusable</code> input property of
+        the <code>[fdkFocusableList]</code> directive. When focused on the row to dive in and out of cell use
+        <code>F2</code> key.
+    </p>
 </description>
 <component-example [hasBackground]="false">
     <fundamental-ngx-focusable-grid-default-example></fundamental-ngx-focusable-grid-default-example>
