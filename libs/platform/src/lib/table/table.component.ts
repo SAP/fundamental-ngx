@@ -92,7 +92,7 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
+import { LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -1421,7 +1421,15 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             return;
         }
 
-        event?.preventDefault();
+        if (event && event instanceof KeyboardEvent && KeyUtil.isKeyCode(event, SPACE)) {
+            const eventTarget = event.target as HTMLInputElement;
+            if (
+                eventTarget.type === 'checkbox' ||
+                (eventTarget.tagName !== 'INPUT' && eventTarget.tagName !== 'TEXTAREA')
+            ) {
+                event.preventDefault(); // prevent page scroll but still allow space presses in inputs
+            }
+        }
 
         if (row.navigatable) {
             this._emitRowNavigate(row);
