@@ -35,7 +35,10 @@ let uniqueId = 0;
         },
         registerFormItemControl(RadioButtonComponent),
         contentDensityObserverProviders()
-    ]
+    ],
+    host: {
+        '(focusout)': 'onTouched()'
+    }
 })
 export class RadioButtonComponent
     implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor, OnDestroy, FormItemControl
