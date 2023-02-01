@@ -1,3 +1,12 @@
+# [0.39.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.22...v0.39.0-rc.23) (2023-02-01)
+
+
+### Bug Fixes
+
+* **platform:** can not enter space characters in inputs inside table cells ([#9306](https://github.com/SAP/fundamental-ngx/issues/9306)) ([a600794](https://github.com/SAP/fundamental-ngx/commit/a6007946e705cd8511bdd48d409abb586bf280b3))
+
+
+
 # [0.39.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.21...v0.39.0-rc.22) (2023-01-31)
 
 
