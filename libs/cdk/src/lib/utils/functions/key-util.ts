@@ -11,6 +11,7 @@ import {
     END,
     ENTER,
     ESCAPE,
+    F2,
     HOME,
     LEFT_ARROW,
     META,
@@ -71,7 +72,8 @@ const keyMap: Map<number, string[]> = new Map([
     [NUMPAD_SIX, ['NumPad6']],
     [NUMPAD_SEVEN, ['NumPad7']],
     [NUMPAD_EIGHT, ['NumPad8']],
-    [NUMPAD_NINE, ['NumPad9']]
+    [NUMPAD_NINE, ['NumPad9']],
+    [F2, ['F2']]
 ]);
 
 export class KeyUtil {
