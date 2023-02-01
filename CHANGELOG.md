@@ -1,3 +1,12 @@
+# [0.39.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.25...v0.39.0-rc.26) (2023-02-01)
+
+
+### Features
+
+* **core:** shellbar improvements ([#9287](https://github.com/SAP/fundamental-ngx/issues/9287)) ([7e4b09e](https://github.com/SAP/fundamental-ngx/commit/7e4b09e41518e7a7f61ade2e5b3023b874b1d512))
+
+
+
 # [0.39.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.24...v0.39.0-rc.25) (2023-02-01)
 
 
