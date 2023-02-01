@@ -3,6 +3,7 @@
     inputId="multiInput"
     [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
     placeholder="Search here..."
+    (searchTermChange)="searchTermChange($event)"
     [(ngModel)]="selected"
 ></fd-multi-input>
 

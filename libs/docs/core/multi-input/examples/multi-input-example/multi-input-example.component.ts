@@ -23,4 +23,8 @@ export class MultiInputExampleComponent {
     selectedObjectValues = ['apple_value', 'blueberry_value'];
     objectValuesDisplayFn = (v): string => v.label;
     objectValuesValueFn = (v): string => v.value;
+
+    searchTermChange(text: string): void {
+        console.log(text);
+    }
 }

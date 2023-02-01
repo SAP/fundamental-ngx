@@ -159,19 +159,25 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /** Event emitted when item is selected. */
     @Output()
-    selectionChange = new EventEmitter<MultiInputSelectionChangeEvent>();
+    readonly selectionChange = new EventEmitter<MultiInputSelectionChangeEvent>();
 
     /** @hidden Emits event when the menu is opened/closed */
     @Output()
-    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Event emitted when data loading is started. */
+    @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() onDataRequested = new EventEmitter<void>();
+    readonly onDataRequested = new EventEmitter<void>();
 
     /** Event emitted when data loading is finished. */
+    @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() onDataReceived = new EventEmitter<void>();
+    readonly onDataReceived = new EventEmitter<void>();
+
+    /** Event emitted when the search term changes. Use *$event* to access the new term. */
+    @Output()
+    readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
 
     /** @hidden */
     @ViewChild(ListComponent)
@@ -392,6 +398,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         map.set('query', text);
         map.set('limit', 12);
         this.ds.match(map);
+
+        this.searchTermChange.emit(text);
 
         this.cd.detectChanges();
     }
