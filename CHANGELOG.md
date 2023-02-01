@@ -1,3 +1,12 @@
+# [0.39.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.24...v0.39.0-rc.25) (2023-02-01)
+
+
+### Features
+
+* **core:** add search change event ([#9303](https://github.com/SAP/fundamental-ngx/issues/9303)) ([df91c3e](https://github.com/SAP/fundamental-ngx/commit/df91c3e7f22c595cfc0a2fce584afc4bc12ded36))
+
+
+
 # [0.39.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.23...v0.39.0-rc.24) (2023-02-01)
 
 
