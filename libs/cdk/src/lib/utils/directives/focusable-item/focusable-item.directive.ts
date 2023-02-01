@@ -10,7 +10,7 @@ import {
 } from '../../deprecated-selector.class';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { FocusableObserver } from './focusable.observer';
-import { takeUntil } from 'rxjs';
+import { skip, takeUntil } from 'rxjs';
 
 export interface FocusableItemPosition {
     rowIndex: number;
@@ -104,7 +104,7 @@ export class FocusableItemDirective implements HasElementRef {
     ) {
         this._focusableObserver
             .observe(this._elementRef, false)
-            .pipe(takeUntil(this._destroy$))
+            .pipe(skip(1), takeUntil(this._destroy$))
             .subscribe((isFocusable) => {
                 if (isFocusable !== this.fdkFocusableItem) {
                     this.fdkFocusableItem = isFocusable;
@@ -135,6 +135,10 @@ export class FocusableItemDirective implements HasElementRef {
     /** @hidden */
     @HostListener('focusin')
     async _onFocusin(): Promise<void> {
+        if (!this.fdkFocusableItem) {
+            return;
+        }
+
         if (this._timerId != null) {
             clearTimeout(this._timerId);
             this._timerId = null;
@@ -160,6 +164,10 @@ export class FocusableItemDirective implements HasElementRef {
     /** @hidden */
     @HostListener('focusout')
     _onFocusout(): void {
+        if (!this.fdkFocusableItem) {
+            return;
+        }
+
         this._timerId = setTimeout(() => (this._timerId = null));
     }
 
