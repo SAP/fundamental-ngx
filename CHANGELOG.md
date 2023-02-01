@@ -1,3 +1,12 @@
+# [0.39.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.23...v0.39.0-rc.24) (2023-02-01)
+
+
+### Bug Fixes
+
+* **platform:** listen to checkbox changes ([#9307](https://github.com/SAP/fundamental-ngx/issues/9307)) ([200c9e1](https://github.com/SAP/fundamental-ngx/commit/200c9e15e2b75e4fad3551975685eaeab17d6b62))
+
+
+
 # [0.39.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.22...v0.39.0-rc.23) (2023-02-01)
 
 
