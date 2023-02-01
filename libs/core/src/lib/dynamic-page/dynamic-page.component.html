@@ -19,7 +19,12 @@
     </header>
 
     <ng-content select="fd-tab-list"></ng-content>
-    <div fd-scrollbar>
+
+    <div fd-scrollbar *ngIf="!_tabComponent">
+        <ng-content select="fd-dynamic-page-content"></ng-content>
+    </div>
+
+    <div *ngIf="_tabComponent">
         <ng-content select="fd-dynamic-page-content"></ng-content>
     </div>
 
