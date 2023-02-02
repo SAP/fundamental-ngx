@@ -92,6 +92,8 @@ export const formGroupProvider: Provider = {
 
 type FormGroupField = (FormField | FormFieldGroup) & { hintOptions?: HintOptions };
 
+let formGroupUniqueId = 0;
+
 /**
  *
  * FormGroup represent high order container aggregating FormFields and ability to distribute these
@@ -179,7 +181,7 @@ export class FormGroupComponent
 {
     /** Id for the form group element */
     @Input()
-    id: string;
+    id: string = `fdp-form-group-${formGroupUniqueId++}`;
 
     /** Name property to be set on a form. Will be used if `useForm` is set to true */
     @Input()

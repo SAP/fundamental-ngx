@@ -26,6 +26,12 @@ export class DynamicFormControlDirective implements OnInit {
     @Input() formItem: PreparedDynamicFormFieldItem;
 
     /**
+     * @description Represents form control id.
+     */
+    @Input()
+    id: string;
+
+    /**
      * @description Represents form control name.
      */
     @Input() name: string;
@@ -55,6 +61,11 @@ export class DynamicFormControlDirective implements OnInit {
         private readonly _injector: Injector,
         @Optional() @Inject(CONTENT_DENSITY_DIRECTIVE) private contentDensityDirective: Observable<ContentDensityMode>
     ) {}
+
+    /** @hidden */
+    fieldId(): string {
+        return `fdp-form-control-${this.id || this.name}`;
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -87,6 +98,7 @@ export class DynamicFormControlDirective implements OnInit {
         });
 
         componentRef.instance.formItem = this.formItem;
+        componentRef.instance.id = this.fieldId();
         componentRef.instance.name = this.name;
         componentRef.instance.form = this.form;
         componentRef.instance.formField = this.formField;
