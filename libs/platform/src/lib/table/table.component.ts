@@ -92,7 +92,7 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -1496,11 +1496,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             this._dragDropRearrangeTreeRows(dragRow, dropRow);
             this._dragDropUpdateDropRowAttributes(dragRow, dropRow);
 
-            if (!dropRow.expanded) {
-                this._toggleExpandableTableRow(dropRow);
-            } else {
-                this._onTableRowsChanged();
-            }
+            this._onTableRowsChanged();
 
             this._cdr.markForCheck();
             this._emitRowsRearrangeEvent(dragRow, event.draggedItemIndex, event.replacedItemIndex);
@@ -2439,5 +2435,26 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 currentPage: 1
             }
         };
+    }
+
+    /** @hidden */
+    _dragRowFromKeyboard(dir: string, event: Event, currentRowIndex: number) {
+        event.preventDefault();
+        if (this._rowsDraggable) {
+            let replacedItem, replacedItemIndex;
+            if (dir === 'up') {
+                replacedItemIndex = currentRowIndex;
+                currentRowIndex = currentRowIndex - 1;
+            } else {
+                replacedItemIndex = currentRowIndex + 1;
+            }
+
+            replacedItem = this._tableRowsVisible.filter((row, index) => index === replacedItemIndex)[0];
+
+            if (replacedItem) {
+                const dragDropEvent = {items: this._tableRowsVisible, draggedItemIndex: currentRowIndex, replacedItemIndex: replacedItemIndex};
+                this._dragDropItemDrop(dragDropEvent);
+            }
+        }
     }
 }
