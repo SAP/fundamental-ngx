@@ -249,6 +249,9 @@ export interface DynamicFormFieldItem {
 
     /** Horizontally align text inside the second column (Applicable for two columns layout) */
     secondaryTextAlignment?: TextAlignment;
+
+    /** Custom template used to build control body. */
+    controlTemplate: TemplateRef<any>;
 }
 
 type PreparedDynamicFormFieldItemFields = {
