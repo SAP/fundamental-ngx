@@ -53,8 +53,6 @@ import {
 } from './enums';
 import {
     DEFAULT_HIGHLIGHTING_KEY,
-    DEFAULT_SELECTABLE_KEY,
-    DEFAULT_SELECTED_KEY,
     DEFAULT_TABLE_STATE,
     EDITABLE_ROW_SEMANTIC_STATE,
     SELECTION_COLUMN_WIDTH,
@@ -369,18 +367,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     get selectedKey(): string {
-        if (!this._selectedKey && this._forceSelected) {
-            return DEFAULT_SELECTED_KEY;
-        }
-
         return this._selectedKey;
     }
 
     /** @hidden */
     private _selectedKey: string;
-
-    /** @hidden */
-    private _forceSelected = false;
 
     /** Value with the key of the row item's field to enable selecting.  */
     @Input()
@@ -389,18 +380,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     get selectableKey(): string {
-        if (!this._selectableKey && this._forceSelectable) {
-            return DEFAULT_SELECTABLE_KEY;
-        }
-
         return this._selectableKey;
     }
 
     /** @hidden */
     private _selectableKey: string;
-
-    /** @hidden */
-    private _forceSelectable = false;
 
     /**
      * Tracking function that will be used to check the differences in data changes.
@@ -1199,12 +1183,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      */
     addRow(): void {
         this._forceSemanticHighlighting = true;
-        this._forceSelected = true;
-        this._forceSelectable = true;
 
         const newRow = this._buildNewRowSkeleton();
-        newRow[this.selectableKey] = true;
-        newRow[this.selectedKey] = false;
         newRow[this.semanticHighlighting] = EDITABLE_ROW_SEMANTIC_STATE;
 
         this._addedItems.unshift(newRow);
@@ -1212,7 +1192,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         const newRows = this._createTableRowsByDataSourceItems([newRow]);
         this._newTableRows = [...newRows, ...this._newTableRows];
 
-        this._setTableRows(this._dataSourceTableRows);
+        this._setTableRows();
         this.emptyRowAdded.emit();
     }
 
@@ -1870,7 +1850,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    private _setTableRows(rows: TableRow[]): void {
+    private _setTableRows(rows = this._dataSourceTableRows): void {
         this._dataSourceTableRows = rows;
         this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
         this._onTableRowsChanged();
@@ -2491,9 +2471,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._newTableRows = [];
         this._addedItems = [];
         this._forceSemanticHighlighting = false;
-        this._forceSelected = false;
-        this._forceSelectable = false;
-        this._setTableRows(this._dataSourceTableRows);
+        this._setTableRows();
     }
 
     /** @hidden */
