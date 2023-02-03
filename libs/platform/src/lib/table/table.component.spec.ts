@@ -704,9 +704,9 @@ describe('TableComponent internal', () => {
                 calculateTableElementsMetaData();
 
                 expect(tableHeaderCells.length).toBe(3);
-                expect(tableHeaderCells[0].nativeElement.innerText.trim()).toBe('ID');
-                expect(tableHeaderCells[1].nativeElement.innerText.trim()).toBe('Name');
-                expect(tableHeaderCells[2].nativeElement.innerText.trim()).toBe('Status');
+                expect(tableHeaderCells[0].nativeElement.innerText.trim()).toBe('Name');
+                expect(tableHeaderCells[1].nativeElement.innerText.trim()).toBe('Status');
+                expect(tableHeaderCells[2].nativeElement.innerText.trim()).toBe('ID');
             }));
         });
 
