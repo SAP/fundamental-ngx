@@ -518,6 +518,22 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="columns-ngfor" componentName="table"
+    >Rendering columns with ngFor loop</fd-docs-section-title
+>
+<description>
+    <p>Platform Table component supports declaring columns with <code>*ngFor</code> loop.</p>
+    <p>When new column added, it will automatically appear in the table.</p>
+    <p>If by default column should be hidden, developers can add <code>[visible]="false"</code> Input property.</p>
+    <p>This way column still will be added to the table configuration dialog, but won't be rendered when added.</p>
+</description>
+<component-example>
+    <fdp-platform-table-columns-ngfor-example></fdp-platform-table-columns-ngfor-example>
+</component-example>
+<code-example [exampleFiles]="ngFor"></code-example>
+
+<separator></separator>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fdp-table
         [fdContentDensity]="data.table.contentDensity"

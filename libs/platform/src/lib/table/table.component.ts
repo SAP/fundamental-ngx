@@ -773,6 +773,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _currentPreset: PlatformTableManagedPreset = {};
 
     /** @hidden */
+    private _initialStateSet = false;
+
+    /** @hidden */
     @HostListener('keydown', ['$event'])
     _onKeyDown(event: KeyboardEvent): void {
         if (
@@ -963,10 +966,19 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * @param columns table columns names
      */
     setColumns(columns: string[]): void {
-        const columnKeys = this.getTableColumns()
-            .filter((c) => columns.includes(c.name))
-            .map((c) => c.key);
-        this._tableService.setColumns(columns, columnKeys);
+        const tableColumns = this.getTableColumns();
+        const columnsObject: Record<string, string[]> = {
+            columns: [],
+            keys: []
+        };
+        tableColumns
+            .filter((column) => columns.includes(column.name))
+            .reduce((acc, column) => {
+                acc.columns.push(column.name);
+                acc.keys.push(column.key);
+                return acc;
+            }, columnsObject);
+        this._tableService.setColumns(columnsObject.columns, columnsObject.keys);
         this._cdr.markForCheck();
     }
 
@@ -1847,8 +1859,19 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             const prevColumns = this._tableColumnsSubject.getValue().map((column) => column.name);
             const currentColumns = columns.map((column) => column.name);
 
+            const newColumns = columns
+                .filter((column) => column.visible && !prevColumns.includes(column.name))
+                .map((c) => c.name);
+            const stateColumns = this.getTableState().columns;
+
             this._buildColumnsMap(columns);
             this._tableColumnsSubject.next(columns);
+
+            if (this._initialStateSet) {
+                this.setColumns([...stateColumns, ...newColumns]);
+            }
+
+            this._initialStateSet = true;
 
             this._tableService.columnsChange.emit({ previous: currentColumns, current: prevColumns });
             this._tableService.detectChanges();

@@ -35,6 +35,9 @@ export abstract class TableColumn {
     /** Toggles freeze/unfreeze feature in the column header. */
     abstract freezable: boolean;
 
+    /** Initial visibility state of the column. */
+    abstract visible: boolean;
+
     /** Column cell template for readonly mode. */
     abstract columnCellTemplate: TemplateRef<any>;
 
