@@ -1,0 +1,21 @@
+<fdp-table [dataSource]="source" [trackBy]="trackBy" emptyTableMessage="No data found">
+    <fdp-table-toolbar [hideItemCount]="true">
+        <fdp-table-toolbar-left-actions>
+            <label fd-toolbar-label class="fd-toolbar__title"> Custom table title </label>
+            <fd-toolbar-separator></fd-toolbar-separator>
+            <fdp-button label="I'm a button"></fdp-button>
+        </fdp-table-toolbar-left-actions>
+        <fdp-table-toolbar-actions>
+            <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>
+            <fdp-button label="Action Two" (click)="alert('Action Two')"></fdp-button>
+        </fdp-table-toolbar-actions>
+    </fdp-table-toolbar>
+
+    <fdp-column name="name" key="name" label="Name" align="start"> </fdp-column>
+
+    <fdp-column name="description" key="description" label="Description"> </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price" align="end"> </fdp-column>
+
+    <fdp-column name="status" key="status" label="Status" align="center"> </fdp-column>
+</fdp-table>
