@@ -1,3 +1,12 @@
+# [0.39.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.26...v0.39.0-rc.27) (2023-02-03)
+
+
+### Bug Fixes
+
+* **core:** fix radio button reactive touched ([#9320](https://github.com/SAP/fundamental-ngx/issues/9320)) ([a10e441](https://github.com/SAP/fundamental-ngx/commit/a10e4411ce13b4170ce1d9f8b93b0a579176784d))
+
+
+
 # [0.39.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.25...v0.39.0-rc.26) (2023-02-01)
 
 
