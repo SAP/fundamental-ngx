@@ -973,6 +973,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         };
         tableColumns
             .filter((column) => columns.includes(column.name))
+            // We need to have same order of columns as user defined.
+            .sort((a, b) => columns.indexOf(a.name) - columns.indexOf(b.name))
             .reduce((acc, column) => {
                 acc.columns.push(column.name);
                 acc.keys.push(column.key);
