@@ -71,6 +71,10 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     @Input()
     filterable = false;
 
+    /** Initial visibility state of the column. Default `true`. */
+    @Input()
+    visible = true;
+
     /**
      * Data type the column represents. Default is 'string'
      * @type { 'string' | 'number' | 'date' | 'boolean' }

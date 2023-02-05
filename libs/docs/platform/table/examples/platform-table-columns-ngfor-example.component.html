@@ -1,0 +1,30 @@
+<p>Note: each even column will be hidden by default. To enable column visibility, open p13 dialog.</p>
+
+<fdp-table #table [dataSource]="source" [trackBy]="trackBy" emptyTableMessage="No data found">
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false">
+        <fdp-table-toolbar-actions>
+            <fdp-button label="Add column" (click)="addColumn()"></fdp-button>
+            <fdp-button label="Remove column" (click)="removeColumn()"></fdp-button>
+        </fdp-table-toolbar-actions>
+    </fdp-table-toolbar>
+
+    <fdp-column name="name" key="name" label="Name" align="start"> </fdp-column>
+
+    <fdp-column name="description" key="description" label="Description"> </fdp-column>
+
+    <fdp-column name="price" key="price.value" label="Price" align="end"> </fdp-column>
+
+    <fdp-column name="status" key="status" label="Status" align="center"> </fdp-column>
+
+    <fdp-column
+        *ngFor="let column of columns; let i = index"
+        [name]="column.key"
+        [label]="column.label"
+        [visible]="i % 2 === 0"
+    >
+        <fdp-table-cell *fdpCellDef="let node"> Some text here </fdp-table-cell>
+    </fdp-column>
+</fdp-table>
+
+<!-- Connect P13 Dialog to the table -->
+<fdp-table-p13-dialog [table]="table"></fdp-table-p13-dialog>
