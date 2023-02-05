@@ -1,3 +1,12 @@
+# [0.39.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.27...v0.39.0-rc.28) (2023-02-05)
+
+
+### Features
+
+* **platform:** dynamic columns support ([#9329](https://github.com/SAP/fundamental-ngx/issues/9329)) ([9a08865](https://github.com/SAP/fundamental-ngx/commit/9a08865dccc6c35883e015667c98f0ac675934ea))
+
+
+
 # [0.39.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.26...v0.39.0-rc.27) (2023-02-03)
 
 
