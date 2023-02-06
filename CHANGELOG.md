@@ -1,3 +1,12 @@
+# [0.39.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.29...v0.39.0-rc.30) (2023-02-06)
+
+
+### Bug Fixes
+
+* **ci:** lint-staged ([#9319](https://github.com/SAP/fundamental-ngx/issues/9319)) ([6366bdf](https://github.com/SAP/fundamental-ngx/commit/6366bdf8377b729ec1cfa055d981d27da816b4a1))
+
+
+
 # [0.39.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.28...v0.39.0-rc.29) (2023-02-06)
 
 
