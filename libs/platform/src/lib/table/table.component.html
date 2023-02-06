@@ -7,7 +7,7 @@
 
 <fd-busy-indicator [loading]="loadingState && _firstLoadingDone" [block]="true">
     <!-- Table Container -->
-    <div class="fdp-table__container" role="table" #tableContainer>
+    <div class="fdp-table__container" #tableContainer>
         <ng-container [ngTemplateOutlet]="tableTemplate"></ng-container>
 
         <!-- Table column resizer for visually representing the resizing process -->
@@ -26,7 +26,7 @@
     >
         <table
             fd-table
-            role="presentation"
+            [attr.role]="isTreeTable ? 'treegrid' : 'grid'"
             class="fdp-table__body-table"
             [allCellsFocusable]="true"
             [popIn]="_poppingColumns.length > 0"
@@ -143,7 +143,6 @@
                     <tr
                         *ngSwitchCase="'group'"
                         fd-table-row
-                        role="row"
                         [attr.aria-rowindex]="rowIdx"
                         (click)="_emitRowActivate(row)"
                     >
@@ -151,7 +150,7 @@
                             fd-table-cell
                             class="fd-table__cell--group fd-table__cell--fixed fd-table__cell--expand"
                             tabindex="0"
-                            role="cell"
+                            role="gridcell"
                             [attr.colspan]="_tableColumnsLength"
                             [attr.aria-expanded]="row.expanded"
                             [attr.data-nesting-level]="row.level + 1"
@@ -168,8 +167,6 @@
                         *ngSwitchDefault
                         fd-table-row
                         fd-dnd-item
-                        #tableRow
-                        role="row"
                         [applyDragItemClass]="_rowsDraggable"
                         [class]="row | rowClasses : rowsClass"
                         [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
@@ -180,6 +177,7 @@
                         [highlightActive]="highlightNavigatedRow"
                         [attr.aria-selected]="row.checked"
                         [attr.aria-rowindex]="rowIdx"
+                        [attr.aria-level]="isTreeTable ? row.level + 1 : null"
                         (click)="_onRowClick(row)"
                         (keydown.enter)="_onRowClick(row)"
                         (keydown.space)="_onRowClick(row, $event)"
@@ -242,7 +240,7 @@
                         <ng-template #selectionMock>
                             <td
                                 class="fd-table__cell--fixed fd-table__cell--checkbox"
-                                role="rowheader"
+                                role="gridcell"
                                 fd-table-cell
                                 fdkDisabled
                             ></td>
@@ -255,7 +253,7 @@
                                 colIdx | columnResizableSide : _visibleColumns.length : _isShownNavigationColumn
                             "
                             [columnName]="column.name"
-                            role="cell"
+                            role="gridcell"
                             [headers]="id + '__' + column.name"
                             [ngClass]="'fdp-table__col--' + column.name"
                             [class.fd-table__cell--fixed]="_freezableColumns.has(column.name)"
@@ -273,6 +271,8 @@
                             "
                             [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
                             [attr.data-nesting-level]="colIdx === 0 ? row.level + 1 : null"
+                            [cellFocusedEventAnnouncer]="null"
+                            (cellFocused)="_onCellFocused($event, isTreeTable ? row.level : null)"
                             (click)="_onCellClick(colIdx, row)"
                             (keyup.enter)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
                         >
@@ -284,7 +284,12 @@
                             ></ng-container>
                         </td>
 
-                        <td *ngIf="_isShownNavigationColumn" fd-table-cell class="fdp-table__cell--navigation">
+                        <td
+                            *ngIf="_isShownNavigationColumn"
+                            fd-table-cell
+                            class="fdp-table__cell--navigation"
+                            fdkDisabled
+                        >
                             <i
                                 *ngIf="row.navigatable"
                                 fd-table-icon
@@ -345,7 +350,7 @@
 <!-- Empty Table Message -->
 <ng-template #emptyTableTemplate>
     <tbody *ngIf="!_firstLoadingDone" fd-table-body>
-        <tr fd-table-row role="row" *fdkRepeat="3">
+        <tr fd-table-row *fdkRepeat="3">
             <td fd-table-cell *fdkRepeat="_tableColumnsLength">
                 <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="60%"></fd-skeleton>
             </td>
@@ -353,7 +358,7 @@
     </tbody>
 
     <tbody *ngIf="_firstLoadingDone" fd-table-body class="fdp-table__empty">
-        <tr fd-table-row role="row">
+        <tr fd-table-row>
             <td fd-table-cell class="fd-table__cell--no-data" [attr.colspan]="_tableColumnsLength">
                 <div class="fdp-table__empty-table-message">
                     <ng-container>

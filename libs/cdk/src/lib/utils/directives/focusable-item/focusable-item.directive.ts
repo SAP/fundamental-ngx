@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
 import { DestroyedService, TabbableElementService } from '../../services';
@@ -11,6 +11,9 @@ import {
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { FocusableObserver } from './focusable.observer';
 import { takeUntil } from 'rxjs';
+import { Nullable } from '../../models/nullable';
+
+export type CellFocusedEventAnnouncer = Nullable<(position: FocusableItemPosition) => string>;
 
 export interface FocusableItemPosition {
     rowIndex: number;
@@ -68,7 +71,11 @@ export class FocusableItemDirective implements HasElementRef {
 
     /** Function, which returns a string to be announced by screen-reader whenever an item which is in grid receives focus. */
     @Input()
-    cellFocusedEventAnnouncer: (position: FocusableItemPosition) => string = this._defaultItemFocusedEventAnnouncer;
+    cellFocusedEventAnnouncer: CellFocusedEventAnnouncer = this._defaultItemFocusedEventAnnouncer;
+
+    /** Event emitted when the cell receives focus, not being emitted when focus moves between item's children. */
+    @Output()
+    readonly cellFocused = new EventEmitter<FocusableItemPosition>();
 
     /** @hidden */
     _position: FocusableItemPosition;
@@ -156,8 +163,12 @@ export class FocusableItemDirective implements HasElementRef {
         }
 
         if (this._position) {
-            this._liveAnnouncer.clear();
-            await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(this._position));
+            this.cellFocused.next(this._position);
+
+            if (this.cellFocusedEventAnnouncer) {
+                this._liveAnnouncer.clear();
+                await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(this._position));
+            }
         }
     }
 
