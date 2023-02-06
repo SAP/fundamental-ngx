@@ -104,7 +104,17 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
-export type CellFocusedEventAnnouncer = (data: FocusableItemPosition, nestingLevel: number | null) => string;
+/**
+ * Cell announcer function which returns a string to be announced by screen readers.
+ * @param position The position of the cell in the table.
+ * @param headerLabel The label of the column header.
+ * @param nestingLevel The nesting level of the cell in case of tree table.
+ */
+export type CellFocusedEventAnnouncer = (
+    position: FocusableItemPosition,
+    headerLabel: string,
+    nestingLevel: number | null
+) => string;
 
 type TreeLike<T> = T & {
     _children?: TreeLike<T>[];
@@ -1584,10 +1594,14 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    async _onCellFocused(position: FocusableItemPosition, nestingLevel: number | null): Promise<void> {
+    async _onCellFocused(
+        position: FocusableItemPosition,
+        columnLabel: string,
+        nestingLevel: number | null
+    ): Promise<void> {
         if (this.cellFocusedEventAnnouncer) {
             this._liveAnnouncer.clear();
-            await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(position, nestingLevel));
+            await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(position, columnLabel, nestingLevel));
         }
     }
 
@@ -2522,11 +2536,16 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    private _defaultCellFocusedEventAnnouncer(position: FocusableItemPosition, nestingLevel: number | null): string {
+    private _defaultCellFocusedEventAnnouncer(
+        position: FocusableItemPosition,
+        headerLabel: string,
+        nestingLevel: number | null
+    ): string {
         return (
-            `Column ${position.colIndex + 1} of ${position.totalCols}, row: ${position.rowIndex + 1} of ${
-                position.totalRows
-            }` + (nestingLevel !== null ? `, level: ${nestingLevel + 1}` : '')
+            `${headerLabel},
+            column ${position.colIndex + 1} of ${position.totalCols},
+            row: ${position.rowIndex + 1} of ${position.totalRows}` +
+            (nestingLevel !== null ? `, level: ${nestingLevel + 1}` : '')
         );
     }
 }

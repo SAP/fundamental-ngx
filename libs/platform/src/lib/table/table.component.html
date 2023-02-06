@@ -90,6 +90,8 @@
                             "
                             [fdPopoverTrigger]="columnHeaderPopover"
                             [class.fd-table__item--clickable]="_isColumnHasHeaderMenu(column)"
+                            [cellFocusedEventAnnouncer]="null"
+                            (cellFocused)="_onCellFocused($event, column.label ?? '', null)"
                         >
                             <ng-container
                                 *ngTemplateOutlet="tableHeaderCellTemplate; context: { column: column }"
@@ -272,7 +274,7 @@
                             [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
                             [attr.data-nesting-level]="colIdx === 0 ? row.level + 1 : null"
                             [cellFocusedEventAnnouncer]="null"
-                            (cellFocused)="_onCellFocused($event, isTreeTable ? row.level : null)"
+                            (cellFocused)="_onCellFocused($event, column?.label ?? '', isTreeTable ? row.level : null)"
                             (click)="_onCellClick(colIdx, row)"
                             (keyup.enter)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
                         >
