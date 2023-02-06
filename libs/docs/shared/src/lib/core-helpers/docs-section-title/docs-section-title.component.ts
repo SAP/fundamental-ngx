@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyedService } from '@fundamental-ngx/cdk';
+import { takeUntil } from 'rxjs';
 import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
 @Component({
@@ -17,7 +19,8 @@ import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
             <ng-content></ng-content>
         </h2>
     `,
-    styleUrls: ['./docs-section-title.component.scss']
+    styleUrls: ['./docs-section-title.component.scss'],
+    providers: [DestroyedService]
 })
 export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
     @ViewChild('title', { read: ElementRef })
@@ -33,12 +36,16 @@ export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
 
     private idFromUrl: any;
 
-    constructor(private activatedRoute: ActivatedRoute, @Inject(CURRENT_LIB) private currentLib: Libraries) {
+    constructor(
+        private readonly activatedRoute: ActivatedRoute,
+        @Inject(CURRENT_LIB) private readonly currentLib: Libraries,
+        private readonly _destroy$: DestroyedService
+    ) {
         this.currentLibrary = this.currentLib;
     }
 
     ngOnInit(): void {
-        this.activatedRoute.fragment.subscribe((fragment) => {
+        this.activatedRoute.fragment.pipe(takeUntil(this._destroy$)).subscribe((fragment) => {
             this.idFromUrl = fragment;
             this.handleUrlFragment();
         });

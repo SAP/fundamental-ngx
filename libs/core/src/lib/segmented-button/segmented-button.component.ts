@@ -14,7 +14,7 @@ import {
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { filter, startWith, takeUntil, tap } from 'rxjs/operators';
 import { Subject, merge, fromEvent } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { DestroyedService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -49,7 +49,8 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => SegmentedButtonComponent),
             multi: true
-        }
+        },
+        DestroyedService
     ]
 })
 export class SegmentedButtonComponent implements AfterContentInit, ControlValueAccessor {
@@ -75,9 +76,6 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     /** @hidden */
     private _isDisabled = false;
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$ = new Subject<void>();
-
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
@@ -88,7 +86,11 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     onTouched = (): void => {};
 
     /** @hidden */
-    constructor(private readonly _changeDetRef: ChangeDetectorRef, private readonly _elementRef: ElementRef) {}
+    constructor(
+        private readonly _changeDetRef: ChangeDetectorRef,
+        private readonly _elementRef: ElementRef,
+        private readonly _onDestroy$: DestroyedService
+    ) {}
 
     /** @hidden */
     ngAfterContentInit(): void {

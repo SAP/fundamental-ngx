@@ -169,6 +169,9 @@ export class TokenizerComponent
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
+    private readonly _eventListeners: (() => void)[] = [];
+
+    /** @hidden */
     constructor(
         readonly _contentDensityObserver: ContentDensityObserver,
         private _elementRef: ElementRef,
@@ -176,13 +179,15 @@ export class TokenizerComponent
         @Optional() private _rtlService: RtlService,
         private _renderer: Renderer2
     ) {
-        this._renderer.listen('window', 'click', (e: Event) => {
-            if (this.elementRef().nativeElement.contains(e.target) === false) {
-                this.tokenList.forEach((token) => {
-                    token.selected = false;
-                });
-            }
-        });
+        this._eventListeners.push(
+            this._renderer.listen('window', 'click', (e: Event) => {
+                if (this.elementRef().nativeElement.contains(e.target) === false) {
+                    this.tokenList.forEach((token) => {
+                        token.selected = false;
+                    });
+                }
+            })
+        );
     }
 
     /** @hidden */
@@ -224,6 +229,7 @@ export class TokenizerComponent
         }
         this._onDestroy$.next();
         this._onDestroy$.complete();
+        this._eventListeners.forEach((e) => e());
         this._unsubscribeClicks();
     }
 
@@ -545,9 +551,11 @@ export class TokenizerComponent
 
     /** @hidden */
     private _inputKeydownEvent(): void {
-        this.input.elementRef().nativeElement.addEventListener('keydown', (event) => {
-            this.handleKeyDown(event, this.tokenList.length);
-        });
+        this._eventListeners.push(
+            this._renderer.listen(this.input.elementRef().nativeElement, 'keydown', (event: KeyboardEvent) => {
+                this.handleKeyDown(event, this.tokenList.length);
+            })
+        );
     }
 
     /** @hidden Method which handles what happens to token when it is clicked and no key is being held down.*/
