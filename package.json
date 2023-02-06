@@ -177,7 +177,9 @@
     "webdriverio": "7.27.0"
   },
   "lint-staged": {
-    "*.{js,ts,html,md,scss,css,json,yml}": "nx format:write --files=",
-    "*.ts": "eslint"
+    "*": [
+      "yarn nx format:write --uncommitted",
+      "yarn eslint --fix"
+    ]
   }
 }
