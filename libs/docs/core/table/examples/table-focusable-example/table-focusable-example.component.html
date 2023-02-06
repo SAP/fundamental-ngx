@@ -1,20 +1,20 @@
-<table fd-table aria-label="Focusable">
+<table fd-table aria-label="Focusable" [allCellsFocusable]="true">
     <thead fd-table-header>
         <tr fd-table-row>
-            <th fd-table-cell [focusable]="true" [activable]="true" [hoverable]="true">Every</th>
-            <th fd-table-cell [focusable]="true" [activable]="true" [hoverable]="true">Single</th>
-            <th fd-table-cell [focusable]="true" [activable]="true" [hoverable]="true">Cell</th>
-            <th fd-table-cell [focusable]="true" [activable]="true" [hoverable]="true">Can be</th>
-            <th fd-table-cell [focusable]="true" [activable]="true" [hoverable]="true">Focused</th>
+            <th fd-table-cell [activable]="true" [hoverable]="true">Every</th>
+            <th fd-table-cell [activable]="true" [hoverable]="true">Single</th>
+            <th fd-table-cell [activable]="true" [hoverable]="true">Cell</th>
+            <th fd-table-cell [activable]="true" [hoverable]="true">Can be</th>
+            <th fd-table-cell [activable]="true" [hoverable]="true">Focused</th>
         </tr>
     </thead>
     <tbody fd-table-body>
         <tr fd-table-row [focusable]="true" *ngFor="let item of [0, 1, 2, 3, 4, 5]">
-            <td fd-table-cell [focusable]="true">Whole</td>
-            <td fd-table-cell [focusable]="true">Row</td>
-            <td fd-table-cell [focusable]="true">Can also</td>
-            <td fd-table-cell [focusable]="true">Be</td>
-            <td fd-table-cell [focusable]="true">Focused</td>
+            <td fd-table-cell>Whole</td>
+            <td fd-table-cell>Row</td>
+            <td fd-table-cell>Can also</td>
+            <td fd-table-cell>Be</td>
+            <td fd-table-cell>Focused</td>
         </tr>
     </tbody>
 </table>
