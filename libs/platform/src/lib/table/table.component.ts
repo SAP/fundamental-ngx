@@ -30,7 +30,14 @@ import set from 'lodash-es/set';
 import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
-import { FdDropEvent, KeyUtil, RangeSelector, resizeObservable, RtlService } from '@fundamental-ngx/cdk/utils';
+import {
+    FdDropEvent,
+    FocusableItemPosition,
+    KeyUtil,
+    RangeSelector,
+    resizeObservable,
+    RtlService
+} from '@fundamental-ngx/cdk/utils';
 import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
 import { FDP_PRESET_MANAGED_COMPONENT, isDataSource, isString } from '@fundamental-ngx/platform/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
@@ -93,8 +100,11 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
+
+export type CellFocusedEventAnnouncer = (data: FocusableItemPosition, nestingLevel: number | null) => string;
 
 type TreeLike<T> = T & {
     _children?: TreeLike<T>[];
@@ -386,6 +396,13 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** Whether all rows should be collapsed by default after the table is loaded. */
     @Input()
     expandOnInit = false;
+
+    /**
+     * Function, that creates a string to be announced by screen-reader whenever cell receives focus.
+     * Second argument is nesting level starting from 0 if table in tree mode, otherwise null.
+     */
+    @Input()
+    cellFocusedEventAnnouncer: CellFocusedEventAnnouncer = this._defaultCellFocusedEventAnnouncer;
 
     /** Event emitted when current preset configuration has been changed. */
     @Output()
@@ -807,7 +824,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         private readonly _elRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService,
         readonly contentDensityObserver: ContentDensityObserver,
-        readonly injector: Injector
+        readonly injector: Injector,
+        private readonly _liveAnnouncer: LiveAnnouncer
     ) {
         super();
     }
@@ -1539,6 +1557,14 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     _columnTrackBy(index: number, column: TableColumn): string {
         return column.name;
+    }
+
+    /** @hidden */
+    async _onCellFocused(position: FocusableItemPosition, nestingLevel: number | null): Promise<void> {
+        if (this.cellFocusedEventAnnouncer) {
+            this._liveAnnouncer.clear();
+            await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(position, nestingLevel));
+        }
     }
 
     /** Fetch data source data. */
@@ -2464,5 +2490,14 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 currentPage: 1
             }
         };
+    }
+
+    /** @hidden */
+    private _defaultCellFocusedEventAnnouncer(position: FocusableItemPosition, nestingLevel: number | null): string {
+        return (
+            `Column ${position.colIndex + 1} of ${position.totalCols}, row: ${position.rowIndex + 1} of ${
+                position.totalRows
+            }` + (nestingLevel !== null ? `, level: ${nestingLevel + 1}` : '')
+        );
     }
 }
