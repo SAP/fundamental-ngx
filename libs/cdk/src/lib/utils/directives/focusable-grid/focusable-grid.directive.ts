@@ -1,5 +1,5 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { AfterViewInit, ContentChildren, Directive, EventEmitter, Input, Output, QueryList } from '@angular/core';
 import { merge, startWith, switchMap, takeUntil } from 'rxjs';
 import { KeyUtil } from '../../functions';
@@ -7,6 +7,8 @@ import { Nullable } from '../../models/nullable';
 import { DestroyedService } from '../../services';
 import { FocusableItemPosition } from '../focusable-item';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective, FocusableListPosition } from '../focusable-list';
+import { findLastIndex } from 'lodash-es';
+import { ScrollPosition } from '../focusable-list';
 
 @Directive({
     selector: '[fdkFocusableGrid]',
@@ -104,7 +106,7 @@ export class FocusableGridDirective implements AfterViewInit {
 
     /** @hidden */
     _onKeydown(event: KeyboardEvent, list: FocusableListDirective, activeItemIndex: Nullable<number>): void {
-        if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
+        if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, PAGE_DOWN, PAGE_UP])) {
             return;
         }
 
@@ -112,6 +114,7 @@ export class FocusableGridDirective implements AfterViewInit {
         const currentRowIndex = lists.findIndex((item) => item === list);
         let nextRowIndex: number | undefined;
         let nextRowItemIndex = activeItemIndex ?? 0;
+        let scrollIntoView: ScrollPosition;
 
         const isFirstItemLtr = activeItemIndex === 0 && this.contentDirection !== 'rtl';
         const isLastItemRtl = activeItemIndex === list._focusableItems.length - 1 && this.contentDirection === 'rtl';
@@ -134,7 +137,6 @@ export class FocusableGridDirective implements AfterViewInit {
                     nextRowIndex = currentRowIndex - 1;
                     nextRowItemIndex = lists[nextRowIndex]?._focusableItems.length - 1;
                 }
-
                 break;
             case RIGHT_ARROW:
                 if (this.wrapHorizontally && (isFirstItemRtl || isLastItemLtr)) {
@@ -142,20 +144,29 @@ export class FocusableGridDirective implements AfterViewInit {
                     nextRowIndex = currentRowIndex + 1;
                     nextRowItemIndex = 0;
                 }
-
+                break;
+            case PAGE_DOWN:
+                event.preventDefault();
+                nextRowIndex = findLastIndex(lists, (item) => item._isVisible);
+                scrollIntoView = 'top';
+                break;
+            case PAGE_UP:
+                event.preventDefault();
+                nextRowIndex = lists.findIndex((item) => item._isVisible);
+                scrollIntoView = 'bottom';
                 break;
         }
 
         const nextRow = lists[nextRowIndex ?? -1];
         if (nextRow) {
             if (nextRow.focusable) {
-                nextRow.focus();
+                nextRow.focus(scrollIntoView);
                 return;
             }
 
             const itemIndex = this._getItemIndex(nextRow, nextRowItemIndex);
             if (itemIndex != null) {
-                nextRow.setActiveItem(itemIndex);
+                nextRow.setActiveItem(itemIndex, scrollIntoView);
             }
         }
     }
