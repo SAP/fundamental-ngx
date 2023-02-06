@@ -7,10 +7,12 @@ import {
     QueryList,
     ContentChildren,
     forwardRef,
-    inject
+    inject,
+    Output,
+    EventEmitter
 } from '@angular/core';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { FocusableItemDirective, FocusableItemPosition } from '@fundamental-ngx/cdk/utils';
+import { CellFocusedEventAnnouncer, FocusableItemDirective, FocusableItemPosition } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
@@ -71,8 +73,14 @@ export class TableCellDirective implements AfterContentInit {
 
     /** Function, that creates a string to be announced by screen-reader whenever cell receives focus */
     @Input()
-    set cellFocusedEventAnnouncer(fn: (data: FocusableItemPosition) => string) {
-        this._focusableItemDirective.cellFocusedEventAnnouncer = fn;
+    set cellFocusedEventAnnouncer(announcer: CellFocusedEventAnnouncer) {
+        this._focusableItemDirective.cellFocusedEventAnnouncer = announcer;
+    }
+
+    /** Event emitted when the cell receives focus, not being emitted when focus moves between item's children. */
+    @Output()
+    get cellFocused(): EventEmitter<FocusableItemPosition> {
+        return this._focusableItemDirective.cellFocused;
     }
 
     /** @hidden */
