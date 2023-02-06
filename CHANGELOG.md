@@ -1,3 +1,12 @@
+# [0.39.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.28...v0.39.0-rc.29) (2023-02-06)
+
+
+### Features
+
+* **docs:** add custom title example ([#9328](https://github.com/SAP/fundamental-ngx/issues/9328)) ([1f4867e](https://github.com/SAP/fundamental-ngx/commit/1f4867e43eefa8d1de2b937cd79c105755cd85bc))
+
+
+
 # [0.39.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.27...v0.39.0-rc.28) (2023-02-05)
 
 
