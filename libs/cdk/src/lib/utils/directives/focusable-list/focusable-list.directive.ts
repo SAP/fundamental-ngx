@@ -29,8 +29,9 @@ import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a1
 import { getNativeElement } from '../../helpers';
 import { HasElementRef } from '../../interfaces';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { KeyUtil } from '../../functions';
+import { intersectionObservable, KeyUtil } from '../../functions';
 import { F2, TAB } from '@angular/cdk/keycodes';
+import { scrollIntoView, ScrollPosition } from './scroll';
 
 export interface FocusableListPosition {
     rowIndex: number;
@@ -150,6 +151,9 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
     }
 
     /** @hidden */
+    _isVisible = false;
+
+    /** @hidden */
     constructor(
         private _renderer: Renderer2,
         private _destroy$: DestroyedService,
@@ -157,6 +161,10 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
         private _liveAnnouncer: LiveAnnouncer,
         private _focusableObserver: FocusableObserver
     ) {
+        intersectionObservable(this._elementRef.nativeElement, { threshold: 0.25 })
+            .pipe(takeUntil(this._destroy$))
+            .subscribe((isVisible) => (this._isVisible = isVisible[0]?.isIntersecting));
+
         this._focusableObserver
             .observe(this._elementRef, false)
             .pipe(takeUntil(this._destroy$))
@@ -231,7 +239,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
     }
 
     /** Set active item in list */
-    setActiveItem(index: number): void {
+    setActiveItem(index: number, scrollPosition?: ScrollPosition): void {
         let avaiableIndex;
 
         this._focusableItems.find((item, itemIndex) => {
@@ -244,13 +252,15 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
         });
 
         if (avaiableIndex != null) {
+            scrollIntoView(this._focusableItems[avaiableIndex]?._elementRef.nativeElement, scrollPosition);
             this._keyManager?.setActiveItem(avaiableIndex);
         }
     }
 
     /** Focus whole list */
-    focus(): void {
+    focus(scrollPosition?: ScrollPosition): void {
         if (this.focusable) {
+            scrollIntoView(this._elementRef.nativeElement, scrollPosition);
             this._elementRef.nativeElement.focus();
         }
     }
@@ -319,7 +329,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
     ): void {
         this._refreshItems$.next();
 
-        let keyManager = new FocusKeyManager<any>(items);
+        let keyManager = new FocusKeyManager<any>(items).withHomeAndEnd();
 
         if (config.wrap !== false) {
             keyManager = keyManager.withWrap();

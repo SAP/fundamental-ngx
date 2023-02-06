@@ -1,6 +1,12 @@
-<div fdkFocusableGrid wrapHorizontally (itemFocused)="itemFocused($event)" (rowFocused)="rowFocused($event)">
+<div
+    fdkFocusableGrid
+    wrapHorizontally
+    (itemFocused)="itemFocused($event)"
+    (rowFocused)="rowFocused($event)"
+    style="max-height: 200px; overflow: auto"
+>
     <div
-        *ngFor="let list of [].constructor(3); let rowIndex = index"
+        *ngFor="let list of [].constructor(40); let rowIndex = index"
         fdkFocusableList
         focusable
         navigationDirection="grid"
