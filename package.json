@@ -94,7 +94,7 @@
     "@nrwl/devkit": "15.5.3",
     "@nrwl/eslint-plugin-nx": "15.5.3",
     "@nrwl/linter": "15.5.3",
-    "@nrwl/nx-cloud": "15.0.2",
+    "@nrwl/nx-cloud": "15.0.3",
     "@nrwl/nx-plugin": "15.5.3",
     "@nrwl/schematics": "8.12.11",
     "@nrwl/tao": "15.5.3",
