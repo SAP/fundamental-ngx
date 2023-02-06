@@ -1,3 +1,12 @@
+# [0.39.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.30...v0.39.0-rc.31) (2023-02-06)
+
+
+### Bug Fixes
+
+* **core,cdk,platform,docs:** remove memory leaks ([#9344](https://github.com/SAP/fundamental-ngx/issues/9344)) ([11c2b92](https://github.com/SAP/fundamental-ngx/commit/11c2b926b43dc7e03a191ad16a48531c7cb765ce))
+
+
+
 # [0.39.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.29...v0.39.0-rc.30) (2023-02-06)
 
 
