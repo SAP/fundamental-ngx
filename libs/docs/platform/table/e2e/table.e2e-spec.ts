@@ -171,19 +171,6 @@ describe('Table component test suite', () => {
         it('should check table item single selection', async () => {
             await findElementInTable(tableDefaultExample, tableCellArr);
         });
-
-        it('should check correct operation x button', async () => {
-            await scrollIntoView(tableDefaultExample);
-            await setValue(tableDefaultExample + input, 'Astro');
-            await click(tableDefaultExample + button, 1);
-
-            const filterRowCount = await getElementArrayLength(tableDefaultExample + tableRow);
-            await expect(filterRowCount).toEqual(2);
-
-            await click(tableDefaultExample + button);
-            const nonFilterRowCount = await getElementArrayLength(tableDefaultExample + tableRow);
-            await expect(nonFilterRowCount).toEqual(16);
-        });
     });
 
     describe('Check Custom Column Width & Column Resizing', () => {
@@ -193,6 +180,20 @@ describe('Table component test suite', () => {
 
         it('should check table item single selection', async () => {
             await findElementInTable(tableCustomWidthExample, tableCellArr);
+        });
+
+        // Simple example was updated to use custom heading.
+        it('should check correct operation x button', async () => {
+            await scrollIntoView(tableCustomWidthExample);
+            await setValue(tableCustomWidthExample + input, 'Astro');
+            await click(tableCustomWidthExample + button, 1);
+
+            const filterRowCount = await getElementArrayLength(tableCustomWidthExample + tableRow);
+            await expect(filterRowCount).toEqual(2);
+
+            await click(tableCustomWidthExample + button);
+            const nonFilterRowCount = await getElementArrayLength(tableCustomWidthExample + tableRow);
+            await expect(nonFilterRowCount).toEqual(16);
         });
     });
 

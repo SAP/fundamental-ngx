@@ -55,6 +55,8 @@ import { PlatformTableEditableRowsExampleComponent } from './examples/editable-r
 import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 import { PlatformTableResponsiveColumnsExampleComponent } from './examples/platform-table-responsive-columns-example.component';
 import { PlatformTableInitialLoadingExampleComponent } from './examples/initial-loading/platform-table-initial-loading-example.component';
+import { PlatformTableColumnsNgforExampleComponent } from './examples/platform-table-columns-ngfor-example.component';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 
 const routes: Routes = [
     {
@@ -85,7 +87,8 @@ const routes: Routes = [
         IllustratedMessageModule,
         FdpFormGroupModule,
         SelectModule,
-        SegmentedButtonModule
+        SegmentedButtonModule,
+        ToolbarModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -117,7 +120,8 @@ const routes: Routes = [
         PlatformTableWrapExampleComponent,
         PlatformTableEditableRowsExampleComponent,
         PlatformTableResponsiveColumnsExampleComponent,
-        PlatformTableInitialLoadingExampleComponent
+        PlatformTableInitialLoadingExampleComponent,
+        PlatformTableColumnsNgforExampleComponent
     ],
     providers: [
         RtlService,
