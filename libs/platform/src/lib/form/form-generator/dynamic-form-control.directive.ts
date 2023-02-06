@@ -63,11 +63,6 @@ export class DynamicFormControlDirective implements OnInit {
     ) {}
 
     /** @hidden */
-    fieldId(): string {
-        return `fdp-form-control-${this.id || this.name}`;
-    }
-
-    /** @hidden */
     ngOnInit(): void {
         const foundComponent = this._formGeneratorService.getComponentDefinitionByType(this.formItem.type);
 
@@ -98,7 +93,7 @@ export class DynamicFormControlDirective implements OnInit {
         });
 
         componentRef.instance.formItem = this.formItem;
-        componentRef.instance.id = this.fieldId();
+        componentRef.instance.id = this.id;
         componentRef.instance.name = this.name;
         componentRef.instance.form = this.form;
         componentRef.instance.formField = this.formField;
