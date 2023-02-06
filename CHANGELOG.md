@@ -1,3 +1,12 @@
+# [0.39.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.31...v0.39.0-rc.32) (2023-02-06)
+
+
+### Bug Fixes
+
+* **core:** give action sheet wrapper same z index as dialog ([#9318](https://github.com/SAP/fundamental-ngx/issues/9318)) ([b9512d0](https://github.com/SAP/fundamental-ngx/commit/b9512d0a5c48e365adef08e27015bee4d6ab5d88))
+
+
+
 # [0.39.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.30...v0.39.0-rc.31) (2023-02-06)
 
 
