@@ -22,9 +22,15 @@ import {
 } from '@angular/core';
 import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 
-import { applyCssClass, CssClassBuilder, OVERFLOW_PRIORITY_SCORE, OverflowPriority } from '@fundamental-ngx/cdk/utils';
+import {
+    applyCssClass,
+    CssClassBuilder,
+    OVERFLOW_PRIORITY_SCORE,
+    OverflowPriority,
+    DestroyedService
+} from '@fundamental-ngx/cdk/utils';
 import { fromEvent, Observable, of, Subscription } from 'rxjs';
-import { debounceTime, delay, distinctUntilChanged, filter, takeWhile } from 'rxjs/operators';
+import { debounceTime, delay, distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import { ToolbarItemDirective } from './toolbar-item.directive';
 import { TitleToken } from '@fundamental-ngx/core/title';
 import {
@@ -56,7 +62,8 @@ export const enum OverflowPriorityEnum {
     providers: [
         contentDensityObserverProviders({
             defaultContentDensity: ContentDensityMode.COMPACT
-        })
+        }),
+        DestroyedService
     ]
 })
 export class ToolbarComponent
@@ -165,9 +172,6 @@ export class ToolbarComponent
     private _groupedCollectionPriority: { [key: number]: OverflowPriority } | null;
 
     /** @hidden */
-    private _alive = true;
-
-    /** @hidden */
     private _initialised = false;
 
     /** @hidden */
@@ -175,6 +179,7 @@ export class ToolbarComponent
         private _cd: ChangeDetectorRef,
         private _renderer: Renderer2,
         readonly _contentDensityObserver: ContentDensityObserver,
+        private readonly _destroy$: DestroyedService,
         @Optional() @SkipSelf() @Inject(DYNAMIC_PAGE_HEADER_TOKEN) private _dynamicPageHeader?: DynamicPageHeader
     ) {
         _contentDensityObserver.subscribe();
@@ -184,9 +189,10 @@ export class ToolbarComponent
     ngOnInit(): void {
         fromEvent(window, 'resize')
             .pipe(
-                takeWhile(() => this._alive && this.shouldOverflow),
+                filter(() => this.shouldOverflow),
                 debounceTime(50),
-                distinctUntilChanged()
+                distinctUntilChanged(),
+                takeUntil(this._destroy$)
             )
             .subscribe(() => this._onResize());
     }
@@ -195,10 +201,7 @@ export class ToolbarComponent
     ngAfterViewInit(): void {
         if (this.shouldOverflow) {
             of(true)
-                .pipe(
-                    delay(5),
-                    takeWhile(() => this._alive)
-                )
+                .pipe(delay(5), takeUntil(this._destroy$))
                 .subscribe(() => this._collapseItems());
         }
         this._initialised = true;
@@ -222,7 +225,6 @@ export class ToolbarComponent
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-        this._alive = false;
     }
 
     /** Change detection reference */
