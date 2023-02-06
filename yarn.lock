@@ -1995,12 +1995,12 @@
   resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.26.3-rc.5.tgz#a0a5cad6faf66f000a0d851fd1267a24f38a32a1"
   integrity sha512-uWaz4Fmaq+/ZnifJ4Tf0/Etinut1u5oYatbiVKuvl3wjtdIZQ5J7XDH+rr2qDRUij5P1eQEOgJqA0IvPZm7K3Q==
 
-"@fundamental-styles/fn@0.25.1-rc.16":
-  version "0.25.1-rc.16"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/fn/-/fn-0.25.1-rc.16.tgz#f79a805aee7cfedc93c8b7cedb161d17ef1f8d00"
-  integrity sha512-fKtnIw/X6SO9UUlnCxeYFApP8QnTp2ydRTYynvKIb31KR+XD1gkutyqaikzeESj92+m6drQyiJMoknnZ1vdl2g==
+"@fundamental-styles/fn@0.26.5":
+  version "0.26.5"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/fn/-/fn-0.26.5.tgz#357907e3c8e26408cfd5420b8d8842b0db6f4e53"
+  integrity sha512-AWdB23ZdauSLpZtW3Q1zsk/xvAYce/GYyt2J2rbiQP00an3OkVHebtKpuWNVLwJ+kgwUadKdKto4UrvUDqgGIw==
   dependencies:
-    fundamental-styles "0.25.1-rc.16"
+    fundamental-styles "0.26.5"
 
 "@gar/promisify@^1.1.3":
   version "1.1.3"
@@ -8952,10 +8952,10 @@ functions-have-names@^1.2.2:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-fundamental-styles@0.25.1-rc.16:
-  version "0.25.1-rc.16"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.25.1-rc.16.tgz#8560a5e1411ac3dfbf6d593ba4cd7b1f3124f3d5"
-  integrity sha512-/ETPbzv98pMtqT5nNODkamxDBJsDPJ4KG/f5XEAvExvdx0+IvESuZQES6n1F3He1o1zMGLJj4HVqp4UJFiRGsQ==
+fundamental-styles@0.26.5:
+  version "0.26.5"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.26.5.tgz#6d955ae1b2e0ddc26872a1bde2da0d58a4c4beaf"
+  integrity sha512-ZZ04HOXBessPFEUWMPxWpxp5GGb8ZliVN0D4/gGN57pKkcDhb3V+T/2GgRI21MoUzVBx2Xd3wYbVBeTw17ZOpg==
 
 fundamental-styles@0.27.0-rc.2:
   version "0.27.0-rc.2"
