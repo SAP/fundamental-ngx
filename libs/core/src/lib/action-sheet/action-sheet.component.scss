@@ -8,5 +8,5 @@ fd-action-sheet-body {
 }
 .fd-action-sheet__wrapper--active {
     position: fixed;
-    z-index: 5;
+    z-index: 999;
 }
