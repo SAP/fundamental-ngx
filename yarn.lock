@@ -212,7 +212,7 @@
     "@angular-devkit/architect" "0.1501.2"
     rxjs "6.6.7"
 
-"@angular-devkit/core@15.0.4", "@angular-devkit/core@^15.0.0":
+"@angular-devkit/core@15.0.4":
   version "15.0.4"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-15.0.4.tgz#257ba1d76cd106216d0150f480d0062e726af996"
   integrity sha512-4ITpRAevd652SxB+qNesIQ9qfbm7wT5UBU5kJOPPwGL77I21g8CQpkmV1n5VSacPvC9Zbz90feOWexf7w7JzcA==
@@ -234,6 +234,17 @@
     rxjs "6.6.7"
     source-map "0.7.4"
 
+"@angular-devkit/core@15.1.4", "@angular-devkit/core@^15.0.0":
+  version "15.1.4"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-15.1.4.tgz#462f123d56f9298cb04b3fa31b425fc31abb76c5"
+  integrity sha512-PW5MRmd9DHJR4FaXchwQtj9pXnsghSTnwRvfZeCRNYgU2sv0DKyTV+YTSJB+kNXnoPNG1Je6amDEkiXecpspXg==
+  dependencies:
+    ajv "8.12.0"
+    ajv-formats "2.1.1"
+    jsonc-parser "3.2.0"
+    rxjs "6.6.7"
+    source-map "0.7.4"
+
 "@angular-devkit/core@8.3.23":
   version "8.3.23"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-8.3.23.tgz#612bf8a76b1ccde40cd6a5e85a02dc083bb666c6"
@@ -245,12 +256,23 @@
     rxjs "6.4.0"
     source-map "0.7.3"
 
-"@angular-devkit/schematics@15.1.2", "@angular-devkit/schematics@~15.1.0":
+"@angular-devkit/schematics@15.1.2":
   version "15.1.2"
   resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-15.1.2.tgz#018966ab48b5510a3c8f322887d4e06a22c011e7"
   integrity sha512-HjJPm+4SS5TdAHHvdpXLv25wsvwVOn5RYs0A9MazTndlm80ct3PKeYUgakNDRFjRj8uORNlJMKmQIIhUSDjFsw==
   dependencies:
     "@angular-devkit/core" "15.1.2"
+    jsonc-parser "3.2.0"
+    magic-string "0.27.0"
+    ora "5.4.1"
+    rxjs "6.6.7"
+
+"@angular-devkit/schematics@15.1.4", "@angular-devkit/schematics@~15.1.0":
+  version "15.1.4"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-15.1.4.tgz#30e38777f1bd98e20e6dbe1bfddabc3bcd42605f"
+  integrity sha512-jpddxo9Qd2yRQ1t9FLhAx5S+luz6HkyhDytq0LFKbxf9ikf1J4oy9riPBFl4pRmrNARWcHZ6GbD20/Ky8PjmXQ==
+  dependencies:
+    "@angular-devkit/core" "15.1.4"
     jsonc-parser "3.2.0"
     magic-string "0.27.0"
     ora "5.4.1"
