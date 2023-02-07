@@ -195,8 +195,6 @@ export class DialogComponent
     onAnimationEnd(event: AnimationEvent): void {
         const { fromState, toState } = event;
 
-        console.log(event);
-
         if ((toState === 'void' && fromState !== 'void') || toState === 'hidden') {
             this._dialogRef._endClose$.next();
             this._dialogRef._endClose$.complete();
