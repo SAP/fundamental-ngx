@@ -7,6 +7,9 @@ export class DialogRefBase<T, P = any> {
     /** @hidden */
     protected readonly _afterLoaded = new Subject<boolean>();
 
+    /** @hidden */
+    public _endClose$ = new Subject<void>();
+
     /**
      * Observable that is triggered when the dialog is closed.
      * On close a *result* is passed back. On dismiss, an *error* is returned instead.

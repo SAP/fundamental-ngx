@@ -7,6 +7,7 @@ import {
     HostBinding,
     HostListener,
     Inject,
+    OnDestroy,
     Optional,
     QueryList
 } from '@angular/core';
@@ -18,7 +19,7 @@ import { FN_SELECT_PROVIDER } from './select.token';
 @Directive({
     selector: '[fnSelectMenu]'
 })
-export class SelectMenuDirective implements AfterViewInit {
+export class SelectMenuDirective implements AfterViewInit, OnDestroy {
     /** @hidden */
     @HostBinding('class')
     private readonly _initialClass = 'fn-select__menu';
@@ -63,5 +64,10 @@ export class SelectMenuDirective implements AfterViewInit {
                 this._focusKeyManager.setFirstItemActive();
             });
         }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._focusKeyManager?.destroy();
     }
 }

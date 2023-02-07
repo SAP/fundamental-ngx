@@ -157,6 +157,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         this.close.complete();
         this._tabSubscription.unsubscribe();
         this._dirChangeSubscription.unsubscribe();
+        this._keyManager?.destroy();
     }
 
     /**

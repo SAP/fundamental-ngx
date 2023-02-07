@@ -57,12 +57,10 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
 
         this._dialogs.push(component);
 
-        const defaultBehaviourOnClose = (): void => {
+        const refSub = dialogRef._endClose$.subscribe(() => {
             this._destroyDialog(component);
             refSub.unsubscribe();
-        };
-
-        const refSub = dialogRef.afterClosed.subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose);
+        });
 
         return dialogRef;
     }

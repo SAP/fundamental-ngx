@@ -1,6 +1,26 @@
-import { animate, AnimationTriggerMetadata, style, transition, trigger } from '@angular/animations';
+import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from '@angular/animations';
 
-export const dialogFadeNgIf: AnimationTriggerMetadata = trigger('dialog-fade', [
-    transition(':enter', [style({ opacity: 0 }), animate('150ms ease-in-out', style({ opacity: 1 }))]),
-    transition(':leave', [style({ opacity: 1 }), animate('75ms ease-in-out', style({ opacity: 0 }))])
+export const dialogFade: AnimationTriggerMetadata = trigger('state', [
+    state(
+        'void, hidden',
+        style({
+            opacity: 0
+        })
+    ),
+    state(
+        'visible',
+        style({
+            opacity: 1
+        })
+    ),
+    transition('* => visible', animate('150ms cubic-bezier(0, 0, 0.2, 1)')),
+    transition(
+        '* => void, * => hidden',
+        animate(
+            '75ms cubic-bezier(0.4, 0.0, 1, 1)',
+            style({
+                opacity: 0
+            })
+        )
+    )
 ]);

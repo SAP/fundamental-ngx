@@ -427,6 +427,7 @@ export class SearchFieldComponent
             this._suggestionOverlayRef.dispose();
             this._suggestionOverlayRef = null;
         }
+        this._suggestionkeyManager?.destroy();
         this._onDestroy$.next();
     }
 
@@ -556,6 +557,7 @@ export class SearchFieldComponent
      */
     openSuggestionMenu(): void {
         this.closeSuggestionMenu();
+        this._suggestionkeyManager?.destroy();
         this._suggestionkeyManager = new FocusKeyManager(this.suggestionItems);
         if (this._showDropdown) {
             return;

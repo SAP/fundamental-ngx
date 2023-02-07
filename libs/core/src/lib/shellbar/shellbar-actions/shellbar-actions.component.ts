@@ -10,7 +10,8 @@ import {
     ChangeDetectorRef,
     inject,
     Output,
-    EventEmitter
+    EventEmitter,
+    OnDestroy
 } from '@angular/core';
 
 import { FD_COMBOBOX_COMPONENT, ComboboxInterface } from '@fundamental-ngx/core/combobox';
@@ -56,7 +57,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
         '[class.fd-shellbar__group--actions]': 'true'
     }
 })
-export class ShellbarActionsComponent {
+export class ShellbarActionsComponent implements OnDestroy {
     /** The user data. */
     @Input()
     user: ShellbarUser;
@@ -138,6 +139,11 @@ export class ShellbarActionsComponent {
         } else {
             return this.user;
         }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._portalOutlet?.dispose();
     }
 
     /** @hidden */

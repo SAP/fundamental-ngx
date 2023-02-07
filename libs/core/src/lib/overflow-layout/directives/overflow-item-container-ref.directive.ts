@@ -1,4 +1,4 @@
-import { Directive, ElementRef, TemplateRef, ViewContainerRef, ViewRef } from '@angular/core';
+import { Directive, ElementRef, TemplateRef, ViewContainerRef, ViewRef, OnDestroy } from '@angular/core';
 
 /**
  * Directive to hide component without actual destroying of the component instance.
@@ -6,7 +6,7 @@ import { Directive, ElementRef, TemplateRef, ViewContainerRef, ViewRef } from '@
 @Directive({
     selector: '[fdOverflowItemContainerRef]'
 })
-export class OverflowItemContainerRefDirective {
+export class OverflowItemContainerRefDirective implements OnDestroy {
     /** @hidden */
     private _viewRef: ViewRef;
 
@@ -42,5 +42,10 @@ export class OverflowItemContainerRefDirective {
     ) {
         // Create embedded view right away and manipulate its visibility later.
         this._viewContainerRef.createEmbeddedView(this._templateRef);
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._viewRef?.destroy();
     }
 }

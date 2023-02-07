@@ -5,6 +5,7 @@ import {
     ElementRef,
     HostBinding,
     HostListener,
+    isDevMode,
     OnDestroy,
     OnInit
 } from '@angular/core';
@@ -26,6 +27,10 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
      */
     @HostBinding('attr.dir')
     _dir: string;
+
+    /** The state of the Dialog animations. */
+    @HostBinding('@state')
+    _animationState = 'void';
 
     /** @hidden Reference to dialog window element*/
     abstract dialogWindow: ElementRef;
@@ -124,9 +129,12 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
                 this._focusTrapId = this._focusTrapService.createFocusTrap(this.dialogWindow.nativeElement, {
                     clickOutsideDeactivates: this._config.backdropClickCloseable && this._config.hasBackdrop,
                     escapeDeactivates: false,
+                    fallbackFocus: this.dialogWindow.nativeElement,
                     allowOutsideClick: () => true
                 });
-            } catch (e) {}
+            } catch (e) {
+                isDevMode() && console.error(e);
+            }
         }
     }
 

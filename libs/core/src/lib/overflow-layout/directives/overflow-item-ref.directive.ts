@@ -72,17 +72,6 @@ export class OverflowItemRefDirective<T = any> implements OverflowItemRef<T> {
     constructor(public templateRef: TemplateRef<OverflowItemDirectiveContext<T>>) {}
 
     /**
-     * Sets the element reference of the `fdOverflowLayoutItem` directive.`
-     * @param elmRef
-     */
-    setElementRef(elmRef: ElementRef): void {
-        if (this.elementRef) {
-            return;
-        }
-        this.elementRef = elmRef;
-    }
-
-    /**
      * Sets the `fdOverflowLayoutItem` directive.
      * @param item
      */
