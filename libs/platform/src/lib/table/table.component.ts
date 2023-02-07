@@ -1578,8 +1578,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _dragDropUpdateDropRowAttributes(dragRow: TableRow, dropRow: TableRow): void {
-        dragRow.parent = dropRow.parent;
-        dragRow.level = dropRow.level;
+        dragRow.parent = dropRow;
+        dragRow.level = dropRow.level + 1;
 
         if (!this._isTreeRow(dropRow)) {
             dropRow.type = TableRowType.TREE;
@@ -1587,15 +1587,14 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         const children = this._findRowChildren(dragRow);
         children.forEach((row) => {
-            row.level = this._getRowParents(row).length;
+            const updatedRowLevel = this._getRowParents(row).length;
+            row.level = updatedRowLevel;
         });
     }
 
     /** @hidden */
     private _dragDropRearrangeTreeRows(dragRow: TableRow, dropRow: TableRow): void {
         const allRows = this._tableRows;
-        let rowsBefore: any;
-        let rowsAfter: any;
 
         const dragRowIndex = allRows.findIndex((row) => row === dragRow);
         const dragRowChildren = this._findRowChildren(dragRow);
@@ -1605,13 +1604,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         const dropRowIndex = allRows.findIndex((row) => row === dropRow);
         const dropRowChildren = this._findRowChildren(dropRow);
 
-        if (dragRowIndex > dropRowIndex) {
-            rowsBefore = allRows.slice(0, dropRowChildren.length + 1 - dropRowIndex);
-            rowsAfter = allRows.slice(dropRowChildren.length + 1 - dropRowIndex);
-        } else {
-            rowsBefore = allRows.slice(0, dropRowIndex + dropRowChildren.length + 1);
-            rowsAfter = allRows.slice(dropRowIndex + dropRowChildren.length + 1);
-        }
+        const rowsBefore = allRows.slice(0, dropRowIndex + dropRowChildren.length + 1);
+        const rowsAfter = allRows.slice(dropRowIndex + dropRowChildren.length + 1);
 
         this._tableRows = [...rowsBefore, ...rowsToMove, ...rowsAfter];
     }

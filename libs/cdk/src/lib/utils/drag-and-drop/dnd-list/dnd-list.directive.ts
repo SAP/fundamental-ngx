@@ -143,7 +143,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         const replacedItemIndex = this._closestItemIndex;
         const draggedItem = items[draggedItemIndex];
 
-        if (!replacedItemIndex) {
+        if (!replacedItemIndex && replacedItemIndex !== 0) {
             return;
         }
 
