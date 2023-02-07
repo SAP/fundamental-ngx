@@ -590,6 +590,9 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
             private: 'Private'
         }
     },
+    platformSelect: {
+        selectOptionLabel: 'Seleziona un opzione'
+    },
     fnSlider: {
         minMaxDetails: 'Il valore minimo dello slider è {{ min }}, il valore massimo è {{ max }}',
         valueminDetails: 'Il valore è  {{ value }}',

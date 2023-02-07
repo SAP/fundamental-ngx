@@ -780,6 +780,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
             private: 'Приватне'
         }
     },
+    platformSelect: {
+        selectOptionLabel: 'Виберіть опцію'
+    },
     fnSlider: {
         minMaxDetails: 'Мінімальне значення слайдера {{min}}, максимальне значення {{ max }}',
         valueminDetails: 'Поточне значення: {{ value }}',

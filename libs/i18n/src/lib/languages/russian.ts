@@ -781,6 +781,9 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
             private: 'Приватное'
         }
     },
+    platformSelect: {
+        selectOptionLabel: 'Выберите вариант'
+    },
     fnSlider: {
         minMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',
         valueminDetails: 'Значение равно {{ value }}',
