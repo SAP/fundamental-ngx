@@ -70,6 +70,9 @@ const platformResponsiveColumnsTsSrc = 'platform-table-responsive-columns-exampl
 const platformInitialLoadingSrc = 'initial-loading/platform-table-initial-loading-example.component.html';
 const platformInitialLoadingTsSrc = 'initial-loading/platform-table-initial-loading-example.component.ts';
 
+const platformTableNgForSrc = 'platform-table-columns-ngfor-example.component.html';
+const platformTableNgForTsSrc = 'platform-table-columns-ngfor-example.component.ts';
+
 const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
 
 import { TableDataProviderExample } from './examples/platform-table-data-provider-example';
@@ -530,6 +533,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-initial-loading-example',
             component: 'PlatformTableInitialLoadingExampleComponent',
             name: 'platform-table-initial-loading-example.component.ts'
+        }
+    ];
+
+    ngFor: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformTableNgForSrc),
+            fileName: 'platform-table-columns-ngfor-example',
+            name: 'platform-table-columns-ngfor-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformTableNgForTsSrc),
+            fileName: 'platform-table-columns-ngfor-example',
+            component: 'PlatformTableColumnsNgforExampleComponent',
+            name: 'platform-table-columns-ngfor-example.component.ts'
         }
     ];
 

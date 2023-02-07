@@ -1,9 +1,10 @@
 name: scheduled-daily-build
 
 on:
-    schedule:
+    workflow_dispatch:
+    # schedule:
         # Cron time is UTC, set to run at 22:00UTC (01:00 EST)
-        - cron: '0 22 * * *'
+        # - cron: '0 22 * * *'
 
 env:
     NX_CLOUD_DISTRIBUTED_EXECUTION: true

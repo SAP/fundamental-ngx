@@ -1,5 +1,5 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -198,6 +198,8 @@ describe('TableComponent internal', () => {
             >
                 <fdp-table-toolbar title="Order Items" [hideItemCount]="false"></fdp-table-toolbar>
 
+                <fdp-column name="id" key="id" label="ID" *ngIf="showIdColumn"></fdp-column>
+
                 <fdp-column name="name" key="name" label="Name" [width]="customColumnWidth + 'px'"></fdp-column>
 
                 <fdp-column name="price" key="price.value">
@@ -221,6 +223,7 @@ describe('TableComponent internal', () => {
         /** So big so table column won't grow on any device */
         customColumnWidth = 10000;
         rowsClass: TableRowClass<any> = 'class';
+        showIdColumn = false;
     }
 
     describe('TableComponent Host', async () => {
@@ -684,7 +687,7 @@ describe('TableComponent internal', () => {
                 });
             });
 
-            it('should render only specific columns in right order', () => {
+            it('should render only specific columns in right order', fakeAsync(() => {
                 tableComponent.setColumns(['name', 'status']);
 
                 fixture.detectChanges();
@@ -693,7 +696,18 @@ describe('TableComponent internal', () => {
                 expect(tableHeaderCells.length).toBe(2);
                 expect(tableHeaderCells[0].nativeElement.innerText.trim()).toBe('Name');
                 expect(tableHeaderCells[1].nativeElement.innerText.trim()).toBe('Status');
-            });
+
+                hostComponent.showIdColumn = true;
+                fixture.detectChanges();
+                tick(200);
+
+                calculateTableElementsMetaData();
+
+                expect(tableHeaderCells.length).toBe(3);
+                expect(tableHeaderCells[0].nativeElement.innerText.trim()).toBe('Name');
+                expect(tableHeaderCells[1].nativeElement.innerText.trim()).toBe('Status');
+                expect(tableHeaderCells[2].nativeElement.innerText.trim()).toBe('ID');
+            }));
         });
 
         describe('navigation', () => {

@@ -1,3 +1,61 @@
+# [0.39.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.32...v0.39.0-rc.33) (2023-02-06)
+
+
+
+# [0.39.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.31...v0.39.0-rc.32) (2023-02-06)
+
+
+### Bug Fixes
+
+* **core:** give action sheet wrapper same z index as dialog ([#9318](https://github.com/SAP/fundamental-ngx/issues/9318)) ([b9512d0](https://github.com/SAP/fundamental-ngx/commit/b9512d0a5c48e365adef08e27015bee4d6ab5d88))
+
+
+
+# [0.39.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.30...v0.39.0-rc.31) (2023-02-06)
+
+
+### Bug Fixes
+
+* **core,cdk,platform,docs:** remove memory leaks ([#9344](https://github.com/SAP/fundamental-ngx/issues/9344)) ([11c2b92](https://github.com/SAP/fundamental-ngx/commit/11c2b926b43dc7e03a191ad16a48531c7cb765ce))
+
+
+
+# [0.39.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.29...v0.39.0-rc.30) (2023-02-06)
+
+
+### Bug Fixes
+
+* **ci:** lint-staged ([#9319](https://github.com/SAP/fundamental-ngx/issues/9319)) ([6366bdf](https://github.com/SAP/fundamental-ngx/commit/6366bdf8377b729ec1cfa055d981d27da816b4a1))
+
+
+
+# [0.39.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.28...v0.39.0-rc.29) (2023-02-06)
+
+
+### Features
+
+* **docs:** add custom title example ([#9328](https://github.com/SAP/fundamental-ngx/issues/9328)) ([1f4867e](https://github.com/SAP/fundamental-ngx/commit/1f4867e43eefa8d1de2b937cd79c105755cd85bc))
+
+
+
+# [0.39.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.27...v0.39.0-rc.28) (2023-02-05)
+
+
+### Features
+
+* **platform:** dynamic columns support ([#9329](https://github.com/SAP/fundamental-ngx/issues/9329)) ([9a08865](https://github.com/SAP/fundamental-ngx/commit/9a08865dccc6c35883e015667c98f0ac675934ea))
+
+
+
+# [0.39.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.26...v0.39.0-rc.27) (2023-02-03)
+
+
+### Bug Fixes
+
+* **core:** fix radio button reactive touched ([#9320](https://github.com/SAP/fundamental-ngx/issues/9320)) ([a10e441](https://github.com/SAP/fundamental-ngx/commit/a10e4411ce13b4170ce1d9f8b93b0a579176784d))
+
+
+
 # [0.39.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.25...v0.39.0-rc.26) (2023-02-01)
 
 
