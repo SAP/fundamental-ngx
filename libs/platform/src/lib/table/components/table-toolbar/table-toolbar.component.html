@@ -10,7 +10,7 @@
             {{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span>
         </label>
         <ng-container *ngIf="_tableToolbarLeftActionsComponent">
-            <fd-toolbar-separator></fd-toolbar-separator>
+            <fd-toolbar-separator *ngIf="!!title || !hideItemCount"></fd-toolbar-separator>
             <ng-container *ngTemplateOutlet="_tableToolbarLeftActionsComponent._contentTemplateRef"></ng-container>
         </ng-container>
         <fd-toolbar-spacer></fd-toolbar-spacer>

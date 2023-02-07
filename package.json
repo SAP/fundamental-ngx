@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.39.0-rc.28",
+  "version": "0.39.0-rc.33",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori Angular component library.",
@@ -177,7 +177,9 @@
     "webdriverio": "7.27.0"
   },
   "lint-staged": {
-    "*.{js,ts,html,md,scss,css,json,yml}": "nx format:write --files=",
-    "*.ts": "eslint"
+    "*": [
+      "yarn nx format:write --uncommitted",
+      "yarn eslint --fix"
+    ]
   }
 }

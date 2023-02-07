@@ -115,6 +115,7 @@ export class DndItemDirective implements DndItem, AfterContentInit, OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
+        this._dragRef.dispose();
     }
 
     /** @hidden */
