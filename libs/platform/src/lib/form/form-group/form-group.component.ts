@@ -181,7 +181,7 @@ export class FormGroupComponent
 {
     /** Id for the form group element */
     @Input()
-    id: string = `fdp-form-group-${formGroupUniqueId++}`;
+    id = `fdp-form-group-${formGroupUniqueId++}`;
 
     /** Name property to be set on a form. Will be used if `useForm` is set to true */
     @Input()
