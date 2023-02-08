@@ -32,6 +32,9 @@ import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap }
 
 import {
     FdDropEvent,
+    FDK_FOCUSABLE_GRID_DIRECTIVE,
+    FocusableCellPosition,
+    FocusableGridDirective,
     FocusableItemPosition,
     KeyUtil,
     RangeSelector,
@@ -497,6 +500,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     readonly table: ElementRef<HTMLDivElement>;
 
     /** @hidden */
+    @ViewChild(FDK_FOCUSABLE_GRID_DIRECTIVE)
+    _focusableGrid: FocusableGridDirective;
+
+    /** @hidden */
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
 
@@ -643,6 +650,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * RTL flag
      */
     _rtl = false;
+
+    /** @hidden */
+    private _focusedCellPosition: Nullable<FocusableCellPosition>;
 
     /**
      * @hidden
@@ -803,6 +813,26 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _initialStateSet = false;
 
     /** @hidden */
+    private _focusinTimerId;
+
+    /** @hidden */
+    @HostListener('focusout')
+    _onFocusOut(): void {
+        this._focusinTimerId = setTimeout(() => {
+            this._focusedCellPosition = null;
+        });
+    }
+
+    /** @hidden */
+    @HostListener('focusin')
+    _onFocusIn(): void {
+        if (this._focusinTimerId) {
+            clearTimeout(this._focusinTimerId);
+            this._focusinTimerId = null;
+        }
+    }
+
+    /** @hidden */
     @HostListener('keydown', ['$event'])
     _onKeyDown(event: KeyboardEvent): void {
         if (
@@ -911,6 +941,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._listenToTableWidthChanges();
 
         this._listenToTableContainerMouseLeave();
+
+        this._listenToLoadingAndRefocusCell();
 
         this._cdr.detectChanges();
 
@@ -1575,6 +1607,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         columnLabel: string,
         nestingLevel: number | null
     ): Promise<void> {
+        this._focusedCellPosition = { rowIndex: position.rowIndex, colIndex: position.colIndex };
+
         if (this.cellFocusedEventAnnouncer) {
             this._liveAnnouncer.clear();
             await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(position, columnLabel, nestingLevel));
@@ -2504,6 +2538,19 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 currentPage: 1
             }
         };
+    }
+
+    /** @hidden */
+    private _listenToLoadingAndRefocusCell(): void {
+        this._subscriptions.add(
+            this._tableService.tableLoading$.pipe(filter((loadingState) => !loadingState)).subscribe(() => {
+                setTimeout(() => {
+                    if (this._focusedCellPosition) {
+                        this._focusableGrid.focusCell(this._focusedCellPosition);
+                    }
+                });
+            })
+        );
     }
 
     /** @hidden */

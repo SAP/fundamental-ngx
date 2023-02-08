@@ -240,20 +240,20 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
 
     /** Set active item in list */
     setActiveItem(index: number, scrollPosition?: ScrollPosition): void {
-        let avaiableIndex;
+        let availableIndex;
 
         this._focusableItems.find((item, itemIndex) => {
             if (itemIndex >= index && item.fdkFocusableItem) {
-                avaiableIndex = itemIndex;
+                availableIndex = itemIndex;
                 return true;
             }
 
             return false;
         });
 
-        if (avaiableIndex != null) {
-            scrollIntoView(this._focusableItems[avaiableIndex]?._elementRef.nativeElement, scrollPosition);
-            this._keyManager?.setActiveItem(avaiableIndex);
+        if (availableIndex != null) {
+            scrollIntoView(this._focusableItems.get(availableIndex)?.elementRef().nativeElement, scrollPosition);
+            this._keyManager?.setActiveItem(availableIndex);
         }
     }
 
