@@ -264,7 +264,7 @@ describe('Table component test suite', () => {
 
     describe('Check Multi Row Selection', () => {
         it('should verify checkboxes', async () => {
-            await checkAllCheckbox(tableMultipleRowSelectionExample);
+            await checkAllCheckbox(tableMultipleRowSelectionExample, true);
         });
     });
 
@@ -923,12 +923,14 @@ describe('Table component test suite', () => {
         await click(barButton);
     }
 
-    async function checkAllCheckbox(selector): Promise<void> {
+    async function checkAllCheckbox(selector, skipFirst = false): Promise<void> {
         await scrollIntoView(selector);
         await click(selector + 'fd-checkbox');
         const checkboxLength = await getElementArrayLength(selector + tableRow);
         for (let i = 0; i < checkboxLength; i++) {
-            await expect(await getAttributeByName(selector + tableRow, 'aria-selected', i)).toBe('true');
+            await expect(await getAttributeByName(selector + tableRow, 'aria-selected', i)).toBe(
+                skipFirst && i === 0 ? 'false' : 'true'
+            );
         }
     }
 
