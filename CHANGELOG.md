@@ -1,3 +1,12 @@
+## [0.37.2](https://github.com/SAP/fundamental-ngx/compare/v0.37.1...v0.37.2) (2023-02-08)
+
+
+### Bug Fixes
+
+* **core:** allow shellbar-user-menu noArrow ([#9268](https://github.com/SAP/fundamental-ngx/issues/9268)) ([949cd49](https://github.com/SAP/fundamental-ngx/commit/949cd49b742373b7430bdc1fd9e0fddad4e11329))
+
+
+
 ## [0.37.1](https://github.com/SAP/fundamental-ngx/compare/v0.37.1-rc.2...v0.37.1) (2022-12-10)
 
 
