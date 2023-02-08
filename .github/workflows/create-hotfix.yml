@@ -35,7 +35,9 @@ jobs:
                   token: ${{ secrets.GHACTIONS }}
             - name: Using CI env flags
               id: ciEnv
-              run: .ci-env/flags.sh
+              run: |
+                  chmod +x .ci-env/flags.sh
+                  .ci-env/flags.sh
 
             - name: Setup Node.js and Cache
               uses: ./.github/actions/nodejs
