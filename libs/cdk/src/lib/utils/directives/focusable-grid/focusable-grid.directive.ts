@@ -9,12 +9,24 @@ import { FocusableItemPosition } from '../focusable-item';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective, FocusableListPosition } from '../focusable-list';
 import { findLastIndex } from 'lodash-es';
 import { ScrollPosition } from '../focusable-list';
+import { FDK_FOCUSABLE_GRID_DIRECTIVE } from './focusable-grid.tokens';
+
+export interface FocusableCellPosition {
+    rowIndex: number;
+    colIndex: number;
+}
 
 @Directive({
     selector: '[fdkFocusableGrid]',
     exportAs: 'fdkFocusableGrid',
     standalone: true,
-    providers: [DestroyedService]
+    providers: [
+        {
+            provide: FDK_FOCUSABLE_GRID_DIRECTIVE,
+            useExisting: FocusableGridDirective
+        },
+        DestroyedService
+    ]
 })
 export class FocusableGridDirective implements AfterViewInit {
     /** Direction of the content. */
@@ -102,6 +114,17 @@ export class FocusableGridDirective implements AfterViewInit {
                 takeUntil(this._destroy$)
             )
             .subscribe(({ event, list, activeItemIndex }) => this._onKeydown(event, list, activeItemIndex));
+    }
+
+    /**
+     * Focus cell by position.
+     * @param position position of the cell
+     */
+    focusCell(position: FocusableCellPosition): void {
+        const list = this._focusableLists.get(position.rowIndex);
+        if (list) {
+            list.setActiveItem(position.colIndex);
+        }
     }
 
     /** @hidden */
