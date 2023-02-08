@@ -91,7 +91,7 @@
                             [fdPopoverTrigger]="columnHeaderPopover"
                             [class.fd-table__item--clickable]="_isColumnHasHeaderMenu(column)"
                             [cellFocusedEventAnnouncer]="null"
-                            (cellFocused)="_onCellFocused($event, column.label ?? '', null)"
+                            (cellFocused)="_onCellFocused($event, column.label, null)"
                         >
                             <ng-container
                                 *ngTemplateOutlet="tableHeaderCellTemplate; context: { column: column }"
