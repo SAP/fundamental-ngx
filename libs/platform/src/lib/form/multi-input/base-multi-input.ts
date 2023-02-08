@@ -179,6 +179,10 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
 
+    /** @hidden Emits event when the addon button is clicked. */
+    @Output()
+    readonly addOnButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+
     /** @hidden */
     @ViewChild(ListComponent)
     listComponent: ListComponent;

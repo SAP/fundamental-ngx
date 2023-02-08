@@ -222,6 +222,10 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    /** @hidden Emits event when the addon button is clicked. */
+    @Output()
+    addOnButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+
     /** Event emitted when data loading is started. */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
