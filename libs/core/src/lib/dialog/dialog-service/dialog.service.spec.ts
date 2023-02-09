@@ -1,9 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogService } from './dialog.service';
 import { DialogModule } from '../dialog.module';
+
+@Component({
+    template: ``
+})
+class DialogServiceTestComponent {
+    constructor(public dialogService: DialogService) {}
+}
 
 @Component({
     template: `
@@ -18,18 +26,23 @@ class TemplateTestComponent {
 
 describe('DialogService', () => {
     let service: DialogService;
+    let component: TemplateTestComponent;
+    let rootComponent: DialogServiceTestComponent;
+    let fixture: ComponentFixture<DialogServiceTestComponent>;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [TemplateTestComponent, DialogServiceTestComponent],
+            imports: [CommonModule, DialogModule, NoopAnimationsModule]
+        }).compileComponents();
+    });
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [TemplateTestComponent],
-            imports: [DialogModule]
-        })
-            .overrideModule(BrowserDynamicTestingModule, {
-                set: { entryComponents: [TemplateTestComponent] }
-            })
-            .compileComponents();
-
-        service = TestBed.inject<DialogService>(DialogService);
+        fixture = TestBed.createComponent(DialogServiceTestComponent);
+        rootComponent = fixture.componentInstance;
+        component = TestBed.createComponent(TemplateTestComponent).componentInstance;
+        service = rootComponent.dialogService;
+        fixture.detectChanges();
     });
 
     it('should create', () => {
@@ -37,30 +50,46 @@ describe('DialogService', () => {
         expect(service.hasOpenDialogs()).toBeFalse();
     });
 
-    it('should open dialog from template', () => {
+    it('should open dialog from template', fakeAsync(async () => {
         const destroyDialogSpy = spyOn<any>(service, '_destroyDialog').and.callThrough();
-        const templateRef = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
+        const templateRef = component.templateRef;
         const dialogRef = service.open(templateRef);
+
+        fixture.detectChanges();
+
+        await fixture.whenRenderingDone();
 
         expect(service.hasOpenDialogs()).toBeTrue();
 
         dialogRef.dismiss();
 
+        fixture.detectChanges();
+
+        tick(200);
+
         expect(destroyDialogSpy).toHaveBeenCalled();
         expect(service.hasOpenDialogs()).toBeFalse();
-    });
+    }));
 
-    it('should open dialog from component', () => {
+    it('should open dialog from component', fakeAsync(async () => {
         const destroyDialogSpy = spyOn<any>(service, '_destroyDialog').and.callThrough();
         const dialogRef = service.open(TemplateTestComponent);
 
+        fixture.detectChanges();
+
+        await fixture.whenRenderingDone();
+
         expect(service.hasOpenDialogs()).toBeTrue();
 
         dialogRef.dismiss();
 
+        fixture.detectChanges();
+
+        tick(200);
+
         expect(destroyDialogSpy).toHaveBeenCalled();
         expect(service.hasOpenDialogs()).toBeFalse();
-    });
+    }));
 
     it('should dismiss all modals', () => {
         service.open(TemplateTestComponent);

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
 import { PlatformTableModule } from '../../../table.module';
 import { FilterDialogData, P13FilteringDialogComponent } from './filtering.component';
@@ -18,7 +18,7 @@ describe('PlatformTableP13FilterDialogComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformTableModule, BrowserAnimationsModule],
+            imports: [PlatformTableModule, NoopAnimationsModule],
             providers: [{ provide: DialogRef, useValue: dialogRef }, DialogConfig]
         }).compileComponents();
     }));

@@ -3,7 +3,6 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    HostListener,
     Input,
     OnChanges,
     OnDestroy,
@@ -13,10 +12,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { AnimationEvent } from '@angular/animations';
 
 import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/cdk/utils';
-import { DialogBase, dialogFade } from '@fundamental-ngx/core/dialog';
+import { DialogBase } from '@fundamental-ngx/core/dialog';
 
 import { MessageBoxHost, MessageBoxConfig } from './utils/message-box-config.class';
 import { MessageBoxRef } from './utils/message-box-ref.class';
@@ -42,8 +40,7 @@ import { CSS_CLASS_NAME } from './utils/const';
         role: 'dialog'
     },
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: MessageBoxHost, useExisting: MessageBoxComponent }],
-    animations: [dialogFade]
+    providers: [{ provide: MessageBoxHost, useExisting: MessageBoxComponent }]
 })
 export class MessageBoxComponent
     extends DialogBase
@@ -87,7 +84,6 @@ export class MessageBoxComponent
         elementRef: ElementRef
     ) {
         super(router, elementRef, changeDetectorRef, rtlService, focusTrapService);
-        this._listenOnClose();
     }
 
     /** @hidden */
@@ -103,7 +99,6 @@ export class MessageBoxComponent
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
-        this._animationState = 'visible';
         this.buildComponentCssClass();
     }
 
@@ -120,7 +115,6 @@ export class MessageBoxComponent
     /** @hidden */
     ngOnDestroy(): void {
         super.ngOnDestroy();
-        this._animationState = 'void';
     }
 
     /** @hidden */
@@ -138,29 +132,6 @@ export class MessageBoxComponent
     /** @hidden */
     elementRef(): ElementRef {
         return this._elementRef;
-    }
-
-    /** Handle end of animations, updating the state of the Message Toast. */
-    @HostListener('@state.done', ['$event'])
-    onAnimationEnd(event: AnimationEvent): void {
-        const { fromState, toState } = event;
-
-        if ((toState === 'void' && fromState !== 'void') || toState === 'hidden') {
-            this._messageBoxRef._endClose$.next();
-            this._messageBoxRef._endClose$.complete();
-        }
-    }
-
-    /**
-     * @hidden
-     * We need to wait until animation plays, and then send signal to the service to destroy the component.
-     */
-    private _listenOnClose(): void {
-        const callback: () => void = () => (this._animationState = 'void');
-        this._messageBoxRef.afterClosed.subscribe({
-            next: () => callback(),
-            error: () => callback()
-        });
     }
 
     /** @hidden */

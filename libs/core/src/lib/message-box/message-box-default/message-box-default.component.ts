@@ -25,7 +25,7 @@ export class MessageBoxDefaultComponent implements OnInit, AfterViewInit {
     _contentTemplate: TemplateRef<any>;
 
     /** @hidden */
-    _messageBoxContent: MessageBoxContent;
+    _messageBoxContent: MessageBoxContent | null;
 
     /** @hidden */
     _footerVisible: boolean;
@@ -35,7 +35,7 @@ export class MessageBoxDefaultComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     ngOnInit(): void {
-        this._footerVisible = !!(this._messageBoxContent.cancelButton || this._messageBoxContent.approveButton);
+        this._footerVisible = !!(this._messageBoxContent?.cancelButton || this._messageBoxContent?.approveButton);
     }
 
     /** @hidden */
@@ -45,23 +45,23 @@ export class MessageBoxDefaultComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     _onCloseButton(): void {
-        this._messageBoxContent.closeButtonCallback?.();
+        this._messageBoxContent?.closeButtonCallback?.();
     }
 
     /** @hidden */
     _onApproveButton(): void {
-        this._messageBoxContent.approveButtonCallback?.();
+        this._messageBoxContent?.approveButtonCallback?.();
     }
 
     /** @hidden */
     _onCancelButton(): void {
-        this._messageBoxContent.cancelButtonCallback?.();
+        this._messageBoxContent?.cancelButtonCallback?.();
     }
 
     /** @hidden */
     private _setContentTemplate(): void {
         this._contentTemplate =
-            this._messageBoxContent.content instanceof TemplateRef
+            this._messageBoxContent?.content instanceof TemplateRef
                 ? this._messageBoxContent.content
                 : this._textContentTemplate;
 

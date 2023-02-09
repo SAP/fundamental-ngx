@@ -28,10 +28,6 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     @HostBinding('attr.dir')
     _dir: string;
 
-    /** The state of the Dialog animations. */
-    @HostBinding('@state')
-    _animationState = 'void';
-
     /** @hidden Reference to dialog window element*/
     abstract dialogWindow: ElementRef;
 

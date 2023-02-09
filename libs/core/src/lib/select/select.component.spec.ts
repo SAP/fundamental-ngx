@@ -8,6 +8,7 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { SelectModule } from './select.module';
 import { SelectKeyManagerService } from './select-key-manager.service';
 import { OptionComponent } from './option/option.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
     template: `
@@ -122,7 +123,7 @@ describe('SelectComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent, TestFilteringWrapperComponent, ValueCompareWithSelectComponent],
-            imports: [SelectModule]
+            imports: [SelectModule, NoopAnimationsModule]
         })
             .overrideComponent(SelectComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }

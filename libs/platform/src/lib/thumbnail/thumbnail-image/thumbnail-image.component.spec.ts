@@ -11,6 +11,7 @@ import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ThumbnailImageComponent } from './thumbnail-image.component';
 import { Media } from '../thumbnail.interfaces';
 import { PlatformThumbnailModule } from '../thumbnail.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
     template: `<fdp-thumbnail-image [mediaList]="mediaList"></fdp-thumbnail-image>`
@@ -193,7 +194,15 @@ describe('MoreImagesThumbnailImageTestComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule, PlatformThumbnailModule],
+            imports: [
+                CommonModule,
+                AvatarModule,
+                DialogModule,
+                CarouselModule,
+                ButtonModule,
+                PlatformThumbnailModule,
+                NoopAnimationsModule
+            ],
             declarations: [MoreImagesThumbnailImageTestComponent],
             providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();

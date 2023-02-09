@@ -1,10 +1,10 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChild,
     ElementRef,
-    HostListener,
     Input,
     OnChanges,
     OnDestroy,
@@ -14,12 +14,10 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { AnimationEvent } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
 import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/cdk/utils';
 
-import { dialogFade } from './utils/dialog.animations';
 import { DialogConfig } from './utils/dialog-config.class';
 import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 import { DialogBodyComponent } from './dialog-body/dialog-body.component';
@@ -46,7 +44,7 @@ import { DialogTitleDirective } from './directives/dialog-title.directive';
     host: {
         tabindex: '-1'
     },
-    animations: [dialogFade],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
 export class DialogComponent
@@ -152,7 +150,6 @@ export class DialogComponent
     ngOnInit(): void {
         super.ngOnInit();
         this._listenOnHidden();
-        this._listenOnClose();
         this.buildComponentCssClass();
     }
 
@@ -170,7 +167,6 @@ export class DialogComponent
     ngOnDestroy(): void {
         super.ngOnDestroy();
         this._onHidden.unsubscribe();
-        this._animationState = 'void';
     }
 
     /** @hidden */
@@ -190,35 +186,11 @@ export class DialogComponent
         return this._elementRef;
     }
 
-    /** Handle end of animations, updating the state of the Message Toast. */
-    @HostListener('@state.done', ['$event'])
-    onAnimationEnd(event: AnimationEvent): void {
-        const { fromState, toState } = event;
-
-        if ((toState === 'void' && fromState !== 'void') || toState === 'hidden') {
-            this._dialogRef._endClose$.next();
-            this._dialogRef._endClose$.complete();
-        }
-    }
-
     /** @hidden Listen on Dialog visibility */
     private _listenOnHidden(): void {
         this._onHidden = this._dialogRef.onHide.subscribe((isHidden) => {
             this.showDialogWindow = !isHidden;
-            this._animationState = this.showDialogWindow ? 'visible' : 'void';
             this.buildComponentCssClass();
-        });
-    }
-
-    /**
-     * @hidden
-     * We need to wait until animation plays, and then send signal to the service to destroy the component.
-     */
-    private _listenOnClose(): void {
-        const callback: () => void = () => (this._animationState = 'void');
-        this._dialogRef.afterClosed.subscribe({
-            next: () => callback(),
-            error: () => callback()
         });
     }
 }
