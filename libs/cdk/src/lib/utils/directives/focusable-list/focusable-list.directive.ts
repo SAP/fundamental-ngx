@@ -8,6 +8,7 @@ import {
     HostListener,
     Input,
     OnChanges,
+    OnDestroy,
     Output,
     QueryList,
     Renderer2,
@@ -82,7 +83,7 @@ export class DeprecatedFocusableListDirective extends DeprecatedSelector {}
         DestroyedService
     ]
 })
-export class FocusableListDirective implements OnChanges, AfterViewInit {
+export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestroy {
     /** Whether the whole list should be focusable, handy in grids. */
     @Input()
     set focusable(value: BooleanInput) {
@@ -215,6 +216,11 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
                 takeUntil(this._destroy$)
             )
             .subscribe();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._keyManager?.destroy();
     }
 
     /** @hidden */
