@@ -1,3 +1,12 @@
+# [0.39.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.35...v0.39.0-rc.36) (2023-02-09)
+
+
+### Features
+
+* **platform:** table not selectable and preselected rows ([#9304](https://github.com/SAP/fundamental-ngx/issues/9304)) ([e66901b](https://github.com/SAP/fundamental-ngx/commit/e66901b482b057a902e1a36c114d61bfa71eedb1))
+
+
+
 # [0.39.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.34...v0.39.0-rc.35) (2023-02-08)
 
 
