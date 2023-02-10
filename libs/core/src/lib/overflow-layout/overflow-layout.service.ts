@@ -1,15 +1,14 @@
-import { FocusKeyManager } from '@angular/cdk/a11y';
-import { ElementRef, Injectable, OnDestroy, Optional, QueryList } from '@angular/core';
-import { resizeObservable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { ElementRef, Injectable, OnDestroy } from '@angular/core';
+import { resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { debounceTime, distinctUntilChanged, filter, Observable, skip, Subject, Subscription } from 'rxjs';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowLayoutFocusableItem } from './interfaces/overflow-focusable-item.interface';
 import { OverflowItemRef } from './interfaces/overflow-item-ref.interface';
 
 export interface OverflowLayoutConfig {
-    items: QueryList<OverflowItemRef>;
-    focusableItems: QueryList<OverflowLayoutFocusableItem>;
-    visibleItems: QueryList<OverflowLayoutItemContainerDirective>;
+    items: OverflowItemRef[];
+    focusableItems: OverflowLayoutFocusableItem[];
+    visibleItems: OverflowLayoutItemContainerDirective[];
     itemsWrapper: HTMLElement;
     showMoreContainer: HTMLElement;
     layoutContainerElement: HTMLElement;
@@ -46,9 +45,6 @@ export class OverflowLayoutService implements OnDestroy {
     result = new OverflowLayoutListeningResult();
 
     /** @hidden */
-    _keyboardEventsManager: FocusKeyManager<OverflowLayoutFocusableItem>;
-
-    /** @hidden */
     private _listenToItemResize = true;
 
     /** @hidden */
@@ -66,9 +62,6 @@ export class OverflowLayoutService implements OnDestroy {
     /** @hidden */
     private _result$ = new Subject<OverflowLayoutListeningResult>();
 
-    /** @hidden */
-    private _dir: 'rtl' | 'ltr' = 'ltr';
-
     /**
      * Observable which emits when changes detection is required.
      */
@@ -84,7 +77,7 @@ export class OverflowLayoutService implements OnDestroy {
     }
 
     /** @hidden */
-    constructor(private _elRef: ElementRef<HTMLElement>, @Optional() private _rtlService: RtlService | null) {}
+    constructor(private _elRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -95,9 +88,7 @@ export class OverflowLayoutService implements OnDestroy {
     startListening(config: OverflowLayoutConfig): void {
         this.setConfig(config);
         this.fitVisibleItems();
-        this._setFocusKeyManager();
-        this._listenToChanges();
-        this._subscribeToRtl();
+        this._listenToSizeChanges(this._elRef.nativeElement, this.config.itemsWrapper);
     }
 
     /** @hidden */
@@ -108,17 +99,6 @@ export class OverflowLayoutService implements OnDestroy {
     /** @hidden */
     private _emitResult(): void {
         this._result$.next(this.result);
-    }
-
-    /** @hidden */
-    private _listenToChanges(): void {
-        this._subscription.add(
-            this.config.items.changes.subscribe(() => {
-                this.fitVisibleItems();
-            })
-        );
-
-        this._listenToSizeChanges(this._elRef.nativeElement, this.config.itemsWrapper);
     }
 
     /** @hidden */
@@ -146,10 +126,10 @@ export class OverflowLayoutService implements OnDestroy {
      */
     fitVisibleItems(): void {
         this._listenToItemResize = false;
-        this._allItems = this.config.items.toArray();
+        this._allItems = this.config.items;
 
-        let allItems = this.config.items.toArray();
-        let visibleContainerItems = this.config.visibleItems.toArray();
+        let allItems = this.config.items;
+        let visibleContainerItems = this.config.visibleItems;
 
         this._elRef.nativeElement.style.height = `${this._elRef.nativeElement.clientHeight}px`;
 
@@ -174,7 +154,7 @@ export class OverflowLayoutService implements OnDestroy {
         this._emitResult();
         const containerWidth = this._elRef.nativeElement.getBoundingClientRect().width;
         const itemsContainerWidth = allItems.reduce(
-            (total, item) => total + this._getElementWidth(item.elementRef.nativeElement) || 0,
+            (total, item) => total + this._getElementWidth(item.overflowItem.elmRef.nativeElement) || 0,
             0
         );
 
@@ -207,7 +187,7 @@ export class OverflowLayoutService implements OnDestroy {
         const forcedItemsIndexes = this._getForcedItemsIndexes();
 
         forcedItemsIndexes.forEach((itemIndex) => {
-            const container = this.config.visibleItems.get(itemIndex);
+            const container = this.config.visibleItems[itemIndex];
             if (!container) {
                 return;
             }
@@ -242,7 +222,7 @@ export class OverflowLayoutService implements OnDestroy {
 
             const condition =
                 (combinedWidth <= layoutWidth ||
-                    (item === this.config.visibleItems.last &&
+                    (item === this.config.visibleItems[this.config.visibleItems.length - 1] &&
                         combinedWidth <= layoutWidth + showMoreContainerWidth)) &&
                 fittingElmCount < maxVisibleItems;
 
@@ -287,34 +267,6 @@ export class OverflowLayoutService implements OnDestroy {
         this._elRef.nativeElement.style.height = '';
 
         this._listenToItemResize = true;
-    }
-
-    /** @hidden */
-    private _setFocusKeyManager(): void {
-        if (!this.config.enableKeyboardNavigation) {
-            return;
-        }
-        this._dir = this._rtlService?.rtl.value ? 'rtl' : 'ltr';
-        this._keyboardEventsManager = new FocusKeyManager(this.config.focusableItems)
-            .withWrap()
-            .withHorizontalOrientation(this._dir)
-            .withVerticalOrientation()
-            .skipPredicate((item) => !item.navigable || item.hidden);
-    }
-
-    /** @hidden Rtl change subscription */
-    private _subscribeToRtl(): void {
-        if (!this._rtlService || !this.config.enableKeyboardNavigation) {
-            return;
-        }
-
-        this._subscription.add(
-            this._rtlService.rtl.subscribe((isRtl) => {
-                this._dir = isRtl ? 'rtl' : 'ltr';
-
-                this._keyboardEventsManager = this._keyboardEventsManager.withHorizontalOrientation(this._dir);
-            })
-        );
     }
 
     /** @hidden */

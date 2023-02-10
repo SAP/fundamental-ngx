@@ -689,6 +689,7 @@ describe('Approval flow', () => {
         await waitForElDisplayed(detailsDialog);
         await expect(await isElementClickable(detailsDialogSendReminderBtn)).toBe(false, 'reminder button is enabled');
         await click(detailsDialogCancelBtn);
+        await waitForElDisappear(detailsDialog);
     }
 
     async function checkSendReminder(nodeSelection: string): Promise<void> {
@@ -701,5 +702,6 @@ describe('Approval flow', () => {
         await expect(await waitForElDisplayed(reminderToaster)).toBe(true, 'toast message not displayed');
         await expect(await getText(reminderToaster)).toContain(remainder_text);
         await waitForNotPresent(reminderToaster);
+        await waitForElDisappear(detailsDialog);
     }
 });

@@ -1,39 +1,55 @@
+import { CdkPortalOutlet, ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import {
-    ComponentFactoryResolver,
+    ChangeDetectorRef,
     ComponentRef,
     ElementRef,
     EmbeddedViewRef,
+    Injector,
     TemplateRef,
     Type,
     ViewContainerRef
 } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Nullable } from '../models/nullable';
 
 export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>> {
     /** @hidden */
-    abstract containerRef: ViewContainerRef;
+    abstract portalOutlet: CdkPortalOutlet;
 
     /** @hidden */
-    childContent: T | undefined = undefined;
+    childContent: Nullable<T> = undefined;
 
     /** @hidden */
     protected _componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     /** @hidden */
-    constructor(protected _elementRef: ElementRef, protected _componentFactoryResolver: ComponentFactoryResolver) {}
+    protected _contentLoaded$ = new BehaviorSubject<boolean>(false);
+
+    /** @hidden */
+    protected constructor(
+        protected _elementRef: ElementRef,
+        protected _injector: Injector,
+        protected _cdr: ChangeDetectorRef
+    ) {}
 
     /** @hidden Load received content */
     protected abstract _loadContent(): void;
 
     /** @hidden Load received content as component */
     protected _createFromComponent(content: Type<any>): void {
-        this.containerRef.clear();
-        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(content);
-        this._componentRef = this.containerRef.createComponent(componentFactory);
+        this.portalOutlet?.attachedRef?.destroy();
+        const injector = Injector.create({
+            parent: this._injector,
+            providers: []
+        });
+        this._componentRef = this.portalOutlet.attach(new ComponentPortal(content, null, injector));
     }
 
     /** @hidden Load received content as embedded view */
     protected _createFromTemplate(content: TemplateRef<any>, context: any): void {
-        this.containerRef.clear();
-        this._componentRef = this.containerRef.createEmbeddedView(content, context);
+        this.portalOutlet?.attachedRef?.destroy();
+        this._componentRef = this.portalOutlet.attach(
+            new TemplatePortal(content, null as unknown as ViewContainerRef, context)
+        );
     }
 }

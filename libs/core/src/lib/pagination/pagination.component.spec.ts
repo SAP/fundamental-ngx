@@ -128,7 +128,7 @@ describe('Pagination Component', () => {
         });
 
         it('should reset input field', () => {
-            const model = { reset: (_value: any) => {} } as NgModel;
+            const model = { reset: () => {} } as NgModel;
             const modelMockSpy = spyOn(model, 'reset');
 
             component.currentPage = 3;

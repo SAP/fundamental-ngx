@@ -187,6 +187,7 @@ export class RadioGroupComponent
     ngOnDestroy(): void {
         this._destroy$.next(true);
         this._destroy$.complete();
+        this._keyboardEventsManager?.destroy();
     }
 
     /** @hidden */
@@ -219,6 +220,7 @@ export class RadioGroupComponent
             return;
         }
 
+        this._keyboardEventsManager?.destroy();
         this._keyboardEventsManager = new FocusKeyManager(radioButtons).withWrap().withHorizontalOrientation('ltr');
 
         radioButtons.changes

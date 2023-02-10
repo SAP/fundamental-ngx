@@ -66,6 +66,7 @@ export class KeyboardSupportService<T> {
     onDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+        this._keyManager.destroy();
     }
 
     /** @hidden */

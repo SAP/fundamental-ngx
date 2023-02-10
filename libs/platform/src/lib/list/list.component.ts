@@ -499,9 +499,9 @@ export class ListComponent<T>
             this.dataSource.close();
         }
 
-        if (this._dsSubscription) {
-            this._dsSubscription.unsubscribe();
-        }
+        this._dsSubscription?.unsubscribe();
+
+        this._keyManager?.destroy();
     }
 
     /**

@@ -1,18 +1,18 @@
-import { ComponentRef } from '@angular/core';
-
-import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { ComponentRef, Injectable, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogConfigBase } from './dialog-config-base.class';
 import { DialogRefBase } from './dialog-ref-base.class';
 
 /** Service used to dynamically generate a dialog. */
-export abstract class DialogBaseService<T> {
+@Injectable()
+export abstract class DialogBaseService<T> implements OnDestroy {
     /** @hidden Collection of existing dialog references */
     protected _dialogs: ComponentRef<T>[] = [];
 
     /** @hidden */
-    constructor(protected _dynamicComponentService: DynamicComponentService) {}
+    protected _destroy$ = new Subject<void>();
 
     /**
      * Status of the dialog service.
@@ -27,6 +27,12 @@ export abstract class DialogBaseService<T> {
         this._dialogs.forEach((item) => this._destroyDialog(item));
     }
 
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._destroy$.next();
+        this._destroy$.complete();
+    }
+
     abstract open<D>(content: unknown, config: DialogConfigBase<D>): DialogRefBase<D>;
 
     /** @hidden Extends configuration using default values*/
@@ -36,7 +42,6 @@ export abstract class DialogBaseService<T> {
 
     /** @hidden Destroy existing dialog */
     protected _destroyDialog(dialog: ComponentRef<T>): void {
-        this._dynamicComponentService.destroyComponent(dialog);
         this._dialogs = this._dialogs.filter((d) => d !== dialog);
     }
 }

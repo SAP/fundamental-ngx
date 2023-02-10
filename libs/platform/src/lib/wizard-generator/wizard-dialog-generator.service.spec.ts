@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
 
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { WizardGeneratorItem } from './interfaces/wizard-generator-item.interface';
 import { WizardTitle } from './interfaces/wizard-title.interface';
@@ -103,7 +104,7 @@ describe('WizardDialogGeneratorService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule],
+            imports: [DialogModule, NoopAnimationsModule],
             providers: [WizardDialogGeneratorService]
         });
         service = TestBed.inject(WizardDialogGeneratorService);
@@ -114,8 +115,8 @@ describe('WizardDialogGeneratorService', () => {
         expect(service).toBeTruthy();
     });
 
-    it('should open dialog with wizard', async () => {
-        const dialogRef = service.open({
+    it('should open dialog with wizard', () => {
+        service.open({
             width: '100%',
             height: '100%',
             verticalPadding: false,
@@ -129,8 +130,6 @@ describe('WizardDialogGeneratorService', () => {
         });
         expect(dialogService.hasOpenDialogs()).toBeTrue();
 
-        dialogRef.dismiss();
-
-        expect(dialogService.hasOpenDialogs()).toBeFalse();
+        // Dismissal is tesed in dialog service itself. No need to repeat it.
     });
 });

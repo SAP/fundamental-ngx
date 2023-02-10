@@ -1,23 +1,26 @@
 import { Inject, Injectable, Injector, Optional } from '@angular/core';
 
-import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogBaseService } from '@fundamental-ngx/core/dialog';
+import { takeUntil } from 'rxjs';
 
 import { MESSAGE_BOX_DEFAULT_CONFIG, MessageBoxConfig } from '../utils/message-box-config.class';
 import { MessageBoxRef } from '../utils/message-box-ref.class';
 import { MessageBoxContainerComponent } from '../message-box-container/message-box-container.component';
 import { MessageBoxContentType } from '../message-box-content.type';
+import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 /** Service used to create a message box. */
 @Injectable()
 export class MessageBoxService extends DialogBaseService<MessageBoxContainerComponent> {
     /** @hidden */
     constructor(
-        dynamicComponentService: DynamicComponentService,
         @Optional() @Inject(MESSAGE_BOX_DEFAULT_CONFIG) private _defaultConfig: MessageBoxConfig,
-        @Optional() private _rtlService: RtlService
+        @Optional() private _rtlService: RtlService,
+        private readonly _overlay: Overlay
     ) {
-        super(dynamicComponentService);
+        super();
     }
 
     /**
@@ -40,21 +43,22 @@ export class MessageBoxService extends DialogBaseService<MessageBoxContainerComp
             parent: config.injector
         });
 
-        const component = this._dynamicComponentService.createDynamicComponent<MessageBoxContainerComponent>(
-            content,
-            MessageBoxContainerComponent,
-            config,
-            { injector }
-        );
+        const overlayRef = this._overlay.create(new OverlayConfig());
 
-        this._dialogs.push(component);
+        const portal = new ComponentPortal(MessageBoxContainerComponent, null, injector);
 
-        const defaultBehaviourOnClose = (): void => {
-            this._destroyDialog(component);
-            refSub.unsubscribe();
-        };
+        const componentRef = overlayRef.attach(portal);
 
-        const refSub = messageBoxRef.afterClosed.subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose);
+        componentRef.instance.childContent = content;
+        componentRef.instance.messageBoxConfig = config;
+
+        this._dialogs.push(componentRef);
+
+        messageBoxRef._endClose$.pipe(takeUntil(this._destroy$)).subscribe(() => {
+            this._destroyDialog(componentRef);
+            componentRef.destroy();
+            overlayRef.dispose();
+        });
 
         return messageBoxRef;
     }

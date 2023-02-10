@@ -1,6 +1,6 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
-import { Directive, HostBinding, HostListener, Inject, Input, Optional } from '@angular/core';
+import { Directive, HostBinding, HostListener, Inject, Input, OnDestroy, Optional } from '@angular/core';
 import { DestroyedService, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { takeUntil } from 'rxjs';
 import { OverflowContainer } from '../interfaces/overflow-container.interface';
@@ -17,7 +17,7 @@ import { FD_OVERFLOW_CONTAINER } from '../tokens/overflow-container.token';
     selector: '[fdOverflowLayoutPopoverContent]',
     providers: [DestroyedService]
 })
-export class OverflowLayoutPopoverContentDirective implements OverflowPopoverContent {
+export class OverflowLayoutPopoverContentDirective implements OverflowPopoverContent, OnDestroy {
     /**
      * Array of hidden items.
      */
@@ -26,6 +26,7 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
         // Need to set items with a delay so that elementRef of the focusable item would refresh.
         setTimeout(() => {
             this._items = value;
+            this._keyboardEventsManager?.destroy();
             this._keyboardEventsManager = new FocusKeyManager(
                 this._items
                     .filter((item) => item.overflowItem.focusableItem?.focusable)
@@ -69,7 +70,7 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
     @HostListener('keyup', ['$event'])
     keyUpHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, TAB)) {
-            const index = this._items.findIndex((item) => item.elementRef.nativeElement === event.target);
+            const index = this._items.findIndex((item) => item.overflowItem.elmRef.nativeElement === event.target);
             if (index !== -1) {
                 this._keyboardEventsManager.setActiveItem(index);
             }
@@ -88,5 +89,10 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
      */
     focusFirstTabbableElement(): void {
         this._keyboardEventsManager.setActiveItem(0);
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._keyboardEventsManager?.destroy();
     }
 }

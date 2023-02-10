@@ -1,9 +1,17 @@
-import { TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
 import { MessageBoxService } from './message-box.service';
 import { MessageBoxModule } from '../message-box.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+@Component({
+    template: ``
+})
+class MessageBoxServiceTestComponent {
+    constructor(public messageBoxService: MessageBoxService) {}
+}
 
 @Component({
     template: `
@@ -18,18 +26,23 @@ class TemplateTestComponent {
 
 describe('MessageBoxService', () => {
     let service: MessageBoxService;
+    let component: TemplateTestComponent;
+    let rootComponent: MessageBoxServiceTestComponent;
+    let fixture: ComponentFixture<MessageBoxServiceTestComponent>;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [TemplateTestComponent, MessageBoxServiceTestComponent],
+            imports: [CommonModule, MessageBoxModule, NoopAnimationsModule]
+        }).compileComponents();
+    });
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [TemplateTestComponent],
-            imports: [MessageBoxModule]
-        })
-            .overrideModule(BrowserDynamicTestingModule, {
-                set: { entryComponents: [TemplateTestComponent] }
-            })
-            .compileComponents();
-
-        service = TestBed.inject<MessageBoxService>(MessageBoxService);
+        fixture = TestBed.createComponent(MessageBoxServiceTestComponent);
+        rootComponent = fixture.componentInstance;
+        component = TestBed.createComponent(TemplateTestComponent).componentInstance;
+        service = rootComponent.messageBoxService;
+        fixture.detectChanges();
     });
 
     it('should create', () => {
@@ -37,30 +50,50 @@ describe('MessageBoxService', () => {
         expect(service.hasOpenDialogs()).toBeFalse();
     });
 
-    it('should open message box from template', () => {
+    it('should open message box from template', fakeAsync(async () => {
         const destroyDialogSpy = spyOn<any>(service, '_destroyDialog').and.callThrough();
-        const templateRef = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
+        const templateRef = component.templateRef;
         const dialogRef = service.open(templateRef);
+
+        fixture.detectChanges();
+
+        await fixture.whenRenderingDone();
 
         expect(service.hasOpenDialogs()).toBeTrue();
 
         dialogRef.dismiss();
 
+        fixture.detectChanges();
+
+        tick(200);
+
         expect(destroyDialogSpy).toHaveBeenCalled();
         expect(service.hasOpenDialogs()).toBeFalse();
-    });
+    }));
 
-    it('should open dialog from component', () => {
+    it('should open dialog from component', fakeAsync(async () => {
         const destroyDialogSpy = spyOn<any>(service, '_destroyDialog').and.callThrough();
         const dialogRef = service.open(TemplateTestComponent);
 
+        fixture.detectChanges();
+
+        expect(service.hasOpenDialogs()).toBeTrue();
+
+        fixture.detectChanges();
+
+        await fixture.whenRenderingDone();
+
         expect(service.hasOpenDialogs()).toBeTrue();
 
         dialogRef.dismiss();
 
+        fixture.detectChanges();
+
+        tick(200);
+
         expect(destroyDialogSpy).toHaveBeenCalled();
         expect(service.hasOpenDialogs()).toBeFalse();
-    });
+    }));
 
     it('should dismiss all message boxes', () => {
         service.open(TemplateTestComponent);

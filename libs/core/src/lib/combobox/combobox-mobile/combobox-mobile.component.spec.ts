@@ -5,7 +5,7 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { EventEmitter } from '@angular/core';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -41,7 +41,7 @@ describe('ComboboxMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule, BrowserAnimationsModule, RouterTestingModule],
+            imports: [DialogModule, NoopAnimationsModule, RouterTestingModule],
             declarations: [ComboboxMobileComponent],
             providers: [DynamicComponentService, { provide: COMBOBOX_COMPONENT, useValue: comboboxInputComponent }]
         }).compileComponents();

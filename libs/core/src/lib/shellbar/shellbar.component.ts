@@ -208,6 +208,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     /** @hidden */
     ngOnDestroy(): void {
         this._searchSubmitSubscription?.unsubscribe();
+        this._searchPortalOutlet?.dispose();
     }
 
     /** @hidden */

@@ -6,6 +6,7 @@ import { whenStable } from '@fundamental-ngx/core/tests';
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
     selector: 'fdp-smart-filter-bar-test',
@@ -310,7 +311,7 @@ describe('SmartFilterBarComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PlatformTableModule, PlatformSmartFilterBarModule],
+            imports: [PlatformTableModule, PlatformSmartFilterBarModule, NoopAnimationsModule],
             declarations: [TestComponent]
         }).compileComponents();
     });
