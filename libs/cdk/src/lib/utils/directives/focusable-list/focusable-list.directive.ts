@@ -30,7 +30,7 @@ import { getNativeElement } from '../../helpers';
 import { HasElementRef } from '../../interfaces';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { intersectionObservable, KeyUtil } from '../../functions';
-import { F2, TAB } from '@angular/cdk/keycodes';
+import { F2 } from '@angular/cdk/keycodes';
 import { scrollIntoView, ScrollPosition } from './scroll';
 
 export interface FocusableListPosition {
@@ -372,12 +372,6 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
                     // Already handled
                     if (event.defaultPrevented) {
                         return;
-                    }
-
-                    // Prevent scrolling and other default actions
-                    // But allow tabbing in/out and F2 to jump into list
-                    if (!KeyUtil.isKeyCode(event, [TAB, F2])) {
-                        event.preventDefault();
                     }
 
                     this._keyManager?.onKeydown(event);

@@ -12,6 +12,8 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { FocusableObserver } from './focusable.observer';
 import { takeUntil } from 'rxjs';
 import { Nullable } from '../../models/nullable';
+import { KeyUtil } from '../../functions';
+import { ENTER, ESCAPE, F2, LEFT_ARROW, MAC_ENTER, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 export type CellFocusedEventAnnouncer = Nullable<(position: FocusableItemPosition) => string>;
 
@@ -140,6 +142,26 @@ export class FocusableItemDirective implements HasElementRef {
     }
 
     /** @hidden */
+    @HostListener('keydown', ['$event'])
+    onKeydown(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2])) {
+            if (event.target && this._eventTargetIsInput(event.target)) {
+                this.elementRef().nativeElement.focus();
+            } else {
+                this._focusChildElement();
+            }
+        } else if (KeyUtil.isKeyCode(event, ESCAPE)) {
+            this.elementRef().nativeElement.focus();
+        } else if (
+            KeyUtil.isKeyCode(event, [RIGHT_ARROW, LEFT_ARROW]) &&
+            event.target &&
+            this._eventTargetIsInput(event.target)
+        ) {
+            event.stopImmediatePropagation();
+        }
+    }
+
+    /** @hidden */
     @HostListener('focusin')
     async _onFocusin(): Promise<void> {
         if (!this.fdkFocusableItem) {
@@ -150,16 +172,6 @@ export class FocusableItemDirective implements HasElementRef {
             clearTimeout(this._timerId);
             this._timerId = null;
             return;
-        }
-
-        if (this.focusChild) {
-            const tabbableElement = this._tabbableElementService.getTabbableElement(
-                this.elementRef().nativeElement,
-                false,
-                true
-            );
-
-            tabbableElement?.focus();
         }
 
         if (this._position) {
@@ -209,5 +221,21 @@ export class FocusableItemDirective implements HasElementRef {
         return `Column ${position.colIndex + 1} of ${position.totalCols}, row: ${position.rowIndex + 1} of ${
             position.totalRows
         }`;
+    }
+
+    /** @hidden */
+    private _focusChildElement(): void {
+        const tabbableElement = this._tabbableElementService.getTabbableElement(
+            this.elementRef().nativeElement,
+            false,
+            true
+        );
+
+        tabbableElement?.focus();
+    }
+
+    /** @hidden */
+    private _eventTargetIsInput(eventTarget: EventTarget): boolean {
+        return (eventTarget as HTMLElement).tagName === 'INPUT' || (eventTarget as HTMLElement).tagName === 'TEXTAREA';
     }
 }
