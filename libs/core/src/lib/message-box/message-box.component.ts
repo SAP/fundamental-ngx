@@ -14,7 +14,7 @@ import {
 import { Router } from '@angular/router';
 
 import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/cdk/utils';
-import { DialogBase, dialogFadeNgIf } from '@fundamental-ngx/core/dialog';
+import { DialogBase } from '@fundamental-ngx/core/dialog';
 
 import { MessageBoxHost, MessageBoxConfig } from './utils/message-box-config.class';
 import { MessageBoxRef } from './utils/message-box-ref.class';
@@ -40,8 +40,7 @@ import { CSS_CLASS_NAME } from './utils/const';
         role: 'dialog'
     },
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: MessageBoxHost, useExisting: MessageBoxComponent }],
-    animations: [dialogFadeNgIf]
+    providers: [{ provide: MessageBoxHost, useExisting: MessageBoxComponent }]
 })
 export class MessageBoxComponent
     extends DialogBase

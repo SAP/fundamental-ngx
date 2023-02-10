@@ -107,6 +107,7 @@ export class FocusKeyManagerListDirective implements OnChanges, AfterContentInit
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+        this._focusKeyManager.destroy();
     }
 
     /** Focus certain list's item */

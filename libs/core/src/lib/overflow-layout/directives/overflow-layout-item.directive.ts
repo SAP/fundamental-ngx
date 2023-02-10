@@ -67,7 +67,6 @@ export class OverflowLayoutItemDirective implements OverflowItem, OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        this._overflowItemRef?.setElementRef(this.elmRef);
         this._overflowItemRef?.setOverflowItem(this);
     }
 }

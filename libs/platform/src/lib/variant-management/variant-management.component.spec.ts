@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { I18nModule } from '@fundamental-ngx/i18n';
@@ -42,7 +43,7 @@ describe('VariantManagementComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [DialogModule, I18nModule, PipeModule],
+            imports: [DialogModule, I18nModule, PipeModule, NoopAnimationsModule],
             declarations: [VariantManagementComponent],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();

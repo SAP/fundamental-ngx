@@ -1,4 +1,4 @@
-<fd-message-box>
+<fd-message-box *ngIf="_messageBoxContent">
     <fd-message-box-header>
         <h1 fd-title>{{ _messageBoxContent.title }}</h1>
     </fd-message-box-header>
@@ -30,5 +30,5 @@
 </fd-message-box>
 
 <ng-template #textContent>
-    {{ _messageBoxContent.content }}
+    {{ _messageBoxContent?.content }}
 </ng-template>
