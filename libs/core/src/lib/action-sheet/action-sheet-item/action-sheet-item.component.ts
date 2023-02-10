@@ -62,8 +62,8 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     disabled = false;
 
     /** @hidden */
-    @ViewChild(ButtonComponent)
-    buttonComponent: ButtonComponent;
+    @ViewChild(ButtonComponent, { read: ElementRef })
+    buttonComponent: ElementRef;
 
     /** @hidden */
     @Output()
@@ -96,6 +96,6 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
 
     /** @hidden */
     focus(): void {
-        this.buttonComponent.elementRef().nativeElement.focus();
+        this.buttonComponent.nativeElement.focus();
     }
 }

@@ -41,7 +41,6 @@ import equal from 'fast-deep-equal';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { RangeSelector } from '@fundamental-ngx/cdk/utils';
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -209,8 +208,8 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     listComponent: ListComponent;
 
     /** @hidden */
-    @ViewChild('searchInputElement')
-    searchInputElement: FormControlComponent;
+    @ViewChild('searchInputElement', { read: ElementRef })
+    searchInputElement: ElementRef;
 
     /** @hidden */
     @ContentChildren(TemplateDirective)
@@ -565,7 +564,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     /** Method passed to list component */
     handleListFocusEscape(direction: FocusEscapeDirection): void {
         if (direction === 'up') {
-            this.searchInputElement?.elementRef().nativeElement.focus();
+            this.searchInputElement?.nativeElement.focus();
         }
     }
 
@@ -621,7 +620,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /** @hidden */
     protected _focusToSearchField(): void {
-        this.searchInputElement?.elementRef().nativeElement.focus();
+        this.searchInputElement?.nativeElement.focus();
     }
 
     /** @hidden

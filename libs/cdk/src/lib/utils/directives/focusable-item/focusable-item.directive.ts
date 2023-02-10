@@ -177,7 +177,7 @@ export class FocusableItemDirective implements HasElementRef {
     private _disableTabbableElements(): void {
         // Since we cannot select by tabindex attribute (links, inputs, buttons might not have one but still can be focusable),
         // Select all elements from the cell and filter by tabIndex property.
-        Array.from(this.elementRef().nativeElement.querySelectorAll<HTMLElement>('*'))
+        Array.from(this._elementRef.nativeElement.querySelectorAll<HTMLElement>('*'))
             .filter((elm) => elm.tabIndex >= 0)
             .forEach((elm) => {
                 this._tabbableElements.set(elm, elm.tabIndex);

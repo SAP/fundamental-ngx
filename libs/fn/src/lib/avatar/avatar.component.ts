@@ -260,7 +260,7 @@ export class AvatarComponent implements OnInit, OnChanges {
                 }
 
                 if (option === ALTER_ICON_OPTIONS.ALT) {
-                    const altValue = this.elementRef().nativeElement.getAttribute('alt');
+                    const altValue = this._elementRef.nativeElement.getAttribute('alt');
                     if (altValue && altValue !== '') {
                         this._abbreviate = this._getAbbreviate(altValue.trim());
                         break;
