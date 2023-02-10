@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { AlertContentComponent } from './alert-content.component';
 import { AlertConfig, AlertService } from '@fundamental-ngx/core/alert';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
+import { takeUntil } from 'rxjs';
 
 @Component({
     selector: 'fd-alert-component-as-content-example',
     templateUrl: './alert-component-as-content-example.component.html',
-    styleUrls: ['alert-component-as-content-example.component.scss']
+    styleUrls: ['alert-component-as-content-example.component.scss'],
+    providers: [DestroyedService]
 })
 export class AlertComponentAsContentExampleComponent {
-    constructor(public alertService: AlertService) {}
+    constructor(public alertService: AlertService, private readonly _destroy$: DestroyedService) {}
 
     openFromComponent(): void {
         this.alertService.open(AlertContentComponent, {
@@ -41,7 +44,7 @@ export class AlertComponentAsContentExampleComponent {
             }
         } as AlertConfig);
 
-        alertRef.afterDismissed.subscribe(() => {
+        alertRef.afterDismissed.pipe(takeUntil(this._destroy$)).subscribe(() => {
             // Do something after closing, receive data
             // You can also manually close this alert using alertRef.dismiss()
         });

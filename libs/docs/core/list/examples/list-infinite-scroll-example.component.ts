@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, takeUntil } from 'rxjs/operators';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 const ITEMS_AMOUNT_ON_LOAD = 5;
 
 @Component({
     selector: 'fd-list-infinite-scroll-example',
-    templateUrl: './list-infinite-scroll-example.component.html'
+    templateUrl: './list-infinite-scroll-example.component.html',
+    providers: [DestroyedService]
 })
 export class ListInfiniteScrollExampleComponent {
     // List that is displayed to the user
@@ -15,13 +17,13 @@ export class ListInfiniteScrollExampleComponent {
 
     loading = false;
 
-    constructor(private liveAnnouncer: LiveAnnouncer) {}
+    constructor(private liveAnnouncer: LiveAnnouncer, private readonly _destroy$: DestroyedService) {}
 
     loadMore(): void {
         this.loading = true;
         this.liveAnnouncer.announce('Loading', 'assertive');
         of(this._getNewItems())
-            .pipe(delay(2000))
+            .pipe(delay(2000), takeUntil(this._destroy$))
             .subscribe((result) => {
                 this.items = this.items.concat(result);
                 this.loading = false;

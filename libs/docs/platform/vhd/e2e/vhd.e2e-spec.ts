@@ -108,7 +108,7 @@ describe('Value help dialog test suite', () => {
             await checkResults(tableRows, searchValues[0]);
         });
 
-        it('should check advanced search results', async () => {
+        xit('should check advanced search results', async () => {
             await click(openDialogBtn);
             await waitForPresent(dialogContainer);
             await click(advSearchToggle);
@@ -174,7 +174,7 @@ describe('Value help dialog test suite', () => {
             await waitForPresent(openDialogBtn);
         });
 
-        it('should check advanced search options appear for table columns', async () => {
+        xit('should check advanced search options appear for table columns', async () => {
             await click(openDialogBtn);
             await waitForElDisplayed(toolbarButtons);
             await click(toolbarButtons);

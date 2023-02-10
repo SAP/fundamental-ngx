@@ -429,6 +429,7 @@ export class SearchFieldComponent
         }
         this._suggestionkeyManager?.destroy();
         this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** @hidden */
