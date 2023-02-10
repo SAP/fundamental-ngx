@@ -196,44 +196,56 @@
                         ></td>
 
                         <!-- Row Selection Cell -->
-                        <td
-                            *ngIf="selectionMode === SELECTION_MODE.SINGLE; else multipleSelectionTemplate"
-                            class="fd-table__cell--fixed fd-table__cell--checkbox"
-                            tabindex="0"
-                            role="rowheader"
-                            fd-table-cell
-                            fd-table-cell-selectable
-                            [style]="
-                                contentDensityObserver
-                                    | async
-                                    | selectionCellStyles : _rtl : _semanticHighlightingColumnWidth
-                            "
-                            [attr.aria-selected]="row.checked"
-                            (click)="_toggleSingleSelectableRow(row)"
-                            (keydown.enter)="_toggleSingleSelectableRow(row)"
-                            (keydown.space)="_toggleSingleSelectableRow(row)"
-                        ></td>
+                        <ng-container [ngSwitch]="selectionMode">
+                            <ng-container *ngSwitchCase="SELECTION_MODE.SINGLE">
+                                <td
+                                    *ngIf="row.value[selectableKey] !== false; else selectionMock"
+                                    class="fd-table__cell--fixed fd-table__cell--checkbox"
+                                    role="rowheader"
+                                    fd-table-cell
+                                    fd-table-cell-selectable
+                                    [style]="
+                                        contentDensityObserver
+                                            | async
+                                            | selectionCellStyles : _rtl : _semanticHighlightingColumnWidth
+                                    "
+                                    [attr.aria-selected]="row.checked"
+                                    (click)="_toggleSingleSelectableRow(row)"
+                                    (keydown.enter)="_toggleSingleSelectableRow(row)"
+                                    (keydown.space)="_toggleSingleSelectableRow(row)"
+                                ></td>
+                            </ng-container>
 
-                        <ng-template #multipleSelectionTemplate>
+                            <ng-container *ngSwitchCase="SELECTION_MODE.MULTIPLE">
+                                <td
+                                    *ngIf="row.value[selectableKey] !== false; else selectionMock"
+                                    class="fd-table__cell--fixed fd-table__cell--checkbox"
+                                    role="cell"
+                                    fd-table-cell
+                                    [style]="
+                                        contentDensityObserver
+                                            | async
+                                            | selectionCellStyles : _rtl : _semanticHighlightingColumnWidth
+                                    "
+                                >
+                                    <fd-checkbox
+                                        labelClass="fd-table__checkbox-label"
+                                        [ngModel]="row.checked"
+                                        (click)="_toggleMultiSelectRow(row, $event)"
+                                        (keydown.enter)="_toggleMultiSelectRow(row, $event)"
+                                        (keydown.space)="_toggleMultiSelectRow(row, $event)"
+                                    ></fd-checkbox>
+                                </td>
+                            </ng-container>
+                        </ng-container>
+
+                        <ng-template #selectionMock>
                             <td
-                                *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
                                 class="fd-table__cell--fixed fd-table__cell--checkbox"
                                 role="gridcell"
                                 fd-table-cell
-                                [style]="
-                                    contentDensityObserver
-                                        | async
-                                        | selectionCellStyles : _rtl : _semanticHighlightingColumnWidth
-                                "
-                            >
-                                <fd-checkbox
-                                    labelClass="fd-table__checkbox-label"
-                                    [ngModel]="row.checked"
-                                    (click)="_toggleMultiSelectRow(row, $event)"
-                                    (keydown.enter)="_toggleMultiSelectRow(row, $event)"
-                                    (keydown.space)="_toggleMultiSelectRow(row, $event)"
-                                ></fd-checkbox>
-                            </td>
+                                fdkDisabled
+                            ></td>
                         </ng-template>
 
                         <td

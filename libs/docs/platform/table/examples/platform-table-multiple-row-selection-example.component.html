@@ -1,6 +1,8 @@
 <fdp-table
     [dataSource]="source"
     selectionMode="multiple"
+    selectableKey="selectable"
+    selectedKey="selected"
     emptyTableMessage="No data found"
     (rowSelectionChange)="onRowSelectionChange($event)"
 >

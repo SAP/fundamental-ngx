@@ -8,6 +8,7 @@ import {
     HostListener,
     Input,
     OnChanges,
+    OnDestroy,
     Output,
     QueryList,
     Renderer2,
@@ -30,7 +31,7 @@ import { getNativeElement } from '../../helpers';
 import { HasElementRef } from '../../interfaces';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { intersectionObservable, KeyUtil } from '../../functions';
-import { F2 } from '@angular/cdk/keycodes';
+import { F2, TAB } from '@angular/cdk/keycodes';
 import { scrollIntoView, ScrollPosition } from './scroll';
 
 export interface FocusableListPosition {
@@ -82,7 +83,7 @@ export class DeprecatedFocusableListDirective extends DeprecatedSelector {}
         DestroyedService
     ]
 })
-export class FocusableListDirective implements OnChanges, AfterViewInit {
+export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestroy {
     /** Whether the whole list should be focusable, handy in grids. */
     @Input()
     set focusable(value: BooleanInput) {
@@ -215,6 +216,11 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
                 takeUntil(this._destroy$)
             )
             .subscribe();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._keyManager?.destroy();
     }
 
     /** @hidden */
@@ -372,6 +378,12 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
                     // Already handled
                     if (event.defaultPrevented) {
                         return;
+                    }
+
+                    // Prevent scrolling and other default actions
+                    // But allow tabbing in/out and F2 to jump into list
+                    if (!KeyUtil.isKeyCode(event, [TAB, F2])) {
+                        event.preventDefault();
                     }
 
                     this._keyManager?.onKeydown(event);

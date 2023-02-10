@@ -1,3 +1,30 @@
+# [0.39.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.35...v0.39.0-rc.36) (2023-02-09)
+
+
+### Features
+
+* **platform:** table not selectable and preselected rows ([#9304](https://github.com/SAP/fundamental-ngx/issues/9304)) ([e66901b](https://github.com/SAP/fundamental-ngx/commit/e66901b482b057a902e1a36c114d61bfa71eedb1))
+
+
+
+# [0.39.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.34...v0.39.0-rc.35) (2023-02-08)
+
+
+### Bug Fixes
+
+* **core:** dynamic page should not add scrollbar directive if there is a tablist ([#9317](https://github.com/SAP/fundamental-ngx/issues/9317)) ([a83f1d2](https://github.com/SAP/fundamental-ngx/commit/a83f1d2d9e2acc41577efd6f5009e0dfba5eca82))
+
+
+
+# [0.39.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.33...v0.39.0-rc.34) (2023-02-08)
+
+
+### Bug Fixes
+
+* lint error ([#9352](https://github.com/SAP/fundamental-ngx/issues/9352)) ([7d1b614](https://github.com/SAP/fundamental-ngx/commit/7d1b6149944a1c94b419184e38b20051a43739c6))
+
+
+
 # [0.39.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.32...v0.39.0-rc.33) (2023-02-06)
 
 

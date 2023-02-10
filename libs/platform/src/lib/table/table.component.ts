@@ -47,7 +47,6 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { cloneDeep, get } from 'lodash-es';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
-import { SaveRowsEvent } from './interfaces/save-rows-event.interface';
 import { EditableTableCell } from './table-cell.class';
 import { TableResponsiveService } from './table-responsive.service';
 
@@ -94,7 +93,8 @@ import {
     TableRowSelectionChangeEvent,
     TableRowsRearrangeEvent,
     TableRowToggleOpenStateEvent,
-    TableSortChangeEvent
+    TableSortChangeEvent,
+    SaveRowsEvent
 } from './models';
 import { TableColumnResizeService } from './table-column-resize.service';
 import {
@@ -382,6 +382,32 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _forceSemanticHighlighting = false;
+
+    /** Value with the key of the row item's field to enable selecting.  */
+    @Input()
+    set selectedKey(value: string) {
+        this._selectedKey = value;
+    }
+
+    get selectedKey(): string {
+        return this._selectedKey;
+    }
+
+    /** @hidden */
+    private _selectedKey: string;
+
+    /** Value with the key of the row item's field to enable selecting.  */
+    @Input()
+    set selectableKey(value: string) {
+        this._selectableKey = value;
+    }
+
+    get selectableKey(): string {
+        return this._selectableKey;
+    }
+
+    /** @hidden */
+    private _selectableKey: string;
 
     /**
      * Tracking function that will be used to check the differences in data changes.
@@ -1146,7 +1172,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     toggleSelectableRow(rowIndex: number): void {
         const row = this._tableRows[rowIndex];
 
-        if (!row) {
+        if (!row || row.value[this.selectableKey] === false) {
             return;
         }
 
@@ -1216,8 +1242,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * Adds empty row for editing at the beginning of the rows array.
      */
     addRow(): void {
-        const newRow = this._buildNewRowSkeleton();
         this._forceSemanticHighlighting = true;
+
+        const newRow = this._buildNewRowSkeleton();
         newRow[this.semanticHighlighting] = EDITABLE_ROW_SEMANTIC_STATE;
 
         this._addedItems.unshift(newRow);
@@ -1225,7 +1252,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         const newRows = this._createTableRowsByDataSourceItems([newRow]);
         this._newTableRows = [...newRows, ...this._newTableRows];
 
-        this._setTableRows(this._dataSourceTableRows);
+        this._setTableRows();
         this.emptyRowAdded.emit();
     }
 
@@ -1239,12 +1266,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * Emits save event and resets editable rows array.
      */
     saveRows(): void {
-        const event: SaveRowsEvent<T> = {
-            items: [...this._addedItems],
-            done: () => {
-                this._tableDataSource.fetch(this.getTableState());
-            }
-        };
+        const event = new SaveRowsEvent<T>(() => {
+            this._tableDataSource.fetch(this.getTableState());
+        }, [...this._addedItems]);
 
         const forms = [...this.customEditableCells.toArray(), ...this.editableCells.toArray()].map((t) => t.form);
 
@@ -1825,7 +1849,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         return source.map((item: T, index: number) => {
             const isNewItem = this._addedItems.includes(item);
-            const row = new TableRow(TableRowType.ITEM, !!selectedRowsMap.get(item), index, item);
+            const row = new TableRow(
+                TableRowType.ITEM,
+                item[this.selectedKey] ?? !!selectedRowsMap.get(item),
+                index,
+                item
+            );
             row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
             row.state = isNewItem ? 'editable' : 'readonly';
             return row;
@@ -1845,7 +1874,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 item[this.relationKey].length;
             const row = new TableRow(
                 hasChildren ? TableRowType.TREE : TableRowType.ITEM,
-                !!selectedRowsMap.get(item),
+                item[this.selectedKey] ?? !!selectedRowsMap.get(item),
                 index,
                 item
             );
@@ -1895,7 +1924,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    private _setTableRows(rows: TableRow[]): void {
+    private _setTableRows(rows = this._dataSourceTableRows): void {
         this._dataSourceTableRows = rows;
         this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
         this._onTableRowsChanged();
@@ -2322,7 +2351,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _isSelectableRow(row: TableRow): boolean {
-        return this._isItemRow(row) || this._isTreeRow(row);
+        return (this._isItemRow(row) || this._isTreeRow(row)) && row.value[this.selectableKey] !== false;
     }
 
     /** @hidden */
@@ -2516,7 +2545,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._newTableRows = [];
         this._addedItems = [];
         this._forceSemanticHighlighting = false;
-        this._setTableRows(this._dataSourceTableRows);
+        this._setTableRows();
     }
 
     /** @hidden */

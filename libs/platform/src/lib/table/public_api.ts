@@ -75,7 +75,6 @@ export * from './interfaces/collection-state.interface';
 export * from './interfaces/search-field.interface';
 export * from './interfaces/selection-value.interface';
 export * from './interfaces/table-state.interface';
-export * from './interfaces/save-rows-event.interface';
 export * from './interfaces/column-responsive-state.interface';
 
 export * from './models';
