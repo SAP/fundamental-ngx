@@ -1,3 +1,12 @@
+# [0.39.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.36...v0.39.0-rc.37) (2023-02-10)
+
+
+### Bug Fixes
+
+* overflow layout memory leaks ([#9350](https://github.com/SAP/fundamental-ngx/issues/9350)) ([8a6fb7d](https://github.com/SAP/fundamental-ngx/commit/8a6fb7dcd6fe0c7208937b0a27117cf9b2cde61f))
+
+
+
 # [0.39.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.35...v0.39.0-rc.36) (2023-02-09)
 
 
