@@ -1,10 +1,10 @@
-import { ElementRef, Injectable } from '@angular/core';
+import { ElementRef, Injectable, OnDestroy } from '@angular/core';
 import { MessageStates } from './form-message.component';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { CSS_CLASS_NAME, getTypeClassName } from './constants';
 
 @Injectable()
-export class PopoverFormMessageService {
+export class PopoverFormMessageService implements OnDestroy {
     /** @hidden */
     private _type: MessageStates;
 
@@ -50,6 +50,11 @@ export class PopoverFormMessageService {
     show(): void {
         this._hidden = false;
         this._updatePopover();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._popoverService.onDestroy();
     }
 
     /** @hidden */

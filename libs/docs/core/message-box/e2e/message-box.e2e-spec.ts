@@ -9,7 +9,9 @@ import {
     refreshPage,
     scrollIntoView,
     sendKeys,
-    waitForElDisplayed
+    waitForElDisappear,
+    waitForElDisplayed,
+    waitForNotPresent
 } from '../../../../../e2e';
 import { buttonClassArr, iconsArr } from './message-box';
 
@@ -95,6 +97,7 @@ describe('Message-box test suits', () => {
                     `Element type is not ${buttonClassArr[i]}`
                 );
                 await click(sematicTypesExample + button, i);
+                await waitForElDisplayed(messageBox);
                 i === buttonsLength - 1
                     ? await expect(await doesItExist(messageIcon)).toBe(false, 'Icon exists')
                     : await expect(await getElementClass(messageIcon)).toContain(
@@ -102,6 +105,7 @@ describe('Message-box test suits', () => {
                           `Icon is not ${iconsArr[i]}`
                       );
                 await click(okButton);
+                await waitForElDisappear(messageBox);
             }
         });
     });
@@ -152,7 +156,7 @@ describe('Message-box test suits', () => {
         await waitForElDisplayed(messageBox);
         await sendKeys('Escape');
 
-        await expect(await doesItExist(messageBox)).toBe(false);
+        await expect(await waitForNotPresent(messageBox)).toBe(true);
         await refreshPage();
     }
 
@@ -162,7 +166,7 @@ describe('Message-box test suits', () => {
             await click(section + button, i);
             await expect(await isElementDisplayed(messageBox)).toBe(true, 'Message-Box is not displayed');
             await click(okButton);
-            await expect(await doesItExist(messageBox)).toBe(false, 'Message-Box still displayed');
+            await expect(await waitForNotPresent(messageBox)).toBe(true, 'Message-Box still displayed');
         }
     }
 

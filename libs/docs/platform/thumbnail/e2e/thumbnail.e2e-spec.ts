@@ -8,6 +8,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
+    waitForNotPresent,
     waitForPresent
 } from '../../../../../e2e';
 import { ThumbnailPo } from './thumbnail.po';
@@ -73,11 +74,12 @@ describe('Thumbnail field', () => {
         await scrollIntoView(verticalGalleryImages, 4);
         await waitForElDisplayed(verticalGalleryImages, 4);
         await clickWithOption(verticalGalleryImages, 4, 5000, { x: 10 });
+        await waitForElDisplayed(galleryDialog);
         await scrollIntoView(galleryDialog);
         await waitForElDisplayed(galleryDialog);
         await click(galleryDialogCloseButton);
 
-        await expect(await doesItExist(galleryDialog)).toBe(false);
+        await expect(await waitForNotPresent(galleryDialog)).toBe(true);
     });
 
     it('should be able to switch image in gallery popup', async () => {
