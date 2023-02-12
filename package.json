@@ -97,7 +97,7 @@
     "@nrwl/nx-cloud": "15.0.2",
     "@nrwl/nx-plugin": "15.5.3",
     "@nrwl/schematics": "8.12.11",
-    "@nrwl/tao": "15.5.3",
+    "@nrwl/tao": "15.6.3",
     "@nrwl/workspace": "15.5.3",
     "@schematics/angular": "15.1.2",
     "@swc-node/register": "1.5.4",

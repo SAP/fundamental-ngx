@@ -38,7 +38,7 @@
     tsconfig-paths "^4.1.0"
     webpack-merge "^5.7.3"
 
-"@angular-devkit/architect@0.1500.4", "@angular-devkit/architect@>=0.1500.0 < 0.1600.0":
+"@angular-devkit/architect@0.1500.4":
   version "0.1500.4"
   resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1500.4.tgz#ffcb226ebcb0cf69db509c7351bd77a61c9ab04f"
   integrity sha512-U9RQueICmmNk9c2zQjUN8qi/+H6kO2VKqeyuh3Vwj6yj4lQEINf1SNX8Ba9UFH/rxNo64iFM0k5x5vX0VajvCw==
@@ -46,7 +46,7 @@
     "@angular-devkit/core" "15.0.4"
     rxjs "6.6.7"
 
-"@angular-devkit/architect@0.1501.2":
+"@angular-devkit/architect@0.1501.2", "@angular-devkit/architect@>=0.1500.0 < 0.1600.0":
   version "0.1501.2"
   resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1501.2.tgz#1f5f0eab9734cb528d86788cb4ba9d7dc475bbb9"
   integrity sha512-AfORVGLN0FBIUXO3FkfGOKu+Gz6oJjF8Bu8cPn27duiI0wszxGNY3fATKwbSg7JcKx1oQS/G7RjyC5OiTA6a0Q==
@@ -212,7 +212,7 @@
     "@angular-devkit/architect" "0.1501.2"
     rxjs "6.6.7"
 
-"@angular-devkit/core@15.0.4", "@angular-devkit/core@^15.0.0":
+"@angular-devkit/core@15.0.4":
   version "15.0.4"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-15.0.4.tgz#257ba1d76cd106216d0150f480d0062e726af996"
   integrity sha512-4ITpRAevd652SxB+qNesIQ9qfbm7wT5UBU5kJOPPwGL77I21g8CQpkmV1n5VSacPvC9Zbz90feOWexf7w7JzcA==
@@ -223,7 +223,7 @@
     rxjs "6.6.7"
     source-map "0.7.4"
 
-"@angular-devkit/core@15.1.2":
+"@angular-devkit/core@15.1.2", "@angular-devkit/core@^15.0.0":
   version "15.1.2"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-15.1.2.tgz#e4767ad4365f84bcaff28aa04b4c6a78e5e72a61"
   integrity sha512-wkLZYvTZt30Ge6Z83Gxsr6mO1TIHCu3SImdE0zwW63EdU9o1NYkU74z1D9VUZ9Up7uHi1cHs/dssbxUuZ4eWOA==
@@ -2469,6 +2469,13 @@
   dependencies:
     nx "15.5.3"
 
+"@nrwl/cli@15.6.3":
+  version "15.6.3"
+  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-15.6.3.tgz#999531d6efb30afc39373bdcbd7e78254a3a3fd3"
+  integrity sha512-K4E0spofThZXMnhA6R8hkUTdfqmwSnUE2+DlD5Y3jqsvKTAgwF5U41IFkEouFZCf+dWjy0RA20bWoX48EVFtmQ==
+  dependencies:
+    nx "15.6.3"
+
 "@nrwl/cli@8.12.11":
   version "8.12.11"
   resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-8.12.11.tgz#3be261a04c18edc4c4133f0e7078b9c23802f0a8"
@@ -2638,6 +2645,13 @@
   integrity sha512-vgPLIW9IoBfQ4IkHRT5RC4LqNwFBK5jmHYmFIRgbIeFRudFBbnpmOaKRME0OwN7qJ6964PVVbzahAPvYVD02xw==
   dependencies:
     nx "15.5.3"
+
+"@nrwl/tao@15.6.3":
+  version "15.6.3"
+  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-15.6.3.tgz#b24e11345375dea96bc386c60b9b1102a7584932"
+  integrity sha512-bDZbPIbU5Mf2BvX0q8GjPxrm1WkYyfW+gp7mLuuJth2sEpZiCr47mSwuGko/y4CKXvIX46VQcAS0pKQMKugXsg==
+  dependencies:
+    nx "15.6.3"
 
 "@nrwl/tao@8.12.11":
   version "8.12.11"
@@ -12969,6 +12983,47 @@ nx@15.5.3:
   dependencies:
     "@nrwl/cli" "15.5.3"
     "@nrwl/tao" "15.5.3"
+    "@parcel/watcher" "2.0.4"
+    "@yarnpkg/lockfile" "^1.1.0"
+    "@yarnpkg/parsers" "^3.0.0-rc.18"
+    "@zkochan/js-yaml" "0.0.6"
+    axios "^1.0.0"
+    chalk "^4.1.0"
+    cli-cursor "3.1.0"
+    cli-spinners "2.6.1"
+    cliui "^7.0.2"
+    dotenv "~10.0.0"
+    enquirer "~2.3.6"
+    fast-glob "3.2.7"
+    figures "3.2.0"
+    flat "^5.0.2"
+    fs-extra "^11.1.0"
+    glob "7.1.4"
+    ignore "^5.0.4"
+    js-yaml "4.1.0"
+    jsonc-parser "3.2.0"
+    lines-and-columns "~2.0.3"
+    minimatch "3.0.5"
+    npm-run-path "^4.0.1"
+    open "^8.4.0"
+    semver "7.3.4"
+    string-width "^4.2.3"
+    strong-log-transformer "^2.1.0"
+    tar-stream "~2.2.0"
+    tmp "~0.2.1"
+    tsconfig-paths "^4.1.2"
+    tslib "^2.3.0"
+    v8-compile-cache "2.3.0"
+    yargs "^17.6.2"
+    yargs-parser "21.1.1"
+
+nx@15.6.3:
+  version "15.6.3"
+  resolved "https://registry.yarnpkg.com/nx/-/nx-15.6.3.tgz#900087bce38c6e5975660c23ebd41ead1bf54f98"
+  integrity sha512-3t0A0GPLNen1yPAyE+VGZ3nkAzZYb5nfXtAcx8SHBlKq4u42yBY3khBmP1y4Og3jhIwFIj7J7Npeh8ZKrthmYQ==
+  dependencies:
+    "@nrwl/cli" "15.6.3"
+    "@nrwl/tao" "15.6.3"
     "@parcel/watcher" "2.0.4"
     "@yarnpkg/lockfile" "^1.1.0"
     "@yarnpkg/parsers" "^3.0.0-rc.18"
