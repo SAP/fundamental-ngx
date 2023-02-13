@@ -6,7 +6,7 @@ import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { EventEmitter } from '@angular/core';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { MultiInputComponent } from '../multi-input.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MULTI_INPUT_COMPONENT } from '../multi-input.interface';
 
 describe('MultiInputMobileComponent', () => {
@@ -35,7 +35,7 @@ describe('MultiInputMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule, BrowserAnimationsModule],
+            imports: [DialogModule, NoopAnimationsModule],
             declarations: [MultiInputMobileComponent],
             providers: [
                 DynamicComponentService,

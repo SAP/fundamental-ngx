@@ -12,6 +12,7 @@ import {
     refreshPage,
     sendKeys,
     waitForElDisplayed,
+    waitForNotPresent,
     waitForPresent
 } from '../../../../../e2e';
 import { emptyValuesArr } from './menu-contents';
@@ -108,7 +109,7 @@ describe('Menu test suite', () => {
             await waitForElDisplayed(dialogMobileMenu);
             await expect(await elementDisplayed(dialogMobileMenu)).toBe(true);
             await click(closeDialogMobileMenu);
-            await expect(await doesItExist(dialogMobileMenu)).toBe(false);
+            await expect(await waitForNotPresent(dialogMobileMenu)).toBe(true);
         });
 
         it('should check cascading menu for all dialog popup buttons', async () => {

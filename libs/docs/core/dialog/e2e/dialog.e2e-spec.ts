@@ -23,6 +23,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
+    waitForElDisappear,
     waitForElDisplayed,
     waitForNotDisplayed,
     waitForNotPresent,
@@ -47,6 +48,7 @@ import {
     topPaddingProperty
 } from './dialog-contents';
 import { papayaFruit } from './dialog';
+import waitForDisplayed from 'webdriverio/build/commands/element/waitForDisplayed';
 
 describe('dialog test suite', () => {
     const dialogPage = new DialogPo();
@@ -143,7 +145,7 @@ describe('dialog test suite', () => {
                 await openDialog(stateDialog, i);
                 await closeDialog();
 
-                await expect(await doesItExist(dialog)).toBe(false, 'dialog did not close');
+                await expect(await waitForElDisappear(dialog)).toBe(true, 'dialog did not close');
             }
         });
 
@@ -187,6 +189,8 @@ describe('dialog test suite', () => {
             }
             await openDialog(configurationDialog, 1);
 
+            await waitForElDisplayed(dialog);
+
             await checkResizingDialog();
 
             await closeDialog();
@@ -199,7 +203,7 @@ describe('dialog test suite', () => {
             await expect(await doesItExist(dialog)).toBe(true, 'dialog is closed when it should be open');
             await closeDialog();
 
-            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await waitForElDisappear(dialog)).toBe(true, 'dialog is open when it should be closed');
         });
     });
 
@@ -283,15 +287,31 @@ describe('dialog test suite', () => {
 
     describe('stacked dialogs examples', () => {
         it('should check that there can be multiple dialogs', async () => {
+            let currentDialogCount = await getElementArrayLength(dialog);
+            if (currentDialogCount > 0) {
+                for (let i = 1; i++; i <= currentDialogCount) {
+                    await click(dialog + button);
+                }
+            }
             await openDialog(stackedDialog);
 
-            await expect(await getElementArrayLength(dialog)).toBe(1);
+            await waitForElDisplayed(dialog);
+
+            currentDialogCount = await getElementArrayLength(dialog);
+
+            await expect(currentDialogCount).toBe(1);
             await click(dialog + button, 1);
             await waitForElDisplayed(dialog, 1);
 
-            await expect(await getElementArrayLength(dialog)).toBe(2);
+            currentDialogCount = await getElementArrayLength(dialog);
+
+            await expect(currentDialogCount).toBe(2);
             await click(dialog + button, 3);
+            await pause(500);
+            // await waitForNotPresent(dialog, 1);
             await closeDialog();
+
+            await pause(500);
 
             await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
         });
@@ -303,12 +323,12 @@ describe('dialog test suite', () => {
 
             await click(dialog + button);
 
-            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await waitForElDisappear(dialog)).toBe(true, 'dialog is open when it should be closed');
             await openDialog(customDialog);
 
             await click(dialog + button, 1);
 
-            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await waitForElDisappear(dialog)).toBe(true, 'dialog is open when it should be closed');
         });
 
         it('should check custom backdrop class', async () => {
@@ -324,13 +344,13 @@ describe('dialog test suite', () => {
             await waitForElDisplayed(dialog);
             await click(dialog + button);
 
-            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await waitForElDisappear(dialog)).toBe(true, 'dialog is open when it should be closed');
 
             await click(customDialog + button, 1);
             await waitForElDisplayed(dialog);
             await click(dialog + button, 1);
 
-            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await waitForElDisappear(dialog)).toBe(true, 'dialog is open when it should be closed');
         });
 
         it('should check static dialog dismissal', async () => {
@@ -338,13 +358,13 @@ describe('dialog test suite', () => {
             await waitForElDisplayed(dialog);
             await click(dialog + button);
 
-            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await waitForElDisappear(dialog)).toBe(true, 'dialog is open when it should be closed');
 
             await click(customDialog + button, 2);
             await waitForElDisplayed(dialog);
             await click(dialog + button, 1);
 
-            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await waitForElDisappear(dialog)).toBe(true, 'dialog is open when it should be closed');
         });
     });
 
@@ -358,11 +378,14 @@ describe('dialog test suite', () => {
             await openDialog(playgroundDialog);
             await clickWithOption(dialog, 0, 5000, { x: -100, y: -100 });
 
-            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await waitForElDisappear(dialog)).toBe(true, 'dialog is open when it should be closed');
 
             await click(playgroundDialog + checkboxes, 1);
             await openDialog(playgroundDialog);
             await clickWithOption(dialog, 0, 5000, { x: -100, y: -100 });
+
+            // Just give it a time for dialog to potentially disappear.
+            await pause(500);
 
             await expect(await doesItExist(dialog)).toBe(true, 'dialog is closed when it should be open');
         });
@@ -370,12 +393,15 @@ describe('dialog test suite', () => {
         it('should check dialog escKeyCloseable option', async () => {
             await openDialog(playgroundDialog);
             await sendKeys('Escape');
-            await expect(await doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
+            await expect(await waitForElDisappear(dialog)).toBe(true, 'dialog is open when it should be closed');
 
             await scrollIntoView(playgroundDialog + checkboxes, 2);
             await click(playgroundDialog + checkboxes, 2);
             await openDialog(playgroundDialog);
             await sendKeys('Escape');
+
+            // Just give it a time for dialog to potentially disappear.
+            await pause(500);
 
             await expect(await doesItExist(dialog)).toBe(true, 'dialog is closed when it should be open');
         });
@@ -383,11 +409,16 @@ describe('dialog test suite', () => {
         it('should check dialog mobile option', async () => {
             await openDialog(playgroundDialog);
 
+            await waitForElDisplayed(dialog);
+
             await expect(await getAttributeByName(dialogContainer2, classAttribute)).not.toContain(mobileClass);
 
             await closeDialog();
+            await waitForElDisappear(dialog);
             await click(playgroundDialog + checkboxes, 5);
             await openDialog(playgroundDialog);
+
+            await waitForElDisplayed(dialog);
 
             await expect(await getAttributeByName(dialogContainer2, classAttribute)).toContain(mobileClass);
         });
@@ -396,12 +427,17 @@ describe('dialog test suite', () => {
             await click(playgroundDialog + checkboxes, 5);
             await openDialog(playgroundDialog);
 
+            await waitForElDisplayed(dialog);
+
             await expect(await getAttributeByName(dialogContainer2, classAttribute)).not.toContain(
                 noMobileSpacingClass
             );
             await closeDialog();
+            await waitForElDisappear(dialog);
             await click(playgroundDialog + checkboxes, 6);
             await openDialog(playgroundDialog);
+
+            await waitForElDisplayed(dialog);
 
             await expect(await getAttributeByName(dialogContainer2, classAttribute)).toContain(noMobileSpacingClass);
         });
@@ -436,8 +472,11 @@ describe('dialog test suite', () => {
             await expect(await doesItExist(resizeHandle)).toBe(false, 'resize handle exists when it should not');
 
             await closeDialog();
+            await waitForElDisappear(dialog);
             await click(playgroundDialog + checkboxes, 8);
             await openDialog(playgroundDialog);
+
+            await waitForElDisplayed(dialog);
 
             await checkResizingDialog();
         });
@@ -452,6 +491,7 @@ describe('dialog test suite', () => {
             await click(playgroundDialog + inputFields, 1);
             await setValue(playgroundDialog + inputFields, '400px', 1);
             await openDialog(playgroundDialog);
+            await waitForElDisplayed(dialogContainer2);
 
             await expect(await (await getElementSize(dialogContainer2, 0)).width).toBe(400);
             await expect(await (await getElementSize(dialogContainer2, 0)).height).toBe(400);
@@ -471,6 +511,7 @@ describe('dialog test suite', () => {
             await click(playgroundDialog + inputFields, 5);
             await sendKeys('600px');
             await openDialog(playgroundDialog);
+            await waitForElDisplayed(dialog);
             const handleXLocation = Math.floor(await getElementLocation(resizeHandle, 0, 'x'));
             const handleYLocation = Math.floor(await getElementLocation(resizeHandle, 0, 'y'));
 
@@ -615,7 +656,7 @@ describe('dialog test suite', () => {
                         await dialogPage.getScreenshotFolder()
                     )
                 ).toBeLessThan(5, `dialog ${i} screenshot doesn't match baseline`);
-                if ((await doesItExist(dialog)) === false) {
+                if ((await waitForElDisappear(dialog)) === true) {
                     continue;
                 }
                 await click(dialog + button);
@@ -672,6 +713,7 @@ describe('dialog test suite', () => {
         await click(exampleSelector + dialogSelector, selectorIndex);
         await waitForElDisplayed(dialog);
         await click(dialog + button, dialogButtonIndex);
+        await waitForElDisappear(dialog);
 
         await expect(await getText(exampleSelector + dialogOutput)).toContain(expectation);
     }
@@ -685,6 +727,7 @@ describe('dialog test suite', () => {
         await click(exampleSelector + dialogSelector, selectorIndex);
         await waitForElDisplayed(dialog);
         await sendKeys('Escape');
+        await waitForElDisappear(dialog);
 
         await expect(await getText(exampleSelector + dialogOutput)).toContain(escapeStatus);
     }

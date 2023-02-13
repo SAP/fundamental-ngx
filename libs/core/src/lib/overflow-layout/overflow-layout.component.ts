@@ -18,10 +18,11 @@ import {
     OnDestroy,
     Input,
     OnInit,
-    NgZone
+    NgZone,
+    Optional
 } from '@angular/core';
 import { debounceTime, filter, first, fromEvent, startWith, Subject, Subscription } from 'rxjs';
-import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowContainer } from './interfaces/overflow-container.interface';
 import { OverflowExpand } from './interfaces/overflow-expand.interface';
@@ -33,6 +34,7 @@ import { FD_OVERFLOW_CONTAINER } from './tokens/overflow-container.token';
 import { FD_OVERFLOW_EXPAND } from './tokens/overflow-expand.token';
 import { FD_OVERFLOW_FOCUSABLE_ITEM } from './tokens/overflow-focusable-item.token';
 import { FD_OVERFLOW_ITEM_REF } from './tokens/overflow-item-ref.token';
+import { FocusKeyManager } from '@angular/cdk/a11y';
 
 @Component({
     selector: 'fd-overflow-layout',
@@ -172,6 +174,12 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
     /** @hidden */
     private _canListenToResize = false;
 
+    /** @hidden */
+    private _dir: 'rtl' | 'ltr' = 'ltr';
+
+    /** @hidden */
+    private _keyboardEventsManager: Nullable<FocusKeyManager<OverflowLayoutFocusableItem>>;
+
     /** Overflow Layout more button text */
     @Input()
     moreItemsButtonText: (hiddenItemsCount: number) => string = (count) => `${count} more`;
@@ -179,9 +187,9 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
     /** @hidden */
     private get _config(): OverflowLayoutConfig {
         return {
-            visibleItems: this._visibleItems,
-            items: this._items,
-            focusableItems: this._focusableOverflowItems,
+            visibleItems: this._visibleItems.toArray(),
+            items: this._items.toArray(),
+            focusableItems: this._focusableOverflowItems.toArray(),
             itemsWrapper: this._itemsWrapper.nativeElement,
             showMoreContainer: this._showMoreContainer.nativeElement,
             layoutContainerElement: this._layoutContainer.nativeElement,
@@ -197,7 +205,8 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         private readonly _elementRef: ElementRef<HTMLElement>,
         private readonly _ngZone: NgZone,
         protected _cdr: ChangeDetectorRef,
-        protected _overflowLayoutService: OverflowLayoutService
+        protected _overflowLayoutService: OverflowLayoutService,
+        @Optional() private readonly _rtl: RtlService
     ) {
         this._subscription.add(
             this._fillTrigger$.pipe(debounceTime(30)).subscribe(() => {
@@ -237,8 +246,14 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
                 this._allItems = this._items.toArray();
 
                 this._cdr.detectChanges();
+
+                this._overflowLayoutService.setConfig(this._config);
+                this._overflowLayoutService.fitVisibleItems();
             })
         );
+
+        this._setFocusKeyManager();
+        this._subscribeToRtl();
 
         // There might be cases when the elements are not rendered yet, but the component is initialized already.
         // It may happen when it's inside the components that are wrapping ng-content with ng-containers and so on.
@@ -253,6 +268,8 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
     /** @hidden */
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
+        this._keyboardEventsManager?.destroy();
+        this._keyboardEventsManager = null;
     }
 
     /**
@@ -274,7 +291,7 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
         const index = this._focusableOverflowItems.toArray().findIndex((item) => item === element);
 
         if (index !== -1) {
-            this._overflowLayoutService._keyboardEventsManager.setActiveItem(index);
+            this._keyboardEventsManager?.setActiveItem(index);
         }
     }
 
@@ -309,7 +326,7 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
                             .toArray()
                             .findIndex((item) => item.focusable && item.elementRef.nativeElement === event.target);
                         if (index !== -1) {
-                            this._overflowLayoutService._keyboardEventsManager.setActiveItem(index);
+                            this._keyboardEventsManager?.setActiveItem(index);
                         }
                     }
 
@@ -317,9 +334,38 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
                         event.preventDefault();
 
                         // passing the event to key manager so, we get a change fired
-                        this._overflowLayoutService._keyboardEventsManager.onKeydown(event);
+                        this._keyboardEventsManager?.onKeydown(event);
                     }
                 })
+        );
+    }
+
+    /** @hidden */
+    private _setFocusKeyManager(): void {
+        if (!this.enableKeyboardNavigation) {
+            return;
+        }
+        this._dir = this._rtl?.rtl.value ? 'rtl' : 'ltr';
+        this._keyboardEventsManager?.destroy();
+        this._keyboardEventsManager = new FocusKeyManager(this._focusableOverflowItems)
+            .withWrap()
+            .withHorizontalOrientation(this._dir)
+            .withVerticalOrientation()
+            .skipPredicate((item) => !item.navigable || item.hidden);
+    }
+
+    /** @hidden Rtl change subscription */
+    private _subscribeToRtl(): void {
+        if (!this._rtl || !this.enableKeyboardNavigation) {
+            return;
+        }
+
+        this._subscription.add(
+            this._rtl.rtl.subscribe((isRtl) => {
+                this._dir = isRtl ? 'rtl' : 'ltr';
+
+                this._keyboardEventsManager = this._keyboardEventsManager?.withHorizontalOrientation(this._dir);
+            })
         );
     }
 }

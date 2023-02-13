@@ -24,7 +24,7 @@ import {
 } from '../../deprecated-selector.class';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableObserver } from '../focusable-item';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE } from './focusable-list.tokens';
-import { fromEvent, merge, Subject } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import { Nullable } from '../../models/nullable';
 import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { getNativeElement } from '../../helpers';
@@ -56,7 +56,8 @@ interface FocusableListConfig {
     contentDirection?: 'ltr' | 'rtl' | null;
 }
 
-export type FocusableItem = FocusableOption & HasElementRef & { index: number; focusable: (() => boolean) | boolean };
+export type FocusableItem = FocusableOption &
+    HasElementRef & { index: number; focusable: (() => boolean) | boolean; keydown: Subject<KeyboardEvent> };
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -202,7 +203,8 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
                         index,
                         focusable: () => item.fdkFocusableItem,
                         elementRef: () => item.elementRef(),
-                        focus: () => item.elementRef().nativeElement.focus()
+                        focus: () => item.elementRef().nativeElement.focus(),
+                        keydown: item._keydown$
                     }));
 
                     const direction = this.navigationDirection === 'grid' ? 'horizontal' : this.navigationDirection;
@@ -231,17 +233,25 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
             return;
         }
 
-        this._keydown$.next({ list: this, event, activeItemIndex: null });
+        if (KeyUtil.isKeyCode(event, F2) && this.focusable) {
+            const isFocused = document.activeElement === this._elementRef.nativeElement;
 
-        if (!KeyUtil.isKeyCode(event, F2) || !this.focusable) {
-            return;
+            if (!isFocused && event.shiftKey) {
+                event.stopPropagation();
+
+                this.focus();
+
+                return;
+            } else if (isFocused && !event.shiftKey) {
+                event.stopPropagation();
+
+                this.setActiveItem(0);
+
+                return;
+            }
         }
 
-        if (document.activeElement === this._elementRef.nativeElement) {
-            this.setActiveItem(0);
-        } else {
-            this.focus();
-        }
+        this._keydown$.next({ list: this, event, activeItemIndex: this._keyManager?.activeItemIndex ?? null });
     }
 
     /** Set active item in list */
@@ -352,7 +362,6 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
 
         this._keyManager = keyManager;
 
-        const events$ = items.map((item) => fromEvent<KeyboardEvent>(getNativeElement(item), 'keydown'));
         const focusListenerDestroyers = items.map((item, index) =>
             this._renderer.listen(getNativeElement(item), 'focus', () => {
                 const directiveItem = this._focusableItems.get(index);
@@ -370,11 +379,9 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
             })
         );
 
-        merge(...events$)
+        merge(...items.map((item) => item.keydown))
             .pipe(
                 tap((event: KeyboardEvent) => {
-                    this._keydown$.next({ list, event, activeItemIndex: this._keyManager?.activeItemIndex });
-
                     // Already handled
                     if (event.defaultPrevented) {
                         return;

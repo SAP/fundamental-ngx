@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChild,
@@ -17,7 +18,6 @@ import { Subscription } from 'rxjs';
 
 import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/cdk/utils';
 
-import { dialogFadeNgIf } from './utils/dialog.animations';
 import { DialogConfig } from './utils/dialog-config.class';
 import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 import { DialogBodyComponent } from './dialog-body/dialog-body.component';
@@ -42,10 +42,9 @@ import { DialogTitleDirective } from './directives/dialog-title.directive';
     styleUrls: ['dialog.component.scss'],
     templateUrl: './dialog.component.html',
     host: {
-        tabindex: '-1',
-        '[@dialog-fade]': ''
+        tabindex: '-1'
     },
-    animations: [dialogFadeNgIf],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
 export class DialogComponent
