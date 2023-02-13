@@ -336,7 +336,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
             const option = options[i];
 
             if (option === ALTER_ICON_OPTIONS.CONTENT) {
-                const contentValue = this._content?.nativeElement.innerText;
+                const contentValue = this._content?.nativeElement.textContent;
                 if (contentValue) {
                     this.abbreviate = this._generateAbbreviation(contentValue);
                     break;
