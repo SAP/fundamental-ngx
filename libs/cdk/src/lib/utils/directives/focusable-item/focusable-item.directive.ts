@@ -1,6 +1,5 @@
 import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { F2 } from '@angular/cdk/keycodes';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
 import { DestroyedService, TabbableElementService } from '../../services';
 import { HasElementRef } from '../../interfaces';
