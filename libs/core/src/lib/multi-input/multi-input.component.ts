@@ -299,6 +299,10 @@ export class MultiInputComponent
     @Output()
     readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    /** @hidden Emits event when the addon button is clicked. */
+    @Output()
+    readonly addOnButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+
     /** Event emitted, when the multi input's all item checked or not */
     @Output()
     readonly allItemsSelectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -683,6 +687,7 @@ export class MultiInputComponent
 
     /** @hidden */
     _addOnButtonClicked(): void {
+        this.addOnButtonClicked.emit();
         this.openChangeHandle(!this.open);
     }
 

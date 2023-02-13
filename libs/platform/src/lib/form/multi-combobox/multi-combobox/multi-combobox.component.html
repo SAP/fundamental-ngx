@@ -38,7 +38,7 @@
             [attr.aria-readonly]="readonly"
             [glyphAriaLabel]="ariaLabel || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
             [iconTitle]="addonIconTitle || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
-            (addOnButtonClicked)="!mobile && onPrimaryButtonClick(isOpen)"
+            (addOnButtonClicked)="addOnButtonClicked.emit(); !mobile && onPrimaryButtonClick(isOpen)"
             (click)="mobile && !isOpen && onPrimaryButtonClick(false)"
             (keydown)="navigateByTokens($event)"
         >
@@ -250,7 +250,7 @@
         <span
             fd-list-title
             [attr.title]="optionItem.label"
-            [innerHTML]="optionItem.label | highlight: inputText"
+            [innerHTML]="optionItem.label | highlight : inputText"
         ></span>
     </ng-container>
 
@@ -269,7 +269,7 @@
                 [style.text-align]="secondaryTextAlignment"
                 fd-list-secondary
                 [attr.title]="optionItem.secondaryText"
-                [innerHTML]="optionItem.secondaryText | highlight: inputText"
+                [innerHTML]="optionItem.secondaryText | highlight : inputText"
             ></span>
         </ng-container>
 
