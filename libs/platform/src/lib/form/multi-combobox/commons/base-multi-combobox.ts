@@ -200,6 +200,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onDataReceived = new EventEmitter<void>();
 
+    /** @hidden Emits event when the addon button is clicked. */
+    @Output()
+    addOnButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+
     /** @hidden */
     @ViewChild(ListComponent)
     listComponent: ListComponent;

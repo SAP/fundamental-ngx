@@ -1,7 +1,7 @@
 import { RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 
 import { DialogService } from '@fundamental-ngx/core/dialog';
@@ -50,7 +50,7 @@ describe('ApprovalFlowComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PlatformApprovalFlowModule, BrowserAnimationsModule],
+            imports: [PlatformApprovalFlowModule, NoopAnimationsModule],
             declarations: [TestPlatformApprovalFlowComponent],
             providers: [RtlService]
         }).compileComponents();

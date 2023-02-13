@@ -1,4 +1,4 @@
-import { ElementRef, TemplateRef } from '@angular/core';
+import { TemplateRef } from '@angular/core';
 import { OverflowItem } from './overflow-item.interface';
 
 export type OverflowItemDirectiveContext<T = any> = {
@@ -11,10 +11,6 @@ export type OverflowItemDirectiveContext<T = any> = {
 };
 
 export interface OverflowItemRef<T = any> {
-    /**
-     * Element reference.
-     */
-    elementRef: ElementRef<HTMLElement>;
     /**
      * Overflow item directive instance.
      */
@@ -47,12 +43,6 @@ export interface OverflowItemRef<T = any> {
 
     /** Item instance. Used for correct autocomplete. */
     item: T;
-
-    /**
-     * Sets the element reference of the directive.
-     * @param elmRef Element reference.
-     */
-    setElementRef(elmRef: ElementRef): void;
 
     /**
      * Sets the overflow item directive.

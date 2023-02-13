@@ -68,6 +68,7 @@ export class AvatarGroupOverflowBodyDirective implements AfterViewInit, OnDestro
     /** @hidden */
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
+        this._keyboardEventsManager?.destroy();
     }
 
     /** @hidden */
@@ -100,6 +101,7 @@ export class AvatarGroupOverflowBodyDirective implements AfterViewInit, OnDestro
 
     /** @hidden */
     private _setKeyboardEventsManager(): void {
+        this._keyboardEventsManager?.destroy();
         this._keyboardEventsManager = new FocusKeyManager(this.overflowItems)
             .withWrap()
             .withHorizontalOrientation(this._dir);

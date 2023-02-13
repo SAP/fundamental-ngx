@@ -5,6 +5,7 @@ import {
     EventEmitter,
     Input,
     OnChanges,
+    OnDestroy,
     Output,
     QueryList,
     Renderer2,
@@ -70,7 +71,7 @@ export class DeprecatedFocusableListDirective extends DeprecatedSelector {}
         DestroyedService
     ]
 })
-export class FocusableListDirective implements OnChanges, AfterViewInit {
+export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestroy {
     /** Direction of navigation. Should be set to 'grid' when list is a part of grid. */
     @Input()
     navigationDirection: 'horizontal' | 'vertical' | 'grid' = 'vertical';
@@ -159,6 +160,11 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
                 takeUntil(this._destroy$)
             )
             .subscribe();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._keyManager?.destroy();
     }
 
     /** Set active item in list */

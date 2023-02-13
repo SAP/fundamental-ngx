@@ -7,6 +7,7 @@ import {
     OnInit,
     ViewChild
 } from '@angular/core';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
@@ -14,7 +15,8 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
     selector: 'fd-carousel-dynamic-items-example',
     templateUrl: './carousel-dynamic-items-example.component.html',
     styleUrls: ['./carousel-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyedService]
 })
 export class CarouselDynamicItemsExampleComponent implements OnInit, AfterViewInit {
     @ViewChild('carousel')
@@ -24,14 +26,11 @@ export class CarouselDynamicItemsExampleComponent implements OnInit, AfterViewIn
     visibleSlidesCount = 3;
     cardsHidden = [];
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(private _changeDetectorRef: ChangeDetectorRef, private readonly _destroy$: DestroyedService) {}
 
     ngOnInit(): void {
         fromEvent(window, 'resize')
-            .pipe(debounceTime(60), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(60), takeUntil(this._destroy$))
             .subscribe(() => this.updateLayout());
     }
 

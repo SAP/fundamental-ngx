@@ -5,6 +5,7 @@ import {
     ContentChildren,
     HostListener,
     Input,
+    OnDestroy,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
@@ -19,7 +20,7 @@ import { ListNavigationItemComponent } from '@fundamental-ngx/core/list';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VerticalNavigationComponent implements AfterContentInit {
+export class VerticalNavigationComponent implements AfterContentInit, OnDestroy {
     /** Whether or not this component is to be shown in 'condensed' mode. */
     @Input()
     condensed = false;
@@ -50,10 +51,16 @@ export class VerticalNavigationComponent implements AfterContentInit {
                 navItem._condensed = true;
             });
         }
+        this._keyManager?.destroy();
         this._keyManager = new FocusKeyManager(this._navigationItems)
             .withHomeAndEnd()
             .skipPredicate((item) => !item._isItemVisible || (item._condensed && item.expanded));
         this._listenOnQueryChange();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._keyManager?.destroy();
     }
 
     /** Set fake focus on element with passed index */

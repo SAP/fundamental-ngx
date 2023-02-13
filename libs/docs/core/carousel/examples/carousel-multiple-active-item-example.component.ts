@@ -7,6 +7,7 @@ import {
     OnInit,
     ViewChild
 } from '@angular/core';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
@@ -14,7 +15,8 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
     selector: 'fd-carousel-multiple-active-item-example',
     templateUrl: './carousel-multiple-active-item-example.component.html',
     styleUrls: ['./carousel-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyedService]
 })
 export class CarouselMultipleActiveItemExampleComponent implements OnInit, AfterViewInit {
     @ViewChild('carousel')
@@ -29,11 +31,11 @@ export class CarouselMultipleActiveItemExampleComponent implements OnInit, After
     card2Visibility = true;
     card3Visibility = true;
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(private _changeDetectorRef: ChangeDetectorRef, private readonly _destroy$: DestroyedService) {}
 
     ngOnInit(): void {
         fromEvent(window, 'resize')
-            .pipe(debounceTime(60), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(60), takeUntil(this._destroy$))
             .subscribe(() => this.updateLayout());
     }
 

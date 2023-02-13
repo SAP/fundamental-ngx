@@ -1,3 +1,30 @@
+# [0.39.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.37...v0.39.0-rc.38) (2023-02-13)
+
+
+### Bug Fixes
+
+* **core,platform:** multi input/combobox addon button click event ([#9359](https://github.com/SAP/fundamental-ngx/issues/9359)) ([b75f7c1](https://github.com/SAP/fundamental-ngx/commit/b75f7c1ffd107e8562e8c9ead8cffae9b52c5606))
+
+
+
+# [0.39.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.36...v0.39.0-rc.37) (2023-02-10)
+
+
+### Bug Fixes
+
+* overflow layout memory leaks ([#9350](https://github.com/SAP/fundamental-ngx/issues/9350)) ([8a6fb7d](https://github.com/SAP/fundamental-ngx/commit/8a6fb7dcd6fe0c7208937b0a27117cf9b2cde61f))
+
+
+
+# [0.39.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.35...v0.39.0-rc.36) (2023-02-09)
+
+
+### Features
+
+* **platform:** table not selectable and preselected rows ([#9304](https://github.com/SAP/fundamental-ngx/issues/9304)) ([e66901b](https://github.com/SAP/fundamental-ngx/commit/e66901b482b057a902e1a36c114d61bfa71eedb1))
+
+
+
 # [0.39.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.34...v0.39.0-rc.35) (2023-02-08)
 
 

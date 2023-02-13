@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { Component } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
 import { DialogConfig } from '../utils/dialog-config.class';
@@ -8,6 +9,7 @@ import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { whenStable } from '@fundamental-ngx/core/tests';
+import { PortalModule } from '@angular/cdk/portal';
 
 const TEXT_CONTENT = 'Hello there';
 
@@ -24,6 +26,7 @@ describe('DialogContainerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
+            imports: [NoopAnimationsModule, PortalModule],
             declarations: [DialogContainerComponent, ContentTestComponent],
             providers: [
                 { provide: DialogConfig, useValue: dialogConfig },
@@ -34,15 +37,14 @@ describe('DialogContainerComponent', () => {
         });
     }));
 
-    beforeEach(() => {
+    beforeEach(waitForAsync(() => {
         fixture = TestBed.createComponent(DialogContainerComponent);
         component = fixture.componentInstance;
         component.childContent = ContentTestComponent;
-    });
+    }));
 
     it('should create', () => {
         fixture.detectChanges();
-
         expect(component).toBeTruthy();
     });
 
