@@ -1,3 +1,12 @@
+# [0.39.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.37...v0.39.0-rc.38) (2023-02-13)
+
+
+### Bug Fixes
+
+* **core,platform:** multi input/combobox addon button click event ([#9359](https://github.com/SAP/fundamental-ngx/issues/9359)) ([b75f7c1](https://github.com/SAP/fundamental-ngx/commit/b75f7c1ffd107e8562e8c9ead8cffae9b52c5606))
+
+
+
 # [0.39.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.36...v0.39.0-rc.37) (2023-02-10)
 
 
