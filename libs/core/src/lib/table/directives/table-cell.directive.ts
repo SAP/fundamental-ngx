@@ -39,7 +39,6 @@ export class TableCellDirective implements AfterContentInit {
     @HostBinding('class.fd-table__cell--focusable')
     @Input()
     set focusable(value: Nullable<boolean>) {
-        this._focusableItemDirective.focusChild = value;
         this._focusableItemDirective.fdkFocusableItem = value;
     }
 

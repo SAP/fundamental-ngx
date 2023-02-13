@@ -11,7 +11,7 @@
         focusable
         navigationDirection="grid"
     >
-        <span *ngFor="let item of [].constructor(3); let columnIndex = index" fdkFocusableItem focusChild>
+        <span *ngFor="let item of [].constructor(3); let columnIndex = index" fdkFocusableItem>
             <ng-container *ngIf="columnIndex === 0"> Content {{ rowIndex + 1 }} - {{ columnIndex + 1 }} </ng-container>
 
             <ng-container *ngIf="columnIndex === 1">

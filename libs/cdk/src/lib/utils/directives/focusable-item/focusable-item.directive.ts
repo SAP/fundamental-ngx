@@ -1,5 +1,6 @@
 import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { F2 } from '@angular/cdk/keycodes';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
 import { DestroyedService, TabbableElementService } from '../../services';
 import { HasElementRef } from '../../interfaces';
@@ -10,8 +11,9 @@ import {
 } from '../../deprecated-selector.class';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { FocusableObserver } from './focusable.observer';
-import { takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { Nullable } from '../../models/nullable';
+import { KeyUtil } from '../../functions';
 
 export type CellFocusedEventAnnouncer = Nullable<(position: FocusableItemPosition) => string>;
 
@@ -58,17 +60,6 @@ export class FocusableItemDirective implements HasElementRef {
         return this._focusable;
     }
 
-    /** Whether tabbable child should be focused instead. Default is false. */
-    @Input()
-    set focusChild(val: BooleanInput) {
-        this._focusChild = coerceBooleanProperty(val);
-        this.setTabbable(this._focusable);
-    }
-
-    get focusChild(): boolean {
-        return this._focusChild;
-    }
-
     /** Function, which returns a string to be announced by screen-reader whenever an item which is in grid receives focus. */
     @Input()
     cellFocusedEventAnnouncer: CellFocusedEventAnnouncer = this._defaultItemFocusedEventAnnouncer;
@@ -78,10 +69,10 @@ export class FocusableItemDirective implements HasElementRef {
     readonly cellFocused = new EventEmitter<FocusableItemPosition>();
 
     /** @hidden */
-    _position: FocusableItemPosition;
+    public readonly _keydown$ = new Subject<KeyboardEvent>();
 
     /** @hidden */
-    private _focusChild = false;
+    _position: FocusableItemPosition;
 
     /** @hidden */
     private _focusable = true;
@@ -128,10 +119,6 @@ export class FocusableItemDirective implements HasElementRef {
     setTabbable(state: boolean): void {
         this._tabbable = state;
 
-        if (!this.focusChild) {
-            return;
-        }
-
         if (state) {
             this._enableTabbableElements();
         } else {
@@ -152,16 +139,6 @@ export class FocusableItemDirective implements HasElementRef {
             return;
         }
 
-        if (this.focusChild) {
-            const tabbableElement = this._tabbableElementService.getTabbableElement(
-                this.elementRef().nativeElement,
-                false,
-                true
-            );
-
-            tabbableElement?.focus();
-        }
-
         if (this._position) {
             this.cellFocused.next(this._position);
 
@@ -179,7 +156,44 @@ export class FocusableItemDirective implements HasElementRef {
             return;
         }
 
+        // Timeout is needed to prevent focusout event from being emitted when focus moves between item's children.
         this._timerId = setTimeout(() => (this._timerId = null));
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    _onKeydown(event: KeyboardEvent): void {
+        if (!this.fdkFocusableItem) {
+            return;
+        }
+
+        const isFocused = document.activeElement === this._elementRef.nativeElement;
+
+        if (KeyUtil.isKeyCode(event, F2)) {
+            if (isFocused && !event.shiftKey) {
+                event.stopPropagation();
+
+                const tabbableElement = this._tabbableElementService.getTabbableElement(
+                    this.elementRef().nativeElement,
+                    false,
+                    true
+                );
+
+                tabbableElement?.focus();
+
+                return;
+            } else if (!isFocused && event.shiftKey) {
+                event.stopPropagation();
+
+                this._elementRef.nativeElement.focus();
+
+                return;
+            }
+        }
+
+        if (isFocused) {
+            this._keydown$.next(event);
+        }
     }
 
     /** @hidden */
