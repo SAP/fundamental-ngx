@@ -1,6 +1,6 @@
 import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { F2 } from '@angular/cdk/keycodes';
+import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
 import { DestroyedService, TabbableElementService } from '../../services';
 import { HasElementRef } from '../../interfaces';
@@ -168,27 +168,28 @@ export class FocusableItemDirective implements HasElementRef {
         }
 
         const isFocused = document.activeElement === this._elementRef.nativeElement;
+        const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2]) && !event.shiftKey && isFocused;
+        const shouldFocusCell =
+            ((KeyUtil.isKeyCode(event, F2) && event.shiftKey) || KeyUtil.isKeyCode(event, ESCAPE)) && !isFocused;
 
-        if (KeyUtil.isKeyCode(event, F2)) {
-            if (isFocused && !event.shiftKey) {
-                event.stopPropagation();
+        if (shouldFocusChild) {
+            event.stopPropagation();
 
-                const tabbableElement = this._tabbableElementService.getTabbableElement(
-                    this.elementRef().nativeElement,
-                    false,
-                    true
-                );
+            const tabbableElement = this._tabbableElementService.getTabbableElement(
+                this.elementRef().nativeElement,
+                false,
+                true
+            );
 
-                tabbableElement?.focus();
+            tabbableElement?.focus();
 
-                return;
-            } else if (!isFocused && event.shiftKey) {
-                event.stopPropagation();
+            return;
+        } else if (shouldFocusCell) {
+            event.stopPropagation();
 
-                this._elementRef.nativeElement.focus();
+            this._elementRef.nativeElement.focus();
 
-                return;
-            }
+            return;
         }
 
         if (isFocused) {

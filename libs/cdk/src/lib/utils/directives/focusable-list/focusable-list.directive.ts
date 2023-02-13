@@ -31,7 +31,7 @@ import { getNativeElement } from '../../helpers';
 import { HasElementRef } from '../../interfaces';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { intersectionObservable, KeyUtil } from '../../functions';
-import { F2 } from '@angular/cdk/keycodes';
+import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
 import { scrollIntoView, ScrollPosition } from './scroll';
 
 export interface FocusableListPosition {
@@ -233,22 +233,23 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
             return;
         }
 
-        if (KeyUtil.isKeyCode(event, F2) && this.focusable) {
-            const isFocused = document.activeElement === this._elementRef.nativeElement;
+        const isFocused = document.activeElement === this._elementRef.nativeElement;
+        const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2]) && !event.shiftKey && isFocused;
+        const shouldFocusList =
+            ((KeyUtil.isKeyCode(event, F2) && event.shiftKey) || KeyUtil.isKeyCode(event, ESCAPE)) && !isFocused;
 
-            if (!isFocused && event.shiftKey) {
-                event.stopPropagation();
+        if (shouldFocusChild) {
+            event.stopPropagation();
 
-                this.focus();
+            this.setActiveItem(0);
 
-                return;
-            } else if (isFocused && !event.shiftKey) {
-                event.stopPropagation();
+            return;
+        } else if (shouldFocusList) {
+            event.stopPropagation();
 
-                this.setActiveItem(0);
+            this.focus();
 
-                return;
-            }
+            return;
         }
 
         this._keydown$.next({ list: this, event, activeItemIndex: this._keyManager?.activeItemIndex ?? null });
