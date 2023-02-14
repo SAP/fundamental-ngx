@@ -424,12 +424,7 @@ export class SelectComponent<T = any>
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.placeholder) {
-            this.ariaLabel = this.placeholder;
-        } else {
-            this.ariaLabel = 'Select an option';
-        }
-
+        this.ariaLabel = this.placeholder;
         this._initializeCommonBehavior();
     }
 
