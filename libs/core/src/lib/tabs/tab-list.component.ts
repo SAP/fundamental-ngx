@@ -135,6 +135,10 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     @ViewChild(OverflowLayoutComponent)
     private _overflowLayout: OverflowLayoutComponent;
 
+    /** @hidden */
+    @ViewChild('menu', { read: MenuComponent })
+    menu: MenuComponent;
+
     /** @hidden Collection of tabs in original order */
     _tabArray: TabInfo[];
 
