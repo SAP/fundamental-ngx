@@ -7,17 +7,21 @@ import {
     QueryList,
     ContentChildren,
     forwardRef,
-    inject,
-    Output,
-    EventEmitter
+    inject
 } from '@angular/core';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { CellFocusedEventAnnouncer, FocusableItemDirective, FocusableItemPosition } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { CellFocusedEventAnnouncer, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
+import { BooleanInput } from '@angular/cdk/coercion';
 
 @Directive({
     selector: '[fdTableCell], [fd-table-cell]',
-    hostDirectives: [FocusableItemDirective]
+    hostDirectives: [
+        {
+            directive: FocusableItemDirective,
+            // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
+            outputs: ['cellFocused']
+        }
+    ]
 })
 export class TableCellDirective implements AfterContentInit {
     /** Whether to show the table cell's horizontal borders */
@@ -35,14 +39,13 @@ export class TableCellDirective implements AfterContentInit {
     @Input()
     activable = false;
 
-    /** Whether the table cell is focusable */
+    /** @hidden */
     @HostBinding('class.fd-table__cell--focusable')
     @Input()
-    set focusable(value: Nullable<boolean>) {
+    set focusable(value: BooleanInput) {
         this._focusableItemDirective.fdkFocusableItem = value;
     }
-
-    get focusable(): Nullable<boolean> {
+    get focusable(): boolean {
         return this._focusableItemDirective.fdkFocusableItem;
     }
 
@@ -76,12 +79,6 @@ export class TableCellDirective implements AfterContentInit {
         this._focusableItemDirective.cellFocusedEventAnnouncer = announcer;
     }
 
-    /** Event emitted when the cell receives focus, not being emitted when focus moves between item's children. */
-    @Output()
-    get cellFocused(): EventEmitter<FocusableItemPosition> {
-        return this._focusableItemDirective.cellFocused;
-    }
-
     /** @hidden */
     @ContentChildren(forwardRef(() => CheckboxComponent))
     _checkboxes: QueryList<CheckboxComponent>;
@@ -95,7 +92,7 @@ export class TableCellDirective implements AfterContentInit {
 
     /** @hidden */
     constructor(public readonly elementRef: ElementRef<HTMLElement>) {
-        this.focusable = false;
+        this._focusableItemDirective.fdkFocusableItem = false;
     }
 
     /** @hidden */
