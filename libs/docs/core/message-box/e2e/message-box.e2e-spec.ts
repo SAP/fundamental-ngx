@@ -6,6 +6,7 @@ import {
     getElementClass,
     getText,
     isElementDisplayed,
+    pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -172,6 +173,7 @@ describe('Message-box test suits', () => {
 
     async function checkAcceptingMessage(section: string): Promise<void> {
         await click(section + button);
+        await pause(500);
         await click(okButton);
         section === basedObjectExample
             ? await expect(await getText(section + resultTxt)).toContain('Approved', 'Result is not OK')
@@ -179,7 +181,9 @@ describe('Message-box test suits', () => {
     }
     async function checkDismissingMessage(section: string): Promise<void> {
         await click(section + button);
+        await pause(500);
         await click(cancelButton);
+        await pause(500);
         section === basedObjectExample
             ? await expect(await getText(section + resultTxt)).toContain('Canceled', 'Result is not Canceled')
             : await expect(await getText(section + resultTxt)).toContain('Cancel', 'Result is not Cancel');
