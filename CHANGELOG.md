@@ -1,3 +1,12 @@
+# [0.39.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.38...v0.39.0-rc.39) (2023-02-15)
+
+
+### Bug Fixes
+
+* **core,cx,fn,platform:** textContent instead of innerText for matter of performance ([#9381](https://github.com/SAP/fundamental-ngx/issues/9381)) ([7d72ef9](https://github.com/SAP/fundamental-ngx/commit/7d72ef9fdf0bb77ed6a3e7add34e3201d330bf51))
+
+
+
 # [0.39.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.37...v0.39.0-rc.38) (2023-02-13)
 
 

@@ -98,7 +98,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
         if (this._iconComponent) {
             this._iconComponent._navigationItemIcon = true;
         }
-        this._innerText = this._text.elementRef.nativeElement.innerText;
+        this._innerText = this._text.elementRef.nativeElement.textContent ?? '';
     }
 
     /** @hidden */

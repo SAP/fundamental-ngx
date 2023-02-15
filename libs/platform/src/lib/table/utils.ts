@@ -113,7 +113,7 @@ export const getUniqueListValuesByKey = <T, K extends keyof T>(list: T[], key: K
 
 export const getScrollBarWidth = (document: Document): number => {
     const div = document.createElement('div');
-    div.innerText = 'W';
+    div.textContent = 'W';
     div.style.position = 'absolute';
     div.style.visibility = 'hidden';
     div.style.overflowY = 'scroll';
