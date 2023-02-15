@@ -11,10 +11,12 @@ import {
     Input,
     OnInit,
     Optional,
+    QueryList,
     Self,
     SkipSelf,
     TemplateRef,
     ViewChild,
+    ViewChildren,
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
@@ -34,7 +36,7 @@ import {
     isFunction,
     PlatformFormField
 } from '@fundamental-ngx/platform/shared';
-import { ListComponent, ModifyItemEvent, SelectionType } from '@fundamental-ngx/platform/list';
+import { BaseListItem, ListComponent, ModifyItemEvent, SelectionType } from '@fundamental-ngx/platform/list';
 
 import { InputType } from '../input/input.component';
 import { AutoCompleteEvent } from '../auto-complete/auto-complete.directive';
@@ -161,6 +163,10 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     /** @hidden */
     @ViewChild('listTemplate')
     listTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChildren(BaseListItem)
+    private readonly _listItems: QueryList<BaseListItem>;
 
     /** @hidden */
     constructor(
@@ -366,6 +372,10 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     setAsSelected(item: MultiInputOption[]): void {
         this._selected = item;
         this.inputText = '';
+        this._listItems?.forEach((listItem) => {
+            const isSelected = !!this._selected.find((value) => equal(value.value, listItem.value));
+            listItem.setSelected(isSelected);
+        });
     }
 
     /** @hidden */

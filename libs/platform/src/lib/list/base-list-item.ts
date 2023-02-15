@@ -340,6 +340,20 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     }
 
     /**
+     * Programmatically set selected state of the list item.
+     * @param selected Whether the list item is selected
+     */
+    setSelected(selected: boolean): void {
+        if (selected === this._selected) {
+            return;
+        }
+        const event = new ModifyItemEvent();
+        event.source = this;
+        this._selected = selected;
+        this._changeDetectorRef.detectChanges();
+    }
+
+    /**
      * @hidden
      * On item click event will be emitted
      */
