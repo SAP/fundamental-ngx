@@ -1611,8 +1611,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         const children = this._findRowChildren(dragRow);
         children.forEach((row) => {
-            const updatedRowLevel = this._getRowParents(row).length;
-            row.level = updatedRowLevel;
+            row.level = this._getRowParents(row).length;
         });
     }
 

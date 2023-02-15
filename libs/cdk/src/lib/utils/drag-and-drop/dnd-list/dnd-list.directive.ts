@@ -143,40 +143,38 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         const replacedItemIndex = this._closestItemIndex;
         const draggedItem = items[draggedItemIndex];
 
-        if (!replacedItemIndex && replacedItemIndex !== 0) {
-            return;
-        }
+        if (replacedItemIndex || replacedItemIndex === 0) {
+            if (draggedItemIndex !== replacedItemIndex) {
+                if (draggedItemIndex < replacedItemIndex) {
+                    for (let i = draggedItemIndex; i < replacedItemIndex; i++) {
+                        items[i] = items[i + 1];
+                    }
+                } else {
+                    for (let i = draggedItemIndex; i > replacedItemIndex; i--) {
+                        items[i] = items[i - 1];
+                    }
+                }
 
-        if (draggedItemIndex !== replacedItemIndex) {
-            if (draggedItemIndex < replacedItemIndex) {
-                for (let i = draggedItemIndex; i < replacedItemIndex; i++) {
-                    items[i] = items[i + 1];
-                }
-            } else {
-                for (let i = draggedItemIndex; i > replacedItemIndex; i--) {
-                    items[i] = items[i - 1];
-                }
+                /** Replacing items */
+                items[replacedItemIndex] = draggedItem;
+
+                this.itemsChange.emit(items);
             }
 
-            /** Replacing items */
-            items[replacedItemIndex] = draggedItem;
+            this.itemDropped.emit({
+                replacedItemIndex,
+                draggedItemIndex,
+                items
+            });
 
-            this.itemsChange.emit(items);
+            this._removeAllLines();
+            this._removeAllReplaceIndicators();
+
+            /** Reset */
+            this._elementsCoordinates = [];
+            this._closestItemIndex = null;
+            this._closestItemPosition = null;
         }
-
-        this.itemDropped.emit({
-            replacedItemIndex,
-            draggedItemIndex,
-            items
-        });
-
-        this._removeAllLines();
-        this._removeAllReplaceIndicators();
-
-        /** Reset */
-        this._elementsCoordinates = [];
-        this._closestItemIndex = null;
-        this._closestItemPosition = null;
     }
 
     /** @hidden */

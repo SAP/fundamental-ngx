@@ -1332,7 +1332,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 fixture.detectChanges();
 
-                expect(draggedRow).toEqual(tableComponent._tableRowsVisible[5]);
+                expect(draggedRow.parent).toEqual(tableComponent._tableRowsVisible[5]);
             });
         });
     });
