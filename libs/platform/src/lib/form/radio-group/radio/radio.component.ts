@@ -88,8 +88,8 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     readonly checked: EventEmitter<RadioButtonComponent> = new EventEmitter();
 
     /** Access radio button child element passed as content of radio button group */
-    @ViewChild(CoreRadioButtonComponent, { static: false, read: ElementRef })
-    private coreRadioButton: ElementRef;
+    @ViewChild(CoreRadioButtonComponent, { static: false })
+    private coreRadioButton: CoreRadioButtonComponent;
 
     /** @hidden */
     constructor(
@@ -143,7 +143,7 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
 
     /** method for cdk FocusKeymanager */
     focus(): void {
-        this.coreRadioButton?.nativeElement.focus();
+        this.coreRadioButton?.inputElement.nativeElement.focus();
     }
 
     /** method to select radio button */
