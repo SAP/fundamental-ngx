@@ -300,7 +300,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     deleteToken(selectedValue: MultiInputOption): void {
         if (this.tokenizer.tokenList.length > 0) {
             this.tokenizer.tokenList.forEach((token) => {
-                if (token.tokenWrapperElement.nativeElement.innerText === selectedValue.label) {
+                if (token.tokenWrapperElement.nativeElement.textContent === selectedValue.label) {
                     this.selected.splice(this.selected.indexOf(selectedValue), 1);
                 }
             });

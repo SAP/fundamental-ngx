@@ -71,7 +71,7 @@ export class NestedListTitleDirective {
 
     /** Returns element's InnerText */
     getInnerText(): string {
-        return this.elementRef && this.elementRef.nativeElement.innerText;
+        return this.elementRef && this.elementRef.nativeElement.textContent;
     }
 }
 
