@@ -1,3 +1,12 @@
+# [0.39.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.46...v0.39.0-rc.47) (2023-02-16)
+
+
+### Bug Fixes
+
+* documentation for multi-input addon button events ([#9398](https://github.com/SAP/fundamental-ngx/issues/9398)) ([a104d3a](https://github.com/SAP/fundamental-ngx/commit/a104d3a5123cbdc01278010bf70fe6c71130210c))
+
+
+
 # [0.39.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.45...v0.39.0-rc.46) (2023-02-16)
 
 
