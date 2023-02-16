@@ -344,20 +344,29 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             this._dsSubscription.unsubscribe();
         }
     }
-    /** @hidden
+    /**
+     * @hidden
      * Define is this item selected
      */
     abstract isSelectedOptionItem(selectedItem: MultiInputOption): boolean;
 
-    /** @hidden
+    /**
+     * @hidden
      * Emit select OptionItem
      * */
     abstract selectOptionItem(item: MultiInputOption): void;
 
-    /** @hidden
+    /**
+     * @hidden
      * Define value as selected
      * */
     abstract setAsSelected(item: MultiInputOption[]): void;
+
+    /**
+     * @hidden
+     * Mathod for marking list option as selected.
+     */
+    abstract markListItemsAsSelected(): void;
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
@@ -380,13 +389,19 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this.openChange.next(this.isOpen);
         this._cd.markForCheck();
         setTimeout(() => {
+            this.markListItemsAsSelected();
+            if (this.inputText) {
+                return;
+            }
             // Focus on the first item in dropdown.
+            this.listComponent._setCurrentActiveItemIndex(0);
             this.listComponent?.listItems.first.focus();
         });
     }
     /** Closes the select popover body. */
     close(): void {
         this.isOpen = false;
+        this.searchTermChanged();
         this.isOpenChange.emit(this.isOpen);
         this.openChange.next(this.isOpen);
         this._cd.markForCheck();

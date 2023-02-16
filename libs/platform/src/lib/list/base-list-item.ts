@@ -246,7 +246,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      * @hidden
      * Whether listitem is selected binded to template
      */
-    _selected: boolean;
+    _selected = false;
 
     /**
      * @hidden

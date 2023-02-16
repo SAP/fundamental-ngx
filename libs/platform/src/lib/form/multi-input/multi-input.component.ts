@@ -333,6 +333,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     removeSelectedTokens(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
             if (this.isOpen) {
+                this.listComponent._setCurrentActiveItemIndex(0);
                 this.listTemplateDD.listItems.first.focus();
             } else {
                 this.showList(!this.isOpen);
@@ -372,6 +373,14 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     setAsSelected(item: MultiInputOption[]): void {
         this._selected = item;
         this.inputText = '';
+        this.markListItemsAsSelected();
+    }
+
+    /**
+     * @hidden
+     * Mathod for marking items in dropdown as selected.
+     */
+    markListItemsAsSelected(): void {
         this._listItems?.forEach((listItem) => {
             const isSelected = !!this._selected.find((value) => equal(value.value, listItem.value));
             listItem.setSelected(isSelected);
