@@ -435,7 +435,7 @@ export class MultiInputComponent
     buildComponentCssClass(): string[] {
         // TODO: this icon flip may be addressed in styles in the future
         if (this.glyph === 'value-help' && this._dir === 'rtl') {
-            const icon = this.elementRef().nativeElement.querySelector('.sap-icon--value-help');
+            const icon = this._elementRef.nativeElement.querySelector('.sap-icon--value-help') as HTMLElement;
             if (icon) {
                 icon.style.transform = 'scaleX(-1)';
             }

@@ -10,6 +10,7 @@ import {
     isElementClickable,
     isElementDisplayed,
     mouseHoverElement,
+    pause,
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
@@ -114,7 +115,7 @@ describe('calendar test suite', () => {
     describe('mobile calendar examples', () => {
         it('should check landscape mode calendar selections', async () => {
             await click(mobileExamples + button);
-            await waitForElDisplayed(mobileCalendar);
+            await pause(500);
 
             await checkCurrentDayHighlighted(mobileCalendar);
             await checkSingleSelection(mobileCalendar, calendarItem);
@@ -127,7 +128,7 @@ describe('calendar test suite', () => {
         it('should check landscape mode selection output', async () => {
             const startOutput = await getText(mobileExamples + selectionOutput);
             await click(mobileExamples + button);
-            await waitForElDisplayed(mobileCalendar);
+            await pause(500);
 
             await checkSingleSelection(mobileCalendar, calendarItem);
             await click(okBtn);
@@ -136,7 +137,7 @@ describe('calendar test suite', () => {
 
         it('should check portrait mode calendar selections', async () => {
             await click(mobileExamples + button, 1);
-            await waitForElDisplayed(mobileCalendar);
+            await pause(500);
 
             await checkCurrentDayHighlighted(mobileCalendar);
             await checkSingleSelection(mobileCalendar, calendarItem);
@@ -149,7 +150,7 @@ describe('calendar test suite', () => {
         it('should check portrait mode selection output', async () => {
             const startOutput = await getText(mobileExamples + selectionOutput);
             await click(mobileExamples + button, 1);
-            await waitForElDisplayed(mobileCalendar);
+            await pause(500);
 
             await checkSingleSelection(mobileCalendar, calendarItem);
             await click(okBtn);
@@ -158,13 +159,14 @@ describe('calendar test suite', () => {
 
         it('should check portrait and landscape modes', async () => {
             await click(mobileExamples + button);
-            await waitForElDisplayed(mobileCalendar);
+            await pause(500);
 
             await expect(await getAttributeByName(mobileCalendar, classAttribute)).toContain(landscapeAttribute);
 
             await click(okBtn);
+            await pause(500);
             await click(mobileExamples + button, 1);
-            await waitForElDisplayed(mobileCalendar);
+            await pause(500);
 
             await expect(await getAttributeByName(mobileCalendar, classAttribute)).toContain(portraitAttribute);
         });

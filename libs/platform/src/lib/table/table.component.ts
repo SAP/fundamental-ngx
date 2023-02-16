@@ -30,7 +30,17 @@ import set from 'lodash-es/set';
 import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
-import { FdDropEvent, KeyUtil, RangeSelector, resizeObservable, RtlService } from '@fundamental-ngx/cdk/utils';
+import {
+    FdDropEvent,
+    FDK_FOCUSABLE_GRID_DIRECTIVE,
+    FocusableCellPosition,
+    FocusableGridDirective,
+    FocusableItemPosition,
+    KeyUtil,
+    RangeSelector,
+    resizeObservable,
+    RtlService
+} from '@fundamental-ngx/cdk/utils';
 import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
 import { FDP_PRESET_MANAGED_COMPONENT, isDataSource, isString } from '@fundamental-ngx/platform/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
@@ -93,8 +103,21 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
+
+/**
+ * Cell announcer function which returns a string to be announced by screen readers.
+ * @param position The position of the cell in the table.
+ * @param headerLabel The label of the column header.
+ * @param nestingLevel The nesting level of the cell in case of tree table.
+ */
+export type CellFocusedEventAnnouncer = (
+    position: FocusableItemPosition,
+    headerLabel: string,
+    nestingLevel: number | null
+) => string;
 
 type TreeLike<T> = T & {
     _children?: TreeLike<T>[];
@@ -413,6 +436,13 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     expandOnInit = false;
 
+    /**
+     * Function, that creates a string to be announced by screen-reader whenever cell receives focus.
+     * Second argument is nesting level starting from 0 if table in tree mode, otherwise null.
+     */
+    @Input()
+    cellFocusedEventAnnouncer: CellFocusedEventAnnouncer = this._defaultCellFocusedEventAnnouncer;
+
     /** Event emitted when current preset configuration has been changed. */
     @Output()
     presetChanged = new EventEmitter<PlatformTableManagedPreset>();
@@ -494,6 +524,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     @ViewChild(FdTableComponent, { read: ElementRef })
     readonly table: ElementRef<HTMLDivElement>;
+
+    /** @hidden */
+    @ViewChild(FDK_FOCUSABLE_GRID_DIRECTIVE)
+    _focusableGrid: FocusableGridDirective;
 
     /** @hidden */
     @ContentChildren(TableColumn)
@@ -642,6 +676,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * RTL flag
      */
     _rtl = false;
+
+    /** @hidden */
+    private _focusedCellPosition: Nullable<FocusableCellPosition>;
 
     /**
      * @hidden
@@ -802,6 +839,26 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _initialStateSet = false;
 
     /** @hidden */
+    private _focusinTimerId;
+
+    /** @hidden */
+    @HostListener('focusout')
+    _onFocusOut(): void {
+        this._focusinTimerId = setTimeout(() => {
+            this._focusedCellPosition = null;
+        });
+    }
+
+    /** @hidden */
+    @HostListener('focusin')
+    _onFocusIn(): void {
+        if (this._focusinTimerId) {
+            clearTimeout(this._focusinTimerId);
+            this._focusinTimerId = null;
+        }
+    }
+
+    /** @hidden */
     @HostListener('keydown', ['$event'])
     _onKeyDown(event: KeyboardEvent): void {
         if (
@@ -833,7 +890,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         private readonly _elRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService,
         readonly contentDensityObserver: ContentDensityObserver,
-        readonly injector: Injector
+        readonly injector: Injector,
+        private readonly _liveAnnouncer: LiveAnnouncer
     ) {
         super();
     }
@@ -909,6 +967,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._listenToTableWidthChanges();
 
         this._listenToTableContainerMouseLeave();
+
+        this._listenToLoadingAndRefocusCell();
 
         this._cdr.detectChanges();
 
@@ -1563,6 +1623,20 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     _columnTrackBy(index: number, column: TableColumn): string {
         return column.name;
+    }
+
+    /** @hidden */
+    async _onCellFocused(
+        position: FocusableItemPosition,
+        columnLabel: string,
+        nestingLevel: number | null
+    ): Promise<void> {
+        this._focusedCellPosition = { rowIndex: position.rowIndex, colIndex: position.colIndex };
+
+        if (this.cellFocusedEventAnnouncer) {
+            this._liveAnnouncer.clear();
+            await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(position, columnLabel, nestingLevel));
+        }
     }
 
     /** Fetch data source data. */
@@ -2511,5 +2585,32 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 currentPage: 1
             }
         };
+    }
+
+    /** @hidden */
+    private _listenToLoadingAndRefocusCell(): void {
+        this._subscriptions.add(
+            this._tableService.tableLoading$.pipe(filter((loadingState) => !loadingState)).subscribe(() => {
+                setTimeout(() => {
+                    if (this._focusedCellPosition) {
+                        this._focusableGrid.focusCell(this._focusedCellPosition);
+                    }
+                });
+            })
+        );
+    }
+
+    /** @hidden */
+    private _defaultCellFocusedEventAnnouncer(
+        position: FocusableItemPosition,
+        headerLabel: string,
+        nestingLevel: number | null
+    ): string {
+        return (
+            `${headerLabel},
+            column ${position.colIndex + 1} of ${position.totalCols},
+            row: ${position.rowIndex + 1} of ${position.totalRows}` +
+            (nestingLevel !== null ? `, level: ${nestingLevel + 1}` : '')
+        );
     }
 }

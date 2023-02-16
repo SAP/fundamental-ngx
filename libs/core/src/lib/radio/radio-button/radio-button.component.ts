@@ -45,7 +45,7 @@ export class RadioButtonComponent
 {
     /** @hidden */
     @ViewChild('inputElement')
-    inputElement: ElementRef;
+    inputElement: ElementRef<HTMLInputElement>;
 
     /** Sets the `aria-label` attribute to the element. */
     @Input()

@@ -1,18 +1,32 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { AfterViewInit, ContentChildren, Directive, EventEmitter, Input, Output, QueryList } from '@angular/core';
 import { merge, startWith, switchMap, takeUntil } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { Nullable } from '../../models/nullable';
 import { DestroyedService } from '../../services';
 import { FocusableItemPosition } from '../focusable-item';
-import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective } from '../focusable-list';
+import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective, FocusableListPosition } from '../focusable-list';
+import { findLastIndex } from 'lodash-es';
+import { ScrollPosition } from '../focusable-list';
+import { FDK_FOCUSABLE_GRID_DIRECTIVE } from './focusable-grid.tokens';
+
+export interface FocusableCellPosition {
+    rowIndex: number;
+    colIndex: number;
+}
 
 @Directive({
     selector: '[fdkFocusableGrid]',
     exportAs: 'fdkFocusableGrid',
     standalone: true,
-    providers: [DestroyedService]
+    providers: [
+        {
+            provide: FDK_FOCUSABLE_GRID_DIRECTIVE,
+            useExisting: FocusableGridDirective
+        },
+        DestroyedService
+    ]
 })
 export class FocusableGridDirective implements AfterViewInit {
     /** Direction of the content. */
@@ -37,11 +51,15 @@ export class FocusableGridDirective implements AfterViewInit {
     @Output()
     readonly itemFocused = new EventEmitter<FocusableItemPosition>();
 
+    /** Event emitted when whole row focused, contains row's position info. */
+    @Output()
+    readonly rowFocused = new EventEmitter<FocusableListPosition>();
+
     /** @hidden */
     private _wrapHorizontally = false;
 
     /** @hidden */
-    @ContentChildren(FDK_FOCUSABLE_LIST_DIRECTIVE)
+    @ContentChildren(FDK_FOCUSABLE_LIST_DIRECTIVE, { descendants: true })
     private readonly _focusableLists: QueryList<FocusableListDirective>;
 
     /** @hidden */
@@ -61,6 +79,21 @@ export class FocusableGridDirective implements AfterViewInit {
             .pipe(
                 startWith(this._focusableLists),
                 switchMap((queryList: QueryList<FocusableListDirective>) =>
+                    merge(...queryList.toArray().map((list) => list._gridListFocused$))
+                ),
+                takeUntil(this._destroy$)
+            )
+            .subscribe((focusedEvent) => {
+                this.rowFocused.emit(focusedEvent);
+
+                this._focusableLists.forEach((list) => list.setTabbable(false));
+                this._focusableLists.forEach((list) => list._setItemsTabbable(false));
+            });
+
+        this._focusableLists.changes
+            .pipe(
+                startWith(this._focusableLists),
+                switchMap((queryList: QueryList<FocusableListDirective>) =>
                     merge(...queryList.toArray().map((list) => list._gridItemFocused$))
                 ),
                 takeUntil(this._destroy$)
@@ -68,6 +101,7 @@ export class FocusableGridDirective implements AfterViewInit {
             .subscribe((focusedEvent) => {
                 this.itemFocused.emit(focusedEvent);
 
+                this._focusableLists.forEach((list) => list.setTabbable(false));
                 this._focusableLists.forEach((list) => list._setItemsTabbable(false));
             });
 
@@ -82,20 +116,28 @@ export class FocusableGridDirective implements AfterViewInit {
             .subscribe(({ event, list, activeItemIndex }) => this._onKeydown(event, list, activeItemIndex));
     }
 
+    /**
+     * Focus cell by position.
+     * @param position position of the cell
+     */
+    focusCell(position: FocusableCellPosition): void {
+        const list = this._focusableLists.get(position.rowIndex);
+        if (list) {
+            list.setActiveItem(position.colIndex);
+        }
+    }
+
     /** @hidden */
     _onKeydown(event: KeyboardEvent, list: FocusableListDirective, activeItemIndex: Nullable<number>): void {
-        if (activeItemIndex == null) {
-            return;
-        }
-
-        if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
+        if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, PAGE_DOWN, PAGE_UP])) {
             return;
         }
 
         const lists = this._focusableLists.toArray();
         const currentRowIndex = lists.findIndex((item) => item === list);
-        let nextRowIndex: number | null = null;
-        let nextRowItemIndex = activeItemIndex;
+        let nextRowIndex: number | undefined;
+        let nextRowItemIndex = activeItemIndex ?? 0;
+        let scrollIntoView: ScrollPosition;
 
         const isFirstItemLtr = activeItemIndex === 0 && this.contentDirection !== 'rtl';
         const isLastItemRtl = activeItemIndex === list._focusableItems.length - 1 && this.contentDirection === 'rtl';
@@ -126,15 +168,29 @@ export class FocusableGridDirective implements AfterViewInit {
                     nextRowItemIndex = 0;
                 }
                 break;
+            case PAGE_DOWN:
+                event.preventDefault();
+                nextRowIndex = findLastIndex(lists, (item) => item._isVisible);
+                scrollIntoView = 'top';
+                break;
+            case PAGE_UP:
+                event.preventDefault();
+                nextRowIndex = lists.findIndex((item) => item._isVisible);
+                scrollIntoView = 'bottom';
+                break;
         }
 
-        if (nextRowIndex != null && lists[nextRowIndex]) {
-            const itemIndex = this._getItemIndex(lists[nextRowIndex], nextRowItemIndex);
-            if (itemIndex == null) {
+        const nextRow = lists[nextRowIndex ?? -1];
+        if (nextRow) {
+            if (nextRow.focusable) {
+                nextRow.focus(scrollIntoView);
                 return;
             }
 
-            lists[nextRowIndex].setActiveItem(itemIndex);
+            const itemIndex = this._getItemIndex(nextRow, nextRowItemIndex);
+            if (itemIndex != null) {
+                nextRow.setActiveItem(itemIndex, scrollIntoView);
+            }
         }
     }
 

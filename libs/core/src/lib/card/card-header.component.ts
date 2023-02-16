@@ -63,7 +63,7 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
     /** @hidden */
     ngAfterContentInit(): void {
         /** Add fd-card__avatar class to fd-avatar */
-        const avatar = this.elementRef().nativeElement.querySelector('fd-avatar');
+        const avatar = this._elementRef.nativeElement.querySelector('fd-avatar');
         if (avatar) {
             this.renderer.addClass(avatar, 'fd-card__avatar');
         }
