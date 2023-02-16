@@ -10,5 +10,6 @@ export const API_FILES = {
     dataSource: ['DataSourceComponent'],
     utils: ['UtilsComponent'],
     focusableItem: ['FocusableItemComponent'],
-    tabbable: ['']
+    tabbable: [''],
+    focusableGrid: ['FocusableGridDirective', 'FocusableListDirective', 'FocusableItemDirective']
 };

@@ -5,24 +5,26 @@ import {
     Directive,
     ElementRef,
     HostBinding,
-    HostListener,
+    inject,
     Input,
     OnDestroy,
     OnInit,
-    Optional,
     QueryList
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
-import { FdTable } from '../fd-table.interface';
 
 import { TableService } from '../table.service';
 import { TableCellDirective } from './table-cell.directive';
+import { BooleanInput } from '@angular/cdk/coercion';
+import { DestroyedService, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 
 export const HIDDEN_CLASS_NAME = 'fd-table--hidden';
 
 @Directive({
-    selector: '[fdTableRow], [fd-table-row]'
+    selector: '[fdTableRow], [fd-table-row]',
+    providers: [DestroyedService],
+    hostDirectives: [FocusableListDirective]
 })
 export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     /** @hidden */
@@ -51,7 +53,12 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     /** Whether the table row is focusable */
     @HostBinding('class.fd-table__row--focusable')
     @Input()
-    focusable = false;
+    set focusable(value: BooleanInput) {
+        this._focusableListDirective.focusable = value;
+    }
+    get focusable(): boolean {
+        return this._focusableListDirective.focusable;
+    }
 
     /** Whether the table row is main row, it's concerned only on pop in mode */
     @HostBinding('class.fd-table__row--main')
@@ -69,24 +76,20 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     active = false;
 
     /** @hidden */
-    @HostBinding('attr.tabindex')
-    private get _tabIndex(): number | null {
-        return this._tabFocusable && this.focusable ? 0 : null;
-    }
-
-    /** @hidden */
     private _propagateKeysSubscription: Subscription;
 
     /** @hidden */
-    private _tabFocusable = true;
+    private readonly _focusableListDirective = inject(FocusableListDirective);
 
     /** @hidden */
     constructor(
         private _changeDetRef: ChangeDetectorRef,
         private _tableService: TableService,
-        public elementRef: ElementRef<HTMLTableRowElement>,
-        @Optional() private readonly _table?: FdTable
-    ) {}
+        public elementRef: ElementRef<HTMLTableRowElement>
+    ) {
+        this._focusableListDirective.navigationDirection = 'grid';
+        this._focusableListDirective._updateNavigationDirection();
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -104,13 +107,6 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     /** @hidden */
     ngOnDestroy(): void {
         this._propagateKeysSubscription.unsubscribe();
-    }
-
-    /**
-     * Changes focusable state of the row.
-     */
-    toggleFocusableState(focusable: boolean): void {
-        this._tabFocusable = focusable;
     }
 
     /** @hidden */
@@ -165,17 +161,5 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
                 cell.elementRef.nativeElement.ariaColIndex = index.toString();
             });
         });
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    private _onRowKeydown(event: KeyboardEvent): void {
-        this._table?._onRowKeydown(event, this);
-    }
-
-    /** @hidden */
-    @HostListener('focus')
-    private _onRowFocus(): void {
-        this._table?._setCurrentFocusableRow(this);
     }
 }

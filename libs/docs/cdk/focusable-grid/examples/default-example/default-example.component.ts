@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FocusableItemPosition } from '@fundamental-ngx/cdk/utils';
+import { FocusableItemPosition, FocusableListPosition } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fundamental-ngx-focusable-grid-default-example',
@@ -40,6 +40,10 @@ export class DefaultExampleComponent {
     constructor() {}
 
     itemFocused(position: FocusableItemPosition): void {
+        console.log(position);
+    }
+
+    rowFocused(position: FocusableListPosition): void {
         console.log(position);
     }
 }

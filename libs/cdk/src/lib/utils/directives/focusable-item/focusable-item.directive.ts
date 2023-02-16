@@ -1,5 +1,6 @@
-import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
 import { DestroyedService, TabbableElementService } from '../../services';
 import { HasElementRef } from '../../interfaces';
@@ -10,7 +11,11 @@ import {
 } from '../../deprecated-selector.class';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { FocusableObserver } from './focusable.observer';
-import { takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
+import { Nullable } from '../../models/nullable';
+import { KeyUtil } from '../../functions';
+
+export type CellFocusedEventAnnouncer = Nullable<(position: FocusableItemPosition) => string>;
 
 export interface FocusableItemPosition {
     rowIndex: number;
@@ -55,26 +60,19 @@ export class FocusableItemDirective implements HasElementRef {
         return this._focusable;
     }
 
-    /** Whether tabbable child should be focused instead. Default is false. */
-    @Input()
-    set focusChild(val: BooleanInput) {
-        this._focusChild = coerceBooleanProperty(val);
-        this.setTabbable(this._focusable);
-    }
-
-    get focusChild(): boolean {
-        return this._focusChild;
-    }
-
     /** Function, which returns a string to be announced by screen-reader whenever an item which is in grid receives focus. */
     @Input()
-    cellFocusedEventAnnouncer: (position: FocusableItemPosition) => string = this._defaultItemFocusedEventAnnouncer;
+    cellFocusedEventAnnouncer: CellFocusedEventAnnouncer = this._defaultItemFocusedEventAnnouncer;
+
+    /** Event emitted when the cell receives focus, not being emitted when focus moves between item's children. */
+    @Output()
+    readonly cellFocused = new EventEmitter<FocusableItemPosition>();
+
+    /** @hidden */
+    public readonly _keydown$ = new Subject<KeyboardEvent>();
 
     /** @hidden */
     _position: FocusableItemPosition;
-
-    /** @hidden */
-    private _focusChild = false;
 
     /** @hidden */
     private _focusable = true;
@@ -106,7 +104,7 @@ export class FocusableItemDirective implements HasElementRef {
             .observe(this._elementRef, false)
             .pipe(takeUntil(this._destroy$))
             .subscribe((isFocusable) => {
-                if (isFocusable !== this.fdkFocusableItem) {
+                if (!isFocusable && isFocusable !== this.fdkFocusableItem) {
                     this.fdkFocusableItem = isFocusable;
                 }
             });
@@ -121,10 +119,6 @@ export class FocusableItemDirective implements HasElementRef {
     setTabbable(state: boolean): void {
         this._tabbable = state;
 
-        if (!this.focusChild) {
-            return;
-        }
-
         if (state) {
             this._enableTabbableElements();
         } else {
@@ -135,13 +129,52 @@ export class FocusableItemDirective implements HasElementRef {
     /** @hidden */
     @HostListener('focusin')
     async _onFocusin(): Promise<void> {
+        if (!this.fdkFocusableItem) {
+            return;
+        }
+
         if (this._timerId != null) {
             clearTimeout(this._timerId);
             this._timerId = null;
             return;
         }
 
-        if (this.focusChild) {
+        if (this._position) {
+            this.cellFocused.next(this._position);
+
+            if (this.cellFocusedEventAnnouncer) {
+                this._liveAnnouncer.clear();
+                await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(this._position));
+            }
+        }
+    }
+
+    /** @hidden */
+    @HostListener('focusout')
+    _onFocusout(): void {
+        if (!this.fdkFocusableItem) {
+            return;
+        }
+
+        // Timeout is needed to prevent focusout event from being emitted when focus moves between item's children.
+        this._timerId = setTimeout(() => (this._timerId = null));
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    _onKeydown(event: KeyboardEvent): void {
+        if (!this.fdkFocusableItem) {
+            return;
+        }
+
+        const isFocused = document.activeElement === this._elementRef.nativeElement;
+        const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2]) && !event.shiftKey && isFocused;
+        const shouldFocusCell =
+            ((KeyUtil.isKeyCode(event, F2) && event.shiftKey) || KeyUtil.isKeyCode(event, ESCAPE)) && !isFocused;
+
+        if (shouldFocusChild) {
+            event.stopPropagation();
+
             const tabbableElement = this._tabbableElementService.getTabbableElement(
                 this.elementRef().nativeElement,
                 false,
@@ -149,18 +182,19 @@ export class FocusableItemDirective implements HasElementRef {
             );
 
             tabbableElement?.focus();
+
+            return;
+        } else if (shouldFocusCell) {
+            event.stopPropagation();
+
+            this._elementRef.nativeElement.focus();
+
+            return;
         }
 
-        if (this._position) {
-            this._liveAnnouncer.clear();
-            await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(this._position));
+        if (isFocused) {
+            this._keydown$.next(event);
         }
-    }
-
-    /** @hidden */
-    @HostListener('focusout')
-    _onFocusout(): void {
-        this._timerId = setTimeout(() => (this._timerId = null));
     }
 
     /** @hidden */
