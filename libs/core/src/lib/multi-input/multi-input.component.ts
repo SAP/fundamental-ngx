@@ -299,7 +299,7 @@ export class MultiInputComponent
     @Output()
     readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden Emits event when the addon button is clicked. */
+    /** Emits event when the addon button is clicked. */
     @Output()
     readonly addOnButtonClicked: EventEmitter<void> = new EventEmitter<void>();
 
