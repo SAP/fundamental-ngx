@@ -1,3 +1,17 @@
+# [0.39.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.42...v0.39.0-rc.43) (2023-02-16)
+
+
+### Bug Fixes
+
+* **cdk,core,platform:** table keyboard ([#9324](https://github.com/SAP/fundamental-ngx/issues/9324)) ([c5fd065](https://github.com/SAP/fundamental-ngx/commit/c5fd065ab72579af972b261d6310ae1b91dbbac4))
+
+
+### BREAKING CHANGES
+
+* **cdk,core,platform:** `tabindex` input property removed from fd-table-cell; use `focusable` instead; `tabindex` input property removed from fd-table-row; use `focusable instead`; `TableCellPosition` interface removed; use `FocusableItemPosition` instead as `TableCellPosition` removed; typings of `cellFocusedEventAnnouncer` of fd-table-cell was changed; `focusChild` property removed from focusable-item directive. Use F2 key to focus cell's child.
+
+
+
 # [0.39.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.41...v0.39.0-rc.42) (2023-02-16)
 
 
