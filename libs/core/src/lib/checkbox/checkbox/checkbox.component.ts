@@ -29,6 +29,7 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
+import { FD_CHECKBOX_COMPONENT } from '../tokens';
 
 let checkboxUniqueId = 0;
 
@@ -45,6 +46,10 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => CheckboxComponent),
             multi: true
+        },
+        {
+            provide: FD_CHECKBOX_COMPONENT,
+            useExisting: CheckboxComponent
         },
         registerFormItemControl(CheckboxComponent),
         contentDensityObserverProviders()

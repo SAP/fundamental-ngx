@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { TitleComponent } from '@fundamental-ngx/core/title';
+import { TitleComponent, TitleToken } from '@fundamental-ngx/core/title';
 
 @Directive()
 export abstract class DialogHeaderBase implements AfterContentInit {
@@ -20,7 +20,7 @@ export abstract class DialogHeaderBase implements AfterContentInit {
     subHeaderTemplate: TemplateRef<any>;
 
     /** @hidden */
-    @ContentChild(TitleComponent)
+    @ContentChild(TitleToken)
     set defaultTitleSize(title: TitleComponent) {
         if (title && !title.headerSize) {
             title.headerSize = 5;

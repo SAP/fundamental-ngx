@@ -1,5 +1,6 @@
 import { AfterContentInit, ContentChild, Directive, ElementRef } from '@angular/core';
 import { BusyIndicatorComponent } from '../busy-indicator.component';
+import { FD_BUSY_INDICATOR_COMPONENT } from '../tokens';
 
 const messageToastClass = 'fd-message-toast';
 
@@ -9,7 +10,7 @@ const messageToastClass = 'fd-message-toast';
 })
 export class BusyIndicatorExtendedDirective implements AfterContentInit {
     /** @hidden */
-    @ContentChild(BusyIndicatorComponent)
+    @ContentChild(FD_BUSY_INDICATOR_COMPONENT)
     busyIndicator: BusyIndicatorComponent;
 
     /** @hidden */

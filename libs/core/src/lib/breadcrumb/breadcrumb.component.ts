@@ -6,7 +6,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Input,
     isDevMode,
     OnInit,
@@ -22,6 +21,7 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
+import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -44,7 +44,13 @@ import { BreadcrumbItemComponent } from './breadcrumb-item.component';
     styleUrls: ['./breadcrumb.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyedService]
+    providers: [
+        DestroyedService,
+        {
+            provide: FD_BREADCRUMB_COMPONENT,
+            useExisting: BreadcrumbComponent
+        }
+    ]
 })
 export class BreadcrumbComponent implements OnInit, AfterViewInit {
     /**
@@ -84,12 +90,8 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
     hiddenItemsCount = new EventEmitter<number>();
 
     /** @hidden */
-    @ContentChildren(BreadcrumbItemComponent)
+    @ContentChildren(FD_BREADCRUMB_ITEM_COMPONENT)
     private readonly _contentItems: QueryList<BreadcrumbItemComponent>;
-
-    /** @hidden */
-    @ContentChildren(forwardRef(() => BreadcrumbItemComponent))
-    breadcrumbItems: QueryList<BreadcrumbItemComponent>;
 
     /** @hidden */
     @ViewChild(MenuComponent)

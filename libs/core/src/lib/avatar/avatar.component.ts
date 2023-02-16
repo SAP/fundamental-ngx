@@ -23,6 +23,7 @@ import {
     CssClassBuilder
 } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FD_AVATAR_COMPONENT } from './tokens';
 
 let avatarUniqueId = 0;
 
@@ -39,6 +40,12 @@ const ALTER_ICON_OPTIONS = {
     styleUrls: ['./avatar.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: FD_AVATAR_COMPONENT,
+            useExisting: AvatarComponent
+        }
+    ],
     host: {
         '[attr.tabindex]': '_tabindex'
     }
