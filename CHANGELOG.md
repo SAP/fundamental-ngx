@@ -1,4 +1,11 @@
 
+### [0.36.4](https://github.com/SAP/fundamental-ngx/compare/v0.36.3...v0.36.4) (2023-02-16)
+
+
+### Features
+
+* **core:** expose collapse overflow tab menu ([#9386](https://github.com/SAP/fundamental-ngx/issues/9386)) ([8d30e43](https://github.com/SAP/fundamental-ngx/commit/8d30e4364663e5274a9a4ff63606063bf4b3d632))
+
 ### [0.36.3](https://github.com/SAP/fundamental-ngx/compare/v0.36.2...v0.36.3) (2023-02-06)
 
 
