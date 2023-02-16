@@ -224,7 +224,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
     /** Emits event when the addon button is clicked. */
     @Output()
-    addOnButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+    addOnButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
 
     /** Event emitted when data loading is started. */
     @Output()

@@ -181,7 +181,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /** Emits event when the addon button is clicked. */
     @Output()
-    readonly addOnButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+    readonly addOnButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
 
     /** @hidden */
     @ViewChild(ListComponent)

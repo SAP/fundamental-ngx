@@ -7,7 +7,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiInputAddonClickedExampleComponent {
-    addOnClicked(): void {
+    addOnClicked(event?: Event): void {
+        console.log(event);
         window.alert('Add On Button Clicked!');
     }
 }

@@ -45,7 +45,7 @@
             [isControl]="true"
             [glyph]="displayAddonButton ? glyph : ''"
             [iconTitle]="title"
-            (addOnButtonClicked)="_addOnButtonClicked()"
+            (addOnButtonClicked)="_addOnButtonClicked($event)"
         >
             <fd-tokenizer
                 [compactCollapse]="compactCollapse"

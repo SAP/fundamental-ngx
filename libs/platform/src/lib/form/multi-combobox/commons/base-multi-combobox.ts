@@ -201,7 +201,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /** Emits event when the addon button is clicked. */
     @Output()
-    addOnButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+    addOnButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
 
     /** @hidden */
     @ViewChild(ListComponent)

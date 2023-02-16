@@ -36,7 +36,7 @@
         [state]="state"
         [disabled]="disabled"
         (keydown)="removeSelectedTokens($event)"
-        (addOnButtonClicked)="addOnButtonClick()"
+        (addOnButtonClicked)="addOnButtonClick($event)"
         (click)="onInputGroupClicked()"
     >
         <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fdp-multi-input__invisible-text"
