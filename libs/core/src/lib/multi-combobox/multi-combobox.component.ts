@@ -222,9 +222,9 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden Emits event when the addon button is clicked. */
+    /** Emits event when the addon button is clicked. */
     @Output()
-    addOnButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+    addOnButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
 
     /** Event emitted when data loading is started. */
     @Output()
