@@ -366,7 +366,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
      * @hidden
      * Mathod for marking list option as selected.
      */
-    abstract markListItemsAsSelected(): void;
+    abstract _markListItemsAsSelected(): void;
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
@@ -389,7 +389,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this.openChange.next(this.isOpen);
         this._cd.markForCheck();
         setTimeout(() => {
-            this.markListItemsAsSelected();
+            this._markListItemsAsSelected();
             if (this.inputText) {
                 return;
             }

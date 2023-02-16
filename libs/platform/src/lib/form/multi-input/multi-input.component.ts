@@ -373,14 +373,14 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     setAsSelected(item: MultiInputOption[]): void {
         this._selected = item;
         this.inputText = '';
-        this.markListItemsAsSelected();
+        this._markListItemsAsSelected();
     }
 
     /**
      * @hidden
      * Mathod for marking items in dropdown as selected.
      */
-    markListItemsAsSelected(): void {
+    _markListItemsAsSelected(): void {
         this._listItems?.forEach((listItem) => {
             const isSelected = !!this._selected.find((value) => equal(value.value, listItem.value));
             listItem.setSelected(isSelected);
