@@ -63,27 +63,27 @@ export const CUSTOM_LANGUAGE: FdLanguage = {
     translationCustomizationExample: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(translationCustomizationExampleComponentHtml, 'shared'),
+            code: getAssetFromModuleAssets(translationCustomizationExampleComponentHtml, 'shared/src/lib'),
             fileName: 'i18n-translation-customization-example'
         },
         {
             language: 'typescript',
             component: 'PlatformI18nTranslationCustomizationExampleComponent',
-            code: getAssetFromModuleAssets(translationCustomizationExampleComponentTs, 'shared'),
+            code: getAssetFromModuleAssets(translationCustomizationExampleComponentTs, 'shared/src/lib'),
             fileName: 'i18n-translation-customization-example',
             name: 'Host component'
         },
         {
             language: 'typescript',
             component: 'TranslationWrapper1Component',
-            code: getAssetFromModuleAssets(translationCustomizationWrapper1Component, 'shared'),
+            code: getAssetFromModuleAssets(translationCustomizationWrapper1Component, 'shared/src/lib'),
             fileName: 'translation-wrapper-1',
             name: 'Wrapper component 1'
         },
         {
             language: 'typescript',
             component: 'TranslationWrapper2Component',
-            code: getAssetFromModuleAssets(translationCustomizationWrapper2Component, 'shared'),
+            code: getAssetFromModuleAssets(translationCustomizationWrapper2Component, 'shared/src/lib'),
             fileName: 'translation-wrapper-2',
             name: 'Wrapper component 2'
         }
@@ -92,13 +92,13 @@ export const CUSTOM_LANGUAGE: FdLanguage = {
     languageChangeExample: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(languageChangeExampleComponentHtml, 'shared'),
+            code: getAssetFromModuleAssets(languageChangeExampleComponentHtml, 'shared/src/lib'),
             fileName: 'i18n-language-change-example-example'
         },
         {
             language: 'typescript',
             component: 'PlatformLanguageChangeExampleComponent',
-            code: getAssetFromModuleAssets(languageChangeExampleComponentTs, 'shared'),
+            code: getAssetFromModuleAssets(languageChangeExampleComponentTs, 'shared/src/lib'),
             fileName: 'i18n-language-change-example-example'
         }
     ];
