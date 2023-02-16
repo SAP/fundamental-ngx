@@ -181,12 +181,13 @@ describe('Multi input test suite', () => {
         const activeButtonsQuantity = await getElementArrayLength(activeDropdownButtons);
         const disabledExample = 5;
         const mobileExample = 6;
+        const loadingExample = 8;
 
         for (let i = 0; i < activeButtonsQuantity; i++) {
             if (i === disabledExample) {
                 continue;
             }
-            if (i !== mobileExample) {
+            if (i !== mobileExample && i !== loadingExample) {
                 await scrollIntoView(activeDropdownButtons, i);
                 await multiInputPage.expandDropdown(activeDropdownButtons, i);
                 const optionsArr = await getAttributeByNameArr(options, 'title');
@@ -202,7 +203,7 @@ describe('Multi input test suite', () => {
                 await click(selectedToken);
                 await sendKeys(['Backspace', 'Backspace']);
                 const isDisplayed = await (await $$('fd-tokenizer')[i]!.$('.fd-token__close')).isDisplayed();
-                await expect(isDisplayed).toBeFalsy();
+                await expect(isDisplayed).toBeFalsy(`Failed for ${i}`);
             }
             if (i === mobileExample) {
                 await multiInputPage.expandDropdown(activeDropdownButtons, i);
@@ -215,7 +216,7 @@ describe('Multi input test suite', () => {
                 await click(selectedToken);
                 await sendKeys(['Backspace', 'Backspace']);
                 const isDisplayed = await (await $$('fd-tokenizer')[i]!.$('.fd-token__close')).isDisplayed();
-                await expect(isDisplayed).toBeFalsy();
+                await expect(isDisplayed).toBeFalsy('Failed for mobile example');
             }
         }
     });

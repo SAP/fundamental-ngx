@@ -1,3 +1,30 @@
+# [0.39.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.45...v0.39.0-rc.46) (2023-02-16)
+
+
+### Bug Fixes
+
+* **core:** i18n example code ([#9399](https://github.com/SAP/fundamental-ngx/issues/9399)) ([2960bfd](https://github.com/SAP/fundamental-ngx/commit/2960bfd0ab91148011fc26d81fcb33d7a8ac9768))
+
+
+
+# [0.39.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.44...v0.39.0-rc.45) (2023-02-16)
+
+
+### Bug Fixes
+
+* **platform:** multi-input bugfixes ([#9390](https://github.com/SAP/fundamental-ngx/issues/9390)) ([bfe4fea](https://github.com/SAP/fundamental-ngx/commit/bfe4feaacb5a224a058641fb82c025f56b3b465c))
+
+
+
+# [0.39.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.43...v0.39.0-rc.44) (2023-02-16)
+
+
+### Bug Fixes
+
+* **e2e:** core message box ([#9397](https://github.com/SAP/fundamental-ngx/issues/9397)) ([6fb939d](https://github.com/SAP/fundamental-ngx/commit/6fb939d14fc7b8b48a05441afffac13fd127cb67))
+
+
+
 # [0.39.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.42...v0.39.0-rc.43) (2023-02-16)
 
 
