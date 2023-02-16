@@ -143,7 +143,7 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
 
     /** method for cdk FocusKeymanager */
     focus(): void {
-        this.coreRadioButton?.elementRef().nativeElement.focus();
+        this.coreRadioButton?.inputElement.nativeElement.focus();
     }
 
     /** method to select radio button */

@@ -268,7 +268,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     /** @hidden */
     zoomClicked(event: Event): void {
         event.preventDefault();
-        this.elementRef().nativeElement.focus();
+        this._elementRef.nativeElement.focus();
         this.zoomGlyphClicked.next();
     }
 
@@ -346,7 +346,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
             }
 
             if (option === ALTER_ICON_OPTIONS.ALT) {
-                const altValue = this.elementRef().nativeElement.getAttribute('alt');
+                const altValue = this._elementRef.nativeElement.getAttribute('alt');
                 if (altValue) {
                     this.abbreviate = this._generateAbbreviation(altValue);
                     break;

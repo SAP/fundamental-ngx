@@ -7,8 +7,8 @@ import {
     ContentChildren,
     QueryList,
     AfterContentInit,
-    ChangeDetectorRef,
-    OnDestroy
+    OnDestroy,
+    ElementRef
 } from '@angular/core';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { startWith, takeUntil } from 'rxjs/operators';
@@ -48,14 +48,11 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
     objectIdentifierClass = true;
 
     /** @hidden */
-    @ContentChildren(LinkComponent)
-    linkComponents: QueryList<LinkComponent>;
+    @ContentChildren(LinkComponent, { read: ElementRef })
+    linkComponents: QueryList<ElementRef>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
-    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -76,7 +73,7 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
     }
 
     /** @hidden */
-    private _addIdentifierClass(link: LinkComponent): void {
-        link.elementRef().nativeElement.classList.add('fd-object-identifier__link');
+    private _addIdentifierClass(link: ElementRef): void {
+        link.nativeElement.classList.add('fd-object-identifier__link');
     }
 }

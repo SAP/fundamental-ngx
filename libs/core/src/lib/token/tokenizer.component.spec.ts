@@ -66,11 +66,11 @@ describe('TokenizerComponent', () => {
 
         await whenStable(fixture);
 
-        component.input.elementRef().nativeElement.focus();
+        component.input.nativeElement.focus();
         const event = new KeyboardEvent('keydown', {
             key: 'ArrowLeft'
         });
-        component.input.elementRef().nativeElement.dispatchEvent(event);
+        component.input.nativeElement.dispatchEvent(event);
 
         await whenStable(fixture);
 
@@ -78,26 +78,26 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handleKeyDown on ArrowLeft when last token is focused', () => {
-        spyOn(component.input.elementRef().nativeElement, 'focus');
+        spyOn(component.input.nativeElement, 'focus');
         spyOn(component, 'focusTokenElement');
         const event = new KeyboardEvent('keydown', {
             key: 'ArrowLeft'
         });
         component.handleKeyDown(event, component.tokenList.length - 1);
 
-        expect(component.input.elementRef().nativeElement.focus).not.toHaveBeenCalled();
+        expect(component.input.nativeElement.focus).not.toHaveBeenCalled();
         expect(component.focusTokenElement).toHaveBeenCalledWith(component.tokenList.length - 2);
     });
 
     it('should handleKeyDown on ArrowRight when last token is focused', () => {
-        spyOn(component.input.elementRef().nativeElement, 'focus');
+        spyOn(component.input.nativeElement, 'focus');
         spyOn(component, 'focusTokenElement');
         const event = new KeyboardEvent('keydown', {
             key: 'ArrowRight'
         });
         component.handleKeyDown(event, component.tokenList.length - 1);
 
-        expect(component.input.elementRef().nativeElement.focus).toHaveBeenCalled();
+        expect(component.input.nativeElement.focus).toHaveBeenCalled();
         expect(component.focusTokenElement).not.toHaveBeenCalled();
     });
 
@@ -232,7 +232,7 @@ describe('TokenizerComponent', () => {
         component.tokenList.forEach((token) => {
             spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         });
-        spyOn(component.input.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
+        spyOn(component.input.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
     });
 
     it('should handle ngAfterContentInit', () => {

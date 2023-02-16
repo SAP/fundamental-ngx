@@ -91,11 +91,11 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef<Element>,
+        private _elementRef: ElementRef<HTMLElement>,
         private changeDetectorRef: ChangeDetectorRef,
         @Inject('linkRouterTarget') readonly routerLink: RouterLink
     ) {
-        if (isDevMode() && this.elementRef().nativeElement.hasAttribute('fd-breadcrumb-link')) {
+        if (isDevMode() && this._elementRef.nativeElement.hasAttribute('fd-breadcrumb-link')) {
             console.warn('The fd-breadcrumb-link attribute is deprecated. Please use fd-link instead.');
         }
     }
