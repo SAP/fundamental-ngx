@@ -130,7 +130,7 @@ export class TableComponent implements AfterViewInit, OnDestroy, FdTable {
 
     /** @hidden */
     _onRowKeydown(event: KeyboardEvent, tableRow: TableRowDirective): void {
-        if (!event.defaultPrevented && KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
+        if (!event.defaultPrevented && KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW]) && !event.altKey) {
             const dir = KeyUtil.isKeyCode(event, DOWN_ARROW) ? 1 : -1;
             const rows = dir === 1 ? this._rows.toArray() : this._rows.toArray().reverse();
             const currentRowIndex = rows.findIndex((row) => row === tableRow);
@@ -159,7 +159,7 @@ export class TableComponent implements AfterViewInit, OnDestroy, FdTable {
     /** @hidden being triggered by TableCellDirective whenever it's clicked */
     _onCellKeydown(event: KeyboardEvent, cell: TableCellDirective): void {
         const cellElement = cell.elementRef.nativeElement;
-        if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
+        if (!event.defaultPrevented && KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW]) && !event.altKey) {
             event.preventDefault();
             const data = cell.getCellPosition();
             if (!data) {
