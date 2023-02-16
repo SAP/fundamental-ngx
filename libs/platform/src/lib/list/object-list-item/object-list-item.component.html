@@ -114,7 +114,8 @@
         class="fd-list__form-item"
         *ngIf="(selectionMode === 'multi' || selectionMode === 'single') && !rowSelection"
     >
-        <fd-checkbox *ngIf="selectionMode === 'multi'" role="checkbox" [(ngModel)]="_selected"> </fd-checkbox>
+        <fd-checkbox *ngIf="selectionMode === 'multi'" role="checkbox" [(ngModel)]="_selected" tabIndexValue="-1">
+        </fd-checkbox>
         <fd-radio-button
             *ngIf="selectionMode === 'single'"
             [value]="value"

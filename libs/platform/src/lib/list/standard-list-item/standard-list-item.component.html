@@ -156,6 +156,7 @@
             (click)="$event.stopPropagation()"
             [(ngModel)]="_selected"
             [ariaLabel]="ariaLabel"
+            tabIndexValue="-1"
             (ngModelChange)="_onCheckboxModelChange()"
             [attr.aria-selected]="_selected"
         >
