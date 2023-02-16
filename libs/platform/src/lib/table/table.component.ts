@@ -1577,13 +1577,20 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             let replacedIndex;
             dir === 'up' ? (replacedIndex = currentRowIndex - 1) : (replacedIndex = currentRowIndex + 1);
 
-            if (this._tableRowsVisible[replacedIndex]) {
-                const dragDropEvent = {
-                    items: this._tableRowsVisible,
-                    draggedItemIndex: currentRowIndex,
-                    replacedItemIndex: replacedIndex
-                };
-                this._dragDropItemDrop(dragDropEvent);
+            const dragRow = this._tableRows.find((row) => row === this._tableRowsVisible[currentRowIndex]);
+            const dropRow = this._tableRows.find((row) => row === this._tableRowsVisible[replacedIndex]);
+            if (dragRow && dropRow) {
+                currentRowIndex = this._tableRows.indexOf(dragRow);
+                replacedIndex = this._tableRows.indexOf(dropRow);
+
+                [this._tableRows[currentRowIndex], this._tableRows[replacedIndex]] = [
+                    this._tableRows[replacedIndex],
+                    this._tableRows[currentRowIndex]
+                ];
+
+                this._onTableRowsChanged();
+                this._cdr.markForCheck();
+                this._emitRowsRearrangeEvent(dragRow, replacedIndex, currentRowIndex);
             }
         }
     }
