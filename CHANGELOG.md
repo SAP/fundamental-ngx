@@ -1,3 +1,12 @@
+# [0.39.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.41...v0.39.0-rc.42) (2023-02-16)
+
+
+### Bug Fixes
+
+* **core:** use static element ref property ([#9366](https://github.com/SAP/fundamental-ngx/issues/9366)) ([a9a0515](https://github.com/SAP/fundamental-ngx/commit/a9a05150328d69e990a1ce15f92c08749c872ef1))
+
+
+
 # [0.39.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.40...v0.39.0-rc.41) (2023-02-15)
 
 
