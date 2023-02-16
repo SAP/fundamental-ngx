@@ -5,7 +5,6 @@ import {
     getElementArrayLength,
     getElementClass,
     getText,
-    isElementDisplayed,
     pause,
     refreshPage,
     scrollIntoView,
@@ -61,6 +60,7 @@ describe('Message-box test suits', () => {
             await checkAcceptingMessage(openTemplateExample);
         });
         it('Should check working of message-boxes', async () => {
+            await refreshPage();
             await checkDismissingMessage(openTemplateExample);
         });
         it('should check losing message box by escape button', async () => {
@@ -76,6 +76,7 @@ describe('Message-box test suits', () => {
             await checkAcceptingMessage(basedComponentExample);
         });
         it('Should check working of message-boxes', async () => {
+            await refreshPage();
             await checkDismissingMessage(basedComponentExample);
         });
         it('should check losing message box by escape button', async () => {
@@ -156,22 +157,22 @@ describe('Message-box test suits', () => {
         await click(section + button);
         await waitForElDisplayed(messageBox);
         await sendKeys('Escape');
-
         await expect(await waitForNotPresent(messageBox)).toBe(true);
-        await refreshPage();
     }
 
     async function checkMessageBoxWorking(section: string): Promise<void> {
+        await scrollIntoView(section);
         const elementLength = await getElementArrayLength(section + button);
         for (let i = 0; i < elementLength; i++) {
             await click(section + button, i);
-            await expect(await isElementDisplayed(messageBox)).toBe(true, 'Message-Box is not displayed');
+            await expect(await waitForElDisplayed(messageBox)).toBe(true, 'Message-Box is displayed');
             await click(okButton);
-            await expect(await waitForNotPresent(messageBox)).toBe(true, 'Message-Box still displayed');
+            await expect(await waitForNotPresent(messageBox)).toBe(true, 'Message-Box is not displayed');
         }
     }
 
     async function checkAcceptingMessage(section: string): Promise<void> {
+        await scrollIntoView(section);
         await click(section + button);
         await pause(500);
         await click(okButton);
@@ -180,10 +181,12 @@ describe('Message-box test suits', () => {
             : await expect(await getText(section + resultTxt)).toContain('Ok', 'Result is not OK');
     }
     async function checkDismissingMessage(section: string): Promise<void> {
+        await scrollIntoView(section);
         await click(section + button);
         await pause(500);
+        await waitForElDisplayed(messageBox);
         await click(cancelButton);
-        await pause(500);
+        await waitForNotPresent(messageBox);
         section === basedObjectExample
             ? await expect(await getText(section + resultTxt)).toContain('Canceled', 'Result is not Canceled')
             : await expect(await getText(section + resultTxt)).toContain('Cancel', 'Result is not Cancel');
