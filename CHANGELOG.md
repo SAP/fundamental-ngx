@@ -1,3 +1,12 @@
+# [0.39.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.44...v0.39.0-rc.45) (2023-02-16)
+
+
+### Bug Fixes
+
+* **platform:** multi-input bugfixes ([#9390](https://github.com/SAP/fundamental-ngx/issues/9390)) ([bfe4fea](https://github.com/SAP/fundamental-ngx/commit/bfe4feaacb5a224a058641fb82c025f56b3b465c))
+
+
+
 # [0.39.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.43...v0.39.0-rc.44) (2023-02-16)
 
 
