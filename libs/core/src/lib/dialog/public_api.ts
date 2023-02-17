@@ -28,3 +28,4 @@ export * from './utils/dialog.animations';
 
 export * from './dialog.types';
 export * from './utils/dialog-overlay.container';
+export * from './tokens';

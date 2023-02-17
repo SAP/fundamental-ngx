@@ -9,7 +9,7 @@ import {
     QueryList
 } from '@angular/core';
 import { ObjectMarkerComponent } from '@fundamental-ngx/core/object-marker';
-import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { FD_OBJECT_STATUS_COMPONENT, ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -56,7 +56,7 @@ export class UploadCollectionStatusGroupDirective {}
 })
 export class UploadCollectionStatusItemDirective implements OnInit {
     /** @hidden */
-    constructor(@Optional() @Inject(ObjectStatusComponent) private _objectStatus: ObjectStatusComponent) {}
+    constructor(@Optional() @Inject(FD_OBJECT_STATUS_COMPONENT) private _objectStatus: ObjectStatusComponent) {}
 
     /** @hidden */
     ngOnInit(): void {
