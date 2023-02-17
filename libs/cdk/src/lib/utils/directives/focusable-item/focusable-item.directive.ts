@@ -84,7 +84,7 @@ export class FocusableItemDirective implements HasElementRef {
     private _tabbable = true;
 
     /** @hidden */
-    private _timerId: any | null;
+    private _timerId: ReturnType<typeof setTimeout> | null;
 
     /** @hidden */
     @HostBinding('attr.tabindex')
