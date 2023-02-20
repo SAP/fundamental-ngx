@@ -110,7 +110,7 @@
     "@wdio/cli": "7.16.16",
     "@wdio/jasmine-framework": "7.0.0",
     "@wdio/local-runner": "7.16.15",
-    "@wdio/sauce-service": "7.16.16",
+    "@wdio/sauce-service": "8.3.10",
     "@wdio/spec-reporter": "7.7.3",
     "ajv-formats": "2.1.1",
     "angular-cli-ghpages": "1.0.5",
