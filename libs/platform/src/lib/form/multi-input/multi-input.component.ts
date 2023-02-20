@@ -389,7 +389,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden */
     _onAutoComplete(event: AutoCompleteEvent): void {
-        if (!event.forceClose) {
+        if (!event.forceClose || !this._suggestions) {
             return;
         }
 
