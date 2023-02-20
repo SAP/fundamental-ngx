@@ -19,6 +19,7 @@
 <ng-template #tableTemplate>
     <div
         class="fdp-table__body fd-scrollbar"
+        [class.fdp-table__body--virtual-scroll]="!!virtualScroll"
         fdpTableScrollable
         #verticalScrollable="tableScrollable"
         [style.height]="bodyHeight"
@@ -137,10 +138,11 @@
                 [items]="_tableRows"
                 [draggable]="_rowsDraggable"
                 [replaceMode]="true"
+                [style.transform]="_virtualScrollTransform"
                 (itemDropped)="_dragDropItemDrop($event)"
             >
                 <ng-container
-                    *ngFor="let row of _tableRowsVisible; let rowIdx = index; trackBy: _rowTrackBy"
+                    *ngFor="let row of _tableRowsInViewport; let rowIdx = index; trackBy: _rowTrackBy"
                     [ngSwitch]="row.type"
                 >
                     <tr
@@ -346,6 +348,10 @@
                     </tr>
                 </ng-container>
             </tbody>
+
+            <tbody
+                *ngIf="virtualScroll"
+                [style.height.px]="_virtualScrollTotalHeight"></tbody>
         </table>
     </div>
 </ng-template>

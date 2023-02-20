@@ -265,6 +265,37 @@
 
 <separator></separator>
 
+
+<fd-docs-section-title id="virtual-scroll" componentName="table"> Virtual Scroll</fd-docs-section-title>
+    <p>
+        When having a large amount of data, it is recommended to use virtual scroll to improve performance. To enable virtual Scroll use next properties:
+    </p>
+
+    <ul>
+        <li>
+            <code>[virtualScroll]="true"</code> - enable virtual scroll
+        </li>
+        <li>
+            <code>[bodyHeight]="value"</code> - set height of the table body (viewport)
+        </li>
+        <li>
+            <code>[rowHeight]="value"</code> - set height of the table row if it different from default for the current content density
+        </li>
+    </ul>
+
+    <p>
+        Additionally you may set <code>renderAhead</code> input property to specify how many rows should be rendered ahead of the current viewport, default is 20.
+    </p>
+<description>
+
+</description>
+<component-example>
+    <fdp-platform-table-virtual-scroll-example></fdp-platform-table-virtual-scroll-example>
+</component-example>
+<code-example [exampleFiles]="virtualScrollTableFiles"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="p13" componentName="table"> Personalization Dialog.</fd-docs-section-title>
 <description>
     The p13n dialog control provides a dialog for tables that allows the user to personalize one or more of the

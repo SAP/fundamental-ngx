@@ -57,6 +57,7 @@ import { PlatformTableResponsiveColumnsExampleComponent } from './examples/platf
 import { PlatformTableInitialLoadingExampleComponent } from './examples/initial-loading/platform-table-initial-loading-example.component';
 import { PlatformTableColumnsNgforExampleComponent } from './examples/platform-table-columns-ngfor-example.component';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { PlatformTableVirtualScrollExampleComponent } from './examples/virtual-scroll/platform-table-virtual-scroll-example.component';
 
 const routes: Routes = [
     {
@@ -121,7 +122,8 @@ const routes: Routes = [
         PlatformTableEditableRowsExampleComponent,
         PlatformTableResponsiveColumnsExampleComponent,
         PlatformTableInitialLoadingExampleComponent,
-        PlatformTableColumnsNgforExampleComponent
+        PlatformTableColumnsNgforExampleComponent,
+        PlatformTableVirtualScrollExampleComponent
     ],
     providers: [
         RtlService,

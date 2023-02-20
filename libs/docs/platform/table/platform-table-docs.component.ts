@@ -48,6 +48,8 @@ const platformTableP13GroupSrc = 'platform-table-p13-group-example.component.htm
 const platformTableP13GroupTsSrc = 'platform-table-p13-group-example.component.ts';
 const platformTreeTableDefaultSrc = 'platform-table-tree-example.component.html';
 const platformTreeTableDefaultTsSrc = 'platform-table-tree-example.component.ts';
+const platformVirtualScrollTableDefaultSrc = 'virtual-scroll/platform-table-virtual-scroll-example.component.html';
+const platformVirtualScrollTableDefaultTsSrc = 'virtual-scroll/platform-table-virtual-scroll-example.component.ts';
 const platformTableNavigatableRowSrc = 'platform-table-navigatable-row-indicator-example.component.html';
 const platformTableNoOuterBordersSrc = 'platform-table-navigatable-row-indicator-example.component.html';
 const platformTableNavigatableRowTsSrc = 'platform-table-navigatable-row-indicator-example.component.ts';
@@ -382,6 +384,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-tree-example',
             component: 'PlatformTableTreeExampleComponent',
             name: 'platform-table-tree-example.component.ts'
+        }
+    ];
+
+    virtualScrollTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformVirtualScrollTableDefaultSrc),
+            fileName: 'platform-table-virtual-scroll-example',
+            name: 'platform-table-virtual-scroll-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformVirtualScrollTableDefaultTsSrc),
+            fileName: 'platform-table-virtual-scroll-example',
+            component: 'PlatformTableVirtualScrollExampleComponent',
+            name: 'platform-table-virtual-scroll-example.component.ts'
         }
     ];
 
