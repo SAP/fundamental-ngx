@@ -1,3 +1,12 @@
+# [0.39.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.49...v0.39.0-rc.50) (2023-02-20)
+
+
+### Features
+
+* **core,platform:** lightweight tokens ([#9400](https://github.com/SAP/fundamental-ngx/issues/9400)) ([005a50d](https://github.com/SAP/fundamental-ngx/commit/005a50dd49d2253e186cff87e1f94ef7c8927ec6))
+
+
+
 # [0.39.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.48...v0.39.0-rc.49) (2023-02-17)
 
 
