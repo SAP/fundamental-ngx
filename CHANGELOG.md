@@ -1,3 +1,17 @@
+# [0.39.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.52...v0.39.0-rc.53) (2023-02-20)
+
+
+### Features
+
+* **platform:** added id property to form generator items ([#9346](https://github.com/SAP/fundamental-ngx/issues/9346)) ([44f5427](https://github.com/SAP/fundamental-ngx/commit/44f54274d52c2048a1d6ad9be6d6a9b05fb69409))
+
+
+### BREAKING CHANGES
+
+* **platform:** BaseDynamicFormGeneratorControlInterface now has required 'id' field
+
+
+
 # [0.39.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.51...v0.39.0-rc.52) (2023-02-20)
 
 
