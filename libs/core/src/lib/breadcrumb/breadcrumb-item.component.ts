@@ -5,10 +5,10 @@ import {
     Component,
     ContentChild,
     ElementRef,
-    forwardRef,
     ViewEncapsulation
 } from '@angular/core';
-import { LinkComponent } from '@fundamental-ngx/core/link';
+import { FD_LINK_COMPONENT, LinkComponent } from '@fundamental-ngx/core/link';
+import { FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
 
 /**
  * Breadcrumb item directive. Must have child breadcrumb link directives.
@@ -25,12 +25,18 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
     host: {
         class: 'fd-breadcrumb__item'
     },
+    providers: [
+        {
+            provide: FD_BREADCRUMB_ITEM_COMPONENT,
+            useExisting: BreadcrumbItemComponent
+        }
+    ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BreadcrumbItemComponent implements AfterViewInit {
     /** @hidden */
-    @ContentChild(forwardRef(() => LinkComponent))
+    @ContentChild(FD_LINK_COMPONENT)
     breadcrumbLink: LinkComponent;
 
     /** In case there is no link in Item and breadcrumb item is non-interactive, we move whole item content to menu item title */

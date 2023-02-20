@@ -52,12 +52,12 @@
                     </div>
                 </li>
 
-                <li fd-menu-item [submenu]="versionSubmenu">
+                <!-- <li fd-menu-item [submenu]="versionSubmenu">
                     <div fd-menu-interactive>
                         <span fd-menu-title>Versions</span>
                         <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
                     </div>
-                </li>
+                </li> -->
             </fd-menu>
 
             <fd-submenu #themeSubmenu>
@@ -119,7 +119,7 @@
                 <ng-container *ngTemplateOutlet="i18nTemplate"></ng-container>
             </fd-menu>
 
-            <button
+            <!-- <button
                 fd-button
                 fdType="transparent"
                 [fdMenu]="true"
@@ -127,7 +127,7 @@
                 class="fd-shellbar__button fd-shellbar__button--menu fd-docs--toolbar__version fd-docs--theme-menu"
             >
                 v{{ version.id }}
-            </button>
+            </button> -->
 
             <fd-menu #versionsMenu [fillControlMode]="null" placement="bottom-end">
                 <ng-container *ngTemplateOutlet="versionsTemplate"></ng-container>

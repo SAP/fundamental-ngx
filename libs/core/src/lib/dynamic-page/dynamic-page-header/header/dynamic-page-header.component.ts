@@ -17,7 +17,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
-import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
+import { BreadcrumbComponent, FD_BREADCRUMB_COMPONENT } from '@fundamental-ngx/core/breadcrumb';
 
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageService } from '../../dynamic-page.service';
@@ -65,7 +65,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     subtitleWrap = false;
 
     /** @hidden */
-    @ContentChild(BreadcrumbComponent)
+    @ContentChild(FD_BREADCRUMB_COMPONENT)
     _breadcrumbComponent: BreadcrumbComponent;
 
     /** @hidden */

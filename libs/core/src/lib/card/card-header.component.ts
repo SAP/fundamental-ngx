@@ -11,7 +11,7 @@ import {
     OnChanges
 } from '@angular/core';
 
-import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent, FD_AVATAR_COMPONENT } from '@fundamental-ngx/core/avatar';
 
 import { CLASS_NAME } from './constants';
 import { CardSubtitleDirective } from './card-subtitle.directive';
@@ -45,7 +45,7 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
     class: string;
 
     /** @hidden */
-    @ContentChild(AvatarComponent)
+    @ContentChild(FD_AVATAR_COMPONENT)
     _avatar: AvatarComponent;
 
     /** @hidden */

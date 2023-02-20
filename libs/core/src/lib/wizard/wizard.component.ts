@@ -18,7 +18,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { DialogBodyComponent } from '@fundamental-ngx/core/dialog';
+import { DialogBodyComponent, FD_DIALOG_BODY_COMPONENT } from '@fundamental-ngx/core/dialog';
 import { scrollTop } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { WizardStepComponent } from './wizard-step/wizard-step.component';
@@ -149,7 +149,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         private _elRef: ElementRef,
         private readonly _cdRef: ChangeDetectorRef,
         @Inject(FD_LANGUAGE) _language$: Observable<FdLanguage>,
-        @Optional() private _dialogBodyComponent: DialogBodyComponent
+        @Optional() @Inject(FD_DIALOG_BODY_COMPONENT) private _dialogBodyComponent: DialogBodyComponent
     ) {
         const sub = _language$.subscribe((lang) => {
             // set ariaLabel only if it's not applied manually

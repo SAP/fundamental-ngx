@@ -21,8 +21,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
+import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
+import { FD_RADIO_BUTTON_COMPONENT, RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { ListLinkDirective } from '../directives/list-link.directive';
 import { merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
@@ -31,9 +31,10 @@ import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/cdk/uti
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { FD_LIST_UNREAD_INDICATOR } from '../list-component.token';
 import { ListFocusItem } from '../list-focus-item.model';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ListUnreadIndicator } from '../list-unread-indicator.interface';
+import { FD_LIST_LINK_DIRECTIVE } from '../tokens';
 
 let listItemUniqueId = 0;
 
@@ -129,7 +130,7 @@ export class ListItemComponent
     link = false;
 
     /** @hidden */
-    @ContentChild(RadioButtonComponent)
+    @ContentChild(FD_RADIO_BUTTON_COMPONENT)
     set radio(value: RadioButtonComponent) {
         this._radio = value;
         if (this._radio && this._radio.tabIndex == null) {
@@ -141,7 +142,7 @@ export class ListItemComponent
     }
 
     /** @hidden */
-    @ContentChild(CheckboxComponent)
+    @ContentChild(FD_CHECKBOX_COMPONENT)
     set checkbox(value: CheckboxComponent) {
         this._checkbox = value;
         if (this._checkbox && this._checkbox.tabIndexValue == null) {
@@ -153,11 +154,11 @@ export class ListItemComponent
     }
 
     /** @hidden */
-    @ContentChildren(ListLinkDirective)
+    @ContentChildren(FD_LIST_LINK_DIRECTIVE)
     linkDirectives: QueryList<ListLinkDirective>;
 
     /** @hidden */
-    @ContentChildren(ButtonComponent, { descendants: true })
+    @ContentChildren(FD_BUTTON_COMPONENT, { descendants: true })
     buttons: QueryList<ButtonComponent>;
 
     /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */

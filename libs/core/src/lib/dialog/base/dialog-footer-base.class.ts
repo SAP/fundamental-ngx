@@ -2,7 +2,7 @@ import { AfterContentInit, ContentChildren, Directive, QueryList, TemplateRef } 
 import { startWith } from 'rxjs/operators';
 
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import { ButtonBarComponent, FD_BUTTON_BAR_COMPONENT } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 @Directive()
@@ -15,7 +15,7 @@ export abstract class DialogFooterBase implements AfterContentInit {
     customTemplates: QueryList<TemplateDirective>;
 
     /** @hidden */
-    @ContentChildren(ButtonBarComponent)
+    @ContentChildren(FD_BUTTON_BAR_COMPONENT)
     buttons: QueryList<ButtonBarComponent>;
 
     /** @hidden */

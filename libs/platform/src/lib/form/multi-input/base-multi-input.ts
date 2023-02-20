@@ -179,9 +179,9 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
 
-    /** @hidden Emits event when the addon button is clicked. */
+    /** Emits event when the addon button is clicked. */
     @Output()
-    readonly addOnButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+    readonly addOnButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
 
     /** @hidden */
     @ViewChild(FdpListComponent)
@@ -394,7 +394,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
                 return;
             }
             // Focus on the first item in dropdown.
-            this.listComponent._setCurrentActiveItemIndex(0);
+            this.listComponent?._setCurrentActiveItemIndex(0);
             this.listComponent?.listItems.first.focus();
         });
     }

@@ -7,11 +7,12 @@ import {
     ViewEncapsulation,
     OnChanges,
     OnInit,
-    Optional
+    Optional,
+    Inject
 } from '@angular/core';
 import { applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { BasePopoverClass, FD_POPOVER_COMPONENT } from '@fundamental-ngx/core/popover';
 
 @Component({
     selector: 'fd-notification-group',
@@ -33,7 +34,10 @@ export class NotificationGroupComponent implements OnChanges, OnInit, CssClassBu
     width: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, @Optional() private _popover: PopoverComponent) {
+    constructor(
+        private _elementRef: ElementRef,
+        @Optional() @Inject(FD_POPOVER_COMPONENT) private _popover: BasePopoverClass
+    ) {
         if (this._popover) {
             this._popover.focusTrapped = true;
             this._popover.focusAutoCapture = true;

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { WizardDialogGeneratorService } from '@fundamental-ngx/platform/wizard-generator';
@@ -27,7 +27,8 @@ let componentExampleUniqueId = 0;
         DialogService,
         WizardDialogGeneratorService
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComponentExampleComponent implements OnInit {
     @Input()

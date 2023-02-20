@@ -278,8 +278,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     }
 
     /** @hidden */
-    addOnButtonClick(): void {
-        this.addOnButtonClicked.emit();
+    addOnButtonClick(event: Event): void {
+        this.addOnButtonClicked.emit(event);
         if (isFunction(this.addOnButtonClickFn)) {
             this.addOnButtonClickFn();
             return;
@@ -389,7 +389,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden */
     _onAutoComplete(event: AutoCompleteEvent): void {
-        if (!event.forceClose) {
+        if (!event.forceClose || !this._suggestions) {
             return;
         }
 

@@ -8,6 +8,7 @@ import {
     OnInit
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder, NullableObject, Nullable } from '@fundamental-ngx/cdk/utils';
+import { FD_OBJECT_STATUS_COMPONENT } from './tokens';
 
 export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
 
@@ -32,6 +33,12 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
     styleUrls: ['./object-status.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: FD_OBJECT_STATUS_COMPONENT,
+            useExisting: ObjectStatusComponent
+        }
+    ],
     host: {
         '[attr.tabindex]': 'clickable ? 0 : -1'
     }

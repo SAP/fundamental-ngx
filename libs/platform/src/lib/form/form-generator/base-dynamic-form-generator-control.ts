@@ -8,6 +8,7 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from './provi
 export interface BaseDynamicFormGeneratorControlInterface {
     formItem: PreparedDynamicFormFieldItem;
     name: string;
+    id: string;
     form: FormGroup;
     formField: PlatformFormField;
 }
@@ -23,6 +24,11 @@ export abstract class BaseDynamicFormGeneratorControl implements BaseDynamicForm
      * @description @see DynamicFormItem.
      */
     @Input() formItem: PreparedDynamicFormFieldItem;
+
+    /**
+     * @description Id of the control.
+     */
+    @Input() id: string;
 
     /**
      * @description Represents form control name.

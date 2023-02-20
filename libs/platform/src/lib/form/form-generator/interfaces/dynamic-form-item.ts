@@ -33,6 +33,12 @@ export type DynamicFormItem = DynamicFormFieldGroup | DynamicFormFieldItem;
 export interface DynamicFormFieldGroup {
     /**
      * @description
+     * ID of the form item, if not provided, name will be used instead
+     */
+    id?: string;
+
+    /**
+     * @description
      * Name of the form item in form.
      */
     name: string;
@@ -80,6 +86,12 @@ export interface DynamicFormFieldItem {
      * Additional set of options that can affect UI of the form item form control.
      */
     controlType?: InputType;
+
+    /**
+     * @description
+     * ID of the form item, if not provided, name will be used instead
+     */
+    id?: string;
 
     /**
      * @description
