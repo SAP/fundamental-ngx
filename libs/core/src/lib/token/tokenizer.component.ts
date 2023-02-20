@@ -504,6 +504,7 @@ export class TokenizerComponent
         this.handleTokenClickSubscriptions();
         this.previousTokenCount = this.tokenList.length;
         this.tokenList.forEach((token) => token._setTotalCount(this.tokenList.length));
+        this._cdRef.markForCheck();
     }
 
     /** @hidden */

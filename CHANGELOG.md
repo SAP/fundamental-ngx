@@ -1,3 +1,48 @@
+# [0.39.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.53...v0.39.0-rc.54) (2023-02-20)
+
+
+### Bug Fixes
+
+* **platform:** multi input dh fixes ([#9418](https://github.com/SAP/fundamental-ngx/issues/9418)) ([f059fbe](https://github.com/SAP/fundamental-ngx/commit/f059fbe3db08cc8a05c8d34813703c0d19b2ca48))
+
+
+
+# [0.39.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.52...v0.39.0-rc.53) (2023-02-20)
+
+
+### Features
+
+* **platform:** added id property to form generator items ([#9346](https://github.com/SAP/fundamental-ngx/issues/9346)) ([44f5427](https://github.com/SAP/fundamental-ngx/commit/44f54274d52c2048a1d6ad9be6d6a9b05fb69409))
+
+
+### BREAKING CHANGES
+
+* **platform:** BaseDynamicFormGeneratorControlInterface now has required 'id' field
+
+
+
+# [0.39.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.51...v0.39.0-rc.52) (2023-02-20)
+
+
+### Features
+
+* **platform:** table role feed ([#9416](https://github.com/SAP/fundamental-ngx/issues/9416)) ([c60863d](https://github.com/SAP/fundamental-ngx/commit/c60863dc81ae4809170217cdb4d611d3e3656500))
+
+
+
+# [0.39.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.50...v0.39.0-rc.51) (2023-02-20)
+
+
+
+# [0.39.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.49...v0.39.0-rc.50) (2023-02-20)
+
+
+### Features
+
+* **core,platform:** lightweight tokens ([#9400](https://github.com/SAP/fundamental-ngx/issues/9400)) ([005a50d](https://github.com/SAP/fundamental-ngx/commit/005a50dd49d2253e186cff87e1f94ef7c8927ec6))
+
+
+
 # [0.39.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.48...v0.39.0-rc.49) (2023-02-17)
 
 

@@ -6,7 +6,7 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-notification-actions',
@@ -20,6 +20,6 @@ export class NotificationActionsComponent {
     fdNotificationActionsClass = true;
 
     /** @hidden */
-    @ContentChildren(ButtonComponent)
+    @ContentChildren(FD_BUTTON_COMPONENT)
     buttons: QueryList<ButtonComponent>;
 }

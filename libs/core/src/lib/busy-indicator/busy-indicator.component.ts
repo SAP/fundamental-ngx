@@ -10,6 +10,7 @@ import {
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { TAB } from '@angular/cdk/keycodes';
+import { FD_BUSY_INDICATOR_COMPONENT } from './tokens';
 
 export type BusyIndicatorSize = 's' | 'm' | 'l';
 
@@ -19,6 +20,12 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
     styleUrls: ['./busy-indicator.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: FD_BUSY_INDICATOR_COMPONENT,
+            useExisting: BusyIndicatorComponent
+        }
+    ],
     host: {
         '[attr.role]': "loading ? 'progressbar' : 'presentation'",
         '[attr.tabindex]': 'loading ? 0 : -1',

@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
@@ -110,7 +110,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     click: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
     /** @hidden */
-    @ContentChild(IconComponent)
+    @ContentChild(FD_ICON_COMPONENT)
     icon: IconComponent;
 
     /** Access child element, for checking link content*/

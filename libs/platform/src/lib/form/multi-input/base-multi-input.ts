@@ -394,7 +394,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
                 return;
             }
             // Focus on the first item in dropdown.
-            this.listComponent._setCurrentActiveItemIndex(0);
+            this.listComponent?._setCurrentActiveItemIndex(0);
             this.listComponent?.listItems.first.focus();
         });
     }

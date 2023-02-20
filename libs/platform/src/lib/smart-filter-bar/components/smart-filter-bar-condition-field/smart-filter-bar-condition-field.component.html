@@ -1,6 +1,7 @@
 <ng-container [formGroup]="form">
     <ng-container [formGroupName]="formGroupName">
         <fdp-multi-input
+            [id]="id"
             [addOnButtonClickFn]="openConditionsDialog"
             [autofocus]="true"
             [dataSource]="formItem.choices || []"

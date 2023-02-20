@@ -7,6 +7,7 @@ import {
     ContentChildren,
     ElementRef,
     HostBinding,
+    Inject,
     Input,
     OnDestroy,
     Optional,
@@ -26,7 +27,10 @@ import { DynamicPageService } from './dynamic-page.service';
 import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
 import { TabListComponent } from '@fundamental-ngx/core/tabs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { FlexibleColumnLayoutComponent } from '@fundamental-ngx/core/flexible-column-layout';
+import {
+    FD_FLEXIBLE_COLUMN_LAYOUT_COMPONENT,
+    FlexibleColumnLayoutComponent
+} from '@fundamental-ngx/core/flexible-column-layout';
 
 import { asyncScheduler, fromEvent, Observable, startWith, Subject } from 'rxjs';
 import { debounceTime, map, observeOn, takeUntil } from 'rxjs/operators';
@@ -130,7 +134,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         private _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2,
         private _dynamicPageService: DynamicPageService,
-        @Optional() private _columnLayout: FlexibleColumnLayoutComponent,
+        @Optional() @Inject(FD_FLEXIBLE_COLUMN_LAYOUT_COMPONENT) private _columnLayout: FlexibleColumnLayoutComponent,
         @Optional() private _dynamicPageWrapper: DynamicPageWrapperDirective
     ) {}
 

@@ -65,6 +65,7 @@ export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGenera
         <ng-container [formGroup]="form">
             <ng-container [formGroupName]="formGroupName">
                 <fdp-date-picker
+                    [id]="id"
                     [placeholder]="formItem.placeholder || formItem.message"
                     [name]="name"
                     [formControlName]="name"

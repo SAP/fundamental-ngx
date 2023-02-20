@@ -10,7 +10,7 @@ import {
     OnDestroy,
     ElementRef
 } from '@angular/core';
-import { LinkComponent } from '@fundamental-ngx/core/link';
+import { FD_LINK_COMPONENT } from '@fundamental-ngx/core/link';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -48,7 +48,7 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
     objectIdentifierClass = true;
 
     /** @hidden */
-    @ContentChildren(LinkComponent, { read: ElementRef })
+    @ContentChildren(FD_LINK_COMPONENT, { read: ElementRef })
     linkComponents: QueryList<ElementRef>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
