@@ -1,3 +1,12 @@
+# [0.39.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.54...v0.39.0-rc.55) (2023-02-20)
+
+
+### Bug Fixes
+
+* type error ([#9403](https://github.com/SAP/fundamental-ngx/issues/9403)) ([5a853fe](https://github.com/SAP/fundamental-ngx/commit/5a853fefdf3afa06d0e83af3b63613a71d4d033f))
+
+
+
 # [0.39.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.53...v0.39.0-rc.54) (2023-02-20)
 
 
