@@ -1,3 +1,12 @@
+# [0.39.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.51...v0.39.0-rc.52) (2023-02-20)
+
+
+### Features
+
+* **platform:** table role feed ([#9416](https://github.com/SAP/fundamental-ngx/issues/9416)) ([c60863d](https://github.com/SAP/fundamental-ngx/commit/c60863dc81ae4809170217cdb4d611d3e3656500))
+
+
+
 # [0.39.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.50...v0.39.0-rc.51) (2023-02-20)
 
 
