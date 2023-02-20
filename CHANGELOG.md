@@ -1,3 +1,12 @@
+# [0.39.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.53...v0.39.0-rc.54) (2023-02-20)
+
+
+### Bug Fixes
+
+* **platform:** multi input dh fixes ([#9418](https://github.com/SAP/fundamental-ngx/issues/9418)) ([f059fbe](https://github.com/SAP/fundamental-ngx/commit/f059fbe3db08cc8a05c8d34813703c0d19b2ca48))
+
+
+
 # [0.39.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.52...v0.39.0-rc.53) (2023-02-20)
 
 
