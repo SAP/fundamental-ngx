@@ -26,6 +26,12 @@ export class DynamicFormControlDirective implements OnInit {
     @Input() formItem: PreparedDynamicFormFieldItem;
 
     /**
+     * @description Represents form control id.
+     */
+    @Input()
+    id: string;
+
+    /**
      * @description Represents form control name.
      */
     @Input() name: string;
@@ -87,6 +93,7 @@ export class DynamicFormControlDirective implements OnInit {
         });
 
         componentRef.instance.formItem = this.formItem;
+        componentRef.instance.id = this.id; // This is also done from fdp-form-field
         componentRef.instance.name = this.name;
         componentRef.instance.form = this.form;
         componentRef.instance.formField = this.formField;

@@ -1,6 +1,7 @@
 <ng-container [formGroup]="form" *ngIf="formField">
     <ng-container [formGroupName]="formGroupName">
         <fdp-input
+            [id]="id"
             [placeholder]="placeholder"
             [name]="name"
             [type]="formItem.controlType || 'text'"
