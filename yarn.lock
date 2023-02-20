@@ -212,7 +212,7 @@
     "@angular-devkit/architect" "0.1501.2"
     rxjs "6.6.7"
 
-"@angular-devkit/core@15.0.4", "@angular-devkit/core@^15.0.0":
+"@angular-devkit/core@15.0.4":
   version "15.0.4"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-15.0.4.tgz#257ba1d76cd106216d0150f480d0062e726af996"
   integrity sha512-4ITpRAevd652SxB+qNesIQ9qfbm7wT5UBU5kJOPPwGL77I21g8CQpkmV1n5VSacPvC9Zbz90feOWexf7w7JzcA==
@@ -227,6 +227,17 @@
   version "15.1.2"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-15.1.2.tgz#e4767ad4365f84bcaff28aa04b4c6a78e5e72a61"
   integrity sha512-wkLZYvTZt30Ge6Z83Gxsr6mO1TIHCu3SImdE0zwW63EdU9o1NYkU74z1D9VUZ9Up7uHi1cHs/dssbxUuZ4eWOA==
+  dependencies:
+    ajv "8.12.0"
+    ajv-formats "2.1.1"
+    jsonc-parser "3.2.0"
+    rxjs "6.6.7"
+    source-map "0.7.4"
+
+"@angular-devkit/core@15.1.6", "@angular-devkit/core@^15.0.0":
+  version "15.1.6"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-15.1.6.tgz#61275ee83825fea0e24966bc450fc27e6d5c35c7"
+  integrity sha512-jGgxyRjecVf6lEyqDxz7ltMEndNPxIg720pk6r40fgsu0dU8w9vjJSJe7k0XdJiXVRcN6wZa/J5nO/xcwWVIsA==
   dependencies:
     ajv "8.12.0"
     ajv-formats "2.1.1"
@@ -4239,7 +4250,7 @@ ajv@8.11.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-ajv@8.12.0:
+ajv@8.12.0, ajv@^8.0.0, ajv@^8.11.0, ajv@^8.8.0:
   version "8.12.0"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.12.0.tgz#d1a0527323e22f53562c567c00991577dfbe19d1"
   integrity sha512-sRu1kpcO9yLtYxBKvqfTeh9KzZEwO3STyX1HT+4CaDzC6HpTGYhIhPIzj9XuKU7KYDwnaeh5hcOwjy1QuJzBPA==
@@ -4257,16 +4268,6 @@ ajv@^6.10.0, ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5:
     fast-deep-equal "^3.1.1"
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.4.1"
-    uri-js "^4.2.2"
-
-ajv@^8.0.0, ajv@^8.11.0, ajv@^8.8.0:
-  version "8.11.2"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.11.2.tgz#aecb20b50607acf2569b6382167b65a96008bb78"
-  integrity sha512-E4bfmKAhGiSTvMfL1Myyycaub+cUEU2/IvpylXkUu7CHBkBj1f/ikdzbD7YQ6FKUbixDxeYvB/xY4fvyroDlQg==
-  dependencies:
-    fast-deep-equal "^3.1.1"
-    json-schema-traverse "^1.0.0"
-    require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
 allure-js-commons@^1.3.2:
