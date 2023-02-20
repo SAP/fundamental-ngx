@@ -33,6 +33,7 @@ import { POPOVER_COMPONENT } from './popover.interface';
 import { PopoverMobileComponent } from './popover-mobile/popover-mobile.component';
 import { PopoverMobileModule } from './popover-mobile/popover-mobile.module';
 import { PopoverChildContent } from './popover-child-content.interface';
+import { FD_POPOVER_COMPONENT } from './tokens';
 
 export const SELECT_CLASS_NAMES = {
     selectControl: 'fd-select__control'
@@ -50,7 +51,13 @@ let cdkPopoverUniqueId = 0;
     templateUrl: './popover.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [PopoverService],
+    providers: [
+        PopoverService,
+        {
+            provide: FD_POPOVER_COMPONENT,
+            useExisting: PopoverComponent
+        }
+    ],
     host: {
         class: 'fd-popover-custom',
         '[class.fd-popover-custom--mobile]': 'mobile',

@@ -1,4 +1,5 @@
 import { Component, ElementRef, Optional } from '@angular/core';
+import { FD_DIALOG_BODY_COMPONENT } from '../tokens';
 
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogRef } from '../utils/dialog-ref.class';
@@ -20,7 +21,13 @@ import { DialogRef } from '../utils/dialog-ref.class';
         '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig.verticalPadding',
         '[class.fd-dialog__body--no-horizontal-padding]': '!dialogConfig.horizontalPadding',
         '[style.min-height]': 'dialogConfig.bodyMinHeight'
-    }
+    },
+    providers: [
+        {
+            provide: FD_DIALOG_BODY_COMPONENT,
+            useExisting: DialogBodyComponent
+        }
+    ]
 })
 export class DialogBodyComponent {
     /** @hidden */

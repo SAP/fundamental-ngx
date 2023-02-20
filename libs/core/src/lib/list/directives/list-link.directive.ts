@@ -1,11 +1,18 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Subject } from 'rxjs';
+import { FD_LIST_LINK_DIRECTIVE } from '../tokens';
 
 @Directive({
     selector: '[fd-list-link], [fdListLink]',
     host: {
         '[attr.tabindex]': '-1'
-    }
+    },
+    providers: [
+        {
+            provide: FD_LIST_LINK_DIRECTIVE,
+            useExisting: ListLinkDirective
+        }
+    ]
 })
 export class ListLinkDirective implements OnChanges {
     /** Defines if navigation indicator arrow should be included inside list item */

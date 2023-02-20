@@ -1,6 +1,7 @@
 import {
     Directive,
     ElementRef,
+    Inject,
     Input,
     OnChanges,
     OnDestroy,
@@ -8,11 +9,12 @@ import {
     Optional,
     Self,
     SimpleChanges,
-    TemplateRef
+    TemplateRef,
+    Type
 } from '@angular/core';
 import { PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
 import { BasePopoverClass } from '@fundamental-ngx/core/popover';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_ICON_COMPONENT } from '@fundamental-ngx/core/icon';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 const INLINE_HELP_CLASS = 'fd-popover__body--inline-help fd-inline-help__content';
@@ -65,7 +67,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     constructor(
         private _popoverService: PopoverService,
         private _elementRef: ElementRef,
-        @Optional() @Self() private _icon: IconComponent
+        @Optional() @Self() @Inject(FD_ICON_COMPONENT) private _icon: Type<any>
     ) {
         super();
     }

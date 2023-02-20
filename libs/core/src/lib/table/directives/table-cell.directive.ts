@@ -6,10 +6,9 @@ import {
     Input,
     QueryList,
     ContentChildren,
-    forwardRef,
     inject
 } from '@angular/core';
-import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
 import { CellFocusedEventAnnouncer, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { BooleanInput } from '@angular/cdk/coercion';
 
@@ -80,7 +79,7 @@ export class TableCellDirective implements AfterContentInit {
     }
 
     /** @hidden */
-    @ContentChildren(forwardRef(() => CheckboxComponent))
+    @ContentChildren(FD_CHECKBOX_COMPONENT)
     _checkboxes: QueryList<CheckboxComponent>;
 
     /** @hidden */
