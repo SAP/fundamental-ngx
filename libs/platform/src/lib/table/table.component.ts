@@ -445,20 +445,20 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     cellFocusedEventAnnouncer: CellFocusedEventAnnouncer = this._defaultCellFocusedEventAnnouncer;
 
     /** Whether to show only visible rows in matter of performance
-      * false by default, when true setting bodyHeight and rowHeight is required.
-      */
+     * false by default, when true setting bodyHeight and rowHeight is required.
+     */
     @Input()
     virtualScroll = false;
 
     /** Height of the row, required for the virtualScroll,
-      * default is 44px in cozy, 32px in compact and 24px in condensed (set automatically)
-      */
+     * default is 44px in cozy, 32px in compact and 24px in condensed (set automatically)
+     */
     @Input()
     rowHeight = ROW_HEIGHT.get(ContentDensityMode.COZY)!;
 
-    /** Cashe size for the virtualScroll */
+    /** Cache size for the virtualScroll, default is 40 in each direction */
     @Input()
-    renderAhead = 20;
+    renderAhead = 40;
 
     /** Event emitted when current preset configuration has been changed. */
     @Output()
@@ -868,6 +868,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _focusinTimerId;
 
     /** @hidden */
+    private _virtualScrollCache = { startNodeIndex: -1, visibleNodeCount: -1, totalNodeCount: -1 };
+
+    /** @hidden */
     private _rowHeightManuallySet = false;
 
     /** @hidden */
@@ -963,10 +966,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             this._rowHeightManuallySet = true;
         }
 
-        if (
-            this.virtualScroll &&
-            (changes['rowHeight'] || changes['virtualScroll'] || changes['renderAhead'])
-        ) {
+        if (this.virtualScroll && (changes['rowHeight'] || changes['virtualScroll'] || changes['renderAhead'])) {
             this._calculateVirtualScrollRows();
         }
     }
@@ -2006,19 +2006,31 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             return;
         }
 
-        this._virtualScrollTotalHeight = this._tableRowsVisible.length * this.rowHeight;
+        const totalNodeCount = this._tableRowsVisible.length;
 
-        const scrollTop = Math.max(0, this.verticalScrollable.getScrollTop() - this._tableRowsInViewport.length * this.rowHeight);
-        const scrollTopCorrection = scrollTop ? this._tableRowsInViewport.length * this.rowHeight : 0;
-
-        let startNodeIndex = Math.floor(scrollTop / this.rowHeight) - this.renderAhead;
+        let startNodeIndex = Math.floor(this.verticalScrollable.getScrollTop() / this.rowHeight) - this.renderAhead;
         startNodeIndex = Math.max(0, startNodeIndex);
 
-        let visibleNodeCount = Math.ceil(this.tableContainer.nativeElement.clientHeight / this.rowHeight) + 2 * this.renderAhead;
-        visibleNodeCount = Math.min(this._tableRowsVisible.length - startNodeIndex, visibleNodeCount);
+        let visibleNodeCount =
+            Math.ceil(this.tableContainer.nativeElement.clientHeight / this.rowHeight) + 2 * this.renderAhead;
+        visibleNodeCount = Math.min(totalNodeCount - startNodeIndex, visibleNodeCount);
 
+        // Simple caching to avoid unnecessary re-renderings
+        const isCached =
+            startNodeIndex === this._virtualScrollCache.startNodeIndex &&
+            visibleNodeCount === this._virtualScrollCache.visibleNodeCount &&
+            totalNodeCount === this._virtualScrollCache.totalNodeCount &&
+            // On rows change, even if the total number of rows is the same, the row object will be different
+            this._tableRowsVisible[startNodeIndex] === this._tableRowsInViewport[0];
+
+        if (isCached) {
+            return;
+        }
+
+        this._virtualScrollCache = { startNodeIndex, visibleNodeCount, totalNodeCount };
+        this._virtualScrollTotalHeight = totalNodeCount * this.rowHeight - visibleNodeCount * this.rowHeight;
+        this._virtualScrollTransform = `translateY(` + startNodeIndex * this.rowHeight + `px)`;
         this._tableRowsInViewport = this._tableRowsVisible.slice(startNodeIndex, startNodeIndex + visibleNodeCount);
-        this._virtualScrollTransform = `translateY(` + (+scrollTopCorrection + startNodeIndex * this.rowHeight) + `px)`;
 
         this._cdr.detectChanges();
     }
@@ -2026,12 +2038,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     private _listenToRowHeightChange(): void {
         this._subscriptions.add(
-            this.contentDensityObserver
-                .pipe(filter(() => !this._rowHeightManuallySet))
-                .subscribe(contentDensity => {
-                    this.rowHeight = ROW_HEIGHT.get(contentDensity) ?? ROW_HEIGHT.get(ContentDensityMode.COZY)!;
-                    this._calculateVirtualScrollRows();
-                })
+            this.contentDensityObserver.pipe(filter(() => !this._rowHeightManuallySet)).subscribe((contentDensity) => {
+                this.rowHeight = ROW_HEIGHT.get(contentDensity) ?? ROW_HEIGHT.get(ContentDensityMode.COZY)!;
+                this._calculateVirtualScrollRows();
+            })
         );
     }
 
@@ -2039,14 +2049,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _listenToVirtualScroll(): void {
         this._subscriptions.add(
             this._tableScrollDispatcher
-                .scrolled()
-                .pipe(
-                    filter(() => this.virtualScroll && !!this.bodyHeight),
-                    debounceTime(50),
-                    filter((scrollable) => scrollable === this.verticalScrollable),
-                    map((scrollable) => scrollable.getElementRef().nativeElement),
-                    filter((element) => !!element),
-                )
+                .verticallyScrolled()
+                .pipe(filter(() => this.virtualScroll && !!this.bodyHeight))
                 .subscribe(() => {
                     this._calculateVirtualScrollRows();
                 })

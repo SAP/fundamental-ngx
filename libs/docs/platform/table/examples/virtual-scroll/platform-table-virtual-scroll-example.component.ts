@@ -92,33 +92,32 @@ function getNestedValue<T extends Record<string, any>>(key: string, object: T): 
 }
 
 // Example items
-const ITEMS: ExampleItem[] = new Array(500).fill(null).map((_, index) => (
-    {
-        name: 'Laptops ' + index,
-        children: [
-            {
-                name: 'Astro Laptop 1516',
-                description: 'pede malesuada',
-                price: {
-                    value: 489.01,
-                    currency: 'EUR'
-                },
-                status: 'Out of stock',
-                statusColor: 'negative',
-                date: new FdDate(2020, 2, 5),
-                verified: true
+const ITEMS: ExampleItem[] = new Array(5000).fill(null).map((_, index) => ({
+    name: 'Laptops ' + index,
+    children: [
+        {
+            name: 'Astro Laptop 1516',
+            description: 'pede malesuada',
+            price: {
+                value: 489.01,
+                currency: 'EUR'
             },
-            {
-                name: 'Benda Laptop 1408',
-                description: 'suspendisse potenti cras in',
-                price: {
-                    value: 243.49,
-                    currency: 'CNY'
-                },
-                status: 'Stocked on demand',
-                statusColor: 'informative',
-                date: new FdDate(2020, 9, 22),
-                verified: true
-            }
-        ]
-    }));
+            status: 'Out of stock',
+            statusColor: 'negative',
+            date: new FdDate(2020, 2, 5),
+            verified: true
+        },
+        {
+            name: 'Benda Laptop 1408',
+            description: 'suspendisse potenti cras in',
+            price: {
+                value: 243.49,
+                currency: 'CNY'
+            },
+            status: 'Stocked on demand',
+            statusColor: 'informative',
+            date: new FdDate(2020, 9, 22),
+            verified: true
+        }
+    ]
+}));

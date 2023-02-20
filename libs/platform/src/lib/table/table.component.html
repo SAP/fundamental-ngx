@@ -149,6 +149,7 @@
                         *ngSwitchCase="'group'"
                         fd-table-row
                         [attr.aria-rowindex]="rowIdx"
+                        [style.height.px]="rowHeight"
                         (click)="_emitRowActivate(row)"
                     >
                         <td
@@ -180,6 +181,7 @@
                         [activable]="rowsActivable || !!row.navigatable"
                         [active]="rowIdx === _navigatedRowIndex"
                         [highlightActive]="highlightNavigatedRow"
+                        [style.height.px]="rowHeight"
                         [attr.aria-selected]="row.checked"
                         [attr.aria-rowindex]="rowIdx"
                         [attr.aria-level]="isTreeTable ? row.level + 1 : null"
@@ -349,9 +351,7 @@
                 </ng-container>
             </tbody>
 
-            <tbody
-                *ngIf="virtualScroll"
-                [style.height.px]="_virtualScrollTotalHeight"></tbody>
+            <tbody *ngIf="virtualScroll" [style.height.px]="_virtualScrollTotalHeight"></tbody>
         </table>
     </div>
 </ng-template>
