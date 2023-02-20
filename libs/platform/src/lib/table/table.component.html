@@ -23,6 +23,7 @@
         #verticalScrollable="tableScrollable"
         [style.height]="bodyHeight"
         [class.fixed-height]="!!bodyHeight"
+        [attr.role]="pageScrolling ? 'feed' : null"
     >
         <table
             fd-table
