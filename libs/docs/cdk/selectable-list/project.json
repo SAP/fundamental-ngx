@@ -1,11 +1,11 @@
 {
-    "name": "docs-fn-selectable-list",
+    "name": "docs-cdk-selectable-list",
     "sourceRoot": "libs/docs/fn/selectable-list",
     "projectType": "library",
     "prefix": "fdp-doc",
     "targets": {
         "e2e-noop": {
-            "executor": "@fundamental-ngx/wdio:e2e-test",
+            "executor": "@fundamental-ngx/nx-plugin:e2e-test",
             "options": {
                 "e2eTsConfig": "libs/docs/fn/selectable-list/e2e/tsconfig.json",
                 "baseUrl": "http://localhost:4200",

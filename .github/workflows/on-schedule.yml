@@ -3,8 +3,8 @@ name: scheduled-daily-build
 on:
     workflow_dispatch:
     # schedule:
-        # Cron time is UTC, set to run at 22:00UTC (01:00 EST)
-        # - cron: '0 22 * * *'
+    # Cron time is UTC, set to run at 22:00UTC (01:00 EST)
+    # - cron: '0 22 * * *'
 
 env:
     NX_CLOUD_DISTRIBUTED_EXECUTION: true
@@ -72,9 +72,9 @@ jobs:
               with:
                   parallel-commands: |
                       npx nx run-many --target=build --exclude=docs --parallel=3
-                      npx nx run-many --target=test --exclude=workspace-tools --parallel=3
+                      npx nx run-many --target=test --exclude=nx-plugin --parallel=3
                       npx nx run-many --target=lint --exclude=core,platform,fn --parallel=3
-                      npx nx run-many workspace-tools:test --skip-nx-cache
+                      npx nx run-many nx-plugin:test --skip-nx-cache
     e2e_test:
         needs: initialize_cloud
         runs-on: ubuntu-latest

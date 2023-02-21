@@ -1,3 +1,12 @@
+# [0.39.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.56...v0.39.0-rc.57) (2023-02-21)
+
+
+### Bug Fixes
+
+* **ci,cdk,deps:** nx tools refactoring ([#9391](https://github.com/SAP/fundamental-ngx/issues/9391)) ([a8fd419](https://github.com/SAP/fundamental-ngx/commit/a8fd419fa3505285194d68966902b07654c090ce))
+
+
+
 # [0.39.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.55...v0.39.0-rc.56) (2023-02-20)
 
 
