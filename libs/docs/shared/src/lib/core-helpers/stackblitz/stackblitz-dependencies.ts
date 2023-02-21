@@ -1,5 +1,6 @@
 export class StackblitzDependencies {
     private static _libDependencies: string[] = [
+        '@fundamental-ngx/cdk',
         '@fundamental-ngx/platform',
         '@fundamental-ngx/core',
         '@fundamental-ngx/i18n'
