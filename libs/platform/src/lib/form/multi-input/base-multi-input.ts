@@ -424,7 +424,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         const map = new Map();
         map.set('query', text);
         map.set('limit', 12);
-        this.ds.match(map);
+        this.ds?.match(map);
 
         this.searchTermChange.emit(text);
 

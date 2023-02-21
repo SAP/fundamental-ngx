@@ -52,7 +52,7 @@ export class PlatformMultiInputDocsComponent {
             component: 'PlatformMultiInputCompactExampleComponent'
         }
     ];
-    multiInputGrouped: ExampleFile[] = [
+    multiInputValueHelp: ExampleFile[] = [
         {
             language: 'html',
             code: getAssetFromModuleAssets(platformMultiInputComplexExample),
@@ -65,7 +65,7 @@ export class PlatformMultiInputDocsComponent {
             component: 'PlatformMultiInputComplexExampleComponent'
         }
     ];
-    multiInputValueHelp: ExampleFile[] = [
+    multiInputGrouped: ExampleFile[] = [
         {
             language: 'html',
             code: getAssetFromModuleAssets(platformMultiInputGroupedExample),

@@ -28,7 +28,7 @@ export class SideNavigationCondensedObjectExampleComponent {
                 {
                     link: {
                         icon: 'action-settings',
-                        title: 'Link 3',
+                        title: 'Link With Children',
                         selected: true
                     },
                     list: {
