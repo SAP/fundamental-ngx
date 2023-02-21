@@ -319,6 +319,7 @@
         "fn-utils": "libs/fn/src/lib/utils",
         "i18n": "libs/i18n",
         "moment-adapter": "libs/moment-adapter",
+        "nx-plugin": "libs/nx-plugin",
         "platform": "libs/platform/src/lib",
         "platform-action-bar": "libs/platform/src/lib/action-bar",
         "platform-action-button-group": "libs/platform/src/lib/action-button-group",
@@ -349,8 +350,6 @@
         "platform-upload-collection": "libs/platform/src/lib/upload-collection",
         "platform-value-help-dialog": "libs/platform/src/lib/value-help-dialog",
         "platform-variant-management": "libs/platform/src/lib/variant-management",
-        "platform-wizard-generator": "libs/platform/src/lib/wizard-generator",
-        "plugins-wdio": "libs/plugins/wdio",
-        "workspace-tools": "tools"
+        "platform-wizard-generator": "libs/platform/src/lib/wizard-generator"
     }
 }

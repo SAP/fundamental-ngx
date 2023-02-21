@@ -6,13 +6,13 @@
     "buildTarget": "build-umbrella",
     "targets": {
         "prepare": {
-            "executor": "@fundamental-ngx/workspace-tools:prepare",
+            "executor": "@fundamental-ngx/nx-plugin:prepare-library",
             "options": {
                 "distPath": "dist/libs/cx"
             }
         },
         "compile-typedoc": {
-            "executor": "@fundamental-ngx/workspace-tools:compile-typedoc",
+            "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
             "options": {
                 "outputPath": "libs/docs/typedoc/cx"
             },
