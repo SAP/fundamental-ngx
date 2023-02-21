@@ -1,81 +1,98 @@
-<p>Array of Strings:</p>
+<div fd-form-item>
+    <label fd-form-label for="array-of-strings">Array of Strings:</label>
+    <fd-multi-combobox
+        [autoResize]="true"
+        name="array-of-strings"
+        inputId="array-of-strings"
+        placeholder="Type some text..."
+        [dataSource]="dataSourceStrings"
+        [selectedItems]="selectedItems1"
+        (selectionChange)="onSelect1($event)"
+    ></fd-multi-combobox>
+</div>
 
-<fd-multi-combobox
-    [autoResize]="true"
-    name="array-of-strings"
-    placeholder="Type some text..."
-    [dataSource]="dataSourceStrings"
-    [selectedItems]="selectedItems1"
-    (selectionChange)="onSelect1($event)"
-></fd-multi-combobox>
 <p>Selected: {{ selectedItems1 }}</p>
 
-<p>Array of Objects:</p>
+<div fd-form-item>
+    <label fd-form-label for="array-of-objects">Array of Objects:</label>
+    <fd-multi-combobox
+        [autoResize]="true"
+        name="array-of-objects"
+        inputId="array-of-objects"
+        placeholder="Type some text..."
+        [dataSource]="dataSource"
+        displayKey="name"
+        lookupKey="id"
+        [selectedItems]="selectedItems2"
+        (selectionChange)="onSelect2($event)"
+    ></fd-multi-combobox>
+</div>
 
-<fd-multi-combobox
-    [autoResize]="true"
-    name="array-of-objects"
-    placeholder="Type some text..."
-    [dataSource]="dataSource"
-    displayKey="name"
-    lookupKey="id"
-    [selectedItems]="selectedItems2"
-    (selectionChange)="onSelect2($event)"
-></fd-multi-combobox>
 <p>Selected: {{ selectedItems2 | json }}</p>
 
-<p>Observable:</p>
+<div fd-form-item>
+    <label fd-form-label for="observable">Observable:</label>
+    <fd-multi-combobox
+        [autoResize]="true"
+        name="observable"
+        inputId="observable"
+        placeholder="Type some text..."
+        [dataSource]="dataSourceOf"
+        displayKey="name"
+        lookupKey="id"
+        (selectionChange)="onSelect3($event)"
+        [selectedItems]="selectedItems3"
+    ></fd-multi-combobox>
+</div>
 
-<fd-multi-combobox
-    [autoResize]="true"
-    name="observable"
-    placeholder="Type some text..."
-    [dataSource]="dataSourceOf"
-    displayKey="name"
-    lookupKey="id"
-    (selectionChange)="onSelect3($event)"
-    [selectedItems]="selectedItems3"
-></fd-multi-combobox>
 <p>Selected: {{ selectedItems3 | json }}</p>
 
-<p>Data Source:</p>
+<div fd-form-item>
+    <label fd-form-label for="ds">Data Source:</label>
+    <fd-multi-combobox
+        [autoResize]="true"
+        name="ds"
+        inputId="ds"
+        placeholder="Type some text..."
+        [dataSource]="ds"
+        displayKey="name"
+        lookupKey="id"
+        (selectionChange)="onSelect4($event)"
+        [selectedItems]="selectedItems4"
+    ></fd-multi-combobox>
+</div>
 
-<fd-multi-combobox
-    [autoResize]="true"
-    name="ds"
-    placeholder="Type some text..."
-    [dataSource]="ds"
-    displayKey="name"
-    lookupKey="id"
-    (selectionChange)="onSelect4($event)"
-    [selectedItems]="selectedItems4"
-></fd-multi-combobox>
 <p>Selected: {{ selectedItems4 | json }}</p>
 
-<p>Data Source (Limitless):</p>
+<div fd-form-item>
+    <label fd-form-label for="dsLimitless">Data Source (Limitless):</label>
+    <fd-multi-combobox
+        [autoResize]="true"
+        name="dsLimitless"
+        inputId="dsLimitless"
+        placeholder="Type some text..."
+        [dataSource]="dsl"
+        displayKey="name"
+        lookupKey="id"
+        (selectionChange)="onSelect6($event)"
+        [selectedItems]="selectedItems6"
+        [limitless]="isLimitless"
+    ></fd-multi-combobox>
+</div>
 
-<fd-multi-combobox
-    [autoResize]="true"
-    name="dsLimitless"
-    placeholder="Type some text..."
-    [dataSource]="dsl"
-    displayKey="name"
-    lookupKey="id"
-    (selectionChange)="onSelect6($event)"
-    [selectedItems]="selectedItems6"
-    [limitless]="isLimitless"
-></fd-multi-combobox>
 <p>Limitless: {{ isLimitless }}</p>
 <p>Selected: {{ selectedItems6 | json }}</p>
 <button fd-button (click)="isLimitless = !isLimitless">Toggle Limitless</button>
 
-<p>Example with 'N more' label:</p>
-
-<fd-multi-combobox
-    name="standard"
-    placeholder="Type some text..."
-    [dataSource]="dataSourceStrings"
-    (selectionChange)="onSelect5($event)"
-    [selectedItems]="selectedItems5"
-></fd-multi-combobox>
+<div fd-form-item>
+    <label fd-form-label for="standard">Example with 'N more' label:</label>
+    <fd-multi-combobox
+        name="standard"
+        inputId="standard"
+        placeholder="Type some text..."
+        [dataSource]="dataSourceStrings"
+        (selectionChange)="onSelect5($event)"
+        [selectedItems]="selectedItems5"
+    ></fd-multi-combobox>
+</div>
 <p>Selected: {{ selectedItems5 }}</p>
