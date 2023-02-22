@@ -1,3 +1,12 @@
+# [0.39.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.58...v0.39.0-rc.59) (2023-02-22)
+
+
+### Bug Fixes
+
+* **docs:** core dialog examples initial focus targets ([#9434](https://github.com/SAP/fundamental-ngx/issues/9434)) ([4c98941](https://github.com/SAP/fundamental-ngx/commit/4c989410a384dc222355c37f8c9d6c48f1e500c1))
+
+
+
 # [0.39.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.57...v0.39.0-rc.58) (2023-02-22)
 
 
