@@ -187,7 +187,9 @@
   },
   "lint-staged": {
     "*": [
-      "yarn nx format:write --uncommitted",
+      "yarn nx format:write --uncommitted"
+    ],
+    "*.{js,ts,html,md,json,yml}": [
       "yarn eslint --fix"
     ]
   }

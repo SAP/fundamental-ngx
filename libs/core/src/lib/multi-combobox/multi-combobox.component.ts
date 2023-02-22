@@ -65,7 +65,7 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
         {
             directive: CvaDirective,
             // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-            inputs: ['id', 'placeholder', 'state', 'stateMessage', 'disabled', 'readonly', 'name']
+            inputs: ['id:inputId', 'placeholder', 'state', 'stateMessage', 'disabled', 'readonly', 'name']
         },
         {
             directive: DataSourceDirective,
