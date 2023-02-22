@@ -101,12 +101,7 @@
                 ariaLabel="Interested Emphasized"
             ></fd-button-bar>
 
-            <fd-button-bar
-                fdInitialFocus
-                label="Cancel"
-                (click)="dialog.dismiss('Cancel')"
-                ariaLabel="Cancel"
-            ></fd-button-bar>
+            <fd-button-bar label="Cancel" (click)="dialog.dismiss()" ariaLabel="Cancel"></fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>
