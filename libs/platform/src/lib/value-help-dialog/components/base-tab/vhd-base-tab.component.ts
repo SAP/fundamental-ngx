@@ -15,7 +15,7 @@ export class VhdBaseTab {
     @Input()
     tabTitle: string;
 
-    /** Mobile view */
+    /** Mobile view  */
     @Input()
     mobile = false;
 

@@ -31,6 +31,7 @@ import { TableColumnResizeService } from '../../table-column-resize.service';
  *  align="start">
  * </fdp-column>
  *
+ *
  * <fdp-column
  *  name="price"
  *  key="price.value">
