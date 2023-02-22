@@ -1,8 +1,9 @@
-import { Component, ElementRef, Optional } from '@angular/core';
+import { Component, ElementRef, Inject, Optional } from '@angular/core';
 import { FD_DIALOG_BODY_COMPONENT } from '../tokens';
 
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogRef } from '../utils/dialog-ref.class';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 
 /**
  * Applies fundamental layout and styling to the contents of a dialog body.
@@ -27,15 +28,19 @@ import { DialogRef } from '../utils/dialog-ref.class';
             provide: FD_DIALOG_BODY_COMPONENT,
             useExisting: DialogBodyComponent
         }
-    ]
+    ],
+    hostDirectives: [ScrollbarDirective]
 })
 export class DialogBodyComponent {
     /** @hidden */
     constructor(
         private _elRef: ElementRef,
         @Optional() public dialogConfig: DialogConfig,
-        @Optional() public dialogRef: DialogRef
-    ) {}
+        @Optional() public dialogRef: DialogRef,
+        @Inject(ScrollbarDirective) private _scrollbarDirective: ScrollbarDirective
+    ) {
+        this._scrollbarDirective.overrideTabindex = false;
+    }
 
     /** @hidden */
     elementRef(): ElementRef<any> {
