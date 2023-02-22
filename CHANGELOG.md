@@ -1,3 +1,12 @@
+# [0.39.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.57...v0.39.0-rc.58) (2023-02-22)
+
+
+### Bug Fixes
+
+* **docs,core:** beautify multi combobox docs ([#9422](https://github.com/SAP/fundamental-ngx/issues/9422)) ([2e923fb](https://github.com/SAP/fundamental-ngx/commit/2e923fb84e29c1507e16b765b5071bdefc11188d))
+
+
+
 # [0.39.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.56...v0.39.0-rc.57) (2023-02-21)
 
 
