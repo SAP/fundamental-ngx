@@ -1,3 +1,12 @@
+# [0.39.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.60...v0.39.0-rc.61) (2023-02-23)
+
+
+### Features
+
+* **core:** scrollbar now uses cdk scrollable ([#9436](https://github.com/SAP/fundamental-ngx/issues/9436)) ([a82ba3d](https://github.com/SAP/fundamental-ngx/commit/a82ba3d437d73f566502f3f7a765df07009b1000))
+
+
+
 # [0.39.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.59...v0.39.0-rc.60) (2023-02-23)
 
 
