@@ -21,7 +21,8 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
         '[class.fd-dialog__body]': 'true',
         '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig.verticalPadding',
         '[class.fd-dialog__body--no-horizontal-padding]': '!dialogConfig.horizontalPadding',
-        '[style.min-height]': 'dialogConfig.bodyMinHeight'
+        '[style.min-height]': 'dialogConfig.bodyMinHeight',
+        '[style.padding]': '"1rem"'
     },
     providers: [
         {
