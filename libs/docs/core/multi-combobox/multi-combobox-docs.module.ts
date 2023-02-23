@@ -14,6 +14,7 @@ import { MultiComboboxColumnsExampleComponent } from './examples/multi-combobox-
 import { MultiComboboxFormsExampleComponent } from './examples/multi-combobox-forms/multi-combobox-forms-example.component';
 import { MultiComboboxStatesExampleComponent } from './examples/multi-combobox-states/multi-combobox-states-example.component';
 import { MultiComboboxLoadingExampleComponent } from './examples/multi-combobox-loading/multi-combobox-loading-example.component';
+import { FormModule } from '@fundamental-ngx/core/form';
 
 const routes: Routes = [
     {
@@ -33,7 +34,8 @@ const routes: Routes = [
         MultiComboboxModule,
         FormsModule,
         ReactiveFormsModule,
-        BusyIndicatorModule
+        BusyIndicatorModule,
+        FormModule
     ],
     exports: [RouterModule],
     declarations: [
