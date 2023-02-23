@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import { ScrollbarComponent } from './scrollbar.component';
+import { ScrollbarDirective } from './scrollbar.directive';
 
 @NgModule({
-    declarations: [ScrollbarComponent],
-    imports: [CommonModule],
-    exports: [ScrollbarComponent]
+    imports: [ScrollbarDirective],
+    exports: [ScrollbarDirective]
 })
 export class ScrollbarModule {}
