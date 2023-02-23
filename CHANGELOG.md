@@ -1,3 +1,12 @@
+# [0.39.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.59...v0.39.0-rc.60) (2023-02-23)
+
+
+### Bug Fixes
+
+* **core:** fixed dialog body redundant elements ([#9435](https://github.com/SAP/fundamental-ngx/issues/9435)) ([5b6e275](https://github.com/SAP/fundamental-ngx/commit/5b6e275faa625895a62d4710fb4db5cf1bbd98dc))
+
+
+
 # [0.39.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.58...v0.39.0-rc.59) (2023-02-22)
 
 
