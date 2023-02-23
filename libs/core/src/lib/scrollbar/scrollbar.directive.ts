@@ -6,7 +6,7 @@ import scrollbarStyles from 'fundamental-styles/dist/js/scrollbar';
 export type ScrollbarOverflowOptions = 'auto' | 'scroll' | 'hidden';
 
 let scrollbarElementsQuantity = 0;
-let styleSheet: CSSStyleSheet;
+let styleSheet: CSSStyleSheet | undefined;
 
 /**
  * The scrollbar directive.
@@ -105,17 +105,17 @@ export class ScrollbarDirective implements OnDestroy {
         const platform = inject(PLATFORM_ID);
         if (!styleSheet && isPlatformBrowser(platform)) {
             styleSheet = new CSSStyleSheet();
-            styleSheet.replace(scrollbarStyles.cssSource).then(() => {
-                document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
-            });
+            styleSheet.replaceSync(scrollbarStyles.cssSource);
+            document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
         }
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         if (--scrollbarElementsQuantity === 0) {
-            styleSheet.replaceSync('');
+            styleSheet!.replaceSync('');
             document.adoptedStyleSheets = document.adoptedStyleSheets.filter((sheet) => sheet !== styleSheet);
+            styleSheet = undefined;
         }
     }
 
