@@ -2,6 +2,7 @@ import { Directive, ElementRef, HostBinding, inject, Input, OnDestroy, PLATFORM_
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { isPlatformBrowser } from '@angular/common';
 import scrollbarStyles from 'fundamental-styles/dist/js/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
 
 export type ScrollbarOverflowOptions = 'auto' | 'scroll' | 'hidden';
 
@@ -25,6 +26,7 @@ let styleSheet: CSSStyleSheet | undefined;
     host: {
         class: 'fd-scrollbar'
     },
+    hostDirectives: [CdkScrollable],
     standalone: true
 })
 export class ScrollbarDirective implements OnDestroy {
