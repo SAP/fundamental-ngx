@@ -285,7 +285,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             return;
         }
 
-        this.showList(!this.isOpen);
+        if (this.openDropdownOnAddOnClicked) {
+            this.showList(!this.isOpen);
+        }
     }
 
     /** @hidden */
