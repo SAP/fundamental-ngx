@@ -54,6 +54,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     }
 
     /** aria-label for form-control. */
+    @Input()
     ariaLabel: Nullable<string>;
 
     /** @hidden */
@@ -63,6 +64,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     }
 
     /** aria-label for form-control. */
+    @Input()
     ariaLabelledBy: Nullable<string>;
 
     /** @hidden */
