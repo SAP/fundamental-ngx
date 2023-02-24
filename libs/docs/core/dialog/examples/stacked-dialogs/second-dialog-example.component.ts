@@ -18,7 +18,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 
             <fd-dialog-footer>
                 <fd-button-bar
-                    fd-initial-focus
+                    fdkInitialFocus
                     fdType="emphasized"
                     label="Close"
                     (click)="dialogRef.close()"

@@ -1,7 +1,13 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { Directive, ElementRef, HostBinding, inject, Input, OnDestroy, PLATFORM_ID } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { isPlatformBrowser } from '@angular/common';
+import scrollbarStyles from 'fundamental-styles/dist/js/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
 
 export type ScrollbarOverflowOptions = 'auto' | 'scroll' | 'hidden';
+
+let scrollbarElementsQuantity = 0;
+let styleSheet: CSSStyleSheet | undefined;
 
 /**
  * The scrollbar directive.
@@ -15,23 +21,21 @@ export type ScrollbarOverflowOptions = 'auto' | 'scroll' | 'hidden';
  * <div fd-scrollbar [noHorizontalScroll]="true">
  * ```
  */
-@Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
-    selector: '[fd-scrollbar]',
-    template: ` <ng-content></ng-content>`,
+@Directive({
+    selector: '[fdScrollbar], [fd-scrollbar]',
     host: {
         class: 'fd-scrollbar'
     },
-    styleUrls: ['./scrollbar.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    hostDirectives: [CdkScrollable],
+    standalone: true
 })
-export class ScrollbarComponent {
+export class ScrollbarDirective implements OnDestroy {
     /** Whether overflow horizontal content should be hidden. */
     @Input()
     set noHorizontalScroll(value: BooleanInput) {
         this._noHorizontalScroll = coerceBooleanProperty(value);
     }
+
     get noHorizontalScroll(): boolean {
         return this._noHorizontalScroll;
     }
@@ -41,6 +45,7 @@ export class ScrollbarComponent {
     set noVerticalScroll(value: BooleanInput) {
         this._noVerticalScroll = coerceBooleanProperty(value);
     }
+
     get noVerticalScroll(): boolean {
         return this._noVerticalScroll;
     }
@@ -50,6 +55,7 @@ export class ScrollbarComponent {
     set alwaysVisible(value: BooleanInput) {
         this._alwaysVisible = coerceBooleanProperty(value);
     }
+
     get alwaysVisible(): boolean {
         return this._alwaysVisible;
     }
@@ -96,7 +102,24 @@ export class ScrollbarComponent {
     /**
      * @hidden
      */
-    constructor(private _elementRef: ElementRef<HTMLElement>) {}
+    constructor(private _elementRef: ElementRef<HTMLElement>) {
+        scrollbarElementsQuantity++;
+        const platform = inject(PLATFORM_ID);
+        if (!styleSheet && isPlatformBrowser(platform)) {
+            styleSheet = new CSSStyleSheet();
+            styleSheet.replaceSync(scrollbarStyles.cssSource);
+            document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        if (--scrollbarElementsQuantity === 0) {
+            styleSheet!.replaceSync('');
+            document.adoptedStyleSheets = document.adoptedStyleSheets.filter((sheet) => sheet !== styleSheet);
+            styleSheet = undefined;
+        }
+    }
 
     /** method to invoke scroll */
     scroll(options: ScrollToOptions): void {

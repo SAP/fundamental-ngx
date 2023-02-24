@@ -1,5 +1,5 @@
 <div class="fdp-menu-example">
-    <div style="height: 25rem; overflow: scroll" cdkScrollable>
+    <div style="height: 15rem" fdScrollbar>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et odio eu tellus vehicula pharetra. Interdum
             et malesuada fames ac ante ipsum primis in faucibus. In mi sem, sollicitudin a porta a, tempus non nibh.
@@ -12,7 +12,7 @@
             ut ipsum lobortis placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </p>
 
-        <button fd-button [fdpMenuTriggerFor]="scrollableMenu" label="Button example"></button>
+        <button fd-button [fdpMenuTriggerFor]="scrollableMenu" label="Button example" style="margin: 0 1rem"></button>
         <fdp-menu #scrollableMenu id="scrollable-menu">
             <fdp-menu-item>First Item</fdp-menu-item>
             <fdp-menu-item>Second Item</fdp-menu-item>

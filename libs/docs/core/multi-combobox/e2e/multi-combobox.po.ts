@@ -20,7 +20,7 @@ export class MultiComboboxPo extends CoreBaseComponentPo {
     dialogButton = this.dialog + ' .fd-button';
     dialogListItem = this.dialog + ' .fd-list__item[role="listitem"]';
     selectedDialogItem = this.dialog + ' .fd-list__item.is-selected .fd-list__title';
-    dialogInput = this.dialog + ' #mobile';
+    dialogInput = this.dialog + ' #mobile-input';
     showSelectedItemsBtn = this.dialog + ' .fd-margin-begin--tiny';
 
     async open(): Promise<void> {

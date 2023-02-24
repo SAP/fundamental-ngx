@@ -1,3 +1,39 @@
+# [0.39.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.60...v0.39.0-rc.61) (2023-02-23)
+
+
+### Features
+
+* **core:** scrollbar now uses cdk scrollable ([#9436](https://github.com/SAP/fundamental-ngx/issues/9436)) ([a82ba3d](https://github.com/SAP/fundamental-ngx/commit/a82ba3d437d73f566502f3f7a765df07009b1000))
+
+
+
+# [0.39.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.59...v0.39.0-rc.60) (2023-02-23)
+
+
+### Bug Fixes
+
+* **core:** fixed dialog body redundant elements ([#9435](https://github.com/SAP/fundamental-ngx/issues/9435)) ([5b6e275](https://github.com/SAP/fundamental-ngx/commit/5b6e275faa625895a62d4710fb4db5cf1bbd98dc))
+
+
+
+# [0.39.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.58...v0.39.0-rc.59) (2023-02-22)
+
+
+### Bug Fixes
+
+* **docs:** core dialog examples initial focus targets ([#9434](https://github.com/SAP/fundamental-ngx/issues/9434)) ([4c98941](https://github.com/SAP/fundamental-ngx/commit/4c989410a384dc222355c37f8c9d6c48f1e500c1))
+
+
+
+# [0.39.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.57...v0.39.0-rc.58) (2023-02-22)
+
+
+### Bug Fixes
+
+* **docs,core:** beautify multi combobox docs ([#9422](https://github.com/SAP/fundamental-ngx/issues/9422)) ([2e923fb](https://github.com/SAP/fundamental-ngx/commit/2e923fb84e29c1507e16b765b5071bdefc11188d))
+
+
+
 # [0.39.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.56...v0.39.0-rc.57) (2023-02-21)
 
 
