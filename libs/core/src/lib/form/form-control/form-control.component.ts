@@ -47,25 +47,25 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     @Input()
     class: string;
 
+    /** aria-label for form-control. */
+    @Input()
+    ariaLabel: Nullable<string>;
+
+    /** aria-label for form-control. */
+    @Input()
+    ariaLabelledBy: Nullable<string>;
+
     /** @hidden */
     @HostBinding('attr.aria-label')
     private get ariaLabelBinding(): string {
         return this.ariaLabelAttr || this.ariaLabel || '';
     }
 
-    /** aria-label for form-control. */
-    @Input()
-    ariaLabel: Nullable<string>;
-
     /** @hidden */
     @HostBinding('attr.aria-labelledby')
     private get ariaLabelledByBinding(): string {
         return this.ariaLabelledByAttr || this.ariaLabelledBy || '';
     }
-
-    /** aria-label for form-control. */
-    @Input()
-    ariaLabelledBy: Nullable<string>;
 
     /** @hidden */
     private _subscriptions = new Subscription();
