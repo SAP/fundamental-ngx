@@ -259,4 +259,13 @@ describe('MultiInputComponent', () => {
 
         expect(component.selected).toEqual([]);
     });
+
+    it('should not open dropdown when openDropdownOnAddOnClicked is false', () => {
+        spyOn(component.addOnButtonClicked, 'emit');
+        spyOn(component, 'openChangeHandle');
+        component.openDropdownOnAddOnClicked = false;
+        component._addOnButtonClicked(new MouseEvent('click'));
+        expect(component.addOnButtonClicked.emit).toHaveBeenCalled();
+        expect(component.openChangeHandle).not.toHaveBeenCalled();
+    });
 });
