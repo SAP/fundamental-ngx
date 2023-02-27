@@ -183,6 +183,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     @Input()
     limitless: boolean;
 
+    /** Whether to open the dropdown when the addon button is clicked. */
+    @Input()
+    openDropdownOnAddOnClicked = true;
+
     /** Event emitted when item is selected. */
     @Output()
     selectionChange = new EventEmitter<MultiComboboxSelectionChangeEvent>();
@@ -514,7 +518,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             this.searchTermChanged('');
         }
 
-        this.showList(!isOpen);
+        if (this.openDropdownOnAddOnClicked) {
+            this.showList(!isOpen);
+        }
 
         if (this.isOpen && this.listComponent) {
             this.listComponent.setItemActive(0);

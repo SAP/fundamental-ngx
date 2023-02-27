@@ -19,7 +19,7 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
 
             <fd-dialog-footer>
                 <fd-button-bar
-                    fd-initial-focus
+                    fdkInitialFocus
                     fdType="emphasized"
                     label="Open Second Dialog"
                     (click)="openDialog()"

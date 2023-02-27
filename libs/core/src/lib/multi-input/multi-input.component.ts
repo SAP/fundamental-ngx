@@ -114,6 +114,10 @@ export class MultiInputComponent
     @Input()
     dropdownValues: any[] = [];
 
+    /** Whether to open the dropdown when the addon button is clicked. */
+    @Input()
+    openDropdownOnAddOnClicked = true;
+
     /** Search term, or more specifically the value of the inner input field. */
     @Input()
     set searchTerm(value: string) {
@@ -688,7 +692,9 @@ export class MultiInputComponent
     /** @hidden */
     _addOnButtonClicked(event: Event): void {
         this.addOnButtonClicked.emit(event);
-        this.openChangeHandle(!this.open);
+        if (this.openDropdownOnAddOnClicked) {
+            this.openChangeHandle(!this.open);
+        }
     }
 
     /** @hidden */

@@ -16,6 +16,7 @@ import { PlatformMenuScrollingExampleComponent } from './examples/platform-menu-
 import { PlatformMenuXPositionExampleComponent } from './examples/platform-menu-x-position-example.component';
 import { PlatformMenuWithIconsExampleComponent } from './examples/platform-menu-with-icons-example.component';
 import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 
 const routes: Routes = [
     {
@@ -35,7 +36,8 @@ const routes: Routes = [
         PlatformMenuModule,
         ButtonModule,
         AvatarModule,
-        ScrollingModule
+        ScrollingModule,
+        ScrollbarDirective
     ],
     exports: [RouterModule],
     declarations: [
