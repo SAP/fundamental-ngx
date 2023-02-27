@@ -38,7 +38,7 @@
             [attr.aria-readonly]="this._cva.readonly"
             [glyphAriaLabel]="this._cva.ariaLabel || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
             [iconTitle]="addonIconTitle || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
-            (addOnButtonClicked)="addOnButtonClicked.emit($event); !mobile && _onPrimaryButtonClick(isOpen)"
+            (addOnButtonClicked)="_addOnClicked($event)"
             (click)="mobile && !isOpen && _onPrimaryButtonClick(false)"
             (keydown)="_navigateByTokens($event)"
         >

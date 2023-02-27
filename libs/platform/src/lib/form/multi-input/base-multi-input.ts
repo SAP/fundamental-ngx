@@ -146,6 +146,10 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @Input()
     autoResize = false;
 
+    /** Whether to open the dropdown when the addon button is clicked. */
+    @Input()
+    openDropdownOnAddOnClicked = true;
+
     /** Value of the multi input */
     @Input()
     set value(value: any) {
