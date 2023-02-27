@@ -1,7 +1,6 @@
 import { strings } from '@angular-devkit/core';
-import { readJson, Tree, writeJson, formatFiles, generateFiles } from '@nrwl/devkit';
+import { formatFiles, generateFiles, names, readJson, Tree, writeJson } from '@nrwl/devkit';
 import { SchematicsException } from '@angular-devkit/schematics';
-import { names } from '@nrwl/devkit';
 import * as ts from 'typescript';
 import {
     addModuleOrComponentExportToModule,
@@ -169,9 +168,7 @@ function updateLibraryData(tree: Tree, schema: SapComponentSchema): void {
     function updateAngularJson() {
         const angularJson = readJson(tree, '/angular.json');
 
-        const config = angularJson.projects[oldName];
-
-        angularJson.projects[newName] = config;
+        angularJson.projects[newName] = angularJson.projects[oldName];
         delete angularJson.projects[oldName];
 
         writeJson(tree, '/angular.json', angularJson);
@@ -213,9 +210,7 @@ function updateLibraryData(tree: Tree, schema: SapComponentSchema): void {
         replaceContentInFile(tree, newModulePath, [[oldModuleName, strings.classify(schema.name)]]);
 
         // add created module to exports of root package module
-        const moduleName = `fundamental-ngx${
-            schema.project === 'experimental' ? '-' + getProjectTag(schema) : ''
-        }.module.ts`;
+        const moduleName = `fundamental-ngx.module.ts`;
         addModuleOrComponentExportToModule(
             tree,
             `${getLibraryDirectory(schema, false)}/${moduleName}`,
@@ -264,8 +259,6 @@ function getProjectDirName(schema: SapComponentSchema): string {
             return 'core';
         case 'platform':
             return 'platform';
-        case 'experimental':
-            return 'fn';
         case 'cx':
             return 'cx';
         case 'cdk':
@@ -281,8 +274,6 @@ function getProjectTag(schema: SapComponentSchema): string {
             return 'fd';
         case 'platform':
             return 'fdp';
-        case 'experimental':
-            return 'fn';
         case 'cx':
             return 'cx';
         case 'cdk':
@@ -302,5 +293,5 @@ function startCaseName(str: string): string {
 
 interface SapComponentSchema {
     name: string;
-    project: 'core' | 'platform' | 'experimental' | 'cx' | 'cdk';
+    project: 'core' | 'platform' | 'cx' | 'cdk';
 }
