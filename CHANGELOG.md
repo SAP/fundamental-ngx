@@ -1,3 +1,12 @@
+# [0.39.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.61...v0.39.0-rc.62) (2023-02-25)
+
+
+### Bug Fixes
+
+* **core,platform:** openDropdownOnAddOnClicked event for multi components  ([#9440](https://github.com/SAP/fundamental-ngx/issues/9440)) ([6ccc35b](https://github.com/SAP/fundamental-ngx/commit/6ccc35b9af29b6fbd8ea309920f94a0ff87e9311))
+
+
+
 # [0.39.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.60...v0.39.0-rc.61) (2023-02-23)
 
 

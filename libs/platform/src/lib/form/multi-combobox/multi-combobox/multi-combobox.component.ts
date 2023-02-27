@@ -299,6 +299,14 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         this.close();
     }
 
+    /** @hidden */
+    _addOnClicked(event: Event): void {
+        this.addOnButtonClicked.emit(event);
+        if (!this.mobile) {
+            this.onPrimaryButtonClick(this.isOpen);
+        }
+    }
+
     /**
      * @hidden
      * applying range selection. Note, that this function will be invoked after combobox item's value has been changed

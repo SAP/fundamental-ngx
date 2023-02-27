@@ -86,6 +86,15 @@ describe('PlatformMultiInputComponent', () => {
         const toggleButton = fixture.nativeElement.querySelectorAll('.fd-token');
         expect(toggleButton.length).toBe(1);
     });
+
+    it('should not open dropdown when openDropdownOnAddOnClicked is false', () => {
+        spyOn(component.platformMultiInputComponent.addOnButtonClicked, 'emit');
+        spyOn(component.platformMultiInputComponent, 'showList');
+        component.platformMultiInputComponent.openDropdownOnAddOnClicked = false;
+        component.platformMultiInputComponent.addOnButtonClick(new MouseEvent('click'));
+        expect(component.platformMultiInputComponent.addOnButtonClicked.emit).toHaveBeenCalled();
+        expect(component.platformMultiInputComponent.showList).not.toHaveBeenCalled();
+    });
 });
 
 const MULTI_INPUT_IDENTIFIER = 'platform-multi-input-unit-test';

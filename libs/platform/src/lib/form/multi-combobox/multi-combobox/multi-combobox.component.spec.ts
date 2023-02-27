@@ -206,4 +206,13 @@ describe('MultiComboboxComponent default values', () => {
 
         expect(multiCombobox._selectedSuggestions.length).toEqual(0);
     });
+
+    it('should not open dropdown when openDropdownOnAddOnClicked is false', () => {
+        spyOn(multiCombobox.addOnButtonClicked, 'emit');
+        spyOn(multiCombobox, 'showList');
+        multiCombobox.openDropdownOnAddOnClicked = false;
+        multiCombobox._addOnClicked(new MouseEvent('click'));
+        expect(multiCombobox.addOnButtonClicked.emit).toHaveBeenCalled();
+        expect(multiCombobox.showList).not.toHaveBeenCalled();
+    });
 });

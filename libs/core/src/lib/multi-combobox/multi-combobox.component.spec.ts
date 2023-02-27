@@ -149,6 +149,15 @@ describe('MultiComboBox component', () => {
 
         expect(component._selectedSuggestions.length).toEqual(0);
     });
+
+    it('should not open dropdown when openDropdownOnAddOnClicked is false', () => {
+        spyOn(component.addOnButtonClicked, 'emit');
+        spyOn(component, '_showList');
+        component.openDropdownOnAddOnClicked = false;
+        component._addOnClicked(new MouseEvent('click'));
+        expect(component.addOnButtonClicked.emit).toHaveBeenCalled();
+        expect(component._showList).not.toHaveBeenCalled();
+    });
 });
 
 describe('MultiComboBox component CVA', () => {
