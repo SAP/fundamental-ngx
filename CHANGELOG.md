@@ -1,3 +1,16 @@
+# [0.39.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.63...v0.39.0-rc.64) (2023-02-27)
+
+
+
+# [0.39.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.62...v0.39.0-rc.63) (2023-02-27)
+
+
+### Bug Fixes
+
+* aria-label not being properly applied to fdp-input ([#9441](https://github.com/SAP/fundamental-ngx/issues/9441)) ([ef92277](https://github.com/SAP/fundamental-ngx/commit/ef92277791f719173c8e135312b76926d83432ba))
+
+
+
 # [0.39.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.61...v0.39.0-rc.62) (2023-02-25)
 
 
