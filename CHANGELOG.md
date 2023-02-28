@@ -1,3 +1,12 @@
+# [0.39.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.65...v0.39.0-rc.66) (2023-02-28)
+
+
+### Bug Fixes
+
+* **docs:** @fundamental-ngx/cdk added to stackblitz deps ([#9423](https://github.com/SAP/fundamental-ngx/issues/9423)) ([ab12db4](https://github.com/SAP/fundamental-ngx/commit/ab12db4958ad1a2a767cd4dae3a4e4b453eea2f9))
+
+
+
 # [0.39.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.64...v0.39.0-rc.65) (2023-02-27)
 
 
