@@ -1,3 +1,12 @@
+# [0.39.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.66...v0.39.0-rc.67) (2023-02-28)
+
+
+### Bug Fixes
+
+* **core,platform:** form message issues ([#9179](https://github.com/SAP/fundamental-ngx/issues/9179)) ([54d067d](https://github.com/SAP/fundamental-ngx/commit/54d067de58e95d7f69d004b850669d77e4b019e3))
+
+
+
 # [0.39.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.65...v0.39.0-rc.66) (2023-02-28)
 
 
