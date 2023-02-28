@@ -17,29 +17,25 @@
 
 <div fd-form-item class="fd-custom-form-item-message">
     <label fd-form-label for="group-message-2"> Message With InputGroup - Changed Programmatically </label>
-    <fd-popover
+    <fd-form-input-message-group
         placement="bottom"
         [(isOpen)]="open"
         [triggers]="[]"
         [closeOnOutsideClick]="false"
         [closeOnEscapeKey]="false"
     >
-        <fd-popover-control>
-            <fd-input-group
-                id="group-message-2"
-                state="information"
-                [button]="true"
-                addOnText="Toggle Message"
-                (addOnButtonClicked)="open = !open"
-            >
-            </fd-input-group>
-        </fd-popover-control>
-        <fd-popover-body>
-            <fd-form-message type="information" [static]="true">
-                This message is controlled by <code>open</code> variable.
-            </fd-form-message>
-        </fd-popover-body>
-    </fd-popover>
+        <fd-input-group
+            id="group-message-2"
+            state="information"
+            [button]="true"
+            addOnText="Toggle Message"
+            (addOnButtonClicked)="open = !open"
+        >
+        </fd-input-group>
+        <fd-form-message type="information">
+            This message is controlled by <code>open</code> variable.
+        </fd-form-message>
+    </fd-form-input-message-group>
 </div>
 
 <div fd-form-item class="fd-custom-form-item-message">

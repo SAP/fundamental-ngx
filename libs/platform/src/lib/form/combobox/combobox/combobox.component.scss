@@ -6,29 +6,7 @@
         z-index: -1;
     }
 
-    &__message {
-        &.fd-form-message {
-            display: flex;
-            max-width: 100%;
-        }
-
-        &--popover.fd-form-message {
-            border-top-left-radius: 0.25rem;
-            border-top-left-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
-            border-top-right-radius: 0.25rem;
-            border-top-right-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
-        }
-    }
-
     &__list {
-        &--message {
-            &,
-            .fd-list__item:first-child {
-                border-top-left-radius: 0 !important;
-                border-top-right-radius: 0 !important;
-            }
-        }
-
         .fd-list__item {
             justify-content: space-between;
 
