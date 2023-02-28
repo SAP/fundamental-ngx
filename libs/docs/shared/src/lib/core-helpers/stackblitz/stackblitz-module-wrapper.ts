@@ -11,6 +11,7 @@ export class StackblitzModuleWrapper {
         { name: 'FormsModule', path: '@angular/forms' },
         { name: 'ReactiveFormsModule', path: '@angular/forms' },
         { name: 'BrowserAnimationsModule', path: '@angular/platform-browser/animations' },
+        { name: 'FundamentalNgxCdkModule', path: '@fundamental-ngx/cdk' },
         { name: 'FundamentalNgxCoreModule, FdDatetimeModule', path: '@fundamental-ngx/core' },
         { name: 'FundamentalNgxPlatformModule', path: '@fundamental-ngx/platform' },
         { name: 'HttpClientModule', path: '@angular/common/http' },
@@ -54,7 +55,6 @@ export class StackblitzModuleWrapper {
 
         return `
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 ${defaultImports}
 ${imports}
@@ -64,8 +64,7 @@ ${imports}
         ${declarations}
     ],
     imports: [
-        ${moduleImports},
-        RouterModule.forRoot([{path: '#', component:${mainComponent}}], { useHash: true }),
+        ${moduleImports}
     ],
     providers: [
         RtlService,
