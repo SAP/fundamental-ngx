@@ -18,6 +18,7 @@ import { TableService } from './table.service';
 import { DeprecatedTableCompactDirective } from './deprecated-table-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { DeprecatedTableCondensedDirective } from './deprecated-table-condensed.directive';
+import { TableFixedDirective } from './directives/table-fixed.directive';
 
 @NgModule({
     imports: [CommonModule, ContentDensityModule],
@@ -35,6 +36,7 @@ import { DeprecatedTableCondensedDirective } from './deprecated-table-condensed.
         TableInnerDirective,
         TableTextDirective,
         TableIconDirective,
+        TableFixedDirective,
         DeprecatedTableCompactDirective,
         DeprecatedTableCondensedDirective
     ],
@@ -52,6 +54,7 @@ import { DeprecatedTableCondensedDirective } from './deprecated-table-condensed.
         TableInnerDirective,
         TableTextDirective,
         TableIconDirective,
+        TableFixedDirective,
         DeprecatedTableCompactDirective,
         DeprecatedTableCondensedDirective,
         ContentDensityModule

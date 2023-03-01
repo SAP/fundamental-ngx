@@ -62,6 +62,16 @@ export class TableComponent implements AfterContentInit, AfterViewInit {
     @Input()
     noBorderY = false;
 
+    /** Whether or not to show the table's outer border */
+    @HostBinding('class.fd-table--no-outer-border')
+    @Input()
+    noOuterBorder = false;
+
+    /** Whether or not to show the table's top border */
+    @HostBinding('class.fd-table--top-border')
+    @Input()
+    topBorder = false;
+
     /** Whether or not to display the table in pop in mode, it also require change of markup */
     @HostBinding('class.fd-table--pop-in')
     @Input()
