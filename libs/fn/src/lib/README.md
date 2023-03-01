@@ -26,7 +26,7 @@ The `@fundamental-ngx/fn` library is an Fiori Next set of [Angular](https://angu
 
 The Fundamental Library Styles is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
 
-See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/home) for examples and API details.
+See [Component Documentation](https://sap.github.io/fundamental-ngx/#/core/new-component) for examples and API details.
 
 ## <a name="2"></a>2. Requirements
 
