@@ -25,7 +25,7 @@ The `@fundamental-ngx/cdk` library is a set of utilities and [Angular](https://a
 It includes common behaviour for working with `DataSources` and `ControlValueAccessors`.
 Additionally, it contains injectable helpers to easily control the `rxjs` subscriptions in your components, focusable/selectable list helpers and many more.
 
-See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/home) for examples and API details.
+See [Component Documentation](https://sap.github.io/fundamental-ngx/#/core/new-component) for examples and API details.
 
 ## <a name="2"></a>2. Requirements
 
