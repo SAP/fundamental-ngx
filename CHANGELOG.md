@@ -1,3 +1,12 @@
+# [0.39.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.69...v0.39.0-rc.70) (2023-03-02)
+
+
+### Bug Fixes
+
+* **platform:** screenreader reading fdp-select selected value twice ([#9314](https://github.com/SAP/fundamental-ngx/issues/9314)) ([99d9be1](https://github.com/SAP/fundamental-ngx/commit/99d9be1aefb8f3a4a3b0f69fdfb2712d8f885ea8))
+
+
+
 # [0.39.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.68...v0.39.0-rc.69) (2023-03-02)
 
 
