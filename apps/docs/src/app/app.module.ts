@@ -31,13 +31,6 @@ const routes: Routes = [
             import('./platform/platform-documentation.module').then((m) => m.PlatformDocumentationModule)
     },
     {
-        path: 'fn',
-        data: {
-            library: 'BTP Experimental'
-        },
-        loadChildren: () => import('./fn/fn-documentation.module').then((m) => m.FnDocumentationModule)
-    },
-    {
         path: 'cx',
         data: {
             library: 'CX'

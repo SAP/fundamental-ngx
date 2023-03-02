@@ -149,6 +149,7 @@
 <ng-template #listTemplate>
     <ul
         fd-list
+        [hasMessage]="!!stateMessage"
         (focusEscapeList)="handleListFocusEscape($event)"
         [dropdownMode]="true"
         class="fdp-multi-combobox__list fd-list--multi-input"
@@ -160,7 +161,16 @@
         [attr.aria-labelledby]="id + '-search'"
         aria-multiselectable="true"
     >
-        <fd-form-message *ngIf="!!stateMessage" [type]="state" [innerHtml]="stateMessage"></fd-form-message>
+        <li
+            *ngIf="stateMessage"
+            [attr.aria-label]="stateMessage"
+            fd-list-message
+            tabindex="-1"
+            role="presentation"
+            [type]="state || 'default'"
+            [innerHtml]="stateMessage"
+        ></li>
+
         <ng-content></ng-content>
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">

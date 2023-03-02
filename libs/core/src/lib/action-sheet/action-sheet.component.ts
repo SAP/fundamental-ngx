@@ -175,7 +175,9 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _actionControlHandle(): void {
-        this.actionSheetControl.clicked.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.open());
+        this.actionSheetControl.clicked
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(() => (this.isOpen ? this.close() : this.open()));
     }
 
     /** @hidden */

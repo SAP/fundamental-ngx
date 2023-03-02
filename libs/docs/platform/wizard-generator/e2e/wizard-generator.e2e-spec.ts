@@ -736,7 +736,6 @@ describe('Wizard generator test suite', () => {
                     'you not moved to third step'
                 );
 
-                await click(dialog + nextStepBtn2);
                 await click(dialog + select);
                 await pause(await getPauseTime());
                 const paymentMethod = await getText(listItemText);
@@ -781,7 +780,8 @@ describe('Wizard generator test suite', () => {
             });
         });
         describe('Other cases', () => {
-            it('should check required fields validation', async () => {
+            // TODO: https://github.com/SAP/fundamental-ngx/issues/9461
+            xit('should check required fields validation', async () => {
                 await openDialog(branchingExample, 1500);
                 await click(dialog + nextStepBtn2);
                 await expect(await getElementClass(dialog + selectControl)).toContain('error', 'error is not appeared');

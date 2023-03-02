@@ -1,3 +1,47 @@
+# [0.39.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.67...v0.39.0-rc.68) (2023-03-01)
+
+
+
+# [0.39.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.66...v0.39.0-rc.67) (2023-02-28)
+
+
+### Bug Fixes
+
+* **core,platform:** form message issues ([#9179](https://github.com/SAP/fundamental-ngx/issues/9179)) ([54d067d](https://github.com/SAP/fundamental-ngx/commit/54d067de58e95d7f69d004b850669d77e4b019e3))
+
+
+
+# [0.39.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.65...v0.39.0-rc.66) (2023-02-28)
+
+
+### Bug Fixes
+
+* **docs:** @fundamental-ngx/cdk added to stackblitz deps ([#9423](https://github.com/SAP/fundamental-ngx/issues/9423)) ([ab12db4](https://github.com/SAP/fundamental-ngx/commit/ab12db4958ad1a2a767cd4dae3a4e4b453eea2f9))
+
+
+
+# [0.39.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.64...v0.39.0-rc.65) (2023-02-27)
+
+
+### Bug Fixes
+
+* various minor fixes from defect hunting ([#9425](https://github.com/SAP/fundamental-ngx/issues/9425)) ([f7813df](https://github.com/SAP/fundamental-ngx/commit/f7813df617270412f80bfaabc467ea879d149acc))
+
+
+
+# [0.39.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.63...v0.39.0-rc.64) (2023-02-27)
+
+
+
+# [0.39.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.62...v0.39.0-rc.63) (2023-02-27)
+
+
+### Bug Fixes
+
+* aria-label not being properly applied to fdp-input ([#9441](https://github.com/SAP/fundamental-ngx/issues/9441)) ([ef92277](https://github.com/SAP/fundamental-ngx/commit/ef92277791f719173c8e135312b76926d83432ba))
+
+
+
 # [0.39.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.61...v0.39.0-rc.62) (2023-02-25)
 
 
