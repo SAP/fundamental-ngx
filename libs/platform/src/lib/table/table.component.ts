@@ -1658,6 +1658,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                     replacedItemIndex: replacedIndex
                 };
                 this._dragDropItemDrop(dragDropEvent);
+                (event.target as HTMLElement).focus();
             }
         }
     }
