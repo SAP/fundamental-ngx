@@ -17,6 +17,7 @@ import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FD_RADIO_BUTTON_COMPONENT } from '../tokens';
 
 export type stateType = 'success' | 'error' | 'warning' | 'default' | 'information';
 let uniqueId = 0;
@@ -33,6 +34,10 @@ let uniqueId = 0;
             useExisting: forwardRef(() => RadioButtonComponent),
             multi: true
         },
+        {
+            provide: FD_RADIO_BUTTON_COMPONENT,
+            useExisting: RadioButtonComponent
+        },
         registerFormItemControl(RadioButtonComponent),
         contentDensityObserverProviders()
     ],
@@ -45,7 +50,7 @@ export class RadioButtonComponent
 {
     /** @hidden */
     @ViewChild('inputElement')
-    inputElement: ElementRef;
+    inputElement: ElementRef<HTMLInputElement>;
 
     /** Sets the `aria-label` attribute to the element. */
     @Input()

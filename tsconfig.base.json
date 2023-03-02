@@ -347,6 +347,7 @@
             "@fundamental-ngx/fn/utils": ["libs/fn/src/lib/utils/index.ts"],
             "@fundamental-ngx/i18n": ["libs/i18n/src/index.ts"],
             "@fundamental-ngx/moment-adapter": ["libs/moment-adapter/src/index.ts"],
+            "@fundamental-ngx/nx-plugin": ["libs/nx-plugin/src/index.ts"],
             "@fundamental-ngx/platform": ["libs/platform/src/lib/index.ts"],
             "@fundamental-ngx/platform/action-bar": ["libs/platform/src/lib/action-bar/index.ts"],
             "@fundamental-ngx/platform/action-button-group": ["libs/platform/src/lib/action-button-group/index.ts"],
@@ -377,9 +378,7 @@
             "@fundamental-ngx/platform/upload-collection": ["libs/platform/src/lib/upload-collection/index.ts"],
             "@fundamental-ngx/platform/value-help-dialog": ["libs/platform/src/lib/value-help-dialog/index.ts"],
             "@fundamental-ngx/platform/variant-management": ["libs/platform/src/lib/variant-management/index.ts"],
-            "@fundamental-ngx/platform/wizard-generator": ["libs/platform/src/lib/wizard-generator/index.ts"],
-            "@fundamental-ngx/wdio": ["libs/plugins/wdio/src/index.ts"],
-            "@fundamental-ngx/workspace-tools": ["tools/index.ts"]
+            "@fundamental-ngx/platform/wizard-generator": ["libs/platform/src/lib/wizard-generator/index.ts"]
         },
         "skipLibCheck": true
     },

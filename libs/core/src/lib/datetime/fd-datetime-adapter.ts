@@ -379,7 +379,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
      * @returns The stripped string.
      */
     private _stripDirectionalityCharacters(str: string): string {
-        return str.replace(/[\u200e\u200f]/g, '');
+        return str.replace(/[\u200e\u200f]/g, '').replace(/\u202f/g, ' ');
     }
 
     /** @hidden */

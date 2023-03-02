@@ -1,22 +1,25 @@
 import { Inject, Injectable, Injector, Optional } from '@angular/core';
+import { takeUntil } from 'rxjs';
 import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
 import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../utils/dialog-config.class';
-import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogBaseService } from '../base/dialog-base.service';
 import { DialogContentType } from '../dialog.types';
+import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 /** Service used to create a dialog. */
 @Injectable()
 export class DialogService extends DialogBaseService<DialogContainerComponent> {
     /** @hidden */
     constructor(
-        @Inject(DynamicComponentService) dynamicComponentService: DynamicComponentService,
         @Optional() @Inject(DIALOG_DEFAULT_CONFIG) private _defaultConfig: DialogConfig,
         @Optional() private _rtlService: RtlService,
-        private _injector: Injector
+        private _injector: Injector,
+        private readonly _overlay: Overlay
     ) {
-        super(dynamicComponentService);
+        super();
     }
 
     /**
@@ -48,21 +51,24 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
             parent: parentInjector
         });
 
-        const component = this._dynamicComponentService.createDynamicComponent<DialogContainerComponent>(
-            content,
-            DialogContainerComponent,
-            dialogConfig,
-            { injector }
-        );
+        const overlayRef = this._overlay.create(new OverlayConfig());
 
-        this._dialogs.push(component);
+        if (dialogConfig.container && dialogConfig.container !== 'body' && typeof dialogConfig.container !== 'string') {
+            dialogConfig.container.append(overlayRef.hostElement);
+        }
+        const portal = new ComponentPortal(DialogContainerComponent, null, injector);
+        const componentRef = overlayRef.attach(portal);
 
-        const defaultBehaviourOnClose = (): void => {
-            this._destroyDialog(component);
-            refSub.unsubscribe();
-        };
+        componentRef.instance.childContent = content;
+        componentRef.instance.dialogConfig = dialogConfig;
 
-        const refSub = dialogRef.afterClosed.subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose);
+        this._dialogs.push(componentRef);
+
+        dialogRef._endClose$.pipe(takeUntil(this._destroy$)).subscribe(() => {
+            this._destroyDialog(componentRef);
+            componentRef.destroy();
+            overlayRef.dispose();
+        });
 
         return dialogRef;
     }

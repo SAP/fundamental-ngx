@@ -36,7 +36,7 @@ import {
 } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 
-import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
+import { FD_LIST_MESSAGE_DIRECTIVE, ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
 import {
     AutoCompleteEvent,
     DynamicComponentService,
@@ -312,7 +312,7 @@ export class ComboboxComponent
     inputGroup: InputGroupComponent;
 
     /** @hidden */
-    @ContentChildren(ListMessageDirective)
+    @ContentChildren(FD_LIST_MESSAGE_DIRECTIVE)
     listMessages: QueryList<ListMessageDirective>;
 
     /** @hidden */

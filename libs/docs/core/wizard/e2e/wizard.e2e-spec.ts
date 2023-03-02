@@ -15,6 +15,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
+    waitForElDisappear,
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
@@ -231,6 +232,9 @@ describe('Wizard component test', () => {
 
     async function checkReOpen(section: string, block: string): Promise<void> {
         await click(section + button);
+        if (section === dialogExample) {
+            await pause(1000);
+        }
         if (section === defaultExample) {
             await pause(5000);
             await waitForElDisplayed(block + nextStep);
@@ -251,8 +255,13 @@ describe('Wizard component test', () => {
         }
         if (section !== defaultExample) {
             await click(dialogWizard + buttonsBar + ':nth-child(3) ' + button);
+            await pause(1000);
             await click(section + button);
+            await pause(1000);
         }
+        // if (section === dialogExample) {
+        //     await pause(1000);
+        // }
         await expect(await getValue(fullNameInput)).toEqual(fullName);
         await expect(await getValue(firstAdressInput)).toEqual(firstAdress);
         await expect(await getValue(secAdressInput)).toEqual(secAdress);
@@ -276,8 +285,8 @@ describe('Wizard component test', () => {
         if (section === dialogExample) {
             await expect(await waitForElDisplayed(dialogWizard)).toBe(true, 'dialog wizard did not open');
             await click(dialogWizard + buttonsBar + ':nth-child(2) ' + button);
-            await expect(await doesItExist(dialogWizard)).toBe(
-                false,
+            await expect(await waitForElDisappear(dialogWizard)).toBe(
+                true,
                 'dialog wizard did not close, still exist in DOM'
             );
         }

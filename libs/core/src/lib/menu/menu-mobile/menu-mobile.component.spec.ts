@@ -1,6 +1,6 @@
 import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN, whenStable } from '@fundamental-ngx/core/tests';
@@ -49,7 +49,7 @@ describe('MenuMobileComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TesNestedMenuItemComponent],
-            imports: [MenuModule, MenuMobileModule, BrowserAnimationsModule],
+            imports: [MenuModule, MenuMobileModule, NoopAnimationsModule],
             providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
         }).compileComponents();
     }));
@@ -74,7 +74,7 @@ describe('MenuMobileComponent', () => {
     });
 
     it('should open in mobile mode', async () => {
-        setup();
+        await setup();
 
         await whenStable(fixture);
 
@@ -91,7 +91,7 @@ describe('MenuMobileComponent', () => {
     it('should use custom dialog configuration', async () => {
         const customDialogClass = 'test-dialog-class';
 
-        setup({ dialogConfig: { dialogPanelClass: customDialogClass } });
+        await setup({ dialogConfig: { dialogPanelClass: customDialogClass } });
 
         await whenStable(fixture);
 
@@ -103,7 +103,7 @@ describe('MenuMobileComponent', () => {
     });
 
     it('should open menu sub-level', async () => {
-        setup();
+        await setup();
 
         await whenStable(fixture);
 
@@ -119,7 +119,7 @@ describe('MenuMobileComponent', () => {
     });
 
     it('should use correct menu title', async () => {
-        setup();
+        await setup();
 
         await whenStable(fixture);
 
@@ -137,7 +137,7 @@ describe('MenuMobileComponent', () => {
     });
 
     it('should navigate back to parent level', async () => {
-        setup();
+        await setup();
 
         await whenStable(fixture);
 
@@ -158,7 +158,7 @@ describe('MenuMobileComponent', () => {
     });
 
     it('should properly render with empty MobileConfig', async () => {
-        setup({});
+        await setup({});
 
         await whenStable(fixture);
 
@@ -173,7 +173,7 @@ describe('MenuMobileComponent', () => {
     });
 
     it('should properly render title and close button based on MobileConfig', async () => {
-        setup({ title: MOBILE_CONFIG.title, hasCloseButton: true });
+        await setup({ title: MOBILE_CONFIG.title, hasCloseButton: true });
 
         await whenStable(fixture);
 
@@ -189,7 +189,7 @@ describe('MenuMobileComponent', () => {
     });
 
     it('should properly render approve and dismiss buttons based on MobileConfig', async () => {
-        setup({ cancelButtonText: 'APPROVE', approveButtonText: 'DISMISS' });
+        await setup({ cancelButtonText: 'APPROVE', approveButtonText: 'DISMISS' });
 
         await whenStable(fixture);
 

@@ -1,3 +1,307 @@
+# [0.39.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.68...v0.39.0-rc.69) (2023-03-02)
+
+
+### Features
+
+* **core,platform:** update fundamental-styles version, adopt breaking changes ([#9467](https://github.com/SAP/fundamental-ngx/issues/9467)) ([c30dbe0](https://github.com/SAP/fundamental-ngx/commit/c30dbe0a074cf9a5b4305ddba4ca12e34bf52f05))
+
+
+
+# [0.39.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.67...v0.39.0-rc.68) (2023-03-01)
+
+
+
+# [0.39.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.66...v0.39.0-rc.67) (2023-02-28)
+
+
+### Bug Fixes
+
+* **core,platform:** form message issues ([#9179](https://github.com/SAP/fundamental-ngx/issues/9179)) ([54d067d](https://github.com/SAP/fundamental-ngx/commit/54d067de58e95d7f69d004b850669d77e4b019e3))
+
+
+
+# [0.39.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.65...v0.39.0-rc.66) (2023-02-28)
+
+
+### Bug Fixes
+
+* **docs:** @fundamental-ngx/cdk added to stackblitz deps ([#9423](https://github.com/SAP/fundamental-ngx/issues/9423)) ([ab12db4](https://github.com/SAP/fundamental-ngx/commit/ab12db4958ad1a2a767cd4dae3a4e4b453eea2f9))
+
+
+
+# [0.39.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.64...v0.39.0-rc.65) (2023-02-27)
+
+
+### Bug Fixes
+
+* various minor fixes from defect hunting ([#9425](https://github.com/SAP/fundamental-ngx/issues/9425)) ([f7813df](https://github.com/SAP/fundamental-ngx/commit/f7813df617270412f80bfaabc467ea879d149acc))
+
+
+
+# [0.39.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.63...v0.39.0-rc.64) (2023-02-27)
+
+
+
+# [0.39.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.62...v0.39.0-rc.63) (2023-02-27)
+
+
+### Bug Fixes
+
+* aria-label not being properly applied to fdp-input ([#9441](https://github.com/SAP/fundamental-ngx/issues/9441)) ([ef92277](https://github.com/SAP/fundamental-ngx/commit/ef92277791f719173c8e135312b76926d83432ba))
+
+
+
+# [0.39.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.61...v0.39.0-rc.62) (2023-02-25)
+
+
+### Bug Fixes
+
+* **core,platform:** openDropdownOnAddOnClicked event for multi components  ([#9440](https://github.com/SAP/fundamental-ngx/issues/9440)) ([6ccc35b](https://github.com/SAP/fundamental-ngx/commit/6ccc35b9af29b6fbd8ea309920f94a0ff87e9311))
+
+
+
+# [0.39.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.60...v0.39.0-rc.61) (2023-02-23)
+
+
+### Features
+
+* **core:** scrollbar now uses cdk scrollable ([#9436](https://github.com/SAP/fundamental-ngx/issues/9436)) ([a82ba3d](https://github.com/SAP/fundamental-ngx/commit/a82ba3d437d73f566502f3f7a765df07009b1000))
+
+
+
+# [0.39.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.59...v0.39.0-rc.60) (2023-02-23)
+
+
+### Bug Fixes
+
+* **core:** fixed dialog body redundant elements ([#9435](https://github.com/SAP/fundamental-ngx/issues/9435)) ([5b6e275](https://github.com/SAP/fundamental-ngx/commit/5b6e275faa625895a62d4710fb4db5cf1bbd98dc))
+
+
+
+# [0.39.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.58...v0.39.0-rc.59) (2023-02-22)
+
+
+### Bug Fixes
+
+* **docs:** core dialog examples initial focus targets ([#9434](https://github.com/SAP/fundamental-ngx/issues/9434)) ([4c98941](https://github.com/SAP/fundamental-ngx/commit/4c989410a384dc222355c37f8c9d6c48f1e500c1))
+
+
+
+# [0.39.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.57...v0.39.0-rc.58) (2023-02-22)
+
+
+### Bug Fixes
+
+* **docs,core:** beautify multi combobox docs ([#9422](https://github.com/SAP/fundamental-ngx/issues/9422)) ([2e923fb](https://github.com/SAP/fundamental-ngx/commit/2e923fb84e29c1507e16b765b5071bdefc11188d))
+
+
+
+# [0.39.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.56...v0.39.0-rc.57) (2023-02-21)
+
+
+### Bug Fixes
+
+* **ci,cdk,deps:** nx tools refactoring ([#9391](https://github.com/SAP/fundamental-ngx/issues/9391)) ([a8fd419](https://github.com/SAP/fundamental-ngx/commit/a8fd419fa3505285194d68966902b07654c090ce))
+
+
+
+# [0.39.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.55...v0.39.0-rc.56) (2023-02-20)
+
+
+
+# [0.39.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.54...v0.39.0-rc.55) (2023-02-20)
+
+
+### Bug Fixes
+
+* type error ([#9403](https://github.com/SAP/fundamental-ngx/issues/9403)) ([5a853fe](https://github.com/SAP/fundamental-ngx/commit/5a853fefdf3afa06d0e83af3b63613a71d4d033f))
+
+
+
+# [0.39.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.53...v0.39.0-rc.54) (2023-02-20)
+
+
+### Bug Fixes
+
+* **platform:** multi input dh fixes ([#9418](https://github.com/SAP/fundamental-ngx/issues/9418)) ([f059fbe](https://github.com/SAP/fundamental-ngx/commit/f059fbe3db08cc8a05c8d34813703c0d19b2ca48))
+
+
+
+# [0.39.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.52...v0.39.0-rc.53) (2023-02-20)
+
+
+### Features
+
+* **platform:** added id property to form generator items ([#9346](https://github.com/SAP/fundamental-ngx/issues/9346)) ([44f5427](https://github.com/SAP/fundamental-ngx/commit/44f54274d52c2048a1d6ad9be6d6a9b05fb69409))
+
+
+### BREAKING CHANGES
+
+* **platform:** BaseDynamicFormGeneratorControlInterface now has required 'id' field
+
+
+
+# [0.39.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.51...v0.39.0-rc.52) (2023-02-20)
+
+
+### Features
+
+* **platform:** table role feed ([#9416](https://github.com/SAP/fundamental-ngx/issues/9416)) ([c60863d](https://github.com/SAP/fundamental-ngx/commit/c60863dc81ae4809170217cdb4d611d3e3656500))
+
+
+
+# [0.39.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.50...v0.39.0-rc.51) (2023-02-20)
+
+
+
+# [0.39.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.49...v0.39.0-rc.50) (2023-02-20)
+
+
+### Features
+
+* **core,platform:** lightweight tokens ([#9400](https://github.com/SAP/fundamental-ngx/issues/9400)) ([005a50d](https://github.com/SAP/fundamental-ngx/commit/005a50dd49d2253e186cff87e1f94ef7c8927ec6))
+
+
+
+# [0.39.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.48...v0.39.0-rc.49) (2023-02-17)
+
+
+
+# [0.39.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.47...v0.39.0-rc.48) (2023-02-17)
+
+
+
+# [0.39.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.46...v0.39.0-rc.47) (2023-02-16)
+
+
+### Bug Fixes
+
+* documentation for multi-input addon button events ([#9398](https://github.com/SAP/fundamental-ngx/issues/9398)) ([a104d3a](https://github.com/SAP/fundamental-ngx/commit/a104d3a5123cbdc01278010bf70fe6c71130210c))
+
+
+
+# [0.39.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.45...v0.39.0-rc.46) (2023-02-16)
+
+
+### Bug Fixes
+
+* **core:** i18n example code ([#9399](https://github.com/SAP/fundamental-ngx/issues/9399)) ([2960bfd](https://github.com/SAP/fundamental-ngx/commit/2960bfd0ab91148011fc26d81fcb33d7a8ac9768))
+
+
+
+# [0.39.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.44...v0.39.0-rc.45) (2023-02-16)
+
+
+### Bug Fixes
+
+* **platform:** multi-input bugfixes ([#9390](https://github.com/SAP/fundamental-ngx/issues/9390)) ([bfe4fea](https://github.com/SAP/fundamental-ngx/commit/bfe4feaacb5a224a058641fb82c025f56b3b465c))
+
+
+
+# [0.39.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.43...v0.39.0-rc.44) (2023-02-16)
+
+
+### Bug Fixes
+
+* **e2e:** core message box ([#9397](https://github.com/SAP/fundamental-ngx/issues/9397)) ([6fb939d](https://github.com/SAP/fundamental-ngx/commit/6fb939d14fc7b8b48a05441afffac13fd127cb67))
+
+
+
+# [0.39.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.42...v0.39.0-rc.43) (2023-02-16)
+
+
+### Bug Fixes
+
+* **cdk,core,platform:** table keyboard ([#9324](https://github.com/SAP/fundamental-ngx/issues/9324)) ([c5fd065](https://github.com/SAP/fundamental-ngx/commit/c5fd065ab72579af972b261d6310ae1b91dbbac4))
+
+
+### BREAKING CHANGES
+
+* **cdk,core,platform:** `tabindex` input property removed from fd-table-cell; use `focusable` instead; `tabindex` input property removed from fd-table-row; use `focusable instead`; `TableCellPosition` interface removed; use `FocusableItemPosition` instead as `TableCellPosition` removed; typings of `cellFocusedEventAnnouncer` of fd-table-cell was changed; `focusChild` property removed from focusable-item directive. Use F2 key to focus cell's child.
+
+
+
+# [0.39.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.41...v0.39.0-rc.42) (2023-02-16)
+
+
+### Bug Fixes
+
+* **core:** use static element ref property ([#9366](https://github.com/SAP/fundamental-ngx/issues/9366)) ([a9a0515](https://github.com/SAP/fundamental-ngx/commit/a9a05150328d69e990a1ce15f92c08749c872ef1))
+
+
+
+# [0.39.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.40...v0.39.0-rc.41) (2023-02-15)
+
+
+### Features
+
+* **core:** expose collapse overflow tab menu ([#9386](https://github.com/SAP/fundamental-ngx/issues/9386)) ([a31a701](https://github.com/SAP/fundamental-ngx/commit/a31a7018bb00cd2b0d3e57bc7e9538b304d38aa9))
+
+
+
+# [0.39.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.39...v0.39.0-rc.40) (2023-02-15)
+
+
+### Bug Fixes
+
+* **platform:** table drag and drop bugs ([#9351](https://github.com/SAP/fundamental-ngx/issues/9351)) ([5a77b7b](https://github.com/SAP/fundamental-ngx/commit/5a77b7b7cc688d117b3b1077fff16f2da917b994))
+
+
+
+# [0.39.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.38...v0.39.0-rc.39) (2023-02-15)
+
+
+### Bug Fixes
+
+* **core,cx,fn,platform:** textContent instead of innerText for matter of performance ([#9381](https://github.com/SAP/fundamental-ngx/issues/9381)) ([7d72ef9](https://github.com/SAP/fundamental-ngx/commit/7d72ef9fdf0bb77ed6a3e7add34e3201d330bf51))
+
+
+
+# [0.39.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.37...v0.39.0-rc.38) (2023-02-13)
+
+
+### Bug Fixes
+
+* **core,platform:** multi input/combobox addon button click event ([#9359](https://github.com/SAP/fundamental-ngx/issues/9359)) ([b75f7c1](https://github.com/SAP/fundamental-ngx/commit/b75f7c1ffd107e8562e8c9ead8cffae9b52c5606))
+
+
+
+# [0.39.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.36...v0.39.0-rc.37) (2023-02-10)
+
+
+### Bug Fixes
+
+* overflow layout memory leaks ([#9350](https://github.com/SAP/fundamental-ngx/issues/9350)) ([8a6fb7d](https://github.com/SAP/fundamental-ngx/commit/8a6fb7dcd6fe0c7208937b0a27117cf9b2cde61f))
+
+
+
+# [0.39.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.35...v0.39.0-rc.36) (2023-02-09)
+
+
+### Features
+
+* **platform:** table not selectable and preselected rows ([#9304](https://github.com/SAP/fundamental-ngx/issues/9304)) ([e66901b](https://github.com/SAP/fundamental-ngx/commit/e66901b482b057a902e1a36c114d61bfa71eedb1))
+
+
+
+# [0.39.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.34...v0.39.0-rc.35) (2023-02-08)
+
+
+### Bug Fixes
+
+* **core:** dynamic page should not add scrollbar directive if there is a tablist ([#9317](https://github.com/SAP/fundamental-ngx/issues/9317)) ([a83f1d2](https://github.com/SAP/fundamental-ngx/commit/a83f1d2d9e2acc41577efd6f5009e0dfba5eca82))
+
+
+
+# [0.39.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.33...v0.39.0-rc.34) (2023-02-08)
+
+
+### Bug Fixes
+
+* lint error ([#9352](https://github.com/SAP/fundamental-ngx/issues/9352)) ([7d1b614](https://github.com/SAP/fundamental-ngx/commit/7d1b6149944a1c94b419184e38b20051a43739c6))
+
+
+
 # [0.39.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.32...v0.39.0-rc.33) (2023-02-06)
 
 

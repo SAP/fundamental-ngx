@@ -2,7 +2,6 @@ import { EventEmitter, Injector } from '@angular/core';
 import { PresetManagedComponent } from '@fundamental-ngx/platform/shared';
 import { Observable } from 'rxjs';
 
-import { SaveRowsEvent } from './interfaces/save-rows-event.interface';
 import { TableState } from './interfaces/table-state.interface';
 import { CollectionSort } from './interfaces/collection-sort.interface';
 import { CollectionFilter } from './interfaces/collection-filter.interface';
@@ -10,7 +9,7 @@ import { CollectionGroup } from './interfaces/collection-group.interface';
 import { SearchInput } from './interfaces/search-field.interface';
 import { TableColumn } from './components/table-column/table-column';
 import { TableDataSource } from './domain';
-import { PlatformTableManagedPreset } from './models';
+import { PlatformTableManagedPreset, SaveRowsEvent } from './models';
 
 export abstract class Table<T = any> implements PresetManagedComponent<PlatformTableManagedPreset> {
     abstract readonly name: string;

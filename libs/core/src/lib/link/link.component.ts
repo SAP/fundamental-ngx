@@ -21,7 +21,8 @@ import { RouterLink } from '@angular/router';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { map, startWith, Subject, takeUntil, tap } from 'rxjs';
 import { DomPortal, Portal } from '@angular/cdk/portal';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_LINK_COMPONENT } from './tokens';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -31,6 +32,10 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
+        {
+            provide: FD_LINK_COMPONENT,
+            useExisting: LinkComponent
+        },
         {
             provide: 'linkRouterTarget',
             useFactory: (withHref?: RouterLink, routerLink?: RouterLink): RouterLink | undefined =>
@@ -44,7 +49,7 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
 })
 export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit, OnDestroy {
     /** @hidden */
-    @ContentChildren(IconComponent)
+    @ContentChildren(FD_ICON_COMPONENT)
     iconComponents: QueryList<IconComponent>;
 
     /** @hidden */
@@ -91,11 +96,11 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef<Element>,
+        private _elementRef: ElementRef<HTMLElement>,
         private changeDetectorRef: ChangeDetectorRef,
         @Inject('linkRouterTarget') readonly routerLink: RouterLink
     ) {
-        if (isDevMode() && this.elementRef().nativeElement.hasAttribute('fd-breadcrumb-link')) {
+        if (isDevMode() && this._elementRef.nativeElement.hasAttribute('fd-breadcrumb-link')) {
             console.warn('The fd-breadcrumb-link attribute is deprecated. Please use fd-link instead.');
         }
     }

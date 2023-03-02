@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$id": "sap-component",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Component name",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            }
+        },
+        "project": {
+            "type": "string",
+            "enum": ["core", "platform", "cx", "cdk"]
+        }
+    },
+    "required": ["name", "project"]
+}

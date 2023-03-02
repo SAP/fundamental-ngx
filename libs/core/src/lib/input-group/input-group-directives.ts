@@ -146,7 +146,7 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
     /** @hidden */
     ngAfterContentInit(): void {
         /** Add fd-input-group__button to button child element */
-        const button = this.elementRef().nativeElement.querySelector('button');
+        const button = this._elementRef.nativeElement.querySelector('button');
         if (button) {
             this.renderer.addClass(button, 'fd-input-group__button');
         }

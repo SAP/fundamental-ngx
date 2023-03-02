@@ -29,7 +29,6 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
                 </fd-button-bar>
                 <fd-button-bar
                     label="Cancel"
-                    fdInitialFocus
                     fdType="transparent"
                     (click)="dialogRef.dismiss('Cancel')"
                     ariaLabel="Cancel"

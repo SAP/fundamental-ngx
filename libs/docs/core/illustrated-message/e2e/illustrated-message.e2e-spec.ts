@@ -7,7 +7,8 @@ import {
     getElementArrayLength,
     isElementClickable,
     saveElementScreenshot,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForNotPresent
 } from '../../../../../e2e';
 
 describe('Illustrated-message test suite', () => {
@@ -39,13 +40,13 @@ describe('Illustrated-message test suite', () => {
 
         it('should close dialog popup illustrated message by click on "Close sign X" button', async () => {
             await click(closePopupSignButton);
-            await expect(await doesItExist(dialogPopup)).toBe(false, 'dialog was not closed by clicking on X');
+            await expect(await waitForNotPresent(dialogPopup)).toBe(true, 'dialog was not closed by clicking on X');
         });
 
         it('should close dialog popup illustrated message by click on "Close" button', async () => {
             await click(buttonDialog);
             await click(closePopupButton);
-            await expect(await doesItExist(dialogPopup)).toBe(false, 'dialog was not closed by clicking close');
+            await expect(await waitForNotPresent(dialogPopup)).toBe(true, 'dialog was not closed by clicking close');
         });
     });
 

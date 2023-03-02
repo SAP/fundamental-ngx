@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 @Component({
@@ -7,7 +7,8 @@ import { RtlService } from '@fundamental-ngx/cdk/utils';
         <label fd-form-label> Simulate RTL </label>
         <fd-switch [(ngModel)]="isChecked" (ngModelChange)="onChange()"></fd-switch>
     `,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DirectionalityComponent implements OnInit {
     id: string;

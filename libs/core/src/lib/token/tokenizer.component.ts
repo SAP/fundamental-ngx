@@ -55,8 +55,8 @@ export class TokenizerComponent
     tokenList: QueryList<TokenComponent>;
 
     /** @hidden */
-    @ContentChild(forwardRef(() => FormControlComponent))
-    input: FormControlComponent;
+    @ContentChild(forwardRef(() => FormControlComponent), { read: ElementRef })
+    input: ElementRef;
 
     /** @hidden */
     @ViewChild('tokenizerInner')
@@ -181,7 +181,7 @@ export class TokenizerComponent
     ) {
         this._eventListeners.push(
             this._renderer.listen('window', 'click', (e: Event) => {
-                if (this.elementRef().nativeElement.contains(e.target) === false) {
+                if (this._elementRef.nativeElement.contains(e.target) === false) {
                     this.tokenList.forEach((token) => {
                         token.selected = false;
                     });
@@ -192,7 +192,7 @@ export class TokenizerComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.input && this.input.elementRef()) {
+        if (this.input?.nativeElement) {
             this._inputKeydownEvent();
         }
         // watch for changes to the tokenList and attempt to expand/collapse tokens as needed
@@ -387,8 +387,8 @@ export class TokenizerComponent
             totalTokenWidth = totalTokenWidth + token.elementRef.nativeElement.getBoundingClientRect().width;
         });
         // add input width
-        if (this.input && this.input.elementRef()) {
-            totalTokenWidth = totalTokenWidth + this.input.elementRef().nativeElement.getBoundingClientRect().width;
+        if (this.input?.nativeElement) {
+            totalTokenWidth = totalTokenWidth + this.input.nativeElement.getBoundingClientRect().width;
         }
         // add the width of the "____ more" element
         if (this.moreTokensLeft.length > 0 && this.moreElement && this.moreElement.nativeElement) {
@@ -504,6 +504,7 @@ export class TokenizerComponent
         this.handleTokenClickSubscriptions();
         this.previousTokenCount = this.tokenList.length;
         this.tokenList.forEach((token) => token._setTotalCount(this.tokenList.length));
+        this._cdRef.markForCheck();
     }
 
     /** @hidden */
@@ -552,7 +553,7 @@ export class TokenizerComponent
     /** @hidden */
     private _inputKeydownEvent(): void {
         this._eventListeners.push(
-            this._renderer.listen(this.input.elementRef().nativeElement, 'keydown', (event: KeyboardEvent) => {
+            this._renderer.listen(this.input.nativeElement, 'keydown', (event: KeyboardEvent) => {
                 this.handleKeyDown(event, this.tokenList.length);
             })
         );
@@ -661,7 +662,7 @@ export class TokenizerComponent
 
     /** @hidden */
     private _isInputFocused(): boolean {
-        return document.activeElement === this.input.elementRef().nativeElement;
+        return document.activeElement === this.input.nativeElement;
     }
 
     /** @hidden */
@@ -671,12 +672,12 @@ export class TokenizerComponent
 
     /** @hidden */
     private _getInputValue(): string {
-        return this.input.elementRef().nativeElement.value;
+        return this.input.nativeElement.value;
     }
 
     /** @hidden */
     private _focusInput(): void {
-        this.input.elementRef().nativeElement.focus();
+        this.input.nativeElement.focus();
     }
 
     /** @hidden */
@@ -687,11 +688,11 @@ export class TokenizerComponent
     /** @hidden */
     private _listenElementEvents(): void {
         merge(
-            fromEvent<Event>(this.elementRef().nativeElement, 'focus', { capture: true }).pipe(
+            fromEvent<Event>(this._elementRef.nativeElement, 'focus', { capture: true }).pipe(
                 filter((event) => (event['target'] as any)?.tagName === 'INPUT' && this.tokenizerFocusable),
                 mapTo(true)
             ),
-            fromEvent<Event>(this.elementRef().nativeElement, 'blur', { capture: true }).pipe(mapTo(false))
+            fromEvent<Event>(this._elementRef.nativeElement, 'blur', { capture: true }).pipe(mapTo(false))
         )
             .pipe(
                 // debounceTime is needed in order to filter subsequent focus-blur events, that happen simultaneously

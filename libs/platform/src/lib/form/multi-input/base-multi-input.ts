@@ -37,7 +37,7 @@ import { takeUntil, startWith } from 'rxjs/operators';
 
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { ListComponent } from '@fundamental-ngx/core/list';
+import { FdpListComponent, ListComponent } from '@fundamental-ngx/platform/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import {
     CollectionBaseInput,
@@ -146,6 +146,10 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @Input()
     autoResize = false;
 
+    /** Whether to open the dropdown when the addon button is clicked. */
+    @Input()
+    openDropdownOnAddOnClicked = true;
+
     /** Value of the multi input */
     @Input()
     set value(value: any) {
@@ -179,9 +183,13 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
 
+    /** Emits event when the addon button is clicked. */
+    @Output()
+    readonly addOnButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
+
     /** @hidden */
-    @ViewChild(ListComponent)
-    listComponent: ListComponent;
+    @ViewChild(FdpListComponent)
+    listComponent: ListComponent<MultiInputOption>;
 
     /** @hidden */
     @ContentChildren(TemplateDirective)
@@ -340,20 +348,29 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             this._dsSubscription.unsubscribe();
         }
     }
-    /** @hidden
+    /**
+     * @hidden
      * Define is this item selected
      */
     abstract isSelectedOptionItem(selectedItem: MultiInputOption): boolean;
 
-    /** @hidden
+    /**
+     * @hidden
      * Emit select OptionItem
      * */
     abstract selectOptionItem(item: MultiInputOption): void;
 
-    /** @hidden
+    /**
+     * @hidden
      * Define value as selected
      * */
     abstract setAsSelected(item: MultiInputOption[]): void;
+
+    /**
+     * @hidden
+     * Mathod for marking list option as selected.
+     */
+    abstract _markListItemsAsSelected(): void;
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
@@ -375,13 +392,27 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this.isOpenChange.emit(this.isOpen);
         this.openChange.next(this.isOpen);
         this._cd.markForCheck();
+        setTimeout(() => {
+            this._markListItemsAsSelected();
+            if (this.inputText) {
+                return;
+            }
+            // Focus on the first item in dropdown.
+            this.listComponent?._setCurrentActiveItemIndex(0);
+            this.listComponent?.listItems.first.focus();
+        });
     }
     /** Closes the select popover body. */
     close(): void {
         this.isOpen = false;
+        this.searchTermChanged();
         this.isOpenChange.emit(this.isOpen);
         this.openChange.next(this.isOpen);
         this._cd.markForCheck();
+
+        if (!this.mobile) {
+            this.searchInputElement.nativeElement.focus();
+        }
     }
 
     /** @hidden */
@@ -397,7 +428,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         const map = new Map();
         map.set('query', text);
         map.set('limit', 12);
-        this.ds.match(map);
+        this.ds?.match(map);
 
         this.searchTermChange.emit(text);
 
@@ -448,9 +479,9 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
                 this.showList(true);
             }
 
-            if (this.isOpen && this.listComponent) {
-                this.listComponent.setItemActive(0);
-            } else if (!this.isOpen) {
+            if (this.isOpen) {
+                this.listComponent?.listItems.first.focus();
+            } else {
                 this._chooseOtherItem(1);
             }
         } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {

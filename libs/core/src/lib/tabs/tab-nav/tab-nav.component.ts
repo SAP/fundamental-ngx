@@ -103,6 +103,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
         this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
+        this._keyboardEventsManager?.destroy();
     }
 
     /** @hidden
@@ -178,6 +179,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
 
     /** @hidden */
     private _setupKeyManager(): void {
+        this._keyboardEventsManager?.destroy();
         this._keyboardEventsManager = new FocusKeyManager(this.links).withWrap().withHorizontalOrientation(this._dir);
 
         this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl) => {

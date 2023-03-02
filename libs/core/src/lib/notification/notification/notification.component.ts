@@ -17,14 +17,15 @@ import {
     Type,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    Inject
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { NotificationRef } from '../notification-utils/notification-ref';
 import { AbstractFdNgxClass, RtlService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { NotificationConfig } from '../notification-utils/notification-config';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { FD_POPOVER_COMPONENT, PopoverComponent } from '@fundamental-ngx/core/popover';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { filter, take, takeUntil } from 'rxjs/operators';
@@ -114,7 +115,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         @Optional() private _notificationConfig: NotificationConfig,
         @Optional() private _notificationRef: NotificationRef,
         @Optional() private _rtlService: RtlService,
-        @Optional() private _popover: PopoverComponent
+        @Optional() @Inject(FD_POPOVER_COMPONENT) private _popover: PopoverComponent
     ) {
         super(_elRef);
 

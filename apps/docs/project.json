@@ -10,7 +10,7 @@
     },
     "targets": {
         "e2e-app": {
-            "executor": "@fundamental-ngx/wdio:e2e-test-app",
+            "executor": "@fundamental-ngx/nx-plugin:e2e-test-app",
             "configurations": {
                 "affected-local": {
                     "affected": true,
@@ -37,7 +37,6 @@
                 "commands": [
                     "npx nx run core:compile-typedoc",
                     "npx nx run platform:compile-typedoc",
-                    "npx nx run fn:compile-typedoc",
                     "npx nx run datetime-adapter:compile-typedoc",
                     "npx nx run moment-adapter:compile-typedoc",
                     "npx nx run i18n:compile-typedoc",
@@ -88,11 +87,6 @@
                         "output": "./assets/core"
                     },
                     {
-                        "input": "./libs/fn/src/lib",
-                        "glob": "README.md",
-                        "output": "./assets/fn"
-                    },
-                    {
                         "input": "./libs/cdk/src/lib",
                         "glob": "README.md",
                         "output": "./assets/cdk"
@@ -126,11 +120,6 @@
                         "glob": "**/examples/**/*",
                         "input": "libs/docs/platform",
                         "output": "./docs/platform"
-                    },
-                    {
-                        "glob": "**/examples/**/*",
-                        "input": "libs/docs/fn",
-                        "output": "./docs/fn"
                     },
                     {
                         "glob": "**/examples/**/*",
@@ -258,5 +247,5 @@
         }
     },
     "tags": ["scope:docs", "type:app"],
-    "implicitDependencies": ["cdk", "core", "platform", "fn", "i18n", "datetime-adapter", "moment-adapter"]
+    "implicitDependencies": ["cdk", "core", "platform", "i18n", "datetime-adapter", "moment-adapter"]
 }

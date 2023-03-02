@@ -246,7 +246,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      * @hidden
      * Whether listitem is selected binded to template
      */
-    _selected: boolean;
+    _selected = false;
 
     /**
      * @hidden
@@ -337,6 +337,20 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      */
     focus(): void {
         this.listItem.nativeElement.focus();
+    }
+
+    /**
+     * Programmatically set selected state of the list item.
+     * @param selected Whether the list item is selected
+     */
+    setSelected(selected: boolean): void {
+        if (selected === this._selected) {
+            return;
+        }
+        const event = new ModifyItemEvent();
+        event.source = this;
+        this._selected = selected;
+        this._changeDetectorRef.detectChanges();
     }
 
     /**

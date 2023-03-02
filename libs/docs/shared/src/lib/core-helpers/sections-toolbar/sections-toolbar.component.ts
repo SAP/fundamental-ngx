@@ -1,4 +1,14 @@
-import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    inject,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges
+} from '@angular/core';
 import {
     SectionInterface,
     SectionInterfaceContent,
@@ -12,7 +22,8 @@ const SMALL_SCREEN_BREAKPOINT = 992;
 @Component({
     selector: 'sections-toolbar',
     templateUrl: './sections-toolbar.component.html',
-    styleUrls: ['./sections-toolbar.component.scss']
+    styleUrls: ['./sections-toolbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SectionsToolbarComponent implements OnInit, OnChanges {
     @Input() sections: SectionInterface[];

@@ -37,13 +37,20 @@ import {
     TWO_COLUMNS_MID_EXPANDED,
     TWO_COLUMNS_START_EXPANDED
 } from './constants';
+import { FD_FLEXIBLE_COLUMN_LAYOUT_COMPONENT } from './tokens';
 
 @Component({
     selector: 'fd-flexible-column-layout',
     templateUrl: './flexible-column-layout.component.html',
     styleUrls: ['./flexible-column-layout.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: FD_FLEXIBLE_COLUMN_LAYOUT_COMPONENT,
+            useExisting: FlexibleColumnLayoutComponent
+        }
+    ]
 })
 export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit {
     /**

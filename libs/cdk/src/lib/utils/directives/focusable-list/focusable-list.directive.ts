@@ -2,9 +2,13 @@ import {
     AfterViewInit,
     ContentChildren,
     Directive,
+    ElementRef,
     EventEmitter,
+    HostBinding,
+    HostListener,
     Input,
     OnChanges,
+    OnDestroy,
     Output,
     QueryList,
     Renderer2,
@@ -18,13 +22,22 @@ import {
     FD_DEPRECATED_DIRECTIVE_SELECTOR,
     getDeprecatedModel
 } from '../../deprecated-selector.class';
-import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from '../focusable-item';
+import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableObserver } from '../focusable-item';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE } from './focusable-list.tokens';
-import { fromEvent, merge, Subject } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import { Nullable } from '../../models/nullable';
-import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
+import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { getNativeElement } from '../../helpers';
 import { HasElementRef } from '../../interfaces';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { intersectionObservable, KeyUtil } from '../../functions';
+import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
+import { scrollIntoView, ScrollPosition } from './scroll';
+
+export interface FocusableListPosition {
+    rowIndex: number;
+    totalRows: number;
+}
 
 export interface FocusableListItemFocusedEvent {
     index: number;
@@ -43,7 +56,8 @@ interface FocusableListConfig {
     contentDirection?: 'ltr' | 'rtl' | null;
 }
 
-export type FocusableItem = FocusableOption & HasElementRef & { index: number; focusable: (() => boolean) | boolean };
+export type FocusableItem = FocusableOption &
+    HasElementRef & { index: number; focusable: (() => boolean) | boolean; keydown: Subject<KeyboardEvent> };
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -70,7 +84,21 @@ export class DeprecatedFocusableListDirective extends DeprecatedSelector {}
         DestroyedService
     ]
 })
-export class FocusableListDirective implements OnChanges, AfterViewInit {
+export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestroy {
+    /** Whether the whole list should be focusable, handy in grids. */
+    @Input()
+    set focusable(value: BooleanInput) {
+        this._focusable = coerceBooleanProperty(value);
+
+        this.setTabbable(this._focusable);
+    }
+    get focusable(): boolean {
+        return this._focusable;
+    }
+
+    /** @hidden */
+    private _focusable = false;
+
     /** Direction of navigation. Should be set to 'grid' when list is a part of grid. */
     @Input()
     navigationDirection: 'horizontal' | 'vertical' | 'grid' = 'vertical';
@@ -85,16 +113,23 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
     @Input()
     wrap = false;
 
-    /** Event emitted when item focused, contains item's position info. */
+    /** Function, which returns a string to be announced by screen-reader whenever an row which is in grid receives focus. */
+    @Input()
+    listFocusedEventAnnouncer: (position: FocusableListPosition) => string = this._defaultListFocusedEventAnnouncer;
+
+    /** Event emitted when list's item focused, contains item's position info. */
     @Output()
     readonly itemFocused = new EventEmitter<FocusableListItemFocusedEvent>();
 
     /** @hidden */
-    @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
+    @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE, { descendants: true })
     public readonly _focusableItems: QueryList<FocusableItemDirective>;
 
     /** @hidden */
     public readonly _gridItemFocused$ = new Subject<FocusableItemPosition>();
+
+    /** @hidden */
+    public readonly _gridListFocused$ = new Subject<FocusableListPosition>();
 
     /** @hidden */
     public readonly _keydown$ = new Subject<FocusableListKeydownEvent>();
@@ -106,10 +141,41 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
     private _keyManager?: FocusKeyManager<FocusableItem>;
 
     /** @hidden */
+    private _tabbable = false;
+
+    /** @hidden */
     private readonly _refreshItems$ = new Subject<void>();
 
     /** @hidden */
-    constructor(private _renderer: Renderer2, private _destroy$: DestroyedService) {}
+    @HostBinding('attr.tabindex')
+    get _tabindex(): number {
+        return this._tabbable ? 0 : -1;
+    }
+
+    /** @hidden */
+    _isVisible = false;
+
+    /** @hidden */
+    constructor(
+        private _renderer: Renderer2,
+        private _destroy$: DestroyedService,
+        private _elementRef: ElementRef<HTMLElement>,
+        private _liveAnnouncer: LiveAnnouncer,
+        private _focusableObserver: FocusableObserver
+    ) {
+        intersectionObservable(this._elementRef.nativeElement, { threshold: 0.25 })
+            .pipe(takeUntil(this._destroy$))
+            .subscribe((isVisible) => (this._isVisible = isVisible[0]?.isIntersecting));
+
+        this._focusableObserver
+            .observe(this._elementRef, false)
+            .pipe(takeUntil(this._destroy$))
+            .subscribe((isFocusable) => {
+                if (!isFocusable && isFocusable !== this.focusable) {
+                    this.focusable = isFocusable;
+                }
+            });
+    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -121,16 +187,8 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
             this._keyManager = this._keyManager.withWrap(changes['wrap'].currentValue);
         }
 
-        if (changes['contentDirection']) {
-            if (changes['contentDirection'].currentValue === 'vertical') {
-                this._keyManager = this._keyManager.withVerticalOrientation(true);
-                this._keyManager = this._keyManager.withHorizontalOrientation(null);
-            } else {
-                this._keyManager = this._keyManager.withVerticalOrientation(false);
-                this._keyManager = this._keyManager.withHorizontalOrientation(
-                    changes['contentDirection'].currentValue || 'ltr'
-                );
-            }
+        if (changes['navigationDirection']) {
+            this._updateNavigationDirection();
         }
     }
 
@@ -145,7 +203,8 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
                         index,
                         focusable: () => item.fdkFocusableItem,
                         elementRef: () => item.elementRef(),
-                        focus: () => item.elementRef().nativeElement.focus()
+                        focus: () => item.elementRef().nativeElement.focus(),
+                        keydown: item._keydown$
                     }));
 
                     const direction = this.navigationDirection === 'grid' ? 'horizontal' : this.navigationDirection;
@@ -161,10 +220,98 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
             .subscribe();
     }
 
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._keyManager?.destroy();
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    _onKeydown(event: KeyboardEvent): void {
+        // Already handled
+        if (event.defaultPrevented) {
+            return;
+        }
+
+        const isFocused = document.activeElement === this._elementRef.nativeElement;
+        const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2]) && !event.shiftKey && isFocused;
+        const shouldFocusList =
+            ((KeyUtil.isKeyCode(event, F2) && event.shiftKey) || KeyUtil.isKeyCode(event, ESCAPE)) && !isFocused;
+
+        if (shouldFocusChild) {
+            event.stopPropagation();
+
+            this.setActiveItem(0);
+
+            return;
+        } else if (shouldFocusList) {
+            event.stopPropagation();
+
+            this.focus();
+
+            return;
+        }
+
+        this._keydown$.next({ list: this, event, activeItemIndex: this._keyManager?.activeItemIndex ?? null });
+    }
+
     /** Set active item in list */
-    setActiveItem(index: number): void {
-        if (this._focusableItems.get(index)?.fdkFocusableItem) {
-            this._keyManager?.setActiveItem(index);
+    setActiveItem(index: number, scrollPosition?: ScrollPosition): void {
+        let availableIndex;
+
+        this._focusableItems.find((item, itemIndex) => {
+            if (itemIndex >= index && item.fdkFocusableItem) {
+                availableIndex = itemIndex;
+                return true;
+            }
+
+            return false;
+        });
+
+        if (availableIndex != null) {
+            scrollIntoView(this._focusableItems.get(availableIndex)?.elementRef().nativeElement, scrollPosition);
+            this._keyManager?.setActiveItem(availableIndex);
+        }
+    }
+
+    /** Focus whole list */
+    focus(scrollPosition?: ScrollPosition): void {
+        if (this.focusable) {
+            scrollIntoView(this._elementRef.nativeElement, scrollPosition);
+            this._elementRef.nativeElement.focus();
+        }
+    }
+
+    /** Set tabbable state */
+    setTabbable(state: boolean): void {
+        this._tabbable = state;
+    }
+
+    /** @hidden */
+    @HostListener('focus')
+    async _onFocus(): Promise<void> {
+        if (this._gridPosition) {
+            this._gridListFocused$.next(this._gridPosition);
+
+            this._liveAnnouncer.clear();
+            await this._liveAnnouncer.announce(this.listFocusedEventAnnouncer(this._gridPosition));
+
+            this.setTabbable(true);
+        }
+    }
+
+    /** @hidden */
+    _updateNavigationDirection(): void {
+        if (!this._keyManager) {
+            return;
+        }
+
+        if (this.navigationDirection === 'vertical') {
+            this._keyManager = this._keyManager.withVerticalOrientation(true);
+            this._keyManager = this._keyManager.withHorizontalOrientation(null);
+        } else {
+            this._keyManager = this._keyManager.withVerticalOrientation(false);
+            this._keyManager = this._keyManager.withHorizontalOrientation(this.contentDirection || 'ltr');
         }
     }
 
@@ -174,7 +321,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
     }
 
     /** @hidden */
-    _setGridPosition(position: { rowIndex: number; totalRows: number }): void {
+    _setGridPosition(position: FocusableListPosition): void {
         this._gridPosition = position;
 
         this._focusableItems.changes
@@ -199,7 +346,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
     ): void {
         this._refreshItems$.next();
 
-        let keyManager = new FocusKeyManager<any>(items);
+        let keyManager = new FocusKeyManager<any>(items).withHomeAndEnd();
 
         if (config.wrap !== false) {
             keyManager = keyManager.withWrap();
@@ -216,7 +363,6 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
 
         this._keyManager = keyManager;
 
-        const events$ = items.map((item) => fromEvent<KeyboardEvent>(getNativeElement(item), 'keydown'));
         const focusListenerDestroyers = items.map((item, index) =>
             this._renderer.listen(getNativeElement(item), 'focus', () => {
                 const directiveItem = this._focusableItems.get(index);
@@ -234,11 +380,10 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
             })
         );
 
-        merge(...events$)
+        merge(...items.map((item) => item.keydown))
             .pipe(
                 tap((event: KeyboardEvent) => {
-                    this._keydown$.next({ list, event, activeItemIndex: this._keyManager?.activeItemIndex });
-
+                    // Already handled
                     if (event.defaultPrevented) {
                         return;
                     }
@@ -249,5 +394,10 @@ export class FocusableListDirective implements OnChanges, AfterViewInit {
                 finalize(() => focusListenerDestroyers.forEach((d) => d()))
             )
             .subscribe();
+    }
+
+    /** @hidden */
+    private _defaultListFocusedEventAnnouncer(position: FocusableListPosition): string {
+        return `Row: ${position.rowIndex + 1} of ${position.totalRows}, use F2 button to dive in and focus list's item`;
     }
 }

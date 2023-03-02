@@ -258,8 +258,16 @@
         {
             "files": ["*.html"],
             "rules": {}
+        },
+        {
+            "files": ["*.json"],
+            "extends": "plugin:json/recommended"
+        },
+        {
+            "files": ["*.md"],
+            "extends": "plugin:markdown/recommended"
         }
     ],
-    "plugins": ["@nrwl/nx"],
+    "plugins": ["@nrwl/nx", "json", "markdown"],
     "root": true
 }

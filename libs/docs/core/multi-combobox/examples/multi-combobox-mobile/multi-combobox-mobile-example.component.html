@@ -1,14 +1,18 @@
 <p>Mobile Mode Combobox:</p>
 
-<fd-multi-combobox
-    name="mobile"
-    placeholder="Type some text..."
-    displayKey="name"
-    id="mobile"
-    [dataSource]="dataSource"
-    [mobile]="true"
-    [mobileConfig]="mobileConfig"
-    (selectionChange)="onSelect($event)"
-    [selectedItems]="selectedItems"
-></fd-multi-combobox>
+<div fd-form-item>
+    <label fd-form-label for="mobile-input">Mobile Mode Combobox:</label>
+    <fd-multi-combobox
+        name="mobile"
+        inputId="mobile-input"
+        placeholder="Type some text..."
+        displayKey="name"
+        id="mobile"
+        [dataSource]="dataSource"
+        [mobile]="true"
+        [mobileConfig]="mobileConfig"
+        (selectionChange)="onSelect($event)"
+        [selectedItems]="selectedItems"
+    ></fd-multi-combobox>
+</div>
 <p>Selected: {{ selectedItems | json }}</p>

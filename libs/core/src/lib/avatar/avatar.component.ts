@@ -23,6 +23,7 @@ import {
     CssClassBuilder
 } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FD_AVATAR_COMPONENT } from './tokens';
 
 let avatarUniqueId = 0;
 
@@ -39,6 +40,12 @@ const ALTER_ICON_OPTIONS = {
     styleUrls: ['./avatar.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: FD_AVATAR_COMPONENT,
+            useExisting: AvatarComponent
+        }
+    ],
     host: {
         '[attr.tabindex]': '_tabindex'
     }
@@ -268,7 +275,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     /** @hidden */
     zoomClicked(event: Event): void {
         event.preventDefault();
-        this.elementRef().nativeElement.focus();
+        this._elementRef.nativeElement.focus();
         this.zoomGlyphClicked.next();
     }
 
@@ -336,7 +343,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
             const option = options[i];
 
             if (option === ALTER_ICON_OPTIONS.CONTENT) {
-                const contentValue = this._content?.nativeElement.innerText;
+                const contentValue = this._content?.nativeElement.textContent;
                 if (contentValue) {
                     this.abbreviate = this._generateAbbreviation(contentValue);
                     break;
@@ -346,7 +353,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
             }
 
             if (option === ALTER_ICON_OPTIONS.ALT) {
-                const altValue = this.elementRef().nativeElement.getAttribute('alt');
+                const altValue = this._elementRef.nativeElement.getAttribute('alt');
                 if (altValue) {
                     this.abbreviate = this._generateAbbreviation(altValue);
                     break;

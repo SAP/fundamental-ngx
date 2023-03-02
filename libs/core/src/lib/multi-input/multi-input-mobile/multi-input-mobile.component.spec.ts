@@ -6,7 +6,7 @@ import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { EventEmitter } from '@angular/core';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { MultiInputComponent } from '../multi-input.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MULTI_INPUT_COMPONENT } from '../multi-input.interface';
 
 describe('MultiInputMobileComponent', () => {
@@ -35,7 +35,7 @@ describe('MultiInputMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule, BrowserAnimationsModule],
+            imports: [DialogModule, NoopAnimationsModule],
             declarations: [MultiInputMobileComponent],
             providers: [
                 DynamicComponentService,
@@ -75,29 +75,21 @@ describe('MultiInputMobileComponent', () => {
 
     it('should open and close with approve', () => {
         component.ngOnInit();
-        component.ngAfterViewInit();
-        spyOn(anyComponent.dialogRef._onHide, 'next');
         spyOn(anyComponent._component, 'dialogApprove');
         fixture.detectChanges();
-        expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         anyComponent._component.openChange.emit(true);
         fixture.detectChanges();
-        expect(anyComponent.dialogRef._onHide.next).toHaveBeenCalledWith(false);
         component.handleApprove();
         expect(anyComponent._component.dialogApprove).toHaveBeenCalled();
     });
 
     it('should open and close with dismiss', () => {
         component.ngOnInit();
-        component.ngAfterViewInit();
-        spyOn(anyComponent.dialogRef._onHide, 'next');
         spyOn(anyComponent._component, 'dialogDismiss');
         fixture.detectChanges();
-        expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         anyComponent._component.selected = [];
         anyComponent._component.openChange.emit(true);
         fixture.detectChanges();
-        expect(anyComponent.dialogRef._onHide.next).toHaveBeenCalledWith(false);
         component.handleDismiss();
         expect(anyComponent._component.dialogDismiss).toHaveBeenCalledWith([]);
     });

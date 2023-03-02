@@ -1,28 +1,38 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ComponentFactoryResolver,
+    ComponentRef,
     ElementRef,
+    HostBinding,
+    HostListener,
+    Injector,
     Input,
     TemplateRef,
     Type,
-    ViewChild,
-    ViewContainerRef
+    ViewChild
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { AnimationEvent } from '@angular/animations';
+import { applyCssClass, DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { DynamicComponentContainer } from '@fundamental-ngx/cdk/utils';
+import { takeUntil } from 'rxjs';
 import { MessageBoxConfig } from '../utils/message-box-config.class';
 import { MessageBoxRef } from '../utils/message-box-ref.class';
 import { MessageBoxContent } from '../utils/message-box-content.class';
 import { MessageBoxDefaultComponent } from '../message-box-default/message-box-default.component';
 import { MessageBoxContentType } from '../message-box-content.type';
+import { CdkPortalOutlet } from '@angular/cdk/portal';
+import { dialogFade } from '@fundamental-ngx/core/dialog';
 
 /** Message box container where the message box content is embedded. */
 @Component({
     selector: 'fd-message-box-container',
-    template: '<ng-container #contentContainer></ng-container>'
+    template: '<ng-template cdkPortalOutlet></ng-template>',
+    animations: [dialogFade],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyedService]
 })
 export class MessageBoxContainerComponent
     extends DynamicComponentContainer<MessageBoxContentType>
@@ -35,9 +45,13 @@ export class MessageBoxContainerComponent
         this.buildComponentCssClass();
     }
 
+    /** The state of the Dialog animations. */
+    @HostBinding('@state')
+    _animationState = 'void';
+
     /** @hidden */
-    @ViewChild('contentContainer', { read: ViewContainerRef })
-    containerRef: ViewContainerRef;
+    @ViewChild(CdkPortalOutlet)
+    portalOutlet: CdkPortalOutlet;
 
     /** @hidden */
     private _class = '';
@@ -46,16 +60,20 @@ export class MessageBoxContainerComponent
     constructor(
         public messageBoxConfig: MessageBoxConfig,
         private _messageBoxRef: MessageBoxRef,
+        private _destroy$: DestroyedService,
         elementRef: ElementRef,
-        componentFactoryResolver: ComponentFactoryResolver,
-        private _changeDetectorRef: ChangeDetectorRef
+        changeDetectorRef: ChangeDetectorRef,
+        injector: Injector
     ) {
-        super(elementRef, componentFactoryResolver);
+        super(elementRef, injector, changeDetectorRef);
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._loadContent();
+        setTimeout(() => {
+            this._loadContent();
+            this._listenOnClose();
+        });
     }
 
     /** @hidden */
@@ -78,7 +96,8 @@ export class MessageBoxContainerComponent
         } else {
             this._createFromDefaultMessageBox(this.childContent ?? null);
         }
-        this._changeDetectorRef.detectChanges();
+        this._animationState = 'visible';
+        this._cdr.detectChanges();
     }
 
     /** @hidden Returns context for embedded template*/
@@ -88,9 +107,34 @@ export class MessageBoxContainerComponent
 
     /** @hidden Load Dialog component from passed object */
     private _createFromDefaultMessageBox(content: MessageBoxContent | null): void {
-        this.containerRef.clear();
-        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(MessageBoxDefaultComponent);
-        this._componentRef = this.containerRef.createComponent<MessageBoxDefaultComponent>(componentFactory);
-        this._componentRef.instance._messageBoxContent = content;
+        this._createFromComponent(MessageBoxDefaultComponent);
+        const instance = (this._componentRef as ComponentRef<MessageBoxDefaultComponent>).instance;
+        instance._messageBoxContent = content;
+    }
+
+    /** Handle end of animations, updating the state of the Message Toast. */
+    @HostListener('@state.done', ['$event'])
+    onAnimationEnd(event: AnimationEvent): void {
+        const { toState } = event;
+
+        if (toState === 'hidden') {
+            this._messageBoxRef._endClose$.next();
+            this._messageBoxRef._endClose$.complete();
+        }
+    }
+
+    /**
+     * @hidden
+     * We need to wait until animation plays, and then send signal to the service to destroy the component.
+     */
+    private _listenOnClose(): void {
+        const callback: () => void = () => {
+            this._animationState = 'hidden';
+            this._cdr.detectChanges();
+        };
+        this._messageBoxRef.afterClosed.pipe(takeUntil(this._destroy$)).subscribe({
+            next: () => callback(),
+            error: () => callback()
+        });
     }
 }

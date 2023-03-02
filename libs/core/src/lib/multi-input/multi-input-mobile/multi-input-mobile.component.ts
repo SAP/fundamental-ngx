@@ -1,5 +1,4 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ElementRef,
@@ -20,6 +19,7 @@ import {
     MobileModeControl,
     MobileModeConfigToken
 } from '@fundamental-ngx/core/mobile-mode';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-multi-input-mobile',
@@ -28,10 +28,7 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class MultiInputMobileComponent
-    extends MobileModeBase<MultiInputInterface>
-    implements OnInit, AfterViewInit, OnDestroy
-{
+export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterface> implements OnInit, OnDestroy {
     /** @hidden */
     allItemsSelected: boolean;
 
@@ -43,10 +40,10 @@ export class MultiInputMobileComponent
      * Control element, which will be rendered inside dialog.
      * List element, which will be rendered inside dialog.
      */
-    childContent: {
+    childContent: Nullable<{
         listTemplate: TemplateRef<any>;
         controlTemplate: TemplateRef<any>;
-    } | null = null;
+    }> = null;
 
     /** @hidden */
     private _selectedBackup: any[];
@@ -67,14 +64,7 @@ export class MultiInputMobileComponent
     }
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        this._open();
-        this.dialogRef.hide(true);
-    }
-
-    /** @hidden */
     ngOnDestroy(): void {
-        this.dialogRef.close();
         super.onDestroy();
     }
 
@@ -85,25 +75,26 @@ export class MultiInputMobileComponent
 
     /** @hidden */
     handleDismiss(): void {
-        this.dialogRef.hide(true);
+        this.dialogRef.dismiss();
         this._component.dialogDismiss(this._selectedBackup);
     }
 
     /** @hidden */
     handleApprove(): void {
-        this.dialogRef.hide(true);
+        this.dialogRef.close();
         this._component.dialogApprove();
     }
 
     /** @hidden */
     private _toggleDialog(open: boolean): void {
-        if (open) {
-            this._selectedBackup = [...this._component.selected];
-            if (!this._dialogService.hasOpenDialogs()) {
-                this._open();
-            }
+        if (!open) {
+            return;
         }
-        this.dialogRef.hide(!open);
+
+        this._selectedBackup = this._component.selected?.length ? [...this._component.selected] : [];
+        if (!this._dialogService.hasOpenDialogs()) {
+            this._open();
+        }
     }
 
     /** @hidden */

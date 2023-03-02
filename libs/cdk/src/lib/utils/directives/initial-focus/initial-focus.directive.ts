@@ -59,18 +59,18 @@ export class InitialFocusDirective implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._executeOnStable(() => this._focus());
+        this._executeOnEmpty(() => this._focus());
     }
 
     /**
      * @hidden
      * Executes a function when the zone is stable.
      */
-    private _executeOnStable(fn: () => any): void {
-        if (this._ngZone.isStable) {
+    private _executeOnEmpty(fn: () => any): void {
+        if (!this._ngZone.hasPendingMicrotasks) {
             fn();
         } else {
-            this._ngZone.onStable.pipe(take(1)).subscribe(fn);
+            this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(fn);
         }
     }
 

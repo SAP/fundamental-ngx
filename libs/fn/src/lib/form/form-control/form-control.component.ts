@@ -158,8 +158,6 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
 
     /** @hidden */
     private _getElementTag(): string | undefined {
-        if (this.elementRef() && this.elementRef().nativeElement) {
-            return this.elementRef().nativeElement.tagName.toLocaleLowerCase();
-        }
+        return this._elementRef?.nativeElement.tagName.toLocaleLowerCase();
     }
 }

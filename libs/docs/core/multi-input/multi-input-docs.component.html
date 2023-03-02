@@ -156,3 +156,20 @@
     <fd-multi-input-dropdown-width-example></fd-multi-input-dropdown-width-example>
 </component-example>
 <code-example [exampleFiles]="customWidth"></code-example>
+
+<fd-docs-section-title id="addon-clicked" componentName="multi-input">
+    Addon Button Clicked Event
+</fd-docs-section-title>
+<description>
+    <p>
+        The <code>addOnButtonClicked</code> event is emitted when the user clicks the addon button. This event can be
+        captured to further configure custom behavior, in this example opening a window alert.
+        <br />
+        Use the <code>[openDropdownOnAddOnClicked]</code> to configure whether the multi-input dropdown list should be
+        opened when the addon button is clicked. Default is true.
+    </p>
+</description>
+<component-example>
+    <fd-multi-input-addon-clicked-example></fd-multi-input-addon-clicked-example>
+</component-example>
+<code-example [exampleFiles]="addonClicked"></code-example>

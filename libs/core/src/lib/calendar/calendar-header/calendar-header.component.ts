@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     Input,
     OnChanges,
@@ -16,7 +17,6 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
 import { FdCalendarView } from '../types';
@@ -204,8 +204,8 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     }
 
     /** @hidden */
-    @ViewChild('prevButton')
-    _prevButtonComponent: ButtonComponent;
+    @ViewChild('prevButton', { read: ElementRef })
+    _prevButtonComponent: ElementRef;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -260,10 +260,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
      * Focus on focusable control within the header
      */
     focus(): void {
-        if (!this._prevButtonComponent) {
-            return;
-        }
-        this._prevButtonComponent.elementRef().nativeElement.focus();
+        this._prevButtonComponent.nativeElement?.focus();
     }
 
     /** @hidden */

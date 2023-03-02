@@ -103,7 +103,6 @@ export class DialogInnerPopoverComponent {
                 </fd-button-bar>
                 <fd-button-bar
                     label="Cancel"
-                    fdInitialFocus
                     fdType="transparent"
                     (click)="dialogRef.dismiss('Cancel')"
                     ariaLabel="Cancel"

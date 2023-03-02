@@ -41,7 +41,6 @@ import equal from 'fast-deep-equal';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { RangeSelector } from '@fundamental-ngx/cdk/utils';
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -184,6 +183,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     @Input()
     limitless: boolean;
 
+    /** Whether to open the dropdown when the addon button is clicked. */
+    @Input()
+    openDropdownOnAddOnClicked = true;
+
     /** Event emitted when item is selected. */
     @Output()
     selectionChange = new EventEmitter<MultiComboboxSelectionChangeEvent>();
@@ -200,13 +203,17 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onDataReceived = new EventEmitter<void>();
 
+    /** Emits event when the addon button is clicked. */
+    @Output()
+    addOnButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
+
     /** @hidden */
     @ViewChild(ListComponent)
     listComponent: ListComponent;
 
     /** @hidden */
-    @ViewChild('searchInputElement')
-    searchInputElement: FormControlComponent;
+    @ViewChild('searchInputElement', { read: ElementRef })
+    searchInputElement: ElementRef;
 
     /** @hidden */
     @ContentChildren(TemplateDirective)
@@ -511,7 +518,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             this.searchTermChanged('');
         }
 
-        this.showList(!isOpen);
+        if (this.openDropdownOnAddOnClicked) {
+            this.showList(!isOpen);
+        }
 
         if (this.isOpen && this.listComponent) {
             this.listComponent.setItemActive(0);
@@ -561,7 +570,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     /** Method passed to list component */
     handleListFocusEscape(direction: FocusEscapeDirection): void {
         if (direction === 'up') {
-            this.searchInputElement?.elementRef().nativeElement.focus();
+            this.searchInputElement?.nativeElement.focus();
         }
     }
 
@@ -617,7 +626,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /** @hidden */
     protected _focusToSearchField(): void {
-        this.searchInputElement?.elementRef().nativeElement.focus();
+        this.searchInputElement?.nativeElement.focus();
     }
 
     /** @hidden

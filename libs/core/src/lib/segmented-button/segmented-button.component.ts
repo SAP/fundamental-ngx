@@ -11,7 +11,7 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { filter, startWith, takeUntil, tap } from 'rxjs/operators';
 import { Subject, merge, fromEvent } from 'rxjs';
 import { DestroyedService, KeyUtil } from '@fundamental-ngx/cdk/utils';
@@ -63,7 +63,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     _fdSegmentedButtonClass = true;
 
     /** @hidden */
-    @ContentChildren(ButtonComponent)
+    @ContentChildren(FD_BUTTON_COMPONENT)
     _buttons: QueryList<ButtonComponent>;
 
     /**

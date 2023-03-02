@@ -9,7 +9,7 @@ import {
     Input,
     Optional
 } from '@angular/core';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import { FocusableOption } from '@angular/cdk/a11y';
@@ -61,7 +61,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     _listNavigationItemArrow: ListNavigationItemArrowDirective;
 
     /** @hidden */
-    @ContentChild(IconComponent)
+    @ContentChild(FD_ICON_COMPONENT)
     _iconComponent: IconComponent;
 
     /** @hidden */
@@ -98,7 +98,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
         if (this._iconComponent) {
             this._iconComponent._navigationItemIcon = true;
         }
-        this._innerText = this._text.elementRef.nativeElement.innerText;
+        this._innerText = this._text.elementRef.nativeElement.textContent ?? '';
     }
 
     /** @hidden */

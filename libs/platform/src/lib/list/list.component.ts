@@ -499,9 +499,9 @@ export class ListComponent<T>
             this.dataSource.close();
         }
 
-        if (this._dsSubscription) {
-            this._dsSubscription.unsubscribe();
-        }
+        this._dsSubscription?.unsubscribe();
+
+        this._keyManager?.destroy();
     }
 
     /**
@@ -519,7 +519,7 @@ export class ListComponent<T>
         const activeItemIndex: Nullable<number> = this._keyManager.activeItemIndex;
 
         if (activeItemIndex) {
-            this._keyManager.setActiveItem(activeItemIndex);
+            this._setCurrentActiveItemIndex(activeItemIndex);
         }
 
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
@@ -528,6 +528,11 @@ export class ListComponent<T>
             this._updateNavigation(event);
             return false;
         }
+    }
+
+    /** @hidden */
+    _setCurrentActiveItemIndex(activeItemIndex: number): void {
+        this._keyManager?.setActiveItem(activeItemIndex);
     }
 
     /**

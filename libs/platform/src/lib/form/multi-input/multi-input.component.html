@@ -36,7 +36,7 @@
         [state]="state"
         [disabled]="disabled"
         (keydown)="removeSelectedTokens($event)"
-        (addOnButtonClicked)="addOnButtonClick()"
+        (addOnButtonClicked)="addOnButtonClick($event)"
         (click)="onInputGroupClicked()"
     >
         <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fdp-multi-input__invisible-text"
@@ -110,6 +110,7 @@
                 [title]="listItem.label"
                 [description]="listItem.description || ''"
                 [avatarSrc]="listItem.avatarSrc"
+                [value]="listItem.value"
                 (itemSelected)="selectionMode !== 'multi' && addToArray(listItem, true)"
                 (itemCheckboxSelected)="_checkboxSelected(listItem, $event)"
                 (buttonClicked)="deleteToken(listItem)"
@@ -133,6 +134,7 @@
                 <fdp-standard-list-item
                     *ngFor="let optionItem of group.children; let i = index"
                     [title]="optionItem.label"
+                    [value]="optionItem.value"
                     (itemSelected)="addToArray(optionItem, true)"
                     (itemCheckboxSelected)="addToArray(optionItem, false)"
                     (buttonClicked)="deleteToken(optionItem)"

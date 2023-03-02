@@ -1,7 +1,7 @@
 <fdp-form-field
     [hint]="hintOptions"
     [placeholder]="_placeholder"
-    [id]="formFieldName"
+    [id]="field.formItem.id || formFieldName"
     [column]="field.formItem.guiOptions?.column || 1"
     [columnLayout]="field.formItem.guiOptions?.columnLayout"
     [colon]="field.formItem.guiOptions?.appendColon === true"
@@ -42,6 +42,7 @@
         [form]="form"
         [formGroupNamePath]="formGroupNamePath"
         fdpDynamicFormControl
+        [id]="field.formItem.id || formFieldName"
         [name]="formFieldName"
         [formItem]="field.formItem"
     >

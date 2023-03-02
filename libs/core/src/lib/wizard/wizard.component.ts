@@ -18,7 +18,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { DialogBodyComponent } from '@fundamental-ngx/core/dialog';
+import { DialogBodyComponent, FD_DIALOG_BODY_COMPONENT } from '@fundamental-ngx/core/dialog';
 import { scrollTop } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { WizardStepComponent } from './wizard-step/wizard-step.component';
@@ -27,7 +27,7 @@ import { WizardContentComponent } from './wizard-content/wizard-content.componen
 import { ACTIVE_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS, COMPLETED_STEP_STATUS } from './constants';
 import { WIZARD } from './wizard-injection-token';
 import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
-import { ScrollbarComponent } from '@fundamental-ngx/core/scrollbar';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
@@ -120,8 +120,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     wrapperContainer: ElementRef<HTMLElement>;
 
     /** @hidden */
-    @ViewChild(ScrollbarComponent)
-    scrollbar: ScrollbarComponent;
+    @ViewChild(ScrollbarDirective)
+    scrollbar: ScrollbarDirective;
 
     /** @hidden */
     contentTemplates: TemplateRef<any>[] = [];
@@ -149,7 +149,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         private _elRef: ElementRef,
         private readonly _cdRef: ChangeDetectorRef,
         @Inject(FD_LANGUAGE) _language$: Observable<FdLanguage>,
-        @Optional() private _dialogBodyComponent: DialogBodyComponent
+        @Optional() @Inject(FD_DIALOG_BODY_COMPONENT) private _dialogBodyComponent: DialogBodyComponent
     ) {
         const sub = _language$.subscribe((lang) => {
             // set ariaLabel only if it's not applied manually

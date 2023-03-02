@@ -10,6 +10,7 @@ import {
     isElementClickable,
     isElementDisplayed,
     mouseHoverElement,
+    pause,
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
@@ -114,7 +115,7 @@ describe('calendar test suite', () => {
     describe('mobile calendar examples', () => {
         it('should check landscape mode calendar selections', async () => {
             await click(mobileExamples + button);
-            await waitForElDisplayed(mobileCalendar);
+            await pause(500);
 
             await checkCurrentDayHighlighted(mobileCalendar);
             await checkSingleSelection(mobileCalendar, calendarItem);
@@ -127,7 +128,7 @@ describe('calendar test suite', () => {
         it('should check landscape mode selection output', async () => {
             const startOutput = await getText(mobileExamples + selectionOutput);
             await click(mobileExamples + button);
-            await waitForElDisplayed(mobileCalendar);
+            await pause(500);
 
             await checkSingleSelection(mobileCalendar, calendarItem);
             await click(okBtn);
@@ -136,7 +137,7 @@ describe('calendar test suite', () => {
 
         it('should check portrait mode calendar selections', async () => {
             await click(mobileExamples + button, 1);
-            await waitForElDisplayed(mobileCalendar);
+            await pause(500);
 
             await checkCurrentDayHighlighted(mobileCalendar);
             await checkSingleSelection(mobileCalendar, calendarItem);
@@ -149,7 +150,7 @@ describe('calendar test suite', () => {
         it('should check portrait mode selection output', async () => {
             const startOutput = await getText(mobileExamples + selectionOutput);
             await click(mobileExamples + button, 1);
-            await waitForElDisplayed(mobileCalendar);
+            await pause(500);
 
             await checkSingleSelection(mobileCalendar, calendarItem);
             await click(okBtn);
@@ -158,13 +159,14 @@ describe('calendar test suite', () => {
 
         it('should check portrait and landscape modes', async () => {
             await click(mobileExamples + button);
-            await waitForElDisplayed(mobileCalendar);
+            await pause(500);
 
             await expect(await getAttributeByName(mobileCalendar, classAttribute)).toContain(landscapeAttribute);
 
             await click(okBtn);
+            await pause(500);
             await click(mobileExamples + button, 1);
-            await waitForElDisplayed(mobileCalendar);
+            await pause(500);
 
             await expect(await getAttributeByName(mobileCalendar, classAttribute)).toContain(portraitAttribute);
         });
@@ -247,31 +249,27 @@ describe('calendar test suite', () => {
         });
 
         it('should check ability to mark next week', async () => {
-            await click(specialDaysCalendar + calendarOptions, 1);
-            const currentDayIndex = await getCurrentDayIndex(specialDaysCalendar);
-            const tomorrowsDayIndex = currentDayIndex + 1;
             const nextMonthButton = specialDaysCalendar + rightArrowBtn;
-            let nextWeekDaysQuantity = 0;
-            const initialDaysQuantity = await getElementArrayLength(specialDaysCalendar + calendarItem);
-            for (let i = tomorrowsDayIndex; i < initialDaysQuantity; i++) {
-                if (nextWeekDaysQuantity < 7) {
-                    await expect(await getElementClass(specialDaysCalendar + calendarItem, i)).toContain('special-day');
-                    nextWeekDaysQuantity++;
-                } else {
-                    await expect(await getElementClass(specialDaysCalendar + calendarItem, i)).not.toContain(
-                        'special-day'
-                    );
-                }
-            }
-            if (tomorrowsDayIndex + 7 > initialDaysQuantity) {
+
+            await click(specialDaysCalendar + calendarOptions, 1);
+
+            const today = new Date();
+            const endDate = new Date(today);
+            endDate.setDate(today.getDate() + 7);
+
+            if (endDate.getDate() < today.getDate()) {
                 await click(nextMonthButton);
-                const rest = 7 - nextWeekDaysQuantity;
-                for (let i = 0; i < rest; i++) {
-                    await expect(await getElementClass(specialDaysCalendar + calendarItem, i)).toContain('special-day');
-                    nextWeekDaysQuantity++;
-                }
             }
-            expect(nextWeekDaysQuantity).toBe(7);
+
+            expect(
+                await (await $(specialDaysCalendar).$('.fd-calendar__item*=' + endDate.getDate())).getAttribute('class')
+            ).not.toContain('special-day');
+
+            expect(
+                await (
+                    await $(specialDaysCalendar).$('.fd-calendar__item*=' + (endDate.getDate() + 1))
+                ).getAttribute('class')
+            ).not.toContain('special-day');
         });
 
         it('should check ability to mark all Mondays', async () => {

@@ -1,2 +1,6 @@
 @import 'fundamental-styles/dist/input';
 @import 'fundamental-styles/dist/step-input';
+
+.fd-step-input {
+    display: flex;
+}

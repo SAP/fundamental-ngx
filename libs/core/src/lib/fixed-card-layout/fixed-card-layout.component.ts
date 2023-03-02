@@ -238,6 +238,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     /** @hidden */
     ngOnDestroy(): void {
         this._cardsSizeChangeSubscription.unsubscribe();
+        this._keyboardEventsManager?.destroy();
 
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -393,6 +394,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
 
     /** @hidden */
     private _accessibilitySetup(): void {
+        this._keyboardEventsManager?.destroy();
         this._keyboardEventsManager = new FocusKeyManager(this._cardContainers).withWrap();
     }
 

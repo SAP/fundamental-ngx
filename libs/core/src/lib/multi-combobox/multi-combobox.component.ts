@@ -65,7 +65,7 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
         {
             directive: CvaDirective,
             // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-            inputs: ['id', 'placeholder', 'state', 'stateMessage', 'disabled', 'readonly', 'name']
+            inputs: ['id:inputId', 'placeholder', 'state', 'stateMessage', 'disabled', 'readonly', 'name']
         },
         {
             directive: DataSourceDirective,
@@ -156,6 +156,10 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     @Input()
     autoResize = true;
 
+    /** Whether to open the dropdown when the addon button is clicked. */
+    @Input()
+    openDropdownOnAddOnClicked = true;
+
     /** Value of the multi combobox */
     @Input()
     set value(value: T[]) {
@@ -221,6 +225,10 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     /** @hidden Emits event when the menu is opened/closed. */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** Emits event when the addon button is clicked. */
+    @Output()
+    addOnButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
 
     /** Event emitted when data loading is started. */
     @Output()
@@ -596,7 +604,9 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             this._searchTermChanged('');
         }
 
-        this._showList(!isOpen);
+        if (this.openDropdownOnAddOnClicked) {
+            this._showList(!isOpen);
+        }
 
         if (this.isOpen && this.listComponent) {
             this.listComponent.setItemActive(0);
@@ -650,6 +660,16 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     _handleListFocusEscape(direction: FocusEscapeDirection): void {
         if (direction === 'up') {
             this.searchInputElement?.elmRef?.nativeElement.focus();
+        }
+    }
+
+    /**
+     * @hidden
+     */
+    _addOnClicked($event: Event): void {
+        this.addOnButtonClicked.emit($event);
+        if (!this.mobile) {
+            this._onPrimaryButtonClick(this.isOpen);
         }
     }
 

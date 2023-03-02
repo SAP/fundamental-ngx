@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-platform-multi-input-grouped-example',
     templateUrl: './platform-multi-input-grouped-example.component.html',
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformMultiInputGroupedExampleComponent {
     list_elements = [

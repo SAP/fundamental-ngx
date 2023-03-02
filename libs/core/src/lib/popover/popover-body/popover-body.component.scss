@@ -35,6 +35,19 @@ fd-popover-body {
             display: none !important;
         }
 
+        &.fd-form-message {
+            &::before {
+                width: auto;
+                height: auto;
+                position: relative;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border: none;
+            }
+        }
+
         > .fd-scrollbar {
             max-height: 100%;
             max-width: 100%;

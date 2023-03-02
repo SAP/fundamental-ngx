@@ -5,11 +5,13 @@ import {
     getElementArrayLength,
     getElementClass,
     getText,
-    isElementDisplayed,
+    pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
-    waitForElDisplayed
+    waitForElDisappear,
+    waitForElDisplayed,
+    waitForNotPresent
 } from '../../../../../e2e';
 import { buttonClassArr, iconsArr } from './message-box';
 
@@ -58,6 +60,7 @@ describe('Message-box test suits', () => {
             await checkAcceptingMessage(openTemplateExample);
         });
         it('Should check working of message-boxes', async () => {
+            await refreshPage();
             await checkDismissingMessage(openTemplateExample);
         });
         it('should check losing message box by escape button', async () => {
@@ -73,6 +76,7 @@ describe('Message-box test suits', () => {
             await checkAcceptingMessage(basedComponentExample);
         });
         it('Should check working of message-boxes', async () => {
+            await refreshPage();
             await checkDismissingMessage(basedComponentExample);
         });
         it('should check losing message box by escape button', async () => {
@@ -95,6 +99,7 @@ describe('Message-box test suits', () => {
                     `Element type is not ${buttonClassArr[i]}`
                 );
                 await click(sematicTypesExample + button, i);
+                await waitForElDisplayed(messageBox);
                 i === buttonsLength - 1
                     ? await expect(await doesItExist(messageIcon)).toBe(false, 'Icon exists')
                     : await expect(await getElementClass(messageIcon)).toContain(
@@ -102,6 +107,7 @@ describe('Message-box test suits', () => {
                           `Icon is not ${iconsArr[i]}`
                       );
                 await click(okButton);
+                await waitForElDisappear(messageBox);
             }
         });
     });
@@ -151,31 +157,36 @@ describe('Message-box test suits', () => {
         await click(section + button);
         await waitForElDisplayed(messageBox);
         await sendKeys('Escape');
-
-        await expect(await doesItExist(messageBox)).toBe(false);
-        await refreshPage();
+        await expect(await waitForNotPresent(messageBox)).toBe(true);
     }
 
     async function checkMessageBoxWorking(section: string): Promise<void> {
+        await scrollIntoView(section);
         const elementLength = await getElementArrayLength(section + button);
         for (let i = 0; i < elementLength; i++) {
             await click(section + button, i);
-            await expect(await isElementDisplayed(messageBox)).toBe(true, 'Message-Box is not displayed');
+            await expect(await waitForElDisplayed(messageBox)).toBe(true, 'Message-Box is displayed');
             await click(okButton);
-            await expect(await doesItExist(messageBox)).toBe(false, 'Message-Box still displayed');
+            await expect(await waitForNotPresent(messageBox)).toBe(true, 'Message-Box is not displayed');
         }
     }
 
     async function checkAcceptingMessage(section: string): Promise<void> {
+        await scrollIntoView(section);
         await click(section + button);
+        await pause(500);
         await click(okButton);
         section === basedObjectExample
             ? await expect(await getText(section + resultTxt)).toContain('Approved', 'Result is not OK')
             : await expect(await getText(section + resultTxt)).toContain('Ok', 'Result is not OK');
     }
     async function checkDismissingMessage(section: string): Promise<void> {
+        await scrollIntoView(section);
         await click(section + button);
+        await pause(500);
+        await waitForElDisplayed(messageBox);
         await click(cancelButton);
+        await waitForNotPresent(messageBox);
         section === basedObjectExample
             ? await expect(await getText(section + resultTxt)).toContain('Canceled', 'Result is not Canceled')
             : await expect(await getText(section + resultTxt)).toContain('Cancel', 'Result is not Cancel');

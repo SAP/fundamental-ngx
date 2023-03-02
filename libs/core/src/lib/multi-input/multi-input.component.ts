@@ -114,6 +114,10 @@ export class MultiInputComponent
     @Input()
     dropdownValues: any[] = [];
 
+    /** Whether to open the dropdown when the addon button is clicked. */
+    @Input()
+    openDropdownOnAddOnClicked = true;
+
     /** Search term, or more specifically the value of the inner input field. */
     @Input()
     set searchTerm(value: string) {
@@ -299,6 +303,10 @@ export class MultiInputComponent
     @Output()
     readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    /** Emits event when the addon button is clicked. */
+    @Output()
+    readonly addOnButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
+
     /** Event emitted, when the multi input's all item checked or not */
     @Output()
     readonly allItemsSelectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -431,7 +439,7 @@ export class MultiInputComponent
     buildComponentCssClass(): string[] {
         // TODO: this icon flip may be addressed in styles in the future
         if (this.glyph === 'value-help' && this._dir === 'rtl') {
-            const icon = this.elementRef().nativeElement.querySelector('.sap-icon--value-help');
+            const icon = this._elementRef.nativeElement.querySelector('.sap-icon--value-help') as HTMLElement;
             if (icon) {
                 icon.style.transform = 'scaleX(-1)';
             }
@@ -682,8 +690,11 @@ export class MultiInputComponent
     }
 
     /** @hidden */
-    _addOnButtonClicked(): void {
-        this.openChangeHandle(!this.open);
+    _addOnButtonClicked(event: Event): void {
+        this.addOnButtonClicked.emit(event);
+        if (this.openDropdownOnAddOnClicked) {
+            this.openChangeHandle(!this.open);
+        }
     }
 
     /** @hidden */

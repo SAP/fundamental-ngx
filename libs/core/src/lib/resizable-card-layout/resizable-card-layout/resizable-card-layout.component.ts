@@ -150,6 +150,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     ngOnDestroy(): void {
         this._destroy$.next();
         this._destroy$.complete();
+        this._keyboardEventsManager?.destroy();
     }
 
     /** @hidden handles keyboard accessibility */
@@ -273,6 +274,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /** @hidden */
     private _accessibilitySetup(): void {
+        this._keyboardEventsManager?.destroy();
         this._keyboardEventsManager = new FocusKeyManager(this.resizeCardItems).withWrap();
     }
 

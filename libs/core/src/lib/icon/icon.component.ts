@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FD_ICON_COMPONENT } from './tokens';
 
 export type IconFont = 'SAP-icons' | 'BusinessSuiteInAppSymbols' | 'SAP-icons-TNT';
 
@@ -31,6 +32,12 @@ const BusinessSuiteInAppSymbol_PREFIX = 'businessSuiteInAppSymbols';
     host: {
         role: 'presentation'
     },
+    providers: [
+        {
+            provide: FD_ICON_COMPONENT,
+            useExisting: IconComponent
+        }
+    ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

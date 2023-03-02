@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, ViewChild 
 import { BaseButton, ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
 import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FD_BUTTON_BAR_COMPONENT } from '../tokens';
 
 let randomButtonBarId = 0;
 
@@ -23,7 +24,13 @@ let randomButtonBarId = 0;
         >
             <ng-content></ng-content>
         </button>
-    `
+    `,
+    providers: [
+        {
+            provide: FD_BUTTON_BAR_COMPONENT,
+            useExisting: ButtonBarComponent
+        }
+    ]
 })
 export class ButtonBarComponent extends BaseButton implements OnDestroy {
     /** Whether the element should take the whole width of the container. */

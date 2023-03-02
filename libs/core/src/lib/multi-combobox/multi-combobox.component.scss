@@ -14,6 +14,10 @@ $block: fd-multi-combobox;
         display: inline-block;
     }
 
+    .fd-popover-custom {
+        display: block;
+    }
+
     &__list-container {
         .fd-list {
             .fd-list__item {
