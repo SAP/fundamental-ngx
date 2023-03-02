@@ -1,3 +1,12 @@
+# [0.39.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.68...v0.39.0-rc.69) (2023-03-02)
+
+
+### Features
+
+* **core,platform:** update fundamental-styles version, adopt breaking changes ([#9467](https://github.com/SAP/fundamental-ngx/issues/9467)) ([c30dbe0](https://github.com/SAP/fundamental-ngx/commit/c30dbe0a074cf9a5b4305ddba4ca12e34bf52f05))
+
+
+
 # [0.39.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.67...v0.39.0-rc.68) (2023-03-01)
 
 
