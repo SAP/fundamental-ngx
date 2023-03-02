@@ -569,6 +569,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
             private: 'Private'
         }
     },
+    platformSelect: {
+        selectOptionLabel: '选择一个选项'
+    },
     fnSlider: {
         minMaxDetails: '滑动条最小值为{{ min }}，最大值为{{ max }}',
         valueminDetails: '值等于{{ value }}',

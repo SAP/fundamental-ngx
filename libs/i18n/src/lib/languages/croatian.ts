@@ -575,6 +575,9 @@ export const FD_LANGUAGE_CROATIAN: FdLanguage = {
             private: 'Private'
         }
     },
+    platformSelect: {
+        selectOptionLabel: 'Odaberite opciju'
+    },
     fnSlider: {
         minMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',
         valueminDetails: 'Value is {{ value }}',
