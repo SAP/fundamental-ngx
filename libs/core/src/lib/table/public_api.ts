@@ -1,6 +1,7 @@
 export * from './table.module';
 export * from './table.component';
 export * from './directives/table-body.directive';
+export * from './directives/table-fixed.directive';
 export * from './directives/table-cell.directive';
 export * from './directives/table-header.directive';
 export * from './directives/table-row.directive';

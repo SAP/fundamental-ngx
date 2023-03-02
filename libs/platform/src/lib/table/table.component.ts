@@ -212,6 +212,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     enableDragResize = true;
 
+    /** Whether to fix the table header and footer. Default is false.
+     * Note that if the table contains freezable columns, the header and
+     * footer will be fixed automatically. */
+    @Input()
+    fixed = false;
+
     /**
      * Table data source.
      * Can be @type { T[] | Observable<T[]> | TableDataSource<T> }

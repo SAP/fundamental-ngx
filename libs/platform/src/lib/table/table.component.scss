@@ -194,8 +194,11 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
         .fd-table__cell {
             margin-top: 0;
             max-height: 100%;
-            position: sticky;
             top: 0;
+
+            &--fixed {
+                position: sticky;
+            }
 
             .fd-table__popover--custom {
                 display: none;
