@@ -2,7 +2,7 @@ import { Component, ContentChildren, Input, QueryList, TemplateRef, ViewChild } 
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { FileUploaderComponent } from '@fundamental-ngx/core/file-uploader';
 import { UploadCollectionItemDirective } from '@fundamental-ngx/core/upload-collection';
-import { RangeSelector } from '@fundamental-ngx/core/utils';
+import { RangeSelector } from '@fundamental-ngx/cdk/utils';
 
 interface FileItem {
     fileName: string;

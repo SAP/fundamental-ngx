@@ -34,7 +34,7 @@ This repository contains 2 libraries(npm packages),
 
 To download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
 
-Fundamental Library for Angular is intended for use with Angular 8 or newer.
+Fundamental Library for Angular is intended for use with Angular 15 or newer.
 
 Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 
@@ -46,6 +46,12 @@ Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 ## <a name="4"></a>4. Support
 
 If you encounter an issue, you can [create a ticket](https://github.com/SAP/fundamental-ngx/issues).
+
+Angular Versions Support: Our versions offer Angular support. More information can be found [here](https://github.com/SAP/fundamental-ngx/wiki/Angular-Versions-Support).
+
+-   Features and enhancements are developed to the latest version of fundamental-ngx.
+
+-   Bugfixes can be downported to the latest ngx version, which is compiled with the second last Angular version.
 
 ## <a name="5"></a>5. Contributing
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 @Component({
     selector: 'fdp-platform-number-step-input-state-example',

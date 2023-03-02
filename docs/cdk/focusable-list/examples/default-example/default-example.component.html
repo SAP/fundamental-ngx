@@ -1,0 +1,14 @@
+<h5>Vertical focus list</h5>
+
+<div fdkFocusableList (itemFocused)="itemFocused($event)">
+    <ng-container *ngFor="let item of focusableItems; let index = index">
+        <div fdkFocusableItem>focusable #{{ index + 1 }}</div>
+    </ng-container>
+</div>
+
+<h5>Horizontal focus list</h5>
+<div fdkFocusableList navigationDirection="horizontal" (itemFocused)="itemFocused($event)">
+    <ng-container *ngFor="let item of focusableItems; let index = index">
+        <span fdkFocusableItem> focusable #{{ index + 1 }} </span>
+    </ng-container>
+</div>

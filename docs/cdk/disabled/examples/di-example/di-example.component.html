@@ -1,0 +1,20 @@
+<ul [fdkDisabled]="rootElementDisabled" class="disabled-list-example">
+    <li fdDisabledRecipient [fdkDisabled]="firstElementDisabled">child 1</li>
+    <li fdDisabledRecipient>child 2</li>
+    <li fdDisabledRecipient>child 3</li>
+</ul>
+
+<div style="margin-top: 20px">
+    <button
+        style="margin-bottom: 0.5rem"
+        fd-button
+        (fdkClicked)="rootElementDisabled = !rootElementDisabled"
+        [label]="rootElementDisabled ? 'Enable root element' : 'Disable root element'"
+    ></button>
+    <br />
+    <button
+        fd-button
+        (fdkClicked)="firstElementDisabled = !firstElementDisabled"
+        [label]="firstElementDisabled ? 'Enable first element' : 'Disable first element'"
+    ></button>
+</div>

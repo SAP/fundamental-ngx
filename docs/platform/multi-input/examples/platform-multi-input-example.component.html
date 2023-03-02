@@ -16,6 +16,7 @@
             displayKey="state"
             [autofocus]="true"
             [(ngModel)]="selected"
+            (searchTermChange)="searchTermChange($event)"
         >
         </fdp-multi-input>
     </fdp-form-field>

@@ -6,6 +6,7 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-date-picker-disable-focus-scroll-example',
@@ -20,7 +21,7 @@ import {
             [(ngModel)]="date"
         ></fd-date-picker>
         <br />
-        <div>Selected Date: {{ date?.toDateString() || 'null' }}</div>`,
+        <div>Selected Date: {{ date?.toDateString() }}</div>`,
     providers: [
         {
             provide: DatetimeAdapter,
@@ -33,7 +34,7 @@ import {
     ]
 })
 export class DatePickerDisableFocusScrollExampleComponent {
-    date = FdDate.getNow();
+    date: Nullable<FdDate> = FdDate.getNow();
 
     preventScrollOnFocus = false;
 

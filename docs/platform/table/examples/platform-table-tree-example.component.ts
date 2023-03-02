@@ -274,7 +274,7 @@ const ITEMS: ExampleItem[] = [
                 children: []
             },
             {
-                name: 'Other1',
+                name: 'Other 4',
                 children: [
                     {
                         name: 'Camcorder View',
@@ -300,10 +300,10 @@ const ITEMS: ExampleItem[] = [
                         verified: true
                     },
                     {
-                        name: 'Other 2',
+                        name: 'Other 5',
                         children: [
                             {
-                                name: 'Other 1',
+                                name: 'Other 6',
                                 children: [
                                     {
                                         name: 'Beam Breaker B-1',

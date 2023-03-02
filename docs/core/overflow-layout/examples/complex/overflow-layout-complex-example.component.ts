@@ -1,7 +1,7 @@
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { KeyUtil, Size } from '@fundamental-ngx/core/utils';
+import { KeyUtil, Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarGeneratorExampleService } from './avatar-generator-example.service';
 
 @Component({

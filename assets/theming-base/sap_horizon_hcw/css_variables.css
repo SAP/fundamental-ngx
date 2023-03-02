@@ -1,12 +1,12 @@
 /**
 * Copyright (c) 2012-2020 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
-* Theming Engine 1.71.0-20220930061804
-* data:{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "1.71.0-20220930061804"}, "Version": { "Build": "11.1.45.20221109145826", "Source": "11.1.45"}}
+* Theming Engine 1.23011.0-20230207082640+28af5100faa08fd8dfd90e2a1fa5e36aa307de3f
+* data:{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "1.23011.0-20230207082640+28af5100faa08fd8dfd90e2a1fa5e36aa307de3f"}, "Version": { "Build": "11.1.49.20230207115017", "Source": "11.1.49"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "1.71.0-20220930061804"}, "Version": { "Build": "11.1.45.20221109145826", "Source": "11.1.45"}}');}
-:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "1.71.0-20220930061804"}, "Version": { "Build": "11.1.45.20221109145826", "Source": "11.1.45"}};}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "1.23011.0-20230207082640+28af5100faa08fd8dfd90e2a1fa5e36aa307de3f"}, "Version": { "Build": "11.1.49.20230207115017", "Source": "11.1.49"}}');}
+:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_horizon_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_horizon_hcb","sap_horizon","baseTheme"], "Tags": ["Fiori_3","HighContrast","LightColorScheme"], "FallbackThemeId": "sap_horizon", "Engine": {"Name": "theming-engine", "Version": "1.23011.0-20230207082640+28af5100faa08fd8dfd90e2a1fa5e36aa307de3f"}, "Version": { "Build": "11.1.49.20230207115017", "Source": "11.1.49"}};}
 :root {
   --sapBrandColor: #e97624;
   --sapHighlightColor: #e97624;
@@ -18,7 +18,7 @@
   --sapFontBoldFamily: "72-Bold", "72-Boldfull", "72", "72full", Arial, Helvetica, sans-serif;
   --sapFontSemiboldFamily: "72-Semibold", "72-Semiboldfull", "72", "72full", Arial, Helvetica, sans-serif;
   --sapFontSemiboldDuplexFamily: "72-SemiboldDuplex", "72-SemiboldDuplexfull", "72", "72full", Arial, Helvetica, sans-serif;
-  --sapFontBlackFamily: "72Black", "72", "72full", Arial, Helvetica, sans-serif;
+  --sapFontBlackFamily: "72Black", "72Blackfull","72", "72full", Arial, Helvetica, sans-serif;
   --sapFontHeaderFamily: "72", "72full", Arial, Helvetica, sans-serif;
   --sapFontSize: .875rem;
   --sapFontSmallSize: .75rem;
@@ -626,7 +626,7 @@
   --sapSlider_RangeHandleBackground: #fff;
   --sapSlider_Hover_HandleBackground: #e97624;
   --sapSlider_Hover_HandleBorderColor: #000;
-  --sapSlider_Hover_RangeHandleBackground: transparent;
+  --sapSlider_Hover_RangeHandleBackground: #e97624;
   --sapSlider_Active_HandleBackground: #e97624;
   --sapSlider_Active_HandleBorderColor: #000;
   --sapSlider_Active_RangeHandleBackground: transparent;

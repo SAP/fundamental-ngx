@@ -13,7 +13,7 @@
         <small
             >Selected Time:
             <span *ngIf="customForm.controls.time.value">
-                {{ customForm.controls.time.value?.toDate() | date: 'shortTime' }}
+                {{ customForm.controls.time.value.toDate() | date : 'shortTime' }}
             </span>
         </small>
         <small>Touched: {{ customForm.controls.time.touched }}</small>
@@ -32,7 +32,7 @@
         <small
             >Selected Time:
             <span *ngIf="customForm.controls.disabledTime.value">
-                {{ customForm.controls.disabledTime.value?.toDate() | date: 'shortTime' }}
+                {{ customForm.controls.disabledTime.value.toDate() | date : 'shortTime' }}
             </span>
         </small>
         <small>Disabled: {{ customForm.controls.disabledTime.disabled }}</small>

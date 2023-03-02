@@ -1,0 +1,15 @@
+<div
+    fdClickedUsageWithProvider
+    (anyOutputName)="fdClickEvent = $event"
+    fdkFocusableItem
+    style="border: 1px solid #dedede; display: inline-block; padding: 5px 7px; cursor: pointer"
+>
+    Trigger
+</div>
+
+<div>
+    Emitted event type is <code>{{ fdClickEvent?.type | json }}</code>
+    <ng-container *ngIf="fdClickEvent?.code">
+        , Key is <code>{{ fdClickEvent?.code | json }}</code>
+    </ng-container>
+</div>

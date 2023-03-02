@@ -19,7 +19,7 @@
         </ng-container>
     </ng-template>
 </fdp-form-group>
-<span style="margin-left: 2rem">Favorites: {{ form1.controls.fruitsEx?.value }}</span>
+<span style="margin-left: 2rem">Favorites: {{ form1.controls.fruitsEx.value }}</span>
 
 <h3>Checkbox group created from list of values and value is required</h3>
 <fdp-form-group [formGroup]="form2">
@@ -39,7 +39,7 @@
         </ng-container>
     </ng-template>
 </fdp-form-group>
-<span style="margin-left: 2rem">Favorites: {{ form2.controls.fruits1?.value }}</span>
+<span style="margin-left: 2rem">Favorites: {{ form2.controls.fruits1.value }}</span>
 
 <h3>Checkboxes with different context</h3>
 <div>Qualification form</div>
@@ -114,7 +114,7 @@
         </ng-container>
     </ng-template>
 </fdp-form-group>
-<span style="margin-left: 2rem">Languages Known: {{ form3.controls.language?.value }}</span>
+<span style="margin-left: 2rem">Languages Known: {{ form3.controls.language.value }}</span>
 
 <h3>Checkbox with same context</h3>
 <fdp-form-group #fg [formGroup]="form4">

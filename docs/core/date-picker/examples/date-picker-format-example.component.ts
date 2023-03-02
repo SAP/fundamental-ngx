@@ -8,6 +8,7 @@ import {
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { DateRange } from '@fundamental-ngx/core/calendar';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * FD_DATETIME_FORMATS is based on Intl.DateTimeFormat,
@@ -52,7 +53,7 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
 })
 export class DatePickerFormatExampleComponent {
     date: FdDate;
-    selectedRange: DateRange<FdDate>;
+    selectedRange: Nullable<DateRange<FdDate>>;
 
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {
         const today = this.datetimeAdapter.today();

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RangeSelector } from '@fundamental-ngx/core/utils';
+import { RangeSelector } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-table-checkboxes-example',

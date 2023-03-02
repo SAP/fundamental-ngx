@@ -16,6 +16,14 @@
 
         <fd-shellbar-subtitle> Subtitle </fd-shellbar-subtitle>
 
+        <fdp-search-field
+            placeholder="Search"
+            [suggestions]="suggestions"
+            [categories]="categories"
+            (searchSubmit)="onSearchSubmit($event)"
+            (inputChange)="onInputChange($event)"
+        ></fdp-search-field>
+
         <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
             <fd-shellbar-action
                 *ngFor="let action of actions"
@@ -30,15 +38,6 @@
                 <fd-product-switch-body [products]="productSwitcher" [forceListMode]="currentSize === 's'">
                 </fd-product-switch-body>
             </fd-product-switch>
-
-            <fd-combobox
-                [(ngModel)]="searchTerm"
-                glyph="search"
-                [dropdownValues]="searchTerms"
-                placeholder="Type some text..."
-                maxHeight="250px"
-                [isSearch]="true"
-            ></fd-combobox>
         </fd-shellbar-actions>
     </fd-shellbar>
 </div>

@@ -1,0 +1,43 @@
+<fd-segmented-button [(ngModel)]="currentSize">
+    <button fd-button value="s">S</button>
+    <button fd-button value="m">M</button>
+    <button fd-button value="l">L</button>
+    <button fd-button value="xl">XL</button>
+</fd-segmented-button>
+
+<div style="margin-top: 60px" [style.maxWidth]="sizesWidth[currentSize] + 'px'">
+    <fd-shellbar>
+        <fd-shellbar-logo>
+            <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+        </fd-shellbar-logo>
+
+        <fd-product-menu [control]="productMenuControl" [closePopoverOnSelect]="true" [items]="productMenuItems">
+        </fd-product-menu>
+
+        <fd-shellbar-subtitle> Subtitle </fd-shellbar-subtitle>
+
+        <fdp-search-field
+            placeholder="Search"
+            [suggestions]="suggestions"
+            [categories]="categories"
+            (searchSubmit)="onSearchSubmit($event)"
+            (inputChange)="onInputChange($event)"
+        ></fdp-search-field>
+
+        <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
+            <fd-shellbar-action
+                *ngFor="let action of actions"
+                [glyph]="action.glyph"
+                [callback]="action.callback"
+                [label]="action.label"
+                [notificationCount]="action.notificationCount"
+                [notificationLabel]="action.notificationLabel"
+            ></fd-shellbar-action>
+
+            <fd-product-switch>
+                <fd-product-switch-body [products]="productSwitcher" [forceListMode]="currentSize === 's'">
+                </fd-product-switch-body>
+            </fd-product-switch>
+        </fd-shellbar-actions>
+    </fd-shellbar>
+</div>

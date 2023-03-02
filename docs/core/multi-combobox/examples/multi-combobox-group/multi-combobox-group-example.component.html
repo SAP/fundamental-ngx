@@ -1,0 +1,31 @@
+<div fd-form-item>
+    <label fd-form-label for="group-with-key">Group with Key:</label>
+    <fd-multi-combobox
+        name="group"
+        inputId="group-with-key"
+        placeholder="Type some text..."
+        [dataSource]="dataSource"
+        displayKey="name"
+        [group]="true"
+        groupKey="type"
+        (selectionChange)="onSelect($event)"
+        [selectedItems]="selectedItems"
+    ></fd-multi-combobox>
+</div>
+<p>Selected: {{ selectedItems | json }}</p>
+
+<div fd-form-item>
+    <label fd-form-label for="group-without-key">Group without Key:</label>
+    <fd-multi-combobox
+        name="group-without-key"
+        inputId="group-without-key"
+        placeholder="Type some text..."
+        [dataSource]="dataSource"
+        displayKey="name"
+        [group]="true"
+        (selectionChange)="onSelect1($event)"
+        [selectedItems]="selectedItems1"
+    ></fd-multi-combobox>
+</div>
+
+<p>Selected: {{ selectedItems1 | json }}</p>

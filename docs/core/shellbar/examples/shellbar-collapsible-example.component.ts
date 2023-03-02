@@ -1,24 +1,97 @@
 import { Component } from '@angular/core';
 import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
 import { ShellbarMenuItem, ShellbarSizes, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core/shellbar';
+import { SearchInput, SuggestionItem, ValueLabelItem } from '@fundamental-ngx/platform/search-field';
 
 @Component({
     selector: 'fd-shellbar-collapsible-example',
     templateUrl: './shellbar-collapsible-example.component.html'
 })
 export class ShellbarCollapsibleExampleComponent {
-    currentSize: ShellbarSizes = 'm';
+    currentSize: ShellbarSizes = 'xl';
 
     sizesWidth = {
         s: 320,
         m: 720,
         l: 1024,
-        xl: 1400
+        xl: 1900
     };
 
-    searchTerm: string;
+    searchTerm = '';
+
+    inputText = '';
 
     productMenuControl = 'Corporate Portal';
+
+    categories: ValueLabelItem[] = [
+        {
+            value: 'red',
+            label: 'Red'
+        },
+        {
+            value: 'orange',
+            label: 'Orange'
+        },
+        {
+            value: 'yellow',
+            label: 'Yellow'
+        },
+        {
+            value: 'green',
+            label: 'Green'
+        },
+        {
+            value: 'blue',
+            label: 'Blue'
+        },
+        {
+            value: 'indigo',
+            label: 'Indigo'
+        },
+        {
+            value: 'violet',
+            label: 'Violet'
+        }
+    ];
+
+    suggestions: SuggestionItem[] = [
+        {
+            value: 'Apple'
+        },
+        {
+            value: 'Banana'
+        },
+        {
+            value: 'Blueberry'
+        },
+        {
+            value: 'Cherry'
+        },
+        {
+            value: 'Grape'
+        },
+        {
+            value: 'Lemon'
+        },
+        {
+            value: 'Lime'
+        },
+        {
+            value: 'Orange'
+        },
+        {
+            value: 'Peach'
+        },
+        {
+            value: 'Pineapple'
+        },
+        {
+            value: 'Plum'
+        },
+        {
+            value: 'Raspberry'
+        }
+    ];
 
     productMenuItems: ShellbarMenuItem[] = [
         {
@@ -160,5 +233,13 @@ export class ShellbarCollapsibleExampleComponent {
 
     productSwitcherCallback(product): void {
         alert(product + 'Product Clicked');
+    }
+
+    onSearchSubmit($event: SearchInput): void {
+        this.searchTerm = $event.text;
+    }
+
+    onInputChange($event: SearchInput): void {
+        this.inputText = $event.text;
     }
 }

@@ -5,7 +5,7 @@ MIT
 MIT
 The MIT License
 
-Copyright (c) 2022 Google LLC.
+Copyright (c) 2023 Google LLC.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -66,6 +66,15 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
+@fundamental-ngx/cdk
+Apache-2.0
+
+@fundamental-ngx/cdk/data-source
+
+@fundamental-ngx/cdk/forms
+
+@fundamental-ngx/cdk/utils
 
 @fundamental-ngx/core
 Apache-2.0
@@ -164,6 +173,8 @@ Apache-2.0
 
 @fundamental-ngx/core/mobile-mode
 
+@fundamental-ngx/core/multi-combobox
+
 @fundamental-ngx/core/multi-input
 
 @fundamental-ngx/core/nested-list
@@ -258,50 +269,14 @@ Apache-2.0
 
 @fundamental-ngx/core/wizard
 
+@fundamental-ngx/cx/nested-list
+
+@fundamental-ngx/cx/side-navigation
+
 @fundamental-ngx/datetime-adapter
 Apache-2.0
 
-@fundamental-ngx/fn/avatar
-
 @fundamental-ngx/fn/button
-
-@fundamental-ngx/fn/cdk
-
-@fundamental-ngx/fn/checkbox
-
-@fundamental-ngx/fn/form
-
-@fundamental-ngx/fn/generic-tag
-
-@fundamental-ngx/fn/info-label
-
-@fundamental-ngx/fn/input
-
-@fundamental-ngx/fn/list
-
-@fundamental-ngx/fn/message-strip
-
-@fundamental-ngx/fn/message-toast
-
-@fundamental-ngx/fn/notification
-
-@fundamental-ngx/fn/object-status
-
-@fundamental-ngx/fn/progress-bar
-
-@fundamental-ngx/fn/radio
-
-@fundamental-ngx/fn/search
-
-@fundamental-ngx/fn/segmented-button
-
-@fundamental-ngx/fn/select
-
-@fundamental-ngx/fn/slider
-
-@fundamental-ngx/fn/switch
-
-@fundamental-ngx/fn/tabs
 
 @fundamental-ngx/fn/utils
 
