@@ -575,6 +575,9 @@ export const FD_LANGUAGE_BELARUSIAN: FdLanguage = {
             private: 'Private'
         }
     },
+    platformSelect: {
+        selectOptionLabel: 'Выберыце варыянт'
+    },
     fnSlider: {
         minMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',
         valueminDetails: 'Value is {{ value }}',

@@ -575,6 +575,9 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
             private: 'Private'
         }
     },
+    platformSelect: {
+        selectOptionLabel: 'एक विकल्प चुनें'
+    },
     fnSlider: {
         minMaxDetails: 'स्लाइडर न्यूनतम मूल्य {{ min }}, अधिकतम मूल्य {{ max }}',
         valueminDetails: 'मूल्य {{ value }}',

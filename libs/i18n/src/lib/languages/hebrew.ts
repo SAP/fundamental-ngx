@@ -575,6 +575,9 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
             private: 'Private'
         }
     },
+    platformSelect: {
+        selectOptionLabel: 'בחר אפשרות'
+    },
     fnSlider: {
         minMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',
         valueminDetails: 'Value is {{ value }}',

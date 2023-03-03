@@ -48,6 +48,7 @@ import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/cdk/utils';
 import { SkeletonModule } from '../../../core/src/lib/skeleton';
 import { TableLoadingExampleComponent } from './examples/loading/table-loading-example.component';
+import { TableFixedExampleComponent } from './examples/table-fixed-example.component';
 
 const routes: Routes = [
     {
@@ -103,7 +104,8 @@ const routes: Routes = [
         TableCustomDialogComponent,
         TableFocusableExampleComponent,
         TableNavigatableRowExampleComponent,
-        TableLoadingExampleComponent
+        TableLoadingExampleComponent,
+        TableFixedExampleComponent
     ],
     entryComponents: [TableCustomDialogComponent],
     providers: [

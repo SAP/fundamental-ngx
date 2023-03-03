@@ -81,7 +81,7 @@
                     (count === 1
                         ? 'platformCombobox.countListResultsSingular'
                         : 'platformCombobox.countListResultsPlural'
-                    ) | fdTranslate: { count: count }
+                    ) | fdTranslate : { count: count }
                 }}
             </ng-container>
         </div>
@@ -94,15 +94,9 @@
 </ng-template>
 
 <ng-template #listTemplate>
-    <fd-form-message
-        *ngIf="!!stateMessage"
-        [type]="state"
-        [innerHtml]="stateMessage"
-        class="fdp-combobox__message {{ !mobile && 'fdp-combobox__message--popover' }}"
-    ></fd-form-message>
-
     <ul
         fd-list
+        [hasMessage]="!!stateMessage"
         (focusEscapeList)="handleListFocusEscape($event)"
         [dropdownMode]="true"
         class="fdp-combobox__list {{ !!stateMessage && 'fdp-combobox__list--message' }}"
@@ -113,6 +107,16 @@
         [style.maxHeight]="!mobile && maxHeight"
         [style.maxWidth]="autoResize && maxWidth + 'px'"
     >
+        <li
+            *ngIf="stateMessage"
+            [attr.aria-label]="stateMessage"
+            fd-list-message
+            tabindex="-1"
+            role="presentation"
+            [type]="state || 'default'"
+            [innerHtml]="stateMessage"
+        ></li>
+
         <ng-content></ng-content>
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">
@@ -187,7 +191,7 @@
 
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
     <ng-container *ngIf="!optionItemTemplate">
-        <span [attr.title]="optionItem.label" [innerHTML]="optionItem.label | highlight: inputText"></span>
+        <span [attr.title]="optionItem.label" [innerHTML]="optionItem.label | highlight : inputText"></span>
     </ng-container>
 
     <ng-container *ngIf="optionItemTemplate">
@@ -205,7 +209,7 @@
                 [style.text-align]="secondaryTextAlignment"
                 fd-list-secondary
                 [attr.title]="optionItem.secondaryText"
-                [innerHTML]="optionItem.secondaryText | highlight: inputText"
+                [innerHTML]="optionItem.secondaryText | highlight : inputText"
             ></span>
         </ng-container>
 

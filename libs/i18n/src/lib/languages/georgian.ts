@@ -578,6 +578,9 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
             private: 'პირადი'
         }
     },
+    platformSelect: {
+        selectOptionLabel: 'აირჩიეთ ვარიანტი'
+    },
     fnSlider: {
         minMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{ min }}, მაქსიმალური - {{ max }}',
         valueminDetails: 'მნიშვნელობა არის {{ value }}',

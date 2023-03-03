@@ -280,6 +280,7 @@ export const API_FILES = {
         'TableComponent',
         'TableResponsiveWrapperDirective',
         'TableWrapperComponent',
+        'TableFixedDirective',
         'ColumnSortableDirective'
     ],
     tabs: [

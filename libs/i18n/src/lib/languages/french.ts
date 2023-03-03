@@ -583,6 +583,9 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
             private: 'Private'
         }
     },
+    platformSelect: {
+        selectOptionLabel: 'Sélectionnez une option'
+    },
     fnSlider: {
         minMaxDetails: 'La valeur minimale du curseur est {{ min }}, la valeur maximale est {{ max }}',
         valueminDetails: 'La valeur est {{ value }}',

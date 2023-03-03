@@ -770,6 +770,9 @@ export interface FdLanguage {
             private: FdLanguageKey;
         };
     };
+    platformSelect: {
+        selectOptionLabel: FdLanguageKey;
+    };
     fnSlider: {
         /**
          * @param min

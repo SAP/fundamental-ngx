@@ -585,6 +585,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
             private: 'Private'
         }
     },
+    platformSelect: {
+        selectOptionLabel: 'Zgjidhni një opsion'
+    },
     fnSlider: {
         minMaxDetails: 'Vlera minimale e rrëshqitësit është {{ min }}, vlera maksimale është {{ max }}',
         valueminDetails: 'Vlera është  {{ value }}',

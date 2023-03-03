@@ -25,6 +25,7 @@
         [style.height]="bodyHeight"
         [class.fixed-height]="!!bodyHeight"
         [attr.role]="pageScrolling ? 'feed' : null"
+        [class.fd-table--fixed]="_freezableColumns.size || fixed"
     >
         <table
             fd-table

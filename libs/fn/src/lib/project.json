@@ -5,7 +5,7 @@
     "prefix": "fn",
     "buildTarget": "build-umbrella",
     "targets": {
-        "prepare": {
+        "prepare-noop": {
             "executor": "@fundamental-ngx/nx-plugin:prepare-library",
             "options": {
                 "schematics": {
@@ -15,14 +15,14 @@
                 "distPath": "dist/libs/fn"
             }
         },
-        "compile-typedoc": {
+        "compile-typedoc-noop": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
             "options": {
                 "outputPath": "libs/docs/typedoc/fn"
             },
             "outputs": ["{options.outputPath}"]
         },
-        "build-umbrella": {
+        "build-umbrella-noop": {
             "executor": "@nrwl/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/fn"],
             "options": {
@@ -37,7 +37,7 @@
             },
             "defaultConfiguration": "production"
         },
-        "lint": {
+        "lint-noop": {
             "executor": "@nrwl/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/fn/src/lib/**/*.ts", "libs/fn/src/lib/**/*.html"]
