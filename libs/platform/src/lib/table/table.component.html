@@ -39,7 +39,7 @@
                 <tr fd-table-row>
                     <th
                         *ngIf="semanticHighlighting"
-                        class="fd-table__cell--fixed"
+                        [class.fd-table__cell--fixed]="fixed"
                         fd-table-cell
                         fd-table-status-indicator
                         fdkDisabled
@@ -50,7 +50,8 @@
                     <th
                         *ngIf="_isShownSelectionColumn"
                         fd-table-cell
-                        class="fd-table__cell--fixed fd-table__cell--checkbox"
+                        [class.fd-table__cell--fixed]="fixed"
+                        class="fd-table__cell--checkbox"
                         [style]="
                             contentDensityObserver
                                 | async
@@ -155,7 +156,7 @@
                     >
                         <td
                             fd-table-cell
-                            class="fd-table__cell--group fd-table__cell--fixed fd-table__cell--expand"
+                            class="fd-table__cell--group fd-table__cell--expand"
                             tabindex="0"
                             role="gridcell"
                             [attr.colspan]="_tableColumnsLength"
@@ -194,7 +195,6 @@
                     >
                         <td
                             *ngIf="semanticHighlighting"
-                            class="fd-table__cell--fixed"
                             fd-table-cell
                             fd-table-status-indicator
                             fdkDisabled
@@ -206,7 +206,7 @@
                             <ng-container *ngSwitchCase="SELECTION_MODE.SINGLE">
                                 <td
                                     *ngIf="row.value[selectableKey] !== false; else selectionMock"
-                                    class="fd-table__cell--fixed fd-table__cell--checkbox"
+                                    class="fd-table__cell--checkbox"
                                     role="rowheader"
                                     fd-table-cell
                                     fd-table-cell-selectable
@@ -225,7 +225,7 @@
                             <ng-container *ngSwitchCase="SELECTION_MODE.MULTIPLE">
                                 <td
                                     *ngIf="row.value[selectableKey] !== false; else selectionMock"
-                                    class="fd-table__cell--fixed fd-table__cell--checkbox"
+                                    class="fd-table__cell--checkbox"
                                     role="cell"
                                     fd-table-cell
                                     [style]="
@@ -246,12 +246,7 @@
                         </ng-container>
 
                         <ng-template #selectionMock>
-                            <td
-                                class="fd-table__cell--fixed fd-table__cell--checkbox"
-                                role="gridcell"
-                                fd-table-cell
-                                fdkDisabled
-                            ></td>
+                            <td class="fd-table__cell--checkbox" role="gridcell" fd-table-cell fdkDisabled></td>
                         </ng-template>
 
                         <td
@@ -352,6 +347,7 @@
                 </ng-container>
             </tbody>
 
+            <!-- the tbody element below is so the scrollbar renders correctly -->
             <tbody *ngIf="virtualScroll" [style.height.px]="_virtualScrollTotalHeight"></tbody>
         </table>
     </div>
