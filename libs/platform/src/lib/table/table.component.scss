@@ -401,14 +401,13 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
         }
     }
 
-    /* === VIRTUAL SCROLL === */
     &__body--virtual-scroll {
         position: relative;
         will-change: scroll-position;
 
         .fd-table__body {
             position: static;
-            will-change: "transform";
+            will-change: transform;
         }
     }
 }
