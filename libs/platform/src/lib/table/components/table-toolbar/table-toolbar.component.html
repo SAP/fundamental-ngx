@@ -6,9 +6,9 @@
     let-columns="columns"
 >
     <fd-toolbar fdType="transparent" [clearBorder]="true" [hasTitle]="!!title">
-        <label fd-toolbar-label [id]="tableToolbarTitleId" [class.fd-toolbar__title]="!!title">
+        <h4 class="fd-title fd-title--h4 fd-toolbar__title" [id]="tableToolbarTitleId">
             {{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span>
-        </label>
+        </h4>
         <ng-container *ngIf="_tableToolbarLeftActionsComponent">
             <fd-toolbar-separator *ngIf="!!title || !hideItemCount"></fd-toolbar-separator>
             <ng-container *ngTemplateOutlet="_tableToolbarLeftActionsComponent._contentTemplateRef"></ng-container>

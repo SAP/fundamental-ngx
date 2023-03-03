@@ -49,6 +49,7 @@ import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/cdk/u
 import { SkeletonModule } from '../../../core/src/lib/skeleton';
 import { TableLoadingExampleComponent } from './examples/loading/table-loading-example.component';
 import { TableFixedExampleComponent } from './examples/table-fixed-example.component';
+import { TitleModule } from '@fundamental-ngx/core/title';
 
 const routes: Routes = [
     {
@@ -82,7 +83,8 @@ const routes: Routes = [
         StepInputModule,
         PopoverModule,
         SkeletonModule,
-        RepeatModule
+        RepeatModule,
+        TitleModule
     ],
     exports: [RouterModule],
     declarations: [
