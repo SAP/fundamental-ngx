@@ -15,6 +15,12 @@
     <fdp-column name="price" key="price.value" label="Price" align="end"> </fdp-column>
 
     <fdp-column name="status" key="status" label="Status" align="center" [groupable]="true"> </fdp-column>
+
+    <fdp-column name="rowIndex" key="rowIndex" label="Row index">
+        <fdp-table-cell *fdpCellDef="let item; let i = rowIndex">
+            <span>Row index {{ i }}</span>
+        </fdp-table-cell>
+    </fdp-column>
 </fdp-table>
 
 <!-- View Settings Dialog-->

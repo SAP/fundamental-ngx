@@ -5,6 +5,7 @@ import { EditableTableCell } from '../table-cell.class';
 export interface FdpCellDefContext<T = any> {
     $implicit: T;
     popping: boolean;
+    rowIndex: number;
 }
 
 /** Column cell container. */

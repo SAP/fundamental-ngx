@@ -30,4 +30,10 @@
             <span fd-object-status [status]="item.statusColor">{{ item.status }}</span>
         </fdp-table-cell>
     </fdp-column>
+    <fdp-column name="index" key="index">
+        <fdp-table-header *fdpHeaderCellDef>Row index</fdp-table-header>
+        <fdp-table-cell *fdpCellDef="let item; let i = rowIndex">
+            <span>Row index {{ i }}</span>
+        </fdp-table-cell>
+    </fdp-column>
 </fdp-table>
