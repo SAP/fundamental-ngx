@@ -71,7 +71,7 @@ export class TablePo extends PlatformBaseComponentPo {
     fdpTable = 'fdp-table';
     optionSingle = this.playgroundSelectionModeDropdown + ' option[value="single"]';
     optionMultiple = this.playgroundSelectionModeDropdown + ' option[value="multiple"]';
-    tableCellFixed = '.fd-table__cell';
+    tableCellClass = '.fd-table__cell';
     playgroundSchemaInput = '.form-control.fd-input';
     toolbarText = '.fd-label.fd-toolbar__overflow-label';
     dropdownList = '.fd-select-options';
