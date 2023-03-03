@@ -334,7 +334,7 @@
                                     <ng-container
                                         *ngTemplateOutlet="
                                             poppingColumn.columnCellTemplate;
-                                            context: { $implicit: row.value, popping: true }
+                                            context: { $implicit: row.value, popping: true, rowIndex: row.index }
                                         "
                                     ></ng-container>
                                 </ng-container>
@@ -540,7 +540,10 @@
         <ng-container *ngIf="row.state === 'readonly'; else editModeCell">
             <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
                 <ng-container
-                    *ngTemplateOutlet="column.columnCellTemplate; context: { $implicit: row.value }"
+                    *ngTemplateOutlet="
+                        column.columnCellTemplate;
+                        context: { $implicit: row.value, popping: false, rowIndex: row.index }
+                    "
                 ></ng-container>
             </ng-container>
 
@@ -554,7 +557,7 @@
                 <ng-container
                     *ngTemplateOutlet="
                         column.editableColumnCellTemplate;
-                        context: { $implicit: row.value, popping: false }
+                        context: { $implicit: row.value, popping: false, rowIndex: row.index }
                     "
                 ></ng-container>
             </ng-container>
