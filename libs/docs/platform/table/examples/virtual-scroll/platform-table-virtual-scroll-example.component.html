@@ -6,11 +6,9 @@
     emptyTableMessage="No data found"
     bodyHeight="300px"
     [virtualScroll]="true"
-    (rowToggleOpenState)="onRowToggleOpenState($event)"
-    (rowsRearrange)="onRowsRearrange($event)"
+    [expandOnInit]="true"
 >
-    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false" [showExpandCollapseButtons]="true">
-    </fdp-table-toolbar>
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false" [hideSearchInput]="true"> </fdp-table-toolbar>
 
     <fdp-column name="name" key="name" label="Name" align="start"> </fdp-column>
 

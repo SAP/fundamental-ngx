@@ -207,6 +207,7 @@
                                 <td
                                     *ngIf="row.value[selectableKey] !== false; else selectionMock"
                                     class="fd-table__cell--checkbox"
+                                    [class.fd-table__cell--fixed]="fixed"
                                     role="rowheader"
                                     fd-table-cell
                                     fd-table-cell-selectable
@@ -226,6 +227,7 @@
                                 <td
                                     *ngIf="row.value[selectableKey] !== false; else selectionMock"
                                     class="fd-table__cell--checkbox"
+                                    [class.fd-table__cell--fixed]="fixed"
                                     role="cell"
                                     fd-table-cell
                                     [style]="
@@ -246,7 +248,13 @@
                         </ng-container>
 
                         <ng-template #selectionMock>
-                            <td class="fd-table__cell--checkbox" role="gridcell" fd-table-cell fdkDisabled></td>
+                            <td
+                                class="fd-table__cell--checkbox"
+                                role="gridcell"
+                                fd-table-cell
+                                fdkDisabled
+                                [class.fd-table__cell--fixed]="fixed"
+                            ></td>
                         </ng-template>
 
                         <td

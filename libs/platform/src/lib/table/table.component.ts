@@ -1845,6 +1845,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._subscriptions.add(
             this._tableService.freezeChange.subscribe((event: FreezeChange) => {
                 this.columnFreeze.emit(new TableColumnFreezeEvent(this, event.current, event.previous));
+                this.fixed = !!this._freezableColumns.size;
             })
         );
 
@@ -2122,6 +2123,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     private _setFreezableInfo(): void {
         this._freezableColumns = this._getFreezableColumns();
+        this.fixed = !!this._freezableColumns.size;
     }
 
     /** @hidden */
