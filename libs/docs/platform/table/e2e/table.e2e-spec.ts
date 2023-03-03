@@ -54,7 +54,8 @@ import {
     testText5,
     testText7,
     testTextName,
-    testTextSearch
+    testTextSearch,
+    groupTableCellArr
 } from './table-contents';
 
 describe('Table component test suite', () => {
@@ -374,7 +375,7 @@ describe('Table component test suite', () => {
 
     describe('Check Column Grouping', () => {
         it('should check table item single selection', async () => {
-            await findElementInTable(tableGroupableExample, tableCellArr);
+            await findElementInTable(tableGroupableExample, groupTableCellArr);
         });
 
         it('should verify checkboxes', async () => {
