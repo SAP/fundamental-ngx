@@ -1,3 +1,12 @@
+## [0.39.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.39.0...v0.39.1-rc.0) (2023-03-03)
+
+
+### Features
+
+* **platform:** introduce table row index ([#9471](https://github.com/SAP/fundamental-ngx/issues/9471)) ([9c32274](https://github.com/SAP/fundamental-ngx/commit/9c32274e9c5e2d3ae4835a0e0dbf7a7f0a194bcf))
+
+
+
 # [0.39.0](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.70...v0.39.0) (2023-03-02)
 
 
