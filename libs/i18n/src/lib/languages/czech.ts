@@ -579,6 +579,9 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
             private: 'Private'
         }
     },
+    platformSelect: {
+        selectOptionLabel: 'Vyberte možnost'
+    },
     fnSlider: {
         minMaxDetails: 'Minimální hodnota posuvníku je {{ min }}, maximální hodnota je {{ max }}',
         valueminDetails: 'Hodnota je {{ hodnota }}',

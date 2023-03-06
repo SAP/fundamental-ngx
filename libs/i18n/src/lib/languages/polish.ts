@@ -581,6 +581,9 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
             private: 'Private'
         }
     },
+    platformSelect: {
+        selectOptionLabel: 'Wybierz opcję'
+    },
     fnSlider: {
         minMaxDetails: 'Minimalna wartość {{ min }}, maksymalna wartość {{ max }}',
         valueminDetails: 'Wartość {{ value }}',

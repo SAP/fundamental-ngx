@@ -38,6 +38,7 @@ const tableDialogCustom = 'table-custom-columns-example/table-custom-dialog.comp
 const tableNavigatableRowHtml = 'table-navigatable-row-example.component.html';
 const tableNavigatableRowTs = 'table-navigatable-row-example.component.ts';
 const tableLoadingHtmlSrc = 'loading/table-loading-example.component.html';
+const tableFixedHtmlSrc = 'loading/table-fixed-example.component.html';
 
 @Component({
     selector: 'app-table',
@@ -294,6 +295,14 @@ export class TableDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(tableLoadingHtmlSrc),
             fileName: 'table-loading-example'
+        }
+    ];
+
+    tableFixed: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(tableFixedHtmlSrc),
+            fileName: 'table-fixed-example'
         }
     ];
 

@@ -647,6 +647,9 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
             private: 'Private'
         }
     },
+    platformSelect: {
+        selectOptionLabel: 'Изберете опция'
+    },
     fnSlider: {
         minMaxDetails: 'Минималната стойност на плъзгача е {{ min }}, максималната стойност е {{ max }}',
         valueminDetails: 'Стойността е {{ value }}',

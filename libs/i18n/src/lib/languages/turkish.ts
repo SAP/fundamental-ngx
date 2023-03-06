@@ -576,6 +576,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
             private: 'Private'
         }
     },
+    platformSelect: {
+        selectOptionLabel: 'Bir seçenek seçin'
+    },
     fnSlider: {
         minMaxDetails: 'Kaydırıcının {{ min }} minimum değeri, {{ max }} maksimum değeri',
         valueminDetails: 'Değer {{ value }}',

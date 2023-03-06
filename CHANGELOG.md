@@ -1,3 +1,34 @@
+## [0.39.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.39.0...v0.39.1-rc.0) (2023-03-03)
+
+
+### Features
+
+* **platform:** introduce table row index ([#9471](https://github.com/SAP/fundamental-ngx/issues/9471)) ([9c32274](https://github.com/SAP/fundamental-ngx/commit/9c32274e9c5e2d3ae4835a0e0dbf7a7f0a194bcf))
+
+
+
+# [0.39.0](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.70...v0.39.0) (2023-03-02)
+
+
+
+# [0.39.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.69...v0.39.0-rc.70) (2023-03-02)
+
+
+### Bug Fixes
+
+* **platform:** screenreader reading fdp-select selected value twice ([#9314](https://github.com/SAP/fundamental-ngx/issues/9314)) ([99d9be1](https://github.com/SAP/fundamental-ngx/commit/99d9be1aefb8f3a4a3b0f69fdfb2712d8f885ea8))
+
+
+
+# [0.39.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.68...v0.39.0-rc.69) (2023-03-02)
+
+
+### Features
+
+* **core,platform:** update fundamental-styles version, adopt breaking changes ([#9467](https://github.com/SAP/fundamental-ngx/issues/9467)) ([c30dbe0](https://github.com/SAP/fundamental-ngx/commit/c30dbe0a074cf9a5b4305ddba4ca12e34bf52f05))
+
+
+
 # [0.39.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.67...v0.39.0-rc.68) (2023-03-01)
 
 

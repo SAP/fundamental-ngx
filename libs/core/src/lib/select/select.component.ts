@@ -424,8 +424,6 @@ export class SelectComponent<T = any>
 
     /** @hidden */
     ngOnInit(): void {
-        this.ariaLabel = this.ariaLabel || this.placeholder;
-
         this._initializeCommonBehavior();
     }
 
