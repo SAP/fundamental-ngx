@@ -1651,6 +1651,25 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
+    _dragRowFromKeyboard(dir: string, event: Event, currentRowIndex: number): void {
+        event.preventDefault();
+        if (this._rowsDraggable) {
+            let replacedIndex;
+            dir === 'up' ? (replacedIndex = currentRowIndex - 1) : (replacedIndex = currentRowIndex + 1);
+
+            if (this._tableRowsVisible[replacedIndex]) {
+                const dragDropEvent = {
+                    items: this._tableRowsVisible,
+                    draggedItemIndex: currentRowIndex,
+                    replacedItemIndex: replacedIndex
+                };
+                this._dragDropItemDrop(dragDropEvent);
+                (event.target as HTMLElement).focus();
+            }
+        }
+    }
+
+    /** @hidden */
     private _closePopoverForColumnByFieldName(field: string): void {
         const index = this._visibleColumns.findIndex((c) => c.key === field);
         if (index !== -1) {
