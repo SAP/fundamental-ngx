@@ -1,3 +1,12 @@
+## [0.39.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.0...v0.39.1-rc.1) (2023-03-07)
+
+
+### Bug Fixes
+
+* platform table keyboard dnd ([#9420](https://github.com/SAP/fundamental-ngx/issues/9420)) ([5142679](https://github.com/SAP/fundamental-ngx/commit/51426792a853e518c711dd14cab030a2c3b138e3))
+
+
+
 ## [0.39.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.39.0...v0.39.1-rc.0) (2023-03-03)
 
 
