@@ -11,7 +11,7 @@ const LIST_ELEMENTS: Address[] = new Array(6).fill(undefined).map((_, i) => ({ n
 })
 export class PlatformListBorderLessExampleComponent {
     _dataSource = new ListDataSource<Address>(new ListDataProvider());
-    _itemsArr: Address[] = LIST_ELEMENTS;
+    _itemsArr: Observable<Address[]> = of(LIST_ELEMENTS);
 }
 // it is from application point of to show as example,they refer internal structurs in general
 export interface Address {
