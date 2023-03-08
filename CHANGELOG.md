@@ -1,3 +1,12 @@
+## [0.39.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.1...v0.39.1-rc.2) (2023-03-08)
+
+
+### Bug Fixes
+
+* **core,platform:** table toolbar title updates ([#9474](https://github.com/SAP/fundamental-ngx/issues/9474)) ([8164585](https://github.com/SAP/fundamental-ngx/commit/816458572da0039e1b1f450ae5728191f2f652cb))
+
+
+
 ## [0.39.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.0...v0.39.1-rc.1) (2023-03-07)
 
 
