@@ -7,6 +7,13 @@ export const tableCellArr = [
     '66.04',
     'Stocked on demand'
 ];
+export const groupTableCellArr = [
+    '10 Portable DVD player',
+    'diam neque vestibulum eget vulputate',
+    '66.04',
+    'Stocked on demand',
+    'Row index 0'
+];
 export const descriptionStartTestText = 'cubilia curae';
 export const descriptionEndTestText = 'ultrices posuere';
 export const priceStartTestText = '36.56';
@@ -14,7 +21,7 @@ export const priceEndTestText = '489.01';
 export const nameStartTestText = '10 Portable DVD player';
 export const nameEndTestText = 'Gaming Monster Pro';
 export const testText2 = 'Product name 0';
-export const tableCellArr2 = ['Product name 0', 'Product description goes here 0', '0', 'Available'];
+export const tableCellArr2 = ['Product name 0', 'Product description goes here 0', '0', 'Available', 'Row index 0'];
 export const testText3 = 'Gaming Monster Pro';
 export const tableCellArr3 = ['Gaming Monster Pro', '213.47', 'Out of stock'];
 export const tableCellArr4 = [
@@ -39,7 +46,8 @@ export const tableCellArr6 = [
     '10 Portable DVD player',
     'diam neque vestibulum eget vulputate',
     '66.04 CNY',
-    'Stocked on demand'
+    'Stocked on demand',
+    'Row index 0'
 ];
 export const placeholderTestText = 'Search';
 export const astroTestText = 'Astro';
