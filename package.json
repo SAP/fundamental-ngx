@@ -101,7 +101,7 @@
     "@nrwl/schematics": "8.12.11",
     "@nrwl/tao": "15.5.3",
     "@nrwl/workspace": "15.5.3",
-    "@schematics/angular": "15.1.2",
+    "@schematics/angular": "15.2.1",
     "@swc-node/register": "^1.4.2",
     "@swc/cli": "~0.1.55",
     "@swc/core": "^1.2.173",
