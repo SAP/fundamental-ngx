@@ -140,7 +140,7 @@
     "fs-extra": "10.1.0",
     "git-semver-tags": "4.1.1",
     "github-assistant": "0.3.4",
-    "husky": "8.0.2",
+    "husky": "8.0.3",
     "jasmine-core": "4.5.0",
     "jasmine-marbles": "0.9.2",
     "jasmine-spec-reporter": "7.0.0",
