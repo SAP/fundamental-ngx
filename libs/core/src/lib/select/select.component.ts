@@ -172,7 +172,7 @@ export class SelectComponent<T = any>
 
     /** Custom template used to build control body. */
     @Input()
-    controlTemplate: TemplateRef<any>;
+    controlTemplate?: TemplateRef<any>;
 
     /** The element to which the popover should be appended. */
     @Input()

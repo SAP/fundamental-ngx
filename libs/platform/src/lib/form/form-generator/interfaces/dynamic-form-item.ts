@@ -1,6 +1,7 @@
 import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Observable } from 'rxjs';
+import { TemplateRef } from '@angular/core';
 
 import { ContentDensity } from '@fundamental-ngx/cdk/utils';
 import {
@@ -251,7 +252,7 @@ export interface DynamicFormFieldItem {
     secondaryTextAlignment?: TextAlignment;
 
     /** Custom template used to build control body. */
-    controlTemplate: TemplateRef<any>;
+    controlTemplate?: TemplateRef<any>;
 }
 
 type PreparedDynamicFormFieldItemFields = {
