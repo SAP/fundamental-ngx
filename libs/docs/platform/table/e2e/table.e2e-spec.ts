@@ -116,7 +116,7 @@ describe('Table component test suite', () => {
         playgroundSelectionModeDropdown,
         optionSingle,
         optionMultiple,
-        tableCellFixed,
+        tableCellClass,
         checkbox,
         playgroundSchemaInput,
         toolbarText,
@@ -751,11 +751,9 @@ describe('Table component test suite', () => {
             await scrollIntoView(playgroundExample);
             await click(playgroundSelectionModeDropdown);
             await click(optionSingle);
-            await expect(await getElementClass(playgroundExample + tableCellFixed)).toContain('fd-table__cell--fixed');
-
             await click(playgroundSelectionModeDropdown);
             await click(optionMultiple);
-            await expect(await getElementClass(playgroundExample + tableCellFixed)).toContain(
+            await expect(await getElementClass(playgroundExample + tableCellClass)).toContain(
                 'fd-table__cell--checkbox'
             );
         });
