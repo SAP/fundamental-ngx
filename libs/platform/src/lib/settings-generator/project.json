@@ -1,0 +1,41 @@
+{
+    "name": "platform-settings-generator",
+    "projectType": "library",
+    "sourceRoot": "libs/platform/src/lib/settings-generator",
+    "prefix": "fdp",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["{workspaceRoot}/dist/libs/platform/settings-generator"],
+            "options": {
+                "tsConfig": "libs/platform/src/lib/settings-generator/tsconfig.lib.json",
+                "project": "libs/platform/src/lib/settings-generator/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/platform/src/lib/settings-generator/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/platform/src/lib/settings-generator/test.ts",
+                "tsConfig": "libs/platform/src/lib/settings-generator/tsconfig.spec.json",
+                "karmaConfig": "libs/platform/src/lib/settings-generator/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/platform/src/lib/settings-generator/**/*.ts",
+                    "libs/platform/src/lib/settings-generator/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fdp"],
+    "implicitDependencies": ["cdk", "core", "platform-message-popover"]
+}

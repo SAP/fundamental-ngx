@@ -1,0 +1,83 @@
+<div class="fdp-settings-generator--sidebar-layout">
+    <div class="fdp-settings-generator__sidebar">
+        <ul fd-list [byline]="true" [navigationIndicator]="true">
+            <li
+                (click)="_setSelectedIndex(i)"
+                fd-list-item
+                [selected]="i === _selectedIndex"
+                *ngFor="let item of _settings?.items; let i = index"
+            >
+                <a fd-list-link [navigated]="i === _selectedIndex">
+                    <span fd-list-thumbnail *ngIf="item.thumbnail">
+                        <fd-icon *ngIf="item.thumbnail.icon" [glyph]="item.thumbnail.icon"></fd-icon>
+                        <fd-avatar [image]="item.thumbnail.avatar" size="s" *ngIf="item.thumbnail.avatar"></fd-avatar>
+                    </span>
+                    <div fd-list-content>
+                        <ng-container *ngIf="item.title | fdkAsyncOrSync as titleValue; else titleElseBlock">
+                            <div fd-list-title>{{ titleValue }}</div>
+                        </ng-container>
+                        <ng-template #titleElseBlock>
+                            <div fd-list-title>
+                                <fd-skeleton
+                                    height="16px"
+                                    type="rectangle"
+                                    width="40%"
+                                    textLines="1"
+                                    style="margin: auto 0"
+                                ></fd-skeleton>
+                            </div>
+                        </ng-template>
+                        <!-- <div fd-list-title>{{ item.title | fdkAsyncOrSync }}</div> -->
+                        <div fd-list-byline *ngIf="item.description">
+                            <ng-container
+                                *ngIf="item.description | fdkAsyncOrSync as descriptionValue; else descriptionElseBlock"
+                            >
+                                {{ descriptionValue }}
+                            </ng-container>
+                            <ng-template #descriptionElseBlock>
+                                <fd-skeleton type="text" width="60%" textLines="1" style="margin: auto 0"></fd-skeleton>
+                            </ng-template>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="fdp-settings-generator__content">
+        <ng-container *ngFor="let item of _settings?.items; let i = index">
+            <fdp-settings-generator-content
+                [attr.hidden]="i !== _selectedIndex ? true : null"
+                [settings]="item"
+            ></fdp-settings-generator-content>
+        </ng-container>
+    </div>
+    <!-- <fd-splitter defaultPaneId="one">
+        <fd-splitter-pane-container resizerType="transparent">
+            <fd-splitter-split-pane id="sidebar" size="300px">
+                <div class="fdp-settings-generator__sidebar">
+                    <ul fd-list [byline]="true" [navigationIndicator]="true">
+                        <li (click)="_setSelectedIndex(i)" fd-list-item [selected]="i === _selectedIndex" *ngFor="let item of _settings?.items; let i = index">
+                            <a fd-list-link [navigated]="i === _selectedIndex">
+                                <span fd-list-thumbnail *ngIf="item.thumbnail">
+                                    <fd-icon *ngIf="item.thumbnail.icon" [glyph]="item.thumbnail.icon"></fd-icon>
+                                    <fd-avatar [image]="item.thumbnail.avatar" size="s" *ngIf="item.thumbnail.avatar"></fd-avatar>
+                                </span>
+                                <div fd-list-content>
+                                    <div fd-list-title>{{ item.title | fdkAsyncOrSync }}</div>
+                                    <div fd-list-byline *ngIf="item.description">{{ item.description | fdkAsyncOrSync }}</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </fd-splitter-split-pane>
+            <fd-splitter-split-pane id="content">
+                <div class="fdp-settings-generator__content">
+                    <ng-container *ngFor="let item of _settings?.items; let i = index">
+                        <fdp-settings-generator-content [attr.hidden]="i !== _selectedIndex ? true : null" [settings]="item"></fdp-settings-generator-content>
+                    </ng-container>
+                </div>
+            </fd-splitter-split-pane>
+        </fd-splitter-pane-container>
+    </fd-splitter> -->
+</div>

@@ -8,9 +8,10 @@ import { SafePipe } from './safe.pipe';
 import { ValueByPathPipe } from './value-by-path.pipe';
 import { IsCompactDensityPipe } from './is-compact.pipe';
 import { TruncatePipe } from './truncate.pipe';
+import { AsyncOrSyncPipe } from './async-or-sync.pipe';
 
 @NgModule({
-    declarations: [
+    imports: [
         DisplayFnPipe,
         SearchHighlightPipe,
         TwoDigitsPipe,
@@ -18,7 +19,8 @@ import { TruncatePipe } from './truncate.pipe';
         ValueByPathPipe,
         IsCompactDensityPipe,
         TruncatePipe,
-        FilterStringsPipe
+        FilterStringsPipe,
+        AsyncOrSyncPipe
     ],
     exports: [
         DisplayFnPipe,
@@ -28,7 +30,8 @@ import { TruncatePipe } from './truncate.pipe';
         ValueByPathPipe,
         IsCompactDensityPipe,
         TruncatePipe,
-        FilterStringsPipe
+        FilterStringsPipe,
+        AsyncOrSyncPipe
     ]
 })
 export class PipeModule {}

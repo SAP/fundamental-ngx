@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Nullable } from '../models/nullable';
 
 @Pipe({
-    name: 'fdFilterStrings'
+    name: 'fdFilterStrings',
+    standalone: true
 })
 export class FilterStringsPipe implements PipeTransform {
     /**

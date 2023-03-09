@@ -1,6 +1,6 @@
 {
     "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
-    "dest": "../../../../../dist/libs/platform/src/lib/message-popover",
+    "dest": "../../../../../dist/libs/platform/message-popover",
     "lib": {
         "entryFile": "./index.ts"
     }

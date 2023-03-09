@@ -11,7 +11,7 @@ import { FormGeneratorComponentsAccessorService } from './form-generator-compone
 import {
     DynamicFormFieldItem,
     DynamicFormItem,
-    DynamicFormItemChoices,
+    DynamicFormItemChoiceTypes,
     DynamicFormValue,
     PreparedDynamicFormFieldItem
 } from './interfaces/dynamic-form-item';
@@ -194,7 +194,7 @@ export class FormGeneratorService implements OnDestroy {
                 formValue[i] = await this._getFunctionValue(obj);
             }
 
-            if (renderValue && formItem.controlType === 'password') {
+            if (renderValue && formItem['controlType'] === 'password') {
                 formValue[i] = this._formatPasswordValue(formValue[i]);
             }
         }
@@ -253,7 +253,7 @@ export class FormGeneratorService implements OnDestroy {
      * @param item form item.
      * @returns is current form item is a field.
      */
-    isFormFieldItem(item: DynamicFormItem | undefined): item is DynamicFormFieldItem {
+    isFormFieldItem(item: any): item is DynamicFormFieldItem {
         return !!(item as DynamicFormFieldItem).type;
     }
 
@@ -429,7 +429,7 @@ export class FormGeneratorService implements OnDestroy {
             value = await this._getFunctionValue(obj);
         }
 
-        return value as T;
+        return this._getFunctionValue(value) as T;
     }
 
     /**
@@ -439,7 +439,7 @@ export class FormGeneratorService implements OnDestroy {
      * @returns
      */
     private async _getFormItemChoices(formItem: DynamicFormFieldItem, form: DynamicFormGroup): Promise<SelectItem[]> {
-        const defaultChoices = await this._getFormItemPropertyValue<DynamicFormItemChoices[]>(
+        const defaultChoices = await this._getFormItemPropertyValue<DynamicFormItemChoiceTypes[]>(
             formItem,
             form,
             'choices'
@@ -510,7 +510,7 @@ export class FormGeneratorService implements OnDestroy {
             }
 
             if (formItem.onchange) {
-                const obj = formItem.onchange(control.value, this.forms, control as DynamicFormControl);
+                const obj = formItem.onchange(control.value as any, this.forms, control as DynamicFormControl);
                 await this._getFunctionValue(obj);
             }
         }

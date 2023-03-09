@@ -1,0 +1,28 @@
+$block: fdp-settings-generator;
+
+.#{$block} {
+    .#{$block}__title {
+        padding: 1.5rem 1rem 1rem;
+    }
+
+    &__sidebar {
+        border-right: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+        background: var(--sapBaseColor);
+    }
+
+    &__content {
+        background: var(--sapBaseColor);
+        flex-grow: 1;
+
+        &-section {
+            display: block;
+            &[hidden] {
+                display: none;
+            }
+        }
+    }
+
+    &--sidebar-layout {
+        display: flex;
+    }
+}

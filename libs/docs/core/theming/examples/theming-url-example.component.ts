@@ -22,7 +22,7 @@ export class ThemingUrlExampleComponent {
     constructor(private _themingService: ThemingService, private _router: Router) {
         this._themingService.init();
 
-        this._themingService.currentTheme.subscribe((theme) => {
+        this._themingService.currentTheme$.subscribe((theme) => {
             this.themeFromUrl = theme;
         });
     }

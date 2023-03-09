@@ -18,13 +18,15 @@ import { THEMING_CONFIG_TOKEN } from './tokens';
 
 @Injectable()
 export class ThemingService implements OnDestroy {
-    /** @hidden */
-    private readonly config = new BaseThemingConfig();
+    /**
+     * Theming configuration.
+     */
+    readonly config = new BaseThemingConfig();
 
     /**
-     * Current theme applied to the application.
+     * Observable of the current theme, applied to the application.
      */
-    get currentTheme(): Observable<CompleteThemeDefinition | null> {
+    get currentTheme$(): Observable<CompleteThemeDefinition | null> {
         return this._currentThemeSubject.asObservable();
     }
 
@@ -40,8 +42,10 @@ export class ThemingService implements OnDestroy {
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
-    private _currentTheme: CompleteThemeDefinition;
+    /**
+     * Current theme applied to the application.
+     */
+    currentTheme: CompleteThemeDefinition;
 
     /** @hidden */
     private readonly _currentThemeSubject: BehaviorSubject<CompleteThemeDefinition | null> =
@@ -110,7 +114,7 @@ export class ThemingService implements OnDestroy {
             this._setThemeResource('fonts', theme.theming.themeFontPath);
         }
 
-        this._currentTheme = theme;
+        this.currentTheme = theme;
         this._currentThemeSubject.next(theme);
 
         return true;

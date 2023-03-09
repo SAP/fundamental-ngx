@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import escape from 'lodash-es/escape';
 
 @Pipe({
-    name: 'highlight'
+    name: 'highlight',
+    standalone: true
 })
 export class SearchHighlightPipe implements PipeTransform {
     /** Highlight search term in string. */

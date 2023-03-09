@@ -122,6 +122,25 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     }
 
     /**
+     * Programmatically add new form to array of forms.
+     * @param form
+     */
+    addForms(forms: MessagePopoverForm | MessagePopoverForm[]): void {
+        const formsArray = Array.isArray(forms) ? forms : [forms];
+        this._ngForms.push(...formsArray);
+        this._startListeningForErrors();
+    }
+
+    /**
+     * Programmativally add new form fields to array of listened form fields.
+     * @param formFields
+     */
+    addFormFields(formFields: PlatformFormFieldControl[]): void {
+        this._formFields.push(...formFields);
+        this._listenToFormFieldErrors(this._formFields);
+    }
+
+    /**
      * @hidden
      * Listens to the form submission and collects form control errors.
      */

@@ -1,5 +1,5 @@
 import { QueryList, TemplateRef } from '@angular/core';
-import { NgControl } from '@angular/forms';
+import { FormControl, NgControl } from '@angular/forms';
 import { FormField, FormStates } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Subject } from 'rxjs';
@@ -84,6 +84,9 @@ export abstract class PlatformFormField extends FormField {
 
     /** Form control */
     ngControl?: NgControl;
+
+    /** @hidden */
+    formControl?: FormControl;
 
     /** Event emitted when errors being changed. */
     errorsChange$: Subject<void>;

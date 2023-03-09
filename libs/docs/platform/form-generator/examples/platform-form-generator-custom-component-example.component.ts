@@ -6,7 +6,9 @@ import {
     BaseDynamicFormGeneratorControl,
     FormGeneratorService,
     DynamicFormItem,
-    DynamicFormValue
+    DynamicFormValue,
+    BaseDynamicFormFieldItem,
+    DynamicFormItemChoice
 } from '@fundamental-ngx/platform/form';
 
 @Component({
@@ -32,6 +34,11 @@ export class PlatformFormGeneratorCustomSliderElementComponent extends BaseDynam
     }
 }
 
+export interface SliderDynamicFormControl extends BaseDynamicFormFieldItem<{ value: number; label: string }> {
+    type: 'slider';
+    choices: DynamicFormItemChoice<number> | ((formValue?: DynamicFormValue) => DynamicFormItemChoice);
+}
+
 @Component({
     selector: 'fdp-platform-form-generator-custom-component-example',
     templateUrl: './platform-form-generator-custom-component-example.component.html'
@@ -40,7 +47,7 @@ export class PlatformFormGeneratorCustomComponentExampleComponent {
     formCreated = false;
     formValue: DynamicFormValue;
 
-    questions: DynamicFormItem[] = [
+    questions: DynamicFormItem<{}, SliderDynamicFormControl>[] = [
         {
             type: 'slider',
             name: 'some_slider',

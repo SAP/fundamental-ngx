@@ -278,6 +278,10 @@ export class FormGroupComponent
     @Input()
     mainTitle: string;
 
+    /** Whether to hide form's main title. Default is false. */
+    @Input()
+    hideMainTItle = false;
+
     /**
      * Convenient way to initialize internal FormControls from object
      */

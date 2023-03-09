@@ -65,7 +65,7 @@ function addDocsLibraryToNx(tree: Tree, schema: SapComponentSchema) {
 }
 
 function updateApiFiles(tree: Tree, schema: SapComponentSchema) {
-    const filePath = `libs/docs/${getProjectDirName(schema)}/shared/src/lib/api-files.ts`;
+    const filePath = `libs/docs/${getProjectDirName(schema)}/shared/api-files.ts`;
     const content = tree.read(filePath);
     const tsSourceFile = ts.createSourceFile(filePath, content?.toString() ?? '', ts.ScriptTarget.Latest, true);
     const statement = getVariableStatement(tsSourceFile, 'API_FILES');

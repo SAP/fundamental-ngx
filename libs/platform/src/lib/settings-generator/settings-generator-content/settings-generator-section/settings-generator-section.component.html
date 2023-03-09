@@ -1,0 +1,10 @@
+<fdp-form-generator
+    *ngIf="_renderer === 'form'"
+    [noAdditionalContent]="true"
+    [mainTitle]="items.title | fdkAsyncOrSync"
+    [hideMainTItle]="true"
+    [formItems]="_formItems"
+    [unifiedLayout]="false"
+></fdp-form-generator>
+
+<ng-container *ngIf="_renderer === 'template' && items?.template" [ngTemplateOutlet]="_templateRef"></ng-container>

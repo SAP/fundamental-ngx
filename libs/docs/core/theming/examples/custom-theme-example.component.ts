@@ -57,7 +57,7 @@ export class CustomThemeExampleComponent implements OnDestroy {
 
     constructor(private _themingService: ThemingService) {
         this._themingService.init();
-        this._themingService.currentTheme
+        this._themingService.currentTheme$
             .pipe(takeUntil(this._onDestroy$))
             .subscribe((theme) => (this.currentTheme = theme));
     }

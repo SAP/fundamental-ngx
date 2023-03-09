@@ -144,7 +144,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     ) {
         this.library = this._route.snapshot.data['library'] || 'core';
 
-        this._themingService.currentTheme
+        this._themingService.currentTheme$
             .pipe(
                 takeUntil(this._onDestroy$),
                 filter((theme) => !!theme)
