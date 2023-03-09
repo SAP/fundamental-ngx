@@ -1,3 +1,12 @@
+## [0.39.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.2...v0.39.1-rc.3) (2023-03-09)
+
+
+### Features
+
+* **platform:** virtual scroll for table ([#9419](https://github.com/SAP/fundamental-ngx/issues/9419)) ([dd24f61](https://github.com/SAP/fundamental-ngx/commit/dd24f61aaf2a4067d925cf37d7b1edbbf5f2721a))
+
+
+
 ## [0.39.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.1...v0.39.1-rc.2) (2023-03-08)
 
 
