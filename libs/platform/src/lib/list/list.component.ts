@@ -124,9 +124,9 @@ export class ListComponent<T>
     @Input()
     delayTime: number;
 
-    /** Items to be loaded at once. */
+    /** Items to be loaded at once. Intinity (no limit) by default. */
     @Input()
-    itemSize = 0;
+    itemSize = Infinity;
 
     /** Enables lazy loadMore of data. */
     @Input()
@@ -733,8 +733,13 @@ export class ListComponent<T>
             })
         );
 
+        const matchParams = new Map();
+
+        matchParams.set('query', '*');
+        matchParams.set('limit', this.itemSize);
+
         // initial data fetch
-        initDataSource.match('*');
+        initDataSource.match(matchParams);
 
         return initDataSource;
     }
