@@ -1,3 +1,12 @@
+## [0.39.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.3...v0.39.1-rc.4) (2023-03-09)
+
+
+### Bug Fixes
+
+* **platform:** don't limit list items rendering if itemSize is empty ([#9493](https://github.com/SAP/fundamental-ngx/issues/9493)) ([082d6d3](https://github.com/SAP/fundamental-ngx/commit/082d6d3eae61881a931ad64cb8115dbdd0d69c44))
+
+
+
 ## [0.39.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.2...v0.39.1-rc.3) (2023-03-09)
 
 
