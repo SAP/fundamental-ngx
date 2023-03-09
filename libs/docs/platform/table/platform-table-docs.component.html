@@ -62,6 +62,15 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="custom-titles" componentName="table"> Custom Toolbar Title </fd-docs-section-title>
+<description>This example shows how to customize the title of the table</description>
+<component-example>
+    <fdp-platform-table-custom-title-example></fdp-platform-table-custom-title-example>
+</component-example>
+<code-example [exampleFiles]="customTitleTableFiles"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="single-row-selection" componentName="table"> Single Row Selection</fd-docs-section-title>
 <description>
     <p>This example shows single row selection</p>
@@ -267,6 +276,33 @@
     <fdp-platform-table-tree-example></fdp-platform-table-tree-example>
 </component-example>
 <code-example [exampleFiles]="treeTableFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="virtual-scroll" componentName="table"> Virtual Scroll</fd-docs-section-title>
+<p>
+    When dealing with large amounts of data, it is recommended to use virtual scrolling to improve performance. To
+    enable Virtual Scroll, use the following properties:
+</p>
+
+<ul>
+    <li><code>[virtualScroll]="true"</code> - enables virtual scroll</li>
+    <li><code>[bodyHeight]="value"</code> - sets the height of the table body (viewport)</li>
+    <li>
+        <code>[rowHeight]="value"</code> - sets the height of the table row if it is different from default for the
+        current content density
+    </li>
+</ul>
+
+<p>
+    Additionally, you may set the <code>renderAhead</code> input property to specify how many rows should be rendered
+    ahead of the current viewport. Default is 20.
+</p>
+<description> </description>
+<component-example>
+    <fdp-platform-table-virtual-scroll-example></fdp-platform-table-virtual-scroll-example>
+</component-example>
+<code-example [exampleFiles]="virtualScrollTableFiles"></code-example>
 
 <separator></separator>
 

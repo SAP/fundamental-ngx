@@ -400,4 +400,14 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
             }
         }
     }
+
+    &__body--virtual-scroll {
+        position: relative;
+        will-change: scroll-position;
+
+        .fd-table__body {
+            position: static;
+            will-change: transform;
+        }
+    }
 }

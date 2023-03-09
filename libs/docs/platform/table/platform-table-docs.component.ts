@@ -18,6 +18,8 @@ const platformTableDefaultSrc = 'platform-table-default-example.component.html';
 const platformTableDefaultTsSrc = 'platform-table-default-example.component.ts';
 const platformTableCustomColumnSrc = 'platform-table-custom-column-example.component.html';
 const platformTableCustomColumnTsSrc = 'platform-table-custom-column-example.component.ts';
+const platformTableCustomTitleSrc = 'platform-table-custom-title-example.component.html';
+const platformTableCustomTitleTsSrc = 'platform-table-custom-title-example.component.ts';
 const platformTableCustomWidthSrc = 'platform-table-custom-width-example.component.html';
 const platformTableCustomWidthTsSrc = 'platform-table-custom-width-example.component.ts';
 const platformTableSingleRowSelectionSrc = 'platform-table-single-row-selection-example.component.html';
@@ -48,6 +50,8 @@ const platformTableP13GroupSrc = 'platform-table-p13-group-example.component.htm
 const platformTableP13GroupTsSrc = 'platform-table-p13-group-example.component.ts';
 const platformTreeTableDefaultSrc = 'platform-table-tree-example.component.html';
 const platformTreeTableDefaultTsSrc = 'platform-table-tree-example.component.ts';
+const platformVirtualScrollTableDefaultSrc = 'virtual-scroll/platform-table-virtual-scroll-example.component.html';
+const platformVirtualScrollTableDefaultTsSrc = 'virtual-scroll/platform-table-virtual-scroll-example.component.ts';
 const platformTableNavigatableRowSrc = 'platform-table-navigatable-row-indicator-example.component.html';
 const platformTableNoOuterBordersSrc = 'platform-table-navigatable-row-indicator-example.component.html';
 const platformTableNavigatableRowTsSrc = 'platform-table-navigatable-row-indicator-example.component.ts';
@@ -141,6 +145,22 @@ export class PlatformTableDocsComponent {
             code: getAssetFromModuleAssets(platformTableCustomColumnTsSrc),
             fileName: 'platform-table-custom-column-example',
             component: 'PlatformTableCustomColumnExampleComponent',
+            name: 'platform-table-example.component.ts'
+        }
+    ];
+
+    customTitleTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformTableCustomTitleSrc),
+            fileName: 'platform-table-custom-title-example',
+            name: 'platform-table-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformTableCustomTitleTsSrc),
+            fileName: 'platform-table-custom-title-example',
+            component: 'PlatformTableCustomTitleExampleComponent',
             name: 'platform-table-example.component.ts'
         }
     ];
@@ -382,6 +402,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-tree-example',
             component: 'PlatformTableTreeExampleComponent',
             name: 'platform-table-tree-example.component.ts'
+        }
+    ];
+
+    virtualScrollTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformVirtualScrollTableDefaultSrc),
+            fileName: 'platform-table-virtual-scroll-example',
+            name: 'platform-table-virtual-scroll-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformVirtualScrollTableDefaultTsSrc),
+            fileName: 'platform-table-virtual-scroll-example',
+            component: 'PlatformTableVirtualScrollExampleComponent',
+            name: 'platform-table-virtual-scroll-example.component.ts'
         }
     ];
 
