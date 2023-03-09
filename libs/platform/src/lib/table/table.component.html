@@ -190,6 +190,8 @@
                         (click)="_onRowClick(row)"
                         (keydown.enter)="_onRowClick(row)"
                         (keydown.space)="_onRowClick(row, $event)"
+                        (keydown.alt.arrowup)="_dragRowFromKeyboard('up', $event, rowIdx)"
+                        (keydown.alt.arrowdown)="_dragRowFromKeyboard('down', $event, rowIdx)"
                         (started)="_dragDropStart()"
                         [main]="true"
                     >

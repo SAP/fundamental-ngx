@@ -29,6 +29,7 @@ import { PlatformTableHeaderComponent } from './platform-table-header/platform-t
 import { PlatformTableDocsComponent } from './platform-table-docs.component';
 import { PlatformTableDefaultExampleComponent } from './examples/platform-table-default-example.component';
 import { PlatformTableCustomColumnExampleComponent } from './examples/platform-table-custom-column-example.component';
+import { PlatformTableCustomTitleExampleComponent } from './examples/platform-table-custom-title-example.component';
 import { PlatformTableMultipleRowSelectionExampleComponent } from './examples/platform-table-multiple-row-selection-example.component';
 import { PlatformTableSingleRowSelectionExampleComponent } from './examples/platform-table-single-row-selection-example.component';
 import { PlatformTableSortableExampleComponent } from './examples/platform-table-sortable-example.component';
@@ -97,6 +98,7 @@ const routes: Routes = [
         PlatformTableHeaderComponent,
         PlatformTableDefaultExampleComponent,
         PlatformTableCustomColumnExampleComponent,
+        PlatformTableCustomTitleExampleComponent,
         PlatformTableSingleRowSelectionExampleComponent,
         PlatformTableMultipleRowSelectionExampleComponent,
         PlatformTableSortableExampleComponent,

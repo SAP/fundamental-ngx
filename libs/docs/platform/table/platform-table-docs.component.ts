@@ -18,6 +18,8 @@ const platformTableDefaultSrc = 'platform-table-default-example.component.html';
 const platformTableDefaultTsSrc = 'platform-table-default-example.component.ts';
 const platformTableCustomColumnSrc = 'platform-table-custom-column-example.component.html';
 const platformTableCustomColumnTsSrc = 'platform-table-custom-column-example.component.ts';
+const platformTableCustomTitleSrc = 'platform-table-custom-title-example.component.html';
+const platformTableCustomTitleTsSrc = 'platform-table-custom-title-example.component.ts';
 const platformTableCustomWidthSrc = 'platform-table-custom-width-example.component.html';
 const platformTableCustomWidthTsSrc = 'platform-table-custom-width-example.component.ts';
 const platformTableSingleRowSelectionSrc = 'platform-table-single-row-selection-example.component.html';
@@ -143,6 +145,22 @@ export class PlatformTableDocsComponent {
             code: getAssetFromModuleAssets(platformTableCustomColumnTsSrc),
             fileName: 'platform-table-custom-column-example',
             component: 'PlatformTableCustomColumnExampleComponent',
+            name: 'platform-table-example.component.ts'
+        }
+    ];
+
+    customTitleTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformTableCustomTitleSrc),
+            fileName: 'platform-table-custom-title-example',
+            name: 'platform-table-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformTableCustomTitleTsSrc),
+            fileName: 'platform-table-custom-title-example',
+            component: 'PlatformTableCustomTitleExampleComponent',
             name: 'platform-table-example.component.ts'
         }
     ];
