@@ -276,7 +276,7 @@ export class FormGroupComponent
 
     /** Form's main title. */
     @Input()
-    mainTitle: string;
+    mainTitle: Nullable<string>;
 
     /** Whether to hide form's main title. Default is false. */
     @Input()

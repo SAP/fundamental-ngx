@@ -1,5 +1,5 @@
 <h2 fd-title class="fdp-settings-generator__title">
-    <ng-container *ngIf="settings?.title | fdkAsyncOrSync as settingsTitle; else loadingBlock">
+    <ng-container *ngIf="settings?.title | fdkMakeAsync | async as settingsTitle; else loadingBlock">
         {{ settingsTitle }}
     </ng-container>
     <ng-template #loadingBlock>
@@ -9,7 +9,7 @@
 
 <ng-template #tabbedLayout>
     <fd-tab-list size="s">
-        <fd-tab *ngFor="let group of _groups" [title]="group.title | fdkAsyncOrSync">
+        <fd-tab *ngFor="let group of _groups" [title]="group.title | fdkMakeAsync | async">
             <fdp-settings-generator-section
                 [groupName]="$any(settings).id"
                 [items]="group"
@@ -20,9 +20,6 @@
 
 <ng-template #formLayout>
     <fdp-settings-generator-section [items]="settings!"></fdp-settings-generator-section>
-    <!-- <fdp-form-generator *ngIf="_renderer === 'form'" [formItems]="$any(settings?.items)"></fdp-form-generator>
-
-    <ng-container *ngIf="_renderer === 'template' && settings?.template" [ngTemplateOutlet]="settings!.template!"></ng-container> -->
 </ng-template>
 
 <ng-container *ngTemplateOutlet="_contentLayout === 'tabs' ? tabbedLayout : formLayout"></ng-container>

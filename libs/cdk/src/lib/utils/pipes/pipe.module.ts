@@ -8,7 +8,7 @@ import { SafePipe } from './safe.pipe';
 import { ValueByPathPipe } from './value-by-path.pipe';
 import { IsCompactDensityPipe } from './is-compact.pipe';
 import { TruncatePipe } from './truncate.pipe';
-import { AsyncOrSyncPipe } from './async-or-sync.pipe';
+import { MakeAsyncPipe } from './make-async.pipe';
 
 @NgModule({
     imports: [
@@ -20,7 +20,7 @@ import { AsyncOrSyncPipe } from './async-or-sync.pipe';
         IsCompactDensityPipe,
         TruncatePipe,
         FilterStringsPipe,
-        AsyncOrSyncPipe
+        MakeAsyncPipe
     ],
     exports: [
         DisplayFnPipe,
@@ -31,7 +31,7 @@ import { AsyncOrSyncPipe } from './async-or-sync.pipe';
         IsCompactDensityPipe,
         TruncatePipe,
         FilterStringsPipe,
-        AsyncOrSyncPipe
+        MakeAsyncPipe
     ]
 })
 export class PipeModule {}

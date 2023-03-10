@@ -37,5 +37,5 @@
         }
     },
     "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": ["cdk", "core", "platform-message-popover"]
+    "implicitDependencies": ["cdk", "core"]
 }

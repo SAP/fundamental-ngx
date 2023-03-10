@@ -13,3 +13,4 @@ export * from './settings-generator-content/settings-generator-content.component
 export * from './settings-generator-content/settings-generator-section/settings-generator-section.component';
 export * from './controls/theme-selector-list/theme-selector-list.component';
 export * from './directives/settings-generator-section.directive';
+export * from './layouts/base-settings-generator-layout';

@@ -104,7 +104,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      * @description Form main title.
      */
     @Input()
-    mainTitle: string;
+    mainTitle: Nullable<string>;
 
     /**
      * Whether to hide main title. Default is false.

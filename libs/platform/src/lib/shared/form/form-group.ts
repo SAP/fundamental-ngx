@@ -4,6 +4,7 @@ import { FormGroup, AbstractControl } from '@angular/forms';
 import { PlatformFormField } from './form-field';
 import { FormFieldGroup } from './form-field-group';
 import { LabelLayout, ColumnLayout } from './form-options';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * FormGroup base class.
@@ -55,7 +56,7 @@ export abstract class FormGroupContainer {
     /**
      * Form's main title.
      */
-    mainTitle?: string;
+    mainTitle?: Nullable<string>;
 
     /**
      * Attach underlying form field.
