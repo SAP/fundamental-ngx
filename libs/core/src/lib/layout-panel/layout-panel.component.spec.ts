@@ -25,4 +25,10 @@ describe('LayoutPanelComponent', () => {
     it('should assign class', () => {
         expect(fixture.nativeElement.className).toContain('fd-layout-panel');
     });
+
+    it('should apply transparent background', () => {
+        component.transparent = true;
+        fixture.detectChanges();
+        expect(fixture.nativeElement.className).toContain('fd-layout-panel--transparent');
+    });
 });

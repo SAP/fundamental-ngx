@@ -6,6 +6,8 @@ import { LayoutPanelDocsHeaderComponent } from './layout-panel-docs-header/layou
 import { LayoutPanelDocsComponent } from './layout-panel-docs.component';
 import { LayoutPanelExampleComponent } from './examples/layout-panel-examples.component';
 import { LayoutPanelEdgeBleedExampleComponent } from './examples/layout-panel-edge-bleed-example.component';
+import { LayoutPanelTransparentExampleComponent } from './examples/layout-panel-transparent-example.component';
+import { LayoutPanelFooterVariationsExampleComponent } from './examples/layout-panel-footer-variations-example.component';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
 import { TableModule } from '@fundamental-ngx/core/table';
 
@@ -27,7 +29,9 @@ const routes: Routes = [
         LayoutPanelDocsComponent,
         LayoutPanelExampleComponent,
         LayoutPanelDocsHeaderComponent,
-        LayoutPanelEdgeBleedExampleComponent
+        LayoutPanelEdgeBleedExampleComponent,
+        LayoutPanelTransparentExampleComponent,
+        LayoutPanelFooterVariationsExampleComponent
     ],
     providers: [currentComponentProvider('layout-panel')]
 })
