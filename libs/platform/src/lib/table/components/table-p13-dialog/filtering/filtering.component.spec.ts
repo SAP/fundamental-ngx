@@ -3,6 +3,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
 import { PlatformTableModule } from '../../../table.module';
 import { FilterDialogData, P13FilteringDialogComponent } from './filtering.component';
+import { FilterableColumnDataType } from '../../../enums/filter-type.enum';
 
 describe('PlatformTableP13FilterDialogComponent', () => {
     let component: P13FilteringDialogComponent;
@@ -10,7 +11,31 @@ describe('PlatformTableP13FilterDialogComponent', () => {
 
     const dialogRef = new DialogRef();
     const dialogData: FilterDialogData = {
-        columns: [],
+        columns: [
+            {
+                label: 'Name',
+                key: 'name',
+                dataType: FilterableColumnDataType.STRING
+            },
+            {
+                label: 'Description',
+                key: 'description',
+                dataType: FilterableColumnDataType.STRING,
+                filterable: false
+            },
+            {
+                label: 'Price',
+                key: 'price.value',
+                dataType: FilterableColumnDataType.STRING,
+                filterable: true
+            },
+            {
+                label: 'Status',
+                key: 'status',
+                dataType: FilterableColumnDataType.STRING,
+                filterable: true
+            }
+        ],
         collectionFilter: []
     };
 
@@ -31,5 +56,9 @@ describe('PlatformTableP13FilterDialogComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should not add columns where filterable is false or unspecified', () => {
+        expect(component.columns.length).toEqual(2);
     });
 });
