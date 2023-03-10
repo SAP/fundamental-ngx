@@ -1,3 +1,12 @@
+## [0.39.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.5...v0.39.1-rc.6) (2023-03-10)
+
+
+### Features
+
+* **platform:** pass avatar properties ([#9500](https://github.com/SAP/fundamental-ngx/issues/9500)) ([bc6fb00](https://github.com/SAP/fundamental-ngx/commit/bc6fb00221e86c9741fad92d3d668dc22459d7be))
+
+
+
 ## [0.39.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.4...v0.39.1-rc.5) (2023-03-10)
 
 
