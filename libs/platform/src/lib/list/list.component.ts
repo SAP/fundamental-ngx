@@ -7,6 +7,7 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
+    forwardRef,
     Host,
     HostListener,
     Inject,
@@ -274,7 +275,7 @@ export class ListComponent<T>
     anchor: ElementRef<HTMLLinkElement>;
 
     /** @hidden */
-    @ContentChild(ListItemDef)
+    @ContentChild(forwardRef(() => ListItemDef))
     listItemDef: ListItemDef;
 
     /** Load More List item content */
@@ -282,7 +283,7 @@ export class ListComponent<T>
     loadMoreContent: LoadMoreContentDirective;
 
     /** Child items of the List. */
-    @ContentChildren(BaseListItem, { descendants: true })
+    @ContentChildren(forwardRef(() => BaseListItem), { descendants: true })
     listItems: QueryList<BaseListItem>;
 
     /** @hidden */
