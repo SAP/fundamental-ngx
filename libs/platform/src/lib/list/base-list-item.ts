@@ -10,13 +10,14 @@ import {
     Input,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     TemplateRef,
     ViewChild
 } from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { ColorAccent, KeyUtil, Size } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
@@ -25,10 +26,52 @@ import { ListComponent, ListType, SelectionType } from './list.component';
 import { ListConfig } from './list.config';
 import { ActionListItemComponent } from './action-list-item/action-list-item.component';
 import { FdpListComponent } from './fdpListComponent.token';
+import merge from 'lodash-es/merge';
 
 export const IS_ACTIVE_CLASS = 'is-active';
 let nextListItemId = 0;
 export type StatusType = 'negative' | 'critical' | 'positive' | 'informative';
+
+export class ListAvatarConfig {
+    /** @hidden */
+    class = '';
+    /** @hidden */
+    ariaLabel: Nullable<string> = null;
+    /** @hidden */
+    ariaLabelledby: Nullable<string> = null;
+    /** @hidden */
+    label: Nullable<string> = null;
+    /** @hidden */
+    size: Size = 's';
+    /** @hidden */
+    glyph: Nullable<string> = null;
+    /** @hidden */
+    zoomGlyph: Nullable<string> = null;
+    /** @hidden */
+    circle = false;
+    /** @hidden */
+    transparent = false;
+    /** @hidden */
+    contain = false;
+    /** @hidden */
+    placeholder = false;
+    /** @hidden */
+    tile = false;
+    /** @hidden */
+    border = false;
+    /** @hidden */
+    colorAccent: Nullable<ColorAccent> = null;
+    /** @hidden */
+    random = false;
+    /** @hidden */
+    clickable = false;
+    /** @hidden */
+    image: Nullable<string> = null;
+    /** @hidden */
+    alterIcon: Nullable<string> = null;
+    /** @hidden */
+    backupImage: Nullable<string> = null;
+}
 
 /**
  * Base interface for a list variant definition.
@@ -83,13 +126,48 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     @Input()
     ariaPosinet: number;
 
-    /** attribute to hold avatar path */
+    /** Avatar component properties. @see AvatarComponent for more details */
     @Input()
-    avatarSrc?: string;
+    set avatar(value: Partial<ListAvatarConfig> | string) {
+        value = typeof value === 'string' ? { image: value } : value;
+        this._avatarConfig = merge(new ListAvatarConfig(), value);
+    }
 
-    /** attribute to hold avatar title for a11y */
+    get avatar(): ListAvatarConfig {
+        return this._avatarConfig;
+    }
+
+    /**
+     * @deprecated
+     * Use `avatar` property for more flexible configuration.
+     *
+     * @description
+     * Attribute to hold avatar path
+     */
     @Input()
-    avatarTitle: string;
+    set avatarSrc(value: Nullable<string>) {
+        this._avatarConfig = merge(this._avatarConfig, { image: value });
+    }
+
+    get avatarSrc(): Nullable<string> {
+        return this.avatar?.image;
+    }
+
+    /**
+     * @deprecated
+     * Use `avatar` property for more flexible configuration.
+     *
+     * @description
+     * Attribute to hold avatar title for a11y
+     */
+    @Input()
+    set avatarTitle(value: Nullable<string>) {
+        this._avatarConfig = merge(this._avatarConfig, { ariaLabel: value });
+    }
+
+    get avatarTitle(): Nullable<string> {
+        return this.avatar?.ariaLabel;
+    }
 
     /** attribute to hold counter value */
     @Input()
@@ -154,8 +232,9 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     /**
      * Whether to display unread notification circle.
      */
-    @Input()
-    displayUnreadNotification = false;
+    get displayUnreadNotification(): boolean {
+        return !!this._list?.unreadIndicator;
+    }
 
     /** radio button value */
     @Input()
@@ -258,10 +337,14 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     private _listComponent = inject<ListComponent<unknown>>(FdpListComponent);
 
     /** @hidden */
+    private _avatarConfig: ListAvatarConfig = new ListAvatarConfig();
+
+    /** @hidden */
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
         public itemEl: ElementRef<HTMLElement>,
-        protected _listConfig: ListConfig
+        protected _listConfig: ListConfig,
+        @Optional() private readonly _list: ListComponent<any>
     ) {
         super(_changeDetectorRef);
     }
