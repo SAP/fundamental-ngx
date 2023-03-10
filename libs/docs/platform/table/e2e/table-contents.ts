@@ -51,7 +51,7 @@ export const tableCellArr6 = [
 ];
 export const placeholderTestText = 'Search';
 export const astroTestText = 'Astro';
-export const testText7 = 'penatibus et magnis';
+export const testText7 = '154.1';
 export const pharetraTestText = 'pharetra magna vestibulum aliquet';
 export const nuncTestText = 'nunc nisl duis bibendum';
 export const massaTestText = 'massa quis augue luctus tincidunt';
