@@ -289,7 +289,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     }
 
     /** @hidden Get the abbreviation string */
-    private _generateAbbreviation(label: string): string | null {
+    private _generateAbbreviation(label: Nullable<string>): string | null {
+        if (!label) {
+            return null;
+        }
         const maxLettersCount = 3;
         const firstLetters = label.split(' ').map((word) => word.charAt(0));
         const abbreviate = firstLetters.join('');

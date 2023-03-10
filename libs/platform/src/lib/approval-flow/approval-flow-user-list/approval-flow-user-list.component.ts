@@ -91,7 +91,9 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
         if (this.selectedUsers.length) {
             const selectedApproversNames = this.selectedUsers.map((approver) => approver.name);
 
-            this._selectedItems = this.listItems.filter((item) => selectedApproversNames.includes(item.avatarTitle));
+            this._selectedItems = this.listItems.filter(
+                (item) => !!item.avatar?.ariaLabel && selectedApproversNames.includes(item.avatar.ariaLabel)
+            );
 
             this._selectedItems.forEach((item) => {
                 item._selected = true;

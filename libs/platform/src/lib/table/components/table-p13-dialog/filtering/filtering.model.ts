@@ -7,6 +7,7 @@ export interface FilterableColumn {
     label: string;
     key: string;
     dataType: FilterableColumnDataType;
+    filterable?: boolean;
 }
 
 export interface FilterDialogData extends TableDialogCommonData {

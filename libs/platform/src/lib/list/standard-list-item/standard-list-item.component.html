@@ -70,15 +70,29 @@
 <ng-template #commonTemplate>
     <fd-icon class="fd-list__icon" *ngIf="titleIcon" [glyph]="titleIcon" [attr.alt]="titleIcon" role="img"> </fd-icon>
     <fd-avatar
-        class="fd-list__icon"
-        size="s"
-        [image]="avatarSrc"
-        *ngIf="avatarSrc !== null && avatarSrc !== undefined"
-        [attr.alt]="avatarTitle"
-        [label]="avatarTitle"
+        [size]="avatar.size"
+        [glyph]="avatar.glyph"
+        [zoomGlyph]="avatar.zoomGlyph"
+        *ngIf="avatar.label || avatar.image || avatar.glyph || avatar.zoomGlyph"
+        [label]="avatar.label"
+        [circle]="avatar.circle"
+        [placeholder]="avatar.placeholder"
+        [tile]="avatar.tile"
+        [colorAccent]="avatar.colorAccent"
+        [image]="avatar.image"
+        [transparent]="avatar.transparent"
+        [random]="avatar.random"
+        [class]="'fd-list__icon ' + avatar.class"
+        [ariaLabel]="avatar.ariaLabel"
+        [ariaLabelledby]="avatar.ariaLabelledby"
+        [contain]="avatar.contain"
+        [border]="avatar.border"
+        [alterIcon]="avatar.alterIcon"
+        [backupImage]="avatar.backupImage"
+        [clickable]="avatar.clickable"
+        [attr.alt]="avatar.ariaLabel"
         role="img"
-    >
-    </fd-avatar>
+    ></fd-avatar>
     <span *ngIf="title" fd-list-title [attr.aria-label]="ariaLabel" [attr.nowrap]="titleWrap" [attr.title]="title">
         {{ title }}
     </span>
@@ -104,24 +118,34 @@
 </ng-template>
 
 <ng-template #byLineTemplate>
-    <fd-icon
-        class="fd-list__icon fd-list__thumbnail"
-        *ngIf="titleIcon"
-        [glyph]="titleIcon"
-        [attr.alt]="titleIcon"
-        role="img"
-    >
-    </fd-icon>
-    <fd-avatar
-        class="fd-list__icon fd-list__thumbnail"
-        size="s"
-        [image]="avatarSrc"
-        *ngIf="avatarSrc !== null && avatarSrc !== undefined"
-        [attr.alt]="avatarTitle"
-        [label]="avatarTitle"
-        role="img"
-    >
-    </fd-avatar>
+    <div fdListThumbnail>
+        <fd-icon class="fd-list__icon" *ngIf="titleIcon" [glyph]="titleIcon" [attr.alt]="titleIcon" role="img">
+        </fd-icon>
+        <fd-avatar
+            [size]="avatar.size"
+            [glyph]="avatar.glyph"
+            [zoomGlyph]="avatar.zoomGlyph"
+            *ngIf="avatar.label || avatar.image || avatar.glyph || avatar.zoomGlyph"
+            [label]="avatar.label"
+            [circle]="avatar.circle"
+            [placeholder]="avatar.placeholder"
+            [tile]="avatar.tile"
+            [colorAccent]="avatar.colorAccent"
+            [image]="avatar.image"
+            [transparent]="avatar.transparent"
+            [random]="avatar.random"
+            [class]="avatar.class"
+            [ariaLabel]="avatar.ariaLabel"
+            [ariaLabelledby]="avatar.ariaLabelledby"
+            [contain]="avatar.contain"
+            [border]="avatar.border"
+            [alterIcon]="avatar.alterIcon"
+            [backupImage]="avatar.backupImage"
+            [clickable]="avatar.clickable"
+            [attr.alt]="avatar.ariaLabel"
+            role="img"
+        ></fd-avatar>
+    </div>
 
     <div class="fd-list__content">
         <div *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap" [attr.title]="title">

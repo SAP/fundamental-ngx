@@ -1,6 +1,5 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -12,7 +11,6 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 
-import { ListConfig } from '../list.config';
 import { ActionChangeEvent, BaseListItem, IS_ACTIVE_CLASS } from '../base-list-item';
 
 @Component({
@@ -29,15 +27,6 @@ export class ActionListItemComponent extends BaseListItem {
     /** Event sent when action in clicked */
     @Output()
     actionClicked = new EventEmitter<ActionChangeEvent>();
-
-    /** @hidden */
-    constructor(
-        _changeDetectorRef: ChangeDetectorRef,
-        itemEl: ElementRef<HTMLElement>,
-        protected _listConfig: ListConfig
-    ) {
-        super(_changeDetectorRef, itemEl, _listConfig);
-    }
 
     /**
      * @hidden
