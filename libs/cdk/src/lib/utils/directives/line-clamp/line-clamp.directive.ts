@@ -179,8 +179,6 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
     refreshTarget(event: LineClampTargetDirective): void {
         this._lineClampTarget = event.targetElement;
         this._originalText = event.fdLineClampTargetText;
-        this.reset();
-        this.refreshClamp();
         this._checkLineCount();
     }
 
