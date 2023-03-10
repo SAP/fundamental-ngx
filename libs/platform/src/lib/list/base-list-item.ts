@@ -145,8 +145,12 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      * Attribute to hold avatar path
      */
     @Input()
-    set avatarSrc(value: string | undefined) {
+    set avatarSrc(value: Nullable<string>) {
         this._avatarConfig = merge(this._avatarConfig, { image: value });
+    }
+
+    get avatarSrc(): Nullable<string> {
+        return this.avatar?.image;
     }
 
     /**
@@ -157,8 +161,12 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      * Attribute to hold avatar title for a11y
      */
     @Input()
-    set avatarTitle(value: string) {
+    set avatarTitle(value: Nullable<string>) {
         this._avatarConfig = merge(this._avatarConfig, { ariaLabel: value });
+    }
+
+    get avatarTitle(): Nullable<string> {
+        return this.avatar?.ariaLabel;
     }
 
     /** attribute to hold counter value */
