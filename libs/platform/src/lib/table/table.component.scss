@@ -273,6 +273,8 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
     }
 
     .fd-table__cell {
+        z-index: 0; // need so fixed cells are above not-fixed cells
+
         &--checkbox {
             border-left: none;
             border-right: $fd-table-border;
