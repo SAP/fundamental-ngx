@@ -1,3 +1,12 @@
+## [0.39.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.4...v0.39.1-rc.5) (2023-03-10)
+
+
+### Bug Fixes
+
+* **platform:** do not display filterable=false columns in p13 filter dialog ([#9495](https://github.com/SAP/fundamental-ngx/issues/9495)) ([ea0e326](https://github.com/SAP/fundamental-ngx/commit/ea0e326f4ae5ca0175f68c8bb3544bd97dd7ee7a))
+
+
+
 ## [0.39.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.3...v0.39.1-rc.4) (2023-03-09)
 
 
