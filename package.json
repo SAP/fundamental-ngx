@@ -91,7 +91,7 @@
     "@commitlint/config-conventional": "17.3.0",
     "@jsdevtools/npm-publish": "1.4.3",
     "@nrwl/cli": "15.5.3",
-    "@nrwl/devkit": "15.5.3",
+    "@nrwl/devkit": "15.8.6",
     "@nrwl/eslint-plugin-nx": "15.5.3",
     "@nrwl/jest": "15.5.3",
     "@nrwl/js": "15.5.3",
