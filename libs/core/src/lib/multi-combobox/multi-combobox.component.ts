@@ -606,6 +606,8 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
         if (this.openDropdownOnAddOnClicked) {
             this._showList(!isOpen);
+        } else if (this.isOpen) {
+            this._showList(false);
         }
 
         if (this.isOpen && this.listComponent) {

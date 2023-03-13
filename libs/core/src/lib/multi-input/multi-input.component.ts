@@ -694,6 +694,8 @@ export class MultiInputComponent
         this.addOnButtonClicked.emit(event);
         if (this.openDropdownOnAddOnClicked) {
             this.openChangeHandle(!this.open);
+        } else if (this.open) {
+            this.openChangeHandle(false);
         }
     }
 
