@@ -9,6 +9,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+let layoutPanelUniqueId = 0;
+
 /**
  * Layout Panels are used to encapsulate part of the content, form elements, lists, collections, etc., on a page.
  */
@@ -27,9 +29,18 @@ export class LayoutPanelComponent implements OnChanges, OnInit {
     @Input()
     backgroundImage: string;
 
+    /** Id for the layout panel element. */
+    @Input()
+    id: string = 'fd-layout-panel-' + layoutPanelUniqueId++;
+
     /** @hidden */
     @HostBinding('class.fd-layout-panel')
     fdLayoutPanelClass = true;
+
+    /** Whether the background of the panel should be transparent. */
+    @Input()
+    @HostBinding('class.fd-layout-panel--transparent')
+    transparent = false;
 
     /** @hidden */
     constructor(private elRef: ElementRef) {}

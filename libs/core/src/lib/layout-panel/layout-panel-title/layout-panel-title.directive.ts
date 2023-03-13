@@ -15,6 +15,6 @@ import { Directive, HostBinding } from '@angular/core';
 })
 export class LayoutPanelTitleDirective {
     /** @hidden */
-    @HostBinding('class.fd-layout-panel__title')
-    fdLayoutPanelTitleClass = true;
+    @HostBinding('class')
+    fdLayoutPanelTitleClass = 'fd-title fd-title--h5';
 }

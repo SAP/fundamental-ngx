@@ -74,16 +74,26 @@
         <!--header content-->
         <div class="fd-object-list__header">
             <fd-avatar
-                size="s"
-                [glyph]="glyph"
-                *ngIf="label !== undefined || image !== undefined"
-                [label]="label"
-                [circle]="circle"
-                [placeholder]="placeholder"
-                [tile]="tile"
-                [colorAccent]="colorAccent"
-                [image]="image"
-                [transparent]="transparent"
+                [size]="avatar.size"
+                [glyph]="avatar.glyph"
+                [zoomGlyph]="avatar.zoomGlyph"
+                *ngIf="avatar.label || avatar.image || avatar.glyph || avatar.zoomGlyph"
+                [label]="avatar.label"
+                [circle]="avatar.circle"
+                [placeholder]="avatar.placeholder"
+                [tile]="avatar.tile"
+                [colorAccent]="avatar.colorAccent"
+                [image]="avatar.image"
+                [transparent]="avatar.transparent"
+                [random]="avatar.random"
+                [class]="avatar.class"
+                [ariaLabel]="avatar.ariaLabel"
+                [ariaLabelledby]="avatar.ariaLabelledby"
+                [contain]="avatar.contain"
+                [border]="avatar.border"
+                [alterIcon]="avatar.alterIcon"
+                [backupImage]="avatar.backupImage"
+                [clickable]="avatar.clickable"
             ></fd-avatar>
             <!--left side header content-->
             <div class="fd-object-list__header-left">
