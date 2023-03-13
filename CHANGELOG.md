@@ -1,3 +1,48 @@
+## [0.39.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.6...v0.39.1-rc.7) (2023-03-10)
+
+
+### Bug Fixes
+
+* **core:** update Layout Panel to latest design ([#9499](https://github.com/SAP/fundamental-ngx/issues/9499)) ([3e51e74](https://github.com/SAP/fundamental-ngx/commit/3e51e74774fc6eed0b2cef277f009835bfe7bf97))
+
+
+
+## [0.39.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.5...v0.39.1-rc.6) (2023-03-10)
+
+
+### Features
+
+* **platform:** pass avatar properties ([#9500](https://github.com/SAP/fundamental-ngx/issues/9500)) ([bc6fb00](https://github.com/SAP/fundamental-ngx/commit/bc6fb00221e86c9741fad92d3d668dc22459d7be))
+
+
+
+## [0.39.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.4...v0.39.1-rc.5) (2023-03-10)
+
+
+### Bug Fixes
+
+* **platform:** do not display filterable=false columns in p13 filter dialog ([#9495](https://github.com/SAP/fundamental-ngx/issues/9495)) ([ea0e326](https://github.com/SAP/fundamental-ngx/commit/ea0e326f4ae5ca0175f68c8bb3544bd97dd7ee7a))
+
+
+
+## [0.39.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.3...v0.39.1-rc.4) (2023-03-09)
+
+
+### Bug Fixes
+
+* **platform:** don't limit list items rendering if itemSize is empty ([#9493](https://github.com/SAP/fundamental-ngx/issues/9493)) ([082d6d3](https://github.com/SAP/fundamental-ngx/commit/082d6d3eae61881a931ad64cb8115dbdd0d69c44))
+
+
+
+## [0.39.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.2...v0.39.1-rc.3) (2023-03-09)
+
+
+### Features
+
+* **platform:** virtual scroll for table ([#9419](https://github.com/SAP/fundamental-ngx/issues/9419)) ([dd24f61](https://github.com/SAP/fundamental-ngx/commit/dd24f61aaf2a4067d925cf37d7b1edbbf5f2721a))
+
+
+
 ## [0.39.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.1...v0.39.1-rc.2) (2023-03-08)
 
 

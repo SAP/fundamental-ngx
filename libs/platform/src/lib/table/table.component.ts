@@ -65,6 +65,7 @@ import {
     DEFAULT_HIGHLIGHTING_KEY,
     DEFAULT_TABLE_STATE,
     EDITABLE_ROW_SEMANTIC_STATE,
+    ROW_HEIGHT,
     SELECTION_COLUMN_WIDTH,
     SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH
 } from './constants';
@@ -449,6 +450,22 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     cellFocusedEventAnnouncer: CellFocusedEventAnnouncer = this._defaultCellFocusedEventAnnouncer;
 
+    /** Whether to show only visible rows in matter of performance
+     * false by default, when true setting bodyHeight and rowHeight is required.
+     */
+    @Input()
+    virtualScroll = false;
+
+    /** Height of the row, required for the virtualScroll,
+     * default is 44px in cozy, 32px in compact and 24px in condensed (set automatically)
+     */
+    @Input()
+    rowHeight = ROW_HEIGHT.get(ContentDensityMode.COZY)!;
+
+    /** Cache size for the virtualScroll, default is 40 in each direction */
+    @Input()
+    renderAhead = 40;
+
     /** Event emitted when current preset configuration has been changed. */
     @Output()
     presetChanged = new EventEmitter<PlatformTableManagedPreset>();
@@ -738,6 +755,15 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     _isGroupTable = false;
 
     /** @hidden */
+    _virtualScrollTotalHeight = 0;
+
+    /** @hidden */
+    _virtualScrollTransform: Nullable<string> = null;
+
+    /** @hidden */
+    _tableRowsInViewport: TableRow<T>[] = [];
+
+    /** @hidden */
     get _isShownSelectionColumn(): boolean {
         return this.selectionMode === SelectionMode.SINGLE || this.selectionMode === SelectionMode.MULTIPLE;
     }
@@ -848,6 +874,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _focusinTimerId;
 
     /** @hidden */
+    private _virtualScrollCache = { startNodeIndex: -1, visibleNodeCount: -1, totalNodeCount: -1 };
+
+    /** @hidden */
+    private _rowHeightManuallySet = false;
+
+    /** @hidden */
     @HostListener('focusout')
     _onFocusOut(): void {
         this._focusinTimerId = setTimeout(() => {
@@ -935,6 +967,14 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
             this._calculateIsShownNavigationColumn();
         }
+
+        if ('rowHeight' in changes) {
+            this._rowHeightManuallySet = true;
+        }
+
+        if (this.virtualScroll && (changes['rowHeight'] || changes['virtualScroll'] || changes['renderAhead'])) {
+            this._calculateVirtualScrollRows();
+        }
     }
 
     /** @hidden */
@@ -967,6 +1007,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._listenToTableRowsPipe();
 
         this._listenToPageScrolling();
+
+        this._listenToVirtualScroll();
+
+        this._listenToRowHeightChange();
 
         this._listenToColumnPropertiesChange();
 
@@ -1820,6 +1864,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._subscriptions.add(
             this._tableService.freezeChange.subscribe((event: FreezeChange) => {
                 this.columnFreeze.emit(new TableColumnFreezeEvent(this, event.current, event.previous));
+                this.fixed = !!this._freezableColumns.size;
             })
         );
 
@@ -1973,6 +2018,69 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     private _calculateVisibleTableRows(): void {
         this._tableRowsVisible = this._tableRows.filter((row) => !row.hidden);
+
+        if (this.virtualScroll) {
+            this._calculateVirtualScrollRows();
+        } else {
+            this._tableRowsInViewport = this._tableRowsVisible;
+        }
+    }
+
+    /** @hidden */
+    private _calculateVirtualScrollRows(): void {
+        if (!this.virtualScroll || !this.bodyHeight) {
+            return;
+        }
+
+        const totalNodeCount = this._tableRowsVisible.length;
+
+        let startNodeIndex = Math.floor(this.verticalScrollable.getScrollTop() / this.rowHeight) - this.renderAhead;
+        startNodeIndex = Math.max(0, startNodeIndex);
+
+        let visibleNodeCount =
+            Math.ceil(this.tableContainer.nativeElement.clientHeight / this.rowHeight) + 2 * this.renderAhead;
+        visibleNodeCount = Math.min(totalNodeCount - startNodeIndex, visibleNodeCount);
+
+        // Simple caching to avoid unnecessary re-renderings
+        const isCached =
+            startNodeIndex === this._virtualScrollCache.startNodeIndex &&
+            visibleNodeCount === this._virtualScrollCache.visibleNodeCount &&
+            totalNodeCount === this._virtualScrollCache.totalNodeCount &&
+            // On rows change, even if the total number of rows is the same, the row object will be different
+            this._tableRowsVisible[startNodeIndex] === this._tableRowsInViewport[0];
+
+        if (isCached) {
+            return;
+        }
+
+        this._virtualScrollCache = { startNodeIndex, visibleNodeCount, totalNodeCount };
+        this._virtualScrollTotalHeight = totalNodeCount * this.rowHeight - visibleNodeCount * this.rowHeight;
+        this._virtualScrollTransform = `translateY(` + startNodeIndex * this.rowHeight + `px)`;
+        this._tableRowsInViewport = this._tableRowsVisible.slice(startNodeIndex, startNodeIndex + visibleNodeCount);
+
+        this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    private _listenToRowHeightChange(): void {
+        this._subscriptions.add(
+            this.contentDensityObserver.pipe(filter(() => !this._rowHeightManuallySet)).subscribe((contentDensity) => {
+                this.rowHeight = ROW_HEIGHT.get(contentDensity) ?? ROW_HEIGHT.get(ContentDensityMode.COZY)!;
+                this._calculateVirtualScrollRows();
+            })
+        );
+    }
+
+    /** @hidden */
+    private _listenToVirtualScroll(): void {
+        this._subscriptions.add(
+            this._tableScrollDispatcher
+                .verticallyScrolled()
+                .pipe(filter(() => this.virtualScroll && !!this.bodyHeight))
+                .subscribe(() => {
+                    this._calculateVirtualScrollRows();
+                })
+        );
     }
 
     /** @hidden */
@@ -2034,6 +2142,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     private _setFreezableInfo(): void {
         this._freezableColumns = this._getFreezableColumns();
+        this.fixed = !!this._freezableColumns.size;
     }
 
     /** @hidden */

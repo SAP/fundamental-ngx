@@ -7,6 +7,7 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
+    forwardRef,
     Host,
     HostListener,
     Inject,
@@ -124,9 +125,9 @@ export class ListComponent<T>
     @Input()
     delayTime: number;
 
-    /** Items to be loaded at once. */
+    /** Items to be loaded at once. Intinity (no limit) by default. */
     @Input()
-    itemSize = 0;
+    itemSize = Infinity;
 
     /** Enables lazy loadMore of data. */
     @Input()
@@ -274,7 +275,7 @@ export class ListComponent<T>
     anchor: ElementRef<HTMLLinkElement>;
 
     /** @hidden */
-    @ContentChild(ListItemDef)
+    @ContentChild(forwardRef(() => ListItemDef))
     listItemDef: ListItemDef;
 
     /** Load More List item content */
@@ -282,7 +283,7 @@ export class ListComponent<T>
     loadMoreContent: LoadMoreContentDirective;
 
     /** Child items of the List. */
-    @ContentChildren(BaseListItem, { descendants: true })
+    @ContentChildren(forwardRef(() => BaseListItem), { descendants: true })
     listItems: QueryList<BaseListItem>;
 
     /** @hidden */
@@ -733,8 +734,13 @@ export class ListComponent<T>
             })
         );
 
+        const matchParams = new Map();
+
+        matchParams.set('query', '*');
+        matchParams.set('limit', this.itemSize);
+
         // initial data fetch
-        initDataSource.match('*');
+        initDataSource.match(matchParams);
 
         return initDataSource;
     }

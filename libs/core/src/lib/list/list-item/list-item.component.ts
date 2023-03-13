@@ -184,11 +184,6 @@ export class ListItemComponent
     private _listItemRole = 'listitem';
 
     /** @hidden */
-    get _displayUnreadIndicator(): boolean {
-        return !!this._unreadIndicator?.unreadIndicator;
-    }
-
-    /** @hidden */
     @HostBinding('attr.aria-describedBy')
     get getCombinedAriaDescribedBy(): string | null {
         let describedBy = this.screenReaderContent ? this._uniqueId + '-screenReader-content' : '';

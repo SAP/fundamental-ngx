@@ -4,7 +4,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { LayoutPanelModule } from '../layout-panel.module';
 
 @Component({
-    template: ` <h1 #directiveElement fd-layout-panel-title>Test Text</h1> `
+    template: ` <h5 #directiveElement fd-layout-panel-title>Test Text</h5> `
 })
 class TestComponent {
     @ViewChild('directiveElement')
@@ -33,6 +33,6 @@ describe('LayoutPanelTitleDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-layout-panel__title');
+        expect(component.ref.nativeElement.className).toBe('fd-title fd-title--h5');
     });
 });

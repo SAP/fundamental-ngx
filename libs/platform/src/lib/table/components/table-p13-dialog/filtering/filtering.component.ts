@@ -66,7 +66,7 @@ export class P13FilteringDialogComponent implements Resettable {
     constructor(public dialogRef: DialogRef<FilterDialogData>) {
         const { columns, collectionFilter } = this.dialogRef.data;
 
-        this.columns = columns || [];
+        this.columns = columns.filter((column) => column.filterable) || [];
 
         this._initiateRules(collectionFilter);
 
