@@ -1,3 +1,12 @@
+## [0.39.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.6...v0.39.1-rc.7) (2023-03-10)
+
+
+### Bug Fixes
+
+* **core:** update Layout Panel to latest design ([#9499](https://github.com/SAP/fundamental-ngx/issues/9499)) ([3e51e74](https://github.com/SAP/fundamental-ngx/commit/3e51e74774fc6eed0b2cef277f009835bfe7bf97))
+
+
+
 ## [0.39.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.5...v0.39.1-rc.6) (2023-03-10)
 
 
