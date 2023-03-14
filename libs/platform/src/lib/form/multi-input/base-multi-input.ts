@@ -405,14 +405,14 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** Closes the select popover body. */
     close(): void {
         this.isOpen = false;
+        this.inputText = '';
         this.searchTermChanged();
-        this.isOpenChange.emit(this.isOpen);
-        this.openChange.next(this.isOpen);
-        this._cd.markForCheck();
-
         if (!this.mobile) {
             this.searchInputElement.nativeElement.focus();
         }
+        this.isOpenChange.emit(false);
+        this.openChange.next(false);
+        this._cd.markForCheck();
     }
 
     /** @hidden */

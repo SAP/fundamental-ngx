@@ -279,14 +279,17 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden */
     addOnButtonClick(event: Event): void {
+        if (!this.openDropdownOnAddOnClicked && this.isOpen) {
+            this.showList(false);
+        } else if (this.openDropdownOnAddOnClicked) {
+            this.showList(!this.isOpen);
+        }
+
         this.addOnButtonClicked.emit(event);
+
         if (isFunction(this.addOnButtonClickFn)) {
             this.addOnButtonClickFn();
             return;
-        }
-
-        if (this.openDropdownOnAddOnClicked) {
-            this.showList(!this.isOpen);
         }
     }
 

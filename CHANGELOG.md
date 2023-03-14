@@ -1,3 +1,12 @@
+## [0.39.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.7...v0.39.1-rc.8) (2023-03-13)
+
+
+### Bug Fixes
+
+* **core,platform:** addon button should always close popover if it is open despite inputs ([#9498](https://github.com/SAP/fundamental-ngx/issues/9498)) ([02d2f2b](https://github.com/SAP/fundamental-ngx/commit/02d2f2ba8accaec66fe43eccc32217143060eeff))
+
+
+
 ## [0.39.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.6...v0.39.1-rc.7) (2023-03-10)
 
 

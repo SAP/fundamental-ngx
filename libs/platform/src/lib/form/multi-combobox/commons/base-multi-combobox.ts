@@ -520,6 +520,8 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
         if (this.openDropdownOnAddOnClicked) {
             this.showList(!isOpen);
+        } else if (this.isOpen) {
+            this.showList(false);
         }
 
         if (this.isOpen && this.listComponent) {
