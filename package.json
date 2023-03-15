@@ -51,7 +51,7 @@
     "@fundamental-styles/cx": "0.26.3-rc.5",
     "@fundamental-styles/fn": "0.25.1-rc.16",
     "@nrwl/angular": "15.5.3",
-    "@sap-theming/theming-base-content": "11.1.49",
+    "@sap-theming/theming-base-content": "11.2.1",
     "@stackblitz/sdk": "1.8.2",
     "@swc/helpers": "~0.4.11",
     "@types/google.visualization": "0.0.68",
