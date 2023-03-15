@@ -255,6 +255,9 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         if (!changes['selectedDate'] && !changes['selectedRangeDate'] && !changes['currentlyDisplayed']) {
             this._buildDayViewGrid();
         }
+        if (changes['startingDayOfWeek']) {
+            this._refreshShortWeekDays();
+        }
     }
 
     /** @hidden */

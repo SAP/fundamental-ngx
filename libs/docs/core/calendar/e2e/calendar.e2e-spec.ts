@@ -28,6 +28,8 @@ import {
     disabledAttribute,
     landscapeAttribute,
     mondayStartDate,
+    tuesdayStartDate,
+    fridayStartDate,
     otherMonth,
     portraitAttribute
 } from './calendar-contents';
@@ -61,6 +63,7 @@ describe('calendar test suite', () => {
         rangeCalendar,
         programmaticCalendar,
         mondayCalendar,
+        cdkOverlay,
         calendarDays,
         internationalCalendar,
         singleReactiveCalendar,
@@ -263,7 +266,7 @@ describe('calendar test suite', () => {
 
             expect(
                 await (await $(specialDaysCalendar).$('.fd-calendar__item*=' + endDate.getDate())).getAttribute('class')
-            ).not.toContain('special-day');
+            ).toContain('special-day');
 
             expect(
                 await (
@@ -355,6 +358,17 @@ describe('calendar test suite', () => {
     describe('monday start calendar example', () => {
         it('should check calendar starts on Monday', async () => {
             await expect(await getText(mondayCalendar + calendarDays)).toEqual(mondayStartDate);
+        });
+
+        it('should check calendar after changing starting day', async () => {
+            await click(mondayCalendar + ' .fd-select .fd-button');
+            await waitForElDisplayed(cdkOverlay + ' li.fd-list__item');
+            await click(cdkOverlay + ' li.fd-list__item', 2);
+            await expect(await getText(mondayCalendar + calendarDays)).toEqual(tuesdayStartDate);
+            await click(mondayCalendar + ' .fd-select .fd-button');
+            await waitForElDisplayed(cdkOverlay + ' li.fd-list__item');
+            await click(cdkOverlay + ' li.fd-list__item', 5);
+            await expect(await getText(mondayCalendar + calendarDays)).toEqual(fridayStartDate);
         });
 
         it('should check calendar selections', async () => {
