@@ -1,7 +1,7 @@
 <fdp-form-generator
     *ngIf="_renderer === 'form'"
     [noAdditionalContent]="true"
-    [mainTitle]="items?.title | fdkMakeAsync | async"
+    [mainTitle]="items?.title | fdkAsyncOrSync"
     [hideMainTItle]="true"
     [formItems]="_formItems"
     [unifiedLayout]="false"

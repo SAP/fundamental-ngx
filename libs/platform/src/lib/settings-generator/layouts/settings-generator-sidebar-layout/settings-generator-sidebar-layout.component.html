@@ -19,7 +19,7 @@
                         ></fdp-settings-generator-sidebar-icon>
                     </span>
                     <div fd-list-content>
-                        <ng-container *ngIf="item.title | fdkMakeAsync | async as titleValue; else titleElseBlock">
+                        <ng-container *ngIf="item.title | fdkAsyncOrSync as titleValue; else titleElseBlock">
                             <div fd-list-title>{{ titleValue }}</div>
                         </ng-container>
                         <ng-template #titleElseBlock>
@@ -35,10 +35,7 @@
                         </ng-template>
                         <div fd-list-byline *ngIf="item.description">
                             <ng-container
-                                *ngIf="
-                                    item.description | fdkMakeAsync | async as descriptionValue;
-                                    else descriptionElseBlock
-                                "
+                                *ngIf="item.description | fdkAsyncOrSync as descriptionValue; else descriptionElseBlock"
                             >
                                 {{ descriptionValue }}
                             </ng-container>

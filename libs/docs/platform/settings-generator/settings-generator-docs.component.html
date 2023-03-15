@@ -41,7 +41,7 @@
 <component-example>
     <fdp-settings-generator-message-popover-example></fdp-settings-generator-message-popover-example>
 </component-example>
-<code-example [exampleFiles]="settingsGeneratorDefaultExample"></code-example>
+<code-example [exampleFiles]="settingsGeneratorMessagePopoverLayoutExample"></code-example>
 
 <separator></separator>
 
@@ -65,7 +65,7 @@
 <component-example>
     <fdp-settings-generator-custom-layout-example></fdp-settings-generator-custom-layout-example>
 </component-example>
-<code-example [exampleFiles]="settingsGeneratorDefaultExample"></code-example>
+<code-example [exampleFiles]="settingsGeneratorCustomLayoutExample"></code-example>
 
 <separator></separator>
 
@@ -85,17 +85,34 @@
 <component-example>
     <fdp-settings-generator-custom-control-example></fdp-settings-generator-custom-control-example>
 </component-example>
-<code-example [exampleFiles]="settingsGeneratorDefaultExample"></code-example>
+<code-example [exampleFiles]="settingsGeneratorCustomControlExample"></code-example>
 
 <separator></separator>
 
 <fd-docs-section-title id="dialog" componentName="settings-generator">
-    Settings Generator Standard Usage
+    Settings Generator in Dialog
 </fd-docs-section-title>
 <description>
-    <!-- TODO -->
+    <p>Settings Generator component can be easily embedded in Dialog component.</p>
+    <p>The example below shows how to embed Settings Dialog inside TemplateRef.</p>
 </description>
 <component-example>
     <fdp-settings-generator-dialog-example></fdp-settings-generator-dialog-example>
 </component-example>
-<code-example [exampleFiles]="settingsGeneratorDefaultExample"></code-example>
+<code-example [exampleFiles]="settingsGeneratorDialogLayoutExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="default-config" componentName="settings-generator">
+    Settings Generator default configuration
+</fd-docs-section-title>
+<description>
+    <p>Settings Generator can be preconfigured when importing <code>SettingsGeneratorModule</code>.</p>
+    <p>
+        To preconfigure default layout and it's properties, call <code>withConfig(config)</code> method of
+        <code>SettingsGeneratorModule</code>, where <code>config</code> is your configuration object.
+    </p>
+</description>
+<ng-container *ngIf="defaultConfigExample | async as defaultConfigExampleString">
+    <fd-code-snippet language="typescript" [contentBased]="true">{{ defaultConfigExampleString }}</fd-code-snippet>
+</ng-container>

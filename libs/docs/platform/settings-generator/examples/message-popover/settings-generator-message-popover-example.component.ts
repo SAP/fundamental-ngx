@@ -97,8 +97,9 @@ export class SettingsGeneratorMessagePopoverExampleComponent implements AfterVie
             label: theme.name + (this._theming.config.defaultTheme === theme.id ? ' (Default)' : ''),
             value: theme.id,
             description: theme.description
-            // template: this.themeListItemTemplate
         }));
+
+        const currentTheme = this._theming.getCurrentTheme();
 
         this.schema = {
             appearance: 'sidebar',
@@ -220,7 +221,7 @@ export class SettingsGeneratorMessagePopoverExampleComponent implements AfterVie
                                     name: 'theme',
                                     message: 'Theme',
                                     choices,
-                                    default: this._theming.currentTheme.id,
+                                    default: currentTheme?.id,
                                     guiOptions: {
                                         noLabelLayout: true
                                     }

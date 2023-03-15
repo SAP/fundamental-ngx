@@ -195,5 +195,5 @@ export class PlatformFormGeneratorDocsComponent {
         }
     ];
 
-    defaultConfigExample = defaultConfigSrc;
+    defaultConfigExample = getAssetFromModuleAssets(defaultConfigSrc);
 }

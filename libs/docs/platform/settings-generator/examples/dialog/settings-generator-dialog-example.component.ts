@@ -120,6 +120,8 @@ export class SettingsGeneratorDialogExampleComponent {
             // template: this.themeListItemTemplate
         }));
 
+        const currentTheme = this._theming.getCurrentTheme();
+
         this.schema = {
             appearance: 'sidebar',
             items: [
@@ -213,7 +215,7 @@ export class SettingsGeneratorDialogExampleComponent {
                                     name: 'theme',
                                     message: 'Theme',
                                     choices,
-                                    default: this._theming.currentTheme.id,
+                                    default: currentTheme?.id,
                                     guiOptions: {
                                         noLabelLayout: true
                                     }

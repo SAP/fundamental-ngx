@@ -100,6 +100,8 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
             description: theme.description
         }));
 
+        const currentTheme = this._theming.getCurrentTheme();
+
         this.schema = {
             appearance: 'sidebar',
             sidebarWidth: {
@@ -229,7 +231,7 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
                                     name: 'theme',
                                     message: 'Theme',
                                     choices,
-                                    default: this._theming.currentTheme.id,
+                                    default: currentTheme?.id,
                                     guiOptions: {
                                         noLabelLayout: true
                                     }

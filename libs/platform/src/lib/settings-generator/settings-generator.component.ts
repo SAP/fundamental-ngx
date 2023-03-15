@@ -5,6 +5,7 @@ import {
     Component,
     ComponentRef,
     HostBinding,
+    Inject,
     inject,
     Injector,
     Input,
@@ -17,11 +18,13 @@ import { DestroyedService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import { BaseSettingsGeneratorLayout } from './layouts/base-settings-generator-layout';
 import { SettingsGeneratorSidebarLayoutComponent } from './layouts/settings-generator-sidebar-layout/settings-generator-sidebar-layout.component';
+import { SettingsConfig } from './models/settings-config.model';
 import { SettingsModel } from './models/settings.model';
 import { SettingsGeneratorLayoutAccessorService } from './settings-generator-layout-accessor.service';
 import { SettingsGeneratorReturnValue, SettingsGeneratorService } from './settings-generator.service';
 import { ThemeSelectorListComponent } from './controls/theme-selector-list/theme-selector-list.component';
 import { BehaviorSubject, filter, Observable, Subscription } from 'rxjs';
+import { FDP_SETTINGS_GENERATOR_CONFIG } from './tokens';
 
 @Component({
     selector: 'fdp-settings-generator',
@@ -37,6 +40,9 @@ export class SettingsGeneratorComponent implements AfterViewInit, OnDestroy {
      */
     @Input()
     set settings(value: Nullable<SettingsModel>) {
+        if (value) {
+            value.appearance = value.appearance || (this._config.defaultLayout as string);
+        }
         this._settings = value;
         this._settingsGeneratorService.settings.next(value);
         this._setLayout();
@@ -78,7 +84,8 @@ export class SettingsGeneratorComponent implements AfterViewInit, OnDestroy {
         private readonly _settingsLayoutService: SettingsGeneratorLayoutAccessorService,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
-        private readonly _cdr: ChangeDetectorRef
+        private readonly _cdr: ChangeDetectorRef,
+        @Inject(FDP_SETTINGS_GENERATOR_CONFIG) private readonly _config: SettingsConfig
     ) {
         this._settingsLayoutService.addLayout('sidebar', SettingsGeneratorSidebarLayoutComponent);
         this._fgService.addComponent(ThemeSelectorListComponent, ['theme-list']);

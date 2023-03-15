@@ -81,18 +81,26 @@
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <fdp-settings-generator #settingsGenerator [settings]="schema"></fdp-settings-generator>
+            <fdp-message-popover-form-wrapper #messagePopoverWrapper>
+                <fdp-settings-generator #settingsGenerator [settings]="schema"></fdp-settings-generator>
+            </fdp-message-popover-form-wrapper>
         </fd-dialog-body>
 
         <fd-dialog-footer>
-            <fd-button-bar
-                fdType="emphasized"
-                label="Interested"
-                (click)="submitSettings(settingsGenerator, dialog)"
-                ariaLabel="Interested Emphasized"
-            ></fd-button-bar>
-
-            <fd-button-bar label="Cancel" (click)="dialog.dismiss('Cancel')" ariaLabel="Cancel"></fd-button-bar>
+            <ng-template fdkTemplate="footer">
+                <div fd-bar-left>
+                    <fdp-message-popover [wrapper]="messagePopoverWrapper"></fdp-message-popover>
+                </div>
+                <div fd-bar-right>
+                    <fd-button-bar
+                        fdType="emphasized"
+                        label="Submit"
+                        (click)="submitSettings(settingsGenerator, dialog)"
+                        ariaLabel="Submit Emphasized"
+                    ></fd-button-bar>
+                    <fd-button-bar label="Cancel" (click)="dialog.dismiss('Cancel')" ariaLabel="Cancel"></fd-button-bar>
+                </div>
+            </ng-template>
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>

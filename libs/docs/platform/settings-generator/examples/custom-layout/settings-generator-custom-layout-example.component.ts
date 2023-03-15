@@ -27,7 +27,7 @@ import { take } from 'rxjs/operators';
     selector: 'fdp-settings-generator-tabs-layout',
     template: `
         <fd-tab-list *ngIf="settings">
-            <fd-tab *ngFor="let tab of settings.items" [title]="tab.title | fdkMakeAsync | async">
+            <fd-tab *ngFor="let tab of settings.items" [title]="tab.title | fdkAsyncOrSync">
                 <fdp-settings-generator-content [settings]="tab"></fdp-settings-generator-content>
             </fd-tab>
         </fd-tab-list>

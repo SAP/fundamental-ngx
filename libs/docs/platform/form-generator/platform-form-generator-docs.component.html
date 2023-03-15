@@ -170,7 +170,9 @@
     This code snipped shows an example module which imports Form Generator module and provides default configuration for
     the fields.
 </description>
-<fd-code-snippet language="typescript" [contentBased]="true">{{ defaultConfigExample }}</fd-code-snippet>
+<ng-container *ngIf="defaultConfigExample | async as defaultConfigExampleString">
+    <fd-code-snippet language="typescript" [contentBased]="true">{{ defaultConfigExampleString }}</fd-code-snippet>
+</ng-container>
 
 <fd-docs-section-title id="loading" componentName="form-generator"> Initial loading </fd-docs-section-title>
 <description>
