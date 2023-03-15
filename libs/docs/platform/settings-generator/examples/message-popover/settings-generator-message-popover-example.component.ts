@@ -1,16 +1,15 @@
 import {
-    Component,
+    AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    Injectable,
     TemplateRef,
     ViewChild,
-    ChangeDetectorRef,
-    Injectable,
-    AfterViewInit
+    ViewEncapsulation
 } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ThemingService } from '@fundamental-ngx/core/theming';
-import { BaseDynamicFormFieldItem } from '@fundamental-ngx/platform';
-import { ListAvatarConfig } from '@fundamental-ngx/platform/list';
 import { SettingsGeneratorComponent, SettingsModel } from '@fundamental-ngx/platform/settings-generator';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -30,7 +29,7 @@ interface UserModel {
 @Injectable()
 class ExampleUserService {
     private readonly _user$ = new BehaviorSubject<UserModel>({
-        email: 'john.doe@sap.com',
+        email: 'invalidEmail',
         name: 'John Doe',
         username: 'C78672634',
         language: 'de',
@@ -40,7 +39,7 @@ class ExampleUserService {
         }
     });
     getUser(): Observable<UserModel> {
-        return this._user$.asObservable().pipe(delay(2000), share());
+        return this._user$.asObservable();
     }
 
     getLanguages(): Observable<SelectItem[]> {
@@ -65,14 +64,14 @@ class ExampleUserService {
         });
     }
 }
-
 @Component({
-    selector: 'fdp-settings-generator-default-example',
-    templateUrl: './settings-generator-default-example.component.html',
+    selector: 'fdp-settings-generator-message-popover-example',
+    templateUrl: './settings-generator-message-popover-example.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ExampleUserService]
 })
-export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
+export class SettingsGeneratorMessagePopoverExampleComponent implements AfterViewInit {
     @ViewChild('privacyContent')
     privacyContent: TemplateRef<any>;
 
@@ -98,6 +97,7 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
             label: theme.name + (this._theming.config.defaultTheme === theme.id ? ' (Default)' : ''),
             value: theme.id,
             description: theme.description
+            // template: this.themeListItemTemplate
         }));
 
         this.schema = {
@@ -113,16 +113,7 @@ export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
                     description: this._userService.getUser().pipe(map((res) => res.name)),
                     id: 'userAccount',
                     thumbnail: {
-                        avatar: this._userService.getUser().pipe(
-                            map((res) => {
-                                const avatarObject: Partial<ListAvatarConfig> = {
-                                    image: res.avatar,
-                                    circle: true,
-                                    colorAccent: 10
-                                };
-                                return avatarObject;
-                            })
-                        )
+                        avatar: this._userService.getUser().pipe(map((res) => res.avatar))
                     },
                     groups: [
                         {

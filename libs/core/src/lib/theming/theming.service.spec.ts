@@ -55,7 +55,7 @@ describe('ThemingService with default config', () => {
     });
 
     it('should set default scheme', async () => {
-        const currentTheme = await firstValueFrom(service.currentTheme);
+        const currentTheme = await firstValueFrom(service.currentTheme$);
         expect(currentTheme?.id).toEqual(defaultConfig.defaultTheme);
     });
 
@@ -64,7 +64,7 @@ describe('ThemingService with default config', () => {
 
         service.setTheme(newTheme.id);
 
-        const currentTheme = await firstValueFrom(service.currentTheme);
+        const currentTheme = await firstValueFrom(service.currentTheme$);
 
         expect(currentTheme?.id).toEqual(newTheme.id);
     });
@@ -96,7 +96,7 @@ describe('ThemingService with custom config', () => {
 
     it('should apply custom configuration', async () => {
         expect(service.getThemes()).toEqual(customThemes);
-        const currentTheme = await firstValueFrom(service.currentTheme);
+        const currentTheme = await firstValueFrom(service.currentTheme$);
         expect(currentTheme?.id).toEqual(customConfig.defaultTheme);
     });
 });

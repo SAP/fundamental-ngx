@@ -5,9 +5,12 @@ import {
     HostBinding,
     inject,
     Input,
+    QueryList,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
 import {
     GroupedFormSettingsItem,
     GroupedTemplateSettingsItem,
@@ -68,6 +71,10 @@ export class SettingsGeneratorContentComponent {
     private readonly _initialClass = 'fdp-settings-generator__content-section';
 
     /** @hidden */
+    @ViewChildren(TabPanelComponent)
+    private readonly _tabPanels: QueryList<TabPanelComponent>;
+
+    /** @hidden */
     isTemplateLayout(settings: Nullable<SettingsItem>): settings is TemplateSettingsItem {
         return !!settings?.template;
     }
@@ -75,5 +82,23 @@ export class SettingsGeneratorContentComponent {
     /** @hidden */
     isGroupedSettings(settings: any): settings is GroupedFormSettingsItem | GroupedTemplateSettingsItem {
         return settings?.groups?.length > 0;
+    }
+
+    /**
+     * Activates tab by group ID.
+     * @param id ID of the group.
+     */
+    setActiveTab(id: string): void {
+        if (!this.isGroupedSettings(this._settings)) {
+            return;
+        }
+        this._tabPanels?.forEach((tab, index) => {
+            const group = this._groups[index];
+
+            if (group.id === id) {
+                tab.open(true);
+                return false;
+            }
+        });
     }
 }

@@ -17,9 +17,10 @@ import {
     PlatformFormFieldControl,
     FormFieldErrorDirectiveContext
 } from '@fundamental-ngx/platform/shared';
-import { BehaviorSubject, filter, startWith, Subscription, switchMap, takeUntil, zip } from 'rxjs';
+import { BehaviorSubject, filter, startWith, Subject, Subscription, switchMap, takeUntil, zip } from 'rxjs';
 import { FDP_MESSAGE_POPOVER_CONFIG, MessagePopoverConfig, MessagePopoverErrorConfig } from '../../default-config';
 import { MessagePopoverFormItemDirective } from '../../directives/message-popover-form-item.directive';
+import { MessagePopoverComponent } from '../../message-popover.component';
 import { MessagePopoverEntry } from '../../models/message-popover-entry.interface';
 import { MessagePopoverErrorGroup, MessagePopoverErrorText } from '../../models/message-popover-error.interface';
 import { MessagePopoverWrapper } from '../../models/message-popover-wrapper.interface';
@@ -36,6 +37,8 @@ export type MessagePopoverForm = NgForm | FormGroupDirective;
     encapsulation: ViewEncapsulation.None
 })
 export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper, AfterViewInit, OnDestroy {
+    /** Message Popover instance. */
+    messagePopover$ = new Subject<MessagePopoverComponent>();
     /**
      * User-passed forms.
      */
@@ -122,6 +125,14 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     }
 
     /**
+     * Sets Message Popover component instance.
+     */
+    setMessagePopover(messagePopover: MessagePopoverComponent): void {
+        this.messagePopover$.next(messagePopover);
+        // this.messagePopover = messagePopover;
+    }
+
+    /**
      * Programmatically add new form to array of forms.
      * @param form
      */
@@ -132,7 +143,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     }
 
     /**
-     * Programmativally add new form fields to array of listened form fields.
+     * Programmatically add new form fields to array of listened form fields.
      * @param formFields
      */
     addFormFields(formFields: PlatformFormFieldControl[]): void {
@@ -357,6 +368,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
             heading: this._getErrorText(field, errorDirective, 'heading', errorKey, error),
             description: this._getErrorText(field, errorDirective, 'description', errorKey, error),
             errors: control!.errors,
+            formField: field,
             element: field?.elementRef
         };
     }

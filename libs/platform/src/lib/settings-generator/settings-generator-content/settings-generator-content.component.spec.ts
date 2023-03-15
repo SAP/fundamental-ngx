@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PipeModule } from '@fundamental-ngx/cdk/utils';
 
 import { SettingsGeneratorContentComponent } from './settings-generator-content.component';
 
@@ -8,7 +9,8 @@ describe('SettingsGeneratorContentComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [SettingsGeneratorContentComponent]
+            declarations: [SettingsGeneratorContentComponent],
+            imports: [PipeModule]
         }).compileComponents();
 
         fixture = TestBed.createComponent(SettingsGeneratorContentComponent);

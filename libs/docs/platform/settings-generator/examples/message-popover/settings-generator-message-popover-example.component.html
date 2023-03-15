@@ -79,10 +79,13 @@
         </p>
     </div>
 </ng-template>
-
-<fdp-settings-generator [settings]="schema"></fdp-settings-generator>
-
+<fdp-message-popover-form-wrapper #messagePopoverWrapper>
+    <fdp-settings-generator [settings]="schema"></fdp-settings-generator>
+</fdp-message-popover-form-wrapper>
 <div fd-bar barDesign="footer">
+    <div fd-bar-left>
+        <fdp-message-popover [wrapper]="messagePopoverWrapper"></fdp-message-popover>
+    </div>
     <div fd-bar-right>
         <fd-button-bar (click)="submit()" label="Save"></fd-button-bar>
     </div>

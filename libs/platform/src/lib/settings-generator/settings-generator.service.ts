@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, inject } from '@angular/core';
+import { Injectable, OnDestroy, inject, ElementRef } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     BehaviorSubject,
@@ -23,12 +23,20 @@ export type SettingsGeneratorReturnValue = Record<string, unknown>;
 @Injectable()
 export class SettingsGeneratorService implements OnDestroy {
     /**
-     * Settings object subject.
+     * Settings configuration subject.
      */
-    settings = new BehaviorSubject<Nullable<SettingsModel>>(null);
+    readonly settings = new BehaviorSubject<Nullable<SettingsModel>>(null);
 
-    /** Form generators collected from all items and groups. */
-    formGenerators = new Map<string, FormGeneratorComponent>();
+    /**
+     * Stream emitted when user clicked on message popover error entry.
+     */
+    readonly onItemFocus = new Subject<{ path: string; element: ElementRef<HTMLElement> }>();
+
+    /**
+     * @hidden
+     * Form generators collected from all items and groups.
+     */
+    private readonly _formGenerators = new Map<string, FormGeneratorComponent>();
 
     /** @hidden */
     private readonly _messagePopover = inject(MessagePopoverFormWrapperComponent, {
@@ -38,14 +46,15 @@ export class SettingsGeneratorService implements OnDestroy {
     /** @hidden */
     private readonly _destroy$ = new Subject<void>();
 
-    /**
-     *
-     * @param path
-     * @param formGenerator
-     */
-    addFormGenerator(path: string[], formGenerator: FormGeneratorComponent): void {
+    /** @hidden */
+    constructor() {
+        this._listenToMessagePopoverItemClick();
+    }
+
+    /** @hidden */
+    _addFormGenerator(path: string[], formGenerator: FormGeneratorComponent): void {
         const joinedPath = path.join('.');
-        this.formGenerators.set(joinedPath, formGenerator);
+        this._formGenerators.set(joinedPath, formGenerator);
         formGenerator.loading$
             .pipe(
                 filter((loading) => !loading),
@@ -58,30 +67,26 @@ export class SettingsGeneratorService implements OnDestroy {
             });
     }
 
-    /**
-     *
-     * @param path
-     */
-    removeFormGenerator(path: string[]): void {
+    /** @hidden */
+    _removeFormGenerator(path: string[]): void {
         const joinedPath = path.join('.');
-        this.formGenerators.delete(joinedPath);
+        this._formGenerators.delete(joinedPath);
     }
 
-    /** @hidden */
+    /**
+     * Submits registered forms and emits result if submission status was successful (no errors).
+     */
     submit(): Observable<SettingsGeneratorReturnValue> {
-        // Flatten
         const joinedEvents: Record<string, Observable<DynamicFormValue>> = {};
-        this.formGenerators.forEach((formGenerator, key) => {
+        this._formGenerators.forEach((formGenerator, key) => {
             joinedEvents[key] = formGenerator.loading$.pipe(
                 filter((result) => !result),
                 delay(50),
                 tap(() => formGenerator.submit()),
                 switchMap(() => formGenerator.formSubmittedStatus$),
-                // take(1),
                 filter((status) => status.success),
                 take(1),
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                map((result) => result.value!),
+                map((result) => result.value as DynamicFormValue),
                 takeUntil(this._destroy$)
             );
         });
@@ -95,8 +100,34 @@ export class SettingsGeneratorService implements OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.formGenerators.clear();
+        this._formGenerators.clear();
         this._destroy$.next();
         this._destroy$.complete();
+    }
+
+    /**
+     * @hidden
+     * Subscribse to click events from message popover and tries to open the section where invalid input is located.
+     */
+    private _listenToMessagePopoverItemClick(): void {
+        this._messagePopover?.messagePopover$
+            ?.pipe(
+                switchMap((messagePopover) => messagePopover.focusItem),
+                filter((entry) => !!entry.formField),
+                takeUntil(this._destroy$)
+            )
+            .subscribe((entry) => {
+                this._formGenerators.forEach((formGenerator, path) => {
+                    const formFields = formGenerator.formFields;
+                    // We already filtered entries with present form field.
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                    if (formFields.includes(entry.formField!)) {
+                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                        this.onItemFocus.next({ path, element: entry.formField!.elementRef });
+                        return false;
+                    }
+                });
+                console.log(entry, this._formGenerators);
+            });
     }
 }

@@ -1,11 +1,12 @@
-import { AfterViewInit, ChangeDetectorRef, Directive, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, inject, OnInit } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
 import { SettingsGeneratorService } from '../settings-generator.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SettingsModel } from '../models/settings.model';
 
 @Directive()
-export abstract class BaseSettingsGeneratorLayout implements OnInit, AfterViewInit {
+export abstract class BaseSettingsGeneratorLayout implements OnInit {
     /**
      * Settings generator service.
      */
@@ -24,28 +25,21 @@ export abstract class BaseSettingsGeneratorLayout implements OnInit, AfterViewIn
     /**
      * Settings schema.
      */
-    _settings: Nullable<SettingsModel>;
-
-    /**
-     * Selected settings section.
-     */
-    _selectedIndex: number;
+    settings: Nullable<SettingsModel>;
 
     /** @hidden */
     ngOnInit(): void {
         this._settingsGeneratorService.settings.pipe(takeUntil(this._destroy$)).subscribe((settings) => {
-            this._settings = settings;
+            this.settings = settings;
             this._cdr.detectChanges();
         });
     }
 
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._setSelectedIndex(0);
-    }
-
-    /** @hidden */
-    _setSelectedIndex(index: number): void {
-        this._selectedIndex = index;
-    }
+    /**
+     * Method for focusing inner form control.
+     * It is responsible for activating the section and placing focus on the element.
+     * @param path path of the control joined by dot(.). Usually represents section ID and inner group ID.
+     * @param element ElementRef of native element to focus.
+     */
+    abstract focusElementByPath(path: string, element: ElementRef<HTMLElement>): void;
 }

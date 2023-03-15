@@ -1,6 +1,5 @@
-<ng-template #privacyContent>
+<ng-template #firstTabContent>
     <div style="padding: 1rem">
-        <h1 fd-title>Privacy Policy</h1>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eros quam, suscipit vel mauris sit amet, viverra
             accumsan purus. Duis aliquam eu turpis ut imperdiet. Suspendisse tempus quam pharetra, rutrum mi non,
@@ -39,9 +38,8 @@
     </div>
 </ng-template>
 
-<ng-template #termsOfServiceContent>
+<ng-template #secondTabContent>
     <div style="padding: 1rem">
-        <h1 fd-title>Terms Of Service</h1>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eros quam, suscipit vel mauris sit amet, viverra
             accumsan purus. Duis aliquam eu turpis ut imperdiet. Suspendisse tempus quam pharetra, rutrum mi non,
@@ -79,10 +77,13 @@
         </p>
     </div>
 </ng-template>
-
-<fdp-settings-generator [settings]="schema"></fdp-settings-generator>
-
+<fdp-message-popover-form-wrapper #messagePopoverWrapper>
+    <fdp-settings-generator [settings]="schema"></fdp-settings-generator>
+</fdp-message-popover-form-wrapper>
 <div fd-bar barDesign="footer">
+    <div fd-bar-left>
+        <fdp-message-popover [wrapper]="messagePopoverWrapper"></fdp-message-popover>
+    </div>
     <div fd-bar-right>
         <fd-button-bar (click)="submit()" label="Save"></fd-button-bar>
     </div>

@@ -27,10 +27,27 @@ import { ListConfig } from './list.config';
 import { ActionListItemComponent } from './action-list-item/action-list-item.component';
 import { FdpListComponent } from './fdpListComponent.token';
 import merge from 'lodash-es/merge';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 
 export const IS_ACTIVE_CLASS = 'is-active';
 let nextListItemId = 0;
 export type StatusType = 'negative' | 'critical' | 'positive' | 'informative';
+
+export class ListIconConfig {
+    /** The icon name to display. See the icon page for the list of icons
+     * here: https://sap.github.io/fundamental-ngx/icon
+     * */
+    glyph: IconComponent['glyph'];
+    /** user's custom classes */
+    class: IconComponent['class'] = '';
+    /**
+     * The icon font
+     * Options include: 'SAP-icons', 'BusinessSuiteInAppSymbols' and 'SAP-icons-TNT'
+     */
+    font: IconComponent['font'] = 'SAP-icons';
+    /** Aria-label for Icon. */
+    ariaLabel: IconComponent['ariaLabel'];
+}
 
 export class ListAvatarConfig {
     /** @hidden */
@@ -218,9 +235,31 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     @Input()
     titleWrap?: boolean;
 
-    /** attribute to hold primary/title icon*/
+    /**
+     * @deprecated See `icon` input property for more flexible icon configuration.
+     * @description
+     * attribute to hold primary/title icon
+     */
     @Input()
-    titleIcon?: string;
+    set titleIcon(value: Nullable<string>) {
+        this._iconConfig = merge(new ListIconConfig(), { glyph: value, ariaLabel: value });
+    }
+
+    get titleIcon(): Nullable<string> {
+        return this._iconConfig.glyph;
+    }
+
+    /**
+     * List item icon configuration.
+     */
+    @Input()
+    set icon(value: Partial<ListIconConfig>) {
+        this._iconConfig = merge(new ListIconConfig(), value);
+    }
+
+    get icon(): ListIconConfig {
+        return this._iconConfig;
+    }
 
     /**
      * sets the list item in bold text
@@ -338,6 +377,9 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
 
     /** @hidden */
     private _avatarConfig: ListAvatarConfig = new ListAvatarConfig();
+
+    /** @hidden */
+    private _iconConfig: ListIconConfig = new ListIconConfig();
 
     /** @hidden */
     constructor(

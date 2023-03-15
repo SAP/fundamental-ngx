@@ -1,16 +1,22 @@
 <div class="fdp-settings-generator--sidebar-layout">
-    <div class="fdp-settings-generator__sidebar">
+    <div
+        class="fdp-settings-generator__sidebar"
+        [style.width]="_sidebarWidth.width"
+        [style.min-width]="_sidebarWidth.minWidth"
+        [style.max-width]="_sidebarWidth.maxWidth"
+    >
         <ul fd-list [byline]="true" [navigationIndicator]="true">
             <li
                 (click)="_setSelectedIndex(i)"
                 fd-list-item
                 [selected]="i === _selectedIndex"
-                *ngFor="let item of _settings?.items; let i = index"
+                *ngFor="let item of settings?.items; let i = index"
             >
                 <a fd-list-link [navigated]="i === _selectedIndex">
                     <span fd-list-thumbnail *ngIf="item.thumbnail">
-                        <fd-icon *ngIf="item.thumbnail.icon" [glyph]="item.thumbnail.icon"></fd-icon>
-                        <fd-avatar [image]="item.thumbnail.avatar" size="s" *ngIf="item.thumbnail.avatar"></fd-avatar>
+                        <fdp-settings-generator-sidebar-icon
+                            [thumbnail]="item.thumbnail"
+                        ></fdp-settings-generator-sidebar-icon>
                     </span>
                     <div fd-list-content>
                         <ng-container *ngIf="item.title | fdkMakeAsync | async as titleValue; else titleElseBlock">
@@ -45,11 +51,17 @@
             </li>
         </ul>
     </div>
-    <div class="fdp-settings-generator__content">
-        <ng-container *ngFor="let item of _settings?.items; let i = index">
+    <div
+        class="fdp-settings-generator__content"
+        [style.width]="'calc(100% - ' + _sidebarWidth.width + ')'"
+        [style.min-width]="'calc(100% - ' + _sidebarWidth.minWidth + ')'"
+        [style.max-width]="'calc(100% - ' + _sidebarWidth.maxWidth + ')'"
+    >
+        <ng-container *ngFor="let item of settings?.items; let i = index">
             <fdp-settings-generator-content
                 [attr.hidden]="i !== _selectedIndex ? true : null"
                 [settings]="item"
+                #settingsGeneratorContent
             ></fdp-settings-generator-content>
         </ng-container>
     </div>

@@ -23,7 +23,6 @@ export type SettingsSectionItemsModel = SettingsTemplateTab | SettingsFormTab | 
 @Component({
     selector: 'fdp-settings-generator-section',
     templateUrl: './settings-generator-section.component.html',
-    styleUrls: ['./settings-generator-section.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -33,7 +32,7 @@ export class SettingsGeneratorSectionComponent {
     groupName: Nullable<string>;
     /** @hidden */
     @Input()
-    set items(value: SettingsSectionItemsModel) {
+    set items(value: Nullable<SettingsSectionItemsModel>) {
         this._items = value;
 
         if (this._isTemplateLayout(value)) {
@@ -41,11 +40,11 @@ export class SettingsGeneratorSectionComponent {
             this._templateRef = value.template;
         } else {
             this._renderer = 'form';
-            this._formItems = value.items || [];
+            this._formItems = value?.items || [];
         }
     }
 
-    get items(): SettingsSectionItemsModel {
+    get items(): Nullable<SettingsSectionItemsModel> {
         return this._items;
     }
 
@@ -53,21 +52,25 @@ export class SettingsGeneratorSectionComponent {
     private readonly _settingsGeneratorService = inject(SettingsGeneratorService);
 
     /** @hidden */
-    private _items: SettingsSectionItemsModel;
+    private _items: Nullable<SettingsSectionItemsModel>;
 
     /** @hidden */
     @ViewChild(FormGeneratorComponent)
     private set _formGeneratorCmp(component: FormGeneratorComponent | undefined) {
         this._formGenerator = component;
 
+        if (!this.items) {
+            return;
+        }
+
         const config = this.items as SettingsFormTab | FormSettingsItem;
 
         const path = [this.groupName, config.id].filter((v) => !!v) as string[];
 
         if (component) {
-            this._settingsGeneratorService.addFormGenerator(path, component);
+            this._settingsGeneratorService._addFormGenerator(path, component);
         } else {
-            this._settingsGeneratorService.removeFormGenerator(path);
+            this._settingsGeneratorService._removeFormGenerator(path);
         }
     }
 
@@ -84,7 +87,7 @@ export class SettingsGeneratorSectionComponent {
     _formItems: DynamicFormItem[] = [];
 
     /** @hidden */
-    _isTemplateLayout(settings: SettingsSectionItemsModel): settings is TemplateSettingsItem {
+    _isTemplateLayout(settings: any): settings is TemplateSettingsItem {
         return !!settings?.template;
     }
 }

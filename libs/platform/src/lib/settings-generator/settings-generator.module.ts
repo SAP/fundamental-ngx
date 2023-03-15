@@ -1,12 +1,13 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FDP_SETTINGS_GENERATOR_DEFAULT_CONFIG } from './default-config';
+import { SettingsConfig } from './models/settings-config.model';
 import { SettingsGeneratorComponent } from './settings-generator.component';
 import { SettingsGeneratorSidebarLayoutComponent } from './layouts/settings-generator-sidebar-layout/settings-generator-sidebar-layout.component';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { SplitterModule } from '@fundamental-ngx/core/splitter';
-import { SettingsGeneratorTabsLayoutComponent } from './layouts/settings-generator-tabs-layout/settings-generator-tabs-layout.component';
 import { SettingsGeneratorContentComponent } from './settings-generator-content/settings-generator-content.component';
 import { PortalModule } from '@angular/cdk/portal';
 import { TitleModule } from '@fundamental-ngx/core/title';
@@ -18,8 +19,10 @@ import {
     ThemeSelectorListIconComponent
 } from './controls/theme-selector-list/theme-selector-list.component';
 import { ClickedBehaviorModule, PipeModule } from '@fundamental-ngx/cdk/utils';
-import { SettingsGeneratorSectionDirective } from './directives/settings-generator-section.directive';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { SettingsGeneratorSidebarIconComponent } from './layouts/settings-generator-sidebar-layout/settings-generator-sidebar-icon/settings-generator-sidebar-icon.component';
+import { SettingsGeneratorLayoutAccessorService } from './settings-generator-layout-accessor.service';
+import { FDP_SETTINGS_GENERATOR_CONFIG } from './tokens';
 
 @NgModule({
     imports: [
@@ -39,21 +42,41 @@ import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
     declarations: [
         SettingsGeneratorComponent,
         SettingsGeneratorSidebarLayoutComponent,
-        SettingsGeneratorTabsLayoutComponent,
         SettingsGeneratorContentComponent,
         SettingsGeneratorSectionComponent,
         ThemeSelectorListComponent,
         ThemeSelectorListIconComponent,
-        SettingsGeneratorSectionDirective
+        SettingsGeneratorSidebarIconComponent
     ],
     exports: [
         SettingsGeneratorComponent,
         SettingsGeneratorSidebarLayoutComponent,
-        SettingsGeneratorTabsLayoutComponent,
         SettingsGeneratorContentComponent,
         SettingsGeneratorSectionComponent,
-        ThemeSelectorListIconComponent,
-        SettingsGeneratorSectionDirective
+        ThemeSelectorListIconComponent
+    ],
+    providers: [
+        SettingsGeneratorLayoutAccessorService,
+        {
+            provide: FDP_SETTINGS_GENERATOR_CONFIG,
+            useValue: FDP_SETTINGS_GENERATOR_DEFAULT_CONFIG
+        }
     ]
 })
-export class SettingsGeneratorModule {}
+export class SettingsGeneratorModule {
+    /**
+     * Allows configuring module on a global level with custom configuration.
+     * @param config User's custom configuration.
+     */
+    static withConfig(config: Partial<SettingsConfig>): ModuleWithProviders<SettingsGeneratorModule> {
+        return {
+            ngModule: SettingsGeneratorModule,
+            providers: [
+                {
+                    provide: FDP_SETTINGS_GENERATOR_CONFIG,
+                    useValue: { ...FDP_SETTINGS_GENERATOR_DEFAULT_CONFIG, ...config }
+                }
+            ]
+        };
+    }
+}

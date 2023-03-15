@@ -141,10 +141,19 @@ export class FormGeneratorService implements OnDestroy {
                 continue;
             }
 
-            formItem.message = await this._getFormItemPropertyValue(formItem, defaultFormGroup, 'message');
-            formItem.placeholder = await this._getFormItemPropertyValue(formItem, defaultFormGroup, 'placeholder');
-            formItem.choices = await this._getFormItemChoices(formItem, defaultFormGroup);
-            formItem.default = await this._getFormItemPropertyValue(formItem, defaultFormGroup, 'default');
+            const [[message, placeholder, defaultValue], choices] = await Promise.all([
+                this._getFormItemProperties<[string, string, any]>(formItem, defaultFormGroup, [
+                    'message',
+                    'placeholder',
+                    'default'
+                ]),
+                this._getFormItemChoices(formItem, defaultFormGroup)
+            ]);
+
+            formItem.message = message;
+            formItem.placeholder = placeholder;
+            formItem.default = defaultValue;
+            formItem.choices = choices;
 
             // Update form value since it might be changed
             defaultFormGroup.controls[formItem.name].setValue(formItem.default);
@@ -429,7 +438,20 @@ export class FormGeneratorService implements OnDestroy {
             value = await this._getFunctionValue(obj);
         }
 
-        return this._getFunctionValue(value) as T;
+        return (await this._getFunctionValue(value)) as T;
+    }
+
+    /** @hidden */
+    private async _getFormItemProperties<TTypes extends any[] = any[]>(
+        formItem: DynamicFormFieldItem,
+        form: DynamicFormGroup,
+        keys: string[]
+    ): Promise<TTypes> {
+        const promises: Promise<any>[] = [];
+        keys.forEach((key) => {
+            promises.push(this._getFormItemPropertyValue(formItem, form, key));
+        });
+        return (await Promise.all(promises)) as TTypes;
     }
 
     /**

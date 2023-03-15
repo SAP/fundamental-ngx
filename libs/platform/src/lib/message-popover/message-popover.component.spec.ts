@@ -92,6 +92,7 @@ const stubErrors: MessagePopoverErrorGroup[] = [
 export class MessagePopoverWrapperStub implements MessagePopoverWrapper {
     errors = of(stubErrors);
     formFields: [];
+    setMessagePopover(): void {}
 }
 
 describe('MessagePopoverComponent', () => {
