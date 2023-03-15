@@ -55,7 +55,8 @@ import {
     testText7,
     testTextName,
     testTextSearch,
-    groupTableCellArr
+    groupTableCellArr,
+    freezeTableCellArr
 } from './table-contents';
 
 describe('Table component test suite', () => {
@@ -425,7 +426,7 @@ describe('Table component test suite', () => {
             const cellLength = await getElementArrayLength(tableFreezableExample + tableRow + tableCellText);
             for (let i = 0; i < cellLength; i++) {
                 await expect((await getText(tableFreezableExample + tableRow + tableCellText, i)).trim()).toBe(
-                    tableCellArr[i]
+                    freezeTableCellArr[i]
                 );
             }
         });

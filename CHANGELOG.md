@@ -1,3 +1,12 @@
+## [0.39.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.8...v0.39.1-rc.9) (2023-03-14)
+
+
+### Bug Fixes
+
+* **platform:** table with freezing columns hidden cell issues ([#9502](https://github.com/SAP/fundamental-ngx/issues/9502)) ([e387440](https://github.com/SAP/fundamental-ngx/commit/e387440c7a7942dafb586933a33f8d22dff908b8))
+
+
+
 ## [0.39.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.7...v0.39.1-rc.8) (2023-03-13)
 
 
