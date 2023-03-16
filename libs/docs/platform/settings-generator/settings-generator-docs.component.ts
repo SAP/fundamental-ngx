@@ -28,7 +28,7 @@ export class SettingsGeneratorDocsComponent {
     ];
 
     settingsGeneratorMessagePopoverLayoutExample: ExampleFile[] = [
-        getExampleFile('dialog/settings-generator-message-popover-example.component.html'),
-        getExampleFile('dialog/settings-generator-message-popover-example.component.ts')
+        getExampleFile('message-popover/settings-generator-message-popover-example.component.html'),
+        getExampleFile('message-popover/settings-generator-message-popover-example.component.ts')
     ];
 }
