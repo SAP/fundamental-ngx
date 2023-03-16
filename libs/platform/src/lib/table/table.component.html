@@ -82,6 +82,8 @@
                             [ngClass]="'fdp-table__col--' + column.name"
                             [class.fd-table__cell--fixed]="_freezableColumns.has(column.name)"
                             [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
+                            [class.fd-table__cell--fixed-end]="_freezableEndColumns.has(column.name)"
+                            [class.fd-table__cell--fixed-end-last]="column.name === freezeEndColumnsTo"
                             [ngStyle]="
                                 column
                                     | tableCellStyles
@@ -89,8 +91,10 @@
                                         : _semanticHighlightingColumnWidth
                                         : _selectionColumnWidth
                                         : _freezableColumns.has(column.name)
+                                        : _freezableEndColumns.has(column.name)
                                         : _tableColumnResizeService.getPrevColumnsWidth(column.name)
                                         : _tableColumnResizeService.getColumnWidthStyle(column.name)
+                                        : _tableColumnResizeService.getNextColumnsWidth(column.name)
                             "
                             [fdPopoverTrigger]="columnHeaderPopover"
                             [class.fd-table__item--clickable]="_isColumnHasHeaderMenu(column)"
@@ -271,6 +275,8 @@
                             [ngClass]="'fdp-table__col--' + column.name"
                             [class.fd-table__cell--fixed]="_freezableColumns.has(column.name)"
                             [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
+                            [class.fd-table__cell--fixed-end]="_freezableEndColumns.has(column.name)"
+                            [class.fd-table__cell--fixed-end-last]="column.name === freezeEndColumnsTo"
                             [class.fd-table__cell--expand]="_isTreeRowFirstCell(colIdx, row)"
                             [ngStyle]="
                                 column
@@ -279,8 +285,10 @@
                                         : _semanticHighlightingColumnWidth
                                         : _selectionColumnWidth
                                         : _freezableColumns.has(column.name)
+                                        : _freezableEndColumns.has(column.name)
                                         : _tableColumnResizeService.getPrevColumnsWidth(column.name)
                                         : _tableColumnResizeService.getColumnWidthStyle(column.name)
+                                        : _tableColumnResizeService.getNextColumnsWidth(column.name)
                             "
                             [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
                             [attr.data-nesting-level]="colIdx === 0 ? row.level + 1 : null"

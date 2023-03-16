@@ -11,14 +11,21 @@ export class TableCellStylesPipe implements PipeTransform {
         semanticHighlightingColumnWidth: number,
         selectionColumnWidth: number,
         isFrozenColumn: boolean,
+        isFrozenEndColumn: boolean,
         prevColumnWidthPx: number,
-        columnWidth: string
+        columnWidth: string,
+        nextColumnWidthPx: number
     ): Record<string, number | string> {
         const styles: { [property: string]: number | string } = {};
 
         if (isFrozenColumn) {
             const key = isRtl ? 'right.px' : 'left.px';
             styles[key] = semanticHighlightingColumnWidth + selectionColumnWidth + prevColumnWidthPx;
+        }
+
+        if (isFrozenEndColumn) {
+            const key = isRtl ? 'left.px' : 'right.px';
+            styles[key] = nextColumnWidthPx.toString();
         }
 
         styles['min-width'] = columnWidth;

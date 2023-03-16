@@ -31,7 +31,13 @@ export class TableColumnResizeService implements OnDestroy {
     private _visibleColumnLeftNeighbourMap = new Map<string, string | undefined>();
 
     /** @hidden */
+    private _visibleColumnRightNeighbourMap = new Map<string, string | undefined>();
+
+    /** @hidden */
     private _visibleColumnLeftOffsetPxMap = new Map<string, number>();
+
+    /** @hidden */
+    private _visibleColumnRightOffsetPxMap = new Map<string, number>();
 
     /** @hidden */
     private _startX: number | null = null;
@@ -117,8 +123,12 @@ export class TableColumnResizeService implements OnDestroy {
     /** @hidden initializes service with data, trigger columns width calculation. */
     setColumnNames(visibleColumnNames: string[]): void {
         this._visibleColumnLeftNeighbourMap.clear();
+        this._visibleColumnRightNeighbourMap.clear();
         visibleColumnNames.forEach((column, index) => {
             this._visibleColumnLeftNeighbourMap.set(column, visibleColumnNames[index - 1]);
+        });
+        visibleColumnNames.reverse().forEach((column, index) => {
+            this._visibleColumnRightNeighbourMap.set(column, visibleColumnNames[index - 1]);
         });
         this._visibleColumnNames = [...visibleColumnNames];
         this.updateFrozenColumnsWidth();
@@ -126,11 +136,17 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** @hidden */
     updateFrozenColumnsWidth(): void {
-        let allPreviousWidths = 0;
+        let allPreviousWidths = 0,
+            allNextWidths = 0;
         for (const [column, prevColumn] of this._visibleColumnLeftNeighbourMap.entries()) {
             allPreviousWidths +=
                 this._columnsCellMap.get(prevColumn as string)?.[0]?.nativeElement.getBoundingClientRect().width ?? 0;
             this._visibleColumnLeftOffsetPxMap.set(column, allPreviousWidths);
+        }
+        for (const [column, nextColumn] of this._visibleColumnRightNeighbourMap.entries()) {
+            allNextWidths +=
+                this._columnsCellMap.get(nextColumn as string)?.[0]?.nativeElement.getBoundingClientRect().width ?? 0;
+            this._visibleColumnRightOffsetPxMap.set(column, allNextWidths);
         }
     }
 
@@ -157,9 +173,19 @@ export class TableColumnResizeService implements OnDestroy {
         return this._visibleColumnLeftNeighbourMap.get(columnName);
     }
 
+    /** Previous column name */
+    getNextColumnName(columnName: string): string | undefined {
+        return this._visibleColumnRightNeighbourMap.get(columnName);
+    }
+
     /** Overall previous columns width. Used to calculate offset for the absolute positioned cells. */
     getPrevColumnsWidth(columnName: string): number {
         return this._visibleColumnLeftOffsetPxMap.get(columnName) ?? 0;
+    }
+
+    /** Overall next columns width. Used to calculate offset for the absolute positioned cells. */
+    getNextColumnsWidth(columnName: string): number {
+        return this._visibleColumnRightOffsetPxMap.get(columnName) ?? 0;
     }
 
     /** Register column's cell to get its dimensions in further. */
