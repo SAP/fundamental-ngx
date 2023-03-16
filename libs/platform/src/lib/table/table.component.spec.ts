@@ -181,7 +181,7 @@ describe('TableComponent internal', () => {
 
         component.freezeToColumn(columnKey);
 
-        expect(serviceFreezeToSpy).toHaveBeenCalledWith(columnKey);
+        expect(serviceFreezeToSpy).toHaveBeenCalledWith(columnKey, undefined);
         expect(component.freezeColumnsTo).toEqual(columnKey);
     });
 });
