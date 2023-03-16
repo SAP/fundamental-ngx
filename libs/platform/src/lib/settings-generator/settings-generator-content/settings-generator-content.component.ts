@@ -2,9 +2,11 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    EventEmitter,
     HostBinding,
     inject,
     Input,
+    Output,
     QueryList,
     ViewChildren,
     ViewEncapsulation
@@ -56,6 +58,14 @@ export class SettingsGeneratorContentComponent {
     get settings(): Nullable<SettingsItem> {
         return this._settings;
     }
+
+    /** Whether to render content component in mobile view. */
+    @Input()
+    mobile = false;
+
+    /** Event emits when user needs to be moved back to navigation screen. */
+    @Output()
+    goBack = new EventEmitter<void>();
 
     /** @hidden */
     _id: Nullable<string>;

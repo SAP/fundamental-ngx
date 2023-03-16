@@ -7,10 +7,6 @@ export type SmartFilterBarDynamicFormFieldItem = DynamicFormFieldItem<{
     guiOptions: SmartFilterBarDynamicFormFieldGuiOptions;
 }>;
 
-// export interface SmartFilterBarDynamicFormFieldItem extends DynamicFormFieldItem {
-//     guiOptions: SmartFilterBarDynamicFormFieldGuiOptions;
-// }
-
 export interface SmartFilterBarDynamicFormFieldGuiOptions extends DynamicFormItemGuiOptions {
     additionalData: {
         type: string;

@@ -1,10 +1,9 @@
-import { SettingsConfig } from './models/settings-config.model';
+import { SidebarSettingsGeneratorConfig } from './models/settings-config.model';
 
-export const FDP_SETTINGS_GENERATOR_DEFAULT_CONFIG: SettingsConfig = {
+export const FDP_SETTINGS_GENERATOR_DEFAULT_CONFIG: SidebarSettingsGeneratorConfig = {
     defaultLayout: 'sidebar',
-    sidebarWidth: {
-        minWidth: '25%',
-        width: '25%',
-        maxWidth: '25%'
+    sidebar: {
+        mobileBreakpoint: 700,
+        width: '25%'
     }
 };

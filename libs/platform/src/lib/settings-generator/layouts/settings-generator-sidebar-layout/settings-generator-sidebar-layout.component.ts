@@ -3,13 +3,15 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    HostBinding,
     inject,
     OnInit,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DestroyedService, Nullable } from '@fundamental-ngx/cdk/utils';
-import { takeUntil } from 'rxjs';
+import { DestroyedService, Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { debounceTime, distinctUntilChanged, startWith, takeUntil } from 'rxjs';
+import { SidebarSettingsGeneratorConfig } from '../../models/settings-config.model';
 import {
     FormSettingsItem,
     GroupedFormSettingsItem,
@@ -39,20 +41,39 @@ export class SettingsGeneratorSidebarLayoutComponent
     protected _destroy$ = inject(DestroyedService);
 
     /** @hidden */
-    private readonly _config = inject(FDP_SETTINGS_GENERATOR_CONFIG);
+    private readonly _config = inject<SidebarSettingsGeneratorConfig>(FDP_SETTINGS_GENERATOR_CONFIG);
 
     /**
      * Selected settings section.
      */
-    _selectedIndex: number;
+    _selectedIndex = -1;
 
     /** @hidden */
     _sidebarWidth: SidebarWidthConfiguration;
 
     /** @hidden */
+    @HostBinding('class.fdp-settings-generator__sidebar-layout--mobile')
+    _isMobile: boolean;
+
+    /** @hidden */
+    @HostBinding('class')
+    private readonly _initialClass = 'fdp-settings-generator__sidebar-layout';
+
+    /** @hidden */
+    private _sidebarVisible = true;
+
+    /** @hidden */
+    private _initialSelectedItemSet = false;
+
+    /** @hidden */
+    get _mobileSidebarVisible(): boolean {
+        return this._isMobile && this._sidebarVisible;
+    }
+
+    /** @hidden */
     constructor() {
         super();
-        this._sidebarWidth = this._getNormalizedSidebarWidth(this._config.sidebarWidth);
+        this._sidebarWidth = this._getNormalizedSidebarWidth(this._config.sidebar?.width);
     }
 
     /** @hidden */
@@ -95,13 +116,43 @@ export class SettingsGeneratorSidebarLayoutComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._setSelectedIndex(0);
+        if (this._settingsGenerator.elementRef.nativeElement && this._config.sidebar?.mobileBreakpoint) {
+            resizeObservable(this._settingsGenerator.elementRef.nativeElement)
+                .pipe(startWith(null), debounceTime(30), distinctUntilChanged(), takeUntil(this._destroy$))
+                .subscribe(() => {
+                    const { width } = this._settingsGenerator.elementRef.nativeElement.getBoundingClientRect();
+                    const isMobile = width <= this._config.sidebar.mobileBreakpoint;
+                    if (this._isMobile === isMobile) {
+                        return;
+                    }
+                    this._settingsGeneratorService.setMobileState(isMobile);
+                    this._isMobile = isMobile;
+
+                    // User opened section previously, so focus on that section
+                    if (this._isMobile && this._selectedIndex >= 0) {
+                        this._sidebarVisible = false;
+                    }
+
+                    // In mobile view, we don't need to set initial index, since the section won't be visible to the end user.
+                    if (!this._initialSelectedItemSet && !this._isMobile) {
+                        this._setSelectedIndex(this._selectedIndex > -1 ? this._selectedIndex : 0);
+                        this._initialSelectedItemSet = true;
+                    }
+                    this._cdr.detectChanges();
+                });
+        }
     }
 
     /** @hidden */
     _setSelectedIndex(index: number): void {
         this._selectedIndex = index;
-        this._cdr.markForCheck();
+        this._sidebarVisible = index === -1;
+        this._cdr.detectChanges();
+    }
+
+    /** @Hidden */
+    _goBack(): void {
+        this._setSelectedIndex(-1);
     }
 
     /** @hidden */

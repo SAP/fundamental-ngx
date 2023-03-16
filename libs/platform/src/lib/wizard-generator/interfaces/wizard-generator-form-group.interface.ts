@@ -62,10 +62,3 @@ export interface WizardGeneratorFormGroupItem extends DynamicFormFieldGroup {
 }
 
 export type WizardGeneratorFormFieldItem = DynamicFormFieldItem<{ dependencyFields?: WizardGeneratorDependencyFields }>;
-
-// export type WizardGeneratorFormFieldItem extends DynamicFormFieldItem<{dependencyFields: WizardGeneratorDependencyFields}> {
-//     /**
-//      * @description Object of dependency fields that are used with `when` function
-//      */
-//     dependencyFields?: WizardGeneratorDependencyFields;
-// }

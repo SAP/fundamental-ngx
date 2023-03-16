@@ -150,7 +150,7 @@ export class SettingsGeneratorDialogExampleComponent {
                                             M: 6
                                         },
                                         fieldColumnLayout: {
-                                            S: 12,
+                                            S: 11,
                                             M: 6
                                         }
                                     }
@@ -167,7 +167,7 @@ export class SettingsGeneratorDialogExampleComponent {
                                             M: 6
                                         },
                                         fieldColumnLayout: {
-                                            S: 12,
+                                            S: 11,
                                             M: 6
                                         }
                                     }
@@ -189,7 +189,7 @@ export class SettingsGeneratorDialogExampleComponent {
                                             M: 6
                                         },
                                         fieldColumnLayout: {
-                                            S: 12,
+                                            S: 11,
                                             M: 6
                                         }
                                     }

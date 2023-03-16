@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Directive, ElementRef, inject, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
+import { SettingsGeneratorComponent } from '../settings-generator.component';
 import { SettingsGeneratorService } from '../settings-generator.service';
 import { Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -16,6 +17,11 @@ export abstract class BaseSettingsGeneratorLayout implements OnInit {
      * Change detector ref.
      */
     protected readonly _cdr = inject(ChangeDetectorRef);
+
+    /**
+     * Settings generator component ref.
+     */
+    protected _settingsGenerator = inject(SettingsGeneratorComponent);
 
     /**
      * Subject to notify subscriptions to unsubscribe when component destroys.

@@ -33,6 +33,11 @@ export class SettingsGeneratorService implements OnDestroy {
     readonly onItemFocus = new Subject<{ path: string; element: ElementRef<HTMLElement> }>();
 
     /**
+     * Stream emitted when mobile state has been changed.
+     */
+    readonly mobileState$ = new BehaviorSubject<boolean>(false);
+
+    /**
      * @hidden
      * Form generators collected from all items and groups.
      */
@@ -96,6 +101,14 @@ export class SettingsGeneratorService implements OnDestroy {
             take(1),
             takeUntil(this._destroy$)
         );
+    }
+
+    /**
+     * Sets mobile state.
+     * @param isMobile Whether mobile state should be applied.
+     */
+    setMobileState(isMobile: boolean): void {
+        this.mobileState$.next(isMobile);
     }
 
     /** @hidden */

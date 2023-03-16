@@ -1,4 +1,5 @@
 <h2 fd-title class="fdp-settings-generator__title">
+    <button *ngIf="mobile" fd-button glyph="menu2" fdType="transparent" (click)="goBack.emit()"></button>
     <ng-container *ngIf="settings?.title | fdkAsyncOrSync as settingsTitle; else loadingBlock">
         {{ settingsTitle }}
     </ng-container>

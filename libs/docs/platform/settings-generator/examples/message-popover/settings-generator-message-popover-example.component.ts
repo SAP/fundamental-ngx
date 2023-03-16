@@ -136,7 +136,7 @@ export class SettingsGeneratorMessagePopoverExampleComponent implements AfterVie
                                             M: 6
                                         },
                                         fieldColumnLayout: {
-                                            S: 12,
+                                            S: 11,
                                             M: 6
                                         },
                                         status: 'critical',
@@ -156,7 +156,7 @@ export class SettingsGeneratorMessagePopoverExampleComponent implements AfterVie
                                             M: 6
                                         },
                                         fieldColumnLayout: {
-                                            S: 12,
+                                            S: 11,
                                             M: 6
                                         }
                                     }
@@ -173,7 +173,7 @@ export class SettingsGeneratorMessagePopoverExampleComponent implements AfterVie
                                             M: 6
                                         },
                                         fieldColumnLayout: {
-                                            S: 12,
+                                            S: 11,
                                             M: 6
                                         }
                                     }
@@ -195,7 +195,7 @@ export class SettingsGeneratorMessagePopoverExampleComponent implements AfterVie
                                             M: 6
                                         },
                                         fieldColumnLayout: {
-                                            S: 12,
+                                            S: 11,
                                             M: 6
                                         }
                                     }
