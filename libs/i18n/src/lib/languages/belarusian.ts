@@ -353,6 +353,7 @@ export const FD_LANGUAGE_BELARUSIAN: FdLanguage = {
         headerMenuSortDesc: 'Sort Descending',
         headerMenuGroup: 'Group',
         headerMenuFreeze: 'Freeze',
+        headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'HeaderMenuUnfreeze',
         headerMenuFilter: 'Filter',
         defaultEmptyMessage: 'No data found',

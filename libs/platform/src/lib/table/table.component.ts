@@ -1137,22 +1137,31 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** Freeze table to column */
-    freezeToColumn(columnName: string): void {
-        this.freezeColumnsTo = columnName;
+    freezeToColumn(columnName: string, end?: boolean): void {
+        end ? (this.freezeEndColumnsTo = columnName) : (this.freezeColumnsTo = columnName);
 
-        this._tableService.freezeTo(columnName);
+        this._tableService.freezeTo(columnName, end);
         this.recalculateTableColumnWidth();
+        this.columnHeaderPopovers.forEach((popover) => {
+            popover.close();
+        });
     }
 
     /** Unfreeze column */
-    unfreeze(columnName: string): void {
-        const freezeToColumnIndex = this._freezableColumns.get(columnName) ?? -1;
-        const freezeToPreviousColumnName = this._freezableColumns[freezeToColumnIndex - 1];
+    unfreeze(columnName: string, end?: boolean): void {
+        const columns = end ? this._freezableEndColumns : this._freezableColumns;
+        const freezeToColumnIndex = columns.get(columnName) ?? -1;
+        const freezeToPreviousColumnName = columns[freezeToColumnIndex - 1];
 
-        this.freezeColumnsTo = freezeToPreviousColumnName;
+        end
+            ? (this.freezeEndColumnsTo = freezeToPreviousColumnName)
+            : (this.freezeColumnsTo = freezeToPreviousColumnName);
 
-        this._tableService.freezeTo(freezeToPreviousColumnName);
+        this._tableService.freezeTo(freezeToPreviousColumnName, end);
         this.recalculateTableColumnWidth();
+        this.columnHeaderPopovers.forEach((popover) => {
+            popover.close();
+        });
     }
 
     /** expand all rows */
@@ -1398,6 +1407,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             column.sortable ||
             column.groupable ||
             column.freezable ||
+            column.endFreezable ||
             (column.filterable && !this._isFilteringFromHeaderDisabled)
         );
     }

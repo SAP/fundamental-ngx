@@ -439,23 +439,31 @@
         </ng-container>
 
         <!-- Freeze -->
-        <ng-container *ngIf="column.freezable">
+        <ng-container *ngIf="column.freezable || column.endFreezable">
             <li
-                *ngIf="!_freezableColumns?.has(column.name); else unfreezeTpl"
+                *ngIf="
+                    !_freezableColumns?.has(column.name) && !_freezableEndColumns?.has(column.name);
+                    else unfreezeTpl
+                "
                 class="fd-table__item--clickable"
                 fd-list-item
-                (click)="freezeToColumn(column.name)"
-                (keyup.enter)="freezeToColumn(column.name)"
+                (click)="freezeToColumn(column.name, column.endFreezable)"
+                (keyup.enter)="freezeToColumn(column.name, column.endFreezable)"
             >
                 <span></span>
-                <span fd-list-title>{{ 'platformTable.headerMenuFreeze' | fdTranslate }}</span>
+                <span fd-list-title *ngIf="!column.endFreezable">{{
+                    'platformTable.headerMenuFreeze' | fdTranslate
+                }}</span>
+                <span fd-list-title *ngIf="column.endFreezable">{{
+                    'platformTable.headerMenuEndFreeze' | fdTranslate
+                }}</span>
             </li>
             <ng-template #unfreezeTpl>
                 <li
                     class="fd-table__item--clickable"
                     fd-list-item
-                    (click)="unfreeze(column.name)"
-                    (keyup.enter)="unfreeze(column.name)"
+                    (click)="unfreeze(column.name, column.endFreezable)"
+                    (keyup.enter)="unfreeze(column.name, column.endFreezable)"
                 >
                     <span></span>
                     <span fd-list-title>{{ 'platformTable.headerMenuUnfreeze' | fdTranslate }}</span>

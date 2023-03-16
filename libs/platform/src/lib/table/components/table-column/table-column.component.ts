@@ -90,6 +90,10 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     @Input()
     freezable = false;
 
+    /** Toggles freeze feature for the column. */
+    @Input()
+    endFreezable = false;
+
     /** Width of the column cells. */
     @Input()
     set width(value: string) {

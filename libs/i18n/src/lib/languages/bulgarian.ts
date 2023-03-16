@@ -423,6 +423,7 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         headerMenuSortDesc: 'Сортирай Нисходящо',
         headerMenuGroup: 'Групирай',
         headerMenuFreeze: 'Замрази',
+        headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'Размрази',
         headerMenuFilter: 'Филтър',
         defaultEmptyMessage: 'Няма намерени данни',

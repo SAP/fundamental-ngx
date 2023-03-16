@@ -354,6 +354,7 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         headerMenuSortDesc: 'Sortuj Malejąco',
         headerMenuGroup: 'Grupa',
         headerMenuFreeze: 'Zamrożenie',
+        headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'HeaderMenuUnfreeze',
         headerMenuFilter: 'Filtr',
         defaultEmptyMessage: 'Brak wyników',

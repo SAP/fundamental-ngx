@@ -365,6 +365,7 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         headerMenuSortDesc: 'Ordine decrescente',
         headerMenuGroup: 'Gruppo',
         headerMenuFreeze: 'Congela',
+        headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'Sblocca',
         headerMenuFilter: 'Filtro',
         defaultEmptyMessage: 'Nessun dato trovato',
