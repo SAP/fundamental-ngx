@@ -2784,9 +2784,34 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 if (this._freezableColumns.size && !this._freezableEndColumns.size) {
                     activeEl.scrollIntoView({ block: 'nearest', inline: 'end' });
                 } else if (!this._freezableColumns.size && this._freezableEndColumns.size) {
-                    activeEl.scrollIntoView({ block: 'nearest', inline: 'start' });
-                } else if (this._freezableColumns.size && this._freezableEndColumns.size) {
                     activeEl.scrollIntoView({ block: 'nearest', inline: 'center' });
+                } else if (this._freezableColumns.size && this._freezableEndColumns.size) {
+                    // check to see if the active element is obstructed by another element
+                    const activeElLeft = activeEl.getBoundingClientRect().left;
+                    const activeElTop = activeEl.getBoundingClientRect().top;
+                    const topElementFromLeft = document.elementFromPoint(activeElLeft, activeElTop);
+                    // if the activeEl is overlapped
+                    if (
+                        topElementFromLeft &&
+                        !activeEl.isSameNode(topElementFromLeft) &&
+                        topElementFromLeft.classList.contains('fd-table__cell--fixed-end')
+                    ) {
+                        const topElementX = topElementFromLeft.getBoundingClientRect().left;
+                        const leftVal = this._rtl
+                            ? (activeElLeft + activeEl.getBoundingClientRect().width - topElementX) * -1
+                            : activeElLeft + activeEl.getBoundingClientRect().width - topElementX;
+                        tableScrollableEl.scrollBy({ top: 0, left: leftVal });
+                    } else if (
+                        topElementFromLeft &&
+                        !activeEl.isSameNode(topElementFromLeft) &&
+                        topElementFromLeft.classList.contains('fd-table__cell--fixed')
+                    ) {
+                        const topElementX = topElementFromLeft.getBoundingClientRect().right;
+                        const leftVal = this._rtl
+                            ? (activeElLeft - activeEl.getBoundingClientRect().width - topElementX) * -1
+                            : activeElLeft - activeEl.getBoundingClientRect().width - topElementX;
+                        tableScrollableEl.scrollBy({ top: 0, left: leftVal });
+                    }
                 }
             }
         }
