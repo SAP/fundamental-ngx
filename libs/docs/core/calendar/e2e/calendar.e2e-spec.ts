@@ -263,7 +263,7 @@ describe('calendar test suite', () => {
 
             expect(
                 await (await $(specialDaysCalendar).$('.fd-calendar__item*=' + endDate.getDate())).getAttribute('class')
-            ).not.toContain('special-day');
+            ).toContain('special-day');
 
             expect(
                 await (
