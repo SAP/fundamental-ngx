@@ -1,3 +1,12 @@
+## [0.39.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.13...v0.39.1-rc.14) (2023-03-18)
+
+
+### Bug Fixes
+
+* **core:** dialog should be scrollable if needed ([#9540](https://github.com/SAP/fundamental-ngx/issues/9540)) ([412ac0a](https://github.com/SAP/fundamental-ngx/commit/412ac0a9a662479de93d04c742faaf6b1b38ca84))
+
+
+
 ## [0.39.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.12...v0.39.1-rc.13) (2023-03-18)
 
 
