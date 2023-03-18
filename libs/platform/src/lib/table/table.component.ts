@@ -2475,7 +2475,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _calculateCheckedAll(): void {
         const selectableRows = this._getSelectableRows();
         const totalSelected = selectableRows.filter((r) => r.checked);
-        this._checkedAll = totalSelected.length === selectableRows.length;
+        this._checkedAll = totalSelected.length === selectableRows.length && selectableRows.length !== 0;
         this._checkedAny = totalSelected.length > 0;
     }
 
