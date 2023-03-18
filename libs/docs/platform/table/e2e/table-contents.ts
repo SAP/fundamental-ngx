@@ -7,6 +7,14 @@ export const tableCellArr = [
     '66.04',
     'Stocked on demand'
 ];
+export const freezeTableCellArr = [
+    '10 Portable DVD player',
+    'diam neque vestibulum eget vulputate',
+    '66.04',
+    'Stocked on demand',
+    '2020',
+    'true'
+];
 export const groupTableCellArr = [
     '10 Portable DVD player',
     'diam neque vestibulum eget vulputate',

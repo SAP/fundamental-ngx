@@ -1,3 +1,34 @@
+## [0.39.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.10...v0.39.1-rc.11) (2023-03-17)
+
+
+
+## [0.39.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.9...v0.39.1-rc.10) (2023-03-17)
+
+
+### Bug Fixes
+
+* **platform:** bug where checkbox would be checked when there are no selectable rows ([#9531](https://github.com/SAP/fundamental-ngx/issues/9531)) ([7ccd0d9](https://github.com/SAP/fundamental-ngx/commit/7ccd0d9209d482cdf782762cbd6ec812344827ec))
+
+
+
+## [0.39.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.8...v0.39.1-rc.9) (2023-03-14)
+
+
+### Bug Fixes
+
+* **platform:** table with freezing columns hidden cell issues ([#9502](https://github.com/SAP/fundamental-ngx/issues/9502)) ([e387440](https://github.com/SAP/fundamental-ngx/commit/e387440c7a7942dafb586933a33f8d22dff908b8))
+
+
+
+## [0.39.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.7...v0.39.1-rc.8) (2023-03-13)
+
+
+### Bug Fixes
+
+* **core,platform:** addon button should always close popover if it is open despite inputs ([#9498](https://github.com/SAP/fundamental-ngx/issues/9498)) ([02d2f2b](https://github.com/SAP/fundamental-ngx/commit/02d2f2ba8accaec66fe43eccc32217143060eeff))
+
+
+
 ## [0.39.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.6...v0.39.1-rc.7) (2023-03-10)
 
 

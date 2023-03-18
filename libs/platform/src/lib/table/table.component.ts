@@ -533,8 +533,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     onDataReceived = new EventEmitter<void>();
 
     /** @hidden */
-    @ViewChild('verticalScrollable')
-    readonly verticalScrollable: TableScrollable;
+    @ViewChild('tableScrollable')
+    readonly tableScrollable: TableScrollable;
 
     /** @hidden */
     @ViewChildren('columnHeaderPopover')
@@ -1682,6 +1682,14 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         nestingLevel: number | null
     ): Promise<void> {
         this._focusedCellPosition = { rowIndex: position.rowIndex, colIndex: position.colIndex };
+        const tableScrollableEl = this.tableScrollable.getElementRef().nativeElement;
+
+        if (this._freezableColumns.size && tableScrollableEl.scrollWidth > tableScrollableEl.clientWidth) {
+            const activeEl = document.activeElement;
+            if (activeEl) {
+                activeEl.scrollIntoView({ block: 'nearest', inline: 'end' });
+            }
+        }
 
         if (this.cellFocusedEventAnnouncer) {
             this._liveAnnouncer.clear();
@@ -2034,7 +2042,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         const totalNodeCount = this._tableRowsVisible.length;
 
-        let startNodeIndex = Math.floor(this.verticalScrollable.getScrollTop() / this.rowHeight) - this.renderAhead;
+        let startNodeIndex = Math.floor(this.tableScrollable.getScrollTop() / this.rowHeight) - this.renderAhead;
         startNodeIndex = Math.max(0, startNodeIndex);
 
         let visibleNodeCount =
@@ -2467,7 +2475,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _calculateCheckedAll(): void {
         const selectableRows = this._getSelectableRows();
         const totalSelected = selectableRows.filter((r) => r.checked);
-        this._checkedAll = totalSelected.length === selectableRows.length;
+        this._checkedAll = totalSelected.length === selectableRows.length && selectableRows.length !== 0;
         this._checkedAny = totalSelected.length > 0;
     }
 
@@ -2578,7 +2586,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 .pipe(
                     filter(() => this.pageScrolling),
                     debounceTime(50),
-                    filter((scrollable) => scrollable === this.verticalScrollable),
+                    filter((scrollable) => scrollable === this.tableScrollable),
                     map((scrollable) => scrollable.getElementRef().nativeElement),
                     filter((element) => !!element),
                     filter(
