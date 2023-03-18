@@ -1,3 +1,16 @@
+## [0.39.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.10...v0.39.1-rc.11) (2023-03-17)
+
+
+
+## [0.39.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.9...v0.39.1-rc.10) (2023-03-17)
+
+
+### Bug Fixes
+
+* **platform:** bug where checkbox would be checked when there are no selectable rows ([#9531](https://github.com/SAP/fundamental-ngx/issues/9531)) ([7ccd0d9](https://github.com/SAP/fundamental-ngx/commit/7ccd0d9209d482cdf782762cbd6ec812344827ec))
+
+
+
 ## [0.39.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.8...v0.39.1-rc.9) (2023-03-14)
 
 
