@@ -55,7 +55,7 @@
     "@stackblitz/sdk": "1.8.2",
     "@swc/helpers": "~0.4.11",
     "@types/google.visualization": "0.0.68",
-    "@types/node": "16.11.7",
+    "@types/node": "18.15.3",
     "compare-versions": "5.0.1",
     "core-js": "3.26.1",
     "dayjs": "1.11.6",
