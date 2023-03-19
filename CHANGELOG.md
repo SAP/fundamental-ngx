@@ -1,3 +1,12 @@
+## [0.39.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.14...v0.39.1-rc.15) (2023-03-19)
+
+
+### Bug Fixes
+
+* **core:** startingDayOfWeek couldn\'t be updated ([#9524](https://github.com/SAP/fundamental-ngx/issues/9524)) ([70250f4](https://github.com/SAP/fundamental-ngx/commit/70250f4e31531a5805129cb1325fcd7b4191f7cd))
+
+
+
 ## [0.39.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.13...v0.39.1-rc.14) (2023-03-18)
 
 
