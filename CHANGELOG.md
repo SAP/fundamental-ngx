@@ -1,3 +1,12 @@
+## [0.39.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.15...v0.39.1-rc.16) (2023-03-19)
+
+
+### Bug Fixes
+
+* **core:** fd-text does not show/hide 'MORE/LESS' button correctly when text length changes ([#9496](https://github.com/SAP/fundamental-ngx/issues/9496)) ([e20f4c0](https://github.com/SAP/fundamental-ngx/commit/e20f4c08d766b55cc7a2850101ddda6396d83c8c))
+
+
+
 ## [0.39.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.14...v0.39.1-rc.15) (2023-03-19)
 
 
