@@ -12,7 +12,11 @@
     <div class="fd-dynamic-page__collapsible-header-visibility-container" #pincollapseContainer>
         <ng-container *ngIf="collapsible">
             <div class="fd-dynamic-page__collapsible-header-visibility-container--left-gradient"></div>
-            <div role="toolbar" class="fd-dynamic-page__collapsible-header-visibility-container--button-group">
+            <div
+                role="toolbar"
+                class="fd-dynamic-page__collapsible-header-visibility-container--button-group"
+                style="z-index: 6"
+            >
                 <button
                     fd-button
                     class="fd-dynamic-page__collapse-button"
