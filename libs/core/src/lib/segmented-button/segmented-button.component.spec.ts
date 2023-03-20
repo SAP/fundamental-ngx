@@ -3,8 +3,10 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
 
-import { SegmentedButtonComponent, isSelectedClass, isDisabledClass } from './segmented-button.component';
+import { SegmentedButtonComponent, isDisabledClass } from './segmented-button.component';
 import { SegmentedButtonModule } from './segmented-button.module';
+
+const isSelectedClass = 'fd-button--toggled';
 
 @Component({
     selector: 'fd-test-component',
