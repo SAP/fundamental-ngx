@@ -1,3 +1,12 @@
+## [0.39.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.19...v0.39.1-rc.20) (2023-03-21)
+
+
+### Bug Fixes
+
+* **core:** various bugfixes ([#9553](https://github.com/SAP/fundamental-ngx/issues/9553)) ([fb7782b](https://github.com/SAP/fundamental-ngx/commit/fb7782b57822ef670ef75fc75419de090f4b7e7f))
+
+
+
 ## [0.39.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.18...v0.39.1-rc.19) (2023-03-20)
 
 
