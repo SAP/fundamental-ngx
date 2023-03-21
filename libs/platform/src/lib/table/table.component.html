@@ -493,7 +493,7 @@
 <!-- Column Header Cell Template -->
 <ng-template #tableHeaderCellTemplate let-column="column">
     <div
-        class="fd-table__text fd-table__text--no-wrap"
+        class="fd-table__text--no-wrap"
         [class.fd-table__inner]="_sortRulesMap.has(column.key) || _filterRulesMap.has(column.key)"
     >
         <ng-container *ngTemplateOutlet="tableHeaderCellContentTemplate; context: { column: column }"></ng-container>

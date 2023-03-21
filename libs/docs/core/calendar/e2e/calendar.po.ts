@@ -46,6 +46,7 @@ export class CalendarPo extends CoreBaseComponentPo {
     sundays = this.specialDaysCalendar + this.calendarRow + this.calendarItem + ':nth-child(1):not(.hidden-day)';
     saturdays = this.specialDaysCalendar + this.calendarRow + this.calendarItem + ':nth-child(7):not(.hidden-day)';
     wednesdays = this.standardCalendar + this.calendarRow + this.calendarItem + ':nth-child(4):not(.hidden-day)';
+    cdkOverlay = '.cdk-overlay-container ';
 
     async open(): Promise<void> {
         await super.open(this.url);

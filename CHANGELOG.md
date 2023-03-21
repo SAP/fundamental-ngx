@@ -1,3 +1,68 @@
+## [0.39.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.18...v0.39.1-rc.19) (2023-03-20)
+
+
+
+## [0.39.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.17...v0.39.1-rc.18) (2023-03-19)
+
+
+
+## [0.39.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.16...v0.39.1-rc.17) (2023-03-19)
+
+
+
+## [0.39.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.15...v0.39.1-rc.16) (2023-03-19)
+
+
+### Bug Fixes
+
+* **core:** fd-text does not show/hide 'MORE/LESS' button correctly when text length changes ([#9496](https://github.com/SAP/fundamental-ngx/issues/9496)) ([e20f4c0](https://github.com/SAP/fundamental-ngx/commit/e20f4c08d766b55cc7a2850101ddda6396d83c8c))
+
+
+
+## [0.39.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.14...v0.39.1-rc.15) (2023-03-19)
+
+
+### Bug Fixes
+
+* **core:** startingDayOfWeek couldn\'t be updated ([#9524](https://github.com/SAP/fundamental-ngx/issues/9524)) ([70250f4](https://github.com/SAP/fundamental-ngx/commit/70250f4e31531a5805129cb1325fcd7b4191f7cd))
+
+
+
+## [0.39.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.13...v0.39.1-rc.14) (2023-03-18)
+
+
+### Bug Fixes
+
+* **core:** dialog should be scrollable if needed ([#9540](https://github.com/SAP/fundamental-ngx/issues/9540)) ([412ac0a](https://github.com/SAP/fundamental-ngx/commit/412ac0a9a662479de93d04c742faaf6b1b38ca84))
+
+
+
+## [0.39.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.12...v0.39.1-rc.13) (2023-03-18)
+
+
+
+## [0.39.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.11...v0.39.1-rc.12) (2023-03-18)
+
+
+### Bug Fixes
+
+* **core,platform,docs:** minor tweaks to table header styles ([#9538](https://github.com/SAP/fundamental-ngx/issues/9538)) ([232bec4](https://github.com/SAP/fundamental-ngx/commit/232bec43fbcde13325e7ac9bf762df161d55c881))
+
+
+
+## [0.39.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.10...v0.39.1-rc.11) (2023-03-17)
+
+
+
+## [0.39.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.9...v0.39.1-rc.10) (2023-03-17)
+
+
+### Bug Fixes
+
+* **platform:** bug where checkbox would be checked when there are no selectable rows ([#9531](https://github.com/SAP/fundamental-ngx/issues/9531)) ([7ccd0d9](https://github.com/SAP/fundamental-ngx/commit/7ccd0d9209d482cdf782762cbd6ec812344827ec))
+
+
+
 ## [0.39.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.8...v0.39.1-rc.9) (2023-03-14)
 
 
