@@ -1,20 +1,20 @@
 <ng-template #inlineHelpRef>
     <span fd-link [undecorated]="true" class="fd-form-label__inline-help">
         <fd-icon
-            *ngIf="inlineHelpTitle"
+            *ngIf="inlineHelpContent"
             class="fd-form-label__help"
             [class.fd-form-label__help--after]="inlineHelpPlacement === 'after'"
             [glyph]="inlineHelpGlyph"
             [triggers]="inlineHelpTriggers"
-            [fd-inline-help]="inlineHelpTitle"
-            [ariaLabel]="inlineHelpTitle"
+            [fd-inline-help]="inlineHelpContent"
+            [ariaLabel]="inlineHelpLabel"
             [placement]="inlineHelpBodyPlacement"
             tabindex="0"
         ></fd-icon>
     </span>
 </ng-template>
 
-<ng-container *ngIf="inlineHelpPlacement === 'before' && inlineHelpTitle">
+<ng-container *ngIf="inlineHelpPlacement === 'before' && inlineHelpContent">
     <ng-container *ngTemplateOutlet="inlineHelpRef"></ng-container>
 </ng-container>
 
@@ -23,6 +23,6 @@
     <ng-container *ngIf="colon">:</ng-container>
 </span>
 
-<ng-container *ngIf="inlineHelpPlacement === 'after' && inlineHelpTitle">
+<ng-container *ngIf="inlineHelpPlacement === 'after' && inlineHelpContent">
     <ng-container *ngTemplateOutlet="inlineHelpRef"></ng-container>
 </ng-container>

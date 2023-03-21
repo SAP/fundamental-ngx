@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { DynamicFormFieldGroup, DynamicFormFieldItem, DynamicFormGroup } from '@fundamental-ngx/platform/form';
-import { HintOptions } from '@fundamental-ngx/platform/shared';
+import { HintInput } from '@fundamental-ngx/platform/shared';
 import { WizardGeneratorDependencyFields, WizardGeneratorFormsValue } from './wizard-generator-item.interface';
 
 export interface WizardGeneratorFormGroup {
@@ -49,7 +49,7 @@ export interface WizardGeneratorFormGroupGuiOptions {
     /**
      * Hint options. Either only text or full config
      */
-    hint?: string | HintOptions;
+    hint?: HintInput;
 }
 
 export type WizardGeneratorFormItem = WizardGeneratorFormGroupItem | WizardGeneratorFormFieldItem;
