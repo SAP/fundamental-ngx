@@ -56,12 +56,26 @@ export class BasePopoverClass {
      * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp) or a config object for the corresponding event.
      * Using the config object allows to specify whether an event should apply both for open and close actions or only some of them.
      *
+     * If array of triggers consists only of one event, it will be treated at a toggle event (open and close)
+     * If array of trigger consists of more than one event, each odd event will be treated as an open event for the popover,
+     * and each even event will be treated as closing event for the popover.
+     *
      * Consider the following value for `triggers`:
      * ```
      * [
-     *  'click', // basically it's an alias for "{ trigger: 'click', openAction: true, closeAction: true }"
-     *  { trigger: 'mouseenter', openAction: true, closeAction: false }, // "mouseenter" will only open the popover
-     *  { trigger: 'mouseleave', openAction: false, closeAction: true } // "mouseleave" will only close the popover
+     *  'click' // basically it's an alias for "{ trigger: 'click', openAction: true, closeAction: true }"
+     * ]
+     * ```
+     * ```
+     * [
+     *  'mouseenter' // Shortcut for "{ trigger: 'mouseenter', openAction: true, closeAction: false }", and will only open the popover.
+     *  'mouseleave' // Shortcut for "{ trigger: 'mouseleave', openAction: false, closeAction: true }" and will only close the popover.
+     * ]
+     * ```
+     * ```
+     * [
+     *  { trigger: 'mouseenter', openAction: true, closeAction: true }, // "mouseenter" will toggle the popover.
+     *  { trigger: 'mouseleave', openAction: true, closeAction: true } // "mouseleave" will toggle the popover.
      * ]
      * ```
      *

@@ -12,10 +12,10 @@ import {
 import { merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
 
-import { RtlService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { RtlService, Nullable, isOdd } from '@fundamental-ngx/cdk/utils';
 import { GetDefaultPosition, PopoverPosition } from '@fundamental-ngx/core/shared';
 
-import { BasePopoverClass } from '../base/base-popover.class';
+import { BasePopoverClass, TriggerConfig } from '../base/base-popover.class';
 import { PopoverBodyComponent } from '../popover-body/popover-body.component';
 import { PopoverContainerDirective } from '../popover-container/popover-container.directive';
 
@@ -246,21 +246,38 @@ export class PopoverService extends BasePopoverClass {
         this._removeTriggerListeners();
 
         if (this.triggers?.length) {
-            this.triggers.forEach((trigger) => {
-                const triggerName = typeof trigger === 'string' ? trigger : trigger.trigger;
+            this._normalizeTriggers().forEach((trigger) => {
                 this._eventRef.push(
-                    this._renderer.listen(this._triggerElement.nativeElement, triggerName, (event: Event) => {
-                        const closeAction = typeof trigger !== 'object' || !!trigger.closeAction;
-                        const openAction = typeof trigger !== 'object' || !!trigger.openAction;
+                    this._renderer.listen(this._triggerElement.nativeElement, trigger.trigger, (event: Event) => {
+                        const closeAction = !!trigger.closeAction;
+                        const openAction = !!trigger.openAction;
                         this.toggle(openAction, closeAction);
 
-                        if (typeof trigger === 'object' && trigger.stopPropagation) {
+                        if (trigger.stopPropagation) {
                             event.stopImmediatePropagation();
                         }
                     })
                 );
             });
         }
+    }
+
+    /** @hidden */
+    private _normalizeTriggers(): TriggerConfig[] {
+        return this.triggers.map((trigger, index) => {
+            if (typeof trigger === 'object' && trigger.trigger) {
+                return trigger;
+            }
+
+            const oddNumber = isOdd(index + 1);
+
+            return {
+                trigger,
+                openAction: this.triggers.length === 1 || oddNumber,
+                closeAction: this.triggers.length === 1 || !oddNumber,
+                stopPropagation: false
+            } as TriggerConfig;
+        });
     }
 
     /** @hidden */
