@@ -1,0 +1,159 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>The component that represents shellbar actions.
+			It is a container wrapper for all product actions and links (required element).</p>
+			<p>```html
+				&lt;fd-shellbar-actions [user]=&quot;user&quot;
+				[userMenu]=&quot;userMenu&quot;
+				[productSwitcher]=&quot;productSwitcher&quot;&gt;
+			<button fd-button fdType="standard">Custom Button</button></p>
+		</div>
+		<pre><code><span style="color: #000000">   &lt;</span><span style="color: #001080">fd</span><span style="color: #000000">-</span><span style="color: #001080">shellbar</span><span style="color: #000000">-</span><span style="color: #001080">action</span><span style="color: #000000"> *</span><span style="color: #001080">ngFor</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;let action of actions&quot;</span>
+<span style="color: #000000">                       [</span><span style="color: #001080">glyph</span><span style="color: #000000">]=</span><span style="color: #A31515">&quot;action.glyph&quot;</span>
+<span style="color: #000000">                       [</span><span style="color: #001080">callback</span><span style="color: #000000">]=</span><span style="color: #A31515">&quot;action.callback&quot;</span>
+<span style="color: #000000">                       [</span><span style="color: #001080">label</span><span style="color: #000000">]=</span><span style="color: #A31515">&quot;action.label&quot;</span>
+<span style="color: #000000">                       [</span><span style="color: #001080">notificationCount</span><span style="color: #000000">]=</span><span style="color: #A31515">&quot;action.notificationCount&quot;</span>
+<span style="color: #000000">                       [</span><span style="color: #001080">notificationLabel</span><span style="color: #000000">]=</span><span style="color: #A31515">&quot;action.notificationLabel&quot;</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">   &lt;/</span><span style="color: #001080">fd</span><span style="color: #000000">-</span><span style="color: #001080">shellbar</span><span style="color: #000000">-</span><span style="color: #001080">action</span><span style="color: #000000">&gt;</span>
+</code></pre>
+		</fd-shellbar-actions>
+		```
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">ShellbarActionsComponent</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel">
+	<h3>Implements</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Constructors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+		<a name="constructor" class="tsd-anchor"></a>
+		<h3>constructor</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Shellbar<wbr>Actions<wbr>Component<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ShellbarActionsComponent</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+				</aside>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ShellbarActionsComponent</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="closePopoverOnSelect" class="tsd-anchor"></a>
+		<h3>close<wbr>Popover<wbr>OnSelect</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">close<wbr>Popover<wbr>OnSelect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b67ae7c9f/libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts#L71">libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts:71</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>When set to true, popover list will be closed after selecting the option</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="collapsedItemMenuLabel" class="tsd-anchor"></a>
+		<h3>collapsed<wbr>Item<wbr>Menu<wbr>Label</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">collapsed<wbr>Item<wbr>Menu<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b67ae7c9f/libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts#L78">libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts:78</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
+				<dd><p>use i18n capabilities instead
+					Label for the collapsed item menu.</p>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="searchOpen" class="tsd-anchor"></a>
+		<h3>search<wbr>Open</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">search<wbr>Open<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b67ae7c9f/libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts#L84">libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts:84</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted when search opened.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="showSearch" class="tsd-anchor"></a>
+		<h3>show<wbr>Search</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">show<wbr>Search<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b67ae7c9f/libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts#L119">libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts:119</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether to show the search field.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="user" class="tsd-anchor"></a>
+		<h3>user</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">user<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ShellbarUser</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b67ae7c9f/libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts#L63">libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts:63</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The user data.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="userMenu" class="tsd-anchor"></a>
+		<h3>user<wbr>Menu</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">user<wbr>Menu<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ShellbarUserMenu</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b67ae7c9f/libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts#L67">libs/core/src/lib/shellbar/shellbar-actions/shellbar-actions.component.ts:67</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The user menu data.</p>
+			</div>
+		</div>
+	</section>
+</section>
+</div>
