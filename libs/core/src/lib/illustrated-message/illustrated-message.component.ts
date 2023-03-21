@@ -9,7 +9,8 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
-    ViewEncapsulation
+    ViewEncapsulation,
+    SimpleChanges
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { applyCssClass, RequireOnlyOne } from '@fundamental-ngx/cdk/utils';
@@ -93,8 +94,11 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
     constructor(private _elementRef: ElementRef, private _cdRef: ChangeDetectorRef, private _sanitizer: DomSanitizer) {}
 
     /** @hidden */
-    ngOnChanges(): void {
+    ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
+        if ('svgConfig' in changes) {
+            this._constructHref();
+        }
     }
 
     /** @hidden */

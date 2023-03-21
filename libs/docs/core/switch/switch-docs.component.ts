@@ -30,7 +30,8 @@ export class SwitchDocsComponent {
         properties: {
             disabled: false,
             checked: false,
-            compact: true
+            compact: true,
+            semantic: false
         }
     };
 

@@ -309,14 +309,14 @@ describe('PopoverService', () => {
         componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('keydown'));
         expect(service.toggle).toHaveBeenCalledTimes(4);
 
-        expect(service.open).toHaveBeenCalledTimes(2);
+        expect(service.open).toHaveBeenCalledTimes(1);
         // "close" is being invoked twice for each action
-        expect(service.close).toHaveBeenCalledTimes(4);
+        expect(service.close).toHaveBeenCalledTimes(2);
     });
 
     it('should support trigger config', () => {
         componentInstance.triggers = [
-            'mouseenter',
+            { trigger: 'mouseenter', closeAction: true, openAction: true },
             { trigger: 'click', closeAction: false, openAction: true },
             { trigger: 'mouseleave', closeAction: true, openAction: false }
         ];
@@ -329,31 +329,31 @@ describe('PopoverService', () => {
         componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('click'));
         expect(service.toggle).toHaveBeenCalledTimes(1);
         expect(service.open).toHaveBeenCalledTimes(1);
-        expect(service.close).toHaveBeenCalledTimes(0 * 2);
+        expect(service.close).toHaveBeenCalledTimes(0);
 
         expect(service.isOpen).toBe(true);
         componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('click'));
         expect(service.toggle).toHaveBeenCalledTimes(2);
         expect(service.open).toHaveBeenCalledTimes(1);
-        expect(service.close).toHaveBeenCalledTimes(0 * 2);
+        expect(service.close).toHaveBeenCalledTimes(0);
 
         expect(service.isOpen).toBe(true);
         componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('click'));
         expect(service.toggle).toHaveBeenCalledTimes(3);
         expect(service.open).toHaveBeenCalledTimes(1);
-        expect(service.close).toHaveBeenCalledTimes(0 * 2);
+        expect(service.close).toHaveBeenCalledTimes(0);
 
         expect(service.isOpen).toBe(true);
         componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('mouseenter'));
         expect(service.toggle).toHaveBeenCalledTimes(4);
         expect(service.open).toHaveBeenCalledTimes(1);
-        expect(service.close).toHaveBeenCalledTimes(1 * 2);
+        expect(service.close).toHaveBeenCalledTimes(2);
 
         expect(service.isOpen).toBe(false);
         componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('mouseenter'));
         expect(service.toggle).toHaveBeenCalledTimes(5);
         expect(service.open).toHaveBeenCalledTimes(2);
-        expect(service.close).toHaveBeenCalledTimes(1 * 2);
+        expect(service.close).toHaveBeenCalledTimes(2);
 
         expect(service.isOpen).toBe(true);
         componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('mouseleave'));

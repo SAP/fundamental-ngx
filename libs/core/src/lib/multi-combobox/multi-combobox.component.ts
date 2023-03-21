@@ -698,10 +698,6 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             }
         });
         this._selectedSuggestions = this._selectedSuggestions.filter((s) => !toRemoveSet.has(s.value));
-        // selected items should be displayed in the same order as options
-        const valueIndexes = new Map<any, number>(this._suggestions.map((s, i) => [s.value, i]));
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this._selectedSuggestions.sort((a, b) => valueIndexes.get(a.value)! - valueIndexes.get(b.value)!);
         this._propagateChange();
 
         this._tokenizer.onResize();

@@ -1,13 +1,13 @@
 <p class="fd-text" [class.fd-text--pre-wrap]="whitespaces" [style.hyphens]="hyphenation">
     <span
-        fd-lineclamp
+        fdkLineClamp
         class="fd-text__lineclamp"
         #lineClamp="fdLineClamp"
         [fdLineclampState]="_isCollapsed"
         [fdLineClampLines]="maxLines"
         (lineCountUpdate)="checkLineCount($event)"
     >
-        <span fd-lineclamp-target [fdLineClampTargetText]="text" (update)="lineClamp.refreshTarget($event)"></span>
+        <span fdkLineClampTarget [fdLineClampTargetText]="text" (update)="lineClamp.refreshTarget($event)"></span>
     </span>
 
     <a

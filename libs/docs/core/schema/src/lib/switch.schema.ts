@@ -11,6 +11,9 @@ export const switchSchema: any = {
                 },
                 compact: {
                     type: 'boolean'
+                },
+                semantic: {
+                    type: 'boolean'
                 }
             }
         }

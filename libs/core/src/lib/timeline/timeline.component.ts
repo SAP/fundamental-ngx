@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    ElementRef,
     Input,
     IterableChangeRecord,
     IterableDiffer,
@@ -20,7 +21,8 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { Subject } from 'rxjs';
+import { resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { debounceTime, Subject } from 'rxjs';
 import { ViewportRuler } from '@angular/cdk/overlay';
 import { takeUntil } from 'rxjs/operators';
 
@@ -115,6 +117,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
         private _cd: ChangeDetectorRef,
         private _timelinePositionControlService: TimelinePositionControlService,
         private _viewportRuler: ViewportRuler,
+        private _elementRef: ElementRef<HTMLElement>,
         private _ngZone: NgZone
     ) {}
 
@@ -143,11 +146,9 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._viewportRuler
-            .change(50)
-            .pipe(takeUntil(this._onDestroy))
-            // ViewportRuler invoked out of zone, that is why I need to invoke function in zone
-            .subscribe(() => this._ngZone.run(() => this._timelinePositionControlService.calculatePositions()));
+        resizeObservable(this._elementRef.nativeElement)
+            .pipe(debounceTime(50), takeUntil(this._onDestroy))
+            .subscribe(() => this._timelinePositionControlService.calculatePositions());
         this._setPositionStrategy();
         this.switchDataSource(this.dataSource);
     }

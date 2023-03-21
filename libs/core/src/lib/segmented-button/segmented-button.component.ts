@@ -7,6 +7,7 @@ import {
     ElementRef,
     forwardRef,
     HostBinding,
+    HostListener,
     Input,
     QueryList,
     ViewEncapsulation
@@ -18,7 +19,6 @@ import { DestroyedService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export const isSelectedClass = 'fd-button--toggled';
 export const isDisabledClass = 'is-disabled';
 
 export type SegmentedButtonValue = string | (string | null)[] | null;
@@ -39,8 +39,7 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
     templateUrl: './segmented-button.component.html',
     styleUrls: ['./segmented-button.component.scss'],
     host: {
-        role: 'group',
-        '(click)': '_click($event)'
+        role: 'group'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -131,6 +130,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     }
 
     /** @hidden */
+    @HostListener('click', ['$event'])
     private _click(event: MouseEvent): void {
         if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
             this.onTouched();
@@ -217,6 +217,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
         }
         this._buttons.forEach((button) => this._deselectButton(button));
         this._getButtonsByValues(values).forEach((button) => this._selectButton(button));
+        this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
@@ -234,28 +235,22 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
 
     /** @hidden */
     private _selectButton(buttonComponent: ButtonComponent): void {
-        const button = buttonComponent.elementRef().nativeElement;
-        button.classList.add(isSelectedClass);
-        button.setAttribute('aria-pressed', 'true');
-        this._changeDetRef.detectChanges();
+        buttonComponent.toggled = true;
     }
 
     /** @hidden */
     private _deselectButton(buttonComponent: ButtonComponent): void {
-        const button = buttonComponent.elementRef().nativeElement;
-        button.classList.remove(isSelectedClass);
-        button.setAttribute('aria-pressed', 'false');
-        this._changeDetRef.detectChanges();
+        buttonComponent.toggled = false;
     }
 
     /** @hidden */
     private _isButtonSelected(buttonComponent: ButtonComponent): boolean {
-        return buttonComponent.elementRef().nativeElement.classList.contains(isSelectedClass);
+        return buttonComponent.toggled;
     }
 
     /** @hidden */
     private _isButtonDisabled(buttonComponent: ButtonComponent): boolean {
-        return buttonComponent.elementRef().nativeElement.classList.contains(isDisabledClass);
+        return buttonComponent._disabled || buttonComponent.ariaDisabled;
     }
 
     /** @hidden */

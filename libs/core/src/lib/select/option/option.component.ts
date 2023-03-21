@@ -3,19 +3,24 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChildren,
     ElementRef,
     EventEmitter,
     HostBinding,
     Input,
     OnDestroy,
     Output,
+    QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FocusableOption, FocusOrigin } from '@angular/cdk/a11y';
 import { ENTER, hasModifierKey, SPACE } from '@angular/cdk/keycodes';
 
+import { ListTitleDirective } from '@fundamental-ngx/core/list';
+
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { startWith } from 'rxjs/operators';
 import { OptionsInterface } from '../options.interface';
 
 let optionUniqueId = 0;
@@ -96,6 +101,13 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
     @HostBinding('class.is-selected')
     selected = false;
 
+    /** @Hidden */
+    @ContentChildren(ListTitleDirective)
+    _listTitleDirectives: QueryList<ListTitleDirective> | undefined;
+
+    /** @hidden */
+    _renderer: 'plain' | 'title' = 'title';
+
     /**
      * The displayed value of the option. It shows the selected option in the select's trigger.
      */
@@ -119,6 +131,15 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
 
     /** @hidden */
     constructor(private _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {}
+
+    /** @Hidden */
+    ngAfterViewInit(): void {
+        this._listTitleDirectives?.changes.pipe(startWith(null)).subscribe(() => {
+            const directivesLength = this._listTitleDirectives?.length ?? 0;
+            this._renderer = directivesLength > 0 ? 'plain' : 'title';
+            this._changeDetectorRef.detectChanges();
+        });
+    }
 
     /**
      * @hidden

@@ -48,6 +48,7 @@
                 [class.is-disabled]="cell.disabled"
                 [class]="cell.specialNumber ? 'fd-calendar__special-day--' + cell.specialNumber : ''"
                 [attr.id]="cell.id"
+                [attr.data-fd-calendar-date-day]="cell.label"
                 [attr.data-fd-calendar-day]="cell.index"
                 [attr.aria-selected]="cell.selected"
                 [attr.aria-disabled]="cell.disabled"

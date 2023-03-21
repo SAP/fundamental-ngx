@@ -10,6 +10,8 @@ export interface ListComponentInterface {
         focus(): void;
     }>;
 
+    byline: boolean;
+
     setItemActive(index: number): void;
 
     items: QueryList<ListItemInterface>;
