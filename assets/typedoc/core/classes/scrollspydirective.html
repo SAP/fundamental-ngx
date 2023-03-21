@@ -1,0 +1,120 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>A directive designed to help navigation elements determine the element currently in view of the user.</p>
+		</div>
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">ScrollSpyDirective</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="fireEmpty" class="tsd-anchor"></a>
+		<h3>fire<wbr>Empty</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">fire<wbr>Empty<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b67ae7c9f/libs/core/src/lib/scroll-spy/scroll-spy.directive.ts#L20">libs/core/src/lib/scroll-spy/scroll-spy.directive.ts:20</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether events are still fired if there is no tag present on the user&#39;s screen.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="scrollSpyDisabled" class="tsd-anchor"></a>
+		<h3>scroll<wbr>Spy<wbr>Disabled</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">scroll<wbr>Spy<wbr>Disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b67ae7c9f/libs/core/src/lib/scroll-spy/scroll-spy.directive.ts#L41">libs/core/src/lib/scroll-spy/scroll-spy.directive.ts:41</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether to disable scroll spy</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="spyChange" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> spy<wbr>Change</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">spy<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b67ae7c9f/libs/core/src/lib/scroll-spy/scroll-spy.directive.ts#L48">libs/core/src/lib/scroll-spy/scroll-spy.directive.ts:48</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event fired on the scroll element when a new item becomes activated by the scrollspy .
+				The returned value is the HTMLElement itself.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="targetOffset" class="tsd-anchor"></a>
+		<h3>target<wbr>Offset</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">target<wbr>Offset<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b67ae7c9f/libs/core/src/lib/scroll-spy/scroll-spy.directive.ts#L35">libs/core/src/lib/scroll-spy/scroll-spy.directive.ts:35</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Number that represents the offset in pixels for fired target. <code>100</code> value means that the event will be fired for
+				target that is 100 pixels below the spy container.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="targetPercent" class="tsd-anchor"></a>
+		<h3>target<wbr>Percent</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">target<wbr>Percent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b67ae7c9f/libs/core/src/lib/scroll-spy/scroll-spy.directive.ts#L28">libs/core/src/lib/scroll-spy/scroll-spy.directive.ts:28</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>A number that represent at what location in the container the event is fired.
+					0.5 would fire the events in the middle of the container,
+				0 for the top and 1 for the bottom.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="trackedTags" class="tsd-anchor"></a>
+		<h3>tracked<wbr>Tags</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">tracked<wbr>Tags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b67ae7c9f/libs/core/src/lib/scroll-spy/scroll-spy.directive.ts#L14">libs/core/src/lib/scroll-spy/scroll-spy.directive.ts:14</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>An array of tags to track.</p>
+			</div>
+		</div>
+	</section>
+</section>
+</div>
