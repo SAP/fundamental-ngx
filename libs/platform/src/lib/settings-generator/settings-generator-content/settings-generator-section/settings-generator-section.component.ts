@@ -27,10 +27,16 @@ export type SettingsSectionItemsModel = SettingsTemplateTab | SettingsFormTab | 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsGeneratorSectionComponent {
-    /** @hidden */
+    /**
+     * Group name. Used to define full path of the inner form.
+     */
     @Input()
     groupName: Nullable<string>;
-    /** @hidden */
+
+    /**
+     * Section items.
+     * @param value {Nullable<SettingsSectionItemsModel>} Can be either a template Ref, or Form generator items.
+     */
     @Input()
     set items(value: Nullable<SettingsSectionItemsModel>) {
         this._items = value;

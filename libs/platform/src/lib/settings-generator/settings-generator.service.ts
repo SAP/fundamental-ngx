@@ -120,7 +120,7 @@ export class SettingsGeneratorService implements OnDestroy {
 
     /**
      * @hidden
-     * Subscribse to click events from message popover and tries to open the section where invalid input is located.
+     * Subscribes to click events from message popover and tries to open the section where invalid input is located.
      */
     private _listenToMessagePopoverItemClick(): void {
         this._messagePopover?.messagePopover$
@@ -140,7 +140,6 @@ export class SettingsGeneratorService implements OnDestroy {
                         return false;
                     }
                 });
-                console.log(entry, this._formGenerators);
             });
     }
 }

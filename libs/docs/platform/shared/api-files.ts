@@ -117,5 +117,14 @@ export const API_FILES = {
         'MessagePopoverFormItemDirective'
     ],
     variantManagement: ['VariantManagementComponent', 'VariantManagementWrapperComponent'],
-    settingsGenerator: ['SettingsGeneratorComponent']
+    settingsGenerator: [
+        'SettingsGeneratorComponent',
+        'SettingsGeneratorService',
+        'SettingsGeneratorLayoutAccessorService',
+        'SettingsGeneratorContentComponent',
+        'SettingsGeneratorSectionComponent',
+        'SettingsGeneratorSidebarLayoutComponent',
+        'SettingsGeneratorSidebarIconComponent',
+        'ThemeSelectorListComponent'
+    ]
 };
