@@ -1,3 +1,12 @@
+## [0.39.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.22...v0.39.1-rc.23) (2023-03-22)
+
+
+### Bug Fixes
+
+* **core:** replaced CSSStyleSheet with ordinary style ([#9567](https://github.com/SAP/fundamental-ngx/issues/9567)) ([3e19fbe](https://github.com/SAP/fundamental-ngx/commit/3e19fbe1c24c0cb600598efaf9227ea6c73b0b17))
+
+
+
 ## [0.39.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.21...v0.39.1-rc.22) (2023-03-22)
 
 
