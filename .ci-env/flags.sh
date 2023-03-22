@@ -2,4 +2,4 @@
 # This flag indicates if the tag should be treated as a latest one, which is going to trigger
 # - npm publish with `latest` tag, which will become new default version
 # - main version incrementation
-echo "isLatest=false" >> $GITHUB_OUTPUT
+echo "isLatest=true" >> $GITHUB_OUTPUT
