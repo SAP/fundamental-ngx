@@ -95,7 +95,7 @@ jobs:
               uses: ./.github/actions/generate-conventional-release-notes
 
             - name: Create Release
-              uses: ncipollo/release-action@v1.10.0
+              uses: ncipollo/release-action@v1.12.0
               with:
                   prerelease: ${{ steps.bumpVersion.outputs.isPrerelease }}
                   tag: v${{ steps.bumpVersion.outputs.newVersion }}
