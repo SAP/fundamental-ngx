@@ -1,13 +1,13 @@
-import { Directive, ElementRef, HostBinding, inject, Input, OnDestroy, PLATFORM_ID } from '@angular/core';
+import { Directive, ElementRef, HostBinding, inject, Input, OnDestroy, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import scrollbarStyles from 'fundamental-styles/dist/js/scrollbar';
 import { CdkScrollable } from '@angular/cdk/overlay';
 
 export type ScrollbarOverflowOptions = 'auto' | 'scroll' | 'hidden';
 
 let scrollbarElementsQuantity = 0;
-let styleSheet: CSSStyleSheet | undefined;
+let styleSheet: HTMLStyleElement | null = null;
 
 /**
  * The scrollbar directive.
@@ -91,6 +91,8 @@ export class ScrollbarDirective implements OnDestroy {
     }
 
     /** @hidden */
+    private _document: Document = inject(DOCUMENT);
+    /** @hidden */
     private _noHorizontalScroll = false;
 
     /** @hidden */
@@ -102,22 +104,21 @@ export class ScrollbarDirective implements OnDestroy {
     /**
      * @hidden
      */
-    constructor(private _elementRef: ElementRef<HTMLElement>) {
+    constructor(private _elementRef: ElementRef<HTMLElement>, renderer2: Renderer2) {
         scrollbarElementsQuantity++;
         const platform = inject(PLATFORM_ID);
         if (!styleSheet && isPlatformBrowser(platform)) {
-            styleSheet = new CSSStyleSheet();
-            styleSheet.replaceSync(scrollbarStyles.cssSource);
-            document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
+            styleSheet = renderer2.createElement('style');
+            styleSheet!.innerHTML = scrollbarStyles.cssSource;
+            renderer2.appendChild(this._document.head, styleSheet);
         }
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         if (--scrollbarElementsQuantity === 0) {
-            styleSheet!.replaceSync('');
-            document.adoptedStyleSheets = document.adoptedStyleSheets.filter((sheet) => sheet !== styleSheet);
-            styleSheet = undefined;
+            styleSheet?.remove();
+            styleSheet = null;
         }
     }
 
