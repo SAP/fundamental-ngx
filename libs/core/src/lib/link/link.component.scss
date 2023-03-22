@@ -1,1 +1,5 @@
 @import 'fundamental-styles/dist/link';
+
+.fd-link__content--icon-line-height {
+    line-height: var(--sapContent_LineHeight);
+}

@@ -31,7 +31,7 @@ jobs:
 
             - name: Get last commit SHA
               id: get-last-commit
-              run: echo "::set-output name=commit-sha::$(git rev-parse HEAD)"
+              run: echo "commit-sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
     update-versions:
         runs-on: ubuntu-latest

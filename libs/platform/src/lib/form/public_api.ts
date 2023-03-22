@@ -34,14 +34,14 @@ export * from './form-generator/form-generator.tokens';
 export * from './form-generator/config/default-components-list';
 export * from './form-generator/config/default-validation-errors';
 export * from './form-generator/config/default-form-generator-hint-options';
-export * from './form-generator/dynamic-form-generator-checkbox/dynamic-form-generator-checkbox.component';
-export * from './form-generator/dynamic-form-generator-datepicker/dynamic-form-generator-datepicker.component';
-export * from './form-generator/dynamic-form-generator-editor/dynamic-form-generator-editor.component';
-export * from './form-generator/dynamic-form-generator-input/dynamic-form-generator-input.component';
-export * from './form-generator/dynamic-form-generator-radio/dynamic-form-generator-radio.component';
-export * from './form-generator/dynamic-form-generator-select/dynamic-form-generator-select.component';
-export * from './form-generator/dynamic-form-generator-switch/dynamic-form-generator-switch.component';
-export * from './form-generator/dynamic-form-generator-multi-input/dynamic-form-generator-multi-input.component';
+export * from './form-generator/controls/dynamic-form-generator-checkbox/dynamic-form-generator-checkbox.component';
+export * from './form-generator/controls/dynamic-form-generator-datepicker/dynamic-form-generator-datepicker.component';
+export * from './form-generator/controls/dynamic-form-generator-editor/dynamic-form-generator-editor.component';
+export * from './form-generator/controls/dynamic-form-generator-input/dynamic-form-generator-input.component';
+export * from './form-generator/controls/dynamic-form-generator-radio/dynamic-form-generator-radio.component';
+export * from './form-generator/controls/dynamic-form-generator-select/dynamic-form-generator-select.component';
+export * from './form-generator/controls/dynamic-form-generator-switch/dynamic-form-generator-switch.component';
+export * from './form-generator/controls/dynamic-form-generator-multi-input/dynamic-form-generator-multi-input.component';
 export * from './form-generator/form-generator/form-generator.component';
 export * from './form-generator/interfaces/dynamic-abstract-control';
 export * from './form-generator/interfaces/dynamic-form-group';
@@ -50,6 +50,7 @@ export * from './form-generator/interfaces/form-component-definition';
 export * from './form-generator/interfaces/form-generator-module-config';
 export * from './form-generator/providers/providers';
 export * from './form-generator/form-generator-field/form-generator-field.component';
+export * from './form-generator/form-generator-components-accessor.service';
 
 export * from './form-group/constants';
 export * from './form-group/config/default-form-field-hint-options';
@@ -130,3 +131,5 @@ export * from './text-area/text-area.module';
 
 export * from './time-picker/time-picker.component';
 export * from './time-picker/time-picker.module';
+
+export * from './form-generator/controls/dynamic-form-generator-object-status/dynamic-form-generator-object-status.component';

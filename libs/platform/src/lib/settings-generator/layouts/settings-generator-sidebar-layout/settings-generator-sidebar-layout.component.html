@@ -1,0 +1,67 @@
+<div
+    class="fdp-settings-generator__sidebar"
+    [class.fdp-settings-generator__sidebar--hidden]="!_mobileSidebarVisible"
+    [style.width]="_mobileSidebarVisible ? null : _sidebarWidth.width"
+    [style.min-width]="_mobileSidebarVisible ? null : _sidebarWidth.minWidth"
+    [style.max-width]="_mobileSidebarVisible ? null : _sidebarWidth.maxWidth"
+>
+    <ul fd-list [byline]="true" [navigationIndicator]="true">
+        <li
+            (click)="_setSelectedIndex(i)"
+            fd-list-item
+            [selected]="i === _selectedIndex"
+            *ngFor="let item of settings?.items; let i = index"
+        >
+            <a fd-list-link [navigated]="i === _selectedIndex">
+                <span fd-list-thumbnail *ngIf="item.thumbnail">
+                    <fdp-settings-generator-sidebar-icon
+                        [thumbnail]="item.thumbnail"
+                    ></fdp-settings-generator-sidebar-icon>
+                </span>
+                <div fd-list-content>
+                    <ng-container *ngIf="item.title | fdkAsyncOrSync as titleValue; else titleElseBlock">
+                        <div fd-list-title>{{ titleValue }}</div>
+                    </ng-container>
+                    <ng-template #titleElseBlock>
+                        <div fd-list-title>
+                            <fd-skeleton
+                                height="16px"
+                                type="rectangle"
+                                width="40%"
+                                textLines="1"
+                                style="margin: auto 0"
+                            ></fd-skeleton>
+                        </div>
+                    </ng-template>
+                    <div fd-list-byline *ngIf="item.description">
+                        <ng-container
+                            *ngIf="item.description | fdkAsyncOrSync as descriptionValue; else descriptionElseBlock"
+                        >
+                            {{ descriptionValue }}
+                        </ng-container>
+                        <ng-template #descriptionElseBlock>
+                            <fd-skeleton type="text" width="60%" textLines="1" style="margin: auto 0"></fd-skeleton>
+                        </ng-template>
+                    </div>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
+<div
+    class="fdp-settings-generator__content"
+    [class.fdp-settings-generator__content--hidden]="_mobileSidebarVisible"
+    [style.width]="_mobileSidebarVisible ? null : 'calc(100% - ' + _sidebarWidth.width + ')'"
+    [style.min-width]="_mobileSidebarVisible ? null : 'calc(100% - ' + _sidebarWidth.minWidth + ')'"
+    [style.max-width]="_mobileSidebarVisible ? null : 'calc(100% - ' + _sidebarWidth.maxWidth + ')'"
+>
+    <ng-container *ngFor="let item of settings?.items; let i = index">
+        <fdp-settings-generator-content
+            [attr.hidden]="i !== _selectedIndex ? true : null"
+            [settings]="item"
+            [mobile]="_isMobile"
+            (goBack)="_goBack()"
+            #settingsGeneratorContent
+        ></fdp-settings-generator-content>
+    </ng-container>
+</div>

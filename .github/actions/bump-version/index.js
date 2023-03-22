@@ -3,7 +3,7 @@ const semver = require('semver');
 const fs = require('fs');
 const core = require('@actions/core');
 const { getInput } = require('@actions/core');
-const packageJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+const packageJson = JSON.parse(fs.readFileSync('./package.json', { encoding: 'utf-8' }));
 const releaseType = core.getInput('isPrerelease') !== 'false' ? 'prerelease' : 'release';
 const writeFile = core.getInput('writeFile') !== 'false';
 const isHotfix = getInput('isHotfix') !== 'false';

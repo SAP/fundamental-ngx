@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { SubscriptionStrategy } from './subscription-strategy.interface';
 
 /**
@@ -7,7 +7,7 @@ import { SubscriptionStrategy } from './subscription-strategy.interface';
 export class ObservableStrategy<T> implements SubscriptionStrategy<T> {
     /** @hidden */
     createSubscription(async: Observable<T>, updateLatestValue: any): Promise<void> {
-        return async.toPromise().then(updateLatestValue, (e) => {
+        return firstValueFrom(async).then(updateLatestValue, (e) => {
             console.error(e);
         });
     }

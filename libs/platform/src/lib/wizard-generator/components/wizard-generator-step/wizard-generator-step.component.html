@@ -7,7 +7,7 @@
         [columnLayout]="form.columnLayout"
         [noAdditionalContent]="true"
         [formName]="form.id"
-        [formItems]="form.formItems"
+        [formItems]="$any(form.formItems)"
         [hint]="form.guiOptions?.hint!"
         [unifiedLayout]="unifiedLayout"
         (formCreated)="onFormCreated($event, form.id)"

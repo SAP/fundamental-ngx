@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AsyncOrSyncPipe } from './async-or-sync.pipe';
 
 import { DisplayFnPipe } from './displayFn.pipe';
 import { FilterStringsPipe } from './filter-strings.pipe';
@@ -8,9 +9,10 @@ import { SafePipe } from './safe.pipe';
 import { ValueByPathPipe } from './value-by-path.pipe';
 import { IsCompactDensityPipe } from './is-compact.pipe';
 import { TruncatePipe } from './truncate.pipe';
+import { MakeAsyncPipe } from './make-async.pipe';
 
 @NgModule({
-    declarations: [
+    imports: [
         DisplayFnPipe,
         SearchHighlightPipe,
         TwoDigitsPipe,
@@ -18,7 +20,9 @@ import { TruncatePipe } from './truncate.pipe';
         ValueByPathPipe,
         IsCompactDensityPipe,
         TruncatePipe,
-        FilterStringsPipe
+        FilterStringsPipe,
+        MakeAsyncPipe,
+        AsyncOrSyncPipe
     ],
     exports: [
         DisplayFnPipe,
@@ -28,7 +32,9 @@ import { TruncatePipe } from './truncate.pipe';
         ValueByPathPipe,
         IsCompactDensityPipe,
         TruncatePipe,
-        FilterStringsPipe
+        FilterStringsPipe,
+        MakeAsyncPipe,
+        AsyncOrSyncPipe
     ]
 })
 export class PipeModule {}

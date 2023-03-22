@@ -60,7 +60,7 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
      * Glyph (icon) of the Object Status.
      */
     @Input()
-    glyph: string;
+    glyph: Nullable<string>;
 
     /** Define the text content of the Object Status */
     @Input()

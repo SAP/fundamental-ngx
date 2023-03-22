@@ -48,6 +48,12 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     @Input()
     orientation: SplitterPaneContainerOrientationType = SplitterPaneContainerOrientation.vertical;
 
+    /**
+     * Style of the resizer.
+     */
+    @Input()
+    resizerType: 'default' | 'transparent' | 'translucent' = 'default';
+
     /** Event emitted after container's panes has resized. */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-native

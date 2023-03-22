@@ -19,7 +19,7 @@ import { DynamicFormControl } from './dynamic-form-control';
 })
 class HostComponent {
     control = new DynamicFormControl('default value', {
-        dynamicFormItem: { type: 'input', name: 'test', message: 'test' }
+        dynamicFormItem: { type: 'input', name: 'test', message: 'test', default: '' }
     });
 
     shouldShow = true;

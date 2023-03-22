@@ -25,6 +25,7 @@ import { CalendarModule, DeprecatedCalendarContentDensityDirective } from '@fund
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { CalendarDisabledNavigationButtonsExampleComponent } from './examples/calendar-disabled-navigation-buttons-example/calendar-disabled-navigation-buttons-example.component';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 const routes: Routes = [
     {
@@ -44,6 +45,7 @@ const routes: Routes = [
         CheckboxModule,
         FdDatetimeModule,
         CalendarModule,
+        SelectModule,
         SegmentedButtonModule,
         SharedDocumentationPageModule,
         RouterModule.forChild(routes)

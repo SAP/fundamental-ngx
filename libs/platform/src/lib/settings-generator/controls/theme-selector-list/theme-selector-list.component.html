@@ -1,0 +1,20 @@
+<ul fd-list [byline]="true">
+    <li fd-list-item *ngFor="let item of formItem.choices" [selected]="currentTheme === item.value">
+        <a fd-list-link (fdkClicked)="setTheme(item.value)">
+            <ng-container *ngIf="!item.template">
+                <div fd-list-thumbnail class="settings-selector-list__theme--{{ item.value }}">
+                    <fdp-theme-selector-list-icon></fdp-theme-selector-list-icon>
+                </div>
+                <div fd-list-content>
+                    <div fd-list-title>{{ item.label }}</div>
+                    <div fd-list-byline>{{ item.description }}</div>
+                </div>
+            </ng-container>
+            <ng-template
+                [ngIf]="item.template"
+                [ngTemplateOutlet]="item.template!"
+                [ngTemplateOutletContext]="{ $implicit: item }"
+            ></ng-template>
+        </a>
+    </li>
+</ul>

@@ -2,7 +2,7 @@ import { Directive, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { PlatformFormField, SelectItem } from '@fundamental-ngx/platform/shared';
-import { PreparedDynamicFormFieldItem } from './interfaces/dynamic-form-item';
+import { BaseDynamicFormFieldItem, PreparedDynamicFormFieldItem } from './interfaces/dynamic-form-item';
 import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from './providers/providers';
 
 export interface BaseDynamicFormGeneratorControlInterface {
@@ -19,11 +19,13 @@ export interface BaseDynamicFormGeneratorControlInterface {
 @Directive({
     providers: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
 })
-export abstract class BaseDynamicFormGeneratorControl implements BaseDynamicFormGeneratorControlInterface {
+export abstract class BaseDynamicFormGeneratorControl<T extends BaseDynamicFormFieldItem = BaseDynamicFormFieldItem>
+    implements BaseDynamicFormGeneratorControlInterface
+{
     /**
      * @description @see DynamicFormItem.
      */
-    @Input() formItem: PreparedDynamicFormFieldItem;
+    @Input() formItem: PreparedDynamicFormFieldItem<T>;
 
     /**
      * @description Id of the control.

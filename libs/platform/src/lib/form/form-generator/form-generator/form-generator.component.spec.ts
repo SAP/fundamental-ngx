@@ -19,7 +19,7 @@ import { DynamicFormFieldItem } from '../interfaces/dynamic-form-item';
 import { FormGeneratorComponent } from './form-generator.component';
 import { DynamicFormControlDirective } from '../dynamic-form-control.directive';
 import { DynamicFormControlFieldDirective } from '../dynamic-form-control-field.directive';
-import { DynamicFormGeneratorInputComponent } from '../dynamic-form-generator-input/dynamic-form-generator-input.component';
+import { DynamicFormGeneratorInputComponent } from '../controls/dynamic-form-generator-input/dynamic-form-generator-input.component';
 import { FormGeneratorService } from '../form-generator.service';
 
 @Component({

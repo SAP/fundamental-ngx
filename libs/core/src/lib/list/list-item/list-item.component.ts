@@ -10,6 +10,7 @@ import {
     forwardRef,
     HostBinding,
     HostListener,
+    inject,
     Inject,
     Input,
     OnChanges,
@@ -198,6 +199,11 @@ export class ListItemComponent
 
     /** @hidden */
     readonly _uniqueId = 'fd-list-item-' + ++listItemUniqueId;
+
+    /** @hidden */
+    readonly _list = inject(FD_LIST_UNREAD_INDICATOR, {
+        optional: true
+    });
 
     /** @hidden */
     constructor(

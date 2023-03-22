@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { cloneDeep, merge } from 'lodash-es';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { THEME_SWITCHER_ROUTER_MISSING_ERROR } from '@fundamental-ngx/cdk/utils';
+import { Nullable, THEME_SWITCHER_ROUTER_MISSING_ERROR } from '@fundamental-ngx/cdk/utils';
 import { BaseThemingConfig } from './config';
 import { ThemingConfig } from './interfaces/theming-config.interface';
 import { STANDARD_THEMES } from './standard-themes';
@@ -18,11 +18,13 @@ import { THEMING_CONFIG_TOKEN } from './tokens';
 
 @Injectable()
 export class ThemingService implements OnDestroy {
-    /** @hidden */
-    private readonly config = new BaseThemingConfig();
+    /**
+     * Theming configuration.
+     */
+    readonly config = new BaseThemingConfig();
 
     /**
-     * Current theme applied to the application.
+     * Observable of the current theme, applied to the application.
      */
     get currentTheme(): Observable<CompleteThemeDefinition | null> {
         return this._currentThemeSubject.asObservable();
@@ -39,9 +41,6 @@ export class ThemingService implements OnDestroy {
 
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
-    private _currentTheme: CompleteThemeDefinition;
 
     /** @hidden */
     private readonly _currentThemeSubject: BehaviorSubject<CompleteThemeDefinition | null> =
@@ -110,7 +109,6 @@ export class ThemingService implements OnDestroy {
             this._setThemeResource('fonts', theme.theming.themeFontPath);
         }
 
-        this._currentTheme = theme;
         this._currentThemeSubject.next(theme);
 
         return true;
@@ -121,6 +119,13 @@ export class ThemingService implements OnDestroy {
      */
     getThemes(): CompleteThemeDefinition[] {
         return [...this._availableThemes].map((entry) => entry[1]);
+    }
+
+    /**
+     * Returns current theme definition.
+     */
+    getCurrentTheme(): Nullable<ThemeDefinition> {
+        return this._currentThemeSubject.value;
     }
 
     /**

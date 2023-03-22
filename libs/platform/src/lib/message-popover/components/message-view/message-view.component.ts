@@ -104,6 +104,10 @@ export class MessageViewComponent implements AfterViewInit {
     @Output()
     openDetails = new EventEmitter<MessagePopoverEntry>();
 
+    /** Event emitted when user clicks on error entry and item's element should be focused. */
+    @Output()
+    focusItem = new EventEmitter<MessagePopoverEntry>();
+
     /** Event emitted when user clicks on the field link to focus on the field itself. */
     @Output()
     closePopover = new EventEmitter<boolean>();
@@ -144,7 +148,7 @@ export class MessageViewComponent implements AfterViewInit {
     _showDetails(entry: MessagePopoverEntry): void {
         this._activeListElement = this._document.activeElement as HTMLElement;
         if (!entry.description.message) {
-            this._focusElement(undefined, entry.element);
+            this._focusElement(undefined, entry);
             return;
         }
         this.currentScreen = 'details';
@@ -152,14 +156,15 @@ export class MessageViewComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    _focusElement(event?: MouseEvent, item?: ElementRef): void {
-        if (!item?.nativeElement) {
+    _focusElement(event?: MouseEvent, item?: MessagePopoverEntry): void {
+        if (!item?.element?.nativeElement) {
             return;
         }
         event?.stopImmediatePropagation();
         this.closePopover.emit(false);
+        this.focusItem.emit(item);
         setTimeout(() => {
-            const tabbableElement = this._tabbableService.getTabbableElement(item.nativeElement);
+            const tabbableElement = this._tabbableService.getTabbableElement(item.element?.nativeElement);
             tabbableElement?.focus();
         });
     }

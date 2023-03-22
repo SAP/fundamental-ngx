@@ -2,20 +2,20 @@ import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 
-const gridListDefaultTs = 'default/grid-list-example.component';
-const gridListSingleSelectTs = 'single-select/grid-list-single-select-example.component';
-const gridListSingleSelectLeftTs = 'single-select-left/grid-list-single-select-left-example.component';
-const gridListSingleSelectRightTs = 'single-select-right/grid-list-single-select-right-example.component';
-const gridListMultiSelectTs = 'multi-select/grid-list-multi-select-example.component';
-const gridListDeleteTs = 'delete/grid-list-delete-example.component';
-const gridListGroupTs = 'group/grid-list-group-example.component';
-const gridListStatesTs = 'states/grid-list-states-example.component';
-const gridListStatusesTs = 'statuses/grid-list-statuses-example.component';
-const gridListMoreTs = 'more/grid-list-more-example.component';
-const gridListFooterTs = 'footer/grid-list-footer-example.component';
-const gridListDndTs = 'dnd/grid-list-dnd-example.component';
-const gridListLayoutTs = 'layout/grid-list-layout-example.component';
-const gridListFocusingTs = 'focusing/grid-list-focusing-example.component';
+const gridListDefaultTs = 'default/grid-list-example.component.ts';
+const gridListSingleSelectTs = 'single-select/grid-list-single-select-example.component.ts';
+const gridListSingleSelectLeftTs = 'single-select-left/grid-list-single-select-left-example.component.ts';
+const gridListSingleSelectRightTs = 'single-select-right/grid-list-single-select-right-example.component.ts';
+const gridListMultiSelectTs = 'multi-select/grid-list-multi-select-example.component.ts';
+const gridListDeleteTs = 'delete/grid-list-delete-example.component.ts';
+const gridListGroupTs = 'group/grid-list-group-example.component.ts';
+const gridListStatesTs = 'states/grid-list-states-example.component.ts';
+const gridListStatusesTs = 'statuses/grid-list-statuses-example.component.ts';
+const gridListMoreTs = 'more/grid-list-more-example.component.ts';
+const gridListFooterTs = 'footer/grid-list-footer-example.component.ts';
+const gridListDndTs = 'dnd/grid-list-dnd-example.component.ts';
+const gridListLayoutTs = 'layout/grid-list-layout-example.component.ts';
+const gridListFocusingTs = 'focusing/grid-list-focusing-example.component.ts';
 
 const scssFileCode = 'grid-list.component.scss';
 

@@ -583,7 +583,7 @@ export class FormFieldComponent
             this._updateHintOptions();
             this._formFieldLayoutService.setNeedsInlineHelp(
                 this,
-                this.hintOptions.target === 'input' || this.hintOptions.target === 'auto'
+                (this.hintOptions.target === 'input' || this.hintOptions.target === 'auto') && !!this.hint
             );
         }
         if (changes.hint && changes.hint.firstChange) {

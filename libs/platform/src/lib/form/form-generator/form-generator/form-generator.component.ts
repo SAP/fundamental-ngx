@@ -15,9 +15,9 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { FormGroupDirective, NgForm } from '@angular/forms';
-import { debounceTime, takeUntil } from 'rxjs/operators';
-import { Subject, Subscription } from 'rxjs';
+import { FormControlStatus, FormGroupDirective, NgForm } from '@angular/forms';
+import { debounceTime, filter, startWith, switchMap, take, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import {
     ColumnLayout,
     FieldHintOptions,
@@ -54,6 +54,8 @@ import { FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS } from '../form-generator.token
 import { defaultFormGeneratorHintOptions } from '../config/default-form-generator-hint-options';
 
 let formUniqueId = 0;
+
+export const FDP_FORM_IGNORED_STATUSES: FormControlStatus[] = ['INVALID', 'PENDING', 'DISABLED'];
 
 export interface SubmitFormEventResult {
     /**
@@ -102,7 +104,13 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      * @description Form main title.
      */
     @Input()
-    mainTitle: string;
+    mainTitle: Nullable<string>;
+
+    /**
+     * Whether to hide main title. Default is false.
+     */
+    @Input()
+    hideMainTItle = false;
 
     /**
      * @description
@@ -239,6 +247,21 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      */
     formLoading = true;
 
+    /**
+     * Stream of form loading state.
+     */
+    loading$ = new BehaviorSubject<boolean>(this.formLoading);
+
+    /**
+     * Stream of last form submission status.
+     */
+    formSubmittedStatus$ = new Subject<SubmitFormEventResult>();
+
+    /**
+     * Stream of last form submission value.
+     */
+    formValue$ = new BehaviorSubject<DynamicFormValue>({});
+
     /** @hidden
      * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
      */
@@ -273,6 +296,9 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
 
     /** @hidden */
     private readonly _defaultHintOptions: FieldHintOptions;
+
+    /** @hidden */
+    private _ngSubmitSubscription: Subscription | undefined;
 
     /** @hidden */
     constructor(
@@ -311,6 +337,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+        this._ngSubmitSubscription?.unsubscribe();
     }
 
     /**
@@ -328,16 +355,16 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         this.form.markAllAsTouched();
         this._cd.detectChanges();
 
-        // stop here if form is invalid
-        if (this.form.invalid || this.form.pending) {
-            this.formSubmittedStatus.emit({ success: false, value: null });
-            return;
-        }
-
         const formValue = await this._fgService.getFormValue(this.form);
 
+        this.formSubmittedStatus.emit({ success: !this.form.invalid, value: formValue });
+        this.formSubmittedStatus$.next({ success: !this.form.invalid, value: formValue });
+
+        if (this.form.invalid) {
+            return;
+        }
         this.formSubmitted.emit(formValue);
-        this.formSubmittedStatus.emit({ success: true, value: formValue });
+        this.formValue$.next(formValue);
 
         this.form.markAsPristine();
     }
@@ -347,6 +374,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      */
     private async _generateForm(): Promise<void> {
         this.formLoading = true;
+        this.loading$.next(this.formLoading);
 
         const form = await this._fgService.generateForm(this.formName, this.formItems);
 
@@ -371,10 +399,13 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         this._cd.detectChanges();
 
         this.formCreated.emit(this.form);
+        this.loading$.next(this.formLoading);
 
-        this.formGroup.ngSubmit.subscribe(async () => {
-            await this._onSubmit();
-        });
+        if (!this.formGroup) {
+            return;
+        }
+
+        this._listenToSubmit();
     }
 
     /**
@@ -448,5 +479,26 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         });
 
         return returnErrors;
+    }
+
+    /** @hidden */
+    private _listenToSubmit(): void {
+        this._ngSubmitSubscription?.unsubscribe();
+        this._ngSubmitSubscription = this.formGroup.ngSubmit
+            .pipe(
+                switchMap(() =>
+                    this.formGroup.statusChanges!.pipe(
+                        startWith(this.formGroup.status),
+                        filter((status: FormControlStatus) => status !== 'PENDING'),
+                        take(1),
+                        // filter((status) => status !== 'INVALID'),
+                        takeUntil(this._onDestroy$)
+                    )
+                )
+            )
+            .subscribe(async () => {
+                await this._onSubmit();
+                this._listenToSubmit();
+            });
     }
 }

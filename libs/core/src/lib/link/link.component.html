@@ -1,7 +1,7 @@
 <span *ngIf="_prefixPortal">
     <ng-container *cdkPortalOutlet="_prefixPortal"></ng-container>
 </span>
-<span class="fd-link__content" #content>
+<span class="fd-link__content" #content [class.fd-link__content--icon-line-height]="_postfixPortal || _prefixPortal">
     <ng-content></ng-content>
 </span>
 <span *ngIf="_postfixPortal">

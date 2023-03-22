@@ -641,12 +641,8 @@ export class DatePickerComponent<D>
             selected = this._parseDate(selected);
             this.selectedDate = selected;
 
-            if (this._isSingleModelValid(this.selectedDate)) {
-                this._inputFieldDate = this._formatDate(selected);
-                this._refreshCurrentlyDisplayedCalendarDate(selected);
-            } else {
-                this._inputFieldDate = '';
-            }
+            this._inputFieldDate = this._formatDate(selected);
+            this._refreshCurrentlyDisplayedCalendarDate(selected);
         }
         if (this.type === 'range') {
             /**
@@ -661,12 +657,8 @@ export class DatePickerComponent<D>
                     end: this._parseDate(selected.end)
                 };
 
-                if (this._isRangeModelValid(this.selectedRangeDate)) {
-                    this._refreshCurrentlyDisplayedCalendarDate(selected.start);
-                    this._inputFieldDate = this._formatDateRange(selected);
-                } else {
-                    this._inputFieldDate = '';
-                }
+                this._refreshCurrentlyDisplayedCalendarDate(selected.start);
+                this._inputFieldDate = this._formatDateRange(selected);
             } else {
                 this._inputFieldDate = '';
             }
