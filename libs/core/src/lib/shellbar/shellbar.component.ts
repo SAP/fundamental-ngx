@@ -73,6 +73,13 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     @Input()
     sideNav = false;
 
+    /**
+     * Whether the Shellbar is used with CX Side Navigation
+     * When set to true, the responsive paddings are not applied
+     */
+    @Input()
+    cxSideNav = false;
+
     /** @hidden */
     @ContentChild(FD_COMBOBOX_COMPONENT, { static: false })
     comboboxComponent: ComboboxInterface;

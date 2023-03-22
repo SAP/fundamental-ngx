@@ -65,6 +65,10 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     @Input()
     narrow = false;
 
+    /** Whether this side nav should display in mobile (fullscreen) mode. */
+    @Input()
+    mobile = false;
+
     /** Whether clicking on elements should change selected state of items */
     @Input()
     set selectable(selectable: boolean) {

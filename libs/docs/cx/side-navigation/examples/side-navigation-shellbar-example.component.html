@@ -1,0 +1,182 @@
+<fd-shellbar [cxSideNav]="true">
+    <button
+        fd-shellbar-side-nav
+        fd-button
+        fdType="transparent"
+        glyph="menu2"
+        style="width: 2.75rem"
+        (click)="condensed = !condensed"
+    ></button>
+    <fd-shellbar-logo>
+        <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+    </fd-shellbar-logo>
+
+    <fd-product-menu [control]="productMenuControl" [closePopoverOnSelect]="true" [items]="productMenuItems">
+    </fd-product-menu>
+
+    <fd-shellbar-subtitle> Subtitle </fd-shellbar-subtitle>
+
+    <fdp-search-field
+        placeholder="Search"
+        [suggestions]="suggestions"
+        [categories]="categories"
+        (searchSubmit)="onSearchSubmit($event)"
+        (inputChange)="onInputChange($event)"
+    ></fdp-search-field>
+
+    <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
+        <fd-shellbar-action
+            *ngFor="let action of actions"
+            [glyph]="action.glyph"
+            [callback]="action.callback"
+            [label]="action.label"
+            [notificationCount]="action.notificationCount"
+            [notificationLabel]="action.notificationLabel"
+        ></fd-shellbar-action>
+
+        <fd-product-switch>
+            <fd-product-switch-body [products]="productSwitcher"> </fd-product-switch-body>
+        </fd-product-switch>
+    </fd-shellbar-actions>
+</fd-shellbar>
+<div style="height: 480px">
+    <fdx-side-nav>
+        <div fdx-side-nav-main>
+            <ul fdx-nested-list>
+                <li fdx-nested-list-item>
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon glyph="home"></i>
+                        <span fdx-nested-list-title>Level 1 Item</span>
+                    </a>
+                </li>
+                <li fdx-nested-list-item>
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon glyph="crossed-line-chart"></i>
+                        <span fdx-nested-list-title>Level 1 Item</span>
+                    </a>
+                </li>
+                <li fdx-nested-list-item>
+                    <fdx-nested-list-popover>
+                        <button fdx-nested-list-link>
+                            <i fdx-nested-list-icon glyph="task"></i>
+                            <span fdx-nested-list-title>Level 1 Item with children</span>
+                            <i fdx-nested-list-expand-icon></i>
+                        </button>
+                        <ul fdx-nested-list>
+                            <li fdx-nested-list-item [header]="true">
+                                <a fdx-nested-list-link>
+                                    <span fdx-nested-list-title>Header (Navigable)</span>
+                                </a>
+                            </li>
+                            <li fdx-nested-list-item>
+                                <a fdx-nested-list-link>
+                                    <span fdx-nested-list-title>Level 2 Item</span>
+                                </a>
+                            </li>
+                            <li fdx-nested-list-item>
+                                <button fdx-nested-list-link>
+                                    <span fdx-nested-list-title>Level 2 Item with children</span>
+                                    <i fdx-nested-list-expand-icon></i>
+                                </button>
+                                <ul fdx-nested-list>
+                                    <li fdx-nested-list-item>
+                                        <a fdx-nested-list-link>
+                                            <span fdx-nested-list-title>Level 3 Item</span>
+                                        </a>
+                                    </li>
+                                    <li fdx-nested-list-item>
+                                        <a fdx-nested-list-link>
+                                            <span fdx-nested-list-title>Level 3 Item</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li fdx-nested-list-item>
+                                <a fdx-nested-list-link>
+                                    <span fdx-nested-list-title>Level 2 Item</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </fdx-nested-list-popover>
+                </li>
+                <li fdx-nested-list-item>
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon glyph="settings"></i>
+                        <span fdx-nested-list-title>Level 1 Item</span>
+                    </a>
+                </li>
+                <li fdx-nested-list-item>
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon glyph="calendar"></i>
+                        <span fdx-nested-list-title>Level 1 Item</span>
+                    </a>
+                </li>
+                <li fdx-nested-list-item>
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon glyph="customer"></i>
+                        <span fdx-nested-list-title>Level 1 Item</span>
+                    </a>
+                </li>
+                <li fdx-nested-list-item>
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon glyph="windows-doors"></i>
+                        <span fdx-nested-list-title>Level 1 Item</span>
+                    </a>
+                </li>
+                <li fdx-nested-list-item>
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon glyph="washing-machine"></i>
+                        <span fdx-nested-list-title>Level 1 Item</span>
+                    </a>
+                </li>
+                <li fdx-nested-list-item>
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon glyph="visits"></i>
+                        <span fdx-nested-list-title>Level 1 Item</span>
+                    </a>
+                </li>
+                <li fdx-nested-list-item>
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon glyph="video"></i>
+                        <span fdx-nested-list-title>Level 1 Item</span>
+                    </a>
+                </li>
+                <li fdx-nested-list-item>
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon glyph="shortcut"></i>
+                        <span fdx-nested-list-title>Level 1 Item</span>
+                    </a>
+                </li>
+                <li fdx-nested-list-item>
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon glyph="timesheet"></i>
+                        <span fdx-nested-list-title>Level 1 Item</span>
+                    </a>
+                </li>
+                <li fdx-nested-list-item>
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon glyph="business-objects-explorer"></i>
+                        <span fdx-nested-list-title>Level 1 Item</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div fdx-side-nav-utility>
+            <ul fdx-nested-list [textOnly]="true">
+                <li fdx-nested-list-item>
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon glyph="employee"></i>
+                        <span fdx-nested-list-title>Level 1 Item</span>
+                    </a>
+                </li>
+                <li fdx-nested-list-item>
+                    <a fdx-nested-list-link>
+                        <i fdx-nested-list-icon glyph="activities"></i>
+                        <span fdx-nested-list-title>Level 1 Item</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </fdx-side-nav>
+</div>

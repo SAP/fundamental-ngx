@@ -1,5 +1,10 @@
 @import 'fundamental-styles/dist/shellbar';
 
+.fd-shellbar--cx-side-nav {
+    box-shadow: var(--sapContent_Shadow0);
+    padding-left: 0.5rem;
+}
+
 fd-shellbar-actions {
     .fd-shellbar__search-field {
         min-width: 15rem;
