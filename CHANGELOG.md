@@ -1,3 +1,12 @@
+## [0.39.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.21...v0.39.1-rc.22) (2023-03-22)
+
+
+### Features
+
+* **platform:** settings generator ([#9497](https://github.com/SAP/fundamental-ngx/issues/9497)) ([d11427a](https://github.com/SAP/fundamental-ngx/commit/d11427aba01ba7ee7af6cb25b50a101a88c1af07))
+
+
+
 ## [0.39.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.20...v0.39.1-rc.21) (2023-03-22)
 
 
