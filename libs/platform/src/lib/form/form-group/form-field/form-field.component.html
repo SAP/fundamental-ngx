@@ -12,7 +12,11 @@
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
         <ng-container *ngTemplateOutlet="gapTemplate"></ng-container>
     </div>
-    <span aria-hidden="true" style="display: none" [id]="'fdp-form-hint-' + id">{{ hintOptions.text }}</span>
+    <span aria-hidden="true" style="display: none" [id]="'fdp-form-hint-' + id">
+        <ng-container *ngIf="isStringHint(hintOptions.content); else $any(hintOptions.content)">
+            {{ hintOptions.content }}
+        </ng-container>
+    </span>
 </ng-template>
 
 <ng-template #withFormMessage>
