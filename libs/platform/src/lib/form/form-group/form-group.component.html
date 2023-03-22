@@ -8,7 +8,7 @@
 </ng-template>
 
 <ng-template #fields>
-    <div *ngIf="mainTitle" class="fd-form-header">
+    <div *ngIf="mainTitle && !hideMainTItle" class="fd-form-header">
         <ng-template [ngTemplateOutlet]="mainTitleTemplate"></ng-template>
     </div>
 

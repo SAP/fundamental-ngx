@@ -1,4 +1,7 @@
-<span fd-list-title>
-    <ng-content></ng-content>
+<span fd-list-title *ngIf="_renderer === 'title'; else plainRenderer">
+    <ng-template *ngTemplateOutlet="plainRenderer"></ng-template>
 </span>
+<ng-template #plainRenderer>
+    <ng-content></ng-content>
+</ng-template>
 <ng-content select="[secondary]"></ng-content>

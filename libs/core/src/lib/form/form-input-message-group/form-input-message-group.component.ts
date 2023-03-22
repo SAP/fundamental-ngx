@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { TriggerConfig } from '@fundamental-ngx/core/popover';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 @Component({
@@ -14,7 +15,7 @@ export class FormInputMessageGroupComponent {
      * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
      */
     @Input()
-    triggers: string[] = ['focusin', 'focusout'];
+    triggers: (string | TriggerConfig)[] = ['focusin', 'focusout'];
 
     /**
      * Allows the user to decide if he wants to keep the error message after they click outside

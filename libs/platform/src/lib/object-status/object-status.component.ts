@@ -34,7 +34,7 @@ export class ObjectStatusComponent {
      * Glyph (icon) of the Object Status.
      */
     @Input()
-    glyph: string;
+    glyph: Nullable<string>;
 
     /**
      * A number representing the indication color.

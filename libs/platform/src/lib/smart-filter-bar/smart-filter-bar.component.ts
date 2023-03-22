@@ -616,7 +616,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
                 }
             },
             when: () => this._selectedFilters.includes(column.name)
-        };
+        } as SmartFilterBarDynamicFormFieldItem;
     }
 
     /**

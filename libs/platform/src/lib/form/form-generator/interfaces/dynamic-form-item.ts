@@ -1,3 +1,4 @@
+import { TemplateRef } from '@angular/core';
 import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Observable } from 'rxjs';
@@ -16,8 +17,16 @@ import { InputType } from '../../input/input.component';
 import { DynamicFormGroup } from './dynamic-form-group';
 import { DynamicFormControl, DynamicFormGroupControl } from '../dynamic-form-control';
 import { TextAlignment } from '../../combobox';
+import { FdDate } from '@fundamental-ngx/core/datetime';
+import { ObjectStatus } from '@fundamental-ngx/core/object-status';
+import { IndicationColorType } from '@fundamental-ngx/platform/object-status';
 
-export type DynamicFormItemChoices = number | string | SelectItem;
+export type DynamicFormItemChoice<T = any> =
+    | DynamicFormItemChoiceTypes<T>[]
+    | Observable<DynamicFormItemChoiceTypes<T>[]>
+    | Promise<DynamicFormItemChoiceTypes<T>[]>;
+
+export type DynamicFormItemChoiceTypes<T = any> = number | string | SelectItem<T>;
 /** Advanced error type. Used to render more complex error view with custom error type. */
 export interface DynamicFormItemValidationObject {
     /** Error heading. */
@@ -28,7 +37,16 @@ export interface DynamicFormItemValidationObject {
     type: FormStates;
 }
 export type DynamicFormItemValidationResult = null | boolean | string | DynamicFormItemValidationObject;
-export type DynamicFormItem = DynamicFormFieldGroup | DynamicFormFieldItem;
+/**
+ * Dynamic form item type.
+ *
+ * `T` type represents additional type properties.
+ * `U` type represents additional `DynamicFormFieldItem` interface.
+ */
+export type DynamicFormItem<
+    T extends Record<string, any> = Record<string, any>,
+    U extends BaseDynamicFormFieldItem = AnyDynamicFormFieldItem
+> = DynamicFormFieldGroup | DynamicFormFieldItem<T, U>;
 
 export interface DynamicFormFieldGroup {
     /**
@@ -71,22 +89,14 @@ export interface DynamicFormFieldGroup {
     guiOptions?: BaseDynamicFormItemGuiOptions;
 }
 
-/**
- * Dynamic form item object interface which is used for generating form controls of defined type with validation rules.
- */
-export interface DynamicFormFieldItem {
+export type FdpFormGeneratorAsyncProperty<T = string> = T | Promise<T> | Observable<T>;
+
+export interface BaseDynamicFormFieldItem<T = any> {
     /**
      * @description
      * Type of the form item. E.g. input, textarea, checkbox, etc.
      */
     type: string;
-
-    /**
-     * @description
-     * Additional set of options that can affect UI of the form item form control.
-     */
-    controlType?: InputType;
-
     /**
      * @description
      * ID of the form item, if not provided, name will be used instead
@@ -104,14 +114,18 @@ export interface DynamicFormFieldItem {
      * Display name of the form item.
      * @param formValue the form value hash.
      */
-    message: string | ((formValue?: DynamicFormValue) => string | Promise<string> | Observable<string>);
+    message:
+        | FdpFormGeneratorAsyncProperty<string>
+        | ((formValue?: DynamicFormValue) => FdpFormGeneratorAsyncProperty<string>);
 
     /**
      * @description
      * Display placeholder of the form item.
      * @param formValue the form value hash.
      */
-    placeholder?: string | ((formValue?: DynamicFormValue) => string | Promise<string> | Observable<string>);
+    placeholder?:
+        | FdpFormGeneratorAsyncProperty<string>
+        | ((formValue?: DynamicFormValue) => FdpFormGeneratorAsyncProperty<string>);
 
     /**
      * @description
@@ -123,18 +137,7 @@ export interface DynamicFormFieldItem {
      * @description
      * Default value of the form item.
      */
-    default?: any | ((formValue?: DynamicFormValue) => any | Promise<any> | Observable<any>);
-
-    /**
-     * @description
-     * The list of available options to select.
-     * @param formValue raw form item value.
-     */
-    choices?:
-        | DynamicFormItemChoices[]
-        | ((
-              formValue?: DynamicFormValue
-          ) => DynamicFormItemChoices[] | Promise<DynamicFormItemChoices[]> | Observable<DynamicFormItemChoices[]>);
+    default?: FdpFormGeneratorAsyncProperty<T> | ((formValue?: DynamicFormValue) => FdpFormGeneratorAsyncProperty<T>);
 
     /**
      * @description
@@ -146,7 +149,7 @@ export interface DynamicFormFieldItem {
      * @returns null or String
      */
     validate?: (
-        formItemValue?: any,
+        formItemValue: T,
         formValue?: DynamicFormValue
     ) =>
         | DynamicFormItemValidationResult
@@ -178,7 +181,7 @@ export interface DynamicFormFieldItem {
      * @returns updated form item value to be used in the form value hash.
      */
     transformer?: (
-        formItemValue?: any,
+        formItemValue: T,
         formValue?: DynamicFormValue,
         formItem?: DynamicFormFieldItem
     ) => any | Promise<any>;
@@ -191,7 +194,7 @@ export interface DynamicFormFieldItem {
      * @returns updated form item value to be used in the form value hash for rendering purposes.
      */
     valueRenderer?: (
-        formItemValue?: any,
+        formItemValue: T,
         formValue?: DynamicFormValue,
         formItem?: DynamicFormFieldItem
     ) => any | Promise<any>;
@@ -216,7 +219,7 @@ export interface DynamicFormFieldItem {
      * @param control Dynamic form control.
      */
     onchange?: (
-        fieldValue: any,
+        fieldValue: T,
         forms: Map<string, DynamicFormGroup>,
         control: DynamicFormControl
     ) => void | Promise<void> | Observable<void>;
@@ -230,18 +233,48 @@ export interface DynamicFormFieldItem {
 
     /**
      * @description
-     * Additional set of options that can affect UI of the form item form control.
-     */
-    guiOptions?: DynamicFormItemGuiOptions;
-
-    /**
-     * @description
      * Rank is used for ordering.
      * Than lower number then higher priority.
      */
     rank?: number;
 
-    /** The field to show data in secondary column */
+    /**
+     * @description
+     * Additional set of options that can affect UI of the form item form control.
+     */
+    guiOptions?: DynamicFormItemGuiOptions;
+}
+
+export interface InputDynamicFormFieldItem extends BaseDynamicFormFieldItem<string> {
+    type: 'input' | 'email' | 'number' | 'password';
+    /**
+     * @description
+     * Additional set of options that can affect UI of the form item form control.
+     */
+    controlType?: InputType;
+}
+
+export interface DatePickerDynamicFormFieldItem extends BaseDynamicFormFieldItem<FdDate> {
+    type: 'datepicker';
+}
+
+export interface TextAreaDynamicFormFieldItem extends BaseDynamicFormFieldItem<string> {
+    type: 'editor' | 'textarea';
+}
+
+export interface SwitchDynamicFormFieldItem extends BaseDynamicFormFieldItem<boolean> {
+    type: 'switch';
+}
+
+export interface SelectDynamicFormFieldItem<T = DynamicFormItemChoiceTypes<any>> extends BaseDynamicFormFieldItem<T> {
+    type: 'select' | 'list' | 'multi-input';
+    /**
+     * @description
+     * The list of available options to select.
+     * @param formValue raw form item value.
+     */
+    choices?: DynamicFormItemChoice | ((formValue?: DynamicFormValue) => DynamicFormItemChoice);
+
     secondaryKey?: string;
 
     /** Show the second column (Applicable for two columns layout) */
@@ -249,10 +282,57 @@ export interface DynamicFormFieldItem {
 
     /** Horizontally align text inside the second column (Applicable for two columns layout) */
     secondaryTextAlignment?: TextAlignment;
+    /** Custom template used to build control body. */
+    controlTemplate?: TemplateRef<any>;
 }
+
+export interface RadioDynamicFormFieldItem extends Omit<SelectDynamicFormFieldItem<any>, 'type'> {
+    type: 'radio' | 'confirm';
+}
+
+export interface CheckboxDynamicFormFieldItem extends Omit<SelectDynamicFormFieldItem<any>, 'type'> {
+    type: 'checkbox';
+}
+
+export interface ObjectStatusDynamicFormFieldItem extends BaseDynamicFormFieldItem<string> {
+    type: 'object-status';
+    guiOptions?: BaseDynamicFormFieldItem['guiOptions'] & {
+        status?: ObjectStatus;
+        icon?: string;
+        indicationColor?: IndicationColorType;
+    };
+}
+
+export interface AnyDynamicFormFieldItem<T = any> extends BaseDynamicFormFieldItem<T> {
+    type: string;
+    /**
+     * @description
+     * The list of available options to select.
+     * @param formValue raw form item value.
+     */
+    choices?: DynamicFormItemChoice | ((formValue?: DynamicFormValue) => DynamicFormItemChoice);
+}
+
+export type DynamicFormFieldItem<
+    T extends Record<string, any> = Record<string, any>,
+    U extends BaseDynamicFormFieldItem = AnyDynamicFormFieldItem
+> = T &
+    (
+        | InputDynamicFormFieldItem
+        | DatePickerDynamicFormFieldItem
+        | TextAreaDynamicFormFieldItem
+        | SwitchDynamicFormFieldItem
+        | SelectDynamicFormFieldItem
+        | RadioDynamicFormFieldItem
+        | CheckboxDynamicFormFieldItem
+        | ObjectStatusDynamicFormFieldItem
+        | U
+        | AnyDynamicFormFieldItem
+    );
 
 type PreparedDynamicFormFieldItemFields = {
     message: string;
+    default: any;
     placeholder?: string;
     choices?: SelectItem[];
 };
@@ -261,7 +341,10 @@ type PreparedDynamicFormFieldItemFields = {
  * @hidden
  * Internal representation of DynamicFormFieldItem with all fields resolved to a plain value
  */
-export type PreparedDynamicFormFieldItem = Omit<DynamicFormFieldItem, keyof PreparedDynamicFormFieldItemFields> &
+export type PreparedDynamicFormFieldItem<T extends BaseDynamicFormFieldItem = BaseDynamicFormFieldItem> = Omit<
+    T,
+    keyof PreparedDynamicFormFieldItemFields
+> &
     PreparedDynamicFormFieldItemFields;
 
 export interface BaseDynamicFormItemGuiOptions {

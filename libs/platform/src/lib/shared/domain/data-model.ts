@@ -1,5 +1,6 @@
 import { coerceArray } from '@angular/cdk/coercion';
 import { isBlank } from './../utils/lang';
+import { TemplateRef } from '@angular/core';
 
 /**
  * Interface SelectItem is used to deal with complex object in order to be able to format
@@ -28,6 +29,18 @@ export interface SelectItem<T = any> {
     isGroup?: boolean;
     secondaryText?: string;
     children?: SelectItem[];
+
+    /**
+     * @hidden
+     * Used in settings generator only.
+     */
+    description?: string;
+
+    /**
+     * @hidden
+     * Used in settings generator only.
+     */
+    template?: TemplateRef<any>;
 }
 
 export interface OptionItem {

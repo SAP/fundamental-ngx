@@ -5,20 +5,18 @@
     "prefix": "fdp",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["{workspaceRoot}/dist/libs/platform/message-popover"],
             "options": {
-                "project": "libs/platform/src/lib/message-popover/ng-package.json"
+                "tsConfig": "libs/platform/src/lib/message-popover/tsconfig.lib.json",
+                "project": "libs/platform/src/lib/message-popover/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
             },
             "configurations": {
                 "production": {
                     "tsConfig": "libs/platform/src/lib/message-popover/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/platform/src/lib/message-popover/tsconfig.lib.json"
                 }
-            },
-            "defaultConfiguration": "production"
+            }
         },
         "test": {
             "executor": "@angular-devkit/build-angular:karma",
@@ -38,6 +36,6 @@
             }
         }
     },
-    "tags": ["scope:fdp", "type:lib"],
+    "tags": ["type:lib", "scope:fdp"],
     "implicitDependencies": ["cdk", "core"]
 }

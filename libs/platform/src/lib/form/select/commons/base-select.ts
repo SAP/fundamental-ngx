@@ -129,7 +129,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
 
     /** Custom template used to build control body. */
     @Input()
-    controlTemplate: TemplateRef<any>;
+    controlTemplate: TemplateRef<any> | undefined;
 
     /** Binds to control aria-labelledBy attribute */
     @Input()

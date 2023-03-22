@@ -1,3 +1,48 @@
+## [0.39.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.23...v0.39.1-rc.24) (2023-03-22)
+
+
+### Bug Fixes
+
+* **ci:** various hotfix script fixes ([#9568](https://github.com/SAP/fundamental-ngx/issues/9568)) ([a5ad27d](https://github.com/SAP/fundamental-ngx/commit/a5ad27db1a553d8b326b170eea68c8e2b4fd0d8b))
+
+
+
+## [0.39.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.22...v0.39.1-rc.23) (2023-03-22)
+
+
+### Bug Fixes
+
+* **core:** replaced CSSStyleSheet with ordinary style ([#9567](https://github.com/SAP/fundamental-ngx/issues/9567)) ([3e19fbe](https://github.com/SAP/fundamental-ngx/commit/3e19fbe1c24c0cb600598efaf9227ea6c73b0b17))
+
+
+
+## [0.39.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.21...v0.39.1-rc.22) (2023-03-22)
+
+
+### Features
+
+* **platform:** settings generator ([#9497](https://github.com/SAP/fundamental-ngx/issues/9497)) ([d11427a](https://github.com/SAP/fundamental-ngx/commit/d11427aba01ba7ee7af6cb25b50a101a88c1af07))
+
+
+
+## [0.39.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.20...v0.39.1-rc.21) (2023-03-22)
+
+
+### Bug Fixes
+
+* **e2e:** fix failing e2e tests ([#9565](https://github.com/SAP/fundamental-ngx/issues/9565)) ([4e9d045](https://github.com/SAP/fundamental-ngx/commit/4e9d0458a8a463dbcf939cece48161021c98af19))
+
+
+
+## [0.39.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.19...v0.39.1-rc.20) (2023-03-21)
+
+
+### Bug Fixes
+
+* **core:** various bugfixes ([#9553](https://github.com/SAP/fundamental-ngx/issues/9553)) ([fb7782b](https://github.com/SAP/fundamental-ngx/commit/fb7782b57822ef670ef75fc75419de090f4b7e7f))
+
+
+
 ## [0.39.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.18...v0.39.1-rc.19) (2023-03-20)
 
 

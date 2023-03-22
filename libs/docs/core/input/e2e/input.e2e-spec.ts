@@ -1,3 +1,4 @@
+import { wait } from '@nrwl/nx-cloud/lib/utilities/waiter';
 import {
     addValue,
     browserIsSafari,
@@ -179,7 +180,8 @@ describe('Input should ', () => {
         }
     });
 
-    it('should check displayed popover by clicking and check text', async () => {
+    // Does not make sense since clicking on label will shift the focus on the input, and inline help has focusout trigger to hide the popover.
+    xit('should check displayed popover by clicking and check text', async () => {
         await scrollIntoView(questionMark);
         await click(questionMark);
         await expect(await isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');

@@ -2,8 +2,10 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    EventEmitter,
     Input,
     OnInit,
+    Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -31,6 +33,10 @@ export class MessagePopoverComponent implements OnInit {
     /** Message Popover Wrapper component. */
     @Input()
     wrapper: MessagePopoverWrapper;
+
+    /** Event emits when user clicks on error entry and item's element needs to be focused. */
+    @Output()
+    focusItem = new EventEmitter<MessagePopoverEntry>();
 
     /** Current message popover screen. Can be `list` or `details`. */
     currentScreen: 'list' | 'details' = 'list';
@@ -68,6 +74,7 @@ export class MessagePopoverComponent implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
+        this.wrapper?.setMessagePopover(this);
         this.wrapper?.errors.pipe(takeUntil(this._destroy$)).subscribe((errors) => {
             this._groupedErrors = errors;
             this._errorTypes = [];

@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { firstValueFrom } from 'rxjs';
 import { BaseThemingConfig } from './config';
 import { STANDARD_THEMES } from './standard-themes';
 import { ThemingService } from './theming.service';
@@ -54,17 +53,17 @@ describe('ThemingService with default config', () => {
         service.init();
     });
 
-    it('should set default scheme', async () => {
-        const currentTheme = await firstValueFrom(service.currentTheme);
+    it('should set default scheme', () => {
+        const currentTheme = service.getCurrentTheme();
         expect(currentTheme?.id).toEqual(defaultConfig.defaultTheme);
     });
 
-    it('should set theme', async () => {
+    it('should set theme', () => {
         const newTheme = STANDARD_THEMES[1];
 
         service.setTheme(newTheme.id);
 
-        const currentTheme = await firstValueFrom(service.currentTheme);
+        const currentTheme = service.getCurrentTheme();
 
         expect(currentTheme?.id).toEqual(newTheme.id);
     });
@@ -96,7 +95,7 @@ describe('ThemingService with custom config', () => {
 
     it('should apply custom configuration', async () => {
         expect(service.getThemes()).toEqual(customThemes);
-        const currentTheme = await firstValueFrom(service.currentTheme);
+        const currentTheme = service.getCurrentTheme();
         expect(currentTheme?.id).toEqual(customConfig.defaultTheme);
     });
 });

@@ -34,7 +34,7 @@ describe('TextComponent', () => {
         component.text = text;
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('span[fd-lineclamp-target]').innerText).toBe(text);
+        expect(fixture.nativeElement.querySelector('span[fdkLineClampTarget]').innerText).toBe(text);
     });
 
     it('should enable whitespaces', () => {

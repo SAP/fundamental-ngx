@@ -10,3 +10,4 @@ export * from './is-compact-density';
 export * from './module-deprecations-provider';
 export * from './consumer-provider-factory';
 export * from './get-document-font-size';
+export * from './is-odd';

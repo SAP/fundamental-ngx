@@ -1,6 +1,6 @@
 {
     "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
-    "dest": "../../../../../dist/libs/platform/src/lib/variant-management",
+    "dest": "../../../../../dist/libs/platform/variant-management",
     "lib": {
         "entryFile": "./index.ts"
     }
