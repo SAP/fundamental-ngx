@@ -1,0 +1,110 @@
+$colors: (
+    'sap_fiori_3': (
+        'fill_1': #f7f7f7,
+        'fill_2': #cccccc,
+        'fill_3': #ffffff,
+        'fill_4': #d9d9d9,
+        'fill_5': #0854a0,
+        'fill_6': #6a6d70,
+        'fill_7': #354a5f,
+        'fill_8': #7996b4,
+        'fill_9': #ffffff
+    ),
+    'sap_fiori_3_dark': (
+        'fill_1': #1c2228,
+        //--sapBackgroundColor
+        'fill_2': #424f5e,
+        //--sapTile_SeparatorColor
+        'fill_3': #29313a,
+        //--sapObjectHeader_Background
+        'fill_4': #3a4552,
+        //--sapObjectHeader_BorderColor
+        'fill_5': #91c8f6,
+        //--sapSelectedColor
+        'fill_6': #d3d7d9,
+        //--sapContent_LabelColor
+        'fill_7': #354a5f,
+        //--sapShellColor
+        'fill_8': #7996b4,
+        //--sapShell_InteractiveBorderColor
+        'fill_9': #fafafa //--sapShell_TextColor,,,
+    ),
+    'sap_fiori_3_hcb': (
+        'fill_1': #000000,
+        'fill_2': #ffffff,
+        'fill_3': #000000,
+        'fill_4': #ffffff,
+        'fill_5': #0f5d94,
+        'fill_6': #ffffff,
+        'fill_7': #000000,
+        'fill_8': #ffffff,
+        'fill_9': #ffffff
+    ),
+    'sap_fiori_3_hcw': (
+        'fill_1': #ffffff,
+        'fill_2': #000000,
+        'fill_3': #ffffff,
+        'fill_4': #000000,
+        'fill_5': #8fb5ff,
+        'fill_6': #000000,
+        'fill_7': #ffffff,
+        'fill_8': #000000,
+        'fill_9': #000000
+    ),
+    'sap_horizon': (
+        'fill_1': #f5f6f7,
+        'fill_2': #cccccc,
+        'fill_3': #ffffff,
+        'fill_4': #d9d9d9,
+        'fill_5': #0070f2,
+        'fill_6': #556b82,
+        'fill_7': #ffffff,
+        'fill_8': #788fa6,
+        'fill_9': #223548
+    ),
+    'sap_horizon_dark': (
+        'fill_1': #12171c,
+        'fill_2': #475566,
+        'fill_3': #1d232a,
+        'fill_4': #2e3742,
+        'fill_5': #4db1ff,
+        'fill_6': #8396a8,
+        'fill_7': #1d232a,
+        'fill_8': #a9b4be,
+        'fill_9': #eaecee
+    ),
+    'sap_horizon_hcb': (
+        'fill_1': #000000,
+        'fill_2': #ffffff,
+        'fill_3': #000000,
+        'fill_4': #ffffff,
+        'fill_5': #0f5d94,
+        'fill_6': #ffffff,
+        'fill_7': #000000,
+        'fill_8': #ffffff,
+        'fill_9': #ffffff
+    ),
+    'sap_horizon_hcw': (
+        'fill_1': #ffffff,
+        'fill_2': #000000,
+        'fill_3': #ffffff,
+        'fill_4': #000000,
+        'fill_5': #8fb5ff,
+        'fill_6': #000000,
+        'fill_7': #ffffff,
+        'fill_8': #000000,
+        'fill_9': #000000
+    )
+);
+
+@each $set-name, $set-fill in $colors {
+    .settings-selector-list__theme--#{$set-name} {
+        border-radius: 50%;
+        border: 1px solid var(--sapContent_Illustrative_Color5);
+        @for $i from 1 through 9 {
+            .settings-selector-list-icon__cls-#{$i} {
+                fill: map-get($set-fill, 'fill_#{$i}');
+            }
+        }
+    }
+}

@@ -81,6 +81,9 @@ export class DialogConfigBase<T> implements DynamicComponentConfig {
     /** Whether the dialog should have horizontal padding. */
     horizontalPadding?: boolean = true;
 
+    /** Whether to completely disable dialog body paddings. */
+    disablePaddings?: boolean = false;
+
     /** Workaround for IE11, as `flex-grow: 1` on dialog body won't work when 'min-height' for dialog set
      * There is another way to get dialog of wanted height by setting `min-height` for dialog body.
      */

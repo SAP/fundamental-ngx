@@ -56,6 +56,7 @@
             [currentEntry]="currentEntry"
             (openDetails)="_showDetails($event)"
             (closePopover)="_closePopover($event)"
+            (focusItem)="focusItem.emit($event)"
         ></fdp-message-view>
     </div>
 </fd-popover>

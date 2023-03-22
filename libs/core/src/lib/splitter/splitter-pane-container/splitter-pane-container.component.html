@@ -15,7 +15,7 @@
                 *ngTemplateOutlet="
                     panesTemplate;
                     context: {
-                        panes: _activePanes | noDefaultPane: _defaultPane?.isOnCanvas && _activePanes.length > 1
+                        panes: _activePanes | noDefaultPane : _defaultPane?.isOnCanvas && _activePanes.length > 1
                     }
                 "
             ></ng-container>
@@ -48,6 +48,7 @@
             (startResize)="_startResize()"
             (endResize)="_endResize()"
             (resize)="_onResize(pane.id, $event)"
+            [class]="'fd-splitter__resizer--' + resizerType"
         ></fd-splitter-resizer>
     </ng-container>
 </ng-template>

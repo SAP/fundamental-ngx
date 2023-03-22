@@ -1,0 +1,118 @@
+<fd-docs-section-title id="default" componentName="settings-generator">
+    Settings Generator Standard Usage
+</fd-docs-section-title>
+<description>
+    <p>By default, Settings Generator renders with <b>Sidebar</b> layout.</p>
+    <p>
+        Sidebar list item can accept <code>thumbnail</code> property which can be either
+        <a routerLink="/core/icon">Icon</a> component configuration, or
+        <a routerLink="/core/avatar">Avatar</a> configuration.
+    </p>
+    <p>Content section can be configured in two ways:</p>
+    <ul>
+        <li><code>Form Generator</code> component, which can generate various types of forms and it's controls;</li>
+        <li><code>TemplateRef</code>, to render custom content.</li>
+    </ul>
+</description>
+<component-example>
+    <fdp-settings-generator-default-example></fdp-settings-generator-default-example>
+</component-example>
+<code-example [exampleFiles]="settingsGeneratorDefaultExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="message-popover" componentName="settings-generator">
+    Displaying validation errors with Settings Generator
+</fd-docs-section-title>
+<description>
+    <p>
+        For better user experience, each form control type of Settings generator can have own validation rules (see
+        <a routerLink="/platform/form-generator">Form Generator</a>).
+    </p>
+    <p>
+        Since Settings generator is a component with complex layout and ability to display only active section, it is
+        preferred to utilize <a routerLink="/platform/message-popover">Message Popover component</a> with it.
+    </p>
+    <p>
+        Settings Generator automatically integrates with Message Popover and listens to Message Popover entry click to
+        open appropriate section and group.
+    </p>
+</description>
+<component-example>
+    <fdp-settings-generator-message-popover-example></fdp-settings-generator-message-popover-example>
+</component-example>
+<code-example [exampleFiles]="settingsGeneratorMessagePopoverLayoutExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-layout" componentName="settings-generator">
+    Settings Generator with Custom Layout
+</fd-docs-section-title>
+<description>
+    <p>Developers can change default <b>Sidebar</b> layout to custom one.</p>
+    <p>To do so, you would need to generate a component that extends from <code>BaseSettingsGeneratorLayout</code>.</p>
+    <p>
+        This abstract class contains of <code>focusElementByPath</code> abstract method, which is required for a cases
+        when Settings Generator is used with Message Popover.
+    </p>
+    <p>The purpose of this method is to find appropriate section and set it as active.</p>
+    <p>After component has been created, register it with <code>SettingsGeneratorLayoutAccessorService</code>.</p>
+    <p>
+        In order to support Typings of your layout properties, you would need to pass a generic type of your Component's
+        properties interface into <code>SettingsModel</code>.
+    </p>
+</description>
+<component-example>
+    <fdp-settings-generator-custom-layout-example></fdp-settings-generator-custom-layout-example>
+</component-example>
+<code-example [exampleFiles]="settingsGeneratorCustomLayoutExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-controls" componentName="settings-generator">
+    Settings Generator with Custom Controls
+</fd-docs-section-title>
+<description>
+    <p>
+        Settings Generator uses <a routerLink="/platform/form-generator">Form Generator</a> component inside to render
+        forms.
+    </p>
+    <p>
+        Developers can extend default set of controls by providing additional control components via
+        <code>FormGeneratorService</code>.
+    </p>
+</description>
+<component-example>
+    <fdp-settings-generator-custom-control-example></fdp-settings-generator-custom-control-example>
+</component-example>
+<code-example [exampleFiles]="settingsGeneratorCustomControlExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="dialog" componentName="settings-generator">
+    Settings Generator in Dialog
+</fd-docs-section-title>
+<description>
+    <p>Settings Generator component can be easily embedded in Dialog component.</p>
+    <p>The example below shows how to embed Settings Dialog inside TemplateRef.</p>
+</description>
+<component-example>
+    <fdp-settings-generator-dialog-example></fdp-settings-generator-dialog-example>
+</component-example>
+<code-example [exampleFiles]="settingsGeneratorDialogLayoutExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="default-config" componentName="settings-generator">
+    Settings Generator default configuration
+</fd-docs-section-title>
+<description>
+    <p>Settings Generator can be preconfigured when importing <code>SettingsGeneratorModule</code>.</p>
+    <p>
+        To preconfigure default layout and it's properties, call <code>withConfig(config)</code> method of
+        <code>SettingsGeneratorModule</code>, where <code>config</code> is your configuration object.
+    </p>
+</description>
+<ng-container *ngIf="defaultConfigExample | async as defaultConfigExampleString">
+    <fd-code-snippet language="typescript" [contentBased]="true">{{ defaultConfigExampleString }}</fd-code-snippet>
+</ng-container>

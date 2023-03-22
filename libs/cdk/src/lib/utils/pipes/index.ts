@@ -7,3 +7,5 @@ export * from './search-highlight.pipe';
 export * from './truncate.pipe';
 export * from './two-digits.pipe';
 export * from './value-by-path.pipe';
+export * from './make-async.pipe';
+export * from './async-or-sync.pipe';

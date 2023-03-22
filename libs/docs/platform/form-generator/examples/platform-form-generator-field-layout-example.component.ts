@@ -188,8 +188,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
                 hint: 'XL: 1, L: 2, M: 1, S: 1'
             },
             validators: [Validators.required],
-            validate: (value: FdDate) =>
-                value !== null && value.year < 2020 ? null : 'You need to be born before 2020',
+            validate: (value) => (value !== null && value.year < 2020 ? null : 'You need to be born before 2020'),
             transformer: (value: FdDate) => value?.toDateString()
         },
         {

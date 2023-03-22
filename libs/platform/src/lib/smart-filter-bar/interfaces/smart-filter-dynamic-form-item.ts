@@ -3,9 +3,9 @@ import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 import { Observable } from 'rxjs';
 
-export interface SmartFilterBarDynamicFormFieldItem extends DynamicFormFieldItem {
+export type SmartFilterBarDynamicFormFieldItem = DynamicFormFieldItem<{
     guiOptions: SmartFilterBarDynamicFormFieldGuiOptions;
-}
+}>;
 
 export interface SmartFilterBarDynamicFormFieldGuiOptions extends DynamicFormItemGuiOptions {
     additionalData: {

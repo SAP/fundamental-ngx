@@ -62,6 +62,10 @@ export const components: SectionInterfaceContent[] = [
     {
         url: 'platform/variant-management',
         name: 'Variant Management'
+    },
+    {
+        url: 'platform/settings-generator',
+        name: 'Settings Generator'
     }
 ];
 

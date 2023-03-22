@@ -286,6 +286,13 @@ export const ROUTES: Routes = [
                     import('@fundamental-ngx/docs/platform/variant-management').then(
                         (m) => m.VariantManagementDocsModule
                     )
+            },
+            {
+                path: 'settings-generator',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/platform/settings-generator').then(
+                        (m) => m.SettingsGeneratorDocsModule
+                    )
             }
         ]
     }

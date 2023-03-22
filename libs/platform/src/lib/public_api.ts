@@ -30,3 +30,4 @@ export * from '@fundamental-ngx/platform/icon-tab-bar';
 export * from '@fundamental-ngx/platform/smart-filter-bar';
 export * from '@fundamental-ngx/platform/message-popover';
 export * from '@fundamental-ngx/platform/variant-management';
+export * from '@fundamental-ngx/platform/settings-generator';

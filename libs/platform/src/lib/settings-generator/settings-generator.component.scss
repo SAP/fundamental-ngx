@@ -1,0 +1,49 @@
+$block: fdp-settings-generator;
+
+.#{$block} {
+    display: block;
+    .#{$block}__title {
+        padding: 1.5rem 1rem 1rem;
+    }
+
+    &__sidebar {
+        border-right: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+        background: var(--sapBaseColor);
+    }
+
+    &__content {
+        background: var(--sapBaseColor);
+        flex-grow: 1;
+
+        &-section {
+            display: block;
+            &[hidden] {
+                display: none;
+            }
+        }
+    }
+
+    &__sidebar-layout {
+        display: flex;
+        position: relative;
+
+        &--mobile {
+            .#{$block} {
+                &__content {
+                    min-width: 100% !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    &--hidden {
+                        display: none;
+                    }
+                }
+                &__sidebar {
+                    width: 100%;
+                    &--hidden {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

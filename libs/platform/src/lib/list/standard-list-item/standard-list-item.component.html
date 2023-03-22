@@ -68,7 +68,16 @@
 </ng-container>
 
 <ng-template #commonTemplate>
-    <fd-icon class="fd-list__icon" *ngIf="titleIcon" [glyph]="titleIcon" [attr.alt]="titleIcon" role="img"> </fd-icon>
+    <fd-icon
+        class="fd-list__icon"
+        *ngIf="icon.glyph"
+        [glyph]="icon.glyph"
+        [font]="icon.font"
+        [ariaLabel]="icon.ariaLabel"
+        [attr.alt]="icon.ariaLabel"
+        role="img"
+    >
+    </fd-icon>
     <fd-avatar
         [size]="avatar.size"
         [glyph]="avatar.glyph"
@@ -119,7 +128,15 @@
 
 <ng-template #byLineTemplate>
     <div fdListThumbnail>
-        <fd-icon class="fd-list__icon" *ngIf="titleIcon" [glyph]="titleIcon" [attr.alt]="titleIcon" role="img">
+        <fd-icon
+            class="fd-list__icon"
+            *ngIf="icon.glyph"
+            [glyph]="icon.glyph"
+            [font]="icon.font"
+            [ariaLabel]="icon.ariaLabel"
+            [attr.alt]="icon.ariaLabel"
+            role="img"
+        >
         </fd-icon>
         <fd-avatar
             [size]="avatar.size"

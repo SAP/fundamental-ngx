@@ -1,0 +1,9 @@
+<ng-container [formGroup]="form">
+    <ng-container [formGroupName]="formGroupName">
+        <fdp-object-status
+            [label]="formItem.default"
+            [status]="formItem.guiOptions?.status"
+            [glyph]="formItem.guiOptions?.icon"
+        ></fdp-object-status>
+    </ng-container>
+</ng-container>

@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: 'twoDigits'
+    name: 'twoDigits',
+    standalone: true
 })
 export class TwoDigitsPipe implements PipeTransform {
     /** Transform number to two digits. */

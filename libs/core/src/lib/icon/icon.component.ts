@@ -45,13 +45,14 @@ export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
     /** The icon name to display. See the icon page for the list of icons
      * here: https://sap.github.io/fundamental-ngx/icon
      * */
-    @Input() glyph;
+    @Input() glyph: any;
 
     /**
      * The icon font
      * Options include: 'SAP-icons', 'BusinessSuiteInAppSymbols' and 'SAP-icons-TNT'
      */
-    @Input() font: IconFont = 'SAP-icons';
+    @Input()
+    font: IconFont = 'SAP-icons';
 
     /** user's custom classes */
     @Input()

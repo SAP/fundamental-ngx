@@ -1,0 +1,35 @@
+<ng-container *ngIf="!_iconConfig && !_avatarConfig; else iconBlock">
+    <fd-skeleton type="rectangle" width="48px" height="48px"></fd-skeleton>
+</ng-container>
+<ng-template #iconBlock>
+    <fd-icon
+        *ngIf="_iconConfig && _iconConfig.glyph"
+        [glyph]="_iconConfig.glyph"
+        [ariaLabel]="_iconConfig.ariaLabel"
+        [font]="_iconConfig.font"
+    ></fd-icon>
+    <fd-avatar
+        *ngIf="_avatarConfig && (_avatarConfig.image || _avatarConfig.glyph || _avatarConfig.zoomGlyph)"
+        [size]="_avatarConfig.size"
+        [glyph]="_avatarConfig.glyph"
+        [zoomGlyph]="_avatarConfig.zoomGlyph"
+        [label]="_avatarConfig.label"
+        [circle]="_avatarConfig.circle"
+        [placeholder]="_avatarConfig.placeholder"
+        [tile]="_avatarConfig.tile"
+        [colorAccent]="_avatarConfig.colorAccent"
+        [image]="_avatarConfig.image"
+        [transparent]="_avatarConfig.transparent"
+        [random]="_avatarConfig.random"
+        [class]="'fd-list__icon ' + _avatarConfig.class"
+        [ariaLabel]="_avatarConfig.ariaLabel"
+        [ariaLabelledby]="_avatarConfig.ariaLabelledby"
+        [contain]="_avatarConfig.contain"
+        [border]="_avatarConfig.border"
+        [alterIcon]="_avatarConfig.alterIcon"
+        [backupImage]="_avatarConfig.backupImage"
+        [clickable]="_avatarConfig.clickable"
+        [attr.alt]="_avatarConfig.ariaLabel"
+        role="img"
+    ></fd-avatar>
+</ng-template>
