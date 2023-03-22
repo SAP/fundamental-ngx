@@ -55,7 +55,11 @@ export class TableRow<T = any> {
         /**
          * Row state: readonly or editable.
          */
-        public state: TableRowState = 'readonly'
+        public state: TableRowState = 'readonly',
+        /**
+         * Children table rows.
+         */
+        public children: TableRow[] = []
     ) {}
 }
 

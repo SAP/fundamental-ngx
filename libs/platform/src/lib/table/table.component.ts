@@ -1,3 +1,5 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -26,9 +28,6 @@ import {
     ViewRef
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import set from 'lodash-es/set';
-import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
 import {
     FdDropEvent,
@@ -37,30 +36,25 @@ import {
     FocusableGridDirective,
     FocusableItemPosition,
     KeyUtil,
+    Nullable,
     RangeSelector,
     resizeObservable,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
+import {
+    ContentDensityMode,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
 import { FDP_PRESET_MANAGED_COMPONENT, isDataSource, isString } from '@fundamental-ngx/platform/shared';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { cloneDeep, get } from 'lodash-es';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-
-import { EditableTableCell } from './table-cell.class';
-import { TableResponsiveService } from './table-responsive.service';
-
-import { TableService } from './table.service';
-import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
-import { SearchInput } from './interfaces/search-field.interface';
-import {
-    FILTER_STRING_STRATEGY,
-    FilterableColumnDataType,
-    SelectionMode,
-    SelectionModeValue,
-    SortDirection,
-    TableRowType
-} from './enums';
+import set from 'lodash-es/set';
+import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
+import { TableColumn } from './components/table-column/table-column';
+import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
 import {
     DEFAULT_HIGHLIGHTING_KEY,
     DEFAULT_TABLE_STATE,
@@ -69,13 +63,19 @@ import {
     SELECTION_COLUMN_WIDTH,
     SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH
 } from './constants';
-import { TableDataSource } from './domain/table-data-source';
 import { ArrayTableDataSource } from './domain/array-data-source';
 import { ObservableTableDataSource } from './domain/observable-data-source';
-import { TableColumn } from './components/table-column/table-column';
-import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
-import { Table } from './table';
-import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
+import { TableDataSource } from './domain/table-data-source';
+import {
+    FILTER_STRING_STRATEGY,
+    FilterableColumnDataType,
+    SelectionMode,
+    SelectionModeValue,
+    SortDirection,
+    TableRowType
+} from './enums';
+import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
+import { SearchInput } from './interfaces/search-field.interface';
 import {
     ColumnsChange,
     FilterChange,
@@ -83,6 +83,7 @@ import {
     GroupChange,
     PlatformTableManagedPreset,
     RowComparator,
+    SaveRowsEvent,
     SortChange,
     TableColumnFreezeEvent,
     TableColumnsChangeEvent,
@@ -94,17 +95,16 @@ import {
     TableRowSelectionChangeEvent,
     TableRowsRearrangeEvent,
     TableRowToggleOpenStateEvent,
-    TableSortChangeEvent,
-    SaveRowsEvent
+    TableSortChangeEvent
 } from './models';
+import { Table } from './table';
+
+import { EditableTableCell } from './table-cell.class';
 import { TableColumnResizeService } from './table-column-resize.service';
-import {
-    ContentDensityMode,
-    ContentDensityObserver,
-    contentDensityObserverProviders
-} from '@fundamental-ngx/core/content-density';
-import { LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { TableResponsiveService } from './table-responsive.service';
+import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
+
+import { TableService } from './table.service';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -1374,6 +1374,35 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         return currentPreset;
     }
 
+    /**
+     * Programmatically toggles `expand` state of the row with defined index.
+     * @param rowIndexes row indexes including nested rows.
+     *
+     * Usage example:
+     * * To toggle first level row, pass one argument:
+     * ```
+     * table.toggleGroupRows(0) // Will result in toggling first row if it's type is `TableRowType.TREE` or `TableRowType.GROUP`.
+     * ```
+     * * To toggle nested rows, pass additional arguments of indexes:
+     * ```
+     * table.toggleGroupRows(0, 1) // Will result in toggling first root row, then it's second child.
+     * ```
+     */
+    toggleGroupRows(...rowIndexes: number[]): void {
+        let tableRow: TableRow | null = null;
+        for (const rowIndex of rowIndexes) {
+            tableRow = tableRow ? tableRow.children[rowIndex] : this._tableRows[rowIndex];
+
+            if (tableRow.type === TableRowType.ITEM) {
+                break;
+            }
+
+            this._toggleGroupRow(tableRow);
+        }
+
+        this._cdr.detectChanges();
+    }
+
     // Private API
 
     /** @hidden */
@@ -1753,12 +1782,18 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _dragDropUpdateDropRowAttributes(dragRow: TableRow, dropRow: TableRow): void {
+        if (dragRow.parent) {
+            // Remove child row from previous parent row.
+            dragRow.parent.children.splice(dragRow.parent.children.indexOf(dragRow), 1);
+        }
         dragRow.parent = dropRow;
         dragRow.level = dropRow.level + 1;
 
         if (!this._isTreeRow(dropRow)) {
             dropRow.type = TableRowType.TREE;
         }
+
+        dropRow.children.push(dragRow);
 
         const children = this._findRowChildren(dragRow);
         children.forEach((row) => {
@@ -1962,6 +1997,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                     c.level = c.parent.level + 1;
                     c.hidden = true;
                 });
+
+                row.children.push(...children);
 
                 rows.push(...children);
             }
@@ -2402,7 +2439,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 row.expanded = false;
             }
 
-            // if parent is expanded we want show only items which direct parents are expanded as well
+            // if parent is expanded we want to show only items which direct parents are expanded as well
             if (expanded) {
                 row.hidden = !this._getRowParents(row, rowToToggle).every((parent) => parent.expanded);
             }

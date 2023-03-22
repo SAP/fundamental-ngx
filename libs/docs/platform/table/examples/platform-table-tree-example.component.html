@@ -8,6 +8,9 @@
     (rowsRearrange)="onRowsRearrange($event)"
 >
     <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false" [showExpandCollapseButtons]="true">
+        <fdp-table-toolbar-actions>
+            <fdp-button label="Toggle first row" (click)="toggleFirstRow()"></fdp-button>
+        </fdp-table-toolbar-actions>
     </fdp-table-toolbar>
 
     <fdp-column name="name" key="name" label="Name" align="start"> </fdp-column>
