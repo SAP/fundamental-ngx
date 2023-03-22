@@ -1,3 +1,12 @@
+## [0.39.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.26...v0.39.1-rc.27) (2023-03-22)
+
+
+### Bug Fixes
+
+* **platform:** keyboard support for sort popovers ([#9561](https://github.com/SAP/fundamental-ngx/issues/9561)) ([3ecb213](https://github.com/SAP/fundamental-ngx/commit/3ecb2131a1d857626183c4ed87040888bc952a76))
+
+
+
 ## [0.39.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.25...v0.39.1-rc.26) (2023-03-22)
 
 
