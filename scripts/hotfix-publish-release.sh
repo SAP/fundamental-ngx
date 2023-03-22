@@ -24,11 +24,11 @@ git_status=$(git status --porcelain)
 
 
 git checkout -b $HOTFIX_TMP_BRANCH
-
+sed -i '' -e '$ d' .ci-env/flags.sh
 # Check if should be treated as a latest version
-[[ $1 == "latest" ]] && sed -i -e "s/\(isLatest::\).*/\1true'/" .ci-env/flags.sh
+[[ $1 == "latest" ]] && echo -e 'echo "isLatest=true" >> $GITHUB_OUTPUT' >> .ci-env/flags.sh
 
-[[ $1 != "latest" ]] && sed -i -e "s/\(isLatest::\).*/\1false'/" .ci-env/flags.sh
+[[ $1 != "latest" ]] && echo -e 'echo "isLatest=false" >> $GITHUB_OUTPUT' >> .ci-env/flags.sh
 
 # make sure the file is executable
 git update-index --chmod=+x .ci-env/flags.sh
