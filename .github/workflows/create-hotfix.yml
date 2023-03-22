@@ -136,7 +136,9 @@ jobs:
                   repository-name: ${{ github.repository }}
     stop_agents:
         if: ${{ always() }}
-        needs: run-release
+        needs:
+            - run-release
+            - gh_pages
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
         steps:
