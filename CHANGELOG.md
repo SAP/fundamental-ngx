@@ -1,3 +1,13 @@
+## [0.39.2](https://github.com/SAP/fundamental-ngx/compare/v0.39.1...v0.39.2) (2023-03-22)
+
+
+### Bug Fixes
+
+* **ci:** various ci updates ([#9569](https://github.com/SAP/fundamental-ngx/issues/9569)) ([dab6b2d](https://github.com/SAP/fundamental-ngx/commit/dab6b2d77b1752b3cfcdae7d8707040ace912228))
+* **ci:** various hotfix script fixes ([#9568](https://github.com/SAP/fundamental-ngx/issues/9568)) ([15b172f](https://github.com/SAP/fundamental-ngx/commit/15b172fb8ae2a0d7975d321a1b58bf2b03ee8cc8))
+
+
+
 ## [0.39.1](https://github.com/SAP/fundamental-ngx/compare/v0.39.0...v0.39.1) (2023-03-22)
 
 
