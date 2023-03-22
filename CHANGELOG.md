@@ -1,3 +1,12 @@
+## [0.39.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.27...v0.39.1-rc.28) (2023-03-22)
+
+
+### Bug Fixes
+
+* **core:** dynamic collapsible subheader z-index must be higher ([#9554](https://github.com/SAP/fundamental-ngx/issues/9554)) ([7b15192](https://github.com/SAP/fundamental-ngx/commit/7b15192cac896005905a4efbc135226fee0b96c2))
+
+
+
 ## [0.39.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.26...v0.39.1-rc.27) (2023-03-22)
 
 
