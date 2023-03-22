@@ -1,3 +1,12 @@
+## [0.39.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.20...v0.39.1-rc.21) (2023-03-22)
+
+
+### Bug Fixes
+
+* **e2e:** fix failing e2e tests ([#9565](https://github.com/SAP/fundamental-ngx/issues/9565)) ([4e9d045](https://github.com/SAP/fundamental-ngx/commit/4e9d0458a8a463dbcf939cece48161021c98af19))
+
+
+
 ## [0.39.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.19...v0.39.1-rc.20) (2023-03-21)
 
 
