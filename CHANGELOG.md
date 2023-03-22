@@ -1,3 +1,12 @@
+## [0.39.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.25...v0.39.1-rc.26) (2023-03-22)
+
+
+### Features
+
+* **platform:** programmatic table row expansion ([#9566](https://github.com/SAP/fundamental-ngx/issues/9566)) ([e942db5](https://github.com/SAP/fundamental-ngx/commit/e942db528ff5dc95c7e9483eed2a75839f85c40a))
+
+
+
 ## [0.39.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.24...v0.39.1-rc.25) (2023-03-22)
 
 
