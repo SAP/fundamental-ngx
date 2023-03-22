@@ -13,9 +13,12 @@
         <ng-container *ngTemplateOutlet="gapTemplate"></ng-container>
     </div>
     <span aria-hidden="true" style="display: none" [id]="'fdp-form-hint-' + id">
-        <ng-container *ngIf="isStringHint(hintOptions.content); else $any(hintOptions.content)">
+        <ng-container *ngIf="isStringHint(hintOptions.content); else hintTemplate">
             {{ hintOptions.content }}
         </ng-container>
+        <ng-template #hintTemplate>
+            <ng-template [ngTemplateOutlet]="$any(hintOptions.content)"></ng-template>
+        </ng-template>
     </span>
 </ng-template>
 
