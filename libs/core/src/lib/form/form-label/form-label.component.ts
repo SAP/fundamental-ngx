@@ -55,7 +55,13 @@ export class FormLabelComponent implements OnChanges {
 
     /** Trigger event names for the inline help. */
     @Input()
-    inlineHelpTriggers: (string | TriggerConfig)[] = ['mouseenter', 'mouseleave', 'focusin', 'focusout'];
+    inlineHelpTriggers: (string | TriggerConfig)[] = [
+        'mouseenter',
+        'mouseleave',
+        'focusin',
+        'focusout',
+        { trigger: 'click', openAction: true, closeAction: true }
+    ];
 
     /**
      * The placement of the inline help.
