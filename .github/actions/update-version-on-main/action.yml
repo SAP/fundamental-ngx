@@ -21,8 +21,9 @@ runs:
               fetch-depth: 0
               token: ${{ inputs.token }}
 
-        - name: Setup Node.js and Cache
-          uses: ./.github/actions/nodejs
+        - name: Install Dependencies
+          run: yarn install --frozen-lockfile
+          shell: bash
 
         - name: Bump Version
           id: bumpVersion
