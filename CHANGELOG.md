@@ -1,3 +1,14 @@
+## [0.39.1](https://github.com/SAP/fundamental-ngx/compare/v0.39.0...v0.39.1) (2023-03-22)
+
+
+### Bug Fixes
+
+* **ci:** added chmod before running script ([b71737a](https://github.com/SAP/fundamental-ngx/commit/b71737a314e0e32763f288424977eff332c7ed2e))
+* **ci:** using needs instead of jobs ([0f3a9d2](https://github.com/SAP/fundamental-ngx/commit/0f3a9d2b5cad71c94bbd30d6b9ec2e2eb80691ed))
+* **core:** replaced CSSStyleSheet with ordinary style ([56cd2aa](https://github.com/SAP/fundamental-ngx/commit/56cd2aa4d8c12dbc67eacbe3aefea5c3d9972045))
+
+
+
 # [0.39.0](https://github.com/SAP/fundamental-ngx/compare/v0.39.0-rc.70...v0.39.0) (2023-03-02)
 
 
