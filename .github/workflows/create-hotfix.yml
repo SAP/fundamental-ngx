@@ -43,6 +43,12 @@ jobs:
                   fetch-depth: 0
                   token: ${{ secrets.GHACTIONS }}
 
+            - uses: ./.github/actions/set-up-git
+              name: Set up git user
+              with:
+                  name: ${{ secrets.GH_NAME }}
+                  email: ${{ secrets.GH_EMAIL }}
+
             - name: Setup Node.js and Cache
               uses: ./.github/actions/nodejs
 
@@ -118,6 +124,12 @@ jobs:
               with:
                   ref: main # always fetch from main branch
                   token: ${{ secrets.GHACTIONS }}
+
+            - uses: ./.github/actions/set-up-git
+              name: Set up git user
+              with:
+                  name: ${{ secrets.GH_NAME }}
+                  email: ${{ secrets.GH_EMAIL }}
 
             - name: Setup Node.js and Cache
               uses: ./.github/actions/nodejs
