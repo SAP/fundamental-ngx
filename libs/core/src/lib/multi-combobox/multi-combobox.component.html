@@ -45,6 +45,8 @@
             <fd-tokenizer
                 *ngIf="_selectedSuggestions"
                 [tokenizerFocusable]="false"
+                [compactCollapse]="true"
+                #tokenizer
                 class="fd-multi-combobox-tokenizer-custom"
                 [class.fd-multi-combobox-tokenizer-custom--compact]="contentDensityObserver.isCompact"
                 (moreClickedEvent)="_moreClicked()"
@@ -81,13 +83,14 @@
                     [(ngModel)]="inputText"
                     (ngModelChange)="_searchTermChanged()"
                     [placeholder]="this._cva.placeholder"
-                    (focus)="this._cva.onTouched()"
-                    (blur)="!mobile && _onBlur($event)"
+                    (focus)="this._cva.onTouched(); tokenizer._showAllTokens()"
+                    (blur)="!mobile && _onBlur($event); tokenizer._hideTokens()"
                     [attr.aria-expanded]="isOpen"
                     [readonly]="this._cva.readonly"
                     [attr.aria-readonly]="this._cva.readonly"
                     [attr.aria-required]="this._cva.required"
                     [displayFn]="_displayFn"
+                    class="fd-tokenizer__input"
                 />
             </fd-tokenizer>
         </fd-input-group>

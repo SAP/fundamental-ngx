@@ -39,7 +39,6 @@ import equal from 'fast-deep-equal';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { FormItemControl } from '@fundamental-ngx/core/form';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
 
 import { SelectableOptionItem, OptionItem } from '@fundamental-ngx/cdk/forms';
@@ -245,8 +244,8 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     private readonly listComponent: ListComponentInterface;
 
     /** @hidden */
-    @ViewChild('searchInputElement')
-    readonly searchInputElement: Nullable<FormItemControl>;
+    @ViewChild('searchInputElement', { read: ElementRef })
+    readonly searchInputElement: Nullable<ElementRef<HTMLInputElement>>;
 
     /** @hidden */
     @ContentChildren(TemplateDirective)
@@ -613,6 +612,8 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         if (this.isOpen && this.listComponent) {
             this.listComponent.setItemActive(0);
         }
+
+        this.searchInputElement?.nativeElement.focus();
     }
 
     /**
@@ -661,7 +662,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      */
     _handleListFocusEscape(direction: FocusEscapeDirection): void {
         if (direction === 'up') {
-            this.searchInputElement?.elmRef?.nativeElement.focus();
+            this._focusToSearchField();
         }
     }
 

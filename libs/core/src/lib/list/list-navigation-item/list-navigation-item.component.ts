@@ -16,7 +16,7 @@ import { FocusableOption } from '@angular/cdk/a11y';
 import { Subject } from 'rxjs';
 import { ListNavigationItemArrowDirective } from '../directives/list-navigation-item-arrow.directive';
 import { ListNavigationItemTextDirective } from '../directives/list-navigation-item-text.directive';
-import { FD_LIST_COMPONENT } from '../list-component.token';
+import { FD_LIST_COMPONENT } from '../tokens';
 import { ListComponentInterface } from '../list-component.interface';
 
 @Component({
