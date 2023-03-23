@@ -250,9 +250,8 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
 
     /** @hidden */
     ngOnDestroy(): void {
-        if (this.tokenListChangesSubscription) {
-            this.tokenListChangesSubscription.unsubscribe();
-        }
+        this.tokenListChangesSubscription?.unsubscribe();
+        this._tokenElementFocusedSub?.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
         this._eventListeners.forEach((e) => e());
@@ -802,8 +801,9 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
 
     /** @hidden Listen window resize and distribute cards on column change */
     private _listenOnResize(): void {
+        this.onResize();
         resizeObservable(this._elementRef.nativeElement)
-            .pipe(startWith(null), debounceTime(60), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(30), takeUntil(this._onDestroy$))
             .subscribe(() => this.onResize());
     }
 
