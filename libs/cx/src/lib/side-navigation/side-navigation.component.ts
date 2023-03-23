@@ -8,9 +8,11 @@ import {
     HostBinding,
     HostListener,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     QueryList,
+    SimpleChanges,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -37,14 +39,14 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     encapsulation: ViewEncapsulation.None,
     providers: [NestedListKeyboardService, NestedListStateService]
 })
-export class SideNavigationComponent implements AfterContentInit, AfterViewInit, OnInit, OnDestroy {
+export class SideNavigationComponent implements AfterContentInit, AfterViewInit, OnInit, OnChanges, OnDestroy {
     /**
      * Side navigation configuration, to pass whole model object, instead of creating HTML from scratch
      */
     @Input()
     sideNavigationConfiguration: Nullable<SideNavigationModel>;
 
-    /** Whether condensed mode is included */
+    /** @deprecated Not applicable to the CX side nav. */
     @Input()
     @HostBinding('class.fdx-side-nav--condensed')
     condensed = false;
@@ -68,6 +70,10 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     /** Whether this side nav should display in mobile (fullscreen) mode. */
     @Input()
     mobile = false;
+
+    /** Whether to show the scroll buttons in narrow mode. When set to false, default scrollbar behavior will be used. */
+    @Input()
+    showScrollButtons = true;
 
     /** Whether clicking on elements should change selected state of items */
     @Input()
@@ -128,11 +134,13 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
         if (!this.sideNavigationConfiguration) {
             this.keyboardService.refreshItems(this.getLists());
         }
-        if (this.sideNavMain && this.narrow) {
+        this._setupScrollButtons();
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.narrow) {
             this._setupScrollButtons();
-            this.sideNavMain.list.nestedItems.forEach((item) => {
-                item._narrow = true;
-            });
         }
     }
 
@@ -161,13 +169,26 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
         setTimeout(() => {
             if (
                 this.sideNavMain.elementRef.nativeElement.scrollHeight >
-                this.sideNavMain.elementRef.nativeElement.clientHeight
+                    this.sideNavMain.elementRef.nativeElement.clientHeight &&
+                this.sideNavMain &&
+                this.narrow &&
+                this.showScrollButtons
             ) {
                 this.sideNavMain.elementRef.nativeElement.style.overflowY = 'hidden';
                 this._showScrollUpButton = true;
                 this._showScrollDownButton = true;
-                this._cdRef.detectChanges();
+                this.sideNavMain.list.nestedItems.forEach((item) => {
+                    item._narrow = true;
+                });
+            } else {
+                this.sideNavMain.elementRef.nativeElement.style.overflowY = 'scroll';
+                this._showScrollUpButton = false;
+                this._showScrollDownButton = false;
+                this.sideNavMain.list.nestedItems.forEach((item) => {
+                    item._narrow = false;
+                });
             }
+            this._cdRef.detectChanges();
         });
     }
 

@@ -3,6 +3,7 @@
 .fd-shellbar--cx-side-nav {
     box-shadow: var(--sapContent_Shadow0);
     padding-left: 0.5rem;
+    z-index: 1;
 }
 
 fd-shellbar-actions {
