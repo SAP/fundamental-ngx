@@ -1,3 +1,12 @@
+## [0.39.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.28...v0.39.1-rc.29) (2023-03-23)
+
+
+### Features
+
+* **platform:** implement end column freezing ([#9529](https://github.com/SAP/fundamental-ngx/issues/9529)) ([5ea9e4a](https://github.com/SAP/fundamental-ngx/commit/5ea9e4a2a6490d7da9f2b25b8e7a202c79310f19))
+
+
+
 ## [0.39.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.27...v0.39.1-rc.28) (2023-03-22)
 
 
