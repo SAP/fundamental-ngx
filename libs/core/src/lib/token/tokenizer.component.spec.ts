@@ -62,6 +62,7 @@ describe('TokenizerComponent', () => {
 
     it('should addEventListener to input during ngAfterViewInit and handle keydown', async () => {
         spyOn(component, 'handleKeyDown');
+        await whenStable(fixture);
         component.ngAfterViewInit();
 
         await whenStable(fixture);
@@ -232,17 +233,15 @@ describe('TokenizerComponent', () => {
         component.tokenList.forEach((token) => {
             spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         });
-        spyOn(component.input.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
+        spyOn(component.input.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 } as DOMRect);
     });
 
-    it('should handle ngAfterContentInit', () => {
+    it('should handle resize', () => {
         spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
-        spyOn(component, 'onResize');
 
-        component.ngAfterContentInit();
+        component.onResize();
 
         expect(component.previousElementWidth).toBe(1);
-        expect(component.onResize).toHaveBeenCalled();
     });
 
     it('should get the hidden cozy token count AfterViewChecked', async () => {

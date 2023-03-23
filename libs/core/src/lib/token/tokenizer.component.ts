@@ -1,6 +1,5 @@
 import { DOCUMENT } from '@angular/common';
 import {
-    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -48,9 +47,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()]
 })
-export class TokenizerComponent
-    implements AfterViewInit, AfterContentInit, OnDestroy, CssClassBuilder, OnInit, OnChanges
-{
+export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBuilder, OnInit, OnChanges {
     /** user's custom classes */
     @Input()
     class: string;
@@ -246,14 +243,9 @@ export class TokenizerComponent
         if (!this.compact && !this.compactCollapse) {
             this._handleCozyTokenCount();
         }
-    }
-
-    /** @hidden */
-    ngAfterContentInit(): void {
         this._listenElementEvents();
         this.previousElementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
         this._listenOnResize();
-        this.onResize();
     }
 
     /** @hidden */
@@ -811,7 +803,7 @@ export class TokenizerComponent
     /** @hidden Listen window resize and distribute cards on column change */
     private _listenOnResize(): void {
         resizeObservable(this._elementRef.nativeElement)
-            .pipe(debounceTime(60), takeUntil(this._onDestroy$))
+            .pipe(startWith(null), debounceTime(60), takeUntil(this._onDestroy$))
             .subscribe(() => this.onResize());
     }
 
