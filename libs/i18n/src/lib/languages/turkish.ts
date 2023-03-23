@@ -354,6 +354,7 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         headerMenuSortDesc: 'Azalan Sıralama',
         headerMenuGroup: 'Grup',
         headerMenuFreeze: 'Donma',
+        headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'HeaderMenuUnfreeze',
         headerMenuFilter: 'Filtre',
         defaultEmptyMessage: 'Hiçbir veri bulunamadı',

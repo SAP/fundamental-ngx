@@ -207,12 +207,19 @@ export class TableService {
     }
 
     /** Freeze table to column */
-    freezeTo(columnName: string | null): void {
+    freezeTo(columnName: string | null, end?: boolean): void {
         const prevState = this.getTableState();
 
-        this.setTableState({ ...prevState, freezeToColumn: columnName });
+        if (!end) {
+            this.setTableState({ ...prevState, freezeToColumn: columnName });
+        } else {
+            this.setTableState({ ...prevState, freezeToEndColumn: columnName });
+        }
 
-        this.freezeChange.emit({ current: columnName, previous: prevState.freezeToColumn });
+        this.freezeChange.emit({
+            current: columnName,
+            previous: end ? prevState.freezeToEndColumn : prevState.freezeToColumn
+        });
     }
 
     /** Set table columns */

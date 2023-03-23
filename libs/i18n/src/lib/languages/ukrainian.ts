@@ -506,6 +506,7 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         headerMenuSortDesc: 'Сортувати за спаданням',
         headerMenuGroup: 'Сгрупувати',
         headerMenuFreeze: 'Заморозити',
+        headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'Розморозити',
         headerMenuFilter: 'Фільтр',
         defaultEmptyMessage: 'Нічого не знайдено',

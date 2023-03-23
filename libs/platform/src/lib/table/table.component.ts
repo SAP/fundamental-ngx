@@ -253,6 +253,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     freezeColumnsTo: string;
 
+    /** The column `name` to freeze columns after and including. */
+    @Input()
+    freezeEndColumnsTo: string;
+
     /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
     @Input()
     selectionMode: SelectionModeValue = SelectionMode.NONE;
@@ -676,6 +680,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      */
     _freezableColumns: Map<string, number> = new Map();
 
+    /**
+     * @hidden
+     * Freezable column names and their respective indexes for columns that will be frozen to the end of hte table
+     */
+    _freezableEndColumns: Map<string, number> = new Map();
+
     /** @hidden */
     _isShownSortSettingsInToolbar = false;
 
@@ -783,7 +793,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             !this._sortRulesMap.size &&
             !this._groupRulesMap.size &&
             !this._filterRulesMap.size &&
-            !this._freezableColumns.size
+            !this._freezableColumns.size &&
+            !this._freezableEndColumns.size
         );
     }
 
@@ -956,7 +967,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             this._rangeSelector.reset();
         }
 
-        if ('selectionMode' in changes || 'freezeColumnsTo' in changes || 'semanticHighlighting' in changes) {
+        if (
+            'selectionMode' in changes ||
+            'freezeColumnsTo' in changes ||
+            'freezeEndColumnsTo' in changes ||
+            'semanticHighlighting' in changes
+        ) {
             this.recalculateTableColumnWidth();
         }
 
@@ -1121,22 +1137,31 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** Freeze table to column */
-    freezeToColumn(columnName: string): void {
-        this.freezeColumnsTo = columnName;
+    freezeToColumn(columnName: string, end?: boolean): void {
+        end ? (this.freezeEndColumnsTo = columnName) : (this.freezeColumnsTo = columnName);
 
-        this._tableService.freezeTo(columnName);
+        this._tableService.freezeTo(columnName, end);
         this.recalculateTableColumnWidth();
+        this.columnHeaderPopovers.forEach((popover) => {
+            popover.close();
+        });
     }
 
     /** Unfreeze column */
-    unfreeze(columnName: string): void {
-        const freezeToColumnIndex = this._freezableColumns.get(columnName) ?? -1;
-        const freezeToPreviousColumnName = this._freezableColumns[freezeToColumnIndex - 1];
+    unfreeze(columnName: string, end?: boolean): void {
+        const columns = end ? this._freezableEndColumns : this._freezableColumns;
+        const freezeToColumnIndex = columns.get(columnName) ?? -1;
+        const freezeToPreviousColumnName = columns[freezeToColumnIndex - 1];
 
-        this.freezeColumnsTo = freezeToPreviousColumnName;
+        end
+            ? (this.freezeEndColumnsTo = freezeToPreviousColumnName)
+            : (this.freezeColumnsTo = freezeToPreviousColumnName);
 
-        this._tableService.freezeTo(freezeToPreviousColumnName);
+        this._tableService.freezeTo(freezeToPreviousColumnName, end);
         this.recalculateTableColumnWidth();
+        this.columnHeaderPopovers.forEach((popover) => {
+            popover.close();
+        });
     }
 
     /** expand all rows */
@@ -1411,6 +1436,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             column.sortable ||
             column.groupable ||
             column.freezable ||
+            column.endFreezable ||
             (column.filterable && !this._isFilteringFromHeaderDisabled)
         );
     }
@@ -1711,14 +1737,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         nestingLevel: number | null
     ): Promise<void> {
         this._focusedCellPosition = { rowIndex: position.rowIndex, colIndex: position.colIndex };
-        const tableScrollableEl = this.tableScrollable.getElementRef().nativeElement;
 
-        if (this._freezableColumns.size && tableScrollableEl.scrollWidth > tableScrollableEl.clientWidth) {
-            const activeEl = document.activeElement;
-            if (activeEl) {
-                activeEl.scrollIntoView({ block: 'nearest', inline: 'end' });
-            }
-        }
+        this._scrollToOverlappedCell();
 
         if (this.cellFocusedEventAnnouncer) {
             this._liveAnnouncer.clear();
@@ -1836,6 +1856,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             filterBy: this.initialFilterBy || prevState.filterBy,
             groupBy: this.initialGroupBy || prevState.groupBy,
             freezeToColumn: this.freezeColumnsTo || prevState.freezeToColumn,
+            freezeToEndColumn: this.freezeEndColumnsTo || prevState.freezeToEndColumn,
             page: {
                 currentPage: page.currentPage || 1,
                 pageSize: this.pageSize || page.pageSize
@@ -1907,7 +1928,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._subscriptions.add(
             this._tableService.freezeChange.subscribe((event: FreezeChange) => {
                 this.columnFreeze.emit(new TableColumnFreezeEvent(this, event.current, event.previous));
-                this.fixed = !!this._freezableColumns.size;
+                this.fixed = !!this._freezableColumns.size || !!this._freezableEndColumns.size;
             })
         );
 
@@ -2187,7 +2208,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     private _setFreezableInfo(): void {
         this._freezableColumns = this._getFreezableColumns();
-        this.fixed = !!this._freezableColumns.size;
+        this._freezableEndColumns = this._getFreezableEndColumns();
+        this.fixed = !!this._freezableColumns.size || !!this._freezableEndColumns.size;
     }
 
     /** @hidden */
@@ -2208,6 +2230,27 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             columnNames.set(column.name, columnNames.size);
 
             if (column.name === this.freezeColumnsTo) {
+                return columnNames;
+            }
+        }
+
+        return new Map();
+    }
+
+    /** @hidden */
+    private _getFreezableEndColumns(): Map<string, number> {
+        const columnNames = new Map<string, number>();
+        const columns = this._visibleColumns;
+
+        if (!columns.length || !this.freezeEndColumnsTo) {
+            return columnNames;
+        }
+
+        for (let i = columns.length - 1; i >= 0; i--) {
+            // using columnNames.size as index of a column
+            columnNames.set(columns[i].name, columnNames.size);
+
+            if (columns[i].name === this.freezeEndColumnsTo) {
                 return columnNames;
             }
         }
@@ -2660,7 +2703,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 .pipe(debounceTime(100))
                 .subscribe(() => {
                     this.recalculateTableColumnWidth();
-                    if (this._freezableColumns.size) {
+                    if (this._freezableColumns.size || this._freezableEndColumns.size) {
                         this._tableColumnResizeService.updateFrozenColumnsWidth();
                     }
                 })
@@ -2734,6 +2777,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 text: ''
             },
             freezeToColumn: null,
+            freezeToEndColumn: null,
             page: {
                 pageSize: 0,
                 currentPage: 1
@@ -2766,5 +2810,57 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             row: ${position.rowIndex + 1} of ${position.totalRows}` +
             (nestingLevel !== null ? `, level: ${nestingLevel + 1}` : '')
         );
+    }
+
+    /** @hidden */
+    private _scrollToOverlappedCell(): void {
+        const tableScrollableEl = this.tableScrollable.getElementRef().nativeElement;
+
+        if (
+            (this._freezableColumns.size || this._freezableEndColumns.size) &&
+            tableScrollableEl.scrollWidth > tableScrollableEl.clientWidth
+        ) {
+            const activeEl = document.activeElement;
+            if (
+                activeEl &&
+                !(
+                    activeEl.classList.contains('fd-table__cell--fixed') ||
+                    activeEl.classList.contains('fd-table__cell--fixed-end')
+                )
+            ) {
+                if (this._freezableColumns.size && !this._freezableEndColumns.size) {
+                    activeEl.scrollIntoView({ block: 'nearest', inline: 'end' });
+                } else if (!this._freezableColumns.size && this._freezableEndColumns.size) {
+                    activeEl.scrollIntoView({ block: 'nearest', inline: 'center' });
+                } else if (this._freezableColumns.size && this._freezableEndColumns.size) {
+                    // check to see if the active element is obstructed by another element
+                    const activeElLeft = activeEl.getBoundingClientRect().left;
+                    const activeElTop = activeEl.getBoundingClientRect().top;
+                    const topElementFromLeft = document.elementFromPoint(activeElLeft, activeElTop);
+                    // if the activeEl is overlapped
+                    if (
+                        topElementFromLeft &&
+                        !activeEl.isSameNode(topElementFromLeft) &&
+                        topElementFromLeft.classList.contains('fd-table__cell--fixed-end')
+                    ) {
+                        const topElementX = topElementFromLeft.getBoundingClientRect().left;
+                        const leftVal = this._rtl
+                            ? (activeElLeft + activeEl.getBoundingClientRect().width - topElementX) * -1
+                            : activeElLeft + activeEl.getBoundingClientRect().width - topElementX;
+                        tableScrollableEl.scrollBy({ top: 0, left: leftVal });
+                    } else if (
+                        topElementFromLeft &&
+                        !activeEl.isSameNode(topElementFromLeft) &&
+                        topElementFromLeft.classList.contains('fd-table__cell--fixed')
+                    ) {
+                        const topElementX = topElementFromLeft.getBoundingClientRect().right;
+                        const leftVal = this._rtl
+                            ? (activeElLeft - activeEl.getBoundingClientRect().width - topElementX) * -1
+                            : activeElLeft - activeEl.getBoundingClientRect().width - topElementX;
+                        tableScrollableEl.scrollBy({ top: 0, left: leftVal });
+                    }
+                }
+            }
+        }
     }
 }

@@ -95,7 +95,7 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     abstract toggleSelectableRow(rowIndex: number): void;
 
     /** Freeze table columns to including */
-    abstract freezeToColumn(columnKey: string): void;
+    abstract freezeToColumn(columnKey: string, end?: boolean): void;
 
     /** Unfreeze column */
     abstract unfreeze(columnKey: string): void;

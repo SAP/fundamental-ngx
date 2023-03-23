@@ -362,6 +362,7 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         headerMenuSortDesc: 'Rendit në zbritje',
         headerMenuGroup: 'Groupo',
         headerMenuFreeze: 'Blloko',
+        headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'Menuja "Shkrije"',
         headerMenuFilter: 'Filtro',
         defaultEmptyMessage: 'No data found',

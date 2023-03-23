@@ -357,6 +357,7 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         headerMenuSortDesc: 'Tri décroissant',
         headerMenuGroup: 'Grouper',
         headerMenuFreeze: 'Geler',
+        headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: "Déverrouillage du menu d'en-tête",
         headerMenuFilter: 'Filtrer',
         defaultEmptyMessage: 'Aucune donnée trouvée',

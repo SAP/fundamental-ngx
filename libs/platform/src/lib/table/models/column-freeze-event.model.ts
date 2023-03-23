@@ -3,6 +3,7 @@ import { Table } from '../table';
 export interface FreezeChange {
     current: string | null;
     previous: string | null;
+    end?: boolean;
 }
 
 export class TableColumnFreezeEvent {

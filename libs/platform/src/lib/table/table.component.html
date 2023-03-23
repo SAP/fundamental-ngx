@@ -82,6 +82,8 @@
                             [ngClass]="'fdp-table__col--' + column.name"
                             [class.fd-table__cell--fixed]="_freezableColumns.has(column.name)"
                             [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
+                            [class.fd-table__cell--fixed-end]="_freezableEndColumns.has(column.name)"
+                            [class.fd-table__cell--fixed-end-last]="column.name === freezeEndColumnsTo"
                             [ngStyle]="
                                 column
                                     | tableCellStyles
@@ -89,8 +91,10 @@
                                         : _semanticHighlightingColumnWidth
                                         : _selectionColumnWidth
                                         : _freezableColumns.has(column.name)
+                                        : _freezableEndColumns.has(column.name)
                                         : _tableColumnResizeService.getPrevColumnsWidth(column.name)
                                         : _tableColumnResizeService.getColumnWidthStyle(column.name)
+                                        : _tableColumnResizeService.getNextColumnsWidth(column.name)
                             "
                             [fdPopoverTrigger]="columnHeaderPopover"
                             [class.fd-table__item--clickable]="_isColumnHasHeaderMenu(column)"
@@ -274,6 +278,8 @@
                             [ngClass]="'fdp-table__col--' + column.name"
                             [class.fd-table__cell--fixed]="_freezableColumns.has(column.name)"
                             [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
+                            [class.fd-table__cell--fixed-end]="_freezableEndColumns.has(column.name)"
+                            [class.fd-table__cell--fixed-end-last]="column.name === freezeEndColumnsTo"
                             [class.fd-table__cell--expand]="_isTreeRowFirstCell(colIdx, row)"
                             [ngStyle]="
                                 column
@@ -282,8 +288,10 @@
                                         : _semanticHighlightingColumnWidth
                                         : _selectionColumnWidth
                                         : _freezableColumns.has(column.name)
+                                        : _freezableEndColumns.has(column.name)
                                         : _tableColumnResizeService.getPrevColumnsWidth(column.name)
                                         : _tableColumnResizeService.getColumnWidthStyle(column.name)
+                                        : _tableColumnResizeService.getNextColumnsWidth(column.name)
                             "
                             [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
                             [attr.data-nesting-level]="colIdx === 0 ? row.level + 1 : null"
@@ -437,25 +445,33 @@
         </ng-container>
 
         <!-- Freeze -->
-        <ng-container *ngIf="column.freezable">
+        <ng-container *ngIf="column.freezable || column.endFreezable">
             <li
                 [tabindex]="0"
-                *ngIf="!_freezableColumns?.has(column.name); else unfreezeTpl"
+                *ngIf="
+                    !_freezableColumns?.has(column.name) && !_freezableEndColumns?.has(column.name);
+                    else unfreezeTpl
+                "
                 class="fd-table__item--clickable"
                 fd-list-item
-                (click)="freezeToColumn(column.name)"
-                (keydown.enter)="freezeToColumn(column.name)"
+                (click)="freezeToColumn(column.name, column.endFreezable)"
+                (keyup.enter)="freezeToColumn(column.name, column.endFreezable)"
             >
                 <span></span>
-                <span fd-list-title>{{ 'platformTable.headerMenuFreeze' | fdTranslate }}</span>
+                <span fd-list-title *ngIf="!column.endFreezable">{{
+                    'platformTable.headerMenuFreeze' | fdTranslate
+                }}</span>
+                <span fd-list-title *ngIf="column.endFreezable">{{
+                    'platformTable.headerMenuEndFreeze' | fdTranslate
+                }}</span>
             </li>
             <ng-template #unfreezeTpl>
                 <li
                     [tabindex]="0"
                     class="fd-table__item--clickable"
                     fd-list-item
-                    (click)="unfreeze(column.name)"
-                    (keydown.enter)="unfreeze(column.name)"
+                    (click)="unfreeze(column.name, column.endFreezable)"
+                    (keyup.enter)="unfreeze(column.name, column.endFreezable)"
                 >
                     <span></span>
                     <span fd-list-title>{{ 'platformTable.headerMenuUnfreeze' | fdTranslate }}</span>

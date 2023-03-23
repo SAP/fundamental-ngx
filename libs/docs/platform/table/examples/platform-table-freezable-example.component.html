@@ -1,8 +1,9 @@
-<div style="width: 600px">
+<div style="width: 800px">
     <fdp-table
         [dataSource]="source"
         selectionMode="multiple"
         freezeColumnsTo="description"
+        freezeEndColumnsTo="verified"
         (columnFreeze)="onColumnFreezeChange($event)"
     >
         <fdp-table-toolbar title="Order Line Items" [hideItemCount]="true"> </fdp-table-toolbar>

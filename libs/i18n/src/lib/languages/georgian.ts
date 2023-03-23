@@ -355,6 +355,7 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         headerMenuSortDesc: 'კლებადობით დალაგება',
         headerMenuGroup: 'ჯგუფი',
         headerMenuFreeze: 'გაყინვა',
+        headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'მენიუს განბლოკვა',
         headerMenuFilter: 'ფილტრი',
         defaultEmptyMessage: 'მონაცემები ვერ მოიძებნა',

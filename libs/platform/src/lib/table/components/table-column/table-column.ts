@@ -35,6 +35,9 @@ export abstract class TableColumn {
     /** Toggles freeze/unfreeze feature in the column header. */
     abstract freezable: boolean;
 
+    /** Toggles end column freeze/unfreeze feature in the column header. */
+    abstract endFreezable: boolean;
+
     /** Initial visibility state of the column. */
     abstract visible: boolean;
 

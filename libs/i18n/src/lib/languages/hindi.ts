@@ -354,6 +354,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         headerMenuSortDesc: 'घटते क्रम',
         headerMenuGroup: 'समूह',
         headerMenuFreeze: 'फ्रीज करें',
+        headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'हैडर मेनू अनफ्रीज',
         headerMenuFilter: 'फिल्टर',
         defaultEmptyMessage: 'डाटा प्राप्त नहीं हुआ',
