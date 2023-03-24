@@ -612,8 +612,6 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         if (this.isOpen && this.listComponent) {
             this.listComponent.setItemActive(0);
         }
-
-        this.searchInputElement?.nativeElement.focus();
     }
 
     /**
