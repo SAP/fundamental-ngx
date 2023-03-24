@@ -1,0 +1,12 @@
+<div fd-form-item style="width: 300px">
+    <label fd-form-label for="tokenizer-behaviour-example">Array of Strings:</label>
+    <fd-multi-combobox
+        [autoResize]="true"
+        name="tokenizer-behaviour-example"
+        inputId="tokenizer-behaviour-example"
+        placeholder="Type some text..."
+        [dataSource]="dataSource"
+        [selectedItems]="selectedItems1"
+        (selectionChange)="onSelect1($event)"
+    ></fd-multi-combobox>
+</div>

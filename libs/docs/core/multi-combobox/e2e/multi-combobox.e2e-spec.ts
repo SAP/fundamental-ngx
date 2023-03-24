@@ -38,6 +38,7 @@ describe('multi-combobox test suite', () => {
     const mobileExample = 6;
     const nMoreExample = 5;
     const twoColumnExample = 9;
+    const tokenizerExample = 16;
     const searchValue = 'app';
 
     beforeAll(async () => {
@@ -73,7 +74,7 @@ describe('multi-combobox test suite', () => {
             const exampleCount = await getElementArrayLength(expandButton);
 
             for (let i = 0; i < exampleCount; i++) {
-                if (i === mobileExample) {
+                if (i === mobileExample || i === tokenizerExample) {
                     continue;
                 }
 
@@ -119,12 +120,12 @@ describe('multi-combobox test suite', () => {
             const inputCount = await getElementArrayLength(inputField);
 
             for (let i = 0; i < inputCount; i++) {
-                if (i !== mobileExample) {
+                if (i !== mobileExample && i !== tokenizerExample) {
                     await scrollIntoView(inputField, i);
                     await click(inputField, i);
                     await sendKeys(searchValue);
 
-                    if (i == inputCount - 1) {
+                    if (i == inputCount - 2) {
                         await browser.pause(500);
                     }
 
@@ -132,7 +133,10 @@ describe('multi-combobox test suite', () => {
                     const listItemText = await getTextArr(listItem);
 
                     for (const element of listItemText) {
-                        await expect(element.toString().toLowerCase()).toContain(searchValue);
+                        await expect(element.toString().toLowerCase()).toContain(
+                            searchValue,
+                            `Values do not match for index ${i}`
+                        );
                     }
                 }
             }
@@ -224,9 +228,10 @@ describe('multi-combobox test suite', () => {
     async function checkInputExpansion(index: number = 0): Promise<void> {
         await scrollIntoView(expandButton, index);
         await click(expandButton, index);
-        await expect(await waitForElDisplayed(list)).toBe(true);
+        await expect(await waitForElDisplayed(list)).toBe(true, `List is not displayed for index ${index}`);
         await click(expandButton, index);
-        await expect(await doesItExist(list)).toBe(false);
+
+        await expect(await doesItExist(list)).toBe(false, `List is still displayed for index ${index}`);
     }
 
     async function checkListClosedAfterSelection(index: number = 0): Promise<void> {

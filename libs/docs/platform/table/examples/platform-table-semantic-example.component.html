@@ -1,4 +1,10 @@
-<fdp-table [dataSource]="source" emptyTableMessage="No data found" semanticHighlighting="semantic">
+<fdp-table
+    [dataSource]="source"
+    emptyTableMessage="No data found"
+    semanticHighlighting="semantic"
+    [noVerticalBorders]="true"
+    [noOuterBorders]="true"
+>
     <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false">
         <fdp-table-toolbar-actions>
             <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>

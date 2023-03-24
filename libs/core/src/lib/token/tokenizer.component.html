@@ -4,7 +4,7 @@
     [class.fd-tokenizer--compact]="compact"
 >
     <div class="fd-tokenizer__inner" #tokenizerInner>
-        <div role="listbox">
+        <div role="listbox" [style.width]="_tokensContainerWidth">
             <ng-content select="fd-token"></ng-content>
         </div>
 
@@ -52,20 +52,17 @@
 <ng-template #moreElement>
     <span
         (click)="moreClicked()"
-        *ngIf="
-            (moreTokensLeft.length > 0 || moreTokensRight.length > 0 || hiddenCozyTokenCount > 0) &&
-            !open &&
-            !_tokenizerHasFocus
-        "
+        *ngIf="_showMoreElement"
+        #moreElementSpan
         class="fd-tokenizer-more"
         role="button"
         tabindex="0"
     >
         <ng-container *ngIf="compact || compactCollapse">
-            {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length } }}
+            {{ 'coreTokenizer.moreLabel' | fdTranslate : { count: moreTokensLeft.length + moreTokensRight.length } }}
         </ng-container>
         <ng-container *ngIf="!compact && !compactCollapse">
-            {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount } }}
+            {{ 'coreTokenizer.moreLabel' | fdTranslate : { count: hiddenCozyTokenCount } }}
         </ng-container>
     </span>
 </ng-template>

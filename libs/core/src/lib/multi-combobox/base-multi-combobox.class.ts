@@ -30,7 +30,6 @@ import {
     RangeSelector
 } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
-import { FormItemControl } from '@fundamental-ngx/core/form';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, skip, startWith, Subscription, takeUntil, timer } from 'rxjs';
 import {
@@ -112,7 +111,7 @@ export abstract class BaseMultiCombobox<T = any> {
     abstract isGroup: boolean;
     abstract inputText: string;
 
-    abstract searchInputElement: Nullable<FormItemControl>;
+    abstract searchInputElement: Nullable<ElementRef<HTMLInputElement>>;
 
     abstract selectionChange: EventEmitter<MultiComboboxSelectionChangeEvent>;
     abstract dataReceived: EventEmitter<void>;
@@ -408,7 +407,7 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /** @hidden */
     protected _focusToSearchField(): void {
-        this.searchInputElement?.elmRef?.nativeElement.focus();
+        this.searchInputElement?.nativeElement.focus();
     }
 
     /** @hidden */
