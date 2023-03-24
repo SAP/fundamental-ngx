@@ -1,8 +1,10 @@
+/* eslint-disable @angular-eslint/no-input-rename */
 import {
     Directive,
     ElementRef,
     Inject,
     Input,
+    isDevMode,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -26,7 +28,7 @@ const INLINE_HELP_ICON_CLASS = 'fd-popover__body--inline-help-icon';
  */
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-inline-help], [fd-inline-help-template]',
+    selector: '[fd-inline-help]:not([fd-inline-help-template]), [fd-inline-help-template]:not([fd-inline-help])',
     providers: [PopoverService],
     host: {
         '[class.fd-inline-help__trigger]': 'true'
@@ -57,11 +59,27 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
 
     /** Inline help text to display inside generated popover */
     @Input('fd-inline-help')
-    inlineHelpText: Nullable<string> = null;
+    set inlineHelpContent(content: string | TemplateRef<any>) {
+        const { text, template } = {
+            text: typeof content === 'string' ? content : null,
+            template: content instanceof TemplateRef ? content : null
+        };
+        this._popoverService.updateContent(text, template);
+    }
 
-    /** Inline help template to display inside generated popover */
+    /**
+     * Inline help template to display inside generated popover
+     * @deprecated Use `fd-inline-help` instead
+     * */
     @Input('fd-inline-help-template')
-    inlineHelpTemplate: Nullable<TemplateRef<any>> = null;
+    set inlineHelpTemplate(template: Nullable<TemplateRef<any>>) {
+        if (isDevMode()) {
+            console.warn(
+                '[fd-inline-help-template] is deprecated and will be removed in the future, use [fd-inline-help] instead.'
+            );
+        }
+        this._popoverService.updateContent(null, template);
+    }
 
     /** @hidden */
     constructor(
@@ -77,22 +95,12 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         if ('additionalBodyClass' in changes) {
             this._applyAdditionalInlineHelpClass();
         }
-
-        if ('inlineHelpText' in changes || 'inlineHelpTemplate' in changes) {
-            this._popoverService.updateContent(
-                changes['inlineHelpText']?.currentValue,
-                changes['inlineHelpTemplate']?.currentValue
-            );
-        }
-
         this._popoverService.refreshConfiguration(this);
     }
 
     /** @hidden */
     ngOnInit(): void {
         this._applyAdditionalInlineHelpClass();
-        this._popoverService.stringContent = this.inlineHelpText;
-        this._popoverService.templateContent = this.inlineHelpTemplate;
         this._popoverService.initialise(this._elementRef, this);
     }
 

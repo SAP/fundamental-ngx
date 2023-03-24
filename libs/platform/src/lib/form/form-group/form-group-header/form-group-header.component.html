@@ -14,8 +14,7 @@
     <span *ngIf="hintOptions" fd-link [undecorated]="true">
         <fd-icon
             [style.vertical-align]="'middle'"
-            [ariaLabel]="hintOptions.text"
-            [fd-inline-help]="hintOptions.text"
+            [fd-inline-help]="hintOptions.content"
             [glyph]="hintOptions.glyph"
             [placement]="hintOptions.placement || null"
             [triggers]="hintOptions.trigger || []"

@@ -159,7 +159,7 @@ export class PopoverService extends BasePopoverClass {
     }
 
     /** method updating template or text inside rendered PopoverBody */
-    updateContent(stringContent: string, templateContent: TemplateRef<any> | null): void {
+    updateContent(stringContent: Nullable<string>, templateContent: Nullable<TemplateRef<any>>): void {
         this.stringContent = stringContent;
         this.templateContent = templateContent;
         if (this._getPopoverBody()) {

@@ -46,7 +46,9 @@ import {
     RESPONSIVE_BREAKPOINTS_CONFIG,
     ResponsiveBreakPointConfig,
     ResponsiveBreakpointsService,
-    PlatformFormField
+    PlatformFormField,
+    FieldHintInput,
+    HintContent
 } from '@fundamental-ngx/platform/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { getFormState } from '../../helpers';
@@ -117,7 +119,7 @@ export class FormFieldComponent
 
     /** Hint to be placed next to label */
     @Input()
-    hint: Nullable<string | FieldHintOptions>;
+    hint: Nullable<FieldHintInput>;
 
     /**
      * @deprecated
@@ -138,6 +140,7 @@ export class FormFieldComponent
         this.fieldColumnLayout =
             this._labelLayout === 'horizontal' ? DefaultHorizontalFieldLayout : DefaultVerticalFieldLayout;
     }
+
     get labelLayout(): LabelLayout {
         return this._labelLayout;
     }
@@ -181,6 +184,7 @@ export class FormFieldComponent
         this._isColumnLayoutEnabled = true;
         this._setLayout();
     }
+
     get columnLayout(): ColumnLayout {
         return this._columnLayout;
     }
@@ -197,6 +201,7 @@ export class FormFieldComponent
         this._labelColumnLayoutClass = generateColumnClass(this._labelColumnLayout);
         this._labelColumnLayout$.next(this._labelColumnLayout);
     }
+
     get labelColumnLayout(): ColumnLayout {
         return this._labelColumnLayout;
     }
@@ -214,6 +219,7 @@ export class FormFieldComponent
         this._fieldColumnLayoutClass = generateColumnClass(this._fieldColumnLayout);
         this._fieldColumnLayout$.next(this._fieldColumnLayout);
     }
+
     get fieldColumnLayout(): ColumnLayout {
         return this._fieldColumnLayout;
     }
@@ -231,6 +237,7 @@ export class FormFieldComponent
         this._gapColumnLayoutClass = generateColumnClass(this._gapColumnLayout);
         this._gapColumnLayout$.next(this._gapColumnLayout);
     }
+
     get gapColumnLayout(): ColumnLayout {
         return this._gapColumnLayout;
     }
@@ -247,6 +254,7 @@ export class FormFieldComponent
     set required(value: BooleanInput) {
         this._required = coerceBooleanProperty(value);
     }
+
     get required(): boolean {
         return this._required;
     }
@@ -262,6 +270,7 @@ export class FormFieldComponent
             this._updateControlProperties();
         }
     }
+
     get editable(): boolean {
         return this._editable;
     }
@@ -273,6 +282,7 @@ export class FormFieldComponent
     set columns(value: Column) {
         this._columns = <Column>coerceNumberProperty(value);
     }
+
     get columns(): Column {
         return this._columns;
     }
@@ -776,6 +786,14 @@ export class FormFieldComponent
             });
     }
 
+    /**
+     * Returns whether content of the provided hint is a string.
+     * @hidden
+     */
+    isStringHint(hintOptions: HintContent): hintOptions is string {
+        return typeof hintOptions === 'string';
+    }
+
     /** @hidden */
     private _validateErrorHandler(): void {
         if (
@@ -899,11 +917,11 @@ export class FormFieldComponent
     /** @hidden */
     private _updateHintOptions(): void {
         // placement is here set up because hintPlacement is deprecated
-        if (typeof this.hint === 'string') {
+        if (typeof this.hint === 'string' || this.hint instanceof TemplateRef) {
             this.hintOptions = {
                 ...this._defaultHintOptions,
                 placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
-                text: this.hint
+                content: this.hint
             };
         } else if (typeof this.hint === 'object') {
             this.hintOptions = {

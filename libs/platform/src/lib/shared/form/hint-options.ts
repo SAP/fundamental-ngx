@@ -1,10 +1,25 @@
 import { InlineHelpFormPlacement } from '@fundamental-ngx/core/form';
 import { HintPlacement } from './form-options';
 import { TriggerConfig } from '@fundamental-ngx/core/popover';
+import { TemplateRef } from '@angular/core';
+
+export type HintContent = string | TemplateRef<void>;
+
+export type HintInput = HintContent | HintOptions;
+export type FieldHintInput = HintContent | FieldHintOptions;
 
 export interface HintOptions {
-    /** Text of the hint */
-    text: string;
+    /**
+     * Text of the hint
+     *
+     * @deprecated
+     * Use `content` instead
+     * */
+    text?: string;
+
+    /** Text or the template of the hint */
+    content: HintContent;
+
     /** Text position of the inline help icon, relative to label */
     position?: InlineHelpFormPlacement;
     /** Trigger events for showing and hiding help */

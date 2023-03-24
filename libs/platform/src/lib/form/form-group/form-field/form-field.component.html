@@ -12,7 +12,14 @@
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
         <ng-container *ngTemplateOutlet="gapTemplate"></ng-container>
     </div>
-    <span aria-hidden="true" style="display: none" [id]="'fdp-form-hint-' + id">{{ hintOptions.text }}</span>
+    <span aria-hidden="true" style="display: none" [id]="'fdp-form-hint-' + id">
+        <ng-container *ngIf="isStringHint(hintOptions.content); else hintTemplate">
+            {{ hintOptions.content }}
+        </ng-container>
+        <ng-template #hintTemplate>
+            <ng-template [ngTemplateOutlet]="$any(hintOptions.content)"></ng-template>
+        </ng-template>
+    </span>
 </ng-template>
 
 <ng-template #withFormMessage>
@@ -63,7 +70,7 @@
             [id]="'fdp-form-label-' + id"
             [required]="editable && required"
             fd-form-label
-            [inlineHelpTitle]="hintOptions.text || ''"
+            [inlineHelpContent]="hintOptions.content"
             [inlineHelpBodyPlacement]="hintOptions.placement || 'top'"
             [inlineHelpPlacement]="hintOptions.position || 'after'"
             [inlineHelpGlyph]="hintOptions.glyph || ''"
@@ -88,11 +95,11 @@
 </ng-template>
 
 <ng-template #gapTemplate>
-    <ng-container *ngIf="hintTarget === 'input' && hintOptions.text; else withoutHint">
+    <ng-container *ngIf="hintTarget === 'input' && hintOptions.content; else withoutHint">
         <div class="fd-col fd-form-field-inline-help-container" [class]="_gapColumnLayoutClass">
             <span fd-link [undecorated]="true">
                 <fd-icon
-                    [fd-inline-help]="hintOptions.text"
+                    [fd-inline-help]="hintOptions.content"
                     [glyph]="hintOptions.glyph"
                     [placement]="hintOptions.placement || null"
                     [triggers]="hintOptions.trigger || []"
