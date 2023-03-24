@@ -45,6 +45,8 @@
         <fd-tokenizer
             *ngIf="selected"
             [tokenizerFocusable]="false"
+            [compactCollapse]="true"
+            #tokenizer
             class="fd-multi-input-tokenizer-custom"
             [class.fd-multi-input-tokenizer-custom--compact]="contentDensityObserver.isCompact$ | async"
             (moreClickedEvent)="moreClicked()"
@@ -64,7 +66,7 @@
             <input
                 #searchInputElement
                 type="text"
-                class="fd-input fd-multi-input-tokenizer-input"
+                class="fd-input fd-multi-input-tokenizer-input fd-tokenizer__input"
                 fdp-auto-complete
                 (onComplete)="_onAutoComplete($event)"
                 (keydown.enter)="_onKeydownEnter($event)"
@@ -78,7 +80,8 @@
                 (ngModelChange)="searchTermChanged()"
                 [ngModelOptions]="{ standalone: true }"
                 [placeholder]="placeholder"
-                (blur)="onTouched()"
+                (focus)="onTouched(); tokenizer._showAllTokens()"
+                (blur)="tokenizer._hideTokens()"
                 [attr.aria-expanded]="isOpen && _suggestions.length > 0"
                 [readonly]="readonly"
                 aria-haspopup="listbox"

@@ -100,7 +100,7 @@ export class MultiInputComponent
 
     /** Whether to use cozy visuals but compact collapsing behavior. */
     @Input()
-    compactCollapse = false;
+    compactCollapse = true;
 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()

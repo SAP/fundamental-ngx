@@ -5,6 +5,7 @@ import {
     Component,
     ElementRef,
     EventEmitter,
+    inject,
     Input,
     OnDestroy,
     Output,
@@ -13,10 +14,11 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { fromEvent, Subscription } from 'rxjs';
+import { DestroyedService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { takeUntil } from 'rxjs/operators';
 
 /**
  * A token is used to represent contextualizing information.
@@ -28,7 +30,10 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     styleUrls: ['./token.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders(), DestroyedService],
+    host: {
+        '[style.max-width.%]': '100'
+    }
 })
 export class TokenComponent implements AfterViewInit, OnDestroy {
     /** Whether the token is disabled. */
@@ -103,8 +108,17 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onTokenKeydown = new EventEmitter<KeyboardEvent>();
 
+    /**
+     * Emitted when token element received or lost focus.
+     */
+    @Output()
+    elementFocused = new EventEmitter<boolean>();
+
     /** @hidden */
     totalCount: number;
+
+    /** @hidden */
+    private readonly _destroy$ = inject(DestroyedService);
 
     /** @hidden */
     constructor(
@@ -116,6 +130,18 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     ngAfterViewInit(): void {
         this._viewContainer.createEmbeddedView(this._content);
+
+        fromEvent(this.tokenWrapperElement.nativeElement, 'focus')
+            .pipe(takeUntil(this._destroy$))
+            .subscribe(() => {
+                this.elementFocused.emit(true);
+            });
+
+        fromEvent(this.tokenWrapperElement.nativeElement, 'blur')
+            .pipe(takeUntil(this._destroy$))
+            .subscribe(() => {
+                this.elementFocused.emit(false);
+            });
     }
 
     /** @hidden */

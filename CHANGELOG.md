@@ -1,3 +1,17 @@
+# [0.40.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.29...v0.40.0-rc.0) (2023-03-24)
+
+
+### Bug Fixes
+
+* **core,platform:** multi input and combobox tokenizer behaviour ([#9571](https://github.com/SAP/fundamental-ngx/issues/9571)) ([7430869](https://github.com/SAP/fundamental-ngx/commit/74308695ab2ae1b4c370431a6f612cc838119034))
+
+
+### BREAKING CHANGES
+
+* **core,platform:** Multi-combobox and Multi-input components for both libraries (core and platform) are now following [guidelines logic regarding reviewing tokens](https://experience.sap.com/fiori-design-web/multiinput/#reviewing-tokens)
+
+
+
 ## [0.39.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.28...v0.39.1-rc.29) (2023-03-23)
 
 

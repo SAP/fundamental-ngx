@@ -94,3 +94,27 @@
     <fd-multi-combobox-loading-example></fd-multi-combobox-loading-example>
 </component-example>
 <code-example [exampleFiles]="multiComboboxLoadingExample"></code-example>
+
+<fd-docs-section-title id="tokenizer-behaviour" componentName="multi-combobox">Reviewing tokens</fd-docs-section-title>
+<description>
+    <p>
+        If tokens have been selected, and the multi-combo box is not in focus, the input field displays as many tokens
+        as possible in the available space. If more tokens have been selected, an [n] More label indicates the number of
+        hidden tokens. The tokens in the input field appear in the order in which they were selected.
+    </p>
+    <p>
+        Clicking the [n] More label opens a popover below the input field, in which all selected items are shown. The
+        user can deselect an item by clicking its checkbox or label.
+    </p>
+    <p>
+        If there is only one token in the input field and its length exceeds the width of the input field, the text is
+        truncated. Clicking the token opens a popover below the input field, in which the full text of the token is
+        shown.
+    </p>
+</description>
+<component-example>
+    <fd-multi-combobox-responsive-tokenizer-example></fd-multi-combobox-responsive-tokenizer-example>
+</component-example>
+<code-example [exampleFiles]="multiComboboxTokenizerExample"></code-example>
+
+<separator></separator>

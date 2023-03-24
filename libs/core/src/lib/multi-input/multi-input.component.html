@@ -47,6 +47,7 @@
             (addOnButtonClicked)="_addOnButtonClicked($event)"
         >
             <fd-tokenizer
+                #tokenizer
                 [compactCollapse]="compactCollapse"
                 [open]="open"
                 [tokenizerFocusable]="false"
@@ -84,6 +85,8 @@
                     [attr.aria-labelledby]="ariaLabelledBy"
                     (keydown)="_handleInputKeydown($event)"
                     [attr.id]="inputId"
+                    (focus)="tokenizer._showAllTokens()"
+                    (blur)="tokenizer._hideTokens()"
                 />
             </fd-tokenizer>
         </fd-input-group>

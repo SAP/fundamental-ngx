@@ -15,6 +15,8 @@ const multiComboboxStatesHtml = 'multi-combobox-states/multi-combobox-states-exa
 const multiComboboxStatesTs = 'multi-combobox-states/multi-combobox-states-example.component.ts';
 const multiComboboxLoadingHtml = 'multi-combobox-loading/multi-combobox-loading-example.component.html';
 const multiComboboxLoadingTs = 'multi-combobox-loading/multi-combobox-loading-example.component.ts';
+const multiComboboxTokenizerHtml = 'tokenizer/multi-combobox-responsive-tokenizer-example.component.html';
+const multiComboboxTokenizerTs = 'tokenizer/multi-combobox-responsive-tokenizer-example.component.ts';
 
 @Component({
     selector: 'app-multi-combobox',
@@ -116,6 +118,20 @@ export class MultiComboboxDocsComponent {
             fileName: 'multi-combobox-loading-example',
             code: getAssetFromModuleAssets(multiComboboxLoadingTs),
             component: 'MultiComboboxLoadingExampleComponent'
+        }
+    ];
+
+    multiComboboxTokenizerExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'multi-combobox-responsive-tokenizer-example',
+            code: getAssetFromModuleAssets(multiComboboxTokenizerHtml)
+        },
+        {
+            language: 'typescript',
+            fileName: 'multi-combobox-responsive-tokenizer-example',
+            code: getAssetFromModuleAssets(multiComboboxTokenizerTs),
+            component: 'MultiComboboxResponsiveTokenizerExampleComponent'
         }
     ];
 }
