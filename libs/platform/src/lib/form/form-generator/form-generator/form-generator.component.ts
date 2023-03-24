@@ -11,6 +11,7 @@ import {
     Output,
     QueryList,
     SimpleChanges,
+    TemplateRef,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -23,7 +24,8 @@ import {
     FieldHintOptions,
     PlatformFormFieldControl,
     HintOptions,
-    LabelLayout
+    LabelLayout,
+    HintInput
 } from '@fundamental-ngx/platform/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormGeneratorFieldComponent } from '../form-generator-field/form-generator-field.component';
@@ -117,7 +119,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      * Hint for the main title
      */
     @Input()
-    hint: string | HintOptions;
+    hint: HintInput;
 
     /**
      * @description Specify the column layout in the format `XLn-Ln-Mn-Sn`
@@ -317,10 +319,10 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.hint) {
-            if (typeof this.hint === 'string') {
+            if (typeof this.hint === 'string' || this.hint instanceof TemplateRef) {
                 this.hintOptions = {
                     ...this._defaultHintOptions,
-                    text: this.hint
+                    content: this.hint
                 };
             } else {
                 this.hintOptions = {
@@ -444,13 +446,13 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         if (!guiOptions?.hint) {
             return;
         }
-        const formItemHintOptions: string | HintOptions | FieldHintOptions = guiOptions.hint;
+        const formItemHintOptions = guiOptions.hint;
         const placement = guiOptions.hintPlacement || this._defaultHintOptions.placement;
-        if (typeof formItemHintOptions === 'string') {
+        if (typeof formItemHintOptions === 'string' || formItemHintOptions instanceof TemplateRef) {
             return {
                 ...this._defaultHintOptions,
                 placement,
-                text: formItemHintOptions
+                content: formItemHintOptions
             };
         }
         return {

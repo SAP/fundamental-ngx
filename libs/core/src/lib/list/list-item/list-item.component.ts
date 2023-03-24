@@ -30,12 +30,11 @@ import { startWith, takeUntil } from 'rxjs/operators';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { FD_LIST_UNREAD_INDICATOR } from '../list-component.token';
 import { ListFocusItem } from '../list-focus-item.model';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ListUnreadIndicator } from '../list-unread-indicator.interface';
-import { FD_LIST_LINK_DIRECTIVE } from '../tokens';
+import { FD_LIST_LINK_DIRECTIVE, FD_LIST_UNREAD_INDICATOR } from '../tokens';
 
 let listItemUniqueId = 0;
 

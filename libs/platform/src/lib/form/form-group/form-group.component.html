@@ -43,7 +43,7 @@
 <ng-content select="fdp-form-group"></ng-content>
 
 <ng-template #mainTitleTemplate>
-    <ng-container *ngIf="_hintOptions?.text && _hintOptions.position === 'before'">
+    <ng-container *ngIf="_hintOptions?.content && _hintOptions.position === 'before'">
         <ng-template [ngTemplateOutlet]="hintTemplate"></ng-template>
     </ng-container>
 
@@ -51,15 +51,14 @@
         {{ mainTitle }}
     </h5>
 
-    <ng-container *ngIf="_hintOptions?.text && _hintOptions.position === 'after'">
+    <ng-container *ngIf="_hintOptions?.content && _hintOptions.position === 'after'">
         <ng-template [ngTemplateOutlet]="hintTemplate"></ng-template>
     </ng-container>
 
     <ng-template #hintTemplate>
         <span fd-link [undecorated]="true">
             <fd-icon
-                [ariaLabel]="_hintOptions.text"
-                [fd-inline-help]="_hintOptions.text"
+                [fd-inline-help]="_hintOptions.content"
                 [glyph]="_hintOptions.glyph"
                 [placement]="_hintOptions.placement || null"
                 [triggers]="_hintOptions.trigger || []"

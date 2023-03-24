@@ -15,6 +15,7 @@ import { MultiComboboxFormsExampleComponent } from './examples/multi-combobox-fo
 import { MultiComboboxStatesExampleComponent } from './examples/multi-combobox-states/multi-combobox-states-example.component';
 import { MultiComboboxLoadingExampleComponent } from './examples/multi-combobox-loading/multi-combobox-loading-example.component';
 import { FormModule } from '@fundamental-ngx/core/form';
+import { MultiComboboxResponsiveTokenizerExampleComponent } from './examples/tokenizer/multi-combobox-responsive-tokenizer-example.component';
 
 const routes: Routes = [
     {
@@ -37,7 +38,7 @@ const routes: Routes = [
         BusyIndicatorModule,
         FormModule
     ],
-    exports: [RouterModule],
+    exports: [RouterModule, MultiComboboxResponsiveTokenizerExampleComponent],
     declarations: [
         MultiComboboxDocsComponent,
         MultiComboboxHeaderComponent,
@@ -47,7 +48,8 @@ const routes: Routes = [
         MultiComboboxColumnsExampleComponent,
         MultiComboboxFormsExampleComponent,
         MultiComboboxStatesExampleComponent,
-        MultiComboboxLoadingExampleComponent
+        MultiComboboxLoadingExampleComponent,
+        MultiComboboxResponsiveTokenizerExampleComponent
     ],
     providers: [currentComponentProvider('multi-combobox')]
 })

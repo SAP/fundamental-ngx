@@ -2,7 +2,7 @@ import { InjectionToken } from '@angular/core';
 import { Column, ColumnLayout, FieldHintOptions } from '@fundamental-ngx/platform/shared';
 import { defaultFormFieldHintOptions } from './config/default-form-field-hint-options';
 
-export const FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT = new InjectionToken<Omit<FieldHintOptions, 'text'>>(
+export const FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT = new InjectionToken<Omit<FieldHintOptions, 'content'>>(
     'Form field default hint options',
     {
         factory: () => defaultFormFieldHintOptions

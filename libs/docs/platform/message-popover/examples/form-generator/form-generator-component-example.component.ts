@@ -61,7 +61,7 @@ export class FormGeneratorComponentExample {
                     placeholder: 'Please provide your name',
                     guiOptions: {
                         hint: {
-                            text: 'Some contextual hint',
+                            content: 'Some contextual hint',
                             glyph: 'accidental-leave'
                         },
                         appendColon: true,

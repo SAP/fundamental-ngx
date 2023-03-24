@@ -53,6 +53,7 @@ import {
     FieldHintOptions,
     FormFieldGroup,
     FormGroupContainer,
+    HintInput,
     HintOptions,
     HintPlacement,
     LabelLayout,
@@ -203,7 +204,7 @@ export class FormGroupComponent
      * Form group hint options
      */
     @Input()
-    hint: string | HintOptions;
+    hint: HintInput;
 
     /**
      * @deprecated
@@ -424,10 +425,10 @@ export class FormGroupComponent
     ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
         if (changes.hint) {
-            if (typeof this.hint === 'string') {
+            if (typeof this.hint === 'string' || this.hint instanceof TemplateRef) {
                 this._hintOptions = {
                     ...this._defaultHintOptions,
-                    text: this.hint
+                    content: this.hint
                 };
             } else {
                 this._hintOptions = {
