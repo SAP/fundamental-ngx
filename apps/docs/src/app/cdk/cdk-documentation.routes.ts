@@ -60,6 +60,10 @@ export const ROUTES: Routes = [
                 path: 'initial-focus',
                 loadChildren: () =>
                     import('@fundamental-ngx/docs/cdk/initial-focus').then((m) => m.InitialFocusDocsModule)
+            },
+            {
+                path: 'breakpoint',
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/breakpoint').then((m) => m.BreakpointDocsModule)
             }
         ]
     }

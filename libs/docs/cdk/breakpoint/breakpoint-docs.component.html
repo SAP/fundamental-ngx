@@ -1,0 +1,24 @@
+<fd-docs-section-title id="simple" componentName="FdkBreakpoint">Basic example</fd-docs-section-title>
+<description>
+    <p>
+        <code> *fdkBreakpoint="[BREAKPOINT_NAME]" </code>
+        BREAKPOINT_NAME can be one of the following: <code>S</code>, <code>M</code>, <code>L</code>, <code>XL</code>,
+        also, if you want to use custom breakpoint you can use <code>lt</code> and <code>gt</code> inputs
+    </p>
+</description>
+<component-example [hasBackground]="false">
+    <fdk-breakpoint-basic-example></fdk-breakpoint-basic-example>
+</component-example>
+<code-example [exampleFiles]="basicExample"></code-example>
+
+<fd-docs-section-title id="alias" componentName="FdkBreakpoint">Alias naming</fd-docs-section-title>
+<description>
+    <p>
+        You can use alias naming for breakpoints, for example, you can use <code>[fdkBreakpointS]</code> on
+        <code>ng-template</code> instead of <code>*fdkBreakpoint="['S']"</code>
+    </p>
+</description>
+<component-example>
+    <fdk-breakpoint-alias-names-example></fdk-breakpoint-alias-names-example>
+</component-example>
+<code-example [exampleFiles]="aliasExample"></code-example>

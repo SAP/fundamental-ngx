@@ -29,3 +29,4 @@ export * from './readonly';
 export * from './disabled';
 export * from './clicked';
 export * from './selectable-list';
+export * from './breakpoints/breakpoint.directive';

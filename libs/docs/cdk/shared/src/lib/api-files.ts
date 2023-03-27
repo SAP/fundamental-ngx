@@ -6,6 +6,7 @@
  * Names are sorted in the ApiComponent so order does not matter.
  */
 export const API_FILES = {
+    breakpoint: ['BreakpointDirective'],
     forms: ['FormsComponent'],
     dataSource: ['DataSourceComponent'],
     utils: ['UtilsComponent'],
