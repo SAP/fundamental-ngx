@@ -21,11 +21,7 @@ import { debounceTime, startWith } from 'rxjs/operators';
 import { MicroProcessFlowFocusableItemDirective } from '../../micro-process-flow-focusable-item.directive';
 import { MicroProcessFlowItemComponent } from '../micro-process-flow-item/micro-process-flow-item.component';
 import { MICRO_PROCESS_FLOW } from '../../injection-tokens';
-import {
-    ContentDensityObserver,
-    contentDensityObserverProviders,
-    ContentDensityMode
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fd-micro-process-flow',
@@ -42,9 +38,7 @@ import {
             provide: MICRO_PROCESS_FLOW,
             useExisting: MicroProcessFlowComponent
         },
-        contentDensityObserverProviders({
-            modifiers: { [ContentDensityMode.COMPACT]: 'fd-micro-process-flow--compact' }
-        })
+        contentDensityObserverProviders()
     ]
 })
 export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewInit {

@@ -14,6 +14,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
 
 import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -45,7 +46,8 @@ import { DialogTitleDirective } from './directives/dialog-title.directive';
         tabindex: '-1'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [contentDensityObserverProviders()]
 })
 export class DialogComponent
     extends DialogBase

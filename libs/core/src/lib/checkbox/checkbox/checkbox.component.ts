@@ -24,11 +24,7 @@ import equal from 'fast-deep-equal';
 import { Subscription } from 'rxjs';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import {
-    ContentDensityMode,
-    ContentDensityObserver,
-    contentDensityObserverProviders
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FD_CHECKBOX_COMPONENT } from '../tokens';
 
 let checkboxUniqueId = 0;
@@ -191,22 +187,14 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._contentDensityObserver
-            .consume(
-                {
-                    elementRef: () => this.inputElement,
-                    contentDensitySettings: {
-                        modifiers: { [ContentDensityMode.COMPACT]: 'fd-checkbox--compact' }
-                    }
-                },
-                {
-                    elementRef: () => this.labelElement,
-                    contentDensitySettings: {
-                        modifiers: { [ContentDensityMode.COMPACT]: 'fd-checkbox__label--compact' }
-                    }
-                }
-            )
-            .subscribe();
+        this._contentDensityObserver.consume(
+            {
+                elementRef: () => this.inputElement
+            },
+            {
+                elementRef: () => this.labelElement
+            }
+        );
     }
 
     /** @hidden */

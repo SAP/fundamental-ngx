@@ -123,7 +123,7 @@ describe('ComboboxComponent default values', () => {
 
         fixture.detectChanges();
 
-        const compact = fixture.debugElement.queryAll(By.css('.fd-input--compact'));
+        const compact = fixture.debugElement.queryAll(By.css('fdp-combobox.is-compact'));
 
         expect(compact.length).toBeGreaterThan(0);
     });

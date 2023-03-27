@@ -104,7 +104,7 @@ describe('Select Component default values', () => {
 
         fixture.detectChanges();
 
-        const compact = fixture.debugElement.queryAll(By.css('.fd-select--compact'));
+        const compact = fixture.debugElement.queryAll(By.css('.fd-select.is-compact'));
 
         expect(compact.length).toBeGreaterThan(0);
     });

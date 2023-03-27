@@ -1,7 +1,6 @@
 <div
     class="fd-time"
     (keydown)="handleKeyDownEvent($event)"
-    [class.fd-time--compact]="_contentDensityObserver.isCompact$ | async"
     [class.fd-time--tablet]="tablet"
     [attr.aria-label]="_componentAriaLabel || ('coreTime.componentAriaName' | fdTranslate)"
 >

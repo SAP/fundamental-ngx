@@ -54,7 +54,7 @@ describe('PanelComponent', () => {
         component.isCompact = true;
         component.isFixed = true;
         fixture.detectChanges();
-        expect(component.panelRef.nativeElement.children[0].classList).toContain('fd-panel--compact');
+        expect(component.panelRef.nativeElement.classList).toContain('is-compact');
         expect(component.panelRef.nativeElement.children[0].classList).toContain('fd-panel--fixed');
     });
 

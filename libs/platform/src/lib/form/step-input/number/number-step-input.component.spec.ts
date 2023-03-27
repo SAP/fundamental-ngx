@@ -222,19 +222,16 @@ describe('NumberStepInputComponent main functionality', () => {
 
     it('should handle "compact" mode', () => {
         const hostEl = fixture.debugElement.query(By.css('.fd-step-input'));
-        const input = fixture.debugElement.query(By.css('.fd-step-input__input'));
 
         component.contentDensity = ContentDensityMode.COZY;
         fixture.detectChanges();
 
-        expect(hostEl.nativeElement.className.includes('fd-step-input--compact')).not.toBeTrue();
-        expect(input.nativeElement.className.includes('fd-input--compact')).not.toBeTrue();
+        expect(hostEl.nativeElement.className).not.toContain('is-compact');
 
         component.contentDensity = ContentDensityMode.COMPACT;
         fixture.detectChanges();
 
-        expect(hostEl.nativeElement.className.includes('fd-step-input--compact')).toBeTrue();
-        expect(input.nativeElement.className.includes('fd-input--compact')).toBeTrue();
+        expect(hostEl.nativeElement.className).toContain('is-compact');
     });
 
     it('should decrement by 1 clicking "decrease" button', () => {

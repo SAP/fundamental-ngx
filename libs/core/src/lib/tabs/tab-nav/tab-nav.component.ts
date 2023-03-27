@@ -21,17 +21,13 @@ import { merge, Subject, Subscription } from 'rxjs';
 import { TabModes, TabSizes } from '../tab-list.component';
 import { takeUntil } from 'rxjs/operators';
 import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
-import {
-    ContentDensityObserver,
-    contentDensityObserverProviders,
-    ContentDensityMode
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-tab-nav]',
     template: ` <ng-content></ng-content>`,
-    providers: [contentDensityObserverProviders({ modifiers: { [ContentDensityMode.COMPACT]: 'fd-tabs--compact' } })],
+    providers: [contentDensityObserverProviders()],
     styleUrls: ['./tab-nav.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush

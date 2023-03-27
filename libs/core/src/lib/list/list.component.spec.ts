@@ -57,7 +57,7 @@ describe('ListComponent', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-list');
+        expect(component.ref.nativeElement.className).toContain('fd-list');
     });
 
     it('should assign additional classes', () => {
@@ -69,7 +69,7 @@ describe('ListComponent', () => {
         fixture.detectChanges();
         expect(component.ref.nativeElement.classList).toContain('fd-list--no-border');
         expect(component.ref.nativeElement.classList).toContain('fd-list--has-message');
-        expect(component.ref.nativeElement.classList).toContain('fd-list--compact');
+        expect(component.ref.nativeElement.classList).toContain('is-compact');
         expect(component.ref.nativeElement.classList).toContain('fd-list--multi-input');
         expect(component.ref.nativeElement.classList).toContain('fd-list--dropdown');
     });

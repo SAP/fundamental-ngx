@@ -3,7 +3,6 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { FormModule } from '@fundamental-ngx/core/form';
@@ -99,13 +98,7 @@ describe('MultiComboboxComponent default values', () => {
         multiCombobox.onPrimaryButtonClick(multiCombobox.isOpen);
         fixture.detectChanges();
 
-        const compactInput = fixture.debugElement.queryAll(By.css('.fd-input--compact'));
-        const compactTokenizer = fixture.debugElement.queryAll(By.css('.fd-tokenizer--compact'));
-        const compactList = fixture.debugElement.queryAll(By.css('.fd-list--compact'));
-
-        expect(compactInput.length).toBeGreaterThan(0);
-        expect(compactTokenizer.length).toBeGreaterThan(0);
-        expect(compactList.length).toBeGreaterThan(0);
+        expect(component.multiCombobox.elementRef.nativeElement.classList).toContain('is-compact');
     });
 
     it('should be able to fix the height of the multi-combobox list via the maxHeight property', () => {

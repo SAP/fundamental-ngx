@@ -48,7 +48,6 @@
             [compactCollapse]="true"
             #tokenizer
             class="fd-multi-input-tokenizer-custom"
-            [class.fd-multi-input-tokenizer-custom--compact]="contentDensityObserver.isCompact$ | async"
             (moreClickedEvent)="moreClicked()"
             tabindex="-1"
             role="listbox"

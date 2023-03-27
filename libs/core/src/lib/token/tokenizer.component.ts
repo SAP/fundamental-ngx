@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import {
+    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -89,8 +90,8 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     /**
      * Component is in compact mode, determined by the consumer
      */
-    get compact(): boolean {
-        return this._contentDensityObserver.isCompact;
+    get compact(): Observable<boolean> {
+        return this._contentDensityObserver.isCompact$;
     }
 
     /** @hidden */

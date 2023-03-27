@@ -13,11 +13,7 @@ import {
 import { BaseButton } from './base-button';
 import { Subscription } from 'rxjs';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import {
-    ContentDensityObserver,
-    contentDensityObserverProviders,
-    ContentDensityMode
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 import { FD_BUTTON_COMPONENT } from './tokens';
 
@@ -45,11 +41,7 @@ import { FD_BUTTON_COMPONENT } from './tokens';
         '[attr.aria-label]': 'buttonArialabel'
     },
     providers: [
-        contentDensityObserverProviders({
-            modifiers: {
-                [ContentDensityMode.COMPACT]: 'fd-button--compact'
-            }
-        }),
+        contentDensityObserverProviders(),
         {
             provide: FD_BUTTON_COMPONENT,
             useExisting: ButtonComponent

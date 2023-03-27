@@ -69,7 +69,7 @@ describe('MessageBoxFooterComponent', () => {
         const footerEl = fixture.nativeElement.querySelector('footer');
 
         expect(footerEl).toHaveClass('fd-message-box__footer');
-        expect(footerEl).toHaveClass('fd-bar--cozy');
+        expect(footerEl).toHaveClass('is-cozy');
     });
 
     it('should use default template', async () => {

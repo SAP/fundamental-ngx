@@ -71,7 +71,6 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
     host: {
         class: 'fd-select',
         '[class.fd-select--inline]': 'inline',
-        '[class.fd-select--compact]': '_contentDensityObserver.isCompact',
         // @deprecated leaving class fd-select-custom-class for backwards compatibility
         '[class.fd-select-custom-class]': 'inline',
         // @deprecated leaving class fd-select-custom-class--mobile for backwards compatibility

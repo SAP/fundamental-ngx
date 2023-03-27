@@ -160,10 +160,10 @@ describe('SelectComponent', () => {
         it('should consume content density', () => {
             fixture.componentInstance.compact = true;
             fixture.detectChanges();
-            expect(fixture.nativeElement.querySelector('.fd-select--compact')).toBeTruthy();
+            expect(fixture.componentInstance.selectElement.nativeElement.classList).toContain('is-compact');
             fixture.componentInstance.compact = false;
             fixture.detectChanges();
-            expect(fixture.nativeElement.querySelector('.fd-select--compact')).toBeFalsy();
+            expect(fixture.componentInstance.selectElement.nativeElement.classList).not.toContain('is-compact');
         });
 
         it('should open options panel when we click on the trigger control.', async () => {

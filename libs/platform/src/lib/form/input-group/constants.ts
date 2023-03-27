@@ -5,7 +5,6 @@ export const CSS_CLASS_NAME = {
     input: 'fd-input-group__input',
     addon: 'fd-input-group__addon',
     addonButton: 'fd-input-group__addon--button',
-    addonCompact: 'fd-input-group__addon--compact',
     button: 'fd-input-group__button'
 } as const;
 
