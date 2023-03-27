@@ -1,3 +1,12 @@
+# [0.40.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.1...v0.40.0-rc.2) (2023-03-27)
+
+
+### Bug Fixes
+
+* **ci:** latest version hotfix failure ([#9574](https://github.com/SAP/fundamental-ngx/issues/9574)) ([3b776f1](https://github.com/SAP/fundamental-ngx/commit/3b776f10a50f46e401c391b16ae22e2033ad0607))
+
+
+
 # [0.40.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.0...v0.40.0-rc.1) (2023-03-24)
 
 
