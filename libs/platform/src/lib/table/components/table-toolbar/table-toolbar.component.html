@@ -14,11 +14,7 @@
             <ng-container *ngTemplateOutlet="_tableToolbarLeftActionsComponent._contentTemplateRef"></ng-container>
         </ng-container>
         <fd-toolbar-spacer></fd-toolbar-spacer>
-        <ng-container *ngIf="showExpandCollapseButtons">
-            <fdp-button glyph="expand-all" (click)="_expandAll()"></fdp-button>
-            <fdp-button glyph="collapse-all" (click)="_collapseAll()"></fdp-button>
-            <fd-toolbar-spacer></fd-toolbar-spacer>
-        </ng-container>
+
         <fdp-search-field
             *ngIf="!hideSearchInput"
             style="min-width: 15.5rem"
@@ -59,8 +55,14 @@
             <ng-container *ngTemplateOutlet="tableToolbarActionsComponent.contentTemplateRef"></ng-container>
         </ng-container>
 
-        <ng-container *ngIf="sortable || filterable || groupable || columns">
+        <ng-container *ngIf="showExpandCollapseButtons || sortable || filterable || groupable || columns">
             <fd-toolbar-separator fd-toolbar-item *ngIf="tableToolbarActionsComponent"></fd-toolbar-separator>
+
+            <ng-container *ngIf="showExpandCollapseButtons">
+                <fdp-button glyph="expand-all" (click)="_expandAll()" aria-haspopup="modal"></fdp-button>
+                <fdp-button glyph="collapse-all" (click)="_collapseAll()" aria-haspopup="modal"></fdp-button>
+            </ng-container>
+
             <fdp-button
                 *ngIf="sortable"
                 glyph="sort"
