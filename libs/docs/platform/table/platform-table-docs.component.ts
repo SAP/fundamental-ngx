@@ -14,6 +14,7 @@ import {
 import { ExampleFile, getAsset, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 
+const platformTableWithResponsiveActionsSrc = 'platform-table-responsive-actions-example.component.ts';
 const platformTableDefaultSrc = 'platform-table-default-example.component.html';
 const platformTableDefaultTsSrc = 'platform-table-default-example.component.ts';
 const platformTableCustomColumnSrc = 'platform-table-custom-column-example.component.html';
@@ -130,6 +131,15 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-default-example',
             component: 'PlatformTableDefaultExampleComponent',
             name: 'platform-table-example.component.ts'
+        }
+    ];
+
+    tableWithResponsiveActionsFiles: ExampleFile[] = [
+        {
+            language: 'ts',
+            code: getAssetFromModuleAssets(platformTableWithResponsiveActionsSrc),
+            fileName: 'platform-table-responsive-actions-example',
+            name: 'platform-table-responsive-actions-example.component.ts'
         }
     ];
 
