@@ -93,7 +93,7 @@
     "@nrwl/cli": "15.5.3",
     "@nrwl/devkit": "15.5.3",
     "@nrwl/eslint-plugin-nx": "15.5.3",
-    "@nrwl/jest": "15.5.3",
+    "@nrwl/jest": "15.8.9",
     "@nrwl/js": "15.5.3",
     "@nrwl/linter": "15.5.3",
     "@nrwl/nx-cloud": "15.0.2",
