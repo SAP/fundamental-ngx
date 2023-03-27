@@ -23,9 +23,18 @@ jobs:
             node-version: 16.x
             yarn-version: 1.22.19
 
+    ciEnv:
+        name: CI Environment
+        runs-on: ubuntu-latest
+        steps:
+            - name: Using CI env flags
+              id: ciEnv
+              run: .ci-env/flags.sh
+
     run-release:
         name: Run release
         runs-on: ubuntu-latest
+        needs: ciEnv
         steps:
             - name: Fetch from origin repo
               uses: actions/checkout@v3
@@ -33,9 +42,12 @@ jobs:
                   ref: hotfix_tmp_branch_for_automated_release_do_not_use # always fetch from hotfix temporary branch
                   fetch-depth: 0
                   token: ${{ secrets.GHACTIONS }}
-            - name: Using CI env flags
-              id: ciEnv
-              run: .ci-env/flags.sh
+
+            - uses: ./.github/actions/set-up-git
+              name: Set up git user
+              with:
+                  name: ${{ secrets.GH_NAME }}
+                  email: ${{ secrets.GH_EMAIL }}
 
             - name: Setup Node.js and Cache
               uses: ./.github/actions/nodejs
@@ -48,7 +60,7 @@ jobs:
               uses: ./.github/actions/bump-version
               with:
                   isPrerelease: false
-                  isHotfix: ${{ !steps.ciEnv.outputs.isLatest }}
+                  isHotfix: ${{ !needs.ciEnv.steps.ciEnv.outputs.isLatest }}
                   writeFile: true
 
             - name: Lint and build
@@ -101,18 +113,51 @@ jobs:
                   tag: v${{ steps.bumpVersion.outputs.newVersion }}
                   body: ${{ steps.generate_body.outputs.generatedReleaseNotes }}
 
-            - if: ${{ steps.ciEnv.outputs.isLatest }}
-              name: Update version on main
-              uses: ./.github/actions/update-version-on-main
+    update-version-on-main:
+        name: Update version on main
+        runs-on: ubuntu-latest
+        needs: ciEnv
+        if: ${{ needs.ciEnv.steps.ciEnv.outputs.isLatest }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                  ref: main # always fetch from main branch
+                  token: ${{ secrets.GHACTIONS }}
+
+            - uses: ./.github/actions/set-up-git
+              name: Set up git user
               with:
                   name: ${{ secrets.GH_NAME }}
                   email: ${{ secrets.GH_EMAIL }}
-                  token: ${{ secrets.GHACTIONS }}
+
+            - name: Setup Node.js and Cache
+              uses: ./.github/actions/nodejs
+
+            - name: Bump Version
+              if: ${{ steps.ciEnv.outputs.isLatest }}
+              id: bumpVersion
+              uses: ./.github/actions/bump-version
+              with:
+                  isPrerelease: false
+                  writeFile: true
+
+            - name: Update Changelog
+              run: npx conventional-changelog-cli -p angular -i CHANGELOG.md -s
+              shell: bash
+
+            - name: Commit Changes
+              run: |
+                  git add .
+                  git commit -m "chore(release): release v${{ steps.bumpVersion.outputs.newVersion }} [ci skip]" --no-verify
+                  git push
+              shell: bash
+
     gh_pages:
         name: Github Pages deploy
         runs-on: ubuntu-latest
-        needs: run-release
-        if: ${{ needs.run-release.steps.ciEnv.outputs.isLatest }}
+        needs: ciEnv
+        if: ${{ needs.ciEnv.steps.ciEnv.outputs.isLatest }}
         steps:
             - name: Checkout
               uses: actions/checkout@v3
@@ -136,6 +181,7 @@ jobs:
         if: ${{ always() }}
         needs:
             - run-release
+            - update-version-on-main
             - gh_pages
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
