@@ -11,32 +11,18 @@
         <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
     </fd-shellbar-logo>
 
-    <fd-product-menu [control]="productMenuControl" [closePopoverOnSelect]="true" [items]="productMenuItems">
-    </fd-product-menu>
-
     <fd-shellbar-subtitle> Subtitle </fd-shellbar-subtitle>
 
-    <fdp-search-field
-        placeholder="Search"
-        [suggestions]="suggestions"
-        [categories]="categories"
-        (searchSubmit)="onSearchSubmit($event)"
-        (inputChange)="onInputChange($event)"
-    ></fdp-search-field>
+    <fdp-search-field placeholder="Search"></fdp-search-field>
 
     <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
         <fd-shellbar-action
             *ngFor="let action of actions"
             [glyph]="action.glyph"
-            [callback]="action.callback"
             [label]="action.label"
             [notificationCount]="action.notificationCount"
             [notificationLabel]="action.notificationLabel"
         ></fd-shellbar-action>
-
-        <fd-product-switch>
-            <fd-product-switch-body [products]="productSwitcher"> </fd-product-switch-body>
-        </fd-product-switch>
     </fd-shellbar-actions>
 </fd-shellbar>
 <div style="height: 480px">
