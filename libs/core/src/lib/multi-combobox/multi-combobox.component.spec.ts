@@ -3,7 +3,6 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { Type } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { ControlValueAccessor, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 import { isSelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityMode, mockedLocalContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
@@ -61,13 +60,7 @@ describe('MultiComboBox component', () => {
 
         fixture.detectChanges();
 
-        const compactInput = fixture.debugElement.queryAll(By.css('.fd-input--compact'));
-        const compactTokenizer = fixture.debugElement.queryAll(By.css('.fd-tokenizer--compact'));
-        const compactList = fixture.debugElement.queryAll(By.css('.fd-list--compact'));
-
-        expect(compactInput.length).toBeGreaterThan(0);
-        expect(compactTokenizer.length).toBeGreaterThan(0);
-        expect(compactList.length).toBeGreaterThan(0);
+        expect(fixture.debugElement.nativeElement.classList).toContain('is-compact');
     });
 
     it('should be able to expand/collapse list if click on onPrimaryButtonClick', () => {

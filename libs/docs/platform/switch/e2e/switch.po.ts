@@ -11,7 +11,7 @@ export class SwitchPo extends PlatformBaseComponentPo {
 
     defaultCompactSwitchLabel = '#default-compact-switch .fd-switch';
     defaultCompactSwitchInput = '#default-compact-switch-input';
-    defaultCompactSwitchSizeAttr = '#default-compact-switch .fd-switch--compact span';
+    defaultCompactSwitchSizeAttr = '#default-compact-switch .fd-switch.is-compact span';
     defaultCompactSwitchHandel = '#default-compact-switch .fd-switch__handle';
 
     disabledSwitchLabel = '#switch-disabled .fd-switch';

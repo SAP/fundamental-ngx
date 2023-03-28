@@ -1,11 +1,22 @@
 @import 'fundamental-styles/dist/margins';
 
+@mixin fd-compact() {
+    @at-root {
+        [class*='--compact'] &:not([class*='--cozy']):not([class*='--condensed']),
+        .is-compact &:not(.is-cozy):not(.is-condensed),
+        &[class*='--compact'],
+        &.is-compact {
+            @content;
+        }
+    }
+}
+
 $block: fd-multi-combobox;
 
 .#{$block} {
     &-tokenizer-custom {
         width: calc(100% - 2.25rem);
-        &--compact {
+        @include fd-compact() {
             width: calc(100% - 2rem);
         }
     }

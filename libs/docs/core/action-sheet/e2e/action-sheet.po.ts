@@ -10,6 +10,7 @@ export class ActionSheetPo extends CoreBaseComponentPo {
     actionSheetListItems = 'fd-action-sheet-body li';
     actionSheetListItemButtons = 'fd-action-sheet-body button';
     alertMessage = 'fd-message-toast';
+    actionSheetBodyContainer = 'fd-action-sheet-body';
 
     async open(): Promise<void> {
         await super.open(this.url);

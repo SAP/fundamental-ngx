@@ -1,6 +1,5 @@
 import { DOCUMENT } from '@angular/common';
 import {
-    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -26,7 +25,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
-import { BehaviorSubject, fromEvent, merge, startWith, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, fromEvent, merge, Observable, startWith, Subject, Subscription } from 'rxjs';
 import { filter, takeUntil, debounceTime, map } from 'rxjs/operators';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import {
@@ -88,10 +87,19 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     }
 
     /**
+     * @hidden
+     * Observable state of the compact mode.
+     */
+    get _compact$(): Observable<boolean> {
+        return this._contentDensityObserver.isCompact$;
+    }
+
+    /**
+     * @hidden
      * Component is in compact mode, determined by the consumer
      */
-    get compact(): Observable<boolean> {
-        return this._contentDensityObserver.isCompact$;
+    get _compact(): boolean {
+        return this._contentDensityObserver.isCompact;
     }
 
     /** @hidden */
@@ -241,7 +249,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             });
         });
 
-        if (!this.compact && !this.compactCollapse) {
+        if (!this._compact && !this.compactCollapse) {
             this._handleCozyTokenCount();
         }
         this._listenElementEvents();
@@ -362,7 +370,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             const elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
             this._resetTokens();
             this.previousElementWidth = elementWidth;
-            if (!this.compact && !this.compactCollapse) {
+            if (!this._compact && !this.compactCollapse) {
                 this._handleCozyTokenCount();
             }
         }
@@ -525,7 +533,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         if (this._forceAllTokensToDisplay) {
             return;
         }
-        if (!this.compact && !this.compactCollapse) {
+        if (!this._compact && !this.compactCollapse) {
             this._getHiddenCozyTokenCount();
             return;
         }
@@ -587,7 +595,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     private _resetTokens(): void {
         this.moreTokensLeft = [];
         this.moreTokensRight = [];
-        if (this.compact || this.compactCollapse || this._forceAllTokensToDisplay) {
+        if (this._compact || this.compactCollapse || this._forceAllTokensToDisplay) {
             this.tokenList.forEach((token) => {
                 this._makeElementVisible(token.elementRef);
             });

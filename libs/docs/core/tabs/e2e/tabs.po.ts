@@ -32,6 +32,7 @@ export class TabsPo extends CoreBaseComponentPo {
     iconOnlyMode = this.modeSelect + 'option:nth-child(2)';
     filterMode = this.modeSelect + 'option:nth-child(3)';
     compactCheckBox = '.fd-checkbox__label';
+    threeTabsList = this.playGroundExample + 'fd-tab-list';
     threeTabsGroup = this.playGroundExample + '.fd-tabs';
     compactFilterModeClass = 'fd-tabs fd-tabs--filter fd-tabs--m fd-tabs--compact';
     titleField = '#playgroundtitle';

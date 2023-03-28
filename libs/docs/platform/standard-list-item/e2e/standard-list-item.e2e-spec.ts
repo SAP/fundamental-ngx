@@ -62,7 +62,7 @@ describe('Standard List Item test suite:', () => {
 
     describe('Standard List Item (ByLine)- Border Less examples:', () => {
         it('should check border and density', async () => {
-            await checkSelectorExists(`${sNoBorderByLineAttr}[fdCompact] > .fd-list--compact`);
+            await checkSelectorExists(`${sNoBorderByLineAttr}[fdCompact] > .fd-list.is-compact`);
         });
 
         it('should check interaction and content', async () => {

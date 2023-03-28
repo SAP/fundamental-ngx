@@ -106,13 +106,14 @@ describe('Checkbox test Component', () => {
     });
 
     it('should have classes applied', () => {
-        const checkboxInput = fixture.debugElement.query(By.css('fd-checkbox'));
+        const checkboxInput = fixture.debugElement.query(By.css('input'));
+        const checkbox = fixture.debugElement.query(By.css('fd-checkbox'));
         const checkboxLabel = fixture.debugElement.query(By.css('.fd-checkbox__label'));
 
         // Input Element
         expect(checkboxInput.nativeElement.getAttribute('type')).toEqual('checkbox');
         expect(checkboxInput.nativeElement.getAttribute('id')).toEqual('checkbox-0');
-        expect(checkboxInput.nativeElement.classList.contains('is-compact')).toBeTruthy();
+        expect(checkbox.nativeElement.classList.contains('is-compact')).toBeTruthy();
         expect(checkboxLabel.nativeElement.classList.contains('fd-checkbox__label')).toBeTruthy();
         expect(checkboxInput.nativeElement.classList.contains('fd-checkbox')).toBeTruthy();
     });

@@ -221,7 +221,7 @@ describe('NumberStepInputComponent main functionality', () => {
     });
 
     it('should handle "compact" mode', () => {
-        const hostEl = fixture.debugElement.query(By.css('.fd-step-input'));
+        const hostEl = fixture.debugElement.query(By.css('fdp-number-step-input'));
 
         component.contentDensity = ContentDensityMode.COZY;
         fixture.detectChanges();

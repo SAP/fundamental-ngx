@@ -46,7 +46,7 @@ export class ApprovalFlowPo extends PlatformBaseComponentPo {
     toastMessageDialog = 'fd-message-toast';
     flowNavigationArrow = 'button.fdp-approval-flow-carousel-controls__button--next-slide';
 
-    topActionButtons = 'button.fd-button--standard.fd-button--compact';
+    topActionButtons = 'button.fd-button--standard.is-compact';
     messageStrip = 'fd-message-strip';
     messageStripUndoLink = 'fd-message-strip a';
     messageStripCancelUndoMessage = 'fd-message-strip button';

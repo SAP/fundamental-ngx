@@ -4,7 +4,7 @@
             <ng-content select="fd-token"></ng-content>
         </div>
 
-        <ng-container *ngIf="_showOverflowPopover && (compact || compactCollapse); else moreElement">
+        <ng-container *ngIf="_showOverflowPopover && ((_compact$ | async) || compactCollapse); else moreElement">
             <ng-container *ngTemplateOutlet="tokensOverflow"></ng-container>
         </ng-container>
 
@@ -48,10 +48,10 @@
         role="button"
         tabindex="0"
     >
-        <ng-container *ngIf="compact || compactCollapse">
+        <ng-container *ngIf="(_compact$ | async) || compactCollapse">
             {{ 'coreTokenizer.moreLabel' | fdTranslate : { count: moreTokensLeft.length + moreTokensRight.length } }}
         </ng-container>
-        <ng-container *ngIf="!compact && !compactCollapse">
+        <ng-container *ngIf="(_compact$ | async) === false && !compactCollapse">
             {{ 'coreTokenizer.moreLabel' | fdTranslate : { count: hiddenCozyTokenCount } }}
         </ng-container>
     </span>

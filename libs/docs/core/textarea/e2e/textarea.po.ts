@@ -10,7 +10,7 @@ export class TextareaPo extends CoreBaseComponentPo {
 
     textarea = '.fd-textarea';
     label = '.fd-form-label';
-    compactTextarea = '.fd-textarea--compact';
+    compactTextarea = '.fd-textarea.is-compact';
     basicTextArea = '.fd-textarea:not(.fd-textarea--compact)';
 
     helpIcon = '.sap-icon--question-mark';
