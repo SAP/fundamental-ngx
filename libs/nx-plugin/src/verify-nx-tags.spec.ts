@@ -11,7 +11,7 @@ const knownTypes = new Set(['app', 'e2e', 'tools', 'lib']);
 const knownScopes = new Set(['docs', 'fd', 'fdp', 'fn', 'cx', 'tools', 'datetime-adapter', 'components-e2e', 'i18n']);
 
 // For some reason this test hangs. TODO: investigate whats wrong.
-xdescribe('Nx projects (nx.json)', () => {
+describe('Nx projects (nx.json)', () => {
     // generate tests so we have a clear output of which project failed
     projects.forEach((testEntry) => {
         describe(`Project ${testEntry.projectName}`, () => {
