@@ -737,7 +737,7 @@ describe('Table component test suite', () => {
             await scrollIntoView(playgroundExample);
             await click(playgroundContentDensityDropdown);
             await click(optionCompact);
-            await expect(await getElementClass(playgroundExample + fdpTable)).toContain('fd-table--compact');
+            await expect(await getElementClass(playgroundExample + fdpTable)).toContain('is-compact');
 
             await click(playgroundContentDensityDropdown);
             await click(optionCozy);
@@ -745,7 +745,7 @@ describe('Table component test suite', () => {
 
             await click(playgroundContentDensityDropdown);
             await click(optionCondensed);
-            await expect(await getElementClass(playgroundExample + fdpTable)).toContain('fd-table--condensed');
+            await expect(await getElementClass(playgroundExample + fdpTable)).toContain('is-condensed');
         });
 
         it('should check table selection mode', async () => {
