@@ -1,3 +1,12 @@
+# [0.40.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.2...v0.40.0-rc.3) (2023-03-28)
+
+
+### Bug Fixes
+
+* **platform:** collapseAll/expandAll needs to be now in the same group as sort,filter buttons ([#9591](https://github.com/SAP/fundamental-ngx/issues/9591)) ([19f4513](https://github.com/SAP/fundamental-ngx/commit/19f45138d712ce2b10930a87b8aa6f35531eaef4))
+
+
+
 # [0.40.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.1...v0.40.0-rc.2) (2023-03-27)
 
 
