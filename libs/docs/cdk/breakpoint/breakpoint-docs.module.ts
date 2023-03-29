@@ -8,6 +8,7 @@ import { BasicExampleComponent } from './examples/basic-example/basic-example.co
 import { BreakpointModule } from '@fundamental-ngx/cdk/utils';
 import { AliasNamesExampleComponent } from './examples/alias-names-example/alias-names-example.component';
 import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
+import { TableModule } from '@fundamental-ngx/core/table';
 
 const routes: Routes = [
     {
@@ -24,7 +25,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [CommonModule, RouterModule.forChild(routes), SharedDocumentationPageModule, BreakpointModule],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        BreakpointModule,
+        TableModule
+    ],
     exports: [RouterModule],
     declarations: [
         BreakpointDocsComponent,

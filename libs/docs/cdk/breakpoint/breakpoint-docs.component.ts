@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { ResponsiveBreakpoints } from '../../../cdk/src/lib/utils/directives/breakpoints/responsive-breakpoints';
 
 const defaultExampleHtml = 'basic-example/basic-example.component.html';
 const defaultExampleTs = 'basic-example/basic-example.component.ts';
@@ -10,6 +11,8 @@ const aliasNamesExampleTs = 'alias-names-example/alias-names-example.component.t
     templateUrl: './breakpoint-docs.component.html'
 })
 export class BreakpointDocsComponent {
+    breakpointSizes = ResponsiveBreakpoints;
+
     basicExample = [
         {
             code: getAssetFromModuleAssets(defaultExampleHtml),

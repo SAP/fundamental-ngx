@@ -2,9 +2,35 @@
 <description>
     <p>
         <code> *fdkBreakpoint="[BREAKPOINT_NAME]" </code>
-        BREAKPOINT_NAME can be one of the following: <code>S</code>, <code>M</code>, <code>L</code>, <code>XL</code>,
-        also, if you want to use custom breakpoint you can use <code>lt</code> and <code>gt</code> inputs
+        BREAKPOINT_NAME can be one of the following:
     </p>
+    <table fd-table>
+        <thead fd-table-header>
+            <tr fd-table-row>
+                <th fd-table-cell>BREAKPOINT_NAME</th>
+                <th fd-table-cell>Container size</th>
+            </tr>
+        </thead>
+        <tbody fd-table-body>
+            <tr fd-table-row [hoverable]="true">
+                <td fd-table-cell>S</td>
+                <td fd-table-cell>[0 - {{ breakpointSizes.S }})px</td>
+            </tr>
+            <tr fd-table-row [hoverable]="true">
+                <td fd-table-cell>M</td>
+                <td fd-table-cell>({{ breakpointSizes.S }} - {{ breakpointSizes.M }})px</td>
+            </tr>
+            <tr fd-table-row [hoverable]="true">
+                <td fd-table-cell>L</td>
+                <td fd-table-cell>({{ breakpointSizes.M }} - {{ breakpointSizes.L }})px</td>
+            </tr>
+            <tr fd-table-row [hoverable]="true">
+                <td fd-table-cell>XL</td>
+                <td fd-table-cell>({{ breakpointSizes.L }} - &infin;]px</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>also, if you want to use custom breakpoint you can use <code>lt</code> and <code>gt</code> inputs</p>
 </description>
 <component-example [hasBackground]="false">
     <fdk-breakpoint-basic-example></fdk-breakpoint-basic-example>
