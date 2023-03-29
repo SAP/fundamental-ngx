@@ -426,6 +426,8 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         toolbarActionFilterButtonTitle: 'Filtr',
         toolbarActionGroupButtonTitle: 'Skupina',
         toolbarActionColumnsButtonTitle: 'Sloupce',
+        toolbarActionExpandAllButtonTitle: 'Rozbalit vše',
+        toolbarActionCollapseAllButtonTitle: 'Sbalit vše',
         filterDialogNotFilteredLabel: '(Nefiltrováno)',
         filterDialogFilterByLabel: 'Filtrovat podle: {{ filterLabel }}',
         filterDialogFilterTitle: 'Filtr',
