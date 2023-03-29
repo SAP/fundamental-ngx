@@ -11,6 +11,7 @@ import {
     OnChanges,
     OnInit,
     Output,
+    Renderer2,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -162,8 +163,15 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     /** Event emitted when zoom icon clicked. Only fires if zoomGlyph input property is set. */
     @Output() zoomGlyphClicked = new EventEmitter<void>();
 
-    /** @hidden */
-    @HostBinding('style.background-image')
+    /**
+     * @hidden
+     */
+    set bgImage(image: Nullable<string>) {
+        this._bgImage = image;
+
+        this._renderer.setStyle(this._elementRef.nativeElement, 'background-image', image);
+    }
+
     get bgImage(): Nullable<string> {
         return this._bgImage;
     }
@@ -213,8 +221,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef,
-        private _cdr: ChangeDetectorRef,
+        private readonly _elementRef: ElementRef,
+        private readonly _cdr: ChangeDetectorRef,
+        private readonly _renderer: Renderer2,
         @Attribute('tabindex') private hostTabindex: number | null
     ) {}
 
@@ -311,14 +320,14 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
         if (value) {
             this._verifyImageUrl(value, (): void => {}, this._onErrorCallback);
         } else {
-            this._bgImage = null;
+            this.bgImage = null;
         }
     }
 
     /** @hidden */
     private _verifyImageUrl(srcValue: string, onLoadCallback: () => void, onErrorCallback: () => void): void {
         // Don't load the same image all the time check happens
-        if (srcValue === this._bgImage) {
+        if (srcValue === this.bgImage) {
             return;
         }
         const img = new Image();
@@ -330,14 +339,13 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
 
     /** @hidden */
     private _assignBgImage(srcValue: Nullable<string>): void {
-        this._bgImage = srcValue ? `url(${srcValue})` : null;
+        this.bgImage = srcValue ? `url(${srcValue})` : null;
     }
 
     /** @hidden */
     private _onErrorCallback(): void {
         if (!this._alterIcon) {
             this._showDefaultIcon();
-            this._cdr.detectChanges();
             return;
         }
 
@@ -373,11 +381,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
                         this._backupImage,
                         () => {
                             this._assignBgImage(this._backupImage);
-                            this._cdr.detectChanges();
                         },
                         () => {
                             this._showDefaultIcon();
-                            this._cdr.detectChanges();
                         }
                     );
                     break;
@@ -393,8 +399,6 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
 
             this._showDefaultIcon();
         }
-
-        this._cdr.detectChanges();
     }
 
     /** @hidden */
@@ -402,5 +406,6 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
         this.abbreviate = null;
         this._image = null;
         this.glyph = null;
+        this._cdr.markForCheck();
     }
 }
