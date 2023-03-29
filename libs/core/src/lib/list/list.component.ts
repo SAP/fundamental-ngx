@@ -32,7 +32,7 @@ import {
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 import { ListComponentInterface } from './list-component.interface';
-import { FD_LIST_COMPONENT, FD_LIST_UNREAD_INDICATOR } from './list-component.token';
+import { FD_LIST_COMPONENT, FD_LIST_UNREAD_INDICATOR } from './tokens';
 import { ListUnreadIndicator } from './list-unread-indicator.interface';
 
 /**

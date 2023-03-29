@@ -508,6 +508,7 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         headerMenuSortDesc: 'Сортировать по убыванию',
         headerMenuGroup: 'Сгруппировать',
         headerMenuFreeze: 'Заморозить',
+        headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'Разморозить',
         headerMenuFilter: 'Фильтр',
         defaultEmptyMessage: 'Ничего не найдено',

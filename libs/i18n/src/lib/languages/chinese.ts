@@ -352,6 +352,7 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         headerMenuSortDesc: '降序排序',
         headerMenuGroup: '分组',
         headerMenuFreeze: '冻结',
+        headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: '解冻标题菜单',
         headerMenuFilter: '筛选',
         defaultEmptyMessage: '没有找到相关数据',

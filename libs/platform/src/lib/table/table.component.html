@@ -82,6 +82,8 @@
                             [ngClass]="'fdp-table__col--' + column.name"
                             [class.fd-table__cell--fixed]="_freezableColumns.has(column.name)"
                             [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
+                            [class.fd-table__cell--fixed-end]="_freezableEndColumns.has(column.name)"
+                            [class.fd-table__cell--fixed-end-last]="column.name === freezeEndColumnsTo"
                             [ngStyle]="
                                 column
                                     | tableCellStyles
@@ -89,8 +91,10 @@
                                         : _semanticHighlightingColumnWidth
                                         : _selectionColumnWidth
                                         : _freezableColumns.has(column.name)
+                                        : _freezableEndColumns.has(column.name)
                                         : _tableColumnResizeService.getPrevColumnsWidth(column.name)
                                         : _tableColumnResizeService.getColumnWidthStyle(column.name)
+                                        : _tableColumnResizeService.getNextColumnsWidth(column.name)
                             "
                             [fdPopoverTrigger]="columnHeaderPopover"
                             [class.fd-table__item--clickable]="_isColumnHasHeaderMenu(column)"
@@ -107,6 +111,9 @@
                                 [disabled]="!_isColumnHasHeaderMenu(column)"
                                 [noArrow]="true"
                                 fd-table-popover
+                                [focusAutoCapture]="true"
+                                [focusTrapped]="true"
+                                [triggers]="['click', 'keydown.enter', 'keydown.space']"
                             >
                                 <ng-container
                                     *ngTemplateOutlet="headerPopoverTemplate; context: { column: column }"
@@ -118,7 +125,7 @@
                     <th
                         *ngIf="_isShownNavigationColumn"
                         fd-table-cell
-                        lass="fdp-table__cell--navigation"
+                        class="fdp-table__cell--navigation"
                         role="columnheader"
                     ></th>
 
@@ -163,7 +170,7 @@
                             [attr.aria-expanded]="row.expanded"
                             [attr.data-nesting-level]="row.level + 1"
                             (click)="_toggleGroupRow(row)"
-                            (keyup.enter)="_toggleGroupRow(row)"
+                            (keydown.enter)="_toggleGroupRow(row)"
                         >
                             <ng-container
                                 *ngTemplateOutlet="tableCellExpandTemplate; context: { row: row }"
@@ -271,6 +278,8 @@
                             [ngClass]="'fdp-table__col--' + column.name"
                             [class.fd-table__cell--fixed]="_freezableColumns.has(column.name)"
                             [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
+                            [class.fd-table__cell--fixed-end]="_freezableEndColumns.has(column.name)"
+                            [class.fd-table__cell--fixed-end-last]="column.name === freezeEndColumnsTo"
                             [class.fd-table__cell--expand]="_isTreeRowFirstCell(colIdx, row)"
                             [ngStyle]="
                                 column
@@ -279,15 +288,17 @@
                                         : _semanticHighlightingColumnWidth
                                         : _selectionColumnWidth
                                         : _freezableColumns.has(column.name)
+                                        : _freezableEndColumns.has(column.name)
                                         : _tableColumnResizeService.getPrevColumnsWidth(column.name)
                                         : _tableColumnResizeService.getColumnWidthStyle(column.name)
+                                        : _tableColumnResizeService.getNextColumnsWidth(column.name)
                             "
                             [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
                             [attr.data-nesting-level]="colIdx === 0 ? row.level + 1 : null"
                             [cellFocusedEventAnnouncer]="null"
                             (cellFocused)="_onCellFocused($event, column?.label ?? '', isTreeTable ? row.level : null)"
                             (click)="_onCellClick(colIdx, row)"
-                            (keyup.enter)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
+                            (keydown.enter)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
                         >
                             <ng-container
                                 *ngTemplateOutlet="
@@ -334,7 +345,7 @@
                             [attr.data-nesting-level]="row.level + 1"
                             [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
                             (click)="_onCellClick(0, row)"
-                            (keyup.enter)="_isTreeRowFirstCell(0, row) && _toggleGroupRow(row)"
+                            (keydown.enter)="_isTreeRowFirstCell(0, row) && _toggleGroupRow(row)"
                         >
                             <div fd-table-text *ngFor="let poppingColumn of _poppingColumns">
                                 <label fd-form-label>{{ poppingColumn.label }}:</label>
@@ -398,19 +409,21 @@
         <!-- Sorting -->
         <ng-container *ngIf="column.sortable">
             <li
+                [tabindex]="0"
                 class="fd-table__item--clickable"
                 fd-list-item
                 (click)="_columnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
-                (keyup.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
+                (keydown.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
             >
                 <span fd-list-icon glyph="sort-ascending"></span>
                 <span fd-list-title>{{ 'platformTable.headerMenuSortAsc' | fdTranslate }}</span>
             </li>
             <li
+                [tabindex]="0"
                 class="fd-table__item--clickable"
                 fd-list-item
                 (click)="_columnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
-                (keyup.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
+                (keydown.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
             >
                 <span fd-list-icon glyph="sort-descending"></span>
                 <span fd-list-title>{{ 'platformTable.headerMenuSortDesc' | fdTranslate }}</span>
@@ -420,10 +433,11 @@
         <!-- Grouping -->
         <ng-container *ngIf="column.groupable">
             <li
+                [tabindex]="0"
                 class="fd-table__item--clickable"
                 fd-list-item
                 (click)="_columnHeaderGroupBy(column.key)"
-                (keyup.enter)="_columnHeaderGroupBy(column.key)"
+                (keydown.enter)="_columnHeaderGroupBy(column.key)"
             >
                 <span fd-list-icon></span>
                 <span fd-list-title>{{ 'platformTable.headerMenuGroup' | fdTranslate }}</span>
@@ -431,23 +445,33 @@
         </ng-container>
 
         <!-- Freeze -->
-        <ng-container *ngIf="column.freezable">
+        <ng-container *ngIf="column.freezable || column.endFreezable">
             <li
-                *ngIf="!_freezableColumns?.has(column.name); else unfreezeTpl"
+                [tabindex]="0"
+                *ngIf="
+                    !_freezableColumns?.has(column.name) && !_freezableEndColumns?.has(column.name);
+                    else unfreezeTpl
+                "
                 class="fd-table__item--clickable"
                 fd-list-item
-                (click)="freezeToColumn(column.name)"
-                (keyup.enter)="freezeToColumn(column.name)"
+                (click)="freezeToColumn(column.name, column.endFreezable)"
+                (keyup.enter)="freezeToColumn(column.name, column.endFreezable)"
             >
                 <span></span>
-                <span fd-list-title>{{ 'platformTable.headerMenuFreeze' | fdTranslate }}</span>
+                <span fd-list-title *ngIf="!column.endFreezable">{{
+                    'platformTable.headerMenuFreeze' | fdTranslate
+                }}</span>
+                <span fd-list-title *ngIf="column.endFreezable">{{
+                    'platformTable.headerMenuEndFreeze' | fdTranslate
+                }}</span>
             </li>
             <ng-template #unfreezeTpl>
                 <li
+                    [tabindex]="0"
                     class="fd-table__item--clickable"
                     fd-list-item
-                    (click)="unfreeze(column.name)"
-                    (keyup.enter)="unfreeze(column.name)"
+                    (click)="unfreeze(column.name, column.endFreezable)"
+                    (keyup.enter)="unfreeze(column.name, column.endFreezable)"
                 >
                     <span></span>
                     <span fd-list-title>{{ 'platformTable.headerMenuUnfreeze' | fdTranslate }}</span>
@@ -457,7 +481,7 @@
 
         <!-- Filtering -->
         <ng-container *ngIf="column.filterable && !_isFilteringFromHeaderDisabled">
-            <li fd-list-item>
+            <li fd-list-item [tabindex]="0">
                 <i fd-list-icon glyph="filter"></i>
                 <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
                     <label fd-form-label [for]="'fdp-table-column-filtering-' + column.name">{{
@@ -466,7 +490,7 @@
                     <input
                         fd-form-control
                         [id]="'fdp-table-column-filtering-' + column.name"
-                        (keyup.enter)="_columnHeaderFilterBy(column.key, $any($event.target)?.value)"
+                        (keydown.enter)="_columnHeaderFilterBy(column.key, $any($event.target)?.value)"
                     />
                 </div>
             </li>

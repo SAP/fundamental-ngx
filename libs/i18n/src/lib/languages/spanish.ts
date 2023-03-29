@@ -357,6 +357,7 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
         headerMenuSortDesc: 'Orden descendente',
         headerMenuGroup: 'Grupo',
         headerMenuFreeze: 'Congelar',
+        headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'HeaderMenuUnfreeze',
         headerMenuFilter: 'Filtro',
         defaultEmptyMessage: 'No se encontraron datos',

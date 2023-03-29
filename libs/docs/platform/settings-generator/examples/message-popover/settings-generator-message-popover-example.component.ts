@@ -129,7 +129,7 @@ export class SettingsGeneratorMessagePopoverExampleComponent implements AfterVie
                                     guiOptions: {
                                         hint: {
                                             target: 'input',
-                                            text: 'This is not editable text'
+                                            content: 'This is not editable text'
                                         },
                                         labelColumnLayout: {
                                             S: 12,

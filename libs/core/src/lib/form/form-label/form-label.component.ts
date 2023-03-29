@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    HostBinding,
+    Input,
+    isDevMode,
+    OnChanges,
+    TemplateRef,
+    ViewEncapsulation
+} from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { InlineHelpFormPlacement } from '../inline-help-placement.type';
@@ -15,7 +24,6 @@ let formLabelIdCount = 0;
  * ```
  */
 @Component({
-    // TODO to be discussed
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-form-label]',
     templateUrl: './form-label.component.html',
@@ -45,9 +53,21 @@ export class FormLabelComponent implements OnChanges {
     @HostBinding('class.fd-form-label__wrapper--align-end')
     alignLabelEnd = false;
 
-    /** Inline help body text. */
+    /**
+     * Inline help body text.
+     * @deprecated Use inlineHelpContent instead
+     * */
     @Input()
-    inlineHelpTitle: Nullable<string> = null;
+    set inlineHelpTitle(title: Nullable<string>) {
+        if (isDevMode()) {
+            console.warn('inlineHelpTitle is deprecated, use inlineHelpContent instead');
+        }
+        this.inlineHelpContent = title;
+    }
+
+    /** Inline help content. Could be just a string or complex template */
+    @Input()
+    inlineHelpContent: Nullable<string | TemplateRef<any>> = null;
 
     /** Glyph of icon triggering inline help. */
     @Input()
@@ -76,6 +96,18 @@ export class FormLabelComponent implements OnChanges {
     @Input()
     inlineHelpPlacement: InlineHelpFormPlacement = 'after';
 
+    /** Inline help label. */
+    @Input()
+    set inlineHelpLabel(label: string) {
+        this._inlineHelpLabel = label;
+    }
+    get inlineHelpLabel(): string {
+        if (this._inlineHelpLabel) {
+            return this._inlineHelpLabel;
+        }
+        return typeof this.inlineHelpContent === 'string' ? this.inlineHelpContent : '';
+    }
+
     /** @hidden */
     @HostBinding('class.fd-form-label__wrapper')
     defaultClass = true;
@@ -103,8 +135,11 @@ export class FormLabelComponent implements OnChanges {
     private _formLabelId = `fd-form-label-${++formLabelIdCount}`;
 
     /** @hidden */
+    private _inlineHelpLabel?: string;
+
+    /** @hidden */
     ngOnChanges(): void {
-        this.inlineHelpClass = !!this.inlineHelpTitle;
-        this.inlineHelpAfter = !!this.inlineHelpTitle && this.inlineHelpPlacement === 'after';
+        this.inlineHelpClass = !!this.inlineHelpContent;
+        this.inlineHelpAfter = !!this.inlineHelpContent && this.inlineHelpPlacement === 'after';
     }
 }

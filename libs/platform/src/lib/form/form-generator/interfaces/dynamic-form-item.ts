@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 import { ContentDensity } from '@fundamental-ngx/cdk/utils';
 import {
     ColumnLayout,
-    FieldHintOptions,
-    HintOptions,
+    FieldHintInput,
+    HintInput,
     HintPlacement,
     InlineLayout,
     LabelLayout,
@@ -370,7 +370,7 @@ export interface BaseDynamicFormItemGuiOptions {
      * @description
      * If set, hint icon is added to control label or group heading with tooltip message as a value.
      */
-    hint?: string | HintOptions;
+    hint?: HintInput;
 
     /**
      * @deprecated Use `hint.placement` instead
@@ -438,7 +438,7 @@ export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions
     /**
      * Hint options. Either only text or full config
      */
-    hint?: string | FieldHintOptions;
+    hint?: FieldHintInput;
 }
 
 export type DynamicFormValue = Record<string, any>;

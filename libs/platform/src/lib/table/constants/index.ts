@@ -21,6 +21,7 @@ export const DEFAULT_TABLE_STATE: Readonly<TableState> = {
     columns: [],
     columnKeys: [],
     freezeToColumn: null,
+    freezeToEndColumn: null,
     searchInput: DEFAULT_TABLE_SEARCH_INPUT
 };
 

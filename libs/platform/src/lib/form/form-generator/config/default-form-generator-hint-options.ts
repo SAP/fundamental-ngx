@@ -1,6 +1,6 @@
 import { FieldHintOptions } from '@fundamental-ngx/platform/shared';
 
-export const defaultFormGeneratorHintOptions: Omit<FieldHintOptions, 'text'> = {
+export const defaultFormGeneratorHintOptions: Omit<FieldHintOptions, 'content'> = {
     placement: 'right',
     position: 'after',
     trigger: [

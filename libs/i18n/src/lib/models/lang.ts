@@ -444,6 +444,7 @@ export interface FdLanguage {
         headerMenuSortDesc: FdLanguageKey;
         headerMenuGroup: FdLanguageKey;
         headerMenuFreeze: FdLanguageKey;
+        headerMenuEndFreeze: FdLanguageKey;
         headerMenuUnfreeze: FdLanguageKey;
         headerMenuFilter: FdLanguageKey;
         defaultEmptyMessage: FdLanguageKey;

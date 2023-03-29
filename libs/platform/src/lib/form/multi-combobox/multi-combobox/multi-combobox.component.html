@@ -43,6 +43,8 @@
             (keydown)="navigateByTokens($event)"
         >
             <fd-tokenizer
+                #tokenizer
+                [compactCollapse]="true"
                 *ngIf="_selectedSuggestions"
                 [tokenizerFocusable]="false"
                 class="fdp-multi-combobox-tokenizer-custom"
@@ -82,12 +84,13 @@
                     [(ngModel)]="inputText"
                     (ngModelChange)="searchTermChanged()"
                     [placeholder]="placeholder"
-                    (focus)="onTouched()"
-                    (blur)="!mobile && onBlur($event)"
+                    (focus)="onTouched(); tokenizer._showAllTokens()"
+                    (blur)="!mobile && onBlur($event); tokenizer._hideTokens()"
                     [attr.aria-expanded]="isOpen"
                     [readonly]="readonly"
                     [attr.aria-readonly]="readonly"
                     [attr.aria-required]="required"
+                    class="fd-tokenizer__input"
                 />
             </fd-tokenizer>
         </fd-input-group>

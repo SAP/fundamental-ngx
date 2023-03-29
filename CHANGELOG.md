@@ -1,3 +1,93 @@
+# [0.40.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.4...v0.40.0-rc.5) (2023-03-29)
+
+
+### Bug Fixes
+
+* **core:** use renderer instead of cdr ([#9602](https://github.com/SAP/fundamental-ngx/issues/9602)) ([b6bdd34](https://github.com/SAP/fundamental-ngx/commit/b6bdd345f480b709a845d3dcb8fa1166e1d7037a))
+
+
+
+# [0.40.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.3...v0.40.0-rc.4) (2023-03-28)
+
+
+
+# [0.40.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.2...v0.40.0-rc.3) (2023-03-28)
+
+
+### Bug Fixes
+
+* **platform:** collapseAll/expandAll needs to be now in the same group as sort,filter buttons ([#9591](https://github.com/SAP/fundamental-ngx/issues/9591)) ([19f4513](https://github.com/SAP/fundamental-ngx/commit/19f45138d712ce2b10930a87b8aa6f35531eaef4))
+
+
+
+# [0.40.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.1...v0.40.0-rc.2) (2023-03-27)
+
+
+### Bug Fixes
+
+* **ci:** latest version hotfix failure ([#9574](https://github.com/SAP/fundamental-ngx/issues/9574)) ([3b776f1](https://github.com/SAP/fundamental-ngx/commit/3b776f10a50f46e401c391b16ae22e2033ad0607))
+
+
+
+# [0.40.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.0...v0.40.0-rc.1) (2023-03-24)
+
+
+### Features
+
+* **platform:** form generator inline help support for templates ([#9560](https://github.com/SAP/fundamental-ngx/issues/9560)) ([5814ba3](https://github.com/SAP/fundamental-ngx/commit/5814ba3a2a2b920df7c5bb7b77bbbff9582c4fb2))
+
+
+
+# [0.40.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.29...v0.40.0-rc.0) (2023-03-24)
+
+
+### Bug Fixes
+
+* **core,platform:** multi input and combobox tokenizer behaviour ([#9571](https://github.com/SAP/fundamental-ngx/issues/9571)) ([7430869](https://github.com/SAP/fundamental-ngx/commit/74308695ab2ae1b4c370431a6f612cc838119034))
+
+
+### BREAKING CHANGES
+
+* **core,platform:** Multi-combobox and Multi-input components for both libraries (core and platform) are now following [guidelines logic regarding reviewing tokens](https://experience.sap.com/fiori-design-web/multiinput/#reviewing-tokens)
+
+
+
+## [0.39.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.28...v0.39.1-rc.29) (2023-03-23)
+
+
+### Features
+
+* **platform:** implement end column freezing ([#9529](https://github.com/SAP/fundamental-ngx/issues/9529)) ([5ea9e4a](https://github.com/SAP/fundamental-ngx/commit/5ea9e4a2a6490d7da9f2b25b8e7a202c79310f19))
+
+
+
+## [0.39.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.27...v0.39.1-rc.28) (2023-03-22)
+
+
+### Bug Fixes
+
+* **core:** dynamic collapsible subheader z-index must be higher ([#9554](https://github.com/SAP/fundamental-ngx/issues/9554)) ([7b15192](https://github.com/SAP/fundamental-ngx/commit/7b15192cac896005905a4efbc135226fee0b96c2))
+
+
+
+## [0.39.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.26...v0.39.1-rc.27) (2023-03-22)
+
+
+### Bug Fixes
+
+* **platform:** keyboard support for sort popovers ([#9561](https://github.com/SAP/fundamental-ngx/issues/9561)) ([3ecb213](https://github.com/SAP/fundamental-ngx/commit/3ecb2131a1d857626183c4ed87040888bc952a76))
+
+
+
+## [0.39.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.25...v0.39.1-rc.26) (2023-03-22)
+
+
+### Features
+
+* **platform:** programmatic table row expansion ([#9566](https://github.com/SAP/fundamental-ngx/issues/9566)) ([e942db5](https://github.com/SAP/fundamental-ngx/commit/e942db528ff5dc95c7e9483eed2a75839f85c40a))
+
+
+
 ## [0.39.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.39.1-rc.24...v0.39.1-rc.25) (2023-03-22)
 
 

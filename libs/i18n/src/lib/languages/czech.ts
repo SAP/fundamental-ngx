@@ -357,6 +357,7 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         headerMenuSortDesc: 'Seřadit sestupně',
         headerMenuGroup: 'Skupina',
         headerMenuFreeze: 'Zmrazit',
+        headerMenuEndFreeze: 'Freeze to End',
         headerMenuUnfreeze: 'HeaderMenuUnfreeze',
         headerMenuFilter: 'Filtr',
         defaultEmptyMessage: 'Nenalezena žádná data',

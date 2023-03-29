@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, inject, NgZone, TemplateRef, ViewChild } from '@angular/core';
 import { DynamicFormItem } from '@fundamental-ngx/platform/form';
 import { HintOptions } from '@fundamental-ngx/platform/shared';
+import { first } from 'rxjs';
 
 @Component({
     selector: 'fdp-platform-form-generator-inline-help-example',
     templateUrl: './platform-form-generator-inline-help-example.component.html'
 })
-export class PlatformFormGeneratorInlineHelpExampleComponent {
+export class PlatformFormGeneratorInlineHelpExampleComponent implements AfterViewInit {
+    @ViewChild('hintTemplate', { static: true })
+    hintTemplate!: TemplateRef<void>;
+
+    ngZone = inject(NgZone);
+
     formItemsAutoHintPlacement: DynamicFormItem[] = [
         {
             type: 'input',
@@ -32,7 +38,7 @@ export class PlatformFormGeneratorInlineHelpExampleComponent {
             message: 'First Name',
             guiOptions: {
                 hint: {
-                    text: 'Some hint for name',
+                    content: 'Some hint for name',
                     target: 'label'
                 }
             }
@@ -43,7 +49,7 @@ export class PlatformFormGeneratorInlineHelpExampleComponent {
             message: 'Last Name',
             guiOptions: {
                 hint: {
-                    text: 'Some hint for last name',
+                    content: 'Some hint for last name',
                     target: 'label'
                 }
             }
@@ -63,7 +69,7 @@ export class PlatformFormGeneratorInlineHelpExampleComponent {
                     message: 'First Name',
                     guiOptions: {
                         hint: {
-                            text: 'Some hint for name',
+                            content: 'Some hint for name',
                             target: 'label'
                         }
                     }
@@ -74,7 +80,7 @@ export class PlatformFormGeneratorInlineHelpExampleComponent {
                     message: 'Last Name',
                     guiOptions: {
                         hint: {
-                            text: 'Some hint for last name',
+                            content: 'Some hint for last name',
                             target: 'label'
                         }
                     }
@@ -83,7 +89,31 @@ export class PlatformFormGeneratorInlineHelpExampleComponent {
         }
     ];
 
+    formItemsWithTemplateHint: DynamicFormItem[];
+
     formGeneratorMainHint: HintOptions = {
-        text: 'Some hint for main title'
+        content: 'Some hint for main title'
     };
+
+    ngAfterViewInit(): void {
+        this.ngZone.onStable.pipe(first()).subscribe(() => {
+            this.formItemsWithTemplateHint = [
+                {
+                    name: 'firstAndLastName',
+                    message: 'First And Last Name',
+                    items: [
+                        {
+                            type: 'input',
+                            id: 'firstName-for-template-hint-example',
+                            name: 'firstName',
+                            message: 'First Name',
+                            guiOptions: {
+                                hint: this.hintTemplate
+                            }
+                        }
+                    ]
+                }
+            ];
+        });
+    }
 }

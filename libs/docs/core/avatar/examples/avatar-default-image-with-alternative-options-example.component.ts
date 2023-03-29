@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'fd-avatar-default-image-with-alternative-options-example',
@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
                 margin: 1rem;
             }
         `
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvatarDefaultImageWithAlternativeOptionsExampleComponent {}

@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.39.1-rc.25",
+  "version": "0.40.0-rc.5",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori Angular component library.",
@@ -87,7 +87,7 @@
     "@angular/language-service": "15.1.1",
     "@angularclass/hmr": "3.0.0",
     "@babel/core": "7.20.5",
-    "@commitlint/cli": "17.3.0",
+    "@commitlint/cli": "17.5.1",
     "@commitlint/config-conventional": "17.3.0",
     "@jsdevtools/npm-publish": "1.4.3",
     "@nrwl/cli": "15.5.3",
