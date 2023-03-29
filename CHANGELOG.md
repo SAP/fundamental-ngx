@@ -1,3 +1,13 @@
+# [0.40.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.5...v0.40.0-rc.6) (2023-03-29)
+
+
+### Bug Fixes
+
+* **platform:** missing tooltip - aria label for table toolbar actions ([#9601](https://github.com/SAP/fundamental-ngx/issues/9601)) ([e1d3dfe](https://github.com/SAP/fundamental-ngx/commit/e1d3dfee8fdcc4edcc58eddc6342a6c85922e062))
+* value help dialog hidden label ([#9605](https://github.com/SAP/fundamental-ngx/issues/9605)) ([782afdc](https://github.com/SAP/fundamental-ngx/commit/782afdc73b11e202b494567c8021edd796a470a4))
+
+
+
 # [0.40.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.4...v0.40.0-rc.5) (2023-03-29)
 
 
