@@ -220,7 +220,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
             });
 
             // Simply remove all modifiers from current element. Content density state is covered by parent element.
-            if (parentContentDensityEqual) {
+            if (parentContentDensityEqual && !this.config.alwaysAddModifiers) {
                 return;
             }
 

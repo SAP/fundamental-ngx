@@ -19,6 +19,15 @@
             margin-bottom: 0;
         }
     }
+
+    .fd-step-input__button {
+        position: relative !important;
+        &:focus {
+            &:after {
+                display: none;
+            }
+        }
+    }
 }
 
 .fd-step-input__container {

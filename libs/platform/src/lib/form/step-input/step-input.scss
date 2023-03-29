@@ -3,4 +3,12 @@
 
 .fd-step-input {
     display: flex;
+    .fd-step-input__button {
+        position: relative !important;
+        &:focus {
+            &:after {
+                display: none;
+            }
+        }
+    }
 }

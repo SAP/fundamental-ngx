@@ -9,4 +9,10 @@ fd-input-group {
     .fd-button.fd-button--transparent {
         background: transparent;
     }
+
+    .fd-input-group__addon--button {
+        .fd-input-group__button {
+            position: relative !important;
+        }
+    }
 }

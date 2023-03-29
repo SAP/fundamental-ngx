@@ -47,7 +47,7 @@ import { DialogTitleDirective } from './directives/dialog-title.directive';
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })]
 })
 export class DialogComponent
     extends DialogBase
