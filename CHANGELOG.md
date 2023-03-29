@@ -1,3 +1,12 @@
+# [0.40.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.4...v0.40.0-rc.5) (2023-03-29)
+
+
+### Bug Fixes
+
+* **core:** use renderer instead of cdr ([#9602](https://github.com/SAP/fundamental-ngx/issues/9602)) ([b6bdd34](https://github.com/SAP/fundamental-ngx/commit/b6bdd345f480b709a845d3dcb8fa1166e1d7037a))
+
+
+
 # [0.40.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.3...v0.40.0-rc.4) (2023-03-28)
 
 
