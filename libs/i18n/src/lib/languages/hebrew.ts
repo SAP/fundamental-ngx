@@ -422,6 +422,8 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
         toolbarActionFilterButtonTitle: 'Filter',
         toolbarActionGroupButtonTitle: 'Group',
         toolbarActionColumnsButtonTitle: 'Columns',
+        toolbarActionExpandAllButtonTitle: 'Expand all',
+        toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Not Filtered)',
         filterDialogFilterByLabel: 'Filter by: {{ filterLabel }}',
         filterDialogFilterTitle: 'Filter',

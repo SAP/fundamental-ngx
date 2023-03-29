@@ -424,6 +424,8 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         toolbarActionFilterButtonTitle: 'ფილტრაცია',
         toolbarActionGroupButtonTitle: 'დაჯგუფება',
         toolbarActionColumnsButtonTitle: 'სვეტები',
+        toolbarActionExpandAllButtonTitle: 'Expand all',
+        toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(გაუფილტრავი)',
         filterDialogFilterByLabel: 'გაფილტრე: {{ filterLabel }}',
         filterDialogFilterTitle: 'ფილტრი',

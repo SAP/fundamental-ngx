@@ -422,6 +422,8 @@ export const FD_LANGUAGE_GERMAN: FdLanguage = {
         toolbarActionFilterButtonTitle: 'Filter',
         toolbarActionGroupButtonTitle: 'Group',
         toolbarActionColumnsButtonTitle: 'Columns',
+        toolbarActionExpandAllButtonTitle: 'Alles expandieren',
+        toolbarActionCollapseAllButtonTitle: 'Alles komprimieren',
         filterDialogNotFilteredLabel: '(Not Filtered)',
         filterDialogFilterByLabel: 'Filter by: {{ filterLabel }}',
         filterDialogFilterTitle: 'Filter',

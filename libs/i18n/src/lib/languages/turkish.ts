@@ -423,6 +423,8 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         toolbarActionFilterButtonTitle: 'Filtre',
         toolbarActionGroupButtonTitle: 'Grup',
         toolbarActionColumnsButtonTitle: 'Kolonlar',
+        toolbarActionExpandAllButtonTitle: 'Expand all',
+        toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Filtrelenmemiş)',
         filterDialogFilterByLabel: 'Filtreleme ölçütü: {{ filterLabel }}',
         filterDialogFilterTitle: 'Filtre',
