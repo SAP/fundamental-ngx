@@ -1,7 +1,9 @@
+import { Observable } from 'rxjs';
+
 export interface ExampleFile<
-    ProvidedCodeType = string | Promise<string>,
-    ProvidedScssCodeType = string | Promise<string>,
-    ProvidedTsCodeType = string | Promise<string>
+    ProvidedCodeType = string | Observable<string>,
+    ProvidedScssCodeType = string | Observable<string>,
+    ProvidedTsCodeType = string | Observable<string>
 > {
     code: ProvidedCodeType;
     scssFileCode?: ProvidedScssCodeType;

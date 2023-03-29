@@ -8,6 +8,7 @@ import { ExampleFile } from '../code-example/example-file';
 import { StackblitzModuleWrapper } from './stackblitz-module-wrapper';
 import { DocsService } from '../../services/docs.service';
 import { getAsset } from '../../getAsset';
+import { first, tap, zip } from 'rxjs';
 
 interface GeneratedFile {
     path: string;
@@ -22,32 +23,45 @@ interface GeneratedFiles {
 
 @Injectable()
 export class StackblitzService {
-    polyfills: Promise<string>;
-    main: Promise<string>;
-    styles: Promise<string>;
-    tsconfig: Promise<string>;
-    angular: Promise<string>;
+    polyfills: string;
+    main: string;
+    styles: string;
+    tsconfig: string;
+    angular: string;
 
     constructor(@Inject(CURRENT_LIB) private currentLib: Libraries, private _docsService: DocsService) {
-        this.main = getAsset('./stackblitz/example-stack/main.ts');
-        this.styles = getAsset('./stackblitz/example-stack/styles.scss');
-        this.tsconfig = getAsset('./stackblitz/example-stack/tsconfig.json');
-        this.angular = getAsset('./stackblitz/example-stack/angular.json');
-        this.polyfills = getAsset('./stackblitz/example-stack/polyfills.ts');
+        zip(
+            getAsset('./stackblitz/example-stack/main.ts'),
+            getAsset('./stackblitz/example-stack/styles.scss'),
+            getAsset('./stackblitz/example-stack/tsconfig.json'),
+            getAsset('./stackblitz/example-stack/angular.json'),
+            getAsset('./stackblitz/example-stack/polyfills.ts')
+        )
+            .pipe(
+                first(),
+                tap(([main, styles, tsconfig, angular, polyfills]) => {
+                    this.main = main;
+                    this.styles = styles;
+                    this.tsconfig = tsconfig;
+                    this.angular = angular;
+                    this.polyfills = polyfills;
+                })
+            )
+            .subscribe();
     }
 
-    async defaultProjectInfo(): Promise<StackblitzProject> {
+    defaultProjectInfo(): StackblitzProject {
         return {
             files: {
-                'src/main.ts': await this.main,
-                'src/polyfills.ts': await this.polyfills,
-                'src/styles.scss': await this.styles,
-                'angular.json': await this.angular,
+                'src/main.ts': this.main,
+                'src/polyfills.ts': this.polyfills,
+                'src/styles.scss': this.styles,
+                'angular.json': this.angular,
                 /**
                  * We're providing custom tsconfig with "enableIvy": false due to the StackBlitz issue
                  * https://github.com/stackblitz/core/issues/1364
                  */
-                'tsconfig.json': await this.tsconfig
+                'tsconfig.json': this.tsconfig
             },
             title: 'Fundamental-NGX Example',
             description: 'Generated for you by fundamental-ngx team',
@@ -57,8 +71,8 @@ export class StackblitzService {
         };
     }
 
-    async openCode(exampleFiles: ExampleFile<string>[]): Promise<void> {
-        const defaultProjectInfo = await this.defaultProjectInfo();
+    openCode(exampleFiles: ExampleFile<string, string, string>[]): void {
+        const defaultProjectInfo = this.defaultProjectInfo();
         const stackBlitzFiles: StackblitzFile[] = [];
 
         for (const example of exampleFiles) {
@@ -70,11 +84,11 @@ export class StackblitzService {
             const mainComponent: boolean = exampleFiles.length === 1 || !!example.main;
 
             if (example.language === 'html') {
-                generatedFiles = await this.handleHtmlFile(exampleFiles, example);
+                generatedFiles = this.handleHtmlFile(exampleFiles, example);
             } else if (example.language === 'typescript') {
-                generatedFiles = await this.handleTsFile(example);
+                generatedFiles = this.handleTsFile(example);
             } else if (example.language === 'scss') {
-                generatedFiles = await this.handleScssFile(example);
+                generatedFiles = this.handleScssFile(example);
             } else if (example.path !== undefined) {
                 defaultProjectInfo.files[`${example.path}/${example.fileName}.${example.language}`] = example.code;
                 continue;
@@ -201,7 +215,10 @@ export class ${componentName} {}`;
         return StackblitzModuleWrapper.GetModule(files);
     }
 
-    private async handleHtmlFile(exampleFiles: ExampleFile[], file: ExampleFile<string>): Promise<GeneratedFiles> {
+    private handleHtmlFile(
+        exampleFiles: ExampleFile<string, string, string>[],
+        file: ExampleFile<string, string, string>
+    ): GeneratedFiles {
         const generatedFile: GeneratedFiles = {};
 
         generatedFile.html = {
@@ -212,37 +229,34 @@ export class ${componentName} {}`;
         if (file.scssFileCode) {
             generatedFile.scss = {
                 path: this.getFilePath(file, 'scss'),
-                code: typeof file.scssFileCode === 'string' ? file.scssFileCode || '' : await file.scssFileCode
+                code: file.scssFileCode
             };
         }
 
         // If there is only HTML added, file is standalone or it has typescript code,
         // the typescript file is added
         if (this.isStandAlone(exampleFiles, file)) {
-            const getCode = async (): Promise<string> => {
+            const getCode = (): string => {
                 if (!file.typescriptFileCode) {
                     return this.getDefaultTypescriptFile(file.fileName ?? '');
-                }
-                if (typeof file.typescriptFileCode === 'string') {
-                    return file.typescriptFileCode;
                 }
                 return file.typescriptFileCode;
             };
             generatedFile.ts = {
                 path: this.getFilePath(file, 'ts'),
-                code: await getCode()
+                code: getCode()
             };
         }
         return generatedFile;
     }
 
-    private async handleTsFile(file: ExampleFile<string>): Promise<GeneratedFiles> {
+    private handleTsFile(file: ExampleFile<string, string, string>): GeneratedFiles {
         const generatedFile: GeneratedFiles = {};
 
         if (file.scssFileCode) {
             generatedFile.scss = {
                 path: this.getFilePath(file, 'scss'),
-                code: typeof file.scssFileCode === 'string' ? file.scssFileCode || '' : await file.scssFileCode
+                code: file.scssFileCode
             };
         }
 
@@ -254,7 +268,7 @@ export class ${componentName} {}`;
         return generatedFile;
     }
 
-    private async handleScssFile(file: ExampleFile<string>): Promise<GeneratedFiles> {
+    private handleScssFile(file: ExampleFile<string>): GeneratedFiles {
         const generatedFile: GeneratedFiles = {};
 
         generatedFile.scss = {

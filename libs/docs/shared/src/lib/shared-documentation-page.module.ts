@@ -26,6 +26,7 @@ import { DatetimeImportantComponent } from './common-components/datetime-importa
 import { DeprecatedAlertsComponent } from './core-helpers/deprecated-alerts/deprecated-alerts.component';
 import { DocPageComponent } from './core-helpers/doc-page/doc-page.component';
 import { I18nDocsModule } from './core-helpers/i18n-docs/i18n-docs.module';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 
 /** THIS MODULE PROVIDES BASIC SET OF DEPENDENCIES NEEDED TO CREATE COMPONENT EXAMPLE PAGE */
 @NgModule({
@@ -54,7 +55,8 @@ import { I18nDocsModule } from './core-helpers/i18n-docs/i18n-docs.module';
         SchemaModule,
         sharedCoreModules,
         I18nDocsModule,
-        MarkdownModule.forChild()
+        MarkdownModule.forChild(),
+        BusyIndicatorModule
     ],
     providers: [CopyService, ApiDocsService],
     exports: [
