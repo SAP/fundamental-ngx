@@ -169,8 +169,8 @@ $block: fdp-value-help-dialog;
         }
     }
 
-    &__hidden_label {
-        display: none;
+    .#{$block}__hidden_label {
+        display: none !important;
     }
 
     &__table-busy-indicator {
