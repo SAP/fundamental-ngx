@@ -9,6 +9,7 @@ import { BreakpointModule } from '@fundamental-ngx/cdk/utils';
 import { AliasNamesExampleComponent } from './examples/alias-names-example/alias-names-example.component';
 import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
 import { TableModule } from '@fundamental-ngx/core/table';
+import { DifferentObserveTargetExampleComponent } from './examples/different-observe-target-example.component';
 
 const routes: Routes = [
     {
@@ -37,7 +38,8 @@ const routes: Routes = [
         BreakpointDocsComponent,
         BreakpointHeaderComponent,
         BasicExampleComponent,
-        AliasNamesExampleComponent
+        AliasNamesExampleComponent,
+        DifferentObserveTargetExampleComponent
     ],
     providers: [currentComponentProvider('breakpoint')]
 })

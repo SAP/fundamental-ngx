@@ -2,6 +2,7 @@
 import {
     AfterViewInit,
     Directive,
+    ElementRef,
     EmbeddedViewRef,
     inject,
     Input,
@@ -10,11 +11,11 @@ import {
     TemplateRef,
     ViewContainerRef
 } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty, coerceElement } from '@angular/cdk/coercion';
 import { ViewportSizeObservable } from '../../tokens/viewport-size.observable';
-import { DestroyedService } from '../../services';
-import { map, startWith, takeUntil, tap } from 'rxjs/operators';
-import { combineLatest, Subject } from 'rxjs';
+import { DestroyedService, ResizeObserverService } from '../../services';
+import { map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { BreakpointName, getBreakpointName } from './responsive-breakpoints';
 
 /**
@@ -87,6 +88,20 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
     @Input()
     fdkBreakpointGt: number;
 
+    /**
+     * Observe element width changes.
+     */
+    @Input('fdkBreakpointObserve')
+    set observationSource(value: HTMLElement | ElementRef<HTMLElement>) {
+        const element = coerceElement(value);
+        this._sizeObservable$.next(
+            this._resizeObserverService.observe(value).pipe(
+                map(() => element.offsetWidth),
+                startWith(element.offsetWidth)
+            )
+        );
+    }
+
     /** @hidden */
     templateViewRef?: EmbeddedViewRef<unknown>;
 
@@ -106,14 +121,20 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
     private _destroyed$ = inject(DestroyedService);
 
     /** @hidden */
+    private _resizeObserverService = inject(ResizeObserverService);
+
+    /** @hidden */
     onChanges$ = new Subject<void>();
+
+    /** @hidden */
+    _sizeObservable$: BehaviorSubject<Observable<number>> = new BehaviorSubject<Observable<number>>(this.viewportSize$);
 
     /** @hidden */
     constructor(private readonly templateRef: TemplateRef<any>, private readonly viewContainer: ViewContainerRef) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
-        combineLatest([this.viewportSize$, this.onChanges$.pipe(startWith(void 0))])
+        combineLatest([this._sizeObservable$.pipe(switchMap((obs$) => obs$)), this.onChanges$.pipe(startWith(void 0))])
             .pipe(
                 map(([w]) => [w, getBreakpointName(w)] as const),
                 map(([width, breakpointName]) => this._shouldShow(width, breakpointName)),

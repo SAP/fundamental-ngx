@@ -6,6 +6,7 @@ const defaultExampleHtml = 'basic-example/basic-example.component.html';
 const defaultExampleTs = 'basic-example/basic-example.component.ts';
 
 const aliasNamesExampleTs = 'alias-names-example/alias-names-example.component.ts';
+const differentSourceExampleTs = 'different-observe-target-example.component.ts';
 
 @Component({
     templateUrl: './breakpoint-docs.component.html'
@@ -33,6 +34,15 @@ export class BreakpointDocsComponent {
             language: 'ts',
             fileName: 'alias-names-example.component',
             component: 'AliasNamesExampleComponent'
+        }
+    ];
+
+    differentSourceExample = [
+        {
+            code: getAssetFromModuleAssets(differentSourceExampleTs),
+            language: 'ts',
+            fileName: 'different-observe-target-example.component',
+            component: 'DifferentObserveTargetExampleComponent'
         }
     ];
 }

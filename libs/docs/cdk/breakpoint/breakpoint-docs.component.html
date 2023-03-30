@@ -48,3 +48,15 @@
     <fdk-breakpoint-alias-names-example></fdk-breakpoint-alias-names-example>
 </component-example>
 <code-example [exampleFiles]="aliasExample"></code-example>
+
+<fd-docs-section-title id="differentSource" componentName="FdkBreakpoint">Alias naming</fd-docs-section-title>
+<description>
+    <p>
+        By default, <code>FdkBreakpoint</code> uses <code>window</code> object to get the width of the screen. If you
+        want to use another source, you can use <code>fdkBreakpointObserve</code> input.
+    </p>
+</description>
+<component-example>
+    <fdk-different-observe-target-example></fdk-different-observe-target-example>
+</component-example>
+<code-example [exampleFiles]="differentSourceExample"></code-example>
