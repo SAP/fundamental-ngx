@@ -59,9 +59,8 @@ export class ResizeObserverService implements OnDestroy {
             }
             observedElement = { observer, stream, count: 0 };
             this._observedElements.set(element, observedElement);
-        } else {
-            observedElement.count++;
         }
+        observedElement.count++;
         return observedElement?.stream;
     }
 
