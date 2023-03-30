@@ -2,6 +2,9 @@ import { ExampleFile } from './core-helpers/code-example/example-file';
 import { inject } from '@angular/core';
 import { CURRENT_LIB } from './utilities';
 import { CURRENT_COMPONENT } from './tokens/current-component.token';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 const fileExtensionToLanguage = {
     ts: 'typescript',
@@ -11,18 +14,16 @@ const fileExtensionToLanguage = {
     scss: 'sass'
 };
 
-export const getAsset = (path: string): Promise<string> =>
-    fetch(path, {
-        method: 'GET'
-    })
-        .then((response) => response.text())
-        .then((text) => text.trim());
+export const getAsset = (path: string): Observable<string> =>
+    inject(HttpClient)
+        .get(path, { responseType: 'text' })
+        .pipe(map((r) => r.trim()));
 
 export const getAssetFromModuleAssets = (
     fileName: string,
     currentLib: string = inject(CURRENT_LIB),
     currentComponent: string = inject(CURRENT_COMPONENT)
-): Promise<string> => {
+): Observable<string> => {
     const path = `docs/${currentLib}/${currentComponent}/examples/${fileName}`;
     return getAsset(path);
 };

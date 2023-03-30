@@ -5,14 +5,13 @@
         [label]="(isOpen ? 'Hide' : 'Show') + ' Code'"
         (click)="isOpen = !isOpen"
     ></button>
-    <div>
+    <div *ngIf="isOpen">
         <button
             fd-button
             glyph="copy"
             title="Copy example to clipboard"
             label="Copy"
             style="margin-right: 1rem"
-            *ngIf="isOpen"
             (click)="copyText()"
         ></button>
         <button
@@ -20,21 +19,29 @@
             glyph="play"
             title="Open code in stackblitz"
             label="StackBlitz"
-            *ngIf="isOpen"
             (click)="openStackBlitz()"
         ></button>
     </div>
 </div>
 <div class="docs-html-example-container" [@height]="isOpen">
-    <div class="docs-code-example-content">
-        <fd-tab-list>
-            <fd-tab
-                *ngFor="let file of _displayedFiles; let i = index"
-                [title]="file.name || file.language | titlecase"
-                (opened)="activeIndex = i"
-            >
-                <fd-code-snippet [file]="file"></fd-code-snippet>
-            </fd-tab>
-        </fd-tab-list>
+    <div class="docs-code-example-content" *ngIf="isOpen">
+        <ng-container *ngIf="exampleFilesNetworkEntity$ | async as examples">
+            <div style="text-align: center; padding: 1rem" *ngIf="examples.state === states.loading">
+                <fd-busy-indicator [loading]="true" ariaLabel="loading example files" title="Please Wait" size="l">
+                </fd-busy-indicator>
+            </div>
+            <fd-message-strip *ngIf="examples.state === states.error" type="error" (onDismiss)="isOpen = false">
+                Failed to load example files
+            </fd-message-strip>
+            <fd-tab-list *ngIf="examples.state === states.success">
+                <fd-tab
+                    *ngFor="let file of examples.exampleFiles; let i = index"
+                    [title]="file.name || file.language | titlecase"
+                    (opened)="activeIndex = i"
+                >
+                    <fd-code-snippet [file]="file"></fd-code-snippet>
+                </fd-tab>
+            </fd-tab-list>
+        </ng-container>
     </div>
 </div>
