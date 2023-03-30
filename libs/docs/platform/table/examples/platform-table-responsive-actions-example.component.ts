@@ -7,31 +7,33 @@ import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx
 @Component({
     selector: 'fdp-platform-table-responsive-actions-example',
     template: `
-        <fdp-table [dataSource]="source" [trackBy]="trackBy" emptyTableMessage="No data found">
-            <fdp-table-toolbar title="Order Line Items">
-                <fdp-table-toolbar-actions>
-                    <ng-template [fdkBreakpointLt]="740">
-                        <fdp-button glyph="overflow" [fdpMenuTriggerFor]="actions"></fdp-button>
-                        <fdp-menu #actions>
-                            <fdp-menu-item (click)="alert('Action One')">Action One</fdp-menu-item>
-                            <fdp-menu-item (click)="alert('Action Two')">Action Two</fdp-menu-item>
-                        </fdp-menu>
-                    </ng-template>
-                    <ng-template [fdkBreakpointGt]="739">
-                        <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>
-                        <fdp-button label="Action Two" (click)="alert('Action Two')"></fdp-button>
-                    </ng-template>
-                </fdp-table-toolbar-actions>
-            </fdp-table-toolbar>
+        <div #tableComponentWrapper>
+            <fdp-table [dataSource]="source" [trackBy]="trackBy" emptyTableMessage="No data found">
+                <fdp-table-toolbar title="Order Line Items">
+                    <fdp-table-toolbar-actions>
+                        <ng-template [fdkBreakpointLt]="740" [fdkBreakpointObserve]="tableComponentWrapper">
+                            <fdp-button glyph="overflow" [fdpMenuTriggerFor]="actions"></fdp-button>
+                            <fdp-menu #actions>
+                                <fdp-menu-item (click)="alert('Action One')">Action One</fdp-menu-item>
+                                <fdp-menu-item (click)="alert('Action Two')">Action Two</fdp-menu-item>
+                            </fdp-menu>
+                        </ng-template>
+                        <ng-template [fdkBreakpointGt]="739" [fdkBreakpointObserve]="tableComponentWrapper">
+                            <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>
+                            <fdp-button label="Action Two" (click)="alert('Action Two')"></fdp-button>
+                        </ng-template>
+                    </fdp-table-toolbar-actions>
+                </fdp-table-toolbar>
 
-            <fdp-column name="name" key="name" label="Name" align="start"></fdp-column>
+                <fdp-column name="name" key="name" label="Name" align="start"></fdp-column>
 
-            <fdp-column name="description" key="description" label="Description"></fdp-column>
+                <fdp-column name="description" key="description" label="Description"></fdp-column>
 
-            <fdp-column name="price" key="price.value" label="Price" align="end"></fdp-column>
+                <fdp-column name="price" key="price.value" label="Price" align="end"></fdp-column>
 
-            <fdp-column name="status" key="status" label="Status" align="center"></fdp-column>
-        </fdp-table>
+                <fdp-column name="status" key="status" label="Status" align="center"></fdp-column>
+            </fdp-table>
+        </div>
     `
 })
 export class PlatformTableResponsiveActionsExampleComponent {
