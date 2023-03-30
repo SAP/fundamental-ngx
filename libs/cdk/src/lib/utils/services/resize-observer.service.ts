@@ -49,7 +49,7 @@ export class ResizeObserverService implements OnDestroy {
      * new one if not.
      */
     private _observeElement(element: Element): Subject<ResizeObserverEntry[]> | undefined {
-        const observedElement = this._observedElements.get(element);
+        let observedElement = this._observedElements.get(element);
 
         if (!observedElement) {
             const stream = new Subject<ResizeObserverEntry[]>();
@@ -57,7 +57,8 @@ export class ResizeObserverService implements OnDestroy {
             if (observer) {
                 observer.observe(element);
             }
-            this._observedElements.set(element, { observer, stream, count: 1 });
+            observedElement = { observer, stream, count: 0 };
+            this._observedElements.set(element, observedElement);
         } else {
             observedElement.count++;
         }
