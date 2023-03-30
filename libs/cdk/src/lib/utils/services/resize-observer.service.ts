@@ -74,8 +74,7 @@ export class ResizeObserverService implements OnDestroy {
             return;
         }
 
-        observedElement.count--;
-        if (!observedElement.count) {
+        if (!--observedElement.count) {
             return;
         }
         this._cleanupObserver(element);
