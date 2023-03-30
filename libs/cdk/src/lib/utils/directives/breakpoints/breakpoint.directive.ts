@@ -6,7 +6,6 @@ import {
     inject,
     Input,
     NgModule,
-    NgZone,
     OnChanges,
     TemplateRef,
     ViewContainerRef
@@ -102,9 +101,6 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
 
     /** @hidden */
     private viewportSize$ = inject(ViewportSizeObservable);
-
-    /** @hidden */
-    private _ngZone = inject(NgZone);
 
     /** @hidden */
     private _destroyed$ = inject(DestroyedService);
