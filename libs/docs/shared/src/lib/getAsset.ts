@@ -14,7 +14,8 @@ const fileExtensionToLanguage = {
     scss: 'sass'
 };
 
-export const getAsset = (path: string): Observable<string> => inject(HttpClient)
+export const getAsset = (path: string): Observable<string> =>
+    inject(HttpClient)
         .get(path, { responseType: 'text' })
         .pipe(map((r) => r.trim()));
 
