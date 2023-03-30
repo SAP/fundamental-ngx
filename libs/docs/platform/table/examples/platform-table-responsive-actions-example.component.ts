@@ -17,7 +17,7 @@ import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx
                             <fdp-menu-item (click)="alert('Action Two')">Action Two</fdp-menu-item>
                         </fdp-menu>
                     </ng-template>
-                    <ng-template [fdkBreakpointGt]="740">
+                    <ng-template [fdkBreakpointGt]="739">
                         <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>
                         <fdp-button label="Action Two" (click)="alert('Action Two')"></fdp-button>
                     </ng-template>

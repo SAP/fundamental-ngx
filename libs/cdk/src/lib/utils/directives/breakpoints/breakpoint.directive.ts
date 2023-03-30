@@ -1,11 +1,21 @@
 /* eslint-disable @angular-eslint/no-input-rename */
-import { AfterViewInit, Directive, inject, Input, NgModule, NgZone, OnChanges } from '@angular/core';
-import { NgIf } from '@angular/common';
+import {
+    AfterViewInit,
+    Directive,
+    EmbeddedViewRef,
+    inject,
+    Input,
+    NgModule,
+    NgZone,
+    OnChanges,
+    TemplateRef,
+    ViewContainerRef
+} from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ViewportSizeObservable } from '../../tokens/viewport-size.observable';
 import { DestroyedService } from '../../services';
-import { first, map, startWith, takeUntil, tap } from 'rxjs/operators';
-import { combineLatest, Subject, switchMap } from 'rxjs';
+import { map, startWith, takeUntil, tap } from 'rxjs/operators';
+import { combineLatest, Subject } from 'rxjs';
 import { BreakpointName, getBreakpointName } from './responsive-breakpoints';
 
 /**
@@ -16,7 +26,6 @@ import { BreakpointName, getBreakpointName } from './responsive-breakpoints';
     selector:
         '[fdkBreakpoint], [fdkBreakpointS], [fdkBreakpointM], [fdkBreakpointL], [fdkBreakpointXL], [fdkBreakpointLt], [fdkBreakpointGt]',
     standalone: true,
-    hostDirectives: [NgIf],
     providers: [DestroyedService]
 })
 export class BreakpointDirective implements OnChanges, AfterViewInit {
@@ -80,6 +89,9 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
     fdkBreakpointGt: number;
 
     /** @hidden */
+    templateViewRef?: EmbeddedViewRef<unknown>;
+
+    /** @hidden */
     private _showOnS = false;
     /** @hidden */
     private _showOnM = false;
@@ -87,9 +99,6 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
     private _showOnL = false;
     /** @hidden */
     private _showOnXL = false;
-
-    /** @hidden */
-    _ngIf = inject(NgIf, { host: true });
 
     /** @hidden */
     private viewportSize$ = inject(ViewportSizeObservable);
@@ -104,17 +113,26 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
     onChanges$ = new Subject<void>();
 
     /** @hidden */
+    constructor(private readonly templateRef: TemplateRef<any>, private readonly viewContainer: ViewContainerRef) {}
+
+    /** @hidden */
     ngAfterViewInit(): void {
         combineLatest([this.viewportSize$, this.onChanges$.pipe(startWith(void 0))])
             .pipe(
                 map(([w]) => [w, getBreakpointName(w)] as const),
                 map(([width, breakpointName]) => this._shouldShow(width, breakpointName)),
-                switchMap((shouldShow) =>
-                    this._ngZone.onStable.pipe(
-                        first(),
-                        tap(() => (this._ngIf.ngIf = shouldShow))
-                    )
-                ),
+                tap((shouldShow) => {
+                    if (shouldShow) {
+                        if (!this.templateViewRef) {
+                            this.viewContainer.clear();
+                            this.templateViewRef = this.viewContainer.createEmbeddedView(this.templateRef);
+                            this.templateViewRef.detectChanges();
+                        }
+                    } else {
+                        this.viewContainer.clear();
+                        this.templateViewRef = undefined;
+                    }
+                }),
                 takeUntil(this._destroyed$)
             )
             .subscribe();
