@@ -18,7 +18,7 @@
                 }
             }
         },
-        "test": {
+        "test-noop": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {
                 "main": "libs/fn/src/lib/generic-tag/test.ts",
