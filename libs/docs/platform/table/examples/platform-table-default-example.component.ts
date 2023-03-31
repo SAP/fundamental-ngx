@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
@@ -6,12 +6,19 @@ import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx
 
 @Component({
     selector: 'fdp-platform-table-default-example',
-    templateUrl: './platform-table-default-example.component.html'
+    templateUrl: './platform-table-default-example.component.html',
+    styles: [
+        `
+            :host {
+                display: block;
+            }
+        `
+    ]
 })
 export class PlatformTableDefaultExampleComponent {
     source: TableDataSource<ExampleItem>;
 
-    constructor() {
+    constructor(readonly hostElement: ElementRef<HTMLElement>) {
         this.source = new TableDataSource(new TableDataProviderExample());
     }
 
