@@ -14,7 +14,7 @@ import {
 import { BooleanInput, coerceBooleanProperty, coerceElement } from '@angular/cdk/coercion';
 import { ViewportSizeObservable } from '../../tokens/viewport-size.observable';
 import { DestroyedService, ResizeObserverService } from '../../services';
-import { map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { finalize, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { BreakpointName, getBreakpointName } from './responsive-breakpoints';
 
@@ -150,7 +150,11 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
                         this.templateViewRef = undefined;
                     }
                 }),
-                takeUntil(this._destroyed$)
+                takeUntil(this._destroyed$),
+                finalize(() => {
+                    this.viewContainer.clear();
+                    this.templateViewRef = undefined;
+                })
             )
             .subscribe();
     }
