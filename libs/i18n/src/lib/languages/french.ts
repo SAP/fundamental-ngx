@@ -149,6 +149,9 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Assistant'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: "Plus d'infos"
+    },
     platformActionBar: {
         backButtonLabel: 'Revenir en arrière'
     },
