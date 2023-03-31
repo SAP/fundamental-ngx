@@ -4,7 +4,7 @@
     "sourceRoot": "libs/fn/src/lib/search",
     "prefix": "fd",
     "targets": {
-        "build": {
+        "build-noop": {
             "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["{workspaceRoot}/dist/libs/fn/search"],
             "options": {
