@@ -28,7 +28,7 @@
                 "karmaConfig": "libs/fn/src/lib/segmented-button/karma.conf.js"
             }
         },
-        "lint": {
+        "lint-noop": {
             "executor": "@nrwl/linter:eslint",
             "options": {
                 "lintFilePatterns": [

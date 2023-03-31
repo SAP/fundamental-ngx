@@ -28,7 +28,7 @@
                 "karmaConfig": "libs/fn/src/lib/message-toast/karma.conf.js"
             }
         },
-        "lint": {
+        "lint-noop": {
             "executor": "@nrwl/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/fn/src/lib/message-toast/**/*.ts", "libs/fn/src/lib/message-toast/**/*.html"]

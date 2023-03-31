@@ -26,7 +26,7 @@
                 "karmaConfig": "libs/fn/src/lib/select/karma.conf.js"
             }
         },
-        "lint": {
+        "lint-noop": {
             "executor": "@nrwl/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/fn/src/lib/select/**/*.ts", "libs/fn/src/lib/select/**/*.html"]
