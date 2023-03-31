@@ -23,6 +23,10 @@ export interface ApprovalFlowApproverDetailsDialogRefData {
     rtl?: boolean;
 }
 
+/**
+ * @deprecated
+ * ApprovalFlowApproverDetails component is depricated since version 0.40.0
+ */
 @Component({
     selector: 'fdp-approval-flow-approver-details',
     templateUrl: './approval-flow-approver-details.component.html',

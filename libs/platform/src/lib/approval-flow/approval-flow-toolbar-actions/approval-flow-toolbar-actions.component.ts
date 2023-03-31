@@ -5,6 +5,10 @@ import { ApprovalFlowGraph, ApprovalGraphMetadata } from '../approval-flow-graph
 import { ApprovalGraphNode } from '../interfaces/approval-node';
 import { isNodeApproved } from '../helpers';
 
+/**
+ * @deprecated
+ * ApprovalFlowToolbarActions component is depricated since version 0.40.0
+ */
 @Component({
     selector: 'fdp-approval-flow-toolbar-actions',
     templateUrl: './approval-flow-toolbar-actions.component.html',

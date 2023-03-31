@@ -16,6 +16,10 @@ export interface ApprovalFlowMessage {
     type: ApprovalFlowMessageType;
 }
 
+/**
+ * @deprecated
+ * ApprovalFlowMessages component is depricated since version 0.40.0
+ */
 @Component({
     selector: 'fdp-approval-flow-messages',
     templateUrl: './approval-flow-messages.component.html',
