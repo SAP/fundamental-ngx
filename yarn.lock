@@ -235,10 +235,21 @@
     rxjs "6.6.7"
     source-map "0.7.4"
 
-"@angular-devkit/core@15.2.0", "@angular-devkit/core@^15.0.0":
+"@angular-devkit/core@15.2.0":
   version "15.2.0"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-15.2.0.tgz#79c9db21cf5d0e02c967346ca53e378dec09de2e"
   integrity sha512-kUE5XvQzn+fiEvFqIk8x0q4hvRD+dKfAMM7p0uPQ69O9cj2b8c01oDvLOskvwhIJOnKTxnK/1d2gFQLupPci4A==
+  dependencies:
+    ajv "8.12.0"
+    ajv-formats "2.1.1"
+    jsonc-parser "3.2.0"
+    rxjs "6.6.7"
+    source-map "0.7.4"
+
+"@angular-devkit/core@15.2.4", "@angular-devkit/core@^15.0.0":
+  version "15.2.4"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-15.2.4.tgz#f7696f09c66d01568a07f0e71672e887fdf57280"
+  integrity sha512-yl+0j1bMwJLKShsyCXw77tbJG8Sd21+itisPLL2MgEpLNAO252kr9zG4TLlFRJyKVftm2l1h78KjqvM5nbOXNg==
   dependencies:
     ajv "8.12.0"
     ajv-formats "2.1.1"
@@ -276,6 +287,17 @@
     "@angular-devkit/core" "15.1.6"
     jsonc-parser "3.2.0"
     magic-string "0.27.0"
+    ora "5.4.1"
+    rxjs "6.6.7"
+
+"@angular-devkit/schematics@15.2.4":
+  version "15.2.4"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-15.2.4.tgz#85129ebabcdb362f4b65a6e290bb2ae846f3d64c"
+  integrity sha512-/W7/vvn59PAVLzhcvD4/N/E8RDhub8ny1A7I96LTRjC5o+yvVV16YJ4YJzolrRrIEN01KmLVQJ9A58VCaweMgw==
+  dependencies:
+    "@angular-devkit/core" "15.2.4"
+    jsonc-parser "3.2.0"
+    magic-string "0.29.0"
     ora "5.4.1"
     rxjs "6.6.7"
 
@@ -3035,6 +3057,15 @@
   dependencies:
     "@angular-devkit/core" "15.1.2"
     "@angular-devkit/schematics" "15.1.2"
+    jsonc-parser "3.2.0"
+
+"@schematics/angular@15.2.4":
+  version "15.2.4"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-15.2.4.tgz#b61b9cb3becf601e904f60490846c1d95bd63700"
+  integrity sha512-P9axwKDXEDrGXYcoCuhwv4guhvtIjDCvyZMsQw8IMpfAacTYajka+T3mZrzyTe96Uhu0JwcAW5iUlOZAJhPEdQ==
+  dependencies:
+    "@angular-devkit/core" "15.2.4"
+    "@angular-devkit/schematics" "15.2.4"
     jsonc-parser "3.2.0"
 
 "@schematics/angular@8.3.23":
