@@ -1,3 +1,12 @@
+# [0.40.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.8...v0.40.0-rc.9) (2023-04-02)
+
+
+### Bug Fixes
+
+* **platform:** semantic borderless example ([#9603](https://github.com/SAP/fundamental-ngx/issues/9603)) ([ad7d9cb](https://github.com/SAP/fundamental-ngx/commit/ad7d9cbaeda9b158b4c02943dc87b0de33b67725))
+
+
+
 # [0.40.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.7...v0.40.0-rc.8) (2023-03-31)
 
 
