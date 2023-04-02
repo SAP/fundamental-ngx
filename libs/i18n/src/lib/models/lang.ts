@@ -219,6 +219,9 @@ export interface FdLanguage {
     coreWizard: {
         ariaLabel: FdLanguageKey;
     };
+    coreBreadcrumb: {
+        overflowTitleMore: FdLanguageKey;
+    };
     platformActionBar: {
         backButtonLabel: FdLanguageKey;
     };

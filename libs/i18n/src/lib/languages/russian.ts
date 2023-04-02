@@ -173,6 +173,9 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Мастер'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Больше'
+    },
     platformActionBar: {
         backButtonLabel: 'Вернуться назад'
     },

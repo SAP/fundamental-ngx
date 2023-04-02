@@ -147,6 +147,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Sihirbaz'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Daha'
+    },
     platformActionBar: {
         backButtonLabel: 'Geri dön'
     },

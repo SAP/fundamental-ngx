@@ -13,6 +13,7 @@ import { PortalModule } from '@angular/cdk/portal';
 import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { DeprecatedBreadcrumbsCompactDirective } from './deprecated-breadcrumbs-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         PipeModule,
         ContentDensityModule,
         OverflowLayoutModule,
-        ButtonModule
+        ButtonModule,
+        I18nModule
     ],
     exports: [
         BreadcrumbComponent,

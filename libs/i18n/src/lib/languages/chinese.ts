@@ -146,6 +146,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
     coreWizard: {
         ariaLabel: '向导'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: '更多'
+    },
     platformActionBar: {
         backButtonLabel: '返回'
     },

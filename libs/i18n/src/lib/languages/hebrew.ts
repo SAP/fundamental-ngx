@@ -147,6 +147,9 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Wizard'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'More'
+    },
     platformActionBar: {
         backButtonLabel: 'Go Back'
     },

@@ -147,6 +147,9 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Kreator'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Więcej'
+    },
     platformActionBar: {
         backButtonLabel: 'Powrót'
     },
