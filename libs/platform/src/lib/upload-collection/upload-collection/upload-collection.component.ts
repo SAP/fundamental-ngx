@@ -47,6 +47,10 @@ import { UploadCollectionDataSource } from '../domain/upload-collection-data-sou
 export type FdpUploadCollectionDataSource = UploadCollectionDataSource;
 let randomId = 0;
 
+/**
+ * @deprecated
+ * UploadCollection component is depricated since version 0.40.0
+ */
 @Component({
     selector: 'fdp-upload-collection',
     templateUrl: './upload-collection.component.html',

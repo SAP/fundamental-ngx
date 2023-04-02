@@ -9,6 +9,10 @@ export interface SelectTypeDialogFormData {
     toNextSerial: boolean;
 }
 
+/**
+ * @deprecated
+ * ApprovalFlowSelectType component is depricated since version 0.40.0
+ */
 @Component({
     selector: 'fdp-approval-flow-select-type',
     templateUrl: './approval-flow-select-type.component.html',
