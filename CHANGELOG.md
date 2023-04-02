@@ -1,3 +1,12 @@
+# [0.40.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.9...v0.40.0-rc.10) (2023-04-02)
+
+
+### Bug Fixes
+
+* **platform:** no tooltip for breadcrumb when overflow dots are shown ([#9610](https://github.com/SAP/fundamental-ngx/issues/9610)) ([9bf5758](https://github.com/SAP/fundamental-ngx/commit/9bf5758155cc46c017654d99cc5e7bb49bf3372a))
+
+
+
 # [0.40.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.8...v0.40.0-rc.9) (2023-04-02)
 
 
