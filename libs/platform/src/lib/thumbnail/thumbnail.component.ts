@@ -35,6 +35,10 @@ export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailCompo
     ) {}
 }
 
+/**
+ * @deprecated
+ * Thumbnail component is depricated since version 0.40.0
+ */
 @Component({
     selector: 'fdp-thumbnail',
     templateUrl: './thumbnail.component.html',

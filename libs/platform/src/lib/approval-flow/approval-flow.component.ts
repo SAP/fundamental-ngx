@@ -81,7 +81,10 @@ import {
 import { cloneDeep, uniqBy } from 'lodash-es';
 
 let defaultId = 0;
-
+/**
+ * @deprecated
+ * Approval Flow component is depricated since version 0.40.0
+ */
 @Component({
     selector: 'fdp-approval-flow',
     templateUrl: './approval-flow.component.html',

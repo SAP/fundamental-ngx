@@ -148,6 +148,9 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     coreWizard: {
         ariaLabel: 'ოსტატი'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'მეტი'
+    },
     platformActionBar: {
         backButtonLabel: 'უკან დაბრუნება'
     },

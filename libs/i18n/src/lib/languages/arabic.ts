@@ -147,6 +147,9 @@ export const FD_LANGUAGE_ARABIC: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Wizard'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Më shumë'
+    },
     platformActionBar: {
         backButtonLabel: 'Go Back'
     },

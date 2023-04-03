@@ -147,6 +147,9 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
     coreWizard: {
         ariaLabel: 'विज़ार्ड'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'और'
+    },
     platformActionBar: {
         backButtonLabel: 'वापस जाएं'
     },

@@ -154,6 +154,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Magjistar'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Më shumë'
+    },
     platformActionBar: {
         backButtonLabel: 'Kthehu mbrapa'
     },

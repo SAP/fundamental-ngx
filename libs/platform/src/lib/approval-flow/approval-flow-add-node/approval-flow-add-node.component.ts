@@ -51,6 +51,10 @@ export enum APPROVAL_FLOW_APPROVER_TYPES {
     EVERYONE = 'EVERYONE'
 }
 
+/**
+ * @deprecated
+ * ApprovalFlowAddNode component is depricated since version 0.40.0
+ */
 @Component({
     selector: 'fdp-approval-flow-add-node',
     templateUrl: './approval-flow-add-node.component.html',

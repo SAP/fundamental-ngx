@@ -336,8 +336,8 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
 
         &--mock {
             &.fd-table__cell--mock-borderless {
-                border-left: none;
-                border-right: none;
+                border-left: none !important;
+                border-right: none !important;
             }
         }
 
@@ -419,6 +419,16 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
         .fd-table__body {
             position: static;
             will-change: transform;
+        }
+    }
+
+    &.fd-table--no-vertical-borders {
+        .fd-table__cell--status-indicator {
+            border-right-color: transparent;
+
+            @include fd-rtl() {
+                border-left-color: transparent;
+            }
         }
     }
 }
