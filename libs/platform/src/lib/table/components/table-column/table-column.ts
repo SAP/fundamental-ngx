@@ -56,7 +56,7 @@ export abstract class TableColumn {
     /** Whether to apply fd-table-text (text-shadow) to the cell content, if disabled noWrap has no effect. */
     abstract applyText: boolean;
 
-    /** Stores information for the header cell if the ellipsis are visible in case of column resize */
+    /** Stores information for the header cell if the ellipsis are visible after the column resize */
     abstract headerOverflows: boolean;
 
     /** Whether this column is visible */
