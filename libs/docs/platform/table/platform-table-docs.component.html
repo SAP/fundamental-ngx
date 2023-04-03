@@ -263,14 +263,26 @@
 
     <h3>Drag & Drop</h3>
 
-    Tree table supports Drag & Drop by default, so rows can be moved & placed inside other rows. Please consider that
-    Drag & Drop isn't possible yet with <code>[sortable]</code>, <code>[groupable]</code>,
-    <code>[filterable]</code> columns and <code>[freezeColumnsTo]</code> enabled.
+    <p>
+        Tree table supports Drag & Drop by default, so rows can be moved & placed inside other rows. Please consider
+        that Drag & Drop isn't possible yet with <code>[sortable]</code>, <code>[groupable]</code>,
+        <code>[filterable]</code> columns and <code>[freezeColumnsTo]</code> enabled.
+    </p>
 
     <br />
 
-    Drag and drop is available via keyboard by focusing a row or cell, holding the alt/option key and using the up or
-    down arrows.
+    <p>
+        Drag and drop is available via keyboard by focusing a row or cell, holding the alt/option key and using the up
+        or down arrows.
+    </p>
+    <p>
+        By default, keyboard drag & drop works in shift mode, which means that focused item will ne moved on the same
+        level as it's siblings.
+    </p>
+    <p>
+        By pressing alt/option + shift key, drag & drop will use 'group' mode with the next sibling based on the
+        direction of drag & drop.
+    </p>
 </description>
 <component-example>
     <fdp-platform-table-tree-example></fdp-platform-table-tree-example>

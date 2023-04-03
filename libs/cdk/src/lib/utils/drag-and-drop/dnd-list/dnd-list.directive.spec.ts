@@ -97,7 +97,9 @@ describe('DndListDirective', () => {
         expect(directive.itemDropped.emit).toHaveBeenCalledWith({
             replacedItemIndex: 1,
             draggedItemIndex: 3,
-            items: ['item1', 'item4', 'item2', 'item3']
+            items: ['item1', 'item4', 'item2', 'item3'],
+            insertAt: 'after',
+            mode: 'shift'
         });
 
         expect((directive as any)._removeAllLines).toHaveBeenCalled();

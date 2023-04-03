@@ -16,6 +16,8 @@ export interface FdDropEvent<T> {
     items: Array<T>;
     replacedItemIndex: number;
     draggedItemIndex: number;
+    insertAt: 'before' | 'after' | null;
+    mode: FdDndDropEventMode;
 }
 
 export interface ElementPosition {
@@ -36,3 +38,6 @@ export interface DndItem {
     listDraggable: boolean;
     changeCDKDragState: () => void;
 }
+
+export type FdDndDropType = 'shift' | 'group' | 'auto';
+export type FdDndDropEventMode = 'shift' | 'group';

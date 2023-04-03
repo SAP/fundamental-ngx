@@ -85,7 +85,7 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
 
             &.fd-dnd-on-drag {
                 &.fd-dnd-placeholder {
-                    padding-left: 2.8rem;
+                    //padding-left: 2.8rem;
 
                     @include fd-rtl() {
                         padding-left: 0.5rem;

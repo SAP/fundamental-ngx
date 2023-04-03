@@ -1,0 +1,32 @@
+<fd-docs-section-title id="simple" componentName="fdkDisabled">Basic example</fd-docs-section-title>
+<description>
+    <p>
+        Drag & Drop container should be decorated with <code>fdkDndList</code> directive, which accepts
+        <code>[items]</code> input property with the array of draggable items.
+    </p>
+    <p>Developers can define type of drop action by specifying <code>[dropMode]</code> input property:</p>
+    <ul>
+        <li>
+            <code>shift</code> will highlight element that's being currently hovered with dragged item with the line,
+            indicating that dragged item will be placed before or after the hovered element.
+        </li>
+        <li>
+            <code>group</code> will highlight element that's being currently hovered with dragged item by changing
+            element's background, indicating that dragged item will replace currently hovered element. This options is
+            suitable for grouping scenarios, when dropping item on another item should create a group, where dropped
+            item will become a child item of hovered one.
+        </li>
+        <li>
+            <code>auto</code> will combine both approaches described above, and will select appropriate action depending
+            on the coordinates of dragged item. By default it will apply <code>group</code> mode, if percentage of the
+            dragged element area which hovers over the hovered item is less than a <code>[threshold]</code> percentage.
+            Developers can specify the threshold percentage of dragged item over another item to switch between
+            <code>group</code> and <code>shift</code> modes.
+        </li>
+    </ul>
+    <p>Each draggable item element should be decorated with <code>fdkDndItem</code> directive.</p>
+</description>
+<component-example [hasBackground]="true">
+    <fundamental-ngx-cdk-disabled-example></fundamental-ngx-cdk-disabled-example>
+</component-example>
+<code-example [exampleFiles]="defaultExample"></code-example>
