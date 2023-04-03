@@ -172,6 +172,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Майстер'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Більше'
+    },
     platformActionBar: {
         backButtonLabel: 'Повернутися назад'
     },

@@ -150,6 +150,9 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Wizard'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Více'
+    },
     platformActionBar: {
         backButtonLabel: 'Vraťit se zpět'
     },

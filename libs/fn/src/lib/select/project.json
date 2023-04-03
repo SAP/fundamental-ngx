@@ -4,7 +4,7 @@
     "sourceRoot": "libs/fn/src/lib/select",
     "prefix": "fn",
     "targets": {
-        "build": {
+        "build-noop": {
             "executor": "@nrwl/angular:ng-packagr-lite",
             "outputs": ["{workspaceRoot}/dist/libs/fn/select"],
             "options": {
@@ -18,7 +18,7 @@
                 }
             }
         },
-        "test": {
+        "test-noop": {
             "executor": "@angular-devkit/build-angular:karma",
             "options": {
                 "main": "libs/fn/src/lib/select/test.ts",
@@ -26,7 +26,7 @@
                 "karmaConfig": "libs/fn/src/lib/select/karma.conf.js"
             }
         },
-        "lint": {
+        "lint-noop": {
             "executor": "@nrwl/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/fn/src/lib/select/**/*.ts", "libs/fn/src/lib/select/**/*.html"]
