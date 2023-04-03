@@ -208,6 +208,7 @@ export class PopoverService extends BasePopoverClass {
      */
     refreshConfiguration(config: BasePopoverClass): void {
         const onlyChanged = Object.keys(new BasePopoverClass()).filter((key) => this[key] !== config[key]);
+        this.appendTo = config.appendTo;
 
         if (onlyChanged.includes('isOpen')) {
             if (config.isOpen) {
