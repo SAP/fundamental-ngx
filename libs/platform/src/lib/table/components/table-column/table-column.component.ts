@@ -129,6 +129,9 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     /** Stores information for the header cell if the ellipsis are visible after the column resize */
     headerOverflows = false;
 
+    /** Stores information for the header cells if the ellipsis are visible in case column of resize */
+    headerOverflows = false;
+
     /** @hidden */
     @ContentChild(FdpCellDef)
     set fdpCellDef(fdpCellDef: Nullable<FdpCellDef>) {
