@@ -36,10 +36,6 @@ export class DefaultExampleComponent {
     values3 = generateItems();
     constructor() {}
 
-    onItemsChange(items: ListItem[], property: string, dropMode: FdDndDropType): void {
-        // this[property] = items;
-    }
-
     onItemDropped(event: FdDropEvent<ListItem>, property: string): void {
         const values = this[property] as ListItem[];
         const draggedItem = values[event.draggedItemIndex];
@@ -52,6 +48,8 @@ export class DefaultExampleComponent {
         }
 
         this._dragDropUpdateDropItemAttributes(draggedItem, droppedItem, event.mode, property);
+
+        this._cdr.detectChanges();
     }
 
     /** @hidden */
@@ -133,9 +131,30 @@ export class DefaultExampleComponent {
         };
     }
 
+    /** @hidden */
     private _findItemChildren(item: ListItem, property: string): ListItem[] {
-        const allItems = this[property] as ListItem[];
-        return allItems.filter((item) => item.parent === item);
+        const allItems = this[property];
+        const itemsLength = allItems.length;
+
+        /**
+         * Since we are dealing with a flat list
+         * it means all children go next right after the expandable item
+         * until the next item has a mutual parent
+         */
+
+        let index = allItems.indexOf(item);
+        const parents = this._getItemParents(item, property);
+        const children: ListItem[] = [];
+
+        while (index++ < itemsLength) {
+            const nextItem = allItems[index];
+            if (!nextItem?.parent || parents.includes(nextItem.parent)) {
+                break;
+            }
+            children.push(nextItem);
+        }
+
+        return children;
     }
 
     private _getItemParents(item: ListItem, property: string): ListItem[] {

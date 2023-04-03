@@ -16,7 +16,7 @@
 </p>
 <ng-template
     [ngTemplateOutlet]="listRenderer"
-    [ngTemplateOutletContext]="{ $implicit: values2, dropMode: 'auto', property: 'values2' }"
+    [ngTemplateOutletContext]="{ $implicit: values3, dropMode: 'auto', property: 'values3' }"
 ></ng-template>
 
 <ng-template let-items let-dropMode="dropMode" let-property="property" #listRenderer>
@@ -25,7 +25,6 @@
         fdkDndList
         [dropMode]="dropMode"
         [items]="items"
-        (itemsChange)="onItemsChange($event, property, dropMode)"
         (itemDropped)="onItemDropped($event, property)"
     >
         <ng-container *ngFor="let item of items">

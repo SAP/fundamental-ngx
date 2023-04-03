@@ -93,6 +93,7 @@ describe('DndListDirective', () => {
         directive.items = [...component.list];
 
         (directive as any)._closestItemIndex = 1;
+        (directive as any)._closestItemPosition = 'after';
         directive.dragEnd(3);
         expect(directive.itemDropped.emit).toHaveBeenCalledWith({
             replacedItemIndex: 1,
