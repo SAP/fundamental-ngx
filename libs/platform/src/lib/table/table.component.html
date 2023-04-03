@@ -535,7 +535,7 @@
     <ng-template #defaultHeaderCellTemplate>
         <span
             [id]="id + '-header-cell-' + column.name"
-            [attr.title]="column.label"
+            [attr.title]="column?.headerOverflows ? column.label : null"
             class="fd-table__cell--truncate-txt"
         >
             {{ column?.label }}
@@ -544,6 +544,31 @@
 </ng-template>
 
 <!-- Table Cell Expand Template -->
+<ng-template #tableCellExpandTemplate let-row="row">
+    <div class="fd-table__expand-wrapper">
+        <span class="fd-table__expand" [class.fd-table__expand--open]="row.expanded" aria-hidden="true"></span>
+
+        <!-- Group row template when no nested groups -->
+        <ng-container *ngIf="_groupRulesMap.size === 1">
+            <div class="fd-table__text fd-table__text--no-wrap">
+                {{ row.value?.['value'] }} - {{ row.value?.['count'] }}
+            </div>
+        </ng-container>
+
+        <!-- Group row template when there are nested groups -->
+        <ng-container *ngIf="_groupRulesMap.size !== 1">
+            <div class="fd-table__text fd-table__text--no-wrap">
+                <ng-container
+                    *ngTemplateOutlet="
+                        tableHeaderCellContentTemplate;
+                        context: { column: _keyToColumnMap.get(row.value?.['field']) }
+                    "
+                ></ng-container
+                >: {{ row.value?.['value'] }}
+            </div>
+        </ng-container>
+    </div>
+</ng-template>
 <ng-template #tableCellExpandTemplate let-row="row">
     <div class="fd-table__expand-wrapper">
         <span class="fd-table__expand" [class.fd-table__expand--open]="row.expanded" aria-hidden="true"></span>
