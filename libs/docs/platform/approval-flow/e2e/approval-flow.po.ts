@@ -2,6 +2,9 @@ import { PlatformBaseComponentPo, waitForElDisplayed, waitForPresent } from '../
 
 export class ApprovalFlowPo extends PlatformBaseComponentPo {
     url = '/approval-flow';
+
+    afDefaultExample = 'fdp-platform-approval-flow-example ';
+
     root = '#page-content';
     watchers = 'fdp-approval-flow .fdp-approval-flow__watchers';
     watchersTitle = this.watchers + ' p';
