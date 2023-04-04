@@ -11,11 +11,16 @@ export const getChangesSource$ = (params: {
     defaultContentDensity: ContentDensityMode;
     contentDensityDirective?: Observable<LocalContentDensityMode>;
     contentDensityService?: GlobalContentDensityService;
+    parentContentDensityService?: Observable<ContentDensityMode>;
 }): Observable<ContentDensityMode> => {
     const serviceValue$: Observable<ContentDensityMode> = params.contentDensityService
         ? params.contentDensityService.contentDensityListener()
         : of(params.defaultContentDensity);
-    const changesSource$ = params.contentDensityDirective ? params.contentDensityDirective : serviceValue$;
+    const changesSource$ = params.parentContentDensityService
+        ? params.parentContentDensityService
+        : params.contentDensityDirective
+        ? params.contentDensityDirective
+        : serviceValue$;
 
     return changesSource$.pipe(
         switchMap((mode: LocalContentDensityMode) => {

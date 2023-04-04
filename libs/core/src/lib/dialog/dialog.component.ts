@@ -151,7 +151,6 @@ export class DialogComponent
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
-        this._listenOnHidden();
         this.buildComponentCssClass();
     }
 
@@ -163,6 +162,7 @@ export class DialogComponent
     /** @hidden */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
+        this._listenOnHidden();
     }
 
     /** @hidden */
@@ -193,6 +193,16 @@ export class DialogComponent
         this._onHidden = this._dialogRef.onHide.subscribe((isHidden) => {
             this.showDialogWindow = !isHidden;
             this.buildComponentCssClass();
+
+            if (!this._focusTrapId) {
+                return;
+            }
+            const focusTrapInstance = this._focusTrapService.getFocusTrapInstance(this._focusTrapId);
+            if (isHidden) {
+                focusTrapInstance?.pause();
+            } else {
+                focusTrapInstance?.unpause();
+            }
         });
     }
 }

@@ -10,5 +10,6 @@ export const defaultContentDensityObserverConfigs: Required<ContentDensityObserv
     supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY],
     defaultContentDensity: ContentDensityMode.COZY,
     debug: false,
-    alwaysAddModifiers: false
+    alwaysAddModifiers: false,
+    restrictChildContentDensity: false
 };

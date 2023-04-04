@@ -480,6 +480,8 @@ export class SelectComponent<T = any>
         this._highlightCorrectOption();
         this._changeDetectorRef.markForCheck();
 
+        this._controlElementRef.nativeElement.focus();
+
         this.isOpenChange.emit(true);
     }
 
@@ -605,7 +607,7 @@ export class SelectComponent<T = any>
     }
 
     /**
-     * Expose expose outside of this mixin to give component ability
+     * Expose outside of this mixin to give component ability
      * to update caluclatedMaxHeight if needed
      * @hidden
      */
@@ -704,6 +706,9 @@ export class SelectComponent<T = any>
             this._changeDetectorRef.markForCheck();
         }
     }
+
+    /** @hidden */
+    _buttonClick(): void {}
 
     /** @hidden */
     private _resetOptions(): void {

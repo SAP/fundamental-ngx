@@ -140,13 +140,17 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
 
         this.config = {
             ...defaultContentDensityObserverConfigs,
+            ...(this._parentContentDensityObserver?.config ?? {}),
             ...(_providedConfig || {})
         };
 
         getChangesSource$({
             defaultContentDensity: this.value,
             contentDensityDirective: this._contentDensityDirective ?? undefined,
-            contentDensityService: this._globalContentDensityService ?? undefined
+            contentDensityService: this._globalContentDensityService ?? undefined,
+            parentContentDensityService: this.config.restrictChildContentDensity
+                ? this._parentContentDensityObserver?.asObservable() ?? undefined
+                : undefined
         })
             .pipe(
                 map((density) => {

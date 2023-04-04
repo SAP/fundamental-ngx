@@ -18,6 +18,7 @@ import {
 import { DestroyedService, Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
+import { ContentDensityMode, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, Subscription, takeUntil } from 'rxjs';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
@@ -44,7 +45,13 @@ export interface NormalizedBreakpoint {
     styleUrls: ['./shellbar.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyedService]
+    providers: [
+        DestroyedService,
+        contentDensityObserverProviders({
+            supportedContentDensity: [ContentDensityMode.COZY],
+            restrictChildContentDensity: true
+        })
+    ]
 })
 export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Size of Shellbar component 's' | 'm' | 'l' | 'xl' */

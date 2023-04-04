@@ -38,9 +38,8 @@ function generateContentDensityStorage(config: ContentDensityModuleConfig): Prov
 }
 
 @NgModule({
-    imports: [CommonModule],
-    exports: [ContentDensityDirective],
-    declarations: [ContentDensityDirective]
+    imports: [CommonModule, ContentDensityDirective],
+    exports: [ContentDensityDirective]
 })
 export class ContentDensityModule {
     /** Module with providers */

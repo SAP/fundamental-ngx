@@ -8,6 +8,6 @@ export class DefaultDisabledViewModifier implements DisabledViewModifier {
 
     /** @hidden */
     setDisabledState = (isDisabled: boolean): void => {
-        setDisabledState(this.elementRef, isDisabled);
+        setDisabledState(this.elementRef, isDisabled, 'is-disabled', true);
     };
 }

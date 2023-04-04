@@ -21,7 +21,8 @@ import { ContentDensityMode } from '../types/content-density.mode';
             provide: CONTENT_DENSITY_DIRECTIVE,
             useExisting: forwardRef(() => ContentDensityDirective)
         }
-    ]
+    ],
+    standalone: true
 })
 export class ContentDensityDirective extends BehaviorSubject<LocalContentDensityMode> implements OnDestroy {
     /**
