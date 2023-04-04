@@ -15,6 +15,7 @@ export class SelectPo extends CoreBaseComponentPo {
     maxHeightExample = 'fd-select-max-height-example';
     addRemoveOptionExample = 'fd-select-adding-example';
     programmaticControlExample = 'fd-select-programmatic-example';
+    selectControl = ' .fd-select__control';
 
     async open(): Promise<void> {
         await super.open(this.url);

@@ -345,12 +345,12 @@ describe('Table test suite', () => {
             const fiveTableRows = await getElementArrayLength(tablePaginationExample + tableRow);
             await expect(fiveTableRows).toEqual(5);
 
-            await click(tablePaginationExample + button);
+            await click(tablePaginationExample + ' .fd-select__control');
             await click(menuItem);
             const threeTableRows = await getElementArrayLength(tablePaginationExample + tableRow);
             await expect(threeTableRows).toEqual(3);
 
-            await click(tablePaginationExample + button);
+            await click(tablePaginationExample + ' .fd-select__control');
             await click(menuItem, 2);
             const tenTableRows = await getElementArrayLength(tablePaginationExample + tableRow);
             await expect(tenTableRows).toEqual(10);
@@ -375,7 +375,7 @@ describe('Table test suite', () => {
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/7148
         xit('should check that current page not changing after changing items per page', async () => {
             await scrollIntoView(tablePaginationExample);
-            await click(tablePaginationExample + button);
+            await click(tablePaginationExample + ' .fd-select__control');
             const defaultSelectedPage = await getText(selectedPage);
             await click(menuItem);
             await expect(await getText(selectedPage)).toBe(defaultSelectedPage);

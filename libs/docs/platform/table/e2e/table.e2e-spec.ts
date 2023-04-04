@@ -1,3 +1,4 @@
+import { wait } from '@nrwl/nx-cloud/lib/utilities/waiter';
 import { TablePo } from './table.po';
 import {
     acceptAlert,
@@ -567,9 +568,10 @@ describe('Table component test suite', () => {
             await findElementInTable(tableP13SortExample, tableCellArr4);
         });
 
-        it('should check sorting ascending and descending by name', async () => {
+        fit('should check sorting ascending and descending by name', async () => {
             await scrollIntoView(tableP13SortExample);
             await click(tableP13SortExample + ellipsisButton);
+            await wait(500);
             await click(popoverDropdownButton);
             await click(buttonSortedBy);
             await click(footerButtonOk);

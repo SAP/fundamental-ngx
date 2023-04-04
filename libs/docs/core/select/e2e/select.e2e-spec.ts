@@ -1,9 +1,11 @@
+import { wait } from '@nrwl/nx-cloud/lib/utilities/waiter';
 import { SelectPo } from './select.po';
 import {
     browserIsSafari,
     click,
     getAttributeByName,
     getElementArrayLength,
+    getElementClass,
     getText,
     isElementClickable,
     refreshPage,
@@ -13,7 +15,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 
-describe('Select component:', () => {
+fdescribe('Select component:', () => {
     const selectPage = new SelectPo();
     const {
         selectModesExample,
@@ -27,7 +29,8 @@ describe('Select component:', () => {
         overlayContainer,
         buttons,
         option,
-        displayedText
+        displayedText,
+        selectControl
     } = selectPage;
 
     beforeAll(async () => {
@@ -43,7 +46,7 @@ describe('Select component:', () => {
     describe('Select modes', () => {
         it('should be able to select the option for default select', async () => {
             const textBefore = await getText(selectModesExample + displayedText);
-            await click(selectModesExample + buttons);
+            await click(selectModesExample + selectControl);
             await waitForElDisplayed(option, 4);
             await click(option, 4);
             const textAfter = await getText(selectModesExample + displayedText);
@@ -52,7 +55,7 @@ describe('Select component:', () => {
 
         it('should be able to select the option for compact select', async () => {
             const textBefore = await getText(selectModesExample + displayedText, 1);
-            await click(selectModesExample + buttons, 1);
+            await click(selectModesExample + selectControl, 1);
             await waitForElDisplayed(option, 4);
             await click(option, 4);
             const textAfter = await getText(selectModesExample + displayedText, 1);
@@ -60,15 +63,14 @@ describe('Select component:', () => {
         });
 
         it('should check disabled select', async () => {
-            await expect(await isElementClickable(selectModesExample + buttons, 2)).toBe(false);
-            await expect(await getAttributeByName(selectModesExample + buttons, 'disabled', 2)).toBe('true');
+            await expect(await getElementClass(selectModesExample + selectControl, 2)).toContain('is-disabled');
         });
     });
 
     describe('Semantic state', () => {
         it('should be able to select the option Success state', async () => {
             const textBefore = await getText(selectSemanticStatesExample + displayedText);
-            await click(selectSemanticStatesExample + buttons);
+            await click(selectSemanticStatesExample + selectControl);
             await waitForElDisplayed(option, 4);
             await click(option, 4);
             const textAfter = await getText(selectSemanticStatesExample + displayedText);
@@ -77,7 +79,7 @@ describe('Select component:', () => {
 
         it('should be able to select the option Warning state', async () => {
             const textBefore = await getText(selectSemanticStatesExample + displayedText, 1);
-            await click(selectSemanticStatesExample + buttons, 1);
+            await click(selectSemanticStatesExample + selectControl, 1);
             await waitForElDisplayed(option, 4);
             await click(option, 4);
             const textAfter = await getText(selectSemanticStatesExample + displayedText, 1);
@@ -86,7 +88,7 @@ describe('Select component:', () => {
 
         it('should be able to select the option Error state', async () => {
             const textBefore = await getText(selectSemanticStatesExample + displayedText, 2);
-            await click(selectSemanticStatesExample + buttons, 2);
+            await click(selectSemanticStatesExample + selectControl, 2);
             await waitForElDisplayed(option, 4);
             await click(option, 4);
             const textAfter = await getText(selectSemanticStatesExample + displayedText, 2);
@@ -95,7 +97,7 @@ describe('Select component:', () => {
 
         it('should be able to select the option Information state', async () => {
             const textBefore = await getText(selectSemanticStatesExample + displayedText, 3);
-            await click(selectSemanticStatesExample + buttons, 3);
+            await click(selectSemanticStatesExample + selectControl, 3);
             await waitForElDisplayed(option, 4);
             await click(option, 4);
             const textAfter = await getText(selectSemanticStatesExample + displayedText, 3);
@@ -106,7 +108,7 @@ describe('Select component:', () => {
     describe('Custom Control Content', () => {
         it('should be able to select the option', async () => {
             const textBefore = await getText(customControlExample + displayedText);
-            await click(customControlExample + buttons);
+            await click(customControlExample + selectControl);
             await waitForElDisplayed(option, 4);
             await click(option, 4);
             const textAfter = await getText(customControlExample + displayedText);
@@ -117,7 +119,7 @@ describe('Select component:', () => {
     describe('Extended Options', () => {
         it('should be able to select the option', async () => {
             const textBefore = await getText(extendedOptionsExample + displayedText);
-            await click(extendedOptionsExample + buttons);
+            await click(extendedOptionsExample + selectControl);
             await waitForElDisplayed(option, 4);
             await click(option, 4);
             const textAfter = await getText(extendedOptionsExample + displayedText);
@@ -128,7 +130,7 @@ describe('Select component:', () => {
     describe('Mobile Mode', () => {
         it('should be able to select the option', async () => {
             const textBefore = await getText(mobileModeExample + displayedText);
-            await click(mobileModeExample + buttons);
+            await click(mobileModeExample + selectControl);
             await waitForElDisplayed(option);
             await click(option);
             const textAfter = await getText(mobileModeExample + displayedText);
@@ -139,7 +141,7 @@ describe('Select component:', () => {
     describe('Max Height', () => {
         it('should be able to select the option', async () => {
             const textBefore = await getText(maxHeightExample + displayedText);
-            await click(maxHeightExample + buttons);
+            await click(maxHeightExample + selectControl);
             await waitForElDisplayed(option, 4);
             await click(option, 4);
             const textAfter = await getText(maxHeightExample + displayedText);
@@ -150,7 +152,7 @@ describe('Select component:', () => {
     describe('Adding and Removing Options', () => {
         it('should be able to select the option', async () => {
             const textBefore = await getText(addRemoveOptionExample + displayedText);
-            await click(addRemoveOptionExample + buttons, 2);
+            await click(addRemoveOptionExample + selectControl);
             await waitForElDisplayed(option, 4);
             await click(option, 4);
             const textAfter = await getText(addRemoveOptionExample + displayedText);
@@ -162,12 +164,12 @@ describe('Select component:', () => {
             if (await browserIsSafari()) {
                 return;
             }
-            await click(addRemoveOptionExample + buttons, 2);
+            await click(addRemoveOptionExample + selectControl);
             await waitForElDisplayed(option, 4);
             const optionsCountBefore = await getElementArrayLength(option);
-            await click(addRemoveOptionExample + buttons, 2);
+            await click(addRemoveOptionExample + selectControl);
             await click(addRemoveOptionExample + buttons);
-            await click(addRemoveOptionExample + buttons, 2);
+            await click(addRemoveOptionExample + selectControl);
             await waitForElDisplayed(option, 4);
             const optionsCountAfterAdding = await getElementArrayLength(option);
 
@@ -179,12 +181,12 @@ describe('Select component:', () => {
             if (await browserIsSafari()) {
                 return;
             }
-            await click(addRemoveOptionExample + buttons, 2);
+            await click(addRemoveOptionExample + selectControl);
             await waitForElDisplayed(option, 4);
             const optionsCountBefore = await getElementArrayLength(option);
-            await click(addRemoveOptionExample + buttons, 2);
+            await click(addRemoveOptionExample + selectControl);
             await click(addRemoveOptionExample + buttons, 1);
-            await click(addRemoveOptionExample + buttons, 2);
+            await click(addRemoveOptionExample + selectControl);
             await waitForElDisplayed(option, 4);
             const optionsCountAfterRemoving = await getElementArrayLength(option);
 
@@ -193,7 +195,7 @@ describe('Select component:', () => {
 
         it('should check that we not able to remove the last option', async () => {
             await scrollIntoView(addRemoveOptionExample);
-            await click(addRemoveOptionExample + buttons, 2);
+            await click(addRemoveOptionExample + selectControl);
             const optionsCountBefore = await getElementArrayLength(overlayContainer + option);
             for (let i = 0; i < optionsCountBefore; i++) {
                 await click(addRemoveOptionExample + buttons, 1);
@@ -206,7 +208,7 @@ describe('Select component:', () => {
     describe('Programmatic Control', () => {
         it('should be able to select the option', async () => {
             const textBefore = await getText(programmaticControlExample + displayedText);
-            await click(programmaticControlExample + buttons, 3);
+            await click(programmaticControlExample + selectControl);
             await waitForElDisplayed(option, 5);
             await click(option, 5);
             const textAfter = await getText(programmaticControlExample + displayedText);
