@@ -1,3 +1,21 @@
+# [0.40.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.12...v0.40.0-rc.13) (2023-04-05)
+
+
+### Features
+
+* new content density mechanism ([#9596](https://github.com/SAP/fundamental-ngx/issues/9596)) ([34c15ba](https://github.com/SAP/fundamental-ngx/commit/34c15bad0422b00a7958f3cc57f985d521e4e179))
+
+
+### BREAKING CHANGES
+
+* - Content Density mechanism was changed in favour of fundamental-styles content density mechanism based on parent css classes: `.is-cozy`, '.is-compact', '.is-condensed';
+- All components are now relying on those css classes instead of previous approach with `.fd-${component-name}__[cozy|compact|condensed]`;
+- Now, if content densities of child and parent components are equal, child component will omit adding `.is-cozy`, `.is-compact` or `.is-condensed` css class modifier.
+- Shellbar and it's inner components are always keep `cozy` state, no matter the global or directive content density applied to it;
+- Select component changed `.fd-button` tag from `button` to `span` to match the markup and visual styling from fundamental-styles;
+
+
+
 # [0.40.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.11...v0.40.0-rc.12) (2023-04-02)
 
 
