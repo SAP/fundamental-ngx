@@ -42,6 +42,10 @@ const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 
 let defaultId = 0;
 
+/**
+ * @deprecated
+ * ApprovalFlowNode component is depricated since version 0.40.0
+ */
 @Component({
     selector: 'fdp-approval-flow-node',
     templateUrl: './approval-flow-node.component.html',

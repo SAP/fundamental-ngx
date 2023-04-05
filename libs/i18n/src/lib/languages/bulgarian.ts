@@ -171,6 +171,9 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Помощник'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Повече'
+    },
     platformActionBar: {
         backButtonLabel: 'Върни Се Обратно'
     },

@@ -71,7 +71,7 @@ describe('Switch test suite', () => {
         await expect(await checkToggleState(playGroundSwitchExample)).toBe(true, 'toggle is not enabled');
         await click(checkboxes, 2);
         await expect(await getElementClass(playGroundSwitchExample + toggle)).not.toContain(
-            'fd-switch--compact',
+            'is-compact',
             'toggle is compact'
         );
         await click(checkboxes, 0);
@@ -81,7 +81,7 @@ describe('Switch test suite', () => {
         );
         await click(checkboxes, 2);
         await expect(await getElementClass(playGroundSwitchExample + toggle)).toContain(
-            'fd-switch--compact',
+            'is-compact',
             'toggle is not compact'
         );
     });

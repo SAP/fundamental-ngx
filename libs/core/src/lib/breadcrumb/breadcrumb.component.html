@@ -59,12 +59,18 @@
         <span class="fd-breadcrumb__item" *ngIf="breadcrumbs.length > 0" [fdMenuTrigger]="menu">
             <a
                 fd-link
+                [attr.aria-label]="'coreBreadcrumb.overflowTitleMore' | fdTranslate"
+                aria-haspopup="listbox"
                 tabindex="0"
                 class="fd-breadcrumb__collapsed"
                 (keydown.enter)="_keyDownHandle($event)"
                 (keydown.space)="_keyDownHandle($event)"
             >
-                <fd-icon glyph="overflow"></fd-icon>
+                <fd-icon
+                    glyph="overflow"
+                    [title]="'coreBreadcrumb.overflowTitleMore' | fdTranslate"
+                    [ariaLabel]="'coreBreadcrumb.overflowTitleMore' | fdTranslate"
+                ></fd-icon>
                 <fd-icon glyph="slim-arrow-down"></fd-icon>
             </a>
         </span>

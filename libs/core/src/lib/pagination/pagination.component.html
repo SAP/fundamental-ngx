@@ -100,7 +100,7 @@
             #pageInputElement
             fdkFocusKeyManagerItem
             fd-form-control
-            fd-only-digits
+            fdkOnlyDigits
             required
             size="1"
             min="1"
@@ -195,13 +195,7 @@
 </ng-container>
 
 <ng-template #more>
-    <span
-        class="fd-pagination__more"
-        [class.fd-pagination__more--compact]="_contentDensityObserver.isCompact$ | async"
-        aria-hidden="true"
-        aria-label="..."
-        role="presentation"
-    ></span>
+    <span class="fd-pagination__more" aria-hidden="true" aria-label="..." role="presentation"></span>
 </ng-template>
 
 <ng-template #total let-showing="showing">

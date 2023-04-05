@@ -89,7 +89,6 @@
         />
         <span
             class="fd-input-group__addon fd-input-group__addon--button"
-            [class.fd-input-group__addon--compact]="_contentDensityObserver.isCompact$ | async"
             [class.fd-shellbar__input-group-addon]="inShellbar"
             *ngIf="isSearch && showClearButton && inputText && inputText.length > 0"
         >

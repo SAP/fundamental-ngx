@@ -10,8 +10,8 @@ export class VhdPo extends PlatformBaseComponentPo {
     menuCheckboxes = 'fd-popover-body fd-checkbox';
     menuDialogBtn = 'app-platform-vhd fd-popover button';
     menuItemNames = 'fd-popover-body .fd-list__title';
-    miniOpenDialogBtn = 'button[class*="fd-button--compact"]';
-    openDialogBtn = 'button[class="fd-button fd-button--standard"]';
+    miniOpenDialogBtn = 'button[class*="is-compact"]';
+    openDialogBtn = '.fd-doc-component button.fd-button.fd-button--standard';
     basicSearchInput = '.fdp-search-field__input';
 
     // Dialog form selectors

@@ -4,6 +4,10 @@ import { Observable } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ApprovalUser } from '../interfaces';
 
+/**
+ * @deprecated
+ * ApprovalFlowUserDetails component is depricated since version 0.40.0
+ */
 @Component({
     selector: 'fdp-approval-flow-user-details',
     templateUrl: './approval-flow-user-details.component.html',

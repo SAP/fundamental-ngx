@@ -98,7 +98,7 @@ describe('RadioButtonComponent', () => {
         expect(inputElems1.getAttribute('ng-reflect-value')).toEqual('2');
 
         expect(inputElems1.classList.contains('fd-radio')).toBeTruthy();
-        expect(inputElems1.classList.contains('fd-radio--compact')).toBeTruthy();
+        expect(inputElems1.classList.contains('is-compact')).toBeTruthy();
     });
 
     it('radio click should should change control value', async () => {

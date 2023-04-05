@@ -4,7 +4,6 @@
         [class.is-focus]="focused"
         [class.is-readonly]="!editable"
         [class.is-disabled]="disabled"
-        [class.fd-step-input--compact]="contentDensityObserver.isCompact"
         [class.fd-step-input--without-buttons]="showLabels"
         [class]="state ? 'is-' + state : ''"
     >
@@ -26,7 +25,6 @@
         <input
             #inputElementRef
             class="fd-input fd-input--no-number-spinner fd-step-input__input"
-            [class.fd-input--compact]="contentDensityObserver.isCompact"
             [id]="id"
             [name]="name"
             [disabled]="disabled"
@@ -40,7 +38,7 @@
             fdpStepInputControl
             type="text"
             inputmode="numeric"
-            fd-only-digits
+            fdkOnlyDigits
             [decimal]="true"
         />
         <button

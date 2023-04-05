@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fd-list-dnd-example',
+    encapsulation: ViewEncapsulation.None,
     templateUrl: './list-dnd-example.component.html'
 })
 export class ListDndExampleComponent {

@@ -11,7 +11,7 @@ import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 @Component({
     selector: 'fdp-file-uploader-test',
     template: `
-        <fdp-form-group #fg [fdContentDensity]="contentDensity">
+        <fdp-form-group #fg>
             <fdp-form-field
                 #ffl1
                 label="File Uploader"
@@ -22,6 +22,7 @@ import { FdpFormGroupModule } from '../form-group/fdp-form.module';
                 placeholder="Select the file"
             >
                 <fdp-file-uploader
+                    [fdContentDensity]="contentDensity"
                     id="file-uploader-sample"
                     name="reactiveFormInput"
                     placeholder="Select the file"
@@ -93,18 +94,8 @@ describe('PlatformFileUploaderComponent', () => {
         await wait(fixture);
         component.contentDensity = ContentDensityMode.COMPACT;
         fixture.detectChanges();
-        const fileUploaderData = fixture.debugElement.query(By.css('.fd-file-uploader__input'));
-        const disabledValue = fileUploaderData.nativeElement.classList;
-        expect(disabledValue).toContain('fd-input--compact');
-    });
-
-    it('should upload file', async () => {
-        await wait(fixture);
-        component.contentDensity = ContentDensityMode.COMPACT;
-        fixture.detectChanges();
-        const fileUploaderData = fixture.debugElement.query(By.css('.fd-file-uploader__input'));
-        const disabledValue = fileUploaderData.nativeElement.classList;
-        expect(disabledValue).toContain('fd-input--compact');
+        const fileUploader = fixture.debugElement.query(By.css('fdp-file-uploader'));
+        expect(fileUploader.nativeElement.classList).toContain('is-compact');
     });
 
     it('should selectHandler with no maxFileSize', async () => {

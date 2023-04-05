@@ -1,20 +1,18 @@
-const angularJson = require('../../angular.json');
-const projects: { projectName: string; tags: string[] }[] = Object.keys(angularJson.projects).map((projName) => {
-    const projectContent = require('../../' + angularJson.projects[projName] + '/project.json');
-    return {
-        projectName: projName,
-        ...projectContent
-    };
-});
+import { FsTree } from 'nx/src/generators/tree';
+import { workspaceRoot } from 'nx/src/utils/app-root';
+import { getProjects } from '@nrwl/devkit';
+
+const tree = new FsTree(workspaceRoot, true); // Second param is for verbosity
+const projects = [...getProjects(tree).values()];
 
 const knownTypes = new Set(['app', 'e2e', 'tools', 'lib']);
 const knownScopes = new Set(['docs', 'fd', 'fdp', 'fn', 'cx', 'tools', 'datetime-adapter', 'components-e2e', 'i18n']);
 
 // For some reason this test hangs. TODO: investigate whats wrong.
-xdescribe('Nx projects (nx.json)', () => {
+describe('Nx projects (nx.json)', () => {
     // generate tests so we have a clear output of which project failed
     projects.forEach((testEntry) => {
-        describe(`Project ${testEntry.projectName}`, () => {
+        describe(`Project ${testEntry.name}`, () => {
             it('should have a valid scope tag', () => {
                 expect(testEntry.tags).toBeDefined();
                 expect(testEntry.tags?.length).toBeGreaterThan(0);

@@ -1,10 +1,4 @@
-<div
-    #headerContainer
-    role="tablist"
-    class="fd-tabs"
-    [class]="(mode ? 'fd-tabs--' + mode : '') + (' fd-tabs--' + size)"
-    [class.fd-tabs--compact]="_contentDensityObserver.isCompact"
->
+<div #headerContainer role="tablist" class="fd-tabs" [class]="(mode ? 'fd-tabs--' + mode : '') + (' fd-tabs--' + size)">
     <fd-overflow-layout
         [maxVisibleItems]="maxVisibleTabs"
         [enableKeyboardNavigation]="true"

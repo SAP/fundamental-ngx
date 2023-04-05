@@ -1177,7 +1177,9 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 tableComponent._dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 0,
-                    draggedItemIndex: 1
+                    draggedItemIndex: 1,
+                    mode: 'group',
+                    insertAt: 'after'
                 });
 
                 fixture.detectChanges();
@@ -1195,7 +1197,9 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 tableComponent._dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 0,
-                    draggedItemIndex: 1
+                    draggedItemIndex: 1,
+                    mode: 'group',
+                    insertAt: 'after'
                 });
 
                 fixture.detectChanges();
@@ -1207,7 +1211,9 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 tableComponent._dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 0,
-                    draggedItemIndex: 1
+                    draggedItemIndex: 1,
+                    mode: 'group',
+                    insertAt: 'after'
                 });
 
                 fixture.detectChanges();
@@ -1231,7 +1237,9 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 tableComponent._dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 1,
-                    draggedItemIndex: 0
+                    draggedItemIndex: 0,
+                    mode: 'group',
+                    insertAt: 'after'
                 });
 
                 fixture.detectChanges();
@@ -1251,7 +1259,9 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 tableComponent._dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 2,
-                    draggedItemIndex: 1
+                    draggedItemIndex: 1,
+                    mode: 'group',
+                    insertAt: 'after'
                 });
 
                 fixture.detectChanges();
@@ -1269,7 +1279,9 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 tableComponent._dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 2,
-                    draggedItemIndex: 1
+                    draggedItemIndex: 1,
+                    mode: 'group',
+                    insertAt: 'after'
                 });
 
                 fixture.detectChanges();
@@ -1285,7 +1297,9 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 tableComponent._dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 9,
-                    draggedItemIndex: 0
+                    draggedItemIndex: 0,
+                    mode: 'group',
+                    insertAt: 'after'
                 });
 
                 fixture.detectChanges();
@@ -1299,7 +1313,9 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 tableComponent._dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 0,
-                    draggedItemIndex: 9
+                    draggedItemIndex: 9,
+                    mode: 'group',
+                    insertAt: 'after'
                 });
 
                 fixture.detectChanges();
@@ -1313,7 +1329,9 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 tableComponent._dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 5,
-                    draggedItemIndex: 0
+                    draggedItemIndex: 0,
+                    mode: 'group',
+                    insertAt: 'after'
                 });
 
                 fixture.detectChanges();
@@ -1327,7 +1345,9 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 tableComponent._dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 5,
-                    draggedItemIndex: 9
+                    draggedItemIndex: 9,
+                    mode: 'group',
+                    insertAt: 'after'
                 });
 
                 fixture.detectChanges();

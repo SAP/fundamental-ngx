@@ -146,7 +146,7 @@ describe('Button test suite:', () => {
         it('verify checkbox compact', async () => {
             await scrollIntoView(checkboxCompact);
             await click(checkboxCompact);
-            await expect(await getElementClass(playgroundButton)).toContain('fd-button--compact');
+            await expect(await getElementClass(playgroundButton)).toContain('is-compact');
         });
 
         it('verify icon of dropdown menu', async () => {

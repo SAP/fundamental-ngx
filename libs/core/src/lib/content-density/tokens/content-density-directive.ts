@@ -1,5 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ContentDensityMode } from '../types/content-density.mode';
+import { LocalContentDensityMode } from '../content-density.types';
 
-export const CONTENT_DENSITY_DIRECTIVE = new InjectionToken<Observable<ContentDensityMode>>('ContentDensityDirective');
+export const CONTENT_DENSITY_DIRECTIVE = new InjectionToken<Observable<LocalContentDensityMode>>(
+    'ContentDensityDirective'
+);

@@ -52,8 +52,8 @@ describe('Token component test', () => {
         it('should check size of tokens in compact example', async () => {
             const tokensLength = await getElementArrayLength(compactExample + token);
             for (let i = 0; i < tokensLength; i++) {
-                await expect(await getElementClass(compactExample + token, i)).toContain(
-                    'compact',
+                await expect(await getElementClass(compactExample + 'fd-token', i)).toContain(
+                    'is-compact',
                     `token with index ${i} is not compact`
                 );
             }

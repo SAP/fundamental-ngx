@@ -149,6 +149,9 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Wizard'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'More'
+    },
     platformActionBar: {
         backButtonLabel: 'Regresar'
     },

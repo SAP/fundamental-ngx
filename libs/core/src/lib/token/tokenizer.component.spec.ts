@@ -56,7 +56,7 @@ describe('TokenizerComponent', () => {
     it('should handle content density when compact input is not provided', () => {
         spyOn(component, 'buildComponentCssClass');
         component.ngOnInit();
-        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
+        expect(component._contentDensityObserver.isCompact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
         expect(component.buildComponentCssClass).toHaveBeenCalled();
     });
 

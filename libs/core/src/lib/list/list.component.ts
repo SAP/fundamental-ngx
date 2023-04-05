@@ -26,11 +26,7 @@ import {
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListFocusItem } from './list-focus-item.model';
 import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
-import {
-    ContentDensityObserver,
-    contentDensityObserverProviders,
-    ContentDensityMode
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ListComponentInterface } from './list-component.interface';
 import { FD_LIST_COMPONENT, FD_LIST_UNREAD_INDICATOR } from './tokens';
 import { ListUnreadIndicator } from './list-unread-indicator.interface';
@@ -52,9 +48,7 @@ import { ListUnreadIndicator } from './list-unread-indicator.interface';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         KeyboardSupportService,
-        contentDensityObserverProviders({
-            modifiers: { [ContentDensityMode.COMPACT]: 'fd-list--compact' }
-        }),
+        contentDensityObserverProviders(),
         {
             provide: FD_LIST_COMPONENT,
             useExisting: ListComponent

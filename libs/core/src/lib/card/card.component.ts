@@ -15,11 +15,7 @@ import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { CardType, CLASS_NAME } from './constants';
 import { Subscription } from 'rxjs';
 import { getCardModifierClassNameByCardType } from './utils';
-import {
-    ContentDensityObserver,
-    contentDensityObserverProviders,
-    ContentDensityMode
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let cardId = 0;
 
@@ -29,13 +25,7 @@ let cardId = 0;
     styleUrls: ['./card.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        contentDensityObserverProviders({
-            modifiers: {
-                [ContentDensityMode.COMPACT]: CLASS_NAME.cardCompact
-            }
-        })
-    ]
+    providers: [contentDensityObserverProviders()]
 })
 export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDestroy {
     /** Badge */

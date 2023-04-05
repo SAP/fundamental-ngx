@@ -12,7 +12,10 @@
         <ng-template [ngTemplateOutlet]="mainTitleTemplate"></ng-template>
     </div>
 
-    <div class="fd-container fd-form-layout-grid-container">
+    <div
+        class="fd-container fd-form-layout-grid-container"
+        [class.is-compact]="contentDensityObserver.isCompact$ | async"
+    >
         <div *ngFor="let column of formRows | keyvalue; trackBy: trackByFn" class="fd-row">
             <div
                 *ngFor="let fields of column | fieldGroupRowValue | keyvalue; trackBy: trackByFn; let index = index"
@@ -25,11 +28,7 @@
                     </div>
                 </div>
 
-                <div
-                    *ngFor="let field of fields.value; trackBy: trackByFieldName"
-                    class="fd-row fd-form-item"
-                    [class.fd-form-item--compact]="contentDensityObserver.isCompact"
-                >
+                <div *ngFor="let field of fields.value; trackBy: trackByFieldName" class="fd-row fd-form-item">
                     <div class="fd-col" [class]="_inlineColumnLayoutClass" [style.order]="field.rank">
                         <ng-container *ngTemplateOutlet="field?.renderer || null"></ng-container>
                     </div>

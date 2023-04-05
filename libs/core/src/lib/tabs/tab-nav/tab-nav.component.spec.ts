@@ -56,10 +56,10 @@ describe('TabNavDirective', () => {
     it('should consume content density', () => {
         fixture.componentInstance.compact = true;
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-tabs--compact')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.fd-tabs.is-compact')).toBeTruthy();
         fixture.componentInstance.compact = false;
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-tabs--compact')).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.fd-tabs.is-compact')).toBeFalsy();
     });
 
     it('should handle ngAfterContentInit', () => {

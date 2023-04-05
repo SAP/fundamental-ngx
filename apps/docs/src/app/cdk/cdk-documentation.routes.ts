@@ -25,6 +25,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/cdk/data-source').then((m) => m.DataSourceDocsModule)
             },
             {
+                path: 'drag-n-drop',
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/drag-n-drop').then((m) => m.DndDocsModule)
+            },
+            {
                 path: 'focusable-item',
                 loadChildren: () =>
                     import('@fundamental-ngx/docs/cdk/focusable-item').then((m) => m.FocusableItemDocsModule)

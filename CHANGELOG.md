@@ -1,3 +1,67 @@
+# [0.40.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.13...v0.40.0-rc.14) (2023-04-05)
+
+
+### Features
+
+* **platform, cdk:** Drag & drop auto detect mode ([#9626](https://github.com/SAP/fundamental-ngx/issues/9626)) ([e4b5c6c](https://github.com/SAP/fundamental-ngx/commit/e4b5c6ce5686a7152f12d71d23c1b6475a9a89b2))
+
+
+### BREAKING CHANGES
+
+* **platform, cdk:** - Platform table now exposes `dropMode` input property which is `auto` by default;
+- Default `auto` dnd option behaves in following way: if dragged item is hovering another item by over `n` pixels, where `n` is calculated with following formula: `[hovered element half height] + [hovered element height * threshold]`, it will apply `shift` mode, which during the drop of the dragged item will place it before or after the hovered element on the same level, otherwhise it will apply `group` mode, which creates children array of hovered element and places the dragged item inside it, adding +1 level to it;
+- Platform Table page has been splitted into smaller pages that are grouped by the usage scenarios such as: Personalization Dialog, Settings Dialog, Navigation, Scrolling options, etc.
+
+
+
+# [0.40.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.12...v0.40.0-rc.13) (2023-04-05)
+
+
+### Features
+
+* new content density mechanism ([#9596](https://github.com/SAP/fundamental-ngx/issues/9596)) ([34c15ba](https://github.com/SAP/fundamental-ngx/commit/34c15bad0422b00a7958f3cc57f985d521e4e179))
+
+
+### BREAKING CHANGES
+
+* - Content Density mechanism was changed in favour of fundamental-styles content density mechanism based on parent css classes: `.is-cozy`, '.is-compact', '.is-condensed';
+- All components are now relying on those css classes instead of previous approach with `.fd-${component-name}__[cozy|compact|condensed]`;
+- Now, if content densities of child and parent components are equal, child component will omit adding `.is-cozy`, `.is-compact` or `.is-condensed` css class modifier.
+- Shellbar and it's inner components are always keep `cozy` state, no matter the global or directive content density applied to it;
+- Select component changed `.fd-button` tag from `button` to `span` to match the markup and visual styling from fundamental-styles;
+
+
+
+# [0.40.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.11...v0.40.0-rc.12) (2023-04-02)
+
+
+
+# [0.40.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.10...v0.40.0-rc.11) (2023-04-02)
+
+
+
+# [0.40.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.9...v0.40.0-rc.10) (2023-04-02)
+
+
+### Bug Fixes
+
+* **platform:** no tooltip for breadcrumb when overflow dots are shown ([#9610](https://github.com/SAP/fundamental-ngx/issues/9610)) ([9bf5758](https://github.com/SAP/fundamental-ngx/commit/9bf5758155cc46c017654d99cc5e7bb49bf3372a))
+
+
+
+# [0.40.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.8...v0.40.0-rc.9) (2023-04-02)
+
+
+### Bug Fixes
+
+* **platform:** semantic borderless example ([#9603](https://github.com/SAP/fundamental-ngx/issues/9603)) ([ad7d9cb](https://github.com/SAP/fundamental-ngx/commit/ad7d9cbaeda9b158b4c02943dc87b0de33b67725))
+
+
+
+# [0.40.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.7...v0.40.0-rc.8) (2023-03-31)
+
+
+
 # [0.40.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.6...v0.40.0-rc.7) (2023-03-30)
 
 

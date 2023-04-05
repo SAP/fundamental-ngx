@@ -9,7 +9,6 @@
         class="fdp-search-field__category-button fd-input-group__button fd-button fd-button--menu {{
             appearance?.categoryButtonClass
         }}"
-        [class.fd-button--compact]="contentDensityObserver.isCompact"
         [fdpMenuTriggerFor]="categoryMenu"
     >
         <span class="fdp-search-field__category-label" *ngIf="!hideCategoryLabel">
@@ -39,6 +38,7 @@
         class="fdp-search-field"
         [class.with-categories]="_showCategoryDropdown"
         [class.is-loading]="isLoading"
+        [class.is-compact]="contentDensityObserver.isCompact$ | async"
         [class.hide-category-label]="hideCategoryLabel"
     >
         <div
@@ -48,7 +48,6 @@
         >
             <span
                 class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.searchCategoryClass }}"
-                [class.fd-input-group__addon--compact]="contentDensityObserver.isCompact"
                 *ngIf="_showCategoryDropdown"
             >
                 <ng-template
@@ -67,7 +66,6 @@
                 [attr.aria-controls]="_menuId"
                 [attr.aria-expanded]="_showDropdown ? 'true' : 'false'"
                 aria-haspopup="true"
-                [class.fd-input--compact]="contentDensityObserver.isCompact"
                 (keydown)="onKeydown($event)"
                 (keydown.enter)="onSearchSubmit($event)"
                 [(ngModel)]="inputText"
@@ -76,7 +74,6 @@
             />
             <span
                 class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }}"
-                [class.fd-input-group__addon--compact]="contentDensityObserver.isCompact"
                 *ngIf="inputText && inputText.length > 0"
             >
                 <button
@@ -84,7 +81,6 @@
                     class="fdp-search-field__clear fd-button fd-button--transparent {{ appearance?.buttonClass }}"
                     [class.fd-input-group__button]="!appearance?.removeGroupButtonClass"
                     [attr.disabled]="disabled ? '' : null"
-                    [class.fd-button--compact]="contentDensityObserver.isCompact"
                     [attr.id]="_clearId"
                     (click)="clearTextInput()"
                 >
@@ -95,7 +91,6 @@
                 class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }} {{
                     appearance?.searchSubmitClass
                 }}"
-                [class.fd-input-group__addon--compact]="contentDensityObserver.isCompact"
                 *ngIf="forceSearchButton || isLoading || (!isLoading && !_isSearchDone)"
             >
                 <button
@@ -105,7 +100,6 @@
                     [class.fd-input-group__button]="!appearance?.removeGroupButtonClass"
                     [attr.id]="_submitId"
                     [attr.disabled]="disabled ? '' : null"
-                    [class.fd-button--compact]="contentDensityObserver.isCompact"
                     (click)="onSearchSubmit()"
                 >
                     <fd-icon glyph="search"></fd-icon>
@@ -115,7 +109,6 @@
                 class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.addonClass }} {{
                     appearance?.searchSubmitClass
                 }}"
-                [class.fd-input-group__addon--compact]="contentDensityObserver.isCompact"
                 *ngIf="!disableRefresh && !isLoading && (_isRefresh || _isSearchDone)"
             >
                 <button
@@ -124,7 +117,6 @@
                         appearance?.buttonClass
                     }}"
                     [attr.disabled]="disabled ? '' : null"
-                    [class.fd-button--compact]="contentDensityObserver.isCompact"
                     [attr.id]="_refreshId"
                     (click)="onSearchSubmit()"
                 >
@@ -144,10 +136,11 @@
         <nav
             class="fd-menu"
             tabindex="-1"
-            [class.fd-menu--compact]="contentDensityObserver.isCompact"
+            [class.is-compact]="contentDensityObserver.isCompact$ | async"
             [class.fd-menu--mobile]="mobile"
             [class.fd-menu--overflow]="!mobile"
             [attr.id]="_menuId"
+            #menu
             (keydown)="onKeydown($event)"
         >
             <ul class="fd-menu__list" role="menu">

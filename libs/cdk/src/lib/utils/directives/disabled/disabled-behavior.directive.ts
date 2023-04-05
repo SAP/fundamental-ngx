@@ -55,6 +55,18 @@ export class DisabledBehaviorDirective
         return this._disabled;
     }
 
+    /**
+     * Whether to add `disabledClass` class to the element.
+     */
+    @Input()
+    addDisabledClass = true;
+
+    /**
+     * Disabled css class to apply to the element.
+     */
+    @Input()
+    disabledClass = 'is-disabled';
+
     /** @hidden */
     private _disabled = false;
     /** @hidden */
@@ -71,7 +83,7 @@ export class DisabledBehaviorDirective
 
     /** @hidden */
     setDisabledState = (isDisabled: boolean): void => {
-        setDisabledState(this._elementRef, isDisabled);
+        setDisabledState(this._elementRef, isDisabled, this.disabledClass, this.addDisabledClass);
     };
 
     /** @hidden */

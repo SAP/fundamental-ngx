@@ -13,20 +13,12 @@ import { InputGroupPlacement } from './types';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Subscription } from 'rxjs';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import {
-    ContentDensityObserver,
-    contentDensityObserverProviders,
-    ContentDensityMode
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-input-group-input]',
-    providers: [
-        contentDensityObserverProviders({
-            modifiers: { [ContentDensityMode.COMPACT]: 'fd-input--compact' }
-        })
-    ]
+    providers: [contentDensityObserverProviders()]
 })
 export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChanges, OnDestroy {
     /** user's custom classes */
@@ -81,11 +73,7 @@ export class InputGroupTextareaDirective {}
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-input-group-addon]',
-    providers: [
-        contentDensityObserverProviders({
-            modifiers: { [ContentDensityMode.COMPACT]: 'fd-input-group__addon--compact' }
-        })
-    ]
+    providers: [contentDensityObserverProviders()]
 })
 export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuilder, AfterContentInit, OnDestroy {
     /** user's custom classes */
