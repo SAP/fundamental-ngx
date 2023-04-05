@@ -1,0 +1,45 @@
+<fd-docs-section-title id="single-row-selection" componentName="table"> Single Row Selection</fd-docs-section-title>
+<description>
+    <p>This example shows single row selection</p>
+
+    <p>
+        If both selection and search is used in a table, use <code>rowComparator</code> in order to preserve selection
+        after search is changed
+    </p>
+
+    <p>
+        Consider that in the table with selection column the overall columns width cannot be less than table container.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-table-single-row-selection-example></fdp-platform-table-single-row-selection-example>
+</component-example>
+<code-example [exampleFiles]="singleRowSelectionFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="multiple-row-selection" componentName="table">
+    Multiple Row Selection
+</fd-docs-section-title>
+<description>
+    <p>This example shows multiple row selection</p>
+
+    <p>
+        Consider that in the table with selection column present the overall columns width cannot be less than table
+        container.
+    </p>
+
+    <p>
+        You can have preselected rows by providing <code>selectedKey</code> input property for the table with field name
+        in row object. Any truthy value will be considered as selected.
+    </p>
+
+    <p>
+        You also can disable selecting for some rows by providing <code>selectableKey</code> input property for the
+        table with field name in row object. Only <code>false</code> value disables selection.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-table-multiple-row-selection-example></fdp-platform-table-multiple-row-selection-example>
+</component-example>
+<code-example [exampleFiles]="multipleRowSelectionFiles"></code-example>

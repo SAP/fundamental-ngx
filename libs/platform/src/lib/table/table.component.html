@@ -154,7 +154,7 @@
                 [tabIndex]="pageScrolling ? 0 : -1"
                 [items]="_tableRows"
                 [draggable]="_rowsDraggable"
-                [replaceMode]="true"
+                [dropMode]="dropMode"
                 [style.transform]="_virtualScrollTransform"
                 (itemDropped)="_dragDropItemDrop($event)"
             >
@@ -205,8 +205,10 @@
                         (click)="_onRowClick(row)"
                         (keydown.enter)="_onRowClick(row)"
                         (keydown.space)="_onRowClick(row, $event)"
-                        (keydown.alt.arrowup)="_dragRowFromKeyboard('up', $event, rowIdx)"
-                        (keydown.alt.arrowdown)="_dragRowFromKeyboard('down', $event, rowIdx)"
+                        (keydown.alt.arrowup)="_dragRowFromKeyboard('up', $event, rowIdx, 'shift')"
+                        (keydown.alt.arrowdown)="_dragRowFromKeyboard('down', $event, rowIdx, 'shift')"
+                        (keydown.alt.shift.arrowup)="_dragRowFromKeyboard('up', $event, rowIdx, 'group')"
+                        (keydown.alt.shift.arrowdown)="_dragRowFromKeyboard('down', $event, rowIdx, 'group')"
                         (started)="_dragDropStart()"
                         [main]="true"
                     >

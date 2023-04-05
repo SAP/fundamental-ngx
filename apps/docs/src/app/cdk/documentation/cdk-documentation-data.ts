@@ -17,6 +17,10 @@ export const directives: SectionInterfaceContent[] = [
         name: 'Data Source'
     },
     {
+        url: 'cdk/drag-n-drop',
+        name: 'Drag&Drop'
+    },
+    {
         url: 'cdk/focusable-list',
         name: 'Focusable List'
     },

@@ -1,0 +1,34 @@
+<fd-docs-section-title id="actiable-rows" componentName="table"> Activable Rows</fd-docs-section-title>
+<description>
+    <p>This example shows activable rows</p>
+
+    <ul>
+        <li>Use <code>[rowsActivable]="true"</code> input property on the table to make rows activable.</li>
+        <li>Event <code>(rowActivate)</code> is emitted when row gets activated.</li>
+    </ul>
+</description>
+<component-example>
+    <fdp-platform-table-activable-example></fdp-platform-table-activable-example>
+</component-example>
+<code-example [exampleFiles]="activableRowFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="navigatable-row" componentName="table"> Navigatable rows</fd-docs-section-title>
+<description>
+    This example shows navigatable rows.
+
+    <ul>
+        <li>
+            Use <code>[rowNavigatable]="true"</code> input property on the table to make rows navigatable. Pass boolean
+            to change navigatable state for all rows. Pass string with the field of the rows which will be used to
+            calculate row's navigatable state.
+        </li>
+        <li>Use <code>[highlightNavigatedRow]="true"</code> to highlight currently navigated row.</li>
+        <li>Event <code>(rowNavigate)</code> is emitted when row gets activated.</li>
+    </ul>
+</description>
+<component-example>
+    <fdp-platform-table-navigatable-row-indicator-example></fdp-platform-table-navigatable-row-indicator-example>
+</component-example>
+<code-example [exampleFiles]="navigatableRowFiles"></code-example>

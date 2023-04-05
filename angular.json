@@ -112,6 +112,7 @@
         "docs-cdk-clicked": "libs/docs/cdk/clicked",
         "docs-cdk-data-source": "libs/docs/cdk/data-source",
         "docs-cdk-disabled": "libs/docs/cdk/disabled",
+        "docs-cdk-dnd": "libs/docs/cdk/drag-n-drop",
         "docs-cdk-focusable-item": "libs/docs/cdk/focusable-item",
         "docs-cdk-focusable-list": "libs/docs/cdk/focusable-list",
         "docs-cdk-forms": "libs/docs/cdk/forms",

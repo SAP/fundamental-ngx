@@ -1,0 +1,18 @@
+{
+    "name": "docs-cdk-dnd",
+    "sourceRoot": "libs/docs/cdk/drag-n-drop",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {
+        "e2e-noop": {
+            "executor": "@fundamental-ngx/nx-plugin:e2e-test",
+            "options": {
+                "e2eTsConfig": "libs/docs/cdk/drag-n-drop/e2e/tsconfig.json",
+                "baseUrl": "http://localhost:4200",
+                "configFile": "libs/docs/cdk/drag-n-drop/wdio.conf.js"
+            },
+            "outputs": ["{workspaceRoot}/allure-results/docs-cdk-dnd"]
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

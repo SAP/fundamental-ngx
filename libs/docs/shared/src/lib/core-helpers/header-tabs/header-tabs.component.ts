@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { ExampleChildService } from '../../services/example-child.service';
 
 @Component({
     selector: 'fd-header-tabs',
@@ -7,4 +8,8 @@ import { Component, Input } from '@angular/core';
 })
 export class HeaderTabsComponent {
     @Input() hasI18n = false;
+
+    observedLink = inject(ExampleChildService, {
+        optional: true
+    });
 }
