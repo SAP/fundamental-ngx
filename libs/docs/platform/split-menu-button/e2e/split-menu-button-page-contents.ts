@@ -13,4 +13,4 @@ export const standardBtnText2 = 'Standard Button 2';
 export const iconAttr = 'icon';
 export const iconLabel = 'world';
 export const outputLabel = 'Selected Item: ';
-export const compactButtonClass = '.fd-button--compact';
+export const compactButtonClass = '.fd-button.is-compact';

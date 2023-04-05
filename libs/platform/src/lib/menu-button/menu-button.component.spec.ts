@@ -100,7 +100,7 @@ describe('Menu Button Disabled test and Type, size test', () => {
         expect(menubuttonElement.nativeElement.classList.contains('fd-button--standard')).toBeTrue();
         expect(menubuttonElement.nativeElement.classList.contains('fd-button--menu')).toBeTrue();
         expect(menubuttonElement.nativeElement.classList.contains('fd-button')).toBeTrue();
-        expect(menubuttonElement.nativeElement.classList.contains('fd-button--compact')).toBeTrue();
+        expect(menubuttonElement.nativeElement.classList.contains('is-compact')).toBeTrue();
     });
 });
 

@@ -19,10 +19,6 @@ import {
     },
     providers: [
         contentDensityObserverProviders({
-            modifiers: {
-                [ContentDensityMode.COMPACT]: 'example-component--compact',
-                [ContentDensityMode.CONDENSED]: 'example-component--condensed'
-            },
             supportedContentDensity: [
                 ContentDensityMode.COMPACT,
                 ContentDensityMode.COZY,

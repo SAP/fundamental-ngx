@@ -19,8 +19,8 @@ export class DateTimePicker extends PlatformBaseComponentPo {
     disabledDateTimePickerButton = '.is-disabled button';
     disabledDateTimePickerInput = '.is-disabled input';
 
-    compactDateTimePickerButton = '.fd-button--compact';
-    compactDateTimePickerInput = '.fd-input--compact';
+    compactDateTimePickerButton = 'fdp-datetime-picker[fdCompact] .fd-button';
+    compactDateTimePickerInput = 'fdp-datetime-picker[fdCompact] .fd-input';
     changeDateTimeValueButton = 'button[name="changeBtn"]';
 
     calendarExpanded = '.fd-datetime__container';

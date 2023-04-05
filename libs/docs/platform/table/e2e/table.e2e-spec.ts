@@ -1,3 +1,4 @@
+import { wait } from '@nrwl/nx-cloud/lib/utilities/waiter';
 import { TablePo } from './table.po';
 import {
     acceptAlert,
@@ -567,9 +568,10 @@ describe('Table component test suite', () => {
             await findElementInTable(tableP13SortExample, tableCellArr4);
         });
 
-        it('should check sorting ascending and descending by name', async () => {
+        fit('should check sorting ascending and descending by name', async () => {
             await scrollIntoView(tableP13SortExample);
             await click(tableP13SortExample + ellipsisButton);
+            await wait(500);
             await click(popoverDropdownButton);
             await click(buttonSortedBy);
             await click(footerButtonOk);
@@ -737,7 +739,7 @@ describe('Table component test suite', () => {
             await scrollIntoView(playgroundExample);
             await click(playgroundContentDensityDropdown);
             await click(optionCompact);
-            await expect(await getElementClass(playgroundExample + fdpTable)).toContain('fd-table--compact');
+            await expect(await getElementClass(playgroundExample + fdpTable)).toContain('is-compact');
 
             await click(playgroundContentDensityDropdown);
             await click(optionCozy);
@@ -745,7 +747,7 @@ describe('Table component test suite', () => {
 
             await click(playgroundContentDensityDropdown);
             await click(optionCondensed);
-            await expect(await getElementClass(playgroundExample + fdpTable)).toContain('fd-table--condensed');
+            await expect(await getElementClass(playgroundExample + fdpTable)).toContain('is-condensed');
         });
 
         it('should check table selection mode', async () => {

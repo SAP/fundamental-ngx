@@ -1,33 +1,73 @@
 //TODO evaluate whether this should be in fd-styles
 
-.fd-multi-input-tokenizer-custom {
-    width: calc(100% - 2.25rem);
-    &--compact {
-        width: calc(100% - 2rem);
+@mixin fd-compact() {
+    @at-root {
+        [class*='--compact'] &:not([class*='--cozy']):not([class*='--condensed']),
+        .is-compact &:not(.is-cozy):not(.is-condensed),
+        &[class*='--compact'],
+        &.is-compact {
+            @content;
+        }
     }
 }
 
-.fd-multi-input-input-group-custom {
-    max-width: 100%;
-}
+$block: fd-multi-input-input;
 
-.fd-multi-input-custom {
-    display: block;
-}
+.#{$block} {
+    &-tokenizer-custom {
+        width: calc(100% - 2.25rem);
+        @include fd-compact() {
+            width: calc(100% - 2rem);
+        }
+    }
 
-.fd-multi-input-item {
-    cursor: pointer;
-    padding: 0;
-}
+    &-input-group-custom {
+        max-width: 100%;
+    }
 
-.fd-multi-input-popover-size {
-    overflow: auto;
-    display: block;
-}
+    &-custom {
+        display: block;
+    }
 
-.fd-multi-input-popover-custom.fd-popover-custom {
-    max-width: 100%;
-    display: block;
+    &-item {
+        cursor: pointer;
+        padding: 0;
+    }
+
+    &-popover-size {
+        overflow: auto;
+        display: block;
+    }
+
+    &-popover-custom {
+        &.fd-popover-custom {
+            max-width: 100%;
+            display: block;
+        }
+    }
+
+    &-menu-overflow {
+        max-width: 37.5rem;
+    }
+
+    &-show-all {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        background-color: transparent;
+        .fd-link:active {
+            color: inherit;
+        }
+    }
+
+    &-checkbox {
+        width: 100%;
+        cursor: pointer;
+
+        .fd-checkbox__label {
+            color: inherit;
+        }
+    }
 }
 
 .fd-multi-input-menu-overflow {
@@ -41,25 +81,6 @@
         margin-bottom: 0;
         padding-left: 0;
         background-color: transparent;
-    }
-}
-
-.fd-multi-input-show-all {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    background-color: transparent;
-    .fd-link:active {
-        color: inherit;
-    }
-}
-
-.fd-multi-input-checkbox {
-    width: 100%;
-    cursor: pointer;
-
-    .fd-checkbox__label {
-        color: inherit;
     }
 }
 

@@ -13,7 +13,7 @@ import { Component, Input } from '@angular/core';
     host: {
         '[attr.aria-label]': '"close"',
         '[class.fd-button]': 'true',
-        '[class.fd-button--compact]': '!mobile',
+        '[class.is-compact]': '!mobile',
         '[class.fd-button--transparent]': 'true',
         '[attr.title]': 'title'
     },

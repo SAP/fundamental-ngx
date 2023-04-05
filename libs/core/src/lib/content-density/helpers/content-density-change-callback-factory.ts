@@ -15,7 +15,7 @@ export function contentDensityCallbackFactory(
         const configs = {
             contentDensitySettings: {
                 ...defaultContentDensityObserverConfigs,
-                ...consumerConfig.contentDensitySettings
+                ...(consumerConfig.contentDensitySettings || {})
             },
             elementRef: () => consumerConfig.elementRef()
         };

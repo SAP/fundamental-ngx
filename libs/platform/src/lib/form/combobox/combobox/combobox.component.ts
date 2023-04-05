@@ -20,6 +20,7 @@ import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import {
     ComboBoxDataSource,
@@ -42,7 +43,10 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
     styleUrls: ['./combobox.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: ComboboxComponent, multi: true }]
+    providers: [
+        { provide: FD_FORM_FIELD_CONTROL, useExisting: ComboboxComponent, multi: true },
+        contentDensityObserverProviders()
+    ]
 })
 export class ComboboxComponent extends BaseCombobox implements ComboboxInterface, OnInit, AfterViewInit {
     /** @hidden */

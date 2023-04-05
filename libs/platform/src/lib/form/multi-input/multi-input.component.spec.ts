@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -42,6 +42,9 @@ class PlatformMulitiInputTestComponent {
     @ViewChild(PlatformMultiInputComponent)
     platformMultiInputComponent: PlatformMultiInputComponent;
 
+    @ViewChild(PlatformMultiInputComponent, { read: ElementRef })
+    platformMultiInputComponentElement;
+
     contentDensity: ContentDensityMode = ContentDensityMode.COZY;
     LIST_ELEMENTS = [{ name: 'Name1' }, { name: 'Name2' }, { name: 'Name3' }, { name: 'Name4' }];
 }
@@ -74,11 +77,10 @@ describe('PlatformMultiInputComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should open and close the dropdown', async () => {
+    it('should change content density', async () => {
         component.contentDensity = ContentDensityMode.COMPACT;
         fixture.detectChanges();
-        const toggleButton = fixture.nativeElement.querySelectorAll('fd-input--compact');
-        expect(toggleButton.length).toBe(0);
+        expect(component.platformMultiInputComponent.elementRef.nativeElement.classList).toContain('is-compact');
     });
     it('should check adding number of tokens in the component', async () => {
         component.platformMultiInputComponent.addToArray('name1');

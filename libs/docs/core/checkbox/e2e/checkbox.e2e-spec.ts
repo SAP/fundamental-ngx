@@ -7,6 +7,7 @@ import {
     executeScriptBeforeTagAttr,
     getAttributeByName,
     getElementArrayLength,
+    getElementClass,
     getText,
     isElementClickable,
     isEnabled,
@@ -296,6 +297,12 @@ describe('checkbox test suite', () => {
                     stateClassesArr[i]
                 );
             }
+        });
+
+        it('should check compact checkbox', async () => {
+            await scrollIntoView(styledCheckbox);
+
+            await expect(await getElementClass(`${styledCheckbox} fd-checkbox[fdCompact]`)).toContain('is-compact');
         });
 
         it('should check checkboxes are clickable', async () => {

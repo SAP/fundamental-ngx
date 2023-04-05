@@ -17,5 +17,5 @@ export const stateClassesArr = [
     'fd-checkbox is-warning',
     'fd-checkbox is-error',
     'fd-checkbox',
-    'fd-checkbox--compact'
+    'fd-checkbox'
 ];

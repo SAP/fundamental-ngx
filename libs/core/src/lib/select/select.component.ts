@@ -71,7 +71,6 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
     host: {
         class: 'fd-select',
         '[class.fd-select--inline]': 'inline',
-        '[class.fd-select--compact]': '_contentDensityObserver.isCompact',
         // @deprecated leaving class fd-select-custom-class for backwards compatibility
         '[class.fd-select-custom-class]': 'inline',
         // @deprecated leaving class fd-select-custom-class--mobile for backwards compatibility
@@ -481,6 +480,8 @@ export class SelectComponent<T = any>
         this._highlightCorrectOption();
         this._changeDetectorRef.markForCheck();
 
+        this._controlElementRef.nativeElement.focus();
+
         this.isOpenChange.emit(true);
     }
 
@@ -606,7 +607,7 @@ export class SelectComponent<T = any>
     }
 
     /**
-     * Expose expose outside of this mixin to give component ability
+     * Expose outside of this mixin to give component ability
      * to update caluclatedMaxHeight if needed
      * @hidden
      */
@@ -705,6 +706,9 @@ export class SelectComponent<T = any>
             this._changeDetectorRef.markForCheck();
         }
     }
+
+    /** @hidden */
+    _buttonClick(): void {}
 
     /** @hidden */
     private _resetOptions(): void {

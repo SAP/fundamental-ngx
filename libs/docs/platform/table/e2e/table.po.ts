@@ -55,7 +55,7 @@ export class TablePo extends PlatformBaseComponentPo {
     dialogMoveToBottom = '[title="Move to Bottom"]';
     footerButtonOk = 'fd-dialog-footer-button button';
     columnHeader = '[role="columnheader"] div';
-    popoverDropdownButton = 'fd-dialog-body fd-popover-control button';
+    popoverDropdownButton = 'fd-dialog-body fd-popover-control .fd-button';
     buttonAdd = '[title="Add new"]';
     buttonRemove = '[title="Remove"]';
     dialogInput = 'fdp-table-filter-rule input';

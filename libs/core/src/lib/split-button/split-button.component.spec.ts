@@ -1,7 +1,7 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { SplitButtonComponent, splitButtonTextClass, splitButtonTextCompactClass } from './split-button.component';
+import { SplitButtonComponent, splitButtonTextClass } from './split-button.component';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import createSpy = jasmine.createSpy;
@@ -10,7 +10,7 @@ import { I18nModule } from '@fundamental-ngx/i18n';
 @Component({
     selector: 'fd-test-component',
     template: `
-        <fd-split-button [expandButtonTitle]="moreBtnTitle" [fdCompact]="compact">
+        <fd-split-button #splitButton [expandButtonTitle]="moreBtnTitle" [fdCompact]="compact">
             <fd-menu>
                 <li fd-menu-item>
                     <div fd-menu-interactive>
@@ -112,7 +112,8 @@ describe('SplitButtonComponent', () => {
         const textElement = componentInstance.mainActionBtn?.nativeElement.querySelector('.fd-button__text');
         expect(textElement.classList.contains(splitButtonTextClass));
         fixture.componentInstance.compact = true;
-        expect(textElement.classList.contains(splitButtonTextCompactClass));
+        fixture.detectChanges();
+        expect(component.nativeElement.classList).toContain('is-compact');
     });
 
     it('should add is-active class to more-actions button', () => {

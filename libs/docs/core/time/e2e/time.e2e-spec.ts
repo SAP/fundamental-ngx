@@ -200,13 +200,13 @@ describe('Time component test', () => {
         let scrollStep, scrollToHour, scrollToMinute, scrollToSec;
 
         if (direction === 'up') {
-            if ((await getElementClass(section + clockArea)) === 'fd-time fd-time--compact') {
+            if ((await getElementClass(section + clockArea)) === 'fd-time is-compact') {
                 scrollStep = 50;
             } else {
                 scrollStep = 100;
             }
         } else if (direction === 'down') {
-            if ((await getElementClass(section + clockArea)) === 'fd-time fd-time--compact') {
+            if ((await getElementClass(section + clockArea)) === 'fd-time is-compact') {
                 scrollStep = -50;
             } else {
                 scrollStep = -100;

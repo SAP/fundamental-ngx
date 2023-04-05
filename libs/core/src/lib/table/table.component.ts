@@ -22,10 +22,6 @@ import { first, startWith, takeUntil } from 'rxjs';
 import { TableCellDirective } from './directives/table-cell.directive';
 
 export const FdTableContentDensityProviderParams = {
-    modifiers: {
-        [ContentDensityMode.COMPACT]: 'fd-table--compact',
-        [ContentDensityMode.CONDENSED]: 'fd-table--condensed'
-    },
     supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.CONDENSED, ContentDensityMode.COZY]
 };
 

@@ -10,4 +10,8 @@ export class ContentDensityObserverSettings {
     defaultContentDensity?: ContentDensityMode | ProviderToken<ContentDensityMode> | FactorySansProvider;
     /** Whether in debug mode. */
     debug?: boolean;
+    /** Whether to always add class modifiers. Useful for components that are detached from its parent component. */
+    alwaysAddModifiers?: boolean;
+    /** Whether to force child components to restrict supported content density with current component's one. */
+    restrictChildContentDensity?: boolean;
 }

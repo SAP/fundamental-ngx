@@ -88,9 +88,7 @@ describe('NestedListDirective', () => {
         expect(
             (level1List as any)._elementRef.nativeElement.classList.contains('fdx-nested-list--text-only')
         ).toBeTruthy();
-        expect(
-            (level1List as any)._elementRef.nativeElement.classList.contains('fdx-nested-list--compact')
-        ).toBeTruthy();
+        expect((level1List as any)._elementRef.nativeElement.classList.contains('is-compact')).toBeTruthy();
         expect((level1List as any)._elementRef.nativeElement.classList.contains('level-1')).toBeTruthy();
         expect((level3List as any)._elementRef.nativeElement.classList.contains('level-3')).toBeTruthy();
         expect((level4List as any)._elementRef.nativeElement.classList.contains('level-4')).toBeTruthy();

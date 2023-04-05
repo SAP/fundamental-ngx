@@ -162,23 +162,6 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
         outline: none;
     }
 
-    &__header,
-    .#{$block}__body {
-        position: relative;
-        border-left: $fd-table-border;
-        border-left: $fd-table-border-var;
-
-        @include fd-rtl() {
-            border-left: none;
-            border-right: $fd-table-border;
-            border-right: $fd-table-border-var;
-
-            .fd-table__cell:first-child {
-                border-right: none;
-            }
-        }
-    }
-
     &__header {
         // is needed to have proper overflow for header cells with frozen columns
         z-index: 2;
@@ -274,25 +257,6 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
 
     .fd-table__cell {
         z-index: 0; // need so fixed cells are above not-fixed cells
-
-        &--checkbox {
-            border-left: none;
-            border-right: $fd-table-border;
-            border-right: $fd-table-border-var;
-
-            & + .fd-table__cell--fixed {
-                border-left: none;
-            }
-
-            @include fd-rtl() {
-                border-left: $fd-table-border;
-                border-left: $fd-table-border-var;
-
-                & + .fd-table__cell {
-                    border-right: none;
-                }
-            }
-        }
 
         &--group {
             min-width: 100%;

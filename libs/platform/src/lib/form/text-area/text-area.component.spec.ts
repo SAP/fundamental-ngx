@@ -103,7 +103,7 @@ describe('Basic Textarea', () => {
 
     it('should have compact class applied', () => {
         const textareaElement = fixture.debugElement.query(By.css('textarea'));
-        expect(textareaElement.nativeElement.classList.contains('fd-textarea--compact')).toBeTruthy();
+        expect(textareaElement.nativeElement.classList.contains('is-compact')).toBeTruthy();
     });
 
     it('should have a label, hint, placeholder and default value', async () => {

@@ -34,7 +34,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['./popover-body.component.scss'],
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })]
 })
 export class PopoverBodyComponent {
     /** Whether to wrap content with fd-scrollbar directive. */

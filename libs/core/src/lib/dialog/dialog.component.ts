@@ -14,6 +14,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
 
 import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -45,7 +46,8 @@ import { DialogTitleDirective } from './directives/dialog-title.directive';
         tabindex: '-1'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })]
 })
 export class DialogComponent
     extends DialogBase
@@ -149,7 +151,6 @@ export class DialogComponent
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
-        this._listenOnHidden();
         this.buildComponentCssClass();
     }
 
@@ -161,6 +162,7 @@ export class DialogComponent
     /** @hidden */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
+        this._listenOnHidden();
     }
 
     /** @hidden */
@@ -191,6 +193,16 @@ export class DialogComponent
         this._onHidden = this._dialogRef.onHide.subscribe((isHidden) => {
             this.showDialogWindow = !isHidden;
             this.buildComponentCssClass();
+
+            if (!this._focusTrapId) {
+                return;
+            }
+            const focusTrapInstance = this._focusTrapService.getFocusTrapInstance(this._focusTrapId);
+            if (isHidden) {
+                focusTrapInstance?.pause();
+            } else {
+                focusTrapInstance?.unpause();
+            }
         });
     }
 }

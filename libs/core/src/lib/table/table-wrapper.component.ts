@@ -11,7 +11,6 @@ import {
     contentDensityObserverProviders,
     ContentDensityObserverTarget
 } from '@fundamental-ngx/core/content-density';
-import { FdTableContentDensityProviderParams } from './table.component';
 
 /**
  * The component that represents a table wrapper, it will add fd-table class to its first child.
@@ -29,7 +28,7 @@ import { FdTableContentDensityProviderParams } from './table.component';
     styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders(FdTableContentDensityProviderParams)]
+    providers: [contentDensityObserverProviders()]
 })
 export class TableWrapperComponent implements AfterContentInit, OnDestroy {
     /** @hidden */
@@ -46,8 +45,7 @@ export class TableWrapperComponent implements AfterContentInit, OnDestroy {
 
             const tableElementRef = new ElementRef<HTMLTableElement>(tableElement);
             this._contentDensitySettings = {
-                elementRef: () => tableElementRef,
-                contentDensitySettings: FdTableContentDensityProviderParams
+                elementRef: () => tableElementRef
             };
             this._contentDensityObserver.consume(this._contentDensitySettings);
 

@@ -39,6 +39,7 @@ describe('Tabs test suite', () => {
         iconOnlyMode,
         compactCheckBox,
         threeTabsGroup,
+        threeTabsList,
         iconSelect,
         collapsibleTab,
         acceleratedIcon,
@@ -130,7 +131,7 @@ describe('Tabs test suite', () => {
         await click(modeSelect);
         await click(filterMode);
         await click(compactCheckBox);
-        await expect(await getElementClass(threeTabsGroup)).toContain('compact');
+        await expect(await getElementClass(threeTabsList)).toContain('is-compact');
         await expect(await getElementClass(threeTabsGroup)).toContain('filter');
     });
 

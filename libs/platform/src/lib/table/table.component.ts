@@ -175,15 +175,7 @@ let tableUniqueId = 0;
         TableColumnResizeService,
         TableResponsiveService,
         contentDensityObserverProviders({
-            supportedContentDensity: [
-                ContentDensityMode.COMPACT,
-                ContentDensityMode.COZY,
-                ContentDensityMode.CONDENSED
-            ],
-            modifiers: {
-                [ContentDensityMode.COMPACT]: 'fd-table--compact',
-                [ContentDensityMode.CONDENSED]: 'fd-table--condensed'
-            }
+            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY, ContentDensityMode.CONDENSED]
         }),
         {
             provide: FDP_PRESET_MANAGED_COMPONENT,
