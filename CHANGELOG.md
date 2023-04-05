@@ -1,3 +1,19 @@
+# [0.40.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.13...v0.40.0-rc.14) (2023-04-05)
+
+
+### Features
+
+* **platform, cdk:** Drag & drop auto detect mode ([#9626](https://github.com/SAP/fundamental-ngx/issues/9626)) ([e4b5c6c](https://github.com/SAP/fundamental-ngx/commit/e4b5c6ce5686a7152f12d71d23c1b6475a9a89b2))
+
+
+### BREAKING CHANGES
+
+* **platform, cdk:** - Platform table now exposes `dropMode` input property which is `auto` by default;
+- Default `auto` dnd option behaves in following way: if dragged item is hovering another item by over `n` pixels, where `n` is calculated with following formula: `[hovered element half height] + [hovered element height * threshold]`, it will apply `shift` mode, which during the drop of the dragged item will place it before or after the hovered element on the same level, otherwhise it will apply `group` mode, which creates children array of hovered element and places the dragged item inside it, adding +1 level to it;
+- Platform Table page has been splitted into smaller pages that are grouped by the usage scenarios such as: Personalization Dialog, Settings Dialog, Navigation, Scrolling options, etc.
+
+
+
 # [0.40.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.12...v0.40.0-rc.13) (2023-04-05)
 
 
