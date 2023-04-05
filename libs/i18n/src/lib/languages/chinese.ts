@@ -39,6 +39,13 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         listItemStatusLocked: '被锁定',
         listItemStatusDraft: '拟稿'
     },
+    coreList: {
+        listItem: 'List Item',
+        selected: 'Selected',
+        notSelected: 'Not Selected',
+        navigated: 'Navigated',
+        navigable: 'Navigable'
+    },
     coreMessageStrip: {
         dismissLabel: '关闭'
     },

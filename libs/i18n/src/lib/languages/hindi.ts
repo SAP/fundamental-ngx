@@ -39,6 +39,13 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         listItemStatusLocked: 'बंद',
         listItemStatusDraft: 'प्रालेख'
     },
+    coreList: {
+        listItem: 'List Item',
+        selected: 'Selected',
+        notSelected: 'Not Selected',
+        navigated: 'Navigated',
+        navigable: 'Navigable'
+    },
     coreMessageStrip: {
         dismissLabel: 'खारिज करें'
     },

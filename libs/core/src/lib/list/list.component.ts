@@ -15,7 +15,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ListItemComponent } from './list-item/list-item.component';
-import { merge, Observable, Subject, Subscription } from 'rxjs';
+import { merge, Observable, Subject } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 import {
     FocusEscapeDirection,
@@ -128,9 +128,6 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     /** @hidden */
     @ContentChildren(ListFocusItem)
     private _focusItems: QueryList<ListFocusItem>;
-
-    /** @hidden */
-    private _subscriptions = new Subscription();
 
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();

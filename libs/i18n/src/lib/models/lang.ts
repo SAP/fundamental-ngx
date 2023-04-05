@@ -45,6 +45,13 @@ export interface FdLanguage {
         listItemStatusLocked: FdLanguageKey;
         listItemStatusDraft: FdLanguageKey;
     };
+    coreList: {
+        listItem: FdLanguageKey;
+        selected: FdLanguageKey;
+        notSelected: FdLanguageKey;
+        navigated: FdLanguageKey;
+        navigable: FdLanguageKey;
+    };
     coreMessageStrip: {
         dismissLabel: FdLanguageKey;
     };

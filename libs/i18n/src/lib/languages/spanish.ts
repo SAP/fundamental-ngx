@@ -40,6 +40,13 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
         listItemStatusLocked: 'Bloqueado',
         listItemStatusDraft: 'Borrador'
     },
+    coreList: {
+        listItem: 'List Item',
+        selected: 'Selected',
+        notSelected: 'Not Selected',
+        navigated: 'Navigated',
+        navigable: 'Navigable'
+    },
     coreMessageStrip: {
         dismissLabel: 'Descartar'
     },

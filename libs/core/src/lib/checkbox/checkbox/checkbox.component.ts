@@ -50,7 +50,11 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
         registerFormItemControl(CheckboxComponent),
         contentDensityObserverProviders()
     ],
-    host: { '[attr.tabindex]': '-1' }
+    host: {
+        '[attr.tabindex]': '-1',
+        role: 'checkbox',
+        '[attr.aria-checked]': '_getAriaChecked()'
+    }
 })
 export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
     /** @hidden */
@@ -308,6 +312,17 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     private _detectChanges(): void {
         if (!this._changeDetectorRef['destroyed']) {
             this._changeDetectorRef.detectChanges();
+        }
+    }
+
+    /** @hidden Used to set the aria-checked value. */
+    private _getAriaChecked(): string {
+        if (this.checkboxState === 'checked' || this.checkboxState) {
+            return 'true';
+        } else if (this.checkboxState === 'indeterminate') {
+            return 'mixed';
+        } else {
+            return 'false';
         }
     }
 }

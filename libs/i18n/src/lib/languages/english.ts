@@ -39,6 +39,13 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         listItemStatusLocked: 'Locked',
         listItemStatusDraft: 'Draft'
     },
+    coreList: {
+        listItem: 'List Item',
+        selected: 'Selected',
+        notSelected: 'Not Selected',
+        navigated: 'Navigated',
+        navigable: 'Navigable'
+    },
     coreMessageStrip: {
         dismissLabel: 'Dismiss'
     },
