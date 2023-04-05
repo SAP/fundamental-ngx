@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
@@ -7,7 +7,8 @@ import {
     TableDataProvider,
     TableState,
     TableRowToggleOpenStateEvent,
-    TableRowsRearrangeEvent
+    TableRowsRearrangeEvent,
+    TableComponent
 } from '@fundamental-ngx/platform/table';
 
 @Component({
@@ -15,6 +16,9 @@ import {
     templateUrl: './platform-table-tree-example.component.html'
 })
 export class PlatformTableTreeExampleComponent {
+    @ViewChild(TableComponent)
+    table: TableComponent;
+
     source: TableDataSource<ExampleItem>;
 
     constructor() {
@@ -31,6 +35,10 @@ export class PlatformTableTreeExampleComponent {
 
     onRowsRearrange(event: TableRowsRearrangeEvent<ExampleItem>): void {
         console.log(event);
+    }
+
+    toggleFirstRow(): void {
+        this.table.toggleGroupRows(0);
     }
 }
 

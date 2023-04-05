@@ -1,0 +1,41 @@
+<p><code>[dropMode]="'shift'"</code>:</p>
+<ng-template
+    [ngTemplateOutlet]="listRenderer"
+    [ngTemplateOutletContext]="{ $implicit: values, dropMode: 'shift', property: 'values' }"
+></ng-template>
+<p>
+    <code>[dropMode]="'group'"</code>
+</p>
+<ng-template
+    [ngTemplateOutlet]="listRenderer"
+    [ngTemplateOutletContext]="{ $implicit: values2, dropMode: 'group', property: 'values2' }"
+></ng-template>
+
+<p>
+    <code>[dropMode]="'auto'"</code>
+</p>
+<ng-template
+    [ngTemplateOutlet]="listRenderer"
+    [ngTemplateOutletContext]="{ $implicit: values3, dropMode: 'auto', property: 'values3' }"
+></ng-template>
+
+<ng-template let-items let-dropMode="dropMode" let-property="property" #listRenderer>
+    <div
+        class="fdk-sortable-list"
+        fdkDndList
+        [dropMode]="dropMode"
+        [items]="items"
+        (itemDropped)="onItemDropped($event, property)"
+    >
+        <ng-container *ngFor="let item of items">
+            <div
+                class="fdk-sortable-list__item"
+                fdkDndItem
+                [ngStyle]="{ '--fdItemShift': 'calc(' + item.level + ' * 2rem)' }"
+                [attr.data-level]="item.level"
+            >
+                List item {{ item.name }}
+            </div>
+        </ng-container>
+    </div>
+</ng-template>

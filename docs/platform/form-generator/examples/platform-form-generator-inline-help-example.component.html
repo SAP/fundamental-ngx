@@ -13,6 +13,10 @@
     <fdp-button type="submit" label="Submit form"></fdp-button>
 </fdp-form-generator>
 
+<fdp-form-generator [formItems]="formItemsWithTemplateHint" mainTitle="Templates can be passed as hints">
+    <fdp-button type="submit" label="Submit form"></fdp-button>
+</fdp-form-generator>
+
 <fdp-form-generator
     [formItems]="formItemsHintOnGroupHeader"
     [hint]="formGeneratorMainHint"
@@ -20,3 +24,5 @@
 >
     <fdp-button type="submit" label="Submit form"></fdp-button>
 </fdp-form-generator>
+
+<ng-template #hintTemplate> Hint template! <fd-icon glyph="activate"></fd-icon> </ng-template>

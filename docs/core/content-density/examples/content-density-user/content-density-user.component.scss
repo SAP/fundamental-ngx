@@ -27,12 +27,12 @@
         right: 5px;
     }
 
-    &--compact {
+    &.is-compact {
         padding: 12px;
         font-size: var(--sapFontSmallSize);
     }
 
-    &--condensed {
+    &.is-condensed {
         padding: 7px;
         font-size: var(--sapFontSmallSize);
     }

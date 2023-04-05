@@ -7,7 +7,12 @@ import {
     FD_DATETIME_FORMATS,
     FdDate
 } from '@fundamental-ngx/core/datetime';
-import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
+import {
+    DynamicFormItem,
+    DynamicFormItemValidationResult,
+    DynamicFormValue,
+    FormGeneratorComponent
+} from '@fundamental-ngx/platform/form';
 
 export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     new Promise<boolean>((resolve) => {
@@ -56,7 +61,7 @@ export class FormGeneratorComponentExample {
                     placeholder: 'Please provide your name',
                     guiOptions: {
                         hint: {
-                            text: 'Some contextual hint',
+                            content: 'Some contextual hint',
                             glyph: 'accidental-leave'
                         },
                         appendColon: true,
@@ -102,7 +107,7 @@ export class FormGeneratorComponentExample {
             name: 'password',
             message: 'Password',
             validators: [Validators.required],
-            validate: (value: string) => {
+            validate: (value: string): DynamicFormItemValidationResult => {
                 const passwordPattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\\w\\s]).{8,}$');
                 return passwordPattern.test(value)
                     ? null
