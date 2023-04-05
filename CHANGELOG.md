@@ -1,3 +1,12 @@
+# [0.40.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.14...v0.40.0-rc.15) (2023-04-05)
+
+
+### Features
+
+* **cdk:** created breakpoint directive ([#9594](https://github.com/SAP/fundamental-ngx/issues/9594)) ([0e8a5e6](https://github.com/SAP/fundamental-ngx/commit/0e8a5e6f0af3c929219aca82dc357e257ec151fa))
+
+
+
 # [0.40.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.13...v0.40.0-rc.14) (2023-04-05)
 
 
