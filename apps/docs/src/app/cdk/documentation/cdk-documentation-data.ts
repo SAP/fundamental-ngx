@@ -43,6 +43,10 @@ export const directives: SectionInterfaceContent[] = [
     {
         url: 'cdk/initial-focus',
         name: 'Initial Focus'
+    },
+    {
+        url: 'cdk/breakpoint',
+        name: 'Breakpoint'
     }
 ];
 

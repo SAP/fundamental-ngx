@@ -48,7 +48,7 @@ export class FormsDefaultExampleComponent {
         { provide: FD_FORM_FIELD_CONTROL, useExisting: CustomCdkControlExampleComponent, multi: true }
     ]
 })
-export class CustomCdkControlExampleComponent<T> {
+export class CustomCdkControlExampleComponent {
     @Input()
     set options(options: string[]) {
         this.form = this._formBuilder.group(
@@ -64,7 +64,7 @@ export class CustomCdkControlExampleComponent<T> {
     _options: string[];
 
     form: FormGroup;
-    cvaControl: CvaControl<T> = inject(CvaControl);
+    cvaControl: CvaControl<string[]> = inject(CvaControl);
     _destroy$ = inject(DestroyedService);
 
     constructor(private readonly _formBuilder: FormBuilder) {}

@@ -133,6 +133,7 @@
             "@fundamental-ngx/cx/nested-list": ["libs/cx/src/lib/nested-list/index.ts"],
             "@fundamental-ngx/cx/side-navigation": ["libs/cx/src/lib/side-navigation/index.ts"],
             "@fundamental-ngx/datetime-adapter": ["libs/datetime-adapter/src/index.ts"],
+            "@fundamental-ngx/docs/cdk/breakpoint": ["libs/docs/cdk/breakpoint/index.ts"],
             "@fundamental-ngx/docs/cdk/clicked": ["libs/docs/cdk/clicked/index.ts"],
             "@fundamental-ngx/docs/cdk/data-source": ["libs/docs/cdk/data-source/index.ts"],
             "@fundamental-ngx/docs/cdk/disabled": ["libs/docs/cdk/disabled/index.ts"],
