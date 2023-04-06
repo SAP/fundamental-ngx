@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { SegmentedButtonComponent, isDisabledClass } from './segmented-button.component';
 import { SegmentedButtonModule } from './segmented-button.module';
@@ -152,5 +153,31 @@ describe('SegmentedButtonComponent', () => {
         expect(component.secondButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();
         expect(component.thirdButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();
         expect(component.segmentedButton['_currentValue']).toEqual(['first', 'second', 'third']);
+    });
+});
+
+describe('Segmented button component CVA', () => {
+    runValueAccessorTests<SegmentedButtonComponent, HostComponent>({
+        component: SegmentedButtonComponent,
+        additionalSetup: (fixture, done) => {
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+                done();
+            });
+        },
+        testModuleMetadata: {
+            declarations: [HostComponent],
+            imports: [SegmentedButtonModule, ButtonModule] // <= importing the module for app-select
+        },
+        hostTemplate: {
+            // specify that "AppSelectComponent" should not be tested directly
+            hostComponent: HostComponent,
+            // specify the way to access "AppSelectComponent" from the host template
+            getTestingComponent: (fixture) => fixture.componentInstance.segmentedButton
+        },
+        supportsOnBlur: false,
+        internalValueChangeSetter: null,
+        getComponentValue: (fixture) => (fixture.componentInstance.segmentedButton as any)._currentValue,
+        getValues: () => [1, 2, 3] // <= setting the same values as select options in host template
     });
 });
