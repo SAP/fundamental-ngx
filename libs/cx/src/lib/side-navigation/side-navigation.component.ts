@@ -26,6 +26,7 @@ import { PreparedNestedListComponent } from '@fundamental-ngx/cx/nested-list';
 import { NestedListStateService } from '@fundamental-ngx/cx/nested-list';
 import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
 
 /**
  * The side-navigation is a wrapping component representing
@@ -39,7 +40,9 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     encapsulation: ViewEncapsulation.None,
     providers: [NestedListKeyboardService, NestedListStateService]
 })
-export class SideNavigationComponent implements AfterContentInit, AfterViewInit, OnInit, OnChanges, OnDestroy {
+export class SideNavigationComponent
+    implements AfterContentInit, AfterViewInit, OnInit, OnChanges, OnDestroy, SideNavigationInterface
+{
     /**
      * Side navigation configuration, to pass whole model object, instead of creating HTML from scratch
      */
@@ -102,6 +105,9 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
 
     /** @hidden */
     _showScrollDownButton = false;
+
+    /** @hidden */
+    additionalShellbarCssClass = 'fd-shellbar--cx-side-nav';
 
     /** @hidden */
     private _keyboardSubscription = new Subscription();

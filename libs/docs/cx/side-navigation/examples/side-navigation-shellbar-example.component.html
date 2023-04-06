@@ -1,4 +1,4 @@
-<fd-shellbar [cxSideNav]="true">
+<fd-shellbar [sideNav]="cxSideNav">
     <button
         fd-shellbar-side-nav
         fd-button
@@ -26,7 +26,7 @@
     </fd-shellbar-actions>
 </fd-shellbar>
 <div style="height: 480px">
-    <fdx-side-nav [narrow]="condensed" [showScrollButtons]="false">
+    <fdx-side-nav [narrow]="condensed" [showScrollButtons]="false" #cxSideNav>
         <div fdx-side-nav-main>
             <ul fdx-nested-list>
                 <li fdx-nested-list-item>
