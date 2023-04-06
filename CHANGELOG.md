@@ -1,3 +1,12 @@
+## [0.40.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.40.0...v0.40.1-rc.0) (2023-04-06)
+
+
+### Bug Fixes
+
+* **core:** simplify change detection for segmented button ([#9638](https://github.com/SAP/fundamental-ngx/issues/9638)) ([867f3b1](https://github.com/SAP/fundamental-ngx/commit/867f3b14cb228144cf088efd868b4e40bc566fcf))
+
+
+
 # [0.40.0](https://github.com/SAP/fundamental-ngx/compare/v0.40.0-rc.15...v0.40.0) (2023-04-05)
 
 
