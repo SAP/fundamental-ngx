@@ -45,11 +45,12 @@ describe('SegmentedButtonComponent', () => {
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(waitForAsync(() => {
         fixture = TestBed.createComponent(HostComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-    });
+        fixture.whenStable();
+    }));
 
     it('should create', () => {
         expect(component).toBeTruthy();
