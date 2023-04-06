@@ -1,5 +1,5 @@
 import {
-    AfterContentInit,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -9,12 +9,13 @@ import {
     HostBinding,
     HostListener,
     Input,
+    OnDestroy,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
-import { filter, startWith, takeUntil, tap } from 'rxjs/operators';
-import { Subject, merge, fromEvent } from 'rxjs';
+import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
+import { Subject, merge, fromEvent, asyncScheduler } from 'rxjs';
 import { DestroyedService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -52,7 +53,7 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
         DestroyedService
     ]
 })
-export class SegmentedButtonComponent implements AfterContentInit, ControlValueAccessor {
+export class SegmentedButtonComponent implements AfterViewInit, ControlValueAccessor, OnDestroy {
     /** Whether segmented button is on toggle mode, which allows to toggle more than 1 button */
     @Input()
     toggle = false;
@@ -92,9 +93,13 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     ) {}
 
     /** @hidden */
-    ngAfterContentInit(): void {
+    ngAfterViewInit(): void {
         this._listenToButtonChanges();
-        this._setInitialState();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onRefresh$.complete();
     }
 
     /** @hidden */
@@ -138,17 +143,15 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     }
 
     /** @hidden */
-    private _setInitialState(): void {
-        this._toggleDisableButtons(this._isDisabled);
-        this._pickButtonsByValues(this._currentValue);
-    }
-
-    /** @hidden */
     private _listenToButtonChanges(): void {
-        this._buttons.changes.pipe(startWith(1)).subscribe(() => {
-            this._onRefresh$.next();
-            this._buttons.forEach((button) => this._listenToTriggerEvents(button));
-        });
+        this._buttons.changes
+            .pipe(startWith(1), observeOn(asyncScheduler), takeUntil(this._onDestroy$))
+            .subscribe(() => {
+                this._onRefresh$.next();
+                this._toggleDisableButtons(this._isDisabled);
+                this._pickButtonsByValues(this._currentValue);
+                this._buttons.forEach((button) => this._listenToTriggerEvents(button));
+            });
     }
 
     /** @hidden */
@@ -178,13 +181,13 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
                 this._buttons.forEach((button) => this._deselectButton(button));
                 this._selectButton(buttonComponent);
                 this._propagateChange();
-                this._detectChanges();
+                this._changeDetRef.markForCheck();
             }
 
             if (this.toggle) {
                 this._toggleButton(buttonComponent);
                 this._propagateChange();
-                this._detectChanges();
+                this._changeDetRef.markForCheck();
             }
         }
     }
@@ -193,12 +196,6 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     private _propagateChange(): void {
         this.onChange(this._getValuesBySelected());
         this._currentValue = this._getValuesBySelected();
-    }
-
-    /** @hidden */
-    private _detectChanges(): void {
-        this._buttons.forEach((button) => button.detectChanges());
-        this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
@@ -263,7 +260,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
         if (disable) {
             this._buttons.forEach((button) => button.elementRef().nativeElement.setAttribute('disabled', 'true'));
         }
-        this._detectChanges();
+        this._changeDetRef.markForCheck();
     }
 
     /** @hidden */
