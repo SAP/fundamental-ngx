@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
@@ -17,6 +17,7 @@ import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 })
 class PanelWithDefaultValuesComponent {
     @ViewChild(PanelComponent) panel: PanelComponent;
+    @ViewChild(PanelComponent, { read: ElementRef }) panelElm: ElementRef<HTMLElement>;
 }
 
 describe('PanelComponent default values', () => {
@@ -75,6 +76,7 @@ describe('PanelComponent default values', () => {
 })
 class SimplePanelComponent {
     @ViewChild(PanelComponent) panel: PanelComponent;
+    @ViewChild(PanelComponent, { read: ElementRef }) panelElm: ElementRef<HTMLElement>;
     @ViewChild(PanelContentComponent) panelContent: PanelContentComponent;
     @ViewChild(PanelActionsComponent) panelActions: PanelActionsComponent;
 
@@ -125,8 +127,7 @@ describe('Simple PanelComponent', () => {
     it('Should be able to change the contentDensity to "compact"', async () => {
         component.contentDensity = ContentDensityMode.COMPACT;
         fixture.detectChanges();
-        const compactPanel = fixture.debugElement.queryAll(By.css('.fd-panel--compact'));
-        expect(compactPanel.length).toBeGreaterThan(0);
+        expect(component.panelElm.nativeElement.classList).toContain('is-compact');
     });
 
     it('Should be able to fix the height of the Panel body via the contentHeight property', async () => {

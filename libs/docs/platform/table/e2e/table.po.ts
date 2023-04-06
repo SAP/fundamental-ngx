@@ -1,8 +1,20 @@
-import { PlatformBaseComponentPo, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
+import {
+    acceptAlert,
+    click,
+    getAlertText,
+    getAttributeByName,
+    getElementArrayLength,
+    getElementPlaceholder,
+    getText,
+    PlatformBaseComponentPo,
+    scrollIntoView,
+    setValue,
+    waitForElDisplayed,
+    waitForPresent
+} from '../../../../../e2e';
+import { alertTestText1, alertTestText2, testText, testTextName, testTextSearch } from './table-contents';
 
 export class TablePo extends PlatformBaseComponentPo {
-    readonly url = '/table';
-
     tableDefaultExample = 'fdp-platform-table-default-example ';
     tableCustomWidthExample = 'fdp-platform-table-custom-width-example ';
     tableActivableExample = 'fdp-platform-table-activable-example ';
@@ -55,7 +67,7 @@ export class TablePo extends PlatformBaseComponentPo {
     dialogMoveToBottom = '[title="Move to Bottom"]';
     footerButtonOk = 'fd-dialog-footer-button button';
     columnHeader = '[role="columnheader"] div';
-    popoverDropdownButton = 'fd-dialog-body fd-popover-control button';
+    popoverDropdownButton = 'fd-dialog-body fd-popover-control .fd-button';
     buttonAdd = '[title="Add new"]';
     buttonRemove = '[title="Remove"]';
     dialogInput = 'fdp-table-filter-rule input';
@@ -91,6 +103,10 @@ export class TablePo extends PlatformBaseComponentPo {
     synchronizeButton = '.fdp-search-field__loading';
     arrowButton = '.fd-table__cell--expand';
 
+    constructor(public readonly url: string) {
+        super();
+    }
+
     async open(): Promise<void> {
         await super.open(this.url);
         await waitForPresent(this.root);
@@ -107,5 +123,75 @@ export class TablePo extends PlatformBaseComponentPo {
 
     async compareWithBaseline(specName: string = 'table'): Promise<any> {
         return super.compareWithBaseline(specName, await this.getScreenshotFolder());
+    }
+
+    async checkAlertMessages(selector: string): Promise<void> {
+        await scrollIntoView(selector + this.button);
+        await click(selector + this.buttonActionOne);
+        await expect(await getAlertText()).toBe(alertTestText1);
+        await acceptAlert();
+
+        await click(selector + this.buttonActionTwo);
+        await expect(await getAlertText()).toBe(alertTestText2);
+        await acceptAlert();
+    }
+
+    async findElementInTable(selector: string, arr: string[], count: number = 0): Promise<void> {
+        await scrollIntoView(selector + this.input);
+        await setValue(selector + this.input, testText);
+        await click(selector + this.buttonSearch);
+        const rowLength = await getElementArrayLength(selector + this.tableRow);
+        await expect(rowLength).toEqual(1);
+        const cellLength = await getElementArrayLength(selector + this.tableRow + this.tableCellText);
+        for (let i = 0; i < cellLength - count; i++) {
+            await expect((await getText(selector + this.tableRow + this.tableCellText, i)).trim()).toBe(arr[i]);
+        }
+    }
+
+    async chooseSortOptionBy(selector: string, transparentButton: string, index: number): Promise<void> {
+        await click(selector + transparentButton);
+        await click(this.buttonSortedBy, index);
+        await click(this.barButton);
+    }
+
+    async checkAllCheckbox(selector, skipFirst = false): Promise<void> {
+        await scrollIntoView(selector);
+        await click(selector + 'fd-checkbox');
+        const checkboxLength = await getElementArrayLength(selector + this.tableRow);
+        for (let i = 0; i < checkboxLength; i++) {
+            await expect(await getAttributeByName(selector + this.tableRow, 'aria-selected', i)).toBe(
+                skipFirst && i === 0 ? 'false' : 'true'
+            );
+        }
+    }
+
+    async chooseFilter(indexFilter: number, indexBy): Promise<void> {
+        await scrollIntoView(this.tableFilterableExample);
+        await click(this.tableFilterableExample + this.ellipsisButton);
+        await click(this.filterItem, indexFilter);
+        await click(this.filterByColorItem, indexBy);
+        await click(this.barButton);
+    }
+
+    async checkPlaceholder(selector: string, index: number = 0): Promise<void> {
+        await scrollIntoView(selector);
+        await click(selector + this.button, index);
+        await expect(await getElementPlaceholder(this.dialogCompactInput)).toBe(testTextSearch);
+    }
+
+    async checkSearchingInDialog(): Promise<void> {
+        await setValue(this.dialogCompactInput, testTextName);
+        const itemLength = await getElementArrayLength(this.dialogItemText);
+        await expect(itemLength).toEqual(1);
+        await expect((await getText(this.dialogItemText)).trim()).toBe(testTextName);
+    }
+
+    async checkSortingColumns(selector: string, transparentButton: string, index: number = 0): Promise<void> {
+        await scrollIntoView(selector);
+        await click(selector + transparentButton, index);
+        await click(this.dialogMoveToBottom);
+        await click(this.dialogItem);
+        await click(this.footerButtonOk);
+        await expect((await getText(selector + this.columnHeader, 3)).trim()).toBe(testTextName);
     }
 }

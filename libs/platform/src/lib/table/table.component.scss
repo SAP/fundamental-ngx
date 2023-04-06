@@ -85,7 +85,7 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
 
             &.fd-dnd-on-drag {
                 &.fd-dnd-placeholder {
-                    padding-left: 2.8rem;
+                    //padding-left: 2.8rem;
 
                     @include fd-rtl() {
                         padding-left: 0.5rem;
@@ -160,23 +160,6 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
         position: relative;
         overflow: hidden;
         outline: none;
-    }
-
-    &__header,
-    .#{$block}__body {
-        position: relative;
-        border-left: $fd-table-border;
-        border-left: $fd-table-border-var;
-
-        @include fd-rtl() {
-            border-left: none;
-            border-right: $fd-table-border;
-            border-right: $fd-table-border-var;
-
-            .fd-table__cell:first-child {
-                border-right: none;
-            }
-        }
     }
 
     &__header {
@@ -275,25 +258,6 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
     .fd-table__cell {
         z-index: 0; // need so fixed cells are above not-fixed cells
 
-        &--checkbox {
-            border-left: none;
-            border-right: $fd-table-border;
-            border-right: $fd-table-border-var;
-
-            & + .fd-table__cell--fixed {
-                border-left: none;
-            }
-
-            @include fd-rtl() {
-                border-left: $fd-table-border;
-                border-left: $fd-table-border-var;
-
-                & + .fd-table__cell {
-                    border-right: none;
-                }
-            }
-        }
-
         &--group {
             min-width: 100%;
             border-left: none;
@@ -327,8 +291,8 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
 
         &--mock {
             &.fd-table__cell--mock-borderless {
-                border-left: none;
-                border-right: none;
+                border-left: none !important;
+                border-right: none !important;
             }
         }
 
@@ -410,6 +374,16 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
         .fd-table__body {
             position: static;
             will-change: transform;
+        }
+    }
+
+    &.fd-table--no-vertical-borders {
+        .fd-table__cell--status-indicator {
+            border-right-color: transparent;
+
+            @include fd-rtl() {
+                border-left-color: transparent;
+            }
         }
     }
 }

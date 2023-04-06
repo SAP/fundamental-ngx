@@ -28,7 +28,7 @@
         [class.fd-grid-list__highlight--negative]="status === 'warning'"
         [class.fd-grid-list__highlight--critical]="status === 'error'"
         [class.fd-grid-list__highlight--neutral]="status === 'neutral'"
-        [attr.aria-label]="'coreGridList.listItemStatusAriaLabel' | fdTranslate: { status: status }"
+        [attr.aria-label]="'coreGridList.listItemStatusAriaLabel' | fdTranslate : { status: status }"
     ></span>
 
     <ng-container *ngIf="selectionMode === 'singleSelect'">
@@ -63,7 +63,7 @@
         <span
             *ngIf="counter"
             class="fd-grid-list__item-counter"
-            [attr.aria-label]="'coreGridList.listItemCounterAriaLabel' | fdTranslate: { count: counter }"
+            [attr.aria-label]="'coreGridList.listItemCounterAriaLabel' | fdTranslate : { count: counter }"
             [innerText]="counter"
         ></span>
 
@@ -123,7 +123,7 @@
     <input
         [attr.tabindex]="selectionMode === 'singleSelect' ? -1 : 0"
         type="radio"
-        class="fd-radio fd-radio--compact fd-grid-list__radio-input"
+        class="fd-radio is-compact fd-grid-list__radio-input"
         [style.display]="selectionMode === 'singleSelect' ? 'none' : ''"
         [id]="id + '-radio'"
         [name]="'fd-grid-list-item-toolbar-' + selectionMode"
@@ -145,18 +145,14 @@
 <ng-template #checkbox>
     <input
         type="checkbox"
-        class="fd-checkbox fd-checkbox--compact fd-grid-list__checkbox-input"
+        class="fd-checkbox is-compact fd-grid-list__checkbox-input"
         [id]="id + '-checkbox'"
         [attr.aria-label]="ariaLabel"
         [attr.aria-labelledby]="ariaLabelledBy"
         [ngModel]="_selectedItem"
         (click)="_checkboxClick($event)"
     />
-    <label
-        class="fd-checkbox__label fd-checkbox__label--compact fd-grid-list__checkbox-label"
-        [for]="id + '-checkbox'"
-        tabindex="-1"
-    ></label>
+    <label class="fd-checkbox__label fd-grid-list__checkbox-label" [for]="id + '-checkbox'" tabindex="-1"></label>
 </ng-template>
 
 <ng-template #itemFooter>

@@ -59,14 +59,28 @@
             <fd-toolbar-separator fd-toolbar-item *ngIf="tableToolbarActionsComponent"></fd-toolbar-separator>
 
             <ng-container *ngIf="showExpandCollapseButtons">
-                <fdp-button glyph="expand-all" (click)="_expandAll()" aria-haspopup="modal"></fdp-button>
-                <fdp-button glyph="collapse-all" (click)="_collapseAll()" aria-haspopup="modal"></fdp-button>
+                <fdp-button
+                    glyph="expand-all"
+                    (click)="_expandAll()"
+                    [title]="'platformTable.toolbarActionExpandAllButtonTitle' | fdTranslate"
+                    [ariaLabel]="'platformTable.toolbarActionExpandAllButtonTitle' | fdTranslate"
+                    buttonType="transparent"
+                ></fdp-button>
+
+                <fdp-button
+                    glyph="collapse-all"
+                    (click)="_collapseAll()"
+                    [title]="'platformTable.toolbarActionCollapseAllButtonTitle' | fdTranslate"
+                    [ariaLabel]="'platformTable.toolbarActionCollapseAllButtonTitle' | fdTranslate"
+                    buttonType="transparent"
+                ></fdp-button>
             </ng-container>
 
             <fdp-button
                 *ngIf="sortable"
                 glyph="sort"
                 [title]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
+                [ariaLabel]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
                 buttonType="transparent"
                 aria-haspopup="modal"
                 (click)="openSorting()"
@@ -75,6 +89,7 @@
                 *ngIf="filterable"
                 glyph="filter"
                 [title]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
+                [ariaLabel]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
                 buttonType="transparent"
                 aria-haspopup="modal"
                 (click)="openFiltering()"
@@ -83,6 +98,7 @@
                 *ngIf="groupable"
                 glyph="group-2"
                 [title]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
+                [ariaLabel]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
                 buttonType="transparent"
                 aria-haspopup="modal"
                 (click)="openGrouping()"
@@ -91,6 +107,7 @@
                 *ngIf="columns"
                 glyph="action-settings"
                 [title]="'platformTable.toolbarActionColumnsButtonTitle' | fdTranslate"
+                [ariaLabel]="'platformTable.toolbarActionColumnsButtonTitle' | fdTranslate"
                 buttonType="transparent"
                 aria-haspopup="modal"
                 (click)="openColumns()"

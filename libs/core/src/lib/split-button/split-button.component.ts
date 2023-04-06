@@ -28,8 +28,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 export const splitButtonTextClass = 'fd-button-split__text';
-export const splitButtonTextCompactClass = 'fd-button-split__text--compact';
-const splitButtonTextClasses = [splitButtonTextClass, splitButtonTextCompactClass];
+const splitButtonTextClasses = [splitButtonTextClass];
 
 /**
  * Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with
@@ -298,11 +297,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
             return;
         }
         splitButtonTextClasses.forEach((_class) => this._renderer.removeClass(textSpanElement, _class));
-        if (compact) {
-            this._renderer.addClass(textSpanElement, splitButtonTextCompactClass);
-        } else {
-            this._renderer.addClass(textSpanElement, splitButtonTextClass);
-        }
+        this._renderer.addClass(textSpanElement, splitButtonTextClass);
     };
 
     /** @hidden */

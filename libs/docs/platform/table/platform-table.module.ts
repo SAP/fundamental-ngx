@@ -9,7 +9,7 @@ import { TableModule } from '@fundamental-ngx/core/table';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { BreakpointDirective, RtlService } from '@fundamental-ngx/cdk/utils';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformInputModule } from '@fundamental-ngx/platform/form';
@@ -20,6 +20,7 @@ import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import {
     ApiComponent,
     currentComponentProvider,
+    ExampleChildService,
     getI18nKey,
     I18nDocsComponent,
     SharedDocumentationPageModule
@@ -59,15 +60,27 @@ import { PlatformTableInitialLoadingExampleComponent } from './examples/initial-
 import { PlatformTableColumnsNgforExampleComponent } from './examples/platform-table-columns-ngfor-example.component';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PlatformTableVirtualScrollExampleComponent } from './examples/virtual-scroll/platform-table-virtual-scroll-example.component';
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
+import { P13DialogDocsComponent } from './child-docs/p13-dialog/p13-dialog-docs.component';
+import { SettingsDialogDocsComponent } from './child-docs/settings-dialog/settings-dialog-docs.component';
+import { RowSelectionDocsComponent } from './child-docs/row-selection/row-selection-docs.component';
+import { TableScrollingDocsComponent } from './child-docs/scrolling/table-scrolling-docs.component';
+import { ClickableRowsDocsComponent } from './child-docs/clickable-rows/clickable-rows-docs.component';
 
 const routes: Routes = [
     {
         path: '',
         component: PlatformTableHeaderComponent,
         children: [
-            { path: '', component: PlatformTableDocsComponent },
+            { path: '', redirectTo: 'basic', pathMatch: 'full' },
+            { path: 'basic', component: PlatformTableDocsComponent },
             { path: 'api', component: ApiComponent, data: { content: API_FILES.table } },
-            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformTable') }
+            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformTable') },
+            { path: 'p13-dialog-table', component: P13DialogDocsComponent, data: { child: true } },
+            { path: 'settings-dialog-table', component: SettingsDialogDocsComponent },
+            { path: 'scrolling', component: TableScrollingDocsComponent },
+            { path: 'row-selection', component: RowSelectionDocsComponent },
+            { path: 'clickable-rows', component: ClickableRowsDocsComponent }
         ]
     }
 ];
@@ -90,7 +103,9 @@ const routes: Routes = [
         FdpFormGroupModule,
         SelectModule,
         SegmentedButtonModule,
-        ToolbarModule
+        ToolbarModule,
+        BreakpointDirective,
+        PlatformMenuModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -125,12 +140,18 @@ const routes: Routes = [
         PlatformTableResponsiveColumnsExampleComponent,
         PlatformTableInitialLoadingExampleComponent,
         PlatformTableColumnsNgforExampleComponent,
-        PlatformTableVirtualScrollExampleComponent
+        PlatformTableVirtualScrollExampleComponent,
+        P13DialogDocsComponent,
+        SettingsDialogDocsComponent,
+        RowSelectionDocsComponent,
+        TableScrollingDocsComponent,
+        ClickableRowsDocsComponent
     ],
     providers: [
         RtlService,
         platformContentDensityModuleDeprecationsProvider('fdp-table'),
-        currentComponentProvider('table')
+        currentComponentProvider('table'),
+        ExampleChildService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

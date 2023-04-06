@@ -1,0 +1,62 @@
+<fd-docs-section-title id="simple" componentName="FdkBreakpoint">Basic example</fd-docs-section-title>
+<description>
+    <p>
+        <code> *fdkBreakpoint="[BREAKPOINT_NAME]" </code>
+        BREAKPOINT_NAME can be one of the following:
+    </p>
+    <table fd-table>
+        <thead fd-table-header>
+            <tr fd-table-row>
+                <th fd-table-cell>BREAKPOINT_NAME</th>
+                <th fd-table-cell>Container size</th>
+            </tr>
+        </thead>
+        <tbody fd-table-body>
+            <tr fd-table-row [hoverable]="true">
+                <td fd-table-cell>S</td>
+                <td fd-table-cell>[0 - {{ breakpointSizes.S }})px</td>
+            </tr>
+            <tr fd-table-row [hoverable]="true">
+                <td fd-table-cell>M</td>
+                <td fd-table-cell>({{ breakpointSizes.S }} - {{ breakpointSizes.M }})px</td>
+            </tr>
+            <tr fd-table-row [hoverable]="true">
+                <td fd-table-cell>L</td>
+                <td fd-table-cell>({{ breakpointSizes.M }} - {{ breakpointSizes.L }})px</td>
+            </tr>
+            <tr fd-table-row [hoverable]="true">
+                <td fd-table-cell>XL</td>
+                <td fd-table-cell>({{ breakpointSizes.L }} - &infin;]px</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>also, if you want to use custom breakpoint you can use <code>lt</code> and <code>gt</code> inputs</p>
+</description>
+<component-example [hasBackground]="false">
+    <fdk-breakpoint-basic-example></fdk-breakpoint-basic-example>
+</component-example>
+<code-example [exampleFiles]="basicExample"></code-example>
+
+<fd-docs-section-title id="alias" componentName="FdkBreakpoint">Alias naming</fd-docs-section-title>
+<description>
+    <p>
+        You can use alias naming for breakpoints, for example, you can use <code>[fdkBreakpointS]</code> on
+        <code>ng-template</code> instead of <code>*fdkBreakpoint="['S']"</code>
+    </p>
+</description>
+<component-example>
+    <fdk-breakpoint-alias-names-example></fdk-breakpoint-alias-names-example>
+</component-example>
+<code-example [exampleFiles]="aliasExample"></code-example>
+
+<fd-docs-section-title id="differentSource" componentName="FdkBreakpoint">Alias naming</fd-docs-section-title>
+<description>
+    <p>
+        By default, <code>FdkBreakpoint</code> uses <code>window</code> object to get the width of the screen. If you
+        want to use another source, you can use <code>fdkBreakpointObserve</code> input.
+    </p>
+</description>
+<component-example>
+    <fdk-different-observe-target-example></fdk-different-observe-target-example>
+</component-example>
+<code-example [exampleFiles]="differentSourceExample"></code-example>

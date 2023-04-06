@@ -149,6 +149,9 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Assistant'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: "Plus d'infos"
+    },
     platformActionBar: {
         backButtonLabel: 'Revenir en arrière'
     },
@@ -426,6 +429,8 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         toolbarActionFilterButtonTitle: 'Filtre',
         toolbarActionGroupButtonTitle: 'Grouper',
         toolbarActionColumnsButtonTitle: 'Colonnes',
+        toolbarActionExpandAllButtonTitle: 'Expand all',
+        toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Non filtré)',
         filterDialogFilterByLabel: 'Filtrer par: {{ filterLabel }}',
         filterDialogFilterTitle: 'Filtre',

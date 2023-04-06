@@ -305,13 +305,13 @@ describe('Value help dialog test suite', () => {
             await click(menuCheckboxes);
             await click(menuDialogBtn);
             await expect(await getText(inputToken)).toEqual(itemName);
-            await click(openDialogBtn, 3);
+            await click(openDialogBtn, 4);
             await expect(await getAttributeByName(tableRows, 'aria-selected')).toBe('true');
         });
 
         it('should check selection from main dialog', async () => {
-            await scrollIntoView(openDialogBtn, 3);
-            await click(openDialogBtn, 3);
+            await scrollIntoView(openDialogBtn, 4);
+            await click(openDialogBtn, 4);
             await waitForPresent(dialogContainer);
             await clickTableCheckbox(1);
             const selectedItem = (await getText(selectedItemName)).trim();
@@ -322,7 +322,7 @@ describe('Value help dialog test suite', () => {
         });
 
         it('should check search field', async () => {
-            await click(openDialogBtn, 3);
+            await click(openDialogBtn, 4);
             const firstName = (await getText(productNameColumn)).toLowerCase().trim();
             await click(cancelButton);
             await waitForElDisappear(dialogContainer);

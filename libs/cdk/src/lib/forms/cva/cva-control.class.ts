@@ -14,7 +14,7 @@ export class CvaControl<T> {
     /**
      * Control value accessor directive instance.
      */
-    public cvaDirective = inject(CvaDirective<T>, {
+    public cvaDirective = inject<CvaDirective<T>>(CvaDirective, {
         self: true,
         optional: true
     });

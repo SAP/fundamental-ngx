@@ -206,24 +206,16 @@ describe('dynamic side content test suite', () => {
         it('should check changing size of buttons size', async () => {
             await openPage(responsiveExample);
             await click(dynamicPageBtn, 7);
-            const buttonsLength = await getElementArrayLength(dynamicPage + button);
-            for (let i = 0; i < buttonsLength; i++) {
-                if (i !== 5 && i !== 6) {
-                    await expect(await getElementClass(dynamicPageBtn, i)).not.toContain(
-                        'compact',
-                        'size of the button still compact'
-                    );
-                }
-            }
+            await expect(await getElementClass(`${dynamicPage} fd-toolbar`)).not.toContain(
+                'is-compact',
+                'size of the button still compact'
+            );
+
             await click(dynamicPage + button, 7);
-            for (let i = 0; i < buttonsLength; i++) {
-                if (i !== 5 && i !== 6) {
-                    await expect(await getElementClass(dynamicPageBtn, i)).toContain(
-                        'compact',
-                        'size of the button did not change to cozy'
-                    );
-                }
-            }
+            await expect(await getElementClass(`${dynamicPage} fd-toolbar`)).toContain(
+                'is-compact',
+                'size of the button did not change to cozy'
+            );
         });
 
         it('should check links clickable', async () => {

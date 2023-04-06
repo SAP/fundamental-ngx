@@ -19,6 +19,10 @@ interface DialogRefData {
     thumbnailId: string;
 }
 
+/**
+ * @deprecated
+ * ThumbnailDetails component is depricated since version 0.40.0
+ */
 @Component({
     selector: 'fdp-thumbnail-details',
     templateUrl: './thumbnail-details.component.html',

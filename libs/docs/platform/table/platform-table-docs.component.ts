@@ -1,7 +1,12 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
+
+import { ExampleChildService, ExampleFile, getAsset, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 import {
     TableColumnFreezeEvent,
     TableDataSource,
@@ -10,9 +15,8 @@ import {
     TableRowSelectionChangeEvent,
     TableSortChangeEvent
 } from '@fundamental-ngx/platform/table';
-
-import { ExampleFile, getAsset, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
+import { ExampleItem } from './examples/platform-table-data-items-example';
+import { TableDataProviderExample } from './examples/platform-table-data-provider-example';
 
 const platformTableDefaultSrc = 'platform-table-default-example.component.html';
 const platformTableDefaultTsSrc = 'platform-table-default-example.component.ts';
@@ -22,39 +26,15 @@ const platformTableCustomTitleSrc = 'platform-table-custom-title-example.compone
 const platformTableCustomTitleTsSrc = 'platform-table-custom-title-example.component.ts';
 const platformTableCustomWidthSrc = 'platform-table-custom-width-example.component.html';
 const platformTableCustomWidthTsSrc = 'platform-table-custom-width-example.component.ts';
-const platformTableSingleRowSelectionSrc = 'platform-table-single-row-selection-example.component.html';
-const platformTableSingleRowSelectionTsSrc = 'platform-table-single-row-selection-example.component.ts';
-const platformTableMultipleRowSelectionSrc = 'platform-table-multiple-row-selection-example.component.html';
-const platformTableMultipleRowSelectionTsSrc = 'platform-table-multiple-row-selection-example.component.ts';
-const platformTableSortableSrc = 'platform-table-sortable-example.component.html';
-const platformTableSortableTsSrc = 'platform-table-sortable-example.component.ts';
-const platformTableGroupableSrc = 'platform-table-groupable-example.component.html';
-const platformTableGroupableTsSrc = 'platform-table-groupable-example.component.ts';
-const platformTableFilterableSrc = 'platform-table-filterable-example.component.html';
-const platformTableFilterableTsSrc = 'platform-table-filterable-example.component.ts';
 const platformTableFreezableSrc = 'platform-table-freezable-example.component.html';
 const platformTableFreezableTsSrc = 'platform-table-freezable-example.component.ts';
 const platformTableLoadingSrc = 'platform-table-loading-example.component.html';
 const platformTableLoadingTsSrc = 'platform-table-loading-example.component.ts';
-const platformTablePageScrollingSrc = 'platform-table-page-scrolling-example.component.html';
-const platformTablePageScrollingTsSrc = 'platform-table-page-scrolling-example.component.ts';
 const platformTableInitialStateSrc = 'platform-table-initial-state-example.component.html';
 const platformTableInitialStateTsSrc = 'platform-table-initial-state-example.component.ts';
-const platformTableP13ColumnSrc = 'platform-table-p13-columns-example.component.html';
-const platformTableP13ColumnTsSrc = 'platform-table-p13-columns-example.component.ts';
-const platformTableP13SortSrc = 'platform-table-p13-sort-example.component.html';
-const platformTableP13SortTsSrc = 'platform-table-p13-sort-example.component.ts';
-const platformTableP13FilterSrc = 'platform-table-p13-filter-example.component.html';
-const platformTableP13FilterTsSrc = 'platform-table-p13-filter-example.component.ts';
-const platformTableP13GroupSrc = 'platform-table-p13-group-example.component.html';
-const platformTableP13GroupTsSrc = 'platform-table-p13-group-example.component.ts';
 const platformTreeTableDefaultSrc = 'platform-table-tree-example.component.html';
 const platformTreeTableDefaultTsSrc = 'platform-table-tree-example.component.ts';
-const platformVirtualScrollTableDefaultSrc = 'virtual-scroll/platform-table-virtual-scroll-example.component.html';
-const platformVirtualScrollTableDefaultTsSrc = 'virtual-scroll/platform-table-virtual-scroll-example.component.ts';
-const platformTableNavigatableRowSrc = 'platform-table-navigatable-row-indicator-example.component.html';
 const platformTableNoOuterBordersSrc = 'platform-table-navigatable-row-indicator-example.component.html';
-const platformTableNavigatableRowTsSrc = 'platform-table-navigatable-row-indicator-example.component.ts';
 const platformTableNoOuterBordersTsSrc = 'platform-table-navigatable-row-indicator-example.component.ts';
 const platformTableSemanticSrc = 'platform-table-semantic-example.component.html';
 const platformTableSemanticTsSrc = 'platform-table-semantic-example.component.ts';
@@ -79,13 +59,10 @@ const platformTableNgForTsSrc = 'platform-table-columns-ngfor-example.component.
 
 const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
 
-import { TableDataProviderExample } from './examples/platform-table-data-provider-example';
-import { ExampleItem } from './examples/platform-table-data-items-example';
-import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
-
 @Component({
     selector: 'fdp-table-docs',
     templateUrl: './platform-table-docs.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [RtlService]
 })
 export class PlatformTableDocsComponent {
@@ -181,86 +158,6 @@ export class PlatformTableDocsComponent {
         }
     ];
 
-    singleRowSelectionFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformTableSingleRowSelectionSrc),
-            fileName: 'platform-table-single-row-selection-example',
-            name: 'platform-table-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformTableSingleRowSelectionTsSrc),
-            fileName: 'platform-table-single-row-selection-example',
-            component: 'PlatformTableSingleRowSelectionExampleComponent',
-            name: 'platform-table-example.component.ts'
-        }
-    ];
-
-    multipleRowSelectionFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformTableMultipleRowSelectionSrc),
-            fileName: 'platform-table-multiple-row-selection-example',
-            name: 'platform-table-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformTableMultipleRowSelectionTsSrc),
-            fileName: 'platform-table-multiple-row-selection-example',
-            component: 'PlatformTableMultipleRowSelectionExampleComponent',
-            name: 'platform-table-example.component.ts'
-        }
-    ];
-
-    sortableTableFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformTableSortableSrc),
-            fileName: 'platform-table-sortable-example',
-            name: 'platform-table-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformTableSortableTsSrc),
-            fileName: 'platform-table-sortable-example',
-            component: 'PlatformTableSortableExampleComponent',
-            name: 'platform-table-example.component.ts'
-        }
-    ];
-
-    filterableTableFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformTableFilterableSrc),
-            fileName: 'platform-table-filterable-example',
-            name: 'platform-table-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformTableFilterableTsSrc),
-            fileName: 'platform-table-filterable-example',
-            component: 'PlatformTableFilterableExampleComponent',
-            name: 'platform-table-example.component.ts'
-        }
-    ];
-
-    groupableTableFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformTableGroupableSrc),
-            fileName: 'platform-table-groupable-example',
-            name: 'platform-table-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformTableGroupableTsSrc),
-            fileName: 'platform-table-groupable-example',
-            component: 'PlatformTableGroupableExampleComponent',
-            name: 'platform-table-example.component.ts'
-        }
-    ];
-
     freezableTableFiles: ExampleFile[] = [
         {
             language: 'html',
@@ -293,22 +190,6 @@ export class PlatformTableDocsComponent {
         }
     ];
 
-    pageScrollingTableFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformTablePageScrollingSrc),
-            fileName: 'platform-table-page-scrolling-example',
-            name: 'platform-table-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformTablePageScrollingTsSrc),
-            fileName: 'platform-table-page-scrolling-example',
-            component: 'PlatformTablePageScrollingExampleComponent',
-            name: 'platform-table-example.component.ts'
-        }
-    ];
-
     initialStateFiles: ExampleFile[] = [
         {
             language: 'html',
@@ -321,70 +202,6 @@ export class PlatformTableDocsComponent {
             code: getAssetFromModuleAssets(platformTableInitialStateTsSrc),
             fileName: 'platform-table-initial-state-example',
             component: 'PlatformTableInitialStateExampleComponent',
-            name: 'platform-table-example.component.ts'
-        }
-    ];
-
-    p13ColumnsFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformTableP13ColumnSrc),
-            fileName: 'platform-table-p13-columns-example',
-            name: 'platform-table-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformTableP13ColumnTsSrc),
-            fileName: 'platform-table-p13-columns-example',
-            component: 'PlatformTableP13ColumnsExampleComponent',
-            name: 'platform-table-example.component.ts'
-        }
-    ];
-
-    p13SortFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformTableP13SortSrc),
-            fileName: 'platform-table-p13-sort-example',
-            name: 'platform-table-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformTableP13SortTsSrc),
-            fileName: 'platform-table-p13-sort-example',
-            component: 'PlatformTableP13SortExampleComponent',
-            name: 'platform-table-example.component.ts'
-        }
-    ];
-
-    p13FilterFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformTableP13FilterSrc),
-            fileName: 'platform-table-p13-filter-example',
-            name: 'platform-table-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformTableP13FilterTsSrc),
-            fileName: 'platform-table-p13-filter-example',
-            component: 'PlatformTableP13FilterExampleComponent',
-            name: 'platform-table-example.component.ts'
-        }
-    ];
-
-    p13GroupFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformTableP13GroupSrc),
-            fileName: 'platform-table-p13-group-example',
-            name: 'platform-table-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformTableP13GroupTsSrc),
-            fileName: 'platform-table-p13-group-example',
-            component: 'PlatformTableP13GroupExampleComponent',
             name: 'platform-table-example.component.ts'
         }
     ];
@@ -402,38 +219,6 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-tree-example',
             component: 'PlatformTableTreeExampleComponent',
             name: 'platform-table-tree-example.component.ts'
-        }
-    ];
-
-    virtualScrollTableFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformVirtualScrollTableDefaultSrc),
-            fileName: 'platform-table-virtual-scroll-example',
-            name: 'platform-table-virtual-scroll-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformVirtualScrollTableDefaultTsSrc),
-            fileName: 'platform-table-virtual-scroll-example',
-            component: 'PlatformTableVirtualScrollExampleComponent',
-            name: 'platform-table-virtual-scroll-example.component.ts'
-        }
-    ];
-
-    navitableRowFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(platformTableNavigatableRowSrc),
-            fileName: 'platform-table-navigatable-row-indicator-example',
-            name: 'platform-table-navigatable-row-indicator-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: getAssetFromModuleAssets(platformTableNavigatableRowTsSrc),
-            fileName: 'platform-table-navigatable-row-indicator-example',
-            component: 'PlatformTableNavigatableRowIndicatorExampleComponent',
-            name: 'platform-table-navigatable-row-indicator-example.component.ts'
         }
     ];
 
@@ -590,6 +375,8 @@ export class PlatformTableDocsComponent {
 
     dataSource: TableDataSource<ExampleItem>;
 
+    childService = inject(ExampleChildService);
+    route = inject(ActivatedRoute);
     constructor(
         private schemaFactory: SchemaFactoryService,
         private _cd: ChangeDetectorRef,
@@ -597,6 +384,7 @@ export class PlatformTableDocsComponent {
     ) {
         this.schema = this.schemaFactory.getComponent('fdp-table');
         this.dataSource = new TableDataSource(new TableDataProviderExample(datetimeAdapter));
+        this.childService.setLink(this.route.snapshot.routeConfig?.path);
     }
 
     onSchemaValues(data): void {

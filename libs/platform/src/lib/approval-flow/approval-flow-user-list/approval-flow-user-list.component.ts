@@ -27,6 +27,10 @@ import { trackByFn } from '../helpers';
 const ITEMS_RENDERED_AT_ONCE = 100;
 const INTERVAL_IN_MS = 10;
 
+/**
+ * @deprecated
+ * ApprovalFlowUserList component is depricated since version 0.40.0
+ */
 @Component({
     selector: 'fdp-approval-flow-user-list',
     templateUrl: './approval-flow-user-list.component.html',

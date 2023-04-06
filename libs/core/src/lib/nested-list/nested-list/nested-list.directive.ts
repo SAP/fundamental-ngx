@@ -23,17 +23,11 @@ import { NestedListInterface } from './nested-list.interface';
 import { NestedListHeaderDirective } from '../nested-list-directives';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
-import {
-    ContentDensityObserver,
-    contentDensityObserverProviders,
-    ContentDensityMode
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 @Directive({
     selector: '[fdNestedList], [fd-nested-list]',
-    providers: [
-        contentDensityObserverProviders({ modifiers: { [ContentDensityMode.COMPACT]: 'fd-nested-list--compact' } })
-    ]
+    providers: [contentDensityObserverProviders()]
 })
 export class NestedListDirective implements AfterContentInit, NestedListInterface, OnDestroy {
     /** In case the user wants to no use icons for items in this list */

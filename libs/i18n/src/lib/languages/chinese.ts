@@ -146,6 +146,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
     coreWizard: {
         ariaLabel: '向导'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: '更多'
+    },
     platformActionBar: {
         backButtonLabel: '返回'
     },
@@ -421,6 +424,8 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         toolbarActionFilterButtonTitle: '筛选',
         toolbarActionGroupButtonTitle: '分组',
         toolbarActionColumnsButtonTitle: '列',
+        toolbarActionExpandAllButtonTitle: 'Expand all',
+        toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '（未筛选）',
         filterDialogFilterByLabel: '筛选方式：{{ filterLabel }}',
         filterDialogFilterTitle: '筛选',

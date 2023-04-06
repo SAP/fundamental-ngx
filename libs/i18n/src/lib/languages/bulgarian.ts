@@ -171,6 +171,9 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Помощник'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Повече'
+    },
     platformActionBar: {
         backButtonLabel: 'Върни Се Обратно'
     },
@@ -492,6 +495,8 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         toolbarActionFilterButtonTitle: 'Филтрирай',
         toolbarActionGroupButtonTitle: 'Групирай',
         toolbarActionColumnsButtonTitle: 'Колони',
+        toolbarActionExpandAllButtonTitle: 'Expand all',
+        toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Нефилтрирано)',
         filterDialogFilterByLabel: 'Филтрирано по: {{ filterLabel }}',
         filterDialogFilterTitle: 'Филтър',

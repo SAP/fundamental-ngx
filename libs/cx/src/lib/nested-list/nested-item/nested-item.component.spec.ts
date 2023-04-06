@@ -1,3 +1,4 @@
+import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 import { NestedItemComponent } from './nested-item.component';
 import { Component, ViewChild } from '@angular/core';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
@@ -98,7 +99,7 @@ describe('NestedItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CxNestedListModule, PopoverModule],
+            imports: [CxNestedListModule, PopoverModule, SideNavigationModule],
             declarations: [TestNestedContainerComponent],
             providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
         }).compileComponents();

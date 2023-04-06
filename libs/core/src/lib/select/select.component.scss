@@ -1,9 +1,11 @@
 @use '@angular/cdk';
 @import 'fundamental-styles/dist/select';
 
+$block: fd-select;
+
 @include cdk.a11y-visually-hidden();
 
-.fd-select {
+.#{$block} {
     display: block;
     max-width: 100%;
 
@@ -13,5 +15,11 @@
 
     &--inline {
         display: inline-block;
+    }
+
+    .#{$block}__control {
+        .#{$block}__button {
+            position: static;
+        }
     }
 }

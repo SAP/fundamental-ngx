@@ -15,7 +15,7 @@ export class ComboboxPo extends CoreBaseComponentPo {
     mobileTitle = 'h1.fd-title--h5';
     reactiveFormButton = 'fd-combobox-forms-example button';
     reactiveFormText = 'fd-combobox-forms-example small';
-    compactInput = '.fd-input--compact';
+    compactInput = '.fd-combobox-input.is-compact .fd-input';
 
     async open(): Promise<void> {
         await super.open(this.url);

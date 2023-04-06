@@ -39,15 +39,15 @@ describe('Input group addon with a text', () => {
         expect(addonEl.classList.contains('fd-input-group__addon')).toBeTruthy();
     });
 
-    it('Should add "fd-input-group__addon--compact" class if it is compact mode', async () => {
+    it('Should add "is-compact" class if it is compact mode', async () => {
         const addonEl = fixture.debugElement.query(By.directive(InputGroupAddonBodyComponent))
             .nativeElement as HTMLElement;
 
-        expect(addonEl.classList.contains('fd-input-group__addon--compact')).toBeFalsy();
+        expect(addonEl.classList.contains('is-compact')).toBeFalsy();
 
         host.contentDensity = ContentDensityMode.COMPACT;
         fixture.detectChanges();
-        expect(addonEl.classList.contains('fd-input-group__addon--compact')).toBeTruthy();
+        expect(addonEl.classList.contains('is-compact')).toBeTruthy();
     });
 
     it('Should add "fd-input-group__addon--button" if "hasButton" true ', () => {

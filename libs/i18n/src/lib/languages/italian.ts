@@ -157,6 +157,9 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Procedura guidata'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Altro'
+    },
     platformActionBar: {
         backButtonLabel: 'Torna indietro'
     },
@@ -434,6 +437,8 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         toolbarActionFilterButtonTitle: 'Filtro',
         toolbarActionGroupButtonTitle: 'Gruppo',
         toolbarActionColumnsButtonTitle: 'Colonne',
+        toolbarActionExpandAllButtonTitle: 'Expand all',
+        toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Non filtrato)',
         filterDialogFilterByLabel: 'Filtra per: {{ filterLabel }}',
         filterDialogFilterTitle: 'Filtro',

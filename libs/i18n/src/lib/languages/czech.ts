@@ -150,6 +150,9 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Wizard'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Více'
+    },
     platformActionBar: {
         backButtonLabel: 'Vraťit se zpět'
     },
@@ -426,6 +429,8 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         toolbarActionFilterButtonTitle: 'Filtr',
         toolbarActionGroupButtonTitle: 'Skupina',
         toolbarActionColumnsButtonTitle: 'Sloupce',
+        toolbarActionExpandAllButtonTitle: 'Rozbalit vše',
+        toolbarActionCollapseAllButtonTitle: 'Sbalit vše',
         filterDialogNotFilteredLabel: '(Nefiltrováno)',
         filterDialogFilterByLabel: 'Filtrovat podle: {{ filterLabel }}',
         filterDialogFilterTitle: 'Filtr',

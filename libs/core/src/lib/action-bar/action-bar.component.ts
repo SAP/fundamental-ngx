@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 /**
- * The parent action bar directive.
+ * @deprecated
+ * Action Bar component is depricated since version 0.40.0
  *
  * Children usage:
  * ```html

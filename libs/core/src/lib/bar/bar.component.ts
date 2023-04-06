@@ -33,9 +33,6 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         contentDensityObserverProviders({
-            modifiers: {
-                [ContentDensityMode.COZY]: 'fd-bar--cozy'
-            },
             defaultContentDensity: ContentDensityMode.COMPACT
         })
     ]

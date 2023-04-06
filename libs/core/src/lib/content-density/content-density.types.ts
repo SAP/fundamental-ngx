@@ -42,7 +42,7 @@ export type ContentDensityModuleConfig = (
     BaseContentDensityModuleConfig;
 
 export interface ContentDensityObserverTarget extends HasElementRef {
-    contentDensitySettings: ContentDensityObserverSettings;
+    contentDensitySettings?: ContentDensityObserverSettings;
 }
 
 export type ContentDensityCallbackFn = (target: ContentDensityMode) => void;

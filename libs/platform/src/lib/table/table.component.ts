@@ -30,6 +30,8 @@ import {
 import { NgForm } from '@angular/forms';
 
 import {
+    FdDndDropEventMode,
+    FdDndDropType,
     FdDropEvent,
     FDK_FOCUSABLE_GRID_DIRECTIVE,
     FocusableCellPosition,
@@ -130,6 +132,13 @@ interface GroupTableRowValueType {
     count: number;
 }
 
+interface UpdatedDndRowsPosition {
+    allRows: TableRow[];
+    rowsToMove: TableRow[];
+    rowsAfterDropRow: TableRow[];
+    dropRowItems: TableRow[];
+}
+
 let tableUniqueId = 0;
 
 /**
@@ -175,15 +184,7 @@ let tableUniqueId = 0;
         TableColumnResizeService,
         TableResponsiveService,
         contentDensityObserverProviders({
-            supportedContentDensity: [
-                ContentDensityMode.COMPACT,
-                ContentDensityMode.COZY,
-                ContentDensityMode.CONDENSED
-            ],
-            modifiers: {
-                [ContentDensityMode.COMPACT]: 'fd-table--compact',
-                [ContentDensityMode.CONDENSED]: 'fd-table--condensed'
-            }
+            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY, ContentDensityMode.CONDENSED]
         }),
         {
             provide: FDP_PRESET_MANAGED_COMPONENT,
@@ -469,6 +470,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** Cache size for the virtualScroll, default is 40 in each direction */
     @Input()
     renderAhead = 40;
+
+    /**
+     * Row drop mode.
+     */
+    @Input()
+    dropMode: FdDndDropType = 'auto';
 
     /** Event emitted when current preset configuration has been changed. */
     @Output()
@@ -1696,10 +1703,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             }
 
             this._dragDropUpdateDragParentRowAttributes(dragRow);
-            this._dragDropRearrangeTreeRows(dragRow, dropRow);
-            this._dragDropUpdateDropRowAttributes(dragRow, dropRow);
+            this._dragDropRearrangeTreeRows(dragRow, dropRow, event);
+            this._dragDropUpdateDropRowAttributes(dragRow, dropRow, event.mode);
 
-            if (!dropRow.expanded) {
+            if (!dropRow.expanded && event.mode === 'group') {
                 this._toggleExpandableTableRow(dropRow);
             } else {
                 this._onTableRowsChanged();
@@ -1752,21 +1759,26 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    _dragRowFromKeyboard(dir: string, event: Event, currentRowIndex: number): void {
+    _dragRowFromKeyboard(dir: string, event: Event, currentRowIndex: number, mode: 'shift' | 'group'): void {
+        if (!this._rowsDraggable) {
+            return;
+        }
         event.preventDefault();
-        if (this._rowsDraggable) {
-            let replacedIndex;
-            dir === 'up' ? (replacedIndex = currentRowIndex - 1) : (replacedIndex = currentRowIndex + 1);
+        let replacedIndex;
+        dir === 'up' ? (replacedIndex = currentRowIndex - 1) : (replacedIndex = currentRowIndex + 1);
 
-            if (this._tableRowsVisible[replacedIndex]) {
-                const dragDropEvent = {
-                    items: this._tableRowsVisible,
-                    draggedItemIndex: currentRowIndex,
-                    replacedItemIndex: replacedIndex
-                };
-                this._dragDropItemDrop(dragDropEvent);
+        if (this._tableRowsVisible[replacedIndex]) {
+            const dragDropEvent: FdDropEvent<TableRow<T>> = {
+                items: this._tableRowsVisible,
+                draggedItemIndex: currentRowIndex,
+                replacedItemIndex: replacedIndex,
+                insertAt: dir === 'down' ? 'after' : 'before',
+                mode
+            };
+            this._dragDropItemDrop(dragDropEvent);
+            setTimeout(() => {
                 (event.target as HTMLElement).focus();
-            }
+            });
         }
     }
 
@@ -1801,19 +1813,24 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    private _dragDropUpdateDropRowAttributes(dragRow: TableRow, dropRow: TableRow): void {
+    private _dragDropUpdateDropRowAttributes(dragRow: TableRow, dropRow: TableRow, mode: FdDndDropEventMode): void {
         if (dragRow.parent) {
             // Remove child row from previous parent row.
             dragRow.parent.children.splice(dragRow.parent.children.indexOf(dragRow), 1);
         }
-        dragRow.parent = dropRow;
-        dragRow.level = dropRow.level + 1;
+        dragRow.level = dropRow.level + (mode === 'group' ? 1 : 0);
 
-        if (!this._isTreeRow(dropRow)) {
-            dropRow.type = TableRowType.TREE;
+        if (mode === 'group') {
+            dragRow.parent = dropRow;
+            if (!this._isTreeRow(dropRow)) {
+                dropRow.type = TableRowType.TREE;
+            }
+
+            dropRow.children.push(dragRow);
+        } else {
+            dragRow.parent = dropRow.parent;
+            dropRow.parent?.children.push(dragRow);
         }
-
-        dropRow.children.push(dragRow);
 
         const children = this._findRowChildren(dragRow);
         children.forEach((row) => {
@@ -1822,7 +1839,16 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    private _dragDropRearrangeTreeRows(dragRow: TableRow, dropRow: TableRow): void {
+    private _dragDropRearrangeTreeRows(dragRow: TableRow, dropRow: TableRow, event: FdDropEvent<TableRow>): void {
+        if (event.mode === 'shift') {
+            this._handleShiftDropAction(dragRow, dropRow, event);
+        } else {
+            this._handleReplaceDropAction(dragRow, dropRow, event);
+        }
+    }
+
+    /** @hidden */
+    private _getNewDragDropRowsPosition(dragRow: TableRow, dropRow: TableRow): UpdatedDndRowsPosition {
         const allRows = this._tableRows;
 
         const dragRowIndex = allRows.findIndex((row) => row === dragRow);
@@ -1833,10 +1859,43 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         const dropRowIndex = allRows.findIndex((row) => row === dropRow);
         const dropRowChildren = this._findRowChildren(dropRow);
 
-        const rowsBefore = allRows.slice(0, dropRowIndex + dropRowChildren.length + 1);
-        const rowsAfter = allRows.slice(dropRowIndex + dropRowChildren.length + 1);
+        const dropRowItemsLength = dropRowChildren.length + 1;
 
-        this._tableRows = [...rowsBefore, ...rowsToMove, ...rowsAfter];
+        const rowsAfterDropRow = allRows.splice(dropRowIndex + dropRowItemsLength, allRows.length + dropRowItemsLength);
+        const dropRowItems = allRows.splice(dropRowIndex, dropRowItemsLength);
+
+        return {
+            allRows,
+            rowsToMove,
+            rowsAfterDropRow,
+            dropRowItems
+        };
+    }
+
+    /** @hidden */
+    private _handleShiftDropAction(dragRow: TableRow, dropRow: TableRow, event: FdDropEvent<TableRow>): void {
+        const { allRows, rowsToMove, rowsAfterDropRow, dropRowItems } = this._getNewDragDropRowsPosition(
+            dragRow,
+            dropRow
+        );
+
+        this._tableRows = [
+            ...allRows,
+            ...(event.insertAt === 'after' ? dropRowItems : []),
+            ...rowsToMove,
+            ...(event.insertAt === 'after' ? [] : dropRowItems),
+            ...rowsAfterDropRow
+        ];
+    }
+
+    /** @hidden */
+    private _handleReplaceDropAction(dragRow: TableRow, dropRow: TableRow, event: FdDropEvent<TableRow>): void {
+        const { allRows, rowsToMove, rowsAfterDropRow, dropRowItems } = this._getNewDragDropRowsPosition(
+            dragRow,
+            dropRow
+        );
+
+        this._tableRows = [...allRows, ...dropRowItems, ...rowsToMove, ...rowsAfterDropRow];
     }
 
     /** @hidden */

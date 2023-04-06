@@ -13,6 +13,7 @@ import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { BreadcrumbComponent } from './breadcrumb.component';
 import { whenStable } from '@fundamental-ngx/core/tests';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @Component({
     selector: 'fd-breadcrumb-test-component',
@@ -49,7 +50,8 @@ describe('BreadcrumbComponent', () => {
                 RouterModule,
                 RouterTestingModule,
                 OverflowLayoutModule,
-                PortalModule
+                PortalModule,
+                I18nModule
             ],
             providers: [RtlService],
             schemas: [NO_ERRORS_SCHEMA]

@@ -32,7 +32,18 @@ export const components: SectionInterfaceContent[] = [
     { url: 'platform/search-field', name: 'Search Field' },
     { url: 'platform/smart-filter-bar', name: 'Smart Filter Bar' },
     { url: 'platform/split-menu-button', name: 'Split Menu Button' },
-    { url: 'platform/table', name: 'Table' },
+    {
+        url: 'platform/table',
+        name: 'Table',
+        subItems: [
+            { url: 'platform/table/basic', name: 'Basic examples' },
+            { url: 'platform/table/p13-dialog-table', name: 'Personalization dialog' },
+            { url: 'platform/table/settings-dialog-table', name: 'Settings dialog' },
+            { url: 'platform/table/row-selection', name: 'Row selection' },
+            { url: 'platform/table/scrolling', name: 'Scrolling options' },
+            { url: 'platform/table/clickable-rows', name: 'Clickable rows' }
+        ]
+    },
     { url: 'platform/textarea', name: 'Textarea' },
     { url: 'platform/thumbnail', name: 'Thumbnail' },
     { url: 'platform/time-picker', name: 'Time Picker' },

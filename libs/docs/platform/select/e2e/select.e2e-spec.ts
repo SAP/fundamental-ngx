@@ -94,10 +94,10 @@ describe('Select test suite', () => {
 
     describe('Check Select Semantic States example', () => {
         it('should be able to select the option', async () => {
-            const selectLength = await getElementArrayLength(selectSemanticStateExample + buttons);
+            const selectLength = await getElementArrayLength(selectSemanticStateExample + inputControl);
             for (let i = 0; i < selectLength; i++) {
                 const textBefore = await getText(selectSemanticStateExample + displayText, i);
-                await click(selectSemanticStateExample + buttons, i);
+                await click(selectSemanticStateExample + inputControl, i);
                 await click(selectSemanticStateOption, 7);
                 const textAfter = await getText(selectSemanticStateExample + displayText, i);
                 await expect(textBefore).not.toEqual(textAfter);
@@ -136,8 +136,8 @@ describe('Select test suite', () => {
         });
 
         it('verify title and close button is clickable', async () => {
-            await scrollIntoView(selectMobileExample + buttons);
-            await click(selectMobileExample + buttons);
+            await scrollIntoView(selectMobileExample + inputControl);
+            await click(selectMobileExample + inputControl);
 
             await expect(await getText(mobileTitle)).toBe(titleTestText);
             await expect(await isElementClickable(mobileCloseButton)).toBe(true, 'close button not clickable');
@@ -188,7 +188,7 @@ describe('Select test suite', () => {
 
     async function checkOptions(selector: string, itemIndex: number, index = 0): Promise<void> {
         const textBefore = await getText(selector + displayText, index);
-        click(selector + buttons, index);
+        click(selector + inputControl, index);
         if (selector == selectMobileExample) {
             await (await $('fd-dialog-body .fd-select-options')).waitForDisplayed();
             await click('fd-dialog-body .fd-select-options .fd-list__item', itemIndex);

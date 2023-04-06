@@ -21,6 +21,8 @@ class TableComponentMock
             | 'save'
             | 'cancel'
             | 'presetChanged'
+            | 'expandAll'
+            | 'collapseAll'
         >
 {
     openTableSortSettings = new EventEmitter();
@@ -33,6 +35,8 @@ class TableComponentMock
     presetChanged = new EventEmitter();
 
     search(): void {}
+    expandAll(): void {}
+    collapseAll(): void {}
 }
 
 describe('TableToolbarComponent', () => {
@@ -121,6 +125,22 @@ describe('TableToolbarComponent', () => {
             expect(tableHandlerSpy).not.toHaveBeenCalled();
 
             component.openColumns();
+
+            expect(tableHandlerSpy).toHaveBeenCalledTimes(1);
+        });
+
+        it('Should call table.expandAll by "_expandAll" action ', () => {
+            const tableHandlerSpy = spyOn(table, 'expandAll').and.stub();
+
+            component._expandAll();
+
+            expect(tableHandlerSpy).toHaveBeenCalledTimes(1);
+        });
+
+        it('Should call table.collapseAll by "_collapseAll" action ', () => {
+            const tableHandlerSpy = spyOn(table, 'collapseAll').and.stub();
+
+            component._collapseAll();
 
             expect(tableHandlerSpy).toHaveBeenCalledTimes(1);
         });

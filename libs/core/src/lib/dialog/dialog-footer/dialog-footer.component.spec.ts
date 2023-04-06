@@ -73,7 +73,7 @@ describe('DialogFooterComponent', () => {
         const footerEl = fixture.nativeElement.querySelector('footer');
 
         expect(footerEl).toHaveClass('fd-dialog__footer');
-        expect(footerEl).toHaveClass('fd-bar--cozy');
+        expect(footerEl).toHaveClass('is-cozy');
     });
 
     it('should use default template', async () => {

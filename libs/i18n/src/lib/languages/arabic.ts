@@ -147,6 +147,9 @@ export const FD_LANGUAGE_ARABIC: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Wizard'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Më shumë'
+    },
     platformActionBar: {
         backButtonLabel: 'Go Back'
     },
@@ -422,6 +425,8 @@ export const FD_LANGUAGE_ARABIC: FdLanguage = {
         toolbarActionFilterButtonTitle: 'Filter',
         toolbarActionGroupButtonTitle: 'Group',
         toolbarActionColumnsButtonTitle: 'Columns',
+        toolbarActionExpandAllButtonTitle: 'Expand all',
+        toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Not Filtered)',
         filterDialogFilterByLabel: 'Filter by: {{ filterLabel }}',
         filterDialogFilterTitle: 'Filter',

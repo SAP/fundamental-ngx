@@ -24,6 +24,7 @@ import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import { DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BasePopoverClass } from './base/base-popover.class';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
@@ -56,7 +57,8 @@ let cdkPopoverUniqueId = 0;
         {
             provide: FD_POPOVER_COMPONENT,
             useExisting: PopoverComponent
-        }
+        },
+        contentDensityObserverProviders()
     ],
     host: {
         class: 'fd-popover-custom',

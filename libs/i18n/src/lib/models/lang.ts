@@ -219,6 +219,9 @@ export interface FdLanguage {
     coreWizard: {
         ariaLabel: FdLanguageKey;
     };
+    coreBreadcrumb: {
+        overflowTitleMore: FdLanguageKey;
+    };
     platformActionBar: {
         backButtonLabel: FdLanguageKey;
     };
@@ -519,6 +522,8 @@ export interface FdLanguage {
         toolbarActionFilterButtonTitle: FdLanguageKey;
         toolbarActionGroupButtonTitle: FdLanguageKey;
         toolbarActionColumnsButtonTitle: FdLanguageKey;
+        toolbarActionExpandAllButtonTitle: FdLanguageKey;
+        toolbarActionCollapseAllButtonTitle: FdLanguageKey;
         filterDialogNotFilteredLabel: FdLanguageKey;
         /** @param filterLabel */
         filterDialogFilterByLabel: FdLanguageKey;

@@ -60,22 +60,22 @@
         [attr.tabindex]="disabled ? -1 : 0"
         role="slider"
         [attr.aria-label]="
-            ariaLabel || 'coreSlider.singleMinMaxDetails' | fdTranslate: { min: minValue, max: maxValue }
+            ariaLabel || 'coreSlider.singleMinMaxDetails' | fdTranslate : { min: minValue, max: maxValue }
         "
         [attr.aria-labelledby]="ariaLabelledBy"
         [fdPopoverTrigger]="tooltipMode ? singleSliderPopover : null"
-        [attr.aria-valuemin]="'coreSlider.singleValueminDetails' | fdTranslate: { value: minValue }"
-        [attr.aria-valuemax]="'coreSlider.singleValuemaxDetails' | fdTranslate: { value: maxValue }"
+        [attr.aria-valuemin]="'coreSlider.singleValueminDetails' | fdTranslate : { value: minValue }"
+        [attr.aria-valuemax]="'coreSlider.singleValuemaxDetails' | fdTranslate : { value: maxValue }"
         [attr.aria-valuenow]="
             _useSliderValuePrefix
                 ? ('coreSlider.singleValueNowDetails'
-                  | fdTranslate: { value: getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER) })
+                  | fdTranslate : { value: getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER) })
                 : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
         "
         [attr.aria-valuetext]="
             _useSliderValuePrefix
                 ? ('coreSlider.singleValueNowDetails'
-                  | fdTranslate: { value: getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER) })
+                  | fdTranslate : { value: getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER) })
                 : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
         "
         fd-slider-position
@@ -113,22 +113,22 @@
         [attr.tabindex]="disabled ? -1 : 0"
         role="slider"
         [attr.aria-label]="
-            ariaLabel || 'coreSlider.multipleHandle1MinMaxDetails' | fdTranslate: { min: minValue, max: maxValue }
+            ariaLabel || 'coreSlider.multipleHandle1MinMaxDetails' | fdTranslate : { min: minValue, max: maxValue }
         "
         [attr.aria-labelledby]="ariaLabelledBy"
         [fdPopoverTrigger]="tooltipMode ? rangeSliderPopover1 : null"
-        [attr.aria-valuemin]="'coreSlider.multipleHandle1ValueminDetails' | fdTranslate: { value: minValue }"
-        [attr.aria-valuemax]="'coreSlider.multipleHandle1ValuemaxDetails' | fdTranslate: { value: maxValue }"
+        [attr.aria-valuemin]="'coreSlider.multipleHandle1ValueminDetails' | fdTranslate : { value: minValue }"
+        [attr.aria-valuemax]="'coreSlider.multipleHandle1ValuemaxDetails' | fdTranslate : { value: maxValue }"
         [attr.aria-valuenow]="
             _useSliderValuePrefix
                 ? ('coreSlider.multipleHandle1ValueNowDetails'
-                  | fdTranslate: { value: getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1) })
+                  | fdTranslate : { value: getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1) })
                 : getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1)
         "
         [attr.aria-valuetext]="
             _useSliderValuePrefix
                 ? ('coreSlider.multipleHandle1ValueNowDetails'
-                  | fdTranslate: { value: getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1) })
+                  | fdTranslate : { value: getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1) })
                 : getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1)
         "
         fd-slider-position
@@ -146,22 +146,22 @@
         [attr.tabindex]="disabled ? -1 : 0"
         role="slider"
         [attr.aria-label]="
-            ariaLabel || 'coreSlider.multipleHandle2MinMaxDetails' | fdTranslate: { min: minValue, max: maxValue }
+            ariaLabel || 'coreSlider.multipleHandle2MinMaxDetails' | fdTranslate : { min: minValue, max: maxValue }
         "
         [attr.aria-labelledby]="ariaLabelledBy"
         [fdPopoverTrigger]="tooltipMode ? rangeSliderPopover2 : null"
-        [attr.aria-valuemin]="'coreSlider.multipleHandle2ValueminDetails' | fdTranslate: { value: minValue }"
-        [attr.aria-valuemax]="'coreSlider.multipleHandle2ValuemaxDetails' | fdTranslate: { value: maxValue }"
+        [attr.aria-valuemin]="'coreSlider.multipleHandle2ValueminDetails' | fdTranslate : { value: minValue }"
+        [attr.aria-valuemax]="'coreSlider.multipleHandle2ValuemaxDetails' | fdTranslate : { value: maxValue }"
         [attr.aria-valuenow]="
             _useSliderValuePrefix
                 ? ('coreSlider.multipleHandle2ValueNowDetails'
-                  | fdTranslate: { value: getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2) })
+                  | fdTranslate : { value: getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2) })
                 : getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)
         "
         [attr.aria-valuetext]="
             _useSliderValuePrefix
                 ? ('coreSlider.multipleHandle2ValueNowDetails'
-                  | fdTranslate: { value: getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2) })
+                  | fdTranslate : { value: getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2) })
                 : getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)
         "
         fd-slider-position
@@ -231,7 +231,7 @@
             tabindex="-1"
             type="text"
             [disabled]="disabled"
-            fd-only-digits
+            fdkOnlyDigits
             [decimal]="true"
             [style.width.ch]="('' + _popoverValueRef[target]).length + 2"
             class="fd-input fd-slider--tooltip {{ _popoverInputFieldClass }}"

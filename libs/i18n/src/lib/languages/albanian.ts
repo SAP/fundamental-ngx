@@ -154,6 +154,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Magjistar'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Më shumë'
+    },
     platformActionBar: {
         backButtonLabel: 'Kthehu mbrapa'
     },
@@ -431,6 +434,8 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         toolbarActionFilterButtonTitle: 'Filtro',
         toolbarActionGroupButtonTitle: 'Group',
         toolbarActionColumnsButtonTitle: 'Columns',
+        toolbarActionExpandAllButtonTitle: 'Expand all',
+        toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Not Filtered)',
         filterDialogFilterByLabel: 'Filtro sipas: {{ filterLabel }}',
         filterDialogFilterTitle: 'Filtro',

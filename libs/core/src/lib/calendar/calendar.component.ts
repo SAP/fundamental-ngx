@@ -36,11 +36,7 @@ import { createMissingDateImplementationError } from './calendar-errors';
 import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from './models/common';
 import { CalendarType, DaysOfWeek, FdCalendarView, NavigationButtonDisableFunction } from './types';
-import {
-    ContentDensityObserver,
-    contentDensityObserverProviders,
-    ContentDensityMode
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 let calendarUniqueId = 0;
@@ -73,11 +69,7 @@ let calendarUniqueId = 0;
             multi: true
         },
         CalendarService,
-        contentDensityObserverProviders({
-            modifiers: {
-                [ContentDensityMode.COMPACT]: 'fd-calendar--compact'
-            }
-        })
+        contentDensityObserverProviders()
     ],
     host: {
         '(focusout)': '_focusOut($event)',

@@ -25,6 +25,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/cdk/data-source').then((m) => m.DataSourceDocsModule)
             },
             {
+                path: 'drag-n-drop',
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/drag-n-drop').then((m) => m.DndDocsModule)
+            },
+            {
                 path: 'focusable-item',
                 loadChildren: () =>
                     import('@fundamental-ngx/docs/cdk/focusable-item').then((m) => m.FocusableItemDocsModule)
@@ -60,6 +64,10 @@ export const ROUTES: Routes = [
                 path: 'initial-focus',
                 loadChildren: () =>
                     import('@fundamental-ngx/docs/cdk/initial-focus').then((m) => m.InitialFocusDocsModule)
+            },
+            {
+                path: 'breakpoint',
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/breakpoint').then((m) => m.BreakpointDocsModule)
             }
         ]
     }

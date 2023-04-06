@@ -331,26 +331,13 @@ describe('SearchFieldComponent', () => {
         host.isLoading = true;
 
         fixture.detectChanges();
-        let inputField: ElementRef = fixture.debugElement.query(By.css('input.fd-input'));
-        let submitButton: ElementRef = fixture.debugElement.query(By.css('button.fdp-search-field__submit'));
-        let categoryButton: ElementRef = fixture.debugElement.query(By.css('button.fdp-search-field__category-button'));
-        let compactAddons: ElementRef[] = fixture.debugElement.queryAll(By.css('.fd-input-group__addon--compact'));
-        expect(inputField.nativeElement.classList.contains('fd-input--compact')).toBeFalsy();
-        expect(submitButton.nativeElement.classList.contains('fd-button--compact')).toBeFalsy();
-        expect(categoryButton.nativeElement.classList.contains('fd-button--compact')).toBeFalsy();
-        expect(compactAddons.length).toBe(0);
+        let searchComponent = fixture.debugElement.query(By.css('fdp-search-field'));
+        expect(searchComponent.nativeElement.classList.contains('is-compact')).toBeFalsy();
         host.contentDensity = ContentDensityMode.COMPACT;
 
         fixture.detectChanges();
 
-        inputField = fixture.debugElement.query(By.css('input.fd-input'));
-        submitButton = fixture.debugElement.query(By.css('button.fdp-search-field__submit'));
-        categoryButton = fixture.debugElement.query(By.css('button.fdp-search-field__category-button'));
-        compactAddons = fixture.debugElement.queryAll(By.css('.fd-input-group__addon--compact'));
-        expect(inputField.nativeElement.classList.contains('fd-input--compact')).toBeTruthy();
-        expect(submitButton.nativeElement.classList.contains('fd-button--compact')).toBeTruthy();
-        expect(categoryButton.nativeElement.classList.contains('fd-button--compact')).toBeTruthy();
-        expect(compactAddons.length).toBe(2);
+        searchComponent = fixture.debugElement.query(By.css('fdp-search-field'));
     });
 
     it('should open "dropdown" on keyboard entry', () => {

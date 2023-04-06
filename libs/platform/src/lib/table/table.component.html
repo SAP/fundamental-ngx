@@ -68,7 +68,14 @@
                         ></fd-checkbox>
                     </th>
 
-                    <ng-container *ngFor="let column of _visibleColumns; let colIdx = index; trackBy: _columnTrackBy">
+                    <ng-container
+                        *ngFor="
+                            let column of _visibleColumns;
+                            let colIdx = index;
+                            trackBy: _columnTrackBy;
+                            last as isLast
+                        "
+                    >
                         <th
                             [focusable]="true"
                             fd-table-cell
@@ -84,6 +91,7 @@
                             [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
                             [class.fd-table__cell--fixed-end]="_freezableEndColumns.has(column.name)"
                             [class.fd-table__cell--fixed-end-last]="column.name === freezeEndColumnsTo"
+                            [class.is-last-child]="isLast && !_isShownNavigationColumn"
                             [ngStyle]="
                                 column
                                     | tableCellStyles
@@ -125,7 +133,7 @@
                     <th
                         *ngIf="_isShownNavigationColumn"
                         fd-table-cell
-                        class="fdp-table__cell--navigation"
+                        class="fdp-table__cell--navigation is-last-child"
                         role="columnheader"
                     ></th>
 
@@ -146,7 +154,7 @@
                 [tabIndex]="pageScrolling ? 0 : -1"
                 [items]="_tableRows"
                 [draggable]="_rowsDraggable"
-                [replaceMode]="true"
+                [dropMode]="dropMode"
                 [style.transform]="_virtualScrollTransform"
                 (itemDropped)="_dragDropItemDrop($event)"
             >
@@ -197,8 +205,10 @@
                         (click)="_onRowClick(row)"
                         (keydown.enter)="_onRowClick(row)"
                         (keydown.space)="_onRowClick(row, $event)"
-                        (keydown.alt.arrowup)="_dragRowFromKeyboard('up', $event, rowIdx)"
-                        (keydown.alt.arrowdown)="_dragRowFromKeyboard('down', $event, rowIdx)"
+                        (keydown.alt.arrowup)="_dragRowFromKeyboard('up', $event, rowIdx, 'shift')"
+                        (keydown.alt.arrowdown)="_dragRowFromKeyboard('down', $event, rowIdx, 'shift')"
+                        (keydown.alt.shift.arrowup)="_dragRowFromKeyboard('up', $event, rowIdx, 'group')"
+                        (keydown.alt.shift.arrowdown)="_dragRowFromKeyboard('down', $event, rowIdx, 'group')"
                         (started)="_dragDropStart()"
                         [main]="true"
                     >
@@ -207,6 +217,7 @@
                             fd-table-cell
                             fd-table-status-indicator
                             fdkDisabled
+                            [addDisabledClass]="false"
                             [status]="row.value[semanticHighlighting]"
                         ></td>
 
@@ -262,12 +273,13 @@
                                 role="gridcell"
                                 fd-table-cell
                                 fdkDisabled
+                                [addDisabledClass]="false"
                                 [class.fd-table__cell--fixed]="fixed"
                             ></td>
                         </ng-template>
 
                         <td
-                            *ngFor="let column of _visibleColumns; let colIdx = index"
+                            *ngFor="let column of _visibleColumns; let colIdx = index; last as isLast"
                             fd-table-cell
                             [fdpTableCellResizable]="
                                 colIdx | columnResizableSide : _visibleColumns.length : _isShownNavigationColumn
@@ -281,6 +293,7 @@
                             [class.fd-table__cell--fixed-end]="_freezableEndColumns.has(column.name)"
                             [class.fd-table__cell--fixed-end-last]="column.name === freezeEndColumnsTo"
                             [class.fd-table__cell--expand]="_isTreeRowFirstCell(colIdx, row)"
+                            [class.is-last-child]="isLast && !_isShownNavigationColumn"
                             [ngStyle]="
                                 column
                                     | tableCellStyles
@@ -311,8 +324,9 @@
                         <td
                             *ngIf="_isShownNavigationColumn"
                             fd-table-cell
-                            class="fdp-table__cell--navigation"
+                            class="fdp-table__cell--navigation is-last-child"
                             fdkDisabled
+                            [addDisabledClass]="false"
                         >
                             <i
                                 *ngIf="row.navigatable"
@@ -327,6 +341,7 @@
                             class="fd-table__cell fd-table__cell--mock"
                             [class.fd-table__cell--mock-borderless]="!_cellMockVisible"
                             fdkDisabled
+                            [addDisabledClass]="false"
                         ></td>
                     </tr>
 
@@ -337,7 +352,12 @@
                         [attr.aria-selected]="row.checked"
                         [class]="row | rowClasses : rowsClass"
                     >
-                        <td *ngIf="selectionMode !== SELECTION_MODE.NONE" fd-table-cell fdkDisabled></td>
+                        <td
+                            *ngIf="selectionMode !== SELECTION_MODE.NONE"
+                            fd-table-cell
+                            fdkDisabled
+                            [addDisabledClass]="false"
+                        ></td>
 
                         <td
                             fd-table-cell

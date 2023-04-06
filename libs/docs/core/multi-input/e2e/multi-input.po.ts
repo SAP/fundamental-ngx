@@ -11,7 +11,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
     multiInputOptions = 'fd-multi-input[inputid="multiInput"] .fd-token__text span';
     buttonShowAll = '.fd-multi-input-menu-overflow a.fd-link';
     hiddenAddonButtonInputOptions = 'fd-multi-input[inputid="noAddonMultiInput1"] .fd-token__text span';
-    compactMultiInputOptions = '.fd-token--compact .fd-token__text span';
+    compactMultiInputOptions = '.fd-multi-input.is-compact .fd-token__text span';
     approveButton = '.fd-button--emphasized';
     multiSelectButton = '.custom-multi-input-select-all-bar-element button';
     mobileInputOptions = 'fd-multi-input-mobile-example .fd-token__text span';
@@ -30,7 +30,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
     dialogCheckbox = '.fd-dialog fd-checkbox';
     selectAllItemsBtn = '.fd-button[glyph="multiselect-all"]';
     dialogListItem = '.fd-dialog .fd-list__item';
-    compactInput = '.fd-input--compact';
+    compactInput = '.fd-multi-input.is-compact .fd-input';
 
     async open(): Promise<void> {
         await super.open(this.url);

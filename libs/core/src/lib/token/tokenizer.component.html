@@ -1,27 +1,17 @@
-<div
-    class="fd-tokenizer fd-tokenizer--scrollable"
-    [class.is-focus]="_tokenizerHasFocus"
-    [class.fd-tokenizer--compact]="compact"
->
+<div class="fd-tokenizer fd-tokenizer--scrollable" [class.is-focus]="_tokenizerHasFocus">
     <div class="fd-tokenizer__inner" #tokenizerInner>
         <div role="listbox" [style.width]="_tokensContainerWidth">
             <ng-content select="fd-token"></ng-content>
         </div>
 
-        <ng-container *ngIf="_showOverflowPopover && (compact || compactCollapse); else moreElement">
+        <ng-container *ngIf="_showOverflowPopover && ((_compact$ | async) || compactCollapse); else moreElement">
             <ng-container *ngTemplateOutlet="tokensOverflow"></ng-container>
         </ng-container>
 
         <ng-content select="[fd-form-control]"></ng-content>
     </div>
     <span fd-input-group-addon *ngIf="glyph" #inputGroupAddOn [button]="true" placement="after">
-        <button
-            fd-button
-            [class]="compact ? 'fd-tokenizer-addon--compact' : 'fd-tokenizer-addon'"
-            fdType="transparent"
-            [glyph]="glyph"
-            type="button"
-        ></button>
+        <button fd-button class="fd-tokenizer-addon" fdType="transparent" [glyph]="glyph" type="button"></button>
     </span>
 </div>
 
@@ -58,10 +48,10 @@
         role="button"
         tabindex="0"
     >
-        <ng-container *ngIf="compact || compactCollapse">
+        <ng-container *ngIf="(_compact$ | async) || compactCollapse">
             {{ 'coreTokenizer.moreLabel' | fdTranslate : { count: moreTokensLeft.length + moreTokensRight.length } }}
         </ng-container>
-        <ng-container *ngIf="!compact && !compactCollapse">
+        <ng-container *ngIf="(_compact$ | async) === false && !compactCollapse">
             {{ 'coreTokenizer.moreLabel' | fdTranslate : { count: hiddenCozyTokenCount } }}
         </ng-container>
     </span>

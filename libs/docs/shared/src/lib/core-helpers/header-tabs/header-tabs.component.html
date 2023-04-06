@@ -2,7 +2,7 @@
     <li fd-tab-item>
         <a
             fd-tab-link
-            routerLink="./"
+            [routerLink]="observedLink ? (observedLink.link | async) : './'"
             routerLinkActive
             #rla1="routerLinkActive"
             [active]="rla1.isActive"

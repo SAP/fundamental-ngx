@@ -181,8 +181,7 @@ describe('StepInputComponent', () => {
 
         await whenStable(fixture);
 
-        expect(element.nativeElement.querySelector('.fd-step-input--compact')).toBeTruthy();
-        expect(element.nativeElement.querySelectorAll('.fd-button--compact').length).toEqual(2);
+        expect(element.nativeElement.classList).toContain('is-compact');
     });
 
     it('should display in selected semantic state', async () => {

@@ -4,6 +4,10 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ApprovalTeam } from '../interfaces';
 import { trackByFn } from '../helpers';
 
+/**
+ * @deprecated
+ * ApprovalFlowTeamList component is depricated since version 0.40.0
+ */
 @Component({
     selector: 'fdp-approval-flow-team-list',
     templateUrl: './approval-flow-team-list.component.html',

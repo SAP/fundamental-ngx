@@ -64,14 +64,23 @@
                 {{ triggerValue }}
             </ng-template>
         </div>
-        <button
-            fd-button
-            tabindex="-1"
-            class="fd-button--transparent fd-select__button {{ selectDropdownButtonClass }}"
+        <span
+            class="fd-button fd-button--transparent fd-select__button"
+            [ngClass]="selectDropdownButtonClass"
+            [class.is-disabled]="disabled"
             *ngIf="!readonly"
-            [disabled]="disabled"
-            [glyph]="glyph"
-        ></button>
+        >
+            <fd-icon [glyph]="glyph"></fd-icon>
+        </span>
+        <!--        <button-->
+        <!--            fd-button-->
+        <!--            tabindex="-1"-->
+        <!--            class="fd-button&#45;&#45;transparent fd-select__button {{ selectDropdownButtonClass }}"-->
+        <!--            (click)="_buttonClick()"-->
+        <!--            *ngIf="!readonly"-->
+        <!--            [disabled]="disabled"-->
+        <!--            [glyph]="glyph"-->
+        <!--        ></button>-->
     </div>
 </ng-template>
 

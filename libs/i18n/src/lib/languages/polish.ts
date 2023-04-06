@@ -147,6 +147,9 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Kreator'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Więcej'
+    },
     platformActionBar: {
         backButtonLabel: 'Powrót'
     },
@@ -423,6 +426,8 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         toolbarActionFilterButtonTitle: 'Filtr',
         toolbarActionGroupButtonTitle: 'Grupa',
         toolbarActionColumnsButtonTitle: 'Kolumny',
+        toolbarActionExpandAllButtonTitle: 'Expand all',
+        toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Nie zastosowano żadnego filtra)',
         filterDialogFilterByLabel: 'Użyto filtr: {{ filterLabel }}',
         filterDialogFilterTitle: 'Filtr',

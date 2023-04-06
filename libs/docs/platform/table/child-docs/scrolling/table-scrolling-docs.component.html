@@ -1,0 +1,48 @@
+<fd-docs-section-title id="page-scrolling" componentName="table"> Page Scrolling</fd-docs-section-title>
+<description>
+    In order to get table page scrolling use the next options:
+    <ul>
+        <li>Add <code>[pageScrolling]="true"</code> to trigger a fetch once the table is scrolled to the bottom.</li>
+        <li>
+            Add <code>[bodyHeight]="tableBodyHeight"</code> to restrict a table body height so the vertical scrollbar
+            can appear.
+        </li>
+        <li>Add <code>[pageSize]="itemsPerPage"</code> to specify how many items there are per page.</li>
+        <li>
+            Add <code>[pageScrollingThreshold]="thresholdInPx"</code> to indicate the threshold between the height of
+            the remaining content and the need to load new data.
+        </li>
+    </ul>
+    Consider that columns width automatically calculates only after the first set of data comes to the component.
+</description>
+<component-example>
+    <fdp-platform-table-page-scrolling-example></fdp-platform-table-page-scrolling-example>
+</component-example>
+<code-example [exampleFiles]="pageScrollingTableFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="virtual-scroll" componentName="table"> Virtual Scroll</fd-docs-section-title>
+<p>
+    When dealing with large amounts of data, it is recommended to use virtual scrolling to improve performance. To
+    enable Virtual Scroll, use the following properties:
+</p>
+
+<ul>
+    <li><code>[virtualScroll]="true"</code> - enables virtual scroll</li>
+    <li><code>[bodyHeight]="value"</code> - sets the height of the table body (viewport)</li>
+    <li>
+        <code>[rowHeight]="value"</code> - sets the height of the table row if it is different from default for the
+        current content density
+    </li>
+</ul>
+
+<p>
+    Additionally, you may set the <code>renderAhead</code> input property to specify how many rows should be rendered
+    ahead of the current viewport. Default is 20.
+</p>
+<description> </description>
+<component-example>
+    <fdp-platform-table-virtual-scroll-example></fdp-platform-table-virtual-scroll-example>
+</component-example>
+<code-example [exampleFiles]="virtualScrollTableFiles"></code-example>

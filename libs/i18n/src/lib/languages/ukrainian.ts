@@ -172,6 +172,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Майстер'
     },
+    coreBreadcrumb: {
+        overflowTitleMore: 'Більше'
+    },
     platformActionBar: {
         backButtonLabel: 'Повернутися назад'
     },
@@ -575,6 +578,8 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         toolbarActionFilterButtonTitle: 'Фільтр',
         toolbarActionGroupButtonTitle: 'Сгрупувати',
         toolbarActionColumnsButtonTitle: 'Стовпці',
+        toolbarActionExpandAllButtonTitle: 'Expand all',
+        toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Не відфільтровано)',
         filterDialogFilterByLabel: 'Фільтрувати за: {{ filterLabel }}',
         filterDialogFilterTitle: 'Фільтр',

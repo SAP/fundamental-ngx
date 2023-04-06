@@ -4,8 +4,12 @@
     <p>Developers can pass additional content into tables' toolbar left side.</p>
     <p>
         To do that, developers need to wrap needed content with <code>fdp-table-toolbar-left-actions</code> component.
-    </p></description
->
+    </p>
+    <p>
+        This example shows usage of the <a fd-link routerLink="/cdk/breakpoint">Breakpoint directive</a>, to achieve
+        responsiveness of the action buttons in table toolbar.
+    </p>
+</description>
 <component-example>
     <fdp-platform-table-default-example></fdp-platform-table-default-example>
 </component-example>
@@ -37,22 +41,6 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="actiable-rows" componentName="table"> Activable Rows</fd-docs-section-title>
-<description>
-    <p>This example shows activable rows</p>
-
-    <ul>
-        <li>Use <code>[rowsActivable]="true"</code> input property on the table to make rows activable.</li>
-        <li>Event <code>(rowActivate)</code> is emitted when row gets activated.</li>
-    </ul>
-</description>
-<component-example>
-    <fdp-platform-table-activable-example></fdp-platform-table-activable-example>
-</component-example>
-<code-example [exampleFiles]="defaultTableFiles"></code-example>
-
-<separator></separator>
-
 <fd-docs-section-title id="custom-columns" componentName="table"> Custom Column</fd-docs-section-title>
 <description>This example shows custom column definition implementation</description>
 <component-example>
@@ -68,110 +56,6 @@
     <fdp-platform-table-custom-title-example></fdp-platform-table-custom-title-example>
 </component-example>
 <code-example [exampleFiles]="customTitleTableFiles"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="single-row-selection" componentName="table"> Single Row Selection</fd-docs-section-title>
-<description>
-    <p>This example shows single row selection</p>
-
-    <p>
-        If both selection and search is used in a table, use <code>rowComparator</code> in order to preserve selection
-        after search is changed
-    </p>
-
-    <p>
-        Consider that in the table with selection column the overall columns width cannot be less than table container.
-    </p>
-</description>
-<component-example>
-    <fdp-platform-table-single-row-selection-example></fdp-platform-table-single-row-selection-example>
-</component-example>
-<code-example [exampleFiles]="singleRowSelectionFiles"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="multiple-row-selection" componentName="table">
-    Multiple Row Selection
-</fd-docs-section-title>
-<description>
-    <p>This example shows multiple row selection</p>
-
-    <p>
-        Consider that in the table with selection column present the overall columns width cannot be less than table
-        container.
-    </p>
-
-    <p>
-        You can have preselected rows by providing <code>selectedKey</code> input property for the table with field name
-        in row object. Any truthy value will be considered as selected.
-    </p>
-
-    <p>
-        You also can disable selecting for some rows by providing <code>selectableKey</code> input property for the
-        table with field name in row object. Only <code>false</code> value disables selection.
-    </p>
-</description>
-<component-example>
-    <fdp-platform-table-multiple-row-selection-example></fdp-platform-table-multiple-row-selection-example>
-</component-example>
-<code-example [exampleFiles]="multipleRowSelectionFiles"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="sortable" componentName="table"> Column Sorting</fd-docs-section-title>
-<description>
-    <p>Use <code>[sortable]="true"</code> to mark a column as an sortable one.</p>
-    <p>
-        Developers can restrict selecting "Not Sorted" option by providing
-        <code>[allowDisablingSorting]="false"</code> input property for the
-        <code>fdp-table-view-settings-dialog</code> component and providing
-        <a routerLink="/platform/table" fragment="initial-state">[initialSortBy]</a> input property of the table.
-    </p>
-    <p>In this example <code>Name</code>, <code>Description</code> and <code>Price</code> columns can be sorted.</p>
-</description>
-<component-example>
-    <fdp-platform-table-sortable-example></fdp-platform-table-sortable-example>
-</component-example>
-<code-example [exampleFiles]="sortableTableFiles"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="filterable" componentName="table"> Column Filtering</fd-docs-section-title>
-<description>
-    There are two ways to add filtering. The first one is to use the column option <code>[filterable]="true"</code>.
-    This will add filter input field in the column header menu.
-    <br />
-    The second one is to use <code>fdp-table-view-settings-filter</code> withing
-    <code>fdp-table-view-settings-dialog</code>. It gives ability to define filtering type. For now it supports the next
-    types:
-    <ul>
-        <li>single-select</li>
-        <li>multi-select</li>
-        <li>custom</li>
-    </ul>
-</description>
-<component-example>
-    <fdp-platform-table-filterable-example></fdp-platform-table-filterable-example>
-</component-example>
-<code-example [exampleFiles]="filterableTableFiles"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="groupable" componentName="table"> Column Grouping</fd-docs-section-title>
-<description>
-    Use <code>[groupable]="true"</code> to mark a column as one that can be used to group by.
-    <br />
-    Once there is at least one a groupable column the Group dialog option appears in the table toolbar. To enable
-    grouping by some column you can use the column header menu or the Group dialog. In order to ungroup you should use
-    only the Group dialog.
-    <br />
-    In this example <code>Name</code> and <code>Status</code> columns can be used to group by.
-</description>
-<component-example>
-    <fdp-platform-table-groupable-example></fdp-platform-table-groupable-example>
-</component-example>
-<code-example [exampleFiles]="groupableTableFiles"></code-example>
 
 <separator></separator>
 
@@ -211,30 +95,6 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="page-scrolling" componentName="table"> Page Scrolling</fd-docs-section-title>
-<description>
-    In order to get table page scrolling use the next options:
-    <ul>
-        <li>Add <code>[pageScrolling]="true"</code> to trigger a fetch once the table is scrolled to the bottom.</li>
-        <li>
-            Add <code>[bodyHeight]="tableBodyHeight"</code> to restrict a table body height so the vertical scrollbar
-            can appear.
-        </li>
-        <li>Add <code>[pageSize]="itemsPerPage"</code> to specify how many items there are per page.</li>
-        <li>
-            Add <code>[pageScrollingThreshold]="thresholdInPx"</code> to indicate the threshold between the height of
-            the remaining content and the need to load new data.
-        </li>
-    </ul>
-    Consider that columns width automatically calculates only after the first set of data comes to the component.
-</description>
-<component-example>
-    <fdp-platform-table-page-scrolling-example></fdp-platform-table-page-scrolling-example>
-</component-example>
-<code-example [exampleFiles]="pageScrollingTableFiles"></code-example>
-
-<separator></separator>
-
 <fd-docs-section-title id="initial-state" componentName="table"> Initial State</fd-docs-section-title>
 <description>
     To setup initial state use next properties:
@@ -263,163 +123,31 @@
 
     <h3>Drag & Drop</h3>
 
-    Tree table supports Drag & Drop by default, so rows can be moved & placed inside other rows. Please consider that
-    Drag & Drop isn't possible yet with <code>[sortable]</code>, <code>[groupable]</code>,
-    <code>[filterable]</code> columns and <code>[freezeColumnsTo]</code> enabled.
+    <p>
+        Tree table supports Drag & Drop by default, so rows can be moved & placed inside other rows. Please consider
+        that Drag & Drop isn't possible yet with <code>[sortable]</code>, <code>[groupable]</code>,
+        <code>[filterable]</code> columns and <code>[freezeColumnsTo]</code> enabled.
+    </p>
 
     <br />
 
-    Drag and drop is available via keyboard by focusing a row or cell, holding the alt/option key and using the up or
-    down arrows.
+    <p>
+        Drag and drop is available via keyboard by focusing a row or cell, holding the alt/option key and using the up
+        or down arrows.
+    </p>
+    <p>
+        By default, keyboard drag & drop works in shift mode, which means that focused item will ne moved on the same
+        level as it's siblings.
+    </p>
+    <p>
+        By pressing alt/option + shift key, drag & drop will use 'group' mode with the next sibling based on the
+        direction of drag & drop.
+    </p>
 </description>
 <component-example>
     <fdp-platform-table-tree-example></fdp-platform-table-tree-example>
 </component-example>
 <code-example [exampleFiles]="treeTableFiles"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="virtual-scroll" componentName="table"> Virtual Scroll</fd-docs-section-title>
-<p>
-    When dealing with large amounts of data, it is recommended to use virtual scrolling to improve performance. To
-    enable Virtual Scroll, use the following properties:
-</p>
-
-<ul>
-    <li><code>[virtualScroll]="true"</code> - enables virtual scroll</li>
-    <li><code>[bodyHeight]="value"</code> - sets the height of the table body (viewport)</li>
-    <li>
-        <code>[rowHeight]="value"</code> - sets the height of the table row if it is different from default for the
-        current content density
-    </li>
-</ul>
-
-<p>
-    Additionally, you may set the <code>renderAhead</code> input property to specify how many rows should be rendered
-    ahead of the current viewport. Default is 20.
-</p>
-<description> </description>
-<component-example>
-    <fdp-platform-table-virtual-scroll-example></fdp-platform-table-virtual-scroll-example>
-</component-example>
-<code-example [exampleFiles]="virtualScrollTableFiles"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="p13" componentName="table"> Personalization Dialog.</fd-docs-section-title>
-<description>
-    The p13n dialog control provides a dialog for tables that allows the user to personalize one or more of the
-    following attributes:
-    <ul>
-        <li>Columns (visibility and order of columns)</li>
-        <li>Sorting by multiple columns</li>
-        <li>Filtering by multiple columns</li>
-        <li>Grouping by multiple columns</li>
-    </ul>
-</description>
-
-<fd-docs-section-title id="p13-table-columns" componentName="table">
-    Table columns visibility and order
-</fd-docs-section-title>
-<description>
-    To make columns settings available connect
-    <code>&lt;fdp-table-p13-dialog [table]="table"&gt;&lt;/fdp-table-p13-dialog&gt;</code> to a table. Once there is at
-    least one <code>fdp-column</code> definition the columns settings button will be available in the table toolbar.
-</description>
-<component-example>
-    <fdp-platform-table-p13-columns-example></fdp-platform-table-p13-columns-example>
-</component-example>
-<code-example [exampleFiles]="p13ColumnsFiles"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="p13-table-sort" componentName="table"> Sorting by multiple columns</fd-docs-section-title>
-<description>
-    <ul>
-        <li>
-            Connect your table to p13 columns dialog by adding
-            <code
-                >&lt;fdp-table-p13-dialog
-                [table]="table"&gt;&lt;fdp-table-p13n-sort&gt;&lt;/fdp-table-p13n-sort&gt;&lt;/fdp-table-p13-dialog&gt;</code
-            >
-        </li>
-        <li>Add <code>&lt;fdp-column [sortable]="true"&gt;</code> option to mark a column as sortable.</li>
-    </ul>
-    The order of the criteria is exactly the same as the order in which sorting is applied to the table.
-</description>
-<component-example>
-    <fdp-platform-table-p13-sort-example></fdp-platform-table-p13-sort-example>
-</component-example>
-<code-example [exampleFiles]="p13SortFiles"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="p13-table-filter" componentName="table">
-    Filtering by multiple columns
-</fd-docs-section-title>
-<description>
-    <ul>
-        <li>
-            Connect your table to p13 filtering dialog by adding
-            <code
-                >&lt;fdp-table-p13-dialog
-                [table]="table"&gt;&lt;fdp-table-p13n-filter&gt;&lt;/fdp-table-p13n-filter&gt;&lt;/fdp-table-p13-dialog&gt;</code
-            >
-        </li>
-        <li>Add <code>&lt;fdp-column [filterable]="true"&gt;</code> option to mark a column as filterable.</li>
-        <li>
-            Add column data type <code>&lt;fdp-column dataType="string | number | date | boolean"&gt;</code>
-            to show corresponding filtering ui.
-        </li>
-    </ul>
-    Please note once the <code>fdp-table-p13n-filter</code> is connected to a table the filter option is not available
-    from column header dialog menu.
-</description>
-<component-example>
-    <fdp-platform-table-p13-filter-example></fdp-platform-table-p13-filter-example>
-</component-example>
-<code-example [exampleFiles]="p13FilterFiles"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="p13-table-group" componentName="table"> Grouping by multiple columns</fd-docs-section-title>
-<description>
-    <ul>
-        <li>
-            Connect your table to p13 group dialog by adding
-            <code
-                >&lt;fdp-table-p13-dialog
-                [table]="table"&gt;&lt;fdp-table-p13n-group&gt;&lt;/fdp-table-p13n-group&gt;&lt;/fdp-table-p13-dialog&gt;</code
-            >
-        </li>
-        <li>Add <code>&lt;fdp-column [groupable]="true"&gt;</code> option to mark a column as groupable.</li>
-    </ul>
-</description>
-<component-example>
-    <fdp-platform-table-p13-group-example></fdp-platform-table-p13-group-example>
-</component-example>
-<code-example [exampleFiles]="p13GroupFiles"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title id="navigatable-row" componentName="table"> Navigatable rows</fd-docs-section-title>
-<description>
-    This example shows navigatable rows.
-
-    <ul>
-        <li>
-            Use <code>[rowNavigatable]="true"</code> input property on the table to make rows navigatable. Pass boolean
-            to change navigatable state for all rows. Pass string with the field of the rows which will be used to
-            calculate row's navigatable state.
-        </li>
-        <li>Use <code>[highlightNavigatedRow]="true"</code> to highlight currently navigated row.</li>
-        <li>Event <code>(rowNavigate)</code> is emitted when row gets activated.</li>
-    </ul>
-</description>
-<component-example>
-    <fdp-platform-table-navigatable-row-indicator-example></fdp-platform-table-navigatable-row-indicator-example>
-</component-example>
-<code-example [exampleFiles]="navitableRowFiles"></code-example>
 
 <separator></separator>
 
@@ -497,7 +225,7 @@
     <fdp-platform-table-no-outer-borders-example></fdp-platform-table-no-outer-borders-example>
 </component-example>
 
-<code-example [exampleFiles]="noDataCustomMessageFiles"></code-example>
+<code-example [exampleFiles]="noOuterBordersFiles"></code-example>
 
 <separator></separator>
 

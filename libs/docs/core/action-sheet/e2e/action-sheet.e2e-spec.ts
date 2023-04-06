@@ -19,8 +19,14 @@ import {
 
 describe('Action sheet test suite', () => {
     const actionSheetPage = new ActionSheetPo();
-    const { actionSheetMenuButton, actionSheetList, actionSheetListItems, actionSheetListItemButtons, alertMessage } =
-        actionSheetPage;
+    const {
+        actionSheetMenuButton,
+        actionSheetList,
+        actionSheetListItems,
+        actionSheetListItemButtons,
+        alertMessage,
+        actionSheetBodyContainer
+    } = actionSheetPage;
 
     beforeAll(async () => {
         await actionSheetPage.open();
@@ -43,7 +49,7 @@ describe('Action sheet test suite', () => {
 
     it('should check compact', async () => {
         await click(actionSheetMenuButton, 1);
-        await expect(await getElementClass(actionSheetListItemButtons)).toContain(compactValue);
+        await expect(await getElementClass(actionSheetBodyContainer)).toContain(compactValue);
     });
 
     it('should check alert appears after selection for default action sheet', async () => {

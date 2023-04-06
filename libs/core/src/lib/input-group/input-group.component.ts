@@ -16,6 +16,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { filter, fromEvent, map, merge, Observable, Subject, takeUntil, debounceTime } from 'rxjs';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -48,6 +49,7 @@ let addOnInputRandomId = 0;
             useExisting: forwardRef(() => InputGroupComponent),
             multi: true
         },
+        contentDensityObserverProviders(),
         registerFormItemControl(InputGroupComponent)
     ],
     encapsulation: ViewEncapsulation.None,
@@ -98,7 +100,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     @Input()
     buttonFocusable = true;
 
-    /** The type of the input, used in Input Group. By default value is set to 'text' */
+    /** The type of the input, used in Input Group. By default, value is set to 'text' */
     @Input()
     type = 'text';
 
@@ -242,7 +244,13 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     }
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(
+        private readonly _elementRef: ElementRef,
+        private readonly _changeDetectorRef: ChangeDetectorRef,
+        private _contentDensityObserver: ContentDensityObserver
+    ) {
+        this._contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     get elementRef(): ElementRef<HTMLElement> {

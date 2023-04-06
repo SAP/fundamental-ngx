@@ -1,0 +1,95 @@
+<fd-docs-section-title id="p13" componentName="table"> Personalization Dialog.</fd-docs-section-title>
+<description>
+    The p13n dialog control provides a dialog for tables that allows the user to personalize one or more of the
+    following attributes:
+    <ul>
+        <li>Columns (visibility and order of columns)</li>
+        <li>Sorting by multiple columns</li>
+        <li>Filtering by multiple columns</li>
+        <li>Grouping by multiple columns</li>
+    </ul>
+</description>
+
+<fd-docs-section-title id="p13-table-columns" componentName="table">
+    Table columns visibility and order
+</fd-docs-section-title>
+<description>
+    To make columns settings available connect
+    <code>&lt;fdp-table-p13-dialog [table]="table"&gt;&lt;/fdp-table-p13-dialog&gt;</code> to a table. Once there is at
+    least one <code>fdp-column</code> definition the columns settings button will be available in the table toolbar.
+</description>
+<component-example>
+    <fdp-platform-table-p13-columns-example></fdp-platform-table-p13-columns-example>
+</component-example>
+<code-example [exampleFiles]="p13ColumnsFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="p13-table-sort" componentName="table"> Sorting by multiple columns</fd-docs-section-title>
+<description>
+    <ul>
+        <li>
+            Connect your table to p13 columns dialog by adding
+            <code
+                >&lt;fdp-table-p13-dialog
+                [table]="table"&gt;&lt;fdp-table-p13n-sort&gt;&lt;/fdp-table-p13n-sort&gt;&lt;/fdp-table-p13-dialog&gt;</code
+            >
+        </li>
+        <li>Add <code>&lt;fdp-column [sortable]="true"&gt;</code> option to mark a column as sortable.</li>
+    </ul>
+    The order of the criteria is exactly the same as the order in which sorting is applied to the table.
+</description>
+<component-example>
+    <fdp-platform-table-p13-sort-example></fdp-platform-table-p13-sort-example>
+</component-example>
+<code-example [exampleFiles]="p13SortFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="p13-table-filter" componentName="table">
+    Filtering by multiple columns
+</fd-docs-section-title>
+<description>
+    <ul>
+        <li>
+            Connect your table to p13 filtering dialog by adding
+            <code
+                >&lt;fdp-table-p13-dialog
+                [table]="table"&gt;&lt;fdp-table-p13n-filter&gt;&lt;/fdp-table-p13n-filter&gt;&lt;/fdp-table-p13-dialog&gt;</code
+            >
+        </li>
+        <li>Add <code>&lt;fdp-column [filterable]="true"&gt;</code> option to mark a column as filterable.</li>
+        <li>
+            Add column data type <code>&lt;fdp-column dataType="string | number | date | boolean"&gt;</code>
+            to show corresponding filtering ui.
+        </li>
+    </ul>
+    Please note once the <code>fdp-table-p13n-filter</code> is connected to a table the filter option is not available
+    from column header dialog menu.
+</description>
+<component-example>
+    <fdp-platform-table-p13-filter-example></fdp-platform-table-p13-filter-example>
+</component-example>
+<code-example [exampleFiles]="p13FilterFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="p13-table-group" componentName="table"> Grouping by multiple columns</fd-docs-section-title>
+<description>
+    <ul>
+        <li>
+            Connect your table to p13 group dialog by adding
+            <code
+                >&lt;fdp-table-p13-dialog
+                [table]="table"&gt;&lt;fdp-table-p13n-group&gt;&lt;/fdp-table-p13n-group&gt;&lt;/fdp-table-p13-dialog&gt;</code
+            >
+        </li>
+        <li>Add <code>&lt;fdp-column [groupable]="true"&gt;</code> option to mark a column as groupable.</li>
+    </ul>
+</description>
+<component-example>
+    <fdp-platform-table-p13-group-example></fdp-platform-table-p13-group-example>
+</component-example>
+<code-example [exampleFiles]="p13GroupFiles"></code-example>
+
+<separator></separator>
