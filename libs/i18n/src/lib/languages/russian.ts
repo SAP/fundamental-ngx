@@ -53,6 +53,13 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         listItemStatusLocked: 'Заблокировано',
         listItemStatusDraft: 'Черновик'
     },
+    coreList: {
+        listItem: 'List Item',
+        selected: 'Selected',
+        notSelected: 'Not Selected',
+        navigated: 'Navigated',
+        navigable: 'Navigable'
+    },
     coreMessageStrip: {
         dismissLabel: 'Закрыть'
     },

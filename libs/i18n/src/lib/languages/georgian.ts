@@ -39,6 +39,13 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         listItemStatusLocked: 'დაბლოკილი',
         listItemStatusDraft: 'დაუსრულებელი'
     },
+    coreList: {
+        listItem: 'List Item',
+        selected: 'Selected',
+        notSelected: 'Not Selected',
+        navigated: 'Navigated',
+        navigable: 'Navigable'
+    },
     coreMessageStrip: {
         dismissLabel: 'გაუქმება'
     },

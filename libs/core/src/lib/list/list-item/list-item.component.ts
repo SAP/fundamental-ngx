@@ -25,7 +25,7 @@ import {
 import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
 import { FD_RADIO_BUTTON_COMPONENT, RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { ListLinkDirective } from '../directives/list-link.directive';
-import { merge, Subject } from 'rxjs';
+import { firstValueFrom, merge, Observable, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/cdk/utils';
@@ -35,6 +35,7 @@ import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/butt
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ListUnreadIndicator } from '../list-unread-indicator.interface';
 import { FD_LIST_LINK_DIRECTIVE, FD_LIST_UNREAD_INDICATOR } from '../tokens';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 
 let listItemUniqueId = 0;
 
@@ -113,6 +114,10 @@ export class ListItemComponent
     @Input()
     selectedListItemScreenReaderText: string;
 
+    /** Text to be read by screen reader for not selected list item */
+    @Input()
+    notSelectedListItemScreenReaderText: string;
+
     /** Text to be read by screen reader for navigated list item */
     @Input()
     navigatedListItemScreenReaderText: string;
@@ -174,6 +179,9 @@ export class ListItemComponent
     private _checkbox: CheckboxComponent;
 
     /** @hidden */
+    private _translationResolver = new TranslationResolver();
+
+    /** @hidden */
     screenReaderContent = '';
 
     /** @hidden group header id, that is being set by parent list component */
@@ -208,6 +216,7 @@ export class ListItemComponent
     constructor(
         public readonly elementRef: ElementRef,
         private readonly _changeDetectorRef: ChangeDetectorRef,
+        @Inject(FD_LANGUAGE) private readonly _language: Observable<FdLanguage>,
         @Optional() @Inject(FD_LIST_UNREAD_INDICATOR) private readonly _unreadIndicator?: ListUnreadIndicator
     ) {
         super(elementRef);
@@ -325,16 +334,33 @@ export class ListItemComponent
     }
 
     /** @hidden */
-    private _updateScreenReaderText(): void {
-        let content = '';
+    private async _updateScreenReaderText(): Promise<void> {
+        const lang = await firstValueFrom(this._language);
+        let content = this._translationResolver.resolve(lang, 'coreList.listItem');
         if (this.selected) {
-            content += this._addTextPart(content, this.selectedListItemScreenReaderText ?? 'selected');
+            content += this._addTextPart(
+                content,
+                this.selectedListItemScreenReaderText ?? this._translationResolver.resolve(lang, 'coreList.selected')
+            );
+        } else {
+            content += this._addTextPart(
+                content,
+                this.notSelectedListItemScreenReaderText ??
+                    this._translationResolver.resolve(lang, 'coreList.notSelected')
+            );
         }
         if (this.linkDirectives?.some((d) => d.navigated)) {
-            content += this._addTextPart(content, this.navigatedListItemScreenReaderText ?? 'navigated');
+            content += this._addTextPart(
+                content,
+                this.navigatedListItemScreenReaderText ?? this._translationResolver.resolve(lang, 'coreList.navigated')
+            );
         }
         if (this.linkDirectives?.some((d) => d.navigationIndicator)) {
-            content += this._addTextPart(content, this.navigatableListItemScreenReaderText ?? 'navigatable');
+            content += this._addTextPart(
+                content,
+                this.navigatableListItemScreenReaderText ??
+                    this._translationResolver.resolve(lang, 'coreList.navigable')
+            );
         }
         if (content.startsWith(', ')) {
             content = content.substring(2);

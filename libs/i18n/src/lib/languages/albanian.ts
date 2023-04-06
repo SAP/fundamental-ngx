@@ -39,6 +39,13 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         listItemStatusLocked: 'I kyçur',
         listItemStatusDraft: 'Draft'
     },
+    coreList: {
+        listItem: 'List Item',
+        selected: 'Selected',
+        notSelected: 'Not Selected',
+        navigated: 'Navigated',
+        navigable: 'Navigable'
+    },
     coreMessageStrip: {
         dismissLabel: 'Largoje'
     },

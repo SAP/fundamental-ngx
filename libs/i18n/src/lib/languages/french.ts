@@ -39,6 +39,13 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         listItemStatusLocked: 'Bloqué',
         listItemStatusDraft: 'Brouillon'
     },
+    coreList: {
+        listItem: 'List Item',
+        selected: 'Selected',
+        notSelected: 'Not Selected',
+        navigated: 'Navigated',
+        navigable: 'Navigable'
+    },
     coreMessageStrip: {
         dismissLabel: 'Rejeter'
     },

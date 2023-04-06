@@ -39,6 +39,13 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         listItemStatusLocked: 'Kilitli',
         listItemStatusDraft: 'Taslak'
     },
+    coreList: {
+        listItem: 'List Item',
+        selected: 'Selected',
+        notSelected: 'Not Selected',
+        navigated: 'Navigated',
+        navigable: 'Navigable'
+    },
     coreMessageStrip: {
         dismissLabel: 'Azletmek'
     },
