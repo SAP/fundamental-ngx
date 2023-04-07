@@ -279,6 +279,10 @@ export class MultiInputComponent
     @Input()
     title: string;
 
+    /** Whether list item options should be rendered as byline. */
+    @Input()
+    byline = false;
+
     /** Whether the autocomplete should be enabled; Enabled by default */
     @Input()
     autoComplete = true;
