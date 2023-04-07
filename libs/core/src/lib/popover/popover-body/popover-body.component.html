@@ -8,12 +8,7 @@
     [style.min-width.px]="_popoverBodyMinWidth"
     [style.width.px]="_popoverBodyWidth"
 >
-    <div
-        fd-scrollbar
-        class="fd-popover__wrapper"
-        [overrideTabindex]="_tabbableScrollbar"
-        *ngIf="!_disableScrollbar; else renderer"
-    >
+    <div class="fd-popover__wrapper" *ngIf="!_disableScrollbar; else renderer">
         <ng-container *ngTemplateOutlet="renderer"></ng-container>
     </div>
 </div>
