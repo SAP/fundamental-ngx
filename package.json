@@ -84,7 +84,7 @@
     "@angular-eslint/template-parser": "15.1.0",
     "@angular/cli": "15.1.2",
     "@angular/compiler-cli": "15.1.1",
-    "@angular/language-service": "15.1.1",
+    "@angular/language-service": "15.2.6",
     "@angularclass/hmr": "3.0.0",
     "@babel/core": "7.21.3",
     "@babel/runtime": "7.21.0",
