@@ -1438,6 +1438,58 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     // Private API
 
     /** @hidden */
+    _scrollToOverlappedCell(): void {
+        const tableScrollableEl = this.tableScrollable.getElementRef().nativeElement;
+
+        if (
+            (this._freezableColumns.size || this._freezableEndColumns.size) &&
+            tableScrollableEl.scrollWidth > tableScrollableEl.clientWidth
+        ) {
+            const activeEl = document.activeElement;
+            if (
+                activeEl &&
+                !(
+                    activeEl.classList.contains('fd-table__cell--fixed') ||
+                    activeEl.classList.contains('fd-table__cell--fixed-end')
+                )
+            ) {
+                if (this._freezableColumns.size && !this._freezableEndColumns.size) {
+                    activeEl.scrollIntoView({ block: 'nearest', inline: 'end' });
+                } else if (!this._freezableColumns.size && this._freezableEndColumns.size) {
+                    activeEl.scrollIntoView({ block: 'nearest', inline: 'center' });
+                } else if (this._freezableColumns.size && this._freezableEndColumns.size) {
+                    // check to see if the active element is obstructed by another element
+                    const activeElLeft = activeEl.getBoundingClientRect().left;
+                    const activeElTop = activeEl.getBoundingClientRect().top;
+                    const topElementFromLeft = document.elementFromPoint(activeElLeft, activeElTop);
+                    // if the activeEl is overlapped
+                    if (
+                        topElementFromLeft &&
+                        !activeEl.isSameNode(topElementFromLeft) &&
+                        topElementFromLeft.classList.contains('fd-table__cell--fixed-end')
+                    ) {
+                        const topElementX = topElementFromLeft.getBoundingClientRect().left;
+                        const leftVal = this._rtl
+                            ? (activeElLeft + activeEl.getBoundingClientRect().width - topElementX) * -1
+                            : activeElLeft + activeEl.getBoundingClientRect().width - topElementX;
+                        tableScrollableEl.scrollBy({ top: 0, left: leftVal });
+                    } else if (
+                        topElementFromLeft &&
+                        !activeEl.isSameNode(topElementFromLeft) &&
+                        topElementFromLeft.classList.contains('fd-table__cell--fixed')
+                    ) {
+                        const topElementX = topElementFromLeft.getBoundingClientRect().right;
+                        const leftVal = this._rtl
+                            ? (activeElLeft - activeEl.getBoundingClientRect().width - topElementX) * -1
+                            : activeElLeft - activeEl.getBoundingClientRect().width - topElementX;
+                        tableScrollableEl.scrollBy({ top: 0, left: leftVal });
+                    }
+                }
+            }
+        }
+    }
+
+    /** @hidden */
     _isColumnHasHeaderMenu(column: TableColumn): boolean {
         return (
             column.sortable ||
@@ -1744,8 +1796,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         nestingLevel: number | null
     ): Promise<void> {
         this._focusedCellPosition = { rowIndex: position.rowIndex, colIndex: position.colIndex };
-
-        this._scrollToOverlappedCell();
 
         if (this.cellFocusedEventAnnouncer) {
             this._liveAnnouncer.clear();
@@ -2869,57 +2919,5 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             row: ${position.rowIndex + 1} of ${position.totalRows}` +
             (nestingLevel !== null ? `, level: ${nestingLevel + 1}` : '')
         );
-    }
-
-    /** @hidden */
-    private _scrollToOverlappedCell(): void {
-        const tableScrollableEl = this.tableScrollable.getElementRef().nativeElement;
-
-        if (
-            (this._freezableColumns.size || this._freezableEndColumns.size) &&
-            tableScrollableEl.scrollWidth > tableScrollableEl.clientWidth
-        ) {
-            const activeEl = document.activeElement;
-            if (
-                activeEl &&
-                !(
-                    activeEl.classList.contains('fd-table__cell--fixed') ||
-                    activeEl.classList.contains('fd-table__cell--fixed-end')
-                )
-            ) {
-                if (this._freezableColumns.size && !this._freezableEndColumns.size) {
-                    activeEl.scrollIntoView({ block: 'nearest', inline: 'end' });
-                } else if (!this._freezableColumns.size && this._freezableEndColumns.size) {
-                    activeEl.scrollIntoView({ block: 'nearest', inline: 'center' });
-                } else if (this._freezableColumns.size && this._freezableEndColumns.size) {
-                    // check to see if the active element is obstructed by another element
-                    const activeElLeft = activeEl.getBoundingClientRect().left;
-                    const activeElTop = activeEl.getBoundingClientRect().top;
-                    const topElementFromLeft = document.elementFromPoint(activeElLeft, activeElTop);
-                    // if the activeEl is overlapped
-                    if (
-                        topElementFromLeft &&
-                        !activeEl.isSameNode(topElementFromLeft) &&
-                        topElementFromLeft.classList.contains('fd-table__cell--fixed-end')
-                    ) {
-                        const topElementX = topElementFromLeft.getBoundingClientRect().left;
-                        const leftVal = this._rtl
-                            ? (activeElLeft + activeEl.getBoundingClientRect().width - topElementX) * -1
-                            : activeElLeft + activeEl.getBoundingClientRect().width - topElementX;
-                        tableScrollableEl.scrollBy({ top: 0, left: leftVal });
-                    } else if (
-                        topElementFromLeft &&
-                        !activeEl.isSameNode(topElementFromLeft) &&
-                        topElementFromLeft.classList.contains('fd-table__cell--fixed')
-                    ) {
-                        const topElementX = topElementFromLeft.getBoundingClientRect().right;
-                        const leftVal = this._rtl
-                            ? (activeElLeft - activeEl.getBoundingClientRect().width - topElementX) * -1
-                            : activeElLeft - activeEl.getBoundingClientRect().width - topElementX;
-                        tableScrollableEl.scrollBy({ top: 0, left: leftVal });
-                    }
-                }
-            }
-        }
     }
 }

@@ -108,6 +108,8 @@
                             [class.fd-table__item--clickable]="_isColumnHasHeaderMenu(column)"
                             [cellFocusedEventAnnouncer]="null"
                             (cellFocused)="_onCellFocused($event, column.label, null)"
+                            (keydown.arrowLeft)="_scrollToOverlappedCell()"
+                            (keydown.arrowRight)="_scrollToOverlappedCell()"
                         >
                             <ng-container
                                 *ngTemplateOutlet="tableHeaderCellTemplate; context: { column: column }"
@@ -312,6 +314,8 @@
                             (cellFocused)="_onCellFocused($event, column?.label ?? '', isTreeTable ? row.level : null)"
                             (click)="_onCellClick(colIdx, row)"
                             (keydown.enter)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
+                            (keydown.arrowLeft)="_scrollToOverlappedCell()"
+                            (keydown.arrowRight)="_scrollToOverlappedCell()"
                         >
                             <ng-container
                                 *ngTemplateOutlet="
