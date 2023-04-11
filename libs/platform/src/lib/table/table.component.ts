@@ -49,7 +49,7 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
-import { FDP_PRESET_MANAGED_COMPONENT, isDataSource, isString } from '@fundamental-ngx/platform/shared';
+import { FDP_PRESET_MANAGED_COMPONENT, isDataSource, isJsObject, isString } from '@fundamental-ngx/platform/shared';
 import { cloneDeep, get } from 'lodash-es';
 import set from 'lodash-es/set';
 import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
@@ -82,6 +82,7 @@ import {
     FilterChange,
     FreezeChange,
     GroupChange,
+    isTableRow,
     PlatformTableManagedPreset,
     RowComparator,
     SaveRowsEvent,
@@ -2073,30 +2074,35 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _createTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
+        const item = source[0] as any;
+
+        if (isTableRow(item)) {
+            return source as TableRow[];
+        }
+
         if (this.isTreeTable) {
             return this._createTreeTableRowsByDataSourceItems(source);
         }
-
-        const selectedRowsMap = this._getSelectionStatusByRowValue(source);
-
-        return source.map((item: T, index: number) => {
-            const isNewItem = this._addedItems.includes(item);
-            const row = newTableRow({
-                type: TableRowType.ITEM,
-                checked: item[this.selectedKey] ?? !!selectedRowsMap.get(item),
-                index,
-                value: item
-            });
-            row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
-            row.state = isNewItem ? 'editable' : 'readonly';
-            return row;
-        });
+        return this._convertObjectsToTableRows(source);
     }
 
     /** @hidden */
     private _createTreeTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
-        const rows: TableRow<T>[] = [];
+        const item = source[0] as any;
 
+        if (isJsObject(item)) {
+            return this._convertTreeObjectsToTableRows(source);
+        }
+        return [];
+    }
+
+    /**
+     * Converts data to TableRow interface
+     *
+     * @hidden
+     */
+    private _convertTreeObjectsToTableRows(source: T[]): TableRow<T>[] {
+        const rows: TableRow<T>[] = [];
         const selectedRowsMap = this._getSelectionStatusByRowValue(source);
 
         source.forEach((item: T, index: number) => {
@@ -2123,7 +2129,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                     c.level = c.parent.level + 1;
                     c.hidden = true;
                 });
-
                 row.children.push(...children);
 
                 rows.push(...children);
@@ -2131,6 +2136,27 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         });
 
         return rows;
+    }
+
+    /**
+     * Converts data to TableRow interface
+     *
+     * @hidden
+     */
+    private _convertObjectsToTableRows(source: T[]): TableRow<T>[] {
+        const selectedRowsMap = this._getSelectionStatusByRowValue(source);
+        return source.map((item: T, index: number) => {
+            const isNewItem = this._addedItems.includes(item);
+            const row = newTableRow({
+                type: TableRowType.ITEM,
+                checked: item[this.selectedKey] ?? !!selectedRowsMap.get(item),
+                index,
+                value: item
+            });
+            row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
+            row.state = isNewItem ? 'editable' : 'readonly';
+            return row;
+        });
     }
 
     /**

@@ -69,3 +69,8 @@ export interface TableRow<T = any> {
 }
 
 export type TableRowClass<T = any> = string | ((row: T) => string);
+
+/** @hidden */
+export function isTableRow<T = any>(row: TableRow<T>): row is TableRow<T> {
+    return row && row.type !== undefined && row.value !== undefined && row.index >= 0 && row.state !== undefined;
+}
