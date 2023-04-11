@@ -1,3 +1,12 @@
+## [0.40.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.2...v0.40.1-rc.3) (2023-04-11)
+
+
+### Bug Fixes
+
+* **cx:** side nav updates ([#9570](https://github.com/SAP/fundamental-ngx/issues/9570)) ([449abbc](https://github.com/SAP/fundamental-ngx/commit/449abbc9ca2a934ac2510a4bb53a29c38936582f))
+
+
+
 ## [0.40.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.1...v0.40.1-rc.2) (2023-04-10)
 
 
