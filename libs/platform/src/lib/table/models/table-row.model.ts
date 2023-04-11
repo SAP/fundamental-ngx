@@ -6,61 +6,66 @@ export type TableRowState = 'editable' | 'readonly';
  * Table row entity
  * Used to represent table row in the template
  */
-export class TableRow<T = any> {
+export interface TableRow<T = any> {
     /**
-     * Table row entity
-     * Used to represent table row in the template
+     * Row semantic type
      */
-    constructor(
-        /**
-         * Row semantic type
-         */
-        public type: TableRowType.ITEM | TableRowType.GROUP | TableRowType.TREE,
-        /**
-         * Indicates if row is selected
-         */
-        public checked: boolean,
-        /**
-         * Index of a "value" in data source list
-         */
-        public index: number,
-        /**
-         * Data model it represents
-         */
-        public readonly value: T,
-        /**
-         * Reference to a parent if any
-         */
-        public parent: TableRow | null = null,
-        /**
-         * Nesting level
-         */
-        public level = 0,
-        /**
-         * Expandable
-         */
-        public expandable = false,
-        /**
-         * Expanded/Collapsed
-         */
-        public expanded = true,
-        /**
-         * If item should be hidden. Used to skip rendering
-         */
-        public hidden = false,
-        /**
-         * If the row is navigatable
-         */
-        public navigatable = false,
-        /**
-         * Row state: readonly or editable.
-         */
-        public state: TableRowState = 'readonly',
-        /**
-         * Children table rows.
-         */
-        public children: TableRow[] = []
-    ) {}
+    type: TableRowType.ITEM | TableRowType.GROUP | TableRowType.TREE;
+
+    /**
+     * Indicates if row is selected
+     */
+    checked: boolean;
+
+    /**
+     * Index of a "value" in data source list
+     */
+    index: number;
+
+    /**
+     * Data model it represents
+     */
+    readonly value: T;
+
+    /**
+     * Reference to a parent if any
+     */
+    parent: TableRow | null;
+
+    /**
+     * Nesting level
+     */
+    level: number;
+
+    /**
+     * Expandable
+     */
+    expandable: boolean;
+
+    /**
+     * Expanded/Collapsed
+     */
+    expanded: boolean;
+
+    /**
+     * If item should be hidden. Used to skip rendering
+     */
+    hidden: boolean;
+
+    /**
+     * If the row is navigatable
+     */
+    navigatable: boolean;
+
+    /**
+     * Row state: readonly or editable.
+     */
+    state: TableRowState;
+
+    /**
+     * Children table rows.
+     */
+    children: TableRow[];
 }
 
 export type TableRowClass<T = any> = string | ((row: T) => string);

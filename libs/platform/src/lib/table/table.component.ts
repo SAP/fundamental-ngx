@@ -106,6 +106,7 @@ import { TableResponsiveService } from './table-responsive.service';
 import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
 
 import { TableService } from './table.service';
+import { newTableRow } from './utils';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -2080,12 +2081,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         return source.map((item: T, index: number) => {
             const isNewItem = this._addedItems.includes(item);
-            const row = new TableRow(
-                TableRowType.ITEM,
-                item[this.selectedKey] ?? !!selectedRowsMap.get(item),
+            const row = newTableRow({
+                type: TableRowType.ITEM,
+                checked: item[this.selectedKey] ?? !!selectedRowsMap.get(item),
                 index,
-                item
-            );
+                value: item
+            });
             row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
             row.state = isNewItem ? 'editable' : 'readonly';
             return row;
@@ -2103,12 +2104,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 Object.prototype.hasOwnProperty.call(item, this.relationKey) &&
                 Array.isArray(item[this.relationKey]) &&
                 item[this.relationKey].length;
-            const row = new TableRow(
-                hasChildren ? TableRowType.TREE : TableRowType.ITEM,
-                item[this.selectedKey] ?? !!selectedRowsMap.get(item),
+            const row = newTableRow({
+                type: hasChildren ? TableRowType.TREE : TableRowType.ITEM,
+                checked: item[this.selectedKey] ?? !!selectedRowsMap.get(item),
                 index,
-                item
-            );
+                value: item
+            });
 
             row.expanded = false;
             row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
@@ -2469,17 +2470,17 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 continue;
             }
 
-            const groupTableRow: TreeLike<TableRow<GroupTableRowValueType>> = new TableRow<GroupTableRowValueType>(
-                TableRowType.GROUP,
-                false,
-                0,
-                { field: rule.field, value, count: 0 },
+            const groupTableRow: TreeLike<TableRow<GroupTableRowValueType>> = newTableRow<GroupTableRowValueType>({
+                type: TableRowType.GROUP,
+                checked: false,
+                index: 0,
+                value: { field: rule.field, value, count: 0 },
                 parent,
                 level,
-                true /** expandable */,
-                true /** expanded */,
-                !!parent && !parent.expanded /** hidden */
-            );
+                expandable: true,
+                expanded: true,
+                hidden: !!parent && !parent.expanded
+            });
 
             // Ads group's children rows
             groupTableRow._children = this._createGroupedTableRowsTree(rules, filteredRows, groupTableRow, level + 1);
