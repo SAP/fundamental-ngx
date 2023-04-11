@@ -1,5 +1,10 @@
 @import '@fundamental-styles/cx/dist/side-nav';
 
+.fdx-side-nav--mobile {
+    width: 100%;
+    border-radius: 0;
+}
+
 .fdx-side-nav__button-container {
     background: var(--sapGroup_ContentBackground);
     position: sticky;
