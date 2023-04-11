@@ -1,0 +1,120 @@
+<fd-popover
+    [disabled]="disabled"
+    [noArrow]="true"
+    fd-table-popover
+    [focusAutoCapture]="true"
+    [focusTrapped]="true"
+    *ngIf="!popoverTemplate; else projectedPopover"
+    [triggers]="_headerPopoverTriggers"
+>
+    <fdp-list [noBorder]="true" [navigated]="true">
+        <fdp-free-content-list-item *ngFor="let item of _popoverItems$.asObservable() | async">
+            <ng-template [ngTemplateOutlet]="item" [ngTemplateOutletContext]="{ popover: popover }"></ng-template>
+        </fdp-free-content-list-item>
+    </fdp-list>
+</fd-popover>
+<ng-template #projectedPopover>
+    <ng-template
+        [ngTemplateOutlet]="popoverTemplate!"
+        [ngTemplateOutletContext]="{ $implicit: _popoverItems$.asObservable() }"
+    ></ng-template>
+</ng-template>
+
+<ng-container *ngIf="column.sortable">
+    <ng-template fdkTemplate="sortingAscPopoverItem" let-popover="popover">
+        <a
+            fd-list-link
+            [focusable]="true"
+            (click)="columnHeaderSortBy.emit({ key: column.key, direction: SORT_DIRECTION.ASC }); popover?.close()"
+            (keydown.enter)="
+                columnHeaderSortBy.emit({ key: column.key, direction: SORT_DIRECTION.ASC }); popover?.close()
+            "
+        >
+            <span fd-list-icon glyph="sort-ascending"></span>
+            <span fd-list-title>{{ 'platformTable.headerMenuSortAsc' | fdTranslate }}</span>
+        </a>
+    </ng-template>
+    <ng-template fdkTemplate="sortingDescPopoverItem" let-popover="popover">
+        <a
+            fd-list-link
+            [focusable]="true"
+            (click)="columnHeaderSortBy.emit({ key: column.key, direction: SORT_DIRECTION.DESC }); popover?.close()"
+            (keydown.enter)="
+                columnHeaderSortBy.emit({ key: column.key, direction: SORT_DIRECTION.DESC }); popover?.close()
+            "
+        >
+            <span fd-list-icon glyph="sort-descending"></span>
+            <span fd-list-title>{{ 'platformTable.headerMenuSortDesc' | fdTranslate }}</span>
+        </a>
+    </ng-template>
+</ng-container>
+
+<ng-container *ngIf="column.groupable">
+    <ng-template fdkTemplate="groupPopoverItem" let-popover="popover">
+        <a
+            fd-list-link
+            [focusable]="true"
+            (click)="columnHeaderGroupBy.emit(column.key); popover?.close()"
+            (keydown.enter)="columnHeaderGroupBy.emit(column.key); popover?.close()"
+        >
+            <span fd-list-icon></span>
+            <span fd-list-title>{{ 'platformTable.headerMenuGroup' | fdTranslate }}</span>
+        </a>
+    </ng-template>
+</ng-container>
+
+<ng-container *ngIf="column.freezable || column.endFreezable">
+    <ng-template fdkTemplate="freezePopoverItem" let-popover="popover">
+        <ng-container *ngIf="columnFrozen; else unfreezeTpl">
+            <a
+                fd-list-link
+                [focusable]="true"
+                (click)="
+                    freezeToColumn.emit({ name: column.name, endFreezable: column.endFreezable }); popover?.close()
+                "
+                (keyup.enter)="
+                    freezeToColumn.emit({ name: column.name, endFreezable: column.endFreezable }); popover?.close()
+                "
+            >
+                <span></span>
+                <span fd-list-title *ngIf="!column.endFreezable">{{
+                    'platformTable.headerMenuFreeze' | fdTranslate
+                }}</span>
+                <span fd-list-title *ngIf="column.endFreezable">{{
+                    'platformTable.headerMenuEndFreeze' | fdTranslate
+                }}</span>
+            </a>
+        </ng-container>
+        <ng-template #unfreezeTpl>
+            <a
+                fd-list-link
+                [focusable]="true"
+                (click)="unFreeze.emit({ name: column.name, endFreezable: column.endFreezable }); popover?.close()"
+                (keyup.enter)="
+                    unFreeze.emit({ name: column.name, endFreezable: column.endFreezable }); popover?.close()
+                "
+            >
+                <span></span>
+                <span fd-list-title>{{ 'platformTable.headerMenuUnfreeze' | fdTranslate }}</span>
+            </a>
+        </ng-template>
+    </ng-template>
+</ng-container>
+
+<ng-container *ngIf="column.filterable && !filteringFromHeaderDisabled">
+    <ng-template fdkTemplate="filteringPopoverItem" let-popover="popover">
+        <i fd-list-icon glyph="filter"></i>
+        <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
+            <label fd-form-label [for]="'fdp-table-column-filtering-' + column.name">{{
+                'platformTable.headerMenuFilter' | fdTranslate
+            }}</label>
+            <input
+                fd-form-control
+                [id]="'fdp-table-column-filtering-' + column.name"
+                (keydown.enter)="
+                    columnHeaderFilterBy.emit({ key: column.key, value: $any($event.target)?.value }); popover?.close()
+                "
+            />
+        </div>
+    </ng-template>
+</ng-container>

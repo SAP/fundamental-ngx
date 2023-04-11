@@ -48,7 +48,6 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
 import { FDP_PRESET_MANAGED_COMPONENT, isDataSource, isString } from '@fundamental-ngx/platform/shared';
 import { cloneDeep, get } from 'lodash-es';
@@ -552,10 +551,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     @ViewChild('tableScrollable')
     readonly tableScrollable: TableScrollable;
-
-    /** @hidden */
-    @ViewChildren('columnHeaderPopover')
-    readonly columnHeaderPopovers: QueryList<PopoverComponent>;
 
     /** @hidden */
     @ViewChild('tableContainer')
@@ -1155,9 +1150,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         this._tableService.freezeTo(columnName, end);
         this.recalculateTableColumnWidth();
-        this.columnHeaderPopovers.forEach((popover) => {
-            popover.close();
-        });
     }
 
     /** Unfreeze column */
@@ -1172,9 +1164,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         this._tableService.freezeTo(freezeToPreviousColumnName, end);
         this.recalculateTableColumnWidth();
-        this.columnHeaderPopovers.forEach((popover) => {
-            popover.close();
-        });
     }
 
     /** expand all rows */
@@ -1601,7 +1590,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         } else {
             this.group([{ field, direction: SortDirection.NONE, showAsColumn: true }]);
         }
-        this._closePopoverForColumnByFieldName(field);
     }
 
     /**
@@ -1622,7 +1610,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         } else {
             this.removeFilter([field]);
         }
-        this._closePopoverForColumnByFieldName(field);
     }
 
     /**
@@ -1631,7 +1618,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      */
     _columnHeaderSortBy(field: string, direction: SortDirection): void {
         this.sort([{ field, direction }]);
-        this._closePopoverForColumnByFieldName(field);
     }
 
     /** @hidden */
@@ -1795,14 +1781,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             setTimeout(() => {
                 (event.target as HTMLElement).focus();
             });
-        }
-    }
-
-    /** @hidden */
-    private _closePopoverForColumnByFieldName(field: string): void {
-        const index = this._visibleColumns.findIndex((c) => c.key === field);
-        if (index !== -1) {
-            this.columnHeaderPopovers.get(index)?.close();
         }
     }
 

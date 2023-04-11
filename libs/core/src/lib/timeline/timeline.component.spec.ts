@@ -60,8 +60,6 @@ describe('TimelineComponent', () => {
 
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const timelineWithHorizontal = hostEl.querySelector('.fd-timeline--horizontal');
-        // const test = hostEl.querySelector('.fd-timeline');
-        // debugger;
         expect(timelineWithHorizontal).not.toBeNull();
     });
 

@@ -26,6 +26,7 @@ import { DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import equal from 'fast-deep-equal';
 import { BasePopoverClass } from './base/base-popover.class';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { PopoverService } from './popover-service/popover.service';
@@ -76,7 +77,20 @@ export class PopoverComponent
 
     /** Reference to popover trigger element */
     @Input()
-    trigger: ElementRef;
+    set trigger(trigger: ElementRef) {
+        if (equal(trigger, this._trigger)) {
+            return;
+        }
+        this._trigger = trigger;
+        this._popoverService.updateTriggerElement(this._trigger);
+    }
+
+    get trigger(): ElementRef {
+        return this._trigger;
+    }
+
+    /** @hidden */
+    private _trigger: ElementRef;
 
     /** Whether position shouldn't change, when popover approach the corner of page */
     @Input()
