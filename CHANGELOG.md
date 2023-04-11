@@ -1,3 +1,16 @@
+## [0.40.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.1...v0.40.1-rc.2) (2023-04-10)
+
+
+
+## [0.40.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.0...v0.40.1-rc.1) (2023-04-07)
+
+
+### Features
+
+* **core:** add cva tests for segmented button ([#9639](https://github.com/SAP/fundamental-ngx/issues/9639)) ([0183cb6](https://github.com/SAP/fundamental-ngx/commit/0183cb6b545851faabbde7df8be9a06fcafa6494))
+
+
+
 ## [0.40.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.40.0...v0.40.1-rc.0) (2023-04-06)
 
 
