@@ -13,9 +13,9 @@ export interface TableRow<T = any> {
     type: TableRowType.ITEM | TableRowType.GROUP | TableRowType.TREE;
 
     /**
-     * Indicates if row is selected
+     * Indicates if row is selected. It also supports intermediate state
      */
-    checked: boolean;
+    checked: boolean | null;
 
     /**
      * Index of a "value" in data source list

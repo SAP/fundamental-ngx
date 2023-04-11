@@ -360,6 +360,22 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     isTreeTable: boolean;
 
+    /**
+     *  When True, the checked state of each tree item depends on the checked
+     *  state of its parent or direct child.
+     */
+    @Input()
+    set enableTristateMode(value: boolean) {
+        this._enableTristateMode = value;
+    }
+
+    get enableTristateMode(): boolean {
+        return this.isTreeTable && this._enableTristateMode;
+    }
+
+    /** @hidden */
+    private _enableTristateMode = false;
+
     /** Accessor to a children nodes of tree. */
     @Input()
     relationKey: string;
@@ -1526,6 +1542,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             if (this._isItemRow(row) || this._isTreeRow(row)) {
                 row.checked = checked;
                 checked ? added.push(row) : removed.push(row);
+
+                this._applyTristateSelection(row, added, removed);
             }
         });
 
@@ -2122,7 +2140,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             rows.push(row);
 
             if (hasChildren) {
-                const children = this._createTreeTableRowsByDataSourceItems(item[this.relationKey]);
+                const children = this._convertTreeObjectsToTableRows(item[this.relationKey]);
 
                 children.forEach((c) => {
                     c.parent = c.parent || row;
@@ -2166,8 +2184,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      *
      * @returns `Map` object with the `checked` status for particular source item
      */
-    private _getSelectionStatusByRowValue(source: T[]): Map<T, boolean> {
-        const rowMap = new Map<T, boolean>();
+    private _getSelectionStatusByRowValue(source: T[]): Map<T, boolean | null> {
+        const rowMap = new Map<T, boolean | null>();
         if (
             (this.selectionMode === SelectionMode.SINGLE || this.selectionMode === SelectionMode.MULTIPLE) &&
             typeof this.rowComparator === 'function'
@@ -2688,6 +2706,50 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         const totalSelected = selectableRows.filter((r) => r.checked);
         this._checkedAll = totalSelected.length === selectableRows.length && selectableRows.length !== 0;
         this._checkedAny = totalSelected.length > 0;
+    }
+
+    /**
+     * Propagates tristate selection mode to the tree. It starts with updating a state for all the parents and then
+     * to children
+     *
+     * @hidden
+     */
+    private _applyTristateSelection(row: TableRow, addedRows: TableRow<T>[], removedRows: TableRow<T>[]): void {
+        if (!this.enableTristateMode) {
+            return;
+        }
+
+        this._applySelectionToParents(row, addedRows, removedRows);
+        this._applySelectionToChildren(row, addedRows, removedRows);
+    }
+
+    /** @hidden */
+    private _applySelectionToParents(row: TableRow, addedRows: TableRow<T>[], removedRows: TableRow<T>[]): void {
+        let currentRow = row.parent;
+
+        while (currentRow) {
+            const children = this._findRowChildren(currentRow).filter((r) => r.parent === currentRow);
+            const totalChecked = children.filter((r) => r.checked);
+            const checkedAll = totalChecked.length === children.length;
+            const checkedAny = totalChecked.length > 0;
+
+            currentRow.checked = checkedAll ? true : checkedAny ? null : false;
+            currentRow.checked || currentRow.checked === null
+                ? addedRows.push(currentRow)
+                : removedRows.push(currentRow);
+
+            currentRow = currentRow.parent;
+        }
+    }
+
+    /** @hidden */
+    private _applySelectionToChildren(row: TableRow, addedRows: TableRow<T>[], removedRows: TableRow<T>[]): void {
+        const allChilren = this._findRowChildren(row);
+
+        allChilren.forEach((r) => {
+            r.checked = row.checked;
+            r.checked ? addedRows.push(row) : removedRows.push(row);
+        });
     }
 
     /** @hidden */
