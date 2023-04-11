@@ -1,4 +1,9 @@
-<div class="fd-shellbar" [class]="'fd-shellbar--' + _currentSize" [class.fd-shellbar--side-nav]="sideNav" #shellbar>
+<div
+    class="fd-shellbar"
+    [class]="'fd-shellbar--' + _currentSize + _getSideNavClass()"
+    [class.fd-shellbar--side-nav]="sideNav === true"
+    #shellbar
+>
     <div class="fd-shellbar__group fd-shellbar__group--product" *ngIf="!_hideAllComponents">
         <ng-content select="[fd-shellbar-side-nav]"></ng-content>
 
