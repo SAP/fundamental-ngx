@@ -2092,12 +2092,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _createTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
-        const item = source[0] as any;
-
-        if (isTableRow(item)) {
-            return source as TableRow[];
-        }
-
         if (this.isTreeTable) {
             return this._createTreeTableRowsByDataSourceItems(source);
         }
@@ -2108,10 +2102,35 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _createTreeTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
         const item = source[0] as any;
 
+        if (isTableRow(item)) {
+            return this._convertTreeTableRowToFlatList(source as TableRow[]);
+        }
+
         if (isJsObject(item)) {
             return this._convertTreeObjectsToTableRows(source);
         }
         return [];
+    }
+
+    /**
+     * Since we dont work with the tree, we need to convert incoming tree to
+     * flat format while maintaining original state.
+     *
+     * @hidden
+     */
+    private _convertTreeTableRowToFlatList(rows: TableRow<T>[]): TableRow<T>[] {
+        const flatList: TableRow[] = [];
+
+        for (const item of rows) {
+            item.navigatable = this._isRowNavigatable(item as T, this.rowNavigatable);
+            flatList.push(item);
+
+            if (item.children.length) {
+                item.children.forEach((c) => (c.hidden = !item.expanded));
+                flatList.push(...item.children);
+            }
+        }
+        return flatList;
     }
 
     /**
@@ -2162,6 +2181,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * @hidden
      */
     private _convertObjectsToTableRows(source: T[]): TableRow<T>[] {
+        const rowItem = source[0] as any;
+
+        if (isTableRow(rowItem)) {
+            return source as TableRow[];
+        }
+
         const selectedRowsMap = this._getSelectionStatusByRowValue(source);
         return source.map((item: T, index: number) => {
             const isNewItem = this._addedItems.includes(item);
@@ -2718,7 +2743,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         if (!this.enableTristateMode) {
             return;
         }
-
         this._applySelectionToParents(row, addedRows, removedRows);
         this._applySelectionToChildren(row, addedRows, removedRows);
     }

@@ -136,7 +136,7 @@ export const newTableRow = <T = any>(row: Partial<TableRow<T>>): TableRow<T> => 
         parent: row.parent || null,
         level: row.level || 0,
         expandable: row.expandable || false,
-        expanded: row.expanded || true,
+        expanded: row.expanded || false,
         hidden: row.hidden || false,
         navigatable: row.navigatable || false,
         state: row.state || 'readonly',
