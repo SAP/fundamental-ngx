@@ -13431,10 +13431,10 @@ ng-packagr@~15.1.0:
   optionalDependencies:
     esbuild "^0.17.0"
 
-ngx-cva-test-suite@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ngx-cva-test-suite/-/ngx-cva-test-suite-2.0.0.tgz#fed0f86c402ec7d615b8474ec0cfba415ab1693d"
-  integrity sha512-eclZJpqdieaoC17rAP7r9LriGz3gQhe1+5zhW2RCd0bKCBmt5mC9vtfPBKTe7UORT7f+qOCa1V9oXbXRUfrRRg==
+ngx-cva-test-suite@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-cva-test-suite/-/ngx-cva-test-suite-2.0.1.tgz#05a86aba7c9178a7ce775fd58fc61e43b4dc2b24"
+  integrity sha512-Q6JrUVFXq1J4AdxOoD6KMO4vTZei+l8GYQdlWbT2vExUNu7KW6bulqXsl+OBNHiQ6tj3BKS/+K42HEOuaSfNWg==
   dependencies:
     tslib "^2.3.0"
 
