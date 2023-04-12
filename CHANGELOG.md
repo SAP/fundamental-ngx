@@ -1,3 +1,16 @@
+## [0.40.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.4...v0.40.1-rc.5) (2023-04-12)
+
+
+
+## [0.40.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.3...v0.40.1-rc.4) (2023-04-12)
+
+
+### Bug Fixes
+
+* **platform:** search field input value updated when used in form tag ([#9662](https://github.com/SAP/fundamental-ngx/issues/9662)) ([9215623](https://github.com/SAP/fundamental-ngx/commit/9215623865984ae4e410467d2b6ad167ab68d1aa))
+
+
+
 ## [0.40.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.2...v0.40.1-rc.3) (2023-04-11)
 
 
