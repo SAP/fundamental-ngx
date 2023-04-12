@@ -1568,10 +1568,20 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * @hidden
      * Create table rows rearrange event
      */
-    _emitRowsRearrangeEvent(row: TableRow, previousIndex: number, newIndex: number): void {
+    _emitRowsRearrangeEvent(row: TableRow, dropRow: TableRow, event: FdDropEvent<TableRow>): void {
         const rows = this._tableRows.map(({ value }) => value);
 
-        this.rowsRearrange.emit(new TableRowsRearrangeEvent(row.value, previousIndex, newIndex, rows));
+        this.rowsRearrange.emit(
+            new TableRowsRearrangeEvent(
+                row.value,
+                dropRow.value,
+                event.draggedItemIndex,
+                event.replacedItemIndex,
+                event.insertAt,
+                event.mode,
+                rows
+            )
+        );
     }
 
     /**
@@ -1713,7 +1723,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             }
 
             this._cdr.markForCheck();
-            this._emitRowsRearrangeEvent(dragRow, event.draggedItemIndex, event.replacedItemIndex);
+            this._emitRowsRearrangeEvent(dragRow, dropRow, event);
         }
     }
 
