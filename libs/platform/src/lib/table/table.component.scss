@@ -75,30 +75,34 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
     /** Tree table Drag & Drop fixes due to the absolute positioning */
     &.fd-table--tree {
         .fd-table__body .fd-table__row {
-            &:hover {
-                cursor: grab;
-            }
+            cursor: auto;
 
-            &:active {
-                cursor: grabbing;
-            }
-
-            &.fd-dnd-on-drag {
-                &.fd-dnd-placeholder {
-                    //padding-left: 2.8rem;
-
-                    @include fd-rtl() {
-                        padding-left: 0.5rem;
-                    }
+            &--draggable {
+                &:hover {
+                    cursor: grab;
                 }
 
-                &:not(.fd-dnd-placeholder) {
-                    .fdp-table__cell--selection {
-                        top: 0;
-                        transform: translate(-100%, 0);
+                &:active {
+                    cursor: grabbing;
+                }
+
+                &.fd-dnd-on-drag {
+                    &.fd-dnd-placeholder {
+                        //padding-left: 2.8rem;
 
                         @include fd-rtl() {
-                            transform: translate(100%, 0);
+                            padding-left: 0.5rem;
+                        }
+                    }
+
+                    &:not(.fd-dnd-placeholder) {
+                        .fdp-table__cell--selection {
+                            top: 0;
+                            transform: translate(-100%, 0);
+
+                            @include fd-rtl() {
+                                transform: translate(100%, 0);
+                            }
                         }
                     }
                 }

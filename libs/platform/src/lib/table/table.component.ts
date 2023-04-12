@@ -333,6 +333,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @Hidden */
     private _noBorderY = false;
 
+    /** Whether to allow for row reordering on tree tables via drag and drop. */
+    @Input()
+    enableRowReordering = true;
+
     /** Initial visible columns. Consist of a list of unique column names */
     @Input()
     initialVisibleColumns: string[];
