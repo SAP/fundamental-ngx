@@ -1,3 +1,21 @@
+## [0.40.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.6...v0.40.1-rc.7) (2023-04-12)
+
+
+### Bug Fixes
+
+* **core:** attach popover to different container via append to ([#9634](https://github.com/SAP/fundamental-ngx/issues/9634)) ([b6a637a](https://github.com/SAP/fundamental-ngx/commit/b6a637aaaa2d6f2115b0fa894946e00dcd5b25bd))
+
+
+
+## [0.40.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.5...v0.40.1-rc.6) (2023-04-12)
+
+
+### Bug Fixes
+
+* **platform:** extend TableRowsRearrangeEvent with new data ([#9673](https://github.com/SAP/fundamental-ngx/issues/9673)) ([89df008](https://github.com/SAP/fundamental-ngx/commit/89df008b1b2cd58c0b46f926656f0d324b57be16))
+
+
+
 ## [0.40.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.4...v0.40.1-rc.5) (2023-04-12)
 
 
