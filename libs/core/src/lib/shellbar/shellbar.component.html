@@ -4,7 +4,12 @@
     [class.fd-shellbar--side-nav]="sideNav === true"
     #shellbar
 >
-    <div class="fd-shellbar__group fd-shellbar__group--product" *ngIf="!_hideAllComponents">
+    <div
+        class="fd-shellbar__group fd-shellbar__group--product"
+        [class.fd-shellbar__group--shrink]="groupFlex?.product?.shrink"
+        [class.fd-shellbar__group--basis-auto]="groupFlex?.product?.flexBasisAuto"
+        *ngIf="!_hideAllComponents"
+    >
         <ng-content select="[fd-shellbar-side-nav]"></ng-content>
 
         <ng-content select="fd-shellbar-logo"></ng-content>
@@ -20,7 +25,12 @@
     <div hidden>
         <ng-content></ng-content>
     </div>
-    <div class="fd-shellbar__group fd-shellbar__group--center fd-shellbar__group--mobile-flex" *ngIf="searchComponent">
+    <div
+        class="fd-shellbar__group fd-shellbar__group--center fd-shellbar__group--mobile-flex"
+        [class.fd-shellbar__group--shrink]="groupFlex?.search?.shrink"
+        [class.fd-shellbar__group--basis-auto]="groupFlex?.search?.flexBasisAuto"
+        *ngIf="searchComponent"
+    >
         <div class="fd-shellbar__action fd-shellbar__action--grow">
             <ng-container cdkPortalOutlet #searchPortalOutlet></ng-container>
         </div>

@@ -22,7 +22,7 @@ import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 import { CdkPortalOutlet, DomPortal } from '@angular/cdk/portal';
-import { ShellbarSizes } from '../shellbar.component';
+import { ShellbarComponent, ShellbarSizes } from '../shellbar.component';
 import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -54,7 +54,9 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.fd-shellbar__group]': 'true',
-        '[class.fd-shellbar__group--actions]': 'true'
+        '[class.fd-shellbar__group--actions]': 'true',
+        '[class.fd-shellbar__group--shrink]': '_shellbar?.groupFlex?.actions?.shrink',
+        '[class.fd-shellbar__group--basis-auto]': '_shellbar?.groupFlex?.actions?.flexBasisAuto'
     }
 })
 export class ShellbarActionsComponent implements OnDestroy {
@@ -120,6 +122,11 @@ export class ShellbarActionsComponent implements OnDestroy {
 
     /** @hidden */
     private readonly _cd = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    private readonly _shellbar = inject(ShellbarComponent, {
+        optional: true
+    });
 
     /** @hidden */
     private _searchComponent: Nullable<SearchComponent>;
