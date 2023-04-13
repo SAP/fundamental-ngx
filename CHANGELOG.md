@@ -1,3 +1,12 @@
+## [0.40.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.8...v0.40.1-rc.9) (2023-04-13)
+
+
+### Bug Fixes
+
+* **cx:** updated styles version and fixed side nav content density ([#9689](https://github.com/SAP/fundamental-ngx/issues/9689)) ([89730a8](https://github.com/SAP/fundamental-ngx/commit/89730a892d7813bb592901c8975b89189df07d68))
+
+
+
 ## [0.40.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.7...v0.40.1-rc.8) (2023-04-13)
 
 
