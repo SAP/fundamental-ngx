@@ -2826,6 +2826,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                     this.recalculateTableColumnWidth();
                     if (this._freezableColumns.size || this._freezableEndColumns.size) {
                         this._tableColumnResizeService.updateFrozenColumnsWidth();
+                        this._cdr.detectChanges();
                     }
                 })
         );
