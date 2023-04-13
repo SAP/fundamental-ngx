@@ -1,3 +1,12 @@
+## [0.40.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.7...v0.40.1-rc.8) (2023-04-13)
+
+
+### Bug Fixes
+
+* **platform:** automatically sticky table header ([#9684](https://github.com/SAP/fundamental-ngx/issues/9684)) ([c2acd56](https://github.com/SAP/fundamental-ngx/commit/c2acd56287f341ca6ae877b43627e0bb27e6eda0))
+
+
+
 ## [0.40.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.6...v0.40.1-rc.7) (2023-04-12)
 
 
