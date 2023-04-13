@@ -128,8 +128,8 @@ export class OverflowLayoutService implements OnDestroy {
         this._listenToItemResize = false;
         this._allItems = this.config.items;
 
-        let allItems = this.config.items;
-        let visibleContainerItems = this.config.visibleItems;
+        let allItems = [...this.config.items];
+        let visibleContainerItems = [...this.config.visibleItems];
 
         this._elRef.nativeElement.style.height = `${this._elRef.nativeElement.clientHeight}px`;
 
@@ -154,7 +154,7 @@ export class OverflowLayoutService implements OnDestroy {
         this._emitResult();
         const containerWidth = this._elRef.nativeElement.getBoundingClientRect().width;
         const itemsContainerWidth = allItems.reduce(
-            (total, item) => total + this._getElementWidth(item.overflowItem.elmRef.nativeElement) || 0,
+            (total, item) => total + (this._getElementWidth(item.elementRef.nativeElement) || 0),
             0
         );
 
