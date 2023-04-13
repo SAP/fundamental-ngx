@@ -214,11 +214,13 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     enableDragResize = true;
 
-    /** Whether to fix the table header and footer. Default is false.
+    /**
+     * Whether to fix the table header and footer. Default is true.
      * Note that if the table contains freezable columns, the header and
-     * footer will be fixed automatically. */
+     * footer will be fixed automatically, regardless of this input value.
+     * */
     @Input()
-    fixed = false;
+    fixed = true;
 
     /**
      * Table data source.
@@ -1997,7 +1999,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._subscriptions.add(
             this._tableService.freezeChange.subscribe((event: FreezeChange) => {
                 this.columnFreeze.emit(new TableColumnFreezeEvent(this, event.current, event.previous));
-                this.fixed = !!this._freezableColumns.size || !!this._freezableEndColumns.size;
+                this.fixed = !!this.fixed || !!this._freezableColumns.size || !!this._freezableEndColumns.size;
             })
         );
 
@@ -2278,7 +2280,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _setFreezableInfo(): void {
         this._freezableColumns = this._getFreezableColumns();
         this._freezableEndColumns = this._getFreezableEndColumns();
-        this.fixed = !!this._freezableColumns.size || !!this._freezableEndColumns.size;
+        this.fixed = !!this.fixed || !!this._freezableColumns.size || !!this._freezableEndColumns.size;
     }
 
     /** @hidden */
