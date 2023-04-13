@@ -50,7 +50,7 @@ class ExampleUserService {
             },
             {
                 value: 'de',
-                label: 'Deutch'
+                label: 'Deutsch'
             }
         ];
         return of(languages);
