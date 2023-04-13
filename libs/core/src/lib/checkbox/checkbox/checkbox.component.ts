@@ -317,7 +317,7 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
 
     /** @hidden Used to set the aria-checked value. */
     private _getAriaChecked(): string {
-        if (this.checkboxState === 'checked' || this.checkboxState) {
+        if (this.checkboxState === 'checked') {
             return 'true';
         } else if (this.checkboxState === 'indeterminate') {
             return 'mixed';
