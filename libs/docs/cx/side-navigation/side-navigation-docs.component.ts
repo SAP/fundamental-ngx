@@ -60,4 +60,16 @@ export class SideNavigationDocsComponent {
             component: 'SideNavigationOverflowExampleComponent'
         })
     ];
+    sideNavigationShellbarExample = [
+        getExampleFile('side-navigation-shellbar-example.component.html'),
+        getExampleFile('side-navigation-shellbar-example.component.ts', {
+            component: 'SideNavigationShellbarExampleComponent'
+        })
+    ];
+    sideNavigationMobileExample = [
+        getExampleFile('side-navigation-mobile-example.component.html'),
+        getExampleFile('side-navigation-mobile-example.component.ts', {
+            component: 'SideNavigationMobileExampleComponent'
+        })
+    ];
 }

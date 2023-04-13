@@ -19,6 +19,7 @@ import { SideNavigationModel } from './side-navigation-model';
 import { PreparedNestedListComponent } from '@fundamental-ngx/core/nested-list';
 import { NestedListStateService } from '@fundamental-ngx/core/nested-list';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { SideNavigationInterface } from './side-navigation.interface';
 
 /**
  * The side-navigation is a wrapping component representing
@@ -31,7 +32,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     encapsulation: ViewEncapsulation.None,
     providers: [NestedListKeyboardService, NestedListStateService]
 })
-export class SideNavigationComponent implements AfterContentInit, AfterViewInit, OnInit {
+export class SideNavigationComponent implements AfterContentInit, AfterViewInit, OnInit, SideNavigationInterface {
     /**
      * Side navigation configuration, to pass whole model object, instead of creating HTML from scratch
      */
@@ -66,6 +67,9 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     /** @hidden */
     @ViewChildren(PreparedNestedListComponent)
     preparedNestedList: QueryList<PreparedNestedListComponent>;
+
+    /** @hidden */
+    additionalShellbarCssClass = 'fd-shellbar--side-nav';
 
     /** @hidden */
     constructor(private keyboardService: NestedListKeyboardService, private nestedListState: NestedListStateService) {

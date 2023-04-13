@@ -3,6 +3,8 @@
     [class.fdx-side-nav--dynamic-width]="dynamicWidth"
     [class.fdx-side-nav--narrow]="narrow"
     [class.fdx-side-nav--condensed]="condensed || sideNavigationConfiguration?.condensed"
+    [class.fdx-side-nav--mobile]="mobile"
+    fd-scrollbar
 >
     <ng-container *ngIf="!sideNavigationConfiguration">
         <ng-container *ngTemplateOutlet="scrollUp"></ng-container>

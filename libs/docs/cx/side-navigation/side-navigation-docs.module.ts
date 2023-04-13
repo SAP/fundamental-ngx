@@ -12,9 +12,12 @@ import { SideNavigationDynamicWidthExampleComponent } from './examples/side-navi
 import { SideNavigationCozyWideTextOnly3LevelExampleComponent } from './examples/side-navigation-cozy-wide-text-only-3-level-example.component';
 import { SideNavigationNarrowExampleComponent } from './examples/side-navigation-narrow-example.component';
 import { SideNavigationFilterExampleComponent } from './examples/side-navigation-filter-example.component';
-import { FormModule, InputGroupModule } from '@fundamental-ngx/core';
+import { FormModule, InputGroupModule, ProductSwitchModule, ShellbarModule } from '@fundamental-ngx/core';
 import { SideNavigationOverflowExampleComponent } from './examples/side-navigation-overflow-example.component';
+import { SideNavigationShellbarExampleComponent } from './examples/side-navigation-shellbar-example.component';
+import { SideNavigationMobileExampleComponent } from './examples/side-navigation-mobile-example.component';
 import { SideNavigationCollapseExampleComponent } from './examples/side-navigation-expand-collapse-example.component';
+import { PlatformSearchFieldModule } from '@fundamental-ngx/platform';
 
 const routes: Routes = [
     {
@@ -33,7 +36,10 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         CxSideNavigationModule,
         InputGroupModule,
-        FormModule
+        FormModule,
+        ShellbarModule,
+        PlatformSearchFieldModule,
+        ProductSwitchModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -42,6 +48,8 @@ const routes: Routes = [
         SideNavigationNarrowExampleComponent,
         SideNavigationFilterExampleComponent,
         SideNavigationOverflowExampleComponent,
+        SideNavigationShellbarExampleComponent,
+        SideNavigationMobileExampleComponent,
         SideNavigationWideIcon1LevelExampleComponent,
         SideNavigationCozyWideIcon3LevelExampleComponent,
         SideNavigationDynamicWidthExampleComponent,

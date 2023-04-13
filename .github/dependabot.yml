@@ -13,7 +13,6 @@ updates:
           - g-cheishvili
           - mikerodonnell89
           - droshev
-          - platon-rov
       ignore:
           - dependency-name: typescript
             versions:
