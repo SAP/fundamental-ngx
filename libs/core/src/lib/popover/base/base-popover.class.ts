@@ -133,7 +133,7 @@ export class BasePopoverClass {
 
     /** The element to which  the overlay is attached. By default it is body */
     @Input()
-    appendTo: Nullable<ElementRef | Element>;
+    appendTo: Nullable<ElementRef | Element> = null;
 
     /** Whether position shouldn't change, when popover approach the corner of page */
     @Input()

@@ -1,3 +1,52 @@
+## [0.40.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.7...v0.40.1-rc.8) (2023-04-13)
+
+
+### Bug Fixes
+
+* **platform:** automatically sticky table header ([#9684](https://github.com/SAP/fundamental-ngx/issues/9684)) ([c2acd56](https://github.com/SAP/fundamental-ngx/commit/c2acd56287f341ca6ae877b43627e0bb27e6eda0))
+
+
+
+## [0.40.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.6...v0.40.1-rc.7) (2023-04-12)
+
+
+### Bug Fixes
+
+* **core:** attach popover to different container via append to ([#9634](https://github.com/SAP/fundamental-ngx/issues/9634)) ([b6a637a](https://github.com/SAP/fundamental-ngx/commit/b6a637aaaa2d6f2115b0fa894946e00dcd5b25bd))
+
+
+
+## [0.40.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.5...v0.40.1-rc.6) (2023-04-12)
+
+
+### Bug Fixes
+
+* **platform:** extend TableRowsRearrangeEvent with new data ([#9673](https://github.com/SAP/fundamental-ngx/issues/9673)) ([89df008](https://github.com/SAP/fundamental-ngx/commit/89df008b1b2cd58c0b46f926656f0d324b57be16))
+
+
+
+## [0.40.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.4...v0.40.1-rc.5) (2023-04-12)
+
+
+
+## [0.40.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.3...v0.40.1-rc.4) (2023-04-12)
+
+
+### Bug Fixes
+
+* **platform:** search field input value updated when used in form tag ([#9662](https://github.com/SAP/fundamental-ngx/issues/9662)) ([9215623](https://github.com/SAP/fundamental-ngx/commit/9215623865984ae4e410467d2b6ad167ab68d1aa))
+
+
+
+## [0.40.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.2...v0.40.1-rc.3) (2023-04-11)
+
+
+### Bug Fixes
+
+* **cx:** side nav updates ([#9570](https://github.com/SAP/fundamental-ngx/issues/9570)) ([449abbc](https://github.com/SAP/fundamental-ngx/commit/449abbc9ca2a934ac2510a4bb53a29c38936582f))
+
+
+
 ## [0.40.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.1...v0.40.1-rc.2) (2023-04-10)
 
 

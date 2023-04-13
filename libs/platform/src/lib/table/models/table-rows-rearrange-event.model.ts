@@ -1,3 +1,5 @@
+import { FdDndDropEventMode } from '@fundamental-ngx/cdk/utils';
+
 export class TableRowsRearrangeEvent<T> {
     /**
      * Table rows rearrange event
@@ -6,5 +8,13 @@ export class TableRowsRearrangeEvent<T> {
      * @param newIndex New index of the row
      * @param rows All rows of the table
      */
-    constructor(public row: T, public previousIndex: number, public newIndex: number, public rows: T[]) {}
+    constructor(
+        public row: T,
+        public dropRow: T,
+        public previousIndex: number,
+        public newIndex: number,
+        public insertAt: 'before' | 'after' | null,
+        public mode: FdDndDropEventMode,
+        public rows: T[]
+    ) {}
 }
