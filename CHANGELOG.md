@@ -1,3 +1,12 @@
+## [0.40.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.0...v0.40.2-rc.1) (2023-04-14)
+
+
+### Features
+
+* **platform:** custom table popover renderer ([#9659](https://github.com/SAP/fundamental-ngx/issues/9659)) ([b7e69b1](https://github.com/SAP/fundamental-ngx/commit/b7e69b1bfeb54e2e2a056361b2de4ac4f75365e6))
+
+
+
 ## [0.40.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.40.1...v0.40.2-rc.0) (2023-04-14)
 
 
