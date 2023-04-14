@@ -106,10 +106,10 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
     /**
      * Whether AddOn Button should be focusable
-     * @default true
+     * @default false
      */
     @Input()
-    buttonFocusable = true;
+    buttonFocusable = false;
 
     /** Whether the autocomplete should be enabled; Enabled by default. */
     @Input()
@@ -609,8 +609,8 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             this._showList(false);
         }
 
-        if (this.isOpen && this.listComponent) {
-            this.listComponent.setItemActive(0);
+        if (this.isOpen) {
+            this.searchInputElement?.nativeElement.focus();
         }
     }
 
