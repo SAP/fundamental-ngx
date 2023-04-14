@@ -48,6 +48,7 @@ import {
 describe('Approval flow', () => {
     const approvalFlowPage = new ApprovalFlowPo();
     const {
+        afDefaultExample,
         selectExample,
         flowNavigationArrow,
         approvalFlowNode,
@@ -114,22 +115,26 @@ describe('Approval flow', () => {
     }, 1);
 
     it('should have watchers section with watchers details displayed', async () => {
-        await expect(await isElementDisplayed(watchersAvatar)).toBe(true);
-        await expect(await getElementArrayLength(watchersAvatar)).toBe(4);
+        await scrollIntoView(afDefaultExample);
+        await expect(await isElementDisplayed(afDefaultExample + watchersAvatar)).toBe(true);
+        await expect(await getElementArrayLength(afDefaultExample + watchersAvatar)).toBe(4);
     });
 
     it('should have watchers section has correct title', async () => {
-        await expect(await getText(watchersTitle)).toBe(watchers_block_title);
+        await scrollIntoView(afDefaultExample);
+        await expect(await getText(afDefaultExample + watchersTitle)).toBe(watchers_block_title);
     });
 
     it('should have watchers section user details appear on click', async () => {
-        await click(watchersAvatar);
+        await scrollIntoView(afDefaultExample);
+        await click(afDefaultExample + watchersAvatar);
         await waitForElDisplayed(detailsDialog);
         await checkWatchersDetailsDialogContent();
     });
 
     it('should have watchers section user details disappeared on click', async () => {
-        await click(watchersAvatar);
+        await scrollIntoView(afDefaultExample);
+        await click(afDefaultExample + watchersAvatar);
         await waitForElDisplayed(detailsDialog);
         await click(detailsDialogCancelBtn);
         await waitForElDisappear(detailsDialog);
@@ -137,21 +142,23 @@ describe('Approval flow', () => {
     });
 
     it('should be able to switch example', async () => {
-        await selectOptionByValueAttribute(selectExample, 'empty');
-        await expect(await getElementArrayLength(approvalFlowNode)).toEqual(0);
+        await scrollIntoView(afDefaultExample);
+        await selectOptionByValueAttribute(afDefaultExample + selectExample, 'empty');
+        await expect(await getElementArrayLength(afDefaultExample + approvalFlowNode)).toEqual(0);
 
-        await selectOptionByValueAttribute(selectExample, 'simple');
-        await expect(await getElementArrayLength(approvalFlowNode)).toEqual(3);
+        await selectOptionByValueAttribute(afDefaultExample + selectExample, 'simple');
+        await expect(await getElementArrayLength(afDefaultExample + approvalFlowNode)).toEqual(3);
 
-        await selectOptionByValueAttribute(selectExample, 'medium');
-        await expect(await getElementArrayLength(approvalFlowNode)).toEqual(6);
+        await selectOptionByValueAttribute(afDefaultExample + selectExample, 'medium');
+        await expect(await getElementArrayLength(afDefaultExample + approvalFlowNode)).toEqual(6);
 
-        await selectOptionByValueAttribute(selectExample, 'complex');
-        await expect(await getElementArrayLength(approvalFlowNode)).toEqual(8);
+        await selectOptionByValueAttribute(afDefaultExample + selectExample, 'complex');
+        await expect(await getElementArrayLength(afDefaultExample + approvalFlowNode)).toEqual(8);
     });
 
     it('verify approval item content', async () => {
-        const arrLength = await getElementArrayLength(approvalFlowNode);
+        await scrollIntoView(afDefaultExample);
+        const arrLength = await getElementArrayLength(afDefaultExample + approvalFlowNode);
         for (let i = 0; arrLength > i; i++) {
             await expect(await isElementDisplayed(approvalFlowNodeAvatar, i)).toBe(true);
             await expect(await isElementDisplayed(approvalFlowNodeName, i)).toBe(true);
@@ -164,6 +171,7 @@ describe('Approval flow', () => {
     });
 
     it('verify approver/approving team details item content', async () => {
+        await scrollIntoView(afDefaultExample);
         const arrLength = await getElementArrayLength(approvalFlowNode);
         for (let i = 0; arrLength > i; i++) {
             while (!(await isElementClickable(approvalFlowNode, i))) {
@@ -191,8 +199,9 @@ describe('Approval flow', () => {
     });
 
     it('should be able send remainder to all statuses', async () => {
-        await scrollIntoView(remaindersSendToInput);
-        await click(remaindersSendToInput);
+        await scrollIntoView(afDefaultExample);
+        await scrollIntoView(afDefaultExample + remaindersSendToInput);
+        await click(afDefaultExample + remaindersSendToInput);
         await sendKeys(approved_node_status);
         await waitForElDisplayed(selectItem);
         await click(selectItem);
@@ -200,17 +209,20 @@ describe('Approval flow', () => {
         await waitForElDisplayed(selectItem);
         await click(selectItem);
 
-        await enterEditMode();
+        await enterEditMode(afDefaultExample);
 
         await checkSendReminder(inProgressNode);
         await checkSendReminder(notStartedNode);
     });
 
     it('should be able to search users', async () => {
-        await waitForElDisplayed(editExampleButton);
-        await click(editExampleButton);
-        await waitForElDisplayed(approvalFlowNode, 1);
-        (await browserIsFirefox()) ? await click(approvalFlowNode, 3) : await click(approvalFlowNode, 1);
+        await scrollIntoView(afDefaultExample);
+        await waitForElDisplayed(afDefaultExample + editExampleButton);
+        await click(afDefaultExample + editExampleButton);
+        await waitForElDisplayed(afDefaultExample + approvalFlowNode, 1);
+        (await browserIsFirefox())
+            ? await click(afDefaultExample + approvalFlowNode, 3)
+            : await click(afDefaultExample + approvalFlowNode, 1);
         await waitForElDisplayed(detailsDialogSearchInput);
         const usersCountBeforeSearch = await getElementArrayLength(detailsDialogTeamMemberName);
         await setValue(detailsDialogSearchInput, 'Caleb');
@@ -222,15 +234,16 @@ describe('Approval flow', () => {
 
     describe('Edit mode', () => {
         it('should be able to add watchers', async () => {
-            const watchersCountBefore = await getElementArrayLength(watchersAvatar);
-            await click(editExampleButton);
+            await scrollIntoView(afDefaultExample);
+            const watchersCountBefore = await getElementArrayLength(afDefaultExample + watchersAvatar);
+            await click(afDefaultExample + editExampleButton);
             await waitForElDisplayed(addWhatchersInput);
             await click(addWhatchersInput);
             await sendKeys('Alvin');
             await pause(500);
             await click(selectItem);
             await click(bottomMenuItems);
-            const watchersCountAfter = await getElementArrayLength(watchersAvatar);
+            const watchersCountAfter = await getElementArrayLength(afDefaultExample + watchersAvatar);
 
             await expect(watchersCountBefore).toBe(watchersCountAfter - 1);
         });
@@ -253,9 +266,10 @@ describe('Approval flow', () => {
         });
 
         it('should be able to add node in parallel', async () => {
-            const approvalFlowNodeCountBefore = await getElementArrayLength(approvalFlowNode);
+            await scrollIntoView(afDefaultExample);
+            const approvalFlowNodeCountBefore = await getElementArrayLength(afDefaultExample + approvalFlowNode);
 
-            await click(editExampleButton);
+            await click(afDefaultExample + editExampleButton);
             await waitForElDisplayed(addNode);
             await click(addNode, 1);
             await click(detailsDialogParallelSerialSelect);
@@ -268,14 +282,15 @@ describe('Approval flow', () => {
             await waitForElDisplayed(detailsDialogSendReminderBtn);
             await click(detailsDialogSendReminderBtn);
             await click(bottomMenuItems);
-            const approvalFlowNodeCountAfter = await getElementArrayLength(approvalFlowNode);
+            const approvalFlowNodeCountAfter = await getElementArrayLength(afDefaultExample + approvalFlowNode);
             await expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfter - 1);
         });
 
         it('should be able to add node in serial by "+" icon', async () => {
-            const approvalFlowNodeCountBefore = await getElementArrayLength(approvalFlowNode);
+            await scrollIntoView(afDefaultExample);
+            const approvalFlowNodeCountBefore = await getElementArrayLength(afDefaultExample + approvalFlowNode);
 
-            await click(editExampleButton);
+            await click(afDefaultExample + editExampleButton);
             await waitForElDisplayed(addNode, 1);
             (await browserIsFirefox()) ? await click(addNode, 2) : await click(addNode, 1);
             await click(detailsDialogParallelSerialSelect);
@@ -288,14 +303,15 @@ describe('Approval flow', () => {
             await waitForElDisplayed(detailsDialogSendReminderBtn);
             await click(detailsDialogSendReminderBtn);
             await click(bottomMenuItems);
-            const approvalFlowNodeCountAfter = await getElementArrayLength(approvalFlowNode);
+            const approvalFlowNodeCountAfter = await getElementArrayLength(afDefaultExample + approvalFlowNode);
 
             await expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfter - 1);
         });
 
         it('should be able to add node in serial using top bar action menu', async () => {
-            const approvalFlowNodeCountBefore = await getElementArrayLength(approvalFlowNode);
-            await click(editExampleButton);
+            await scrollIntoView(afDefaultExample);
+            const approvalFlowNodeCountBefore = await getElementArrayLength(afDefaultExample + approvalFlowNode);
+            await click(afDefaultExample + editExampleButton);
             await waitForElDisplayed(addNode);
             await waitForElDisplayed(approvalFlowNodeCheckbox);
             await click(approvalFlowNodeCheckbox, 3);
@@ -308,13 +324,14 @@ describe('Approval flow', () => {
             await click(detailsDialogSendReminderBtn);
             await waitForElDisplayed(detailsDialogSendReminderBtn);
             await click(detailsDialogSendReminderBtn);
-            const approvalFlowNodeCountAfterAdding = await getElementArrayLength(approvalFlowNode);
+            const approvalFlowNodeCountAfterAdding = await getElementArrayLength(afDefaultExample + approvalFlowNode);
 
             await expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfterAdding - 1);
         });
 
         it('should be able to add node in serial using node action menu', async () => {
-            const approvalFlowNodeCountBefore = await getElementArrayLength(approvalFlowNode);
+            await scrollIntoView(afDefaultExample);
+            const approvalFlowNodeCountBefore = await getElementArrayLength(afDefaultExample + approvalFlowNode);
             await click(editExampleButton);
             await waitForElDisplayed(approvalFlowNodeActionMenu);
             await click(approvalFlowNodeActionMenu, 3);
@@ -327,14 +344,17 @@ describe('Approval flow', () => {
             await click(detailsDialogSendReminderBtn);
             await waitForElDisplayed(detailsDialogSendReminderBtn);
             await click(detailsDialogSendReminderBtn);
-            const approvalFlowNodeCountAfterAdd = await getElementArrayLength(approvalFlowNode);
+            const approvalFlowNodeCountAfterAdd = await getElementArrayLength(afDefaultExample + approvalFlowNode);
 
             await expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfterAdd - 1);
         });
 
         it('should add the whole team as reviewer', async () => {
-            await enterEditMode();
-            (await browserIsFirefox()) ? await click(addNode, 2) : await click(addNode, 1);
+            await scrollIntoView(afDefaultExample);
+            await enterEditMode(afDefaultExample);
+            (await browserIsFirefox())
+                ? await click(afDefaultExample + addNode, 2)
+                : await click(afDefaultExample + addNode, 1);
             await waitForElDisplayed(detailsDialog);
             await click(addApproverOptions, 1);
             await pause(500);
@@ -347,19 +367,26 @@ describe('Approval flow', () => {
             await click(footerButtons);
 
             if (await browserIsFirefox()) {
-                await expect(await getText(nodeCardInfo, 5)).toContain('4 members\n' + 'Accounting team');
+                await expect(await getText(afDefaultExample + nodeCardInfo, 5)).toContain(
+                    '4 members\n' + 'Accounting team'
+                );
             }
             if (await browserIsSafari()) {
-                await expect(await getText(nodeCardInfo, 4)).toContain('4 members  Accounting team');
+                await expect(await getText(afDefaultExample + nodeCardInfo, 4)).toContain('4 members  Accounting team');
             }
             if (!(await browserIsFirefox()) && !(await browserIsSafari())) {
-                await expect(await getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
+                await expect(await getText(afDefaultExample + nodeCardInfo, 4)).toContain(
+                    '4 members\n' + 'Accounting team'
+                );
             }
         });
 
         it('should add anyone from team as reviewer', async () => {
-            await enterEditMode();
-            (await browserIsFirefox()) ? await click(addNode, 2) : await click(addNode, 1);
+            await scrollIntoView(afDefaultExample);
+            await enterEditMode(afDefaultExample);
+            (await browserIsFirefox())
+                ? await click(afDefaultExample + addNode, 2)
+                : await click(afDefaultExample + addNode, 1);
             await waitForElDisplayed(detailsDialog);
             await click(addApproverOptions, 1);
             await pause(500);
@@ -372,53 +399,60 @@ describe('Approval flow', () => {
             await click(footerButtons);
 
             if (await browserIsFirefox()) {
-                await expect(await getText(nodeCardInfo, 5)).toContain('4 members\n' + 'Accounting team');
+                await expect(await getText(afDefaultExample + nodeCardInfo, 5)).toContain(
+                    '4 members\n' + 'Accounting team'
+                );
             }
             if (await browserIsSafari()) {
-                await expect(await getText(nodeCardInfo, 4)).toContain('4 members  Accounting team');
+                await expect(await getText(afDefaultExample + nodeCardInfo, 4)).toContain('4 members  Accounting team');
             }
             if (!(await browserIsFirefox()) && !(await browserIsSafari())) {
-                await expect(await getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
+                await expect(await getText(afDefaultExample + nodeCardInfo, 4)).toContain(
+                    '4 members\n' + 'Accounting team'
+                );
             }
         });
 
         it('should be able to remove node by button', async () => {
-            await waitForElDisplayed(approvalFlowNode);
-            const approvalFlowNodeCountBefore = await getElementArrayLength(approvalFlowNode);
+            await scrollIntoView(afDefaultExample);
+            await waitForElDisplayed(afDefaultExample + approvalFlowNode);
+            const approvalFlowNodeCountBefore = await getElementArrayLength(afDefaultExample + approvalFlowNode);
 
-            await waitForElDisplayed(editExampleButton);
-            await click(editExampleButton);
-            await waitForElDisplayed(approvalFlowNodeCheckbox);
+            await waitForElDisplayed(afDefaultExample + editExampleButton);
+            await click(afDefaultExample + editExampleButton);
+            await waitForElDisplayed(afDefaultExample + approvalFlowNodeCheckbox);
             (await browserIsFirefox())
-                ? await click(approvalFlowNodeCheckboxAlt, 3)
-                : await click(approvalFlowNodeCheckbox, 1);
-            await waitForElDisplayed(topActionButtons, 2);
-            await click(topActionButtons, 2);
-            const approvalFlowNodeCountAfterRemove = await getElementArrayLength(approvalFlowNode);
+                ? await click(afDefaultExample + approvalFlowNodeCheckboxAlt, 3)
+                : await click(afDefaultExample + approvalFlowNodeCheckbox, 1);
+            await waitForElDisplayed(afDefaultExample + topActionButtons, 2);
+            await click(afDefaultExample + topActionButtons, 2);
+            const approvalFlowNodeCountAfterRemove = await getElementArrayLength(afDefaultExample + approvalFlowNode);
 
             await expect(approvalFlowNodeCountBefore).toEqual(approvalFlowNodeCountAfterRemove + 1);
         });
 
         it('should be able to remove node by node action menu', async () => {
-            await waitForElDisplayed(approvalFlowNode);
-            const approvalFlowNodeCountBefore = await getElementArrayLength(approvalFlowNode);
+            await scrollIntoView(afDefaultExample);
+            await waitForElDisplayed(afDefaultExample + approvalFlowNode);
+            const approvalFlowNodeCountBefore = await getElementArrayLength(afDefaultExample + approvalFlowNode);
 
-            await waitForElDisplayed(editExampleButton);
-            await click(editExampleButton);
+            await waitForElDisplayed(afDefaultExample + editExampleButton);
+            await click(afDefaultExample + editExampleButton);
             await waitForElDisplayed(approvalFlowNodeActionMenu);
             await click(approvalFlowNodeActionMenu, 3);
             await waitForElDisplayed(approvalFlowNodeActionMenuItem, 2);
             await click(approvalFlowNodeActionMenuItem, 2);
 
             await waitForElDisplayed(messageStrip);
-            const approvalFlowNodeCountAfterRemove = await getElementArrayLength(approvalFlowNode);
+            const approvalFlowNodeCountAfterRemove = await getElementArrayLength(afDefaultExample + approvalFlowNode);
 
             await expect(approvalFlowNodeCountBefore).toEqual(approvalFlowNodeCountAfterRemove + 1);
         });
 
         it('should add node before', async () => {
-            const startingNodeCount = await getElementArrayLength(nodeCardInfo);
-            await enterEditMode();
+            await scrollIntoView(afDefaultExample);
+            const startingNodeCount = await getElementArrayLength(afDefaultExample + nodeCardInfo);
+            await enterEditMode(afDefaultExample);
             (await browserIsFirefox())
                 ? await click(approvalFlowNodeActionMenu, 5)
                 : await click(approvalFlowNodeActionMenu, 4);
@@ -432,12 +466,13 @@ describe('Approval flow', () => {
             await click(footerButtons);
             await click(footerButtons);
 
-            await expect(await getElementArrayLength(nodeCardInfo)).toEqual(startingNodeCount + 1);
+            await expect(await getElementArrayLength(afDefaultExample + nodeCardInfo)).toEqual(startingNodeCount + 1);
         });
 
         it('should add node after', async () => {
-            const startingNodeCount = await getElementArrayLength(nodeCardInfo);
-            await enterEditMode();
+            await scrollIntoView(afDefaultExample);
+            const startingNodeCount = await getElementArrayLength(afDefaultExample + nodeCardInfo);
+            await enterEditMode(afDefaultExample);
             (await browserIsFirefox())
                 ? await click(approvalFlowNodeActionMenu, 5)
                 : await click(approvalFlowNodeActionMenu, 4);
@@ -451,17 +486,18 @@ describe('Approval flow', () => {
             await click(footerButtons);
             await click(footerButtons);
 
-            await expect(await getElementArrayLength(nodeCardInfo)).toEqual(startingNodeCount + 1);
+            await expect(await getElementArrayLength(afDefaultExample + nodeCardInfo)).toEqual(startingNodeCount + 1);
         });
     });
 
     describe('should be able send remainder to approving team', () => {
         it('should be able send remainder to approving team (full)', async () => {
-            const arrLength = await getElementArrayLength(approvalFlowTeamNode);
+            await scrollIntoView(afDefaultExample);
+            const arrLength = await getElementArrayLength(afDefaultExample + approvalFlowTeamNode);
             for (let i = 0; arrLength > i; i++) {
-                const approvalNodeText = await getText(approvalFlowTeamNode, i);
-                const approvalNodeDescription = await getText(approvalFlowNodeDescription, i);
-                await click(approvalFlowTeamNode, i);
+                const approvalNodeText = await getText(afDefaultExample + approvalFlowTeamNode, i);
+                const approvalNodeDescription = await getText(afDefaultExample + approvalFlowNodeDescription, i);
+                await click(afDefaultExample + approvalFlowTeamNode, i);
                 const teamSize = await getElementArrayLength(detailsDialogTeamMember);
                 for (let k = 0; teamSize > k; k++) {
                     await click(detailsDialogTeamMemberCheckBox, k);
@@ -477,10 +513,11 @@ describe('Approval flow', () => {
         });
 
         it('should be able send remainder to approving team', async () => {
-            const arrLength = await getElementArrayLength(approvalFlowTeamNode);
+            await scrollIntoView(afDefaultExample);
+            const arrLength = await getElementArrayLength(afDefaultExample + approvalFlowTeamNode);
             for (let i = 0; arrLength > i; i++) {
-                while (await isElementDisplayed(approvalFlowTeamNode, i)) {
-                    await click(flowNavigationArrow);
+                while (await isElementDisplayed(afDefaultExample + approvalFlowTeamNode, i)) {
+                    await click(afDefaultExample + flowNavigationArrow);
                 }
                 let approvalNodeText = await getText(approvalFlowTeamNode, i);
                 await click(approvalFlowTeamNode, i);
@@ -499,8 +536,9 @@ describe('Approval flow', () => {
 
     describe('custom options', () => {
         it('should check all statuses changed to not started', async () => {
+            await scrollIntoView(afDefaultExample);
             await markOption(setStatusOption);
-            const nodeCardCount = await getElementArrayLength(nodeCardInfo);
+            const nodeCardCount = await getElementArrayLength(afDefaultExample + nodeCardInfo);
 
             for (let i = 0; i < nodeCardCount; i++) {
                 await scrollIntoView(nodeCardInfo, i);
@@ -509,8 +547,9 @@ describe('Approval flow', () => {
         });
 
         it('check all node actions disabled', async () => {
+            await scrollIntoView(afDefaultExample);
             await markOption(disableAllNodesOption);
-            await enterEditMode();
+            await enterEditMode(afDefaultExample);
 
             await expect(await doesItExist(approvalFlowNodeActionMenu)).toBe(
                 false,
@@ -521,8 +560,9 @@ describe('Approval flow', () => {
         });
 
         it('check disable adding before', async () => {
+            await scrollIntoView(afDefaultExample);
             await markOption(disableAddingBeforeOption);
-            await enterEditMode();
+            await enterEditMode(afDefaultExample);
 
             (await browserIsFirefox())
                 ? await checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[0], 5)
@@ -534,8 +574,9 @@ describe('Approval flow', () => {
         });
 
         it('check disable adding after', async () => {
+            await scrollIntoView(afDefaultExample);
             await markOption(disableAddingAfterOption);
-            await enterEditMode();
+            await enterEditMode(afDefaultExample);
             (await browserIsFirefox())
                 ? await checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[1], 5)
                 : await checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[1], 4);
@@ -545,8 +586,9 @@ describe('Approval flow', () => {
         });
 
         it('check disable adding parallel', async () => {
+            await scrollIntoView(afDefaultExample);
             await markOption(disableAddingParallelOption);
-            await enterEditMode();
+            await enterEditMode(afDefaultExample);
 
             (await browserIsFirefox())
                 ? await checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[2], 5)
@@ -558,8 +600,9 @@ describe('Approval flow', () => {
         });
 
         it('check disable editing', async () => {
+            await scrollIntoView(afDefaultExample);
             await markOption(disableEditingOption);
-            await enterEditMode();
+            await enterEditMode(afDefaultExample);
 
             (await browserIsFirefox())
                 ? await checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[3], 5)
@@ -571,8 +614,9 @@ describe('Approval flow', () => {
         });
 
         it('check disable remove', async () => {
+            await scrollIntoView(afDefaultExample);
             await markOption(disableRemovingOption);
-            await enterEditMode();
+            await enterEditMode(afDefaultExample);
 
             (await browserIsFirefox())
                 ? await checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[4], 5)
@@ -584,12 +628,17 @@ describe('Approval flow', () => {
         });
 
         it('check disabling edit mode', async () => {
+            await scrollIntoView(afDefaultExample);
             await markOption(editModeOption);
 
-            await expect(await doesItExist(editExampleButton)).toBe(false, 'edit button still present');
+            await expect(await doesItExist(afDefaultExample + editExampleButton)).toBe(
+                false,
+                'edit button still present'
+            );
         });
 
         it('should check send reminders disabled', async () => {
+            await scrollIntoView(afDefaultExample);
             await scrollIntoView(reminderOptionsButton);
             await click(reminderOptionsButton);
             await waitForElDisplayed(reminderOptionsList);
@@ -603,7 +652,7 @@ describe('Approval flow', () => {
                 await waitForElDisplayed(reminderOptionsList);
             }
 
-            await enterEditMode();
+            await enterEditMode(afDefaultExample);
 
             await checkReminderDisabled(approvedNode);
             await checkReminderDisabled(rejectedNode);
@@ -612,10 +661,11 @@ describe('Approval flow', () => {
         });
 
         it('should check due date node', async () => {
+            await scrollIntoView(afDefaultExample);
             await markOption(dueDateWarningsOption);
 
-            await expect(await waitForPresent(dueDateNode)).toBe(true, 'due date not shown');
-            await expect(await getText(dueDateNode)).toContain(dueDateMessage);
+            await expect(await waitForPresent(afDefaultExample + dueDateNode)).toBe(true, 'due date not shown');
+            await expect(await getText(afDefaultExample + dueDateNode)).toContain(dueDateMessage);
         });
     });
 
@@ -633,6 +683,7 @@ describe('Approval flow', () => {
     });
 
     async function checkApproveNodeDetailsDialogContent(): Promise<void> {
+        await scrollIntoView(afDefaultExample);
         await expect(await isElementDisplayed(detailsDialog)).toBe(true);
         await expect(await isElementDisplayed(detailsDialogAvatar)).toBe(true);
         await expect(await getText(detailsDialogCancelBtn)).toContain(details_dialog_cancel_btn);
@@ -641,6 +692,7 @@ describe('Approval flow', () => {
     }
 
     async function checkWatchersDetailsDialogContent(): Promise<void> {
+        await scrollIntoView(afDefaultExample);
         await expect(await isElementDisplayed(detailsDialog)).toBe(true);
         await expect(await isElementDisplayed(detailsDialogAvatar)).toBe(true);
         await expect(await getText(detailsDialogCancelBtn)).toContain(details_dialog_cancel_btn);
@@ -652,9 +704,9 @@ describe('Approval flow', () => {
         await click(optionInput, option);
     }
 
-    async function enterEditMode(): Promise<void> {
-        await scrollIntoView(editExampleButton);
-        await click(editExampleButton);
+    async function enterEditMode(view: string): Promise<void> {
+        await scrollIntoView(view + editExampleButton);
+        await click(view + editExampleButton);
         await waitForNotDisplayed(editExampleButton);
     }
 

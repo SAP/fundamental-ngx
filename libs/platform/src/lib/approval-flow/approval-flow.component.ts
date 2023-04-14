@@ -79,6 +79,7 @@ import {
     ApprovalFlowUserDataSource
 } from '@fundamental-ngx/platform/shared';
 import { cloneDeep, uniqBy } from 'lodash-es';
+import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 
 let defaultId = 0;
 /**
@@ -110,6 +111,13 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
     /** A reference to the user details template */
     @Input() userDetailsTemplate: TemplateRef<any>;
+
+    /** A reference to the app custom statuses */
+    @Input() approvalStatusTemplate: TemplateRef<any>;
+
+    /** Custom status to color mapping  */
+    @Input()
+    statusColorMapping: Record<ApprovalStatus, ObjectStatus>;
 
     /** Whether to display due date warning in status */
     @Input() checkDueDate = false;

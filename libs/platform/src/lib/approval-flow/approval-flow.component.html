@@ -123,6 +123,8 @@
                                     [dueDateThreshold]="dueDateThreshold"
                                     [renderArrow]="columnIndex > 0"
                                     [allNodesInColumnApproved]="!!column.allNodesApproved"
+                                    [approvalStatusTemplate]="approvalStatusTemplate"
+                                    [statusColorMapping]="statusColorMapping"
                                     (onAdd)="_addNode(node, $event)"
                                     (onEdit)="_editNode(node)"
                                     (onDelete)="_onNodeDelete(node)"
