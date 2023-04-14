@@ -25,8 +25,8 @@
         *ngIf="status"
         class="fd-grid-list__highlight"
         [class.fd-grid-list__highlight--positive]="status === 'success'"
-        [class.fd-grid-list__highlight--negative]="status === 'warning'"
-        [class.fd-grid-list__highlight--critical]="status === 'error'"
+        [class.fd-grid-list__highlight--critical]="status === 'warning'"
+        [class.fd-grid-list__highlight--negative]="status === 'error'"
         [class.fd-grid-list__highlight--neutral]="status === 'neutral'"
         [attr.aria-label]="'coreGridList.listItemStatusAriaLabel' | fdTranslate : { status: status }"
     ></span>
