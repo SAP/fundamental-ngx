@@ -1,3 +1,12 @@
+## [0.40.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.2...v0.40.2-rc.3) (2023-04-14)
+
+
+### Bug Fixes
+
+* **platform:** only scroll freezable cells when using l/r keyboard buttons, freezable column width not updating on table data load ([#9657](https://github.com/SAP/fundamental-ngx/issues/9657)) ([51363c7](https://github.com/SAP/fundamental-ngx/commit/51363c77657e4aedbeaf3d54dfd81682f85b28e7))
+
+
+
 ## [0.40.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.1...v0.40.2-rc.2) (2023-04-14)
 
 
