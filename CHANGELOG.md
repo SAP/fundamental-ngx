@@ -1,3 +1,12 @@
+## [0.40.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.3...v0.40.2-rc.4) (2023-04-14)
+
+
+### Bug Fixes
+
+* **core,platform:** multi combobox/input keyboard behaviour ([#9694](https://github.com/SAP/fundamental-ngx/issues/9694)) ([7c4b67d](https://github.com/SAP/fundamental-ngx/commit/7c4b67da2b574aca02d93af4ae79ebba5f85806f))
+
+
+
 ## [0.40.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.2...v0.40.2-rc.3) (2023-04-14)
 
 
