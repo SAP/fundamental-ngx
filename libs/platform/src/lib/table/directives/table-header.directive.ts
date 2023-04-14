@@ -1,4 +1,9 @@
 import { Directive, TemplateRef } from '@angular/core';
+import { FdpCellDefContext } from './table-cell.directive';
+
+export interface FdpHeaderCellDefContext<T = any> {
+    $implicit: T;
+}
 
 /** Column header container. */
 // eslint-disable-next-line @angular-eslint/directive-selector
@@ -12,7 +17,12 @@ export class FdpTableHeader {}
  */
 @Directive({ selector: '[fdpHeaderCellDef]' })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
-export class FdpHeaderCellDef {
+export class FdpHeaderCellDef<T = any> {
     /** @hidden */
-    constructor(public templateRef: TemplateRef<any>) {}
+    constructor(public templateRef: TemplateRef<FdpCellDefContext<T>>) {}
+
+    /** @hidden */
+    static ngTemplateContextGuard(dir: FdpHeaderCellDef, ctx: FdpHeaderCellDefContext): ctx is FdpHeaderCellDefContext {
+        return true;
+    }
 }

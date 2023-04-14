@@ -27,6 +27,9 @@ export * from './components/table-toolbar/table-toolbar';
 export * from './components/table-toolbar/table-toolbar-actions.component';
 export * from './components/table-toolbar/table-toolbar.component';
 export * from './components/table-toolbar/table-toolbar-left-actions.component';
+export * from './components/table-cell-header-popover/table-cell-header-popover.component';
+export * from './components/table-header-cell-content/table-header-cell-content.component';
+export * from './components/table-cell-content/table-cell-content.component';
 
 export * from './components/table-view-settings-dialog/table-view-settings-dialog.component';
 export * from './components/table-view-settings-dialog/table-view-settings-filter.component';
@@ -49,6 +52,7 @@ export * from './directives/table-header.directive';
 export * from './directives/table-scrollable.directive';
 export * from './directives/table-view-settings-filter-custom.directive';
 export * from './directives/platform-table-column-responsive.directive';
+export * from './directives/table-cell-header-popover.directive';
 
 export * from './domain/array-data-source';
 export * from './domain/observable-data-source';

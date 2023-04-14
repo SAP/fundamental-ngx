@@ -100,8 +100,8 @@ describe('Upload collection test suite', () => {
     it('should check table column headers displayed correctly for all examples', async () => {
         await checkColumnHeaderText(defaultExample);
         await checkColumnHeaderText(disableExample);
-        await checkColumnHeaderText(readonlyExample, ' div');
-        await checkColumnHeaderText(turnOffExample, ' div');
+        await checkColumnHeaderText(readonlyExample, ' fdp-table-header-cell-content > div');
+        await checkColumnHeaderText(turnOffExample, ' fdp-table-header-cell-content > div');
     });
 
     it('should check searching table contents for all examples', async () => {
