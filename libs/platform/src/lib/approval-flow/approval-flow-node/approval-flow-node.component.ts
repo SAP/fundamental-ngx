@@ -80,6 +80,14 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
      */
     @Input() allNodesInColumnApproved = false;
 
+    /** A reference to the app custom statuses */
+    @Input()
+    approvalStatusTemplate: TemplateRef<any>;
+
+    /** Custom status to color mapping  */
+    @Input()
+    statusColorMapping: Record<ApprovalStatus, ObjectStatus>;
+
     /** Whether the node is in edit mode */
     @Input()
     @HostBinding('class.fdp-approval-flow-node--edit-mode')
@@ -355,18 +363,23 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
             this._dueIn = Math.round(nowAndDueDiff / DAY_IN_MILLISECONDS);
             this._showDueDateWarning = !isNodeApproved(this.node) && dueThreshold < Date.now();
-            this._objectStatus = this._showDueDateWarning ? 'critical' : getNodeStatusClass(this.node.status);
+            this._objectStatus = this._showDueDateWarning ? 'critical' : this._getNodeStatusClass();
 
             this._cdr.detectChanges();
 
             return;
         }
 
-        this._objectStatus = getNodeStatusClass(this.node.status);
+        this._objectStatus = this._getNodeStatusClass();
         this._cdr.detectChanges();
     }
-}
 
-function getNodeStatusClass(status: ApprovalStatus): ObjectStatus {
-    return NODE_STATUS_CLASS_MAP[status] as ObjectStatus;
+    /** @hidden */
+    private _getNodeStatusClass(): ObjectStatus {
+        return (
+            this.statusColorMapping
+                ? this.statusColorMapping[this.node.status]
+                : NODE_STATUS_CLASS_MAP[this.node.status]
+        ) as ObjectStatus;
+    }
 }
