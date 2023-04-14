@@ -86,6 +86,7 @@
                             [columnName]="column.name"
                             [id]="id + '__' + column.name"
                             [attr.aria-colindex]="colIdx"
+                            [attr.aria-labelledby]="id + '-header-cell-' + column.name"
                             [ngClass]="'fdp-table__col--' + column.name"
                             [class.fd-table__cell--fixed]="_freezableColumns.has(column.name)"
                             [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
@@ -433,7 +434,13 @@
     </ng-container>
 
     <ng-template #defaultHeaderCellTemplate>
-        {{ column?.label }}
+        <span
+            [id]="id + '-header-cell-' + column.name"
+            [attr.title]="column?.headerOverflows ? column.label : null"
+            class="fd-table__cell--truncate-txt"
+        >
+            {{ column?.label }}
+        </span>
     </ng-template>
 </ng-template>
 
