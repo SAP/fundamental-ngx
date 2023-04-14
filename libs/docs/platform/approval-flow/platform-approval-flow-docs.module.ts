@@ -17,6 +17,7 @@ import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import { PlatformApprovalFlowHeaderComponent } from './platform-approval-flow-header/platform-approval-flow-header.component';
 import { PlatformApprovalFlowDocsComponent } from './platform-approval-flow-docs.component';
 import { PlatformApprovalFlowExampleComponent } from './examples/platform-approval-flow-example.component';
+import { PlatformApprovalFlowCustomStatusExampleComponent } from './examples/platform-approval-flow-custom-status-example.component';
 
 const routes: Routes = [
     {
@@ -43,7 +44,8 @@ const routes: Routes = [
     declarations: [
         PlatformApprovalFlowHeaderComponent,
         PlatformApprovalFlowDocsComponent,
-        PlatformApprovalFlowExampleComponent
+        PlatformApprovalFlowExampleComponent,
+        PlatformApprovalFlowCustomStatusExampleComponent
     ],
     providers: [RtlService, currentComponentProvider('approval-flow')]
 })

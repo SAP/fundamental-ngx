@@ -1,3 +1,79 @@
+## [0.40.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.5...v0.40.2-rc.6) (2023-04-14)
+
+
+### Bug Fixes
+
+* **platform:** custom status for approval flow ([#9630](https://github.com/SAP/fundamental-ngx/issues/9630)) ([3907eef](https://github.com/SAP/fundamental-ngx/commit/3907eef3de8bf2aa7086c3c2b4117dfbab32d475))
+
+
+
+## [0.40.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.4...v0.40.2-rc.5) (2023-04-14)
+
+
+### Bug Fixes
+
+* **core:** allow shrinking groups ([#9670](https://github.com/SAP/fundamental-ngx/issues/9670)) ([c6202ea](https://github.com/SAP/fundamental-ngx/commit/c6202ea46535400528e1ed348abedd6b6130b13c))
+
+
+
+## [0.40.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.3...v0.40.2-rc.4) (2023-04-14)
+
+
+### Bug Fixes
+
+* **core,platform:** multi combobox/input keyboard behaviour ([#9694](https://github.com/SAP/fundamental-ngx/issues/9694)) ([7c4b67d](https://github.com/SAP/fundamental-ngx/commit/7c4b67da2b574aca02d93af4ae79ebba5f85806f))
+
+
+
+## [0.40.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.2...v0.40.2-rc.3) (2023-04-14)
+
+
+### Bug Fixes
+
+* **platform:** only scroll freezable cells when using l/r keyboard buttons, freezable column width not updating on table data load ([#9657](https://github.com/SAP/fundamental-ngx/issues/9657)) ([51363c7](https://github.com/SAP/fundamental-ngx/commit/51363c77657e4aedbeaf3d54dfd81682f85b28e7))
+
+
+
+## [0.40.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.1...v0.40.2-rc.2) (2023-04-14)
+
+
+### Bug Fixes
+
+* **platform:** tooltip for column size shrink ([#9612](https://github.com/SAP/fundamental-ngx/issues/9612)) ([951b69e](https://github.com/SAP/fundamental-ngx/commit/951b69e60a3eba302c56567a5cc9d2f9824bf922))
+
+
+
+## [0.40.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.0...v0.40.2-rc.1) (2023-04-14)
+
+
+### Features
+
+* **platform:** custom table popover renderer ([#9659](https://github.com/SAP/fundamental-ngx/issues/9659)) ([b7e69b1](https://github.com/SAP/fundamental-ngx/commit/b7e69b1bfeb54e2e2a056361b2de4ac4f75365e6))
+
+
+
+## [0.40.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.40.1...v0.40.2-rc.0) (2023-04-14)
+
+
+### Bug Fixes
+
+* **platform:** add input to disable drag and drop ([#9685](https://github.com/SAP/fundamental-ngx/issues/9685)) ([44bce1a](https://github.com/SAP/fundamental-ngx/commit/44bce1a770dd8ea802edfaf2027a5b5150878b68))
+
+
+
+## [0.40.1](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.9...v0.40.1) (2023-04-13)
+
+
+
+## [0.40.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.8...v0.40.1-rc.9) (2023-04-13)
+
+
+### Bug Fixes
+
+* **cx:** updated styles version and fixed side nav content density ([#9689](https://github.com/SAP/fundamental-ngx/issues/9689)) ([89730a8](https://github.com/SAP/fundamental-ngx/commit/89730a892d7813bb592901c8975b89189df07d68))
+
+
+
 ## [0.40.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.7...v0.40.1-rc.8) (2023-04-13)
 
 

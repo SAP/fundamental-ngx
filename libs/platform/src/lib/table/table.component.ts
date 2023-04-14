@@ -48,7 +48,6 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
 import { FDP_PRESET_MANAGED_COMPONENT, isDataSource, isString } from '@fundamental-ngx/platform/shared';
 import { cloneDeep, get } from 'lodash-es';
@@ -335,6 +334,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @Hidden */
     private _noBorderY = false;
 
+    /** Whether to allow for row reordering on tree tables via drag and drop. */
+    @Input()
+    enableRowReordering = true;
+
     /** Initial visible columns. Consist of a list of unique column names */
     @Input()
     initialVisibleColumns: string[];
@@ -548,10 +551,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     @ViewChild('tableScrollable')
     readonly tableScrollable: TableScrollable;
-
-    /** @hidden */
-    @ViewChildren('columnHeaderPopover')
-    readonly columnHeaderPopovers: QueryList<PopoverComponent>;
 
     /** @hidden */
     @ViewChild('tableContainer')
@@ -1151,9 +1150,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         this._tableService.freezeTo(columnName, end);
         this.recalculateTableColumnWidth();
-        this.columnHeaderPopovers.forEach((popover) => {
-            popover.close();
-        });
     }
 
     /** Unfreeze column */
@@ -1168,9 +1164,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         this._tableService.freezeTo(freezeToPreviousColumnName, end);
         this.recalculateTableColumnWidth();
-        this.columnHeaderPopovers.forEach((popover) => {
-            popover.close();
-        });
     }
 
     /** expand all rows */
@@ -1440,6 +1433,58 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     // Private API
 
     /** @hidden */
+    _scrollToOverlappedCell(): void {
+        const tableScrollableEl = this.tableScrollable.getElementRef().nativeElement;
+
+        if (
+            (this._freezableColumns.size || this._freezableEndColumns.size) &&
+            tableScrollableEl.scrollWidth > tableScrollableEl.clientWidth
+        ) {
+            const activeEl = document.activeElement;
+            if (
+                activeEl &&
+                !(
+                    activeEl.classList.contains('fd-table__cell--fixed') ||
+                    activeEl.classList.contains('fd-table__cell--fixed-end')
+                )
+            ) {
+                if (this._freezableColumns.size && !this._freezableEndColumns.size) {
+                    activeEl.scrollIntoView({ block: 'nearest', inline: 'end' });
+                } else if (!this._freezableColumns.size && this._freezableEndColumns.size) {
+                    activeEl.scrollIntoView({ block: 'nearest', inline: 'center' });
+                } else if (this._freezableColumns.size && this._freezableEndColumns.size) {
+                    // check to see if the active element is obstructed by another element
+                    const activeElLeft = activeEl.getBoundingClientRect().left;
+                    const activeElTop = activeEl.getBoundingClientRect().top;
+                    const topElementFromLeft = document.elementFromPoint(activeElLeft, activeElTop);
+                    // if the activeEl is overlapped
+                    if (
+                        topElementFromLeft &&
+                        !activeEl.isSameNode(topElementFromLeft) &&
+                        topElementFromLeft.classList.contains('fd-table__cell--fixed-end')
+                    ) {
+                        const topElementX = topElementFromLeft.getBoundingClientRect().left;
+                        const leftVal = this._rtl
+                            ? (activeElLeft + activeEl.getBoundingClientRect().width - topElementX) * -1
+                            : activeElLeft + activeEl.getBoundingClientRect().width - topElementX;
+                        tableScrollableEl.scrollBy({ top: 0, left: leftVal });
+                    } else if (
+                        topElementFromLeft &&
+                        !activeEl.isSameNode(topElementFromLeft) &&
+                        topElementFromLeft.classList.contains('fd-table__cell--fixed')
+                    ) {
+                        const topElementX = topElementFromLeft.getBoundingClientRect().right;
+                        const leftVal = this._rtl
+                            ? (activeElLeft - activeEl.getBoundingClientRect().width - topElementX) * -1
+                            : activeElLeft - activeEl.getBoundingClientRect().width - topElementX;
+                        tableScrollableEl.scrollBy({ top: 0, left: leftVal });
+                    }
+                }
+            }
+        }
+    }
+
+    /** @hidden */
     _isColumnHasHeaderMenu(column: TableColumn): boolean {
         return (
             column.sortable ||
@@ -1597,7 +1642,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         } else {
             this.group([{ field, direction: SortDirection.NONE, showAsColumn: true }]);
         }
-        this._closePopoverForColumnByFieldName(field);
     }
 
     /**
@@ -1618,7 +1662,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         } else {
             this.removeFilter([field]);
         }
-        this._closePopoverForColumnByFieldName(field);
     }
 
     /**
@@ -1627,7 +1670,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      */
     _columnHeaderSortBy(field: string, direction: SortDirection): void {
         this.sort([{ field, direction }]);
-        this._closePopoverForColumnByFieldName(field);
     }
 
     /** @hidden */
@@ -1757,8 +1799,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     ): Promise<void> {
         this._focusedCellPosition = { rowIndex: position.rowIndex, colIndex: position.colIndex };
 
-        this._scrollToOverlappedCell();
-
         if (this.cellFocusedEventAnnouncer) {
             this._liveAnnouncer.clear();
             await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(position, columnLabel, nestingLevel));
@@ -1791,14 +1831,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             setTimeout(() => {
                 (event.target as HTMLElement).focus();
             });
-        }
-    }
-
-    /** @hidden */
-    private _closePopoverForColumnByFieldName(field: string): void {
-        const index = this._visibleColumns.findIndex((c) => c.key === field);
-        if (index !== -1) {
-            this.columnHeaderPopovers.get(index)?.close();
         }
     }
 
@@ -2776,6 +2808,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                     this.recalculateTableColumnWidth();
                     if (this._freezableColumns.size || this._freezableEndColumns.size) {
                         this._tableColumnResizeService.updateFrozenColumnsWidth();
+                        this._cdr.detectChanges();
                     }
                 })
         );
@@ -2881,57 +2914,5 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             row: ${position.rowIndex + 1} of ${position.totalRows}` +
             (nestingLevel !== null ? `, level: ${nestingLevel + 1}` : '')
         );
-    }
-
-    /** @hidden */
-    private _scrollToOverlappedCell(): void {
-        const tableScrollableEl = this.tableScrollable.getElementRef().nativeElement;
-
-        if (
-            (this._freezableColumns.size || this._freezableEndColumns.size) &&
-            tableScrollableEl.scrollWidth > tableScrollableEl.clientWidth
-        ) {
-            const activeEl = document.activeElement;
-            if (
-                activeEl &&
-                !(
-                    activeEl.classList.contains('fd-table__cell--fixed') ||
-                    activeEl.classList.contains('fd-table__cell--fixed-end')
-                )
-            ) {
-                if (this._freezableColumns.size && !this._freezableEndColumns.size) {
-                    activeEl.scrollIntoView({ block: 'nearest', inline: 'end' });
-                } else if (!this._freezableColumns.size && this._freezableEndColumns.size) {
-                    activeEl.scrollIntoView({ block: 'nearest', inline: 'center' });
-                } else if (this._freezableColumns.size && this._freezableEndColumns.size) {
-                    // check to see if the active element is obstructed by another element
-                    const activeElLeft = activeEl.getBoundingClientRect().left;
-                    const activeElTop = activeEl.getBoundingClientRect().top;
-                    const topElementFromLeft = document.elementFromPoint(activeElLeft, activeElTop);
-                    // if the activeEl is overlapped
-                    if (
-                        topElementFromLeft &&
-                        !activeEl.isSameNode(topElementFromLeft) &&
-                        topElementFromLeft.classList.contains('fd-table__cell--fixed-end')
-                    ) {
-                        const topElementX = topElementFromLeft.getBoundingClientRect().left;
-                        const leftVal = this._rtl
-                            ? (activeElLeft + activeEl.getBoundingClientRect().width - topElementX) * -1
-                            : activeElLeft + activeEl.getBoundingClientRect().width - topElementX;
-                        tableScrollableEl.scrollBy({ top: 0, left: leftVal });
-                    } else if (
-                        topElementFromLeft &&
-                        !activeEl.isSameNode(topElementFromLeft) &&
-                        topElementFromLeft.classList.contains('fd-table__cell--fixed')
-                    ) {
-                        const topElementX = topElementFromLeft.getBoundingClientRect().right;
-                        const leftVal = this._rtl
-                            ? (activeElLeft - activeEl.getBoundingClientRect().width - topElementX) * -1
-                            : activeElLeft - activeEl.getBoundingClientRect().width - topElementX;
-                        tableScrollableEl.scrollBy({ top: 0, left: leftVal });
-                    }
-                }
-            }
-        }
     }
 }

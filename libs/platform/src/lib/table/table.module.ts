@@ -24,6 +24,7 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 import { PlatformDatePickerModule, PlatformInputModule, PlatformSwitchModule } from '@fundamental-ngx/platform/form';
+import { PlatformListModule } from '@fundamental-ngx/platform/list';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { I18nModule } from '@fundamental-ngx/i18n';
@@ -80,6 +81,11 @@ import { ColumnResizableSidePipe } from './pipes/column-resizable-side.pipe';
 import { PlatformTableColumnResponsiveDirective } from './directives/platform-table-column-responsive.directive';
 import { TableToolbarLeftActionsComponent } from './components/table-toolbar/table-toolbar-left-actions.component';
 
+import { TableCellContentComponent } from './components/table-cell-content/table-cell-content.component';
+import { TableHeaderCellContentComponent } from './components/table-header-cell-content/table-header-cell-content.component';
+import { TableCellHeaderPopoverDirective } from './directives/table-cell-header-popover.directive';
+import { TableCellHeaderPopoverComponent } from './components/table-cell-header-popover/table-cell-header-popover.component';
+
 const EXPORTABLE_DECLARATIONS = [
     TableComponent,
     TableColumnComponent,
@@ -125,7 +131,11 @@ const EXPORTABLE_DECLARATIONS = [
     TableEditableCellComponent,
     FdpEditableCellFormDirective,
     PlatformTableColumnResponsiveDirective,
-    TableToolbarLeftActionsComponent
+    TableToolbarLeftActionsComponent,
+    TableCellContentComponent,
+    TableHeaderCellContentComponent,
+    TableCellHeaderPopoverDirective,
+    TableCellHeaderPopoverComponent
 ];
 
 @NgModule({
@@ -161,14 +171,10 @@ const EXPORTABLE_DECLARATIONS = [
         ContentDensityModule,
         SkeletonModule,
         RepeatModule,
-        DisabledBehaviorModule
+        DisabledBehaviorModule,
+        PlatformListModule
     ],
     declarations: [...EXPORTABLE_DECLARATIONS],
-    exports: [
-        ...EXPORTABLE_DECLARATIONS,
-        PlatformContentDensityDeprecationsModule,
-        ContentDensityModule,
-        TableToolbarLeftActionsComponent
-    ]
+    exports: [...EXPORTABLE_DECLARATIONS]
 })
 export class PlatformTableModule {}

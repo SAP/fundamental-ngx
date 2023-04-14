@@ -18,6 +18,7 @@ import { ShellbarSideNavResponsiveExampleComponent } from './examples/shellbar-s
 import { InitialFocusModule, moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { ShellbarResponsiveExampleComponent } from './examples/shellbar-responsive-example/shellbar-responsive-example.component';
+import { ShellbarGrowingGroupExampleComponent } from './examples/shellbar-growing-group-example/shellbar-growing-group-example.component';
 
 const routes: Routes = [
     {
@@ -43,7 +44,7 @@ const routes: Routes = [
         SegmentedButtonModule,
         PlatformSearchFieldModule
     ],
-    exports: [RouterModule, ShellbarResponsiveExampleComponent],
+    exports: [RouterModule, ShellbarResponsiveExampleComponent, ShellbarGrowingGroupExampleComponent],
     declarations: [
         ShellbarDocsComponent,
         ShellbarDocsHeaderComponent,
@@ -51,7 +52,8 @@ const routes: Routes = [
         ShellbarSideNavExampleComponent,
         ShellbarCollapsibleExampleComponent,
         ShellbarSideNavResponsiveExampleComponent,
-        ShellbarResponsiveExampleComponent
+        ShellbarResponsiveExampleComponent,
+        ShellbarGrowingGroupExampleComponent
     ],
     providers: [moduleDeprecationsProvider(DeprecatedShellbarCompactDirective), currentComponentProvider('shellbar')]
 })

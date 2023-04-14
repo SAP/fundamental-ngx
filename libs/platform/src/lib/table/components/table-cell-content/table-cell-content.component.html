@@ -1,0 +1,42 @@
+<div fd-table-text [fdTableTextClass]="column.applyText" [noWrap]="column.noWrap">
+    <span
+        *ngIf="isTreeRowFirstCell"
+        class="fd-table__expand"
+        [class.fd-table__expand--open]="row.expanded"
+        aria-hidden="true"
+    ></span>
+
+    <ng-container *ngIf="row.state === 'readonly'; else editModeCell">
+        <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
+            <ng-container
+                *ngTemplateOutlet="
+                    column.columnCellTemplate!;
+                    context: { $implicit: row.value, popping: false, rowIndex: row.index }
+                "
+            ></ng-container>
+        </ng-container>
+
+        <ng-template #defaultTableCellTemplate>
+            {{ row.value | valueByPath : column.key }}
+        </ng-template>
+    </ng-container>
+
+    <ng-template #editModeCell>
+        <ng-container *ngIf="column?.editableColumnCellTemplate; else defaultEditableTableCellTemplate">
+            <ng-container
+                *ngTemplateOutlet="
+                    column.editableColumnCellTemplate!;
+                    context: { $implicit: row.value, popping: false, rowIndex: row.index }
+                "
+            ></ng-container>
+        </ng-container>
+
+        <ng-template #defaultEditableTableCellTemplate>
+            <fdp-table-editable-cell
+                [row]="row"
+                [column]="column"
+                [columnValue]="row.value | valueByPath : column.key"
+            ></fdp-table-editable-cell>
+        </ng-template>
+    </ng-template>
+</div>

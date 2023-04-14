@@ -28,12 +28,14 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import {
+    asyncScheduler,
     BehaviorSubject,
     filter,
     firstValueFrom,
     isObservable,
     map,
     Observable,
+    observeOn,
     of,
     startWith,
     Subject,
@@ -485,7 +487,9 @@ export class ListComponent<T>
         this._keyManager = new FocusKeyManager<BaseListItem>(this.listItems).withWrap();
 
         this._subscriptions.add(
-            this.listItems.changes.pipe(startWith(this.listItems)).subscribe(() => this._updateListItems())
+            this.listItems.changes
+                .pipe(startWith(this.listItems), observeOn(asyncScheduler))
+                .subscribe(() => this._updateListItems())
         );
 
         const indicator = this.elementRef.nativeElement.querySelector('fd-busy-indicator');
@@ -903,6 +907,8 @@ export class ListComponent<T>
 
             item.ariaPosinet = index;
         });
+
+        this._cd.markForCheck();
     }
 
     /** @hidden */
