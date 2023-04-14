@@ -54,7 +54,6 @@ export class SettingsGeneratorTabsLayoutComponent extends BaseSettingsGeneratorL
         if (sectionIndex > -1) {
             this.tabPanels.get(sectionIndex)!.open(true);
         }
-        debugger;
     }
 }
 

@@ -2,6 +2,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
@@ -10,6 +12,7 @@ import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { BreakpointDirective, RtlService } from '@fundamental-ngx/cdk/utils';
+import { PlatformListModule } from '@fundamental-ngx/platform/list';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformInputModule } from '@fundamental-ngx/platform/form';
@@ -76,7 +79,7 @@ const routes: Routes = [
             { path: 'basic', component: PlatformTableDocsComponent },
             { path: 'api', component: ApiComponent, data: { content: API_FILES.table } },
             { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformTable') },
-            { path: 'p13-dialog-table', component: P13DialogDocsComponent, data: { child: true } },
+            { path: 'p13-dialog-table', component: P13DialogDocsComponent },
             { path: 'settings-dialog-table', component: SettingsDialogDocsComponent },
             { path: 'scrolling', component: TableScrollingDocsComponent },
             { path: 'row-selection', component: RowSelectionDocsComponent },
@@ -105,7 +108,10 @@ const routes: Routes = [
         SegmentedButtonModule,
         ToolbarModule,
         BreakpointDirective,
-        PlatformMenuModule
+        PlatformMenuModule,
+        PopoverModule,
+        PlatformListModule,
+        ListModule
     ],
     exports: [RouterModule],
     declarations: [

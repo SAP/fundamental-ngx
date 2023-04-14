@@ -22,6 +22,7 @@ import {
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import {
+    ALT,
     BACKSPACE,
     CONTROL,
     DOWN_ARROW,
@@ -100,7 +101,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
      * @default true
      */
     @Input()
-    buttonFocusable = true;
+    buttonFocusable = false;
 
     /** Datasource for suggestion list. */
     @Input()
@@ -348,7 +349,8 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         UP_ARROW,
         RIGHT_ARROW,
         DOWN_ARROW,
-        LEFT_ARROW
+        LEFT_ARROW,
+        ALT
     ];
 
     /** @hidden */
@@ -524,9 +526,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             this.showList(false);
         }
 
-        if (this.isOpen && this.listComponent) {
-            this.listComponent.setItemActive(0);
-        }
+        this.searchInputElement?.nativeElement.focus();
     }
 
     /**

@@ -1,13 +1,55 @@
 <fdp-table [dataSource]="source" emptyTableMessage="No data found" (rowSelectionChange)="onRowSelectionChange($event)">
     <fdp-table-toolbar title="Order Line Items" [hideItemCount]="true" [hideSearchInput]="false"> </fdp-table-toolbar>
 
-    <fdp-column name="name" key="name">
-        <fdp-table-header *fdpHeaderCellDef>Name</fdp-table-header>
+    <fdp-column name="name" key="name" [sortable]="true">
+        <fdp-table-header *fdpHeaderCellDef>
+            Name
+            <!-- *fdpTableCellHeaderPopover implicitly exposes Observable<TemplateRef[]> with default column actions, such as sort, group, filter, freeze. -->
+            <!-- When using custom popover renderer, it's developers responsibility to include those default actions into custom renderer component. -->
+            <fd-popover
+                #popover
+                *fdpTableCellHeaderPopover="let items"
+                placement="top"
+                title="menu2"
+                [focusAutoCapture]="true"
+            >
+                <fd-popover-control>
+                    <button fdCompact fd-button glyph="menu2"></button>
+                </fd-popover-control>
+                <fd-popover-body>
+                    <fdp-list [navigated]="true">
+                        <fdp-free-content-list-item>
+                            <a fd-list-link>
+                                <i fd-list-icon glyph="history"></i>
+                                <span fd-list-title> Link List item 1 </span>
+                            </a>
+                        </fdp-free-content-list-item>
+                        <fdp-free-content-list-item>
+                            <a fd-list-link>
+                                <i fd-list-icon glyph="cart"></i>
+                                <span fd-list-title> Link List item 2 </span>
+                            </a>
+                        </fdp-free-content-list-item>
+                        <fdp-free-content-list-item>
+                            <a fd-list-link>
+                                <span fd-list-title> Link List item 3</span>
+                            </a>
+                        </fdp-free-content-list-item>
+                        <fdp-free-content-list-item *ngFor="let item of items | async">
+                            <ng-template
+                                [ngTemplateOutlet]="item"
+                                [ngTemplateOutletContext]="{ popover: popover }"
+                            ></ng-template>
+                        </fdp-free-content-list-item>
+                    </fdp-list>
+                </fd-popover-body>
+            </fd-popover>
+        </fdp-table-header>
         <fdp-table-cell *fdpCellDef="let item">{{ item.name }}</fdp-table-cell>
     </fdp-column>
 
-    <fdp-column name="description" key="description">
-        <fdp-table-header *fdpHeaderCellDef>Description</fdp-table-header>
+    <fdp-column name="description" key="description" [sortable]="true">
+        <fdp-table-header *fdpHeaderCellDef> Description </fdp-table-header>
         <fdp-table-cell *fdpCellDef="let item">
             <fdp-input
                 type="text"
@@ -21,18 +63,20 @@
 
     <fdp-column name="price" key="price.value">
         <fdp-table-header *fdpHeaderCellDef>Price</fdp-table-header>
-        <fdp-table-cell *fdpCellDef="let item"> {{ item.price.value }} {{ item.price.currency }} </fdp-table-cell>
+        <fdp-table-cell *fdpCellDef="let item; as: exampleItemType">
+            {{ item.price.value }} {{ item.price.currency }}
+        </fdp-table-cell>
     </fdp-column>
 
     <fdp-column name="status" key="status">
         <fdp-table-header *fdpHeaderCellDef>Status</fdp-table-header>
-        <fdp-table-cell *fdpCellDef="let item">
+        <fdp-table-cell *fdpCellDef="let item; as: exampleItemType">
             <span fd-object-status [status]="item.statusColor">{{ item.status }}</span>
         </fdp-table-cell>
     </fdp-column>
     <fdp-column name="index" key="index">
         <fdp-table-header *fdpHeaderCellDef>Row index</fdp-table-header>
-        <fdp-table-cell *fdpCellDef="let item; let i = rowIndex">
+        <fdp-table-cell *fdpCellDef="let item; as: exampleItemType; let i = rowIndex">
             <span>Row index {{ i }}</span>
         </fdp-table-cell>
     </fdp-column>

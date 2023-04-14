@@ -88,3 +88,23 @@
     <fd-shellbar-side-nav-responsive-example></fd-shellbar-side-nav-responsive-example>
 </component-example>
 <code-example [exampleFiles]="shellbarSideNavResponsive"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="side-growing-group" componentName="shellbar">
+    Shellbar with Growing groups
+</fd-docs-section-title>
+<description>
+    <p>
+        The shellbar is optimized to be used with central group for the search. This creates a necessity of centering
+        the groups by giving them equal width.
+    </p>
+    <p>
+        If the design suggests that each group can have own width, developers can pass <code>[groupFlex]</code> input
+        property defining for each group whether it can shrink, allowing other groups to grow.
+    </p>
+</description>
+<component-example>
+    <fd-shellbar-growing-group-example></fd-shellbar-growing-group-example>
+</component-example>
+<code-example [exampleFiles]="shellbarSideNavResponsive"></code-example>

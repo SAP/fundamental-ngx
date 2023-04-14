@@ -10,6 +10,7 @@ import {
     SimpleChanges,
     TemplateRef
 } from '@angular/core';
+import { TableCellHeaderPopoverDirective } from '../../directives/table-cell-header-popover.directive';
 
 import { ColumnAlignValue } from '../../enums/column-align.enum';
 import { FilterableColumnDataType } from '../../enums/filter-type.enum';
@@ -20,6 +21,7 @@ import { FdpColumnResponsiveState } from '../../interfaces/column-responsive-sta
 import { TableColumn } from './table-column';
 import { TableService } from '../../table.service';
 import { TableColumnResizeService } from '../../table-column-resize.service';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * The component that represents a table column.
@@ -113,30 +115,42 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     applyText = true;
 
     /** Column cell template */
-    columnCellTemplate: TemplateRef<any>;
+    columnCellTemplate: Nullable<TemplateRef<any>>;
 
     /** Editable column cell template. */
-    editableColumnCellTemplate: TemplateRef<any>;
+    editableColumnCellTemplate: Nullable<TemplateRef<any>>;
 
     /** Column header template */
-    headerCellTemplate: TemplateRef<any>;
+    headerCellTemplate: Nullable<TemplateRef<any>>;
+
+    /** Column header popover template. */
+    headerCellPopoverTemplate: Nullable<TemplateRef<any>>;
+
+    /** Stores information for the header cell if the ellipsis are visible after the column resize */
+    headerOverflows = false;
 
     /** @hidden */
     @ContentChild(FdpCellDef)
-    set fdpCellDef(fdpCellDef: FdpCellDef) {
+    set fdpCellDef(fdpCellDef: Nullable<FdpCellDef>) {
         this.columnCellTemplate = fdpCellDef?.templateRef;
     }
 
     /** Editable column cell template definition. */
     @ContentChild(FdpEditableCellDef)
-    set fdpEditableCellDef(fdpEditableCellDef: FdpEditableCellDef) {
+    set fdpEditableCellDef(fdpEditableCellDef: Nullable<FdpEditableCellDef>) {
         this.editableColumnCellTemplate = fdpEditableCellDef?.templateRef;
     }
 
     /** @hidden */
     @ContentChild(FdpHeaderCellDef)
-    set fdpHeaderCellDef(fdpHeaderCellDef: FdpHeaderCellDef) {
+    set fdpHeaderCellDef(fdpHeaderCellDef: Nullable<FdpHeaderCellDef>) {
         this.headerCellTemplate = fdpHeaderCellDef?.templateRef;
+    }
+
+    /** @hidden */
+    @ContentChild(TableCellHeaderPopoverDirective)
+    set fdpHeaderCellPopover(popover: Nullable<TableCellHeaderPopoverDirective>) {
+        this.headerCellPopoverTemplate = popover?.templateRef;
     }
 
     /** Responsive state of the column. */

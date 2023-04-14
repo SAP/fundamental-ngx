@@ -262,6 +262,15 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
+    /**
+     * Updates trigger element and refreshes the listeners.
+     * @param trigger Trigger element ref.
+     */
+    updateTriggerElement(trigger: ElementRef): void {
+        this._triggerElement = trigger;
+        this._refreshTriggerListeners();
+    }
+
     /** @hidden */
     private _normalizeTriggers(): TriggerConfig[] {
         return this.triggers.map((trigger, index) => {

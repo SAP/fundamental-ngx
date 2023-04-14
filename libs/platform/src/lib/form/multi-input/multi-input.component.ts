@@ -283,6 +283,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             this.showList(false);
         } else if (this.openDropdownOnAddOnClicked) {
             this.showList(!this.isOpen);
+            this.searchInputElement?.nativeElement.focus();
         }
 
         this.addOnButtonClicked.emit(event);

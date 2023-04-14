@@ -66,7 +66,7 @@ export class TablePo extends PlatformBaseComponentPo {
     dialogItemText = '.fd-select-item--active  .fd-list__title';
     dialogMoveToBottom = '[title="Move to Bottom"]';
     footerButtonOk = 'fd-dialog-footer-button button';
-    columnHeader = '[role="columnheader"] div';
+    columnHeader = '[role="columnheader"] fdp-table-header-cell-content > div';
     popoverDropdownButton = 'fd-dialog-body fd-popover-control .fd-button';
     buttonAdd = '[title="Add new"]';
     buttonRemove = '[title="Remove"]';
