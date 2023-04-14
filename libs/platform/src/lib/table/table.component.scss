@@ -196,6 +196,15 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
                 visibility: hidden;
             }
         }
+
+        .fd-table__cell--truncate-txt {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            vertical-align: text-bottom;
+            max-width: 100%;
+        }
     }
 
     &__body {

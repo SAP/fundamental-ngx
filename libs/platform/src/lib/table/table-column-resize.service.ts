@@ -270,11 +270,10 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Update columns width after resizing, prevent from having too small columns. */
     _processResize(diffX: number): void {
-        const columnWidth = this._columnsCellMap
-            .get(this._resizedColumn)?.[0]
-            ?.nativeElement.getBoundingClientRect().width;
+        const resizedElement = this._columnsCellMap.get(this._resizedColumn)?.[0]?.nativeElement;
+        const columnWidth = resizedElement?.getBoundingClientRect().width;
 
-        if (!columnWidth) {
+        if (!columnWidth || !resizedElement) {
             return;
         }
 
@@ -304,8 +303,13 @@ export class TableColumnResizeService implements OnDestroy {
             }
         }
 
-        this._fixedColumnsWidthMap.set(this._resizedColumn, columnWidth + diffX + 'px');
+        const updatedWidth = columnWidth + diffX;
+        this._fixedColumnsWidthMap.set(this._resizedColumn, updatedWidth + 'px');
         this.updateFrozenColumnsWidthAfterResize(this._resizedColumn, diffX);
+
+        const computed = window.getComputedStyle(resizedElement);
+        const padding = parseInt(computed.paddingLeft, 10) + parseInt(computed.paddingRight, 10);
+        this._updateHeaderOverflowState(updatedWidth - padding);
     }
 
     /** Update column resizer position. */
@@ -320,5 +324,24 @@ export class TableColumnResizeService implements OnDestroy {
 
                 this._markForCheck.next();
             });
+    }
+
+    /**
+     * Check if the header text length goes over the column width. In such case applies text truncation with
+     * ellipsis and make sure we also show a tooltip.
+     *
+     * @private
+     */
+    private _updateHeaderOverflowState(updatedWidth: number): void {
+        const element = this._columnsCellMap
+            .get(this._resizedColumn)
+            ?.find((c) => c?.nativeElement.tagName === 'TH')?.nativeElement;
+        const visibleColumn = this._tableRef.getVisibleTableColumns().find((c) => c.name === this._resizedColumn);
+        const headerTextElem = element?.querySelector(`#${this._tableRef.id}-header-cell-${this._resizedColumn}`);
+
+        if (!headerTextElem || !visibleColumn) {
+            return;
+        }
+        visibleColumn.headerOverflows = headerTextElem.scrollWidth > updatedWidth;
     }
 }
