@@ -67,8 +67,10 @@
                 type="text"
                 class="fd-input fd-multi-input-tokenizer-input fd-tokenizer__input"
                 fdp-auto-complete
+                autocomplete="off"
                 (onComplete)="_onAutoComplete($event)"
                 (keydown.enter)="_onKeydownEnter($event)"
+                (keydown)="onInputKeydownHandler($event)"
                 [inputText]="inputText"
                 [options]="_suggestions"
                 fd-input-group-input

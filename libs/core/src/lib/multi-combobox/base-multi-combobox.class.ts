@@ -1,4 +1,5 @@
 import {
+    ALT,
     BACKSPACE,
     CONTROL,
     DOWN_ARROW,
@@ -153,7 +154,8 @@ export abstract class BaseMultiCombobox<T = any> {
         UP_ARROW,
         RIGHT_ARROW,
         DOWN_ARROW,
-        LEFT_ARROW
+        LEFT_ARROW,
+        ALT
     ];
 
     /** @hidden */

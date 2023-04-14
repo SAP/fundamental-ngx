@@ -19,6 +19,7 @@ import {
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import {
+    ALT,
     BACKSPACE,
     CONTROL,
     DOWN_ARROW,
@@ -172,7 +173,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * @default true
      */
     @Input()
-    buttonFocusable = true;
+    buttonFocusable = false;
 
     /**
      * The trigger events that will open/close the options popover.
@@ -295,7 +296,8 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         UP_ARROW,
         RIGHT_ARROW,
         DOWN_ARROW,
-        LEFT_ARROW
+        LEFT_ARROW,
+        ALT
     ];
 
     /** Keys, that are numbers from number keypad */
@@ -445,8 +447,8 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
         this.isOpenChangeHandle(!this.isOpen);
 
-        if (this.isOpen && this.listComponent) {
-            this.listComponent.setItemActive(0);
+        if (this.isOpen) {
+            this.searchInputElement?.nativeElement.focus();
         }
     }
 

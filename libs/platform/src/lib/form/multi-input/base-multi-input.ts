@@ -21,6 +21,7 @@ import {
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import {
+    ALT,
     CONTROL,
     DOWN_ARROW,
     ENTER,
@@ -113,10 +114,10 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /**
      * Whether AddOn Button should be focusable
-     * @default true
+     * @default false
      */
     @Input()
-    buttonFocusable = true;
+    buttonFocusable = false;
 
     /** Tells the multi input if we need to group items */
     @Input()
@@ -288,7 +289,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         UP_ARROW,
         RIGHT_ARROW,
         DOWN_ARROW,
-        LEFT_ARROW
+        LEFT_ARROW,
+        ALT
     ];
 
     /** @hidden */
@@ -397,9 +399,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             if (this.inputText) {
                 return;
             }
-            // Focus on the first item in dropdown.
-            this.listComponent?._setCurrentActiveItemIndex(0);
-            this.listComponent?.listItems.first.focus();
         });
     }
     /** Closes the select popover body. */
@@ -480,6 +479,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             }
 
             if (this.isOpen) {
+                this.listComponent?._setCurrentActiveItemIndex(0);
                 this.listComponent?.listItems.first.focus();
             } else {
                 this._chooseOtherItem(1);

@@ -99,7 +99,7 @@
                 [fdType]="inShellbar ? 'standard' : 'transparent'"
                 title="Clear input"
                 [class.fd-shellbar__button]="inShellbar"
-                [attr.tabindex]="buttonFocusable ? 0 : -1"
+                [attr.tabindex]="clearButtonFocusable ? 0 : -1"
                 (focus)="clearInputBtnFocus()"
                 (blur)="clearInputBtnBlur()"
                 (click)="_handleClearSearchTerm()"

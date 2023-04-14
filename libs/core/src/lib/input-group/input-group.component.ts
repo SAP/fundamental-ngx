@@ -22,7 +22,11 @@ import { filter, fromEvent, map, merge, Observable, Subject, takeUntil, debounce
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 
-import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
+import {
+    InputGroupAddonButtonDirective,
+    InputGroupAddOnDirective,
+    InputGroupInputDirective
+} from './input-group-directives';
 import { InputGroupPlacement } from './types';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 
@@ -188,6 +192,10 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     addOnElement: InputGroupAddOnDirective;
 
     /** @hidden */
+    @ViewChild(InputGroupAddonButtonDirective, { static: false, read: ElementRef })
+    private readonly _localButtonElement: ElementRef;
+
+    /** @hidden */
     _inputTextValue: string;
 
     /** @hidden */
@@ -325,10 +333,18 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
             return;
         }
 
-        this._inputFocused$ = merge(
+        const focusEvents = [
             fromEvent(inputElement, 'focusin').pipe(map(() => true)),
             fromEvent(inputElement, 'focusout').pipe(map(() => false))
-        ).pipe(
+        ];
+
+        if (this._localButtonElement) {
+            focusEvents.push(
+                fromEvent(this._localButtonElement.nativeElement, 'mousedown').pipe(map(() => !this.buttonFocusable))
+            );
+        }
+
+        this._inputFocused$ = merge(...focusEvents).pipe(
             // debounceTime is needed in order to filter subsequent focus-blur events, that happen simultaneously
             debounceTime(10),
             filter(() => this.showFocus),

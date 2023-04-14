@@ -17,6 +17,8 @@ input {
 
 .fd-tokenizer-more {
     padding-right: 0.5rem;
+    color: var(--sapLinkColor);
+    cursor: pointer;
     [dir='rtl'] &,
     &[dir='rtl'] {
         padding-left: 0.5rem;

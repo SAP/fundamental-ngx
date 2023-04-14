@@ -6,6 +6,7 @@ import { InputGroupComponent } from './input-group.component';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import {
+    InputGroupAddonButtonDirective,
     InputGroupAddOnDirective,
     InputGroupInputDirective,
     InputGroupTextareaDirective
@@ -19,7 +20,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         InputGroupInputDirective,
         InputGroupTextareaDirective,
         InputGroupAddOnDirective,
-        DeprecatedInputGroupCompactDirective
+        DeprecatedInputGroupCompactDirective,
+        InputGroupAddonButtonDirective
     ],
     imports: [CommonModule, ButtonModule, IconModule, FormsModule, ContentDensityModule],
     exports: [
@@ -28,7 +30,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         InputGroupTextareaDirective,
         InputGroupAddOnDirective,
         DeprecatedInputGroupCompactDirective,
-        ContentDensityModule
+        ContentDensityModule,
+        InputGroupAddonButtonDirective
     ]
 })
 export class InputGroupModule {}
