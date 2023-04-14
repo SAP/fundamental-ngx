@@ -1,3 +1,12 @@
+## [0.40.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.40.1...v0.40.2-rc.0) (2023-04-14)
+
+
+### Bug Fixes
+
+* **platform:** add input to disable drag and drop ([#9685](https://github.com/SAP/fundamental-ngx/issues/9685)) ([44bce1a](https://github.com/SAP/fundamental-ngx/commit/44bce1a770dd8ea802edfaf2027a5b5150878b68))
+
+
+
 ## [0.40.1](https://github.com/SAP/fundamental-ngx/compare/v0.40.1-rc.9...v0.40.1) (2023-04-13)
 
 
