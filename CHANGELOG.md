@@ -1,3 +1,12 @@
+## [0.40.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.5...v0.40.2-rc.6) (2023-04-14)
+
+
+### Bug Fixes
+
+* **platform:** custom status for approval flow ([#9630](https://github.com/SAP/fundamental-ngx/issues/9630)) ([3907eef](https://github.com/SAP/fundamental-ngx/commit/3907eef3de8bf2aa7086c3c2b4117dfbab32d475))
+
+
+
 ## [0.40.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.4...v0.40.2-rc.5) (2023-04-14)
 
 
