@@ -1,3 +1,12 @@
+## [0.40.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.4...v0.40.2-rc.5) (2023-04-14)
+
+
+### Bug Fixes
+
+* **core:** allow shrinking groups ([#9670](https://github.com/SAP/fundamental-ngx/issues/9670)) ([c6202ea](https://github.com/SAP/fundamental-ngx/commit/c6202ea46535400528e1ed348abedd6b6130b13c))
+
+
+
 ## [0.40.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.3...v0.40.2-rc.4) (2023-04-14)
 
 
