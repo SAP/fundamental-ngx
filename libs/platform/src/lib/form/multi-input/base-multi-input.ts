@@ -22,6 +22,7 @@ import {
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import {
     ALT,
+    BACKSPACE,
     CONTROL,
     DOWN_ARROW,
     ENTER,
@@ -290,7 +291,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         RIGHT_ARROW,
         DOWN_ARROW,
         LEFT_ARROW,
-        ALT
+        ALT,
+        BACKSPACE
     ];
 
     /** @hidden */
