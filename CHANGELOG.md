@@ -1,3 +1,12 @@
+## [0.40.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.1...v0.40.2-rc.2) (2023-04-14)
+
+
+### Bug Fixes
+
+* **platform:** tooltip for column size shrink ([#9612](https://github.com/SAP/fundamental-ngx/issues/9612)) ([951b69e](https://github.com/SAP/fundamental-ngx/commit/951b69e60a3eba302c56567a5cc9d2f9824bf922))
+
+
+
 ## [0.40.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.0...v0.40.2-rc.1) (2023-04-14)
 
 
