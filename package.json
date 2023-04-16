@@ -120,7 +120,7 @@
     "ajv-formats": "2.1.1",
     "angular-cli-ghpages": "1.0.5",
     "autoprefixer": "10.4.14",
-    "axe-core": "4.5.2",
+    "axe-core": "4.6.3",
     "axe-html-reporter": "2.2.3",
     "axios": "1.2.0",
     "babel-loader": "9.1.0",
