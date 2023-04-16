@@ -70,10 +70,8 @@ function createComponentClassList(
     previousComponentClassList: string[],
     newComponentClassList: string[]
 ): string[] {
-    allClasses = allClasses.slice();
-    let index = firstCommonElementIndex(allClasses, previousComponentClassList);
-    index = index === -1 ? 0 : index;
-    allClasses.splice(index, previousComponentClassList.length, ...newComponentClassList);
-
-    return allClasses;
+    const index = firstCommonElementIndex(allClasses, previousComponentClassList);
+    const start = index === -1 ? 0 : index + 1;
+    const end = index === -1 ? 0 : start + previousComponentClassList.length;
+    return [...allClasses.slice(0, start), ...newComponentClassList, ...allClasses.slice(end)];
 }
