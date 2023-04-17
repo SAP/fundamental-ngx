@@ -1,3 +1,12 @@
+## [0.40.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.7...v0.40.2-rc.8) (2023-04-17)
+
+
+### Bug Fixes
+
+* **core:** fd-scrollbar should prevent scroll event from bubbling ([#9696](https://github.com/SAP/fundamental-ngx/issues/9696)) ([b37a5d5](https://github.com/SAP/fundamental-ngx/commit/b37a5d5067a8f6c78ad81db346e35436398ec435))
+
+
+
 ## [0.40.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.6...v0.40.2-rc.7) (2023-04-17)
 
 
