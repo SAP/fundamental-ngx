@@ -25,6 +25,11 @@ export class ListLinkDirective implements OnChanges {
     @HostBinding('class.is-navigated')
     navigated = false;
 
+    /** Whether to mark link as focusable. If true, list item will shift focus from itself to the link. */
+    @Input()
+    @HostBinding('class.fd-list__link--focusable')
+    focusable = false;
+
     /** @hidden */
     @HostBinding('class.fd-list__link')
     fdListLinkClass = true;

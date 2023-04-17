@@ -515,9 +515,7 @@ export class MultiInputComponent
         } else {
             this.disableParentFocusTrap();
 
-            if (this.listComponent && this._searchTermCtrl.value?.length === 0) {
-                this.listComponent.setItemActive(0);
-            }
+            this.searchInputElement?.nativeElement.focus();
         }
 
         this.tokenizer.removeSelectedTokens();

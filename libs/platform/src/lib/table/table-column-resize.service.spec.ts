@@ -9,6 +9,7 @@ import { TableScrollDispatcherService } from './table-scroll-dispatcher.service'
 
 describe('TableColumnResizeService', () => {
     let service: TableColumnResizeService;
+    const visibleColumn = { name: 'name', headerOverflows: false };
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -17,6 +18,7 @@ describe('TableColumnResizeService', () => {
         service = TestBed.inject(TableColumnResizeService);
         service.setTableRef({
             getMaxAllowedFreezableColumnsWidth: () => 1000,
+            getVisibleTableColumns: () => [visibleColumn],
             _freezableColumns: new Map([['name', 0]]),
             _tableWidthPx: 1400
         } as any);
@@ -56,6 +58,13 @@ describe('TableColumnResizeService', () => {
             }
         } as ElementRef;
 
+        Object.defineProperty(window, 'getComputedStyle', {
+            value: () => ({
+                paddingLeft: '8px',
+                paddingRight: '8px'
+            })
+        });
+
         service.registerColumnCell(tableColumn.name, tableColumnCell);
         service.setColumnNames(tableColumnNames);
         service.setInitialResizerPosition(0, tableColumn.name);
@@ -81,6 +90,13 @@ describe('TableColumnResizeService', () => {
             }
         } as ElementRef;
 
+        Object.defineProperty(window, 'getComputedStyle', {
+            value: () => ({
+                paddingLeft: '8px',
+                paddingRight: '8px'
+            })
+        });
+
         service.registerColumnCell(tableColumn.name, tableColumnCell);
         service.setColumnNames(tableColumnNames);
         service.setInitialResizerPosition(0, tableColumn.name);
@@ -89,5 +105,69 @@ describe('TableColumnResizeService', () => {
         service.finishResize({ clientX: clientEndX } as MouseEvent);
 
         expect(service.getColumnWidthStyle(tableColumn.name)).toEqual(TABLE_COLUMN_MIN_WIDTH + 'px');
+    });
+
+    it('should truncate header text when column size is smaller', () => {
+        const clientStartX = 0;
+        const clientEndX = -80;
+        const initialColumnWidth = 100;
+        const tableColumnNames = ['name'];
+        const tableColumn = (<any>{ name: tableColumnNames[0], width: null }) as TableColumn;
+        const tableColumnCell = {
+            nativeElement: {
+                getBoundingClientRect: () => ({ width: initialColumnWidth }),
+                clientWidth: initialColumnWidth,
+                tagName: 'TH',
+                querySelector: (s: string) => ({ scrollWidth: 80 })
+            }
+        } as ElementRef;
+
+        Object.defineProperty(window, 'getComputedStyle', {
+            value: () => ({
+                paddingLeft: '8px',
+                paddingRight: '8px'
+            })
+        });
+
+        service.registerColumnCell(tableColumn.name, tableColumnCell);
+        service.setColumnNames(tableColumnNames);
+        service.setInitialResizerPosition(0, tableColumn.name);
+
+        service.startResize({ clientX: clientStartX } as MouseEvent);
+        service.finishResize({ clientX: clientEndX } as MouseEvent);
+
+        expect(visibleColumn.headerOverflows).toBeTruthy();
+    });
+
+    it('should not truncate header text if the column is wider', () => {
+        const clientStartX = 0;
+        const clientEndX = -80;
+        const initialColumnWidth = 100;
+        const tableColumnNames = ['name'];
+        const tableColumn = (<any>{ name: tableColumnNames[0], width: null }) as TableColumn;
+        const tableColumnCell = {
+            nativeElement: {
+                getBoundingClientRect: () => ({ width: initialColumnWidth }),
+                clientWidth: initialColumnWidth,
+                tagName: 'TH',
+                querySelector: (s: string) => ({ scrollWidth: 20 })
+            }
+        } as ElementRef;
+
+        Object.defineProperty(window, 'getComputedStyle', {
+            value: () => ({
+                paddingLeft: '10px',
+                paddingRight: '10px'
+            })
+        });
+
+        service.registerColumnCell(tableColumn.name, tableColumnCell);
+        service.setColumnNames(tableColumnNames);
+        service.setInitialResizerPosition(0, tableColumn.name);
+
+        service.startResize({ clientX: clientStartX } as MouseEvent);
+        service.finishResize({ clientX: clientEndX } as MouseEvent);
+
+        expect(visibleColumn.headerOverflows).toBeFalse();
     });
 });

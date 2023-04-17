@@ -16,8 +16,7 @@ import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-input-group-input]',
+    selector: '[fdInputGroupInput], [fd-input-group-input]',
     providers: [contentDensityObserverProviders()]
 })
 export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChanges, OnDestroy {
@@ -59,20 +58,18 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
+    elementRef(): ElementRef {
         return this._elementRef;
     }
 }
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-textarea-group-input]'
+    selector: '[fdTextareaGroupInput], [fd-textarea-group-input]'
 })
 export class InputGroupTextareaDirective {}
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-input-group-addon]',
+    selector: '[fdInputGroupAddon], [fd-input-group-addon]',
     providers: [contentDensityObserverProviders()]
 })
 export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuilder, AfterContentInit, OnDestroy {
@@ -161,7 +158,15 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
+    elementRef(): ElementRef {
         return this._elementRef;
     }
 }
+
+@Directive({
+    selector: '[fdInputGroupAddonButton], [fd-input-group-addon-button]',
+    host: {
+        class: 'fd-input-group__button'
+    }
+})
+export class InputGroupAddonButtonDirective {}

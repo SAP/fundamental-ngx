@@ -14,6 +14,8 @@ import { PlatformTableManagedPreset, SaveRowsEvent } from './models';
 export abstract class Table<T = any> implements PresetManagedComponent<PlatformTableManagedPreset> {
     abstract readonly name: string;
 
+    abstract readonly id: string;
+
     abstract initialSortBy?: CollectionSort[];
 
     abstract initialGroupBy: CollectionGroup[];
