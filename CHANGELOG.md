@@ -1,3 +1,12 @@
+## [0.40.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.8...v0.40.2-rc.9) (2023-04-17)
+
+
+### Bug Fixes
+
+* **cdk:** dynamic component should markForCheck after creation ([#9692](https://github.com/SAP/fundamental-ngx/issues/9692)) ([a517cae](https://github.com/SAP/fundamental-ngx/commit/a517cae9e5593dcfb4f6ab3b2dc903e9a232e8c0))
+
+
+
 ## [0.40.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.7...v0.40.2-rc.8) (2023-04-17)
 
 
