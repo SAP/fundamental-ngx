@@ -315,7 +315,7 @@
                             [cellFocusedEventAnnouncer]="null"
                             (cellFocused)="_onCellFocused($event, column?.label ?? '', isTreeTable ? row.level : null)"
                             (click)="_onCellClick(colIdx, row)"
-                            (keydown.enter)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
+                            (keydown.enter)="_isTreeRowFirstCell(colIdx, row, $event) && _toggleGroupRow(row)"
                             (keydown.arrowLeft)="_scrollToOverlappedCell()"
                             (keydown.arrowRight)="_scrollToOverlappedCell()"
                         >
@@ -370,7 +370,7 @@
                             [attr.data-nesting-level]="row.level + 1"
                             [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
                             (click)="_onCellClick(0, row)"
-                            (keydown.enter)="_isTreeRowFirstCell(0, row) && _toggleGroupRow(row)"
+                            (keydown.enter)="_isTreeRowFirstCell(0, row, $event) && _toggleGroupRow(row)"
                         >
                             <div fd-table-text *ngFor="let poppingColumn of _poppingColumns">
                                 <label fd-form-label>{{ poppingColumn.label }}:</label>

@@ -1731,9 +1731,15 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         );
     }
 
-    /** @hidden */
-    _isTreeRowFirstCell(cellIndex: number, row: TableRow): boolean {
-        return cellIndex === 0 && this._isTreeRow(row);
+    /**
+     * This method is used in both css class condition and in the (keydown.enter) handler. We want
+     * to make sure that we also allow keyboard handling for the non-tree cells.
+     *
+     * @param event Optional event that is used only for the keydown even handler
+     * @hidden
+     */
+    _isTreeRowFirstCell(cellIndex: number, row: TableRow, event?: Event): boolean {
+        return (cellIndex === 0 && this._isTreeRow(row)) || (!!event && !this._isTreeRow(row));
     }
 
     /** @hidden */
