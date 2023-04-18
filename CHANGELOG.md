@@ -1,3 +1,13 @@
+## [0.40.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.9...v0.40.2-rc.10) (2023-04-18)
+
+
+### Bug Fixes
+
+* **core:** fix overflow layout calculation ([#9687](https://github.com/SAP/fundamental-ngx/issues/9687)) ([e8fc19b](https://github.com/SAP/fundamental-ngx/commit/e8fc19b948ac46abbf780b334e3a2a80f24504a8))
+* **platform:** enable keydown events also for the non-tree rows ([#9693](https://github.com/SAP/fundamental-ngx/issues/9693)) ([dce1786](https://github.com/SAP/fundamental-ngx/commit/dce17862b7f81e4e20c0bed59ce6d96e13477df6))
+
+
+
 ## [0.40.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.8...v0.40.2-rc.9) (2023-04-17)
 
 
