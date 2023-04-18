@@ -215,6 +215,7 @@
                         (keydown.alt.shift.arrowdown)="_dragRowFromKeyboard('down', $event, rowIdx, 'group')"
                         (started)="_dragDropStart()"
                         [main]="true"
+                        [class.fd-table__row--draggable]="enableRowReordering && _rowsDraggable"
                     >
                         <td
                             *ngIf="semanticHighlighting"

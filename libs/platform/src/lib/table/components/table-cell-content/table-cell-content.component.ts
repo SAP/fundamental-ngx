@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { TableRow } from '../../models/table-row.model';
 import { TableColumn } from '../table-column/table-column';
 
 @Component({
     selector: 'fdp-table-cell-content',
     templateUrl: './table-cell-content.component.html',
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    encapsulation: ViewEncapsulation.None
 })
 export class TableCellContentComponent {
     /** Table column definition. */
