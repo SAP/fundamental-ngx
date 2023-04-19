@@ -1,3 +1,12 @@
+## [0.40.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.10...v0.40.2-rc.11) (2023-04-19)
+
+
+### Bug Fixes
+
+* testing translation_v2 ([#9717](https://github.com/SAP/fundamental-ngx/issues/9717)) ([502d5e5](https://github.com/SAP/fundamental-ngx/commit/502d5e55be9b3ef8588fa54885d5a65facf2cc7d))
+
+
+
 ## [0.40.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.9...v0.40.2-rc.10) (2023-04-18)
 
 
