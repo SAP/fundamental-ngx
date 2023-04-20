@@ -16,9 +16,12 @@ import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 import { FD_BUTTON_COMPONENT } from './tokens';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { DeprecatedButtonContentDensityDirective } from './deprecated-button-content-density.directive';
 
 /**
- * Button directive, used to enhance standard HTML buttons.
+ * Button component, used to enhance standard HTML buttons.
  *
  * ``` selector: button[fd-button], a[fd-button] ```
  *
@@ -35,6 +38,12 @@ import { FD_BUTTON_COMPONENT } from './tokens';
     styleUrls: ['./button.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    hostDirectives: [
+        {
+            directive: DeprecatedButtonContentDensityDirective,
+            inputs: ['compact']
+        }
+    ],
     host: {
         '[attr.type]': 'type',
         '[attr.disabled]': '_disabled || null',
@@ -46,7 +55,9 @@ import { FD_BUTTON_COMPONENT } from './tokens';
             provide: FD_BUTTON_COMPONENT,
             useExisting: ButtonComponent
         }
-    ]
+    ],
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet, IconComponent]
 })
 export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {
     /** The property allows user to pass additional css classes. */

@@ -9,7 +9,8 @@ import { Directive, forwardRef } from '@angular/core';
             provide: CONTENT_DENSITY_DIRECTIVE,
             useExisting: forwardRef(() => DeprecatedButtonContentDensityDirective)
         }
-    ]
+    ],
+    standalone: true
 })
 export class DeprecatedButtonContentDensityDirective extends DeprecatedCompactDirective {
     /** @hidden */

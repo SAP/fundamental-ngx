@@ -2,11 +2,12 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ButtonComponent } from './button.component';
-import { ButtonModule } from './button.module';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<button fd-button label="Button"></button>'
+    template: '<button fd-button label="Button"></button>',
+    standalone: true,
+    imports: [ButtonComponent]
 })
 export class TestComponent {}
 
@@ -17,8 +18,7 @@ describe('ButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ButtonModule],
-            declarations: [TestComponent]
+            imports: [ButtonComponent, TestComponent]
         });
     }));
 
@@ -53,13 +53,17 @@ describe('ButtonComponent', () => {
 
 @Component({
     selector: 'fd-disabled-test-component',
-    template: '<button fd-button label="Button" disabled></button>'
+    template: '<button fd-button label="Button" disabled></button>',
+    standalone: true,
+    imports: [ButtonComponent]
 })
 export class DisabledTestComponent {}
 
 @Component({
     selector: 'fd-aria-disabled-test-component',
-    template: '<button fd-button label="Button" aria-disabled="true"></button>'
+    template: '<button fd-button label="Button" aria-disabled="true"></button>',
+    standalone: true,
+    imports: [ButtonComponent]
 })
 export class AriaDisabledTestComponent {}
 
@@ -72,8 +76,7 @@ describe('ButtonComponent – Disabled', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ButtonModule],
-            declarations: [DisabledTestComponent, AriaDisabledTestComponent]
+            imports: [ButtonComponent, DisabledTestComponent, AriaDisabledTestComponent]
         });
     }));
 
