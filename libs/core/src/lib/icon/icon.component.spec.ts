@@ -8,7 +8,9 @@ const FONT_NAME = 'SAP-icons';
 
 @Component({
     selector: 'fd-test-icon',
-    template: ` <fd-icon [font]="fontName" [glyph]="iconName"></fd-icon> `
+    template: ` <fd-icon [font]="fontName" [glyph]="iconName"></fd-icon> `,
+    standalone: true,
+    imports: [IconModule]
 })
 class TestWrapperComponent {
     readonly iconName = ICON_NAME;
@@ -21,8 +23,7 @@ describe('IconComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [IconModule]
+            imports: [IconModule, TestWrapperComponent]
         }).compileComponents();
     }));
 
