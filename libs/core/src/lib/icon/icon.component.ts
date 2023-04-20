@@ -39,7 +39,8 @@ const BusinessSuiteInAppSymbol_PREFIX = 'businessSuiteInAppSymbols';
         }
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
     /** The icon name to display. See the icon page for the list of icons
