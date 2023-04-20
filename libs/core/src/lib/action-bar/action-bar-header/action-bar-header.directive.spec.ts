@@ -4,7 +4,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActionBarModule } from '../action-bar.module';
 
 @Component({
-    template: ` <div #directiveElement fd-action-bar-header>Action Bar Header Test Text</div> `
+    template: ` <div #directiveElement fd-action-bar-header>Action Bar Header Test Text</div> `,
+    standalone: true,
+    imports: [ActionBarModule]
 })
 class TestComponent {
     @ViewChild('directiveElement')
@@ -17,8 +19,7 @@ describe('ActionBarHeaderDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ActionBarModule]
+            imports: [ActionBarModule, TestComponent]
         }).compileComponents();
     }));
 

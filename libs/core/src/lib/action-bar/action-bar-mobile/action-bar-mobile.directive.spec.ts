@@ -3,7 +3,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActionBarModule } from '../action-bar.module';
 
 @Component({
-    template: ` <div #directiveElement fd-action-bar-mobile>Action Bar Mobile Test Text</div> `
+    template: ` <div #directiveElement fd-action-bar-mobile>Action Bar Mobile Test Text</div> `,
+    standalone: true,
+    imports: [ActionBarModule]
 })
 class TestComponent {
     @ViewChild('directiveElement')
@@ -16,8 +18,7 @@ describe('ActionBarDescription', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ActionBarModule]
+            imports: [ActionBarModule, TestComponent]
         }).compileComponents();
     }));
 

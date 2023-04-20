@@ -18,6 +18,7 @@ import { Directive } from '@angular/core';
     selector: '[fd-action-bar-actions]',
     host: {
         class: 'fd-action-bar__actions'
-    }
+    },
+    standalone: true
 })
 export class ActionBarActionsDirective {}

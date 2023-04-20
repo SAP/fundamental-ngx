@@ -23,6 +23,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
         class: 'fd-action-bar__title'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class ActionBarTitleComponent {}

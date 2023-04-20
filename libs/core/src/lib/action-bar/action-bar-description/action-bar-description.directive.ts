@@ -16,7 +16,8 @@ import { Directive, HostBinding, Input } from '@angular/core';
     selector: '[fd-action-bar-description]',
     host: {
         class: 'fd-action-bar__description'
-    }
+    },
+    standalone: true
 })
 export class ActionBarDescriptionDirective {
     /** Whether the action bar also has a back button. */

@@ -10,7 +10,8 @@ import { ActionBarBackDirective } from './action-bar-back/action-bar-back.direct
 import { ActionBarMobileDirective } from './action-bar-mobile/action-bar-mobile.directive';
 
 @NgModule({
-    declarations: [
+    imports: [
+        CommonModule,
         ActionBarComponent,
         ActionBarTitleComponent,
         ActionBarDescriptionDirective,
@@ -19,7 +20,6 @@ import { ActionBarMobileDirective } from './action-bar-mobile/action-bar-mobile.
         ActionBarBackDirective,
         ActionBarMobileDirective
     ],
-    imports: [CommonModule],
     exports: [
         ActionBarComponent,
         ActionBarTitleComponent,
