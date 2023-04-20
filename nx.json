@@ -72,6 +72,9 @@
         },
         "lint": {
             "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+        },
+        "lint-noop": {
+            "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
         }
     },
     "namedInputs": {
