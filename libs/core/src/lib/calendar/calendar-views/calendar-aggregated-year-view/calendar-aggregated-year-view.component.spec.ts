@@ -14,8 +14,7 @@ describe('CalendarAggregatedYearViewComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, IconModule, ButtonModule, FdDatetimeModule],
-            declarations: [CalendarAggregatedYearViewComponent],
+            imports: [CommonModule, IconModule, ButtonModule, FdDatetimeModule, CalendarAggregatedYearViewComponent],
             providers: [CalendarService]
         }).compileComponents();
     }));

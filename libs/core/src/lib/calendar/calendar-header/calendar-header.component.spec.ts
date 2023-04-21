@@ -11,8 +11,7 @@ describe('Calendar2HeaderComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [CalendarHeaderComponent],
-            imports: [ButtonModule, FdDatetimeModule],
+            imports: [ButtonModule, FdDatetimeModule, CalendarHeaderComponent],
             providers: [CalendarService]
         }).compileComponents();
     }));

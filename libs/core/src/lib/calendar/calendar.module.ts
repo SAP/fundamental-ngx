@@ -1,7 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
 import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
@@ -14,7 +11,8 @@ import { DeprecatedCalendarContentDensityDirective } from './deprecated-calendar
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    declarations: [
+    imports: [
+        ContentDensityModule,
         CalendarComponent,
         CalendarHeaderComponent,
         CalendarDayViewComponent,
@@ -24,7 +22,6 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         CalendarCloseButtonDirective,
         DeprecatedCalendarContentDensityDirective
     ],
-    imports: [CommonModule, IconModule, ButtonModule, ContentDensityModule],
     exports: [
         CalendarComponent,
         CalendarDayViewComponent,

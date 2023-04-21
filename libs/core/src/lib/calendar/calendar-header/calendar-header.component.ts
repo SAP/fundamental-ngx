@@ -23,6 +23,9 @@ import { FdCalendarView } from '../types';
 import { CalendarCurrent } from '../models/calendar-current';
 import { CalendarYearGrid } from '../models/calendar-year-grid';
 import { CalendarService } from '../calendar.service';
+import { CalendarCloseButtonDirective } from '../calendar-directives';
+import { NgIf } from '@angular/common';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 /**
  * Internal use only.
@@ -36,7 +39,9 @@ import { CalendarService } from '../calendar.service';
     host: {
         '[attr.id]': 'viewId'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ButtonComponent, NgIf, CalendarCloseButtonDirective]
 })
 export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges {
     /** Currently active view. Needed for a11y labels. */

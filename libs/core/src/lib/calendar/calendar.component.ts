@@ -38,6 +38,7 @@ import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from 
 import { CalendarType, DaysOfWeek, FdCalendarView, NavigationButtonDisableFunction } from './types';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 
 let calendarUniqueId = 0;
 
@@ -76,7 +77,18 @@ let calendarUniqueId = 0;
         '[attr.id]': 'id',
         class: 'fd-calendar fd-has-display-block'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        CalendarHeaderComponent,
+        NgIf,
+        NgSwitch,
+        NgSwitchCase,
+        CalendarDayViewComponent,
+        CalendarMonthViewComponent,
+        CalendarYearViewComponent,
+        CalendarAggregatedYearViewComponent
+    ]
 })
 export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAccessor, Validator, OnDestroy {
     /** The currently selected date model in single mode. */

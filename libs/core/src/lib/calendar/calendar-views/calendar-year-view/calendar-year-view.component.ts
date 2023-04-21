@@ -22,6 +22,8 @@ import { CalendarService } from '../../calendar.service';
 import { CalendarYearGrid, CalendarYear } from '../../models/calendar-year-grid';
 import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { NgFor } from '@angular/common';
 
 /** Component representing the YearView of the Calendar Component. */
 @Component({
@@ -32,7 +34,9 @@ import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
     host: {
         '[attr.id]': 'viewId'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgFor, ButtonComponent]
 })
 export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestroy, FocusableCalendarView {
     /** The id of the calendar passed from the parent component */

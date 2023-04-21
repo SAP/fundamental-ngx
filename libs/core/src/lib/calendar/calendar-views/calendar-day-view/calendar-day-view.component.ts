@@ -29,6 +29,7 @@ import { CalendarService } from '../../calendar.service';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { NgIf, NgFor } from '@angular/common';
 
 /** Component representing the day view of the calendar. */
 @Component({
@@ -40,7 +41,9 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
         '[attr.id]': 'viewId',
         class: 'fd-calendar__dates'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, NgFor]
 })
 export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy, FocusableCalendarView {
     /** Currently displayed month and year for days */
