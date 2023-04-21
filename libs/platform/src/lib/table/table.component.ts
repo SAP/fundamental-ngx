@@ -2119,15 +2119,15 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * @hidden
      */
     private _convertTreeTableRowToFlatList(rows: TableRow<T>[]): TableRow<T>[] {
-        const flatList: TableRow[] = [];
+        let flatList: TableRow[] = [];
 
         for (const item of rows) {
             item.navigatable = this._isRowNavigatable(item as T, this.rowNavigatable);
             flatList.push(item);
 
-            if (item.children.length) {
+            if (Array.isArray(item.children)) {
                 item.children.forEach((c) => (c.hidden = !item.expanded));
-                flatList.push(...item.children);
+                flatList = flatList.concat(this._convertTreeTableRowToFlatList(item.children));
             }
         }
         return flatList;
@@ -2772,7 +2772,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         allChilren.forEach((r) => {
             r.checked = row.checked;
-            r.checked ? addedRows.push(row) : removedRows.push(row);
+            r.checked ? addedRows.push(r) : removedRows.push(r);
         });
     }
 
