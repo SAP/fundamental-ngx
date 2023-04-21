@@ -12,7 +12,9 @@ import { MenuItemComponent } from './menu-item.component';
                 <div fd-menu-interactive></div>
             </li>
         </fd-menu>
-    `
+    `,
+    standalone: true,
+    imports: [MenuModule]
 })
 class TestMenuItemComponent {
     @ViewChild(MenuComponent) menu: MenuComponent;
@@ -30,8 +32,7 @@ describe('MenuItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestMenuItemComponent],
-            imports: [MenuModule]
+            imports: [TestMenuItemComponent]
         }).compileComponents();
     }));
 
@@ -136,7 +137,9 @@ describe('MenuItemComponent', () => {
                 <div fd-menu-interactive>Option 2.1</div>
             </li>
         </fd-submenu>
-    `
+    `,
+    standalone: true,
+    imports: [MenuModule]
 })
 class TesNestedMenuItemComponent {
     @ViewChild(MenuComponent) menu: MenuComponent;
@@ -154,8 +157,7 @@ describe('MenuItemComponent nested', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TesNestedMenuItemComponent],
-            imports: [MenuModule]
+            imports: [MenuModule, TesNestedMenuItemComponent]
         }).compileComponents();
     }));
 

@@ -8,7 +8,7 @@ describe('MenuSeparatorComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [MenuSeparatorComponent]
+            imports: [MenuSeparatorComponent]
         }).compileComponents();
     }));
 

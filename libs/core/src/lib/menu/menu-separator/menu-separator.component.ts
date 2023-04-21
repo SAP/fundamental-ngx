@@ -4,7 +4,8 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     selector: 'fd-menu-separator',
     template: '',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class MenuSeparatorComponent {
     /** @hidden */

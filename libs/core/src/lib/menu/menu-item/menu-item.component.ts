@@ -29,6 +29,7 @@ import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
 import { MenuService } from '../services/menu.service';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 
 let menuUniqueId = 0;
 
@@ -55,7 +56,9 @@ export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component depend
     host: {
         'attr.role': 'menuitem',
         '[class.fd-menu__item]': 'true'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet]
 })
 export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, AfterContentInit, OnDestroy {
     /** Set the Menu Item as disabled/enabled */
@@ -265,7 +268,8 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: SUBMENU, useExisting: SubmenuComponent }],
-    exportAs: 'fdSubmenu'
+    exportAs: 'fdSubmenu',
+    standalone: true
 })
 export class SubmenuComponent implements BaseSubmenu, AfterContentInit {
     /** Aria-label for navigation */

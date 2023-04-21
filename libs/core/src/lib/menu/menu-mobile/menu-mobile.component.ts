@@ -12,25 +12,72 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DialogBodyComponent, DialogService } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogCloseButtonComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogService
+} from '@fundamental-ngx/core/dialog';
 import { Observable, of } from 'rxjs';
 import { MenuService } from '../services/menu.service';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { map, startWith, take, takeUntil } from 'rxjs/operators';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
+import {
+    DeprecatedInitialFocusDirective,
+    InitialFocusDirective,
+    RtlService,
+    TemplateDirective
+} from '@fundamental-ngx/cdk/utils';
 import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeBase,
-    MobileModeControl,
-    MobileModeConfigToken
+    MobileModeConfigToken,
+    MobileModeControl
 } from '@fundamental-ngx/core/mobile-mode';
+import {
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
 
 @Component({
     selector: 'fd-menu-mobile',
     templateUrl: './menu-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TemplateDirective,
+        BarLeftDirective,
+        NgIf,
+        BarElementDirective,
+        ButtonComponent,
+        ContentDensityDirective,
+        TitleComponent,
+        BarRightDirective,
+        DialogCloseButtonComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        NgTemplateOutlet,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        InitialFocusDirective,
+        DeprecatedInitialFocusDirective,
+        AsyncPipe
+    ]
 })
 export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit, OnDestroy {
     /** @hidden */

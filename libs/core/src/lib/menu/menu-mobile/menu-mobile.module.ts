@@ -5,8 +5,7 @@ import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @NgModule({
-    declarations: [MenuMobileComponent],
-    imports: [CommonModule, DialogModule, ButtonModule],
+    imports: [CommonModule, DialogModule, ButtonModule, MenuMobileComponent],
     exports: [MenuMobileComponent]
 })
 export class MenuMobileModule {}

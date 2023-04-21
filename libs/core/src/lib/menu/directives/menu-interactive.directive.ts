@@ -5,7 +5,8 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     selector: '[fd-menu-interactive]',
     host: {
         role: 'menuitem'
-    }
+    },
+    standalone: true
 })
 export class MenuInteractiveDirective {
     /** @hidden */

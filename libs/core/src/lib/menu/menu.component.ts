@@ -48,7 +48,8 @@ let menuUniqueId = 0;
     styleUrls: ['menu.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [MenuService, PopoverService, contentDensityObserverProviders()]
+    providers: [MenuService, PopoverService, contentDensityObserverProviders()],
+    standalone: true
 })
 export class MenuComponent
     extends BasePopoverClass

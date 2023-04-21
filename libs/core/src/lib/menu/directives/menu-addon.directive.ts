@@ -1,4 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { NgIf } from '@angular/common';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -6,7 +8,9 @@ import { Component, HostBinding, Input } from '@angular/core';
     template: `
         <fd-icon [glyph]="glyph" *ngIf="glyph" role="presentation"></fd-icon>
         <ng-content></ng-content>
-    `
+    `,
+    standalone: true,
+    imports: [NgIf, IconComponent]
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class MenuAddonDirective {

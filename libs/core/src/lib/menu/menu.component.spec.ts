@@ -28,7 +28,9 @@ import { MenuService } from './services/menu.service';
         </fd-menu>
 
         <button #trigger [fdMenuTrigger]="menu"></button>
-    `
+    `,
+    standalone: true,
+    imports: [MenuModule]
 })
 export class TestMenuComponent {
     @ViewChild(MenuComponent)
@@ -48,8 +50,7 @@ describe('MenuComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MenuModule],
-            declarations: [TestMenuComponent]
+            imports: [MenuModule, TestMenuComponent]
         }).compileComponents();
     }));
 

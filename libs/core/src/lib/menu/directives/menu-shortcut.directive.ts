@@ -5,7 +5,8 @@ import { filter } from 'rxjs/operators';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-menu-shortcut]'
+    selector: '[fd-menu-shortcut]',
+    standalone: true
 })
 export class MenuShortcutDirective implements AfterViewInit, OnDestroy {
     /** Hide shortcuts in mobile mode */

@@ -26,7 +26,9 @@ import { MenuModule } from '../menu.module';
                 <div href="#" fd-menu-interactive></div>
             </li>
         </fd-submenu>
-    `
+    `,
+    standalone: true,
+    imports: [MenuModule]
 })
 export class TestMenuComponent {
     @ViewChild(MenuComponent)
@@ -50,8 +52,7 @@ describe('MenuService', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MenuModule],
-            declarations: [TestMenuComponent]
+            imports: [MenuModule, TestMenuComponent]
         }).compileComponents();
     }));
 
