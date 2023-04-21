@@ -18,7 +18,6 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { FD_BUTTON_COMPONENT } from './tokens';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { DeprecatedButtonContentDensityDirective } from './deprecated-button-content-density.directive';
 
 /**
  * Button component, used to enhance standard HTML buttons.
@@ -38,12 +37,6 @@ import { DeprecatedButtonContentDensityDirective } from './deprecated-button-con
     styleUrls: ['./button.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    hostDirectives: [
-        {
-            directive: DeprecatedButtonContentDensityDirective,
-            inputs: ['compact']
-        }
-    ],
     host: {
         '[attr.type]': 'type',
         '[attr.disabled]': '_disabled || null',

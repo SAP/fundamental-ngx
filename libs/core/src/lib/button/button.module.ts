@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { ButtonComponent } from './button.component';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { DeprecatedButtonContentDensityDirective } from './deprecated-button-content-density.directive';
 
 @NgModule({
-    imports: [CommonModule, ContentDensityModule, ButtonComponent],
-    exports: [ButtonComponent, ContentDensityModule]
+    imports: [ContentDensityModule, ButtonComponent, DeprecatedButtonContentDensityDirective],
+    exports: [ButtonComponent, ContentDensityModule, DeprecatedButtonContentDensityDirective]
 })
 export class ButtonModule {}
