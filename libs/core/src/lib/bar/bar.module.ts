@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 import { BarComponent } from './bar.component';
@@ -13,7 +11,8 @@ import { DeprecatedBarContentDensityDirective } from './deprecated-bar-content-d
 import { DeprecatedBarButtonContentDensityDirective } from './deprecated-bar-button-content-density.directive';
 
 @NgModule({
-    declarations: [
+    imports: [
+        ContentDensityModule,
         BarComponent,
         BarLeftDirective,
         BarMiddleDirective,
@@ -23,7 +22,6 @@ import { DeprecatedBarButtonContentDensityDirective } from './deprecated-bar-but
         DeprecatedBarContentDensityDirective,
         DeprecatedBarButtonContentDensityDirective
     ],
-    imports: [CommonModule, ButtonModule, ContentDensityModule],
     exports: [
         BarComponent,
         BarLeftDirective,

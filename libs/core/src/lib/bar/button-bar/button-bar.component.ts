@@ -30,7 +30,9 @@ let randomButtonBarId = 0;
             provide: FD_BUTTON_BAR_COMPONENT,
             useExisting: ButtonBarComponent
         }
-    ]
+    ],
+    standalone: true,
+    imports: [ButtonComponent]
 })
 export class ButtonBarComponent extends BaseButton implements OnDestroy {
     /** Whether the element should take the whole width of the container. */

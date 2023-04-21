@@ -8,7 +8,8 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCozyDirective } from '@fundamental
             provide: CONTENT_DENSITY_DIRECTIVE,
             useExisting: forwardRef(() => DeprecatedBarContentDensityDirective)
         }
-    ]
+    ],
+    standalone: true
 })
 export class DeprecatedBarContentDensityDirective extends DeprecatedCozyDirective {
     /** @hidden */

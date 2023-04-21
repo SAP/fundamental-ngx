@@ -7,7 +7,9 @@ import { BarModule } from '../bar.module';
         <fd-bar-element #directiveElement [fullWidth]="fullWidth" [isTitle]="isTitle">
             Bar Element Test
         </fd-bar-element>
-    `
+    `,
+    standalone: true,
+    imports: [BarModule]
 })
 class TestComponent {
     @ViewChild('directiveElement')
@@ -22,8 +24,7 @@ describe('BarElementDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [BarModule]
+            imports: [BarModule, TestComponent]
         }).compileComponents();
     }));
 

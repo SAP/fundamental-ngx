@@ -3,7 +3,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { BarModule } from '../bar.module';
 
 @Component({
-    template: ` <div #directiveElement fd-bar-middle>Bar Middle Area Test</div> `
+    template: ` <div #directiveElement fd-bar-middle>Bar Middle Area Test</div> `,
+    standalone: true,
+    imports: [BarModule]
 })
 class TestComponent {
     @ViewChild('directiveElement', { static: false })
@@ -16,8 +18,7 @@ describe('BarMiddleDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [BarModule]
+            imports: [BarModule, TestComponent]
         }).compileComponents();
     }));
 
