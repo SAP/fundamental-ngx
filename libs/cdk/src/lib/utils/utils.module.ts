@@ -18,7 +18,8 @@ import {
     ResizeModule,
     SelectableListModule,
     TemplateModule,
-    TruncateModule
+    TruncateModule,
+    BreakpointModule
 } from './directives';
 import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
 
@@ -41,7 +42,8 @@ import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
         SelectableListModule,
         ReadonlyBehaviorModule,
         ClickedBehaviorModule,
-        InitialFocusModule
+        InitialFocusModule,
+        BreakpointModule
     ],
     exports: [
         FocusableItemModule,
@@ -60,7 +62,8 @@ import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
         SelectableListModule,
         ReadonlyBehaviorModule,
         ClickedBehaviorModule,
-        InitialFocusModule
+        InitialFocusModule,
+        BreakpointModule
     ],
     providers: [RtlService, ThemesService]
 })

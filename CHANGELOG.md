@@ -1,3 +1,21 @@
+## [0.40.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.12...v0.40.2-rc.13) (2023-04-21)
+
+
+### Bug Fixes
+
+* **cdk:** resize observer cleanup and breakpoint directive export absence ([#9720](https://github.com/SAP/fundamental-ngx/issues/9720)) ([c5d2cda](https://github.com/SAP/fundamental-ngx/commit/c5d2cda24408165ac921b1ad3b06c913a642f5a5))
+
+
+
+## [0.40.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.11...v0.40.2-rc.12) (2023-04-20)
+
+
+### Bug Fixes
+
+* **platform:** minor table visual issues ([#9713](https://github.com/SAP/fundamental-ngx/issues/9713)) ([32e1722](https://github.com/SAP/fundamental-ngx/commit/32e172282487324c6d4c86c8e2462e4c5a28d338))
+
+
+
 ## [0.40.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.10...v0.40.2-rc.11) (2023-04-19)
 
 
