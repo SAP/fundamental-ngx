@@ -9,7 +9,9 @@ import { BusyIndicatorModule } from '../busy-indicator.module';
         <div fd-busy-indicator-extended>
             <fd-busy-indicator [loading]="true" label="Please wait" ariaLabel="Please wait"></fd-busy-indicator>
         </div>
-    </ng-template>`
+    </ng-template>`,
+    standalone: true,
+    imports: [BusyIndicatorModule, MessageToastModule]
 })
 class TestComponent {
     @ViewChild('testTemplate', { static: true }) templateRef: TemplateRef<any>;
@@ -21,8 +23,7 @@ describe('BusyIndicatorExtendedDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [BusyIndicatorModule, MessageToastModule],
+            imports: [BusyIndicatorModule, MessageToastModule, TestComponent],
             providers: [MessageToastService]
         }).compileComponents();
     }));

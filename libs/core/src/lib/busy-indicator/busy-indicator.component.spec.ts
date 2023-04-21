@@ -7,7 +7,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <fd-busy-indicator [loading]="loading" [size]="size" [block]="block">
             <button *ngIf="hasContent">Button</button>
         </fd-busy-indicator>
-    `
+    `,
+    standalone: true
 })
 class TestWrapperComponent {
     block = true;
@@ -22,7 +23,7 @@ describe('BusyIndicatorComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent, BusyIndicatorComponent]
+            imports: [TestWrapperComponent, BusyIndicatorComponent]
         })
             .overrideComponent(BusyIndicatorComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }
