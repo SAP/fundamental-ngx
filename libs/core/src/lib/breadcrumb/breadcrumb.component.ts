@@ -15,13 +15,30 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
+import {
+    OverflowExpandDirective,
+    OverflowItemRefDirective,
+    OverflowLayoutComponent,
+    OverflowLayoutItemDirective
+} from '@fundamental-ngx/core/overflow-layout';
 import { DestroyedService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, takeUntil } from 'rxjs';
-import { MenuComponent } from '@fundamental-ngx/core/menu';
+import {
+    MenuAddonDirective,
+    MenuComponent,
+    MenuInteractiveDirective,
+    MenuItemComponent,
+    MenuTitleDirective,
+    MenuTriggerDirective
+} from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { PortalModule } from '@angular/cdk/portal';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -50,6 +67,26 @@ import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens'
             provide: FD_BREADCRUMB_COMPONENT,
             useExisting: BreadcrumbComponent
         }
+    ],
+    standalone: true,
+    imports: [
+        OverflowLayoutComponent,
+        NgFor,
+        OverflowItemRefDirective,
+        OverflowLayoutItemDirective,
+        PortalModule,
+        OverflowExpandDirective,
+        MenuComponent,
+        MenuItemComponent,
+        MenuInteractiveDirective,
+        NgIf,
+        MenuAddonDirective,
+        MenuTitleDirective,
+        MenuTriggerDirective,
+        LinkComponent,
+        IconComponent,
+        AsyncPipe,
+        FdTranslatePipe
     ]
 })
 export class BreadcrumbComponent implements OnInit, AfterViewInit {

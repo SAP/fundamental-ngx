@@ -9,7 +9,8 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCompactDirective } from '@fundamen
             provide: CONTENT_DENSITY_DIRECTIVE,
             useExisting: forwardRef(() => DeprecatedBreadcrumbsCompactDirective)
         }
-    ]
+    ],
+    standalone: true
 })
 export class DeprecatedBreadcrumbsCompactDirective extends DeprecatedCompactDirective {
     /** @hidden */
