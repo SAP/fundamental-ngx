@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { AvatarModule } from './avatar.module';
 import { AvatarComponent } from './avatar.component';
 
 @Component({
@@ -19,7 +18,9 @@ import { AvatarComponent } from './avatar.component';
         [border]="border"
         [label]="label"
     >
-    </fd-avatar>`
+    </fd-avatar>`,
+    standalone: true,
+    imports: [AvatarComponent]
 })
 class TestComponent {
     size: 'xs' | 's' | 'm' | 'l' | 'xl' = 'm';
@@ -42,8 +43,7 @@ describe('AvatarComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [AvatarModule]
+            imports: [TestComponent]
         })
             .overrideComponent(AvatarComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }
