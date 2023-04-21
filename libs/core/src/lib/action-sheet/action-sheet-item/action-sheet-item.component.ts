@@ -38,7 +38,9 @@ export interface ActionSheetClickEvent {
     host: {
         class: 'fd-action-sheet__item',
         role: 'none'
-    }
+    },
+    standalone: true,
+    imports: [ButtonComponent]
 })
 export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     /** Sets text of button. */

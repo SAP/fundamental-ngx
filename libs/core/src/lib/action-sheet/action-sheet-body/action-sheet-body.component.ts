@@ -33,7 +33,8 @@ let actionSheetBodyUniqueIdCounter = 0;
     templateUrl: './action-sheet-body.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders()],
+    standalone: true
 })
 export class ActionSheetBodyComponent {
     /** Id of the Action Sheet Body. */

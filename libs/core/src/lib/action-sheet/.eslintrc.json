@@ -26,7 +26,8 @@
                         "prefix": "fd",
                         "style": "kebab-case"
                     }
-                ]
+                ],
+                "@angular-eslint/no-inputs-metadata-property": "off"
             },
             "plugins": ["@angular-eslint/eslint-plugin", "@typescript-eslint"]
         },

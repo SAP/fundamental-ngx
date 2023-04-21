@@ -23,13 +23,14 @@ import { startWith, takeUntil } from 'rxjs/operators';
 
 import { DynamicComponentService, FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/cdk/utils';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 
 import { ActionSheetMobileModule } from './action-sheet-mobile/action-sheet-mobile.module';
 import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
 import { ActionSheetControlComponent } from './action-sheet-control/action-sheet-control.component';
 import { ActionSheetClickEvent, ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.component';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 
 @Component({
     selector: 'fd-action-sheet',
@@ -37,7 +38,9 @@ import { ActionSheetClickEvent, ActionSheetItemComponent } from './action-sheet-
     styleUrls: ['./action-sheet.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [KeyboardSupportService]
+    providers: [KeyboardSupportService],
+    standalone: true,
+    imports: [NgIf, PopoverModule, NgTemplateOutlet]
 })
 export class ActionSheetComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Whether should be displayed in mobile mode */

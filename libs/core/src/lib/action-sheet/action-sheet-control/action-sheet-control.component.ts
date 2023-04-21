@@ -25,7 +25,8 @@ import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
     selector: 'fd-action-sheet-control',
     templateUrl: './action-sheet-control.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class ActionSheetControlComponent {
     /** Emitted event when control button is clicked */

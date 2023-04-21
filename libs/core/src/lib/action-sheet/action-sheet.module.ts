@@ -1,30 +1,27 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { ActionSheetComponent } from './action-sheet.component';
 import { ActionSheetControlComponent } from './action-sheet-control/action-sheet-control.component';
 import { ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.component';
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { DeprecatedActionSheetCompactDirective } from './deprecated-action-sheet-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { DeprecatedActionSheetCompactDirective } from './deprecated-action-sheet-compact.directive';
 
 @NgModule({
-    imports: [CommonModule, PopoverModule, ButtonModule, ContentDensityModule],
+    imports: [
+        ContentDensityModule,
+        ActionSheetComponent,
+        ActionSheetControlComponent,
+        ActionSheetItemComponent,
+        ActionSheetBodyComponent,
+        DeprecatedActionSheetCompactDirective
+    ],
     exports: [
         ActionSheetComponent,
         ActionSheetControlComponent,
         ActionSheetItemComponent,
         ActionSheetBodyComponent,
-        DeprecatedActionSheetCompactDirective,
-        ContentDensityModule
-    ],
-    declarations: [
-        ActionSheetComponent,
-        ActionSheetControlComponent,
-        ActionSheetItemComponent,
-        ActionSheetBodyComponent,
+        ContentDensityModule,
         DeprecatedActionSheetCompactDirective
     ]
 })
