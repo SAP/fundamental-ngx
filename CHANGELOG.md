@@ -1,3 +1,12 @@
+## [0.40.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.13...v0.40.2-rc.14) (2023-04-21)
+
+
+### Bug Fixes
+
+* **platform:** exclude columns from p13n dialog ([#9590](https://github.com/SAP/fundamental-ngx/issues/9590)) ([a1adcb9](https://github.com/SAP/fundamental-ngx/commit/a1adcb9b574c8c81618debb7f58f99f29ac10a85))
+
+
+
 ## [0.40.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.12...v0.40.2-rc.13) (2023-04-21)
 
 
