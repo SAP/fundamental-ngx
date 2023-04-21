@@ -7,7 +7,9 @@ import { DialogService } from './dialog.service';
 import { DialogModule } from '../dialog.module';
 
 @Component({
-    template: ``
+    template: ``,
+    standalone: true,
+    imports: [CommonModule, DialogModule]
 })
 class DialogServiceTestComponent {
     constructor(public dialogService: DialogService) {}
@@ -18,7 +20,9 @@ class DialogServiceTestComponent {
         <ng-template let-dialogRef let-dialogConfig="dialogConfig" #testTemplate>
             <fd-dialog [dialogRef]="dialogRef" [dialogConfig]="dialogConfig"></fd-dialog>
         </ng-template>
-    `
+    `,
+    standalone: true,
+    imports: [CommonModule, DialogModule]
 })
 class TemplateTestComponent {
     @ViewChild('testTemplate') templateRef: TemplateRef<any>;
@@ -32,8 +36,13 @@ describe('DialogService', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TemplateTestComponent, DialogServiceTestComponent],
-            imports: [CommonModule, DialogModule, NoopAnimationsModule]
+            imports: [
+                CommonModule,
+                DialogModule,
+                NoopAnimationsModule,
+                TemplateTestComponent,
+                DialogServiceTestComponent
+            ]
         }).compileComponents();
     });
 

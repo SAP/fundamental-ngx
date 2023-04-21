@@ -9,6 +9,7 @@ import { Directive } from '@angular/core';
     selector: '[fd-dialog-decisive-button]',
     host: {
         '[class.fd-dialog__decisive-button]': 'true'
-    }
+    },
+    standalone: true
 })
 export class DialogDecisiveButtonDirective {}

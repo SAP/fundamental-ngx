@@ -29,7 +29,7 @@ import { DialogDefaultComponent } from '../dialog-default/dialog-default.compone
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 import { DialogContentType } from '../dialog.types';
 import { dialogFade } from '../utils/dialog.animations';
-import { CdkPortalOutlet } from '@angular/cdk/portal';
+import { CdkPortalOutlet, PortalModule } from '@angular/cdk/portal';
 import { takeUntil } from 'rxjs';
 
 /** Dialog container where the dialog content is embedded. */
@@ -39,7 +39,9 @@ import { takeUntil } from 'rxjs';
     styleUrls: ['./dialog-container.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [dialogFade],
-    providers: [DestroyedService]
+    providers: [DestroyedService],
+    standalone: true,
+    imports: [PortalModule]
 })
 export class DialogContainerComponent
     extends DynamicComponentContainer<DialogContentType>

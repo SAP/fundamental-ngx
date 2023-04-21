@@ -17,7 +17,14 @@ import { Router } from '@angular/router';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
 
-import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/cdk/utils';
+import {
+    applyCssClass,
+    CssClassBuilder,
+    FocusTrapService,
+    ResizeDirective,
+    ResizeHandleDirective,
+    RtlService
+} from '@fundamental-ngx/cdk/utils';
 
 import { DialogConfig } from './utils/dialog-config.class';
 import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
@@ -26,6 +33,11 @@ import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 import { DialogRef } from './utils/dialog-ref.class';
 import { DialogBase } from './base/dialog-base.class';
 import { DialogTitleDirective } from './directives/dialog-title.directive';
+import { NgIf } from '@angular/common';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import { A11yModule } from '@angular/cdk/a11y';
 
 /**
  * Dialog component.
@@ -47,7 +59,18 @@ import { DialogTitleDirective } from './directives/dialog-title.directive';
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })]
+    providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })],
+    standalone: true,
+    imports: [
+        ResizeDirective,
+        A11yModule,
+        CdkDrag,
+        CdkScrollable,
+        ScrollbarDirective,
+        NgIf,
+        ResizeHandleDirective,
+        CdkDragHandle
+    ]
 })
 export class DialogComponent
     extends DialogBase

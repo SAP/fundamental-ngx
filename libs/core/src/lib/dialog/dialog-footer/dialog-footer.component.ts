@@ -2,6 +2,9 @@ import { AfterContentInit, AfterViewInit, Component, Optional } from '@angular/c
 
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogFooterBase } from '../base/dialog-footer-base.class';
+import { BarComponent, BarRightDirective } from '@fundamental-ngx/core/bar';
+import { NgTemplateOutlet } from '@angular/common';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 
 export const DialogButtonClass = 'fd-dialog__decisive-button';
 
@@ -19,7 +22,9 @@ export const DialogButtonClass = 'fd-dialog__decisive-button';
  * */
 @Component({
     selector: 'fd-dialog-footer',
-    templateUrl: './dialog-footer.component.html'
+    templateUrl: './dialog-footer.component.html',
+    standalone: true,
+    imports: [BarComponent, ContentDensityDirective, NgTemplateOutlet, BarRightDirective]
 })
 export class DialogFooterComponent extends DialogFooterBase implements AfterContentInit, AfterViewInit {
     /** @hidden */

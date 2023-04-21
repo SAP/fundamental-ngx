@@ -4,6 +4,8 @@ import { FD_DIALOG_BODY_COMPONENT } from '../tokens';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogRef } from '../utils/dialog-ref.class';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { NgIf, AsyncPipe } from '@angular/common';
 
 /**
  * Applies fundamental layout and styling to the contents of a dialog body.
@@ -30,7 +32,9 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
             useExisting: DialogBodyComponent
         }
     ],
-    hostDirectives: [ScrollbarDirective]
+    hostDirectives: [ScrollbarDirective],
+    standalone: true,
+    imports: [NgIf, BusyIndicatorComponent, AsyncPipe]
 })
 export class DialogBodyComponent {
     /** @hidden */

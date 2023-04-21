@@ -11,8 +11,7 @@ describe('DialogBodyComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [BusyIndicatorModule],
-            declarations: [DialogBodyComponent],
+            imports: [BusyIndicatorModule, DialogBodyComponent],
             providers: [DialogConfig, DialogRef]
         }).compileComponents();
     }));

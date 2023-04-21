@@ -15,7 +15,9 @@ const TEXT_CONTENT = 'Hello there';
 
 @Component({
     selector: 'fd-content-test-component',
-    template: TEXT_CONTENT
+    template: TEXT_CONTENT,
+    standalone: true,
+    imports: [PortalModule]
 })
 class ContentTestComponent {}
 
@@ -26,8 +28,7 @@ describe('DialogContainerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [NoopAnimationsModule, PortalModule],
-            declarations: [DialogContainerComponent, ContentTestComponent],
+            imports: [NoopAnimationsModule, PortalModule, DialogContainerComponent, ContentTestComponent],
             providers: [
                 { provide: DialogConfig, useValue: dialogConfig },
                 { provide: DialogRef, useClass: DialogRef }

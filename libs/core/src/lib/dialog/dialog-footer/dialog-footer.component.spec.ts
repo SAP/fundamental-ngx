@@ -15,7 +15,9 @@ import { DialogConfig } from '../utils/dialog-config.class';
                 </div>
             </ng-template>
         </fd-dialog-footer>
-    `
+    `,
+    standalone: true,
+    imports: [BarModule, DialogFooterComponent, TemplateModule]
 })
 class CustomFooterTestComponent {
     @ViewChild(DialogFooterComponent) dialogFooterRef: DialogFooterComponent;
@@ -26,7 +28,9 @@ class CustomFooterTestComponent {
         <fd-dialog-footer>
             <fd-button-bar label="Default button">Default button</fd-button-bar>
         </fd-dialog-footer>
-    `
+    `,
+    standalone: true,
+    imports: [BarModule, DialogFooterComponent, TemplateModule]
 })
 class DefaultFooterTestComponent {
     @ViewChild(DialogFooterComponent) dialogFooterRef: DialogFooterComponent;
@@ -35,8 +39,13 @@ class DefaultFooterTestComponent {
 describe('DialogFooterComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [DialogFooterComponent, CustomFooterTestComponent, DefaultFooterTestComponent],
-            imports: [BarModule, TemplateModule],
+            imports: [
+                BarModule,
+                TemplateModule,
+                DialogFooterComponent,
+                CustomFooterTestComponent,
+                DefaultFooterTestComponent
+            ],
             providers: [DialogConfig]
         });
     }));

@@ -4,7 +4,16 @@ import { DialogHeaderComponent } from './dialog-header.component';
 import { Component, Type, ViewChild } from '@angular/core';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { TemplateModule } from '@fundamental-ngx/cdk/utils';
-import { BarModule } from '@fundamental-ngx/core/bar';
+import {
+    BarComponent,
+    BarElementDirective,
+    BarLeftDirective,
+    BarMiddleDirective,
+    BarModule,
+    BarRightDirective
+} from '@fundamental-ngx/core/bar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { DialogCloseButtonComponent } from '../dialog-close-button/dialog-close-button.component';
 
 @Component({
     template: `
@@ -24,7 +33,17 @@ import { BarModule } from '@fundamental-ngx/core/bar';
                 </div>
             </ng-template>
         </fd-dialog-header>
-    `
+    `,
+    standalone: true,
+    imports: [
+        BarComponent,
+        BarRightDirective,
+        BarLeftDirective,
+        BarElementDirective,
+        BarMiddleDirective,
+        DialogHeaderComponent,
+        TemplateModule
+    ]
 })
 class CustomHeaderTestComponent {
     @ViewChild(DialogHeaderComponent) dialogHeaderRef: DialogHeaderComponent;
@@ -36,7 +55,9 @@ class CustomHeaderTestComponent {
             <h1 fd-title>Default Title</h1>
             <button fd-dialog-close-button></button>
         </fd-dialog-header>
-    `
+    `,
+    standalone: true,
+    imports: [DialogHeaderComponent, TitleComponent, DialogCloseButtonComponent, TemplateModule]
 })
 class DefaultHeaderTestComponent {
     @ViewChild(DialogHeaderComponent) dialogHeaderRef: DialogHeaderComponent;
@@ -45,8 +66,13 @@ class DefaultHeaderTestComponent {
 describe('DialogHeaderComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [DialogHeaderComponent, CustomHeaderTestComponent, DefaultHeaderTestComponent],
-            imports: [BarModule, TemplateModule],
+            imports: [
+                BarModule,
+                TemplateModule,
+                DialogHeaderComponent,
+                CustomHeaderTestComponent,
+                DefaultHeaderTestComponent
+            ],
             providers: [DialogConfig]
         });
     }));

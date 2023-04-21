@@ -11,6 +11,11 @@ import { DialogConfig } from './utils/dialog-config.class';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavigationStart, Router, RouterEvent, RouterModule } from '@angular/router';
 import { Subject } from 'rxjs';
+import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
+import { DialogBodyComponent } from './dialog-body/dialog-body.component';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 
 @Component({
     template: `
@@ -21,15 +26,23 @@ import { Subject } from 'rxjs';
                 <button></button>
             </fd-dialog-footer>
         </fd-dialog>
-    `
+    `,
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        DialogFooterComponent
+    ]
 })
 class TemplateTestComponent {
     @ViewChild(DialogComponent) dialog: DialogComponent;
 }
 
 @NgModule({
-    declarations: [TemplateTestComponent],
-    imports: [CommonModule, BrowserModule, DialogModule, NoopAnimationsModule],
+    imports: [CommonModule, BrowserModule, DialogModule, NoopAnimationsModule, TemplateTestComponent],
     providers: [DialogService]
 })
 class TestModule {}
