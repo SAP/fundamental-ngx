@@ -13,7 +13,8 @@ import { FD_LANGUAGE } from './../utils/tokens';
             provide: FD_LANGUAGE,
             useValue: new BehaviorSubject<FdLanguage>(FD_LANGUAGE_ENGLISH)
         }
-    ]
+    ],
+    standalone: true
 })
 export class FdPatchLanguageDirective implements OnDestroy {
     /** @hidden */

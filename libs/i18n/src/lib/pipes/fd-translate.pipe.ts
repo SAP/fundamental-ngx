@@ -11,13 +11,13 @@ import {
     takeUntil
 } from 'rxjs';
 
-import { FdLanguage, FdLanguageKeyArgs } from '../models/lang';
-import { FD_LANGUAGE } from '../utils/tokens';
-import { TranslationResolver } from '../utils/translation-resolver';
+import { FdLanguage, FdLanguageKeyArgs } from '../models';
+import { FD_LANGUAGE, TranslationResolver } from '../utils';
 
 @Pipe({
     name: 'fdTranslate',
-    pure: false // required to update the value when the observable is resolved
+    pure: false, // required to update the value when the observable is resolved
+    standalone: true
 })
 export class FdTranslatePipe implements PipeTransform, OnDestroy {
     /** @hidden */
