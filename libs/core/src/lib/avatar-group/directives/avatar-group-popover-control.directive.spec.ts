@@ -5,7 +5,9 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { AvatarGroupModule } from '../avatar-group.module';
 
 @Component({
-    template: `<fd-avatar #directiveElement fd-avatar-group-popover-control></fd-avatar>`
+    template: `<fd-avatar #directiveElement fd-avatar-group-popover-control></fd-avatar>`,
+    standalone: true,
+    imports: [AvatarGroupModule, AvatarModule]
 })
 class TestComponent {
     @ViewChild('directiveElement', { read: ElementRef })
@@ -18,8 +20,7 @@ describe('AvatarGroupPopoverControlDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [AvatarGroupModule, AvatarModule]
+            imports: [AvatarGroupModule, AvatarModule, TestComponent]
         }).compileComponents();
     }));
 

@@ -44,7 +44,9 @@ const NUMBER_OF_ITEMS = 20;
                 </fd-popover>
             </fd-avatar-group>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [AvatarGroupModule, PopoverModule, AvatarModule, ButtonModule]
 })
 class AvatarGroupTestComponent {
     @ViewChild('avatarGroup')
@@ -62,8 +64,7 @@ describe('AvatarGroupComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [AvatarGroupTestComponent],
-            imports: [AvatarGroupModule, PopoverModule, AvatarModule, ButtonModule]
+            imports: [AvatarGroupModule, PopoverModule, AvatarModule, ButtonModule, AvatarGroupTestComponent]
         }).compileComponents();
     }));
 

@@ -4,7 +4,8 @@ import { Directive, HostBinding, Input } from '@angular/core';
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-avatar-group-popover-control]',
-    host: { class: 'fd-avatar-group__popover-control' }
+    host: { class: 'fd-avatar-group__popover-control' },
+    standalone: true
 })
 export class AvatarGroupPopoverControlDirective {
     /** Tabindex of the popover control. */

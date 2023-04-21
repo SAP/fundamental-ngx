@@ -4,7 +4,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AvatarGroupModule } from '../avatar-group.module';
 
 @Component({
-    template: `<div #directiveElement fd-avatar-group-overflow-body>Avatar Group Overflow Body</div>`
+    template: `<div #directiveElement fd-avatar-group-overflow-body>Avatar Group Overflow Body</div>`,
+    standalone: true,
+    imports: [AvatarGroupModule]
 })
 class TestComponent {
     @ViewChild('directiveElement', { static: false })
@@ -17,8 +19,7 @@ describe('AvatarGroupItemDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [AvatarGroupModule]
+            imports: [AvatarGroupModule, TestComponent]
         }).compileComponents();
     }));
 

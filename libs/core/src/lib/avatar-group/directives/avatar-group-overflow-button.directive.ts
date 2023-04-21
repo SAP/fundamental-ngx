@@ -9,7 +9,8 @@ import { AvatarGroupOverflowButtonColor } from '../avatar-group.component';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-avatar-group-overflow-button]'
+    selector: '[fd-avatar-group-overflow-button]',
+    standalone: true
 })
 export class AvatarGroupOverflowButtonDirective implements OnInit, OnChanges, CssClassBuilder {
     /** User's custom classes. */

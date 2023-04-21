@@ -16,7 +16,8 @@ import { AVATAR_GROUP_FOCUSABLE_AVATAR_DIRECTIVE } from '../tokens';
             provide: AVATAR_GROUP_FOCUSABLE_AVATAR_DIRECTIVE,
             useExisting: forwardRef(() => AvatarGroupFocusableAvatarDirective)
         }
-    ]
+    ],
+    standalone: true
 })
 export class AvatarGroupFocusableAvatarDirective implements FocusableOption, HasElementRef {
     /** Tabindex of the Avatar. */

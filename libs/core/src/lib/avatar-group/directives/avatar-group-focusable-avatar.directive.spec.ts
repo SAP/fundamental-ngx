@@ -5,7 +5,9 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { AvatarGroupModule } from '../avatar-group.module';
 
 @Component({
-    template: `<fd-avatar #directiveElement fd-avatar-group-focusable-avatar></fd-avatar>`
+    template: `<fd-avatar #directiveElement fd-avatar-group-focusable-avatar></fd-avatar>`,
+    standalone: true,
+    imports: [AvatarModule, AvatarGroupModule]
 })
 class TestComponent {
     @ViewChild('directiveElement', { read: ElementRef })
@@ -18,8 +20,7 @@ describe('AvatarGroupFocusableAvatarDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [AvatarModule, AvatarGroupModule]
+            imports: [AvatarModule, AvatarGroupModule, TestComponent]
         }).compileComponents();
     }));
 

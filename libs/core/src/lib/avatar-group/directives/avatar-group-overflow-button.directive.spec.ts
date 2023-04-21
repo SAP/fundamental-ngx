@@ -8,7 +8,9 @@ import { AvatarGroupOverflowButtonColor } from '../avatar-group.component';
 @Component({
     template: `<button #directiveElement fd-avatar-group-overflow-button [size]="size" [color]="color">
         Avatar Group Overflow Button
-    </button>`
+    </button>`,
+    standalone: true,
+    imports: [AvatarGroupModule]
 })
 class TestComponent {
     @ViewChild('directiveElement', { static: false })
@@ -24,8 +26,7 @@ describe('AvatarGroupOverflowButtonDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [AvatarGroupModule]
+            imports: [AvatarGroupModule, TestComponent]
         }).compileComponents();
     }));
 
