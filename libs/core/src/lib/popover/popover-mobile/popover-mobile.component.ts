@@ -24,6 +24,11 @@ import {
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { PopoverInterface, POPOVER_COMPONENT } from '../popover.interface';
 import { PopoverChildContent } from '../popover-child-content.interface';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 let mobilePopoverUniqueId = 0;
 
@@ -31,7 +36,9 @@ let mobilePopoverUniqueId = 0;
     selector: 'fd-popover-mobile',
     templateUrl: './popover-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [DialogModule, TitleComponent, NgIf, CdkScrollable, ScrollbarDirective, NgTemplateOutlet]
 })
 export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> implements OnInit, OnDestroy {
     /** @hidden

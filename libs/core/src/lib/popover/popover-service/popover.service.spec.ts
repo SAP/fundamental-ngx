@@ -12,7 +12,9 @@ import { PopoverModule } from '../popover.module';
         <ng-container #container></ng-container>
         <div #triggerElement>trigger</div>
     `,
-    providers: [PopoverService]
+    providers: [PopoverService],
+    standalone: true,
+    imports: [PopoverModule]
 })
 class PopoverTestComponent extends BasePopoverClass {
     @ViewChild(PopoverBodyComponent) popoverBody: PopoverBodyComponent;
@@ -43,8 +45,7 @@ describe('PopoverService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [PopoverModule],
-            declarations: [PopoverTestComponent]
+            imports: [PopoverModule, PopoverTestComponent]
         }).compileComponents();
 
         fixture = TestBed.createComponent(PopoverTestComponent);

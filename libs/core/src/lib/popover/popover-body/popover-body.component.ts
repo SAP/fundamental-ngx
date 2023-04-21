@@ -9,15 +9,17 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { ConnectionPositionPair, CdkScrollable } from '@angular/cdk/overlay';
 import { ESCAPE } from '@angular/cdk/keycodes';
-import { CdkTrapFocus } from '@angular/cdk/a11y';
+import { CdkTrapFocus, A11yModule } from '@angular/cdk/a11y';
 
 import { Subject } from 'rxjs';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -34,7 +36,9 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['./popover-body.component.scss'],
-    providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })]
+    providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })],
+    standalone: true,
+    imports: [A11yModule, NgIf, CdkScrollable, ScrollbarDirective, NgTemplateOutlet]
 })
 export class PopoverBodyComponent {
     /** Whether to wrap content with fd-scrollbar directive. */

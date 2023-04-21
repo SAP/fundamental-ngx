@@ -8,7 +8,7 @@ describe('PopoverControlComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [PopoverControlComponent]
+            imports: [PopoverControlComponent]
         }).compileComponents();
     }));
 

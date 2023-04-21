@@ -3,7 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PopoverModule } from '../../popover.module';
 
 @Component({
-    template: ` <div #directiveElement fd-popover-body-footer>Popover Footer Test</div> `
+    template: ` <div #directiveElement fd-popover-body-footer>Popover Footer Test</div> `,
+    standalone: true,
+    imports: [PopoverModule]
 })
 class TestComponent {
     @ViewChild('directiveElement')
@@ -15,8 +17,7 @@ describe('PopoverBodyFooterDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [PopoverModule]
+            imports: [PopoverModule, TestComponent]
         }).compileComponents();
     }));
 

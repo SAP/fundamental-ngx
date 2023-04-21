@@ -29,7 +29,9 @@ const MOBILE_CONFIG: MobileModeConfig = { title: 'Test popover title' };
                 </div>
             </ng-template>
         </fd-popover>
-    `
+    `,
+    standalone: true,
+    imports: [PopoverModule, OverlayModule, A11yModule, PopoverMobileModule]
 })
 class TestPopoverWrapperComponent {
     @ViewChild(PopoverComponent) popoverComponent: PopoverComponent;
@@ -44,8 +46,7 @@ describe('PopoverMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestPopoverWrapperComponent],
-            imports: [PopoverModule, OverlayModule, A11yModule, PopoverMobileModule],
+            imports: [PopoverModule, OverlayModule, A11yModule, PopoverMobileModule, TestPopoverWrapperComponent],
             providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
         }).compileComponents();
     }));
