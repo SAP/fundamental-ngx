@@ -1,0 +1,372 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<div class="tsd-comment tsd-typography">
+		<dl class="tsd-comment-tags">
+			<dt class="fd-tsd-comment-tag-pill">dynamic</dt>
+			<dd></dd>
+		</dl>
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">CarouselService</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel">
+	<h3>Implements</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="active" class="tsd-anchor"></a>
+		<h3>active</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">active<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CarouselItemInterface</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L48">libs/core/src/lib/carousel/carousel.service.ts:48</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Initial active item of carousel, position first + offset</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="activeChange_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> active<wbr>Change$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">active<wbr>Change$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PanEndOutput</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L42">libs/core/src/lib/carousel/carousel.service.ts:42</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event thrown, when active element is changed</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="config" class="tsd-anchor"></a>
+		<h3>config</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CarouselConfig</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L45">libs/core/src/lib/carousel/carousel.service.ts:45</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Configuration for carousel</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="dragStateChange_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> drag<wbr>State<wbr>Change$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">drag<wbr>State<wbr>Change$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L39">libs/core/src/lib/carousel/carousel.service.ts:39</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event thrown when element is dragged. Emits &quot;true&quot; when drag starts and &quot;false&quot; when drag ends.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="isRtl" class="tsd-anchor"></a>
+		<h3>is<wbr>Rtl</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">is<wbr>Rtl<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L51">libs/core/src/lib/carousel/carousel.service.ts:51</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Set to true for rtl mode</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="items" class="tsd-anchor"></a>
+		<h3>items</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CarouselItemInterface</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L54">libs/core/src/lib/carousel/carousel.service.ts:54</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>carousel items query list</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Accessors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="currentTransitionPx" class="tsd-anchor"></a>
+		<h3>current<wbr>Transition<wbr>Px</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> currentTransitionPx<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> currentTransitionPx<span class="tsd-signature-symbol">(</span>currentTransitionPx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L60">libs/core/src/lib/carousel/carousel.service.ts:60</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Current transition value in px</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L57">libs/core/src/lib/carousel/carousel.service.ts:57</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Current transition value in px</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>currentTransitionPx: <span class="tsd-signature-type">number</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="goToItem" class="tsd-anchor"></a>
+		<h3>go<wbr>ToItem</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">go<wbr>ToItem<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CarouselItemInterface</span>, smooth<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L144">libs/core/src/lib/carousel/carousel.service.ts:144</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Change active element</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>item: <span class="tsd-signature-type">CarouselItemInterface</span></h5>
+					</li>
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> smooth: <span class="tsd-signature-type">boolean</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="initialise" class="tsd-anchor"></a>
+		<h3>initialise</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">initialise<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CarouselConfig</span>, items<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CarouselItemInterface</span><span class="tsd-signature-symbol">&gt;</span>, listElementReference<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L110">libs/core/src/lib/carousel/carousel.service.ts:110</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>set initial values for the service</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>config: <span class="tsd-signature-type">CarouselConfig</span></h5>
+					</li>
+					<li>
+						<h5>items: <span class="tsd-signature-type">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CarouselItemInterface</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+					<li>
+						<h5>listElementReference: <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="pickNext" class="tsd-anchor"></a>
+		<h3>pick<wbr>Next</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">pick<wbr>Next<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L156">libs/core/src/lib/carousel/carousel.service.ts:156</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>pick next element and set it active</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="pickPrevious" class="tsd-anchor"></a>
+		<h3>pick<wbr>Previous</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">pick<wbr>Previous<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L169">libs/core/src/lib/carousel/carousel.service.ts:169</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>pick previous element and set it active</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="setElement" class="tsd-anchor"></a>
+		<h3>set<wbr>Element</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">set<wbr>Element<span class="tsd-signature-symbol">(</span>elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L130">libs/core/src/lib/carousel/carousel.service.ts:130</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>set element ref</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>elementRef: <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="setItems" class="tsd-anchor"></a>
+		<h3>set<wbr>Items</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">set<wbr>Items<span class="tsd-signature-symbol">(</span>items<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CarouselItemInterface</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L135">libs/core/src/lib/carousel/carousel.service.ts:135</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>set items and assign active item, if not already there</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>items: <span class="tsd-signature-type">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CarouselItemInterface</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="updateConfig" class="tsd-anchor"></a>
+		<h3>update<wbr>Config</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">update<wbr>Config<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CarouselConfig</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/carousel/carousel.service.ts#L125">libs/core/src/lib/carousel/carousel.service.ts:125</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>update config value for the service</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>config: <span class="tsd-signature-type">CarouselConfig</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>

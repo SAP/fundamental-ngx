@@ -1,0 +1,108 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<div class="tsd-comment tsd-typography">
+		<dl class="tsd-comment-tags">
+			<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
+			<dd><p>Alert component is depricated since version 0.16.0
+				Message Strip component should be used instead.</p>
+				<p>Service used to dynamically generate an alert as an overlay.</p>
+			</dd>
+		</dl>
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">AlertService</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="dismissAll" class="tsd-anchor"></a>
+		<h3>dismiss<wbr>All</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">dismiss<wbr>All<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/alert/alert-service/alert.service.ts#L84">libs/core/src/lib/alert/alert-service/alert.service.ts:84</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Dismisses all service-opened alerts.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="hasOpenAlerts" class="tsd-anchor"></a>
+		<h3>has<wbr>Open<wbr>Alerts</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">has<wbr>Open<wbr>Alerts<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/alert/alert-service/alert.service.ts#L29">libs/core/src/lib/alert/alert-service/alert.service.ts:29</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Returns true if there are some alerts currently open. False otherwise.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="open" class="tsd-anchor"></a>
+		<h3>open</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">open<span class="tsd-signature-symbol">(</span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, alertConfig<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">AlertConfig</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AlertRef</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/core/src/lib/alert/alert-service/alert.service.ts#L38">libs/core/src/lib/alert/alert-service/alert.service.ts:38</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Opens an alert component with a content of type TemplateRef, Component Type or String.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>content: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>Content of the alert component.</p>
+						</div>
+					</li>
+					<li>
+						<h5>alertConfig: <span class="tsd-signature-type">AlertConfig</span><span class="tsd-signature-symbol"> = ...</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>Configuration of the alert component.</p>
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AlertRef</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>

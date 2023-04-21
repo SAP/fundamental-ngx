@@ -1,0 +1,75 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>This directive is used to provide drag &amp; drop with keyboard support.
+				It should be used together with directive fdDndKeyboardGroup.
+				We are using _groups from fdDndKeyboardGroup and adding a possibility to move cards.
+			Please see example below:</p>
+		</div>
+		<dl class="tsd-comment-tags">
+			<dt class="fd-tsd-comment-tag-pill">component({</dt>
+			<dd><p>selector: &#39;cdk-drag-drop-example&#39;,
+					template: <code>&lt;div               cdkDragListGroup               fdDndKeyboardGroup               [groups]=&quot;groups&quot;           &gt;               &lt;div                   *ngFor=&quot;let group of groups; let groupIndex = index&quot;                   cdkDragList               &gt;                   Group #{{ groupIndex }}                   &lt;div                       *ngFor=&quot;let item of group; let index = index&quot;                       cdkDrag                       fdDndKeyboardItem                       [itemIndex]=&quot;index&quot;                       [groupIndex]=&quot;groupIndex&quot;                       [dndKeyboardDisabled]=&quot;flag for disable/enable keyboard navigation if needed&quot;                       tabindex=&quot;0&quot;                   &gt;                       Item #{{ item }}                   &lt;/div&gt;               &lt;/div&gt;           &lt;/div&gt;</code>,
+					})
+					export class CdkDragDropExample {
+					groups = [
+					[1, 2, 3],
+					[4, 5, 6],
+					];
+				}</p>
+			</dd>
+		</dl>
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">DndKeyboardItemDirective</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel">
+	<h3>Implements</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="groupIndex" class="tsd-anchor"></a>
+		<h3>group<wbr>Index</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">group<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/cdk/src/lib/utils/drag-and-drop/dnd-keyboard-item/dnd-keyboard-item.directive.ts#L52">libs/cdk/src/lib/utils/drag-and-drop/dnd-keyboard-item/dnd-keyboard-item.directive.ts:52</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>group(column) index</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="itemIndex" class="tsd-anchor"></a>
+		<h3>item<wbr>Index</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">item<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/cdk/src/lib/utils/drag-and-drop/dnd-keyboard-item/dnd-keyboard-item.directive.ts#L48">libs/cdk/src/lib/utils/drag-and-drop/dnd-keyboard-item/dnd-keyboard-item.directive.ts:48</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>item index in group(column)</p>
+			</div>
+		</div>
+	</section>
+</section>
+</div>
