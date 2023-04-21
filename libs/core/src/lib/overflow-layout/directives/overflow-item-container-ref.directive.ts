@@ -4,7 +4,8 @@ import { Directive, ElementRef, TemplateRef, ViewContainerRef, ViewRef, OnDestro
  * Directive to hide component without actual destroying of the component instance.
  */
 @Directive({
-    selector: '[fdOverflowItemContainerRef]'
+    selector: '[fdOverflowItemContainerRef]',
+    standalone: true
 })
 export class OverflowItemContainerRefDirective implements OnDestroy {
     /** @hidden */

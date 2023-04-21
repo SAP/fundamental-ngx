@@ -15,7 +15,8 @@ import { FD_OVERFLOW_CONTAINER } from '../tokens/overflow-container.token';
  */
 @Directive({
     selector: '[fdOverflowLayoutPopoverContent]',
-    providers: [DestroyedService]
+    providers: [DestroyedService],
+    standalone: true
 })
 export class OverflowLayoutPopoverContentDirective implements OverflowPopoverContent, OnDestroy {
     /**

@@ -5,7 +5,9 @@ import { BrowserTestingModule } from '@angular/platform-browser/testing';
 import { OverflowItemContainerRefDirective } from './overflow-item-container-ref.directive';
 
 @Component({
-    template: `<div id="directive_element" *fdOverflowItemContainerRef></div>`
+    template: `<div id="directive_element" *fdOverflowItemContainerRef></div>`,
+    standalone: true,
+    imports: [CommonModule, BrowserTestingModule, OverflowItemContainerRefDirective]
 })
 export class TestComponent {
     @ViewChild(OverflowItemContainerRefDirective, { read: OverflowItemContainerRefDirective })
@@ -17,8 +19,7 @@ describe('OverflowItemContainerDirective', () => {
     let directive: OverflowItemContainerRefDirective;
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [CommonModule, BrowserTestingModule],
-            declarations: [OverflowItemContainerRefDirective, TestComponent]
+            imports: [TestComponent]
         }).compileComponents();
     });
 

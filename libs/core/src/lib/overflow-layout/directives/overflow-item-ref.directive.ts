@@ -13,7 +13,8 @@ import { FD_OVERFLOW_ITEM_REF } from '../tokens/overflow-item-ref.token';
             provide: FD_OVERFLOW_ITEM_REF,
             useExisting: OverflowItemRefDirective
         }
-    ]
+    ],
+    standalone: true
 })
 export class OverflowItemRefDirective<T = any> implements OverflowItemRef<T> {
     /**

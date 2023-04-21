@@ -12,7 +12,8 @@ import { FD_OVERFLOW_ITEM } from '../tokens/overflow-item.token';
             provide: FD_OVERFLOW_FOCUSABLE_ITEM,
             useExisting: OverflowLayoutFocusableItemDirective
         }
-    ]
+    ],
+    standalone: true
 })
 export class OverflowLayoutFocusableItemDirective implements OverflowLayoutFocusableItem, OnInit {
     /** Whether the item should be focusable. */
