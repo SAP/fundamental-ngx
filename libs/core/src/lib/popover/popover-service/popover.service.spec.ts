@@ -108,6 +108,7 @@ describe('PopoverService', () => {
     it('should initialise, open and pass some settings', () => {
         componentInstance.noArrow = false;
         componentInstance.isOpen = true;
+        componentInstance.appendTo = componentInstance.triggerRef;
         spyOn(service, 'open').and.callThrough();
 
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
@@ -119,6 +120,7 @@ describe('PopoverService', () => {
         expect(service['_overlayRef']).toBeTruthy();
         expect(service.isOpen).toBeTrue();
         expect(service['_overlayRef'].hasAttached()).toBeTrue();
+        expect(service.appendTo).toBe(componentInstance.triggerRef);
     });
 
     it('should open', () => {

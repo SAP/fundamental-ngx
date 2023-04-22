@@ -123,8 +123,9 @@ describe('Link component test suite', () => {
             // unstable on Safari
             return;
         }
+        await linkPage.open();
         await waitForElDisplayed(iconLink);
-        await checkLinkTarget(iconLink, googleLink, 'input[type="text"]');
+        await checkLinkTarget(iconLink, googleLink, 'body');
         await linkPage.open();
     }, 2);
 

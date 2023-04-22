@@ -10,6 +10,12 @@
     <fdp-column name="verified" key="verified" label="Verified"> </fdp-column>
 
     <fdp-column name="status" key="status" label="Status"> </fdp-column>
+
+    <fdp-column name="action" key="" label="" [disableP13n]="true">
+        <fdp-table-cell *fdpCellDef="let item">
+            <fdp-button label="Action"></fdp-button>
+        </fdp-table-cell>
+    </fdp-column>
 </fdp-table>
 
 <!-- Connect P13 Dialog to the table -->

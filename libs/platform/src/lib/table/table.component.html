@@ -86,6 +86,7 @@
                             [columnName]="column.name"
                             [id]="id + '__' + column.name"
                             [attr.aria-colindex]="colIdx"
+                            [attr.aria-labelledby]="id + '-header-cell-' + column.name"
                             [ngClass]="'fdp-table__col--' + column.name"
                             [class.fd-table__cell--fixed]="_freezableColumns.has(column.name)"
                             [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
@@ -104,29 +105,31 @@
                                         : _tableColumnResizeService.getColumnWidthStyle(column.name)
                                         : _tableColumnResizeService.getNextColumnsWidth(column.name)
                             "
-                            [fdPopoverTrigger]="columnHeaderPopover"
+                            [fdPopoverTrigger]="tablePopover.popover"
                             [class.fd-table__item--clickable]="_isColumnHasHeaderMenu(column)"
                             [cellFocusedEventAnnouncer]="null"
                             (cellFocused)="_onCellFocused($event, column.label, null)"
+                            (keydown.arrowLeft)="_scrollToOverlappedCell()"
+                            (keydown.arrowRight)="_scrollToOverlappedCell()"
                         >
-                            <ng-container
-                                *ngTemplateOutlet="tableHeaderCellTemplate; context: { column: column }"
-                            ></ng-container>
-
-                            <!-- Header menu -->
-                            <fd-popover
-                                #columnHeaderPopover
-                                [disabled]="!_isColumnHasHeaderMenu(column)"
-                                [noArrow]="true"
-                                fd-table-popover
-                                [focusAutoCapture]="true"
-                                [focusTrapped]="true"
-                                [triggers]="['click', 'keydown.enter', 'keydown.space']"
+                            <fdp-table-header-cell-content
+                                [column]="column"
+                                [hasFilter]="_filterRulesMap.has(column.key)"
+                                [hasSorting]="_sortRulesMap.has(column.key)"
+                                [sorting]="_sortRulesMap.get(column.key)"
                             >
-                                <ng-container
-                                    *ngTemplateOutlet="headerPopoverTemplate; context: { column: column }"
-                                ></ng-container>
-                            </fd-popover>
+                                <!-- Header menu -->
+                                <fdp-table-cell-header-popover
+                                    #tablePopover
+                                    [disabled]="!_isColumnHasHeaderMenu(column)"
+                                    [column]="column"
+                                    [popoverTemplate]="column.headerCellPopoverTemplate"
+                                    [filteringFromHeaderDisabled]="_isFilteringFromHeaderDisabled"
+                                    (columnHeaderSortBy)="_columnHeaderSortBy($event.key, $event.direction)"
+                                    (columnHeaderGroupBy)="_columnHeaderGroupBy($event)"
+                                    (columnHeaderFilterBy)="_columnHeaderFilterBy($event.key, $event.value)"
+                                ></fdp-table-cell-header-popover>
+                            </fdp-table-header-cell-content>
                         </th>
                     </ng-container>
 
@@ -153,7 +156,7 @@
                 [noBorderY]="noBorderY"
                 [tabIndex]="pageScrolling ? 0 : -1"
                 [items]="_tableRows"
-                [draggable]="_rowsDraggable"
+                [draggable]="enableRowReordering && _rowsDraggable"
                 [dropMode]="dropMode"
                 [style.transform]="_virtualScrollTransform"
                 (itemDropped)="_dragDropItemDrop($event)"
@@ -168,6 +171,7 @@
                         [attr.aria-rowindex]="rowIdx"
                         [style.height.px]="rowHeight"
                         (click)="_emitRowActivate(row)"
+                        [class.fd-table__row--draggable]="enableRowReordering && _rowsDraggable"
                     >
                         <td
                             fd-table-cell
@@ -211,6 +215,7 @@
                         (keydown.alt.shift.arrowdown)="_dragRowFromKeyboard('down', $event, rowIdx, 'group')"
                         (started)="_dragDropStart()"
                         [main]="true"
+                        [class.fd-table__row--draggable]="enableRowReordering && _rowsDraggable"
                     >
                         <td
                             *ngIf="semanticHighlighting"
@@ -311,14 +316,16 @@
                             [cellFocusedEventAnnouncer]="null"
                             (cellFocused)="_onCellFocused($event, column?.label ?? '', isTreeTable ? row.level : null)"
                             (click)="_onCellClick(colIdx, row)"
-                            (keydown.enter)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
+                            (keydown.enter)="_isTreeRowFirstCell(colIdx, row, $event) && _toggleGroupRow(row)"
+                            (keydown.arrowLeft)="_scrollToOverlappedCell()"
+                            (keydown.arrowRight)="_scrollToOverlappedCell()"
                         >
-                            <ng-container
-                                *ngTemplateOutlet="
-                                    tableCellTemplate;
-                                    context: { row: row, column: column, colIdx: colIdx }
-                                "
-                            ></ng-container>
+                            <fdp-table-cell-content
+                                [isTreeRowFirstCell]="_isTreeRowFirstCell(colIdx, row)"
+                                [row]="row"
+                                [column]="column"
+                                [expanded]="row.expanded"
+                            ></fdp-table-cell-content>
                         </td>
 
                         <td
@@ -365,7 +372,7 @@
                             [attr.data-nesting-level]="row.level + 1"
                             [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
                             (click)="_onCellClick(0, row)"
-                            (keydown.enter)="_isTreeRowFirstCell(0, row) && _toggleGroupRow(row)"
+                            (keydown.enter)="_isTreeRowFirstCell(0, row, $event) && _toggleGroupRow(row)"
                         >
                             <div fd-table-text *ngFor="let poppingColumn of _poppingColumns">
                                 <label fd-form-label>{{ poppingColumn.label }}:</label>
@@ -373,7 +380,7 @@
                                 <ng-container *ngIf="poppingColumn?.columnCellTemplate; else defaultTableCellTemplate">
                                     <ng-container
                                         *ngTemplateOutlet="
-                                            poppingColumn.columnCellTemplate;
+                                            poppingColumn.columnCellTemplate!;
                                             context: { $implicit: row.value, popping: true, rowIndex: row.index }
                                         "
                                     ></ng-container>
@@ -423,136 +430,23 @@
     </tbody>
 </ng-template>
 
-<!-- Column Header Popover Template  -->
-<ng-template #headerPopoverTemplate let-column="column">
-    <ul fd-list [noBorder]="true">
-        <!-- Sorting -->
-        <ng-container *ngIf="column.sortable">
-            <li
-                [tabindex]="0"
-                class="fd-table__item--clickable"
-                fd-list-item
-                (click)="_columnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
-                (keydown.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
-            >
-                <span fd-list-icon glyph="sort-ascending"></span>
-                <span fd-list-title>{{ 'platformTable.headerMenuSortAsc' | fdTranslate }}</span>
-            </li>
-            <li
-                [tabindex]="0"
-                class="fd-table__item--clickable"
-                fd-list-item
-                (click)="_columnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
-                (keydown.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
-            >
-                <span fd-list-icon glyph="sort-descending"></span>
-                <span fd-list-title>{{ 'platformTable.headerMenuSortDesc' | fdTranslate }}</span>
-            </li>
-        </ng-container>
-
-        <!-- Grouping -->
-        <ng-container *ngIf="column.groupable">
-            <li
-                [tabindex]="0"
-                class="fd-table__item--clickable"
-                fd-list-item
-                (click)="_columnHeaderGroupBy(column.key)"
-                (keydown.enter)="_columnHeaderGroupBy(column.key)"
-            >
-                <span fd-list-icon></span>
-                <span fd-list-title>{{ 'platformTable.headerMenuGroup' | fdTranslate }}</span>
-            </li>
-        </ng-container>
-
-        <!-- Freeze -->
-        <ng-container *ngIf="column.freezable || column.endFreezable">
-            <li
-                [tabindex]="0"
-                *ngIf="
-                    !_freezableColumns?.has(column.name) && !_freezableEndColumns?.has(column.name);
-                    else unfreezeTpl
-                "
-                class="fd-table__item--clickable"
-                fd-list-item
-                (click)="freezeToColumn(column.name, column.endFreezable)"
-                (keyup.enter)="freezeToColumn(column.name, column.endFreezable)"
-            >
-                <span></span>
-                <span fd-list-title *ngIf="!column.endFreezable">{{
-                    'platformTable.headerMenuFreeze' | fdTranslate
-                }}</span>
-                <span fd-list-title *ngIf="column.endFreezable">{{
-                    'platformTable.headerMenuEndFreeze' | fdTranslate
-                }}</span>
-            </li>
-            <ng-template #unfreezeTpl>
-                <li
-                    [tabindex]="0"
-                    class="fd-table__item--clickable"
-                    fd-list-item
-                    (click)="unfreeze(column.name, column.endFreezable)"
-                    (keyup.enter)="unfreeze(column.name, column.endFreezable)"
-                >
-                    <span></span>
-                    <span fd-list-title>{{ 'platformTable.headerMenuUnfreeze' | fdTranslate }}</span>
-                </li>
-            </ng-template>
-        </ng-container>
-
-        <!-- Filtering -->
-        <ng-container *ngIf="column.filterable && !_isFilteringFromHeaderDisabled">
-            <li fd-list-item [tabindex]="0">
-                <i fd-list-icon glyph="filter"></i>
-                <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
-                    <label fd-form-label [for]="'fdp-table-column-filtering-' + column.name">{{
-                        'platformTable.headerMenuFilter' | fdTranslate
-                    }}</label>
-                    <input
-                        fd-form-control
-                        [id]="'fdp-table-column-filtering-' + column.name"
-                        (keydown.enter)="_columnHeaderFilterBy(column.key, $any($event.target)?.value)"
-                    />
-                </div>
-            </li>
-        </ng-container>
-    </ul>
-</ng-template>
-
-<!-- Column Header Cell Template -->
-<ng-template #tableHeaderCellTemplate let-column="column">
-    <div
-        class="fd-table__text--no-wrap"
-        [class.fd-table__inner]="_sortRulesMap.has(column.key) || _filterRulesMap.has(column.key)"
-    >
-        <ng-container *ngTemplateOutlet="tableHeaderCellContentTemplate; context: { column: column }"></ng-container>
-
-        <div
-            class="fd-table__column-header-icons"
-            *ngIf="_sortRulesMap.has(column.key) || _filterRulesMap.has(column.key)"
-        >
-            <fd-icon *ngIf="_filterRulesMap.has(column.key)" fd-table-icon glyph="filter"></fd-icon>
-
-            <fd-icon
-                *ngIf="_sortRulesMap.has(column.key)"
-                fd-table-icon
-                [glyph]="
-                    _sortRulesMap.get(column.key)?.direction === SORT_DIRECTION.ASC
-                        ? 'sort-ascending'
-                        : 'sort-descending'
-                "
-            ></fd-icon>
-        </div>
-    </div>
-</ng-template>
-
 <!-- Column Header Cell Content Template  -->
 <ng-template #tableHeaderCellContentTemplate let-column="column">
     <ng-container *ngIf="column?.headerCellTemplate; else defaultHeaderCellTemplate">
-        <ng-container *ngTemplateOutlet="column.headerCellTemplate"></ng-container>
+        <ng-template
+            [ngTemplateOutlet]="column.headerCellTemplate"
+            [ngTemplateOutletContext]="{ $implicit: column }"
+        ></ng-template>
     </ng-container>
 
     <ng-template #defaultHeaderCellTemplate>
-        {{ column?.label }}
+        <span
+            [id]="id + '-header-cell-' + column.name"
+            [attr.title]="column?.headerOverflows ? column.label : null"
+            class="fd-table__cell--truncate-txt"
+        >
+            {{ column?.label }}
+        </span>
     </ng-template>
 </ng-template>
 
@@ -580,51 +474,5 @@
                 >: {{ row.value?.['value'] }}
             </div>
         </ng-container>
-    </div>
-</ng-template>
-
-<!-- Table Cell Template -->
-<ng-template #tableCellTemplate let-column="column" let-row="row" let-colIdx="colIdx">
-    <div fd-table-text [fdTableTextClass]="column.applyText" [noWrap]="column.noWrap">
-        <span
-            *ngIf="_isTreeRowFirstCell(colIdx, row)"
-            class="fd-table__expand"
-            [class.fd-table__expand--open]="row.expanded"
-            aria-hidden="true"
-        ></span>
-
-        <ng-container *ngIf="row.state === 'readonly'; else editModeCell">
-            <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
-                <ng-container
-                    *ngTemplateOutlet="
-                        column.columnCellTemplate;
-                        context: { $implicit: row.value, popping: false, rowIndex: row.index }
-                    "
-                ></ng-container>
-            </ng-container>
-
-            <ng-template #defaultTableCellTemplate>
-                {{ row?.value | valueByPath : column.key }}
-            </ng-template>
-        </ng-container>
-
-        <ng-template #editModeCell>
-            <ng-container *ngIf="column?.editableColumnCellTemplate; else defaultEditableTableCellTemplate">
-                <ng-container
-                    *ngTemplateOutlet="
-                        column.editableColumnCellTemplate;
-                        context: { $implicit: row.value, popping: false, rowIndex: row.index }
-                    "
-                ></ng-container>
-            </ng-container>
-
-            <ng-template #defaultEditableTableCellTemplate>
-                <fdp-table-editable-cell
-                    [row]="row"
-                    [column]="column"
-                    [columnValue]="row?.value | valueByPath : column.key"
-                ></fdp-table-editable-cell>
-            </ng-template>
-        </ng-template>
     </div>
 </ng-template>

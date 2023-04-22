@@ -4,3 +4,19 @@
 </component-example>
 
 <code-example [exampleFiles]="basic"></code-example>
+
+<separator></separator>
+<fd-docs-section-title id="custom-width" componentName="table">
+    Approval Flow with custom statuses
+</fd-docs-section-title>
+<description>
+    <p>
+        In this example we have custom status defined on the application level. We need to provide a
+        <code>approvalStatusTemplate</code> template to tell the <code>ApprovalFlow</code> component how to handle these
+        different states
+    </p>
+</description>
+<component-example>
+    <fdp-platform-approval-flow-status-example></fdp-platform-approval-flow-status-example>
+</component-example>
+<code-example [exampleFiles]="status"></code-example>

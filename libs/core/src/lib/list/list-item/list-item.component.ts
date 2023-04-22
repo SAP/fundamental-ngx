@@ -291,6 +291,14 @@ export class ListItemComponent
     }
 
     /** @hidden */
+    @HostListener('focus')
+    private _onFocus(): void {
+        // Try to find inner focusable link
+        const tabbableLink = this.elementRef.nativeElement.querySelector('.fd-list__link.fd-list__link--focusable');
+        tabbableLink?.focus();
+    }
+
+    /** @hidden */
     private _listenOnLinkQueryChange(): void {
         this.linkDirectives.changes.pipe(startWith(this.linkDirectives), takeUntil(this._onDestroy$)).subscribe(() => {
             this._onLinkListChanged$.next();

@@ -1,12 +1,12 @@
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
-import { PlatformListModule } from '../list.module';
+import { Observable, of } from 'rxjs';
 import { ListComponent } from '../list.component';
+import { PlatformListModule } from '../list.module';
 import { StandardListItemComponent } from './standard-list-item.component';
 import { StandardListItemModule } from './standard-list-item.module';
 
@@ -54,11 +54,12 @@ describe('StandardListItemComponent', () => {
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(waitForAsync(() => {
         fixture = TestBed.createComponent(StandardListItemTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-    });
+        fixture.whenStable();
+    }));
 
     it('should create', () => {
         expect(component).toBeTruthy();
@@ -85,6 +86,7 @@ describe('StandardListItemComponent', () => {
 
 @Component({
     selector: 'fdp-standard-list-item-test',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <fdp-list #component [dataSource]="dataSource">
             <fdp-standard-list-item #childComponent *fdpItemDef="let address" [title]="address.name">

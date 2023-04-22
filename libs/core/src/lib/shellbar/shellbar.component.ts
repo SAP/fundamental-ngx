@@ -20,19 +20,36 @@ import { FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
 import { ContentDensityMode, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
+import equal from 'fast-deep-equal';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, Subscription, takeUntil } from 'rxjs';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
 import { FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
+import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
 
 export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
 
 export type Breakpoints = Record<ShellbarSizes, number>;
+
+export type ShellbarGroup = 'product' | 'search' | 'actions';
 
 export interface NormalizedBreakpoint {
     size: ShellbarSizes;
     min: number;
     max: number;
 }
+
+export type ShellbarGroupFlexOptions = Partial<{
+    [key in ShellbarGroup]: {
+        /**
+         * Whether to shrink group.
+         */
+        shrink?: boolean;
+        /**
+         * Whether to apply flex-basis: auto style.
+         */
+        flexBasisAuto?: boolean;
+    };
+}>;
 
 /**
  * The shellbar offers consistent, responsive navigation across all products and applications.
@@ -74,11 +91,33 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /**
-     * Whether the Shellbar is used with Side Navigation
-     * When set to true, the responsive paddings are not applied
+     * Whether the Shellbar is used with Side Navigation.
+     * When set to true, the responsive paddings are not applied.
+     * Can also accept a template variable referring to a SideNavigationInterface (fd-side-nav or fdx-side-nav), and
+     * will add the corresponding class.
      */
     @Input()
-    sideNav = false;
+    sideNav: boolean | SideNavigationInterface = false;
+
+    /**
+     * Shellbar group flex configuration.
+     */
+    @Input()
+    set groupFlex(value: Nullable<ShellbarGroupFlexOptions>) {
+        if (equal(value, this._groupFlex)) {
+            return;
+        }
+
+        this._groupFlex = value;
+        this._cd.detectChanges();
+    }
+
+    get groupFlex(): Nullable<ShellbarGroupFlexOptions> {
+        return this._groupFlex;
+    }
+
+    /** @hidden */
+    private _groupFlex: Nullable<ShellbarGroupFlexOptions>;
 
     /** @hidden */
     @ContentChild(FD_COMBOBOX_COMPONENT, { static: false })
@@ -265,6 +304,17 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         this._showMobileSearch = false;
         this._actions._setSearchVisibility(false);
         this._cd.detectChanges();
+    }
+
+    /** @hidden */
+    _getSideNavClass(): string {
+        let retVal = ' ';
+
+        if (this.sideNav && (this.sideNav as SideNavigationInterface).additionalShellbarCssClass) {
+            retVal += (this.sideNav as SideNavigationInterface).additionalShellbarCssClass;
+        }
+
+        return retVal;
     }
 
     /** @hidden */

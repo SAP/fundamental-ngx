@@ -68,21 +68,7 @@
         </div>
 
         <fdp-object-status [status]="_objectStatus" [inverted]="true">
-            <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">
-                <ng-container [ngSwitch]="node.status">
-                    <ng-container *ngSwitchCase="'approved'">{{
-                        'platformApprovalFlow.statusApproved' | fdTranslate
-                    }}</ng-container>
-                    <ng-container *ngSwitchCase="'rejected'">{{
-                        'platformApprovalFlow.statusRejected' | fdTranslate
-                    }}</ng-container>
-                    <ng-container *ngSwitchCase="'in progress'">{{
-                        'platformApprovalFlow.statusInProgress' | fdTranslate
-                    }}</ng-container>
-                    <ng-container *ngSwitchCase="'not started'">{{
-                        'platformApprovalFlow.statusNotStarted' | fdTranslate
-                    }}</ng-container>
-                </ng-container>
+            <ng-container *ngIf="approvalStatusTemplate; then userStatusTemplate; else defaultStatusTemplate">
             </ng-container>
 
             <ng-container *ngIf="checkDueDate && _showDueDateWarning">
@@ -167,6 +153,36 @@
         [class.fdp-approval-flow-node__drop-zone--blank]="isNextNodeBlank"
         [class.fdp-approval-flow-node__drop-zone--partial]="_dropZonePartial(placement)"
     ></div>
+</ng-template>
+
+<ng-template #defaultStatusTemplate>
+    <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">
+        <ng-container [ngSwitch]="node.status">
+            <ng-container *ngSwitchCase="'approved'">{{
+                'platformApprovalFlow.statusApproved' | fdTranslate
+            }}</ng-container>
+            <ng-container *ngSwitchCase="'rejected'">{{
+                'platformApprovalFlow.statusRejected' | fdTranslate
+            }}</ng-container>
+            <ng-container *ngSwitchCase="'in progress'">{{
+                'platformApprovalFlow.statusInProgress' | fdTranslate
+            }}</ng-container>
+            <ng-container *ngSwitchCase="'not started'">{{
+                'platformApprovalFlow.statusNotStarted' | fdTranslate
+            }}</ng-container>
+        </ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template #userStatusTemplate>
+    <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">
+        <ng-container
+            *ngIf="approvalStatusTemplate"
+            [ngTemplateOutlet]="approvalStatusTemplate"
+            [ngTemplateOutletContext]="{ node: node }"
+        >
+        </ng-container>
+    </ng-container>
 </ng-template>
 
 <fd-menu #menu fdContentDensity placement="bottom-end" (isOpenChange)="_onMenuOpen()">

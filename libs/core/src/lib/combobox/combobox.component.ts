@@ -245,10 +245,17 @@ export class ComboboxComponent
 
     /**
      * Whether AddOn Button should be focusable
+     * @default false
+     */
+    @Input()
+    buttonFocusable = false;
+
+    /**
+     * Whether clear button should be focusable.
      * @default true
      */
     @Input()
-    buttonFocusable = true;
+    clearButtonFocusable = true;
 
     /** Whether the combobox is readonly. */
     @Input()
@@ -564,8 +571,8 @@ export class ComboboxComponent
         this.isOpenChangeHandle(!this.open);
         this.searchInputElement.nativeElement.focus();
         this.filterHighlight = false;
-        if (this.open && this.listComponent) {
-            this.listComponent.setItemActive(0);
+        if (this.open) {
+            this.searchInputElement?.nativeElement.focus();
         }
     }
 
