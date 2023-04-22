@@ -16,6 +16,7 @@
     "packageManager": "yarn@1.22.18",
     "scripts": {
         "preinstall": "npx only-allow yarn",
+        "migrate": "nx g @fundamental-ngx/nx-plugin:migrate-to-jest --verbose --dryRun",
         "build": "echo Building default app && nx build",
         "build-docs-netlify": "yarn run build --configuration=production-unoptimized",
         "build:umbrella": "echo Building umbrella libraries && nx run-many --target=build-umbrella --all",
