@@ -18,7 +18,7 @@ export default async function (tree: Tree, schema: SapComponentSchema) {
         name: schema.name,
         directory: `${getProjectDirName(schema)}/src/lib`,
         tags: [`scope:${getProjectTag(schema)}`, 'type:lib'].join(','),
-        unitTestRunner: UnitTestRunner.Karma,
+        unitTestRunner: UnitTestRunner.Jest,
         prefix: getProjectTag(schema),
         publishable: true,
         importPath: getImportPath(schema),
