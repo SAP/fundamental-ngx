@@ -43,7 +43,8 @@
                     "npx nx run cdk:compile-typedoc"
                 ],
                 "parallel": true
-            }
+            },
+            "outputs": ["libs/docs/typedoc"]
         },
         "build": {
             "executor": "@nrwl/angular:webpack-browser",
