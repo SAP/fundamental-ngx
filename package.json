@@ -103,7 +103,7 @@
     "@nrwl/tao": "15.5.3",
     "@nrwl/workspace": "15.5.3",
     "@schematics/angular": "15.1.2",
-    "@swc-node/register": "^1.4.2",
+    "@swc-node/register": "^1.6.4",
     "@swc/cli": "~0.1.55",
     "@swc/core": "^1.2.173",
     "@types/jasmine": "3.10.2",
