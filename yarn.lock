@@ -2122,10 +2122,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fundamental-styles/cx@0.29.0-rc.8":
-  version "0.29.0-rc.8"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.29.0-rc.8.tgz#489eedf1a72b3cbb412172ea758519f5dacdf700"
-  integrity sha512-S3QhIq36+eyColsJNoCWx2pNu6cz6DdoS9ysW5Rz8Un6qw7DpiTllrqcEQQo7RfJrGQSaQA+Yqy4VOzczonrjA==
+"@fundamental-styles/cx@0.29.0-rc.11":
+  version "0.29.0-rc.11"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.29.0-rc.11.tgz#b3f35459ead44b7ba6f3da1ec7650f2d6bbd295b"
+  integrity sha512-GZlZRlYorQ4riJ7V3Ec2SclcNqFhbTktprXXIS4DYrsKcBKrhAYb8n31b3XMaFeFOfp4yUmipGJ4+4px7cnI/Q==
 
 "@fundamental-styles/fn@0.25.1-rc.16":
   version "0.25.1-rc.16"
