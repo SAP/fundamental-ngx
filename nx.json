@@ -68,7 +68,7 @@
             "dependsOn": ["build-umbrella"]
         },
         "test": {
-            "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"]
+            "inputs": ["default", "^default", "{projectRoot}/**/*.spec.[jt]s", "{workspaceRoot}/jest.preset.js"]
         },
         "lint": {
             "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]

@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 
-import { SplitterModule } from '../splitter.module';
 import { SplitterSplitPaneComponent } from './splitter-split-pane.component';
 
 describe('SplitterSplitPaneComponent', () => {
@@ -11,7 +10,7 @@ describe('SplitterSplitPaneComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [SplitterModule]
+            declarations: [SplitterSplitPaneComponent]
         }).compileComponents();
     }));
 

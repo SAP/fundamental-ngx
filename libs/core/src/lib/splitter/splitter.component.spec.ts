@@ -1,11 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 
 import { SplitterSplitPaneComponent } from './splitter-split-pane/splitter-split-pane.component';
 import { SplitterComponent } from './splitter.component';
-import { SplitterModule } from './splitter.module';
 
 @Component({
     template: `
@@ -33,8 +32,8 @@ describe('SplitterComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [SplitterHostComponent],
-            imports: [SplitterModule]
+            declarations: [SplitterHostComponent, SplitterComponent, SplitterSplitPaneComponent],
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));
 

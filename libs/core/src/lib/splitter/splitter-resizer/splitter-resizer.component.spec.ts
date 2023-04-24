@@ -3,8 +3,8 @@ import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angul
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 
-import { SplitterModule } from '../splitter.module';
 import { SplitterResizerComponent } from './splitter-resizer.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('SplitterResizerComponent', () => {
     let component: SplitterResizerComponent;
@@ -12,7 +12,8 @@ describe('SplitterResizerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [SplitterModule]
+            declarations: [SplitterResizerComponent],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
     }));
 
