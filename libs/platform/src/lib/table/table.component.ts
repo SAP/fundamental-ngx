@@ -1689,7 +1689,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             const eventTarget = event.target as HTMLInputElement;
             if (
                 eventTarget.type === 'checkbox' ||
-                (eventTarget.tagName !== 'INPUT' && eventTarget.tagName !== 'TEXTAREA')
+                (eventTarget.tagName !== 'INPUT' &&
+                    eventTarget.tagName !== 'BUTTON' &&
+                    eventTarget.tagName !== 'TEXTAREA')
             ) {
                 event.preventDefault(); // prevent page scroll but still allow space presses in inputs
             }
