@@ -1,3 +1,12 @@
+## [0.40.2-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.17...v0.40.2-rc.18) (2023-04-24)
+
+
+### Bug Fixes
+
+* remove translation_v2 ([#9745](https://github.com/SAP/fundamental-ngx/issues/9745)) ([9c94593](https://github.com/SAP/fundamental-ngx/commit/9c94593d09321ad5b932192d915e05c208b26f1f))
+
+
+
 ## [0.40.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.16...v0.40.2-rc.17) (2023-04-24)
 
 
