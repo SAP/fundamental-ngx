@@ -1,11 +1,10 @@
 {
     "name": "docs",
-    "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "apps/docs/src",
     "projectType": "application",
     "prefix": "fundamental-ngx",
     "generators": {
-        "@nx/angular:component": {
+        "@nrwl/schematics:component": {
             "style": "scss"
         }
     },
@@ -48,7 +47,7 @@
             "outputs": ["libs/docs/typedoc"]
         },
         "build": {
-            "executor": "@nx/angular:webpack-browser",
+            "executor": "@nrwl/angular:webpack-browser",
             "options": {
                 "outputPath": "dist/apps/docs",
                 "index": "apps/docs/src/index.html",
@@ -145,7 +144,7 @@
                     },
                     {
                         "glob": "**/*",
-                        "input": "libs/docs/shared/src/lib/i18n/examples",
+                        "input": "libs/docs/i18n/examples",
                         "output": "./docs/platform/i18n/examples"
                     },
                     {
@@ -222,7 +221,7 @@
             "dependsOn": ["^build", "generate-typedoc"]
         },
         "serve": {
-            "executor": "@nx/angular:webpack-dev-server",
+            "executor": "@nrwl/angular:webpack-dev-server",
             "options": {
                 "browserTarget": "docs:build"
             },
@@ -242,7 +241,7 @@
             "defaultConfiguration": "hot-module-replacement"
         },
         "lint": {
-            "executor": "@nx/linter:eslint",
+            "executor": "@nrwl/linter:eslint",
             "options": {
                 "lintFilePatterns": ["apps/docs/**/*.ts", "apps/docs/**/*.html"]
             }
