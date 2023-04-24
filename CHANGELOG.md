@@ -1,3 +1,12 @@
+## [0.40.2-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.18...v0.40.2-rc.19) (2023-04-24)
+
+
+### Bug Fixes
+
+* **platform:** enables correct behavior for buttons when used as action in the cell ([#9741](https://github.com/SAP/fundamental-ngx/issues/9741)) ([5678204](https://github.com/SAP/fundamental-ngx/commit/5678204d035da93133fa68736c15e78c6b2e5a9d))
+
+
+
 ## [0.40.2-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.17...v0.40.2-rc.18) (2023-04-24)
 
 
