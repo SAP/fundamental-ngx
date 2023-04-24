@@ -1,3 +1,12 @@
+## [0.40.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.16...v0.40.2-rc.17) (2023-04-24)
+
+
+### Features
+
+* **core:** added byline input to multi-input component ([#9730](https://github.com/SAP/fundamental-ngx/issues/9730)) ([0589851](https://github.com/SAP/fundamental-ngx/commit/058985182e8a996434c72f6c66f6a90749f56fcd))
+
+
+
 ## [0.40.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.15...v0.40.2-rc.16) (2023-04-22)
 
 
