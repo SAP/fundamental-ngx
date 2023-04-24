@@ -1,5 +1,5 @@
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CarouselDirective } from './carousel.directive';
 import { CarouselItemDirective } from './carousel-item.directive';
 import { CommonModule } from '@angular/common';
@@ -7,7 +7,7 @@ import { CarouselConfig, CarouselService } from './carousel.service';
 
 @Component({
     template: `
-        <div #directiveElement fdCarousel [config]="configuration">
+        <div fdCarousel [config]="configuration">
             <div fdCarouselItem value="1" style="height: 30px"></div>
             <div fdCarouselItem value="2" style="height: 30px"></div>
             <div fdCarouselItem value="3" style="height: 30px"></div>
@@ -30,7 +30,7 @@ class VerticalCarouselComponent {
 
 @Component({
     template: `
-        <div #directiveElement class="container-ex" fdCarousel [config]="configuration">
+        <div fdCarousel [config]="configuration">
             <div fdCarouselItem value="1" [initialWidth]="30" class="element"></div>
             <div fdCarouselItem value="2" [initialWidth]="30" class="element"></div>
             <div fdCarouselItem value="3" [initialWidth]="30" class="element"></div>
@@ -39,30 +39,7 @@ class VerticalCarouselComponent {
             <div fdCarouselItem value="6" [initialWidth]="30" class="element"></div>
             <div fdCarouselItem value="7" [initialWidth]="30" class="element"></div>
         </div>
-    `,
-    styles: [
-        `
-            .element {
-                width: 30px;
-                min-width: 30px;
-                height: 30px;
-                align-items: center;
-                display: flex;
-            }
-
-            .container-wrap {
-                overflow: hidden;
-                width: 210px;
-                min-width: 210px;
-            }
-
-            .container-ex {
-                display: flex;
-                width: 210px;
-                min-width: 210px;
-            }
-        `
-    ]
+    `
 })
 class HorizontalCarouselComponent {
     @ViewChild(CarouselDirective)
@@ -75,14 +52,8 @@ class HorizontalCarouselComponent {
 }
 
 describe('CarouselDirective', () => {
-    let horizontalComponent: HorizontalCarouselComponent;
-    let verticalComponent: VerticalCarouselComponent;
-    let horizontalDirective: CarouselDirective;
-    let verticalDirective: CarouselDirective;
-    let verticalFixture: ComponentFixture<VerticalCarouselComponent>;
-    let horizontalFixture: ComponentFixture<HorizontalCarouselComponent>;
-
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
+        TestBed.resetTestingModule();
         TestBed.configureTestingModule({
             imports: [CommonModule],
             declarations: [
@@ -93,189 +64,212 @@ describe('CarouselDirective', () => {
             ],
             providers: [CarouselService]
         }).compileComponents();
-    }));
-
-    beforeEach(() => {
-        horizontalFixture = TestBed.createComponent(HorizontalCarouselComponent);
-        verticalFixture = TestBed.createComponent(VerticalCarouselComponent);
-        horizontalFixture.detectChanges();
-        verticalFixture.detectChanges();
-        horizontalComponent = horizontalFixture.componentInstance;
-        verticalComponent = verticalFixture.componentInstance;
-        horizontalDirective = horizontalComponent.directive;
-        verticalDirective = verticalComponent.directive;
-        horizontalFixture.detectChanges();
-        verticalFixture.detectChanges();
     });
+    describe('Horizontal carousel', () => {
+        let horizontalComponent: HorizontalCarouselComponent;
+        let horizontalDirective: CarouselDirective;
+        let horizontalFixture: ComponentFixture<HorizontalCarouselComponent>;
+        beforeEach(async () => {
+            horizontalFixture = TestBed.createComponent(HorizontalCarouselComponent);
+            horizontalFixture.detectChanges();
+            await horizontalFixture.whenRenderingDone();
+            horizontalComponent = horizontalFixture.componentInstance;
+            horizontalDirective = horizontalComponent.directive;
+            horizontalFixture.detectChanges();
+            horizontalDirective.items.forEach((item) => {
+                jest.spyOn(item.element, 'getBoundingClientRect').mockReturnValue({ width: 30, height: 30 } as DOMRect);
+            });
+        });
 
-    it('should create', () => {
-        expect(verticalComponent).toBeTruthy();
-        expect(horizontalComponent).toBeTruthy();
-    });
+        it('should create', () => {
+            expect(horizontalComponent).toBeTruthy();
+        });
 
-    it('should put translate on vertical', () => {
-        const distance: number = verticalComponent.items.first.getHeight() * 4;
+        it('should handle pan start and move', () => {
+            jest.spyOn<any, any>(horizontalDirective.dragStateChange, 'emit');
 
-        verticalDirective.goToItem(verticalDirective.items.toArray()[4], false);
-        verticalFixture.detectChanges();
+            (<any>horizontalDirective)._carouselService._handlePanStart();
 
-        expect(verticalDirective.carouselService.currentTransitionPx).toBe(-distance);
-    });
+            expect(horizontalDirective.dragStateChange.emit).toHaveBeenCalledWith(true);
 
-    it('should put translate on vertical and be on middle at end', () => {
-        const distance: number = verticalComponent.items.first.getHeight() * 4;
+            const firstDelta = -10;
+            (<any>horizontalDirective)._carouselService._handlePan(firstDelta);
 
-        verticalDirective.goToItem(verticalDirective.items.toArray()[4], false);
-        verticalFixture.detectChanges();
+            horizontalFixture.detectChanges();
 
-        expect(verticalDirective.carouselService.currentTransitionPx).toBe(-distance);
-    });
+            expect(horizontalDirective.carouselService.currentTransitionPx).toBe(firstDelta);
 
-    it('should put translate on last and first', () => {
-        const height: number = verticalComponent.items.first.getHeight();
+            const secondDelta = -20;
+            (<any>horizontalDirective)._carouselService._handlePan(secondDelta);
 
-        verticalDirective.goToItem(verticalComponent.items.toArray()[6], false);
-        verticalFixture.detectChanges();
+            horizontalFixture.detectChanges();
 
-        expect(verticalDirective.carouselService.currentTransitionPx).toBe(-height * 6);
+            expect(horizontalDirective.carouselService.currentTransitionPx).toBe(secondDelta);
 
-        verticalDirective.goToItem(verticalComponent.items.toArray()[0], false);
-        verticalFixture.detectChanges();
+            const thirdDelta = -120;
+            (<any>horizontalDirective)._carouselService._handlePan(thirdDelta);
 
-        expect(verticalDirective.carouselService.currentTransitionPx).toBe(0);
-    });
+            horizontalFixture.detectChanges();
 
-    it('should handle pan start and move', () => {
-        jest.spyOn<any, any>(verticalDirective.dragStateChange, 'emit');
+            expect(horizontalDirective.carouselService.currentTransitionPx).toBe(thirdDelta);
+            expect((<any>horizontalDirective)._carouselService._getClosest().value).toBe(
+                horizontalDirective.items.toArray()[3].value
+            );
+        });
 
-        (<any>verticalDirective)._carouselService._handlePanStart();
+        it('should return closest with half', () => {
+            horizontalDirective.carouselService.currentTransitionPx = -160;
 
-        expect(verticalDirective.dragStateChange.emit).toHaveBeenCalledWith(true);
+            expect((<any>horizontalDirective)._carouselService._getClosest().value).toBe(
+                horizontalDirective.items.toArray()[5].value
+            );
+            horizontalDirective.carouselService.currentTransitionPx = -170;
 
-        const firstDelta = -10;
-        (<any>verticalDirective)._carouselService._handlePan(firstDelta);
+            expect((<any>horizontalDirective)._carouselService._getClosest().value).toBe(
+                horizontalDirective.items.toArray()[6].value
+            );
+        });
 
-        verticalFixture.detectChanges();
+        it('should handle get put last/first element when pan after/before list ', () => {
+            (<any>horizontalDirective)._carouselService._handlePanStart();
 
-        expect(verticalDirective.carouselService.currentTransitionPx).toBe(firstDelta);
+            (<any>horizontalDirective)._carouselService._handlePanEnd(-6000);
+            horizontalFixture.detectChanges();
 
-        const secondDelta = -20;
-        (<any>verticalDirective)._carouselService._handlePan(secondDelta);
+            expect(horizontalDirective.carouselService.currentTransitionPx).toBe(
+                -horizontalDirective.items.first.getWidth() * 6
+            );
 
-        verticalFixture.detectChanges();
+            (<any>horizontalDirective)._carouselService._handlePanEnd(1000);
+            horizontalFixture.detectChanges();
 
-        expect(verticalDirective.carouselService.currentTransitionPx).toBe(secondDelta);
-
-        const thirdDelta = -120;
-        (<any>verticalDirective)._carouselService._handlePan(thirdDelta);
-
-        verticalFixture.detectChanges();
-
-        expect(verticalDirective.carouselService.currentTransitionPx).toBe(thirdDelta);
-        expect((<any>verticalDirective)._carouselService._getClosest().value).toBe(
-            verticalDirective.items.toArray()[3].value
-        );
-    });
-
-    it('should handle pan end', () => {
-        jest.spyOn(verticalDirective.activeChange, 'emit');
-
-        (<any>verticalDirective)._carouselService._handlePanEnd(-170);
-        verticalFixture.detectChanges();
-
-        expect(verticalDirective.activeChange.emit).toHaveBeenCalledWith({
-            item: verticalDirective.items.toArray()[6],
-            after: true
+            expect(horizontalDirective.carouselService.currentTransitionPx === 0).toBe(true);
         });
     });
+    describe('Vertical carousel', () => {
+        let verticalComponent: VerticalCarouselComponent;
+        let verticalDirective: CarouselDirective;
+        let verticalFixture: ComponentFixture<VerticalCarouselComponent>;
 
-    it('should return closest with half', () => {
-        verticalDirective.carouselService.currentTransitionPx = -160;
+        beforeEach(async () => {
+            verticalFixture = TestBed.createComponent(VerticalCarouselComponent);
+            verticalFixture.detectChanges();
+            verticalComponent = verticalFixture.componentInstance;
+            verticalDirective = verticalComponent.directive;
+            verticalFixture.detectChanges();
+            await verticalFixture.whenRenderingDone();
+            verticalComponent.directive.items.forEach((item) => {
+                jest.spyOn(item.element, 'getBoundingClientRect').mockReturnValue({ width: 30, height: 30 } as DOMRect);
+            });
+        });
 
-        expect((<any>verticalDirective)._carouselService._getClosest().value).toBe(
-            verticalDirective.items.toArray()[5].value
-        );
-        verticalDirective.carouselService.currentTransitionPx = -170;
+        it('should create', () => {
+            expect(verticalComponent).toBeTruthy();
+        });
 
-        expect((<any>verticalDirective)._carouselService._getClosest().value).toBe(
-            verticalDirective.items.toArray()[6].value
-        );
-    });
+        it('should put translate on vertical', () => {
+            const distance: number = verticalComponent.items.first.getHeight() * 4;
 
-    it('should handle get put last/first element when pan after/before list ', () => {
-        (<any>verticalDirective)._carouselService._handlePanStart();
+            verticalDirective.goToItem(verticalDirective.items.toArray()[4], false);
+            verticalFixture.detectChanges();
 
-        (<any>verticalDirective)._carouselService._handlePanEnd(-6000);
-        verticalFixture.detectChanges();
+            expect(verticalDirective.carouselService.currentTransitionPx).toBe(-distance);
+        });
 
-        expect(verticalDirective.carouselService.currentTransitionPx).toBe(
-            -verticalDirective.items.first.getHeight() * 6
-        );
+        it('should put translate on vertical and be on middle at end', () => {
+            const distance: number = verticalComponent.items.first.getHeight() * 4;
 
-        (<any>verticalDirective)._carouselService._handlePanEnd(1000);
-        verticalFixture.detectChanges();
+            verticalDirective.goToItem(verticalDirective.items.toArray()[4], false);
+            verticalFixture.detectChanges();
 
-        expect(verticalDirective.carouselService.currentTransitionPx).toBe(0);
-    });
+            expect(verticalDirective.carouselService.currentTransitionPx).toBe(-distance);
+        });
 
-    it('horizontal should handle pan start and move', () => {
-        jest.spyOn<any, any>(horizontalDirective.dragStateChange, 'emit');
+        it('should put translate on last and first', () => {
+            const height: number = verticalComponent.items.first.getHeight();
 
-        (<any>horizontalDirective)._carouselService._handlePanStart();
+            verticalDirective.goToItem(verticalComponent.items.toArray()[6], false);
+            verticalFixture.detectChanges();
 
-        expect(horizontalDirective.dragStateChange.emit).toHaveBeenCalledWith(true);
+            expect(verticalDirective.carouselService.currentTransitionPx).toBe(-height * 6);
 
-        const firstDelta = -10;
-        (<any>horizontalDirective)._carouselService._handlePan(firstDelta);
+            verticalDirective.goToItem(verticalComponent.items.toArray()[0], false);
+            verticalFixture.detectChanges();
 
-        horizontalFixture.detectChanges();
+            expect(verticalDirective.carouselService.currentTransitionPx === 0).toBe(true);
+        });
 
-        expect(horizontalDirective.carouselService.currentTransitionPx).toBe(firstDelta);
+        it('should handle pan start and move', () => {
+            jest.spyOn<any, any>(verticalDirective.dragStateChange, 'emit');
 
-        const secondDelta = -20;
-        (<any>horizontalDirective)._carouselService._handlePan(secondDelta);
+            (<any>verticalDirective)._carouselService._handlePanStart();
 
-        horizontalFixture.detectChanges();
+            expect(verticalDirective.dragStateChange.emit).toHaveBeenCalledWith(true);
 
-        expect(horizontalDirective.carouselService.currentTransitionPx).toBe(secondDelta);
+            const firstDelta = -10;
+            (<any>verticalDirective)._carouselService._handlePan(firstDelta);
 
-        const thirdDelta = -120;
-        (<any>horizontalDirective)._carouselService._handlePan(thirdDelta);
+            verticalFixture.detectChanges();
 
-        horizontalFixture.detectChanges();
+            expect(verticalDirective.carouselService.currentTransitionPx).toBe(firstDelta);
 
-        expect(horizontalDirective.carouselService.currentTransitionPx).toBe(thirdDelta);
-        expect((<any>horizontalDirective)._carouselService._getClosest().value).toBe(
-            horizontalDirective.items.toArray()[3].value
-        );
-    });
+            const secondDelta = -20;
+            (<any>verticalDirective)._carouselService._handlePan(secondDelta);
 
-    it('horizontal should return closest with half', () => {
-        horizontalDirective.carouselService.currentTransitionPx = -160;
+            verticalFixture.detectChanges();
 
-        expect((<any>horizontalDirective)._carouselService._getClosest().value).toBe(
-            horizontalDirective.items.toArray()[5].value
-        );
-        horizontalDirective.carouselService.currentTransitionPx = -170;
+            expect(verticalDirective.carouselService.currentTransitionPx).toBe(secondDelta);
 
-        expect((<any>horizontalDirective)._carouselService._getClosest().value).toBe(
-            horizontalDirective.items.toArray()[6].value
-        );
-    });
+            const thirdDelta = -120;
+            (<any>verticalDirective)._carouselService._handlePan(thirdDelta);
 
-    it('horizontal should handle get put last/first element when pan after/before list ', () => {
-        (<any>horizontalDirective)._carouselService._handlePanStart();
+            verticalFixture.detectChanges();
 
-        (<any>horizontalDirective)._carouselService._handlePanEnd(-6000);
-        horizontalFixture.detectChanges();
+            expect(verticalDirective.carouselService.currentTransitionPx).toBe(thirdDelta);
+            expect((<any>verticalDirective)._carouselService._getClosest().value).toBe(
+                verticalDirective.items.toArray()[3].value
+            );
+        });
 
-        expect(horizontalDirective.carouselService.currentTransitionPx).toBe(
-            -horizontalDirective.items.first.getWidth() * 6
-        );
+        it('should handle pan end', () => {
+            jest.spyOn(verticalDirective.activeChange, 'emit');
 
-        (<any>horizontalDirective)._carouselService._handlePanEnd(1000);
-        horizontalFixture.detectChanges();
+            (<any>verticalDirective)._carouselService._handlePanEnd(-170);
+            verticalFixture.detectChanges();
 
-        expect(horizontalDirective.carouselService.currentTransitionPx).toBe(0);
+            expect(verticalDirective.activeChange.emit).toHaveBeenCalledWith({
+                item: verticalDirective.items.toArray()[6],
+                after: true
+            });
+        });
+
+        it('should return closest with half', () => {
+            verticalDirective.carouselService.currentTransitionPx = -160;
+
+            expect((<any>verticalDirective)._carouselService._getClosest().value).toBe(
+                verticalDirective.items.toArray()[5].value
+            );
+            verticalDirective.carouselService.currentTransitionPx = -170;
+
+            expect((<any>verticalDirective)._carouselService._getClosest().value).toBe(
+                verticalDirective.items.toArray()[6].value
+            );
+        });
+
+        it('should handle get put last/first element when pan after/before list ', () => {
+            (<any>verticalDirective)._carouselService._handlePanStart();
+
+            (<any>verticalDirective)._carouselService._handlePanEnd(-6000);
+            verticalFixture.detectChanges();
+
+            expect(verticalDirective.carouselService.currentTransitionPx).toBe(
+                -verticalDirective.items.first.getHeight() * 6
+            );
+
+            (<any>verticalDirective)._carouselService._handlePanEnd(1000);
+            verticalFixture.detectChanges();
+
+            expect(verticalDirective.carouselService.currentTransitionPx === 0).toBe(true);
+        });
     });
 });
