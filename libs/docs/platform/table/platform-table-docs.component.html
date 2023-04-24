@@ -127,10 +127,10 @@
 
     <h3>Drag & Drop</h3>
 
+    <p>Tree table supports mouse Drag & Drop by default, so rows can be moved & placed inside other rows.</p>
     <p>
-        Tree table supports Drag & Drop by default, so rows can be moved & placed inside other rows. Please consider
-        that Drag & Drop isn't possible yet with <code>[sortable]</code>, <code>[groupable]</code>,
-        <code>[filterable]</code> columns and <code>[freezeColumnsTo]</code> enabled.
+        Drag & Drop events are simply client-side events and any desired backend changes must be handled by catching the
+        <code>(rowsRearrange)</code> event.
     </p>
 
     <br />

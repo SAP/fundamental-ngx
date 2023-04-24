@@ -156,7 +156,7 @@
                 [noBorderY]="noBorderY"
                 [tabIndex]="pageScrolling ? 0 : -1"
                 [items]="_tableRows"
-                [draggable]="enableRowReordering && _rowsDraggable"
+                [draggable]="_rowsDraggable"
                 [dropMode]="dropMode"
                 [style.transform]="_virtualScrollTransform"
                 (itemDropped)="_dragDropItemDrop($event)"
@@ -171,7 +171,7 @@
                         [attr.aria-rowindex]="rowIdx"
                         [style.height.px]="rowHeight"
                         (click)="_emitRowActivate(row)"
-                        [class.fd-table__row--draggable]="enableRowReordering && _rowsDraggable"
+                        [class.fd-table__row--draggable]="_rowsDraggable"
                     >
                         <td
                             fd-table-cell

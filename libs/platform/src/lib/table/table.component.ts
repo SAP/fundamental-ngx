@@ -796,14 +796,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     get _rowsDraggable(): boolean {
-        return (
-            this.isTreeTable &&
-            !this._sortRulesMap.size &&
-            !this._groupRulesMap.size &&
-            !this._filterRulesMap.size &&
-            !this._freezableColumns.size &&
-            !this._freezableEndColumns.size
-        );
+        return this.isTreeTable && this.enableRowReordering;
     }
 
     /** @hidden */
