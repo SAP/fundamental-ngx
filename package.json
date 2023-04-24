@@ -53,7 +53,7 @@
     "@nrwl/angular": "15.5.3",
     "@sap-theming/theming-base-content": "11.3.2",
     "@stackblitz/sdk": "1.8.2",
-    "@swc/helpers": "~0.4.11",
+    "@swc/helpers": "~0.5.0",
     "@types/google.visualization": "0.0.68",
     "@types/node": "16.11.7",
     "compare-versions": "5.0.1",
