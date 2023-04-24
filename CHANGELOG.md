@@ -1,3 +1,12 @@
+## [0.40.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.15...v0.40.2-rc.16) (2023-04-22)
+
+
+### Bug Fixes
+
+* **docs:** api absence in prod builds ([#9729](https://github.com/SAP/fundamental-ngx/issues/9729)) ([24e5e82](https://github.com/SAP/fundamental-ngx/commit/24e5e82967971f95c9a2716d3c02463494a70fdc))
+
+
+
 ## [0.40.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.14...v0.40.2-rc.15) (2023-04-21)
 
 
