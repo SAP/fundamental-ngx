@@ -1,3 +1,12 @@
+## [0.40.2-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.19...v0.40.2-rc.20) (2023-04-24)
+
+
+### Bug Fixes
+
+* **platform:** open up drag and drop to sorting/filtering/etc ([#9712](https://github.com/SAP/fundamental-ngx/issues/9712)) ([3154f74](https://github.com/SAP/fundamental-ngx/commit/3154f747007a803ef1333e735c1805a1027afe45))
+
+
+
 ## [0.40.2-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.18...v0.40.2-rc.19) (2023-04-24)
 
 
