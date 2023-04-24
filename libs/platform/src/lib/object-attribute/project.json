@@ -1,41 +1,55 @@
 {
-    "name": "platform-object-attribute",
-    "projectType": "library",
-    "sourceRoot": "libs/platform/src/lib/object-attribute",
-    "prefix": "fdp",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/object-attribute"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/object-attribute/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/object-attribute/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/object-attribute/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/platform/src/lib/object-attribute/test.ts",
-                "tsConfig": "libs/platform/src/lib/object-attribute/tsconfig.spec.json",
-                "karmaConfig": "libs/platform/src/lib/object-attribute/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": [
-                    "libs/platform/src/lib/object-attribute/**/*.ts",
-                    "libs/platform/src/lib/object-attribute/**/*.html"
-                ]
-            }
+  "name": "platform-object-attribute",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/platform/src/lib/object-attribute",
+  "prefix": "fdp",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/platform/object-attribute"
+      ],
+      "options": {
+        "tsConfig": "libs/platform/src/lib/object-attribute/tsconfig.lib.json",
+        "project": "libs/platform/src/lib/object-attribute/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/platform/src/lib/object-attribute/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": []
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/platform/src/lib/object-attribute/**/*.ts",
+          "libs/platform/src/lib/object-attribute/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/platform/src/lib/object-attribute/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fdp"
+  ],
+  "implicitDependencies": []
 }

@@ -1,37 +1,54 @@
 {
-    "name": "cdk-forms",
-    "projectType": "library",
-    "sourceRoot": "libs/cdk/src/lib/forms",
-    "prefix": "fdk",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/cdk/forms"],
-            "options": {
-                "tsConfig": "libs/cdk/src/lib/forms/tsconfig.lib.json",
-                "project": "libs/cdk/src/lib/forms/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/cdk/src/lib/forms/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/cdk/src/lib/forms/test.ts",
-                "tsConfig": "libs/cdk/src/lib/forms/tsconfig.spec.json",
-                "karmaConfig": "libs/cdk/src/lib/forms/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["libs/cdk/src/lib/forms/**/*.ts", "libs/cdk/src/lib/forms/**/*.html"]
-            }
+  "name": "cdk-forms",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/cdk/src/lib/forms",
+  "prefix": "fdk",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/cdk/forms"
+      ],
+      "options": {
+        "tsConfig": "libs/cdk/src/lib/forms/tsconfig.lib.json",
+        "project": "libs/cdk/src/lib/forms/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/cdk/src/lib/forms/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cdk/src/lib/forms/**/*.ts",
+          "libs/cdk/src/lib/forms/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/cdk/src/lib/forms/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
 }

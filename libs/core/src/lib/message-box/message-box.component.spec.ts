@@ -82,7 +82,7 @@ describe('MessageBoxComponent', () => {
     it('should close after esc pressed', () => {
         setup();
 
-        const dismissSpy = spyOn(messageBoxRef, 'dismiss');
+        const dismissSpy = jest.spyOn(messageBoxRef, 'dismiss');
 
         messageBoxComponent['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
         fixture.detectChanges();
@@ -95,7 +95,7 @@ describe('MessageBoxComponent', () => {
 
         setup([{ token: MessageBoxConfig, provider: { useValue: customDialogConfig } }]);
 
-        const dismissSpy = spyOn(messageBoxRef, 'dismiss');
+        const dismissSpy = jest.spyOn(messageBoxRef, 'dismiss');
         fixture.detectChanges();
 
         fixture.nativeElement.querySelector('.fd-message-box').dispatchEvent(new MouseEvent('mousedown'));
@@ -141,26 +141,22 @@ describe('MessageBoxComponent', () => {
         };
         setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-message-box')).toHaveClass('customBackdropClass');
-        expect(fixture.nativeElement.querySelector('.fd-message-box__content')).toHaveClass('customPanelClass');
+        expect(fixture.nativeElement.querySelector('.fd-message-box').classList.contains('customBackdropClass')).toBe(true);
+        expect(fixture.nativeElement.querySelector('.fd-message-box__content').classList.contains('customPanelClass')).toBe(true);
     });
 
     it('should display in mobile mode', () => {
         const customMessageBoxConfig = { ...new MessageBoxConfig(), mobile: true };
         setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-message-box__content')).toHaveClass(
-            'fd-message-box__content--mobile'
-        );
+        expect(fixture.nativeElement.querySelector('.fd-message-box__content').classList.contins('fd-message-box__content--mobile')).toBe(true);
     });
 
     it('should display in mobile mode with no stretch', () => {
         const customMessageBoxConfig = { ...new MessageBoxConfig(), mobileOuterSpacing: true };
         setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-message-box__content')).toHaveClass(
-            'fd-message-box__content--no-mobile-stretch'
-        );
+        expect(fixture.nativeElement.querySelector('.fd-message-box__content').classList.contains('fd-message-box__content--no-mobile-stretch')).toBe(true);
     });
 
     it('should use custom attributes', () => {
@@ -184,7 +180,7 @@ describe('MessageBoxComponent', () => {
     it('should close the message box on router navigation start', () => {
         setup();
         const event = new NavigationStart(42, '/');
-        spyOn(messageBoxRef, 'dismiss');
+        jest.spyOn(messageBoxRef, 'dismiss');
         routerEventsSubject.next(event);
 
         expect(messageBoxRef.dismiss).toHaveBeenCalled();

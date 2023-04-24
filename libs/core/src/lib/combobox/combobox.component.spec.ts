@@ -32,7 +32,7 @@ describe('ComboboxComponent', () => {
     });
 
     it('should call searchFn onInputKeydownHandler', () => {
-        spyOn(component, 'searchFn');
+        jest.spyOn(component, 'searchFn');
         component.open = true;
         const event = {
             key: 'Enter',
@@ -41,13 +41,13 @@ describe('ComboboxComponent', () => {
         component.onInputKeydownHandler(<any>event);
         expect(component.searchFn).toHaveBeenCalled();
         event.key = 'ArrowDown';
-        spyOn(event, 'preventDefault');
+        jest.spyOn(event, 'preventDefault');
         component.onInputKeydownHandler(<any>event);
         expect(event.preventDefault).toHaveBeenCalled();
     });
 
     it('should set inputText', () => {
-        spyOn(component, 'onChange');
+        jest.spyOn(component, 'onChange');
         component.inputText = 'someValue';
         expect(component.onChange).toHaveBeenCalledWith('someValue');
     });
@@ -75,7 +75,7 @@ describe('ComboboxComponent', () => {
     });
 
     it('should handle input entry on dropdown mode', () => {
-        spyOn(component, 'onChange');
+        jest.spyOn(component, 'onChange');
         component.communicateByObject = true;
         component.displayFn = (item: any): string => item.displayedValue;
         component.onMenuClickHandler(component.dropdownValues[1]);
@@ -83,7 +83,7 @@ describe('ComboboxComponent', () => {
     });
 
     it('should handle wrong input entry on dropdown mode', () => {
-        spyOn(component, 'onChange');
+        jest.spyOn(component, 'onChange');
         component.communicateByObject = true;
         component.displayFn = (item: any): string => {
             if (item) {
@@ -106,7 +106,7 @@ describe('ComboboxComponent', () => {
     it('should handleSearchTermChange', () => {
         component.dropdownValues = ['value 1', 'value 2'];
         component.inputText = 'input text';
-        spyOn(component, 'filterFn');
+        jest.spyOn(component, 'filterFn');
 
         component.handleSearchTermChange();
 
@@ -114,8 +114,8 @@ describe('ComboboxComponent', () => {
     });
 
     it('should handle primaryButtonClick', () => {
-        spyOn(component, 'searchFn');
-        spyOn(component, 'isOpenChangeHandle');
+        jest.spyOn(component, 'searchFn');
+        jest.spyOn(component, 'isOpenChangeHandle');
         component.open = false;
         component.onPrimaryButtonClick();
         expect(component.searchFn).toHaveBeenCalled();
@@ -124,7 +124,7 @@ describe('ComboboxComponent', () => {
 
     it('should choose previous element', () => {
         component.open = false;
-        spyOn(component, 'onMenuClickHandler');
+        jest.spyOn(component, 'onMenuClickHandler');
         component.displayFn = (item: any): string => item.displayedValue;
         component.inputTextValue = component.dropdownValues[1].displayedValue;
         component.onInputKeydownHandler(<any>{ stopPropagation: () => {}, preventDefault: () => {}, key: 'ArrowUp' });
@@ -134,7 +134,7 @@ describe('ComboboxComponent', () => {
 
     it('should choose next element, when there is nothing chosen', () => {
         component.open = false;
-        spyOn(component, 'onMenuClickHandler');
+        jest.spyOn(component, 'onMenuClickHandler');
         component.displayFn = (item: any): string => item.displayedValue;
         component.inputTextValue = '';
         component.onInputKeydownHandler(<any>{ stopPropagation: () => {}, preventDefault: () => {}, key: 'ArrowDown' });
@@ -173,7 +173,7 @@ describe('ComboboxComponent', () => {
     it('should bring back values, if canceled on mobile mode and dont emit changes', async () => {
         component.mobile = true;
 
-        spyOn(component, 'onChange');
+        jest.spyOn(component, 'onChange');
 
         await fixture.whenStable();
 
@@ -189,7 +189,7 @@ describe('ComboboxComponent', () => {
     it('should emit changes values on approve', async () => {
         component.mobile = true;
 
-        spyOn(component, 'onChange');
+        jest.spyOn(component, 'onChange');
 
         await fixture.whenStable();
 
@@ -239,16 +239,16 @@ describe('ComboboxComponent', () => {
             (<any>component)._cdRef.detectChanges();
 
             const inputGroup = fixture.nativeElement.querySelector('.fd-input-group');
-            expect(inputGroup.classList.contains('fd-shellbar__input-group')).toBeTrue();
+            expect(inputGroup.classList.contains('fd-shellbar__input-group')).toBe(true);
 
             const input = fixture.nativeElement.querySelector('.fd-input');
-            expect(input.classList.contains('fd-shellbar__input-group-input')).toBeTrue();
+            expect(input.classList.contains('fd-shellbar__input-group-input')).toBe(true);
 
             const addOns = fixture.nativeElement.querySelectorAll('.fd-input-group__addon');
             addOns.forEach((element) => {
-                expect(element.classList.contains('fd-shellbar__input-group-addon')).toBeTrue();
+                expect(element.classList.contains('fd-shellbar__input-group-addon')).toBe(true);
                 const button = element.querySelector('.fd-button');
-                expect(button.classList.contains('fd-shellbar__button')).toBeTrue();
+                expect(button.classList.contains('fd-shellbar__button')).toBe(true);
             });
         });
     });

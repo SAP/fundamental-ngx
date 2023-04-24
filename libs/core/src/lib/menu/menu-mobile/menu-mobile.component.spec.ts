@@ -78,7 +78,7 @@ describe('MenuMobileComponent', () => {
 
         await whenStable(fixture);
 
-        const openDialogSpy = spyOn<any>(menuMobile, '_openDialog').and.callThrough();
+        const openDialogSpy = jest.spyOn<any, any>(menuMobile, '_openDialog');
 
         menu.open();
 
@@ -115,7 +115,7 @@ describe('MenuMobileComponent', () => {
 
         await whenStable(fixture);
 
-        expect(menuMobile.isSubmenu).toBeTrue();
+        expect(menuMobile.isSubmenu).toBe(true);
     });
 
     it('should use correct menu title', async () => {
@@ -149,12 +149,12 @@ describe('MenuMobileComponent', () => {
 
         await whenStable(fixture);
 
-        expect(menuMobile.isSubmenu).toBeTrue();
+        expect(menuMobile.isSubmenu).toBe(true);
         fixture.nativeElement.querySelector('#menu-mobile-navigate-back').click();
 
         await whenStable(fixture);
 
-        expect(menuMobile.isSubmenu).toBeFalse();
+        expect(menuMobile.isSubmenu).toBe(false);
     });
 
     it('should properly render with empty MobileConfig', async () => {

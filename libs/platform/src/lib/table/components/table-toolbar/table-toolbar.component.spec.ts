@@ -77,7 +77,7 @@ describe('TableToolbarComponent', () => {
 
     describe('delegates handling to table grid', () => {
         it('Should call table.search by "submitSearch"', () => {
-            const tableHandlerSpy = spyOn(table, 'search').and.stub();
+            const tableHandlerSpy = jest.spyOn(table, 'search').mockImplementation();
 
             expect(tableHandlerSpy).not.toHaveBeenCalled();
 
@@ -90,7 +90,7 @@ describe('TableToolbarComponent', () => {
         });
 
         it('Should trigger table.openTableSortSettings by "openSorting"', () => {
-            const tableHandlerSpy = spyOn(table.openTableSortSettings, 'emit').and.stub();
+            const tableHandlerSpy = jest.spyOn(table.openTableSortSettings, 'emit').mockImplementation();
 
             expect(tableHandlerSpy).not.toHaveBeenCalled();
 
@@ -100,7 +100,7 @@ describe('TableToolbarComponent', () => {
         });
 
         it('Should trigger table.openFilteringDialog by "openFiltering"', () => {
-            const tableHandlerSpy = spyOn(table.openTableFilterSettings, 'emit').and.stub();
+            const tableHandlerSpy = jest.spyOn(table.openTableFilterSettings, 'emit').mockImplementation();
 
             expect(tableHandlerSpy).not.toHaveBeenCalled();
 
@@ -110,7 +110,7 @@ describe('TableToolbarComponent', () => {
         });
 
         it('Should trigger table.openGroupingDialog by "openGrouping"', () => {
-            const tableHandlerSpy = spyOn(table.openTableGroupSettings, 'emit').and.stub();
+            const tableHandlerSpy = jest.spyOn(table.openTableGroupSettings, 'emit').mockImplementation();
 
             expect(tableHandlerSpy).not.toHaveBeenCalled();
 
@@ -120,7 +120,7 @@ describe('TableToolbarComponent', () => {
         });
 
         it('Should trigger table.openTableColumnSettings by "openColumns"', () => {
-            const tableHandlerSpy = spyOn(table.openTableColumnSettings, 'emit').and.stub();
+            const tableHandlerSpy = jest.spyOn(table.openTableColumnSettings, 'emit').mockImplementation();
 
             expect(tableHandlerSpy).not.toHaveBeenCalled();
 
@@ -130,7 +130,7 @@ describe('TableToolbarComponent', () => {
         });
 
         it('Should call table.expandAll by "_expandAll" action ', () => {
-            const tableHandlerSpy = spyOn(table, 'expandAll').and.stub();
+            const tableHandlerSpy = jest.spyOn(table, 'expandAll').mockImplementation();
 
             component._expandAll();
 
@@ -138,7 +138,7 @@ describe('TableToolbarComponent', () => {
         });
 
         it('Should call table.collapseAll by "_collapseAll" action ', () => {
-            const tableHandlerSpy = spyOn(table, 'collapseAll').and.stub();
+            const tableHandlerSpy = jest.spyOn(table, 'collapseAll').mockImplementation();
 
             component._collapseAll();
 

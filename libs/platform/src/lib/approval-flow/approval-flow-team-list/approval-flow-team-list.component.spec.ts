@@ -32,7 +32,7 @@ describe('ApprovalFlowTeamListComponent', () => {
             members: []
         };
 
-        const teamSpy = spyOn(component.onTeamClick, 'emit').and.callThrough();
+        const teamSpy = jest.spyOn(component.onTeamClick, 'emit');
 
         component._showTeamDetails(approvalTeam);
 

@@ -1,29 +1,34 @@
 {
-    "extends": "../../tsconfig.base.json",
-    "references": [
-        {
-            "path": "./tsconfig.lib.json"
-        },
-        {
-            "path": "./tsconfig.lib.prod.json"
-        },
-        {
-            "path": "./tsconfig.spec.json"
-        }
-    ],
-    "compilerOptions": {
-        "outDir": "../../dist/out-tsc",
-        "target": "es2022",
-        "declaration": true,
-        "declarationMap": true,
-        "types": [],
-        "lib": ["dom", "es2018"]
+  "extends": "../../tsconfig.base.json",
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
     },
-    "angularCompilerOptions": {
-        "enableIvy": true,
-        "skipTemplateCodegen": true,
-        "strictMetadataEmit": true,
-        "enableResourceInlining": true
+    {
+      "path": "./tsconfig.lib.prod.json"
     },
-    "include": ["**/*.ts"]
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ],
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "target": "es2022",
+    "declaration": true,
+    "declarationMap": true,
+    "types": [],
+    "lib": [
+      "dom",
+      "es2018"
+    ]
+  },
+  "angularCompilerOptions": {
+    "enableIvy": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "enableResourceInlining": true
+  },
+  "include": [
+    "**/*.ts"
+  ]
 }

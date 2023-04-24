@@ -34,6 +34,6 @@ describe('AvatarGroupFocusableAvatarDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement).toHaveClass('fd-avatar-group__focusable-avatar');
+        expect(component.ref.nativeElement.classList.contains('fd-avatar-group__focusable-avatar')).toBe(true);
     });
 });

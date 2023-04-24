@@ -147,12 +147,12 @@ describe('TestDatePickerComponent', () => {
 
     it('Should handle single date change and update input', async () => {
         await wait(fixture);
-        spyOn(host.datepicker.toArray()[0], 'onChange');
+        jest.spyOn(host.datepicker.toArray()[0], 'onChange');
 
         const datepicker = host.datepicker.toArray()[0];
         expect(datepicker.fdDatePickerComponent._inputFieldDate).toEqual('1/2/1990');
 
-        spyOn(datepicker.selectedDateChange, 'emit');
+        jest.spyOn(datepicker.selectedDateChange, 'emit');
         const date = FdDate.getToday();
         const dateStr = (<any>datepicker.fdDatePickerComponent)._formatDate(date);
         datepicker.fdDatePickerComponent._inputFieldDate = '';
@@ -165,11 +165,11 @@ describe('TestDatePickerComponent', () => {
     it('Should handle range date change and update input', async () => {
         await wait(fixture);
 
-        spyOn(host.datepicker.toArray()[1], 'onChange');
+        jest.spyOn(host.datepicker.toArray()[1], 'onChange');
 
         const datepicker = host.datepicker.toArray()[1];
 
-        spyOn(datepicker.selectedRangeDateChange, 'emit');
+        jest.spyOn(datepicker.selectedRangeDateChange, 'emit');
         const dateStart = FdDate.getToday();
         const dateLast = FdDate.getToday();
         dateLast.month = 12;
@@ -260,7 +260,7 @@ describe('TestDatePickerComponent', () => {
     it('Should register invalid string date and not call event for single mode', () => {
         const fdpDatePickerComponent = host.datepicker.toArray()[0];
         const fdDatePickerComponent = fdpDatePickerComponent.fdDatePickerComponent;
-        spyOn(fdDatePickerComponent.selectedDateChange, 'emit');
+        jest.spyOn(fdDatePickerComponent.selectedDateChange, 'emit');
         fdDatePickerComponent.type = 'single';
         fdDatePickerComponent.dateStringUpdate('hello');
         const date = adapter.parse('hello');
@@ -273,7 +273,7 @@ describe('TestDatePickerComponent', () => {
         const fdpDatePickerComponent = host.datepicker.toArray()[1];
         const fdDatePickerComponent = fdpDatePickerComponent.fdDatePickerComponent;
 
-        spyOn(fdDatePickerComponent.selectedRangeDateChange, 'emit');
+        jest.spyOn(fdDatePickerComponent.selectedRangeDateChange, 'emit');
         fdDatePickerComponent.type = 'range';
         fdDatePickerComponent.dateStringUpdate('start - end');
         const start = adapter.parse('start');
@@ -287,7 +287,7 @@ describe('TestDatePickerComponent', () => {
         await wait(fixture);
 
         const datepicker = host.datepicker.toArray()[0];
-        spyOn(datepicker.selectedDateChange, 'emit');
+        jest.spyOn(datepicker.selectedDateChange, 'emit');
 
         datepicker.writeValue(new FdDate(2018, 10, 10));
 
@@ -308,8 +308,8 @@ describe('TestDatePickerComponent', () => {
         await wait(fixture);
 
         const datepicker = host.datepicker.toArray()[0];
-        spyOn(datepicker.selectedDateChange, 'emit');
-        spyOn(datepicker, 'onChange');
+        jest.spyOn(datepicker.selectedDateChange, 'emit');
+        jest.spyOn(datepicker, 'onChange');
 
         const date = new FdDate(2000, 10, 10);
         const strDate = (<any>datepicker.fdDatePickerComponent)._formatDate(date);
@@ -329,8 +329,8 @@ describe('TestDatePickerComponent', () => {
         await wait(fixture);
 
         const datepicker = host.datepicker.toArray()[1];
-        spyOn(datepicker.selectedRangeDateChange, 'emit');
-        spyOn(datepicker, 'onChange');
+        jest.spyOn(datepicker.selectedRangeDateChange, 'emit');
+        jest.spyOn(datepicker, 'onChange');
         const date1 = new FdDate(2000, 10, 10);
         const date2 = new FdDate(2011, 10, 10);
 
@@ -350,8 +350,8 @@ describe('TestDatePickerComponent', () => {
         await wait(fixture);
 
         const datepicker = host.datepicker.toArray()[1];
-        spyOn(datepicker.selectedRangeDateChange, 'emit');
-        spyOn(datepicker, 'onChange');
+        jest.spyOn(datepicker.selectedRangeDateChange, 'emit');
+        jest.spyOn(datepicker, 'onChange');
         const date1 = new FdDate(2011, 10, 10);
         const date2 = new FdDate(2000, 10, 10);
         const strDate1 = (<any>datepicker.fdDatePickerComponent)._formatDate(date1);

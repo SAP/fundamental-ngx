@@ -135,8 +135,8 @@ describe('WizardGeneratorService', () => {
     });
 
     it('should transform items', async () => {
-        const prepareSpy = spyOn(service, 'prepareWizardItems').and.callThrough();
-        const visibilitySpy = spyOn(service, 'refreshStepVisibility').and.callThrough();
+        const prepareSpy = jest.spyOn(service, 'prepareWizardItems');
+        const visibilitySpy = jest.spyOn(service, 'refreshStepVisibility');
 
         await service.prepareWizardItems(TEST_ITEMS);
 
@@ -149,7 +149,7 @@ describe('WizardGeneratorService', () => {
     it('should place summary step last', async () => {
         await service.prepareWizardItems(TEST_ITEMS);
 
-        expect(service.items[service.items.length - 1].summary).toBeTrue();
+        expect(service.items[service.items.length - 1].summary).toBe(true);
     });
 
     it('should change current step', async () => {

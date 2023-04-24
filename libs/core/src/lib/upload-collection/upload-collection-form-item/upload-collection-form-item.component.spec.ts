@@ -23,7 +23,7 @@ describe('UploadCollectionFormItemComponent', () => {
     });
 
     it('should handle writeValue function', () => {
-        spyOn(component.fileNameChanged, 'emit');
+        jest.spyOn(component.fileNameChanged, 'emit');
         component.writeValue('testing');
         expect(component.fileName).toEqual('testing');
         expect(component.fileNameChanged.emit).toHaveBeenCalledWith('testing');

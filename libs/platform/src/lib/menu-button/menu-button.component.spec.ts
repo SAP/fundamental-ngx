@@ -41,7 +41,7 @@ describe('MenuButtonComponent', () => {
     });
 
     it('button onclick should be called', () => {
-        spyOn(component, 'onButtonClick');
+        jest.spyOn(component, 'onButtonClick');
         component.onButtonClick({});
         expect(component.onButtonClick).toHaveBeenCalled();
     });
@@ -92,15 +92,15 @@ describe('Menu Button Disabled test and Type, size test', () => {
 
     it('button should be disabled', () => {
         const menubuttonElement = fixture.debugElement.query(By.css('fdp-menu-button'));
-        expect(menubuttonElement.nativeElement.classList.contains('fd-menu-button--disabled')).toBeTrue();
+        expect(menubuttonElement.nativeElement.classList.contains('fd-menu-button--disabled')).toBe(true);
     });
 
     it('button should be standard and contain Menu', () => {
         const menubuttonElement = fixture.debugElement.query(By.css('button'));
-        expect(menubuttonElement.nativeElement.classList.contains('fd-button--standard')).toBeTrue();
-        expect(menubuttonElement.nativeElement.classList.contains('fd-button--menu')).toBeTrue();
-        expect(menubuttonElement.nativeElement.classList.contains('fd-button')).toBeTrue();
-        expect(menubuttonElement.nativeElement.classList.contains('is-compact')).toBeTrue();
+        expect(menubuttonElement.nativeElement.classList.contains('fd-button--standard')).toBe(true);
+        expect(menubuttonElement.nativeElement.classList.contains('fd-button--menu')).toBe(true);
+        expect(menubuttonElement.nativeElement.classList.contains('fd-button')).toBe(true);
+        expect(menubuttonElement.nativeElement.classList.contains('is-compact')).toBe(true);
     });
 });
 
@@ -184,7 +184,7 @@ describe('Menu Button click on Item select', () => {
     });
 
     it('clicked function should be called', () => {
-        spyOn(host, 'clicked');
+        jest.spyOn(host, 'clicked');
         host.clicked();
         expect(host.clicked).toHaveBeenCalled();
     });

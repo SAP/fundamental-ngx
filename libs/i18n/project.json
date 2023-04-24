@@ -1,70 +1,91 @@
 {
-    "name": "i18n",
-    "projectType": "library",
-    "sourceRoot": "libs/i18n/src",
-    "prefix": "fundamental-ngx",
-    "targets": {
-        "prepare": {
-            "executor": "@fundamental-ngx/nx-plugin:prepare-library",
-            "options": {
-                "distPath": "dist/libs/i18n"
-            }
-        },
-        "compile-typedoc": {
-            "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
-            "options": {
-                "outputPath": "libs/docs/typedoc/i18n"
-            },
-            "outputs": ["{options.outputPath}"]
-        },
-        "build": {
-            "executor": "@nrwl/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/i18n"],
-            "options": {
-                "project": "libs/i18n/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/i18n/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/i18n/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
-        },
-        "build-umbrella": {
-            "executor": "@nrwl/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/i18n"],
-            "options": {
-                "project": "libs/i18n/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/i18n/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/i18n/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/i18n/src/test.ts",
-                "tsConfig": "libs/i18n/tsconfig.spec.json",
-                "karmaConfig": "libs/i18n/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["libs/i18n/src/**/*.ts", "libs/i18n/src/**/*.html"]
-            }
-        }
+  "name": "i18n",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/i18n/src",
+  "prefix": "fundamental-ngx",
+  "targets": {
+    "prepare": {
+      "executor": "@fundamental-ngx/nx-plugin:prepare-library",
+      "options": {
+        "distPath": "dist/libs/i18n"
+      }
     },
-    "tags": ["type:lib", "scope:i18n"]
+    "compile-typedoc": {
+      "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
+      "options": {
+        "outputPath": "libs/docs/typedoc/i18n"
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    },
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/i18n"
+      ],
+      "options": {
+        "project": "libs/i18n/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/i18n/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/i18n/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "build-umbrella": {
+      "executor": "@nrwl/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/i18n"
+      ],
+      "options": {
+        "project": "libs/i18n/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/i18n/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/i18n/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/i18n/src/**/*.ts",
+          "libs/i18n/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/i18n/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:i18n"
+  ]
 }

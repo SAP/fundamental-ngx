@@ -1,40 +1,41 @@
 {
-    "name": "fn-notification",
-    "projectType": "library",
-    "sourceRoot": "libs/fn/src/lib/notification",
-    "prefix": "fn",
-    "targets": {
-        "build-noop": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/fn/notification"],
-            "options": {
-                "project": "libs/fn/src/lib/notification/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/fn/src/lib/notification/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/fn/src/lib/notification/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+  "name": "fn-notification",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/fn/src/lib/notification",
+  "prefix": "fn",
+  "targets": {
+    "build-noop": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/fn/notification"
+      ],
+      "options": {
+        "project": "libs/fn/src/lib/notification/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/fn/src/lib/notification/tsconfig.lib.prod.json"
         },
-        "test-noop": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/fn/src/lib/notification/test.ts",
-                "tsConfig": "libs/fn/src/lib/notification/tsconfig.spec.json",
-                "karmaConfig": "libs/fn/src/lib/notification/karma.conf.js"
-            }
-        },
-        "lint-noop": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["libs/fn/src/lib/notification/**/*.ts", "libs/fn/src/lib/notification/**/*.html"]
-            }
+        "development": {
+          "tsConfig": "libs/fn/src/lib/notification/tsconfig.lib.json"
         }
+      },
+      "defaultConfiguration": "production"
     },
-    "tags": ["scope:fn", "type:lib"],
-    "implicitDependencies": []
+    "lint-noop": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/fn/src/lib/notification/**/*.ts",
+          "libs/fn/src/lib/notification/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "scope:fn",
+    "type:lib"
+  ],
+  "implicitDependencies": []
 }

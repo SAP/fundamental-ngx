@@ -38,8 +38,6 @@ describe('BusyIndicatorExtendedDirective', () => {
     });
 
     it('should assign classes', () => {
-        spyOn<any>(messageComponent, '_loadFromComponent').and.callThrough();
-
         messageComponent.childContent = TestBed.createComponent(TestComponent).componentInstance.templateRef;
         messageComponent.open();
         messageComponent.ngOnInit();

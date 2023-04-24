@@ -64,7 +64,7 @@ describe('InputGroup component', () => {
         const addons = hostElement.querySelectorAll('fdp-input-group-addon-body');
         const input = hostElement.querySelector('fdp-input');
 
-        expect(addons.length === 3).toBeTrue();
+        expect(addons.length === 3).toBe(true);
 
         expect(addons[0].textContent?.includes('$')).toBeTruthy();
         expect(addons[1].textContent?.includes('0.00')).toBeTruthy();
@@ -76,7 +76,7 @@ describe('InputGroup component', () => {
 
     it('Should add class to child input', () => {
         const inputElements = fixture.debugElement.queryAll(By.css('input:not([type="button"])'));
-        expect(inputElements[0].nativeElement.className.includes('fd-input-group__input')).toBeTrue();
+        expect(inputElements[0].nativeElement.className.includes('fd-input-group__input')).toBe(true);
     });
 
     it('Should add class when disabled', () => {
@@ -182,7 +182,7 @@ describe('Input group within platform form', () => {
         const formControl = host.form.get('qty') as FormControl;
         const inputGroupElement = fixture.debugElement.query(By.css('.fd-input-group'));
 
-        expect(inputGroupElement.nativeElement.className.includes('is-error')).not.toBeTrue();
+        expect(inputGroupElement.nativeElement.className.includes('is-error')).not.toBe(true);
 
         formControl.markAsTouched();
         await wait(fixture);
@@ -190,26 +190,26 @@ describe('Input group within platform form', () => {
         await wait(fixture);
 
         expect(formControl.value).toBe(null);
-        expect(inputGroupElement.nativeElement.className.includes('is-error')).toBeTrue();
+        expect(inputGroupElement.nativeElement.className.includes('is-error')).toBe(true);
     });
 
     it('should mark form field as touched when gets blurred', async () => {
         const formControl = host.form.get('qty') as FormControl;
         const inputEl = fixture.debugElement.query(By.css('fdp-input input[id="qty"]'));
 
-        expect(formControl.touched).not.toBeTrue();
+        expect(formControl.touched).not.toBe(true);
 
         const focusEvent = new Event('focus');
         inputEl.nativeElement?.dispatchEvent(focusEvent);
         await wait(fixture);
 
-        expect(formControl.touched).toBeFalse();
+        expect(formControl.touched).toBe(false);
 
         const blurEvent = new Event('blur');
         inputEl.nativeElement?.dispatchEvent(blurEvent);
         await wait(fixture);
 
-        expect(formControl.touched).toBeTrue();
+        expect(formControl.touched).toBe(true);
     });
 });
 

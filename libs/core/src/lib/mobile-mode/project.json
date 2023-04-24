@@ -1,37 +1,54 @@
 {
-    "name": "core-mobile-mode",
-    "projectType": "library",
-    "sourceRoot": "libs/core/src/lib/mobile-mode",
-    "prefix": "fd",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/mobile-mode"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/mobile-mode/tsconfig.lib.json",
-                "project": "libs/core/src/lib/mobile-mode/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/mobile-mode/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/mobile-mode/test.ts",
-                "tsConfig": "libs/core/src/lib/mobile-mode/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/mobile-mode/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["libs/core/src/lib/mobile-mode/**/*.ts", "libs/core/src/lib/mobile-mode/**/*.html"]
-            }
+  "name": "core-mobile-mode",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/core/src/lib/mobile-mode",
+  "prefix": "fd",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/mobile-mode"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/mobile-mode/tsconfig.lib.json",
+        "project": "libs/core/src/lib/mobile-mode/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/mobile-mode/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/mobile-mode/**/*.ts",
+          "libs/core/src/lib/mobile-mode/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/core/src/lib/mobile-mode/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
 }

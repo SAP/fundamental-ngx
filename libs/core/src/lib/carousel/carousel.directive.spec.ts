@@ -146,7 +146,7 @@ describe('CarouselDirective', () => {
     });
 
     it('should handle pan start and move', () => {
-        spyOn<any>(verticalDirective.dragStateChange, 'emit').and.callThrough();
+        jest.spyOn<any, any>(verticalDirective.dragStateChange, 'emit');
 
         (<any>verticalDirective)._carouselService._handlePanStart();
 
@@ -178,7 +178,7 @@ describe('CarouselDirective', () => {
     });
 
     it('should handle pan end', () => {
-        spyOn(verticalDirective.activeChange, 'emit');
+        jest.spyOn(verticalDirective.activeChange, 'emit');
 
         (<any>verticalDirective)._carouselService._handlePanEnd(-170);
         verticalFixture.detectChanges();
@@ -219,7 +219,7 @@ describe('CarouselDirective', () => {
     });
 
     it('horizontal should handle pan start and move', () => {
-        spyOn<any>(horizontalDirective.dragStateChange, 'emit').and.callThrough();
+        jest.spyOn<any, any>(horizontalDirective.dragStateChange, 'emit');
 
         (<any>horizontalDirective)._carouselService._handlePanStart();
 

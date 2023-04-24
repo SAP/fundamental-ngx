@@ -52,19 +52,19 @@ describe('SplitterComponent', () => {
     });
 
     it('should toggle pane on the canvas', () => {
-        const hideSpy = spyOn(hostComponent.paneOne, 'hideFromCanvas').and.callThrough();
-        const showSpy = spyOn(hostComponent.paneOne, 'showOnCanvas').and.callThrough();
+        const hideSpy = jest.spyOn(hostComponent.paneOne, 'hideFromCanvas');
+        const showSpy = jest.spyOn(hostComponent.paneOne, 'showOnCanvas');
 
         splitterComponent.hidePaneFromCanvas(hostComponent.paneOneId);
         fixture.detectChanges();
 
         expect(hideSpy).toHaveBeenCalled();
-        expect(splitterComponent.isPaneOnCanvas(hostComponent.paneOneId)).toBeFalse();
+        expect(splitterComponent.isPaneOnCanvas(hostComponent.paneOneId)).toBe(false);
 
         splitterComponent.showPaneOnCanvas(hostComponent.paneOneId);
         fixture.detectChanges();
 
         expect(showSpy).toHaveBeenCalled();
-        expect(splitterComponent.isPaneOnCanvas(hostComponent.paneOneId)).toBeTrue();
+        expect(splitterComponent.isPaneOnCanvas(hostComponent.paneOneId)).toBe(true);
     });
 });

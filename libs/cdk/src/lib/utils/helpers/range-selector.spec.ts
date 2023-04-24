@@ -3,12 +3,16 @@ import { RangeSelector } from './range-selector';
 describe('RangeSelector', () => {
     let rangeSelector: RangeSelector;
 
-    function getEvent(shiftKey = false): PointerEvent {
-        return new PointerEvent('click', { shiftKey });
+    function getEvent(shiftKey = false): MouseEvent {
+        return new MouseEvent('click', { shiftKey });
     }
 
     beforeEach(() => {
         rangeSelector = new RangeSelector();
+    });
+
+    afterEach(() => {
+        jest.restoreAllMocks();
     });
 
     it('should be initialised as empty', () => {
@@ -43,18 +47,19 @@ describe('RangeSelector', () => {
     });
 
     it('should apply value to selected index, when "applyValueToEachInRange" is called without multi-selection', () => {
-        const spy = jasmine.createSpy('valueSpy');
+        const spy = jest.fn();
 
         rangeSelector.applyValueToEachInRange(spy);
         expect(spy).toHaveBeenCalledTimes(0);
 
         rangeSelector.onRangeElementToggled(1, getEvent());
         rangeSelector.applyValueToEachInRange(spy);
-        expect(spy).toHaveBeenCalledOnceWith(1);
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy).toBeCalledWith(1);
     });
 
     it('should apply value to each index at range, when "applyValueToEachInRange" is called', () => {
-        const spy = jasmine.createSpy('valueSpy');
+        const spy = jest.fn();
 
         rangeSelector.applyValueToEachInRange(spy);
         expect(spy).toHaveBeenCalledTimes(0);

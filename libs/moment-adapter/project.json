@@ -1,77 +1,99 @@
 {
-    "name": "moment-adapter",
-    "sourceRoot": "libs/moment-adapter/src",
-    "projectType": "library",
-    "prefix": "fd",
-    "targets": {
-        "prepare": {
-            "executor": "@fundamental-ngx/nx-plugin:prepare-library",
-            "options": {
-                "schematics": {
-                    "collection": "schematics",
-                    "tsConfig": "tsconfig.schematics.json"
-                },
-                "distPath": "dist/libs/moment-adapter"
-            }
+  "name": "moment-adapter",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/moment-adapter/src",
+  "projectType": "library",
+  "prefix": "fd",
+  "targets": {
+    "prepare": {
+      "executor": "@fundamental-ngx/nx-plugin:prepare-library",
+      "options": {
+        "schematics": {
+          "collection": "schematics",
+          "tsConfig": "tsconfig.schematics.json"
         },
-        "compile-typedoc": {
-            "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
-            "options": {
-                "outputPath": "libs/docs/typedoc/moment-adapter"
-            },
-            "outputs": ["{options.outputPath}"]
-        },
-        "build": {
-            "executor": "@nrwl/angular:package",
-            "options": {
-                "tsConfig": "libs/moment-adapter/tsconfig.lib.json",
-                "project": "libs/moment-adapter/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/moment-adapter/tsconfig.lib.prod.json"
-                }
-            },
-            "outputs": ["{workspaceRoot}/dist/libs/moment-adapter"],
-            "defaultConfiguration": "production"
-        },
-        "build-umbrella": {
-            "executor": "@nrwl/angular:package",
-            "options": {
-                "tsConfig": "libs/moment-adapter/tsconfig.lib.json",
-                "project": "libs/moment-adapter/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/moment-adapter/tsconfig.lib.prod.json"
-                }
-            },
-            "outputs": ["{workspaceRoot}/dist/libs/moment-adapter"],
-            "defaultConfiguration": "production"
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["libs/moment-adapter/**/*.ts", "libs/moment-adapter/**/*.html"]
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/moment-adapter/src/test.ts",
-                "tsConfig": "libs/moment-adapter/tsconfig.spec.json",
-                "karmaConfig": "libs/moment-adapter/karma.conf.js"
-            },
-            "outputs": ["{workspaceRoot}/coverage/libs/moment-adapter"]
-        }
+        "distPath": "dist/libs/moment-adapter"
+      }
     },
-    "generators": {
-        "@nrwl/schematics:component": {
-            "styleext": "scss"
-        }
+    "compile-typedoc": {
+      "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
+      "options": {
+        "outputPath": "libs/docs/typedoc/moment-adapter"
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
-    "tags": ["type:lib", "scope:datetime-adapter"],
-    "implicitDependencies": ["core"]
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "options": {
+        "tsConfig": "libs/moment-adapter/tsconfig.lib.json",
+        "project": "libs/moment-adapter/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/moment-adapter/tsconfig.lib.prod.json"
+        }
+      },
+      "outputs": [
+        "{workspaceRoot}/dist/libs/moment-adapter"
+      ],
+      "defaultConfiguration": "production"
+    },
+    "build-umbrella": {
+      "executor": "@nrwl/angular:package",
+      "options": {
+        "tsConfig": "libs/moment-adapter/tsconfig.lib.json",
+        "project": "libs/moment-adapter/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/moment-adapter/tsconfig.lib.prod.json"
+        }
+      },
+      "outputs": [
+        "{workspaceRoot}/dist/libs/moment-adapter"
+      ],
+      "defaultConfiguration": "production"
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/moment-adapter/**/*.ts",
+          "libs/moment-adapter/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/moment-adapter/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "generators": {
+    "@nrwl/schematics:component": {
+      "styleext": "scss"
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:datetime-adapter"
+  ],
+  "implicitDependencies": [
+    "core"
+  ]
 }

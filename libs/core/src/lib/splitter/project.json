@@ -1,37 +1,54 @@
 {
-    "name": "core-splitter",
-    "projectType": "library",
-    "sourceRoot": "libs/core/src/lib/splitter",
-    "prefix": "fd",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/splitter"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/splitter/tsconfig.lib.json",
-                "project": "libs/core/src/lib/splitter/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/splitter/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/splitter/test.ts",
-                "tsConfig": "libs/core/src/lib/splitter/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/splitter/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["libs/core/src/lib/splitter/**/*.ts", "libs/core/src/lib/splitter/**/*.html"]
-            }
+  "name": "core-splitter",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/core/src/lib/splitter",
+  "prefix": "fd",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/splitter"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/splitter/tsconfig.lib.json",
+        "project": "libs/core/src/lib/splitter/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/splitter/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/splitter/**/*.ts",
+          "libs/core/src/lib/splitter/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/core/src/lib/splitter/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
 }

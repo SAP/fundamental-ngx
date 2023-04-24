@@ -134,7 +134,7 @@ describe('SmartFilterBarSubjectDirective', () => {
     });
 
     it('should return subject fields', () => {
-        const spy = spyOn<any>(component.directive, '_transformSubjectField').and.callThrough();
+        const spy = jest.spyOn<any, any>(component.directive, '_transformSubjectField');
 
         const subjectFieldNames = component.directive.getSubjectFields().map((f) => f.name);
 

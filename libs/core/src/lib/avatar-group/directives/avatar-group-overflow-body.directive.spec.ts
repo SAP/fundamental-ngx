@@ -33,6 +33,6 @@ describe('AvatarGroupItemDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement).toHaveClass('fd-avatar-group__overflow-body');
+        expect(component.ref.nativeElement.classList.contains('fd-avatar-group__overflow-body')).toBe(true);
     });
 });

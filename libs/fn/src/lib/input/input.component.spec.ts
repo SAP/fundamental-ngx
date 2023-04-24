@@ -46,8 +46,8 @@ describe('InputComponent', () => {
     });
 
     it('should call onTouched and onChange', () => {
-        spyOn(component, 'onTouched');
-        spyOn(component, 'onChange');
+        jest.spyOn(component, 'onTouched');
+        jest.spyOn(component, 'onChange');
         component.inputText = 'test';
         expect(component.onTouched).toHaveBeenCalled();
         expect(component.onChange).toHaveBeenCalled();

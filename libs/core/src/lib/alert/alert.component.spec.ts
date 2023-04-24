@@ -57,7 +57,7 @@ describe('AlertComponent', () => {
     });
 
     it('should load child component', () => {
-        spyOn<any>(component, 'loadFromComponent').and.callThrough();
+        jest.spyOn<any, any>(component, 'loadFromComponent');
         component.childContent = TemplateTestComponent;
         component.ngOnInit();
         component.ngAfterViewInit();
@@ -66,7 +66,7 @@ describe('AlertComponent', () => {
     });
 
     it('should load child template', () => {
-        spyOn<any>(component, 'loadFromTemplate').and.callThrough();
+        jest.spyOn<any, any>(component, 'loadFromTemplate');
         component.childContent = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
         component.ngOnInit();
         component.ngAfterViewInit();
@@ -76,7 +76,7 @@ describe('AlertComponent', () => {
 
     it('should load child string', () => {
         const tester = 'teststring';
-        spyOn<any>(component, 'loadFromString').and.callThrough();
+        jest.spyOn<any, any>(component, 'loadFromString');
         component.childContent = tester;
         component.ngOnInit();
         component.ngAfterViewInit();

@@ -104,26 +104,27 @@ describe('SelectionService', () => {
     it('should update value when clicked', () => {
         const value1Element = fixture.elementRef.nativeElement.querySelector('#value1');
         component.multiple = false;
-        const onChangeSpy = spyOn(component, 'onChange');
+        const onChangeSpy = jest.spyOn(component, 'onChange');
         value1Element.click();
-        expect(onChangeSpy).toHaveBeenCalledOnceWith('1');
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+        expect(onChangeSpy).toHaveBeenCalledWith('1');
     });
 
     it('should update selected state of child when setValue is called', () => {
         selectionService.setValue(['1', '3']);
         const items = component.items.toArray();
-        expect(items[0].selected).toBeTrue();
-        expect(items[1].selected).toBeFalse();
-        expect(items[2].selected).toBeTrue();
+        expect(items[0].selected).toBe(true);
+        expect(items[1].selected).toBe(false);
+        expect(items[2].selected).toBe(true);
     });
 
     it('should respect multiple property of host component', () => {
         component.multiple = false;
         selectionService.setValue(['1', '3']);
         const items = component.items.toArray();
-        expect(items[0].selected).toBeTrue();
-        expect(items[1].selected).toBeFalse();
-        expect(items[2].selected).toBeFalse();
+        expect(items[0].selected).toBe(true);
+        expect(items[1].selected).toBe(false);
+        expect(items[2].selected).toBe(false);
     });
 
     it('should respect toggle property of host component', () => {
@@ -132,7 +133,7 @@ describe('SelectionService', () => {
         selectionService.setValue('1');
         const items = component.items.toArray();
         items[0].elementRef().nativeElement.click();
-        expect(items.every(({ selected }) => !selected)).toBeTrue();
+        expect(items.every(({ selected }) => !selected)).toBe(true);
     });
 
     it('should listen to the SPACE click', () => {
@@ -143,7 +144,7 @@ describe('SelectionService', () => {
         });
         items[0].elementRef().nativeElement.dispatchEvent(event);
 
-        expect(items[0].selected).toBeTrue();
+        expect(items[0].selected).toBe(true);
     });
 
     it('should listen to the ENTER click', () => {
@@ -154,6 +155,6 @@ describe('SelectionService', () => {
         });
         items[0].elementRef().nativeElement.dispatchEvent(event);
 
-        expect(items[0].selected).toBeTrue();
+        expect(items[0].selected).toBe(true);
     });
 });

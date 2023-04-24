@@ -25,6 +25,6 @@ describe('MessagePageTitleComponent', () => {
     it('should apply proper css classes', async () => {
         await whenStable(fixture);
 
-        expect(fixture.nativeElement).toHaveClass('fd-message-page__title');
+        expect(fixture.nativeElement.classList.contains('fd-message-page__title')).toBe(true);
     });
 });

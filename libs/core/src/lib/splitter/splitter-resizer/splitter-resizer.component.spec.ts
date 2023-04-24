@@ -31,9 +31,9 @@ describe('SplitterResizerComponent', () => {
         const initialValue = 100;
         const changedValue = 150;
 
-        const startResizeSpy = spyOn(component.startResize, 'emit').and.callThrough();
-        const endResizeSpy = spyOn(component.endResize, 'emit').and.callThrough();
-        const resizeSpy = spyOn(component.resize, 'emit').and.callThrough();
+        const startResizeSpy = jest.spyOn(component.startResize, 'emit');
+        const endResizeSpy = jest.spyOn(component.endResize, 'emit');
+        const resizeSpy = jest.spyOn(component.resize, 'emit');
         const document = TestBed.inject(DOCUMENT);
 
         component._onMouseDown(new MouseEvent('mousedown', { clientX: initialValue }));
@@ -56,9 +56,9 @@ describe('SplitterResizerComponent', () => {
     }));
 
     it('should resize with keyboard', () => {
-        const startResizeSpy = spyOn(component.startResize, 'emit').and.callThrough();
-        const endResizeSpy = spyOn(component.endResize, 'emit').and.callThrough();
-        const resizeSpy = spyOn(component.resize, 'emit').and.callThrough();
+        const startResizeSpy = jest.spyOn(component.startResize, 'emit');
+        const endResizeSpy = jest.spyOn(component.endResize, 'emit');
+        const resizeSpy = jest.spyOn(component.resize, 'emit');
 
         component._onKeydown(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
         fixture.detectChanges();

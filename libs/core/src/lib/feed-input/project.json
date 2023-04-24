@@ -1,37 +1,54 @@
 {
-    "name": "core-feed-input",
-    "projectType": "library",
-    "sourceRoot": "libs/core/src/lib/feed-input",
-    "prefix": "fd",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/feed-input"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/feed-input/tsconfig.lib.json",
-                "project": "libs/core/src/lib/feed-input/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/feed-input/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/feed-input/test.ts",
-                "tsConfig": "libs/core/src/lib/feed-input/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/feed-input/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["libs/core/src/lib/feed-input/**/*.ts", "libs/core/src/lib/feed-input/**/*.html"]
-            }
+  "name": "core-feed-input",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/core/src/lib/feed-input",
+  "prefix": "fd",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/feed-input"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/feed-input/tsconfig.lib.json",
+        "project": "libs/core/src/lib/feed-input/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/feed-input/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/feed-input/**/*.ts",
+          "libs/core/src/lib/feed-input/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/core/src/lib/feed-input/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
 }

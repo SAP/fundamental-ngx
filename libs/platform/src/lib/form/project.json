@@ -1,38 +1,55 @@
 {
-    "name": "platform-form",
-    "projectType": "library",
-    "sourceRoot": "libs/platform/src/lib/form",
-    "prefix": "fdp",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/form"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/form/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/form/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/form/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/platform/src/lib/form/test.ts",
-                "tsConfig": "libs/platform/src/lib/form/tsconfig.spec.json",
-                "karmaConfig": "libs/platform/src/lib/form/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["libs/platform/src/lib/form/**/*.ts", "libs/platform/src/lib/form/**/*.html"]
-            }
+  "name": "platform-form",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/platform/src/lib/form",
+  "prefix": "fdp",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/platform/form"
+      ],
+      "options": {
+        "tsConfig": "libs/platform/src/lib/form/tsconfig.lib.json",
+        "project": "libs/platform/src/lib/form/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/platform/src/lib/form/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": []
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/platform/src/lib/form/**/*.ts",
+          "libs/platform/src/lib/form/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/platform/src/lib/form/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fdp"
+  ],
+  "implicitDependencies": []
 }

@@ -1,42 +1,56 @@
 {
-    "name": "core-content-density",
-    "projectType": "library",
-    "sourceRoot": "libs/core/src/lib/content-density",
-    "prefix": "fd",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/content-density"],
-            "options": {
-                "project": "libs/core/src/lib/content-density/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/content-density/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/core/src/lib/content-density/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+  "name": "core-content-density",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/core/src/lib/content-density",
+  "prefix": "fd",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/content-density"
+      ],
+      "options": {
+        "project": "libs/core/src/lib/content-density/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/content-density/tsconfig.lib.prod.json"
         },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/content-density/test.ts",
-                "tsConfig": "libs/core/src/lib/content-density/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/content-density/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": [
-                    "libs/core/src/lib/content-density/**/*.ts",
-                    "libs/core/src/lib/content-density/**/*.html"
-                ]
-            }
+        "development": {
+          "tsConfig": "libs/core/src/lib/content-density/tsconfig.lib.json"
         }
+      },
+      "defaultConfiguration": "production"
     },
-    "tags": ["scope:fd", "type:lib"]
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/content-density/**/*.ts",
+          "libs/core/src/lib/content-density/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/core/src/lib/content-density/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "scope:fd",
+    "type:lib"
+  ]
 }

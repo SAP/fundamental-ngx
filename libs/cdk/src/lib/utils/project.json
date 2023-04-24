@@ -1,37 +1,54 @@
 {
-    "name": "cdk-utils",
-    "projectType": "library",
-    "sourceRoot": "libs/cdk/src/lib/utils",
-    "prefix": "fdk",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/cdk/utils"],
-            "options": {
-                "tsConfig": "libs/cdk/src/lib/utils/tsconfig.lib.json",
-                "project": "libs/cdk/src/lib/utils/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/cdk/src/lib/utils/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/cdk/src/lib/utils/test.ts",
-                "tsConfig": "libs/cdk/src/lib/utils/tsconfig.spec.json",
-                "karmaConfig": "libs/cdk/src/lib/utils/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["libs/cdk/src/lib/utils/**/*.ts", "libs/cdk/src/lib/utils/**/*.html"]
-            }
+  "name": "cdk-utils",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/cdk/src/lib/utils",
+  "prefix": "fdk",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/cdk/utils"
+      ],
+      "options": {
+        "tsConfig": "libs/cdk/src/lib/utils/tsconfig.lib.json",
+        "project": "libs/cdk/src/lib/utils/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/cdk/src/lib/utils/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cdk/src/lib/utils/**/*.ts",
+          "libs/cdk/src/lib/utils/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/cdk/src/lib/utils/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
 }

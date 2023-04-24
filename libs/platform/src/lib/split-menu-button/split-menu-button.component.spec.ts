@@ -146,8 +146,8 @@ describe('SplitMenuButtonComponent', () => {
         fixture.detectChanges();
 
         const splitButtons = fixture.debugElement.queryAll(By.css('.fd-button'));
-        expect(splitButtons[0].nativeElement.classList.contains('is-disabled')).toBeTrue();
-        expect(splitButtons[1].nativeElement.classList.contains('is-disabled')).toBeTrue();
+        expect(splitButtons[0].nativeElement.classList.contains('is-disabled')).toBe(true);
+        expect(splitButtons[1].nativeElement.classList.contains('is-disabled')).toBe(true);
 
         // click on primary button
         mouseClickOnElement(splitButtons[0].nativeElement);

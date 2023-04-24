@@ -32,7 +32,7 @@ describe('TimeColumnComponent', () => {
     });
 
     it('should call pick time method with on active change', () => {
-        spyOn(<any>component, '_pickTime');
+        jest.spyOn(<any>component, '_pickTime');
 
         (<any>component)._initialised = true;
 
@@ -45,7 +45,7 @@ describe('TimeColumnComponent', () => {
     it('should call pick time method with scrollUp', () => {
         component.activeValue = rows[2];
 
-        spyOn(<any>component, '_pickTime');
+        jest.spyOn(<any>component, '_pickTime');
 
         component.scrollUp();
         expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[1], true, true, false);
@@ -54,7 +54,7 @@ describe('TimeColumnComponent', () => {
     it('should call pick time method with scrollUp, when beginning is approached', () => {
         component.activeValue = rows[0];
 
-        spyOn(<any>component, '_pickTime');
+        jest.spyOn(<any>component, '_pickTime');
 
         component.scrollUp();
         expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[9], true, true, false);
@@ -63,7 +63,7 @@ describe('TimeColumnComponent', () => {
     it('should call pick time method with scrollDown', () => {
         component.activeValue = rows[2];
 
-        spyOn(<any>component, '_pickTime');
+        jest.spyOn(<any>component, '_pickTime');
 
         component.scrollDown();
         expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[3], true, true, true);
@@ -72,7 +72,7 @@ describe('TimeColumnComponent', () => {
     it('should call pick time method with scrollDown, when end is approached', () => {
         component.activeValue = rows[9];
 
-        spyOn(<any>component, '_pickTime');
+        jest.spyOn(<any>component, '_pickTime');
 
         component.scrollDown();
         expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[0], true, true, true);
@@ -82,7 +82,7 @@ describe('TimeColumnComponent', () => {
         const item = component.items.toArray()[3];
         const offsetItem = component.items.toArray()[3 + component.offset];
 
-        spyOn(component.activeValueChange, 'emit');
+        jest.spyOn(component.activeValueChange, 'emit');
         component.activeChangedHandle({
             item,
             after: false
@@ -103,7 +103,7 @@ describe('TimeColumnComponent', () => {
 
         const item = component.items.toArray()[3];
 
-        spyOn(component.activeValueChange, 'emit');
+        jest.spyOn(component.activeValueChange, 'emit');
         component.activeChangedHandle({
             item,
             after: false

@@ -3,7 +3,6 @@ import { ChangeDetectorRef } from '@angular/core';
 import { MessageBoxDefaultComponent } from './message-box-default.component';
 import { MessageBoxContent } from '../utils/message-box-content.class';
 import { MessageBoxConfig } from '../utils/message-box-config.class';
-import createSpy = jasmine.createSpy;
 
 describe('MessageBoxDefaultComponent', () => {
     let component: MessageBoxDefaultComponent;
@@ -13,15 +12,19 @@ describe('MessageBoxDefaultComponent', () => {
         component = new MessageBoxDefaultComponent(new MessageBoxConfig(), changeDetectorRefMock);
     });
 
+    afterEach(() => {
+        jest.restoreAllMocks();
+    });
+
     it('should create', () => {
         expect(component).toBeTruthy();
     });
 
     it('should call callbacks', () => {
         const messageBoxContent: MessageBoxContent = {
-            closeButtonCallback: createSpy(),
-            cancelButtonCallback: createSpy(),
-            approveButtonCallback: createSpy()
+            closeButtonCallback: jest.fn(),
+            cancelButtonCallback: jest.fn(),
+            approveButtonCallback: jest.fn()
         };
 
         component._messageBoxContent = messageBoxContent;

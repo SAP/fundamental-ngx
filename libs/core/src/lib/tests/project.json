@@ -1,37 +1,54 @@
 {
-    "name": "core-tests",
-    "projectType": "library",
-    "sourceRoot": "libs/core/src/lib/tests",
-    "prefix": "fd",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/tests"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/tests/tsconfig.lib.json",
-                "project": "libs/core/src/lib/tests/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/tests/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/tests/test.ts",
-                "tsConfig": "libs/core/src/lib/tests/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/tests/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["libs/core/src/lib/tests/**/*.ts", "libs/core/src/lib/tests/**/*.html"]
-            }
+  "name": "core-tests",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/core/src/lib/tests",
+  "prefix": "fd",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/tests"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/tests/tsconfig.lib.json",
+        "project": "libs/core/src/lib/tests/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/tests/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/tests/**/*.ts",
+          "libs/core/src/lib/tests/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/core/src/lib/tests/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
 }

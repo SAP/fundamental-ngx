@@ -1,41 +1,55 @@
 {
-    "name": "platform-thumbnail",
-    "projectType": "library",
-    "sourceRoot": "libs/platform/src/lib/thumbnail",
-    "prefix": "fdp",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/thumbnail"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/thumbnail/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/thumbnail/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/thumbnail/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/platform/src/lib/thumbnail/test.ts",
-                "tsConfig": "libs/platform/src/lib/thumbnail/tsconfig.spec.json",
-                "karmaConfig": "libs/platform/src/lib/thumbnail/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": [
-                    "libs/platform/src/lib/thumbnail/**/*.ts",
-                    "libs/platform/src/lib/thumbnail/**/*.html"
-                ]
-            }
+  "name": "platform-thumbnail",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/platform/src/lib/thumbnail",
+  "prefix": "fdp",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/platform/thumbnail"
+      ],
+      "options": {
+        "tsConfig": "libs/platform/src/lib/thumbnail/tsconfig.lib.json",
+        "project": "libs/platform/src/lib/thumbnail/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/platform/src/lib/thumbnail/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": []
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/platform/src/lib/thumbnail/**/*.ts",
+          "libs/platform/src/lib/thumbnail/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/platform/src/lib/thumbnail/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fdp"
+  ],
+  "implicitDependencies": []
 }

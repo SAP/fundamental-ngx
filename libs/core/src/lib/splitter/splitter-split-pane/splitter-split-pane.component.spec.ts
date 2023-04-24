@@ -27,7 +27,7 @@ describe('SplitterSplitPaneComponent', () => {
     });
 
     it('should toggle on canvas', () => {
-        const spy = spyOn(component.toggleOnCanvas, 'emit').and.callThrough();
+        const spy = jest.spyOn(component.toggleOnCanvas, 'emit');
 
         component.hideFromCanvas();
         fixture.detectChanges();

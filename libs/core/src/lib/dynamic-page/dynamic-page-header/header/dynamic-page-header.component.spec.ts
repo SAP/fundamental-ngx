@@ -61,9 +61,9 @@ describe('DynamicPageTitleComponent', () => {
 
     it('should call set size on depended components', fakeAsync(() => {
         fixture.detectChanges();
-        const breadcrumbSpy = spyOn(header._breadcrumbComponent, 'onResize').and.callThrough();
-        const contentToolbarSpy = spyOn(header._contentToolbar, '_setSize').and.callThrough();
-        const globalActionsSpy = spyOn(header._globalActions, '_setSize').and.callThrough();
+        const breadcrumbSpy = jest.spyOn(header._breadcrumbComponent, 'onResize');
+        const contentToolbarSpy = jest.spyOn(header._contentToolbar, '_setSize');
+        const globalActionsSpy = jest.spyOn(header._globalActions, '_setSize');
 
         header.size = 'small';
 
@@ -79,10 +79,10 @@ describe('DynamicPageTitleComponent', () => {
         header.ngOnInit();
         component.dynamicPageService.pixelsSizeChanged.next(ActionSquashBreakpointPx - 10);
         fixture.detectChanges();
-        expect((<any>header)._actionsSquashed).toBeTrue();
+        expect((<any>header)._actionsSquashed).toBe(true);
 
         component.dynamicPageService.pixelsSizeChanged.next(ActionSquashBreakpointPx + 10);
         fixture.detectChanges();
-        expect((<any>header)._actionsSquashed).toBeFalse();
+        expect((<any>header)._actionsSquashed).toBe(false);
     });
 });

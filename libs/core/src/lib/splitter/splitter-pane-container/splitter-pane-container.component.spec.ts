@@ -60,7 +60,7 @@ describe('SplitterPaneContainerComponent', () => {
     });
 
     it('should resize', () => {
-        const spy = spyOn(paneContainerComponent.resize, 'emit').and.callThrough();
+        const spy = jest.spyOn(paneContainerComponent.resize, 'emit');
 
         paneContainerComponent._startResize();
         fixture.detectChanges();

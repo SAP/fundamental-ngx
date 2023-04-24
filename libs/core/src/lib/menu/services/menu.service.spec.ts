@@ -77,7 +77,7 @@ describe('MenuService', () => {
     });
 
     it('should set menu item as focused', () => {
-        const focusSpy = spyOn(menuItems.last, 'focus');
+        const focusSpy = jest.spyOn(menuItems.last, 'focus');
         menuService.setFocused(menuItems.last);
 
         expect(focusSpy).toHaveBeenCalled();
@@ -85,9 +85,9 @@ describe('MenuService', () => {
     });
 
     it('should set menu item active and update active path', () => {
-        const selectedSpy = spyOn(menuItems.last, 'setSelected');
-        const activePathSpy = spyOn<any>(menuService, '_emitActivePath');
-        const addToActivePathSpy = spyOn<any>(menuService, '_addToActivePath').and.callThrough();
+        const selectedSpy = jest.spyOn(menuItems.last, 'setSelected');
+        const activePathSpy = jest.spyOn<any, any>(menuService, '_emitActivePath');
+        const addToActivePathSpy = jest.spyOn<any, any>(menuService, '_addToActivePath');
 
         menuService.setActive(true, menuItems.last);
 
@@ -101,9 +101,9 @@ describe('MenuService', () => {
     it('should remove and close menu item from active path', () => {
         menuService.setActive(true, menuItems.last);
 
-        const closeSpy = spyOn(menuItems.last, 'setSelected');
-        const activePathSpy = spyOn<any>(menuService, '_emitActivePath');
-        const removeFromActivePathSpy = spyOn<any>(menuService, '_removeFromActivePath').and.callThrough();
+        const closeSpy = jest.spyOn(menuItems.last, 'setSelected');
+        const activePathSpy = jest.spyOn<any, any>(menuService, '_emitActivePath');
+        const removeFromActivePathSpy = jest.spyOn<any, any>(menuService, '_removeFromActivePath');
 
         menuService.setActive(false, menuItems.last);
 
@@ -114,7 +114,7 @@ describe('MenuService', () => {
     });
 
     it('should handle removing unknown node from active path', () => {
-        const closeSpy = spyOn(menuItems.last, 'setSelected');
+        const closeSpy = jest.spyOn(menuItems.last, 'setSelected');
 
         menuService.setActive(false, menuItems.last);
 
@@ -122,7 +122,7 @@ describe('MenuService', () => {
     });
 
     it('should not activate disabled element', () => {
-        const addToActivePathSpy = spyOn<any>(menuService, '_addToActivePath');
+        const addToActivePathSpy = jest.spyOn<any, any>(menuService, '_addToActivePath');
         menuItems.last.disabled = true;
 
         menuService.setActive(true, menuItems.last);
@@ -132,8 +132,8 @@ describe('MenuService', () => {
     });
 
     it('should reset menu state', () => {
-        const clearPathSpy = spyOn<any>(menuService, '_clearActivePath').and.callThrough();
-        const activePathSpy = spyOn<any>(menuService, '_emitActivePath');
+        const clearPathSpy = jest.spyOn<any, any>(menuService, '_clearActivePath');
+        const activePathSpy = jest.spyOn<any, any>(menuService, '_emitActivePath');
 
         menuService.setActive(true, menuItems.last);
         menuService.resetMenuState();
@@ -150,8 +150,8 @@ describe('MenuService', () => {
     });
 
     it('should open submenu on arrow right', fakeAsync(() => {
-        const setFocusedSpy = spyOn(menuService, 'setFocused');
-        const activateSpy = spyOn(menuItems.first, 'setSelected');
+        const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
+        const activateSpy = jest.spyOn(menuItems.first, 'setSelected');
         menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
         menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowRight' }));
@@ -164,8 +164,8 @@ describe('MenuService', () => {
     }));
 
     it('should open submenu on arrow right', fakeAsync(() => {
-        const setFocusedSpy = spyOn(menuService, 'setFocused');
-        const activateSpy = spyOn(menuItems.first, 'setSelected');
+        const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
+        const activateSpy = jest.spyOn(menuItems.first, 'setSelected');
         menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
         menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowRight' }));
@@ -178,8 +178,8 @@ describe('MenuService', () => {
     }));
 
     it('should open submenu on arrow left', () => {
-        const setActiveSpy = spyOn(menuService, 'setActive');
-        const setFocusedSpy = spyOn(menuService, 'setFocused');
+        const setActiveSpy = jest.spyOn(menuService, 'setActive');
+        const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
 
         menuService.setActive(true, menuItems.first);
         menuService.focusedNode = menuService.menuMap.get(nestedMenuItem);
@@ -191,7 +191,7 @@ describe('MenuService', () => {
     });
 
     it('should focus next menu item on arrow down', () => {
-        const setFocusedSpy = spyOn(menuService, 'setFocused');
+        const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
 
         menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
@@ -201,7 +201,7 @@ describe('MenuService', () => {
     });
 
     it('should focus next menu item on arrow up', () => {
-        const setFocusedSpy = spyOn(menuService, 'setFocused');
+        const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
 
         menuService.focusedNode = menuService.menuMap.get(menuItems.toArray()[1]);
 
@@ -211,7 +211,7 @@ describe('MenuService', () => {
     });
 
     it('should open submenu on space/enter', () => {
-        const clickSpy = spyOn(menuItems.first, 'click');
+        const clickSpy = jest.spyOn(menuItems.first, 'click');
 
         menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
@@ -222,7 +222,7 @@ describe('MenuService', () => {
     });
 
     it('should close menu on Escape', () => {
-        const closeSpy = spyOn(menu, 'close');
+        const closeSpy = jest.spyOn(menu, 'close');
 
         menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
@@ -235,7 +235,7 @@ describe('MenuService', () => {
         fixture.componentInstance.disabled = true;
         fixture.detectChanges();
         const menuItemsArray = menuItems.toArray();
-        const setFocusedSpy = spyOn(menuService, 'setFocused');
+        const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
 
         menuService.focusedNode = menuService.menuMap.get(menuItemsArray[2]);
         menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowUp' }));
@@ -247,7 +247,7 @@ describe('MenuService', () => {
         fixture.componentInstance.disabled = true;
         fixture.detectChanges();
         const menuItemsArray = menuItems.toArray();
-        const setFocusedSpy = spyOn(menuService, 'setFocused');
+        const setFocusedSpy = jest.spyOn(menuService, 'setFocused');
 
         menuService.focusedNode = menuService.menuMap.get(menuItemsArray[0]);
         menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'ArrowDown' }));

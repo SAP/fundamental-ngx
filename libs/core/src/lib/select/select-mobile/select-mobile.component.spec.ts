@@ -163,7 +163,7 @@ describe('SelectComponent in mobile mode', () => {
 
         await whenStable(fixture);
 
-        spyOn(testComponent.selectComponent.valueChange, 'emit').and.callThrough();
+        jest.spyOn(testComponent.selectComponent.valueChange, 'emit');
         testComponent.selectComponent.open();
 
         await whenStable(fixture);
@@ -181,7 +181,7 @@ describe('SelectComponent in mobile mode', () => {
         await setup({ approveButtonText: 'SUBMIT', hasCloseButton: true });
         await whenStable(fixture);
 
-        spyOn(testComponent.selectComponent.isOpenChange, 'emit').and.callThrough();
+        jest.spyOn(testComponent.selectComponent.isOpenChange, 'emit');
         testComponent.selectComponent.open();
 
         await whenStable(fixture);

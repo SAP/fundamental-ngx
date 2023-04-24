@@ -44,7 +44,7 @@ describe('DndItemDirective', () => {
     });
 
     it('should react to start drag', () => {
-        spyOn(directive.started, 'emit');
+        jest.spyOn(directive.started, 'emit');
         expect((directive as any)._placeholderElement).toBeFalsy();
         directive.onCdkDragStart();
         expect((directive as any)._placeholderElement).not.toBeFalsy();
@@ -52,7 +52,7 @@ describe('DndItemDirective', () => {
     });
 
     it('should react to drag release', () => {
-        spyOn(directive.released, 'emit');
+        jest.spyOn(directive.released, 'emit');
         (directive as any)._placeholderElement = document.createElement('div');
         directive.elementRef.nativeElement.appendChild((directive as any)._placeholderElement);
         directive.onCdkDragReleased();

@@ -31,10 +31,11 @@ describe('FdTranslate pipe', () => {
                     nodeMembersCount: (params: { count: number }) => `${params.count} function members`
                 }
             } as FdLanguage;
-            const spy = spyOn(customLang.platformApprovalFlow, 'nodeMembersCount' as any).and.callThrough();
+            const spy = jest.spyOn<any, any>(customLang.platformApprovalFlow, 'nodeMembersCount');
             pipe = new FdTranslatePipe(of(customLang), changeDetectorRefMock);
             expect(pipe.transform('platformApprovalFlow.nodeMembersCount', { count: 15 })).toBe('15 function members');
-            expect(spy).toHaveBeenCalledOnceWith({ count: 15 });
+            expect(spy).toHaveBeenCalledWith({ count: 15 });
+            expect(spy).toHaveBeenCalledTimes(1);
         });
         it('should fall back to English dictionary if function value throws', () => {
             const customLang = {
@@ -46,7 +47,7 @@ describe('FdTranslate pipe', () => {
                     }
                 }
             } as FdLanguage;
-            const spy = spyOn(customLang.platformApprovalFlow, 'nodeMembersCount' as any).and.callThrough();
+            const spy = jest.spyOn<any, any>(customLang.platformApprovalFlow, 'nodeMembersCount' as any);
             pipe = new FdTranslatePipe(of(customLang), changeDetectorRefMock);
             expect(pipe.transform('platformApprovalFlow.nodeMembersCount', { count: 15 })).toBe('15 members');
             expect(spy).toHaveBeenCalled();

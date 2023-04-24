@@ -26,7 +26,7 @@ describe('ButtonComponent', () => {
     });
 
     it('button onclick should be called', () => {
-        spyOn(component, 'onBtnClick');
+        jest.spyOn(component, 'onBtnClick');
         component.onBtnClick({});
         expect(component.onBtnClick).toHaveBeenCalled();
     });

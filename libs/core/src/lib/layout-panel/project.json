@@ -1,40 +1,54 @@
 {
-    "name": "core-layout-panel",
-    "projectType": "library",
-    "sourceRoot": "libs/core/src/lib/layout-panel",
-    "prefix": "fd",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/layout-panel"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/layout-panel/tsconfig.lib.json",
-                "project": "libs/core/src/lib/layout-panel/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/layout-panel/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/layout-panel/test.ts",
-                "tsConfig": "libs/core/src/lib/layout-panel/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/layout-panel/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": [
-                    "libs/core/src/lib/layout-panel/**/*.ts",
-                    "libs/core/src/lib/layout-panel/**/*.html"
-                ]
-            }
+  "name": "core-layout-panel",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/core/src/lib/layout-panel",
+  "prefix": "fd",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/layout-panel"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/layout-panel/tsconfig.lib.json",
+        "project": "libs/core/src/lib/layout-panel/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/layout-panel/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/layout-panel/**/*.ts",
+          "libs/core/src/lib/layout-panel/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/core/src/lib/layout-panel/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
 }

@@ -1,41 +1,55 @@
 {
-    "name": "platform-approval-flow",
-    "projectType": "library",
-    "sourceRoot": "libs/platform/src/lib/approval-flow",
-    "prefix": "fdp",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/approval-flow"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/approval-flow/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/approval-flow/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/approval-flow/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/platform/src/lib/approval-flow/test.ts",
-                "tsConfig": "libs/platform/src/lib/approval-flow/tsconfig.spec.json",
-                "karmaConfig": "libs/platform/src/lib/approval-flow/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": [
-                    "libs/platform/src/lib/approval-flow/**/*.ts",
-                    "libs/platform/src/lib/approval-flow/**/*.html"
-                ]
-            }
+  "name": "platform-approval-flow",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/platform/src/lib/approval-flow",
+  "prefix": "fdp",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/platform/approval-flow"
+      ],
+      "options": {
+        "tsConfig": "libs/platform/src/lib/approval-flow/tsconfig.lib.json",
+        "project": "libs/platform/src/lib/approval-flow/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/platform/src/lib/approval-flow/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": []
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/platform/src/lib/approval-flow/**/*.ts",
+          "libs/platform/src/lib/approval-flow/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/platform/src/lib/approval-flow/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fdp"
+  ],
+  "implicitDependencies": []
 }

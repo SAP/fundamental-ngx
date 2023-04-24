@@ -85,7 +85,7 @@ describe('FeedInputComponent', () => {
     });
 
     it('should call onChange when textarea value changing', () => {
-        spyOn(component, 'onChange');
+        jest.spyOn(component, 'onChange');
         textareaEl.nativeElement.value = 'test';
         textareaEl.nativeElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();
@@ -94,7 +94,7 @@ describe('FeedInputComponent', () => {
     });
 
     it('should call resize when textarea value changing', () => {
-        spyOn(component, 'resize');
+        jest.spyOn(component, 'resize');
         textareaEl.nativeElement.value = 'test';
         textareaEl.nativeElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();

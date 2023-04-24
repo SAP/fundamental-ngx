@@ -67,7 +67,7 @@ describe('FeedListItemComponent', () => {
         component.isRichText = true;
         component.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement).not.toHaveClass(`${componentClassPrefix}--collapsible`);
+        expect(component.elementRef().nativeElement.classList.contains(`${componentClassPrefix}--collapsible`)).toBe(false);
         expect(component.elementRef().nativeElement.querySelector('.fd-feed-list__link--more')).toBeFalsy();
     });
 
@@ -100,8 +100,8 @@ describe('FeedListItemComponent', () => {
         component.hasMore = true;
         fixture.detectChanges();
         component.toggleTextView();
-        expect(component.isCollapsed).toBeFalse();
+        expect(component.isCollapsed).toBe(false);
         component.toggleTextView();
-        expect(component.isCollapsed).toBeTrue();
+        expect(component.isCollapsed).toBe(true);
     });
 });

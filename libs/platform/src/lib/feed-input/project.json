@@ -1,41 +1,55 @@
 {
-    "name": "platform-feed-input",
-    "projectType": "library",
-    "sourceRoot": "libs/platform/src/lib/feed-input",
-    "prefix": "fdp",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/feed-input"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/feed-input/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/feed-input/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/feed-input/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/platform/src/lib/feed-input/test.ts",
-                "tsConfig": "libs/platform/src/lib/feed-input/tsconfig.spec.json",
-                "karmaConfig": "libs/platform/src/lib/feed-input/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": [
-                    "libs/platform/src/lib/feed-input/**/*.ts",
-                    "libs/platform/src/lib/feed-input/**/*.html"
-                ]
-            }
+  "name": "platform-feed-input",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/platform/src/lib/feed-input",
+  "prefix": "fdp",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/platform/feed-input"
+      ],
+      "options": {
+        "tsConfig": "libs/platform/src/lib/feed-input/tsconfig.lib.json",
+        "project": "libs/platform/src/lib/feed-input/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/platform/src/lib/feed-input/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": []
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/platform/src/lib/feed-input/**/*.ts",
+          "libs/platform/src/lib/feed-input/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/platform/src/lib/feed-input/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fdp"
+  ],
+  "implicitDependencies": []
 }

@@ -1,40 +1,54 @@
 {
-    "name": "core-micro-process-flow",
-    "projectType": "library",
-    "sourceRoot": "libs/core/src/lib/micro-process-flow",
-    "prefix": "fd",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/micro-process-flow"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/micro-process-flow/tsconfig.lib.json",
-                "project": "libs/core/src/lib/micro-process-flow/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/micro-process-flow/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/micro-process-flow/test.ts",
-                "tsConfig": "libs/core/src/lib/micro-process-flow/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/micro-process-flow/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": [
-                    "libs/core/src/lib/micro-process-flow/**/*.ts",
-                    "libs/core/src/lib/micro-process-flow/**/*.html"
-                ]
-            }
+  "name": "core-micro-process-flow",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/core/src/lib/micro-process-flow",
+  "prefix": "fd",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/micro-process-flow"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/micro-process-flow/tsconfig.lib.json",
+        "project": "libs/core/src/lib/micro-process-flow/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/micro-process-flow/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/micro-process-flow/**/*.ts",
+          "libs/core/src/lib/micro-process-flow/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/core/src/lib/micro-process-flow/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
 }

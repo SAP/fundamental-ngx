@@ -149,7 +149,7 @@ describe('GridListItemComponent', () => {
     });
 
     it('should throw Detail event if click on Detail button', () => {
-        spyOn(component, 'detail');
+        jest.spyOn(component, 'detail');
 
         const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[title="Details"]'));
         button.nativeElement.click();
@@ -159,7 +159,7 @@ describe('GridListItemComponent', () => {
     });
 
     it('should throw Draft event if click on Draft button', () => {
-        spyOn(component, 'draft');
+        jest.spyOn(component, 'draft');
 
         const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[ng-reflect-label="Draft"]'));
         button.nativeElement.click();
@@ -169,7 +169,7 @@ describe('GridListItemComponent', () => {
     });
 
     it('should throw Locked event if click on Locked button', () => {
-        spyOn(component, 'locked');
+        jest.spyOn(component, 'locked');
 
         const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[ng-reflect-label="Locked"]'));
         button.nativeElement.click();

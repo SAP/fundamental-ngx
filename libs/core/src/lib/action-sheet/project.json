@@ -1,40 +1,54 @@
 {
-    "name": "core-action-sheet",
-    "projectType": "library",
-    "sourceRoot": "libs/core/src/lib/action-sheet",
-    "prefix": "fd",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/action-sheet"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/action-sheet/tsconfig.lib.json",
-                "project": "libs/core/src/lib/action-sheet/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/action-sheet/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/action-sheet/test.ts",
-                "tsConfig": "libs/core/src/lib/action-sheet/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/action-sheet/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": [
-                    "libs/core/src/lib/action-sheet/**/*.ts",
-                    "libs/core/src/lib/action-sheet/**/*.html"
-                ]
-            }
+  "name": "core-action-sheet",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/core/src/lib/action-sheet",
+  "prefix": "fd",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/action-sheet"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/action-sheet/tsconfig.lib.json",
+        "project": "libs/core/src/lib/action-sheet/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/action-sheet/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/action-sheet/**/*.ts",
+          "libs/core/src/lib/action-sheet/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/core/src/lib/action-sheet/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
 }

@@ -120,7 +120,7 @@ describe('NestedItemDirective', () => {
     });
 
     it('Item with popover should react to open change from popover', () => {
-        spyOn(nestedItemPopoverDirective, 'triggerOpen');
+        jest.spyOn(nestedItemPopoverDirective, 'triggerOpen');
         expect(itemService.popover).toBeDefined();
         itemService.popover!.handleOpenChange(true);
         expect(nestedItemPopoverDirective.triggerOpen).toHaveBeenCalled();
@@ -128,7 +128,7 @@ describe('NestedItemDirective', () => {
 
     it('Item with popover should propagate expanded change event', () => {
         nestedItemPopoverDirective.expanded = false;
-        spyOn(nestedItemPopoverDirective as any, 'propagateOpenChange');
+        jest.spyOn(nestedItemPopoverDirective as any, 'propagateOpenChange');
         nestedItemPopoverDirective.triggerOpen();
         expect((nestedItemPopoverDirective as any).propagateOpenChange).toHaveBeenCalledWith(true);
     });
@@ -151,7 +151,7 @@ describe('NestedItemDirective', () => {
 
     it('Item with list should propagate expanded change event', () => {
         nestedItemListDirective.expanded = false;
-        spyOn(nestedItemListDirective as any, 'propagateOpenChange');
+        jest.spyOn(nestedItemListDirective as any, 'propagateOpenChange');
         nestedItemListDirective.triggerOpen();
         expect((nestedItemListDirective as any).propagateOpenChange).toHaveBeenCalledWith(true);
     });
@@ -169,7 +169,7 @@ describe('NestedItemDirective', () => {
 
     it('Should react to events from icon child', () => {
         fixture.detectChanges();
-        spyOn(nestedItemListDirective, 'toggle');
+        jest.spyOn(nestedItemListDirective, 'toggle');
         nestedItemListDirective.contentItem.nestedExpandIcon.onClick(new MouseEvent('click'));
         fixture.detectChanges();
         expect(nestedItemListDirective.toggle).toHaveBeenCalledWith();
@@ -179,7 +179,7 @@ describe('NestedItemDirective', () => {
         fixture.detectChanges();
         expect(itemService.popover).toBeDefined();
         itemService.popover!.handleOpenChange(true);
-        spyOn(nestedItemPopoverDirective, 'toggle');
+        jest.spyOn(nestedItemPopoverDirective, 'toggle');
         nestedItemPopoverDirective.contentItem.nestedExpandIcon.onClick(new MouseEvent('click'));
         fixture.detectChanges();
         expect(nestedItemPopoverDirective.toggle).toHaveBeenCalledWith();
@@ -187,7 +187,7 @@ describe('NestedItemDirective', () => {
 
     it('Should handle keyboard event from link', () => {
         fixture.detectChanges();
-        spyOn(nestedItemListDirective.keyboardTriggered, 'emit');
+        jest.spyOn(nestedItemListDirective.keyboardTriggered, 'emit');
         const keyboardEvent = new KeyboardEvent('keyDown');
         nestedItemListDirective.contentItem.nestedLink.onKeyDown(keyboardEvent);
         fixture.detectChanges();
@@ -196,7 +196,7 @@ describe('NestedItemDirective', () => {
 
     it('Popover Should handle keyboard event from link', () => {
         fixture.detectChanges();
-        spyOn(nestedItemPopoverDirective.keyboardTriggered, 'emit');
+        jest.spyOn(nestedItemPopoverDirective.keyboardTriggered, 'emit');
         const keyboardEvent = new KeyboardEvent('keyDown');
         nestedItemPopoverDirective.contentItem.nestedLink.onKeyDown(keyboardEvent);
         fixture.detectChanges();
@@ -204,7 +204,7 @@ describe('NestedItemDirective', () => {
     });
 
     it('Popover Should handle keyboard event from sub items', () => {
-        spyOn(<any>nestedItemPopoverDirective, '_selectedChange');
+        jest.spyOn(<any>nestedItemPopoverDirective, '_selectedChange');
         fixture.detectChanges();
         popoverSubItemElement.linkItem.onClick();
         fixture.detectChanges();
@@ -214,7 +214,7 @@ describe('NestedItemDirective', () => {
     });
 
     it('Should handle keyboard event from sub items', () => {
-        spyOn(<any>nestedItemListDirective, '_selectedChange');
+        jest.spyOn(<any>nestedItemListDirective, '_selectedChange');
         fixture.detectChanges();
         subItemElement.linkItem.onClick();
         fixture.detectChanges();

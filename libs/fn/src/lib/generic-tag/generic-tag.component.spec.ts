@@ -58,7 +58,7 @@ describe('GenericTagComponent', () => {
         statuses.forEach((state) => {
             testComponent.state = state;
             fixture.detectChanges();
-            expect(genericTagElmRef.nativeElement.classList.contains(`fn-generic-tag--${state}`)).toBeTrue();
+            expect(genericTagElmRef.nativeElement.classList.contains(`fn-generic-tag--${state}`)).toBe(true);
         });
     });
 

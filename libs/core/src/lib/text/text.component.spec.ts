@@ -98,8 +98,8 @@ describe('TextComponent', () => {
         component._hasMore = true;
         fixture.detectChanges();
         component.toggleTextView();
-        expect(component.isCollapsed).toBeFalse();
+        expect(component.isCollapsed).toBe(false);
         component.toggleTextView();
-        expect(component.isCollapsed).toBeTrue();
+        expect(component.isCollapsed).toBe(true);
     });
 });

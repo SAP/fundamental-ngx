@@ -1,41 +1,55 @@
 {
-    "name": "platform-action-button-group",
-    "projectType": "library",
-    "sourceRoot": "libs/platform/src/lib/action-button-group",
-    "prefix": "fdp",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/action-button-group"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/action-button-group/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/action-button-group/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/action-button-group/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/platform/src/lib/action-button-group/test.ts",
-                "tsConfig": "libs/platform/src/lib/action-button-group/tsconfig.spec.json",
-                "karmaConfig": "libs/platform/src/lib/action-button-group/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": [
-                    "libs/platform/src/lib/action-button-group/**/*.ts",
-                    "libs/platform/src/lib/action-button-group/**/*.html"
-                ]
-            }
+  "name": "platform-action-button-group",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/platform/src/lib/action-button-group",
+  "prefix": "fdp",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/platform/action-button-group"
+      ],
+      "options": {
+        "tsConfig": "libs/platform/src/lib/action-button-group/tsconfig.lib.json",
+        "project": "libs/platform/src/lib/action-button-group/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/platform/src/lib/action-button-group/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": []
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/platform/src/lib/action-button-group/**/*.ts",
+          "libs/platform/src/lib/action-button-group/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/platform/src/lib/action-button-group/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fdp"
+  ],
+  "implicitDependencies": []
 }

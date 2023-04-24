@@ -61,7 +61,7 @@ describe('TableViewSettingsDialogComponent', () => {
 
     it('should listen to table "open sort settings" event and call showSortingSettings', () => {
         const mockTable: Table = new TableComponentMock() as any;
-        const showSettingsSpy = spyOn(component, 'showSortingSettings').and.stub();
+        const showSettingsSpy = jest.spyOn(component, 'showSortingSettings');
 
         component.table = mockTable as Table;
 
@@ -74,7 +74,7 @@ describe('TableViewSettingsDialogComponent', () => {
 
     it('should listen to table "open group settings" event and call showGroupingSettings', () => {
         const mockTable: Table = new TableComponentMock() as any;
-        const showSettingsSpy = spyOn(component, 'showGroupingSettings').and.stub();
+        const showSettingsSpy = jest.spyOn(component, 'showGroupingSettings');
 
         component.table = mockTable as Table;
 
@@ -87,7 +87,7 @@ describe('TableViewSettingsDialogComponent', () => {
 
     it('should listen to table "open filter settings" event and call showFilteringSettings', () => {
         const mockTable: Table = new TableComponentMock() as any;
-        const showSettingsSpy = spyOn(component, 'showFilteringSettings').and.stub();
+        const showSettingsSpy = jest.spyOn(component, 'showFilteringSettings');
 
         component.table = mockTable as Table;
 
@@ -102,7 +102,7 @@ describe('TableViewSettingsDialogComponent', () => {
         const mockFilterComponent = {} as TableViewSettingsFilterComponent;
         const queryList = new QueryList<TableViewSettingsFilterComponent>();
         const mockTable = new TableComponentMock();
-        const setViewSettingsFiltersSpy = spyOn(mockTable, 'showFilterSettingsInToolbar').and.stub();
+        const setViewSettingsFiltersSpy = jest.spyOn(mockTable, 'showFilterSettingsInToolbar');
 
         queryList.reset([mockFilterComponent]);
 
@@ -125,7 +125,7 @@ describe('TableViewSettingsDialogComponent', () => {
 
     it('should listen to table columns stream and notify table if "sort settings" is available', () => {
         const mockTable = new TableComponentMock();
-        const showSortSettingsInToolbarSpy = spyOn(mockTable, 'showSortSettingsInToolbar').and.stub();
+        const showSortSettingsInToolbarSpy = jest.spyOn(mockTable, 'showSortSettingsInToolbar');
 
         component.table = mockTable as any;
 
@@ -142,7 +142,7 @@ describe('TableViewSettingsDialogComponent', () => {
 
     it('should listen to table columns stream and notify table if "group settings" is available', () => {
         const mockTable = new TableComponentMock();
-        const showGroupSettingsInToolbarSpy = spyOn(mockTable, 'showGroupSettingsInToolbar').and.stub();
+        const showGroupSettingsInToolbarSpy = jest.spyOn(mockTable, 'showGroupSettingsInToolbar');
 
         component.table = mockTable as any;
 

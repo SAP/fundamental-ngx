@@ -86,8 +86,8 @@ xdescribe('WizardGeneratorStepComponent', () => {
     it('should create form', async () => {
         await fixture.whenStable();
 
-        const formCreatedSpy = spyOn(component, 'formsCreated').and.callThrough();
-        const addComponentSpy = spyOn(service, 'addWizardStepComponent').and.callThrough();
+        const formCreatedSpy = jest.spyOn(component, 'formsCreated');
+        const addComponentSpy = jest.spyOn(service, 'addWizardStepComponent');
 
         const newItems = await service.prepareWizardItems(items);
 
@@ -117,7 +117,7 @@ xdescribe('WizardGeneratorStepComponent', () => {
             .submitStepForms('productTypeStep')
             .pipe(first())
             .subscribe((forms) => {
-                expect(forms!.productType.success).toBeTrue();
+                expect(forms!.productType.success).toBe(true);
 
                 done();
             });

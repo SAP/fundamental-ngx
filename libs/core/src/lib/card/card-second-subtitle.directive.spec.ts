@@ -34,6 +34,6 @@ describe('CardSecondSubtitleComponent', () => {
     });
 
     it('should add className to host', () => {
-        expect(debugElement.nativeElement.className.includes(CLASS_NAME.cardSecondSubtitle)).toBeTrue();
+        expect(debugElement.nativeElement.className.includes(CLASS_NAME.cardSecondSubtitle)).toBe(true);
     });
 });

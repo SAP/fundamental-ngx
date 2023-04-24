@@ -1,27 +1,27 @@
 {
-    "extends": "../../tsconfig.base.json",
-    "files": [],
-    "include": [],
-    "references": [
-        {
-            "path": "./tsconfig.lib.json"
-        },
-        {
-            "path": "./tsconfig.lib.prod.json"
-        },
-        {
-            "path": "./tsconfig.spec.json"
-        }
-    ],
-    "compilerOptions": {
-        "forceConsistentCasingInFileNames": true,
-        "noPropertyAccessFromIndexSignature": true,
-        "noImplicitReturns": false,
-        "target": "es2022"
+  "extends": "../../tsconfig.base.json",
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
     },
-    "angularCompilerOptions": {
-        "strictInjectionParameters": true,
-        "strictInputAccessModifiers": true,
-        "strictTemplates": true
+    {
+      "path": "./tsconfig.lib.prod.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
     }
+  ],
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": false,
+    "target": "es2022"
+  },
+  "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
 }

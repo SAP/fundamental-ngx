@@ -1,40 +1,54 @@
 {
-    "name": "core-split-button",
-    "projectType": "library",
-    "sourceRoot": "libs/core/src/lib/split-button",
-    "prefix": "fd",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/split-button"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/split-button/tsconfig.lib.json",
-                "project": "libs/core/src/lib/split-button/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/split-button/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/split-button/test.ts",
-                "tsConfig": "libs/core/src/lib/split-button/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/split-button/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": [
-                    "libs/core/src/lib/split-button/**/*.ts",
-                    "libs/core/src/lib/split-button/**/*.html"
-                ]
-            }
+  "name": "core-split-button",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/core/src/lib/split-button",
+  "prefix": "fd",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/split-button"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/split-button/tsconfig.lib.json",
+        "project": "libs/core/src/lib/split-button/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/split-button/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/split-button/**/*.ts",
+          "libs/core/src/lib/split-button/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/core/src/lib/split-button/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
 }

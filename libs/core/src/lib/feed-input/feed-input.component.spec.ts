@@ -61,7 +61,7 @@ describe('FeedInputComponent', () => {
         component.disabled = true;
         fixture.detectChanges();
 
-        expect(hostEl.nativeElement.className.includes('is-disabled')).toBeTrue();
+        expect(hostEl.nativeElement.className.includes('is-disabled')).toBe(true);
     });
 
     it('should disabled button by default', () => {
@@ -83,7 +83,7 @@ describe('FeedInputComponent', () => {
     });
 
     it('should emit value properly', () => {
-        spyOn(textareaDirective.valueChange, 'emit');
+        jest.spyOn(textareaDirective.valueChange, 'emit');
         const event: any = { target: { value: '' } };
         textareaDirective.onKeyup(event);
         fixture.detectChanges();

@@ -60,7 +60,7 @@ describe('DndListDirective', () => {
     });
 
     it('Should handle move and detect good target (1)', () => {
-        spyOn(directive as any, '_createLine');
+        jest.spyOn(directive as any, '_createLine');
         const pointerPosition = { x: 150, y: 150 };
         (directive as any)._closestItemIndex = 100;
         (directive as any)._closestItemPosition = 'after';
@@ -74,7 +74,7 @@ describe('DndListDirective', () => {
     });
 
     it('Should handle move and detect good target (2)', () => {
-        spyOn(directive as any, '_createLine');
+        jest.spyOn(directive as any, '_createLine');
         const pointerPosition = { x: 230, y: 230 };
         (directive as any)._closestItemIndex = 1000;
         (directive as any)._closestItemPosition = 'after';
@@ -88,8 +88,8 @@ describe('DndListDirective', () => {
     });
 
     it('should handle dragend', () => {
-        spyOn(directive.itemDropped, 'emit');
-        spyOn(directive as any, '_removeAllLines');
+        jest.spyOn(directive.itemDropped, 'emit');
+        jest.spyOn(directive as any, '_removeAllLines');
         directive.items = [...component.list];
 
         (directive as any)._closestItemIndex = 1;
@@ -107,7 +107,7 @@ describe('DndListDirective', () => {
     });
 
     it('should handle stickToPosition', () => {
-        spyOn(directive as any, '_createLine');
+        jest.spyOn(directive as any, '_createLine');
 
         const pointerPosition = { x: 231, y: 231 };
         (directive as any)._closestItemIndex = 1000;

@@ -49,7 +49,7 @@ describe('IllustratedMessageComponent', () => {
     it('Should have scene type by default', () => {
         expect(
             illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--scene')
-        ).toBeTrue();
+        ).toBe(true);
     });
 
     it('Should add dialog type', () => {
@@ -57,7 +57,7 @@ describe('IllustratedMessageComponent', () => {
         fixture.detectChanges();
         expect(
             illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--dialog')
-        ).toBeTrue();
+        ).toBe(true);
     });
 
     it('Should add spot type', () => {
@@ -65,6 +65,6 @@ describe('IllustratedMessageComponent', () => {
         fixture.detectChanges();
         expect(
             illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--spot')
-        ).toBeTrue();
+        ).toBe(true);
     });
 });

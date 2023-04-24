@@ -59,48 +59,48 @@ describe('FdDate', () => {
     });
 
     it('should be invalid date if month is not between 1 - 12', () => {
-        expect(new FdDate(2020, 1, 1).isDateValid()).toBeTrue();
-        expect(new FdDate(2020, 12, 1).isDateValid()).toBeTrue();
-        expect(new FdDate(2020, 0, 1).isDateValid()).toBeFalse();
-        expect(new FdDate(2020, 13, 1).isDateValid()).toBeFalse();
+        expect(new FdDate(2020, 1, 1).isDateValid()).toBe(true);
+        expect(new FdDate(2020, 12, 1).isDateValid()).toBe(true);
+        expect(new FdDate(2020, 0, 1).isDateValid()).toBe(false);
+        expect(new FdDate(2020, 13, 1).isDateValid()).toBe(false);
     });
 
     it('should be invalid date if day is integer and less than 1', () => {
-        expect(new FdDate(2020, 1, 1).isDateValid()).toBeTrue();
-        expect(new FdDate(2020, 1, 0).isDateValid()).toBeFalse();
+        expect(new FdDate(2020, 1, 1).isDateValid()).toBe(true);
+        expect(new FdDate(2020, 1, 0).isDateValid()).toBe(false);
     });
 
     it('should be invalid date if day is integer and not valid for particular month and year', () => {
-        expect(new FdDate(2017, 2, 29).isDateValid()).toBeFalse();
+        expect(new FdDate(2017, 2, 29).isDateValid()).toBe(false);
     });
 
     it('should be invalid date if hour, minute or second is integer and out of range', () => {
-        expect(new FdDate(2020, 1, 1, -1).isDateValid()).toBeFalse();
-        expect(new FdDate(2020, 1, 1, 24).isDateValid()).toBeFalse();
-        expect(new FdDate(2020, 1, 1, 0, -1).isDateValid()).toBeFalse();
-        expect(new FdDate(2020, 1, 1, 0, 60).isDateValid()).toBeFalse();
-        expect(new FdDate(2020, 1, 1, 0, 0, -1).isDateValid()).toBeFalse();
-        expect(new FdDate(2020, 1, 1, 0, 0, 60).isDateValid()).toBeFalse();
+        expect(new FdDate(2020, 1, 1, -1).isDateValid()).toBe(false);
+        expect(new FdDate(2020, 1, 1, 24).isDateValid()).toBe(false);
+        expect(new FdDate(2020, 1, 1, 0, -1).isDateValid()).toBe(false);
+        expect(new FdDate(2020, 1, 1, 0, 60).isDateValid()).toBe(false);
+        expect(new FdDate(2020, 1, 1, 0, 0, -1).isDateValid()).toBe(false);
+        expect(new FdDate(2020, 1, 1, 0, 0, 60).isDateValid()).toBe(false);
     });
 
     it('should create invalid FdDate', () => {
-        expect(new FdDate().isDateValid()).toBeTrue();
-        expect(new FdDate(2017, 1, 1).isDateValid()).toBeTrue();
-        expect(new FdDate(2017, 1, 1, 6, 30, 40).isDateValid()).toBeTrue();
+        expect(new FdDate().isDateValid()).toBe(true);
+        expect(new FdDate(2017, 1, 1).isDateValid()).toBe(true);
+        expect(new FdDate(2017, 1, 1, 6, 30, 40).isDateValid()).toBe(true);
 
-        expect(new FdDate('date' as any).isDateValid()).not.toBeTrue();
-        expect(new FdDate(NaN).isDateValid()).not.toBeTrue();
+        expect(new FdDate('date' as any).isDateValid()).not.toBe(true);
+        expect(new FdDate(NaN).isDateValid()).not.toBe(true);
         // @ts-expect-error fault tolerance test
-        expect(new FdDate(null).isDateValid()).not.toBeTrue();
-        expect(new FdDate(2020, NaN).isDateValid()).not.toBeTrue();
+        expect(new FdDate(null).isDateValid()).not.toBe(true);
+        expect(new FdDate(2020, NaN).isDateValid()).not.toBe(true);
         // @ts-expect-error fault tolerance test
-        expect(new FdDate(2020, null).isDateValid()).not.toBeTrue();
-        expect(new FdDate(2020, 1, NaN).isDateValid()).not.toBeTrue();
+        expect(new FdDate(2020, null).isDateValid()).not.toBe(true);
+        expect(new FdDate(2020, 1, NaN).isDateValid()).not.toBe(true);
         // @ts-expect-error fault tolerance test
-        expect(new FdDate(2020, 1, null).isDateValid()).not.toBeTrue();
-        expect(new FdDate(2020, 1, 1, NaN).isDateValid()).not.toBeTrue();
-        expect(new FdDate(2020, 1, 1, 0, NaN).isDateValid()).not.toBeTrue();
-        expect(new FdDate(2020, 1, 1, 0, 0, NaN).isDateValid()).not.toBeTrue();
+        expect(new FdDate(2020, 1, null).isDateValid()).not.toBe(true);
+        expect(new FdDate(2020, 1, 1, NaN).isDateValid()).not.toBe(true);
+        expect(new FdDate(2020, 1, 1, 0, NaN).isDateValid()).not.toBe(true);
+        expect(new FdDate(2020, 1, 1, 0, 0, NaN).isDateValid()).not.toBe(true);
     });
 
     it('should create FdDate by "getNow()"', () => {
@@ -184,6 +184,6 @@ describe('FdDate', () => {
 
     it('should change FdDate validation status by setTime()', () => {
         const validDate = new FdDate(2020, 11, 21);
-        expect(validDate.setTime(25, 100, 100).isDateValid()).toBeFalse();
+        expect(validDate.setTime(25, 100, 100).isDateValid()).toBe(false);
     });
 });

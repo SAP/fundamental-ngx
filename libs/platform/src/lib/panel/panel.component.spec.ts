@@ -184,7 +184,7 @@ describe('Simple PanelComponent', () => {
 
     it('Should emit a panelExpandChange event when the Panel is expanded and collapsed', async () => {
         let changeEvent: PanelExpandChangeEvent | undefined;
-        const onExpandChangeSpy = spyOn(component, 'onExpandChange').and.callFake((event: PanelExpandChangeEvent) => {
+        const onExpandChangeSpy = jest.spyOn(component, 'onExpandChange').mockImplementation((event: PanelExpandChangeEvent) => {
             changeEvent = event;
         });
         const toggleButton: HTMLButtonElement = fixture.debugElement.query(By.css('.fd-panel__button')).nativeElement;
@@ -192,14 +192,14 @@ describe('Simple PanelComponent', () => {
         toggleButton.click();
         fixture.detectChanges();
         expect(changeEvent).toBeDefined();
-        expect(onExpandChangeSpy.calls.count()).toEqual(1);
-        expect(changeEvent!.payload).toBeFalse();
+        expect(onExpandChangeSpy.mock.calls.length).toEqual(1);
+        expect(changeEvent!.payload).toBe(false);
 
         toggleButton.click();
         fixture.detectChanges();
-        expect(onExpandChangeSpy.calls.count()).toEqual(2);
-        expect(changeEvent!.payload).toBeTrue();
+        expect(onExpandChangeSpy.mock.calls.length).toEqual(2);
+        expect(changeEvent!.payload).toBe(true);
 
-        expect(changeEvent instanceof PanelExpandChangeEvent).toBeTrue();
+        expect(changeEvent instanceof PanelExpandChangeEvent).toBe(true);
     });
 });

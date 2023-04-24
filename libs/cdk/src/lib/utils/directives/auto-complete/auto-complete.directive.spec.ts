@@ -36,7 +36,7 @@ describe('AutoCompleteDirective', () => {
     });
 
     it('should complete Apple word and send event with close force', () => {
-        spyOn(directive.onComplete, 'emit');
+        jest.spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'ap';
 
@@ -53,7 +53,7 @@ describe('AutoCompleteDirective', () => {
     });
 
     it('should complete Apple word and send event with outclose force', () => {
-        spyOn(directive.onComplete, 'emit');
+        jest.spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'ap';
 
@@ -70,7 +70,7 @@ describe('AutoCompleteDirective', () => {
     });
 
     it('should stop completing word', () => {
-        spyOn(directive.onComplete, 'emit');
+        jest.spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'ap';
 
@@ -84,7 +84,7 @@ describe('AutoCompleteDirective', () => {
     });
 
     it('should not complete, when other word is written', () => {
-        spyOn(directive.onComplete, 'emit');
+        jest.spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'SomeOtherWord';
 

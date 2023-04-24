@@ -1,37 +1,54 @@
 {
-    "name": "core-checkbox",
-    "projectType": "library",
-    "sourceRoot": "libs/core/src/lib/checkbox",
-    "prefix": "fd",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/checkbox"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/checkbox/tsconfig.lib.json",
-                "project": "libs/core/src/lib/checkbox/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/checkbox/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/checkbox/test.ts",
-                "tsConfig": "libs/core/src/lib/checkbox/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/checkbox/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["libs/core/src/lib/checkbox/**/*.ts", "libs/core/src/lib/checkbox/**/*.html"]
-            }
+  "name": "core-checkbox",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/core/src/lib/checkbox",
+  "prefix": "fd",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/checkbox"
+      ],
+      "options": {
+        "tsConfig": "libs/core/src/lib/checkbox/tsconfig.lib.json",
+        "project": "libs/core/src/lib/checkbox/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core/src/lib/checkbox/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core/src/lib/checkbox/**/*.ts",
+          "libs/core/src/lib/checkbox/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/core/src/lib/checkbox/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fd"
+  ]
 }

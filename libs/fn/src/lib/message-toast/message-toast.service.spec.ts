@@ -88,7 +88,7 @@ describe('MessageToastService', () => {
 
         fixture.detectChanges();
 
-        const dismissCompleteSpy = spyOn(dummySpy, 'spy');
+        const dismissCompleteSpy = jest.spyOn(dummySpy, 'spy');
 
         ref.containerInstance.onExit$.subscribe({ complete: dismissCompleteSpy });
 
@@ -106,7 +106,7 @@ describe('MessageToastService', () => {
 
         fixture.detectChanges();
 
-        const dismissCompleteSpy = spyOn(dummySpy, 'spy');
+        const dismissCompleteSpy = jest.spyOn(dummySpy, 'spy');
 
         ref.afterDismissed().subscribe({ complete: dismissCompleteSpy });
 

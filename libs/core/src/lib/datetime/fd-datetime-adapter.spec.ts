@@ -259,13 +259,13 @@ describe('FdDatetimeAdapter', () => {
     });
 
     it('should be invalid date with month over/under-flow', () => {
-        expect(adapter.createDate(2017, 13, 1).isDateValid()).toBeFalse();
-        expect(adapter.createDate(2017, 0, 1).isDateValid()).toBeFalse();
+        expect(adapter.createDate(2017, 13, 1).isDateValid()).toBe(false);
+        expect(adapter.createDate(2017, 0, 1).isDateValid()).toBe(false);
     });
 
     it('should be invalid date with date over/under-flow', () => {
-        expect(adapter.createDate(2017, 2, 32).isDateValid()).toBeFalse();
-        expect(adapter.createDate(2017, 2, 0).isDateValid()).toBeFalse();
+        expect(adapter.createDate(2017, 2, 32).isDateValid()).toBe(false);
+        expect(adapter.createDate(2017, 2, 0).isDateValid()).toBe(false);
     });
 
     it('should create Date with low year number', () => {
@@ -285,11 +285,11 @@ describe('FdDatetimeAdapter', () => {
     });
 
     it(`should get today's date`, () => {
-        expect(adapter.datesEqual(adapter.today(), FdDate.getToday())).toBe(true, `should be equal to today's date`);
+        expect(adapter.datesEqual(adapter.today(), FdDate.getToday())).toBe(true); // `should be equal to today's date`
     });
 
     it(`should get now date`, () => {
-        expect(adapter.datesEqual(adapter.now(), new FdDate())).toBe(true, `should be equal to now date moment`);
+        expect(adapter.datesEqual(adapter.now(), new FdDate())).toBe(true); // `should be equal to now date moment`
     });
 
     it('should parse "en" date string', () => {
@@ -319,7 +319,7 @@ describe('FdDatetimeAdapter', () => {
     it('should parse invalid value to invalid date', () => {
         const d = adapter.parse('hello');
         expect(d).toBeDefined();
-        expect(d?.isDateValid()).toBeFalse();
+        expect(d?.isDateValid()).toBe(false);
     });
     it('should parse empty value to null', () => {
         expect(adapter.parse('')).toBe(null);

@@ -84,7 +84,7 @@ describe('ResizableCardItemComponent', () => {
     it('should emit resized event when resizing is completed', () => {
         const mouseEvent1 = new MouseEvent('resize', { clientX: 200, clientY: 40 });
         const card = component.items.toArray()[1];
-        const cardResized = spyOn(card.resized, 'emit');
+        const cardResized = jest.spyOn(card.resized, 'emit');
 
         card.onMouseDown(mouseEvent1, 'both');
         const mouseEvent2 = new MouseEvent('resize', { clientX: 100, clientY: 20 });

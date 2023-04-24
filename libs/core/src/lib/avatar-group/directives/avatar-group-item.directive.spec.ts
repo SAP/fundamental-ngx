@@ -32,6 +32,6 @@ describe('AvatarGroupItemDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement).toHaveClass('fd-avatar-group__item');
+        expect(component.ref.nativeElement.classList.contains('fd-avatar-group__item')).toBe(true);
     });
 });

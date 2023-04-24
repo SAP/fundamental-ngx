@@ -83,7 +83,7 @@ describe('PlatformValueHelpDialogComponent', () => {
 
     it('should have value help dialog reference', async () => {
         testComponent.vhdComponent.open();
-        expect(!!testComponent.vhdComponent.isOpen).toBeTrue();
+        expect(!!testComponent.vhdComponent.isOpen).toBe(true);
     });
 
     it('should have 3 filters', async () => {
@@ -101,14 +101,14 @@ describe('PlatformValueHelpDialogComponent', () => {
 
     it('should not emit value on cancel', async () => {
         testComponent.vhdComponent.open();
-        spyOn(testComponent.vhdComponent.valueChange, 'emit').and.callThrough();
+        jest.spyOn(testComponent.vhdComponent.valueChange, 'emit');
         testComponent.vhdComponent.dismiss();
         expect(testComponent.vhdComponent.valueChange.emit).not.toHaveBeenCalled();
     });
 
     it('should emit value on success', async () => {
         testComponent.vhdComponent.open();
-        spyOn(testComponent.vhdComponent.valueChange, 'emit').and.callThrough();
+        jest.spyOn(testComponent.vhdComponent.valueChange, 'emit');
 
         testComponent.vhdComponent.onSelect(testComponent.data.slice(0, 3));
         testComponent.vhdComponent.success();
@@ -117,7 +117,7 @@ describe('PlatformValueHelpDialogComponent', () => {
 
     it('should emit value once on select', async () => {
         testComponent.vhdComponent.open();
-        spyOn(testComponent.vhdComponent.valueChange, 'emit').and.callThrough();
+        jest.spyOn(testComponent.vhdComponent.valueChange, 'emit');
 
         testComponent.vhdComponent.searchSelection = 'once';
         testComponent.vhdComponent.onSelect(testComponent.data.slice(0, 3));

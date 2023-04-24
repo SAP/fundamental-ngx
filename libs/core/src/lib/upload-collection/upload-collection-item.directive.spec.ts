@@ -79,7 +79,7 @@ describe('UploadCollectionItemDirective', () => {
     });
 
     it('should handle the delete button subscriptions', fakeAsync(() => {
-        spyOn(component.item.deleteClicked, 'emit');
+        jest.spyOn(component.item.deleteClicked, 'emit');
         component.item.ngAfterContentInit();
         tick(1);
         component.item._buttonGroupComponent.deleteClicked.emit();
@@ -89,7 +89,7 @@ describe('UploadCollectionItemDirective', () => {
     }));
 
     it('should handle the ok button subscription', fakeAsync(() => {
-        spyOn(component.item.fileNameChanged, 'emit');
+        jest.spyOn(component.item.fileNameChanged, 'emit');
         component.item.ngAfterContentInit();
         tick(1);
         component.item._formItemComponent.fileName = 'newName';
@@ -100,8 +100,8 @@ describe('UploadCollectionItemDirective', () => {
         expect(component.item._titleDirective.elRef.nativeElement.innerHTML).toEqual('newName.txt');
         expect(component.item.fileNameChanged.emit).toHaveBeenCalled();
         expect(component.item.fileName).toEqual('newName');
-        expect(component.item._formItemComponent._editMode).toBeFalse();
-        expect(component.item._buttonGroupComponent._editMode).toBeFalse();
+        expect(component.item._formItemComponent._editMode).toBe(false);
+        expect(component.item._buttonGroupComponent._editMode).toBe(false);
     }));
 
     it('should handle editClicked subscription', fakeAsync(() => {

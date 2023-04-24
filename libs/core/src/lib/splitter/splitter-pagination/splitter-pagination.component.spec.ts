@@ -29,7 +29,7 @@ describe('SplitterPaginationComponent', () => {
     });
 
     it('should change page', () => {
-        const spy = spyOn(component.onPageChange, 'emit').and.callThrough();
+        const spy = jest.spyOn(component.onPageChange, 'emit');
         const pages = ['1', '2', '3'];
 
         component.pages = pages;

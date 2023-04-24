@@ -34,6 +34,6 @@ describe('AvatarGroupPopoverControlDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement).toHaveClass('fd-avatar-group__popover-control');
+        expect(component.ref.nativeElement.classList.contains('fd-avatar-group__popover-control')).toBe(true);
     });
 });

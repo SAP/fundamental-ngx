@@ -1,43 +1,60 @@
 {
-    "name": "platform-variant-management",
-    "projectType": "library",
-    "sourceRoot": "libs/platform/src/lib/variant-management",
-    "prefix": "fdp",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/variant-management"],
-            "options": {
-                "project": "libs/platform/src/lib/variant-management/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/variant-management/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/platform/src/lib/variant-management/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+  "name": "platform-variant-management",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/platform/src/lib/variant-management",
+  "prefix": "fdp",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/platform/variant-management"
+      ],
+      "options": {
+        "project": "libs/platform/src/lib/variant-management/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/platform/src/lib/variant-management/tsconfig.lib.prod.json"
         },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/platform/src/lib/variant-management/test.ts",
-                "tsConfig": "libs/platform/src/lib/variant-management/tsconfig.spec.json",
-                "karmaConfig": "libs/platform/src/lib/variant-management/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": [
-                    "libs/platform/src/lib/variant-management/**/*.ts",
-                    "libs/platform/src/lib/variant-management/**/*.html"
-                ]
-            }
+        "development": {
+          "tsConfig": "libs/platform/src/lib/variant-management/tsconfig.lib.json"
         }
+      },
+      "defaultConfiguration": "production"
     },
-    "tags": ["scope:fdp", "type:lib"],
-    "implicitDependencies": ["cdk", "core"]
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/platform/src/lib/variant-management/**/*.ts",
+          "libs/platform/src/lib/variant-management/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/platform/src/lib/variant-management/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "scope:fdp",
+    "type:lib"
+  ],
+  "implicitDependencies": [
+    "cdk",
+    "core"
+  ]
 }

@@ -87,13 +87,13 @@ describe('DialogComponent', () => {
         fixture.detectChanges();
 
         const dialogEl = fixture.nativeElement.querySelector('.fd-dialog');
-        expect(dialogEl).not.toHaveClass('.fd-dialog--active');
+        expect(dialogEl.classList.contains('.fd-dialog--active')).toBe(false);
     });
 
     it('should close after esc pressed', async () => {
         await setup();
 
-        const dismissSpy = spyOn(dialogRef, 'dismiss');
+        const dismissSpy = jest.spyOn(dialogRef, 'dismiss');
 
         dialogComponent['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
         fixture.detectChanges();
@@ -106,7 +106,7 @@ describe('DialogComponent', () => {
 
         await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
-        const dismissSpy = spyOn(dialogRef, 'dismiss');
+        const dismissSpy = jest.spyOn(dialogRef, 'dismiss');
         fixture.detectChanges();
 
         fixture.nativeElement.querySelector('.fd-dialog').dispatchEvent(new MouseEvent('mousedown'));
@@ -152,33 +152,29 @@ describe('DialogComponent', () => {
         };
         await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-dialog')).toHaveClass('customBackdropClass');
-        expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass('customPanelClass');
+        expect(fixture.nativeElement.querySelector('.fd-dialog').classList.contains('customBackdropClass')).toBe(true);
+        expect(fixture.nativeElement.querySelector('.fd-dialog__content').classList.contains('customPanelClass')).toBe(true);
     });
 
     it('should display in mobile mode', async () => {
         const customDialogConfig = { ...new DialogConfig(), mobile: true };
         await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass('fd-dialog__content--mobile');
+        expect(fixture.nativeElement.querySelector('.fd-dialog__content').classList.contains('fd-dialog__content--mobile')).toBe(true);
     });
 
     it('should display in mobile mode with no stretch', async () => {
         const customDialogConfig = { ...new DialogConfig(), mobileOuterSpacing: true };
         await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass(
-            'fd-dialog__content--no-mobile-stretch'
-        );
+        expect(fixture.nativeElement.querySelector('.fd-dialog__content').classList.contains('fd-dialog__content--no-mobile-stretch')).toBe(true);
     });
 
     it('should be draggable', async () => {
         const customDialogConfig = { ...new DialogConfig(), draggable: true };
         await setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-dialog__content')).toHaveClass(
-            'fd-dialog__content--draggable-grab'
-        );
+        expect(fixture.nativeElement.querySelector('.fd-dialog__content').classList.contains('fd-dialog__content--draggable-grab')).toBe(true);
 
         fixture.nativeElement.querySelector('fd-dialog-header').dispatchEvent(new MouseEvent('mousedown'));
     });
@@ -213,7 +209,7 @@ describe('DialogComponent', () => {
     it('should close the dialog on router navigation start', async () => {
         await setup();
         const event = new NavigationStart(42, '/');
-        spyOn(dialogRef, 'dismiss');
+        jest.spyOn(dialogRef, 'dismiss');
         routerEventsSubject.next(event);
 
         expect(dialogRef.dismiss).toHaveBeenCalled();

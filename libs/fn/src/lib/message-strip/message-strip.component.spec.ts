@@ -73,7 +73,7 @@ describe('MessageStripComponent', () => {
     });
 
     it('should trigger dismiss event', () => {
-        const eventSpy = spyOn(component, 'dismiss').and.callThrough();
+        const eventSpy = jest.spyOn(component, 'dismiss');
 
         const clickEvent = createMouseEvent('click');
 

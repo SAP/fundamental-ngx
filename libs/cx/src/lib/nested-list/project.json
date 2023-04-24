@@ -1,37 +1,54 @@
 {
-    "name": "cx-nested-list",
-    "projectType": "library",
-    "sourceRoot": "libs/cx/src/lib/nested-list",
-    "prefix": "cx",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/cx/nested-list"],
-            "options": {
-                "tsConfig": "libs/cx/src/lib/nested-list/tsconfig.lib.json",
-                "project": "libs/cx/src/lib/nested-list/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/cx/src/lib/nested-list/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/cx/src/lib/nested-list/test.ts",
-                "tsConfig": "libs/cx/src/lib/nested-list/tsconfig.spec.json",
-                "karmaConfig": "libs/cx/src/lib/nested-list/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["libs/cx/src/lib/nested-list/**/*.ts", "libs/cx/src/lib/nested-list/**/*.html"]
-            }
+  "name": "cx-nested-list",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/cx/src/lib/nested-list",
+  "prefix": "cx",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/cx/nested-list"
+      ],
+      "options": {
+        "tsConfig": "libs/cx/src/lib/nested-list/tsconfig.lib.json",
+        "project": "libs/cx/src/lib/nested-list/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/cx/src/lib/nested-list/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:cx"]
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cx/src/lib/nested-list/**/*.ts",
+          "libs/cx/src/lib/nested-list/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/cx/src/lib/nested-list/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:cx"
+  ]
 }

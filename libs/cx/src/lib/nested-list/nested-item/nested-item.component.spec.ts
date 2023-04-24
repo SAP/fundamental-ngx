@@ -1,6 +1,5 @@
-import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 import { NestedItemComponent } from './nested-item.component';
-import { Component, ViewChild } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { NestedLinkComponent } from '../nested-link/nested-link.component';
@@ -99,9 +98,10 @@ describe('NestedItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CxNestedListModule, PopoverModule, SideNavigationModule],
+            imports: [CxNestedListModule, PopoverModule],
             declarations: [TestNestedContainerComponent],
-            providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
+            providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService],
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));
 
@@ -126,7 +126,7 @@ describe('NestedItemComponent', () => {
     });
 
     it('Item with popover should react to open change from popover', () => {
-        spyOn(nestedItemPopoverDirective, 'triggerOpen');
+        jest.spyOn(nestedItemPopoverDirective, 'triggerOpen');
         expect(itemService.popover).toBeDefined();
         itemService.popover!.handleOpenChange(true);
         expect(nestedItemPopoverDirective.triggerOpen).toHaveBeenCalled();
@@ -134,7 +134,7 @@ describe('NestedItemComponent', () => {
 
     it('Item with popover should propagate expanded change event', () => {
         nestedItemPopoverDirective.expanded = false;
-        spyOn(nestedItemPopoverDirective as any, 'propagateOpenChange');
+        jest.spyOn(nestedItemPopoverDirective as any, 'propagateOpenChange');
         nestedItemPopoverDirective.triggerOpen();
         expect((nestedItemPopoverDirective as any).propagateOpenChange).toHaveBeenCalledWith(true);
     });
@@ -149,7 +149,7 @@ describe('NestedItemComponent', () => {
 
     it('Item with list should propagate expanded change event', () => {
         nestedItemListDirective.expanded = false;
-        spyOn(nestedItemListDirective as any, 'propagateOpenChange');
+        jest.spyOn(nestedItemListDirective as any, 'propagateOpenChange');
         nestedItemListDirective.triggerOpen();
         expect((nestedItemListDirective as any).propagateOpenChange).toHaveBeenCalledWith(true);
     });
@@ -160,7 +160,7 @@ describe('NestedItemComponent', () => {
 
     it('Should react to events from icon child', () => {
         fixture.detectChanges();
-        spyOn(nestedItemListDirective, 'toggle');
+        jest.spyOn(nestedItemListDirective, 'toggle');
         expandIcon.onClick(new MouseEvent('click'));
         fixture.detectChanges();
         expect(expandIcon.expanded).toBeTruthy();
@@ -170,7 +170,7 @@ describe('NestedItemComponent', () => {
         fixture.detectChanges();
         expect(itemService.popover).toBeDefined();
         itemService.popover!.handleOpenChange(true);
-        spyOn(nestedItemPopoverDirective, 'toggle');
+        jest.spyOn(nestedItemPopoverDirective, 'toggle');
         expandIcon.onClick(new MouseEvent('click'));
         fixture.detectChanges();
         expect(nestedItemPopoverDirective.toggle).toHaveBeenCalledWith();
@@ -179,7 +179,7 @@ describe('NestedItemComponent', () => {
     it('Should handle keyboard event from link', () => {
         fixture.detectChanges();
         nestedItemListDirective.ngAfterContentInit();
-        spyOn(nestedItemListDirective.keyboardTriggered, 'emit');
+        jest.spyOn(nestedItemListDirective.keyboardTriggered, 'emit');
         const keyboardEvent = new KeyboardEvent('keyDown');
         nestedLink.onKeyDown(keyboardEvent);
         fixture.detectChanges();
@@ -187,7 +187,7 @@ describe('NestedItemComponent', () => {
     });
 
     it('Popover Should handle keyboard event from sub items', () => {
-        spyOn(<any>nestedItemPopoverDirective, '_selectedChange');
+        jest.spyOn(<any>nestedItemPopoverDirective, '_selectedChange');
         nestedItemPopoverDirective.ngAfterContentInit();
         fixture.detectChanges();
         popoverSubItemElement.linkItem.onClick();
@@ -198,7 +198,7 @@ describe('NestedItemComponent', () => {
     });
 
     it('Should handle keyboard event from sub items', () => {
-        spyOn(<any>nestedItemListDirective, '_selectedChange');
+        jest.spyOn(<any>nestedItemListDirective, '_selectedChange');
         nestedItemListDirective.ngAfterContentInit();
         fixture.detectChanges();
         subItemElement.linkItem.onClick();

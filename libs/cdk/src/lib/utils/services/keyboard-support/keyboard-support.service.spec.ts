@@ -29,7 +29,7 @@ describe('MenuKeyboardService', () => {
 
     it('should refresh listeners', () => {
         service.setKeyboardService(menuItems);
-        spyOn(<any>service, '_refreshEscapeLogic');
+        jest.spyOn(<any>service, '_refreshEscapeLogic');
 
         menuItems.changes.next();
 
@@ -50,8 +50,8 @@ describe('MenuKeyboardService', () => {
                 }
             },
             complete: () => {
-                expect(escapeBefore).toBeTrue();
-                expect(escapeAfter).toBeTrue();
+                expect(escapeBefore).toBe(true);
+                expect(escapeAfter).toBe(true);
                 done();
             }
         });

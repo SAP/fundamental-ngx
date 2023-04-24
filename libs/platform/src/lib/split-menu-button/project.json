@@ -1,41 +1,55 @@
 {
-    "name": "platform-split-menu-button",
-    "projectType": "library",
-    "sourceRoot": "libs/platform/src/lib/split-menu-button",
-    "prefix": "fdp",
-    "targets": {
-        "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/split-menu-button"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/split-menu-button/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/split-menu-button/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/split-menu-button/tsconfig.lib.prod.json"
-                }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/platform/src/lib/split-menu-button/test.ts",
-                "tsConfig": "libs/platform/src/lib/split-menu-button/tsconfig.spec.json",
-                "karmaConfig": "libs/platform/src/lib/split-menu-button/karma.conf.js"
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": [
-                    "libs/platform/src/lib/split-menu-button/**/*.ts",
-                    "libs/platform/src/lib/split-menu-button/**/*.html"
-                ]
-            }
+  "name": "platform-split-menu-button",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/platform/src/lib/split-menu-button",
+  "prefix": "fdp",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/platform/split-menu-button"
+      ],
+      "options": {
+        "tsConfig": "libs/platform/src/lib/split-menu-button/tsconfig.lib.json",
+        "project": "libs/platform/src/lib/split-menu-button/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/platform/src/lib/split-menu-button/tsconfig.lib.prod.json"
         }
+      }
     },
-    "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": []
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/platform/src/lib/split-menu-button/**/*.ts",
+          "libs/platform/src/lib/split-menu-button/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/platform/src/lib/split-menu-button/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": [
+    "type:lib",
+    "scope:fdp"
+  ],
+  "implicitDependencies": []
 }
