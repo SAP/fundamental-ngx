@@ -5,6 +5,8 @@
 
 $block: fdp-table;
 
+$fd-block: fd-table;
+
 $fd-table-border: 0.0625rem solid #e4e4e4;
 $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_BorderColor, #e4e4e4);
 
@@ -13,6 +15,81 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
 
 $fd-table-scrollbar-width: var(--fdScrollbar_Dimension);
 $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(--sapList_BorderWidth, 0.0625rem));
+
+// TODO: Remove after new fundamental-styles version release.
+@mixin fd-compact-or-condensed() {
+    @at-root {
+        [class*='-condensed'] &:not([class*='-cozy']),
+        [class*='-compact'] &:not([class*='-cozy']),
+        &[class*='-condensed'],
+        &[class*='-compact'] {
+            @content;
+        }
+    }
+}
+
+@mixin fd-rtl {
+    @at-root {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
+            @content;
+        }
+    }
+}
+
+@mixin fd-table-nested-cell-padding($levels: 20, $content-density-cozy: false, $include-expand: false) {
+    $level-padding: 0.5rem;
+    $second-level-padding: 1.5rem;
+    $third-level-padding: 0.75rem;
+    $fourth-level-padding: 1.25rem;
+    $expand-padding: if($include-expand, if($content-density-cozy, 2.75rem, 2rem), 0);
+
+    @for $i from 1 through $levels {
+        &[data-nesting-level='#{$i}'] {
+            @if $i == 1 {
+                padding-left: $expand-padding;
+
+                @include fd-rtl() {
+                    padding-left: 0.5rem;
+                    padding-right: $expand-padding;
+                }
+            } @else if $i == 2 {
+                padding-left: $second-level-padding + $expand-padding;
+
+                @include fd-rtl() {
+                    padding-left: 0.5rem;
+                    padding-right: $second-level-padding + $expand-padding;
+                }
+            } @else if $i == 3 {
+                padding-left: $second-level-padding + $third-level-padding + $expand-padding;
+
+                @include fd-rtl() {
+                    padding-left: 0.5rem;
+                    padding-right: $second-level-padding + $third-level-padding + $expand-padding;
+                }
+            } @else if $i == 4 {
+                padding-left: $second-level-padding + $fourth-level-padding + $expand-padding;
+
+                @include fd-rtl() {
+                    padding-left: 0.5rem;
+                    padding-right: $second-level-padding + $fourth-level-padding + $expand-padding;
+                }
+            } @else {
+                padding-left: $second-level-padding +
+                    $third-level-padding +
+                    (($i - 3) * $level-padding) +
+                    $expand-padding;
+
+                @include fd-rtl() {
+                    padding-left: 0.5rem;
+                    padding-right: $second-level-padding + $third-level-padding + (($i - 3) * $level-padding) +
+                        $expand-padding;
+                }
+            }
+        }
+    }
+}
+// End TODO
 
 .#{$block} {
     display: block;
@@ -399,4 +476,39 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
             }
         }
     }
+}
+
+.#{$block} {
+    // TODO: Remove after new fundamental-styles version release.
+    &.#{$fd-block}--tree,
+    &.#{$fd-block}--group {
+        .#{$fd-block}__body {
+            .#{$fd-block}__cell {
+                @include fd-table-nested-cell-padding(20, true, true);
+
+                &--expand {
+                    cursor: pointer;
+                    white-space: nowrap;
+
+                    @include fd-table-nested-cell-padding(20, true);
+                }
+            }
+        }
+    }
+
+    @include fd-compact-or-condensed() {
+        &.#{$fd-block}--tree,
+        &.#{$fd-block}--group {
+            .#{$fd-block}__body {
+                .#{$fd-block}__cell {
+                    @include fd-table-nested-cell-padding(20, false, true);
+
+                    &--expand {
+                        @include fd-table-nested-cell-padding(20, false);
+                    }
+                }
+            }
+        }
+    }
+    // End TODO
 }
