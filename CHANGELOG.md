@@ -1,3 +1,12 @@
+## [0.40.2-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.21...v0.40.2-rc.22) (2023-04-25)
+
+
+### Bug Fixes
+
+* **docs:** background color on the search input in side nav ([#9750](https://github.com/SAP/fundamental-ngx/issues/9750)) ([39efe5c](https://github.com/SAP/fundamental-ngx/commit/39efe5c6ff044960f42389238b77e50bddc44e0c))
+
+
+
 ## [0.40.2-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.20...v0.40.2-rc.21) (2023-04-25)
 
 
