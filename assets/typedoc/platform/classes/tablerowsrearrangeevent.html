@@ -28,7 +28,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/models/table-rows-rearrange-event.model.ts#L11">libs/platform/src/lib/table/models/table-rows-rearrange-event.model.ts:11</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/models/table-rows-rearrange-event.model.ts#L14">libs/platform/src/lib/table/models/table-rows-rearrange-event.model.ts:14</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -54,6 +54,11 @@
 					</li>
 					<li>
 						<h5>dropRow: <span class="tsd-signature-type">T</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Row where the dragged item has been dropped</p>
+							</div>
+						</div>
 					</li>
 					<li>
 						<h5>previousIndex: <span class="tsd-signature-type">number</span></h5>
@@ -73,15 +78,25 @@
 					</li>
 					<li>
 						<h5>insertAt: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"after"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"before"</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Whether dragged the row was inserted before or after the dropped row</p>
+							</div>
+						</div>
 					</li>
 					<li>
 						<h5>mode: <span class="tsd-signature-type">FdDndDropEventMode</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Whether the dropped element shifts other items or is grouped with them</p>
+							</div>
+						</div>
 					</li>
 					<li>
 						<h5>rows: <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></h5>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>All rows of the table</p>
+								<p>All rows of the table in the state they exist on the datasource</p>
 							</div>
 						</div>
 					</li>

@@ -1,23 +1,32 @@
 import { Component } from '@angular/core';
+import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import {
     TableDataSource,
     TableDataProvider,
     TableState,
-    TableRowSelectionChangeEvent
+    TableRowSelectionChangeEvent,
+    SortDirection
 } from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-custom-column-example',
-    templateUrl: './platform-table-custom-column-example.component.html'
+    templateUrl: './platform-table-custom-column-example.component.html',
+    providers: [
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        }
+    ]
 })
 export class PlatformTableCustomColumnExampleComponent {
     source: TableDataSource<ExampleItem>;
 
-    constructor() {
-        this.source = new TableDataSource(new TableDataProviderExample());
+    exampleItemType: ExampleItem;
+    constructor(datetimeAdapter: DatetimeAdapter<FdDate>) {
+        this.source = new TableDataSource(new TableDataProviderExample(datetimeAdapter));
     }
 
     onRowSelectionChange(event: TableRowSelectionChangeEvent<ExampleItem>): void {
@@ -33,7 +42,7 @@ export interface ExampleItem {
         currency: string;
     };
     status: string;
-    statusColor?: string;
+    statusColor?: ObjectStatus;
     date: FdDate;
     verified: boolean;
 }
@@ -43,8 +52,12 @@ export interface ExampleItem {
  *
  */
 export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
-    items: ExampleItem[] = [...ITEMS];
-    totalItems = ITEMS.length;
+    items: ExampleItem[] = [];
+    totalItems = 0;
+
+    constructor(public dateTimeAdapter: DatetimeAdapter<FdDate>) {
+        super();
+    }
 
     fetch(tableState?: TableState): Observable<ExampleItem[]> {
         this.items = [...ITEMS];
@@ -53,10 +66,34 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         if (tableState?.searchInput) {
             this.items = this.search(this.items, tableState);
         }
+        // apply sorting
+        if (tableState?.sortBy) {
+            this.items = this.sort(tableState);
+        }
 
         this.totalItems = this.items.length;
 
         return of(this.items);
+    }
+
+    private sort({ sortBy }: TableState): ExampleItem[] {
+        const items = this.items.slice();
+
+        sortBy = sortBy.filter(({ field }) => !!field);
+
+        if (sortBy.length === 0) {
+            return items;
+        }
+
+        return items.sort(
+            (a, b) =>
+                sortBy
+                    .map(({ field, direction }) => {
+                        const ascModifier = direction === SortDirection.ASC ? 1 : -1;
+                        return sort(a, b, field as string) * ascModifier;
+                    })
+                    .find((result, index, list) => result !== 0 || index === list.length - 1) || 0
+        );
     }
 
     search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
@@ -76,6 +113,14 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         });
     }
 }
+
+const sort = <T extends Record<string, any>>(a: T, b: T, key?: string): number => {
+    if (key) {
+        a = getNestedValue(key, a);
+        b = getNestedValue(key, b);
+    }
+    return a > b ? 1 : a === b ? 0 : -1;
+};
 
 function getNestedValue<T extends Record<string, any>>(key: string, object: T): any {
     return key.split('.').reduce((a, b) => (a ? a[b] : null), object);

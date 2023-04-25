@@ -39,7 +39,7 @@
 		<div class="tsd-signature tsd-kind-icon">align<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ColumnAlignValue</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L18">libs/platform/src/lib/table/components/table-column/table-column.ts:18</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L19">libs/platform/src/lib/table/components/table-column/table-column.ts:19</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -55,7 +55,7 @@
 		<div class="tsd-signature tsd-kind-icon">apply<wbr>Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L57">libs/platform/src/lib/table/components/table-column/table-column.ts:57</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L61">libs/platform/src/lib/table/components/table-column/table-column.ts:61</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -68,10 +68,10 @@
 		<a name="columnCellTemplate" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> column<wbr>Cell<wbr>Template</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">column<wbr>Cell<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<div class="tsd-signature tsd-kind-icon">column<wbr>Cell<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L45">libs/platform/src/lib/table/components/table-column/table-column.ts:45</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L46">libs/platform/src/lib/table/components/table-column/table-column.ts:46</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -87,7 +87,7 @@
 		<div class="tsd-signature tsd-kind-icon">data<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FilterableColumnDataType</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L27">libs/platform/src/lib/table/components/table-column/table-column.ts:27</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L28">libs/platform/src/lib/table/components/table-column/table-column.ts:28</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -97,13 +97,30 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="disableP13n" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> disable<wbr>P13n</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">disable<wbr>P13n<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L67">libs/platform/src/lib/table/components/table-column/table-column.ts:67</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>When TRUE, excludes this column from p13n functionality. No option to Sort, Filter, Group or
+				show/hide columns</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="editableColumnCellTemplate" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> editable<wbr>Column<wbr>Cell<wbr>Template</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">editable<wbr>Column<wbr>Cell<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<div class="tsd-signature tsd-kind-icon">editable<wbr>Column<wbr>Cell<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L48">libs/platform/src/lib/table/components/table-column/table-column.ts:48</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L49">libs/platform/src/lib/table/components/table-column/table-column.ts:49</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -119,7 +136,7 @@
 		<div class="tsd-signature tsd-kind-icon">end<wbr>Freezable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L39">libs/platform/src/lib/table/components/table-column/table-column.ts:39</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L40">libs/platform/src/lib/table/components/table-column/table-column.ts:40</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -135,7 +152,7 @@
 		<div class="tsd-signature tsd-kind-icon">filterable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L24">libs/platform/src/lib/table/components/table-column/table-column.ts:24</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L25">libs/platform/src/lib/table/components/table-column/table-column.ts:25</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -151,7 +168,7 @@
 		<div class="tsd-signature tsd-kind-icon">freezable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L36">libs/platform/src/lib/table/components/table-column/table-column.ts:36</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L37">libs/platform/src/lib/table/components/table-column/table-column.ts:37</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -167,7 +184,7 @@
 		<div class="tsd-signature tsd-kind-icon">groupable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L33">libs/platform/src/lib/table/components/table-column/table-column.ts:33</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L34">libs/platform/src/lib/table/components/table-column/table-column.ts:34</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -177,18 +194,50 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="headerCellPopoverTemplate" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> header<wbr>Cell<wbr>Popover<wbr>Template</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">header<wbr>Cell<wbr>Popover<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L55">libs/platform/src/lib/table/components/table-column/table-column.ts:55</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Column header popover template.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="headerCellTemplate" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> header<wbr>Cell<wbr>Template</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">header<wbr>Cell<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<div class="tsd-signature tsd-kind-icon">header<wbr>Cell<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L51">libs/platform/src/lib/table/components/table-column/table-column.ts:51</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L52">libs/platform/src/lib/table/components/table-column/table-column.ts:52</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Column header template.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="headerOverflows" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> header<wbr>Overflows</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">header<wbr>Overflows<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L70">libs/platform/src/lib/table/components/table-column/table-column.ts:70</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Stores information for the header cell if the ellipsis are visible after the column resize</p>
 			</div>
 		</div>
 	</section>
@@ -199,7 +248,7 @@
 		<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L12">libs/platform/src/lib/table/components/table-column/table-column.ts:12</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L13">libs/platform/src/lib/table/components/table-column/table-column.ts:13</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -215,7 +264,7 @@
 		<div class="tsd-signature tsd-kind-icon">label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L15">libs/platform/src/lib/table/components/table-column/table-column.ts:15</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L16">libs/platform/src/lib/table/components/table-column/table-column.ts:16</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -231,7 +280,7 @@
 		<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L9">libs/platform/src/lib/table/components/table-column/table-column.ts:9</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L10">libs/platform/src/lib/table/components/table-column/table-column.ts:10</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -247,7 +296,7 @@
 		<div class="tsd-signature tsd-kind-icon">no<wbr>Wrap<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L54">libs/platform/src/lib/table/components/table-column/table-column.ts:54</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L58">libs/platform/src/lib/table/components/table-column/table-column.ts:58</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -263,7 +312,7 @@
 		<div class="tsd-signature tsd-kind-icon">responsive<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FdpColumnResponsiveState</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L60">libs/platform/src/lib/table/components/table-column/table-column.ts:60</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L73">libs/platform/src/lib/table/components/table-column/table-column.ts:73</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -279,7 +328,7 @@
 		<div class="tsd-signature tsd-kind-icon">sortable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L21">libs/platform/src/lib/table/components/table-column/table-column.ts:21</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L22">libs/platform/src/lib/table/components/table-column/table-column.ts:22</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -295,7 +344,7 @@
 		<div class="tsd-signature tsd-kind-icon">visible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L42">libs/platform/src/lib/table/components/table-column/table-column.ts:42</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L43">libs/platform/src/lib/table/components/table-column/table-column.ts:43</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -311,7 +360,7 @@
 		<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2bcd59862/libs/platform/src/lib/table/components/table-column/table-column.ts#L30">libs/platform/src/lib/table/components/table-column/table-column.ts:30</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7efb6ad/libs/platform/src/lib/table/components/table-column/table-column.ts#L31">libs/platform/src/lib/table/components/table-column/table-column.ts:31</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
