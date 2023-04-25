@@ -1,3 +1,12 @@
+## [0.40.2-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.20...v0.40.2-rc.21) (2023-04-25)
+
+
+### Bug Fixes
+
+* **platform:** fix table indentation ([#9748](https://github.com/SAP/fundamental-ngx/issues/9748)) ([d7f42b9](https://github.com/SAP/fundamental-ngx/commit/d7f42b9c4f9d2d9ab56c8e4508b042d75bff576b))
+
+
+
 ## [0.40.2-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.19...v0.40.2-rc.20) (2023-04-24)
 
 
