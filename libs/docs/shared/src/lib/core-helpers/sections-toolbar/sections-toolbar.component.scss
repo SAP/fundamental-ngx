@@ -84,11 +84,12 @@
 
 .fd-docs-search {
     flex: 0 0 auto;
-    padding: 15px 15px;
-    margin: 0 15px;
+    padding: 15px 15px 15px 30px;
+    margin: 0 15px 0 0;
 
     border-right: var(--sapList_BorderWidth) solid;
     border-right-color: var(--sapGroup_ContentBorderColor);
+    background-color: var(--sapList_Background);
 }
 
 .nav-item-container {
