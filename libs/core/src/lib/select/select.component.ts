@@ -43,7 +43,7 @@ import { FdOptionSelectionChange, OptionComponent } from './option/option.compon
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { SelectMobileModule } from './select-mobile/select-mobile.module';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { ESCAPE } from '@angular/cdk/keycodes';
+import { ENTER, ESCAPE, SPACE } from '@angular/cdk/keycodes';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 let selectUniqueId = 0;
@@ -676,7 +676,7 @@ export class SelectComponent<T = any>
                 ? this._keyManagerService._handleOpenKeydown(event)
                 : this._keyManagerService._handleClosedKeydown(event);
         }
-        if (KeyUtil.isKeyCode(event, ESCAPE)) {
+        if (KeyUtil.isKeyCode(event, [ESCAPE, ENTER, SPACE])) {
             this._controlElementRef.nativeElement.focus();
         }
     }
@@ -720,6 +720,8 @@ export class SelectComponent<T = any>
             if (event.isUserInput && this._isOpen) {
                 this.close();
             }
+
+            this.focus();
         });
 
         // Listen to changes in the internal state of the _options and react accordingly.
