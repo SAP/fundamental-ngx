@@ -224,7 +224,8 @@ export class TableP13DialogComponent implements OnDestroy {
             dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
                 .subscribe(({ visibleColumns: result }: ColumnsDialogResultData) => {
-                    this._applyColumns(result);
+                    const allColumns = this._mergeWithHiddenColumns(result);
+                    this._applyColumns(allColumns);
                 })
         );
     }
@@ -277,9 +278,9 @@ export class TableP13DialogComponent implements OnDestroy {
     }
 
     /** @hidden */
-    private _getTableColumns(): TableColumn[] {
+    private _getTableColumns(revertSelection = false): TableColumn[] {
         const cols = this._table?.getTableColumns() || [];
-        return cols.filter(({ disableP13n }) => !disableP13n);
+        return cols.filter(({ disableP13n }) => disableP13n === revertSelection);
     }
 
     /** @hidden */
@@ -306,5 +307,20 @@ export class TableP13DialogComponent implements OnDestroy {
     private _unsubscribeFromTable(): void {
         this._tableSubscriptions.unsubscribe();
         this._tableSubscriptions = new Subscription();
+    }
+
+    /**
+     * Merges selection with all the columns that are not marked as disableP13n and then sorts everything
+     * based on original order.
+     *
+     *  @hidden
+     */
+    private _mergeWithHiddenColumns(columns: string[]): string[] {
+        const all = this.table.getTableColumns() || [];
+        return this._getTableColumns(true)
+            .map((c) => c.name)
+            .filter((c) => !columns.includes(c))
+            .concat(columns)
+            .sort((a, b) => all.findIndex((c) => c.name === a) - all.findIndex((c) => c.name === b));
     }
 }
