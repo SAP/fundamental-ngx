@@ -144,7 +144,7 @@
                     },
                     {
                         "glob": "**/*",
-                        "input": "libs/docs/shared/src/lib/i18n/examples",
+                        "input": "libs/docs/i18n/examples",
                         "output": "./docs/platform/i18n/examples"
                     },
                     {

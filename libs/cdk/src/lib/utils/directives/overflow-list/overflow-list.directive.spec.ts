@@ -4,6 +4,8 @@ import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angul
 import { OverflowListDirective } from './overflow-list.directive';
 import { OverflowListItemDirective } from './overflow-list-item.directive';
 import { ViewportRuler } from '@angular/cdk/overlay';
+import { fromEvent } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 
 const LIST_ITEM_WIDTH = 100;
 const LIST_WIDTH = 500;
@@ -66,7 +68,14 @@ describe('OverflowItemsDirective', () => {
         TestBed.configureTestingModule({
             declarations: [WrapperComponent, TestComponent],
             imports: [OverflowListDirective, OverflowListItemDirective],
-            providers: [ViewportRuler]
+            providers: [
+                {
+                    provide: ViewportRuler,
+                    useValue: {
+                        change: () => fromEvent(window, 'resize').pipe(startWith(new Event('resize')))
+                    }
+                }
+            ]
         }).compileComponents();
     }));
 

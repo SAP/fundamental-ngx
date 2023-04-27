@@ -1,0 +1,8 @@
+{
+    "name": "docs-i18n",
+    "sourceRoot": "libs/docs/i18n",
+    "projectType": "library",
+    "prefix": "fdp-doc",
+    "targets": {},
+    "tags": ["type:lib", "scope:docs"]
+}
