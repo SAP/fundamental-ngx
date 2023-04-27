@@ -85,11 +85,15 @@ describe('OverflowItemsDirective', () => {
         fixture.detectChanges();
     });
 
+    afterEach(() => jest.clearAllMocks());
+
     it('should create', () => {
         expect(component).toBeTruthy();
     });
 
     it('should calculated extra items', () => {
+        jest.spyOn(OverflowListDirective.prototype, 'getAmountOfExtraItems').mockReturnValueOnce(1);
+        window.dispatchEvent(new Event('resize'));
         expect(component.currentExtraItems).not.toBe(0);
     });
 
@@ -97,6 +101,7 @@ describe('OverflowItemsDirective', () => {
         const initialStateOfExtraItems = component.currentExtraItems;
 
         component.items.push(1231);
+        jest.spyOn(OverflowListDirective.prototype, 'getAmountOfExtraItems').mockReturnValueOnce(1);
         window.dispatchEvent(new Event('resize'));
         fixture.detectChanges();
         tick(60);
