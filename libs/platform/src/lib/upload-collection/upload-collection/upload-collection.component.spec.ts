@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 
 import { DialogService } from '@fundamental-ngx/core/dialog';
@@ -16,6 +14,7 @@ import { PlatformUploadCollectionModule } from '../upload-collection.module';
 import { UploadCollectionDataSource } from '../domain/upload-collection-data-source';
 import { FilesValidatorService } from '../services/files-validator.service';
 import { UploadCollectionDataProviderTest } from './upload-collection-data-provider-test';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 interface MockFile extends File {
     size: number;
@@ -28,8 +27,9 @@ describe('UploadCollectionComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformUploadCollectionModule, RouterModule, RouterTestingModule],
-            providers: [RtlService, DialogService, FilesValidatorService]
+            imports: [PlatformUploadCollectionModule],
+            providers: [RtlService, DialogService, FilesValidatorService],
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));
 
@@ -65,7 +65,7 @@ describe('UploadCollectionComponent', () => {
     it('toolbar: selectHandler with no maxFileSize', () => {
         jest.spyOn(<any>component, '_uploadNewFiles');
         const file1: MockFile = new File([''], 'file1');
-        jest.replaceProperty(file1, 'size', 1024);
+        jest.spyOn(file1, 'size', 'get').mockReturnValue(1024);
         const event: File[] = [file1];
         component._selectHandler(event);
         expect((<any>component)._uploadNewFiles).toHaveBeenCalledWith(event);
@@ -75,9 +75,9 @@ describe('UploadCollectionComponent', () => {
         jest.spyOn(<any>component, '_uploadNewFiles');
         jest.spyOn(component.fileSizeExceed, 'emit');
         const file1: MockFile = new File([''], 'file1');
-        jest.replaceProperty(file1, 'size', 1024);
+        jest.spyOn(file1, 'size', 'get').mockReturnValue(1024);
         const file2: MockFile = new File([''], 'file2');
-        jest.replaceProperty(file2, 'size', 1048580);
+        jest.spyOn(file2, 'size', 'get').mockReturnValue(1048580);
         const event: File[] = [file1, file2];
         component.maxFileSize = '1MB';
         component._selectHandler(event);
@@ -100,7 +100,9 @@ describe('UploadCollectionComponent', () => {
 
         const items = [...component.dataSource.dataProvider.items, newFolderData];
 
-        jest.spyOn((<any>component)._dialogService, 'open').mockReturnValue({ afterClosed: of(newTemporaryFiles.name) });
+        jest.spyOn((<any>component)._dialogService, 'open').mockReturnValue({
+            afterClosed: of(newTemporaryFiles.name)
+        });
         jest.spyOn(<any>component, '_generateTemporaryNewFolder').mockReturnValue(newTemporaryFiles);
 
         jest.spyOn(component.dataSource, 'newFolder').mockReturnValue(of(items));
@@ -145,8 +147,8 @@ describe('UploadCollectionComponent', () => {
         component._currentUpdateFileVersion = item as UploadCollectionFile;
 
         const file: MockFile = new File([''], 'file1');
-        jest.replaceProperty(file, 'size', 1024);
-        jest.replaceProperty(file, 'type', 'image/png');
+        jest.spyOn(file, 'size', 'get').mockReturnValue(1024);
+        jest.spyOn(file, 'type', 'get').mockReturnValue('image/png');
         const newFile = (<any>component)._generateTemporaryNewFiles([file]);
 
         jest.spyOn(component.dataSource, 'updateVersion').mockReturnValue(of(newFile));
@@ -161,9 +163,9 @@ describe('UploadCollectionComponent', () => {
 
     it('list: should upload files', () => {
         const file1: MockFile = new File([''], 'file1');
-        jest.replaceProperty(file1, 'size', 1024);
+        jest.spyOn(file1, 'size', 'get').mockReturnValue(1024);
         const file2: MockFile = new File([''], 'file2');
-        jest.replaceProperty(file2, 'size', 1048580);
+        jest.spyOn(file2, 'size', 'get').mockReturnValue(1048580);
         const event: File[] = [file1, file2];
 
         const newTemporaryFiles = (<any>component)._generateTemporaryNewFiles(event);
