@@ -4,7 +4,6 @@ import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 
 import { CalendarComponent } from './calendar.component';
 import { CalendarModule } from './calendar.module';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 
 describe('CalendarComponent', () => {
     let component: CalendarComponent<FdDate>;
@@ -12,7 +11,7 @@ describe('CalendarComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FdDatetimeModule, CalendarModule, ButtonModule]
+            imports: [FdDatetimeModule, CalendarModule]
         }).compileComponents();
     }));
 
@@ -21,6 +20,8 @@ describe('CalendarComponent', () => {
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
+
+    afterEach(() => jest.restoreAllMocks());
 
     it('should create', () => {
         expect(component).toBeTruthy();
@@ -152,14 +153,14 @@ describe('CalendarComponent', () => {
     });
 
     it('Should call next year list function, when on year view an next arrow click', () => {
-        jest.spyOn(component, 'displayNextYearList');
+        jest.spyOn(component, 'displayNextYearList').mockImplementation(() => {});
         component.activeView = 'year';
         component.handleNextArrowClick();
         expect(component.displayNextYearList).toHaveBeenCalled();
     });
 
     it('Should call previous year list function, when on year view an next arrow click', () => {
-        jest.spyOn(component, 'displayPreviousYearList');
+        jest.spyOn(component, 'displayPreviousYearList').mockImplementation(() => {});
         component.activeView = 'year';
         component.handlePreviousArrowClick();
         expect(component.displayPreviousYearList).toHaveBeenCalled();
