@@ -63,7 +63,7 @@ jobs:
               name: Commit lint
 
             - name: Just test
-              run: npx nx affected --target=test --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=nx-plugin --parallel=3
+              run: npx nx run-many --target=test --all --parallel=3
             #            - name: Run Build and Test
             #              uses: ./.github/actions/parallel-commands
             #              with:
