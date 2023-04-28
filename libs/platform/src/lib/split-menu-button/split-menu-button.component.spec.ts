@@ -1,12 +1,10 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { By } from '@angular/platform-browser';
-import { ComponentFixture, TestBed, inject, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
-import { ElementRef, ViewChild, Component } from '@angular/core';
-import { ENTER, DOWN_ARROW } from '@angular/cdk/keycodes';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 
 import { createKeyboardEvent } from '@fundamental-ngx/core/tests';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { IconModule } from '@fundamental-ngx/core/icon';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { SplitMenuButtonComponent } from './split-menu-button.component';
@@ -68,7 +66,7 @@ describe('SplitMenuButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ButtonModule, PlatformMenuModule, IconModule, PlatformSplitMenuButtonModule],
+            imports: [PlatformMenuModule, PlatformSplitMenuButtonModule],
             declarations: [TestWrapperComponent],
             providers: [RtlService]
         }).compileComponents();
@@ -141,28 +139,25 @@ describe('SplitMenuButtonComponent', () => {
         expect(host.actionValue).toBe('Second Item');
     }));
 
-    it('should not open menu when split-menu-button is disabled', fakeAsync(() => {
+    it('should not open menu when split-menu-button is disabled', () => {
         host.disabled = true;
         fixture.detectChanges();
 
-        const splitButtons = fixture.debugElement.queryAll(By.css('.fd-button'));
-        expect(splitButtons[0].nativeElement.classList.contains('is-disabled')).toBe(true);
-        expect(splitButtons[1].nativeElement.classList.contains('is-disabled')).toBe(true);
+        const splitButtons = (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>('.fd-button');
+        expect(splitButtons[0].classList.contains('is-disabled')).toBe(true);
+        expect(splitButtons[1].classList.contains('is-disabled')).toBe(true);
 
-        // click on primary button
-        mouseClickOnElement(splitButtons[0].nativeElement);
-        tick(1);
+        splitButtons[0].click();
         fixture.detectChanges();
 
         const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
         expect(items.length).toBeFalsy();
 
         // click on secondary button
-        mouseClickOnElement(splitButtons[1].nativeElement);
-        tick(1);
+        splitButtons[1].click();
         fixture.detectChanges();
 
         const items1 = overlayContainerEl.querySelectorAll('.fd-menu__item');
         expect(items1.length).toBeFalsy();
-    }));
+    });
 });
