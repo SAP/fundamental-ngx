@@ -57,6 +57,8 @@
                                 | async
                                 | selectionCellStyles : _rtl : _semanticHighlightingColumnWidth
                         "
+                        (keydown.enter)="_toggleAllSelectableRows(!checkedState)"
+                        (keydown.space)="_toggleAllSelectableRows(!checkedState)"
                     >
                         <fd-checkbox
                             *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
@@ -260,13 +262,13 @@
                                             | async
                                             | selectionCellStyles : _rtl : _semanticHighlightingColumnWidth
                                     "
+                                    (click)="_toggleMultiSelectRow(row, $event)"
+                                    (keydown.enter)="_toggleMultiSelectRow(row, $event)"
+                                    (keydown.space)="_toggleMultiSelectRow(row, $event)"
                                 >
                                     <fd-checkbox
                                         labelClass="fd-table__checkbox-label"
                                         [ngModel]="row.checked"
-                                        (click)="_toggleMultiSelectRow(row, $event)"
-                                        (keydown.enter)="_toggleMultiSelectRow(row, $event)"
-                                        (keydown.space)="_toggleMultiSelectRow(row, $event)"
                                     ></fd-checkbox>
                                 </td>
                             </ng-container>
