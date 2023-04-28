@@ -907,7 +907,8 @@ describe('TableComponent internal', () => {
 
             const originFetch = hostComponent.source.fetch;
             jest.spyOn(hostComponent.source, 'fetch').mockImplementation((state: TableState) =>
-                originFetch.call(hostComponent.source, state));
+                originFetch.call(hostComponent.source, state)
+            );
 
             fixture.detectChanges();
 
@@ -1123,7 +1124,8 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 );
 
                 expect(emitSpy).toHaveBeenCalledTimes(2);
-                expect(emitSpy.calls.argsFor(1)).toEqual([event2]);
+                expect(emitSpy).toHaveBeenLastCalledWith([event2]);
+                // expect(emitSpy.calls.argsFor(1)).toEqual([event2]);
             });
 
             it('should react to toggling/collapsing with changing rows count', () => {

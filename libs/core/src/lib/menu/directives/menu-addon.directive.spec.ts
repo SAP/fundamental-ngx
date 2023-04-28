@@ -14,17 +14,17 @@ describe('MenuAddonDirective', () => {
     it('should set proper position', () => {
         directive.setAddonPosition = 'before';
 
-        expect(directive.fdAddonAfterClass).toBe(false);
-        expect(directive.fdAddonBeforeClass).toBe(true);
+        expect(directive.fdAddonAfterClass).toBeFalse();
+        expect(directive.fdAddonBeforeClass).toBeTrue();
 
         directive.setAddonPosition = 'after';
 
-        expect(directive.fdAddonAfterClass).toBe(true);
-        expect(directive.fdAddonBeforeClass).toBe(false);
+        expect(directive.fdAddonAfterClass).toBeTrue();
+        expect(directive.fdAddonBeforeClass).toBeFalse();
     });
 
     it('should have proper initial position', () => {
-        expect(directive.fdAddonAfterClass).toBe(true);
-        expect(directive.fdAddonBeforeClass).toBe(false);
+        expect(directive.fdAddonAfterClass).toBeTrue();
+        expect(directive.fdAddonBeforeClass).toBeFalse();
     });
 });

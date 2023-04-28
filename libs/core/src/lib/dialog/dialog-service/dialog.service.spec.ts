@@ -47,11 +47,11 @@ describe('DialogService', () => {
 
     it('should create', () => {
         expect(service).toBeDefined();
-        expect(service.hasOpenDialogs()).toBe(false);
+        expect(service.hasOpenDialogs()).toBeFalse();
     });
 
     it('should open dialog from template', fakeAsync(async () => {
-        const destroyDialogSpy = jest.spyOn<any, any>(service, '_destroyDialog');
+        const destroyDialogSpy = spyOn<any>(service, '_destroyDialog').and.callThrough();
         const templateRef = component.templateRef;
         const dialogRef = service.open(templateRef);
 
@@ -59,7 +59,7 @@ describe('DialogService', () => {
 
         await fixture.whenRenderingDone();
 
-        expect(service.hasOpenDialogs()).toBe(true);
+        expect(service.hasOpenDialogs()).toBeTrue();
 
         dialogRef.dismiss();
 
@@ -68,18 +68,18 @@ describe('DialogService', () => {
         tick(200);
 
         expect(destroyDialogSpy).toHaveBeenCalled();
-        expect(service.hasOpenDialogs()).toBe(false);
+        expect(service.hasOpenDialogs()).toBeFalse();
     }));
 
     it('should open dialog from component', fakeAsync(async () => {
-        const destroyDialogSpy = jest.spyOn<any, any>(service, '_destroyDialog');
+        const destroyDialogSpy = spyOn<any>(service, '_destroyDialog').and.callThrough();
         const dialogRef = service.open(TemplateTestComponent);
 
         fixture.detectChanges();
 
         await fixture.whenRenderingDone();
 
-        expect(service.hasOpenDialogs()).toBe(true);
+        expect(service.hasOpenDialogs()).toBeTrue();
 
         dialogRef.dismiss();
 
@@ -88,7 +88,7 @@ describe('DialogService', () => {
         tick(200);
 
         expect(destroyDialogSpy).toHaveBeenCalled();
-        expect(service.hasOpenDialogs()).toBe(false);
+        expect(service.hasOpenDialogs()).toBeFalse();
     }));
 
     it('should dismiss all modals', () => {
@@ -96,10 +96,10 @@ describe('DialogService', () => {
         service.open(TemplateTestComponent);
         service.open(TemplateTestComponent);
 
-        expect(service.hasOpenDialogs()).toBe(true);
+        expect(service.hasOpenDialogs()).toBeTrue();
 
         service.dismissAll();
 
-        expect(service.hasOpenDialogs()).toBe(false);
+        expect(service.hasOpenDialogs()).toBeFalse();
     });
 });

@@ -69,7 +69,7 @@ describe('SearchFieldMobileComponent', () => {
         anyComponent._component.mobile = true;
         component.ngOnInit();
         anyComponent._component.isOpenChange.emit(true);
-        jest.spyOn(anyComponent._component, 'dialogApprove');
+        spyOn(anyComponent._component, 'dialogApprove');
         fixture.detectChanges();
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         fixture.detectChanges();
@@ -82,7 +82,7 @@ describe('SearchFieldMobileComponent', () => {
         component.ngOnInit();
         anyComponent._component.inputText = 'test';
         anyComponent._component.isOpenChange.emit(true);
-        jest.spyOn(anyComponent._component, 'dialogDismiss');
+        spyOn(anyComponent._component, 'dialogDismiss');
         fixture.detectChanges();
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         fixture.detectChanges();

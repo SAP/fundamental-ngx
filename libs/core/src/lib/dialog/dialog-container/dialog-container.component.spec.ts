@@ -10,7 +10,6 @@ import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { PortalModule } from '@angular/cdk/portal';
-import { NgIf } from "@angular/common";
 
 const TEXT_CONTENT = 'Hello there';
 
@@ -27,7 +26,7 @@ describe('DialogContainerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [NoopAnimationsModule, PortalModule, NgIf],
+            imports: [NoopAnimationsModule, PortalModule],
             declarations: [DialogContainerComponent, ContentTestComponent],
             providers: [
                 { provide: DialogConfig, useValue: dialogConfig },
@@ -59,7 +58,7 @@ describe('DialogContainerComponent', () => {
 
     it('should create component from object', async () => {
         component.childContent = { title: TEXT_CONTENT } as DialogDefaultContent;
-        const embedContentSpy = jest.spyOn(<any>component, '_createFromDefaultDialog');
+        const embedContentSpy = spyOn(<any>component, '_createFromDefaultDialog');
 
         await whenStable(fixture);
 

@@ -67,7 +67,7 @@ describe('MenuComponent', () => {
 
     it('should open/close popover', fakeAsync(() => {
         const menuElement = (): Element => document.querySelector('[fd-menu-interactive]') as Element;
-        const openEmitterSpy = jest.spyOn(menu.isOpenChange, 'emit');
+        const openEmitterSpy = spyOn(menu.isOpenChange, 'emit');
 
         menu.open();
         fixture.detectChanges();
@@ -87,7 +87,7 @@ describe('MenuComponent', () => {
     }));
 
     it('should select mobile view', fakeAsync(() => {
-        const mobileViewSpy = jest.spyOn<any, any>(menu, '_setupMobileMode');
+        const mobileViewSpy = spyOn<any>(menu, '_setupMobileMode');
         menu.mobile = true;
         (<any>menu)._setupView();
 
@@ -97,7 +97,7 @@ describe('MenuComponent', () => {
     }));
 
     it('should select desktop view', () => {
-        const keyboardSupportSpy = jest.spyOn<any, any>(menu, '_setupPopoverService');
+        const keyboardSupportSpy = spyOn<any>(menu, '_setupPopoverService');
         (<any>menu)._setupView();
 
         menu.open();
@@ -119,20 +119,20 @@ describe('MenuComponent', () => {
         menu.mobile = true;
         (<any>menu)._listenOnTriggerRefClicks();
 
-        expect(menu.isOpen).toBe(false);
+        expect(menu.isOpen).toBeFalse();
 
         fixture.detectChanges();
         menu.trigger.nativeElement.dispatchEvent(new MouseEvent('click'));
 
         fixture.detectChanges();
 
-        expect(menu.isOpen).toBe(true);
+        expect(menu.isOpen).toBeTrue();
     });
 
     it('should destroy all references', () => {
-        const destroyEventsSpy = jest.spyOn<any, any>(menu, '_destroyEventListeners');
-        const destroyMobileSpy = jest.spyOn<any, any>(menu, '_destroyMobileComponent');
-        const menuServiceDestroySpy = jest.spyOn<any, any>(menu['_menuService'], 'onDestroy');
+        const destroyEventsSpy = spyOn<any>(menu, '_destroyEventListeners');
+        const destroyMobileSpy = spyOn<any>(menu, '_destroyMobileComponent');
+        const menuServiceDestroySpy = spyOn<any>(menu['_menuService'], 'onDestroy');
 
         menu.ngOnDestroy();
 

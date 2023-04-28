@@ -37,9 +37,9 @@ describe('MenuTriggerDirective', () => {
     });
 
     it('should set menu trigger', () => {
-        const setTriggerSpy = jest.spyOn(Object.getOwnPropertyDescriptor(menu, 'trigger')!, 'set');
-        const listenersSpy = jest.spyOn<any, any>(directive, '_subscribeToMenu');
-        const attributesSpy = jest.spyOn<any, any>(directive, '_setAriaAttributes');
+        const setTriggerSpy = spyOnProperty(menu, 'trigger', 'set');
+        const listenersSpy = spyOn<any>(directive, '_subscribeToMenu');
+        const attributesSpy = spyOn<any>(directive, '_setAriaAttributes');
 
         directive.menu = undefined;
 
@@ -59,7 +59,7 @@ describe('MenuTriggerDirective', () => {
 
         tick();
 
-        expect(directive.ariaHasPopup).toBe(true);
+        expect(directive.ariaHasPopup).toBeTrue();
         expect(directive.ariaExpanded).toBeFalsy();
         expect(directive.ariaControls).toBeFalsy();
 
@@ -68,7 +68,7 @@ describe('MenuTriggerDirective', () => {
 
         tick();
 
-        expect(directive.ariaExpanded).toBe(true);
+        expect(directive.ariaExpanded).toBeTrue();
         expect(directive.ariaControls).toEqual(menu.id);
     }));
 });

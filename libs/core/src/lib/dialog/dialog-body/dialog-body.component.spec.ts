@@ -28,13 +28,13 @@ describe('DialogBodyComponent', () => {
     });
 
     it('should have proper css classes', () => {
-        expect(fixture.nativeElement.classList.contains('fd-dialog__body')).toBe(true);
-        expect(fixture.nativeElement.classList.contains('fd-dialog__body--no-vertical-padding')).toBe(false);
+        expect(fixture.nativeElement).toHaveClass('fd-dialog__body');
+        expect(fixture.nativeElement).not.toHaveClass('fd-dialog__body--no-vertical-padding');
 
         component.dialogConfig.verticalPadding = false;
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.classList.contains('fd-dialog__body--no-vertical-padding')).toBe(true);
+        expect(fixture.nativeElement).toHaveClass('fd-dialog__body--no-vertical-padding');
     });
 
     it('should display in loading state', () => {

@@ -49,9 +49,9 @@ describe('MultiInputComponent', () => {
 
     it('should handle search term change', async () => {
         await fixture.whenStable();
-        jest.spyOn(component.searchTermChange, 'emit');
-        jest.spyOn(component, 'filterFn');
-        jest.spyOn(component, 'openChangeHandle');
+        spyOn(component.searchTermChange, 'emit');
+        spyOn(component, 'filterFn');
+        spyOn(component, 'openChangeHandle').and.callThrough();
 
         const text = 'test';
         const inputElement = fixture.nativeElement.querySelector('.fd-input');
@@ -72,7 +72,7 @@ describe('MultiInputComponent', () => {
         await fixture.whenStable();
         updateComponentInput('dropdownValues', ['test1', 'test2', 'foobar']);
 
-        jest.spyOn(component, 'filterFn');
+        spyOn(component, 'filterFn').and.callThrough();
 
         const text = 'foo';
         const inputElement = fixture.nativeElement.querySelector('.fd-input');
@@ -136,8 +136,8 @@ describe('MultiInputComponent', () => {
     it('should bring back values, if canceled on mobile mode and dont emit changes', async () => {
         component.mobile = true;
 
-        jest.spyOn(component, 'onChange');
-        jest.spyOn(component.selectedChange, 'emit');
+        spyOn(component, 'onChange');
+        spyOn(component.selectedChange, 'emit');
 
         await fixture.whenStable();
 
@@ -156,8 +156,8 @@ describe('MultiInputComponent', () => {
     it('should emit changes values on approve', async () => {
         component.mobile = true;
 
-        jest.spyOn(component, 'onChange');
-        jest.spyOn(component.selectedChange, 'emit');
+        spyOn(component, 'onChange');
+        spyOn(component.selectedChange, 'emit');
 
         await fixture.whenStable();
 
@@ -175,7 +175,7 @@ describe('MultiInputComponent', () => {
     });
 
     it('should focus the input and clear the search term after selection', async () => {
-        const inputFocusSpy = jest.spyOn(component.searchInputElement.nativeElement, 'focus');
+        const inputFocusSpy = spyOn(component.searchInputElement.nativeElement, 'focus');
 
         await fixture.whenStable();
 
@@ -192,8 +192,8 @@ describe('MultiInputComponent', () => {
         const event = new MouseEvent('click');
         updateComponentInput('searchTerm', 'term');
         updateComponentInput('dropdownValues', ['term1', 'term2', 'value']);
-        jest.spyOn(event, 'preventDefault');
-        jest.spyOn(event, 'stopPropagation');
+        spyOn(event, 'preventDefault');
+        spyOn(event, 'stopPropagation');
         component._showAllClicked(event);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(event.stopPropagation).toHaveBeenCalled();
@@ -261,8 +261,8 @@ describe('MultiInputComponent', () => {
     });
 
     it('should not open dropdown when openDropdownOnAddOnClicked is false', () => {
-        jest.spyOn(component.addOnButtonClicked, 'emit');
-        jest.spyOn(component, 'openChangeHandle');
+        spyOn(component.addOnButtonClicked, 'emit');
+        spyOn(component, 'openChangeHandle');
         component.openDropdownOnAddOnClicked = false;
         component._addOnButtonClicked(new MouseEvent('click'));
         expect(component.addOnButtonClicked.emit).toHaveBeenCalled();
