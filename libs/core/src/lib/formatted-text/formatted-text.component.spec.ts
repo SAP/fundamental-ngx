@@ -1,20 +1,37 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormattedTextComponent } from './formatted-text.component';
+import { HtmlSanitizer } from './utils/html-sanitizer';
+import { Subject } from 'rxjs';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 describe('FormattedTextComponent', () => {
     let component: FormattedTextComponent;
     let fixture: ComponentFixture<FormattedTextComponent>;
+    const destroy$ = new Subject<void>();
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [FormattedTextComponent]
+            declarations: [FormattedTextComponent],
+            providers: [
+                {
+                    provide: DestroyedService,
+                    useValue: destroy$
+                }
+            ]
         }).compileComponents();
+        jest.spyOn<any, any>(HtmlSanitizer.prototype, '_supportsSandbox').mockReturnValue(true);
     });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(FormattedTextComponent);
+        fixture.autoDetectChanges(true);
         component = fixture.componentInstance;
+    });
+
+    afterEach(() => {
+        jest.restoreAllMocks();
+        destroy$.next();
     });
 
     it('should create', () => {
@@ -26,7 +43,7 @@ describe('FormattedTextComponent', () => {
         component.height = '100px';
         fixture.detectChanges();
         expect(fixture.nativeElement.classList.contains('fd-formatted-text-with-height')).toBeTruthy();
-        expect(fixture.nativeElement.offsetHeight).toEqual(100);
+        expect(fixture.nativeElement.style.height).toEqual('100px');
     });
 
     it('should add width class and style width', () => {
@@ -34,7 +51,7 @@ describe('FormattedTextComponent', () => {
         component.width = '100px';
         fixture.detectChanges();
         expect(fixture.nativeElement.classList.contains('fd-formatted-text-with-width')).toBeTruthy();
-        expect(fixture.nativeElement.offsetWidth).toEqual(100);
+        expect(fixture.nativeElement.style.width).toEqual('100px');
     });
 
     it('should have expected html on render', () => {
@@ -74,16 +91,13 @@ describe('FormattedTextComponent', () => {
     });
 
     it('should skip unsupported tags', () => {
-        const embedCode = `<p>Sample text</p><script>alert(1);</script><form>Sample form</form>`;
-
-        component.htmlText = embedCode;
+        component.htmlText = `<p>Sample text</p><script>alert(1);</script><form>Sample form</form>`;
         fixture.detectChanges();
         expect(fixture.nativeElement.innerHTML).toEqual('<p>Sample text</p>');
     });
 
     it('should skip unsupported attributes on tag', () => {
-        const embedCode = '<p class="test" style="color: red" href="http://www.sap.com">Sample text</p>';
-        component.htmlText = embedCode;
+        component.htmlText = '<p class="test" style="color: red" href="http://www.sap.com">Sample text</p>';
         fixture.detectChanges();
         expect(fixture.nativeElement.innerHTML).toEqual('<p class="test" style="color: red">Sample text</p>');
     });

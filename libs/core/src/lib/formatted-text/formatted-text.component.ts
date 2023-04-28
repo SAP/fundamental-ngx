@@ -1,16 +1,9 @@
-import {
-    Component,
-    ViewEncapsulation,
-    ChangeDetectionStrategy,
-    Input,
-    OnChanges,
-    HostBinding,
-    OnInit,
-    SimpleChanges
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, inject, Input, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { HtmlSanitizer } from './utils/html-sanitizer';
+import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 export type LinkTargetType = '' | '_blank' | '_self' | '_top' | '_parent' | '_search';
 
@@ -36,25 +29,33 @@ export type LinkTargetType = '' | '_blank' | '_self' | '_top' | '_parent' | '_se
             fd-formatted-text.fd-formatted-text-with-height {
                 overflow-y: auto;
             }
+
             fd-formatted-text.fd-formatted-text-with-width {
                 overflow-x: auto;
             }
         `
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyedService]
 })
-export class FormattedTextComponent implements OnInit, OnChanges {
-    /**
-     * Text for formatted render.
-     */
-    @Input()
-    htmlText: string;
+export class FormattedTextComponent {
     /**
      * Target attribute for included links.
      */
     @Input()
-    convertedLinksDefaultTarget: LinkTargetType = '_blank';
+    set convertedLinksDefaultTarget(value: LinkTargetType) {
+        this.convertedLinksDefaultTarget$.next(value);
+    }
+
+    /**
+     * Text for formatted render.
+     */
+    @Input()
+    set htmlText(value: string) {
+        this.htmlText$.next(value);
+    }
+
     /**
      * Height style for component.
      */
@@ -75,31 +76,22 @@ export class FormattedTextComponent implements OnInit, OnChanges {
     formattedText: SafeHtml = '';
 
     /** @hidden */
-    private _htmlSanitizer!: HtmlSanitizer;
+    private htmlText$ = new Subject<string>();
+    /** @hidden */
+    private convertedLinksDefaultTarget$ = new BehaviorSubject<LinkTargetType>('_blank');
 
     /** @hidden */
     constructor(private readonly domSanitizer: DomSanitizer) {
-        this._htmlSanitizer = new HtmlSanitizer();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.render();
-    }
-
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if ('htmlText' in changes) {
-            this.render();
-        }
-    }
-
-    /** @hidden */
-    private render(): void {
-        this._htmlSanitizer.extendAttrs({
-            target: this.convertedLinksDefaultTarget
-        });
-        const text = this._htmlSanitizer.sanitizeHtml(this.htmlText ?? '');
-        this.formattedText = this.domSanitizer.bypassSecurityTrustHtml(text.trim());
+        const _htmlSanitizer = new HtmlSanitizer();
+        const _destroyed$ = inject(DestroyedService);
+        combineLatest([this.htmlText$, this.convertedLinksDefaultTarget$])
+            .pipe(takeUntil(_destroyed$))
+            .subscribe(([htmlText, convertedLinksDefaultTarget]) => {
+                _htmlSanitizer.extendAttrs({
+                    target: convertedLinksDefaultTarget
+                });
+                const text = _htmlSanitizer.sanitizeHtml(htmlText);
+                this.formattedText = this.domSanitizer.bypassSecurityTrustHtml(text.trim());
+            });
     }
 }

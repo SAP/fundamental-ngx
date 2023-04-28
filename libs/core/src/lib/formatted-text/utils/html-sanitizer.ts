@@ -179,7 +179,7 @@ export class HtmlSanitizer {
     /** @hidden */
     private _getSafeWrapper(): SanitizeWrapper | null {
         const iframe = document.createElement('iframe');
-        if (iframe.sandbox === undefined) {
+        if (!this._supportsSandbox(iframe)) {
             console.warn('Your browser does not support sandboxed iframes. Please upgrade to a modern browser.');
             return null;
         }
@@ -214,5 +214,10 @@ export class HtmlSanitizer {
     /** @hidden */
     private _startsWithAny(str: string, substrings: string[]): boolean {
         return !!str && substrings.some((value) => str.indexOf(value) === 0);
+    }
+
+    /** @hidden */
+    private _supportsSandbox(iframe: HTMLIFrameElement): boolean {
+        return iframe.sandbox !== undefined;
     }
 }
