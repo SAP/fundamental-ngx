@@ -126,9 +126,9 @@ describe('Platform Form', () => {
         const getFormLabelElement = (label: DebugElement): HTMLElement =>
             label.query(By.css('span')).nativeElement as HTMLElement;
 
-        expect(getFormLabelElement(labels[0]).classList.contains('fd-form-label--required')).toBe(true);
-        expect(getFormLabelElement(labels[1]).classList.contains('fd-form-label--required')).toBe(true);
-        expect(getFormLabelElement(labels[2]).classList.contains('fd-form-label--required')).toBe(false);
+        expect(getFormLabelElement(labels[0]).classList.contains('fd-form-label--required')).toBeTrue();
+        expect(getFormLabelElement(labels[1]).classList.contains('fd-form-label--required')).toBeTrue();
+        expect(getFormLabelElement(labels[2]).classList.contains('fd-form-label--required')).toBeFalse();
     });
 
     it('should register formField into formGroup', () => {
@@ -136,15 +136,15 @@ describe('Platform Form', () => {
 
         const firstName: FormFieldComponent = host.firstNameFormField;
         expect(firstName.formGroupContainer.formGroup).toBe(userFormGroup);
-        expect(userFormGroup.contains('firstName')).toBe(true);
+        expect(userFormGroup.contains('firstName')).toBeTrue();
 
         const lastName: FormFieldComponent = host.lastNameFormField;
         expect(lastName.formGroupContainer.formGroup).toBe(userFormGroup);
-        expect(userFormGroup.contains('lastName')).toBe(true);
+        expect(userFormGroup.contains('lastName')).toBeTrue();
 
         const favoriteColor: FormFieldComponent = host.favoriteColorFormField;
         expect(favoriteColor.formGroupContainer.formGroup).toBe(userFormGroup);
-        expect(userFormGroup.contains('favoriteColor')).toBe(true);
+        expect(userFormGroup.contains('favoriteColor')).toBeTrue();
     });
 
     it('should unregister formField from formGroup', () => {
@@ -153,7 +153,7 @@ describe('Platform Form', () => {
         // no control in DOM
         expect(fixture.debugElement.query(By.css('#firstName'))).toBeFalsy();
         // no data in form group
-        expect(host.userFormGroup.contains('firstName')).toBe(false);
+        expect(host.userFormGroup.contains('firstName')).toBeFalse();
 
         let inputs: ElementRef<HTMLElement>[];
         inputs = fixture.debugElement.queryAll(By.css('input'));

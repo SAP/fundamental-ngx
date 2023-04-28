@@ -180,7 +180,7 @@ describe('Advanced Textarea', () => {
 
     it('should call validateLengthOnCustomSet', async () => {
         const textareaElement = host.textareaComponent;
-        jest.spyOn(textareaElement, 'validateLengthOnCustomSet');
+        spyOn(textareaElement, 'validateLengthOnCustomSet');
         textareaElement.maxLength = 5;
         textareaElement.value = 'abcdefgg';
 
@@ -217,7 +217,7 @@ describe('Advanced Textarea', () => {
 
     it('should not focus when textarea is disabled', async () => {
         const textareaElement = host.textareaComponent;
-        jest.spyOn(textareaElement, 'setDisabledState');
+        spyOn(textareaElement, 'setDisabledState');
 
         host.form.get('basicTextarea')?.disable();
         await wait(fixture);
@@ -328,7 +328,7 @@ describe('Advanced Textarea', () => {
 
     it('should call autogrow method', async () => {
         const textareaElement = host.textareaComponent;
-        jest.spyOn(textareaElement, 'autoGrowTextArea');
+        spyOn(textareaElement, 'autoGrowTextArea');
 
         textareaElement.handleBackPress(new KeyboardEvent('keyup', { key: 'd' }));
         await wait(fixture);

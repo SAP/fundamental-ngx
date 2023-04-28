@@ -58,8 +58,8 @@ describe('ApprovalFlowAddNodeComponent', () => {
     });
 
     it('should init dialog with passed data', () => {
-        const approversSpy = jest.spyOn(component._data.userDataSource, 'match');
-        const teamsSpy = jest.spyOn(component._data.teamDataSource, 'match');
+        const approversSpy = spyOn(component._data.userDataSource, 'match').and.callThrough();
+        const teamsSpy = spyOn(component._data.teamDataSource, 'match').and.callThrough();
 
         component._data.isEdit = true;
         component._data.nodeTarget = 'before';
@@ -87,7 +87,7 @@ describe('ApprovalFlowAddNodeComponent', () => {
     it('should set selected approvers', () => {
         const approvers = [];
 
-        const viewServiceSpy = jest.spyOn(TestBed.inject(ApprovalFlowAddNodeViewService), 'resetView');
+        const viewServiceSpy = spyOn(TestBed.inject(ApprovalFlowAddNodeViewService), 'resetView').and.callThrough();
 
         component._setSelectedApprovers(approvers);
 
@@ -97,7 +97,7 @@ describe('ApprovalFlowAddNodeComponent', () => {
     });
 
     it('should confirm selected team', async () => {
-        const viewServiceSpy = jest.spyOn(TestBed.inject(ApprovalFlowAddNodeViewService), 'resetView');
+        const viewServiceSpy = spyOn(TestBed.inject(ApprovalFlowAddNodeViewService), 'resetView').and.callThrough();
 
         const approvalTeam: ApprovalTeam = teams[0];
         component._data.isEdit = true;

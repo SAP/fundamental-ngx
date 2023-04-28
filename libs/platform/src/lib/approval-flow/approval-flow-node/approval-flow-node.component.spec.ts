@@ -61,15 +61,15 @@ describe('ApprovalFlowNodeComponent', () => {
         fixture.detectChanges();
         detectChangesOnPush();
 
-        expect(fixture.nativeElement.classList.contains('fdp-approval-flow-node--blank')).toBe(true);
+        expect(fixture.nativeElement).toHaveClass('fdp-approval-flow-node--blank');
     });
 
     it('should toggle line-before & line-after classes', () => {
         fixture.detectChanges();
         detectChangesOnPush();
 
-        expect(fixture.nativeElement.classList.contains('fdp-approval-flow-node--line-before')).toBe(true);
-        expect(fixture.nativeElement.classList.contains('fdp-approval-flow-node--line-after')).toBe(true);
+        expect(fixture.nativeElement).toHaveClass('fdp-approval-flow-node--line-before');
+        expect(fixture.nativeElement).toHaveClass('fdp-approval-flow-node--line-after');
 
         component.node = {
             ...component.node,
@@ -79,8 +79,8 @@ describe('ApprovalFlowNodeComponent', () => {
         fixture.detectChanges();
         detectChangesOnPush();
 
-        expect(fixture.nativeElement.classList.contains('fdp-approval-flow-node--line-before')).toBe(false);
-        expect(fixture.nativeElement.classList.contains('fdp-approval-flow-node--line-after')).toBe(false);
+        expect(fixture.nativeElement).not.toHaveClass('fdp-approval-flow-node--line-before');
+        expect(fixture.nativeElement).not.toHaveClass('fdp-approval-flow-node--line-after');
     });
 
     it('should render arrow when arrow option set to true', () => {
@@ -101,7 +101,7 @@ describe('ApprovalFlowNodeComponent', () => {
         fixture.detectChanges();
         detectChangesOnPush();
 
-        expect(fixture.nativeElement.classList.contains('fdp-approval-flow-node--approved')).toBe(true);
+        expect(fixture.nativeElement).toHaveClass('fdp-approval-flow-node--approved');
     });
 
     it('should add parent-approved class if parent node is approved', () => {
@@ -116,7 +116,7 @@ describe('ApprovalFlowNodeComponent', () => {
         fixture.detectChanges();
         detectChangesOnPush();
 
-        expect(fixture.nativeElement.classList.contains('fdp-approval-flow-node--parent-approved')).toBe(true);
+        expect(fixture.nativeElement).toHaveClass('fdp-approval-flow-node--parent-approved');
     });
 
     it('should have positive object status when node is approved', () => {

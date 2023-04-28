@@ -90,8 +90,8 @@ describe('PlatformMultiInputComponent', () => {
     });
 
     it('should not open dropdown when openDropdownOnAddOnClicked is false', () => {
-        jest.spyOn(component.platformMultiInputComponent.addOnButtonClicked, 'emit');
-        jest.spyOn(component.platformMultiInputComponent, 'showList');
+        spyOn(component.platformMultiInputComponent.addOnButtonClicked, 'emit');
+        spyOn(component.platformMultiInputComponent, 'showList');
         component.platformMultiInputComponent.openDropdownOnAddOnClicked = false;
         component.platformMultiInputComponent.addOnButtonClick(new MouseEvent('click'));
         expect(component.platformMultiInputComponent.addOnButtonClicked.emit).toHaveBeenCalled();

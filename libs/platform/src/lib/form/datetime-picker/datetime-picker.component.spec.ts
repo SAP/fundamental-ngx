@@ -139,7 +139,7 @@ describe('PlatformDatetimePickerComponent', () => {
 
     it('should call handleDatetime method', async () => {
         const datetimePicker = host.datetimePickerComponent;
-        jest.spyOn(datetimePicker, 'writeValue');
+        spyOn(datetimePicker, 'writeValue');
 
         datetimePicker.value = new FdDate();
         await wait(fixture);
@@ -162,7 +162,7 @@ describe('PlatformDatetimePickerComponent', () => {
 
         const inputGroupEl = fixture.debugElement.query(By.css('.fd-input-group'));
 
-        expect(inputGroupEl.nativeElement.classList.contains('is-error')).not.toBe(true);
+        expect(inputGroupEl.nativeElement.classList.contains('is-error')).not.toBeTrue();
 
         // @ts-expect-error fault tolerance test
         const invalidDate = new FdDate(null);
@@ -170,7 +170,7 @@ describe('PlatformDatetimePickerComponent', () => {
         datetimePicker.handleDatetimeInputChange(invalidDate);
         await wait(fixture);
 
-        expect(inputGroupEl.nativeElement.classList.contains('is-error')).toBe(true);
+        expect(inputGroupEl.nativeElement.classList.contains('is-error')).toBeTrue();
     });
 
     it('should take 100% of container width', () => {

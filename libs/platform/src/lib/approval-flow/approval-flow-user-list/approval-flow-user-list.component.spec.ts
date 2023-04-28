@@ -55,7 +55,7 @@ describe('ApprovalFlowUserListComponent', () => {
             index: 0
         };
 
-        const userSelectionSpy = jest.spyOn(component.onSelectionChange, 'emit');
+        const userSelectionSpy = spyOn(component.onSelectionChange, 'emit').and.callThrough();
 
         component._onSelect(selectionEvent);
 

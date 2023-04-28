@@ -158,10 +158,10 @@ describe('ComboboxComponent default values', () => {
         item.click();
         fixture.detectChanges();
 
-        expect(component.selectedItem instanceof ComboboxSelectionChangeEvent).toBe(true);
+        expect(component.selectedItem instanceof ComboboxSelectionChangeEvent).toBeTrue();
 
         expect(component.selectedItem?.payload).toEqual(component.dataSource[0]);
-        expect(combobox.isOpen).toBe(false);
+        expect(combobox.isOpen).toBeFalse();
 
         combobox.onPrimaryButtonClick();
         fixture.detectChanges();

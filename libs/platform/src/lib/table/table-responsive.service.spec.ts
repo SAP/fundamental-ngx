@@ -88,7 +88,7 @@ describe('TableResponsiveService', () => {
     });
 
     it('should transform plain breakpoints to a correct model', () => {
-        const breakpointTransformerSpy = jest.spyOn(service as any, '_normalizeBreakpoints');
+        const breakpointTransformerSpy = spyOn(service as any, '_normalizeBreakpoints').and.callThrough();
 
         service.registerResponsiveColumn(column, plainBreakpoints);
 

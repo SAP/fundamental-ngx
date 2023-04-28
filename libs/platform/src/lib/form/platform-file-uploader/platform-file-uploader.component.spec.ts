@@ -100,9 +100,9 @@ describe('PlatformFileUploaderComponent', () => {
 
     it('should selectHandler with no maxFileSize', async () => {
         await wait(fixture);
-        jest.spyOn(fileInput.selectionChange, 'emit');
+        spyOn(fileInput.selectionChange, 'emit').and.callThrough();
         const file1: MockFile = new File([''], 'file1');
-        jest.replaceProperty(file1, 'size', 1024);
+        spyOnProperty(file1, 'size').and.returnValue(1024);
         const event: File[] = [file1];
         const fileEvent = new FileUploaderSelectionChangeEvent(fileInput, event);
         fileInput.handleFileChange(event);
@@ -111,12 +111,12 @@ describe('PlatformFileUploaderComponent', () => {
 
     it('should selectHandler with maxFileSize', async () => {
         await wait(fixture);
-        jest.spyOn(fileInput.selectionChange, 'emit');
-        jest.spyOn(fileInput.invalidFileChange, 'emit');
+        spyOn(fileInput.selectionChange, 'emit').and.callThrough();
+        spyOn(fileInput.invalidFileChange, 'emit').and.callThrough();
         const file1: MockFile = new File([''], 'file1');
-        jest.replaceProperty(file1, 'size', 1024);
+        spyOnProperty(file1, 'size').and.returnValue(1024);
         const file2: MockFile = new File([''], 'file2');
-        jest.replaceProperty(file2, 'size', 1048580);
+        spyOnProperty(file2, 'size').and.returnValue(1048580);
         const event: File[] = [file1, file2];
         fileInput.maxFileSize = '1MB';
         const fileEvent = new FileUploaderSelectionChangeEvent(fileInput, event);
@@ -127,12 +127,12 @@ describe('PlatformFileUploaderComponent', () => {
 
     it('should selectHandler with minFileSize', async () => {
         await wait(fixture);
-        jest.spyOn(fileInput.selectionChange, 'emit');
-        jest.spyOn(fileInput.invalidFileChange, 'emit');
+        spyOn(fileInput.selectionChange, 'emit').and.callThrough();
+        spyOn(fileInput.invalidFileChange, 'emit').and.callThrough();
         const file1: MockFile = new File([''], 'file1');
-        jest.replaceProperty(file1, 'size', 1024);
+        spyOnProperty(file1, 'size').and.returnValue(1024);
         const file2: MockFile = new File([''], 'file2');
-        jest.replaceProperty(file2, 'size', 1048580);
+        spyOnProperty(file2, 'size').and.returnValue(1048580);
         const event: File[] = [file1, file2];
         fileInput.minFileSize = '1MB';
         const fileEvent = new FileUploaderSelectionChangeEvent(fileInput, event);

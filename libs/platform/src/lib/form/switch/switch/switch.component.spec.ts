@@ -113,7 +113,7 @@ describe('SwitchComponent', () => {
         switchLabel.nativeElement.click();
         fixture.detectChanges();
 
-        expect(component.switch0CurrentValue).toBe(true);
+        expect(component.switch0CurrentValue).toBeTrue();
     });
 
     it('should change switch state on click', async () => {
@@ -123,22 +123,22 @@ describe('SwitchComponent', () => {
         const switches = component.fdpSwitch.toArray();
 
         // default value
-        expect(switches[0].switchCurrentValue).toBe(false);
-        expect(component.customForm.get('switch0')?.value).toBe(false);
+        expect(switches[0].switchCurrentValue).toBeFalse();
+        expect(component.customForm.get('switch0')?.value).toBeFalse();
 
         const switchLabel = fixture.debugElement.query(By.css('#switch-0 .fd-switch'));
 
         switchLabel.nativeElement.click();
         fixture.detectChanges();
 
-        expect(switches[0].switchCurrentValue).toBe(true);
-        expect(component.customForm.get('switch0')?.value).toBe(true);
+        expect(switches[0].switchCurrentValue).toBeTrue();
+        expect(component.customForm.get('switch0')?.value).toBeTrue();
 
         switchLabel.nativeElement.click();
         fixture.detectChanges();
 
-        expect(switches[0].switchCurrentValue).toBe(false);
-        expect(component.customForm.get('switch0')?.value).toBe(false);
+        expect(switches[0].switchCurrentValue).toBeFalse();
+        expect(component.customForm.get('switch0')?.value).toBeFalse();
     });
 
     it('should apply is-error style on form Error', async () => {

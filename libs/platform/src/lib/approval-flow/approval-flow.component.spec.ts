@@ -106,7 +106,7 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should call watcher click handler on watcher click', () => {
-        jest.spyOn(component, '_onWatcherClick');
+        spyOn(component, '_onWatcherClick').and.callThrough();
 
         const watchersContainer = fixture.nativeElement.querySelector('.fdp-approval-flow__watchers');
         const watcher = watchersContainer.querySelector('fd-avatar');
@@ -129,7 +129,7 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should call keydown handler if arrow key was pressed', () => {
-        jest.spyOn(component, '_onNodeKeyDown');
+        spyOn(component, '_onNodeKeyDown').and.callThrough();
 
         const nodesContainer = fixture.nativeElement.querySelector('.fdp-approval-flow__graph');
 
@@ -176,7 +176,7 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should open adding node dialog for the empty graph', () => {
-        const dialogSpy = jest.spyOn(fixture.componentRef.injector.get(DialogService), 'open').mockReturnValue({
+        const dialogSpy = spyOn(fixture.componentRef.injector.get(DialogService), 'open').and.returnValue({
             afterClosed: of(null)
         } as any);
 
@@ -191,7 +191,7 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should enter edit mode', fakeAsync(() => {
-        const watchersSpy = jest.spyOn(component.watcherDataSource, 'match');
+        const watchersSpy = spyOn(component.watcherDataSource, 'match').and.callThrough();
 
         component._enterEditMode();
 
@@ -202,7 +202,7 @@ describe('ApprovalFlowComponent', () => {
     }));
 
     it('should save edit mode changes', () => {
-        const approvalSpy = jest.spyOn(component.valueChange, 'emit');
+        const approvalSpy = spyOn(component.valueChange, 'emit').and.callThrough();
 
         component._saveEditModeChanges();
 
@@ -217,7 +217,7 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should add node to the graph', () => {
-        const dialogSpy = jest.spyOn(TestBed.inject(DialogService), 'open').mockReturnValue({
+        const dialogSpy = spyOn(TestBed.inject(DialogService), 'open').and.returnValue({
             afterClosed: of({
                 node: Object.assign({}, simpleGraph.nodes[0], { status: 'not started' }),
                 nodeType: APPROVAL_FLOW_NODE_TYPES.SERIAL

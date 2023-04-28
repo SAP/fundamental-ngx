@@ -23,7 +23,7 @@ describe('TableServiceService', () => {
     });
 
     it('should return table state by getTableState', () => {
-        const getValueSpy = jest.spyOn(service, 'getTableState');
+        const getValueSpy = spyOn(service, 'getTableState').and.callThrough();
 
         expect(service.getTableState()).toEqual(DEFAULT_TABLE_STATE);
         expect(getValueSpy).toHaveBeenCalled();
@@ -41,8 +41,8 @@ describe('TableServiceService', () => {
     });
 
     it('should set new sortBy state', () => {
-        const setTableStateSpy = jest.spyOn(service, 'setTableState');
-        const sortChangeSpy = jest.spyOn(service.sortChange, 'emit');
+        const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
+        const sortChangeSpy = spyOn(service.sortChange, 'emit').and.callThrough();
         const field = 'name';
         const newSortBy = [{ field, direction: SortDirection.ASC }];
         const newState: TableState = { ...DEFAULT_TABLE_STATE, sortBy: newSortBy };
@@ -55,8 +55,8 @@ describe('TableServiceService', () => {
     });
 
     it('should set new groupBy state', () => {
-        const setTableStateSpy = jest.spyOn(service, 'setTableState');
-        const groupChangeSpy = jest.spyOn(service.groupChange, 'emit');
+        const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
+        const groupChangeSpy = spyOn(service.groupChange, 'emit').and.callThrough();
         const field = 'name';
         const newGroupBy: CollectionGroup[] = [{ field, direction: SortDirection.ASC, showAsColumn: true }];
         const newState: TableState = { ...DEFAULT_TABLE_STATE, groupBy: newGroupBy };
@@ -69,8 +69,8 @@ describe('TableServiceService', () => {
     });
 
     it('should set new filterBy state', () => {
-        const setTableStateSpy = jest.spyOn(service, 'setTableState');
-        const filterChangeSpy = jest.spyOn(service.filterChange, 'emit');
+        const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
+        const filterChangeSpy = spyOn(service.filterChange, 'emit').and.callThrough();
         const newFilterBy: CollectionStringFilter[] = [
             { field: 'name', value: 'Product name', strategy: FILTER_STRING_STRATEGY.CONTAINS }
         ];
@@ -84,8 +84,8 @@ describe('TableServiceService', () => {
     });
 
     it('should set new freezeToColumn state', () => {
-        const setTableStateSpy = jest.spyOn(service, 'setTableState');
-        const freezeChangeSpy = jest.spyOn(service.freezeChange, 'emit');
+        const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
+        const freezeChangeSpy = spyOn(service.freezeChange, 'emit').and.callThrough();
         const field = 'name';
         const newState: TableState = { ...DEFAULT_TABLE_STATE, freezeToColumn: field };
         const event: FreezeChange = { current: field, previous: DEFAULT_TABLE_STATE.freezeToColumn };
@@ -97,8 +97,8 @@ describe('TableServiceService', () => {
     });
 
     it('should set new search state', () => {
-        const setTableStateSpy = jest.spyOn(service, 'setTableState');
-        const searchChangeSpy = jest.spyOn(service.searchChange, 'emit');
+        const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
+        const searchChangeSpy = spyOn(service.searchChange, 'emit').and.callThrough();
         const newSearchInput: SearchInput = { text: 'Search query', category: null };
         const newState: TableState = { ...DEFAULT_TABLE_STATE, searchInput: newSearchInput };
         const event: SearchChange = { current: newSearchInput, previous: DEFAULT_TABLE_STATE.searchInput };
@@ -110,13 +110,8 @@ describe('TableServiceService', () => {
     });
 
     it('should expose table state through tableState$ observable', () => {
-        const subscriber: Observer<any> = {
-            next: () => {
-            }, error: () => {
-            }, complete: () => {
-            }
-        };
-        const subscriberNextSpy = jest.spyOn(subscriber, 'next');
+        const subscriber: Observer<any> = { next: () => {}, error: () => {}, complete: () => {} };
+        const subscriberNextSpy = spyOn(subscriber, 'next').and.callThrough();
 
         service.tableState$.subscribe(subscriber);
 
@@ -131,13 +126,8 @@ describe('TableServiceService', () => {
     });
 
     it('should emit changes by tableStateChanges$ observable', () => {
-        const subscriber: Observer<any> = {
-            next: () => {
-            }, error: () => {
-            }, complete: () => {
-            }
-        };
-        const subscriberNextSpy = jest.spyOn(subscriber, 'next');
+        const subscriber: Observer<any> = { next: () => {}, error: () => {}, complete: () => {} };
+        const subscriberNextSpy = spyOn(subscriber, 'next').and.callThrough();
 
         service.tableStateChanges$.subscribe(subscriber);
 

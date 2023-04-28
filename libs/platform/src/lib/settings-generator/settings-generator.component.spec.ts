@@ -22,7 +22,7 @@ describe('SettingsGeneratorComponent', () => {
     });
 
     it('should set settings in service', () => {
-        const settingsSpy = jest.spyOn((component as any)._settingsGeneratorService.settings, 'next');
+        const settingsSpy = spyOn((component as any)._settingsGeneratorService.settings, 'next').and.callThrough();
 
         const settings = {
             appearance: 'sidebar',

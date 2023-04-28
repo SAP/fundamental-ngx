@@ -162,7 +162,7 @@ describe('NumberStepInputComponent main functionality', () => {
 
     it('should use stepFn if provided to calculate increase step value', () => {
         component.stepFn = (value: number, action: 'increase' | 'decrease'): number => (action === 'decrease' ? -1 : 1);
-        const stepFnSpy = jest.spyOn(component, 'stepFn').mockReturnValue(10);
+        const stepFnSpy = spyOn(component, 'stepFn').and.returnValue(10);
         component.value = 30;
         fixture.detectChanges();
 
@@ -176,7 +176,7 @@ describe('NumberStepInputComponent main functionality', () => {
 
     it('should use stepFn if provided to calculate decrease step value', () => {
         component.stepFn = (value: number, action: 'increase' | 'decrease'): number => (action === 'decrease' ? -1 : 1);
-        const stepFnSpy = jest.spyOn(component, 'stepFn').mockReturnValue(10);
+        const stepFnSpy = spyOn(component, 'stepFn').and.returnValue(10);
         component.value = 30;
         fixture.detectChanges();
 
@@ -501,7 +501,7 @@ describe('Basic number Step Input withing platforms form', () => {
         const stepInputEl = fixture.debugElement.query(By.css('.fd-step-input'));
 
         expect(formControl.value).toBe(100);
-        expect(stepInputEl.nativeElement.className.includes('is-error')).not.toBe(true);
+        expect(stepInputEl.nativeElement.className.includes('is-error')).not.toBeTrue();
 
         formControl.markAsTouched();
         await wait(fixture);
@@ -509,7 +509,7 @@ describe('Basic number Step Input withing platforms form', () => {
         await wait(fixture);
 
         expect(formControl.value).toBe(null);
-        expect(stepInputEl.nativeElement.className.includes('is-error')).toBe(true);
+        expect(stepInputEl.nativeElement.className.includes('is-error')).toBeTrue();
     });
 
     it('should be in an error state if entered number cannot be parsed', async () => {
@@ -522,14 +522,14 @@ describe('Basic number Step Input withing platforms form', () => {
         formControl.markAsTouched();
         await wait(fixture);
 
-        expect(stepInputEl.nativeElement.className.includes('is-error')).not.toBe(true);
+        expect(stepInputEl.nativeElement.className.includes('is-error')).not.toBeTrue();
 
         stepInputComponent.onEnterValue('not a valid number');
         stepInputComponent.commitEnteredValue();
         await wait(fixture);
 
         expect(formControl.value).toBe(null);
-        expect(stepInputEl.nativeElement.className.includes('is-error')).toBe(true);
+        expect(stepInputEl.nativeElement.className.includes('is-error')).toBeTrue();
     });
 
     it('should submit the value', async () => {

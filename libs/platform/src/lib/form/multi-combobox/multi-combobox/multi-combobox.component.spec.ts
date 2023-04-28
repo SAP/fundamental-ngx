@@ -157,21 +157,21 @@ describe('MultiComboboxComponent default values', () => {
 
     it('should select and unselect an item', () => {
         const item = multiCombobox._suggestions[0];
-        const propagateChangeSpy = jest.spyOn(<any>multiCombobox, '_propagateChange');
+        const propagateChangeSpy = spyOn(<any>multiCombobox, '_propagateChange');
 
-        expect(item.selected).toBe(false);
+        expect(item.selected).toBeFalse();
 
         multiCombobox.toggleSelection(item);
         fixture.detectChanges();
 
-        expect(item.selected).toBe(true);
+        expect(item.selected).toBeTrue();
         expect(multiCombobox._selectedSuggestions.length).toEqual(1);
         expect(propagateChangeSpy).toHaveBeenCalled();
 
         multiCombobox.toggleSelection(item);
         fixture.detectChanges();
 
-        expect(item.selected).toBe(false);
+        expect(item.selected).toBeFalse();
         expect(multiCombobox._selectedSuggestions.length).toEqual(0);
         expect(propagateChangeSpy).toHaveBeenCalled();
     });
@@ -201,8 +201,8 @@ describe('MultiComboboxComponent default values', () => {
     });
 
     it('should not open dropdown when openDropdownOnAddOnClicked is false', () => {
-        jest.spyOn(multiCombobox.addOnButtonClicked, 'emit');
-        jest.spyOn(multiCombobox, 'showList');
+        spyOn(multiCombobox.addOnButtonClicked, 'emit');
+        spyOn(multiCombobox, 'showList');
         multiCombobox.openDropdownOnAddOnClicked = false;
         multiCombobox._addOnClicked(new MouseEvent('click'));
         expect(multiCombobox.addOnButtonClicked.emit).toHaveBeenCalled();

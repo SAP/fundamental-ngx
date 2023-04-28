@@ -81,7 +81,7 @@ describe('TableComponent internal', () => {
         component.selectionMode = SelectionMode.MULTIPLE;
         component.ngAfterViewInit();
 
-        const emitChangeSpy = jest.spyOn(component.rowSelectionChange, 'emit').mockImplementation();
+        const emitChangeSpy = spyOn(component.rowSelectionChange, 'emit').and.stub();
 
         component._toggleMultiSelectRow(component._tableRows[0]);
 
@@ -97,7 +97,7 @@ describe('TableComponent internal', () => {
         component.selectionMode = SelectionMode.SINGLE;
         component.ngAfterViewInit();
 
-        const emitChangeSpy = jest.spyOn(component.rowSelectionChange, 'emit').mockImplementation();
+        const emitChangeSpy = spyOn(component.rowSelectionChange, 'emit').and.stub();
 
         component._toggleSingleSelectableRow(component._tableRows[0]);
 
@@ -141,7 +141,7 @@ describe('TableComponent internal', () => {
     it('sort by cell header method should call TableService.setSort with a proper params', () => {
         const field = 'price.value';
         const direction = SortDirection.ASC;
-        const serviceSortSpy = jest.spyOn(tableService, 'setSort').mockImplementation();
+        const serviceSortSpy = spyOn(tableService, 'setSort').and.stub();
 
         component._columnHeaderSortBy(field, direction);
 
@@ -158,7 +158,7 @@ describe('TableComponent internal', () => {
             strategy: FILTER_STRING_STRATEGY.CONTAINS,
             exclude: false
         };
-        const serviceFilterSpy = jest.spyOn(tableService, 'addFilters').mockImplementation();
+        const serviceFilterSpy = spyOn(tableService, 'addFilters').and.stub();
 
         component._columnHeaderFilterBy(field, value);
 
@@ -168,7 +168,7 @@ describe('TableComponent internal', () => {
     it('group by cell header method should call TableService.setGroups with a proper params', () => {
         const field = 'price.value';
         const payload: CollectionGroup[] = [{ field, direction: SortDirection.NONE, showAsColumn: true }];
-        const serviceGroupSpy = jest.spyOn(tableService, 'setGroups').mockImplementation();
+        const serviceGroupSpy = spyOn(tableService, 'setGroups').and.stub();
 
         component._columnHeaderGroupBy(field);
 
@@ -177,7 +177,7 @@ describe('TableComponent internal', () => {
 
     it('freezeTo method should call TableService.freezeTo and set freezable info', async () => {
         const columnKey = 'description';
-        const serviceFreezeToSpy = jest.spyOn(tableService, 'freezeTo').mockImplementation();
+        const serviceFreezeToSpy = spyOn(tableService, 'freezeTo').and.stub();
 
         component.freezeToColumn(columnKey);
 
@@ -245,7 +245,7 @@ describe('TableComponent internal', () => {
             hostComponent = fixture.componentInstance;
 
             const originFetch = hostComponent.source.fetch;
-            jest.spyOn(hostComponent.source, 'fetch').mockImplementation((state: TableState) => {
+            spyOn(hostComponent.source, 'fetch').and.callFake((state: TableState) => {
                 dataSourceLastFetchState = state;
                 return originFetch.call(hostComponent.source, state);
             });
@@ -364,11 +364,11 @@ describe('TableComponent internal', () => {
 
                     const selectionCell = tableRowCells2DArray[0][0];
 
-                    expect(tableComponent._tableRowsVisible[0].checked).toBe(false);
+                    expect(tableComponent._tableRowsVisible[0].checked).toBeFalse();
 
                     selectionCell.nativeElement.dispatchEvent(new MouseEvent('click'));
 
-                    expect(tableComponent._tableRowsVisible[0].checked).toBe(true);
+                    expect(tableComponent._tableRowsVisible[0].checked).toBeTrue();
                 });
 
                 it('should unselect by clicking on selected cell', () => {
@@ -377,11 +377,11 @@ describe('TableComponent internal', () => {
 
                     const selectionCell = tableRowCells2DArray[0][0];
 
-                    expect(tableComponent._tableRowsVisible[0].checked).toBe(true);
+                    expect(tableComponent._tableRowsVisible[0].checked).toBeTrue();
 
                     selectionCell.nativeElement.dispatchEvent(new MouseEvent('click'));
 
-                    expect(tableComponent._tableRowsVisible[0].checked).toBe(false);
+                    expect(tableComponent._tableRowsVisible[0].checked).toBeFalse();
                 });
 
                 it('should select new cell and unselected previous one', () => {
@@ -390,16 +390,16 @@ describe('TableComponent internal', () => {
 
                     const newlySelectedCell = tableRowCells2DArray[1][0];
 
-                    expect(tableComponent._tableRowsVisible[0].checked).toBe(true);
+                    expect(tableComponent._tableRowsVisible[0].checked).toBeTrue();
 
                     newlySelectedCell.nativeElement.dispatchEvent(new MouseEvent('click'));
 
-                    expect(tableComponent._tableRowsVisible[0].checked).toBe(false);
-                    expect(tableComponent._tableRowsVisible[1].checked).toBe(true);
+                    expect(tableComponent._tableRowsVisible[0].checked).toBeFalse();
+                    expect(tableComponent._tableRowsVisible[1].checked).toBeTrue();
                 });
 
                 it('should emit RowSelectionChange event', () => {
-                    const emitSpy = jest.spyOn(tableComponent.rowSelectionChange, 'emit');
+                    const emitSpy = spyOn(tableComponent.rowSelectionChange, 'emit').and.callThrough();
 
                     // Select first row
                     tableRowCells2DArray[0][0].nativeElement.dispatchEvent(new MouseEvent('click'));
@@ -447,26 +447,26 @@ describe('TableComponent internal', () => {
                     tableComponent._tableRowsVisible[0].checked = false;
                     fixture.detectChanges();
 
-                    expect(tableComponent._tableRowsVisible[0].checked).toBe(false);
+                    expect(tableComponent._tableRowsVisible[0].checked).toBeFalse();
 
                     getSelectionCheckbox(tableRowCells2DArray[0][0]).nativeElement.dispatchEvent(
                         new MouseEvent('click')
                     );
 
-                    expect(tableComponent._tableRowsVisible[0].checked).toBe(true);
+                    expect(tableComponent._tableRowsVisible[0].checked).toBeTrue();
                 });
 
                 it('should unselect by clicking on selected cell', () => {
                     tableComponent._tableRowsVisible[0].checked = true;
                     fixture.detectChanges();
 
-                    expect(tableComponent._tableRowsVisible[0].checked).toBe(true);
+                    expect(tableComponent._tableRowsVisible[0].checked).toBeTrue();
 
                     getSelectionCheckbox(tableRowCells2DArray[0][0]).nativeElement.dispatchEvent(
                         new MouseEvent('click')
                     );
 
-                    expect(tableComponent._tableRowsVisible[0].checked).toBe(false);
+                    expect(tableComponent._tableRowsVisible[0].checked).toBeFalse();
                 });
 
                 it('should select new cell and keep previous ones', () => {
@@ -477,12 +477,12 @@ describe('TableComponent internal', () => {
                         new MouseEvent('click')
                     );
 
-                    expect(tableComponent._tableRowsVisible[0].checked).toBe(true);
-                    expect(tableComponent._tableRowsVisible[1].checked).toBe(true);
+                    expect(tableComponent._tableRowsVisible[0].checked).toBeTrue();
+                    expect(tableComponent._tableRowsVisible[1].checked).toBeTrue();
                 });
 
                 it('should emit RowSelectionChange event', () => {
-                    const emitSpy = jest.spyOn(tableComponent.rowSelectionChange, 'emit');
+                    const emitSpy = spyOn(tableComponent.rowSelectionChange, 'emit').and.callThrough();
                     const firstRowCheckbox = getSelectionCheckbox(tableRowCells2DArray[0][0]);
                     const secondRowCheckbox = getSelectionCheckbox(tableRowCells2DArray[1][0]);
 
@@ -534,12 +534,12 @@ describe('TableComponent internal', () => {
                     // Select all
                     selectAllCheckbox.nativeElement.dispatchEvent(new MouseEvent('click'));
                     fixture.detectChanges();
-                    expect(tableComponent._tableRows.every((row) => row.checked)).toBe(true);
+                    expect(tableComponent._tableRows.every((row) => row.checked)).toBeTrue();
 
                     // Unselect all
                     selectAllCheckbox.nativeElement.dispatchEvent(new MouseEvent('click'));
                     fixture.detectChanges();
-                    expect(tableComponent._tableRows.every((row) => !row.checked)).toBe(true);
+                    expect(tableComponent._tableRows.every((row) => !row.checked)).toBeTrue();
                 });
             });
         });
@@ -720,7 +720,7 @@ describe('TableComponent internal', () => {
             });
 
             it('should set and remove navigation', () => {
-                const spy = jest.spyOn(tableComponent.rowNavigate, 'emit');
+                const spy = spyOn(tableComponent.rowNavigate, 'emit').and.callThrough();
 
                 tableComponent.setRowNavigation(0, true);
 
@@ -756,7 +756,7 @@ describe('TableComponent internal', () => {
                         row.nativeElement.classList.contains(rowClass)
                     );
 
-                    expect(rowsClassesAssigned).toBe(true);
+                    expect(rowsClassesAssigned).toBeTrue();
                 });
 
                 it('should apply custom class using function', () => {
@@ -769,7 +769,7 @@ describe('TableComponent internal', () => {
                         row.nativeElement.classList.contains(hostComponent.table._tableRows[index].value.status)
                     );
 
-                    expect(rowsClassesAssigned).toBe(true);
+                    expect(rowsClassesAssigned).toBeTrue();
                 });
             });
         });
@@ -822,7 +822,7 @@ describe('TableComponent internal', () => {
         beforeEach(() => {
             fixture = TestBed.createComponent(TableHostComponent);
             hostComponent = fixture.componentInstance;
-            jest.spyOn(hostComponent.source, 'fetch');
+            spyOn(hostComponent.source, 'fetch').and.callThrough();
 
             fixture.detectChanges();
 
@@ -906,7 +906,7 @@ describe('TableComponent internal', () => {
             hostComponent = fixture.componentInstance;
 
             const originFetch = hostComponent.source.fetch;
-            jest.spyOn(hostComponent.source, 'fetch').mockImplementation((state: TableState) =>
+            spyOn(hostComponent.source, 'fetch').and.callFake((state: TableState) =>
                 originFetch.call(hostComponent.source, state)
             );
 
@@ -1073,7 +1073,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         beforeEach(() => {
             fixture = TestBed.createComponent(TableHostComponent);
             hostComponent = fixture.componentInstance;
-            jest.spyOn(hostComponent.source, 'fetch');
+            spyOn(hostComponent.source, 'fetch').and.callThrough();
 
             fixture.detectChanges();
 
@@ -1102,7 +1102,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
             });
 
             it('should emit event when parent item collapsed/expanded', () => {
-                const emitSpy = jest.spyOn(tableComponent.rowToggleOpenState, 'emit');
+                const emitSpy = spyOn(tableComponent.rowToggleOpenState, 'emit').and.callThrough();
 
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
@@ -1124,8 +1124,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 );
 
                 expect(emitSpy).toHaveBeenCalledTimes(2);
-                expect(emitSpy).toHaveBeenLastCalledWith([event2]);
-                // expect(emitSpy.calls.argsFor(1)).toEqual([event2]);
+                expect(emitSpy.calls.argsFor(1)).toEqual([event2]);
             });
 
             it('should react to toggling/collapsing with changing rows count', () => {
@@ -1191,7 +1190,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
             });
 
             it('should emit event after rearranging rows', () => {
-                const emitSpy = jest.spyOn(tableComponent.rowsRearrange, 'emit');
+                const emitSpy = spyOn(tableComponent.rowsRearrange, 'emit').and.callThrough();
 
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
@@ -1221,7 +1220,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 calculateTableElementsMetaData();
 
-                expect(tableComponent._tableRows[0].expanded).toBe(true);
+                expect(tableComponent._tableRows[0].expanded).toBeTrue();
                 expect(tableComponent._tableRows[2].level).toEqual(1);
                 expect(tableComponent._tableRows[3].level).toEqual(2);
             });
