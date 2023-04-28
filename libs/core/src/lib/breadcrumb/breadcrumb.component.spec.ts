@@ -71,7 +71,7 @@ describe('BreadcrumbComponent', () => {
     });
 
     it('should handle onResize - enlarging the screen', fakeAsync(() => {
-        const hiddenItemsCountSpy = jest.spyOn(component, '_onHiddenItemsCountChange');
+        const hiddenItemsCountSpy = spyOn(component, '_onHiddenItemsCountChange').and.callThrough();
 
         component.elementRef.nativeElement.parentElement!.style.width = '500px';
         component.onResize();
@@ -82,7 +82,7 @@ describe('BreadcrumbComponent', () => {
     }));
 
     it('should handle onResize - shrinking the screen', fakeAsync(() => {
-        const hiddenItemsCountSpy = jest.spyOn(component, '_onHiddenItemsCountChange');
+        const hiddenItemsCountSpy = spyOn(component, '_onHiddenItemsCountChange').and.callThrough();
 
         component.elementRef.nativeElement.parentElement!.style.width = '200px';
         component.onResize();

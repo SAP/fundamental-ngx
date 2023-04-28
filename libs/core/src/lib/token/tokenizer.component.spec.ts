@@ -251,7 +251,7 @@ describe('TokenizerComponent', () => {
         component.tokenList.forEach((token) => {
             jest.spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').mockReturnValue({ right: 0 });
         });
-        jest.replaceProperty(component.tokenizerInnerEl.nativeElement, 'scrollWidth', 5);
+        jest.spyOn(component.tokenizerInnerEl.nativeElement, 'scrollWidth', 'get').mockReturnValue(5);
 
         component.ngAfterViewInit();
 

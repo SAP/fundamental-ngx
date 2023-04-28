@@ -1,54 +1,37 @@
 {
-  "name": "core-breadcrumb",
-  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "library",
-  "sourceRoot": "libs/core/src/lib/breadcrumb",
-  "prefix": "fd",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:ng-packagr-lite",
-      "outputs": [
-        "{workspaceRoot}/dist/libs/core/breadcrumb"
-      ],
-      "options": {
-        "tsConfig": "libs/core/src/lib/breadcrumb/tsconfig.lib.json",
-        "project": "libs/core/src/lib/breadcrumb/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": false
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/core/src/lib/breadcrumb/tsconfig.lib.prod.json"
+    "name": "core-breadcrumb",
+    "projectType": "library",
+    "sourceRoot": "libs/core/src/lib/breadcrumb",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["{workspaceRoot}/dist/libs/core/breadcrumb"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/breadcrumb/tsconfig.lib.json",
+                "project": "libs/core/src/lib/breadcrumb/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/breadcrumb/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/breadcrumb/test.ts",
+                "tsConfig": "libs/core/src/lib/breadcrumb/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/breadcrumb/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/core/src/lib/breadcrumb/**/*.ts", "libs/core/src/lib/breadcrumb/**/*.html"]
+            }
         }
-      }
     },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/core/src/lib/breadcrumb/**/*.ts",
-          "libs/core/src/lib/breadcrumb/**/*.html"
-        ]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
-      "options": {
-        "jestConfig": "libs/core/src/lib/breadcrumb/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
-      }
-    }
-  },
-  "tags": [
-    "type:lib",
-    "scope:fd"
-  ]
+    "tags": ["type:lib", "scope:fd"]
 }
