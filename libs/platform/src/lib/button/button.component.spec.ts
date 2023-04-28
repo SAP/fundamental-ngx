@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { PlatformButtonModule } from './button.module';
-
 import { ButtonComponent } from './button.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ButtonComponent', () => {
     let component: ButtonComponent;
@@ -10,8 +9,8 @@ describe('ButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformButtonModule],
-            declarations: [ButtonComponent]
+            declarations: [ButtonComponent],
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));
 
@@ -32,10 +31,10 @@ describe('ButtonComponent', () => {
     });
 
     it('should not select a button', () => {
-        const element = fixture.debugElement.nativeElement.querySelector('button');
+        const element = fixture.debugElement.nativeElement.querySelector('button') as HTMLButtonElement;
         component.ariaSelected = false;
         fixture.detectChanges();
-        expect(element.ariaSelected).toBe('false');
+        expect(element.getAttribute('aria-selected')).toBe('false');
     });
 
     it('should have a content disabled button', () => {
@@ -46,9 +45,9 @@ describe('ButtonComponent', () => {
     });
 
     it('should have aria disabled', () => {
-        const element = fixture.debugElement.nativeElement.querySelector('button');
+        const element = fixture.debugElement.nativeElement.querySelector('button') as HTMLButtonElement;
         component.ariaDisabled = true;
         fixture.detectChanges();
-        expect(element.ariaDisabled).toBeTruthy();
+        expect(element.getAttribute('aria-disabled')).toBeTruthy();
     });
 });
