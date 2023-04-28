@@ -1,9 +1,6 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { GridListModule } from '../../grid-list.module';
 import { GridListComponent } from '../grid-list/grid-list.component';
 
@@ -111,7 +108,8 @@ describe('GridListItemComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent],
-            imports: [GridListModule, ButtonModule, AvatarModule]
+            imports: [GridListModule],
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));
 
