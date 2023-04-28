@@ -1,3 +1,12 @@
+## [0.40.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.40.2...v0.40.3-rc.0) (2023-04-28)
+
+
+### Bug Fixes
+
+* **core:** roll back styles version ([#9768](https://github.com/SAP/fundamental-ngx/issues/9768)) ([7511373](https://github.com/SAP/fundamental-ngx/commit/75113734118406ca3d509bf830f22d4e68d579db))
+
+
+
 ## [0.40.2](https://github.com/SAP/fundamental-ngx/compare/v0.40.2-rc.22...v0.40.2) (2023-04-25)
 
 
