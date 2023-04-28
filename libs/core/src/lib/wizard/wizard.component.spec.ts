@@ -102,12 +102,12 @@ describe('WizardComponent', () => {
     }));
 
     it('should handle resize - screen getting bigger', fakeAsync(() => {
-        jest.spyOn(element.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
+        spyOn(element.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
 
         component.resizeHandler();
         tick(10);
 
-        element.nativeElement.getBoundingClientRect.mockReturnValue({ width: 2 });
+        element.nativeElement.getBoundingClientRect.and.returnValue({ width: 2 });
         step3.nativeElement.style.width = '200px';
 
         component.resizeHandler();
@@ -130,7 +130,7 @@ describe('WizardComponent', () => {
     }));
 
     it('should handleStepOrStatusChanges', fakeAsync(() => {
-        jest.spyOn(component.wrapperContainer.nativeElement.children[0], 'scrollTo');
+        spyOn(component.wrapperContainer.nativeElement.children[0], 'scrollTo');
 
         component.ngAfterViewInit();
         tick(10);
@@ -142,7 +142,7 @@ describe('WizardComponent', () => {
     }));
 
     it('should handleScrollSpyChange', fakeAsync(() => {
-        jest.spyOn(step3.nativeElement.children[0], 'id').mockReturnValue('2');
+        spyOnProperty(step3.nativeElement.children[0], 'id').and.returnValue('2');
 
         component.ngAfterViewInit();
         tick(10);

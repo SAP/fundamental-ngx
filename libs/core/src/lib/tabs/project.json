@@ -1,54 +1,37 @@
 {
-  "name": "core-tabs",
-  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "library",
-  "sourceRoot": "libs/core/src/lib/tabs",
-  "prefix": "fd",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:ng-packagr-lite",
-      "outputs": [
-        "{workspaceRoot}/dist/libs/core/tabs"
-      ],
-      "options": {
-        "tsConfig": "libs/core/src/lib/tabs/tsconfig.lib.json",
-        "project": "libs/core/src/lib/tabs/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": false
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/core/src/lib/tabs/tsconfig.lib.prod.json"
+    "name": "core-tabs",
+    "projectType": "library",
+    "sourceRoot": "libs/core/src/lib/tabs",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["{workspaceRoot}/dist/libs/core/tabs"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/tabs/tsconfig.lib.json",
+                "project": "libs/core/src/lib/tabs/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/tabs/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/tabs/test.ts",
+                "tsConfig": "libs/core/src/lib/tabs/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/tabs/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/core/src/lib/tabs/**/*.ts", "libs/core/src/lib/tabs/**/*.html"]
+            }
         }
-      }
     },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/core/src/lib/tabs/**/*.ts",
-          "libs/core/src/lib/tabs/**/*.html"
-        ]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
-      "options": {
-        "jestConfig": "libs/core/src/lib/tabs/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
-      }
-    }
-  },
-  "tags": [
-    "type:lib",
-    "scope:fd"
-  ]
+    "tags": ["type:lib", "scope:fd"]
 }

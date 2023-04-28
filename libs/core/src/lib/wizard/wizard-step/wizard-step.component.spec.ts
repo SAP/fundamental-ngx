@@ -24,7 +24,7 @@ describe('WizardStepComponent', () => {
 
     it('should handle key press (or mouse click if no event is passed)', () => {
         component.visited = true;
-        jest.spyOn(component.stepClicked, 'emit');
+        spyOn(component.stepClicked, 'emit');
         component.stepContainerKeypress();
         expect(component.stepClicked.emit).toHaveBeenCalled();
     });

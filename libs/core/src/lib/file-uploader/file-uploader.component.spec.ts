@@ -39,10 +39,10 @@ describe('FileUploaderComponent', () => {
     });
 
     it('should selectHandler with no maxFileSize', () => {
-        jest.spyOn(component, 'onChange');
-        jest.spyOn(component.selectedFilesChanged, 'emit');
+        spyOn(component, 'onChange').and.callThrough();
+        spyOn(component.selectedFilesChanged, 'emit').and.callThrough();
         const file1: MockFile = new File([''], 'file1');
-        jest.replaceProperty(file1, 'size', 1024);
+        spyOnProperty(file1, 'size').and.returnValue(1024);
         const event: File[] = [file1];
         component.selectHandler(event);
         expect(component.onChange).toHaveBeenCalledWith(event);
@@ -50,13 +50,13 @@ describe('FileUploaderComponent', () => {
     });
 
     it('should selectHandler with maxFileSize', () => {
-        jest.spyOn(component, 'onChange');
-        jest.spyOn(component.selectedFilesChanged, 'emit');
-        jest.spyOn(component.selectedInvalidFiles, 'emit');
+        spyOn(component, 'onChange').and.callThrough();
+        spyOn(component.selectedFilesChanged, 'emit').and.callThrough();
+        spyOn(component.selectedInvalidFiles, 'emit').and.callThrough();
         const file1: MockFile = new File([''], 'file1');
-        jest.replaceProperty(file1, 'size', 1024);
+        spyOnProperty(file1, 'size').and.returnValue(1024);
         const file2: MockFile = new File([''], 'file2');
-        jest.replaceProperty(file2, 'size', 1048580);
+        spyOnProperty(file2, 'size').and.returnValue(1048580);
         const event: File[] = [file1, file2];
         component.maxFileSize = '1MB';
         component.selectHandler(event);
@@ -66,13 +66,13 @@ describe('FileUploaderComponent', () => {
     });
 
     it('should selectHandler with minFileSize', () => {
-        jest.spyOn(component, 'onChange');
-        jest.spyOn(component.selectedFilesChanged, 'emit');
-        jest.spyOn(component.selectedInvalidFiles, 'emit');
+        spyOn(component, 'onChange').and.callThrough();
+        spyOn(component.selectedFilesChanged, 'emit').and.callThrough();
+        spyOn(component.selectedInvalidFiles, 'emit').and.callThrough();
         const file1: MockFile = new File([''], 'file1');
-        jest.replaceProperty(file1, 'size', 1048580);
+        spyOnProperty(file1, 'size').and.returnValue(1048580);
         const file2: MockFile = new File([''], 'file2');
-        jest.replaceProperty(file2, 'size', 1024);
+        spyOnProperty(file2, 'size').and.returnValue(1024);
         const event: File[] = [file1, file2];
         component.minFileSize = '1MB';
         component.selectHandler(event);
@@ -81,13 +81,13 @@ describe('FileUploaderComponent', () => {
         expect(component.selectedInvalidFiles.emit).toHaveBeenCalledWith([file2]);
     });
     it('should selectHandler with minFileSize and maxFileSize', () => {
-        jest.spyOn(component, 'onChange');
-        jest.spyOn(component.selectedFilesChanged, 'emit');
-        jest.spyOn(component.selectedInvalidFiles, 'emit');
+        spyOn(component, 'onChange').and.callThrough();
+        spyOn(component.selectedFilesChanged, 'emit').and.callThrough();
+        spyOn(component.selectedInvalidFiles, 'emit').and.callThrough();
         const file1: MockFile = new File([''], 'file1');
-        jest.replaceProperty(file1, 'size', 104858);
+        spyOnProperty(file1, 'size').and.returnValue(104858);
         const file2: MockFile = new File([''], 'file2');
-        jest.replaceProperty(file2, 'size', 1022);
+        spyOnProperty(file2, 'size').and.returnValue(1022);
         const event: File[] = [file1, file2];
         component.maxFileSize = '1MB';
         component.minFileSize = '1KB';
@@ -97,13 +97,13 @@ describe('FileUploaderComponent', () => {
         expect(component.selectedInvalidFiles.emit).toHaveBeenCalledWith([file2]);
     });
     it('should handle open', () => {
-        jest.spyOn(component.inputRef.nativeElement, 'click');
+        spyOn(component.inputRef.nativeElement, 'click');
         component.open();
         expect(component.inputRef.nativeElement.click).toHaveBeenCalled();
     });
 
     it('should handle clear', () => {
-        jest.spyOn(component, 'onChange');
+        spyOn(component, 'onChange');
         component.clear();
         expect(component.inputRef.nativeElement.value).toEqual('');
         expect(component.validFiles).toEqual([]);

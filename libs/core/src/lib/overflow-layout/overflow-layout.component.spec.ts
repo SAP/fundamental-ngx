@@ -77,7 +77,7 @@ describe('OverflowLayoutComponent', () => {
         await fixture.whenStable();
 
         const expectedAmount = Math.floor(component.containerWidth / component.elementsWidth);
-        const visibleItemsCountSpy = jest.spyOn(component.overflowLayout.visibleItemsCount, 'emit');
+        const visibleItemsCountSpy = spyOn(component.overflowLayout.visibleItemsCount, 'emit').and.callThrough();
 
         component.maxItems = Infinity;
         fixture.detectChanges();

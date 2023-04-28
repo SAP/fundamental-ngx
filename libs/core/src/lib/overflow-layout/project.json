@@ -1,56 +1,42 @@
 {
-  "name": "core-overflow-layout",
-  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "library",
-  "sourceRoot": "libs/core/src/lib/overflow-layout",
-  "prefix": "fd",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:ng-packagr-lite",
-      "outputs": [
-        "{workspaceRoot}/dist/libs/core/overflow-layout"
-      ],
-      "options": {
-        "project": "libs/core/src/lib/overflow-layout/ng-package.json"
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/core/src/lib/overflow-layout/tsconfig.lib.prod.json"
+    "name": "core-overflow-layout",
+    "projectType": "library",
+    "sourceRoot": "libs/core/src/lib/overflow-layout",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["{workspaceRoot}/dist/libs/core/overflow-layout"],
+            "options": {
+                "project": "libs/core/src/lib/overflow-layout/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/overflow-layout/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/core/src/lib/overflow-layout/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
         },
-        "development": {
-          "tsConfig": "libs/core/src/lib/overflow-layout/tsconfig.lib.json"
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/core/src/lib/overflow-layout/test.ts",
+                "tsConfig": "libs/core/src/lib/overflow-layout/tsconfig.spec.json",
+                "karmaConfig": "libs/core/src/lib/overflow-layout/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/core/src/lib/overflow-layout/**/*.ts",
+                    "libs/core/src/lib/overflow-layout/**/*.html"
+                ]
+            }
         }
-      },
-      "defaultConfiguration": "production"
     },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/core/src/lib/overflow-layout/**/*.ts",
-          "libs/core/src/lib/overflow-layout/**/*.html"
-        ]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
-      "options": {
-        "jestConfig": "libs/core/src/lib/overflow-layout/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
-      }
-    }
-  },
-  "tags": [
-    "scope:fd",
-    "type:lib"
-  ]
+    "tags": ["scope:fd", "type:lib"]
 }

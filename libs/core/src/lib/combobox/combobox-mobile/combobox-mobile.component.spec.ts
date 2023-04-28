@@ -68,7 +68,7 @@ describe('ComboboxMobileComponent', () => {
         anyComponent._component.mobile = true;
         component.ngOnInit();
         anyComponent._component.openChange.emit(true);
-        jest.spyOn(anyComponent._component, 'dialogApprove');
+        spyOn(anyComponent._component, 'dialogApprove');
         fixture.detectChanges();
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         fixture.detectChanges();
@@ -81,7 +81,7 @@ describe('ComboboxMobileComponent', () => {
         component.ngOnInit();
         anyComponent._component.inputText = 'test';
         anyComponent._component.openChange.emit(true);
-        jest.spyOn(anyComponent._component, 'dialogDismiss');
+        spyOn(anyComponent._component, 'dialogDismiss');
         fixture.detectChanges();
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         fixture.detectChanges();

@@ -6,7 +6,7 @@ import { TableService } from './table.service';
 describe('TableComponent', () => {
     let component: TableComponent;
     let fixture: ComponentFixture<TableComponent>;
-    const tableSpy = { changeKeys: jest.fn() };
+    const tableSpy = jasmine.createSpyObj('TableService', ['changeKeys']);
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({

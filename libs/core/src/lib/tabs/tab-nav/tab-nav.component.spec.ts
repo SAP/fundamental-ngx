@@ -70,7 +70,7 @@ describe('TabNavDirective', () => {
     it('should react on query list change', fakeAsync(() => {
         fixture.componentInstance.tabNavDirective.ngAfterContentInit();
 
-        jest.spyOn(component as any, '_refreshSubscription');
+        spyOn(component as any, '_refreshSubscription').and.callThrough();
 
         fixture.componentInstance.showLastTab = false;
 
@@ -85,7 +85,7 @@ describe('TabNavDirective', () => {
 
         const link = component.links.get(2)!;
 
-        const focusedSpy = jest.spyOn(link.focused, 'emit');
+        const focusedSpy = spyOn(link.focused, 'emit').and.callThrough();
 
         component.elementRef().nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowRight' }));
         link.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
