@@ -293,8 +293,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
             SmartFilterBarSettingsDialogComponent,
             {
                 ...dialogConfig,
-                responsivePadding: false,
-                verticalPadding: false,
+                disablePaddings: true,
                 width: '50rem',
                 data: dialogData
             },
