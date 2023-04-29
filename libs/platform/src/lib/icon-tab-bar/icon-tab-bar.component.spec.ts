@@ -128,7 +128,7 @@ describe('IconTabBarComponent', () => {
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const someTab = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__tab');
 
-        jest.spyOn(component, 'selected');
+        spyOn(component, 'selected');
         expect(someTab).toBeDefined();
         someTab?.click();
         fixture.detectChanges();
@@ -146,7 +146,7 @@ describe('IconTabBarComponent', () => {
         const target = tabs[1];
         const targetCoords = getGetCenterCoordsOfElement(target);
 
-        jest.spyOn(component, 'reordered');
+        spyOn(component, 'reordered');
         emulateDnD(draggableItem, targetCoords);
 
         expect(component.reordered).toHaveBeenCalled();

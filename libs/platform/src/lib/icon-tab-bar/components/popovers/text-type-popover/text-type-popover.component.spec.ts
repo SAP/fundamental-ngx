@@ -84,11 +84,11 @@ describe('TextTypePopoverComponent', () => {
         };
         component.ngOnChanges({ selectedSubItemUid: component.parentTab } as any);
 
-        expect(component._containsSelected).toBe(false);
+        expect(component._containsSelected).toBeFalse();
 
         component.selectedSubItemUid = '0.1.2.3';
         component.ngOnChanges({ selectedSubItemUid: component.selectedSubItemUid } as any);
-        expect(component._containsSelected).toBe(true);
+        expect(component._containsSelected).toBeTrue();
     });
 
     it('should emit selectedExtraItem event.', () => {
@@ -98,7 +98,7 @@ describe('TextTypePopoverComponent', () => {
         component.extraTabs = tabs;
         component.ngOnChanges({ extraTabs: tabs } as unknown as SimpleChanges);
 
-        const emitSpy = jest.spyOn(component.selectedExtraItem, 'emit');
+        const emitSpy = spyOn(component.selectedExtraItem, 'emit');
         component._selectItem(component.extraTabs[0]);
 
         expect(emitSpy).toHaveBeenCalled();
@@ -111,7 +111,7 @@ describe('TextTypePopoverComponent', () => {
         component.parentTab = tabs[5];
         component.ngOnChanges({ parentTab: tabs[5] } as unknown as SimpleChanges);
 
-        const emitSpy = jest.spyOn(component.selectedSubItem, 'emit');
+        const emitSpy = spyOn(component.selectedSubItem, 'emit');
         const subItem = component.parentTab.subItems?.[0];
         expect(subItem).toBeDefined();
         component._selectItem(subItem!);
