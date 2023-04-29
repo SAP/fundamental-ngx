@@ -48,7 +48,7 @@ describe('FeedListItemComponent', () => {
         component.authorTitle = authorTitle;
         component.authorLink = authorLink;
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.querySelector('.fd-feed-list__name a').innerText).toContain(
+        expect(component.elementRef().nativeElement.querySelector('.fd-feed-list__name a').innerHTML).toContain(
             authorTitle
         );
         expect(
@@ -67,7 +67,9 @@ describe('FeedListItemComponent', () => {
         component.isRichText = true;
         component.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains(`${componentClassPrefix}--collapsible`)).toBe(false);
+        expect(component.elementRef().nativeElement.classList.contains(`${componentClassPrefix}--collapsible`)).toBe(
+            false
+        );
         expect(component.elementRef().nativeElement.querySelector('.fd-feed-list__link--more')).toBeFalsy();
     });
 
@@ -81,17 +83,18 @@ describe('FeedListItemComponent', () => {
         component.moreLabel = moreLabel;
         component.lessLabel = lessLabel;
         fixture.detectChanges();
+        const linkContent = (): string =>
+            component
+                .elementRef()
+                .nativeElement.querySelector('.fd-feed-list__link--more .fd-link__content')
+                .innerHTML.toLowerCase()
+                .trim();
         await fixture.whenStable();
-        let text = component
-            .elementRef()
-            .nativeElement.querySelector('.fd-feed-list__link--more')
-            .innerText.toLowerCase();
-        expect(text).toEqual(moreLabel);
+        expect(linkContent()).toEqual(moreLabel);
         component.isCollapsed = false;
         fixture.detectChanges();
         await fixture.whenStable();
-        text = component.elementRef().nativeElement.querySelector('.fd-feed-list__link--more').innerText.toLowerCase();
-        expect(text).toEqual(lessLabel.toLowerCase());
+        expect(linkContent()).toEqual(lessLabel.toLowerCase());
     });
 
     it('should have ability to toggle view', () => {

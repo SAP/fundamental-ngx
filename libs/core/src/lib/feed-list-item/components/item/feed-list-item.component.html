@@ -51,18 +51,13 @@
     <span>
         {{ isCollapsed ? (text | truncate : maxChars) : text }}
     </span>
-    <a
-        fd-link
-        class="fd-feed-list__link--more"
-        tabindex="0"
-        *ngIf="!isRichText && hasMore"
-        (click)="toggleTextView()"
-        [innerText]="
+    <a fd-link class="fd-feed-list__link--more" tabindex="0" *ngIf="!isRichText && hasMore" (click)="toggleTextView()">
+        {{
             isCollapsed
                 ? moreLabel || ('coreFeedListItem.moreLabel' | fdTranslate)
                 : lessLabel || ('coreFeedListItem.lessLabel' | fdTranslate)
-        "
-    ></a>
+        }}
+    </a>
 </ng-template>
 
 <ng-template #headerTmpl>
