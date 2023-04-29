@@ -77,7 +77,7 @@ describe('MobileMultiComboboxComponent', () => {
         anyComponent._component.mobile = true;
         component.ngOnInit();
         anyComponent._component.openChange.emit(true);
-        jest.spyOn(anyComponent._component, '_dialogApprove');
+        spyOn(anyComponent._component, '_dialogApprove');
         fixture.detectChanges();
 
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
@@ -92,7 +92,7 @@ describe('MobileMultiComboboxComponent', () => {
         anyComponent._component.mobile = true;
         component.ngOnInit();
         anyComponent._component.openChange.emit(true);
-        jest.spyOn(anyComponent._component, '_dialogDismiss');
+        spyOn(anyComponent._component, '_dialogDismiss');
         fixture.detectChanges();
 
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);

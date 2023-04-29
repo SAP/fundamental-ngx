@@ -3142,12 +3142,12 @@
     tmp "~0.2.1"
     tslib "^2.3.0"
 
-"@nrwl/nx-cloud@16.0.0":
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/@nrwl/nx-cloud/-/nx-cloud-16.0.0.tgz#4c7f004ae4e53d51fa579fc79d6bbad43bac569f"
-  integrity sha512-Nvb9ODRpcocUPba7DsoCpVNk1005h0TuQ2HGTd5Qe7gRq1wfRExSJYHxfOuiLbLqEehRMLFuccCgsd5EQS48bQ==
+"@nrwl/nx-cloud@16.0.5":
+  version "16.0.5"
+  resolved "https://registry.yarnpkg.com/@nrwl/nx-cloud/-/nx-cloud-16.0.5.tgz#c963480a71c4afa964fbbe9e4d6bbf222764e9cd"
+  integrity sha512-1p82ym8WE9ziejwgPslstn19iV/VkHfHfKr/5YOnfCHQS+NxUf92ogcYhHXtqWLblVZ9Zs4W4pkSXK4e04wCmQ==
   dependencies:
-    nx-cloud "16.0.0"
+    nx-cloud "16.0.5"
 
 "@nrwl/nx-darwin-arm64@15.9.2":
   version "15.9.2"
@@ -5401,6 +5401,15 @@ axe-html-reporter@2.2.3:
   dependencies:
     mustache "^4.0.1"
     rimraf "^3.0.2"
+
+axios@1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.1.3.tgz#8274250dada2edf53814ed7db644b9c2866c1e35"
+  integrity sha512-00tXVRwKx/FZr/IDVFt4C+f9FYairX517WoGCL6dpOntqLkZofjhu43F/Xl44UOpqa+9sLFDrG/XAnFsUYgkDA==
+  dependencies:
+    follow-redirects "^1.15.0"
+    form-data "^4.0.0"
+    proxy-from-env "^1.1.0"
 
 axios@1.2.0:
   version "1.2.0"
@@ -14521,17 +14530,18 @@ nwsapi@^2.2.2:
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.4.tgz#fd59d5e904e8e1f03c25a7d5a15cfa16c714a1e5"
   integrity sha512-NHj4rzRo0tQdijE9ZqAx6kYDcoRwYwSYzCA8MY3JzfxlrvEU0jhnhJT9BhqhJs7I/dKcrDm6TyulaRqZPIhN5g==
 
-nx-cloud@16.0.0:
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/nx-cloud/-/nx-cloud-16.0.0.tgz#c14d662f4c0048531ed05bb5d9a7da44982ade3b"
-  integrity sha512-Fs6+j3p8eNuYtqEH+DQMblRMm7EpHRalJfs9/fogxZfaIOnxclUvADqxBJYzQ7hLnFAYTVkxNm3qXJxnLFxXrA==
+nx-cloud@16.0.5:
+  version "16.0.5"
+  resolved "https://registry.yarnpkg.com/nx-cloud/-/nx-cloud-16.0.5.tgz#fa0b0185d254405ec47fcbcdbbd8b12ff1add096"
+  integrity sha512-13P7r0aKikjBtmdZrNorwXzVPeVIV4MLEwqGY+DEG6doLBtI5KqEQk/d5B5l2dCF2BEi/LXEmLYCmf9gwbOJ+Q==
   dependencies:
-    "@nrwl/nx-cloud" "16.0.0"
-    axios "^1.0.0"
+    "@nrwl/nx-cloud" "16.0.5"
+    axios "1.1.3"
     chalk "^4.1.0"
     dotenv "~10.0.0"
     fs-extra "^11.1.0"
     node-machine-id "^1.1.12"
+    open "~8.4.0"
     strip-json-comments "^3.1.1"
     tar "6.1.11"
     yargs-parser ">=21.1.1"
@@ -14718,7 +14728,7 @@ open@8.4.1:
     is-docker "^2.1.1"
     is-wsl "^2.2.0"
 
-open@^8.0.9, open@^8.4.0:
+open@^8.0.9, open@^8.4.0, open@~8.4.0:
   version "8.4.2"
   resolved "https://registry.yarnpkg.com/open/-/open-8.4.2.tgz#5b5ffe2a8f793dcd2aad73e550cb87b59cb084f9"
   integrity sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==

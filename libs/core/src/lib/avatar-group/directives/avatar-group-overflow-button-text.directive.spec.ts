@@ -33,7 +33,7 @@ describe('AvatarGroupOverflowButtonTextDirective', () => {
     });
 
     it('should assign classes', () => {
-        expect(component.ref.nativeElement.classList.contains('fd-button__text')).toBe(true);
-        expect(component.ref.nativeElement.classList.contains('fd-avatar-group__button-text')).toBe(true);
+        expect(component.ref.nativeElement).toHaveClass('fd-button__text');
+        expect(component.ref.nativeElement).toHaveClass('fd-avatar-group__button-text');
     });
 });
