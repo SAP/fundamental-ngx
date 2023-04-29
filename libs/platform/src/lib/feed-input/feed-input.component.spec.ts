@@ -66,11 +66,11 @@ describe('FeedInputComponent', () => {
     });
 
     it('should textarea grow by default', () => {
-        const defaultHeight = textareaEl.nativeElement.style.height;
+        const defaultHeight = textareaEl.nativeElement.style.height || 0;
         textareaEl.nativeElement.value = '1 \n 2 \n 3 \n 4';
         component.resize();
 
-        expect(textareaEl.nativeElement.style.height).toBeGreaterThan(defaultHeight);
+        expect(parseInt(textareaEl.nativeElement.style.height, 10)).toBeGreaterThan(defaultHeight);
     });
 
     // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
