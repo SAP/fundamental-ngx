@@ -44,7 +44,7 @@ describe('MessageBoxContainerComponent', () => {
     });
 
     it('should create embedded content from component', () => {
-        const creationSpy = jest.spyOn(<any>component, '_createFromComponent');
+        const creationSpy = spyOn(<any>component, '_createFromComponent');
         component.childContent = TestComponent;
 
         component['_loadContent']();
@@ -53,7 +53,7 @@ describe('MessageBoxContainerComponent', () => {
     });
 
     it('should create embedded content from template', async () => {
-        const creationSpy = jest.spyOn(<any>component, '_createFromTemplate');
+        const creationSpy = spyOn(<any>component, '_createFromTemplate');
         const testComponent = TestBed.createComponent(TestComponent);
 
         await whenStable(testComponent);
@@ -65,7 +65,7 @@ describe('MessageBoxContainerComponent', () => {
     });
 
     it('should create embedded content from content object', () => {
-        const creationSpy = jest.spyOn(<any>component, '_createFromDefaultMessageBox');
+        const creationSpy = spyOn(<any>component, '_createFromDefaultMessageBox');
 
         component.childContent = { title: 'title' } as MessageBoxContent;
 
