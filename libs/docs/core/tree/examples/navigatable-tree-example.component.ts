@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { TreeItem } from '@fundamental-ngx/core/tree';
 
 export interface AdditionalTreeItemData {
@@ -7,11 +7,12 @@ export interface AdditionalTreeItemData {
 }
 
 @Component({
-    selector: 'fd-simple-tree-example',
-    templateUrl: './simple-tree-example.component.html',
+    selector: 'fd-navigatable-tree-example',
+    templateUrl: './navigatable-tree-example.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SimpleTreeExampleComponent {
+export class NavigatableTreeExampleComponent {
     model: TreeItem<AdditionalTreeItemData>;
     items: Partial<TreeItem<AdditionalTreeItemData>>[] = [
         {
@@ -42,6 +43,7 @@ export class SimpleTreeExampleComponent {
                                 {
                                     navigatable: false,
                                     expanded: true,
+                                    state: 'default',
                                     data: {
                                         icon: 'competitor',
                                         title: 'Item 1 (Level 4)'
@@ -62,4 +64,8 @@ export class SimpleTreeExampleComponent {
             }
         }
     ];
+
+    onClick(event: MouseEvent | KeyboardEvent, title: string): void {
+        alert(`Item "${title} clicked with" ${event instanceof MouseEvent ? 'mouse click' : 'keyboard'}`);
+    }
 }

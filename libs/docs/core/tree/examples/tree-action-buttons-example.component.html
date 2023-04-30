@@ -1,0 +1,16 @@
+<fd-tree [dataSource]="items" selection="multiple">
+    <fd-tree-item
+        *fdTreeItemDef="let item; as: model"
+        [level]="item.level"
+        [state]="item.state"
+        [childNodes]="item.children"
+        [expanded]="item.expanded"
+        [parentId]="item.parentId"
+        [id]="item.id"
+    >
+        <fd-icon fdTreeItemIcon [glyph]="item.data.icon"></fd-icon>
+        <span fdTreeItemText>{{ item.data.title }}</span>
+        <button fd-button *ngIf="item.data.editable" fdType="transparent" fdTreeItemButton glyph="edit"></button>
+        <button fd-button *ngIf="item.data.editable" fdType="transparent" fdTreeItemButton glyph="decline"></button>
+    </fd-tree-item>
+</fd-tree>

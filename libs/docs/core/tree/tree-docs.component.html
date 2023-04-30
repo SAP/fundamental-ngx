@@ -1,29 +1,104 @@
-<fd-docs-section-title id="fdTree" componentName="tree"> &lt;fd-tree&gt; </fd-docs-section-title>
-There are two different types of tree cells you can use, the 'simple' cells and the 'rich' cells. Simple cells can only
-display text. Rich cells can contain plain text or links. The tree component requires only two root arguments, a
-'headers' array and a 'treeData' array. The children of the tree are generated recursively from data within the treeData
-array.
-<br /><br />
-In a tree with simple cells, the treeData property is an array of objects that contain two properties, 'rowData' and
-optionally 'children'. Simple cell rowData is an array of strings, each string being a cell in the tree. The 'children'
-property is an array of objects that match this object's structure.
+<fd-docs-section-title id="default" componentName="tree">Default tree</fd-docs-section-title>
+<description>
+    <p>Tree Component allows the user to display and work with a hierarchical set of items.</p>
+    <p>Tree Component supports two approaches of rendering the nodes:</p>
+    <ul>
+        <li>
+            <b>Declarative</b>: works with content projected <code>fd-tree-item</code> components. Child tree items
+            should be inside parent tree item;
+        </li>
+        <li>
+            <b>Imperative</b>: works with data source and provided <code>fd-tree-item</code> definition with the help of
+            <code>*fdTreeItemDef</code> directive
+        </li>
+    </ul>
+    <p>
+        Tree item text is rendered with the help of <code>fdTreeItemText</code>, which allows developers to use any type
+        of content as a text (for example, <code>TemplateRef</code>).
+    </p>
+    <p>Tree item icon can be added with the help of <code>fdTreeItemIcon</code> directive.</p>
 
-<separator></separator>
+    <p>
+        <b>Keyboard navigation</b>: Tree component supports keyboard navigation with the help of arrow keys:
+        <b>up and down</b> will navigate through the items on the same level, <b>left and right</b> will navigate to
+        child or parent level depending on content direction.
+    </p>
+</description>
 
-<fd-docs-section-title id="simple" componentName="tree"> Simple Tree </fd-docs-section-title>
-This is an example of a tree with simple cells, where the rowData is an array of strings.<br /><br />
-<br />
 <component-example>
     <fd-simple-tree-example></fd-simple-tree-example>
 </component-example>
+<code-example [exampleFiles]="simpleExample"></code-example>
 
-<!--<separator></separator>-->
+<separator></separator>
 
-<!--<h2>Rich Tree</h2>-->
-<!--This is an example of a tree with rich cells, where the rowData is an array of objects, where each object can have one-->
-<!--or both of the following properties:<br><br>-->
-<!--<component-example>-->
-<!--    <fd-simple-tree-example></fd-simple-tree-example>-->
-<!--</component-example>-->
-<!--<code-example [code]="richTreeHtml" language="HTML"></code-example>-->
-<!--<code-example [code]="richTreeJson" language="HTML"></code-example>-->
+<fd-docs-section-title id="navigatable" componentName="tree">Navigatable tree items</fd-docs-section-title>
+<description>
+    <p>
+        Tree items can be marked as navigatable. By passing <code>[navigatable]="true"</code> input property, tree item
+        will become interactable.
+    </p>
+    <p>
+        In order to render nafvigation indicator, developers should pass input property
+        <code>[navigationIndicator]="true"</code> to the tree item component.
+    </p>
+</description>
+
+<component-example>
+    <fd-navigatable-tree-example></fd-navigatable-tree-example>
+</component-example>
+<code-example [exampleFiles]="navigatableExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="indicators" componentName="tree">Highlight indicators</fd-docs-section-title>
+<description>
+    <p>Tree item component supports applying highlight indicators.</p>
+    <p>
+        In order to set the indicator, developers need to pass <code>[state]</code> input property with appropriate
+        value.
+    </p>
+</description>
+
+<component-example>
+    <fd-tree-highlight-indicators-example></fd-tree-highlight-indicators-example>
+</component-example>
+<code-example [exampleFiles]="highlightExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="action-buttons">Tree item action buttons</fd-docs-section-title>
+<description>
+    <p>Tree item component supports projecting action buttons.</p>
+    <p>
+        In order to add such buttons, developers should pass element with <code>fdTreeItemButton</code> directive to the
+        tree item content.
+    </p>
+</description>
+
+<component-example>
+    <fd-tree-action-buttons-example></fd-tree-action-buttons-example>
+</component-example>
+<code-example [exampleFiles]="buttonsExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="selection" componentName="tree">Selectable tree items</fd-docs-section-title>
+
+<description>
+    <p>Tree supports selectable state for the tree items.</p>
+    <p>
+        To enable selection, add <code>[selection]="'single' | 'multiple'"</code> input property to the
+        <code>fd-tree</code>.
+    </p>
+    <p>
+        Additionally, developers can specify the location of selection indicator with the help of
+        <code>[selectionPlacement]</code> input property.
+    </p>
+    <p>Selectable tree can also work with Angular Forms. Both reactive and template driven.</p>
+</description>
+
+<component-example>
+    <fd-tree-with-forms-example></fd-tree-with-forms-example>
+</component-example>
+<code-example [exampleFiles]="formsExample"></code-example>

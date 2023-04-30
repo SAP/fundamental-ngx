@@ -1,0 +1,16 @@
+<fd-tree [dataSource]="items" selection="multiple">
+    <fd-tree-item
+        *fdTreeItemDef="let item; as: model"
+        [level]="item.level"
+        [navigatable]="item.navigatable"
+        [navigationIndicator]="item.navigationIndicator"
+        [childNodes]="item.children"
+        [expanded]="item.expanded"
+        [parentId]="item.parentId"
+        [id]="item.id"
+        (treeItemClick)="onClick($event, item.data.title)"
+    >
+        <fd-icon fdTreeItemIcon [glyph]="item.data.icon"></fd-icon>
+        <span fdTreeItemText>{{ item.data.title }}</span>
+    </fd-tree-item>
+</fd-tree>

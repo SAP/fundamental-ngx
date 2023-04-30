@@ -1,22 +1,24 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { TreeItem } from '@fundamental-ngx/core/tree';
 
-export interface AdditionalTreeItemData {
+interface AdditionalTreeItemData {
     title: string;
     icon: string;
 }
 
 @Component({
-    selector: 'fd-simple-tree-example',
-    templateUrl: './simple-tree-example.component.html',
+    selector: 'fd-tree-highlight-indicators-example',
+    templateUrl: './tree-highlight-indicators-example.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SimpleTreeExampleComponent {
+export class TreeHighlightIndicatorsExampleComponent {
     model: TreeItem<AdditionalTreeItemData>;
     items: Partial<TreeItem<AdditionalTreeItemData>>[] = [
         {
             navigatable: true,
             expanded: false,
+            state: 'success',
             navigationIndicator: true,
             data: {
                 icon: 'e-care',
@@ -26,6 +28,7 @@ export class SimpleTreeExampleComponent {
                 {
                     navigatable: true,
                     expanded: false,
+                    state: 'error',
                     data: {
                         icon: 'product',
                         title: 'Item 1 (Level 2)'
@@ -34,6 +37,7 @@ export class SimpleTreeExampleComponent {
                         {
                             navigatable: false,
                             expanded: true,
+                            state: 'warning',
                             data: {
                                 icon: 'competitor',
                                 title: 'Item 1 (Level 3)'
@@ -42,6 +46,7 @@ export class SimpleTreeExampleComponent {
                                 {
                                     navigatable: false,
                                     expanded: true,
+                                    state: 'default',
                                     data: {
                                         icon: 'competitor',
                                         title: 'Item 1 (Level 4)'

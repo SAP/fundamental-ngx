@@ -1,3 +1,4 @@
+import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -72,7 +73,16 @@ export class RadioButtonComponent
      * Includes the radio in the page tab sequence.
      */
     @Input()
-    tabIndex: number;
+    set tabIndex(value: NumberInput) {
+        this._tabIndex = coerceNumberProperty(value);
+    }
+
+    get tabIndex(): NumberInput {
+        return this._tabIndex;
+    }
+
+    /** @hidden */
+    private _tabIndex: number;
 
     /** The field to set state of radio button using:
      * 'success' | 'error' | 'warning' | 'default' | 'information'
@@ -116,9 +126,13 @@ export class RadioButtonComponent
     @Input()
     value: any;
 
-    /** If it is mandatory field */
+    /** If it is a mandatory field */
     @Input()
     required = false;
+
+    /** Whether the control is a standalone. */
+    @Input()
+    standalone = false;
 
     /** Whether the radio button is checked. */
     get checked(): boolean {
@@ -229,6 +243,9 @@ export class RadioButtonComponent
 
     /** @hidden */
     private _checkMandatoryFields(): void {
+        if (this.standalone) {
+            return;
+        }
         if (this.name === undefined) {
             throw new Error('name field is required');
         }

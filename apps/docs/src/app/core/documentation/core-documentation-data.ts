@@ -78,6 +78,7 @@ export const components: SectionInterfaceContent[] = [
     { url: 'core/time', name: 'Time' },
     { url: 'core/time-picker', name: 'Time Picker' },
     { url: 'core/title', name: 'Title' },
+    { url: 'core/tree', name: 'Tree' },
     { url: 'core/switch', name: 'Switch' },
     { url: 'core/token', name: 'Token' },
     { url: 'core/toolbar', name: 'Toolbar' },

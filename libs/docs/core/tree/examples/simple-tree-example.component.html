@@ -1,0 +1,46 @@
+<h3>Imperative Approach:</h3>
+<fd-tree>
+    <fd-tree-item>
+        <fd-icon fdTreeItemIcon glyph="account"></fd-icon>
+        <span fdTreeItemText>Item 1 (Level 1)</span>
+    </fd-tree-item>
+    <fd-tree-item>
+        <fd-icon fdTreeItemIcon glyph="e-care"></fd-icon>
+        <span fdTreeItemText>Item 2 (Level 1)</span>
+        <fd-tree-item>
+            <span fdTreeItemText>Item 1 (Level 2)</span>
+            <fd-tree-item>
+                <span fdTreeItemText>Item 1 (Level 3)</span>
+                <fd-tree-item>
+                    <span fdTreeItemText>Item 1 (Level 4)</span>
+                    <fd-tree-item>
+                        <span fdTreeItemText>Item 1 (Level 5)</span>
+                    </fd-tree-item>
+                </fd-tree-item>
+            </fd-tree-item>
+        </fd-tree-item>
+        <fd-tree-item>
+            <span fdTreeItemText>Item 2 (Level 2)</span>
+        </fd-tree-item>
+    </fd-tree-item>
+    <fd-tree-item>
+        <fd-icon fdTreeItemIcon glyph="phone"></fd-icon>
+        <span fdTreeItemText>Item 3 (Level 1)</span>
+    </fd-tree-item>
+</fd-tree>
+<h3>Declarative Approach:</h3>
+<fd-tree [dataSource]="items" selection="multiple">
+    <fd-tree-item
+        *fdTreeItemDef="let item; as: model"
+        [level]="item.level"
+        [navigatable]="item.navigatable"
+        [navigationIndicator]="item.navigationIndicator"
+        [childNodes]="item.children"
+        [expanded]="item.expanded"
+        [parentId]="item.parentId"
+        [id]="item.id"
+    >
+        <fd-icon fdTreeItemIcon [glyph]="item.data.icon"></fd-icon>
+        <span fdTreeItemText>{{ item.data.title }}</span>
+    </fd-tree-item>
+</fd-tree>

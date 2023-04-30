@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, ElementRef, Inject, Input, Optional, Output } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, Inject, Input, Optional, Output } from '@angular/core';
 import { merge, Observable } from 'rxjs';
 import { SelectableItemToken } from './selectable-item.token';
 import { FDK_SELECTABLE_ITEM_PROVIDER } from './selectable-list.tokens';
@@ -62,6 +62,10 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
     @Output()
     clicked: Observable<MouseEvent | KeyboardEvent>;
 
+    /** Event emitted when selection state being changed for selectable item. */
+    @Output()
+    selected = new EventEmitter<boolean>();
+
     /** @hidden */
     private _value!: ValueType;
     /** @hidden */
@@ -108,6 +112,8 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
             }
             htmlElement.setAttribute('aria-selected', `${isSelected}`);
         }
+
+        this.selected.emit(isSelected);
     }
 
     /** @hidden */

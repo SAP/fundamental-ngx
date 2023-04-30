@@ -1,0 +1,86 @@
+<div
+    class="fd-tree__item-container"
+    tabindex="0"
+    (click)="_onClick($event)"
+    (keyup.enter)="_onClick($any($event))"
+    (keyup.space)="_onClick($any($event))"
+    fdkSelectableItem
+    (selected)="_setSelected($event)"
+    [value]="value"
+    #itemContainer
+    [ngClass]="[
+        state ? 'has-highlight-indicator has-highlight-indicator--' + state : '',
+        navigatable ? 'fd-tree__item-container--active' : '',
+        wrapContent ? 'fd-tree__content--wrap' : ''
+    ]"
+>
+    <ng-container *ngIf="_selectionModel?.placement === 'left'">
+        <ng-template [ngTemplateOutlet]="selection"></ng-template>
+    </ng-container>
+    <ng-container *ngIf="hasChildren">
+        <button
+            tabindex="-1"
+            *ngIf="children.length > 0 || hasProjectedChildren"
+            (click)="_toggleExpandState($event)"
+            class="fd-tree__expander"
+            [class.is-expanded]="expanded"
+            aria-haspopup="true"
+            [attr.aria-expanded]="expanded"
+        >
+            <fd-icon [glyph]="expanded ? 'navigation-down-arrow' : 'navigation-right-arrow'"></fd-icon>
+        </button>
+        <div class="fd-tree__expander fd-tree__expander--loading" *ngIf="!_childrenLoaded">
+            <fd-skeleton type="rectangle" width="1rem" height="1rem"></fd-skeleton>
+        </div>
+        <ng-container *ngIf="_selectionModel?.placement === 'afterExpand'">
+            <ng-template [ngTemplateOutlet]="selection"></ng-template>
+        </ng-container>
+    </ng-container>
+    <div class="fd-tree__content">
+        <ng-content select="[fdTreeItemIcon]"></ng-content>
+        <ng-content select="[fdTreeItemText]"></ng-content>
+    </div>
+    <ng-content select="[fdTreeItemButton]"></ng-content>
+    <ng-container *ngIf="_selectionModel?.placement === 'right'">
+        <ng-template [ngTemplateOutlet]="selection"></ng-template>
+    </ng-container>
+    <fd-icon
+        glyph="slim-arrow-right"
+        class="fd-tree__icon fd-tree__icon--navigation"
+        *ngIf="navigatable && navigationIndicator"
+    ></fd-icon>
+</div>
+
+<ng-container *ngIf="hasProjectedChildren && expanded">
+    <div class="fd-tree">
+        <ng-content select="fd-tree-item"></ng-content>
+    </div>
+</ng-container>
+
+<ng-template #selection>
+    <div class="fd-form-item">
+        <fd-checkbox
+            [(ngModel)]="_selectionState"
+            [ngModelOptions]="{ standalone: true }"
+            (click)="_onClick($event)"
+            (keyup.enter)="_onClick($any($event))"
+            (keyup.space)="_onClick($any($event))"
+            [standalone]="true"
+            tabIndexValue="-1"
+            *ngIf="_selectionModel?.mode === 'multiple'"
+        ></fd-checkbox>
+        <fd-radio-button
+            [(ngModel)]="_selectionState"
+            [ngModelOptions]="{ standalone: true }"
+            [selectedValue]="_selectionState"
+            [value]="true"
+            tabIndex="-1"
+            [standalone]="true"
+            (click)="_onClick($event)"
+            (keyup.enter)="_onClick($any($event))"
+            (keyup.space)="_onClick($any($event))"
+            tabIndexValue="-1"
+            *ngIf="_selectionModel?.mode === 'single'"
+        ></fd-radio-button>
+    </div>
+</ng-template>
