@@ -102,3 +102,21 @@
     <fd-tree-with-forms-example></fd-tree-with-forms-example>
 </component-example>
 <code-example [exampleFiles]="formsExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="lazy-loading" componentName="tree">Lazy loading tree items</fd-docs-section-title>
+
+<description>
+    <p>By default Tree component can accept Data source, observable of and array items and a plain array of items.</p>
+    <p>With large amount of items, this may cause a performance issues.</p>
+    <p>
+        To avoid that, developers can extend default <code>FdTreeDataSource</code> and <code>DataProvider</code> classes
+        to implement lazy loading of the child nodes.
+    </p>
+</description>
+
+<component-example>
+    <fd-lazily-loaded-tree-items-example></fd-lazily-loaded-tree-items-example>
+</component-example>
+<code-example [exampleFiles]="lazyLoadingExample"></code-example>

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 export class FdTreeDataSource<T> extends BaseDataSource<T> {
     /** @hidden */
-    limitless = false;
+    limitless = true;
     /** @hidden */
     constructor(public dataProvider: AbstractDataProvider<T>) {
         super(dataProvider);

@@ -14,6 +14,7 @@ import { TreeWithFormsExampleComponent } from './examples/tree-with-forms-exampl
 import { NavigatableTreeExampleComponent } from './examples/navigatable-tree-example.component';
 import { TreeHighlightIndicatorsExampleComponent } from './examples/tree-highlight-indicators-example.component';
 import { TreeActionButtonsExampleComponent } from './examples/tree-action-buttons-example.component';
+import { LazilyLoadedTreeItemsExampleComponent } from './examples/lazily-loaded-tree-items-example.component';
 
 const routes: Routes = [
     {
@@ -50,7 +51,8 @@ const routes: Routes = [
         TreeWithFormsExampleComponent,
         NavigatableTreeExampleComponent,
         TreeHighlightIndicatorsExampleComponent,
-        TreeActionButtonsExampleComponent
+        TreeActionButtonsExampleComponent,
+        LazilyLoadedTreeItemsExampleComponent
     ],
     providers: [currentComponentProvider('tree')]
 })

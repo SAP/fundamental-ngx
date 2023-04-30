@@ -14,6 +14,8 @@ const buttonsTreeExample = 'tree-action-buttons-example.component.ts';
 const buttonsTreeExampleHtml = 'tree-action-buttons-example.component.html';
 const formsExample = 'tree-with-forms-example.component.ts';
 const formsExampleHtml = 'tree-with-forms-example.component.html';
+const lazyLoadingExampleTs = 'lazily-loaded-tree-items-example.component.ts';
+const lazyLoadingExampleHtml = 'lazily-loaded-tree-items-example.component.html';
 
 @Component({
     selector: 'app-tree',
@@ -87,6 +89,20 @@ export class TreeDocsComponent {
             code: getAssetFromModuleAssets(formsExample),
             fileName: 'tree-with-forms-example',
             component: 'TreeWithFormsExampleComponent'
+        }
+    ];
+
+    lazyLoadingExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(lazyLoadingExampleHtml),
+            fileName: 'lazily-loaded-tree-items-example'
+        },
+        {
+            language: 'TypeScript',
+            code: getAssetFromModuleAssets(lazyLoadingExampleTs),
+            fileName: 'lazily-loaded-tree-items-examplee',
+            component: 'LazilyLoadedTreeItemsExampleComponent'
         }
     ];
 }
