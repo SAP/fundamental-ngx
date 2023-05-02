@@ -104,7 +104,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     private _openDialog(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,
-            verticalPadding: false,
+            disablePaddings: true,
             ...this.dialogConfig,
             escKeyCloseable: false,
             backdropClickCloseable: false,

@@ -151,6 +151,7 @@ export class DialogComponent
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
+        this._listenOnHidden();
         this.buildComponentCssClass();
     }
 
@@ -190,6 +191,9 @@ export class DialogComponent
 
     /** @hidden Listen on Dialog visibility */
     private _listenOnHidden(): void {
+        if (this._onHidden) {
+            this._onHidden.unsubscribe();
+        }
         this._onHidden = this._dialogRef.onHide.subscribe((isHidden) => {
             this.showDialogWindow = !isHidden;
             this.buildComponentCssClass();
