@@ -11,8 +11,6 @@ import { ToolbarLabelDirective } from './toolbar-label.directive';
 import { ToolbarOverflowButtonDirective } from './toolbar-overflow-button.directive';
 import { ToolbarOverflowButtonMenuDirective } from './toolbar-overflow-button-menu.directive';
 import { ToolbarFormLabelDirective } from './toolbar-form-label.directive';
-import { ToolbarOverflowPriorityDirective } from './toolbar-overflow-priority.directive';
-import { ToolbarOverflowGroupDirective } from './toolbar-overflow-group.directive';
 import { DeprecatedToolbarSizeDirective } from './deprecated-toolbar-size.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
@@ -25,8 +23,6 @@ const components = [
     ToolbarLabelDirective,
     ToolbarOverflowButtonDirective,
     ToolbarOverflowButtonMenuDirective,
-    ToolbarOverflowPriorityDirective,
-    ToolbarOverflowGroupDirective,
     DeprecatedToolbarSizeDirective
 ];
 
