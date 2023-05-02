@@ -105,7 +105,7 @@ export class PlatformMultiInputMobileComponent
     private _open(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,
-            verticalPadding: false,
+            disablePaddings: true,
             ...this.dialogConfig,
             backdropClickCloseable: false,
             escKeyCloseable: false,

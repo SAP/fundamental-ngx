@@ -150,8 +150,7 @@ export class TableP13DialogComponent implements OnDestroy {
             P13FilteringDialogComponent,
             {
                 ...dialogConfig,
-                responsivePadding: false,
-                verticalPadding: false,
+                disablePaddings: true,
                 width: '50rem',
                 data: dialogData
             },
@@ -212,8 +211,7 @@ export class TableP13DialogComponent implements OnDestroy {
             P13ColumnsDialogComponent,
             {
                 ...dialogConfig,
-                responsivePadding: false,
-                verticalPadding: false,
+                disablePaddings: true,
                 minWidth: '35rem',
                 data: dialogData
             },

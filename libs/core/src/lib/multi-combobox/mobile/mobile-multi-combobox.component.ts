@@ -108,11 +108,11 @@ export class MobileMultiComboboxComponent
     private _open(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate, {
             mobile: true,
-            verticalPadding: false,
             ...this.dialogConfig,
             backdropClickCloseable: false,
             escKeyCloseable: false,
-            container: this._elementRef.nativeElement
+            container: this._elementRef.nativeElement,
+            disablePaddings: true
         });
     }
 }
