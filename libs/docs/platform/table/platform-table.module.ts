@@ -11,7 +11,7 @@ import { TableModule } from '@fundamental-ngx/core/table';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { BreakpointDirective, RtlService } from '@fundamental-ngx/cdk/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { PlatformListModule } from '@fundamental-ngx/platform/list';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
@@ -107,7 +107,6 @@ const routes: Routes = [
         SelectModule,
         SegmentedButtonModule,
         ToolbarModule,
-        BreakpointDirective,
         PlatformMenuModule,
         PopoverModule,
         PlatformListModule,

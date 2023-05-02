@@ -1,17 +1,8 @@
 <fdp-table [dataSource]="source" [trackBy]="trackBy" emptyTableMessage="No data found">
     <fdp-table-toolbar title="Order Line Items">
         <fdp-table-toolbar-actions>
-            <ng-template [fdkBreakpointLt]="740" [fdkBreakpointObserve]="hostElement">
-                <fdp-button glyph="overflow" [fdpMenuTriggerFor]="actions"></fdp-button>
-                <fdp-menu #actions>
-                    <fdp-menu-item (click)="alert('Action One')">Action One</fdp-menu-item>
-                    <fdp-menu-item (click)="alert('Action Two')">Action Two</fdp-menu-item>
-                </fdp-menu>
-            </ng-template>
-            <ng-template [fdkBreakpointGt]="739" [fdkBreakpointObserve]="hostElement">
-                <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>
-                <fdp-button label="Action Two" (click)="alert('Action Two')"></fdp-button>
-            </ng-template>
+            <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>
+            <fdp-button label="Action Two" (click)="alert('Action Two')"></fdp-button>
         </fdp-table-toolbar-actions>
     </fdp-table-toolbar>
 
