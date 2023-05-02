@@ -29,7 +29,7 @@ import {
     OVERFLOW_PRIORITY_SCORE,
     OverflowPriority
 } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, fromEvent, of, Subscription } from 'rxjs';
+import { BehaviorSubject, fromEvent, of, startWith, Subscription } from 'rxjs';
 import { debounceTime, delay, distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import { TitleToken } from '@fundamental-ngx/core/title';
 import {
@@ -69,6 +69,12 @@ export const enum OverflowPriorityEnum {
 export class ToolbarComponent
     implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked, CssClassBuilder, AfterContentInit
 {
+    /**
+     * The ID of the toolbar title
+     * */
+    @Input()
+    titleId: string;
+
     /** Property allows user to pass additional class
      */
     @Input()
@@ -126,6 +132,10 @@ export class ToolbarComponent
     /** @hidden */
     @ViewChild('overflowSpacer')
     overflowSpacer: ElementRef;
+
+    /** @hidden */
+    @ViewChild('titleElement')
+    titleElement: ElementRef<HTMLHeadElement>;
 
     /** @hidden */
     @ContentChildren(forwardRef(() => ToolbarItem))
@@ -189,6 +199,7 @@ export class ToolbarComponent
     ngOnInit(): void {
         fromEvent(window, 'resize')
             .pipe(
+                startWith(null),
                 filter(() => this.shouldOverflow),
                 debounceTime(50),
                 distinctUntilChanged(),
@@ -199,6 +210,7 @@ export class ToolbarComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
+        // this.toolbarItems.changes.pipe(startWith(this.toolbarItems)).subscribe(items => console.log([...items.toArray()]))
         if (this.shouldOverflow) {
             of(true)
                 .pipe(delay(5), takeUntil(this._destroy$))
@@ -266,7 +278,6 @@ export class ToolbarComponent
         this._cd.detectChanges();
     }
 
-    // shouldOverflow items
     /** @hidden */
     private _collapseItems(): void {
         this._groupedCollection = this._getGroupedCollection();
@@ -291,7 +302,7 @@ export class ToolbarComponent
                 this._normalElements.push(toolbarItem);
                 return _contentWidth + itemWidth;
             }
-        }, 0);
+        }, this.titleElement?.nativeElement.clientWidth || 0);
 
         this._collapseLastSpacerElement(this._overflowElements, this._normalElements);
         this._addToolbarItemToOverflow(this._overflowElements);

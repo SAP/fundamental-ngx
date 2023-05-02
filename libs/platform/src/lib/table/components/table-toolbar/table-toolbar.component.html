@@ -5,17 +5,22 @@
     let-groupable="groupable"
     let-columns="columns"
 >
-    <fd-toolbar fdType="transparent" [clearBorder]="true" [hasTitle]="!!title">
-        <h4 class="fd-title fd-title--h4 fd-toolbar__title" [id]="tableToolbarTitleId">
-            {{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span>
-        </h4>
+    <fd-toolbar
+        fdType="transparent"
+        [clearBorder]="true"
+        [titleId]="tableToolbarTitleId"
+        [title]="title + (!hideItemCount ? ' (' + counter + ')' : '')"
+        [shouldOverflow]="shouldOverflow"
+    >
         <ng-container *ngIf="_tableToolbarLeftActionsComponent">
+            <fd-toolbar-spacer></fd-toolbar-spacer>
             <fd-toolbar-separator *ngIf="!!title || !hideItemCount"></fd-toolbar-separator>
             <ng-container *ngTemplateOutlet="_tableToolbarLeftActionsComponent._contentTemplateRef"></ng-container>
         </ng-container>
         <fd-toolbar-spacer></fd-toolbar-spacer>
 
         <fdp-search-field
+            fd-toolbar-item
             *ngIf="!hideSearchInput"
             style="min-width: 15.5rem"
             [placeholder]="'platformTable.toolbarSearchPlaceholder' | fdTranslate"
@@ -29,17 +34,20 @@
 
         <ng-container *ngIf="editMode !== 'none'">
             <fdp-button
+                fd-toolbar-item
                 [label]="'platformTable.toolbarActionCreateButtonLabel' | fdTranslate"
                 (click)="_addRow()"
             ></fdp-button>
             <ng-container *ngIf="_showSaveButton">
                 <fdp-button
+                    fd-toolbar-item
                     [label]="'platformTable.toolbarActionSaveButtonLabel' | fdTranslate"
                     *ngIf="_showSaveButton"
                     (click)="_saveRows()"
                 ></fdp-button>
-                <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
+                <fd-toolbar-separator></fd-toolbar-separator>
                 <fdp-button
+                    fd-toolbar-item
                     [label]="'platformTable.toolbarActionCancelButtonLabel' | fdTranslate"
                     (click)="_cancelEditing()"
                     buttonType="transparent"
@@ -52,7 +60,9 @@
         </ng-container>
 
         <ng-container *ngIf="tableToolbarActionsComponent">
-            <ng-container *ngTemplateOutlet="tableToolbarActionsComponent.contentTemplateRef"></ng-container>
+            <fdp-toolbar-items-container>
+                <ng-container *ngTemplateOutlet="tableToolbarActionsComponent.contentTemplateRef"></ng-container>
+            </fdp-toolbar-items-container>
         </ng-container>
 
         <ng-container *ngIf="showExpandCollapseButtons || sortable || filterable || groupable || columns">
@@ -60,6 +70,7 @@
 
             <ng-container *ngIf="showExpandCollapseButtons">
                 <fdp-button
+                    fd-toolbar-item
                     glyph="expand-all"
                     (click)="_expandAll()"
                     [title]="'platformTable.toolbarActionExpandAllButtonTitle' | fdTranslate"
@@ -68,6 +79,7 @@
                 ></fdp-button>
 
                 <fdp-button
+                    fd-toolbar-item
                     glyph="collapse-all"
                     (click)="_collapseAll()"
                     [title]="'platformTable.toolbarActionCollapseAllButtonTitle' | fdTranslate"
@@ -77,6 +89,7 @@
             </ng-container>
 
             <fdp-button
+                fd-toolbar-item
                 *ngIf="sortable"
                 glyph="sort"
                 [title]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
@@ -86,6 +99,7 @@
                 (click)="openSorting()"
             ></fdp-button>
             <fdp-button
+                fd-toolbar-item
                 *ngIf="filterable"
                 glyph="filter"
                 [title]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
@@ -95,6 +109,7 @@
                 (click)="openFiltering()"
             ></fdp-button>
             <fdp-button
+                fd-toolbar-item
                 *ngIf="groupable"
                 glyph="group-2"
                 [title]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
@@ -104,6 +119,7 @@
                 (click)="openGrouping()"
             ></fdp-button>
             <fdp-button
+                fd-toolbar-item
                 *ngIf="columns"
                 glyph="action-settings"
                 [title]="'platformTable.toolbarActionColumnsButtonTitle' | fdTranslate"

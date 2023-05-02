@@ -41,6 +41,12 @@ let tableToolbarTitleUniqueId = 0;
     providers: [{ provide: TABLE_TOOLBAR, useExisting: TableToolbarComponent }]
 })
 export class TableToolbarComponent implements TableToolbarWithTemplate, AfterViewInit, OnDestroy {
+    /**
+     * Whether the toolbar should hide elements in popover when they overflow.
+     * */
+    @Input()
+    shouldOverflow = true;
+
     /** Table title. */
     @Input()
     title: string;

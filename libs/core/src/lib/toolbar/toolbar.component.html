@@ -1,29 +1,30 @@
 <div #toolbar [tabindex]="tabindex" [class.fd-toolbar--cozy]="_contentDensityObserver.isCozy$ | async">
-    <h4 *ngIf="title" class="fd-title fd-title--h4 fd-toolbar__title">{{ title }}</h4>
+    <h4 *ngIf="title" class="fd-title fd-title--h4 fd-toolbar__title" [id]="titleId" #titleElement>{{ title }}</h4>
 
     <ng-content></ng-content>
 
     <ng-container *ngIf="shouldOverflow">
-        <span #overflowSpacer class="fd-toolbar__spacer"></span>
+        <span #overflowSpacer></span>
 
-        <span class="fd-toolbar__separator" *ngIf="overflowVisibility$ | async"></span>
+        <ng-container *ngIf="overflowVisibility$ | async">
+            <fd-toolbar-spacer></fd-toolbar-spacer>
+            <span class="fd-toolbar__separator"></span>
+            <fd-popover placement="bottom-end" [noArrow]="true" class="fd-popover">
+                <fd-popover-control>
+                    <button
+                        fd-button
+                        title="More"
+                        aria-label="More"
+                        aria-haspopup="true"
+                        fdType="transparent"
+                        glyph="overflow"
+                    ></button>
+                </fd-popover-control>
 
-        <fd-popover placement="bottom-end" [noArrow]="true" class="fd-popover">
-            <fd-popover-control>
-                <button
-                    *ngIf="overflowVisibility$ | async"
-                    fd-button
-                    title="More"
-                    aria-label="More"
-                    aria-haspopup="true"
-                    fdType="transparent"
-                    glyph="overflow"
-                ></button>
-            </fd-popover-control>
-
-            <fd-popover-body>
-                <div class="fd-toolbar__overflow" #overflowBody></div>
-            </fd-popover-body>
-        </fd-popover>
+                <fd-popover-body>
+                    <div class="fd-toolbar__overflow" #overflowBody></div>
+                </fd-popover-body>
+            </fd-popover>
+        </ng-container>
     </ng-container>
 </div>

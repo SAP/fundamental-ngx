@@ -268,6 +268,6 @@
             "extends": "plugin:markdown/recommended"
         }
     ],
-    "plugins": ["@nrwl/nx", "json", "markdown"],
+    "plugins": ["@nrwl/eslint-plugin-nx", "json", "markdown"],
     "root": true
 }

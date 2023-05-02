@@ -85,6 +85,7 @@ import { TableCellContentComponent } from './components/table-cell-content/table
 import { TableHeaderCellContentComponent } from './components/table-header-cell-content/table-header-cell-content.component';
 import { TableCellHeaderPopoverDirective } from './directives/table-cell-header-popover.directive';
 import { TableCellHeaderPopoverComponent } from './components/table-cell-header-popover/table-cell-header-popover.component';
+import { ToolbarItemsContainerDirective } from './directives';
 
 const EXPORTABLE_DECLARATIONS = [
     TableComponent,
@@ -135,7 +136,8 @@ const EXPORTABLE_DECLARATIONS = [
     TableCellContentComponent,
     TableHeaderCellContentComponent,
     TableCellHeaderPopoverDirective,
-    TableCellHeaderPopoverComponent
+    TableCellHeaderPopoverComponent,
+    ToolbarItemsContainerDirective
 ];
 
 @NgModule({

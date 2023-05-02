@@ -37,7 +37,7 @@ export class ToolbarItemDirective implements ToolbarItem {
 
     /** @hidden */
     get width(): number {
-        return this.element.offsetWidth + 8; // ELEMENT_MARGIN
+        return this.element.clientWidth + 8; // ELEMENT_MARGIN
     }
 
     /** @hidden */
