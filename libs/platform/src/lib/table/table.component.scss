@@ -102,6 +102,18 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
         }
     }
 
+    .fd-toolbar {
+        > fdp-toolbar-items-container {
+            margin: 0;
+            > * {
+                margin-left: 0.5rem;
+                @include fd-rtl() {
+                    margin-left: 0;
+                    margin-right: 0.5rem;
+                }
+            }
+        }
+    }
     .#{$block}__body-table,
     .#{$block}__header-table,
     .#{$block}__body-hs-table {
