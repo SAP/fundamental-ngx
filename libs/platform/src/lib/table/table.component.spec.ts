@@ -1355,5 +1355,124 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 expect(draggedRow.parent).toEqual(tableComponent._tableRowsVisible[5]);
             });
         });
+
+        describe('Tree Selection', () => {
+            beforeEach(() => {
+                calculateTableElementsMetaData();
+
+                // add one extra child row so we can test triselection
+                const newChild = Object.assign({}, hostComponent.source.dataProvider.items[0].children[0]);
+                newChild.name = 'child copy of row + ';
+                hostComponent.source.dataProvider.items[0].children.push(newChild as any);
+            });
+
+            it('should select only one row', () => {
+                hostComponent.table.selectionMode = SelectionMode.MULTIPLE;
+                hostComponent.table.ngAfterViewInit();
+
+                const emitChangeSpy = spyOn(hostComponent.table.rowSelectionChange, 'emit').and.stub();
+
+                hostComponent.table._toggleMultiSelectRow(hostComponent.table._tableRows[0]);
+
+                expect(emitChangeSpy).toHaveBeenCalled();
+            });
+
+            it('should select only parent row and not children', () => {
+                hostComponent.table.selectionMode = SelectionMode.MULTIPLE;
+                hostComponent.table.ngAfterViewInit();
+
+                const emitChangeSpy = spyOn(hostComponent.table.rowSelectionChange, 'emit').and.stub();
+
+                hostComponent.table._toggleMultiSelectRow(hostComponent.table._tableRows[0]);
+
+                let selected: boolean | null = false;
+                hostComponent.table._tableRows[0].children.forEach((c) => {
+                    selected = selected || c.checked;
+                });
+
+                expect(emitChangeSpy).toHaveBeenCalled();
+                expect(selected).toBeFalse();
+                expect(hostComponent.table._tableRows.filter((r) => r.checked).length).toEqual(1);
+            });
+
+            it('should select only child row and not parent row', () => {
+                const rows = hostComponent.table._tableRows;
+
+                hostComponent.table.selectionMode = SelectionMode.MULTIPLE;
+                hostComponent.table.ngAfterViewInit();
+
+                const emitChangeSpy = spyOn(hostComponent.table.rowSelectionChange, 'emit').and.stub();
+
+                hostComponent.table._toggleMultiSelectRow(rows[0].children[0]);
+
+                expect(emitChangeSpy).toHaveBeenCalled();
+                expect(rows.filter((r) => r.checked).length).toEqual(1);
+                expect(rows[0].checked).toBeFalse();
+            });
+
+            describe('with Tristate mode enabled', () => {
+                beforeEach(() => {
+                    calculateTableElementsMetaData();
+                });
+
+                it('should select parent row and all children', () => {
+                    hostComponent.table.enableTristateMode = true;
+                    hostComponent.table.selectionMode = SelectionMode.MULTIPLE;
+                    hostComponent.table.ngAfterViewInit();
+
+                    const emitChangeSpy = spyOn(hostComponent.table.rowSelectionChange, 'emit').and.stub();
+
+                    hostComponent.table._toggleMultiSelectRow(hostComponent.table._tableRows[0]);
+
+                    let selected: boolean | null = false;
+                    hostComponent.table._tableRows[0].children.forEach((c) => {
+                        selected = selected || c.checked;
+                    });
+
+                    expect(emitChangeSpy).toHaveBeenCalled();
+                    expect(selected).toBeTrue();
+                    expect(hostComponent.table._tableRows.filter((r) => r.checked).length).toEqual(3);
+                });
+
+                it('should select a child row and parent row using triste', () => {
+                    hostComponent.table.enableTristateMode = true;
+                    hostComponent.table.selectionMode = SelectionMode.MULTIPLE;
+                    hostComponent.table.ngAfterViewInit();
+
+                    console.log('XXX', hostComponent.table._tableRows[0].checked);
+                    console.log('XXX', hostComponent.table._tableRows[0].children[0].checked);
+
+                    const emitChangeSpy = spyOn(hostComponent.table.rowSelectionChange, 'emit').and.stub();
+                    hostComponent.table._toggleMultiSelectRow(hostComponent.table._tableRows[0].children[0]);
+
+                    expect(emitChangeSpy).toHaveBeenCalled();
+                    expect(
+                        hostComponent.table._tableRows.filter((r) => r.checked || r.checked === null).length
+                    ).toEqual(2);
+                    expect(hostComponent.table._tableRows[0].checked).toBeNull();
+                });
+
+                it('should select a two child row and parent with checked state', () => {
+                    hostComponent.table.enableTristateMode = true;
+                    hostComponent.table.selectionMode = SelectionMode.MULTIPLE;
+                    hostComponent.table.ngAfterViewInit();
+
+                    console.log('XXX', hostComponent.table._tableRows[0].checked);
+                    console.log('XXX', hostComponent.table._tableRows[0].children[0].checked);
+
+                    const emitChangeSpy = spyOn(hostComponent.table.rowSelectionChange, 'emit').and.stub();
+                    hostComponent.table._toggleMultiSelectRow(hostComponent.table._tableRows[0].children[0]);
+                    expect(emitChangeSpy).toHaveBeenCalled();
+
+                    hostComponent.table._toggleMultiSelectRow(hostComponent.table._tableRows[0].children[1]);
+                    expect(emitChangeSpy).toHaveBeenCalled();
+
+                    expect(
+                        hostComponent.table._tableRows.filter((r) => r.checked || r.checked === null).length
+                    ).toEqual(3);
+                    expect(hostComponent.table._tableRows[0].checked).toBeTrue();
+                });
+            });
+        });
     });
 })();

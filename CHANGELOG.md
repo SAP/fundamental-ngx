@@ -1,3 +1,12 @@
+## [0.40.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.40.3...v0.40.4-rc.0) (2023-05-03)
+
+
+### Bug Fixes
+
+* **platform:** check state for tree table ([#9672](https://github.com/SAP/fundamental-ngx/issues/9672)) ([c9eec59](https://github.com/SAP/fundamental-ngx/commit/c9eec59a8faec9f2443dca19f92acfc8b85339f5))
+
+
+
 ## [0.40.3](https://github.com/SAP/fundamental-ngx/compare/v0.40.3-rc.1...v0.40.3) (2023-04-29)
 
 

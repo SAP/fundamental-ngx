@@ -2,8 +2,10 @@
     [dataSource]="source"
     [isTreeTable]="true"
     selectionMode="multiple"
+    [enableTristateMode]="true"
     relationKey="children"
     emptyTableMessage="No data found"
+    (rowSelectionChange)="onRowSelectionChange($event)"
     (rowToggleOpenState)="onRowToggleOpenState($event)"
     (rowsRearrange)="onRowsRearrange($event)"
 >
