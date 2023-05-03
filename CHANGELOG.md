@@ -1,3 +1,12 @@
+## [0.40.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.0...v0.40.4-rc.1) (2023-05-03)
+
+
+### Bug Fixes
+
+* **core,platform:** refocus select element on option select ([#9756](https://github.com/SAP/fundamental-ngx/issues/9756)) ([cfd6475](https://github.com/SAP/fundamental-ngx/commit/cfd6475b02b910b95d30d82931f2b65608250456))
+
+
+
 ## [0.40.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.40.3...v0.40.4-rc.0) (2023-05-03)
 
 
