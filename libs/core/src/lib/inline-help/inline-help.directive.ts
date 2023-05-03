@@ -31,7 +31,8 @@ const INLINE_HELP_ICON_CLASS = 'fd-popover__body--inline-help-icon';
     selector: '[fd-inline-help]:not([fd-inline-help-template]), [fd-inline-help-template]:not([fd-inline-help])',
     providers: [PopoverService],
     host: {
-        '[class.fd-inline-help__trigger]': 'true'
+        '[class.fd-inline-help__trigger]': 'true',
+        role: 'tooltip'
     }
 })
 export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnChanges, OnDestroy {
