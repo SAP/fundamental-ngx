@@ -28,7 +28,7 @@ import {
     OverflowPriority,
     ResizeObserverService
 } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, combineLatest, delayWhen, map, Observable, startWith, takeUntil } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, startWith, takeUntil } from 'rxjs';
 import { TitleToken } from '@fundamental-ngx/core/title';
 import {
     ContentDensityMode,
@@ -174,10 +174,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     /** @hidden */
     ngAfterViewInit(): void {
         this.overflowItems$ = combineLatest([
-            this.resizeObserverService.observe(this.toolbar.nativeElement).pipe(
-                map(() => this._toolbarWidth),
-                delayWhen(() => this.ngZone.onMicrotaskEmpty)
-            ),
+            this.resizeObserverService.observe(this.toolbar.nativeElement).pipe(map(() => this._toolbarWidth)),
             this.toolbarItems.changes.pipe(
                 startWith(this.toolbarItems),
                 map((toolbarItems) => toolbarItems.toArray())
@@ -226,7 +223,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
                 }
                 return [];
             }),
-
             takeUntil(this._destroy$)
         );
         this.overflowItems$.subscribe((items) => {
