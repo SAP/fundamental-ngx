@@ -1,5 +1,5 @@
 <fdp-table [dataSource]="source" [trackBy]="trackBy" emptyTableMessage="No data found">
-    <fdp-table-toolbar title="Order Line Items">
+    <fdp-table-toolbar title="Order Line Items" [shouldOverflow]="true">
         <fdp-table-toolbar-actions>
             <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>
             <fdp-button label="Action Two" (click)="alert('Action Two')"></fdp-button>
