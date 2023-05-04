@@ -217,7 +217,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
                             });
                         }
                     }
-                    return overflowItems;
+                    return overflowItems.sort((a, b) => this._sortPriorities(a.priority, b.priority));
                 }
                 return [];
             }),
