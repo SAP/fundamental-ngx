@@ -38,11 +38,11 @@ export class DynamicPortalComponent implements OnChanges {
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         this.portal?.detach();
-        if (changes.domElement) {
+        if (changes['domElement']) {
             this.portal = new DomPortal(coerceElement(this.domElement));
-        } else if (changes.component) {
+        } else if (changes['component']) {
             this.portal = new ComponentPortal(this.component);
-        } else if (changes.template) {
+        } else if (changes['template']) {
             this.portal = new TemplatePortal(this.template, this.viewContainerRef);
         }
     }
