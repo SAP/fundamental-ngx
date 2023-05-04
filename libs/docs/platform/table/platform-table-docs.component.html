@@ -148,6 +148,16 @@
         direction of drag & drop.
     </p>
     <p>Drag and drop can be disabled by setting the <code>[enableRowReordering]</code> input to <code>false</code>.</p>
+
+    <h3>Tree initialization</h3>
+    <p>
+        Tree can be initialized and and its state can be controlled by the application. In order to do this tree needs
+        be instantiated using <code>TableRow</code> interface, where application set initial state.
+    </p>
+    <p>
+        You can also set <code>[enableTristateMode]</code>, to propagate selection from children to parents and parent
+        to children.
+    </p>
 </description>
 <component-example>
     <fdp-platform-table-tree-example></fdp-platform-table-tree-example>

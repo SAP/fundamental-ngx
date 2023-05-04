@@ -424,6 +424,8 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         if (value) {
             this.selectOptionItem(value);
         }
+
+        this.searchInputElement.nativeElement.focus();
     }
 
     /** @hidden */

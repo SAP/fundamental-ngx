@@ -266,6 +266,8 @@
                                 >
                                     <fd-checkbox
                                         labelClass="fd-table__checkbox-label"
+                                        [tristate]="enableTristateMode"
+                                        [tristateSelectable]="false"
                                         [ngModel]="row.checked"
                                     ></fd-checkbox>
                                 </td>
