@@ -182,7 +182,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
             map(([toolbarWidth, toolbarItems, shouldOverflow]) => {
                 if (shouldOverflow) {
                     const _sortedByPriorityAndGroupItems = this._getSortedByPriorityAndGroupItems(toolbarItems);
-                    console.log({ _sortedByPriorityAndGroupItems });
                     const overflowItems: ToolbarItem[] = [];
                     _sortedByPriorityAndGroupItems.reduce((_contentWidth, toolbarItem) => {
                         const itemWidth = toolbarItem.width;
