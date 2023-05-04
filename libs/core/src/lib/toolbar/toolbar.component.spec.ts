@@ -73,15 +73,9 @@ describe('ToolbarComponent - Prioritization', () => {
         expect(toolbar['_normalElements'].length).toBeGreaterThan(0);
         expect(toolbar['_disappearElements'].length).toBeGreaterThan(0);
 
-        expect(toolbar['_overflowElements'].map((el) => el.elementRef.nativeElement.textContent?.trim())).toEqual(
-            overflowElements
-        );
-        expect(toolbar['_normalElements'].map((el) => el.elementRef.nativeElement.textContent?.trim())).toEqual(
-            normalElements
-        );
-        expect(toolbar['_disappearElements'].map((el) => el.elementRef.nativeElement.textContent?.trim())).toEqual(
-            disappearElements
-        );
+        expect(toolbar['_overflowElements'].map((el) => el.element.textContent?.trim())).toEqual(overflowElements);
+        expect(toolbar['_normalElements'].map((el) => el.element.textContent?.trim())).toEqual(normalElements);
+        expect(toolbar['_disappearElements'].map((el) => el.element.textContent?.trim())).toEqual(disappearElements);
     });
 });
 
@@ -118,15 +112,9 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
         expect(toolbar['_normalElements'].length).toBeGreaterThan(0);
         expect(toolbar['_disappearElements'].length).toBeGreaterThan(0);
 
-        expect(toolbar['_overflowElements'].map((el) => el.elementRef.nativeElement.textContent?.trim())).toEqual(
-            overflowElements
-        );
-        expect(toolbar['_normalElements'].map((el) => el.elementRef.nativeElement.textContent?.trim())).toEqual(
-            normalElements
-        );
-        expect(toolbar['_disappearElements'].map((el) => el.elementRef.nativeElement.textContent?.trim())).toEqual(
-            disappearElements
-        );
+        expect(toolbar['_overflowElements'].map((el) => el.element.textContent?.trim())).toEqual(overflowElements);
+        expect(toolbar['_normalElements'].map((el) => el.element.textContent?.trim())).toEqual(normalElements);
+        expect(toolbar['_disappearElements'].map((el) => el.element.textContent?.trim())).toEqual(disappearElements);
     });
 });
 

@@ -3,28 +3,32 @@
 
     <ng-content></ng-content>
 
-    <ng-container *ngIf="shouldOverflow">
-        <span #overflowSpacer></span>
+    <ng-container *ngIf="overflownItems.length > 0">
+        <fd-toolbar-spacer></fd-toolbar-spacer>
+        <fd-toolbar-separator></fd-toolbar-separator>
+        <fd-popover placement="bottom-end" [noArrow]="true" class="fd-popover">
+            <fd-popover-control>
+                <button
+                    fd-button
+                    title="More"
+                    aria-label="More"
+                    aria-haspopup="true"
+                    fdType="transparent"
+                    glyph="overflow"
+                ></button>
+            </fd-popover-control>
 
-        <ng-container *ngIf="overflowVisibility$ | async">
-            <fd-toolbar-spacer></fd-toolbar-spacer>
-            <span class="fd-toolbar__separator"></span>
-            <fd-popover placement="bottom-end" [noArrow]="true" class="fd-popover">
-                <fd-popover-control>
-                    <button
-                        fd-button
-                        title="More"
-                        aria-label="More"
-                        aria-haspopup="true"
-                        fdType="transparent"
-                        glyph="overflow"
-                    ></button>
-                </fd-popover-control>
-
-                <fd-popover-body>
-                    <div class="fd-toolbar__overflow" #overflowBody></div>
-                </fd-popover-body>
-            </fd-popover>
-        </ng-container>
+            <fd-popover-body>
+                <div class="fd-toolbar__overflow">
+                    <ng-container *ngFor="let overflowedItem of overflownItems">
+                        <fdk-dynamic-portal
+                            [domElement]="overflowedItem.element"
+                            [style.display]="overflowedItem.priority === 'disappear' ? 'none' : 'block'"
+                        >
+                        </fdk-dynamic-portal>
+                    </ng-container>
+                </div>
+            </fd-popover-body>
+        </fd-popover>
     </ng-container>
 </div>

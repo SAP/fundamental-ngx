@@ -8,6 +8,8 @@ import { OverflowPriorityEnum } from './toolbar.component';
     providers: [{ provide: ToolbarItem, useExisting: forwardRef(() => ToolbarItemDirective) }]
 })
 export class ToolbarItemDirective implements ToolbarItem {
+    /** @hidden */
+    private lastWidth = 0;
     /** The priority of the item. */
     @Input()
     fdOverflowPriority: OverflowPriority = OverflowPriorityEnum.HIGH;
@@ -37,7 +39,11 @@ export class ToolbarItemDirective implements ToolbarItem {
 
     /** @hidden */
     get width(): number {
-        return this.element.clientWidth + 8; // ELEMENT_MARGIN
+        if (!this.element.clientWidth) {
+            return this.lastWidth;
+        }
+        this.lastWidth = this.element.clientWidth + 8; // ELEMENT_MARGIN
+        return this.lastWidth;
     }
 
     /** @hidden */

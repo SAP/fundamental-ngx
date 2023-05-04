@@ -6,6 +6,7 @@ export * from './models/nullable';
 export * from './consts';
 export * from './datatypes';
 export * from './decorators';
+export * from './components';
 export * from './directives';
 export * from './drag-and-drop';
 export * from './dynamic-component';

@@ -45,7 +45,7 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
      * Whether the toolbar should hide elements in popover when they overflow.
      * */
     @Input()
-    shouldOverflow = true;
+    shouldOverflow = false;
 
     /** Table title. */
     @Input()

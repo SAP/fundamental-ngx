@@ -19,9 +19,10 @@ import { DeprecatedTableCompactDirective } from './deprecated-table-compact.dire
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { DeprecatedTableCondensedDirective } from './deprecated-table-condensed.directive';
 import { TableFixedDirective } from './directives/table-fixed.directive';
+import { DynamicPortalComponent } from '@fundamental-ngx/cdk/utils';
 
 @NgModule({
-    imports: [CommonModule, ContentDensityModule],
+    imports: [CommonModule, ContentDensityModule, DynamicPortalComponent],
     declarations: [
         TableComponent,
         TableResponsiveWrapperDirective,
