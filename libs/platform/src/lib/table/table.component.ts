@@ -49,7 +49,7 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
-import { FDP_PRESET_MANAGED_COMPONENT, isDataSource, isString } from '@fundamental-ngx/platform/shared';
+import { FDP_PRESET_MANAGED_COMPONENT, isDataSource, isJsObject, isString } from '@fundamental-ngx/platform/shared';
 import { cloneDeep, get } from 'lodash-es';
 import set from 'lodash-es/set';
 import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
@@ -82,6 +82,7 @@ import {
     FilterChange,
     FreezeChange,
     GroupChange,
+    isTableRow,
     PlatformTableManagedPreset,
     RowComparator,
     SaveRowsEvent,
@@ -106,6 +107,7 @@ import { TableResponsiveService } from './table-responsive.service';
 import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
 
 import { TableService } from './table.service';
+import { newTableRow } from './utils';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -357,6 +359,22 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** Whether tree mode is enabled. */
     @Input()
     isTreeTable: boolean;
+
+    /**
+     *  When True, the checked state of each tree item depends on the checked
+     *  state of its parent or direct child.
+     */
+    @Input()
+    set enableTristateMode(value: boolean) {
+        this._enableTristateMode = value;
+    }
+
+    get enableTristateMode(): boolean {
+        return this.isTreeTable && this._enableTristateMode;
+    }
+
+    /** @hidden */
+    private _enableTristateMode = false;
 
     /** Accessor to a children nodes of tree. */
     @Input()
@@ -1524,6 +1542,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             if (this._isItemRow(row) || this._isTreeRow(row)) {
                 row.checked = checked;
                 checked ? added.push(row) : removed.push(row);
+
+                this._applyTristateSelection(row, added, removed);
             }
         });
 
@@ -2075,27 +2095,51 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         if (this.isTreeTable) {
             return this._createTreeTableRowsByDataSourceItems(source);
         }
-
-        const selectedRowsMap = this._getSelectionStatusByRowValue(source);
-
-        return source.map((item: T, index: number) => {
-            const isNewItem = this._addedItems.includes(item);
-            const row = new TableRow(
-                TableRowType.ITEM,
-                item[this.selectedKey] ?? !!selectedRowsMap.get(item),
-                index,
-                item
-            );
-            row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
-            row.state = isNewItem ? 'editable' : 'readonly';
-            return row;
-        });
+        return this._convertObjectsToTableRows(source);
     }
 
     /** @hidden */
     private _createTreeTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
-        const rows: TableRow<T>[] = [];
+        const item = source[0] as any;
 
+        if (isTableRow(item)) {
+            return this._convertTreeTableRowToFlatList(source as TableRow[]);
+        }
+
+        if (isJsObject(item)) {
+            return this._convertTreeObjectsToTableRows(source);
+        }
+        return [];
+    }
+
+    /**
+     * Since we dont work with the tree, we need to convert incoming tree to
+     * flat format while maintaining original state.
+     *
+     * @hidden
+     */
+    private _convertTreeTableRowToFlatList(rows: TableRow<T>[]): TableRow<T>[] {
+        let flatList: TableRow[] = [];
+
+        for (const item of rows) {
+            item.navigatable = this._isRowNavigatable(item as T, this.rowNavigatable);
+            flatList.push(item);
+
+            if (Array.isArray(item.children)) {
+                item.children.forEach((c) => (c.hidden = !item.expanded));
+                flatList = flatList.concat(this._convertTreeTableRowToFlatList(item.children));
+            }
+        }
+        return flatList;
+    }
+
+    /**
+     * Converts data to TableRow interface
+     *
+     * @hidden
+     */
+    private _convertTreeObjectsToTableRows(source: T[]): TableRow<T>[] {
+        const rows: TableRow<T>[] = [];
         const selectedRowsMap = this._getSelectionStatusByRowValue(source);
 
         source.forEach((item: T, index: number) => {
@@ -2103,26 +2147,25 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 Object.prototype.hasOwnProperty.call(item, this.relationKey) &&
                 Array.isArray(item[this.relationKey]) &&
                 item[this.relationKey].length;
-            const row = new TableRow(
-                hasChildren ? TableRowType.TREE : TableRowType.ITEM,
-                item[this.selectedKey] ?? !!selectedRowsMap.get(item),
+            const row = newTableRow({
+                type: hasChildren ? TableRowType.TREE : TableRowType.ITEM,
+                checked: item[this.selectedKey] ?? !!selectedRowsMap.get(item),
                 index,
-                item
-            );
+                value: item
+            });
 
             row.expanded = false;
             row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
             rows.push(row);
 
             if (hasChildren) {
-                const children = this._createTreeTableRowsByDataSourceItems(item[this.relationKey]);
+                const children = this._convertTreeObjectsToTableRows(item[this.relationKey]);
 
                 children.forEach((c) => {
                     c.parent = c.parent || row;
                     c.level = c.parent.level + 1;
                     c.hidden = true;
                 });
-
                 row.children.push(...children);
 
                 rows.push(...children);
@@ -2133,14 +2176,41 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /**
+     * Converts data to TableRow interface
+     *
+     * @hidden
+     */
+    private _convertObjectsToTableRows(source: T[]): TableRow<T>[] {
+        const rowItem = source[0] as any;
+
+        if (isTableRow(rowItem)) {
+            return source as TableRow[];
+        }
+
+        const selectedRowsMap = this._getSelectionStatusByRowValue(source);
+        return source.map((item: T, index: number) => {
+            const isNewItem = this._addedItems.includes(item);
+            const row = newTableRow({
+                type: TableRowType.ITEM,
+                checked: item[this.selectedKey] ?? !!selectedRowsMap.get(item),
+                index,
+                value: item
+            });
+            row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
+            row.state = isNewItem ? 'editable' : 'readonly';
+            return row;
+        });
+    }
+
+    /**
      * @hidden
      * Runs `rowComparator` function against checked rows and compares them with the new `source`
      * If matched, creates an association between the source item and checked status of corresponding row.
      *
      * @returns `Map` object with the `checked` status for particular source item
      */
-    private _getSelectionStatusByRowValue(source: T[]): Map<T, boolean> {
-        const rowMap = new Map<T, boolean>();
+    private _getSelectionStatusByRowValue(source: T[]): Map<T, boolean | null> {
+        const rowMap = new Map<T, boolean | null>();
         if (
             (this.selectionMode === SelectionMode.SINGLE || this.selectionMode === SelectionMode.MULTIPLE) &&
             typeof this.rowComparator === 'function'
@@ -2469,17 +2539,17 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 continue;
             }
 
-            const groupTableRow: TreeLike<TableRow<GroupTableRowValueType>> = new TableRow<GroupTableRowValueType>(
-                TableRowType.GROUP,
-                false,
-                0,
-                { field: rule.field, value, count: 0 },
+            const groupTableRow: TreeLike<TableRow<GroupTableRowValueType>> = newTableRow<GroupTableRowValueType>({
+                type: TableRowType.GROUP,
+                checked: false,
+                index: 0,
+                value: { field: rule.field, value, count: 0 },
                 parent,
                 level,
-                true /** expandable */,
-                true /** expanded */,
-                !!parent && !parent.expanded /** hidden */
-            );
+                expandable: true,
+                expanded: true,
+                hidden: !!parent && !parent.expanded
+            });
 
             // Ads group's children rows
             groupTableRow._children = this._createGroupedTableRowsTree(rules, filteredRows, groupTableRow, level + 1);
@@ -2661,6 +2731,49 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         const totalSelected = selectableRows.filter((r) => r.checked);
         this._checkedAll = totalSelected.length === selectableRows.length && selectableRows.length !== 0;
         this._checkedAny = totalSelected.length > 0;
+    }
+
+    /**
+     * Propagates tristate selection mode to the tree. It starts with updating a state for all the parents and then
+     * to children
+     *
+     * @hidden
+     */
+    private _applyTristateSelection(row: TableRow, addedRows: TableRow<T>[], removedRows: TableRow<T>[]): void {
+        if (!this.enableTristateMode) {
+            return;
+        }
+        this._applySelectionToParents(row, addedRows, removedRows);
+        this._applySelectionToChildren(row, addedRows, removedRows);
+    }
+
+    /** @hidden */
+    private _applySelectionToParents(row: TableRow, addedRows: TableRow<T>[], removedRows: TableRow<T>[]): void {
+        let currentRow = row.parent;
+
+        while (currentRow) {
+            const children = this._findRowChildren(currentRow).filter((r) => r.parent === currentRow);
+            const totalChecked = children.filter((r) => r.checked);
+            const checkedAll = totalChecked.length === children.length;
+            const checkedAny = totalChecked.length > 0;
+
+            currentRow.checked = checkedAll ? true : checkedAny ? null : false;
+            currentRow.checked || currentRow.checked === null
+                ? addedRows.push(currentRow)
+                : removedRows.push(currentRow);
+
+            currentRow = currentRow.parent;
+        }
+    }
+
+    /** @hidden */
+    private _applySelectionToChildren(row: TableRow, addedRows: TableRow<T>[], removedRows: TableRow<T>[]): void {
+        const allChilren = this._findRowChildren(row);
+
+        allChilren.forEach((r) => {
+            r.checked = row.checked;
+            r.checked ? addedRows.push(r) : removedRows.push(r);
+        });
     }
 
     /** @hidden */
