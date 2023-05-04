@@ -11,6 +11,7 @@ import {
     forwardRef,
     Inject,
     Input,
+    NgZone,
     Optional,
     QueryList,
     SkipSelf,
@@ -27,7 +28,7 @@ import {
     OverflowPriority,
     ResizeObserverService
 } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, combineLatest, map, Observable, startWith, takeUntil } from 'rxjs';
+import { BehaviorSubject, combineLatest, delayWhen, map, Observable, startWith, takeUntil } from 'rxjs';
 import { TitleToken } from '@fundamental-ngx/core/title';
 import {
     ContentDensityMode,
@@ -164,6 +165,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         readonly _contentDensityObserver: ContentDensityObserver,
         private readonly _destroy$: DestroyedService,
         private resizeObserverService: ResizeObserverService,
+        private ngZone: NgZone,
         @Optional() @SkipSelf() @Inject(DYNAMIC_PAGE_HEADER_TOKEN) private _dynamicPageHeader?: DynamicPageHeader
     ) {
         _contentDensityObserver.subscribe();
@@ -172,7 +174,10 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     /** @hidden */
     ngAfterViewInit(): void {
         this.overflowItems$ = combineLatest([
-            this.resizeObserverService.observe(this.toolbar.nativeElement).pipe(map(() => this._toolbarWidth)),
+            this.resizeObserverService.observe(this.toolbar.nativeElement).pipe(
+                map(() => this._toolbarWidth),
+                delayWhen(() => this.ngZone.onMicrotaskEmpty)
+            ),
             this.toolbarItems.changes.pipe(
                 startWith(this.toolbarItems),
                 map((toolbarItems) => toolbarItems.toArray())
@@ -221,6 +226,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
                 }
                 return [];
             }),
+
             takeUntil(this._destroy$)
         );
         this.overflowItems$.subscribe((items) => {
