@@ -14,7 +14,7 @@ export const ROUTES: Routes = [
             { path: 'new-component', component: NewComponentComponent },
             {
                 path: 'i18n',
-                loadChildren: () => import('@fundamental-ngx/docs/shared').then((m) => m.PlatformI18nDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/i18n').then((m) => m.PlatformI18nDocsModule)
             },
             {
                 path: 'action-bar',
