@@ -1,4 +1,4 @@
-import { ExecutorContext, ProjectConfiguration, readTargetOptions } from '@nrwl/devkit';
+import { ExecutorContext, ProjectConfiguration, readTargetOptions } from '@nx/devkit';
 import { copySchematics } from './utils/copy-schematics';
 import { syncVersions } from './utils/sync-versions';
 import { PrepareOptions } from './utils/prepare.options';

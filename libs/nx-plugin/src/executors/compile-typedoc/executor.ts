@@ -1,4 +1,4 @@
-import { ExecutorContext, readTargetOptions } from '@nrwl/devkit';
+import { ExecutorContext, readTargetOptions } from '@nx/devkit';
 import { execSync } from 'child_process';
 import { readdirSync, renameSync } from 'fs';
 

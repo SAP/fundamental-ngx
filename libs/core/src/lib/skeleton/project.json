@@ -1,11 +1,12 @@
 {
     "name": "core-skeleton",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/skeleton",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/core/skeleton"],
             "options": {
                 "project": "libs/core/src/lib/skeleton/ng-package.json"
@@ -29,7 +30,7 @@
             }
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/core/src/lib/skeleton/**/*.ts", "libs/core/src/lib/skeleton/**/*.html"]
             }

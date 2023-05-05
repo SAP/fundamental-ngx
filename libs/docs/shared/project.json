@@ -1,11 +1,12 @@
 {
     "name": "docs-shared",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/docs/shared/src",
     "prefix": "fundamental-ngx",
     "targets": {
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/docs/shared/**/*.ts", "libs/docs/shared/**/*.html"]
             }

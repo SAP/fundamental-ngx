@@ -1,11 +1,12 @@
 {
     "name": "cdk-data-source",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/cdk/src/lib/data-source",
     "prefix": "fdk",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
+            "executor": "@nx/angular:ng-packagr-lite",
             "outputs": ["{workspaceRoot}/dist/libs/cdk/data-source"],
             "options": {
                 "tsConfig": "libs/cdk/src/lib/data-source/tsconfig.lib.json",
@@ -27,7 +28,7 @@
             }
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/cdk/src/lib/data-source/**/*.ts", "libs/cdk/src/lib/data-source/**/*.html"]
             }

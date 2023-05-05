@@ -1,4 +1,4 @@
-import { ExecutorContext, logger, ProjectGraph, readTargetOptions } from '@nrwl/devkit';
+import { ExecutorContext, logger, ProjectGraph, readTargetOptions } from '@nx/devkit';
 import { TestAppOptions } from './options.type';
 import { getProjects } from './get-projects';
 

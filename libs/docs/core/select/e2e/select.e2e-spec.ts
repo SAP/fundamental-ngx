@@ -1,13 +1,10 @@
-import { wait } from '@nrwl/nx-cloud/lib/utilities/waiter';
 import { SelectPo } from './select.po';
 import {
     browserIsSafari,
     click,
-    getAttributeByName,
     getElementArrayLength,
     getElementClass,
     getText,
-    isElementClickable,
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,

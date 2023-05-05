@@ -1,5 +1,6 @@
 {
     "name": "core",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib",
     "prefix": "fd",
@@ -23,7 +24,7 @@
             "outputs": ["{options.outputPath}"]
         },
         "build-umbrella": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/core"],
             "options": {
                 "tsConfig": "libs/core/src/lib/tsconfig.lib.json",
@@ -38,7 +39,7 @@
             "defaultConfiguration": "production"
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/core/src/lib/**/*.ts", "libs/core/src/lib/**/*.html"]
             }

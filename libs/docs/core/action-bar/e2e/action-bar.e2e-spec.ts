@@ -1,6 +1,6 @@
 import { ActionBarPo } from './action-bar.po';
 import { backButton } from './action-bar-contents';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
     checkElArrIsClickable,
     click,

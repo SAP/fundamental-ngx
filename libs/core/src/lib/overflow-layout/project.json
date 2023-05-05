@@ -1,11 +1,12 @@
 {
     "name": "core-overflow-layout",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/overflow-layout",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
+            "executor": "@nx/angular:ng-packagr-lite",
             "outputs": ["{workspaceRoot}/dist/libs/core/overflow-layout"],
             "options": {
                 "project": "libs/core/src/lib/overflow-layout/ng-package.json"
@@ -29,7 +30,7 @@
             }
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": [
                     "libs/core/src/lib/overflow-layout/**/*.ts",
