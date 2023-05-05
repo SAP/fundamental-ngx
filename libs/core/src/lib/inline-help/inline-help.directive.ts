@@ -22,6 +22,8 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 const INLINE_HELP_CLASS = 'fd-popover__body--inline-help fd-inline-help__content';
 const INLINE_HELP_ICON_CLASS = 'fd-popover__body--inline-help-icon';
 
+let inlineHelpId = 0;
+
 /**
  * The component that represents an inline-help.
  * Inline help is used to display help text in a popover, often inline with headers, body text and form labels.
@@ -31,8 +33,7 @@ const INLINE_HELP_ICON_CLASS = 'fd-popover__body--inline-help-icon';
     selector: '[fd-inline-help]:not([fd-inline-help-template]), [fd-inline-help-template]:not([fd-inline-help])',
     providers: [PopoverService],
     host: {
-        '[class.fd-inline-help__trigger]': 'true',
-        role: 'tooltip'
+        '[class.fd-inline-help__trigger]': 'true'
     }
 })
 export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnChanges, OnDestroy {
@@ -68,6 +69,9 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         this._popoverService.updateContent(text, template);
     }
 
+    /** @hidden */
+    _describedBy = '';
+
     /**
      * Inline help template to display inside generated popover
      * @deprecated Use `fd-inline-help` instead
@@ -101,6 +105,10 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
 
     /** @hidden */
     ngOnInit(): void {
+        this._bodyRole = 'tooltip';
+        this._describedBy = `fd-inline-help-${inlineHelpId++}`;
+        this._elementRef.nativeElement.setAttribute('aria-describedby', this._describedBy);
+        this._bodyId = this._describedBy;
         this._applyAdditionalInlineHelpClass();
         this._popoverService.initialise(this._elementRef, this);
     }
