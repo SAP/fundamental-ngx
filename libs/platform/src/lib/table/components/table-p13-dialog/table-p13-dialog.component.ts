@@ -276,8 +276,7 @@ export class TableP13DialogComponent implements OnDestroy {
 
     /** @hidden */
     private _getTableColumns(): TableColumn[] {
-        const cols = this._table?.getTableColumns() || [];
-        return cols.filter(({ disableP13n }) => !disableP13n);
+        return this._table?.getTableColumns() || [];
     }
 
     /** @hidden */

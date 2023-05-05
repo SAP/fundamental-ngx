@@ -37,8 +37,7 @@ export const tableCellArr4 = [
     'diam neque vestibulum eget vulputate',
     '66.04',
     'true',
-    'Stocked on demand',
-    'Action'
+    'Stocked on demand'
 ];
 export const tableCellArr5 = [
     '10 Portable DVD player',
