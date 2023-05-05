@@ -5,6 +5,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     ComponentFixture,
+    discardPeriodicTasks,
     fakeAsync,
     flush,
     flushMicrotasks,
@@ -183,6 +184,8 @@ describe('ComboboxComponent default values', () => {
         combobox.onPrimaryButtonClick();
         fixture.detectChanges();
         flushMicrotasks();
+
+        discardPeriodicTasks();
 
         const group = overlayContainerEl.querySelectorAll('.fd-list__group-header');
         expect(group.length).toBe(2);
