@@ -1,3 +1,13 @@
+## [0.40.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.1...v0.40.4-rc.2) (2023-05-05)
+
+
+### Bug Fixes
+
+* **core:** vertical navigation focus issue ([#9789](https://github.com/SAP/fundamental-ngx/issues/9789)) ([9df1c4c](https://github.com/SAP/fundamental-ngx/commit/9df1c4c6940c0d2fd99a0c0c17193be6dd687a86))
+* **platform:** failing combobox unit test ([#9790](https://github.com/SAP/fundamental-ngx/issues/9790)) ([a929ff4](https://github.com/SAP/fundamental-ngx/commit/a929ff4f280e2ee881aa0fbccfc738ba7b87e003))
+
+
+
 ## [0.40.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.0...v0.40.4-rc.1) (2023-05-03)
 
 
