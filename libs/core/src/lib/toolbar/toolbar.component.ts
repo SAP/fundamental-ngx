@@ -137,13 +137,25 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
     /** @hidden */
     @ContentChild(TitleToken)
-    titleComponent: TitleToken | null = null;
+    set titleComponent(title: TitleToken | null) {
+        this._titleComponent$.next(title);
+    }
+
+    get titleComponent(): TitleToken | null {
+        return this._titleComponent$.value;
+    }
 
     /** @hidden */
     overflowItems$: Observable<ToolbarItem[]>;
 
     /** @hidden */
     overflownItems: ToolbarItem[] = [];
+
+    /** @hidden */
+    private _titleComponent$: BehaviorSubject<TitleToken | null> = new BehaviorSubject<TitleToken | null>(null);
+
+    /** @hidden */
+    private _refreshOverflow$ = new BehaviorSubject<void>(undefined);
 
     /** @hidden */
     private get _toolbarWidth(): number {
@@ -179,9 +191,18 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
                 startWith(this.toolbarItems),
                 map((toolbarItems) => toolbarItems.toArray())
             ),
-            this.shouldOverflow$
+            this._titleComponent$.pipe(
+                map((titleComponent): HTMLElement | null => {
+                    if (!titleComponent) {
+                        return this.titleElement?.nativeElement;
+                    }
+                    return titleComponent.elementRef.nativeElement;
+                })
+            ),
+            this.shouldOverflow$,
+            this._refreshOverflow$
         ]).pipe(
-            map(([toolbarWidth, toolbarItems, shouldOverflow]) => {
+            map(([toolbarWidth, toolbarItems, titleElement, shouldOverflow]) => {
                 if (shouldOverflow) {
                     const _sortedByPriorityAndGroupItems = this._getSortedByPriorityAndGroupItems(toolbarItems);
                     const overflowItems: ToolbarItem[] = [];
@@ -198,7 +219,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
                         } else {
                             return _contentWidth + itemWidth;
                         }
-                    }, this.titleElement?.nativeElement.clientWidth || 0);
+                    }, titleElement?.clientWidth || 0);
                     // Hide orphans
                     for (const toolbarItem of overflowItems) {
                         const groupedCollection = this._getGroupedCollection(toolbarItems);
@@ -271,9 +292,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
     /** Method triggering collapsible toolbar  */
     updateCollapsibleItems(): void {
-        if (this._initialised) {
-            // this._onResize();
-        }
+        this._refreshOverflow$.next();
     }
 
     /** @hidden Get group number with the lowest priority.
