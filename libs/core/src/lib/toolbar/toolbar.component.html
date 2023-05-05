@@ -23,7 +23,8 @@
                     <ng-container *ngFor="let overflowedItem of overflownItems">
                         <fdk-dynamic-portal
                             [domElement]="overflowedItem.element"
-                            [style.display]="overflowedItem.priority === 'disappear' ? 'none' : 'block'"
+                            [style.display]="overflowedItem.priority === 'disappear' ? 'none' : 'flex'"
+                            [style.flex-direction]="overflowedItem.priority === 'disappear' ? undefined : 'column'"
                         >
                         </fdk-dynamic-portal>
                     </ng-container>

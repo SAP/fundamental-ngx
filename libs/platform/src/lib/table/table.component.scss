@@ -89,7 +89,22 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
         }
     }
 }
+
 // End TODO
+
+/** When actions are collapsed */
+fdk-dynamic-portal {
+    .fdp-table-toolbar-actions {
+        display: flex;
+        flex-direction: column;
+
+        > *:not(:last-of-type) {
+            margin-left: 0;
+            margin-right: 0;
+            margin-bottom: 0.2rem;
+        }
+    }
+}
 
 .#{$block} {
     display: block;
@@ -102,18 +117,19 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
         }
     }
 
-    .fd-toolbar {
-        > .fdp-table-toolbar-actions {
-            margin: 0;
-            > * {
-                margin-left: 0.5rem;
-                @include fd-rtl() {
-                    margin-left: 0;
-                    margin-right: 0.5rem;
-                }
+    /** When actions are not collapsed */
+    .fdp-table-toolbar-actions {
+        margin: 0;
+
+        > *:not(:first-of-type) {
+            margin-left: 0.5rem;
+            @include fd-rtl() {
+                margin-left: 0;
+                margin-right: 0.5rem;
             }
         }
     }
+
     .#{$block}__body-table,
     .#{$block}__header-table,
     .#{$block}__body-hs-table {
