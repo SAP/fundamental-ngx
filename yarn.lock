@@ -12055,10 +12055,10 @@ karma-spec-reporter@0.0.34:
   dependencies:
     colors "1.4.0"
 
-karma-typescript-angular2-transform@5.5.3:
-  version "5.5.3"
-  resolved "https://registry.yarnpkg.com/karma-typescript-angular2-transform/-/karma-typescript-angular2-transform-5.5.3.tgz#d5796170c4b9414411ad3f9ea51c90154f311284"
-  integrity sha512-PeEUH2fB5vlRXXxpNESdx2DGxIOGF5Z2QFRhMd4jI9cqLxRGeMQET+D83b+lbVgW/yO3568Kt2JEs9Mno58Vww==
+karma-typescript-angular2-transform@5.5.4:
+  version "5.5.4"
+  resolved "https://registry.yarnpkg.com/karma-typescript-angular2-transform/-/karma-typescript-angular2-transform-5.5.4.tgz#282238acc72402cf3d559afd4ce8ee60744b67e8"
+  integrity sha512-4cKnQdtVHW24gWgJL0Go6mNqWPJV3hXh3hwBVVXnJCGVtQWLedzTOrmsoNQfMyfa72sX3CQdneUKMq2xdLQ7mw==
   dependencies:
     acorn "^8.1.0"
     log4js "^6.3.0"
