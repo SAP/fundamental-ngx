@@ -271,6 +271,7 @@
             "@fundamental-ngx/docs/fn/slider": ["libs/docs/fn/slider/index.ts"],
             "@fundamental-ngx/docs/fn/switch": ["libs/docs/fn/switch/index.ts"],
             "@fundamental-ngx/docs/fn/tabs": ["libs/docs/fn/tabs/index.ts"],
+            "@fundamental-ngx/docs/i18n": ["libs/docs/i18n/index.ts"],
             "@fundamental-ngx/docs/platform/action-bar": ["libs/docs/platform/action-bar/index.ts"],
             "@fundamental-ngx/docs/platform/action-list-item": ["libs/docs/platform/action-list-item/index.ts"],
             "@fundamental-ngx/docs/platform/approval-flow": ["libs/docs/platform/approval-flow/index.ts"],

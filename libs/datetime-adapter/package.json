@@ -5,15 +5,15 @@
     "license": "Apache-2.0",
     "homepage": "https://sap.github.io/fundamental-ngx/home",
     "repository": {
-      "type": "git",
-      "url": "https://github.com/SAP/fundamental-ngx"
+        "type": "git",
+        "url": "https://github.com/SAP/fundamental-ngx"
     },
     "scripts": {
         "build": "../../node_modules/.bin/tsc -p tsconfig.schematics.json",
         "copy:schemas": "cp schematics/*/schema.json ../../dist/libs/moment-adapter/",
         "copy:collection": "cp schematics/collection.json ../../dist/libs/moment-adapter/schematics/collection.json",
         "postbuild": "npm run && npm run copy:collection"
-      },
+    },
     "peerDependencies": {
         "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
         "dayjs": "DAYJS_VER_PLACEHOLDER"

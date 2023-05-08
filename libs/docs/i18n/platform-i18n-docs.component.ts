@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ExampleFile } from '../core-helpers/code-example/example-file';
-import { getAssetFromModuleAssets } from '../getAsset';
+import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 
 const translationCustomizationExampleComponentHtml =
     'i18n-translation-customization-example/i18n-translation-customization-example.component.html';

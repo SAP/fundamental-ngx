@@ -1,4 +1,4 @@
-import { logger, ProjectConfiguration } from '@nrwl/devkit';
+import { logger, ProjectConfiguration } from '@nx/devkit';
 import { copySync, pathExistsSync } from 'fs-extra';
 import { exec } from 'child_process';
 import { PrepareOptions, SchematicsOptions } from './prepare.options';

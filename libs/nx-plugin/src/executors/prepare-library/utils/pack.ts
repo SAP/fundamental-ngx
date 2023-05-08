@@ -1,4 +1,4 @@
-import { detectPackageManager, ExecutorContext, getPackageManagerCommand, logger } from '@nrwl/devkit';
+import { detectPackageManager, ExecutorContext, getPackageManagerCommand, logger } from '@nx/devkit';
 import { execSync } from 'child_process';
 import { PrepareOptions } from './prepare.options';
 

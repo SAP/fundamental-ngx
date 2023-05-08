@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PanelModule } from '@fundamental-ngx/core/panel';
-import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
@@ -10,18 +9,11 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
 
 import { PanelComponent } from './panel.component';
 import { PanelContentComponent } from './panel-content/panel-content.component';
-import { PanelActionsComponent } from './panel-actions/panel-actions.component';
+import { PanelActionsComponent } from './panel-actions.component';
 
 @NgModule({
     declarations: [PanelComponent, PanelContentComponent, PanelActionsComponent],
-    imports: [
-        CommonModule,
-        PanelModule,
-        ToolbarModule,
-        PipeModule,
-        PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
-    ],
+    imports: [CommonModule, PanelModule, PipeModule, PlatformContentDensityDeprecationsModule, ContentDensityModule],
     exports: [
         PanelComponent,
         PanelContentComponent,

@@ -1,17 +1,15 @@
-import { Rule } from '@angular-devkit/schematics';
-import { updateJsonInTree } from '@nrwl/workspace/src/utils/ast-utils';
-import { offsetFromRoot, readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { offsetFromRoot, readProjectConfiguration, updateJson, Tree } from '@nx/devkit';
 
 /**
  * Adds overrides to lib's eslintrc file.
  */
-export function addEslintJsonOverrides(tree: Tree, projectName: string): Rule {
+export function addEslintJsonOverrides(tree: Tree, projectName: string) {
     const project = readProjectConfiguration(tree, projectName);
     const eslintPath = `${project.root}/.eslintrc.json`;
     if (!tree.exists(eslintPath)) {
         throw new Error(`Could not find ".eslintrc.json" at "${project.root}"`);
     }
-    return updateJsonInTree(eslintPath, (eslintJson) => {
+    return updateJson(tree, eslintPath, (eslintJson) => {
         const overridePath = `${offsetFromRoot(project.root)}.eslintrc-overrides.json`;
         const overrides = eslintJson.overrides ?? [];
         const tsRuleIndex = overrides.findIndex((rule) => rule.files?.length === 1 && rule.files[0] === '*.ts');
