@@ -13,7 +13,16 @@ import { MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/for
 export class MultiComboboxDatasourceExampleComponent {
     isLimitless = true;
 
-    dataSourceStrings = ['Apple', 'Banana', 'Pineapple', 'Strawberry', 'Broccoli', 'Carrot', 'Jalapeño', 'Spinach'];
+    dataSourceStrings = [
+        '10 Apple',
+        '20 Banana',
+        '30 Pineapple',
+        '40 Strawberry',
+        'Broccoli',
+        'Carrot',
+        'Jalapeño',
+        'Spinach'
+    ];
 
     dataSource = [
         { id: '1', name: 'Apple', type: 'Fruits' },
