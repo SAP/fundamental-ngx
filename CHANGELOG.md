@@ -1,3 +1,13 @@
+## [0.40.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.2...v0.40.4-rc.3) (2023-05-08)
+
+
+### Bug Fixes
+
+* **core,platform:** multi combobox with numpad input ([#9808](https://github.com/SAP/fundamental-ngx/issues/9808)) ([91eee35](https://github.com/SAP/fundamental-ngx/commit/91eee35a88c14f4ae4d30e04540f0eb666fc0aa4))
+* **core,platform:** table toolbar responsiveness ([#9788](https://github.com/SAP/fundamental-ngx/issues/9788)) ([b6d9c3c](https://github.com/SAP/fundamental-ngx/commit/b6d9c3c88cb273eeafebfc39b9e0b95206507fd2))
+
+
+
 ## [0.40.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.1...v0.40.4-rc.2) (2023-05-05)
 
 
