@@ -1,3 +1,12 @@
+## [0.40.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.3...v0.40.4-rc.4) (2023-05-08)
+
+
+### Bug Fixes
+
+* scrollbar should stop immediate propagation ([#9784](https://github.com/SAP/fundamental-ngx/issues/9784)) ([42336a1](https://github.com/SAP/fundamental-ngx/commit/42336a168dba963536106c598f6a540630f48bd0))
+
+
+
 ## [0.40.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.2...v0.40.4-rc.3) (2023-05-08)
 
 
