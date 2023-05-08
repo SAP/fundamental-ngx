@@ -1,5 +1,6 @@
 {
     "name": "cx",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/cx/src/lib",
     "prefix": "cx",
@@ -19,7 +20,7 @@
             "outputs": ["{options.outputPath}"]
         },
         "build-umbrella": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/cx"],
             "options": {
                 "tsConfig": "libs/cx/src/lib/tsconfig.lib.json",
@@ -34,7 +35,7 @@
             "defaultConfiguration": "production"
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/cx/src/lib/**/*.ts", "libs/cx/src/lib/**/*.html"]
             }

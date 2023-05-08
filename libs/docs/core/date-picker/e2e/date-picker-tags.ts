@@ -1,5 +1,5 @@
 import { DatePickerPo } from './date-picker.po';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { getElementArrayLength, getElementClass } from '../../../../../e2e';
 
 const { altCalendarItem } = new DatePickerPo();

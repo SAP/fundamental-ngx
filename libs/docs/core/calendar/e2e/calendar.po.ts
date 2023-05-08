@@ -1,4 +1,4 @@
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { click, CoreBaseComponentPo, scrollIntoView, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
 
 export class CalendarPo extends CoreBaseComponentPo {

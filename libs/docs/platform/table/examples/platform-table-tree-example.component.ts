@@ -100,7 +100,7 @@ export class TableDataProviderExample extends TableDataProvider<TableRow> {
         }
 
         return items.filter((item) => {
-            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
+            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item.value));
             return valuesForSearch
                 .filter((value) => !!value)
                 .map((value): string => value.toString())

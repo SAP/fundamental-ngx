@@ -1,15 +1,16 @@
 {
+    "name": "docs-cdk-shared",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/shared/src",
     "prefix": "fundamental-ngx",
     "targets": {
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/docs/core/shared/**/*.ts", "libs/docs/core/shared/**/*.html"]
             }
         }
     },
-    "tags": ["type:lib", "scope:docs"],
-    "name": "docs-cdk-shared"
+    "tags": ["type:lib", "scope:docs"]
 }

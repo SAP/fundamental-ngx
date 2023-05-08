@@ -1,5 +1,3 @@
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-// import { MockElementRef } from '@fundamental-ngx/core/tests';
 import { ElementRef } from '@angular/core';
 import { OnlyDigitsDirective } from './only-digits.directive';
 

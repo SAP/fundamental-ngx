@@ -1,6 +1,5 @@
-import { wait } from '@nrwl/nx-cloud/lib/utilities/waiter';
 import { CalendarPo } from './calendar.po';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
     click,
     doesItExist,
