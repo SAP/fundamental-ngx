@@ -262,13 +262,13 @@
                                             | async
                                             | selectionCellStyles : _rtl : _semanticHighlightingColumnWidth
                                     "
-                                    (fdkClicked)="_toggleMultiSelectRow(row, $event)"
                                 >
                                     <fd-checkbox
                                         labelClass="fd-table__checkbox-label"
                                         [tristate]="enableTristateMode"
                                         [tristateSelectable]="false"
                                         [ngModel]="row.checked"
+                                        (fdkClicked)="_toggleMultiSelectRow(row, $event)"
                                     ></fd-checkbox>
                                 </td>
                             </ng-container>

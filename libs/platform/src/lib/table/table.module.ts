@@ -173,7 +173,7 @@ const EXPORTABLE_DECLARATIONS = [
         RepeatModule,
         DisabledBehaviorModule,
         PlatformListModule,
-        ClickedBehaviorModule
+        ClickedBehaviorModule.forRoot()
     ],
     declarations: [...EXPORTABLE_DECLARATIONS],
     exports: [...EXPORTABLE_DECLARATIONS]

@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of } from 'rxjs';
 
-import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { ClickedBehaviorModule, RtlService } from '@fundamental-ngx/cdk/utils';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
 import { TableDataProvider, TableDataSource } from './domain';
@@ -234,7 +234,13 @@ describe('TableComponent internal', () => {
 
         beforeEach(waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [PlatformTableModule, PlatformButtonModule, RouterModule, RouterTestingModule],
+                imports: [
+                    PlatformTableModule,
+                    PlatformButtonModule,
+                    RouterModule,
+                    RouterTestingModule,
+                    ClickedBehaviorModule.forRoot()
+                ],
                 declarations: [TableHostComponent],
                 providers: [RtlService]
             }).compileComponents();
