@@ -19,3 +19,4 @@ export * from './abstract-fd-ngx-class';
 export * from './pipes';
 export * from './tokens/module-deprecations.token';
 export * from './tokens/viewport-size.observable';
+export * from './toast';

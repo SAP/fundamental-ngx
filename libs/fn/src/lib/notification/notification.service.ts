@@ -1,6 +1,6 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { EmbeddedViewRef, Injectable, Injector, StaticProvider, TemplateRef, Type } from '@angular/core';
-import { BaseDismissibleToastService, ToastTopRightPosition } from '@fundamental-ngx/fn/cdk';
+import { BaseDismissibleToastService, ToastTopRightPosition } from '@fundamental-ngx/cdk/utils';
 import { NotificationTextComponent } from './components/notification-text/notification-text.component';
 import { NotificationConfig } from './config/notification-config';
 import { NOTIFICATION_DATA } from './constants/notification-data.token';

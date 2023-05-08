@@ -1,5 +1,5 @@
 import { OverlayRef } from '@angular/cdk/overlay';
-import { BaseToastActionDismissibleRef } from '@fundamental-ngx/fn/cdk';
+import { BaseToastActionDismissibleRef } from '@fundamental-ngx/cdk/utils';
 import { NotificationComponent } from '../notification.component';
 import { NotificationConfig } from '../config/notification-config';
 

@@ -78,6 +78,6 @@ export class MessageToastDefaultExampleComponent {
     }
 
     dismissAll(): void {
-        this._messageToastService.dismissAll();
+        this._messageToastService.hideAll();
     }
 }

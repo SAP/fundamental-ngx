@@ -23,7 +23,7 @@ export class NotificationSemanticStateExampleComponent {
     constructor(private _notificationService: NotificationService<NotificationExampleData>) {}
 
     dismissAll(): void {
-        this._notificationService.dismissAll();
+        this._notificationService.hideAll();
     }
 
     openFromTemplate(template: TemplateRef<any>, state: NotificationState = 'positive'): void {

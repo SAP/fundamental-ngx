@@ -7,7 +7,7 @@ import {
     ToastTopCenterPosition,
     ToastTopLeftPosition,
     ToastTopRightPosition
-} from '@fundamental-ngx/fn/cdk';
+} from '@fundamental-ngx/cdk/utils';
 import { NotificationService } from '@fundamental-ngx/fn/notification';
 
 export interface NotificationPosition {

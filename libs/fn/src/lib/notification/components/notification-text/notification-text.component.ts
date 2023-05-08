@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
-import { ToastTextComponent } from '@fundamental-ngx/fn/cdk';
+import { ToastTextComponent } from '@fundamental-ngx/cdk/utils';
 import { NotificationConfig } from '../../config/notification-config';
 import { NOTIFICATION_DATA } from '../../constants/notification-data.token';
 import { NotificationRef } from '../../ref/notification-ref';

@@ -2,7 +2,7 @@ import { OverlayContainer, OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BaseToastOverlayContainer } from '@fundamental-ngx/fn/cdk';
+import { BaseToastOverlayContainer } from '@fundamental-ngx/cdk/utils';
 import { MessageToastComponent } from './message-toast.component';
 import { MessageToastService } from './message-toast.service';
 import { MessageToastTextComponent } from './components/message-toast-text.component';

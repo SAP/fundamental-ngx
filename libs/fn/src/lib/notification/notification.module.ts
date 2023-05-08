@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { ButtonModule } from '@fundamental-ngx/fn/button';
-import { BaseToastOverlayContainer } from '@fundamental-ngx/fn/cdk';
+import { BaseToastOverlayContainer } from '@fundamental-ngx/cdk/utils';
 import { NotificationComponent } from './notification.component';
 import { NotificationService } from './notification.service';
 import { NotificationTextComponent } from './components/notification-text/notification-text.component';

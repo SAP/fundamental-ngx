@@ -7,6 +7,9 @@ const messageToastContentExample = 'message-toast-content-example.component.ts';
 const messageToastExample = 'message-toast-example.component.ts';
 const messageToastExampleHtml = 'message-toast-example.component.html';
 
+const messageToastPositionExample = 'message-toast-position-example.component.ts';
+const messageToastPositionExampleHtml = 'message-toast-position-example.component.html';
+
 @Component({
     selector: 'app-message-toast',
     templateUrl: './message-toast-docs.component.html'
@@ -16,8 +19,7 @@ export class MessageToastDocsComponent {
         {
             language: 'html',
             fileName: 'message-toast-example',
-            code: getAssetFromModuleAssets(messageToastExampleHtml),
-            scssFileCode: getAssetFromModuleAssets(messageToastExampleScss)
+            code: getAssetFromModuleAssets(messageToastExampleHtml)
         },
         {
             language: 'typescript',
@@ -35,6 +37,23 @@ export class MessageToastDocsComponent {
             component: 'MessageToastContentExampleComponent',
             name: 'Content Component',
             entryComponent: true
+        }
+    ];
+
+    messageToastPositionComponentExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'message-toast-position-example',
+            code: getAssetFromModuleAssets(messageToastPositionExampleHtml)
+        },
+        {
+            language: 'typescript',
+            fileName: 'message-toast-position-example',
+            code: getAssetFromModuleAssets(messageToastPositionExample),
+            component: 'MessageToastPositionExampleComponent',
+            entryComponent: true,
+            name: 'Main Component',
+            main: true
         }
     ];
 }
