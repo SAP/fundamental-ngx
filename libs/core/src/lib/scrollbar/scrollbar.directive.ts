@@ -114,7 +114,7 @@ export class ScrollbarDirective implements OnDestroy {
     /** @hidden */
     @HostListener('scroll', ['$event'])
     onScroll(event: Event): void {
-        event.stopPropagation();
+        event.stopImmediatePropagation();
     }
 
     /**
