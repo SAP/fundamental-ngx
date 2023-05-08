@@ -1,6 +1,6 @@
 import { ActionSheetPo } from './action-sheet.po';
 import { alertMessages, compactValue } from './action-sheet-content';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
     checkElArrIsClickable,
     checkElementScreenshot,

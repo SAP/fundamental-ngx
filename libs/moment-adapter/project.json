@@ -1,5 +1,6 @@
 {
     "name": "moment-adapter",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/moment-adapter/src",
     "projectType": "library",
     "prefix": "fd",
@@ -22,7 +23,7 @@
             "outputs": ["{options.outputPath}"]
         },
         "build": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nx/angular:package",
             "options": {
                 "tsConfig": "libs/moment-adapter/tsconfig.lib.json",
                 "project": "libs/moment-adapter/ng-package.json",
@@ -37,7 +38,7 @@
             "defaultConfiguration": "production"
         },
         "build-umbrella": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nx/angular:package",
             "options": {
                 "tsConfig": "libs/moment-adapter/tsconfig.lib.json",
                 "project": "libs/moment-adapter/ng-package.json",
@@ -52,7 +53,7 @@
             "defaultConfiguration": "production"
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/moment-adapter/**/*.ts", "libs/moment-adapter/**/*.html"]
             }
@@ -68,8 +69,8 @@
         }
     },
     "generators": {
-        "@nrwl/schematics:component": {
-            "styleext": "scss"
+        "@nx/angular:component": {
+            "style": "scss"
         }
     },
     "tags": ["type:lib", "scope:datetime-adapter"],

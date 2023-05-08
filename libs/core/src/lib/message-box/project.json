@@ -1,11 +1,12 @@
 {
     "name": "core-message-box",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/message-box",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
+            "executor": "@nx/angular:ng-packagr-lite",
             "outputs": ["{workspaceRoot}/dist/libs/core/message-box"],
             "options": {
                 "tsConfig": "libs/core/src/lib/message-box/tsconfig.lib.json",
@@ -27,7 +28,7 @@
             }
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/core/src/lib/message-box/**/*.ts", "libs/core/src/lib/message-box/**/*.html"]
             }

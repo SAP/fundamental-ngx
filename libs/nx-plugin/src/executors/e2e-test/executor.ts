@@ -1,4 +1,4 @@
-import { ExecutorContext, logger, readTargetOptions } from '@nrwl/devkit';
+import { ExecutorContext, logger, readTargetOptions } from '@nx/devkit';
 import { WdioExecutorOptions } from './schema.type';
 import { startDevServer } from '../../e2e-utils/start-dev-server';
 import { runWdio } from '../../e2e-utils/run-wdio';

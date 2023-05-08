@@ -1,11 +1,12 @@
 {
     "name": "fn-progress-bar",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/fn/src/lib/progress-bar",
     "prefix": "fn",
     "targets": {
         "build-noop": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
+            "executor": "@nx/angular:ng-packagr-lite",
             "outputs": ["{workspaceRoot}/dist/libs/fn/progress-bar"],
             "options": {
                 "project": "libs/fn/src/lib/progress-bar/ng-package.json"
@@ -29,7 +30,7 @@
             }
         },
         "lint-noop": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/fn/src/lib/progress-bar/**/*.ts", "libs/fn/src/lib/progress-bar/**/*.html"]
             }

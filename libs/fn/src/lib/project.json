@@ -1,5 +1,6 @@
 {
     "name": "fn",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/fn/src/lib",
     "prefix": "fn",
@@ -23,7 +24,7 @@
             "outputs": ["{options.outputPath}"]
         },
         "build-umbrella-noop": {
-            "executor": "@nrwl/angular:package",
+            "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/fn"],
             "options": {
                 "tsConfig": "libs/fn/src/lib/tsconfig.lib.json",
@@ -38,7 +39,7 @@
             "defaultConfiguration": "production"
         },
         "lint-noop": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/fn/src/lib/**/*.ts", "libs/fn/src/lib/**/*.html"]
             }

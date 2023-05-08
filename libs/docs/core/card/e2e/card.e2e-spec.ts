@@ -1,5 +1,5 @@
 import { CardPo } from './card.po';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
     checkElArrIsClickable,
     checkElementText,

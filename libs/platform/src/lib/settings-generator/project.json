@@ -1,11 +1,12 @@
 {
     "name": "platform-settings-generator",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/platform/src/lib/settings-generator",
     "prefix": "fdp",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
+            "executor": "@nx/angular:ng-packagr-lite",
             "outputs": ["{workspaceRoot}/dist/libs/platform/settings-generator"],
             "options": {
                 "tsConfig": "libs/platform/src/lib/settings-generator/tsconfig.lib.json",
@@ -27,7 +28,7 @@
             }
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": [
                     "libs/platform/src/lib/settings-generator/**/*.ts",

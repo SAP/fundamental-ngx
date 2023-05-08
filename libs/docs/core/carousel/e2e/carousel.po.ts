@@ -1,4 +1,4 @@
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { CoreBaseComponentPo, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
 
 export class CarouselPo extends CoreBaseComponentPo {
