@@ -1,12 +1,10 @@
-import { Component, ViewEncapsulation, HostBinding, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 
-@Component({
-    selector: 'fd-toolbar-spacer',
-    template: ``,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: 'fd-toolbar-spacer'
 })
-export class ToolbarSpacerComponent {
+export class ToolbarSpacerDirective {
     /** Determines the width of spacer when fixed property is set to true
      * Allowed values: absolute and relative metrics
      * Default value: 0px
