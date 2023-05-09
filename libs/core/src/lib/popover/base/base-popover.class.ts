@@ -154,6 +154,12 @@ export class BasePopoverClass {
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** @hidden Aria role for the popover body. */
+    _bodyRole: string | null = null;
+
+    /** @hidden ID for the popover body. */
+    _bodyId: string | null = null;
 }
 
 /**

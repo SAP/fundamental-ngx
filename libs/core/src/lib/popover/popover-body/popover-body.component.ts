@@ -74,6 +74,12 @@ export class PopoverBodyComponent {
     /** @hidden Property bind to popover's body */
     _closeOnEscapeKey = false;
 
+    /** @hidden Aria role for the popover body */
+    _bodyRole: Nullable<string> = null;
+
+    /** @hidden Aria role for the popover body */
+    _bodyId: Nullable<string> = null;
+
     /** Classes added to arrow element */
     _arrowClasses = '';
 
