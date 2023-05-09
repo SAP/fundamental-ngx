@@ -74,15 +74,13 @@ export class TableDataProviderExample extends TableDataProvider<TableRow> {
 
     constructor() {
         super();
-        this.items = convertToTree(null, ITEMS);
+        this.items = convertToTree(null, ITEMS).map(this.andExpandSecondNode);
         this.totalItems = this.items.length;
     }
 
     fetch(tableState?: TableState): Observable<TableRow[]> {
-        this.items = this.items = convertToTree(null, ITEMS);
-
-        // apply searching
         if (tableState?.searchInput) {
+            this.items = convertToTree(null, ITEMS).map(this.andExpandSecondNode);
             this.items = this.search(this.items, tableState);
         }
 
@@ -106,6 +104,14 @@ export class TableDataProviderExample extends TableDataProvider<TableRow> {
                 .map((value): string => value.toString())
                 .some((value) => value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
         });
+    }
+
+    andExpandSecondNode(row: TableRow, index: number, array: TableRow[]): TableRow {
+        if (index === 1 && row.level === 0) {
+            row.expanded = true;
+            row.hidden = false;
+        }
+        return row;
     }
 }
 

@@ -11,10 +11,11 @@ import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { TableDataProvider, TableDataSource } from './domain';
 import { FILTER_STRING_STRATEGY, FilterableColumnDataType, SelectionMode, SortDirection, TableRowType } from './enums';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
-import { TableRowClass, TableRowSelectionChangeEvent, TableRowToggleOpenStateEvent } from './models';
+import { TableRow, TableRowClass, TableRowSelectionChangeEvent, TableRowToggleOpenStateEvent } from './models';
 import { TableComponent } from './table.component';
 import { PlatformTableModule } from './table.module';
 import { TableService } from './table.service';
+import { newTableRow } from './utils';
 
 interface SourceItem {
     id: string;
@@ -1015,12 +1016,63 @@ const generateTreeItems = (length = 50): SourceTreeItem[] =>
         })
     );
 
+const convertToTableRows = (
+    parent: TableRow | null,
+    items: SourceTreeItem[],
+    level = 0
+): TableRow<SourceTreeItem>[] => {
+    const rows: TableRow<SourceTreeItem>[] = [];
+    items.forEach((value, index) => {
+        let children = [] as TableRow[];
+
+        const treeItem = newTableRow({
+            type: TableRowType.ITEM,
+            checked: false,
+            index,
+            value,
+            parent,
+            level,
+            expanded: false
+        });
+
+        if (value.children && value.children.length > 0) {
+            children = convertToTableRows(treeItem, value.children as SourceTreeItem[], level + 1);
+            treeItem.children = children;
+            treeItem.type = TableRowType.TREE;
+        }
+        rows.push(treeItem);
+    });
+    return rows;
+};
+
 class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
     items = generateTreeItems(treeItemParentsCount);
     totalItems = totalTreeItems;
 
     fetch(): Observable<SourceTreeItem[]> {
         return of(this.items);
+    }
+}
+
+class TreeTableDataProviderWithExpandedNodeMock extends TableDataProvider<TableRow> {
+    items: TableRow[] = [];
+    totalItems = totalTreeItems;
+
+    constructor() {
+        super();
+        this.items = convertToTableRows(null, generateTreeItems(treeItemParentsCount)).map(this.andExpandSecondNode);
+    }
+
+    fetch(): Observable<TableRow[]> {
+        return of(this.items);
+    }
+
+    andExpandSecondNode(row: TableRow, index: number, array: TableRow[]): TableRow {
+        if (index === 1 && row.level === 0) {
+            row.expanded = true;
+            row.hidden = false;
+        }
+        return row;
     }
 }
 
@@ -1472,6 +1524,63 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                     ).toEqual(3);
                     expect(hostComponent.table._tableRows[0].checked).toBeTrue();
                 });
+            });
+        });
+    });
+})();
+
+(function (): void {
+    @Component({
+        template: `
+            <fdp-table
+                fdCompact
+                selectionMode="multiple"
+                [dataSource]="source"
+                [isTreeTable]="true"
+                [relationKey]="relationKey"
+            >
+                <fdp-column name="name" key="name" label="Name"></fdp-column>
+                <fdp-column name="description" key="description" label="Description"></fdp-column>
+                <fdp-column name="status" key="status" label="Status"></fdp-column>
+            </fdp-table>
+        `
+    })
+    class TableHostComponent {
+        @ViewChild(TableComponent) table: TableComponent;
+
+        source = new TableDataSource(new TreeTableDataProviderWithExpandedNodeMock());
+        relationKey = 'children';
+    }
+
+    describe('TableComponent DataSource using TableRow', async () => {
+        let hostComponent: TableHostComponent;
+        let fixture: ComponentFixture<TableHostComponent>;
+        let tableComponent: TableComponent<SourceItem>;
+
+        beforeEach(waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformTableModule, RouterModule, RouterTestingModule],
+                declarations: [TableHostComponent],
+                providers: [RtlService]
+            }).compileComponents();
+        }));
+
+        beforeEach(() => {
+            fixture = TestBed.createComponent(TableHostComponent);
+            hostComponent = fixture.componentInstance;
+            spyOn(hostComponent.source, 'fetch').and.callThrough();
+
+            fixture.detectChanges();
+
+            tableComponent = hostComponent.table;
+        });
+
+        describe('Expanding based on the initial TableRow state', () => {
+            it('should show second item expanded', () => {
+                const expandedRow = tableComponent._tableRowsVisible[1];
+
+                expect(expandedRow.hidden).toBeFalse();
+                expect(expandedRow.expanded).toBeTrue();
             });
         });
     });
