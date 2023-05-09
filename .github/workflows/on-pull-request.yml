@@ -62,14 +62,19 @@ jobs:
             - uses: wagoid/commitlint-github-action@v3
               name: Commit lint
 
-            - name: Run Build and Test
+            - name: Run Build and Lint
               uses: ./.github/actions/parallel-commands
               with:
                   parallel-commands: |
                       npx nx affected --target=build --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=docs --parallel=3
-                      npx nx affected --target=test --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=nx-plugin --parallel=3
                       npx nx affected --target=lint --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=core,platform,cx --parallel=3
                       npx nx run nx-plugin:test --skip-nx-cache
+
+            - name: Run tests
+              run: npx nx affected --target=test --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD --exclude=nx-plugin --parallel=3
+              env:
+                  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
             - name: Format Check
               run: npx nx format:check --base=origin/${{ github.event.pull_request.base.ref }} --head=HEAD
               env:
