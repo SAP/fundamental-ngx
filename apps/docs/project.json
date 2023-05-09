@@ -4,7 +4,7 @@
     "projectType": "application",
     "prefix": "fundamental-ngx",
     "generators": {
-        "@nrwl/schematics:component": {
+        "@nx/schematics:component": {
             "style": "scss"
         }
     },
@@ -47,7 +47,7 @@
             "outputs": ["libs/docs/typedoc"]
         },
         "build": {
-            "executor": "@nrwl/angular:webpack-browser",
+            "executor": "@nx/angular:webpack-browser",
             "options": {
                 "outputPath": "dist/apps/docs",
                 "index": "apps/docs/src/index.html",
@@ -221,7 +221,7 @@
             "dependsOn": ["^build", "generate-typedoc"]
         },
         "serve": {
-            "executor": "@nrwl/angular:webpack-dev-server",
+            "executor": "@nx/angular:webpack-dev-server",
             "options": {
                 "browserTarget": "docs:build"
             },
@@ -241,7 +241,7 @@
             "defaultConfiguration": "hot-module-replacement"
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["apps/docs/**/*.ts", "apps/docs/**/*.html"]
             }
