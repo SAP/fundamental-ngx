@@ -1,8 +1,7 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { UploadCollectionModule } from './upload-collection.module';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { Component, ElementRef, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { UploadCollectionItemDirective } from './upload-collection-item.directive';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { UploadCollectionModule } from './upload-collection.module';
 
 @Component({
     template: `
@@ -50,18 +49,18 @@ describe('UploadCollectionItemDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             declarations: [TestComponent],
-            imports: [UploadCollectionModule, IconModule]
+            imports: [UploadCollectionModule],
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
-    }));
-
-    beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
+
+    afterEach(() => jest.clearAllMocks());
 
     it('should create', () => {
         expect(component).toBeTruthy();
@@ -79,7 +78,7 @@ describe('UploadCollectionItemDirective', () => {
     });
 
     it('should handle the delete button subscriptions', fakeAsync(() => {
-        spyOn(component.item.deleteClicked, 'emit');
+        jest.spyOn(component.item.deleteClicked, 'emit');
         component.item.ngAfterContentInit();
         tick(1);
         component.item._buttonGroupComponent.deleteClicked.emit();
@@ -88,21 +87,21 @@ describe('UploadCollectionItemDirective', () => {
         expect(component.item.deleteClicked.emit).toHaveBeenCalled();
     }));
 
-    it('should handle the ok button subscription', fakeAsync(() => {
-        spyOn(component.item.fileNameChanged, 'emit');
+    it('should handle the ok button subscription', async () => {
         component.item.ngAfterContentInit();
-        tick(1);
+        const emitSpy = jest.spyOn(component.item.fileNameChanged, 'emit');
         component.item._formItemComponent.fileName = 'newName';
+        jest.spyOn<any, any>(component.item, 'getTitleWidth').mockReturnValue(30);
+        jest.spyOn<any, any>(component.item, 'getContainerWidth').mockReturnValue(50);
         component.item._buttonGroupComponent.okClicked.emit();
-        tick(1);
         fixture.detectChanges();
         expect(component.item._titleDirective.elRef.nativeElement.style.display).toEqual('inline-block');
         expect(component.item._titleDirective.elRef.nativeElement.innerHTML).toEqual('newName.txt');
-        expect(component.item.fileNameChanged.emit).toHaveBeenCalled();
+        expect(emitSpy).toHaveBeenCalled();
         expect(component.item.fileName).toEqual('newName');
-        expect(component.item._formItemComponent._editMode).toBeFalse();
-        expect(component.item._buttonGroupComponent._editMode).toBeFalse();
-    }));
+        expect(component.item._formItemComponent._editMode).toBe(false);
+        expect(component.item._buttonGroupComponent._editMode).toBe(false);
+    });
 
     it('should handle editClicked subscription', fakeAsync(() => {
         component.item.ngAfterContentInit();

@@ -71,7 +71,7 @@ describe('ListNavigationItemComponent', () => {
 
     it('should handle mouse click', fakeAsync(() => {
         const event = new MouseEvent('click');
-        spyOn(event, 'stopPropagation');
+        jest.spyOn(event, 'stopPropagation');
         tick();
         component.ref.nativeElement.dispatchEvent(event);
         tick();

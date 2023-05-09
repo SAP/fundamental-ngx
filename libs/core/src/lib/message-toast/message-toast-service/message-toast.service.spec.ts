@@ -52,7 +52,7 @@ describe('MessageToastService', () => {
     });
 
     it('should open message toast from string', () => {
-        spyOn<any>(service, '_destroyMessageToastComponent').and.callThrough();
+        jest.spyOn<any, any>(service, '_destroyMessageToastComponent');
 
         expect(service['_messageToasts'].length).toBe(0);
         expect(service['_messageToastContainerRef']).toBeFalsy();
@@ -70,7 +70,7 @@ describe('MessageToastService', () => {
     });
 
     it('should open message toast from template', () => {
-        spyOn<any>(service, '_destroyMessageToastComponent').and.callThrough();
+        jest.spyOn<any, any>(service, '_destroyMessageToastComponent');
 
         expect(service['_messageToasts'].length).toBe(0);
         expect(service['_messageToastContainerRef']).toBeFalsy();
@@ -87,7 +87,7 @@ describe('MessageToastService', () => {
     });
 
     it('should open message toast from component', () => {
-        spyOn<any>(service, '_destroyMessageToastComponent').and.callThrough();
+        jest.spyOn<any, any>(service, '_destroyMessageToastComponent');
 
         expect(service['_messageToasts'].length).toBe(0);
         expect(service['_messageToastContainerRef']).toBeFalsy();

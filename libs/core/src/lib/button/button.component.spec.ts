@@ -45,7 +45,7 @@ describe('ButtonComponent', () => {
     });
 
     it('should handle content density when compact input is not provided', () => {
-        spyOn(componentInstance, 'buildComponentCssClass').and.callThrough();
+        jest.spyOn(componentInstance, 'buildComponentCssClass');
         componentInstance.ngOnInit();
         expect(componentInstance.buildComponentCssClass).toHaveBeenCalled();
     });

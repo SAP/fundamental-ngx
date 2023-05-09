@@ -26,6 +26,6 @@ describe('NotificationLimitComponent', () => {
     it('should apply proper css classes', async () => {
         await whenStable(fixture);
 
-        expect(fixture.nativeElement).toHaveClass('fd-notification__limit');
+        expect(fixture.nativeElement.classList.contains('fd-notification__limit')).toBe(true);
     });
 });

@@ -64,9 +64,9 @@ describe('DynamicSideContent', () => {
 
         it('should add container', () => {
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
-            expect(
-                componentDebugEl.nativeElement.className.includes(DYNAMIC_SIDE_CONTENT_CLASS_NAME.container)
-            ).toBeTrue();
+            expect(componentDebugEl.nativeElement.className.includes(DYNAMIC_SIDE_CONTENT_CLASS_NAME.container)).toBe(
+                true
+            );
         });
 
         it('should add modifier for position="equalSplit"', () => {
@@ -76,7 +76,7 @@ describe('DynamicSideContent', () => {
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
             expect(
                 componentDebugEl.nativeElement.className.includes(DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSideEqual)
-            ).toBeTrue();
+            ).toBe(true);
         });
 
         it('should add modifier for position="bottom"', () => {
@@ -86,7 +86,7 @@ describe('DynamicSideContent', () => {
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
             expect(
                 componentDebugEl.nativeElement.className.includes(DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSideBelow)
-            ).toBeTrue();
+            ).toBe(true);
         });
 
         it('should add modifier for size option', () => {
@@ -96,25 +96,25 @@ describe('DynamicSideContent', () => {
             fixture.detectChanges();
             expect(
                 componentDebugEl.nativeElement.className.includes(DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSizeSm)
-            ).toBeTrue();
+            ).toBe(true);
 
             host.size = 'md';
             fixture.detectChanges();
             expect(
                 componentDebugEl.nativeElement.className.includes(DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSizeMd)
-            ).toBeTrue();
+            ).toBe(true);
 
             host.size = 'lg';
             fixture.detectChanges();
             expect(
                 componentDebugEl.nativeElement.className.includes(DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSizeMd)
-            ).toBeTrue();
+            ).toBe(true);
 
             host.size = 'xl';
             fixture.detectChanges();
             expect(
                 componentDebugEl.nativeElement.className.includes(DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSizeXl)
-            ).toBeTrue();
+            ).toBe(true);
         });
     });
 
@@ -122,8 +122,8 @@ describe('DynamicSideContent', () => {
         const componentEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent))
             .nativeElement as HTMLElement;
 
-        expect(componentEl?.innerText).toContain(host.sideTextContent);
-        expect(componentEl?.innerText).toContain(host.mainTextContent);
+        expect(componentEl?.innerHTML).toContain(host.sideTextContent);
+        expect(componentEl?.innerHTML).toContain(host.mainTextContent);
     });
 
     describe('positioning', () => {

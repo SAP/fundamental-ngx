@@ -26,6 +26,6 @@ describe('NotificationActionsComponent', () => {
     it('should apply proper css classes', async () => {
         await whenStable(fixture);
 
-        expect(fixture.nativeElement).toHaveClass('fd-notification__actions');
+        expect(fixture.nativeElement.classList.contains('fd-notification__actions')).toBe(true);
     });
 });

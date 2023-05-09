@@ -32,7 +32,7 @@ describe('PopoverFormMessageService', () => {
     });
 
     it('should trigger _updatePopover on message change ', () => {
-        const updateSpy = spyOn(<any>service, '_updatePopover');
+        const updateSpy = jest.spyOn(<any>service, '_updatePopover');
 
         service.message = 'New Message';
 
@@ -40,7 +40,7 @@ describe('PopoverFormMessageService', () => {
     });
 
     it('should trigger _updatePopover on message type change ', () => {
-        const updateSpy = spyOn(<any>service, '_updatePopover');
+        const updateSpy = jest.spyOn(<any>service, '_updatePopover');
 
         service.messageType = 'information';
 
@@ -49,7 +49,7 @@ describe('PopoverFormMessageService', () => {
 
     it('should trigger _updatePopover and hide', () => {
         service.message = 'test';
-        const updateSpy = spyOn(<any>service, '_updatePopover').and.callThrough();
+        const updateSpy = jest.spyOn(<any>service, '_updatePopover');
 
         service.hide();
 
@@ -66,11 +66,11 @@ describe('PopoverFormMessageService', () => {
 
         expect((<any>service)._shouldBeHidden()).toBeTruthy();
 
-        const updateSpy = spyOn(<any>service, '_updatePopover').and.callThrough();
+        const updateSpy = jest.spyOn(<any>service, '_updatePopover');
 
         service.show();
 
         expect(updateSpy).toHaveBeenCalled();
-        expect((<any>service)._shouldBeHidden()).toBeFalse();
+        expect((<any>service)._shouldBeHidden()).toBe(false);
     });
 });

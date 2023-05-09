@@ -21,18 +21,24 @@
             },
             "defaultConfiguration": "production"
         },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/skeleton/test.ts",
-                "tsConfig": "libs/core/src/lib/skeleton/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/skeleton/karma.conf.js"
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/core/src/lib/skeleton/**/*.ts", "libs/core/src/lib/skeleton/**/*.html"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/core/src/lib/skeleton/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
             }
         }
     },

@@ -19,14 +19,6 @@
                 }
             }
         },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/cx/src/lib/side-navigation/test.ts",
-                "tsConfig": "libs/cx/src/lib/side-navigation/tsconfig.spec.json",
-                "karmaConfig": "libs/cx/src/lib/side-navigation/karma.conf.js"
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {
@@ -34,6 +26,20 @@
                     "libs/cx/src/lib/side-navigation/**/*.ts",
                     "libs/cx/src/lib/side-navigation/**/*.html"
                 ]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/cx/src/lib/side-navigation/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
             }
         }
     },

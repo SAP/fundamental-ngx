@@ -1,9 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { GridListModule } from '../../grid-list.module';
 import { GridListSelectionMode } from '../../models/grid-list-selection.models';
 import { GridListComponent } from './grid-list.component';
@@ -114,7 +111,8 @@ describe('GridListComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent],
-            imports: [GridListModule, AvatarModule, ButtonModule]
+            imports: [GridListModule],
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     });
 
@@ -144,7 +142,7 @@ describe('GridListComponent', () => {
     it('toolbar should contain counter and nav indicator', () => {
         const counters = fixture.debugElement.queryAll(By.css('.fd-grid-list__item .fd-grid-list__item-counter'));
         expect(counters.length).toEqual(1);
-        expect(counters[0].nativeElement.innerText).toEqual('15');
+        expect(counters[0].nativeElement.innerText?.toString()).toEqual('15');
 
         const navIndicators = fixture.debugElement.queryAll(
             By.css('.fd-grid-list__item .fd-grid-list__item-navigation-indicator')
@@ -153,7 +151,7 @@ describe('GridListComponent', () => {
     });
 
     it('should throw Navigation event if click on Navigation button', () => {
-        spyOn(component, 'navigate');
+        jest.spyOn(component, 'navigate');
         const item = fixture.debugElement.query(By.css('.fd-grid-list__item.fd-grid-list__item--link'));
 
         item.nativeElement.click();
@@ -177,7 +175,7 @@ describe('GridListComponent', () => {
     });
 
     it('Delete mode: should throw Delete event if click on Delete button', () => {
-        spyOn(component, 'delete');
+        jest.spyOn(component, 'delete');
         component.setMode('delete');
 
         fixture.detectChanges();
@@ -203,7 +201,7 @@ describe('GridListComponent', () => {
 
     it('Single Select mode: should throw selection event if select item', () => {
         component.setMode('singleSelect');
-        spyOn(component, 'selectionChange');
+        jest.spyOn(component, 'selectionChange');
 
         fixture.detectChanges();
 
@@ -227,7 +225,7 @@ describe('GridListComponent', () => {
 
     it('Multi Select mode: should throw selection events if unselected all', () => {
         component.setMode('multiSelect');
-        spyOn(component, 'selectionChange');
+        jest.spyOn(component, 'selectionChange');
 
         fixture.detectChanges();
 
@@ -252,7 +250,7 @@ describe('GridListComponent', () => {
 
     it('Multi Select mode: should throw selection events if select item', () => {
         component.setMode('multiSelect');
-        spyOn(component, 'selectionChange');
+        jest.spyOn(component, 'selectionChange');
 
         fixture.detectChanges();
 

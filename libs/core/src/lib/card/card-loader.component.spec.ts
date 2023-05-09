@@ -25,6 +25,6 @@ describe('CardLoaderComponent', () => {
     });
 
     it('should add className to host', () => {
-        expect(fixture.debugElement.nativeElement.className.includes(CLASS_NAME.cardLoader)).toBeTrue();
+        expect(fixture.debugElement.nativeElement.className.includes(CLASS_NAME.cardLoader)).toBe(true);
     });
 });
