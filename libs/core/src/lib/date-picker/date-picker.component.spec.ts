@@ -69,8 +69,8 @@ describe('DatePickerComponent', () => {
     });
 
     it('should handle single date change and update input', () => {
-        spyOn(component, 'onChange');
-        spyOn(component.selectedDateChange, 'emit');
+        jest.spyOn(component, 'onChange');
+        jest.spyOn(component.selectedDateChange, 'emit');
         const date = adapter.today();
         const dateStr = (<any>component)._formatDate(date);
         component._inputFieldDate = '';
@@ -81,8 +81,8 @@ describe('DatePickerComponent', () => {
     });
 
     it('should handle range date change and update input', () => {
-        spyOn(component, 'onChange');
-        spyOn(component.selectedRangeDateChange, 'emit');
+        jest.spyOn(component, 'onChange');
+        jest.spyOn(component.selectedRangeDateChange, 'emit');
         const dateStart = adapter.today();
         const dateLast = adapter.addCalendarDays(dateStart, 10);
         const dateStrStart = (<any>component)._formatDate(dateStart);
@@ -95,8 +95,8 @@ describe('DatePickerComponent', () => {
     });
 
     it('should handle today button click and, change and update input', () => {
-        spyOn(component, 'onChange');
-        spyOn(component.selectedRangeDateChange, 'emit');
+        jest.spyOn(component, 'onChange');
+        jest.spyOn(component.selectedRangeDateChange, 'emit');
         const date = adapter.today();
         const dateStr = (<any>component)._formatDate(date);
 
@@ -146,7 +146,7 @@ describe('DatePickerComponent', () => {
     });
 
     it('should register invalid string date and not call event for single mode', () => {
-        spyOn(component.selectedDateChange, 'emit');
+        jest.spyOn(component.selectedDateChange, 'emit');
         component.type = 'single';
         component.dateStringUpdate('hello');
         const date = adapter.parse('hello');
@@ -156,7 +156,7 @@ describe('DatePickerComponent', () => {
     });
 
     it('should register invalid string date and not call event for range mode', () => {
-        spyOn(component.selectedRangeDateChange, 'emit');
+        jest.spyOn(component.selectedRangeDateChange, 'emit');
         component.type = 'range';
         component.dateStringUpdate('start - end');
         const start = adapter.parse('start');
@@ -167,14 +167,14 @@ describe('DatePickerComponent', () => {
     });
 
     it('should handle valid reversed range string date', () => {
-        spyOn(component.selectedRangeDateChange, 'emit');
-        spyOn(component, 'onChange');
+        jest.spyOn(component.selectedRangeDateChange, 'emit');
+        jest.spyOn(component, 'onChange');
         const date1 = new FdDate(2011, 10, 10);
         const date2 = new FdDate(2000, 10, 10);
         const strDate1 = (<any>component)._formatDate(date1);
         const strDate2 = (<any>component)._formatDate(date2);
 
-        spyOn(adapter, 'parse').and.callFake((str) => {
+        jest.spyOn(adapter, 'parse').mockImplementation((str) => {
             if (str === strDate1) {
                 return date1;
             }
@@ -195,14 +195,14 @@ describe('DatePickerComponent', () => {
     });
 
     it('should handle single date blocked by disable function and set invalid', () => {
-        spyOn(component.selectedDateChange, 'emit');
-        spyOn(component, 'onChange');
+        jest.spyOn(component.selectedDateChange, 'emit');
+        jest.spyOn(component, 'onChange');
         component.disableFunction = () => true;
         const todayDate = new FdDate();
         const date = new FdDate(2000, 10, 10);
         const strDate = (<any>component)._formatDate(date);
         component.type = 'single';
-        spyOn(adapter, 'parse').and.returnValue(date);
+        jest.spyOn(adapter, 'parse').mockReturnValue(date);
         component.dateStringUpdate(strDate);
         expect(component._isInvalidDateInput).toBe(true);
         expect(component._calendarComponent._currentlyDisplayed.month).toBe(todayDate.month);
@@ -212,8 +212,8 @@ describe('DatePickerComponent', () => {
     });
 
     it('should handle both range dates blocked by disable function and set invalid', () => {
-        spyOn(component.selectedRangeDateChange, 'emit');
-        spyOn(component, 'onChange');
+        jest.spyOn(component.selectedRangeDateChange, 'emit');
+        jest.spyOn(component, 'onChange');
         component.type = 'range';
         component.disableRangeStartFunction = () => true;
         component.disableRangeEndFunction = () => true;
@@ -224,7 +224,7 @@ describe('DatePickerComponent', () => {
         const strDate2 = (<any>component)._formatDate(date2);
         const rangeDateInvalidObject: DateRange<FdDate> = { start: date2, end: date1 };
 
-        spyOn(adapter, 'parse').and.callFake((str) => {
+        jest.spyOn(adapter, 'parse').mockImplementation((str) => {
             if (str === strDate1) {
                 return date1;
             }
@@ -243,8 +243,8 @@ describe('DatePickerComponent', () => {
     });
 
     it('should handle end range date blocked by disable function and set invalid', () => {
-        spyOn(component.selectedRangeDateChange, 'emit');
-        spyOn(component, 'onChange');
+        jest.spyOn(component.selectedRangeDateChange, 'emit');
+        jest.spyOn(component, 'onChange');
         component.type = 'range';
         component.disableRangeEndFunction = (fdDate: FdDate) => adapter.compareDate(fdDate, FdDate.getToday()) > 0;
 
@@ -254,7 +254,7 @@ describe('DatePickerComponent', () => {
         const strDate2 = (<any>component)._formatDate(date2);
 
         const rangeDateInvalidObject: DateRange<FdDate> = { start: date1, end: date2 };
-        spyOn(adapter, 'parse').and.callFake((str) => {
+        jest.spyOn(adapter, 'parse').mockImplementation((str) => {
             if (str === strDate1) {
                 return date1;
             }
@@ -273,7 +273,7 @@ describe('DatePickerComponent', () => {
     });
 
     it('should hide message on open', () => {
-        const hideSpy = spyOn((<any>component)._popoverFormMessage, 'hide').and.callThrough();
+        const hideSpy = jest.spyOn((<any>component)._popoverFormMessage, 'hide');
         component.openCalendar();
         fixture.detectChanges();
         expect(hideSpy).toHaveBeenCalled();
@@ -281,7 +281,7 @@ describe('DatePickerComponent', () => {
 
     it('should show message on close', () => {
         component.isOpen = true;
-        const showSpy = spyOn((<any>component)._popoverFormMessage, 'show').and.callThrough();
+        const showSpy = jest.spyOn((<any>component)._popoverFormMessage, 'show');
         component.closeCalendar();
         fixture.detectChanges();
         expect(showSpy).toHaveBeenCalled();

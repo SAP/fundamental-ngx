@@ -25,13 +25,13 @@ describe('TileComponent', () => {
     });
 
     it('should buildComponentCssClass after view init', () => {
-        spyOn(component, 'buildComponentCssClass');
+        jest.spyOn(component, 'buildComponentCssClass');
         component.ngAfterViewInit();
         expect(component.buildComponentCssClass).toHaveBeenCalled();
     });
 
     it('should buildComponentCssClass after changes', () => {
-        spyOn(component, 'buildComponentCssClass');
+        jest.spyOn(component, 'buildComponentCssClass');
         component.ngOnChanges();
         expect(component.buildComponentCssClass).toHaveBeenCalled();
     });

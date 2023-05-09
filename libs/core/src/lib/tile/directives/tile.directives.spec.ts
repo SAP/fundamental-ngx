@@ -1,15 +1,13 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { TileModule } from '../tile.module';
 import { TileActionCloseDirective, TileActionIndicatorDirective, TileRefreshDirective } from './tile.directives';
 
 @Component({
     selector: 'fd-test-component',
     template: `
-        <button fd-button fd-tile-action-close fdCompact fdType="transparent"></button>
-        <button fd-button fd-tile-action-indicator fdCompact fdType="transparent"></button>
+        <button fd-tile-action-close></button>
+        <button fd-tile-action-indicator></button>
         <div #header fd-tile-header [twoColumn]="true">
             <div fd-tile-header-content></div>
         </div>
@@ -77,7 +75,7 @@ describe('TileDirectives', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TileModule, ButtonModule],
+            imports: [TileModule],
             declarations: [TestComponent]
         });
     }));
@@ -101,13 +99,13 @@ describe('TileDirectives', () => {
         expect(component.profileImg.nativeElement.className).toContain('fd-tile__profile-img');
         expect(component.profileImg.nativeElement.id).toContain('fd-profileTile-');
         expect(component.profileImg.nativeElement.style.getPropertyValue('background-image')).toContain(
-            'url("https://picsum.photos/60/60")'
+            'url(https://picsum.photos/60/60)'
         );
         expect(component.container.nativeElement.className).toContain('fd-tile-container');
         expect(component.container.nativeElement.className).toContain('fd-tile-container--list');
         expect(component.backgroundImg.nativeElement.className).toContain('fd-tile__background-img');
         expect(component.backgroundImg.nativeElement.style.getPropertyValue('background-image')).toContain(
-            'url("https://picsum.photos/60/60")'
+            'url(https://picsum.photos/60/60)'
         );
         expect(component.slideContainer.nativeElement.className).toContain('fd-tile__container');
         expect(component.dot.nativeElement.className).toContain('fd-tile__dot');

@@ -487,7 +487,7 @@ export class SelectComponent<T = any>
 
     /** @hidden */
     close(forceClose: boolean = false): void {
-        if (this._isOpen && (forceClose || this.close)) {
+        if (this._isOpen || forceClose) {
             this._isOpen = false;
             this._keyManagerService._keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
             this._changeDetectorRef.markForCheck();

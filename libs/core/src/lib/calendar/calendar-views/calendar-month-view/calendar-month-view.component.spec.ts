@@ -39,7 +39,7 @@ describe('CalendarMonthViewComponent', () => {
     });
 
     it('Should trigger a click event', () => {
-        spyOn(component, 'selectMonth');
+        jest.spyOn(component, 'selectMonth');
         fixture.debugElement.query(By.css('td')).nativeElement.click();
         expect(component.selectMonth).toHaveBeenCalled();
     });
@@ -59,7 +59,7 @@ describe('CalendarMonthViewComponent', () => {
     });
 
     it('Should focus the month below with ArrowDown', () => {
-        const focusSpy = spyOn(component, '_focusElementBySelector');
+        const focusSpy = jest.spyOn(component, '_focusElementBySelector');
         const event = {
             key: 'ArrowDown',
             preventDefault: () => {}
@@ -69,7 +69,7 @@ describe('CalendarMonthViewComponent', () => {
     });
 
     it('Should focus the month above with ArrowUp', () => {
-        const focusSpy = spyOn(component, '_focusElementBySelector');
+        const focusSpy = jest.spyOn(component, '_focusElementBySelector');
         const event = {
             key: 'ArrowUp',
             preventDefault: () => {}
@@ -79,7 +79,7 @@ describe('CalendarMonthViewComponent', () => {
     });
 
     it('Should focus the month to the left with ArrowLeft', () => {
-        const focusSpy = spyOn(component, '_focusElementBySelector');
+        const focusSpy = jest.spyOn(component, '_focusElementBySelector');
         const event = {
             key: 'ArrowLeft',
             preventDefault: () => {}
@@ -89,7 +89,7 @@ describe('CalendarMonthViewComponent', () => {
     });
 
     it('Should focus the month to the right with ArrowRight', () => {
-        const focusSpy = spyOn(component, '_focusElementBySelector');
+        const focusSpy = jest.spyOn(component, '_focusElementBySelector');
         const event = {
             key: 'ArrowRight',
             preventDefault: () => {}

@@ -49,7 +49,7 @@ describe('AlertService', () => {
     });
 
     it('should open alerts from string', () => {
-        spyOn<any>(service, 'destroyAlertComponent').and.callThrough();
+        jest.spyOn<any, any>(service, 'destroyAlertComponent');
 
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
@@ -65,7 +65,7 @@ describe('AlertService', () => {
     });
 
     it('should open alerts from template', () => {
-        spyOn<any>(service, 'destroyAlertComponent').and.callThrough();
+        jest.spyOn<any, any>(service, 'destroyAlertComponent');
 
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
@@ -82,7 +82,7 @@ describe('AlertService', () => {
     });
 
     it('should open alerts from component', () => {
-        spyOn<any>(service, 'destroyAlertComponent').and.callThrough();
+        jest.spyOn<any, any>(service, 'destroyAlertComponent');
 
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();

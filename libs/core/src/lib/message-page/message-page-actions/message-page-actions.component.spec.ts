@@ -25,6 +25,6 @@ describe('MessagePageActionsComponent', () => {
     it('should apply proper css classes', async () => {
         await whenStable(fixture);
 
-        expect(fixture.nativeElement).toHaveClass('fd-message-page__actions');
+        expect(fixture.nativeElement.classList.contains('fd-message-page__actions')).toBe(true);
     });
 });

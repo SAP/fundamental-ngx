@@ -25,6 +25,6 @@ describe('MessagePageSubtitleComponent', () => {
     it('should apply proper css classes', async () => {
         await whenStable(fixture);
 
-        expect(fixture.nativeElement).toHaveClass('fd-message-page__subtitle');
+        expect(fixture.nativeElement.classList.contains('fd-message-page__subtitle')).toBe(true);
     });
 });

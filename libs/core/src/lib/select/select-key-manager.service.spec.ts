@@ -67,7 +67,7 @@ describe('SelectKeyManagerService', () => {
     });
 
     it('should call _handleClosedKeydown on key press', () => {
-        spyOn(service, '_handleClosedKeydown');
+        jest.spyOn(service, '_handleClosedKeydown');
 
         _component.selectComponent._handleKeydown(keyDownEventUp);
 
@@ -77,7 +77,7 @@ describe('SelectKeyManagerService', () => {
     });
 
     it('should call _handleOpenKeydown on key press', () => {
-        spyOn(service, '_handleOpenKeydown');
+        jest.spyOn(service, '_handleOpenKeydown');
 
         _component.selectComponent._isOpen = true;
 

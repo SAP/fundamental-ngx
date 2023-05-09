@@ -4,7 +4,6 @@ import { By } from '@angular/platform-browser';
 import { SplitButtonComponent, splitButtonTextClass } from './split-button.component';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import createSpy = jasmine.createSpy;
 import { I18nModule } from '@fundamental-ngx/i18n';
 
 @Component({
@@ -52,13 +51,17 @@ describe('SplitButtonComponent', () => {
         componentInstance = component.injector.get(SplitButtonComponent);
     });
 
+    afterEach(() => {
+        jest.restoreAllMocks();
+    });
+
     it('should create', () => {
         expect(component).toBeTruthy();
         expect(componentInstance).toBeTruthy();
     });
 
     it('should handle content init - no selected item', () => {
-        spyOn(componentInstance, 'selectMenuItem');
+        jest.spyOn(componentInstance, 'selectMenuItem');
         componentInstance.mainActionTitle = null as any;
         componentInstance.ngAfterContentInit();
         expect(componentInstance.selectMenuItem).toHaveBeenCalledWith(componentInstance.menu._menuItems.first);
@@ -66,7 +69,7 @@ describe('SplitButtonComponent', () => {
     });
 
     it('should handle content init - selected item', () => {
-        spyOn(componentInstance, 'selectMenuItem');
+        jest.spyOn(componentInstance, 'selectMenuItem');
         componentInstance.selected = componentInstance.menu._menuItems.last;
         componentInstance.mainActionTitle = null as any;
         componentInstance.ngAfterContentInit();
@@ -78,12 +81,12 @@ describe('SplitButtonComponent', () => {
 
     it('should handle the main button click - no selected item', () => {
         const mouseEvent = new MouseEvent('click');
-        spyOn(mouseEvent, 'stopPropagation');
-        spyOn(componentInstance.primaryButtonClicked, 'emit');
+        jest.spyOn(mouseEvent, 'stopPropagation');
+        jest.spyOn(componentInstance.primaryButtonClicked, 'emit');
         componentInstance.selected = null as any;
         componentInstance.mainAction = {
             mainActionTitle: 'title',
-            callback: createSpy()
+            callback: jest.fn()
         };
 
         componentInstance.onMainButtonClick(mouseEvent);
@@ -95,10 +98,10 @@ describe('SplitButtonComponent', () => {
 
     it('should handle the main button click - selected item', () => {
         const mouseEvent = new MouseEvent('click');
-        spyOn(mouseEvent, 'stopPropagation');
-        spyOn(componentInstance.primaryButtonClicked, 'emit');
+        jest.spyOn(mouseEvent, 'stopPropagation');
+        jest.spyOn(componentInstance.primaryButtonClicked, 'emit');
         componentInstance.selected = componentInstance.menu._menuItems.first;
-        spyOn(componentInstance.selected.elementRef.nativeElement, 'click');
+        jest.spyOn(componentInstance.selected.elementRef.nativeElement, 'click');
 
         componentInstance.onMainButtonClick(mouseEvent);
 
@@ -118,11 +121,11 @@ describe('SplitButtonComponent', () => {
 
     it('should add is-active class to more-actions button', () => {
         const mainActionBtn = componentInstance.menuActionBtn?.nativeElement as HTMLElement;
-        expect(mainActionBtn.classList.contains('is-active')).toBeFalse();
+        expect(mainActionBtn.classList.contains('is-active')).toBeFalsy();
 
         componentInstance.menu.open();
         fixture.detectChanges();
 
-        expect(mainActionBtn.classList.contains('is-active')).toBeTrue();
+        expect(mainActionBtn.classList.contains('is-active')).toBeTruthy();
     });
 });

@@ -19,18 +19,24 @@
                 }
             }
         },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/cdk/src/lib/forms/test.ts",
-                "tsConfig": "libs/cdk/src/lib/forms/tsconfig.spec.json",
-                "karmaConfig": "libs/cdk/src/lib/forms/karma.conf.js"
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/cdk/src/lib/forms/**/*.ts", "libs/cdk/src/lib/forms/**/*.html"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/cdk/src/lib/forms/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
             }
         }
     },

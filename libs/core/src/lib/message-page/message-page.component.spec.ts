@@ -59,7 +59,7 @@ describe('MessagePageComponent', () => {
 
     it('should add proper class to the host', () => {
         const messagePageDebugEl = fixture.debugElement.query(By.directive(MessagePageComponent));
-        expect(messagePageDebugEl.nativeElement.className.includes('fd-message-page')).toBeTrue();
+        expect(messagePageDebugEl.nativeElement.className.includes('fd-message-page')).toBe(true);
     });
 
     it('should render title', () => {

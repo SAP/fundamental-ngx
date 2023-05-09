@@ -47,7 +47,9 @@ describe('MicroProcessFlowFocusableItemDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.elRef.nativeElement).toHaveClass('fd-micro-process-flow__focusable-item');
+        expect(component.ref.elRef.nativeElement.classList.contains('fd-micro-process-flow__focusable-item')).toBe(
+            true
+        );
     });
 
     it('should assign default tabindex', () => {
@@ -62,8 +64,8 @@ describe('MicroProcessFlowFocusableItemDirective', () => {
     });
 
     it('should update focused element index', () => {
-        const focusSpy = spyOn(component.ref, 'onFocus').and.callThrough();
-        const changeFocusedIndexSpy = spyOn(component.microProcessFlowComponent, 'setFocusedElementIndex');
+        const focusSpy = jest.spyOn(component.ref, 'onFocus');
+        const changeFocusedIndexSpy = jest.spyOn(component.microProcessFlowComponent, 'setFocusedElementIndex');
         component.ref.focus({});
         expect(focusSpy).toHaveBeenCalled();
         expect(changeFocusedIndexSpy).toHaveBeenCalledWith(component.ref.elRef.nativeElement);

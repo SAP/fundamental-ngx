@@ -24,7 +24,7 @@ describe('CardHeaderComponent', () => {
     });
 
     it('should add cardHeader className to host', () => {
-        expect(fixture.debugElement.nativeElement.className.includes(CLASS_NAME.cardHeader)).toBeTrue();
+        expect(fixture.debugElement.nativeElement.className.includes(CLASS_NAME.cardHeader)).toBe(true);
     });
 
     it('should add tabindex to host', () => {

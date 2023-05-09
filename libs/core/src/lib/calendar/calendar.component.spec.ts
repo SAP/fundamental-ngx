@@ -4,7 +4,6 @@ import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 
 import { CalendarComponent } from './calendar.component';
 import { CalendarModule } from './calendar.module';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 
 describe('CalendarComponent', () => {
     let component: CalendarComponent<FdDate>;
@@ -12,7 +11,7 @@ describe('CalendarComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FdDatetimeModule, CalendarModule, ButtonModule]
+            imports: [FdDatetimeModule, CalendarModule]
         }).compileComponents();
     }));
 
@@ -22,15 +21,17 @@ describe('CalendarComponent', () => {
         fixture.detectChanges();
     });
 
+    afterEach(() => jest.restoreAllMocks());
+
     it('should create', () => {
         expect(component).toBeTruthy();
     });
 
     it('Should handle selected date changed in single mode', () => {
         const date = new FdDate(2000, 10, 10);
-        spyOn(component.selectedDateChange, 'emit');
-        spyOn(component.closeCalendar, 'emit');
-        spyOn(component, 'onChange');
+        jest.spyOn(component.selectedDateChange, 'emit');
+        jest.spyOn(component.closeCalendar, 'emit');
+        jest.spyOn(component, 'onChange');
         component.selectedDateChanged(date);
         expect(component.onChange).toHaveBeenCalledWith(date);
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
@@ -40,9 +41,9 @@ describe('CalendarComponent', () => {
     it('Should handle selected date changed in range mode', () => {
         const date1 = new FdDate(2000, 10, 10);
         const date2 = new FdDate(2011, 10, 10);
-        spyOn(component.selectedRangeDateChange, 'emit');
-        spyOn(component.closeCalendar, 'emit');
-        spyOn(component, 'onChange');
+        jest.spyOn(component.selectedRangeDateChange, 'emit');
+        jest.spyOn(component.closeCalendar, 'emit');
+        jest.spyOn(component, 'onChange');
         component.selectedRangeDateChanged({ start: date1, end: date2 });
         expect(component.onChange).toHaveBeenCalledWith({ start: date1, end: date2 });
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date1, end: date2 });
@@ -51,9 +52,9 @@ describe('CalendarComponent', () => {
 
     it('Should handle selected only one date changed in range mode', () => {
         const date1 = new FdDate(2000, 10, 10);
-        spyOn(component.selectedRangeDateChange, 'emit');
-        spyOn(component.closeCalendar, 'emit');
-        spyOn(component, 'onChange');
+        jest.spyOn(component.selectedRangeDateChange, 'emit');
+        jest.spyOn(component.closeCalendar, 'emit');
+        jest.spyOn(component, 'onChange');
         component.selectedRangeDateChanged({ start: date1, end: null });
         expect(component.onChange).toHaveBeenCalledWith({ start: date1, end: null });
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date1, end: null });
@@ -61,7 +62,7 @@ describe('CalendarComponent', () => {
     });
 
     it('Should handle write value for single mode when correct', () => {
-        spyOn(component.isValidDateChange, 'emit');
+        jest.spyOn(component.isValidDateChange, 'emit');
         const date = new FdDate(2000, 10, 10);
         component.writeValue(date);
         expect(component.selectedDate).toEqual(date);
@@ -71,7 +72,7 @@ describe('CalendarComponent', () => {
     });
 
     it('Should handle write value for single mode when not correct', () => {
-        spyOn(component.isValidDateChange, 'emit');
+        jest.spyOn(component.isValidDateChange, 'emit');
         const invalidDate = {} as any;
         component.writeValue(invalidDate);
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
@@ -80,7 +81,7 @@ describe('CalendarComponent', () => {
     });
 
     it('Should handle write value for range mode when correct', () => {
-        spyOn(component.isValidDateChange, 'emit');
+        jest.spyOn(component.isValidDateChange, 'emit');
         const date1 = new FdDate(2000, 10, 10);
         const date2 = new FdDate(2012, 10, 10);
         component.calType = 'range';
@@ -92,7 +93,7 @@ describe('CalendarComponent', () => {
     });
 
     it('Should handle write value for range mode when start date not correct', () => {
-        spyOn(component.isValidDateChange, 'emit');
+        jest.spyOn(component.isValidDateChange, 'emit');
         const validDate = new FdDate(2000, 10, 10);
         const invalidDate = {} as any;
         component.calType = 'range';
@@ -102,7 +103,7 @@ describe('CalendarComponent', () => {
     });
 
     it('Should handle write value for range mode when end date not correct', () => {
-        spyOn(component.isValidDateChange, 'emit');
+        jest.spyOn(component.isValidDateChange, 'emit');
         const validDate = new FdDate(2000, 10, 10);
         const invalidDate = {} as any;
         component.calType = 'range';
@@ -112,7 +113,7 @@ describe('CalendarComponent', () => {
     });
 
     it('Should handle write value for range mode when both dates not correct', () => {
-        spyOn(component.isValidDateChange, 'emit');
+        jest.spyOn(component.isValidDateChange, 'emit');
         const invalidDate: any = {};
         const invalidDate2: any = {};
         component.calType = 'range';
@@ -152,14 +153,14 @@ describe('CalendarComponent', () => {
     });
 
     it('Should call next year list function, when on year view an next arrow click', () => {
-        spyOn(component, 'displayNextYearList');
+        jest.spyOn(component, 'displayNextYearList').mockImplementation(() => {});
         component.activeView = 'year';
         component.handleNextArrowClick();
         expect(component.displayNextYearList).toHaveBeenCalled();
     });
 
     it('Should call previous year list function, when on year view an next arrow click', () => {
-        spyOn(component, 'displayPreviousYearList');
+        jest.spyOn(component, 'displayPreviousYearList').mockImplementation(() => {});
         component.activeView = 'year';
         component.handlePreviousArrowClick();
         expect(component.displayPreviousYearList).toHaveBeenCalled();
