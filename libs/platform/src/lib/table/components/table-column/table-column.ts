@@ -60,12 +60,6 @@ export abstract class TableColumn {
     /** Whether to apply fd-table-text (text-shadow) to the cell content, if disabled noWrap has no effect. */
     abstract applyText: boolean;
 
-    /**
-     * When TRUE, excludes this column from p13n functionality. No option to Sort, Filter, Group or
-     * show/hide columns
-     */
-    abstract disableP13n: boolean;
-
     /** Stores information for the header cell if the ellipsis are visible after the column resize */
     abstract headerOverflows: boolean;
 

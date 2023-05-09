@@ -114,13 +114,6 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     @Input()
     applyText = true;
 
-    /**
-     * When TRUE, excludes this column from p13n functionality. No option to Sort, Filter, Group or
-     * show/hide columns
-     */
-    @Input()
-    disableP13n = false;
-
     /** Column cell template */
     columnCellTemplate: Nullable<TemplateRef<any>>;
 

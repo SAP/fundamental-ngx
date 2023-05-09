@@ -1,3 +1,21 @@
+## [0.40.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.5...v0.40.4-rc.6) (2023-05-09)
+
+
+### Bug Fixes
+
+* **platform:** p13n dialog - disableP13n rollback ([#9793](https://github.com/SAP/fundamental-ngx/issues/9793)) ([69c53e6](https://github.com/SAP/fundamental-ngx/commit/69c53e6604450fbace624e7eeec77af1cddd0bfe))
+
+
+
+## [0.40.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.4...v0.40.4-rc.5) (2023-05-09)
+
+
+### Bug Fixes
+
+* **core:** inline help needs tooltip role ([#9785](https://github.com/SAP/fundamental-ngx/issues/9785)) ([dd01f9b](https://github.com/SAP/fundamental-ngx/commit/dd01f9b2835aa65473245ed57534498629a16f44))
+
+
+
 ## [0.40.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.3...v0.40.4-rc.4) (2023-05-08)
 
 
