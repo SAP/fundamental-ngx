@@ -11,10 +11,10 @@ export default async function generator(tree: Tree, { project: name }: { project
     const [targetName, targetWithKarma] =
         Object.entries(projectConfig.targets || {}).find(([, target]) => target.executor?.includes('karma')) || [];
     if (targetWithKarma && targetName) {
-        const options = projectConfig.targets[targetName].options;
-        tree.delete(options.main);
-        tree.delete(options.tsConfig);
-        tree.delete(options.karmaConfig);
+        // const options = projectConfig.targets[targetName].options;
+        // tree.delete(options.main);
+        // tree.delete(options.tsConfig);
+        // tree.delete(options.karmaConfig);
         delete projectConfig.targets[targetName];
         updateProjectConfiguration(tree, name, projectConfig);
         if (targetName === 'test') {
