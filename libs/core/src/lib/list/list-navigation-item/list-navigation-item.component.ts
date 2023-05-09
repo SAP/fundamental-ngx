@@ -163,7 +163,11 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
 
     /** support for FocusKeyManager for arrow key navigation */
     focus(): void {
-        this._elementRef.nativeElement.focus();
+        if (!this._isExpandable) {
+            this._elementRef.nativeElement.focus();
+        } else {
+            this._listNavigationItemArrow?._focus();
+        }
     }
 
     /** support for FocusKeyManager for arrow key navigation */

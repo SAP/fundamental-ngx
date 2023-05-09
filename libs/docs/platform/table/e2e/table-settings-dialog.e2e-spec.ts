@@ -1,4 +1,3 @@
-import { wait } from '@nrwl/nx-cloud/lib/utilities/waiter';
 import { runCommonTests } from './table-common-tests';
 import { TablePo } from './table.po';
 import {
@@ -8,6 +7,7 @@ import {
     getElementArrayLength,
     getText,
     isElementClickable,
+    pause,
     refreshPage,
     scrollIntoView,
     setValue,
@@ -167,7 +167,7 @@ describe('Table component test suite', () => {
             await setValue(filterInput, '10');
             await setValue(filterInput, '40', 1);
             await click(filterButtonOk);
-            await wait(500);
+            await pause(500);
             await click(tableFilterableExample + buttonFilter);
             await click(dialogFilters);
             await expect(await isElementClickable(filterResetButton)).toBe(true, 'reset button not clickable');
@@ -202,7 +202,7 @@ describe('Table component test suite', () => {
             await click(buttonSortedOrder, 1);
             await click(buttonSortedBy, 1);
             await click(barButton);
-            await wait(500);
+            await pause(500);
             await tablePage.chooseSortOptionBy(tableGroupableExample, ellipsisButton, 0);
             await expect((await getText(tableGroupableExample + tableCellDescription)).trim()).toBe(pharetraTestText);
             await expect((await getText(tableGroupableExample + tableCellDescription, 15)).trim()).toBe(

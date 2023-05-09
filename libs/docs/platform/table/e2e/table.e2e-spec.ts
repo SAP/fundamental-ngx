@@ -1,5 +1,4 @@
 import { runCommonTests } from './table-common-tests';
-import { wait } from '@nrwl/nx-cloud/lib/utilities/waiter';
 import { TablePo } from './table.po';
 import {
     browserIsSafari,

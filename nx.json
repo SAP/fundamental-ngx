@@ -5,7 +5,7 @@
     },
     "tasksRunnerOptions": {
         "default": {
-            "runner": "@nrwl/nx-cloud",
+            "runner": "nx-cloud",
             "options": {
                 "accessToken": "MzFiYWRhMTItYTAxYi00MGZjLWJmNDEtOTllMzEwZjI5ODNkfHJlYWQ=",
                 "cacheableOperations": [
@@ -34,20 +34,18 @@
         "@schematics/angular:directive": {
             "prefix": "fd"
         },
-        "@nrwl/angular:application": {
+        "@nx/angular:application": {
             "style": "scss",
             "linter": "eslint",
-            "unitTestRunner": "karma",
             "e2eTestRunner": "none"
         },
-        "@nrwl/angular:library": {
-            "linter": "eslint",
-            "unitTestRunner": "karma"
+        "@nx/angular:library": {
+            "linter": "eslint"
         },
-        "@nrwl/angular:component": {
+        "@nx/angular:component": {
             "style": "scss"
         },
-        "@nrwl/angular": {
+        "@nx/angular": {
             "convert-tslint-to-eslint": {
                 "ignoreExistingTslintConfig": false,
                 "removeTSLintIfNoMoreTSLintTargets": true,
@@ -71,6 +69,9 @@
             "inputs": ["default", "^default", "{workspaceRoot}/karma.conf.js", "{workspaceRoot}/jest.preset.js"]
         },
         "lint": {
+            "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+        },
+        "lint-noop": {
             "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
         }
     },

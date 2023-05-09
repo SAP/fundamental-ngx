@@ -1,5 +1,5 @@
 import { strings } from '@angular-devkit/core';
-import { formatFiles, generateFiles, names, readJson, Tree, writeJson } from '@nrwl/devkit';
+import { formatFiles, generateFiles, names, readJson, Tree, writeJson } from '@nx/devkit';
 import { SchematicsException } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
 import {
@@ -10,7 +10,7 @@ import {
     replaceContentInFile
 } from './utils/ast-utils';
 import { addEslintJsonOverrides } from './utils/linting';
-import { componentGenerator, libraryGenerator, UnitTestRunner } from '@nrwl/angular/generators';
+import { componentGenerator, libraryGenerator, UnitTestRunner } from '@nx/angular/generators';
 import path from 'path';
 
 export default async function (tree: Tree, schema: SapComponentSchema) {
@@ -18,7 +18,7 @@ export default async function (tree: Tree, schema: SapComponentSchema) {
         name: schema.name,
         directory: `${getProjectDirName(schema)}/src/lib`,
         tags: [`scope:${getProjectTag(schema)}`, 'type:lib'].join(','),
-        unitTestRunner: UnitTestRunner.Karma,
+        unitTestRunner: UnitTestRunner.Jest,
         prefix: getProjectTag(schema),
         publishable: true,
         importPath: getImportPath(schema),

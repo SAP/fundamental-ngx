@@ -1,11 +1,12 @@
 {
     "name": "docs-core-schema",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/schema/src",
     "prefix": "fundamental-ngx",
     "targets": {
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/docs/core/schema/**/*.ts", "libs/docs/core/schema/**/*.html"]
             }

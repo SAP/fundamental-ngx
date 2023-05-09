@@ -1,4 +1,4 @@
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { getElementArrayLength, getElementClass, getText, isElementDisplayed } from '../../../../../e2e';
 import { AvatarPo } from './avatar.po';
 

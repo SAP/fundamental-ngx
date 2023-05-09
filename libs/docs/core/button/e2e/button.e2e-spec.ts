@@ -1,5 +1,5 @@
 import { ButtonPo } from './button.po';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
     checkElementScreenshot,
     click,

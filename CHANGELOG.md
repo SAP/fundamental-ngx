@@ -1,3 +1,41 @@
+## [0.40.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.4...v0.40.4-rc.5) (2023-05-09)
+
+
+### Bug Fixes
+
+* **core:** inline help needs tooltip role ([#9785](https://github.com/SAP/fundamental-ngx/issues/9785)) ([dd01f9b](https://github.com/SAP/fundamental-ngx/commit/dd01f9b2835aa65473245ed57534498629a16f44))
+
+
+
+## [0.40.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.3...v0.40.4-rc.4) (2023-05-08)
+
+
+### Bug Fixes
+
+* scrollbar should stop immediate propagation ([#9784](https://github.com/SAP/fundamental-ngx/issues/9784)) ([42336a1](https://github.com/SAP/fundamental-ngx/commit/42336a168dba963536106c598f6a540630f48bd0))
+
+
+
+## [0.40.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.2...v0.40.4-rc.3) (2023-05-08)
+
+
+### Bug Fixes
+
+* **core,platform:** multi combobox with numpad input ([#9808](https://github.com/SAP/fundamental-ngx/issues/9808)) ([91eee35](https://github.com/SAP/fundamental-ngx/commit/91eee35a88c14f4ae4d30e04540f0eb666fc0aa4))
+* **core,platform:** table toolbar responsiveness ([#9788](https://github.com/SAP/fundamental-ngx/issues/9788)) ([b6d9c3c](https://github.com/SAP/fundamental-ngx/commit/b6d9c3c88cb273eeafebfc39b9e0b95206507fd2))
+
+
+
+## [0.40.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.1...v0.40.4-rc.2) (2023-05-05)
+
+
+### Bug Fixes
+
+* **core:** vertical navigation focus issue ([#9789](https://github.com/SAP/fundamental-ngx/issues/9789)) ([9df1c4c](https://github.com/SAP/fundamental-ngx/commit/9df1c4c6940c0d2fd99a0c0c17193be6dd687a86))
+* **platform:** failing combobox unit test ([#9790](https://github.com/SAP/fundamental-ngx/issues/9790)) ([a929ff4](https://github.com/SAP/fundamental-ngx/commit/a929ff4f280e2ee881aa0fbccfc738ba7b87e003))
+
+
+
 ## [0.40.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.0...v0.40.4-rc.1) (2023-05-03)
 
 

@@ -440,6 +440,8 @@ export class PopoverService extends BasePopoverClass {
         body._tabbableScrollbar = this.tabbableScrollbar;
         body._templateToDisplay = this.templateContent!;
         body._closeOnEscapeKey = this.closeOnEscapeKey;
+        body._bodyRole = this._bodyRole;
+        body._bodyId = this._bodyId;
         this._detectChanges();
     }
 

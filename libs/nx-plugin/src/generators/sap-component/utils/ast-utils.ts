@@ -1,6 +1,6 @@
 import { SchematicsException } from '@angular-devkit/schematics';
 import { addExportToModule } from '@angular/cdk/schematics';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 import { InsertChange } from '@schematics/angular/utility/change';
 import * as ts from 'typescript';
 

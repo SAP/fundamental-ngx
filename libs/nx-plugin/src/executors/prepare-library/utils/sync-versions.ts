@@ -1,4 +1,4 @@
-import { logger, ProjectConfiguration } from '@nrwl/devkit';
+import { logger, ProjectConfiguration } from '@nx/devkit';
 import { readFileSync, writeFileSync } from 'fs-extra';
 import { parse, major } from 'semver';
 import { PrepareOptions } from './prepare.options';

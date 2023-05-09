@@ -1,0 +1,16 @@
+{
+    "name": "docs-i18n",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/docs/i18n",
+    "prefix": "fundamental-ngx",
+    "targets": {
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["libs/docs/i18n/**/*.ts", "libs/docs/i18n/**/*.html"]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:docs"]
+}

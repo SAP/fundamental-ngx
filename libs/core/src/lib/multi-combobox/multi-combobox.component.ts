@@ -648,8 +648,13 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         } else if (!KeyUtil.isKeyCode(event, [...this._nonOpeningKeys, CONTROL])) {
             this._showList(true);
             const acceptedKeys = !KeyUtil.isKeyType(event, 'alphabetical') && !KeyUtil.isKeyType(event, 'numeric');
-            if (this.isEmptyValue && acceptedKeys) {
-                this.listComponent?.setItemActive(0);
+            if (acceptedKeys) {
+                // SetTimeout is needed for input to receive new value.
+                setTimeout(() => {
+                    if (this.isEmptyValue) {
+                        this.listComponent?.setItemActive(0);
+                    }
+                });
             }
         }
     }

@@ -6,7 +6,7 @@ import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
 import { PanelComponent, PanelExpandChangeEvent } from './panel.component';
 import { PanelContentComponent } from './panel-content/panel-content.component';
-import { PanelActionsComponent } from './panel-actions/panel-actions.component';
+import { PanelActionsComponent } from './panel-actions.component';
 import { PlatformPanelModule } from './panel.module';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
