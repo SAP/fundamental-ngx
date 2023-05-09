@@ -1,11 +1,12 @@
 {
     "name": "cx-side-navigation",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/cx/src/lib/side-navigation",
     "prefix": "cx",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
+            "executor": "@nx/angular:ng-packagr-lite",
             "outputs": ["{workspaceRoot}/dist/libs/cx/side-navigation"],
             "options": {
                 "tsConfig": "libs/cx/src/lib/side-navigation/tsconfig.lib.json",
@@ -27,7 +28,7 @@
             }
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": [
                     "libs/cx/src/lib/side-navigation/**/*.ts",

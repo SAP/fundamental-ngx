@@ -1,4 +1,4 @@
-import { ExecutorContext, logger, parseTargetString, readTargetOptions } from '@nrwl/devkit';
+import { ExecutorContext, logger, parseTargetString, readTargetOptions } from '@nx/devkit';
 import { ChildProcess, exec } from 'child_process';
 import { TestAppOptions, WithDevServer } from './options.type';
 const waitOn = require('wait-on');

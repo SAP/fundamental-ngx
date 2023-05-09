@@ -16,7 +16,6 @@ import { PanelTitleDirective } from '@fundamental-ngx/core/panel';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
 import { PanelConfig } from './panel.config';
-import { PanelActionsComponent } from './panel-actions/panel-actions.component';
 import { PanelContentComponent } from './panel-content/panel-content.component';
 import {
     ContentDensityObserver,
@@ -103,10 +102,6 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
      * Button label based on the current state
      */
     _expandAriaLabel: string;
-
-    /** @hidden */
-    @ContentChild(PanelActionsComponent)
-    _panelActionsComponent: PanelActionsComponent;
 
     /** @hidden */
     @ContentChild(PanelContentComponent)

@@ -1,11 +1,12 @@
 {
     "name": "core-illustrated-message",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib/illustrated-message",
     "prefix": "fd",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:ng-packagr-lite",
+            "executor": "@nx/angular:ng-packagr-lite",
             "outputs": ["{workspaceRoot}/dist/libs/core/illustrated-message"],
             "options": {
                 "tsConfig": "libs/core/src/lib/illustrated-message/tsconfig.lib.json",
@@ -27,7 +28,7 @@
             }
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": [
                     "libs/core/src/lib/illustrated-message/**/*.ts",
