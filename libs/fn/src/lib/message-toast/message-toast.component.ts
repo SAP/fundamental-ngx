@@ -3,7 +3,7 @@ import {
     BaseToastDurationDismissibleContainerComponent,
     baseToastAnimations,
     ToastDurationDismissibleContainerComponent
-} from '@fundamental-ngx/fn/cdk';
+} from '@fundamental-ngx/cdk/utils';
 import { MessageToastConfig } from './config/message-toast.config';
 
 @Component({

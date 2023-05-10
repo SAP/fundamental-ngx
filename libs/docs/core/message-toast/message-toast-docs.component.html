@@ -1,9 +1,37 @@
 <fd-docs-section-title id="message-toast" componentName="message-toast"> Message Toast </fd-docs-section-title>
 <description>
-    The <code>MessageToastService</code> is available for injection and accepts a component type, a template ref or a
-    string as the alert content.
+    <p>
+        The <code>MessageToastService</code> is available for injection and accepts a component type, a template ref or
+        a string as the alert content.
+    </p>
+    <p>Message Toast appearance can also be animated.</p>
 </description>
 <component-example>
     <fd-message-toast-example></fd-message-toast-example>
 </component-example>
 <code-example [exampleFiles]="messageToastComponentExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="message-toast-positions" componentName="message-toast">
+    Message Toast Position</fd-docs-section-title
+>
+<description>
+    <p>By default, Message Toast component appears at the bottom center of the window,</p>
+    <p>
+        This behaviour can be changed by calling <code>setNewPositionStrategy</code> of the
+        <code>MessageToastService</code>.
+    </p>
+    <p>
+        Additionally, developers can pass <code>positionStrategy</code> property while opening individual Message Toast.
+    </p>
+    <p>
+        Default Message Toast positions include: Top left corner, Top center, Top right corner, Bottom left corner,
+        Bottom center, Bottom right corner.
+    </p>
+    <p>Developers can also pass custom position class extended from <code>BaseToastPosition</code>.</p>
+</description>
+<component-example>
+    <fd-message-toast-position-example></fd-message-toast-position-example>
+</component-example>
+<code-example [exampleFiles]="messageToastPositionComponentExample"></code-example>

@@ -1,5 +1,5 @@
 import { OverlayRef } from '@angular/cdk/overlay';
-import { BaseToastDurationDismissibleRef } from '@fundamental-ngx/fn/cdk';
+import { BaseToastDurationDismissibleRef } from '@fundamental-ngx/cdk/utils';
 import { MessageToastConfig } from '../config/message-toast.config';
 import { MessageToastComponent } from '../message-toast.component';
 
