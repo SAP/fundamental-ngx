@@ -23,7 +23,10 @@ import { ListComponentInterface } from '../list-component.interface';
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-list-navigation-item], [fdListNavigaitonItem]',
     templateUrl: './list-navigation-item.component.html',
-    styleUrls: ['./list-navigation-item.component.scss']
+    styleUrls: ['./list-navigation-item.component.scss'],
+    host: {
+        role: 'treeitem'
+    }
 })
 export class ListNavigationItemComponent implements AfterContentInit, AfterViewInit, FocusableOption {
     /** Whether or not the list item is expanded. */

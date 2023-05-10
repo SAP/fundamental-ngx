@@ -29,7 +29,10 @@ let sideNavigationItemUniqueId = 0;
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[cxNestedItem], [fdx-nested-list-item], li[fdx-nested-list-item]',
     template: ` <ng-content></ng-content> `,
-    providers: [NestedItemService]
+    providers: [NestedItemService],
+    host: {
+        role: 'treeitem'
+    }
 })
 export class NestedItemComponent implements AfterContentInit, NestedItemInterface, OnDestroy {
     /** Whether item should be expanded */
