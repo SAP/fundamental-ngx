@@ -1,16 +1,9 @@
-@use '@angular/cdk';
+@import '@angular/cdk/overlay-prebuilt';
 @import 'fundamental-styles/dist/message-toast';
 
-@include cdk.a11y-visually-hidden();
-
-.fd-message-toast {
-    display: block;
-}
-
-.fd-has-display-block {
-    display: block;
-}
-
-.fd-has-display-none {
-    display: none;
+.fn-toast-overlay-container {
+    .cdk-overlay-pane {
+        max-height: none;
+        height: fit-content;
+    }
 }

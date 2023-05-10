@@ -1,51 +1,45 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { MessageToastComponent, MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { BusyIndicatorModule } from '../busy-indicator.module';
 
 @Component({
-    template: `<ng-template #testTemplate let-messageToast>
+    template: ` <div class="fd-message-toast" #container>
         <div fd-busy-indicator-extended>
             <fd-busy-indicator [loading]="true" label="Please wait" ariaLabel="Please wait"></fd-busy-indicator>
         </div>
-    </ng-template>`
+    </div>`
 })
 class TestComponent {
     @ViewChild('testTemplate', { static: true }) templateRef: TemplateRef<any>;
+    @ViewChild('container') container: ElementRef;
 }
 
 describe('BusyIndicatorExtendedDirective', () => {
-    let messageComponent: MessageToastComponent;
-    let fixture: ComponentFixture<MessageToastComponent>;
+    let component: TestComponent;
+    let fixture: ComponentFixture<TestComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent],
-            imports: [BusyIndicatorModule, MessageToastModule],
-            providers: [MessageToastService]
+            imports: [BusyIndicatorModule]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(MessageToastComponent);
-        messageComponent = fixture.componentInstance;
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
     it('should create', () => {
-        expect(messageComponent).toBeTruthy();
+        expect(component).toBeTruthy();
     });
 
-    it('should assign classes', () => {
-        spyOn<any>(messageComponent, '_loadFromComponent').and.callThrough();
-
-        messageComponent.childContent = TestBed.createComponent(TestComponent).componentInstance.templateRef;
-        messageComponent.open();
-        messageComponent.ngOnInit();
-        messageComponent.ngAfterViewInit();
-
-        expect(fixture.nativeElement.classList.contains('fd-busy-indicator-extended--message-toast')).toBe(true);
-        expect(fixture.nativeElement.classList.contains('fd-busy-indicator-extended')).toBe(true);
+    it('should assign classes', async () => {
+        await fixture.whenRenderingDone();
+        expect(component.container.nativeElement.classList.contains('fd-busy-indicator-extended--message-toast')).toBe(
+            true
+        );
+        expect(component.container.nativeElement.classList.contains('fd-busy-indicator-extended')).toBe(true);
     });
 });

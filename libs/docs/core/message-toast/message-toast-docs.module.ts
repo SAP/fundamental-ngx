@@ -8,6 +8,7 @@ import { MessageToastDocsComponent } from './message-toast-docs.component';
 import { MessageToastHeaderComponent } from './message-toast-header/message-toast-header.component';
 import { MessageToastContentExampleComponent } from './examples/message-toast-content-example.component';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { MessageToastPositionExampleComponent } from './examples/message-toast-position-example.component';
 
 const routes: Routes = [
     {
@@ -27,7 +28,8 @@ const routes: Routes = [
         MessageToastHeaderComponent,
         MessageToastDocsComponent,
         MessageToastContentExampleComponent,
-        MessageToastExampleComponent
+        MessageToastExampleComponent,
+        MessageToastPositionExampleComponent
     ],
     providers: [MessageToastService, currentComponentProvider('message-toast')]
 })

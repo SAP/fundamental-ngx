@@ -329,7 +329,6 @@
             "@fundamental-ngx/fn": ["libs/fn/src/lib/index.ts"],
             "@fundamental-ngx/fn/avatar": ["libs/fn/src/lib/avatar/index.ts"],
             "@fundamental-ngx/fn/button": ["libs/fn/src/lib/button/index.ts"],
-            "@fundamental-ngx/fn/cdk": ["libs/fn/src/lib/cdk/index.ts"],
             "@fundamental-ngx/fn/checkbox": ["libs/fn/src/lib/checkbox/index.ts"],
             "@fundamental-ngx/fn/form": ["libs/fn/src/lib/form/index.ts"],
             "@fundamental-ngx/fn/generic-tag": ["libs/fn/src/lib/generic-tag/index.ts"],

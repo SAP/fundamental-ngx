@@ -1,5 +1,5 @@
 import { IconFont } from '@fundamental-ngx/core/icon';
-import { BaseToastDurationDismissibleConfig } from '@fundamental-ngx/fn/cdk';
+import { BaseToastDurationDismissibleConfig } from '@fundamental-ngx/cdk/utils';
 
 export type NotificationState = 'positive' | 'info' | 'negative' | 'critical';
 
