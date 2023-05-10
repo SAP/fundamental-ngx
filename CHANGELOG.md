@@ -1,3 +1,21 @@
+# [0.41.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.6...v0.41.0-rc.0) (2023-05-10)
+
+
+### Features
+
+* **core:** message toast custom positions ([#9810](https://github.com/SAP/fundamental-ngx/issues/9810)) ([5ab4981](https://github.com/SAP/fundamental-ngx/commit/5ab4981ebd79d510c6ce7b373b19d80a8f7dee22))
+
+
+### BREAKING CHANGES
+
+* **core:** - `@fundamental-ngx/fn/cdk` package has been completely removed. Instead use `@fundamental-ngx/cdk`;
+- The following public methods has been removed from Message Toast component: `close `, `open`;
+- The following public properties has been removed from Message Toast component: `containerRef`, `onHide` been replaced with `onExit$`;
+- Message Toast component requires `BrowserAnimationsModule` or `NoopAnimationsModule` to be added to the application;
+- Message Toast config can receive `animated` boolean property. If `true`, Message Toast component appearance will be animated.
+
+
+
 ## [0.40.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.5...v0.40.4-rc.6) (2023-05-09)
 
 
