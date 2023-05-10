@@ -1,4 +1,4 @@
 <div tabindex="0" role="button" class="fd-grid-list__more" (keydown)="_onKeyDown($event)" (click)="showMore.emit()">
-    <h5 class="fd-title fd-title--h6 fd-grid-list__more-title" [innerText]="title"></h5>
-    <p class="fd-grid-list__more-description" [innerText]="'[ ' + displayCount + ' / ' + totalCount + ' ]'"></p>
+    <h5 class="fd-title fd-title--h6 fd-grid-list__more-title">{{ title }}</h5>
+    <p class="fd-grid-list__more-description">{{ '[ ' + displayCount + ' / ' + totalCount + ' ]' }}</p>
 </div>
