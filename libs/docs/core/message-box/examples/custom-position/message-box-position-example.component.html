@@ -1,4 +1,4 @@
 <button fd-button label="Open at the top" (click)="open()"></button>
 
-<span aria-hidden="true" style="display: none" id="fd-message-box-custom-position-header" [innerText]="title"></span>
-<span aria-hidden="true" style="display: none" id="fd-message-box-custom-position-body" [innerText]="content"></span>
+<span aria-hidden="true" style="display: none" id="fd-message-box-custom-position-header">{{ title }}</span>
+<span aria-hidden="true" style="display: none" id="fd-message-box-custom-position-body">{{ content }}</span>

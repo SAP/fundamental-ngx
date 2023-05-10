@@ -64,8 +64,8 @@
             *ngIf="counter"
             class="fd-grid-list__item-counter"
             [attr.aria-label]="'coreGridList.listItemCounterAriaLabel' | fdTranslate : { count: counter }"
-            [innerText]="counter"
-        ></span>
+            >{{ counter }}</span
+        >
 
         <button
             *ngIf="type === 'detail' || type === 'detailsAndActive'"

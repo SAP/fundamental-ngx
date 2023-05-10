@@ -160,9 +160,9 @@
                             <ng-container *ngIf="disabled || readonly || !_isSelectedItem(item); else editMode">
                                 <span
                                     [class.fdp-upload-collection__cursor]="item.type === 'folder'"
-                                    [innerText]="item.name"
                                     (click)="_openFolder(item)"
-                                ></span>
+                                    >{{ item.name }}</span
+                                >
                             </ng-container>
                         </div>
 
@@ -201,22 +201,19 @@
                 </fdp-column>
 
                 <fdp-column name="uploadedBy" label="Uploaded by" width="5rem">
-                    <fdp-table-cell *fdpCellDef="let item" [innerText]="item.uploadedBy.name"></fdp-table-cell>
+                    <fdp-table-cell *fdpCellDef="let item">{{ item.uploadedBy.name }}</fdp-table-cell>
                 </fdp-column>
 
                 <fdp-column name="uploadedOn" label="Uploaded on" width="5rem">
-                    <fdp-table-cell
-                        *fdpCellDef="let item"
-                        [innerText]="item.uploadedOn | date : 'shortDate'"
-                    ></fdp-table-cell>
+                    <fdp-table-cell *fdpCellDef="let item">{{ item.uploadedOn | date : 'shortDate' }}</fdp-table-cell>
                 </fdp-column>
 
                 <fdp-column name="size" label="File size" width="5rem">
-                    <fdp-table-cell *fdpCellDef="let item" [innerText]="item.fileSize | convertBytes"></fdp-table-cell>
+                    <fdp-table-cell *fdpCellDef="let item">{{ item.fileSize | convertBytes }}</fdp-table-cell>
                 </fdp-column>
 
                 <fdp-column name="version" label="Version" width="5rem">
-                    <fdp-table-cell *fdpCellDef="let item" [innerText]="item.version || ''"></fdp-table-cell>
+                    <fdp-table-cell *fdpCellDef="let item">{{ item.version || '' }}</fdp-table-cell>
                 </fdp-column>
 
                 <fdp-column name="status" label="Status" width="5rem">
@@ -304,8 +301,8 @@
                 [class.invisible]="_showDragDropArea"
             >
                 <fd-icon glyph="document"></fd-icon>
-                <h3 [innerText]="noDataText || ('platformUploadCollection.noDataText' | fdTranslate)"></h3>
-                <p [innerText]="noDataDescription || ('platformUploadCollection.noDataDescription' | fdTranslate)"></p>
+                <h3>{{ noDataText || ('platformUploadCollection.noDataText' | fdTranslate) }}</h3>
+                <p>{{ noDataDescription || ('platformUploadCollection.noDataDescription' | fdTranslate) }}</p>
             </div>
         </div>
 
@@ -335,7 +332,7 @@
                     <span [id]="id + '-results'">
                         {{ 'platformUploadCollection.resultsPerPage' | fdTranslate }}
                     </span>
-                    <span *ngIf="_itemsPerPageOptions.length === 0" [innerText]="_itemsPerPage"></span>
+                    <span *ngIf="_itemsPerPageOptions.length === 0">{{ _itemsPerPage }}</span>
                 </span>
                 <fdp-menu-button
                     *ngIf="_itemsPerPageOptions.length > 0"
@@ -356,7 +353,7 @@
         (itemSelect)="_itemsPerPageChange(value.label)"
         [attr.title]="'Results per page: ' + value.label"
     >
-        <span [innerText]="value.label"></span>
+        <span>{{ value.label }}</span>
     </fdp-menu-item>
 </fdp-menu>
 

@@ -13,6 +13,6 @@
     <button fd-button fdType="positive" label="Success type & no icon" (click)="open('success', false)"></button>
 </div>
 
-<span aria-hidden="true" style="display: none" id="fd-message-box-semantic-types-header" [innerText]="title"></span>
-<span aria-hidden="true" style="display: none" id="fd-message-box-semantic-types-body" [innerText]="content"></span>
-<span aria-hidden="true" style="display: none" id="fd-message-box-semantic-types-types" [innerText]="types"></span>
+<span aria-hidden="true" style="display: none" id="fd-message-box-semantic-types-header">{{ title }}</span>
+<span aria-hidden="true" style="display: none" id="fd-message-box-semantic-types-body">{{ content }}</span>
+<span aria-hidden="true" style="display: none" id="fd-message-box-semantic-types-types">{{ types }}</span>
