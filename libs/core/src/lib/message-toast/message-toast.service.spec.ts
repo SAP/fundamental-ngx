@@ -14,12 +14,6 @@ const testMessage = 'Test message';
 
 const messageToastTextSelector = '.fd-message-toast';
 
-class DummySpyClass {
-    spy(): void {}
-}
-
-const dummySpy = new DummySpyClass();
-
 @Component({
     template: `{{ data.message }}`,
     encapsulation: ViewEncapsulation.None,
@@ -76,9 +70,11 @@ describe('MessageToastService', () => {
         fixture.detectChanges();
         await fixture.whenRenderingDone();
 
-        const messageToastMessageElm = overlayContainerElement.querySelector(messageToastTextSelector) as HTMLElement;
+        const messageToastMessageElm = overlayContainerElement.querySelector(
+            messageToastTextSelector + ' > fd-message-toast-text'
+        ) as HTMLElement;
 
-        expect(messageToastMessageElm.innerText.trim()).toEqual(testMessage);
+        expect(messageToastMessageElm.innerHTML.trim()).toEqual(testMessage);
     });
 
     it('should dismiss message toast', fakeAsync(() => {
@@ -88,7 +84,7 @@ describe('MessageToastService', () => {
 
         fixture.detectChanges();
 
-        const dismissCompleteSpy = spyOn(dummySpy, 'spy');
+        const dismissCompleteSpy = jest.fn();
 
         ref.containerInstance.onExit$.subscribe({ complete: dismissCompleteSpy });
 
@@ -106,7 +102,7 @@ describe('MessageToastService', () => {
 
         fixture.detectChanges();
 
-        const dismissCompleteSpy = spyOn(dummySpy, 'spy');
+        const dismissCompleteSpy = jest.fn();
 
         ref.afterDismissed().subscribe({ complete: dismissCompleteSpy });
 
@@ -130,7 +126,7 @@ describe('MessageToastService', () => {
         const messageToastMessageElm = overlayContainerElement.querySelector(messageToastTextSelector) as HTMLElement;
 
         expect(ref.containerInstance.config.data.message).toEqual(testMessage);
-        expect(messageToastMessageElm.innerText.trim()).toEqual(testMessage);
+        expect(messageToastMessageElm.innerHTML.trim().substring(0, testMessage.length)).toEqual(testMessage);
     });
 
     it('should open message toast from component', async () => {
@@ -146,9 +142,11 @@ describe('MessageToastService', () => {
 
         await fixture.whenRenderingDone();
 
-        const messageToastMessageElm = overlayContainerElement.querySelector(messageToastTextSelector) as HTMLElement;
+        const messageToastMessageElm = overlayContainerElement.querySelector(
+            messageToastTextSelector + ' > ng-component'
+        ) as HTMLElement;
 
         expect(ref.containerInstance.config.data.message).toEqual(testMessage);
-        expect(messageToastMessageElm.innerText.trim()).toEqual(testMessage);
+        expect(messageToastMessageElm.innerHTML.trim()).toEqual(testMessage);
     });
 });
