@@ -40,12 +40,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     /** The trigger events that will open/close the inline help component.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
-    triggers: (string | TriggerConfig)[] = [
-        { trigger: 'mouseenter', openAction: true, closeAction: false },
-        { trigger: 'mouseleave', openAction: false, closeAction: true },
-        { trigger: 'focusin', openAction: true, closeAction: false },
-        { trigger: 'focusout', openAction: false, closeAction: true }
-    ];
+    triggers: (string | TriggerConfig)[] = [{ trigger: 'click', openAction: true, closeAction: true }];
 
     /** Whether the popover should have an arrow. */
     @Input()
