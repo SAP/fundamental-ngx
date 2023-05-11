@@ -56,6 +56,10 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Закрыть'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel: 'Элемент дерева {{ itemDetails }}, {{ index }} из {{ total }}{{ selectedDescription }}'
     },

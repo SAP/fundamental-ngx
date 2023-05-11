@@ -22,6 +22,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SideNavigationInterface } from './side-navigation.interface';
 
 /**
+ * @deprecated use the vertical navigation component instead.
  * The side-navigation is a wrapping component representing
  * a left navigation that can always display or expand/collapse using the menu icon within the global navigation.
  */

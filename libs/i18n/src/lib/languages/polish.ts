@@ -42,6 +42,10 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Odrzuć'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel: 'Element drzewa {{ itemDetails }}, {{ index }} z {{ total }}{{ selectedDescription }}'
     },

@@ -3,11 +3,13 @@ import {
     AfterViewInit,
     Component,
     ContentChild,
+    ContentChildren,
     ElementRef,
     HostBinding,
     HostListener,
     Input,
-    Optional
+    Optional,
+    QueryList
 } from '@angular/core';
 import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -52,6 +54,14 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     _tabIndex;
 
     /** @hidden */
+    @HostBinding('attr.aria-expanded')
+    _expanded = false;
+
+    /** @hidden */
+    @HostBinding('attr.aria-level')
+    _ariaLevel: number;
+
+    /** @hidden */
     @HostBinding('class.fd-list__navigation-item--condensed')
     _condensed = false;
 
@@ -70,6 +80,10 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     /** @hidden */
     @ContentChild(ListNavigationItemTextDirective)
     _text: ListNavigationItemTextDirective;
+
+    /** @hidden */
+    @ContentChildren(ListNavigationItemComponent, { descendants: true })
+    _childItems: QueryList<ListNavigationItemComponent>;
 
     /** @hidden */
     _innerText: string;
@@ -102,11 +116,18 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
             this._iconComponent._navigationItemIcon = true;
         }
         this._innerText = this._text.elementRef.nativeElement.textContent ?? '';
+        this._ariaLevel = 1;
+        this._childItems.forEach((item) => {
+            item._ariaLevel = 2;
+        });
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
         this._subscribeToRtl();
+        if (this._isExpandable) {
+            this._expanded = false;
+        }
         this._setIsItemVisible(this.expanded);
     }
 
@@ -186,6 +207,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
             }
 
             this.expanded = expanded;
+            this._expanded = expanded;
             this._setIsItemVisible(expanded);
             this._listNavigationItemArrow._setExpanded(this.expanded);
 

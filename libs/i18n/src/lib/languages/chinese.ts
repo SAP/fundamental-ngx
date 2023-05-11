@@ -42,6 +42,10 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: '关闭'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel: '树项目{{ itemDetails }}，{{ index }} / {{ total }} {{ selectedDescription }}'
     },

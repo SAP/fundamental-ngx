@@ -5,6 +5,7 @@
     [class.fdx-side-nav--condensed]="condensed || sideNavigationConfiguration?.condensed"
     [class.fdx-side-nav--mobile]="mobile"
     fd-scrollbar
+    [attr.aria-label]="'coreNavigation.mainNavigation' | fdTranslate"
 >
     <ng-container *ngIf="!sideNavigationConfiguration">
         <ng-container *ngTemplateOutlet="scrollUp"></ng-container>

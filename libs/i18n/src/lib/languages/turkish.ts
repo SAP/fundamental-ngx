@@ -42,6 +42,10 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Azletmek'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel: 'Ağaç Öğesi {{ itemDetails }}, {{ index }} / {{ total }}{{ selectedDescription }}'
     },

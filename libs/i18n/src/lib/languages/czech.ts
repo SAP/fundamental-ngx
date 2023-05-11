@@ -42,6 +42,10 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Zrušit'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel: 'Položka stromu {{ itemDetails }}, {{ index }} z {{ total }}{{ selectedDescription }}'
     },

@@ -42,6 +42,10 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'გაუქმება'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel:
             'სიის ელემენტი {{ itemDetails }}, ინდექსით {{ index }} {{ total }}-დან {{ selectedDescription }}'
