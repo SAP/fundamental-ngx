@@ -109,6 +109,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         this._describedBy = `fd-inline-help-${inlineHelpId++}`;
         this._elementRef.nativeElement.setAttribute('aria-describedby', this._describedBy);
         this._bodyId = this._describedBy;
+        this.disableScrollbar = true;
         this._applyAdditionalInlineHelpClass();
         this._popoverService.initialise(this._elementRef, this);
     }
