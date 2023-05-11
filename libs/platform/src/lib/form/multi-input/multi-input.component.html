@@ -59,7 +59,7 @@
                 [attr.aria-posinset]="i"
                 [attr.aria-setsize]="selected.length"
             >
-                <span [innerText]="token.label | displayFnPipe : displayFn"></span>
+                <span>{{ token.label | displayFnPipe : displayFn }}</span>
             </fd-token>
 
             <input

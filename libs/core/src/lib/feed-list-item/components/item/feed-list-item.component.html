@@ -57,12 +57,12 @@
         tabindex="0"
         *ngIf="!isRichText && hasMore"
         (click)="toggleTextView()"
-        [innerText]="
+        >{{
             isCollapsed
                 ? moreLabel || ('coreFeedListItem.moreLabel' | fdTranslate)
                 : lessLabel || ('coreFeedListItem.lessLabel' | fdTranslate)
-        "
-    ></a>
+        }}</a
+    >
 </ng-template>
 
 <ng-template #headerTmpl>

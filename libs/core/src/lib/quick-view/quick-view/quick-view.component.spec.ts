@@ -31,16 +31,11 @@ import { QuickViewModule } from '../quick-view.module';
                             <a
                                 *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
                                 [href]="'tel:' + item.value"
-                                [innerText]="item.value"
                                 fd-link
-                            ></a>
-                            <a
-                                *ngSwitchCase="'Email'"
-                                [href]="'mailto:' + item.value"
-                                [innerText]="item.value"
-                                fd-link
-                            ></a>
-                            <div *ngSwitchDefault [innerText]="item.value"></div>
+                                >{{ item.value }}</a
+                            >
+                            <a *ngSwitchCase="'Email'" [href]="'mailto:' + item.value" fd-link>{{ item.value }}</a>
+                            <div *ngSwitchDefault>{{ item.value }}</div>
                         </ng-container>
                     </fd-quick-view-group-item-content>
                 </fd-quick-view-group-item>

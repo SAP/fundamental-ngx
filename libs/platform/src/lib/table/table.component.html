@@ -421,10 +421,9 @@
                         <div #noDataWrapper>
                             <ng-content select="fdp-table-no-data-wrapper"></ng-content>
                         </div>
-                        <div
-                            *ngIf="!noDataWrapper.hasChildNodes()"
-                            [innerText]="emptyTableMessage || ('platformTable.defaultEmptyMessage' | fdTranslate)"
-                        ></div>
+                        <div *ngIf="!noDataWrapper.hasChildNodes()">
+                            {{ emptyTableMessage || ('platformTable.defaultEmptyMessage' | fdTranslate) }}
+                        </div>
                     </ng-container>
                 </div>
             </td>

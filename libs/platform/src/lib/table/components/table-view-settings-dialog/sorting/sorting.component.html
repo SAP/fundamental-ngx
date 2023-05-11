@@ -65,7 +65,7 @@
                     [ngModel]="field"
                     (ngModelChange)="_sortFieldChange($event)"
                 ></fd-radio-button>
-                <span fd-list-title [innerText]="column.label"></span>
+                <span fd-list-title>{{ column.label }}</span>
             </li>
         </ul>
     </fd-dialog-body>

@@ -44,7 +44,7 @@
             >
                 <a fd-list-link (click)="_hasFolders(folder.files) ? _openFolder(folder) : _selectFolder(folder)">
                     <fd-icon class="fdp-upload-collection__fd-icon" glyph="folder-blank"></fd-icon>
-                    <span fd-list-title [innerText]="folder.name"></span>
+                    <span fd-list-title>{{ folder.name }}</span>
                     <i *ngIf="_hasFolders(folder.files)" fd-list-icon glyph="slim-arrow-right"></i>
                 </a>
             </li>

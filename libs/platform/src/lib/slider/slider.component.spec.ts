@@ -206,11 +206,11 @@ describe('PlatformSliderComponent', () => {
         expect(labels.length).toEqual(6);
     });
 
-    it('should display custome values labels', () => {
+    it('should display custom values labels', () => {
         const labels = fixture.debugElement.queryAll(By.css('.example-3 .fd-slider__label'));
 
         expect(labels.length).toEqual(component.customValues.length);
-        expect(labels[0].nativeElement.innerHTML).toEqual(component.customValues[0].label);
+        expect(labels[0].nativeElement.innerHTML.trim()).toEqual(component.customValues[0].label);
     });
 
     it('range slider should display 2 handles', async () => {

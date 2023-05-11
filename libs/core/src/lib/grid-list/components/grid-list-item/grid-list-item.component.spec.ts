@@ -26,9 +26,9 @@ import { GridListComponent } from '../grid-list/grid-list.component';
                     <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
 
                     <div class="fd-grid-list-item-body--content">
-                        <h4 class="fd-title fd-title--h4" [innerText]="item.title"></h4>
+                        <h4 class="fd-title fd-title--h4">{{ item.title }}</h4>
 
-                        <p [innerText]="item.description"></p>
+                        <p>{{ item.description }}</p>
 
                         <div class="fd-grid-list-item-body--content-address">
                             <p>781 Main Street</p>
