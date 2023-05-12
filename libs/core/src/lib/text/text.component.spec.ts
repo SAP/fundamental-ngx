@@ -82,15 +82,15 @@ describe('TextComponent', () => {
         fixture.detectChanges();
         tick();
 
-        const button = fixture.nativeElement.querySelector('.fd-text__link--more');
+        const button = fixture.nativeElement.querySelector('.fd-text__link--more .fd-link__content');
 
-        expect(button.innerText.toLowerCase()).toEqual(moreLabel);
+        expect(button.innerHTML.toLowerCase()).toEqual(moreLabel);
 
         component.isCollapsed = false;
         fixture.detectChanges();
         tick();
 
-        expect(button.innerText.toLowerCase()).toEqual(lessLabel);
+        expect(button.innerHTML.toLowerCase()).toEqual(lessLabel);
     }));
 
     it('should have ability to toggle text view', () => {
