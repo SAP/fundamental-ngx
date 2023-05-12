@@ -1,9 +1,6 @@
 <fd-grid-list>
     <fd-grid-list-title-bar title="Products">
-        <span
-            fd-grid-list-title-bar-additional-title-item
-            [innerText]="'(' + (group1.length + group2.length) + ')'"
-        ></span>
+        <span fd-grid-list-title-bar-additional-title-item>{{ '(' + (group1.length + group2.length) + ')' }}</span>
     </fd-grid-list-title-bar>
 
     <fd-grid-list-filter-bar *ngIf="showFilterBur" (close)="close()">

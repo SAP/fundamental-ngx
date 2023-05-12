@@ -39,14 +39,14 @@ describe('LayoutPanelFooterComponent', () => {
     it('should apply modifier class for footer content position start/left', () => {
         testComponent.position = 'start';
         fixture.detectChanges();
-        expect(
-            layoutPanelFooterElementRef.nativeElement.classList.contains('fd-layout-panel__footer--start')
-        ).toBeTrue();
+        expect(layoutPanelFooterElementRef.nativeElement.classList.contains('fd-layout-panel__footer--start')).toBe(
+            true
+        );
     });
 
     it('should apply modifier class for footer content position end/right', () => {
         testComponent.position = 'end';
         fixture.detectChanges();
-        expect(layoutPanelFooterElementRef.nativeElement.classList.contains('fd-layout-panel__footer--end')).toBeTrue();
+        expect(layoutPanelFooterElementRef.nativeElement.classList.contains('fd-layout-panel__footer--end')).toBe(true);
     });
 });

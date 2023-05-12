@@ -38,7 +38,7 @@ describe('PopoverComponent', () => {
 
     it('should call close method when isOpen is true', () => {
         component.isOpen = true;
-        spyOn(component, 'close').and.callFake(() => {});
+        jest.spyOn(component, 'close').mockImplementation(() => {});
 
         component.toggle();
 
@@ -47,7 +47,7 @@ describe('PopoverComponent', () => {
 
     it('should call open method when isOpen is false', () => {
         component.isOpen = false;
-        spyOn(component, 'open').and.callFake(() => {});
+        jest.spyOn(component, 'open').mockImplementation(() => {});
 
         component.toggle();
 
@@ -55,7 +55,7 @@ describe('PopoverComponent', () => {
     });
 
     it('should call _popoverService.refreshConfiguration from ngOnChanges', () => {
-        spyOn(popoverServiceStub, 'refreshConfiguration');
+        jest.spyOn(popoverServiceStub, 'refreshConfiguration');
 
         component.ngOnChanges();
 
@@ -63,8 +63,8 @@ describe('PopoverComponent', () => {
     });
 
     it('should open popover', () => {
-        spyOn(popoverServiceStub, 'open');
-        spyOn(component.isOpenChange, 'emit');
+        jest.spyOn(popoverServiceStub, 'open');
+        jest.spyOn(component.isOpenChange, 'emit');
         component.isOpen = false;
 
         component.open();
@@ -75,8 +75,8 @@ describe('PopoverComponent', () => {
     });
 
     it('should close popover', () => {
-        spyOn(popoverServiceStub, 'close');
-        spyOn(component.isOpenChange, 'emit');
+        jest.spyOn(popoverServiceStub, 'close');
+        jest.spyOn(component.isOpenChange, 'emit');
         component.isOpen = true;
 
         component.close();
@@ -87,7 +87,7 @@ describe('PopoverComponent', () => {
     });
 
     it('should add ne wposition', () => {
-        spyOn(popoverServiceStub, 'applyNewPosition');
+        jest.spyOn(popoverServiceStub, 'applyNewPosition');
 
         component.applyNewPosition([]);
 
@@ -95,7 +95,7 @@ describe('PopoverComponent', () => {
     });
 
     it('should update popover', () => {
-        spyOn(component, 'refreshPosition');
+        jest.spyOn(component, 'refreshPosition');
 
         component.updatePopover();
 
@@ -103,7 +103,7 @@ describe('PopoverComponent', () => {
     });
 
     it('should refresh position', () => {
-        spyOn(popoverServiceStub, 'refreshPosition');
+        jest.spyOn(popoverServiceStub, 'refreshPosition');
 
         component.refreshPosition();
 
@@ -118,9 +118,9 @@ describe('PopoverComponent', () => {
             stopPropagation: () => {}
         } as any;
         component.disabled = false;
-        spyOn(component, 'open');
-        spyOn(event, 'preventDefault');
-        spyOn(event, 'stopPropagation');
+        jest.spyOn(component, 'open');
+        jest.spyOn(event, 'preventDefault');
+        jest.spyOn(event, 'stopPropagation');
 
         component.triggerKeyDownHandler(event as KeyboardEvent);
 

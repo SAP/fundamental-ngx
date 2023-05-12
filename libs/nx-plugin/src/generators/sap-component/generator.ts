@@ -195,15 +195,9 @@ function updateLibraryData(tree: Tree, schema: SapComponentSchema): void {
         tree.delete(`${getLibraryDirectory(schema)}/src/index.ts`);
 
         // update paths for moved files
-        replaceContentInFile(tree, `${getLibraryDirectory(schema)}/ng-package.json`, [
-            ['"src/index.ts"', '"./index.ts"']
-        ]);
-        replaceContentInFile(tree, `${getLibraryDirectory(schema)}/tsconfig.lib.json`, [
-            ['"src/test.ts"', '"./test.ts"']
-        ]);
-        replaceContentInFile(tree, `${getLibraryDirectory(schema)}/tsconfig.spec.json`, [
-            ['"src/test.ts"', '"./test.ts"']
-        ]);
+        replaceContentInFile(tree, `${getLibraryDirectory(schema)}/ng-package.json`, [['"src/', '"./']]);
+        replaceContentInFile(tree, `${getLibraryDirectory(schema)}/tsconfig.lib.json`, [['"src/', '"./']]);
+        replaceContentInFile(tree, `${getLibraryDirectory(schema)}/tsconfig.spec.json`, [['"src/', '"./']]);
 
         // renaming module class name
         const oldModuleName = strings.classify(oldName);

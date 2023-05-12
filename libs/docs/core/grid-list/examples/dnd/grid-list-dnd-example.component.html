@@ -1,6 +1,6 @@
 <fd-grid-list fd-dnd-list [items]="list" [gridMode]="true" (itemDropped)="itemsChangeHandle($event)">
     <fd-grid-list-title-bar [title]="'Products'">
-        <span fd-grid-list-title-bar-additional-title-item [innerText]="'(' + list.length + ')'"></span>
+        <span fd-grid-list-title-bar-additional-title-item>{{ '(' + list.length + ')' }}</span>
 
         <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
 

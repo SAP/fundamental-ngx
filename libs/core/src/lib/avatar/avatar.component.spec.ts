@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AvatarModule } from './avatar.module';
 import { AvatarComponent } from './avatar.component';
@@ -34,6 +34,7 @@ class TestComponent {
     zoomGlyph: string | null = null;
     border = false;
     label: string | null = null;
+    @ViewChild(AvatarComponent) avatarComponent: AvatarComponent;
 }
 
 describe('AvatarComponent', () => {
@@ -153,13 +154,14 @@ describe('AvatarComponent', () => {
         expect(zoomElement.querySelector('.sap-icon--edit')).toBeTruthy();
     });
 
-    it('Should Add Abbreviate', () => {
+    it('Should Add Abbreviate', async () => {
         component.label = 'Jane Doe';
         fixture.detectChanges();
-        expect(fixture.debugElement.nativeElement.innerText).toEqual('JD');
+        await fixture.whenRenderingDone();
+        expect(component.avatarComponent.abbreviate).toEqual('JD');
 
         component.label = 'Marjolein van Veen';
         fixture.detectChanges();
-        expect(fixture.debugElement.nativeElement.innerText).toEqual('MvV');
+        expect(component.avatarComponent.abbreviate).toEqual('MvV');
     });
 });

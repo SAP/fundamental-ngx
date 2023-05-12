@@ -41,7 +41,7 @@ describe('NotificationGroupListComponent', () => {
     });
 
     it('should emit value properly', () => {
-        spyOn(notificationGroupHeader.expandedChange, 'emit');
+        jest.spyOn(notificationGroupHeader.expandedChange, 'emit');
         const event: any = { target: { value: true } };
         notificationGroupHeader.toggleExpand(event);
         fixture.detectChanges();

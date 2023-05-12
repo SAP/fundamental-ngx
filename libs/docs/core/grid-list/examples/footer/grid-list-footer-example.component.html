@@ -1,6 +1,6 @@
 <fd-grid-list>
     <fd-grid-list-title-bar title="Products">
-        <span fd-grid-list-title-bar-additional-title-item [innerText]="'(' + list.length + ')'"></span>
+        <span fd-grid-list-title-bar-additional-title-item>{{ '(' + list.length + ')' }}</span>
     </fd-grid-list-title-bar>
 
     <fd-grid-list-item *ngFor="let item of list; let i = index" [title]="item.title" [description]="item.description">

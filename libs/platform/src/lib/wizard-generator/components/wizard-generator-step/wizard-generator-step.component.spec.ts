@@ -7,7 +7,7 @@ import { PlatformWizardGeneratorModule } from '../../wizard-generator.module';
 import { WizardGeneratorService } from '../../wizard-generator.service';
 import { WizardStepForms } from './wizard-generator-step.component';
 import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
-import { first } from 'rxjs/operators';
+import { firstValueFrom } from 'rxjs';
 
 const items = [
     {
@@ -86,8 +86,8 @@ xdescribe('WizardGeneratorStepComponent', () => {
     it('should create form', async () => {
         await fixture.whenStable();
 
-        const formCreatedSpy = spyOn(component, 'formsCreated').and.callThrough();
-        const addComponentSpy = spyOn(service, 'addWizardStepComponent').and.callThrough();
+        const formCreatedSpy = jest.spyOn(component, 'formsCreated');
+        const addComponentSpy = jest.spyOn(service, 'addWizardStepComponent');
 
         const newItems = await service.prepareWizardItems(items);
 
@@ -102,7 +102,7 @@ xdescribe('WizardGeneratorStepComponent', () => {
         expect(addComponentSpy).toHaveBeenCalled();
     });
 
-    it('should submit form', async (done) => {
+    it('should submit form', async () => {
         await fixture.whenStable();
 
         const newItems = await service.prepareWizardItems(items);
@@ -113,13 +113,7 @@ xdescribe('WizardGeneratorStepComponent', () => {
 
         await new Promise((resolve) => setTimeout(() => resolve(null), 200));
 
-        service
-            .submitStepForms('productTypeStep')
-            .pipe(first())
-            .subscribe((forms) => {
-                expect(forms!.productType.success).toBeTrue();
-
-                done();
-            });
+        const forms = await firstValueFrom(service.submitStepForms('productTypeStep'));
+        expect(forms!.productType.success).toBe(true);
     });
 });

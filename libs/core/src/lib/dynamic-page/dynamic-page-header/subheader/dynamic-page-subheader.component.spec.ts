@@ -43,7 +43,7 @@ describe('DynamicPageHeaderComponent', () => {
         subHeader._pinned = false;
         subHeader.togglePinned();
         fixture.detectChanges();
-        expect(component.dynamicPageService.pinned.value).toBeTrue();
+        expect(component.dynamicPageService.pinned.value).toBe(true);
     });
 
     it('should toggle collapse', () => {
@@ -54,14 +54,14 @@ describe('DynamicPageHeaderComponent', () => {
         subHeader.collapsed = false;
         subHeader.collapsed = true;
 
-        expect(visibilityChanged).toBeTrue();
-        expect(component.dynamicPageService.collapsed.value).toBeTrue();
+        expect(visibilityChanged).toBe(true);
+        expect(component.dynamicPageService.collapsed.value).toBe(true);
     });
 
     it('should handle collapse from service', () => {
         subHeader.collapsed = false;
         component.dynamicPageService.collapsed.next(true);
 
-        expect(subHeader.collapsed).toBeTrue();
+        expect(subHeader.collapsed).toBe(true);
     });
 });

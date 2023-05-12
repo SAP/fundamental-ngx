@@ -59,7 +59,7 @@ describe('SwitchComponent', () => {
     });
 
     it('should switch on click', fakeAsync(() => {
-        const checkedChangeSpy = spyOn(component.checkedChange, 'emit');
+        const checkedChangeSpy = jest.spyOn(component.checkedChange, 'emit');
 
         component.isChecked = true;
 
@@ -71,7 +71,7 @@ describe('SwitchComponent', () => {
     }));
 
     it('should focus inner input element', () => {
-        spyOn(input, 'focus');
+        jest.spyOn(input, 'focus');
 
         detectChangesOnPush();
 

@@ -2,15 +2,15 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectorRef, ElementRef } from '@angular/core';
 
 import { OptionComponent } from './option.component';
-import Spy = jasmine.Spy;
+import SpyInstance = jest.SpyInstance;
 
 describe('OptionComponent', () => {
     let component: OptionComponent;
     let fixture: ComponentFixture<OptionComponent>;
-    let keyHandlerSpy: Spy<any>;
-    let setSelectedSpy: Spy<any>;
+    let keyHandlerSpy: SpyInstance<any>;
+    let setSelectedSpy: SpyInstance<any>;
 
-    const changeDetectorRef = jasmine.createSpyObj('ChangeDetectorRef', ['markForCheck']);
+    const changeDetectorRef = { markForCheck: jest.fn() };
     const elementRef = new ElementRef(null);
 
     beforeEach(waitForAsync(() => {
@@ -26,9 +26,13 @@ describe('OptionComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(OptionComponent);
         component = fixture.componentInstance;
-        setSelectedSpy = spyOn(component, '_selectViaInteraction').and.callThrough();
-        keyHandlerSpy = spyOn(component, '_handleKeydown').and.callThrough();
+        setSelectedSpy = jest.spyOn(component, '_selectViaInteraction');
+        keyHandlerSpy = jest.spyOn(component, '_handleKeydown');
         fixture.detectChanges();
+    });
+
+    afterEach(() => {
+        jest.restoreAllMocks();
     });
 
     it('should create', () => {

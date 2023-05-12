@@ -105,21 +105,21 @@
                         <fd-quick-view-group-item>
                             <fd-quick-view-group-item-label>Phone</fd-quick-view-group-item-label>
                             <fd-quick-view-group-item-content>
-                                <a fd-link [href]="'tel:' + person.phone" [innerText]="person.phone"></a>
+                                <a fd-link [href]="'tel:' + person.phone">{{ person.phone }}</a>
                             </fd-quick-view-group-item-content>
                         </fd-quick-view-group-item>
 
                         <fd-quick-view-group-item>
                             <fd-quick-view-group-item-label>Mobile</fd-quick-view-group-item-label>
                             <fd-quick-view-group-item-content>
-                                <a fd-link [href]="'tel:' + person.mobile" [innerText]="person.mobile"></a>
+                                <a fd-link [href]="'tel:' + person.mobile">{{ person.mobile }}</a>
                             </fd-quick-view-group-item-content>
                         </fd-quick-view-group-item>
 
                         <fd-quick-view-group-item>
                             <fd-quick-view-group-item-label>Email</fd-quick-view-group-item-label>
                             <fd-quick-view-group-item-content>
-                                <a fd-link [href]="'mailto:' + person.email" [innerText]="person.email"></a>
+                                <a fd-link [href]="'mailto:' + person.email">{{ person.email }}</a>
                             </fd-quick-view-group-item-content>
                         </fd-quick-view-group-item>
                     </fd-quick-view-group>
@@ -188,7 +188,7 @@
                     <ng-container *ngIf="overflowPopoverStage === 'main'">
                         <div
                             *ngFor="
-                                let person of people | slice: -1 * avatarGroup_IndividualType.overflowItemsCount;
+                                let person of people | slice : -1 * avatarGroup_IndividualType.overflowItemsCount;
                                 let idx = index
                             "
                             fd-avatar-group-overflow-item
@@ -283,33 +283,23 @@
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Phone</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <a
-                                            fd-link
-                                            [href]="'tel:' + personDetails.phone"
-                                            [innerText]="personDetails.phone"
-                                        ></a>
+                                        <a fd-link [href]="'tel:' + personDetails.phone">{{ personDetails.phone }}</a>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
 
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Mobile</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <a
-                                            fd-link
-                                            [href]="'tel:' + personDetails.mobile"
-                                            [innerText]="personDetails.mobile"
-                                        ></a>
+                                        <a fd-link [href]="'tel:' + personDetails.mobile">{{ personDetails.mobile }}</a>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
 
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Email</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <a
-                                            fd-link
-                                            [href]="'mailto:' + personDetails.email"
-                                            [innerText]="personDetails.email"
-                                        ></a>
+                                        <a fd-link [href]="'mailto:' + personDetails.email">{{
+                                            personDetails.email
+                                        }}</a>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
                             </fd-quick-view-group>

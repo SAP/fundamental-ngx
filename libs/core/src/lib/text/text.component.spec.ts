@@ -2,8 +2,7 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 
 import { TextComponent } from './text.component';
 import { TextModule } from './text.module';
-import { ChangeDetectionStrategy } from '@angular/core';
-import { LineClampModule, PipeModule } from '@fundamental-ngx/cdk/utils';
+import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('TextComponent', () => {
     let component: TextComponent;
@@ -11,7 +10,8 @@ describe('TextComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PipeModule, LineClampModule, TextModule]
+            imports: [TextModule],
+            schemas: [NO_ERRORS_SCHEMA]
         })
             .overrideComponent(TextComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }
@@ -34,7 +34,7 @@ describe('TextComponent', () => {
         component.text = text;
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('span[fdkLineClampTarget]').innerText).toBe(text);
+        expect(fixture.nativeElement.querySelector('span[fdkLineClampTarget]').innerHTML).toBe(text);
     });
 
     it('should enable whitespaces', () => {
@@ -66,7 +66,7 @@ describe('TextComponent', () => {
         fixture.detectChanges();
 
         expect(target).toBeTruthy();
-        expect(Number(target.style.webkitLineClamp)).toEqual(maxLines);
+        expect(Number(target.style['-webkit-line-clamp'])).toEqual(maxLines);
     });
 
     it(`should set labels for more and less buttons`, fakeAsync(() => {
@@ -82,15 +82,15 @@ describe('TextComponent', () => {
         fixture.detectChanges();
         tick();
 
-        const button = fixture.nativeElement.querySelector('.fd-text__link--more');
+        const button = fixture.nativeElement.querySelector('.fd-text__link--more .fd-link__content');
 
-        expect(button.innerText.toLowerCase()).toEqual(moreLabel);
+        expect(button.innerHTML.toLowerCase()).toEqual(moreLabel);
 
         component.isCollapsed = false;
         fixture.detectChanges();
         tick();
 
-        expect(button.innerText.toLowerCase()).toEqual(lessLabel);
+        expect(button.innerHTML.toLowerCase()).toEqual(lessLabel);
     }));
 
     it('should have ability to toggle text view', () => {
@@ -98,8 +98,8 @@ describe('TextComponent', () => {
         component._hasMore = true;
         fixture.detectChanges();
         component.toggleTextView();
-        expect(component.isCollapsed).toBeFalse();
+        expect(component.isCollapsed).toBe(false);
         component.toggleTextView();
-        expect(component.isCollapsed).toBeTrue();
+        expect(component.isCollapsed).toBe(true);
     });
 });

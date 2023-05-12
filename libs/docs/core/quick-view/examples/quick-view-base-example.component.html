@@ -22,18 +22,18 @@
                     <a
                         *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
                         [href]="'tel:' + item.value"
-                        [innerText]="item.value"
                         fd-link
                         fd-quick-view-group-item-content-element
-                    ></a>
+                        >{{ item.value }}</a
+                    >
                     <a
                         *ngSwitchCase="'Email'"
                         [href]="'mailto:' + item.value"
-                        [innerText]="item.value"
                         fd-link
                         fd-quick-view-group-item-content-element
-                    ></a>
-                    <div *ngSwitchDefault [innerText]="item.value" fd-quick-view-group-item-content-element></div>
+                        >{{ item.value }}</a
+                    >
+                    <div *ngSwitchDefault fd-quick-view-group-item-content-element>{{ item.value }}</div>
                 </ng-container>
             </fd-quick-view-group-item-content>
         </fd-quick-view-group-item>

@@ -3,8 +3,8 @@ import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angul
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 
-import { SplitterModule } from '../splitter.module';
 import { SplitterResizerComponent } from './splitter-resizer.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('SplitterResizerComponent', () => {
     let component: SplitterResizerComponent;
@@ -12,7 +12,8 @@ describe('SplitterResizerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [SplitterModule]
+            declarations: [SplitterResizerComponent],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
     }));
 
@@ -31,9 +32,9 @@ describe('SplitterResizerComponent', () => {
         const initialValue = 100;
         const changedValue = 150;
 
-        const startResizeSpy = spyOn(component.startResize, 'emit').and.callThrough();
-        const endResizeSpy = spyOn(component.endResize, 'emit').and.callThrough();
-        const resizeSpy = spyOn(component.resize, 'emit').and.callThrough();
+        const startResizeSpy = jest.spyOn(component.startResize, 'emit');
+        const endResizeSpy = jest.spyOn(component.endResize, 'emit');
+        const resizeSpy = jest.spyOn(component.resize, 'emit');
         const document = TestBed.inject(DOCUMENT);
 
         component._onMouseDown(new MouseEvent('mousedown', { clientX: initialValue }));
@@ -56,9 +57,9 @@ describe('SplitterResizerComponent', () => {
     }));
 
     it('should resize with keyboard', () => {
-        const startResizeSpy = spyOn(component.startResize, 'emit').and.callThrough();
-        const endResizeSpy = spyOn(component.endResize, 'emit').and.callThrough();
-        const resizeSpy = spyOn(component.resize, 'emit').and.callThrough();
+        const startResizeSpy = jest.spyOn(component.startResize, 'emit');
+        const endResizeSpy = jest.spyOn(component.endResize, 'emit');
+        const resizeSpy = jest.spyOn(component.resize, 'emit');
 
         component._onKeydown(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
         fixture.detectChanges();

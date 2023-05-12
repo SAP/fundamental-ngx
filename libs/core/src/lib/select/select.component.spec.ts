@@ -285,7 +285,7 @@ describe('SelectComponent', () => {
         xit('should focus select when we TABin to it', async () => {
             document.body.focus();
 
-            spyOn(component, 'focus').and.callThrough();
+            jest.spyOn(component, 'focus');
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', TAB));
             await wait(fixture);
             expect(component.focus).toHaveBeenCalled();
@@ -385,7 +385,7 @@ describe('SelectComponent', () => {
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', ESCAPE));
             await wait(fixture);
 
-            expect(component._isOpen).toBeFalse();
+            expect(component._isOpen).toBe(false);
         });
 
         it(

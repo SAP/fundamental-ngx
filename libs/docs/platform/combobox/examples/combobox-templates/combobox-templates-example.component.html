@@ -10,7 +10,7 @@
             <ng-template fdkTemplate="optionItemTemplate" let-item let-index="index">
                 <div class="fd-template-container-div">
                     <fd-icon glyph="accept" class="fd-template-icon"></fd-icon>
-                    <span class="fd-template-text" [innerText]="item.name"></span>
+                    <span class="fd-template-text">{{ item.name }}</span>
                 </div>
             </ng-template>
         </fdp-combobox>
@@ -28,7 +28,7 @@
             (selectionChange)="onSelect1($event)"
         >
             <ng-template fdkTemplate="groupItemTemplate" let-item>
-                <li class="fd-list__group-header" [innerText]="'Type: ' + item.label"></li>
+                <li class="fd-list__group-header">{{ 'Type: ' + item.label }}</li>
             </ng-template>
         </fdp-combobox>
         <fdp-form-field-extras> Selected: {{ selectedItem1 | json }} </fdp-form-field-extras>
@@ -44,7 +44,7 @@
             (selectionChange)="onSelect2($event)"
         >
             <ng-template fdkTemplate="secondaryItemTemplate" let-item>
-                <span class="fd-list__secondary" [innerText]="item.type"></span>
+                <span class="fd-list__secondary">{{ item.type }}</span>
             </ng-template>
         </fdp-combobox>
         <fdp-form-field-extras> Selected: {{ selectedItem2 | json }} </fdp-form-field-extras>
@@ -61,7 +61,7 @@
             <ng-template fdkTemplate="selectedItemTemplate" let-item>
                 <div class="fd-template-container-div">
                     <fd-icon glyph="accept" class="fd-template-icon"></fd-icon>
-                    <span [innerText]="item.name"></span>
+                    <span>{{ item.name }}</span>
                 </div>
             </ng-template>
         </fdp-combobox>

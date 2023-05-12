@@ -39,7 +39,7 @@ describe('NotificationService', () => {
     });
 
     it('should open notifications from template', () => {
-        spyOn<any>(service, '_destroyNotificationComponent').and.callThrough();
+        jest.spyOn<any, any>(service, '_destroyNotificationComponent');
 
         expect(service['notifications'].length).toBe(0);
         expect(service['containerRef']).toBeFalsy();
@@ -56,7 +56,7 @@ describe('NotificationService', () => {
     });
 
     it('should open notifications from component', () => {
-        spyOn<any>(service, '_destroyNotificationComponent').and.callThrough();
+        jest.spyOn<any, any>(service, '_destroyNotificationComponent');
 
         expect(service['notifications'].length).toBe(0);
         expect(service['containerRef']).toBeFalsy();

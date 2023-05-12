@@ -1,9 +1,6 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { GridListModule } from '../../grid-list.module';
 import { GridListComponent } from '../grid-list/grid-list.component';
 
@@ -26,9 +23,9 @@ import { GridListComponent } from '../grid-list/grid-list.component';
                     <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
 
                     <div class="fd-grid-list-item-body--content">
-                        <h4 class="fd-title fd-title--h4" [innerText]="item.title"></h4>
+                        <h4 class="fd-title fd-title--h4">{{ item.title }}</h4>
 
-                        <p [innerText]="item.description"></p>
+                        <p>{{ item.description }}</p>
 
                         <div class="fd-grid-list-item-body--content-address">
                             <p>781 Main Street</p>
@@ -111,7 +108,8 @@ describe('GridListItemComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent],
-            imports: [GridListModule, ButtonModule, AvatarModule]
+            imports: [GridListModule],
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));
 
@@ -149,7 +147,7 @@ describe('GridListItemComponent', () => {
     });
 
     it('should throw Detail event if click on Detail button', () => {
-        spyOn(component, 'detail');
+        jest.spyOn(component, 'detail');
 
         const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[title="Details"]'));
         button.nativeElement.click();
@@ -159,7 +157,7 @@ describe('GridListItemComponent', () => {
     });
 
     it('should throw Draft event if click on Draft button', () => {
-        spyOn(component, 'draft');
+        jest.spyOn(component, 'draft');
 
         const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[ng-reflect-label="Draft"]'));
         button.nativeElement.click();
@@ -169,7 +167,7 @@ describe('GridListItemComponent', () => {
     });
 
     it('should throw Locked event if click on Locked button', () => {
-        spyOn(component, 'locked');
+        jest.spyOn(component, 'locked');
 
         const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[ng-reflect-label="Locked"]'));
         button.nativeElement.click();

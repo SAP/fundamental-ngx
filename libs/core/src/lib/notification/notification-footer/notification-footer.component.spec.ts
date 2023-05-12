@@ -26,6 +26,6 @@ describe('NotificationFooterComponent', () => {
     it('should apply proper css classes', async () => {
         await whenStable(fixture);
 
-        expect(fixture.nativeElement).toHaveClass('fd-notification__footer');
+        expect(fixture.nativeElement.classList.contains('fd-notification__footer')).toBe(true);
     });
 });

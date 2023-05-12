@@ -107,6 +107,7 @@ import { TableResponsiveService } from './table-responsive.service';
 import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
 
 import { TableService } from './table.service';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { newTableRow } from './utils';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
@@ -603,6 +604,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     editableCellForms: QueryList<NgForm>;
 
     /** @hidden */
+    @ViewChildren(CheckboxComponent)
+    _checkboxes: QueryList<CheckboxComponent>;
+
+    /** @hidden */
     readonly _tableColumnsSubject = new BehaviorSubject<TableColumn[]>([]);
 
     /** @hidden */
@@ -1054,6 +1059,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._listenToTableContainerMouseLeave();
 
         this._listenToLoadingAndRefocusCell();
+
+        this._removeCheckboxTabIndex();
 
         this._cdr.detectChanges();
 
@@ -1853,6 +1860,13 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 (event.target as HTMLElement).focus();
             });
         }
+    }
+
+    /** @hidden */
+    private _removeCheckboxTabIndex(): void {
+        this._checkboxes.forEach((checkbox) => {
+            checkbox.tabIndexValue = -1;
+        });
     }
 
     /** @hidden */

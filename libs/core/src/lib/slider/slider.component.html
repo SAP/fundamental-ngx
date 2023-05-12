@@ -31,8 +31,9 @@
                     class="fd-slider__label"
                     fd-slider-position
                     [position]="tick.position || 0"
-                    [innerText]="tick.label"
-                ></div>
+                >
+                    {{ tick.label }}
+                </div>
             </ng-container>
         </div>
     </div>
@@ -218,13 +219,9 @@
         (mouseenter)="_popoverInputFieldHovered$.next(true)"
         (mouseleave)="_popoverInputFieldHovered$.next(false)"
     >
-        <div
-            *ngIf="(customValues && customValues.length > 0) || tooltipMode === 'readonly'"
-            class="fd-slider--tooltip"
-            [innerText]="
-                customValues && customValues.length > 0 ? customValues[position].label : _popoverValueRef[target]
-            "
-        ></div>
+        <div *ngIf="(customValues && customValues.length > 0) || tooltipMode === 'readonly'" class="fd-slider--tooltip">
+            {{ customValues && customValues.length > 0 ? customValues[position].label : _popoverValueRef[target] }}
+        </div>
 
         <input
             #popoverInputField

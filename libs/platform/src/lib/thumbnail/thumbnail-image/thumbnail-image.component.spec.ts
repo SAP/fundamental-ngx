@@ -70,7 +70,7 @@ describe('DefaultThumbnailImageComponent', () => {
     });
 
     it('should emit on thumbNailClicked', () => {
-        spyOn(thumbNailImageComponent.thumbnailClicked, 'emit');
+        jest.spyOn(thumbNailImageComponent.thumbnailClicked, 'emit');
 
         thumbNailImageComponent.thumbnailClick(component.mediaList[0]);
 

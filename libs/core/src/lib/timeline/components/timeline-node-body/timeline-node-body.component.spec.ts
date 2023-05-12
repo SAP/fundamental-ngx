@@ -41,7 +41,7 @@ describe('TimelineNodeBodyComponent', () => {
     it('should call calculate positions when expanded or collapsed occurs', () => {
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const moreBtn = hostEl.querySelector<HTMLAnchorElement>('.fd-text__link--more');
-        const calculatePositionsSpy = spyOn(
+        const calculatePositionsSpy = jest.spyOn(
             fixture.componentInstance.timelinePositionControlService,
             'calculatePositions'
         );

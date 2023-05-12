@@ -128,7 +128,7 @@ describe('WizardDialogGeneratorService', () => {
                 title: wizardTitle
             }
         });
-        expect(dialogService.hasOpenDialogs()).toBeTrue();
+        expect(dialogService.hasOpenDialogs()).toBe(true);
 
         // Dismissal is tesed in dialog service itself. No need to repeat it.
     });

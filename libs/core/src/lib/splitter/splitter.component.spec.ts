@@ -1,11 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 
 import { SplitterSplitPaneComponent } from './splitter-split-pane/splitter-split-pane.component';
 import { SplitterComponent } from './splitter.component';
-import { SplitterModule } from './splitter.module';
 
 @Component({
     template: `
@@ -33,8 +32,8 @@ describe('SplitterComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [SplitterHostComponent],
-            imports: [SplitterModule]
+            declarations: [SplitterHostComponent, SplitterComponent, SplitterSplitPaneComponent],
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));
 
@@ -52,19 +51,19 @@ describe('SplitterComponent', () => {
     });
 
     it('should toggle pane on the canvas', () => {
-        const hideSpy = spyOn(hostComponent.paneOne, 'hideFromCanvas').and.callThrough();
-        const showSpy = spyOn(hostComponent.paneOne, 'showOnCanvas').and.callThrough();
+        const hideSpy = jest.spyOn(hostComponent.paneOne, 'hideFromCanvas');
+        const showSpy = jest.spyOn(hostComponent.paneOne, 'showOnCanvas');
 
         splitterComponent.hidePaneFromCanvas(hostComponent.paneOneId);
         fixture.detectChanges();
 
         expect(hideSpy).toHaveBeenCalled();
-        expect(splitterComponent.isPaneOnCanvas(hostComponent.paneOneId)).toBeFalse();
+        expect(splitterComponent.isPaneOnCanvas(hostComponent.paneOneId)).toBe(false);
 
         splitterComponent.showPaneOnCanvas(hostComponent.paneOneId);
         fixture.detectChanges();
 
         expect(showSpy).toHaveBeenCalled();
-        expect(splitterComponent.isPaneOnCanvas(hostComponent.paneOneId)).toBeTrue();
+        expect(splitterComponent.isPaneOnCanvas(hostComponent.paneOneId)).toBe(true);
     });
 });

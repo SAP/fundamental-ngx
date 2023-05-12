@@ -58,7 +58,7 @@ describe('DatetimePickerComponent', () => {
     });
 
     it('should update from input for null value', () => {
-        spyOn(component, 'onChange').and.callThrough();
+        jest.spyOn(component, 'onChange');
 
         component.allowNull = true;
         component.handleInputChange('', true);
@@ -74,7 +74,7 @@ describe('DatetimePickerComponent', () => {
     });
 
     it('should update input from calendar', () => {
-        spyOn(component, 'onChange');
+        jest.spyOn(component, 'onChange');
         const tempTime = new FdDate();
         component._tempTime = tempTime;
         const date = new FdDate(2018, 10, 10);
@@ -123,7 +123,7 @@ describe('DatetimePickerComponent', () => {
     });
 
     it('should hide message on open', () => {
-        const hideSpy = spyOn((<any>component)._popoverFormMessage, 'hide');
+        const hideSpy = jest.spyOn((<any>component)._popoverFormMessage, 'hide');
         component.openPopover();
         expect(hideSpy).toHaveBeenCalled();
     });
@@ -131,7 +131,7 @@ describe('DatetimePickerComponent', () => {
     it('should show message on close', () => {
         component.isOpen = true;
 
-        const showSpy = spyOn((<any>component)._popoverFormMessage, 'show');
+        const showSpy = jest.spyOn((<any>component)._popoverFormMessage, 'show');
         component.closePopover();
         expect(showSpy).toHaveBeenCalled();
     });

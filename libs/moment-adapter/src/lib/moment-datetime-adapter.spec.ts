@@ -297,14 +297,11 @@ describe('MomentDatetimeAdapter', () => {
     });
 
     it(`should get today's date`, () => {
-        expect(adapter.datesEqual(adapter.today(), moment().startOf('day'))).toBe(
-            true,
-            `should be equal to today's date`
-        );
+        expect(adapter.datesEqual(adapter.today(), moment().startOf('day'))).toBe(true); // `should be equal to today's date`
     });
 
     it(`should get now date`, () => {
-        expect(adapter.datesEqual(adapter.now(), moment())).toBe(true, `should be equal to now date moment`);
+        expect(adapter.datesEqual(adapter.now(), moment())).toBe(true); // `should be equal to now date moment`
     });
 
     it('should parse "en" date string', () => {
@@ -334,7 +331,7 @@ describe('MomentDatetimeAdapter', () => {
     it('should parse invalid value as invalid', () => {
         const date = adapter.parse('hello', 'M/D/YYYY');
         expect(date).not.toBeNull();
-        expect(date?.isValid()).toBeFalse();
+        expect(date?.isValid()).toBe(false);
     });
 
     it('should format', () => {
