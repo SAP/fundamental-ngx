@@ -28,11 +28,6 @@ export abstract class BaseTreeItem<T extends TreeItem = TreeItem, P = any>
     abstract navigatable: boolean;
 
     /**
-     * Whether the tree item should have a navigation indicator.
-     */
-    abstract navigationIndicator: boolean;
-
-    /**
      * Tree item state.
      */
     abstract state: Nullable<TreeItemState>;
@@ -87,6 +82,16 @@ export abstract class BaseTreeItem<T extends TreeItem = TreeItem, P = any>
      */
     abstract selectableListItem: SelectableItemToken;
 
+    /**
+     * Whether the tree item has Data Source children.
+     */
+    abstract hasDsChildren: boolean;
+
+    /**
+     * Whether the children nodes being loaded from the Data Source.
+     */
+    abstract childrenLoaded: boolean;
+
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
 
@@ -104,5 +109,12 @@ export abstract class BaseTreeItem<T extends TreeItem = TreeItem, P = any>
         return this._elementRef;
     }
 
+    /** Method to focus on the tree item. */
     abstract focus(): void;
+
+    /** Method to set the position of the item in set. */
+    abstract setPosition(totalItemsCount: number, currentIndex: number): void;
+
+    /** Method for setting the focusable tabindex. */
+    abstract setContainerTabIndex(value: number): void;
 }

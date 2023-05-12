@@ -4,6 +4,7 @@ import { SelectableItemDirective, SelectionService } from '@fundamental-ngx/cdk/
 import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER } from '@fundamental-ngx/cdk/data-source';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { TreeItem } from '../../models/tree-item';
 import { TreeDataSourceParser } from '../../data-source/tree-data-source-parser';
 import { TreeService } from '../../tree.service';
@@ -23,7 +24,7 @@ describe('TreeItemComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [TreeItemComponent],
-            imports: [DataSourceDirective, IconModule, SkeletonModule, SelectableItemDirective],
+            imports: [DataSourceDirective, IconModule, SkeletonModule, SelectableItemDirective, I18nModule],
             providers: [
                 TreeService,
                 {
@@ -52,14 +53,6 @@ describe('TreeItemComponent', () => {
     });
 
     it('should add appropriate classes', async () => {
-        await fixture.whenRenderingDone();
-        expect(component.itemContainer?.nativeElement.querySelector('.fd-tree__expander')?.classList).not.toContain(
-            'is-expanded'
-        );
-        expect(component.itemContainer?.nativeElement.classList).not.toContain('has-highlight-indicator');
-        expect(component.itemContainer?.nativeElement.classList).not.toContain('fd-tree__item-container--active');
-        expect(component.itemContainer?.nativeElement.classList).not.toContain('fd-tree__content--wrap');
-        expect(component.itemContainer?.nativeElement.querySelector('.fd-tree__icon--navigation')).not.toBeTruthy();
         component.children = [
             {
                 id: 'id',
@@ -72,7 +65,17 @@ describe('TreeItemComponent', () => {
                 level: 2
             }
         ] as unknown as TreeItem[];
+        (component as any)._dsChildrenNumber = 1;
+        fixture.detectChanges();
+        await fixture.whenRenderingDone();
+        const expander = component.itemContainer?.nativeElement.querySelector('.fd-tree__expander');
+        expect(expander?.classList).not.toContain('is-expanded');
+        expect(component.itemContainer?.nativeElement.classList).not.toContain('has-highlight-indicator');
+        expect(component.itemContainer?.nativeElement.classList).not.toContain('fd-tree__item-container--active');
+        expect(component.itemContainer?.nativeElement.classList).not.toContain('fd-tree__content--wrap');
+        expect(component.itemContainer?.nativeElement.querySelector('.fd-tree__icon--navigation')).not.toBeTruthy();
         component.expanded = true;
+        (component as any)._dsChildrenNumber = 1;
         fixture.detectChanges();
         expect(component.itemContainer?.nativeElement.querySelector('.fd-tree__expander')?.classList).toContain(
             'is-expanded'
@@ -82,10 +85,6 @@ describe('TreeItemComponent', () => {
         fixture.detectChanges();
         await fixture.whenStable();
         expect(component.itemContainer?.nativeElement.classList).toContain('fd-tree__item-container--active');
-        component.navigationIndicator = true;
-        fixture.detectChanges();
-        await fixture.whenStable();
-        expect(component.itemContainer?.nativeElement.querySelector('.fd-tree__icon--navigation')).toBeTruthy();
         component.state = 'default';
         fixture.detectChanges();
         expect(component.itemContainer?.nativeElement.classList).toContain('has-highlight-indicator');

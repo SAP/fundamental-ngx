@@ -33,8 +33,8 @@ import {
     SelectComponentRootToken,
     SelectionService
 } from '@fundamental-ngx/cdk/utils';
-import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { filter, fromEvent, startWith, Subscription, switchMap, takeUntil } from 'rxjs';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { distinctUntilChanged, filter, fromEvent, startWith, Subscription, switchMap, takeUntil } from 'rxjs';
 import { FdTreeAcceptableDataSource, FdTreeDataSource, FdTreeItemType } from './data-source/tree-data-source';
 import { TreeDataSourceParser } from './data-source/tree-data-source-parser';
 import { TreeItemDefDirective } from './directives/tree-item-def.directive';
@@ -98,6 +98,33 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     @Input()
     selectionPlacement: SelectionPlacement = 'none';
 
+    /**
+     * Whether the sections should be dependent for selection mode.
+     * If true, selection control will shift, according to the level.
+     * If false, selection control will stay on the same place ignoring the item level.
+     */
+    @Input()
+    independentSections = false;
+
+    /**
+     * Whether the Tree component has navigation indicators.
+     */
+    @Input()
+    set navigationIndicator(value: boolean) {
+        if (value === this._navigationIndicator) {
+            return;
+        }
+        this._navigationIndicator = value;
+        this._treeService.setNavigationIndicator(value);
+    }
+
+    get navigationIndicator(): boolean {
+        return this._navigationIndicator;
+    }
+
+    /** @hidden */
+    private _navigationIndicator = false;
+
     /** Event emitted when data loading is started. */
     @Output()
     dataRequested = new EventEmitter<boolean>();
@@ -152,6 +179,9 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
 
     /** @hidden */
     private _treeItemDef: Nullable<TreeItemDefDirective>;
+
+    /** @hidden */
+    private readonly _contentDensityObserver = inject(ContentDensityObserver);
 
     /** @hidden */
     private readonly _dataSourceDirective = inject<DataSourceDirective<T, FdTreeDataSource<T>>>(DataSourceDirective);
@@ -209,6 +239,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     /** @hidden */
     constructor() {
         this._selectionService.registerRootComponent(this);
+        this._contentDensityObserver.subscribe();
     }
 
     /** @hidden */
@@ -216,7 +247,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         this._openDataStream();
         this.buildComponentCssClass();
 
-        this._treeService.expandedLevel.pipe(takeUntil(this._destroy$)).subscribe((level) => {
+        this._treeService.expandedLevel.pipe(distinctUntilChanged(), takeUntil(this._destroy$)).subscribe((level) => {
             this._expandedLevel = level;
             this.buildComponentCssClass();
             this._cdr.detectChanges();
@@ -325,7 +356,14 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
 
     /** @hidden */
     _onItemFocused(treeItem: BaseTreeItem): void {
-        const focusedIndex = this._sortedTreeItems.findIndex((item) => item === treeItem);
+        let focusedIndex = -1;
+        this._sortedTreeItems.forEach((item, index) => {
+            const isFocused = treeItem === item;
+            item.setContainerTabIndex(isFocused ? 0 : -1);
+            if (isFocused) {
+                focusedIndex = index;
+            }
+        });
 
         if (focusedIndex === -1) {
             return;
@@ -356,6 +394,11 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     /** @hidden */
     private _sortTreeItems(items: BaseTreeItem[]): BaseTreeItem[] {
         const components: BaseTreeItem[] = [];
+        const rootItems = items.filter((item) => item.level === 1);
+
+        rootItems.forEach((treeItem, index) => {
+            treeItem.setPosition(rootItems.length, index + 1);
+        });
 
         items.forEach((item) => {
             if (!item || components.includes(item)) {
@@ -369,6 +412,10 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
             }
 
             const childItems = this._sortTreeItems(this._allItems.filter((i) => i.parentId === item.id));
+
+            childItems.forEach((treeItem, index) => {
+                treeItem.setPosition(childItems.length, index + 1);
+            });
 
             components.push(...childItems);
         });
@@ -389,6 +436,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
             this._expandedLevel ? `expanded-level-${this._expandedLevel}` : '',
             this.noBorder ? 'fd-tree--no-border' : '',
             this._items.length === 0 && this._initialDataLoaded ? 'fd-tree--no-data' : '',
+            this.independentSections ? 'fd-tree--independent-multi-selection' : '',
             'fd-tree'
         ];
     }
@@ -419,7 +467,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         const expandKey = isRtl ? LEFT_ARROW : RIGHT_ARROW;
         const collapseKey = isRtl ? RIGHT_ARROW : LEFT_ARROW;
 
-        if (KeyUtil.isKeyCode(event, expandKey) && (treeItem.children.length > 0 || treeItem.hasProjectedChildren)) {
+        if (KeyUtil.isKeyCode(event, expandKey) && (treeItem.hasDsChildren || treeItem.hasProjectedChildren)) {
             if (event.defaultPrevented) {
                 return;
             }

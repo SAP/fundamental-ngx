@@ -5,12 +5,15 @@
     <button fd-button value="afterExpand">After expand button</button>
     <button fd-button value="right">Right</button>
 </fd-segmented-button>
+<fd-checkbox [(ngModel)]="independentSections" label="Independent sections"></fd-checkbox>
 <h4>Single selection mode:</h4>
 <form [formGroup]="singleForm">
     <fd-tree
         formControlName="selection"
         [dataSource]="items"
         selection="single"
+        [navigationIndicator]="true"
+        [independentSections]="independentSections"
         [selectionPlacement]="selectionPlacement"
     >
         <fd-tree-item
@@ -19,11 +22,11 @@
             [value]="item.data.value"
             [state]="item.state"
             [navigatable]="item.navigatable"
-            [navigationIndicator]="item.navigationIndicator"
             [childNodes]="item.children"
             [expanded]="item.expanded"
             [parentId]="item.parentId"
             [id]="item.id"
+            (expandedChange)="expandChange($event, item.data.title)"
         >
             <fd-icon fdTreeItemIcon [glyph]="item.data.icon"></fd-icon>
             <span fdTreeItemText>{{ item.data.title }}</span>
@@ -38,6 +41,8 @@
     <fd-tree
         formControlName="selection"
         [dataSource]="items2"
+        [independentSections]="independentSections"
+        [navigationIndicator]="true"
         selection="multiple"
         [selectionPlacement]="selectionPlacement"
     >
@@ -47,7 +52,6 @@
             [value]="item.data.value"
             [state]="item.state"
             [navigatable]="item.navigatable"
-            [navigationIndicator]="item.navigationIndicator"
             [childNodes]="item.children"
             [expanded]="item.expanded"
             [parentId]="item.parentId"

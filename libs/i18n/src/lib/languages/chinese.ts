@@ -591,5 +591,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: '接受',
         semanticDeclineLabel: '拒绝'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node'
     }
 };

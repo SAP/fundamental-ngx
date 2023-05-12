@@ -51,7 +51,7 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
     }
 
     /**
-     * Emits when data from the provides has been changed.
+     * Emits when the data from the provider has been changed.
      * @returns Observable of data source objects.
      */
     get dataChanges(): Observable<T[]> {
@@ -70,19 +70,7 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
     match(predicate: string | Map<string, string> = new Map<string, string>(), start = 0, end = Infinity): void {
         this._dataRequested$.next(true);
         this._dataLoading$.next(true);
-        const searchParam = new Map();
-
-        if (typeof predicate === 'string') {
-            searchParam.set('query', predicate);
-        } else if (predicate instanceof Map) {
-            predicate.forEach((v, k) => searchParam.set(k, v));
-        } else {
-            throw new Error('DataSource.match() predicate can only accepts string and Map');
-        }
-
-        if (!searchParam.has('limit') && !this.limitless) {
-            searchParam.set('limit', BaseDataSource.MaxLimit);
-        }
+        const searchParam = this._getSearchParams(predicate);
 
         this.dataProvider
             .fetch(searchParam, start, end)
@@ -101,10 +89,39 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
     }
 
     /**
+     * Returns the Observable of a total items number filtered by the `predicate` param.
+     * @param predicate Search query.
+     */
+    getTotalItems(predicate: string | Map<string, string> = new Map<string, string>()): Observable<number> {
+        const searchParam = this._getSearchParams(predicate);
+
+        return this.dataProvider.getTotalItems(searchParam);
+    }
+
+    /**
      * Closes the stream
      */
     unsubscribe(): void {
         this._destroy$.next();
         this._destroy$.complete();
+    }
+
+    /** @hidden */
+    private _getSearchParams(predicate: string | Map<string, string>): Map<string, any> {
+        const searchParam = new Map<string, any>();
+
+        if (typeof predicate === 'string') {
+            searchParam.set('query', predicate);
+        } else if (predicate instanceof Map) {
+            predicate.forEach((v, k) => searchParam.set(k, v));
+        } else {
+            throw new Error('DataSource.match() predicate can only accepts string and Map');
+        }
+
+        if (!searchParam.has('limit') && !this.limitless) {
+            searchParam.set('limit', BaseDataSource.MaxLimit);
+        }
+
+        return searchParam;
     }
 }

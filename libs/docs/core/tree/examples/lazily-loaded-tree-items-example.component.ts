@@ -34,10 +34,16 @@ export class FdTreeLazyLoadingDataProvider<T> extends DataProvider<T> {
         // Initiate data provider with an empty array.
         super([]);
     }
+    // Since the initial state does not include any value, set it on fetch method, imitating the http request.
     fetch(params: Map<string, any>): Observable<T[]> {
         // Set items on fetch and simulate quick http request
-        this.values = of(generateItems<T>(20, this._level)).pipe(delay(500));
+        this.values = of(generateItems<T>(20, this._level)).pipe(delay(5000));
         return super.fetch(params);
+    }
+
+    // Since the initial state does not include any value, return a plain number.
+    getTotalItems(params: Map<string, any>): Observable<number> {
+        return of(20);
     }
 }
 
@@ -51,12 +57,7 @@ function generateItems<T = TreeItem<AdditionalTreeItemData>>(length = 20, level 
                 icon: glyphs[i % glyphs.length],
                 value: ++index
             },
-            children:
-                level === 1
-                    ? generateItems(length, level + 1)
-                    : level < 5
-                    ? new ExampleObservableTreeDataSource(level + 1)
-                    : []
+            children: level < 5 ? new ExampleObservableTreeDataSource(level + 1) : []
         } as T);
     }
 

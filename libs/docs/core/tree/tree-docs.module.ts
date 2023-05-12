@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { TextModule } from '@fundamental-ngx/core/text';
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
@@ -35,7 +36,8 @@ const routes: Routes = [
         SegmentedButtonModule,
         TextModule,
         ButtonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        CheckboxModule
     ],
     exports: [
         RouterModule,

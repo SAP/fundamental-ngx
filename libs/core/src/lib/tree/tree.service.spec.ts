@@ -8,7 +8,7 @@ describe('TreeService', () => {
     });
 
     it("should add new expandable level and emit it's value", () => {
-        const emitterSpy = spyOn((service as any)._expandedLevel, 'next').and.callThrough();
+        const emitterSpy = jest.spyOn((service as any)._expandedLevel, 'next');
         service.addExpandableItem('id1', 1, false);
         service.addExpandableItem('id2', 2, false);
         // No levels are expanded
@@ -20,7 +20,7 @@ describe('TreeService', () => {
     });
 
     it('should remove expandable level and emit new level', () => {
-        const emitterSpy = spyOn((service as any)._expandedLevel, 'next').and.callThrough();
+        const emitterSpy = jest.spyOn((service as any)._expandedLevel, 'next');
         service.addExpandableItem('id1', 1, true);
         service.addExpandableItem('id2', 2, true);
         expect(emitterSpy).toHaveBeenCalledWith(2);

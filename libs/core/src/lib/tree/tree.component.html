@@ -1,6 +1,11 @@
 <ng-template #dataSourceRenderer>
-    <ng-container *ngIf="!_initialDataLoaded; else dataLoadedTpl">
-        <div *fdkRepeat="5" role="treeitem" aria-level="1" class="fd-tree__item">
+    <ng-template
+        [ngTemplateOutlet]="!_initialDataLoaded ? loadingRenderer : dataLoadedTpl"
+        [ngTemplateOutletContext]="{ $implicit: 1 }"
+    ></ng-template>
+
+    <ng-template #loadingRenderer let-level>
+        <div *fdkRepeat="5" role="treeitem" [attr.aria-level]="level" class="fd-tree__item">
             <div class="fd-tree__item-container">
                 <div class="fd-tree__content">
                     <span class="fd-tree__text">
@@ -9,7 +14,7 @@
                 </div>
             </div>
         </div>
-    </ng-container>
+    </ng-template>
 
     <ng-template #dataLoadedTpl>
         <ng-container *ngIf="_items.length > 0 && treeItemDef; else noDataTpl">
@@ -26,13 +31,25 @@
         <ng-container fdTreeItem fdkSelectableItem #treeItemDirective="fdTreeItem">
             <ng-template
                 [ngTemplateOutlet]="item.renderer"
-                [ngTemplateOutletContext]="{ $implicit: item, level: 1 }"
+                [ngTemplateOutletContext]="{ $implicit: item }"
                 [ngTemplateOutletInjector]="treeItemDirective.injector"
+            ></ng-template>
+        </ng-container>
+        <ng-container
+            *ngIf="
+                treeItemDirective.treeItem?.hasDsChildren &&
+                !!treeItemDirective.treeItem?.expanded &&
+                !treeItemDirective.treeItem?.childrenLoaded
+            "
+        >
+            <ng-template
+                [ngTemplateOutlet]="loadingRenderer"
+                [ngTemplateOutletContext]="{ $implicit: item.level + 1 }"
             ></ng-template>
         </ng-container>
         <ng-container *ngIf="treeItemDirective.treeItem?.children as childItems">
             <div class="fd-tree" *ngIf="childItems && childItems.length > 0 && !!treeItemDirective?.treeItem?.expanded">
-                <ng-container *ngFor="let child of childItems">
+                <ng-container *ngFor="let child of childItems; trackBy: _trackFn">
                     <ng-template
                         [ngTemplateOutlet]="renderer"
                         [ngTemplateOutletContext]="{ $implicit: child }"

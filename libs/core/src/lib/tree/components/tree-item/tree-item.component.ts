@@ -25,16 +25,7 @@ import {
     SelectableItemToken,
     uuidv4
 } from '@fundamental-ngx/cdk/utils';
-import {
-    asyncScheduler,
-    distinctUntilChanged,
-    filter,
-    observeOn,
-    startWith,
-    Subject,
-    switchMap,
-    takeUntil
-} from 'rxjs';
+import { distinctUntilChanged, filter, startWith, Subject, switchMap, takeUntil } from 'rxjs';
 import { FdTreeAcceptableDataSource, FdTreeDataSource } from '../../data-source/tree-data-source';
 import { TreeItem, TreeItemState } from '../../models/tree-item';
 import { TreeService, SelectionModeModel } from '../../tree.service';
@@ -47,8 +38,8 @@ import { BaseTreeItem } from '../../models/base-tree-item.class';
     changeDetection: ChangeDetectionStrategy.OnPush,
     hostDirectives: [DataSourceDirective],
     host: {
-        role: 'treeitem',
-        class: 'fd-tree__item'
+        class: 'fd-tree__item',
+        role: 'presentation'
     },
     providers: [
         DestroyedService,
@@ -78,6 +69,13 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     id = uuidv4();
 
     /**
+     * Tree item aria label.
+     */
+    @HostBinding('attr.aria-label')
+    @Input()
+    ariaLabel: string;
+
+    /**
      * Tree item parent ID.
      */
     @Input()
@@ -97,12 +95,6 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
      */
     @Input()
     navigatable = false;
-
-    /**
-     * Whether the tree item should have a navigation indicator.
-     */
-    @Input()
-    navigationIndicator = false;
 
     /**
      * Tree item state.
@@ -146,9 +138,18 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
         if (value === this._expanded) {
             return;
         }
-
+        this._treeService.addExpandableItem(this.id, this.level, value);
         this._expanded = value;
-        this._expandedItemService.addExpandableItem(this.id, this.level, this.expanded);
+
+        if (value) {
+            setTimeout(() => {
+                this._dataSourceDirective.dataSourceProvider?.match();
+            });
+        } else {
+            this.children = [];
+            this._treeService.detectChanges.next();
+        }
+
         this._cdr.detectChanges();
     }
 
@@ -158,6 +159,12 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
 
     /** @hidden */
     private _expanded = false;
+
+    /**
+     * @hidden
+     * Whether the tree item should have a navigation indicator.
+     */
+    _navigationIndicator = false;
 
     /**
      * Event emitted when user clicks on tree item.
@@ -181,7 +188,7 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     children: T[] = [];
 
     /** @hidden */
-    _childrenLoaded = false;
+    childrenLoaded = false;
 
     /** @hidden */
     _selectionModel: Nullable<SelectionModeModel>;
@@ -195,6 +202,14 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     get hasProjectedChildren(): boolean {
         return this._projectedTreeItems && this._projectedTreeItems.length > 0;
     }
+
+    /** Whether the tree item has data source children. */
+    get hasDsChildren(): boolean {
+        return this._dsChildrenNumber > 0;
+    }
+
+    /** @Hidden */
+    _containerTabIndex = 0;
 
     /** Tree item focusable container. */
     @ViewChild('itemContainer', { read: ElementRef })
@@ -210,17 +225,30 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
 
     /** Whether the item is accessible via keyboard. */
     get keyboardAccessible(): boolean {
-        return this._parentTreeItem === null ? true : this._parentTreeItem.expanded;
+        return this._parentTreeItem === null
+            ? true
+            : this._parentTreeItem.keyboardAccessible && this._parentTreeItem.expanded;
     }
+
+    /** @hidden */
+    _setSize: number;
+    /** @hidden */
+    _currentPosition: number;
+
+    /** @hidden */
+    _totalChildrenLoaded = false;
+
+    /** @hidden */
+    private _dsChildrenNumber = 0;
 
     /** @hidden */
     private readonly _clicked$ = new Subject<MouseEvent | KeyboardEvent>();
 
-    /** Clicked behaviour implementation. */
+    /** Clicked behavior implementation. */
     clicked = this._clicked$.asObservable();
 
     /** @hidden */
-    private readonly _expandedItemService = inject(TreeService);
+    private readonly _treeService = inject(TreeService);
 
     /** @hidden */
     private readonly _dataSourceDirective = inject<DataSourceDirective<T, FdTreeDataSource<T>>>(DataSourceDirective);
@@ -239,27 +267,42 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
 
     /** @hidden */
     ngOnInit(): void {
-        this._expandedItemService.selectionMode.pipe(takeUntil(this._destroy$)).subscribe((model) => {
+        this._treeService.selectionMode.pipe(takeUntil(this._destroy$)).subscribe((model) => {
             this._selectionModel = model;
             this._cdr.detectChanges();
         });
 
+        this._treeService.navigationIndicator.pipe(takeUntil(this._destroy$)).subscribe((value) => {
+            this._navigationIndicator = value;
+            this._cdr.detectChanges();
+        });
+
         this._dataSourceDirective.dataSource = this.childNodes as DataSource;
-        this._expandedItemService.addExpandableItem(this.id, this.level, this.expanded);
+        this._treeService.addExpandableItem(this.id, this.level, this.expanded);
+
+        this._dataSourceDirective.dataSourceProvider
+            ?.getTotalItems()
+            .pipe(takeUntil(this._destroy$))
+            .subscribe((totalItems) => {
+                this._dsChildrenNumber = totalItems;
+                this._totalChildrenLoaded = true;
+                this._cdr.detectChanges();
+            });
 
         this._dataSourceDirective.dataSourceProvider?.dataReceived
             .pipe(
                 filter((received) => received),
-                switchMap(() => this._dataSourceDirective.dataChanged$.pipe(observeOn(asyncScheduler)))
+                switchMap(() => this._dataSourceDirective.dataChanged$),
+                takeUntil(this._destroy$)
             )
             .subscribe((data) => {
-                this._childrenLoaded = true;
-                this.children = this._expandedItemService.normalizeTreeItems(data, this.id, this.level + 1) as T[];
-                this._expandedItemService.detectChanges.next();
-                this._cdr.detectChanges();
+                this.children = this._treeService.normalizeTreeItems(data, this.id, this.level + 1) as T[];
+                this.childrenLoaded = true;
+                setTimeout(() => {
+                    this._treeService.detectChanges.next();
+                    this._cdr.detectChanges();
+                });
             });
-
-        this._dataSourceDirective.dataSourceProvider?.match();
     }
 
     /** @hidden */
@@ -268,17 +311,36 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
             .pipe(startWith(null), distinctUntilChanged(), takeUntil(this._destroy$))
             .subscribe(() => {
                 this._cdr.detectChanges();
+                this._projectedTreeItems.forEach((treeItem, index) => {
+                    treeItem.setPosition(this._projectedTreeItems.length, index + 1);
+                });
             });
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._expandedItemService.removeExpandableItem(this.id, this.level!);
+        this._treeService.removeExpandableItem(this.id, this.level!);
     }
 
-    /** @hidden */
+    /**
+     * Sets position of the current item in the set.
+     * @param totalItems Total items amount in the set.
+     * @param currentIndex Current item position in the set.
+     */
+    setPosition(totalItems: number, currentIndex: number): void {
+        this._setSize = totalItems;
+        this._currentPosition = currentIndex;
+    }
+
+    /** Method to focus on the tree item. */
     focus(): void {
         this.itemContainer?.nativeElement.focus();
+    }
+
+    /** Method for setting the focusable tabindex. */
+    setContainerTabIndex(value: number): void {
+        this._containerTabIndex = value;
+        this._cdr.markForCheck();
     }
 
     /** @hidden */

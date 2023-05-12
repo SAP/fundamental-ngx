@@ -226,6 +226,10 @@ export interface FdLanguage {
     coreBreadcrumb: {
         overflowTitleMore: FdLanguageKey;
     };
+    coreTree: {
+        expand: FdLanguageKey;
+        collapse: FdLanguageKey;
+    };
     platformActionBar: {
         backButtonLabel: FdLanguageKey;
     };

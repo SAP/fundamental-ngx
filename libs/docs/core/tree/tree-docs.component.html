@@ -40,7 +40,7 @@
     </p>
     <p>
         In order to render nafvigation indicator, developers should pass input property
-        <code>[navigationIndicator]="true"</code> to the tree item component.
+        <code>[navigationIndicator]="true"</code> to the Tree component.
     </p>
 </description>
 
@@ -108,12 +108,17 @@
 <fd-docs-section-title id="lazy-loading" componentName="tree">Lazy loading tree items</fd-docs-section-title>
 
 <description>
-    <p>By default Tree component can accept Data source, observable of and array items and a plain array of items.</p>
-    <p>With large amount of items, this may cause a performance issues.</p>
+    <p>Tree component can work with <b>Arrays</b>, <b>Observables</b> and <b>FdTreeDataSource</b>.</p>
     <p>
-        To avoid that, developers can extend default <code>FdTreeDataSource</code> and <code>DataProvider</code> classes
-        to implement lazy loading of the child nodes.
+        Even though the component does not directly consume child items until the parent item being expanded, passing a
+        large array directly may cause performance issues.
     </p>
+    <p>
+        To avoid that, we recommend passing child items as a separate instance of the Data Source, which will load the
+        data only when it's necessary.
+    </p>
+    <p>To do that, developers can extend default <code>FdTreeDataSource</code> and <code>DataProvider</code> classes</p>
+    <p>This example imitates the scenario when tree item children are being retrieved via http request separately.</p>
 </description>
 
 <component-example>

@@ -601,5 +601,9 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Akceptovat',
         semanticDeclineLabel: 'Odmítnout'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node'
     }
 };

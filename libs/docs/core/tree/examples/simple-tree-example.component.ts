@@ -17,14 +17,12 @@ export class SimpleTreeExampleComponent {
         {
             navigatable: true,
             expanded: false,
-            navigationIndicator: true,
             data: {
                 icon: 'e-care',
                 title: 'Item 1 (Level 1)'
             },
             children: [
                 {
-                    navigatable: true,
                     expanded: false,
                     data: {
                         icon: 'product',
@@ -32,7 +30,6 @@ export class SimpleTreeExampleComponent {
                     },
                     children: [
                         {
-                            navigatable: false,
                             expanded: true,
                             data: {
                                 icon: 'competitor',
@@ -40,7 +37,6 @@ export class SimpleTreeExampleComponent {
                             },
                             children: [
                                 {
-                                    navigatable: false,
                                     expanded: true,
                                     data: {
                                         icon: 'competitor',

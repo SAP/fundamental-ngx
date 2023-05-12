@@ -607,5 +607,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Pranoje',
         semanticDeclineLabel: 'Rënia'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node'
     }
 };

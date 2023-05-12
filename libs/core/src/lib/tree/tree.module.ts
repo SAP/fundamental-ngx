@@ -5,6 +5,7 @@ import { ClickedBehaviorModule, RepeatDirective, SelectableItemDirective } from 
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { TreeComponent } from './tree.component';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { IconModule } from '@fundamental-ngx/core/icon';
@@ -39,7 +40,8 @@ import { TreeItemButtonDirective } from './directives/tree-item-button.directive
         RadioModule,
         SkeletonModule,
         RepeatDirective,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        I18nModule
     ],
     exports: [
         TreeComponent,

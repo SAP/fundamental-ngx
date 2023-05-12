@@ -1,12 +1,12 @@
 <h3>Imperative Approach:</h3>
-<fd-tree>
+<fd-tree style="max-width: 500px">
     <fd-tree-item>
         <fd-icon fdTreeItemIcon glyph="account"></fd-icon>
         <span fdTreeItemText>Item 1 (Level 1)</span>
     </fd-tree-item>
-    <fd-tree-item>
+    <fd-tree-item [wrapContent]="true">
         <fd-icon fdTreeItemIcon glyph="e-care"></fd-icon>
-        <span fdTreeItemText>Item 2 (Level 1)</span>
+        <span fdTreeItemText>Item 2 with some long description that should split into multiple lines (Level 1)</span>
         <fd-tree-item>
             <span fdTreeItemText>Item 1 (Level 2)</span>
             <fd-tree-item>
@@ -34,7 +34,6 @@
         *fdTreeItemDef="let item; as: model"
         [level]="item.level"
         [navigatable]="item.navigatable"
-        [navigationIndicator]="item.navigationIndicator"
         [childNodes]="item.children"
         [expanded]="item.expanded"
         [parentId]="item.parentId"

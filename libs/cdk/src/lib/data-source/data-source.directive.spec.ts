@@ -17,6 +17,10 @@ export class MockDataProvider extends AbstractDataProvider<any> {
     fetch(): Observable<any[]> {
         return of(this.items);
     }
+
+    getTotalItems(params?: Map<string, any>): Observable<number> {
+        return of(this.items.length);
+    }
 }
 
 export class MockArrayDataSource extends BaseDataSource<number> {

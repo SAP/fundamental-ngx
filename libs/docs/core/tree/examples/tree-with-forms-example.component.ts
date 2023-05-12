@@ -1,8 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataProvider } from '@fundamental-ngx/cdk/data-source';
-import { FdTreeDataSource, SelectionPlacement, TreeComponent, TreeItem } from '@fundamental-ngx/core/tree';
-import { delay, of } from 'rxjs';
+import {
+    FdTreeDataSource,
+    SelectionPlacement,
+    TreeComponent,
+    TreeItem,
+    TreeItemState
+} from '@fundamental-ngx/core/tree';
 
 let itemsIndex = 0;
 
@@ -17,6 +22,7 @@ export class TreeWithFormsExampleComponent {
     items = new ExampleObservableTreeDataSource();
     items2 = new ExampleObservableTreeDataSource();
     model: TreeItem<AdditionalTreeItemData>;
+    independentSections = false;
 
     singleForm: FormGroup;
     multipleForm: FormGroup;
@@ -30,6 +36,10 @@ export class TreeWithFormsExampleComponent {
             selection: [[63]]
         });
     }
+
+    expandChange(expanded: boolean, title: string): void {
+        console.log(`Item '${title}' is now ${expanded ? 'expanded' : 'collapsed'}.`);
+    }
 }
 
 export interface AdditionalTreeItemData {
@@ -41,7 +51,7 @@ export interface AdditionalTreeItemData {
 export class ExampleObservableTreeDataSource<T = TreeItem<AdditionalTreeItemData>> extends FdTreeDataSource<T> {
     limitless = true;
     constructor(_level = 1) {
-        super(new DataProvider<T>(of(generateItems<T>(2, _level)).pipe(delay(500))));
+        super(new DataProvider<T>(generateItems<T>(2, _level)));
     }
 }
 
@@ -50,6 +60,7 @@ function generateItems<T = TreeItem<AdditionalTreeItemData>>(length = 20, level 
     for (let i = 0; i < length; i++) {
         items.push({
             expanded: false,
+            state: states[i % states.length],
             data: {
                 title: `Item ${i + 1} (Level ${level})`,
                 value: ++itemsIndex,
@@ -66,6 +77,8 @@ function generateItems<T = TreeItem<AdditionalTreeItemData>>(length = 20, level 
 
     return items;
 }
+
+const states: TreeItemState[] = ['default', 'error', 'success', 'warning'];
 
 const glyphs = [
     'accidental-leave',

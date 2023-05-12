@@ -85,7 +85,6 @@ export class ProjectedTreeItemsComponent {
                 *fdTreeItemDef="let item"
                 [level]="item.level"
                 [navigatable]="item.navigatable"
-                [navigationIndicator]="item.navigationIndicator"
                 [childNodes]="item.children"
                 [expanded]="item.expanded"
                 [parentId]="item.parentId"

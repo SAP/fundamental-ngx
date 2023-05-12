@@ -1,6 +1,7 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { Nullable, uuidv4 } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BaseTreeItem } from './models/base-tree-item.class';
 import { SelectionPlacement, SelectionType } from './models/selection-type';
 import { TreeItem, TreeItemGeneric } from './models/tree-item';
 import { TreeItemDefContext } from './models/tree-item-def-context';
@@ -15,6 +16,9 @@ export class TreeService {
     /** Tree item template ref. */
     treeItemTemplateRef: Nullable<TemplateRef<TreeItemDefContext>>;
 
+    /** Currently focused tree item. */
+    focusedTreeItem: Nullable<BaseTreeItem>;
+
     /** Current expanded level. */
     get expandedLevel(): Observable<number | undefined> {
         return this._expandedLevel.asObservable();
@@ -23,6 +27,11 @@ export class TreeService {
     /** Tree selection mode. */
     get selectionMode(): Observable<SelectionModeModel> {
         return this._selectionMode$.asObservable();
+    }
+
+    /** Whether to show navigation indicator. */
+    get navigationIndicator(): Observable<boolean> {
+        return this._navigationIndicator$.asObservable();
     }
 
     /** @hidden */
@@ -34,10 +43,18 @@ export class TreeService {
     /** @hidden */
     private readonly _expandedLevel = new BehaviorSubject<number | undefined>(undefined);
 
+    /** @hidden */
+    private readonly _navigationIndicator$ = new BehaviorSubject<boolean>(false);
+
     /**
      * @hidden
      */
     readonly detectChanges = new Subject<void>();
+
+    /** Sets whether the navigation indicator should be visible. */
+    setNavigationIndicator(value: boolean): void {
+        this._navigationIndicator$.next(value);
+    }
 
     /** @hidden */
     normalizeTreeItems<T extends TreeItem = TreeItem>(
@@ -94,17 +111,18 @@ export class TreeService {
 
     /** @hidden */
     private _emitNewExpandedLevel(): void {
-        // Go from deeper level
-        const levels = Array.from(this._expandableItems.keys()).sort().reverse();
+        // We need to go from level 1 to deeper level since level 4 may be expanded, yet level 2 not.
+        const levels = Array.from(this._expandableItems.keys()).sort();
         let lastLevel: number | undefined;
 
         for (const level of levels) {
             const levelExpandableItems = this._expandableItems.get(level)!;
 
-            if (Object.values(levelExpandableItems).some((v) => v)) {
-                lastLevel = level;
+            if (Object.values(levelExpandableItems).every((v) => !v)) {
                 break;
             }
+
+            lastLevel = level;
         }
 
         this._expandedLevel.next(lastLevel);

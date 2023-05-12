@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
     selector: '[fdTreeItemIcon]',
@@ -6,7 +6,15 @@ import { Directive } from '@angular/core';
         class: 'fd-tree__icon'
     }
 })
-export class TreeItemIconDirective {}
+export class TreeItemIconDirective {
+    /** @hidden */
+    @HostBinding('attr.role')
+    private readonly _role = 'presentation';
+
+    /** @hidden */
+    @HostBinding('attr.aria-hidden')
+    private readonly _ariaHidden = true;
+}
 
 @Directive({
     selector: '[fdTreeItemText]',

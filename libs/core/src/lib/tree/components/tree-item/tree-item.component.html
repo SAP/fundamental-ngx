@@ -1,12 +1,18 @@
 <div
     class="fd-tree__item-container"
-    tabindex="0"
+    [attr.tabindex]="_containerTabIndex"
     (click)="_onClick($event)"
     (keyup.enter)="_onClick($any($event))"
     (keyup.space)="_onClick($any($event))"
     fdkSelectableItem
     (selected)="_setSelected($event)"
     [value]="value"
+    [attr.aria-haspopup]="children.length > 0 || hasProjectedChildren"
+    [attr.aria-expanded]="expanded"
+    [attr.aria-setsize]="_setSize"
+    [attr.aria-posinset]="_currentPosition"
+    role="treeitem"
+    [attr.aria-level]="level"
     #itemContainer
     [ngClass]="[
         state ? 'has-highlight-indicator has-highlight-indicator--' + state : '',
@@ -18,18 +24,21 @@
         <ng-template [ngTemplateOutlet]="selection"></ng-template>
     </ng-container>
     <ng-container *ngIf="hasChildren">
-        <button
-            tabindex="-1"
-            *ngIf="children.length > 0 || hasProjectedChildren"
+        <span
+            *ngIf="hasDsChildren || hasProjectedChildren"
             (click)="_toggleExpandState($event)"
             class="fd-tree__expander"
+            aria-hidden="true"
+            role="presentation"
+            [attr.aria-label]="(expanded ? 'coreTree.collapse' : 'coreTree.expand') | fdTranslate"
             [class.is-expanded]="expanded"
-            aria-haspopup="true"
-            [attr.aria-expanded]="expanded"
         >
-            <fd-icon [glyph]="expanded ? 'navigation-down-arrow' : 'navigation-right-arrow'"></fd-icon>
-        </button>
-        <div class="fd-tree__expander fd-tree__expander--loading" *ngIf="!_childrenLoaded">
+            <fd-icon
+                class="fd-tree__icon"
+                [glyph]="expanded ? 'navigation-down-arrow' : 'navigation-right-arrow'"
+            ></fd-icon>
+        </span>
+        <div class="fd-tree__expander fd-tree__expander--loading" *ngIf="!_totalChildrenLoaded">
             <fd-skeleton type="rectangle" width="1rem" height="1rem"></fd-skeleton>
         </div>
         <ng-container *ngIf="_selectionModel?.placement === 'afterExpand'">
@@ -47,7 +56,7 @@
     <fd-icon
         glyph="slim-arrow-right"
         class="fd-tree__icon fd-tree__icon--navigation"
-        *ngIf="navigatable && navigationIndicator"
+        *ngIf="navigatable && _navigationIndicator"
     ></fd-icon>
 </div>
 

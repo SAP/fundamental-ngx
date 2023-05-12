@@ -612,5 +612,9 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Accettare',
         semanticDeclineLabel: 'Declino'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node'
     }
 };

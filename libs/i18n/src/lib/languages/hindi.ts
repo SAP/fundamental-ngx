@@ -597,5 +597,9 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'स्वीकार करें',
         semanticDeclineLabel: 'अस्वीकार करें'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node'
     }
 };
