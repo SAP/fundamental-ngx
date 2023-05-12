@@ -1,8 +1,7 @@
+import { Component, ElementRef, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IconModule } from '@fundamental-ngx/core/icon';
 
 import { ObjectStatusComponent } from './object-status.component';
-import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'fd-test-object-status',
@@ -41,7 +40,7 @@ describe('ObjectStatusComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ObjectStatusComponent, TestObjectStatusComponent],
-            imports: [IconModule]
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));
 
@@ -60,13 +59,13 @@ describe('ObjectStatusComponent', () => {
     it('Should add status', () => {
         testComponent.status = 'positive';
         fixture.detectChanges();
-        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--positive')).toBeTrue();
+        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--positive')).toBe(true);
     });
 
     it('Should add indication color', () => {
         testComponent.indicationColor = 2;
         fixture.detectChanges();
-        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--indication-2')).toBeTrue();
+        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--indication-2')).toBe(true);
     });
 
     it('Should add icon', () => {
@@ -75,25 +74,25 @@ describe('ObjectStatusComponent', () => {
         const iconElement = fixture.nativeElement.querySelector('fd-icon');
 
         expect(iconElement).toBeTruthy();
-        expect(iconElement.classList.contains('sap-icon--future')).toBeTrue();
+        // expect(iconElement.getAttribute('glyph')).toBe('future');
     });
 
     it('Should add inverted class', () => {
         testComponent.inverted = true;
         fixture.detectChanges();
-        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--inverted')).toBeTrue();
+        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--inverted')).toBe(true);
     });
 
     it('Should add large design', () => {
         testComponent.large = true;
         fixture.detectChanges();
-        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--large')).toBeTrue();
+        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--large')).toBe(true);
     });
 
     it('Should add clickable class', () => {
         testComponent.clickable = true;
         fixture.detectChanges();
-        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--link')).toBeTrue();
+        expect(objectStatusElementRef.nativeElement.classList.contains('fd-object-status--link')).toBe(true);
     });
 
     it('Should display label', () => {

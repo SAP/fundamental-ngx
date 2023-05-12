@@ -72,10 +72,10 @@ describe('ProductSwitchBodyComponent', () => {
 
     it('should handle keydown enter', () => {
         const el = fixture.debugElement.query(By.css('li'));
-        spyOn(el.nativeElement, 'click');
+        jest.spyOn(el.nativeElement, 'click');
         el.nativeElement.focus();
         const keyboardEvent = createKeyboardEvent('keydown', ENTER, 'Enter', el.nativeElement);
-        spyOn(keyboardEvent, 'preventDefault');
+        jest.spyOn(keyboardEvent, 'preventDefault');
         el.nativeElement.dispatchEvent(keyboardEvent);
 
         expect(keyboardEvent.preventDefault).toHaveBeenCalled();
@@ -83,7 +83,7 @@ describe('ProductSwitchBodyComponent', () => {
     });
 
     it('should handle no list keydown arrow right', () => {
-        spyOn(componentInstance, '_isListMode').and.returnValue(false);
+        jest.spyOn(componentInstance, '_isListMode').mockReturnValue(false);
         const el = fixture.debugElement.query(By.css('li'));
         const nextEl = el.nativeElement.nextElementSibling;
         el.nativeElement.focus();
@@ -94,7 +94,7 @@ describe('ProductSwitchBodyComponent', () => {
     });
 
     it('should handle keydown arrow right when the last item is focused', () => {
-        spyOn(componentInstance, '_isListMode').and.returnValue(false);
+        jest.spyOn(componentInstance, '_isListMode').mockReturnValue(false);
         const els = fixture.debugElement.queryAll(By.css('li'));
         const el = els[els.length - 1];
         el.nativeElement.focus();
@@ -105,7 +105,7 @@ describe('ProductSwitchBodyComponent', () => {
     });
 
     it('should handle no list keydown arrow left', () => {
-        spyOn(componentInstance, '_isListMode').and.returnValue(false);
+        jest.spyOn(componentInstance, '_isListMode').mockReturnValue(false);
         const el = fixture.debugElement.query(By.css('li'));
         const nextEl = el.nativeElement.nextElementSibling;
         nextEl.focus();
@@ -116,7 +116,7 @@ describe('ProductSwitchBodyComponent', () => {
     });
 
     it('should handle no list keydown arrow down', () => {
-        spyOn(componentInstance, '_isListMode').and.returnValue(false);
+        jest.spyOn(componentInstance, '_isListMode').mockReturnValue(false);
         const el = fixture.debugElement.query(By.css('li'));
         const nextElDown = el.nativeElement.nextElementSibling.nextElementSibling.nextElementSibling;
         el.nativeElement.focus();
@@ -127,7 +127,7 @@ describe('ProductSwitchBodyComponent', () => {
     });
 
     it('should handle no list keydown arrow up', () => {
-        spyOn(componentInstance, '_isListMode').and.returnValue(false);
+        jest.spyOn(componentInstance, '_isListMode').mockReturnValue(false);
         const el = fixture.debugElement.query(By.css('li'));
         const nextElDown = el.nativeElement.nextElementSibling.nextElementSibling.nextElementSibling;
         nextElDown.focus();
@@ -138,7 +138,7 @@ describe('ProductSwitchBodyComponent', () => {
     });
 
     it('should handle list arrow up/down', () => {
-        spyOn(componentInstance, '_isListMode').and.returnValue(true);
+        jest.spyOn(componentInstance, '_isListMode').mockReturnValue(true);
         const el = fixture.debugElement.query(By.css('li'));
         const nextElDown = el.nativeElement.nextElementSibling;
         el.nativeElement.focus();

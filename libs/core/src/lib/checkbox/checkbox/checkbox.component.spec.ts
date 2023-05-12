@@ -6,7 +6,7 @@ import { CheckboxComponent } from './checkbox.component';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { CheckboxModule } from '../checkbox.module';
 
-function getCheckboxInput(fixture: ComponentFixture<any>): any {
+function getCheckboxInput(fixture: ComponentFixture<any>): HTMLInputElement {
     return fixture.nativeElement.querySelector('input');
 }
 
@@ -88,7 +88,7 @@ describe('CheckboxComponent', () => {
     });
 
     it('should be unchecked on double click', fakeAsync(() => {
-        spyOn(checkbox, 'nextValue');
+        jest.spyOn(checkbox, 'nextValue');
         checkbox.nextValue();
         tick(15);
         checkbox.nextValue();
@@ -105,7 +105,7 @@ describe('CheckboxComponent', () => {
         await whenStable(fixture);
 
         const input = getCheckboxInput(fixture);
-        expect(input).toHaveClass('is-success');
+        expect(input.classList.contains('is-success')).toBe(true);
     });
 
     it('should display input label', async () => {
@@ -114,9 +114,9 @@ describe('CheckboxComponent', () => {
         checkboxDetectChanges(checkbox);
         await whenStable(fixture);
 
-        const checkboxLabel = getCheckboxLabel(fixture);
+        const checkboxLabel = getCheckboxLabel(fixture)?.querySelector('.fd-checkbox__text');
 
-        expect(checkboxLabel.innerText).toBe('Option 1');
+        expect(checkboxLabel.innerHTML).toContain('Option 1');
     });
 
     it('should be disabled', async () => {
@@ -127,7 +127,7 @@ describe('CheckboxComponent', () => {
         const input = getCheckboxInput(fixture);
         const checkboxLabel = getCheckboxLabel(fixture);
 
-        spyOn(checkbox, 'nextValue');
+        jest.spyOn(checkbox, 'nextValue');
         checkboxLabel.click();
         expect(input.checked).toBe(false);
         expect(input.disabled).toBe(true);
@@ -234,7 +234,7 @@ describe('CheckboxComponent with external listeners', () => {
     });
 
     it('should propagate the click event to the host component and reflect value properly', () => {
-        const spy = spyOn(hostComponent, 'onClicked');
+        const spy = jest.spyOn(hostComponent, 'onClicked');
 
         labelElement.click();
         fixture.detectChanges();

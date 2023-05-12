@@ -17,14 +17,14 @@ describe('CalendarService', () => {
     });
 
     it('Keydown handler should handle enter key', () => {
-        spyOn(service.onKeySelect, 'next');
+        jest.spyOn(service.onKeySelect, 'next');
         const keyboardEvent: any = { key: 'Enter', preventDefault: () => {} };
         service.onKeydownHandler(keyboardEvent, 10);
         expect(service.onKeySelect.next).toHaveBeenCalledWith(10);
     });
 
     it('Keydown handler should handle space key', () => {
-        spyOn(service.onKeySelect, 'next');
+        jest.spyOn(service.onKeySelect, 'next');
         const keyboardEvent: any = { key: ' ', preventDefault: () => {} };
         service.onKeydownHandler(keyboardEvent, 10);
         expect(service.onKeySelect.next).toHaveBeenCalledWith(10);
@@ -35,7 +35,7 @@ describe('CalendarService', () => {
         service.colAmount = 6;
         const idOfLastElement = service.getId(4, 2);
         const idOfElementFocused = service.getId(0, 2);
-        spyOn(service.onListEndApproach, 'next');
+        jest.spyOn(service.onListEndApproach, 'next');
         const keyboardEvent: any = { key: 'ArrowDown', preventDefault: () => {} };
         service.onKeydownHandler(keyboardEvent, idOfLastElement);
         expect(service.onListEndApproach.next).toHaveBeenCalledWith(idOfElementFocused);
@@ -46,7 +46,7 @@ describe('CalendarService', () => {
         service.colAmount = 10;
         const idOfFirstElement = service.getId(0, 1);
         const idOfElementFocused = service.getId(6, 1);
-        spyOn(service.onListStartApproach, 'next');
+        jest.spyOn(service.onListStartApproach, 'next');
         const keyboardEvent: any = { key: 'ArrowUp', preventDefault: () => {} };
         service.onKeydownHandler(keyboardEvent, idOfFirstElement);
         expect(service.onListStartApproach.next).toHaveBeenCalledWith(idOfElementFocused);
@@ -57,7 +57,7 @@ describe('CalendarService', () => {
         service.colAmount = 4;
         const idOfLastElement = service.getId(6, 3);
         const idOfElementFocused = service.getId(0, 0);
-        spyOn(service.onListEndApproach, 'next');
+        jest.spyOn(service.onListEndApproach, 'next');
         const keyboardEvent: any = { key: 'ArrowRight', preventDefault: () => {} };
         service.onKeydownHandler(keyboardEvent, idOfLastElement);
         expect(service.onListEndApproach.next).toHaveBeenCalledWith(idOfElementFocused);
@@ -68,7 +68,7 @@ describe('CalendarService', () => {
         service.colAmount = 4;
         const idOfFirstElement = service.getId(0, 0);
         const idOfElementFocused = service.getId(6, 3);
-        spyOn(service.onListStartApproach, 'next');
+        jest.spyOn(service.onListStartApproach, 'next');
         const keyboardEvent: any = { key: 'ArrowLeft', preventDefault: () => {} };
         service.onKeydownHandler(keyboardEvent, idOfFirstElement);
         expect(service.onListStartApproach.next).toHaveBeenCalledWith(idOfElementFocused);
@@ -79,7 +79,7 @@ describe('CalendarService', () => {
         service.colAmount = 4;
         const idOfFirstElement = service.getId(3, 3);
         const idOfElementFocused = service.getId(4, 3);
-        spyOn(service.onFocusIdChange, 'next');
+        jest.spyOn(service.onFocusIdChange, 'next');
         const keyboardEvent: any = { key: 'ArrowDown', preventDefault: () => {} };
         service.onKeydownHandler(keyboardEvent, idOfFirstElement);
         expect(service.onFocusIdChange.next).toHaveBeenCalledWith(idOfElementFocused);
@@ -90,7 +90,7 @@ describe('CalendarService', () => {
         service.colAmount = 4;
         const idOfFirstElement = service.getId(3, 3);
         const idOfElementFocused = service.getId(2, 3);
-        spyOn(service.onFocusIdChange, 'next');
+        jest.spyOn(service.onFocusIdChange, 'next');
         const keyboardEvent: any = { key: 'ArrowUp', preventDefault: () => {} };
         service.onKeydownHandler(keyboardEvent, idOfFirstElement);
         expect(service.onFocusIdChange.next).toHaveBeenCalledWith(idOfElementFocused);
@@ -101,7 +101,7 @@ describe('CalendarService', () => {
         service.colAmount = 4;
         const idOfFirstElement = service.getId(3, 0);
         const idOfElementFocused = service.getId(2, 3);
-        spyOn(service.onFocusIdChange, 'next');
+        jest.spyOn(service.onFocusIdChange, 'next');
         const keyboardEvent: any = { key: 'ArrowLeft', preventDefault: () => {} };
         service.onKeydownHandler(keyboardEvent, idOfFirstElement);
         expect(service.onFocusIdChange.next).toHaveBeenCalledWith(idOfElementFocused);
@@ -112,7 +112,7 @@ describe('CalendarService', () => {
         service.colAmount = 4;
         const idOfFirstElement = service.getId(5, 3);
         const idOfElementFocused = service.getId(6, 0);
-        spyOn(service.onFocusIdChange, 'next');
+        jest.spyOn(service.onFocusIdChange, 'next');
         const keyboardEvent: any = { key: 'ArrowRight', preventDefault: () => {} };
         service.onKeydownHandler(keyboardEvent, idOfFirstElement);
         expect(service.onFocusIdChange.next).toHaveBeenCalledWith(idOfElementFocused);

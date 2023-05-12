@@ -59,7 +59,7 @@ describe('PopoverService', () => {
     });
 
     it('should initialise with prepared popover component', () => {
-        spyOn(<any>service, '_refreshTriggerListeners');
+        jest.spyOn(<any>service, '_refreshTriggerListeners');
 
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
 
@@ -72,7 +72,7 @@ describe('PopoverService', () => {
 
     it('should initialise and create popover body only with text', () => {
         const testString = 'teststring';
-        spyOn(<any>service, '_refreshTriggerListeners');
+        jest.spyOn(<any>service, '_refreshTriggerListeners');
         service.stringContent = testString;
 
         service.initialise(componentInstance.triggerRef, componentInstance);
@@ -90,7 +90,7 @@ describe('PopoverService', () => {
     it('should initialise and create popover body with template', () => {
         const template = componentInstance.template;
 
-        spyOn(<any>service, '_refreshTriggerListeners');
+        jest.spyOn(<any>service, '_refreshTriggerListeners');
         service.templateContent = template;
 
         service.initialise(componentInstance.triggerRef, componentInstance);
@@ -109,7 +109,7 @@ describe('PopoverService', () => {
         componentInstance.noArrow = false;
         componentInstance.isOpen = true;
         componentInstance.appendTo = componentInstance.triggerRef;
-        spyOn(service, 'open').and.callThrough();
+        jest.spyOn(service, 'open');
 
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
 
@@ -118,31 +118,31 @@ describe('PopoverService', () => {
         expect(service.noArrow).toBe(false);
         expect(service.open).toHaveBeenCalled();
         expect(service['_overlayRef']).toBeTruthy();
-        expect(service.isOpen).toBeTrue();
-        expect(service['_overlayRef'].hasAttached()).toBeTrue();
+        expect(service.isOpen).toBe(true);
+        expect(service['_overlayRef'].hasAttached()).toBe(true);
         expect(service.appendTo).toBe(componentInstance.triggerRef);
     });
 
     it('should open', () => {
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
 
-        spyOn(service.isOpenChange, 'emit').and.callThrough();
+        jest.spyOn(service.isOpenChange, 'emit');
 
         service.open();
 
         fixture.detectChanges();
 
         expect(service['_overlayRef']).toBeTruthy();
-        expect(service.isOpen).toBeTrue();
+        expect(service.isOpen).toBe(true);
         expect(service.isOpenChange.emit).toHaveBeenCalledWith(true);
-        expect(service['_overlayRef'].hasAttached()).toBeTrue();
+        expect(service['_overlayRef'].hasAttached()).toBe(true);
     });
 
     it('should open and close on refresh passed values', () => {
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
 
-        spyOn(service, 'open').and.callThrough();
-        spyOn(service, 'close').and.callThrough();
+        jest.spyOn(service, 'open');
+        jest.spyOn(service, 'close');
 
         componentInstance.isOpen = true;
 
@@ -151,7 +151,7 @@ describe('PopoverService', () => {
         fixture.detectChanges();
 
         expect(service['_overlayRef']).toBeTruthy();
-        expect(service.isOpen).toBeTrue();
+        expect(service.isOpen).toBe(true);
         expect(service.open).toHaveBeenCalled();
 
         componentInstance.isOpen = false;
@@ -160,7 +160,7 @@ describe('PopoverService', () => {
 
         fixture.detectChanges();
 
-        expect(service.isOpen).toBeFalse();
+        expect(service.isOpen).toBe(false);
         expect(service.close).toHaveBeenCalled();
     });
 
@@ -181,29 +181,29 @@ describe('PopoverService', () => {
     it('should close', () => {
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
 
-        spyOn(service.isOpenChange, 'emit').and.callThrough();
+        jest.spyOn(service.isOpenChange, 'emit');
 
         service.open();
         fixture.detectChanges();
 
         expect(service['_overlayRef']).toBeTruthy();
-        expect(service.isOpen).toBeTrue();
+        expect(service.isOpen).toBe(true);
         expect(service.isOpenChange.emit).toHaveBeenCalledWith(true);
-        expect(service['_overlayRef'].hasAttached()).toBeTrue();
+        expect(service['_overlayRef'].hasAttached()).toBe(true);
 
         service.close();
         fixture.detectChanges();
 
         expect(service['_overlayRef'].hasAttached()).toBeFalsy();
-        expect(service.isOpen).toBeFalse();
+        expect(service.isOpen).toBe(false);
         expect(service.isOpenChange.emit).toHaveBeenCalledWith(false);
     });
 
     it('should toggle', () => {
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
 
-        spyOn(service, 'open').and.callThrough();
-        spyOn(service, 'close').and.callThrough();
+        jest.spyOn(service, 'open');
+        jest.spyOn(service, 'close');
         service.toggle();
         fixture.detectChanges();
 
@@ -231,7 +231,7 @@ describe('PopoverService', () => {
 
         fixture.detectChanges();
 
-        spyOn(service, 'close').and.callThrough();
+        jest.spyOn(service, 'close');
 
         (<any>service)._overlayRef.detach();
 
@@ -254,7 +254,7 @@ describe('PopoverService', () => {
 
         fixture.detectChanges();
 
-        spyOn(service, 'close').and.callThrough();
+        jest.spyOn(service, 'close');
 
         componentInstance.popoverBody.onClose.next();
 
@@ -292,9 +292,9 @@ describe('PopoverService', () => {
     it('should toggle open state on trigger event', () => {
         componentInstance.triggers = ['mouseenter', 'keydown'];
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
-        spyOn(service, 'toggle').and.callThrough();
-        spyOn(service, 'open').and.callThrough();
-        spyOn(service, 'close').and.callThrough();
+        jest.spyOn(service, 'toggle');
+        jest.spyOn(service, 'open');
+        jest.spyOn(service, 'close');
         // should trigger the toggling
         componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('mouseenter'));
         expect(service.toggle).toHaveBeenCalledTimes(1);
@@ -323,9 +323,9 @@ describe('PopoverService', () => {
             { trigger: 'mouseleave', closeAction: true, openAction: false }
         ];
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
-        spyOn(service, 'toggle').and.callThrough();
-        spyOn(service, 'open').and.callThrough();
-        spyOn(service, 'close').and.callThrough();
+        jest.spyOn(service, 'toggle');
+        jest.spyOn(service, 'open');
+        jest.spyOn(service, 'close');
 
         expect(service.isOpen).toBe(false);
         componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('click'));

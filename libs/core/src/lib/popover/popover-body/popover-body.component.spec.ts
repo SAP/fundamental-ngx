@@ -28,7 +28,7 @@ describe('PopoverBodyComponent', () => {
     });
 
     it('should handle escape key', () => {
-        spyOn(component.onClose, 'next');
+        jest.spyOn(component.onClose, 'next');
         const keyboardEvent: any = { key: ESCAPE, keyCode: ESCAPE, stopPropagation: () => {} };
         component._closeOnEscapeKey = true;
         component.bodyKeyupHandler(keyboardEvent);
@@ -36,7 +36,7 @@ describe('PopoverBodyComponent', () => {
     });
 
     xit('should change arrow classes', () => {
-        spyOn(<any>component, '_addMarginStyle');
+        jest.spyOn(<any>component, '_addMarginStyle');
 
         const firstPosition: ConnectedPosition = DefaultPositions[0];
 
@@ -48,7 +48,7 @@ describe('PopoverBodyComponent', () => {
     });
 
     xit('should change arrow classes 2', () => {
-        spyOn(<any>component, '_addMarginStyle');
+        jest.spyOn(<any>component, '_addMarginStyle');
 
         const firstPosition: ConnectedPosition = DefaultPositions[5];
 

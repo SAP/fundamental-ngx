@@ -75,14 +75,14 @@ describe('TimePickerComponent', () => {
             component.allowNull = false;
             component._timeInputChanged('3:30 PM');
             expect(component.time?.toTimeString()).toEqual(newTime.toTimeString());
-            expect(component.time?.isDateValid()).toBeTrue();
-            expect(component._isInvalidTimeInput).toBeFalse();
+            expect(component.time?.isDateValid()).toBe(true);
+            expect(component._isInvalidTimeInput).toBe(false);
         });
         it('should be in invalid state if input value can not be parsed', () => {
             component.allowNull = false;
             component._timeInputChanged('hello');
-            expect(component.time?.isDateValid()).toBeFalse();
-            expect(component._isInvalidTimeInput).toBeTrue();
+            expect(component.time?.isDateValid()).toBe(false);
+            expect(component._isInvalidTimeInput).toBe(true);
         });
 
         describe('input field is empty', () => {
@@ -94,18 +94,18 @@ describe('TimePickerComponent', () => {
             it('should be invalid if "allowNull=false"', () => {
                 component.allowNull = false;
                 component._timeInputChanged('');
-                expect(component._isInvalidTimeInput).toBeTrue();
+                expect(component._isInvalidTimeInput).toBe(true);
             });
             it('should be valid if "allowNull=true"', () => {
                 component.allowNull = true;
                 component._timeInputChanged('');
-                expect(component._isInvalidTimeInput).toBeFalse();
+                expect(component._isInvalidTimeInput).toBe(false);
             });
         });
     });
 
     it('should not fire "onChange" if focus has gone but input field stays the same', () => {
-        const onChangeSpy = spyOn(component, 'onChange');
+        const onChangeSpy = jest.spyOn(component, 'onChange');
         component._timeInputChanged('1:30 PM');
         expect(onChangeSpy).toHaveBeenCalledTimes(1);
         component._timeInputChanged('1:30 PM');
@@ -113,11 +113,11 @@ describe('TimePickerComponent', () => {
     });
 
     it('should not fire "onChange" if time component change event brings the same model as the current', () => {
-        const onChangeSpy = spyOn(component, 'onChange');
+        const onChangeSpy = jest.spyOn(component, 'onChange');
         const time = new FdDate().setTime(8, 15, 0);
         component._timeComponentValueChanged(time);
         expect(onChangeSpy).toHaveBeenCalledTimes(1);
-        expect(onChangeSpy).toHaveBeenCalledOnceWith(time);
+        expect(onChangeSpy).toHaveBeenCalledWith(time);
         component._timeComponentValueChanged(new FdDate().setTime(8, 15, 0));
         expect(onChangeSpy).toHaveBeenCalledTimes(1);
     });
@@ -128,7 +128,7 @@ describe('TimePickerComponent', () => {
         const event = {
             stopPropagation(): void {}
         };
-        spyOn(event, 'stopPropagation').and.callThrough();
+        jest.spyOn(event, 'stopPropagation');
         component._inputGroupClicked(<any>event);
         expect(event.stopPropagation).toHaveBeenCalled();
         expect(component.isOpen).toBe(true);
@@ -182,13 +182,13 @@ describe('TimePickerComponent', () => {
 
     it('should call onChange when time from time picker changes', () => {
         const time = new FdDate().setTime(12, 0, 0);
-        spyOn(component, 'onChange');
+        jest.spyOn(component, 'onChange');
         component._timeComponentValueChanged(time);
         expect(component.onChange).toHaveBeenCalledWith(time);
     });
 
     it('should hide message on open', () => {
-        const hideSpy = spyOn((<any>component)._popoverFormMessage, 'hide');
+        const hideSpy = jest.spyOn((<any>component)._popoverFormMessage, 'hide');
         component._setIsOpen(true);
         expect(hideSpy).toHaveBeenCalled();
     });
@@ -196,7 +196,7 @@ describe('TimePickerComponent', () => {
     it('should show message on close', () => {
         component.isOpen = true;
 
-        const showSpy = spyOn((<any>component)._popoverFormMessage, 'show');
+        const showSpy = jest.spyOn((<any>component)._popoverFormMessage, 'show');
         component._setIsOpen(false);
         expect(showSpy).toHaveBeenCalled();
     });

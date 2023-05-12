@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 
-import { SplitterModule } from '../splitter.module';
 import { SplitterPaginationComponent } from './splitter-pagination.component';
 import { SplitterComponent } from './../splitter.component';
 
@@ -12,7 +11,7 @@ describe('SplitterPaginationComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [SplitterModule],
+            declarations: [SplitterPaginationComponent],
             providers: [SplitterComponent]
         }).compileComponents();
     }));
@@ -29,7 +28,7 @@ describe('SplitterPaginationComponent', () => {
     });
 
     it('should change page', () => {
-        const spy = spyOn(component.onPageChange, 'emit').and.callThrough();
+        const spy = jest.spyOn(component.onPageChange, 'emit');
         const pages = ['1', '2', '3'];
 
         component.pages = pages;

@@ -1,11 +1,10 @@
 {
     "name": "docs",
-    "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "apps/docs/src",
     "projectType": "application",
     "prefix": "fundamental-ngx",
     "generators": {
-        "@nx/angular:component": {
+        "@nx/schematics:component": {
             "style": "scss"
         }
     },
@@ -145,7 +144,7 @@
                     },
                     {
                         "glob": "**/*",
-                        "input": "libs/docs/shared/src/lib/i18n/examples",
+                        "input": "libs/docs/i18n/examples",
                         "output": "./docs/platform/i18n/examples"
                     },
                     {
