@@ -1,3 +1,12 @@
+# [0.41.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.41.0-rc.1...v0.41.0-rc.2) (2023-05-12)
+
+
+### Bug Fixes
+
+* **platform:** checkbox focus/keyboard nav issue in platform table ([#9762](https://github.com/SAP/fundamental-ngx/issues/9762)) ([01b1e31](https://github.com/SAP/fundamental-ngx/commit/01b1e31003598d90e2b253cb1e5b4f69d138ae6e))
+
+
+
 # [0.41.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.41.0-rc.0...v0.41.0-rc.1) (2023-05-12)
 
 
