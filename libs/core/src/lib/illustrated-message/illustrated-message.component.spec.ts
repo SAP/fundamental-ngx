@@ -47,24 +47,24 @@ describe('IllustratedMessageComponent', () => {
     });
 
     it('Should have scene type by default', () => {
-        expect(
-            illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--scene')
-        ).toBeTrue();
+        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--scene')).toBe(
+            true
+        );
     });
 
     it('Should add dialog type', () => {
         testComponent.type = 'dialog';
         fixture.detectChanges();
-        expect(
-            illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--dialog')
-        ).toBeTrue();
+        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--dialog')).toBe(
+            true
+        );
     });
 
     it('Should add spot type', () => {
         testComponent.type = 'spot';
         fixture.detectChanges();
-        expect(
-            illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--spot')
-        ).toBeTrue();
+        expect(illustratedMessageElementRef.nativeElement.classList.contains('fd-illustrated-message--spot')).toBe(
+            true
+        );
     });
 });

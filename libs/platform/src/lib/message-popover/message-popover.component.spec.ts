@@ -129,6 +129,6 @@ describe('MessagePopoverComponent', () => {
         component._currentErrorType = 'error';
         component._filterErrors();
 
-        expect(component._filteredErrors.every((e) => e.errors.every((error) => error.type === 'error'))).toBeTrue();
+        expect(component._filteredErrors.every((e) => e.errors.every((error) => error.type === 'error'))).toBe(true);
     });
 });

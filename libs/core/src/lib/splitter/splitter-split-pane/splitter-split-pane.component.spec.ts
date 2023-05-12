@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 
-import { SplitterModule } from '../splitter.module';
 import { SplitterSplitPaneComponent } from './splitter-split-pane.component';
 
 describe('SplitterSplitPaneComponent', () => {
@@ -11,7 +10,7 @@ describe('SplitterSplitPaneComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [SplitterModule]
+            declarations: [SplitterSplitPaneComponent]
         }).compileComponents();
     }));
 
@@ -27,7 +26,7 @@ describe('SplitterSplitPaneComponent', () => {
     });
 
     it('should toggle on canvas', () => {
-        const spy = spyOn(component.toggleOnCanvas, 'emit').and.callThrough();
+        const spy = jest.spyOn(component.toggleOnCanvas, 'emit');
 
         component.hideFromCanvas();
         fixture.detectChanges();

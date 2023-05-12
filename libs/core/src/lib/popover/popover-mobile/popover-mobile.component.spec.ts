@@ -66,7 +66,7 @@ describe('PopoverMobileComponent', () => {
 
     it('should destroy', () => {
         popoverMobileComponent.dialogRef = new PopoverMobileDialogRefStub();
-        spyOn(popoverMobileComponent.dialogRef, 'close');
+        jest.spyOn(popoverMobileComponent.dialogRef, 'close');
 
         popoverMobileComponent.ngOnDestroy();
 
@@ -75,7 +75,7 @@ describe('PopoverMobileComponent', () => {
 
     it('should close', () => {
         popoverMobileComponent.dialogRef = new PopoverMobileDialogRefStub();
-        spyOn(popoverMobileComponent.dialogRef, 'close');
+        jest.spyOn(popoverMobileComponent.dialogRef, 'close');
 
         popoverMobileComponent.close();
 

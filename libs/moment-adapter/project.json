@@ -59,13 +59,18 @@
             }
         },
         "test": {
-            "executor": "@angular-devkit/build-angular:karma",
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
             "options": {
-                "main": "libs/moment-adapter/src/test.ts",
-                "tsConfig": "libs/moment-adapter/tsconfig.spec.json",
-                "karmaConfig": "libs/moment-adapter/karma.conf.js"
+                "jestConfig": "libs/moment-adapter/jest.config.ts",
+                "passWithNoTests": true
             },
-            "outputs": ["{workspaceRoot}/coverage/libs/moment-adapter"]
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
+            }
         }
     },
     "generators": {

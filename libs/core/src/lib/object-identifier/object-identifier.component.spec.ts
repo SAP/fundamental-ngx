@@ -54,17 +54,17 @@ describe('ObjectIdentifierComponent', () => {
         fixture.detectChanges();
         expect(
             testComponent.objectIdentifierElementRef.nativeElement.classList.contains('fd-object-identifier--medium')
-        ).toBeTrue();
+        ).toBe(true);
     });
 
     it('Should add classes to title', () => {
         testComponent.bold = true;
         fixture.detectChanges();
-        expect(testComponent.getTitleElementClassList().contains('fd-object-identifier__title--bold')).toBeTrue();
+        expect(testComponent.getTitleElementClassList().contains('fd-object-identifier__title--bold')).toBe(true);
     });
 
     it('Should add class to fd-link', () => {
         fixture.detectChanges();
-        expect(testComponent.linkElementRef.nativeElement.classList.contains('fd-object-identifier__link')).toBeTrue();
+        expect(testComponent.linkElementRef.nativeElement.classList.contains('fd-object-identifier__link')).toBe(true);
     });
 });

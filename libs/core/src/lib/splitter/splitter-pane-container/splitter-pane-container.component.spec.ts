@@ -1,12 +1,12 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 
 import { ROOT_PAGE } from '../constants';
-import { SplitterModule } from '../splitter.module';
 import { SplitterSplitPaneComponent } from '../splitter-split-pane/splitter-split-pane.component';
-import { SplitterPaneContainerComponent } from './splitter-pane-container.component';
+import { NoDefaultPanePipe, SplitterPaneContainerComponent } from './splitter-pane-container.component';
+import { SplitterComponent } from '../splitter.component';
 
 @Component({
     template: `
@@ -41,8 +41,14 @@ describe('SplitterPaneContainerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [SplitterHostComponent],
-            imports: [SplitterModule]
+            declarations: [
+                SplitterHostComponent,
+                SplitterComponent,
+                SplitterPaneContainerComponent,
+                SplitterSplitPaneComponent,
+                NoDefaultPanePipe
+            ],
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));
 
@@ -60,7 +66,7 @@ describe('SplitterPaneContainerComponent', () => {
     });
 
     it('should resize', () => {
-        const spy = spyOn(paneContainerComponent.resize, 'emit').and.callThrough();
+        const spy = jest.spyOn(paneContainerComponent.resize, 'emit');
 
         paneContainerComponent._startResize();
         fixture.detectChanges();

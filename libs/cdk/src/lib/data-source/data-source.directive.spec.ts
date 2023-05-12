@@ -61,13 +61,11 @@ describe('DataSourceDirective', () => {
     });
 
     it('should emit new data', fakeAsync(() => {
-        const emitSpy = spyOn(directive.dataChanged, 'emit').and.callThrough();
+        const emitSpy = jest.spyOn(directive.dataChanged, 'emit');
 
         directive.dataSource = arrayData;
 
         tick(2000);
-
-        console.log(arrayData);
 
         expect(emitSpy).toHaveBeenCalled();
         expect(emitSpy).toHaveBeenCalledWith(arrayData);

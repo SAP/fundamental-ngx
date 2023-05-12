@@ -54,14 +54,14 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handle content density when compact input is not provided', () => {
-        spyOn(component, 'buildComponentCssClass');
+        jest.spyOn(component, 'buildComponentCssClass');
         component.ngOnInit();
         expect(component._contentDensityObserver.isCompact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
         expect(component.buildComponentCssClass).toHaveBeenCalled();
     });
 
     it('should addEventListener to input during ngAfterViewInit and handle keydown', async () => {
-        spyOn(component, 'handleKeyDown');
+        jest.spyOn(component, 'handleKeyDown');
         await whenStable(fixture);
         component.ngAfterViewInit();
 
@@ -79,8 +79,8 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handleKeyDown on ArrowLeft when last token is focused', () => {
-        spyOn(component.input.nativeElement, 'focus');
-        spyOn(component, 'focusTokenElement');
+        jest.spyOn(component.input.nativeElement, 'focus');
+        jest.spyOn(component, 'focusTokenElement');
         const event = new KeyboardEvent('keydown', {
             key: 'ArrowLeft'
         });
@@ -91,8 +91,8 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handleKeyDown on ArrowRight when last token is focused', () => {
-        spyOn(component.input.nativeElement, 'focus');
-        spyOn(component, 'focusTokenElement');
+        jest.spyOn(component.input.nativeElement, 'focus');
+        jest.spyOn(component, 'focusTokenElement');
         const event = new KeyboardEvent('keydown', {
             key: 'ArrowRight'
         });
@@ -103,7 +103,7 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handleKeyDown on ArrowRight when second to last token is focused', () => {
-        spyOn(component, 'focusTokenElement');
+        jest.spyOn(component, 'focusTokenElement');
         const event = new KeyboardEvent('keydown', {
             key: 'ArrowRight'
         });
@@ -162,9 +162,9 @@ describe('TokenizerComponent', () => {
 
     it('should focus a token element', async () => {
         component.tokenList.forEach((token) =>
-            spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'focus')
+            jest.spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'focus')
         );
-        spyOn(component, 'handleKeyDown');
+        jest.spyOn(component, 'handleKeyDown');
 
         component.focusTokenElement(1);
 
@@ -180,8 +180,8 @@ describe('TokenizerComponent', () => {
     it('should handle resize - getting smaller', () => {
         fixture.componentInstance.compact = true;
         fixture.detectChanges();
-        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
-        spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
+        jest.spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
+        jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(2);
         component.previousElementWidth = 2;
         component.onResize();
         component.moreTokensLeft.length = 0;
@@ -198,10 +198,10 @@ describe('TokenizerComponent', () => {
         fixture.componentInstance.compact = true;
         fixture.detectChanges();
         // need to collapse the tokens before running expand
-        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
-        spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
+        jest.spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
+        jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(2);
         component.onResize();
-        component.elementRef().nativeElement.getBoundingClientRect.and.returnValue({ width: 3 });
+        component.elementRef().nativeElement.getBoundingClientRect.mockReturnValue({ width: 3 });
         component.previousElementWidth = 1;
         component.onResize();
 
@@ -215,10 +215,10 @@ describe('TokenizerComponent', () => {
         fixture.componentInstance.compact = true;
         fixture.detectChanges();
         // need to collapse the tokens before running expand
-        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
-        spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
+        jest.spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
+        jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(2);
         component.onResize();
-        component.elementRef().nativeElement.getBoundingClientRect.and.returnValue({ width: 3 });
+        component.elementRef().nativeElement.getBoundingClientRect.mockReturnValue({ width: 3 });
         component.previousElementWidth = 1;
         component.onResize();
 
@@ -231,13 +231,13 @@ describe('TokenizerComponent', () => {
 
     it('should get the combined token width', () => {
         component.tokenList.forEach((token) => {
-            spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
+            jest.spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
         });
-        spyOn(component.input.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 } as DOMRect);
+        jest.spyOn(component.input.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 } as DOMRect);
     });
 
     it('should handle resize', () => {
-        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
+        jest.spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
 
         component.onResize();
 
@@ -247,11 +247,11 @@ describe('TokenizerComponent', () => {
     it('should get the hidden cozy token count AfterViewChecked', async () => {
         fixture.componentInstance.compact = false;
 
-        spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ left: 1 });
+        jest.spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').mockReturnValue({ left: 1 });
         component.tokenList.forEach((token) => {
-            spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').and.returnValue({ right: 0 });
+            jest.spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').mockReturnValue({ right: 0 });
         });
-        spyOnProperty(component.tokenizerInnerEl.nativeElement, 'scrollWidth').and.returnValue(5);
+        jest.spyOn(component.tokenizerInnerEl.nativeElement, 'scrollWidth', 'get').mockReturnValue(5);
 
         component.ngAfterViewInit();
 

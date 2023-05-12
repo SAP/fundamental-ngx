@@ -28,6 +28,6 @@ describe('NotificationHeaderComponent', () => {
     it('should apply proper css classes', async () => {
         await whenStable(fixture);
 
-        expect(fixture.nativeElement).toHaveClass('fd-notification__header');
+        expect(fixture.nativeElement.classList.contains('fd-notification__header')).toBe(true);
     });
 });

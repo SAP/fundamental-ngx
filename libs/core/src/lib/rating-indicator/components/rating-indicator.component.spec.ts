@@ -33,24 +33,24 @@ describe('RatingIndicatorComponent', () => {
     it(`should have available to select halves`, () => {
         component.allowHalves = true;
         component.buildComponentCssClass();
-        expect(elementRef.nativeElement.classList.contains(`${prefix}--half-star`)).toBeTrue();
+        expect(elementRef.nativeElement.classList.contains(`${prefix}--half-star`)).toBe(true);
     });
 
     it(`should have compact icon`, () => {
         component.size = 'compact';
         component.buildComponentCssClass();
-        expect(elementRef.nativeElement.classList.contains(`${prefix}--${component.size}`)).toBeTrue();
+        expect(elementRef.nativeElement.classList.contains(`${prefix}--${component.size}`)).toBe(true);
     });
 
     it(`should use custom rating icons`, () => {
         component.ratedIcon = 'test-icon-favorite';
         component.unratedIcon = 'test-icon-unfavorite';
         component.buildComponentCssClass();
-        expect(elementRef.nativeElement.classList.contains(`${prefix}--icon`)).toBeTrue();
+        expect(elementRef.nativeElement.classList.contains(`${prefix}--icon`)).toBe(true);
     });
 
     it(`should have correct viewValue`, () => {
-        const ratingChangedSpy = spyOn(component.ratingChanged, 'emit');
+        const ratingChangedSpy = jest.spyOn(component.ratingChanged, 'emit');
         component.onSelect(2);
         expect(ratingChangedSpy).toHaveBeenCalledWith(2);
     });

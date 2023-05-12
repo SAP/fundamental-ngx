@@ -42,13 +42,17 @@ describe('MicroProcessFlowComponent', () => {
     });
 
     it('should paginate one step further', () => {
+        jest.spyOn(
+            fixture.nativeElement.querySelector('.fd-micro-process-flow__wrapper'),
+            'offsetWidth',
+            'get'
+        ).mockReturnValue(100);
         component.microProcessFlow.goNext();
         fixture.detectChanges();
 
-        const previousItemsCount = fixture.nativeElement.querySelector(
-            '.fd-micro-process-flow__link-previous'
-        ).innerText;
-        expect(previousItemsCount).toEqual('1');
+        const previousItemsCount = fixture.nativeElement.querySelector('.fd-micro-process-flow__link-previous');
+        expect(previousItemsCount).toBeTruthy();
+        expect(parseInt(previousItemsCount.innerHTML, 10)).toBe(1);
         expect(component.microProcessFlow.previousItemsCount).toEqual(1);
     });
 

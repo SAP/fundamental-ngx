@@ -45,19 +45,19 @@ describe('InfoLabelComponent', () => {
     it('Should add numeric label type', () => {
         testComponent.type = 'numeric';
         fixture.detectChanges();
-        expect(infoLabelElementRef.nativeElement.classList.contains('fd-info-label--numeric')).toBeTrue();
+        expect(infoLabelElementRef.nativeElement.classList.contains('fd-info-label--numeric')).toBe(true);
     });
 
     it('Should add icon label type', () => {
         testComponent.type = 'icon';
         fixture.detectChanges();
-        expect(infoLabelElementRef.nativeElement.classList.contains('fd-info-label--icon')).toBeTrue();
+        expect(infoLabelElementRef.nativeElement.classList.contains('fd-info-label--icon')).toBe(true);
     });
 
     it('Should add accent color', () => {
         testComponent.color = '2';
         fixture.detectChanges();
-        expect(infoLabelElementRef.nativeElement.classList.contains('fd-info-label--accent-color-2')).toBeTrue();
+        expect(infoLabelElementRef.nativeElement.classList.contains('fd-info-label--accent-color-2')).toBe(true);
     });
 
     it('Should add icon', () => {
@@ -66,7 +66,7 @@ describe('InfoLabelComponent', () => {
         const iconElement = fixture.nativeElement.querySelector('fd-icon');
 
         expect(iconElement).toBeTruthy();
-        expect(iconElement.classList.contains('sap-icon--future')).toBeTrue();
+        expect(iconElement.classList.contains('sap-icon--future')).toBe(true);
     });
 
     it('Should display label', () => {

@@ -37,26 +37,26 @@ describe('CardCounterComponent', () => {
     });
 
     it('should add className to host', () => {
-        expect(debugElement.nativeElement.className.includes(CLASS_NAME.cardCounter)).toBeTrue();
+        expect(debugElement.nativeElement.className.includes(CLASS_NAME.cardCounter)).toBe(true);
     });
 
     describe('object status', () => {
         it('should add className to host', () => {
-            expect(debugElement.nativeElement.className.includes('fd-object-status')).toBeTrue();
+            expect(debugElement.nativeElement.className.includes('fd-object-status')).toBe(true);
         });
 
         it('should add corresponding status modifier', () => {
             fixture.componentInstance.status = 'positive';
             fixture.detectChanges();
-            expect(debugElement.nativeElement.className.includes('fd-object-status--positive')).toBeTrue();
+            expect(debugElement.nativeElement.className.includes('fd-object-status--positive')).toBe(true);
 
             fixture.componentInstance.status = 'negative';
             fixture.detectChanges();
-            expect(debugElement.nativeElement.className.includes('fd-object-status--negative')).toBeTrue();
+            expect(debugElement.nativeElement.className.includes('fd-object-status--negative')).toBe(true);
 
             fixture.componentInstance.status = 'informative';
             fixture.detectChanges();
-            expect(debugElement.nativeElement.className.includes('fd-object-status--informative')).toBeTrue();
+            expect(debugElement.nativeElement.className.includes('fd-object-status--informative')).toBe(true);
         });
     });
 });
