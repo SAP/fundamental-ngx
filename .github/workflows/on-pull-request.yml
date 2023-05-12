@@ -43,7 +43,7 @@ jobs:
     build_test:
         needs: initialize_cloud
         runs-on: ubuntu-latest
-        name: Run affected Build and Test commands
+        name: Run affected Build, Lint and test commands
         defaults:
             run:
                 working-directory: ${{ github.workspace }}
@@ -62,7 +62,7 @@ jobs:
             - uses: wagoid/commitlint-github-action@v3
               name: Commit lint
 
-            - name: Run Build and Lint
+            - name: Run Build, Lint and test commands
               uses: ./.github/actions/parallel-commands
               with:
                   parallel-commands: |
