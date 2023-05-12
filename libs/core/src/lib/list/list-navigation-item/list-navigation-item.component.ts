@@ -5,6 +5,7 @@ import {
     ContentChild,
     ContentChildren,
     ElementRef,
+    forwardRef,
     HostBinding,
     HostListener,
     Input,
@@ -82,7 +83,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     _text: ListNavigationItemTextDirective;
 
     /** @hidden */
-    @ContentChildren(ListNavigationItemComponent, { descendants: true })
+    @ContentChildren(forwardRef(() => ListNavigationItemComponent), { descendants: true })
     _childItems: QueryList<ListNavigationItemComponent>;
 
     /** @hidden */
@@ -117,7 +118,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
         }
         this._innerText = this._text.elementRef.nativeElement.textContent ?? '';
         this._ariaLevel = 1;
-        this._childItems.forEach((item) => {
+        this._childItems?.forEach((item) => {
             item._ariaLevel = 2;
         });
     }
