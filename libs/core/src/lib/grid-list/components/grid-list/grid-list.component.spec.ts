@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { GridListModule } from '../../grid-list.module';
 import { GridListSelectionMode } from '../../models/grid-list-selection.models';
 import { GridListComponent } from './grid-list.component';
+import { GridListItemType } from '../grid-list-item/grid-list-item.component';
 
 @Component({
     selector: 'fd-test-grid-list',
@@ -44,7 +45,7 @@ class TestComponent {
 
     selectionMode: GridListSelectionMode = 'none';
 
-    list = [
+    list: Array<{ id: number; title: string; description: string; type?: GridListItemType; counter?: number }> = [
         {
             id: 1,
             title: 'Title 1',
@@ -142,7 +143,7 @@ describe('GridListComponent', () => {
     it('toolbar should contain counter and nav indicator', () => {
         const counters = fixture.debugElement.queryAll(By.css('.fd-grid-list__item .fd-grid-list__item-counter'));
         expect(counters.length).toEqual(1);
-        expect(counters[0].nativeElement.innerText?.toString()).toEqual('15');
+        expect(counters[0].nativeElement.innerHTML.toString()).toEqual('15');
 
         const navIndicators = fixture.debugElement.queryAll(
             By.css('.fd-grid-list__item .fd-grid-list__item-navigation-indicator')
