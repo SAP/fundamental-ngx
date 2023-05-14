@@ -129,7 +129,7 @@
     "eslint": "8.34.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-jsdoc": "39.6.4",
+    "eslint-plugin-jsdoc": "44.2.3",
     "eslint-plugin-json": "3.1.0",
     "eslint-plugin-markdown": "3.0.0",
     "eslint-plugin-prefer-arrow": "1.2.3",
