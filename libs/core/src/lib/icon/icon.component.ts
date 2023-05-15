@@ -35,9 +35,6 @@ const BusinessSuiteInAppSymbol_PREFIX = 'businessSuiteInAppSymbols';
             useExisting: IconComponent
         }
     ],
-    host: {
-        role: 'img'
-    },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

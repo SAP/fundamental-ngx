@@ -40,7 +40,12 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     /** The trigger events that will open/close the inline help component.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
-    triggers: (string | TriggerConfig)[] = [{ trigger: 'click', openAction: true, closeAction: true }];
+    triggers: (string | TriggerConfig)[] = [
+        { trigger: 'mouseenter', openAction: true, closeAction: false },
+        { trigger: 'mouseleave', openAction: false, closeAction: true },
+        { trigger: 'focusin', openAction: true, closeAction: false },
+        { trigger: 'focusout', openAction: false, closeAction: true }
+    ];
 
     /** Whether the popover should have an arrow. */
     @Input()
@@ -62,6 +67,17 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
             template: content instanceof TemplateRef ? content : null
         };
         this._popoverService.updateContent(text, template);
+
+        let srElement;
+        if (typeof content === 'string') {
+            srElement = document.createElement('span');
+            srElement.innerText = content;
+        } else {
+            srElement = template;
+        }
+
+        srElement.style.cssText = `position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);`;
+        this._elementRef.nativeElement.append(srElement);
     }
 
     /** @hidden */
@@ -103,9 +119,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         this._bodyRole = 'tooltip';
         this._describedBy = `fd-inline-help-${inlineHelpId++}`;
         this._elementRef.nativeElement.setAttribute('aria-describedby', this._describedBy);
-        this._elementRef.nativeElement.setAttribute('aria-labelledby', this._describedBy);
         this._bodyId = this._describedBy;
-        this.disableScrollbar = true;
         this._applyAdditionalInlineHelpClass();
         this._popoverService.initialise(this._elementRef, this);
     }
