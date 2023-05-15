@@ -57,8 +57,8 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         dismissLabel: 'Закрыть'
     },
     coreNavigation: {
-        mainNavigation: 'Main Navigation',
-        navigationPath: 'Navigation Path'
+        mainNavigation: 'Главная Навигация',
+        navigationPath: 'Путь навигации'
     },
     coreNestedList: {
         linkItemAriaLabel: 'Элемент дерева {{ itemDetails }}, {{ index }} из {{ total }}{{ selectedDescription }}'

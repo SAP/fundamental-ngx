@@ -43,8 +43,8 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         dismissLabel: 'გაუქმება'
     },
     coreNavigation: {
-        mainNavigation: 'Main Navigation',
-        navigationPath: 'Navigation Path'
+        mainNavigation: 'მთავარი ნავიგაცია',
+        navigationPath: 'ნავიგაციის გზა'
     },
     coreNestedList: {
         linkItemAriaLabel:
