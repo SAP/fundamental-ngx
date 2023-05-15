@@ -48,6 +48,10 @@ export interface FdLanguage {
     coreMessageStrip: {
         dismissLabel: FdLanguageKey;
     };
+    coreNavigation: {
+        mainNavigation: FdLanguageKey;
+        navigationPath: FdLanguageKey;
+    };
     coreNestedList: {
         /**
          * @param itemDetails

@@ -42,6 +42,10 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Congedare'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel: "Elemento dell'albero {{ itemDetails }}, {{ index }} di {{ total }}{{ selectedDescription }}"
     },

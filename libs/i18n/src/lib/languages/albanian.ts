@@ -42,6 +42,10 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Largoje'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel: 'Artikulli i pemës {{ itemDetails }}, {{ index }} nga {{ total }}{{ selectedDescription }}'
     },

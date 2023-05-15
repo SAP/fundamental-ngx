@@ -42,6 +42,10 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'खारिज करें'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel: 'ट्री वस्तु {{ itemDetails }}, {{ index }} का {{ total }}{{ selectedDescription }}'
     },
