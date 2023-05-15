@@ -1,3 +1,12 @@
+# [0.41.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.41.0-rc.2...v0.41.0-rc.3) (2023-05-15)
+
+
+### Bug Fixes
+
+* **core,platform,cx:** navigation components had missing/incorrect roles ([#9818](https://github.com/SAP/fundamental-ngx/issues/9818)) ([4bae7a3](https://github.com/SAP/fundamental-ngx/commit/4bae7a3c59a9bb71328ca602274d1b9a6058a46d))
+
+
+
 # [0.41.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.41.0-rc.1...v0.41.0-rc.2) (2023-05-12)
 
 
