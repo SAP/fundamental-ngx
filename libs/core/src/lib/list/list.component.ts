@@ -15,7 +15,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ListItemComponent } from './list-item/list-item.component';
-import { merge, Observable, Subject, Subscription } from 'rxjs';
+import { merge, Observable, Subject } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 import {
     FocusEscapeDirection,
@@ -40,8 +40,7 @@ import { ListUnreadIndicator } from './list-unread-indicator.interface';
     selector: '[fd-list], [fdList]',
     templateUrl: `./list.component.html`,
     host: {
-        class: 'fd-list',
-        role: 'list'
+        class: 'fd-list'
     },
     styleUrls: ['./list.component.scss', '../../../../cdk/src/lib/utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -118,6 +117,10 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     hasNavigation = false;
 
     /** @hidden */
+    @HostBinding('attr.role')
+    _role = 'list'; // default role for lists
+
+    /** @hidden */
     @ContentChildren(LIST_ITEM_COMPONENT)
     items: QueryList<ListItemInterface>;
 
@@ -128,9 +131,6 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     /** @hidden */
     @ContentChildren(ListFocusItem)
     private _focusItems: QueryList<ListFocusItem>;
-
-    /** @hidden */
-    private _subscriptions = new Subscription();
 
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
@@ -233,6 +233,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     private _recheckLinks(): void {
         const items = this.items.filter((item) => item.link);
         this.hasNavigation = items.length > 0;
+        this.hasNavigation ? (this._role = 'navigation') : (this._role = 'list');
     }
 
     /** @hidden */
