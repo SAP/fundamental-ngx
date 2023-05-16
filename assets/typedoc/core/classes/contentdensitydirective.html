@@ -217,7 +217,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/content-density/directives/content-density.directive.ts#L50">libs/core/src/lib/content-density/directives/content-density.directive.ts:50</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/core/src/lib/content-density/directives/content-density.directive.ts#L50">libs/core/src/lib/content-density/directives/content-density.directive.ts:50</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -247,7 +247,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/content-density/directives/content-density.directive.ts#L63">libs/core/src/lib/content-density/directives/content-density.directive.ts:63</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/core/src/lib/content-density/directives/content-density.directive.ts#L63">libs/core/src/lib/content-density/directives/content-density.directive.ts:63</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -277,7 +277,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/content-density/directives/content-density.directive.ts#L32">libs/core/src/lib/content-density/directives/content-density.directive.ts:32</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/core/src/lib/content-density/directives/content-density.directive.ts#L32">libs/core/src/lib/content-density/directives/content-density.directive.ts:32</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -306,7 +306,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/content-density/directives/content-density.directive.ts#L76">libs/core/src/lib/content-density/directives/content-density.directive.ts:76</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/core/src/lib/content-density/directives/content-density.directive.ts#L76">libs/core/src/lib/content-density/directives/content-density.directive.ts:76</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -453,7 +453,7 @@
 					<p><strong>WARNING</strong>: Only use this with observables you <em>know</em> will complete. If the source
 						observable does not complete, you will end up with a promise that is hung up, and
 						potentially all of the state of an async function hanging out in memory. To avoid
-						this situation, look into adding something like <a href="MessageToastRef.html#timeout">timeout</a>, {@link take},
+						this situation, look into adding something like {@link timeout}, {@link take},
 					{@link takeWhile}, or {@link takeUntil} amongst others.</p>
 					<a href="#example" id="example" style="color: inherit; text-decoration: none;">
 						<h4>Example</h4>
@@ -1151,8 +1151,7 @@
 		<h3>subscribe</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-			<li class="tsd-signature tsd-kind-icon">subscribe<span class="tsd-signature-symbol">(</span>observer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Observer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">LocalContentDensityMode</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subscription</span></li>
-			<li class="tsd-signature tsd-kind-icon">subscribe<span class="tsd-signature-symbol">(</span>next<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subscription</span></li>
+			<li class="tsd-signature tsd-kind-icon">subscribe<span class="tsd-signature-symbol">(</span>observerOrNext<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Observer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">LocalContentDensityMode</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subscription</span></li>
 			<li class="tsd-signature tsd-kind-icon">subscribe<span class="tsd-signature-symbol">(</span>next<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span>, error<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span>, complete<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subscription</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
@@ -1165,39 +1164,7 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5><span class="tsd-flag ts-flagOptional">Optional</span> observer: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Observer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">LocalContentDensityMode</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Subscription</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from BehaviorSubject.subscribe</p>
-					<ul>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>next: <span class="tsd-signature-type">function</span></h5>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-signature">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">LocalContentDensityMode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5>value: <span class="tsd-signature-type">LocalContentDensityMode</span></h5>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> observerOrNext: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Observer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">LocalContentDensityMode</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Subscription</span></h4>

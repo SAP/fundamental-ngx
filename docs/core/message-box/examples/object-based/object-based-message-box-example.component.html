@@ -1,6 +1,6 @@
 <button fd-button label="Open from object" (click)="open()"></button>
 
-<p [innerText]="closeReason"></p>
+<p>{{ closeReason }}</p>
 
-<span aria-hidden="true" style="display: none" id="fd-message-box-object-based-header" [innerText]="title"></span>
-<span aria-hidden="true" style="display: none" id="fd-message-box-object-based-body" [innerText]="content"></span>
+<span aria-hidden="true" style="display: none" id="fd-message-box-object-based-header">{{ title }}</span>
+<span aria-hidden="true" style="display: none" id="fd-message-box-object-based-body">{{ content }}</span>

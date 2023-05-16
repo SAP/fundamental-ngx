@@ -28,7 +28,7 @@
 		<div class="tsd-signature tsd-kind-icon">fdk<wbr>Disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/cdk/src/lib/utils/directives/disabled/disabled-behavior.interface.ts#L7">libs/cdk/src/lib/utils/directives/disabled/disabled-behavior.interface.ts:7</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3ec2c92/libs/cdk/src/lib/utils/directives/disabled/disabled-behavior.interface.ts#L7">libs/cdk/src/lib/utils/directives/disabled/disabled-behavior.interface.ts:7</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -771,7 +771,7 @@
 				<aside class="tsd-sources">
 					<p>Inherited from Base.setDisabledState</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/cdk/src/lib/utils/directives/disabled/disabled-view-modifier.interface.ts#L2">libs/cdk/src/lib/utils/directives/disabled/disabled-view-modifier.interface.ts:2</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3ec2c92/libs/cdk/src/lib/utils/directives/disabled/disabled-view-modifier.interface.ts#L2">libs/cdk/src/lib/utils/directives/disabled/disabled-view-modifier.interface.ts:2</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -789,8 +789,7 @@
 		<h3>subscribe</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-			<li class="tsd-signature tsd-kind-icon">subscribe<span class="tsd-signature-symbol">(</span>observer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Observer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subscription</span></li>
-			<li class="tsd-signature tsd-kind-icon">subscribe<span class="tsd-signature-symbol">(</span>next<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subscription</span></li>
+			<li class="tsd-signature tsd-kind-icon">subscribe<span class="tsd-signature-symbol">(</span>observerOrNext<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Observer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subscription</span></li>
 			<li class="tsd-signature tsd-kind-icon">subscribe<span class="tsd-signature-symbol">(</span>next<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span>, error<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span>, complete<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subscription</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
@@ -803,39 +802,7 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5><span class="tsd-flag ts-flagOptional">Optional</span> observer: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Observer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Subscription</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from Base.subscribe</p>
-					<ul>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>next: <span class="tsd-signature-type">function</span></h5>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-signature">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5>value: <span class="tsd-signature-type">boolean</span></h5>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> observerOrNext: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Observer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Subscription</span></h4>

@@ -2,14 +2,21 @@ import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform/table';
+import {
+    newTableRow,
+    TableDataProvider,
+    TableDataSource,
+    TableRow,
+    TableRowType,
+    TableState
+} from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-freezable-example',
     templateUrl: './platform-table-freezable-example.component.html'
 })
 export class PlatformTableFreezableExampleComponent {
-    source: TableDataSource<ExampleItem>;
+    source: TableDataSource<TableRow>;
 
     constructor() {
         this.source = new TableDataSource(new TableDataProviderExample());
@@ -37,11 +44,11 @@ export interface ExampleItem {
  * Table Data Provider Example
  *
  */
-export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
-    items: ExampleItem[] = [...ITEMS];
+export class TableDataProviderExample extends TableDataProvider<TableRow> {
+    items: TableRow[] = [...ITEMS];
     totalItems = ITEMS.length;
 
-    fetch(tableState?: TableState): Observable<ExampleItem[]> {
+    fetch(tableState?: TableState): Observable<TableRow[]> {
         this.items = [...ITEMS];
 
         // apply searching
@@ -54,7 +61,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         return of(this.items);
     }
 
-    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
+    search(items: TableRow[], { searchInput, columnKeys }: TableState): TableRow[] {
         const searchText = searchInput?.text || '';
         const keysToSearchBy = columnKeys;
 
@@ -63,7 +70,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         }
 
         return items.filter((item) => {
-            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
+            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item.value));
             return valuesForSearch
                 .filter((value) => !!value)
                 .map((value): string => value.toString())
@@ -77,7 +84,7 @@ function getNestedValue<T extends Record<string, any>>(key: string, object: T): 
 }
 
 // Example items
-const ITEMS: ExampleItem[] = [
+const ITEMS: TableRow[] = [
     {
         name: '10 Portable DVD player',
         description: 'diam neque vestibulum eget vulputate',
@@ -185,4 +192,11 @@ const ITEMS: ExampleItem[] = [
         date: new FdDate(2020, 5, 4),
         verified: true
     }
-];
+].map((value, index) => {
+    return newTableRow({
+        type: TableRowType.ITEM,
+        checked: index % 4 === 0,
+        index,
+        value
+    });
+});

@@ -3,12 +3,16 @@ import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import {
-    TableDataSource,
+    newTableRow,
+    TableComponent,
     TableDataProvider,
-    TableState,
-    TableRowToggleOpenStateEvent,
+    TableDataSource,
+    TableRow,
+    TableRowSelectionChangeEvent,
     TableRowsRearrangeEvent,
-    TableComponent
+    TableRowToggleOpenStateEvent,
+    TableRowType,
+    TableState
 } from '@fundamental-ngx/platform/table';
 
 @Component({
@@ -19,7 +23,7 @@ export class PlatformTableTreeExampleComponent {
     @ViewChild(TableComponent)
     table: TableComponent;
 
-    source: TableDataSource<ExampleItem>;
+    source: TableDataSource<TableRow>;
 
     constructor() {
         this.source = new TableDataSource(new TableDataProviderExample());
@@ -39,6 +43,10 @@ export class PlatformTableTreeExampleComponent {
 
     toggleFirstRow(): void {
         this.table.toggleGroupRows(0);
+    }
+
+    onRowSelectionChange(event: TableRowSelectionChangeEvent<TableRow<any>>) {
+        console.log(event);
     }
 }
 
@@ -60,12 +68,18 @@ export interface ExampleItem {
  * Table Data Provider Example
  *
  */
-export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
-    items: ExampleItem[] = [...ITEMS];
+export class TableDataProviderExample extends TableDataProvider<TableRow> {
+    items: TableRow[] = [];
     totalItems = ITEMS.length;
 
-    fetch(tableState?: TableState): Observable<ExampleItem[]> {
-        this.items = [...ITEMS];
+    constructor() {
+        super();
+        this.items = convertToTree(null, ITEMS);
+        this.totalItems = this.items.length;
+    }
+
+    fetch(tableState?: TableState): Observable<TableRow[]> {
+        this.items = this.items = convertToTree(null, ITEMS);
 
         // apply searching
         if (tableState?.searchInput) {
@@ -77,7 +91,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         return of(this.items);
     }
 
-    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
+    search(items: TableRow[], { searchInput, columnKeys }: TableState): TableRow[] {
         const searchText = searchInput?.text || '';
         const keysToSearchBy = columnKeys;
 
@@ -86,7 +100,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         }
 
         return items.filter((item) => {
-            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
+            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item.value));
             return valuesForSearch
                 .filter((value) => !!value)
                 .map((value): string => value.toString())
@@ -97,6 +111,31 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 
 function getNestedValue<T extends Record<string, any>>(key: string, object: T): any {
     return key.split('.').reduce((a, b) => (a ? a[b] : null), object);
+}
+
+function convertToTree(parent: TableRow | null, items: ExampleItem[], level = 0): TableRow<ExampleItem>[] {
+    const rows: TableRow<ExampleItem>[] = [];
+    items.forEach((value, index) => {
+        let children = [] as TableRow[];
+
+        const treeItem = newTableRow({
+            type: TableRowType.ITEM,
+            checked: false,
+            index,
+            value,
+            parent,
+            level,
+            expanded: false
+        });
+
+        if (value.children && value.children.length > 0) {
+            children = convertToTree(treeItem, value.children, level + 1);
+            treeItem.children = children;
+            treeItem.type = TableRowType.TREE;
+        }
+        rows.push(treeItem);
+    });
+    return rows;
 }
 
 // Example items

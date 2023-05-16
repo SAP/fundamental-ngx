@@ -1,223 +1,622 @@
 <div class="fd-tsdoc-container">
-<section class="tsd-panel tsd-comment">
-	<div class="tsd-comment tsd-typography">
-		<div class="lead">
-			<p>The component that represents a message toast.</p>
-		</div>
-	</div>
-</section>
 <section class="tsd-panel tsd-hierarchy">
 	<h3>Hierarchy</h3>
 	<ul class="tsd-hierarchy">
 		<li>
-			<span class="target">MessageToastComponent</span>
+			<span class="tsd-signature-type">BaseToastDurationDismissibleContainerComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&gt;</span>
+			<ul class="tsd-hierarchy">
+				<li>
+					<span class="target">MessageToastComponent</span>
+				</li>
+			</ul>
 		</li>
 	</ul>
 </section>
-<section class="tsd-panel">
-	<h3>Implements</h3>
-	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">OnInit</span></li>
-		<li><span class="tsd-signature-type">AfterViewInit</span></li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
+<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+		<a name="_attachedPortal" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _attached<wbr>Portal</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_attached<wbr>Portal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Portal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>_attachedPortal</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The portal currently attached to the host.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 		<a name="ariaLabel" class="tsd-anchor"></a>
 		<h3>aria<wbr>Label</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>ariaLabel</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/message-toast/message-toast.component.ts#L86">libs/core/src/lib/message-toast/message-toast.component.ts:86</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts#L58">libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts:58</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Aria label for the message toast component element.</p>
+				<p>Aria label.</p>
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="duration" class="tsd-anchor"></a>
-		<h3>duration</h3>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+		<a name="attachDomPortal" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> attach<wbr>Dom<wbr>Portal</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 3000</span></div>
+		<div class="tsd-signature tsd-kind-icon">attach<wbr>Dom<wbr>Portal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></div>
 		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>attachDomPortal</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/message-toast/message-toast.component.ts#L78">libs/core/src/lib/message-toast/message-toast.component.ts:78</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="config" class="tsd-anchor"></a>
+		<h3>config</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>config</span></p>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="height" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> height</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>height</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts#L55">libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts:55</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Duration of time <em>in milliseconds</em> that the message toast will be visible.
-					The standard value is 3000 ms.
-					The duration can be set to more than 3000 ms,
-					but it&#39;s not recommended to set it to less than 3000 ms.
-				Set to -1 for indefinite.</p>
+				<p>Height of the toast component.</p>
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 		<a name="id" class="tsd-anchor"></a>
 		<h3>id</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>id</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/message-toast/message-toast.component.ts#L68">libs/core/src/lib/message-toast/message-toast.component.ts:68</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts#L61">libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts:61</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Id of the message toast. If omitted, a unique one is generated.</p>
+				<p>ID of the Toast.</p>
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="maxHeight" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> max<wbr>Height</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">max<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>maxHeight</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts#L51">libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts:51</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Max height of the toast component.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 		<a name="maxWidth" class="tsd-anchor"></a>
-		<h3>max<wbr>Width</h3>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> max<wbr>Width</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">max<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">max<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>maxWidth</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/message-toast/message-toast.component.ts#L106">libs/core/src/lib/message-toast/message-toast.component.ts:106</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts#L39">libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts:39</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Maximum width of the message toast.
-					The standard maximum width is 15rem.
-				It&#39;s not recommended to extend the width to more than 35rem.</p>
+				<p>Max width of the toast component.</p>
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="message" class="tsd-anchor"></a>
-		<h3>message</h3>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="minHeight" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> min<wbr>Height</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">min<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>minHeight</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/message-toast/message-toast.component.ts#L90">libs/core/src/lib/message-toast/message-toast.component.ts:90</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts#L47">libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts:47</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Alternative way of passing in a message to the message toast.</p>
+				<p>Min height of the toast component.</p>
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 		<a name="minWidth" class="tsd-anchor"></a>
-		<h3>min<wbr>Width</h3>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> min<wbr>Width</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">min<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">min<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>minWidth</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/message-toast/message-toast.component.ts#L98">libs/core/src/lib/message-toast/message-toast.component.ts:98</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts#L35">libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts:35</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Minimum width of the message toast.</p>
+				<p>Min width of the toast component.</p>
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="mousePersist" class="tsd-anchor"></a>
-		<h3>mouse<wbr>Persist</h3>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="mouseleave_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> mouseleave$</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">mouse<wbr>Persist<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<div class="tsd-signature tsd-kind-icon">mouseleave$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>mouseleave$</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/message-toast/message-toast.component.ts#L82">libs/core/src/lib/message-toast/message-toast.component.ts:82</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible-container.component.ts#L13">libs/cdk/src/lib/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible-container.component.ts:13</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Whether the message toast should stay open if the cursor is over it.</p>
+				<p>Subject for notifying that component is out of hover</p>
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="onHide" class="tsd-anchor"></a>
-		<h3>on<wbr>Hide</h3>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="mouseover_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> mouseover$</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">on<wbr>Hide<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<div class="tsd-signature tsd-kind-icon">mouseover$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>mouseover$</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/message-toast/message-toast.component.ts#L111">libs/core/src/lib/message-toast/message-toast.component.ts:111</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible-container.component.ts#L16">libs/cdk/src/lib/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible-container.component.ts:16</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Event fired when the message toast is timeout.</p>
+				<p>Subject for notifying that component is hovered</p>
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="onEnter_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> on<wbr>Enter$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">on<wbr>Enter$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>onEnter$</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts#L28">libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts:28</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Subject for notifying that the Toast has finished entering the view.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="onExit_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> on<wbr>Exit$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">on<wbr>Exit$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>onExit$</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts#L25">libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts:25</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Subject for notifying that the Toast has finished exiting from view.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="overlayRef" class="tsd-anchor"></a>
+		<h3>overlay<wbr>Ref</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">overlay<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">OverlayRef</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>overlayRef</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts#L31">libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts:31</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Overlay reference</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 		<a name="width" class="tsd-anchor"></a>
-		<h3>width</h3>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> width</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>width</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/message-toast/message-toast.component.ts#L94">libs/core/src/lib/message-toast/message-toast.component.ts:94</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts#L43">libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts:43</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Width of the message toast.</p>
+				<p>Width of the toast component.</p>
 			</div>
 		</div>
 	</section>
 </section>
-<section class="tsd-panel-group tsd-member-group ">
+<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="close" class="tsd-anchor"></a>
-		<h3>close</h3>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
+		<a name="attach" class="tsd-anchor"></a>
+		<h3>attach</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">close<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
+			<li class="tsd-signature tsd-kind-icon">attach&lt;T&gt;<span class="tsd-signature-symbol">(</span>portal<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComponentPortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComponentRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+			<li class="tsd-signature tsd-kind-icon">attach&lt;T&gt;<span class="tsd-signature-symbol">(</span>portal<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplatePortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+			<li class="tsd-signature tsd-kind-icon">attach<span class="tsd-signature-symbol">(</span>portal<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
+					<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>attach</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/message-toast/message-toast.component.ts#L150">libs/core/src/lib/message-toast/message-toast.component.ts:150</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-type-parameters-title">Type parameters</h4>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>T</h4>
+					</li>
+				</ul>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>portal: <span class="tsd-signature-type">ComponentPortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ComponentRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>attach</span></p>
+					<ul>
+					</ul>
+				</aside>
+				<h4 class="tsd-type-parameters-title">Type parameters</h4>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>T</h4>
+					</li>
+				</ul>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>portal: <span class="tsd-signature-type">TemplatePortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>attach</span></p>
+					<ul>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>portal: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
+		<a name="attachComponentPortal" class="tsd-anchor"></a>
+		<h3>attach<wbr>Component<wbr>Portal</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">attach<wbr>Component<wbr>Portal&lt;C&gt;<span class="tsd-signature-symbol">(</span>portal<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComponentPortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComponentRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>attachComponentPortal</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts#L79">libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts:79</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Closes the message toast</p>
+						<p>Attaches component to the portal.</p>
+					</div>
+				</div>
+				<h4 class="tsd-type-parameters-title">Type parameters</h4>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>C</h4>
+					</li>
+				</ul>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>portal: <span class="tsd-signature-type">ComponentPortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ComponentRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
+		<a name="attachTemplatePortal" class="tsd-anchor"></a>
+		<h3>attach<wbr>Template<wbr>Portal</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">attach<wbr>Template<wbr>Portal&lt;T&gt;<span class="tsd-signature-symbol">(</span>portal<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplatePortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>attachTemplatePortal</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts#L87">libs/cdk/src/lib/utils/toast/classes/base-toast-container.component.ts:87</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Attaches Template to the portal.</p>
+					</div>
+				</div>
+				<h4 class="tsd-type-parameters-title">Type parameters</h4>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>T</h4>
+					</li>
+				</ul>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>portal: <span class="tsd-signature-type">TemplatePortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+						<div class="tsd-comment tsd-typography">
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+		<a name="detach" class="tsd-anchor"></a>
+		<h3>detach</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+			<li class="tsd-signature tsd-kind-icon">detach<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>detach</span></p>
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Detaches a previously attached portal.</p>
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="open" class="tsd-anchor"></a>
-		<h3>open</h3>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+		<a name="dispose" class="tsd-anchor"></a>
+		<h3>dispose</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">open<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+			<li class="tsd-signature tsd-kind-icon">dispose<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
+					<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>dispose</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/8cbff3c/libs/core/src/lib/message-toast/message-toast.component.ts#L163">libs/core/src/lib/message-toast/message-toast.component.ts:163</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Opens the message toast.</p>
+						<p>Permanently dispose of this portal host.</p>
 					</div>
 				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+		<a name="enter" class="tsd-anchor"></a>
+		<h3>enter</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">enter<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>enter</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-animated-container.component.ts#L36">libs/cdk/src/lib/utils/toast/classes/base-toast-animated-container.component.ts:36</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Begin animation of Message Toast entrance into view.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+		<a name="exit" class="tsd-anchor"></a>
+		<h3>exit</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">exit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>exit</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/base-toast-animated-container.component.ts#L41">libs/cdk/src/lib/utils/toast/classes/base-toast-animated-container.component.ts:41</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Begin animation of Message Toast removal.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+		<a name="hasAttached" class="tsd-anchor"></a>
+		<h3>has<wbr>Attached</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+			<li class="tsd-signature tsd-kind-icon">has<wbr>Attached<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>hasAttached</span></p>
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether this host has an attached portal.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+		<a name="onMouseLeave" class="tsd-anchor"></a>
+		<h3>on<wbr>Mouse<wbr>Leave</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">on<wbr>Mouse<wbr>Leave<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>onMouseLeave</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible-container.component.ts#L20">libs/cdk/src/lib/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible-container.component.ts:20</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Emits mouseleave$ subject when component is out of hover.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+		<a name="onMouseOver" class="tsd-anchor"></a>
+		<h3>on<wbr>Mouse<wbr>Over</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">on<wbr>Mouse<wbr>Over<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>onMouseOver</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible-container.component.ts#L26">libs/cdk/src/lib/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible-container.component.ts:26</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Emits mouseover$ subject when component is hovered.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+		<a name="setDisposeFn" class="tsd-anchor"></a>
+		<h3>set<wbr>Dispose<wbr>Fn</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+			<li class="tsd-signature tsd-kind-icon">set<wbr>Dispose<wbr>Fn<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from <span>BaseToastDurationDismissibleContainerComponent</span>.<span>setDisposeFn</span></p>
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">docs-private</dt>
+						<dd></dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>fn: <span class="tsd-signature-type">function</span></h5>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
