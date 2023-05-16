@@ -805,7 +805,8 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     },
     coreTree: {
         expand: 'Розгорнути вузол',
-        collapse: 'Згорнути вузол'
+        collapse: 'Згорнути вузол',
+        noData: 'Немає даних'
     }
 };
 

@@ -601,6 +601,7 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
     },
     coreTree: {
         expand: 'Expand node',
-        collapse: 'Collapse node'
+        collapse: 'Collapse node',
+        noData: 'No data'
     }
 };

@@ -806,7 +806,8 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     },
     coreTree: {
         expand: 'Развернуть узел',
-        collapse: 'Свернуть узел'
+        collapse: 'Свернуть узел',
+        noData: 'Нет данных'
     }
 };
 

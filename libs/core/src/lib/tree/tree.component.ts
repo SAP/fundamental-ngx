@@ -13,6 +13,7 @@ import {
     inject,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
     Output,
     QueryList,
@@ -78,7 +79,7 @@ import { TreeItem, TreeItemGeneric } from './models/tree-item';
     ]
 })
 export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeItem = FdTreeItemType<P>>
-    implements CssClassBuilder, OnInit, OnChanges, AfterViewInit, SelectComponentRootToken
+    implements CssClassBuilder, OnInit, OnChanges, AfterViewInit, SelectComponentRootToken, OnDestroy
 {
     /** @hidden */
     @Input()

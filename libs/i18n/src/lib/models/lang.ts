@@ -229,6 +229,7 @@ export interface FdLanguage {
     coreTree: {
         expand: FdLanguageKey;
         collapse: FdLanguageKey;
+        noData: FdLanguageKey;
     };
     platformActionBar: {
         backButtonLabel: FdLanguageKey;

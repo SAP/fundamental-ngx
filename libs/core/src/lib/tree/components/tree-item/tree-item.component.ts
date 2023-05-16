@@ -143,10 +143,12 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
 
         if (value) {
             setTimeout(() => {
+                this._treeService.detectChanges.next();
                 this._dataSourceDirective.dataSourceProvider?.match();
             });
         } else {
             this.children = [];
+            this.childrenLoaded = false;
             this._treeService.detectChanges.next();
         }
 

@@ -1,9 +1,7 @@
 <div
     class="fd-tree__item-container"
     [attr.tabindex]="_containerTabIndex"
-    (click)="_onClick($event)"
-    (keyup.enter)="_onClick($any($event))"
-    (keyup.space)="_onClick($any($event))"
+    (fdkClicked)="_onClick($event)"
     fdkSelectableItem
     (selected)="_setSelected($event)"
     [value]="value"
@@ -71,9 +69,6 @@
         <fd-checkbox
             [(ngModel)]="_selectionState"
             [ngModelOptions]="{ standalone: true }"
-            (click)="_onClick($event)"
-            (keyup.enter)="_onClick($any($event))"
-            (keyup.space)="_onClick($any($event))"
             [standalone]="true"
             tabIndexValue="-1"
             *ngIf="_selectionModel?.mode === 'multiple'"
@@ -85,9 +80,6 @@
             [value]="true"
             tabIndex="-1"
             [standalone]="true"
-            (click)="_onClick($event)"
-            (keyup.enter)="_onClick($any($event))"
-            (keyup.space)="_onClick($any($event))"
             tabIndexValue="-1"
             *ngIf="_selectionModel?.mode === 'single'"
         ></fd-radio-button>

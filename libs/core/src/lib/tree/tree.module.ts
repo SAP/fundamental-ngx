@@ -34,7 +34,7 @@ import { TreeItemButtonDirective } from './directives/tree-item-button.directive
         PopoverModule,
         MenuModule,
         CheckboxModule,
-        ClickedBehaviorModule,
+        ClickedBehaviorModule.forRoot(),
         FormsModule,
         SelectableItemDirective,
         RadioModule,
