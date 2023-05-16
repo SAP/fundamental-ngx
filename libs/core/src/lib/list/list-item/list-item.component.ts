@@ -13,19 +13,17 @@ import {
     inject,
     Inject,
     Input,
-    OnChanges,
     OnDestroy,
     Optional,
     Output,
     QueryList,
-    SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 
 import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
 import { FD_RADIO_BUTTON_COMPONENT, RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { ListLinkDirective } from '../directives/list-link.directive';
-import { merge, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/cdk/utils';
@@ -49,7 +47,6 @@ let listItemUniqueId = 0;
     host: {
         class: 'fd-list__item'
     },
-    styleUrls: ['./list-item.component.scss'],
     providers: [
         {
             provide: LIST_ITEM_COMPONENT,
@@ -63,18 +60,16 @@ let listItemUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class ListItemComponent
-    extends ListFocusItem
-    implements AfterContentInit, OnChanges, OnDestroy, ListItemInterface
-{
+export class ListItemComponent extends ListFocusItem implements AfterContentInit, OnDestroy, ListItemInterface {
     /** Whether list item is selected */
     @Input()
-    @HostBinding('attr.aria-selected')
     @HostBinding('class.is-selected')
+    @HostBinding('attr.aria-checked')
+    @HostBinding('attr.aria-selected')
     selected = false;
 
     /**
-     * Sets aria-describedby attribute for list item.
+     * @deprecated Sets aria-describedby attribute for list item.
      * Note, that it is being combined with internal values for this component
      */
     @Input()
@@ -109,15 +104,15 @@ export class ListItemComponent
     @HostBinding('class.fd-list__item--unread')
     unread = false;
 
-    /** Text to be read by screen reader for selected list item */
+    /** @deprecated Text to be read by screen reader for selected list item */
     @Input()
     selectedListItemScreenReaderText: string;
 
-    /** Text to be read by screen reader for navigated list item */
+    /** @deprecated Text to be read by screen reader for navigated list item */
     @Input()
     navigatedListItemScreenReaderText: string;
 
-    /** Text to be read by screen reader for navigatable list item */
+    /** @deprecated Text to be read by screen reader for navigatable list item */
     @Input()
     navigatableListItemScreenReaderText: string;
 
@@ -173,28 +168,12 @@ export class ListItemComponent
     /** @hidden */
     private _checkbox: CheckboxComponent;
 
-    /** @hidden */
-    screenReaderContent = '';
-
     /** @hidden group header id, that is being set by parent list component */
     _relatedGroupHeaderId: string | null;
 
     /** @hidden */
     @HostBinding('attr.role')
-    private _listItemRole = 'listitem';
-
-    /** @hidden */
-    @HostBinding('attr.aria-describedBy')
-    get getCombinedAriaDescribedBy(): string | null {
-        let describedBy = this.screenReaderContent ? this._uniqueId + '-screenReader-content' : '';
-        if (this.ariaDescribedBy) {
-            describedBy += ' ' + this.ariaDescribedBy;
-        }
-        if (this._relatedGroupHeaderId) {
-            describedBy += ' ' + this._relatedGroupHeaderId;
-        }
-        return describedBy.trim() || null;
-    }
+    private _role = 'listitem'; // default for li elements
 
     /** @hidden */
     readonly _uniqueId = 'fd-list-item-' + ++listItemUniqueId;
@@ -219,19 +198,11 @@ export class ListItemComponent
         this._listenOnButtonQueryChange();
 
         if (this.linkDirectives && this.linkDirectives.length) {
-            this._listItemRole += ' button';
-        }
-    }
-
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (
-            changes.selectedListItemScreenReaderText ||
-            changes.navigatedListItemScreenReaderText ||
-            changes.navigatableListItemScreenReaderText ||
-            changes.selected
-        ) {
-            this._updateScreenReaderText();
+            this._role = 'link';
+        } else if (this.radio) {
+            this._role = 'radio';
+        } else if (this.checkbox) {
+            this._role = 'checkbox';
         }
     }
 
@@ -303,11 +274,6 @@ export class ListItemComponent
         this.linkDirectives.changes.pipe(startWith(this.linkDirectives), takeUntil(this._onDestroy$)).subscribe(() => {
             this._onLinkListChanged$.next();
             this.link = this.linkDirectives.length > 0;
-            if (this.link) {
-                merge(this.linkDirectives.toArray().map((d) => d._onReadablePropertyChanged$))
-                    .pipe(takeUntil(merge(this._onDestroy$, this._onLinkListChanged$)))
-                    .subscribe(() => this._updateScreenReaderText());
-            }
             this._changeDetectorRef.detectChanges();
         });
     }
@@ -330,29 +296,5 @@ export class ListItemComponent
     private _muteEvent(event: Event): void {
         event.stopPropagation();
         event.preventDefault();
-    }
-
-    /** @hidden */
-    private _updateScreenReaderText(): void {
-        let content = '';
-        if (this.selected) {
-            content += this._addTextPart(content, this.selectedListItemScreenReaderText ?? 'selected');
-        }
-        if (this.linkDirectives?.some((d) => d.navigated)) {
-            content += this._addTextPart(content, this.navigatedListItemScreenReaderText ?? 'navigated');
-        }
-        if (this.linkDirectives?.some((d) => d.navigationIndicator)) {
-            content += this._addTextPart(content, this.navigatableListItemScreenReaderText ?? 'navigatable');
-        }
-        if (content.startsWith(', ')) {
-            content = content.substring(2);
-        }
-        this.screenReaderContent = content;
-        this._changeDetectorRef.markForCheck();
-    }
-
-    /** @hidden */
-    private _addTextPart(existing: string, toAdd: string): string {
-        return (existing ? ', ' : '') + toAdd;
     }
 }
