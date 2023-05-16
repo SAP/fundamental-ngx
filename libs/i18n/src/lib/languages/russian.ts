@@ -803,6 +803,11 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Принять',
         semanticDeclineLabel: 'Отклонить'
+    },
+    coreTree: {
+        expand: 'Развернуть узел',
+        collapse: 'Свернуть узел',
+        noData: 'Нет данных'
     }
 };
 

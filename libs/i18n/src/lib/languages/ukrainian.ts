@@ -802,6 +802,11 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Прийняти',
         semanticDeclineLabel: 'Відхилити'
+    },
+    coreTree: {
+        expand: 'Розгорнути вузол',
+        collapse: 'Згорнути вузол',
+        noData: 'Немає даних'
     }
 };
 

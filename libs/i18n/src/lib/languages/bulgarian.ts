@@ -669,5 +669,10 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Приеми',
         semanticDeclineLabel: 'Отхвърли'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node',
+        noData: 'No data'
     }
 };

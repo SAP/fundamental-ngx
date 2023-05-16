@@ -354,7 +354,7 @@ export const API_FILES = {
         'ToolbarSpacerComponent',
         'ThemesService'
     ],
-    tree: ['TreeComponent', 'TreeChildComponent', 'TreeRowObjectModel'],
+    tree: ['TreeComponent', 'TreeItemComponent', 'TreeItemDefDirective'],
     ratingIndicator: ['RatingIndicatorComponent'],
     wizard: ['WizardComponent'],
     gridList: [

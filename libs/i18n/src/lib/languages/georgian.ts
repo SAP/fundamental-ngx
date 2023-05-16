@@ -600,5 +600,10 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'დათანხმება',
         semanticDeclineLabel: 'უარყოფა'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node',
+        noData: 'No data'
     }
 };

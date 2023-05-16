@@ -1,185 +1,108 @@
 import { Component } from '@angular/core';
 import { Schema } from '@fundamental-ngx/docs/schema';
+import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { TreeActionButtonsExampleComponent } from './examples/tree-action-buttons-example.component';
+import { TreeWithFormsExampleComponent } from './examples/tree-with-forms-example.component';
+
+const simpleTreeExample = 'simple-tree-example.component.ts';
+const simpleTreeExampleHtml = 'simple-tree-example.component.html';
+const navigatableTreeExample = 'navigatable-tree-example.component.ts';
+const navigatableTreeExampleHtml = 'navigatable-tree-example.component.html';
+const highlightIndicatorsTreeExample = 'tree-highlight-indicators-example.component.ts';
+const highlightIndicatorsTreeExampleHtml = 'tree-highlight-indicators-example.component.html';
+const buttonsTreeExample = 'tree-action-buttons-example.component.ts';
+const buttonsTreeExampleHtml = 'tree-action-buttons-example.component.html';
+const formsExample = 'tree-with-forms-example.component.ts';
+const formsExampleHtml = 'tree-with-forms-example.component.html';
+const lazyLoadingExampleTs = 'lazily-loaded-tree-items-example.component.ts';
+const lazyLoadingExampleHtml = 'lazily-loaded-tree-items-example.component.html';
 
 @Component({
     selector: 'app-tree',
     templateUrl: './tree-docs.component.html'
 })
 export class TreeDocsComponent {
-    static schema: Schema = {
-        properties: {
-            properties: {
-                type: 'object',
-                properties: {
-                    headers: {
-                        type: 'string[]'
-                    },
-                    treeData: {
-                        type: 'TreeRowObject[]'
-                    }
-                }
-            },
-            state: {
-                type: 'object',
-                properties: {
-                    disabled: {
-                        type: 'boolean'
-                    }
-                }
-            }
+    simpleExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(simpleTreeExampleHtml),
+            fileName: 'simple-tree-example'
         },
-        type: 'object'
-    };
-
-    data: any = {
-        properties: {
-            headers: ['Column Header 1', 'Column Header 2', 'Column Header 3', 'Column Header 4'],
-            simpleTreeData: [
-                {
-                    rowData: ['Data 1', 'Data 2', 'Data 3', 'Data 4'],
-                    children: [
-                        {
-                            rowData: ['Child 1', 'Child 2', 'Child 3'],
-                            children: [
-                                {
-                                    rowData: ['Grandchild 1', 'Grandchild 2', 'Grandchild 3', 'Grandchild 4']
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    rowData: ['Data 5', 'Data 6', 'Data 7', 'Data 8']
-                },
-                {
-                    rowData: ['Data 9'],
-                    children: [
-                        {
-                            rowData: ['Child 5', 'Child 6', 'Child 7', 'Child 8']
-                        }
-                    ]
-                }
-            ],
-            richTreeData: [
-                {
-                    rowData: [
-                        {
-                            displayText: 'Search Engines'
-                        }
-                    ],
-                    children: [
-                        {
-                            rowData: [
-                                {
-                                    displayText: ' '
-                                },
-                                {
-                                    displayText: 'Google',
-                                    linkUrl: 'http://google.com'
-                                },
-                                {
-                                    displayText: 'Bing',
-                                    linkUrl: 'http://bing.com'
-                                },
-                                {
-                                    displayText: 'Yahoo',
-                                    linkUrl: 'http://yahoo.com'
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        state: {
-            disabled: false
+        {
+            language: 'TypeScript',
+            code: getAssetFromModuleAssets(simpleTreeExample),
+            fileName: 'simple-tree-example',
+            component: 'SimpleTreeExampleComponent'
         }
-    };
+    ];
 
-    simpleTreeHtml = `
-        <fd-tree (editRowClicked)="editRowClicked($event)" (deleteRowClicked)="deleteRowClicked($event)"
+    navigatableExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(navigatableTreeExampleHtml),
+            fileName: 'navigatable-tree-example'
+        },
+        {
+            language: 'TypeScript',
+            code: getAssetFromModuleAssets(navigatableTreeExample),
+            fileName: 'navigatable-tree-example',
+            component: 'NavigatableTreeExampleComponent'
+        }
+    ];
 
-                 [displayTreeActions]="true" [headers]="headers" [treeData]="treeData">
+    highlightExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(highlightIndicatorsTreeExampleHtml),
+            fileName: 'tree-highlight-indicators-example'
+        },
+        {
+            language: 'TypeScript',
+            code: getAssetFromModuleAssets(highlightIndicatorsTreeExample),
+            fileName: 'tree-highlight-indicators-example',
+            component: 'TreeHighlightIndicatorsExampleComponent'
+        }
+    ];
 
-        </fd-tree>`;
+    buttonsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(buttonsTreeExampleHtml),
+            fileName: 'tree-action-buttons-example'
+        },
+        {
+            language: 'TypeScript',
+            code: getAssetFromModuleAssets(buttonsTreeExample),
+            fileName: 'tree-action-buttons-example',
+            component: 'TreeActionButtonsExampleComponent'
+        }
+    ];
 
-    simpleTreeJson = `
-        headers: ["Column Header 1", "Column Header 2", "Column Header 3", "Column Header 4"],
-        treeData: [
-          {
-            rowData: ["Data 1", "Data 2", "Data 3", "Data 4"],
-            children: [
-              {
-                rowData: ["Child 1", "Child 2", "Child 3"],
-                children: [
-                  {
-                    rowData: ["Grandchild 1", "Grandchild 2", "Grandchild 3", "Grandchild 4"]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            rowData: ["Data 5", "Data 6", "Data 7", "Data 8"]
-          },
-          {
-            rowData: ["Data 9"],
-            children: [
-              {
-                rowData: ["Child 5", "Child 6", "Child 7", "Child 8"]
-              }
-            ]
-          }
-        ]`;
+    formsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(formsExampleHtml),
+            fileName: 'tree-with-forms-example'
+        },
+        {
+            language: 'TypeScript',
+            code: getAssetFromModuleAssets(formsExample),
+            fileName: 'tree-with-forms-example',
+            component: 'TreeWithFormsExampleComponent'
+        }
+    ];
 
-    richTreeHtml = `<fd-tree [headers]="headers" [treeData]="treeData">
-
-</fd-tree>`;
-
-    richTreeJson = `
-        headers: ["Column Header 1", "Column Header 2", "Column Header 3", "Column Header 4"],
-        treeData: [
-          {
-            rowData: [
-              {
-                displayText: "Search Engines"
-              }
-            ],
-            children: [
-              {
-                rowData: [
-                  {
-                    displayText: " "
-                  },
-                  {
-                    displayText: "Google",
-                    linkUrl: "http://google.com"
-                  },
-                  {
-                    displayText: "Bing",
-                    linkUrl: "http://bing.com"
-                  },
-                  {
-                    displayText: "Yahoo",
-                    linkUrl: "http://yahoo.com"
-                  }
-                ]
-              }
-            ]
-          }
-        ]`;
-
-    onSchemaValues(data): void {
-        this.data = data;
-    }
-
-    editRowClicked(row): void {
-        alert('Edit row clicked');
-        console.log(row);
-    }
-
-    deleteRowClicked(row): void {
-        alert('Delete row clicked');
-        console.log(row);
-    }
+    lazyLoadingExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(lazyLoadingExampleHtml),
+            fileName: 'lazily-loaded-tree-items-example'
+        },
+        {
+            language: 'TypeScript',
+            code: getAssetFromModuleAssets(lazyLoadingExampleTs),
+            fileName: 'lazily-loaded-tree-items-examplee',
+            component: 'LazilyLoadedTreeItemsExampleComponent'
+        }
+    ];
 }

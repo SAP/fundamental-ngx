@@ -598,5 +598,10 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Kabul et',
         semanticDeclineLabel: 'Reddet'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node',
+        noData: 'No data'
     }
 };

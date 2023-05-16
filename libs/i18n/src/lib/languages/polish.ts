@@ -603,5 +603,10 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Zatwierdz',
         semanticDeclineLabel: 'Odrzuć'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node',
+        noData: 'No data'
     }
 };

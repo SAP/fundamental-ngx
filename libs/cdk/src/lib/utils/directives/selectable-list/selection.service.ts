@@ -1,10 +1,15 @@
 import { ChangeDetectorRef, Injectable, OnDestroy, QueryList } from '@angular/core';
 import { coerceArray } from '@angular/cdk/coercion';
-import { combineLatest, merge, Observable, ReplaySubject, Subject, switchMap } from 'rxjs';
+import { combineLatest, isObservable, merge, Observable, of, ReplaySubject, Subject, switchMap } from 'rxjs';
 import { distinctUntilChanged, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
 import equal from 'fast-deep-equal';
 import { SelectableItemToken } from './selectable-item.token';
 import { SelectableListValueType, SelectComponentRootToken } from './select-component-root.token';
+
+export type SelectionItemsList<ElementType extends Element, ValueType = ElementType> =
+    | QueryList<SelectableItemToken<ElementType, ValueType>>
+    | Observable<SelectableItemToken<ElementType, ValueType>[]>
+    | SelectableItemToken<ElementType, ValueType>[];
 
 @Injectable()
 export class SelectionService<ElementType extends Element, ValueType = ElementType> implements OnDestroy {
@@ -58,12 +63,16 @@ export class SelectionService<ElementType extends Element, ValueType = ElementTy
     /**
      * Initialize watcher for selection changes and user interactions
      * */
-    initialize(queryList: QueryList<SelectableItemToken<ElementType, ValueType>>): void {
-        this._items$ = queryList.changes.pipe(
-            startWith(queryList),
-            map((items: QueryList<SelectableItemToken<ElementType, ValueType>>) => items.toArray()),
-            shareReplay(1)
-        );
+    initialize(list: SelectionItemsList<ElementType, ValueType>): void {
+        if (list instanceof QueryList) {
+            this._items$ = list.changes.pipe(
+                startWith(list),
+                map((items: QueryList<SelectableItemToken<ElementType, ValueType>>) => items.toArray()),
+                shareReplay(1)
+            );
+        } else {
+            this._items$ = isObservable(list) ? list : of(list);
+        }
         this.listenToItemInteractions();
     }
 

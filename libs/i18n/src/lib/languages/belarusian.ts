@@ -597,5 +597,10 @@ export const FD_LANGUAGE_BELARUSIAN: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Accept',
         semanticDeclineLabel: 'Decline'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node',
+        noData: 'No data'
     }
 };

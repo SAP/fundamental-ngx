@@ -1,27 +1,76 @@
-<div class="fd-tree fd-tree--header" *ngIf="headers.length > 0">
-    <div class="fd-tree__row fd-tree__row--header">
-        <div class="fd-tree__col fd-tree__col--control">
-            <button
-                (click)="toggleDisplayAll()"
-                class="fd-tree__control"
-                aria-label="Expand all"
-                [class.is-pressed]="!hideAll"
-                [attr.aria-pressed]="!hideAll"
-            ></button>
-            {{ headers[0] }}
+<ng-template #dataSourceRenderer>
+    <ng-template
+        [ngTemplateOutlet]="!_initialDataLoaded ? loadingRenderer : dataLoadedTpl"
+        [ngTemplateOutletContext]="{ $implicit: 1 }"
+    ></ng-template>
+
+    <ng-template #loadingRenderer let-level>
+        <div *fdkRepeat="5" role="treeitem" [attr.aria-level]="level" class="fd-tree__item">
+            <div class="fd-tree__item-container">
+                <div class="fd-tree__content">
+                    <span class="fd-tree__text">
+                        <fd-skeleton type="text" width="100px" textLines="1"></fd-skeleton>
+                    </span>
+                </div>
+            </div>
         </div>
-        <div class="fd-tree__col" *ngFor="let header of headers | slice: 1">
-            {{ header }}
+    </ng-template>
+
+    <ng-template #dataLoadedTpl>
+        <ng-container *ngIf="_items.length > 0 && treeItemDef; else noDataTpl">
+            <ng-container *ngFor="let item of _items; trackBy: _trackFn">
+                <ng-template
+                    [ngTemplateOutlet]="renderer"
+                    [ngTemplateOutletContext]="{ $implicit: item }"
+                ></ng-template>
+            </ng-container>
+        </ng-container>
+    </ng-template>
+
+    <ng-template #renderer let-item>
+        <ng-container fdTreeItem fdkSelectableItem #treeItemDirective="fdTreeItem">
+            <ng-template
+                [ngTemplateOutlet]="item.renderer"
+                [ngTemplateOutletContext]="{ $implicit: item }"
+                [ngTemplateOutletInjector]="treeItemDirective.injector"
+            ></ng-template>
+        </ng-container>
+        <ng-container
+            *ngIf="
+                treeItemDirective.treeItem?.hasDsChildren &&
+                !!treeItemDirective.treeItem?.expanded &&
+                !treeItemDirective.treeItem?.childrenLoaded
+            "
+        >
+            <ng-template
+                [ngTemplateOutlet]="loadingRenderer"
+                [ngTemplateOutletContext]="{ $implicit: item.level + 1 }"
+            ></ng-template>
+        </ng-container>
+        <ng-container *ngIf="treeItemDirective.treeItem?.children as childItems">
+            <div class="fd-tree" *ngIf="childItems && childItems.length > 0 && !!treeItemDirective?.treeItem?.expanded">
+                <ng-container *ngFor="let child of childItems; trackBy: _trackFn">
+                    <ng-template
+                        [ngTemplateOutlet]="renderer"
+                        [ngTemplateOutletContext]="{ $implicit: child }"
+                    ></ng-template>
+                </ng-container>
+            </div>
+        </ng-container>
+    </ng-template>
+
+    <ng-template #noDataTpl>
+        <div role="treeitem" aria-level="1" class="fd-tree__item">
+            <div class="fd-tree__item-container">
+                <div class="fd-tree__content">
+                    <span class="fd-tree__text">{{ 'coreTree.noData' | fdTranslate }}</span>
+                </div>
+            </div>
         </div>
-        <div class="fd-tree__col fd-tree__col--actions"></div>
-    </div>
-</div>
-<ul class="fd-tree" id="ENusD653" role="tree">
-    <fd-tree-child
-        (editClicked)="editClicked($event)"
-        (deleteClicked)="deleteClicked($event)"
-        [displayTreeActions]="displayTreeActions"
-        *ngFor="let row of treeData"
-        [row]="row"
-    ></fd-tree-child>
-</ul>
+    </ng-template>
+</ng-template>
+<ng-template #projectedContentRenderer>
+    <ng-content select="fd-tree-item"></ng-content>
+</ng-template>
+
+<ng-template [ngTemplateOutlet]="treeItemDef ? dataSourceRenderer : projectedContentRenderer"></ng-template>

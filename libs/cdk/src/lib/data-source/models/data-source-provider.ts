@@ -12,11 +12,11 @@ export interface DataSourceProvider<T = any> {
     /**
      * Stream emits when new data has been requested.
      */
-    dataRequested: Observable<void>;
+    dataRequested: Observable<boolean>;
     /**
      * Stream emits when new data has been loaded.
      */
-    dataReceived: Observable<void>;
+    dataReceived: Observable<boolean>;
     /**
      * Stream emits when loading state has been changed.
      */

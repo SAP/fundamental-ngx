@@ -231,13 +231,11 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
     /** Event emitted when data loading is started. */
     @Output()
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    dataRequested = new EventEmitter<void>();
+    dataRequested = new EventEmitter<boolean>();
 
     /** Event emitted when data loading is finished. */
     @Output()
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    dataReceived = new EventEmitter<void>();
+    dataReceived = new EventEmitter<boolean>();
 
     /** @hidden */
     @ViewChild(FD_LIST_COMPONENT)

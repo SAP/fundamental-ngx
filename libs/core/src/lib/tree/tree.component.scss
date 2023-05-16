@@ -1,1 +1,41 @@
 @import 'fundamental-styles/dist/tree';
+
+@mixin fd-rtl {
+    @at-root {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
+            @content;
+        }
+    }
+}
+
+$block: fd-tree;
+
+.#{$block} {
+    display: block;
+    &__expander--loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &__expander {
+        &:not(.is-expanded) {
+            @include fd-rtl() {
+                transform: rotate(180deg);
+            }
+        }
+    }
+    &__icon--navigation {
+        @include fd-rtl() {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+// TODO: Remove these stylings after new stable fundamental-styles version bump.
+
+.fd-tree__item[aria-level='1'] > .fd-tree__item-container--active.is-focus:before,
+.fd-tree__item[aria-level='1'] > .fd-tree__item-container--active:focus:before,
+.fd-tree__item-container--active:focus:before {
+    bottom: 0.0625rem;
+}
