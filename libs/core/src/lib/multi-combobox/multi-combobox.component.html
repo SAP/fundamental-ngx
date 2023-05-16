@@ -149,6 +149,7 @@
 </ng-template>
 
 <ng-template #listTemplate>
+    <fd-multi-combobox-select-all-toggler *ngIf="showSelectAll"></fd-multi-combobox-select-all-toggler>
     <ul
         fd-list
         (focusEscapeList)="_handleListFocusEscape($event)"

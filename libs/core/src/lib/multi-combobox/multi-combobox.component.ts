@@ -89,6 +89,12 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
     ]
 })
 export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implements AfterViewInit, OnInit {
+    /**
+     * Show select all checkbox
+     */
+    @Input()
+    showSelectAll = false;
+
     /** Provides selected items. */
     @Input()
     set selectedItems(value: T[]) {
@@ -413,12 +419,13 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * Method that selects all possible options.
      * *select* attribute – if *true* select all, if *false* unselect all
      * */
-    private _handleSelectAllItems(select: boolean): void {
+    _handleSelectAllItems(select: boolean): void {
         this._flatSuggestions.forEach((item) => (item.selected = select));
         this._selectedSuggestions = select ? [...this._flatSuggestions] : [];
         this._rangeSelector.reset();
 
         this._propagateChange();
+        this._cd.detectChanges();
     }
 
     /** @hidden */
