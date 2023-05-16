@@ -1,3 +1,12 @@
+## [0.41.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.41.0...v0.41.1-rc.0) (2023-05-16)
+
+
+### Features
+
+* **core:** tree component ([#9781](https://github.com/SAP/fundamental-ngx/issues/9781)) ([2a89bed](https://github.com/SAP/fundamental-ngx/commit/2a89bedd6ca1aeff14c818fd81417418d5e22ccc))
+
+
+
 # [0.41.0](https://github.com/SAP/fundamental-ngx/compare/v0.41.0-rc.3...v0.41.0) (2023-05-16)
 
 
