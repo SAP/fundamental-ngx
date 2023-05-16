@@ -32,7 +32,7 @@ export class ThemeSelectorListComponent extends BaseDynamicFormGeneratorControl 
 
 @Component({
     selector: 'fdp-theme-selector-list-icon',
-    templateUrl: './icon.svg',
+    templateUrl: './icon.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
