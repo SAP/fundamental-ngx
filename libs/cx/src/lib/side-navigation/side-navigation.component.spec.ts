@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed, fakeAsync, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 import { SideNavigationComponent } from './side-navigation.component';
 import { Component, ViewChild } from '@angular/core';
@@ -93,7 +94,7 @@ describe('SideNavigationComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CxNestedListModule],
+            imports: [CxNestedListModule, I18nModule],
             declarations: [SideNavigationComponent, SideNavigationMainComponent, TestNestedContainerComponent],
             providers: [MenuKeyboardService]
         }).compileComponents();
@@ -105,22 +106,20 @@ describe('SideNavigationComponent', () => {
         fixture.detectChanges();
     });
 
-    it('should have not hidden items in list', fakeAsync(() => {
-        fixture.whenStable().then(() => {
-            component.sideNav.ngAfterContentInit();
-            fixture.detectChanges();
-            const anyComponent: any = component.sideNav;
-            expect(anyComponent.keyboardService._getAllListItems(anyComponent.getLists()[0]).length).toBe(7);
-        });
-    }));
+    it('should have not hidden items in list', async () => {
+        await fixture.whenStable();
+        component.sideNav.ngAfterContentInit();
+        fixture.detectChanges();
+        const anyComponent: any = component.sideNav;
+        expect(anyComponent.keyboardService._getAllListItems(anyComponent.getLists()[0]).length).toBe(7);
+    });
 
-    it('should have expanded items in list', fakeAsync(() => {
+    it('should have expanded items in list', async () => {
         component.expanded = true;
-        fixture.whenStable().then(() => {
-            component.sideNav.ngAfterContentInit();
-            fixture.detectChanges();
-            const anyComponent: any = component.sideNav;
-            expect(anyComponent.keyboardService._getAllListItems(anyComponent.getLists()[0]).length).toBe(11);
-        });
-    }));
+        await fixture.whenStable();
+        component.sideNav.ngAfterContentInit();
+        fixture.detectChanges();
+        const anyComponent: any = component.sideNav;
+        expect(anyComponent.keyboardService._getAllListItems(anyComponent.getLists()[0]).length).toBe(11);
+    });
 });
