@@ -1,4 +1,3 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
@@ -111,18 +110,6 @@ import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { newTableRow } from './utils';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
-
-/**
- * Cell announcer function which returns a string to be announced by screen readers.
- * @param position The position of the cell in the table.
- * @param headerLabel The label of the column header.
- * @param nestingLevel The nesting level of the cell in case of tree table.
- */
-export type CellFocusedEventAnnouncer = (
-    position: FocusableItemPosition,
-    headerLabel: string,
-    nestingLevel: number | null
-) => string;
 
 type TreeLike<T> = T & {
     _children?: TreeLike<T>[];
@@ -471,13 +458,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** Whether all rows should be collapsed by default after the table is loaded. */
     @Input()
     expandOnInit = false;
-
-    /**
-     * Function, that creates a string to be announced by screen-reader whenever cell receives focus.
-     * Second argument is nesting level starting from 0 if table in tree mode, otherwise null.
-     */
-    @Input()
-    cellFocusedEventAnnouncer: CellFocusedEventAnnouncer = this._defaultCellFocusedEventAnnouncer;
 
     /** Whether to show only visible rows in matter of performance
      * false by default, when true setting bodyHeight and rowHeight is required.
@@ -963,8 +943,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         private readonly _elRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService,
         readonly contentDensityObserver: ContentDensityObserver,
-        readonly injector: Injector,
-        private readonly _liveAnnouncer: LiveAnnouncer
+        readonly injector: Injector
     ) {
         super();
     }
@@ -1820,17 +1799,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    async _onCellFocused(
-        position: FocusableItemPosition,
-        columnLabel: string,
-        nestingLevel: number | null
-    ): Promise<void> {
+    async _onCellFocused(position: FocusableItemPosition): Promise<void> {
         this._focusedCellPosition = { rowIndex: position.rowIndex, colIndex: position.colIndex };
-
-        if (this.cellFocusedEventAnnouncer) {
-            this._liveAnnouncer.clear();
-            await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(position, columnLabel, nestingLevel));
-        }
     }
 
     /** Fetch data source data. */
@@ -3027,20 +2997,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                     }
                 });
             })
-        );
-    }
-
-    /** @hidden */
-    private _defaultCellFocusedEventAnnouncer(
-        position: FocusableItemPosition,
-        headerLabel: string,
-        nestingLevel: number | null
-    ): string {
-        return (
-            `${headerLabel},
-            column ${position.colIndex + 1} of ${position.totalCols},
-            row: ${position.rowIndex + 1} of ${position.totalRows}` +
-            (nestingLevel !== null ? `, level: ${nestingLevel + 1}` : '')
         );
     }
 }
