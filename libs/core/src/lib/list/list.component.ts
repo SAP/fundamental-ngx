@@ -233,7 +233,11 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     private _recheckLinks(): void {
         const items = this.items.filter((item) => item.link);
         this.hasNavigation = items.length > 0;
-        this.hasNavigation ? (this._role = 'navigation') : (this._role = 'list');
+        if (!this.selection) {
+            this.hasNavigation ? (this._role = 'navigation') : (this._role = 'list');
+        } else {
+            this._role = 'listbox';
+        }
     }
 
     /** @hidden */

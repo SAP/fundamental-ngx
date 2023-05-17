@@ -64,7 +64,6 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     /** Whether list item is selected */
     @Input()
     @HostBinding('class.is-selected')
-    @HostBinding('attr.aria-checked')
     @HostBinding('attr.aria-selected')
     selected = false;
 
@@ -199,10 +198,8 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
 
         if (this.linkDirectives && this.linkDirectives.length) {
             this._role = 'link';
-        } else if (this.radio) {
-            this._role = 'radio';
-        } else if (this.checkbox) {
-            this._role = 'checkbox';
+        } else if (this.radio || this.checkbox) {
+            this._role = 'option';
         }
     }
 
