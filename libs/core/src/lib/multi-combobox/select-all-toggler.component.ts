@@ -1,7 +1,14 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    inject,
+    Input,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
-import { takeUntil } from 'rxjs';
-import { MultiComboboxComponent } from './multi-combobox.component';
+import { Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'fd-multi-combobox-select-all-toggler',
@@ -29,15 +36,33 @@ import { MultiComboboxComponent } from './multi-combobox.component';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectAllTogglerComponent {
+export class SelectAllTogglerComponent implements OnInit {
+    /**
+     * Handler for the select all items
+     * */
+    @Input() selectAllHandler: (select: boolean) => void;
+
+    /**
+     * Stream for receiving information about the value changes,
+     */
+    @Input() valueChanges: Observable<unknown>;
+
+    /** @hidden */
+    @Input()
+    selectedItems: Array<unknown> = [];
+
+    /** @hidden */
+    @Input()
+    flatItems: Array<unknown> = [];
+
     /** @hidden */
     get allIsSelected(): boolean {
-        return this.comboboxComponent._selectedSuggestions.length === this.comboboxComponent._flatSuggestions.length;
+        return this.selectedItems.length === this.flatItems.length;
     }
 
     /** @hidden */
     get someAreSelected(): boolean {
-        return this.comboboxComponent._selectedSuggestions.length > 0 && !this.allIsSelected;
+        return this.selectedItems.length > 0 && !this.allIsSelected;
     }
 
     /** @hidden */
@@ -54,19 +79,17 @@ export class SelectAllTogglerComponent {
     /** @hidden */
     private destroy$ = inject(DestroyedService);
     /** @hidden */
-    private comboboxComponent: MultiComboboxComponent = inject(MultiComboboxComponent);
-    /** @hidden */
     private changeDetector: ChangeDetectorRef = inject(ChangeDetectorRef);
 
     /** @hidden */
-    constructor() {
-        this.comboboxComponent.selectionChange.pipe(takeUntil(this.destroy$)).subscribe(() => {
+    ngOnInit(): void {
+        this.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
             this.changeDetector.detectChanges();
         });
     }
 
     /** @hidden */
     change(value: boolean): void {
-        this.comboboxComponent._handleSelectAllItems(value);
+        this.selectAllHandler(value);
     }
 }

@@ -419,14 +419,14 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * Method that selects all possible options.
      * *select* attribute – if *true* select all, if *false* unselect all
      * */
-    _handleSelectAllItems(select: boolean): void {
+    _handleSelectAllItems = (select: boolean): void => {
         this._flatSuggestions.forEach((item) => (item.selected = select));
         this._selectedSuggestions = select ? [...this._flatSuggestions] : [];
         this._rangeSelector.reset();
 
         this._propagateChange();
         this._cd.detectChanges();
-    }
+    };
 
     /** @hidden */
     _navigateByTokens(event: KeyboardEvent): void {
