@@ -8,6 +8,9 @@ export type FdLanguageKey = string | FdLanguageKeyFunction;
  * Representation of the dictionary per UI component
  */
 export interface FdLanguage {
+    coreMultiComboBox: {
+        selectAllLabel: FdLanguageKey;
+    };
     coreCarousel: {
         leftNavigationBtnLabel: FdLanguageKey;
         rightNavigationBtnLabel: FdLanguageKey;

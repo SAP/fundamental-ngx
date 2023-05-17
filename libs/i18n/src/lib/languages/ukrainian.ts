@@ -6,6 +6,9 @@ const pluralization = new PluralizationSet1();
  * Default set of translations of Fundamental UI libarary for Ukrainian language
  */
 export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Вибрати все'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Перейти до попереднього елемента',
         rightNavigationBtnLabel: 'Перейти до наступного елемента'

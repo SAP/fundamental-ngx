@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Arabic language
  */
 export const FD_LANGUAGE_ARABIC: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'تحديد الكل'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Go to previous item',
         rightNavigationBtnLabel: 'Go to next item'

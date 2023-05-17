@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI libarary for Albanian language
  */
 export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Selekto të gjitha'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Shko te artikulli i mëparshëm',
         rightNavigationBtnLabel: 'Shko te artikulli tjetër'

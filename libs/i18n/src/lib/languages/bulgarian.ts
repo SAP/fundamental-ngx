@@ -7,6 +7,9 @@ const pluralization = new PluralizationSet1();
  * Default set of translations of Fundamental UI library for Bulgarian language
  */
 export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Избери всички'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Отиди на предишния елемент',
         rightNavigationBtnLabel: 'Отиди на следващия елемент'

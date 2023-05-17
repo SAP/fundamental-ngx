@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Hindi language
  */
 export const FD_LANGUAGE_HINDI: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'सबका चयन करें'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'पिछले वस्तु पर जाएं',
         rightNavigationBtnLabel: 'अगले वस्तु पर जाएं'

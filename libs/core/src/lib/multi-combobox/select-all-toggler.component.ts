@@ -7,7 +7,7 @@ import { MultiComboboxComponent } from './multi-combobox.component';
     selector: 'fd-multi-combobox-select-all-toggler',
     template: `
         <fd-checkbox
-            [label]="'Select All'"
+            [label]="'coreMultiComboBox.selectAllLabel' | fdTranslate"
             [ngModel]="checkboxValue"
             (ngModelChange)="change($event)"
             [tristate]="true"

@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Sinhala language
  */
 export const FD_LANGUAGE_SINHALA: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'සියල්ල තෝරන්න'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Go to previous item',
         rightNavigationBtnLabel: 'Go to next item'
