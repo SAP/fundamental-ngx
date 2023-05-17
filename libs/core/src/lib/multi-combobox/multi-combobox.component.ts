@@ -421,13 +421,25 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * */
     _handleSelectAllItems = (select: boolean): void => {
         this._flatSuggestions.forEach((item) => (item.selected = select));
+        this._onEveryItem(this._suggestions, (item) => (item.selected = select));
         this._selectedSuggestions = select ? [...this._flatSuggestions] : [];
         this._rangeSelector.reset();
 
         this._propagateChange();
-        this._cd.detectChanges();
     };
 
+    /**
+     * @hidden
+     * Iterate over every item and perform callback
+     */
+    private _onEveryItem(items: SelectableOptionItem[], callback: (item: SelectableOptionItem) => void): void {
+        items.forEach((item) => {
+            callback(item);
+            if (item.children && item.children.length > 0) {
+                this._onEveryItem(item.children, callback);
+            }
+        });
+    }
     /** @hidden */
     _navigateByTokens(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW]) && this.isOpen) {
