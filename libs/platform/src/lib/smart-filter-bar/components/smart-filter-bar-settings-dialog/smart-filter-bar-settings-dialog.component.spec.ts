@@ -78,11 +78,11 @@ describe('SmartFilterBarSettingsDialogComponent', () => {
 
         fixture.detectChanges();
 
-        const allFiltersSpy = spyOn(source, '_getAllItems').and.callThrough();
-        const mandatoryFiltersSpy = spyOn(source, '_getMandatoryItems').and.callThrough();
-        const visibleFiltersSpy = spyOn(source, '_getVisibleItems').and.callThrough();
-        const activeFiltersSpy = spyOn(source, '_getActiveItems').and.callThrough();
-        const visibleActiveFiltersSpy = spyOn(source, '_getVisibleAndActiveItems').and.callThrough();
+        const allFiltersSpy = jest.spyOn(source, '_getAllItems');
+        const mandatoryFiltersSpy = jest.spyOn(source, '_getMandatoryItems');
+        const visibleFiltersSpy = jest.spyOn(source, '_getVisibleItems');
+        const activeFiltersSpy = jest.spyOn(source, '_getActiveItems');
+        const visibleActiveFiltersSpy = jest.spyOn(source, '_getVisibleAndActiveItems');
 
         filterTypes.forEach((f) => {
             const evt: FdpSelectionChangeEvent = {

@@ -22,7 +22,7 @@ describe('SettingsGeneratorComponent', () => {
     });
 
     it('should set settings in service', () => {
-        const settingsSpy = spyOn((component as any)._settingsGeneratorService.settings, 'next').and.callThrough();
+        const settingsSpy = jest.spyOn((component as any)._settingsGeneratorService.settings, 'next');
 
         const settings = {
             appearance: 'sidebar',
@@ -32,7 +32,8 @@ describe('SettingsGeneratorComponent', () => {
         component.settings = settings;
         fixture.detectChanges();
 
-        expect(settingsSpy).toHaveBeenCalledOnceWith(settings);
+        expect(settingsSpy).toHaveBeenCalledTimes(1);
+        expect(settingsSpy).toHaveBeenLastCalledWith(settings);
     });
 
     it('should set appropriate layout', () => {

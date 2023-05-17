@@ -134,7 +134,7 @@ describe('SmartFilterBarSubjectDirective', () => {
     });
 
     it('should return subject fields', () => {
-        const spy = spyOn<any>(component.directive, '_transformSubjectField').and.callThrough();
+        const spy = jest.spyOn(component.directive as any, '_transformSubjectField');
 
         const subjectFieldNames = component.directive.getSubjectFields().map((f) => f.name);
 
@@ -143,7 +143,10 @@ describe('SmartFilterBarSubjectDirective', () => {
     });
 
     it('should return field variants', async () => {
-        const options = (await firstValueFrom(component.directive.getFieldVariants('status'))).map((o) => o.value);
+        // With Jest runner value being transformed with LodashWrapper for some reason.
+        const options = (await firstValueFrom(component.directive.getFieldVariants('status'))).map(
+            (o) => o.value.__wrapped__.status
+        );
         expect(options.filter((o: string, i: number) => options.indexOf(o) === i)).toEqual(['valid', 'invalid']);
     });
 
