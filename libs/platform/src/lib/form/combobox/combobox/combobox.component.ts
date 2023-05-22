@@ -120,7 +120,8 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         const target = event.relatedTarget as HTMLElement;
         if (target) {
             const isList = !!target.closest('.fdp-combobox__list-container');
-            if (isList) {
+            const isListItem = !!target.closest('.fd-list__item');
+            if (isList || isListItem) {
                 return;
             }
         }
