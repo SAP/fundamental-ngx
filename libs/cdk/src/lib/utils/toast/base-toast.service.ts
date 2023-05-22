@@ -22,7 +22,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { BaseToastPosition, ToastGlobalPosition } from './base-toast-positions';
+import { BaseToastPosition, ToastGlobalConnectedPosition, ToastGlobalPosition } from './base-toast-positions';
 import { BaseToastConfig } from './classes/base-toast-config';
 import { BaseToastRef } from './classes/base-toast-ref';
 import { ToastContainerComponent } from './interfaces/toast-container-component.interface';
@@ -52,7 +52,7 @@ export abstract class BaseToastService<
     protected _toasts: BaseToastRef[] = [];
 
     /**
-     * @hiden
+     * @hidden
      */
     protected _toastsMap = new Map<BaseToastPosition, BaseToastRef[]>();
 
@@ -141,6 +141,7 @@ export abstract class BaseToastService<
      * Creates Toast Reference for provided container and overlay.
      * @param containerRef Container reference.
      * @param overlayRef Overlay Reference.
+     * @param positionStrategy Position Strategy
      */
     protected abstract getToastRef<T>(
         containerRef: C,
@@ -158,10 +159,11 @@ export abstract class BaseToastService<
     ): BaseToastRef<T | EmbeddedViewRef<any>, P> {
         const config = { ...this.defaultConfig, ...userConfig };
         const positionStrategy = config.positionStrategy || this.toastPositionStrategy;
-        const overlayRef = this._createOverlay(positionStrategy);
-        const containerRef = this.attachToastContainerComponent(overlayRef, config);
-        const toastRef = this.getToastRef<T>(containerRef, overlayRef, positionStrategy);
+        const { overlay, isAnchor } = this._createOverlay(positionStrategy);
+        const containerRef = this.attachToastContainerComponent(overlay, config);
+        const toastRef = this.getToastRef<T>(containerRef, overlay, positionStrategy);
         toastRef._defaultPositionStrategy = !config.positionStrategy;
+        toastRef._isAnchor = isAnchor;
 
         if (content instanceof TemplateRef) {
             // TemplatePortal requires viewContainer ref
@@ -211,7 +213,7 @@ export abstract class BaseToastService<
     /**
      * Creates an injector to be used inside a Toast component.
      * @param config Config that was used to create the Toast.
-     * @param toastRef Reference to the Toastr.
+     * @param toastRef Reference to the Toast.
      */
     protected createContentComponentInjector<T>(config: P, toastRef: BaseToastRef<T>): Injector {
         return Injector.create({
@@ -250,32 +252,40 @@ export abstract class BaseToastService<
      * @hidden
      * Creates a new overlay and places it in the correct location.
      */
-    private _createOverlay(positionStrategy: BaseToastPosition): OverlayRef {
+    private _createOverlay(positionStrategy: BaseToastPosition): { overlay: OverlayRef; isAnchor: boolean } {
         const overlayConfig = new OverlayConfig();
+        overlayConfig.scrollStrategy = positionStrategy.scrollPosition || this.overlay.scrollStrategies.reposition();
 
-        overlayConfig.positionStrategy = this._getPositionStrategy(positionStrategy);
+        const { position, isAnchor } = this._getPositionStrategy(positionStrategy);
+
+        overlayConfig.positionStrategy = position;
         overlayConfig.panelClass = 'fd-toast-overlay';
-        return this.overlay.create(overlayConfig);
+        return { overlay: this.overlay.create(overlayConfig), isAnchor };
     }
 
     /**
      * @hidden
      * @returns Initial Position Strategy of the Toast Overlay Reference.
      */
-    private _getPositionStrategy(positionStrategy: BaseToastPosition): PositionStrategy {
+    private _getPositionStrategy(positionStrategy: BaseToastPosition): {
+        position: PositionStrategy;
+        isAnchor: boolean;
+    } {
         const lastOverlay = this._getLastToastWithSamePosition(positionStrategy);
 
-        const globalOverlay = this._toastsMap.get(positionStrategy)?.find((toast) => {
-            const config = toast.overlayRef.getConfig();
-
-            return config.positionStrategy instanceof GlobalPositionStrategy;
-        });
+        const globalOverlay = this._toastsMap.get(positionStrategy)?.find(({ _isAnchor }) => _isAnchor);
 
         if (lastOverlay && globalOverlay) {
-            return this._composeFlexibleConnectedPosition(lastOverlay.overlayRef.overlayElement, positionStrategy);
+            return {
+                position: this._composeFlexibleConnectedPosition(
+                    lastOverlay.overlayRef.overlayElement,
+                    positionStrategy
+                ),
+                isAnchor: false
+            };
         }
 
-        return this._composeGlobalPosition(positionStrategy);
+        return { position: this._composeGlobalPosition(positionStrategy), isAnchor: true };
     }
 
     /**
@@ -290,6 +300,7 @@ export abstract class BaseToastService<
     /**
      * @hidden
      * @param connectedElm element to connect with.
+     * @param positionStrategy Position Strategy
      * @returns Flexible Connected Position Strategy for Overlay Reference.
      */
     private _composeFlexibleConnectedPosition(
@@ -308,34 +319,45 @@ export abstract class BaseToastService<
      * @hidden
      * @returns Default Global Position for Overlay Reference.
      */
-    private _composeGlobalPosition(positionStrategy: BaseToastPosition): GlobalPositionStrategy {
-        const globalPosition = this.overlay.position().global();
+    private _composeGlobalPosition(
+        positionStrategy: BaseToastPosition
+    ): GlobalPositionStrategy | FlexibleConnectedPositionStrategy {
+        let position: FlexibleConnectedPositionStrategy | GlobalPositionStrategy;
+        if (this._isBoundGlobalPosition(positionStrategy.global)) {
+            position = this.overlay
+                .position()
+                .flexibleConnectedTo(positionStrategy.global.boundTo)
+                .withPositions([positionStrategy.global])
+                .withPush(false);
+        } else {
+            position = this.overlay.position().global();
+            const globalToastPositionStrategy: ToastGlobalPosition = positionStrategy.global;
 
-        const globalToastPositionStrategy: ToastGlobalPosition = positionStrategy.global;
-
-        for (const [position, value] of Object.entries(globalToastPositionStrategy)) {
-            switch (position) {
-                case 'left':
-                    globalPosition.left(value);
-                    break;
-                case 'right':
-                    globalPosition.right(value);
-                    break;
-                case 'bottom':
-                    globalPosition.bottom(value);
-                    break;
-                case 'top':
-                    globalPosition.top(value);
-                    break;
-                case 'center':
-                    globalPosition.centerHorizontally();
-                    break;
-                case 'centerVertically':
-                    globalPosition.centerVertically();
-                    break;
+            for (const [pos, value] of Object.entries(globalToastPositionStrategy)) {
+                switch (pos) {
+                    case 'left':
+                        position.left(value);
+                        break;
+                    case 'right':
+                        position.right(value);
+                        break;
+                    case 'bottom':
+                        position.bottom(value);
+                        break;
+                    case 'top':
+                        position.top(value);
+                        break;
+                    case 'center':
+                        position.centerHorizontally();
+                        break;
+                    case 'centerVertically':
+                        position.centerVertically();
+                        break;
+                }
             }
         }
-        return globalPosition;
+
+        return position;
     }
 
     /** @hidden */
@@ -359,33 +381,35 @@ export abstract class BaseToastService<
     /**
      * @hidden
      * Updates the position of a current Overlay Reference.
-     * @param overlay Overlay reference which position needs to be updated.
      * @returns New Position Strategy.
+     * @param toast Toast Reference
      */
     private _updatePositionStrategy(toast: BaseToastRef): PositionStrategy {
         const positionStrategy = toast._defaultPositionStrategy ? this.toastPositionStrategy : toast.positionStrategy;
-        const config = toast.overlayRef.getConfig();
 
-        if (config.positionStrategy instanceof GlobalPositionStrategy) {
+        if (toast._isAnchor) {
             return this._composeGlobalPosition(positionStrategy);
         }
 
         const toasts = this._toastsMap.get(positionStrategy) || [];
 
-        const globalOverlay = toasts?.find(({ overlayRef }) => {
-            const overlayConfig = overlayRef.getConfig();
-
-            return overlayConfig.positionStrategy instanceof GlobalPositionStrategy;
-        });
+        const globalOverlay = toasts?.find(({ _isAnchor }) => _isAnchor);
 
         if (!globalOverlay) {
+            toast._isAnchor = true;
             return this._composeGlobalPosition(positionStrategy);
         }
 
         // Get Previous overlay item.
         const overlayItemIndex = toasts.findIndex((t) => t === toast);
         const previousOverlay = toasts[overlayItemIndex - 1];
+        toast._isAnchor = false;
 
         return this._composeFlexibleConnectedPosition(previousOverlay.overlayRef.overlayElement, positionStrategy);
+    }
+
+    /** @hidden */
+    private _isBoundGlobalPosition(position: any): position is ToastGlobalConnectedPosition {
+        return !!position.boundTo;
     }
 }

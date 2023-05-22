@@ -1,3 +1,30 @@
+## [0.41.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.3...v0.41.1-rc.4) (2023-05-22)
+
+
+### Bug Fixes
+
+* **core,cdk:** better fix for 9682 ([#9888](https://github.com/SAP/fundamental-ngx/issues/9888)) ([a56ba6f](https://github.com/SAP/fundamental-ngx/commit/a56ba6fb328f05e20d26fb7f4ad36689af2a0278))
+
+
+
+## [0.41.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.2...v0.41.1-rc.3) (2023-05-22)
+
+
+### Bug Fixes
+
+* **platform:** bug where combobox selection event fires twice ([#9895](https://github.com/SAP/fundamental-ngx/issues/9895)) ([01875af](https://github.com/SAP/fundamental-ngx/commit/01875afd47cf532c60bcc99c67c8220740b91c51))
+
+
+
+## [0.41.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.1...v0.41.1-rc.2) (2023-05-22)
+
+
+### Features
+
+* **core:** message toast bound to element ([#9910](https://github.com/SAP/fundamental-ngx/issues/9910)) ([0d28c13](https://github.com/SAP/fundamental-ngx/commit/0d28c132d4f2bf9acffc113af2e7282c5586829b))
+
+
+
 ## [0.41.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.0...v0.41.1-rc.1) (2023-05-17)
 
 

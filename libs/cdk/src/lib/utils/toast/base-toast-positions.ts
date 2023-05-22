@@ -1,4 +1,4 @@
-import { ConnectedPosition } from '@angular/cdk/overlay';
+import { ConnectedPosition, ScrollStrategy } from '@angular/cdk/overlay';
 
 export interface ToastGlobalPosition {
     left?: string;
@@ -7,6 +7,10 @@ export interface ToastGlobalPosition {
     top?: string;
     center: boolean;
     centerVertically?: boolean;
+}
+
+export interface ToastGlobalConnectedPosition extends ConnectedPosition {
+    boundTo: HTMLElement;
 }
 
 export const toastConnectedTopPosition: ConnectedPosition = {
@@ -52,11 +56,16 @@ export abstract class BaseToastPosition {
     /**
      * Position strategy of the first item.
      */
-    global!: ToastGlobalPosition;
+    global!: ToastGlobalPosition | ToastGlobalConnectedPosition;
     /**
      * Position strategy of the newly added items.
      */
     connected!: ConnectedPosition;
+
+    /**
+     * Scroll strategy. Used when global position is bound to some HTML element on the page.
+     */
+    scrollPosition?: ScrollStrategy;
 }
 
 /**
