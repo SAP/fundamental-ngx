@@ -1,3 +1,12 @@
+## [0.41.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.3...v0.41.1-rc.4) (2023-05-22)
+
+
+### Bug Fixes
+
+* **core,cdk:** better fix for 9682 ([#9888](https://github.com/SAP/fundamental-ngx/issues/9888)) ([a56ba6f](https://github.com/SAP/fundamental-ngx/commit/a56ba6fb328f05e20d26fb7f4ad36689af2a0278))
+
+
+
 ## [0.41.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.2...v0.41.1-rc.3) (2023-05-22)
 
 
