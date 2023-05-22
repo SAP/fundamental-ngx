@@ -1,3 +1,12 @@
+## [0.41.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.1...v0.41.1-rc.2) (2023-05-22)
+
+
+### Features
+
+* **core:** message toast bound to element ([#9910](https://github.com/SAP/fundamental-ngx/issues/9910)) ([0d28c13](https://github.com/SAP/fundamental-ngx/commit/0d28c132d4f2bf9acffc113af2e7282c5586829b))
+
+
+
 ## [0.41.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.0...v0.41.1-rc.1) (2023-05-17)
 
 
