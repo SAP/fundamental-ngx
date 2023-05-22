@@ -5,6 +5,7 @@ import {
     Component,
     ComponentRef,
     ElementRef,
+    EmbeddedViewRef,
     HostBinding,
     HostListener,
     Injector,
@@ -29,13 +30,13 @@ import { DialogDefaultComponent } from '../dialog-default/dialog-default.compone
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 import { DialogContentType } from '../dialog.types';
 import { dialogFade } from '../utils/dialog.animations';
-import { CdkPortalOutlet } from '@angular/cdk/portal';
+import { CdkPortalOutlet, CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
 import { takeUntil } from 'rxjs';
 
 /** Dialog container where the dialog content is embedded. */
 @Component({
     selector: 'fd-dialog-container',
-    template: '<ng-template cdkPortalOutlet></ng-template>',
+    template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
     styleUrls: ['./dialog-container.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [dialogFade],
@@ -92,6 +93,15 @@ export class DialogContainerComponent
     /** @hidden */
     elementRef(): ElementRef {
         return this._elementRef;
+    }
+
+    /** @hidden */
+    protected _attached(event: CdkPortalOutletAttachedRef): void {
+        if (event instanceof ComponentRef<any>) {
+            event.changeDetectorRef.markForCheck();
+        } else if (event instanceof EmbeddedViewRef<any>) {
+            event.markForCheck();
+        }
     }
 
     /** @hidden Load received content */
