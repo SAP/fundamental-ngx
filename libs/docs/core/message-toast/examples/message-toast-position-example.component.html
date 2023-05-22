@@ -9,3 +9,5 @@
 <button fd-button (click)="open(bottomRightPosition)">Open on bottom right corner</button>
 <p>Message toast with custom position:</p>
 <button fd-button (click)="open(customPosition)">Open custom position</button>
+<p>Message toast bounded to the trigger button:</p>
+<button #boundedButton fd-button (click)="open(boundPosition)">Open bounded toast</button>
