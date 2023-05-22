@@ -1,3 +1,12 @@
+## [0.41.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.2...v0.41.1-rc.3) (2023-05-22)
+
+
+### Bug Fixes
+
+* **platform:** bug where combobox selection event fires twice ([#9895](https://github.com/SAP/fundamental-ngx/issues/9895)) ([01875af](https://github.com/SAP/fundamental-ngx/commit/01875afd47cf532c60bcc99c67c8220740b91c51))
+
+
+
 ## [0.41.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.1...v0.41.1-rc.2) (2023-05-22)
 
 
