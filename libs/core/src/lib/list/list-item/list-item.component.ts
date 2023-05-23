@@ -130,6 +130,9 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
         if (this._radio && this._radio.tabIndex == null) {
             this._radio.tabIndex = -1;
         }
+        if (value) {
+            this._role = 'option';
+        }
     }
     get radio(): RadioButtonComponent {
         return this._radio;
@@ -141,6 +144,9 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
         this._checkbox = value;
         if (this._checkbox && this._checkbox.tabIndexValue == null) {
             this._checkbox.tabIndexValue = -1;
+        }
+        if (value) {
+            this._role = 'option';
         }
     }
     get checkbox(): CheckboxComponent {
@@ -195,12 +201,6 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     ngAfterContentInit(): void {
         this._listenOnLinkQueryChange();
         this._listenOnButtonQueryChange();
-
-        if (this.linkDirectives && this.linkDirectives.length) {
-            this._role = 'link';
-        } else if (this.radio || this.checkbox) {
-            this._role = 'option';
-        }
     }
 
     /** @hidden */
@@ -271,6 +271,9 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
         this.linkDirectives.changes.pipe(startWith(this.linkDirectives), takeUntil(this._onDestroy$)).subscribe(() => {
             this._onLinkListChanged$.next();
             this.link = this.linkDirectives.length > 0;
+            if (this.linkDirectives && this.linkDirectives.length) {
+                this._role = 'link';
+            }
             this._changeDetectorRef.detectChanges();
         });
     }
