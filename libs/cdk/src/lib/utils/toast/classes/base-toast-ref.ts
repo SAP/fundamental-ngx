@@ -14,6 +14,11 @@ export abstract class BaseToastRef<
     /** @hidden */
     _defaultPositionStrategy = true;
 
+    /** @hidden
+     * Used for flagging the toast as an anchor for all next appearing toasts.
+     */
+    _isAnchor = false;
+
     /**
      * @hidden
      * Subject for notifying the user that the Toast has been dismissed.

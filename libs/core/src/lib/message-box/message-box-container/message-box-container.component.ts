@@ -5,6 +5,7 @@ import {
     Component,
     ComponentRef,
     ElementRef,
+    EmbeddedViewRef,
     HostBinding,
     HostListener,
     Injector,
@@ -23,13 +24,13 @@ import { MessageBoxRef } from '../utils/message-box-ref.class';
 import { MessageBoxContent } from '../utils/message-box-content.class';
 import { MessageBoxDefaultComponent } from '../message-box-default/message-box-default.component';
 import { MessageBoxContentType } from '../message-box-content.type';
-import { CdkPortalOutlet } from '@angular/cdk/portal';
+import { CdkPortalOutlet, CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
 import { dialogFade } from '@fundamental-ngx/core/dialog';
 
 /** Message box container where the message box content is embedded. */
 @Component({
     selector: 'fd-message-box-container',
-    template: '<ng-template cdkPortalOutlet></ng-template>',
+    template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
     animations: [dialogFade],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DestroyedService]
@@ -85,6 +86,15 @@ export class MessageBoxContainerComponent
     /** @hidden */
     elementRef(): ElementRef {
         return this._elementRef;
+    }
+
+    /** @hidden */
+    protected _attached(event: CdkPortalOutletAttachedRef): void {
+        if (event instanceof ComponentRef<any>) {
+            event.changeDetectorRef.markForCheck();
+        } else if (event instanceof EmbeddedViewRef<any>) {
+            event.markForCheck();
+        }
     }
 
     /** @hidden Load received content */

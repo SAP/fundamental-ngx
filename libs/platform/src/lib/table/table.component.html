@@ -88,7 +88,6 @@
                             [columnName]="column.name"
                             [id]="id + '__' + column.name"
                             [attr.aria-colindex]="colIdx"
-                            [attr.aria-labelledby]="id + '-header-cell-' + column.name"
                             [ngClass]="'fdp-table__col--' + column.name"
                             [class.fd-table__cell--fixed]="_freezableColumns.has(column.name)"
                             [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
@@ -110,7 +109,7 @@
                             [fdPopoverTrigger]="tablePopover.popover"
                             [class.fd-table__item--clickable]="_isColumnHasHeaderMenu(column)"
                             [cellFocusedEventAnnouncer]="null"
-                            (cellFocused)="_onCellFocused($event, column.label, null)"
+                            (cellFocused)="_onCellFocused($event)"
                             (keydown.arrowLeft)="_scrollToOverlappedCell()"
                             (keydown.arrowRight)="_scrollToOverlappedCell()"
                         >
@@ -143,6 +142,7 @@
                     ></th>
 
                     <th
+                        aria-hidden="true"
                         class="fd-table__cell fd-table__cell--mock"
                         [class.fd-table__cell--mock-borderless]="!_cellMockVisible"
                         fdkDisabled
@@ -316,7 +316,7 @@
                             [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
                             [attr.data-nesting-level]="colIdx === 0 ? row.level + 1 : null"
                             [cellFocusedEventAnnouncer]="null"
-                            (cellFocused)="_onCellFocused($event, column?.label ?? '', isTreeTable ? row.level : null)"
+                            (cellFocused)="_onCellFocused($event)"
                             (click)="_onCellClick(colIdx, row)"
                             (keydown.enter)="_isTreeRowFirstCell(colIdx, row, $event) && _toggleGroupRow(row)"
                             (keydown.arrowLeft)="_scrollToOverlappedCell()"
@@ -347,6 +347,7 @@
                         </td>
 
                         <td
+                            aria-hidden="true"
                             class="fd-table__cell fd-table__cell--mock"
                             [class.fd-table__cell--mock-borderless]="!_cellMockVisible"
                             fdkDisabled
