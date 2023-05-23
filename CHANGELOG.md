@@ -1,3 +1,12 @@
+## [0.41.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.5...v0.41.1-rc.6) (2023-05-23)
+
+
+### Bug Fixes
+
+* **core:** hardcode table css prop ([#9918](https://github.com/SAP/fundamental-ngx/issues/9918)) ([dd31f21](https://github.com/SAP/fundamental-ngx/commit/dd31f21d34f1a09cc8d3fabc81fe8e8f45303b47))
+
+
+
 ## [0.41.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.4...v0.41.1-rc.5) (2023-05-23)
 
 
