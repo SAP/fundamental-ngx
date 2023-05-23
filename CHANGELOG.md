@@ -1,3 +1,12 @@
+## [0.41.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.4...v0.41.1-rc.5) (2023-05-23)
+
+
+### Bug Fixes
+
+* **platform:** remove live announcer from platform table ([#9885](https://github.com/SAP/fundamental-ngx/issues/9885)) ([63f4777](https://github.com/SAP/fundamental-ngx/commit/63f4777768401d61b3713f58bff6d35d4a963902))
+
+
+
 ## [0.41.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.3...v0.41.1-rc.4) (2023-05-22)
 
 
