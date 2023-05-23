@@ -12,3 +12,8 @@
         margin: 0;
     }
 }
+
+// TODO: remove hardcoded style
+.fd-table__expand {
+    min-width: var(--fdTable_Header_Cell_Height) !important;
+}
