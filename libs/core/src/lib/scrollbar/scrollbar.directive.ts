@@ -1,18 +1,7 @@
-import {
-    Directive,
-    ElementRef,
-    HostBinding,
-    HostListener,
-    inject,
-    Input,
-    OnDestroy,
-    PLATFORM_ID,
-    Renderer2
-} from '@angular/core';
+import { Directive, ElementRef, HostBinding, inject, Input, OnDestroy, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import scrollbarStyles from 'fundamental-styles/dist/js/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
 
 export type ScrollbarOverflowOptions = 'auto' | 'scroll' | 'hidden';
 
@@ -36,7 +25,6 @@ let styleSheet: HTMLStyleElement | null = null;
     host: {
         class: 'fd-scrollbar'
     },
-    hostDirectives: [CdkScrollable],
     standalone: true
 })
 export class ScrollbarDirective implements OnDestroy {
@@ -110,12 +98,6 @@ export class ScrollbarDirective implements OnDestroy {
 
     /** @hidden */
     private _alwaysVisible = false;
-
-    /** @hidden */
-    @HostListener('scroll', ['$event'])
-    onScroll(event: Event): void {
-        event.stopImmediatePropagation();
-    }
 
     /**
      * @hidden
