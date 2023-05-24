@@ -7,7 +7,8 @@ import {
     HostBinding,
     Input,
     OnDestroy,
-    Output
+    Output,
+    Renderer2
 } from '@angular/core';
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { DndItem, ElementChord, ElementPosition, LinkPosition } from '../dnd.interfaces';
@@ -86,7 +87,11 @@ export class DndItemDirective implements DndItem, AfterContentInit, OnDestroy {
     private _replaceIndicator: HTMLElement | null;
 
     /** @hidden */
-    constructor(public elementRef: ElementRef, private _dragDrop: DragDrop) {}
+    constructor(
+        public readonly elementRef: ElementRef,
+        private readonly _dragDrop: DragDrop,
+        private readonly _renderer: Renderer2
+    ) {}
 
     /** @hidden */
     getElementCoordinates(isBefore: boolean): ElementChord {
@@ -224,6 +229,18 @@ export class DndItemDirective implements DndItem, AfterContentInit, OnDestroy {
     changeCDKDragState(): void {
         if (this._dragRef) {
             this._dragRef.disabled = !(this._draggable && this.listDraggable);
+        }
+    }
+
+    /**
+     * Sets the disabled state of the dnd item.
+     * @param state
+     */
+    setDisabledState(state: boolean): void {
+        if (state) {
+            this._renderer.addClass(this.elementRef.nativeElement, 'fd-dnd-item--disabled');
+        } else {
+            this._renderer.removeClass(this.elementRef.nativeElement, 'fd-dnd-item--disabled');
         }
     }
 

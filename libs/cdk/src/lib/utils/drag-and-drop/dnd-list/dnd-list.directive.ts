@@ -11,10 +11,23 @@ import {
     Output,
     QueryList
 } from '@angular/core';
-import { merge, Subject } from 'rxjs';
+import { merge, Observable, Subject, take } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
+import { selectStrategy } from '../../async-strategy';
 import { ElementChord, FdDropEvent, LinkPosition, ElementPosition, DndItem, FdDndDropType } from '../dnd.interfaces';
 import { DND_ITEM, DND_LIST } from '../tokens';
+
+export type DropPredicate<T> = (
+    dragItem: T,
+    dropItem: T,
+    event: FdDropEvent<T>
+) => boolean | Promise<boolean> | Observable<boolean>;
+export type DragoverPredicate<T> = (
+    dragItem: T,
+    dragOverItem: T,
+    dragItemIndex: number,
+    dragOverItemIndex: number
+) => boolean;
 
 @Directive({
     selector: '[fdkDndList], [fd-dnd-list]',
@@ -79,6 +92,24 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         this._changeDraggableState(draggable);
     }
 
+    /** Predicate function that checks whether the item can be dropped over another item. */
+    @Input()
+    dropPredicate: DropPredicate<T> | undefined;
+
+    /**
+     * Predicate function that checks whether the item can be dragged over another item.
+     * If the function returns `false`, dragged over item will not be highlighted, and drop event will be canceled.
+     */
+    @Input()
+    dragoverPredicate: DragoverPredicate<T> | undefined;
+
+    /**
+     * Event emitted when `dropPredicate` function evaluation changes.
+     * Emits `true` when evaluation started, and `false` when completed.
+     */
+    @Output()
+    dropPredicateCalculating = new EventEmitter<boolean>();
+
     /** Event that is thrown, when items are reordered */
     @Output()
     readonly itemsChange = new EventEmitter<Array<T>>();
@@ -124,6 +155,12 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     private _indicatorsRemoved = true;
+
+    /** @hidden */
+    private _draggedItem: T | undefined;
+
+    /** @hidden */
+    private _ignoreDrop = false;
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -174,7 +211,22 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
                 this._removeAllReplaceIndicators();
                 return;
             }
-            /** Generating line, that shows where the element will be placed, on drop */
+            if (
+                this.dragoverPredicate &&
+                this._draggedItem &&
+                !this.dragoverPredicate(
+                    this._draggedItem,
+                    this.items[this._closestItemIndex],
+                    draggedItemIndex,
+                    this._closestItemIndex
+                )
+            ) {
+                this._ignoreDrop = true;
+                this._setDisabledItem(this._closestItemIndex);
+                return;
+            }
+            this._setDisabledItem(-1);
+            /** Generating line, that shows where the element will be placed, on a drop */
             if (this.dropMode === 'group') {
                 this._createReplaceIndicator(this._closestItemIndex);
             } else if (this.dropMode === 'shift') {
@@ -185,22 +237,59 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         }
     }
 
-    /** Method called, when element is started to be dragged */
+    /** Method called when an element is started to be dragged */
     dragStart(index: number): void {
         const draggedItemElement = this._dndItemReference[index].elementRef;
+        this._draggedItem = this.items[index];
         /** Counting all the element's chords */
         this._elementsCoordinates = this._dndItemReference.map((item: DndItem) =>
             item.getElementCoordinates(this._isBefore(draggedItemElement, item.elementRef), this.gridMode)
         );
     }
 
-    /** Method called, when element is released */
-    dragEnd(draggedItemIndex: number): void {
+    /** Method called when an element is released */
+    async dragEnd(draggedItemIndex: number): Promise<void> {
+        this._draggedItem = undefined;
         const items = this.items.slice();
         const replacedItemIndex = this._closestItemIndex;
-        const draggedItem = items[draggedItemIndex];
+        this._setDisabledItem(-1);
 
-        if (replacedItemIndex || replacedItemIndex === 0) {
+        if (this._ignoreDrop) {
+            this._ignoreDrop = false;
+            return;
+        }
+
+        if (!replacedItemIndex || replacedItemIndex === -1) {
+            return;
+        }
+
+        const draggedItem = items[draggedItemIndex];
+        const replacedItem = items[replacedItemIndex];
+
+        const predicateSubj = new Subject<boolean>();
+
+        const evt: FdDropEvent<T> = {
+            replacedItemIndex,
+            draggedItemIndex,
+            items,
+            insertAt: this._closestItemPosition,
+            mode: this.dropMode !== 'auto' ? this.dropMode : this._detectedDropMode
+        };
+
+        const sub = predicateSubj.pipe(take(1)).subscribe((result) => {
+            sub.unsubscribe();
+            this._removeAllLines();
+            this._removeAllReplaceIndicators();
+
+            /** Reset */
+            this._elementsCoordinates = [];
+            this._closestItemIndex = null;
+            this._closestItemPosition = null;
+
+            if (!result) {
+                return;
+            }
+
             if (draggedItemIndex !== replacedItemIndex) {
                 if (draggedItemIndex < replacedItemIndex) {
                     for (let i = draggedItemIndex; i < replacedItemIndex; i++) {
@@ -218,22 +307,28 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
                 this.itemsChange.emit(items);
             }
 
-            this.itemDropped.emit({
-                replacedItemIndex,
-                draggedItemIndex,
-                items,
-                insertAt: this._closestItemPosition,
-                mode: this.dropMode !== 'auto' ? this.dropMode : this._detectedDropMode
+            this.itemDropped.emit(evt);
+        });
+
+        if (this.dropPredicate !== undefined) {
+            this.dropPredicateCalculating.emit(true);
+            const obj = this.dropPredicate(draggedItem, replacedItem, evt);
+            const strategy = selectStrategy(obj);
+
+            await strategy.createSubscription(obj, (result) => {
+                predicateSubj.next(result);
+                this.dropPredicateCalculating.emit(false);
             });
-
-            this._removeAllLines();
-            this._removeAllReplaceIndicators();
-
-            /** Reset */
-            this._elementsCoordinates = [];
-            this._closestItemIndex = null;
-            this._closestItemPosition = null;
+        } else {
+            predicateSubj.next(true);
         }
+    }
+
+    /** @hidden */
+    private _setDisabledItem(itemIndex: number): void {
+        this.dndItems.forEach((item, index) => {
+            item.setDisabledState(index === itemIndex);
+        });
     }
 
     /** @hidden */
@@ -315,7 +410,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         this.dndItems.forEach((item, index) => {
             item.moved.pipe(takeUntil(refresh$)).subscribe((position: ElementPosition) => this.onMove(position, index));
             item.started.pipe(takeUntil(refresh$)).subscribe(() => this.dragStart(index));
-            item.released.pipe(takeUntil(refresh$)).subscribe(() => this.dragEnd(index));
+            item.released.pipe(takeUntil(refresh$)).subscribe(async () => await this.dragEnd(index));
         });
     }
 

@@ -27,16 +27,17 @@ export interface ElementPosition {
 
 export interface DndItem {
     elementRef: ElementRef;
-    getElementCoordinates: (isBefore: boolean, gridMode: boolean) => ElementChord;
-    removeLine: () => void;
-    removeReplaceIndicator: () => void;
-    createLine: (linkPosition: LinkPosition, gridMode: boolean) => void;
-    createReplaceIndicator: () => void;
+    getElementCoordinates(isBefore: boolean, gridMode: boolean): ElementChord;
+    removeLine(): void;
+    removeReplaceIndicator(): void;
+    createLine(linkPosition: LinkPosition, gridMode: boolean): void;
+    createReplaceIndicator(): void;
     moved: Observable<ElementPosition>;
     released: Observable<void>;
     started: Observable<void>;
     listDraggable: boolean;
-    changeCDKDragState: () => void;
+    changeCDKDragState(): void;
+    setDisabledState(state: boolean): void;
 }
 
 export type FdDndDropType = 'shift' | 'group' | 'auto';

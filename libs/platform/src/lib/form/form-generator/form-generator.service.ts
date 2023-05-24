@@ -1,11 +1,12 @@
 import { Inject, Injectable, OnDestroy, Optional, SkipSelf, Type } from '@angular/core';
 import { AsyncValidatorFn, FormBuilder, Validators } from '@angular/forms';
+import { isFunction, selectStrategy } from '@fundamental-ngx/cdk/utils';
 import { cloneDeep, merge } from 'lodash-es';
 
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
-import { SelectItem, selectStrategy, isFunction } from '@fundamental-ngx/platform/shared';
+import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { DynamicFormControl, DynamicFormControlGroup, DynamicFormGroupControl } from './dynamic-form-control';
 import { FormGeneratorComponentsAccessorService } from './form-generator-components-accessor.service';
 import {

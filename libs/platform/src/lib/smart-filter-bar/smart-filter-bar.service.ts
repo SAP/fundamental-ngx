@@ -11,10 +11,11 @@ import {
     FilterAllStrategy,
     getFilterStrategiesBasedOnDataType
 } from '@fundamental-ngx/platform/table';
-import { isSelectItem, SelectItem, selectStrategy } from '@fundamental-ngx/platform/shared';
+import { isSelectItem, SelectItem } from '@fundamental-ngx/platform/shared';
 
 import { SmartFilterBarCustomFilterConfig } from './interfaces/smart-filter-bar-custom-filter-config';
 import { SmartFilterBarCondition } from './interfaces/smart-filter-bar-condition';
+import { selectStrategy } from '@fundamental-ngx/cdk/utils';
 
 @Injectable()
 export class SmartFilterBarService {

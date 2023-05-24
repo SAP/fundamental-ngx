@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { DropPredicate } from '@fundamental-ngx/cdk';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
@@ -14,6 +15,7 @@ import {
     TableRowType,
     TableState
 } from '@fundamental-ngx/platform/table';
+import { delay } from 'rxjs/operators';
 
 @Component({
     selector: 'fdp-platform-table-tree-example',
@@ -23,7 +25,15 @@ export class PlatformTableTreeExampleComponent {
     @ViewChild(TableComponent)
     table: TableComponent;
 
-    source: TableDataSource<TableRow>;
+    source: TableDataSource<ExampleItem>;
+
+    dropPredicate: DropPredicate<TableRow<ExampleItem>> = (dragRow, dropRow, evt) => {
+        console.log(dragRow, dropRow, evt);
+        if (dragRow.value.name.toLowerCase() === 'laptops' && dropRow.value.name === 'Astro Laptop 1516') {
+            return of(false).pipe(delay(2000));
+        }
+        return true;
+    };
 
     constructor() {
         this.source = new TableDataSource(new TableDataProviderExample());
@@ -45,7 +55,7 @@ export class PlatformTableTreeExampleComponent {
         this.table.toggleGroupRows(0);
     }
 
-    onRowSelectionChange(event: TableRowSelectionChangeEvent<TableRow<any>>) {
+    onRowSelectionChange(event: TableRowSelectionChangeEvent<ExampleItem>) {
         console.log(event);
     }
 }
@@ -68,18 +78,17 @@ export interface ExampleItem {
  * Table Data Provider Example
  *
  */
-export class TableDataProviderExample extends TableDataProvider<TableRow> {
-    items: TableRow[] = [];
+export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
+    items: ExampleItem[] = [];
     totalItems = ITEMS.length;
 
     constructor() {
         super();
-        this.items = convertToTree(null, ITEMS);
-        this.totalItems = this.items.length;
+        this.items = [...ITEMS];
     }
 
-    fetch(tableState?: TableState): Observable<TableRow[]> {
-        this.items = this.items = convertToTree(null, ITEMS);
+    fetch(tableState?: TableState): Observable<ExampleItem[]> {
+        this.items = this.items = [...ITEMS];
 
         // apply searching
         if (tableState?.searchInput) {
@@ -91,7 +100,7 @@ export class TableDataProviderExample extends TableDataProvider<TableRow> {
         return of(this.items);
     }
 
-    search(items: TableRow[], { searchInput, columnKeys }: TableState): TableRow[] {
+    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
         const searchText = searchInput?.text || '';
         const keysToSearchBy = columnKeys;
 
@@ -100,7 +109,7 @@ export class TableDataProviderExample extends TableDataProvider<TableRow> {
         }
 
         return items.filter((item) => {
-            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item.value));
+            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
             return valuesForSearch
                 .filter((value) => !!value)
                 .map((value): string => value.toString())

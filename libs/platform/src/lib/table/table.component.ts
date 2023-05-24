@@ -30,6 +30,8 @@ import {
 import { NgForm } from '@angular/forms';
 
 import {
+    DragoverPredicate,
+    DropPredicate,
     FdDndDropEventMode,
     FdDndDropType,
     FdDropEvent,
@@ -197,7 +199,7 @@ export class TableComponent<T = any>
     extends Table<T>
     implements AfterViewInit, OnDestroy, OnChanges, OnInit, AfterViewChecked
 {
-    /** Component name used in Preset managed component. */
+    /** Component name used in a Preset-managed component. */
     @Input()
     name = 'platformTable';
 
@@ -496,6 +498,18 @@ export class TableComponent<T = any>
     @Input()
     dropMode: FdDndDropType = 'auto';
 
+    /** Predicate function that checks whether the item can be dropped over another item. */
+    @Input()
+    dropPredicate: DropPredicate<TableRow<T>>;
+
+    /**
+     * Predicate function that checks whether the item can be dragged over another item.
+     * If the function returns `false`, dragged over item will not be highlighted, and drop event will be canceled.
+     */
+    @Input()
+    dragoverPredicate: DragoverPredicate<TableRow<T>>;
+
+    /** Event emitted when the current preset configuration has been changed. */
     /**
      * Whether to load previous pages.
      * This option works only when `pageScrolling` is true, and the initial page > 1
@@ -893,7 +907,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     get loadingState(): boolean {
-        return this.loading ?? this._internalLoadingState;
+        return this.loading ?? (this._internalLoadingState || this._dndLoadingState);
     }
 
     /** @hidden
@@ -909,6 +923,9 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _internalLoadingState = false;
+
+    /** @hidden */
+    private _dndLoadingState = false;
 
     /** @hidden */
     private readonly _rangeSelector = new RangeSelector();
@@ -1342,7 +1359,7 @@ export class TableComponent<T = any>
         this._cdr.markForCheck();
     }
 
-    /** Manually triggers columns width recalculation */
+    /** Manually triggers column's width recalculation */
     recalculateTableColumnWidth(): void {
         this._tableColumnResizeService.setColumnNames(this._visibleColumns.map((column) => column.name));
         this._setFreezableInfo();
@@ -1503,7 +1520,7 @@ export class TableComponent<T = any>
                 } else if (!this._freezableColumns.size && this._freezableEndColumns.size) {
                     activeEl.scrollIntoView({ block: 'nearest', inline: 'center' });
                 } else if (this._freezableColumns.size && this._freezableEndColumns.size) {
-                    // check to see if the active element is obstructed by another element
+                    // check to see if another element obstructs the active element
                     const activeElLeft = activeEl.getBoundingClientRect().left;
                     const activeElTop = activeEl.getBoundingClientRect().top;
                     const topElementFromLeft = document.elementFromPoint(activeElLeft, activeElTop);
@@ -1532,6 +1549,16 @@ export class TableComponent<T = any>
                 }
             }
         }
+    }
+
+    /** @hidden */
+    _calculatingLoading(isLoading: boolean): void {
+        if (this._dndLoadingState === isLoading) {
+            return;
+        }
+
+        this._dndLoadingState = isLoading;
+        this._cdr.detectChanges();
     }
 
     /** @hidden */
