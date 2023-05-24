@@ -1,3 +1,12 @@
+## [0.41.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.6...v0.41.1-rc.7) (2023-05-24)
+
+
+### Features
+
+* **platform,docs:** table preserved state ([#9907](https://github.com/SAP/fundamental-ngx/issues/9907)) ([640f78b](https://github.com/SAP/fundamental-ngx/commit/640f78b276011ef957241936f761bb11e92906ef))
+
+
+
 ## [0.41.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.5...v0.41.1-rc.6) (2023-05-23)
 
 
