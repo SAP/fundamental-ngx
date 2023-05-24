@@ -8,7 +8,6 @@
         [initialVisibleColumns]="columns"
         [initialSortBy]="sortBy"
         [initialFilterBy]="initialFilterBy"
-        [initialGroupBy]="groupBy"
         [initialPage]="page"
         [pageScrolling]="true"
         [pageSize]="4"
@@ -19,7 +18,6 @@
         expandedStateKey="expanded"
         dropMode="group"
         (columnsChange)="columnChangeCallback($event)"
-        (groupChange)="groupingChangeCallback($event)"
         (filterChange)="filtersChangeCallback($event)"
         (sortChange)="sortingChangeCallback($event)"
         (rowToggleOpenState)="rowToggleCallback($event)"
@@ -33,30 +31,14 @@
         <fdp-column name="name" key="name" label="Name" [sortable]="true" [groupable]="true" [filterable]="true">
         </fdp-column>
 
-        <fdp-column
-            name="description"
-            key="description"
-            label="Description"
-            [sortable]="true"
-            [groupable]="true"
-            [filterable]="true"
-        >
+        <fdp-column name="description" key="description" label="Description" [sortable]="true" [filterable]="true">
         </fdp-column>
 
-        <fdp-column
-            name="price"
-            key="price.value"
-            label="Price"
-            [sortable]="true"
-            [groupable]="true"
-            [filterable]="true"
-        >
-        </fdp-column>
+        <fdp-column name="price" key="price.value" label="Price" [sortable]="true" [filterable]="true"> </fdp-column>
 
-        <fdp-column name="verified" key="verified" label="Verified" [groupable]="true"> </fdp-column>
+        <fdp-column name="verified" key="verified" label="Verified"> </fdp-column>
 
-        <fdp-column name="status" key="status" label="Status" [sortable]="true" [groupable]="true" [filterable]="true">
-        </fdp-column>
+        <fdp-column name="status" key="status" label="Status" [sortable]="true" [filterable]="true"> </fdp-column>
     </fdp-table>
 
     <fdp-table-p13-dialog [table]="table"></fdp-table-p13-dialog>

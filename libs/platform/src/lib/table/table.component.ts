@@ -54,7 +54,7 @@ import equal from 'fast-deep-equal';
 import { cloneDeep, get } from 'lodash-es';
 import set from 'lodash-es/set';
 import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take, tap } from 'rxjs/operators';
 import { TableColumn } from './components/table-column/table-column';
 import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
 import {
@@ -1091,12 +1091,13 @@ export class TableComponent<T = any>
     /** @hidden */
     ngAfterViewChecked(): void {
         // When table rows are set, emit an event to manipulate the view (e.g., scroll to some row).
-        setTimeout(() => {
-            if (!this._shouldEmitRowsChange) {
-                return;
-            }
-            this._shouldEmitRowsChange = false;
-            this.tableRowsSet.emit();
+        if (!this._shouldEmitRowsChange) {
+            return;
+        }
+        this._shouldEmitRowsChange = false;
+        const emitter = this.tableRowsSet;
+        this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
+            emitter.emit();
         });
     }
 
