@@ -1,3 +1,101 @@
+## [0.41.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.6...v0.41.1-rc.7) (2023-05-24)
+
+
+### Features
+
+* **platform,docs:** table preserved state ([#9907](https://github.com/SAP/fundamental-ngx/issues/9907)) ([640f78b](https://github.com/SAP/fundamental-ngx/commit/640f78b276011ef957241936f761bb11e92906ef))
+
+
+
+## [0.41.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.5...v0.41.1-rc.6) (2023-05-23)
+
+
+### Bug Fixes
+
+* **core:** hardcode table css prop ([#9918](https://github.com/SAP/fundamental-ngx/issues/9918)) ([dd31f21](https://github.com/SAP/fundamental-ngx/commit/dd31f21d34f1a09cc8d3fabc81fe8e8f45303b47))
+
+
+
+## [0.41.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.4...v0.41.1-rc.5) (2023-05-23)
+
+
+### Bug Fixes
+
+* **platform:** remove live announcer from platform table ([#9885](https://github.com/SAP/fundamental-ngx/issues/9885)) ([63f4777](https://github.com/SAP/fundamental-ngx/commit/63f4777768401d61b3713f58bff6d35d4a963902))
+
+
+
+## [0.41.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.3...v0.41.1-rc.4) (2023-05-22)
+
+
+### Bug Fixes
+
+* **core,cdk:** better fix for 9682 ([#9888](https://github.com/SAP/fundamental-ngx/issues/9888)) ([a56ba6f](https://github.com/SAP/fundamental-ngx/commit/a56ba6fb328f05e20d26fb7f4ad36689af2a0278))
+
+
+
+## [0.41.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.2...v0.41.1-rc.3) (2023-05-22)
+
+
+### Bug Fixes
+
+* **platform:** bug where combobox selection event fires twice ([#9895](https://github.com/SAP/fundamental-ngx/issues/9895)) ([01875af](https://github.com/SAP/fundamental-ngx/commit/01875afd47cf532c60bcc99c67c8220740b91c51))
+
+
+
+## [0.41.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.1...v0.41.1-rc.2) (2023-05-22)
+
+
+### Features
+
+* **core:** message toast bound to element ([#9910](https://github.com/SAP/fundamental-ngx/issues/9910)) ([0d28c13](https://github.com/SAP/fundamental-ngx/commit/0d28c132d4f2bf9acffc113af2e7282c5586829b))
+
+
+
+## [0.41.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.0...v0.41.1-rc.1) (2023-05-17)
+
+
+
+## [0.41.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.41.0...v0.41.1-rc.0) (2023-05-16)
+
+
+### Features
+
+* **core:** tree component ([#9781](https://github.com/SAP/fundamental-ngx/issues/9781)) ([2a89bed](https://github.com/SAP/fundamental-ngx/commit/2a89bedd6ca1aeff14c818fd81417418d5e22ccc))
+
+
+
+# [0.41.0](https://github.com/SAP/fundamental-ngx/compare/v0.41.0-rc.3...v0.41.0) (2023-05-16)
+
+
+
+# [0.41.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.41.0-rc.2...v0.41.0-rc.3) (2023-05-15)
+
+
+### Bug Fixes
+
+* **core,platform,cx:** navigation components had missing/incorrect roles ([#9818](https://github.com/SAP/fundamental-ngx/issues/9818)) ([4bae7a3](https://github.com/SAP/fundamental-ngx/commit/4bae7a3c59a9bb71328ca602274d1b9a6058a46d))
+
+
+
+# [0.41.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.41.0-rc.1...v0.41.0-rc.2) (2023-05-12)
+
+
+### Bug Fixes
+
+* **platform:** checkbox focus/keyboard nav issue in platform table ([#9762](https://github.com/SAP/fundamental-ngx/issues/9762)) ([01b1e31](https://github.com/SAP/fundamental-ngx/commit/01b1e31003598d90e2b253cb1e5b4f69d138ae6e))
+
+
+
+# [0.41.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.41.0-rc.0...v0.41.0-rc.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* **core,platform:** remove unnecessary innerText usage ([#9819](https://github.com/SAP/fundamental-ngx/issues/9819)) ([0f7195c](https://github.com/SAP/fundamental-ngx/commit/0f7195c9192952b9f5697305fc8e3b2fc2b88ba5))
+
+
+
 # [0.41.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.40.4-rc.6...v0.41.0-rc.0) (2023-05-10)
 
 

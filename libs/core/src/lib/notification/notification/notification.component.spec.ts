@@ -47,7 +47,7 @@ describe('NotificationComponent', () => {
     });
 
     it('should generate component', () => {
-        spyOn<any>(component, '_loadFromComponent').and.callThrough();
+        jest.spyOn<any, any>(component, '_loadFromComponent');
         component.childContent = TemplateTestComponent;
         component.ngAfterViewInit();
         fixture.detectChanges();
@@ -56,7 +56,7 @@ describe('NotificationComponent', () => {
     });
 
     it('should generate template', () => {
-        spyOn<any>(component, '_loadFromTemplate').and.callThrough();
+        jest.spyOn<any, any>(component, '_loadFromTemplate');
         component.childContent = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
         component.ngAfterViewInit();
         fixture.detectChanges();

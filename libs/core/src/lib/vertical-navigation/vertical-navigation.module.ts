@@ -4,6 +4,7 @@ import { VerticalNavigationComponent } from './vertical-navigation.component';
 import { VerticalNavigationMainNavigationComponent } from './vertical-navigation-main-navigation.component';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { VerticalNavigationGroupHeaderDirective } from './vertical-navigation-group-header.directive';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     declarations: [
@@ -11,7 +12,7 @@ import { VerticalNavigationGroupHeaderDirective } from './vertical-navigation-gr
         VerticalNavigationMainNavigationComponent,
         VerticalNavigationGroupHeaderDirective
     ],
-    imports: [CommonModule, ListModule],
+    imports: [CommonModule, ListModule, I18nModule],
     exports: [
         VerticalNavigationComponent,
         VerticalNavigationMainNavigationComponent,

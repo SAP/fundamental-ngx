@@ -19,18 +19,24 @@
                 }
             }
         },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/platform/src/lib/button/test.ts",
-                "tsConfig": "libs/platform/src/lib/button/tsconfig.spec.json",
-                "karmaConfig": "libs/platform/src/lib/button/karma.conf.js"
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/platform/src/lib/button/**/*.ts", "libs/platform/src/lib/button/**/*.html"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/platform/src/lib/button/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
             }
         }
     },

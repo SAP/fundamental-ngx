@@ -1,5 +1,5 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, ViewChild } from '@angular/core';
 import {
     BaseToastPosition,
     ToastBottomCenterPosition,
@@ -25,6 +25,8 @@ import { MessageToastService } from '@fundamental-ngx/core/message-toast';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageToastPositionExampleComponent {
+    @ViewChild('boundedButton', { read: ElementRef })
+    boundButton: ElementRef;
     topLeftPosition = ToastTopLeftPosition;
     bottomLeftPosition = ToastBottomLeftPosition;
     topRightPosition = ToastTopRightPosition;
@@ -32,8 +34,29 @@ export class MessageToastPositionExampleComponent {
     topCenterPosition = ToastTopCenterPosition;
     bottomCenterPosition = ToastBottomCenterPosition;
     customPosition = CustomToastPosition;
+    boundPosition: BaseToastPosition;
 
     messageToastService = inject(MessageToastService);
+
+    ngAfterViewInit(): void {
+        this.boundPosition = {
+            global: {
+                boundTo: this.boundButton.nativeElement,
+                originX: 'center',
+                originY: 'top',
+                overlayX: 'center',
+                overlayY: 'bottom',
+                offsetY: -16
+            },
+            connected: {
+                originX: 'center',
+                originY: 'top',
+                overlayX: 'center',
+                overlayY: 'bottom',
+                offsetY: -16
+            }
+        };
+    }
 
     open(position: BaseToastPosition): void {
         this.messageToastService.openFromString(

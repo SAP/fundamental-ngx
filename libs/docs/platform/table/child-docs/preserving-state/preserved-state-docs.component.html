@@ -1,0 +1,29 @@
+<fd-docs-section-title id="preserved-state" componentName="table"> Preserving table state</fd-docs-section-title>
+<description>
+    <p>
+        In some cases, application should preserve the state of the table (current page, filters, grouping, sorting,
+        etc) while navigating over pages.
+    </p>
+    <p>
+        To do so, developers can take advantage of using <code>initial[Property]</code> input properties and
+        <code>[property]Change</code> output events.
+    </p>
+    <p>
+        Developers can also listen to a table body scroll event with the help of <code>(tableScrolled)</code> output
+        event, when <code>[pageScrolling]</code> input property is <code>true</code>.
+    </p>
+    <p>
+        The example below demonstrates how to pass initial state and store changed state locally, then recreate the
+        table component and pass updated state to it.
+    </p>
+    <p>
+        The logic behind it is to keep loaded data source items in memory, manipulate their properties when some event
+        from table emits, and reuse this data on new table initialization.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-table-preserved-state-example></fdp-platform-table-preserved-state-example>
+</component-example>
+<code-example [exampleFiles]="preservedStateFiles"></code-example>
+
+<separator></separator>

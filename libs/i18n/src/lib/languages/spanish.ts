@@ -43,6 +43,10 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Descartar'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel: 'Arbol del item {{ itemDetails }}, {{ index }} de {{ total }}{{ selectedDescription }}'
     },
@@ -601,5 +605,10 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Aceptar',
         semanticDeclineLabel: 'Rechazar'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node',
+        noData: 'No data'
     }
 };

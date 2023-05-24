@@ -19,14 +19,6 @@
                 }
             }
         },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/platform/src/lib/value-help-dialog/test.ts",
-                "tsConfig": "libs/platform/src/lib/value-help-dialog/tsconfig.spec.json",
-                "karmaConfig": "libs/platform/src/lib/value-help-dialog/karma.conf.js"
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {
@@ -34,6 +26,20 @@
                     "libs/platform/src/lib/value-help-dialog/**/*.ts",
                     "libs/platform/src/lib/value-help-dialog/**/*.html"
                 ]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/platform/src/lib/value-help-dialog/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
             }
         }
     },

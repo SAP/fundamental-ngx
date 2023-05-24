@@ -17,6 +17,10 @@ export class MockDataProvider extends AbstractDataProvider<any> {
     fetch(): Observable<any[]> {
         return of(this.items);
     }
+
+    getTotalItems(params?: Map<string, any>): Observable<number> {
+        return of(this.items.length);
+    }
 }
 
 export class MockArrayDataSource extends BaseDataSource<number> {
@@ -61,13 +65,11 @@ describe('DataSourceDirective', () => {
     });
 
     it('should emit new data', fakeAsync(() => {
-        const emitSpy = spyOn(directive.dataChanged, 'emit').and.callThrough();
+        const emitSpy = jest.spyOn(directive.dataChanged, 'emit');
 
         directive.dataSource = arrayData;
 
         tick(2000);
-
-        console.log(arrayData);
 
         expect(emitSpy).toHaveBeenCalled();
         expect(emitSpy).toHaveBeenCalledWith(arrayData);

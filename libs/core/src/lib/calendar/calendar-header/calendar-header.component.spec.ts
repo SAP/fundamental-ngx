@@ -25,7 +25,7 @@ describe('Calendar2HeaderComponent', () => {
     });
 
     it('Should switch to year view, when changed to year and not no year view', () => {
-        spyOn(component.activeViewChange, 'emit');
+        jest.spyOn(component.activeViewChange, 'emit');
         component.activeView = 'day';
         component._processViewChange('year');
         expect(component.activeViewChange.emit).toHaveBeenCalledWith('year');
@@ -34,7 +34,7 @@ describe('Calendar2HeaderComponent', () => {
     });
 
     it('Should switch to day view, when changed to year and on year view', () => {
-        spyOn(component.activeViewChange, 'emit');
+        jest.spyOn(component.activeViewChange, 'emit');
         component.activeView = 'year';
         component._processViewChange('year');
         expect(component.activeViewChange.emit).toHaveBeenCalledWith('day');
@@ -42,7 +42,7 @@ describe('Calendar2HeaderComponent', () => {
     });
 
     it('Should switch to month view, changed to month and not no month view', () => {
-        spyOn(component.activeViewChange, 'emit');
+        jest.spyOn(component.activeViewChange, 'emit');
         component.activeView = 'day';
         component._processViewChange('month');
         expect(component.activeViewChange.emit).toHaveBeenCalledWith('month');

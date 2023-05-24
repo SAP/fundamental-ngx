@@ -48,6 +48,10 @@ export interface FdLanguage {
     coreMessageStrip: {
         dismissLabel: FdLanguageKey;
     };
+    coreNavigation: {
+        mainNavigation: FdLanguageKey;
+        navigationPath: FdLanguageKey;
+    };
     coreNestedList: {
         /**
          * @param itemDetails
@@ -221,6 +225,11 @@ export interface FdLanguage {
     };
     coreBreadcrumb: {
         overflowTitleMore: FdLanguageKey;
+    };
+    coreTree: {
+        expand: FdLanguageKey;
+        collapse: FdLanguageKey;
+        noData: FdLanguageKey;
     };
     platformActionBar: {
         backButtonLabel: FdLanguageKey;

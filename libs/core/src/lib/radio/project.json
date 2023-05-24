@@ -19,18 +19,24 @@
                 }
             }
         },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/radio/test.ts",
-                "tsConfig": "libs/core/src/lib/radio/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/radio/karma.conf.js"
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/core/src/lib/radio/**/*.ts", "libs/core/src/lib/radio/**/*.html"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/core/src/lib/radio/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
             }
         }
     },

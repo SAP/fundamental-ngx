@@ -134,7 +134,7 @@ describe('ResizableCardLayoutComponent', () => {
     it('should be placed in layout', () => {
         whenStable(fixture);
 
-        spyOn(component.resizableCardLayout, 'getWidthAvailable').and.returnValue(1200);
+        jest.spyOn(component.resizableCardLayout, 'getWidthAvailable').mockReturnValue(1200);
 
         component.resizableCardLayout.onResize();
         whenStable(fixture);
@@ -175,7 +175,7 @@ describe('ResizableCardLayoutComponent', () => {
         // for lg screen
         whenStable(fixture);
 
-        spyOn(component.resizableCardLayout, 'getWidthAvailable').and.returnValue(1200);
+        jest.spyOn(component.resizableCardLayout, 'getWidthAvailable').mockReturnValue(1200);
 
         component.resizableCardLayout.onResize();
         whenStable(fixture);
@@ -212,7 +212,7 @@ describe('ResizableCardLayoutComponent', () => {
         // for lg screen
         whenStable(fixture);
 
-        spyOn(component.resizableCardLayout, 'getWidthAvailable').and.returnValue(1200);
+        jest.spyOn(component.resizableCardLayout, 'getWidthAvailable').mockReturnValue(1200);
 
         component.resizableCardLayout.onResize();
         whenStable(fixture);
@@ -277,7 +277,7 @@ describe('ResizableCardLayoutComponent', () => {
         // for lg screen
         whenStable(fixture);
 
-        spyOn(component.resizableCardLayout, 'getWidthAvailable').and.returnValue(1200);
+        jest.spyOn(component.resizableCardLayout, 'getWidthAvailable').mockReturnValue(1200);
 
         component.resizableCardLayout.onResize();
         whenStable(fixture);
@@ -315,7 +315,7 @@ describe('ResizableCardLayoutComponent', () => {
         // for lg screen
         whenStable(fixture);
 
-        spyOn(component.resizableCardLayout, 'getWidthAvailable').and.returnValue(1200);
+        jest.spyOn(component.resizableCardLayout, 'getWidthAvailable').mockReturnValue(1200);
 
         component.resizableCardLayout.onResize();
         whenStable(fixture);
@@ -351,7 +351,7 @@ describe('ResizableCardLayoutComponent', () => {
         // for lg screen
         whenStable(fixture);
 
-        spyOn(component.resizableCardLayout, 'getWidthAvailable').and.returnValue(1200);
+        jest.spyOn(component.resizableCardLayout, 'getWidthAvailable').mockReturnValue(1200);
 
         component.resizableCardLayout.onResize();
         whenStable(fixture);
@@ -402,7 +402,7 @@ describe('ResizableCardLayoutComponent', () => {
         // for lg screen
         whenStable(fixture);
 
-        spyOn(component.resizableCardLayout, 'getWidthAvailable').and.returnValue(1200);
+        jest.spyOn(component.resizableCardLayout, 'getWidthAvailable').mockReturnValue(1200);
 
         component.resizableCardLayout.onResize();
         whenStable(fixture);

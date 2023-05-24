@@ -331,7 +331,7 @@ describe('SmartFilterBarComponent', () => {
     it('should open filters dialog', async () => {
         await whenStable(fixture);
 
-        const dialogSpy = spyOn((smartFilterBar as any)._dialogService, 'open').and.callThrough();
+        const dialogSpy = jest.spyOn((smartFilterBar as any)._dialogService, 'open');
 
         smartFilterBar.showFilteringSettings();
 
@@ -341,7 +341,7 @@ describe('SmartFilterBarComponent', () => {
     it('should submit form', async () => {
         await whenStable(fixture);
 
-        const fgSpy = spyOn(component.smartFilterBar, '_onFormSubmitted').and.callThrough();
+        const fgSpy = jest.spyOn(component.smartFilterBar, '_onFormSubmitted');
 
         smartFilterBar.submitForm();
 
@@ -355,7 +355,7 @@ describe('SmartFilterBarComponent', () => {
         fixture.detectChanges();
         await whenStable(fixture);
 
-        expect(smartFilterBar._showFilterBar).toBeFalse();
+        expect(smartFilterBar._showFilterBar).toBe(false);
         expect(
             fixture.nativeElement.querySelector('.fdp-smart-filter-bar__filters').getAttribute('hidden')
         ).not.toBeNull();

@@ -25,6 +25,6 @@ describe('DynamicSideContentSideComponent', () => {
     });
 
     it('should add className to host', () => {
-        expect(fixture.debugElement.nativeElement.className.includes(DYNAMIC_SIDE_CONTENT_CLASS_NAME.side)).toBeTrue();
+        expect(fixture.debugElement.nativeElement.className.includes(DYNAMIC_SIDE_CONTENT_CLASS_NAME.side)).toBe(true);
     });
 });

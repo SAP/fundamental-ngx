@@ -55,6 +55,10 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Закрити'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel: 'Елемент дерева {{ itemDetails }}, {{ index }} із {{ total }}{{ selectedDescription }}'
     },
@@ -798,6 +802,11 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Прийняти',
         semanticDeclineLabel: 'Відхилити'
+    },
+    coreTree: {
+        expand: 'Розгорнути вузол',
+        collapse: 'Згорнути вузол',
+        noData: 'Немає даних'
     }
 };
 

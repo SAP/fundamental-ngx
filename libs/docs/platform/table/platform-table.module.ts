@@ -69,6 +69,8 @@ import { SettingsDialogDocsComponent } from './child-docs/settings-dialog/settin
 import { RowSelectionDocsComponent } from './child-docs/row-selection/row-selection-docs.component';
 import { TableScrollingDocsComponent } from './child-docs/scrolling/table-scrolling-docs.component';
 import { ClickableRowsDocsComponent } from './child-docs/clickable-rows/clickable-rows-docs.component';
+import { PreservedStateDocsComponent } from './child-docs/preserving-state/preserved-state-docs.component';
+import { PlatformTablePreservedStateExampleComponent } from './examples/preserved-state/platform-table-preserved-state-example.component';
 
 const routes: Routes = [
     {
@@ -83,7 +85,8 @@ const routes: Routes = [
             { path: 'settings-dialog-table', component: SettingsDialogDocsComponent },
             { path: 'scrolling', component: TableScrollingDocsComponent },
             { path: 'row-selection', component: RowSelectionDocsComponent },
-            { path: 'clickable-rows', component: ClickableRowsDocsComponent }
+            { path: 'clickable-rows', component: ClickableRowsDocsComponent },
+            { path: 'preserved-state', component: PreservedStateDocsComponent }
         ]
     }
 ];
@@ -150,7 +153,9 @@ const routes: Routes = [
         SettingsDialogDocsComponent,
         RowSelectionDocsComponent,
         TableScrollingDocsComponent,
-        ClickableRowsDocsComponent
+        ClickableRowsDocsComponent,
+        PreservedStateDocsComponent,
+        PlatformTablePreservedStateExampleComponent
     ],
     providers: [
         RtlService,

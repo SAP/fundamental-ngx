@@ -42,6 +42,10 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'გაუქმება'
     },
+    coreNavigation: {
+        mainNavigation: 'მთავარი ნავიგაცია',
+        navigationPath: 'ნავიგაციის გზა'
+    },
     coreNestedList: {
         linkItemAriaLabel:
             'სიის ელემენტი {{ itemDetails }}, ინდექსით {{ index }} {{ total }}-დან {{ selectedDescription }}'
@@ -596,5 +600,10 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'დათანხმება',
         semanticDeclineLabel: 'უარყოფა'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node',
+        noData: 'No data'
     }
 };

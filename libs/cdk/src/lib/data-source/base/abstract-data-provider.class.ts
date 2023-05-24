@@ -38,12 +38,17 @@ export abstract class AbstractDataProvider<T> {
     setMatchingStrategy(strategy: MatchingStrategy): void {
         this._matchingStrategy = strategy;
     }
+
+    /** @hidden */
+    abstract getTotalItems(params?: Map<string, any>): Observable<number>;
 }
 
 /**
  * Default data provider class used for other components to extend from.
  */
 export class DataProvider<T> extends AbstractDataProvider<T> {
+    /** Default limit for the pagination. */
+    public defaultLimit = 50;
     /** @hidden */
     constructor(protected values: Observable<T[]> | T[]) {
         super();
@@ -54,7 +59,7 @@ export class DataProvider<T> extends AbstractDataProvider<T> {
         const observable = isObservable(this.values) ? this.values : of(this.values);
 
         const queryString = params.get('query');
-        const limit = params.get('limit') || 50;
+        const limit = params.get('limit') || this.defaultLimit;
 
         if (!queryString || queryString === '*') {
             return observable.pipe(map((items) => this.withLimit(items, limit)));
@@ -82,8 +87,26 @@ export class DataProvider<T> extends AbstractDataProvider<T> {
     }
 
     /**
+     * Returns observable with the number of total items that satisfy the search query.
+     * Warning: this is a naive implementation of the number of the filtered items.
+     * For real-world scenarios, it is recommended to override this method with its own logic.
+     */
+    getTotalItems(params: Map<string, any>): Observable<number> {
+        const observable = isObservable(this.values) ? this.values : of(this.values);
+        const queryString = params.get('query');
+
+        if (!queryString) {
+            return observable.pipe(map((items) => items.length));
+        }
+
+        const toLowerPattern = queryString.toLowerCase();
+
+        return observable.pipe(map((items) => items.filter((item) => this.matches(item, toLowerPattern)).length));
+    }
+
+    /**
      * Warning: If you don't supply search Key and you want fulltext search, and you use this
-     * default implementation be aware that it can  perform poorly as it is naive implementation
+     * default implementation, be aware that it can perform poorly as it is a naive implementation
      * that does not do deep compare.
      */
     matches(item: T, pattern: string): boolean {

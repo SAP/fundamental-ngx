@@ -42,6 +42,10 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Dismiss'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel: 'Tree Item {{ itemDetails }}, {{ index }} of {{ total }}{{ selectedDescription }}'
     },
@@ -593,5 +597,10 @@ export const FD_LANGUAGE_HEBREW: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Accept',
         semanticDeclineLabel: 'Decline'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node',
+        noData: 'No data'
     }
 };

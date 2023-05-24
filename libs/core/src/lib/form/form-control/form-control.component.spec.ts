@@ -28,7 +28,7 @@ describe('FormControlComponent', () => {
         directive = debugElement.query(By.directive(FormControlComponent));
         componentInstance = directive.injector.get(FormControlComponent);
 
-        spyOn(componentInstance, 'buildComponentCssClass').and.callThrough();
+        jest.spyOn(componentInstance, 'buildComponentCssClass');
     });
 
     it('should create', () => {

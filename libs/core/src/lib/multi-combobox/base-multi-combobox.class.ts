@@ -115,8 +115,8 @@ export abstract class BaseMultiCombobox<T = any> {
     abstract searchInputElement: Nullable<ElementRef<HTMLInputElement>>;
 
     abstract selectionChange: EventEmitter<MultiComboboxSelectionChangeEvent>;
-    abstract dataReceived: EventEmitter<void>;
-    abstract dataRequested: EventEmitter<void>;
+    abstract dataReceived: EventEmitter<boolean>;
+    abstract dataRequested: EventEmitter<boolean>;
 
     /** @hidden */
     selectedShown$ = new BehaviorSubject(false);

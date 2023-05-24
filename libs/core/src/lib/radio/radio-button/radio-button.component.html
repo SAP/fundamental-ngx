@@ -15,6 +15,7 @@
     [attr.aria-required]="required"
     [ngModel]="currentValue"
     (ngModelChange)="valueChange($event)"
+    [ngModelOptions]="{ standalone: standalone }"
     #inputElement
     [value]="value"
     [attr.value]="value"

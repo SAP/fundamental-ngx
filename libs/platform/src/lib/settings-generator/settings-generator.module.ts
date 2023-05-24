@@ -38,7 +38,7 @@ import { FDP_SETTINGS_GENERATOR_CONFIG } from './tokens';
         TitleModule,
         PlatformFormGeneratorModule,
         TabsModule,
-        ClickedBehaviorModule,
+        ClickedBehaviorModule.forRoot(),
         PipeModule,
         SkeletonModule,
         ButtonModule,

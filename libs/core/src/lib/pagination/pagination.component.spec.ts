@@ -59,7 +59,7 @@ describe('Pagination Component', () => {
     });
 
     it('should handle mouseevent', () => {
-        spyOn(component.pageChangeStart, 'emit');
+        jest.spyOn(component.pageChangeStart, 'emit');
 
         component.goToPage(1);
 
@@ -129,7 +129,7 @@ describe('Pagination Component', () => {
 
         it('should reset input field', () => {
             const model = { reset: () => {} } as NgModel;
-            const modelMockSpy = spyOn(model, 'reset');
+            const modelMockSpy = jest.spyOn(model, 'reset');
 
             component.currentPage = 3;
             fixture.detectChanges();

@@ -43,7 +43,6 @@ export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>
             providers: []
         });
         this._componentRef = this.portalOutlet.attach(new ComponentPortal(content, null, injector));
-        this._cdr.markForCheck();
     }
 
     /** @hidden Load received content as embedded view */
@@ -52,6 +51,5 @@ export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>
         this._componentRef = this.portalOutlet.attach(
             new TemplatePortal(content, null as unknown as ViewContainerRef, context)
         );
-        this._cdr.markForCheck();
     }
 }

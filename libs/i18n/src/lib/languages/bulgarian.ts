@@ -54,6 +54,10 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Отхвърляне'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel: 'Елемент от дърво {{ itemDetails }}, {{ index }} от {{ total }}{{ selectedDescription }}'
     },
@@ -665,5 +669,10 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Приеми',
         semanticDeclineLabel: 'Отхвърли'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node',
+        noData: 'No data'
     }
 };

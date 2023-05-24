@@ -42,6 +42,10 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Largoje'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel: 'Artikulli i pemës {{ itemDetails }}, {{ index }} nga {{ total }}{{ selectedDescription }}'
     },
@@ -603,5 +607,10 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Pranoje',
         semanticDeclineLabel: 'Rënia'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node',
+        noData: 'No data'
     }
 };

@@ -87,7 +87,7 @@ describe('StepInputComponent', () => {
     });
 
     it('should increment on button click', async () => {
-        const valueChangeSpy = spyOn(component.valueChange, 'emit').and.callThrough();
+        const valueChangeSpy = jest.spyOn(component.valueChange, 'emit');
         const desiredValue = initialValue + component.step;
 
         expect(component.value).toEqual(initialValue);
@@ -100,7 +100,7 @@ describe('StepInputComponent', () => {
     });
 
     it('should decrement on button click', async () => {
-        const valueChangeSpy = spyOn(component.valueChange, 'emit').and.callThrough();
+        const valueChangeSpy = jest.spyOn(component.valueChange, 'emit');
         const desiredValue = initialValue - component.step;
 
         expect(component.value).toEqual(initialValue);
@@ -113,7 +113,7 @@ describe('StepInputComponent', () => {
     });
 
     it('should increment when button is clicked via keyboard', async () => {
-        const valueChangeSpy = spyOn(component.valueChange, 'emit').and.callThrough();
+        const valueChangeSpy = jest.spyOn(component.valueChange, 'emit');
         const desiredValue = initialValue + component.step;
 
         expect(component.value).toEqual(initialValue);
@@ -127,7 +127,7 @@ describe('StepInputComponent', () => {
     });
 
     it('should decrement when button is clicked via keyboard', async () => {
-        const valueChangeSpy = spyOn(component.valueChange, 'emit').and.callThrough();
+        const valueChangeSpy = jest.spyOn(component.valueChange, 'emit');
         const desiredValue = initialValue - component.step - component.step;
 
         expect(component.value).toEqual(initialValue);
@@ -142,7 +142,7 @@ describe('StepInputComponent', () => {
     });
 
     it('should increment/decrement with custom step', async () => {
-        const valueChangeSpy = spyOn(component.valueChange, 'emit').and.callThrough();
+        const valueChangeSpy = jest.spyOn(component.valueChange, 'emit');
 
         expect(component.value).toEqual(initialValue);
 
@@ -160,18 +160,18 @@ describe('StepInputComponent', () => {
     });
 
     it('should emit (onFocusIn) and (onFocusOut) events', () => {
-        const onTouchedSpy = spyOn(component, 'onTouched');
-        const focusInEventSpy = spyOn(component.onFocusIn, 'emit');
-        const focusOutEventSpy = spyOn(component.onFocusOut, 'emit');
+        const onTouchedSpy = jest.spyOn(component, 'onTouched');
+        const focusInEventSpy = jest.spyOn(component.onFocusIn, 'emit');
+        const focusOutEventSpy = jest.spyOn(component.onFocusOut, 'emit');
 
         component.handleFocusIn();
 
-        expect(component.focused).toBeTrue();
+        expect(component.focused).toBe(true);
         expect(focusInEventSpy).toHaveBeenCalled();
 
         component.handleFocusOut(new FocusEvent('blur'));
 
-        expect(component.focused).toBeFalse();
+        expect(component.focused).toBe(false);
         expect(focusOutEventSpy).toHaveBeenCalled();
         expect(onTouchedSpy).toHaveBeenCalled();
     });
@@ -290,8 +290,8 @@ describe('StepInputComponent', () => {
         const wheelEventUp = new WheelEvent('', { deltaY: -15 });
         const wheelEventDown = new WheelEvent('', { deltaY: 15 });
 
-        const incrementSpy = spyOn(context, 'increment');
-        const decrementSpy = spyOn(context, 'decrement');
+        const incrementSpy = jest.spyOn(context, 'increment');
+        const decrementSpy = jest.spyOn(context, 'decrement');
 
         component.handleScroll.call(context, wheelEventUp);
         expect(incrementSpy).toHaveBeenCalled();
@@ -310,8 +310,8 @@ describe('StepInputComponent', () => {
         const wheelEventUp = new WheelEvent('', { deltaY: -15 });
         const wheelEventDown = new WheelEvent('', { deltaY: 15 });
 
-        const incrementSpy = spyOn(context, 'increment');
-        const decrementSpy = spyOn(context, 'decrement');
+        const incrementSpy = jest.spyOn(context, 'increment');
+        const decrementSpy = jest.spyOn(context, 'decrement');
 
         component.handleScroll.call(context, wheelEventUp);
         expect(incrementSpy).not.toHaveBeenCalled();
@@ -361,8 +361,8 @@ describe('StepInputComponent', () => {
         const keyUpEvent = new KeyboardEvent('keydown', { key: 'ArrowUp' });
         const keyDownEvent = new KeyboardEvent('keydown', { key: 'ArrowDown' });
 
-        const incrementSpy = spyOn(context, 'increment');
-        const decrementSpy = spyOn(context, 'decrement');
+        const incrementSpy = jest.spyOn(context, 'increment');
+        const decrementSpy = jest.spyOn(context, 'decrement');
 
         component.handleKeyDown.call(context, keyUpEvent);
         expect(incrementSpy).not.toHaveBeenCalled();

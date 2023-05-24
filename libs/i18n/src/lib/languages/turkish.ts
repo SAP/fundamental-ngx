@@ -42,6 +42,10 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Azletmek'
     },
+    coreNavigation: {
+        mainNavigation: 'Main Navigation',
+        navigationPath: 'Navigation Path'
+    },
     coreNestedList: {
         linkItemAriaLabel: 'Ağaç Öğesi {{ itemDetails }}, {{ index }} / {{ total }}{{ selectedDescription }}'
     },
@@ -594,5 +598,10 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Kabul et',
         semanticDeclineLabel: 'Reddet'
+    },
+    coreTree: {
+        expand: 'Expand node',
+        collapse: 'Collapse node',
+        noData: 'No data'
     }
 };

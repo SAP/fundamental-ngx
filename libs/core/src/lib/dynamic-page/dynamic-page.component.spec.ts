@@ -63,7 +63,7 @@ xdescribe('DynamicPageComponent default values', () => {
         fixture.detectChanges();
         element.dispatchEvent(new Event('scroll'));
         tick(15);
-        expect((<any>dynamicPageComponent)._dynamicPageService.collapsed.value).toBeTrue();
+        expect((<any>dynamicPageComponent)._dynamicPageService.collapsed.value).toBe(true);
     }));
 
     it('should not collapse on scroll content, when pinned', fakeAsync(() => {
@@ -74,11 +74,11 @@ xdescribe('DynamicPageComponent default values', () => {
         fixture.detectChanges();
         element.dispatchEvent(new Event('scroll'));
         tick(15);
-        expect((<any>dynamicPageComponent)._dynamicPageService.collapsed.value).toBeFalse();
+        expect((<any>dynamicPageComponent)._dynamicPageService.collapsed.value).toBe(false);
     }));
 
     it('should handle collapse', () => {
-        const spy = spyOn(<any>dynamicPageComponent, '_setContainerPositions');
+        const spy = jest.spyOn(<any>dynamicPageComponent, '_setContainerPositions');
 
         (<any>dynamicPageComponent)._dynamicPageService.subheaderVisibilityChange.next();
 
@@ -86,7 +86,7 @@ xdescribe('DynamicPageComponent default values', () => {
     });
 
     it('should propagate sizes', () => {
-        const propagateSizeSpy = spyOn(<any>dynamicPageComponent, '_propagateSizeToChildren');
+        const propagateSizeSpy = jest.spyOn(<any>dynamicPageComponent, '_propagateSizeToChildren');
         dynamicPageComponent.size = 'small';
         expect(propagateSizeSpy).toHaveBeenCalled();
     });

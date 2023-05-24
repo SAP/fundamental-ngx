@@ -1,6 +1,6 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import {
+    AfterViewChecked,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -50,10 +50,11 @@ import {
 } from '@fundamental-ngx/core/content-density';
 import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
 import { FDP_PRESET_MANAGED_COMPONENT, isDataSource, isJsObject, isString } from '@fundamental-ngx/platform/shared';
+import equal from 'fast-deep-equal';
 import { cloneDeep, get } from 'lodash-es';
 import set from 'lodash-es/set';
 import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take, tap } from 'rxjs/operators';
 import { TableColumn } from './components/table-column/table-column';
 import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
 import {
@@ -83,6 +84,7 @@ import {
     FreezeChange,
     GroupChange,
     isTableRow,
+    PageChange,
     PlatformTableManagedPreset,
     RowComparator,
     SaveRowsEvent,
@@ -91,6 +93,7 @@ import {
     TableColumnsChangeEvent,
     TableFilterChangeEvent,
     TableGroupChangeEvent,
+    TablePageChangeEvent,
     TableRow,
     TableRowActivateEvent,
     TableRowClass,
@@ -107,21 +110,10 @@ import { TableResponsiveService } from './table-responsive.service';
 import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
 
 import { TableService } from './table.service';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { newTableRow } from './utils';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
-
-/**
- * Cell announcer function which returns a string to be announced by screen readers.
- * @param position The position of the cell in the table.
- * @param headerLabel The label of the column header.
- * @param nestingLevel The nesting level of the cell in case of tree table.
- */
-export type CellFocusedEventAnnouncer = (
-    position: FocusableItemPosition,
-    headerLabel: string,
-    nestingLevel: number | null
-) => string;
 
 type TreeLike<T> = T & {
     _children?: TreeLike<T>[];
@@ -201,7 +193,10 @@ let tableUniqueId = 0;
         '[class.fdp-table--no-outer-border]': 'noOuterBorders'
     }
 })
-export class TableComponent<T = any> extends Table<T> implements AfterViewInit, OnDestroy, OnChanges, OnInit {
+export class TableComponent<T = any>
+    extends Table<T>
+    implements AfterViewInit, OnDestroy, OnChanges, OnInit, AfterViewChecked
+{
     /** Component name used in Preset managed component. */
     @Input()
     name = 'platformTable';
@@ -356,6 +351,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     initialGroupBy: CollectionGroup[] = [];
 
+    /** Initial page. */
+    @Input()
+    initialPage = 1;
+
     /** Whether tree mode is enabled. */
     @Input()
     isTreeTable: boolean;
@@ -379,6 +378,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** Accessor to a children nodes of tree. */
     @Input()
     relationKey: string;
+
+    /** Table row expanded state key. Used to set the initial state of tree row. */
+    @Input()
+    expandedStateKey: string;
 
     /**
      * Whether row is navigatable.
@@ -471,13 +474,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     expandOnInit = false;
 
-    /**
-     * Function, that creates a string to be announced by screen-reader whenever cell receives focus.
-     * Second argument is nesting level starting from 0 if table in tree mode, otherwise null.
-     */
-    @Input()
-    cellFocusedEventAnnouncer: CellFocusedEventAnnouncer = this._defaultCellFocusedEventAnnouncer;
-
     /** Whether to show only visible rows in matter of performance
      * false by default, when true setting bodyHeight and rowHeight is required.
      */
@@ -499,6 +495,13 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      */
     @Input()
     dropMode: FdDndDropType = 'auto';
+
+    /**
+     * Whether to load previous pages.
+     * This option works only when `pageScrolling` is true, and the initial page > 1
+     */
+    @Input()
+    loadPagesBefore = false;
 
     /** Event emitted when current preset configuration has been changed. */
     @Output()
@@ -525,6 +528,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** Event fired when visible columns list has been changed. */
     @Output()
     readonly columnsChange: EventEmitter<TableColumnsChangeEvent> = new EventEmitter<TableColumnsChangeEvent>();
+
+    /** Event emitted when pagination state has been changed. */
+    @Output()
+    readonly pageChange = new EventEmitter<TablePageChangeEvent>();
 
     /** Event fired when there is a change in the frozen column. */
     @Output()
@@ -560,11 +567,19 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** Event emitted when data loading is started. */
     @Output() // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    onDataRequested = new EventEmitter<void>();
+    readonly onDataRequested = new EventEmitter<void>();
 
     /** Event emitted when data loading is finished. */
     @Output() // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    onDataReceived = new EventEmitter<void>();
+    readonly onDataReceived = new EventEmitter<void>();
+
+    /** Event emitted when table body being scrolled. */
+    @Output()
+    tableScrolled = new EventEmitter<number>();
+
+    /** Event emitted when new rows has been set and rendered. */
+    @Output()
+    tableRowsSet = new EventEmitter<void>();
 
     /** @hidden */
     @ViewChild('tableScrollable')
@@ -601,6 +616,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     @ViewChildren(NgForm)
     editableCellForms: QueryList<NgForm>;
+
+    /** @hidden */
+    @ViewChildren(CheckboxComponent)
+    _checkboxes: QueryList<CheckboxComponent>;
 
     /** @hidden */
     readonly _tableColumnsSubject = new BehaviorSubject<TableColumn[]>([]);
@@ -910,6 +929,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _rowHeightManuallySet = false;
 
     /** @hidden */
+    private _loadPreviousPages = false;
+
+    /** @hidden */
+    private _shouldEmitRowsChange = false;
+
+    /** @hidden */
     @HostListener('focusout')
     _onFocusOut(): void {
         this._focusinTimerId = setTimeout(() => {
@@ -958,8 +983,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         private readonly _elRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService,
         readonly contentDensityObserver: ContentDensityObserver,
-        readonly injector: Injector,
-        private readonly _liveAnnouncer: LiveAnnouncer
+        readonly injector: Injector
     ) {
         super();
     }
@@ -1055,11 +1079,26 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         this._listenToLoadingAndRefocusCell();
 
+        this._removeCheckboxTabIndex();
+
         this._cdr.detectChanges();
 
         if (this.expandOnInit) {
             this.expandAll();
         }
+    }
+
+    /** @hidden */
+    ngAfterViewChecked(): void {
+        // When table rows are set, emit an event to manipulate the view (e.g., scroll to some row).
+        if (!this._shouldEmitRowsChange) {
+            return;
+        }
+        this._shouldEmitRowsChange = false;
+        const emitter = this.tableRowsSet;
+        this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
+            emitter.emit();
+        });
     }
 
     /** @hidden */
@@ -1813,17 +1852,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    async _onCellFocused(
-        position: FocusableItemPosition,
-        columnLabel: string,
-        nestingLevel: number | null
-    ): Promise<void> {
+    async _onCellFocused(position: FocusableItemPosition): Promise<void> {
         this._focusedCellPosition = { rowIndex: position.rowIndex, colIndex: position.colIndex };
-
-        if (this.cellFocusedEventAnnouncer) {
-            this._liveAnnouncer.clear();
-            await this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(position, columnLabel, nestingLevel));
-        }
     }
 
     /** Fetch data source data. */
@@ -1853,6 +1883,13 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 (event.target as HTMLElement).focus();
             });
         }
+    }
+
+    /** @hidden */
+    private _removeCheckboxTabIndex(): void {
+        this._checkboxes.forEach((checkbox) => {
+            checkbox.tabIndexValue = -1;
+        });
     }
 
     /** @hidden */
@@ -1972,6 +2009,17 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             this.initialVisibleColumns ||
             (prevState.columns.length ? prevState.columns : columns.map(({ name }) => name));
 
+        this._loadPreviousPages = this.pageScrolling && this.loadPagesBefore && this.initialPage > 1;
+
+        const initialPage = this._loadPreviousPages
+            ? 1
+            : this.initialPage < page.currentPage
+            ? page.currentPage
+            : this.initialPage;
+
+        const initialPageSize =
+            (this._loadPreviousPages ? this.initialPage : initialPage) * (this.pageSize || page.pageSize);
+
         this.setTableState({
             ...prevState,
             columns: visibleColumns,
@@ -1982,8 +2030,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             freezeToColumn: this.freezeColumnsTo || prevState.freezeToColumn,
             freezeToEndColumn: this.freezeEndColumnsTo || prevState.freezeToEndColumn,
             page: {
-                currentPage: page.currentPage || 1,
-                pageSize: this.pageSize || page.pageSize
+                currentPage: initialPage,
+                pageSize: initialPageSize
             }
         });
     }
@@ -2074,6 +2122,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 this.columnsChange.emit(new TableColumnsChangeEvent(this, event.current, event.previous));
             })
         );
+
+        this._subscriptions.add(
+            this._tableService.pageChange.subscribe((event: PageChange) => {
+                this.pageChange.emit(new TablePageChangeEvent(this, event.current, event.previous));
+            })
+        );
     }
 
     /** @hidden */
@@ -2154,7 +2208,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 value: item
             });
 
-            row.expanded = false;
+            row.expanded =
+                this.expandedStateKey && Object.prototype.hasOwnProperty.call(item, this.expandedStateKey)
+                    ? item[this.expandedStateKey]
+                    : false;
             row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
             rows.push(row);
 
@@ -2164,7 +2221,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 children.forEach((c) => {
                     c.parent = c.parent || row;
                     c.level = c.parent.level + 1;
-                    c.hidden = true;
+                    c.hidden = !row.expanded;
                 });
                 row.children.push(...children);
 
@@ -2234,6 +2291,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         this._calculateIsShownNavigationColumn();
         this._rangeSelector.reset();
+
+        this._shouldEmitRowsChange = true;
 
         if (rows.length && !this._columnsWidthSet) {
             this.recalculateTableColumnWidth();
@@ -2344,7 +2403,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
             this._initialStateSet = true;
 
-            this._tableService.columnsChange.emit({ previous: currentColumns, current: prevColumns });
+            const updatedColumns = this._tableColumnsSubject.getValue().map((column) => column.name);
+
+            if (!equal(updatedColumns, currentColumns)) {
+                this._tableService.columnsChange.emit({ previous: currentColumns, current: updatedColumns });
+            }
             this._tableService.detectChanges();
         });
     }
@@ -2847,6 +2910,21 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 this._internalLoadingState = false;
                 this._firstLoadingDone = true;
                 this._tableService.setTableLoading(this.loadingState);
+
+                // Restore normal pagination after the first fetch of data.
+                if (this._loadPreviousPages) {
+                    const state = this._tableService.getTableState();
+                    this._tableService.setTableState({
+                        ...state,
+                        ...{
+                            page: {
+                                currentPage: this.initialPage || state.page.currentPage,
+                                pageSize: this.pageSize || state.page.pageSize
+                            }
+                        }
+                    });
+                    this._loadPreviousPages = false;
+                }
             })
         );
 
@@ -2886,6 +2964,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                     filter((scrollable) => scrollable === this.tableScrollable),
                     map((scrollable) => scrollable.getElementRef().nativeElement),
                     filter((element) => !!element),
+                    tap(({ scrollTop }) => {
+                        this.tableScrolled.emit(scrollTop);
+                    }),
                     filter(
                         ({ scrollHeight, clientHeight, scrollTop }) =>
                             scrollHeight - clientHeight - scrollTop <= this.pageScrollingThreshold
@@ -3013,20 +3094,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                     }
                 });
             })
-        );
-    }
-
-    /** @hidden */
-    private _defaultCellFocusedEventAnnouncer(
-        position: FocusableItemPosition,
-        headerLabel: string,
-        nestingLevel: number | null
-    ): string {
-        return (
-            `${headerLabel},
-            column ${position.colIndex + 1} of ${position.totalCols},
-            row: ${position.rowIndex + 1} of ${position.totalRows}` +
-            (nestingLevel !== null ? `, level: ${nestingLevel + 1}` : '')
         );
     }
 }

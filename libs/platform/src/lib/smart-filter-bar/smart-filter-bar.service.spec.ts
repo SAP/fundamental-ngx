@@ -46,7 +46,7 @@ describe('SmartFilterBarService', () => {
 
     it('should add custom filter', () => {
         const result = service.addCustomFilter(filterConfig);
-        expect(result).toBeTrue();
+        expect(result).toBe(true);
     });
 
     it('should return custom filter configuration', () => {

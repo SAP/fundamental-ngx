@@ -35,7 +35,7 @@ describe('SmartFilterBarFieldDefinitionDirective', () => {
 
     it('should convert string to boolean', async () => {
         await whenStable(fixture);
-        expect(component.directive.smartFilterBarFilterable).toBeFalse();
-        expect(component.directive.required).toBeTrue();
+        expect(component.directive.smartFilterBarFilterable).toBe(false);
+        expect(component.directive.required).toBe(true);
     });
 });

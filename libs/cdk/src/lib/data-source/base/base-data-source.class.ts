@@ -17,9 +17,9 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
     /** @hidden */
     protected readonly _dataChanges$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
     /** @hidden */
-    protected readonly _dataRequested$ = new Subject<void>();
+    protected readonly _dataRequested$ = new BehaviorSubject<boolean>(false);
     /** @hidden */
-    protected readonly _dataReceived$ = new Subject<void>();
+    protected readonly _dataReceived$ = new BehaviorSubject<boolean>(false);
     /** @hidden */
     protected readonly _destroy$ = new Subject<void>();
 
@@ -30,7 +30,7 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
      * Emitted when new data has been requested.
      * @returns Observable
      */
-    get dataRequested(): Observable<void> {
+    get dataRequested(): Observable<boolean> {
         return this._dataRequested$.asObservable();
     }
 
@@ -38,7 +38,7 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
      * Emitted when new data has been received.
      * @returns Observable
      */
-    get dataReceived(): Observable<void> {
+    get dataReceived(): Observable<boolean> {
         return this._dataReceived$.asObservable();
     }
 
@@ -51,7 +51,7 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
     }
 
     /**
-     * Emits when data from the provides has been changed.
+     * Emits when the data from the provider has been changed.
      * @returns Observable of data source objects.
      */
     get dataChanges(): Observable<T[]> {
@@ -68,9 +68,47 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
      * @param end end index.
      */
     match(predicate: string | Map<string, string> = new Map<string, string>(), start = 0, end = Infinity): void {
-        this._dataRequested$.next();
+        this._dataRequested$.next(true);
         this._dataLoading$.next(true);
-        const searchParam = new Map();
+        const searchParam = this._getSearchParams(predicate);
+
+        this.dataProvider
+            .fetch(searchParam, start, end)
+            .pipe(takeUntil(this._destroy$))
+            .subscribe({
+                next: (result: T[]) => {
+                    this._dataReceived$.next(true);
+                    this._dataLoading$.next(false);
+                    this._dataChanges$.next(result);
+                },
+                error: () => {
+                    this._dataReceived$.next(false);
+                    this._dataLoading$.next(false);
+                }
+            });
+    }
+
+    /**
+     * Returns the Observable of a total items number filtered by the `predicate` param.
+     * @param predicate Search query.
+     */
+    getTotalItems(predicate: string | Map<string, string> = new Map<string, string>()): Observable<number> {
+        const searchParam = this._getSearchParams(predicate);
+
+        return this.dataProvider.getTotalItems(searchParam);
+    }
+
+    /**
+     * Closes the stream
+     */
+    unsubscribe(): void {
+        this._destroy$.next();
+        this._destroy$.complete();
+    }
+
+    /** @hidden */
+    private _getSearchParams(predicate: string | Map<string, string>): Map<string, any> {
+        const searchParam = new Map<string, any>();
 
         if (typeof predicate === 'string') {
             searchParam.set('query', predicate);
@@ -84,27 +122,6 @@ export abstract class BaseDataSource<T> implements DataSourceProvider<T> {
             searchParam.set('limit', BaseDataSource.MaxLimit);
         }
 
-        this.dataProvider
-            .fetch(searchParam, start, end)
-            .pipe(takeUntil(this._destroy$))
-            .subscribe({
-                next: (result: T[]) => {
-                    this._dataReceived$.next();
-                    this._dataLoading$.next(false);
-                    this._dataChanges$.next(result);
-                },
-                error: () => {
-                    this._dataReceived$.next();
-                    this._dataLoading$.next(false);
-                }
-            });
-    }
-
-    /**
-     * Closes the stream
-     */
-    unsubscribe(): void {
-        this._destroy$.next();
-        this._destroy$.complete();
+        return searchParam;
     }
 }

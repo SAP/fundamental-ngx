@@ -19,14 +19,6 @@
                 }
             }
         },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/rating-indicator/test.ts",
-                "tsConfig": "libs/core/src/lib/rating-indicator/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/rating-indicator/karma.conf.js"
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {
@@ -34,6 +26,20 @@
                     "libs/core/src/lib/rating-indicator/**/*.ts",
                     "libs/core/src/lib/rating-indicator/**/*.html"
                 ]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/core/src/lib/rating-indicator/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
             }
         }
     },

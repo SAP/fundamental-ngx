@@ -56,6 +56,10 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Закрыть'
     },
+    coreNavigation: {
+        mainNavigation: 'Главная Навигация',
+        navigationPath: 'Путь навигации'
+    },
     coreNestedList: {
         linkItemAriaLabel: 'Элемент дерева {{ itemDetails }}, {{ index }} из {{ total }}{{ selectedDescription }}'
     },
@@ -799,6 +803,11 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     fnSwitch: {
         semanticAcceptLabel: 'Принять',
         semanticDeclineLabel: 'Отклонить'
+    },
+    coreTree: {
+        expand: 'Развернуть узел',
+        collapse: 'Свернуть узел',
+        noData: 'Нет данных'
     }
 };
 
