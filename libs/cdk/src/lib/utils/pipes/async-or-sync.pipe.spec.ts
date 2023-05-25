@@ -21,7 +21,7 @@ describe('AsyncOrSyncPipe', () => {
         const stringFromObservable = pipe.transform(of('string'));
         const stringNotModified = pipe.transform('string');
 
-        expect(isSubscribable(stringFromObservable)).toBeFalse();
+        expect(isSubscribable(stringFromObservable)).toBe(false);
         expect(stringFromObservable).toEqual('string');
         expect(stringNotModified).toEqual('string');
     });

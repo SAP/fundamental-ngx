@@ -19,18 +19,24 @@
                 }
             }
         },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/core/src/lib/message-box/test.ts",
-                "tsConfig": "libs/core/src/lib/message-box/tsconfig.spec.json",
-                "karmaConfig": "libs/core/src/lib/message-box/karma.conf.js"
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": ["libs/core/src/lib/message-box/**/*.ts", "libs/core/src/lib/message-box/**/*.html"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/core/src/lib/message-box/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
             }
         }
     },

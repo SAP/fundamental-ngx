@@ -44,20 +44,20 @@ describe('DndItemDirective', () => {
     });
 
     it('should react to start drag', () => {
-        spyOn(directive.started, 'emit');
+        const spy = jest.spyOn(directive.started, 'emit');
         expect((directive as any)._placeholderElement).toBeFalsy();
         directive.onCdkDragStart();
         expect((directive as any)._placeholderElement).not.toBeFalsy();
-        expect(directive.started.emit).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
     });
 
     it('should react to drag release', () => {
-        spyOn(directive.released, 'emit');
+        const spy = jest.spyOn(directive.released, 'emit');
         (directive as any)._placeholderElement = document.createElement('div');
         directive.elementRef.nativeElement.appendChild((directive as any)._placeholderElement);
         directive.onCdkDragReleased();
         expect((directive as any)._placeholderElement).toBeFalsy();
-        expect(directive.released.emit).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
     });
 
     it('should create proper horizontal line', () => {
