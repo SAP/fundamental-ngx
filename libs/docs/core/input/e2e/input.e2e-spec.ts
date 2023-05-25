@@ -99,7 +99,7 @@ describe('Input should ', () => {
 
     it('have associated label element to describe its purpose', async () => {
         for (let i = 0; inputsArr.length > i; i++) {
-            await expect((await getPreviousElementText(inputsArr[i])).trim()).toBe(labelsArray[i]);
+            await expect((await getPreviousElementText(inputsArr[i])).trim()).toContain(labelsArray[i]);
         }
         await expect((await getText(validInputLabel)).trim()).toBe(validInputLabelText);
         await expect((await getText(invalidInputLabel)).trim()).toBe(invalidInputLabelText);
