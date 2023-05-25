@@ -43,11 +43,11 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
 
     /**
      * Defines drop strategy:
-     * * `shift` mode will create line after closest drop element.
-     * * `group` mode will create replace indicator on whole closest drop element.
-     * * `auto` mode will create line after closest drop element,
-     * if dragged element coordinates are shifted for 30% from center of the closest drop element.
-     * Otherwise, it will create replace indicator on whole closest drop element.
+     * * `shift` mode will create line after the closest drop element.
+     * * `group` mode will create replace indicator on a whole closest drop element.
+     * * `auto` mode will create a line after the closest drop element
+     * if dragged element coordinates are shifted for 30% from the center of the closest drop element.
+     * Otherwise, it will create replace indicator on a whole closest drop element.
      *
      * `shift` mode is the default.
      */
@@ -65,7 +65,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
      * Use `dropMode` property for better configuration.
      *
      * @description
-     * When enabled, replace indicator will appear on whole element, instead of horizontal/vertical line before/after element.
+     * When enabled, the Replace Indicator will appear on a whole element, instead of horizontal/vertical line before/after an element.
      */
     @Input()
     set replaceMode(value: boolean) {
@@ -83,7 +83,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
 
     /** Array of items, that will be sorted */
     @Input()
-    items: Array<T>;
+    items: Array<T> = [];
 
     /** Defines if drag and drop feature should be enabled for list items */
     @Input()
@@ -110,11 +110,11 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     @Output()
     dropPredicateCalculating = new EventEmitter<boolean>();
 
-    /** Event that is thrown, when items are reordered */
+    /** Event that is thrown when items are reordered */
     @Output()
     readonly itemsChange = new EventEmitter<Array<T>>();
 
-    /** Event that is thrown, when the item is dropped */
+    /** Event that is thrown when the item is dropped */
     @Output()
     readonly itemDropped = new EventEmitter<FdDropEvent<T>>();
 
@@ -174,13 +174,13 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         this._onDestroy$.complete();
     }
 
-    /** Method called, when the item is being moved by 1 px */
+    /** Method called when the item is being moved by 1 px */
     onMove(mousePosition: ElementPosition, draggedItemIndex: number): void {
         /** Temporary object, to store lowest distance values */
         let closestItemIndex: number | null = null;
 
-        const closestItem = this._elementsCoordinates.find((element, index) => {
-            /** Check if element can be replaced */
+        const closestDndItem = this._elementsCoordinates.find((element, index) => {
+            /** Check if an element can be replaced */
             if (!element.stickToPosition && closestItemIndex !== index) {
                 const isMouseOnElement = _isMouseOnElement(element, mousePosition);
                 if (isMouseOnElement) {
@@ -192,11 +192,11 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
             return false;
         });
 
-        if (!closestItem) {
+        if (!closestDndItem) {
             closestItemIndex = null;
         }
 
-        /** If the closest element is different from the old one, new one is picked. It prevents from performance issues */
+        /** If the closest element is different from the old one, the new one is picked. It prevents from performance issues */
         if (
             (closestItemIndex || closestItemIndex === 0) &&
             (closestItemIndex !== this._closestItemIndex || this.dropMode === 'auto')
@@ -205,6 +205,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
             this._removeAllReplaceIndicators();
             this._closestItemIndex = closestItemIndex;
             this._closestItemPosition = this._elementsCoordinates[closestItemIndex].position;
+            const closestItem = this.items[this._closestItemIndex];
             // If closest item index is same as dragged item, just remove indicators
             if (closestItemIndex === draggedItemIndex) {
                 this._removeAllLines();
@@ -214,12 +215,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
             if (
                 this.dragoverPredicate &&
                 this._draggedItem &&
-                !this.dragoverPredicate(
-                    this._draggedItem,
-                    this.items[this._closestItemIndex],
-                    draggedItemIndex,
-                    this._closestItemIndex
-                )
+                !this.dragoverPredicate(this._draggedItem, closestItem, draggedItemIndex, this._closestItemIndex)
             ) {
                 this._ignoreDrop = true;
                 this._setDisabledItem(this._closestItemIndex);
@@ -232,7 +228,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
             } else if (this.dropMode === 'shift') {
                 this._createLine(this._closestItemIndex, this._closestItemPosition);
             } else {
-                this._selectDropModeIndicator(draggedItemIndex, closestItem, closestItemIndex);
+                this._selectDropModeIndicator(draggedItemIndex, closestDndItem, closestItemIndex);
             }
         }
     }
@@ -416,21 +412,21 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
 
     /**
      *  @hidden
-     * Return information if element is placed before the dragged element
+     * Return information if an element is placed before the dragged element
      */
     private _isBefore(draggedElement: ElementRef, targetElement: ElementRef): boolean {
-        /** Sometimes the element are not straight in one column, that's why offset is needed */
+        /** Sometimes the elements are not straight in one column, that's why offset is needed */
         const VERTICAL_OFFSET = 20;
 
-        /** Distances from the top of screen */
+        /** Distances from the top of the screen */
         const draggedElementBound = <DOMRect>draggedElement.nativeElement.getBoundingClientRect();
         const targetElementBound = <DOMRect>targetElement.nativeElement.getBoundingClientRect();
 
         if (draggedElementBound.top - targetElementBound.top > VERTICAL_OFFSET) {
-            /** If element is higher than the dragged element, it's for sure before */
+            /** If an element is higher than the dragged element, it's for sure before */
             return true;
         } else if (targetElementBound.top - draggedElementBound.top > VERTICAL_OFFSET) {
-            /** If element is lower than the dragged element, it's for sure after */
+            /** If an element is lower than the dragged element, it's for sure after */
             return false;
         } else {
             /** If elements are in same level, the horizontal position decides if it's before/after */

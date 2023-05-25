@@ -82,3 +82,4 @@ export * from './interfaces/table-state.interface';
 export * from './interfaces/column-responsive-state.interface';
 
 export * from './models';
+export * from './helpers';
