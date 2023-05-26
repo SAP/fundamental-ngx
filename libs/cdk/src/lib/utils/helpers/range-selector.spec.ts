@@ -1,5 +1,7 @@
 import { RangeSelector } from './range-selector';
 
+// class MockPointerEvent {}
+
 describe('RangeSelector', () => {
     let rangeSelector: RangeSelector;
 
@@ -8,6 +10,7 @@ describe('RangeSelector', () => {
     }
 
     beforeEach(() => {
+        global.window.PointerEvent = MouseEvent as any;
         rangeSelector = new RangeSelector();
     });
 
@@ -43,18 +46,19 @@ describe('RangeSelector', () => {
     });
 
     it('should apply value to selected index, when "applyValueToEachInRange" is called without multi-selection', () => {
-        const spy = jasmine.createSpy('valueSpy');
+        const spy = jest.fn();
 
         rangeSelector.applyValueToEachInRange(spy);
         expect(spy).toHaveBeenCalledTimes(0);
 
         rangeSelector.onRangeElementToggled(1, getEvent());
         rangeSelector.applyValueToEachInRange(spy);
-        expect(spy).toHaveBeenCalledOnceWith(1);
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy).toHaveBeenLastCalledWith(1);
     });
 
     it('should apply value to each index at range, when "applyValueToEachInRange" is called', () => {
-        const spy = jasmine.createSpy('valueSpy');
+        const spy = jest.fn();
 
         rangeSelector.applyValueToEachInRange(spy);
         expect(spy).toHaveBeenCalledTimes(0);

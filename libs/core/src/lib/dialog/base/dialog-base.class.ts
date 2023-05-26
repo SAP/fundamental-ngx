@@ -5,6 +5,7 @@ import {
     ElementRef,
     HostBinding,
     HostListener,
+    inject,
     isDevMode,
     OnDestroy,
     OnInit
@@ -19,6 +20,7 @@ import { KeyUtil, RtlService, FocusTrapService } from '@fundamental-ngx/cdk/util
 import { DialogConfigBase } from './dialog-config-base.class';
 import { DialogRefBase } from './dialog-ref-base.class';
 import { DialogSize, dialogWidthToSize } from '../utils/dialog-width-to-size';
+import { FD_DIALOG_FOCUS_TRAP_ERROR } from '../tokens';
 
 @Directive()
 export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
@@ -45,6 +47,14 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
     abstract get _config(): DialogConfigBase<any>;
+
+    /**
+     * @hidden
+     * Used to mute errors of focus trap during unit tests (jsdom incompatibility).
+     */
+    private readonly _focusTrapError = inject(FD_DIALOG_FOCUS_TRAP_ERROR, {
+        optional: true
+    });
 
     /** @hidden Listen and close dialog on Escape key */
     @HostListener('keyup', ['$event'])
@@ -129,7 +139,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
                     allowOutsideClick: () => true
                 });
             } catch (e) {
-                isDevMode() && console.error(e);
+                isDevMode() && this._focusTrapError !== true && console.error(e);
             }
         }
     }
