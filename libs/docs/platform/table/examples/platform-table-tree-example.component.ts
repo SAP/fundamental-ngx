@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { DropPredicate } from '@fundamental-ngx/cdk/utils';
 import { Observable, of } from 'rxjs';
 
@@ -19,7 +19,9 @@ import { delay, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'fdp-platform-table-tree-example',
-    templateUrl: './platform-table-tree-example.component.html'
+    templateUrl: './platform-table-tree-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformTableTreeExampleComponent {
     @ViewChild(TableComponent)

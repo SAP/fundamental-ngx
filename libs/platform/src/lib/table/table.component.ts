@@ -739,19 +739,19 @@ export class TableComponent<T = any>
     _freezableEndColumns: Map<string, number> = new Map();
 
     /** @hidden */
-    _isShownSortSettingsInToolbar = false;
+    private readonly _isShownSortSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
-    _isShownFilterSettingsInToolbar = false;
+    private readonly _isShownFilterSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
-    _isShownGroupSettingsInToolbar = false;
+    private readonly _isShownGroupSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
-    _isShownColumnSettingsInToolbar = false;
+    private readonly _isShownColumnSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
-    _isFilteringFromHeaderDisabled = false;
+    readonly _isFilteringFromHeaderDisabled$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
     _tableColumnsLength = 0;
@@ -793,6 +793,9 @@ export class TableComponent<T = any>
      * Total items length given by data source
      */
     _totalItems = 0;
+
+    /** @hidden */
+    private _totalItems$ = new BehaviorSubject<number>(this._totalItems);
 
     /**
      * @hidden
@@ -844,15 +847,13 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    get _toolbarContext(): any {
-        return {
-            counter: this._totalItems,
-            sortable: this._isShownSortSettingsInToolbar,
-            filterable: this._isShownFilterSettingsInToolbar,
-            groupable: this._isShownGroupSettingsInToolbar,
-            columns: this._isShownColumnSettingsInToolbar
-        };
-    }
+    _toolbarContext: any = {
+        counter: this._totalItems$,
+        sortable: this._isShownSortSettingsInToolbar$,
+        filterable: this._isShownFilterSettingsInToolbar$,
+        groupable: this._isShownGroupSettingsInToolbar$,
+        columns: this._isShownColumnSettingsInToolbar$
+    };
 
     /** @hidden */
     private _ds: FdpTableDataSource<T>;
@@ -1258,31 +1259,27 @@ export class TableComponent<T = any>
 
     /** Toolbar Sort Settings button visibility */
     showSortSettingsInToolbar(showSortSettings: boolean): void {
-        this._isShownSortSettingsInToolbar = showSortSettings;
-        this._cdr.detectChanges();
+        this._isShownSortSettingsInToolbar$.next(showSortSettings);
     }
 
     /** Toolbar Filter Settings button visibility */
     showFilterSettingsInToolbar(showFilterSettings: boolean): void {
-        this._isShownFilterSettingsInToolbar = showFilterSettings;
-        this._cdr.detectChanges();
+        this._isShownFilterSettingsInToolbar$.next(showFilterSettings);
     }
 
     /** Toolbar Group Settings button visibility */
     showGroupSettingsInToolbar(showGroupSettings: boolean): void {
-        this._isShownGroupSettingsInToolbar = showGroupSettings;
-        this._cdr.detectChanges();
+        this._isShownGroupSettingsInToolbar$.next(showGroupSettings);
     }
 
     /** Toolbar Columns Settings button visibility */
     showColumnSettingsInToolbar(showColumnSettings: boolean): void {
-        this._isShownColumnSettingsInToolbar = showColumnSettings;
-        this._cdr.detectChanges();
+        this._isShownColumnSettingsInToolbar$.next(showColumnSettings);
     }
 
     /** Disable filter from column heder menu */
     setHeaderColumnFilteringDisabled(disabled: boolean): void {
-        this._isFilteringFromHeaderDisabled = disabled;
+        this._isFilteringFromHeaderDisabled$.next(disabled);
     }
 
     /** Set the row navigation */
@@ -1559,7 +1556,7 @@ export class TableComponent<T = any>
             column.groupable ||
             column.freezable ||
             column.endFreezable ||
-            (column.filterable && !this._isFilteringFromHeaderDisabled)
+            (column.filterable && !this._isFilteringFromHeaderDisabled$.getValue())
         );
     }
 
@@ -2555,8 +2552,8 @@ export class TableComponent<T = any>
         }
 
         /**
-         * This is single point of data entry to the component. We don't want to set data on different
-         * places. If any new data comes in either you do a search and you want to pass initial data
+         * This is a single point of data entry to the component. We don't want to set data on different
+         * places. If any new data comes in, or you do a search, and you want to pass initial data
          * its here.
          */
         this._dsOpenedStream = dataSourceStream.open();
@@ -2565,6 +2562,7 @@ export class TableComponent<T = any>
 
         const dsSub = this._dsOpenedStream.subscribe((items) => {
             this._totalItems = dataSourceStream.dataProvider.totalItems;
+            this._totalItems$.next(this._totalItems);
             this._dataSourceItemsSubject.next(items);
             // calling "detectChanges" may result in content jumps
             // using markForCheck in order to let "items" changes to get applied in the UI first

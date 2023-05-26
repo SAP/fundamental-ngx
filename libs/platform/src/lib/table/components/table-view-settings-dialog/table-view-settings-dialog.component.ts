@@ -6,7 +6,8 @@ import {
     forwardRef,
     Input,
     OnDestroy,
-    QueryList
+    QueryList,
+    ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter, startWith } from 'rxjs/operators';
@@ -55,7 +56,8 @@ export const dialogConfig: DialogConfig = {
 @Component({
     selector: 'fdp-table-view-settings-dialog',
     template: '',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestroy {
     /** Reference to table component. */

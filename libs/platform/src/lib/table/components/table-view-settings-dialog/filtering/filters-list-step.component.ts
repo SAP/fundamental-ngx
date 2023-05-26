@@ -6,7 +6,8 @@ import {
     Input,
     Output,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 
 import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step';
@@ -25,6 +26,7 @@ export interface SelectableFilter {
     selector: 'fdp-filters-list-step',
     templateUrl: './filters-list-step.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     /** Each filters dialog step must provide FILTERS_VIEW_STEP_TOKEN to be accessible */
     providers: [{ provide: FILTERS_VIEW_STEP_TOKEN, useExisting: forwardRef(() => FiltersListStepComponent) }]
 })

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
@@ -12,7 +12,9 @@ import {
 
 @Component({
     selector: 'fdp-platform-table-virtual-scroll-example',
-    templateUrl: './platform-table-virtual-scroll-example.component.html'
+    templateUrl: './platform-table-virtual-scroll-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformTableVirtualScrollExampleComponent {
     source: TableDataSource<ExampleItem>;

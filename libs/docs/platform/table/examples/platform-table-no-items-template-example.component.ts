@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fdp-platform-table-no-items-template-example',
-    templateUrl: './platform-table-no-items-template-example.component.html'
+    templateUrl: './platform-table-no-items-template-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformTableNoItemsTemplateExampleComponent {
     source = [];

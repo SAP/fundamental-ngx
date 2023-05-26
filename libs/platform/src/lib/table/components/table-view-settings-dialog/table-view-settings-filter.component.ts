@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 
 import { TableFilterSelectOption } from '../../interfaces/selection-value.interface';
 import { FilterType } from '../../enums/filter-type.enum';
@@ -32,7 +32,8 @@ import { FdpViewSettingsFilterCustomDef } from '../../directives/table-view-sett
 @Component({
     selector: 'fdp-table-view-settings-filter',
     template: '',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class TableViewSettingsFilterComponent {
     /** Table column name on which to filter. */

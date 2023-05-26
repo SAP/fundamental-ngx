@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
@@ -6,7 +6,9 @@ import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx
 
 @Component({
     selector: 'fdp-platform-table-no-outer-borders-example',
-    templateUrl: './platform-table-no-outer-borders-example.component.html'
+    templateUrl: './platform-table-no-outer-borders-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformTableNoOuterBordersExampleComponent {
     source: TableDataSource<ExampleItem>;

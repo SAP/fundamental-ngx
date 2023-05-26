@@ -125,7 +125,7 @@
                                     [disabled]="!_isColumnHasHeaderMenu(column)"
                                     [column]="column"
                                     [popoverTemplate]="column.headerCellPopoverTemplate"
-                                    [filteringFromHeaderDisabled]="_isFilteringFromHeaderDisabled"
+                                    [filteringFromHeaderDisabled]="_isFilteringFromHeaderDisabled$ | async"
                                     (columnHeaderSortBy)="_columnHeaderSortBy($event.key, $event.direction)"
                                     (columnHeaderGroupBy)="_columnHeaderGroupBy($event)"
                                     (columnHeaderFilterBy)="_columnHeaderFilterBy($event.key, $event.value)"
