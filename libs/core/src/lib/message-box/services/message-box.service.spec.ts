@@ -47,11 +47,11 @@ describe('MessageBoxService', () => {
 
     it('should create', () => {
         expect(service).toBeDefined();
-        expect(service.hasOpenDialogs()).toBeFalse();
+        expect(service.hasOpenDialogs()).toBe(false);
     });
 
     it('should open message box from template', fakeAsync(async () => {
-        const destroyDialogSpy = spyOn<any>(service, '_destroyDialog').and.callThrough();
+        const destroyDialogSpy = jest.spyOn(service as any, '_destroyDialog');
         const templateRef = component.templateRef;
         const dialogRef = service.open(templateRef);
 
@@ -59,7 +59,7 @@ describe('MessageBoxService', () => {
 
         await fixture.whenRenderingDone();
 
-        expect(service.hasOpenDialogs()).toBeTrue();
+        expect(service.hasOpenDialogs()).toBe(true);
 
         dialogRef.dismiss();
 
@@ -68,22 +68,22 @@ describe('MessageBoxService', () => {
         tick(200);
 
         expect(destroyDialogSpy).toHaveBeenCalled();
-        expect(service.hasOpenDialogs()).toBeFalse();
+        expect(service.hasOpenDialogs()).toBe(false);
     }));
 
     it('should open dialog from component', fakeAsync(async () => {
-        const destroyDialogSpy = spyOn<any>(service, '_destroyDialog').and.callThrough();
+        const destroyDialogSpy = jest.spyOn(service as any, '_destroyDialog');
         const dialogRef = service.open(TemplateTestComponent);
 
         fixture.detectChanges();
 
-        expect(service.hasOpenDialogs()).toBeTrue();
+        expect(service.hasOpenDialogs()).toBe(true);
 
         fixture.detectChanges();
 
         await fixture.whenRenderingDone();
 
-        expect(service.hasOpenDialogs()).toBeTrue();
+        expect(service.hasOpenDialogs()).toBe(true);
 
         dialogRef.dismiss();
 
@@ -92,7 +92,7 @@ describe('MessageBoxService', () => {
         tick(200);
 
         expect(destroyDialogSpy).toHaveBeenCalled();
-        expect(service.hasOpenDialogs()).toBeFalse();
+        expect(service.hasOpenDialogs()).toBe(false);
     }));
 
     it('should dismiss all message boxes', () => {
@@ -100,10 +100,10 @@ describe('MessageBoxService', () => {
         service.open(TemplateTestComponent);
         service.open(TemplateTestComponent);
 
-        expect(service.hasOpenDialogs()).toBeTrue();
+        expect(service.hasOpenDialogs()).toBe(true);
 
         service.dismissAll();
 
-        expect(service.hasOpenDialogs()).toBeFalse();
+        expect(service.hasOpenDialogs()).toBe(false);
     });
 });

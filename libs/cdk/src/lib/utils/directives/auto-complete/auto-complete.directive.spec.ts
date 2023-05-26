@@ -36,7 +36,7 @@ describe('AutoCompleteDirective', () => {
     });
 
     it('should complete Apple word and send event with close force', () => {
-        spyOn(directive.onComplete, 'emit');
+        const spy = jest.spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'ap';
 
@@ -46,14 +46,14 @@ describe('AutoCompleteDirective', () => {
 
         directive.handleKeyboardEvent(<any>{ stopPropagation: () => {}, preventDefault: () => {}, key: 'Enter' });
 
-        expect(directive.onComplete.emit).toHaveBeenCalledWith({
+        expect(spy).toHaveBeenCalledWith({
             term: 'Apple',
             forceClose: true
         });
     });
 
     it('should complete Apple word and send event with outclose force', () => {
-        spyOn(directive.onComplete, 'emit');
+        const spy = jest.spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'ap';
 
@@ -63,15 +63,13 @@ describe('AutoCompleteDirective', () => {
 
         directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'ArrowLeft' });
 
-        expect(directive.onComplete.emit).toHaveBeenCalledWith({
+        expect(spy).toHaveBeenCalledWith({
             term: 'Apple',
             forceClose: false
         });
     });
 
     it('should stop completing word', () => {
-        spyOn(directive.onComplete, 'emit');
-
         directive.inputText = 'ap';
 
         directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });
@@ -84,8 +82,6 @@ describe('AutoCompleteDirective', () => {
     });
 
     it('should not complete, when other word is written', () => {
-        spyOn(directive.onComplete, 'emit');
-
         directive.inputText = 'SomeOtherWord';
 
         directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'p' });

@@ -120,17 +120,17 @@ describe('NestedItemDirective', () => {
     });
 
     it('Item with popover should react to open change from popover', () => {
-        spyOn(nestedItemPopoverDirective, 'triggerOpen');
+        const spy = jest.spyOn(nestedItemPopoverDirective, 'triggerOpen');
         expect(itemService.popover).toBeDefined();
         itemService.popover!.handleOpenChange(true);
-        expect(nestedItemPopoverDirective.triggerOpen).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
     });
 
     it('Item with popover should propagate expanded change event', () => {
         nestedItemPopoverDirective.expanded = false;
-        spyOn(nestedItemPopoverDirective as any, 'propagateOpenChange');
+        const spy = jest.spyOn(nestedItemPopoverDirective as any, 'propagateOpenChange');
         nestedItemPopoverDirective.triggerOpen();
-        expect((nestedItemPopoverDirective as any).propagateOpenChange).toHaveBeenCalledWith(true);
+        expect(spy).toHaveBeenCalledWith(true);
     });
 
     it('Item with popover should handle expanded change event', () => {
@@ -151,9 +151,9 @@ describe('NestedItemDirective', () => {
 
     it('Item with list should propagate expanded change event', () => {
         nestedItemListDirective.expanded = false;
-        spyOn(nestedItemListDirective as any, 'propagateOpenChange');
+        const spy = jest.spyOn(nestedItemListDirective as any, 'propagateOpenChange');
         nestedItemListDirective.triggerOpen();
-        expect((nestedItemListDirective as any).propagateOpenChange).toHaveBeenCalledWith(true);
+        expect(spy).toHaveBeenCalledWith(true);
     });
 
     it('Item with list should handle expanded change event', () => {
@@ -169,55 +169,53 @@ describe('NestedItemDirective', () => {
 
     it('Should react to events from icon child', () => {
         fixture.detectChanges();
-        spyOn(nestedItemListDirective, 'toggle');
+        const spy = jest.spyOn(nestedItemListDirective, 'toggle');
         nestedItemListDirective.contentItem.nestedExpandIcon.onClick(new MouseEvent('click'));
         fixture.detectChanges();
-        expect(nestedItemListDirective.toggle).toHaveBeenCalledWith();
+        expect(spy).toHaveBeenCalledWith();
     });
 
     it('Popover should react to events from icon child', () => {
         fixture.detectChanges();
         expect(itemService.popover).toBeDefined();
         itemService.popover!.handleOpenChange(true);
-        spyOn(nestedItemPopoverDirective, 'toggle');
+        const spy = jest.spyOn(nestedItemPopoverDirective, 'toggle');
         nestedItemPopoverDirective.contentItem.nestedExpandIcon.onClick(new MouseEvent('click'));
         fixture.detectChanges();
-        expect(nestedItemPopoverDirective.toggle).toHaveBeenCalledWith();
+        expect(spy).toHaveBeenCalledWith();
     });
 
     it('Should handle keyboard event from link', () => {
         fixture.detectChanges();
-        spyOn(nestedItemListDirective.keyboardTriggered, 'emit');
+        const spy = jest.spyOn(nestedItemListDirective.keyboardTriggered, 'emit');
         const keyboardEvent = new KeyboardEvent('keyDown');
         nestedItemListDirective.contentItem.nestedLink.onKeyDown(keyboardEvent);
         fixture.detectChanges();
-        expect(nestedItemListDirective.keyboardTriggered.emit).toHaveBeenCalledWith(keyboardEvent);
+        expect(spy).toHaveBeenCalledWith(keyboardEvent);
     });
 
     it('Popover Should handle keyboard event from link', () => {
         fixture.detectChanges();
-        spyOn(nestedItemPopoverDirective.keyboardTriggered, 'emit');
+        const spy = jest.spyOn(nestedItemPopoverDirective.keyboardTriggered, 'emit');
         const keyboardEvent = new KeyboardEvent('keyDown');
         nestedItemPopoverDirective.contentItem.nestedLink.onKeyDown(keyboardEvent);
         fixture.detectChanges();
-        expect(nestedItemPopoverDirective.keyboardTriggered.emit).toHaveBeenCalledWith(keyboardEvent);
+        expect(spy).toHaveBeenCalledWith(keyboardEvent);
     });
 
     it('Popover Should handle keyboard event from sub items', () => {
-        spyOn(<any>nestedItemPopoverDirective, '_selectedChange');
+        const spy = jest.spyOn(<any>nestedItemPopoverDirective, '_selectedChange');
         fixture.detectChanges();
         popoverSubItemElement.linkItem.onClick();
         fixture.detectChanges();
-        expect((<any>nestedItemPopoverDirective)._selectedChange).toHaveBeenCalledWith(
-            (<any>popoverSubItemElement)._elementId
-        );
+        expect(spy).toHaveBeenCalledWith((<any>popoverSubItemElement)._elementId);
     });
 
     it('Should handle keyboard event from sub items', () => {
-        spyOn(<any>nestedItemListDirective, '_selectedChange');
+        const spy = jest.spyOn(<any>nestedItemListDirective, '_selectedChange');
         fixture.detectChanges();
         subItemElement.linkItem.onClick();
         fixture.detectChanges();
-        expect((<any>nestedItemListDirective)._selectedChange).toHaveBeenCalledWith((<any>subItemElement)._elementId);
+        expect(spy).toHaveBeenCalledWith((<any>subItemElement)._elementId);
     });
 });

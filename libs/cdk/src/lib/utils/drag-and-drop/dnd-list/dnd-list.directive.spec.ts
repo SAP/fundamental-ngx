@@ -60,7 +60,7 @@ describe('DndListDirective', () => {
     });
 
     it('Should handle move and detect good target (1)', () => {
-        spyOn(directive as any, '_createLine');
+        const spy = jest.spyOn(directive as any, '_createLine');
         const pointerPosition = { x: 150, y: 150 };
         (directive as any)._closestItemIndex = 100;
         (directive as any)._closestItemPosition = 'after';
@@ -70,11 +70,11 @@ describe('DndListDirective', () => {
 
         expect((directive as any)._closestItemIndex).toBe(0);
         expect((directive as any)._closestItemPosition).toBe('before');
-        expect((directive as any)._createLine).toHaveBeenCalledWith(0, 'before');
+        expect(spy).toHaveBeenCalledWith(0, 'before');
     });
 
     it('Should handle move and detect good target (2)', () => {
-        spyOn(directive as any, '_createLine');
+        const spy = jest.spyOn(directive as any, '_createLine');
         const pointerPosition = { x: 230, y: 230 };
         (directive as any)._closestItemIndex = 1000;
         (directive as any)._closestItemPosition = 'after';
@@ -84,18 +84,18 @@ describe('DndListDirective', () => {
 
         expect((directive as any)._closestItemIndex).toBe(1);
         expect((directive as any)._closestItemPosition).toBe('before');
-        expect((directive as any)._createLine).toHaveBeenCalledWith(1, 'before');
+        expect(spy).toHaveBeenCalledWith(1, 'before');
     });
 
     it('should handle dragend', () => {
-        spyOn(directive.itemDropped, 'emit');
-        spyOn(directive as any, '_removeAllLines');
+        const itemDroppedSpy = jest.spyOn(directive.itemDropped, 'emit');
+        const removeLinesSpy = jest.spyOn(directive as any, '_removeAllLines');
         directive.items = [...component.list];
 
         (directive as any)._closestItemIndex = 1;
         (directive as any)._closestItemPosition = 'after';
         directive.dragEnd(3);
-        expect(directive.itemDropped.emit).toHaveBeenCalledWith({
+        expect(itemDroppedSpy).toHaveBeenCalledWith({
             replacedItemIndex: 1,
             draggedItemIndex: 3,
             items: ['item1', 'item4', 'item2', 'item3'],
@@ -103,11 +103,11 @@ describe('DndListDirective', () => {
             mode: 'shift'
         });
 
-        expect((directive as any)._removeAllLines).toHaveBeenCalled();
+        expect(removeLinesSpy).toHaveBeenCalled();
     });
 
     it('should handle stickToPosition', () => {
-        spyOn(directive as any, '_createLine');
+        const createLineSpy = jest.spyOn(directive as any, '_createLine');
 
         const pointerPosition = { x: 231, y: 231 };
         (directive as any)._closestItemIndex = 1000;
@@ -122,6 +122,6 @@ describe('DndListDirective', () => {
 
         expect((directive as any)._closestItemIndex).toBe(1000);
         expect((directive as any)._closestItemPosition).toBe('after');
-        expect((directive as any)._createLine).not.toHaveBeenCalledWith(1000, 'before');
+        expect(createLineSpy).not.toHaveBeenCalledWith(1000, 'before');
     });
 });

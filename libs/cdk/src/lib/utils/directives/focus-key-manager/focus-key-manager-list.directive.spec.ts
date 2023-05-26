@@ -36,7 +36,7 @@ describe('FocusKeyManagerList', () => {
     });
 
     it('should focus element', fakeAsync(() => {
-        const focusMock = spyOn(component.item, 'focus').and.callThrough();
+        const focusMock = jest.spyOn(component.item, 'focus');
 
         component.list.ngAfterContentInit();
         component.list.focusItem(0);

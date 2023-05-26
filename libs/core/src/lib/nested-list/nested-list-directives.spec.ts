@@ -54,13 +54,13 @@ describe('NestedListDirectives', () => {
     it('Expand Icon Element should have good classes and react on click', () => {
         expect(expandIconElement.expanded).toBeFalsy();
 
-        spyOn((<any>expandIconElement)._itemService.toggle, 'next');
+        const spy = jest.spyOn((<any>expandIconElement)._itemService.toggle, 'next');
 
         expandIconElement.onClick(new MouseEvent('click'));
 
         fixture.detectChanges();
 
-        expect((<any>expandIconElement)._itemService.toggle.next).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
         expect(expandIconElement.expanded).toBeTruthy();
     });
 

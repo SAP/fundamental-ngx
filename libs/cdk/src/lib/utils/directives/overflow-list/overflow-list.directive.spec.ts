@@ -71,9 +71,22 @@ describe('OverflowItemsDirective', () => {
     }));
 
     beforeEach(async () => {
+        Object.defineProperty(global.window.HTMLElement.prototype, 'clientWidth', {
+            configurable: true,
+            value: LIST_WIDTH
+        });
+        Object.defineProperty(global.window.HTMLElement.prototype, 'offsetWidth', {
+            configurable: true,
+            value: LIST_WIDTH
+        });
+        Object.defineProperty(global.window.HTMLElement.prototype, 'offsetLeft', {
+            configurable: true,
+            value: LIST_WIDTH
+        });
         fixture = TestBed.createComponent(WrapperComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
+        await fixture.whenRenderingDone();
     });
 
     it('should create', () => {
