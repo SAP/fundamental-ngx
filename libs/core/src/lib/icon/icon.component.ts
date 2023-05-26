@@ -29,9 +29,6 @@ const BusinessSuiteInAppSymbol_PREFIX = 'businessSuiteInAppSymbols';
     selector: 'fd-icon',
     template: ``,
     styleUrls: ['./icon.component.scss'],
-    host: {
-        role: 'presentation'
-    },
     providers: [
         {
             provide: FD_ICON_COMPONENT,

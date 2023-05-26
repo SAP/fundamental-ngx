@@ -67,6 +67,17 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
             template: content instanceof TemplateRef ? content : null
         };
         this._popoverService.updateContent(text, template);
+
+        let srElement;
+        if (typeof content === 'string') {
+            srElement = document.createElement('span');
+            srElement.innerText = content;
+        } else {
+            srElement = template;
+        }
+
+        srElement.style.cssText = `position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);`;
+        this._elementRef.nativeElement.append(srElement);
     }
 
     /** @hidden */
