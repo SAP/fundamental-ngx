@@ -2375,7 +2375,10 @@ export class TableComponent<T = any>
         this._subscriptions.add(
             this._tableScrollDispatcher
                 .verticallyScrolled()
-                .pipe(filter(() => this.virtualScroll && !!this.bodyHeight))
+                .pipe(
+                    filter(() => this.virtualScroll && !!this.bodyHeight),
+                    debounceTime(50)
+                )
                 .subscribe(() => {
                     this._calculateVirtualScrollRows();
                 })
