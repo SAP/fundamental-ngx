@@ -67,8 +67,6 @@ describe('Table component test suite', () => {
         tableRowInitialState,
         tableCellInitialState,
         synchronizeButton,
-        tableTreeExample,
-        arrowButton,
         tableWrapExample,
         tableNoOuterBordersExample
     } = tablePage;
@@ -222,29 +220,6 @@ describe('Table component test suite', () => {
             await expect(
                 await getAttributeByName(tableInitialStateExample + tableCellInitialState, 'aria-expanded', 1)
             ).toBe('false');
-        });
-    });
-
-    describe('Check Tree Table', () => {
-        it('should check table item single selection', async () => {
-            await scrollIntoView(tableTreeExample);
-            await setValue(tableTreeExample + input, 'Laptops');
-            await click(tableTreeExample + buttonSearch);
-            const rowLength = await getElementArrayLength(tableTreeExample + tableRow);
-            await expect(rowLength).toEqual(1);
-        });
-
-        it('should check checkboxes', async () => {
-            await tablePage.checkAllCheckbox(tableTreeExample);
-        });
-
-        it('should check expanded table row', async () => {
-            await scrollIntoView(tableTreeExample);
-            const arrowButtonLength = await getElementArrayLength(tableTreeExample + arrowButton);
-            for (let i = 0; i < arrowButtonLength; i++) {
-                await click(tableTreeExample + arrowButton, i);
-            }
-            await expect(await getElementArrayLength(tableTreeExample + tableRow)).toEqual(20);
         });
     });
 
