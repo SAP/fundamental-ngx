@@ -67,6 +67,7 @@ import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { P13DialogDocsComponent } from './child-docs/p13-dialog/p13-dialog-docs.component';
 import { SettingsDialogDocsComponent } from './child-docs/settings-dialog/settings-dialog-docs.component';
 import { RowSelectionDocsComponent } from './child-docs/row-selection/row-selection-docs.component';
+import { TreeTableDocsComponent } from './child-docs/tree-table/tree-table-docs.component';
 import { TableScrollingDocsComponent } from './child-docs/scrolling/table-scrolling-docs.component';
 import { ClickableRowsDocsComponent } from './child-docs/clickable-rows/clickable-rows-docs.component';
 import { PreservedStateDocsComponent } from './child-docs/preserving-state/preserved-state-docs.component';
@@ -85,6 +86,7 @@ const routes: Routes = [
             { path: 'settings-dialog-table', component: SettingsDialogDocsComponent },
             { path: 'scrolling', component: TableScrollingDocsComponent },
             { path: 'row-selection', component: RowSelectionDocsComponent },
+            { path: 'tree-table', component: TreeTableDocsComponent },
             { path: 'clickable-rows', component: ClickableRowsDocsComponent },
             { path: 'preserved-state', component: PreservedStateDocsComponent }
         ]
@@ -152,6 +154,7 @@ const routes: Routes = [
         P13DialogDocsComponent,
         SettingsDialogDocsComponent,
         RowSelectionDocsComponent,
+        TreeTableDocsComponent,
         TableScrollingDocsComponent,
         ClickableRowsDocsComponent,
         PreservedStateDocsComponent,

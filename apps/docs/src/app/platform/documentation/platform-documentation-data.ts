@@ -37,6 +37,7 @@ export const components: SectionInterfaceContent[] = [
         name: 'Table',
         subItems: [
             { url: 'platform/table/basic', name: 'Basic examples' },
+            { url: 'platform/table/tree-table', name: 'Tree Table' },
             { url: 'platform/table/p13-dialog-table', name: 'Personalization dialog' },
             { url: 'platform/table/settings-dialog-table', name: 'Settings dialog' },
             { url: 'platform/table/row-selection', name: 'Row selection' },

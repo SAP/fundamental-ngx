@@ -62,6 +62,7 @@ export interface ExampleItem {
     date?: FdDate;
     verified?: boolean;
     children?: ExampleItem[];
+    expanded?: boolean;
 }
 
 /**
@@ -125,7 +126,7 @@ function convertToTree(parent: TableRow | null, items: ExampleItem[], level = 0)
             value,
             parent,
             level,
-            expanded: false
+            expanded: value.expanded
         });
 
         if (value.children && value.children.length > 0) {
@@ -171,6 +172,7 @@ const ITEMS: ExampleItem[] = [
     },
     {
         name: 'Screens',
+        expanded: true,
         children: [
             {
                 name: 'Bending Screen 21HD',
