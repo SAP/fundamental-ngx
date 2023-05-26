@@ -8,8 +8,9 @@
     (rowSelectionChange)="onRowSelectionChange($event)"
     (rowToggleOpenState)="onRowToggleOpenState($event)"
     (rowsRearrange)="onRowsRearrange($event)"
+    expandedStateKey="expanded"
 >
-    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false" [showExpandCollapseButtons]="true">
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false">
         <fdp-table-toolbar-actions>
             <fdp-button label="Toggle first row" (click)="toggleFirstRow()"></fdp-button>
         </fdp-table-toolbar-actions>
