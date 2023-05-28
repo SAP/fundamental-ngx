@@ -101,7 +101,7 @@
     "@swc/cli": "0.1.62",
     "@swc/core": "^1.2.173",
     "@types/google.visualization": "0.0.68",
-    "@types/jasmine": "3.10.2",
+    "@types/jasmine": "4.3.2",
     "@types/jest": "29.4.4",
     "@types/lodash-es": "4.17.6",
     "@types/node": "16.11.7",
