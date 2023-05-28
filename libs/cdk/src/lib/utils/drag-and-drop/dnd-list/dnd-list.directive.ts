@@ -120,7 +120,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     @ContentChildren(DND_ITEM)
-    dndItems: QueryList<DndItem>;
+    dndItems: QueryList<DndItem<T>>;
 
     /** @hidden */
     private _elementsCoordinates: ElementChord[];
@@ -255,12 +255,12 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
             return;
         }
 
-        if (!replacedItemIndex || replacedItemIndex === -1) {
+        if (replacedItemIndex === null || replacedItemIndex === -1) {
             return;
         }
 
-        const draggedItem = items[draggedItemIndex];
-        const replacedItem = items[replacedItemIndex];
+        const draggedDndItem = this.dndItems.get(draggedItemIndex)?.item ?? items[draggedItemIndex];
+        const replacedDndItem = this.dndItems.get(replacedItemIndex)?.item ?? items[replacedItemIndex];
 
         const predicateSubj = new Subject<boolean>();
 
@@ -298,7 +298,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
                 }
 
                 /** Replacing items */
-                items[replacedItemIndex] = draggedItem;
+                items[replacedItemIndex] = draggedDndItem;
 
                 this.itemsChange.emit(items);
             }
@@ -308,7 +308,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
 
         if (this.dropPredicate !== undefined) {
             this.dropPredicateCalculating.emit(true);
-            const obj = this.dropPredicate(draggedItem, replacedItem, evt);
+            const obj = this.dropPredicate(draggedDndItem, replacedDndItem, evt);
             const strategy = selectStrategy(obj);
 
             await strategy.createSubscription(obj, (result) => {

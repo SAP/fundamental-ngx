@@ -1,5 +1,6 @@
 import { ElementRef } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Nullable } from '../models/nullable';
 
 export type LinkPosition = 'after' | 'before';
 
@@ -25,8 +26,9 @@ export interface ElementPosition {
     y: number;
 }
 
-export interface DndItem {
+export interface DndItem<T = any> {
     elementRef: ElementRef;
+    item: Nullable<T>;
     getElementCoordinates(isBefore: boolean, gridMode: boolean): ElementChord;
     removeLine(): void;
     removeReplaceIndicator(): void;

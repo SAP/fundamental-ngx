@@ -456,3 +456,34 @@ export function createGroupedTableRowsTree(
 
     return groupedTableRows;
 }
+
+/** @hidden */
+export function convertObjectsToTableRows<T>(
+    source: T[],
+    addedItems: T[],
+    selectedKey: string,
+    rowNavigatable: boolean | string,
+    selectionMode: SelectionModeValue,
+    rows: TableRow[],
+    rowComparator: RowComparator
+): TableRow<T>[] {
+    const rowItem = source[0] as any;
+
+    if (isTableRow(rowItem)) {
+        return source as TableRow[];
+    }
+
+    const selectedRowsMap = getSelectionStatusByRowValue(source, selectionMode, rows, rowComparator);
+    return source.map((item: T, index: number) => {
+        const isNewItem = addedItems.includes(item);
+        const row = newTableRow({
+            type: TableRowType.ITEM,
+            checked: item[selectedKey] ?? !!selectedRowsMap.get(item),
+            index,
+            value: item
+        });
+        row.navigatable = isRowNavigatable(item, rowNavigatable);
+        row.state = isNewItem ? 'editable' : 'readonly';
+        return row;
+    });
+}

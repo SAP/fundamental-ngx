@@ -15,12 +15,16 @@ import { DndItem, ElementChord, ElementPosition, LinkPosition } from '../dnd.int
 import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { DND_ITEM } from '../tokens';
+import { Nullable } from '../../models/nullable';
 
 @Directive({
     selector: '[fdkDndItem], [fd-dnd-item]',
     providers: [DragDrop, { provide: DND_ITEM, useExisting: forwardRef(() => DndItemDirective) }]
 })
-export class DndItemDirective implements DndItem, AfterContentInit, OnDestroy {
+export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnDestroy {
+    /** Item reference. Used for cases when `[items]` array of dnd list is different than `dndItems` content children. */
+    @Input('fdkDndItem')
+    item: Nullable<T>;
     /**
      * Whether to apply "fd-dnd-item" class.
      * @default true

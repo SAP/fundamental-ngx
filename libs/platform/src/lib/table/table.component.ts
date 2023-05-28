@@ -113,6 +113,7 @@ import { TableService } from './table.service';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
     buildNewRowSkeleton,
+    convertObjectsToTableRows,
     convertTreeLikeToFlatList,
     convertTreeObjectsToTableRows,
     convertTreeTableRowToFlatList,
@@ -2166,15 +2167,14 @@ export class TableComponent<T = any>
         if (this.isTreeTable) {
             return this._createTreeTableRowsByDataSourceItems(source);
         }
-        return convertTreeObjectsToTableRows(
+        return convertObjectsToTableRows(
             source,
+            this._addedItems,
+            this.selectedKey,
+            this.rowNavigatable,
             this.selectionMode,
             this._tableRows,
-            this.rowComparator,
-            this.relationKey,
-            this.selectedKey,
-            this.expandedStateKey,
-            this.rowNavigatable
+            this.rowComparator
         );
     }
 
