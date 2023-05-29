@@ -23,7 +23,7 @@ import { Observable, takeUntil } from 'rxjs';
     `,
     styles: [
         `
-            fd-multi-combobox-select-all-toggler.fd-list__item {
+            li[fd-multi-combobox-select-all-toggler].fd-list__item {
                 display: block;
                 background-color: var(--sapBackgroundColor);
             }
