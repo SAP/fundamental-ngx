@@ -11,7 +11,8 @@ import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { Observable, takeUntil } from 'rxjs';
 
 @Component({
-    selector: 'fd-multi-combobox-select-all-toggler',
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'li[fd-multi-combobox-select-all-toggler]',
     template: `
         <fd-checkbox
             [label]="'coreMultiComboBox.selectAllLabel' | fdTranslate"
