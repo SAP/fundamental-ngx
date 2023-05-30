@@ -120,6 +120,7 @@
                                 [hasFilter]="_filterRulesMap.has(column.key)"
                                 [hasSorting]="_sortRulesMap.has(column.key)"
                                 [sorting]="_sortRulesMap.get(column.key)"
+                                [attr.title]="column?.headerOverflows ? column.label : null"
                             >
                                 <!-- Header menu -->
                                 <fdp-table-cell-header-popover
