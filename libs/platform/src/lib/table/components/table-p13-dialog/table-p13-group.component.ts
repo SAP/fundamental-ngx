@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * Personalization Dialog Group Settings.
@@ -7,6 +7,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
     selector: 'fdp-table-p13-group',
     template: '',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class TableP13GroupComponent {}

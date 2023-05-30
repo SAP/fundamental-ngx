@@ -6,7 +6,8 @@ import {
     Input,
     Output,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 
 import { ContentDensity } from '@fundamental-ngx/cdk/utils';
@@ -28,6 +29,7 @@ import { FiltersViewStep, FILTERS_VIEW_STEP_TOKEN } from './filters-active-step'
     selector: 'fdp-filter-step',
     templateUrl: './filter-step.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     /** Each filters dialog step must provide FILTERS_VIEW_STEP_TOKEN to be accessible */
     providers: [{ provide: FILTERS_VIEW_STEP_TOKEN, useExisting: forwardRef(() => FilterStepComponent) }]
 })

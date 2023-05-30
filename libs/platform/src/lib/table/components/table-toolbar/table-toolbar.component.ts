@@ -1,5 +1,4 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -7,7 +6,8 @@ import {
     Input,
     OnDestroy,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
@@ -38,9 +38,10 @@ let tableToolbarTitleUniqueId = 0;
     selector: 'fdp-table-toolbar',
     templateUrl: './table-toolbar.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     providers: [{ provide: TABLE_TOOLBAR, useExisting: TableToolbarComponent }]
 })
-export class TableToolbarComponent implements TableToolbarWithTemplate, AfterViewInit, OnDestroy {
+export class TableToolbarComponent implements TableToolbarWithTemplate, OnDestroy {
     /**
      * Whether the toolbar should hide elements in popover when they overflow.
      * */
@@ -104,11 +105,6 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
         private readonly _tableService: TableService
     ) {
         this._listenToTableEvents();
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._cd.detectChanges();
     }
 
     /** @hidden */

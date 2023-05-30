@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
@@ -6,7 +6,9 @@ import { TableDataSource, TableDataProvider, TableState, SortDirection } from '@
 
 @Component({
     selector: 'fdp-platform-table-p13-sort-example',
-    templateUrl: './platform-table-p13-sort-example.component.html'
+    templateUrl: './platform-table-p13-sort-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformTableP13SortExampleComponent {
     source: TableDataSource<ExampleItem>;

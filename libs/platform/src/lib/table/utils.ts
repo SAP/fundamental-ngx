@@ -8,7 +8,7 @@ import {
     CollectionStringFilter
 } from './interfaces';
 import { TableRow } from './models/table-row.model';
-import { FILTER_DATE_STRATEGY, FILTER_NUMBER_STRATEGY, FILTER_STRING_STRATEGY, TableRowType } from './enums';
+import { FILTER_DATE_STRATEGY, FILTER_NUMBER_STRATEGY, FILTER_STRING_STRATEGY } from './enums';
 
 export const filterByString = (rows: TableRow[], filter: CollectionStringFilter): TableRow[] => {
     const filterValue = filter.value && filter.value.toLocaleLowerCase();
@@ -121,28 +121,6 @@ export const getScrollBarWidth = (document: Document): number => {
     const scrollbarWidth = div.offsetWidth - div.clientWidth;
     document.body.removeChild(div);
     return scrollbarWidth;
-};
-
-export const newTableRow = <T = any>(row: Partial<TableRow<T>>): TableRow<T> => {
-    if (!row.value) {
-        throw new Error('Unexpected value. TableRow.value cannot be undefined.');
-    }
-
-    const newRow: TableRow<T> = {
-        type: row.type || TableRowType.ITEM,
-        checked: row.checked || false,
-        index: row.index || 0,
-        value: row.value,
-        parent: row.parent || null,
-        level: row.level || 0,
-        expandable: row.expandable || false,
-        expanded: row.expanded || false,
-        hidden: row.hidden || false,
-        navigatable: row.navigatable || false,
-        state: row.state || 'readonly',
-        children: row.children || []
-    };
-    return newRow;
 };
 
 /** @hidden */

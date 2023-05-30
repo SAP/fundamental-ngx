@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, InjectionToken } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, InjectionToken, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 
 /**
@@ -24,7 +24,8 @@ export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
         (click)="resettable.reset()"
         [disabled]="(resettable.isResetAvailable$ | async) === false"
     ></button>`,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class ResetButtonComponent {
     /** @hidden */

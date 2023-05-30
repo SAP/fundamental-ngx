@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, ViewEncapsulation } from '@angular/core';
 import equal from 'fast-deep-equal/es6';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -33,7 +33,8 @@ const INITIAL_DIRECTION = SortDirection.ASC;
 @Component({
     templateUrl: './sorting.component.html',
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => SortingComponent) }],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class SortingComponent implements Resettable {
     /** Current selected direction */

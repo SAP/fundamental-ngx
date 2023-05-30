@@ -13,3 +13,6 @@ export * from './table-row-activate-event.model';
 export * from './row-comparator.model';
 export * from './table-managed-preset';
 export * from './save-rows-event.interface';
+export * from './tree-table.model';
+export * from './data-source.type';
+export * from './dnd';

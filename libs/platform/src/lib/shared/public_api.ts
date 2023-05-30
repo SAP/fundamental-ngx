@@ -1,13 +1,6 @@
 export * from './base';
 export * from './platform.config';
 
-export * from './async-strategy/function-strategy.class';
-export * from './async-strategy/observable-strategy.class';
-export * from './async-strategy/promise-strategy.class';
-export * from './async-strategy/select-strategy.class';
-export * from './async-strategy/subscription-strategy.interface';
-export * from './async-strategy/value-strategy.class';
-
 export * from './domain/array-data-source';
 export * from './domain/base-data-provider';
 export * from './domain/data-model';

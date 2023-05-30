@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { finalize, delay } from 'rxjs/operators';
 
@@ -7,7 +7,9 @@ import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx
 
 @Component({
     selector: 'fdp-platform-table-page-scrolling-example',
-    templateUrl: './platform-table-page-scrolling-example.component.html'
+    templateUrl: './platform-table-page-scrolling-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformTablePageScrollingExampleComponent {
     sourceProvider = new TableDataProviderExample();

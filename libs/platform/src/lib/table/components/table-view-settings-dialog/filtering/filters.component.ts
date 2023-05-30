@@ -4,7 +4,8 @@ import {
     ChangeDetectorRef,
     Component,
     forwardRef,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import equal from 'fast-deep-equal/es6';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -40,7 +41,8 @@ export enum ACTIVE_STEP {
 @Component({
     templateUrl: './filters.component.html',
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => FiltersComponent) }],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class FiltersComponent implements Resettable, AfterViewInit {
     /** Reference to the available steps */

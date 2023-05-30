@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 
 /**
  * The component that represents a table toolbar actions.
@@ -16,7 +16,8 @@ import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild } from '@ang
             <ng-content></ng-content>
         </ng-template>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class TableToolbarActionsComponent {
     /** @hidden */
