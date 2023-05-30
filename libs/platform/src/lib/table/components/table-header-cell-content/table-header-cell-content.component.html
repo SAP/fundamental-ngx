@@ -23,6 +23,12 @@
     </ng-container>
 
     <ng-template #defaultHeaderCellTemplate>
-        {{ column?.label }}
+        <span
+            [id]="id + '-header-cell-' + column.name"
+            [attr.title]="column?.headerOverflows ? column.label : null"
+            class="fd-table__cell--truncate-txt"
+        >
+            {{ column?.label }}
+        </span>
     </ng-template>
 </ng-template>

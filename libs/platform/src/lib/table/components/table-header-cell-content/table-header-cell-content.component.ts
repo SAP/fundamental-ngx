@@ -15,11 +15,19 @@ import { TableColumn } from '../table-column/table-column';
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                flex-grow: 0;
+            }
+            fdp-table-header-cell-content .fd-table__text--no-wrap {
+                width: 100%;
             }
         `
     ]
 })
 export class TableHeaderCellContentComponent {
+    /** Table Id */
+    @Input()
+    id: string;
+
     /** Column reference. */
     @Input()
     column: TableColumn;

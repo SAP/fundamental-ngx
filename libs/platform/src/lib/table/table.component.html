@@ -115,6 +115,7 @@
                             (keydown.arrowRight)="_scrollToOverlappedCell()"
                         >
                             <fdp-table-header-cell-content
+                                [id]="id"
                                 [column]="column"
                                 [hasFilter]="_filterRulesMap.has(column.key)"
                                 [hasSorting]="_sortRulesMap.has(column.key)"
