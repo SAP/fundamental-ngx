@@ -11,8 +11,8 @@ import {
     Output,
     QueryList
 } from '@angular/core';
-import { merge, Observable, Subject, take } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { merge, Observable, Subject } from 'rxjs';
+import { startWith, takeUntil, take } from 'rxjs/operators';
 import { selectStrategy } from '../../async-strategy';
 import { ElementChord, FdDropEvent, LinkPosition, ElementPosition, DndItem, FdDndDropType } from '../dnd.interfaces';
 import { DND_ITEM, DND_LIST } from '../tokens';
@@ -272,8 +272,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
             mode: this.dropMode !== 'auto' ? this.dropMode : this._detectedDropMode
         };
 
-        const sub = predicateSubj.pipe(take(1)).subscribe((result) => {
-            sub.unsubscribe();
+        predicateSubj.pipe(take(1)).subscribe((result) => {
             this._removeAllLines();
             this._removeAllReplaceIndicators();
 
