@@ -6,6 +6,7 @@ import { AlertService } from './alert-service/alert.service';
 import { AlertContainerComponent } from './alert-utils/alert-container.component';
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
 
 /**
  * @deprecated
@@ -14,7 +15,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
  */
 @NgModule({
     declarations: [AlertComponent, AlertContainerComponent],
-    imports: [CommonModule, ButtonModule],
+    imports: [CommonModule, ButtonModule, MessageStripModule],
     exports: [AlertComponent, AlertContainerComponent],
     providers: [AlertService, DynamicComponentService]
 })

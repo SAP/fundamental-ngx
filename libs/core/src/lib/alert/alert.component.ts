@@ -1,35 +1,34 @@
 import {
-    Component,
-    Input,
-    OnInit,
-    ElementRef,
+    AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
-    ViewChild,
+    Component,
     ComponentFactoryResolver,
     ComponentRef,
-    Type,
-    AfterViewInit,
-    ViewContainerRef,
-    TemplateRef,
-    Optional,
+    ElementRef,
     EmbeddedViewRef,
-    Output,
     EventEmitter,
-    ViewEncapsulation,
     HostListener,
+    Input,
     NgZone,
-    ChangeDetectionStrategy
+    OnInit,
+    Optional,
+    Output,
+    TemplateRef,
+    Type,
+    ViewChild,
+    ViewContainerRef
 } from '@angular/core';
-import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass, Nullable } from '@fundamental-ngx/cdk/utils';
 import { AlertRef } from './alert-utils/alert-ref';
 import { AlertConfig } from './alert-utils/alert-config';
+import { MessageStripType } from '@fundamental-ngx/core/message-strip';
 
 let alertUniqueId = 0;
 
 /**
  * @deprecated
- * Alert component is depricated since version 0.16.0
+ * Alert component is deprecated since version 0.16.0
  * Message Strip component should be used instead.
  *
  * The component that represents an alert. It can be only be used inline.
@@ -39,17 +38,6 @@ let alertUniqueId = 0;
     selector: 'fd-alert',
     templateUrl: './alert.component.html',
     styleUrls: ['./alert.component.scss'],
-    host: {
-        '[attr.aria-labelledby]': 'ariaLabelledBy',
-        '[attr.aria-label]': 'ariaLabel',
-        '[style.width]': 'width',
-        '[style.min-width]': 'minWidth',
-        role: 'alert',
-        '[attr.id]': 'id',
-        '[@fadeAlertNgIf]': ''
-    },
-    animations: [alertFadeNgIf],
-    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
@@ -63,7 +51,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     /** The type of the alert. Can be one of *warning*, *success*, *information*, *error* or null. */
     @Input()
-    type: string;
+    type: MessageStripType;
 
     /** Id for the alert component. If omitted, a unique one is generated. */
     @Input()
@@ -104,7 +92,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     /** Event fired when the alert is dismissed. */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    onDismiss: EventEmitter<undefined> = new EventEmitter<undefined>();
+    onDismiss: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
     mouseInAlert = false;
@@ -237,9 +225,8 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     /** @hidden */
     private loadFromComponent(componentType: Type<any>): void {
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentType);
         this.containerRef.clear();
-        this.componentRef = this.containerRef.createComponent(componentFactory);
+        this.componentRef = this.containerRef.createComponent(componentType);
     }
 
     /** @hidden */
