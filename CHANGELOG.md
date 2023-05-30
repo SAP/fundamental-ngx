@@ -1,3 +1,17 @@
+# [0.42.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.9...v0.42.0-rc.0) (2023-05-30)
+
+
+### Features
+
+* **cdk,platform:** dnd predicate ([#9921](https://github.com/SAP/fundamental-ngx/issues/9921)) ([402b8b5](https://github.com/SAP/fundamental-ngx/commit/402b8b5deee3284e9e2a5bb5a6b1327e82714b81))
+
+
+### BREAKING CHANGES
+
+* **cdk,platform:** Moved async-strategy from @fundamental-ngx/platform/shared to @fundamental-ngx/cdk/utils;
+
+
+
 ## [0.41.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.8...v0.41.1-rc.9) (2023-05-26)
 
 
