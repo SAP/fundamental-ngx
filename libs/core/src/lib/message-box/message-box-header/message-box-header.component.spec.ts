@@ -97,8 +97,8 @@ describe('MessageBoxHeaderComponent', () => {
 
         const headerEl = fixture.nativeElement.querySelector('.fd-bar');
 
-        expect(headerEl).toHaveClass('fd-message-box__header');
-        expect(headerEl).toHaveClass('is-cozy');
+        expect(headerEl.classList).toContain('fd-message-box__header');
+        expect(headerEl.classList).toContain('is-cozy');
     });
 
     it('should use default template', async () => {

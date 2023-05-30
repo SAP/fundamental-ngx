@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    Output,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { skip } from 'rxjs/operators';
@@ -11,7 +20,8 @@ import { FilterRule } from './filtering.model';
 @Component({
     selector: 'fdp-table-filter-rule',
     templateUrl: './filter-rule.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class FilterRuleComponent implements OnDestroy {
     /** Rule to be displayed **/

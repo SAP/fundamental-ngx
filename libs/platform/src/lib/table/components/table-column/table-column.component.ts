@@ -8,7 +8,8 @@ import {
     OnInit,
     Optional,
     SimpleChanges,
-    TemplateRef
+    TemplateRef,
+    ViewEncapsulation
 } from '@angular/core';
 import { TableCellHeaderPopoverDirective } from '../../directives/table-cell-header-popover.directive';
 
@@ -47,6 +48,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     selector: 'fdp-column',
     template: '',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     providers: [{ provide: TableColumn, useExisting: TableColumnComponent }]
 })
 export class TableColumnComponent extends TableColumn implements OnInit, OnChanges {

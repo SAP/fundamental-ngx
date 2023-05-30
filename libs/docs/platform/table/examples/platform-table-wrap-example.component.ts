@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform/table';
+import { TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
+import { Observable, of } from 'rxjs';
 
 @Component({
     selector: 'fdp-platform-table-wrap-example',
-    templateUrl: './platform-table-wrap-example.component.html'
+    templateUrl: './platform-table-wrap-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformTableWrapExampleComponent {
     source: TableDataSource<ExampleItem>;

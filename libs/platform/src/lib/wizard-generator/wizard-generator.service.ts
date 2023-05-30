@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { cloneDeep, concat, mergeWith, uniq } from 'lodash-es';
 
-import { isFunction, selectStrategy } from '@fundamental-ngx/platform/shared';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import {
     WizardGeneratorStepComponent,
@@ -17,6 +16,7 @@ import {
     WizardGeneratorItem,
     WizardVisibleSteps
 } from './interfaces/wizard-generator-item.interface';
+import { isFunction, selectStrategy } from '@fundamental-ngx/cdk/utils';
 
 export type StepsComponents = Map<string, WizardGeneratorStepComponent>;
 

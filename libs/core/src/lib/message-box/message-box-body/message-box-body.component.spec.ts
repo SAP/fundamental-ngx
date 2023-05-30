@@ -33,6 +33,6 @@ describe('MessageBoxBodyComponent', () => {
     it('should apply proper css classes', async () => {
         await whenStable(fixture);
 
-        expect(fixture.nativeElement).toHaveClass('fd-message-box__body--no-vertical-padding');
+        expect(fixture.nativeElement.classList).toContain('fd-message-box__body--no-vertical-padding');
     });
 });

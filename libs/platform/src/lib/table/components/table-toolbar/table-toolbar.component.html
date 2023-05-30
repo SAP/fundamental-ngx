@@ -9,7 +9,7 @@
         fdType="transparent"
         [clearBorder]="true"
         [titleId]="tableToolbarTitleId"
-        [title]="title && !hideItemCount ? title + ' (' + counter + ')' : title"
+        [title]="title && !hideItemCount ? title + ' (' + (counter | async) + ')' : title"
         [shouldOverflow]="shouldOverflow"
     >
         <ng-container *ngIf="_tableToolbarLeftActionsComponent">
@@ -60,7 +60,13 @@
             <fd-toolbar-separator
                 fd-toolbar-item
                 fdOverflowPriority="never"
-                *ngIf="tableToolbarActionsComponent || sortable || filterable || groupable || columns"
+                *ngIf="
+                    tableToolbarActionsComponent ||
+                    (sortable | async) ||
+                    (filterable | async) ||
+                    (groupable | async) ||
+                    (columns | async)
+                "
             ></fd-toolbar-separator>
         </ng-container>
 
@@ -68,7 +74,15 @@
             <ng-container *ngTemplateOutlet="tableToolbarActionsComponent.contentTemplateRef"></ng-container>
         </span>
 
-        <ng-container *ngIf="showExpandCollapseButtons || sortable || filterable || groupable || columns">
+        <ng-container
+            *ngIf="
+                showExpandCollapseButtons ||
+                (sortable | async) ||
+                (filterable | async) ||
+                (groupable | async) ||
+                (columns | async)
+            "
+        >
             <fd-toolbar-separator
                 fd-toolbar-item
                 fdOverflowPriority="never"
@@ -100,7 +114,7 @@
             <fdp-button
                 fd-toolbar-item
                 fdOverflowPriority="never"
-                *ngIf="sortable"
+                *ngIf="sortable | async"
                 glyph="sort"
                 [title]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
                 [ariaLabel]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
@@ -111,7 +125,7 @@
             <fdp-button
                 fd-toolbar-item
                 fdOverflowPriority="never"
-                *ngIf="filterable"
+                *ngIf="filterable | async"
                 glyph="filter"
                 [title]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
                 [ariaLabel]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
@@ -122,7 +136,7 @@
             <fdp-button
                 fd-toolbar-item
                 fdOverflowPriority="never"
-                *ngIf="groupable"
+                *ngIf="groupable | async"
                 glyph="group-2"
                 [title]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
                 [ariaLabel]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
@@ -133,7 +147,7 @@
             <fdp-button
                 fd-toolbar-item
                 fdOverflowPriority="never"
-                *ngIf="columns"
+                *ngIf="columns | async"
                 glyph="action-settings"
                 [title]="'platformTable.toolbarActionColumnsButtonTitle' | fdTranslate"
                 [ariaLabel]="'platformTable.toolbarActionColumnsButtonTitle' | fdTranslate"

@@ -1,10 +1,12 @@
-import { AfterViewInit, Directive, ElementRef, Input, NgZone } from '@angular/core';
-import { take } from 'rxjs/operators';
+import { AfterViewInit, Directive, ElementRef, inject, Input, NgZone } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { distinctUntilChanged, filter, take, takeUntil } from 'rxjs/operators';
 import {
     DeprecatedSelector,
     FD_DEPRECATED_DIRECTIVE_SELECTOR,
     getDeprecatedModel
 } from '../../deprecated-selector.class';
+import { DestroyedService } from '../../services';
 import { TabbableElementService } from '../../services/tabbable-element.service';
 
 @Directive({
@@ -24,6 +26,7 @@ export class DeprecatedInitialFocusDirective extends DeprecatedSelector {}
     selector: '[fdkInitialFocus], [fdInitialFocus], [fd-initial-focus]',
     standalone: true,
     providers: [
+        DestroyedService,
         TabbableElementService,
         {
             provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
@@ -33,19 +36,34 @@ export class DeprecatedInitialFocusDirective extends DeprecatedSelector {}
 })
 export class InitialFocusDirective implements AfterViewInit {
     /**
-     * CSS selector of element that should be focused.
+     * CSS selector of an element that should be focused.
      */
     @Input('fd-initial-focus')
     focusableItem = '.fd-initial-focus-item';
 
     /**
-     * Whether initial focus enabled for current element.
+     * Whether initial focus enabled for a current element.
      */
     @Input()
-    enabled = true;
+    set enabled(value: boolean) {
+        if (value === this.enabled) {
+            return;
+        }
+        this._enabled$.next(value);
+    }
+
+    get enabled(): boolean {
+        return this._enabled$.getValue();
+    }
+
+    /** @hidden */
+    private readonly _destroy$ = inject(DestroyedService);
+
+    /** @hidden */
+    private readonly _enabled$ = new BehaviorSubject<boolean>(true);
 
     /**
-     * Whether to focus last element in found array of elements.
+     * Whether to focus last element in a found array of elements.
      */
     @Input()
     focusLastElement = false;
@@ -59,7 +77,15 @@ export class InitialFocusDirective implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._executeOnEmpty(() => this._focus());
+        this._enabled$
+            .pipe(
+                distinctUntilChanged(),
+                filter((enabled) => enabled),
+                takeUntil(this._destroy$)
+            )
+            .subscribe(() => {
+                this._executeOnEmpty(() => this._focus());
+            });
     }
 
     /**
@@ -76,7 +102,7 @@ export class InitialFocusDirective implements AfterViewInit {
 
     /**
      * @hidden
-     * Searches for appropriate focusable element
+     * Searches for an appropriate focusable element
      */
     private _getFocusableElement(): HTMLElement | null {
         if (!this.focusableItem) {
@@ -91,7 +117,7 @@ export class InitialFocusDirective implements AfterViewInit {
             return !this.focusLastElement ? autoFocusableItems[0] : autoFocusableItems[autoFocusableItems.length - 1];
         }
 
-        // If no elements found, fallback to first tabbable element.
+        // If no elements found, fallback to a first tabbable element.
         return this._tabbableService.getTabbableElement(this._elmRef.nativeElement, this.focusLastElement);
     }
 
@@ -100,6 +126,7 @@ export class InitialFocusDirective implements AfterViewInit {
         if (!this.enabled) {
             return;
         }
-        this._getFocusableElement()?.focus();
+        const elm = this._getFocusableElement();
+        elm?.focus();
     }
 }

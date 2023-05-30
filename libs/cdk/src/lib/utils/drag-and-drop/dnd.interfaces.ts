@@ -1,5 +1,6 @@
 import { ElementRef } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Nullable } from '../models/nullable';
 
 export type LinkPosition = 'after' | 'before';
 
@@ -25,18 +26,20 @@ export interface ElementPosition {
     y: number;
 }
 
-export interface DndItem {
+export interface DndItem<T = any> {
     elementRef: ElementRef;
-    getElementCoordinates: (isBefore: boolean, gridMode: boolean) => ElementChord;
-    removeLine: () => void;
-    removeReplaceIndicator: () => void;
-    createLine: (linkPosition: LinkPosition, gridMode: boolean) => void;
-    createReplaceIndicator: () => void;
+    item: Nullable<T>;
+    getElementCoordinates(isBefore: boolean, gridMode: boolean): ElementChord;
+    removeLine(): void;
+    removeReplaceIndicator(): void;
+    createLine(linkPosition: LinkPosition, gridMode: boolean): void;
+    createReplaceIndicator(): void;
     moved: Observable<ElementPosition>;
     released: Observable<void>;
     started: Observable<void>;
     listDraggable: boolean;
-    changeCDKDragState: () => void;
+    changeCDKDragState(): void;
+    setDisabledState(state: boolean): void;
 }
 
 export type FdDndDropType = 'shift' | 'group' | 'auto';

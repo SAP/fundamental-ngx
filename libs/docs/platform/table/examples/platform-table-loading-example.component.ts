@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
@@ -8,6 +8,8 @@ import { delay } from 'rxjs/operators';
 @Component({
     selector: 'fdp-platform-table-loading-example',
     templateUrl: './platform-table-loading-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     styles: [
         `
             .example-btn-holder {

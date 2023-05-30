@@ -6,6 +6,33 @@ import { resizeObservable } from './resize-observable';
 
 const ELEMENT_DIMENSIONS = { width: 100 };
 
+class MockResizeObserver implements ResizeObserver {
+    constructor(public callbackFn: ResizeObserverCallback) {}
+
+    observe(target: Element, options?: ResizeObserverOptions): void {
+        // Mutation observer observer any changes in DOM tree
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes') {
+                    const entry = {
+                        contentRect: {
+                            width: 200
+                        },
+                        target
+                    } as ResizeObserverEntry;
+                    this.callbackFn([entry], this);
+                }
+            });
+        });
+
+        observer.observe(target, { attributes: true });
+    }
+
+    disconnect(): void {}
+
+    unobserve(target: Element): void {}
+}
+
 @Component({
     template: '',
     // eslint-disable-next-line @angular-eslint/no-host-metadata-property
@@ -31,6 +58,7 @@ describe('Resize Observable utils', () => {
     }));
 
     beforeEach(() => {
+        global.window.ResizeObserver = MockResizeObserver;
         fixture = TestBed.createComponent(TestComponent);
         elementRef = fixture.componentInstance.elementRef;
         fixture.detectChanges();

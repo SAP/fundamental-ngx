@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
@@ -6,7 +6,9 @@ import { TableDataProvider, TableDataSource, TableRowActivateEvent, TableState }
 
 @Component({
     selector: 'fdp-platform-table-activable-example',
-    templateUrl: './platform-table-activable-example.component.html'
+    templateUrl: './platform-table-activable-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformTableActivableExampleComponent {
     source: TableDataSource<ExampleItem>;

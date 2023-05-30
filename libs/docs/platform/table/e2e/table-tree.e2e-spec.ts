@@ -49,6 +49,7 @@ describe('Table component test suite', () => {
             for (let i = 0; i < arrowButtonLength; i++) {
                 await click(tableTreeExample + arrowButton, i);
             }
+            tick(100);
             await expect(await getElementArrayLength(tableTreeExample + tableRow)).toEqual(20);
         });
     });

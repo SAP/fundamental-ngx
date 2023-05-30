@@ -4,7 +4,8 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { DestroyedService, resizeObservable } from '@fundamental-ngx/cdk/utils';
@@ -16,7 +17,8 @@ import { takeUntil } from 'rxjs/operators';
     selector: 'fdp-platform-table-responsive-columns-example',
     templateUrl: './platform-table-responsive-columns-example.component.html',
     providers: [DestroyedService],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformTableResponsiveColumnsExampleComponent implements AfterViewInit {
     source: TableDataSource<ExampleItem>;

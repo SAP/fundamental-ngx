@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
+import { isFunction, isPromise, isSubscribable } from '../typecheck';
 
-import { isFunction, isPromise, isSubscribable } from '../utils/lang';
 import { FunctionStrategy } from './function-strategy.class';
 import { ObservableStrategy } from './observable-strategy.class';
 import { PromiseStrategy } from './promise-strategy.class';
