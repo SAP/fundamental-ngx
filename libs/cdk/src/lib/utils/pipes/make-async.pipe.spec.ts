@@ -19,8 +19,8 @@ describe('MakeAsyncPipe', () => {
         );
         const observableNotModified = pipe.transform(of('string'));
 
-        expect(isSubscribable(observableFromStatic)).toBeTrue();
-        expect(isPromise(promiseNotModified)).toBeTrue();
-        expect(isSubscribable(observableNotModified)).toBeTrue();
+        expect(isSubscribable(observableFromStatic)).toBe(true);
+        expect(isPromise(promiseNotModified)).toBe(true);
+        expect(isSubscribable(observableNotModified)).toBe(true);
     });
 });

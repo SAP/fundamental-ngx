@@ -11,6 +11,7 @@ import { MessageBoxConfig } from './utils/message-box-config.class';
 import { MessageBoxComponent } from './message-box.component';
 import { MessageBoxRef } from './utils/message-box-ref.class';
 import { MessageBoxModule } from './message-box.module';
+import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 
 @Component({
     template: `
@@ -50,7 +51,8 @@ describe('MessageBoxComponent', () => {
             providers: [
                 { provide: MessageBoxRef, useValue: messageBoxRef },
                 { provide: MessageBoxConfig, useValue: messageBoxConfig },
-                { provide: Router, useValue: mockRouter }
+                { provide: Router, useValue: mockRouter },
+                { provide: FD_DIALOG_FOCUS_TRAP_ERROR, useValue: true }
             ]
         });
     }));
@@ -82,7 +84,7 @@ describe('MessageBoxComponent', () => {
     it('should close after esc pressed', () => {
         setup();
 
-        const dismissSpy = spyOn(messageBoxRef, 'dismiss');
+        const dismissSpy = jest.spyOn(messageBoxRef, 'dismiss');
 
         messageBoxComponent['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
         fixture.detectChanges();
@@ -95,7 +97,7 @@ describe('MessageBoxComponent', () => {
 
         setup([{ token: MessageBoxConfig, provider: { useValue: customDialogConfig } }]);
 
-        const dismissSpy = spyOn(messageBoxRef, 'dismiss');
+        const dismissSpy = jest.spyOn(messageBoxRef, 'dismiss');
         fixture.detectChanges();
 
         fixture.nativeElement.querySelector('.fd-message-box').dispatchEvent(new MouseEvent('mousedown'));
@@ -141,15 +143,15 @@ describe('MessageBoxComponent', () => {
         };
         setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-message-box')).toHaveClass('customBackdropClass');
-        expect(fixture.nativeElement.querySelector('.fd-message-box__content')).toHaveClass('customPanelClass');
+        expect(fixture.nativeElement.querySelector('.fd-message-box').classList).toContain('customBackdropClass');
+        expect(fixture.nativeElement.querySelector('.fd-message-box__content').classList).toContain('customPanelClass');
     });
 
     it('should display in mobile mode', () => {
         const customMessageBoxConfig = { ...new MessageBoxConfig(), mobile: true };
         setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-message-box__content')).toHaveClass(
+        expect(fixture.nativeElement.querySelector('.fd-message-box__content').classList).toContain(
             'fd-message-box__content--mobile'
         );
     });
@@ -158,7 +160,7 @@ describe('MessageBoxComponent', () => {
         const customMessageBoxConfig = { ...new MessageBoxConfig(), mobileOuterSpacing: true };
         setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-message-box__content')).toHaveClass(
+        expect(fixture.nativeElement.querySelector('.fd-message-box__content').classList).toContain(
             'fd-message-box__content--no-mobile-stretch'
         );
     });
@@ -184,9 +186,9 @@ describe('MessageBoxComponent', () => {
     it('should close the message box on router navigation start', () => {
         setup();
         const event = new NavigationStart(42, '/');
-        spyOn(messageBoxRef, 'dismiss');
+        const spy = jest.spyOn(messageBoxRef, 'dismiss');
         routerEventsSubject.next(event);
 
-        expect(messageBoxRef.dismiss).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
     });
 });

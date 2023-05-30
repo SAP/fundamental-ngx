@@ -2,6 +2,7 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { MessageBoxModule } from '../message-box.module';
@@ -23,7 +24,7 @@ describe('MessageBoxContainerComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [TestComponent],
-            providers: [MessageBoxRef, MessageBoxConfig],
+            providers: [MessageBoxRef, MessageBoxConfig, { provide: FD_DIALOG_FOCUS_TRAP_ERROR, useValue: true }],
             imports: [MessageBoxModule, NoopAnimationsModule]
         })
             .overrideModule(BrowserDynamicTestingModule, {
@@ -44,7 +45,7 @@ describe('MessageBoxContainerComponent', () => {
     });
 
     it('should create embedded content from component', () => {
-        const creationSpy = spyOn(<any>component, '_createFromComponent');
+        const creationSpy = jest.spyOn(<any>component, '_createFromComponent');
         component.childContent = TestComponent;
 
         component['_loadContent']();
@@ -53,7 +54,7 @@ describe('MessageBoxContainerComponent', () => {
     });
 
     it('should create embedded content from template', async () => {
-        const creationSpy = spyOn(<any>component, '_createFromTemplate');
+        const creationSpy = jest.spyOn(<any>component, '_createFromTemplate');
         const testComponent = TestBed.createComponent(TestComponent);
 
         await whenStable(testComponent);
@@ -65,7 +66,7 @@ describe('MessageBoxContainerComponent', () => {
     });
 
     it('should create embedded content from content object', () => {
-        const creationSpy = spyOn(<any>component, '_createFromDefaultMessageBox');
+        const creationSpy = jest.spyOn(<any>component, '_createFromDefaultMessageBox');
 
         component.childContent = { title: 'title' } as MessageBoxContent;
 

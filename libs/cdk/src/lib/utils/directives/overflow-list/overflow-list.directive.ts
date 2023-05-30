@@ -98,7 +98,9 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
         const elements = this.overflowItems.toArray().map((item) => item.el.nativeElement);
         const computed = getComputedStyle(this._el.nativeElement);
         const contentWidth =
-            this._el.nativeElement.clientWidth - parseFloat(computed.paddingLeft) - parseFloat(computed.paddingRight);
+            this._el.nativeElement.clientWidth -
+            parseFloat(computed.paddingLeft || '0') -
+            parseFloat(computed.paddingRight || '0');
         return this._checkWidthWithOffset(elements, contentWidth);
     }
 

@@ -1,3 +1,16 @@
+## [0.41.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.8...v0.41.1-rc.9) (2023-05-26)
+
+
+
+## [0.41.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.7...v0.41.1-rc.8) (2023-05-25)
+
+
+### Bug Fixes
+
+* **core:** inline help hidden element for screenreaders ([#9822](https://github.com/SAP/fundamental-ngx/issues/9822)) ([dad5d7f](https://github.com/SAP/fundamental-ngx/commit/dad5d7fbd70eb1b46b57b652096650a82ab3f036))
+
+
+
 ## [0.41.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.6...v0.41.1-rc.7) (2023-05-24)
 
 

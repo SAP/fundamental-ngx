@@ -56,13 +56,13 @@ describe('NestedListKeyboardSupportService', () => {
     it('Should handle focus other element', () => {
         const items = (<any>service)._getAllListItems(<any>object);
 
-        spyOn(items[1], 'focus').and.callThrough();
+        const spy = jest.spyOn(items[1], 'focus');
 
         const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowDown' };
 
         (<any>service)._handleKeyDown(keyboardEvent, 0, items);
 
-        expect(items[1].focus).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
     });
 
     it('Should handle open trigger on element', () => {
@@ -71,16 +71,16 @@ describe('NestedListKeyboardSupportService', () => {
         items[0].expanded = false;
         items[0].hasChildren = true;
 
-        spyOn(items[0], 'triggerOpen').and.callThrough();
+        const spyOne = jest.spyOn(items[0], 'triggerOpen');
 
-        spyOn(items[1], 'focus').and.callThrough();
+        const spyTwo = jest.spyOn(items[1], 'focus');
 
         const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowRight' };
 
         (<any>service)._handleKeyDown(keyboardEvent, 0, items);
 
-        expect(items[1].focus).not.toHaveBeenCalled();
-        expect(items[0].triggerOpen).toHaveBeenCalled();
+        expect(spyTwo).not.toHaveBeenCalled();
+        expect(spyOne).toHaveBeenCalled();
     });
 
     it('Should handle close trigger on element', () => {
@@ -89,16 +89,16 @@ describe('NestedListKeyboardSupportService', () => {
         items[0].expanded = true;
         items[0].hasChildren = true;
 
-        spyOn(items[0], 'triggerClose').and.callThrough();
+        const spyOne = jest.spyOn(items[0], 'triggerClose');
 
-        spyOn(items[9], 'focus').and.callThrough();
+        const spyNine = jest.spyOn(items[9], 'focus');
 
         const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowLeft' };
 
         (<any>service)._handleKeyDown(keyboardEvent, 0, items);
 
-        expect(items[9].focus).not.toHaveBeenCalled();
-        expect(items[0].triggerClose).toHaveBeenCalled();
+        expect(spyNine).not.toHaveBeenCalled();
+        expect(spyOne).toHaveBeenCalled();
     });
 
     it('Should focus last element', () => {
@@ -107,13 +107,13 @@ describe('NestedListKeyboardSupportService', () => {
         items[0].expanded = false;
         items[0].hasChildren = true;
 
-        spyOn(items[items.length - 1], 'focus').and.callThrough();
+        const spy = jest.spyOn(items[items.length - 1], 'focus');
 
         const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowUp' };
 
         (<any>service)._handleKeyDown(keyboardEvent, 0, items);
 
-        expect(items[items.length - 1].focus).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
     });
 
     it('Should focus first element', () => {
@@ -122,12 +122,12 @@ describe('NestedListKeyboardSupportService', () => {
         items[items.length - 1].expanded = false;
         items[items.length - 1].hasChildren = false;
 
-        spyOn(items[0], 'focus').and.callThrough();
+        const spy = jest.spyOn(items[0], 'focus');
 
         const keyboardEvent: any = { preventDefault: () => {}, key: 'ArrowDown' };
 
         (<any>service)._handleKeyDown(keyboardEvent, items.length - 1, items);
 
-        expect(items[0].focus).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
     });
 });

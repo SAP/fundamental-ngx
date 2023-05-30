@@ -48,6 +48,9 @@ export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>
     /** @hidden Load received content as embedded view */
     protected _createFromTemplate(content: TemplateRef<any>, context: any): void {
         this.portalOutlet?.attachedRef?.destroy();
+        if (this.portalOutlet.hasAttached()) {
+            this.portalOutlet.detach();
+        }
         this._componentRef = this.portalOutlet.attach(
             new TemplatePortal(content, null as unknown as ViewContainerRef, context)
         );
