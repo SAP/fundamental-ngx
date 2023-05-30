@@ -1,4 +1,4 @@
-<fd-docs-section-title id="simple" componentName="fdkDisabled">Basic example</fd-docs-section-title>
+<fd-docs-section-title id="simple" componentName="drag-n-drop">Basic example</fd-docs-section-title>
 <description>
     <p>
         Drag & Drop container should be decorated with <code>fdkDndList</code> directive, which accepts
@@ -30,3 +30,32 @@
     <fundamental-ngx-cdk-disabled-example></fundamental-ngx-cdk-disabled-example>
 </component-example>
 <code-example [exampleFiles]="defaultExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="disabled" componentName="drag-n-drop">Disabled example</fd-docs-section-title>
+
+<description>
+    <p>Sometimes, dragged item should not be able to drop over some items.</p>
+    <p>
+        For this purpose, <code>fdkDndList</code> directive can accept input property <code>[dropPredicate]</code> as a
+        function, returning boolean result whether the dragged item can be dropped on the item it's currently hovering.
+    </p>
+    <p>
+        Drag&Drop list supports async evaluation of this function, which may come in handy, when calculation should be
+        done on the remote backend side.
+    </p>
+    <p>
+        Additionally, developers can leverage <code>[dragoverPredicate]</code> function. It's purpose is to calculate
+        whether the dragged item can be dragged over a particular item.
+    </p>
+    <p>
+        The difference between <code>[dropPredicate]</code> and <code>[dragoverPredicate]</code> is that
+        <code>[dropPredicate]</code> called <b>after the drop is performed</b>, where
+        <code>[dragoverPredicate]</code> is called when dragged item hovers another item.
+    </p>
+</description>
+<component-example [hasBackground]="true">
+    <fd-dnd-disabled-example></fd-dnd-disabled-example>
+</component-example>
+<code-example [exampleFiles]="disabledExample"></code-example>

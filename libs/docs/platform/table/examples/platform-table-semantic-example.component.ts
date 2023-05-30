@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-semantic-example',
-    templateUrl: './platform-table-semantic-example.component.html'
+    templateUrl: './platform-table-semantic-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformTableSemanticExampleComponent {
     source: TableDataSource<ExampleItem>;

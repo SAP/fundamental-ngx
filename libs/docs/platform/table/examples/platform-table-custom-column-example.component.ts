@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import { Observable, of } from 'rxjs';
 
@@ -14,6 +14,8 @@ import {
 @Component({
     selector: 'fdp-platform-table-custom-column-example',
     templateUrl: './platform-table-custom-column-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     providers: [
         {
             provide: DatetimeAdapter,

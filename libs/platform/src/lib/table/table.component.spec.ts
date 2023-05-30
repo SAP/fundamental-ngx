@@ -1189,7 +1189,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 expect(tableBodyRows.length).toEqual(treeItemParentsCount + treeItemsChildrenPerParentCount * 1);
             });
 
-            it('should emit event after rearranging rows', () => {
+            it('should emit event after rearranging rows', async () => {
                 const emitSpy = spyOn(tableComponent.rowsRearrange, 'emit').and.callThrough();
 
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
@@ -1203,11 +1203,12 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 });
 
                 fixture.detectChanges();
+                await fixture.whenStable();
 
                 expect(emitSpy).toHaveBeenCalled();
             });
 
-            it('should update dragged rows attributes', () => {
+            it('should update dragged rows attributes', async () => {
                 tableComponent._dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 0,
@@ -1217,6 +1218,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 });
 
                 fixture.detectChanges();
+                await fixture.whenStable();
 
                 calculateTableElementsMetaData();
 
@@ -1225,7 +1227,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 expect(tableComponent._tableRows[3].level).toEqual(2);
             });
 
-            it('should prevent from dropping row inside itself', () => {
+            it('should prevent from dropping row inside itself', async () => {
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
                 fixture.detectChanges();
@@ -1243,13 +1245,14 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 });
 
                 fixture.detectChanges();
+                await fixture.whenStable();
 
                 calculateTableElementsMetaData();
 
                 expect(tableComponent._tableRowsVisible[0].level).toEqual(0);
             });
 
-            it('should change type for row with 0 children to "item"', () => {
+            it('should change type for row with 0 children to "item"', async () => {
                 expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount);
 
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
@@ -1265,13 +1268,14 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 });
 
                 fixture.detectChanges();
+                await fixture.whenStable();
 
                 calculateTableElementsMetaData();
 
                 expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount - 1);
             });
 
-            it('should have correct order of items before and after drag and drop', () => {
+            it('should have correct order of items before and after drag and drop', async () => {
                 const row1 = tableComponent._tableRowsVisible[0];
                 const draggedRow = tableComponent._tableRowsVisible[1];
                 const row3 = tableComponent._tableRowsVisible[2];
@@ -1285,13 +1289,14 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 });
 
                 fixture.detectChanges();
+                await fixture.whenStable();
 
                 expect(row1).toEqual(tableComponent._tableRowsVisible[0]);
                 expect(draggedRow).toEqual(tableComponent._tableRowsVisible[3]);
                 expect(row3).toEqual(tableComponent._tableRowsVisible[1]);
             });
 
-            it('should correctly drag and drop first element to last element', () => {
+            it('should correctly drag and drop first element to last element', async () => {
                 const draggedRow = tableComponent._tableRowsVisible[0];
 
                 tableComponent._dragDropItemDrop({
@@ -1303,11 +1308,12 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 });
 
                 fixture.detectChanges();
+                await fixture.whenStable();
 
                 expect(draggedRow).toEqual(tableComponent._tableRowsVisible[10]);
             });
 
-            it('should correctly drag and drop last element to first element', () => {
+            it('should correctly drag and drop last element to first element', async () => {
                 const draggedRow = tableComponent._tableRowsVisible[9];
 
                 tableComponent._dragDropItemDrop({
@@ -1319,11 +1325,12 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 });
 
                 fixture.detectChanges();
+                await fixture.whenStable();
 
                 expect(draggedRow).toEqual(tableComponent._tableRowsVisible[2]);
             });
 
-            it('should correctly drag and drop first element to in-between', () => {
+            it('should correctly drag and drop first element to in-between', async () => {
                 const draggedRow = tableComponent._tableRowsVisible[0];
 
                 tableComponent._dragDropItemDrop({
@@ -1335,11 +1342,12 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 });
 
                 fixture.detectChanges();
+                await fixture.whenStable();
 
                 expect(draggedRow).toEqual(tableComponent._tableRowsVisible[6]);
             });
 
-            it('should correctly drag and drop last element to in-between', () => {
+            it('should correctly drag and drop last element to in-between', async () => {
                 const draggedRow = tableComponent._tableRowsVisible[9];
 
                 tableComponent._dragDropItemDrop({
@@ -1351,6 +1359,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 });
 
                 fixture.detectChanges();
+                await fixture.whenStable();
 
                 expect(draggedRow.parent).toEqual(tableComponent._tableRowsVisible[5]);
             });

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
 import { CollectionFilter } from '../../../interfaces/collection-filter.interface';
 import { TableFilterSelectOption } from '../../../interfaces/selection-value.interface';
@@ -13,7 +13,8 @@ type SelectableOption = TableFilterSelectOption & { selected: boolean };
 @Component({
     selector: 'fdp-filter-multi-select',
     templateUrl: './filter-multi-select.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class FilterMultiSelectComponent {
     /** Selectable filter options */

@@ -45,7 +45,7 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
 
     /** Whether the filtering from header is disabled. */
     @Input()
-    filteringFromHeaderDisabled = false;
+    filteringFromHeaderDisabled: Nullable<boolean> = false;
 
     /** Applied sorting. */
     @Output()

@@ -1,9 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation, inject } from '@angular/core';
-import { FdDndDropEventMode, FdDndDropType, FdDropEvent } from '@fundamental-ngx/cdk';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, ViewEncapsulation } from '@angular/core';
+import { DragoverPredicate, DropPredicate, FdDndDropEventMode, FdDropEvent, isOdd } from '@fundamental-ngx/cdk/utils';
+import { delay, of } from 'rxjs';
 
 @Component({
-    selector: 'fundamental-ngx-cdk-disabled-example',
-    templateUrl: './default-example.component.html',
+    selector: 'fd-dnd-disabled-example',
+    templateUrl: './disabled-example.component.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['../../../../../cdk/src/lib/utils/drag-and-drop/drag-and-drop.scss'],
     styles: [
         `
@@ -23,48 +26,92 @@ import { FdDndDropEventMode, FdDndDropType, FdDropEvent } from '@fundamental-ngx
                 z-index: 10000;
                 opacity: 0.9;
             }
+
+            .fd-dnd-item--disabled {
+                background-color: red;
+            }
         `
-    ],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    ]
 })
-export class DefaultExampleComponent {
+export class DisabledExampleComponent {
+    values = generateItems();
     private _cdr = inject(ChangeDetectorRef);
 
-    values = generateItems();
-    values2 = generateItems();
-    values3 = generateItems();
+    dropMode: 'all' | 'none' | 'odd' = 'all';
 
-    onItemDropped(event: FdDropEvent<ListItem>, property: string): void {
-        const values = this[property] as ListItem[];
+    dragMode: 'all' | 'none' | 'odd' = 'all';
+
+    simulateDelay = false;
+
+    loading = false;
+
+    dragoverPredicate: DragoverPredicate<ListItem> = (dragItem, dragOverItem, dragItemIndex, dragOverItemIndex) => {
+        console.log(dragItem, dragOverItem, dragItemIndex, dragOverItemIndex);
+        if (this.dragMode === 'all') {
+            return true;
+        }
+
+        if (this.dragMode === 'none') {
+            return false;
+        }
+
+        const odd = isOdd(dragItemIndex + 1);
+
+        if (!odd || (odd && isOdd(dragOverItemIndex + 1))) {
+            return true;
+        }
+        return false;
+    };
+
+    predicate: DropPredicate<ListItem> = (dragItem, dropItem, event) => {
+        const resultFn = () => {
+            if (this.dropMode === 'all') {
+                return true;
+            }
+            if (this.dropMode === 'none') {
+                return false;
+            }
+
+            if (isOdd(event.draggedItemIndex + 1) && isOdd(event.replacedItemIndex + 1)) {
+                return true;
+            }
+
+            return false;
+        };
+        const result = resultFn();
+        console.log(dragItem, dropItem, event);
+        return this.simulateDelay ? of(result).pipe(delay(2000)) : result;
+    };
+
+    onPredicateCalculating(loading: boolean): void {
+        this.loading = loading;
+        this._cdr.detectChanges();
+    }
+
+    onItemDropped(event: FdDropEvent<ListItem>): void {
+        const values = this.values as ListItem[];
         const draggedItem = values[event.draggedItemIndex];
         const droppedItem = values[event.replacedItemIndex];
 
         if (event.mode === 'group') {
-            this._handleReplaceDropAction(draggedItem, droppedItem, event, property);
+            this._handleReplaceDropAction(draggedItem, droppedItem, event);
         } else {
-            this._handleShiftDropAction(draggedItem, droppedItem, event, property);
+            this._handleShiftDropAction(draggedItem, droppedItem, event);
         }
 
-        this._dragDropUpdateDropItemAttributes(draggedItem, droppedItem, event.mode, property);
+        this._dragDropUpdateDropItemAttributes(draggedItem, droppedItem, event.mode);
 
         this._cdr.detectChanges();
     }
 
     /** @hidden */
-    private _handleShiftDropAction(
-        dragItem: ListItem,
-        dropItem: ListItem,
-        event: FdDropEvent<ListItem>,
-        property: string
-    ): void {
+    private _handleShiftDropAction(dragItem: ListItem, dropItem: ListItem, event: FdDropEvent<ListItem>): void {
         const { allItems, itemsToMove, itemsAfterDropItem, dropItemItems } = this._getNewDragDropItemsPosition(
             dragItem,
-            dropItem,
-            property
+            dropItem
         );
 
-        this[property] = [
+        this.values = [
             ...allItems,
             ...(event.insertAt === 'after' ? dropItemItems : []),
             ...itemsToMove,
@@ -74,23 +121,17 @@ export class DefaultExampleComponent {
     }
 
     /** @hidden */
-    private _handleReplaceDropAction(
-        dragItem: ListItem,
-        dropItem: ListItem,
-        event: FdDropEvent<ListItem>,
-        property: string
-    ): void {
+    private _handleReplaceDropAction(dragItem: ListItem, dropItem: ListItem, event: FdDropEvent<ListItem>): void {
         const { allItems, itemsToMove, itemsAfterDropItem, dropItemItems } = this._getNewDragDropItemsPosition(
             dragItem,
-            dropItem,
-            property
+            dropItem
         );
 
-        this[property] = [...allItems, ...dropItemItems, ...itemsToMove, ...itemsAfterDropItem];
+        this.values = [...allItems, ...dropItemItems, ...itemsToMove, ...itemsAfterDropItem];
     }
 
-    private _createGroup(event: FdDropEvent<ListItem>, property: string): ListItem[] {
-        const items = this[property] as ListItem[];
+    private _createGroup(event: FdDropEvent<ListItem>): ListItem[] {
+        const items = this.values as ListItem[];
         const droppedItem = items[event.draggedItemIndex];
         const droppedOnItem = items[event.replacedItemIndex];
         droppedItem.parent = droppedOnItem;
@@ -99,20 +140,16 @@ export class DefaultExampleComponent {
         return items;
     }
 
-    private _getNewDragDropItemsPosition(
-        dragItem: ListItem,
-        dropItem: ListItem,
-        property: string
-    ): UpdatedDndItemsPosition {
-        const allItems = this[property];
+    private _getNewDragDropItemsPosition(dragItem: ListItem, dropItem: ListItem): UpdatedDndItemsPosition {
+        const allItems = this.values;
 
         const dragItemIndex = allItems.findIndex((item) => item === dragItem);
-        const dragItemChildren = this._findItemChildren(dragItem, property);
+        const dragItemChildren = this._findItemChildren(dragItem);
 
         const itemsToMove = allItems.splice(dragItemIndex, dragItemChildren.length + 1);
 
         const dropItemIndex = allItems.findIndex((item) => item === dropItem);
-        const dropItemChildren = this._findItemChildren(dropItem, property);
+        const dropItemChildren = this._findItemChildren(dropItem);
 
         const dropItemItemsLength = dropItemChildren.length + 1;
 
@@ -131,8 +168,8 @@ export class DefaultExampleComponent {
     }
 
     /** @hidden */
-    private _findItemChildren(item: ListItem, property: string): ListItem[] {
-        const allItems = this[property];
+    private _findItemChildren(item: ListItem): ListItem[] {
+        const allItems = this.values;
         const itemsLength = allItems.length;
 
         /**
@@ -142,7 +179,7 @@ export class DefaultExampleComponent {
          */
 
         let index = allItems.indexOf(item);
-        const parents = this._getItemParents(item, property);
+        const parents = this._getItemParents(item);
         const children: ListItem[] = [];
 
         while (index++ < itemsLength) {
@@ -156,7 +193,7 @@ export class DefaultExampleComponent {
         return children;
     }
 
-    private _getItemParents(item: ListItem, property: string): ListItem[] {
+    private _getItemParents(item: ListItem): ListItem[] {
         const parents: ListItem[] = [];
         let parent = item.parent || null;
         while (parent && parent !== null) {
@@ -166,12 +203,7 @@ export class DefaultExampleComponent {
         return parents;
     }
 
-    private _dragDropUpdateDropItemAttributes(
-        dragItem: ListItem,
-        dropItem: ListItem,
-        mode: FdDndDropEventMode,
-        property: string
-    ): void {
+    private _dragDropUpdateDropItemAttributes(dragItem: ListItem, dropItem: ListItem, mode: FdDndDropEventMode): void {
         if (dragItem.parent) {
             // Remove child item from previous parent item.
             dragItem.parent.children.splice(dragItem.parent.children.indexOf(dragItem), 1);
@@ -186,9 +218,9 @@ export class DefaultExampleComponent {
             dropItem.parent?.children.push(dragItem);
         }
 
-        const children = this._findItemChildren(dragItem, property);
+        const children = this._findItemChildren(dragItem);
         children.forEach((item) => {
-            item.level = this._getItemParents(item, property).length;
+            item.level = this._getItemParents(item).length;
         });
     }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
@@ -13,7 +13,8 @@ import {
 @Component({
     selector: 'fdp-platform-table-navigatable-row-indicator-example',
     templateUrl: './platform-table-navigatable-row-indicator-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformTableNavigatableRowIndicatorExampleComponent {
     source: TableDataSource<ExampleItem>;

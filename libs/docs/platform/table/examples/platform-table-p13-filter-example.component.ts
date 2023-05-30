@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 
@@ -18,6 +18,8 @@ import { FilterableColumnDataType } from '@fundamental-ngx/platform/table';
 @Component({
     selector: 'fdp-platform-table-p13-filter-example',
     templateUrl: './platform-table-p13-filter-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     providers: [
         {
             provide: DatetimeAdapter,

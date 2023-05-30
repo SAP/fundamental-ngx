@@ -30,6 +30,8 @@ import {
 import { NgForm } from '@angular/forms';
 
 import {
+    DragoverPredicate,
+    DropPredicate,
     FdDndDropEventMode,
     FdDndDropType,
     FdDropEvent,
@@ -49,11 +51,9 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
-import { FDP_PRESET_MANAGED_COMPONENT, isDataSource, isJsObject, isString } from '@fundamental-ngx/platform/shared';
+import { FDP_PRESET_MANAGED_COMPONENT, isJsObject } from '@fundamental-ngx/platform/shared';
 import equal from 'fast-deep-equal';
-import { cloneDeep, get } from 'lodash-es';
-import set from 'lodash-es/set';
-import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, fromEvent, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take, tap } from 'rxjs/operators';
 import { TableColumn } from './components/table-column/table-column';
 import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
@@ -65,8 +65,6 @@ import {
     SELECTION_COLUMN_WIDTH,
     SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH
 } from './constants';
-import { ArrayTableDataSource } from './domain/array-data-source';
-import { ObservableTableDataSource } from './domain/observable-data-source';
 import { TableDataSource } from './domain/table-data-source';
 import {
     FILTER_STRING_STRATEGY,
@@ -80,6 +78,7 @@ import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilt
 import { SearchInput } from './interfaces/search-field.interface';
 import {
     ColumnsChange,
+    FdpTableDataSource,
     FilterChange,
     FreezeChange,
     GroupChange,
@@ -100,7 +99,8 @@ import {
     TableRowSelectionChangeEvent,
     TableRowsRearrangeEvent,
     TableRowToggleOpenStateEvent,
-    TableSortChangeEvent
+    TableSortChangeEvent,
+    UpdatedDndRowsPosition
 } from './models';
 import { Table } from './table';
 
@@ -111,26 +111,22 @@ import { TableScrollable, TableScrollDispatcherService } from './table-scroll-di
 
 import { TableService } from './table.service';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { newTableRow } from './utils';
-
-export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
-
-type TreeLike<T> = T & {
-    _children?: TreeLike<T>[];
-};
-
-interface GroupTableRowValueType {
-    field: string;
-    value: unknown;
-    count: number;
-}
-
-interface UpdatedDndRowsPosition {
-    allRows: TableRow[];
-    rowsToMove: TableRow[];
-    rowsAfterDropRow: TableRow[];
-    dropRowItems: TableRow[];
-}
+import {
+    buildNewRowSkeleton,
+    convertObjectsToTableRows,
+    convertTreeLikeToFlatList,
+    convertTreeObjectsToTableRows,
+    convertTreeTableRowToFlatList,
+    createGroupedTableRowsTree,
+    findRowChildren,
+    getFreezableColumns,
+    getFreezableEndColumns,
+    getRowParents,
+    getSelectableRows,
+    isRowNavigatable,
+    sortTreeLikeGroupedRows,
+    toDataStream
+} from './helpers';
 
 let tableUniqueId = 0;
 
@@ -197,7 +193,7 @@ export class TableComponent<T = any>
     extends Table<T>
     implements AfterViewInit, OnDestroy, OnChanges, OnInit, AfterViewChecked
 {
-    /** Component name used in Preset managed component. */
+    /** Component name used in a Preset-managed component. */
     @Input()
     name = 'platformTable';
 
@@ -496,6 +492,18 @@ export class TableComponent<T = any>
     @Input()
     dropMode: FdDndDropType = 'auto';
 
+    /** Predicate function that checks whether the item can be dropped over another item. */
+    @Input()
+    dropPredicate: DropPredicate<TableRow<T>>;
+
+    /**
+     * Predicate function that checks whether the item can be dragged over another item.
+     * If the function returns `false`, dragged over item will not be highlighted, and drop event will be canceled.
+     */
+    @Input()
+    dragoverPredicate: DragoverPredicate<TableRow<T>>;
+
+    /** Event emitted when the current preset configuration has been changed. */
     /**
      * Whether to load previous pages.
      * This option works only when `pageScrolling` is true, and the initial page > 1
@@ -732,19 +740,19 @@ export class TableComponent<T = any>
     _freezableEndColumns: Map<string, number> = new Map();
 
     /** @hidden */
-    _isShownSortSettingsInToolbar = false;
+    private readonly _isShownSortSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
-    _isShownFilterSettingsInToolbar = false;
+    private readonly _isShownFilterSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
-    _isShownGroupSettingsInToolbar = false;
+    private readonly _isShownGroupSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
-    _isShownColumnSettingsInToolbar = false;
+    private readonly _isShownColumnSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
-    _isFilteringFromHeaderDisabled = false;
+    readonly _isFilteringFromHeaderDisabled$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
     _tableColumnsLength = 0;
@@ -786,6 +794,9 @@ export class TableComponent<T = any>
      * Total items length given by data source
      */
     _totalItems = 0;
+
+    /** @hidden */
+    private _totalItems$ = new BehaviorSubject<number>(this._totalItems);
 
     /**
      * @hidden
@@ -837,15 +848,13 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    get _toolbarContext(): any {
-        return {
-            counter: this._totalItems,
-            sortable: this._isShownSortSettingsInToolbar,
-            filterable: this._isShownFilterSettingsInToolbar,
-            groupable: this._isShownGroupSettingsInToolbar,
-            columns: this._isShownColumnSettingsInToolbar
-        };
-    }
+    _toolbarContext: any = {
+        counter: this._totalItems$,
+        sortable: this._isShownSortSettingsInToolbar$,
+        filterable: this._isShownFilterSettingsInToolbar$,
+        groupable: this._isShownGroupSettingsInToolbar$,
+        columns: this._isShownColumnSettingsInToolbar$
+    };
 
     /** @hidden */
     private _ds: FdpTableDataSource<T>;
@@ -893,7 +902,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     get loadingState(): boolean {
-        return this.loading ?? this._internalLoadingState;
+        return this.loading ?? (this._internalLoadingState || this._dndLoadingState);
     }
 
     /** @hidden
@@ -909,6 +918,9 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _internalLoadingState = false;
+
+    /** @hidden */
+    private _dndLoadingState = false;
 
     /** @hidden */
     private readonly _rangeSelector = new RangeSelector();
@@ -1020,9 +1032,7 @@ export class TableComponent<T = any>
         }
 
         if ('rowNavigatable' in changes) {
-            this._tableRows.forEach(
-                (row) => (row.navigatable = this._isRowNavigatable(row.value, this.rowNavigatable))
-            );
+            this._tableRows.forEach((row) => (row.navigatable = isRowNavigatable(row.value, this.rowNavigatable)));
 
             this._calculateIsShownNavigationColumn();
         }
@@ -1096,7 +1106,7 @@ export class TableComponent<T = any>
         }
         this._shouldEmitRowsChange = false;
         const emitter = this.tableRowsSet;
-        this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
+        this._onZoneFree(() => {
             emitter.emit();
         });
     }
@@ -1250,31 +1260,27 @@ export class TableComponent<T = any>
 
     /** Toolbar Sort Settings button visibility */
     showSortSettingsInToolbar(showSortSettings: boolean): void {
-        this._isShownSortSettingsInToolbar = showSortSettings;
-        this._cdr.detectChanges();
+        this._isShownSortSettingsInToolbar$.next(showSortSettings);
     }
 
     /** Toolbar Filter Settings button visibility */
     showFilterSettingsInToolbar(showFilterSettings: boolean): void {
-        this._isShownFilterSettingsInToolbar = showFilterSettings;
-        this._cdr.detectChanges();
+        this._isShownFilterSettingsInToolbar$.next(showFilterSettings);
     }
 
     /** Toolbar Group Settings button visibility */
     showGroupSettingsInToolbar(showGroupSettings: boolean): void {
-        this._isShownGroupSettingsInToolbar = showGroupSettings;
-        this._cdr.detectChanges();
+        this._isShownGroupSettingsInToolbar$.next(showGroupSettings);
     }
 
     /** Toolbar Columns Settings button visibility */
     showColumnSettingsInToolbar(showColumnSettings: boolean): void {
-        this._isShownColumnSettingsInToolbar = showColumnSettings;
-        this._cdr.detectChanges();
+        this._isShownColumnSettingsInToolbar$.next(showColumnSettings);
     }
 
     /** Disable filter from column heder menu */
     setHeaderColumnFilteringDisabled(disabled: boolean): void {
-        this._isFilteringFromHeaderDisabled = disabled;
+        this._isFilteringFromHeaderDisabled$.next(disabled);
     }
 
     /** Set the row navigation */
@@ -1285,7 +1291,7 @@ export class TableComponent<T = any>
             return;
         }
 
-        row.navigatable = this._isRowNavigatable(row.value, rowNavigatable);
+        row.navigatable = isRowNavigatable(row.value, rowNavigatable);
 
         this._calculateIsShownNavigationColumn();
 
@@ -1342,7 +1348,7 @@ export class TableComponent<T = any>
         this._cdr.markForCheck();
     }
 
-    /** Manually triggers columns width recalculation */
+    /** Manually triggers column's width recalculation */
     recalculateTableColumnWidth(): void {
         this._tableColumnResizeService.setColumnNames(this._visibleColumns.map((column) => column.name));
         this._setFreezableInfo();
@@ -1371,7 +1377,7 @@ export class TableComponent<T = any>
     addRow(): void {
         this._forceSemanticHighlighting = true;
 
-        const newRow = this._buildNewRowSkeleton();
+        const newRow = buildNewRowSkeleton(this.editableRowSkeleton, this.columns.toArray());
         newRow[this.semanticHighlighting] = EDITABLE_ROW_SEMANTIC_STATE;
 
         this._addedItems.unshift(newRow);
@@ -1503,7 +1509,7 @@ export class TableComponent<T = any>
                 } else if (!this._freezableColumns.size && this._freezableEndColumns.size) {
                     activeEl.scrollIntoView({ block: 'nearest', inline: 'center' });
                 } else if (this._freezableColumns.size && this._freezableEndColumns.size) {
-                    // check to see if the active element is obstructed by another element
+                    // check to see if another element obstructs the active element
                     const activeElLeft = activeEl.getBoundingClientRect().left;
                     const activeElTop = activeEl.getBoundingClientRect().top;
                     const topElementFromLeft = document.elementFromPoint(activeElLeft, activeElTop);
@@ -1535,13 +1541,23 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
+    _calculatingLoading(isLoading: boolean): void {
+        if (this._dndLoadingState === isLoading) {
+            return;
+        }
+
+        this._dndLoadingState = isLoading;
+        this._cdr.detectChanges();
+    }
+
+    /** @hidden */
     _isColumnHasHeaderMenu(column: TableColumn): boolean {
         return (
             column.sortable ||
             column.groupable ||
             column.freezable ||
             column.endFreezable ||
-            (column.filterable && !this._isFilteringFromHeaderDisabled)
+            (column.filterable && !this._isFilteringFromHeaderDisabled$.getValue())
         );
     }
 
@@ -1605,7 +1621,7 @@ export class TableComponent<T = any>
         const added: TableRow<T>[] = [];
 
         // uncheck previously checked
-        this._getSelectableRows().forEach((row) => {
+        getSelectableRows(this._tableRows, this.selectableKey).forEach((row) => {
             if (row === rowToToggle) {
                 return;
             }
@@ -1630,7 +1646,7 @@ export class TableComponent<T = any>
         const removed: TableRow<T>[] = [];
         const added: TableRow<T>[] = [];
 
-        this._getSelectableRows().forEach((row) => {
+        getSelectableRows(this._tableRows, this.selectableKey).forEach((row) => {
             if (row.checked === selectAll) {
                 return;
             }
@@ -1650,7 +1666,7 @@ export class TableComponent<T = any>
      * Create table row selection event
      */
     _emitRowSelectionChangeEvent(added: TableRow[], removed: TableRow[]): void {
-        const selected = this._getSelectableRows()
+        const selected = getSelectableRows(this._tableRows, this.selectableKey)
             .filter(({ checked }) => checked)
             .map(({ value }) => value);
 
@@ -1808,27 +1824,29 @@ export class TableComponent<T = any>
             setTimeout(() => (this._dragDropInProgress = false));
         });
 
-        if (this.isTreeTable && event.draggedItemIndex !== event.replacedItemIndex) {
-            const dragRow = this._tableRows.find((row) => row === this._tableRowsVisible[event.draggedItemIndex]);
-            const dropRow = this._tableRows.find((row) => row === this._tableRowsVisible[event.replacedItemIndex]);
+        this._onZoneFree(() => {
+            if (this.isTreeTable && event.draggedItemIndex !== event.replacedItemIndex) {
+                const dragRow = this._tableRows.find((row) => row === this._tableRowsVisible[event.draggedItemIndex]);
+                const dropRow = this._tableRows.find((row) => row === this._tableRowsVisible[event.replacedItemIndex]);
 
-            if (!dragRow || !dropRow || this._isDroppedInsideItself(dropRow, dragRow)) {
-                return;
+                if (!dragRow || !dropRow || this._isDroppedInsideItself(dropRow, dragRow)) {
+                    return;
+                }
+
+                this._dragDropUpdateDragParentRowAttributes(dragRow);
+                this._dragDropRearrangeTreeRows(dragRow, dropRow, event);
+                this._dragDropUpdateDropRowAttributes(dragRow, dropRow, event.mode);
+
+                if (!dropRow.expanded && event.mode === 'group') {
+                    this._toggleExpandableTableRow(dropRow);
+                } else {
+                    this._onTableRowsChanged();
+                }
+
+                this._cdr.detectChanges();
+                this._emitRowsRearrangeEvent(dragRow, dropRow, event);
             }
-
-            this._dragDropUpdateDragParentRowAttributes(dragRow);
-            this._dragDropRearrangeTreeRows(dragRow, dropRow, event);
-            this._dragDropUpdateDropRowAttributes(dragRow, dropRow, event.mode);
-
-            if (!dropRow.expanded && event.mode === 'group') {
-                this._toggleExpandableTableRow(dropRow);
-            } else {
-                this._onTableRowsChanged();
-            }
-
-            this._cdr.markForCheck();
-            this._emitRowsRearrangeEvent(dragRow, dropRow, event);
-        }
+        });
     }
 
     /** @hidden */
@@ -1894,7 +1912,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _isDroppedInsideItself(dropRow: TableRow, dragRow: TableRow): boolean {
-        const dropRowParents = this._getRowParents(dropRow);
+        const dropRowParents = getRowParents(dropRow);
         return !!dropRowParents.find((row) => row === dragRow);
     }
 
@@ -1906,8 +1924,8 @@ export class TableComponent<T = any>
             return;
         }
 
-        const parentRowChildren = this._findRowChildren(parentRow);
-        const dragRowChildren = this._findRowChildren(dragRow);
+        const parentRowChildren = findRowChildren(parentRow, this._tableRows);
+        const dragRowChildren = findRowChildren(dragRow, this._tableRows);
 
         if (parentRowChildren.length - (dragRowChildren.length + 1) === 0) {
             parentRow.type = TableRowType.ITEM;
@@ -1934,9 +1952,9 @@ export class TableComponent<T = any>
             dropRow.parent?.children.push(dragRow);
         }
 
-        const children = this._findRowChildren(dragRow);
+        const children = findRowChildren(dragRow, this._tableRows);
         children.forEach((row) => {
-            row.level = this._getRowParents(row).length;
+            row.level = getRowParents(row).length;
         });
     }
 
@@ -1954,12 +1972,12 @@ export class TableComponent<T = any>
         const allRows = this._tableRows;
 
         const dragRowIndex = allRows.findIndex((row) => row === dragRow);
-        const dragRowChildren = this._findRowChildren(dragRow);
+        const dragRowChildren = findRowChildren(dragRow, this._tableRows);
 
         const rowsToMove = allRows.splice(dragRowIndex, dragRowChildren.length + 1);
 
         const dropRowIndex = allRows.findIndex((row) => row === dropRow);
-        const dropRowChildren = this._findRowChildren(dropRow);
+        const dropRowChildren = findRowChildren(dropRow, this._tableRows);
 
         const dropRowItemsLength = dropRowChildren.length + 1;
 
@@ -2149,7 +2167,15 @@ export class TableComponent<T = any>
         if (this.isTreeTable) {
             return this._createTreeTableRowsByDataSourceItems(source);
         }
-        return this._convertObjectsToTableRows(source);
+        return convertObjectsToTableRows(
+            source,
+            this._addedItems,
+            this.selectedKey,
+            this.rowNavigatable,
+            this.selectionMode,
+            this._tableRows,
+            this.rowComparator
+        );
     }
 
     /** @hidden */
@@ -2157,130 +2183,22 @@ export class TableComponent<T = any>
         const item = source[0] as any;
 
         if (isTableRow(item)) {
-            return this._convertTreeTableRowToFlatList(source as TableRow[]);
+            return convertTreeTableRowToFlatList(source as TableRow[], this.rowNavigatable);
         }
 
         if (isJsObject(item)) {
-            return this._convertTreeObjectsToTableRows(source);
+            return convertTreeObjectsToTableRows(
+                source,
+                this.selectionMode,
+                this._tableRows,
+                this.rowComparator,
+                this.relationKey,
+                this.selectedKey,
+                this.expandedStateKey,
+                this.rowNavigatable
+            );
         }
         return [];
-    }
-
-    /**
-     * Since we dont work with the tree, we need to convert incoming tree to
-     * flat format while maintaining original state.
-     *
-     * @hidden
-     */
-    private _convertTreeTableRowToFlatList(rows: TableRow<T>[]): TableRow<T>[] {
-        let flatList: TableRow[] = [];
-
-        for (const item of rows) {
-            item.navigatable = this._isRowNavigatable(item as T, this.rowNavigatable);
-            flatList.push(item);
-
-            if (Array.isArray(item.children)) {
-                item.children.forEach((c) => (c.hidden = !item.expanded));
-                flatList = flatList.concat(this._convertTreeTableRowToFlatList(item.children));
-            }
-        }
-        return flatList;
-    }
-
-    /**
-     * Converts data to TableRow interface
-     *
-     * @hidden
-     */
-    private _convertTreeObjectsToTableRows(source: T[]): TableRow<T>[] {
-        const rows: TableRow<T>[] = [];
-        const selectedRowsMap = this._getSelectionStatusByRowValue(source);
-
-        source.forEach((item: T, index: number) => {
-            const hasChildren =
-                Object.prototype.hasOwnProperty.call(item, this.relationKey) &&
-                Array.isArray(item[this.relationKey]) &&
-                item[this.relationKey].length;
-            const row = newTableRow({
-                type: hasChildren ? TableRowType.TREE : TableRowType.ITEM,
-                checked: item[this.selectedKey] ?? !!selectedRowsMap.get(item),
-                index,
-                value: item
-            });
-
-            row.expanded =
-                this.expandedStateKey && Object.prototype.hasOwnProperty.call(item, this.expandedStateKey)
-                    ? item[this.expandedStateKey]
-                    : false;
-            row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
-            rows.push(row);
-
-            if (hasChildren) {
-                const children = this._convertTreeObjectsToTableRows(item[this.relationKey]);
-
-                children.forEach((c) => {
-                    c.parent = c.parent || row;
-                    c.level = c.parent.level + 1;
-                    c.hidden = !row.expanded;
-                });
-                row.children.push(...children);
-
-                rows.push(...children);
-            }
-        });
-
-        return rows;
-    }
-
-    /**
-     * Converts data to TableRow interface
-     *
-     * @hidden
-     */
-    private _convertObjectsToTableRows(source: T[]): TableRow<T>[] {
-        const rowItem = source[0] as any;
-
-        if (isTableRow(rowItem)) {
-            return source as TableRow[];
-        }
-
-        const selectedRowsMap = this._getSelectionStatusByRowValue(source);
-        return source.map((item: T, index: number) => {
-            const isNewItem = this._addedItems.includes(item);
-            const row = newTableRow({
-                type: TableRowType.ITEM,
-                checked: item[this.selectedKey] ?? !!selectedRowsMap.get(item),
-                index,
-                value: item
-            });
-            row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
-            row.state = isNewItem ? 'editable' : 'readonly';
-            return row;
-        });
-    }
-
-    /**
-     * @hidden
-     * Runs `rowComparator` function against checked rows and compares them with the new `source`
-     * If matched, creates an association between the source item and checked status of corresponding row.
-     *
-     * @returns `Map` object with the `checked` status for particular source item
-     */
-    private _getSelectionStatusByRowValue(source: T[]): Map<T, boolean | null> {
-        const rowMap = new Map<T, boolean | null>();
-        if (
-            (this.selectionMode === SelectionMode.SINGLE || this.selectionMode === SelectionMode.MULTIPLE) &&
-            typeof this.rowComparator === 'function'
-        ) {
-            const checkedRows = this._tableRows.filter((r) => r.checked);
-            checkedRows.forEach((row) => {
-                const found = source.find((e) => this.rowComparator(row.value, e));
-                if (found) {
-                    rowMap.set(found, row.checked);
-                }
-            });
-        }
-        return rowMap;
     }
 
     /** @hidden */
@@ -2444,55 +2362,9 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _setFreezableInfo(): void {
-        this._freezableColumns = this._getFreezableColumns();
-        this._freezableEndColumns = this._getFreezableEndColumns();
+        this._freezableColumns = getFreezableColumns(this._visibleColumns, this.freezeColumnsTo);
+        this._freezableEndColumns = getFreezableEndColumns(this._visibleColumns, this.freezeEndColumnsTo);
         this.fixed = !!this.fixed || !!this._freezableColumns.size || !!this._freezableEndColumns.size;
-    }
-
-    /** @hidden */
-    private _getFreezableColumns(): Map<string, number> {
-        const columnNames = new Map<string, number>();
-        const columns = this._visibleColumns;
-
-        if (!columns.length || !this.freezeColumnsTo) {
-            return columnNames;
-        }
-
-        for (const column of columns) {
-            if (!column.name) {
-                continue;
-            }
-
-            // using columnNames.size as index of a column
-            columnNames.set(column.name, columnNames.size);
-
-            if (column.name === this.freezeColumnsTo) {
-                return columnNames;
-            }
-        }
-
-        return new Map();
-    }
-
-    /** @hidden */
-    private _getFreezableEndColumns(): Map<string, number> {
-        const columnNames = new Map<string, number>();
-        const columns = this._visibleColumns;
-
-        if (!columns.length || !this.freezeEndColumnsTo) {
-            return columnNames;
-        }
-
-        for (let i = columns.length - 1; i >= 0; i--) {
-            // using columnNames.size as index of a column
-            columnNames.set(columns[i].name, columnNames.size);
-
-            if (columns[i].name === this.freezeEndColumnsTo) {
-                return columnNames;
-            }
-        }
-
-        return new Map();
     }
 
     /** @hidden */
@@ -2536,152 +2408,6 @@ export class TableComponent<T = any>
         this._nameToColumnMap = new Map(columns.map((column) => [column.name, column]));
     }
 
-    /**
-     * @hidden
-     * Group table rows and return tree like rows list.
-     * It's intended to be called recursively.
-     * @param rules group rules to group by
-     * @param rows source table rows
-     * @param parent row parent
-     * @param level level of nesting
-     */
-    private _createGroupedTableRowsTree(
-        rules: CollectionGroup[],
-        rows: TableRow[],
-        parent: TableRow | null = null,
-        level = 0
-    ): TreeLike<TableRow>[] {
-        rules = [...rules];
-
-        if (!rules.length) {
-            // no rules mean that it's the level of source items
-            return rows.map((row) => {
-                row.parent = parent;
-                row.level = level;
-                row.hidden = !!parent && !parent.expanded;
-                return row;
-            });
-        }
-
-        // Retrieve first group rule
-        const rule = rules.shift()!;
-
-        // Build map of unique values for a given group rule
-        const valuesHash = rows
-            .filter((r) => r.state !== 'editable')
-            .reduce((hash, row) => {
-                const modelValue = get(row.value, rule.field);
-
-                if (!hash.has(modelValue)) {
-                    hash.set(modelValue, []);
-                }
-
-                hash.get(modelValue)?.push(row);
-
-                return hash;
-            }, new Map<unknown, TableRow[]>());
-
-        // Build table rows tree
-        let groupedTableRows: TreeLike<TableRow>[] = [];
-
-        if (rows.some((r) => r.state === 'editable')) {
-            groupedTableRows = rows
-                .filter((r) => r.state === 'editable')
-                .map((row) => {
-                    row.parent = parent;
-                    row.level = -1;
-                    row.hidden = !!parent && !parent.expanded;
-                    return row;
-                });
-        }
-
-        for (const [value, values] of Array.from(valuesHash)) {
-            const filteredRows = rows.filter((_item) => values.includes(_item));
-
-            if (filteredRows.length === 0) {
-                continue;
-            }
-
-            const groupTableRow: TreeLike<TableRow<GroupTableRowValueType>> = newTableRow<GroupTableRowValueType>({
-                type: TableRowType.GROUP,
-                checked: false,
-                index: 0,
-                value: { field: rule.field, value, count: 0 },
-                parent,
-                level,
-                expandable: true,
-                expanded: true,
-                hidden: !!parent && !parent.expanded
-            });
-
-            // Ads group's children rows
-            groupTableRow._children = this._createGroupedTableRowsTree(rules, filteredRows, groupTableRow, level + 1);
-
-            groupTableRow.value.count = groupTableRow._children?.length;
-
-            groupedTableRows.push(groupTableRow);
-        }
-
-        return groupedTableRows;
-    }
-
-    /**
-     * @hidden
-     * Sort tree like groups by group.direction setting
-     */
-    private _sortTreeLikeGroupedRows(groupedRows: TreeLike<TableRow>[]): TreeLike<TableRow>[] {
-        if (!groupedRows[0] || !this._isGroupRow(groupedRows[0])) {
-            return groupedRows;
-        }
-
-        const treeLikeRows = groupedRows as TreeLike<TableRow<GroupTableRowValueType>>[];
-        const firstRow = treeLikeRows[0];
-
-        treeLikeRows.forEach((group) => {
-            if (group._children) {
-                group._children = this._sortTreeLikeGroupedRows(group._children);
-            }
-        });
-
-        const groupRule = this._groupRulesMap.get(firstRow.value.field);
-
-        if (!groupRule || groupRule.direction === SortDirection.NONE) {
-            return treeLikeRows;
-        }
-
-        const direction = groupRule.direction;
-        const directionMultiplier = direction === SortDirection.ASC ? 1 : direction === SortDirection.DESC ? -1 : 0;
-
-        return treeLikeRows.slice().sort((a, b) => {
-            const aValue = a.value.value as any;
-            const bValue = b.value.value as any;
-
-            const aNumber = Number.parseFloat(aValue);
-            const bNumber = Number.parseFloat(bValue);
-            if (!Number.isNaN(aNumber) && !Number.isNaN(bNumber)) {
-                return (aNumber - bNumber) * directionMultiplier;
-            }
-
-            return (aValue > bValue ? 1 : -1) * directionMultiplier;
-        });
-    }
-
-    /** @hidden */
-    private _convertTreeLikeToFlatList<K>(treeLikeList: TreeLike<K>[]): K[] {
-        let flatList: K[] = [];
-
-        for (const item of treeLikeList) {
-            flatList.push(item);
-
-            if (Array.isArray(item._children)) {
-                flatList = flatList.concat(this._convertTreeLikeToFlatList(item._children));
-                delete item._children;
-            }
-        }
-
-        return flatList;
-    }
-
     /** @hidden */
     private _groupTableRows(sourceRows: TableRow[], groups: Iterable<CollectionGroup>): TableRow[] {
         const groupRules = Array.from(groups);
@@ -2699,20 +2425,20 @@ export class TableComponent<T = any>
         }
 
         // Build tree like groups
-        const treeLikeGroupedRows = this._createGroupedTableRowsTree(groupRules, sourceRows);
+        const treeLikeGroupedRows = createGroupedTableRowsTree(groupRules, sourceRows);
 
         // Sort tree like groups
-        const sortedTreeLikeGroupedRows = this._sortTreeLikeGroupedRows(treeLikeGroupedRows);
+        const sortedTreeLikeGroupedRows = sortTreeLikeGroupedRows(treeLikeGroupedRows, this._groupRulesMap);
 
         // Convert tree like list to a flat list
-        return this._convertTreeLikeToFlatList(sortedTreeLikeGroupedRows);
+        return convertTreeLikeToFlatList(sortedTreeLikeGroupedRows);
     }
 
     /** @hidden */
     private _toggleExpandableTableRow(rowToToggle: TableRow): void {
         const expanded = (rowToToggle.expanded = !rowToToggle.expanded);
 
-        this._findRowChildren(rowToToggle).forEach((row) => {
+        findRowChildren(rowToToggle, this._tableRows).forEach((row) => {
             // if parent is collapsed we want to hide all nested items
             if (!expanded) {
                 row.hidden = true;
@@ -2721,7 +2447,7 @@ export class TableComponent<T = any>
 
             // if parent is expanded we want to show only items which direct parents are expanded as well
             if (expanded) {
-                row.hidden = !this._getRowParents(row, rowToToggle).every((parent) => parent.expanded);
+                row.hidden = !getRowParents(row, rowToToggle).every((parent) => parent.expanded);
             }
         });
 
@@ -2729,55 +2455,11 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    private _findRowChildren(row: TableRow): TableRow[] {
-        const allRows = this._tableRows;
-        const rowsLength = allRows.length;
-
-        /**
-         * Since we are dealing with a flat list
-         * it means all children go next right after the expandable row
-         * until the next row has a mutual parent
-         */
-
-        let index = allRows.indexOf(row);
-        const parents = this._getRowParents(row);
-        const children: TableRow<T>[] = [];
-
-        while (index++ < rowsLength) {
-            const nextRow = allRows[index];
-            if (!nextRow?.parent || parents.includes(nextRow.parent)) {
-                break;
-            }
-            children.push(nextRow);
-        }
-
-        return children;
-    }
-
-    /**
-     * Get row parents path where the first is the direct parent
-     * @param row Row which parents we need to find
-     * @param untilParent Parent to stop a search on. Default is "null" that means look up until the root
-     * @returns parents list [direct parent, ..., ancestor]
-     * @hidden
-     */
-    private _getRowParents(row: TableRow, untilParent: TableRow | null = null): TableRow[] {
-        untilParent = untilParent || null; // to avoid "undefined"
-        const parents: TableRow<T>[] = [];
-        let parent = row.parent || null; // empty parent should be coerced to "null" do not get into infinite loop
-        while (parent && parent !== untilParent) {
-            parents.push(parent);
-            parent = parent.parent || null;
-        }
-        return parents;
-    }
-
-    /** @hidden */
     private _resetAllSelectedRows(emitEvent = false): void {
         this._checkedAll = false;
         this._checkedAny = false;
         const removed: TableRow<T>[] = [];
-        this._getSelectableRows().forEach((r) => {
+        getSelectableRows(this._tableRows, this.selectableKey).forEach((r) => {
             if (emitEvent && r.checked) {
                 removed.push(r);
             }
@@ -2790,7 +2472,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _calculateCheckedAll(): void {
-        const selectableRows = this._getSelectableRows();
+        const selectableRows = getSelectableRows(this._tableRows, this.selectableKey);
         const totalSelected = selectableRows.filter((r) => r.checked);
         this._checkedAll = totalSelected.length === selectableRows.length && selectableRows.length !== 0;
         this._checkedAny = totalSelected.length > 0;
@@ -2815,7 +2497,7 @@ export class TableComponent<T = any>
         let currentRow = row.parent;
 
         while (currentRow) {
-            const children = this._findRowChildren(currentRow).filter((r) => r.parent === currentRow);
+            const children = findRowChildren(currentRow, this._tableRows).filter((r) => r.parent === currentRow);
             const totalChecked = children.filter((r) => r.checked);
             const checkedAll = totalChecked.length === children.length;
             const checkedAny = totalChecked.length > 0;
@@ -2831,22 +2513,12 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _applySelectionToChildren(row: TableRow, addedRows: TableRow<T>[], removedRows: TableRow<T>[]): void {
-        const allChilren = this._findRowChildren(row);
+        const allChilren = findRowChildren(row, this._tableRows);
 
         allChilren.forEach((r) => {
             r.checked = row.checked;
             r.checked ? addedRows.push(r) : removedRows.push(r);
         });
-    }
-
-    /** @hidden */
-    private _getSelectableRows(): TableRow[] {
-        return this._tableRows.filter((row) => this._isSelectableRow(row));
-    }
-
-    /** @hidden */
-    private _isSelectableRow(row: TableRow): boolean {
-        return (this._isItemRow(row) || this._isTreeRow(row)) && row.value[this.selectableKey] !== false;
     }
 
     /** @hidden */
@@ -2873,15 +2545,15 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _openDataStream(ds: FdpTableDataSource<T>): TableDataSource<T> {
-        const dataSourceStream = this._toDataStream(ds);
+        const dataSourceStream = toDataStream(ds);
 
         if (dataSourceStream === undefined) {
             throw new Error(`[TableDataSource] source did not match an Array, Observable, nor DataSource`);
         }
 
         /**
-         * This is single point of data entry to the component. We don't want to set data on different
-         * places. If any new data comes in either you do a search and you want to pass initial data
+         * This is a single point of data entry to the component. We don't want to set data on different
+         * places. If any new data comes in, or you do a search, and you want to pass initial data
          * its here.
          */
         this._dsOpenedStream = dataSourceStream.open();
@@ -2890,6 +2562,7 @@ export class TableComponent<T = any>
 
         const dsSub = this._dsOpenedStream.subscribe((items) => {
             this._totalItems = dataSourceStream.dataProvider.totalItems;
+            this._totalItems$.next(this._totalItems);
             this._dataSourceItemsSubject.next(items);
             // calling "detectChanges" may result in content jumps
             // using markForCheck in order to let "items" changes to get applied in the UI first
@@ -2934,23 +2607,6 @@ export class TableComponent<T = any>
         dataSourceStream.fetch(this.getTableState());
 
         return dataSourceStream;
-    }
-
-    /** @hidden */
-    private _toDataStream(source: FdpTableDataSource<T>): TableDataSource<T> | undefined {
-        if (isDataSource(source)) {
-            return source as TableDataSource<T>;
-        }
-
-        if (Array.isArray(source)) {
-            return new ArrayTableDataSource(source);
-        }
-
-        if (isObservable(source)) {
-            return new ObservableTableDataSource(source);
-        }
-
-        return undefined;
     }
 
     /** @hidden */
@@ -3018,39 +2674,6 @@ export class TableComponent<T = any>
         );
     }
 
-    /** @hidden */
-    private _isRowNavigatable(row: T, rowNavigatable: string | boolean): boolean {
-        if (!row) {
-            return false;
-        }
-
-        /** If key of the of the row's item field passed */
-        if (isString(rowNavigatable)) {
-            return !!row[rowNavigatable as string];
-        }
-
-        return !!rowNavigatable;
-    }
-
-    /**
-     * @hidden
-     * @private
-     * Creates empty column skeleton object.
-     * @returns Column model.
-     */
-    private _buildNewRowSkeleton(): T {
-        if (this.editableRowSkeleton) {
-            return cloneDeep(this.editableRowSkeleton);
-        }
-
-        let newRow = {};
-        this.columns.forEach((column) => {
-            newRow = set(newRow, column.key, undefined);
-        });
-
-        return newRow as T;
-    }
-
     /**
      * @hidden
      * Resets editable rows discarding the editable rows array.
@@ -3095,5 +2718,12 @@ export class TableComponent<T = any>
                 });
             })
         );
+    }
+
+    /** @hidden */
+    private _onZoneFree(callback: () => void): void {
+        this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
+            callback();
+        });
     }
 }
