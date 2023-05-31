@@ -21,5 +21,7 @@
     [attr.value]="value"
 />
 <label class="fd-radio__label" [attr.title]="title" [for]="id" (click)="labelClicked($event)">
-    <ng-content></ng-content>
+    <span class="fd-radio__text">
+        <ng-content></ng-content>
+    </span>
 </label>
