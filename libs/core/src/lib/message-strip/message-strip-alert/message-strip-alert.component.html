@@ -1,0 +1,13 @@
+<fd-message-strip
+    [class]="messageStripConfig.class"
+    [dismissible]="messageStripConfig.dismissible"
+    [noIcon]="messageStripConfig.noIcon"
+    [type]="messageStripConfig.type"
+    [id]="messageStripConfig.id"
+    [ariaLabelledBy]="messageStripConfig.ariaLabelledBy"
+    [ariaLabel]="messageStripConfig.ariaLabel"
+    [dismissLabel]="messageStripConfig.dismissLabel"
+    (onDismiss)="onDismissHandler()"
+>
+    <ng-template [cdkPortalOutlet]="contentPortal"></ng-template>
+</fd-message-strip>

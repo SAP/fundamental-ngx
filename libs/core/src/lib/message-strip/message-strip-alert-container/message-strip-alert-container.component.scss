@@ -1,0 +1,41 @@
+.fd-message-strip-alert-overlay {
+    max-width: 33.33vw;
+    padding: 0.5rem;
+
+    &--top {
+        top: 0;
+        max-height: 100vh;
+
+        &.fd-message-strip-alert-overlay--bottom-opened {
+            max-height: 50vh;
+        }
+    }
+
+    &--bottom {
+        top: initial;
+        bottom: 0;
+        max-height: 100vh;
+
+        &.fd-message-strip-alert-overlay--top-opened {
+            max-height: 50vh;
+        }
+    }
+
+    &--start {
+        left: 0;
+    }
+
+    &--middle {
+        left: 33.33vw;
+        width: 33.33vw;
+        @media screen and (max-width: 992px) {
+            left: 5vw;
+            width: 90vw;
+            max-width: 90vw;
+        }
+    }
+
+    &--end {
+        right: 0;
+    }
+}
