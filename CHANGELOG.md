@@ -1,3 +1,12 @@
+# [0.42.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.2...v0.42.0-rc.3) (2023-06-01)
+
+
+### Bug Fixes
+
+* **platform:** add rowheader role input option ([#9956](https://github.com/SAP/fundamental-ngx/issues/9956)) ([e1cddff](https://github.com/SAP/fundamental-ngx/commit/e1cddffee3f033348ab437ea07ef1beaf1577514))
+
+
+
 # [0.42.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.1...v0.42.0-rc.2) (2023-06-01)
 
 
