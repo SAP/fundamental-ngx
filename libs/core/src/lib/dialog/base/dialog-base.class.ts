@@ -57,7 +57,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     });
 
     /** @hidden Listen and close dialog on Escape key */
-    @HostListener('keyup', ['$event'])
+    @HostListener('keydown', ['$event'])
     closeDialogEsc(event: KeyboardEvent): void {
         if (this._config.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE)) {
             this._ref.dismiss('escape');
