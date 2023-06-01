@@ -511,6 +511,10 @@ export class TableComponent<T = any>
     @Input()
     loadPagesBefore = false;
 
+    /** @hidden Whether the first item in each row should have the 'rowheader' role. */
+    @Input()
+    enableRowHeaderRole = false;
+
     /** Event emitted when current preset configuration has been changed. */
     @Output()
     presetChanged = new EventEmitter<PlatformTableManagedPreset>();
@@ -1044,6 +1048,10 @@ export class TableComponent<T = any>
         if (this.virtualScroll && (changes['rowHeight'] || changes['virtualScroll'] || changes['renderAhead'])) {
             this._calculateVirtualScrollRows();
         }
+
+        if ('enableRowHeaderRole' in changes) {
+            this._handleRowHeader();
+        }
     }
 
     /** @hidden */
@@ -1095,6 +1103,10 @@ export class TableComponent<T = any>
 
         if (this.expandOnInit) {
             this.expandAll();
+        }
+
+        if (this.enableRowHeaderRole) {
+            this._handleRowHeader();
         }
     }
 
@@ -2724,6 +2736,21 @@ export class TableComponent<T = any>
     private _onZoneFree(callback: () => void): void {
         this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
             callback();
+        });
+    }
+
+    /** @hidden */
+    private _handleRowHeader(): void {
+        this.tableRows.forEach((row) => {
+            let role = 'gridcell';
+            if (row.cells && row.cells.first) {
+                if (this.selectionMode === SelectionMode.SINGLE || this.enableRowHeaderRole) {
+                    role = 'rowheader';
+                } else if (this.selectionMode === SelectionMode.MULTIPLE) {
+                    role = 'cell';
+                }
+                row.cells.first.elementRef.nativeElement.role = role;
+            }
         });
     }
 }
