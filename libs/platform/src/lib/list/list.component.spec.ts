@@ -73,10 +73,10 @@ describe('ListComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should display list container with role as listbox', () => {
+    it('should display list container with role as list', () => {
         const listContainer = fixture.debugElement.nativeElement.querySelector('ul');
         fixture.detectChanges();
-        expect(listContainer.getAttribute('role')).toEqual('listbox');
+        expect(listContainer.getAttribute('role')).toEqual('list');
     });
 
     it('should contain fd-list in list container', () => {
