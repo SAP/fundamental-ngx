@@ -1,3 +1,12 @@
+# [0.42.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.1...v0.42.0-rc.2) (2023-06-01)
+
+
+### Bug Fixes
+
+* **core:** list accessibility updates ([#9883](https://github.com/SAP/fundamental-ngx/issues/9883)) ([8c57d08](https://github.com/SAP/fundamental-ngx/commit/8c57d08208f9ceaf187e025cabf4e19509d0181d))
+
+
+
 # [0.42.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.0...v0.42.0-rc.1) (2023-05-31)
 
 
