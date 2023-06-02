@@ -16,7 +16,7 @@ export class MultiInputDisplaywithExampleComponent {
         { name: 'Orange', value: 'orange_value' }
     ];
 
-    selected = ['banana_value'];
+    selected = [];
 
     displayFunc(obj: any): string {
         return obj.name.toLocaleUpperCase();
