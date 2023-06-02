@@ -42,6 +42,9 @@ export const FD_LANGUAGE_SINHALA: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Dismiss'
     },
+    coreMultiInput: {
+        multiInputAriaLabel: 'Multi Input'
+    },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'

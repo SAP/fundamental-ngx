@@ -42,6 +42,9 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Zrušit'
     },
+    coreMultiInput: {
+        multiInputAriaLabel: 'Multi Input'
+    },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'

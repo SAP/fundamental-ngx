@@ -42,6 +42,9 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Congedare'
     },
+    coreMultiInput: {
+        multiInputAriaLabel: 'Multi Input'
+    },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'
