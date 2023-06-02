@@ -3,6 +3,7 @@
     placeholder="Search here..."
     [(ngModel)]="selected"
     [displayFn]="displayFunc"
+    [valueFn]="valueFunc"
 ></fd-multi-input>
 
 Selected: {{ selected | json }}
