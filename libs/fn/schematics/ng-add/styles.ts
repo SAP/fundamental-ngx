@@ -8,14 +8,14 @@ export const defaultFontStyle = `
 }
 
 @font-face {
-    font-family: '72';
+    font-family: ''72-Light';
     src: url('~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/72-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
-    font-family: '72';
+    font-family: '72-Bold';
     src: url('~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/72-Bold.woff') format('woff');
     font-weight: 700;
     font-style: normal;
