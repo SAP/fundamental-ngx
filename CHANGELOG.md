@@ -1,3 +1,34 @@
+# [0.42.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.4...v0.42.0-rc.5) (2023-06-02)
+
+
+### Bug Fixes
+
+* **core:** select focus on page load bug ([#9969](https://github.com/SAP/fundamental-ngx/issues/9969)) ([38da804](https://github.com/SAP/fundamental-ngx/commit/38da804e5674ac905139bf0550644367683cc7cb))
+
+
+
+# [0.42.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.3...v0.42.0-rc.4) (2023-06-02)
+
+
+
+# [0.42.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.2...v0.42.0-rc.3) (2023-06-01)
+
+
+### Bug Fixes
+
+* **platform:** add rowheader role input option ([#9956](https://github.com/SAP/fundamental-ngx/issues/9956)) ([e1cddff](https://github.com/SAP/fundamental-ngx/commit/e1cddffee3f033348ab437ea07ef1beaf1577514))
+
+
+
+# [0.42.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.1...v0.42.0-rc.2) (2023-06-01)
+
+
+### Bug Fixes
+
+* **core:** list accessibility updates ([#9883](https://github.com/SAP/fundamental-ngx/issues/9883)) ([8c57d08](https://github.com/SAP/fundamental-ngx/commit/8c57d08208f9ceaf187e025cabf4e19509d0181d))
+
+
+
 # [0.42.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.0...v0.42.0-rc.1) (2023-05-31)
 
 
