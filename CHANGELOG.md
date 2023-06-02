@@ -1,3 +1,25 @@
+# [0.42.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.5...v0.42.0-rc.6) (2023-06-02)
+
+
+### Bug Fixes
+
+* **core:** multi input, various fixes and doc updates ([#9961](https://github.com/SAP/fundamental-ngx/issues/9961)) ([6faa0bc](https://github.com/SAP/fundamental-ngx/commit/6faa0bc349e8587cf7af86ed6deddd2e9529a2ad))
+
+
+
+# [0.42.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.4...v0.42.0-rc.5) (2023-06-02)
+
+
+### Bug Fixes
+
+* **core:** select focus on page load bug ([#9969](https://github.com/SAP/fundamental-ngx/issues/9969)) ([38da804](https://github.com/SAP/fundamental-ngx/commit/38da804e5674ac905139bf0550644367683cc7cb))
+
+
+
+# [0.42.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.3...v0.42.0-rc.4) (2023-06-02)
+
+
+
 # [0.42.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.2...v0.42.0-rc.3) (2023-06-01)
 
 

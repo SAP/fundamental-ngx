@@ -522,8 +522,6 @@ export class MultiInputComponent
             this.searchInputElement?.nativeElement.focus();
         }
 
-        this.tokenizer.removeSelectedTokens();
-
         this.tokenizer.tokenizerInnerEl.nativeElement.scrollLeft =
             this.tokenizer.tokenizerInnerEl.nativeElement.scrollWidth;
 
@@ -561,6 +559,7 @@ export class MultiInputComponent
             this._rangeSelector.applyValueToEachInRange((idx) =>
                 this._handleSelect(toggledSelection, vm.displayedOptions[idx].value, false)
             );
+            this._changeDetRef.detectChanges();
         });
         this._subscriptions.add(sub);
         if (isListItem) {
