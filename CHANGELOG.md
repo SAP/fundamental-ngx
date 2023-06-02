@@ -1,3 +1,12 @@
+# [0.42.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.6...v0.42.0-rc.7) (2023-06-02)
+
+
+### Bug Fixes
+
+* **core:** escape key when using focusable grid closes dialog ([#9962](https://github.com/SAP/fundamental-ngx/issues/9962)) ([3508177](https://github.com/SAP/fundamental-ngx/commit/3508177b0c2dfdc731c44dc05aebf4d70bef917f))
+
+
+
 # [0.42.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.5...v0.42.0-rc.6) (2023-06-02)
 
 
