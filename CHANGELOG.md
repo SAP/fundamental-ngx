@@ -1,3 +1,12 @@
+# [0.42.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.7...v0.42.0-rc.8) (2023-06-05)
+
+
+### Bug Fixes
+
+* **core:** fixed popover arrow placement ([#9946](https://github.com/SAP/fundamental-ngx/issues/9946)) ([b7d5cb6](https://github.com/SAP/fundamental-ngx/commit/b7d5cb618e93449cb77553cfbe2836d2b35deef4))
+
+
+
 # [0.42.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.6...v0.42.0-rc.7) (2023-06-02)
 
 
