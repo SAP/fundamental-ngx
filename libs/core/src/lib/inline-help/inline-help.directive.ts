@@ -68,16 +68,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         };
         this._popoverService.updateContent(text, template);
 
-        let srElement;
-        if (typeof content === 'string') {
-            srElement = document.createElement('span');
-            srElement.innerText = content;
-        } else {
-            srElement = template;
-        }
-
-        srElement.style.cssText = `position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);`;
-        this._elementRef.nativeElement.append(srElement);
+        this._setupScreenreaderElement(content);
     }
 
     /** @hidden */
@@ -95,6 +86,8 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
             );
         }
         this._popoverService.updateContent(null, template);
+
+        this._setupScreenreaderElement(template);
     }
 
     /** @hidden */
@@ -138,5 +131,20 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         if (this._icon) {
             this.additionalBodyClass += ' ' + INLINE_HELP_ICON_CLASS;
         }
+    }
+
+    /** @hidden */
+    private _setupScreenreaderElement(content: string | Nullable<TemplateRef<any>>): void {
+        let srElement = document.createElement('span');
+        if (typeof content === 'string') {
+            srElement.innerText = content;
+        } else if (content) {
+            srElement = content.createEmbeddedView(content).rootNodes[0];
+        }
+
+        if (srElement.style) {
+            srElement.style.cssText = `position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);`;
+        }
+        this._elementRef.nativeElement.append(srElement);
     }
 }
