@@ -413,7 +413,11 @@ export class MultiInputComponent
         );
 
         if (!this.ariaLabel) {
-            this._getAriaLabel();
+            this._subscriptions.add(
+                this._language.subscribe(() => {
+                    this._getAriaLabel();
+                })
+            );
         }
     }
 
