@@ -10,11 +10,11 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder, Nullable } from '@fundamental-ngx/cdk/utils';
-import { MessageStripType } from './message-strip-configuration-type';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { NgIf } from '@angular/common';
+import { MessageStripType } from './message-strip-type';
 
 let messageStripUniqueId = 0;
 

@@ -1,34 +1,23 @@
-import { ComponentRef, inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, inject, Injectable, Injector, Type } from '@angular/core';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { BehaviorSubject, combineLatest, map, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Subject, tap } from 'rxjs';
 import { ResponsiveBreakpoints, ViewportSizeObservable } from '@fundamental-ngx/cdk/utils';
-import { MessageStripConfiguration } from './message-strip-configuration-type';
 import { MessageStripAlertContainerComponent } from './message-strip-alert-container/message-strip-alert-container.component';
-import {
-    MessageStripAlertComponent,
-    MessageStripAlertComponentData
-} from './message-strip-alert/message-strip-alert.component';
+import { MessageStripAlertComponent } from './message-strip-alert/message-strip-alert.component';
+import { MessageStripAlertPosition } from './message-strip-alert.position';
+import { OpenMessageStripAlertConfig } from './open-message-strip-alert.config';
+import { MessageStripAlertRef } from './message-strip-alert.ref';
+import { MessageStripAlertComponentData, MessageStripAlertContainerPosition } from './tokens';
+import { applyDefaultConfig } from './default-config';
 
-type MessageStripAlertVerticalPosition = 'top' | 'bottom';
-type MessageStripAlertHorizontalPosition = 'start' | 'middle' | 'end';
-type MessageStripAlertPosition = `${MessageStripAlertVerticalPosition}-${MessageStripAlertHorizontalPosition}`;
-
-interface OpenMessageStripAlertConfig {
-    position?: MessageStripAlertPosition;
-    content: string | TemplateRef<any> | Type<any>;
-    messageStrip?: Partial<MessageStripConfiguration>;
-}
-
-const defaultConfig: Required<Omit<OpenMessageStripAlertConfig, 'content'>> = {
-    position: 'top-middle',
-    messageStrip: {}
-};
-
-function applyDefaultConfig(config: OpenMessageStripAlertConfig): Required<OpenMessageStripAlertConfig> {
-    return { ...defaultConfig, ...config };
-}
-
+/**
+ * Service that is responsible for opening and closing message strip alerts.
+ * This should be only created once in entire application.
+ * Service is responsible for creating and managing the overlays for the
+ * message strip alerts. This also manages the footer components for any
+ * given position.
+ */
 @Injectable({
     providedIn: 'root'
 })
@@ -60,10 +49,18 @@ export class MessageStripAlertService {
             MessageStripAlertPosition,
             {
                 ref: OverlayRef;
-                componentRef: ComponentRef<MessageStripAlertContainerComponent>;
+                containerRef: ComponentRef<MessageStripAlertContainerComponent>;
             }
         >
     > = {};
+
+    /** @hidden */
+    private _messageStripAlertContainerFooters$ = new BehaviorSubject<
+        Partial<Record<MessageStripAlertPosition, Type<any>>>
+    >({});
+
+    /** @hidden */
+    footerComponents$ = this._messageStripAlertContainerFooters$.asObservable();
 
     /** @hidden */
     constructor() {
@@ -73,40 +70,72 @@ export class MessageStripAlertService {
         this.listenToItemsChanges();
     }
 
-    /** @hidden */
-    open(c: OpenMessageStripAlertConfig): void {
-        const config = applyDefaultConfig(c);
-        const portal = this.getComponentPortal(config, () => {
-            this._messageAlerts$.next(this._messageAlerts$.value.filter((item) => item.portal !== portal));
-            config.messageStrip && config.messageStrip.onDismiss && config.messageStrip.onDismiss();
+    /**
+     * Set the footer component for a given position.
+     */
+    setFooterComponent(position: MessageStripAlertPosition, component: Type<any>): void {
+        this._messageStripAlertContainerFooters$.next({
+            ...this._messageStripAlertContainerFooters$.value,
+            [position]: component
         });
-        this._messageAlerts$.next([...this._messageAlerts$.value, { ...config, portal }]);
+    }
+
+    /**
+     * Open a message strip alert with given configuration
+     */
+    open<ComponentType = unknown>(c: OpenMessageStripAlertConfig<ComponentType>): MessageStripAlertRef<ComponentType> {
+        const config = applyDefaultConfig<ComponentType>(c);
+        const alertRef = this.getMessageStripAlertRef(config);
+        this._messageAlerts$.next([{ ...config, portal: alertRef.portal }, ...this._messageAlerts$.value]);
+        return alertRef;
     }
 
     /** @hidden */
-    private getComponentPortal(
-        config: Required<OpenMessageStripAlertConfig>,
-        onDismiss: () => void
-    ): ComponentPortal<MessageStripAlertComponent> {
-        return new ComponentPortal(
-            MessageStripAlertComponent,
-            null,
-            Injector.create({
-                providers: [
-                    {
-                        provide: MessageStripAlertComponentData,
-                        useValue: {
-                            content: config.content,
-                            messageStripConfig: {
-                                ...config.messageStrip,
-                                onDismiss
+    private getMessageStripAlertRef<ComponentType = unknown>(
+        config: Required<OpenMessageStripAlertConfig<ComponentType>>
+    ): MessageStripAlertRef<ComponentType> {
+        const onDismiss$ = new Subject<void>();
+        const alertRef = {
+            portal: new ComponentPortal(
+                MessageStripAlertComponent<ComponentType>,
+                null,
+                Injector.create({
+                    providers: [
+                        {
+                            provide: MessageStripAlertComponentData,
+                            useValue: {
+                                content: config.content,
+                                messageStripConfig: {
+                                    ...config.messageStrip,
+                                    onDismiss: () => {
+                                        this._messageAlerts$.next(
+                                            this._messageAlerts$.value.filter((item) => item.portal !== alertRef.portal)
+                                        );
+                                        config.messageStrip &&
+                                            config.messageStrip.onDismiss &&
+                                            config.messageStrip.onDismiss();
+                                        onDismiss$.next();
+                                    }
+                                }
                             }
+                        },
+                        {
+                            provide: MessageStripAlertRef,
+                            useFactory: () => alertRef
                         }
-                    }
-                ],
-                parent: this.injector
-            })
-        );
+                    ],
+                    parent: this.injector
+                })
+            ),
+            dismiss: () => {
+                this._messageAlerts$.next(this._messageAlerts$.value.filter((item) => item.portal !== alertRef.portal));
+                config.messageStrip && config.messageStrip.onDismiss && config.messageStrip.onDismiss();
+                onDismiss$.next();
+                onDismiss$.complete();
+            },
+            onDismiss$: onDismiss$.asObservable()
+        };
+        return alertRef;
     }
 
     /** @hidden */
@@ -146,9 +175,9 @@ export class MessageStripAlertService {
                         ).forEach(([position, portals]) => {
                             topSectionIsOpened = topSectionIsOpened || position.startsWith('top');
                             bottomSectionIsOpened = bottomSectionIsOpened || position.startsWith('bottom');
-                            const { componentRef } = this.getOverlayRef(position);
-                            componentRef.instance.attachedElements = portals;
-                            componentRef.changeDetectorRef.detectChanges();
+                            const { containerRef } = this.getOverlayRef(position);
+                            containerRef.instance.attachedElements = portals;
+                            containerRef.changeDetectorRef.detectChanges();
                         });
                         this.syncExistingOverlays(messageAlertsByPosition, bottomSectionIsOpened, topSectionIsOpened);
                     }
@@ -192,13 +221,27 @@ export class MessageStripAlertService {
     /** @hidden */
     private getOverlayRef(position: MessageStripAlertPosition): {
         ref: OverlayRef;
-        componentRef: ComponentRef<MessageStripAlertContainerComponent>;
+        containerRef: ComponentRef<MessageStripAlertContainerComponent>;
     } {
         if (!this._overlayRefs[position]) {
             const [verticalPosition, horizontalPosition] = position.split('-');
             const overlayRef = this.createOverlay(verticalPosition, horizontalPosition);
-            const containerRef = overlayRef.attach(new ComponentPortal(MessageStripAlertContainerComponent));
-            this._overlayRefs[position] = { ref: overlayRef, componentRef: containerRef };
+            const containerRef = overlayRef.attach(
+                new ComponentPortal(
+                    MessageStripAlertContainerComponent,
+                    null,
+                    Injector.create({
+                        parent: this.injector,
+                        providers: [
+                            {
+                                provide: MessageStripAlertContainerPosition,
+                                useValue: position
+                            }
+                        ]
+                    })
+                )
+            );
+            this._overlayRefs[position] = { ref: overlayRef, containerRef };
         }
         return this._overlayRefs[position]!;
     }

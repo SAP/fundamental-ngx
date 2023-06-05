@@ -1,6 +1,5 @@
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-
-export type MessageStripType = Nullable<'warning' | 'success' | 'information' | 'error'>;
+import { MessageStripType } from '../message-strip-type';
 
 export interface MessageStripConfiguration {
     class: string;
