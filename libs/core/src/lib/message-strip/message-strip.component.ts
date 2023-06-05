@@ -14,6 +14,8 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 let messageStripUniqueId = 0;
 
+export type MessageStripType = Nullable<'warning' | 'success' | 'information' | 'error'>;
+
 /**
  * The component that represents a message-strip. It can only be used inline.
  */
@@ -53,7 +55,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
      * Can be one of *warning*, *success*, *information*, *error* or null.
      */
     @Input()
-    type: string;
+    type: MessageStripType;
 
     /** Id for the message-strip component. If omitted, a unique one is generated. */
     @Input()

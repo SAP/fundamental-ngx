@@ -10,6 +10,7 @@ describe('FormattedTextComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [FormattedTextComponent]
         }).compileComponents();
+        (HTMLIFrameElement.prototype as any).sandbox = 'allow-forms allow-scripts';
     });
 
     beforeEach(() => {
@@ -26,7 +27,7 @@ describe('FormattedTextComponent', () => {
         component.height = '100px';
         fixture.detectChanges();
         expect(fixture.nativeElement.classList.contains('fd-formatted-text-with-height')).toBeTruthy();
-        expect(fixture.nativeElement.offsetHeight).toEqual(100);
+        expect(fixture.nativeElement.style.height).toEqual('100px');
     });
 
     it('should add width class and style width', () => {
@@ -34,7 +35,7 @@ describe('FormattedTextComponent', () => {
         component.width = '100px';
         fixture.detectChanges();
         expect(fixture.nativeElement.classList.contains('fd-formatted-text-with-width')).toBeTruthy();
-        expect(fixture.nativeElement.offsetWidth).toEqual(100);
+        expect(fixture.nativeElement.style.width).toEqual('100px');
     });
 
     it('should have expected html on render', () => {

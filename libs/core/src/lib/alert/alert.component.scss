@@ -1,20 +1,11 @@
-@import 'fundamental-styles/dist/alert';
-
-.fd-alert {
+:host {
     display: block;
 
-    &__close {
-        &::before,
-        &::after {
-            content: none;
-        }
+    &.fd-has-display-block {
+        display: block;
     }
-}
 
-.fd-has-display-block {
-    display: block;
-}
-
-.fd-has-display-none {
-    display: none;
+    &.fd-has-display-none {
+        display: none;
+    }
 }

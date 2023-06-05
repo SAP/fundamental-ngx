@@ -719,9 +719,8 @@ export class SelectComponent<T = any>
 
             if (event.isUserInput && this._isOpen) {
                 this.close();
+                this.focus();
             }
-
-            this.focus();
         });
 
         // Listen to changes in the internal state of the _options and react accordingly.
