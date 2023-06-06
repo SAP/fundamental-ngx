@@ -1,4 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { DropPredicate } from '@fundamental-ngx/cdk/utils';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
@@ -14,16 +15,35 @@ import {
     TableRowType,
     TableState
 } from '@fundamental-ngx/platform/table';
+import { delay, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'fdp-platform-table-tree-example',
-    templateUrl: './platform-table-tree-example.component.html'
+    templateUrl: './platform-table-tree-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformTableTreeExampleComponent {
     @ViewChild(TableComponent)
     table: TableComponent;
 
-    source: TableDataSource<TableRow>;
+    source: TableDataSource<ExampleItem>;
+
+    dropPredicate: DropPredicate<TableRow<ExampleItem>> = (dragRow, dropRow, evt) => {
+        console.log(dragRow, dropRow, evt);
+        // Cancel the drop if categories are different.
+        if (dragRow.value.category !== dropRow.value.category) {
+            return of(false).pipe(
+                delay(2000),
+                tap(() => {
+                    alert(
+                        `Item ${dragRow.value.name} cannot be dropped into ${dropRow.value.name} because their categories are different.`
+                    );
+                })
+            );
+        }
+        return true;
+    };
 
     constructor() {
         this.source = new TableDataSource(new TableDataProviderExample());
@@ -45,7 +65,7 @@ export class PlatformTableTreeExampleComponent {
         this.table.toggleGroupRows(0);
     }
 
-    onRowSelectionChange(event: TableRowSelectionChangeEvent<TableRow<any>>) {
+    onRowSelectionChange(event: TableRowSelectionChangeEvent<ExampleItem>) {
         console.log(event);
     }
 }
@@ -53,6 +73,7 @@ export class PlatformTableTreeExampleComponent {
 export interface ExampleItem {
     name: string;
     description?: string;
+    category?: string;
     price?: {
         value: number;
         currency: string;
@@ -68,18 +89,17 @@ export interface ExampleItem {
  * Table Data Provider Example
  *
  */
-export class TableDataProviderExample extends TableDataProvider<TableRow> {
-    items: TableRow[] = [];
+export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
+    items: ExampleItem[] = [];
     totalItems = ITEMS.length;
 
     constructor() {
         super();
-        this.items = convertToTree(null, ITEMS);
-        this.totalItems = this.items.length;
+        this.items = [...ITEMS];
     }
 
-    fetch(tableState?: TableState): Observable<TableRow[]> {
-        this.items = this.items = convertToTree(null, ITEMS);
+    fetch(tableState?: TableState): Observable<ExampleItem[]> {
+        this.items = this.items = [...ITEMS];
 
         // apply searching
         if (tableState?.searchInput) {
@@ -91,7 +111,7 @@ export class TableDataProviderExample extends TableDataProvider<TableRow> {
         return of(this.items);
     }
 
-    search(items: TableRow[], { searchInput, columnKeys }: TableState): TableRow[] {
+    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
         const searchText = searchInput?.text || '';
         const keysToSearchBy = columnKeys;
 
@@ -100,7 +120,7 @@ export class TableDataProviderExample extends TableDataProvider<TableRow> {
         }
 
         return items.filter((item) => {
-            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item.value));
+            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
             return valuesForSearch
                 .filter((value) => !!value)
                 .map((value): string => value.toString())
@@ -113,38 +133,15 @@ function getNestedValue<T extends Record<string, any>>(key: string, object: T): 
     return key.split('.').reduce((a, b) => (a ? a[b] : null), object);
 }
 
-function convertToTree(parent: TableRow | null, items: ExampleItem[], level = 0): TableRow<ExampleItem>[] {
-    const rows: TableRow<ExampleItem>[] = [];
-    items.forEach((value, index) => {
-        let children = [] as TableRow[];
-
-        const treeItem = newTableRow({
-            type: TableRowType.ITEM,
-            checked: false,
-            index,
-            value,
-            parent,
-            level,
-            expanded: false
-        });
-
-        if (value.children && value.children.length > 0) {
-            children = convertToTree(treeItem, value.children, level + 1);
-            treeItem.children = children;
-            treeItem.type = TableRowType.TREE;
-        }
-        rows.push(treeItem);
-    });
-    return rows;
-}
-
 // Example items
 const ITEMS: ExampleItem[] = [
     {
         name: 'Laptops',
+        category: 'laptops',
         children: [
             {
                 name: 'Astro Laptop 1516',
+                category: 'laptops',
                 description: 'pede malesuada',
                 price: {
                     value: 489.01,
@@ -157,6 +154,7 @@ const ITEMS: ExampleItem[] = [
             },
             {
                 name: 'Benda Laptop 1408',
+                category: 'laptops',
                 description: 'suspendisse potenti cras in',
                 price: {
                     value: 243.49,
@@ -171,9 +169,11 @@ const ITEMS: ExampleItem[] = [
     },
     {
         name: 'Screens',
+        category: 'screens',
         children: [
             {
                 name: 'Bending Screen 21HD',
+                category: 'screens',
                 description: 'nunc nisl duis bibendum',
                 price: {
                     value: 66.46,
@@ -186,6 +186,7 @@ const ITEMS: ExampleItem[] = [
             },
             {
                 name: 'Broad Screen 22HD',
+                category: 'screens',
                 description: 'ultrices posuere',
                 price: {
                     value: 458.18,
@@ -198,6 +199,7 @@ const ITEMS: ExampleItem[] = [
             },
             {
                 name: 'Ergo Screen E-I',
+                category: 'screens',
                 description: 'massa quis augue luctus tincidunt',
                 price: {
                     value: 387.23,
@@ -210,6 +212,7 @@ const ITEMS: ExampleItem[] = [
             },
             {
                 name: 'Ergo Screen E-II',
+                category: 'screens',
                 description: 'orci eget',
                 price: {
                     value: 75.86,
@@ -223,9 +226,11 @@ const ITEMS: ExampleItem[] = [
     },
     {
         name: 'Other 1',
+        category: 'other',
         children: [
             {
                 name: '10 Portable DVD player',
+                category: 'other',
                 description: 'diam neque vestibulum eget vulputate',
                 price: {
                     value: 66.04,
@@ -238,6 +243,7 @@ const ITEMS: ExampleItem[] = [
             },
             {
                 name: 'Astro Phone 6',
+                category: 'other',
                 description: 'penatibus et magnis',
                 price: {
                     value: 154.1,
@@ -250,6 +256,7 @@ const ITEMS: ExampleItem[] = [
             },
             {
                 name: 'Beam Breaker B-1',
+                category: 'other',
                 description: 'fermentum donec ut',
                 price: {
                     value: 36.56,
@@ -262,6 +269,7 @@ const ITEMS: ExampleItem[] = [
             },
             {
                 name: 'Beam Breaker B-2',
+                category: 'other',
                 description: 'sapien in sapien iaculis congue',
                 price: {
                     value: 332.57,
@@ -275,9 +283,11 @@ const ITEMS: ExampleItem[] = [
     },
     {
         name: 'Other 2',
+        category: 'other',
         children: [
             {
                 name: 'Blaster Extreme',
+                category: 'other',
                 description: 'quisque ut',
                 price: {
                     value: 436.88,
@@ -290,6 +300,7 @@ const ITEMS: ExampleItem[] = [
             },
             {
                 name: 'Camcorder View',
+                category: 'other',
                 description: 'integer ac leo pellentesque',
                 price: {
                     value: 300.52,
@@ -302,6 +313,7 @@ const ITEMS: ExampleItem[] = [
             },
             {
                 name: 'Cepat Tablet 10.5',
+                category: 'other',
                 description: 'rutrum rutrum neque aenean auctor',
                 price: {
                     value: 365.12,
@@ -315,16 +327,20 @@ const ITEMS: ExampleItem[] = [
     },
     {
         name: 'Other 3',
+        category: 'other',
         children: [
             {
                 name: 'Gaming Monster',
+                category: 'other',
                 children: []
             },
             {
                 name: 'Other 4',
+                category: 'other',
                 children: [
                     {
                         name: 'Camcorder View',
+                        category: 'other',
                         description: 'integer ac leo pellentesque',
                         price: {
                             value: 300.52,
@@ -337,6 +353,7 @@ const ITEMS: ExampleItem[] = [
                     },
                     {
                         name: 'Cepat Tablet 10.5',
+                        category: 'other',
                         description: 'rutrum rutrum neque aenean auctor',
                         price: {
                             value: 365.12,
@@ -348,12 +365,15 @@ const ITEMS: ExampleItem[] = [
                     },
                     {
                         name: 'Other 5',
+                        category: 'other',
                         children: [
                             {
                                 name: 'Other 6',
+                                category: 'other',
                                 children: [
                                     {
                                         name: 'Beam Breaker B-1',
+                                        category: 'other',
                                         description: 'fermentum donec ut',
                                         price: {
                                             value: 36.56,
@@ -366,6 +386,7 @@ const ITEMS: ExampleItem[] = [
                                     },
                                     {
                                         name: 'Beam Breaker B-2',
+                                        category: 'other',
                                         description: 'sapien in sapien iaculis congue',
                                         price: {
                                             value: 332.57,

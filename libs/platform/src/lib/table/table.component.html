@@ -128,7 +128,7 @@
                                     [disabled]="!_isColumnHasHeaderMenu(column)"
                                     [column]="column"
                                     [popoverTemplate]="column.headerCellPopoverTemplate"
-                                    [filteringFromHeaderDisabled]="_isFilteringFromHeaderDisabled"
+                                    [filteringFromHeaderDisabled]="_isFilteringFromHeaderDisabled$ | async"
                                     (columnHeaderSortBy)="_columnHeaderSortBy($event.key, $event.direction)"
                                     (columnHeaderGroupBy)="_columnHeaderGroupBy($event)"
                                     (columnHeaderFilterBy)="_columnHeaderFilterBy($event.key, $event.value)"
@@ -156,7 +156,9 @@
             <tbody
                 *ngIf="!!this._tableRowsVisible.length; else emptyTableTemplate"
                 fd-table-body
-                fd-dnd-list
+                fdkDndList
+                [dragoverPredicate]="dragoverPredicate"
+                [dropPredicate]="dropPredicate"
                 [noBorderX]="noBorderX"
                 [noBorderY]="noBorderY"
                 [tabIndex]="pageScrolling ? 0 : -1"
@@ -165,6 +167,7 @@
                 [dropMode]="dropMode"
                 [style.transform]="_virtualScrollTransform"
                 (itemDropped)="_dragDropItemDrop($event)"
+                (dropPredicateCalculating)="_calculatingLoading($event)"
             >
                 <ng-container
                     *ngFor="let row of _tableRowsInViewport; let rowIdx = index; trackBy: _rowTrackBy"
@@ -198,7 +201,7 @@
                     <tr
                         *ngSwitchDefault
                         fd-table-row
-                        fd-dnd-item
+                        [fdkDndItem]="row"
                         [applyDragItemClass]="_rowsDraggable"
                         [class]="row | rowClasses : rowsClass"
                         [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"

@@ -1,0 +1,49 @@
+<p>Drop predicate logic:</p>
+<div style="margin-bottom: 1rem">
+    <fd-segmented-button [(ngModel)]="dropMode">
+        <button fd-button value="all">Enable D&D for all items</button>
+        <button fd-button value="none">Disable D&D for all items</button>
+        <button fd-button value="odd">Enable D&D for odd items in the list</button>
+    </fd-segmented-button>
+</div>
+<div style="margin-bottom: 1rem">
+    <fd-checkbox [(ngModel)]="simulateDelay" label="Simulate delay"></fd-checkbox>
+</div>
+<p>Dragover predicate logic:</p>
+<div style="margin-bottom: 1rem">
+    <fd-segmented-button [(ngModel)]="dragMode">
+        <button fd-button value="all">All items can be dragged over another items</button>
+        <button fd-button value="none">Items cannot be dragged over each other</button>
+        <button fd-button value="odd">Odd items can be dragged only over odd ones</button>
+    </fd-segmented-button>
+</div>
+<fd-busy-indicator
+    style="width: 20rem"
+    [loading]="loading"
+    [block]="true"
+    aria-labelledby="fd-busy-indicator-label-1"
+    title="Block Wrapper"
+>
+    <div
+        class="fdk-sortable-list"
+        fdkDndList
+        style="width: 20rem"
+        [dropPredicate]="predicate"
+        [dropMode]="'shift'"
+        [items]="values"
+        [dragoverPredicate]="dragoverPredicate"
+        (itemDropped)="onItemDropped($event)"
+        (dropPredicateCalculating)="onPredicateCalculating($event)"
+    >
+        <ng-container *ngFor="let item of values">
+            <div
+                class="fdk-sortable-list__item"
+                fdkDndItem
+                [ngStyle]="{ '--fdItemShift': 'calc(' + item.level + ' * 2rem)' }"
+                [attr.data-level]="item.level"
+            >
+                List item {{ item.name }}
+            </div>
+        </ng-container>
+    </div>
+</fd-busy-indicator>

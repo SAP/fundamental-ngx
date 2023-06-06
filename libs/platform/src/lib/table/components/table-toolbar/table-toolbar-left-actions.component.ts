@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fdp-table-toolbar-left-actions',
@@ -7,6 +7,7 @@ import { Component, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/c
             <ng-content></ng-content>
         </ng-template>
     `,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
 export class TableToolbarLeftActionsComponent {

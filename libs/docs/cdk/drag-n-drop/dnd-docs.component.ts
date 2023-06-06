@@ -1,12 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { DisabledExampleComponent } from './examples/disabled-example/disabled-example.component';
 
 const defaultExampleHtml = 'default-example/default-example.component.html';
 const defaultExampleTs = 'default-example/default-example.component.ts';
 
-const diExampleHtml = 'di-example/di-example.component.html';
-const diExampleTs = 'di-example/di-example.component.ts';
-const diRecipientExampleTs = 'di-example/disabled-recipient.directive.ts';
+const disabledExampleHtml = 'disabled-example/disabled-example.component.html';
+const disabledExampleTs = 'disabled-example/disabled-example.component.ts';
 
 @Component({
     selector: 'app-dnd',
@@ -28,24 +28,19 @@ export class DndDocsComponent {
             component: 'fdkDisabledDefaultExample'
         }
     ];
-    diExample: ExampleFile[] = [
+
+    disabledExample: ExampleFile[] = [
         {
-            code: getAssetFromModuleAssets(diExampleHtml),
+            code: getAssetFromModuleAssets(disabledExampleHtml),
             language: 'html',
-            fileName: 'disabled-di-example',
-            component: 'fdkDisabledDIExample'
+            fileName: 'disabled-example',
+            component: 'DisabledExampleComponent'
         },
         {
-            code: getAssetFromModuleAssets(diExampleTs),
+            code: getAssetFromModuleAssets(disabledExampleTs),
             language: 'ts',
-            fileName: 'disabled-di-example',
-            component: 'fdkDisabledDIExample'
-        },
-        {
-            code: getAssetFromModuleAssets(diRecipientExampleTs),
-            language: 'ts',
-            fileName: 'disabled-recipient.directive',
-            component: 'fdkDisabledRecipientDirective'
+            fileName: 'disabled-example',
+            component: 'DisabledExampleComponent'
         }
     ];
 

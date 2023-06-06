@@ -1,15 +1,14 @@
-<button
-    class="fd-alert__close"
-    fd-button
-    glyph="decline"
-    fdCompact
-    fdType="transparent"
-    *ngIf="dismissible"
-    (click)="dismiss(undefined, true)"
-    [attr.aria-controls]="id"
-    [attr.aria-label]="dismissLabel"
-></button>
-<p class="fd-alert__text">
+<fd-message-strip
+    [dismissLabel]="dismissLabel"
+    [ariaLabelledBy]="ariaLabelledBy"
+    [ariaLabel]="ariaLabel"
+    [width]="width"
+    [minWidth]="minWidth"
+    [dismissible]="dismissible"
+    [id]="id"
+    [type]="type"
+    (onDismiss)="onDismiss.emit($event)"
+>
     <ng-container #container>{{ message }}</ng-container>
     <ng-content></ng-content>
-</p>
+</fd-message-strip>

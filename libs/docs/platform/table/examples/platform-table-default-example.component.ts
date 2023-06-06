@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
@@ -7,6 +7,8 @@ import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx
 @Component({
     selector: 'fdp-platform-table-default-example',
     templateUrl: './platform-table-default-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     styles: [
         `
             :host {

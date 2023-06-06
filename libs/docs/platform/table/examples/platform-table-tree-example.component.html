@@ -5,6 +5,7 @@
     [enableTristateMode]="true"
     relationKey="children"
     emptyTableMessage="No data found"
+    [dropPredicate]="dropPredicate"
     (rowSelectionChange)="onRowSelectionChange($event)"
     (rowToggleOpenState)="onRowToggleOpenState($event)"
     (rowsRearrange)="onRowsRearrange($event)"

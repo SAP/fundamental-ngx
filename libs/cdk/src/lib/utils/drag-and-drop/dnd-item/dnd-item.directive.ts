@@ -7,19 +7,24 @@ import {
     HostBinding,
     Input,
     OnDestroy,
-    Output
+    Output,
+    Renderer2
 } from '@angular/core';
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { DndItem, ElementChord, ElementPosition, LinkPosition } from '../dnd.interfaces';
 import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { DND_ITEM } from '../tokens';
+import { Nullable } from '../../models/nullable';
 
 @Directive({
     selector: '[fdkDndItem], [fd-dnd-item]',
     providers: [DragDrop, { provide: DND_ITEM, useExisting: forwardRef(() => DndItemDirective) }]
 })
-export class DndItemDirective implements DndItem, AfterContentInit, OnDestroy {
+export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnDestroy {
+    /** Item reference. Used for cases when `[items]` array of dnd list is different than `dndItems` content children. */
+    @Input('fdkDndItem')
+    item: Nullable<T>;
     /**
      * Whether to apply "fd-dnd-item" class.
      * @default true
@@ -86,7 +91,11 @@ export class DndItemDirective implements DndItem, AfterContentInit, OnDestroy {
     private _replaceIndicator: HTMLElement | null;
 
     /** @hidden */
-    constructor(public elementRef: ElementRef, private _dragDrop: DragDrop) {}
+    constructor(
+        public readonly elementRef: ElementRef,
+        private readonly _dragDrop: DragDrop,
+        private readonly _renderer: Renderer2
+    ) {}
 
     /** @hidden */
     getElementCoordinates(isBefore: boolean): ElementChord {
@@ -224,6 +233,18 @@ export class DndItemDirective implements DndItem, AfterContentInit, OnDestroy {
     changeCDKDragState(): void {
         if (this._dragRef) {
             this._dragRef.disabled = !(this._draggable && this.listDraggable);
+        }
+    }
+
+    /**
+     * Sets the disabled state of the dnd item.
+     * @param state
+     */
+    setDisabledState(state: boolean): void {
+        if (state) {
+            this._renderer.addClass(this.elementRef.nativeElement, 'fd-dnd-item--disabled');
+        } else {
+            this._renderer.removeClass(this.elementRef.nativeElement, 'fd-dnd-item--disabled');
         }
     }
 

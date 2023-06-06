@@ -1,3 +1,96 @@
+# [0.42.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.10...v0.42.0-rc.11) (2023-06-06)
+
+
+### Bug Fixes
+
+* **core:** added blocking of the document scroll when dialog is open ([#9948](https://github.com/SAP/fundamental-ngx/issues/9948)) ([4f8093f](https://github.com/SAP/fundamental-ngx/commit/4f8093f7ff6c3b55593e4f751c83c1b17c8ebb1a))
+
+
+
+# [0.42.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.9...v0.42.0-rc.10) (2023-06-05)
+
+
+
+# [0.42.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.8...v0.42.0-rc.9) (2023-06-05)
+
+
+
+# [0.42.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.7...v0.42.0-rc.8) (2023-06-05)
+
+
+### Bug Fixes
+
+* **core:** fixed popover arrow placement ([#9946](https://github.com/SAP/fundamental-ngx/issues/9946)) ([b7d5cb6](https://github.com/SAP/fundamental-ngx/commit/b7d5cb618e93449cb77553cfbe2836d2b35deef4))
+
+
+
+# [0.42.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.6...v0.42.0-rc.7) (2023-06-02)
+
+
+### Bug Fixes
+
+* **core:** escape key when using focusable grid closes dialog ([#9962](https://github.com/SAP/fundamental-ngx/issues/9962)) ([3508177](https://github.com/SAP/fundamental-ngx/commit/3508177b0c2dfdc731c44dc05aebf4d70bef917f))
+
+
+
+# [0.42.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.5...v0.42.0-rc.6) (2023-06-02)
+
+
+### Bug Fixes
+
+* **core:** multi input, various fixes and doc updates ([#9961](https://github.com/SAP/fundamental-ngx/issues/9961)) ([6faa0bc](https://github.com/SAP/fundamental-ngx/commit/6faa0bc349e8587cf7af86ed6deddd2e9529a2ad))
+
+
+
+# [0.42.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.4...v0.42.0-rc.5) (2023-06-02)
+
+
+### Bug Fixes
+
+* **core:** select focus on page load bug ([#9969](https://github.com/SAP/fundamental-ngx/issues/9969)) ([38da804](https://github.com/SAP/fundamental-ngx/commit/38da804e5674ac905139bf0550644367683cc7cb))
+
+
+
+# [0.42.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.3...v0.42.0-rc.4) (2023-06-02)
+
+
+
+# [0.42.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.2...v0.42.0-rc.3) (2023-06-01)
+
+
+### Bug Fixes
+
+* **platform:** add rowheader role input option ([#9956](https://github.com/SAP/fundamental-ngx/issues/9956)) ([e1cddff](https://github.com/SAP/fundamental-ngx/commit/e1cddffee3f033348ab437ea07ef1beaf1577514))
+
+
+
+# [0.42.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.1...v0.42.0-rc.2) (2023-06-01)
+
+
+### Bug Fixes
+
+* **core:** list accessibility updates ([#9883](https://github.com/SAP/fundamental-ngx/issues/9883)) ([8c57d08](https://github.com/SAP/fundamental-ngx/commit/8c57d08208f9ceaf187e025cabf4e19509d0181d))
+
+
+
+# [0.42.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.0...v0.42.0-rc.1) (2023-05-31)
+
+
+
+# [0.42.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.9...v0.42.0-rc.0) (2023-05-30)
+
+
+### Features
+
+* **cdk,platform:** dnd predicate ([#9921](https://github.com/SAP/fundamental-ngx/issues/9921)) ([402b8b5](https://github.com/SAP/fundamental-ngx/commit/402b8b5deee3284e9e2a5bb5a6b1327e82714b81))
+
+
+### BREAKING CHANGES
+
+* **cdk,platform:** Moved async-strategy from @fundamental-ngx/platform/shared to @fundamental-ngx/cdk/utils;
+
+
+
 ## [0.41.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.41.1-rc.8...v0.41.1-rc.9) (2023-05-26)
 
 

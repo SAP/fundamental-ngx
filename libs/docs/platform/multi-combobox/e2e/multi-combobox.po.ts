@@ -13,12 +13,12 @@ export class MultiComboboxPo extends PlatformBaseComponentPo {
     inputField = this.tokenInputField + ' .fd-input';
     list = '.fd-popover__body .fd-list';
     listItemCheckbox = this.list + ' fd-checkbox';
-    listItem = this.list + ' li.fd-list__item[role="listitem"]';
+    listItem = this.list + ' li.fd-list__item[role="option"]';
     selectedListItem = this.list + ' .fd-list__item.is-selected .fd-list__title';
 
     dialog = '[role="dialog"]';
     dialogButton = this.dialog + ' .fd-button';
-    dialogListItem = this.dialog + ' .fd-list__item[role="listitem"]';
+    dialogListItem = this.dialog + ' .fd-list__item[role="option"]';
     selectedDialogItem = this.dialog + ' .fd-list__item.is-selected .fd-list__title';
     dialogInput = this.dialog + ' #mobile';
     showSelectedItemsBtn = this.dialog + ' .fd-margin-begin--tiny';

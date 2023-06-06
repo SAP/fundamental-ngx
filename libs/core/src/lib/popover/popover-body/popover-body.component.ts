@@ -139,11 +139,13 @@ export class PopoverBodyComponent {
             if (rtl === 'rtl') {
                 overlayX = position.overlayX === 'end' ? 'start' : 'end';
             }
-
+            // TODO: Remove after new fundamental-styles version release.
+            const originY = position.originY === 'bottom' ? 'end' : position.originY;
+            // End TODO
             this._arrowClasses =
                 `fd-popover__body--${overlayX === 'start' ? 'after' : 'before'}` +
                 ` fd-popover__body--arrow-${overlayX === 'start' ? 'left' : 'right'}` +
-                ` fd-popover__body--arrow-y-${position.originY} `;
+                ` fd-popover__body--arrow-y-${originY} `;
         } else {
             this._arrowClasses = 'fd-popover__body--no-arrow';
         }
