@@ -1,3 +1,12 @@
+# [0.42.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.11...v0.42.0-rc.12) (2023-06-06)
+
+
+### Bug Fixes
+
+* **platform:** do not  use fdkClicked ([#9987](https://github.com/SAP/fundamental-ngx/issues/9987)) ([a5621ad](https://github.com/SAP/fundamental-ngx/commit/a5621adf3c6af0816754f39af13dc6470f26f073))
+
+
+
 # [0.42.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.10...v0.42.0-rc.11) (2023-06-06)
 
 
