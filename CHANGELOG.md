@@ -1,3 +1,12 @@
+# [0.42.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.12...v0.42.0-rc.13) (2023-06-06)
+
+
+### Bug Fixes
+
+* **platform:** add Tooltip header update ([#9947](https://github.com/SAP/fundamental-ngx/issues/9947)) ([c989f73](https://github.com/SAP/fundamental-ngx/commit/c989f7326d690e77d7579b02ee22c5cc7736d8ba))
+
+
+
 # [0.42.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.11...v0.42.0-rc.12) (2023-06-06)
 
 
