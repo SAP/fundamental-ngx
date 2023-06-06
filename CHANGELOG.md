@@ -1,3 +1,12 @@
+# [0.42.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.10...v0.42.0-rc.11) (2023-06-06)
+
+
+### Bug Fixes
+
+* **core:** added blocking of the document scroll when dialog is open ([#9948](https://github.com/SAP/fundamental-ngx/issues/9948)) ([4f8093f](https://github.com/SAP/fundamental-ngx/commit/4f8093f7ff6c3b55593e4f751c83c1b17c8ebb1a))
+
+
+
 # [0.42.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.9...v0.42.0-rc.10) (2023-06-05)
 
 
