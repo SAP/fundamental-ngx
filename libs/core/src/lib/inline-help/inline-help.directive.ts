@@ -9,6 +9,7 @@ import {
     OnDestroy,
     OnInit,
     Optional,
+    Renderer2,
     Self,
     SimpleChanges,
     TemplateRef,
@@ -94,6 +95,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     constructor(
         private _popoverService: PopoverService,
         private _elementRef: ElementRef,
+        private _renderer: Renderer2,
         @Optional() @Self() @Inject(FD_ICON_COMPONENT) private _icon: Type<any>
     ) {
         super();
@@ -135,7 +137,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
 
     /** @hidden */
     private _setupScreenreaderElement(content: string | Nullable<TemplateRef<any>>): void {
-        let srElement = document.createElement('span');
+        let srElement = this._renderer.createElement('span');
         if (typeof content === 'string') {
             srElement.innerText = content;
         } else if (content) {
@@ -145,6 +147,6 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         if (srElement.style) {
             srElement.style.cssText = `position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);`;
         }
-        this._elementRef.nativeElement.append(srElement);
+        this._renderer.appendChild(this._elementRef.nativeElement, srElement);
     }
 }
