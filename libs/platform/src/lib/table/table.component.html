@@ -274,7 +274,9 @@
                                         [tristate]="enableTristateMode"
                                         [tristateSelectable]="false"
                                         [ngModel]="row.checked"
-                                        (fdkClicked)="_toggleMultiSelectRow(row, $event)"
+                                        (click)="_toggleMultiSelectRow(row, $event)"
+                                        (keydown.enter)="_toggleMultiSelectRow(row, $event)"
+                                        (keydown.space)="_toggleMultiSelectRow(row, $event)"
                                     ></fd-checkbox>
                                 </td>
                             </ng-container>
