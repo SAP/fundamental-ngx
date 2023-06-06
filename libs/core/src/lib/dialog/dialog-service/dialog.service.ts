@@ -1,4 +1,4 @@
-import { Inject, Injectable, Injector, Optional } from '@angular/core';
+import { inject, Inject, Injectable, Injector, Optional, PLATFORM_ID } from '@angular/core';
 import { takeUntil } from 'rxjs';
 import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
 import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../utils/dialog-config.class';
@@ -8,10 +8,16 @@ import { DialogBaseService } from '../base/dialog-base.service';
 import { DialogContentType } from '../dialog.types';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
+import { isPlatformBrowser } from '@angular/common';
 
 /** Service used to create a dialog. */
 @Injectable()
 export class DialogService extends DialogBaseService<DialogContainerComponent> {
+    /** @hidden */
+    private platformId = inject(PLATFORM_ID);
+    /** @hidden */
+    private readonly htmlElement?: HTMLHtmlElement;
+
     /** @hidden */
     constructor(
         @Optional() @Inject(DIALOG_DEFAULT_CONFIG) private _defaultConfig: DialogConfig,
@@ -20,6 +26,9 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
         private readonly _overlay: Overlay
     ) {
         super();
+        if (isPlatformBrowser(this.platformId)) {
+            this.htmlElement = document.querySelector('html') as HTMLHtmlElement;
+        }
     }
 
     /**
@@ -64,10 +73,12 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
 
         this._dialogs.push(componentRef);
 
+        this.htmlElement && (this.htmlElement.style.overflow = 'hidden');
         dialogRef._endClose$.pipe(takeUntil(this._destroy$)).subscribe(() => {
             this._destroyDialog(componentRef);
             componentRef.destroy();
             overlayRef.dispose();
+            this.htmlElement && (this.htmlElement.style.overflow = '');
         });
 
         return dialogRef;
