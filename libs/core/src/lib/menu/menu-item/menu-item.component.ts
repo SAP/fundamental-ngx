@@ -29,6 +29,7 @@ import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
 import { MenuService } from '../services/menu.service';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 let menuUniqueId = 0;
 
@@ -39,7 +40,9 @@ export interface BaseSubmenu {
     ariaLabel: Nullable<string>;
     ariaLabelledby: Nullable<string>;
     _menuItemsChange$: Observable<void>;
+
     _registerItem(item: MenuItemComponent): void;
+
     _unregisterItem(item: MenuItemComponent): void;
 }
 
@@ -53,8 +56,9 @@ export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component depend
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
-        'attr.role': 'menuitem',
-        '[class.fd-menu__item]': 'true'
+        '[attr.role]': '"menuitem"',
+        '[class.fd-menu__item]': 'true',
+        '[class.has-separator]': '_hasSeparator'
     }
 })
 export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, AfterContentInit, OnDestroy {
@@ -73,6 +77,11 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     /** Reference to the parent submenu if nested menus created dynamically */
     @Input()
     parentSubmenu: BaseSubmenu | undefined;
+    /** Whether the menu item has a separator */
+    @Input()
+    set hasSeparator(value: BooleanInput) {
+        this._hasSeparator = coerceBooleanProperty(value);
+    }
 
     /** Emitted when the menu item is selected. */
     @Output()
@@ -95,6 +104,9 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
 
     /** @hidden */
     private _hoverSubscriptions: Subscription = new Subscription();
+
+    /** @hidden */
+    protected _hasSeparator = false;
 
     /** @hidden */
     constructor(
