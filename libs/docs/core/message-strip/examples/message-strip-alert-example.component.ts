@@ -60,14 +60,14 @@ class ExampleStripAlertFooterComponent {
     selector: 'message-strip-alert-example',
     template: `
         <div>
-            <button fd-button (click)="openText()">Open Text</button>
-            <button fd-button (click)="openTemplate(template)">Open Template</button>
-            <button fd-button (click)="openComponent()">Open Component</button>
+            <button fd-button (click)="openText()">Open Text top-left</button>
+            <button fd-button (click)="openTemplate(template)">Open Template top-middle</button>
+            <button fd-button (click)="openComponent()">Open Component top-end</button>
         </div>
         <div>
-            <button fd-button (click)="openText('bottom')">Open Text from bottom</button>
-            <button fd-button (click)="openTemplate(template, 'bottom')">Open Template from bottom</button>
-            <button fd-button (click)="openComponent('bottom')">Open Component from bottom</button>
+            <button fd-button (click)="openText('bottom')">Open Text bottom-left</button>
+            <button fd-button (click)="openTemplate(template, 'bottom')">Open Template bottom-middle</button>
+            <button fd-button (click)="openComponent('bottom')">Open Component bottom-right</button>
         </div>
         <ng-template #template let-alertRef>
             Template works, hooray!
