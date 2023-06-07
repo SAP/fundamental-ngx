@@ -1,6 +1,6 @@
 import { AfterContentInit, Directive, HostBinding, Input, QueryList, ContentChildren } from '@angular/core';
 import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
-import { DestroyedService, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
+import { DestroyedService, FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { BooleanInput } from '@angular/cdk/coercion';
 
 @Directive({
@@ -8,6 +8,10 @@ import { BooleanInput } from '@angular/cdk/coercion';
     providers: [
         {
             provide: FocusableItemDirective,
+            useExisting: TableCellDirective
+        },
+        {
+            provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
             useExisting: TableCellDirective
         },
         DestroyedService

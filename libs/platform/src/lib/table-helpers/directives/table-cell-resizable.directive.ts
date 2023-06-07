@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Directive, inject, Input, OnDestroy, OnInit } from '@angular/core';
 
-import { FocusableItemDirective, RtlService } from '@fundamental-ngx/cdk/utils';
+import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective, RtlService } from '@fundamental-ngx/cdk/utils';
 import { TableCellDirective } from '@fundamental-ngx/core/table';
 import equal from 'fast-deep-equal';
 import { TableColumnResizeService } from '../services/table-column-resize.service';
@@ -18,6 +18,10 @@ export const TABLE_CELL_RESIZABLE_THRESHOLD_PX = 4;
     selector: '[fdpTableCellResizable]',
     standalone: true,
     providers: [
+        {
+            provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
+            useExisting: PlatformTableCellResizableDirective
+        },
         {
             provide: FocusableItemDirective,
             useExisting: PlatformTableCellResizableDirective

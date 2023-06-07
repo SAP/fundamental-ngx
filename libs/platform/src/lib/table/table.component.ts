@@ -582,12 +582,14 @@ export class TableComponent<T = any>
             columns: this._isShownColumnSettingsInToolbar$
         };
 
-        this._subscriptions.add(
-            this._rtlService.rtl.subscribe((isRtl) => {
-                this._rtl = isRtl;
-                this._cdr.markForCheck();
-            })
-        );
+        if (this._rtlService) {
+            this._subscriptions.add(
+                this._rtlService.rtl.subscribe((isRtl) => {
+                    this._rtl = isRtl;
+                    this._cdr.markForCheck();
+                })
+            );
+        }
     }
 
     /** @hidden */
