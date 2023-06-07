@@ -1,3 +1,34 @@
+# [0.42.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.12...v0.42.0-rc.13) (2023-06-06)
+
+
+### Bug Fixes
+
+* **platform:** add Tooltip header update ([#9947](https://github.com/SAP/fundamental-ngx/issues/9947)) ([c989f73](https://github.com/SAP/fundamental-ngx/commit/c989f7326d690e77d7579b02ee22c5cc7736d8ba))
+
+
+
+# [0.42.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.11...v0.42.0-rc.12) (2023-06-06)
+
+
+### Bug Fixes
+
+* **platform:** do not  use fdkClicked ([#9987](https://github.com/SAP/fundamental-ngx/issues/9987)) ([a5621ad](https://github.com/SAP/fundamental-ngx/commit/a5621adf3c6af0816754f39af13dc6470f26f073))
+
+
+
+# [0.42.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.10...v0.42.0-rc.11) (2023-06-06)
+
+
+### Bug Fixes
+
+* **core:** added blocking of the document scroll when dialog is open ([#9948](https://github.com/SAP/fundamental-ngx/issues/9948)) ([4f8093f](https://github.com/SAP/fundamental-ngx/commit/4f8093f7ff6c3b55593e4f751c83c1b17c8ebb1a))
+
+
+
+# [0.42.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.9...v0.42.0-rc.10) (2023-06-05)
+
+
+
 # [0.42.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.8...v0.42.0-rc.9) (2023-06-05)
 
 
