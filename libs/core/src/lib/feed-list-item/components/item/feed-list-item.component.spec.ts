@@ -48,9 +48,9 @@ describe('FeedListItemComponent', () => {
         component.authorTitle = authorTitle;
         component.authorLink = authorLink;
         fixture.detectChanges();
-        expect(
-            component.elementRef.nativeElement.querySelector('.fd-feed-list__name a > .fd-link__content').innerHTML
-        ).toContain(authorTitle);
+        expect(component.elementRef.nativeElement.querySelector('.fd-feed-list__name a').innerText).toContain(
+            authorTitle
+        );
         expect(component.elementRef.nativeElement.querySelector('.fd-feed-list__name a').getAttribute('href')).toEqual(
             authorLink
         );
@@ -85,16 +85,13 @@ describe('FeedListItemComponent', () => {
         fixture.detectChanges();
         await fixture.whenStable();
         let text = component.elementRef.nativeElement
-            .querySelector('.fd-feed-list__link--more > .fd-link__content')
-            .innerHTML.toLowerCase();
+            .querySelector('.fd-feed-list__link--more')
+            .innerText.toLowerCase();
         expect(text).toEqual(moreLabel);
         component.isCollapsed = false;
         fixture.detectChanges();
         await fixture.whenStable();
-        text = component
-            .elementRef
-            .nativeElement.querySelector('.fd-feed-list__link--more > .fd-link__content')
-            .innerHTML.toLowerCase();
+        text = component.elementRef.nativeElement.querySelector('.fd-feed-list__link--more').innerText.toLowerCase();
         expect(text).toEqual(lessLabel.toLowerCase());
     });
 

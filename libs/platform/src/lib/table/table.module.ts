@@ -18,7 +18,6 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { TableModule } from '@fundamental-ngx/core/table';
 import { ClickedBehaviorModule, DisabledBehaviorModule, PipeModule, RepeatModule } from '@fundamental-ngx/cdk/utils';
-import { TitleModule } from '@fundamental-ngx/core/title';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
@@ -153,11 +152,7 @@ const EXPORTABLE_DECLARATIONS = [
         ClickedBehaviorModule.forRoot(),
         TableHelpersModule
     ],
-    declarations: [
-        ...EXPORTABLE_DECLARATIONS
-    ],
-    exports: [
-        ...EXPORTABLE_DECLARATIONS
-    ]
+    declarations: [...EXPORTABLE_DECLARATIONS],
+    exports: [...EXPORTABLE_DECLARATIONS]
 })
 export class PlatformTableModule {}
