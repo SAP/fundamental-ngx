@@ -153,6 +153,6 @@ const EXPORTABLE_DECLARATIONS = [
         TableHelpersModule
     ],
     declarations: [...EXPORTABLE_DECLARATIONS],
-    exports: [...EXPORTABLE_DECLARATIONS]
+    exports: [...EXPORTABLE_DECLARATIONS, TableHelpersModule]
 })
 export class PlatformTableModule {}
