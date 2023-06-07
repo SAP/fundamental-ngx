@@ -2,6 +2,7 @@
 import {
     Directive,
     ElementRef,
+    EmbeddedViewRef,
     Inject,
     Input,
     isDevMode,
@@ -13,7 +14,8 @@ import {
     Self,
     SimpleChanges,
     TemplateRef,
-    Type
+    Type,
+    ViewContainerRef
 } from '@angular/core';
 import { PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
 import { BasePopoverClass } from '@fundamental-ngx/core/popover';
@@ -75,6 +77,9 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     /** @hidden */
     _describedBy = '';
 
+    /** @hidden */
+    private _srViewRef: EmbeddedViewRef<any>;
+
     /**
      * Inline help template to display inside generated popover
      * @deprecated Use `fd-inline-help` instead
@@ -96,6 +101,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         private _popoverService: PopoverService,
         private _elementRef: ElementRef,
         private _renderer: Renderer2,
+        private readonly _viewContainerRef: ViewContainerRef,
         @Optional() @Self() @Inject(FD_ICON_COMPONENT) private _icon: Type<any>
     ) {
         super();
@@ -137,11 +143,14 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
 
     /** @hidden */
     private _setupScreenreaderElement(content: string | Nullable<TemplateRef<any>>): void {
+        this._viewContainerRef.clear();
         let srElement = this._renderer.createElement('span');
         if (typeof content === 'string') {
             srElement.innerText = content;
         } else if (content) {
-            srElement = content.createEmbeddedView(content).rootNodes[0];
+            this._srViewRef = content.createEmbeddedView(null);
+            this._viewContainerRef.insert(this._srViewRef);
+            srElement = this._srViewRef.rootNodes[0];
         }
 
         if (srElement.style) {
