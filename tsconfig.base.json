@@ -77,7 +77,6 @@
             "@fundamental-ngx/core/message-box": ["libs/core/src/lib/message-box/index.ts"],
             "@fundamental-ngx/core/message-page": ["libs/core/src/lib/message-page/index.ts"],
             "@fundamental-ngx/core/message-strip": ["libs/core/src/lib/message-strip/index.ts"],
-            "@fundamental-ngx/core/message-strip/alert": ["libs/core/src/lib/message-strip/alert/index.ts"],
             "@fundamental-ngx/core/message-toast": ["libs/core/src/lib/message-toast/index.ts"],
             "@fundamental-ngx/core/micro-process-flow": ["libs/core/src/lib/micro-process-flow/index.ts"],
             "@fundamental-ngx/core/mobile-mode": ["libs/core/src/lib/mobile-mode/index.ts"],

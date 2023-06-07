@@ -16,7 +16,7 @@ import { StackblitzService } from '../stackblitz/stackblitz.service';
 import { CodeSnippetComponent } from '../code-snippet/code-snippet.component';
 import { isObservable, Observable, of, ReplaySubject, shareReplay, switchMap, tap, zip } from 'rxjs';
 import { catchError, map, startWith } from 'rxjs/operators';
-import { MessageStripAlertService } from '@fundamental-ngx/core/message-strip/alert';
+import { MessageStripAlertService } from '@fundamental-ngx/core/message-strip';
 
 enum ExampleEntityState {
     loading,

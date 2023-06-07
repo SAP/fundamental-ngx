@@ -3,7 +3,7 @@ import {
     MessageStripAlertContainerAlertRefs,
     MessageStripAlertRef,
     MessageStripAlertService
-} from '@fundamental-ngx/core/message-strip/alert';
+} from '@fundamental-ngx/core/message-strip';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
