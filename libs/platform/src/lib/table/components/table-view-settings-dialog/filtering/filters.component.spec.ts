@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { Table } from '../../../table';
+import { Table } from '@fundamental-ngx/platform/table-helpers';
 import { FiltersComponent } from './filters.component';
 import { PlatformTableModule } from '../../../table.module';
 

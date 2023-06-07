@@ -17,7 +17,7 @@ export class NotificationIndicatorDirective implements OnChanges, OnInit, CssCla
     class: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -37,10 +37,5 @@ export class NotificationIndicatorDirective implements OnChanges, OnInit, CssCla
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-notification__indicator', this.type ? 'fd-notification__indicator--' + this.type : '', this.class];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }

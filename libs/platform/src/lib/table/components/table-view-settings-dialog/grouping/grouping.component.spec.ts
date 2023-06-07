@@ -2,10 +2,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { Table } from '../../../table';
+import { SortDirection, Table } from '@fundamental-ngx/platform/table-helpers';
 import { GroupingComponent } from './grouping.component';
 import { PlatformTableModule } from '../../../table.module';
-import { SortDirection } from '../../../enums';
 
 describe('PlatformTableGroupDialogComponent', () => {
     let component: GroupingComponent;

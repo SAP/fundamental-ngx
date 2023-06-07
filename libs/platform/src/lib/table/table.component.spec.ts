@@ -8,13 +8,24 @@ import { Observable, of } from 'rxjs';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
-import { TableDataProvider, TableDataSource } from './domain';
-import { FILTER_STRING_STRATEGY, FilterableColumnDataType, SelectionMode, SortDirection, TableRowType } from './enums';
-import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
-import { TableRowClass, TableRowSelectionChangeEvent, TableRowToggleOpenStateEvent } from './models';
 import { TableComponent } from './table.component';
 import { PlatformTableModule } from './table.module';
-import { TableService } from './table.service';
+import {
+    CollectionFilter,
+    CollectionGroup,
+    CollectionSort,
+    SelectionMode,
+    SortDirection,
+    TableDataProvider,
+    TableDataSource,
+    TableDraggable,
+    TableRowClass,
+    TableRowSelectionChangeEvent,
+    TableRowToggleOpenStateEvent,
+    TableRowType,
+    TableService,
+    TableState
+} from '@fundamental-ngx/platform/table-helpers';
 
 interface SourceItem {
     id: string;
@@ -68,7 +79,7 @@ describe('TableComponent internal', () => {
         fixture = TestBed.createComponent(TableComponent);
         component = fixture.componentInstance;
 
-        component.dataSource = new TableDataSource(new TableDataProviderMock());
+        component._dataSourceDirective.dataSource = new TableDataSource(new TableDataProviderMock());
         tableService = (<any>component)._tableService;
         fixture.detectChanges();
     });
@@ -138,43 +149,6 @@ describe('TableComponent internal', () => {
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(0);
     });
 
-    it('sort by cell header method should call TableService.setSort with a proper params', () => {
-        const field = 'price.value';
-        const direction = SortDirection.ASC;
-        const serviceSortSpy = spyOn(tableService, 'setSort').and.stub();
-
-        component._columnHeaderSortBy(field, direction);
-
-        expect(serviceSortSpy).toHaveBeenCalledWith([{ field, direction }]);
-    });
-
-    it('filter by cell header method should call TableService.addFilters with a proper params', () => {
-        const field = 'status';
-        const value = 'valid';
-        const payload: CollectionStringFilter = {
-            field,
-            value,
-            type: FilterableColumnDataType.STRING,
-            strategy: FILTER_STRING_STRATEGY.CONTAINS,
-            exclude: false
-        };
-        const serviceFilterSpy = spyOn(tableService, 'addFilters').and.stub();
-
-        component._columnHeaderFilterBy(field, value);
-
-        expect(serviceFilterSpy).toHaveBeenCalledWith([payload]);
-    });
-
-    it('group by cell header method should call TableService.setGroups with a proper params', () => {
-        const field = 'price.value';
-        const payload: CollectionGroup[] = [{ field, direction: SortDirection.NONE, showAsColumn: true }];
-        const serviceGroupSpy = spyOn(tableService, 'setGroups').and.stub();
-
-        component._columnHeaderGroupBy(field);
-
-        expect(serviceGroupSpy).toHaveBeenCalledWith(payload);
-    });
-
     it('freezeTo method should call TableService.freezeTo and set freezable info', async () => {
         const columnKey = 'description';
         const serviceFreezeToSpy = spyOn(tableService, 'freezeTo').and.stub();
@@ -222,7 +196,7 @@ describe('TableComponent internal', () => {
         selection: SelectionMode = SelectionMode.NONE;
         /** So big so table column won't grow on any device */
         customColumnWidth = 10000;
-        rowsClass: TableRowClass<any> = 'class';
+        rowsClass: TableRowClass = 'class';
         showIdColumn = false;
     }
 
@@ -1051,6 +1025,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         let hostComponent: TableHostComponent;
         let fixture: ComponentFixture<TableHostComponent>;
         let tableComponent: TableComponent<SourceItem>;
+        let dndDirective: TableDraggable;
 
         let tableBodyRows: DebugElement[] = [];
         let tableRowTogglerCellsArray: DebugElement[] = [];
@@ -1078,6 +1053,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
             fixture.detectChanges();
 
             tableComponent = hostComponent.table;
+            dndDirective = tableComponent._dndTableDirective!;
         });
 
         beforeEach(() => {
@@ -1174,7 +1150,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
             it('should rearrange table rows on drop', () => {
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
-                tableComponent._dragDropItemDrop({
+                dndDirective.dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 0,
                     draggedItemIndex: 1,
@@ -1190,11 +1166,11 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
             });
 
             it('should emit event after rearranging rows', async () => {
-                const emitSpy = spyOn(tableComponent.rowsRearrange, 'emit').and.callThrough();
+                const emitSpy = spyOn(dndDirective.rowsRearrange, 'emit').and.callThrough();
 
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
-                tableComponent._dragDropItemDrop({
+                dndDirective.dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 0,
                     draggedItemIndex: 1,
@@ -1209,7 +1185,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
             });
 
             it('should update dragged rows attributes', async () => {
-                tableComponent._dragDropItemDrop({
+                dndDirective.dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 0,
                     draggedItemIndex: 1,
@@ -1236,7 +1212,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 expect(tableBodyRows.length).toEqual(treeItemParentsCount + treeItemsChildrenPerParentCount * 1);
 
-                tableComponent._dragDropItemDrop({
+                dndDirective.dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 1,
                     draggedItemIndex: 0,
@@ -1259,7 +1235,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 fixture.detectChanges();
 
-                tableComponent._dragDropItemDrop({
+                dndDirective.dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 2,
                     draggedItemIndex: 1,
@@ -1280,7 +1256,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 const draggedRow = tableComponent._tableRowsVisible[1];
                 const row3 = tableComponent._tableRowsVisible[2];
 
-                tableComponent._dragDropItemDrop({
+                dndDirective.dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 2,
                     draggedItemIndex: 1,
@@ -1299,7 +1275,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
             it('should correctly drag and drop first element to last element', async () => {
                 const draggedRow = tableComponent._tableRowsVisible[0];
 
-                tableComponent._dragDropItemDrop({
+                dndDirective.dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 9,
                     draggedItemIndex: 0,
@@ -1316,7 +1292,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
             it('should correctly drag and drop last element to first element', async () => {
                 const draggedRow = tableComponent._tableRowsVisible[9];
 
-                tableComponent._dragDropItemDrop({
+                dndDirective.dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 0,
                     draggedItemIndex: 9,
@@ -1333,7 +1309,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
             it('should correctly drag and drop first element to in-between', async () => {
                 const draggedRow = tableComponent._tableRowsVisible[0];
 
-                tableComponent._dragDropItemDrop({
+                dndDirective.dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 5,
                     draggedItemIndex: 0,
@@ -1350,7 +1326,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
             it('should correctly drag and drop last element to in-between', async () => {
                 const draggedRow = tableComponent._tableRowsVisible[9];
 
-                tableComponent._dragDropItemDrop({
+                dndDirective.dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 5,
                     draggedItemIndex: 9,

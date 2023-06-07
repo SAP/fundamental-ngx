@@ -9,10 +9,5 @@ export class ListNavigationItemTextDirective {
     navigationItemTextClass = true;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
-
-    /** @hidden */
-    get elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
-    }
+    constructor(public readonly elementRef: ElementRef) {}
 }

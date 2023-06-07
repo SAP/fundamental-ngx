@@ -1,0 +1,8 @@
+<fd-checkbox
+    *ngIf="selectionMode === SELECTION_MODE.SINGLE"
+    labelClass="fd-table__checkbox-label"
+    [tristate]="enableTristateMode"
+    [tristateSelectable]="false"
+    [ngModel]="row.checked$ | async"
+    (fdkClicked)="_toggleMultiSelectRow(row, $event)"
+></fd-checkbox>

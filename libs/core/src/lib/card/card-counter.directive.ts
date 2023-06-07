@@ -22,7 +22,7 @@ export class CardCounterDirective implements OnInit, OnChanges, CssClassBuilder 
     class: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>) {}
+    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -39,10 +39,5 @@ export class CardCounterDirective implements OnInit, OnChanges, CssClassBuilder 
     buildComponentCssClass(): string[] {
         const objectStatusClasses = buildObjectStatusCssClasses(this);
         return [CLASS_NAME.cardCounter, ...objectStatusClasses];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }

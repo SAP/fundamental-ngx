@@ -47,7 +47,7 @@ export abstract class NotificationGroupBaseDirective implements AfterViewInit, O
                 this.notificationActions.forEach((actionsComponent) => {
                     actionsComponent.buttons
                         .toArray()
-                        .map((b) => b.elementRef().nativeElement)
+                        .map((b) => b.elementRef.nativeElement)
                         // skipping buttons that already have this attribute
                         .filter((b) => !b.hasAttribute('aria-describedby'))
                         .forEach((b) => {

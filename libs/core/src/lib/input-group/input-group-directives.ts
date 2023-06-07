@@ -28,7 +28,10 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _contentDensityObserver: ContentDensityObserver) {
+    constructor(
+        public readonly elementRef: ElementRef,
+        private readonly _contentDensityObserver: ContentDensityObserver
+    ) {
         _contentDensityObserver.subscribe();
     }
 
@@ -55,11 +58,6 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-input', 'fd-input-group__input'];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
     }
 }
 
@@ -111,7 +109,7 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef,
+        public readonly elementRef: ElementRef,
         private renderer: Renderer2,
         private _contentDensityObserver: ContentDensityObserver
     ) {
@@ -131,7 +129,7 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
     /** @hidden */
     ngAfterContentInit(): void {
         /** Add fd-input-group__button to button child element */
-        const button = this._elementRef.nativeElement.querySelector('button');
+        const button = this.elementRef.nativeElement.querySelector('button');
         if (button) {
             this.renderer.addClass(button, 'fd-input-group__button');
         }
@@ -155,11 +153,6 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
             this.type ? 'fd-input-group__addon--' + this.type : '',
             this.state ? 'is-' + this.state : ''
         ];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
     }
 }
 

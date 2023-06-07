@@ -123,7 +123,15 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
 
     /** @hidden */
     @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE, { descendants: true })
-    public readonly _focusableItems: QueryList<FocusableItemDirective>;
+    public readonly _projectedFocusableItems: QueryList<FocusableItemDirective>;
+
+    /** @hidden */
+    get _focusableItems(): QueryList<FocusableItemDirective> {
+        return this._items ? this._items : this._projectedFocusableItems;
+    }
+
+    /** @hidden */
+    _items: QueryList<FocusableItemDirective> | undefined;
 
     /** @hidden */
     public readonly _gridItemFocused$ = new Subject<FocusableItemPosition>();
@@ -145,6 +153,9 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
 
     /** @hidden */
     private readonly _refreshItems$ = new Subject<void>();
+
+    /** @hidden */
+    private readonly _refresh$ = new Subject<void>();
 
     /** @hidden */
     @HostBinding('attr.tabindex')
@@ -194,16 +205,29 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._listenOnItems();
+    }
+
+    /** Set items programmatically. */
+    setItems(items: QueryList<FocusableItemDirective>): void {
+        this._items = items;
+        this._listenOnItems();
+    }
+
+    /** @hidden */
+    private _listenOnItems(): void {
+        const refresh$ = merge(this._refresh$, this._destroy$);
+        this._refresh$.next();
         this._focusableItems.changes
             .pipe(
-                startWith(this._focusableItems),
-                map((queryList) => queryList.toArray()),
+                startWith(null),
+                map(() => this._focusableItems.toArray()),
                 tap((items: FocusableItemDirective[]): void => {
                     const focusableItems: FocusableItem[] = items.map((item, index) => ({
                         index,
                         focusable: () => item.fdkFocusableItem,
-                        elementRef: () => item.elementRef(),
-                        focus: () => item.elementRef().nativeElement.focus(),
+                        elementRef: item.elementRef,
+                        focus: () => item.elementRef.nativeElement.focus(),
                         keydown: item._keydown$
                     }));
 
@@ -215,7 +239,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
                         wrap: this.wrap
                     });
                 }),
-                takeUntil(this._destroy$)
+                takeUntil(refresh$)
             )
             .subscribe();
     }
@@ -269,7 +293,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
         });
 
         if (availableIndex != null) {
-            scrollIntoView(this._focusableItems.get(availableIndex)?.elementRef().nativeElement, scrollPosition);
+            scrollIntoView(this._focusableItems.get(availableIndex)?.elementRef.nativeElement, scrollPosition);
             this._keyManager?.setActiveItem(availableIndex);
         }
     }

@@ -4,12 +4,14 @@ import { filter } from 'rxjs/operators';
 
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
 
-import { CollectionFilter } from '../../interfaces/collection-filter.interface';
-import { CollectionGroup } from '../../interfaces/collection-group.interface';
-import { CollectionSort } from '../../interfaces/collection-sort.interface';
-import { TableState } from '../../interfaces/table-state.interface';
-import { Table } from '../../table';
-import { TableColumn } from '../table-column/table-column';
+import {
+    CollectionFilter,
+    CollectionGroup,
+    CollectionSort,
+    Table,
+    TableColumn,
+    TableState
+} from '@fundamental-ngx/platform/table-helpers';
 
 import { TableP13SortComponent } from './table-p13-sort.component';
 import { TableP13GroupComponent } from './table-p13-group.component';

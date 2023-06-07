@@ -13,7 +13,7 @@ import { SettingsGeneratorModule } from '@fundamental-ngx/platform/settings-gene
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform';
+import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform/message-popover';
 import { SettingsGeneratorDialogExampleComponent } from './examples/dialog/settings-generator-dialog-example.component';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { SettingsGeneratorMessagePopoverExampleComponent } from './examples/message-popover/settings-generator-message-popover-example.component';

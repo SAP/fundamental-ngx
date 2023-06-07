@@ -19,19 +19,19 @@ export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = Data
      * @param source
      */
     @Input()
-    set dataSource(source: DataSource<T>) {
+    set dataSource(source: DataSource<T, P>) {
         this._dataSource = source;
         this.dataSourceChanged.next();
 
         this._initializeDataSource();
     }
 
-    get dataSource(): DataSource<T> {
+    get dataSource(): DataSource<T, P> {
         return this._dataSource;
     }
 
     /** @hidden */
-    private _dataSource: DataSource<T>;
+    private _dataSource: DataSource<T, P>;
 
     /** @hidden */
     dataSourceProvider: P | undefined;

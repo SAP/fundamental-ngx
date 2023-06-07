@@ -137,7 +137,7 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
     itemClicked(breadcrumbItem: BreadcrumbItemComponent, $event: any): void {
         if (breadcrumbItem._needsClickProxy) {
             $event.preventDefault();
-            breadcrumbItem.breadcrumbLink.elementRef().nativeElement.click();
+            breadcrumbItem.breadcrumbLink.elementRef.nativeElement.click();
         }
     }
 

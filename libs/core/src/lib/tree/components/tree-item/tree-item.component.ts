@@ -279,7 +279,7 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
             this._cdr.detectChanges();
         });
 
-        this._dataSourceDirective.dataSource = this.childNodes as DataSource;
+        this._dataSourceDirective.dataSource = this.childNodes as DataSource<T, FdTreeDataSource<T>>;
         this._treeService.addExpandableItem(this.id, this.level, this.expanded);
 
         this._dataSourceDirective.dataSourceProvider

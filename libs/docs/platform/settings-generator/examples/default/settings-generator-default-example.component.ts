@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ThemingService } from '@fundamental-ngx/core/theming';
-import { BaseDynamicFormFieldItem } from '@fundamental-ngx/platform';
 import { ListAvatarConfig } from '@fundamental-ngx/platform/list';
 import { SettingsGeneratorComponent, SettingsModel } from '@fundamental-ngx/platform/settings-generator';
 import { SelectItem } from '@fundamental-ngx/platform/shared';

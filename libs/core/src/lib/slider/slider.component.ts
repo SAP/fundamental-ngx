@@ -349,7 +349,7 @@ export class SliderComponent
 
     /** @hidden */
     constructor(
-        private readonly _elementRef: ElementRef,
+        public readonly elementRef: ElementRef,
         private readonly _cdr: ChangeDetectorRef,
         private readonly _renderer: Renderer2,
         private readonly _platform: Platform,
@@ -432,12 +432,6 @@ export class SliderComponent
             this._platform.EDGE || this._platform.TRIDENT ? 'fd-slider__alternative-tick-width' : ''
         ];
     }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
-    }
-
     /** @hidden */
     onChange: (value: SliderControlValue) => void = () => {};
 

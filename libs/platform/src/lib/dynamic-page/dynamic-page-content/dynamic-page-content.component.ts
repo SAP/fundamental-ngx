@@ -54,12 +54,5 @@ export class DynamicPageContentComponent {
     contentTemplateRef: TemplateRef<any>;
 
     /** @hidden */
-    constructor(protected _elementRef: ElementRef<HTMLElement>) {}
-
-    /**
-     * get reference to this element
-     */
-    getElementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
-    }
+    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 }

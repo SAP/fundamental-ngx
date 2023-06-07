@@ -35,5 +35,5 @@
         }
     },
     "tags": ["type:lib", "scope:fdp"],
-    "implicitDependencies": []
+    "implicitDependencies": ["platform-table-helpers"]
 }

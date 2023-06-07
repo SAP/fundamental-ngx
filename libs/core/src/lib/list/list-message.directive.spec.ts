@@ -36,13 +36,13 @@ describe('ListMessageDirective', () => {
 
     it('should assign class', () => {
         component.directive.buildComponentCssClass();
-        expect(component.directive.elementRef().nativeElement.className).toContain('fd-list__message');
+        expect(component.directive.elementRef.nativeElement.className).toContain('fd-list__message');
     });
 
     it('should assign success class', () => {
         component.type = 'success';
         component.directive.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.directive.elementRef().nativeElement.classList).toContain('fd-list__message--success');
+        expect(component.directive.elementRef.nativeElement.classList).toContain('fd-list__message--success');
     });
 });

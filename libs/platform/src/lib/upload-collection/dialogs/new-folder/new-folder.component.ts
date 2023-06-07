@@ -36,7 +36,7 @@ export class NewFolderComponent implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        const el = this.formControl.elementRef().nativeElement as HTMLInputElement;
+        const el = this.formControl.elementRef.nativeElement as HTMLInputElement;
         if (el) {
             el.focus();
             this._setSelectionRange(el, 0, this._newFolderName.length);

@@ -4,11 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
-import { SortDirection } from '../../../enums/sort-direction.enum';
-import { CollectionSort } from '../../../interfaces';
-import { Table } from '../../../table';
+import { CollectionSort, SortDirection, Table, TableDialogCommonData } from '@fundamental-ngx/platform/table-helpers';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
-import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 
 export interface SettingsSortDialogColumn {
     label: string;
@@ -121,7 +118,7 @@ export class SortingComponent implements Resettable {
      * Since view settings dialog supports only one sorting, get the first one if available.
      */
     private _setInitialSorting(): void {
-        const initialSorting = (this._table.initialSortBy || [])[0];
+        const initialSorting = (this._table.initialState?.initialSortBy || [])[0];
 
         this._initialSorting = {
             field: initialSorting?.field ?? NOT_SORTED_OPTION_VALUE,

@@ -188,7 +188,7 @@ export class RatingIndicatorComponent
     private _hideDynamicText = false;
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(public readonly elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
     /** @hidden */
     get viewRatingUID(): number {
         return this._ratingUID;
@@ -274,11 +274,6 @@ export class RatingIndicatorComponent
         this.onChange(value);
         this.onTouched();
         this.ratingChanged.emit(value);
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<RatingIndicatorComponent & HTMLElement> {
-        return this._elementRef;
     }
 
     /** @hidden

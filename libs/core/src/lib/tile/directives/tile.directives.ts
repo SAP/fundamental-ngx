@@ -134,7 +134,7 @@ export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder 
     ariaLabel = 'Refresh';
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -154,11 +154,6 @@ export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder 
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-tile__refresh', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }
 
@@ -293,7 +288,7 @@ export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuil
     class: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -317,14 +312,9 @@ export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuil
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
-    }
-
-    /** @hidden */
     private _addCloseIcon(): void {
         const element = generateIcon('decline');
-        this._elementRef.nativeElement.appendChild(element);
+        this.elementRef.nativeElement.appendChild(element);
     }
 }
 
@@ -337,7 +327,7 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClass
     class: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -361,14 +351,9 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClass
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
-    }
-
-    /** @hidden */
     private _addIndicatorIcon(): void {
         const element = generateIcon('overflow');
-        this._elementRef.nativeElement.appendChild(element);
+        this.elementRef.nativeElement.appendChild(element);
     }
 }
 

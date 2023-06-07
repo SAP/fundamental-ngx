@@ -11,17 +11,18 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import { TableCellHeaderPopoverDirective } from '../../directives/table-cell-header-popover.directive';
-
-import { ColumnAlignValue } from '../../enums/column-align.enum';
-import { FilterableColumnDataType } from '../../enums/filter-type.enum';
-import { FdpCellDef, FdpEditableCellDef } from '../../directives/table-cell.directive';
-import { FdpHeaderCellDef } from '../../directives/table-header.directive';
-import { FdpColumnResponsiveState } from '../../interfaces/column-responsive-state.interface';
-
-import { TableColumn } from './table-column';
-import { TableService } from '../../table.service';
-import { TableColumnResizeService } from '../../table-column-resize.service';
+import {
+    ColumnAlignValue,
+    FdpCellDef,
+    FdpColumnResponsiveState,
+    FdpEditableCellDef,
+    FdpHeaderCellDef,
+    FilterableColumnDataType,
+    TableCellHeaderPopoverDirective,
+    TableColumn,
+    TableColumnResizeService,
+    TableService
+} from '@fundamental-ngx/platform/table-helpers';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**

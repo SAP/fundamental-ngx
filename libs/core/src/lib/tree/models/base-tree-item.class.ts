@@ -93,7 +93,7 @@ export abstract class BaseTreeItem<T extends TreeItem = TreeItem, P = any>
     abstract childrenLoaded: boolean;
 
     /** @hidden */
-    private readonly _elementRef = inject(ElementRef);
+    public readonly elementRef = inject(ElementRef);
 
     /** @hidden */
     private readonly _treeItemDir = inject(TreeItemDirective, {
@@ -102,11 +102,6 @@ export abstract class BaseTreeItem<T extends TreeItem = TreeItem, P = any>
     /** @hidden */
     constructor() {
         this._treeItemDir?.setTreeItem(this);
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
     }
 
     /** Method to focus on the tree item. */

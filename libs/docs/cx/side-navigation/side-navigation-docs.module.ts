@@ -17,7 +17,7 @@ import { SideNavigationOverflowExampleComponent } from './examples/side-navigati
 import { SideNavigationShellbarExampleComponent } from './examples/side-navigation-shellbar-example.component';
 import { SideNavigationMobileExampleComponent } from './examples/side-navigation-mobile-example.component';
 import { SideNavigationCollapseExampleComponent } from './examples/side-navigation-expand-collapse-example.component';
-import { PlatformSearchFieldModule } from '@fundamental-ngx/platform';
+import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 
 const routes: Routes = [
     {

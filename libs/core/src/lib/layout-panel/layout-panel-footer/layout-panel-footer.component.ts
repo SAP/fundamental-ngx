@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
 import { applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -11,7 +19,7 @@ export type FooterPosition = 'start' | 'end';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LayoutPanelFooterComponent implements OnInit, CssClassBuilder {
+export class LayoutPanelFooterComponent implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */
     @Input()
     class: string;
@@ -23,7 +31,7 @@ export class LayoutPanelFooterComponent implements OnInit, CssClassBuilder {
     @Input() position: Nullable<FooterPosition>;
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef<HTMLElement>) {}
+    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -43,10 +51,5 @@ export class LayoutPanelFooterComponent implements OnInit, CssClassBuilder {
             this.position ? `fd-layout-panel__footer--${this.position}` : '',
             this.class
         ];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
     }
 }

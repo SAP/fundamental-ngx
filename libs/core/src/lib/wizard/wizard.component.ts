@@ -258,7 +258,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     private _getDialogOffset(): number {
         let retVal = 0;
         if (this._dialogBodyComponent) {
-            const dialogBody = this._dialogBodyComponent.elementRef().nativeElement;
+            const dialogBody = this._dialogBodyComponent.elementRef.nativeElement;
             if (dialogBody.tagName.toLowerCase() === 'fd-dialog-body') {
                 this._dialogBodyComponent.dialogConfig.verticalPadding = false;
                 const dialogBodyTitle = dialogBody.querySelector('.fd-title--h2');

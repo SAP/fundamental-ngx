@@ -6,6 +6,7 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
+import { TableDialogCommonData } from '@fundamental-ngx/platform/table-helpers';
 import { BehaviorSubject, Observable, Subscription, combineLatest } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -13,7 +14,6 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
-import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 
 export interface DialogTableColumn {
     label: string;

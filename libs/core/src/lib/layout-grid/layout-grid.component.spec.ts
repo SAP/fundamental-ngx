@@ -32,9 +32,9 @@ describe('LayoutGridComponent', () => {
     it('Should proper css classes', () => {
         fixture.detectChanges();
 
-        expect(componentElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.layoutGrid)).toBeTruthy();
+        expect(componentElement.elementRef.nativeElement.classList.contains(CSS_CLASS_NAME.layoutGrid)).toBeTruthy();
         expect(
-            componentElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.layoutGridNoGap)
+            componentElement.elementRef.nativeElement.classList.contains(CSS_CLASS_NAME.layoutGridNoGap)
         ).toBeTruthy();
     });
 });

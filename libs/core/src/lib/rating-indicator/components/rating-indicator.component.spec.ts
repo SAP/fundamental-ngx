@@ -21,7 +21,7 @@ describe('RatingIndicatorComponent', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(RatingIndicatorComponent);
-        elementRef = fixture.componentInstance.elementRef();
+        elementRef = fixture.componentInstance.elementRef;
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

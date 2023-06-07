@@ -166,7 +166,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
     pointsArray: string[] = [];
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _cd: ChangeDetectorRef) {}
+    constructor(public readonly elementRef: ElementRef<HTMLElement>, private _cd: ChangeDetectorRef) {}
 
     /** @hidden */
     class: string;
@@ -208,11 +208,6 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
-    }
-
-    /** @hidden */
     private _calculateFilling(): void {
         if (this.fillPercentage < 0 || this.fillPercentage === undefined) {
             this.fillCalculator = 0;
@@ -233,7 +228,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
             case 'radial': {
                 const tempPercent = this.fillCalculator % 1;
                 const fillNumber = Number(tempPercent.toFixed(2));
-                const element = this._elementRef.nativeElement.querySelectorAll('svg');
+                const element = this.elementRef.nativeElement.querySelectorAll('svg');
 
                 for (let i = 1; i < element.length; i++) {
                     sPointsAttributeValue = this._getPolygonPointsForCircularFilling(

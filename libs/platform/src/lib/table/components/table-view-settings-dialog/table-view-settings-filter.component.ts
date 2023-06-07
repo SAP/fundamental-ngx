@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
-
-import { TableFilterSelectOption } from '../../interfaces/selection-value.interface';
-import { FilterType } from '../../enums/filter-type.enum';
-import { FdpViewSettingsFilterCustomDef } from '../../directives/table-view-settings-filter-custom.directive';
+import {
+    FdpViewSettingsFilterCustomDef,
+    FilterType,
+    TableFilterSelectOption
+} from '@fundamental-ngx/platform/table-helpers';
 
 /**
  * View settings dialog filter component.

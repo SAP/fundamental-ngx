@@ -39,19 +39,19 @@ describe('MessageStripComponent', () => {
         component.noIcon = true;
         component.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-message-strip--no-icon')).toBe(true);
+        expect(component.elementRef.nativeElement.classList.contains('fd-message-strip--no-icon')).toBe(true);
     });
 
     it('should apply a type', () => {
         component.type = 'success';
         component.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-message-strip--success')).toBe(true);
+        expect(component.elementRef.nativeElement.classList.contains('fd-message-strip--success')).toBe(true);
     });
 
     it('should dismiss', () => {
         component.dismiss();
-        expect(component.elementRef().nativeElement.classList.contains('fd-has-display-block')).toBe(false);
-        expect(component.elementRef().nativeElement.classList.contains('fd-has-display-none')).toBe(true);
+        expect(component.elementRef.nativeElement.classList.contains('fd-has-display-block')).toBe(false);
+        expect(component.elementRef.nativeElement.classList.contains('fd-has-display-none')).toBe(true);
     });
 });

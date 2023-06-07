@@ -109,7 +109,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     hasMore = false;
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     setHasMore(): void {
@@ -150,11 +150,6 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [CSS_CLASS_NAME.item, this.class, this.isRichText ? '' : `${CSS_CLASS_NAME.item}--collapsible`];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 
     /** @hidden */

@@ -23,7 +23,7 @@ export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder 
     class: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -43,10 +43,5 @@ export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder 
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-list__message', this.type ? 'fd-list__message--' + this.type : '', this.class];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }

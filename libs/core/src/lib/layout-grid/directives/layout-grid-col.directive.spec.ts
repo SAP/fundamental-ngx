@@ -54,18 +54,18 @@ describe('LayoutGridColDirective', () => {
     it('Should proper css classes', () => {
         fixture.detectChanges();
 
-        expect(directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.col)).toBeTruthy();
+        expect(directiveElement.elementRef.nativeElement.classList.contains(CSS_CLASS_NAME.col)).toBeTruthy();
         expect(
-            directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.colSizePrefix + COL_SIZE)
+            directiveElement.elementRef.nativeElement.classList.contains(CSS_CLASS_NAME.colSizePrefix + COL_SIZE)
         ).toBeTruthy();
         expect(
-            directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.mdColSizePrefix + MD_COL_SIZE)
+            directiveElement.elementRef.nativeElement.classList.contains(CSS_CLASS_NAME.mdColSizePrefix + MD_COL_SIZE)
         ).toBeTruthy();
         expect(
-            directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.lgColSizePrefix + LG_COL_SIZE)
+            directiveElement.elementRef.nativeElement.classList.contains(CSS_CLASS_NAME.lgColSizePrefix + LG_COL_SIZE)
         ).toBeTruthy();
         expect(
-            directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.xlColSizePrefix + XL_COL_SIZE)
+            directiveElement.elementRef.nativeElement.classList.contains(CSS_CLASS_NAME.xlColSizePrefix + XL_COL_SIZE)
         ).toBeTruthy();
     });
 });

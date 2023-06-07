@@ -13,7 +13,7 @@ export class CardKpiAnalyticsLabelDirective implements OnInit, CssClassBuilder {
     class: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>) {}
+    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -24,10 +24,5 @@ export class CardKpiAnalyticsLabelDirective implements OnInit, CssClassBuilder {
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [CLASS_NAME.cardAnalyticsText];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }

@@ -13,11 +13,13 @@ import { Subscription } from 'rxjs';
 import { filter, startWith } from 'rxjs/operators';
 
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
-import { SortDirection } from '../../enums/sort-direction.enum';
-import { TableState } from '../../interfaces/table-state.interface';
-import { CollectionFilter } from '../../interfaces/collection-filter.interface';
-import { Table } from '../../table';
-import { TableColumn } from '../table-column/table-column';
+import {
+    CollectionFilter,
+    SortDirection,
+    Table,
+    TableColumn,
+    TableState
+} from '@fundamental-ngx/platform/table-helpers';
 import { FiltersComponent, FiltersDialogData, FiltersDialogResultData } from './filtering/filters.component';
 import {
     GroupingComponent,

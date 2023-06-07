@@ -191,7 +191,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     private readonly _destroy$ = inject(DestroyedService);
 
     /** @hidden */
-    private readonly _elementRef = inject(ElementRef);
+    public readonly elementRef = inject(ElementRef);
 
     /** @hidden */
     private readonly _treeService = inject(TreeService);
@@ -380,7 +380,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
 
         this._sortedTreeItems.forEach((item) => {
             this._eventSub.add(
-                fromEvent<KeyboardEvent>(item.elementRef().nativeElement, 'keydown').subscribe((event) => {
+                fromEvent<KeyboardEvent>(item.elementRef.nativeElement, 'keydown').subscribe((event) => {
                     this._onItemKeyDown(event, item);
                 })
             );
@@ -422,11 +422,6 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         });
 
         return components;
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
     }
 
     /** @hidden */

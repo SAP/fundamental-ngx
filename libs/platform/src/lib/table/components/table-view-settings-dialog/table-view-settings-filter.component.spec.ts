@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FilterType } from '../../enums';
-import { TableFilterSelectOption } from '../../interfaces';
-import { FdpViewSettingsFilterCustomDef } from '../../directives';
+import {
+    FdpViewSettingsFilterCustomDef,
+    FilterType,
+    TableFilterSelectOption
+} from '@fundamental-ngx/platform/table-helpers';
 
 import { TableViewSettingsFilterComponent } from './table-view-settings-filter.component';
 
@@ -34,12 +35,8 @@ describe('TableViewSettingsFilterComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule],
-            declarations: [
-                HostTableViewSettingsFilterComponent,
-                FdpViewSettingsFilterCustomDef,
-                TableViewSettingsFilterComponent
-            ]
+            imports: [CommonModule, FdpViewSettingsFilterCustomDef],
+            declarations: [HostTableViewSettingsFilterComponent, TableViewSettingsFilterComponent]
         }).compileComponents();
     }));
 

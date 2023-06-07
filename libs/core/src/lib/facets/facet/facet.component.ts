@@ -75,19 +75,12 @@ export class FacetComponent implements AfterViewInit {
     titleId = `fd-facet-title-id-${randomTitleId++}`;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
+    constructor(public readonly elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
         this._setupAdditionalStyles();
         this._addAlignmentModifier();
-    }
-
-    /**
-     * get reference to this element
-     */
-    elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
     }
 
     /**
@@ -99,13 +92,13 @@ export class FacetComponent implements AfterViewInit {
             return;
         }
         // add type modifier class to host
-        this._elementRef.nativeElement.classList.add(`fd-facet--${this.type}`);
+        this.elementRef.nativeElement.classList.add(`fd-facet--${this.type}`);
 
         // add margin end and bottom spacings
-        this._elementRef.nativeElement.classList.add(`fd-margin-end--md`);
+        this.elementRef.nativeElement.classList.add(`fd-margin-end--md`);
         if (this.type !== 'image') {
             // add bottom margin to non-image facets
-            this._elementRef.nativeElement.classList.add(`fd-margin-bottom--sm`);
+            this.elementRef.nativeElement.classList.add(`fd-margin-bottom--sm`);
         }
 
         switch (this.type) {
@@ -114,7 +107,7 @@ export class FacetComponent implements AfterViewInit {
                 this._setStyleToHostElement('order', '-1');
                 break;
             case 'rating-indicator': {
-                const ratingIndicatorComponent = this._elementRef.nativeElement.querySelector('.fd-rating-indicator');
+                const ratingIndicatorComponent = this.elementRef.nativeElement.querySelector('.fd-rating-indicator');
 
                 if (!ratingIndicatorComponent) {
                     return;
@@ -145,7 +138,7 @@ export class FacetComponent implements AfterViewInit {
                 break;
             }
             case 'form': {
-                const formFacetContainer = this._elementRef.nativeElement.querySelectorAll('.fd-facet__container');
+                const formFacetContainer = this.elementRef.nativeElement.querySelectorAll('.fd-facet__container');
                 if (!formFacetContainer) {
                     return;
                 }
@@ -165,7 +158,7 @@ export class FacetComponent implements AfterViewInit {
             }
             case 'key-value': {
                 // add class to object status
-                const objectStatusComponent = this._elementRef.nativeElement.querySelector('.fd-object-status');
+                const objectStatusComponent = this.elementRef.nativeElement.querySelector('.fd-object-status');
                 if (!objectStatusComponent) {
                     return;
                 }
@@ -199,16 +192,16 @@ export class FacetComponent implements AfterViewInit {
         if (!this.alignEnd) {
             return;
         }
-        addClassNameToFacetElement(this._renderer, this._elementRef.nativeElement, 'fd-facet-align-end');
+        addClassNameToFacetElement(this._renderer, this.elementRef.nativeElement, 'fd-facet-align-end');
 
         // add margins to the left after removing existing right margin
-        this._elementRef.nativeElement.classList.remove(`fd-margin-end--md`);
-        this._elementRef.nativeElement.classList.add(`fd-margin-begin--md`);
+        this.elementRef.nativeElement.classList.remove(`fd-margin-end--md`);
+        this.elementRef.nativeElement.classList.add(`fd-margin-begin--md`);
     }
 
     /** @hidden */
     private _setStyleToHostElement(attribute: string, value: any): void {
-        this._renderer.setStyle(this._elementRef.nativeElement, attribute, value);
+        this._renderer.setStyle(this.elementRef.nativeElement, attribute, value);
     }
 
     /** @hidden */

@@ -1,6 +1,5 @@
 export * from './no-data-wrapper/no-data-wrapper.component';
 export * from './reset-button/reset-button.component';
-export * from './table-column/table-column';
 export * from './table-column/table-column.component';
 export * from './table-column-resizer/table-column-resizer.component';
 export * from './table-p13-dialog/table-p13-columns.component';
@@ -17,6 +16,5 @@ export * from './table-toolbar/table-toolbar';
 export * from './table-toolbar/table-toolbar-actions.component';
 export * from './table-toolbar/table-toolbar.component';
 export * from './table-view-settings-dialog';
-export * from './table-cell-content/table-cell-content.component';
 export * from './table-cell-header-popover/table-cell-header-popover.component';
 export * from './table-header-cell-content/table-header-cell-content.component';

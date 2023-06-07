@@ -12,12 +12,11 @@ import {
 import { Observable, Subject } from 'rxjs';
 
 import { takeUntil } from 'rxjs/operators';
-import { SearchInput, SuggestionItem } from '../../interfaces/search-field.interface';
-import { Table } from '../../table';
+import { Table, TableService } from '@fundamental-ngx/platform/table-helpers';
 import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
 import { TableToolbarLeftActionsComponent } from './table-toolbar-left-actions.component';
 import { TableToolbarWithTemplate, TABLE_TOOLBAR } from './table-toolbar';
-import { TableService } from '../../table.service';
+import { SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 
 export type EditMode = 'none' | 'inline';
 

@@ -1,28 +1,19 @@
-import {
-    AfterContentInit,
-    Directive,
-    ElementRef,
-    HostBinding,
-    Input,
-    QueryList,
-    ContentChildren,
-    inject
-} from '@angular/core';
+import { AfterContentInit, Directive, HostBinding, Input, QueryList, ContentChildren } from '@angular/core';
 import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
-import { CellFocusedEventAnnouncer, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
+import { DestroyedService, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { BooleanInput } from '@angular/cdk/coercion';
 
 @Directive({
     selector: '[fdTableCell], [fd-table-cell]',
-    hostDirectives: [
+    providers: [
         {
-            directive: FocusableItemDirective,
-            // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
-            outputs: ['cellFocused']
-        }
+            provide: FocusableItemDirective,
+            useExisting: TableCellDirective
+        },
+        DestroyedService
     ]
 })
-export class TableCellDirective implements AfterContentInit {
+export class TableCellDirective extends FocusableItemDirective implements AfterContentInit {
     /** Whether to show the table cell's horizontal borders */
     @HostBinding('class.fd-table__cell--no-horizontal-border')
     @Input()
@@ -42,10 +33,10 @@ export class TableCellDirective implements AfterContentInit {
     @HostBinding('class.fd-table__cell--focusable')
     @Input()
     set focusable(value: BooleanInput) {
-        this._focusableItemDirective.fdkFocusableItem = value;
+        this.fdkFocusableItem = value;
     }
     get focusable(): boolean {
-        return this._focusableItemDirective.fdkFocusableItem;
+        return this.fdkFocusableItem;
     }
 
     /** Whether the table cell is hoverable */
@@ -68,15 +59,9 @@ export class TableCellDirective implements AfterContentInit {
     @Input()
     noData = false;
 
-    /** Key of cell element, it's used to identify this cell with certain column */
+    /** Key of a cell element, it's used to identify this cell with certain column */
     @Input()
     key: string;
-
-    /** Function, that creates a string to be announced by screen-reader whenever cell receives focus */
-    @Input()
-    set cellFocusedEventAnnouncer(announcer: CellFocusedEventAnnouncer) {
-        this._focusableItemDirective.cellFocusedEventAnnouncer = announcer;
-    }
 
     /** @hidden */
     @ContentChildren(FD_CHECKBOX_COMPONENT)
@@ -87,11 +72,9 @@ export class TableCellDirective implements AfterContentInit {
     _fdTableCellClass = true;
 
     /** @hidden */
-    public readonly _focusableItemDirective = inject(FocusableItemDirective);
-
-    /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>) {
-        this._focusableItemDirective.fdkFocusableItem = false;
+    constructor() {
+        super();
+        this.fdkFocusableItem = false;
     }
 
     /** @hidden */
