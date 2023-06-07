@@ -48,7 +48,7 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
     linkItem: TabLinkDirective;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -69,10 +69,5 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
             this.tabItemState ? `fd-tabs__item--${this.tabItemState}` : '',
             this.class
         ];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
     }
 }

@@ -42,7 +42,7 @@ export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder
     label: string;
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden
      * CssClassBuilder interface implementation
@@ -62,10 +62,5 @@ export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }

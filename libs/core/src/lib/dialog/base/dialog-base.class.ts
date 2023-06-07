@@ -67,7 +67,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     /** @hidden Listen and close dialog on Backdrop click */
     @HostListener('mousedown', ['$event.target'])
     closeDialog(target: ElementRef): void {
-        if (this._config.backdropClickCloseable && target === this._elementRef.nativeElement) {
+        if (this._config.backdropClickCloseable && target === this.elementRef.nativeElement) {
             this._ref.dismiss('backdrop');
         }
     }
@@ -75,7 +75,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     /** @hidden */
     constructor(
         protected _router: Router,
-        protected _elementRef: ElementRef,
+        public readonly elementRef: ElementRef,
         protected _changeDetectorRef: ChangeDetectorRef,
         protected _rtlService: RtlService,
         protected _focusTrapService: FocusTrapService

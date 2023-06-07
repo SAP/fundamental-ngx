@@ -77,7 +77,7 @@ export class AvatarGroupOverflowBodyDirective implements AfterViewInit, OnDestro
         if (KeyUtil.isKeyCode(event, TAB)) {
             const index = this.overflowItems
                 .toArray()
-                .findIndex((item) => item.elementRef().nativeElement === event.target);
+                .findIndex((item) => item.elementRef.nativeElement === event.target);
             if (index !== -1) {
                 this._keyboardEventsManager.setActiveItem(index);
             }

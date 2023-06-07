@@ -28,7 +28,7 @@ export class AvatarGroupOverflowButtonDirective implements OnInit, OnChanges, Cs
     color: AvatarGroupOverflowButtonColor = 'neutral';
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -50,11 +50,6 @@ export class AvatarGroupOverflowButtonDirective implements OnInit, OnChanges, Cs
             this.size ? `fd-avatar-group__more-button--${this.size}` : '',
             this.class
         ];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
     }
 
     /** @hidden */

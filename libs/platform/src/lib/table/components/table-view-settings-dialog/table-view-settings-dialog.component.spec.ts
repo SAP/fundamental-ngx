@@ -4,10 +4,9 @@ import { BehaviorSubject } from 'rxjs';
 
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 
-import { Table } from '../../table';
+import { Table, TableColumn } from '@fundamental-ngx/platform/table-helpers';
 import { TableViewSettingsFilterComponent } from './table-view-settings-filter.component';
 import { TableViewSettingsDialogComponent } from './table-view-settings-dialog.component';
-import { TableColumn } from '../table-column/table-column';
 
 class TableComponentMock
     implements

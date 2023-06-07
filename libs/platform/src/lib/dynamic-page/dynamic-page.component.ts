@@ -150,7 +150,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     _tabs: DynamicPageContentComponent[] = [];
 
     /** @hidden */
-    constructor(protected _cd: ChangeDetectorRef, private _elementRef: ElementRef<HTMLElement>) {
+    constructor(protected _cd: ChangeDetectorRef, public readonly elementRef: ElementRef<HTMLElement>) {
         super(_cd);
     }
 
@@ -187,13 +187,6 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
                 element.open(true);
             }
         });
-    }
-
-    /**
-     * get reference to this element
-     */
-    elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
     }
 
     /** @hidden */

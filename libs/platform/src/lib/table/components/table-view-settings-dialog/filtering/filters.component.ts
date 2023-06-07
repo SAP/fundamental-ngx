@@ -13,14 +13,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
-import { FilterType } from '../../../enums/filter-type.enum';
-import { CollectionFilter } from '../../../interfaces/collection-filter.interface';
-import { Table } from '../../../table';
-import { TableColumn } from '../../table-column/table-column';
-import { TableViewSettingsFilterComponent } from '../../table-view-settings-dialog/table-view-settings-filter.component';
+import {
+    CollectionFilter,
+    FilterType,
+    Table,
+    TableColumn,
+    TableDialogCommonData
+} from '@fundamental-ngx/platform/table-helpers';
+import { TableViewSettingsFilterComponent } from '../table-view-settings-filter.component';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step';
-import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 import { SelectableFilter } from './filters-list-step.component';
 
 export interface FiltersDialogData extends TableDialogCommonData {
@@ -172,7 +174,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
 
     /** @hidden */
     private _setInitialFilters(): void {
-        this._initialFilters = this._table.initialFilterBy ?? [];
+        this._initialFilters = this._table.initialState?.initialFilterBy ?? [];
     }
 
     /** @hidden */

@@ -35,20 +35,20 @@ describe('LinkComponent', () => {
         component.emphasized = true;
         component.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-link--emphasized')).toBe(true);
+        expect(component.elementRef.nativeElement.classList.contains('fd-link--emphasized')).toBe(true);
     });
 
     it('Should Add inverted class', () => {
         component.inverted = true;
         component.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-link--inverted')).toBe(true);
+        expect(component.elementRef.nativeElement.classList.contains('fd-link--inverted')).toBe(true);
     });
 
     it('Should Add disabled class', () => {
         component.disabled = true;
         component.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('is-disabled')).toBe(true);
+        expect(component.elementRef.nativeElement.classList.contains('is-disabled')).toBe(true);
     });
 });

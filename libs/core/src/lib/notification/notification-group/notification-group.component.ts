@@ -35,7 +35,7 @@ export class NotificationGroupComponent implements OnChanges, OnInit, CssClassBu
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef,
+        public readonly elementRef: ElementRef,
         @Optional() @Inject(FD_POPOVER_COMPONENT) private _popover: BasePopoverClass
     ) {
         if (this._popover) {
@@ -59,11 +59,6 @@ export class NotificationGroupComponent implements OnChanges, OnInit, CssClassBu
             this.mobile ? 'fd-notification--mobile' : '',
             this.class
         ];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
     }
 
     /** @hidden */

@@ -156,7 +156,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
 
     /** @hidden */
     private _listenToTriggerEvents(buttonComponent: ButtonComponent): void {
-        const htmlElement = buttonComponent.elementRef().nativeElement;
+        const htmlElement = buttonComponent.elementRef.nativeElement;
 
         const refresh$ = merge(this._onDestroy$, this._onRefresh$);
 
@@ -258,14 +258,14 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
 
         this._buttons.forEach((button) => (button.disabled = disable));
         if (disable) {
-            this._buttons.forEach((button) => button.elementRef().nativeElement.setAttribute('disabled', 'true'));
+            this._buttons.forEach((button) => button.elementRef.nativeElement.setAttribute('disabled', 'true'));
         }
         this._changeDetRef.markForCheck();
     }
 
     /** @hidden */
     private _getButtonValue(buttonComponent: ButtonComponent): string | null {
-        const element = buttonComponent.elementRef().nativeElement;
+        const element = buttonComponent.elementRef.nativeElement;
         if (element instanceof HTMLButtonElement) {
             return element.value;
         }

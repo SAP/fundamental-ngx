@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { CollectionFilter } from '@fundamental-ngx/platform/table-helpers';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
-import { CollectionFilter } from '../../../interfaces';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 
 import { FilterDialogData, FilterDialogResultData, FilterableColumn, FilterRule } from './filtering.model';

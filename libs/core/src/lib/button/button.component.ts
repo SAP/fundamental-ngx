@@ -93,7 +93,7 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef,
+        public readonly elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private _contentDensityObserver: ContentDensityObserver
     ) {
@@ -134,13 +134,6 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
             this.toggled ? `fd-button--toggled` : '',
             this.class
         ];
-    }
-
-    /** HasElementRef interface implementation
-     * function used by applyCssClass and applyCssStyle decorators
-     */
-    public elementRef(): ElementRef<HTMLButtonElement | HTMLAnchorElement> {
-        return this._elementRef;
     }
 
     /** @hidden */

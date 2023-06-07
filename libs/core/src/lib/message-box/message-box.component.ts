@@ -130,11 +130,6 @@ export class MessageBoxComponent
     }
 
     /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
-    }
-
-    /** @hidden */
     private get _messageBoxTypeClass(): string {
         switch (this._config.type) {
             case 'error':

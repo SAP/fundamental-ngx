@@ -160,7 +160,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     onMouseEnter(event: MouseEvent): void {
         event.stopPropagation();
         if (this.icon) {
-            this.renderer2.setStyle(this.icon.elementRef().nativeElement, 'text-decoration', 'underline');
+            this.renderer2.setStyle(this.icon.elementRef.nativeElement, 'text-decoration', 'underline');
         }
     }
 
@@ -171,7 +171,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     onMouseLeave(event: MouseEvent): void {
         event.stopPropagation();
         if (this.icon) {
-            this.renderer2.setStyle(this.icon.elementRef().nativeElement, 'text-decoration', 'none');
+            this.renderer2.setStyle(this.icon.elementRef.nativeElement, 'text-decoration', 'none');
         }
     }
 

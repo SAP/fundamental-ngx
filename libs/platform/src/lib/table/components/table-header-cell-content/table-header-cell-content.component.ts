@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { SortDirection } from '../../enums';
-import { CollectionSort } from '../../interfaces/collection-sort.interface';
-import { TableColumn } from '../table-column/table-column';
+import { CollectionSort, SortDirection, TableColumn } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-table-header-cell-content',

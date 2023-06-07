@@ -92,7 +92,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     onDismiss: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -104,17 +104,12 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
         this.buildComponentCssClass();
     }
 
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
-    }
-
     /**
      * Dismisses the message-strip.
      */
     dismiss(): void {
-        this._elementRef.nativeElement.classList.add('fd-has-display-none');
-        this._elementRef.nativeElement.classList.remove('fd-has-display-block');
+        this.elementRef.nativeElement.classList.add('fd-has-display-none');
+        this.elementRef.nativeElement.classList.remove('fd-has-display-block');
         this.onDismiss.emit();
     }
 

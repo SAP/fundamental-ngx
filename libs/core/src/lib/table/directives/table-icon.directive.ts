@@ -26,7 +26,7 @@ export class TableIconDirective implements OnChanges, CssClassBuilder, OnInit {
     navigation = false;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** Function runs when component is initialized
      * function should build component css class
@@ -53,12 +53,5 @@ export class TableIconDirective implements OnChanges, CssClassBuilder, OnInit {
             this.navigation ? 'fd-table__icon--navigation' : '',
             this.class
         ];
-    }
-
-    /** HasElementRef interface implementation
-     * function used by applyCssClass and applyCssStyle decorators
-     */
-    public elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }

@@ -214,7 +214,7 @@ export class RadioButtonComponent
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
+    get elementRef(): ElementRef {
         return this.inputElement;
     }
 

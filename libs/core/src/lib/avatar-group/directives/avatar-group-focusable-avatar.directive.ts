@@ -26,21 +26,11 @@ export class AvatarGroupFocusableAvatarDirective implements FocusableOption, Has
 
     /** @hidden */
     constructor(
-        private readonly _elementRef: ElementRef<HTMLElement>,
+        public readonly elementRef: ElementRef<HTMLElement>,
         @Optional()
         @Inject(forwardRef(() => AvatarGroupOverflowBodyDirective))
         private readonly _component: AvatarGroupInterface
     ) {}
-
-    /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
-    }
-
-    /** @hidden */
-    get _element(): HTMLElement {
-        return this._elementRef.nativeElement;
-    }
 
     /** Handler for mouse events */
     @HostListener('click')
@@ -52,6 +42,6 @@ export class AvatarGroupFocusableAvatarDirective implements FocusableOption, Has
 
     /** @hidden */
     focus(): void {
-        this._element.focus();
+        this.elementRef.nativeElement.focus();
     }
 }

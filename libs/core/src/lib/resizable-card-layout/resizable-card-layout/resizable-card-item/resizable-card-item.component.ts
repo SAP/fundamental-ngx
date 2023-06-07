@@ -276,7 +276,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     /** @hidden */
     constructor(
         private readonly _cd: ChangeDetectorRef,
-        private readonly _elementRef: ElementRef,
+        public readonly elementRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService
     ) {
         if (this._rtlService) {
@@ -414,7 +414,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
 
     /** Sets focus on the element */
     focus(): void {
-        const header = this._elementRef.nativeElement.querySelector('.fd-card__header');
+        const header = this.elementRef.nativeElement.querySelector('.fd-card__header');
         header?.focus();
     }
 
@@ -473,11 +473,6 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
             // Emits resized event.
             this.resized.emit(this.getResizedEventObject());
         }
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
     }
 
     /** Returns ResizedEvent object to emit. */

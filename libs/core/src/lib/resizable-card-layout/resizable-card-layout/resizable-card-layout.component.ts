@@ -110,7 +110,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     /** @hidden */
     constructor(
         private readonly _cd: ChangeDetectorRef,
-        private readonly _elementRef: ElementRef,
+        public readonly elementRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
@@ -218,11 +218,6 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
         this._layoutShifted = false;
         this.arrangeCards(this.resizeCardItems.toArray());
         this.resized.emit(event);
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<ResizableCardLayoutComponent> {
-        return this._elementRef;
     }
 
     /** @hidden */

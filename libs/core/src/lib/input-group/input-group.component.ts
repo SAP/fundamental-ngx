@@ -327,7 +327,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     /** @hidden */
     private _listenInputFocus(): void {
         const inputElement =
-            this.inputElement?.elementRef()?.nativeElement || this.localInputElement?.elementRef()?.nativeElement;
+            this.inputElement?.elementRef?.nativeElement || this.localInputElement?.elementRef?.nativeElement;
 
         if (!inputElement) {
             return;

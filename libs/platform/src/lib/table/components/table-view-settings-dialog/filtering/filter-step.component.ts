@@ -11,11 +11,9 @@ import {
 } from '@angular/core';
 
 import { ContentDensity } from '@fundamental-ngx/cdk/utils';
+import { CollectionFilter, FILTER_STRATEGY, FilterType } from '@fundamental-ngx/platform/table-helpers';
 
-import { FilterType } from '../../../enums/filter-type.enum';
-import { FILTER_STRATEGY } from '../../../enums/collection-filter.enum';
-import { CollectionFilter } from '../../../interfaces/collection-filter.interface';
-import { TableViewSettingsFilterComponent } from '../../table-view-settings-dialog/table-view-settings-filter.component';
+import { TableViewSettingsFilterComponent } from '../table-view-settings-filter.component';
 import { FiltersViewStep, FILTERS_VIEW_STEP_TOKEN } from './filters-active-step';
 
 /**

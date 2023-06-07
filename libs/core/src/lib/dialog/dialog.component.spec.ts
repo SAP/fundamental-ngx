@@ -95,7 +95,7 @@ describe('DialogComponent', () => {
 
         const dismissSpy = spyOn(dialogRef, 'dismiss');
 
-        dialogComponent['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
+        dialogComponent.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
         fixture.detectChanges();
 
         expect(dismissSpy).toHaveBeenCalled();

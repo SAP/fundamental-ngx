@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { SmartFilterBar, SmartFilterChangeObject } from '@fundamental-ngx/platform';
+import { SmartFilterBar, SmartFilterChangeObject } from '@fundamental-ngx/platform/smart-filter-bar';
 import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 
 @Component({

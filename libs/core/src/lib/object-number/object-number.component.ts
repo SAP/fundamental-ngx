@@ -68,7 +68,7 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
     _numberPipeConfig = '';
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -93,11 +93,6 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
             this.status ? `fd-object-number--${this.status}` : '',
             this.class
         ];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 
     /** @hidden */

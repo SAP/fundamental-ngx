@@ -23,7 +23,7 @@ export class TokenizerInputDirective implements OnInit, OnChanges, CssClassBuild
     }
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -33,10 +33,5 @@ export class TokenizerInputDirective implements OnInit, OnChanges, CssClassBuild
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }

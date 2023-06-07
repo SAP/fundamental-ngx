@@ -184,11 +184,6 @@ export class DialogComponent
         ];
     }
 
-    /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
-    }
-
     /** @hidden Listen on Dialog visibility */
     private _listenOnHidden(): void {
         if (this._onHidden) {

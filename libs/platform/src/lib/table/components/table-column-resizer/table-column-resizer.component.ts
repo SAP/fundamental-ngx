@@ -2,22 +2,21 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    HostBinding,
-    HostListener,
+    ElementRef,
+    inject,
     Inject,
     NgZone,
-    OnDestroy,
     OnInit,
     Optional,
+    Renderer2,
     ViewEncapsulation
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { fromEvent, Subject, Subscription } from 'rxjs';
+import { TableColumnResizeService } from '@fundamental-ngx/platform/table-helpers';
+import { fromEvent, Subscription } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-
-import { TableColumnResizeService } from '../../table-column-resize.service';
+import { DestroyedService, RtlService } from '@fundamental-ngx/cdk/utils';
 
 /** @dynamic */
 @Component({
@@ -26,53 +25,17 @@ import { TableColumnResizeService } from '../../table-column-resize.service';
     styleUrls: ['./table-column-resizer.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    providers: [DestroyedService],
     host: {
         class: 'fdp-table-column-resizer'
     }
 })
-export class PlatformTableColumnResizerComponent implements OnInit, OnDestroy {
-    /** @hidden */
-    @HostBinding('style.display')
-    get _resizerDisplay(): string {
-        return this._resizerPosition > 0 ? 'block' : 'none';
-    }
-
-    /** @hidden */
-    @HostBinding('style.left')
-    get _resizerPositionLeft(): string {
-        if (this._rtl || !this._resizerPosition) {
-            return 'auto';
-        }
-
-        return this._resizerPosition + 'px';
-    }
-
-    /** @hidden */
-    @HostBinding('style.right')
-    get _resizerPositionRight(): string {
-        if (!this._rtl || !this._resizerPosition) {
-            return 'auto';
-        }
-
-        return this._resizerPosition + 'px';
-    }
-
-    /** @hidden */
-    @HostBinding('class.fdp-table-column-resizer--active')
-    get _isActive(): boolean {
-        return this._tableColumnResizeService.resizeInProgress;
-    }
-
-    /** @hidden */
-    private get _resizerPosition(): number {
-        return this._tableColumnResizeService.resizerPosition;
-    }
-
+export class PlatformTableColumnResizerComponent implements OnInit {
     /** @hidden */
     private _pointerMoveListener: Subscription;
 
     /** @hidden */
-    private _destroyed = new Subject<void>();
+    private _destroy$ = inject(DestroyedService);
 
     /** @hidden */
     private get _rtl(): boolean {
@@ -84,44 +47,58 @@ export class PlatformTableColumnResizerComponent implements OnInit, OnDestroy {
         private readonly _cd: ChangeDetectorRef,
         private readonly _ngZone: NgZone,
         private readonly _tableColumnResizeService: TableColumnResizeService,
+        private readonly _renderer: Renderer2,
+        private readonly _elmRef: ElementRef,
         @Inject(DOCUMENT) private readonly _document: Document | null,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
-        this._tableColumnResizeService.markForCheck
-            .pipe(takeUntil(this._destroyed))
-            .subscribe(() => this._cd.markForCheck());
-    }
+        this._ngZone.runOutsideAngular(() => {
+            fromEvent<MouseEvent>(this._elmRef.nativeElement, 'mousedown')
+                .pipe(takeUntil(this._destroy$))
+                .subscribe((evt) => {
+                    this._tableColumnResizeService.startResize(evt);
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._destroyed.next();
-        this._destroyed.complete();
-    }
+                    this._listenForMouseUp();
+                });
 
-    /** @hidden */
-    @HostListener('mousedown', ['$event'])
-    _onMouseDown(event: MouseEvent): void {
-        this._tableColumnResizeService.startResize(event);
+            this._tableColumnResizeService.resizerPosition$.pipe(takeUntil(this._destroy$)).subscribe((position) => {
+                this._renderer.setStyle(this._elmRef.nativeElement, 'display', position > 0 ? 'block' : 'none');
+                if (!position) {
+                    return;
+                }
+                this._renderer.setStyle(this._elmRef.nativeElement, 'left', this._rtl ? 'auto' : `${position}px`);
+                this._renderer.setStyle(this._elmRef.nativeElement, 'right', !this._rtl ? 'auto' : `${position}px`);
+            });
 
-        this._listenForMouseUp();
+            this._tableColumnResizeService.resizeInProgress$
+                .pipe(takeUntil(this._destroy$))
+                .subscribe((resizeInProgress) => {
+                    if (resizeInProgress) {
+                        this._renderer.addClass(this._elmRef.nativeElement, 'fdp-table-column-resizer--active');
+                    } else {
+                        this._renderer.removeClass(this._elmRef.nativeElement, 'fdp-table-column-resizer--active');
+                    }
+                });
+        });
     }
 
     /** @hidden */
     private _listenForMouseUp(): void {
-        this._pointerMoveListener?.unsubscribe();
+        this._ngZone.runOutsideAngular(() => {
+            this._pointerMoveListener?.unsubscribe();
 
-        if (!this._document) {
-            return;
-        }
-
-        this._pointerMoveListener = fromEvent<MouseEvent>(this._document, 'mouseup')
-            .pipe(take(1), takeUntil(this._destroyed))
-            .subscribe((event) => {
-                this._tableColumnResizeService.finishResize(event);
-                this._cd.markForCheck();
-            });
+            if (!this._document) {
+                return;
+            }
+            this._pointerMoveListener = fromEvent<MouseEvent>(this._document, 'mouseup')
+                .pipe(take(1), takeUntil(this._destroy$))
+                .subscribe((event) => {
+                    this._tableColumnResizeService.finishResize(event);
+                    // this._cd.markForCheck();
+                });
+        });
     }
 }

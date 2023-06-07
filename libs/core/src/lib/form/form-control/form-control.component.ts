@@ -82,7 +82,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
 
     /** @hidden */
     constructor(
-        public elmRef: ElementRef,
+        public elementRef: ElementRef,
         @Attribute('aria-label') private ariaLabelAttr: string,
         @Attribute('aria-labelledby') private ariaLabelledByAttr: string
     ) {}
@@ -100,10 +100,5 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this.elmRef;
     }
 }

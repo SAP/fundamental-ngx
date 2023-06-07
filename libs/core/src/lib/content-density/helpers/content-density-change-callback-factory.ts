@@ -17,10 +17,10 @@ export function contentDensityCallbackFactory(
                 ...defaultContentDensityObserverConfigs,
                 ...(consumerConfig.contentDensitySettings || {})
             },
-            elementRef: () => consumerConfig.elementRef()
+            elementRef: consumerConfig.elementRef
         };
         const settings: Required<ContentDensityObserverSettings> = configs.contentDensitySettings;
-        const element = coerceElement(configs.elementRef());
+        const element = coerceElement(configs.elementRef);
 
         Object.values(settings.modifiers).forEach((className) => {
             element.classList.remove(className);

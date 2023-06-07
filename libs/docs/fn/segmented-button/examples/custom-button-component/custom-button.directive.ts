@@ -27,8 +27,8 @@ export class CustomButtonDirective implements SelectableItemToken<HTMLElement, s
         return this.buttonComponent.value;
     }
 
-    elementRef(): ElementRef<HTMLElement> {
-        return this.buttonComponent.elementRef();
+    get elementRef(): ElementRef<HTMLElement> {
+        return this.buttonComponent.elementRef;
     }
 
     getSelected(): boolean {

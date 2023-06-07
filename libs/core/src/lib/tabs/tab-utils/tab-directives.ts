@@ -67,7 +67,7 @@ export class TabIconComponent implements CssClassBuilder, OnChanges {
     icon: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden
      * Function runs when component is initialized
@@ -85,13 +85,6 @@ export class TabIconComponent implements CssClassBuilder, OnChanges {
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-tabs__icon', this.class];
-    }
-
-    /** HasElementRef interface implementation
-     * function used by applyCssClass and applyCssStyle decorators
-     */
-    elementRef(): ElementRef {
-        return this._elementRef;
     }
 }
 

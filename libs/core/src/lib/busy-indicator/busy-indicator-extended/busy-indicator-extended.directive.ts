@@ -14,16 +14,11 @@ export class BusyIndicatorExtendedDirective implements AfterContentInit {
     busyIndicator: BusyIndicatorComponent;
 
     /** @hidden */
-    constructor(private _eleRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
         this._appendCssToParent();
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<HTMLElement> {
-        return this._eleRef;
     }
 
     /** @hidden */
@@ -32,7 +27,7 @@ export class BusyIndicatorExtendedDirective implements AfterContentInit {
         if (!hasLabel) {
             return;
         }
-        const classList = this._eleRef.nativeElement.parentElement?.classList;
+        const classList = this.elementRef.nativeElement.parentElement?.classList;
         if (classList) {
             classList.add('fd-busy-indicator-extended');
             if (classList.contains(messageToastClass)) {

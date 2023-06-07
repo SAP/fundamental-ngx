@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { EditableTableCell, TableColumn, TableRow } from '@fundamental-ngx/platform/table-helpers';
 import set from 'lodash-es/set';
-import { TableRow } from '../../models/table-row.model';
-import { EditableTableCell } from '../../table-cell.class';
-import { TableColumn } from '../table-column/table-column';
 
 let controlUniqId = 0;
 

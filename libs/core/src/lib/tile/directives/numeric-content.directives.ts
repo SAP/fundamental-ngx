@@ -23,7 +23,7 @@ export class NumericContentDirective implements OnInit, OnChanges, CssClassBuild
     baseClass = true;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -51,17 +51,12 @@ export class NumericContentDirective implements OnInit, OnChanges, CssClassBuild
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
-    }
-
-    /** @hidden */
     private _isSmallTile(): boolean {
         let retVal = false;
         if (
-            this._elementRef.nativeElement.parentElement &&
-            this._elementRef.nativeElement.parentElement.parentElement &&
-            this._elementRef.nativeElement.parentElement.parentElement.classList.contains('fd-tile--s')
+            this.elementRef.nativeElement.parentElement &&
+            this.elementRef.nativeElement.parentElement.parentElement &&
+            this.elementRef.nativeElement.parentElement.parentElement.classList.contains('fd-tile--s')
         ) {
             retVal = true;
         }
@@ -93,7 +88,7 @@ export class NumericContentLaunchIconDirective implements OnInit, OnChanges, Css
     glyph: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -113,11 +108,6 @@ export class NumericContentLaunchIconDirective implements OnInit, OnChanges, Css
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-numeric-content__launch-icon', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }
 
@@ -149,7 +139,7 @@ export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBu
     glyph: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -169,11 +159,6 @@ export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBu
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-numeric-content__kpi', this.state ? 'fd-numeric-content__kpi--' + this.state : '', this.class];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }
 
@@ -201,7 +186,7 @@ export class NumericContentScaleArrowDirective implements OnInit, OnChanges, Css
     glyph: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -222,11 +207,6 @@ export class NumericContentScaleArrowDirective implements OnInit, OnChanges, Css
     buildComponentCssClass(): string[] {
         return ['fd-numeric-content__scale-arrow', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
     }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
-    }
 }
 
 @Directive({
@@ -243,7 +223,7 @@ export class NumericContentScaleDirective implements OnInit, OnChanges, CssClass
     class: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -263,11 +243,6 @@ export class NumericContentScaleDirective implements OnInit, OnChanges, CssClass
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-numeric-content__scale', this.state ? 'fd-numeric-content__scale--' + this.state : '', this.class];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }
 

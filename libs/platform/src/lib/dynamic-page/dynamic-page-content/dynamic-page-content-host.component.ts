@@ -69,7 +69,7 @@ export class DynamicPageContentHostComponent implements OnInit {
     private _size: DynamicPageResponsiveSize;
 
     /** @hidden */
-    constructor(protected _elementRef: ElementRef<HTMLElement>, protected _renderer: Renderer2) {}
+    constructor(public readonly elementRef: ElementRef<HTMLElement>, protected _renderer: Renderer2) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -84,13 +84,6 @@ export class DynamicPageContentHostComponent implements OnInit {
         if (this.size) {
             this._setSize(this.size);
         }
-    }
-
-    /**
-     * get reference to this element
-     */
-    getElementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
     }
 
     /**
@@ -139,11 +132,11 @@ export class DynamicPageContentHostComponent implements OnInit {
 
     /** @hidden */
     private _removeClassNameToHostElement(className: string): void {
-        this._renderer.removeClass(this._elementRef.nativeElement, className);
+        this._renderer.removeClass(this.elementRef.nativeElement, className);
     }
 
     /** @hidden */
     private _addClassNameToHostElement(className: string): void {
-        addClassNameToElement(this._renderer, this._elementRef.nativeElement, className);
+        addClassNameToElement(this._renderer, this.elementRef.nativeElement, className);
     }
 }

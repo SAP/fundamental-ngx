@@ -59,7 +59,7 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
     private _colGrow: boolean;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -69,11 +69,6 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
     }
 
     /** @hidden */

@@ -15,35 +15,37 @@ export function applyCssClass(target: any, propertyKey: string, descriptor: Prop
     const originalMethod = descriptor.value;
     descriptor.value = function (): string[] {
         const self = this as unknown as CssClassBuilder & { _uuidv4?: string };
-        if (!self.elementRef) {
+        if (!('elementRef' in self)) {
             throw ELEMENT_REF_EXCEPTION;
         }
 
         const classListToApply: string[] = sanitize(originalMethod.apply(this));
 
-        const elementRef = self.elementRef.apply(this);
+        const elementRef = self.elementRef;
 
         const nativeElement: HTMLElement & { _classMap?: any } = elementRef?.nativeElement;
 
-        if (nativeElement) {
-            if (!nativeElement._classMap) {
-                nativeElement._classMap = {};
-            }
-
-            if (!self._uuidv4) {
-                self._uuidv4 = uuidv4();
-            }
-
-            const currentClassList = Array.from(nativeElement.classList);
-
-            const previousClassListToApply = nativeElement._classMap[self._uuidv4] || [];
-
-            const newClassList = createComponentClassList(currentClassList, previousClassListToApply, classListToApply);
-
-            nativeElement.className = newClassList.join(' ');
-
-            nativeElement._classMap[self._uuidv4] = classListToApply;
+        if (!nativeElement) {
+            return classListToApply;
         }
+
+        if (!nativeElement._classMap) {
+            nativeElement._classMap = {};
+        }
+
+        if (!self._uuidv4) {
+            self._uuidv4 = uuidv4();
+        }
+
+        const currentClassList = Array.from(nativeElement.classList);
+
+        const previousClassListToApply = nativeElement._classMap[self._uuidv4] || [];
+
+        const newClassList = createComponentClassList(currentClassList, previousClassListToApply, classListToApply);
+
+        nativeElement.className = newClassList.join(' ');
+
+        nativeElement._classMap[self._uuidv4] = classListToApply;
 
         return classListToApply;
     };

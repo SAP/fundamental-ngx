@@ -273,7 +273,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     }
 
     /** @hidden */
-    elementRef(): ElementRef {
+    get elementRef(): ElementRef {
         return this.toolbar;
     }
 

@@ -1,4 +1,4 @@
-import { LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+import { SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewChecked,
     AfterViewInit,
@@ -9,8 +9,9 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
+    forwardRef,
     HostBinding,
-    HostListener,
+    inject,
     Injector,
     Input,
     NgZone,
@@ -24,109 +25,100 @@ import {
     TrackByFunction,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation,
-    ViewRef
+    ViewEncapsulation
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import {
-    DragoverPredicate,
-    DropPredicate,
-    FdDndDropEventMode,
-    FdDndDropType,
-    FdDropEvent,
     FDK_FOCUSABLE_GRID_DIRECTIVE,
-    FocusableCellPosition,
     FocusableGridDirective,
-    FocusableItemPosition,
     KeyUtil,
     Nullable,
     RangeSelector,
     resizeObservable,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
+
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
     ContentDensityMode,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
+import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { FDP_PRESET_MANAGED_COMPONENT, isJsObject } from '@fundamental-ngx/platform/shared';
-import equal from 'fast-deep-equal';
-import { BehaviorSubject, fromEvent, merge, Observable, of, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take, tap } from 'rxjs/operators';
-import { TableColumn } from './components/table-column/table-column';
-import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
-import {
-    DEFAULT_HIGHLIGHTING_KEY,
-    DEFAULT_TABLE_STATE,
-    EDITABLE_ROW_SEMANTIC_STATE,
-    ROW_HEIGHT,
-    SELECTION_COLUMN_WIDTH,
-    SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH
-} from './constants';
-import { TableDataSource } from './domain/table-data-source';
-import {
-    FILTER_STRING_STRATEGY,
-    FilterableColumnDataType,
-    SelectionMode,
-    SelectionModeValue,
-    SortDirection,
-    TableRowType
-} from './enums';
-import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
-import { SearchInput } from './interfaces/search-field.interface';
-import {
-    ColumnsChange,
-    FdpTableDataSource,
-    FilterChange,
-    FreezeChange,
-    GroupChange,
-    isTableRow,
-    PageChange,
-    PlatformTableManagedPreset,
-    RowComparator,
-    SaveRowsEvent,
-    SortChange,
-    TableColumnFreezeEvent,
-    TableColumnsChangeEvent,
-    TableFilterChangeEvent,
-    TableGroupChangeEvent,
-    TablePageChangeEvent,
-    TableRow,
-    TableRowActivateEvent,
-    TableRowClass,
-    TableRowSelectionChangeEvent,
-    TableRowsRearrangeEvent,
-    TableRowToggleOpenStateEvent,
-    TableSortChangeEvent,
-    UpdatedDndRowsPosition
-} from './models';
-import { Table } from './table';
-
-import { EditableTableCell } from './table-cell.class';
-import { TableColumnResizeService } from './table-column-resize.service';
-import { TableResponsiveService } from './table-responsive.service';
-import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
-
-import { TableService } from './table.service';
-import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
     buildNewRowSkeleton,
+    CollectionFilter,
+    CollectionGroup,
+    CollectionSort,
     convertObjectsToTableRows,
-    convertTreeLikeToFlatList,
     convertTreeObjectsToTableRows,
     convertTreeTableRowToFlatList,
-    createGroupedTableRowsTree,
+    DEFAULT_HIGHLIGHTING_KEY,
+    EDITABLE_ROW_SEMANTIC_STATE,
+    EditableTableCell,
+    FDP_TABLE_DRAGGABLE_DIRECTIVE,
+    FDP_TABLE_STATE_DIRECTIVE,
+    FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE,
     findRowChildren,
     getFreezableColumns,
     getFreezableEndColumns,
     getRowParents,
     getSelectableRows,
     isRowNavigatable,
-    sortTreeLikeGroupedRows,
-    toDataStream
-} from './helpers';
+    isTableRow,
+    PlatformTableManagedPreset,
+    ROW_HEIGHT,
+    RowComparator,
+    SaveRowsEvent,
+    SELECTION_COLUMN_WIDTH,
+    SelectionMode,
+    SelectionModeValue,
+    SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH,
+    Table,
+    TableColumn,
+    TableColumnFreezeEvent,
+    TableColumnResizeService,
+    TableColumnsChangeEvent,
+    TableDataSource,
+    TableDataSourceDirective,
+    TableDraggable,
+    TableFilterChangeEvent,
+    TableGroupChangeEvent,
+    TableHeaderResizerDirective,
+    TableInitialState,
+    TableInitialStateDirective,
+    TablePageChangeEvent,
+    TableResponsiveService,
+    TableRow,
+    TableRowActivateEvent,
+    TableRowClass,
+    TableRowSelectionChangeEvent,
+    TableRowService,
+    TableRowToggleOpenStateEvent,
+    TableRowType,
+    TableScrollable,
+    TableScrollDispatcherService,
+    TableService,
+    TableSortChangeEvent,
+    TableState,
+    TableVirtualScroll,
+    isTreeRowFirstCell
+} from '@fundamental-ngx/platform/table-helpers';
+import equal from 'fast-deep-equal';
+import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take, tap } from 'rxjs/operators';
+import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components';
+
+interface ToolbarContext {
+    counter: Observable<number>;
+    sortable: Observable<boolean>;
+    filterable: Observable<boolean>;
+    groupable: Observable<boolean>;
+    columns: Observable<boolean>;
+}
 
 let tableUniqueId = 0;
 
@@ -167,7 +159,8 @@ let tableUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        { provide: Table, useExisting: TableComponent },
+        { provide: Table, useExisting: forwardRef(() => TableComponent) },
+        TableRowService,
         TableService,
         TableScrollDispatcherService,
         TableColumnResizeService,
@@ -180,13 +173,28 @@ let tableUniqueId = 0;
             useExisting: TableComponent
         }
     ],
+    hostDirectives: [
+        {
+            directive: TableDataSourceDirective,
+            inputs: ['dataSource']
+        },
+        {
+            directive: TableInitialStateDirective,
+            inputs: [
+                'initialVisibleColumns',
+                'initialSortBy',
+                'initialFilterBy',
+                'initialGroupBy',
+                'initialPage',
+                'state'
+            ]
+        },
+        TableHeaderResizerDirective
+    ],
     host: {
         class: 'fdp-table',
         '[class.fd-table--no-horizontal-borders]': 'noHorizontalBorders || noBorders',
-        '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders',
-        '[class.fd-table--tree]': 'isTreeTable',
-        '[class.fd-table--group]': '_isGroupTable',
-        '[class.fdp-table--no-outer-border]': 'noOuterBorders'
+        '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders'
     }
 })
 export class TableComponent<T = any>
@@ -214,36 +222,6 @@ export class TableComponent<T = any>
     @Input()
     fixed = true;
 
-    /**
-     * Table data source.
-     * Can be @type { T[] | Observable<T[]> | TableDataSource<T> }
-     *
-     */
-    @Input()
-    set dataSource(value: FdpTableDataSource<T>) {
-        this._ds = value;
-
-        if (value && this._viewInitiated) {
-            this._initializeDS(value);
-        }
-    }
-
-    get dataSource(): FdpTableDataSource<T> {
-        return this._ds;
-    }
-
-    /**
-     * Initial state of table.
-     */
-    @Input()
-    set state(value: TableState) {
-        this.setTableState(value || DEFAULT_TABLE_STATE);
-    }
-
-    get state(): TableState {
-        return this.getTableState();
-    }
-
     /** The column `name` to freeze columns up to and including. */
     @Input()
     freezeColumnsTo: string;
@@ -251,109 +229,379 @@ export class TableComponent<T = any>
     /** The column `name` to freeze columns after and including. */
     @Input()
     freezeEndColumnsTo: string;
-
-    /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
-    @Input()
-    selectionMode: SelectionModeValue = SelectionMode.NONE;
-
     /** Toggle for page scrolling feature. */
     @Input()
     pageScrolling = false;
-
     /** Number of items per page. */
     @Input()
     pageSize: Nullable<number>;
-
     /** Page scrolling threshold in px. */
     @Input()
     pageScrollingThreshold = 80;
-
     /** Table body height. */
     @Input()
     bodyHeight: string;
-
+    /** Text displayed when table has no items. */
+    @Input()
+    emptyTableMessage: string;
+    /** Table without horizontal borders. */
+    @Input()
+    noHorizontalBorders = false;
+    /** Table without vertical borders. */
+    @Input()
+    noVerticalBorders = false;
+    /** Table without borders. */
+    @Input()
+    noBorders = false;
+    /** Table body without any borders, but header with borders. */
+    @Input()
+    noBodyBorders = false;
+    /** Table without outer borders */
+    @HostBinding('class.fdp-table--no-outer-border')
+    @Input()
+    noOuterBorders = false;
+    /** Table body without horizontal borders. */
+    @Input()
+    noBorderX = false;
+    /** Table body without vertical borders. */
+    @Input()
+    noBorderY = false;
+    /** Accessor to a children nodes of tree. */
+    @Input()
+    relationKey: string;
+    /** Table row expanded state key. Used to set the initial state of tree row. */
+    @Input()
+    expandedStateKey: string;
+    /**
+     * Whether row is navigatable.
+     * Pass boolean value to set state for the all rows.
+     * Pass string value with the key of the row item's field to compute state for every single row.
+     */
+    @Input()
+    rowNavigatable: string | boolean = false;
+    /**
+     * Whether to highlight navigated row.
+     */
+    @Input()
+    highlightNavigatedRow = false;
+    /** Whether table row can be clicked */
+    @Input()
+    rowsActivable = false;
+    /** Value with the key of the row item's field to enable selecting.  */
+    @Input()
+    selectedKey: string;
+    /** Value with the key of the row item's field to enable selecting.  */
+    @Input()
+    selectableKey: string;
+    /**
+     * Tracking function that will be used to check the differences in data changes.
+     * Used similarly to `ngFor` `trackBy` function.
+     * Accepts a function that takes two parameters, index and item.
+     */
+    @Input()
+    trackBy: TrackByFunction<T>;
+    /**
+     * An optional function, that identifies uniqueness of a particular row.
+     * Table component uses it to be able to preserve selection when data list is changed.
+     */
+    @Input()
+    rowComparator: RowComparator<T>;
+    /** String or function to calculate additional rows' CSS classes. */
+    @Input()
+    rowsClass: TableRowClass<T>;
+    /** Used to construct empty row object for editing. */
+    @Input()
+    editableRowSkeleton: T;
+    /** Whether all rows should be collapsed by default after the table is loaded. */
+    @Input()
+    expandOnInit = false;
+    /**
+     * Height of the row, required for the virtualScroll,
+     * default is 44px in cozy, 32px in compact and 24px in condensed (set automatically)
+     */
+    @Input()
+    rowHeight = ROW_HEIGHT.get(ContentDensityMode.COZY)!;
+    /** Event emitted when the current preset configuration has been changed. */
+    /**
+     * Whether to load previous pages.
+     * This option works only when `pageScrolling` is true, and the initial page > 1
+     */
+    @Input()
+    loadPagesBefore = false;
+    /** Event emitted when current preset configuration has been changed. */
+    @Output()
+    presetChanged = new EventEmitter<PlatformTableManagedPreset>();
+    /** Event fired when table selection has changed. */
+    @Output()
+    readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<
+        TableRowSelectionChangeEvent<T>
+    >();
+    /** Event fired when table sort order has changed. */
+    @Output()
+    readonly sortChange: EventEmitter<TableSortChangeEvent> = new EventEmitter<TableSortChangeEvent>();
+    /** Event fired when the table filter has changed. */
+    @Output()
+    readonly filterChange: EventEmitter<TableFilterChangeEvent> = new EventEmitter<TableFilterChangeEvent>();
+    /** Event fired when table grouping has changed. */
+    @Output()
+    readonly groupChange: EventEmitter<TableGroupChangeEvent> = new EventEmitter<TableGroupChangeEvent>();
+    /** Event fired when visible columns list has been changed. */
+    @Output()
+    readonly columnsChange: EventEmitter<TableColumnsChangeEvent> = new EventEmitter<TableColumnsChangeEvent>();
+    /** Event emitted when pagination state has been changed. */
+    @Output()
+    readonly pageChange = new EventEmitter<TablePageChangeEvent>();
+    /** Event fired when there is a change in the frozen column. */
+    @Output()
+    readonly columnFreeze: EventEmitter<TableColumnFreezeEvent> = new EventEmitter<TableColumnFreezeEvent>();
+    /** Event fired when group/tree row collapsed/expanded. */
+    @Output()
+    readonly rowToggleOpenState = new EventEmitter<TableRowToggleOpenStateEvent<T>>();
+    /** Event fired when row clicked. */
+    @Output()
+    readonly rowActivate = new EventEmitter<TableRowActivateEvent<T>>();
+    /** Event fired when row navigated. */
+    @Output()
+    readonly rowNavigate = new EventEmitter<TableRowActivateEvent<T>>();
+    /** Event fired when empty row added. */
+    @Output()
+    readonly emptyRowAdded = new EventEmitter<void>();
+    /** Event fired when save button pressed. */
+    @Output()
+    readonly save = new EventEmitter<SaveRowsEvent<T>>();
+    /** Event fired when cancel button pressed. */
+    @Output()
+    readonly cancel = new EventEmitter<void>();
+    /** Event emitted when table body being scrolled. */
+    @Output()
+    readonly tableScrolled = new EventEmitter<number>();
+    /** Event emitted when new rows has been set and rendered. */
+    @Output()
+    readonly tableRowsSet = new EventEmitter<void>();
+    /** @hidden */
+    @ViewChild('tableScrollable')
+    readonly tableScrollable: TableScrollable;
+    /** @hidden */
+    @ViewChild('tableContainer')
+    readonly tableContainer: ElementRef<HTMLDivElement>;
+    /** @hidden */
+    @ViewChild(FdTableComponent, { read: ElementRef })
+    readonly table: ElementRef<HTMLDivElement>;
+    /** @hidden */
+    @ViewChild(FDK_FOCUSABLE_GRID_DIRECTIVE)
+    readonly _focusableGrid: FocusableGridDirective;
+    /** @hidden */
+    @ContentChildren(TableColumn)
+    readonly columns: QueryList<TableColumn>;
+    /** @hidden */
+    @ContentChildren(EditableTableCell, { descendants: true })
+    readonly customEditableCells: QueryList<EditableTableCell>;
+    /** @hidden */
+    @ViewChildren(EditableTableCell)
+    readonly editableCells: QueryList<EditableTableCell>;
+    /** @hidden */
+    @ViewChildren(TableRowDirective)
+    readonly tableRows: QueryList<TableRowDirective>;
+    /** @hidden */
+    @ViewChildren(NgForm)
+    readonly editableCellForms: QueryList<NgForm>;
+    /** @hidden */
+    @ViewChildren(CheckboxComponent)
+    readonly _checkboxes: QueryList<CheckboxComponent>;
+    /** @hidden */
+    @ContentChild(TABLE_TOOLBAR)
+    readonly tableToolbar: TableToolbarWithTemplate;
+    /**
+     * @hidden
+     * Representation of combined table rows.
+     * Contains all rows including group rows.
+     */
+    _tableRows: TableRow<T>[] = [];
+    /**
+     * @hidden
+     * Representation of table rows that came from dataSource.
+     * Contains all rows including group rows.
+     */
+    _dataSourceTableRows: TableRow<T>[] = [];
+    /**
+     * @hidden
+     * Representation of added table rows.
+     */
+    _newTableRows: TableRow<T>[] = [];
+    /**
+     * @hidden
+     * Visible table rows.
+     * Rows list that is used to be rendered in the ui.
+     * Based on _tableRows and excludes hidden rows.
+     */
+    _tableRowsVisible: TableRow<T>[] = [];
+    /**
+     * @hidden
+     * Table Column Map. Where key is column key and value is column
+     */
+    _keyToColumnMap: Map<string, TableColumn> = new Map();
+    /**
+     * @hidden
+     * Table Column Map. Where key is column name and value is column
+     */
+    _nameToColumnMap: Map<string, TableColumn> = new Map();
+    /**
+     * @hidden
+     * Freezable column names and their respective indexes
+     */
+    _freezableColumns: Map<string, number> = new Map();
+    /**
+     * @hidden
+     * Freezable column names and their respective indexes for columns that will be frozen to the end of hte table
+     */
+    _freezableEndColumns: Map<string, number> = new Map();
+    /** @hidden */
+    _tableColumnsLength = 0;
+    /** @hidden */
+    _checkedState: boolean | null = false;
+    /**
+     * @hidden
+     * Mapping function for the trackBy, provided by the user.
+     * Is needed, because we are wrapping user supplied data into a `TableRow` class.
+     */
+    _rowTrackBy: TrackByFunction<TableRow<T>>;
+    /** @hidden */
+    @HostBinding('class.fd-table--group')
+    _isGroupTable = false;
+    /** @hidden */
+    _tableRowsInViewport$ = new BehaviorSubject<TableRow<T>[]>([]);
+    /** @hidden */
+    _isShownSelectionColumn = false;
+    /** @hidden */
+    readonly _toolbarContext: ToolbarContext;
+    /** @hidden */
+    _navigatedRowIndex: number;
+    /** @hidden */
+    _selectionColumnWidth = 0;
+    /** @hidden */
+    readonly tableColumnsStream = this._tableService.tableColumns$.asObservable();
+    /** @hidden */
+    _loadPreviousPages = false;
+    /** @hidden */
+    _rtl = false;
+    /** @hidden */
+    readonly _dataSourceDirective = inject(TableDataSourceDirective);
+    /** @hidden */
+    readonly _tableRowService = inject(TableRowService);
+    /** @hidden */
+    readonly initialState = inject<TableInitialState>(FDP_TABLE_STATE_DIRECTIVE, {
+        optional: true
+    });
+    /** @hidden */
+    readonly _virtualScrollDirective = inject<TableVirtualScroll>(FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE, {
+        optional: true
+    });
+    /** @hidden */
+    readonly _dndTableDirective = inject<TableDraggable>(FDP_TABLE_DRAGGABLE_DIRECTIVE, {
+        optional: true
+    });
     // keeping "loading" field private to make sure "loadingState" is used instead
     /** Loading state */
     @Input()
     private loading: boolean | undefined;
+    /** @hidden */
+    private _semanticHighlightingKey: string;
+    /** @hidden */
+    private _forceSemanticHighlighting = false;
+    /** @hidden */
+    private readonly _isShownSortSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
+    /** @hidden */
+    private readonly _isShownFilterSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
+    /** @hidden */
+    private readonly _isShownGroupSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
+    /** @hidden */
+    private readonly _isShownColumnSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
+    /**
+     * @hidden
+     * Indicates when all items are checked
+     */
+    private _checkedAll = false;
+    /**
+     * @hidden
+     * Indicates whether at least 1 item is checked
+     */
+    private _checkedAny = false;
+    /** @hidden */
+    private _subscriptions = new Subscription();
+    /** @hidden */
+    private _viewInitiated = false;
+    /** @hidden */
+    private _addedItems: T[] = [];
+    /** @hidden */
+    private _columnsWidthSet = false;
+    /** @hidden */
+    private _internalLoadingState = false;
+    /** @hidden */
+    private _dndLoadingState = false;
+    /** @hidden */
+    private readonly _rangeSelector = new RangeSelector();
+    /** @hidden */
+    private _currentPreset: PlatformTableManagedPreset = {};
+    /** @hidden */
+    private _initialStateSet = false;
+    /** @hidden */
+    private _rowHeightManuallySet = false;
+    /** @hidden */
+    private _shouldEmitRowsChange = false;
+    /** @hidden */
+    private readonly _tableHeaderResizer = inject(TableHeaderResizerDirective);
 
-    /** Text displayed when table has no items. */
-    @Input()
-    emptyTableMessage: string;
+    /** @hidden */
+    constructor(
+        private readonly _ngZone: NgZone,
+        private readonly _cdr: ChangeDetectorRef,
+        readonly _tableService: TableService,
+        private readonly _tableScrollDispatcher: TableScrollDispatcherService,
+        public readonly _tableColumnResizeService: TableColumnResizeService,
+        private readonly _elRef: ElementRef,
+        @Optional() private readonly _rtlService: RtlService,
+        readonly contentDensityObserver: ContentDensityObserver,
+        readonly injector: Injector
+    ) {
+        super();
+        this.initialState?.setTable(this);
+        this._dndTableDirective?.setTable(this);
+        this._virtualScrollDirective?.setTable(this);
+        this._dataSourceDirective?.setTable(this);
 
-    /** Table without horizontal borders. */
-    @Input()
-    noHorizontalBorders = false;
+        this._toolbarContext = {
+            counter: this._dataSourceDirective.totalItems$,
+            sortable: this._isShownSortSettingsInToolbar$,
+            filterable: this._isShownFilterSettingsInToolbar$,
+            groupable: this._isShownGroupSettingsInToolbar$,
+            columns: this._isShownColumnSettingsInToolbar$
+        };
 
-    /** Table without vertical borders. */
-    @Input()
-    noVerticalBorders = false;
-
-    /** Table without borders. */
-    @Input()
-    noBorders = false;
-
-    /** Table body without any borders, but header with borders. */
-    @Input()
-    noBodyBorders = false;
-
-    /** Table without outer borders */
-    @Input()
-    noOuterBorders = false;
-
-    /** Table body without horizontal borders. */
-    @Input()
-    set noBorderX(value: boolean) {
-        this._noBorderX = value;
+        this._subscriptions.add(
+            this._rtlService.rtl.subscribe((isRtl) => {
+                this._rtl = isRtl;
+                this._cdr.markForCheck();
+            })
+        );
     }
 
-    get noBorderX(): boolean {
-        return this._noBorderX || this.noBodyBorders;
+    /** @hidden */
+    _selectionMode: SelectionModeValue = SelectionMode.NONE;
+
+    /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
+    @Input()
+    set selectionMode(value: SelectionModeValue) {
+        this._selectionMode = value;
+        this._isShownSelectionColumn = this.selectionMode !== SelectionMode.NONE;
+        this._setSelectionColumnWidth();
     }
 
-    /** @Hidden */
-    private _noBorderX = false;
-
-    /** Table body without vertical borders. */
-    @Input()
-    set noBorderY(value: boolean) {
-        this._noBorderY = value;
+    get selectionMode(): SelectionModeValue {
+        return this._selectionMode;
     }
 
-    get noBorderY(): boolean {
-        return this._noBorderY || this.noBodyBorders;
-    }
-
-    /** @Hidden */
-    private _noBorderY = false;
-
-    /** Whether to allow for row reordering on tree tables via drag and drop. */
-    @Input()
-    enableRowReordering = true;
-
-    /** Initial visible columns. Consist of a list of unique column names */
-    @Input()
-    initialVisibleColumns: string[];
-
-    /** Initial sort options. */
-    @Input()
-    initialSortBy: CollectionSort[] = [];
-
-    /** Initial filter options. */
-    @Input()
-    initialFilterBy: CollectionFilter[] = [];
-
-    /** Initial group options. */
-    @Input()
-    initialGroupBy: CollectionGroup[] = [];
-
-    /** Initial page. */
-    @Input()
-    initialPage = 1;
-
-    /** Whether tree mode is enabled. */
-    @Input()
-    isTreeTable: boolean;
+    /** @hidden */
+    private _enableTristateMode = false;
 
     /**
      *  When True, the checked state of each tree item depends on the checked
@@ -368,41 +616,12 @@ export class TableComponent<T = any>
         return this.isTreeTable && this._enableTristateMode;
     }
 
-    /** @hidden */
-    private _enableTristateMode = false;
-
-    /** Accessor to a children nodes of tree. */
-    @Input()
-    relationKey: string;
-
-    /** Table row expanded state key. Used to set the initial state of tree row. */
-    @Input()
-    expandedStateKey: string;
-
-    /**
-     * Whether row is navigatable.
-     * Pass boolean value to set state for the all rows.
-     * Pass string value with the key of the row item's field to compute state for every single row.
-     */
-    @Input()
-    rowNavigatable: string | boolean = false;
-
-    /**
-     * Whether to highlight navigated row.
-     */
-    @Input()
-    highlightNavigatedRow = false;
-
-    /** Whether table row can be clicked */
-    @Input()
-    rowsActivable = false;
-
     /** Value with the key of the row item's field to compute semantic state of the row.  */
     @Input()
     set semanticHighlighting(value: string) {
         this._semanticHighlightingKey = value;
+        this._setSemanticHighlighting();
     }
-
     get semanticHighlighting(): string {
         if (!this._semanticHighlightingKey && this._forceSemanticHighlighting) {
             return DEFAULT_HIGHLIGHTING_KEY;
@@ -412,426 +631,39 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    private _semanticHighlightingKey: string;
-
-    /** @hidden */
-    private _forceSemanticHighlighting = false;
-
-    /** Value with the key of the row item's field to enable selecting.  */
-    @Input()
-    set selectedKey(value: string) {
-        this._selectedKey = value;
+    get initialSortBy(): CollectionSort[] {
+        return this.initialState?.initialSortBy ?? [];
     }
-
-    get selectedKey(): string {
-        return this._selectedKey;
-    }
-
-    /** @hidden */
-    private _selectedKey: string;
-
-    /** Value with the key of the row item's field to enable selecting.  */
-    @Input()
-    set selectableKey(value: string) {
-        this._selectableKey = value;
-    }
-
-    get selectableKey(): string {
-        return this._selectableKey;
-    }
-
-    /** @hidden */
-    private _selectableKey: string;
-
-    /**
-     * Tracking function that will be used to check the differences in data changes.
-     * Used similarly to `ngFor` `trackBy` function.
-     * Accepts a function that takes two parameters, index and item.
-     */
-    @Input()
-    trackBy: TrackByFunction<T>;
-
-    /**
-     * An optional function, that identifies uniqueness of a particular row.
-     * Table component uses it to be able to preserve selection when data list is changed.
-     */
-    @Input()
-    rowComparator: RowComparator<T>;
-
-    /** String or function to calculate additional rows' CSS classes. */
-    @Input()
-    rowsClass: TableRowClass<T>;
-
-    /** Used to construct empty row object for editing. */
-    @Input()
-    editableRowSkeleton: T;
-
-    /** Whether all rows should be collapsed by default after the table is loaded. */
-    @Input()
-    expandOnInit = false;
-
-    /** Whether to show only visible rows in matter of performance
-     * false by default, when true setting bodyHeight and rowHeight is required.
-     */
-    @Input()
-    virtualScroll = false;
-
-    /** Height of the row, required for the virtualScroll,
-     * default is 44px in cozy, 32px in compact and 24px in condensed (set automatically)
-     */
-    @Input()
-    rowHeight = ROW_HEIGHT.get(ContentDensityMode.COZY)!;
-
-    /** Cache size for the virtualScroll, default is 40 in each direction */
-    @Input()
-    renderAhead = 40;
-
-    /**
-     * Row drop mode.
-     */
-    @Input()
-    dropMode: FdDndDropType = 'auto';
-
-    /** Predicate function that checks whether the item can be dropped over another item. */
-    @Input()
-    dropPredicate: DropPredicate<TableRow<T>>;
-
-    /**
-     * Predicate function that checks whether the item can be dragged over another item.
-     * If the function returns `false`, dragged over item will not be highlighted, and drop event will be canceled.
-     */
-    @Input()
-    dragoverPredicate: DragoverPredicate<TableRow<T>>;
-
-    /** Event emitted when the current preset configuration has been changed. */
-    /**
-     * Whether to load previous pages.
-     * This option works only when `pageScrolling` is true, and the initial page > 1
-     */
-    @Input()
-    loadPagesBefore = false;
-
-    /** Event emitted when current preset configuration has been changed. */
-    @Output()
-    presetChanged = new EventEmitter<PlatformTableManagedPreset>();
-
-    /** Event fired when table selection has changed. */
-    @Output()
-    readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<
-        TableRowSelectionChangeEvent<T>
-    >();
-
-    /** Event fired when table sort order has changed. */
-    @Output()
-    readonly sortChange: EventEmitter<TableSortChangeEvent> = new EventEmitter<TableSortChangeEvent>();
-
-    /** Event fired when the table filter has changed. */
-    @Output()
-    readonly filterChange: EventEmitter<TableFilterChangeEvent> = new EventEmitter<TableFilterChangeEvent>();
-
-    /** Event fired when table grouping has changed. */
-    @Output()
-    readonly groupChange: EventEmitter<TableGroupChangeEvent> = new EventEmitter<TableGroupChangeEvent>();
-
-    /** Event fired when visible columns list has been changed. */
-    @Output()
-    readonly columnsChange: EventEmitter<TableColumnsChangeEvent> = new EventEmitter<TableColumnsChangeEvent>();
-
-    /** Event emitted when pagination state has been changed. */
-    @Output()
-    readonly pageChange = new EventEmitter<TablePageChangeEvent>();
-
-    /** Event fired when there is a change in the frozen column. */
-    @Output()
-    readonly columnFreeze: EventEmitter<TableColumnFreezeEvent> = new EventEmitter<TableColumnFreezeEvent>();
-
-    /** Event fired when group/tree row collapsed/expanded. */
-    @Output()
-    readonly rowToggleOpenState = new EventEmitter<TableRowToggleOpenStateEvent<T>>();
-
-    /** Event fired when tree rows rearranged through drag & drop. Consider that rows rearranged with their children rows. */
-    @Output()
-    readonly rowsRearrange = new EventEmitter<TableRowsRearrangeEvent<T>>();
-
-    /** Event fired when row clicked. */
-    @Output()
-    readonly rowActivate = new EventEmitter<TableRowActivateEvent<T>>();
-
-    /** Event fired when row navigated. */
-    @Output()
-    readonly rowNavigate = new EventEmitter<TableRowActivateEvent<T>>();
-
-    /** Event fired when empty row added. */
-    @Output()
-    readonly emptyRowAdded = new EventEmitter<void>();
-
-    /** Event fired when save button pressed. */
-    @Output()
-    readonly save = new EventEmitter<SaveRowsEvent<T>>();
-
-    /** Event fired when cancel button pressed. */
-    @Output()
-    readonly cancel = new EventEmitter<void>();
-
-    /** Event emitted when data loading is started. */
-    @Output() // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    readonly onDataRequested = new EventEmitter<void>();
-
-    /** Event emitted when data loading is finished. */
-    @Output() // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    readonly onDataReceived = new EventEmitter<void>();
-
-    /** Event emitted when table body being scrolled. */
-    @Output()
-    tableScrolled = new EventEmitter<number>();
-
-    /** Event emitted when new rows has been set and rendered. */
-    @Output()
-    tableRowsSet = new EventEmitter<void>();
-
-    /** @hidden */
-    @ViewChild('tableScrollable')
-    readonly tableScrollable: TableScrollable;
-
-    /** @hidden */
-    @ViewChild('tableContainer')
-    readonly tableContainer: ElementRef<HTMLDivElement>;
-
-    /** @hidden */
-    @ViewChild(FdTableComponent, { read: ElementRef })
-    readonly table: ElementRef<HTMLDivElement>;
-
-    /** @hidden */
-    @ViewChild(FDK_FOCUSABLE_GRID_DIRECTIVE)
-    _focusableGrid: FocusableGridDirective;
-
-    /** @hidden */
-    @ContentChildren(TableColumn)
-    readonly columns: QueryList<TableColumn>;
-
-    /** @hidden */
-    @ContentChildren(EditableTableCell, { descendants: true })
-    readonly customEditableCells: QueryList<EditableTableCell>;
-
-    /** @hidden */
-    @ViewChildren(EditableTableCell)
-    readonly editableCells: QueryList<EditableTableCell>;
-
-    /** @hidden */
-    @ViewChildren(TableRowDirective)
-    tableRows: QueryList<TableRowDirective>;
-
-    /** @hidden */
-    @ViewChildren(NgForm)
-    editableCellForms: QueryList<NgForm>;
-
-    /** @hidden */
-    @ViewChildren(CheckboxComponent)
-    _checkboxes: QueryList<CheckboxComponent>;
-
-    /** @hidden */
-    readonly _tableColumnsSubject = new BehaviorSubject<TableColumn[]>([]);
-
-    /** @hidden */
-    readonly tableColumnsStream = this._tableColumnsSubject.asObservable();
-
-    /** @hidden */
-    @ContentChild(TABLE_TOOLBAR)
-    readonly tableToolbar: TableToolbarWithTemplate;
-
-    /** @hidden */
-    readonly SORT_DIRECTION = SortDirection;
-
-    /** @hidden */
-    readonly SELECTION_MODE = SelectionMode;
-
-    /**
-     * @hidden
-     * Data source items stream.
-     */
-    readonly _dataSourceItemsSubject: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
-
-    /**
-     * @hidden
-     * Representation of combined table rows.
-     * Contains all rows including group rows.
-     */
-    _tableRows: TableRow<T>[] = [];
-
-    /**
-     * @hidden
-     * Representation of table rows that came from dataSource.
-     * Contains all rows including group rows.
-     */
-    _dataSourceTableRows: TableRow<T>[] = [];
-
-    /**
-     * @hidden
-     * Representation of added table rows.
-     */
-    _newTableRows: TableRow<T>[] = [];
-
-    /**
-     * @hidden
-     * Visible table rows.
-     * Rows list that is used to be rendered in the ui.
-     * Based on _tableRows and excludes hidden rows.
-     */
-    _tableRowsVisible: TableRow<T>[] = [];
-
-    /**
-     * @hidden
-     * Sort Rules Map. Where key is column key and value is associated sort rule
-     */
-    _sortRulesMap: Map<string, CollectionSort> = new Map();
-
-    /**
-     * @hidden
-     * Filter Rules Map. Where key is column key and value is associated filter rules
-     * Many filters can be applied to one column
-     */
-    _filterRulesMap: Map<string, CollectionFilter[]> = new Map();
-
-    /**
-     * @hidden
-     * Group Rules Map. Where key is column key and value is associated group rule
-     */
-    _groupRulesMapSubject = new BehaviorSubject<Map<string, CollectionGroup>>(new Map());
-
-    /** @hidden */
-    get _groupRulesMap(): Map<string, CollectionGroup> {
-        return this._groupRulesMapSubject.getValue();
-    }
-
-    /** @hidden */
-    _isShownNavigationColumnSubject = new BehaviorSubject<boolean>(false);
-
-    /** @hidden */
-    get _isShownNavigationColumn(): boolean {
-        return this._isShownNavigationColumnSubject.getValue();
-    }
-
-    /** @hidden */
-    private get _headerCellFocused(): boolean {
-        return document.activeElement?.tagName.toLowerCase() === 'th';
-    }
-
-    /**
-     * @hidden
-     * Table Column Map. Where key is column key and value is column
-     */
-    _keyToColumnMap: Map<string, TableColumn> = new Map();
-    /**
-     * @hidden
-     * Table Column Map. Where key is column name and value is column
-     */
-    _nameToColumnMap: Map<string, TableColumn> = new Map();
-
-    /**
-     * @hidden
-     * Freezable column names and their respective indexes
-     */
-    _freezableColumns: Map<string, number> = new Map();
-
-    /**
-     * @hidden
-     * Freezable column names and their respective indexes for columns that will be frozen to the end of hte table
-     */
-    _freezableEndColumns: Map<string, number> = new Map();
-
-    /** @hidden */
-    private readonly _isShownSortSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
-
-    /** @hidden */
-    private readonly _isShownFilterSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
-
-    /** @hidden */
-    private readonly _isShownGroupSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
-
-    /** @hidden */
-    private readonly _isShownColumnSettingsInToolbar$ = new BehaviorSubject<boolean>(false);
-
-    /** @hidden */
-    readonly _isFilteringFromHeaderDisabled$ = new BehaviorSubject<boolean>(false);
-
-    /** @hidden */
-    _tableColumnsLength = 0;
-
-    /**
-     * @hidden
-     * RTL flag
-     */
-    _rtl = false;
-
-    /** @hidden */
-    private _focusedCellPosition: Nullable<FocusableCellPosition>;
-
-    /**
-     * @hidden
-     * Indicates when all items are checked
-     */
-    private _checkedAll = false;
-
-    /**
-     * @hidden
-     * Indicates whether at least 1 item is checked
-     */
-    private _checkedAny = false;
-
-    /** @hidden */
-    get checkedState(): boolean | null {
-        if (this._checkedAll) {
-            return true;
-        }
-        if (this._checkedAny) {
-            return null; // passing null for indeterminate state
-        }
-        return false;
-    }
-
-    /**
-     * @hidden
-     * Total items length given by data source
-     */
-    _totalItems = 0;
-
-    /** @hidden */
-    private _totalItems$ = new BehaviorSubject<number>(this._totalItems);
 
     /**
      * @hidden
      * Columns to be rendered in the template
      */
-    _visibleColumns: TableColumn[] = [];
+    get _visibleColumns(): TableColumn[] {
+        return this._tableService.visibleColumns$.value;
+    }
 
     /**
      * @hidden
      * Columns to be rendered as a pop-in columns.
      */
-    _poppingColumns: TableColumn[] = [];
-
-    /**
-     * @hidden
-     * Mapping function for the trackBy, provided by the user.
-     * Is needed, because we are wrapping user supplied data into a `TableRow` class.
-     */
-    _rowTrackBy: TrackByFunction<TableRow<T>>;
+    get _poppingColumns(): TableColumn[] {
+        return this._tableService.poppingColumns$.value;
+    }
 
     /** @hidden */
-    _isGroupTable = false;
+    get isTreeTable(): boolean {
+        return !!this._dndTableDirective?.isTreeTable;
+    }
 
     /** @hidden */
-    _virtualScrollTotalHeight = 0;
+    get enableRowReordering(): boolean {
+        return !!this._dndTableDirective?.enableRowReordering;
+    }
 
-    /** @hidden */
-    _virtualScrollTransform: Nullable<string> = null;
-
-    /** @hidden */
-    _tableRowsInViewport: TableRow<T>[] = [];
-
-    /** @hidden */
-    get _isShownSelectionColumn(): boolean {
-        return this.selectionMode === SelectionMode.SINGLE || this.selectionMode === SelectionMode.MULTIPLE;
+    /** Whether the table rows are draggable. */
+    get isDraggable(): boolean {
+        return !!this._dndTableDirective?.isTreeTable && !!this._dndTableDirective?.enableRowReordering;
     }
 
     /** @hidden */
@@ -840,49 +672,6 @@ export class TableComponent<T = any>
             this._tableColumnResizeService.fixedWidth &&
             (this.tableContainer?.nativeElement?.scrollWidth ?? 0) > (this.table?.nativeElement?.scrollWidth ?? 0)
         );
-    }
-
-    /** @hidden */
-    get _rowsDraggable(): boolean {
-        return this.isTreeTable && this.enableRowReordering;
-    }
-
-    /** @hidden */
-    _toolbarContext: any = {
-        counter: this._totalItems$,
-        sortable: this._isShownSortSettingsInToolbar$,
-        filterable: this._isShownFilterSettingsInToolbar$,
-        groupable: this._isShownGroupSettingsInToolbar$,
-        columns: this._isShownColumnSettingsInToolbar$
-    };
-
-    /** @hidden */
-    private _ds: FdpTableDataSource<T>;
-
-    /** @hidden */
-    private _tableDataSource: TableDataSource<T>;
-
-    /** @hidden opened data source stream */
-    private _dsOpenedStream: Observable<T[]> | null;
-
-    /** @hidden for data source handling */
-    private _dsSubscription: Subscription | null;
-
-    /** @hidden */
-    private _subscriptions = new Subscription();
-
-    /** @hidden */
-    private _viewInitiated = false;
-
-    /** @hidden */
-    private _dragDropInProgress = false;
-
-    /** @hidden */
-    _navigatedRowIndex: number;
-
-    /** @hidden */
-    get _selectionColumnWidth(): number {
-        return this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensityObserver.value) ?? 0 : 0;
     }
 
     /** @hidden */
@@ -902,102 +691,40 @@ export class TableComponent<T = any>
 
     /** @hidden */
     get loadingState(): boolean {
-        return this.loading ?? (this._internalLoadingState || this._dndLoadingState);
+        return this.loading ?? (this._dataSourceDirective._internalLoadingState || this._dndLoadingState);
     }
 
-    /** @hidden
-     * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
+    /** @hidden */
+    getTableRows(): TableRow[] {
+        return this._tableRows;
+    }
+
+    /** @hidden */
+    setTableRows(rows: TableRow[]): void {
+        this._tableRows = rows;
+    }
+
+    /** @hidden */
+    getVisibleRows(): TableRow[] {
+        return this._tableRowsVisible;
+    }
+
+    /** @hidden */
+    setVisibleRows(rows: TableRow[]): void {
+        this._tableRowsVisible = rows;
+    }
+
+    /** Returns array of rows that are currently in viewport. */
+    getRowsInViewport(): TableRow[] {
+        return this._tableRowsInViewport$.value;
+    }
+
+    /**
+     * Sets an array of rows that are currently in viewport.
+     * @param rows Array of rows.
      */
-    _firstLoadingDone = false;
-
-    /** @hidden */
-    private _addedItems: T[] = [];
-
-    /** @hidden */
-    private _columnsWidthSet = false;
-
-    /** @hidden */
-    private _internalLoadingState = false;
-
-    /** @hidden */
-    private _dndLoadingState = false;
-
-    /** @hidden */
-    private readonly _rangeSelector = new RangeSelector();
-
-    /** @hidden */
-    private _currentPreset: PlatformTableManagedPreset = {};
-
-    /** @hidden */
-    private _initialStateSet = false;
-
-    /** @hidden */
-    private _focusinTimerId;
-
-    /** @hidden */
-    private _virtualScrollCache = { startNodeIndex: -1, visibleNodeCount: -1, totalNodeCount: -1 };
-
-    /** @hidden */
-    private _rowHeightManuallySet = false;
-
-    /** @hidden */
-    private _loadPreviousPages = false;
-
-    /** @hidden */
-    private _shouldEmitRowsChange = false;
-
-    /** @hidden */
-    @HostListener('focusout')
-    _onFocusOut(): void {
-        this._focusinTimerId = setTimeout(() => {
-            this._focusedCellPosition = null;
-        });
-    }
-
-    /** @hidden */
-    @HostListener('focusin')
-    _onFocusIn(): void {
-        if (this._focusinTimerId) {
-            clearTimeout(this._focusinTimerId);
-            this._focusinTimerId = null;
-        }
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    _onKeyDown(event: KeyboardEvent): void {
-        if (
-            (KeyUtil.isKeyCode(event, LEFT_ARROW) || (this._rtl && KeyUtil.isKeyCode(event, RIGHT_ARROW))) &&
-            event.shiftKey &&
-            this._headerCellFocused
-        ) {
-            this._tableColumnResizeService._processResize(-32);
-            event.preventDefault();
-            event.stopImmediatePropagation();
-        } else if (
-            (KeyUtil.isKeyCode(event, RIGHT_ARROW) || (this._rtl && KeyUtil.isKeyCode(event, LEFT_ARROW))) &&
-            event.shiftKey &&
-            this._headerCellFocused
-        ) {
-            this._tableColumnResizeService._processResize(32);
-            event.preventDefault();
-            event.stopImmediatePropagation();
-        }
-    }
-
-    /** @hidden */
-    constructor(
-        private readonly _ngZone: NgZone,
-        private readonly _cdr: ChangeDetectorRef,
-        private readonly _tableService: TableService,
-        private readonly _tableScrollDispatcher: TableScrollDispatcherService,
-        public readonly _tableColumnResizeService: TableColumnResizeService,
-        private readonly _elRef: ElementRef,
-        @Optional() private readonly _rtlService: RtlService,
-        readonly contentDensityObserver: ContentDensityObserver,
-        readonly injector: Injector
-    ) {
-        super();
+    setRowsInViewport(rows: TableRow[]): void {
+        this._tableRowsInViewport$.next(rows);
     }
 
     /** @hidden */
@@ -1040,30 +767,22 @@ export class TableComponent<T = any>
         if ('rowHeight' in changes) {
             this._rowHeightManuallySet = true;
         }
-
-        if (this.virtualScroll && (changes['rowHeight'] || changes['virtualScroll'] || changes['renderAhead'])) {
-            this._calculateVirtualScrollRows();
-        }
     }
 
     /** @hidden */
     ngOnInit(): void {
         this._tableColumnResizeService.setTableRef(this);
 
-        this._isGroupTable = this.initialGroupBy?.length > 0;
+        this._isGroupTable = (this.initialState?.initialGroupBy?.length ?? 0) > 0;
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
         this._viewInitiated = true;
 
-        this._setInitialState();
+        this.initialState?.setInitialState();
 
-        if (this._ds) {
-            this._initializeDS(this._ds);
-        }
-
-        this._listenToRtlChanges();
+        this._dataSourceDirective?.initializeDataSource();
 
         this._listenToTableStateChanges();
 
@@ -1071,13 +790,13 @@ export class TableComponent<T = any>
 
         this._calculateVisibleColumns();
 
-        this._constructTableMetadata();
+        this._tableService.constructTableMetadata();
 
         this._listenToTableRowsPipe();
 
         this._listenToPageScrolling();
 
-        this._listenToVirtualScroll();
+        this._virtualScrollDirective?.listenOnVirtualScroll();
 
         this._listenToRowHeightChange();
 
@@ -1090,8 +809,6 @@ export class TableComponent<T = any>
         this._listenToLoadingAndRefocusCell();
 
         this._removeCheckboxTabIndex();
-
-        this._cdr.detectChanges();
 
         if (this.expandOnInit) {
             this.expandAll();
@@ -1113,7 +830,6 @@ export class TableComponent<T = any>
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._closeDataSource();
         this._subscriptions.unsubscribe();
     }
 
@@ -1232,7 +948,7 @@ export class TableComponent<T = any>
             e.expanded = true;
             e.hidden = false;
         });
-        this._onTableRowsChanged();
+        this.onTableRowsChanged();
     }
 
     /** collapse all rows */
@@ -1243,7 +959,7 @@ export class TableComponent<T = any>
                 e.hidden = true;
             }
         });
-        this._onTableRowsChanged();
+        this.onTableRowsChanged();
     }
 
     /** Search in table */
@@ -1280,7 +996,7 @@ export class TableComponent<T = any>
 
     /** Disable filter from column heder menu */
     setHeaderColumnFilteringDisabled(disabled: boolean): void {
-        this._isFilteringFromHeaderDisabled$.next(disabled);
+        this._tableService._isFilteringFromHeaderDisabled$.next(disabled);
     }
 
     /** Set the row navigation */
@@ -1311,7 +1027,7 @@ export class TableComponent<T = any>
 
         if (this.selectionMode === SelectionMode.SINGLE) {
             this._toggleSingleSelectableRow(row);
-        } else if (this.selectionMode === this.SELECTION_MODE.MULTIPLE) {
+        } else if (this.selectionMode === SelectionMode.MULTIPLE) {
             this._toggleMultiSelectRow(row);
         }
     }
@@ -1368,7 +1084,7 @@ export class TableComponent<T = any>
 
     /** Get table data source */
     getDataSource(): TableDataSource<T> {
-        return this._tableDataSource;
+        return this._dataSourceDirective._tableDataSource;
     }
 
     /**
@@ -1376,6 +1092,7 @@ export class TableComponent<T = any>
      */
     addRow(): void {
         this._forceSemanticHighlighting = true;
+        this._setSemanticHighlighting();
 
         const newRow = buildNewRowSkeleton(this.editableRowSkeleton, this.columns.toArray());
         newRow[this.semanticHighlighting] = EDITABLE_ROW_SEMANTIC_STATE;
@@ -1400,7 +1117,7 @@ export class TableComponent<T = any>
      */
     saveRows(): void {
         const event = new SaveRowsEvent<T>(() => {
-            this._tableDataSource.fetch(this.getTableState());
+            this._dataSourceDirective._tableDataSource.fetch(this.getTableState());
         }, [...this._addedItems]);
 
         const forms = [...this.customEditableCells.toArray(), ...this.editableCells.toArray()].map((t) => t.form);
@@ -1418,7 +1135,7 @@ export class TableComponent<T = any>
     /** Sets current preset for the Table. */
     setPreset(data: PlatformTableManagedPreset): void {
         this._currentPreset = data;
-        const newState: TableState = Object.assign({}, this._getDefaultPresetState(), data);
+        const newState: TableState = Object.assign({}, this._tableService.getDefaultState(), data);
         this._tableService.setSort(newState.sortBy);
         this._tableService.setFilters(newState.filterBy);
         this._tableService.setGroups(newState.groupBy);
@@ -1483,61 +1200,18 @@ export class TableComponent<T = any>
             this._toggleGroupRow(tableRow);
         }
 
-        this._cdr.detectChanges();
+        // this._cdr.detectChanges();
     }
 
     // Private API
 
     /** @hidden */
     _scrollToOverlappedCell(): void {
-        const tableScrollableEl = this.tableScrollable.getElementRef().nativeElement;
-
-        if (
-            (this._freezableColumns.size || this._freezableEndColumns.size) &&
-            tableScrollableEl.scrollWidth > tableScrollableEl.clientWidth
-        ) {
-            const activeEl = document.activeElement;
-            if (
-                activeEl &&
-                !(
-                    activeEl.classList.contains('fd-table__cell--fixed') ||
-                    activeEl.classList.contains('fd-table__cell--fixed-end')
-                )
-            ) {
-                if (this._freezableColumns.size && !this._freezableEndColumns.size) {
-                    activeEl.scrollIntoView({ block: 'nearest', inline: 'end' });
-                } else if (!this._freezableColumns.size && this._freezableEndColumns.size) {
-                    activeEl.scrollIntoView({ block: 'nearest', inline: 'center' });
-                } else if (this._freezableColumns.size && this._freezableEndColumns.size) {
-                    // check to see if another element obstructs the active element
-                    const activeElLeft = activeEl.getBoundingClientRect().left;
-                    const activeElTop = activeEl.getBoundingClientRect().top;
-                    const topElementFromLeft = document.elementFromPoint(activeElLeft, activeElTop);
-                    // if the activeEl is overlapped
-                    if (
-                        topElementFromLeft &&
-                        !activeEl.isSameNode(topElementFromLeft) &&
-                        topElementFromLeft.classList.contains('fd-table__cell--fixed-end')
-                    ) {
-                        const topElementX = topElementFromLeft.getBoundingClientRect().left;
-                        const leftVal = this._rtl
-                            ? (activeElLeft + activeEl.getBoundingClientRect().width - topElementX) * -1
-                            : activeElLeft + activeEl.getBoundingClientRect().width - topElementX;
-                        tableScrollableEl.scrollBy({ top: 0, left: leftVal });
-                    } else if (
-                        topElementFromLeft &&
-                        !activeEl.isSameNode(topElementFromLeft) &&
-                        topElementFromLeft.classList.contains('fd-table__cell--fixed')
-                    ) {
-                        const topElementX = topElementFromLeft.getBoundingClientRect().right;
-                        const leftVal = this._rtl
-                            ? (activeElLeft - activeEl.getBoundingClientRect().width - topElementX) * -1
-                            : activeElLeft - activeEl.getBoundingClientRect().width - topElementX;
-                        tableScrollableEl.scrollBy({ top: 0, left: leftVal });
-                    }
-                }
-            }
-        }
+        this.tableScrollable.scrollToOverlappedCell(
+            this._rtl,
+            this._freezableColumns.size,
+            this._freezableEndColumns.size
+        );
     }
 
     /** @hidden */
@@ -1547,33 +1221,7 @@ export class TableComponent<T = any>
         }
 
         this._dndLoadingState = isLoading;
-        this._cdr.detectChanges();
-    }
-
-    /** @hidden */
-    _isColumnHasHeaderMenu(column: TableColumn): boolean {
-        return (
-            column.sortable ||
-            column.groupable ||
-            column.freezable ||
-            column.endFreezable ||
-            (column.filterable && !this._isFilteringFromHeaderDisabled$.getValue())
-        );
-    }
-
-    /** @hidden */
-    _isTreeRow(row: TableRow): boolean {
-        return row.type === TableRowType.TREE;
-    }
-
-    /** @hidden */
-    _isItemRow(row: TableRow): boolean {
-        return row.type === TableRowType.ITEM;
-    }
-
-    /** @hidden */
-    _isGroupRow(row: TableRow): boolean {
-        return row.type === TableRowType.GROUP;
+        this._tableService.setTableLoading(this.loadingState);
     }
 
     /**
@@ -1594,7 +1242,7 @@ export class TableComponent<T = any>
 
         this._rangeSelector.applyValueToEachInRange((idx) => {
             const row = rows[idx];
-            if (this._isItemRow(row) || this._isTreeRow(row)) {
+            if (row.type === TableRowType.ITEM || row.isTree) {
                 row.checked = checked;
                 checked ? added.push(row) : removed.push(row);
 
@@ -1679,76 +1327,15 @@ export class TableComponent<T = any>
         });
     }
 
-    /**
-     * @hidden
-     * Create table rows rearrange event
-     */
-    _emitRowsRearrangeEvent(row: TableRow, dropRow: TableRow, event: FdDropEvent<TableRow>): void {
-        const rows = this._tableRows.map(({ value }) => value);
-
-        this.rowsRearrange.emit(
-            new TableRowsRearrangeEvent(
-                row.value,
-                dropRow.value,
-                event.draggedItemIndex,
-                event.replacedItemIndex,
-                event.insertAt,
-                event.mode,
-                rows
-            )
-        );
-    }
-
-    /**
-     * @hidden
-     * Group By triggered from column header
-     */
-    _columnHeaderGroupBy(field: string): void {
-        if (this.state.groupBy?.length === 1 && this.state.groupBy[0].field === field) {
-            // reset grouping, if already grouped by this field
-            this.group([]);
-        } else {
-            this.group([{ field, direction: SortDirection.NONE, showAsColumn: true }]);
-        }
-    }
-
-    /**
-     * @hidden
-     * Filter triggered from column header
-     */
-    _columnHeaderFilterBy(field: string, value: string): void {
-        if (value) {
-            const collectionFilter: CollectionStringFilter = {
-                field,
-                value,
-                type: FilterableColumnDataType.STRING,
-                strategy: FILTER_STRING_STRATEGY.CONTAINS,
-                exclude: false
-            };
-
-            this.addFilter([collectionFilter]);
-        } else {
-            this.removeFilter([field]);
-        }
-    }
-
-    /**
-     * @hidden
-     * Sort triggered from column header
-     */
-    _columnHeaderSortBy(field: string, direction: SortDirection): void {
-        this.sort([{ field, direction }]);
-    }
-
     /** @hidden */
     _onCellClick(colIdx: number, row: TableRow<T>): void {
-        if (row.state === 'readonly' && this._isTreeRowFirstCell(colIdx, row)) {
+        if (row.state === 'readonly' && isTreeRowFirstCell(colIdx, row)) {
             this._toggleGroupRow(row);
         }
     }
 
     /** @hidden */
-    _onRowClick(row: TableRow<T>, event?: Event): void {
+    _onRowClick(row: TableRow<T>, event: KeyboardEvent | MouseEvent): void {
         if (row.state !== 'readonly') {
             return;
         }
@@ -1765,13 +1352,8 @@ export class TableComponent<T = any>
             }
         }
 
-        if (row.navigatable) {
-            this._emitRowNavigate(row);
-        }
-
-        if (this.rowsActivable) {
-            this._emitRowActivate(row);
-        }
+        this._emitRowNavigate(row);
+        this._emitRowActivate(row);
     }
 
     /** @hidden */
@@ -1788,12 +1370,12 @@ export class TableComponent<T = any>
      * @hidden
      * Expand/Collapse group row
      */
-    _toggleGroupRow(groupRow: TableRow): void {
-        if (this._dragDropInProgress) {
+    _toggleGroupRow(groupRow: TableRow<T>): void {
+        if (this._dndTableDirective?.dragDropInProgress) {
             return;
         }
 
-        this._toggleExpandableTableRow(groupRow);
+        this.toggleExpandableTableRow(groupRow);
 
         const groupRowIndex = this._tableRows.indexOf(groupRow);
         this.rowToggleOpenState.emit(
@@ -1801,60 +1383,11 @@ export class TableComponent<T = any>
         );
     }
 
-    /**
-     * This method is used in both css class condition and in the (keydown.enter) handler. We want
-     * to make sure that we also allow keyboard handling for the non-tree cells.
-     *
-     * @param event Optional event that is used only for the keydown even handler
-     * @hidden
-     */
-    _isTreeRowFirstCell(cellIndex: number, row: TableRow, event?: Event): boolean {
-        return (cellIndex === 0 && this._isTreeRow(row)) || (!!event && !this._isTreeRow(row));
-    }
-
-    /** @hidden */
-    _dragDropStart(): void {
-        this._dragDropInProgress = true;
-    }
-
-    /** @hidden */
-    _dragDropItemDrop(event: FdDropEvent<TableRow>): void {
-        /** After timeout to make click event handled first */
-        this._ngZone.runOutsideAngular(() => {
-            setTimeout(() => (this._dragDropInProgress = false));
-        });
-
-        this._onZoneFree(() => {
-            if (this.isTreeTable && event.draggedItemIndex !== event.replacedItemIndex) {
-                const dragRow = this._tableRows.find((row) => row === this._tableRowsVisible[event.draggedItemIndex]);
-                const dropRow = this._tableRows.find((row) => row === this._tableRowsVisible[event.replacedItemIndex]);
-
-                if (!dragRow || !dropRow || this._isDroppedInsideItself(dropRow, dragRow)) {
-                    return;
-                }
-
-                this._dragDropUpdateDragParentRowAttributes(dragRow);
-                this._dragDropRearrangeTreeRows(dragRow, dropRow, event);
-                this._dragDropUpdateDropRowAttributes(dragRow, dropRow, event.mode);
-
-                if (!dropRow.expanded && event.mode === 'group') {
-                    this._toggleExpandableTableRow(dropRow);
-                } else {
-                    this._onTableRowsChanged();
-                }
-
-                this._cdr.detectChanges();
-                this._emitRowsRearrangeEvent(dragRow, dropRow, event);
-            }
-        });
-    }
-
     /** @hidden */
     _emitRowNavigate(row: TableRow<T>): void {
         if (!row.navigatable) {
             return;
         }
-
         const rowIndex = this._tableRows.indexOf(row);
 
         if (this.highlightNavigatedRow) {
@@ -1864,43 +1397,35 @@ export class TableComponent<T = any>
         this.rowNavigate.emit(new TableRowActivateEvent<T>(rowIndex, row.value));
     }
 
-    /** @hidden */
-    _columnTrackBy(index: number, column: TableColumn): string {
-        return column.name;
-    }
-
-    /** @hidden */
-    async _onCellFocused(position: FocusableItemPosition): Promise<void> {
-        this._focusedCellPosition = { rowIndex: position.rowIndex, colIndex: position.colIndex };
-    }
-
     /** Fetch data source data. */
     fetch(): void {
-        this._tableDataSource.fetch(this.getTableState());
+        this._dataSourceDirective._tableDataSource.fetch(this.getTableState());
     }
 
     /** @hidden */
-    _dragRowFromKeyboard(dir: string, event: Event, currentRowIndex: number, mode: 'shift' | 'group'): void {
-        if (!this._rowsDraggable) {
-            return;
-        }
-        event.preventDefault();
-        let replacedIndex;
-        dir === 'up' ? (replacedIndex = currentRowIndex - 1) : (replacedIndex = currentRowIndex + 1);
+    onTableRowsChanged(): void {
+        this._calculateVisibleTableRows();
+        this._calculateCheckedAll();
+    }
 
-        if (this._tableRowsVisible[replacedIndex]) {
-            const dragDropEvent: FdDropEvent<TableRow<T>> = {
-                items: this._tableRowsVisible,
-                draggedItemIndex: currentRowIndex,
-                replacedItemIndex: replacedIndex,
-                insertAt: dir === 'down' ? 'after' : 'before',
-                mode
-            };
-            this._dragDropItemDrop(dragDropEvent);
-            setTimeout(() => {
-                (event.target as HTMLElement).focus();
-            });
-        }
+    /** @hidden */
+    toggleExpandableTableRow(rowToToggle: TableRow): void {
+        const expanded = (rowToToggle.expanded = !rowToToggle.expanded);
+
+        findRowChildren(rowToToggle, this._tableRows).forEach((row) => {
+            // if parent is collapsed we want to hide all nested items
+            if (!expanded) {
+                row.hidden = true;
+                row.expanded = false;
+            }
+
+            // if parent is expanded, we want to show only items which direct parents are expanded as well
+            if (expanded) {
+                row.hidden = !getRowParents(row, rowToToggle).every((parent) => parent.expanded);
+            }
+        });
+
+        this.onTableRowsChanged();
     }
 
     /** @hidden */
@@ -1911,153 +1436,9 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    private _isDroppedInsideItself(dropRow: TableRow, dragRow: TableRow): boolean {
-        const dropRowParents = getRowParents(dropRow);
-        return !!dropRowParents.find((row) => row === dragRow);
-    }
-
-    /** @hidden */
-    private _dragDropUpdateDragParentRowAttributes(dragRow: TableRow): void {
-        const parentRow = dragRow.parent;
-
-        if (!parentRow) {
-            return;
-        }
-
-        const parentRowChildren = findRowChildren(parentRow, this._tableRows);
-        const dragRowChildren = findRowChildren(dragRow, this._tableRows);
-
-        if (parentRowChildren.length - (dragRowChildren.length + 1) === 0) {
-            parentRow.type = TableRowType.ITEM;
-        }
-    }
-
-    /** @hidden */
-    private _dragDropUpdateDropRowAttributes(dragRow: TableRow, dropRow: TableRow, mode: FdDndDropEventMode): void {
-        if (dragRow.parent) {
-            // Remove child row from previous parent row.
-            dragRow.parent.children.splice(dragRow.parent.children.indexOf(dragRow), 1);
-        }
-        dragRow.level = dropRow.level + (mode === 'group' ? 1 : 0);
-
-        if (mode === 'group') {
-            dragRow.parent = dropRow;
-            if (!this._isTreeRow(dropRow)) {
-                dropRow.type = TableRowType.TREE;
-            }
-
-            dropRow.children.push(dragRow);
-        } else {
-            dragRow.parent = dropRow.parent;
-            dropRow.parent?.children.push(dragRow);
-        }
-
-        const children = findRowChildren(dragRow, this._tableRows);
-        children.forEach((row) => {
-            row.level = getRowParents(row).length;
-        });
-    }
-
-    /** @hidden */
-    private _dragDropRearrangeTreeRows(dragRow: TableRow, dropRow: TableRow, event: FdDropEvent<TableRow>): void {
-        if (event.mode === 'shift') {
-            this._handleShiftDropAction(dragRow, dropRow, event);
-        } else {
-            this._handleReplaceDropAction(dragRow, dropRow, event);
-        }
-    }
-
-    /** @hidden */
-    private _getNewDragDropRowsPosition(dragRow: TableRow, dropRow: TableRow): UpdatedDndRowsPosition {
-        const allRows = this._tableRows;
-
-        const dragRowIndex = allRows.findIndex((row) => row === dragRow);
-        const dragRowChildren = findRowChildren(dragRow, this._tableRows);
-
-        const rowsToMove = allRows.splice(dragRowIndex, dragRowChildren.length + 1);
-
-        const dropRowIndex = allRows.findIndex((row) => row === dropRow);
-        const dropRowChildren = findRowChildren(dropRow, this._tableRows);
-
-        const dropRowItemsLength = dropRowChildren.length + 1;
-
-        const rowsAfterDropRow = allRows.splice(dropRowIndex + dropRowItemsLength, allRows.length + dropRowItemsLength);
-        const dropRowItems = allRows.splice(dropRowIndex, dropRowItemsLength);
-
-        return {
-            allRows,
-            rowsToMove,
-            rowsAfterDropRow,
-            dropRowItems
-        };
-    }
-
-    /** @hidden */
-    private _handleShiftDropAction(dragRow: TableRow, dropRow: TableRow, event: FdDropEvent<TableRow>): void {
-        const { allRows, rowsToMove, rowsAfterDropRow, dropRowItems } = this._getNewDragDropRowsPosition(
-            dragRow,
-            dropRow
-        );
-
-        this._tableRows = [
-            ...allRows,
-            ...(event.insertAt === 'after' ? dropRowItems : []),
-            ...rowsToMove,
-            ...(event.insertAt === 'after' ? [] : dropRowItems),
-            ...rowsAfterDropRow
-        ];
-    }
-
-    /** @hidden */
-    private _handleReplaceDropAction(dragRow: TableRow, dropRow: TableRow, event: FdDropEvent<TableRow>): void {
-        const { allRows, rowsToMove, rowsAfterDropRow, dropRowItems } = this._getNewDragDropRowsPosition(
-            dragRow,
-            dropRow
-        );
-
-        this._tableRows = [...allRows, ...dropRowItems, ...rowsToMove, ...rowsAfterDropRow];
-    }
-
-    /** @hidden */
-    private _setInitialState(): void {
-        const prevState = this.getTableState();
-        const columns = this.getTableColumns();
-        const page = prevState.page;
-        const visibleColumns =
-            this.initialVisibleColumns ||
-            (prevState.columns.length ? prevState.columns : columns.map(({ name }) => name));
-
-        this._loadPreviousPages = this.pageScrolling && this.loadPagesBefore && this.initialPage > 1;
-
-        const initialPage = this._loadPreviousPages
-            ? 1
-            : this.initialPage < page.currentPage
-            ? page.currentPage
-            : this.initialPage;
-
-        const initialPageSize =
-            (this._loadPreviousPages ? this.initialPage : initialPage) * (this.pageSize || page.pageSize);
-
-        this.setTableState({
-            ...prevState,
-            columns: visibleColumns,
-            columnKeys: columns.filter((c) => visibleColumns.includes(c.name)).map((c) => c.key),
-            sortBy: this.initialSortBy || prevState.sortBy,
-            filterBy: this.initialFilterBy || prevState.filterBy,
-            groupBy: this.initialGroupBy || prevState.groupBy,
-            freezeToColumn: this.freezeColumnsTo || prevState.freezeToColumn,
-            freezeToEndColumn: this.freezeEndColumnsTo || prevState.freezeToEndColumn,
-            page: {
-                currentPage: initialPage,
-                pageSize: initialPageSize
-            }
-        });
-    }
-
-    /** @hidden */
     private _listenToTableRowsPipe(): void {
         this._subscriptions.add(
-            this._dataSourceItemsSubject
+            this._dataSourceDirective.items$
                 .pipe(
                     // map source items to table rows
                     map((source: T[]) => this._createTableRowsByDataSourceItems(source)),
@@ -2065,8 +1446,10 @@ export class TableComponent<T = any>
                     switchMap((rows: TableRow[]) =>
                         this.isTreeTable
                             ? of(rows)
-                            : this._groupRulesMapSubject.pipe(
-                                  map((groupRules) => this._groupTableRows(rows, groupRules.values()))
+                            : this._tableService.groupRules$.pipe(
+                                  map((groupRules) =>
+                                      this._tableRowService.groupTableRows(rows, groupRules.values(), groupRules)
+                                  )
                               )
                     )
                 )
@@ -2084,80 +1467,93 @@ export class TableComponent<T = any>
             })
         );
         this._subscriptions.add(
-            merge(
-                // Events that should trigger DataSource.fetch()
-                this._tableService.sortChange,
-                this._tableService.filterChange,
-                this._tableService.searchChange,
-                this._tableService.pageChange
-            )
+            this._tableService.needFetch$
                 .pipe(
                     map(() => this._tableService.getTableState()),
-                    filter((state) => !!state && !!this._tableDataSource),
+                    filter((state) => !!state && !!this._dataSourceDirective._tableDataSource),
                     distinctUntilChanged()
                 )
                 .subscribe((state) => {
-                    this._tableDataSource.fetch(state);
+                    this._dataSourceDirective._tableDataSource.fetch(state);
                 })
         );
 
         this._subscriptions.add(
-            this._tableService.sortChange.subscribe((event: SortChange) => {
-                this._buildSortRulesMap();
-                this.sortChange.emit(new TableSortChangeEvent(this, event.current, event.previous));
+            this._tableService.groupRules$.subscribe((rules) => {
+                this._isGroupTable = rules.size > 0;
             })
         );
 
         this._subscriptions.add(
-            this._tableService.filterChange.subscribe((event: FilterChange) => {
-                this._buildFilterRulesMap();
-                this.filterChange.emit(new TableFilterChangeEvent(this, event.current, event.previous));
+            this._tableService.stateChange$.subscribe(({ type, state }) => {
+                switch (type) {
+                    case 'columns':
+                        this._calculateVisibleColumns();
+                        this.recalculateTableColumnWidth();
+
+                        this.columnsChange.emit(new TableColumnsChangeEvent(this, state.current, state.previous));
+                        break;
+                    case 'filter':
+                        this.filterChange.emit(new TableFilterChangeEvent(this, state.current, state.previous));
+                        break;
+                    case 'freeze':
+                        this.columnFreeze.emit(new TableColumnFreezeEvent(this, state.current, state.previous));
+                        this.fixed = !!this.fixed || !!this._freezableColumns.size || !!this._freezableEndColumns.size;
+                        break;
+                    case 'search':
+                        break;
+                    case 'group':
+                        this._calculateVisibleColumns();
+                        this.recalculateTableColumnWidth();
+
+                        this.groupChange.emit(new TableGroupChangeEvent(this, state.current, state.previous));
+                        break;
+                    case 'page':
+                        this.pageChange.emit(new TablePageChangeEvent(this, state.current, state.previous));
+                        break;
+                    case 'sort':
+                        this.sortChange.emit(new TableSortChangeEvent(this, state.current, state.previous));
+                        break;
+                }
             })
         );
 
-        this._subscriptions.add(
-            this._tableService.freezeChange.subscribe((event: FreezeChange) => {
-                this.columnFreeze.emit(new TableColumnFreezeEvent(this, event.current, event.previous));
-                this.fixed = !!this.fixed || !!this._freezableColumns.size || !!this._freezableEndColumns.size;
-            })
-        );
-
-        this._subscriptions.add(
-            this._tableService.groupChange.subscribe((event: GroupChange) => {
-                this._buildGroupRulesMap();
-                this._calculateVisibleColumns();
-                this.recalculateTableColumnWidth();
-
-                this.groupChange.emit(new TableGroupChangeEvent(this, event.current, event.previous));
-            })
-        );
-
-        this._subscriptions.add(
-            this._tableService.columnsChange.subscribe((event: ColumnsChange) => {
-                this._calculateVisibleColumns();
-                this.recalculateTableColumnWidth();
-
-                this.columnsChange.emit(new TableColumnsChangeEvent(this, event.current, event.previous));
-            })
-        );
-
-        this._subscriptions.add(
-            this._tableService.pageChange.subscribe((event: PageChange) => {
-                this.pageChange.emit(new TablePageChangeEvent(this, event.current, event.previous));
-            })
-        );
+        this._listenToTableRowStateChange();
     }
 
     /** @hidden */
-    private _listenToRtlChanges(): void {
-        if (!this._rtlService) {
-            return;
-        }
+    private _listenToTableRowStateChange(): void {
+        this._subscriptions.add(
+            this._tableRowService.scrollToOverlappedCell$.subscribe(() => {
+                this._scrollToOverlappedCell();
+            })
+        );
 
         this._subscriptions.add(
-            this._rtlService.rtl.pipe(distinctUntilChanged()).subscribe((rtl) => {
-                this._rtl = rtl;
-                this._cdr.markForCheck();
+            this._tableRowService.cellClicked$.subscribe((evt) => {
+                this._onCellClick(evt.index, evt.row);
+            })
+        );
+
+        this._subscriptions.add(
+            this._tableRowService.toggleAllSelectableRows$.subscribe((evt) => {
+                this._toggleAllSelectableRows(evt);
+            })
+        );
+
+        this._subscriptions.add(
+            this._tableRowService.toggleRow$.subscribe((evt) => {
+                switch (evt.type) {
+                    case 'toggleRow':
+                        this._toggleGroupRow(evt.row);
+                        break;
+                    case 'toggleMultiSelectRow':
+                        this._toggleMultiSelectRow(evt.row, evt.event);
+                        break;
+                    case 'toggleSingleSelectableRow':
+                        this._toggleSingleSelectableRow(evt.row);
+                        break;
+                }
             })
         );
     }
@@ -2205,7 +1601,7 @@ export class TableComponent<T = any>
     private _setTableRows(rows = this._dataSourceTableRows): void {
         this._dataSourceTableRows = rows;
         this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
-        this._onTableRowsChanged();
+        this.onTableRowsChanged();
 
         this._calculateIsShownNavigationColumn();
         this._rangeSelector.reset();
@@ -2215,87 +1611,38 @@ export class TableComponent<T = any>
         if (rows.length && !this._columnsWidthSet) {
             this.recalculateTableColumnWidth();
             this._columnsWidthSet = true;
-            return;
         }
 
-        /** Seems to be the only way to avoid ViewDestroyedError: Attempt to use a destroyed view: detectChange */
-        setTimeout(() => {
-            if (!(this._cdr as ViewRef).destroyed) {
-                this._cdr.detectChanges();
-            }
-        });
-    }
-
-    /** @hidden */
-    private _onTableRowsChanged(): void {
-        this._calculateVisibleTableRows();
-        this._calculateCheckedAll();
+        this._cdr.detectChanges();
     }
 
     /** @hidden */
     private _calculateVisibleTableRows(): void {
         this._tableRowsVisible = this._tableRows.filter((row) => !row.hidden);
 
-        if (this.virtualScroll) {
-            this._calculateVirtualScrollRows();
+        if (this._virtualScrollDirective) {
+            this._virtualScrollDirective?.calculateVirtualScrollRows();
         } else {
-            this._tableRowsInViewport = this._tableRowsVisible;
+            this.setRowsInViewport(this._tableRowsVisible);
         }
-    }
-
-    /** @hidden */
-    private _calculateVirtualScrollRows(): void {
-        if (!this.virtualScroll || !this.bodyHeight) {
-            return;
-        }
-
-        const totalNodeCount = this._tableRowsVisible.length;
-
-        let startNodeIndex = Math.floor(this.tableScrollable.getScrollTop() / this.rowHeight) - this.renderAhead;
-        startNodeIndex = Math.max(0, startNodeIndex);
-
-        let visibleNodeCount =
-            Math.ceil(this.tableContainer.nativeElement.clientHeight / this.rowHeight) + 2 * this.renderAhead;
-        visibleNodeCount = Math.min(totalNodeCount - startNodeIndex, visibleNodeCount);
-
-        // Simple caching to avoid unnecessary re-renderings
-        const isCached =
-            startNodeIndex === this._virtualScrollCache.startNodeIndex &&
-            visibleNodeCount === this._virtualScrollCache.visibleNodeCount &&
-            totalNodeCount === this._virtualScrollCache.totalNodeCount &&
-            // On rows change, even if the total number of rows is the same, the row object will be different
-            this._tableRowsVisible[startNodeIndex] === this._tableRowsInViewport[0];
-
-        if (isCached) {
-            return;
-        }
-
-        this._virtualScrollCache = { startNodeIndex, visibleNodeCount, totalNodeCount };
-        this._virtualScrollTotalHeight = totalNodeCount * this.rowHeight - visibleNodeCount * this.rowHeight;
-        this._virtualScrollTransform = `translateY(` + startNodeIndex * this.rowHeight + `px)`;
-        this._tableRowsInViewport = this._tableRowsVisible.slice(startNodeIndex, startNodeIndex + visibleNodeCount);
-
-        this._cdr.detectChanges();
     }
 
     /** @hidden */
     private _listenToRowHeightChange(): void {
         this._subscriptions.add(
-            this.contentDensityObserver.pipe(filter(() => !this._rowHeightManuallySet)).subscribe((contentDensity) => {
-                this.rowHeight = ROW_HEIGHT.get(contentDensity) ?? ROW_HEIGHT.get(ContentDensityMode.COZY)!;
-                this._calculateVirtualScrollRows();
-            })
-        );
-    }
-
-    /** @hidden */
-    private _listenToVirtualScroll(): void {
-        this._subscriptions.add(
-            this._tableScrollDispatcher
-                .verticallyScrolled()
-                .pipe(filter(() => this.virtualScroll && !!this.bodyHeight))
-                .subscribe(() => {
-                    this._calculateVirtualScrollRows();
+            this.contentDensityObserver
+                .pipe(
+                    tap(() => {
+                        this._setSelectionColumnWidth();
+                    }),
+                    filter(() => !this._rowHeightManuallySet)
+                )
+                .subscribe((contentDensity) => {
+                    this.rowHeight = ROW_HEIGHT.get(contentDensity) ?? ROW_HEIGHT.get(ContentDensityMode.COZY)!;
+                    if (this._virtualScrollDirective) {
+                        this._virtualScrollDirective.rowHeight = this.rowHeight;
+                        this._virtualScrollDirective.calculateVirtualScrollRows();
+                    }
                 })
         );
     }
@@ -2304,7 +1651,7 @@ export class TableComponent<T = any>
     private _listenToColumns(): void {
         this.columns.changes.pipe(startWith(null)).subscribe(() => {
             const columns = this.getTableColumns();
-            const prevColumns = this._tableColumnsSubject.getValue().map((column) => column.name);
+            const prevColumns = this._tableService.tableColumns$.value.map((column) => column.name);
             const currentColumns = columns.map((column) => column.name);
 
             const newColumns = columns
@@ -2313,7 +1660,7 @@ export class TableComponent<T = any>
             const stateColumns = this.getTableState().columns;
 
             this._buildColumnsMap(columns);
-            this._tableColumnsSubject.next(columns);
+            this._tableService.tableColumns$.next(columns);
 
             if (this._initialStateSet) {
                 this.setColumns([...stateColumns, ...newColumns]);
@@ -2321,10 +1668,14 @@ export class TableComponent<T = any>
 
             this._initialStateSet = true;
 
-            const updatedColumns = this._tableColumnsSubject.getValue().map((column) => column.name);
+            const updatedColumns = this._tableService.tableColumns$.value.map((column) => column.name);
 
             if (!equal(updatedColumns, currentColumns)) {
-                this._tableService.columnsChange.emit({ previous: currentColumns, current: updatedColumns });
+                this._tableService.stateChange$.next({
+                    type: 'columns',
+                    state: { previous: currentColumns, current: updatedColumns }
+                });
+                this._tableService.columnsChange$.next({ previous: currentColumns, current: updatedColumns });
             }
             this._tableService.detectChanges();
         });
@@ -2343,9 +1694,21 @@ export class TableComponent<T = any>
             .filter((column): column is TableColumn => !!column)
             .filter(({ key }) => !groupedColumnsToHide.includes(key));
 
-        this._visibleColumns = allColumns.filter((column) => column.responsiveState === 'visible');
+        const [visibleColumns, poppingColumns] = allColumns.reduce(
+            (acc, column) => {
+                if (column.responsiveState === 'hidden') {
+                    return acc;
+                }
+                acc[column.responsiveState === 'visible' ? 0 : 1].push(column);
+                return acc;
+            },
+            [[], []] as TableColumn[][]
+        );
 
-        this._poppingColumns = allColumns.filter((column) => column.responsiveState === 'popping');
+        this._tableService.setVisibleColumns(visibleColumns);
+        this._tableService.setPoppingColumns(poppingColumns);
+
+        this._cdr.detectChanges();
 
         this._calculateTableColumnsLength();
     }
@@ -2357,7 +1720,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _calculateIsShownNavigationColumn(): void {
-        this._isShownNavigationColumnSubject.next(this._tableRows.some((tableRow) => tableRow.navigatable));
+        this._tableService._isShownNavigationColumn$.next(this._tableRows.some((tableRow) => tableRow.navigatable));
     }
 
     /** @hidden */
@@ -2368,106 +1731,9 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    private _constructTableMetadata(): void {
-        const state = this.getTableState();
-
-        this._buildSortRulesMap(state);
-
-        this._buildGroupRulesMap(state);
-
-        this._buildFilterRulesMap(state);
-    }
-
-    /** @hidden */
-    private _buildGroupRulesMap(state = this.getTableState()): void {
-        const groupMap = new Map(state.groupBy.map((rule) => [rule.field, rule]));
-        this._groupRulesMapSubject.next(groupMap);
-        this._isGroupTable = groupMap.size > 0;
-    }
-
-    /** @hidden */
-    private _buildSortRulesMap(state = this.getTableState()): void {
-        this._sortRulesMap = new Map(state.sortBy.filter((rule) => rule.field).map((rule) => [rule.field!, rule]));
-    }
-
-    /** @hidden */
-    private _buildFilterRulesMap(state = this.getTableState()): void {
-        this._filterRulesMap = state.filterBy.reduce((hash, rule) => {
-            const key = rule.field;
-            if (!hash.has(key)) {
-                hash.set(key, []);
-            }
-            hash.get(key)?.push(rule);
-            return hash;
-        }, new Map<string, CollectionFilter[]>());
-    }
-
-    /** @hidden */
-    private _buildColumnsMap(columns = this._tableColumnsSubject.getValue()): void {
+    private _buildColumnsMap(columns = this._tableService.tableColumns$.value): void {
         this._keyToColumnMap = new Map(columns.map((column) => [column.key, column]));
         this._nameToColumnMap = new Map(columns.map((column) => [column.name, column]));
-    }
-
-    /** @hidden */
-    private _groupTableRows(sourceRows: TableRow[], groups: Iterable<CollectionGroup>): TableRow[] {
-        const groupRules = Array.from(groups);
-
-        if (!groupRules.length) {
-            /**
-             * In case if previously we had groups with collapsed items
-             * but now we don't have it we need to reset row.hidden flag
-             * in order to avoid empty table after groups settings removing
-             */
-            sourceRows.forEach((row) => {
-                row.hidden = false;
-            });
-            return sourceRows;
-        }
-
-        // Build tree like groups
-        const treeLikeGroupedRows = createGroupedTableRowsTree(groupRules, sourceRows);
-
-        // Sort tree like groups
-        const sortedTreeLikeGroupedRows = sortTreeLikeGroupedRows(treeLikeGroupedRows, this._groupRulesMap);
-
-        // Convert tree like list to a flat list
-        return convertTreeLikeToFlatList(sortedTreeLikeGroupedRows);
-    }
-
-    /** @hidden */
-    private _toggleExpandableTableRow(rowToToggle: TableRow): void {
-        const expanded = (rowToToggle.expanded = !rowToToggle.expanded);
-
-        findRowChildren(rowToToggle, this._tableRows).forEach((row) => {
-            // if parent is collapsed we want to hide all nested items
-            if (!expanded) {
-                row.hidden = true;
-                row.expanded = false;
-            }
-
-            // if parent is expanded we want to show only items which direct parents are expanded as well
-            if (expanded) {
-                row.hidden = !getRowParents(row, rowToToggle).every((parent) => parent.expanded);
-            }
-        });
-
-        this._onTableRowsChanged();
-    }
-
-    /** @hidden */
-    private _resetAllSelectedRows(emitEvent = false): void {
-        this._checkedAll = false;
-        this._checkedAny = false;
-        const removed: TableRow<T>[] = [];
-        getSelectableRows(this._tableRows, this.selectableKey).forEach((r) => {
-            if (emitEvent && r.checked) {
-                removed.push(r);
-            }
-            r.checked = false;
-        });
-        if (emitEvent) {
-            this._emitRowSelectionChangeEvent([], removed);
-        }
     }
 
     /** @hidden */
@@ -2476,6 +1742,7 @@ export class TableComponent<T = any>
         const totalSelected = selectableRows.filter((r) => r.checked);
         this._checkedAll = totalSelected.length === selectableRows.length && selectableRows.length !== 0;
         this._checkedAny = totalSelected.length > 0;
+        this._checkedState = this._checkedAll ? true : this._checkedAny ? null : false;
     }
 
     /**
@@ -2522,94 +1789,6 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    private _initializeDS(dataSource: FdpTableDataSource<T>): void {
-        this._closeDataSource();
-        this._resetAllSelectedRows();
-
-        this._tableDataSource = this._openDataStream(dataSource);
-    }
-
-    /** @hidden */
-    private _closeDataSource(): void {
-        if (!this._tableDataSource) {
-            return;
-        }
-
-        this._tableDataSource.close();
-
-        if (this._dsSubscription) {
-            this._dsSubscription.unsubscribe();
-            this._dsSubscription = null;
-        }
-    }
-
-    /** @hidden */
-    private _openDataStream(ds: FdpTableDataSource<T>): TableDataSource<T> {
-        const dataSourceStream = toDataStream(ds);
-
-        if (dataSourceStream === undefined) {
-            throw new Error(`[TableDataSource] source did not match an Array, Observable, nor DataSource`);
-        }
-
-        /**
-         * This is a single point of data entry to the component. We don't want to set data on different
-         * places. If any new data comes in, or you do a search, and you want to pass initial data
-         * its here.
-         */
-        this._dsOpenedStream = dataSourceStream.open();
-
-        this._dsSubscription = new Subscription();
-
-        const dsSub = this._dsOpenedStream.subscribe((items) => {
-            this._totalItems = dataSourceStream.dataProvider.totalItems;
-            this._totalItems$.next(this._totalItems);
-            this._dataSourceItemsSubject.next(items);
-            // calling "detectChanges" may result in content jumps
-            // using markForCheck in order to let "items" changes to get applied in the UI first
-            this._cdr.markForCheck();
-        });
-        this._dsSubscription.add(dsSub);
-
-        this._dsSubscription.add(
-            dataSourceStream.onDataRequested().subscribe(() => {
-                this.onDataRequested.emit();
-                this._internalLoadingState = true;
-                this._tableService.setTableLoading(this.loadingState);
-            })
-        );
-        this._dsSubscription.add(
-            dataSourceStream.onDataReceived().subscribe(() => {
-                this.onDataReceived.emit();
-                this._internalLoadingState = false;
-                this._firstLoadingDone = true;
-                this._tableService.setTableLoading(this.loadingState);
-
-                // Restore normal pagination after the first fetch of data.
-                if (this._loadPreviousPages) {
-                    const state = this._tableService.getTableState();
-                    this._tableService.setTableState({
-                        ...state,
-                        ...{
-                            page: {
-                                currentPage: this.initialPage || state.page.currentPage,
-                                pageSize: this.pageSize || state.page.pageSize
-                            }
-                        }
-                    });
-                    this._loadPreviousPages = false;
-                }
-            })
-        );
-
-        this._subscriptions.add(this._dsSubscription);
-
-        // initial data fetch
-        dataSourceStream.fetch(this.getTableState());
-
-        return dataSourceStream;
-    }
-
-    /** @hidden */
     private _listenToPageScrolling(): void {
         this._subscriptions.add(
             this._tableScrollDispatcher
@@ -2618,7 +1797,7 @@ export class TableComponent<T = any>
                     filter(() => this.pageScrolling),
                     debounceTime(50),
                     filter((scrollable) => scrollable === this.tableScrollable),
-                    map((scrollable) => scrollable.getElementRef().nativeElement),
+                    map((scrollable) => scrollable.elementRef.nativeElement),
                     filter((element) => !!element),
                     tap(({ scrollTop }) => {
                         this.tableScrolled.emit(scrollTop);
@@ -2631,7 +1810,8 @@ export class TableComponent<T = any>
                         const {
                             page: { currentPage, pageSize }
                         } = this.getTableState();
-                        const lastPage = Math.ceil(this._totalItems / (pageSize || this._totalItems));
+                        const totalItems = this._dataSourceDirective.totalItems$.value;
+                        const lastPage = Math.ceil(totalItems / (pageSize || totalItems));
                         return currentPage < lastPage;
                     })
                 )
@@ -2646,8 +1826,12 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _listenToColumnPropertiesChange(): void {
-        this._subscriptions.add(this._tableService.markForCheck$.subscribe(() => this._cdr.markForCheck()));
-        this._subscriptions.add(this._tableService.detectChanges$.subscribe(() => this._cdr.detectChanges()));
+        this._subscriptions.add(
+            this._tableService.markForCheck$.pipe(debounceTime(5)).subscribe(() => this._cdr.markForCheck())
+        );
+        this._subscriptions.add(
+            this._tableService.detectChanges$.pipe(debounceTime(5)).subscribe(() => this._cdr.detectChanges())
+        );
     }
 
     /** @hidden */
@@ -2667,11 +1851,13 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _listenToTableContainerMouseLeave(): void {
-        this._subscriptions.add(
-            fromEvent(this.tableContainer.nativeElement, 'mouseleave').subscribe(() =>
-                this._tableColumnResizeService.hideResizer()
-            )
-        );
+        this._ngZone.runOutsideAngular(() => {
+            this._subscriptions.add(
+                fromEvent(this.tableContainer.nativeElement, 'mouseleave').subscribe(() =>
+                    this._tableColumnResizeService.hideResizer()
+                )
+            );
+        });
     }
 
     /**
@@ -2682,29 +1868,8 @@ export class TableComponent<T = any>
         this._newTableRows = [];
         this._addedItems = [];
         this._forceSemanticHighlighting = false;
+        this._setSemanticHighlighting();
         this._setTableRows();
-    }
-
-    /** @hidden */
-    private _getDefaultPresetState(): TableState {
-        const tableState = this._tableService.getTableState();
-        return {
-            columnKeys: tableState.columnKeys,
-            sortBy: [],
-            filterBy: [],
-            groupBy: [],
-            columns: tableState.columns,
-            searchInput: {
-                category: null,
-                text: ''
-            },
-            freezeToColumn: null,
-            freezeToEndColumn: null,
-            page: {
-                pageSize: 0,
-                currentPage: 1
-            }
-        };
     }
 
     /** @hidden */
@@ -2712,8 +1877,8 @@ export class TableComponent<T = any>
         this._subscriptions.add(
             this._tableService.tableLoading$.pipe(filter((loadingState) => !loadingState)).subscribe(() => {
                 setTimeout(() => {
-                    if (this._focusedCellPosition) {
-                        this._focusableGrid.focusCell(this._focusedCellPosition);
+                    if (this._tableHeaderResizer.focusedCellPosition) {
+                        this._focusableGrid.focusCell(this._tableHeaderResizer.focusedCellPosition);
                     }
                 });
             })
@@ -2725,5 +1890,18 @@ export class TableComponent<T = any>
         this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
             callback();
         });
+    }
+
+    /** @hidden */
+    private _setSemanticHighlighting(): void {
+        this._tableService._semanticHighlighting$.next(this.semanticHighlighting);
+        this._tableService._semanticHighlightingColumnWidth$.next(this._semanticHighlightingColumnWidth);
+    }
+
+    /** @hidden */
+    private _setSelectionColumnWidth(): void {
+        this._selectionColumnWidth = this._isShownSelectionColumn
+            ? SELECTION_COLUMN_WIDTH.get(this.contentDensityObserver.value) ?? 0
+            : 0;
     }
 }

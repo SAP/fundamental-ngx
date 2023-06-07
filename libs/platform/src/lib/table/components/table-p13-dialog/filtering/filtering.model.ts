@@ -1,7 +1,10 @@
-import { CollectionFilter } from '../../../interfaces/collection-filter.interface';
-import { FilterStrategy, getFilterStrategiesBasedOnDataType } from '../../../enums/collection-filter.enum';
-import { FilterableColumnDataType } from '../../../enums/filter-type.enum';
-import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
+import {
+    CollectionFilter,
+    FilterableColumnDataType,
+    FilterStrategy,
+    getFilterStrategiesBasedOnDataType,
+    TableDialogCommonData
+} from '@fundamental-ngx/platform/table-helpers';
 
 export interface FilterableColumn {
     label: string;

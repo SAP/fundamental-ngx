@@ -86,7 +86,7 @@ describe('MessageBoxComponent', () => {
 
         const dismissSpy = jest.spyOn(messageBoxRef, 'dismiss');
 
-        messageBoxComponent['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
+        messageBoxComponent.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
         fixture.detectChanges();
 
         expect(dismissSpy).toHaveBeenCalled();

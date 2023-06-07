@@ -1,9 +1,16 @@
-import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { PlatformListModule } from '@fundamental-ngx/platform/list';
-import { TableColumn } from '../table-column/table-column';
+import {
+    CollectionGroup,
+    CollectionStringFilter,
+    FILTER_STRING_STRATEGY,
+    FilterableColumnDataType,
+    SortDirection,
+    TableColumn,
+    TableService
+} from '@fundamental-ngx/platform/table-helpers';
 
 import { TableCellHeaderPopoverComponent } from './table-cell-header-popover.component';
 
@@ -25,41 +32,27 @@ class MockTableColumn implements Partial<TableColumn> {
     filterable = true;
 }
 
-@Component({
-    template: `
-        <fdp-table-cell-header-popover
-            [column]="column"
-            [popoverTemplate]="popoverTemplate"
-            [columnFrozen]="false"
-            [filteringFromHeaderDisabled]="false"
-        ></fdp-table-cell-header-popover>
-    `,
-    changeDetection: ChangeDetectionStrategy.OnPush
-})
-class TestComponent {
-    column: TableColumn = new MockTableColumn() as TableColumn;
-    popoverTemplate: Nullable<TemplateRef<any>>;
-    disabled = false;
-    columnFrozen = false;
-    filteringFromHeaderDisabled = false;
-
-    @ViewChild(TableCellHeaderPopoverComponent)
-    popoverComponent: TableCellHeaderPopoverComponent;
-}
-
 describe('TableCellHeaderPopoverComponent', () => {
-    let component: TestComponent;
-    let fixture: ComponentFixture<TestComponent>;
+    let component: TableCellHeaderPopoverComponent;
+    let fixture: ComponentFixture<TableCellHeaderPopoverComponent>;
+    let tableService: TableService;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestComponent, TableCellHeaderPopoverComponent],
-            imports: [PopoverModule, PlatformListModule, TemplateDirective]
+            declarations: [TableCellHeaderPopoverComponent],
+            imports: [PopoverModule, PlatformListModule, TemplateDirective],
+            providers: [TableService]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(TestComponent);
+        fixture = TestBed.createComponent(TableCellHeaderPopoverComponent);
         component = fixture.componentInstance;
+        inject([TableService], (ts) => {
+            tableService = ts;
+        })();
         fixture.detectChanges();
+        component.column = new MockTableColumn() as TableColumn;
+        component.columnFrozen = false;
+        component.filteringFromHeaderDisabled = false;
         await fixture.whenStable();
     });
 
@@ -67,10 +60,14 @@ describe('TableCellHeaderPopoverComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should render items based on conditions', fakeAsync(() => {
+    it('should render items based on conditions', fakeAsync(async () => {
+        component.column = new MockTableColumn() as TableColumn;
+        component.columnFrozen = false;
+        component.filteringFromHeaderDisabled = false;
+        await fixture.detectChanges();
         tick(1000);
 
-        const renderedPopoverItems = component.popoverComponent._popoverItems.toArray().map((item) => item.name);
+        const renderedPopoverItems = component._popoverItems.toArray().map((item) => item.name);
 
         Object.keys(columnPopoverItemsMapping).forEach((popoverItemName) => {
             const popoverItemConditionProperties = (
@@ -87,4 +84,41 @@ describe('TableCellHeaderPopoverComponent', () => {
             expect(renderedPopoverItems.includes(popoverItemName)).toEqual(appliedCondition);
         });
     }));
+
+    it('sort by cell header method should call TableService.setSort with a proper params', () => {
+        const field = 'price.value';
+        const direction = SortDirection.ASC;
+        const serviceSortSpy = spyOn(tableService, 'setSort').and.stub();
+
+        component._setColumnHeaderSortBy(field, direction);
+
+        expect(serviceSortSpy).toHaveBeenCalledWith([{ field, direction }]);
+    });
+
+    it('filter by cell header method should call TableService.addFilters with a proper params', () => {
+        const field = 'status';
+        const value = 'valid';
+        const payload: CollectionStringFilter = {
+            field,
+            value,
+            type: FilterableColumnDataType.STRING,
+            strategy: FILTER_STRING_STRATEGY.CONTAINS,
+            exclude: false
+        };
+        const serviceFilterSpy = spyOn(tableService, 'addFilters').and.stub();
+
+        component._setColumnHeaderFilterBy(field, value);
+
+        expect(serviceFilterSpy).toHaveBeenCalledWith([payload]);
+    });
+
+    it('group by cell header method should call TableService.setGroups with a proper params', () => {
+        const field = 'price.value';
+        const payload: CollectionGroup[] = [{ field, direction: SortDirection.NONE, showAsColumn: true }];
+        const serviceGroupSpy = spyOn(tableService, 'setGroups').and.stub();
+
+        component._setColumnHeaderGroupBy(field);
+
+        expect(serviceGroupSpy).toHaveBeenCalledWith(payload);
+    });
 });

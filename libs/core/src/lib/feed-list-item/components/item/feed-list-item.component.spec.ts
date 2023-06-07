@@ -48,27 +48,27 @@ describe('FeedListItemComponent', () => {
         component.authorTitle = authorTitle;
         component.authorLink = authorLink;
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.querySelector('.fd-feed-list__name a').innerText).toContain(
+        expect(component.elementRef.nativeElement.querySelector('.fd-feed-list__name a').innerText).toContain(
             authorTitle
         );
-        expect(
-            component.elementRef().nativeElement.querySelector('.fd-feed-list__name a').getAttribute('href')
-        ).toEqual(authorLink);
+        expect(component.elementRef.nativeElement.querySelector('.fd-feed-list__name a').getAttribute('href')).toEqual(
+            authorLink
+        );
     });
 
     it('should render author title as sample text', () => {
         component.authorTitle = 'John Doe';
         component.authorLink = null;
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.querySelector('.fd-feed-list__name a')).toBeNull();
+        expect(component.elementRef.nativeElement.querySelector('.fd-feed-list__name a')).toBeNull();
     });
 
     it('should render only formatted text', () => {
         component.isRichText = true;
         component.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement).not.toHaveClass(`${componentClassPrefix}--collapsible`);
-        expect(component.elementRef().nativeElement.querySelector('.fd-feed-list__link--more')).toBeFalsy();
+        expect(component.elementRef.nativeElement).not.toHaveClass(`${componentClassPrefix}--collapsible`);
+        expect(component.elementRef.nativeElement.querySelector('.fd-feed-list__link--more')).toBeFalsy();
     });
 
     it(`should label's more and less buttons`, async () => {
@@ -82,15 +82,14 @@ describe('FeedListItemComponent', () => {
         component.lessLabel = lessLabel;
         fixture.detectChanges();
         await fixture.whenStable();
-        let text = component
-            .elementRef()
-            .nativeElement.querySelector('.fd-feed-list__link--more')
+        let text = component.elementRef.nativeElement
+            .querySelector('.fd-feed-list__link--more')
             .innerText.toLowerCase();
         expect(text).toEqual(moreLabel);
         component.isCollapsed = false;
         fixture.detectChanges();
         await fixture.whenStable();
-        text = component.elementRef().nativeElement.querySelector('.fd-feed-list__link--more').innerText.toLowerCase();
+        text = component.elementRef.nativeElement.querySelector('.fd-feed-list__link--more').innerText.toLowerCase();
         expect(text).toEqual(lessLabel.toLowerCase());
     });
 

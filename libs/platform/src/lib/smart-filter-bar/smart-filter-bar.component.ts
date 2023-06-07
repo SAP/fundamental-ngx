@@ -24,12 +24,8 @@ import { map, take, takeUntil } from 'rxjs/operators';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    CollectionFilterGroup,
-    FilterableColumnDataType,
-    FilterType,
-    SearchInput
-} from '@fundamental-ngx/platform/table';
+import { CollectionFilterGroup, FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
+import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import {
     DynamicFormFieldItem,
     DynamicFormItem,

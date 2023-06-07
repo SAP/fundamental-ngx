@@ -1,0 +1,42 @@
+{
+    "name": "platform-table-helpers",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/platform/src/lib/table-helpers",
+    "prefix": "fdp",
+    "targets": {
+        "build": {
+            "executor": "@nx/angular:ng-packagr-lite",
+            "outputs": ["{workspaceRoot}/dist/libs/platform/table-helpers"],
+            "options": {
+                "tsConfig": "libs/platform/src/lib/table-helpers/tsconfig.lib.json",
+                "project": "libs/platform/src/lib/table-helpers/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/platform/src/lib/table-helpers/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "main": "libs/platform/src/lib/table-helpers/test.ts",
+                "tsConfig": "libs/platform/src/lib/table-helpers/tsconfig.spec.json",
+                "karmaConfig": "libs/platform/src/lib/table-helpers/karma.conf.js"
+            }
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/platform/src/lib/table-helpers/**/*.ts",
+                    "libs/platform/src/lib/table-helpers/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fdp"],
+    "implicitDependencies": []
+}

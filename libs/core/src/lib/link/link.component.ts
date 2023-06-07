@@ -96,11 +96,11 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef<HTMLElement>,
+        public readonly elementRef: ElementRef<HTMLElement>,
         private changeDetectorRef: ChangeDetectorRef,
         @Inject('linkRouterTarget') readonly routerLink: RouterLink
     ) {
-        if (isDevMode() && this._elementRef.nativeElement.hasAttribute('fd-breadcrumb-link')) {
+        if (isDevMode() && this.elementRef.nativeElement.hasAttribute('fd-breadcrumb-link')) {
             console.warn('The fd-breadcrumb-link attribute is deprecated. Please use fd-link instead.');
         }
     }
@@ -128,11 +128,6 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
-    }
-
-    /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
@@ -146,7 +141,7 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
                 map((icons) =>
                     // We are only interested in the first descendant of the content element
                     icons.filter(
-                        (icon) => icon.elementRef().nativeElement.parentElement === this.contentSpan.nativeElement
+                        (icon) => icon.elementRef.nativeElement.parentElement === this.contentSpan.nativeElement
                     )
                 ),
                 map((icons) => {
@@ -154,13 +149,13 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
                         return {};
                     }
                     const prefix =
-                        icons[0].elementRef().nativeElement === this.contentSpan.nativeElement.childNodes[0]
-                            ? icons[0].elementRef().nativeElement
+                        icons[0].elementRef.nativeElement === this.contentSpan.nativeElement.childNodes[0]
+                            ? icons[0].elementRef.nativeElement
                             : null;
                     const postfix =
-                        icons[icons.length - 1].elementRef().nativeElement ===
+                        icons[icons.length - 1].elementRef.nativeElement ===
                         this.contentSpan.nativeElement.childNodes[this.contentSpan.nativeElement.childNodes.length - 1]
-                            ? icons[icons.length - 1].elementRef().nativeElement
+                            ? icons[icons.length - 1].elementRef.nativeElement
                             : null;
                     if (prefix) {
                         this._prefixIconName = this.iconComponents.first.glyph;

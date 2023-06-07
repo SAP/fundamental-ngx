@@ -35,6 +35,6 @@ describe('ObjectMarkerComponent', () => {
         component.clickable = true;
         component.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-object-marker--link')).toBe(true);
+        expect(component.elementRef.nativeElement.classList.contains('fd-object-marker--link')).toBe(true);
     });
 });

@@ -91,11 +91,6 @@ export class DialogContainerComponent
     }
 
     /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
-    }
-
-    /** @hidden */
     protected _attached(event: CdkPortalOutletAttachedRef): void {
         if (event instanceof ComponentRef<any>) {
             event.changeDetectorRef.markForCheck();

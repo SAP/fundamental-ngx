@@ -94,7 +94,7 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
+    get elementRef(): ElementRef {
         return this.ref;
     }
 }
