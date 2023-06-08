@@ -321,7 +321,7 @@
                                         : _tableColumnResizeService.getColumnWidthStyle(column.name)
                                         : _tableColumnResizeService.getNextColumnsWidth(column.name)
                             "
-                            [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
+                            [attr.aria-expanded]="_isTreeRowFirstCell(colIdx, row) ? row.expanded : null"
                             [attr.data-nesting-level]="colIdx === 0 ? row.level + 1 : null"
                             [cellFocusedEventAnnouncer]="null"
                             (cellFocused)="_onCellFocused($event)"
