@@ -1,11 +1,15 @@
 import { MenuAddonDirective } from './menu-addon.directive';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 
 describe('MenuAddonDirective', () => {
     let directive: MenuAddonDirective;
 
-    beforeEach(() => {
-        directive = new MenuAddonDirective();
-    });
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [MenuAddonDirective]
+        }).compileComponents();
+        directive = TestBed.createComponent(MenuAddonDirective).componentInstance;
+    }));
 
     it('should create an instance', () => {
         expect(directive).toBeTruthy();
