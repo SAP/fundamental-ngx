@@ -49,7 +49,7 @@ describe('UploadCollectionComponent', () => {
     it('toolbar: should show total number items of current folder', () => {
         expect(component._totalItems).toEqual(2);
         expect(component._getList().length).toEqual(2);
-        expect(component._visibleList.length).toEqual(2);
+        expect(component._visibleList$.value.length).toEqual(2);
     });
 
     it('toolbar: should filter when search', () => {
@@ -58,8 +58,8 @@ describe('UploadCollectionComponent', () => {
 
         expect(component._totalItems).toEqual(1);
         expect(component._getList().length).toEqual(1);
-        expect(component._visibleList.length).toEqual(1);
-        expect(component._visibleList[0].name).toEqual('Folder-1');
+        expect(component._visibleList$.value.length).toEqual(1);
+        expect(component._visibleList$.value[0].name).toEqual('Folder-1');
     });
 
     it('toolbar: selectHandler with no maxFileSize', () => {
@@ -113,7 +113,7 @@ describe('UploadCollectionComponent', () => {
 
         expect(component._totalItems).toEqual(3);
         expect(component._getList().length).toEqual(3);
-        expect(component._visibleList.length).toEqual(3);
+        expect(component._visibleList$.value.length).toEqual(3);
 
         const newFolder = component
             ._getList()
@@ -134,7 +134,7 @@ describe('UploadCollectionComponent', () => {
 
         expect(component._totalItems).toEqual(1);
         expect(component._getList().length).toEqual(1);
-        expect(component._visibleList.length).toEqual(1);
+        expect(component._visibleList$.value.length).toEqual(1);
 
         const removedItemNotFound = component._getList().find((i) => i.documentId === item.documentId);
         expect(removedItemNotFound).toBeFalsy();
@@ -189,7 +189,7 @@ describe('UploadCollectionComponent', () => {
 
         expect(component._totalItems).toEqual(4);
         expect(component._getList().length).toEqual(4);
-        expect(component._visibleList.length).toEqual(4);
+        expect(component._visibleList$.value.length).toEqual(4);
     });
 
     // footer
@@ -236,6 +236,6 @@ describe('UploadCollectionComponent', () => {
 
         expect(component._totalItems).toEqual(4);
         expect(component._getList().length).toEqual(4);
-        expect(component._visibleList.length).toEqual(1);
+        expect(component._visibleList$.value.length).toEqual(1);
     });
 });

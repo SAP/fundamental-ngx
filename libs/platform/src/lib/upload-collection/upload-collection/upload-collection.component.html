@@ -55,7 +55,7 @@
                 [(ngModel)]="_searchText"
                 (ngModelChange)="_searchInputChanged()"
                 glyph="search"
-                [ariaLabelledby]="id + '-breadcrumb'"
+                [ariaLabelledBy]="id + '-breadcrumb'"
                 [placeholder]="'platformUploadCollection.searchPlaceholder' | fdTranslate"
             ></fd-input-group>
 
@@ -132,8 +132,8 @@
         >
             <!-- Table -->
             <fdp-table
-                *ngIf="_visibleList.length > 0"
-                [dataSource]="_visibleList"
+                *ngIf="_visibleList$.value.length > 0"
+                [dataSource]="_visibleList$"
                 [loading]="dataSource.isDataLoading"
                 selectionMode="multiple"
                 emptyTableMessage=""
@@ -297,7 +297,7 @@
             <!-- No data -->
             <div
                 class="fdp-upload-collection__no-data"
-                *ngIf="_visibleList.length === 0"
+                *ngIf="_visibleList$.value.length === 0"
                 [class.invisible]="_showDragDropArea"
             >
                 <fd-icon glyph="document"></fd-icon>

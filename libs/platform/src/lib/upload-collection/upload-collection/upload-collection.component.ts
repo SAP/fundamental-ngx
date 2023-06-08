@@ -12,7 +12,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 
 import { uuidv4 } from '@fundamental-ngx/cdk/utils';
@@ -234,7 +234,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
     /** @hidden
      * List of currently displayed items
      */
-    _visibleList: UploadCollectionItem[] = [];
+    _visibleList$ = new BehaviorSubject<UploadCollectionItem[]>([]);
 
     /** @hidden */
     selectedItems: UploadCollectionItem[] = [];
@@ -1034,7 +1034,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
 
     /** @hidden */
     private _initializeDS(ds: FdpUploadCollectionDataSource): void {
-        this._visibleList = [];
+        this._visibleList$.next([]);
         if (isDataSource(this.dataSource)) {
             this.dataSource.close();
             if (this._dsSubscription) {
@@ -1061,7 +1061,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
          * its here.
          */
         this._dsSubscription = initDataSource.open().subscribe((data) => {
-            this._visibleList = data;
+            this._visibleList$.next(data);
 
             this._totalItems = initDataSource.dataProvider.totalItems;
 
@@ -1099,7 +1099,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
     private _countUnvisibleItems(): void {
         const itemsPerPage = this._itemsPerPage as number;
         this._countShowedItems = this._currentPage * itemsPerPage - itemsPerPage + 1;
-        this._countNotShowedItems = this._countShowedItems + this._visibleList.length - 1;
+        this._countNotShowedItems = this._countShowedItems + this._visibleList$.value.length - 1;
     }
 
     /** @hidden */
