@@ -63,7 +63,6 @@ export class MenuComponent
     get mobile(): boolean {
         return this._mobile;
     }
-
     /** Whether the popover is disabled. */
     @Input()
     disabled = false;
@@ -122,6 +121,9 @@ export class MenuComponent
     private _externalTrigger: ElementRef;
 
     /** @hidden */
+    _addons: Array<unknown> = [];
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
@@ -129,6 +131,11 @@ export class MenuComponent
 
     /** @hidden */
     private _clickEventListener: null | (() => void);
+
+    /** @hidden */
+    get hasAddons(): boolean {
+        return this._addons.length > 0;
+    }
 
     /** @hidden */
     private get _popoverConfig(): BasePopoverClass {

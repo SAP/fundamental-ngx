@@ -1,19 +1,19 @@
-<fd-docs-section-title id="simple" componentName="menu"> Simple menu </fd-docs-section-title>
-<description>
-    To create simple menu use following directives:
-    <ul>
-        <li><code>fd-menu-item</code> - list element</li>
-        <li><code>fd-menu-interactive</code> - interactive element wrapping menu element content</li>
-        <li><code>fd-menu-title</code> - menu element title</li>
-    </ul>
-    Attach created menu to any HTML element using <code>fdMenuTrigger</code> directive.
-</description>
-<component-example>
-    <fd-menu-example></fd-menu-example>
-</component-example>
-<code-example [exampleFiles]="menuBasic"></code-example>
+<!--<fd-docs-section-title id="simple" componentName="menu"> Simple menu </fd-docs-section-title>-->
+<!--<description>-->
+<!--    To create simple menu use following directives:-->
+<!--    <ul>-->
+<!--        <li><code>fd-menu-item</code> - list element</li>-->
+<!--        <li><code>fd-menu-interactive</code> - interactive element wrapping menu element content</li>-->
+<!--        <li><code>fd-menu-title</code> - menu element title</li>-->
+<!--    </ul>-->
+<!--    Attach created menu to any HTML element using <code>fdMenuTrigger</code> directive.-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fd-menu-example></fd-menu-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="menuBasic"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
 <fd-docs-section-title id="with-icons" componentName="menu"> Menu with icons </fd-docs-section-title>
 <description>
@@ -31,69 +31,69 @@
 </component-example>
 <code-example [exampleFiles]="menuAddon"></code-example>
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="separator" componentName="menu"> Menu with separator </fd-docs-section-title>
-<description>
-    To add a visual separation line between menu items, use the <code>[hasSeparator]</code> input on the list item
-    component.
-</description>
-<component-example>
-    <fd-menu-separator-example></fd-menu-separator-example>
-</component-example>
-<code-example [exampleFiles]="menuSeparator"></code-example>
+<!--<fd-docs-section-title id="separator" componentName="menu"> Menu with separator </fd-docs-section-title>-->
+<!--<description>-->
+<!--    To add a visual separation line between menu items, use the <code>[hasSeparator]</code> input on the list item-->
+<!--    component.-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fd-menu-separator-example></fd-menu-separator-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="menuSeparator"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="scrollbar" componentName="menu"> Menu with Scrollbar </fd-docs-section-title>
-<description>Menu handles overflow using <code>fd-scrollbar</code> </description>
-<component-example>
-    <fd-menu-scrollbar-example></fd-menu-scrollbar-example>
-</component-example>
-<code-example [exampleFiles]="menuScrollbar"></code-example>
+<!--<fd-docs-section-title id="scrollbar" componentName="menu"> Menu with Scrollbar </fd-docs-section-title>-->
+<!--<description>Menu handles overflow using <code>fd-scrollbar</code> </description>-->
+<!--<component-example>-->
+<!--    <fd-menu-scrollbar-example></fd-menu-scrollbar-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="menuScrollbar"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="with-submenu" componentName="menu"> Menu with submenu </fd-docs-section-title>
-<description>
-    Each Menu item can have its submenu. To create a submenu, do the following:
-    <ul>
-        <li>Create standard menu</li>
-        <li>Create submenus using <code>fd-submenu</code> component</li>
-        <li>Attach created submenus to <code>fd-menu-item</code> using <code>[submenu]</code> input</li>
-        <li>
-            You can use <code>fd-menu-addon</code> with <code>[submenuIndicator]="true"</code> to add icon indicating
-            menu items with submenus
-        </li>
-    </ul>
-    Use <code>(activePath)</code> output to receive information about currently active items. Use
-    <code>(openOnHoverTime)</code> to specify after how much hover time menu item should expand.
-</description>
-<component-example>
-    <fd-menu-with-submenu-example></fd-menu-with-submenu-example>
-</component-example>
-<code-example [exampleFiles]="menuWithSubmenu"></code-example>
+<!--<fd-docs-section-title id="with-submenu" componentName="menu"> Menu with submenu </fd-docs-section-title>-->
+<!--<description>-->
+<!--    Each Menu item can have its submenu. To create a submenu, do the following:-->
+<!--    <ul>-->
+<!--        <li>Create standard menu</li>-->
+<!--        <li>Create submenus using <code>fd-submenu</code> component</li>-->
+<!--        <li>Attach created submenus to <code>fd-menu-item</code> using <code>[submenu]</code> input</li>-->
+<!--        <li>-->
+<!--            You can use <code>fd-menu-addon</code> with <code>[submenuIndicator]="true"</code> to add icon indicating-->
+<!--            menu items with submenus-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--    Use <code>(activePath)</code> output to receive information about currently active items. Use-->
+<!--    <code>(openOnHoverTime)</code> to specify after how much hover time menu item should expand.-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fd-menu-with-submenu-example></fd-menu-with-submenu-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="menuWithSubmenu"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->
 
-<fd-docs-section-title id="mobile" componentName="menu"> Menu in mobile mode </fd-docs-section-title>
-<description>
-    To use Menu in mobile mode:
-    <ul>
-        <li>Set <code>[mobile]</code> property to true</li>
-        <li>
-            Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
-            look of the control
-        </li>
-    </ul>
+<!--<fd-docs-section-title id="mobile" componentName="menu"> Menu in mobile mode </fd-docs-section-title>-->
+<!--<description>-->
+<!--    To use Menu in mobile mode:-->
+<!--    <ul>-->
+<!--        <li>Set <code>[mobile]</code> property to true</li>-->
+<!--        <li>-->
+<!--            Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the-->
+<!--            look of the control-->
+<!--        </li>-->
+<!--    </ul>-->
 
-    Menu Mobile Mode can be configured <strong>globally</strong> by providing <code>MOBILE_MODE_CONFIG</code> token.
-    Check <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a> for more
-    information.
-</description>
-<component-example>
-    <fd-menu-mobile-example></fd-menu-mobile-example>
-</component-example>
-<code-example [exampleFiles]="menuMobile"></code-example>
+<!--    Menu Mobile Mode can be configured <strong>globally</strong> by providing <code>MOBILE_MODE_CONFIG</code> token.-->
+<!--    Check <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a> for more-->
+<!--    information.-->
+<!--</description>-->
+<!--<component-example>-->
+<!--    <fd-menu-mobile-example></fd-menu-mobile-example>-->
+<!--</component-example>-->
+<!--<code-example [exampleFiles]="menuMobile"></code-example>-->
 
-<separator></separator>
+<!--<separator></separator>-->

@@ -1,4 +1,5 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { MenuComponent } from '../menu.component';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -9,7 +10,7 @@ import { Component, HostBinding, Input } from '@angular/core';
     `
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
-export class MenuAddonDirective {
+export class MenuAddonDirective implements OnInit, OnDestroy {
     /** Whether addon is used before or after text */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('position') set setAddonPosition(position: 'before' | 'after') {
@@ -40,4 +41,21 @@ export class MenuAddonDirective {
     /** @hidden */
     @HostBinding('class.fd-menu__addon-before')
     fdAddonBeforeClass = false;
+
+    /** @hidden */
+    private menuComponent = inject(MenuComponent, { optional: true });
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.menuComponent) {
+            this.menuComponent._addons = [...this.menuComponent._addons, this];
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        if (this.menuComponent) {
+            this.menuComponent._addons = this.menuComponent._addons.filter((item) => item !== this);
+        }
+    }
 }
