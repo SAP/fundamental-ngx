@@ -1,5 +1,6 @@
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -9,6 +10,8 @@ import {
     inject,
     Input,
     NgZone,
+    OnDestroy,
+    OnInit,
     Output,
     QueryList,
     ViewChildren,
@@ -24,6 +27,7 @@ import {
 } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import {
+    EditableTableCell,
     isTreeRowFirstCell,
     SelectionMode,
     SelectionModeValue,
@@ -36,7 +40,7 @@ import {
     TableService
 } from '@fundamental-ngx/platform/table-helpers';
 import { fromEvent } from 'rxjs';
-import { filter, switchMap, takeUntil } from 'rxjs/operators';
+import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -46,7 +50,7 @@ import { filter, switchMap, takeUntil } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DestroyedService]
 })
-export class TableRowComponent<T> {
+export class TableRowComponent<T> implements OnInit, AfterViewInit, OnDestroy {
     /** Row ID. */
     @Input()
     rowId: string;
@@ -109,6 +113,10 @@ export class TableRowComponent<T> {
     @Input()
     freezableEndColumns: Map<string, number> = new Map();
 
+    /** @hidden Whether the first item in each row should have the 'rowheader' role. */
+    @Input()
+    enableRowHeaderRole = false;
+
     /**
      * Event emitted when keyboard drag performed.
      */
@@ -116,10 +124,17 @@ export class TableRowComponent<T> {
     keyboardDrag = new EventEmitter<TableRowKeyboardDrag>();
 
     /** @hidden */
+    _hasRowHeaderColumn = false;
+
+    /** @hidden */
     @ViewChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
     private set _focusableItems(items: QueryList<FocusableItemDirective>) {
         this._focusableDirective.setItems(items);
     }
+
+    /** @hidden */
+    @ViewChildren(EditableTableCell)
+    private readonly _editableCells: QueryList<EditableTableCell>;
 
     /** @hidden */
     @HostBinding('attr.aria-selected')
@@ -200,6 +215,31 @@ export class TableRowComponent<T> {
                     this._onKeyDown(event);
                 });
         });
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._tableService.visibleColumns$.pipe(takeUntil(this._destroy$)).subscribe((columns) => {
+            this._hasRowHeaderColumn = columns.some((c) => c.role === 'rowheader');
+            this._cdr.markForCheck();
+        });
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._editableCells.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe(() => {
+            const cells = this._editableCells.toArray();
+            if (cells.length > 0) {
+                this._tableRowService.updateEditableCells(this.row, cells);
+            } else {
+                this._tableRowService.removeEditableCells(this.row);
+            }
+        });
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._tableRowService.removeEditableCells(this.row);
     }
 
     /** @hidden */

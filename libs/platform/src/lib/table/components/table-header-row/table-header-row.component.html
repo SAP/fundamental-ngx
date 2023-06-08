@@ -50,6 +50,7 @@
         "
         [columnName]="column.name"
         [id]="id + '__' + column.name"
+        [attr.aria-labelledby]="id + '-header-cell-' + column.name"
         [attr.aria-colindex]="colIdx"
         [ngClass]="'fdp-table__col--' + column.name"
         [class.fd-table__cell--fixed]="freezableColumns.has(column.name)"

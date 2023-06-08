@@ -117,6 +117,10 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     @Input()
     applyText = true;
 
+    /** Column role attribute. */
+    @Input()
+    role: 'cell' | 'rowheader' | 'gridcell' = 'gridcell';
+
     /** Column cell template */
     columnCellTemplate: Nullable<TemplateRef<any>>;
 

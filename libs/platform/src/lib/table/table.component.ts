@@ -24,10 +24,8 @@ import {
     SimpleChanges,
     TrackByFunction,
     ViewChild,
-    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { NgForm } from '@angular/forms';
 
 import {
     FDK_FOCUSABLE_GRID_DIRECTIVE,
@@ -38,14 +36,12 @@ import {
     resizeObservable,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
-
-import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
     ContentDensityMode,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { TableComponent as FdTableComponent, TableRowDirective } from '@fundamental-ngx/core/table';
+import { TableComponent as FdTableComponent } from '@fundamental-ngx/core/table';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { FDP_PRESET_MANAGED_COMPONENT, isJsObject } from '@fundamental-ngx/platform/shared';
 import {
@@ -329,10 +325,6 @@ export class TableComponent<T = any>
     @Input()
     loadPagesBefore = false;
 
-    /** @hidden Whether the first item in each row should have the 'rowheader' role. */
-    @Input()
-    enableRowHeaderRole = false;
-
     /** Event emitted when current preset configuration has been changed. */
     @Output()
     presetChanged = new EventEmitter<PlatformTableManagedPreset>();
@@ -402,18 +394,6 @@ export class TableComponent<T = any>
     @ContentChildren(EditableTableCell, { descendants: true })
     readonly customEditableCells: QueryList<EditableTableCell>;
     /** @hidden */
-    @ViewChildren(EditableTableCell)
-    readonly editableCells: QueryList<EditableTableCell>;
-    /** @hidden */
-    @ViewChildren(TableRowDirective)
-    readonly tableRows: QueryList<TableRowDirective>;
-    /** @hidden */
-    @ViewChildren(NgForm)
-    readonly editableCellForms: QueryList<NgForm>;
-    /** @hidden */
-    @ViewChildren(CheckboxComponent)
-    readonly _checkboxes: QueryList<CheckboxComponent>;
-    /** @hidden */
     @ContentChild(TABLE_TOOLBAR)
     readonly tableToolbar: TableToolbarWithTemplate;
     /**
@@ -445,11 +425,6 @@ export class TableComponent<T = any>
      * Table Column Map. Where key is column key and value is column
      */
     _keyToColumnMap: Map<string, TableColumn> = new Map();
-    /**
-     * @hidden
-     * Table Column Map. Where key is column name and value is column
-     */
-    _nameToColumnMap: Map<string, TableColumn> = new Map();
     /**
      * @hidden
      * Freezable column names and their respective indexes
@@ -774,10 +749,6 @@ export class TableComponent<T = any>
         if ('rowHeight' in changes) {
             this._rowHeightManuallySet = true;
         }
-
-        if ('enableRowHeaderRole' in changes) {
-            this._handleRowHeader();
-        }
     }
 
     /** @hidden */
@@ -819,14 +790,8 @@ export class TableComponent<T = any>
 
         this._listenToLoadingAndRefocusCell();
 
-        this._removeCheckboxTabIndex();
-
         if (this.expandOnInit) {
             this.expandAll();
-        }
-
-        if (this.enableRowHeaderRole) {
-            this._handleRowHeader();
         }
     }
 
@@ -1134,8 +1099,12 @@ export class TableComponent<T = any>
         const event = new SaveRowsEvent<T>(() => {
             this._dataSourceDirective._tableDataSource.fetch(this.getTableState());
         }, [...this._addedItems]);
+        const editableCells: EditableTableCell[] = ([] as EditableTableCell[]).concat.apply(
+            [],
+            Array.from(this._tableRowService.editableCells.values())
+        );
 
-        const forms = [...this.customEditableCells.toArray(), ...this.editableCells.toArray()].map((t) => t.form);
+        const forms = [...this.customEditableCells.toArray(), ...editableCells].map((t) => t.form);
 
         // Trigger form revalidation
         forms.forEach((form) => form.onSubmit(null as any));
@@ -1442,13 +1411,6 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    private _removeCheckboxTabIndex(): void {
-        this._checkboxes.forEach((checkbox) => {
-            checkbox.tabIndexValue = -1;
-        });
-    }
-
-    /** @hidden */
     private _listenToTableRowsPipe(): void {
         this._subscriptions.add(
             this._dataSourceDirective.items$
@@ -1746,7 +1708,6 @@ export class TableComponent<T = any>
     /** @hidden */
     private _buildColumnsMap(columns = this._tableService.tableColumns$.value): void {
         this._keyToColumnMap = new Map(columns.map((column) => [column.key, column]));
-        this._nameToColumnMap = new Map(columns.map((column) => [column.name, column]));
     }
 
     /** @hidden */
@@ -1916,20 +1877,5 @@ export class TableComponent<T = any>
         this._selectionColumnWidth = this._isShownSelectionColumn
             ? SELECTION_COLUMN_WIDTH.get(this.contentDensityObserver.value) ?? 0
             : 0;
-    }
-
-    /** @hidden */
-    private _handleRowHeader(): void {
-        this.tableRows.forEach((row) => {
-            let role = 'gridcell';
-            if (row.cells && row.cells.first) {
-                if (this.selectionMode === SelectionMode.SINGLE || this.enableRowHeaderRole) {
-                    role = 'rowheader';
-                } else if (this.selectionMode === SelectionMode.MULTIPLE) {
-                    role = 'cell';
-                }
-                row.cells.first.elementRef.nativeElement.role = role;
-            }
-        });
     }
 }

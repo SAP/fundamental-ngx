@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { convertTreeLikeToFlatList, createGroupedTableRowsTree, sortTreeLikeGroupedRows } from '../helpers';
 import { CollectionGroup } from '../interfaces';
 import { TableRow } from '../models';
+import { EditableTableCell } from '../table-cell.class';
 
 export type ToggleRowModel =
     | {
@@ -56,6 +57,9 @@ export class TableRowService {
 
     /** Toggle row stream. */
     readonly toggleRow$ = this._toggleRowSubject.asObservable();
+
+    /** Editable cells map. */
+    readonly editableCells = new Map<TableRow<any>, EditableTableCell[]>();
 
     /** `toggleRow$` stream trigger. */
     toggleRow(evt: ToggleRowModel): void {
@@ -110,5 +114,15 @@ export class TableRowService {
 
         // Convert tree like list to a flat list
         return convertTreeLikeToFlatList(sortedTreeLikeGroupedRows);
+    }
+
+    /** Sets editable cells for particular row. */
+    updateEditableCells(row: TableRow, cells: EditableTableCell[]): void {
+        this.editableCells.set(row, cells);
+    }
+
+    /** Removes editable cells of particular row. */
+    removeEditableCells(row: TableRow): void {
+        this.editableCells.delete(row);
     }
 }

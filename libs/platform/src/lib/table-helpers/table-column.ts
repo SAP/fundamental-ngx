@@ -64,4 +64,6 @@ export abstract class TableColumn {
 
     /** Whether this column is visible */
     abstract responsiveState: FdpColumnResponsiveState;
+    /** Column role attribute. */
+    abstract role: 'cell' | 'rowheader' | 'gridcell';
 }

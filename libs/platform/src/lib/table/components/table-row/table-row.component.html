@@ -14,7 +14,7 @@
             *ngIf="row.value[selectableKey] !== false; else selectionMock"
             class="fd-table__cell--checkbox"
             [class.fd-table__cell--fixed]="fixed"
-            role="rowheader"
+            [attr.role]="_hasRowHeaderColumn ? 'gridcell' : 'rowheader'"
             fd-table-cell
             fd-table-cell-selectable
             [focusable]="true"
@@ -44,6 +44,7 @@
             "
         >
             <fd-checkbox
+                tabIndexValue="-1"
                 labelClass="fd-table__checkbox-label"
                 [tristate]="enableTristateMode"
                 [tristateSelectable]="false"
@@ -80,7 +81,7 @@
     "
     [columnName]="column.name"
     [focusable]="true"
-    role="gridcell"
+    [attr.role]="column.role"
     [headers]="rowId + '__' + column.name"
     [ngClass]="'fdp-table__col--' + column.name"
     [class.fd-table__cell--fixed]="freezableColumns.has(column.name)"
