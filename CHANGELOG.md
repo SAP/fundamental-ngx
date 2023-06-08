@@ -1,3 +1,12 @@
+# [0.42.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.13...v0.42.0-rc.14) (2023-06-07)
+
+
+### Bug Fixes
+
+* **core:** template based inline help was not setting screenreader element ([#9985](https://github.com/SAP/fundamental-ngx/issues/9985)) ([e041216](https://github.com/SAP/fundamental-ngx/commit/e0412166cff8f9441f14254cc41f403c3479299b))
+
+
+
 # [0.42.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.12...v0.42.0-rc.13) (2023-06-06)
 
 
