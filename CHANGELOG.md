@@ -1,3 +1,12 @@
+# [0.42.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.14...v0.42.0-rc.15) (2023-06-09)
+
+
+### Bug Fixes
+
+* **platform:** do not set aria-expanded for table cells that do not expand ([#10007](https://github.com/SAP/fundamental-ngx/issues/10007)) ([030954c](https://github.com/SAP/fundamental-ngx/commit/030954c7eedfa990bbfc57a5949e8a3264786c62))
+
+
+
 # [0.42.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.13...v0.42.0-rc.14) (2023-06-07)
 
 
