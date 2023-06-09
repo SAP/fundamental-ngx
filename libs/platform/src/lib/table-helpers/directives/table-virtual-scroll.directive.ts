@@ -1,7 +1,7 @@
 import { Directive, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { DestroyedService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
-import { filter } from 'rxjs';
+import { BehaviorSubject, filter } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE, ROW_HEIGHT } from '../constants';
 import { TableVirtualScroll } from '../models';
@@ -46,7 +46,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     virtualScrollTotalHeight = 0;
 
     /** @hidden */
-    virtualScrollTransform: Nullable<string> = null;
+    virtualScrollTransform$ = new BehaviorSubject<number>(0);
 
     /** @hidden */
     private _table: Table;
@@ -97,6 +97,8 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
             Math.ceil(this._table.tableContainer.nativeElement.clientHeight / rowHeight) + 2 * this.renderAhead;
         visibleNodeCount = Math.min(totalNodeCount - startNodeIndex, visibleNodeCount);
 
+        this.virtualScrollTransform$.next(startNodeIndex * rowHeight);
+
         // Simple caching to avoid unnecessary re-renderings
         const isCached =
             startNodeIndex === this._virtualScrollCache.startNodeIndex &&
@@ -111,7 +113,6 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
 
         this._virtualScrollCache = { startNodeIndex, visibleNodeCount, totalNodeCount };
         this.virtualScrollTotalHeight = totalNodeCount * rowHeight - visibleNodeCount * rowHeight;
-        this.virtualScrollTransform = `translateY(` + startNodeIndex * rowHeight + `px)`;
         this._table.setRowsInViewport(rowsVisible.slice(startNodeIndex, startNodeIndex + visibleNodeCount));
     }
 

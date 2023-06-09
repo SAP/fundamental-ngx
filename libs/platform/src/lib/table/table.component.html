@@ -57,6 +57,7 @@
                 *ngIf="!!this._tableRowsVisible.length; else emptyTableTemplate"
                 fd-table-body
                 fdkDndList
+                #tableBody
                 [dragoverPredicate]="_dndTableDirective?.dragoverPredicate"
                 [dropPredicate]="_dndTableDirective?.dropPredicate"
                 [noBorderX]="noBorderX || noBorders"
@@ -65,73 +66,73 @@
                 [items]="_tableRows"
                 [draggable]="isDraggable"
                 [dropMode]="_dndTableDirective?.dropMode ?? 'group'"
-                [style.transform]="_virtualScrollDirective?.virtualScrollTransform"
                 (itemDropped)="_dndTableDirective?.dragDropItemDrop($event)"
                 (dropPredicateCalculating)="_calculatingLoading($event)"
                 (dropCancelled)="_dndTableDirective?.dropCancelled()"
             >
                 <ng-container
-                    *ngFor="let row of _tableRowsInViewport$ | async; let rowIdx = index; trackBy: _rowTrackBy"
-                    [ngSwitch]="row.type"
+                    *ngFor="let rowDummy of _tableRowsInViewPortPlaceholder; let rowIdx = index; trackBy: _rowTrackBy"
                 >
-                    <tr
-                        *ngSwitchCase="'group'"
-                        fd-table-row
-                        fdp-table-group-row
-                        [index]="rowIdx"
-                        [height]="rowHeight"
-                        [draggable]="isDraggable"
-                        [row]="row"
-                        [id]="id"
-                        [keyToColumnMap]="_keyToColumnMap"
-                        [tableColumnsLength]="_tableColumnsLength"
-                        (toggleGroupRow)="_toggleGroupRow($event)"
-                        (click)="_emitRowActivate(row)"
-                    ></tr>
+                    <ng-container *ngIf="_tableRowsInViewport[rowIdx] as row" [ngSwitch]="row.type">
+                        <tr
+                            *ngSwitchCase="'group'"
+                            fd-table-row
+                            fdp-table-group-row
+                            [index]="rowIdx"
+                            [height]="rowHeight"
+                            [draggable]="isDraggable"
+                            [row]="row"
+                            [id]="id"
+                            [keyToColumnMap]="_keyToColumnMap"
+                            [tableColumnsLength]="_tableColumnsLength"
+                            (toggleGroupRow)="_toggleGroupRow($event)"
+                            (click)="_emitRowActivate(row)"
+                        ></tr>
 
-                    <tr
-                        *ngSwitchDefault
-                        fd-table-row
-                        [fdkDndItem]="row"
-                        [applyDragItemClass]="isDraggable"
-                        [class]="row | rowClasses : rowsClass"
-                        [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
-                        [focusable]="rowsActivable || !!row.navigatable"
-                        [hoverable]="rowsActivable || _isShownSelectionColumn || !!row.navigatable"
-                        [activable]="rowsActivable || !!row.navigatable"
-                        [active]="rowIdx === _navigatedRowIndex"
-                        [highlightActive]="highlightNavigatedRow"
-                        [style.height.px]="rowHeight"
-                        [attr.aria-level]="isTreeTable ? row.level + 1 : null"
-                        (fdkClicked)="_onRowClick(row, $event)"
-                        (started)="_dndTableDirective?.dragDropStart()"
-                        [main]="true"
-                        [class.fd-table__row--draggable]="isDraggable"
-                        fdp-table-row
-                        [rowId]="id"
-                        [index]="rowIdx"
-                        [row]="row"
-                        [selectionMode]="_selectionMode"
-                        [selectableKey]="selectableKey"
-                        [enableTristateMode]="enableTristateMode"
-                        [fixed]="fixed"
-                        [selectionColumnWidth]="_selectionColumnWidth"
-                        [freezeColumnsTo]="freezeColumnsTo"
-                        [freezeEndColumnsTo]="freezeEndColumnsTo"
-                    ></tr>
+                        <tr
+                            *ngSwitchDefault
+                            fd-table-row
+                            [fdkDndItem]="row"
+                            [applyDragItemClass]="isDraggable"
+                            [class]="row | rowClasses : rowsClass"
+                            [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
+                            [focusable]="rowsActivable || !!row.navigatable"
+                            [hoverable]="rowsActivable || _isShownSelectionColumn || !!row.navigatable"
+                            [activable]="rowsActivable || !!row.navigatable"
+                            [active]="rowIdx === _navigatedRowIndex"
+                            [highlightActive]="highlightNavigatedRow"
+                            [style.height.px]="rowHeight"
+                            [attr.aria-level]="isTreeTable ? row.level + 1 : null"
+                            (fdkClicked)="_onRowClick(row, $event)"
+                            (started)="_dndTableDirective?.dragDropStart()"
+                            [main]="true"
+                            [class.fd-table__row--draggable]="isDraggable"
+                            fdp-table-row
+                            [rowId]="id"
+                            [index]="rowIdx"
+                            [row]="row"
+                            [selectionMode]="_selectionMode"
+                            [selectableKey]="selectableKey"
+                            [enableTristateMode]="enableTristateMode"
+                            [fixed]="fixed"
+                            [selectionColumnWidth]="_selectionColumnWidth"
+                            [freezeColumnsTo]="freezeColumnsTo"
+                            [freezeEndColumnsTo]="freezeEndColumnsTo"
+                        ></tr>
 
-                    <tr
-                        *ngIf="row.type === 'item' && _poppingColumns.length > 0"
-                        fd-table-row
-                        fdp-table-popping-row
-                        [secondary]="true"
-                        [selectionMode]="selectionMode"
-                        [row]="row"
-                        [checked]="row.checked"
-                        [class]="row | rowClasses : rowsClass"
-                        (toggleGroupRow)="_toggleGroupRow($event)"
-                        (cellClicked)="_onCellClick($event.index, $event.row)"
-                    ></tr>
+                        <tr
+                            *ngIf="row.type === 'item' && _poppingColumns.length > 0"
+                            fd-table-row
+                            fdp-table-popping-row
+                            [secondary]="true"
+                            [selectionMode]="selectionMode"
+                            [row]="row"
+                            [checked]="row.checked"
+                            [class]="row | rowClasses : rowsClass"
+                            (toggleGroupRow)="_toggleGroupRow($event)"
+                            (cellClicked)="_onCellClick($event.index, $event.row)"
+                        ></tr>
+                    </ng-container>
                 </ng-container>
             </tbody>
 

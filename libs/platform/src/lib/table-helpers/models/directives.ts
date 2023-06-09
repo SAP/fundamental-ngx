@@ -1,5 +1,6 @@
 import { EventEmitter } from '@angular/core';
-import { DragoverPredicate, DropPredicate, FdDndDropType, FdDropEvent, Nullable } from '@fundamental-ngx/cdk/utils';
+import { DragoverPredicate, DropPredicate, FdDndDropType, FdDropEvent } from '@fundamental-ngx/cdk/utils';
+import { Observable } from 'rxjs';
 import { CollectionFilter, CollectionGroup, CollectionSort, TableState } from '../interfaces';
 import { Table } from '../table';
 import { TableRow } from './table-row.model';
@@ -33,9 +34,9 @@ export abstract class TableInitialState {
 
 export abstract class TableVirtualScroll {
     abstract rowHeight: number;
+    abstract virtualScrollTransform$: Observable<number>;
     abstract virtualScroll: boolean;
     abstract virtualScrollTotalHeight: number;
-    abstract virtualScrollTransform: Nullable<string>;
     abstract setTable(table: Table): void;
     abstract listenOnVirtualScroll(): void;
     abstract calculateVirtualScrollRows(): void;

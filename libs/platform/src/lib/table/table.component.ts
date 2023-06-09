@@ -325,6 +325,51 @@ export class TableComponent<T = any>
     @Input()
     loadPagesBefore = false;
 
+    /** @hidden */
+    _selectionMode: SelectionModeValue = SelectionMode.NONE;
+
+    /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
+    @Input()
+    set selectionMode(value: SelectionModeValue) {
+        this._selectionMode = value;
+        this._isShownSelectionColumn = this.selectionMode !== SelectionMode.NONE;
+        this._setSelectionColumnWidth();
+    }
+
+    get selectionMode(): SelectionModeValue {
+        return this._selectionMode;
+    }
+
+    /** @hidden */
+    private _enableTristateMode = false;
+
+    /**
+     *  When True, the checked state of each tree item depends on the checked
+     *  state of its parent or direct child.
+     */
+    @Input()
+    set enableTristateMode(value: boolean) {
+        this._enableTristateMode = value;
+    }
+
+    get enableTristateMode(): boolean {
+        return this.isTreeTable && this._enableTristateMode;
+    }
+
+    /** Value with the key of the row item's field to compute semantic state of the row.  */
+    @Input()
+    set semanticHighlighting(value: string) {
+        this._semanticHighlightingKey = value;
+        this._setSemanticHighlighting();
+    }
+    get semanticHighlighting(): string {
+        if (!this._semanticHighlightingKey && this._forceSemanticHighlighting) {
+            return DEFAULT_HIGHLIGHTING_KEY;
+        }
+
+        return this._semanticHighlightingKey;
+    }
+
     /** Event emitted when current preset configuration has been changed. */
     @Output()
     presetChanged = new EventEmitter<PlatformTableManagedPreset>();
@@ -388,6 +433,9 @@ export class TableComponent<T = any>
     @ViewChild(FDK_FOCUSABLE_GRID_DIRECTIVE)
     readonly _focusableGrid: FocusableGridDirective;
     /** @hidden */
+    @ViewChild('tableBody', { read: ElementRef })
+    private readonly _tableBody: ElementRef<HTMLElement>;
+    /** @hidden */
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
     /** @hidden */
@@ -396,6 +444,61 @@ export class TableComponent<T = any>
     /** @hidden */
     @ContentChild(TABLE_TOOLBAR)
     readonly tableToolbar: TableToolbarWithTemplate;
+    /** @hidden */
+    get initialSortBy(): CollectionSort[] {
+        return this.initialState?.initialSortBy ?? [];
+    }
+
+    /**
+     * @hidden
+     * Columns to be rendered in the template
+     */
+    get _visibleColumns(): TableColumn[] {
+        return this._tableService.visibleColumns$.value;
+    }
+
+    /**
+     * @hidden
+     * Columns to be rendered as a pop-in columns.
+     */
+    get _poppingColumns(): TableColumn[] {
+        return this._tableService.poppingColumns$.value;
+    }
+
+    /** @hidden */
+    get isTreeTable(): boolean {
+        return !!this._dndTableDirective?.isTreeTable;
+    }
+
+    /** @hidden */
+    get enableRowReordering(): boolean {
+        return !!this._dndTableDirective?.enableRowReordering;
+    }
+
+    /** Whether the table rows are draggable. */
+    get isDraggable(): boolean {
+        return !!this._dndTableDirective?.isTreeTable && !!this._dndTableDirective?.enableRowReordering;
+    }
+
+    /** @hidden */
+    get _semanticHighlightingColumnWidth(): number {
+        return this.semanticHighlighting ? SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH : 0;
+    }
+
+    /** @hidden Sum of widths of fixed columns (semantic highlighting, selection) */
+    get _fixedColumnsPadding(): number {
+        return this._semanticHighlightingColumnWidth + this._selectionColumnWidth;
+    }
+
+    /** @hidden */
+    get _tableWidthPx(): number {
+        return this.tableContainer.nativeElement.getBoundingClientRect().width;
+    }
+
+    /** @hidden */
+    get loadingState(): boolean {
+        return this.loading ?? (this._dataSourceDirective._internalLoadingState || this._dndLoadingState);
+    }
     /**
      * @hidden
      * Representation of combined table rows.
@@ -432,24 +535,20 @@ export class TableComponent<T = any>
     _freezableColumns: Map<string, number> = new Map();
     /**
      * @hidden
-     * Freezable column names and their respective indexes for columns that will be frozen to the end of hte table
+     * Freezable column names and their respective indexes for columns that will be frozen to the end of the table
      */
     _freezableEndColumns: Map<string, number> = new Map();
     /** @hidden */
     _tableColumnsLength = 0;
     /** @hidden */
     _checkedState: boolean | null = false;
-    /**
-     * @hidden
-     * Mapping function for the trackBy, provided by the user.
-     * Is needed, because we are wrapping user supplied data into a `TableRow` class.
-     */
-    _rowTrackBy: TrackByFunction<TableRow<T>>;
     /** @hidden */
     @HostBinding('class.fd-table--group')
     _isGroupTable = false;
     /** @hidden */
-    _tableRowsInViewport$ = new BehaviorSubject<TableRow<T>[]>([]);
+    _tableRowsInViewport: TableRow<T>[] = [];
+    /** @hidden */
+    _tableRowsInViewPortPlaceholder: null[] = [];
     /** @hidden */
     _isShownSelectionColumn = false;
     /** @hidden */
@@ -531,6 +630,13 @@ export class TableComponent<T = any>
     /** @hidden */
     private readonly _tableHeaderResizer = inject(TableHeaderResizerDirective);
 
+    /**
+     * @hidden
+     * Mapping function for the trackBy, provided by the user.
+     * Is needed, because we are wrapping user supplied data into a `TableRow` class.
+     */
+    _rowTrackBy: TrackByFunction<TableRow<T>> = (index) => index;
+
     /** @hidden */
     constructor(
         private readonly _ngZone: NgZone,
@@ -568,107 +674,6 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    _selectionMode: SelectionModeValue = SelectionMode.NONE;
-
-    /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
-    @Input()
-    set selectionMode(value: SelectionModeValue) {
-        this._selectionMode = value;
-        this._isShownSelectionColumn = this.selectionMode !== SelectionMode.NONE;
-        this._setSelectionColumnWidth();
-    }
-
-    get selectionMode(): SelectionModeValue {
-        return this._selectionMode;
-    }
-
-    /** @hidden */
-    private _enableTristateMode = false;
-
-    /**
-     *  When True, the checked state of each tree item depends on the checked
-     *  state of its parent or direct child.
-     */
-    @Input()
-    set enableTristateMode(value: boolean) {
-        this._enableTristateMode = value;
-    }
-
-    get enableTristateMode(): boolean {
-        return this.isTreeTable && this._enableTristateMode;
-    }
-
-    /** Value with the key of the row item's field to compute semantic state of the row.  */
-    @Input()
-    set semanticHighlighting(value: string) {
-        this._semanticHighlightingKey = value;
-        this._setSemanticHighlighting();
-    }
-    get semanticHighlighting(): string {
-        if (!this._semanticHighlightingKey && this._forceSemanticHighlighting) {
-            return DEFAULT_HIGHLIGHTING_KEY;
-        }
-
-        return this._semanticHighlightingKey;
-    }
-
-    /** @hidden */
-    get initialSortBy(): CollectionSort[] {
-        return this.initialState?.initialSortBy ?? [];
-    }
-
-    /**
-     * @hidden
-     * Columns to be rendered in the template
-     */
-    get _visibleColumns(): TableColumn[] {
-        return this._tableService.visibleColumns$.value;
-    }
-
-    /**
-     * @hidden
-     * Columns to be rendered as a pop-in columns.
-     */
-    get _poppingColumns(): TableColumn[] {
-        return this._tableService.poppingColumns$.value;
-    }
-
-    /** @hidden */
-    get isTreeTable(): boolean {
-        return !!this._dndTableDirective?.isTreeTable;
-    }
-
-    /** @hidden */
-    get enableRowReordering(): boolean {
-        return !!this._dndTableDirective?.enableRowReordering;
-    }
-
-    /** Whether the table rows are draggable. */
-    get isDraggable(): boolean {
-        return !!this._dndTableDirective?.isTreeTable && !!this._dndTableDirective?.enableRowReordering;
-    }
-
-    /** @hidden */
-    get _semanticHighlightingColumnWidth(): number {
-        return this.semanticHighlighting ? SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH : 0;
-    }
-
-    /** @hidden Sum of widths of fixed columns (semantic highlighting, selection) */
-    get _fixedColumnsPadding(): number {
-        return this._semanticHighlightingColumnWidth + this._selectionColumnWidth;
-    }
-
-    /** @hidden */
-    get _tableWidthPx(): number {
-        return this.tableContainer.nativeElement.getBoundingClientRect().width;
-    }
-
-    /** @hidden */
-    get loadingState(): boolean {
-        return this.loading ?? (this._dataSourceDirective._internalLoadingState || this._dndLoadingState);
-    }
-
-    /** @hidden */
     getTableRows(): TableRow[] {
         return this._tableRows;
     }
@@ -690,7 +695,7 @@ export class TableComponent<T = any>
 
     /** Returns array of rows that are currently in viewport. */
     getRowsInViewport(): TableRow[] {
-        return this._tableRowsInViewport$.value;
+        return this._tableRowsInViewport;
     }
 
     /**
@@ -698,7 +703,8 @@ export class TableComponent<T = any>
      * @param rows Array of rows.
      */
     setRowsInViewport(rows: TableRow[]): void {
-        this._tableRowsInViewport$.next(rows);
+        this._tableRowsInViewport = rows;
+        this._tableRowsInViewPortPlaceholder = new Array(rows.length).fill(null);
         this._cdr.detectChanges();
     }
 
@@ -711,7 +717,7 @@ export class TableComponent<T = any>
         if ('trackBy' in changes) {
             this._rowTrackBy =
                 typeof this.trackBy === 'function'
-                    ? (index, item) => this.trackBy(index, item.value)
+                    ? (index) => this.trackBy(index, this._tableRowsInViewport[index].value)
                     : (undefined as any);
         }
 
@@ -785,6 +791,14 @@ export class TableComponent<T = any>
 
         if (this.expandOnInit) {
             this.expandAll();
+        }
+
+        if (this._virtualScrollDirective) {
+            this._subscriptions.add(
+                this._virtualScrollDirective.virtualScrollTransform$.subscribe((transform) => {
+                    this._tableBody.nativeElement.style.transform = `translateY(${transform}px)`;
+                })
+            );
         }
     }
 
