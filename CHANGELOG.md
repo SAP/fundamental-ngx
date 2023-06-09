@@ -1,3 +1,74 @@
+# [0.42.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.13...v0.42.0-rc.14) (2023-06-07)
+
+
+### Bug Fixes
+
+* **core:** template based inline help was not setting screenreader element ([#9985](https://github.com/SAP/fundamental-ngx/issues/9985)) ([e041216](https://github.com/SAP/fundamental-ngx/commit/e0412166cff8f9441f14254cc41f403c3479299b))
+
+
+
+# [0.42.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.12...v0.42.0-rc.13) (2023-06-06)
+
+
+### Bug Fixes
+
+* **platform:** add Tooltip header update ([#9947](https://github.com/SAP/fundamental-ngx/issues/9947)) ([c989f73](https://github.com/SAP/fundamental-ngx/commit/c989f7326d690e77d7579b02ee22c5cc7736d8ba))
+
+
+
+# [0.42.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.11...v0.42.0-rc.12) (2023-06-06)
+
+
+### Bug Fixes
+
+* **platform:** do not  use fdkClicked ([#9987](https://github.com/SAP/fundamental-ngx/issues/9987)) ([a5621ad](https://github.com/SAP/fundamental-ngx/commit/a5621adf3c6af0816754f39af13dc6470f26f073))
+
+
+
+# [0.42.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.10...v0.42.0-rc.11) (2023-06-06)
+
+
+### Bug Fixes
+
+* **core:** added blocking of the document scroll when dialog is open ([#9948](https://github.com/SAP/fundamental-ngx/issues/9948)) ([4f8093f](https://github.com/SAP/fundamental-ngx/commit/4f8093f7ff6c3b55593e4f751c83c1b17c8ebb1a))
+
+
+
+# [0.42.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.9...v0.42.0-rc.10) (2023-06-05)
+
+
+
+# [0.42.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.8...v0.42.0-rc.9) (2023-06-05)
+
+
+
+# [0.42.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.7...v0.42.0-rc.8) (2023-06-05)
+
+
+### Bug Fixes
+
+* **core:** fixed popover arrow placement ([#9946](https://github.com/SAP/fundamental-ngx/issues/9946)) ([b7d5cb6](https://github.com/SAP/fundamental-ngx/commit/b7d5cb618e93449cb77553cfbe2836d2b35deef4))
+
+
+
+# [0.42.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.6...v0.42.0-rc.7) (2023-06-02)
+
+
+### Bug Fixes
+
+* **core:** escape key when using focusable grid closes dialog ([#9962](https://github.com/SAP/fundamental-ngx/issues/9962)) ([3508177](https://github.com/SAP/fundamental-ngx/commit/3508177b0c2dfdc731c44dc05aebf4d70bef917f))
+
+
+
+# [0.42.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.5...v0.42.0-rc.6) (2023-06-02)
+
+
+### Bug Fixes
+
+* **core:** multi input, various fixes and doc updates ([#9961](https://github.com/SAP/fundamental-ngx/issues/9961)) ([6faa0bc](https://github.com/SAP/fundamental-ngx/commit/6faa0bc349e8587cf7af86ed6deddd2e9529a2ad))
+
+
+
 # [0.42.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.4...v0.42.0-rc.5) (2023-06-02)
 
 

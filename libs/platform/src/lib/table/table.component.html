@@ -88,6 +88,7 @@
                             [columnName]="column.name"
                             [id]="id + '__' + column.name"
                             [attr.aria-colindex]="colIdx"
+                            [attr.aria-labelledby]="id + '-header-cell-' + column.name"
                             [ngClass]="'fdp-table__col--' + column.name"
                             [class.fd-table__cell--fixed]="_freezableColumns.has(column.name)"
                             [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
@@ -114,10 +115,12 @@
                             (keydown.arrowRight)="_scrollToOverlappedCell()"
                         >
                             <fdp-table-header-cell-content
+                                [id]="id"
                                 [column]="column"
                                 [hasFilter]="_filterRulesMap.has(column.key)"
                                 [hasSorting]="_sortRulesMap.has(column.key)"
                                 [sorting]="_sortRulesMap.get(column.key)"
+                                [attr.title]="column?.headerOverflows ? column.label : null"
                             >
                                 <!-- Header menu -->
                                 <fdp-table-cell-header-popover
@@ -271,7 +274,9 @@
                                         [tristate]="enableTristateMode"
                                         [tristateSelectable]="false"
                                         [ngModel]="row.checked"
-                                        (fdkClicked)="_toggleMultiSelectRow(row, $event)"
+                                        (click)="_toggleMultiSelectRow(row, $event)"
+                                        (keydown.enter)="_toggleMultiSelectRow(row, $event)"
+                                        (keydown.space)="_toggleMultiSelectRow(row, $event)"
                                     ></fd-checkbox>
                                 </td>
                             </ng-container>
