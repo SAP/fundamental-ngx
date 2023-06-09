@@ -64,10 +64,6 @@ export class TableRowComponent<T> implements OnInit, AfterViewInit, OnDestroy {
     @Input()
     index: number;
 
-    /** Whether the cell mock is visible. */
-    @Input()
-    cellMockVisible: boolean;
-
     /** Selection mode. */
     @Input()
     selectionMode: SelectionModeValue;
@@ -99,23 +95,6 @@ export class TableRowComponent<T> implements OnInit, AfterViewInit, OnDestroy {
     /** The column `name` to freeze columns after and including. */
     @Input()
     freezeEndColumnsTo: string;
-
-    /**
-     * @hidden
-     * Freezable column names and their respective indexes
-     */
-    @Input()
-    freezableColumns: Map<string, number> = new Map();
-
-    /**
-     * Freezable column names and their respective indexes for columns that will be frozen to the end of the table
-     */
-    @Input()
-    freezableEndColumns: Map<string, number> = new Map();
-
-    /** @hidden Whether the first item in each row should have the 'rowheader' role. */
-    @Input()
-    enableRowHeaderRole = false;
 
     /**
      * Event emitted when keyboard drag performed.

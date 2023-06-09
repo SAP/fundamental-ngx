@@ -77,6 +77,9 @@ export class TableColumnResizeService implements OnDestroy {
     /** Resize progress stream. */
     readonly resizeInProgress$ = new BehaviorSubject<boolean>(this._resizeInProgress);
 
+    /** Whether cell mock should be visible. */
+    readonly cellMockVisible$ = new BehaviorSubject<boolean>(false);
+
     /** Current column resizer position. */
     get resizerPosition(): number {
         return this._resizerPosition ?? 0;

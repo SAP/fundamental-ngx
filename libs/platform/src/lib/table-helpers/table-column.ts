@@ -66,4 +66,10 @@ export abstract class TableColumn {
     abstract responsiveState: FdpColumnResponsiveState;
     /** Column role attribute. */
     abstract role: 'cell' | 'rowheader' | 'gridcell';
+
+    /** @hidden */
+    abstract _freezed: boolean;
+
+    /** @hidden */
+    abstract _endFreezed: boolean;
 }

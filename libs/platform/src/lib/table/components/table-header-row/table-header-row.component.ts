@@ -61,12 +61,6 @@ export class TableHeaderRowComponent implements OnInit {
     checkedState: boolean | null;
 
     /**
-     * Whether cell mock is visible.
-     */
-    @Input()
-    cellMockVisible: boolean;
-
-    /**
      * Selection mode.
      */
     @Input()
@@ -85,20 +79,6 @@ export class TableHeaderRowComponent implements OnInit {
     /** The column `name` to freeze columns after and including. */
     @Input()
     freezeEndColumnsTo: string;
-
-    /**
-     * @hidden
-     * Freezable column names and their respective indexes
-     */
-    @Input()
-    freezableColumns: Map<string, number> = new Map();
-
-    /**
-     * @hidden
-     * Freezable column names and their respective indexes for columns that will be frozen to the end of hte table
-     */
-    @Input()
-    freezableEndColumns: Map<string, number> = new Map();
 
     /** @hidden */
     @ViewChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)

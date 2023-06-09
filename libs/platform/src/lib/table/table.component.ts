@@ -649,14 +649,6 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    get _cellMockVisible(): boolean {
-        return (
-            this._tableColumnResizeService.fixedWidth &&
-            (this.tableContainer?.nativeElement?.scrollWidth ?? 0) > (this.table?.nativeElement?.scrollWidth ?? 0)
-        );
-    }
-
-    /** @hidden */
     get _semanticHighlightingColumnWidth(): number {
         return this.semanticHighlighting ? SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH : 0;
     }
@@ -707,6 +699,7 @@ export class TableComponent<T = any>
      */
     setRowsInViewport(rows: TableRow[]): void {
         this._tableRowsInViewport$.next(rows);
+        this._cdr.detectChanges();
     }
 
     /** @hidden */
@@ -1703,6 +1696,10 @@ export class TableComponent<T = any>
         this._freezableColumns = getFreezableColumns(this._visibleColumns, this.freezeColumnsTo);
         this._freezableEndColumns = getFreezableEndColumns(this._visibleColumns, this.freezeEndColumnsTo);
         this.fixed = !!this.fixed || !!this._freezableColumns.size || !!this._freezableEndColumns.size;
+        this.columns.forEach((column) => {
+            column._freezed = this._freezableColumns.has(column.name);
+            column._endFreezed = this._freezableEndColumns.has(column.name);
+        });
     }
 
     /** @hidden */
@@ -1812,7 +1809,13 @@ export class TableComponent<T = any>
     private _listenToTableWidthChanges(): void {
         this._subscriptions.add(
             resizeObservable(this.tableContainer.nativeElement)
-                .pipe(debounceTime(100))
+                .pipe(
+                    tap(() => {
+                        // this._tableContainerScrollWidth = this.tableContainer.nativeElement.scrollWidth;
+                        this._checkCellMock();
+                    }),
+                    debounceTime(100)
+                )
                 .subscribe(() => {
                     this.recalculateTableColumnWidth();
                     if (this._freezableColumns.size || this._freezableEndColumns.size) {
@@ -1820,6 +1823,13 @@ export class TableComponent<T = any>
                         this._cdr.detectChanges();
                     }
                 })
+        );
+
+        this._subscriptions.add(
+            resizeObservable(this.table.nativeElement).subscribe(() => {
+                // this._tableScrollWidth = this.table.nativeElement.scrollWidth;
+                this._checkCellMock();
+            })
         );
     }
 
@@ -1877,5 +1887,13 @@ export class TableComponent<T = any>
         this._selectionColumnWidth = this._isShownSelectionColumn
             ? SELECTION_COLUMN_WIDTH.get(this.contentDensityObserver.value) ?? 0
             : 0;
+    }
+
+    /** @hidden */
+    private _checkCellMock(): void {
+        this._tableColumnResizeService.cellMockVisible$.next(
+            this._tableColumnResizeService.fixedWidth &&
+                (this.tableContainer?.nativeElement?.scrollWidth ?? 0) > (this.table?.nativeElement?.scrollWidth ?? 0)
+        );
     }
 }

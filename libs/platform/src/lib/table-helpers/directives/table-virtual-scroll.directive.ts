@@ -83,15 +83,18 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
             return;
         }
 
+        const rowHeight = this.rowHeight + 1;
+
         const rowsVisible = this._table.getVisibleRows();
         const rowsInViewPort = this._table.getRowsInViewport();
         const totalNodeCount = rowsVisible.length;
+        const scrollTop = this._table.tableScrollable.getScrollTop();
 
-        let startNodeIndex = Math.floor(this._table.tableScrollable.getScrollTop() / this.rowHeight) - this.renderAhead;
+        let startNodeIndex = Math.floor(scrollTop / rowHeight) - this.renderAhead;
         startNodeIndex = Math.max(0, startNodeIndex);
 
         let visibleNodeCount =
-            Math.ceil(this._table.tableContainer.nativeElement.clientHeight / this.rowHeight) + 2 * this.renderAhead;
+            Math.ceil(this._table.tableContainer.nativeElement.clientHeight / rowHeight) + 2 * this.renderAhead;
         visibleNodeCount = Math.min(totalNodeCount - startNodeIndex, visibleNodeCount);
 
         // Simple caching to avoid unnecessary re-renderings
@@ -107,8 +110,8 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         }
 
         this._virtualScrollCache = { startNodeIndex, visibleNodeCount, totalNodeCount };
-        this.virtualScrollTotalHeight = totalNodeCount * this.rowHeight - visibleNodeCount * this.rowHeight;
-        this.virtualScrollTransform = `translateY(` + startNodeIndex * this.rowHeight + `px)`;
+        this.virtualScrollTotalHeight = totalNodeCount * rowHeight - visibleNodeCount * rowHeight;
+        this.virtualScrollTransform = `translateY(` + startNodeIndex * rowHeight + `px)`;
         this._table.setRowsInViewport(rowsVisible.slice(startNodeIndex, startNodeIndex + visibleNodeCount));
     }
 

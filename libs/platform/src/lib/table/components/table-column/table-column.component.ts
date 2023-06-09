@@ -137,6 +137,12 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     headerOverflows = false;
 
     /** @hidden */
+    _freezed = false;
+
+    /** @hidden */
+    _endFreezed = false;
+
+    /** @hidden */
     @ContentChild(FdpCellDef)
     set fdpCellDef(fdpCellDef: Nullable<FdpCellDef>) {
         this.columnCellTemplate = fdpCellDef?.templateRef;

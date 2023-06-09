@@ -84,20 +84,23 @@
     [attr.role]="column.role"
     [headers]="rowId + '__' + column.name"
     [ngClass]="'fdp-table__col--' + column.name"
-    [class.fd-table__cell--fixed]="freezableColumns.has(column.name)"
-    [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
-    [class.fd-table__cell--fixed-end]="freezableEndColumns.has(column.name)"
-    [class.fd-table__cell--fixed-end-last]="column.name === freezeEndColumnsTo"
-    [class.fd-table__cell--expand]="row.isTree && colIdx === 0"
-    [class.is-last-child]="isLast && (_tableService._isShownNavigationColumn$ | async) === false"
+    [ngClass]="[
+        'fdp-table__col--' + column.name,
+        column._freezed ? 'fd-table__cell--fixed' : '',
+        column.name === freezeColumnsTo ? 'fd-table__cell--fixed-last' : '',
+        column._endFreezed ? 'fd-table__cell--fixed-end' : '',
+        column.name === freezeEndColumnsTo ? 'fd-table__cell--fixed-end-last' : '',
+        row.isTree && colIdx === 0 ? 'fd-table__cell--expand' : '',
+        isLast && (_tableService._isShownNavigationColumn$ | async) === false ? 'is-last-child' : ''
+    ]"
     [ngStyle]="
         column
             | tableCellStyles
                 : _rtl
                 : (_tableService._semanticHighlightingColumnWidth$ | async)
                 : selectionColumnWidth
-                : freezableColumns.has(column.name)
-                : freezableEndColumns.has(column.name)
+                : column._freezed
+                : column._endFreezed
                 : _tableColumnResizeService.getPrevColumnsWidth(column.name)
                 : _tableColumnResizeService.getColumnWidthStyle(column.name)
                 : _tableColumnResizeService.getNextColumnsWidth(column.name)
@@ -175,7 +178,7 @@
 <td
     aria-hidden="true"
     class="fd-table__cell fd-table__cell--mock"
-    [class.fd-table__cell--mock-borderless]="!cellMockVisible"
+    [class.fd-table__cell--mock-borderless]="(_tableColumnResizeService.cellMockVisible$ | async) !== true"
     fdkDisabled
     [addDisabledClass]="false"
 ></td>
