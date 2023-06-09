@@ -109,7 +109,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
         this.dragDropInProgress = true;
     }
 
-    /** @hidden */
+    /** Method called when dnd performed with the keyboard. */
     dragRowFromKeyboard(dir: string, event: Event, currentRowIndex: number, mode: 'shift' | 'group'): void {
         if (!this._rowsDraggable) {
             return;
@@ -133,7 +133,15 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
         }
     }
 
-    /** @hidden */
+    /** Method called when drag&drop event being cancelled. */
+    dropCancelled(): void {
+        /** After timeout to make click event handled first */
+        this._ngZone.runOutsideAngular(() => {
+            setTimeout(() => (this.dragDropInProgress = false));
+        });
+    }
+
+    /** Method called when dragged item being dropped. */
     dragDropItemDrop(event: FdDropEvent<TableRow>): void {
         /** After timeout to make click event handled first */
         this._ngZone.runOutsideAngular(() => {

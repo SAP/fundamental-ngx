@@ -17,6 +17,7 @@ export abstract class TableDraggable<T = any> {
     abstract dragDropItemDrop(event: FdDropEvent<TableRow>): void;
     abstract dragDropStart(): void;
     abstract setTable(table: Table): void;
+    abstract dropCancelled(): void;
 }
 
 export abstract class TableInitialState {

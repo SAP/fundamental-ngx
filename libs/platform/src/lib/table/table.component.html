@@ -71,6 +71,7 @@
                 [style.transform]="_virtualScrollDirective?.virtualScrollTransform"
                 (itemDropped)="_dndTableDirective?.dragDropItemDrop($event)"
                 (dropPredicateCalculating)="_calculatingLoading($event)"
+                (dropCancelled)="_dndTableDirective?.dropCancelled()"
             >
                 <ng-container
                     *ngFor="let row of _tableRowsInViewport$ | async; let rowIdx = index; trackBy: _rowTrackBy"

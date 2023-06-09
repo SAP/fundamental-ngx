@@ -118,6 +118,10 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     @Output()
     readonly itemDropped = new EventEmitter<FdDropEvent<T>>();
 
+    /** Event that is thrown when predicate function returned false. */
+    @Output()
+    readonly dropCancelled = new EventEmitter<void>();
+
     /** @hidden */
     @ContentChildren(DND_ITEM)
     dndItems: QueryList<DndItem<T>>;
@@ -282,6 +286,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
             this._closestItemPosition = null;
 
             if (!result) {
+                this.dropCancelled.emit();
                 return;
             }
 
