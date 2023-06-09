@@ -1,3 +1,12 @@
+# [0.42.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.15...v0.42.0-rc.16) (2023-06-09)
+
+
+### Bug Fixes
+
+* **docs:** sidebar container css bug ([#10006](https://github.com/SAP/fundamental-ngx/issues/10006)) ([8a635a6](https://github.com/SAP/fundamental-ngx/commit/8a635a65098a6e1fe532a385e78b39b1c2ce30d6))
+
+
+
 # [0.42.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.14...v0.42.0-rc.15) (2023-06-09)
 
 
