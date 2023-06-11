@@ -25,12 +25,38 @@ import {
     MobileModeControl,
     MobileModeConfigToken
 } from '@fundamental-ngx/core/mobile-mode';
+import { InitialFocusDirective, DeprecatedInitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { TitleModule } from '@fundamental-ngx/core/title';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { NgIf, NgTemplateOutlet, AsyncPipe } from '@angular/common';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-menu-mobile',
     templateUrl: './menu-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DialogModule,
+        TemplateDirective,
+        BarModule,
+        NgIf,
+        ButtonModule,
+        ContentDensityDirective,
+        TitleModule,
+        CdkScrollable,
+        ScrollbarDirective,
+        NgTemplateOutlet,
+        InitialFocusDirective,
+        DeprecatedInitialFocusDirective,
+        AsyncPipe
+    ]
 })
 export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit, OnDestroy {
     /** @hidden */

@@ -5,7 +5,8 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { MenuComponent } from '../menu.component';
 
 @Directive({
-    selector: '[fdMenuTrigger]'
+    selector: '[fdMenuTrigger]',
+    standalone: true
 })
 export class MenuTriggerDirective implements OnDestroy {
     /** Set reference to Menu Component */

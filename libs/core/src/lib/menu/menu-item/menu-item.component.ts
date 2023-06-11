@@ -30,6 +30,7 @@ import { MenuInteractiveDirective } from '../directives/menu-interactive.directi
 import { MenuService } from '../services/menu.service';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 
 let menuUniqueId = 0;
 
@@ -59,7 +60,9 @@ export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component depend
         '[attr.role]': '"menuitem"',
         '[class.fd-menu__item]': 'true',
         '[class.has-separator]': '_hasSeparator'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet]
 })
 export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, AfterContentInit, OnDestroy {
     /** Set the Menu Item as disabled/enabled */
@@ -277,7 +280,8 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: SUBMENU, useExisting: SubmenuComponent }],
-    exportAs: 'fdSubmenu'
+    exportAs: 'fdSubmenu',
+    standalone: true
 })
 export class SubmenuComponent implements BaseSubmenu, AfterContentInit {
     /** Aria-label for navigation */

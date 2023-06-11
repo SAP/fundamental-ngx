@@ -1,13 +1,16 @@
-import { Component, HostBinding, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostBinding, inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MenuComponent } from '../menu.component';
+import { CdkPortalOutlet, PortalModule } from '@angular/cdk/portal';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-menu-addon',
     template: `
-        <fd-icon [glyph]="glyph" *ngIf="glyph" role="presentation"></fd-icon>
+        <ng-template cdkPortalOutlet></ng-template>
         <ng-content></ng-content>
-    `
+    `,
+    standalone: true,
+    imports: [PortalModule]
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class MenuAddonDirective implements OnInit, OnDestroy {
@@ -17,12 +20,6 @@ export class MenuAddonDirective implements OnInit, OnDestroy {
         this.fdAddonBeforeClass = position === 'before';
         this.fdAddonAfterClass = position === 'after';
     }
-
-    /** The icon name to display. See the icon page for the list of icons
-     * here: https://sap.github.io/fundamental-ngx/icon
-     * */
-    @Input()
-    glyph: string;
 
     /** Whether is used as submenu indicator */
     @Input()
@@ -44,6 +41,10 @@ export class MenuAddonDirective implements OnInit, OnDestroy {
 
     /** @hidden */
     private menuComponent = inject(MenuComponent, { optional: true });
+
+    /** @hidden */
+    @ViewChild(CdkPortalOutlet)
+    addonGlyphPortalOutlet: CdkPortalOutlet;
 
     /** @hidden */
     ngOnInit(): void {

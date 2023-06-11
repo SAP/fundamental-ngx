@@ -6,7 +6,7 @@ describe('MenuAddonDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [MenuAddonDirective]
+            imports: [MenuAddonDirective]
         }).compileComponents();
         directive = TestBed.createComponent(MenuAddonDirective).componentInstance;
     }));

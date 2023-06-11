@@ -2,7 +2,10 @@ import { MenuTitleDirective } from './menu-title.directive';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-@Component({ template: '<div fd-menu-title>{{ menuTitle }}</div>' })
+@Component({
+    template: '<div fd-menu-title>{{ menuTitle }}</div>',
+    standalone: true
+})
 class TestComponent {
     @ViewChild(MenuTitleDirective) menuTitleDirective: MenuTitleDirective;
 
@@ -15,7 +18,7 @@ describe('MenuTitleDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, MenuTitleDirective]
+            imports: [TestComponent, MenuTitleDirective]
         }).compileComponents();
     }));
 

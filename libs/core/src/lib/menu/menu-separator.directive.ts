@@ -9,7 +9,8 @@ import { Directive, ElementRef, inject } from '@angular/core';
     selector: 'fd-menu-separator',
     host: {
         '[style.display]': '"none"'
-    }
+    },
+    standalone: true
 })
 export class MenuSeparatorDirective {
     /** @hidden */
