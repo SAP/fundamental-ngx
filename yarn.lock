@@ -9575,7 +9575,15 @@ git-remote-origin-url@^2.0.0:
     gitconfiglocal "^1.0.0"
     pify "^2.3.0"
 
-git-semver-tags@4.1.1, git-semver-tags@^4.0.0, git-semver-tags@^4.1.1:
+git-semver-tags@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/git-semver-tags/-/git-semver-tags-5.0.0.tgz#775ff55effae0b50b755448408de6cd56ce293e2"
+  integrity sha512-fZ+tmZ1O5aXW/T5nLzZLbxWAHdQTLLXalOECMNAmhoEQSfqZjtaeMjpsXH4C5qVhrICTkVQeQFujB1lKzIHljA==
+  dependencies:
+    meow "^8.1.2"
+    semver "^6.3.0"
+
+git-semver-tags@^4.0.0, git-semver-tags@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/git-semver-tags/-/git-semver-tags-4.1.1.tgz#63191bcd809b0ec3e151ba4751c16c444e5b5780"
   integrity sha512-OWyMt5zBe7xFs8vglMmhM9lRQzCWL3WjHtxNNfJTMngGym7pC1kh8sP6jevfydJ6LP3ZvGxfb6ABYgPUM0mtsA==
@@ -12563,7 +12571,7 @@ memfs@^3.4.1, memfs@^3.4.12, memfs@^3.4.3:
   dependencies:
     fs-monkey "^1.0.3"
 
-meow@^8.0.0:
+meow@^8.0.0, meow@^8.1.2:
   version "8.1.2"
   resolved "https://registry.yarnpkg.com/meow/-/meow-8.1.2.tgz#bcbe45bda0ee1729d350c03cffc8395a36c4e897"
   integrity sha512-r85E3NdZ+mpYk1C6RjPFEMSE+s1iZMuHtsHAqY0DT3jZczl0diWUZ8g6oU7h0M9cD2EL+PzaYghhCLzR0ZNn5Q==
