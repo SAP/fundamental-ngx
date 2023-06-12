@@ -114,8 +114,8 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
         this._virtualScrollCache = { startNodeIndex, visibleNodeCount, totalNodeCount };
         this.virtualScrollTotalHeight = totalNodeCount * rowHeight - visibleNodeCount * rowHeight;
         this._table.setRowsInViewport(
-            rowsVisible.slice(startNodeIndex, startNodeIndex + visibleNodeCount),
-            startNodeIndex
+            startNodeIndex,
+            rowsVisible.slice(startNodeIndex, startNodeIndex + visibleNodeCount).length
         );
     }
 

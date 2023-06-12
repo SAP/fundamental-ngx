@@ -547,7 +547,11 @@ export class TableComponent<T = any>
     _isGroupTable = false;
     /** @hidden */
     _tableRowsInViewport: TableRow<T>[] = [];
-    /** @hidden */
+    /**
+     * @hidden
+     * Used to create a row component placeholder and set data in it rather than re-create the row component when data changes.
+     * Optimizes performance due to skipping initial setup of the component.
+     */
     _tableRowsInViewPortPlaceholder: number[] = [];
     /** @hidden */
     _isShownSelectionColumn = false;
@@ -614,8 +618,6 @@ export class TableComponent<T = any>
     /** @hidden */
     private _columnsWidthSet = false;
     /** @hidden */
-    private _internalLoadingState = false;
-    /** @hidden */
     private _dndLoadingState = false;
     /** @hidden */
     private readonly _rangeSelector = new RangeSelector();
@@ -635,7 +637,10 @@ export class TableComponent<T = any>
      * Mapping function for the trackBy, provided by the user.
      * Is needed, because we are wrapping user supplied data into a `TableRow` class.
      */
-    _rowTrackBy: TrackByFunction<TableRow<T>> = (index) => index;
+    _rowTrackBy: TrackByFunction<TableRow<T>> | TrackByFunction<number>;
+
+    /** @hidden */
+    private readonly _defaultTrackBy: TrackByFunction<number> = (index: number) => index;
 
     /** @hidden */
     constructor(
@@ -655,6 +660,7 @@ export class TableComponent<T = any>
         this._virtualScrollDirective?.setTable(this);
         this._dataSourceDirective?.setTable(this);
 
+        this._rowTrackBy = this._defaultTrackBy;
         this._toolbarContext = {
             counter: this._dataSourceDirective.totalItems$,
             sortable: this._isShownSortSettingsInToolbar$,
@@ -680,11 +686,11 @@ export class TableComponent<T = any>
 
     /**
      * Sets an array of rows that are currently in viewport.
-     * @param rows Array of rows.
+     * @param startIndex Start index of all rows.
+     * @param length Length of viewport rows.
      */
-    setRowsInViewport(rows: TableRow[], startIndex = 0): void {
-        // this._tableRowsInViewport = rows;
-        this._tableRowsInViewPortPlaceholder = new Array(rows.length).fill(null).map((_, i) => i + startIndex);
+    setRowsInViewport(startIndex = 0, length: number): void {
+        this._tableRowsInViewPortPlaceholder = new Array(length).fill(null).map((_, i) => i + startIndex);
         this._cdr.detectChanges();
     }
 
@@ -697,8 +703,8 @@ export class TableComponent<T = any>
         if ('trackBy' in changes) {
             this._rowTrackBy =
                 typeof this.trackBy === 'function'
-                    ? (index) => this.trackBy(index, this._tableRowsInViewport[index].value)
-                    : (undefined as any);
+                    ? (index) => this.trackBy(index, this._tableRowsVisible[index].value)
+                    : this._defaultTrackBy;
         }
 
         // changes below should be checked only after view is initialized
@@ -1273,7 +1279,7 @@ export class TableComponent<T = any>
 
         this._rangeSelector.reset();
 
-        this._emitRowSelectionChangeEvent(added, removed);
+        this._emitRowSelectionChangeEvent(added, removed, true);
 
         this._calculateCheckedAll();
     }
@@ -1282,7 +1288,7 @@ export class TableComponent<T = any>
      * @hidden
      * Create table row selection event
      */
-    _emitRowSelectionChangeEvent(added: TableRow[], removed: TableRow[]): void {
+    _emitRowSelectionChangeEvent(added: TableRow[], removed: TableRow[], all: boolean = false): void {
         const selected = getSelectableRows(this._tableRows, this.selectableKey)
             .filter(({ checked }) => checked)
             .map(({ value }) => value);
@@ -1292,7 +1298,8 @@ export class TableComponent<T = any>
             selection: selected,
             added: added.map(({ value }) => value),
             removed: removed.map(({ value }) => value),
-            index: added.concat(removed).map(({ index }) => index)
+            index: added.concat(removed).map(({ index }) => index),
+            all
         });
     }
 
@@ -1585,7 +1592,7 @@ export class TableComponent<T = any>
         if (this._virtualScrollDirective) {
             this._virtualScrollDirective?.calculateVirtualScrollRows();
         } else {
-            this.setRowsInViewport(this._tableRowsVisible);
+            this.setRowsInViewport(0, this._tableRowsVisible.length);
         }
     }
 

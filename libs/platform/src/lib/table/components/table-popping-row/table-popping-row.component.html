@@ -8,7 +8,7 @@
     (click)="cellClicked.emit({ index: 0, row })"
     (keydown.enter)="_isTreeRowFirstCell(0, row, $event) && toggleGroupRow.emit(row)"
 >
-    <div fd-table-text *ngFor="let poppingColumn of _tableService.poppingColumns$ | async">
+    <div fd-table-text *ngFor="let poppingColumn of _fdpTableService.poppingColumns$ | async">
         <label fd-form-label>{{ poppingColumn.label }}:</label>
 
         <ng-container *ngIf="poppingColumn?.columnCellTemplate; else defaultTableCellTemplate">

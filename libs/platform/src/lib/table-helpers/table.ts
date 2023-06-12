@@ -178,7 +178,7 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     abstract getRowsInViewport(): number[];
 
-    abstract setRowsInViewport(rows: TableRow[], startIndex?: number): void;
+    abstract setRowsInViewport(startIndex: number, length: number): void;
 
     abstract toggleExpandableTableRow(row: TableRow<T>);
 

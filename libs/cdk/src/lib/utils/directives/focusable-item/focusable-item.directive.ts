@@ -149,7 +149,6 @@ export class FocusableItemDirective implements HasElementRef {
     }
 
     /** @hidden */
-    // @HostListener('focusin')
     private async _onFocusin(): Promise<void> {
         if (!this.fdkFocusableItem) {
             return;
@@ -172,7 +171,6 @@ export class FocusableItemDirective implements HasElementRef {
     }
 
     /** @hidden */
-    // @HostListener('focusout')
     private _onFocusout(): void {
         if (!this.fdkFocusableItem) {
             return;
@@ -183,7 +181,6 @@ export class FocusableItemDirective implements HasElementRef {
     }
 
     /** @hidden */
-    // @HostListener('keydown', ['$event'])
     private _onKeydown(event: KeyboardEvent): void {
         if (!this.fdkFocusableItem) {
             return;

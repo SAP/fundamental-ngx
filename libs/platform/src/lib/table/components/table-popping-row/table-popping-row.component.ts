@@ -8,6 +8,8 @@ import {
     Output,
     inject
 } from '@angular/core';
+import { DestroyedService, FDK_FOCUSABLE_LIST_DIRECTIVE } from '@fundamental-ngx/cdk/utils';
+import { TableRowDirective } from '@fundamental-ngx/core/table';
 import {
     isTreeRow,
     isTreeRowFirstCell,
@@ -22,9 +24,16 @@ import {
     selector: '[fdp-table-popping-row]',
     templateUrl: './table-popping-row.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
+            useExisting: TableRowDirective
+        },
+        DestroyedService
+    ]
 })
-export class TablePoppingRowComponent<T> {
+export class TablePoppingRowComponent<T> extends TableRowDirective {
     /** Table Row. */
     @Input()
     row: TableRow<T>;
@@ -56,5 +65,5 @@ export class TablePoppingRowComponent<T> {
     readonly _isTreeRowFirstCell = isTreeRowFirstCell;
 
     /** @hidden */
-    readonly _tableService = inject(TableService);
+    readonly _fdpTableService = inject(TableService);
 }
