@@ -76,6 +76,10 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     /** Event fired when cancel button pressed. */
     readonly cancel: EventEmitter<void>;
 
+    abstract _tableRowsVisible: TableRow<T>[];
+
+    abstract _tableRows: TableRow<T>[];
+
     /** Get table state */
     abstract getTableState(): TableState;
 
@@ -172,17 +176,9 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     /** Returns current preset. */
     abstract getCurrentPreset(): PlatformTableManagedPreset;
 
-    abstract getTableRows(): TableRow<T>[];
+    abstract getRowsInViewport(): number[];
 
-    abstract setTableRows(rows: TableRow<T>[]);
-
-    abstract getVisibleRows(): TableRow<T>[];
-
-    abstract getRowsInViewport(): TableRow<T>[];
-
-    abstract setRowsInViewport(rows: TableRow[]): void;
-
-    abstract setVisibleRows(rows: TableRow<T>[]);
+    abstract setRowsInViewport(rows: TableRow[], startIndex?: number): void;
 
     abstract toggleExpandableTableRow(row: TableRow<T>);
 

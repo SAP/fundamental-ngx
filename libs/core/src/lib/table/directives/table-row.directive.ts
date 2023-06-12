@@ -16,17 +16,22 @@ import { startWith } from 'rxjs/operators';
 
 import { TableService } from '../table.service';
 import { TableCellDirective } from './table-cell.directive';
-import { BooleanInput } from '@angular/cdk/coercion';
-import { DestroyedService, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { DestroyedService, FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 
 export const HIDDEN_CLASS_NAME = 'fd-table--hidden';
 
 @Directive({
     selector: '[fdTableRow], [fd-table-row]',
-    providers: [DestroyedService],
-    hostDirectives: [FocusableListDirective]
+    providers: [
+        {
+            provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
+            useExisting: TableRowDirective
+        },
+        DestroyedService
+    ]
 })
-export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
+export class TableRowDirective extends FocusableListDirective implements AfterViewInit, OnDestroy, OnInit {
     /** @hidden */
     @ContentChildren(TableCellDirective)
     cells: QueryList<TableCellDirective>;
@@ -54,10 +59,12 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     @HostBinding('class.fd-table__row--focusable')
     @Input()
     set focusable(value: BooleanInput) {
-        this._focusableListDirective.focusable = value;
+        this._focusable = coerceBooleanProperty(value);
+
+        this.setTabbable(this._focusable);
     }
     get focusable(): boolean {
-        return this._focusableListDirective.focusable;
+        return this._focusable;
     }
 
     /** Whether the table row is main row, it's concerned only on pop in mode */
@@ -79,20 +86,21 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     private _propagateKeysSubscription: Subscription;
 
     /** @hidden */
-    private readonly _focusableListDirective = inject(FocusableListDirective);
+    private readonly _changeDetRef = inject(ChangeDetectorRef);
+    /** @hidden */
+    private _tableService = inject(TableService);
+    /** @hidden */
+    public elementRef: ElementRef<HTMLTableRowElement> = inject(ElementRef);
 
     /** @hidden */
-    constructor(
-        private _changeDetRef: ChangeDetectorRef,
-        private _tableService: TableService,
-        public elementRef: ElementRef<HTMLTableRowElement>
-    ) {
-        this._focusableListDirective.navigationDirection = 'grid';
-        this._focusableListDirective._updateNavigationDirection();
+    constructor() {
+        super();
     }
 
     /** @hidden */
     ngOnInit(): void {
+        this.navigationDirection = 'grid';
+        this._updateNavigationDirection();
         this._propagateKeysSubscription = this._tableService.propagateKeys$.subscribe((keys: string[]) =>
             this._resetCells(keys)
         );
@@ -100,12 +108,14 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
+        super.ngAfterViewInit();
         this._resetCells(this._tableService.propagateKeys$.getValue());
         this._setupCellsSubscription();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
+        super.ngOnDestroy();
         this._propagateKeysSubscription.unsubscribe();
     }
 

@@ -40,9 +40,8 @@
         >
             <thead fd-table-header class="fdp-table__header">
                 <tr
-                    fd-table-row
                     fdp-table-header-row
-                    [id]="id"
+                    [rowId]="id"
                     [fixed]="fixed"
                     [isShownSelectionColumn]="_isShownSelectionColumn"
                     [checkedState]="_checkedState"
@@ -71,18 +70,17 @@
                 (dropCancelled)="_dndTableDirective?.dropCancelled()"
             >
                 <ng-container
-                    *ngFor="let rowDummy of _tableRowsInViewPortPlaceholder; let rowIdx = index; trackBy: _rowTrackBy"
+                    *ngFor="let rowIndex of _tableRowsInViewPortPlaceholder; let rowIdx = index; trackBy: _rowTrackBy"
                 >
-                    <ng-container *ngIf="_tableRowsInViewport[rowIdx] as row" [ngSwitch]="row.type">
+                    <ng-container *ngIf="_tableRowsVisible[rowIndex] as row" [ngSwitch]="row.type">
                         <tr
                             *ngSwitchCase="'group'"
-                            fd-table-row
                             fdp-table-group-row
-                            [index]="rowIdx"
+                            [index]="rowIndex"
                             [height]="rowHeight"
                             [draggable]="isDraggable"
                             [row]="row"
-                            [id]="id"
+                            [rowId]="id"
                             [keyToColumnMap]="_keyToColumnMap"
                             [tableColumnsLength]="_tableColumnsLength"
                             (toggleGroupRow)="_toggleGroupRow($event)"
@@ -91,7 +89,6 @@
 
                         <tr
                             *ngSwitchDefault
-                            fd-table-row
                             [fdkDndItem]="row"
                             [applyDragItemClass]="isDraggable"
                             [class]="row | rowClasses : rowsClass"
@@ -99,7 +96,7 @@
                             [focusable]="rowsActivable || !!row.navigatable"
                             [hoverable]="rowsActivable || _isShownSelectionColumn || !!row.navigatable"
                             [activable]="rowsActivable || !!row.navigatable"
-                            [active]="rowIdx === _navigatedRowIndex"
+                            [active]="rowIndex === _navigatedRowIndex"
                             [highlightActive]="highlightNavigatedRow"
                             [style.height.px]="rowHeight"
                             [attr.aria-level]="isTreeTable ? row.level + 1 : null"
@@ -109,7 +106,7 @@
                             [class.fd-table__row--draggable]="isDraggable"
                             fdp-table-row
                             [rowId]="id"
-                            [index]="rowIdx"
+                            [index]="rowIndex"
                             [row]="row"
                             [selectionMode]="_selectionMode"
                             [selectableKey]="selectableKey"

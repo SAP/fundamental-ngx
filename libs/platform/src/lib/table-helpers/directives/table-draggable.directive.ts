@@ -83,20 +83,6 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
     /** @hidden */
     dragDropInProgress = false;
 
-    /** @hidden */
-    private get _tableRowsVisible(): TableRow[] {
-        return this._table.getVisibleRows();
-    }
-
-    /** @hidden */
-    private set _tableRows(rows: TableRow[]) {
-        this._table.setTableRows(rows);
-    }
-
-    private get _tableRows(): TableRow[] {
-        return this._table.getTableRows();
-    }
-
     /** Sets table reference. */
     setTable(table: Table): void {
         this._table = table;
@@ -118,9 +104,9 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
         let replacedIndex;
         dir === 'up' ? (replacedIndex = currentRowIndex - 1) : (replacedIndex = currentRowIndex + 1);
 
-        if (this._tableRowsVisible[replacedIndex]) {
+        if (this._table._tableRowsVisible[replacedIndex]) {
             const dragDropEvent: FdDropEvent<TableRow<T>> = {
-                items: this._tableRowsVisible,
+                items: this._table._tableRowsVisible,
                 draggedItemIndex: currentRowIndex,
                 replacedItemIndex: replacedIndex,
                 insertAt: dir === 'down' ? 'after' : 'before',
@@ -150,8 +136,12 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
 
         this._onZoneFree(() => {
             if (this.isTreeTable && event.draggedItemIndex !== event.replacedItemIndex) {
-                const dragRow = this._tableRows.find((row) => row === this._tableRowsVisible[event.draggedItemIndex]);
-                const dropRow = this._tableRows.find((row) => row === this._tableRowsVisible[event.replacedItemIndex]);
+                const dragRow = this._table._tableRows.find(
+                    (row) => row === this._table._tableRowsVisible[event.draggedItemIndex]
+                );
+                const dropRow = this._table._tableRows.find(
+                    (row) => row === this._table._tableRowsVisible[event.replacedItemIndex]
+                );
 
                 if (!dragRow || !dropRow || this._isDroppedInsideItself(dropRow, dragRow)) {
                     return;
@@ -178,7 +168,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
      * Create table rows rearrange event
      */
     _emitRowsRearrangeEvent(row: TableRow, dropRow: TableRow, event: FdDropEvent<TableRow>): void {
-        const rows = this._tableRows.map(({ value }) => value);
+        const rows = this._table._tableRows.map(({ value }) => value);
 
         this.rowsRearrange.emit(
             new TableRowsRearrangeEvent(
@@ -207,8 +197,8 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
             return;
         }
 
-        const parentRowChildren = findRowChildren(parentRow, this._tableRows);
-        const dragRowChildren = findRowChildren(dragRow, this._tableRows);
+        const parentRowChildren = findRowChildren(parentRow, this._table._tableRows);
+        const dragRowChildren = findRowChildren(dragRow, this._table._tableRows);
 
         if (parentRowChildren.length - (dragRowChildren.length + 1) === 0) {
             parentRow.setRowType(TableRowType.ITEM);
@@ -235,7 +225,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
             dropRow.parent?.children.push(dragRow);
         }
 
-        const children = findRowChildren(dragRow, this._tableRows);
+        const children = findRowChildren(dragRow, this._table._tableRows);
         children.forEach((row) => {
             row.level = getRowParents(row).length;
         });
@@ -252,15 +242,15 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
 
     /** @hidden */
     private _getNewDragDropRowsPosition(dragRow: TableRow, dropRow: TableRow): UpdatedDndRowsPosition {
-        const allRows = this._tableRows;
+        const allRows = this._table._tableRows;
 
         const dragRowIndex = allRows.findIndex((row) => row === dragRow);
-        const dragRowChildren = findRowChildren(dragRow, this._tableRows);
+        const dragRowChildren = findRowChildren(dragRow, this._table._tableRows);
 
         const rowsToMove = allRows.splice(dragRowIndex, dragRowChildren.length + 1);
 
         const dropRowIndex = allRows.findIndex((row) => row === dropRow);
-        const dropRowChildren = findRowChildren(dropRow, this._tableRows);
+        const dropRowChildren = findRowChildren(dropRow, this._table._tableRows);
 
         const dropRowItemsLength = dropRowChildren.length + 1;
 
@@ -282,7 +272,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
             dropRow
         );
 
-        this._tableRows = [
+        this._table._tableRows = [
             ...allRows,
             ...(event.insertAt === 'after' ? dropRowItems : []),
             ...rowsToMove,
@@ -298,7 +288,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
             dropRow
         );
 
-        this._tableRows = [...allRows, ...dropRowItems, ...rowsToMove, ...rowsAfterDropRow];
+        this._table._tableRows = [...allRows, ...dropRowItems, ...rowsToMove, ...rowsAfterDropRow];
     }
 
     /** @hidden */

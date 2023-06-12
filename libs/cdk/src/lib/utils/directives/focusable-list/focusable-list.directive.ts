@@ -6,6 +6,7 @@ import {
     EventEmitter,
     HostBinding,
     HostListener,
+    inject,
     Input,
     OnChanges,
     OnDestroy,
@@ -97,7 +98,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     }
 
     /** @hidden */
-    private _focusable = false;
+    protected _focusable = false;
 
     /** Direction of navigation. Should be set to 'grid' when list is a part of grid. */
     @Input()
@@ -158,6 +159,17 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     private readonly _refresh$ = new Subject<void>();
 
     /** @hidden */
+    private readonly _renderer = inject(Renderer2);
+    /** @hidden */
+    protected readonly _destroy$ = inject(DestroyedService);
+    /** @hidden */
+    private readonly _elementRef: ElementRef<HTMLElement> = inject(ElementRef);
+    /** @hidden */
+    private readonly _liveAnnouncer = inject(LiveAnnouncer);
+    /** @hidden */
+    private readonly _focusableObserver = inject(FocusableObserver);
+
+    /** @hidden */
     @HostBinding('attr.tabindex')
     get _tabindex(): number {
         return this._tabbable ? 0 : -1;
@@ -167,13 +179,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     _isVisible = false;
 
     /** @hidden */
-    constructor(
-        private _renderer: Renderer2,
-        private _destroy$: DestroyedService,
-        private _elementRef: ElementRef<HTMLElement>,
-        private _liveAnnouncer: LiveAnnouncer,
-        private _focusableObserver: FocusableObserver
-    ) {
+    constructor() {
         intersectionObservable(this._elementRef.nativeElement, { threshold: 0.25 })
             .pipe(takeUntil(this._destroy$))
             .subscribe((isVisible) => (this._isVisible = isVisible[0]?.isIntersecting));

@@ -12,11 +12,12 @@ import {
 import {
     DestroyedService,
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
+    FDK_FOCUSABLE_LIST_DIRECTIVE,
     FocusableItemDirective,
-    FocusableListDirective,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
+import { TableRowDirective } from '@fundamental-ngx/core/table';
 import {
     SelectionMode,
     SelectionModeValue,
@@ -33,12 +34,18 @@ import { takeUntil } from 'rxjs/operators';
     templateUrl: './table-header-row.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyedService]
+    providers: [
+        {
+            provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
+            useExisting: TableHeaderRowComponent
+        },
+        DestroyedService
+    ]
 })
-export class TableHeaderRowComponent implements OnInit {
+export class TableHeaderRowComponent extends TableRowDirective implements OnInit {
     /** Table ID. */
     @Input()
-    id: string;
+    rowId: string;
 
     /**
      * Whether to fix the table header and footer. Default is true.
@@ -82,8 +89,8 @@ export class TableHeaderRowComponent implements OnInit {
 
     /** @hidden */
     @ViewChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
-    private set _focusableItems(items: QueryList<FocusableItemDirective>) {
-        this._focusableDirective.setItems(items);
+    private set _focusableCellItems(items: QueryList<FocusableItemDirective>) {
+        this.setItems(items);
     }
 
     /** @hidden */
@@ -96,15 +103,10 @@ export class TableHeaderRowComponent implements OnInit {
     readonly _tableColumnResizeService = inject(TableColumnResizeService);
 
     /** @hidden */
-    readonly _tableService = inject(TableService);
+    readonly _fdpTableService = inject(TableService);
 
     /** @hidden */
     readonly _contentDensityObserver = inject(ContentDensityObserver);
-
-    /** @hidden */
-    private readonly _focusableDirective = inject(FocusableListDirective, {
-        self: true
-    });
 
     /** @hidden */
     readonly _tableRowService = inject(TableRowService);
@@ -115,13 +117,11 @@ export class TableHeaderRowComponent implements OnInit {
     });
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
-
-    /** @hidden */
     private readonly _cdr = inject(ChangeDetectorRef);
 
     /** @hidden */
     constructor() {
+        super();
         this._rtlService?.rtl.pipe(takeUntil(this._destroy$)).subscribe((isRtl) => {
             this._rtl = isRtl;
         });
@@ -129,6 +129,7 @@ export class TableHeaderRowComponent implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
+        super.ngOnInit();
         this._tableColumnResizeService.markForCheck.pipe(takeUntil(this._destroy$)).subscribe(() => {
             this._cdr.detectChanges();
         });
@@ -146,7 +147,7 @@ export class TableHeaderRowComponent implements OnInit {
             column.groupable ||
             column.freezable ||
             column.endFreezable ||
-            (column.filterable && !this._tableService._isFilteringFromHeaderDisabled$.value)
+            (column.filterable && !this._fdpTableService._isFilteringFromHeaderDisabled$.value)
         );
     }
 }

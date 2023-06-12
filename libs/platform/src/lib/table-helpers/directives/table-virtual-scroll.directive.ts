@@ -85,7 +85,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
 
         const rowHeight = this.rowHeight + 1;
 
-        const rowsVisible = this._table.getVisibleRows();
+        const rowsVisible = this._table._tableRowsVisible;
         const rowsInViewPort = this._table.getRowsInViewport();
         const totalNodeCount = rowsVisible.length;
         const scrollTop = this._table.tableScrollable.getScrollTop();
@@ -105,7 +105,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
             visibleNodeCount === this._virtualScrollCache.visibleNodeCount &&
             totalNodeCount === this._virtualScrollCache.totalNodeCount &&
             // On rows change, even if the total number of rows is the same, the row object will be different
-            rowsVisible[startNodeIndex] === rowsInViewPort[0];
+            startNodeIndex === rowsInViewPort[0];
 
         if (isCached) {
             return;
@@ -113,7 +113,10 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
 
         this._virtualScrollCache = { startNodeIndex, visibleNodeCount, totalNodeCount };
         this.virtualScrollTotalHeight = totalNodeCount * rowHeight - visibleNodeCount * rowHeight;
-        this._table.setRowsInViewport(rowsVisible.slice(startNodeIndex, startNodeIndex + visibleNodeCount));
+        this._table.setRowsInViewport(
+            rowsVisible.slice(startNodeIndex, startNodeIndex + visibleNodeCount),
+            startNodeIndex
+        );
     }
 
     /**

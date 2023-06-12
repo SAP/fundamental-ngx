@@ -548,7 +548,7 @@ export class TableComponent<T = any>
     /** @hidden */
     _tableRowsInViewport: TableRow<T>[] = [];
     /** @hidden */
-    _tableRowsInViewPortPlaceholder: null[] = [];
+    _tableRowsInViewPortPlaceholder: number[] = [];
     /** @hidden */
     _isShownSelectionColumn = false;
     /** @hidden */
@@ -673,38 +673,18 @@ export class TableComponent<T = any>
         }
     }
 
-    /** @hidden */
-    getTableRows(): TableRow[] {
-        return this._tableRows;
-    }
-
-    /** @hidden */
-    setTableRows(rows: TableRow[]): void {
-        this._tableRows = rows;
-    }
-
-    /** @hidden */
-    getVisibleRows(): TableRow[] {
-        return this._tableRowsVisible;
-    }
-
-    /** @hidden */
-    setVisibleRows(rows: TableRow[]): void {
-        this._tableRowsVisible = rows;
-    }
-
     /** Returns array of rows that are currently in viewport. */
-    getRowsInViewport(): TableRow[] {
-        return this._tableRowsInViewport;
+    getRowsInViewport(): number[] {
+        return this._tableRowsInViewPortPlaceholder;
     }
 
     /**
      * Sets an array of rows that are currently in viewport.
      * @param rows Array of rows.
      */
-    setRowsInViewport(rows: TableRow[]): void {
-        this._tableRowsInViewport = rows;
-        this._tableRowsInViewPortPlaceholder = new Array(rows.length).fill(null);
+    setRowsInViewport(rows: TableRow[], startIndex = 0): void {
+        // this._tableRowsInViewport = rows;
+        this._tableRowsInViewPortPlaceholder = new Array(rows.length).fill(null).map((_, i) => i + startIndex);
         this._cdr.detectChanges();
     }
 

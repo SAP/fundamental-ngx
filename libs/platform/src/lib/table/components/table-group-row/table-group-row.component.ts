@@ -8,6 +8,7 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
+import { TableRowDirective } from '@fundamental-ngx/core/table';
 import { CollectionGroup, TableColumn, TableRow, TableService } from '@fundamental-ngx/platform/table-helpers';
 import { Observable } from 'rxjs';
 
@@ -18,10 +19,10 @@ import { Observable } from 'rxjs';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableGroupRowComponent<T> {
+export class TableGroupRowComponent<T> extends TableRowDirective {
     /** Table ID. */
     @Input()
-    id: string;
+    rowId: string;
     /** Row index. */
     @HostBinding('attr.aria-rowindex')
     @Input()
@@ -54,10 +55,10 @@ export class TableGroupRowComponent<T> {
     toggleGroupRow = new EventEmitter<TableRow<T>>();
 
     /** @hidden */
-    private readonly _tableService = inject(TableService);
+    private readonly _fdpTableService = inject(TableService);
 
     /** @hidden */
     get _groupRulesMap(): Observable<Map<string, CollectionGroup>> {
-        return this._tableService.groupRules$;
+        return this._fdpTableService.groupRules$;
     }
 }

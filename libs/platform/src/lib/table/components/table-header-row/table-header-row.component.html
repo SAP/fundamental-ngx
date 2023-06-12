@@ -1,11 +1,11 @@
 <th
-    *ngIf="_tableService._semanticHighlighting$ | async"
+    *ngIf="_fdpTableService._semanticHighlighting$ | async"
     [class.fd-table__cell--fixed]="fixed"
     fd-table-cell
     fd-table-status-indicator
     fdkDisabled
-    [style.min-width]="_tableService._semanticHighlightingColumnWidth$ | async"
-    [style.max-width]="_tableService._semanticHighlightingColumnWidth$ | async"
+    [style.min-width]="_fdpTableService._semanticHighlightingColumnWidth$ | async"
+    [style.max-width]="_fdpTableService._semanticHighlightingColumnWidth$ | async"
 ></th>
 
 <th
@@ -16,7 +16,7 @@
     [style]="
         _contentDensityObserver
             | async
-            | selectionCellStyles : _rtl : (_tableService._semanticHighlightingColumnWidth$ | async)
+            | selectionCellStyles : _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
     "
     (keydown.enter)="_tableRowService.toggleAllSelectableRows(!checkedState)"
     (keydown.space)="_tableRowService.toggleAllSelectableRows(!checkedState)"
@@ -33,7 +33,7 @@
 
 <ng-container
     *ngFor="
-        let column of _tableService.visibleColumns$ | async;
+        let column of _fdpTableService.visibleColumns$ | async;
         let colIdx = index;
         trackBy: _columnTrackBy;
         last as isLast
@@ -45,12 +45,12 @@
         [fdpTableCellResizable]="
             colIdx
                 | columnResizableSide
-                    : _tableService.visibleColumnsLength
-                    : (_tableService._isShownNavigationColumn$ | async)
+                    : _fdpTableService.visibleColumnsLength
+                    : (_fdpTableService._isShownNavigationColumn$ | async)
         "
         [columnName]="column.name"
-        [id]="id + '__' + column.name"
-        [attr.aria-labelledby]="id + '-header-cell-' + column.name"
+        [id]="rowId + '__' + column.name"
+        [attr.aria-labelledby]="rowId + '-header-cell-' + column.name"
         [attr.aria-colindex]="colIdx"
         [ngClass]="[
             'fdp-table__col--' + column.name,
@@ -58,14 +58,14 @@
             column.name === freezeColumnsTo ? 'fd-table__cell--fixed-last' : '',
             column._endFreezed ? 'fd-table__cell--fixed-end' : '',
             column.name === freezeEndColumnsTo ? 'fd-table__cell--fixed-end-last' : '',
-            isLast && (_tableService._isShownNavigationColumn$ | async) !== true ? 'is-last-child' : '',
+            isLast && (_fdpTableService._isShownNavigationColumn$ | async) !== true ? 'is-last-child' : '',
             _isColumnHasHeaderMenu(column) ? 'fd-table__item--clickable' : ''
         ]"
         [ngStyle]="
             column
                 | tableCellStyles
                     : _rtl
-                    : (_tableService._semanticHighlightingColumnWidth$ | async)
+                    : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
                     : selectionColumnWidth
                     : column._freezed
                     : column._endFreezed
@@ -80,10 +80,12 @@
         (keydown.arrowRight)="_tableRowService.scrollToOverlappedCell()"
     >
         <fdp-table-header-cell-content
+            [id]="rowId"
             [column]="column"
-            [hasFilter]="(_tableService.filterRules$ | async)?.has(column.key) === true"
-            [hasSorting]="(_tableService.sortRules$ | async)?.has(column.key) === true"
-            [sorting]="(_tableService.sortRules$ | async)?.get(column.key)"
+            [hasFilter]="(_fdpTableService.filterRules$ | async)?.has(column.key) === true"
+            [hasSorting]="(_fdpTableService.sortRules$ | async)?.has(column.key) === true"
+            [sorting]="(_fdpTableService.sortRules$ | async)?.get(column.key)"
+            [attr.title]="column?.headerOverflows ? column.label : null"
         >
             <!-- Header menu -->
             <fdp-table-cell-header-popover
@@ -91,14 +93,14 @@
                 [disabled]="!_isColumnHasHeaderMenu(column)"
                 [column]="column"
                 [popoverTemplate]="column.headerCellPopoverTemplate"
-                [filteringFromHeaderDisabled]="_tableService._isFilteringFromHeaderDisabled$ | async"
+                [filteringFromHeaderDisabled]="_fdpTableService._isFilteringFromHeaderDisabled$ | async"
             ></fdp-table-cell-header-popover>
         </fdp-table-header-cell-content>
     </th>
 </ng-container>
 
 <th
-    *ngIf="_tableService._isShownNavigationColumn$ | async"
+    *ngIf="_fdpTableService._isShownNavigationColumn$ | async"
     fd-table-cell
     class="fdp-table__cell--navigation is-last-child"
     role="columnheader"

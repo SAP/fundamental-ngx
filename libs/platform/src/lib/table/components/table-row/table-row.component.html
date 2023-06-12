@@ -1,5 +1,5 @@
 <td
-    *ngIf="_tableService._semanticHighlighting$ | async as semanticHighlighting"
+    *ngIf="_fdpTableService._semanticHighlighting$ | async as semanticHighlighting"
     fd-table-cell
     fd-table-status-indicator
     fdkDisabled
@@ -21,7 +21,7 @@
             [style]="
                 _contentDensityObserver
                     | async
-                    | selectionCellStyles : _rtl : (_tableService._semanticHighlightingColumnWidth$ | async)
+                    | selectionCellStyles : _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
             "
             [attr.aria-selected]="row.checked"
             (click)="_toggleSingleSelectableRow()"
@@ -40,7 +40,7 @@
             [style]="
                 _contentDensityObserver
                     | async
-                    | selectionCellStyles : _rtl : (_tableService._semanticHighlightingColumnWidth$ | async)
+                    | selectionCellStyles : _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
             "
         >
             <fd-checkbox
@@ -68,7 +68,7 @@
 
 <td
     *ngFor="
-        let column of _tableService.visibleColumns$ | async;
+        let column of _fdpTableService.visibleColumns$ | async;
         let colIdx = index;
         last as isLast;
         trackBy: _columnTrackBy
@@ -76,8 +76,8 @@
     [fdpTableCellResizable]="
         colIdx
             | columnResizableSide
-                : _tableService.visibleColumnsLength
-                : (_tableService._isShownNavigationColumn$ | async) === true
+                : _fdpTableService.visibleColumnsLength
+                : (_fdpTableService._isShownNavigationColumn$ | async) === true
     "
     [columnName]="column.name"
     [focusable]="true"
@@ -91,13 +91,13 @@
         column._endFreezed ? 'fd-table__cell--fixed-end' : '',
         column.name === freezeEndColumnsTo ? 'fd-table__cell--fixed-end-last' : '',
         row.isTree && colIdx === 0 ? 'fd-table__cell--expand' : '',
-        isLast && (_tableService._isShownNavigationColumn$ | async) === false ? 'is-last-child' : ''
+        isLast && (_fdpTableService._isShownNavigationColumn$ | async) === false ? 'is-last-child' : ''
     ]"
     [ngStyle]="
         column
             | tableCellStyles
                 : _rtl
-                : (_tableService._semanticHighlightingColumnWidth$ | async)
+                : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
                 : selectionColumnWidth
                 : column._freezed
                 : column._endFreezed
@@ -160,7 +160,7 @@
 <ng-content></ng-content>
 
 <td
-    *ngIf="_tableService._isShownNavigationColumn$ | async"
+    *ngIf="_fdpTableService._isShownNavigationColumn$ | async"
     fd-table-cell
     class="fdp-table__cell--navigation is-last-child"
     fdkDisabled

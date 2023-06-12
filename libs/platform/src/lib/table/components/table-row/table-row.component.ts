@@ -20,12 +20,13 @@ import {
 import {
     DestroyedService,
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
+    FDK_FOCUSABLE_LIST_DIRECTIVE,
     FocusableItemDirective,
-    FocusableListDirective,
     KeyUtil,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
+import { TableRowDirective } from '@fundamental-ngx/core/table';
 import {
     EditableTableCell,
     isTreeRowFirstCell,
@@ -48,9 +49,15 @@ import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
     templateUrl: './table-row.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyedService]
+    providers: [
+        {
+            provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
+            useExisting: TableRowComponent
+        },
+        DestroyedService
+    ]
 })
-export class TableRowComponent<T> implements OnInit, AfterViewInit, OnDestroy {
+export class TableRowComponent<T> extends TableRowDirective implements OnInit, AfterViewInit, OnDestroy {
     /** Row ID. */
     @Input()
     rowId: string;
@@ -107,9 +114,13 @@ export class TableRowComponent<T> implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
     @ViewChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
-    private set _focusableItems(items: QueryList<FocusableItemDirective>) {
-        this._focusableDirective.setItems(items);
+    private set _focusableViewCellItems(items: QueryList<FocusableItemDirective>) {
+        this.setItems(items);
+        this._focusbleCellItems = items;
     }
+
+    /** @hidden */
+    private _focusbleCellItems: QueryList<FocusableItemDirective>;
 
     /** @hidden */
     @ViewChildren(EditableTableCell)
@@ -142,15 +153,7 @@ export class TableRowComponent<T> implements OnInit, AfterViewInit, OnDestroy {
     });
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
-
-    /** @hidden */
-    private readonly _focusableDirective = inject(FocusableListDirective, {
-        self: true
-    });
-
-    /** @hidden */
-    readonly _tableService = inject(TableService);
+    readonly _fdpTableService = inject(TableService);
 
     /** @hidden */
     readonly _tableRowService = inject(TableRowService);
@@ -171,6 +174,7 @@ export class TableRowComponent<T> implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
     constructor() {
+        super();
         this._rtlService?.rtl.pipe(takeUntil(this._destroy$)).subscribe((rtl) => {
             this._rtl = rtl;
         });
@@ -198,7 +202,8 @@ export class TableRowComponent<T> implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
-        this._tableService.visibleColumns$.pipe(takeUntil(this._destroy$)).subscribe((columns) => {
+        super.ngOnInit();
+        this._fdpTableService.visibleColumns$.pipe(takeUntil(this._destroy$)).subscribe((columns) => {
             this._hasRowHeaderColumn = columns.some((c) => c.role === 'rowheader');
             this._cdr.markForCheck();
         });
@@ -206,6 +211,7 @@ export class TableRowComponent<T> implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngAfterViewInit(): void {
+        super.ngAfterViewInit();
         this._editableCells.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe(() => {
             const cells = this._editableCells.toArray();
             if (cells.length > 0) {
@@ -218,6 +224,7 @@ export class TableRowComponent<T> implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
+        super.ngOnDestroy();
         this._tableRowService.removeEditableCells(this.row);
     }
 
