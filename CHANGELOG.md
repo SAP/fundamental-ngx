@@ -1,3 +1,12 @@
+# [0.42.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.16...v0.42.0-rc.17) (2023-06-12)
+
+
+### Bug Fixes
+
+* **core:** update 72 Bold font name ([#9971](https://github.com/SAP/fundamental-ngx/issues/9971)) ([26fb2f6](https://github.com/SAP/fundamental-ngx/commit/26fb2f6be40c10420b04c605b6173d7abc43bc57))
+
+
+
 # [0.42.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.15...v0.42.0-rc.16) (2023-06-09)
 
 
