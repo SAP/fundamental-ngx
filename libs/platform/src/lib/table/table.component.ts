@@ -297,8 +297,8 @@ export class TableComponent<T = any>
     @Input()
     trackBy: TrackByFunction<T>;
     /**
-     * An optional function, that identifies uniqueness of a particular row.
-     * Table component uses it to be able to preserve selection when data list is changed.
+     * An optional function that identifies uniqueness of a particular row.
+     * Table component uses it to be able to preserve selection when a data list is changed.
      */
     @Input()
     rowComparator: RowComparator<T>;

@@ -383,7 +383,8 @@ describe('TableComponent internal', () => {
                         added: [tableComponent._tableRowsVisible[0].value],
                         removed: [],
                         selection: [tableComponent._tableRowsVisible[0].value],
-                        index: [0]
+                        index: [0],
+                        all: false
                     };
 
                     expect(emitSpy).toHaveBeenCalledWith(event1);
@@ -396,7 +397,8 @@ describe('TableComponent internal', () => {
                         added: [tableComponent._tableRowsVisible[1].value],
                         removed: event1.added,
                         selection: [tableComponent._tableRowsVisible[1].value],
-                        index: [1, 0]
+                        index: [1, 0],
+                        all: false
                     };
 
                     expect(emitSpy).toHaveBeenCalledWith(event2);
@@ -468,7 +470,8 @@ describe('TableComponent internal', () => {
                         selection: [tableComponent._tableRowsVisible[0].value],
                         added: [tableComponent._tableRowsVisible[0].value],
                         removed: [],
-                        index: [0]
+                        index: [0],
+                        all: false
                     };
 
                     expect(emitSpy).toHaveBeenCalledWith(event1);
@@ -484,7 +487,8 @@ describe('TableComponent internal', () => {
                         ],
                         added: [tableComponent._tableRowsVisible[1].value],
                         removed: [],
-                        index: [1]
+                        index: [1],
+                        all: false
                     };
 
                     expect(emitSpy).toHaveBeenCalledWith(event2);
@@ -497,7 +501,8 @@ describe('TableComponent internal', () => {
                         selection: [tableComponent._tableRowsVisible[1].value],
                         added: [],
                         removed: [tableComponent._tableRowsVisible[0].value],
-                        index: [0]
+                        index: [0],
+                        all: false
                     };
 
                     expect(emitSpy).toHaveBeenCalledWith(event3);
@@ -1030,11 +1035,16 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         let tableBodyRows: DebugElement[] = [];
         let tableRowTogglerCellsArray: DebugElement[] = [];
 
+        let firstRowToggler: DebugElement;
+        let secondRowToggler: DebugElement;
+
         const calculateTableElementsMetaData = (): void => {
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body tbody .fd-table__row'));
             tableRowTogglerCellsArray = fixture.debugElement.queryAll(
                 By.css('.fdp-table__body tbody .fd-table__row .fd-table__cell--expand')
             );
+            firstRowToggler = tableRowTogglerCellsArray[0];
+            secondRowToggler = tableRowTogglerCellsArray[1];
         };
 
         beforeEach(waitForAsync(() => {
@@ -1067,14 +1077,8 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         });
 
         describe('Collapsing/Expanding', () => {
-            let firstRowToggler: DebugElement;
-            let secondRowToggler: DebugElement;
-
             beforeEach(() => {
                 calculateTableElementsMetaData();
-
-                firstRowToggler = tableRowTogglerCellsArray[0];
-                secondRowToggler = tableRowTogglerCellsArray[1];
             });
 
             it('should emit event when parent item collapsed/expanded', () => {
@@ -1090,6 +1094,8 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 expect(emitSpy).toHaveBeenCalledWith(event1);
 
+                calculateTableElementsMetaData();
+
                 secondRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
                 const secondRowIndex = 1 + treeItemsChildrenPerParentCount;
@@ -1103,10 +1109,14 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 expect(emitSpy.calls.argsFor(1)).toEqual([event2]);
             });
 
-            it('should react to toggling/collapsing with changing rows count', () => {
+            it('should react to toggling/collapsing with changing rows count', async () => {
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
+                // debugger;
+
                 fixture.detectChanges();
+
+                await fixture.whenStable();
 
                 calculateTableElementsMetaData();
 
@@ -1115,6 +1125,8 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 secondRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
                 fixture.detectChanges();
+
+                await fixture.whenStable();
 
                 calculateTableElementsMetaData();
 
@@ -1124,6 +1136,8 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 fixture.detectChanges();
 
+                await fixture.whenStable();
+
                 calculateTableElementsMetaData();
 
                 expect(tableBodyRows.length).toEqual(treeItemParentsCount + treeItemsChildrenPerParentCount);
@@ -1132,6 +1146,8 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 fixture.detectChanges();
 
+                await fixture.whenStable();
+
                 calculateTableElementsMetaData();
 
                 expect(tableBodyRows.length).toEqual(treeItemParentsCount);
@@ -1139,8 +1155,6 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         });
 
         describe('Drag & Drop', () => {
-            let firstRowToggler: DebugElement;
-
             beforeEach(() => {
                 calculateTableElementsMetaData();
 
@@ -1424,9 +1438,6 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                     hostComponent.table.selectionMode = SelectionMode.MULTIPLE;
                     hostComponent.table.ngAfterViewInit();
 
-                    console.log('XXX', hostComponent.table._tableRows[0].checked);
-                    console.log('XXX', hostComponent.table._tableRows[0].children[0].checked);
-
                     const emitChangeSpy = spyOn(hostComponent.table.rowSelectionChange, 'emit').and.stub();
                     hostComponent.table._toggleMultiSelectRow(hostComponent.table._tableRows[0].children[0]);
 
@@ -1441,9 +1452,6 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                     hostComponent.table.enableTristateMode = true;
                     hostComponent.table.selectionMode = SelectionMode.MULTIPLE;
                     hostComponent.table.ngAfterViewInit();
-
-                    console.log('XXX', hostComponent.table._tableRows[0].checked);
-                    console.log('XXX', hostComponent.table._tableRows[0].children[0].checked);
 
                     const emitChangeSpy = spyOn(hostComponent.table.rowSelectionChange, 'emit').and.stub();
                     hostComponent.table._toggleMultiSelectRow(hostComponent.table._tableRows[0].children[0]);

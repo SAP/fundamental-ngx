@@ -28,7 +28,7 @@ import {
     providers: [
         {
             provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
-            useExisting: TableRowDirective
+            useExisting: TablePoppingRowComponent
         },
         DestroyedService
     ]

@@ -10,7 +10,7 @@ export class TableSelectionChangeEvent<T> {
     /** Indexes location of additions or removals */
     index: number[];
     /** Whether `Check/Uncheck` all checkbox was pressed. */
-    all: boolean;
+    all?: boolean;
 }
 
 export class TableRowSelectionChangeEvent<T> extends TableSelectionChangeEvent<T> {
