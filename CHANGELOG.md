@@ -1,3 +1,12 @@
+# [0.42.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.19...v0.42.0-rc.20) (2023-06-13)
+
+
+### Bug Fixes
+
+* **core:** select should have listbox role ([#9986](https://github.com/SAP/fundamental-ngx/issues/9986)) ([3bb5ab0](https://github.com/SAP/fundamental-ngx/commit/3bb5ab042548d829bd61766d309717b827ba273f))
+
+
+
 # [0.42.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.18...v0.42.0-rc.19) (2023-06-13)
 
 
