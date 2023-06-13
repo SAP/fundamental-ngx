@@ -56,6 +56,9 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Закрыть'
     },
+    coreMultiInput: {
+        multiInputAriaLabel: 'Multi Input'
+    },
     coreNavigation: {
         mainNavigation: 'Главная Навигация',
         navigationPath: 'Путь навигации'

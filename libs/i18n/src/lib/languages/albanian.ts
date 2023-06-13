@@ -42,6 +42,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Largoje'
     },
+    coreMultiInput: {
+        multiInputAriaLabel: 'Multi Input'
+    },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'

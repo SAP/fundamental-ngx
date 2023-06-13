@@ -39,6 +39,9 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         listItemStatusLocked: 'Bloqué',
         listItemStatusDraft: 'Brouillon'
     },
+    coreMultiInput: {
+        multiInputAriaLabel: 'Multi Input'
+    },
     coreMessageStrip: {
         dismissLabel: 'Rejeter'
     },
