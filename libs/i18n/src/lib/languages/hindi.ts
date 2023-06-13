@@ -42,6 +42,9 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'खारिज करें'
     },
+    coreMultiInput: {
+        multiInputAriaLabel: 'Multi Input'
+    },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'

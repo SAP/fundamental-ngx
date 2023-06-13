@@ -48,6 +48,9 @@ export interface FdLanguage {
     coreMessageStrip: {
         dismissLabel: FdLanguageKey;
     };
+    coreMultiInput: {
+        multiInputAriaLabel: FdLanguageKey;
+    };
     coreNavigation: {
         mainNavigation: FdLanguageKey;
         navigationPath: FdLanguageKey;

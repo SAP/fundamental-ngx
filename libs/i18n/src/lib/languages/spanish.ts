@@ -43,6 +43,9 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Descartar'
     },
+    coreMultiInput: {
+        multiInputAriaLabel: 'Multi Input'
+    },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'

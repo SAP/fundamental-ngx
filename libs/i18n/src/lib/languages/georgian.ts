@@ -42,6 +42,9 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'გაუქმება'
     },
+    coreMultiInput: {
+        multiInputAriaLabel: 'Multi Input'
+    },
     coreNavigation: {
         mainNavigation: 'მთავარი ნავიგაცია',
         navigationPath: 'ნავიგაციის გზა'

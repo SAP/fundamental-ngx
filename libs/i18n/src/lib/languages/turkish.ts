@@ -42,6 +42,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Azletmek'
     },
+    coreMultiInput: {
+        multiInputAriaLabel: 'Multi Input'
+    },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'
