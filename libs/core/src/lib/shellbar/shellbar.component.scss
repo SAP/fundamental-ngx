@@ -29,13 +29,3 @@ fd-shellbar-actions {
 .fd-shellbar__action.fd-shellbar__action--desktop:empty {
     display: none;
 }
-
-// TODO: remove when updating fundamental-styles to 0.29.0
-.fd-shellbar__group--shrink {
-    flex-grow: 0;
-}
-
-// TODO: remove when updating fundamental-styles to 0.29.0
-.fd-shellbar__group--basis-auto {
-    flex-basis: auto;
-}
