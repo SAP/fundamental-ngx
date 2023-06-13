@@ -1,3 +1,12 @@
+# [0.42.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.18...v0.42.0-rc.19) (2023-06-13)
+
+
+### Bug Fixes
+
+* **core:** add label for multi input ([#9972](https://github.com/SAP/fundamental-ngx/issues/9972)) ([199c5dd](https://github.com/SAP/fundamental-ngx/commit/199c5dde12f2a608c0b36ecbb59cdee302b83753))
+
+
+
 # [0.42.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.17...v0.42.0-rc.18) (2023-06-13)
 
 
