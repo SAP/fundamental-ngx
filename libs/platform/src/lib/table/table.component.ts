@@ -370,6 +370,18 @@ export class TableComponent<T = any>
         return this._semanticHighlightingKey;
     }
 
+    /**
+     * Whether to force rows to follow 'checked all' state of the table.
+     * If true, all new rows that are coming from the dataSource will follow 'checked all' state.
+     * If false, row will respect `checkedKey` property to define checked state of itself.
+     * Default is false.
+     */
+    @Input()
+    forceCheckedAllState = false;
+
+    /** @hidden */
+    private _shouldCheckNewRows = false;
+
     /** Event emitted when current preset configuration has been changed. */
     @Output()
     presetChanged = new EventEmitter<PlatformTableManagedPreset>();
@@ -1279,6 +1291,8 @@ export class TableComponent<T = any>
 
         this._rangeSelector.reset();
 
+        this._shouldCheckNewRows = selectAll;
+
         this._emitRowSelectionChangeEvent(added, removed, true);
 
         this._calculateCheckedAll();
@@ -1529,18 +1543,28 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _createTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
+        let rows: TableRow<T>[];
         if (this.isTreeTable) {
-            return this._createTreeTableRowsByDataSourceItems(source);
+            rows = this._createTreeTableRowsByDataSourceItems(source);
+        } else {
+            rows = convertObjectsToTableRows(
+                source,
+                this._addedItems,
+                this.selectedKey,
+                this.rowNavigatable,
+                this.selectionMode,
+                this._tableRows,
+                this.rowComparator
+            );
         }
-        return convertObjectsToTableRows(
-            source,
-            this._addedItems,
-            this.selectedKey,
-            this.rowNavigatable,
-            this.selectionMode,
-            this._tableRows,
-            this.rowComparator
-        );
+
+        if (this._shouldCheckNewRows && this.forceCheckedAllState) {
+            rows.forEach((row) => {
+                row.checked = row.checked || true;
+            });
+        }
+
+        return rows;
     }
 
     /** @hidden */

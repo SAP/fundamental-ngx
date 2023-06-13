@@ -2,8 +2,12 @@
     [dataSource]="source"
     [pageScrolling]="true"
     [pageSize]="50"
+    [forceCheckedAllState]="true"
+    selectionMode="multiple"
+    selectedKey="selected"
     bodyHeight="20rem"
     [loading]="!!(loading | async)"
+    (rowSelectionChange)="onRowSelectionChange($event)"
 >
     <fdp-table-toolbar title="Order Items"> </fdp-table-toolbar>
 
