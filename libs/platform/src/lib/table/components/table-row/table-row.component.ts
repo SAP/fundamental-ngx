@@ -260,7 +260,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     }
 
     /** @hidden */
-    _toggleMultiSelectRow(row: TableRow<T>, event: KeyboardEvent | MouseEvent): void {
+    _toggleMultiSelectRow(row: TableRow<T>, event?: Event): void {
         this._tableRowService.toggleRow({ ...{ row, event }, ...{ type: 'toggleMultiSelectRow' } });
     }
 

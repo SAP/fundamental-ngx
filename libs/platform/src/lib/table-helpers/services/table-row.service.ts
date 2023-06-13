@@ -18,7 +18,7 @@ export type ToggleRowModel =
     | {
           type: 'toggleMultiSelectRow';
           row: TableRow;
-          event: Event;
+          event?: Event;
       };
 
 export interface CellClickedModel {

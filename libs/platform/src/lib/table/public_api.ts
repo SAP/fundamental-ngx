@@ -43,7 +43,5 @@ export * from './components/table-group-row/table-group-row.component';
 
 export * from './components/table-popping-row/table-popping-row.component';
 
-export * from './components/table-row-selection-cell/table-row-selection-cell.component';
-
 export * from './components/table-header-row/table-header-row.component';
 export * from '@fundamental-ngx/platform/table-helpers';

@@ -38,6 +38,8 @@
             role="cell"
             fd-table-cell
             [focusable]="true"
+            (keydown.enter)="_toggleMultiSelectRow(row, $event)"
+            (keydown.space)="_toggleMultiSelectRow(row, $event)"
             [style]="
                 _contentDensityObserver
                     | async
@@ -50,7 +52,7 @@
                 [tristate]="enableTristateMode"
                 [tristateSelectable]="false"
                 [ngModel]="row.checked$ | async"
-                (fdkClicked)="_toggleMultiSelectRow(row, $event)"
+                (ngModelChange)="_toggleMultiSelectRow(row)"
             ></fd-checkbox>
         </td>
     </ng-container>

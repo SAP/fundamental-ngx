@@ -23,6 +23,7 @@
     (keydown.space)="_tableRowService.toggleAllSelectableRows(!checkedState)"
 >
     <fd-checkbox
+        tabIndexValue="-1"
         *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
         labelClass="fd-table__checkbox-label"
         [tristate]="true"
