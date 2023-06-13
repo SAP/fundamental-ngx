@@ -17,7 +17,7 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { Subject } from 'rxjs';
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { MenuInteractiveDirective } from '@fundamental-ngx/core/menu';
+import { MenuInteractiveComponent } from '@fundamental-ngx/core/menu';
 
 @Component({
     selector: 'fdp-menu-item',
@@ -68,8 +68,8 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
     }
 
     /** @hidden */
-    @ContentChild(MenuInteractiveDirective)
-    _fdMenuInteractiveChild: MenuInteractiveDirective;
+    @ContentChild(MenuInteractiveComponent)
+    _fdMenuInteractiveChild: MenuInteractiveComponent;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef, private _cdr: ChangeDetectorRef) {}

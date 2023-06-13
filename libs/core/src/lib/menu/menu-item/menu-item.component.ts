@@ -26,7 +26,7 @@ import { filter, switchMap, takeUntil } from 'rxjs/operators';
 
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
-import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
+import { MenuInteractiveComponent } from '../directives/menu-interactive.component';
 import { MenuService } from '../services/menu.service';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -96,8 +96,8 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     menuItemTitle: MenuTitleDirective;
 
     /** @hidden Reference to the Menu Item interactive element */
-    @ContentChild(MenuInteractiveDirective)
-    menuInteractive: MenuInteractiveDirective;
+    @ContentChild(MenuInteractiveComponent)
+    menuInteractive: MenuInteractiveComponent;
 
     /** @hidden Whether sub-menu is currently visible*/
     submenuVisible = false;

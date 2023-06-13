@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
+import { MenuInteractiveComponent } from '../directives/menu-interactive.component';
 import { MenuComponent } from '../menu.component';
 import { MenuModule } from '../menu.module';
 import { MenuItemComponent } from './menu-item.component';
@@ -19,7 +19,7 @@ import { MenuItemComponent } from './menu-item.component';
 class TestMenuItemComponent {
     @ViewChild(MenuComponent) menu: MenuComponent;
     @ViewChild(MenuItemComponent) menuItem: MenuItemComponent;
-    @ViewChild(MenuInteractiveDirective) menuInteractive: MenuInteractiveDirective;
+    @ViewChild(MenuInteractiveComponent) menuInteractive: MenuInteractiveComponent;
 
     disabled = false;
 }
@@ -28,7 +28,7 @@ describe('MenuItemComponent', () => {
     let fixture: ComponentFixture<TestMenuItemComponent>;
     let menu: MenuComponent;
     let menuItem: MenuItemComponent;
-    let menuInteractive: MenuInteractiveDirective;
+    let menuInteractive: MenuInteractiveComponent;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -145,7 +145,7 @@ class TesNestedMenuItemComponent {
     @ViewChild(MenuComponent) menu: MenuComponent;
     @ViewChild('menuItemWithNestedMenu') menuItemWithNestedMenu: MenuItemComponent;
     @ViewChild('menuNestedItem') menuNestedItem: MenuItemComponent;
-    @ViewChild(MenuInteractiveDirective) menuInteractive: MenuInteractiveDirective;
+    @ViewChild(MenuInteractiveComponent) menuInteractive: MenuInteractiveComponent;
 }
 
 describe('MenuItemComponent nested', () => {
@@ -153,7 +153,7 @@ describe('MenuItemComponent nested', () => {
     let menu: MenuComponent;
     let menuItemWithNestedMenu: MenuItemComponent;
     let nestedMenuItem: MenuItemComponent;
-    let menuInteractiveWithNested: MenuInteractiveDirective;
+    let menuInteractiveWithNested: MenuInteractiveComponent;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({

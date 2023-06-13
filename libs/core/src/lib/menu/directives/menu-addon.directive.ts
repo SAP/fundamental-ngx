@@ -1,6 +1,6 @@
-import { Component, HostBinding, inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MenuComponent } from '../menu.component';
+import { Component, HostBinding, inject, Input, ViewChild } from '@angular/core';
 import { CdkPortalOutlet, PortalModule } from '@angular/cdk/portal';
+import { GlyphMenuAddonDirective } from './glyph-menu-addon.directive';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -10,10 +10,11 @@ import { CdkPortalOutlet, PortalModule } from '@angular/cdk/portal';
         <ng-content></ng-content>
     `,
     standalone: true,
+    hostDirectives: [{ directive: GlyphMenuAddonDirective, inputs: ['glyph'] }],
     imports: [PortalModule]
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
-export class MenuAddonDirective implements OnInit, OnDestroy {
+export class MenuAddonDirective {
     /** Whether addon is used before or after text */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('position') set setAddonPosition(position: 'before' | 'after') {
@@ -40,23 +41,11 @@ export class MenuAddonDirective implements OnInit, OnDestroy {
     fdAddonBeforeClass = false;
 
     /** @hidden */
-    private menuComponent = inject(MenuComponent, { optional: true });
-
-    /** @hidden */
     @ViewChild(CdkPortalOutlet)
-    addonGlyphPortalOutlet: CdkPortalOutlet;
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.menuComponent) {
-            this.menuComponent._addons = [...this.menuComponent._addons, this];
-        }
+    set addonPortalOutlet(portalOutlet: CdkPortalOutlet) {
+        this._addonGlyph.setGlyphPortalOutlet(portalOutlet);
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        if (this.menuComponent) {
-            this.menuComponent._addons = this.menuComponent._addons.filter((item) => item !== this);
-        }
-    }
+    readonly _addonGlyph = inject(GlyphMenuAddonDirective);
 }

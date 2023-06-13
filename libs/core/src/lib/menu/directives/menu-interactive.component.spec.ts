@@ -1,12 +1,12 @@
 import { waitForAsync } from '@angular/core/testing';
-import { MenuInteractiveDirective } from './menu-interactive.directive';
+import { MenuInteractiveComponent } from './menu-interactive.component';
 import { MockElementRef } from '@fundamental-ngx/core/tests';
 
 describe('MenuLinkDirective', () => {
-    let directive: MenuInteractiveDirective;
+    let directive: MenuInteractiveComponent;
 
     beforeEach(waitForAsync(() => {
-        directive = new MenuInteractiveDirective(new MockElementRef());
+        directive = new MenuInteractiveComponent(new MockElementRef());
     }));
 
     it('should create an instance', () => {

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MenuComponent } from './menu.component';
 import { MenuTitleDirective } from './directives/menu-title.directive';
-import { MenuInteractiveDirective } from './directives/menu-interactive.directive';
+import { MenuInteractiveComponent } from './directives/menu-interactive.component';
 import { MenuSeparatorDirective } from './menu-separator.directive';
 import { MenuAddonDirective } from './directives/menu-addon.directive';
 import { MenuItemComponent, SubmenuComponent } from './menu-item/menu-item.component';
@@ -14,6 +14,7 @@ import { DynamicComponentService, InitialFocusModule } from '@fundamental-ngx/cd
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { GlyphMenuAddonDirective } from './directives/glyph-menu-addon.directive';
 import { PortalModule } from '@angular/cdk/portal';
+import { ToggleButtonDirective } from './directives/toggle-button.directive';
 
 @NgModule({
     imports: [
@@ -28,10 +29,11 @@ import { PortalModule } from '@angular/cdk/portal';
         MenuAddonDirective,
         MenuSeparatorDirective,
         MenuShortcutDirective,
-        MenuInteractiveDirective,
+        MenuInteractiveComponent,
         MenuTitleDirective,
         SubmenuComponent,
-        MenuTriggerDirective
+        MenuTriggerDirective,
+        ToggleButtonDirective
     ],
     exports: [
         MenuComponent,
@@ -39,12 +41,13 @@ import { PortalModule } from '@angular/cdk/portal';
         SubmenuComponent,
         MenuSeparatorDirective,
         MenuShortcutDirective,
-        MenuInteractiveDirective,
+        MenuInteractiveComponent,
         MenuTitleDirective,
         MenuAddonDirective,
         MenuTriggerDirective,
         ContentDensityModule,
-        GlyphMenuAddonDirective
+        GlyphMenuAddonDirective,
+        ToggleButtonDirective
     ],
     providers: [DynamicComponentService]
 })

@@ -2,9 +2,9 @@
 
 <fd-menu #menu>
     <li fd-menu-item>
-        <a href="#" fd-menu-interactive>
-            <span fd-menu-title>Option 1</span>
-        </a>
+        <button fd-menu-interactive toggle [ngModel]="menuItemValue" (ngModelChange)="valueChanged($event)">
+            <span fd-menu-title>Toggle item</span>
+        </button>
     </li>
     <li fd-menu-item>
         <a href="#" fd-menu-interactive>

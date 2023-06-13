@@ -255,6 +255,11 @@ export class MenuComponent
     }
 
     /** @hidden */
+    detectChanges(): void {
+        this._changeDetectorRef.detectChanges();
+    }
+
+    /** @hidden */
     private _cleanUpMenuAfterClose(): void {
         this._menuService.resetMenuState();
     }
@@ -267,7 +272,7 @@ export class MenuComponent
             this._setupPopoverService();
         }
 
-        this._changeDetectorRef.detectChanges();
+        this.detectChanges();
     }
 
     /** @hidden */

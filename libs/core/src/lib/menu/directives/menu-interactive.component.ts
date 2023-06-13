@@ -1,15 +1,25 @@
-import { Directive, ElementRef, HostBinding } from '@angular/core';
+import { Component, ElementRef, HostBinding, inject, ViewChild } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { CdkPortalOutlet, PortalModule } from '@angular/cdk/portal';
 
-@Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
+@Component({
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-menu-interactive]',
+    template: `
+        <ng-template cdkPortalOutlet></ng-template>
+        <ng-content></ng-content>
+    `,
     host: {
         role: 'menuitem'
     },
+    imports: [PortalModule],
     standalone: true
 })
-export class MenuInteractiveDirective {
+export class MenuInteractiveComponent {
+    /** @hidden */
+    @ViewChild(CdkPortalOutlet)
+    addonPortalOutlet: CdkPortalOutlet;
+
     /** @hidden */
     @HostBinding('attr.tabindex')
     tabindex = 0;
@@ -39,7 +49,7 @@ export class MenuInteractiveDirective {
     _fromSplitButton = false;
 
     /** @hidden */
-    constructor(public elementRef: ElementRef) {}
+    public elementRef: ElementRef = inject(ElementRef);
 
     /** @hidden */
     setSelected(isSelected: boolean): void {
@@ -58,3 +68,5 @@ export class MenuInteractiveDirective {
         this.ariaControls = hasSubmenu ? itemId || this.ariaControls : null;
     }
 }
+
+export { MenuInteractiveComponent as MenuInteractiveDirective };
