@@ -1,3 +1,30 @@
+# [0.42.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.16...v0.42.0-rc.17) (2023-06-12)
+
+
+### Bug Fixes
+
+* **core:** update 72 Bold font name ([#9971](https://github.com/SAP/fundamental-ngx/issues/9971)) ([26fb2f6](https://github.com/SAP/fundamental-ngx/commit/26fb2f6be40c10420b04c605b6173d7abc43bc57))
+
+
+
+# [0.42.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.15...v0.42.0-rc.16) (2023-06-09)
+
+
+### Bug Fixes
+
+* **docs:** sidebar container css bug ([#10006](https://github.com/SAP/fundamental-ngx/issues/10006)) ([8a635a6](https://github.com/SAP/fundamental-ngx/commit/8a635a65098a6e1fe532a385e78b39b1c2ce30d6))
+
+
+
+# [0.42.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.14...v0.42.0-rc.15) (2023-06-09)
+
+
+### Bug Fixes
+
+* **platform:** do not set aria-expanded for table cells that do not expand ([#10007](https://github.com/SAP/fundamental-ngx/issues/10007)) ([030954c](https://github.com/SAP/fundamental-ngx/commit/030954c7eedfa990bbfc57a5949e8a3264786c62))
+
+
+
 # [0.42.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.13...v0.42.0-rc.14) (2023-06-07)
 
 
