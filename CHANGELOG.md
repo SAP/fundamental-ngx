@@ -1,3 +1,12 @@
+# [0.42.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.17...v0.42.0-rc.18) (2023-06-13)
+
+
+### Bug Fixes
+
+* **docs:** remove display none spans from inline help docs ([#10005](https://github.com/SAP/fundamental-ngx/issues/10005)) ([f307937](https://github.com/SAP/fundamental-ngx/commit/f3079372cb9ebdc86e365847e9cf586abb13ce1c))
+
+
+
 # [0.42.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.16...v0.42.0-rc.17) (2023-06-12)
 
 
