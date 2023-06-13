@@ -58,7 +58,9 @@
 <description>
     The input supports objects through the <code>displayFn</code> input. The way the object is displayed to the user is
     fully customizable through providing a function that accepts the object and returns the string to be displayed. The
-    example below shows displaying an object field in full uppercase.
+    example below shows displaying an object field in full uppercase. The <code>displayFn</code> input should always be
+    used with the <code>valueFn</code> input to ensure that the selected items display properly both in the tokenizer
+    and the dropdown. The <code>valueFn</code> should return a unique identifier for each object in the array.
 </description>
 <component-example>
     <fd-multi-input-displaywith-example></fd-multi-input-displaywith-example>

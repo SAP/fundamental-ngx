@@ -2,6 +2,7 @@
 import {
     Directive,
     ElementRef,
+    EmbeddedViewRef,
     Inject,
     Input,
     isDevMode,
@@ -9,10 +10,12 @@ import {
     OnDestroy,
     OnInit,
     Optional,
+    Renderer2,
     Self,
     SimpleChanges,
     TemplateRef,
-    Type
+    Type,
+    ViewContainerRef
 } from '@angular/core';
 import { PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
 import { BasePopoverClass } from '@fundamental-ngx/core/popover';
@@ -68,20 +71,14 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         };
         this._popoverService.updateContent(text, template);
 
-        let srElement;
-        if (typeof content === 'string') {
-            srElement = document.createElement('span');
-            srElement.innerText = content;
-        } else {
-            srElement = template;
-        }
-
-        srElement.style.cssText = `position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);`;
-        this._elementRef.nativeElement.append(srElement);
+        this._setupScreenreaderElement(content);
     }
 
     /** @hidden */
     _describedBy = '';
+
+    /** @hidden */
+    private _srViewRef: EmbeddedViewRef<any>;
 
     /**
      * Inline help template to display inside generated popover
@@ -95,12 +92,16 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
             );
         }
         this._popoverService.updateContent(null, template);
+
+        this._setupScreenreaderElement(template);
     }
 
     /** @hidden */
     constructor(
         private _popoverService: PopoverService,
         private _elementRef: ElementRef,
+        private _renderer: Renderer2,
+        private readonly _viewContainerRef: ViewContainerRef,
         @Optional() @Self() @Inject(FD_ICON_COMPONENT) private _icon: Type<any>
     ) {
         super();
@@ -138,5 +139,23 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         if (this._icon) {
             this.additionalBodyClass += ' ' + INLINE_HELP_ICON_CLASS;
         }
+    }
+
+    /** @hidden */
+    private _setupScreenreaderElement(content: string | Nullable<TemplateRef<any>>): void {
+        this._viewContainerRef.clear();
+        let srElement = this._renderer.createElement('span');
+        if (typeof content === 'string') {
+            srElement.innerText = content;
+        } else if (content) {
+            this._srViewRef = content.createEmbeddedView(null);
+            this._viewContainerRef.insert(this._srViewRef);
+            srElement = this._srViewRef.rootNodes[0];
+        }
+
+        if (srElement.style) {
+            srElement.style.cssText = `position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);`;
+        }
+        this._renderer.appendChild(this._elementRef.nativeElement, srElement);
     }
 }

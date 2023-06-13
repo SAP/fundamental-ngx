@@ -48,9 +48,9 @@ describe('FeedListItemComponent', () => {
         component.authorTitle = authorTitle;
         component.authorLink = authorLink;
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.querySelector('.fd-feed-list__name a').innerText).toContain(
-            authorTitle
-        );
+        expect(
+            component.elementRef().nativeElement.querySelector('.fd-feed-list__name a > .fd-link__content').innerHTML
+        ).toContain(authorTitle);
         expect(
             component.elementRef().nativeElement.querySelector('.fd-feed-list__name a').getAttribute('href')
         ).toEqual(authorLink);
@@ -67,7 +67,9 @@ describe('FeedListItemComponent', () => {
         component.isRichText = true;
         component.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement).not.toHaveClass(`${componentClassPrefix}--collapsible`);
+        expect(component.elementRef().nativeElement.classList.contains(`${componentClassPrefix}--collapsible`)).toBe(
+            false
+        );
         expect(component.elementRef().nativeElement.querySelector('.fd-feed-list__link--more')).toBeFalsy();
     });
 
@@ -84,13 +86,16 @@ describe('FeedListItemComponent', () => {
         await fixture.whenStable();
         let text = component
             .elementRef()
-            .nativeElement.querySelector('.fd-feed-list__link--more')
-            .innerText.toLowerCase();
+            .nativeElement.querySelector('.fd-feed-list__link--more > .fd-link__content')
+            .innerHTML.toLowerCase();
         expect(text).toEqual(moreLabel);
         component.isCollapsed = false;
         fixture.detectChanges();
         await fixture.whenStable();
-        text = component.elementRef().nativeElement.querySelector('.fd-feed-list__link--more').innerText.toLowerCase();
+        text = component
+            .elementRef()
+            .nativeElement.querySelector('.fd-feed-list__link--more > .fd-link__content')
+            .innerHTML.toLowerCase();
         expect(text).toEqual(lessLabel.toLowerCase());
     });
 
@@ -100,8 +105,8 @@ describe('FeedListItemComponent', () => {
         component.hasMore = true;
         fixture.detectChanges();
         component.toggleTextView();
-        expect(component.isCollapsed).toBeFalse();
+        expect(component.isCollapsed).toBe(false);
         component.toggleTextView();
-        expect(component.isCollapsed).toBeTrue();
+        expect(component.isCollapsed).toBe(true);
     });
 });
