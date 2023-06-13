@@ -31,11 +31,3 @@ $block: fd-tree;
         }
     }
 }
-
-// TODO: Remove these stylings after new stable fundamental-styles version bump.
-
-.fd-tree__item[aria-level='1'] > .fd-tree__item-container--active.is-focus:before,
-.fd-tree__item[aria-level='1'] > .fd-tree__item-container--active:focus:before,
-.fd-tree__item-container--active:focus:before {
-    bottom: 0.0625rem;
-}
