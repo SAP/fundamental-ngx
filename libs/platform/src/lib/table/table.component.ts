@@ -798,6 +798,8 @@ export class TableComponent<T = any>
                 })
             );
         }
+
+        this._focusableGrid.shortRowFocus = 'first';
     }
 
     /** @hidden */
