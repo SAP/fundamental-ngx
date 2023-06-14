@@ -1,3 +1,49 @@
+# [0.42.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.20...v0.42.0-rc.21) (2023-06-14)
+
+
+### Features
+
+* **platform:** table optimisation ([#9991](https://github.com/SAP/fundamental-ngx/issues/9991)) ([d2476c6](https://github.com/SAP/fundamental-ngx/commit/d2476c6af59be9e3f538d3eea6e7f79bd9f61a2f))
+
+
+### BREAKING CHANGES
+
+* **platform:** **Components that rely on `HasElementRef` interface:**
+
+- `HasElementRef` interface has been changed. Now instead of `elementRef()` method, components should have `elementRef: ElementRef` property. This can include getters too;
+
+**Core table:**
+
+- `TableCellDirective` now directly extends from `FocusableItemDirective`. Previously it had `FocusableItemDirective` as a host directive applied to itself;
+
+**Platform table:**
+
+- All directives, services, models, data source classes are moved from `@fundamental-ngx/platform/table` into a separate package `@fundamental-ngx/platform/table-helpers`. To keep backwards compatibility, `@fundamental-ngx/platform/table` re-exports `@fundamental-ngx/platform/table-helpers` so that the import paths are the same as before;
+- Platform table directives are standalone now;
+- Platform table data-source related functionality has been moved to `TableDataSourceDirective` standalone directive. Input properties are preserved;
+- Platform table drag&drop related functionality has been moved to `TableDraggableDirective` standalone directive. Input properties are preserved;
+- Platform table initial state related functionality has been moved to `TableInitialStateDirective` standalone directive. Input properties are preserved;
+- Platform table virtual scroll related functionality has been moved to `TableVirtualScrollDirective` standalone directive. Input properties are preserved;
+- Platform table data source has been refactored to utilize `@fundamental-ngx/cdk/data-source` implementation. Backwards compatibility is preserved for classes that extend from data-source/data-provider. More complex classes may need to be refactored according to new class signature;
+- Platform table now uses `TableRowImpl` class as implementation of `TableRow` interface instead of simple object;
+- Helper methods from TableComponent has been moved to a standalone functions;
+- `SearchInput` type is now not re-exported from `@fundamental-ngx/platform/table`. Instead use `@fundamental-ngx/platform/search-field`;
+- Table component html is now split between logical parts: table, table header rows, table content rows. Resulting markup is not changed, but the business logic parts are being moved to appropriate components;
+- Platform table rows now try to reuse the html element they bounded to. This means that if developers use reference to elementRef of the row, and rows array changes, they need to manually recalculate the reference to the element;
+- Platform table group row: text pattern changed from {{ column.name }} : {{ column.value }} to {{ column.name }}: {{ column.value }}. Space before colon has been removed;
+- Platform table input properties recalculation now more efficient. Previously we checked property value on every `mousemove`, now, only when something inside the table itself is changed. This may require additional detectChanges calls from developers who are using Platform Table.
+- Such input properties has been removed from platform table class:
+  - `dataSource `- setter available via `fdp-table[dataSource]` but class property now accessible from `_dataSourceDirective` property of Table component;
+  -  `state`, `initialVisibleColumns`, `initialSortBy`, `initialFilterBy`, `initialGroupBy`, `initialPage` setters available via `fdp-table[property]` but the class property now accessible from `initialState` property of Table component;
+  - `isTreeTable`, `enableRowReordering`, `dropMode` setters available via `fdp-table[property]` but the class property now accessible via `_dndTableDirective` property of Table component;
+  - `virtualScroll`, `renderAhead` setter available via `fdp-table[virtualScroll]`, but the class property now accessible via `_virtualScrollDirective` property of Table component;
+- Such events has been removed from Platform Table class:
+  - `rowsRearrange` - listener still available via `fdp-table(rowsRearrange)`, but actual eventEmitter is now located in `_dndTableDirective` property of Table component;
+  - `onDataRequested`, `onDataReceived` - listeners still available via `fdp-table(event)`, but actual eventEmitters are now located in `_dataSourceDirective` property of Table component;
+- Private API changed. For more information refer to [this PR](https://github.com/SAP/fundamental-ngx/pull/9991)
+
+
+
 # [0.42.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.19...v0.42.0-rc.20) (2023-06-13)
 
 
