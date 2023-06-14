@@ -55,6 +55,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: 'Закрити'
     },
+    coreMultiInput: {
+        multiInputAriaLabel: 'Multi Input'
+    },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'

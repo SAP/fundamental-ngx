@@ -42,6 +42,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
     coreMessageStrip: {
         dismissLabel: '关闭'
     },
+    coreMultiInput: {
+        multiInputAriaLabel: 'Multi Input'
+    },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'

@@ -7,6 +7,7 @@ import {
     EventEmitter,
     forwardRef,
     HostListener,
+    Inject,
     Injector,
     Input,
     OnChanges,
@@ -23,7 +24,7 @@ import {
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { SelectionModel } from '@angular/cdk/collections';
-import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, firstValueFrom, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, first, map, startWith } from 'rxjs/operators';
 
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
@@ -51,6 +52,7 @@ import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -361,6 +363,9 @@ export class MultiInputComponent
     private readonly _rangeSelector = new RangeSelector();
 
     /** @hidden */
+    private readonly _translationResolver = new TranslationResolver();
+
+    /** @hidden */
     onChange: (value: any) => void = () => {};
 
     /** @hidden */
@@ -374,6 +379,7 @@ export class MultiInputComponent
         private readonly _dynamicComponentService: DynamicComponentService,
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
+        @Inject(FD_LANGUAGE) private readonly _language: Observable<FdLanguage>,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private readonly _focusTrapService: FocusTrapService
     ) {}
@@ -405,6 +411,14 @@ export class MultiInputComponent
                 .pipe(map((viewModel) => !viewModel.displayedOptions.some((c) => !c.isSelected)))
                 .subscribe((allItemsSelected) => this.allItemsSelectedChange.emit(allItemsSelected))
         );
+
+        if (!this.ariaLabel) {
+            this._subscriptions.add(
+                this._language.subscribe(() => {
+                    this._getAriaLabel();
+                })
+            );
+        }
     }
 
     /** @hidden */
@@ -857,6 +871,12 @@ export class MultiInputComponent
         if (!this.elementRef.nativeElement.contains(event.relatedTarget as Node)) {
             this.onTouched();
         }
+    }
+
+    /** @hidden */
+    private async _getAriaLabel(): Promise<void> {
+        const lang = await firstValueFrom(this._language);
+        this.ariaLabel = this._translationResolver.resolve(lang, 'coreMultiInput.multiInputAriaLabel');
     }
 }
 

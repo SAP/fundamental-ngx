@@ -1,3 +1,30 @@
+# [0.42.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.19...v0.42.0-rc.20) (2023-06-13)
+
+
+### Bug Fixes
+
+* **core:** select should have listbox role ([#9986](https://github.com/SAP/fundamental-ngx/issues/9986)) ([3bb5ab0](https://github.com/SAP/fundamental-ngx/commit/3bb5ab042548d829bd61766d309717b827ba273f))
+
+
+
+# [0.42.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.18...v0.42.0-rc.19) (2023-06-13)
+
+
+### Bug Fixes
+
+* **core:** add label for multi input ([#9972](https://github.com/SAP/fundamental-ngx/issues/9972)) ([199c5dd](https://github.com/SAP/fundamental-ngx/commit/199c5dde12f2a608c0b36ecbb59cdee302b83753))
+
+
+
+# [0.42.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.17...v0.42.0-rc.18) (2023-06-13)
+
+
+### Bug Fixes
+
+* **docs:** remove display none spans from inline help docs ([#10005](https://github.com/SAP/fundamental-ngx/issues/10005)) ([f307937](https://github.com/SAP/fundamental-ngx/commit/f3079372cb9ebdc86e365847e9cf586abb13ce1c))
+
+
+
 # [0.42.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.16...v0.42.0-rc.17) (2023-06-12)
 
 
