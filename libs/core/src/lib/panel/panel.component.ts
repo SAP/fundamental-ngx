@@ -84,7 +84,7 @@ export class PanelComponent implements OnInit, OnDestroy {
     /** @hidden */
     constructor(
         private _cdRef: ChangeDetectorRef,
-        private _elementRef: ElementRef,
+        public readonly elementRef: ElementRef,
         readonly _contentDensityObserver: ContentDensityObserver,
         @Optional() private _rtlService: RtlService
     ) {}
@@ -97,11 +97,6 @@ export class PanelComponent implements OnInit, OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 
     /** Methods that toggles the Panel Content */

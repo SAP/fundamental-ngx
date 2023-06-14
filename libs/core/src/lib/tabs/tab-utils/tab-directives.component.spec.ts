@@ -34,6 +34,6 @@ describe('TabIconComponent', () => {
         directiveElement.buildComponentCssClass();
         fixture.detectChanges();
 
-        expect((directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__icon')).toBeTruthy();
+        expect((directiveElement as any).elementRef.nativeElement.classList.contains('fd-tabs__icon')).toBeTruthy();
     });
 });

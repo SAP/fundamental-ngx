@@ -277,7 +277,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
 
     /** @hidden */
     constructor(
-        private readonly _elementRef: ElementRef,
+        public readonly elementRef: ElementRef,
         private readonly _changeDetectorRef: ChangeDetectorRef,
         private readonly _dialogService: DialogService,
         @Optional() private readonly _rtlService: RtlService
@@ -334,11 +334,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     /** @hidden */
     get hasSelectedAndConditions(): boolean {
         return Boolean(this.selectedItems.length + this.validConditions.length);
-    }
-
-    /** @hidden */
-    get elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 
     /** @hidden */

@@ -1,6 +1,7 @@
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
+import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { PresetManagedComponent } from '@fundamental-ngx/platform/shared';
-import { CollectionFilterGroup, SearchInput } from '@fundamental-ngx/platform/table';
+import { CollectionFilterGroup } from '@fundamental-ngx/platform/table';
 import { SmartFilterBarManagedPreset } from './interfaces/smart-filter-bar-change';
 import { SmartFilterBarCondition } from './interfaces/smart-filter-bar-condition';
 import { SmartFilterBarStrategyLabels } from './interfaces/strategy-labels.type';

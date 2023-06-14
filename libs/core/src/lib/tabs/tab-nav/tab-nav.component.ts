@@ -70,9 +70,9 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef,
-        private _contentDensityObserver: ContentDensityObserver,
-        @Optional() private _rtlService: RtlService
+        public readonly elementRef: ElementRef,
+        private readonly _contentDensityObserver: ContentDensityObserver,
+        @Optional() private readonly _rtlService: RtlService
     ) {
         this._contentDensityObserver.subscribe();
     }
@@ -110,13 +110,6 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [`fd-tabs`, this.mode ? 'fd-tabs--' + this.mode : '', `fd-tabs--${this.size}`, this.class];
-    }
-
-    /** HasElementRef interface implementation
-     * function used by applyCssClass and applyCssStyle decorators
-     */
-    elementRef(): ElementRef {
-        return this._elementRef;
     }
 
     /** Function that gives possibility to get all the link directives, with and without nav__item wrapper */

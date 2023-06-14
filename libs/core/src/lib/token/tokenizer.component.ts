@@ -207,7 +207,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     /** @hidden */
     constructor(
         readonly _contentDensityObserver: ContentDensityObserver,
-        private _elementRef: ElementRef,
+        public readonly elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService,
         private _renderer: Renderer2,
@@ -215,7 +215,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     ) {
         this._eventListeners.push(
             this._renderer.listen('window', 'click', (e: Event) => {
-                if (this._elementRef.nativeElement.contains(e.target) === false) {
+                if (this.elementRef.nativeElement.contains(e.target) === false) {
                     this.tokenList.forEach((token) => {
                         token.selected = false;
                     });
@@ -253,7 +253,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             this._handleCozyTokenCount();
         }
         this._listenElementEvents();
-        this.previousElementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
+        this.previousElementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
         this._listenOnResize();
     }
 
@@ -285,11 +285,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [this.class];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
     }
 
     /** @hidden */
@@ -366,8 +361,8 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
 
     /** @hidden */
     onResize(): void {
-        if (this._elementRef) {
-            const elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
+        if (this.elementRef) {
+            const elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             this._resetTokens();
             this.previousElementWidth = elementWidth;
             if (!this._compact && !this.compactCollapse) {
@@ -554,7 +549,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
 
         this.tokenList.forEach((token) => token._viewContainer.createEmbeddedView(token._content));
 
-        let elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
+        let elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
         let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
         let i = 0;
         /*
@@ -578,7 +573,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
                 token.elementRef.nativeElement.style.display = 'none';
             }
             // get the new elementWidth and combinedTokenWidth as these will have changed after setting a token display to 'none'
-            elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
+            elementWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
             this._checkMoreElementVisibility();
             combinedTokenWidth = this.getCombinedTokenWidth();
             side === 'right' ? i-- : i++;
@@ -612,7 +607,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
 
     /** @hidden */
     private _getHiddenCozyTokenCount(): void {
-        const elementLeft = this._elementRef.nativeElement.getBoundingClientRect().left;
+        const elementLeft = this.elementRef.nativeElement.getBoundingClientRect().left;
         this.hiddenCozyTokenCount = 0;
         this.tokenList.forEach((token) => {
             if (
@@ -791,11 +786,11 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     /** @hidden */
     private _listenElementEvents(): void {
         merge(
-            fromEvent<Event>(this._elementRef.nativeElement, 'focus', { capture: true }).pipe(
+            fromEvent<Event>(this.elementRef.nativeElement, 'focus', { capture: true }).pipe(
                 filter((event) => (event['target'] as any)?.tagName === 'INPUT' && this.tokenizerFocusable),
                 map(() => true)
             ),
-            fromEvent<Event>(this._elementRef.nativeElement, 'blur', { capture: true }).pipe(map(() => false))
+            fromEvent<Event>(this.elementRef.nativeElement, 'blur', { capture: true }).pipe(map(() => false))
         )
             .pipe(
                 // debounceTime is needed in order to filter subsequent focus-blur events, that happen simultaneously
@@ -811,7 +806,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     /** @hidden Listen window resize and distribute cards on column change */
     private _listenOnResize(): void {
         this.onResize();
-        resizeObservable(this._elementRef.nativeElement)
+        resizeObservable(this.elementRef.nativeElement)
             .pipe(debounceTime(30), takeUntil(this._onDestroy$))
             .subscribe(() => this.onResize());
     }

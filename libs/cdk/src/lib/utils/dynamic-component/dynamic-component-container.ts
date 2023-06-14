@@ -27,7 +27,7 @@ export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>
 
     /** @hidden */
     protected constructor(
-        protected _elementRef: ElementRef,
+        public elementRef: ElementRef,
         protected _injector: Injector,
         protected _cdr: ChangeDetectorRef
     ) {}

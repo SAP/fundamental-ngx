@@ -8,7 +8,7 @@ export abstract class SelectableItemToken<ElementType extends Element = HTMLElem
     abstract value: TValue;
     abstract fdkSelectableItem?: boolean;
 
-    abstract elementRef(): ElementRef<ElementType>;
+    abstract readonly elementRef: ElementRef<ElementType>;
 
     abstract setSelected(isSelected: boolean): void;
 

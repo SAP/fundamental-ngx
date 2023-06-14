@@ -378,6 +378,7 @@
             "@fundamental-ngx/platform/smart-filter-bar": ["libs/platform/src/lib/smart-filter-bar/index.ts"],
             "@fundamental-ngx/platform/split-menu-button": ["libs/platform/src/lib/split-menu-button/index.ts"],
             "@fundamental-ngx/platform/table": ["libs/platform/src/lib/table/index.ts"],
+            "@fundamental-ngx/platform/table-helpers": ["libs/platform/src/lib/table-helpers/index.ts"],
             "@fundamental-ngx/platform/thumbnail": ["libs/platform/src/lib/thumbnail/index.ts"],
             "@fundamental-ngx/platform/upload-collection": ["libs/platform/src/lib/upload-collection/index.ts"],
             "@fundamental-ngx/platform/value-help-dialog": ["libs/platform/src/lib/value-help-dialog/index.ts"],

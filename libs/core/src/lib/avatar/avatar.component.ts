@@ -169,7 +169,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     set bgImage(image: Nullable<string>) {
         this._bgImage = image;
 
-        this._renderer.setStyle(this._elementRef.nativeElement, 'background-image', image);
+        this._renderer.setStyle(this.elementRef.nativeElement, 'background-image', image);
     }
 
     get bgImage(): Nullable<string> {
@@ -221,7 +221,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
 
     /** @hidden */
     constructor(
-        private readonly _elementRef: ElementRef,
+        public readonly elementRef: ElementRef,
         private readonly _cdr: ChangeDetectorRef,
         private readonly _renderer: Renderer2,
         @Attribute('tabindex') private hostTabindex: number | null
@@ -263,11 +263,6 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
-    }
-
-    /** @hidden */
     @HostListener('click', ['$event'])
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space', ['$event'])
@@ -284,7 +279,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     /** @hidden */
     zoomClicked(event: Event): void {
         event.preventDefault();
-        this._elementRef.nativeElement.focus();
+        this.elementRef.nativeElement.focus();
         this.zoomGlyphClicked.next();
     }
 
@@ -364,7 +359,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
             }
 
             if (option === ALTER_ICON_OPTIONS.ALT) {
-                const altValue = this._elementRef.nativeElement.getAttribute('alt');
+                const altValue = this.elementRef.nativeElement.getAttribute('alt');
                 if (altValue) {
                     this.abbreviate = this._generateAbbreviation(altValue);
                     break;

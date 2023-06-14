@@ -43,7 +43,7 @@ import { PlatformPanelModule } from '@fundamental-ngx/platform/panel';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { PlatformSliderModule } from '@fundamental-ngx/platform/slider';
 import { PlatformSplitMenuButtonModule } from '@fundamental-ngx/platform/split-menu-button';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { PlatformTableModule, TableHelpersModule } from '@fundamental-ngx/platform/table';
 import { PlatformThumbnailModule } from '@fundamental-ngx/platform/thumbnail';
 import { PlatformUploadCollectionModule } from '@fundamental-ngx/platform/upload-collection';
 import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
@@ -106,7 +106,8 @@ import { SettingsGeneratorModule } from '@fundamental-ngx/platform/settings-gene
         PlatformSmartFilterBarModule,
         PlatformMessagePopoverModule,
         VariantManagementModule,
-        SettingsGeneratorModule
+        SettingsGeneratorModule,
+        TableHelpersModule
     ],
     providers: []
 })

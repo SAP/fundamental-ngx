@@ -86,7 +86,6 @@ export class TableComponent implements AfterContentInit, AfterViewInit {
     @Input()
     set allCellsFocusable(value: BooleanInput) {
         this._allCellsFocusable = coerceBooleanProperty(value);
-
         this._updateCells();
     }
     get allCellsFocusable(): boolean {

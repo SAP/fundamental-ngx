@@ -66,7 +66,7 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     ariaLabelledBy: Nullable<string>;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -76,11 +76,6 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
     }
 
     /** @hidden */

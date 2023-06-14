@@ -152,7 +152,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
                 const styles: CSSStyleDeclaration[] = [];
                 styles.push((this._titleDirective.elRef.nativeElement as HTMLElement).style);
                 this._titleContainerDirective?._objectMarkerComponents?.forEach((objectMarker) => {
-                    styles.push(objectMarker.elementRef().nativeElement.style);
+                    styles.push(objectMarker.elementRef.nativeElement.style);
                 });
                 event
                     ? styles.forEach((style) => (style.display = 'none'))

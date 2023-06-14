@@ -65,7 +65,7 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
     private _glyph = 'documents';
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -79,11 +79,6 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-message-page', this.class];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
     }
 
     /** @hidden */

@@ -65,7 +65,7 @@ export class FeedListComponent implements OnInit, AfterContentChecked, OnDestroy
     private $feedItemChanges: Subscription;
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngAfterContentChecked(): void {
@@ -105,11 +105,6 @@ export class FeedListComponent implements OnInit, AfterContentChecked, OnDestroy
             this.isGroup ? `${CSS_CLASS_NAME.list}--group` : '',
             this.mobile ? `${CSS_CLASS_NAME.list}--s` : ''
         ];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 
     /** @hidden */

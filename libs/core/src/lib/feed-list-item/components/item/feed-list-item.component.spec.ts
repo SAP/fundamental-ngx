@@ -49,28 +49,28 @@ describe('FeedListItemComponent', () => {
         component.authorLink = authorLink;
         fixture.detectChanges();
         expect(
-            component.elementRef().nativeElement.querySelector('.fd-feed-list__name a > .fd-link__content').innerHTML
+            component.elementRef.nativeElement.querySelector('.fd-feed-list__name a > .fd-link__content').innerHTML
         ).toContain(authorTitle);
-        expect(
-            component.elementRef().nativeElement.querySelector('.fd-feed-list__name a').getAttribute('href')
-        ).toEqual(authorLink);
+        expect(component.elementRef.nativeElement.querySelector('.fd-feed-list__name a').getAttribute('href')).toEqual(
+            authorLink
+        );
     });
 
     it('should render author title as sample text', () => {
         component.authorTitle = 'John Doe';
         component.authorLink = null;
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.querySelector('.fd-feed-list__name a')).toBeNull();
+        expect(component.elementRef.nativeElement.querySelector('.fd-feed-list__name a')).toBeNull();
     });
 
     it('should render only formatted text', () => {
         component.isRichText = true;
         component.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains(`${componentClassPrefix}--collapsible`)).toBe(
+        expect(component.elementRef.nativeElement.classList.contains(`${componentClassPrefix}--collapsible`)).toBe(
             false
         );
-        expect(component.elementRef().nativeElement.querySelector('.fd-feed-list__link--more')).toBeFalsy();
+        expect(component.elementRef.nativeElement.querySelector('.fd-feed-list__link--more')).toBeFalsy();
     });
 
     it(`should label's more and less buttons`, async () => {
@@ -84,17 +84,15 @@ describe('FeedListItemComponent', () => {
         component.lessLabel = lessLabel;
         fixture.detectChanges();
         await fixture.whenStable();
-        let text = component
-            .elementRef()
-            .nativeElement.querySelector('.fd-feed-list__link--more > .fd-link__content')
+        let text = component.elementRef.nativeElement
+            .querySelector('.fd-feed-list__link--more > .fd-link__content')
             .innerHTML.toLowerCase();
         expect(text).toEqual(moreLabel);
         component.isCollapsed = false;
         fixture.detectChanges();
         await fixture.whenStable();
-        text = component
-            .elementRef()
-            .nativeElement.querySelector('.fd-feed-list__link--more > .fd-link__content')
+        text = component.elementRef.nativeElement
+            .querySelector('.fd-feed-list__link--more > .fd-link__content')
             .innerHTML.toLowerCase();
         expect(text).toEqual(lessLabel.toLowerCase());
     });

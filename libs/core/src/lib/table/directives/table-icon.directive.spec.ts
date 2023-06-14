@@ -34,6 +34,6 @@ describe('TableIconDirective', () => {
     });
 
     it('should assign classes', () => {
-        expect(component.icon.elementRef().nativeElement.classList.length).toBe(3);
+        expect(component.icon.elementRef.nativeElement.classList.length).toBe(3);
     });
 });

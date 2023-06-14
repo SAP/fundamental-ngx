@@ -94,8 +94,8 @@ describe('TileDirectives', () => {
         expect(component.footer.nativeElement.className).toContain('fd-tile__footer');
         expect(component.footer.nativeElement.className).toContain('fd-tile__footer--2-col');
         component.refresh.buildComponentCssClass();
-        expect(component.refresh.elementRef().nativeElement.className).toContain('fd-tile__refresh');
-        expect(component.refresh.elementRef().nativeElement.className).toContain('sap-icon--refresh');
+        expect(component.refresh.elementRef.nativeElement.className).toContain('fd-tile__refresh');
+        expect(component.refresh.elementRef.nativeElement.className).toContain('sap-icon--refresh');
         expect(component.profileImg.nativeElement.className).toContain('fd-tile__profile-img');
         expect(component.profileImg.nativeElement.id).toContain('fd-profileTile-');
         expect(component.profileImg.nativeElement.style.getPropertyValue('background-image')).toContain(
@@ -111,8 +111,8 @@ describe('TileDirectives', () => {
         expect(component.dot.nativeElement.className).toContain('fd-tile__dot');
         expect(component.dot.nativeElement.className).toContain('fd-tile__dot--active');
         component.actionClose.buildComponentCssClass();
-        expect(component.actionClose.elementRef().nativeElement.className).toContain('fd-tile__action-close');
+        expect(component.actionClose.elementRef.nativeElement.className).toContain('fd-tile__action-close');
         component.actionIndicator.buildComponentCssClass();
-        expect(component.actionIndicator.elementRef().nativeElement.className).toContain('fd-tile__action-indicator');
+        expect(component.actionIndicator.elementRef.nativeElement.className).toContain('fd-tile__action-indicator');
     });
 });

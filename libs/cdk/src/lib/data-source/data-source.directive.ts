@@ -19,19 +19,18 @@ export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = Data
      * @param source
      */
     @Input()
-    set dataSource(source: DataSource<T>) {
+    set dataSource(source: DataSource<T, P> | null) {
         this._dataSource = source;
-        this.dataSourceChanged.next();
-
         this._initializeDataSource();
+        this.dataSourceChanged.next();
     }
 
-    get dataSource(): DataSource<T> {
+    get dataSource(): DataSource<T, P> | null {
         return this._dataSource;
     }
 
     /** @hidden */
-    private _dataSource: DataSource<T>;
+    private _dataSource: DataSource<T, P> | null;
 
     /** @hidden */
     dataSourceProvider: P | undefined;
@@ -105,7 +104,11 @@ export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = Data
     }
 
     /** @Hidden */
-    private _toDataStream(source: DataSource<T>): P | undefined {
-        return this._dataSourceTransformer ? this._dataSourceTransformer.parse(source) : undefined;
+    private _toDataStream(source: DataSource<T> | null): P | undefined {
+        return !source
+            ? undefined
+            : this._dataSourceTransformer
+            ? this._dataSourceTransformer.parse(source)
+            : undefined;
     }
 }

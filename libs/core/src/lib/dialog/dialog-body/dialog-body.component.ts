@@ -35,16 +35,11 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 export class DialogBodyComponent {
     /** @hidden */
     constructor(
-        private _elRef: ElementRef,
+        public readonly elementRef: ElementRef,
         @Optional() public dialogConfig: DialogConfig,
         @Optional() public dialogRef: DialogRef,
         @Inject(ScrollbarDirective) private _scrollbarDirective: ScrollbarDirective
     ) {
         this._scrollbarDirective.overrideTabindex = false;
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elRef;
     }
 }

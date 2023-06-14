@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,
     ContentChildren,
@@ -6,6 +7,7 @@ import {
     EventEmitter,
     HostBinding,
     HostListener,
+    inject,
     Input,
     OnChanges,
     OnDestroy,
@@ -97,7 +99,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     }
 
     /** @hidden */
-    private _focusable = false;
+    protected _focusable = false;
 
     /** Direction of navigation. Should be set to 'grid' when list is a part of grid. */
     @Input()
@@ -123,7 +125,15 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
 
     /** @hidden */
     @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE, { descendants: true })
-    public readonly _focusableItems: QueryList<FocusableItemDirective>;
+    public readonly _projectedFocusableItems: QueryList<FocusableItemDirective>;
+
+    /** @hidden */
+    get _focusableItems(): QueryList<FocusableItemDirective> {
+        return this._items ? this._items : this._projectedFocusableItems;
+    }
+
+    /** @hidden */
+    _items: QueryList<FocusableItemDirective> | undefined;
 
     /** @hidden */
     public readonly _gridItemFocused$ = new Subject<FocusableItemPosition>();
@@ -147,6 +157,22 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     private readonly _refreshItems$ = new Subject<void>();
 
     /** @hidden */
+    private readonly _refresh$ = new Subject<void>();
+
+    /** @hidden */
+    private readonly _renderer = inject(Renderer2);
+    /** @hidden */
+    protected readonly _destroy$ = inject(DestroyedService);
+    /** @hidden */
+    private readonly _elementRef: ElementRef<HTMLElement> = inject(ElementRef);
+    /** @hidden */
+    private readonly _liveAnnouncer = inject(LiveAnnouncer);
+    /** @hidden */
+    private readonly _focusableObserver = inject(FocusableObserver);
+    /** @hidden */
+    private readonly _document = inject(DOCUMENT);
+
+    /** @hidden */
     @HostBinding('attr.tabindex')
     get _tabindex(): number {
         return this._tabbable ? 0 : -1;
@@ -156,13 +182,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     _isVisible = false;
 
     /** @hidden */
-    constructor(
-        private _renderer: Renderer2,
-        private _destroy$: DestroyedService,
-        private _elementRef: ElementRef<HTMLElement>,
-        private _liveAnnouncer: LiveAnnouncer,
-        private _focusableObserver: FocusableObserver
-    ) {
+    constructor() {
         intersectionObservable(this._elementRef.nativeElement, { threshold: 0.25 })
             .pipe(takeUntil(this._destroy$))
             .subscribe((isVisible) => (this._isVisible = isVisible[0]?.isIntersecting));
@@ -194,16 +214,29 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._listenOnItems();
+    }
+
+    /** Set items programmatically. */
+    setItems(items: QueryList<FocusableItemDirective>): void {
+        this._items = items;
+        this._listenOnItems();
+    }
+
+    /** @hidden */
+    private _listenOnItems(): void {
+        const refresh$ = merge(this._refresh$, this._destroy$);
+        this._refresh$.next();
         this._focusableItems.changes
             .pipe(
-                startWith(this._focusableItems),
-                map((queryList) => queryList.toArray()),
+                startWith(null),
+                map(() => this._focusableItems.toArray()),
                 tap((items: FocusableItemDirective[]): void => {
                     const focusableItems: FocusableItem[] = items.map((item, index) => ({
                         index,
                         focusable: () => item.fdkFocusableItem,
-                        elementRef: () => item.elementRef(),
-                        focus: () => item.elementRef().nativeElement.focus(),
+                        elementRef: item.elementRef,
+                        focus: () => item.elementRef.nativeElement.focus(),
                         keydown: item._keydown$
                     }));
 
@@ -215,7 +248,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
                         wrap: this.wrap
                     });
                 }),
-                takeUntil(this._destroy$)
+                takeUntil(refresh$)
             )
             .subscribe();
     }
@@ -233,7 +266,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
             return;
         }
 
-        const isFocused = document.activeElement === this._elementRef.nativeElement;
+        const isFocused = this._document.activeElement === this._elementRef.nativeElement;
         const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2]) && !event.shiftKey && isFocused;
         const shouldFocusList =
             ((KeyUtil.isKeyCode(event, F2) && event.shiftKey) || KeyUtil.isKeyCode(event, ESCAPE)) && !isFocused;
@@ -269,7 +302,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
         });
 
         if (availableIndex != null) {
-            scrollIntoView(this._focusableItems.get(availableIndex)?.elementRef().nativeElement, scrollPosition);
+            scrollIntoView(this._focusableItems.get(availableIndex)?.elementRef.nativeElement, scrollPosition);
             this._keyManager?.setActiveItem(availableIndex);
         }
     }

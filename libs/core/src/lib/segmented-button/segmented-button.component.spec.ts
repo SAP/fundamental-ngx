@@ -73,7 +73,7 @@ describe('SegmentedButtonComponent', () => {
         fixture.detectChanges();
 
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.secondButton.elementRef().nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
         expect(component.thirdButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
     });
 
@@ -91,11 +91,11 @@ describe('SegmentedButtonComponent', () => {
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
         expect(component.segmentedButton['_currentValue']).toEqual('first');
 
-        component.secondButton.elementRef().nativeElement.dispatchEvent(new MouseEvent('click'));
+        component.secondButton.elementRef.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
 
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(false);
-        expect(component.secondButton.elementRef().nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
         expect(component.segmentedButton['_currentValue']).toEqual('second');
     });
 
@@ -107,11 +107,11 @@ describe('SegmentedButtonComponent', () => {
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
         expect(component.segmentedButton['_currentValue']).toEqual(['first']);
 
-        component.secondButton.elementRef().nativeElement.dispatchEvent(new MouseEvent('click'));
+        component.secondButton.elementRef.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
 
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.secondButton.elementRef().nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
         expect(component.segmentedButton['_currentValue']).toEqual(['first', 'second']);
     });
 
@@ -124,10 +124,10 @@ describe('SegmentedButtonComponent', () => {
 
         component.secondButton.disabled = true;
         fixture.detectChanges();
-        component.secondButton.elementRef().nativeElement.dispatchEvent(new MouseEvent('click'));
+        component.secondButton.elementRef.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
 
-        expect(component.secondButton.elementRef().nativeElement.classList.contains(isSelectedClass)).toBe(false);
+        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(false);
         expect(component.segmentedButton['_currentValue']).toEqual('first');
     });
 
@@ -139,18 +139,18 @@ describe('SegmentedButtonComponent', () => {
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
         expect(component.segmentedButton['_currentValue']).toEqual(['first']);
 
-        component.secondButton.elementRef().nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+        component.secondButton.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
         fixture.detectChanges();
 
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.secondButton.elementRef().nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
         expect(component.segmentedButton['_currentValue']).toEqual(['first', 'second']);
 
         component.thirdButton.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
         fixture.detectChanges();
 
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
-        expect(component.secondButton.elementRef().nativeElement.classList.contains(isSelectedClass)).toBe(true);
+        expect(component.secondButton.elementRef.nativeElement.classList.contains(isSelectedClass)).toBe(true);
         expect(component.thirdButton.nativeElement.classList.contains(isSelectedClass)).toBe(true);
         expect(component.segmentedButton['_currentValue']).toEqual(['first', 'second', 'third']);
     });

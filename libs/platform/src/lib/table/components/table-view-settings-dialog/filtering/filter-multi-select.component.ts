@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-
-import { CollectionFilter } from '../../../interfaces/collection-filter.interface';
-import { TableFilterSelectOption } from '../../../interfaces/selection-value.interface';
+import { CollectionFilter, TableFilterSelectOption } from '@fundamental-ngx/platform/table-helpers';
 
 /**
  * Multi Select filter type.

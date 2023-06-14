@@ -34,12 +34,12 @@ describe('TabItemDirective', () => {
         directiveElement.buildComponentCssClass();
         fixture.detectChanges();
 
-        expect((directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item')).toBeTruthy();
+        expect((directiveElement as any).elementRef.nativeElement.classList.contains('fd-tabs__item')).toBeTruthy();
         expect(
-            (directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item--header')
+            (directiveElement as any).elementRef.nativeElement.classList.contains('fd-tabs__item--header')
         ).toBeTruthy();
         expect(
-            (directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item--success')
+            (directiveElement as any).elementRef.nativeElement.classList.contains('fd-tabs__item--success')
         ).toBeTruthy();
     });
 
@@ -49,12 +49,12 @@ describe('TabItemDirective', () => {
         directiveElement.buildComponentCssClass();
         fixture.detectChanges();
 
-        expect((directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item')).toBeTruthy();
+        expect((directiveElement as any).elementRef.nativeElement.classList.contains('fd-tabs__item')).toBeTruthy();
         expect(
-            (directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item--header')
+            (directiveElement as any).elementRef.nativeElement.classList.contains('fd-tabs__item--header')
         ).toBeFalsy();
         expect(
-            (directiveElement as any)._elementRef.nativeElement.classList.contains('fd-tabs__item--success')
+            (directiveElement as any).elementRef.nativeElement.classList.contains('fd-tabs__item--success')
         ).toBeFalsy();
     });
 });

@@ -53,7 +53,7 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
     _subtitle: CardSubtitleDirective;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
+    constructor(public readonly elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -63,7 +63,7 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
     /** @hidden */
     ngAfterContentInit(): void {
         /** Add fd-card__avatar class to fd-avatar */
-        const avatar = this._elementRef.nativeElement.querySelector('fd-avatar');
+        const avatar = this.elementRef.nativeElement.querySelector('fd-avatar');
         if (avatar) {
             this.renderer.addClass(avatar, 'fd-card__avatar');
         }
@@ -78,10 +78,5 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [CLASS_NAME.cardHeader, !this.interactive ? CLASS_NAME.cardHeaderNonInteractive : ''];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }

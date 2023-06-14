@@ -26,13 +26,13 @@ describe('FeedListComponent', () => {
         component.mobile = true;
         component.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-feed-list--s')).toBeTruthy();
+        expect(component.elementRef.nativeElement.classList.contains('fd-feed-list--s')).toBeTruthy();
     });
 
     it('should have border less class', () => {
         component.borderLess = true;
         component.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-feed-list--no-border')).toBeTruthy();
+        expect(component.elementRef.nativeElement.classList.contains('fd-feed-list--no-border')).toBeTruthy();
     });
 });

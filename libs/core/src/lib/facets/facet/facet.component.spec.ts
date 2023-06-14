@@ -69,11 +69,11 @@ describe('FormFacetComponent', () => {
 
     it('should add correct classes to facet by default', async () => {
         fixture.detectChanges();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-facet')).toBeTruthy();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-facet--form')).toBeTruthy();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-margin-end--md')).toBeTruthy();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-margin-bottom--sm')).toBeTruthy();
-        expect(component.facetContentComponent.elementRef().nativeElement.classList.contains('fd-facet__container'));
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-facet')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-facet--form')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-margin-end--md')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-margin-bottom--sm')).toBeTruthy();
+        expect(component.facetContentComponent.elementRef.nativeElement.classList.contains('fd-facet__container'));
     });
 
     it('should add tiny margin for form facet with link', async () => {
@@ -119,15 +119,15 @@ describe('Image Facet Component', () => {
 
     it('should add correct classes to image facet by default', async () => {
         fixture.detectChanges();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-facet')).toBeTruthy();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-facet--image')).toBeTruthy();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-margin-end--md')).toBeTruthy();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-margin-bottom--sm')).toBeFalsy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-facet')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-facet--image')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-margin-end--md')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-margin-bottom--sm')).toBeFalsy();
     });
 
     it('should add order to image facet', async () => {
         fixture.detectChanges();
-        expect(facetComponent.elementRef().nativeElement.style.order).toBe('-1');
+        expect(facetComponent.elementRef.nativeElement.style.order).toBe('-1');
     });
 });
 
@@ -170,11 +170,11 @@ describe('Rating Indicator Facet Component', () => {
 
     it('should add correct classes to rating indicator facet by default', async () => {
         fixture.detectChanges();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-facet')).toBeTruthy();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-facet--rating-indicator')).toBeTruthy();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-margin-end--md')).toBeTruthy();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-margin-bottom--sm')).toBeTruthy();
-        expect(component.facetContentComponent.elementRef().nativeElement.classList.contains('fd-facet__container'));
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-facet')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-facet--rating-indicator')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-margin-end--md')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-margin-bottom--sm')).toBeTruthy();
+        expect(component.facetContentComponent.elementRef.nativeElement.classList.contains('fd-facet__container'));
     });
 
     it('should add correct classes to rating indicator component', async () => {
@@ -241,10 +241,10 @@ describe('Key Value Facet Component', () => {
 
     it('should add correct classes to key value facet by default', async () => {
         fixture.detectChanges();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-facet')).toBeTruthy();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-facet--key-value')).toBeTruthy();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-margin-end--md')).toBeTruthy();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-margin-bottom--sm')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-facet')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-facet--key-value')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-margin-end--md')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-margin-bottom--sm')).toBeTruthy();
     });
 
     it('should add correct classes to key value component', async () => {
@@ -316,7 +316,7 @@ describe('Key Value Facet Alignment Component', () => {
     it('should add correct classes when for key value facet alignEnd is set', async () => {
         facetComponent.alignEnd = true;
         fixture.detectChanges();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-facet-align-end')).toBeTruthy();
-        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-margin-begin--md')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-facet-align-end')).toBeTruthy();
+        expect(facetComponent.elementRef.nativeElement.classList.contains('fd-margin-begin--md')).toBeTruthy();
     });
 });

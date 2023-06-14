@@ -45,7 +45,7 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     class: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -64,10 +64,5 @@ export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [this.isInline ? 'fd-form-group--inline' : ''];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }

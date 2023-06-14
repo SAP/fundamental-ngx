@@ -17,7 +17,7 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { TableModule } from '@fundamental-ngx/core/table';
-import { DisabledBehaviorModule, PipeModule, RepeatModule } from '@fundamental-ngx/cdk/utils';
+import { ClickedBehaviorModule, DisabledBehaviorModule, PipeModule, RepeatModule } from '@fundamental-ngx/cdk/utils';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
@@ -30,76 +30,56 @@ import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { TableHelpersModule } from '@fundamental-ngx/platform/table-helpers';
 
 import { TableComponent } from './table.component';
-import { TableColumnComponent } from './components/table-column/table-column.component';
-import { TableToolbarComponent } from './components/table-toolbar/table-toolbar.component';
-import { TableToolbarActionsComponent } from './components/table-toolbar/table-toolbar-actions.component';
-import { ResetButtonComponent } from './components/reset-button/reset-button.component';
-import { TableViewSettingsDialogComponent } from './components/table-view-settings-dialog/table-view-settings-dialog.component';
-import { TableViewSettingsFilterComponent } from './components/table-view-settings-dialog/table-view-settings-filter.component';
-import { SortingComponent } from './components/table-view-settings-dialog/sorting/sorting.component';
-import { GroupingComponent } from './components/table-view-settings-dialog/grouping/grouping.component';
-import { FiltersComponent } from './components/table-view-settings-dialog/filtering/filters.component';
-import { FiltersListStepComponent } from './components/table-view-settings-dialog/filtering/filters-list-step.component';
-import { FilterStepComponent } from './components/table-view-settings-dialog/filtering/filter-step.component';
-import { FilterSingleSelectComponent } from './components/table-view-settings-dialog/filtering/filter-single-select.component';
-import { FilterMultiSelectComponent } from './components/table-view-settings-dialog/filtering/filter-multi-select.component';
-import { FilterCustomComponent } from './components/table-view-settings-dialog/filtering/filter-custom.component';
-import { TableP13DialogComponent } from './components/table-p13-dialog/table-p13-dialog.component';
-import { TableP13SortComponent } from './components/table-p13-dialog/table-p13-sort.component';
-import { TableP13FilterComponent } from './components/table-p13-dialog/table-p13-filter.component';
-import { TableP13GroupComponent } from './components/table-p13-dialog/table-p13-group.component';
-import { TableP13ColumnsComponent } from './components/table-p13-dialog/table-p13-columns.component';
+import { TableColumnComponent } from './components';
+import { TableToolbarComponent } from './components';
+import { TableToolbarActionsComponent } from './components';
+import { ResetButtonComponent } from './components';
+import { TableViewSettingsDialogComponent } from './components';
+import { TableViewSettingsFilterComponent } from './components';
+import { SortingComponent } from './components';
+import { GroupingComponent } from './components';
+import { FiltersComponent } from './components';
+import { FiltersListStepComponent } from './components';
+import { FilterStepComponent } from './components';
+import { FilterSingleSelectComponent } from './components';
+import { FilterMultiSelectComponent } from './components';
+import { FilterCustomComponent } from './components';
+import { TableP13DialogComponent } from './components';
+import { TableP13SortComponent } from './components';
+import { TableP13FilterComponent } from './components';
+import { TableP13GroupComponent } from './components';
+import { TableP13ColumnsComponent } from './components';
 import {
     P13SortingDialogComponent,
     GetAvailableSortColumnsPipe
 } from './components/table-p13-dialog/sorting/sorting.component';
-import { P13GroupingDialogComponent } from './components/table-p13-dialog/grouping/grouping.component';
-import { P13FilteringDialogComponent } from './components/table-p13-dialog/filtering/filtering.component';
-import { FilterRuleComponent } from './components/table-p13-dialog/filtering/filter-rule.component';
-import { P13ColumnsDialogComponent } from './components/table-p13-dialog/columns/columns.component';
+import { P13GroupingDialogComponent } from './components';
+import { P13FilteringDialogComponent } from './components';
+import { FilterRuleComponent } from './components';
+import { P13ColumnsDialogComponent } from './components';
 
-import {
-    FdpCellDef,
-    FdpTableCell,
-    FdpEditableCellDef,
-    FdpEditableCellFormDirective
-} from './directives/table-cell.directive';
-import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.directive';
-import { FdpViewSettingsFilterCustomDef } from './directives/table-view-settings-filter-custom.directive';
-import { TableScrollableDirective } from './directives/table-scrollable.directive';
-import { FdpCellSelectableDirective } from './directives/table-cell-selectable.directive';
-import { PlatformTableCellResizableDirective } from './directives/table-cell-resizable.directive';
-import { PlatformTableColumnResizerComponent } from './components/table-column-resizer/table-column-resizer.component';
-import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wrapper.component';
+import { PlatformTableColumnResizerComponent } from './components';
+import { NoDataWrapperComponent } from './components';
 import { TableEditableCellComponent } from './components/table-editable-cell/table-editable-cell.component';
-import { TableCellStylesPipe } from './pipes/cell-styles.pipe';
-import { SelectionCellStylesPipe } from './pipes/selection-cell-styles.pipe';
-import { RowClassesPipe } from './pipes/row-classes.pipe';
-import { ColumnResizableSidePipe } from './pipes/column-resizable-side.pipe';
-import { PlatformTableColumnResponsiveDirective } from './directives/platform-table-column-responsive.directive';
 import { TableToolbarLeftActionsComponent } from './components/table-toolbar/table-toolbar-left-actions.component';
 
-import { TableCellContentComponent } from './components/table-cell-content/table-cell-content.component';
-import { TableHeaderCellContentComponent } from './components/table-header-cell-content/table-header-cell-content.component';
-import { TableCellHeaderPopoverDirective } from './directives/table-cell-header-popover.directive';
-import { TableCellHeaderPopoverComponent } from './components/table-cell-header-popover/table-cell-header-popover.component';
+import { TableHeaderCellContentComponent } from './components';
+import { TableCellHeaderPopoverComponent } from './components';
+import { TableRowComponent } from './components/table-row/table-row.component';
+import { TableGroupRowComponent } from './components/table-group-row/table-group-row.component';
+import { TablePoppingRowComponent } from './components/table-popping-row/table-popping-row.component';
+import { TableHeaderRowComponent } from './components/table-header-row/table-header-row.component';
 
 const EXPORTABLE_DECLARATIONS = [
     TableComponent,
     TableColumnComponent,
     TableToolbarComponent,
     TableToolbarActionsComponent,
-    FdpTableCell,
-    FdpCellDef,
-    FdpEditableCellDef,
-    FdpCellSelectableDirective,
-    FdpTableHeader,
-    FdpHeaderCellDef,
     TableViewSettingsDialogComponent,
     TableViewSettingsFilterComponent,
-    FdpViewSettingsFilterCustomDef,
     SortingComponent,
     GroupingComponent,
     FiltersComponent,
@@ -110,10 +90,6 @@ const EXPORTABLE_DECLARATIONS = [
     FilterCustomComponent,
     ResetButtonComponent,
     TableP13DialogComponent,
-    TableCellStylesPipe,
-    SelectionCellStylesPipe,
-    ColumnResizableSidePipe,
-    RowClassesPipe,
     TableP13SortComponent,
     TableP13FilterComponent,
     TableP13GroupComponent,
@@ -123,19 +99,17 @@ const EXPORTABLE_DECLARATIONS = [
     P13FilteringDialogComponent,
     FilterRuleComponent,
     P13ColumnsDialogComponent,
-    TableScrollableDirective,
-    PlatformTableCellResizableDirective,
     PlatformTableColumnResizerComponent,
     NoDataWrapperComponent,
     GetAvailableSortColumnsPipe,
     TableEditableCellComponent,
-    FdpEditableCellFormDirective,
-    PlatformTableColumnResponsiveDirective,
     TableToolbarLeftActionsComponent,
-    TableCellContentComponent,
     TableHeaderCellContentComponent,
-    TableCellHeaderPopoverDirective,
-    TableCellHeaderPopoverComponent
+    TableCellHeaderPopoverComponent,
+    TableRowComponent,
+    TableGroupRowComponent,
+    TablePoppingRowComponent,
+    TableHeaderRowComponent
 ];
 
 @NgModule({
@@ -172,9 +146,11 @@ const EXPORTABLE_DECLARATIONS = [
         SkeletonModule,
         RepeatModule,
         DisabledBehaviorModule,
-        PlatformListModule
+        PlatformListModule,
+        ClickedBehaviorModule.forRoot(),
+        TableHelpersModule
     ],
     declarations: [...EXPORTABLE_DECLARATIONS],
-    exports: [...EXPORTABLE_DECLARATIONS]
+    exports: [...EXPORTABLE_DECLARATIONS, TableHelpersModule]
 })
 export class PlatformTableModule {}

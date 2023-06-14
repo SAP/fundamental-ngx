@@ -102,7 +102,7 @@ describe('ButtonComponent', () => {
     });
 
     it('should keep initial class', async () => {
-        const componentClasses = (buttonInstance.elementRef().nativeElement as HTMLElement).className;
+        const componentClasses = (buttonInstance.elementRef.nativeElement as HTMLElement).className;
         expect(componentClasses).toContain('initial-button-class');
     });
 
@@ -113,20 +113,20 @@ describe('ButtonComponent', () => {
 
         await fixture.whenStable();
 
-        const componentClasses = (buttonInstance.elementRef().nativeElement as HTMLElement).className;
+        const componentClasses = (buttonInstance.elementRef.nativeElement as HTMLElement).className;
 
         expect(componentClasses).toContain('standard');
         expect(componentClasses).toContain(TEST_DIRECTIVE_CLASS);
     });
 
     it('should keep classes added at @ContentChild phase', async () => {
-        const componentClasses = (buttonInstance.elementRef().nativeElement as HTMLElement).className;
+        const componentClasses = (buttonInstance.elementRef.nativeElement as HTMLElement).className;
 
         expect(componentClasses).toContain(TEST_CONTENT_CHILD_PHASE_CLASS_NAME);
     });
 
     it('should keep classes added at @ViewChild phase', async () => {
-        const componentClasses = (buttonInstance.elementRef().nativeElement as HTMLElement).className;
+        const componentClasses = (buttonInstance.elementRef.nativeElement as HTMLElement).className;
 
         expect(componentClasses).toContain(TEST_VIEW_CHILD_PHASE_CLASS_NAME);
     });

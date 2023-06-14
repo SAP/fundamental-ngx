@@ -55,7 +55,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     @ViewChild(DialogBodyComponent)
     set _watch(_dialogBody: DialogBodyComponent) {
         if (_dialogBody) {
-            this._menuService.addKeyboardSupport(_dialogBody.elementRef());
+            this._menuService.addKeyboardSupport(_dialogBody.elementRef);
         }
     }
 

@@ -40,7 +40,7 @@ describe('Table component test suite', () => {
     }
 
     describe('Check Single Row Selection', () => {
-        it('should check table item single selection', async () => {
+        it('should check table item single selection items', async () => {
             await tablePage.findElementInTable(tableSingleRowSelectionExample, tableCellArr);
         });
 

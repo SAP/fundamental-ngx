@@ -72,7 +72,7 @@ describe('NestedListDirectives', () => {
         iconElement.glyph = 'custom-icon';
         iconElement.buildComponentCssClass();
         fixture.detectChanges();
-        const classList = (iconElement as any)._elementRef.nativeElement.classList;
+        const classList = (iconElement as any).elementRef.nativeElement.classList;
         expect(classList).toContain('sap-icon--' + 'custom-icon');
     });
 });

@@ -1,0 +1,116 @@
+<th
+    *ngIf="_fdpTableService._semanticHighlighting$ | async"
+    [class.fd-table__cell--fixed]="fixed"
+    fd-table-cell
+    fd-table-status-indicator
+    fdkDisabled
+    [style.min-width]="_fdpTableService._semanticHighlightingColumnWidth$ | async"
+    [style.max-width]="_fdpTableService._semanticHighlightingColumnWidth$ | async"
+></th>
+
+<th
+    *ngIf="isShownSelectionColumn"
+    fd-table-cell
+    [focusable]="true"
+    [class.fd-table__cell--fixed]="fixed"
+    class="fd-table__cell--checkbox"
+    [style]="
+        _contentDensityObserver
+            | async
+            | selectionCellStyles : _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
+    "
+    (keydown.enter)="_tableRowService.toggleAllSelectableRows(!checkedState)"
+    (keydown.space)="_tableRowService.toggleAllSelectableRows(!checkedState)"
+>
+    <fd-checkbox
+        tabIndexValue="-1"
+        *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
+        labelClass="fd-table__checkbox-label"
+        [tristate]="true"
+        [tristateSelectable]="false"
+        [ngModel]="checkedState"
+        (ngModelChange)="_tableRowService.toggleAllSelectableRows($event)"
+    ></fd-checkbox>
+</th>
+
+<ng-container
+    *ngFor="
+        let column of _fdpTableService.visibleColumns$ | async;
+        let colIdx = index;
+        trackBy: _columnTrackBy;
+        last as isLast
+    "
+>
+    <th
+        [focusable]="true"
+        role="columnheader"
+        [fdpTableCellResizable]="
+            colIdx
+                | columnResizableSide
+                    : _fdpTableService.visibleColumnsLength
+                    : (_fdpTableService._isShownNavigationColumn$ | async)
+        "
+        [columnName]="column.name"
+        [id]="rowId + '__' + column.name"
+        [attr.aria-labelledby]="rowId + '-header-cell-' + column.name"
+        [attr.aria-colindex]="colIdx"
+        [ngClass]="[
+            'fdp-table__col--' + column.name,
+            column._freezed ? 'fd-table__cell--fixed' : '',
+            column.name === freezeColumnsTo ? 'fd-table__cell--fixed-last' : '',
+            column._endFreezed ? 'fd-table__cell--fixed-end' : '',
+            column.name === freezeEndColumnsTo ? 'fd-table__cell--fixed-end-last' : '',
+            isLast && (_fdpTableService._isShownNavigationColumn$ | async) !== true ? 'is-last-child' : '',
+            _isColumnHasHeaderMenu(column) ? 'fd-table__item--clickable' : ''
+        ]"
+        [ngStyle]="
+            column
+                | tableCellStyles
+                    : _rtl
+                    : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
+                    : selectionColumnWidth
+                    : column._freezed
+                    : column._endFreezed
+                    : _tableColumnResizeService.getPrevColumnsWidth(column.name)
+                    : _tableColumnResizeService.getColumnWidthStyle(column.name)
+                    : _tableColumnResizeService.getNextColumnsWidth(column.name)
+        "
+        [fdPopoverTrigger]="tablePopover.popover"
+        [cellFocusedEventAnnouncer]="null"
+        (cellFocused)="_tableRowService.cellFocused($event)"
+        (keydown.arrowLeft)="_tableRowService.scrollToOverlappedCell()"
+        (keydown.arrowRight)="_tableRowService.scrollToOverlappedCell()"
+    >
+        <fdp-table-header-cell-content
+            [id]="rowId"
+            [column]="column"
+            [hasFilter]="(_fdpTableService.filterRules$ | async)?.has(column.key) === true"
+            [hasSorting]="(_fdpTableService.sortRules$ | async)?.has(column.key) === true"
+            [sorting]="(_fdpTableService.sortRules$ | async)?.get(column.key)"
+            [attr.title]="column?.headerOverflows ? column.label : null"
+        >
+            <!-- Header menu -->
+            <fdp-table-cell-header-popover
+                #tablePopover
+                [disabled]="!_isColumnHasHeaderMenu(column)"
+                [column]="column"
+                [popoverTemplate]="column.headerCellPopoverTemplate"
+                [filteringFromHeaderDisabled]="_fdpTableService._isFilteringFromHeaderDisabled$ | async"
+            ></fdp-table-cell-header-popover>
+        </fdp-table-header-cell-content>
+    </th>
+</ng-container>
+
+<th
+    *ngIf="_fdpTableService._isShownNavigationColumn$ | async"
+    fd-table-cell
+    class="fdp-table__cell--navigation is-last-child"
+    role="columnheader"
+></th>
+
+<th
+    aria-hidden="true"
+    class="fd-table__cell fd-table__cell--mock"
+    [class.fd-table__cell--mock-borderless]="(_tableColumnResizeService.cellMockVisible$ | async) !== true"
+    fdkDisabled
+></th>

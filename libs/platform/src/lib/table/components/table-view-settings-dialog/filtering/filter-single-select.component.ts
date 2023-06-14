@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { CollectionFilter, TableFilterSelectOption } from '@fundamental-ngx/platform/table-helpers';
 
-import { CollectionFilter } from '../../../interfaces/collection-filter.interface';
-import { TableFilterSelectOption } from '../../../interfaces/selection-value.interface';
 import { NOT_FILTERED_OPTION_VALUE } from './constants';
 
 /**

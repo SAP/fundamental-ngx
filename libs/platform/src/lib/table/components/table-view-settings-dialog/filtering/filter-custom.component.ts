@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, DoCheck } from '@angular/core';
+import { CollectionFilter } from '@fundamental-ngx/platform/table-helpers';
 
-import { CollectionFilter } from '../../../interfaces/collection-filter.interface';
-import { TableViewSettingsFilterComponent } from '../../table-view-settings-dialog/table-view-settings-filter.component';
+import { TableViewSettingsFilterComponent } from '../table-view-settings-filter.component';
 import {
     ContentDensityMode,
     ContentDensityObserver,

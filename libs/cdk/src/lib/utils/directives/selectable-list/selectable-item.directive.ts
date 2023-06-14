@@ -81,7 +81,7 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
         private disabled$: FdkDisabledProvider,
         private readonly$: FdkReadonlyProvider,
         private selectionService: SelectionService<ElementType, ValueType>,
-        private _elementRef: ElementRef<ElementType>,
+        public readonly elementRef: ElementRef<ElementType>,
         private _cd: ChangeDetectorRef,
         _clicked: FdkClickedProvider
     ) {
@@ -103,7 +103,7 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
             this.provider.setSelected(isSelected);
         } else {
             this._selected = isSelected;
-            const htmlElement = this._elementRef.nativeElement;
+            const htmlElement = this.elementRef.nativeElement;
             const { classList } = htmlElement;
             if (isSelected) {
                 classList.add('is-selected');
@@ -114,11 +114,6 @@ export class SelectableItemDirective<ElementType extends Element = HTMLElement, 
         }
 
         this.selected.emit(isSelected);
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<ElementType> {
-        return this._elementRef;
     }
 
     /** @hidden */

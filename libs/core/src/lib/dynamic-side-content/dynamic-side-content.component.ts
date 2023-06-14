@@ -83,7 +83,10 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
     private _position: DynamicSideContentPosition = 'none';
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(
+        public readonly elementRef: ElementRef<HTMLElement>,
+        private readonly _changeDetectorRef: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -108,11 +111,6 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
             getSizeClassName(this.size),
             getPositionClassName(this.position)
         ].filter((v): v is string => !!v);
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 
     /** @hidden */

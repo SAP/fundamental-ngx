@@ -35,15 +35,13 @@ describe('NotificationIndicatorDirective', () => {
 
     it('should assign class', () => {
         component.directive.buildComponentCssClass();
-        expect(component.directive.elementRef().nativeElement.className).toContain('fd-notification__indicator');
+        expect(component.directive.elementRef.nativeElement.className).toContain('fd-notification__indicator');
     });
 
     it('should assign success class', () => {
         component.type = 'success';
         component.directive.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.directive.elementRef().nativeElement.classList).toContain(
-            'fd-notification__indicator--success'
-        );
+        expect(component.directive.elementRef.nativeElement.classList).toContain('fd-notification__indicator--success');
     });
 });

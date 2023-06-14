@@ -4,10 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
-import { SortDirection } from '../../../enums/sort-direction.enum';
-import { Table } from '../../../table';
+import { SortDirection, Table, TableDialogCommonData } from '@fundamental-ngx/platform/table-helpers';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
-import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 
 export interface SettingsGroupDialogColumn {
     label: string;
@@ -113,7 +111,7 @@ export class GroupingComponent implements Resettable {
 
     /** @hidden */
     private _setInitialGrouping(): void {
-        const initialGrouping = (this._table.initialGroupBy || [])[0];
+        const initialGrouping = (this._table.initialState?.initialGroupBy || [])[0];
         this._initialGrouping = {
             field: initialGrouping?.field ?? NOT_GROUPED_OPTION_VALUE,
             direction: initialGrouping?.direction ?? INITIAL_DIRECTION

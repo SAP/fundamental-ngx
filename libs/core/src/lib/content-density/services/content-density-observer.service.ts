@@ -185,7 +185,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
 
     /** @hidden */
     consume(...consumers: ContentDensityObserverTarget[]): void {
-        this._elements.concat(...consumers.map((c) => c.elementRef()));
+        this._elements.concat(...consumers.map((c) => c.elementRef));
     }
 
     /**
@@ -206,7 +206,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
 
     /** @hidden */
     removeConsumer(consumer: ContentDensityObserverTarget): void {
-        this._elements.splice(this._elements.indexOf(consumer.elementRef()), 1);
+        this._elements.splice(this._elements.indexOf(consumer.elementRef), 1);
     }
 
     /** @hidden */

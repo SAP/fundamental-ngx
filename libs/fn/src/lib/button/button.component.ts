@@ -152,18 +152,11 @@ export class ButtonComponent implements SelectableItemToken<HTMLButtonElement | 
     /** @hidden */
     constructor(
         @Optional() @Inject(SelectComponentRootToken) private selectComponent: SelectComponentRootToken,
-        private _elementRef: ElementRef,
+        public readonly elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         _clicked: FdkClickedProvider
     ) {
         this.clicked = _clicked.asObservable();
-    }
-
-    /** HasElementRef interface implementation
-     * function used by applyCssClass and applyCssStyle decorators
-     */
-    elementRef(): ElementRef<HTMLButtonElement | HTMLAnchorElement> {
-        return this._elementRef;
     }
 
     /** @hidden */

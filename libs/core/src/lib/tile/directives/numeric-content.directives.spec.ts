@@ -73,22 +73,20 @@ describe('NumericContentDirectives', () => {
 
     it('should assign classes', () => {
         component.numericContent.ngOnChanges();
-        expect(component.numericContent.elementRef().nativeElement.className).toContain('fd-numeric-content');
-        expect(component.numericContent.elementRef().nativeElement.className).toContain('fd-numeric-content--l');
-        expect(component.numericContent.elementRef().nativeElement.className).toContain(
-            'fd-numeric-content--small-tile'
-        );
+        expect(component.numericContent.elementRef.nativeElement.className).toContain('fd-numeric-content');
+        expect(component.numericContent.elementRef.nativeElement.className).toContain('fd-numeric-content--l');
+        expect(component.numericContent.elementRef.nativeElement.className).toContain('fd-numeric-content--small-tile');
         component.launchIcon.ngOnChanges();
-        expect(component.launchIcon.elementRef().nativeElement.className).toContain('fd-numeric-content__launch-icon');
-        expect(component.launchIcon.elementRef().nativeElement.className).toContain('sap-icon--add');
+        expect(component.launchIcon.elementRef.nativeElement.className).toContain('fd-numeric-content__launch-icon');
+        expect(component.launchIcon.elementRef.nativeElement.className).toContain('sap-icon--add');
         component.kpi.ngOnChanges();
-        expect(component.kpi.elementRef().nativeElement.className).toContain('fd-numeric-content__kpi');
-        expect(component.kpi.elementRef().nativeElement.className).toContain('fd-numeric-content__kpi--positive');
+        expect(component.kpi.elementRef.nativeElement.className).toContain('fd-numeric-content__kpi');
+        expect(component.kpi.elementRef.nativeElement.className).toContain('fd-numeric-content__kpi--positive');
         component.scaleArrow.ngOnChanges();
-        expect(component.scaleArrow.elementRef().nativeElement.className).toContain('fd-numeric-content__scale-arrow');
-        expect(component.scaleArrow.elementRef().nativeElement.className).toContain('sap-icon--down');
+        expect(component.scaleArrow.elementRef.nativeElement.className).toContain('fd-numeric-content__scale-arrow');
+        expect(component.scaleArrow.elementRef.nativeElement.className).toContain('sap-icon--down');
         component.scale.ngOnChanges();
-        expect(component.scale.elementRef().nativeElement.className).toContain('fd-numeric-content__scale');
-        expect(component.scale.elementRef().nativeElement.className).toContain('fd-numeric-content__scale--negative');
+        expect(component.scale.elementRef.nativeElement.className).toContain('fd-numeric-content__scale');
+        expect(component.scale.elementRef.nativeElement.className).toContain('fd-numeric-content__scale--negative');
     });
 });

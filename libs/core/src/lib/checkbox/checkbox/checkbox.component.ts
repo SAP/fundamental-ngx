@@ -189,10 +189,10 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     ngAfterViewInit(): void {
         this._contentDensityObserver.consume(
             {
-                elementRef: () => this.inputElement
+                elementRef: this.inputElement
             },
             {
-                elementRef: () => this.labelElement
+                elementRef: this.labelElement
             }
         );
     }

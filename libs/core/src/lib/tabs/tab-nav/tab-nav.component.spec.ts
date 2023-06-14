@@ -87,7 +87,7 @@ describe('TabNavDirective', () => {
 
         const focusedSpy = spyOn(link.focused, 'emit').and.callThrough();
 
-        component.elementRef().nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowRight' }));
+        component.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowRight' }));
         link.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
 
         tick(10);

@@ -6,15 +6,17 @@ import {
     PipeTransform,
     ViewEncapsulation
 } from '@angular/core';
+import {
+    CollectionSort,
+    getUniqueListValuesByKey,
+    SortDirection,
+    TableDialogCommonData
+} from '@fundamental-ngx/platform/table-helpers';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
-import { getUniqueListValuesByKey } from '../../../utils';
-import { CollectionSort } from '../../../interfaces/collection-sort.interface';
-import { SortDirection } from '../../../enums/sort-direction.enum';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
-import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 
 export interface SortDialogColumn {
     label: string;

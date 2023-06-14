@@ -36,7 +36,7 @@ class TestDirective implements SelectableItemToken<HTMLElement, string> {
         this.clicked.emit();
     }
 
-    elementRef(): ElementRef<HTMLElement> {
+    get elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
     }
 
@@ -132,7 +132,7 @@ describe('SelectionService', () => {
         component.toggle = true;
         selectionService.setValue('1');
         const items = component.items.toArray();
-        items[0].elementRef().nativeElement.click();
+        items[0].elementRef.nativeElement.click();
         expect(items.every(({ selected }) => !selected)).toBe(true);
     });
 
@@ -142,7 +142,7 @@ describe('SelectionService', () => {
             key: 'Space',
             keyCode: SPACE
         });
-        items[0].elementRef().nativeElement.dispatchEvent(event);
+        items[0].elementRef.nativeElement.dispatchEvent(event);
 
         expect(items[0].selected).toBe(true);
     });
@@ -153,7 +153,7 @@ describe('SelectionService', () => {
             key: 'Enter',
             keyCode: ENTER
         });
-        items[0].elementRef().nativeElement.dispatchEvent(event);
+        items[0].elementRef.nativeElement.dispatchEvent(event);
 
         expect(items[0].selected).toBe(true);
     });

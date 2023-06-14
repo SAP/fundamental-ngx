@@ -11,17 +11,18 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import { TableCellHeaderPopoverDirective } from '../../directives/table-cell-header-popover.directive';
-
-import { ColumnAlignValue } from '../../enums/column-align.enum';
-import { FilterableColumnDataType } from '../../enums/filter-type.enum';
-import { FdpCellDef, FdpEditableCellDef } from '../../directives/table-cell.directive';
-import { FdpHeaderCellDef } from '../../directives/table-header.directive';
-import { FdpColumnResponsiveState } from '../../interfaces/column-responsive-state.interface';
-
-import { TableColumn } from './table-column';
-import { TableService } from '../../table.service';
-import { TableColumnResizeService } from '../../table-column-resize.service';
+import {
+    ColumnAlignValue,
+    FdpCellDef,
+    FdpColumnResponsiveState,
+    FdpEditableCellDef,
+    FdpHeaderCellDef,
+    FilterableColumnDataType,
+    TableCellHeaderPopoverDirective,
+    TableColumn,
+    TableColumnResizeService,
+    TableService
+} from '@fundamental-ngx/platform/table-helpers';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
@@ -116,6 +117,10 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     @Input()
     applyText = true;
 
+    /** Column role attribute. */
+    @Input()
+    role: 'cell' | 'rowheader' | 'gridcell' = 'gridcell';
+
     /** Column cell template */
     columnCellTemplate: Nullable<TemplateRef<any>>;
 
@@ -130,6 +135,12 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
 
     /** Stores information for the header cell if the ellipsis are visible after the column resize */
     headerOverflows = false;
+
+    /** @hidden */
+    _freezed = false;
+
+    /** @hidden */
+    _endFreezed = false;
 
     /** @hidden */
     @ContentChild(FdpCellDef)

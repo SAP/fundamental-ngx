@@ -32,7 +32,7 @@ export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions im
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef,
+        public readonly elementRef: ElementRef,
         private _renderer: Renderer2,
         private _changeDetRef: ChangeDetectorRef
     ) {
@@ -40,13 +40,8 @@ export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions im
     }
 
     /** @hidden */
-    get elementRef(): ElementRef {
-        return this._elementRef;
-    }
-
-    /** @hidden */
     ngAfterContentInit(): void {
-        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageLayoutActionsToolbar, this._elementRef);
-        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar, this._elementRef);
+        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageLayoutActionsToolbar, this.elementRef);
+        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar, this.elementRef);
     }
 }

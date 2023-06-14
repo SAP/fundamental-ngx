@@ -48,38 +48,38 @@ describe('ObjectNumberComponent', () => {
     it('should apply large design', () => {
         fixture.componentInstance.large = true;
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-object-number--large')).toBe(true);
+        expect(component.elementRef.nativeElement.classList.contains('fd-object-number--large')).toBe(true);
     });
 
     it('should add status', () => {
         fixture.componentInstance.status = 'positive';
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-object-number--positive')).toBe(true);
+        expect(component.elementRef.nativeElement.classList.contains('fd-object-number--positive')).toBe(true);
     });
 
     it('should add custom class', () => {
         fixture.componentInstance.class = 'custom-class';
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('custom-class')).toBe(true);
+        expect(component.elementRef.nativeElement.classList.contains('custom-class')).toBe(true);
     });
 
     it('should display units', () => {
         fixture.componentInstance.unit = 'TEST';
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.textContent.includes('TEST')).toBe(true);
+        expect(component.elementRef.nativeElement.textContent.includes('TEST')).toBe(true);
     });
 
     it('should display decimals', () => {
         fixture.componentInstance.decimal = 2;
         fixture.detectChanges();
         expect(
-            component.elementRef().nativeElement.querySelector(numberTextEl).textContent.includes('1,000.37')
+            component.elementRef.nativeElement.querySelector(numberTextEl).textContent.includes('1,000.37')
         ).toBeTruthy();
     });
 
     it('should not display decimals if [decimal] set to 0', () => {
         fixture.componentInstance.decimal = 0;
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.querySelector(numberTextEl).textContent.trim()).toEqual('1,000');
+        expect(component.elementRef.nativeElement.querySelector(numberTextEl).textContent.trim()).toEqual('1,000');
     });
 });

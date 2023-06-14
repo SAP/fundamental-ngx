@@ -45,7 +45,7 @@ export class TableWrapperComponent implements AfterContentInit, OnDestroy {
 
             const tableElementRef = new ElementRef<HTMLTableElement>(tableElement);
             this._contentDensitySettings = {
-                elementRef: () => tableElementRef
+                elementRef: tableElementRef
             };
             this._contentDensityObserver.consume(this._contentDensitySettings);
 

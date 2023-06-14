@@ -91,7 +91,11 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _cdRef: ChangeDetectorRef, private _sanitizer: DomSanitizer) {}
+    constructor(
+        public readonly elementRef: ElementRef,
+        private _cdRef: ChangeDetectorRef,
+        private _sanitizer: DomSanitizer
+    ) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -117,11 +121,6 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
     }
 
     /**

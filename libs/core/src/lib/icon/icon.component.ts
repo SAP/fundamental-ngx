@@ -65,7 +65,7 @@ export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
     _navigationItemIcon = false;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -92,10 +92,5 @@ export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
                 ? `${SAP_ICONS_PREFIX}-${BusinessSuiteInAppSymbol_PREFIX}--${this.glyph}`
                 : ''
         ];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }

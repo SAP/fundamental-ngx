@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
+import { FilterableColumnDataType } from '@fundamental-ngx/platform/table-helpers';
 import { PlatformTableModule } from '../../../table.module';
 import { FilterDialogData, P13FilteringDialogComponent } from './filtering.component';
-import { FilterableColumnDataType } from '../../../enums/filter-type.enum';
 
 describe('PlatformTableP13FilterDialogComponent', () => {
     let component: P13FilteringDialogComponent;

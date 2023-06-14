@@ -180,7 +180,7 @@ describe('TokenizerComponent', () => {
     it('should handle resize - getting smaller', () => {
         fixture.componentInstance.compact = true;
         fixture.detectChanges();
-        jest.spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
+        jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
         jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(2);
         component.previousElementWidth = 2;
         component.onResize();
@@ -198,10 +198,10 @@ describe('TokenizerComponent', () => {
         fixture.componentInstance.compact = true;
         fixture.detectChanges();
         // need to collapse the tokens before running expand
-        jest.spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
+        jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
         jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(2);
         component.onResize();
-        component.elementRef().nativeElement.getBoundingClientRect.mockReturnValue({ width: 3 });
+        component.elementRef.nativeElement.getBoundingClientRect.mockReturnValue({ width: 3 });
         component.previousElementWidth = 1;
         component.onResize();
 
@@ -215,10 +215,10 @@ describe('TokenizerComponent', () => {
         fixture.componentInstance.compact = true;
         fixture.detectChanges();
         // need to collapse the tokens before running expand
-        jest.spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
+        jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
         jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(2);
         component.onResize();
-        component.elementRef().nativeElement.getBoundingClientRect.mockReturnValue({ width: 3 });
+        component.elementRef.nativeElement.getBoundingClientRect.mockReturnValue({ width: 3 });
         component.previousElementWidth = 1;
         component.onResize();
 
@@ -237,7 +237,7 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handle resize', () => {
-        jest.spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
+        jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
 
         component.onResize();
 
@@ -247,7 +247,7 @@ describe('TokenizerComponent', () => {
     it('should get the hidden cozy token count AfterViewChecked', async () => {
         fixture.componentInstance.compact = false;
 
-        jest.spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').mockReturnValue({ left: 1 });
+        jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({ left: 1 });
         component.tokenList.forEach((token) => {
             jest.spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').mockReturnValue({ right: 0 });
         });

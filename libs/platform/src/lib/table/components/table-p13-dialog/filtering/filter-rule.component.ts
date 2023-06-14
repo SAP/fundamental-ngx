@@ -9,11 +9,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { FILTER_STRATEGY, FilterableColumnDataType } from '@fundamental-ngx/platform/table-helpers';
 import { Subscription } from 'rxjs';
 import { skip } from 'rxjs/operators';
-
-import { FilterableColumnDataType } from '../../../enums/filter-type.enum';
-import { FILTER_STRATEGY } from '../../../enums/collection-filter.enum';
 
 import { FilterRule } from './filtering.model';
 

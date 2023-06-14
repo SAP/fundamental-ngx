@@ -14,10 +14,16 @@ import {
 } from '@angular/core';
 import { DestroyedService, Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { PopoverComponent, TriggerConfig } from '@fundamental-ngx/core/popover';
+import {
+    CollectionStringFilter,
+    FILTER_STRING_STRATEGY,
+    FilterableColumnDataType,
+    SortDirection,
+    TableColumn,
+    TableService
+} from '@fundamental-ngx/platform/table-helpers';
 import { BehaviorSubject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { TableColumn } from '../table-column/table-column';
-import { SortDirection } from '../../enums';
 
 @Component({
     selector: 'fdp-table-cell-header-popover',
@@ -47,18 +53,6 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     @Input()
     filteringFromHeaderDisabled: Nullable<boolean> = false;
 
-    /** Applied sorting. */
-    @Output()
-    columnHeaderSortBy = new EventEmitter<{ key: TableColumn['key']; direction: SortDirection }>();
-
-    /** Applied grouping. */
-    @Output()
-    columnHeaderGroupBy = new EventEmitter<TableColumn['key']>();
-
-    /** Applied filtering. */
-    @Output()
-    columnHeaderFilterBy = new EventEmitter<{ key: TableColumn['key']; value: any }>();
-
     /** Column freezing. */
     @Output()
     freezeToColumn = new EventEmitter<{ name: TableColumn['name']; endFreezable: TableColumn['endFreezable'] }>();
@@ -85,6 +79,9 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     private readonly _destroy$ = inject(DestroyedService);
 
     /** @hidden */
+    private readonly _tableService = inject(TableService);
+
+    /** @hidden */
     _headerPopoverTriggers: TriggerConfig[] = [
         {
             trigger: 'click',
@@ -108,8 +105,41 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._popoverItems.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe((items) => {
+        this._popoverItems.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe(() => {
             this._popoverItems$.next(this._popoverItems.map((t) => t.templateRef));
         });
+    }
+
+    /** @hidden */
+    _setColumnHeaderSortBy(field: TableColumn['key'], direction: SortDirection): void {
+        this._tableService.setSort([{ field, direction }]);
+    }
+
+    /** @hidden */
+    _setColumnHeaderGroupBy(field: TableColumn['key']): void {
+        const state = this._tableService.getTableState();
+        if (state.groupBy?.length === 1 && state.groupBy[0].field === field) {
+            // reset grouping, if already grouped by this field
+            this._tableService.setGroups([]);
+        } else {
+            this._tableService.setGroups([{ field, direction: SortDirection.NONE, showAsColumn: true }]);
+        }
+    }
+
+    /** @hidden */
+    _setColumnHeaderFilterBy(field: TableColumn['key'], value: any): void {
+        if (!value) {
+            this._tableService.removeFilters([field]);
+            return;
+        }
+        const collectionFilter: CollectionStringFilter = {
+            field,
+            value,
+            type: FilterableColumnDataType.STRING,
+            strategy: FILTER_STRING_STRATEGY.CONTAINS,
+            exclude: false
+        };
+
+        this._tableService.addFilters([collectionFilter]);
     }
 }

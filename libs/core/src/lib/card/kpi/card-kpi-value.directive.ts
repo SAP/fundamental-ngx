@@ -19,7 +19,7 @@ export class CardKpiValueDirective implements OnInit, CssClassBuilder {
     status: KpiStatus;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>) {}
+    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -33,10 +33,5 @@ export class CardKpiValueDirective implements OnInit, CssClassBuilder {
             CLASS_NAME.cardAnalyticsKpiValue,
             this.status ? `${CLASS_NAME.cardAnalyticsKpiValue}--${this.status}` : ''
         ];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }

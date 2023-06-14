@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+    CollectionGroup,
+    getUniqueListValuesByKey,
+    SortDirection,
+    TableDialogCommonData
+} from '@fundamental-ngx/platform/table-helpers';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
-import { getUniqueListValuesByKey } from '../../../utils';
-import { CollectionGroup } from '../../../interfaces/collection-group.interface';
-import { SortDirection } from '../../../enums/sort-direction.enum';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
-import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 
 export interface GroupDialogColumn {
     label: string;

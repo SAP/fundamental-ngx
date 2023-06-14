@@ -66,7 +66,7 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _contentDensityObserver: ContentDensityObserver) {
+    constructor(public readonly elementRef: ElementRef, private _contentDensityObserver: ContentDensityObserver) {
         this._contentDensityObserver.subscribe();
     }
 
@@ -102,10 +102,5 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
             this.inHomePage && this.size ? `fd-bar--home-page-${this.size}` : '',
             this.class
         ];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }

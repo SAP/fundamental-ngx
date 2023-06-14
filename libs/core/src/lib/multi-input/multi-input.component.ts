@@ -254,7 +254,7 @@ export class MultiInputComponent
             return this.bodyMaxWidth;
         }
 
-        return this._elementRef.nativeElement.getBoundingClientRect().width;
+        return this.elementRef.nativeElement.getBoundingClientRect().width;
     }
 
     /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
@@ -374,7 +374,7 @@ export class MultiInputComponent
     /** @hidden */
     constructor(
         readonly _contentDensityObserver: ContentDensityObserver,
-        private readonly _elementRef: ElementRef<HTMLElement>,
+        public readonly elementRef: ElementRef<HTMLElement>,
         private readonly _changeDetRef: ChangeDetectorRef,
         private readonly _dynamicComponentService: DynamicComponentService,
         private readonly _injector: Injector,
@@ -457,18 +457,13 @@ export class MultiInputComponent
     buildComponentCssClass(): string[] {
         // TODO: this icon flip may be addressed in styles in the future
         if (this.glyph === 'value-help' && this._dir === 'rtl') {
-            const icon = this._elementRef.nativeElement.querySelector('.sap-icon--value-help') as HTMLElement;
+            const icon = this.elementRef.nativeElement.querySelector('.sap-icon--value-help') as HTMLElement;
             if (icon) {
                 icon.style.transform = 'scaleX(-1)';
             }
         }
 
         return ['fd-multi-input', 'fd-multi-input-custom', this.class];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 
     /** @hidden */
@@ -485,9 +480,9 @@ export class MultiInputComponent
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
         if (isDisabled) {
-            this._elementRef.nativeElement.style.pointerEvents = 'none';
+            this.elementRef.nativeElement.style.pointerEvents = 'none';
         } else {
-            this._elementRef.nativeElement.style.pointerEvents = 'auto';
+            this.elementRef.nativeElement.style.pointerEvents = 'auto';
         }
 
         this._changeDetRef.detectChanges();
@@ -873,7 +868,7 @@ export class MultiInputComponent
     /** @hidden */
     @HostListener('focusout', ['$event'])
     private _focusOut(event: FocusEvent): void {
-        if (!this._elementRef.nativeElement.contains(event.relatedTarget as Node)) {
+        if (!this.elementRef.nativeElement.contains(event.relatedTarget as Node)) {
             this.onTouched();
         }
     }

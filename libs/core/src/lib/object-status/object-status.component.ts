@@ -95,7 +95,7 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     _textClass: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -115,11 +115,6 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     @applyCssClass
     buildComponentCssClass(): string[] {
         return buildObjectStatusCssClasses(this);
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }
 

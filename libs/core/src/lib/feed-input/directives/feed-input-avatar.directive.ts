@@ -18,7 +18,7 @@ export class FeedInputAvatarDirective implements OnInit, OnChanges, CssClassBuil
     placeholder: boolean;
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef<HTMLElement>) {}
+    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -34,10 +34,5 @@ export class FeedInputAvatarDirective implements OnInit, OnChanges, CssClassBuil
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-feed-input__thumb', this.placeholder ? `sap-icon` : '', this.class];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
     }
 }

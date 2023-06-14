@@ -1,10 +1,10 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     selector: '[fdListIcon], [fd-list-icon]'
 })
-export class ListIconDirective implements OnChanges, OnInit {
+export class ListIconDirective implements OnChanges, OnInit, CssClassBuilder {
     /** The icon name to display. See the icon page for the list of icons
      * here: https://sap.github.io/fundamental-ngx/icon
      * */
@@ -21,7 +21,7 @@ export class ListIconDirective implements OnChanges, OnInit {
     role = 'presentation';
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -41,10 +41,5 @@ export class ListIconDirective implements OnChanges, OnInit {
     @applyCssClass
     buildComponentCssClass(): string[] {
         return ['fd-list__icon', this.glyph ? 'sap-icon--' + this.glyph : '', this.class];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 }
