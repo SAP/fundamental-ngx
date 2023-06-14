@@ -29,6 +29,7 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v3
+            - run: chmod +x .ci-env/flags.sh
             - name: Using CI env flags
               id: ciEnv
               run: .ci-env/flags.sh
