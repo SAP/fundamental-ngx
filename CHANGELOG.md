@@ -1,3 +1,12 @@
+## [0.40.4](https://github.com/SAP/fundamental-ngx/compare/v0.40.3...v0.40.4) (2023-06-14)
+
+
+### Bug Fixes
+
+* **core:** datetime picker scroll issue ([50b4462](https://github.com/SAP/fundamental-ngx/commit/50b4462dc61b8ddc1583a9cf9c654466703c0528))
+
+
+
 ## [0.40.3](https://github.com/SAP/fundamental-ngx/compare/v0.40.3-rc.1...v0.40.3) (2023-04-29)
 
 
