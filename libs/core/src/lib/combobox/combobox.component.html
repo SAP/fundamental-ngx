@@ -51,8 +51,8 @@
         [isControl]="true"
         [isExpanded]="!mobile && open && displayedValues.length > 0"
         [showFocus]="!clearInputBtnFocused"
-        [glyphAriaLabel]="ariaLabel"
-        [iconTitle]="title"
+        [glyphAriaLabel]="ariaLabel || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
+        [iconTitle]="title || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)"
         (addOnButtonClicked)="onPrimaryButtonClick()"
         (click)="mobile && isOpenChangeHandle(true)"
     >
