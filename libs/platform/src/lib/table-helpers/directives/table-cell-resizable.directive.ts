@@ -2,6 +2,7 @@ import { AfterViewInit, Directive, inject, Input, OnDestroy, OnInit } from '@ang
 
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective, RtlService } from '@fundamental-ngx/cdk/utils';
 import { TableCellDirective } from '@fundamental-ngx/core/table';
+import equal from 'fast-deep-equal';
 import { TableColumnResizeService } from '../services/table-column-resize.service';
 import { fromEvent } from 'rxjs';
 import { distinctUntilChanged, filter, map, takeUntil } from 'rxjs/operators';
@@ -77,7 +78,7 @@ export class PlatformTableCellResizableDirective
                 .pipe(
                     filter(() => this._tableColumnResizeService?.resizeInProgress !== true),
                     map((event) => this._getResizer(event) || { resizerPosition: 0, resizedColumn: this.columnName }),
-                    distinctUntilChanged(),
+                    distinctUntilChanged((prev, curr) => equal(prev, curr)),
                     takeUntil(this._destroy$)
                 )
                 .subscribe((data) => {
