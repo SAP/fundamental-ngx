@@ -1,4 +1,5 @@
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
+import { DOCUMENT } from '@angular/common';
 import { Directive, ElementRef, inject, NgZone, OnInit } from '@angular/core';
 import {
     DestroyedService,
@@ -40,6 +41,9 @@ export class TableHeaderResizerDirective implements OnInit {
     private readonly _zone = inject(NgZone);
 
     /** @hidden */
+    private readonly _document = inject(DOCUMENT);
+
+    /** @hidden */
     private _focusinTimerId: any;
 
     /** @hidden */
@@ -47,7 +51,7 @@ export class TableHeaderResizerDirective implements OnInit {
 
     /** @hidden */
     private get _headerCellFocused(): boolean {
-        return document.activeElement?.tagName.toLowerCase() === 'th';
+        return this._document.activeElement?.tagName.toLowerCase() === 'th';
     }
     /** @hidden */
     ngOnInit(): void {

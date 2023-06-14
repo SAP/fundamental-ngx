@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import { Directive, ElementRef, EventEmitter, HostBinding, inject, Input, NgZone, Output } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
@@ -104,6 +105,8 @@ export class FocusableItemDirective implements HasElementRef {
     private readonly _liveAnnouncer = inject(LiveAnnouncer);
     /** @hidden */
     protected readonly _zone = inject(NgZone);
+    /** @hidden */
+    private readonly _document = inject(DOCUMENT);
 
     /** @hidden */
     constructor() {
@@ -186,7 +189,7 @@ export class FocusableItemDirective implements HasElementRef {
             return;
         }
 
-        const isFocused = document.activeElement === this.elementRef.nativeElement;
+        const isFocused = this._document.activeElement === this.elementRef.nativeElement;
         const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2]) && !event.shiftKey && isFocused;
         const shouldFocusCell =
             ((KeyUtil.isKeyCode(event, F2) && event.shiftKey) || KeyUtil.isKeyCode(event, ESCAPE)) && !isFocused;

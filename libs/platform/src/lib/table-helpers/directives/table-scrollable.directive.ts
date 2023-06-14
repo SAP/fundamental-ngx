@@ -1,11 +1,13 @@
-import { Directive, ElementRef, NgZone, OnDestroy, OnInit, forwardRef } from '@angular/core';
+import { Directive, ElementRef, NgZone, OnDestroy, OnInit, forwardRef, inject } from '@angular/core';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import {
     TABLE_SCROLLABLE,
     TableScrollable,
     TableScrollDispatcherService
 } from '../services/table-scroll-dispatcher.service';
-import { Subject, Observable, Observer, fromEvent } from 'rxjs';
+import { Observable, Observer, fromEvent } from 'rxjs';
 import { filter, share, takeUntil, tap } from 'rxjs/operators';
+import { DOCUMENT } from '@angular/common';
 
 /**
  * Table Scrollable.
@@ -19,12 +21,12 @@ import { filter, share, takeUntil, tap } from 'rxjs/operators';
     selector: '[fdpTableScrollable]',
     exportAs: 'tableScrollable',
     standalone: true,
-    providers: [{ provide: TABLE_SCROLLABLE, useExisting: forwardRef(() => TableScrollableDirective) }]
+    providers: [
+        { provide: TABLE_SCROLLABLE, useExisting: forwardRef(() => TableScrollableDirective) },
+        DestroyedService
+    ]
 })
 export class TableScrollableDirective implements TableScrollable, OnInit, OnDestroy {
-    /** @hidden */
-    private _destroyed = new Subject<void>();
-
     /** @hidden */
     private _skipEvent = false;
 
@@ -33,6 +35,12 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
 
     /** @hidden */
     private _prevScrollLeft = 0;
+
+    /** @hidden */
+    private readonly _destroyed$ = inject(DestroyedService);
+
+    /** @hidden */
+    private readonly _document = inject(DOCUMENT);
 
     /** Scroll events stream */
     private _elementScrollStream: Observable<Event> = new Observable((observer: Observer<Event>) => {
@@ -48,7 +56,7 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
             }
             return true;
         }),
-        takeUntil(this._destroyed),
+        takeUntil(this._destroyed$),
         share()
     );
 
@@ -79,8 +87,6 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
     /** @hidden */
     ngOnDestroy(): void {
         this.scrollDispatcher.deregister(this);
-        this._destroyed.next();
-        this._destroyed.complete();
     }
 
     /** Returns observable that emits when a scroll event is fired on the host element. */
@@ -135,7 +141,7 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
             (freezableColumnsSize || freezableEndColumnSize) &&
             tableScrollableEl.scrollWidth > tableScrollableEl.clientWidth
         ) {
-            const activeEl = document.activeElement;
+            const activeEl = this._document.activeElement;
             if (
                 activeEl &&
                 !(
@@ -151,7 +157,7 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
                     // check to see if another element obstructs the active element
                     const activeElLeft = activeEl.getBoundingClientRect().left;
                     const activeElTop = activeEl.getBoundingClientRect().top;
-                    const topElementFromLeft = document.elementFromPoint(activeElLeft, activeElTop);
+                    const topElementFromLeft = this._document.elementFromPoint(activeElLeft, activeElTop);
                     // if the activeEl is overlapped
                     if (
                         topElementFromLeft &&

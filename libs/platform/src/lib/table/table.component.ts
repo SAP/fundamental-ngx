@@ -172,7 +172,9 @@ let tableUniqueId = 0;
     hostDirectives: [
         {
             directive: TableDataSourceDirective,
-            inputs: ['dataSource']
+            inputs: ['dataSource'],
+            // eslint-disable-next-line @angular-eslint/no-output-on-prefix,@angular-eslint/no-outputs-metadata-property
+            outputs: ['onDataRequested', 'onDataReceived']
         },
         {
             directive: TableInitialStateDirective,
@@ -557,8 +559,6 @@ export class TableComponent<T = any>
     /** @hidden */
     @HostBinding('class.fd-table--group')
     _isGroupTable = false;
-    /** @hidden */
-    _tableRowsInViewport: TableRow<T>[] = [];
     /**
      * @hidden
      * Used to create a row component placeholder and set data in it rather than re-create the row component when data changes.

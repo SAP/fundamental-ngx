@@ -116,11 +116,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     @ViewChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
     private set _focusableViewCellItems(items: QueryList<FocusableItemDirective>) {
         this.setItems(items);
-        this._focusbleCellItems = items;
     }
-
-    /** @hidden */
-    private _focusbleCellItems: QueryList<FocusableItemDirective>;
 
     /** @hidden */
     @ViewChildren(EditableTableCell)

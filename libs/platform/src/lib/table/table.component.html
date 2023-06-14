@@ -69,9 +69,7 @@
                 (dropPredicateCalculating)="_calculatingLoading($event)"
                 (dropCancelled)="_dndTableDirective?.dropCancelled()"
             >
-                <ng-container
-                    *ngFor="let rowIndex of _tableRowsInViewPortPlaceholder; let rowIdx = index; trackBy: _rowTrackBy"
-                >
+                <ng-container *ngFor="let rowIndex of _tableRowsInViewPortPlaceholder; trackBy: _rowTrackBy">
                     <ng-container *ngIf="_tableRowsVisible[rowIndex] as row" [ngSwitch]="row.type">
                         <tr
                             *ngSwitchCase="'group'"

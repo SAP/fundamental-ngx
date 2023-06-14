@@ -3,16 +3,17 @@
     class="fd-table__cell--group fd-table__cell--expand"
     tabindex="0"
     role="gridcell"
+    [focusable]="true"
     [attr.colspan]="tableColumnsLength"
     [attr.aria-expanded]="row.expanded"
     [attr.data-nesting-level]="row.level + 1"
     (fdkClicked)="toggleGroupRow.emit(row)"
 >
-    <ng-container *ngTemplateOutlet="tableCellExpandTemplate; context: { row: row }"></ng-container>
+    <ng-container *ngTemplateOutlet="tableCellExpandTemplate"></ng-container>
 </td>
 
 <!-- Table Cell Expand Template -->
-<ng-template #tableCellExpandTemplate let-row="row">
+<ng-template #tableCellExpandTemplate>
     <div class="fd-table__expand-wrapper">
         <span class="fd-table__expand" [class.fd-table__expand--open]="row.expanded" aria-hidden="true"></span>
 
@@ -27,13 +28,8 @@
             <!-- Group row template when there are nested groups -->
             <ng-container *ngIf="groupRules.size !== 1">
                 <div class="fd-table__text fd-table__text--no-wrap">
-                    <ng-container
-                        *ngTemplateOutlet="
-                        tableHeaderCellContentTemplate;
-                        context: { column: keyToColumnMap.get(row.value?.['field']) }
-                    "
-                    ></ng-container
-                    >: {{ row.value?.['value'] }}
+                    <ng-container *ngTemplateOutlet="tableHeaderCellContentTemplate"></ng-container>:
+                    {{ row.value?.['value'] }}
                 </div>
             </ng-container>
         </ng-container>
@@ -41,21 +37,22 @@
 </ng-template>
 
 <!-- Column Header Cell Content Template  -->
-<ng-template #tableHeaderCellContentTemplate let-column="column">
-    <ng-container *ngIf="column?.headerCellTemplate; else defaultHeaderCellTemplate">
-        <ng-template
-            [ngTemplateOutlet]="column.headerCellTemplate"
-            [ngTemplateOutletContext]="{ $implicit: column }"
-        ></ng-template>
-    </ng-container>
+<ng-template #tableHeaderCellContentTemplate>
+    <ng-container *ngIf="_column">
+        <ng-container *ngIf="_column.headerCellTemplate; else defaultHeaderCellTemplate">
+            <ng-template
+                [ngTemplateOutlet]="_column.headerCellTemplate"
+                [ngTemplateOutletContext]="{ $implicit: _column }"
+            ></ng-template>
+        </ng-container>
 
-    <ng-template #defaultHeaderCellTemplate>
-        <span
-            [id]="rowId + '-header-cell-' + column.name"
-            [attr.title]="column?.headerOverflows ? column.label : null"
-            class="fd-table__cell--truncate-txt"
-        >
-            {{ column?.label }}
-        </span>
-    </ng-template>
+        <ng-template #defaultHeaderCellTemplate>
+            <span
+                [id]="rowId + '-header-cell-' + _column.name"
+                [attr.title]="_column.headerOverflows ? _column.label : null"
+                class="fd-table__cell--truncate-txt"
+                >{{ _column.label }}</span
+            >
+        </ng-template>
+    </ng-container>
 </ng-template>

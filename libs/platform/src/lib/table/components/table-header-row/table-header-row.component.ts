@@ -150,10 +150,4 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
             (column.filterable && !this._fdpTableService._isFilteringFromHeaderDisabled$.value)
         );
     }
-
-    /** @hidden */
-    _toggleAllSelectableRows(event: Event): void {
-        event.stopImmediatePropagation();
-        this._tableRowService.toggleAllSelectableRows(!this.checkedState);
-    }
 }

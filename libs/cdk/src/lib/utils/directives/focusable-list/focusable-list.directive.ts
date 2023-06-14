@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,
     ContentChildren,
@@ -168,6 +169,8 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     private readonly _liveAnnouncer = inject(LiveAnnouncer);
     /** @hidden */
     private readonly _focusableObserver = inject(FocusableObserver);
+    /** @hidden */
+    private readonly _document = inject(DOCUMENT);
 
     /** @hidden */
     @HostBinding('attr.tabindex')
@@ -263,7 +266,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
             return;
         }
 
-        const isFocused = document.activeElement === this._elementRef.nativeElement;
+        const isFocused = this._document.activeElement === this._elementRef.nativeElement;
         const shouldFocusChild = KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER, F2]) && !event.shiftKey && isFocused;
         const shouldFocusList =
             ((KeyUtil.isKeyCode(event, F2) && event.shiftKey) || KeyUtil.isKeyCode(event, ESCAPE)) && !isFocused;

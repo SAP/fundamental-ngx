@@ -21,14 +21,13 @@ import { FormStates } from '../models/form-state';
 import { FormField } from '../models/form-field';
 import { FormFieldControl } from '../models/form-field-control';
 import { FD_FORM_FIELD } from '../tokens/form-field.token';
-import { DestroyedService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 let randomId = 0;
 
 @Directive({
     selector: '[fdkCva]',
-    standalone: true,
-    providers: [DestroyedService]
+    standalone: true
 })
 export class CvaDirective<T = any>
     implements BaseCVA, FormFieldControl, OnInit, DoCheck, AfterViewInit, OnDestroy, ControlValueAccessor
@@ -77,8 +76,6 @@ export class CvaDirective<T = any>
     private _disabled: boolean;
     /** @hidden */
     private _editable = true;
-    /** @hidden */
-    private _destroyed = new Subject<void>();
 
     /** ID for the Element */
     @Input()
@@ -278,8 +275,6 @@ export class CvaDirective<T = any>
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this.stateChanges.complete();
-        this._destroyed.next();
-        this._destroyed.complete();
         this.formField?.unregisterFormFieldControl(this);
     }
 

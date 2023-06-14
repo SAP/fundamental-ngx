@@ -591,7 +591,7 @@ describe('TableComponent internal', () => {
                     expect(tableBodyRows.length).toBe(54);
                 });
 
-                it('should create group row title as pattern "{{columnLabel}} : {{columnUniqueValue}}"', () => {
+                it('should create group row title as pattern "{{columnLabel}}: {{columnUniqueValue}}"', () => {
                     tableComponent.group([
                         { field: 'status', direction: SortDirection.ASC, showAsColumn: true },
                         { field: 'isVerified', direction: SortDirection.ASC, showAsColumn: true }
@@ -600,11 +600,11 @@ describe('TableComponent internal', () => {
                     fixture.detectChanges();
                     calculateTableElementsMetaData();
 
-                    expect(tableRowCells2DArray[0][0].nativeElement.innerText).toContain('Status : invalid');
-                    expect(tableRowCells2DArray[1][0].nativeElement.innerText).toContain('Client Verified : false');
+                    expect(tableRowCells2DArray[0][0].nativeElement.innerText).toContain('Status: invalid');
+                    expect(tableRowCells2DArray[1][0].nativeElement.innerText).toContain('Client Verified: false');
 
-                    expect(tableRowCells2DArray[27][0].nativeElement.innerText).toContain('Status : valid');
-                    expect(tableRowCells2DArray[28][0].nativeElement.innerText).toContain('Client Verified : true');
+                    expect(tableRowCells2DArray[27][0].nativeElement.innerText).toContain('Status: valid');
+                    expect(tableRowCells2DArray[28][0].nativeElement.innerText).toContain('Client Verified: true');
                 });
             });
         });
