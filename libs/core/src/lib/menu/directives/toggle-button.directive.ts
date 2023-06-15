@@ -1,11 +1,8 @@
-import { AfterViewInit, ContentChild, Directive, HostListener, inject } from '@angular/core';
+import { AfterViewInit, Directive, HostListener, inject } from '@angular/core';
 import { CvaControl, CvaDirective, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { takeUntil, tap } from 'rxjs';
-import { ComponentPortal } from '@angular/cdk/portal';
 import { MenuInteractiveComponent } from './menu-interactive.component';
-import { GlyphMenuAddonDirective } from './glyph-menu-addon.directive';
-import { MenuAddonDirective } from './menu-addon.directive';
 import { TOGGLE_MENU_ITEM } from '../menu.tokens';
 
 @Directive({
@@ -27,10 +24,6 @@ import { TOGGLE_MENU_ITEM } from '../menu.tokens';
 })
 export class ToggleButtonDirective implements AfterViewInit {
     /** @hidden */
-    @ContentChild(GlyphMenuAddonDirective)
-    addon: GlyphMenuAddonDirective;
-
-    /** @hidden */
     private _cvaControl: CvaControl<boolean> = inject(CvaControl)!;
 
     /** @hidden */
@@ -51,15 +44,7 @@ export class ToggleButtonDirective implements AfterViewInit {
         this._cvaControl.cvaDirective?.ngControl?.valueChanges
             ?.pipe(
                 tap((value: boolean) => {
-                    let addonGlyph: GlyphMenuAddonDirective = this.addon;
-                    if (!addonGlyph) {
-                        this._interactiveItemComponent.addonPortalOutlet.detach();
-                        const componentPortal = this._interactiveItemComponent.addonPortalOutlet.attachComponentPortal(
-                            new ComponentPortal(MenuAddonDirective)
-                        );
-                        addonGlyph = componentPortal.instance._addonGlyph;
-                    }
-                    addonGlyph.glyph = value ? 'accept' : undefined;
+                    this._interactiveItemComponent.startAddon._addonGlyph.glyph = value ? 'accept' : undefined;
                 }),
                 takeUntil(this._destroy$)
             )

@@ -6,12 +6,34 @@
             <span fd-menu-title>Toggle item</span>
         </button>
     </li>
-    <li fd-menu-item>
-        <a href="#" fd-menu-interactive>
-            <span fd-menu-title>Option 2</span>
-        </a>
+    <li fd-menu-item fdMenuSegmentedButtonHeader [ngModel]="sortOrder">
+        <button fd-menu-interactive>
+            <fd-menu-addon glyph="sort"></fd-menu-addon>
+            <span fd-menu-title>Sort</span>
+        </button>
     </li>
-    <li fd-menu-item>
+    <li fd-menu-item fdMenuSegmentedButtonOption value="asc">
+        <button fd-menu-interactive>
+            <span fd-menu-title>Asc</span>
+        </button>
+    </li>
+    <li fd-menu-item fdMenuSegmentedButtonOption value="desc">
+        <button fd-menu-interactive>
+            <span fd-menu-title>Desc</span>
+        </button>
+    </li>
+    <li fd-menu-item fdMenuSegmentedButtonOption>
+        <button fd-menu-interactive>
+            <span fd-menu-title>Option 3</span>
+        </button>
+    </li>
+    <li fd-menu-item fdMenuSegmentedButtonHeader [ngModel]="sortOrder">
+        <button fd-menu-interactive>
+            <fd-menu-addon glyph="sort"></fd-menu-addon>
+            <span fd-menu-title>Sort</span>
+        </button>
+    </li>
+    <li fd-menu-item fdMenuSegmentedButtonOption>
         <a href="#" fd-menu-interactive>
             <span fd-menu-title>Option 3</span>
         </a>

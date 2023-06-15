@@ -1,6 +1,7 @@
-import { Component, ElementRef, HostBinding, inject, ViewChild } from '@angular/core';
+import { Component, ContentChild, ElementRef, HostBinding, inject, ViewChild } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { CdkPortalOutlet, PortalModule } from '@angular/cdk/portal';
+import { CdkPortalOutlet, ComponentPortal, PortalModule } from '@angular/cdk/portal';
+import { MenuAddonDirective } from './menu-addon.directive';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -19,6 +20,16 @@ export class MenuInteractiveComponent {
     /** @hidden */
     @ViewChild(CdkPortalOutlet)
     addonPortalOutlet: CdkPortalOutlet;
+
+    /** @hidden */
+    @ContentChild(MenuAddonDirective)
+    private set addon(addon: MenuAddonDirective) {
+        if (
+            addon?.elementRef.nativeElement === this.elementRef.nativeElement.querySelector('fd-menu-addon:first-child')
+        ) {
+            this._addon = addon;
+        }
+    }
 
     /** @hidden */
     @HostBinding('attr.tabindex')
@@ -50,6 +61,20 @@ export class MenuInteractiveComponent {
 
     /** @hidden */
     public elementRef: ElementRef = inject(ElementRef);
+
+    /** @hidden */
+    private _addon: MenuAddonDirective;
+
+    /** @hidden */
+    get startAddon(): MenuAddonDirective {
+        if (!this._addon) {
+            this.addonPortalOutlet.detach();
+            this._addon = this.addonPortalOutlet.attachComponentPortal(
+                new ComponentPortal(MenuAddonDirective)
+            ).instance;
+        }
+        return this._addon;
+    }
 
     /** @hidden */
     setSelected(isSelected: boolean): void {

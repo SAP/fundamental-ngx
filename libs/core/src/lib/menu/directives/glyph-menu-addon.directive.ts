@@ -1,6 +1,6 @@
-import { Directive, inject, Input, OnDestroy } from '@angular/core';
-import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal';
-import { combineLatest, of, shareReplay, Subject, tap } from 'rxjs';
+import { ComponentRef, Directive, EmbeddedViewRef, inject, Input, OnDestroy } from '@angular/core';
+import { CdkPortalOutlet, ComponentPortal, DomPortal, Portal, TemplatePortal } from '@angular/cdk/portal';
+import { combineLatest, first, map, Observable, of, shareReplay, Subject, tap } from 'rxjs';
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
@@ -42,6 +42,23 @@ export class GlyphMenuAddonDirective implements OnDestroy {
     /** @hidden */
     setGlyphPortalOutlet(outlet: CdkPortalOutlet): void {
         this._addonGlyphPortalOutlet$.next(outlet);
+    }
+
+    /** @hidden */
+    renderElement<ComponentType>(element: ComponentPortal<ComponentType>): Observable<ComponentRef<ComponentType>>;
+    /** @hidden */
+    renderElement<TemplateContext>(
+        element: TemplatePortal<TemplateContext>
+    ): Observable<EmbeddedViewRef<TemplateContext>>;
+    /** @hidden */
+    renderElement(element: DomPortal): Observable<any>;
+    /** @hidden */
+    renderElement(element: Portal<any>): Observable<any> {
+        return this._addonGlyphPortalOutlet$.pipe(
+            first(),
+            tap((outlet) => outlet.detach()),
+            map((outlet) => outlet.attach(element))
+        );
     }
 
     /** @hidden */

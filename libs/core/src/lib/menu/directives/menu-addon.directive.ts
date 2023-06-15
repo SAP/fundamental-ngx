@@ -1,14 +1,11 @@
-import { Component, HostBinding, inject, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, inject, Input, ViewChild } from '@angular/core';
 import { CdkPortalOutlet, PortalModule } from '@angular/cdk/portal';
 import { GlyphMenuAddonDirective } from './glyph-menu-addon.directive';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-menu-addon',
-    template: `
-        <ng-template cdkPortalOutlet></ng-template>
-        <ng-content></ng-content>
-    `,
+    template: ` <ng-template cdkPortalOutlet></ng-template> `,
     standalone: true,
     hostDirectives: [{ directive: GlyphMenuAddonDirective, inputs: ['glyph'] }],
     imports: [PortalModule]
@@ -48,4 +45,7 @@ export class MenuAddonDirective {
 
     /** @hidden */
     readonly _addonGlyph = inject(GlyphMenuAddonDirective);
+
+    /** @hidden */
+    readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 }

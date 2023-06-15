@@ -15,6 +15,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { GlyphMenuAddonDirective } from './directives/glyph-menu-addon.directive';
 import { PortalModule } from '@angular/cdk/portal';
 import { ToggleButtonDirective } from './directives/toggle-button.directive';
+import { SegmentedButtonHeaderDirective } from './directives/segmented-button/segmented-button-header.directive';
+import { SegmentedButtonOptionDirective } from './directives/segmented-button/segmented-button-option.directive';
 
 @NgModule({
     imports: [
@@ -33,7 +35,9 @@ import { ToggleButtonDirective } from './directives/toggle-button.directive';
         MenuTitleDirective,
         SubmenuComponent,
         MenuTriggerDirective,
-        ToggleButtonDirective
+        ToggleButtonDirective,
+        SegmentedButtonHeaderDirective,
+        SegmentedButtonOptionDirective
     ],
     exports: [
         MenuComponent,
@@ -47,7 +51,9 @@ import { ToggleButtonDirective } from './directives/toggle-button.directive';
         MenuTriggerDirective,
         ContentDensityModule,
         GlyphMenuAddonDirective,
-        ToggleButtonDirective
+        ToggleButtonDirective,
+        SegmentedButtonHeaderDirective,
+        SegmentedButtonOptionDirective
     ],
     providers: [DynamicComponentService]
 })

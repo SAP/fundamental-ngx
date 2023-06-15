@@ -11,6 +11,7 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
 })
 export class MenuExampleComponent {
     menuItemValue: boolean;
+    sortOrder: 'asc' | 'desc' = 'asc';
 
     valueChanged(value: boolean): void {
         this.menuItemValue = value;
