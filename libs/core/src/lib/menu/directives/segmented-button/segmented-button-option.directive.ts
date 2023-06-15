@@ -1,13 +1,15 @@
-import { Directive, ElementRef, HostListener, inject, Input, Renderer2 } from '@angular/core';
-import { MenuItemComponent } from '../../menu-item/menu-item.component';
+import { AfterViewInit, Directive, ElementRef, HostListener, inject, Input, NgZone, Renderer2 } from '@angular/core';
 import { DomPortal } from '@angular/cdk/portal';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, combineLatest, tap, delayWhen, takeUntil } from 'rxjs';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
+import { MenuItemComponent } from '../../menu-item/menu-item.component';
 
 @Directive({
     selector: 'li[fd-menu-item][fdMenuSegmentedButtonOption]',
-    standalone: true
+    standalone: true,
+    providers: [DestroyedService]
 })
-export class SegmentedButtonOptionDirective<T> {
+export class SegmentedButtonOptionDirective<T> implements AfterViewInit {
     /** @hidden */
     @Input() value: T;
 
@@ -26,14 +28,60 @@ export class SegmentedButtonOptionDirective<T> {
     readonly renderer2 = inject(Renderer2);
 
     /** @hidden */
-    private readonly _dotElement: HTMLSpanElement;
+    private _dotElement: HTMLSpanElement;
+
+    /** @hidden */
+    private _viewInit$ = new Subject<void>();
+
+    /** @hidden */
+    private _selected$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
     constructor() {
+        const ngZone = inject(NgZone);
+        const destroyed$ = inject(DestroyedService);
+        combineLatest([this._viewInit$.pipe(delayWhen(() => ngZone.onStable.asObservable())), this._selected$])
+            .pipe(
+                tap(() => {
+                    if (!this._dotElement) {
+                        this.createDot();
+                    }
+                }),
+                tap(([_, selected]) => {
+                    selected ? this.showDot() : this.hideDot();
+                }),
+                takeUntil(destroyed$)
+            )
+            .subscribe();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._viewInit$.next();
+    }
+
+    /** @hidden */
+    private createDot(): void {
         this._dotElement = this.renderer2.createElement('span');
+        this.renderer2.appendChild(this.elementRef.nativeElement, this._dotElement);
         this.renderer2.addClass(this._dotElement, 'fd-menu__active-dot');
         this.renderer2.setAttribute(this._dotElement, 'role', 'presentation');
-        this.renderer2.appendChild(this.elementRef.nativeElement, this._dotElement);
+        this.hideDot();
+        const addonDirective = this.menuItem.menuInteractive.startAddon;
+        const addonGlyph = addonDirective._addonGlyph;
+        addonGlyph.renderElement(new DomPortal(this._dotElement)).subscribe();
+    }
+
+    /** @hidden */
+    private showDot(): void {
+        this.renderer2.setAttribute(this._dotElement, 'aria-hidden', 'false');
+        this.renderer2.setStyle(this._dotElement, 'display', 'inline-block');
+    }
+
+    /** @hidden */
+    private hideDot(): void {
+        this.renderer2.setAttribute(this._dotElement, 'aria-hidden', 'true');
+        this.renderer2.setStyle(this._dotElement, 'display', 'none');
     }
 
     /** @hidden */
@@ -47,13 +95,6 @@ export class SegmentedButtonOptionDirective<T> {
 
     /** @hidden */
     set selected(isSelected: boolean) {
-        const addonDirective = this.menuItem.menuInteractive.startAddon;
-        console.log(addonDirective.elementRef);
-        const addonGlyph = addonDirective._addonGlyph;
-        this._dotElement.style.display = isSelected ? 'block' : 'none';
-        isSelected
-            ? this._dotElement.removeAttribute('aria-hidden')
-            : this._dotElement.setAttribute('aria-hidden', 'true');
-        addonGlyph.renderElement(new DomPortal(this._dotElement)).subscribe();
+        this._selected$.next(isSelected);
     }
 }
