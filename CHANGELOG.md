@@ -1,3 +1,12 @@
+# [0.42.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.22...v0.42.0-rc.23) (2023-06-15)
+
+
+### Bug Fixes
+
+* **cdk:** if row is not focusable, focus first cell ([#10032](https://github.com/SAP/fundamental-ngx/issues/10032)) ([58c9687](https://github.com/SAP/fundamental-ngx/commit/58c96879ee86480b6c82db4a9810f8e9b4b98bab))
+
+
+
 # [0.42.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.21...v0.42.0-rc.22) (2023-06-14)
 
 
