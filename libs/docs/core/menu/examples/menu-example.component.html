@@ -2,38 +2,16 @@
 
 <fd-menu #menu>
     <li fd-menu-item>
-        <button fd-menu-interactive toggle [ngModel]="menuItemValue" (ngModelChange)="valueChanged($event)">
-            <span fd-menu-title>Toggle item</span>
-        </button>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Option 1</span>
+        </a>
     </li>
-    <li fd-menu-item fdMenuSegmentedButtonHeader [ngModel]="sortOrder">
-        <button fd-menu-interactive>
-            <fd-menu-addon glyph="sort"></fd-menu-addon>
-            <span fd-menu-title>Sort</span>
-        </button>
+    <li fd-menu-item>
+        <a href="#" fd-menu-interactive>
+            <span fd-menu-title>Option 2</span>
+        </a>
     </li>
-    <li fd-menu-item fdMenuSegmentedButtonOption value="asc">
-        <button fd-menu-interactive>
-            <span fd-menu-title>Asc</span>
-        </button>
-    </li>
-    <li fd-menu-item fdMenuSegmentedButtonOption value="desc">
-        <button fd-menu-interactive>
-            <span fd-menu-title>Desc</span>
-        </button>
-    </li>
-    <li fd-menu-item fdMenuSegmentedButtonOption>
-        <button fd-menu-interactive>
-            <span fd-menu-title>Option 3</span>
-        </button>
-    </li>
-    <li fd-menu-item fdMenuSegmentedButtonHeader [ngModel]="sortOrder">
-        <button fd-menu-interactive>
-            <fd-menu-addon glyph="sort"></fd-menu-addon>
-            <span fd-menu-title>Sort</span>
-        </button>
-    </li>
-    <li fd-menu-item fdMenuSegmentedButtonOption>
+    <li fd-menu-item>
         <a href="#" fd-menu-interactive>
             <span fd-menu-title>Option 3</span>
         </a>

@@ -9,14 +9,7 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
     standalone: true,
     imports: [ButtonModule, MenuModule]
 })
-export class MenuExampleComponent {
-    menuItemValue: boolean;
-    sortOrder: 'asc' | 'desc' = 'asc';
-
-    valueChanged(value: boolean): void {
-        this.menuItemValue = value;
-    }
-}
+export class MenuExampleComponent {}
 
 @Component({
     selector: 'fd-menu-addon-example',
