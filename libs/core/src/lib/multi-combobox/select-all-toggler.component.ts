@@ -19,7 +19,6 @@ import { ListFocusItem } from '@fundamental-ngx/core/list';
         <fd-checkbox
             [label]="'coreMultiComboBox.selectAllLabel' | fdTranslate"
             [ngModel]="checkboxValue"
-            (ngModelChange)="change($event)"
             [tristate]="true"
         ></fd-checkbox>
     `,
@@ -92,6 +91,7 @@ export class SelectAllTogglerComponent extends ListFocusItem implements OnInit {
     private changeDetector: ChangeDetectorRef = inject(ChangeDetectorRef);
 
     /** @hidden */
+    @HostListener('click', ['$event'])
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
