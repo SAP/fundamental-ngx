@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    HostListener,
     inject,
     Input,
     OnInit,
@@ -9,6 +10,7 @@ import {
 } from '@angular/core';
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { Observable, takeUntil } from 'rxjs';
+import { ListFocusItem } from '@fundamental-ngx/core/list';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -33,11 +35,17 @@ import { Observable, takeUntil } from 'rxjs';
     host: {
         '[class.fd-list__item]': 'true'
     },
-    providers: [DestroyedService],
+    providers: [
+        {
+            provide: ListFocusItem,
+            useExisting: SelectAllTogglerComponent
+        },
+        DestroyedService
+    ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectAllTogglerComponent implements OnInit {
+export class SelectAllTogglerComponent extends ListFocusItem implements OnInit {
     /**
      * Handler for the select all items
      * */
@@ -79,8 +87,18 @@ export class SelectAllTogglerComponent implements OnInit {
 
     /** @hidden */
     private destroy$ = inject(DestroyedService);
+
     /** @hidden */
     private changeDetector: ChangeDetectorRef = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    @HostListener('keydown.enter', ['$event'])
+    @HostListener('keydown.space', ['$event'])
+    onKeyDown(event: KeyboardEvent): void {
+        event.preventDefault();
+        event.stopPropagation();
+        this.change(!this.checkboxValue);
+    }
 
     /** @hidden */
     ngOnInit(): void {
