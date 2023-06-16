@@ -1,3 +1,12 @@
+# [0.42.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.23...v0.42.0-rc.24) (2023-06-16)
+
+
+### Bug Fixes
+
+* **core:** localize combobox addon button ([#10033](https://github.com/SAP/fundamental-ngx/issues/10033)) ([53846da](https://github.com/SAP/fundamental-ngx/commit/53846da173901b035aac0ca1f6701f54ebe5c5c7))
+
+
+
 # [0.42.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.22...v0.42.0-rc.23) (2023-06-15)
 
 
