@@ -27,6 +27,11 @@ export class GlyphMenuAddonDirective implements OnDestroy {
      * */
     isInToggleButton = !!inject(TOGGLE_MENU_ITEM, { optional: true });
 
+    /** IconComponent loader */
+    private iconComponent$ = fromPromise(
+        import('@fundamental-ngx/core/icon').then(({ IconComponent }) => IconComponent)
+    ).pipe(shareReplay(1));
+
     /** @hidden */
     private menuComponent = inject<MenuComponent>(FD_MENU_COMPONENT, { optional: true });
 
@@ -63,9 +68,6 @@ export class GlyphMenuAddonDirective implements OnDestroy {
 
     /** @hidden */
     constructor() {
-        const iconComponent$ = fromPromise(
-            import('@fundamental-ngx/core/icon').then(({ IconComponent }) => IconComponent)
-        ).pipe(shareReplay(1));
         combineLatest([this._addonGlyphPortalOutlet$, this._glyphName$])
             .pipe(
                 tap(([, glyphName]) => {
@@ -76,7 +78,7 @@ export class GlyphMenuAddonDirective implements OnDestroy {
                         outlet.detach();
                         return of(null);
                     }
-                    return iconComponent$.pipe(
+                    return this.iconComponent$.pipe(
                         tap((IconComponent) => {
                             const componentRef = outlet.attachComponentPortal(new ComponentPortal(IconComponent));
                             componentRef.instance.glyph = glyphName;
