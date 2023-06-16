@@ -8,6 +8,7 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
+    HostBinding,
     Inject,
     InjectionToken,
     Input,
@@ -29,8 +30,8 @@ import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuInteractiveComponent } from '../menu-interactive.component';
 import { MenuService } from '../services/menu.service';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { coerceBoolean, Nullable } from '@fundamental-ngx/cdk/utils';
+import { BooleanInput } from '@angular/cdk/coercion';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { FD_MENU_ITEM_COMPONENT } from '../menu.tokens';
 
@@ -60,8 +61,7 @@ export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component depend
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.role]': '"menuitem"',
-        '[class.fd-menu__item]': 'true',
-        '[class.has-separator]': '_hasSeparator'
+        '[class.fd-menu__item]': 'true'
     },
     standalone: true,
     imports: [NgIf, NgTemplateOutlet],
@@ -91,9 +91,9 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
 
     /** Whether the menu item has a separator */
     @Input()
-    set hasSeparator(value: BooleanInput) {
-        this._hasSeparator = coerceBooleanProperty(value);
-    }
+    @HostBinding('class.has-separator')
+    @coerceBoolean
+    hasSeparator: BooleanInput;
 
     /** Emitted when the menu item is selected. */
     @Output()
@@ -116,9 +116,6 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
 
     /** @hidden */
     private _hoverSubscriptions: Subscription = new Subscription();
-
-    /** @hidden */
-    protected _hasSeparator = false;
 
     /** @hidden */
     constructor(

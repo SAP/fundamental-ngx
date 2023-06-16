@@ -35,9 +35,7 @@ export class ToggleButtonDirective implements AfterViewInit {
     /**
      * Listen on interaction events that should cause the value update
      * */
-    @HostListener('click')
-    @HostListener('keydown.space')
-    @HostListener('keydown.enter')
+    @HostListener('click', ['$event'])
     onClick(): void {
         this._cvaControl.cvaDirective?.setValue(!this._cvaControl.cvaDirective!.value);
     }
