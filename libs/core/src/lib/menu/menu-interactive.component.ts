@@ -1,7 +1,7 @@
 import { Component, ContentChild, ElementRef, HostBinding, inject, ViewChild } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CdkPortalOutlet, ComponentPortal, PortalModule } from '@angular/cdk/portal';
-import { MenuAddonDirective } from './menu-addon.directive';
+import { MenuAddonDirective } from './directives/menu-addon.directive';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector

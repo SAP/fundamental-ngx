@@ -2,7 +2,7 @@ import { AfterViewInit, Directive, HostListener, inject } from '@angular/core';
 import { CvaControl, CvaDirective, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { takeUntil, tap } from 'rxjs';
-import { MenuInteractiveComponent } from './menu-interactive.component';
+import { MenuInteractiveComponent } from '../menu-interactive.component';
 import { TOGGLE_MENU_ITEM } from '../menu.tokens';
 
 @Directive({
@@ -32,10 +32,14 @@ export class ToggleButtonDirective implements AfterViewInit {
     /** @hidden */
     private _interactiveItemComponent = inject(MenuInteractiveComponent, { host: true });
 
-    /** @hidden */
+    /**
+     * Listen on interaction events that should cause the value update
+     * */
     @HostListener('click')
+    @HostListener('keydown.space')
+    @HostListener('keydown.enter')
     onClick(): void {
-        this._cvaControl.cvaDirective!.setValue(!this._cvaControl.cvaDirective!.value);
+        this._cvaControl.cvaDirective?.setValue(!this._cvaControl.cvaDirective!.value);
     }
 
     /** @hidden */

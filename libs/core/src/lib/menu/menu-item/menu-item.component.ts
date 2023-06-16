@@ -26,7 +26,7 @@ import { filter, switchMap, takeUntil } from 'rxjs/operators';
 
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
-import { MenuInteractiveComponent } from '../directives/menu-interactive.component';
+import { MenuInteractiveComponent } from '../menu-interactive.component';
 import { MenuService } from '../services/menu.service';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
