@@ -37,6 +37,15 @@
             width: 90vw;
             max-width: 90vw;
         }
+
+        fd-message-strip-alert-container {
+            width: 100%;
+
+            > .fd-scrollbar > * {
+                width: fit-content;
+                margin: 0 auto;
+            }
+        }
     }
 
     &--end {
