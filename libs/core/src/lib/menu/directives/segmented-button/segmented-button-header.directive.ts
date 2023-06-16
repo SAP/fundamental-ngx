@@ -5,6 +5,7 @@ import { BehaviorSubject, combineLatest, map, merge, of, switchMap, tap } from '
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { MenuItemComponent } from '../../menu-item/menu-item.component';
 import { takeUntil } from 'rxjs/operators';
+import { FD_MENU_ITEM_COMPONENT } from '../../menu.tokens';
 
 const strictEquals = (a: unknown, b: unknown): boolean => a === b;
 
@@ -32,7 +33,7 @@ export class SegmentedButtonHeaderDirective<T> implements AfterViewInit {
     /** @hidden */
     readonly elementRef = inject(ElementRef);
     /** @hidden */
-    readonly menuItem = inject(MenuItemComponent, { host: true });
+    readonly menuItem = inject<MenuItemComponent>(FD_MENU_ITEM_COMPONENT, { host: true });
 
     /** @hidden */
     private _cvaControl: CvaControl<T> = inject(CvaControl)!;

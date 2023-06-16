@@ -3,6 +3,7 @@ import { DomPortal } from '@angular/cdk/portal';
 import { BehaviorSubject, Observable, Subject, combineLatest, tap, delayWhen, takeUntil } from 'rxjs';
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { MenuItemComponent } from '../../menu-item/menu-item.component';
+import { FD_MENU_ITEM_COMPONENT } from '../../menu.tokens';
 
 @Directive({
     selector: 'li[fd-menu-item][fdMenuSegmentedButtonOption]',
@@ -19,7 +20,7 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit {
     readonly elementRef = inject(ElementRef);
 
     /** @hidden */
-    readonly menuItem = inject(MenuItemComponent, { host: true });
+    readonly menuItem = inject<MenuItemComponent>(FD_MENU_ITEM_COMPONENT, { host: true });
 
     /** @hidden */
     readonly clicked: Observable<void> = this._clicked.asObservable();

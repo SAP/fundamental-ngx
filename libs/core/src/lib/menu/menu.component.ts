@@ -8,6 +8,7 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
+    forwardRef,
     Injector,
     Input,
     OnDestroy,
@@ -37,6 +38,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SegmentedButtonHeaderDirective } from './directives/segmented-button/segmented-button-header.directive';
 import { SegmentedButtonOptionDirective } from './directives/segmented-button/segmented-button-option.directive';
+import { FD_MENU_COMPONENT, FD_MENU_ITEM_COMPONENT } from './menu.tokens';
 
 let menuUniqueId = 0;
 
@@ -49,7 +51,15 @@ let menuUniqueId = 0;
     styleUrls: ['menu.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [MenuService, PopoverService, contentDensityObserverProviders()],
+    providers: [
+        MenuService,
+        PopoverService,
+        {
+            provide: FD_MENU_COMPONENT,
+            useExisting: forwardRef(() => MenuComponent)
+        },
+        contentDensityObserverProviders()
+    ],
     standalone: true
 })
 export class MenuComponent
@@ -115,7 +125,7 @@ export class MenuComponent
     _menuRootTemplate: TemplateRef<any>;
 
     /** @hidden Reference to all menu Items */
-    @ContentChildren(MenuItemComponent)
+    @ContentChildren(FD_MENU_ITEM_COMPONENT)
     _menuItems: QueryList<MenuItemComponent>;
 
     /** @hidden Menu item segmented item headers */

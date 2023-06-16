@@ -9,6 +9,7 @@ import { MenuComponent } from '../menu.component';
 import { MenuModule } from '../menu.module';
 import { MenuMobileComponent } from './menu-mobile.component';
 import { MenuMobileModule } from './menu-mobile.module';
+import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 
 const MOBILE_CONFIG: MobileModeConfig = { title: 'Test menu title' };
 
@@ -51,7 +52,13 @@ describe('MenuMobileComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [MenuModule, MenuMobileModule, NoopAnimationsModule, TesNestedMenuItemComponent],
-            providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
+            providers: [
+                {
+                    provide: MOBILE_CONFIG_TEST_TOKEN,
+                    useValue: MOBILE_CONFIG
+                },
+                { provide: FD_DIALOG_FOCUS_TRAP_ERROR, useValue: true }
+            ]
         }).compileComponents();
     }));
 
@@ -79,7 +86,7 @@ describe('MenuMobileComponent', () => {
 
         await whenStable(fixture);
 
-        const openDialogSpy = spyOn<any>(menuMobile, '_openDialog').and.callThrough();
+        const openDialogSpy = jest.spyOn(<any>menuMobile, '_openDialog');
 
         menu.open();
 

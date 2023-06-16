@@ -5,7 +5,7 @@ import { combineLatest, first, map, Observable, of, shareReplay, Subject, tap } 
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { MenuComponent } from '../menu.component';
-import { TOGGLE_MENU_ITEM } from '../menu.tokens';
+import { FD_MENU_COMPONENT, TOGGLE_MENU_ITEM } from '../menu.tokens';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -28,7 +28,7 @@ export class GlyphMenuAddonDirective implements OnDestroy {
     isInToggleButton = !!inject(TOGGLE_MENU_ITEM, { optional: true });
 
     /** @hidden */
-    private menuComponent = inject(MenuComponent, { optional: true });
+    private menuComponent = inject<MenuComponent>(FD_MENU_COMPONENT, { optional: true });
 
     /** @hidden */
     private _addonGlyphPortalOutlet$ = new Subject<CdkPortalOutlet>();

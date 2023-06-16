@@ -7,6 +7,7 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
+    forwardRef,
     Inject,
     InjectionToken,
     Input,
@@ -31,6 +32,7 @@ import { MenuService } from '../services/menu.service';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { FD_MENU_ITEM_COMPONENT } from '../menu.tokens';
 
 let menuUniqueId = 0;
 
@@ -62,7 +64,13 @@ export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component depend
         '[class.has-separator]': '_hasSeparator'
     },
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet]
+    imports: [NgIf, NgTemplateOutlet],
+    providers: [
+        {
+            provide: FD_MENU_ITEM_COMPONENT,
+            useExisting: forwardRef(() => MenuItemComponent)
+        }
+    ]
 })
 export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, AfterContentInit, OnDestroy {
     /** Set the Menu Item as disabled/enabled */
@@ -80,6 +88,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     /** Reference to the parent submenu if nested menus created dynamically */
     @Input()
     parentSubmenu: BaseSubmenu | undefined;
+
     /** Whether the menu item has a separator */
     @Input()
     set hasSeparator(value: BooleanInput) {
@@ -96,7 +105,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     menuItemTitle: MenuTitleDirective;
 
     /** @hidden Reference to the Menu Item interactive element */
-    @ContentChild(MenuInteractiveComponent)
+    @ContentChild(forwardRef(() => MenuInteractiveComponent))
     menuInteractive: MenuInteractiveComponent;
 
     /** @hidden Whether sub-menu is currently visible*/
@@ -296,7 +305,7 @@ export class SubmenuComponent implements BaseSubmenu, AfterContentInit {
     @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
 
     /** @hidden Reference to Submenu MenuItems  */
-    @ContentChildren(MenuItemComponent)
+    @ContentChildren(FD_MENU_ITEM_COMPONENT)
     _projectedItems: QueryList<MenuItemComponent>;
 
     /** @hidden */

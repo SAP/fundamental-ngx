@@ -1,9 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, forwardRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { MenuInteractiveComponent } from '../menu-interactive.component';
 import { MenuComponent } from '../menu.component';
-import { MenuModule } from '../menu.module';
-import { MenuItemComponent } from './menu-item.component';
+import { MenuItemComponent, SubmenuComponent } from './menu-item.component';
+import { MenuTriggerDirective } from '../directives/menu-trigger.directive';
 
 @Component({
     template: `
@@ -14,7 +14,7 @@ import { MenuItemComponent } from './menu-item.component';
         </fd-menu>
     `,
     standalone: true,
-    imports: [MenuModule]
+    imports: [MenuComponent, MenuItemComponent, MenuInteractiveComponent]
 })
 class TestMenuItemComponent {
     @ViewChild(MenuComponent) menu: MenuComponent;
@@ -32,7 +32,7 @@ describe('MenuItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MenuModule, TestMenuItemComponent]
+            imports: [TestMenuItemComponent]
         }).compileComponents();
     }));
 
@@ -55,8 +55,8 @@ describe('MenuItemComponent', () => {
     });
 
     it('should configure menu interactive', () => {
-        const setSubmenuSpy = spyOn(menuInteractive, 'setSubmenu');
-        const setDisabledSpy = spyOn(menuInteractive, 'setDisabled');
+        const setSubmenuSpy = jest.spyOn(menuInteractive, 'setSubmenu');
+        const setDisabledSpy = jest.spyOn(menuInteractive, 'setDisabled');
 
         menuItem.ngAfterContentInit();
 
@@ -65,8 +65,8 @@ describe('MenuItemComponent', () => {
     });
 
     it('should set item as active on click', fakeAsync(() => {
-        const setActiveSpy = spyOn(menuItem.menuService!, 'setActive').and.callThrough();
-        const setSelectedSpy = spyOn(menuItem, 'setSelected');
+        const setActiveSpy = jest.spyOn(menuItem.menuService!, 'setActive');
+        const setSelectedSpy = jest.spyOn(menuItem, 'setSelected');
 
         menu.open();
         fixture.detectChanges();
@@ -85,7 +85,7 @@ describe('MenuItemComponent', () => {
 
         tick();
 
-        const setActiveSpy = spyOn(menuItem.menuService!, 'setActive');
+        const setActiveSpy = jest.spyOn(menuItem.menuService!, 'setActive');
 
         menuInteractive.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
 
@@ -105,7 +105,7 @@ describe('MenuItemComponent', () => {
     }));
 
     it('should set disabled state', fakeAsync(() => {
-        const setDisabledSpy = spyOn(menuInteractive, 'setDisabled').and.callThrough();
+        const setDisabledSpy = jest.spyOn(menuInteractive, 'setDisabled');
 
         fixture.componentInstance.disabled = true;
         fixture.detectChanges();
@@ -139,13 +139,13 @@ describe('MenuItemComponent', () => {
         </fd-submenu>
     `,
     standalone: true,
-    imports: [MenuModule]
+    imports: [MenuTriggerDirective, MenuComponent, MenuItemComponent, MenuInteractiveComponent, SubmenuComponent]
 })
 class TesNestedMenuItemComponent {
     @ViewChild(MenuComponent) menu: MenuComponent;
     @ViewChild('menuItemWithNestedMenu') menuItemWithNestedMenu: MenuItemComponent;
     @ViewChild('menuNestedItem') menuNestedItem: MenuItemComponent;
-    @ViewChild(MenuInteractiveComponent) menuInteractive: MenuInteractiveComponent;
+    @ViewChild(forwardRef(() => MenuInteractiveComponent)) menuInteractive: MenuInteractiveComponent;
 }
 
 describe('MenuItemComponent nested', () => {
@@ -157,7 +157,7 @@ describe('MenuItemComponent nested', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MenuModule, TesNestedMenuItemComponent]
+            imports: [TesNestedMenuItemComponent]
         }).compileComponents();
     }));
 
@@ -187,7 +187,7 @@ describe('MenuItemComponent nested', () => {
     });
 
     it('should open/close submenu', fakeAsync(() => {
-        const setSelectedSpy = spyOn(menuInteractiveWithNested, 'setSelected');
+        const setSelectedSpy = jest.spyOn(menuInteractiveWithNested, 'setSelected');
 
         menu.open();
         fixture.detectChanges();
@@ -206,7 +206,7 @@ describe('MenuItemComponent nested', () => {
     }));
 
     it('should open submenu on menu item hover', fakeAsync(() => {
-        const openSubmenuSpy = spyOn(menuItemWithNestedMenu, 'setSelected').and.callThrough();
+        const openSubmenuSpy = jest.spyOn(menuItemWithNestedMenu, 'setSelected');
 
         menu.open();
         fixture.detectChanges();
@@ -241,8 +241,8 @@ describe('MenuItemComponent nested', () => {
     }));
 
     it('should configure menu interactive', () => {
-        const setSubmenuSpy = spyOn(menuInteractiveWithNested, 'setSubmenu');
-        const setDisabledSpy = spyOn(menuInteractiveWithNested, 'setDisabled');
+        const setSubmenuSpy = jest.spyOn(menuInteractiveWithNested, 'setSubmenu');
+        const setDisabledSpy = jest.spyOn(menuInteractiveWithNested, 'setDisabled');
 
         menuItemWithNestedMenu.ngAfterContentInit();
 

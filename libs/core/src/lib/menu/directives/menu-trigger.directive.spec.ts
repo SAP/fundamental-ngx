@@ -5,6 +5,7 @@ import { Component, EventEmitter, ViewChild } from '@angular/core';
 
 @Component({
     template: '<div [fdMenuTrigger]="null"></div>',
+    imports: [MenuTriggerDirective],
     standalone: true
 })
 class TestComponent {
@@ -18,7 +19,7 @@ describe('MenuTriggerDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestComponent, MenuTriggerDirective]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 
@@ -40,9 +41,9 @@ describe('MenuTriggerDirective', () => {
     });
 
     it('should set menu trigger', () => {
-        const setTriggerSpy = spyOnProperty(menu, 'trigger', 'set');
-        const listenersSpy = spyOn<any>(directive, '_subscribeToMenu');
-        const attributesSpy = spyOn<any>(directive, '_setAriaAttributes');
+        const setTriggerSpy = jest.spyOn(menu, 'trigger', 'set');
+        const listenersSpy = jest.spyOn(directive as any, '_subscribeToMenu');
+        const attributesSpy = jest.spyOn(directive as any, '_setAriaAttributes');
 
         directive.menu = undefined;
 

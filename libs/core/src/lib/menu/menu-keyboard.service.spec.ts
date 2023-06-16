@@ -7,13 +7,10 @@ describe('MenuKeyboardService', () => {
 
     beforeEach(() => {
         service = new MenuKeyboardService();
-        service.focusEscapeAfterList = jasmine.createSpy();
-        service.focusEscapeBeforeList = jasmine.createSpy();
-        menuItems = [
-            jasmine.createSpyObj('DefaultMenuItem', ['focus', 'click']),
-            jasmine.createSpyObj('DefaultMenuItem', ['focus', 'click']),
-            jasmine.createSpyObj('DefaultMenuItem', ['focus', 'click'])
-        ];
+        service.focusEscapeAfterList = jest.fn();
+        service.focusEscapeBeforeList = jest.fn();
+        const dummy = (): any => ({ focus: jest.fn(), click: jest.fn() });
+        menuItems = [dummy(), dummy(), dummy()];
     });
 
     it('should create an instance', () => {

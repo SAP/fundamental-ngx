@@ -44,6 +44,6 @@ describe('MenuShortcutDirective', () => {
 
         tick();
 
-        expect(directive['_elementRef'].nativeElement.style.display).toBeFalsy('none');
+        expect(directive['_elementRef'].nativeElement.style.display).toBeFalsy();
     }));
 });
