@@ -116,7 +116,7 @@ describe('MenuMobileComponent', () => {
 
         await whenStable(fixture);
 
-        expect(menuMobile.isSubmenu).toBeTrue();
+        expect(menuMobile.isSubmenu).toBe(true);
     });
 
     it('should use correct menu title', async () => {
@@ -150,12 +150,12 @@ describe('MenuMobileComponent', () => {
 
         await whenStable(fixture);
 
-        expect(menuMobile.isSubmenu).toBeTrue();
+        expect(menuMobile.isSubmenu).toBe(true);
         fixture.nativeElement.querySelector('#menu-mobile-navigate-back').click();
 
         await whenStable(fixture);
 
-        expect(menuMobile.isSubmenu).toBeFalse();
+        expect(menuMobile.isSubmenu).toBe(false);
     });
 
     it('should properly render with empty MobileConfig', async () => {

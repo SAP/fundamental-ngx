@@ -62,7 +62,7 @@ describe('MenuTriggerDirective', () => {
 
         tick();
 
-        expect(directive.ariaHasPopup).toBeTrue();
+        expect(directive.ariaHasPopup).toBe(true);
         expect(directive.ariaExpanded).toBeFalsy();
         expect(directive.ariaControls).toBeFalsy();
 
@@ -71,7 +71,7 @@ describe('MenuTriggerDirective', () => {
 
         tick();
 
-        expect(directive.ariaExpanded).toBeTrue();
+        expect(directive.ariaExpanded).toBe(true);
         expect(directive.ariaControls).toEqual(menu.id);
     }));
 });

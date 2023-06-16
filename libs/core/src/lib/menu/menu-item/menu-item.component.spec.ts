@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { MenuInteractiveComponent } from '../directives/menu-interactive.component';
+import { MenuInteractiveComponent } from '../menu-interactive.component';
 import { MenuComponent } from '../menu.component';
 import { MenuModule } from '../menu.module';
 import { MenuItemComponent } from './menu-item.component';
@@ -92,8 +92,8 @@ describe('MenuItemComponent', () => {
         tick();
 
         expect(setActiveSpy).not.toHaveBeenCalled();
-        expect(menuInteractive.selected).toBeFalse();
-        expect(menuItem['_hoverSubscriptions'].closed).toBeFalse();
+        expect(menuInteractive.selected).toBe(false);
+        expect(menuItem['_hoverSubscriptions'].closed).toBe(false);
     }));
 
     it('should have no hover listener in mobile mode', fakeAsync(() => {
@@ -101,7 +101,7 @@ describe('MenuItemComponent', () => {
 
         tick();
 
-        expect(menuItem['_hoverSubscriptions'].closed).toBeTrue();
+        expect(menuItem['_hoverSubscriptions'].closed).toBe(true);
     }));
 
     it('should set disabled state', fakeAsync(() => {
@@ -113,7 +113,7 @@ describe('MenuItemComponent', () => {
         tick();
 
         expect(setDisabledSpy).toHaveBeenCalledWith(true);
-        expect(menuInteractive.disabled).toBeTrue();
+        expect(menuInteractive.disabled).toBe(true);
     }));
 });
 
@@ -183,7 +183,7 @@ describe('MenuItemComponent nested', () => {
 
     it('should have submenu', () => {
         expect(menuItemWithNestedMenu.submenu).toBeTruthy();
-        expect(menuItemWithNestedMenu.submenuVisible).toBeFalse();
+        expect(menuItemWithNestedMenu.submenuVisible).toBe(false);
     });
 
     it('should open/close submenu', fakeAsync(() => {
@@ -197,12 +197,12 @@ describe('MenuItemComponent nested', () => {
         menuItemWithNestedMenu.setSelected(true);
 
         expect(setSelectedSpy).toHaveBeenCalledWith(true);
-        expect(menuItemWithNestedMenu.submenuVisible).toBeTrue();
+        expect(menuItemWithNestedMenu.submenuVisible).toBe(true);
 
         menuItemWithNestedMenu.setSelected(false);
 
         expect(setSelectedSpy).toHaveBeenCalledWith(false);
-        expect(menuItemWithNestedMenu.submenuVisible).toBeFalse();
+        expect(menuItemWithNestedMenu.submenuVisible).toBe(false);
     }));
 
     it('should open submenu on menu item hover', fakeAsync(() => {
@@ -218,7 +218,7 @@ describe('MenuItemComponent nested', () => {
         tick();
 
         expect(openSubmenuSpy).toHaveBeenCalled();
-        expect(menuItemWithNestedMenu.submenuVisible).toBeTrue();
+        expect(menuItemWithNestedMenu.submenuVisible).toBe(true);
     }));
 
     it('should close sibling opened submenu when mouse goes on another menu item', fakeAsync(() => {
@@ -230,14 +230,14 @@ describe('MenuItemComponent nested', () => {
         menuInteractiveWithNested.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
         tick();
         // Since hover on the second option submenu is shown
-        expect(menuItemWithNestedMenu.submenuVisible).toBeTrue();
+        expect(menuItemWithNestedMenu.submenuVisible).toBe(true);
 
         // Hover moves on sibling menu item
         menu._menuItems.first.menuInteractive.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
         tick();
 
         // the second option submenu gets closed
-        expect(menuItemWithNestedMenu.submenuVisible).toBeFalse();
+        expect(menuItemWithNestedMenu.submenuVisible).toBe(false);
     }));
 
     it('should configure menu interactive', () => {
