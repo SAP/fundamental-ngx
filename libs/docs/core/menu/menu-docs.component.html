@@ -1,4 +1,4 @@
-<fd-docs-section-title id="simple" componentName="menu"> Simple menu </fd-docs-section-title>
+<fd-docs-section-title id="simple" componentName="menu"> Simple menu</fd-docs-section-title>
 <description>
     To create simple menu use following directives:
     <ul>
@@ -15,7 +15,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="with-icons" componentName="menu"> Menu with icons </fd-docs-section-title>
+<fd-docs-section-title id="with-icons" componentName="menu"> Menu with icons</fd-docs-section-title>
 <description>
     Menu items can be extended with additional content using the following directives:
     <ul>
@@ -33,7 +33,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="separator" componentName="menu"> Menu with separator </fd-docs-section-title>
+<fd-docs-section-title id="separator" componentName="menu"> Menu with separator</fd-docs-section-title>
 <description>
     To add a visual separation line between menu items, use the <code>[hasSeparator]</code> input on the list item
     component.
@@ -45,8 +45,8 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="scrollbar" componentName="menu"> Menu with Scrollbar </fd-docs-section-title>
-<description>Menu handles overflow using <code>fd-scrollbar</code> </description>
+<fd-docs-section-title id="scrollbar" componentName="menu"> Menu with Scrollbar</fd-docs-section-title>
+<description>Menu handles overflow using <code>fd-scrollbar</code></description>
 <component-example>
     <fd-menu-scrollbar-example></fd-menu-scrollbar-example>
 </component-example>
@@ -54,7 +54,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="with-submenu" componentName="menu"> Menu with submenu </fd-docs-section-title>
+<fd-docs-section-title id="with-submenu" componentName="menu"> Menu with submenu</fd-docs-section-title>
 <description>
     Each Menu item can have its submenu. To create a submenu, do the following:
     <ul>
@@ -76,7 +76,40 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="mobile" componentName="menu"> Menu in mobile mode </fd-docs-section-title>
+<fd-docs-section-title id="extended-menu" componentName="menu">Extended menu</fd-docs-section-title>
+<description>
+    <p>
+        Menu can have menu items as toggle button or as a segmented button. Menus also can include inputs as an
+        interactive element.
+    </p>
+    <p>
+        To use toggle button functionality, use <code>button[fd-menu-interactive][toggle]</code> element. It implements
+        control value accessor, so it can be used with both template-driven and reactive forms.
+    </p>
+    <p>
+        To use segmented button functionality, use <code>li[fd-menu-item][fdMenuSegmentedButtonHeader]</code> and
+        <code>li[fd-menu-item][fdMenuSegmentedButtonOption]</code> elements.
+        <br />
+        <code>li[fd-menu-item][fdMenuSegmentedButtonHeader]</code> implements control value accessor, so it can be used
+        with both template-driven and reactive forms. The possible values for it are passed via
+        <code>li[fd-menu-item][fdMenuSegmentedButtonOption][value]</code> property and can be anything.
+        <br />
+        By default, the comparison is done using strict equality operator, but you can provide your own
+        <code>valueComparator</code> to the header element. The type for it is <code>(a, b) => boolean</code>
+    </p>
+    <p>
+        To use input as an menu item, use <code>input[fd-form-control][fd-menu-item-input]</code> element inside the
+        <code>div[fd-menu-interactive]</code> element.
+    </p>
+</description>
+<component-example>
+    <fd-extended-menu-example></fd-extended-menu-example>
+</component-example>
+<code-example [exampleFiles]="extendedMenu"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="mobile" componentName="menu"> Menu in mobile mode</fd-docs-section-title>
 <description>
     To use Menu in mobile mode:
     <ul>

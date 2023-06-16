@@ -1,9 +1,9 @@
-import { ComponentRef, Directive, EmbeddedViewRef, inject, Input, OnDestroy } from '@angular/core';
 import { CdkPortalOutlet, ComponentPortal, DomPortal, Portal, TemplatePortal } from '@angular/cdk/portal';
-import { combineLatest, first, map, Observable, of, shareReplay, Subject, tap } from 'rxjs';
+import { ComponentRef, Directive, EmbeddedViewRef, inject, Input, OnDestroy } from '@angular/core';
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { combineLatest, first, map, Observable, of, shareReplay, Subject, tap } from 'rxjs';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { MenuComponent } from '../menu.component';
 import { TOGGLE_MENU_ITEM } from '../menu.tokens';
 
@@ -80,9 +80,9 @@ export class GlyphMenuAddonDirective implements OnDestroy {
                         tap((IconComponent) => {
                             const componentRef = outlet.attachComponentPortal(new ComponentPortal(IconComponent));
                             componentRef.instance.glyph = glyphName;
-                            componentRef.instance.elementRef().nativeElement.setAttribute('role', 'presentation');
+                            componentRef.instance.elementRef.nativeElement.setAttribute('role', 'presentation');
                             if (this.isInToggleButton) {
-                                componentRef.instance.elementRef().nativeElement.classList.add('fd-menu__checkmark');
+                                componentRef.instance.elementRef.nativeElement.classList.add('fd-menu__checkmark');
                             }
                             componentRef.changeDetectorRef.detectChanges();
                         })
