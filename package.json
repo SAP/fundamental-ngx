@@ -105,7 +105,7 @@
     "@types/jest": "29.4.4",
     "@types/lodash-es": "4.17.6",
     "@types/node": "16.11.7",
-    "@typescript-eslint/eslint-plugin": "5.59.2",
+    "@typescript-eslint/eslint-plugin": "5.59.11",
     "@typescript-eslint/parser": "5.59.2",
     "@wdio/allure-reporter": "7.7.3",
     "@wdio/cli": "7.16.16",
