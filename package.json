@@ -164,7 +164,7 @@
     "ngx-cva-test-suite": "2.0.0",
     "nx": "16.1.0",
     "nx-cloud": "16.0.5",
-    "postcss": "^8.4.21",
+    "postcss": "^8.4.24",
     "postcss-import": "15.1.0",
     "postcss-preset-env": "7.8.3",
     "postcss-url": "10.1.3",
