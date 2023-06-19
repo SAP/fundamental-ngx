@@ -110,6 +110,7 @@
                                 <button
                                     fd-button
                                     fdType="emphasized"
+                                    [disabled]="!_tempDate"
                                     [label]="okLabel || ('coreDatetimePicker.datetimeOkLabel' | fdTranslate)"
                                     [ariaLabel]="okLabel || ('coreDatetimePicker.datetimeOkLabel' | fdTranslate)"
                                     (click)="submit()"

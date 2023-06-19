@@ -610,7 +610,11 @@ export class DatetimePickerComponent<D>
     submit(): void {
         // marking date & time as not null, errors will be caught below
         const currentDate = this._tempDate!;
-        const currentTime = this._tempTime!;
+        let currentTime = this._tempTime;
+
+        if (!currentTime) {
+            currentTime = this._dateTimeAdapter.today();
+        }
 
         try {
             this.date = this._dateTimeAdapter.setTime(
