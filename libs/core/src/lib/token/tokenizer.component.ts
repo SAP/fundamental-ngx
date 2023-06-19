@@ -580,10 +580,12 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         }
 
         this._cdRef.detectChanges();
-        this._hiddenTokens.forEach((hiddenToken, index) => {
-            hiddenToken._viewContainer.clear();
-            this._viewContainer.get(index)?.createEmbeddedView(hiddenToken._content);
-        });
+        if (this._showOverflowPopover) {
+            this._hiddenTokens.forEach((hiddenToken, index) => {
+                hiddenToken._viewContainer.clear();
+                this._viewContainer.get(index)?.createEmbeddedView(hiddenToken._content);
+            });
+        }
     }
 
     /** @hidden */
