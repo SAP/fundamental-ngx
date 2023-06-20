@@ -366,7 +366,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     }
 
     /** @hidden */
-    _toggleSelection(item: SelectableOptionItem): void {
+    _toggleSelection(item: SelectableOptionItem, fromTokenCloseClick = false): void {
         const idx = getTokenIndexByIdlOrValue(item, this._selectedSuggestions);
         if (idx === -1) {
             this._selectedSuggestions.push(item);
@@ -376,7 +376,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
         item.selected = !item.selected;
 
-        this._propagateChange();
+        this._propagateChange(fromTokenCloseClick);
 
         if (!this._selectedSuggestions.length) {
             this._focusToSearchField();
@@ -435,7 +435,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         }
         const optionItem = this._suggestions.find((s) => s.value === token.value);
         if (optionItem) {
-            this._toggleSelection(optionItem);
+            this._toggleSelection(optionItem, true);
             this._rangeSelector.reset();
         }
     }
