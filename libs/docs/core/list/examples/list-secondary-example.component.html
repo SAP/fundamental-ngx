@@ -1,16 +1,28 @@
 <ul fd-list>
     <li fd-list-item>
         <span fd-list-title> List item 1 </span>
-        <span fd-list-secondary> 1 </span>
+        <span fd-list-secondary type="positive"> 1 </span>
     </li>
     <li fd-list-item>
         <span fd-list-title> List item 2 </span>
-        <span fd-list-secondary> 2 </span>
+        <span fd-list-secondary type="critical"> 2 </span>
+    </li>
+    <li fd-list-item>
+        <span fd-list-title> List item 3 </span>
+        <span fd-list-secondary type="negative"> 3 </span>
+    </li>
+    <li fd-list-item>
+        <span fd-list-title> List item 4 </span>
+        <span fd-list-secondary type="informative"> 4 </span>
+    </li>
+    <li fd-list-item>
+        <span fd-list-title> List item 5 </span>
+        <span fd-list-secondary> 5 </span>
     </li>
     <li fd-list-item [counter]="123.123456">
-        <span fd-list-title> List item 3 with Counter </span>
+        <span fd-list-title> List item 6 with Counter </span>
     </li>
     <li fd-list-item [counter]="54354.21345">
-        <span fd-list-title> List item 4 with Counter </span>
+        <span fd-list-title> List item 7 with Counter </span>
     </li>
 </ul>
