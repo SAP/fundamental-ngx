@@ -38,6 +38,44 @@
 </component-example>
 <code-example [exampleFiles]="messageStripWidthExample"></code-example>
 
+<separator></separator>
+
+<fd-docs-section-title id="message-strip-alert" componentName="message-strip-alert">
+    Message Strip Alerts
+</fd-docs-section-title>
+<description>
+    <p>
+        Message Strip Alerts are used to display a short, important message in a prominent location on the page. They
+        are used to inform users of a situation that requires their attention or action. They are not part of the Fiori
+        Design guidelines.
+    </p>
+    <p>
+        This example shows usage of the <code>MessageStripAlertService</code>. You can set custom footer for rendering
+        actions. You can use <code>TemplateRef<{{ '{' }}$implicit: MessageStripAlertRef{{ '}' }}></code>, ordinary
+        string or the component.
+    </p>
+    <p>
+        If you choose to have component as a content, you can use <code>MessageStripAlertRef</code> to close the alert,
+        or get some data from it.
+    </p>
+    <p>
+        Message stripe alert containers are responsive. Below the <code>M</code>(1024px) breakpoint, the alerts from all
+        the positions are unified into either <code>bottom-middle</code> or <code>top-middle</code> positions, depending
+        on their vertical position requirement and they are ordered by the time of appearance.
+    </p>
+    <p>
+        If from the vertical positions(bottom or top) only one is used, then the container will take all the viewport
+        height, and it will have a scrollbar if the content is bigger than the viewport. If both vertical positions are
+        used, the container will take only half of the viewport height.
+    </p>
+</description>
+<component-example>
+    <message-strip-alert-example></message-strip-alert-example>
+</component-example>
+<code-example [exampleFiles]="messageStripAlertExampleFiles"></code-example>
+
+<separator></separator>
+
 <playground
     [schema]="schema"
     [schemaInitialValues]="data"

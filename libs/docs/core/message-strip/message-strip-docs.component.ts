@@ -52,13 +52,20 @@ export class MessageStripDocsComponent {
         }
     ];
 
+    messageStripAlertExampleFiles: ExampleFile[] = [
+        {
+            language: 'ts',
+            fileName: 'message-strip-alert-example',
+            code: getAssetFromModuleAssets('message-strip-alert-example.component.ts')
+        }
+    ];
+
     schema: Schema;
 
     /**
      * Should show message strip component in playground.
      */
     shouldShow = true;
-
     /**
      * @hidden
      */

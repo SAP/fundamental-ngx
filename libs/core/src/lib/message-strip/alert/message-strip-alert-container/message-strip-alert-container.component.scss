@@ -1,0 +1,68 @@
+.fd-message-strip-alert-overlay {
+    max-width: 33.33vw;
+    padding: 0.5rem;
+
+    &--top {
+        top: 0;
+        max-height: 100vh;
+
+        &.fd-message-strip-alert-overlay--bottom-opened {
+            max-height: 50vh;
+        }
+    }
+
+    &--bottom {
+        top: initial;
+        bottom: 0;
+        max-height: 100vh;
+
+        fd-message-strip-alert-container {
+            flex-direction: column-reverse;
+        }
+
+        &.fd-message-strip-alert-overlay--top-opened {
+            max-height: 50vh;
+        }
+    }
+
+    &--start {
+        left: 0;
+    }
+
+    &--middle {
+        left: 33.33vw;
+        width: 33.33vw;
+        @media screen and (max-width: 992px) {
+            left: 5vw;
+            width: 90vw;
+            max-width: 90vw;
+        }
+
+        fd-message-strip-alert-container {
+            width: 100%;
+
+            > .fd-scrollbar > * {
+                width: fit-content;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    &--end {
+        right: 0;
+    }
+
+    fd-message-strip-alert-container {
+        display: flex;
+        flex-direction: column;
+
+        div[fdscrollbar] {
+            width: 100%;
+            display: flex;
+            padding: 0.5rem;
+            gap: 0.75rem;
+            flex-direction: column;
+            max-height: 100%;
+        }
+    }
+}

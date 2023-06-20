@@ -12,11 +12,11 @@ import {
 import { CopyService } from '../../services/copy.service';
 import { ExampleFile } from './example-file';
 import { height } from '../../utilities';
-import { AlertConfig, AlertService } from '@fundamental-ngx/core/alert';
 import { StackblitzService } from '../stackblitz/stackblitz.service';
 import { CodeSnippetComponent } from '../code-snippet/code-snippet.component';
 import { isObservable, Observable, of, ReplaySubject, shareReplay, switchMap, tap, zip } from 'rxjs';
 import { catchError, map, startWith } from 'rxjs/operators';
+import { MessageStripAlertService } from '@fundamental-ngx/core/message-strip';
 
 enum ExampleEntityState {
     loading,
@@ -64,7 +64,7 @@ export class CodeExampleComponent implements OnInit {
     constructor(
         private element: ElementRef,
         private copyService: CopyService,
-        private alertService: AlertService,
+        private messageStripAlertService: MessageStripAlertService,
         private stackBlitzService: StackblitzService
     ) {
         this.exampleFilesNetworkEntity$ = this._displayedFiles.pipe(
@@ -126,7 +126,10 @@ export class CodeExampleComponent implements OnInit {
 
     copyText(): void {
         this.copyService.copyText(this._exampleFiles[this.activeIndex].code);
-        this.alertService.open('Code copied!', { type: 'success', duration: 5000 } as AlertConfig);
+        this.messageStripAlertService.open({
+            content: 'Code copied!',
+            messageStrip: { type: 'success', duration: 5000, mousePersist: true }
+        });
     }
 
     ngOnInit(): void {
