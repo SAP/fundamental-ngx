@@ -59,12 +59,12 @@ class ExampleStripAlertFooterComponent {
 @Component({
     selector: 'message-strip-alert-example',
     template: `
-        <div>
+        <div class="example-row">
             <button fd-button (click)="openText()">Open Text top-left</button>
             <button fd-button (click)="openTemplate(template)">Open Template top-middle</button>
             <button fd-button (click)="openComponent()">Open Component top-end</button>
         </div>
-        <div>
+        <div class="example-row">
             <button fd-button (click)="openText('bottom')">Open Text bottom-left</button>
             <button fd-button (click)="openTemplate(template, 'bottom')">Open Template bottom-middle</button>
             <button fd-button (click)="openComponent('bottom')">Open Component bottom-right</button>
@@ -73,7 +73,21 @@ class ExampleStripAlertFooterComponent {
             Rendered using the template and added custom close button, which will dismiss the alert
             <button fd-button fdCompact fdType="transparent" (click)="alertRef.dismiss()">Close</button>
         </ng-template>
-    `
+    `,
+    styles: [
+        `
+            :host {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .example-row {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+            }
+        `
+    ]
 })
 export class MessageStripAlertExampleComponent {
     private messageStripAlertService = inject(MessageStripAlertService);
