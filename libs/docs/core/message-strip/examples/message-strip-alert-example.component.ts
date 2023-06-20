@@ -12,7 +12,7 @@ import { LinkModule } from '@fundamental-ngx/core/link';
 let itemIndex = 0;
 
 @Component({
-    template: `Component works, hooray! {{ itemIndex }}`,
+    template: `Created using the component ! This is #{{ itemIndex }}`,
     standalone: true
 })
 class ExampleStripAlertComponent implements OnDestroy {
@@ -70,8 +70,8 @@ class ExampleStripAlertFooterComponent {
             <button fd-button (click)="openComponent('bottom')">Open Component bottom-right</button>
         </div>
         <ng-template #template let-alertRef>
-            Template works, hooray!
-            <button fd-button fdCompact (click)="alertRef.dismiss()">Close</button>
+            Rendered using the template and added custom close button, which will dismiss the alert
+            <button fd-button fdCompact fdType="transparent" (click)="alertRef.dismiss()">Close</button>
         </ng-template>
     `
 })
@@ -84,7 +84,7 @@ export class MessageStripAlertExampleComponent {
 
     openText(vPosition: 'top' | 'bottom' = 'top') {
         this.messageStripAlertService.open({
-            content: 'Text works, hooray!',
+            content: 'This will be automatically dismissed in 5 seconds and if mouse is hovered dismiss time is reset',
             position: `${vPosition}-start`,
             messageStrip: {
                 duration: 5000,
@@ -103,8 +103,9 @@ export class MessageStripAlertExampleComponent {
             position: `${vPosition}-middle`,
             content,
             messageStrip: {
+                noIcon: true,
                 type: 'error',
-                dismissible: true
+                dismissible: false
             }
         });
     }
