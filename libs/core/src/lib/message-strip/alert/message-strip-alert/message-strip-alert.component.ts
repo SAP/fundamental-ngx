@@ -1,11 +1,12 @@
 import {
+    AfterViewInit,
     Component,
-    ElementRef,
     inject,
     OnDestroy,
     Renderer2,
     TemplateRef,
     Type,
+    ViewChild,
     ViewContainerRef
 } from '@angular/core';
 import { MessageStripConfiguration } from '../message-strip-configuration-type';
@@ -13,6 +14,7 @@ import { ComponentPortal, DomPortal, Portal, PortalModule, TemplatePortal } from
 import { MessageStripComponent } from '../../message-strip.component';
 import { MessageStripAlertRef } from '../message-strip-alert.ref';
 import { MessageStripAlertComponentData } from '../tokens';
+import { AutoDismissMessageStripDirective } from '../../auto-dismiss-message-strip.directive';
 
 /**
  * The wrapper component, which is wrapping the Message Strip and passes
@@ -21,9 +23,13 @@ import { MessageStripAlertComponentData } from '../tokens';
 @Component({
     templateUrl: `./message-strip-alert.component.html`,
     standalone: true,
-    imports: [MessageStripComponent, PortalModule]
+    imports: [MessageStripComponent, PortalModule, AutoDismissMessageStripDirective]
 })
-export class MessageStripAlertComponent<ComponentType = unknown> implements OnDestroy {
+export class MessageStripAlertComponent<ComponentType = unknown> implements OnDestroy, AfterViewInit {
+    /** @hidden */
+    @ViewChild(AutoDismissMessageStripDirective)
+    autoDismissMessageStripDirective: AutoDismissMessageStripDirective;
+
     /** User provided data. Full of it */
     data = inject(MessageStripAlertComponentData);
     /** Configuration for the message strip appearance */
@@ -31,8 +37,6 @@ export class MessageStripAlertComponent<ComponentType = unknown> implements OnDe
     /** Portal, which is responsible for correctly rendering user provided content. It can be any type of the portal */
     contentPortal: Portal<unknown>;
 
-    /** @hidden */
-    private elementRef = inject(ElementRef);
     /** @hidden */
     private viewContainerRef = inject(ViewContainerRef);
     /** @hidden */
@@ -53,21 +57,6 @@ export class MessageStripAlertComponent<ComponentType = unknown> implements OnDe
     constructor() {
         this.messageStripConfig = this.data.messageStripConfig;
         this.contentPortal = this.getPortal(this.data.content);
-        if (this.messageStripConfig.duration) {
-            this.autoDismissTimeout = setTimeout(() => {
-                this.onDismissHandler();
-            }, this.messageStripConfig.duration);
-            if (this.messageStripConfig.mousePersist) {
-                this.renderer2.listen(this.elementRef.nativeElement, 'mouseenter', () => {
-                    clearTimeout(this.autoDismissTimeout);
-                });
-                this.renderer2.listen(this.elementRef.nativeElement, 'mouseleave', () => {
-                    this.autoDismissTimeout = setTimeout(() => {
-                        this.onDismissHandler();
-                    }, this.messageStripConfig.duration);
-                });
-            }
-        }
     }
 
     /**
@@ -80,6 +69,11 @@ export class MessageStripAlertComponent<ComponentType = unknown> implements OnDe
     /** @hidden */
     ngOnDestroy(): void {
         clearTimeout(this.autoDismissTimeout);
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this.autoDismissMessageStripDirective.open();
     }
 
     /**

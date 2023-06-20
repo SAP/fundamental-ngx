@@ -1,6 +1,9 @@
 <fd-message-strip
     [class]="messageStripConfig.class"
     [dismissible]="messageStripConfig.dismissible"
+    [autoDismiss]="messageStripConfig.duration > 0"
+    [mousePersist]="messageStripConfig.mousePersist"
+    [duration]="messageStripConfig.duration"
     [noIcon]="messageStripConfig.noIcon"
     [type]="messageStripConfig.type"
     [id]="messageStripConfig.id"
