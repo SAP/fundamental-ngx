@@ -66,7 +66,17 @@
 <separator></separator>
 
 <fd-docs-section-title id="secondary" componentName="list"> Secondary item on list </fd-docs-section-title>
-<description>The list component can be customized by adding additional information in additional columns.</description>
+<description>
+    <p>The list component can be customized by adding additional information in additional columns.</p>
+    <p>
+        Secondary items can have different types of visual appearance and can be set with
+        <code>[fd-list-secondary][type]</code> property
+    </p>
+    <p>Available types are</p>
+    <ul>
+        <li *ngFor="let secondaryListItemType of _secondaryListItemTypes">{{ secondaryListItemType }}</li>
+    </ul>
+</description>
 <component-example>
     <fd-list-secondary-example></fd-list-secondary-example>
 </component-example>
