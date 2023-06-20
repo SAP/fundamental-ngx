@@ -13,7 +13,7 @@ export class GridListPo extends CoreBaseComponentPo {
     deleteModeTitle = '[selectionmode="delete"] [title="Products"]';
     deleteItemButton = '[selectionmode="delete"] fd-grid-list-item button';
     multiSelectModeSelectedItems = 'fd-grid-list[selectionmode="multiSelect"] fd-grid-list-item .is-selected';
-    multiSelectModeCheckboxes = 'fd-grid-list[selectionmode="multiSelect"] .fd-checkbox__label';
+    multiSelectModeCheckboxes = 'fd-grid-list[selectionmode="multiSelect"] .fd-checkbox';
     singleSelectItems = '[selectionmode="singleSelect"] fd-grid-list-item > div';
     singleSelectItemsSelected = '[selectionmode="singleSelect"] fd-grid-list-item .is-selected';
     unreadStateItem = '[state="unread"] h6';
