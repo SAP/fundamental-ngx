@@ -1,3 +1,12 @@
+# [0.42.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.24...v0.42.0-rc.25) (2023-06-20)
+
+
+### Bug Fixes
+
+* **core:** tokenizer bug when removing tokens ([#10054](https://github.com/SAP/fundamental-ngx/issues/10054)) ([23e6c5f](https://github.com/SAP/fundamental-ngx/commit/23e6c5f69a494850e8363af1a551cb29abacd03b))
+
+
+
 # [0.42.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.23...v0.42.0-rc.24) (2023-06-16)
 
 
