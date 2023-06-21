@@ -33,7 +33,7 @@ export class ApprovalFlowPo extends PlatformBaseComponentPo {
     approvalFlowNodeStatus = this.approvalFlowNode + ' fdp-object-status';
     approvalFlowNodeName = this.approvalFlowNode + ' .fdp-approval-flow-node__name';
     approvalFlowNodeDescription = this.approvalFlowNode + ' .fdp-approval-flow-node__description';
-    approvalFlowNodeCheckbox = '.fd-toolbar .fd-checkbox__label';
+    approvalFlowNodeCheckbox = '.fd-toolbar .fd-checkbox';
     approvalFlowNodeCheckboxAlt = '.fd-grid-list__item-input';
     approvalFlowNodeActionMenu = '.fdp-approval-flow-node__menu-button';
     approvalFlowNodeActionMenuItem = '[role="menuitem"]';

@@ -28,6 +28,7 @@
     [class.fd-checkbox__label--required]="required"
     (click)="_onLabelClick($event)"
 >
+    <span class="fd-checkbox__checkmark" aria-hidden="true"></span>
     <div class="fd-checkbox__label-container">
         <ng-container *ngIf="label">
             <span class="fd-checkbox__text">
