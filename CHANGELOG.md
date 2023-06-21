@@ -1,3 +1,12 @@
+# [0.42.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.28...v0.42.0-rc.29) (2023-06-21)
+
+
+### Bug Fixes
+
+* **core:** selecting only date and not time and pressing OK does not set date ([#10053](https://github.com/SAP/fundamental-ngx/issues/10053)) ([0256e9d](https://github.com/SAP/fundamental-ngx/commit/0256e9d47be50597a03a684cfecbb998ba3e923b))
+
+
+
 # [0.42.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.27...v0.42.0-rc.28) (2023-06-21)
 
 
