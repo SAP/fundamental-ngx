@@ -582,11 +582,11 @@ export class MultiInputComponent
     /** @hidden */
     _onTokenClick(value: any, resetSearch: boolean, event?: MouseEvent): void {
         event?.preventDefault(); // prevent this function from being called twice when checkbox updates
-        this._handleSelect(false, value, resetSearch);
+        this._handleSelect(false, value, resetSearch, true);
     }
 
     /** @hidden */
-    _handleSelect(checked: any, value: any, resetSearch = true): void {
+    _handleSelect(checked: any, value: any, resetSearch = true, fromTokenCloseClick = false): void {
         const previousLength = this._selectionModel.selected.length;
         if (checked) {
             this._selectionModel.select(value);
@@ -609,7 +609,7 @@ export class MultiInputComponent
         }
 
         // On Mobile mode changes are propagated only on approve.
-        this._propagateChange();
+        this._propagateChange(fromTokenCloseClick);
     }
 
     /** @hidden */
