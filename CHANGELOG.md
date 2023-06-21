@@ -1,3 +1,12 @@
+# [0.42.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.27...v0.42.0-rc.28) (2023-06-21)
+
+
+### Bug Fixes
+
+* **core:** new checkbox hidden element for a11y ([#10038](https://github.com/SAP/fundamental-ngx/issues/10038)) ([779c92b](https://github.com/SAP/fundamental-ngx/commit/779c92bcccaa535aa8132c7cf8ae9204aaec3990))
+
+
+
 # [0.42.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.26...v0.42.0-rc.27) (2023-06-20)
 
 
