@@ -2387,10 +2387,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fundamental-styles/cx@0.29.0":
-  version "0.29.0"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.29.0.tgz#0daca1f7a8d2cc840b3c29eb461b6c7eb5cef13a"
-  integrity sha512-2q8Zd1T3PLIHnSuVgBzACYDH+PeF8Kdih/Td0USP4MIUg7MMYcqsTDGr9mhK5QjExq+iWNqbOtDUtOlTX8aJTQ==
+"@fundamental-styles/cx@0.29.4":
+  version "0.29.4"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.29.4.tgz#549a6726b1d425837332e1ec296ddfdc08f71100"
+  integrity sha512-b9otnj9ynPok0mG5DaRi5+QT7BZvZos9zdAwy3XVNwJeQsAkT0j0jWCRzMPNpVsZBjVUHIxf0avpLWvy4JRGiw==
 
 "@fundamental-styles/fn@0.25.1-rc.16":
   version "0.25.1-rc.16"
@@ -9432,10 +9432,10 @@ fundamental-styles@0.25.1-rc.16:
   resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.25.1-rc.16.tgz#8560a5e1411ac3dfbf6d593ba4cd7b1f3124f3d5"
   integrity sha512-/ETPbzv98pMtqT5nNODkamxDBJsDPJ4KG/f5XEAvExvdx0+IvESuZQES6n1F3He1o1zMGLJj4HVqp4UJFiRGsQ==
 
-fundamental-styles@0.29.0:
-  version "0.29.0"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.29.0.tgz#beb47eadffffccaf91e59b8c076635f80f0f6a87"
-  integrity sha512-kuhHMf+Zby/0QrvgFN3zYLK/fwOt6quNpWMrJHLnQxO0lGnMen5irkechjuXPwG9lUF5OSEx7KlJ/MiX4HgPDw==
+fundamental-styles@0.29.4:
+  version "0.29.4"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.29.4.tgz#403ae7817c2ff59bc06699a9c483ed5554fa07cc"
+  integrity sha512-q/AVBDqcVXNkxRnXyofOd6r2FvwBGb5NR0Gq0AcJVyDTrTRbtZ1yMseW/4MZWAcLkejzP9Iw7a/DiCwFQRa1Jg==
 
 gauge@^4.0.3:
   version "4.0.4"
