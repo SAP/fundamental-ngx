@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { MessageStripComponent } from './message-strip.component';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { I18nModule } from '@fundamental-ngx/i18n';
+import { AutoDismissMessageStripDirective } from './auto-dismiss-message-strip.directive';
 
 @NgModule({
-    declarations: [MessageStripComponent],
-    imports: [CommonModule, ButtonModule, I18nModule],
-    exports: [MessageStripComponent]
+    imports: [MessageStripComponent, AutoDismissMessageStripDirective],
+    exports: [MessageStripComponent, AutoDismissMessageStripDirective]
 })
 export class MessageStripModule {}

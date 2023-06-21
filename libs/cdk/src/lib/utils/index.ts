@@ -21,3 +21,4 @@ export * from './tokens/module-deprecations.token';
 export * from './tokens/viewport-size.observable';
 export * from './toast';
 export * from './async-strategy';
+export * from './directives/breakpoints/responsive-breakpoints';
